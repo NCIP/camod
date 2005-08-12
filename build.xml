@@ -1,0 +1,63 @@
+<project name="caMOD" default="build_war" basedir=".">
+	<property file="build.properties" />
+    
+	<!--
+	TARGET: COMPILE
+		Compiles the source directory
+	-->
+	<target name="compile">
+		<delete dir="${build.classes.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<javac srcdir="${source.dir}" destdir="${build.classes.dir}" source="1.4" debug="true" debuglevel="lines,vars,source">
+		 <classpath>
+		 	 <fileset dir="${source.lib.dir}">
+	 	        <include name="*.jar"/>
+	 	      </fileset>
+		 </classpath>
+		</javac>
+	</target>
+	
+	
+	<!--
+		TARGET: copy_resource_directory
+		Copies all the bundle resources to the WEB-INF/classes/ folder
+	-->
+	<target name="copy_resource_directory" depends="compile">
+		<copy todir="${build.classes.dir}">
+			<fileset dir="${source.dir}">
+				<include name="*.xml" />
+				<include name="*.properties" />
+				<include name="*.dtd" />
+				<include name="*.xsd" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build.classes.dir}">
+			<fileset dir="${source.dir}">
+				<include name="*.xml" />
+				<include name="*.properties" />
+				<include name="*.dtd" />
+				<include name="*.xsd" />
+			</fileset>
+		</copy>
+    </target>
+    
+    
+	<!--
+		TARGET: build_war
+		This will build the war file
+	-->
+    <target name="build_war" depends="copy_resource_directory">
+		<delete file="${build.dir}/${app.war.name}.war" />
+		<war destfile="${build.dir}/${app.war.name}.war" webxml="${webapp.dir}/WEB-INF/web.xml">
+			<fileset file="${webapp.dir}/*.*" />
+			<zipfileset dir="${webapp.dir}/common" prefix="common" />
+			<zipfileset dir="${webapp.dir}/images" prefix="images" />
+			<zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
+			<zipfileset dir="${webapp.dir}/styles" prefix="styles" />
+			<webinf dir="${webapp.dir}/WEB-INF"/>
+			<classes dir="${build.classes.dir}" />
+    	</war>
+	</target>
+	
+</project>
