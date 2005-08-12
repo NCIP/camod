@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+  <!-- ========== Data Sources Definitions =================================== -->
+  <!--
+    Define your Struts data sources in a file called struts-data-sources.xml and place
+    it in your merge directory.
+  -->
+
+  <!-- ========== Form Bean Definitions =================================== -->
+  <form-beans>
+
+   <form-bean
+	name="cellLineForm"
+    type="gov.nih.nci.camod.webapp.form.CellLineForm"/>
+
+<form-bean
+	name="environmentalFactorForm"
+    type="gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm"/>
+<form-bean
+	name="geneDeliveryForm"
+    type="gov.nih.nci.camod.webapp.form.GeneDeliveryForm"/>
+
+<form-bean
+	name="genomicSegmentForm"
+    type="gov.nih.nci.camod.webapp.form.GenomicSegmentForm"/>
+
+<form-bean
+	name="transgeneForm"
+    type="gov.nih.nci.camod.webapp.form.TransgeneForm"/>
+<form-bean
+	name="imageForm"
+    type="gov.nih.nci.camod.webapp.form.ImageForm"/>
+<form-bean
+	name="inducedMutationForm"
+    type="gov.nih.nci.camod.webapp.form.InducedMutationForm"/>
+<form-bean
+	name="microArrayDataForm"
+    type="gov.nih.nci.camod.webapp.form.MicroArrayDataForm"/>
+
+<form-bean
+	name="publicationForm"
+    type="gov.nih.nci.camod.webapp.form.PublicationForm"/>
+
+<form-bean
+	name="targetedModificationForm"
+    type="gov.nih.nci.camod.webapp.form.TargetedModificationForm"/>
+
+<form-bean
+	name="therapyForm"
+    type="gov.nih.nci.camod.webapp.form.TherapyForm"/>
+
+<form-bean
+	name="xenograftForm"
+    type="gov.nih.nci.camod.webapp.form.XenograftForm"/>
+
+<form-bean
+	name="loginForm"
+    type="gov.nih.nci.camod.webapp.form.LoginForm"/>
+
+<form-bean
+	name="personForm"
+    type="gov.nih.nci.camod.webapp.form.PersonForm"/>
+<form-bean
+	name="ModelCharacteristicsForm"
+    type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
+
+  </form-beans>
+
+  <!-- ========== Global Exceptions Definitions =================================== -->
+      <global-exceptions>
+        <exception type="java.lang.Exception"
+            key="errors.general"
+            handler="gov.nih.nci.camod.webapp.action.ActionExceptionHandler"/>
+    </global-exceptions>
+
+  <!-- ========== Global Forward Definitions =================================== -->
+      <global-forwards>        
+    </global-forwards>
+
+  <!-- ========== Action Mapping Definitions =================================== -->
+   <action-mappings>
+    <action
+      path="/persons"
+      type="gov.nih.nci.camod.webapp.action.PersonAction"
+      name="personForm"
+      scope="request"
+      input="mainMenu"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="edit"
+        path="/WEB-INF/pages/personForm.jsp"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/personList.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/editPerson"
+      type="gov.nih.nci.camod.webapp.action.PersonAction"
+      name="personForm"
+      scope="request"
+      input="list"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="edit"
+        path="/WEB-INF/pages/personForm.jsp"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/personList.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/savePerson"
+      type="gov.nih.nci.camod.webapp.action.PersonAction"
+      name="personForm"
+      scope="request"
+      input="edit"
+      parameter="method"
+      unknown="false"
+      validate="true"
+    >
+      <forward
+        name="edit"
+        path="/WEB-INF/pages/personForm.jsp"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/personList.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/reload"
+      type="gov.nih.nci.camod.webapp.action.ReloadAction"
+      roles="admin"
+      unknown="false"
+      validate="false"
+    >
+    </action>
+
+       <action path="/login" 
+    	type="org.apache.struts.actions.ForwardAction" 
+    	parameter="/login.jsp"/>
+    <action path="/register" 
+    	type="org.apache.struts.actions.ForwardAction" 
+    	parameter="/register.jsp"/>
+    <action path="/submitPublications" 
+    	type="org.apache.struts.actions.ForwardAction"
+		parameter="/submitPublications.jsp"/>
+    <action path="/submitRadiation"
+    	type="org.apache.struts.actions.ForwardAction"
+    	parameter="/submitRadiation.jsp" />
+    <action path="/personsTest"
+	      	type="gov.nih.nci.camod.webapp.action.PersonAction"
+	      	name="personForm"
+	      	scope="request"
+	      	input="/login.jsp"
+	      	parameter="method"      	
+	      	unknown="false"
+	      	validate="false">
+      	<forward
+        	name="list"
+        	path="/login.jsp"
+        	redirect="false"/>
+    </action>
+    <action path="/loginAction"
+	        type="gov.nih.nci.camod.webapp.action.LoginAction"
+	        name="loginForm"
+	        scope="request"
+	        parameter="method" 
+	        unknown="false"
+	        validate="false"
+	        input="/login.jsp">
+    <forward
+            name="success"
+            path="/UserAction.do?method=ReturnUserModels"></forward>
+    <forward
+            name="failure"
+            path="/login.jsp"></forward>                                
+    </action>
+    <action path="/LogoutAction"
+	        type="gov.nih.nci.camod.webapp.action.LogoutAction"
+	        scope="request"
+	        parameter="method" 	     
+	        unknown="false"
+	        validate="false"
+	        input="/login.jsp">
+    <forward
+            name="success"
+            path="/loggedOut.jsp"></forward>
+    </action>
+    <action path="/AnimalModelAction"
+	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
+	        name="ModelCharacteristicsForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitNewModels.jsp">
+    <forward
+            name="createsuccessful"
+            path="/submitOverview.jsp"></forward>
+    <forward
+            name="editsuccessful"
+            path="/submitOverview.jsp"></forward>
+    <forward
+            name="failure"
+            path="/submitModels.jsp"></forward>     
+    <forward 
+    		name="loginrequired"
+    		path="/login.jsp"></forward>	
+    <forward 
+    		name="duplicatesuccessful"
+    		path="/submitModels.jsp"></forward>	    
+    <forward 
+    		name="modeldeleted"
+    		path="/submitModels.jsp"></forward>			
+    </action>
+    <action path="/UserAction"
+	        type="gov.nih.nci.camod.webapp.action.UserAction"
+	        scope="request"
+	        parameter="method"
+   	        unknown="false"
+	        input="/login.jsp" 	     
+	        validate="false" >
+    <forward
+            name="usermodellist"
+            path="/submitModels.jsp"></forward>
+    <forward 
+    		name="loginrequired"
+    		path="/login.jsp"></forward>
+    </action>
+    <action path="/SubmitAction"
+	        type="gov.nih.nci.camod.webapp.action.SubmitAction"
+	        scope="request"
+	        parameter="method"
+   	        unknown="false"
+	        input="/submitModels.jsp" 	     
+	        validate="false" >
+    <forward
+            name="success"
+            path="/submitOverview.jsp"></forward>
+    <forward 
+    		name="loginrequired"
+    		path="/login.jsp"></forward>
+    <forward 
+    		name="modeldeleted"
+    		path="/UserAction.do?method=ReturnUserModels"></forward>  	    		
+    </action>
+    <action path="/FormAction"
+    		type="gov.nih.nci.camod.webapp.action.FormAction"
+    		name="ModelCharacteristicsForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+    <forward 
+    		name="success"
+    		path="/submitModelCharacteristics.jsp"></forward>	
+    <forward 
+    		name="loginrequired"
+    		path="/login.jsp"></forward>    		
+    </action>
+  </action-mappings>
+
+  <controller nocache="true" inputForward="true" maxFileSize="2M"/>
+
+      <message-resources parameter="ApplicationResources"/>
+
+      <!-- ========== Validator plugin ===================  -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames" 
+                      value="/WEB-INF/validator-rules.xml,
+                             /WEB-INF/validator-rules-custom.xml,
+                             /WEB-INF/validation.xml"/>
+    </plug-in>
+
+</struts-config>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Nomenclature.hbm.xml
+    Created on : May 5, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for Nomenclature
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="Nomenclature" 
+    	table="nomenclature"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="nomenclature_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	    
+	    
+	    <!-- name -->
+        <property name="name"
+        	column="name" 
+        	type="string"/>
+	</class>
+</hibernate-mapping>

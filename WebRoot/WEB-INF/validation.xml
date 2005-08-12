@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN" "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+
+<form-validation>
+     <global>
+      <constant>
+        <constant-name>phone</constant-name>
+        <constant-value>^\(?(\d{3})\)?[-| ]?(\d{3})[-| ]?(\d{4})$</constant-value>
+      </constant>
+      <constant>
+        <constant-name>zip</constant-name>
+        <constant-value>^\d{5}\d*$</constant-value>
+      </constant>
+      <constant>
+        <constant-name>currency</constant-name>
+        <constant-value>^\d{1,3}(,?\d{1,3})*\.?(\d{1,2})?$</constant-value>
+      </constant> 
+   </global>
+  <formset>
+  	<form name="loginForm">
+        <field property="username" depends="required">
+            <arg0 key="loginForm.username"/>
+        </field>
+        <field property="password" depends="required">
+            <arg0 key="loginForm.password"/>
+        </field>
+    </form>
+    <form name="ModelCharacteristicsForm">
+        <field property="modelDescriptor" depends="required">
+            <arg0 key="ModelCharacteristicsForm.modelDescriptor"/>
+        </field>
+        <field property="email" depends="required">
+            <arg0 key="ModelCharacteristicsForm.email"/>
+        </field>
+        <field property="scientificName" depends="required">
+            <arg0 key="ModelCharacteristicsForm.scientificName"/>
+        </field>
+        <field property="ethinicityStrain" depends="required">
+            <arg0 key="ModelCharacteristicsForm.ethinicityStrain"/>
+        </field>
+        <field property="description" depends="required">
+            <arg0 key="ModelCharacteristicsForm.description"/>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="ModelCharacteristicsForm.type"/>
+        </field>
+        <field property="releaseDate" depends="required">
+            <arg0 key="ModelCharacteristicsForm.releaseDate"/>
+        </field>
+    </form>
+
+  </formset>
+</form-validation>

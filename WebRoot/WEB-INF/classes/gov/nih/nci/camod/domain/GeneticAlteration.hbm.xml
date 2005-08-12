@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : GeneticAlteration.hbm.xml
+    Created on : May 3, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for GeneticAlteration
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="GeneticAlteration" 
+    	table="genetic_alteration"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="genetic_alteration_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- observation -->
+        <property name="observation" 
+        	column="observation" 
+        	type="string"/>   
+	    
+	    <!-- methodOfObservation -->
+        <property name="methodOfObservation" 
+        	column="method_of_observation" 
+        	type="string"/> 
+	</class>
+</hibernate-mapping>
