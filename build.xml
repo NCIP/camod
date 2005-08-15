@@ -1,4 +1,4 @@
-<project name="caMOD" default="build_war" basedir=".">
+<project name="caMOD" default="deploy" basedir=".">
 	
 	<property file="build.properties" />
     
@@ -60,5 +60,13 @@
 			<classes dir="${build.classes.dir}" />
     	</war>
 	</target>
+	
+	
+    <target name="deploy" depends="build_war"
+        description="Deploy '${app.war.name}.war' to local JBoss">
+    	<delete file="${jboss.home}/server/${jboss.instance}/deploy/${app.war.name}.war"/>
+        <copy file="${build.dir}/${app.war.name}.war"
+            todir="${jboss.home}/server/${jboss.instance}/deploy"/>
+    </target>
 	
 </project>
