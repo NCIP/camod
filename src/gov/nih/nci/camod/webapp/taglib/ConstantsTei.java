@@ -19,7 +19,7 @@ import gov.nih.nci.camod.Constants;
  * tag, identifying the scripting object(s) to be made visible.
  *
  * @author Matt Raible
- * @version $Revision: 1.1 $ $Date: 2005-08-12 18:59:34 $
+ * @version $Revision: 1.2 $ $Date: 2005-08-15 14:19:57 $
  */
 public class ConstantsTei extends TagExtraInfo {
     private final Log log = LogFactory.getLog(ConstantsTei.class);

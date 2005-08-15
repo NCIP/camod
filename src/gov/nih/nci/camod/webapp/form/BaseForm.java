@@ -26,7 +26,7 @@ import org.apache.struts.validator.ValidatorForm;
  * <p><a href="BaseForm.java.html"><i>View Source</i></a></p>
  *
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
- * @version $Revision: 1.1 $ $Date: 2005-08-12 18:59:39 $
+ * @version $Revision: 1.2 $ $Date: 2005-08-15 14:19:58 $
  */
 public class BaseForm extends ValidatorForm implements Serializable {
 	private static final long serialVersionUID = 3257005453799404851L;

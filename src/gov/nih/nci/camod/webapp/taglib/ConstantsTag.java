@@ -30,7 +30,7 @@ import gov.nih.nci.camod.Constants;
  * </p>
  *
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
- * @version $Revision: 1.1 $ $Date: 2005-08-12 18:59:34 $
+ * @version $Revision: 1.2 $ $Date: 2005-08-15 14:19:57 $
  *
  * @jsp.tag name="constants" bodycontent="empty"
  *  tei-class="gov.nih.nci.camod.webapp.taglib.ConstantsTei"

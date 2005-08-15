@@ -27,7 +27,7 @@ import org.displaytag.tags.el.ExpressionEvaluator;
  * </p>
  *
  * @author Jens Fischer, Matt Raible
- * @version $Revision: 1.1 $ $Date: 2005-08-12 18:59:35 $
+ * @version $Revision: 1.2 $ $Date: 2005-08-15 14:19:57 $
  *
  * @jsp.tag name="country" bodycontent="empty"
  */

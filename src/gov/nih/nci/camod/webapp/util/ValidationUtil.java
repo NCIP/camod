@@ -19,7 +19,7 @@ import org.apache.struts.validator.Resources;
  * </p>
  *
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
- * @version $Revision: 1.1 $ $Date: 2005-08-12 18:59:56 $
+ * @version $Revision: 1.2 $ $Date: 2005-08-15 14:20:05 $
  */
 public class ValidationUtil {
     //~ Methods ================================================================
