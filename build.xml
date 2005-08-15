@@ -1,4 +1,4 @@
-<project name="caMOD" default="deploy" basedir=".">
+<project name="caMOD" default="clean-build-compile-deploy" basedir=".">
 	
 	<property file="build.properties" />
     
@@ -48,7 +48,7 @@
 		TARGET: build_war
 		This will build the war file
 	-->
-    <target name="build_war" depends="copy_resource_directory">
+    <target name="build_war" depends="copy_resource_directory, service-context">
 		<delete file="${build.dir}/${app.war.name}.war" />
 		<war destfile="${build.dir}/${app.war.name}.war" webxml="${webapp.dir}/WEB-INF/web.xml">
 			<fileset file="${webapp.dir}/*.*" />
@@ -60,8 +60,7 @@
 			<classes dir="${build.classes.dir}" />
     	</war>
 	</target>
-	
-	
+		
     <target name="deploy" depends="build_war"
         description="Deploy '${app.war.name}.war' to local JBoss">
     	<delete file="${jboss.home}/server/${jboss.instance}/deploy/${app.war.name}.war"/>
@@ -69,4 +68,13 @@
             todir="${jboss.home}/server/${jboss.instance}/deploy"/>
     </target>
 	
+    <target name="service-context">    
+    	<copy tofile="${build.dir}/WebRoot/WEB-INF/applicationContext-service.xml">
+            <fileset dir="${build.dir}/src/gov/nih/nci/camod/service" includes="**/*-service.xml"/>
+        </copy>   	
+    </target>
+    	
+	<target name="clean-build-compile-deploy" depends="deploy" /> 
+
 </project>
+	
