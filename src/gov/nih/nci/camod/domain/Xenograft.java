@@ -22,7 +22,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Xenograft extends AbstractCancerModel {
 	private String administrativeSite;
 	private String geneticManipulation;
-	private String xenograftType;
 	private String modificationDescription;
 	private String parentalCellLineName;
 	private String name;
@@ -34,7 +33,20 @@ public class Xenograft extends AbstractCancerModel {
 	private List invivoResultCollection = new ArrayList();
 	private Taxon originSpecies;
 	private Taxon hostSpecies;
+	private Organ organ;
 	
+	/**
+	 * @return Returns the organ.
+	 */
+	public Organ getOrgan() {
+		return organ;
+	}
+	/**
+	 * @param organ The organ to set.
+	 */
+	public void setOrgan(Organ organ) {
+		this.organ = organ;
+	}
 	/**
 	 * @return Returns the hostSpecies.
 	 */
@@ -193,18 +205,6 @@ public class Xenograft extends AbstractCancerModel {
 	 */
 	public void setTumorCode(TumorCode tumorCode) {
 		this.tumorCode = tumorCode;
-	}	
-	/**
-	 * @return Returns the xenograftType.
-	 */
-	public String getXenograftType() {
-		return xenograftType;
-	}
-	/**
-	 * @param xenograftType The xenograftType to set.
-	 */
-	public void setXenograftType(String xenograftType) {
-		this.xenograftType = xenograftType;
 	}
 	/**
 	 * @see java.lang.Object#equals(Object)
@@ -225,23 +225,22 @@ public class Xenograft extends AbstractCancerModel {
 						this.modificationDescription,
 						rhs.modificationDescription).append(
 						this.parentalCellLineName, rhs.parentalCellLineName)
-				.append(this.harvestDate, rhs.harvestDate).append(
-						this.xenograftType, rhs.xenograftType).append(
-						this.name, rhs.name).append(this.hostSpecies,
-						rhs.hostSpecies).isEquals();
+				.append(this.organ, rhs.organ).append(this.harvestDate,
+						rhs.harvestDate).append(this.name, rhs.name).append(
+						this.hostSpecies, rhs.hostSpecies).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-1754259427, 1984756469).appendSuper(
+		return new HashCodeBuilder(-2123253831, 472004439).appendSuper(
 				super.hashCode()).append(this.originSpecies).append(
 				this.tumorCode).append(this.invivoResultCollection).append(
 				this.graftType).append(this.geneticManipulation).append(
 				this.administrativeSite).append(this.cellAmount).append(
 				this.atccNumber).append(this.modificationDescription).append(
-				this.parentalCellLineName).append(this.harvestDate).append(
-				this.xenograftType).append(this.name).append(this.hostSpecies)
+				this.parentalCellLineName).append(this.organ).append(
+				this.harvestDate).append(this.name).append(this.hostSpecies)
 				.toHashCode();
 	}
 	/**
@@ -257,7 +256,6 @@ public class Xenograft extends AbstractCancerModel {
 				.append("principalInvestigator",
 						this.getPrincipalInvestigator())
 				.append("atccNumber", this.atccNumber)
-				.append("xenograftType", this.xenograftType)
 				.append("originSpecies", this.originSpecies)
 				.append("species", this.getSpecies())
 				.append("state", this.getState())
@@ -271,6 +269,7 @@ public class Xenograft extends AbstractCancerModel {
 				.append("tumorCode", this.tumorCode)
 				.append("publicationCollection",
 						this.getPublicationCollection())
+				.append("organ", this.organ)
 				.append("administrativeSite", this.administrativeSite)
 				.append("modelDescriptor", this.getModelDescriptor())
 				.append("modificationDescription", this.modificationDescription)

@@ -83,7 +83,7 @@ public class Transgene extends EngineeredGene {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(1388783907, -674007719).appendSuper(
+		return new HashCodeBuilder(-570776691, 2101951297).appendSuper(
 				super.hashCode()).append(this.locationOfIntegration).append(
 				this.regulatoryElementCollection).append(this.species)
 				.toHashCode();
@@ -97,10 +97,11 @@ public class Transgene extends EngineeredGene {
 				.append("name", this.getName()).append("locationOfIntegration",
 						this.locationOfIntegration).append("id", this.getId())
 				.append("comments", this.getComments()).append("image",
-						this.getImage()).append("cabioId", this.getCabioId())
-				.append("expressionLevelDescCollection",
-						this.getExpressionLevelDescCollection()).append(
-						"genotypeSummary", this.getGenotypeSummary()).append(
+						this.getImage()).append("organCollection",
+						this.getOrganCollection()).append("cabioId",
+						this.getCabioId()).append("mutationIdentifier",
+						this.getMutationIdentifier()).append("genotypeSummary",
+						this.getGenotypeSummary()).append(
 						"regulatoryElementCollection",
 						this.regulatoryElementCollection).toString();
 	}

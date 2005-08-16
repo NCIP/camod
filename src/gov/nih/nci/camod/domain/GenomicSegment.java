@@ -88,7 +88,7 @@ public class GenomicSegment extends EngineeredGene {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-36251067, 68750997).appendSuper(
+		return new HashCodeBuilder(1738802159, 1516001829).appendSuper(
 				super.hashCode()).append(this.segmentType).append(
 				this.locationOfIntegration).append(this.segmentSize).append(
 				this.cloneDesignator).toHashCode();
@@ -103,12 +103,11 @@ public class GenomicSegment extends EngineeredGene {
 				this.locationOfIntegration).append("name", this.getName())
 				.append("id", this.getId()).append("comments",
 						this.getComments()).append("image", this.getImage())
-				.append("segmentSize", this.segmentSize).append("cabioId",
-						this.getCabioId()).append(
-						"expressionLevelDescCollection",
-						this.getExpressionLevelDescCollection()).append(
-						"cloneDesignator", this.cloneDesignator).append(
-						"genotypeSummary", this.getGenotypeSummary())
-				.toString();
+				.append("organCollection", this.getOrganCollection()).append(
+						"segmentSize", this.segmentSize).append("cabioId",
+						this.getCabioId()).append("cloneDesignator",
+						this.cloneDesignator).append("mutationIdentifier",
+						this.getMutationIdentifier()).append("genotypeSummary",
+						this.getGenotypeSummary()).toString();
 	}
 }

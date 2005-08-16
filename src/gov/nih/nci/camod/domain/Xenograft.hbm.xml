@@ -27,11 +27,6 @@
         	column="genetic_manipulation" 
         	type="string"/>	
         
-        <!-- xenograftType -->
-        <property name="xenograftType" 
-        	column="xenograft_type" 
-        	type="string"/>		
-        	
         <!-- modificationDescription -->
         <property name="modificationDescription" 
         	column="modification_description" 
@@ -96,6 +91,14 @@
         <many-to-one
         	name="hostSpecies"
         	column="host_species_id"
-        	class="Taxon"/>        
+        	class="Taxon"/>    
+        	
+        <!-- organ: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
+        <many-to-one name="organ"
+        	class="Organ"
+        	column="organ_id"
+        	cascade="all"
+        	unique="true"/>
 	</subclass>
 </hibernate-mapping>

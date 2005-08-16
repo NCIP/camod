@@ -43,17 +43,17 @@
         	column="comments" 
         	type="string"/>	
         
-        <!-- expressionLevelDescCollection (one-to-many unidirectional) -->
-        <bag name="expressionLevelDescCollection" 
-        	table="eng_gen_exp_level_desc"
+        <!-- organCollection (one-to-many unidirectional) -->
+        <bag name="organCollection"
+        	table="engineered_gene_organ" 
         	inverse="false" 
         	lazy="true" 
         	cascade="all-delete-orphan">
         	
         	<key column="engineered_gene_id"/>
-        	<many-to-many column="exp_level_desc_id"
+        	<many-to-many column="organ_id"
             	unique="true"
-            	class="ExpressionLevelDesc"/>
+            	class="Organ"/>
         </bag>
         
         <!-- conditionality (many-to-one unidirectional) -->

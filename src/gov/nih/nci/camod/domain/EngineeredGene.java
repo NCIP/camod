@@ -27,9 +27,27 @@ public class EngineeredGene extends BaseObject implements Serializable {
 	private GenotypeSummary genotypeSummary;
 	private Image image;
 	private Conditionality conditionality;
-	private List expressionLevelDescCollection = new ArrayList();
 	private MutationIdentifier mutationIdentifier;
+	private List organCollection = new ArrayList();	
 	
+	/**
+	 * @return Returns the organCollection.
+	 */
+	public List getOrganCollection() {
+		return organCollection;
+	}
+	/**
+	 * @param organCollection The organCollection to set.
+	 */
+	public void setOrganCollection(List organCollection) {
+		this.organCollection = organCollection;
+	}
+	/**
+	 * @param organ The organ to add.
+	 */
+	public void addOrgan(Organ organ) {
+		organCollection.add(organ);
+	}	
 	/**
 	 * @return Returns the mutationIdentifier.
 	 */
@@ -42,24 +60,6 @@ public class EngineeredGene extends BaseObject implements Serializable {
 	public void setMutationIdentifier(MutationIdentifier mutationIdentifier) {
 		this.mutationIdentifier = mutationIdentifier;
 	}
-	/**
-	 * @return Returns the expressionLevelDescCollection.
-	 */
-	public List getExpressionLevelDescCollection() {
-		return expressionLevelDescCollection;
-	}
-	/**
-	 * @param expressionLevelDescCollection The expressionLevelDescCollection to set.
-	 */
-	public void setExpressionLevelDescCollection(List expressionLevelDescCollection) {
-		this.expressionLevelDescCollection = expressionLevelDescCollection;
-	}
-	/**
-	 * @param expressionLevelDesc The expressionLevelDesc to add.
-	 */
-	public void addExpressionLevelDesc(ExpressionLevelDesc expressionLevelDesc) {
-		expressionLevelDescCollection.add(expressionLevelDesc);
-	}	
 	/**
 	 * @return Returns the comments.
 	 */
@@ -155,22 +155,21 @@ public class EngineeredGene extends BaseObject implements Serializable {
 		return new EqualsBuilder().append(
 				this.comments, rhs.comments).append(this.mutationIdentifier,
 				rhs.mutationIdentifier).append(this.genotypeSummary,
-				rhs.genotypeSummary).append(this.conditionality,
+				rhs.genotypeSummary).append(this.organCollection,
+				rhs.organCollection).append(this.conditionality,
 				rhs.conditionality).append(this.image, rhs.image).append(
-				this.expressionLevelDescCollection,
-				rhs.expressionLevelDescCollection).append(this.cabioId,
-				rhs.cabioId).append(this.name, rhs.name)
-				.append(this.id, rhs.id).isEquals();
+				this.cabioId, rhs.cabioId).append(this.name, rhs.name).append(
+				this.id, rhs.id).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-1145075169, 69087661).append(this.comments).append(
+		return new HashCodeBuilder(1420752269, 1266067367).append(this.comments).append(
 				this.mutationIdentifier).append(this.genotypeSummary).append(
-				this.conditionality).append(this.image).append(
-				this.expressionLevelDescCollection).append(this.cabioId)
-				.append(this.name).append(this.id).toHashCode();
+				this.organCollection).append(this.conditionality).append(
+				this.image).append(this.cabioId).append(this.name).append(
+				this.id).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -179,10 +178,9 @@ public class EngineeredGene extends BaseObject implements Serializable {
 		return new ToStringBuilder(this).append("conditionality",
 				this.conditionality).append("name", this.name).append("id",
 				this.id).append("comments", this.comments).append("image",
-				this.image).append("cabioId", this.cabioId).append(
-				"expressionLevelDescCollection",
-				this.expressionLevelDescCollection).append(
-				"mutationIdentifier", this.mutationIdentifier).append(
-				"genotypeSummary", this.genotypeSummary).toString();
+				this.image).append("organCollection", this.organCollection)
+				.append("cabioId", this.cabioId).append("mutationIdentifier",
+						this.mutationIdentifier).append("genotypeSummary",
+						this.genotypeSummary).toString();
 	}
 }

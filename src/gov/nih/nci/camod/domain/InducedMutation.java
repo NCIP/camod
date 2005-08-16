@@ -97,7 +97,7 @@ public class InducedMutation extends EngineeredGene {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(1806683963, 1119230461).appendSuper(
+		return new HashCodeBuilder(-1438034695, -1262291951).appendSuper(
 				super.hashCode()).append(this.environmentalFactor).append(
 				this.description).append(this.geneticAlterationCollection)
 				.append(this.geneId).toHashCode();
@@ -110,14 +110,14 @@ public class InducedMutation extends EngineeredGene {
 				this.getConditionality()).append("name", this.getName())
 				.append("description", this.description).append("id",
 						this.getId()).append("comments", this.getComments())
-				.append("image", this.getImage()).append(
+				.append("image", this.getImage()).append("organCollection",
+						this.getOrganCollection()).append(
 						"geneticAlterationCollection",
 						this.geneticAlterationCollection).append("cabioId",
-						this.getCabioId()).append(
-						"expressionLevelDescCollection",
-						this.getExpressionLevelDescCollection()).append(
-						"environmentalFactor", this.environmentalFactor)
-				.append("geneId", this.geneId).append("genotypeSummary",
+						this.getCabioId()).append("environmentalFactor",
+						this.environmentalFactor).append("mutationIdentifier",
+						this.getMutationIdentifier()).append("geneId",
+						this.geneId).append("genotypeSummary",
 						this.getGenotypeSummary()).toString();
 	}
 }

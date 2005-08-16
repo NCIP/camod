@@ -97,7 +97,7 @@ public class TargetedModification extends EngineeredGene {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-888810581, 620182193).appendSuper(
+		return new HashCodeBuilder(-547681255, 1252724853).appendSuper(
 				super.hashCode()).append(this.modificationTypeCollection)
 				.append(this.esCellLineName).append(this.geneId).append(
 						this.blastocystName).toHashCode();
@@ -111,9 +111,8 @@ public class TargetedModification extends EngineeredGene {
 				.append("id", this.getId()).append("comments",
 						this.getComments()).append("esCellLineName",
 						this.esCellLineName).append("image", this.getImage())
-				.append("cabioId", this.getCabioId()).append(
-						"expressionLevelDescCollection",
-						this.getExpressionLevelDescCollection()).append(
+				.append("organCollection", this.getOrganCollection()).append(
+						"cabioId", this.getCabioId()).append(
 						"mutationIdentifier", this.getMutationIdentifier())
 				.append("blastocystName", this.blastocystName).append(
 						"modificationTypeCollection",

@@ -78,5 +78,10 @@
             	unique="true"
             	class="Publication"/>
         </bag>
+        
+        <!-- therapeuticExperiment -->
+        <property name="therapeuticExperiment" 
+        	column="therapeutic_experiment" 
+        	type="boolean"/>
 	</class>
 </hibernate-mapping>

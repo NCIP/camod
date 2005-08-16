@@ -31,7 +31,20 @@ public class Therapy extends BaseObject implements Serializable {
 	private Treatment treatment;
 	private List publicationCollection = new ArrayList();
 	private Agent agent;	
+	private boolean therapeuticExperiment;
 	
+	/**
+	 * @return Returns the therapeuticExperiment.
+	 */
+	public boolean getTherapeuticExperiment() {
+		return therapeuticExperiment;
+	}
+	/**
+	 * @param therapeuticExperiment The therapeuticExperiment to set.
+	 */
+	public void setTherapeuticExperiment(boolean therapeuticExperiment) {
+		this.therapeuticExperiment = therapeuticExperiment;
+	}
 	/**
 	 * @return Returns the agent.
 	 */
@@ -169,6 +182,7 @@ public class Therapy extends BaseObject implements Serializable {
 		return new EqualsBuilder().append(
 				this.tumorResponse, rhs.tumorResponse).append(this.comments,
 				rhs.comments).append(this.experiment, rhs.experiment).append(
+				this.therapeuticExperiment, rhs.therapeuticExperiment).append(
 				this.agent, rhs.agent).append(this.toxicityGrade,
 				rhs.toxicityGrade).append(this.treatment, rhs.treatment)
 				.append(this.publicationCollection, rhs.publicationCollection)
@@ -179,11 +193,12 @@ public class Therapy extends BaseObject implements Serializable {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-2038641917, 1925525155).append(this.tumorResponse).append(
-				this.comments).append(this.experiment).append(this.agent)
-				.append(this.toxicityGrade).append(this.treatment).append(
-						this.publicationCollection).append(this.biomarker)
-				.append(this.results).append(this.id).toHashCode();
+		return new HashCodeBuilder(288096921, 542841797).append(this.tumorResponse).append(
+				this.comments).append(this.experiment).append(
+				this.therapeuticExperiment).append(this.agent).append(
+				this.toxicityGrade).append(this.treatment).append(
+				this.publicationCollection).append(this.biomarker).append(
+				this.results).append(this.id).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -194,8 +209,9 @@ public class Therapy extends BaseObject implements Serializable {
 						this.id).append("comments", this.comments).append(
 						"agent", this.agent).append("publicationCollection",
 						this.publicationCollection).append("biomarker",
-						this.biomarker).append("treatment", this.treatment)
-				.append("results", this.results).append("toxicityGrade",
-						this.toxicityGrade).toString();
+						this.biomarker).append("therapeuticExperiment",
+						this.therapeuticExperiment).append("treatment",
+						this.treatment).append("results", this.results).append(
+						"toxicityGrade", this.toxicityGrade).toString();
 	}
 }
