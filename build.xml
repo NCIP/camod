@@ -1,4 +1,4 @@
-<project name="caMOD" default="clean-build-compile-deploy" basedir=".">
+<project name="caMOD" default="clean-build-compile" basedir=".">
 	
 	<property file="build.properties" />
 	
