@@ -22,7 +22,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class CellLine extends BaseObject implements Serializable {
 	private Long id;
-	private String components;
+	private String comments;
 	private String experiment;
 	private String name;
 	private String results;
@@ -40,18 +40,18 @@ public class CellLine extends BaseObject implements Serializable {
 	 */
 	public void setOrgan(Organ organ) {
 		this.organ = organ;
+	}	
+	/**
+	 * @return Returns the comments.
+	 */
+	public String getComments() {
+		return comments;
 	}
 	/**
-	 * @return Returns the components.
+	 * @param comments The comments to set.
 	 */
-	public String getComponents() {
-		return components;
-	}
-	/**
-	 * @param components The components to set.
-	 */
-	public void setComponents(String components) {
-		this.components = components;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	/**
 	 * @return Returns the experiment.
@@ -129,8 +129,8 @@ public class CellLine extends BaseObject implements Serializable {
 		}
 		CellLine rhs = (CellLine) object;
 		return new EqualsBuilder().append(
-				this.experiment, rhs.experiment).append(this.components,
-				rhs.components).append(this.organ, rhs.organ).append(
+				this.experiment, rhs.experiment).append(this.comments,
+				rhs.comments).append(this.organ, rhs.organ).append(
 				this.publicationCollection, rhs.publicationCollection).append(
 				this.name, rhs.name).append(this.results, rhs.results).append(
 				this.id, rhs.id).isEquals();
@@ -139,10 +139,10 @@ public class CellLine extends BaseObject implements Serializable {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(1630795507, -544251359).append(this.experiment).append(
-				this.components).append(this.organ).append(
-				this.publicationCollection).append(this.name).append(
-				this.results).append(this.id).toHashCode();
+		return new HashCodeBuilder(-1563857285, 1875579981).append(this.experiment).append(this.comments)
+				.append(this.organ).append(this.publicationCollection).append(
+						this.name).append(this.results).append(this.id)
+				.toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -150,7 +150,7 @@ public class CellLine extends BaseObject implements Serializable {
 	public String toString() {
 		return new ToStringBuilder(this).append("experiment", this.experiment)
 				.append("name", this.name).append("id", this.id).append(
-						"components", this.components).append(
+						"comments", this.comments).append(
 						"publicationCollection", this.publicationCollection)
 				.append("organ", this.organ).append("results", this.results)
 				.toString();

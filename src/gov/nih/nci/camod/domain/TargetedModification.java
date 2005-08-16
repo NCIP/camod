@@ -21,7 +21,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class TargetedModification extends EngineeredGene {
 	private String esCellLineName;
 	private String blastocystName;
-	private String modificationType;
 	private String geneId;
 	private List modificationTypeCollection = new ArrayList();
 	
@@ -56,18 +55,6 @@ public class TargetedModification extends EngineeredGene {
 		this.geneId = geneId;
 	}
 	/**
-	 * @return Returns the modificationType.
-	 */
-	public String getModificationType() {
-		return modificationType;
-	}
-	/**
-	 * @param modificationType The modificationType to set.
-	 */
-	public void setModificationType(String modificationType) {
-		this.modificationType = modificationType;
-	}
-	/**
 	 * @return Returns the blastocystName.
 	 */
 	public String getBlastocystName() {
@@ -99,20 +86,21 @@ public class TargetedModification extends EngineeredGene {
 			return false;
 		}
 		TargetedModification rhs = (TargetedModification) object;
-		return new EqualsBuilder().appendSuper(super.equals(object)).append(
-				this.modificationType, rhs.modificationType).append(
-				this.esCellLineName, rhs.esCellLineName).append(this.geneId,
-				rhs.geneId).append(this.blastocystName, rhs.blastocystName)
-				.isEquals();
+		return new EqualsBuilder().appendSuper(super.equals(object))
+				.append(this.modificationTypeCollection,
+						rhs.modificationTypeCollection).append(
+						this.esCellLineName, rhs.esCellLineName).append(
+						this.geneId, rhs.geneId).append(this.blastocystName,
+						rhs.blastocystName).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(397720149, 2087731731).appendSuper(
-				super.hashCode()).append(this.modificationType).append(
-				this.esCellLineName).append(this.geneId).append(
-				this.blastocystName).toHashCode();
+		return new HashCodeBuilder(-888810581, 620182193).appendSuper(
+				super.hashCode()).append(this.modificationTypeCollection)
+				.append(this.esCellLineName).append(this.geneId).append(
+						this.blastocystName).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -126,8 +114,10 @@ public class TargetedModification extends EngineeredGene {
 				.append("cabioId", this.getCabioId()).append(
 						"expressionLevelDescCollection",
 						this.getExpressionLevelDescCollection()).append(
-						"blastocystName", this.blastocystName).append(
-						"modificationType", this.modificationType).append(
+						"mutationIdentifier", this.getMutationIdentifier())
+				.append("blastocystName", this.blastocystName).append(
+						"modificationTypeCollection",
+						this.modificationTypeCollection).append(
 						"genotypeSummary", this.getGenotypeSummary()).append(
 						"geneId", this.geneId).toString();
 	}

@@ -27,11 +27,6 @@
         	column="blastocyst_name" 
         	type="string"/>
         	
-        <!-- modificationType -->
-        <property name="modificationType" 
-        	column="modification_type" 
-        	type="string"/>
-        	
         <!-- geneId -->
         <property name="geneId" 
         	column="gene_id" 

@@ -1,7 +1,7 @@
 <project name="caMOD" default="clean-build-compile-deploy" basedir=".">
 	
 	<property file="build.properties" />
-		
+	
 	<!-- DEFAULT BUILD, does everything -->	
 	<target name="clean-build-compile-deploy" depends="deploy" /> 
 	
@@ -67,8 +67,131 @@
     <target name="deploy" depends="build_war"
         description="Deploy '${app.war.name}.war' to local JBoss">
     	<delete file="${jboss.home}/server/${jboss.instance}/deploy/${app.war.name}.war"/>
-        <copy file="${build.dir}/${app.war.name}.war"
+        <copy file="${build.dir}/build/${app.war.name}.war"
             todir="${jboss.home}/server/${jboss.instance}/deploy"/>
+    </target>
+				
+	
+	
+	
+
+	
+	<!-- Setup Hibernate Mappings -->
+
+    <!-- import properties (app settings, classpath, jar file locations) -->
+    <import file="properties.xml"/>
+	
+    <!-- =================================================================== -->
+    <!--            Setup Database                                           -->
+    <!-- =================================================================== -->
+    <target name="setup" depends="db-create,db-prepare"
+        description="creates database and populates by calling other tasks"/>
+	
+    <!-- Remove classes directory for clean build -->
+    <target name="clean" description="Removes build artifacts">
+        <echo level="info">Cleaning build and distribution directories</echo>
+     	<delete dir="${build.dir}/build/dao/gen"/> 
+        <delete file="database.properties"/>
+        <delete file="create-tables.sql"/>
+    </target>
+    	
+	<target name="init" description="defines custom tasks">
+	</target>
+	
+    <!-- =================================================================== -->
+    <!-- The "db-prepare" target generates the database schema and creates   --> 
+    <!-- tables based on the mapping files                                   -->
+    <!-- =================================================================== -->
+    <target name="db-prepare"
+        description="creates database tables">    	
+    	
+    	<echo>db-prepare, schemaexport</echo>   
+    	
+        <taskdef name="schemaexport"
+            classname="org.hibernate.tool.hbm2ddl.SchemaExportTask">        
+            <classpath>
+                  <path refid="all.classpath"/>
+            </classpath> 
+        </taskdef>
+    	
+        <generate-database-properties/>
+        <schemaexport quiet="no" text="no" drop="no" delimiter=";" 
+            properties="database.properties" output="create-tables.sql">
+            <fileset dir="${build.dir}/src/gov/nih/nci/camod/domain" includes="**/*.hbm.xml"/>        	
+        </schemaexport>
+    	
+    </target>
+	
+    <!-- =================================================================== -->
+    <!-- The "db-create" target creates a database based on properties       -->
+    <!-- from the database.properties file                                   -->
+    <!-- =================================================================== -->
+    <target name="db-create" depends="init"
+        description="create database for ${database.type}">
+    	
+        <echo level="warning">WARNING:</echo>
+        <echo>You selected a '${database.type}' database which </echo>
+        <echo>does NOT support creating a database via JDBC.  </echo>
+        <echo>Please create a '${database.name}' database manually</echo>
+        <echo>and then run "ant db-prepare" to create the </echo>
+        <echo>database tables.  You might want to check the </echo>
+        <echo>metadata/sql directory to see if the file</echo>
+        <echo>'${database.type}-create.sql' exists.</echo>
+    	
+    </target>
+		
+    <target name="package-dao" depends="prepare,compile-dao" description="Package DAO JAR">
+        <!-- Copy XML files from source -->
+    	<mkdir dir="${build.dir}/build/dao/gen"/> 
+        <copy todir="${build.dir}/build/dao/gen">
+            <fileset dir="${build.dir}/src/gov/nih/nci/camod/domain" includes="**/*.xml"/>
+            <filterset refid="variables.to.replace"/>
+        </copy>
+    	
+        <!-- Copy Spring configuration files -->
+        <mkdir dir="${build.dir}/build/dao/gen/META-INF"/>        
+        <jar destfile="${build.dir}/build/${app.jar.name}-dao.jar">
+            <manifest>
+                <attribute name="Class-Path" value="${app.jar.name}-dao.jar"/>
+            </manifest>
+            <fileset dir="${build.dir}/build/dao/classes"/>
+            <fileset dir="${build.dir}/build/dao/gen" includes="**/*.xml" 
+                excludes="**/applicationContext-*.xml"/>
+            <metainf dir="${build.dir}/build/dao/gen/META-INF"/>
+        </jar>
+    </target>	
+	
+    <!-- Check timestamp on files -->
+    <target name="prepare" depends="init" description="create target directories">
+    </target>
+    	
+    <target name="compile-dao" depends="hibernatedoclet" description="Compile dao module">
+        <compile module="dao"/>
+    </target>
+	
+    <!-- =================================================================== -->
+    <!-- The "hibernatedoclet" target generates Hibernate mapping files      -->
+    <!-- based on XDoclet marked-up Plain Old Java Object (POJO)             -->
+    <!-- =================================================================== -->
+    <target name="hibernatedoclet" depends="prepare" unless="hibernatedoclet.unnecessary"
+        description="Generate Hibernate mapping files">
+
+        <taskdef name="hibernatedoclet"
+            classname="xdoclet.modules.hibernate.HibernateDocletTask">
+            <classpath>
+                  <path refid="all.classpath"/> 
+            </classpath> 
+		</taskdef>
+        
+    	<mkdir dir="${build.dir}/build/dao/gen" />
+    	
+        <!-- generate hibernate files -->
+        <hibernatedoclet destdir="${build.dir}/build/dao/gen" 
+            excludedtags="@version,@author" addedtags="@xdoclet-generated at ${TODAY}"
+            force="${xdoclet.force}">
+            <fileset dir="${build.dir}/src/gov/nih/nci/camod/domain"/>
+            <hibernate validatexml="true" version="3.0"/>
+        </hibernatedoclet>
     </target>
 	
 </project>

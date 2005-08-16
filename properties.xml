@@ -2,10 +2,8 @@
 <project name="properties" default="generate.database.properties">
     <!-- Library versions and JARs -->
     <property name="lib.dir" location="lib"/>
-    <property file="${lib.dir}/lib.properties"/>
     
     <!-- Load user overrides -->
-    <property file="${user.home}/.${ant.project.name}-build.properties"/>
     <property file="${user.home}/.build.properties"/>
     <property file="build.properties"/>
     
@@ -20,9 +18,6 @@
     <property name="https.port" value="8443"/>
     <property name="dao.type" value="hibernate"/>
     <property name="jsp.2" value="false"/>
-    
-    <!-- Properties for running unit tests with tomcat -->
-    <property file="tomcat.properties"/>
     
     <!-- Defaults for database.properties -->
     <property name="database.jar" location="${oracle.jar}"/>
@@ -62,6 +57,11 @@
     <!-- Classpaths                                                          -->
     <!-- =================================================================== -->
     
+    <!--  Entire lib -->
+    <path id="all.classpath">
+    	<fileset dir="${build.webapp.lib.dir}" includes="*.jar"/>     
+    </path>
+    
     <path id="xdoclet.classpath">
         <pathelement location="${log4j.jar}"/>
         <pathelement location="${commons-logging.jar}"/>
@@ -72,12 +72,7 @@
     
     <!-- Hibernate -->
     <path id="hibernate.classpath">
-        <pathelement location="${hibernate.jar}"/> 
-        <fileset dir="${hibernate.dir}/lib" includes="*.jar"/>
-        <pathelement location="${database.jar}"/> 
-        <pathelement location="${commons-beanutils.jar}"/>
-        <pathelement location="${commons-lang.jar}"/>
-        <path location="${build.dir}/dao/classes"/>
+        <pathelement location="${build.webapp.lib.dir}/hibernate3x.jar"/>
     </path>
     
     <!-- DAO -->
@@ -86,72 +81,6 @@
         <pathelement location="${commons-lang.jar}"/>
         <pathelement location="${commons-logging.jar}"/>
         <fileset dir="${spring.dir}" includes="*.jar"/>
-    </path>
-    <path id="dao.test.classpath">
-        <path refid="dao.compile.classpath"/>
-        <pathelement location="${dbunit.jar}"/>
-        <pathelement location="${junit.jar}"/>
-        <pathelement location="${commons-collections.jar}"/>
-        <pathelement location="${log4j.jar}"/>
-    </path>
-    
-    <!-- Service -->
-    <path id="service.compile.classpath">
-        <path refid="dao.compile.classpath"/>
-        <pathelement location="${dist.dir}/${webapp.name}-dao.jar"/>
-        <fileset dir="${javamail.dir}" includes="*.jar"/>
-        <pathelement location="${commons-lang.jar}"/>
-        <pathelement location="${commons-logging.jar}"/>
-        <pathelement location="${commons-beanutils.jar}"/>
-        <pathelement location="${commons-collections.jar}"/>
-        <pathelement location="${persistence.jar}"/>
-        <fileset dir="${spring.dir}" includes="*.jar"/>
-        <fileset dir="${velocity.dir}" includes="*.jar"/>
-    </path>
-    <path id="service.test.classpath">
-        <path refid="service.compile.classpath"/>
-        <pathelement location="${junit.jar}"/>
-        <pathelement location="${log4j.jar}"/>
-        <pathelement location="${jakarta-oro.jar}"/>
-        <pathelement location="${dumbster.jar}"/>
-        <pathelement location="${jmock.jar}"/>
-        <path location="test/dao"/>
-    </path>
-        
-    <!-- Web -->
-    <path id="web.compile.classpath">
-        <pathelement location="${dist.dir}/${webapp.name}-dao.jar"/>
-        <pathelement location="${dist.dir}/${webapp.name}-service.jar"/>
-        <pathelement location="${struts.jar}"/>
-        <pathelement location="${strutsmenu.jar}"/>
-        <pathelement location="${displaytag.jar}"/>
-        <pathelement location="${jakarta-oro.jar}"/>
-        <pathelement location="${commons-digester.jar}"/>
-        <pathelement location="${commons-logging.jar}"/>
-        <pathelement location="${commons-beanutils.jar}"/>
-        <pathelement location="${commons-collections.jar}"/>
-        <pathelement location="${commons-fileupload.jar}"/>
-        <pathelement location="${commons-lang.jar}"/>
-        <pathelement location="${commons-validator.jar}"/>
-        <pathelement location="${servletapi.jar}"/>
-        <fileset dir="${javamail.dir}" includes="*.jar"/>
-        <fileset dir="${spring.dir}" includes="*.jar"/>
-        <fileset dir="${jstl.dir}/lib" includes="jstl.jar"/>
-        <pathelement location="${csm.jar}"/>     	
-    </path>
-	
-    <path id="web.test.classpath">
-        <path refid="web.compile.classpath"/>
-        <pathelement location="${dumbster.jar}"/>
-        <pathelement location="${junit.jar}"/>
-        <pathelement location="${strutstestcase.jar}"/>
-    	<pathelement location="${mysql.jar}"/>
-        <fileset dir="${webtest.dir}/lib" includes="*.jar"/>
-        <pathelement location="${log4j.jar}"/>
-        <fileset dir="${velocity.dir}" includes="*.jar"/>
-        <!-- Needed for testing out-of-container -->
-        <path refid="dao.compile.classpath"/>
-        <path location="test/dao"/>
     </path>
         
     <property name="inheritAll" value="true"/>

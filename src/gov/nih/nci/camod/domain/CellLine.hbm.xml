@@ -22,9 +22,9 @@
 	        <generator class="native"/>
 	    </id>	    
 	    
-	    <!-- components -->
-        <property name="components" 
-        	column="components" 
+	    <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
         	type="string"/>
 	    
 	    <!-- experiment -->
