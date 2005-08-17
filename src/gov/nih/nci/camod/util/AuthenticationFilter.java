@@ -1,15 +1,15 @@
 package gov.nih.nci.camod.util;
 
+import gov.nih.nci.camod.Constants;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,7 +37,7 @@ public class AuthenticationFilter implements Filter {
 			}
 			
 			HttpSession session = req.getSession(); //get the session or create it
-			String user = (String) session.getAttribute("camod.loggedon.username" );
+			String user = (String) session.getAttribute( Constants.CURRENTUSER );
 			
 			if ( user == null) {
 				

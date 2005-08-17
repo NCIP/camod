@@ -67,12 +67,12 @@ public final class AnimalModelAction extends BaseAction {
 																	"\n\t type: " + modelChar.getType() + 
 																	"\n\t url: " + modelChar.getUrl() +
 																	"\n\t calendarReleaseDate: " + modelChar.getCalendarReleaseDate() + 
-																	"\n\t currentUser: " + (String) request.getSession().getAttribute("camod.loggedon.username") );
+																	"\n\t currentUser: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
 			
 			Person person = new Person();
 			
 			//Set the current user as the person who entered this model
-			person.setUsername( (String) request.getSession().getAttribute("camod.loggedon.username") );    		    	
+			person.setUsername( (String) request.getSession().getAttribute( Constants.CURRENTUSER ) );    		    	
 				
 			AnimalModel animalModel = new AnimalModel();
 			
@@ -88,9 +88,6 @@ public final class AnimalModelAction extends BaseAction {
 			animalModel.setModelDescriptor( modelChar.getModelDescriptor() );		
 			animalModel.setExperimentDesign( modelChar.getExperimentDesign() );
 			
-			//By default a new model's state is set to incomplete
-			animalModel.setState("incomplete");
-			
 			ContactInfo contactInfo = new ContactInfo();
 			contactInfo.setEmail( modelChar.getEmail() );
 			
@@ -102,12 +99,12 @@ public final class AnimalModelAction extends BaseAction {
 			//Strain
 			taxon.setEthnicityStrain( modelChar.getEthinicityStrain() );
 			
-			//if ( modelChar.getOtherEthinicityStrain() != null || ! modelChar.getOtherEthinicityStrain().equals( "" ) ) 
-		//	{
-	//			System.out.println( "<AnimalModelAction saveNewModel> Someone entered in a new Strain " + modelChar.getOtherEthinicityStrain() );
-	//			System.out.println( "<AnimalModelAction saveNewModel> Sending a notice email to Ulli" );
-				//TODO: call a email function
-	//		}
+			// if ( modelChar.getOtherEthinicityStrain() != null || ! modelChar.getOtherEthinicityStrain().equals( "" ) ) 
+			// {
+			//			System.out.println( "<AnimalModelAction saveNewModel> Someone entered in a new Strain " + modelChar.getOtherEthinicityStrain() );
+			//			System.out.println( "<AnimalModelAction saveNewModel> Sending a notice email to Ulli" );
+			// TODO: call a email function
+			//		}
 				
 			//phenotype description
 			Phenotype phenotype = new Phenotype();
@@ -135,12 +132,15 @@ public final class AnimalModelAction extends BaseAction {
 				availability.setReleaseDate( releaseDate );
 			}						
 			
+			//By default a new model's state is set to incomplete
+			animalModel.setState("incomplete");			
+			
 	        AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
 			Long modelID = animalModelManager.saveAnimalModel( person, contactInfo, animalModel, taxon, phenotype, sexDistribution, availability );    				    
 	    	
 			// Setup global constants to use for submission / editing process
 			AnimalModel am = animalModelManager.getAnimalModel( "" + modelID );	      	
-	    	request.getSession().setAttribute( Constants.MODELID, am.getId() );
+	    	request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
 	    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
 	    	request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
 	    	
@@ -156,8 +156,8 @@ public final class AnimalModelAction extends BaseAction {
     }
     
     
-	/** Called from subSubmitMenu.jsp
-	 * 
+	/** 
+	 *  Used to update a animalModel
 	 */ 
     public ActionForward editExistingModel( ActionMapping mapping, 
     									    ActionForm form,
@@ -167,10 +167,113 @@ public final class AnimalModelAction extends BaseAction {
     
     	// Grab the current modelID from the session  
     	String modelID = (String) request.getSession().getAttribute( Constants.MODELID );
-    	
-    	//TODO: ...
-    	
-    	return mapping.findForward("editsuccessful");
+
+       	if( checkIfLoggedIn( request ) )
+		{
+	    	ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;
+	    	
+			System.out.println( "<AnimalModelAction editExistingModel> New Model Being created with following Characteristics:" + 
+																	"\n\t description: " + modelChar.getDescription() + 
+																	"\n\t breedingNotes: " + modelChar.getBreedingNotes() + 
+																	"\n\t email: " + modelChar.getEmail() + 
+																	"\n\t ethinicityStrain: " + modelChar.getEthinicityStrain() +
+																	"\n\t experimentDesign: " + modelChar.getExperimentDesign() + 
+																	"\n\t isToolMouse: " + modelChar.getIsToolMouse() + 
+																	"\n\t modelDescriptor: " + modelChar.getModelDescriptor() +
+																	"\n\t name: " + modelChar.getName() + 
+																	"\n\t releaseDate: " + modelChar.getReleaseDate() +
+																	"\n\t scientificName: " + modelChar.getScientificName() +
+																	"\n\t summary: " + modelChar.getSummary() +
+																	"\n\t type: " + modelChar.getType() + 
+																	"\n\t url: " + modelChar.getUrl() +
+																	"\n\t calendarReleaseDate: " + modelChar.getCalendarReleaseDate() + 
+																	"\n\t currentUser: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
+			
+    		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
+    		
+    		//retrieve model by it's id
+    		AnimalModel animalModel = animalModelManager.getAnimalModel( modelID );	  
+    		
+			//set the isToolMouse variable
+			if ( modelChar.getIsToolMouse().equals("yes") )
+				animalModel.setIsToolMouse( true );
+			else 
+				animalModel.setIsToolMouse( false );
+			
+			animalModel.setUrl( modelChar.getUrl() );    	
+			
+			//Model Name/Descriptor
+			animalModel.setModelDescriptor( modelChar.getModelDescriptor() );		
+			animalModel.setExperimentDesign( modelChar.getExperimentDesign() );
+			
+			//Set contactInfo
+			ContactInfo contactInfo = (ContactInfo) animalModel.getPrincipalInvestigator().getContactInfoCollection().get(0);
+			contactInfo.setEmail( modelChar.getEmail() );						
+								
+			//Species & Strain
+			Taxon taxon = animalModel.getSpecies();			
+			taxon.setScientificName( modelChar.getScientificName() );			
+			taxon.setEthnicityStrain( modelChar.getEthinicityStrain() );
+			
+			animalModel.setSpecies( taxon );
+
+			// TODO: if the user inputs "Other", add this to the Taxon 
+			//if ( modelChar.getOtherEthinicityStrain() != null || ! modelChar.getOtherEthinicityStrain().equals( "" ) ) 
+			// {
+			//			System.out.println( "<AnimalModelAction saveNewModel> Someone entered in a new Strain " + modelChar.getOtherEthinicityStrain() );
+			//			System.out.println( "<AnimalModelAction saveNewModel> Sending a notice email to Ulli" );
+			// TODO: call a email function
+			//		}
+				
+			//Phenotype description
+			Phenotype phenotype = animalModel.getPhenotype();
+			phenotype.setDescription( modelChar.getDescription() );
+			phenotype.setBreedingNotes( modelChar.getBreedingNotes() );
+									
+			//Set the gender
+			SexDistribution sexDistribution = phenotype.getSexDistribution();
+			sexDistribution.setType( modelChar.getType() );
+			phenotype.setSexDistribution( sexDistribution );
+			
+			// Setting the phenotype sets gender, description and breedingNotes
+			animalModel.setPhenotype( phenotype );
+			
+			Availability availability = new Availability();  
+			
+			// Set the for the enteredDate the current date, when this model was created
+			availability.setEnteredDate( new Date() );
+			
+			SimpleDateFormat formatter = new SimpleDateFormat( "MM/dd/yyyy" );
+			Date releaseDate = new Date();
+	
+			if ( modelChar.getReleaseDate().equals( "immediately" ) ) {
+				availability.setReleaseDate( releaseDate );
+				System.out.println( "<AnimalModelAction editExistingModel> Current Date: " + formatter.format( releaseDate ) );    		
+			} else {
+				// TODO: add popup calender to submitNewModel.jsp and convert the string to Date object here
+				// modelChar.getCalendarReleaseDate();
+				availability.setReleaseDate( releaseDate );
+			}						    		    	
+	    	animalModel.setAvailability( availability );
+	    	
+			// Save the changes to the AnimalModel		
+			animalModelManager.saveAnimalModel( animalModel );    				    
+	    	
+			// Setup global constants to use for submission / editing process
+			animalModel = animalModelManager.getAnimalModel( "" + modelID );	      	
+	    	request.getSession().setAttribute( Constants.MODELID, animalModel.getId().toString() );
+	    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, animalModel.getModelDescriptor() );
+	    	request.getSession().setAttribute( Constants.MODELSTATUS, animalModel.getState() );
+	    	
+	    	//Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
+	        ActionMessages msg = new ActionMessages();
+	        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "modelchar.edit.successful" ) );
+	        saveErrors( request, msg );
+	     
+	    	return mapping.findForward( "editsuccessful" );
+		} else {
+			return mapping.findForward( "loginrequired" );
+		}    	    
     }
     
     
@@ -184,19 +287,19 @@ public final class AnimalModelAction extends BaseAction {
 							          	    HttpServletResponse response)
     throws Exception {
     
-    	System.out.println( "<AnimalModelAction duplicateModel> modelID=" + request.getParameter( "modelID" ) );
+    	System.out.println( "<AnimalModelAction duplicateModel> modelID=" + request.getParameter( "aModelID" ) );
 		
     	if( checkIfLoggedIn( request ) )
 		{
-    		String modelID = request.getParameter( "modelID" );
+    		String modelID = request.getParameter( "aModelID" );
     		
     		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
     		
     		//retrieve model by it's id
-    		AnimalModel am = animalModelManager.getAnimalModel( modelID );	  
+    		AnimalModel animalModel = animalModelManager.getAnimalModel( modelID );	  
 	    	
 	    	//create a new model
-	 		animalModelManager.saveAnimalModel( am );
+	 		animalModelManager.saveAnimalModel( animalModel );
 	    		        
     		return mapping.findForward( "duplicatesuccessful" );
 		} else {
@@ -213,11 +316,13 @@ public final class AnimalModelAction extends BaseAction {
 							          HttpServletResponse response)
 	throws Exception {
 		
-		System.out.println( "<AnimalModelAction DeleteModel> modelID=" + request.getParameter( "modelID" ) );
+		System.out.println( "<AnimalModelAction DeleteModel> modelID=" + request.getParameter( "aModelID" ) );
+		
 		
 		if( checkIfLoggedIn( request ) )
 		{
-			String modelID = request.getParameter( "modelID" );
+			// Retrieve the parameter passed by the URL
+			String modelID = request.getParameter( "aModelID" );
 			
 			AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    			
 			animalModelManager.removeAnimalModel( modelID );
@@ -240,11 +345,11 @@ public final class AnimalModelAction extends BaseAction {
      */
 	public boolean checkIfLoggedIn( HttpServletRequest request )
 	{
-		if ( request.getSession().getAttribute("camod.loggedon.username") == null ) {				
+		if ( request.getSession().getAttribute( Constants.CURRENTUSER ) == null ) {				
             
-            ActionErrors errors = new ActionErrors();
-            errors.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "error.login.required" ) );
-            saveErrors( request, errors );
+            ActionMessages msg = new ActionMessages();
+            msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "error.login.required" ) );
+            saveErrors( request, msg );
                          
 			return false;
 		} else 

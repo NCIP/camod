@@ -5,6 +5,27 @@
 <%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>	
 
+<SCRIPT LANGUAGE="JavaScript">
+	var cal = new CalendarPopup();
+
+	function chkOther( control ) {
+		ideControl = document.ModelCharacteristicsForm.otherEthinicityStrain;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+	function goCal() {
+		cal.select(document.ModelCharacteristicsForm.calendarReleaseDate,'anchor1','MM/dd/yyyy'); 
+		return false;
+	}
+	
+</SCRIPT>
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
@@ -34,7 +55,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Model Descriptor</label></td>
 			<td class="formField">			
-					<html:form action="AnimalModelAction.do?method=saveNewModel" focus="modelDescriptor">
+					<html:form action="AnimalModelAction.do?method=editExistingModel" focus="modelDescriptor">
 					<html:text styleClass="formFieldSized" property="modelDescriptor" name="formdata" size="30"/>
 			</td>
 		</tr>
@@ -77,7 +98,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" name="formdata" >
+				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" name="formdata" onclick="chkOther(this);">
 					<html:option value="1">1</html:option> 
 					<html:option value="2">2</html:option>
 					<html:option value="3">3</html:option>

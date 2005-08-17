@@ -1,11 +1,18 @@
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.ContactInfo;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TaxonManager;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -13,18 +20,11 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
-
-import gov.nih.nci.camod.domain.ContactInfo;
-import gov.nih.nci.camod.domain.AnimalAvailability;
-
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.domain.AnimalModel;
-
 public class FormAction extends BaseAction {
 		
-	/** Pre-populate all field values in the form for submitModelCharacteristics.jsp
+	/** Pre-populate all field values in the form ModelCharacteristicsForm
+	 * 
+	 *  Used by submitModelCharacteristics.jsp
 	 * 
 	 */ 
 	public ActionForward prepopulateModelCharacteristics(    ActionMapping mapping, 
@@ -60,7 +60,6 @@ public class FormAction extends BaseAction {
 			
 			modelChar.setExperimentDesign( am.getExperimentDesign() );
 			
-			// TODO: Gender/Type SexDistrobution  - modelChar.setType();
 			modelChar.setType( am.getPhenotype().getSexDistribution().getType() );
 			
 			modelChar.setBreedingNotes( am.getPhenotype().getBreedingNotes() );		
@@ -72,9 +71,14 @@ public class FormAction extends BaseAction {
 			modelChar.setReleaseDate( "after" );
 			modelChar.setCalendarReleaseDate( am.getAvailability().getReleaseDate().toString() );
 
-			//List amList = animalModelManager.getAnimalModels();
-			//AnimalModel am2 = (AnimalModel) amList.get( 0 );
-			//am2.getSpecies().getScientificName();
+			// TODO: Create a java class for populating all different dropdown menus, as well as CONSTANTS to hold the values in
+			//Get values for dropdown lists for Species, Strains
+			//TaxonManager taxonManager = (TaxonManager) getBean( "taxonManager" );
+			//List speciesList = taxonManager.getTaxons();		
+			//Taxon tax = new Taxon();			
+			//tax.getScientificName();			
+			//Taxon species = speciesList.get(0);			
+			//List strainsList = taxonManager.getStrains( );
 			
 			//Store the Form in session to be used by the JSP
 			request.getSession().setAttribute( Constants.FORMDATA, modelChar );

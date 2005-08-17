@@ -83,6 +83,7 @@
 
   <!-- ========== Action Mapping Definitions =================================== -->
    <action-mappings>
+   
     <action
       path="/persons"
       type="gov.nih.nci.camod.webapp.action.PersonAction"
@@ -104,6 +105,7 @@
         redirect="false"
       />
     </action>
+    
     <action
       path="/editPerson"
       type="gov.nih.nci.camod.webapp.action.PersonAction"
@@ -146,6 +148,7 @@
         redirect="false"
       />
     </action>
+    
     <action
       path="/reload"
       type="gov.nih.nci.camod.webapp.action.ReloadAction"
@@ -155,7 +158,7 @@
     >
     </action>
 
-       <action path="/login" 
+    <action path="/login" 
     	type="org.apache.struts.actions.ForwardAction" 
     	parameter="/login.jsp"/>
     <action path="/register" 
@@ -167,6 +170,7 @@
     <action path="/submitRadiation"
     	type="org.apache.struts.actions.ForwardAction"
     	parameter="/submitRadiation.jsp" />
+    	
     <action path="/personsTest"
 	      	type="gov.nih.nci.camod.webapp.action.PersonAction"
 	      	name="personForm"
@@ -180,6 +184,9 @@
         	path="/login.jsp"
         	redirect="false"/>
     </action>
+    
+    
+     <!-- Called from login.jsp ( loginForm ) -->
     <action path="/loginAction"
 	        type="gov.nih.nci.camod.webapp.action.LoginAction"
 	        name="loginForm"
@@ -195,6 +202,7 @@
             name="failure"
             path="/login.jsp"></forward>                                
     </action>
+    
     <action path="/LogoutAction"
 	        type="gov.nih.nci.camod.webapp.action.LogoutAction"
 	        scope="request"
@@ -206,6 +214,7 @@
             name="success"
             path="/loggedOut.jsp"></forward>
     </action>
+    
     <action path="/AnimalModelAction"
 	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
 	        name="ModelCharacteristicsForm"
@@ -227,11 +236,12 @@
     		path="/login.jsp"></forward>	
     <forward 
     		name="duplicatesuccessful"
-    		path="/submitModels.jsp"></forward>	    
+    		path="/UserAction.do?method=ReturnUserModels"></forward>	    
     <forward 
     		name="modeldeleted"
-    		path="/submitModels.jsp"></forward>			
+    		path="/UserAction.do?method=ReturnUserModels"></forward>			
     </action>
+    
     <action path="/UserAction"
 	        type="gov.nih.nci.camod.webapp.action.UserAction"
 	        scope="request"
@@ -246,6 +256,7 @@
     		name="loginrequired"
     		path="/login.jsp"></forward>
     </action>
+    
     <action path="/SubmitAction"
 	        type="gov.nih.nci.camod.webapp.action.SubmitAction"
 	        scope="request"
@@ -263,6 +274,7 @@
     		name="modeldeleted"
     		path="/UserAction.do?method=ReturnUserModels"></forward>  	    		
     </action>
+    
     <action path="/FormAction"
     		type="gov.nih.nci.camod.webapp.action.FormAction"
     		name="ModelCharacteristicsForm"    		
@@ -276,6 +288,7 @@
     		name="loginrequired"
     		path="/login.jsp"></forward>    		
     </action>
+    
   </action-mappings>
 
   <controller nocache="true" inputForward="true" maxFileSize="2M"/>
