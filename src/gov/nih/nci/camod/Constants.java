@@ -152,4 +152,9 @@ public class Constants {
      */
     public static final String FORMDATA = "formdata";
     public static final String ANIMALMODEL = "animalmodel";
+    
+    /**
+     * Used to store username for current user 
+     */
+    public static final String CURRENTUSER = "camod.loggedon.username";
 }
