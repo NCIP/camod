@@ -34,18 +34,8 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
 		<tr>
+			<html:errors/>		
 			<td class="formMessage" colspan="3">
-			
-				<logic:messagesPresent>
-				  <ul>
-				    <font color="red">
-				      <html:messages id="error">
-				        <li><%=error %></li>
-				      </html:messages>
-				    </font>
-				  </ul>
-				</logic:messagesPresent>
-			
 				* indicates a required field
 			</td>
 		</tr>
