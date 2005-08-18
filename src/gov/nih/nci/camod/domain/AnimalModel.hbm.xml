@@ -130,19 +130,6 @@
             	class="AnimalAvailability"/>
         </bag> 
         
-        <!-- treatmentCollection (one-to-many unidirectional) -->
-        <bag name="treatmentCollection" 
-        	table="animal_model_treatment"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="treatment_id"
-            	unique="true"
-            	class="Treatment"/>
-        </bag>
-        
         <!-- environmentalFactorCollection (one-to-many unidirectional) -->
         <bag name="environmentalFactorCollection" 
         	table="ani_mod_env_factor"

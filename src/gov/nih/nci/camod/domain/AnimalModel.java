@@ -28,7 +28,6 @@ public class AnimalModel extends AbstractCancerModel {
 	private List therapyCollection = new ArrayList();
 	private List geneDeliveryCollection = new ArrayList();
 	private List animalAvailabilityCollection = new ArrayList();
-	private List treatmentCollection = new ArrayList();
 	private List environmentalFactorCollection = new ArrayList();
 	private List histopathologyCollection = new ArrayList();
 	private List engineeredGeneCollection = new ArrayList();
@@ -106,24 +105,6 @@ public class AnimalModel extends AbstractCancerModel {
 	 */
 	public void addEnvironmentalFactor(EnvironmentalFactor environmentalFactor) {
 		environmentalFactorCollection.add(environmentalFactor);
-	}	
-	/**
-	 * @return Returns the treatmentCollection.
-	 */
-	public List getTreatmentCollection() {
-		return treatmentCollection;
-	}
-	/**
-	 * @param treatmentCollection The treatmentCollection to set.
-	 */
-	public void setTreatmentCollection(List treatmentCollection) {
-		this.treatmentCollection = treatmentCollection;
-	}
-	/**
-	 * @param treatment The treatment to add.
-	 */
-	public void addTreatment(Treatment treatment) {
-		treatmentCollection.add(treatment);
 	}
 	/**
 	 * @return Returns the animalAvailabilityCollection.
@@ -313,14 +294,14 @@ public class AnimalModel extends AbstractCancerModel {
 				rhs.repositoryInfo).append(this.geneDeliveryCollection,
 				rhs.geneDeliveryCollection).append(
 				this.histopathologyCollection, rhs.histopathologyCollection)
-				.append(this.treatmentCollection, rhs.treatmentCollection)
 				.append(this.therapyCollection, rhs.therapyCollection).append(
 						this.cellLineCollection, rhs.cellLineCollection)
 				.append(this.imageCollection, rhs.imageCollection).append(
 						this.isToolMouse, rhs.isToolMouse).append(this.url,
-						rhs.url).append(this.xenograftCollection,
-						rhs.xenograftCollection).append(
-						this.environmentalFactorCollection,
+						rhs.url).append(this.engineeredGeneCollection,
+						rhs.engineeredGeneCollection).append(
+						this.xenograftCollection, rhs.xenograftCollection)
+				.append(this.environmentalFactorCollection,
 						rhs.environmentalFactorCollection).append(
 						this.microArrayDataCollection,
 						rhs.microArrayDataCollection).isEquals();
@@ -329,17 +310,17 @@ public class AnimalModel extends AbstractCancerModel {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-1840808911, 1633590877).appendSuper(
+		return new HashCodeBuilder(795592963, -1409924013).appendSuper(
 				super.hashCode()).append(this.spontaneousMutationCollection)
 				.append(this.phenotype).append(
 						this.animalAvailabilityCollection).append(
 						this.repositoryInfo)
 				.append(this.geneDeliveryCollection).append(
 						this.histopathologyCollection).append(
-						this.treatmentCollection)
-				.append(this.therapyCollection).append(this.cellLineCollection)
+						this.therapyCollection).append(this.cellLineCollection)
 				.append(this.imageCollection).append(this.isToolMouse).append(
-						this.url).append(this.xenograftCollection).append(
+						this.url).append(this.engineeredGeneCollection).append(
+						this.xenograftCollection).append(
 						this.environmentalFactorCollection).append(
 						this.microArrayDataCollection).toHashCode();
 	}
@@ -365,11 +346,12 @@ public class AnimalModel extends AbstractCancerModel {
 						"imageCollection", this.imageCollection).append(
 						"environmentalFactorCollection",
 						this.environmentalFactorCollection).append(
+						"engineeredGeneCollection",
+						this.engineeredGeneCollection).append(
 						"microArrayDataCollection",
 						this.microArrayDataCollection).append("phenotype",
 						this.phenotype).append("cellLineCollection",
-						this.cellLineCollection).append("treatmentCollection",
-						this.treatmentCollection).append("state",
+						this.cellLineCollection).append("state",
 						this.getState()).append("availability",
 						this.getAvailability()).append("submitter",
 						this.getSubmitter()).append("publicationCollection",
