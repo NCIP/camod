@@ -11,11 +11,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.ValidatorForm;
-
 
 /**
  * Base ActionForm bean. Used to give child classes readable
@@ -26,7 +23,7 @@ import org.apache.struts.validator.ValidatorForm;
  * <p><a href="BaseForm.java.html"><i>View Source</i></a></p>
  *
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
- * @version $Revision: 1.2 $ $Date: 2005-08-15 14:19:58 $
+ * @version $Revision: 1.3 $ $Date: 2005-08-18 17:39:12 $
  */
 public class BaseForm extends ValidatorForm implements Serializable {
 	private static final long serialVersionUID = 3257005453799404851L;
@@ -59,11 +56,7 @@ public class BaseForm extends ValidatorForm implements Serializable {
                                  HttpServletRequest request) {
     	
         ActionErrors errors = new ActionErrors();
- 
-    	System.out.println( "<BaseForm validate> here" );
     	
-    	
-    	/*
         // Identify the request parameter containing the method name
         String parameter = mapping.getParameter();
 
@@ -84,12 +77,9 @@ public class BaseForm extends ValidatorForm implements Serializable {
                     method.equalsIgnoreCase(delete))) {
                 return null;
             }
-        }
-        */
+        }        
         // perform regular validation
         return super.validate(mapping, request);
-    }
-   
-    
+    }    
 }
      
