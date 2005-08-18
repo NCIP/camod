@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author rajputs
+ * @author pandyas
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
@@ -19,7 +19,7 @@ import org.apache.struts.action.ActionMapping;
 public class TransgeneForm extends BaseForm implements Serializable {
 	/**
 	 * Default empty constructor
-	 * @author rajputs
+	 * @author pandyas
 	 *
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
@@ -28,7 +28,18 @@ public class TransgeneForm extends BaseForm implements Serializable {
 	
 	// engineeredGeneId is of type String since it comes from the presentation layer
 	protected String engineeredGeneId;
-	protected String locationOfIntegration;	
+	protected String locationOfIntegration;
+	protected String name;
+	protected String scientificName;
+	protected String numberMGI;
+	protected String function;
+	protected String conditionedBy;
+	protected String description;
+	protected String comments;
+	protected String fileServerLocation;
+	protected String title;
+	protected String segmentSize;
+	protected String cloneDesignator;
 	
 	/**
 	 * @return Returns the engineeredGeneId.
@@ -54,8 +65,138 @@ public class TransgeneForm extends BaseForm implements Serializable {
 	public void setLocationOfIntegration(String locationOfIntegration) {
 		this.locationOfIntegration = locationOfIntegration;
 	}
+	/**
+	 * @return Returns the name.
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name The name to set.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return Returns the scientificName.
+	 */
+	public String getScientificName() {
+		return scientificName;
+	}
+	/**
+	 * @param scientificName The scientificName to set.
+	 */
+	public void setScientificName(String scientificName) {
+		this.scientificName = scientificName;
+	}	
+	/**
+	 * @return Returns the numberMGI.
+	 */
+	public String getNumberMGI() {
+		return numberMGI;
+	}
+	/**
+	 * @param numberMGI The numberMGI to set.
+	 */
+	public void setNumberMGI(String numberMGI) {
+		this.numberMGI = numberMGI;
+	}
+	/**
+	 * @return Returns the function.
+	 */
+	public String getFunction() {
+		return function;
+	}
+	/**
+	 * @param function The function to set.
+	 */
+	public void setFunction(String function) {
+		this.function = function;
+	}
+	/**
+	 * @return Returns the conditionedBy.
+	 */
+	public String getConditionedBy() {
+		return conditionedBy;
+	}
+	/**
+	 * @param conditionedBy The conditionedBy to set.
+	 */
+	public void setConditionedBy(String conditionedBy) {
+		this.conditionedBy = conditionedBy;
+	}	
+	/**
+	 * @return Returns the description.
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description The description to set.
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}	
+	/**
+	 * @return Returns the comments.
+	 */
+	public String getComments() {
+		return comments;
+	}
+	/**
+	 * @param comments The comments to set.
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	/**
+	 * @return Returns the fileServerLocation.
+	 */
+	public String getFileServerLocation() {
+		return fileServerLocation;
+	}
+	/**
+	 * @param fileServerLocation The fileServerLocation to set.
+	 */
+	public void setFileServerLocation(String fileServerLocation) {
+		this.fileServerLocation = fileServerLocation;
+	}	
+	/**
+	 * @return Returns the title.
+	 */
+	public String getTitle() {
+		return title;
+	}
+	/**
+	 * @param title The title to set.
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	/**
+	 * @return Returns the segmentSize.
+	 */
+	public String getSegmentSize() {
+		return segmentSize;
+	}
+	/**
+	 * @param segmentSize The segmentSize to set.
+	 */
+	public void setSegmentSize(String segmentSize) {
+		this.segmentSize = segmentSize;
+	}
+	/**
+	 * @return Returns the cloneDesignator.
+	 */
+	public String getCloneDesignator() {
+		return cloneDesignator;
+	}
+	/**
+	 * @param cloneDesignator The cloneDesignator to set.
+	 */
+	public void setCloneDesignator(String cloneDesignator) {
+		this.cloneDesignator = cloneDesignator;
+	}	
 	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
+
 }

@@ -28,9 +28,78 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 	
 	// id is of type String since it comes from the presentation layer
 	protected String id;
+	protected String name;
+	protected String modificationType;
+	protected String geneId;
 	protected String esCellLineName;
 	protected String blastocystName;
+	protected String conditionedBy;
+	protected String description;
+	protected String comments;
+	protected String numberMGI;
+	protected String fileServerLocation;
+	protected String title;
 	
+	/**
+	 * @return Returns the id.
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id The id to set.
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	/**
+	 * @return Returns the name.
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name The name to set.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}	
+	/**
+	 * @return Returns the modificationType.
+	 */
+	public String getModificationType() {
+		return modificationType;
+	}
+	/**
+	 * @param modificationType The modificationType to set.
+	 */
+	public void setModificationType(String modificationType) {
+		this.modificationType = modificationType;
+	}
+	/**
+	 * @return Returns the geneId.
+	 */
+	public String getGeneId() {
+		return geneId;
+	}
+	/**
+	 * @param geneId The geneId to set.
+	 */
+	public void setGeneId(String geneId) {
+		this.geneId = geneId;
+	}	
+	/**
+	 * @return Returns the esCellLineName.
+	 */
+	public String getEsCellLineName() {
+		return esCellLineName;
+	}
+	/**
+	 * @param esCellLineName The esCellLineName to set.
+	 */
+	public void setEsCellLineName(String esCellLineName) {
+		this.esCellLineName = esCellLineName;
+	}	
 	/**
 	 * @return Returns the blastocystName.
 	 */
@@ -44,29 +113,57 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 		this.blastocystName = blastocystName;
 	}
 	/**
-	 * @return Returns the esCellLineName.
+	 * @return Returns the conditionedBy.
 	 */
-	public String getEsCellLineName() {
-		return esCellLineName;
+	public String getConditionedBy() {
+		return conditionedBy;
 	}
 	/**
-	 * @param esCellLineName The esCellLineName to set.
+	 * @param conditionedBy The conditionedBy to set.
 	 */
-	public void setEsCellLineName(String esCellLineName) {
-		this.esCellLineName = esCellLineName;
+	public void setConditionedBy(String conditionedBy) {
+		this.conditionedBy = conditionedBy;
 	}
 	/**
-	 * @return Returns the id.
+	 * @return Returns the description.
 	 */
-	public String getId() {
-		return id;
+	public String getDescription() {
+		return description;
 	}
 	/**
-	 * @param id The id to set.
+	 * @param description The description to set.
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+	/**
+	 * @return Returns the comments.
+	 */
+	public String getComments() {
+		return comments;
+	}
+	/**
+	 * @param comments The comments to set.
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	/**
+	 * @return Returns the numberMGI.
+	 */
+	public String getNumberMGI() {
+		return numberMGI;
+	}
+	/**
+	 * @param numberMGI The numberMGI to set.
+	 */
+	public void setNumberMGI(String numberMGI) {
+		this.numberMGI = numberMGI;
+	}	
+	
+	
+	
+
 	
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
         // reset any boolean data types to false
