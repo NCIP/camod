@@ -78,7 +78,10 @@
     </global-exceptions>
 
   <!-- ========== Global Forward Definitions =================================== -->
-      <global-forwards>        
+      <global-forwards>
+    <forward
+            name="submitNewModel"
+            path="/submitNewModel.jsp"></forward>              
     </global-forwards>
 
   <!-- ========== Action Mapping Definitions =================================== -->
@@ -220,8 +223,8 @@
 	        name="ModelCharacteristicsForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitNewModels.jsp">
+	        validate="true"
+	        input="submitNewModel">
     <forward
             name="createsuccessful"
             path="/submitOverview.jsp"></forward>
