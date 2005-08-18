@@ -1,14 +1,9 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 public class ModelCharacteristicsForm extends BaseForm implements Serializable {
+		private static final long serialVersionUID = 3257850969634190134L;
 
 		protected String modelDescriptor;
 		protected String name;
@@ -24,8 +19,7 @@ public class ModelCharacteristicsForm extends BaseForm implements Serializable {
 		protected String url;
 		protected String releaseDate = "immediately";
 		protected String calendarReleaseDate;
-		protected String otherEthinicityStrain;
-		
+		protected String otherEthinicityStrain;		
 		
 		public ModelCharacteristicsForm() {
 		//	isToolMouse = "no";
@@ -139,25 +133,4 @@ public class ModelCharacteristicsForm extends BaseForm implements Serializable {
 		public void setReleaseDate(String a) {
 			this.releaseDate = a;
 		}
-		
-        /*
-         *  (non-Javadoc)
-         * @see org.apache.struts.action.ActionForm#validate(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-         */
-		public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) 
-        {        							
-        	ActionErrors errors = new ActionErrors();
-       
-			System.out.println("<ModelCharacteristicsForm validate> here 33 2");
-			
-			if ( ( modelDescriptor == null ) || ( modelDescriptor.length() < 1 ) ) 
-			{ 
-			    errors.add( "error" , new ActionMessage( "error.modelDescriptor.required" ) ); 
-			}
-			
-			return errors;						
-		}
-
-		
-		
 }
