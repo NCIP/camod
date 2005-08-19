@@ -161,10 +161,6 @@
 				path="/jsp/loginSuccess.jsp"></forward>
 			
 			<forward
-				name="protected"
-				path="/jsp/protected"></forward>
-			
-			<forward
 				name="register"
 				path="/jsp/register.jsp"></forward>
 			
@@ -277,201 +273,177 @@
 				path="/jsp/zoomifyImage.jsp"></forward>
 			
 			<forward
-				name="error"
-				path="/jsp/protected/error.jsp"></forward>
+				name="adminCommentScreening"
+				path="/jsp/protected/adminCommentScreening.jsp"></forward>
 			
 			<forward
-				name="evsTreeImage"
-				path="/jsp/protected/evsTreeImage.jsp"></forward>
+				name="adminMenu"
+				path="/jsp/protected/adminMenu.jsp"></forward>
 			
 			<forward
-				name="footer"
-				path="/jsp/protected/footer.jsp"></forward>
+				name="adminModelsAssignment"
+				path="/jsp/protected/adminModelsAssignment.jsp"></forward>
 			
 			<forward
-				name="header"
-				path="/jsp/protected/header.jsp"></forward>
+				name="adminRoles"
+				path="/jsp/protected/adminRoles.jsp"></forward>
 			
 			<forward
-				name="help"
-				path="/jsp/protected/help.jsp"></forward>
+				name="adminUserSettings"
+				path="/jsp/protected/adminUserSettings.jsp"></forward>
 			
 			<forward
-				name="helpAdmin"
-				path="/jsp/protected/helpAdmin.jsp"></forward>
+				name="adminUsersAppointment"
+				path="/jsp/protected/adminUsersAppointment.jsp"></forward>
 			
 			<forward
-				name="helpDesk"
-				path="/jsp/protected/helpDesk.jsp"></forward>
+				name="subAdminMenu"
+				path="/jsp/protected/subAdminMenu.jsp"></forward>
 			
 			<forward
-				name="helpSearching"
-				path="/jsp/protected/helpSearching.jsp"></forward>
+				name="subSubmitMenu"
+				path="/jsp/protected/subSubmitMenu.jsp"></forward>
 			
 			<forward
-				name="helpSubmission"
-				path="/jsp/protected/helpSubmission.jsp"></forward>
+				name="submitAssocExpression"
+				path="/jsp/protected/submitAssocExpression.jsp"></forward>
 			
 			<forward
-				name="index"
-				path="/jsp/protected/index.jsp"></forward>
+				name="submitAssocMetastasis"
+				path="/jsp/protected/submitAssocMetastasis.jsp"></forward>
 			
 			<forward
-				name="infoAccessibility"
-				path="/jsp/protected/infoAccessibility.jsp"></forward>
+				name="submitCellLines"
+				path="/jsp/protected/submitCellLines.jsp"></forward>
 			
 			<forward
-				name="infoApplicationSupport"
-				path="/jsp/protected/infoApplicationSupport.jsp"></forward>
+				name="submitChemicalDrug"
+				path="/jsp/protected/submitChemicalDrug.jsp"></forward>
 			
 			<forward
-				name="infoContactUs"
-				path="/jsp/protected/infoContactUs.jsp"></forward>
+				name="submitClinicalMarkers"
+				path="/jsp/protected/submitClinicalMarkers.jsp"></forward>
 			
 			<forward
-				name="infoDisclaimer"
-				path="/jsp/protected/infoDisclaimer.jsp"></forward>
+				name="submitComment"
+				path="/jsp/protected/submitComment.jsp"></forward>
 			
 			<forward
-				name="infoPrivacyNotice"
-				path="/jsp/protected/infoPrivacyNotice.jsp"></forward>
+				name="submitEngineeredTransgene"
+				path="/jsp/protected/submitEngineeredTransgene.jsp"></forward>
 			
 			<forward
-				name="infoWhatsNew"
-				path="/jsp/protected/infoWhatsNew.jsp"></forward>
+				name="submitEnvironmentalFactors"
+				path="/jsp/protected/submitEnvironmentalFactors.jsp"></forward>
 			
 			<forward
-				name="loggedOut"
-				path="/jsp/protected/loggedOut.jsp"></forward>
+				name="submitGeneDelivery"
+				path="/jsp/protected/submitGeneDelivery.jsp"></forward>
 			
 			<forward
-				name="login"
-				path="/jsp/protected/login.jsp"></forward>
+				name="submitGenomicSegment"
+				path="/jsp/protected/submitGenomicSegment.jsp"></forward>
 			
 			<forward
-				name="loginMenu"
-				path="/jsp/protected/loginMenu.jsp"></forward>
+				name="submitGrowthFactors"
+				path="/jsp/protected/submitGrowthFactors.jsp"></forward>
 			
 			<forward
-				name="loginSuccess"
-				path="/jsp/protected/loginSuccess.jsp"></forward>
+				name="submitHistopathology"
+				path="/jsp/protected/submitHistopathology.jsp"></forward>
 			
 			<forward
-				name="protected"
-				path="/jsp/protected/protected"></forward>
+				name="submitHormone"
+				path="/jsp/protected/submitHormone.jsp"></forward>
 			
 			<forward
-				name="register"
-				path="/jsp/protected/register.jsp"></forward>
+				name="submitIMSR"
+				path="/jsp/protected/submitIMSR.jsp"></forward>
 			
 			<forward
-				name="registerSuccess"
-				path="/jsp/protected/registerSuccess.jsp"></forward>
+				name="submitImages"
+				path="/jsp/protected/submitImages.jsp"></forward>
 			
 			<forward
-				name="registerUserPass"
-				path="/jsp/protected/registerUserPass.jsp"></forward>
+				name="submitInducedMutation"
+				path="/jsp/protected/submitInducedMutation.jsp"></forward>
 			
 			<forward
-				name="searchAdvanced"
-				path="/jsp/protected/searchAdvanced.jsp"></forward>
+				name="submitInvestigator"
+				path="/jsp/protected/submitInvestigator.jsp"></forward>
 			
 			<forward
-				name="searchMenu"
-				path="/jsp/protected/searchMenu.jsp"></forward>
+				name="submitJacksonLab"
+				path="/jsp/protected/submitJacksonLab.jsp"></forward>
 			
 			<forward
-				name="searchResults"
-				path="/jsp/protected/searchResults.jsp"></forward>
+				name="submitMMHCCRepo"
+				path="/jsp/protected/submitMMHCCRepo.jsp"></forward>
 			
 			<forward
-				name="searchSimple"
-				path="/jsp/protected/searchSimple.jsp"></forward>
+				name="submitMenu"
+				path="/jsp/protected/submitMenu.jsp"></forward>
 			
 			<forward
-				name="searchTableOfContents"
-				path="/jsp/protected/searchTableOfContents.jsp"></forward>
+				name="submitMicroarrayData"
+				path="/jsp/protected/submitMicroarrayData.jsp"></forward>
 			
 			<forward
-				name="sidebar"
-				path="/jsp/protected/sidebar.jsp"></forward>
+				name="submitModelCharacteristics"
+				path="/jsp/protected/submitModelCharacteristics.jsp"></forward>
 			
 			<forward
-				name="subSearchMenu"
-				path="/jsp/protected/subSearchMenu.jsp"></forward>
+				name="submitModels"
+				path="/jsp/protected/submitModels.jsp"></forward>
 			
 			<forward
-				name="subViewModelMenu"
-				path="/jsp/protected/subViewModelMenu.jsp"></forward>
+				name="submitNewModel"
+				path="/jsp/protected/submitNewModel.jsp"></forward>
 			
 			<forward
-				name="viewCarcinogenicInterventions"
-				path="/jsp/protected/viewCarcinogenicInterventions.jsp"></forward>
+				name="submitNutritionalFactors"
+				path="/jsp/protected/submitNutritionalFactors.jsp"></forward>
 			
 			<forward
-				name="viewCellLines"
-				path="/jsp/protected/viewCellLines.jsp"></forward>
+				name="submitOtherPublications"
+				path="/jsp/protected/submitOtherPublications.jsp"></forward>
 			
 			<forward
-				name="viewEngineeredTransgene"
-				path="/jsp/protected/viewEngineeredTransgene.jsp"></forward>
+				name="submitOverview"
+				path="/jsp/protected/submitOverview.jsp"></forward>
 			
 			<forward
-				name="viewGeneticDescription"
-				path="/jsp/protected/viewGeneticDescription.jsp"></forward>
+				name="submitPublications"
+				path="/jsp/protected/submitPublications.jsp"></forward>
 			
 			<forward
-				name="viewGenomicSegment"
-				path="/jsp/protected/viewGenomicSegment.jsp"></forward>
+				name="submitRadiation"
+				path="/jsp/protected/submitRadiation.jsp"></forward>
 			
 			<forward
-				name="viewHistopathology"
-				path="/jsp/protected/viewHistopathology.jsp"></forward>
+				name="submitSpontaneousMutation"
+				path="/jsp/protected/submitSpontaneousMutation.jsp"></forward>
 			
 			<forward
-				name="viewImages"
-				path="/jsp/protected/viewImages.jsp"></forward>
+				name="submitSurgeryOther"
+				path="/jsp/protected/submitSurgeryOther.jsp"></forward>
 			
 			<forward
-				name="viewInducedMutation"
-				path="/jsp/protected/viewInducedMutation.jsp"></forward>
+				name="submitTargetedModification"
+				path="/jsp/protected/submitTargetedModification.jsp"></forward>
 			
 			<forward
-				name="viewMicroarrays"
-				path="/jsp/protected/viewMicroarrays.jsp"></forward>
+				name="submitTherapy"
+				path="/jsp/protected/submitTherapy.jsp"></forward>
 			
 			<forward
-				name="viewModelCharacteristics"
-				path="/jsp/protected/viewModelCharacteristics.jsp"></forward>
+				name="submitTransplantXenograft"
+				path="/jsp/protected/submitTransplantXenograft.jsp"></forward>
 			
 			<forward
-				name="viewModelMenu"
-				path="/jsp/protected/viewModelMenu.jsp"></forward>
+				name="submitViralTreatment"
+				path="/jsp/protected/submitViralTreatment.jsp"></forward>
 			
-			<forward
-				name="viewPublications"
-				path="/jsp/protected/viewPublications.jsp"></forward>
-			
-			<forward
-				name="viewSpontaneousMutation"
-				path="/jsp/protected/viewSpontaneousMutation.jsp"></forward>
-			
-			<forward
-				name="viewTargetedModification"
-				path="/jsp/protected/viewTargetedModification.jsp"></forward>
-			
-			<forward
-				name="viewTherapeuticApproaches"
-				path="/jsp/protected/viewTherapeuticApproaches.jsp"></forward>
-			
-			<forward
-				name="viewTransplantXenograft"
-				path="/jsp/protected/viewTransplantXenograft.jsp"></forward>
-			
-			<forward
-				name="zoomifyImage"
-				path="/jsp/protected/zoomifyImage.jsp"></forward>
-	
     </global-forwards>
 
   <!-- ========== Action Mapping Definitions =================================== -->
