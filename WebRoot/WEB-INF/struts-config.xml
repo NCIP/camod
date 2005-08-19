@@ -79,116 +79,877 @@
 
   <!-- ========== Global Forward Definitions =================================== -->
       <global-forwards>
-    <forward
-            name="submitNewModel"
-            path="/submitNewModel.jsp"></forward>              
+      
+			<forward
+				name="error"
+				path="/jsp/error.jsp"></forward>
+			
+			<forward
+				name="evsTreeImage"
+				path="/jsp/evsTreeImage.jsp"></forward>
+			
+			<forward
+				name="footer"
+				path="/jsp/footer.jsp"></forward>
+			
+			<forward
+				name="header"
+				path="/jsp/header.jsp"></forward>
+			
+			<forward
+				name="help"
+				path="/jsp/help.jsp"></forward>
+			
+			<forward
+				name="helpAdmin"
+				path="/jsp/helpAdmin.jsp"></forward>
+			
+			<forward
+				name="helpDesk"
+				path="/jsp/helpDesk.jsp"></forward>
+			
+			<forward
+				name="helpSearching"
+				path="/jsp/helpSearching.jsp"></forward>
+			
+			<forward
+				name="helpSubmission"
+				path="/jsp/helpSubmission.jsp"></forward>
+			
+			<forward
+				name="index"
+				path="/jsp/index.jsp"></forward>
+			
+			<forward
+				name="infoAccessibility"
+				path="/jsp/infoAccessibility.jsp"></forward>
+			
+			<forward
+				name="infoApplicationSupport"
+				path="/jsp/infoApplicationSupport.jsp"></forward>
+			
+			<forward
+				name="infoContactUs"
+				path="/jsp/infoContactUs.jsp"></forward>
+			
+			<forward
+				name="infoDisclaimer"
+				path="/jsp/infoDisclaimer.jsp"></forward>
+			
+			<forward
+				name="infoPrivacyNotice"
+				path="/jsp/infoPrivacyNotice.jsp"></forward>
+			
+			<forward
+				name="infoWhatsNew"
+				path="/jsp/infoWhatsNew.jsp"></forward>
+			
+			<forward
+				name="loggedOut"
+				path="/jsp/loggedOut.jsp"></forward>
+			
+			<forward
+				name="login"
+				path="/jsp/login.jsp"></forward>
+			
+			<forward
+				name="loginMenu"
+				path="/jsp/loginMenu.jsp"></forward>
+			
+			<forward
+				name="loginSuccess"
+				path="/jsp/loginSuccess.jsp"></forward>
+			
+			<forward
+				name="protected"
+				path="/jsp/protected"></forward>
+			
+			<forward
+				name="register"
+				path="/jsp/register.jsp"></forward>
+			
+			<forward
+				name="registerSuccess"
+				path="/jsp/registerSuccess.jsp"></forward>
+			
+			<forward
+				name="registerUserPass"
+				path="/jsp/registerUserPass.jsp"></forward>
+			
+			<forward
+				name="searchAdvanced"
+				path="/jsp/searchAdvanced.jsp"></forward>
+			
+			<forward
+				name="searchMenu"
+				path="/jsp/searchMenu.jsp"></forward>
+			
+			<forward
+				name="searchResults"
+				path="/jsp/searchResults.jsp"></forward>
+			
+			<forward
+				name="searchSimple"
+				path="/jsp/searchSimple.jsp"></forward>
+			
+			<forward
+				name="searchTableOfContents"
+				path="/jsp/searchTableOfContents.jsp"></forward>
+			
+			<forward
+				name="sidebar"
+				path="/jsp/sidebar.jsp"></forward>
+			
+			<forward
+				name="subSearchMenu"
+				path="/jsp/subSearchMenu.jsp"></forward>
+			
+			<forward
+				name="subViewModelMenu"
+				path="/jsp/subViewModelMenu.jsp"></forward>
+			
+			<forward
+				name="viewCarcinogenicInterventions"
+				path="/jsp/viewCarcinogenicInterventions.jsp"></forward>
+			
+			<forward
+				name="viewCellLines"
+				path="/jsp/viewCellLines.jsp"></forward>
+			
+			<forward
+				name="viewEngineeredTransgene"
+				path="/jsp/viewEngineeredTransgene.jsp"></forward>
+			
+			<forward
+				name="viewGeneticDescription"
+				path="/jsp/viewGeneticDescription.jsp"></forward>
+			
+			<forward
+				name="viewGenomicSegment"
+				path="/jsp/viewGenomicSegment.jsp"></forward>
+			
+			<forward
+				name="viewHistopathology"
+				path="/jsp/viewHistopathology.jsp"></forward>
+			
+			<forward
+				name="viewImages"
+				path="/jsp/viewImages.jsp"></forward>
+			
+			<forward
+				name="viewInducedMutation"
+				path="/jsp/viewInducedMutation.jsp"></forward>
+			
+			<forward
+				name="viewMicroarrays"
+				path="/jsp/viewMicroarrays.jsp"></forward>
+			
+			<forward
+				name="viewModelCharacteristics"
+				path="/jsp/viewModelCharacteristics.jsp"></forward>
+			
+			<forward
+				name="viewModelMenu"
+				path="/jsp/viewModelMenu.jsp"></forward>
+			
+			<forward
+				name="viewPublications"
+				path="/jsp/viewPublications.jsp"></forward>
+			
+			<forward
+				name="viewSpontaneousMutation"
+				path="/jsp/viewSpontaneousMutation.jsp"></forward>
+			
+			<forward
+				name="viewTargetedModification"
+				path="/jsp/viewTargetedModification.jsp"></forward>
+			
+			<forward
+				name="viewTherapeuticApproaches"
+				path="/jsp/viewTherapeuticApproaches.jsp"></forward>
+			
+			<forward
+				name="viewTransplantXenograft"
+				path="/jsp/viewTransplantXenograft.jsp"></forward>
+			
+			<forward
+				name="zoomifyImage"
+				path="/jsp/zoomifyImage.jsp"></forward>
+			
+			<forward
+				name="error"
+				path="/jsp/protected/error.jsp"></forward>
+			
+			<forward
+				name="evsTreeImage"
+				path="/jsp/protected/evsTreeImage.jsp"></forward>
+			
+			<forward
+				name="footer"
+				path="/jsp/protected/footer.jsp"></forward>
+			
+			<forward
+				name="header"
+				path="/jsp/protected/header.jsp"></forward>
+			
+			<forward
+				name="help"
+				path="/jsp/protected/help.jsp"></forward>
+			
+			<forward
+				name="helpAdmin"
+				path="/jsp/protected/helpAdmin.jsp"></forward>
+			
+			<forward
+				name="helpDesk"
+				path="/jsp/protected/helpDesk.jsp"></forward>
+			
+			<forward
+				name="helpSearching"
+				path="/jsp/protected/helpSearching.jsp"></forward>
+			
+			<forward
+				name="helpSubmission"
+				path="/jsp/protected/helpSubmission.jsp"></forward>
+			
+			<forward
+				name="index"
+				path="/jsp/protected/index.jsp"></forward>
+			
+			<forward
+				name="infoAccessibility"
+				path="/jsp/protected/infoAccessibility.jsp"></forward>
+			
+			<forward
+				name="infoApplicationSupport"
+				path="/jsp/protected/infoApplicationSupport.jsp"></forward>
+			
+			<forward
+				name="infoContactUs"
+				path="/jsp/protected/infoContactUs.jsp"></forward>
+			
+			<forward
+				name="infoDisclaimer"
+				path="/jsp/protected/infoDisclaimer.jsp"></forward>
+			
+			<forward
+				name="infoPrivacyNotice"
+				path="/jsp/protected/infoPrivacyNotice.jsp"></forward>
+			
+			<forward
+				name="infoWhatsNew"
+				path="/jsp/protected/infoWhatsNew.jsp"></forward>
+			
+			<forward
+				name="loggedOut"
+				path="/jsp/protected/loggedOut.jsp"></forward>
+			
+			<forward
+				name="login"
+				path="/jsp/protected/login.jsp"></forward>
+			
+			<forward
+				name="loginMenu"
+				path="/jsp/protected/loginMenu.jsp"></forward>
+			
+			<forward
+				name="loginSuccess"
+				path="/jsp/protected/loginSuccess.jsp"></forward>
+			
+			<forward
+				name="protected"
+				path="/jsp/protected/protected"></forward>
+			
+			<forward
+				name="register"
+				path="/jsp/protected/register.jsp"></forward>
+			
+			<forward
+				name="registerSuccess"
+				path="/jsp/protected/registerSuccess.jsp"></forward>
+			
+			<forward
+				name="registerUserPass"
+				path="/jsp/protected/registerUserPass.jsp"></forward>
+			
+			<forward
+				name="searchAdvanced"
+				path="/jsp/protected/searchAdvanced.jsp"></forward>
+			
+			<forward
+				name="searchMenu"
+				path="/jsp/protected/searchMenu.jsp"></forward>
+			
+			<forward
+				name="searchResults"
+				path="/jsp/protected/searchResults.jsp"></forward>
+			
+			<forward
+				name="searchSimple"
+				path="/jsp/protected/searchSimple.jsp"></forward>
+			
+			<forward
+				name="searchTableOfContents"
+				path="/jsp/protected/searchTableOfContents.jsp"></forward>
+			
+			<forward
+				name="sidebar"
+				path="/jsp/protected/sidebar.jsp"></forward>
+			
+			<forward
+				name="subSearchMenu"
+				path="/jsp/protected/subSearchMenu.jsp"></forward>
+			
+			<forward
+				name="subViewModelMenu"
+				path="/jsp/protected/subViewModelMenu.jsp"></forward>
+			
+			<forward
+				name="viewCarcinogenicInterventions"
+				path="/jsp/protected/viewCarcinogenicInterventions.jsp"></forward>
+			
+			<forward
+				name="viewCellLines"
+				path="/jsp/protected/viewCellLines.jsp"></forward>
+			
+			<forward
+				name="viewEngineeredTransgene"
+				path="/jsp/protected/viewEngineeredTransgene.jsp"></forward>
+			
+			<forward
+				name="viewGeneticDescription"
+				path="/jsp/protected/viewGeneticDescription.jsp"></forward>
+			
+			<forward
+				name="viewGenomicSegment"
+				path="/jsp/protected/viewGenomicSegment.jsp"></forward>
+			
+			<forward
+				name="viewHistopathology"
+				path="/jsp/protected/viewHistopathology.jsp"></forward>
+			
+			<forward
+				name="viewImages"
+				path="/jsp/protected/viewImages.jsp"></forward>
+			
+			<forward
+				name="viewInducedMutation"
+				path="/jsp/protected/viewInducedMutation.jsp"></forward>
+			
+			<forward
+				name="viewMicroarrays"
+				path="/jsp/protected/viewMicroarrays.jsp"></forward>
+			
+			<forward
+				name="viewModelCharacteristics"
+				path="/jsp/protected/viewModelCharacteristics.jsp"></forward>
+			
+			<forward
+				name="viewModelMenu"
+				path="/jsp/protected/viewModelMenu.jsp"></forward>
+			
+			<forward
+				name="viewPublications"
+				path="/jsp/protected/viewPublications.jsp"></forward>
+			
+			<forward
+				name="viewSpontaneousMutation"
+				path="/jsp/protected/viewSpontaneousMutation.jsp"></forward>
+			
+			<forward
+				name="viewTargetedModification"
+				path="/jsp/protected/viewTargetedModification.jsp"></forward>
+			
+			<forward
+				name="viewTherapeuticApproaches"
+				path="/jsp/protected/viewTherapeuticApproaches.jsp"></forward>
+			
+			<forward
+				name="viewTransplantXenograft"
+				path="/jsp/protected/viewTransplantXenograft.jsp"></forward>
+			
+			<forward
+				name="zoomifyImage"
+				path="/jsp/protected/zoomifyImage.jsp"></forward>
+	
     </global-forwards>
 
   <!-- ========== Action Mapping Definitions =================================== -->
    <action-mappings>
-   
-    <action
-      path="/persons"
-      type="gov.nih.nci.camod.webapp.action.PersonAction"
-      name="personForm"
-      scope="request"
-      input="mainMenu"
-      parameter="method"
-      unknown="false"
-      validate="false"
-    >
-      <forward
-        name="edit"
-        path="/WEB-INF/pages/personForm.jsp"
-        redirect="false"
-      />
-      <forward
-        name="list"
-        path="/WEB-INF/pages/personList.jsp"
-        redirect="false"
-      />
-    </action>
-    
-    <action
-      path="/editPerson"
-      type="gov.nih.nci.camod.webapp.action.PersonAction"
-      name="personForm"
-      scope="request"
-      input="list"
-      parameter="method"
-      unknown="false"
-      validate="false"
-    >
-      <forward
-        name="edit"
-        path="/WEB-INF/pages/personForm.jsp"
-        redirect="false"
-      />
-      <forward
-        name="list"
-        path="/WEB-INF/pages/personList.jsp"
-        redirect="false"
-      />
-    </action>
-    <action
-      path="/savePerson"
-      type="gov.nih.nci.camod.webapp.action.PersonAction"
-      name="personForm"
-      scope="request"
-      input="edit"
-      parameter="method"
-      unknown="false"
-      validate="true"
-    >
-      <forward
-        name="edit"
-        path="/WEB-INF/pages/personForm.jsp"
-        redirect="false"
-      />
-      <forward
-        name="list"
-        path="/WEB-INF/pages/personList.jsp"
-        redirect="false"
-      />
-    </action>
-    
-    <action
-      path="/reload"
-      type="gov.nih.nci.camod.webapp.action.ReloadAction"
-      roles="admin"
-      unknown="false"
-      validate="false"
-    >
-    </action>
 
-    <action path="/login" 
-    	type="org.apache.struts.actions.ForwardAction" 
-    	parameter="/login.jsp"/>
-    <action path="/register" 
-    	type="org.apache.struts.actions.ForwardAction" 
-    	parameter="/register.jsp"/>
-    <action path="/submitPublications" 
-    	type="org.apache.struts.actions.ForwardAction"
-		parameter="/submitPublications.jsp"/>
-    <action path="/submitRadiation"
-    	type="org.apache.struts.actions.ForwardAction"
-    	parameter="/submitRadiation.jsp" />
+		<action
+			path="/adminCommentScreening"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/adminCommentScreening.jsp" />
+		
+		<action
+			path="/adminMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/adminMenu.jsp" />
+		
+		<action
+			path="/adminModelsAssignment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/adminModelsAssignment.jsp" />
+		
+		<action
+			path="/adminRoles"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/adminRoles.jsp" />
+		
+		<action
+			path="/adminUserSettings"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/adminUserSettings.jsp" />
+		
+		<action
+			path="/adminUsersAppointment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/adminUsersAppointment.jsp" />
+		
+		<action
+			path="/subAdminMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/subAdminMenu.jsp" />
+		
+		<action
+			path="/subSubmitMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/subSubmitMenu.jsp" />
+		
+		<action
+			path="/submitAssocExpression"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitAssocExpression.jsp" />
+		
+		<action
+			path="/submitAssocMetastasis"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitAssocMetastasis.jsp" />
+		
+		<action
+			path="/submitCellLines"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitCellLines.jsp" />
+		
+		<action
+			path="/submitChemicalDrug"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitChemicalDrug.jsp" />
+		
+		<action
+			path="/submitClinicalMarkers"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitClinicalMarkers.jsp" />
+		
+		<action
+			path="/submitComment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitComment.jsp" />
+		
+		<action
+			path="/submitEngineeredTransgene"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitEngineeredTransgene.jsp" />
+		
+		<action
+			path="/submitEnvironmentalFactors"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitEnvironmentalFactors.jsp" />
+		
+		<action
+			path="/submitGeneDelivery"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitGeneDelivery.jsp" />
+		
+		<action
+			path="/submitGenomicSegment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitGenomicSegment.jsp" />
+		
+		<action
+			path="/submitGrowthFactors"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitGrowthFactors.jsp" />
+		
+		<action
+			path="/submitHistopathology"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitHistopathology.jsp" />
+		
+		<action
+			path="/submitHormone"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitHormone.jsp" />
+		
+		<action
+			path="/submitIMSR"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitIMSR.jsp" />
+		
+		<action
+			path="/submitImages"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitImages.jsp" />
+		
+		<action
+			path="/submitInducedMutation"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitInducedMutation.jsp" />
+		
+		<action
+			path="/submitInvestigator"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitInvestigator.jsp" />
+		
+		<action
+			path="/submitJacksonLab"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitJacksonLab.jsp" />
+		
+		<action
+			path="/submitMMHCCRepo"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitMMHCCRepo.jsp" />
+		
+		<action
+			path="/submitMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitMenu.jsp" />
+		
+		<action
+			path="/submitMicroarrayData"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitMicroarrayData.jsp" />
+		
+		<action
+			path="/submitModelCharacteristics"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitModelCharacteristics.jsp" />
+		
+		<action
+			path="/submitModels"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitModels.jsp" />
+		
+		<action
+			path="/submitNewModel"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitNewModel.jsp" />
+		
+		<action
+			path="/submitNutritionalFactors"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitNutritionalFactors.jsp" />
+		
+		<action
+			path="/submitOtherPublications"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitOtherPublications.jsp" />
+		
+		<action
+			path="/submitOverview"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitOverview.jsp" />
+		
+		<action
+			path="/submitPublications"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/protected/jsp/submitPublications.jsp" />
+		
+		<action
+			path="/submitRadiation"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitRadiation.jsp" />
+		
+		<action
+			path="/submitSpontaneousMutation"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitSpontaneousMutation.jsp" />
+		
+		<action
+			path="/submitSurgeryOther"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitSurgeryOther.jsp" />
+		
+		<action
+			path="/submitTargetedModification"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitTargetedModification.jsp" />
+		
+		<action
+			path="/submitTherapy"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitTherapy.jsp" />
+		
+		<action
+			path="/submitTransplantXenograft"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitTransplantXenograft.jsp" />
+		
+		<action
+			path="/submitViralTreatment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitViralTreatment.jsp" />
+		
+		<action
+			path="/error"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/error.jsp" />
+		
+		<action
+			path="/evsTreeImage"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/evsTreeImage.jsp" />
+		
+		<action
+			path="/footer"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/footer.jsp" />
+		
+		<action
+			path="/header"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/header.jsp" />
+		
+		<action
+			path="/help"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/help.jsp" />
+		
+		<action
+			path="/helpAdmin"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/helpAdmin.jsp" />
+		
+		<action
+			path="/helpDesk"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/helpDesk.jsp" />
+		
+		<action
+			path="/helpSearching"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/helpSearching.jsp" />
+		
+		<action
+			path="/helpSubmission"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/helpSubmission.jsp" />
+		
+		<action
+			path="/index"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/index.jsp" />
+		
+		<action
+			path="/infoAccessibility"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/infoAccessibility.jsp" />
+		
+		<action
+			path="/infoApplicationSupport"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/infoApplicationSupport.jsp" />
+		
+		<action
+			path="/infoContactUs"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/infoContactUs.jsp" />
+		
+		<action
+			path="/infoDisclaimer"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/infoDisclaimer.jsp" />
+		
+		<action
+			path="/infoPrivacyNotice"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/infoPrivacyNotice.jsp" />
+		
+		<action
+			path="/infoWhatsNew"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/infoWhatsNew.jsp" />
+		
+		<action
+			path="/loggedOut"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/loggedOut.jsp" />
+		
+		<action
+			path="/login"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/login.jsp" />
+		
+		<action
+			path="/loginMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/loginMenu.jsp" />
+		
+		<action
+			path="/loginSuccess"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/loginSuccess.jsp" />
+		
+		<action
+			path="/protected"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected" />
+		
+		<action
+			path="/register"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/register.jsp" />
+		
+		<action
+			path="/registerSuccess"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/registerSuccess.jsp" />
+		
+		<action
+			path="/registerUserPass"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/registerUserPass.jsp" />
+		
+		<action
+			path="/searchAdvanced"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchAdvanced.jsp" />
+		
+		<action
+			path="/searchMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchMenu.jsp" />
+		
+		<action
+			path="/searchResults"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchResults.jsp" />
+		
+		<action
+			path="/searchSimple"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchSimple.jsp" />
+		
+		<action
+			path="/searchTableOfContents"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchTableOfContents.jsp" />
+		
+		<action
+			path="/sidebar"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/sidebar.jsp" />
+		
+		<action
+			path="/subSearchMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/subSearchMenu.jsp" />
+		
+		<action
+			path="/subViewModelMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/subViewModelMenu.jsp" />
+		
+		<action
+			path="/viewCarcinogenicInterventions"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewCarcinogenicInterventions.jsp" />
+		
+		<action
+			path="/viewCellLines"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewCellLines.jsp" />
+		
+		<action
+			path="/viewEngineeredTransgene"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewEngineeredTransgene.jsp" />
+		
+		<action
+			path="/viewGeneticDescription"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewGeneticDescription.jsp" />
+		
+		<action
+			path="/viewGenomicSegment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewGenomicSegment.jsp" />
+		
+		<action
+			path="/viewHistopathology"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewHistopathology.jsp" />
+		
+		<action
+			path="/viewImages"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewImages.jsp" />
+		
+		<action
+			path="/viewInducedMutation"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewInducedMutation.jsp" />
+		
+		<action
+			path="/viewMicroarrays"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewMicroarrays.jsp" />
+		
+		<action
+			path="/viewModelCharacteristics"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewModelCharacteristics.jsp" />
+		
+		<action
+			path="/viewModelMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewModelMenu.jsp" />
+		
+		<action
+			path="/viewPublications"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewPublications.jsp" />
+		
+		<action
+			path="/viewSpontaneousMutation"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewSpontaneousMutation.jsp" />
+		
+		<action
+			path="/viewTargetedModification"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewTargetedModification.jsp" />
+		
+		<action
+			path="/viewTherapeuticApproaches"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewTherapeuticApproaches.jsp" />
+		
+		<action
+			path="/viewTransplantXenograft"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewTransplantXenograft.jsp" />
+		
+		<action
+			path="/zoomifyImage"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/zoomifyImage.jsp" />
+
+	    <action 
+	    	path="/login" 
+	    	type="org.apache.struts.actions.ForwardAction" 
+	    	parameter="/login.jsp" />
     	
-    <action path="/personsTest"
-	      	type="gov.nih.nci.camod.webapp.action.PersonAction"
-	      	name="personForm"
-	      	scope="request"
-	      	input="/login.jsp"
-	      	parameter="method"      	
-	      	unknown="false"
-	      	validate="false">
-      	<forward
-        	name="list"
-        	path="/login.jsp"
-        	redirect="false"/>
-    </action>
-    
-    
+    	<action
+		      path="/reload"
+		      type="gov.nih.nci.camod.webapp.action.ReloadAction"
+		      roles="admin"
+		      unknown="false"
+		      validate="false" />
+
+  
      <!-- Called from login.jsp ( loginForm ) -->
     <action path="/loginAction"
 	        type="gov.nih.nci.camod.webapp.action.LoginAction"
