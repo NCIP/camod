@@ -114,7 +114,25 @@
          <rtexprvalue>true</rtexprvalue>
 
       </attribute>
-
    </tag>
-
+   <tag> 
+       <name>cshelp</name> 
+       <tag-class>gov.nih.nci.camod.webapp.taglib.ContextSensitiveHelpTag</tag-class>
+       <attribute>
+           <name>key</name>
+           <required>true</required>
+       </attribute>
+       <attribute>
+           <name>href</name>
+           <required>false</required>
+       </attribute>
+       <attribute>
+           <name>bundle</name>
+           <required>false</required>
+       </attribute>
+       <attribute>
+           <name>text</name>
+           <required>true</required>
+       </attribute>
+   </tag>
 </taglib>
