@@ -26,6 +26,9 @@ public class AuthenticationFilter implements Filter {
 		
 		public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain )
 		throws IOException, ServletException {
+			
+			System.out.println( "AuthenticationFileter doFilter> Entering... " );
+			
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse res = (HttpServletResponse) response;
 			
@@ -41,9 +44,14 @@ public class AuthenticationFilter implements Filter {
 			
 			if ( user == null) {
 				
+				System.out.println( "AuthenticationFileter doFilter> Authentication FAILURE " );
+					
+				session.setAttribute( Constants.LOGINFAILED, "true" );
+		        
 				//redirect to the login page
 				res.sendRedirect( req.getContextPath() + onFailure );
 			} else {
+				System.out.println( "AuthenticationFileter doFilter> Authentication SUCESS " );
 				chain.doFilter( request, response );
 			}			
 		}

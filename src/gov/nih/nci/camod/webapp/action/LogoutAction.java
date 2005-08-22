@@ -18,8 +18,10 @@ public class LogoutAction extends BaseAction {
             HttpServletResponse response)
 	throws IOException, ServletException
 	{
+		System.out.println( "<LogoutAction execute> Logging Off" );
+		
 		request.getSession().setAttribute( "camod.loggedon.username", null );
-		return mapping.findForward( "success" );
+		return mapping.findForward( "loggedOut" );
 	}
 
 }

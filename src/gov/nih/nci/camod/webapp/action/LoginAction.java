@@ -41,7 +41,7 @@ public final class LoginAction extends BaseAction {
     static AuthenticationManager authMgr = null;
     static AuthorizationManager Mgr = null;
     
-    /*
+    /**
     * Authenticates the user using the CSM AuthenticationManager and stores in
     * the session.
     * 
@@ -63,7 +63,8 @@ public final class LoginAction extends BaseAction {
         log.debug("System Config file is: " + System.getProperty( "gov.nih.nci.security.configFile" ) );
         
         //check login credentials using Authentication Mangager
-        boolean loginOK = false;                
+        boolean loginOK = false;     
+        
         try {
             loginOK = getAuthenticationManager().login( loginForm.getUsername(), loginForm.getPassword() );
         } catch ( CSException ex ) {
@@ -77,19 +78,14 @@ public final class LoginAction extends BaseAction {
  
         if ( loginOK ) {
                 System.out.println("<LogonAction.java> SUCESSFUL LOGIN ");
-                forward = Constants.SUCCESS;
-                
-               // ActionMessages messages = new ActionMessages();
-               // messages.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "access.application.success" ) );
-               // saveMessages( request, messages );
-                
+                forward = "success";                             
                 request.getSession().setAttribute( "camod.loggedon.username", loginForm.getUsername() );
                 
         } else {
                 System.out.println("<LogonAction.java> FAILURE LOGIN ");
-                forward = Constants.FAILURE;
+                forward = "login";
                 
-                ActionErrors errors = new ActionErrors();
+                ActionMessages errors = new ActionMessages();
                 errors.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "errors.validation.header" ) );
                 saveErrors( request, errors );
         }                

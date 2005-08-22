@@ -34,7 +34,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("viewCellLines.jsp") || 
 						jspName.equals("viewImages.jsp") || 
 						jspName.equals("viewMicroarrays.jsp") ){
-				return "subViewModelMenu.jsp";
+					return "subViewModelMenu.jsp";
 			} 
 			else if (	jspName.equals("adminRoles.jsp") || 
 						jspName.equals("helpAdmin.jsp") || 
@@ -42,14 +42,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("adminModelsAssignment.jsp") || 
 						jspName.equals("adminCommentScreening.jsp")  || 
 						jspName.equals("helpDesk.jsp") ) {	
-				
-				if ( checkIfLoggedIn( request ) == true )
 					return "subAdminMenu.jsp";
-				else {
-					// Following is a hack, need to setup all pages to use action classes to allow for ActionErrors
-					request.getSession().setAttribute( "camod.noaccess.error", "noaccess" );
-					return "redirect";
-				}
 			}
 			else if ( 	jspName.equals("submitOverview.jsp") ||
 						jspName.equals("submitAssocExpression.jsp") || 
@@ -81,41 +74,13 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("submitMMHCCRepo.jsp") ||  
 						jspName.equals("submitInvestigator.jsp") ||  
 						jspName.equals("submitIMSR.jsp") ) {
-				
-				if ( checkIfLoggedIn( request ) == true )
 					return "subSubmitMenu.jsp";
-				else { 					
-					request.getSession().setAttribute( "camod.noaccess.error", "noaccess" );
-					return "redirect";					
 				}
-				
-			} 
 			else if ( 	jspName.equals("submitModels.jsp") || 
-					    jspName.equals("submitNewModel.jsp") 
-					) {
-				
-				if ( checkIfLoggedIn( request ) == true )
-					return "";
-				else {					
-					request.getSession().setAttribute( "camod.noaccess.error", "noaccess" );
-					return "redirect";
-				}
-				
+					    jspName.equals("submitNewModel.jsp") ) {				
+					return "subEmptyMenu.jsp";				
 			} else {
 				return "";
 			}			
-		}
-		
-		public boolean checkIfLoggedIn( HttpServletRequest request )
-		{
-			if ( request.getSession().getAttribute("camod.loggedon.username") == null ) {				
-                
-                ActionErrors errors = new ActionErrors();
-                errors.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "error.login.required" ) );
-                saveErrors( request, errors );
-                             
-				return false;
-			} else 
-				return true;
 		}
 }
