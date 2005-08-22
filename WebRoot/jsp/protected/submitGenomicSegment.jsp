@@ -1,5 +1,5 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 
 <form name="input" action="submitOverview.jsp" method="get">
 
@@ -132,9 +132,4 @@
 	</TABLE>	
 </td></tr></TABLE>
 
-<%@ include file="footer.jsp" %>
-
-
-
-
-
+<%@ include file="/jsp/footer.jsp" %>

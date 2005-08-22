@@ -1,5 +1,5 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 
 <FORM name="input" action="http://caarraydb.nci.nih.gov" method="get">
 
@@ -37,4 +37,4 @@
 	</td></tr></TABLE>
 </tr></td></TABLE>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
