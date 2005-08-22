@@ -57,10 +57,12 @@
     <!-- Classpaths                                                          -->
     <!-- =================================================================== -->
     
-    <!--  Entire lib -->
-    <path id="all.classpath">
-    	<fileset dir="${build.webapp.lib.dir}" includes="*.jar"/>     
-    </path>
+    <!--  Entire lib --> 
+    <path id="all.classpath"> 
+        <fileset dir="${build.webapp.lib.dir}" includes="*.jar"/>   
+        <path location="${build.classes.dir}"/> 
+    </path> 
+    
     
     <path id="xdoclet.classpath">
         <pathelement location="${log4j.jar}"/>
