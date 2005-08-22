@@ -2,10 +2,14 @@ package gov.nih.nci.camod.webapp.taglib;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ResourceBundle;
 
 import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.Tag;
-// TODO: Add comments
+
+/**
+ * Custom tag for context sensitive help.
+ */
 public class ContextSensitiveHelpTag implements Tag, Serializable {
 
 	private static final long serialVersionUID = 5618297483211863400L;
@@ -21,7 +25,7 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 
 	private String myHref = null;
 
-	private String myBundle = null;
+	private String myBundle = "ContextSensitiveHelp";
 
 	public void setPageContext(PageContext inPageContext) {
 		myPageContext = inPageContext;
@@ -35,6 +39,16 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 		return myParent;
 	}
 
+	/**
+	 * Sets the key attribute. This is included in the tld file.
+	 * 
+	 * @jsp.attribute description="The key attribute used to look up the value
+	 *                in the properties file"
+	 * 
+	 * required="true"
+	 * 
+	 * rtexprvalue="false"
+	 */
 	public void setKey(String inKey) {
 		myKey = inKey;
 	}
@@ -43,6 +57,15 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 		return myKey;
 	}
 
+	/**
+	 * Sets the text attribute. This is included in the tld file.
+	 * 
+	 * @jsp.attribute description="The text the CS help will be for"
+	 * 
+	 * required="true"
+	 * 
+	 * rtexprvalue="false"
+	 */
 	public void setText(String inLabelName) {
 		myLabelName = inLabelName;
 	}
@@ -55,6 +78,16 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 		return myHref;
 	}
 
+	/**
+	 * Sets the href attribute. This is included in the tld file.
+	 * 
+	 * @jsp.attribute description="Where to go when the text is clicked.
+	 *                Currently not implemented"
+	 * 
+	 * required="false"
+	 * 
+	 * rtexprvalue="false"
+	 */
 	public void setHref(String inHref) {
 		this.myHref = inHref;
 	}
@@ -63,6 +96,16 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 		return myBundle;
 	}
 
+	/**
+	 * Sets the bundle attribute. This is included in the tld file.
+	 * 
+	 * @jsp.attribute description="What bundle to use for the key lookup.
+	 *                Currently defaults to ContextSensitiveHelp.properties"
+	 * 
+	 * required="false"
+	 * 
+	 * rtexprvalue="false"
+	 */
 	public void setBundle(String inBundle) {
 		this.myBundle = inBundle;
 	}
@@ -71,6 +114,10 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 
 		try {
 
+			// Get the text
+			ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
+			String theText = theBundle.getString(myKey);
+
 			// Process optional attributes
 			String theHref = "";
 			if (myHref != null) {
@@ -78,9 +125,9 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 			}
 
 			myPageContext.getOut().write(
-					"<a " + theHref + " onMouseOver=\"stm(Text['" + myKey
-							+ "'],Style[0])\" onMouseOut=\"htm();\">" + myLabelName
-							+ "</a>");
+					"<a " + theHref + " onMouseOver=\"stm(" + theText
+							+ ",Style[0])\" onMouseOut=\"htm();\">"
+							+ myLabelName + "</a>");
 
 		} catch (IOException e) {
 			throw new JspTagException("An IOException occurred.");
