@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface TargetedModificationManager {
-	public List getTargetedModifications();
-	public TargetedModification getTargetedModification(String id);
-    public void saveTargetedModification(TargetedModification targetedModification);
-    public void removeTargetedModification(String id);
+	public List getAll();
+	public TargetedModification get(String id);
+    public void save(TargetedModification targetedModification);
+    public void remove(String id);
 }

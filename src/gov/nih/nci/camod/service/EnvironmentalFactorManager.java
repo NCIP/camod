@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface EnvironmentalFactorManager {
-	public List getEnvironmentalFactors();
-	public EnvironmentalFactor getEnvironmentalFactor(String id);
-    public void saveEnvironmentalFactor(EnvironmentalFactor environmentalFactor);
-    public void removeEnvironmentalFactor(String id);
+	public List getAll();
+	public EnvironmentalFactor get(String id);
+    public void save(EnvironmentalFactor environmentalFactor);
+    public void remove(String id);
 }

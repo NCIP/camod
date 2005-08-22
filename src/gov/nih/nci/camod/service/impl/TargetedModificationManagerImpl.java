@@ -8,6 +8,9 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.service.TargetedModificationManager;
+import gov.nih.nci.common.persistence.Persist;
+import gov.nih.nci.common.persistence.Search;
+import gov.nih.nci.common.persistence.exception.PersistenceException;
 import java.util.List;
 
 /**
@@ -18,19 +21,57 @@ import java.util.List;
  */
 public class TargetedModificationManagerImpl extends BaseManager implements TargetedModificationManager {
 	
-	public List getTargetedModifications() {		
-		List targetedModifications = null;		
+	public List getAll() {		
+		List targetedModifications = null;
+		
+		try {
+			targetedModifications = Search.query(TargetedModification.class);
+		} catch (Exception e) {
+			System.out.println("Exception in TargetedModificationManagerImpl.getAll");
+			e.printStackTrace();
+		}
+		
 		return targetedModifications;
 	}
 	
-	public TargetedModification getTargetedModification(String id) {
+	public TargetedModification get(String id) {
 		TargetedModification targetedModification = null;
+		
+		try {
+			targetedModification = (TargetedModification) 
+				Search.queryById(TargetedModification.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in TargetedModificationManagerImpl.get");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in TargetedModificationManagerImpl.get");
+			e.printStackTrace();
+		}
+		
 		return targetedModification;
     }
 
-    public void saveTargetedModification(TargetedModification targetedModification) {    	
+    public void save(TargetedModification targetedModification) {    
+    	try {
+			Persist.save(targetedModification);			
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in TargetedModificationManagerImpl.save");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in TargetedModificationManagerImpl.save");
+			e.printStackTrace();
+		}
     }
 
-    public void removeTargetedModification(String id) {    	
+    public void remove(String id) {    	
+    	try {
+			Persist.deleteById(TargetedModification.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in TargetedModificationManagerImpl.remove");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in TargetedModificationManagerImpl.remove");
+			e.printStackTrace();
+		}
     }
 }

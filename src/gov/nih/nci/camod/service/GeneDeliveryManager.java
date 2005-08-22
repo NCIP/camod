@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface GeneDeliveryManager {
-	public List getGeneDeliverys();
-	public GeneDelivery getGeneDelivery(String id);
-    public void saveGeneDelivery(GeneDelivery geneDelivery);
-    public void removeGeneDelivery(String id);
+	public List getAll();
+	public GeneDelivery get(String id);
+    public void save(GeneDelivery geneDelivery);
+    public void remove(String id);
 }

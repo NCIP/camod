@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface XenograftManager {
-	public List getXenografts();
-	public Xenograft getXenograft(String id);
-    public void saveXenograft(Xenograft xenograft);
-    public void removeXenograft(String id);
+	public List getAll();
+	public Xenograft get(String id);
+    public void save(Xenograft xenograft);
+    public void remove(String id);
 }

@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface CellLineManager {
-	public List getCellLines();
-	public CellLine getCellLine(String id);
-    public void saveCellLine(CellLine cellLine);
-    public void removeCellLine(String id);
+	public List getAll();
+	public CellLine get(String id);
+    public void save(CellLine cellLine);
+    public void remove(String id);
 }

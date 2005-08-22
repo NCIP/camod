@@ -23,15 +23,15 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface AnimalModelManager {
-	public List getAnimalModels();
+	public List getAll();
 	
-	public List getAnimalModels(String username);
+	public List getAll(String username);
 	
-	public AnimalModel getAnimalModel(String id);
+	public AnimalModel get(String id);
     
-	public void saveAnimalModel(AnimalModel animalModel);
+	public void save(AnimalModel animalModel);
     
-	public Long saveAnimalModel(
+	public Long save(
     	Person person,
 		ContactInfo contactInfo,
 		AnimalModel animalModel,
@@ -40,5 +40,5 @@ public interface AnimalModelManager {
 		SexDistribution sexDistribution,
 		Availability availability);
     
-	public void removeAnimalModel(String id);
+	public void remove(String id);
 }

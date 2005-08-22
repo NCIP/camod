@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface TherapyManager {
-	public List getTherapys();
-	public Therapy getTherapy(String id);
-    public void saveTherapy(Therapy therapy);
-    public void removeTherapy(String id);
+	public List getAll();
+	public Therapy get(String id);
+    public void save(Therapy therapy);
+    public void remove(String id);
 }

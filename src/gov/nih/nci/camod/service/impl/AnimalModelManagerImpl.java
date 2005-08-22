@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class AnimalModelManagerImpl extends BaseManager implements AnimalModelManager {
 	
-	public List getAnimalModels() {		
+	public List getAll() {		
 		List animalModels = null;
 		
 		try {
@@ -41,7 +41,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return animalModels;
 	}
 	
-	public List getAnimalModels(String username) {		
+	public List getAll(String username) {		
 		// The list of AnimalModels to be returned
 		List animalModels = null;
 		
@@ -65,7 +65,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return animalModels;
 	}
 	
-	public AnimalModel getAnimalModel(String id) {
+	public AnimalModel get(String id) {
 		AnimalModel animalModel = null;
 		
 		try {
@@ -81,7 +81,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return animalModel;
     }
 
-    public void saveAnimalModel(AnimalModel animalModel) {
+    public void save(AnimalModel animalModel) {
     	try {
 			Persist.save(animalModel);			
 		} catch (PersistenceException pe) {
@@ -93,7 +93,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		}
     }
     
-    public Long saveAnimalModel(
+    public Long save(
         Person person,
     	ContactInfo contactInfo,
     	AnimalModel animalModel,
@@ -138,7 +138,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return id;
     }
 
-    public void removeAnimalModel(String id) {
+    public void remove(String id) {
     	try {
 			Persist.deleteById(AnimalModel.class, new Long(id));
 		} catch (PersistenceException pe) {

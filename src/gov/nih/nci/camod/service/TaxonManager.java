@@ -17,9 +17,9 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface TaxonManager {
-	public List getTaxons();
-	public Taxon getTaxon(String id);
-    public void saveTaxon(Taxon taxon);
-    public void removeTaxon(String id);
+	public List getAll();
+	public Taxon get(String id);
+    public void save(Taxon taxon);
+    public void remove(String id);
     public List getStrains(Species species);
 }

@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface GenomicSegmentManager {
-	public List getGenomicSegments();
-	public GenomicSegment getGenomicSegment(String id);
-    public void saveGenomicSegment(GenomicSegment genomicSegment);
-    public void removeGenomicSegment(String id);
+	public List getAll();
+	public GenomicSegment get(String id);
+    public void save(GenomicSegment genomicSegment);
+    public void remove(String id);
 }

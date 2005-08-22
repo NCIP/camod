@@ -8,6 +8,9 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.service.ImageManager;
+import gov.nih.nci.common.persistence.Persist;
+import gov.nih.nci.common.persistence.Search;
+import gov.nih.nci.common.persistence.exception.PersistenceException;
 import java.util.List;
 
 /**
@@ -18,19 +21,56 @@ import java.util.List;
  */
 public class ImageManagerImpl extends BaseManager implements ImageManager {
 	
-	public List getImages() {		
-		List images = null;		
+	public List getAll() {		
+		List images = null;
+		
+		try {
+			images = Search.query(Image.class);
+		} catch (Exception e) {
+			System.out.println("Exception in ImageManagerImpl.getAll");
+			e.printStackTrace();
+		}
+		
 		return images;
 	}
 	
-	public Image getImage(String id) {
+	public Image get(String id) {
 		Image image = null;
+		
+		try {
+			image = (Image) Search.queryById(Image.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in ImageManagerImpl.get");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in ImageManagerImpl.get");
+			e.printStackTrace();
+		}
+		
 		return image;
     }
 
-    public void saveImage(Image image) {    	
+    public void save(Image image) {    	
+    	try {
+			Persist.save(image);			
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in ImageManagerImpl.save");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in ImageManagerImpl.save");
+			e.printStackTrace();
+		}
     }
 
-    public void removeImage(String id) {    	
+    public void remove(String id) {    
+    	try {
+			Persist.deleteById(Image.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in ImageManagerImpl.remove");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in ImageManagerImpl.remove");
+			e.printStackTrace();
+		}
     }
 }

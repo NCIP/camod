@@ -6,13 +6,10 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.PersonManager;
 import gov.nih.nci.common.persistence.*;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,89 +20,54 @@ import java.util.List;
  */
 public class PersonManagerImpl extends BaseManager implements PersonManager {
 	
-	public List getPersons() {		
+	public List getAll() {		
 		List persons = null;
 		
 		try {
 			persons = Search.query(Person.class);
-			
-			
-			
-			
-			
-			if (persons != null && !persons.isEmpty()) {				
-				System.out.println("\n *** PERSONS ***");				
-				Iterator personIterator = persons.iterator();			
-				while (personIterator.hasNext()) {
-					Person person = (Person) personIterator.next();
-					
-					// Print the persons
-					System.out.println("FirstName: " + person.getFirstName());
-					System.out.println("LastName: " + person.getLastName());
-					
-					// Print the contact infos
-					if (person.getContactInfoCollection() != null &&
-						!person.getContactInfoCollection().isEmpty()) {
-						
-						System.out.println("\n *** CONTACT INFOS ***");
-				
-						Iterator ciIterator = person.getContactInfoCollection().iterator();
-						while (ciIterator.hasNext()) {
-							ContactInfo contactInfo = (ContactInfo) ciIterator.next();
-							System.out.println("Zip: " + contactInfo.getZip());
-						}
-					} else {
-						System.out.println("\n*** NO CONTACT INFOS RETRIEVED!!! ***\n");
-					}
-				}
-		    } else {
-		    	System.out.println("\n*** NO PARTIES RETRIEVED!!! ***\n");
-		    }
-
-			
 		} catch (Exception e) {
-			System.out.println("Exception in PersonManagerImpl.getPersons");
+			System.out.println("Exception in PersonManagerImpl.getAll");
 		}
 		
 		return persons;
 	}
 	
-	public Person getPerson(String id) {
+	public Person get(String id) {
 		Person person = null;
 		
 		try {
 			person = (Person) Search.queryById(Person.class, new Long(id));
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PersonManagerImpl.getPerson");
+			System.out.println("PersistenceException in PersonManagerImpl.get");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in PersonManagerImpl.getPerson");
+			System.out.println("Exception in PersonManagerImpl.get");
 			e.printStackTrace();
 		}
 		
 		return person;
     }
 
-    public void savePerson(Person person) {
+    public void save(Person person) {
     	try {
 			Persist.save(person);
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PersonManagerImpl.savePerson");
+			System.out.println("PersistenceException in PersonManagerImpl.save");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in PersonManagerImpl.savePerson");
+			System.out.println("Exception in PersonManagerImpl.save");
 			e.printStackTrace();
 		}
     }
 
-    public void removePerson(String id) {
+    public void remove(String id) {
     	try {
 			Persist.deleteById(Person.class, new Long(id));
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PersonManagerImpl.removePerson");
+			System.out.println("PersistenceException in PersonManagerImpl.remove");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in PersonManagerImpl.removePerson");
+			System.out.println("Exception in PersonManagerImpl.remove");
 			e.printStackTrace();
 		}
     }

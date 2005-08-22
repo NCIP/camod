@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface PersonManager {
-	public List getPersons();
-	public Person getPerson(String id);
-    public void savePerson(Person person);
-    public void removePerson(String id);
+	public List getAll();
+	public Person get(String id);
+    public void save(Person person);
+    public void remove(String id);
 }

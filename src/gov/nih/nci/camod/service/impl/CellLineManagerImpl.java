@@ -8,6 +8,9 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.service.CellLineManager;
+import gov.nih.nci.common.persistence.Persist;
+import gov.nih.nci.common.persistence.Search;
+import gov.nih.nci.common.persistence.exception.PersistenceException;
 import java.util.List;
 
 /**
@@ -18,19 +21,56 @@ import java.util.List;
  */
 public class CellLineManagerImpl extends BaseManager implements CellLineManager {
 	
-	public List getCellLines() {		
-		List cellLines = null;		
+	public List getAll() {		
+		List cellLines = null;
+		
+		try {
+			cellLines = Search.query(CellLine.class);
+		} catch (Exception e) {
+			System.out.println("Exception in CellLineManagerImpl.getAll");
+			e.printStackTrace();
+		}
+		
 		return cellLines;
 	}
 	
-	public CellLine getCellLine(String id) {
-		CellLine cellLine = null;		
+	public CellLine get(String id) {
+		CellLine cellLine = null;
+		
+		try {
+			cellLine = (CellLine) Search.queryById(CellLine.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in CellLineManagerImpl.get");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in CellLineManagerImpl.get");
+			e.printStackTrace();
+		}
+		
 		return cellLine;
     }
 
-    public void saveCellLine(CellLine cellLine) {    	
+    public void save(CellLine cellLine) {   
+    	try {
+			Persist.save(cellLine);			
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in CellLineManagerImpl.save");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in CellLineManagerImpl.save");
+			e.printStackTrace();
+		}
     }
 
-    public void removeCellLine(String id) {    	
+    public void remove(String id) {    
+    	try {
+			Persist.deleteById(CellLine.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in CellLineManagerImpl.remove");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in CellLineManagerImpl.remove");
+			e.printStackTrace();
+		}
     }
 }

@@ -21,55 +21,55 @@ import gov.nih.nci.common.persistence.exception.PersistenceException;
  */
 public class SexDistributionManagerImpl extends BaseManager implements SexDistributionManager {
 	
-	public List getSexDistributions() {
+	public List getAll() {
 		List sexDistributions = null;
 		
 		try {
 			sexDistributions = Search.query(SexDistribution.class);
 		} catch (Exception e) {
-			System.out.println("Exception in SexDistributionManagerImpl.getSexDistributions()");
+			System.out.println("Exception in SexDistributionManagerImpl.getAll");
 			e.printStackTrace();
 		}
 		
 		return sexDistributions;
 	}
 	
-	public SexDistribution getSexDistribution(String id) {
+	public SexDistribution get(String id) {
 		SexDistribution sexDistribution = null;
 		
 		try {
 			sexDistribution = (SexDistribution) Search.queryById(SexDistribution.class, new Long(id));
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in SexDistributionManagerImpl.getSexDistribution(String id)");
+			System.out.println("PersistenceException in SexDistributionManagerImpl.get");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in SexDistributionManagerImpl.getSexDistribution(String id)");
+			System.out.println("Exception in SexDistributionManagerImpl.get");
 			e.printStackTrace();
 		}
 		
 		return sexDistribution;
 	}
 	
-    public void saveSexDistribution(SexDistribution sexDistribution) {
+    public void save(SexDistribution sexDistribution) {
     	try {
 			Persist.save(sexDistribution);			
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in SexDistributionManagerImpl.saveSexDistribution");
+			System.out.println("PersistenceException in SexDistributionManagerImpl.save");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in SexDistributionManagerImpl.saveSexDistribution");
+			System.out.println("Exception in SexDistributionManagerImpl.save");
 			e.printStackTrace();
 		}
     }
     
-    public void removeSexDistribution(String id) {
+    public void remove(String id) {
     	try {
 			Persist.deleteById(SexDistribution.class, new Long(id));
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in SexDistributionManagerImpl.removeSexDistribution");
+			System.out.println("PersistenceException in SexDistributionManagerImpl.remove");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in SexDistributionManagerImpl.removeSexDistribution");
+			System.out.println("Exception in SexDistributionManagerImpl.remove");
 			e.printStackTrace();
 		}
     }	

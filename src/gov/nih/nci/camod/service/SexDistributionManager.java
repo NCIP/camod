@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface SexDistributionManager {
-	public List getSexDistributions();
-	public SexDistribution getSexDistribution(String id);
-    public void saveSexDistribution(SexDistribution sexDistribution);
-    public void removeSexDistribution(String id);
+	public List getAll();
+	public SexDistribution get(String id);
+    public void save(SexDistribution sexDistribution);
+    public void remove(String id);
 }

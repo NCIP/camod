@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface ImageManager {
-	public List getImages();
-	public Image getImage(String id);
-    public void saveImage(Image image);
-    public void removeImage(String id);
+	public List getAll();
+	public Image get(String id);
+    public void save(Image image);
+    public void remove(String id);
 }

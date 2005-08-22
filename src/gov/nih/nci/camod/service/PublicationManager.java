@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface PublicationManager {
-	public List getPublications();
-	public Publication getPublication(String id);
-    public void savePublication(Publication publication);
-    public void removePublication(String id);
+	public List getAll();
+	public Publication get(String id);
+    public void save(Publication publication);
+    public void remove(String id);
 }

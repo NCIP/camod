@@ -8,6 +8,9 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.service.TransgeneManager;
+import gov.nih.nci.common.persistence.Persist;
+import gov.nih.nci.common.persistence.Search;
+import gov.nih.nci.common.persistence.exception.PersistenceException;
 import java.util.List;
 
 /**
@@ -18,19 +21,56 @@ import java.util.List;
  */
 public class TransgeneManagerImpl extends BaseManager implements TransgeneManager {
 	
-	public List getTransgenes() {		
-		List transgenes = null;		
+	public List getAll() {		
+		List transgenes = null;
+		
+		try {
+			transgenes = Search.query(Transgene.class);
+		} catch (Exception e) {
+			System.out.println("Exception in TransgeneManagerImpl.getAll");
+			e.printStackTrace();
+		}
+		
 		return transgenes;
 	}
 	
-	public Transgene getTransgene(String id) {
+	public Transgene get(String id) {
 		Transgene transgene = null;
+		
+		try {
+			transgene = (Transgene) Search.queryById(Transgene.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in TransgeneManagerImpl.get");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in TransgeneManagerImpl.get");
+			e.printStackTrace();
+		}
+		
 		return transgene;
     }
 
-    public void saveTransgene(Transgene transgene) {    	
+    public void save(Transgene transgene) {    	
+    	try {
+			Persist.save(transgene);			
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in TransgeneManagerImpl.save");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in TransgeneManagerImpl.save");
+			e.printStackTrace();
+		}
     }
 
-    public void removeTransgene(String id) {    	
+    public void remove(String id) {    	
+    	try {
+			Persist.deleteById(Transgene.class, new Long(id));
+		} catch (PersistenceException pe) {
+			System.out.println("PersistenceException in TransgeneManagerImpl.remove");
+			pe.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception in TransgeneManagerImpl.remove");
+			e.printStackTrace();
+		}
     }
 }

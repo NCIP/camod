@@ -26,55 +26,55 @@ import org.hibernate.eqbe.*;
  */
 public class TaxonManagerImpl extends BaseManager implements TaxonManager {
 
-	public List getTaxons() {
+	public List getAll() {
 		List taxons = null;
 		
 		try {
 			taxons = Search.query(Taxon.class);
 		} catch (Exception e) {
-			System.out.println("Exception in TaxonManagerImpl.getTaxons()");
+			System.out.println("Exception in TaxonManagerImpl.getAll");
 			e.printStackTrace();
 		}
 		
 		return taxons;
 	}
 	
-	public Taxon getTaxon(String id) {
+	public Taxon get(String id) {
 		Taxon taxon = null;
 		
 		try {
 			taxon = (Taxon) Search.queryById(Taxon.class, new Long(id));
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in TaxonManagerImpl.getTaxon(String id)");
+			System.out.println("PersistenceException in TaxonManagerImpl.get");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in TaxonManagerImpl.getTaxon(String id)");
+			System.out.println("Exception in TaxonManagerImpl.get");
 			e.printStackTrace();
 		}
 		
 		return taxon;
 	}
 	
-    public void saveTaxon(Taxon taxon) {
+    public void save(Taxon taxon) {
     	try {
 			Persist.save(taxon);			
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in TaxonManagerImpl.saveTaxon");
+			System.out.println("PersistenceException in TaxonManagerImpl.save");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in TaxonManagerImpl.saveTaxon");
+			System.out.println("Exception in TaxonManagerImpl.save");
 			e.printStackTrace();
 		}
     }
     
-    public void removeTaxon(String id) {
+    public void remove(String id) {
     	try {
 			Persist.deleteById(Taxon.class, new Long(id));
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in TaxonManagerImpl.removeTaxon");
+			System.out.println("PersistenceException in TaxonManagerImpl.remove");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in TaxonManagerImpl.removeTaxon");
+			System.out.println("Exception in TaxonManagerImpl.remove");
 			e.printStackTrace();
 		}
     }	
@@ -111,7 +111,7 @@ public class TaxonManagerImpl extends BaseManager implements TaxonManager {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Exception in TaxonManagerImpl.getTaxons()");
+			System.out.println("Exception in TaxonManagerImpl.getStrains");
 			e.printStackTrace();
 		}
 		

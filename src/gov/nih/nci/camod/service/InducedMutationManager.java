@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface InducedMutationManager {
-	public List getInducedMutations();
-	public InducedMutation getInducedMutation(String id);
-    public void saveInducedMutation(InducedMutation inducedMutation);
-    public void removeInducedMutation(String id);
+	public List getAll();
+	public InducedMutation get(String id);
+    public void save(InducedMutation inducedMutation);
+    public void remove(String id);
 }
