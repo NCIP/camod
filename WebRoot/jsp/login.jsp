@@ -1,11 +1,13 @@
-<%@ include file="header.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
-<%@ include file="sidebar.jsp" %>
+
+<%@ page import="gov.nih.nci.camod.Constants" %>
 
 <%@ page buffer="32kb"%>
 
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="scripts/TipMessages.js" type=text/javascript></SCRIPT>	
+<SCRIPT src="../scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
 <!-- Main Content Begins -->  
 	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -59,21 +61,13 @@
                                                   </tr>
                                                   <tr>
                                                       <td class="sidebarContent">
-                                                          <table cellpadding="2" cellspacing="0" border="0">     
-                                                                                                                                                                        					                                                                                                                   
-                                                            <logic:messagesPresent>
-                                                            <tr><td colspan=3>                                                              
-                                                                <html:messages id="error">
-                                                                	<span id="errorsHeader"><bean:write name="error"/></span><br>
-                                                                </html:messages>                                                                
-                                                            </td></tr>      
-                                                            </logic:messagesPresent> 
+                                                          <table cellpadding="2" cellspacing="0" border="0">                                                                                                                                                                             					                                                                                                                   
                                                             
                                                             <%
-					                                      		if( session.getAttribute( "camod.noaccess.error" ) != null ) {
-					                                      			session.setAttribute( "camod.noaccess.error" , null );
+					                                      		if( session.getAttribute( Constants.LOGINFAILED ) == "true" ) {
+					                                      			session.setAttribute( Constants.LOGINFAILED , null );
 					                                      			%>
-					                                      				<tr><td colspan="3">
+					                                      				<tr><td colspan="3">					                                      				
 						                                      				<span id="errorsHeader">
 						                                      					<bean:message key="error.login.required"/>
 					                                      					</span>

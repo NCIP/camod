@@ -1,6 +1,6 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
-<%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
 
 <%@ page buffer="32kb"%>
 
@@ -34,7 +34,9 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
 		<tr>
+		
 			<html:errors/>		
+			
 			<td class="formMessage" colspan="3">
 				* indicates a required field
 			</td>
@@ -187,7 +189,7 @@
 	</TABLE>	
 </td></tr></TABLE>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
 
 
 

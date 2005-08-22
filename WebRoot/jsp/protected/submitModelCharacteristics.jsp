@@ -1,5 +1,5 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp" %>
 
 <%@ page buffer="32kb"%>
@@ -178,7 +178,7 @@
 	</TABLE>	
 </td></tr></TABLE>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
 
 
 

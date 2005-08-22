@@ -10,9 +10,11 @@
 			width=1 border=0></A>
 		</TD>
 
+
+
 		<!-- link 1 begins -->
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="login.jsp">HOME</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="login">HOME</html:link>&nbsp;&nbsp;
 		</TD>
 		<!-- link 1 ends -->
 
@@ -21,7 +23,7 @@
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="register.jsp">REGISTER</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="register">REGISTER</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -29,7 +31,7 @@
 		</TD>
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="searchSimple.jsp">SEARCH MODELS</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="searchSimple">SEARCH MODELS</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -37,7 +39,7 @@
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="UserAction.do?method=ReturnUserModels">SUBMIT MODELS</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="/UserAction.do?method=ReturnUserModels">SUBMIT MODELS</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -45,7 +47,7 @@
 		</TD>		
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="adminRoles.jsp">ADMIN</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="adminRoles">ADMIN</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -53,7 +55,7 @@
 		</TD>		
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="help.jsp">HELP</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="help">HELP</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>

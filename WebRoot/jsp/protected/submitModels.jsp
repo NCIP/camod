@@ -1,5 +1,5 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
@@ -7,9 +7,9 @@
 <%@ page import="java.util.List" %>
 
 <%      
-   List results = (List) request.getSession().getAttribute( Constants.USERMODELLIST );
-   int size = results.size();
-   System.out.println( "SIZE: " + size );
+	List results = (List) request.getSession().getAttribute( Constants.USERMODELLIST );
+	int size = results.size();
+	System.out.println( "SIZE: " + size );
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -29,7 +29,7 @@
 						<td>
 							  Welcome back <b><%= session.getAttribute("camod.loggedon.username") %></b>.<br>
 						      To edit one of your existing models click on the name of the model.<br>
-						      To add a new model select "<a href="submitNewModel.jsp">Add new Model</a>".<br>
+						      To add a new model select "<html:link action="submitNewModel">Add new Model</html:link>".<br>
 							<br>
 						      If you are unfamiliar with the submission process please refer to <a href="help.jsp">HELP</a>.<br>
 							<br>
@@ -66,7 +66,7 @@
 
 		<tr>
 			<td class="resultsBoxWhite" width="10%">&nbsp;</td>
-			<td class="resultsBoxWhite" width="40%"><a href="submitNewModel.jsp"><font color=red><b>Add New Model</font></b></a></td>
+			<td class="resultsBoxWhite" width="40%"><html:link action="submitNewModel"><font color=red><b>Add New Model</font></b></html:link></td>
 			<td class="resultsBoxWhite" width="30%"><%= new java.util.Date() %></td>
 			<td class="resultsBoxWhiteEnd" width="10%">&nbsp;</td>
 		</tr>
@@ -103,7 +103,7 @@
 	</TABLE>		
 </td></tr></TABLE>	
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
 
 
 

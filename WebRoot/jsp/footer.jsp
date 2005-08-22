@@ -15,33 +15,35 @@
 		     <tr>
 		     
 			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-			  &nbsp;&nbsp;<a class="footerMenuLink" href="infoContactUs.jsp">CONTACT US</a>&nbsp;&nbsp;
+			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoContactUs">CONTACT US</html:link>&nbsp;&nbsp;
 			</td>
 			
 			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
 			
-			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-			  &nbsp;&nbsp;<a class="footerMenuLink" href="infoPrivacyNotice.jsp">PRIVACY NOTICE</a>&nbsp;&nbsp;
+			<td align="center" height="20" class="footerMenuItem" onmouseofver="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
+			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoPrivacyNotice">PRIVACY NOTICE</html:link>&nbsp;&nbsp;
 			</td>
 			
 			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
 						
 			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-			  &nbsp;&nbsp;<a class="footerMenuLink" href="infoDisclaimer.jsp">DISCLAIMER</a>&nbsp;&nbsp;
+			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoDisclaimer">DISCLAIMER</html:link>&nbsp;&nbsp;
 			</td>
 			
 			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
 			
 			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-			  &nbsp;&nbsp;<a class="footerMenuLink" href="infoAccessibility.jsp">ACCESSIBILITY</a>&nbsp;&nbsp;			
+			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoAccessibility">ACCESSIBILITY</html:link>&nbsp;&nbsp;			
 			</td>
 
 			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
 
 			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-			  &nbsp;&nbsp;<a class="footerMenuLink" href="infoApplicationSupport.jsp">APPLICATION SUPPORT</a>&nbsp;&nbsp;
+			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoApplicationSupport">APPLICATION SUPPORT</html:link>&nbsp;&nbsp;
 			</td>
-
+			
+			
+			
 			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
 			
 		      </tr>

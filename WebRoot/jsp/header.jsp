@@ -6,7 +6,9 @@
 	<SCRIPT src="scripts/TipCode.js" type=text/javascript></SCRIPT>	
 	<SCRIPT SRC="scripts/CalendarPopup.js" type=text/javascript></SCRIPT>
 	<META content="MSHTML 6.00.2800.1491" name=GENERATOR>
-
+	
+	<%@ include file="../common/taglibs.jsp"%>
+	
 </HEAD>
 
 <BODY>

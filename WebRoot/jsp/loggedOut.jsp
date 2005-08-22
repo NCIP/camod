@@ -1,5 +1,5 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -15,7 +15,7 @@
 				</tr>			
 				
 				<tr>
-					<td class="resultsBoxWhiteEnd">Session Ended.<br><a href="login.jsp">Login</a></td> 
+					<td class="resultsBoxWhiteEnd">Session Ended.<br><html:link action="login">Login</html:link></td> 
 				</tr>
 				
 			</TABLE>
@@ -23,4 +23,4 @@
 	</td></tr></TABLE>
 </tr></td></TABLE>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>
