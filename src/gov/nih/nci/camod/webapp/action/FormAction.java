@@ -39,7 +39,7 @@ public class FormAction extends BaseAction {
 		// Use the current animalModel based on the ID stored in the session
 		String modelID = "" + request.getSession().getAttribute( Constants.MODELID );		
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    			
-		AnimalModel am = animalModelManager.getAnimalModel( modelID );	
+		AnimalModel am = animalModelManager.get( modelID );	
 		
 		modelChar.setModelDescriptor( am.getModelDescriptor() );
 	
