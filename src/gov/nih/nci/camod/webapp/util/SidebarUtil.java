@@ -80,7 +80,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 					    jspName.equals("submitNewModel.jsp") ) {				
 					return "subEmptyMenu.jsp";				
 			} else {
-				return "";
+				return "subEmptyMenu.jsp";
 			}			
 		}
 }

@@ -28,7 +28,7 @@ public class DropdownUtil extends BaseAction {
 		// for each taxon, get it's scientificName (it's species name)
 		// for each unique species name retrieve all (if any) strain names
 		TaxonManager taxonManager = (TaxonManager) getBean( "taxonManager" );
-		List taxonList = taxonManager.getTaxons();			
+		List taxonList = taxonManager.getAll();			
 		List speciesNames = new ArrayList();
 		
 		// List containing type Strain Objects, returned from TaxonManager.getStrains()
@@ -108,7 +108,7 @@ public class DropdownUtil extends BaseAction {
 		System.out.println( "\n\n<DropdownUtil getSexDistributionsList> SexDistributionNames List" );
 		
 		SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean( "sexDistributionManager" );
-		List sexDistributionNames = sexDistributionManager.getSexDistributions();
+		List sexDistributionNames = sexDistributionManager.getAll();
 		
 		// TODO: REMOVE DUPLICATES!
 		
