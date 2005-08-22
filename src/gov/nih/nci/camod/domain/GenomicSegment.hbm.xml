@@ -32,12 +32,17 @@
         	column="clone_designator" 
         	type="string"/>    	
         
-        <!-- segmentType: this is really a one-to-one relationship with unique=true -->
-        <!-- (one-to-one unidirectional) -->
-        <many-to-one name="segmentType"
-        	class="SegmentType"
-        	column="segment_type_id"
-        	cascade="all"
-        	unique="true"/>
+        <!-- segmentTypeCollection (one-to-many unidirectional) -->
+        <bag name="segmentTypeCollection" 
+        	table="gen_seg_segment_type"
+        	inverse="false" 
+        	lazy="true" 
+        	cascade="all-delete-orphan">
+        	
+        	<key column="engineered_gene_id"/>
+        	<many-to-many column="segment_type_id"
+            	unique="true"
+            	class="SegmentType"/>
+        </bag>
 	</subclass>
 </hibernate-mapping>
