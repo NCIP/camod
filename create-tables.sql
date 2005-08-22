@@ -72,6 +72,7 @@ drop table taxon cascade constraints;
 drop table therapy cascade constraints;
 drop table therapy_publication cascade constraints;
 drop table transgene_reg_element cascade constraints;
+drop table transgene_taxon cascade constraints;
 drop table treatment cascade constraints;
 drop table tumor_code cascade constraints;
 drop table xenograft_invivo_result cascade constraints;
@@ -224,6 +225,7 @@ create table clinical_marker (
 create table comments (
    comments_id number(19,0) not null,
    remark varchar2(255),
+   state varchar2(255),
    abs_cancer_model_id number(19,0),
    availability_id number(19,0) unique,
    model_section_id number(19,0),
@@ -279,7 +281,6 @@ create table engineered_gene (
    description varchar2(255),
    es_cell_line_name varchar2(255),
    blastocyst_name varchar2(255),
-   species_id number(19,0) unique,
    primary key (engineered_gene_id)
 );
 create table engineered_gene_organ (
@@ -570,6 +571,10 @@ create table transgene_reg_element (
    engineered_gene_id number(19,0) not null,
    regulatory_element_id number(19,0) not null unique
 );
+create table transgene_taxon (
+   engineered_gene_id number(19,0) not null,
+   taxon_id number(19,0) not null unique
+);
 create table treatment (
    treatment_id number(19,0) not null,
    regimen varchar2(255),
@@ -645,7 +650,6 @@ alter table comments add constraint FKDC17DDF495BE676C foreign key (model_sectio
 alter table comments add constraint FKDC17DDF43595FF35 foreign key (party_id) references party;
 alter table comments add constraint FKDC17DDF4496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table comments add constraint FKDC17DDF4290CE83F foreign key (availability_id) references availability;
-alter table engineered_gene add constraint FK4ADB4966B3AAA503 foreign key (species_id) references taxon;
 alter table engineered_gene add constraint FK4ADB496653A0BB3C foreign key (segment_type_id) references segment_type;
 alter table engineered_gene add constraint FK4ADB4966BB186F15 foreign key (image_id) references image;
 alter table engineered_gene add constraint FK4ADB4966F9575982 foreign key (genotype_summary_id) references genotype_summary;
@@ -700,6 +704,8 @@ alter table therapy_publication add constraint FK863317568258D935 foreign key (p
 alter table therapy_publication add constraint FK86331756DB10995 foreign key (therapy_id) references therapy;
 alter table transgene_reg_element add constraint FK32E60ECFB947BD44 foreign key (regulatory_element_id) references regulatory_element;
 alter table transgene_reg_element add constraint FK32E60ECF9C4CA0C foreign key (engineered_gene_id) references engineered_gene;
+alter table transgene_taxon add constraint FKCFB6A9C8DF44C4B5 foreign key (taxon_id) references taxon;
+alter table transgene_taxon add constraint FKCFB6A9C89C4CA0C foreign key (engineered_gene_id) references engineered_gene;
 alter table treatment add constraint FKFC3978788E609262 foreign key (sex_distribution_id) references sex_distribution;
 alter table xenograft_invivo_result add constraint FKB62953C28FA16C42 foreign key (invivo_result_id) references invivo_result;
 alter table xenograft_invivo_result add constraint FKB62953C2F1AE4034 foreign key (abs_cancer_model_id) references abs_cancer_model;

@@ -22,13 +22,18 @@
         	column="location_of_integration" 
         	type="string"/>        	
         
-        <!-- species: this is really a one-to-one relationship with unique=true -->
-        <!-- (one-to-one unidirectional) -->
-        <many-to-one name="species"
-        	class="Taxon"
-        	column="species_id"
-        	cascade="all"
-        	unique="true"/>
+        <!-- taxonCollection (one-to-many unidirectional) -->
+        <bag name="taxonCollection" 
+        	table="transgene_taxon"
+        	inverse="false" 
+        	lazy="true" 
+        	cascade="all-delete-orphan">
+        	
+        	<key column="engineered_gene_id"/>
+        	<many-to-many column="taxon_id"
+            	unique="true"
+            	class="Taxon"/>
+        </bag>
         
         <!-- regulatoryElementCollection (one-to-many unidirectional) -->
         <bag name="regulatoryElementCollection" 

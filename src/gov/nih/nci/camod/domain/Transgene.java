@@ -21,20 +21,26 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Transgene extends EngineeredGene {
 	private String locationOfIntegration;
 	private List regulatoryElementCollection = new ArrayList();
-	private Taxon species;
+	private List taxonCollection = new ArrayList();	
 	
 	/**
-	 * @return Returns the species.
+	 * @return Returns the taxonCollection.
 	 */
-	public Taxon getSpecies() {
-		return species;
+	public List getTaxonCollection() {
+		return taxonCollection;
 	}
 	/**
-	 * @param species The species to set.
+	 * @param taxonCollection The taxonCollection to set.
 	 */
-	public void setSpecies(Taxon species) {
-		this.species = species;
+	public void setTaxonCollection(List taxonCollection) {
+		this.taxonCollection = taxonCollection;
 	}
+	/**
+	 * @param taxon The taxon to add.
+	 */
+	public void addTaxon(Taxon taxon) {
+		taxonCollection.add(taxon);
+	}	
 	/**
 	 * @return Returns the regulatoryElementCollection.
 	 */
@@ -74,35 +80,36 @@ public class Transgene extends EngineeredGene {
 		}
 		Transgene rhs = (Transgene) object;
 		return new EqualsBuilder().appendSuper(super.equals(object)).append(
+				this.taxonCollection, rhs.taxonCollection).append(
 				this.locationOfIntegration, rhs.locationOfIntegration).append(
 				this.regulatoryElementCollection,
-				rhs.regulatoryElementCollection).append(this.species,
-				rhs.species).isEquals();
+				rhs.regulatoryElementCollection).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-570776691, 2101951297).appendSuper(
-				super.hashCode()).append(this.locationOfIntegration).append(
-				this.regulatoryElementCollection).append(this.species)
-				.toHashCode();
+		return new HashCodeBuilder(1968525603, -819614537).appendSuper(
+				super.hashCode()).append(this.taxonCollection).append(
+				this.locationOfIntegration).append(
+				this.regulatoryElementCollection).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return new ToStringBuilder(this).append("conditionality",
-				this.getConditionality()).append("species", this.species)
-				.append("name", this.getName()).append("locationOfIntegration",
-						this.locationOfIntegration).append("id", this.getId())
-				.append("comments", this.getComments()).append("image",
-						this.getImage()).append("organCollection",
-						this.getOrganCollection()).append("cabioId",
-						this.getCabioId()).append("mutationIdentifier",
-						this.getMutationIdentifier()).append("genotypeSummary",
-						this.getGenotypeSummary()).append(
+				this.getConditionality()).append("locationOfIntegration",
+				this.locationOfIntegration).append("name", this.getName())
+				.append("id", this.getId()).append("comments",
+						this.getComments()).append("image", this.getImage())
+				.append("organCollection", this.getOrganCollection()).append(
+						"cabioId", this.getCabioId()).append("taxonCollection",
+						this.taxonCollection).append("mutationIdentifier",
+						this.getMutationIdentifier()).append(
 						"regulatoryElementCollection",
-						this.regulatoryElementCollection).toString();
+						this.regulatoryElementCollection).append(
+						"genotypeSummary", this.getGenotypeSummary())
+				.toString();
 	}
 }

@@ -29,6 +29,11 @@
         	column="remark" 
         	type="string"/>
         	
+        <!-- state -->
+        <property name="state" 
+        	column="state" 
+        	type="string"/>
+        	
         <!-- AbstractCancerModel (many-to-one) -->
         <many-to-one name="cancerModel"
         	class="AbstractCancerModel"
