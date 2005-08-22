@@ -27,39 +27,18 @@ public class UserAction extends BaseAction {
 									        HttpServletRequest request,
 									        HttpServletResponse response ) 
     	{
-    		if( checkIfLoggedIn( request ) )
-    		{
-	    		System.out.println( "<UserAction ReturnUserModels> Entering... " );
-		    	
-	    		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
-		    	List amList = animalModelManager.getAll( (String) request.getSession().getAttribute("camod.loggedon.username") );	 
-		    	
-		    	//sort list by modelDescriptor, ignoring case
-		    	Collections.sort( amList, new _sortAnimalModels() );
-		    	
-		    	request.getSession().setAttribute( Constants.USERMODELLIST, amList );
-		    	
-	    		return mapping.findForward( "usermodellist" );
-    		} else {
-    			return mapping.findForward( "loginrequired" );
-    		}
+    		System.out.println( "<UserAction ReturnUserModels> Entering... " );
+	    	
+    		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
+	    	List amList = animalModelManager.getAnimalModels( (String) request.getSession().getAttribute("camod.loggedon.username") );	 
+	    	
+	    	//sort list by modelDescriptor, ignoring case
+	    	Collections.sort( amList, new _sortAnimalModels() );
+	    	
+	    	request.getSession().setAttribute( Constants.USERMODELLIST, amList );
+	    	
+    		return mapping.findForward( "submitModels" );
     }
-     
-    //Used to check camod.loggedon.username attribute to see if a user is logged in
-    //
-	public boolean checkIfLoggedIn( HttpServletRequest request )
-	{
-		if ( request.getSession().getAttribute("camod.loggedon.username") == null ) {				
-            
-            ActionErrors errors = new ActionErrors();
-            errors.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "error.login.required" ) );
-            saveErrors( request, errors );
-                         
-			return false;
-			
-		} else 
-			return true;
-	} 
 }
 
 class _sortAnimalModels implements java.util.Comparator {

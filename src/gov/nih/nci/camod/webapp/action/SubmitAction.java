@@ -29,41 +29,21 @@ public class SubmitAction extends BaseAction{
     	
     	System.out.println( "<SubmitAction setModelConstants> modelID" + request.getParameter( "aModelID" ) );
 		
-    	if( checkIfLoggedIn( request ) )
-		{
-    		String modelID = request.getParameter( "aModelID" );
-    		
-    		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
-	    	AnimalModel am = animalModelManager.get( modelID );	  
-	    	
-	    	request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
-	    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
-	    	request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
-	    	
-	    	//Add a message to be displayed in submitModles saying you've deleted a model  
-	        //ActionMessages msg = new ActionMessages();
-	        //msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "delete.successful" ) );
-	        //saveErrors( request, msg );
-	        
-    		return mapping.findForward( "success" );
-		} else {
-			return mapping.findForward( "loginrequired" );
-		}
+		String modelID = request.getParameter( "aModelID" );
+		
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
+    	AnimalModel am = animalModelManager.getAnimalModel( modelID );	  
+    	
+    	request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
+    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
+    	request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
+    	
+    	//Add a message to be displayed in submitModles saying you've deleted a model  
+        //ActionMessages msg = new ActionMessages();
+        //msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "delete.successful" ) );
+        //saveErrors( request, msg );
+        
+		return mapping.findForward( "submitOverview" );
     }
     
-    /** Used to check camod.loggedon.username attribute to see if any user is logged in
-     * 
-     */
-	public boolean checkIfLoggedIn( HttpServletRequest request )
-	{
-		if ( request.getSession().getAttribute( Constants.CURRENTUSER) == null ) {				
-            
-            ActionMessages msg = new ActionMessages();
-            msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "error.login.required" ) );
-            saveErrors( request, msg );
-                         
-			return false;
-		} else 
-			return true;
-	}
 }
