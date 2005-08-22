@@ -115,7 +115,7 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	public String getStyleClass() {
 		return myStyleClass;
 	}
-	
+
 	/**
 	 * Sets the styleClass. This is included in the tld file.
 	 * 
@@ -134,25 +134,33 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 
 		try {
 
-			// Get the text
-			ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
-			String theText = theBundle.getString(myKey);
-
-			String theStyleClass = theBundle.getString(myStyleClass);
-
 			// Process optional attributes
 			String theHref = "";
 			if (myHref != null) {
 				theHref = "href=\"" + myHref + "\"";
 			}
 
-			myPageContext.getOut().write(
-					"<a " + theHref + " onMouseOver=\"stm(" + theText + ","
-							+ theStyleClass + ")\" onMouseOut=\"htm();\">"
-							+ myLabelName + "</a>");
+			try {
+				// Get the text
+				ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
+				String theText = theBundle.getString(myKey);
+				String theStyleClass = theBundle.getString(myStyleClass);
+
+				myPageContext.getOut().write(
+						"<a " + theHref + " onMouseOver=\"stm(" + theText + ","
+								+ theStyleClass + ")\" onMouseOut=\"htm();\">"
+								+ myLabelName + "</a>");
+			} catch (Exception e) {
+
+				// Can't get bundle. Ignore tooltip
+				myPageContext.getOut().write(
+						"<a " + theHref + " \">" + myLabelName + "</a>");
+			}
 
 		} catch (IOException e) {
 			throw new JspTagException("An IOException occurred.");
+		} catch (Exception e) {
+			throw new JspTagException("An unknown exception occurred.");
 		}
 
 		return SKIP_BODY;
