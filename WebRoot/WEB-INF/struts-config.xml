@@ -62,9 +62,6 @@
     type="gov.nih.nci.camod.webapp.form.LoginForm"/>
 
 <form-bean
-	name="personForm"
-    type="gov.nih.nci.camod.webapp.form.PersonForm"/>
-<form-bean
 	name="ModelCharacteristicsForm"
     type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
 
