@@ -123,6 +123,10 @@
            <required>true</required>
        </attribute>
        <attribute>
+           <name>text</name>
+           <required>true</required>
+       </attribute>
+       <attribute>
            <name>href</name>
            <required>false</required>
        </attribute>
@@ -131,8 +135,8 @@
            <required>false</required>
        </attribute>
        <attribute>
-           <name>text</name>
-           <required>true</required>
-       </attribute>
+         <name>styleClass</name>
+         <required>false</required>
+      </attribute>
    </tag>
 </taglib>

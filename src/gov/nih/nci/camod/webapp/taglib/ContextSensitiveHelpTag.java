@@ -27,6 +27,8 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 
 	private String myBundle = "ContextSensitiveHelp";
 
+	private String myStyleClass = "style_0";
+
 	public void setPageContext(PageContext inPageContext) {
 		myPageContext = inPageContext;
 	}
@@ -89,7 +91,7 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	 * rtexprvalue="false"
 	 */
 	public void setHref(String inHref) {
-		this.myHref = inHref;
+		myHref = inHref;
 	}
 
 	public String getBundle() {
@@ -107,7 +109,25 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	 * rtexprvalue="false"
 	 */
 	public void setBundle(String inBundle) {
-		this.myBundle = inBundle;
+		myBundle = inBundle;
+	}
+
+	public String getStyleClass() {
+		return myStyleClass;
+	}
+	
+	/**
+	 * Sets the styleClass. This is included in the tld file.
+	 * 
+	 * @jsp.attribute description="What style to use for the popup. Currently
+	 *                defaults to style_0"
+	 * 
+	 * required="false"
+	 * 
+	 * rtexprvalue="false"
+	 */
+	public void setStyleClass(String inStyleClass) {
+		myStyleClass = inStyleClass;
 	}
 
 	public int doStartTag() throws JspException {
@@ -118,6 +138,8 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 			ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
 			String theText = theBundle.getString(myKey);
 
+			String theStyleClass = theBundle.getString(myStyleClass);
+
 			// Process optional attributes
 			String theHref = "";
 			if (myHref != null) {
@@ -125,8 +147,8 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 			}
 
 			myPageContext.getOut().write(
-					"<a " + theHref + " onMouseOver=\"stm(" + theText
-							+ ",Style[0])\" onMouseOut=\"htm();\">"
+					"<a " + theHref + " onMouseOver=\"stm(" + theText + ","
+							+ theStyleClass + ")\" onMouseOut=\"htm();\">"
 							+ myLabelName + "</a>");
 
 		} catch (IOException e) {
