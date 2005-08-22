@@ -136,10 +136,10 @@ public final class AnimalModelAction extends BaseAction {
 			animalModel.setState("incomplete");			
 			
 	        AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
-			Long modelID = animalModelManager.saveAnimalModel( person, contactInfo, animalModel, taxon, phenotype, sexDistribution, availability );    				    
+			Long modelID = animalModelManager.save( person, contactInfo, animalModel, taxon, phenotype, sexDistribution, availability );    				    
 	    	
 			// Setup global constants to use for submission / editing process
-			AnimalModel am = animalModelManager.getAnimalModel( "" + modelID );	      	
+			AnimalModel am = animalModelManager.get( "" + modelID );	      	
 	    	request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
 	    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
 	    	request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
@@ -192,7 +192,7 @@ public final class AnimalModelAction extends BaseAction {
     		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
     		
     		//retrieve model by it's id
-    		AnimalModel animalModel = animalModelManager.getAnimalModel( modelID );	  
+    		AnimalModel animalModel = animalModelManager.get( modelID );	  
     		
 			//set the isToolMouse variable
 			if ( modelChar.getIsToolMouse().equals("yes") )
@@ -257,10 +257,10 @@ public final class AnimalModelAction extends BaseAction {
 	    	animalModel.setAvailability( availability );
 	    	
 			// Save the changes to the AnimalModel		
-			animalModelManager.saveAnimalModel( animalModel );    				    
+			animalModelManager.save( animalModel );    				    
 	    	
 			// Setup global constants to use for submission / editing process
-			animalModel = animalModelManager.getAnimalModel( "" + modelID );	      	
+			animalModel = animalModelManager.get( "" + modelID );	      	
 	    	request.getSession().setAttribute( Constants.MODELID, animalModel.getId().toString() );
 	    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, animalModel.getModelDescriptor() );
 	    	request.getSession().setAttribute( Constants.MODELSTATUS, animalModel.getState() );
@@ -296,10 +296,10 @@ public final class AnimalModelAction extends BaseAction {
     		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
     		
     		//retrieve model by it's id
-    		AnimalModel animalModel = animalModelManager.getAnimalModel( modelID );	  
+    		AnimalModel animalModel = animalModelManager.get( modelID );	  
 	    	
 	    	//create a new model
-	 		animalModelManager.saveAnimalModel( animalModel );
+	 		animalModelManager.save( animalModel );
 	    		        
     		return mapping.findForward( "duplicatesuccessful" );
 		} else {
@@ -325,7 +325,7 @@ public final class AnimalModelAction extends BaseAction {
 			String modelID = request.getParameter( "aModelID" );
 			
 			AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    			
-			animalModelManager.removeAnimalModel( modelID );
+			animalModelManager.remove( modelID );
 			
 	    	//Add a message to be displayed in submitModles saying you've deleted a model  
 	        ActionMessages msg = new ActionMessages();

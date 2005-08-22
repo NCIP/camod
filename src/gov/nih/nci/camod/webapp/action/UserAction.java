@@ -32,7 +32,7 @@ public class UserAction extends BaseAction {
 	    		System.out.println( "<UserAction ReturnUserModels> Entering... " );
 		    	
 	    		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
-		    	List amList = animalModelManager.getAnimalModels( (String) request.getSession().getAttribute("camod.loggedon.username") );	 
+		    	List amList = animalModelManager.getAll( (String) request.getSession().getAttribute("camod.loggedon.username") );	 
 		    	
 		    	//sort list by modelDescriptor, ignoring case
 		    	Collections.sort( amList, new _sortAnimalModels() );

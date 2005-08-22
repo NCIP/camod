@@ -34,7 +34,7 @@ public class SubmitAction extends BaseAction{
     		String modelID = request.getParameter( "aModelID" );
     		
     		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
-	    	AnimalModel am = animalModelManager.getAnimalModel( modelID );	  
+	    	AnimalModel am = animalModelManager.get( modelID );	  
 	    	
 	    	request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
 	    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
