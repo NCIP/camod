@@ -130,14 +130,11 @@ public class Constants {
     public static final String USERMODELLIST = "usermodellist";
     
     /**
-     *  Used to store list of species for drop down menus
+     *  Used to store lists for drop down menus
      */
     public static final String SPECIESDROP = "speciesdrop";
-
-    /**
-     *  Used to store list of strains for drop down menus
-     */
     public static final String STRAINDROP = "straindrop";
+    public static final String SEXDISTRIBUTIONDROP = "sexdrop";
     
     /**
      * Used to determine the current model to edit on submission/edit
@@ -157,4 +154,5 @@ public class Constants {
      * Used to store username for current user 
      */
     public static final String CURRENTUSER = "camod.loggedon.username";
+    public static final String LOGINFAILED = "loginfailed";
 }
