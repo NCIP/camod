@@ -124,7 +124,7 @@
                                                   </tr>
 
                                                   <tr>
-                                                      <td class="sidebarContent"><a href="infoWhatsNew.jsp"><IMG src="images/bullet_point.gif" border=0>&nbsp;View What's New</a></td>
+                                                      <td class="sidebarContent"><html:link action="infoWhatsNew"><IMG src="images/bullet_point.gif" border=0>&nbsp;View What's New</html:link></td>
                                                   </tr>
                                               </table>
                                           </td>
