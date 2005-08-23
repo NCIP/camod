@@ -1,5 +1,5 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -14,8 +14,8 @@
 			<td class="GreyBox" width="20%"><b>Engineered Transgene</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<ul>
-					<li><a href="viewEngineeredTransgene.jsp">ETransgene 1</a>
-					<li><a href="viewEngineeredTransgene.jsp">ETransgene 2</a>
+					<li><html:link action="viewEngineeredTransgene">ETransgene 1</html:link>
+					<li><html:link action="viewEngineeredTransgene">ETransgene 2</html:link>
 				</ul>
 			</td>			
 		</tr>
@@ -24,9 +24,9 @@
 			<td class="WhiteBox" width="20%"><b>Genomic Segment</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<ul>
-					<li><a href="viewGenomicSegment.jsp">Seg-1</a>
-					<li><a href="viewGenomicSegment.jsp">Seg-2</a>
-					<li><a href="viewGenomicSegment.jsp">Seg-3</a>
+					<li><html:link action="viewGenomicSegment">Seg-1</html:link>
+					<li><html:link action="viewGenomicSegment">Seg-2</html:link>
+					<li><html:link action="viewGenomicSegment">Seg-3</html:link>
 				</ul>
 			</td>			
 		</tr>
@@ -35,9 +35,9 @@
 			<td class="GreyBox" width="20%"><b>Targeted Modification</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<ul>
-					<li><a href="viewTargetedModification.jsp">LiL 12p</a>
-					<li><a href="viewTargetedModification.jsp">Kras</a>
-					<li><a href="viewTargetedModification.jsp">P-120</a>
+					<li><html:link action="viewTargetedModification">LiL 12p</html:link>
+					<li><html:link action="viewTargetedModification">Kras</html:link>
+					<li><html:link action="viewTargetedModification">P-120</html:link>
 				</ul>
 			</td>			
 		</tr>
@@ -46,7 +46,7 @@
 			<td class="WhiteBox" width="20%"><b>Induced Mutation</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<ul>
-					<li><a href="viewInducedMutation.jsp">Agent X</a>
+					<li><html:link action="viewInducedMutation">Agent X</html:link>
 				</ul>
 			</td>			
 		</tr>
@@ -55,7 +55,7 @@
 			<td class="GreyBox" width="20%"><b>Spontaneous Mutation</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<ul>
-					<li><a href="viewSpontaneousMutation.jsp">Mutation X</a>
+					<li><html:link action="viewSpontaneousMutation">Mutation X</html:link>
 				</ul>
 			</td>			
 		</tr>			
@@ -70,4 +70,4 @@
 </TABLE>
 
 
-<%@ include file="footer.jsp" %>
+<%@ include file="/jsp/footer.jsp" %>

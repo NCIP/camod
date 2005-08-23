@@ -1,7 +1,7 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 
-<FORM name="input" action="searchResults.jsp" method="get">
+<FORM name="input" action="searchResults.do" method="get">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -406,5 +406,4 @@
 	</td></tr></TABLE>
 </td></tr></TABLE>	
 
-<%@ include file="footer.jsp" %>
-
+<%@ include file="/jsp/footer.jsp" %>

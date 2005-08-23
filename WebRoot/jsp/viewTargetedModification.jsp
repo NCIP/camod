@@ -1,5 +1,5 @@
-<%@ include file="header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
     <tr><td>
@@ -104,6 +104,7 @@
                     <td class="resultsBoxWhite" align="left" valign="top"><b>Libraries and Tissues (from EST data)</b></td>
                     <td class="resultsBoxWhiteEnd"><br>
                         <ul>
+                        <!--Remove direct reference to jsp when implemented,  if applicable -->
                             <li>This gene is found in these <a target="_blank" a="" href="caBIO/LibraryListContainer.jsp?&amp;newsearch=true&amp;geneId=53999&amp;clusterId=4733&amp;taxon=Mm">libraries</a>
                             from the following tissue types: 
                             <blockquote>mammary gland,soft tissue,synovium,uncharacterized tissue</blockquote></li>
@@ -161,12 +162,4 @@
             </td></tr></TABLE>
  </td></tr></TABLE>
 
-<%@ include file="footer.jsp" %>
-
-
-
-
-
-
-
-
+<%@ include file="/jsp/footer.jsp" %>

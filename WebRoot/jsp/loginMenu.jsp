@@ -14,7 +14,7 @@
 
 		<!-- link 1 begins -->
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="login">HOME</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="login">&nbsp;&nbsp;HOME</html:link>&nbsp;&nbsp;
 		</TD>
 		<!-- link 1 ends -->
 
@@ -23,7 +23,7 @@
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="register">REGISTER</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="register">&nbsp;&nbsp;REGISTER</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -31,7 +31,7 @@
 		</TD>
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="searchSimple">SEARCH MODELS</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="searchSimple">&nbsp;&nbsp;SEARCH MODELS</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -39,7 +39,7 @@
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="/UserAction.do?method=ReturnUserModels">SUBMIT MODELS</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="/UserAction.do?method=ReturnUserModels">&nbsp;&nbsp;SUBMIT MODELS</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -47,7 +47,7 @@
 		</TD>		
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="adminRoles">ADMIN</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="adminRoles">&nbsp;&nbsp;ADMIN</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -55,7 +55,7 @@
 		</TD>		
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="help">HELP</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="help">&nbsp;&nbsp;HELP</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>

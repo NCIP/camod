@@ -1,3 +1,5 @@
+<%@ include file="/common/taglibs.jsp"%>
+
 <TR><TD class=mainMenu width="100%" height=20>
 
 <!-- Main menu begins -->
@@ -7,7 +9,7 @@
 
 		<!-- link 1 begins -->
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="login.jsp"><center>HOME</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="login"><center>HOME</html:link></center>&nbsp;&nbsp;
 		</TD>
 		<!-- link 1 ends -->
 
@@ -17,7 +19,7 @@
 
 		<!-- link 2 begins -->
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewModelCharacteristics.jsp"><center>MODEL<br>CHARACTERISTICS</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewModelCharacteristics"><center>MODEL<br>CHARACTERISTICS</html:link></center>&nbsp;&nbsp;
 		</TD>
 		<!-- link 2 ends -->
 		
@@ -26,7 +28,7 @@
 		</TD>
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewGeneticDescription.jsp"><center>GENETIC<br>DESCRIPTION</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewGeneticDescription"><center>GENETIC<br>DESCRIPTION</html:link></center>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -34,7 +36,7 @@
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewCarcinogenicInterventions.jsp"><center>CARCINOGENIC<br>INTERVENTIONS</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewCarcinogenicInterventions"><center>CARCINOGENIC<br>INTERVENTIONS</html:link></center>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -42,7 +44,7 @@
 		</TD>
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewPublications.jsp"><center>PUBLICATIONS</center></a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewPublications"><center>PUBLICATIONS</center></html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -50,7 +52,7 @@
 		</TD>		
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewHistopathology.jsp"><center>HISTOPATHOLOGY</center></a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewHistopathology"><center>HISTOPATHOLOGY</center></html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -58,7 +60,7 @@
 		</TD>		
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewTherapeuticApproaches.jsp"><center>THERAPEUTIC<br>APPROACHES</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewTherapeuticApproaches"><center>THERAPEUTIC<br>APPROACHES</html:link></center>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -66,7 +68,7 @@
 		</TD>			
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewCellLines.jsp"><center>CELL<br>LINES</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewCellLines"><center>CELL<br>LINES</html:link></center>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -74,7 +76,7 @@
 		</TD>	
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewImages.jsp"><center>IMAGES</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewImages"><center>IMAGES</html:link></center>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
@@ -83,7 +85,7 @@
 
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="viewMicroarrays.jsp"><center>MICROARRAYS</a></center>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="viewMicroarrays"><center>MICROARRAYS</html:link></center>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
