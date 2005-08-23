@@ -61,6 +61,7 @@
 			<zipfileset dir="${webapp.dir}/images" prefix="images" />
 			<zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
 			<zipfileset dir="${webapp.dir}/styles" prefix="styles" />
+			<zipfileset dir="${webapp.dir}/config" prefix="config" />
 			<webinf dir="${webapp.dir}/WEB-INF"/>
 			<classes dir="${build.classes.dir}" />
     	</war>
