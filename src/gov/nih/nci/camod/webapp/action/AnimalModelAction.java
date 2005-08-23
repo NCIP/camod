@@ -1,6 +1,7 @@
 package gov.nih.nci.camod.webapp.action;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
@@ -42,7 +43,7 @@ public final class AnimalModelAction extends BaseAction {
 	/** Called from submitNewModel.jsp
 	 * 
 	 */ 
-    public ActionForward saveNewModel( ActionMapping mapping, 
+    public ActionForward save( ActionMapping mapping, 
     								   ActionForm form,
 							           HttpServletRequest request,
 							           HttpServletResponse response)
@@ -155,7 +156,7 @@ public final class AnimalModelAction extends BaseAction {
 	/** 
 	 *  Used to update a animalModel
 	 */ 
-    public ActionForward editExistingModel( ActionMapping mapping, 
+    public ActionForward edit( ActionMapping mapping, 
     									    ActionForm form,
 							          	    HttpServletRequest request,
 							          	    HttpServletResponse response)
@@ -272,7 +273,7 @@ public final class AnimalModelAction extends BaseAction {
 	 *  Called from subSubmitMenu.jsp
 	 * 
 	 */ 
-    public ActionForward duplicateModel( 	ActionMapping mapping, 
+    public ActionForward duplicate( 	ActionMapping mapping, 
 										    ActionForm form,
 							          	    HttpServletRequest request,
 							          	    HttpServletResponse response)
@@ -290,13 +291,13 @@ public final class AnimalModelAction extends BaseAction {
     	//create a new model
  		animalModelManager.save( animalModel );
     		        
-		return mapping.findForward( "submitModels" );
+		return mapping.findForward( "duplicatesuccessful" );
     }
     
 	/** Delete a AnimalModel based on it's id 
 	 * 
 	 */
-    public ActionForward deleteModel( ActionMapping mapping, 
+    public ActionForward delete( ActionMapping mapping, 
 									  ActionForm form,
 							          HttpServletRequest request,
 							          HttpServletResponse response)
@@ -315,9 +316,44 @@ public final class AnimalModelAction extends BaseAction {
         msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "delete.successful" ) );
         saveErrors( request, msg );
 		
-		return mapping.findForward( "submitModels" );
+		return mapping.findForward( "modeldeleted" );
 
     }
    
+    public ActionForward returnUserModels(  ActionMapping mapping, 
+											ActionForm form,
+									        HttpServletRequest request,
+									        HttpServletResponse response ) 
+	{
+		System.out.println( "<UserAction ReturnUserModels> Entering... " );
+		
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
+		List amList = animalModelManager.getAll( (String) request.getSession().getAttribute("camod.loggedon.username") );	 
+		
+		//sort list by modelDescriptor, ignoring case
+		Collections.sort( amList, new _sortAnimalModels() );
+		
+		request.getSession().setAttribute( Constants.USERMODELLIST, amList );
+		
+		return mapping.findForward( "submitModels" );
+	}
+}
+
+class _sortAnimalModels implements java.util.Comparator {
+
+	public void SortAnimalModels() {}
 	
+	public int compare( Object oo1, Object oo2 ) 
+	{
+		AnimalModel o1 = (AnimalModel) oo1;    	
+		AnimalModel o2 = (AnimalModel) oo2;
+		
+		if ( o1.getModelDescriptor().compareToIgnoreCase( o2.getModelDescriptor() ) > 0 )
+			return 1;
+		else
+			if ( o1.getModelDescriptor().compareToIgnoreCase( o2.getModelDescriptor() ) < 0 )
+				return -1;
+			else
+				return 0;
+	}   
 }

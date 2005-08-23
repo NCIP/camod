@@ -15,23 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
-public class FormAction extends BaseAction {
-		
+public class AnimalModelPopulateAction extends BaseAction {
+
 	/** 
 	 * Pre-populate all field values in the form ModelCharacteristicsForm 
 	 *  Used by submitModelCharacteristics.jsp
 	 * 
 	 */ 
-	public ActionForward prepopulateModelCharacteristics(      ActionMapping mapping, 
-															   ActionForm form,
-													           HttpServletRequest request,
-													           HttpServletResponse response)
+	public ActionForward populate( ActionMapping mapping, 
+								   ActionForm form,
+						           HttpServletRequest request,
+						           HttpServletResponse response)
 	  throws Exception {	
 		  
-		System.out.println( "<FormAction prepopulateModelCharacteristics> Entering... " );
+		System.out.println( "<AnimalModelPopulateAction populate> Entering... " );
 
 		// Create a form to edit
 		ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;
@@ -83,4 +81,5 @@ public class FormAction extends BaseAction {
 		return mapping.findForward("submitModelCharacteristics");
 
 	}
+	
 }
