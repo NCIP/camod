@@ -917,7 +917,7 @@
 			validate="false" />
 
      <!-- Called from login.jsp ( loginForm ) -->
-    <action path="/loginAction"
+    <action path="/LoginAction"
 	        type="gov.nih.nci.camod.webapp.action.LoginAction"
 	        name="loginForm"
 	        scope="request"
@@ -927,7 +927,7 @@
 	        input="/login">    
     <forward
             name="success"
-            path="/UserAction.do?method=ReturnUserModels"></forward>                              
+            path="/ReturnUserModels.do?method=returnUserModels"></forward>                              
     </action>
     
     <action path="/LogoutAction"
@@ -946,26 +946,41 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="submitNewModel">   	
-    <forward 
-    		name="duplicatesuccessful"
-    		path="/UserAction.do?method=ReturnUserModels"></forward>	    
-    <forward 
-    		name="modeldeleted"
-    		path="/UserAction.do?method=ReturnUserModels"></forward>			
     </action>
     
+    <action path="/ReturnUserModels"
+            type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
+            scope="request"
+            parameter="method"         
+            validate="false" >                           
+    </action>
+   
+    <action path="/AnimalModelPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AnimalModelPopulateAction"
+    		name="ModelCharacteristicsForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+      
     <action path="/DeleteAnimalModelAction"
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
             scope="request"
             parameter="method"         
-            validate="false" >                           
-   </action>
+            validate="false" >  
+    <forward 
+    		name="modeldeleted"
+    		path="/ReturnUserModels.do?method=returnUserModels"></forward>	                         
+    </action>
    
-   <action path="/DuplicateAnimalModelAction"
+    <action path="/DuplicateAnimalModelAction"
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
             scope="request"
             parameter="method"         
-            validate="false" >                           
+            validate="false" >  
+    <forward 
+    		name="duplicatesuccessful"
+    		path="/ReturnUserModels.do?method=returnUserModels"></forward>                                     
    </action>
     
     <action path="/UserAction"
@@ -984,14 +999,6 @@
    	        unknown="false"
 	        input="/submitModels" 	     
 	        validate="false" >    		
-    </action>
-    
-    <action path="/FormAction"
-    		type="gov.nih.nci.camod.webapp.action.FormAction"
-    		name="ModelCharacteristicsForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
     </action>
         
   </action-mappings>
