@@ -3,7 +3,6 @@
 <%@ include file="/common/taglibs.jsp"%>
 
 <%@ page buffer="32kb"%>
-
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>

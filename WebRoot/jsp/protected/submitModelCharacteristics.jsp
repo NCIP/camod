@@ -56,7 +56,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Model Descriptor</label></td>
 			<td class="formField">			
-					<html:form action="AnimalModelAction.do?method=edit" focus="modelDescriptor">
+					<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor">
 					<html:text styleClass="formFieldSized" property="modelDescriptor" name="formdata" size="30"/>
 			</td>
 		</tr>
