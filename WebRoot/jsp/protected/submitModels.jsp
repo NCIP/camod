@@ -76,7 +76,7 @@
 	         <TR>
 	             <td class="resultsBoxGrey" width="10%">
 	             	<center>
-	             		<html:link action="DuplicateAnimalModelAction?method=duplicateModel" paramId="aModelID" paramName="aModel" paramProperty="id" onclick="return confirm('Are you sure you want to duplicate this record?');"><IMG src="images/dupRecord.gif" border=0></html:link>
+	             		<html:link action="DuplicateAnimalModelAction?method=duplicate" paramId="aModelID" paramName="aModel" paramProperty="id" onclick="return confirm('Are you sure you want to duplicate this record?');"><IMG src="images/dupRecord.gif" border=0></html:link>
 	             	</center>
 	             </td>
 	             <td class="resultsBoxGrey" width="40%">
@@ -88,7 +88,7 @@
 	             <td class="resultsBoxGreyEnd" width="10%">
 	                <center>
 		                <bean:parameter id="modID" name="aModel" value="id"/>		               
-	                	<html:link action="DeleteAnimalModelAction?method=deleteModel" paramId="aModelID" paramName="aModel" paramProperty="id" onclick="return confirm('Are you sure you want to delete this record?');"><IMG src="images/remove.gif" border=0></html:link>	                	
+	                	<html:link action="DeleteAnimalModelAction?method=delete" paramId="aModelID" paramName="aModel" paramProperty="id" onclick="return confirm('Are you sure you want to delete this record?');"><IMG src="images/remove.gif" border=0></html:link>	                	
 	                </center>
 	             </td>                     
 	         </TR>
