@@ -290,7 +290,7 @@ public final class AnimalModelAction extends BaseAction {
     	//create a new model
  		animalModelManager.save( animalModel );
     		        
-		return mapping.findForward( "duplicatesuccessful" );
+		return mapping.findForward( "submitModels" );
     }
     
 	/** Delete a AnimalModel based on it's id 
@@ -315,7 +315,7 @@ public final class AnimalModelAction extends BaseAction {
         msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "delete.successful" ) );
         saveErrors( request, msg );
 		
-		return mapping.findForward( "modeldeleted" );
+		return mapping.findForward( "submitModels" );
 
     }
    

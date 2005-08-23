@@ -954,6 +954,20 @@
     		path="/UserAction.do?method=ReturnUserModels"></forward>			
     </action>
     
+    <action path="/DeleteAnimalModelAction"
+            type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
+            scope="request"
+            parameter="method"         
+            validate="false" >                           
+   </action>
+   
+   <action path="/DuplicateAnimalModelAction"
+            type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
+            scope="request"
+            parameter="method"         
+            validate="false" >                           
+   </action>
+    
     <action path="/UserAction"
 	        type="gov.nih.nci.camod.webapp.action.UserAction"
 	        scope="request"
