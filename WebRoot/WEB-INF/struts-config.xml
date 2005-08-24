@@ -916,6 +916,8 @@
 			unknown="false"
 			validate="false" />
 
+
+
      <!-- Called from login.jsp ( loginForm ) -->
     <action path="/LoginAction"
 	        type="gov.nih.nci.camod.webapp.action.LoginAction"
@@ -948,13 +950,6 @@
 	        input="submitNewModel">   	
     </action>
     
-    <action path="/ReturnUserModels"
-            type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
-            scope="request"
-            parameter="method"         
-            validate="false" >                           
-    </action>
-   
     <action path="/AnimalModelPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AnimalModelPopulateAction"
     		name="ModelCharacteristicsForm"    		
@@ -962,6 +957,23 @@
             parameter="method"
 			validate="false">		
     </action>
+    
+    <!-- changed input so the page returns to correct jsp on failed validation -->
+    <action path="/EditAnimalModel"
+	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
+	        name="ModelCharacteristicsForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="submitModelCharacteristics">   	
+    </action>
+        
+    <action path="/ReturnUserModels"
+            type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
+            scope="request"
+            parameter="method"         
+            validate="false" >                           
+    </action>  
       
     <action path="/DeleteAnimalModelAction"
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
