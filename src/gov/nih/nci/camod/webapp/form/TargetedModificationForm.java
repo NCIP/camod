@@ -26,10 +26,9 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 	 */
 	public TargetedModificationForm() {}
 	
-	// id is of type String since it comes from the presentation layer
-	protected String id;
 	protected String name;
 	protected String modificationType;
+	protected String otherModificationType;
 	protected String geneId;
 	protected String esCellLineName;
 	protected String blastocystName;
@@ -40,18 +39,6 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 	protected String fileServerLocation;
 	protected String title;
 	
-	/**
-	 * @return Returns the id.
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
 	/**
 	 * @return Returns the name.
 	 */
@@ -76,6 +63,18 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 	public void setModificationType(String modificationType) {
 		this.modificationType = modificationType;
 	}
+	/**
+	 * @return Returns the otherModificationType.
+	 */
+	public String getOtherModificationType() {
+		return otherModificationType;
+	}
+	/**
+	 * @param otherModificationType The otherModificationType to set.
+	 */
+	public void setOtherModificationType(String otherModificationType) {
+		this.otherModificationType = otherModificationType;
+	}	
 	/**
 	 * @return Returns the geneId.
 	 */
@@ -159,13 +158,6 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 	 */
 	public void setNumberMGI(String numberMGI) {
 		this.numberMGI = numberMGI;
-	}	
-	
-	
-	
+	}
 
-	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
 }

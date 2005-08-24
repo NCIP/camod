@@ -26,23 +26,109 @@ public class InducedMutationForm extends BaseForm implements Serializable {
 	 */
 	public InducedMutationForm() {}
 	
-	// id is of type String since it comes from the presentation layer
-	protected String id;
+	protected String type;
+	protected String otherType;
+	protected String CASNumber;
+	protected String geneId;
+	protected String name;
+	protected String description;
+	protected String observation;
+	protected String numberMGI;
 	
 	/**
-	 * @return Returns the id.
+	 * @return Returns the type.
 	 */
-	public String getId() {
-		return id;
+	public String getType() {
+		return type;
 	}
 	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
+	 * @param type The type to set.
+	 */	
+	public void setType(String type) {
+		this.type = type;
 	}
-	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
+	/**
+	 * @return Returns the otherType.
+	 */
+	public String getOtherType() {
+		return otherType;
+	}
+	/**
+	 * @param otherType The otherType to set.
+	 */	
+	public void setOtherType(String otherType) {
+		this.otherType = otherType;
+	}	
+	/**
+	 * @return Returns the CASNumber.
+	 */
+	public String getCASNumber() {
+		return CASNumber;
+	}
+	/**
+	 * @param CASNumber The CASNumber to set.
+	 */	
+	public void setCASNumber(String CASNumber) {
+		this.CASNumber = CASNumber;
+	}	
+	/**
+	 * @return Returns the geneId.
+	 */
+	public String getGeneId() {
+		return geneId;
+	}
+	/**
+	 * @param geneId The geneId to set.
+	 */
+	public void setGeneId(String geneId) {
+		this.geneId = geneId;
+	}	
+	/**
+	 * @return Returns the name.
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name The name to set.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}	
+	/**
+	 * @return Returns the description.
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description The description to set.
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}	
+	/**
+	 * @return Returns the observation.
+	 */
+	public String getObservation() {
+		return observation;
+	}
+	/**
+	 * @param observation The observation to set.
+	 */
+	public void setObservation(String observation) {
+		this.observation = observation;
+	}	
+	/**
+	 * @return Returns the numberMGI.
+	 */
+	public String getNumberMGI() {
+		return numberMGI;
+	}
+	/**
+	 * @param numberMGI The numberMGI to set.
+	 */
+	public void setNumberMGI(String numberMGI) {
+		this.numberMGI = numberMGI;
+	}	
 }

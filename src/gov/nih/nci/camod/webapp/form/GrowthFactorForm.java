@@ -7,6 +7,8 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * @author pandyas
@@ -14,7 +16,7 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactorForm extends BaseForm implements Serializable {
+public class GrowthFactorForm extends BaseForm implements Serializable {
 	/**
 	 * Default empty constructor
 	 * @author pandyas
@@ -22,12 +24,11 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
-	public EnvironmentalFactorForm() {}
+	public GrowthFactorForm() {}
 	
 	protected String name;
-	protected String otherName;	
+	protected String otherName;		
 	protected String dosage;
-	protected String administrativeRoute;
 	protected String regimen;
 	protected String ageAtTreatment;
 	protected String type;
@@ -68,18 +69,6 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	public void setDosage(String dosage) {
 		this.dosage = dosage;
 	}
-	/**
-	 * @return Returns the administrativeRoute.
-	 */
-	public String getAdministrativeRoute() {
-		return administrativeRoute;
-	}
-	/**
-	 * @param administrativeRoute The administrativeRoute to set.
-	 */
-	public void setAdministrativeRoute(String administrativeRoute) {
-		this.administrativeRoute = administrativeRoute;
-	}	
 	/**
 	 * @return Returns the regimen.
 	 */

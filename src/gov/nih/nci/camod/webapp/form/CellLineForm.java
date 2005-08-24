@@ -26,48 +26,12 @@ public class CellLineForm extends BaseForm implements Serializable {
 	 */
 	public CellLineForm() {}
 	
-	// Id is of type String since it comes from the presentation layer
-	protected String id;
-	protected String components;
-	protected String experiment;
 	protected String name;
+	protected String otherName;
+	protected String experiment;
 	protected String results;
-	/**
-	 * @return Returns the components.
-	 */
-	public String getComponents() {
-		return components;
-	}
-	/**
-	 * @param components The components to set.
-	 */
-	public void setComponents(String components) {
-		this.components = components;
-	}
-	/**
-	 * @return Returns the experiment.
-	 */
-	public String getExperiment() {
-		return experiment;
-	}
-	/**
-	 * @param experiment The experiment to set.
-	 */
-	public void setExperiment(String experiment) {
-		this.experiment = experiment;
-	}
-	/**
-	 * @return Returns the id.
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+	protected String comments;
+
 	/**
 	 * @return Returns the name.
 	 */
@@ -81,6 +45,30 @@ public class CellLineForm extends BaseForm implements Serializable {
 		this.name = name;
 	}
 	/**
+	 * @return Returns the otherName.
+	 */
+	public String getOtherName() {
+		return otherName;
+	}
+	/**
+	 * @param otherName The otherName to set.
+	 */
+	public void setOtherName(String otherName) {
+		this.otherName = otherName;
+	}	
+	/**
+	 * @return Returns the experiment.
+	 */
+	public String getExperiment() {
+		return experiment;
+	}
+	/**
+	 * @param experiment The experiment to set.
+	 */
+	public void setExperiment(String experiment) {
+		this.experiment = experiment;
+	}
+	/**
 	 * @return Returns the results.
 	 */
 	public String getResults() {
@@ -92,8 +80,16 @@ public class CellLineForm extends BaseForm implements Serializable {
 	public void setResults(String results) {
 		this.results = results;
 	}
-	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
+	/**
+	 * @return Returns the comments.
+	 */
+	public String getComments() {
+		return comments;
+	}
+	/**
+	 * @param comments The comments to set.
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 }

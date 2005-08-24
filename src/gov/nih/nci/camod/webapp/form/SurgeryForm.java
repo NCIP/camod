@@ -8,13 +8,14 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+
 /**
  * @author pandyas
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactorForm extends BaseForm implements Serializable {
+	public class SurgeryForm extends BaseForm implements Serializable {
 	/**
 	 * Default empty constructor
 	 * @author pandyas
@@ -22,16 +23,14 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
-	public EnvironmentalFactorForm() {}
-	
+	public SurgeryForm() {}
+
 	protected String name;
 	protected String otherName;	
-	protected String dosage;
-	protected String administrativeRoute;
 	protected String regimen;
 	protected String ageAtTreatment;
 	protected String type;
-	
+
 	/**
 	 * @return Returns the name.
 	 */
@@ -57,30 +56,6 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 		this.otherName = otherName;
 	}	
 	/**
-	 * @return Returns the dosage.
-	 */
-	public String getDosage() {
-		return dosage;
-	}
-	/**
-	 * @param dosage The dosage to set.
-	 */
-	public void setDosage(String dosage) {
-		this.dosage = dosage;
-	}
-	/**
-	 * @return Returns the administrativeRoute.
-	 */
-	public String getAdministrativeRoute() {
-		return administrativeRoute;
-	}
-	/**
-	 * @param administrativeRoute The administrativeRoute to set.
-	 */
-	public void setAdministrativeRoute(String administrativeRoute) {
-		this.administrativeRoute = administrativeRoute;
-	}	
-	/**
 	 * @return Returns the regimen.
 	 */
 	public String getRegimen() {
@@ -91,7 +66,7 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 */
 	public void setRegimen(String regimen) {
 		this.regimen = regimen;
-	}	
+	}
 	/**
 	 * @return Returns the ageAtTreatment.
 	 */
@@ -103,7 +78,7 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 */
 	public void setAgeAtTreatment(String ageAtTreatment) {
 		this.ageAtTreatment = ageAtTreatment;
-	}	
+	}
 	/**
 	 * @return Returns the type.
 	 */
@@ -117,3 +92,4 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 		this.type = type;
 	}
 }
+

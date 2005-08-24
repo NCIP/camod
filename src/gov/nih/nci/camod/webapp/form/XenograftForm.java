@@ -26,65 +26,21 @@ public class XenograftForm extends BaseForm implements Serializable {
 	 */
 	public XenograftForm() {}
 	
-	// id is of type String since it comes from the presentation layer. This
-	// form does not include properties from the parent class of Xenograft,
+	// This form does not include properties from the parent class of Xenograft,
 	// AbstractCancerModel
-	protected String id;
-	protected String administrativeSite;
-	protected String geneticManipulation;
-	protected String type;
-	protected String modificationDescription;
-	protected String parentalCellLineName;
 	protected String name;
+	protected String ATTCNumber;
+	protected String parentalCellLineName;
+	protected String ageAtTreatment;
+	protected String cellAmount;
+	protected String harvestDate;
+	protected String modificationDescription;	
+	protected String geneticManipulation;	
+	protected String administrativeSite;
+	protected String graftType;
+	protected String otherGraftType;
+
 	
-	/**
-	 * @return Returns the administrativeSite.
-	 */
-	public String getAdministrativeSite() {
-		return administrativeSite;
-	}
-	/**
-	 * @param administrativeSite The administrativeSite to set.
-	 */
-	public void setAdministrativeSite(String administrativeSite) {
-		this.administrativeSite = administrativeSite;
-	}
-	/**
-	 * @return Returns the geneticManipulation.
-	 */
-	public String getGeneticManipulation() {
-		return geneticManipulation;
-	}
-	/**
-	 * @param geneticManipulation The geneticManipulation to set.
-	 */
-	public void setGeneticManipulation(String geneticManipulation) {
-		this.geneticManipulation = geneticManipulation;
-	}
-	/**
-	 * @return Returns the id.
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-	/**
-	 * @return Returns the modificationDescription.
-	 */
-	public String getModificationDescription() {
-		return modificationDescription;
-	}
-	/**
-	 * @param modificationDescription The modificationDescription to set.
-	 */
-	public void setModificationDescription(String modificationDescription) {
-		this.modificationDescription = modificationDescription;
-	}
 	/**
 	 * @return Returns the name.
 	 */
@@ -98,6 +54,18 @@ public class XenograftForm extends BaseForm implements Serializable {
 		this.name = name;
 	}
 	/**
+	 * @return Returns the ATTCNumber.
+	 */
+	public String getATTCNumber() {
+		return ATTCNumber;
+	}
+	/**
+	 * @param ATTCNumber The ATTCNumber to set.
+	 */
+	public void setATTCNumber(String ATTCNumber) {
+		this.ATTCNumber = ATTCNumber;
+	}	
+	/**
 	 * @return Returns the parentalCellLineName.
 	 */
 	public String getParentalCellLineName() {
@@ -110,19 +78,99 @@ public class XenograftForm extends BaseForm implements Serializable {
 		this.parentalCellLineName = parentalCellLineName;
 	}
 	/**
-	 * @return Returns the type.
+	 * @return Returns the ageAtTreatment.
 	 */
-	public String getType() {
-		return type;
+	public String getAgeAtTreatment() {
+		return ageAtTreatment;
 	}
 	/**
-	 * @param type The type to set.
+	 * @param ageAtTreatment The ageAtTreatment to set.
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setAgeAtTreatment(String ageAtTreatment) {
+		this.ageAtTreatment = ageAtTreatment;
 	}
-	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
+	/**
+	 * @return Returns the cellAmount.
+	 */
+	public String getCellAmount() {
+		return cellAmount;
+	}
+	/**
+	 * @param cellAmount The cellAmount to set.
+	 */
+	public void setCellAmount(String cellAmount) {
+		this.cellAmount = cellAmount;
+	}	
+	/**
+	 * @return Returns the harvestDate.
+	 */
+	public String getHarvestDate() {
+		return harvestDate;
+	}
+	/**
+	 * @param harvestDate The harvestDate to set.
+	 */
+	public void setHarvestDate(String harvestDate) {
+		this.harvestDate = harvestDate;
+	}	
+	/**
+	 * @return Returns the modificationDescription.
+	 */
+	public String getModificationDescription() {
+		return modificationDescription;
+	}
+	/**
+	 * @param modificationDescription The modificationDescription to set.
+	 */
+	public void setModificationDescription(String modificationDescription) {
+		this.modificationDescription = modificationDescription;
+	}	
+	/**
+	 * @return Returns the geneticManipulation.
+	 */
+	public String getGeneticManipulation() {
+		return geneticManipulation;
+	}
+	/**
+	 * @param geneticManipulation The geneticManipulation to set.
+	 */
+	public void setGeneticManipulation(String geneticManipulation) {
+		this.geneticManipulation = geneticManipulation;
+	}	
+	/**
+	 * @return Returns the administrativeSite.
+	 */
+	public String getAdministrativeSite() {
+		return administrativeSite;
+	}
+	/**
+	 * @param administrativeSite The administrativeSite to set.
+	 */
+	public void setAdministrativeSite(String administrativeSite) {
+		this.administrativeSite = administrativeSite;
+	}
+	/**
+	 * @return Returns the graftType.
+	 */
+	public String getGraftType() {
+		return graftType;
+	}
+	/**
+	 * @param graftType The graftType to set.
+	 */
+	public void setGraftType(String graftType) {
+		this.graftType = graftType;
+	}
+	/**
+	 * @return Returns the otherGraftType.
+	 */
+	public String getOtherGraftType() {
+		return otherGraftType;
+	}
+	/**
+	 * @param otherGraftType The otherGraftType to set.
+	 */
+	public void setOtherGraftType(String otherGraftType) {
+		this.otherGraftType = otherGraftType;
+	}	
 }

@@ -1,5 +1,5 @@
 /*
- * Created on Aug 19, 2005
+ * Created on Aug 23, 2005
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
@@ -14,7 +14,8 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactorForm extends BaseForm implements Serializable {
+
+public class ChemicalDrugForm extends BaseForm implements Serializable {
 	/**
 	 * Default empty constructor
 	 * @author pandyas
@@ -22,12 +23,15 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
-	public EnvironmentalFactorForm() {}
+	public ChemicalDrugForm() {}
 	
 	protected String name;
-	protected String otherName;	
+	protected String otherName;
 	protected String dosage;
+	protected String NSCNumber;
+	protected String CASNumber;
 	protected String administrativeRoute;
+	protected String otherAdministrativeRoute;
 	protected String regimen;
 	protected String ageAtTreatment;
 	protected String type;
@@ -69,6 +73,30 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 		this.dosage = dosage;
 	}
 	/**
+	 * @return Returns the NSCNumber.
+	 */
+	public String getNSCNumber() {
+		return NSCNumber;
+	}
+	/**
+	 * @param NSCNumber The NSCNumber to set.
+	 */	
+	public void setNSCNumber(String NSCNumber) {
+		this.NSCNumber = NSCNumber;
+	}	
+	/**
+	 * @return Returns the CASNumber.
+	 */
+	public String getCASNumber() {
+		return CASNumber;
+	}
+	/**
+	 * @param CASNumber The CASNumber to set.
+	 */	
+	public void setCASNumber(String CASNumber) {
+		this.CASNumber = CASNumber;
+	}	
+	/**
 	 * @return Returns the administrativeRoute.
 	 */
 	public String getAdministrativeRoute() {
@@ -79,6 +107,18 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 */
 	public void setAdministrativeRoute(String administrativeRoute) {
 		this.administrativeRoute = administrativeRoute;
+	}
+	/**
+	 * @return Returns the otherAdministrativeRoute.
+	 */
+	public String getOtherAdministrativeRoute() {
+		return otherAdministrativeRoute;
+	}
+	/**
+	 * @param otherAdministrativeRoute The otherAdministrativeRoute to set.
+	 */
+	public void setOtherAdministrativeRoute(String otherAdministrativeRoute) {
+		this.otherAdministrativeRoute = otherAdministrativeRoute;
 	}	
 	/**
 	 * @return Returns the regimen.
@@ -116,4 +156,5 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
+
 }

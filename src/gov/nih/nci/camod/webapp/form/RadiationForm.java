@@ -14,7 +14,7 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactorForm extends BaseForm implements Serializable {
+	public class RadiationForm extends BaseForm implements Serializable {
 	/**
 	 * Default empty constructor
 	 * @author pandyas
@@ -22,12 +22,13 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
-	public EnvironmentalFactorForm() {}
+	public RadiationForm() {}
 	
 	protected String name;
 	protected String otherName;	
 	protected String dosage;
 	protected String administrativeRoute;
+	protected String otherAdministrativeRoute;	
 	protected String regimen;
 	protected String ageAtTreatment;
 	protected String type;
@@ -79,6 +80,18 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 */
 	public void setAdministrativeRoute(String administrativeRoute) {
 		this.administrativeRoute = administrativeRoute;
+	}
+	/**
+	 * @return Returns the otherAdministrativeRoute.
+	 */
+	public String getOtherAdministrativeRoute() {
+		return otherAdministrativeRoute;
+	}
+	/**
+	 * @param otherAdministrativeRoute The otherAdministrativeRoute to set.
+	 */
+	public void setOtherAdministrativeRoute(String otherAdministrativeRoute) {
+		this.otherAdministrativeRoute = otherAdministrativeRoute;
 	}	
 	/**
 	 * @return Returns the regimen.

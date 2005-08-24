@@ -26,12 +26,36 @@ public class ImageForm extends BaseForm implements Serializable {
 	 */
 	public ImageForm() {}
 	
-	// id is of type String since it comes from the presentation layer
-	protected String id;
+	protected String fileServerLocation;
 	protected String title;
 	protected String description;
 	protected String staining;
-	
+	protected String otherStaining;
+
+	/**
+	 * @return Returns the fileServerLocation.
+	 */
+	public String getFileServerLocation() {
+		return fileServerLocation;
+	}
+	/**
+	 * @param fileServerLocation The fileServerLocation to set.
+	 */
+	public void setFileServerLocation(String fileServerLocation) {
+		this.fileServerLocation = fileServerLocation;
+	}
+	/**
+	 * @return Returns the title.
+	 */
+	public String getTitle() {
+		return title;
+	}
+	/**
+	 * @param title The title to set.
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}	
 	/**
 	 * @return Returns the description.
 	 */
@@ -44,18 +68,7 @@ public class ImageForm extends BaseForm implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	/**
-	 * @return Returns the id.
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	/**
 	 * @return Returns the staining.
 	 */
@@ -69,19 +82,15 @@ public class ImageForm extends BaseForm implements Serializable {
 		this.staining = staining;
 	}
 	/**
-	 * @return Returns the title.
+	 * @return Returns the otherStaining.
 	 */
-	public String getTitle() {
-		return title;
+	public String getOtherStaining() {
+		return otherStaining;
 	}
 	/**
-	 * @param title The title to set.
+	 * @param otherStaining The otherStaining to set.
 	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
+	public void setOtherStaining(String otherStaining) {
+		this.otherStaining = otherStaining;
+	}	
 }

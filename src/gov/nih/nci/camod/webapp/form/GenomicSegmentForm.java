@@ -7,8 +7,7 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts.action.ActionMapping;
+
 
 /**
  * @author rajputs
@@ -26,10 +25,9 @@ public class GenomicSegmentForm extends BaseForm implements Serializable {
 	 */
 	public GenomicSegmentForm() {}
 	
-	// id is of type String since it comes from the presentation layer
-	protected String id;
 	protected String locationOfIntegration;
-	protected String name;
+	protected String segmentName;
+	protected String otherSegmentName;	
 	protected String segmentSize;
 	protected String cloneDesignator;
 	protected String comments;
@@ -38,18 +36,6 @@ public class GenomicSegmentForm extends BaseForm implements Serializable {
 	protected String title;
 	protected String description;
 	
-	/**
-	 * @return Returns the id.
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
 	/**
 	 * @return Returns the locationOfIntegration.
 	 */
@@ -63,17 +49,29 @@ public class GenomicSegmentForm extends BaseForm implements Serializable {
 		this.locationOfIntegration = locationOfIntegration;
 	}
 	/**
-	 * @return Returns the name.
+	 * @return Returns the segmentName.
 	 */
-	public String getName() {
-		return name;
+	public String getSegmentName() {
+		return segmentName;
 	}
 	/**
-	 * @param name The name to set.
+	 * @param segmentName The segmentName to set.
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setSegmentName(String segmentName) {
+		this.segmentName = segmentName;
 	}
+	/**
+	 * @return Returns the otherSegmentName.
+	 */
+	public String getOtherSegmentName() {
+		return otherSegmentName;
+	}
+	/**
+	 * @param otherSegmentName The otherSegmentName to set.
+	 */
+	public void setOtherSegmentName(String otherSegmentName) {
+		this.otherSegmentName = otherSegmentName;
+	}	
 	/**
 	 * @return Returns the segmentSize.
 	 */

@@ -1,5 +1,5 @@
 /*
- * Created on Aug 19, 2005
+ * Created on Aug 23, 2005
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
@@ -14,7 +14,8 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactorForm extends BaseForm implements Serializable {
+
+public class HormoneForm extends BaseForm implements Serializable {
 	/**
 	 * Default empty constructor
 	 * @author pandyas
@@ -22,15 +23,13 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
-	public EnvironmentalFactorForm() {}
+	
+	public HormoneForm() {}
 	
 	protected String name;
-	protected String otherName;	
+	protected String otherName;
 	protected String dosage;
-	protected String administrativeRoute;
 	protected String regimen;
-	protected String ageAtTreatment;
-	protected String type;
 	
 	/**
 	 * @return Returns the name.
@@ -69,18 +68,6 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 		this.dosage = dosage;
 	}
 	/**
-	 * @return Returns the administrativeRoute.
-	 */
-	public String getAdministrativeRoute() {
-		return administrativeRoute;
-	}
-	/**
-	 * @param administrativeRoute The administrativeRoute to set.
-	 */
-	public void setAdministrativeRoute(String administrativeRoute) {
-		this.administrativeRoute = administrativeRoute;
-	}	
-	/**
 	 * @return Returns the regimen.
 	 */
 	public String getRegimen() {
@@ -92,28 +79,5 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	public void setRegimen(String regimen) {
 		this.regimen = regimen;
 	}	
-	/**
-	 * @return Returns the ageAtTreatment.
-	 */
-	public String getAgeAtTreatment() {
-		return ageAtTreatment;
-	}
-	/**
-	 * @param ageAtTreatment The ageAtTreatment to set.
-	 */
-	public void setAgeAtTreatment(String ageAtTreatment) {
-		this.ageAtTreatment = ageAtTreatment;
-	}	
-	/**
-	 * @return Returns the type.
-	 */
-	public String getType() {
-		return type;
-	}
-	/**
-	 * @param type The type to set.
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
+
 }

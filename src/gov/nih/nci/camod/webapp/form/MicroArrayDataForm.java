@@ -26,11 +26,22 @@ public class MicroArrayDataForm extends BaseForm implements Serializable {
 	 */
 	public MicroArrayDataForm() {}
 	
-	// id and experimentId are of type String since they come from the presentation layer
-	protected String id;
 	protected String experimentName;
 	protected String experimentId;
+	protected String otherLocationURL;
 	
+	/**
+	 * @return Returns the experimentName.
+	 */
+	public String getExperimentName() {
+		return experimentName;
+	}
+	/**
+	 * @param experimentName The experimentName to set.
+	 */
+	public void setExperimentName(String experimentName) {
+		this.experimentName = experimentName;
+	}	
 	/**
 	 * @return Returns the experimentId.
 	 */
@@ -44,31 +55,16 @@ public class MicroArrayDataForm extends BaseForm implements Serializable {
 		this.experimentId = experimentId;
 	}
 	/**
-	 * @return Returns the experimentName.
+	 * @return Returns the otherLocationURL.
 	 */
-	public String getExperimentName() {
-		return experimentName;
+	public String getOtherLocationURL() {
+		return otherLocationURL;
 	}
 	/**
-	 * @param experimentName The experimentName to set.
+	 * @param otherLocationURL The otherLocationURL to set.
 	 */
-	public void setExperimentName(String experimentName) {
-		this.experimentName = experimentName;
+	public void setOtherLocationURL(String otherLocationURL) {
+		this.otherLocationURL = otherLocationURL;
 	}
-	/**
-	 * @return Returns the id.
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
+
 }

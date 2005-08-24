@@ -26,22 +26,11 @@ public class GeneDeliveryForm extends BaseForm implements Serializable {
 	 */
 	public GeneDeliveryForm() {}
 	
-	// id is of type String since it comes from the presentation layer
-	protected String id;
 	protected String viralVector;
+	protected String otherViralVector;
+	protected String geneInVirus;
+	protected String regimen;
 	
-	/**
-	 * @return Returns the id.
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
 	/**
 	 * @return Returns the viralVector.
 	 */
@@ -54,8 +43,40 @@ public class GeneDeliveryForm extends BaseForm implements Serializable {
 	public void setViralVector(String viralVector) {
 		this.viralVector = viralVector;
 	}
-	
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
-        // reset any boolean data types to false
-    }
+	/**
+	 * @return Returns the otherViralVector.
+	 */
+	public String getOtherViralVector() {
+		return otherViralVector;
+	}
+	/**
+	 * @param otherViralVector The otherViralVector to set.
+	 */
+	public void setOtherViralVector(String otherViralVector) {
+		this.otherViralVector = otherViralVector;
+	}	
+	/**
+	 * @return Returns the geneInVirus.
+	 */
+	public String getGeneInVirus() {
+		return geneInVirus;
+	}
+	/**
+	 * @param viralVector The viralVector to set.
+	 */
+	public void setGeneInVirus(String geneInVirus) {
+		this.geneInVirus = geneInVirus;
+	}	
+	/**
+	 * @return Returns the regimen.
+	 */
+	public String getRegimen() {
+		return regimen;
+	}
+	/**
+	 * @param regimen The regimen to set.
+	 */
+	public void setRegimen(String regimen) {
+		this.regimen = regimen;
+	}
 }
