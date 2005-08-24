@@ -13,126 +13,242 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.service.CurationManager;
 import gov.nih.nci.camod.domain.Curateable;
+import gov.nih.nci.camod.service.CurationManager;
+
 import java.util.*;
-import javax.xml.parsers.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.*;
 
 /**
  * AbstractCurationManager: Abstract implementation of the CurationManager.
  */
 public abstract class AbstractCurationManager implements CurationManager {
-	protected HashMap events = null;
-	protected String state = null;
-	protected org.w3c.dom.Document curationConfig = null;
-    protected org.w3c.dom.Element curationStates = null;
-    protected org.w3c.dom.Element curationState = null;
-    protected org.w3c.dom.NodeList stateList = null;
 
-    /**
-     * AbstractCurationManager::init()
-     */
-    protected void init() {
+	protected class State {
+
+		private String myName = null;
+
+		private String mySymbolicName = null;
+
+		private List myActions = new ArrayList();
+
+		private Map myNextValidStates = new HashMap();
+
+		public State(String inName, String inSymbolicName) {
+			myName = inName;
+			mySymbolicName = inSymbolicName;
+		}
+
+		public String getName() {
+			return myName;
+		}
+
+		public String getSymbolicName() {
+			return mySymbolicName;
+		}
+
+		public String getNextState(String inEvent) {
+
+			String theNextState = "";
+			if (myNextValidStates.containsKey(inEvent)) {
+				theNextState = (String) myNextValidStates.get(inEvent);
+			}
+
+			// Invalid event. Map to the "all" event
+			if (theNextState.equals("")) {
+
+				inEvent = "all";
+
+				if (myNextValidStates.containsKey(inEvent)) {
+					theNextState = (String) myNextValidStates.get(inEvent);
+				}
+			}
+
+			return theNextState;
+		}
+
+		public List getActions() {
+			return myActions;
+		}
+
+		public void addAction(String inAction) {
+			myActions.add(inAction);
+		}
+
+		public void addNextValidState(String inState, String inMatchEvent) {
+			myNextValidStates.put(inMatchEvent, inState);
+		}
+	}
+
+	protected HashMap myStates = new HashMap();
+
+	private String myDefaultState = null;
+
+	/**
+	 * AbstractCurationManager::init()
+	 */
+	protected void init(String inPath) {
+
+		Document theCurationConfig = null;
+
 		// --------------------------------------------------------------------------------------
-        // Read in Curation Configuration file.
+		// Read in Curation Configuration file.
 		// --------------------------------------------------------------------------------------
-        try {
+		try {
 
 			// Create an instance of the DocumentBuilderFactory
-			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+					.newInstance();
 
 			// Retrieve the DocumentBuilder from the factory.
-			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			DocumentBuilder documentBuilder = documentBuilderFactory
+					.newDocumentBuilder();
 
 			// Turn it into an in-memory object
-			curationConfig = documentBuilder.parse("config/CurationConfig.xml");
+			// TODO: make sure we validate
+			theCurationConfig = documentBuilder.parse(inPath
+					+ "/config/CurationConfig.xml");
 
+			// /////////////////////////////////////////////////////////////
+			// Map state tree and Set the Default State.
+			// NOTE: this document will have already been verified by
+			// the xsd
+			// /////////////////////////////////////////////////////////////
+
+			Element theCurationStates = theCurationConfig.getDocumentElement();
+			NodeList theStateList = theCurationStates
+					.getElementsByTagName("state");
+
+			for (int i = 0; i < theStateList.getLength(); i++) {
+				Element theStateElement = (Element) theStateList.item(i);
+
+				// Note, these will always be there
+				String theName = (String) theStateElement.getElementsByTagName(
+						"name").item(0).getFirstChild().getNodeValue();
+				String theSymbolicName = (String) theStateElement
+						.getElementsByTagName("symbolic-name").item(0)
+						.getNodeValue();
+
+				if ("true".equals(theStateElement.getAttribute("default"))) {
+					myDefaultState = theName;
+				}
+
+				State theState = new State(theName, theSymbolicName);
+
+				NodeList theActionsList = theStateElement
+						.getElementsByTagName("actions");
+
+				// Should only be one
+				if (theActionsList.getLength() == 1) {
+					NodeList theActionNodes = theActionsList.item(0)
+							.getChildNodes();
+
+					for (int j = 0; j < theActionNodes.getLength(); j++) {
+
+						if ("action".equals(theActionNodes.item(j)
+								.getNodeName())) {
+							theState.addAction(theActionNodes.item(j)
+									.getFirstChild().getNodeValue());
+						}
+					}
+				}
+
+				NodeList theNextValidStatesList = theStateElement
+						.getElementsByTagName("next-valid-states");
+
+				// Should only be one
+				if (theNextValidStatesList.getLength() == 1) {
+					NodeList theValidStateNodes = theNextValidStatesList
+							.item(0).getChildNodes();
+
+					for (int j = 0; j < theValidStateNodes.getLength(); j++) {
+
+						Node theValidStateNode = theValidStateNodes.item(j);
+
+						NodeList theChildNodes = theValidStateNode
+								.getChildNodes();
+
+						String theEvent = "all";
+						String theStateName = null;
+
+						for (int k = 0; k < theChildNodes.getLength(); k++) {
+
+							Node theChildNode = theChildNodes.item(k);
+
+							if ("name".equals(theChildNode.getNodeName())) {
+								theStateName = theChildNode.getFirstChild()
+										.getNodeValue();
+							} else if ("match-event".equals(theChildNode
+									.getNodeName())) {
+								theEvent = theChildNode.getFirstChild()
+										.getNodeValue();
+							}
+						}
+
+						if (theStateName != null) {
+							theState.addNextValidState(theStateName, theEvent);
+						}
+					}
+				}
+
+				myStates.put(theName, theState);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// --------------------------------------------------------------------------------------
-        // Identify Events and Set the Default State.
-		// --------------------------------------------------------------------------------------
+	}
 
-		events = new HashMap();
-        curationStates = curationConfig.getDocumentElement();
-        stateList = curationStates.getElementsByTagName("State");
-        
-        for (int x=0; x < stateList.getLength(); x++ ) {
-			curationState = (org.w3c.dom.Element)stateList.item(x);
-			events.put(curationState.getAttribute("eventName"), curationState.getAttribute("eventValue"));
+	/**
+	 * AbstractCurationManager::getDefaultState()
+	 */
+	public String getDefaultState() {
+		return myDefaultState;
+	}
 
-			if ( curationState.getAttribute("default").equals("true")) {
-				this.setDefaultState(curationState.getAttribute("symbolicNameValue"));
-			}
-		}
-    }
+	/**
+	 * AbstractCurationManager::changeState()
+	 */
+	public Curateable changeState(Curateable inCurateableObj, String inEvent) {
 
-    /**
-     * AbstractCurationManager::setDefaultState()
-     */
-    private void setDefaultState(String p_state) {
-		this.state = p_state;
+		String theCurrentStateName = inCurateableObj.getState();
 
-    }
+		if (myStates.containsKey(theCurrentStateName)) {
 
-    /**
-     * AbstractCurationManager::getDefaultState()
-     */
-    public String getDefaultState() {
-		return this.state;
-    }
+			State theCurrentState = (State) myStates.get(theCurrentStateName);
 
-    /**
-     * AbstractCurationManager::changeState()
-     */
-    public Curateable changeState(Curateable obj, String newState) {
-		ArrayList validStates = null;
-		StringTokenizer tokenizer = null;
+			String theNextStateName = theCurrentState.getNextState(inEvent);
 
-		String currentState = obj.getState();
+			if (theNextStateName.equals("")) {
+				System.out.println("Cannot leave current state: "
+						+ theCurrentStateName);
+			} else if (myStates.containsKey(theNextStateName)) {
+				State theNextState = (State) myStates.get(theNextStateName);
 
-		if (currentState == null) {
-			obj.setState(this.getDefaultState());
-			return obj;
-		}
+				List theActions = theNextState.getActions();
 
-		if (!currentState.equals(newState))	{
-			// Determine the next possible states.
-			validStates = new ArrayList();
-			
-        	for (int x=0; x < stateList.getLength(); x++ ) {
-				curationState = (org.w3c.dom.Element)stateList.item(x);
-				
-				if (curationState.getAttribute("symbolicNameValue").equals(currentState)) {
-					tokenizer = new StringTokenizer(curationState.getAttribute("nextValidState"), ",");
-					
-					while (tokenizer.hasMoreTokens()) {
-						String token = tokenizer.nextToken();
-						validStates.add(token);
-					}
+				Iterator theIterator = theActions.iterator();
+
+				while (theIterator.hasNext()) {
+					System.out.println("Executing action: "
+							+ (String) theIterator.next());
 				}
-			}
 
-			// If the new state is valid, process the event and return the new state.
-			if (validStates.contains(newState))	{
-				// Get New State Config
-        		for (int x=0; x < stateList.getLength(); x++ ) {
-					curationState = (org.w3c.dom.Element)stateList.item(x);
-					if (curationState.getAttribute("symbolicNameValue").equals(newState)) {
-						// Process Event
-						obj.setState(processEvent(curationState));
-						break;
-					}
-				}
+				System.out.println("Changing to state: " + theNextStateName);
+				inCurateableObj.setState(theNextStateName);
+			} else {
+				throw new IllegalArgumentException("Unknown next state: "
+						+ theNextStateName);
 			}
+		} else {
+			throw new IllegalArgumentException("Unknown current state: "
+					+ theCurrentStateName);
 		}
-		return obj;
-    }
 
-    /**
-     * AbstractCurationManager::processEvent()
-     */
-    public abstract String processEvent(org.w3c.dom.Element curationState);
+		return inCurateableObj;
+	}
 }

@@ -21,5 +21,4 @@ import gov.nih.nci.camod.domain.Curateable;
 public interface CurationManager {
     public String getDefaultState();
     public Curateable changeState(Curateable obj, String newState);
-    public String processEvent(org.w3c.dom.Element curationState);
 }

@@ -1,66 +1,98 @@
-<CurationStates>
-
-	<State 	symbolicName="INCOMPLETE"
-		symbolicNameValue="Incomplete"
-		eventName="INCOMPLETE_EVENT"
-		eventValue="0"
-		nextValidState="CompleteNotScreened"
-		default="true"/>		
-
-	<State 	symbolicName="COMPLETE"
-		symbolicNameValue="Complete"
-		eventName="COMPLETE_EVENT"
-		eventValue="1"
-		nextValidState="CompleteNotScreened"
-		default="false"/>		
-
-	<State 	symbolicName="COMPLETE_NOT_SCREENED"
-		symbolicNameValue="CompleteNotScreened"
-		eventName="COMPLETE_NOT_SCREENED_EVENT"
-		eventValue="2"
-		nextValidState="ScreenerAssigned"
-		default="false"/>		
-
-	<State 	symbolicName="SCREENER_ASSIGNED"
-		symbolicNameValue="ScreenerAssigned"
-		eventName="SCREENER_ASSIGNED_EVENT"
-		eventValue="3"
-		nextValidState="ScreenerApproved, ScreenerRejected"
-		default="false"/>		
-
-	<State 	symbolicName="SCREENER_APPROVED"
-		symbolicNameValue="ScreenerApproved"
-		eventName="SCREENER_APPROVED_EVENT"
-		eventValue="4"
-		nextValidState="ReviewerAssigned"
-		default="false"/>		
-
-	<State 	symbolicName="SCREENER_REJECTED"
-		symbolicNameValue="ScreenerRejected"
-		eventName="SCREENER_REJECTED_EVENT"
-		eventValue="5"
-		nextValidState="CompleteNotScreened"
-		default="false"/>		
-
-	<State 	symbolicName="REVIEWER_ASSIGNED"
-		symbolicNameValue="ReviewerAssigned"
-		eventName="REVIEWER_ASSIGNED_EVENT"
-		eventValue="6"
-		nextValidState="ReviewerApproved, ReviewerRejected"
-		default="false"/>		
-
-	<State 	symbolicName="REVIEWER_APPROVED"
-		symbolicNameValue="ReviewerApproved"
-		eventName="REVIEWER_APPROVED_EVENT"
-		eventValue="7"
-		nextValidState="Complete"
-		default="false"/>		
-
-	<State 	symbolicName="REVIEWER_REJECTED"
-		symbolicNameValue="ReviewerRejected"
-		eventName="REVIEWER_REJECTED_EVENT"
-		eventValue="8"
-		nextValidState="CompleteNotScreened"
-		default="false"/>		
-
-</CurationStates>
+<curation-states>
+	<state default="true">
+	 	<name>INCOMPLETE</name>
+		<symbolic-name>Incomplete</symbolic-name>
+		<next-valid-states>
+		    <next-valid-state>
+		        <name>COMPLETE</name>
+		    </next-valid-state>
+		</next-valid-states>
+	</state>
+	
+	<state default="false">
+	 	<name>COMPLETE</name>
+	    <actions>
+		    <action>email:Coordinator</action>
+		</actions>
+		<symbolic-name>CompleteNotScreened</symbolic-name>
+		<next-valid-states>
+		    <next-valid-state>
+		        <name>SCREENER_ASSIGNED</name>
+		    </next-valid-state>
+		</next-valid-states>
+	</state>
+	
+	<state default="false">
+	 	<name>SCREENER_ASSIGNED</name>
+		<symbolic-name>ScreenerAssigned</symbolic-name>
+	    <actions>
+		    <action>email:Screener</action>
+		</actions>
+		<next-valid-states>
+		    <next-valid-state>
+		        <name>SCREENER_APPROVED</name>
+		        <match-event>approved</match-event>
+		    </next-valid-state>
+		    <next-valid-state>
+		        <name>SCREENER_REJECTED</name>
+		        <match-event>rejected</match-event>
+		    </next-valid-state>
+		</next-valid-states>
+	</state>
+	
+	<state default="false">
+	 	<name>SCREENER_APPROVED</name>
+		<symbolic-name>ScreenerApproved</symbolic-name>
+		<next-valid-states>
+		    <next-valid-state>
+		        <name>REVIEWER_ASSIGNED</name>
+		    </next-valid-state>
+		</next-valid-states>
+	</state>
+	
+	<state default="false">
+	 	<name>SCREENER_REJECTED</name>
+		<symbolic-name>ScreenerRejected</symbolic-name>
+	</state>
+	
+	<state default="false">
+	 	<name>REVIEWER_ASSIGNED</name>
+		<symbolic-name>ReviewerAssigned</symbolic-name>
+		<actions>
+		    <action>email:Editor</action>
+		</actions>
+		<next-valid-states>
+		    <next-valid-state>
+		        <name>REVIEWER_APPROVED</name>
+		        <match-event>approved</match-event>
+		    </next-valid-state>
+		    <next-valid-state>
+		        <name>REVIEWER_NEED_MORE_INFO</name>
+		        <match-event>rejected</match-event>
+		    </next-valid-state>
+		</next-valid-states>
+	</state>
+	
+	<state default="false">
+	 	<name>REVIEWER_APPROVED</name>
+		<symbolic-name>ReviewerApproved</symbolic-name>
+	</state>
+	
+	<state default="false">
+	 	<name>REVIEWER_NEED_MORE_INFO</name>
+		<symbolic-name>ReviewerApproved</symbolic-name>
+		<actions>
+		    <action>email:Submitter</action>
+		</actions>
+		<next-valid-states>
+		    <next-valid-state>
+		        <name>REVIEWER_APPROVED</name>
+		        <match-event>approved</match-event>
+		    </next-valid-state>
+		    <next-valid-state>
+		        <name>REVIEWER_NEED_MORE_INFO</name>
+		        <match-event>rejected</match-event>
+		    </next-valid-state>
+		</next-valid-states>
+	</state>
+</curation-states>
