@@ -10,9 +10,9 @@ import org.apache.struts.action.ActionMessages;
 import gov.nih.nci.camod.Constants;
 
 /**
- * InducedMutationAction Class
+ * EngineeredTransgeneAction Class
  */
-public final class InducedMutationAction extends BaseAction {
+public final class EngineeredTransgeneAction extends BaseAction {
 	
     /**
      * Delete

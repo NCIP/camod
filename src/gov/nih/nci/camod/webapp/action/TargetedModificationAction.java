@@ -14,22 +14,6 @@ import gov.nih.nci.camod.Constants;
  */
 public final class TargetedModificationAction extends BaseAction {
 	
-	/**
-	 * Cancel
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-    public ActionForward cancel(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request,
-                                HttpServletResponse response)
-    throws Exception {
-        return search(mapping, form, request, response);
-    }
-
     /**
      * Delete
      * @param mapping
@@ -47,9 +31,27 @@ public final class TargetedModificationAction extends BaseAction {
             log.debug("Entering 'delete' method");
         }
 
-        return search(mapping, form, request, response);
+        return mapping.findForward("");
     }
 
+	/**
+	 * Cancel
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+    public ActionForward duplicate(ActionMapping mapping, ActionForm form,
+                                HttpServletRequest request,
+                                HttpServletResponse response)
+    throws Exception {
+    	
+    	 return mapping.findForward("");
+    }    
+    
+    
     /**
      * Edit
      * @param mapping
@@ -88,41 +90,5 @@ public final class TargetedModificationAction extends BaseAction {
         }
 
         return mapping.findForward("");
-    }
-
-    /**
-     * Search
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request,
-                                HttpServletResponse response)
-    throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'search' method");
-        }
-
-        return mapping.findForward("");
-    }
-    
-    /**
-     * Unspecified
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception 
-     */
-    public ActionForward unspecified(ActionMapping mapping, ActionForm form,
-                                     HttpServletRequest request,
-                                     HttpServletResponse response)
-        throws Exception {
-        return search(mapping, form, request, response);
     }
 }

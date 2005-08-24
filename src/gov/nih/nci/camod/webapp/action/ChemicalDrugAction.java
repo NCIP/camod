@@ -10,9 +10,10 @@ import org.apache.struts.action.ActionMessages;
 import gov.nih.nci.camod.Constants;
 
 /**
- * InducedMutationAction Class
+ * ChemicalDrugAction Class
  */
-public final class InducedMutationAction extends BaseAction {
+
+public class ChemicalDrugAction extends BaseAction {
 	
     /**
      * Delete

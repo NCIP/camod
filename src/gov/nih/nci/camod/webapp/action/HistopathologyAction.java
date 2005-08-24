@@ -10,9 +10,10 @@ import org.apache.struts.action.ActionMessages;
 import gov.nih.nci.camod.Constants;
 
 /**
- * InducedMutationAction Class
+ * HistopathologyAction Class
  */
-public final class InducedMutationAction extends BaseAction {
+
+public class HistopathologyAction extends BaseAction {
 	
     /**
      * Delete
@@ -91,4 +92,5 @@ public final class InducedMutationAction extends BaseAction {
 
         return mapping.findForward("");
     }
+
 }

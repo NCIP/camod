@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package gov.nih.nci.camod.webapp.action;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +13,10 @@ import org.apache.struts.action.ActionMessages;
 import gov.nih.nci.camod.Constants;
 
 /**
- * InducedMutationAction Class
+ * RadiationAction Class
  */
-public final class InducedMutationAction extends BaseAction {
+
+public class RadiationAction extends BaseAction {
 	
     /**
      * Delete
@@ -91,4 +95,5 @@ public final class InducedMutationAction extends BaseAction {
 
         return mapping.findForward("");
     }
+
 }
