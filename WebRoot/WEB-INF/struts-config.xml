@@ -16,6 +16,18 @@
 		 <form-bean
 			name="cellLineForm"
 		    type="gov.nih.nci.camod.webapp.form.CellLineForm"/>
+		    
+		 <form-bean
+			name="chemicalDrugForm"
+		    type="gov.nih.nci.camod.webapp.form.ChemicalDrugForm"/>	
+		    
+		 <form-bean
+			name="clinicalMarkerForm"
+		    type="gov.nih.nci.camod.webapp.form.ClinicalMarkerForm"/>
+		    
+		<form-bean
+			name="engineeredTransgeneForm"
+		    type="gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm"/>		    		    	    
 		
 		<form-bean
 			name="environmentalFactorForm"
@@ -27,46 +39,78 @@
 		<form-bean
 			name="genomicSegmentForm"
 		    type="gov.nih.nci.camod.webapp.form.GenomicSegmentForm"/>
-		
+
 		<form-bean
-			name="transgeneForm"
-		    type="gov.nih.nci.camod.webapp.form.TransgeneForm"/>
+			name="growthFactorForm"
+		    type="gov.nih.nci.camod.webapp.form.GrowthFactorForm"/>
+		    
+		<form-bean
+			name="histopathologyForm"
+		    type="gov.nih.nci.camod.webapp.form.HistopathologyForm"/>
+		    
+		<form-bean
+			name="hormoneForm"
+		    type="gov.nih.nci.camod.webapp.form.HormoneForm"/>		
+
 		<form-bean
 			name="imageForm"
 		    type="gov.nih.nci.camod.webapp.form.ImageForm"/>
+		    
 		<form-bean
 			name="inducedMutationForm"
 		    type="gov.nih.nci.camod.webapp.form.InducedMutationForm"/>
+		    
+		<form-bean
+			name="loginForm"
+		    type="gov.nih.nci.camod.webapp.form.LoginForm"/>
+		    		    
 		<form-bean
 			name="microArrayDataForm"
 		    type="gov.nih.nci.camod.webapp.form.MicroArrayDataForm"/>
+		    
+		<form-bean
+			name="ModelCharacteristicsForm"
+		    type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
+		    
+		<form-bean
+			name="nutritionalFactorForm"
+		    type="gov.nih.nci.camod.webapp.form.NutritionalFactorForm"/>		    		    
 		
 		<form-bean
 			name="publicationForm"
 		    type="gov.nih.nci.camod.webapp.form.PublicationForm"/>
+		    
+		<form-bean
+			name="radiationForm"
+		    type="gov.nih.nci.camod.webapp.form.RadiationForm"/>
+		    
+		<form-bean
+			name="spontaneousMutationForm"
+		    type="gov.nih.nci.camod.webapp.form.SpontaneousMutationForm"/>
+		    
+		<form-bean
+			name="surgeryForm"
+		    type="gov.nih.nci.camod.webapp.form.SurgeryForm"/>		    
 		
 		<form-bean
 			name="targetedModificationForm"
 		    type="gov.nih.nci.camod.webapp.form.TargetedModificationForm"/>
+		    
+		<form-bean
+			name="targetedModificationForm"
+		    type="gov.nih.nci.camod.webapp.form.TargetedModificationForm"/>		    
 		
 		<form-bean
 			name="therapyForm"
 		    type="gov.nih.nci.camod.webapp.form.TherapyForm"/>
+		    
+		<form-bean
+			name="viralTreatmentForm"
+		    type="gov.nih.nci.camod.webapp.form.ViralTreatmentForm"/>		    
 		
 		<form-bean
 			name="xenograftForm"
 		    type="gov.nih.nci.camod.webapp.form.XenograftForm"/>
-		
-		<form-bean
-			name="loginForm"
-		    type="gov.nih.nci.camod.webapp.form.LoginForm"/>
-		
-		<form-bean
-			name="personForm"
-		    type="gov.nih.nci.camod.webapp.form.PersonForm"/>
-		<form-bean
-			name="ModelCharacteristicsForm"
-		    type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
 
   </form-beans>
 
