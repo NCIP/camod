@@ -35,8 +35,9 @@ public class CustomRequestProcessor extends RequestProcessor {
 		System.out.println( "<CustomRequestProcessor processActionPerform> mapping.getParameter=" + mapping.getParameter() );
 		
 		// Check custom ActionMapping Parameter
-		if ( mapping.getParameter().toString().equals( "method") || mapping.getParameter().toString().contains( "/protected") )
-		{		
+		if ( mapping.getParameter().toString().equals( "method") || mapping.getParameter().toString().indexOf("/protected") != -1 )
+		{	
+			
 			HttpSession session = request.getSession();
 			String user = (String) session.getAttribute( Constants.CURRENTUSER );
 					
@@ -45,7 +46,7 @@ public class CustomRequestProcessor extends RequestProcessor {
 				return mapping.findForward( "login" );
 			}				
 		} 
-		
+
 		return super.processActionPerform( request, response, action, form, mapping );
 	}
 }
