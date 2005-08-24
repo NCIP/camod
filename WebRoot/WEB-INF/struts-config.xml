@@ -12,6 +12,9 @@
 
   <!-- ========== Form Bean Definitions =================================== -->
   <form-beans>
+		 <form-bean
+			name="associatedExpressionForm"
+		    type="gov.nih.nci.camod.webapp.form.AssociatedExpressionForm"/>
 
 		 <form-bean
 			name="cellLineForm"
@@ -32,6 +35,7 @@
 		<form-bean
 			name="environmentalFactorForm"
 		    type="gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm"/>
+		    
 		<form-bean
 			name="geneDeliveryForm"
 		    type="gov.nih.nci.camod.webapp.form.GeneDeliveryForm"/>
@@ -69,7 +73,7 @@
 		    type="gov.nih.nci.camod.webapp.form.MicroArrayDataForm"/>
 		    
 		<form-bean
-			name="ModelCharacteristicsForm"
+			name="modelCharacteristicsForm"
 		    type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
 		    
 		<form-bean
@@ -96,10 +100,6 @@
 			name="targetedModificationForm"
 		    type="gov.nih.nci.camod.webapp.form.TargetedModificationForm"/>
 		    
-		<form-bean
-			name="targetedModificationForm"
-		    type="gov.nih.nci.camod.webapp.form.TargetedModificationForm"/>		    
-		
 		<form-bean
 			name="therapyForm"
 		    type="gov.nih.nci.camod.webapp.form.TherapyForm"/>
