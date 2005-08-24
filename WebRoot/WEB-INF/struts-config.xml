@@ -960,9 +960,20 @@
 			unknown="false"
 			validate="false" />
 
+     <!-- AssociatedExpressionForm -->     
+     <!-- CellLineForm -->     
+     <!-- ChemicalDrugForm -->     
+     <!-- ClinicalMarkerForm -->
+     <!-- EngineeredTransgeneForm -->
+     <!-- EnvironmentalFactorForm -->
+     <!-- GeneDeliveryForm -->
+     <!-- GenomicSegmentForm -->
+     <!-- GrowthFactorForm -->
+     <!-- HistopathologyForm -->
+     <!-- HormoneForm -->
+     <!-- ImageForm -->
 
-
-     <!-- Called from login.jsp ( loginForm ) -->
+     <!--  loginForm - Called from login.jsp  -->
     <action path="/LoginAction"
 	        type="gov.nih.nci.camod.webapp.action.LoginAction"
 	        name="loginForm"
@@ -985,6 +996,9 @@
 	        input="login">
     </action>
     
+    <!-- MicroArrayDataForm -->
+    
+    <!--  ModelCharacteristicsForm  -->
     <action path="/AnimalModelAction"
 	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
 	        name="ModelCharacteristicsForm"
@@ -1038,7 +1052,19 @@
     		name="duplicatesuccessful"
     		path="/ReturnUserModels.do?method=returnUserModels"></forward>                                     
    </action>
+   
+     <!-- NutritionalFactorForm -->
+     <!-- PublicationForm -->	
+     <!-- RadiationForm -->
+     <!-- SpontaneousMutationForm -->
+     <!-- SurgeryForm -->
+     <!-- TargetedModificationForm -->
+     <!-- TherapyForm -->
+     <!-- ViralTreatmentForm -->
+     <!-- XenograftForm -->
     
+    
+    <!-- UserAction -->
     <action path="/UserAction"
 	        type="gov.nih.nci.camod.webapp.action.UserAction"
 	        scope="request"
@@ -1048,6 +1074,7 @@
 	        validate="false" >
     </action>
     
+    <!-- SubmitAction -->
     <action path="/SubmitAction"
 	        type="gov.nih.nci.camod.webapp.action.SubmitAction"
 	        scope="request"
