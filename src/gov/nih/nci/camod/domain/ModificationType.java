@@ -10,6 +10,8 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author rajputs
@@ -20,7 +22,21 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class ModificationType extends BaseObject implements Serializable {
 	private Long id;
 	private String name;
+	private List targetedModificationCollection = new ArrayList();
 	
+	/**
+	 * @return Returns the targetedModificationCollection.
+	 */
+	public List getTargetedModificationCollection() {
+		return targetedModificationCollection;
+	}
+	/**
+	 * @param targetedModificationCollection The targetedModificationCollection to set.
+	 */
+	public void setTargetedModificationCollection(
+			List targetedModificationCollection) {
+		this.targetedModificationCollection = targetedModificationCollection;
+	}	
 	/**
 	 * @return Returns the id.
 	 */
@@ -54,20 +70,24 @@ public class ModificationType extends BaseObject implements Serializable {
 		}
 		ModificationType rhs = (ModificationType) object;
 		return new EqualsBuilder().append(
-				this.name, rhs.name).append(this.id, rhs.id).isEquals();
+				this.targetedModificationCollection,
+				rhs.targetedModificationCollection).append(this.name, rhs.name)
+				.append(this.id, rhs.id).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-264652227, -1030466487).append(this.name).append(this.id)
-				.toHashCode();
+		return new HashCodeBuilder(726628189, 1147964673).append(this.targetedModificationCollection)
+				.append(this.name).append(this.id).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return new ToStringBuilder(this).append("name", this.name).append("id",
-				this.id).toString();
+		return new ToStringBuilder(this).append("name", this.name).append(
+				"targetedModificationCollection",
+				this.targetedModificationCollection).append("id", this.id)
+				.toString();
 	}
 }

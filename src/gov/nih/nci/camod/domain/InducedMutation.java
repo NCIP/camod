@@ -97,7 +97,7 @@ public class InducedMutation extends EngineeredGene {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-1438034695, -1262291951).appendSuper(
+		return new HashCodeBuilder(185645383, 717000701).appendSuper(
 				super.hashCode()).append(this.environmentalFactor).append(
 				this.description).append(this.geneticAlterationCollection)
 				.append(this.geneId).toHashCode();
@@ -108,16 +108,16 @@ public class InducedMutation extends EngineeredGene {
 	public String toString() {
 		return new ToStringBuilder(this).append("conditionality",
 				this.getConditionality()).append("name", this.getName())
-				.append("description", this.description).append("id",
+				.append("expressionFeatureCollection",
+						this.getExpressionFeatureCollection()).append("id",
 						this.getId()).append("comments", this.getComments())
-				.append("image", this.getImage()).append("organCollection",
-						this.getOrganCollection()).append(
-						"geneticAlterationCollection",
-						this.geneticAlterationCollection).append("cabioId",
-						this.getCabioId()).append("environmentalFactor",
-						this.environmentalFactor).append("mutationIdentifier",
-						this.getMutationIdentifier()).append("geneId",
-						this.geneId).append("genotypeSummary",
-						this.getGenotypeSummary()).toString();
+				.append("description", this.description).append("image",
+						this.getImage()).append("cabioId", this.getCabioId())
+				.append("geneticAlterationCollection",
+						this.geneticAlterationCollection).append(
+						"mutationIdentifier", this.getMutationIdentifier())
+				.append("environmentalFactor", this.environmentalFactor)
+				.append("genotypeSummary", this.getGenotypeSummary()).append(
+						"geneId", this.geneId).toString();
 	}
 }

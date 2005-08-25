@@ -32,7 +32,8 @@
         	column="gene_id" 
         	type="string"/>
         	
-        <!-- modificationTypeCollection (one-to-many unidirectional) -->
+        <!-- modificationTypeCollection (many-to-many bidirectional) -->
+        <!-- Note: this collection will be used to synchronize state with the database. -->
         <bag name="modificationTypeCollection" 
         	table="tar_mod_modification_type"
         	inverse="false" 
@@ -41,7 +42,6 @@
         	
         	<key column="engineered_gene_id"/>
         	<many-to-many column="modification_type_id"
-            	unique="true"
             	class="ModificationType"/>
         </bag>
 	</subclass>

@@ -32,7 +32,8 @@
         <!-- description -->
         <property name="description" 
         	column="description" 
-        	type="string"/>	
+        	type="string"
+        	length="4000"/>	
         	
         <!-- staining -->
         <property name="staining" 

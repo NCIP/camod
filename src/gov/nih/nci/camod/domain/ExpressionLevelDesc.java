@@ -22,20 +22,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class ExpressionLevelDesc extends BaseObject implements Serializable {
 	private Long id;
 	private String expressionLevel;
-	private List organCollection = new ArrayList();
 	
-	/**
-	 * @return Returns the organCollection.
-	 */
-	public List getOrganCollection() {
-		return organCollection;
-	}
-	/**
-	 * @param organCollection The organCollection to set.
-	 */
-	public void setOrganCollection(List organCollection) {
-		this.organCollection = organCollection;
-	}
 	/**
 	 * @return Returns the expressionLevel.
 	 */
@@ -69,7 +56,6 @@ public class ExpressionLevelDesc extends BaseObject implements Serializable {
 		}
 		ExpressionLevelDesc rhs = (ExpressionLevelDesc) object;
 		return new EqualsBuilder().append(
-				this.organCollection, rhs.organCollection).append(
 				this.expressionLevel, rhs.expressionLevel).append(this.id,
 				rhs.id).isEquals();
 	}
@@ -77,15 +63,14 @@ public class ExpressionLevelDesc extends BaseObject implements Serializable {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-511900051, -355258071).append(this.organCollection).append(
-				this.expressionLevel).append(this.id).toHashCode();
+		return new HashCodeBuilder(493009911, -1296889097).append(this.expressionLevel).append(this.id)
+				.toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return new ToStringBuilder(this).append("id", this.id).append(
-				"organCollection", this.organCollection).append(
 				"expressionLevel", this.expressionLevel).toString();
 	}
 }

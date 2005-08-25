@@ -28,19 +28,5 @@
         <property name="expressionLevel" 
         	column="expression_level" 
         	type="string"/>
-        	
-        <!-- organCollection (many-to-many bidirectional) -->
-        <!-- Note: this collection will NOT be used to synchronize state with the database. -->
-        <!-- Changes made to expressionLevelDescCollection in Organ will be synchronized with the database. -->
-        <bag name="organCollection"
-        	table="organ_exp_level_desc"
-        	inverse="true" 
-        	lazy="true"
-        	cascade="all-delete-orphan">
-        	
-        	<key column="exp_level_desc_id"/>
-        	<many-to-many class="Organ" 
-        		column="organ_id"/>
-        </bag> 
 	</class>
 </hibernate-mapping>

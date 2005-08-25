@@ -89,7 +89,7 @@ public class Transgene extends EngineeredGene {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(1968525603, -819614537).appendSuper(
+		return new HashCodeBuilder(1792793975, 1838484929).appendSuper(
 				super.hashCode()).append(this.taxonCollection).append(
 				this.locationOfIntegration).append(
 				this.regulatoryElementCollection).toHashCode();
@@ -101,10 +101,11 @@ public class Transgene extends EngineeredGene {
 		return new ToStringBuilder(this).append("conditionality",
 				this.getConditionality()).append("locationOfIntegration",
 				this.locationOfIntegration).append("name", this.getName())
-				.append("id", this.getId()).append("comments",
-						this.getComments()).append("image", this.getImage())
-				.append("organCollection", this.getOrganCollection()).append(
-						"cabioId", this.getCabioId()).append("taxonCollection",
+				.append("expressionFeatureCollection",
+						this.getExpressionFeatureCollection()).append("id",
+						this.getId()).append("comments", this.getComments())
+				.append("image", this.getImage()).append("cabioId",
+						this.getCabioId()).append("taxonCollection",
 						this.taxonCollection).append("mutationIdentifier",
 						this.getMutationIdentifier()).append(
 						"regulatoryElementCollection",

@@ -44,12 +44,10 @@
         	column="age_at_treatment" 
         	type="string"/>	
         	
-        <!-- sexDistribution: this is really a one-to-one relationship with unique=true -->
-        <!-- (one-to-one unidirectional) -->
-        <many-to-one name="sexDistribution"
-        	class="SexDistribution"
+        <!-- sexDistribution (many-to-one unidirectional) -->
+        <many-to-one 
+        	name="sexDistribution"
         	column="sex_distribution_id"
-        	cascade="all"
-        	unique="true"/>
+        	class="SexDistribution"/>
 	</class>
 </hibernate-mapping>

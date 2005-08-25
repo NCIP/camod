@@ -40,6 +40,7 @@ public class TargetedModification extends EngineeredGene {
 	 * @param modificationType The modificationType to add.
 	 */
 	public void addModificationType(ModificationType modificationType) {
+		modificationType.getTargetedModificationCollection().add(this);
 		modificationTypeCollection.add(modificationType);
 	}	
 	/**
@@ -97,7 +98,7 @@ public class TargetedModification extends EngineeredGene {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-547681255, 1252724853).appendSuper(
+		return new HashCodeBuilder(1377742101, -963966355).appendSuper(
 				super.hashCode()).append(this.modificationTypeCollection)
 				.append(this.esCellLineName).append(this.geneId).append(
 						this.blastocystName).toHashCode();
@@ -108,16 +109,17 @@ public class TargetedModification extends EngineeredGene {
 	public String toString() {
 		return new ToStringBuilder(this).append("conditionality",
 				this.getConditionality()).append("name", this.getName())
-				.append("id", this.getId()).append("comments",
-						this.getComments()).append("esCellLineName",
-						this.esCellLineName).append("image", this.getImage())
-				.append("organCollection", this.getOrganCollection()).append(
-						"cabioId", this.getCabioId()).append(
-						"mutationIdentifier", this.getMutationIdentifier())
-				.append("blastocystName", this.blastocystName).append(
+				.append("expressionFeatureCollection",
+						this.getExpressionFeatureCollection()).append(
+						"esCellLineName", this.esCellLineName).append("id",
+						this.getId()).append("comments", this.getComments())
+				.append("image", this.getImage()).append("cabioId",
+						this.getCabioId()).append("mutationIdentifier",
+						this.getMutationIdentifier()).append("blastocystName",
+						this.blastocystName).append(
 						"modificationTypeCollection",
-						this.modificationTypeCollection).append(
-						"genotypeSummary", this.getGenotypeSummary()).append(
-						"geneId", this.geneId).toString();
+						this.modificationTypeCollection).append("geneId",
+						this.geneId).append("genotypeSummary",
+						this.getGenotypeSummary()).toString();
 	}
 }

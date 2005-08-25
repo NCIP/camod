@@ -106,19 +106,19 @@ public class GenomicSegment extends EngineeredGene {
 		GenomicSegment rhs = (GenomicSegment) object;
 		return new EqualsBuilder().appendSuper(super.equals(object)).append(
 				this.locationOfIntegration, rhs.locationOfIntegration).append(
+				this.segmentTypeCollection, rhs.segmentTypeCollection).append(
 				this.segmentSize, rhs.segmentSize).append(this.cloneDesignator,
 				rhs.cloneDesignator).isEquals();
 	}
-
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(1738802159, 1516001829).appendSuper(
+		return new HashCodeBuilder(-1013910251, -2066007607).appendSuper(
 				super.hashCode()).append(this.locationOfIntegration).append(
-				this.segmentSize).append(this.cloneDesignator).toHashCode();
+				this.segmentTypeCollection).append(this.segmentSize).append(
+				this.cloneDesignator).toHashCode();
 	}
-
 	/**
 	 * @see java.lang.Object#toString()
 	 */
@@ -126,13 +126,15 @@ public class GenomicSegment extends EngineeredGene {
 		return new ToStringBuilder(this).append("conditionality",
 				this.getConditionality()).append("locationOfIntegration",
 				this.locationOfIntegration).append("name", this.getName())
-				.append("id", this.getId()).append("comments",
-						this.getComments()).append("image", this.getImage())
-				.append("organCollection", this.getOrganCollection()).append(
-						"segmentSize", this.segmentSize).append("cabioId",
-						this.getCabioId()).append("cloneDesignator",
-						this.cloneDesignator).append("mutationIdentifier",
-						this.getMutationIdentifier()).append("genotypeSummary",
-						this.getGenotypeSummary()).toString();
+				.append("expressionFeatureCollection",
+						this.getExpressionFeatureCollection()).append("id",
+						this.getId()).append("comments", this.getComments())
+				.append("image", this.getImage()).append("segmentSize",
+						this.segmentSize).append("cabioId", this.getCabioId())
+				.append("cloneDesignator", this.cloneDesignator).append(
+						"mutationIdentifier", this.getMutationIdentifier())
+				.append("segmentTypeCollection", this.segmentTypeCollection)
+				.append("genotypeSummary", this.getGenotypeSummary())
+				.toString();
 	}
 }

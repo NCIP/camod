@@ -27,7 +27,8 @@
 	    <!-- observation -->
         <property name="observation" 
         	column="observation" 
-        	type="string"/>   
+        	type="string"
+        	not-null="true"/>   
 	    
 	    <!-- methodOfObservation -->
         <property name="methodOfObservation" 

@@ -25,12 +25,14 @@
 	    <!-- comments -->
         <property name="comments" 
         	column="comments" 
-        	type="string"/>
+        	type="string"
+        	length="2000"/>
 	    
 	    <!-- experiment -->
         <property name="experiment" 
         	column="experiment" 
-        	type="string"/>
+        	type="string"
+        	length="2000"/>
 	    
 	    <!-- name -->
         <property name="name" 

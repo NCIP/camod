@@ -24,27 +24,7 @@ public class Organ extends BaseObject implements Serializable {
 	private String name;
 	private String conceptCode;
 	private List histopathologyCollection = new ArrayList();
-	private List expressionLevelDescCollection = new ArrayList();	
 	
-	/**
-	 * @return Returns the expressionLevelDescCollection.
-	 */
-	public List getExpressionLevelDescCollection() {
-		return expressionLevelDescCollection;
-	}
-	/**
-	 * @param expressionLevelDescCollection The expressionLevelDescCollection to set.
-	 */
-	public void setExpressionLevelDescCollection(List expressionLevelDescCollection) {
-		this.expressionLevelDescCollection = expressionLevelDescCollection;
-	}
-	/**
-	 * @param expressionLevelDesc The expressionLevelDesc to add.
-	 */
-	public void addExpressionLevelDesc(ExpressionLevelDesc expressionLevelDesc) {
-		expressionLevelDesc.getOrganCollection().add(this);
-		expressionLevelDescCollection.add(expressionLevelDesc);
-	}
 	/**
 	 * @return Returns the histopathologyCollection.
 	 */
@@ -110,18 +90,16 @@ public class Organ extends BaseObject implements Serializable {
 		Organ rhs = (Organ) object;
 		return new EqualsBuilder().append(
 				this.histopathologyCollection, rhs.histopathologyCollection)
-				.append(this.expressionLevelDescCollection,
-						rhs.expressionLevelDescCollection).append(this.name,
-						rhs.name).append(this.conceptCode, rhs.conceptCode)
-				.append(this.id, rhs.id).isEquals();
+				.append(this.name, rhs.name).append(this.conceptCode,
+						rhs.conceptCode).append(this.id, rhs.id).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-2122195223, -1703430887).append(this.histopathologyCollection).append(
-				this.expressionLevelDescCollection).append(this.name).append(
-				this.conceptCode).append(this.id).toHashCode();
+		return new HashCodeBuilder(-5760707, 335803633).append(this.histopathologyCollection).append(
+				this.name).append(this.conceptCode).append(this.id)
+				.toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -129,8 +107,6 @@ public class Organ extends BaseObject implements Serializable {
 	public String toString() {
 		return new ToStringBuilder(this).append("name", this.name).append(
 				"conceptCode", this.conceptCode).append("id", this.id).append(
-				"expressionLevelDescCollection",
-				this.expressionLevelDescCollection).append(
 				"histopathologyCollection", this.histopathologyCollection)
 				.toString();
 	}

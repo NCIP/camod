@@ -57,7 +57,8 @@
         <!-- microscopicDescription -->
         <property name="microscopicDescription" 
         	column="microscopic_description" 
-        	type="string"/>	
+        	type="string"
+        	length="2000"/>	
         
         <!-- weightOfTumor -->
         <property name="weightOfTumor" 

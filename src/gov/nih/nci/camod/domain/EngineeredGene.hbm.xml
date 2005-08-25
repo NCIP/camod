@@ -41,20 +41,8 @@
         <!-- comments -->
         <property name="comments" 
         	column="comments" 
-        	type="string"/>	
-        
-        <!-- organCollection (one-to-many unidirectional) -->
-        <bag name="organCollection"
-        	table="engineered_gene_organ" 
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="engineered_gene_id"/>
-        	<many-to-many column="organ_id"
-            	unique="true"
-            	class="Organ"/>
-        </bag>
+        	type="string"
+        	length="2000"/>
         
         <!-- conditionality (many-to-one unidirectional) -->
         <many-to-one
@@ -80,6 +68,19 @@
         	class="MutationIdentifier"
         	column="mutation_identifier_id"
         	cascade="all"
-        	unique="true"/>       	
+        	unique="true"/>  
+        	
+        <!-- expressionFeatureCollection (one-to-many unidirectional) -->
+        <bag name="expressionFeatureCollection"
+        	table="eng_gene_exp_feature" 
+        	inverse="false" 
+        	lazy="true" 
+        	cascade="all-delete-orphan">
+        	
+        	<key column="engineered_gene_id"/>
+        	<many-to-many column="expression_feature_id"
+            	unique="true"
+            	class="ExpressionFeature"/>
+        </bag>     	
 	</class>
 </hibernate-mapping>
