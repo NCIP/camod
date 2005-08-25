@@ -28,11 +28,13 @@ drop table conditionality cascade constraints;
 drop table contact_info cascade constraints;
 drop table disease cascade constraints;
 drop table endpoint_code cascade constraints;
+drop table eng_gene_exp_feature cascade constraints;
 drop table engineered_gene cascade constraints;
-drop table engineered_gene_organ cascade constraints;
 drop table env_fac_ind_mutation cascade constraints;
 drop table env_factor cascade constraints;
 drop table exp_level_desc cascade constraints;
+drop table expression_feature cascade constraints;
+drop table gen_seg_segment_type cascade constraints;
 drop table gene_delivery cascade constraints;
 drop table gene_function cascade constraints;
 drop table genetic_alteration cascade constraints;
@@ -50,7 +52,6 @@ drop table modification_type cascade constraints;
 drop table mutation_identifier cascade constraints;
 drop table nomenclature cascade constraints;
 drop table organ cascade constraints;
-drop table organ_exp_level_desc cascade constraints;
 drop table organ_histopathology cascade constraints;
 drop table party cascade constraints;
 drop table party_contact_info cascade constraints;
@@ -200,8 +201,8 @@ create table biological_process (
 );
 create table cell_line (
    cell_line_id number(19,0) not null,
-   comments varchar2(255),
-   experiment varchar2(255),
+   comments varchar2(2000),
+   experiment varchar2(2000),
    name varchar2(255),
    results varchar2(255),
    organ_id number(19,0),
@@ -235,7 +236,7 @@ create table comments (
 create table conditionality (
    conditionality_id number(19,0) not null,
    conditioned_by varchar2(255),
-   description varchar2(255),
+   description varchar2(2000),
    primary key (conditionality_id)
 );
 create table contact_info (
@@ -263,12 +264,16 @@ create table endpoint_code (
    description varchar2(255),
    primary key (endpoint_code_id)
 );
+create table eng_gene_exp_feature (
+   engineered_gene_id number(19,0) not null,
+   expression_feature_id number(19,0) not null unique
+);
 create table engineered_gene (
    engineered_gene_id number(19,0) not null,
    engineered_gene_type varchar2(255) not null,
    cabio_id number(19,0),
    name varchar2(255),
-   comments varchar2(255),
+   comments varchar2(2000),
    conditionality_id number(19,0),
    genotype_summary_id number(19,0),
    image_id number(19,0),
@@ -276,16 +281,11 @@ create table engineered_gene (
    location_of_integration varchar2(255),
    segment_size varchar2(255),
    clone_designator varchar2(255),
-   segment_type_id number(19,0) unique,
    gene_id varchar2(255),
    description varchar2(255),
    es_cell_line_name varchar2(255),
    blastocyst_name varchar2(255),
    primary key (engineered_gene_id)
-);
-create table engineered_gene_organ (
-   engineered_gene_id number(19,0) not null,
-   organ_id number(19,0) not null unique
 );
 create table env_fac_ind_mutation (
    engineered_gene_id number(19,0) not null,
@@ -310,6 +310,16 @@ create table exp_level_desc (
    expression_level varchar2(255),
    primary key (exp_level_desc_id)
 );
+create table expression_feature (
+   expression_feature_id number(19,0) not null,
+   organ_id number(19,0),
+   exp_level_desc_id number(19,0),
+   primary key (expression_feature_id)
+);
+create table gen_seg_segment_type (
+   engineered_gene_id number(19,0) not null,
+   segment_type_id number(19,0) not null unique
+);
 create table gene_delivery (
    gene_delivery_id number(19,0) not null,
    viral_vector varchar2(255),
@@ -326,7 +336,7 @@ create table gene_function (
 );
 create table genetic_alteration (
    genetic_alteration_id number(19,0) not null,
-   observation varchar2(255),
+   observation varchar2(255) not null,
    method_of_observation varchar2(255),
    primary key (genetic_alteration_id)
 );
@@ -349,7 +359,7 @@ create table histopathology (
    tumor_incidence_rate float,
    survival_info varchar2(255),
    age_of_onset varchar2(255),
-   microscopic_description varchar2(255),
+   microscopic_description varchar2(2000),
    weight_of_tumor float,
    volume_of_tumor float,
    comparative_data varchar2(255),
@@ -364,7 +374,7 @@ create table histopathology_disease (
 create table image (
    image_id number(19,0) not null,
    title varchar2(255),
-   description varchar2(255),
+   description varchar2(4000),
    staining varchar2(255),
    file_server_location varchar2(255),
    availability_id number(19,0),
@@ -429,10 +439,6 @@ create table organ (
    name varchar2(255),
    concept_code varchar2(255),
    primary key (organ_id)
-);
-create table organ_exp_level_desc (
-   exp_level_desc_id number(19,0) not null,
-   organ_id number(19,0) not null
 );
 create table organ_histopathology (
    histopathology_id number(19,0) not null,
@@ -539,8 +545,8 @@ create table spontaneous_mutation (
    primary key (spontaneous_mutation_id)
 );
 create table tar_mod_modification_type (
-   engineered_gene_id number(19,0) not null,
-   modification_type_id number(19,0) not null unique
+   modification_type_id number(19,0) not null,
+   engineered_gene_id number(19,0) not null
 );
 create table taxon (
    taxon_id number(19,0) not null,
@@ -581,7 +587,7 @@ create table treatment (
    dosage varchar2(255),
    administrative_route varchar2(255),
    age_at_treatment varchar2(255),
-   sex_distribution_id number(19,0) unique,
+   sex_distribution_id number(19,0),
    primary key (treatment_id)
 );
 create table tumor_code (
@@ -650,15 +656,18 @@ alter table comments add constraint FKDC17DDF495BE676C foreign key (model_sectio
 alter table comments add constraint FKDC17DDF43595FF35 foreign key (party_id) references party;
 alter table comments add constraint FKDC17DDF4496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table comments add constraint FKDC17DDF4290CE83F foreign key (availability_id) references availability;
-alter table engineered_gene add constraint FK4ADB496653A0BB3C foreign key (segment_type_id) references segment_type;
+alter table eng_gene_exp_feature add constraint FK6FC0F1EBBEC26304 foreign key (expression_feature_id) references expression_feature;
+alter table eng_gene_exp_feature add constraint FK6FC0F1EBD749BD3C foreign key (engineered_gene_id) references engineered_gene;
 alter table engineered_gene add constraint FK4ADB4966BB186F15 foreign key (image_id) references image;
 alter table engineered_gene add constraint FK4ADB4966F9575982 foreign key (genotype_summary_id) references genotype_summary;
 alter table engineered_gene add constraint FK4ADB496672CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table engineered_gene add constraint FK4ADB496666D7EBDF foreign key (conditionality_id) references conditionality;
-alter table engineered_gene_organ add constraint FKDDAA19F83D222B55 foreign key (organ_id) references organ;
-alter table engineered_gene_organ add constraint FKDDAA19F8D749BD3C foreign key (engineered_gene_id) references engineered_gene;
 alter table env_fac_ind_mutation add constraint FKDBCCD3F26C3591A1 foreign key (env_factor_id) references env_factor;
 alter table env_fac_ind_mutation add constraint FKDBCCD3F22C7402E4 foreign key (engineered_gene_id) references engineered_gene;
+alter table expression_feature add constraint FKCC1D9C4F3D222B55 foreign key (organ_id) references organ;
+alter table expression_feature add constraint FKCC1D9C4FA17421A4 foreign key (exp_level_desc_id) references exp_level_desc;
+alter table gen_seg_segment_type add constraint FK6E0AD7F53A0BB3C foreign key (segment_type_id) references segment_type;
+alter table gen_seg_segment_type add constraint FK6E0AD7F11021D04 foreign key (engineered_gene_id) references engineered_gene;
 alter table gene_delivery add constraint FK918699DE3D222B55 foreign key (organ_id) references organ;
 alter table gene_delivery add constraint FK918699DE46872875 foreign key (treatment_id) references treatment;
 alter table gene_function add constraint FKB2C0F1C2D749BD3C foreign key (engineered_gene_id) references engineered_gene;
@@ -679,8 +688,6 @@ alter table log add constraint FK1A34477AB701F foreign key (comments_id) referen
 alter table log add constraint FK1A344496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table log add constraint FK1A3443595FF35 foreign key (party_id) references party;
 alter table micro_array_data add constraint FKC3D0BA2B290CE83F foreign key (availability_id) references availability;
-alter table organ_exp_level_desc add constraint FK86074DBC3D222B55 foreign key (organ_id) references organ;
-alter table organ_exp_level_desc add constraint FK86074DBCA17421A4 foreign key (exp_level_desc_id) references exp_level_desc;
 alter table organ_histopathology add constraint FK49AEA2A0D45FCF9F foreign key (histopathology_id) references histopathology;
 alter table organ_histopathology add constraint FK49AEA2A03D222B55 foreign key (organ_id) references organ;
 alter table party_contact_info add constraint FK4B2B4226534EE516 foreign key (contact_info_id) references contact_info;
