@@ -77,7 +77,7 @@
 					                                      	%>  
 					                                      	
                                                               <tr>                                      
-                                                                  <html:form action="loginAction.do" focus="username">                                      
+                                                                  <html:form action="LoginAction.do" focus="username">                                      
                                                                   <td class="sidebarLogin" align="right"><label for="loginID">Login ID</label></td>
                                                                   <td class="formFieldLogin"><html:text property="username" size="15" maxlength="15" /></td>
                                                               </tr>
