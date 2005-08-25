@@ -9,6 +9,7 @@ import gov.nih.nci.camod.webapp.util.DropdownUtil;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,15 +19,20 @@ import org.apache.struts.action.ActionMapping;
 
 public class AnimalModelPopulateAction extends BaseAction {
 
-	/** 
+	/**
 	 * Pre-populate all field values in the form ModelCharacteristicsForm 
-	 *  Used by submitModelCharacteristics.jsp
 	 * 
-	 */ 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	public ActionForward populate( ActionMapping mapping, 
 								   ActionForm form,
 						           HttpServletRequest request,
-						           HttpServletResponse response)
+						           HttpServletResponse response )
 	  throws Exception {	
 		  
 		System.out.println( "<AnimalModelPopulateAction populate> Entering... " );
@@ -66,20 +72,69 @@ public class AnimalModelPopulateAction extends BaseAction {
 		modelChar.setCalendarReleaseDate( am.getAvailability().getReleaseDate().toString() );				
 		
 		//Prepopulate all dropdown fields, set the global Constants to the following
-		DropdownUtil drop = new DropdownUtil();
-		List speciesStrainLst = drop.getSpeciesStrainList();
-		List sexDistList = drop.getSexDistributionsList();
-		
-		//Store the values for the drop down menus in a Constants variable, used in the JSP
-		request.getSession().setAttribute( Constants.SPECIESDROP, speciesStrainLst );
-		request.getSession().setAttribute( Constants.STRAINDROP, speciesStrainLst );
-		request.getSession().setAttribute( Constants.SEXDISTRIBUTIONDROP, sexDistList );
+		this.dropdown( request, response );
 		
 		//Store the Form in session to be used by the JSP
 		request.getSession().setAttribute( Constants.FORMDATA, modelChar );
 		
-		return mapping.findForward("submitModelCharacteristics");
+		return mapping.findForward( "submitModelCharacteristics" );
 
+	}
+	
+	/**
+	 * Populate the dropdown menus for createNewModel
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward dropdown( ActionMapping mapping, 
+			   					   ActionForm form,
+			   					   HttpServletRequest request,
+			   					   HttpServletResponse response )
+	  throws Exception {	
+		
+		System.out.println( "<AnimalModelPopulateAction dropdown> ... " );
+		
+		//setup dropdown menus
+		this.dropdown( request, response );
+		
+		return mapping.findForward( "submitNewModel" );
+	}
+
+	/**
+	 * Populate all drowpdowns for this type of form 
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void dropdown( HttpServletRequest request,
+						  HttpServletResponse response )
+	  throws Exception {
+		
+			System.out.println( "<AnimalModelPopulateAction dropdown> Entering... " );
+		
+			//Prepopulate all dropdown fields, set the global Constants to the following
+			DropdownUtil drop = new DropdownUtil();
+			
+			List speciesList = drop.getSpeciesList();
+			
+			//TODO: Get specific list for speciesName ( for submitModelCharacteristics ) 
+			List strainList = drop.getStrainList( speciesList.get(0).toString() );
+			
+			ServletContext application = servlet.getServletConfig().getServletContext();			
+			String configFileName = application.getRealPath( "/config/SexDistributions.txt" );
+			
+			List sexDistList = drop.getDropdownListFromFile( configFileName );			 
+				
+			//Store the values for the drop down menus in a Constants variable, used in the JSP
+			request.getSession().setAttribute( Constants.SPECIESDROP, speciesList );
+			request.getSession().setAttribute( Constants.STRAINDROP, strainList );
+			request.getSession().setAttribute( Constants.SEXDISTRIBUTIONDROP, sexDistList );		  		
 	}
 	
 }

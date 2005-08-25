@@ -1,13 +1,14 @@
 package gov.nih.nci.camod.webapp.util;
 
-import gov.nih.nci.camod.domain.SexDistribution;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Strain;
 import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.service.SexDistributionManager;
 import gov.nih.nci.camod.service.TaxonManager;
 import gov.nih.nci.camod.webapp.action.BaseAction;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,11 +19,8 @@ public class DropdownUtil extends BaseAction {
 	 * Returns a list of all Species and Strains
 	 * @return speciesStrainList
 	 */
-	public List getSpeciesStrainList()
+	public List getSpeciesList()
 	{
-		// TODO: Return the SpeciesList and StrainList somehow to connect to each other, Hashmap ? 
-		// TODO: Once these Constants are stored into session memory, shouldn't have to retrieve these again for a while
-		
 		// Get values for dropdown lists for Species, Strains
 		// First get a list of all taxons
 		// for each taxon, get it's scientificName (it's species name)
@@ -30,13 +28,6 @@ public class DropdownUtil extends BaseAction {
 		TaxonManager taxonManager = (TaxonManager) getBean( "taxonManager" );
 		List taxonList = taxonManager.getAll();			
 		List speciesNames = new ArrayList();
-		
-		// List containing type Strain Objects, returned from TaxonManager.getStrains()
-		List strainList = null;
-		
-		// List contain strings of strain names
-		List strainNames = new ArrayList();
-		
 		Taxon tmp;
 
 		for ( int i=0; i < taxonList.size(); i++ ) {
@@ -47,79 +38,162 @@ public class DropdownUtil extends BaseAction {
 				if ( ! speciesNames.contains( tmp.getScientificName() ) )
 					speciesNames.add( tmp.getScientificName() );	
 			}				
+		} 		// + " (" + tmp.getCommonName() + ")"
+
+		Collections.sort( speciesNames );
+		
+		// see if this will work
+		for ( int i=0; i<speciesNames.size(); i++) {
+			System.out.println( "Species: " + speciesNames.get(i).toString() );
+			this.getStrainList( speciesNames.get(i).toString() );
 		}
 		
-		//print out speciesNames	
-		System.out.println( "<DropdownUtil getSpeciesStrainList> SpeciesNames List" );	
-		Collections.sort( speciesNames );
-		for ( int j=0; j < speciesNames.size(); j++ )
-			System.out.println( j + ": " + speciesNames.get( j ).toString() );			
+		return speciesNames;
+	}		
+	
+	/** 
+	 * Based on a species name retrieve a list of all Strains
+	 * 
+	 * @param speciesName
+	 * @return
+	 */
+	public List getStrainList( String speciesName )
+	{
+		TaxonManager taxonManager = (TaxonManager) getBean( "taxonManager" );
 		
-		Species species = new Species();	
+		Species species = new Species();
+		species.setName( speciesName );
 		
-		// for each speciesName retrieve a list of strain names
-		// TODO: create/store a collection of species and corrisponding names
-		for ( int i=0; i < speciesNames.size(); i++ ) {
-			species.setName( (String) speciesNames.get(i) );
+		List strainList = new ArrayList();
+		List strainNames = new ArrayList();
+		
+		strainList = taxonManager.getStrains( species );
+		
+		//print out strainNames			
+		 for ( int j=0; j < strainList.size(); j++ ) {
+			Strain strain = (Strain) strainList.get( j );
 			
-			strainList = new ArrayList();
-			strainList = taxonManager.getStrains( species );
-
-			System.out.println( "\n\n<DropdownUtil getSpeciesStrainList> StrainNames List" );
-
-			//print out strainNames
-			for ( int j=0; j < strainList.size(); j++ ) {
-				Strain strain = (Strain) strainList.get( j );
-				
-				if ( strain.getName() != null ) {
-					strainNames.add( strain.getName() );
-					//System.out.println( j + ": " + strain.getName() );
-				}
+			if ( strain.getName() != null ) {
+				strainNames.add( strain.getName() );
+				System.out.println( "Strain Name>>" + j + ": " + strain.getName() );
 			}
-			
-			//	TODO: Add additional Strain named 'Other' to every list
-			strainNames.add( " Other, Strain not listed." );
-			
-			//Sort the list in 'abc' order
-			if ( strainNames.size() > 0 )
-				Collections.sort( strainNames );
-			
-			for ( int j=0; j < strainNames.size(); j++ ) {
-				System.out.println( j + ": " + strainNames.get(j) );
-			}						
-			
-			strainNames.clear();
-		}			
+		}				 
+		 
+		// Sort the list in 'abc' order
+		if ( strainNames.size() > 0 )
+			Collections.sort( strainNames );
 		
-		//temp
-		return speciesNames;		
+		strainNames.add( "Other" );
+		
+		return strainNames;
 	}
 	
 	/**
-	 * Retrieves a list of all sexDistributions
-	 * Returns a list of strings  
-	 * @return genderList
+	 * Give a filename retrieve all lines of that file and put them into a List 
+	 * 
+	 * @return dropdown
 	 */
-	public List getSexDistributionsList()
-	{
-		List genderList = new ArrayList();
+	public List getDropdownListFromFile( String inFilename )
+	{		
+		// Read in a config file with all available options
+		List dropdown = new ArrayList();
 		
-		// Print a list of all the SexDistributions
-		System.out.println( "\n\n<DropdownUtil getSexDistributionsList> SexDistributionNames List" );
+		System.out.println( "<getDropdownListFromFile> Entering... " + inFilename );
 		
-		SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean( "sexDistributionManager" );
-		List sexDistributionNames = sexDistributionManager.getAll();
-		
-		// TODO: REMOVE DUPLICATES!
-		
-		//Collections.sort( sexDistributionNames );
-		
-		for ( int i=0; i < sexDistributionNames.size(); i++ ) {
-			SexDistribution gender = (SexDistribution) sexDistributionNames.get(i);
-			System.out.println( i + ": " + gender.getType() ); 
-			genderList.add( gender.getType() );
-		}	
-		
-		return genderList;		
+	    try {
+	        BufferedReader in = new BufferedReader( new FileReader( inFilename ) );
+	        String str;
+	        while ((str = in.readLine()) != null) {
+	        	System.out.println( "<getDropdownListFromFile> Reading config file: " + inFilename + " ->" + str );
+	        	dropdown.add( str );	
+	        }
+	        in.close();
+	    } catch (IOException e) {
+	    }
+	    
+	    return dropdown;	
 	}
 }
+
+	/*
+	List speciesStrainLst = new ArrayList();	
+	Species species = new Species();	
+	
+	// for each speciesName retrieve a list of strain names
+	for ( int i=0; i < speciesNames.size(); i++ ) {
+		
+		species.setName( (String) speciesNames.get(i) );
+	
+		strainList = new ArrayList();
+		strainList = taxonManager.getStrains( species );
+		
+		strainNames = new ArrayList();
+		
+		//print out strainNames			
+		 for ( int j=0; j < strainList.size(); j++ ) {
+			Strain strain = (Strain) strainList.get( j );
+			
+			if ( strain.getName() != null ) {
+				strainNames.add( strain.getName() );
+				System.out.println( ">>" + j + ": " + strain.getName() );
+			}
+		}
+					
+		SpeciesStrain spStrainObj = new SpeciesStrain();
+		spStrainObj.speciesName = (String) speciesNames.get(i);
+		
+		// Sort the list in 'abc' order
+		if ( strainNames.size() > 0 )
+			Collections.sort( strainNames );	
+		
+		//Add additional Strain named 'Other' to every list
+		strainNames.add( "Other" );
+		
+		spStrainObj.strainList = strainNames;
+		speciesStrainLst.add( spStrainObj );			
+	}
+	
+	//print it out, species and strains
+	SpeciesStrain spStrainObj = new SpeciesStrain();		
+	for ( int y=0; y < speciesStrainLst.size(); y++ ) {
+		spStrainObj = (SpeciesStrain) speciesStrainLst.get(y);
+		System.out.println( "\nspecies: " + y + ": " + spStrainObj.speciesName );
+		
+		for ( int z=0; z < spStrainObj.getStrainList().size(); z++ ){
+			System.out.println( "strain name: " + z + ": " + spStrainObj.getStrainList().get(z).toString() );
+		}
+	}
+			
+	return speciesStrainLst;
+	*/	
+	
+	/*
+	List genderList = new ArrayList();
+	
+	// Print a list of all the SexDistributions
+	System.out.println( "\n\n<DropdownUtil getSexDistributionsList> SexDistributionNames List" );
+	
+	SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean( "sexDistributionManager" );
+	List sexDistributionNames = sexDistributionManager.getAll();
+	
+	// TODO: REMOVE DUPLICATES!
+	//sort list by modelDescriptor, ignoring case
+	//Collections.sort( sexDistributionNames, new _removeDuplicates() );			
+	//Collections.sort( sexDistributionNames );
+	
+	Set set = new TreeSet();
+	//set.addAll( sexDistributionNames );
+	
+	for( int i=0; i< sexDistributionNames.size(); i++ ) {
+		SexDistribution sexType = (SexDistribution) sexDistributionNames.get(i);
+		set.add( sexType.getType() );
+	}
+	
+	Iterator iter = set.iterator();
+    while ( iter.hasNext() ){
+		  genderList.add( iter.next() );
+    }
+	
+	return sexDistributionNames;
+	*/	
+	

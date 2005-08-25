@@ -1,35 +1,23 @@
 package gov.nih.nci.camod.webapp.action;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.apache.struts.actions.DispatchAction;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.service.PersonManager;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 
 import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Nomenclature;
-import gov.nih.nci.camod.domain.GenotypeSummary;
 import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.domain.Taxon;
 import gov.nih.nci.camod.domain.Phenotype;
@@ -40,13 +28,20 @@ import gov.nih.nci.camod.domain.AnimalModel;
 
 public final class AnimalModelAction extends BaseAction {
 	
-	/** Called from submitNewModel.jsp
+	/**
+	 * Save a new AnimalModel
 	 * 
-	 */ 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
     public ActionForward save( ActionMapping mapping, 
-    								   ActionForm form,
-							           HttpServletRequest request,
-							           HttpServletResponse response)
+							   ActionForm form,
+					           HttpServletRequest request,
+					           HttpServletResponse response)
     throws Exception {
      
     	ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;
@@ -149,13 +144,19 @@ public final class AnimalModelAction extends BaseAction {
         saveErrors( request, msg );
      
         return mapping.findForward("submitOverview");
-
     }
     
     
 	/** 
-	 *  Used to update a animalModel
-	 */ 
+	 * Used to update a animalModel
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
     public ActionForward edit( ActionMapping mapping, 
     									    ActionForm form,
 							          	    HttpServletRequest request,
@@ -269,14 +270,20 @@ public final class AnimalModelAction extends BaseAction {
     }
     
     
-	/** Creates an exact duplicate of a AnimalModel 
-	 *  Called from subSubmitMenu.jsp
+	/**
+	 * Creates an exact duplicate of a AnimalModel 
 	 * 
-	 */ 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
     public ActionForward duplicate( 	ActionMapping mapping, 
-										    ActionForm form,
-							          	    HttpServletRequest request,
-							          	    HttpServletResponse response)
+									    ActionForm form,
+						          	    HttpServletRequest request,
+						          	    HttpServletResponse response)
     throws Exception {
     
     	System.out.println( "<AnimalModelAction duplicateModel> modelID=" + request.getParameter( "aModelID" ) );
@@ -294,8 +301,15 @@ public final class AnimalModelAction extends BaseAction {
 		return mapping.findForward( "duplicatesuccessful" );
     }
     
-	/** Delete a AnimalModel based on it's id 
+	/**
+	 * Delete a AnimalModel based on it's id  
 	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
 	 */
     public ActionForward delete( ActionMapping mapping, 
 									  ActionForm form,
@@ -320,6 +334,14 @@ public final class AnimalModelAction extends BaseAction {
 
     }
    
+    /**
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
     public ActionForward returnUserModels(  ActionMapping mapping, 
 											ActionForm form,
 									        HttpServletRequest request,
