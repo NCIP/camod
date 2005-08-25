@@ -1,42 +1,8 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
- <script language="JavaScript">
-    var skinName = 'evs';
-    windowTitle = "NCI Center for Bioinformatics";
+<script language="JavaScript" src="scripts/EvsTree.js"></script>
 
-    // targetFormName (String) - The name of the form with the target form fields (organ, organTissueName, organTissueCode) * NO SPACES *
-    // species (String) - desired species * NO SPACES *
-
-    function showTissueTree(targetFormName, input)
-    {
-      var now = new Date();
-      var glob = now.getHours()+now.getSeconds()+now.getMilliseconds();
-      var targetURL;
-      var rootNode = "Murine_Tissue_Type";
-      input = 'rootNode='+rootNode+";"+input;
-
-      targetURL = '/EVSTree/webtree/WebTreeMain.jsp?treeParams='+escape(input)+';formName='+escape(targetFormName)+';type=tissue;&skin='+skinName+'&windowTitle='+windowTitle+'&rand='+glob;
-
-      // open target window
-      windowOpen(targetURL, 810, 500, 'Tissue Select');
-    }
-
-    // pop-up window utilitiy function
-    function windowOpen(url,w,h,title)
-    {
-      window.name = 'root';
-      remote = window.open(url,'none','width= '+w+',height='+h+', resizable=yes,scrollbars=yes');
-      if (remote != null) {
-  		remote.title = title;
-        if (remote.opener == null) {
-          remote.opener = self;
-          remote.name = 'popup';
-        }
-      }
-      remote.focus();
-    }
- </Script>
 
 <FORM name="input" action="/searchResults.do" method="get">
 
@@ -92,8 +58,7 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-<!--				<a href='javascript: rs("commentWin","evsTreeImage.jsp",1025,700);'> -->
-		  	    <a href="javascript:showTissueTree('input', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+				<a href="javascript:showTissueTree('input', 'mouse', 1)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				<INPUT name="organTissueName" type="hidden"/>
 		 		<INPUT name="organTissueCode" type="hidden"/>

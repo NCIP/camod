@@ -1,0 +1,32 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.75em;
+	color: #947927;
+	background-color: #FFFFFF;
+}
+td {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 0.75em;
+	color: #947927;
+}
+A {
+	color: #003366;
+}
+
+a:link {
+	color: #003366;
+}
+a:visited {
+	color: #3F6798;
+}
+a:hover {
+	color: #996600;
+}
+a:active {
+	color: #003366;
+}
+
+.highlightNode 
+{
+	background-color: #B7D1E8;
+}

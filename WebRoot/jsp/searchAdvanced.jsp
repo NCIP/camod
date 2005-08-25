@@ -1,6 +1,8 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
+<script language="JavaScript" src="scripts/EvsTree.js"></script>
+
 <FORM name="input" action="searchResults.do" method="get">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -50,15 +52,33 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Site of primary Lesion/Tumor</label>&nbsp;<a href='javascript: rs("commentWin","evsTreeImage.jsp",1025,700);'><IMG src="images\selectUP.gif" align=middle  border=0></a></td>
-			<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="field3" id="field3" size="25" /></td>
+			<td class="formRequiredNotice" width="0">&nbsp;</td>
+			<td class="formLabel">
+				<label for="field2">Site of Lesion/Tumor</label>
+				&nbsp;
+				<a href="javascript:showTissueTree('input', 'mouse', 1)">
+				<IMG src="images\selectUP.gif" align=middle border=0>
+				<INPUT name="organTissueName" type="hidden"/>
+		 		<INPUT name="organTissueCode" type="hidden"/>
+				</a>
+			</td>
+			<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="organ" id="organFieldId" size="25" /></td>
 		</tr>
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Diagnosis</label>&nbsp;<a href='javascript: rs("commentWin","evsTreeImage.jsp",1025,700);'><IMG src="images\selectUP.gif" align=middle  border=0></a></td>
-			<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="field3" id="field3" size="25" /></td>
+			<td class="formLabel">
+				<label for="field2">Diagnosis</label>
+				&nbsp;
+				<a href="javascript:showDiagnosisTree('input', 'mouse', 2)">
+				<IMG src="images\selectUP.gif" align=middle  border=0>
+				</a>
+				<input type="hidden" name="DiagnosisName"/>
+			    <input type="hidden" name="DiagnosisCode"/>
+			</td>
+			<td class="formField">
+				<input class="formFieldSized" type="text" disabled="true" name="TumorClassification" id="field3" size="25" />
+			</td>
 		</tr>
 		
 		<tr>
