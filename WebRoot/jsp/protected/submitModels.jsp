@@ -29,9 +29,9 @@
 						<td>
 							  Welcome back <b><%= session.getAttribute("camod.loggedon.username") %></b>.<br>
 						      To edit one of your existing models click on the name of the model.<br>
-						      To add a new model select "<html:link action="submitNewModel">Add new Model</html:link>".<br>
+						      To add a new model select "<html:link action="AnimalModelPopulateAction.do?method=dropdown"><font color=red>Add New Model</font></html:link>".<br>
 							<br>
-						      If you are unfamiliar with the submission process please refer to <a href="help.jsp">HELP</a>.<br>
+						      If you are unfamiliar with the submission process please refer to <html:link action="help">HELP</html:link>.<br>
 							<br>
 						      There are <%= size %> records returned.
 						     <br>						    
@@ -66,7 +66,7 @@
 
 		<tr>
 			<td class="resultsBoxWhite" width="10%">&nbsp;</td>
-			<td class="resultsBoxWhite" width="40%"><html:link action="submitNewModel"><font color=red><b>Add New Model</font></b></html:link></td>
+			<td class="resultsBoxWhite" width="40%"><html:link action="AnimalModelPopulateAction?method=dropdown"><font color=red><b>Add New Model</font></b></html:link></td>
 			<td class="resultsBoxWhite" width="30%"><%= new java.util.Date() %></td>
 			<td class="resultsBoxWhiteEnd" width="10%">&nbsp;</td>
 		</tr>

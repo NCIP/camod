@@ -25,6 +25,13 @@
 		return false;
 	}
 	
+	function getOptions( control ) {
+		form = control.form;
+		form.action = "SetOptionsAction.do?page=submitModelCharacteristics&speciesName=";
+		form.action += control.value;
+		form.submit();
+	}
+	
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -82,7 +89,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="scientificName" name="formdata" >
+				<html:select styleClass="formFieldSized" size="1" property="scientificName" name="formdata" onchange="getOptions(this);" >
 					<html:options name="speciesdrop" />										
 				</html:select>				
 			</td>
@@ -93,7 +100,7 @@
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" name="formdata" onclick="chkOther(this);">
-					<html:options name="speciesdrop" />	
+					<html:options name="straindrop" />	
 				</html:select>
 			</td>
 		</tr>	

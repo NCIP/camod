@@ -4,12 +4,15 @@
 
 <%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
 
+<SCRIPT LANGUAGE="JavaScript" SRC="scripts/CalendarPopup.js"></SCRIPT>
 <SCRIPT LANGUAGE="JavaScript">
+	
 	var cal = new CalendarPopup();
-
+		
 	function chkOther( control ) {
 		ideControl = document.ModelCharacteristicsForm.otherEthinicityStrain;
 			
@@ -21,10 +24,12 @@
 		}
 	}
 	
-	function goCal() {
-		cal.select(document.ModelCharacteristicsForm.calendarReleaseDate,'anchor1','MM/dd/yyyy'); 
-		return false;
-	}
+	function getOptions( control ) {
+		form = control.form;
+		form.action = "SetOptionsAction.do?page=submitNewModel&speciesName=";
+		form.action += control.value;
+		form.submit();
+	}	
 	
 </SCRIPT>
 
@@ -75,16 +80,9 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="scientificName">
-					<html:option value="">&nbsp;</html:option> 
-					<html:option value="Mouse(Mus musculus)">Mouse(Mus musculus)</html:option>
-					<html:option value="Rat(Rattus norvegicus)">Rat(Rattus norvegicus)</html:option>
-					<html:option value="Rat(Rattus rattus)">Rat(Rattus rattus)</html:option> 
-					<html:option value="Mongolian gerbil (Meriones unguiculatus)">Mongolian gerbil (Meriones unguiculatus)</html:option>
-					<html:option value="Syrian (golden) hamster (Mesocricetus auratus)">Syrian (golden) hamster (Mesocricetus auratus)</html:option>
-					<html:option value="Guinea pig (Cavia porcellus)">Guinea pig (Cavia porcellus)</html:option> 
-					<html:option value="Mouse(in vivo)">Mouse(in vivo)</html:option>										
-				</html:select>				
+				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
+					<html:options name="speciesdrop" />										
+				</html:select>			
 			</td>
 		</tr>
 
@@ -93,9 +91,7 @@
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOther(this);">
-					<html:option value="1">1</html:option> 
-					<html:option value="2">2</html:option>
-					<html:option value="Other">Other</html:option>
+					<html:options name="straindrop" />	
 				</html:select>
 			</td>
 		</tr>	
@@ -128,10 +124,8 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Gender</b></label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="type">
-					<html:option value="male">Male</html:option> 
-					<html:option value="female">Female</html:option>
-					<html:option value="female">Both Sexes</html:option>
+				<html:select styleClass="formFieldSized" size="1" property="type">												
+					<html:options name="sexdrop"/>					
 				</html:select>
 			</td>
 		</tr>
@@ -145,7 +139,7 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formRequiredNotice" widh="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Website for add. info</label></td>
 			<td class="formField">
 					<html:text styleClass="formFieldSized" property="url" size="30"/>
@@ -160,11 +154,6 @@
 				<html:radio property="releaseDate" value="immediately" /> Release record immediately <br> 
 				<html:radio property="releaseDate" value="after" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 
 				<html:text styleClass="formFieldSized2" disabled="true" property="calendarReleaseDate" size="10"/>	<br>
-		
-				<A HREF="#"
-					   onClick="goCal();"
- 					   NAME="anchor1" ID="anchor1">select</A>
-		
 			</td>
 		</tr>
 

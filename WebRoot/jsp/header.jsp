@@ -1,14 +1,12 @@
 <HTML>
 <HEAD>
 	<TITLE>caMOD Wireframes development</TITLE>
-	<LINK href="styles/styleSheet.css" type=text/css rel=stylesheet>
+	<LINK href="styles/styleSheet.css" type=text/css rel=stylesheet>	
 	<SCRIPT src="scripts/script.js" type=text/javascript></SCRIPT>
-	<SCRIPT src="scripts/TipCode.js" type=text/javascript></SCRIPT>	
-	<SCRIPT SRC="scripts/CalendarPopup.js" type=text/javascript></SCRIPT>
+	<SCRIPT src="scripts/TipCode.js" type=text/javascript></SCRIPT>		
 	<META content="MSHTML 6.00.2800.1491" name=GENERATOR>
 	
-	<%@ include file="../common/taglibs.jsp"%>
-	
+	<%@ include file="/common/taglibs.jsp"%>	
 </HEAD>
 
 <BODY>
