@@ -1080,10 +1080,20 @@
 	        scope="request"
 	        parameter="method"
    	        unknown="false"
-	        input="/submitModels" 	     
-	        validate="false" >    		
+	        input="/submitModels"
+	        validate="false" >
     </action>
-        
+                
+    <action path="/SetOptionsAction"
+	        type="gov.nih.nci.camod.webapp.action.SetOptionsAction"
+	        name="ModelCharacteristicsForm"
+	        scope="request"
+	        parameter="method"
+   	        unknown="false"
+	        input="/submitModels"
+	        validate="false" >
+    </action>
+            
   </action-mappings>
 
   <controller processorClass="gov.nih.nci.camod.util.CustomRequestProcessor" nocache="true" inputForward="true" maxFileSize="2M" />
