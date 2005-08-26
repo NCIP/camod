@@ -1001,16 +1001,22 @@
     <!--  ModelCharacteristicsForm  -->
     <action path="/AnimalModelAction"
 	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
-	        name="ModelCharacteristicsForm"
+	        name="modelCharacteristicsForm"
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
 	        input="submitNewModel">   	
     </action>
     
+    <action 
+            path="/ChangeAnimalModelStateAction"
+	        type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
+	    >   	
+    </action>    
+    
     <action path="/AnimalModelPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AnimalModelPopulateAction"
-    		name="ModelCharacteristicsForm"    		
+    		name="modelCharacteristicsForm"    		
             scope="request"
             parameter="method"
 			validate="false">		
@@ -1019,7 +1025,7 @@
     <!-- changed input so the page returns to correct jsp on failed validation -->
     <action path="/EditAnimalModel"
 	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
-	        name="ModelCharacteristicsForm"
+	        name="modelCharacteristicsForm"
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
@@ -1086,7 +1092,7 @@
                 
     <action path="/SetOptionsAction"
 	        type="gov.nih.nci.camod.webapp.action.SetOptionsAction"
-	        name="ModelCharacteristicsForm"
+	        name="modelCharacteristicsForm"
 	        scope="request"
 	        parameter="method"
    	        unknown="false"
@@ -1096,7 +1102,7 @@
             
   </action-mappings>
 
-  <controller processorClass="gov.nih.nci.camod.util.CustomRequestProcessor" nocache="true" inputForward="true" maxFileSize="2M" />
+  <controller processorClass="org.apache.struts.action.RequestProcessor" nocache="true" inputForward="true" maxFileSize="2M" />
   
   <message-resources parameter="ApplicationResources"/>
 
