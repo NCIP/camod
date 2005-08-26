@@ -30,10 +30,11 @@
         	column="organ_id"
         	class="Organ"/>
         	
-        <!-- expressionLevelDesc (many-to-one unidirectional) -->
+        <!-- engineeredGene (many-to-one unidirectional) -->
         <many-to-one
-        	name="expressionLevelDesc"
-        	column="exp_level_desc_id"
-        	class="ExpressionLevelDesc"/>
+        	name="engineeredGene"
+        	column="engineered_gene_id"
+        	class="EngineeredGene"/>        	
+        	
 	</class>
 </hibernate-mapping>
