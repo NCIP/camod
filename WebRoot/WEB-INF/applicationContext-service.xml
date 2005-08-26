@@ -54,6 +54,4 @@
     <!-- SexDistributionManager -->
     <bean id="sexDistributionManager" class="gov.nih.nci.camod.service.impl.SexDistributionManagerImpl"/>    
     
-    <!-- curationManager -->
-    <bean id="curationManager" class="gov.nih.nci.camod.service.impl.CurationManagerImpl"/>
 </beans>
