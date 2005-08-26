@@ -28,7 +28,7 @@
         </field>
     </form>
     
-    <form name="ModelCharacteristicsForm">
+    <form name="modelCharacteristicsForm">
         <field property="modelDescriptor" depends="required">
             <arg0 key="ModelCharacteristicsForm.modelDescriptor"/>
         </field>
