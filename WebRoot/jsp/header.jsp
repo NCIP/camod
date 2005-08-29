@@ -1,9 +1,9 @@
 <HTML>
 <HEAD>
 	<TITLE>caMOD Wireframes development</TITLE>
-	<LINK href="styles/styleSheet.css" type=text/css rel=stylesheet>	
-	<SCRIPT src="scripts/script.js" type=text/javascript></SCRIPT>
-	<SCRIPT src="scripts/TipCode.js" type=text/javascript></SCRIPT>		
+	<LINK href="/camod/styles/styleSheet.css" type=text/css rel=stylesheet>	
+	<SCRIPT src="/camod/scripts/script.js" type=text/javascript></SCRIPT>
+	<SCRIPT src="/camod/scripts/TipCode.js" type=text/javascript></SCRIPT>		
 	<META content="MSHTML 6.00.2800.1491" name=GENERATOR>
 	
 	<%@ include file="/common/taglibs.jsp"%>	
@@ -20,14 +20,14 @@
         <TR>
           <TD align=left width=283 height=37><A
             href="http://www.cancer.gov/"><IMG height=37
-            alt="National Cancer Institute" src="images/logotype.gif"
+            alt="National Cancer Institute" src="/camod/images/logotype.gif"
             width=283 border=0></A>
 	  </TD>
           <TD>&nbsp;</TD>
           <TD align=right width=295 height=37>
 	  	<A href="http://www.cancer.gov/"><IMG height=37 
 		alt="U.S. National Institutes of Health | www.cancer.gov" 
-		src="images/tagline.gif" width=295 border=0></A>
+		src="/camod/images/tagline.gif" width=295 border=0></A>
       	  </TD>
       </TR>
     </TABLE>
@@ -47,7 +47,7 @@
               <TR>
                 <TD align=left height=50><A
                   href="login.jsp"><IMG
-                  height=46 alt="Application Logo" hspace=10 src="images/mmhcclogo.gif" border=0></A>
+                  height=46 alt="Application Logo" hspace=10 src="/camod/images/mmhcclogo.gif" border=0></A>
                  </TD></TR>
               </TBODY>
             </TABLE>            

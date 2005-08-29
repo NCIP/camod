@@ -18,25 +18,25 @@
 			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoContactUs">CONTACT US</html:link>&nbsp;&nbsp;
 			</td>
 			
-			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
+			<TD><IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1></TD>				
 			
 			<td align="center" height="20" class="footerMenuItem" onmouseofver="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
 			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoPrivacyNotice">PRIVACY NOTICE</html:link>&nbsp;&nbsp;
 			</td>
 			
-			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
+			<TD><IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1></TD>				
 						
 			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
 			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoDisclaimer">DISCLAIMER</html:link>&nbsp;&nbsp;
 			</td>
 			
-			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
+			<TD><IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1></TD>				
 			
 			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
 			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoAccessibility">ACCESSIBILITY</html:link>&nbsp;&nbsp;			
 			</td>
 
-			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
+			<TD><IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1></TD>				
 
 			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
 			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoApplicationSupport">APPLICATION SUPPORT</html:link>&nbsp;&nbsp;
@@ -44,7 +44,7 @@
 			
 			
 			
-			<TD><IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1></TD>				
+			<TD><IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1></TD>				
 			
 		      </tr>
 
@@ -65,15 +65,15 @@
         <TR>
           <TD vAlign=top>
             <DIV align=center><A href="http://www.cancer.gov/"><IMG height=31
-            alt="National Cancer Institute" src="images/footer_nci.gif"
+            alt="National Cancer Institute" src="/camod/images/footer_nci.gif"
             width=63 border=0></A> <A href="http://www.dhhs.gov/"><IMG height=31
             alt="Department of Health and Human Services"
-            src="images/footer_hhs.gif" width=39 border=0></A> <A
+            src="/camod/images/footer_hhs.gif" width=39 border=0></A> <A
             href="http://www.nih.gov/"><IMG height=31
             alt="National Institutes of Health"
-            src="images/footer_nih.gif" width=46 border=0></A> <A
+            src="/camod/images/footer_nih.gif" width=46 border=0></A> <A
             href="http://www.firstgov.gov/"><IMG height=31 alt=FirstGov.gov
-            src="images/footer_firstgov.gif" width=91 border=0></A>
+            src="/camod/images/footer_firstgov.gif" width=91 border=0></A>
           </DIV>
 	  </TD>
 	  </TR>
