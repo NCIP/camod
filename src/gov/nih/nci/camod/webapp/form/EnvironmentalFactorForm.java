@@ -28,6 +28,7 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	protected String otherName;	
 	protected String dosage;
 	protected String administrativeRoute;
+	protected String otherAdministrativeRoute;	
 	protected String regimen;
 	protected String ageAtTreatment;
 	protected String type;
@@ -79,6 +80,18 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 */
 	public void setAdministrativeRoute(String administrativeRoute) {
 		this.administrativeRoute = administrativeRoute;
+	}
+	/**
+	 * @return Returns the otherAdministrativeRoute.
+	 */
+	public String getOtherAdministrativeRoute() {
+		return otherAdministrativeRoute;
+	}
+	/**
+	 * @param otherAdministrativeRoute The otherAdministrativeRoute to set.
+	 */
+	public void setOtherAdministrativeRoute(String otherAdministrativeRoute) {
+		this.otherAdministrativeRoute = otherAdministrativeRoute;
 	}	
 	/**
 	 * @return Returns the regimen.
