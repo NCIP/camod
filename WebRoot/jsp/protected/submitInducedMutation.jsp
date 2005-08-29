@@ -68,7 +68,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Mutated Locus/Gene(if known)<br>(seperate multiple entries by comma)</label></td>
+		<td class="formLabel"><label for="field2">Mutated Locus/Gene(if known)<br></label></td>
 		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
 	</tr>
 
