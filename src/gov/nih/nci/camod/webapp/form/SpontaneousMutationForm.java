@@ -23,6 +23,8 @@ public class SpontaneousMutationForm extends BaseForm implements Serializable {
 	protected String name;
 	protected String numberMGI;
 	protected String comments;
+	protected String observation;
+	protected String methodOfObservation;
 	
 	/**
 	 * @return Returns the name.
@@ -59,6 +61,30 @@ public class SpontaneousMutationForm extends BaseForm implements Serializable {
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	/**
+	 * @return Returns the observation.
+	 */
+	public String getObservation() {
+		return observation;
+	}
+	/**
+	 * @param observation The observation to set.
+	 */
+	public void setObservation(String observation) {
+		this.observation = observation;
+	}
+	/**
+	 * @return Returns the methodOfObservation.
+	 */
+	public String getMethodOfObservation() {
+		return methodOfObservation;
+	}
+	/**
+	 * @param methodOfObservation The methodOfObservation to set.
+	 */
+	public void setMethodOfObservation(String methodOfObservation) {
+		this.methodOfObservation = methodOfObservation;
 	}	
 }
 
