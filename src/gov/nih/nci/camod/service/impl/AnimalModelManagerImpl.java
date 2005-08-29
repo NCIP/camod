@@ -34,7 +34,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		try {
 			animalModels = Search.query(AnimalModel.class);
 		} catch (Exception e) {
-			System.out.println("Exception in AnimalModelManagerImpl.getAnimalModels()");
+			System.out.println("Exception in AnimalModelManagerImpl.getAnimalModels");
 			e.printStackTrace();
 		}
 		
@@ -148,5 +148,29 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 			System.out.println("Exception in AnimalModelManagerImpl.removeAnimalModel");
 			e.printStackTrace();
 		}
+    }
+    
+    /**
+     * Search for animal models based on:
+     * 
+     *     - modelName
+     *     - piName
+     *     - siteOfTumor
+     *     - speciesName
+     * 
+     * Note: This method is currently a dummy search method and simply returns all the animal model
+     * objects in the database. Searching using eQBE needs to be done.
+     */    
+    public List search() {
+    	List animalModels = null;
+		
+		try {
+			animalModels = Search.query(AnimalModel.class);
+		} catch (Exception e) {
+			System.out.println("Exception in AnimalModelManagerImpl.search");
+			e.printStackTrace();
+		}
+		
+		return animalModels;
     }
 }

@@ -41,4 +41,6 @@ public interface AnimalModelManager {
 		Availability availability);
     
 	public void remove(String id);
+	
+	public List search();
 }
