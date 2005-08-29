@@ -51,6 +51,12 @@
             <arg0 key="ModelCharacteristicsForm.releaseDate"/>
         </field>
     </form>
-
+    
+    <form name="environmentalFactorForm">
+        <field property="name" depends="required">
+            <arg0 key="EnvironmentalFactorForm.name"/>
+    	</field>    
+	</form>
+	
   </formset>
 </form-validation>
