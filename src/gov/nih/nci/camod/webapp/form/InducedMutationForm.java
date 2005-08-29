@@ -33,6 +33,7 @@ public class InducedMutationForm extends BaseForm implements Serializable {
 	protected String name;
 	protected String description;
 	protected String observation;
+	protected String methodOfObservation;
 	protected String numberMGI;
 	
 	/**
@@ -118,6 +119,18 @@ public class InducedMutationForm extends BaseForm implements Serializable {
 	 */
 	public void setObservation(String observation) {
 		this.observation = observation;
+	}
+	/**
+	 * @return Returns the methodOfObservation.
+	 */
+	public String getMethodOfObservation() {
+		return methodOfObservation;
+	}
+	/**
+	 * @param methodOfObservation The methodOfObservation to set.
+	 */
+	public void setMethodOfObservation(String methodOfObservation) {
+		this.methodOfObservation = methodOfObservation;
 	}	
 	/**
 	 * @return Returns the numberMGI.
