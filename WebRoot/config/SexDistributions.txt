@@ -1,4 +1,3 @@
-Male
-Female
-Other
-Unknown
+Male Only
+Female Only
+Both Sexes
