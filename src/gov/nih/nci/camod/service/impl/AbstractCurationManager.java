@@ -1,20 +1,7 @@
-/**
- * Copyright (c) 2001, SAIC, its vendors, and suppliers. ALL RIGHTS RESERVED.
- *
- * @author: Johnita Beasley
- * @date: July 20, 2005
- *
- * Revision History
- * ----------------
- *
- * 2005 July 21    Johnita Beasley    Created and successfully compiled.
- * 2005 August 18  Sumeet Rajput      Integrated with caMOD codebase.
- *
- */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Curateable;
-import gov.nih.nci.camod.service.CurationManager;
+import gov.nih.nci.camod.service.*;
 
 import java.util.*;
 
@@ -28,227 +15,237 @@ import org.w3c.dom.*;
  */
 public abstract class AbstractCurationManager implements CurationManager {
 
-	protected class State {
+    private static final String ACTION_TOKENS = ":,";
 
-		private String myName = null;
+    private class State {
 
-		private String mySymbolicName = null;
+        private String myName = null;
+        private List myActions = new ArrayList();
+        private Map myNextValidStates = new HashMap();
 
-		private List myActions = new ArrayList();
+        public State(String inName) {
+            myName = inName;
+        }
 
-		private Map myNextValidStates = new HashMap();
+        public String getName() {
+            return myName;
+        }
 
-		public State(String inName, String inSymbolicName) {
-			myName = inName;
-			mySymbolicName = inSymbolicName;
-		}
+        public String getNextState(String inEvent) {
 
-		public String getName() {
-			return myName;
-		}
+            String theNextState = "";
+            if (myNextValidStates.containsKey(inEvent)) {
+                theNextState = (String) myNextValidStates.get(inEvent);
+            }
 
-		public String getSymbolicName() {
-			return mySymbolicName;
-		}
+            // Invalid event. Map to the "all" event
+            if (theNextState.equals("")) {
 
-		public String getNextState(String inEvent) {
+                inEvent = "all";
 
-			String theNextState = "";
-			if (myNextValidStates.containsKey(inEvent)) {
-				theNextState = (String) myNextValidStates.get(inEvent);
-			}
+                if (myNextValidStates.containsKey(inEvent)) {
+                    theNextState = (String) myNextValidStates.get(inEvent);
+                }
+            }
 
-			// Invalid event. Map to the "all" event
-			if (theNextState.equals("")) {
+            return theNextState;
+        }
 
-				inEvent = "all";
+        public List getActions() {
+            return myActions;
+        }
 
-				if (myNextValidStates.containsKey(inEvent)) {
-					theNextState = (String) myNextValidStates.get(inEvent);
-				}
-			}
+        public void addAction(String inAction) {
+            myActions.add(inAction);
+        }
 
-			return theNextState;
-		}
+        public void addNextValidState(String inState, String inMatchEvent) {
+            myNextValidStates.put(inMatchEvent, inState);
+        }
+    }
 
-		public List getActions() {
-			return myActions;
-		}
+    // Superclass adds action factory for configurable
+    // behavior
+    protected CuratableActionFactory myActionFactory = new CuratableActionFactoryImpl();
 
-		public void addAction(String inAction) {
-			myActions.add(inAction);
-		}
+    protected HashMap myStates = new HashMap();
 
-		public void addNextValidState(String inState, String inMatchEvent) {
-			myNextValidStates.put(inMatchEvent, inState);
-		}
-	}
+    private String myDefaultState = null;
 
-	protected HashMap myStates = new HashMap();
+    protected void init(String inWorkflowFile) {
 
-	private String myDefaultState = null;
+        Document theCurationConfig = null;
 
-	/**
-	 * AbstractCurationManager::init()
-	 */
-	protected void init(String inPath) {
+        // ///////////////////////////////////////////////////
+        // Read in Curation Configuration file.
+        // ///////////////////////////////////////////////////
+        try {
 
-		Document theCurationConfig = null;
+            // Create an instance of the DocumentBuilderFactory
+            DocumentBuilderFactory theDocumentBuilderFactory = DocumentBuilderFactory.newInstance();
+            
+            // TODO: Get the validation working
+            theDocumentBuilderFactory.setValidating(false);
+            theDocumentBuilderFactory.setNamespaceAware(true);
+ 
+            // Retrieve the DocumentBuilder from the factory.
+            DocumentBuilder theDocumentBuilder = theDocumentBuilderFactory.newDocumentBuilder();
 
-		// --------------------------------------------------------------------------------------
-		// Read in Curation Configuration file.
-		// --------------------------------------------------------------------------------------
-		try {
+            // Turn it into an in-memory object
+            theCurationConfig = theDocumentBuilder.parse(inWorkflowFile);
 
-			// Create an instance of the DocumentBuilderFactory
-			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-					.newInstance();
+            // /////////////////////////////////////////////////////////////
+            // Map state tree and Set the Default State.
+            // NOTE: this document will have already been verified by
+            // the xsd
+            // /////////////////////////////////////////////////////////////
 
-			// Retrieve the DocumentBuilder from the factory.
-			DocumentBuilder documentBuilder = documentBuilderFactory
-					.newDocumentBuilder();
+            Element theCurationStates = theCurationConfig.getDocumentElement();
+            NodeList theStateList = theCurationStates.getElementsByTagName("state");
 
-			// Turn it into an in-memory object
-			// TODO: make sure we validate
-			theCurationConfig = documentBuilder.parse(inPath
-					+ "/config/CurationConfig.xml");
+            for (int i = 0; i < theStateList.getLength(); i++) {
+                Element theStateElement = (Element) theStateList.item(i);
 
-			// /////////////////////////////////////////////////////////////
-			// Map state tree and Set the Default State.
-			// NOTE: this document will have already been verified by
-			// the xsd
-			// /////////////////////////////////////////////////////////////
+                // Note, these will always be there
+                String theName = (String) theStateElement.getElementsByTagName("name").item(0).getFirstChild()
+                        .getNodeValue();
 
-			Element theCurationStates = theCurationConfig.getDocumentElement();
-			NodeList theStateList = theCurationStates
-					.getElementsByTagName("state");
+                if ("true".equals(theStateElement.getAttribute("default"))) {
+                    myDefaultState = theName;
+                }
 
-			for (int i = 0; i < theStateList.getLength(); i++) {
-				Element theStateElement = (Element) theStateList.item(i);
+                State theState = new State(theName);
 
-				// Note, these will always be there
-				String theName = (String) theStateElement.getElementsByTagName(
-						"name").item(0).getFirstChild().getNodeValue();
-				String theSymbolicName = (String) theStateElement
-						.getElementsByTagName("symbolic-name").item(0)
-						.getNodeValue();
+                NodeList theActionsList = theStateElement.getElementsByTagName("actions");
+System.out.println("Actions: " + theActionsList);
+                // Should only be one
+                if (theActionsList.getLength() == 1) {
+                    NodeList theActionNodes = theActionsList.item(0).getChildNodes();
 
-				if ("true".equals(theStateElement.getAttribute("default"))) {
-					myDefaultState = theName;
-				}
+                    for (int j = 0; j < theActionNodes.getLength(); j++) {
 
-				State theState = new State(theName, theSymbolicName);
+                        if ("action".equals(theActionNodes.item(j).getNodeName())) {
+                            theState.addAction(theActionNodes.item(j).getFirstChild().getNodeValue());
+                        }
+                    }
+                }
 
-				NodeList theActionsList = theStateElement
-						.getElementsByTagName("actions");
+                NodeList theNextValidStatesList = theStateElement.getElementsByTagName("next-valid-states");
 
-				// Should only be one
-				if (theActionsList.getLength() == 1) {
-					NodeList theActionNodes = theActionsList.item(0)
-							.getChildNodes();
+                // Should only be one
+                if (theNextValidStatesList.getLength() == 1) {
+                    NodeList theValidStateNodes = theNextValidStatesList.item(0).getChildNodes();
 
-					for (int j = 0; j < theActionNodes.getLength(); j++) {
+                    for (int j = 0; j < theValidStateNodes.getLength(); j++) {
 
-						if ("action".equals(theActionNodes.item(j)
-								.getNodeName())) {
-							theState.addAction(theActionNodes.item(j)
-									.getFirstChild().getNodeValue());
-						}
-					}
-				}
+                        Node theValidStateNode = theValidStateNodes.item(j);
 
-				NodeList theNextValidStatesList = theStateElement
-						.getElementsByTagName("next-valid-states");
+                        NodeList theChildNodes = theValidStateNode.getChildNodes();
 
-				// Should only be one
-				if (theNextValidStatesList.getLength() == 1) {
-					NodeList theValidStateNodes = theNextValidStatesList
-							.item(0).getChildNodes();
+                        String theEvent = "all";
+                        String theStateName = null;
 
-					for (int j = 0; j < theValidStateNodes.getLength(); j++) {
+                        for (int k = 0; k < theChildNodes.getLength(); k++) {
 
-						Node theValidStateNode = theValidStateNodes.item(j);
+                            Node theChildNode = theChildNodes.item(k);
 
-						NodeList theChildNodes = theValidStateNode
-								.getChildNodes();
+                            if ("name".equals(theChildNode.getNodeName())) {
+                                theStateName = theChildNode.getFirstChild().getNodeValue();
+                            } else if ("match-event".equals(theChildNode.getNodeName())) {
+                                theEvent = theChildNode.getFirstChild().getNodeValue();
+                            }
+                        }
 
-						String theEvent = "all";
-						String theStateName = null;
+                        if (theStateName != null) {
+                            theState.addNextValidState(theStateName, theEvent);
+                        }
+                    }
+                }
 
-						for (int k = 0; k < theChildNodes.getLength(); k++) {
+                myStates.put(theName, theState);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-							Node theChildNode = theChildNodes.item(k);
+    }
 
-							if ("name".equals(theChildNode.getNodeName())) {
-								theStateName = theChildNode.getFirstChild()
-										.getNodeValue();
-							} else if ("match-event".equals(theChildNode
-									.getNodeName())) {
-								theEvent = theChildNode.getFirstChild()
-										.getNodeValue();
-							}
-						}
+    public String getDefaultState() {
+        return myDefaultState;
+    }
 
-						if (theStateName != null) {
-							theState.addNextValidState(theStateName, theEvent);
-						}
-					}
-				}
+    public Curateable changeState(Curateable inCurateableObj, String inEvent) {
 
-				myStates.put(theName, theState);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        String theCurrentStateName = inCurateableObj.getState();
 
-	}
+        System.out.println("Current state: (" + theCurrentStateName + ")");
+        
+        System.out.println("All states ***");
+        Set theKeys = myStates.keySet();
+        
+        Iterator theIter = theKeys.iterator();
+        
+        while(theIter.hasNext())
+        {
+            State theState = (State) myStates.get(theIter.next());
+            System.out.println("State: (" + theState.getName() + ")");
+        }
+        
+        
+        if (myStates.containsKey(theCurrentStateName)) {
 
-	/**
-	 * AbstractCurationManager::getDefaultState()
-	 */
-	public String getDefaultState() {
-		return myDefaultState;
-	}
+            State theCurrentState = (State) myStates.get(theCurrentStateName);
 
-	/**
-	 * AbstractCurationManager::changeState()
-	 */
-	public Curateable changeState(Curateable inCurateableObj, String inEvent) {
+            String theNextStateName = theCurrentState.getNextState(inEvent);
 
-		String theCurrentStateName = inCurateableObj.getState();
+            if (theNextStateName.equals("")) {
+                System.out.println("Cannot leave current state: " + theCurrentStateName);
+            } else if (myStates.containsKey(theNextStateName)) {
+                State theNextState = (State) myStates.get(theNextStateName);
 
-		if (myStates.containsKey(theCurrentStateName)) {
+                List theActions = theNextState.getActions();
 
-			State theCurrentState = (State) myStates.get(theCurrentStateName);
+                Iterator theIterator = theActions.iterator();
 
-			String theNextStateName = theCurrentState.getNextState(inEvent);
+                while (theIterator.hasNext()) {
 
-			if (theNextStateName.equals("")) {
-				System.out.println("Cannot leave current state: "
-						+ theCurrentStateName);
-			} else if (myStates.containsKey(theNextStateName)) {
-				State theNextState = (State) myStates.get(theNextStateName);
+                    String theActionEntry = (String) theIterator.next();
 
-				List theActions = theNextState.getActions();
+                    StringTokenizer theTokenizer = new StringTokenizer(theActionEntry, ACTION_TOKENS);
 
-				Iterator theIterator = theActions.iterator();
+                    String theActionName = theTokenizer.nextToken();
 
-				while (theIterator.hasNext()) {
-					System.out.println("Executing action: "
-							+ (String) theIterator.next());
-				}
+                    // Get the arguments for the action
+                    List theArgs = new ArrayList();
+                    while (theTokenizer.hasMoreTokens()) {
+                        String theArg = theTokenizer.nextToken();
+                        theArgs.add(theArg);
+                    }
 
-				System.out.println("Changing to state: " + theNextStateName);
-				inCurateableObj.setState(theNextStateName);
-			} else {
-				throw new IllegalArgumentException("Unknown next state: "
-						+ theNextStateName);
-			}
-		} else {
-			throw new IllegalArgumentException("Unknown current state: "
-					+ theCurrentStateName);
-		}
+                    CurateableAction theAction = myActionFactory.getAction(theActionName);
 
-		return inCurateableObj;
-	}
+                    // Execute the action
+                    if (theAction != null) {
+
+                        // Actions by default are not show stoppers if they
+                        // don't work
+                        try {
+                            theAction.execute(theArgs, inCurateableObj);
+                        } catch (Exception e) {
+                            // TODO: Handle exception
+                        }
+                    }
+                }
+
+                inCurateableObj.setState(theNextStateName);
+
+            } else {
+                throw new IllegalArgumentException("Unknown next state: " + theNextStateName);
+            }
+        } else {
+            throw new IllegalArgumentException("Unknown current state: " + theCurrentStateName);
+        }
+
+        return inCurateableObj;
+    }
 }
