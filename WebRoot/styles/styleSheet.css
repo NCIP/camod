@@ -240,8 +240,19 @@ TD.resultsBoxGreyEnd {
 TD.resultsBoxGreyEnd2 {
 	PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
 }
+
 TD.resultsBoxWhiteEnd {
 	PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff
+}
+
+TD.resultsBoxWhiteNoEnd {
+	PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff
+}
+TD.resultsBoxWhiteNoSides {
+	PADDING-LEFT: 0.8em; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff
+}
+TD.resultsBoxWhiteNoStart {
+	PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff
 }
 TD.GreyBox {
 	PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; BORDER-RIGHT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
