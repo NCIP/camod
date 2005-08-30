@@ -64,7 +64,30 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		
 		return animalModels;
 	}
-	
+    
+    public List getAllByState(String inState) {
+        
+        // The list of AnimalModels to be returned
+        List theAnimalModels = null;
+        
+        // The following two objects are needed for eQBE.
+        AnimalModel theAnimalModel = new AnimalModel();
+        theAnimalModel.setState(inState);
+        
+        // Apply evaluators to object properties
+        Evaluation theEvaluation = new Evaluation();
+        theEvaluation.addEvaluator("animalModel.state", Evaluator.EQUAL); 
+        
+        try {
+            theAnimalModels = Search.query(theAnimalModel, theEvaluation);
+        } catch (Exception e) {
+            System.out.println("Exception in AnimalModelManagerImpl.getAnimalModels(String username)");
+            e.printStackTrace();
+        }
+        
+        return theAnimalModels;
+    }
+    
 	public AnimalModel get(String id) {
 		AnimalModel animalModel = null;
 		

@@ -26,7 +26,9 @@ public interface AnimalModelManager {
 	public List getAll();
 	
 	public List getAll(String username);
-	
+    
+    public List getAllByState(String inState);
+    
 	public AnimalModel get(String id);
     
 	public void save(AnimalModel animalModel);
