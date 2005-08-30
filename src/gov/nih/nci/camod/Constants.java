@@ -1,14 +1,11 @@
 package gov.nih.nci.camod;
 
-
 /**
  * Constant values used throughout the application.
- *
+ * 
  * <p>
  * <a href="Constants.java.html"><i>View Source</i></a>
  * </p>
- *
- * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 public class Constants {
     //~ Static fields/initializers =============================================
@@ -170,4 +167,53 @@ public class Constants {
      */
     public static final String CURRENTUSER = "camod.loggedon.username";
     public static final String LOGINFAILED = "loginfailed";
+
+    // /////////////////////////////////////////////////////////////
+    // Admin specific constants
+    // /////////////////////////////////////////////////////////////
+
+    public interface Admin {
+
+        /**
+         * A constant that defines what file is used for the model curation
+         * process
+         */
+        public static final String MODEL_CURATION_WORKFLOW = "config/CurationConfig.xml";
+
+        /**
+         * A constant that defines what file is used for the comment curation
+         * process
+         */
+        public static final String COMMENT_CURATION_WORKFLOW = "config/CommentCurationConfig.xml";
+
+        /**
+         * Used to set/pull the objects needing to be reviewed out of the
+         * request
+         */
+        public static final String COMMENTS_NEEDING_REVIEW = "commentsNeedingReview";
+
+        /**
+         * Used to set/pull the objects needing to be screened out of the
+         * request
+         */
+        public static final String MODELS_NEEDING_SCREENING = "modelsNeedingScreening";
+
+        /** Used to set/pull the objects needing to be edited out of the request */
+        public static final String MODELS_NEEDING_EDITING = "modelsNeedingEditing";
+
+        /** Used to set/pull the objects needing to be edited out of the request */
+        public static final String MODELS_NEEDING_MORE_INFO = "modelsNeedingMoreInfo";
+
+        /**
+         * Used to set/pull the objects needing to be assigned a screener out of
+         * the request
+         */
+        public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
+
+        /**
+         * Used to set/pull the objects needing to be assigned an editor out of
+         * the request
+         */
+        public static final String MODELS_NEEDING_EDITOR_ASSIGNMENT = "modelsNeedingEditorAssignment";
+    }
 }
