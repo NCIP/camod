@@ -10,7 +10,7 @@
 
 	<div id="menu1" class="masterTitle" onclick="SwitchMenu('sub1')" onmouseover="ChangeClass('menu1','masterTitleOver')" onmouseout="ChangeClass('menu1','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> MODEL CHARACTERISTICS</div>
 	<span class="submasterdiv" id="sub1">		
-		&nbsp;&nbsp;&nbsp;- <html:link styleClass="subMenuBlue" action="AnimalModelPopulateAction.do?method=populate"><%= request.getSession().getAttribute( Constants.MODELDESCRIPTOR ) %></html:link>
+		&nbsp;&nbsp;&nbsp;- <html:link styleClass="subMenuBlue" action="/protected/AnimalModelPopulateAction.do?method=populate"><%= request.getSession().getAttribute( Constants.MODELDESCRIPTOR ) %></html:link>
 		<br><br>		
 	</span>
 

@@ -4,7 +4,7 @@
 <TR><TD class=subMenuPrimaryItems>
 
 <DIV>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="adminRoles">&nbsp;&nbsp;ADMIN ROLES</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="AdminRolesPopulateAction">&nbsp;&nbsp;ADMIN ROLES</html:link>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="adminUsersAppointment.jsp">&nbsp;&nbsp;USERS APPOINTMENT</html:link>
 	<BR>
