@@ -1,97 +1,90 @@
-<curation-states>
+<?xml version="1.0" encoding="UTF-8"?>
+<curation-states xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost:8080/camod/config/CurationConfig.xsd" >
 	<state default="true">
-	 	<name>INCOMPLETE</name>
-		<symbolic-name>Incomplete</symbolic-name>
+	 	<name>Incomplete</name>
 		<next-valid-states>
 		    <next-valid-state>
-		        <name>COMPLETE</name>
+		        <name>Complete-not screened</name>
 		    </next-valid-state>
 		</next-valid-states>
 	</state>
 	
 	<state default="false">
-	 	<name>COMPLETE</name>
+	 	<name>Complete-not screened</name>
 	    <actions>
 		    <action>email:Coordinator</action>
 		</actions>
-		<symbolic-name>CompleteNotScreened</symbolic-name>
 		<next-valid-states>
 		    <next-valid-state>
-		        <name>SCREENER_ASSIGNED</name>
+		        <name>Screener-assigned</name>
 		    </next-valid-state>
 		</next-valid-states>
 	</state>
 	
 	<state default="false">
-	 	<name>SCREENER_ASSIGNED</name>
-		<symbolic-name>ScreenerAssigned</symbolic-name>
+	 	<name>Screener-assigned</name>
 	    <actions>
 		    <action>email:Screener</action>
 		</actions>
 		<next-valid-states>
 		    <next-valid-state>
-		        <name>SCREENER_APPROVED</name>
+		        <name>Screened-approved</name>
 		        <match-event>approved</match-event>
 		    </next-valid-state>
 		    <next-valid-state>
-		        <name>SCREENER_REJECTED</name>
+		        <name>Screened-rejected</name>
 		        <match-event>rejected</match-event>
 		    </next-valid-state>
 		</next-valid-states>
 	</state>
 	
 	<state default="false">
-	 	<name>SCREENER_APPROVED</name>
-		<symbolic-name>ScreenerApproved</symbolic-name>
+	 	<name>Screened-approved</name>
 		<next-valid-states>
 		    <next-valid-state>
-		        <name>REVIEWER_ASSIGNED</name>
+		        <name>Editor-assigned</name>
 		    </next-valid-state>
 		</next-valid-states>
 	</state>
 	
 	<state default="false">
-	 	<name>SCREENER_REJECTED</name>
-		<symbolic-name>ScreenerRejected</symbolic-name>
+	 	<name>Screened-rejected</name>
 	</state>
 	
 	<state default="false">
-	 	<name>REVIEWER_ASSIGNED</name>
-		<symbolic-name>ReviewerAssigned</symbolic-name>
+	 	<name>Editor-assigned</name>
 		<actions>
 		    <action>email:Editor</action>
 		</actions>
 		<next-valid-states>
 		    <next-valid-state>
-		        <name>REVIEWER_APPROVED</name>
+		        <name>Edited-approved</name>
 		        <match-event>approved</match-event>
 		    </next-valid-state>
 		    <next-valid-state>
-		        <name>REVIEWER_NEED_MORE_INFO</name>
-		        <match-event>rejected</match-event>
+		        <name>Edited-need more info</name>
+		        <match-event>need_more_info</match-event>
 		    </next-valid-state>
 		</next-valid-states>
 	</state>
 	
 	<state default="false">
-	 	<name>REVIEWER_APPROVED</name>
-		<symbolic-name>ReviewerApproved</symbolic-name>
+	 	<name>Edited-approved</name>
 	</state>
 	
 	<state default="false">
-	 	<name>REVIEWER_NEED_MORE_INFO</name>
-		<symbolic-name>ReviewerApproved</symbolic-name>
+	 	<name>Edited-need more info</name>
 		<actions>
 		    <action>email:Submitter</action>
 		</actions>
 		<next-valid-states>
 		    <next-valid-state>
-		        <name>REVIEWER_APPROVED</name>
+		        <name>Edited-approved</name>
 		        <match-event>approved</match-event>
 		    </next-valid-state>
 		    <next-valid-state>
-		        <name>REVIEWER_NEED_MORE_INFO</name>
-		        <match-event>rejected</match-event>
+		        <name>Edited-need more info</name>
+		        <match-event>need_more_info</match-event>
 		    </next-valid-state>
 		</next-valid-states>
 	</state>
