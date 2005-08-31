@@ -30,12 +30,22 @@
 			</tr>			
 					
             <tr>
-                <td class="resultsBoxGrey">
-                		This model's status is currently set to <b><%= request.getSession().getAttribute( Constants.MODELSTATUS ) %></b>                		
-                </td>
-                <td align="right" class="resultsBoxGreyEnd2">
-                	<input class="actionButton" type="submit" value="Set model status to Complete" />
-                </td>
+                <logic:notEqual name="<%= Constants.MODELSTATUS%>" value="Incomplete">
+                    <td class="resultsBoxGreyBothEnd">
+                		    This model's status is currently set to <b><%= request.getSession().getAttribute( Constants.MODELSTATUS ) %></b>                		
+                    </td>
+                </logic:notEqual>
+                <logic:equal name="<%= Constants.MODELSTATUS%>" value="Incomplete">
+                    <td class="resultsBoxGrey">
+                		    This model's status is currently set to <b><%= request.getSession().getAttribute( Constants.MODELSTATUS ) %></b>                		
+                    </td>
+                    <td align="right" class="resultsBoxGreyEnd2">
+                        <form method="post" action="ChangeAnimalModelToCompleteAction.do" >
+                            <input type="submit" value= "Change the model state to Complete" >
+                            <input type="hidden" name="ModelId" value="<%= request.getSession().getAttribute(Constants.MODELID) %>">
+                        </form > 
+                    </td>
+                </logic:equal>
                 		               		
             </tr>				
 
