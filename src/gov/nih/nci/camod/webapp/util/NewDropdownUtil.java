@@ -16,13 +16,14 @@ public class NewDropdownUtil {
 
     private static Map ourFileBasedLists = new HashMap();
 
-    public static void populateDropdown(HttpServletRequest inRequest, String inDropdownKey)
+    public static void populateDropdown(HttpServletRequest inRequest, String inDropdownKey, String inFilter)
             throws IllegalArgumentException {
 
-        List theList = getTextFileDropdown(inRequest, inDropdownKey);
-
-        if (theList == null) {
-            theList = getDatabaseDropdown(inRequest, inDropdownKey);
+        List theList = null;
+        if (inDropdownKey.indexOf(".txt") != -1) {
+            theList = getTextFileDropdown(inRequest, inDropdownKey);
+        } else if (inDropdownKey.indexOf(".db") != -1) {
+            theList = getDatabaseDropdown(inRequest, inDropdownKey, inFilter);
         }
 
         if (theList == null) {
@@ -33,13 +34,12 @@ public class NewDropdownUtil {
         inRequest.setAttribute(inDropdownKey, theList);
     }
 
-    private static List getDatabaseDropdown(HttpServletRequest inRequest, String inDropdownKey) {
+    private static List getDatabaseDropdown(HttpServletRequest inRequest, String inDropdownKey, String inFilter) {
 
         List theReturnList = null;
 
         // Grab them for the first time
         if (inDropdownKey.equals(Constants.SPECIESDROP)) {
-
             theReturnList = getSpeciesList(inRequest);
         }
 
@@ -48,7 +48,6 @@ public class NewDropdownUtil {
 
     private static WebApplicationContext getContext(HttpServletRequest inRequest) {
         return WebApplicationContextUtils.getRequiredWebApplicationContext(inRequest.getSession().getServletContext());
-
     }
 
     private static synchronized List getTextFileDropdown(HttpServletRequest inRequest, String inDropdownKey) {
@@ -59,38 +58,37 @@ public class NewDropdownUtil {
             theReturnList = (List) ourFileBasedLists.get(inDropdownKey);
         } else {
 
-            String theBasePath = inRequest.getSession().getServletContext().getRealPath("/config/dropdowns");
+            String theFilename = inRequest.getSession().getServletContext().getRealPath("/config/dropdowns") + "/"
+                    + inDropdownKey;
 
-            List theList = new ArrayList();
-
-            // Grab them for the first time
-            if (inDropdownKey.equals(Constants.SEXDISTRIBUTIONDROP)) {
-
-                try {
-
-                    String theFilename = theBasePath + "/SexDistributions.txt";
-                    System.out.println("The filename: " + theFilename);
-                    BufferedReader in = new BufferedReader(new FileReader(theFilename));
-
-                    String str;
-                    while ((str = in.readLine()) != null) {
-                        System.out.println("<getDropdownListFromFile> Reading config file: " + theFilename + " ->"
-                                + str);
-                        theList.add(str);
-                    }
-                    in.close();
-
-                } catch (IOException e) {
-                    // TODO: Should propagate exception
-                }
-            }
+            List theList = readListFromFile(theFilename);
 
             // Built a list. Add to static hash
             if (theList.size() != 0) {
-
                 ourFileBasedLists.put(inDropdownKey, theList);
                 theReturnList = theList;
             }
+        }
+
+        return theReturnList;
+    }
+
+    static private List readListFromFile(String inFilename) {
+        List theReturnList = new ArrayList();
+
+        try {
+            System.out.println("The filename: " + inFilename);
+            BufferedReader in = new BufferedReader(new FileReader(inFilename));
+
+            String str;
+            while ((str = in.readLine()) != null) {
+                System.out.println("<getDropdownListFromFile> Reading config file: " + inFilename + " ->" + str);
+                theReturnList.add(str);
+            }
+            in.close();
+
+        } catch (IOException e) {
+            // TODO: Should propagate exception
         }
 
         return theReturnList;
