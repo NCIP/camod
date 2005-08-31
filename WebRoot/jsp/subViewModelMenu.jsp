@@ -4,25 +4,36 @@
 <TR><TD class=subMenuPrimaryGreyTitle height=27>Viewing Model: <b>PB-p53(R172L)</b></TD></TR>
 <TR><TD class=subMenuPrimaryItems>
 <DIV>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewModelCharacteristics">MODEL CHARACTERISTICS</html:link>
+	<bean:parameter id="mdl" name="aModelID"/>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=ModelCharacteristics" styleClass="subMenuPrimary">MODEL CHARACTERISTICS</a>
 	<BR>	
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewGeneticDescription">GENETIC DESCRIPTION</html:link>	
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=GeneticDescription" styleClass="subMenuPrimary">GENETIC DESCRIPTION</a>	
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewCarcinogenicInterventions">CARCINOGENIC INTERVENTIONS</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=CarcinogenicInterventions" styleClass="subMenuPrimary">CARCINOGENIC INTERVENTIONS</a>
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewPublications">PUBLICATIONS</html:link>	
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=Publications" styleClass="subMenuPrimary">PUBLICATIONS</a>	
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewHistopathology">HISTOPATHOLOGY</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=Histopathology" styleClass="subMenuPrimary">HISTOPATHOLOGY</a>
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewTherapeuticApproaches">THERAPEUTIC APPROACHES</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=TherapeuticApproaches" styleClass="subMenuPrimary">THERAPEUTIC APPROACHES</a>
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewCellLines">CELL LINES</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=CellLines" styleClass="subMenuPrimary">CELL LINES</a>
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewImages">IMAGES</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=Images" styleClass="subMenuPrimary">IMAGES</a>
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewMicroarrays">MICROARRAYS</html:link>	
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=Microarrays" styleClass="subMenuPrimary">MICROARRAYS</a>	
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;<html:link styleClass="subMenuPrimary" action="viewTransplantXenograft">TRANSPLANT/XENOGRAFT</html:link>	
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<a href="viewModelAction.do?aModelID=<%=mdl%>&page=TransplantXenograft" styleClass="subMenuPrimary">TRANSPLANT/XENOGRAFT</a>	
 	<BR>
 	<BR>
 	<!-- Add checks to see if in submission mode, if so add VIEW MY MODELS option -->

@@ -1,10 +1,10 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
 
 <script language="JavaScript" src="scripts/EvsTree.js"></script>
 
-
-<FORM name="input" action="/searchResults.do" method="get">
+<html:form action="SimpleSearchAction.do" focus="keyword">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -58,7 +58,7 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<a href="javascript:showTissueTree('input', 'mouse', 1)">
+				<a href="javascript:showTissueTree('simpleSearchForm', 'mouse', 1)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				<INPUT name="organTissueName" type="hidden"/>
 		 		<INPUT name="organTissueCode" type="hidden"/>
@@ -90,9 +90,15 @@
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
 					<tr>
-						<td><input class="actionButton" type="submit" value="Search" /></td>
-						<td><input class="actionButton" type="reset" value="Reset" /></td>
-					</tr>
+					  <html:submit styleClass="actionButton">
+						  <bean:message key="button.submit"/>
+					  </html:submit>
+					  
+					  <html:reset styleClass="actionButton">
+					  	  <bean:message key="button.reset"/>
+	  				  </html:reset>
+				  </html:form>			
+				  	</tr>
 				</TABLE>
 			</td>
 		</tr>

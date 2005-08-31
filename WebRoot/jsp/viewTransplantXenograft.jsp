@@ -1,6 +1,3 @@
-<%@ include file="/jsp/header.jsp" %>
-<%@ include file="/jsp/sidebar.jsp" %>
-
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -94,5 +91,3 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
-
-<%@ include file="/jsp/footer.jsp" %>

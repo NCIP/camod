@@ -112,6 +112,10 @@
 			name="xenograftForm"
 		    type="gov.nih.nci.camod.webapp.form.XenograftForm"/>
 
+		<form-bean
+			name="simpleSearchForm"
+		    type="gov.nih.nci.camod.webapp.form.SimpleSearchForm"/>
+
   </form-beans>
 
   <!-- ========== Global Exceptions Definitions =================================== -->
@@ -249,68 +253,8 @@
 			path="/jsp/subViewModelMenu.jsp"></forward>
 		
 		<forward
-			name="viewCarcinogenicInterventions"
-			path="/jsp/viewCarcinogenicInterventions.jsp"></forward>
-		
-		<forward
-			name="viewCellLines"
-			path="/jsp/viewCellLines.jsp"></forward>
-		
-		<forward
-			name="viewEngineeredTransgene"
-			path="/jsp/viewEngineeredTransgene.jsp"></forward>
-		
-		<forward
-			name="viewGeneticDescription"
-			path="/jsp/viewGeneticDescription.jsp"></forward>
-		
-		<forward
-			name="viewGenomicSegment"
-			path="/jsp/viewGenomicSegment.jsp"></forward>
-		
-		<forward
-			name="viewHistopathology"
-			path="/jsp/viewHistopathology.jsp"></forward>
-		
-		<forward
-			name="viewImages"
-			path="/jsp/viewImages.jsp"></forward>
-		
-		<forward
-			name="viewInducedMutation"
-			path="/jsp/viewInducedMutation.jsp"></forward>
-		
-		<forward
-			name="viewMicroarrays"
-			path="/jsp/viewMicroarrays.jsp"></forward>
-		
-		<forward
-			name="viewModelCharacteristics"
-			path="/jsp/viewModelCharacteristics.jsp"></forward>
-		
-		<forward
-			name="viewModelMenu"
-			path="/jsp/viewModelMenu.jsp"></forward>
-		
-		<forward
-			name="viewPublications"
-			path="/jsp/viewPublications.jsp"></forward>
-		
-		<forward
-			name="viewSpontaneousMutation"
-			path="/jsp/viewSpontaneousMutation.jsp"></forward>
-		
-		<forward
-			name="viewTargetedModification"
-			path="/jsp/viewTargetedModification.jsp"></forward>
-		
-		<forward
-			name="viewTherapeuticApproaches"
-			path="/jsp/viewTherapeuticApproaches.jsp"></forward>
-		
-		<forward
-			name="viewTransplantXenograft"
-			path="/jsp/viewTransplantXenograft.jsp"></forward>
+			name="viewModel"
+			path="/jsp/viewModel.jsp"></forward>
 		
 		<forward
 			name="zoomifyImage"
@@ -860,86 +804,6 @@
 			parameter="/jsp/subViewModelMenu.jsp" />
 		
 		<action
-			path="/viewCarcinogenicInterventions"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewCarcinogenicInterventions.jsp" />
-		
-		<action
-			path="/viewCellLines"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewCellLines.jsp" />
-		
-		<action
-			path="/viewEngineeredTransgene"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewEngineeredTransgene.jsp" />
-		
-		<action
-			path="/viewGeneticDescription"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewGeneticDescription.jsp" />
-		
-		<action
-			path="/viewGenomicSegment"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewGenomicSegment.jsp" />
-		
-		<action
-			path="/viewHistopathology"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewHistopathology.jsp" />
-		
-		<action
-			path="/viewImages"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewImages.jsp" />
-		
-		<action
-			path="/viewInducedMutation"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewInducedMutation.jsp" />
-		
-		<action
-			path="/viewMicroarrays"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewMicroarrays.jsp" />
-		
-		<action
-			path="/viewModelCharacteristics"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewModelCharacteristics.jsp" />
-		
-		<action
-			path="/viewModelMenu"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewModelMenu.jsp" />
-		
-		<action
-			path="/viewPublications"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewPublications.jsp" />
-		
-		<action
-			path="/viewSpontaneousMutation"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewSpontaneousMutation.jsp" />
-		
-		<action
-			path="/viewTargetedModification"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewTargetedModification.jsp" />
-		
-		<action
-			path="/viewTherapeuticApproaches"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewTherapeuticApproaches.jsp" />
-		
-		<action
-			path="/viewTransplantXenograft"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewTransplantXenograft.jsp" />
-		
-		<action
 			path="/zoomifyImage"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/zoomifyImage.jsp" />
@@ -950,6 +814,25 @@
 			roles="admin"
 			unknown="false"
 			validate="false" />
+
+	 <!--  search forms -->
+    <action path="/SimpleSearchAction"
+	        type="gov.nih.nci.camod.webapp.action.SimpleSearchAction"
+	        name="simpleSearchForm"
+	        scope="request"
+	        parameter="unprotected_method" 
+	        unknown="false"
+	        validate="false"
+	        input="/simpleSearch">    
+    </action>
+
+    <action path="/viewModelAction"
+	        type="gov.nih.nci.camod.webapp.action.ViewModelAction"
+	        scope="request"
+	        parameter="method"
+   	        unknown="false"
+	        validate="false" >
+    </action>
 
      <!-- AssociatedExpressionForm -->     
      <!-- CellLineForm -->     

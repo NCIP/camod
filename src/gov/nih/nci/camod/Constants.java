@@ -167,6 +167,10 @@ public class Constants {
      */
     public static final String CURRENTUSER = "camod.loggedon.username";
     public static final String LOGINFAILED = "loginfailed";
+	/**
+	 * Used for search results
+	 */
+    public static final String SEARCH_RESULTS = "searchResults";
 
     // /////////////////////////////////////////////////////////////
     // Admin specific constants
