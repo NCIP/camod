@@ -54,4 +54,10 @@
     <!-- SexDistributionManager -->
     <bean id="sexDistributionManager" class="gov.nih.nci.camod.service.impl.SexDistributionManagerImpl"/>    
     
+    <!-- treatmentManager -->
+    <bean id="treatmentManager" class="gov.nih.nci.camod.service.impl.TreatmentManagerImpl"/>    
+    
+    <!-- agentManager -->
+    <bean id="agentManager" class="gov.nih.nci.camod.service.impl.AgentManagerImpl"/>
+    
 </beans>
