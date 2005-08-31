@@ -24,7 +24,7 @@ public class AdminRolesPopulateAction extends BaseAction {
         List theList = theAnimalModelManager.getAllByState("Edited-need more info");
         if (theList != null && !theList.isEmpty()) {
             inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_MORE_INFO, theList);
-        } 
+        }
 
         theList = theAnimalModelManager.getAllByState("Editor-assigned");
         if (theList != null && !theList.isEmpty()) {
@@ -33,10 +33,9 @@ public class AdminRolesPopulateAction extends BaseAction {
 
         theList = theAnimalModelManager.getAllByState("Screened-approved");
         if (theList != null && !theList.isEmpty()) {
-            inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT,
-                    theList);
-        } 
-        
+            inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT, theList);
+        }
+
         theList = theAnimalModelManager.getAllByState("Screener-assigned");
         if (theList != null && !theList.isEmpty()) {
             inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENING, theList);
@@ -46,9 +45,9 @@ public class AdminRolesPopulateAction extends BaseAction {
         if (theList != null && !theList.isEmpty()) {
             inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT, theList);
         }
-        
+
         // TODO: This isn't correct
-        theList = theAnimalModelManager.getAllByState("Incomplete");
+        theList = null; // theAnimalModelManager.getAllByState("Incomplete");
         if (theList != null && !theList.isEmpty()) {
             inRequest.setAttribute(Constants.Admin.COMMENTS_NEEDING_REVIEW, theList);
         }
