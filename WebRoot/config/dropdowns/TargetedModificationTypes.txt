@@ -1,0 +1,10 @@
+Null Modification
+Amino Acid
+Deletion
+Insertion
+Misense
+Nonsense
+Point Mutation
+Regulatory Sequence
+loxP Sites
+test
