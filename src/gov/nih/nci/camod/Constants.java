@@ -144,7 +144,7 @@ public class Constants {
     public static final String HORMONEDROP = "hormonedrop";
     public static final String NUTRITIONFACTORDROP = "nutritionfactordrop";
     public static final String RADIATIONDROP = "radiationdrop";
-    public static final String SUGERYDROP = "sugerydrop";
+    public static final String SURGERYDROP = "surgerydrop";
     public static final String VIRUSDROP = "virusdrop";
 
     
@@ -167,11 +167,32 @@ public class Constants {
      */
     public static final String CURRENTUSER = "camod.loggedon.username";
     public static final String LOGINFAILED = "loginfailed";
-	/**
+
+    /**
 	 * Used for search results
 	 */
     public static final String SEARCH_RESULTS = "searchResults";
 
+
+    // /////////////////////////////////////////////////////////////
+    // Submission specific constants
+    // /////////////////////////////////////////////////////////////
+    
+    public interface Submit {
+    	
+    	/**
+    	 * Used to store a list of names for the cardiogentic intervention section of the sidebar menu of the submission section
+    	 */
+    	public static final String CHEMICALDRUG_LIST = "chemicaldrug_list";
+    	public static final String ENVIRONMENTALFACTOR_LIST = "environmentalfactor_list";
+    	public static final String GENEDELIVERY_LIST = "genedelivery_list";
+    	public static final String GROWTHFACTORS_LIST = "growthfactors_list";
+    	public static final String HORMONE_LIST = "hormone_list";
+    	public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
+    	public static final String SURGERYOTHER_LIST = "surgeryother_list";
+    	public static final String VIRALTREATMENT_LIST = "viraltreatment_list";    	    	
+    }
+    
     // /////////////////////////////////////////////////////////////
     // Admin specific constants
     // /////////////////////////////////////////////////////////////
