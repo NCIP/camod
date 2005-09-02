@@ -427,7 +427,10 @@
 		<forward
 			name="submitViralTreatment"
 			path="/jsp/protected/submitViralTreatment.jsp"></forward>
-     			
+			
+     	<forward
+     		name="AnimalModelTreePopulateAction"
+     		path="/AnimalModelTreePopulateAction.do"></forward>		
       </global-forwards>
 
   <!-- ========== Action Mapping Definitions =================================== -->
@@ -890,6 +893,13 @@
 			validate="false">		
     </action>
     
+    <!--  Generate the list of items on the submission subMenu -->
+	<action path="/AnimalModelTreePopulateAction"
+			type="gov.nih.nci.camod.webapp.action.AnimalModelTreePopulateAction"
+			parameter="method"
+			validate="false">
+	</action>
+
     <!-- changed input so the page returns to correct jsp on failed validation -->
     <action path="/EditAnimalModel"
 	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
@@ -931,7 +941,25 @@
      <!-- PublicationForm -->	
      <!-- RadiationForm -->
      <!-- SpontaneousMutationForm -->
+    
      <!-- SurgeryForm -->
+     <action path="/SurgeryAction"
+	        type="gov.nih.nci.camod.webapp.action.SurgeryAction"
+	        name="surgeryForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="submitSurgeryOther">   	
+    </action>
+    
+    <action path="/SurgeryPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.SurgeryPopulateAction"
+    		name="surgeryForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+    
      <!-- TargetedModificationForm -->
      <!-- TherapyForm -->
      <!-- ViralTreatmentForm -->
@@ -986,7 +1014,7 @@
 	        parameter="method"
    	        unknown="false"
 	        input="/submitModels"
-	        validate="false" >
+	        validate="false" >   
     </action>
                 
     <action path="/SetOptionsAction"
