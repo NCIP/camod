@@ -129,24 +129,24 @@ public class Constants {
     /**
      *  Used to store lists for drop down menus
      */
-    public static final String SPECIESDROP = "speciesdrop";
-    public static final String STRAINDROP = "straindrop";
-    public static final String SEXDISTRIBUTIONDROP = "sexdrop";
-    public static final String DOSAGEUNITSDROP = "dosageunitsdrop";
-    public static final String ADMINISTRATIVEROUTEDROP = "adminroutedrop";
-    public static final String AGEUNITSDROP = "ageunitsdrop";
-    public static final String GENDERDROP = "genderdrop";
-    
-    //Specific to a single screen
-    public static final String CHECMICALDRUGDROP = "chemdrugdrop";
-    public static final String ENVIRONFACTORDROP = "envfactordrop";
-    public static final String GROWTHFACTORDROP = "growfactordrop";
-    public static final String HORMONEDROP = "hormonedrop";
-    public static final String NUTRITIONFACTORDROP = "nutritionfactordrop";
-    public static final String RADIATIONDROP = "radiationdrop";
-    public static final String SURGERYDROP = "surgerydrop";
-    public static final String VIRUSDROP = "virusdrop";
-
+    public interface Dropdowns {
+        public static final String SPECIESDROP = "speciesdrop.db";
+        public static final String STRAINDROP = "straindrop.db";
+        public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
+        public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
+        public static final String ADMINISTRATIVEROUTEDROP = "adminroutedrop.db";
+        public static final String AGEUNITSDROP = "AgeUnits.txt";
+        
+        //Specific to a single screen
+        public static final String CHECMICALDRUGDROP = "chemdrugdrop.db";
+        public static final String ENVIRONFACTORDROP = "envfactordrop.db";
+        public static final String GROWTHFACTORDROP = "growfactordrop.db";
+        public static final String HORMONEDROP = "hormonedrop.db";
+        public static final String NUTRITIONFACTORDROP = "nutritionfactordrop.db";
+        public static final String RADIATIONDROP = "radiationdrop";
+        public static final String SURGERYDROP = "surgerydrop.db";
+        public static final String VIRUSDROP = "virusdrop.db";	
+    }    
     
     /**
      * Used to determine the current model to edit on submission/edit
