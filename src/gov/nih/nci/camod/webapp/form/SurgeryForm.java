@@ -30,7 +30,16 @@ import java.io.Serializable;
 	protected String regimen;
 	protected String ageAtTreatment;
 	protected String type;
-
+	protected String ageUnit;
+	
+	public String getAgeUnit() {
+		return ageUnit;
+	}
+	
+	public void setAgeUnit( String ageUnit) {
+		this.ageUnit = ageUnit;
+	}
+	
 	/**
 	 * @return Returns the name.
 	 */
