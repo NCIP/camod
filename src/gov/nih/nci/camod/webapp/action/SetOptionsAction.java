@@ -2,7 +2,7 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
-import gov.nih.nci.camod.webapp.util.DropdownUtil;
+import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.util.List;
 
@@ -16,7 +16,8 @@ import org.apache.struts.action.ActionMapping;
 public class SetOptionsAction extends BaseAction {
 		
 	/**
-	 * Execute
+	 * This method will take in a species and set the dropdown for it's strains
+	 * Then will return back to where it's supposed to goto
 	 * 
 	 * @param mapping
 	 * @param form
@@ -30,16 +31,15 @@ public class SetOptionsAction extends BaseAction {
                                 HttpServletResponse response)
     throws Exception {    	 
     	  	 
-    	 DropdownUtil drop = new DropdownUtil();
+    	 //DropdownUtil drop = new DropdownUtil();
+    	 NewDropdownUtil drop = new NewDropdownUtil();
     	 
     	 String speciesName = request.getParameter( "speciesName" );
     	 String page = request.getParameter( "page" );
     	 
     	 System.out.println( "<SetOptionsActions execute> speciesName: " + speciesName + "  page: " + page );
     	 
-    	 List strainList  = drop.getStrainList( speciesName );
-    	
-    	 request.getSession().setAttribute( Constants.STRAINDROP, strainList );
+    	 drop.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesName );
     	
     	 if( page.equals("submitNewModel" )) {    		 
 			 ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;

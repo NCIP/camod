@@ -99,7 +99,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 		
 		EnvironmentalFactorManager environmentalFactorManager = (EnvironmentalFactorManager) getBean( "environmentalFactorManager" );
 		//environmentalFactorManager.save( person, environmentalFactor, treatment, sexDistribution );
-		environmentalFactorManager.save( environmentalFactor, treatment, sexDistribution ); 
+		//environmentalFactorManager.save( environmentalFactor, treatment, sexDistribution ); 
 		
 		/*  Setup global constants to use for submission / editing process */
 		/*  Rework since save method does not return modelID */

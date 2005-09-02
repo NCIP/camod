@@ -27,7 +27,7 @@ public class SubmitAction extends BaseAction{
 									        HttpServletResponse response)
     throws Exception {
     	
-    	System.out.println( "<SubmitAction setModelConstants> modelID" + request.getParameter( "aModelID" ) );
+    	System.out.println( "<SubmitAction setModelConstants> modelID=" + request.getParameter( "aModelID" ) );
 		
 		String modelID = request.getParameter( "aModelID" );
 		
@@ -43,7 +43,7 @@ public class SubmitAction extends BaseAction{
         //msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "delete.successful" ) );
         //saveErrors( request, msg );
         
-		return mapping.findForward( "submitOverview" );
+		return mapping.findForward( "AnimalModelTreePopulateAction" );
     }
     
 }

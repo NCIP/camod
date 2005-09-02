@@ -143,7 +143,7 @@ public final class AnimalModelAction extends BaseAction {
         msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "creation.successful" ) );
         saveErrors( request, msg );
      
-        return mapping.findForward("submitOverview");
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
     
     
@@ -266,7 +266,7 @@ public final class AnimalModelAction extends BaseAction {
         msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "modelchar.edit.successful" ) );
         saveErrors( request, msg );
      
-	   return mapping.findForward( "submitOverview" );  	    
+	   return mapping.findForward( "AnimalModelTreePopulateAction" );  	    
     }
     
     

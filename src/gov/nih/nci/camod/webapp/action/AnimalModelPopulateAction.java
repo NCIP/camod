@@ -5,7 +5,7 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
-import gov.nih.nci.camod.webapp.util.DropdownUtil;
+import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.util.List;
 
@@ -119,22 +119,23 @@ public class AnimalModelPopulateAction extends BaseAction {
 			System.out.println( "<AnimalModelPopulateAction dropdown> Entering... " );
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			DropdownUtil drop = new DropdownUtil();
+			//DropdownUtil drop = new DropdownUtil();
+			NewDropdownUtil drop = new NewDropdownUtil();
 			
-			List speciesList = drop.getSpeciesList();
+			drop.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
 			
 			//TODO: Get specific list for speciesName ( for submitModelCharacteristics ) 
-			List strainList = drop.getStrainList( speciesList.get(0).toString() );
+			List speciesList = (List) request.getAttribute( Constants.Dropdowns.SPECIESDROP );			
+			System.out.println( "speciesList.get(0):" + speciesList.size()  );
 			
-			ServletContext application = servlet.getServletConfig().getServletContext();			
-			String configFileName = application.getRealPath( "/config/SexDistributions.txt" );
+			drop.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString() );						
 			
-			List sexDistList = drop.getDropdownListFromFile( configFileName );			 
+			drop.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 
 				
 			//Store the values for the drop down menus in a Constants variable, used in the JSP
-			request.getSession().setAttribute( Constants.SPECIESDROP, speciesList );
-			request.getSession().setAttribute( Constants.STRAINDROP, strainList );
-			request.getSession().setAttribute( Constants.SEXDISTRIBUTIONDROP, sexDistList );		  		
+			//request.getSession().setAttribute( Constants.Dropdowns.SPECIESDROP, speciesList );
+			request.getSession().setAttribute( Constants.Dropdowns.STRAINDROP, "" );
+			//request.getSession().setAttribute( Constants.Dropdowns.SEXDISTRIBUTIONDROP, sexDistList );		  		
 	}
 	
 }
