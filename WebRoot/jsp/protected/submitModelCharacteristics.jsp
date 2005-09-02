@@ -4,7 +4,9 @@
 
 <%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>	
-<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
+<%@ page import="java.util.List" %>
+<%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 
 <SCRIPT LANGUAGE="JavaScript">
 	var cal = new CalendarPopup();
@@ -41,6 +43,7 @@
 		<tr>
 			<td class="formMessage" colspan="3">
 			
+		
 				<logic:messagesPresent>
 				  <ul>
 				    <font color="red">
@@ -90,7 +93,7 @@
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="scientificName" name="formdata" onchange="getOptions(this);" >
-					<html:options name="speciesdrop" />										
+					<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 				</html:select>				
 			</td>
 		</tr>
@@ -100,7 +103,7 @@
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" name="formdata" onclick="chkOther(this);">
-					<html:options name="straindrop" />	
+					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
 				</html:select>
 			</td>
 		</tr>	
@@ -134,7 +137,7 @@
 			<td class="formLabel"><label for="field3"><b>Gender</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="type" name="formdata">												
-					<html:options name="sexdrop"/>					
+					<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 				</html:select>
 			</td>
 		</tr>

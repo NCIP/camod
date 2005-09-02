@@ -5,7 +5,7 @@
 <%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>	
-<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
 <%@ page import="java.util.List" %>
 
 <SCRIPT LANGUAGE="JavaScript" SRC="scripts/CalendarPopup.js"></SCRIPT>
@@ -81,7 +81,7 @@
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
-					<html:options name="speciesdrop" />										
+					<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 				</html:select>			
 			</td>
 		</tr>
@@ -91,7 +91,7 @@
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOther(this);">
-					<html:options name="straindrop" />	
+					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
 				</html:select>
 			</td>
 		</tr>	
@@ -125,7 +125,7 @@
 			<td class="formLabel"><label for="field3"><b>Gender</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="type">												
-					<html:options name="sexdrop"/>					
+					<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 				</html:select>
 			</td>
 		</tr>
