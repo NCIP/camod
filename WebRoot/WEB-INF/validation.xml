@@ -58,5 +58,11 @@
     	</field>    
 	</form>
 	
+	<form name="surgeryForm">
+        <field property="name" depends="required">
+            <arg0 key="SurgeryForm.name"/>
+    	</field>    
+	</form>
+	
   </formset>
 </form-validation>
