@@ -1,5 +1,6 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
+<%@ page import="gov.nih.nci.camod.domain.Therapy" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
@@ -10,7 +11,7 @@
 
 	<div id="menu1" class="masterTitle" onclick="SwitchMenu('sub1')" onmouseover="ChangeClass('menu1','masterTitleOver')" onmouseout="ChangeClass('menu1','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> MODEL CHARACTERISTICS</div>
 	<span class="submasterdiv" id="sub1">		
-		&nbsp;&nbsp;&nbsp;- <html:link styleClass="subMenuBlue" action="/protected/AnimalModelPopulateAction.do?method=populate"><%= request.getSession().getAttribute( Constants.MODELDESCRIPTOR ) %></html:link>
+		&nbsp;&nbsp;&nbsp;- <html:link styleClass="subMenuBlue" action="AnimalModelPopulateAction.do?method=populate"><%= request.getSession().getAttribute( Constants.MODELDESCRIPTOR ) %></html:link>
 		<br><br>		
 	</span>
 
@@ -27,14 +28,18 @@
 
 	<div id="menu3" class="masterTitle" onclick="SwitchMenu('sub3')" onmouseover="ChangeClass('menu3','masterTitleOver')" onmouseout="ChangeClass('menu3','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> CARCINOGENIC INTERVENTIONS</div>
 	<span class="submasterdiv" class="submenu"  id="sub3">
-		- <html:link styleClass="subMenuRed" action="submitChemicalDrug.jsp">Enter Chemical/Drug</html:link><br>
+		- <html:link styleClass="subMenuRed" action="submitChemicalDrug">Enter Chemical/Drug</html:link><br>
 		- <html:link styleClass="subMenuRed" action="submitEnvironmentalFactors">Enter Environmental Factors</html:link><br>		
 		- <html:link styleClass="subMenuRed" action="submitGeneDelivery">Enter Gene Delivery</html:link><br>
 		- <html:link styleClass="subMenuRed" action="submitGrowthFactors">Enter Growth Factors</html:link><br>		
 		- <html:link styleClass="subMenuRed" action="submitHormone">Enter Hormone</html:link><br>
 		- <html:link styleClass="subMenuRed" action="submitNutritionalFactors">Enter Nutritional Factors</html:link><br>
-		- <html:link styleClass="subMenuRed" action="submitRadiation">Enter Radiation</html:link><br>	
-		- <html:link styleClass="subMenuRed" action="submitSurgeryOther">Enter Surgery/Other</html:link><br>	
+		- <html:link styleClass="subMenuRed" action="SurgeryPopulateAction.do?method=dropdown">Enter Surgery/Other</html:link><br>
+				  
+			  <logic:iterate id="aTherapy" name="surgeryother_list" type="Therapy">
+			  &nbsp;&nbsp;&nbsp;&nbsp;* <html:link styleClass="subMenuBlue" action="SurgeryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+			  </logic:iterate>
+		  
 		- <html:link styleClass="subMenuRed" action="submitViralTreatment">Enter Viral Treatment</html:link><br><br>
 	</span>	
 	
