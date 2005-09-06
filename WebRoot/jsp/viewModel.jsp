@@ -2,6 +2,9 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
+
+<bean:define id="mdl" name="animalmodel"/>
+
 <logic:equal parameter="page" value="ModelCharacteristics">
 <%@ include file="/jsp/viewModelCharacteristics.jsp"%>
 </logic:equal>

@@ -1,3 +1,7 @@
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
+
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.domain.Histopathology" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
@@ -99,13 +103,13 @@
 	final int cc = avlbty.size();
 %>
 
-		<% if ( cc > 0 ) { %>
 		<tr><td>&nbsp;</td></tr>
                 
                 <tr>
 			<td class="formTitle" height="20" colspan="2">Model Availability</td>		
 		</tr>
 		
+		<% if ( cc > 0 ) { %>
 		<logic:iterate id="av" 
 						name="avlbty" 
 						indexId="idx">
@@ -128,6 +132,11 @@
 		</tr>
 		
 		</logic:iterate>
+	    <%} else { %>
+		     <TR>
+		  		<TD class="resultsBoxGreyEnd" colspan=4><B><I>No information is available. </I></B> 
+		   		</TD>
+		     </TR>
 		<%}%>		
 		<tr>
 			<td class="WhiteBox" width="100%" colspan="2"><a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
@@ -137,3 +146,5 @@
 	
 </td></tr>
 </TABLE>
+
+<%@ include file="/jsp/footer.jsp" %>

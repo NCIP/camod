@@ -172,6 +172,14 @@ public class Constants {
 	 * Used for search results
 	 */
     public static final String SEARCH_RESULTS = "searchResults";
+    public static final String TRANSGENE_COLL = "transgeneColl";
+    public static final String GENOMIC_SEG_COLL = "genomicSegColl";
+    public static final String TARGETED_MOD_COLL = "targetedModColl";
+    public static final String INDUCED_MUT_COLL = "inducedMutColl";
+    public static final String TRANSGENE_CNT = "transgeneCnt";
+    public static final String GENOMIC_SEG_CNT = "genomicSegCnt";
+    public static final String TARGETED_MOD_CNT = "targetedModCnt";
+    public static final String INDUCED_MUT_CNT = "inducedMutCnt";
 
 
     // /////////////////////////////////////////////////////////////

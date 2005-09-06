@@ -1,3 +1,12 @@
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
+
+<%@ page import="java.util.List" %>
+<%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
+
+<bean:define id="mdl" name="animalmodel"/>
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
@@ -8,8 +17,10 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<td class="formTitle" height="20" colspan="6">Carcinogenic Agents - Model:PB-p53(R172L)</td>				
-			</tr>			
+				<td class="formTitle" height="20" colspan="6">
+					Carcinogenic Agents - Model:
+					<c:out value="${mdl.modelDescriptor}"/></td>				
+			</tr>
 			
 			</TABLE>
 			
@@ -29,16 +40,24 @@
 				<td class="greySubTitle" width="17%">Gender</td>				
 			</tr>
 			
+			<bean:define id="efc" name="mdl" property="environmentalFactorCollection"/>
+			<c:forEach var="ef" items="${efc}">
+			environmentalFactorCollection
 			<!-- Use code to generate Search Results similiar in format to the following static results -->			
 			<tr>
-				<td class="resultsBoxWhite" width="17%">6-nitrochrysene (6-NC)</td>
-				<td class="resultsBoxWhite" width="17%">44mg</td>
-				<td class="resultsBoxWhite" width="17%">Once a Month</td>
-				<td class="resultsBoxWhite" width="17%">intraperitoneal</td>
+				<td class="resultsBoxWhite" width="17%">
+				<c:out value="${ef.name}"/>
+				</td>
+				<td class="resultsBoxWhite" width="17%">
+				44mg</td>
+				<td class="resultsBoxWhite" width="17%">
+				Once a Month</td>
+				<td class="resultsBoxWhite" width="17%">
+				intraperitoneal</td>
 				<td class="resultsBoxWhite" width="17%">6 Months</td>
 				<td class="resultsBoxWhiteEnd" width="17%">Male</td>							
 			</tr>
-			
+			</c:forEach>
 			</TABLE>
 			
 			<br>
@@ -165,3 +184,6 @@
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+
+<%@ include file="/jsp/footer.jsp" %>
