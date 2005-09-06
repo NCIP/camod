@@ -12,6 +12,10 @@
 
   <!-- ========== Form Bean Definitions =================================== -->
   <form-beans>
+  		 <form-bean
+			name="animalModelStateForm"
+		    type="gov.nih.nci.camod.webapp.form.AnimalModelStateForm"/>
+  
 		 <form-bean
 			name="associatedExpressionForm"
 		    type="gov.nih.nci.camod.webapp.form.AssociatedExpressionForm"/>
@@ -255,71 +259,7 @@
 		<forward
 			name="viewModel"
 			path="/jsp/viewModel.jsp"></forward>
-
-		<forward
-			name="viewCarcinogenicInterventions"
-			path="/jsp/viewCarcinogenicInterventions.jsp"></forward>
 		
-		<forward
-			name="viewCellLines"
-			path="/jsp/viewCellLines.jsp"></forward>
-		
-		<forward
-			name="viewEngineeredTransgene"
-			path="/jsp/viewEngineeredTransgene.jsp"></forward>
-		
-		<forward
-			name="viewGeneticDescription"
-			path="/jsp/viewGeneticDescription.jsp"></forward>
-		
-		<forward
-			name="viewGenomicSegment"
-			path="/jsp/viewGenomicSegment.jsp"></forward>
-		
-		<forward
-			name="viewHistopathology"
-			path="/jsp/viewHistopathology.jsp"></forward>
-		
-		<forward
-			name="viewImages"
-			path="/jsp/viewImages.jsp"></forward>
-		
-		<forward
-			name="viewInducedMutation"
-			path="/jsp/viewInducedMutation.jsp"></forward>
-		
-		<forward
-			name="viewMicroarrays"
-			path="/jsp/viewMicroarrays.jsp"></forward>
-		
-		<forward
-			name="viewModelCharacteristics"
-			path="/jsp/viewModelCharacteristics.jsp"></forward>
-		
-		<forward
-			name="viewModelMenu"
-			path="/jsp/viewModelMenu.jsp"></forward>
-		
-		<forward
-			name="viewPublications"
-			path="/jsp/viewPublications.jsp"></forward>
-		
-		<forward
-			name="viewSpontaneousMutation"
-			path="/jsp/viewSpontaneousMutation.jsp"></forward>
-		
-		<forward
-			name="viewTargetedModification"
-			path="/jsp/viewTargetedModification.jsp"></forward>
-		
-		<forward
-			name="viewTherapeuticApproaches"
-			path="/jsp/viewTherapeuticApproaches.jsp"></forward>
-		
-		<forward
-			name="viewTransplantXenograft"
-			path="/jsp/viewTransplantXenograft.jsp"></forward>
-				
 		<forward
 			name="zoomifyImage"
 			path="/jsp/zoomifyImage.jsp"></forward>
@@ -1123,24 +1063,44 @@
      </action>
      
      <action 
+         path="/ChangeAnimalModelToCompletePopulateAction"  
+         type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
+         parameter="protected">   	
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitOverview.jsp">
+    	 </forward>  	
+     </action>
+     <action 
          path="/ChangeAnimalModelToCompleteAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
+         name="animalModelStateForm"
          parameter="protected">   	
          <forward 
     		name="next"
     		path="/ReturnUserModels.do?method=returnUserModels">
     	 </forward>  	
      </action>
+      <action 
+         path="/ChangeAnimalModelStatePopulateAction"  
+         type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
+         parameter="protected">   	
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitChangeAnimalModelState.jsp">
+    	 </forward>  	
+     </action>
      <action 
          path="/ChangeAnimalModelStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
+         name="animalModelStateForm"
          parameter="protected">   	
          <forward 
     		name="next"
     		path="/AdminRolesPopulateAction.do">
     	 </forward>  	
      </action>
-			
+	 
     <!-- UserAction -->
     <action path="/UserAction"
 	        type="gov.nih.nci.camod.webapp.action.UserAction"

@@ -40,10 +40,10 @@
                 		    This model's status is currently set to <b><%= request.getSession().getAttribute( Constants.MODELSTATUS ) %></b>                		
                     </td>
                     <td align="right" class="resultsBoxGreyEnd2">
-                        <form method="post" action="ChangeAnimalModelToCompleteAction.do" >
-                            <input type="submit" value= "Change the model state to Complete" >
-                            <input type="hidden" name="ModelId" value="<%= request.getSession().getAttribute(Constants.MODELID) %>">
-                        </form > 
+                        <html:form action="ChangeAnimalModelToCompleteAction">
+                            <html:hidden property="modelId" name="formdata" />
+                            <html:submit>Set model status to Complete</html:submit>  
+                        </html:form> 
                     </td>
                 </logic:equal>
                 		               		
