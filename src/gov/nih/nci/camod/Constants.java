@@ -166,6 +166,7 @@ public class Constants {
      * Used to store username for current user 
      */
     public static final String CURRENTUSER = "camod.loggedon.username";
+    public static final String CURRENTUSERROLES = "camod.loggedon.userroles";
     public static final String LOGINFAILED = "loginfailed";
 
     /**
@@ -207,6 +208,27 @@ public class Constants {
 
     public interface Admin {
 
+        /**
+         * Defines the different roles in the system
+         */
+        public interface Roles
+        {
+            /**
+             * A constant that defines the controller role
+             */
+            public static final String CONTROLLER = "Controller";
+            
+            /**
+             * A constant that defines the Editor role
+             */
+            public static final String EDITOR = "Editor";
+            
+            /**
+             * A constant that defines the screener role
+             */
+            public static final String SCREENER = "Screener";
+        }
+        
         /**
          * A constant that defines what file is used for the model curation
          * process
