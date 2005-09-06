@@ -8,6 +8,8 @@
 <!-- Place Code here to determine the sub-Menu Links -->
 	<%@ page import="java.io.File" %>
 	<%@ page import="gov.nih.nci.camod.webapp.util.SidebarUtil" %>	
+	<%@ page import="gov.nih.nci.camod.Constants" %>
+	
 	<% 
 		//Get the filename of the current jsp page and display the correct submenu
 		String jspName = new File(request.getRealPath(request.getServletPath())).getName();
@@ -75,9 +77,11 @@
 		<TR><TD class="loggedInBox" width="100%">Currently logged on as:<br>
 		<TABLE><TR><TD class="loggedInBoxBorderless">
 		     <b><%= session.getAttribute("camod.loggedon.username") %></b><br>
-		     &nbsp;&nbsp;&nbsp;&nbsp;<font color="#475b82">- MMHCC Screener<br>
-		     &nbsp;&nbsp;&nbsp;&nbsp;- MMHCC Editor<br>
-		     &nbsp;&nbsp;&nbsp;&nbsp;- MMHCC Reviewer</font><br>
+		     <logic:present name="<%= Constants.CURRENTUSERROLES %>">
+			    <logic:iterate name="<%= Constants.CURRENTUSERROLES %>" id="role" type="String">
+			        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#475b82"> - <%=role%><br>
+			    </logic:iterate> 
+			 </logic:present>
 		     <a href="adminUserSettings.jsp">User Settings</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="LogoutAction.do">Log out</a>
 		     <br>
 		</TD></TR></TABLE>
