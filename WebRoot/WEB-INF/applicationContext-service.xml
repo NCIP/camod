@@ -60,4 +60,6 @@
     <!-- agentManager -->
     <bean id="agentManager" class="gov.nih.nci.camod.service.impl.AgentManagerImpl"/>
     
+    <!-- userManager -->
+    <bean id="userManager" class="gov.nih.nci.camod.service.impl.UserManagerImpl"/>
 </beans>
