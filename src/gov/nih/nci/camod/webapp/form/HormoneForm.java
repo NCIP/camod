@@ -30,6 +30,15 @@ public class HormoneForm extends BaseForm implements Serializable {
 	protected String otherName;
 	protected String dosage;
 	protected String regimen;
+	protected String doseUnit;
+	
+	public String getDoseUnit() {
+		return doseUnit;
+	}
+	
+	public void setDoseUnit(String d ) {
+		this.doseUnit = d;		
+	}
 	
 	/**
 	 * @return Returns the name.

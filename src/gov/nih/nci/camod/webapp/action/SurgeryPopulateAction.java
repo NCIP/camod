@@ -114,18 +114,10 @@ public class SurgeryPopulateAction extends BaseAction {
 		System.out.println( "<SurgeryPopulateAction dropdown> Entering... " );
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
-		//DropdownUtil drop = new DropdownUtil();
 		NewDropdownUtil drop = new NewDropdownUtil();
-		
-		//ServletContext application = servlet.getServletConfig().getServletContext();
 					
 		drop.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
 		drop.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.SURGERYDROP, "" );
-		
-		//Store the values for the drop down menus in a Constants variable, used in the JSP
-		//request.getSession().setAttribute( Constants.Dropdowns.SEXDISTRIBUTIONDROP, sexDistList );	
-		//request.getSession().setAttribute( Constants.Dropdowns.AGEUNITSDROP, ageUnitsList );
-		//request.getSession().setAttribute( Constants.Dropdowns.SURGERYDROP, surgeryOtherList );
+		drop.populateDropdown( request, Constants.Dropdowns.SURGERYDROP, "" );		
 	}	
 }

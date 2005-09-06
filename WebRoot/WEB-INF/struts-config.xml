@@ -1021,6 +1021,24 @@
     		path="/ReturnUserModels.do?method=returnUserModels"></forward>                                     
    </action>
    
+   	 <!-- HormoneForm -->
+   	 <action path="/HormoneAction"
+	        type="gov.nih.nci.camod.webapp.action.HormoneAction"
+	        name="hormoneForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitHormone">   	
+    </action>
+    
+    <action path="/HormonePopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.HormonePopulateAction"
+    		name="hormoneForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+    
      <!-- NutritionalFactorForm -->
      <!-- PublicationForm -->	
      <!-- RadiationForm -->

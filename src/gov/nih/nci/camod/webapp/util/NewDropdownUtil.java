@@ -59,6 +59,10 @@ public class NewDropdownUtil {
         if (inDropdownKey.equals( Constants.Dropdowns.SURGERYDROP )) {
             theReturnList = getSurgeryList(inRequest);
         }
+
+        if (inDropdownKey.equals( Constants.Dropdowns.HORMONEDROP )) {
+            theReturnList = getHormoneList(inRequest);
+        }
         
         if (inDropdownKey.equals( Constants.Dropdowns.STRAINDROP )) {
             theReturnList = getStrainsList(inRequest, inFilter);
@@ -222,4 +226,37 @@ public class NewDropdownUtil {
 
         return surgeryList;
     }
+    
+    /**
+     * Returns a list of all types of surgeries
+     * 
+     */
+    private static List getHormoneList(HttpServletRequest inRequest) {
+
+        AgentManager agentManager = (AgentManager) getContext(inRequest).getBean("agentManager");
+        
+        List agentList = agentManager.getAll();
+        List hormoneList = new ArrayList();
+        Agent tmp;
+
+        // TODO: Fix once we know what we're doing w/ this
+        hormoneList.add("Other");
+
+        if (agentList != null) {
+            for (int i = 0; i < agentList.size(); i++) {
+                tmp = (Agent) agentList.get(i);
+                
+                if (tmp.getName() != null) {
+                    // if the surgery is not already in the List, add it
+                    // (only get unique names)
+                    if ( !hormoneList.contains(tmp.getName()) && tmp.getType().equals( "Hormone" ) )
+                    	hormoneList.add(tmp.getName());
+                }
+            }
+        }
+            
+        Collections.sort(hormoneList);
+
+        return hormoneList;
+    }        
 }

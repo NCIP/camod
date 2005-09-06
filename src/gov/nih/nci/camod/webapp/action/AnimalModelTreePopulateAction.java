@@ -43,12 +43,14 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	
         
         AnimalModel animalModel = animalModelManager.get( modelID );	 
-        
-        
+                
         // Print the list of EnvironmentalFactors for the Cardiogenic Interventions Section
         List tyList = animalModel.getTherapyCollection();
         
         List surgeryList = new ArrayList();
+        List hormoneList = new ArrayList();
+        
+        System.out.println( "<AnimalModelTreePopulateAction> Building Tree ...");
         
         if( tyList == null || tyList.size() == 0 ){
         	System.out.println( "nothing!" );
@@ -60,26 +62,32 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        	//check to see if it is an EnvironmentalFactor
 	        	if ( ty.getTherapeuticExperiment() == false ) {	        		
 	        		Agent agent = ty.getAgent();
-	        		Treatment ts = ty.getTreatment();
-	        		SexDistribution sexDistribution = ts.getSexDistribution();
-	        	
-	        		System.out.println("EnvironmentalFactor("+i+")\n\t name=" + agent.getName() +
+	        		
+	        		//Treatment ts = ty.getTreatment();	        	
+	        		//SexDistribution sexDistribution = ts.getSexDistribution();	        	
+	        		/* System.out.println("EnvironmentalFactor("+i+")\n\t name=" + agent.getName() +
 	        													 "\n\t id=" + ts.getId() +
 	        													 "\n\t type=" + agent.getType() +
 	        													 "\n\t regimen=" + ts.getRegimen() +
 	        													 "\n\t sex=" + sexDistribution.getType() +
 	        													 "\n\t age=" + ts.getAgeAtTreatment() );
+	        		*/
 	        		
 	        		if ( agent.getType().equals( "Other") ) {
-	        			System.out.println( "added therapy to surgeryList" );
+	        			System.out.println( "\tAdded therapy to surgeryList" );
 	        			surgeryList.add( ty );
-	        		}	        			        		
+	        		}
+	        		if ( agent.getType().equals( "Hormone") ) {
+	        			System.out.println( "\tAdded therapy to hormoneList" );
+	        			hormoneList.add( ty );
+	        		}	        		
 	        	}	 	        	
 	        }
         }
-		
+        
+        request.getSession().setAttribute( Constants.Submit.HORMONE_LIST, hormoneList );
         request.getSession().setAttribute( Constants.Submit.SURGERYOTHER_LIST, surgeryList );
 		
-		return mapping.findForward("submitOverview");
+		return mapping.findForward( "submitOverview" );
 	}
 }

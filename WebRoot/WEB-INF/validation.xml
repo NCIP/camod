@@ -64,5 +64,11 @@
     	</field>    
 	</form>
 	
+	<form name="hormoneForm">
+        <field property="name" depends="required">
+            <arg0 key="HormoneForm.name"/>
+    	</field>    
+	</form>
+	
   </formset>
 </form-validation>
