@@ -4,6 +4,7 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CurationManager;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
+import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,31 +19,36 @@ public class ChangeAnimalModelStateAction extends BaseAction {
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
-        CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath("/")
-                + "/config/CurationConfig.xml");
+        if (!isCancelled(inRequest)) {
 
-        System.out.println("<ChangeAnimalModelStateAction populate> Entering... ");
+            CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath(
+                    "/")
+                    + "/config/CurationConfig.xml");
 
-        String theModelId = inRequest.getParameter("ModelId");
-        String theEvent = inRequest.getParameter("event");
+            System.out.println("<ChangeAnimalModelStateAction populate> Entering... ");
 
-        if (theEvent == null) {
-            theEvent = "";
+            AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
+
+            // TODO: is this necessary?
+            if (theForm.getEvent() == null) {
+                theForm.setEvent("");
+            }
+
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theForm.getModelId());
+
+            System.out.println("Comment: " + theForm.getComment());
+
+            if (theAnimalModel != null) {
+                System.out.println("Current state: " + theAnimalModel.getState());
+                theCurationManager.changeState(theAnimalModel, theForm.getEvent());
+                System.out.println("New state: " + theAnimalModel.getState());
+
+                // Save the state change
+                theAnimalModelManager.save(theAnimalModel);
+            }
         }
-
-        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-
-        AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-
-        if (theAnimalModel != null) {
-            System.out.println("Current state: " + theAnimalModel.getState());
-            theCurationManager.changeState(theAnimalModel, theEvent);
-            System.out.println("New state: " + theAnimalModel.getState());
-            
-            // Save the state change
-            theAnimalModelManager.save(theAnimalModel);
-        }
-
         return inMapping.findForward("next");
     }
 }
