@@ -230,6 +230,37 @@ public class Constants {
         }
         
         /**
+         * Defines the different roles in the system
+         */
+        public interface Actions
+        {
+            /**
+             * A constant that defines the text for the generic approved action
+             */
+            public static final String APPROVE = "approve";
+            
+            /**
+             * A constant that defines the text for the assign editor action
+             */
+            public static final String ASSIGN_EDITOR = "assign_editor";
+            
+            /**
+             * A constant that defines the text for the assign screener action
+             */
+            public static final String ASSIGN_SCREENER = "assign_screener";
+            
+            /**
+             * A constant that defines the text for the need more information action
+             */
+            public static final String NEED_MORE_INFO = "need_more_info";
+            
+            /**
+             * A constant that defines the text for the generic reject action
+             */
+            public static final String REJECT = "reject";           
+        }
+        
+        /**
          * A constant that defines what file is used for the model curation
          * process
          */
@@ -247,28 +278,28 @@ public class Constants {
          */
         public static final String COMMENTS_NEEDING_REVIEW = "commentsNeedingReview";
 
-        /**
-         * Used to set/pull the objects needing to be screened out of the
-         * request
-         */
-        public static final String MODELS_NEEDING_SCREENING = "modelsNeedingScreening";
-
         /** Used to set/pull the objects needing to be edited out of the request */
         public static final String MODELS_NEEDING_EDITING = "modelsNeedingEditing";
-
-        /** Used to set/pull the objects needing to be edited out of the request */
-        public static final String MODELS_NEEDING_MORE_INFO = "modelsNeedingMoreInfo";
-
-        /**
-         * Used to set/pull the objects needing to be assigned a screener out of
-         * the request
-         */
-        public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
 
         /**
          * Used to set/pull the objects needing to be assigned an editor out of
          * the request
          */
         public static final String MODELS_NEEDING_EDITOR_ASSIGNMENT = "modelsNeedingEditorAssignment";
+        
+        /** Used to set/pull the objects needing to be edited out of the request */
+        public static final String MODELS_NEEDING_MORE_INFO = "modelsNeedingMoreInfo";
+
+        /**
+         * Used to set/pull the objects needing to be screened out of the
+         * request
+         */
+        public static final String MODELS_NEEDING_SCREENING = "modelsNeedingScreening";
+
+        /**
+         * Used to set/pull the objects needing to be assigned a screener out of
+         * the request
+         */
+        public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
     }
 }

@@ -17,31 +17,35 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
-        AnimalModelStateForm theForm = new AnimalModelStateForm();
+        // Get the user manager bean to handle any role information
+        UserManager theUserManager = (UserManager) getBean("userManager");
 
+        // Get the attributes from the request
         String theModelId = inRequest.getParameter("ModelId");
         String theEvent = inRequest.getParameter("event");
 
+        // Set up the form
+        AnimalModelStateForm theForm = new AnimalModelStateForm();
         theForm.setEvent(theEvent);
         theForm.setModelId(theModelId);
-
-        UserManager theUserManager = (UserManager) getBean("userManager");
-
         inRequest.setAttribute("formdata", theForm);
 
-        if ("assign_screener".equals(theEvent)) {
+        if (theEvent.equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
             inRequest.setAttribute("action", "Assigning Screener to ");
             inRequest.setAttribute("asignees", theUserManager.getUsersForRole(Constants.Admin.Roles.SCREENER));
-        } else if ("assign_editor".equals(theEvent)) {
+        } else if (theEvent.equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
             inRequest.setAttribute("action", "Assigning Editor to ");
             inRequest.setAttribute("asignees", theUserManager.getUsersForRole(Constants.Admin.Roles.EDITOR));
-        } else if ("need_more_info".equals(theEvent)) {
+        } else if (theEvent.equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
             inRequest.setAttribute("action", "Requesting more information for ");
-        } else if ("rejected".equals(theEvent)) {
+        } else if (theEvent.equals(Constants.Admin.Actions.REJECT)) {
             inRequest.setAttribute("action", "Rejecting ");
-        } else {
+        } else if (theEvent.equals(Constants.Admin.Actions.APPROVE)) {
             inRequest.setAttribute("action", "Approving ");
+        } else {
+            throw new IllegalArgumentException("Unknown event type: " + theEvent);
         }
+
         return inMapping.findForward("next");
     }
 }

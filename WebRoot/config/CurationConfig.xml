@@ -29,11 +29,11 @@
 		<next-valid-states>
 		    <next-valid-state>
 		        <name>Screened-approved</name>
-		        <match-event>approved</match-event>
+		        <match-event>approve</match-event>
 		    </next-valid-state>
 		    <next-valid-state>
 		        <name>Screened-rejected</name>
-		        <match-event>rejected</match-event>
+		        <match-event>reject</match-event>
 		    </next-valid-state>
 		</next-valid-states>
 	</state>
@@ -59,7 +59,7 @@
 		<next-valid-states>
 		    <next-valid-state>
 		        <name>Edited-approved</name>
-		        <match-event>approved</match-event>
+		        <match-event>approve</match-event>
 		    </next-valid-state>
 		    <next-valid-state>
 		        <name>Edited-need more info</name>
@@ -80,7 +80,7 @@
 		<next-valid-states>
 		    <next-valid-state>
 		        <name>Edited-approved</name>
-		        <match-event>approved</match-event>
+		        <match-event>approve</match-event>
 		    </next-valid-state>
 		    <next-valid-state>
 		        <name>Edited-need more info</name>

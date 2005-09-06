@@ -48,12 +48,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 	                        </html:link>
 			                <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=approved" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
 		                            Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=need_more_info" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Need More Info
 				                </html:link>
 				            </td>
@@ -81,12 +81,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=approved" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=need_more_info" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Need More Info
 				                </html:link>
 				            </td>
@@ -113,7 +113,7 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 		                    <td class="resultsBoxWhiteNoStart" width="25" >
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=assign_editor" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_EDITOR %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Assign
 				                </html:link>
 	                        </td>
@@ -140,12 +140,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=approved" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=rejected" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Reject
 				                </html:link>
 				            </td>
@@ -174,7 +174,8 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=assign_screener" paramId="ModelId" paramName="model" paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_SCREENER %>" 
+				                           paramId="ModelId" paramName="model" paramProperty="id">
 				                    Assign
 				                </html:link>
 				            </td>
@@ -201,12 +202,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=approved" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="/ChangeAnimalModelStatePopulateAction?event=rejected" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="ModelId" paramName="model"  paramProperty="id">
 				                    Reject
 				                </html:link>
 				            </td>
