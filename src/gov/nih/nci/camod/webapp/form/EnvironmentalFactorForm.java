@@ -27,10 +27,12 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	protected String name;
 	protected String otherName;	
 	protected String dosage;
+	protected String dosageUnit;
 	protected String administrativeRoute;
 	protected String otherAdministrativeRoute;	
 	protected String regimen;
 	protected String ageAtTreatment;
+	protected String ageUnit;
 	protected String type;
 	
 	/**
@@ -68,6 +70,18 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 */
 	public void setDosage(String dosage) {
 		this.dosage = dosage;
+	}
+	/**
+	 * @return Returns the dosageUnit.
+	 */
+	public String getDosageUnit() {
+		return dosageUnit;
+	}
+	/**
+	 * @param dosageUnit The dosageUnit to set.
+	 */
+	public void setDosageUnit(String dosageUnit) {
+		this.dosageUnit = dosageUnit;
 	}
 	/**
 	 * @return Returns the administrativeRoute.
@@ -116,6 +130,18 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	 */
 	public void setAgeAtTreatment(String ageAtTreatment) {
 		this.ageAtTreatment = ageAtTreatment;
+	}
+	/**
+	 * @return Returns the ageUnit.
+	 */
+	public String getAgeUnit() {
+		return ageUnit;
+	}
+	/**
+	 * @param ageUnit The ageUnit to set.
+	 */
+	public void setAgeUnit(String ageUnit) {
+		this.ageUnit = ageUnit;
 	}	
 	/**
 	 * @return Returns the type.
