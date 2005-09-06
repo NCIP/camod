@@ -1,20 +1,14 @@
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-
-import gov.nih.nci.camod.Constants;
-
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.domain.AnimalModel;
+import org.apache.struts.action.*;
 
 public class SubmitAction extends BaseAction{
 
@@ -38,6 +32,10 @@ public class SubmitAction extends BaseAction{
     	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
     	request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
     	
+        AnimalModelStateForm theForm = new AnimalModelStateForm();
+        theForm.setModelId(am.getId().toString());
+        request.setAttribute("formdata", theForm);
+        
     	//Add a message to be displayed in submitModles saying you've deleted a model  
         //ActionMessages msg = new ActionMessages();
         //msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "delete.successful" ) );
