@@ -20,30 +20,44 @@ public class AdminRolesPopulateAction extends BaseAction {
 
         AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-        // Add all the models by state
-        List theList = theAnimalModelManager.getAllByState("Edited-need more info");
-        if (theList != null && !theList.isEmpty()) {
-            inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_MORE_INFO, theList);
+        List theRoles = (List) inRequest.getSession().getAttribute(Constants.CURRENTUSERROLES);
+
+        List theList = null;
+
+        if (theRoles.contains(Constants.Admin.Roles.EDITOR)) {
+
+            // Add all the models by state
+            theList = theAnimalModelManager.getAllByState("Edited-need more info");
+            if (theList != null && !theList.isEmpty()) {
+                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_MORE_INFO, theList);
+            }
+
+            theList = theAnimalModelManager.getAllByState("Editor-assigned");
+            if (theList != null && !theList.isEmpty()) {
+
+                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITING, theList);
+            }
         }
 
-        theList = theAnimalModelManager.getAllByState("Editor-assigned");
-        if (theList != null && !theList.isEmpty()) {
-            inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITING, theList);
+        if (theRoles.contains(Constants.Admin.Roles.CONTROLLER)) {
+
+            theList = theAnimalModelManager.getAllByState("Screened-approved");
+            if (theList != null && !theList.isEmpty()) {
+                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT, theList);
+            }
+
+            theList = theAnimalModelManager.getAllByState("Complete-not screened");
+            if (theList != null && !theList.isEmpty()) {
+                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT, theList);
+            }
         }
 
-        theList = theAnimalModelManager.getAllByState("Screened-approved");
-        if (theList != null && !theList.isEmpty()) {
-            inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT, theList);
-        }
+        if (theRoles.contains(Constants.Admin.Roles.SCREENER)) {
 
-        theList = theAnimalModelManager.getAllByState("Screener-assigned");
-        if (theList != null && !theList.isEmpty()) {
-            inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENING, theList);
-        }
-
-        theList = theAnimalModelManager.getAllByState("Complete-not screened");
-        if (theList != null && !theList.isEmpty()) {
-            inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT, theList);
+            theList = theAnimalModelManager.getAllByState("Screener-assigned");
+            if (theList != null && !theList.isEmpty()) {
+                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENING, theList);
+            }
         }
 
         // TODO: This isn't correct
