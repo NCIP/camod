@@ -49,6 +49,7 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         
         List surgeryList = new ArrayList();
         List hormoneList = new ArrayList();
+        List growthFactorList = new ArrayList();
         
         System.out.println( "<AnimalModelTreePopulateAction> Building Tree ...");
         
@@ -61,17 +62,7 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        	
 	        	//check to see if it is an EnvironmentalFactor
 	        	if ( ty.getTherapeuticExperiment() == false ) {	        		
-	        		Agent agent = ty.getAgent();
-	        		
-	        		//Treatment ts = ty.getTreatment();	        	
-	        		//SexDistribution sexDistribution = ts.getSexDistribution();	        	
-	        		/* System.out.println("EnvironmentalFactor("+i+")\n\t name=" + agent.getName() +
-	        													 "\n\t id=" + ts.getId() +
-	        													 "\n\t type=" + agent.getType() +
-	        													 "\n\t regimen=" + ts.getRegimen() +
-	        													 "\n\t sex=" + sexDistribution.getType() +
-	        													 "\n\t age=" + ts.getAgeAtTreatment() );
-	        		*/
+	        		Agent agent = ty.getAgent();	      
 	        		
 	        		if ( agent.getType().equals( "Other") ) {
 	        			System.out.println( "\tAdded therapy to surgeryList" );
@@ -80,11 +71,16 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        		if ( agent.getType().equals( "Hormone") ) {
 	        			System.out.println( "\tAdded therapy to hormoneList" );
 	        			hormoneList.add( ty );
+	        		}	  
+	        		if ( agent.getType().equals( "Growth Factor") ) {
+	        			System.out.println( "\tAdded therapy to growthFactorList" );
+	        			growthFactorList.add( ty );
 	        		}	        		
 	        	}	 	        	
 	        }
         }
         
+        request.getSession().setAttribute( Constants.Submit.GROWTHFACTORS_LIST, growthFactorList );
         request.getSession().setAttribute( Constants.Submit.HORMONE_LIST, hormoneList );
         request.getSession().setAttribute( Constants.Submit.SURGERYOTHER_LIST, surgeryList );
 		

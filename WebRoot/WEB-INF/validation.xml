@@ -70,5 +70,11 @@
     	</field>    
 	</form>
 	
+	<form name="growthFactorForm">
+        <field property="name" depends="required">
+            <arg0 key="GrowthFactorForm.name"/>
+    	</field>    
+	</form>
+	
   </formset>
 </form-validation>

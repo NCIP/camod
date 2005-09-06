@@ -20,7 +20,7 @@ import org.apache.struts.action.ActionMapping;
 public class HormonePopulateAction extends BaseAction {
 
 	/** 
-	 * Pre-populate all field values in the form SurgeryForm 
+	 * Pre-populate all field values in the form HormoneForm 
 	 *  Used by <jspName>
 	 * 
 	 */ 
@@ -68,7 +68,7 @@ public class HormonePopulateAction extends BaseAction {
 
 	
 	/**
-	 * Populate the dropdown menus for submitSurgeryOther
+	 * Populate the dropdown menus for submitHormone
 	 * 
 	 * @param mapping
 	 * @param form

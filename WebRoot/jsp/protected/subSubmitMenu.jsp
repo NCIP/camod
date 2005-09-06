@@ -31,8 +31,12 @@
 		- <html:link styleClass="subMenuRed" action="submitChemicalDrug">Enter Chemical/Drug</html:link><br>
 		- <html:link styleClass="subMenuRed" action="submitEnvironmentalFactors">Enter Environmental Factors</html:link><br>		
 		- <html:link styleClass="subMenuRed" action="submitGeneDelivery">Enter Gene Delivery</html:link><br>
-		- <html:link styleClass="subMenuRed" action="submitGrowthFactors">Enter Growth Factors</html:link><br>		
 		
+		- <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factors</html:link><br>		
+			  <logic:iterate id="aTherapy" name="growthfactors_list" type="Therapy">
+			  &nbsp;&nbsp;&nbsp;&nbsp;* <html:link styleClass="subMenuBlue" action="GrowthFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+			  </logic:iterate>
+			  
 		- <html:link styleClass="subMenuRed" action="HormonePopulateAction.do?method=dropdown">Enter Hormone</html:link><br>
 			  <logic:iterate id="aTherapy" name="hormone_list" type="Therapy">
 			  &nbsp;&nbsp;&nbsp;&nbsp;* <html:link styleClass="subMenuBlue" action="HormonePopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
