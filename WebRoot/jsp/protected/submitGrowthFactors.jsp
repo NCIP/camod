@@ -2,7 +2,7 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp" %>
 
-<%@ page import="gov.nih.nci.camod.webapp.form.SurgeryForm" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.GrowthFactorForm" %>	
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <%

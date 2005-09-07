@@ -26,7 +26,24 @@ import org.apache.struts.action.ActionMapping;
 	protected String regimen;
 	protected String ageAtTreatment;
 	protected String type;
+	protected String doseUnit;
+	protected String ageUnit;
 	
+	public String getAgeUnit() {
+		return ageUnit;
+	}
+	
+	public void setAgeUnit( String ageUnit) {
+		this.ageUnit = ageUnit;
+	}
+	
+	public String getDoseUnit() {
+		return doseUnit;
+	}
+	
+	public void setDoseUnit(String d ) {
+		this.doseUnit = d;		
+	}
 	/**
 	 * @return Returns the name.
 	 */
