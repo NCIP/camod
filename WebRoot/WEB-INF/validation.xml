@@ -84,5 +84,11 @@
 	
 
 	
+	<form name="viralTreatmentForm">
+        <field property="name" depends="required">
+            <arg0 key="ViralTreatmentForm.name"/>
+    	</field>    
+	</form>
+	
   </formset>
 </form-validation>
