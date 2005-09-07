@@ -926,7 +926,25 @@
      <!-- ChemicalDrugForm -->     
      <!-- ClinicalMarkerForm -->
      <!-- EngineeredTransgeneForm -->
+     
      <!-- EnvironmentalFactorForm -->
+     <action path="/EnvironmentalFactorAction"
+	        type="gov.nih.nci.camod.webapp.action.EnvironmentalFactorAction"
+	        name="environmentalFactorForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitEnvironmentalFactors">   	
+    </action> 
+    
+    <action path="/EnvironmentalFactorPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.EnvironmentalFactorPopulateAction"
+    		name="environmentalFactorForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action> 
+    
      <!-- GeneDeliveryForm -->
      <!-- GenomicSegmentForm -->
      
@@ -1059,8 +1077,26 @@
    
    
      <!-- NutritionalFactorForm -->
-     <!-- PublicationForm -->	
+     <!-- PublicationForm -->
+     	
      <!-- RadiationForm -->
+   	 <action path="/RadiationAction"
+	        type="gov.nih.nci.camod.webapp.action.RadiationAction"
+	        name="radiationForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitRadiation">   	
+    </action>
+    
+    <action path="/RadiationPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.RadiationPopulateAction"
+    		name="radiationForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+     
      <!-- SpontaneousMutationForm -->
     
      <!-- SurgeryForm -->
