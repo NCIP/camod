@@ -1,16 +1,13 @@
 package gov.nih.nci.camod.webapp.action;
 
 import java.util.List;
-
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.domain.EnvironmentalFactor;
-import gov.nih.nci.camod.service.EnvironmentalFactorManager;
 import gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm;
-import gov.nih.nci.camod.webapp.util.DropdownUtil;
+import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -30,28 +27,49 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 						           HttpServletResponse response)
 	  throws Exception {
 		
-		System.out.println( "<EnvironmentalFactorPopulateAction populate> Entering... " );
+		System.out.println( "<EnvironmentalFactorPopulateAction populate> Entering populate() " );
 
 		// Create a form to edit
-		EnvironmentalFactorForm envirFact = ( EnvironmentalFactorForm ) form;
+		EnvironmentalFactorForm envForm = ( EnvironmentalFactorForm ) form;
+		
+    	// Grab the current Therapy we are working with related to this animalModel
+    	String aTherapyID = request.getParameter( "aTherapyID" );		
+		
+		/* Grab the current modelID from the session */
+		String modelID = "" + request.getSession().getAttribute( Constants.MODELID );
+        System.out.println( "<EnvironmentalFactorAction save> Grabed the current modelID");		
 		
 		// Use the current animalModel based on the ID stored in the session
-		String modelID = "" + request.getSession().getAttribute( Constants.MODELID );		
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
 		AnimalModel am = animalModelManager.get( modelID );	
 		
-		//TODO figure out how to deal with collection relationships
-		//envirFact.setName(am.getEnvironmentalFactorCollection().getClass().getName() );
-
-		//envirFact.setDosage(am.);		
-		envirFact.setAdministrativeRoute("");
-		envirFact.setRegimen("");
-		envirFact.setAgeAtTreatment("");
+		//retrieve the list of all therapies from the current animalModel
+		List therapyList = am.getTherapyCollection();
 		
-		envirFact.setType( am.getPhenotype().getSexDistribution().getType());
+		Therapy therapy = new Therapy();
+		
+		//find the specific one we need
+		for ( int i=0; i<therapyList.size(); i++ )
+		{
+			therapy = (Therapy)therapyList.get(i);
+			if ( therapy.getId().toString().equals( aTherapyID) )
+				break;
+		}
+		
+		envForm.setType(therapy.getTreatment().getSexDistribution().getType());
+		envForm.setDosage(therapy.getTreatment().getDosage());
+		envForm.setRegimen(therapy.getTreatment().getRegimen());
+		envForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+		envForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
+		
+		envForm.setName(therapy.getAgent().getName());
+		envForm.setRegimen(therapy.getTreatment().getRegimen());
+		
+		//Prepopulate all dropdown fields, set the global Constants to the following
+		this.dropdown( request, response );
 
 		//Store the Form in session to be used by the JSP
-		request.getSession().setAttribute( Constants.FORMDATA, envirFact );		
+		request.getSession().setAttribute( Constants.FORMDATA, envForm );
 
 		return mapping.findForward("submitEnvironmentalFactors");
 
@@ -73,7 +91,9 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 			   					   HttpServletResponse response )
 	  throws Exception {	
 		
-		System.out.println( "<EnvironmentalFactorPopulateAction dropdown> ... " );
+		//blank out the FORMDATA Constant field
+		EnvironmentalFactorForm envForm = ( EnvironmentalFactorForm ) form;
+		request.getSession().setAttribute( Constants.FORMDATA, envForm );
 		
 		//setup dropdown menus
 		this.dropdown( request, response );
@@ -92,35 +112,18 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 						  HttpServletResponse response )
 	  throws Exception {
 		
-			System.out.println( "<EnvironmentalFactorPopulateAction dropdown> Entering... " );
+			System.out.println( "<EnvironmentalFactorPopulateAction dropdown> Entering void dropdown()" );
+			
+			//Prepopulate all dropdown fields, set the global Constants to the following
+			NewDropdownUtil drop = new NewDropdownUtil();
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			DropdownUtil drop = new DropdownUtil();
-			
-/*			TO DO - Implement dropdowns
- 			//Environmental Factors dropdown
-			List envFactorsList = ;
-			
-			//Administrative Routes dropdown
-			//Dose units dropdown
-			
-			List ageLst = drop.getAgeList();
-			List sexDistList = drop.getSexDistributionsList();
-			
-			//TODO: Get specific list for speciesName ( for submitModelCharacteristics ) 
-			List strainList = drop.getStrainList( speciesList.get(0).toString() );
-			
-			ServletContext application = servlet.getServletConfig().getServletContext();			
-			String configFileName = application.getRealPath( "/config/SexDistributions.txt" );
-			
-			List sexDistList = drop.getDropdownListFromFile( configFileName );			 
-				
-			//Store the values for the drop down menus in a Constants variable, used in the JSP
-			request.getSession().setAttribute( Constants.ENVIRONFACTORDROP, envFactorList ); 
-		    request.getSession().setAttribute( Constants.SPECIESDROP, speciesStrainLst );
-			request.getSession().setAttribute( Constants.AGEDROP, ageLst );
-			request.getSession().setAttribute( Constants.SEXDISTRIBUTIONDROP, sexDistList );
+			drop.populateDropdown( request, Constants.Dropdowns.ENVIRONFACTORDROP, "" );
 
-*/
+			//TODO Administrative Route dropdown		
+			drop.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+			drop.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
+			drop.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
+
 	}	
 }
