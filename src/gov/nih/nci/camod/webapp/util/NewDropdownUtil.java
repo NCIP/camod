@@ -79,13 +79,22 @@ public class NewDropdownUtil {
             theReturnList = getEnvironmentalFactorList(inRequest, "Growth Factor" );
         }
         
-        if (inDropdownKey.equals( Constants.Dropdowns.CHEMICALDRUGDROP )) {
+        if (inDropdownKey.equals( Constants.Dropdowns.CHECMICALDRUGDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Chemical / Drug" );
         }
         
         if (inDropdownKey.equals( Constants.Dropdowns.VIRUSDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Viral" );
         }
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.ENVIRONFACTORDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Environment" );
+        } 
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.RADIATIONDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Radiation" );
+        } 
+      
                    
         return theReturnList;
     }
