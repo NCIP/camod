@@ -929,9 +929,45 @@
      <!-- EnvironmentalFactorForm -->
      <!-- GeneDeliveryForm -->
      <!-- GenomicSegmentForm -->
+     
      <!-- GrowthFactorForm -->
+     <action path="/GrowthFactorAction"
+	        type="gov.nih.nci.camod.webapp.action.GrowthFactorAction"
+	        name="growthFactorForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitGrowthFactors">   	
+    </action>
+    
+    <action path="/GrowthFactorPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.GrowthFactorPopulateAction"
+    		name="growthFactorForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+    
      <!-- HistopathologyForm -->
-     <!-- HormoneForm -->
+     
+   	 <!-- HormoneForm -->
+   	 <action path="/HormoneAction"
+	        type="gov.nih.nci.camod.webapp.action.HormoneAction"
+	        name="hormoneForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitHormone">   	
+    </action>
+    
+    <action path="/HormonePopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.HormonePopulateAction"
+    		name="hormoneForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+    
      <!-- ImageForm -->
 
      <!--  loginForm - Called from login.jsp  -->
@@ -1021,42 +1057,7 @@
     		path="/ReturnUserModels.do?method=returnUserModels"></forward>                                     
    </action>
    
-   	 <!-- HormoneForm -->
-   	 <action path="/HormoneAction"
-	        type="gov.nih.nci.camod.webapp.action.HormoneAction"
-	        name="hormoneForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="submitHormone">   	
-    </action>
-    
-    <action path="/HormonePopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.HormonePopulateAction"
-    		name="hormoneForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
-    </action>
-    
-     <!-- GrowthFactorForm -->
-     <action path="/GrowthFactorAction"
-	        type="gov.nih.nci.camod.webapp.action.GrowthFactorAction"
-	        name="growthFactorForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="submitGrowthFactors">   	
-    </action>
-    
-    <action path="/GrowthFactorPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.GrowthFactorPopulateAction"
-    		name="growthFactorForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
-    </action>
-    
+   
      <!-- NutritionalFactorForm -->
      <!-- PublicationForm -->	
      <!-- RadiationForm -->
