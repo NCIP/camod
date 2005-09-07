@@ -120,7 +120,7 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 			//Prepopulate all dropdown fields, set the global Constants to the following
 			drop.populateDropdown( request, Constants.Dropdowns.ENVIRONFACTORDROP, "" );
 
-			//TODO Administrative Route dropdown		
+			drop.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
 			drop.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
 			drop.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
 			drop.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
