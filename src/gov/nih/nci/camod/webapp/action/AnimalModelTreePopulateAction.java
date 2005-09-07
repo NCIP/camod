@@ -50,6 +50,8 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         List surgeryList = new ArrayList();
         List hormoneList = new ArrayList();
         List growthFactorList = new ArrayList();
+        List viraltreatmentList = new ArrayList();
+        List chemicaldrugList = new ArrayList();
         List environFactorList = new ArrayList();        
         List radiationList = new ArrayList();
         
@@ -77,6 +79,14 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        		if ( agent.getType().equals( "Growth Factor") ) {
 	        			System.out.println( "\tAdded therapy to growthFactorList" );
 	        			growthFactorList.add( ty );
+	        		}	  
+	        		if ( agent.getType().equals( "Viral") ) {
+	        			System.out.println( "\tAdded therapy to viraltreatmentList" );
+	        			viraltreatmentList.add( ty );
+	        		}	
+	        		if ( agent.getType().equals( "Chemical / Drug") ) {
+	        			System.out.println( "\tAdded therapy to chemicaldrugList" );
+	        			chemicaldrugList.add( ty );
 	        		}	
 	        		if ( agent.getType().equals( "Environment") ) {
 	        			System.out.println( "\tAdded therapy to environFactorList" );
@@ -85,7 +95,7 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        		if ( agent.getType().equals( "Radiation") ) {
 	        			System.out.println( "\tAdded therapy to radiationList" );
 	        			radiationList.add( ty );
-	        		}	 
+	        		}	
 	        	}	 	        	
 	        }
         }
@@ -93,9 +103,12 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         request.getSession().setAttribute( Constants.Submit.GROWTHFACTORS_LIST, growthFactorList );
         request.getSession().setAttribute( Constants.Submit.HORMONE_LIST, hormoneList );
         request.getSession().setAttribute( Constants.Submit.SURGERYOTHER_LIST, surgeryList );
+        request.getSession().setAttribute( Constants.Submit.VIRALTREATMENT_LIST, viraltreatmentList );
+        request.getSession().setAttribute( Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList );
         request.getSession().setAttribute( Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList );
         request.getSession().setAttribute( Constants.Submit.RADIATION_LIST, radiationList );
-        
+      
+      
 		return mapping.findForward( "submitOverview" );
 	}
 }
