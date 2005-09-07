@@ -86,15 +86,15 @@ public class NewDropdownUtil {
         if (inDropdownKey.equals( Constants.Dropdowns.VIRUSDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Viral" );
         }
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.RADIATIONDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Radiation" );
+        }        
                 
         if (inDropdownKey.equals( Constants.Dropdowns.ENVIRONFACTORDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Environment" );
         } 
-        
-        if (inDropdownKey.equals( Constants.Dropdowns.RADIATIONDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Radiation" );
-        } 
-                   
+                  
         return theReturnList;
     }
 
@@ -222,7 +222,7 @@ public class NewDropdownUtil {
     }
     
     /**
-     * Returns a list of all Administrative Routese
+     * Returns a list of all Administrative Routes
      * 
      * @return adminList
      */

@@ -27,10 +27,12 @@ import java.io.Serializable;
 	protected String name;
 	protected String otherName;	
 	protected String dosage;
+	protected String doseUnit;	
 	protected String administrativeRoute;
 	protected String otherAdministrativeRoute;	
 	protected String regimen;
 	protected String ageAtTreatment;
+	protected String ageUnit;	
 	protected String type;
 	
 	/**
@@ -69,6 +71,18 @@ import java.io.Serializable;
 	public void setDosage(String dosage) {
 		this.dosage = dosage;
 	}
+	/**
+	 * @return Returns the doseUnit.
+	 */
+	public String getDoseUnit() {
+		return doseUnit;
+	}
+	/**
+	 * @param doseUnit The dosageUnit to set.
+	 */
+	public void setDoseUnit(String doseUnit) {
+		this.doseUnit = doseUnit;
+	}	
 	/**
 	 * @return Returns the administrativeRoute.
 	 */
@@ -116,6 +130,18 @@ import java.io.Serializable;
 	 */
 	public void setAgeAtTreatment(String ageAtTreatment) {
 		this.ageAtTreatment = ageAtTreatment;
+	}
+	/**
+	 * @return Returns the ageUnit.
+	 */
+	public String getAgeUnit() {
+		return ageUnit;
+	}
+	/**
+	 * @param ageUnit The ageUnit to set.
+	 */
+	public void setAgeUnit(String ageUnit) {
+		this.ageUnit = ageUnit;
 	}	
 	/**
 	 * @return Returns the type.
