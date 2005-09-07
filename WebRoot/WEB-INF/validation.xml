@@ -58,23 +58,31 @@
     	</field>    
 	</form>
 	
+	<form name="growthFactorForm">
+        <field property="name" depends="required">
+            <arg0 key="GrowthFactorForm.name"/>
+    	</field>    
+	</form>	
+	
+	<form name="hormoneForm">
+        <field property="name" depends="required">
+            <arg0 key="HormoneForm.name"/>
+    	</field>    
+	</form>	
+	
 	<form name="surgeryForm">
         <field property="name" depends="required">
             <arg0 key="SurgeryForm.name"/>
     	</field>    
 	</form>
 	
-	<form name="hormoneForm">
+	<form name="radiationForm">
         <field property="name" depends="required">
-            <arg0 key="HormoneForm.name"/>
+            <arg0 key="RadiationForm.name"/>
     	</field>    
-	</form>
+	</form>	
 	
-	<form name="growthFactorForm">
-        <field property="name" depends="required">
-            <arg0 key="GrowthFactorForm.name"/>
-    	</field>    
-	</form>
+
 	
   </formset>
 </form-validation>
