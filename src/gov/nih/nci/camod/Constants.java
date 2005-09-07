@@ -138,7 +138,7 @@ public class Constants {
         public static final String AGEUNITSDROP = "AgeUnits.txt";
         
         //Specific to a single screen
-        public static final String CHECMICALDRUGDROP = "chemdrugdrop.db";
+        public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
         public static final String ENVIRONFACTORDROP = "envfactordrop.db";
         public static final String GROWTHFACTORDROP = "growfactordrop.db";
         public static final String HORMONEDROP = "hormonedrop.db";
