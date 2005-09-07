@@ -29,7 +29,12 @@
 	<div id="menu3" class="masterTitle" onclick="SwitchMenu('sub3')" onmouseover="ChangeClass('menu3','masterTitleOver')" onmouseout="ChangeClass('menu3','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> CARCINOGENIC INTERVENTIONS</div>
 	<span class="submasterdiv" class="submenu"  id="sub3">
 		- <html:link styleClass="subMenuRed" action="submitChemicalDrug">Enter Chemical/Drug</html:link><br>
-		- <html:link styleClass="subMenuRed" action="submitEnvironmentalFactors">Enter Environmental Factors</html:link><br>		
+		
+		- <html:link styleClass="subMenuRed" action="EnvironmentalFactorPopulateAction.do?method=dropdown">Enter Environmental Factors</html:link><br>
+			  <logic:iterate id="aTherapy" name="environmentalfactor_list" type="Therapy">
+			  &nbsp;&nbsp;&nbsp;&nbsp;* <html:link styleClass="subMenuBlue" action="EnvironmentalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+			  </logic:iterate>		
+				
 		- <html:link styleClass="subMenuRed" action="submitGeneDelivery">Enter Gene Delivery</html:link><br>
 		
 		- <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factors</html:link><br>		
@@ -43,6 +48,11 @@
 			  </logic:iterate>
 		
 		- <html:link styleClass="subMenuRed" action="submitNutritionalFactors">Enter Nutritional Factors</html:link><br>
+		
+		- <html:link styleClass="subMenuRed" action="RadiationPopulateAction.do?method=dropdown">Enter Radiation</html:link><br>
+			  <logic:iterate id="aTherapy" name="radiation_list" type="Therapy">
+			  &nbsp;&nbsp;&nbsp;&nbsp;* <html:link styleClass="subMenuBlue" action="RadiationPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+			  </logic:iterate>		
 		
 		- <html:link styleClass="subMenuRed" action="SurgeryPopulateAction.do?method=dropdown">Enter Surgery/Other</html:link><br>				  
 			  <logic:iterate id="aTherapy" name="surgeryother_list" type="Therapy">
