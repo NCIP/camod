@@ -922,8 +922,26 @@
      </action>
 
      <!-- AssociatedExpressionForm -->     
-     <!-- CellLineForm -->     
-     <!-- ChemicalDrugForm -->     
+     <!-- CellLineForm --> 
+         
+     <!-- ChemicalDrugForm -->
+     <action path="/ChemicalDrugAction"
+	        type="gov.nih.nci.camod.webapp.action.ChemicalDrugAction"
+	        name="chemicalDrugForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitChemicalDrug">   	
+    </action>
+    
+    <action path="/ChemicalDrugPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.ChemicalDrugPopulateAction"
+    		name="chemicalDrugForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+         
      <!-- ClinicalMarkerForm -->
      <!-- EngineeredTransgeneForm -->
      
@@ -1105,7 +1123,7 @@
 	        name="surgeryForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="true"
+	        validate="false"
 	        input="submitSurgeryOther">   	
     </action>
     
@@ -1119,7 +1137,25 @@
     
      <!-- TargetedModificationForm -->
      <!-- TherapyForm -->
+     
      <!-- ViralTreatmentForm -->
+          <action path="/ViralTreatmentAction"
+	        type="gov.nih.nci.camod.webapp.action.ViralTreatmentAction"
+	        name="viralTreatmentForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitViralTreatment">   	
+    </action>
+    
+    <action path="/ViralTreatmentPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.ViralTreatmentPopulateAction"
+    		name="viralTreatmentForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+    
      <!-- XenograftForm -->
     
     
