@@ -78,7 +78,7 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        			System.out.println( "\tAdded therapy to growthFactorList" );
 	        			growthFactorList.add( ty );
 	        		}	
-	        		if ( agent.getType().equals( "Environmental Factor") ) {
+	        		if ( agent.getType().equals( "Environment") ) {
 	        			System.out.println( "\tAdded therapy to environFactorList" );
 	        			environFactorList.add( ty );
 	        		}	        		
