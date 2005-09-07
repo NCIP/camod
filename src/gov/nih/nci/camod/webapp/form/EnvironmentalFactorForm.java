@@ -27,7 +27,7 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 	protected String name;
 	protected String otherName;	
 	protected String dosage;
-	protected String dosageUnit;
+	protected String doseUnit;
 	protected String administrativeRoute;
 	protected String otherAdministrativeRoute;	
 	protected String regimen;
@@ -72,16 +72,16 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable {
 		this.dosage = dosage;
 	}
 	/**
-	 * @return Returns the dosageUnit.
+	 * @return Returns the doseUnit.
 	 */
-	public String getDosageUnit() {
-		return dosageUnit;
+	public String getDoseUnit() {
+		return doseUnit;
 	}
 	/**
-	 * @param dosageUnit The dosageUnit to set.
+	 * @param doseUnit The dosageUnit to set.
 	 */
-	public void setDosageUnit(String dosageUnit) {
-		this.dosageUnit = dosageUnit;
+	public void setDoseUnit(String doseUnit) {
+		this.doseUnit = doseUnit;
 	}
 	/**
 	 * @return Returns the administrativeRoute.
