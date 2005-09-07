@@ -5,8 +5,10 @@ import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Strain;
 import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Treatment;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.TaxonManager;
+import gov.nih.nci.camod.service.TreatmentManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -55,23 +57,36 @@ public class NewDropdownUtil {
         if (inDropdownKey.equals( Constants.Dropdowns.SPECIESDROP )) {
             theReturnList = getSpeciesList(inRequest);
         }
-
-        if (inDropdownKey.equals( Constants.Dropdowns.SURGERYDROP )) {
-            theReturnList = getSurgeryList(inRequest);
-        }
-
-        if (inDropdownKey.equals( Constants.Dropdowns.HORMONEDROP )) {
-            theReturnList = getHormoneList(inRequest);
-        }
-        
-        if (inDropdownKey.equals( Constants.Dropdowns.GROWTHFACTORDROP )) {
-            theReturnList = getGrowthFactorList(inRequest);
-        }
         
         if (inDropdownKey.equals( Constants.Dropdowns.STRAINDROP )) {
             theReturnList = getStrainsList(inRequest, inFilter);
         }
         
+        if (inDropdownKey.equals( Constants.Dropdowns.ADMINISTRATIVEROUTEDROP )) {
+            theReturnList = getAdminList(inRequest);
+        }
+
+        //Environmental Factors - Carciogenic Interventions
+        if (inDropdownKey.equals( Constants.Dropdowns.SURGERYDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Other" );
+        }
+
+        if (inDropdownKey.equals( Constants.Dropdowns.HORMONEDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Hormone" );
+        }
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.GROWTHFACTORDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Growth Factor" );
+        }
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.CHEMICALDRUGDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Chemical / Drug" );
+        }
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.VIRUSDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Viral" );
+        }
+                   
         return theReturnList;
     }
 
@@ -126,7 +141,7 @@ public class NewDropdownUtil {
     /**
      * Returns a list of all Species and Strains
      * 
-     * @return speciesStrainList
+     * @return speciesNames
      */
     private static List getSpeciesList(HttpServletRequest inRequest) {
 
@@ -163,7 +178,7 @@ public class NewDropdownUtil {
      * Based on a species name retrieve a list of all Strains
      * 
      * @param speciesName
-     * @return
+     * @return strainNames
      */
     private static List getStrainsList( HttpServletRequest inRequest, String speciesName ) {
     	
@@ -199,52 +214,55 @@ public class NewDropdownUtil {
     }
     
     /**
-     * Returns a list of all types of surgeries
+     * Returns a list of all Administrative Routese
      * 
+     * @return adminList
      */
-    private static List getSurgeryList(HttpServletRequest inRequest) {
+    private static List getAdminList(HttpServletRequest inRequest) {
 
-        AgentManager agentManager = (AgentManager) getContext(inRequest).getBean("agentManager");
+        // Get values for dropdown lists for Species, Strains
+        TreatmentManager treatmentManager = ( TreatmentManager ) getContext(inRequest).getBean("treatmentManager");
         
-        List agentList = agentManager.getAll();
-        List surgeryList = new ArrayList();
-        Agent tmp;
+        List treatmentList = treatmentManager.getAll();
+        List adminList = new ArrayList();
+        Treatment tmp;
 
         // TODO: Fix once we know what we're doing w/ this
-        surgeryList.add("Other");
+        adminList.add("Other");
 
-        if (agentList != null) {
-            for (int i = 0; i < agentList.size(); i++) {
-                tmp = (Agent) agentList.get(i);
-                
-                if (tmp.getName() != null) {
-                    // if the surgery is not already in the List, add it
+        if (treatmentList != null) {
+            for (int i = 0; i < treatmentList.size(); i++) {
+                tmp = (Treatment) treatmentList.get(i);
+
+                if (tmp.getAdministrativeRoute() != null) {
+                    // if the speciesName is not already in the List, add it
                     // (only get unique names)
-                    if ( !surgeryList.contains(tmp.getName()) && tmp.getType().equals( "Other" ) )
-                    		surgeryList.add(tmp.getName());
+                    if (!adminList.contains(tmp.getAdministrativeRoute()) )
+                    	adminList.add(tmp.getAdministrativeRoute() );
                 }
-            }
+            } 
         }
-            
-        Collections.sort(surgeryList);
-
-        return surgeryList;
+        
+        Collections.sort(adminList);
+        
+        return adminList;
     }
     
     /**
-     * Returns a list of all types of surgeries
+     * Returns a list for a type of environmental Factore
      * 
+     * @return envList
      */
-    private static List getHormoneList(HttpServletRequest inRequest) {
+    private static List getEnvironmentalFactorList(HttpServletRequest inRequest, String type) {
 
         AgentManager agentManager = (AgentManager) getContext(inRequest).getBean("agentManager");
         
         List agentList = agentManager.getAll();
-        List hormoneList = new ArrayList();
+        List envList = new ArrayList();
         Agent tmp;
 
         // TODO: Fix once we know what we're doing w/ this
-        hormoneList.add("Other");
+        envList.add("Other");
 
         if (agentList != null) {
             for (int i = 0; i < agentList.size(); i++) {
@@ -253,48 +271,15 @@ public class NewDropdownUtil {
                 if (tmp.getName() != null) {
                     // if the surgery is not already in the List, add it
                     // (only get unique names)
-                    if ( !hormoneList.contains(tmp.getName()) && tmp.getType().equals( "Hormone" ) )
-                    	hormoneList.add(tmp.getName());
+                    if ( !envList.contains(tmp.getName()) && tmp.getType().equals( type ) )
+                    	envList.add(tmp.getName());
                 }
             }
         }
             
-        Collections.sort(hormoneList);
+        Collections.sort(envList);
 
-        return hormoneList;
+        return envList;
     }
-    /**
-     * Returns a list of all types of surgeries
-     * 
-     */
-    private static List getGrowthFactorList(HttpServletRequest inRequest) {
-
-        AgentManager agentManager = (AgentManager) getContext(inRequest).getBean("agentManager");
-        
-        List agentList = agentManager.getAll();
-        List hormoneList = new ArrayList();
-        Agent tmp;
-
-        // TODO: Fix once we know what we're doing w/ this
-        hormoneList.add("Other");
-
-        if (agentList != null) {
-            for (int i = 0; i < agentList.size(); i++) {
-                tmp = (Agent) agentList.get(i);
-                
-                if (tmp.getName() != null) {
-                    // if the surgery is not already in the List, add it
-                    // (only get unique names)
-                    if ( !hormoneList.contains(tmp.getName()) && tmp.getType().equals( "Growth Factor" ) )
-                    	hormoneList.add(tmp.getName());
-                }
-            }
-        }
-            
-        Collections.sort(hormoneList);
-
-        return hormoneList;
-    }
-    
     
 }
