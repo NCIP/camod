@@ -90,7 +90,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
         Agent agent = new Agent();
         agent.setName(envForm.getName() );
 
-        agent.setType( "Environmental Factor" );
+        agent.setType( "Environment" );
         agentManager.save(agent);
         
         /*4. Create Therapy object, set its therapeuticExperiment property to false.
@@ -226,7 +226,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
         //Agent IS-A an EnvironmentalFactor
         Agent agent = therapy.getAgent();
         agent.setName( envForm.getName() );
-        agent.setType( "Environmental Factor" );
+        agent.setType( "Environment" );
         agentManager.save( agent );
         
         //TherapeuticExperiment property is false, tells us that this is an environmentalFactor
