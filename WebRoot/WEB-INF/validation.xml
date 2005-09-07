@@ -70,6 +70,12 @@
     	</field>    
 	</form>	
 	
+	<form name="nutritionalFactorForm">
+        <field property="name" depends="required">
+            <arg0 key="NutritionalFactorForm.name"/>
+    	</field>    
+	</form>	
+	
 	<form name="surgeryForm">
         <field property="name" depends="required">
             <arg0 key="SurgeryForm.name"/>

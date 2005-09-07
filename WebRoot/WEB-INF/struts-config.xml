@@ -1095,6 +1095,23 @@
    
    
      <!-- NutritionalFactorForm -->
+   	 <action path="/NutritionalFactorAction"
+	        type="gov.nih.nci.camod.webapp.action.NutritionalFactorAction"
+	        name="nutritionalFactorForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitNutritionalFactors">   	
+    </action>
+    
+    <action path="/NutritionalFactorPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.NutritionalFactorPopulateAction"
+    		name="nutritionalFactorForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+         
      <!-- PublicationForm -->
      	
      <!-- RadiationForm -->

@@ -54,6 +54,7 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         List chemicaldrugList = new ArrayList();
         List environFactorList = new ArrayList();        
         List radiationList = new ArrayList();
+        List nutritionalFactorList = new ArrayList();
         
         System.out.println( "<AnimalModelTreePopulateAction> Building Tree ...");
         
@@ -91,7 +92,13 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        		if ( agent.getType().equals( "Environment") ) {
 	        			System.out.println( "\tAdded therapy to environFactorList" );
 	        			environFactorList.add( ty );
-	        		}	        		
+	        		}
+	        		
+	        		if ( agent.getType().equals( "Nutrition") ) {
+	        			System.out.println( "\tAdded therapy to nutritionalFactorList" );
+	        			nutritionalFactorList.add( ty );
+	        		}
+	        		
 	        		if ( agent.getType().equals( "Radiation") ) {
 	        			System.out.println( "\tAdded therapy to radiationList" );
 	        			radiationList.add( ty );
@@ -107,6 +114,7 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         request.getSession().setAttribute( Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList );
         request.getSession().setAttribute( Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList );
         request.getSession().setAttribute( Constants.Submit.RADIATION_LIST, radiationList );
+        request.getSession().setAttribute( Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList );        
       
       
 		return mapping.findForward( "submitOverview" );

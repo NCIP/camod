@@ -90,6 +90,10 @@ public class NewDropdownUtil {
         if (inDropdownKey.equals( Constants.Dropdowns.RADIATIONDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Radiation" );
         }        
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.NUTRITIONFACTORDROP )) {
+            theReturnList = getEnvironmentalFactorList(inRequest, "Nutrition" );
+        }        
                 
         if (inDropdownKey.equals( Constants.Dropdowns.ENVIRONFACTORDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Environment" );

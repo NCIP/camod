@@ -50,7 +50,10 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;* <html:link styleClass="subMenuBlue" action="HormonePopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
 			  </logic:iterate>
 		
-		- <html:link styleClass="subMenuRed" action="submitNutritionalFactors">Enter Nutritional Factors</html:link><br>
+		- <html:link styleClass="subMenuRed" action="NutritionalFactorPopulateAction.do?method=dropdown">Enter Nutritional Factors</html:link><br>
+			  <logic:iterate id="aTherapy" name="nutritionalfactors_list" type="Therapy">
+			  &nbsp;&nbsp;&nbsp;&nbsp;* <html:link styleClass="subMenuBlue" action="NutritionalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+			  </logic:iterate>		
 		
 		- <html:link styleClass="subMenuRed" action="RadiationPopulateAction.do?method=dropdown">Enter Radiation</html:link><br>
 			  <logic:iterate id="aTherapy" name="radiation_list" type="Therapy">
