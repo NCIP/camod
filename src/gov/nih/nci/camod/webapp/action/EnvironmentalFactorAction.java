@@ -7,34 +7,20 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import gov.nih.nci.camod.Constants;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.actions.DispatchAction;
-
+import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
-
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.EnvironmentalFactor;
-import gov.nih.nci.camod.domain.Phenotype;
+import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Treatment;
 import gov.nih.nci.camod.domain.SexDistribution;
-
+import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.SexDistributionManager;
+import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.service.TreatmentManager;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.service.EnvironmentalFactorManager;
+
 
 
 /**
@@ -42,7 +28,7 @@ import gov.nih.nci.camod.service.EnvironmentalFactorManager;
  */
 public final class EnvironmentalFactorAction extends BaseAction {
 
-	/** Called from submitNewModel.jsp
+	/** Called from submitEnvironmentalFactors.jsp
 	 * 
 	 */ 
     public ActionForward save( ActionMapping mapping, 
@@ -50,145 +36,93 @@ public final class EnvironmentalFactorAction extends BaseAction {
 							           HttpServletRequest request,
 							           HttpServletResponse response)
     throws Exception {
-     
-    	EnvironmentalFactorForm envirFact = ( EnvironmentalFactorForm ) form;
+        if (log.isDebugEnabled()) {
+            log.debug("Entering 'save' method");
+        }    	
+    	
+    	EnvironmentalFactorForm envForm = ( EnvironmentalFactorForm ) form;
     	
 		System.out.println( "<EnvironmentalFactorAction save> following Characteristics:" + 
-																"\n\t name: " + envirFact.getName() + 
-																"\n\t otherName: " + envirFact.getOtherName() + 
-																"\n\t dosage: " + envirFact.getDosage() + 
-																"\n\t administrativeRoute: " + envirFact.getAdministrativeRoute() +
-																"\n\t regimen: " + envirFact.getRegimen() +
-																"\n\t ageAtTreatment: " + envirFact.getAgeAtTreatment() +
-																"\n\t type: " + envirFact.getType() +
+																"\n\t name: " + envForm.getName() + 
+																"\n\t otherName: " + envForm.getOtherName() + 
+																"\n\t dosage: " + envForm.getDosage() + 
+																"\n\t administrativeRoute: " + envForm.getAdministrativeRoute() +
+																"\n\t regimen: " + envForm.getRegimen() +
+																"\n\t ageAtTreatment: " + envForm.getAgeAtTreatment() +
+																"\n\t type: " + envForm.getType() +
 																"\n\t user: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
 		
-		Person person = new Person();
-		
-		//Set the current user as the person who entered this model
-		person.setUsername( (String) request.getSession().getAttribute( Constants.CURRENTUSER ) );    		    	
-			
-		/* EnvironmentalFactor Object */
-		EnvironmentalFactor environmentalFactor = new EnvironmentalFactor();		
-		environmentalFactor.setName(envirFact.getName());
-		
-		// if ( envirFact.getOtherName() != null || ! envirFact.getOtherName().equals( "" ) ) 
-		// {
-		//			System.out.println( " Someone entered in a new environmental name " + envirFact.getOtherName() );
-		//			System.out.println( " Sending a notice email to Ulli" );
-		// TODO: call a email function
-		//		}		
-		
-		/* Treatment Object */
-		Treatment treatment = new Treatment();
-		treatment.setDosage(envirFact.getDosage());
-		treatment.setRegimen(envirFact.getRegimen());
-		treatment.setAgeAtTreatment(envirFact.getAgeAtTreatment());		
-		treatment.setAdministrativeRoute(envirFact.getAdministrativeRoute());
-		
-		// if ( envirFact.getOtherAdministrativeRoute() != null || ! envirFact.getOtherAdministrativeRoute().equals( "" ) ) 
-		// {
-		//			System.out.println( " Someone entered in a new environmental name " + envirFact.getOtherAdministrativeRoute() );
-		//			System.out.println( " Sending a notice email to Ulli" );
-		// TODO: call a email function
-		//		}		
-		
-		/* SexDistribution Object */ 
+		/* Grab the current modelID from the session */
+        String modelID = (String) request.getSession().getAttribute( Constants.MODELID );
+        
+        /* Create all the manager objects needed for Screen */
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
+        SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean( "sexDistributionManager" );
+        TreatmentManager treatmentManager = ( TreatmentManager ) getBean( "treatmentManager" );
+        AgentManager agentManager = ( AgentManager ) getBean( "agentManager" ); 
+        
+        /* Set modelID in AnimalModel object */
+        AnimalModel animalModel = animalModelManager.get( modelID );        
+ 
+		/* 1.  Create and save SexDistribution Object */
 		SexDistribution sexDistribution = new SexDistribution();
-		sexDistribution.setType(envirFact.getType());
+		sexDistribution.setType(envForm.getType());
+        sexDistributionManager.save( sexDistribution );
 		
-		EnvironmentalFactorManager environmentalFactorManager = (EnvironmentalFactorManager) getBean( "environmentalFactorManager" );
-		//environmentalFactorManager.save( person, environmentalFactor, treatment, sexDistribution );
-		//environmentalFactorManager.save( environmentalFactor, treatment, sexDistribution ); 
+ 		/*2. Create Treatment object, set its sexDistribution property (saved in #1) and other values, and save Treatment object.	*/	
+		Treatment treatment = new Treatment();
+
+		// Append the dose unit onto dose, if not null
+		treatment.setDosage( envForm.getAgeAtTreatment() + " " + envForm.getDoseUnit() );
+		treatment.setRegimen(envForm.getRegimen());
+		treatment.setAgeAtTreatment(envForm.getAgeAtTreatment() + "" + envForm.getAgeUnit());
+		treatment.setAdministrativeRoute(envForm.getAdministrativeRoute());
 		
-		/*  Setup global constants to use for submission / editing process */
-		/*  Rework since save method does not return modelID */
-		//AnimalModel am = animalModelManager.get( "" + modelID );	      	
-    	//request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
-    	//request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
-    	//request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
+		//set its sexDistribution property in treatment		
+		treatment.setSexDistribution( sexDistribution );
 		
+		//save treatment object		
+		treatmentManager.save(treatment);
+		
+		System.out.println( "<EnvironmentalFactorAction save> Created and saved Treatment");
+		
+		/* 3. Create Agent, fill it with data meant for EnvironmentalFactor (since Agent IS-A an EnvironmentalFactor) and then save it.*/
+        Agent agent = new Agent();
+        agent.setName(envForm.getName() );
+
+        agent.setType( "Environmental Factor" );
+        agentManager.save(agent);
+        
+        /*4. Create Therapy object, set its therapeuticExperiment property to false.
+    		4.1 set its treatment property (saved in #2).
+    		4.2 set its agent property (saved in #3).
+    		4.3 Add Therapy to animalModel 
+    		4.4 No need to explicity save Therapy object b/c 1...1 relationship with AnimalModel   	
+    		When TherapeuticExperiment property is false, tells us that this is an environmentalFactor
+    	*/
+
+        Therapy therapy = new Therapy();
+        therapy.setTherapeuticExperiment( false );
+        therapy.setAgent( agent );        
+        therapy.setTreatment( treatment ); 
+        
+        /* 5. Add Therapy to AnimalModel */
+        animalModel.addTherapy( therapy );
+
+		/* 6. save the animalModel = saves Therapy (Hibernate saves child in 1...1 relationships)  */  
+        animalModelManager.save( animalModel );
+        
+        System.out.println( "<EnvironmentalFactorAction save> saved the animalModel");
+ 
     	//Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
         ActionMessages msg = new ActionMessages();
-        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "creation.successful" ) );
+        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "environmentalfactor.creation.successful" ) );
         saveErrors( request, msg );
      
-        return mapping.findForward("submitEnvironmentalFactors");		
+        return mapping.findForward("AnimalModelTreePopulateAction");		
     }	
 	
 
-    /**
-     * Delete
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward delete(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request,
-                                HttpServletResponse response)
-    throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'delete' method");
-        }
-        
-    	EnvironmentalFactorForm envirFact = ( EnvironmentalFactorForm ) form;
-    	
-		System.out.println( "<EnvironmentalFactorAction save> following Characteristics:" + 
-																"\n\t name: " + envirFact.getName() + 
-																"\n\t otherName: " + envirFact.getOtherName() + 
-																"\n\t dosage: " + envirFact.getDosage() + 
-																"\n\t administrativeRoute: " + envirFact.getAdministrativeRoute() +
-																"\n\t regimen: " + envirFact.getRegimen() +
-																"\n\t ageAtTreatment: " + envirFact.getAgeAtTreatment() +
-																"\n\t type: " + envirFact.getType() +
-																"\n\t user: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
-		
-		Person person = new Person();
-		
-		//Set the current user as the person who entered this model
-		person.setUsername( (String) request.getSession().getAttribute( Constants.CURRENTUSER ) );    		    	
-			
-		//EnvironmentalFactor Object
-		EnvironmentalFactor environmentalFactor = new EnvironmentalFactor();
-		environmentalFactor.setName(envirFact.getName());
-		
-		// if ( envirFact.getOtherName() != null || ! envirFact.getOtherName().equals( "" ) ) 
-		// {
-		//			System.out.println( " Someone entered in a new environmental name " + envirFact.getOtherName() );
-		//			System.out.println( " Sending a notice email to Ulli" );
-		// TODO: call a email function
-		//		}		
-		
-		//Treatment Object
-		Treatment treatment = new Treatment();
-		treatment.setDosage(envirFact.getDosage());
-		treatment.setAdministrativeRoute(envirFact.getAdministrativeRoute());
-		treatment.setRegimen(envirFact.getRegimen());
-		treatment.setAgeAtTreatment(envirFact.getAgeAtTreatment());
-		
-		//SexDistribution Object to set gender 
-		SexDistribution sexDistribution = new SexDistribution();
-		sexDistribution.setType(envirFact.getType());
-		
-		EnvironmentalFactorManager environmentalFactorManager = (EnvironmentalFactorManager) getBean( "environmentalFactorManager" );
-		//environmentalFactorManager.save( person, environmentalFactor, treatment, sexDistribution ); 
-		
-		// Setup global constants to use for submission / editing process
-		//AnimalModel am = animalModelManager.get( "" + modelID );	      	
-    	//request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
-    	//request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
-    	//request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
-		
-    	//Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
-        ActionMessages msg = new ActionMessages();
-        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "creation.successful" ) );
-        saveErrors( request, msg );        
-
-        return mapping.findForward( "submitEnvironmentalFactors" );
-    }
 
 	/**
 	 * Cancel
@@ -204,7 +138,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
                                 HttpServletResponse response)
     throws Exception {
     	
-    	 return mapping.findForward("submitEnvironmentalFactors");
+    	 return mapping.findForward("submitOverview");
     }    
     
     
@@ -221,29 +155,95 @@ public final class EnvironmentalFactorAction extends BaseAction {
                               HttpServletRequest request,
                               HttpServletResponse response)
     throws Exception {
+        if (log.isDebugEnabled()) {
+            log.debug("Entering 'edit' method");
+        }
 
     	// Grab the current modelID from the session  
     	String modelID = (String) request.getSession().getAttribute( Constants.MODELID ); 
     	
-    	EnvironmentalFactorForm envirFact = ( EnvironmentalFactorForm ) form;
+    	// Grab the current Therapy we are working with related to this animalModel
+    	String aTherapyID = request.getParameter( "aTherapyID" );    	
+    	
+		// Create a form to edit
+		EnvironmentalFactorForm envForm = ( EnvironmentalFactorForm ) form;
     	
 		System.out.println( "<EnvironmentalFactorAction save> following Characteristics:" + 
-																"\n\t name: " + envirFact.getName() + 
-																"\n\t otherName: " + envirFact.getOtherName() + 
-																"\n\t dosage: " + envirFact.getDosage() + 
-																"\n\t administrativeRoute: " + envirFact.getAdministrativeRoute() +
-																"\n\t regimen: " + envirFact.getRegimen() +
-																"\n\t ageAtTreatment: " + envirFact.getAgeAtTreatment() +
-																"\n\t type: " + envirFact.getType() +
+																"\n\t name: " + envForm.getName() + 
+																"\n\t otherName: " + envForm.getOtherName() + 
+																"\n\t dosage: " + envForm.getDosage() + 
+																"\n\t administrativeRoute: " + envForm.getAdministrativeRoute() +
+																"\n\t regimen: " + envForm.getRegimen() +
+																"\n\t ageAtTreatment: " + envForm.getAgeAtTreatment() +
+																"\n\t type: " + envForm.getType() +
 																"\n\t user: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
 		
-		EnvironmentalFactorManager environmentalFactorManager = (EnvironmentalFactorManager) getBean( "environmentalFactorManager" );
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
+        SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean( "sexDistributionManager" );
+        TreatmentManager treatmentManager = ( TreatmentManager ) getBean( "treatmentManager" );
+        AgentManager agentManager = ( AgentManager ) getBean( "agentManager" );
+        TherapyManager therapyManager = ( TherapyManager ) getBean("therapyManager" );
 		
-		//retrieve model by it's id
-		AnimalModel animalModel = animalModelManager.get( modelID );   	
-
-        return mapping.findForward("submitEnvironmentalFactors");
+        AnimalModel animalModel = animalModelManager.get( modelID );
+		
+        //retrieve the list of all therapies from the current animalModel
+		List therapyList = animalModel.getTherapyCollection();
+		
+		Therapy therapy = new Therapy();
+		int therapyNumber = 0;
+		
+		//find the specific one we need
+		for ( int i=0; i<therapyList.size(); i++ )
+		{
+			therapy = (Therapy)therapyList.get(i);
+			System.out.println( " searching ... id=" + therapy.getId().toString() + " = " + aTherapyID );
+			if ( therapy.getId().toString().equals( aTherapyID) )
+			{				
+				therapyNumber = i;
+				System.out.println( "found a match!");
+				break;
+			}
+		}       
+		
+		//Set the treatment
+		Treatment treatment = therapy.getTreatment();
+        
+    	//Set the gender
+		SexDistribution sexDistribution = treatment.getSexDistribution();
+		sexDistribution.setType( envForm.getType() );		
+		//save the sexdistro
+		sexDistributionManager.save( sexDistribution );
+		
+		//save the treatment
+		treatment.setDosage(envForm.getDosage() + " " + envForm.getDoseUnit() );
+		treatment.setAdministrativeRoute(envForm.getAdministrativeRoute());
+		treatment.setRegimen( envForm.getRegimen() );
+		treatment.setSexDistribution( sexDistribution );        
+    	//Append the ageunit onto the age at treatment variable
+		treatment.setAgeAtTreatment( envForm.getAgeAtTreatment()+ " " + envForm.getAgeUnit());
+    	treatmentManager.save( treatment );
+				
+        //Agent IS-A an EnvironmentalFactor
+        Agent agent = therapy.getAgent();
+        agent.setName( envForm.getName() );
+        agent.setType( "Environmental Factor" );
+        agentManager.save( agent );
+        
+        //TherapeuticExperiment property is false, tells us that this is an environmentalFactor
+        therapy.setTherapeuticExperiment( false );
+        therapy.setAgent( agent );
+        therapy.setTreatment( treatment );
+        therapyManager.save( therapy );
+        therapyList.set( therapyNumber, therapy );
+        
+        animalModel.setTherapyCollection( therapyList );           
+		
+        //Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
+        ActionMessages msg = new ActionMessages();
+        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "environmentalfactor.edit.successful" ) );
+        saveErrors( request, msg );
+        
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
 
