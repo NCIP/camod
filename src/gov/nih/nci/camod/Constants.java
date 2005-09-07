@@ -198,6 +198,7 @@ public class Constants {
     	public static final String GROWTHFACTORS_LIST = "growthfactors_list";
     	public static final String HORMONE_LIST = "hormone_list";
     	public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
+    	public static final String RADIATION_LIST = "radiation_list";
     	public static final String SURGERYOTHER_LIST = "surgeryother_list";
     	public static final String VIRALTREATMENT_LIST = "viraltreatment_list";    	    	
     }
