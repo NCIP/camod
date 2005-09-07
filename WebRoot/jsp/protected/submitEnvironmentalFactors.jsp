@@ -68,7 +68,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Other Environmental Factors</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" size="30" property="otherName" name="formdata"/>			
+					<html:text styleClass="formFieldSized" size="30" property="otherName" name="formdata"  disabled="true"/>			
 			</td>
 		</tr>	
 
@@ -93,8 +93,9 @@
 		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:text styleClass="formFieldSized" size="1" property="administrativeRoute"/>
-
+			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute" name="formdata">												
+				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
+			</html:select>			
 		</td>
 	</tr>
 
