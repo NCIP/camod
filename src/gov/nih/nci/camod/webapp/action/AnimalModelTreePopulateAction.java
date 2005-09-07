@@ -50,11 +50,13 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         List surgeryList = new ArrayList();
         List hormoneList = new ArrayList();
         List growthFactorList = new ArrayList();
+        List environFactorList = new ArrayList();        
+        List radiationList = new ArrayList();
         
         System.out.println( "<AnimalModelTreePopulateAction> Building Tree ...");
         
         if( tyList == null || tyList.size() == 0 ){
-        	System.out.println( "nothing!" );
+        	System.out.println( "<AnimalModelTreePopulateAction populate> nothing!" );
         } else {
 	        for ( int i=0; i < tyList.size(); i++ )
 	        {
@@ -75,7 +77,15 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
 	        		if ( agent.getType().equals( "Growth Factor") ) {
 	        			System.out.println( "\tAdded therapy to growthFactorList" );
 	        			growthFactorList.add( ty );
+	        		}	
+	        		if ( agent.getType().equals( "Environmental Factor") ) {
+	        			System.out.println( "\tAdded therapy to environFactorList" );
+	        			environFactorList.add( ty );
 	        		}	        		
+	        		if ( agent.getType().equals( "Radiation") ) {
+	        			System.out.println( "\tAdded therapy to radiationList" );
+	        			radiationList.add( ty );
+	        		}	 
 	        	}	 	        	
 	        }
         }
@@ -83,7 +93,9 @@ public class AnimalModelTreePopulateAction extends BaseAction  {
         request.getSession().setAttribute( Constants.Submit.GROWTHFACTORS_LIST, growthFactorList );
         request.getSession().setAttribute( Constants.Submit.HORMONE_LIST, hormoneList );
         request.getSession().setAttribute( Constants.Submit.SURGERYOTHER_LIST, surgeryList );
-		
+        request.getSession().setAttribute( Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList );
+        request.getSession().setAttribute( Constants.Submit.RADIATION_LIST, radiationList );
+        
 		return mapping.findForward( "submitOverview" );
 	}
 }
