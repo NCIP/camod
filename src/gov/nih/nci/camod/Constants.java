@@ -143,7 +143,7 @@ public class Constants {
         public static final String GROWTHFACTORDROP = "growfactordrop.db";
         public static final String HORMONEDROP = "hormonedrop.db";
         public static final String NUTRITIONFACTORDROP = "nutritionfactordrop.db";
-        public static final String RADIATIONDROP = "radiationdrop";
+        public static final String RADIATIONDROP = "radiationdrop.db";
         public static final String SURGERYDROP = "surgerydrop.db";
         public static final String VIRUSDROP = "virusdrop.db";	
     }    
