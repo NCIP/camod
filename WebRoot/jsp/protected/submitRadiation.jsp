@@ -40,7 +40,7 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center">
 		<tr>
-
+			<html:errors/>
 			<td class="formMessage" colspan="3">* indicates a required field</td>
 		</tr>
 		
