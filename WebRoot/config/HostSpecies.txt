@@ -1,3 +1,0 @@
-(Mouse)Mus musculus
-(Rat)Rattus norvegicus
-(Rat)Rattus rattus
