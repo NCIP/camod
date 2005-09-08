@@ -127,7 +127,7 @@ public final class AnimalModelAction extends BaseAction {
 		}						
 		
 		//By default a new model's state is set to incomplete
-		animalModel.setState("incomplete");			
+		animalModel.setState("Incomplete");			
 		
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
 		Long modelID = animalModelManager.save( person, contactInfo, animalModel, taxon, phenotype, sexDistribution, availability );    				    
