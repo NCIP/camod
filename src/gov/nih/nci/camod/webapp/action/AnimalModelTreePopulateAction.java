@@ -41,75 +41,76 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         // Print the list of EnvironmentalFactors for the Cardiogenic
         // Interventions Section
         List tyList = animalModel.getTherapyCollection();
-
+        
         List surgeryList = new ArrayList();
         List hormoneList = new ArrayList();
         List growthFactorList = new ArrayList();
         List viraltreatmentList = new ArrayList();
         List chemicaldrugList = new ArrayList();
-        List environFactorList = new ArrayList();
+        List environFactorList = new ArrayList();        
         List radiationList = new ArrayList();
         List nutritionalFactorList = new ArrayList();
-
-        System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
-
-        if (tyList == null || tyList.size() == 0) {
-            System.out.println("<AnimalModelTreePopulateAction populate> nothing!");
+        
+        System.out.println( "<AnimalModelTreePopulateAction> Building Tree ...");
+        
+        if( tyList == null || tyList.size() == 0 ){
+        	System.out.println( "<AnimalModelTreePopulateAction populate> nothing!" );
         } else {
-            for (int i = 0; i < tyList.size(); i++) {
-                Therapy ty = (Therapy) tyList.get(i);
-
-                // check to see if it is an EnvironmentalFactor
-                if (ty.getTherapeuticExperiment() == false) {
-                    Agent agent = ty.getAgent();
-
-                    if (agent.getType().equals("Other")) {
-                        System.out.println("\tAdded therapy to surgeryList");
-                        surgeryList.add(ty);
-                    }
-                    if (agent.getType().equals("Hormone")) {
-                        System.out.println("\tAdded therapy to hormoneList");
-                        hormoneList.add(ty);
-                    }
-                    if (agent.getType().equals("Growth Factor")) {
-                        System.out.println("\tAdded therapy to growthFactorList");
-                        growthFactorList.add(ty);
-                    }
-                    if (agent.getType().equals("Viral")) {
-                        System.out.println("\tAdded therapy to viraltreatmentList");
-                        viraltreatmentList.add(ty);
-                    }
-                    if (agent.getType().equals("Chemical / Drug")) {
-                        System.out.println("\tAdded therapy to chemicaldrugList");
-                        chemicaldrugList.add(ty);
-                    }
-                    if (agent.getType().equals("Environment")) {
-                        System.out.println("\tAdded therapy to environFactorList");
-                        environFactorList.add(ty);
-                    }
-
-                    if (agent.getType().equals("Nutrition")) {
-                        System.out.println("\tAdded therapy to nutritionalFactorList");
-                        nutritionalFactorList.add(ty);
-                    }
-
-                    if (agent.getType().equals("Radiation")) {
-                        System.out.println("\tAdded therapy to radiationList");
-                        radiationList.add(ty);
-                    }
-                }
-            }
+	        for ( int i=0; i < tyList.size(); i++ )
+	        {
+	        	Therapy ty = (Therapy)tyList.get(i);
+	        	
+	        	//check to see if it is an EnvironmentalFactor
+	        	if ( ty.getTherapeuticExperiment() == false ) {	        		
+	        		Agent agent = ty.getAgent();	      
+	        		
+	        		if ( agent.getType().equals( "Other") ) {
+	        			System.out.println( "\tAdded therapy to surgeryList" );
+	        			surgeryList.add( ty );
+	        		}
+	        		if ( agent.getType().equals( "Hormone") ) {
+	        			System.out.println( "\tAdded therapy to hormoneList" );
+	        			hormoneList.add( ty );
+	        		}	  
+	        		if ( agent.getType().equals( "Growth Factor") ) {
+	        			System.out.println( "\tAdded therapy to growthFactorList" );
+	        			growthFactorList.add( ty );
+	        		}	  
+	        		if ( agent.getType().equals( "Viral") ) {
+	        			System.out.println( "\tAdded therapy to viraltreatmentList" );
+	        			viraltreatmentList.add( ty );
+	        		}	
+	        		if ( agent.getType().equals( "Chemical / Drug") ) {
+	        			System.out.println( "\tAdded therapy to chemicaldrugList" );
+	        			chemicaldrugList.add( ty );
+	        		}	
+	        		if ( agent.getType().equals( "Environment") ) {
+	        			System.out.println( "\tAdded therapy to environFactorList" );
+	        			environFactorList.add( ty );
+	        		}
+	        		
+	        		if ( agent.getType().equals( "Nutrition") ) {
+	        			System.out.println( "\tAdded therapy to nutritionalFactorList" );
+	        			nutritionalFactorList.add( ty );
+	        		}
+	        		
+	        		if ( agent.getType().equals( "Radiation") ) {
+	        			System.out.println( "\tAdded therapy to radiationList" );
+	        			radiationList.add( ty );
+	        		}	
+	        	}	 	        	
+	        }
         }
-
-        request.getSession().setAttribute(Constants.Submit.GROWTHFACTORS_LIST, growthFactorList);
-        request.getSession().setAttribute(Constants.Submit.HORMONE_LIST, hormoneList);
-        request.getSession().setAttribute(Constants.Submit.SURGERYOTHER_LIST, surgeryList);
-        request.getSession().setAttribute(Constants.Submit.VIRALTREATMENT_LIST, viraltreatmentList);
-        request.getSession().setAttribute(Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList);
-        request.getSession().setAttribute(Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList);
-        request.getSession().setAttribute(Constants.Submit.RADIATION_LIST, radiationList);
-        request.getSession().setAttribute(Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList);
-
+        
+        request.getSession().setAttribute( Constants.Submit.GROWTHFACTORS_LIST, growthFactorList );
+        request.getSession().setAttribute( Constants.Submit.HORMONE_LIST, hormoneList );
+        request.getSession().setAttribute( Constants.Submit.SURGERYOTHER_LIST, surgeryList );
+        request.getSession().setAttribute( Constants.Submit.VIRALTREATMENT_LIST, viraltreatmentList );
+        request.getSession().setAttribute( Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList );
+        request.getSession().setAttribute( Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList );
+        request.getSession().setAttribute( Constants.Submit.RADIATION_LIST, radiationList );
+        request.getSession().setAttribute( Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList );        
+      
         UserManager theUserManager = (UserManager) getBean("userManager");
 
         // Set up the form. Should be only one controller
@@ -121,6 +122,6 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.setAttribute("formdata", theForm);
 
         System.out.println("Before forward");
-        return mapping.findForward("submitOverview");
-    }
+		return mapping.findForward( "submitOverview" );
+	}
 }
