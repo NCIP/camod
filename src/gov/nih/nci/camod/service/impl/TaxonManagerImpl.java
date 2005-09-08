@@ -6,17 +6,15 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Species;
-import gov.nih.nci.camod.domain.Strain;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TaxonManager;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-import org.hibernate.eqbe.*;
+import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
+import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
+
+import java.util.*;
 
 /**
  * @author rajputs

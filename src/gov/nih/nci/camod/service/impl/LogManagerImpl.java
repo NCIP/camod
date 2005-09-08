@@ -5,12 +5,11 @@ import gov.nih.nci.camod.service.LogManager;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
+import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
+import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
 import java.util.Date;
 import java.util.List;
-
-import org.hibernate.eqbe.Evaluation;
-import org.hibernate.eqbe.Evaluator;
 
 /**
  * Implementation of the manager which stores/retrieves Log objects
