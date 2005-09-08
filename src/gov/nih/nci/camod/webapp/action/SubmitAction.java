@@ -3,45 +3,54 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.UserManager;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.*;
 
-public class SubmitAction extends BaseAction{
+public class SubmitAction extends BaseAction {
 
-	/** called from SubmitModels.jsp from list of models links 
-	 * 
-	 */
-    public ActionForward setModelConstants( ActionMapping mapping, 
-		    							    ActionForm form,
-									        HttpServletRequest request,
-									        HttpServletResponse response)
-    throws Exception {
-    	
-    	System.out.println( "<SubmitAction setModelConstants> modelID=" + request.getParameter( "aModelID" ) );
-		
-		String modelID = request.getParameter( "aModelID" );
-		
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    	
-    	AnimalModel am = animalModelManager.get( modelID );	  
-    	
-    	request.getSession().setAttribute( Constants.MODELID, am.getId().toString() );
-    	request.getSession().setAttribute( Constants.MODELDESCRIPTOR, am.getModelDescriptor() );
-    	request.getSession().setAttribute( Constants.MODELSTATUS, am.getState() );
-    	
+    /**
+     * called from SubmitModels.jsp from list of models links
+     * 
+     */
+    public ActionForward setModelConstants(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        System.out.println("<SubmitAction setModelConstants> modelID=" + request.getParameter("aModelID"));
+
+        String modelID = request.getParameter("aModelID");
+
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel am = animalModelManager.get(modelID);
+
+        request.getSession().setAttribute(Constants.MODELID, am.getId().toString());
+        request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
+        request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
+
+        UserManager theUserManager = (UserManager) getBean("userManager");
+
         AnimalModelStateForm theForm = new AnimalModelStateForm();
         theForm.setModelId(am.getId().toString());
+
+        // Set up the form. Should be only one controller
+        List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.CONTROLLER);
+        theForm.setAssignedTo((String) theRoles.get(0));
         request.setAttribute("formdata", theForm);
-        
-    	//Add a message to be displayed in submitModles saying you've deleted a model  
-        //ActionMessages msg = new ActionMessages();
-        //msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "delete.successful" ) );
-        //saveErrors( request, msg );
-        
-		return mapping.findForward( "AnimalModelTreePopulateAction" );
+
+        // Add a message to be displayed in submitModles saying you've deleted a
+        // model
+        // ActionMessages msg = new ActionMessages();
+        // msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+        // "delete.successful" ) );
+        // saveErrors( request, msg );
+
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
-    
+
 }

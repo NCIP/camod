@@ -1,8 +1,7 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.CurationManager;
+import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
@@ -14,41 +13,48 @@ import org.apache.struts.action.*;
 public class ChangeAnimalModelStateAction extends BaseAction {
 
     /**
-     * Change the state for the curation model
+     * Change the state for the animal model
      */
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
+        log.info("Entering ChangeAnimalModelStateAction.execute");
+
+        // The user didn't press the cancel button
         if (!isCancelled(inRequest)) {
 
+            // Get the curation manager workflow XML
             CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath(
                     "/")
                     + "/config/CurationConfig.xml");
 
-            System.out.println("<ChangeAnimalModelStateAction populate> Entering... ");
-
+            // Get the animal model
             AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
-
-            // TODO: is this necessary?
-            if (theForm.getEvent() == null) {
-                theForm.setEvent("");
-            }
-
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-
             AnimalModel theAnimalModel = theAnimalModelManager.get(theForm.getModelId());
 
-            System.out.println("Comment: " + theForm.getComment());
-
+            // Did the id match?
             if (theAnimalModel != null) {
-                System.out.println("Current state: " + theAnimalModel.getState());
+                
+                log.debug("Current state of model: " + theAnimalModel.getState());
+        
                 theCurationManager.changeState(theAnimalModel, theForm.getEvent());
-                System.out.println("New state: " + theAnimalModel.getState());
+                
+                log.debug("New state of model: " + theAnimalModel.getState());
 
                 // Save the state change
                 theAnimalModelManager.save(theAnimalModel);
+
+                LogManager theLogManager = (LogManager) getBean("logManager");
+
+                // Save the associated log comment to track the curation state
+                theLogManager.save(theForm.getAssignedTo(), theForm.getModelId(), theAnimalModel.getState(), theForm
+                        .getComment());
             }
         }
+        
+        log.info("Exiting ChangeAnimalModelStateAction.execute");
+        
         return inMapping.findForward("next");
     }
 }

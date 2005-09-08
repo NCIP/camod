@@ -17,6 +17,8 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
+        log.info("Entering ChangeAnimalModelStatePopulateAction.execute");
+
         // Get the user manager bean to handle any role information
         UserManager theUserManager = (UserManager) getBean("userManager");
 
@@ -30,6 +32,9 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
         theForm.setModelId(theModelId);
         inRequest.setAttribute("formdata", theForm);
 
+        log.debug("The model id: " + theModelId + " and event: " + theEvent);
+
+        // Setting the action. This is used to customize the jsp display
         if (theEvent.equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
             inRequest.setAttribute("action", "Assigning Screener to ");
             inRequest.setAttribute("asignees", theUserManager.getUsersForRole(Constants.Admin.Roles.SCREENER));
@@ -45,6 +50,8 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
         } else {
             throw new IllegalArgumentException("Unknown event type: " + theEvent);
         }
+
+        log.info("Exiting ChangeAnimalModelStatePopulateAction.execute");
 
         return inMapping.findForward("next");
     }

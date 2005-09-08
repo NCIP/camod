@@ -42,6 +42,7 @@
                     <td align="right" class="resultsBoxGreyEnd2">
                         <html:form action="ChangeAnimalModelToCompleteAction">
                             <html:hidden property="modelId" name="formdata" />
+                            <html:hidden property="assignedTo" name="formdata" />
                             <html:submit>Set model status to Complete</html:submit>  
                         </html:form> 
                     </td>

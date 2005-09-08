@@ -6,16 +6,7 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
-<SCRIPT LANGUAGE="JavaScript">
-	
-	function getOptions( control ) {
-		form = control.form;
-		form.action = "SetOptionsAction.do?page=submitModelCharacteristics&speciesName=";
-		form.action += control.value;
-		form.submit();
-	}
-	
-</SCRIPT>
+<!-- submitChangeAnimalModelState.jsp -->
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -32,13 +23,14 @@
 				    </font>
 				  </ul>
 				</logic:messagesPresent>
-			 
 				* indicates a required field
 			</td>
 		</tr>
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3"><bean:write name="action" /> AnimalModel <bean:write property="modelDescriptor" name="formdata" /></td>
+			<td class="formTitle" height="20" colspan="3">
+			    <bean:write name="action" /> AnimalModel <bean:write property="modelDescriptor" name="formdata" />
+			</td>
 		</tr>
         <html:form action="ChangeAnimalModelStateAction">
 		<logic:notEmpty name="asignees" >
@@ -77,13 +69,7 @@
 				</TABLE>
 			</td>
 		</tr>
-		
 	</TABLE>	
 </td></tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
-
-
-
-
-

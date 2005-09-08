@@ -3,18 +3,17 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- adminRoles.jsp -->
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
-
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 	
 		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
-
 			<tr>
 				<td class="formTitle" height="20">Administration Roles</td>				
 			</tr>			
-
 			<tr>
 				<td class="resultsBoxGreyEnd">
 				<TABLE width="100%">
@@ -25,14 +24,17 @@
 				</TABLE>
 				</td> 
 			</tr>
-
 		</TABLE>
 		</td></tr>
 		<tr><td>
 		<br>
-				
+		
+		<!-- Start the various sections per role -->
+		 		
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
+		
+		<!-- Models assigned to this user that need to be edited -->
 		<logic:present name="<%= Admin.MODELS_NEEDING_EDITING %>">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
@@ -66,6 +68,9 @@
 		</td></tr>
 				<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
+		
+		<!-- Models assigned to this user that need more information -->
+		
 		<logic:present name="<%= Admin.MODELS_NEEDING_MORE_INFO %>">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
@@ -98,6 +103,9 @@
 		</logic:present>	
 		</td></tr>
 		<tr><td>
+		
+		<!-- Models assigned to this user that need to have an editor assigned -->
+		
 		<logic:present name="<%= Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT %>">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
@@ -125,6 +133,9 @@
 		</logic:present>	
 		</td></tr>
 		<tr><td>
+		
+		<!-- Models assigned to this user that need to be screened -->
+		
 		<logic:present name="<%= Admin.MODELS_NEEDING_SCREENING %>">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
@@ -159,6 +170,9 @@
 		</logic:present>
 		</td></tr>
 		<tr><td>
+		
+		<!-- Models assigned to this user that need a screener assigned -->
+		
 		<logic:present name="<%= Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT %>">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
@@ -187,6 +201,9 @@
 		</logic:present>				
 		</td></tr>
 		<tr><td>
+		
+		<!-- Comments assigned to this user that need review -->
+		
 		<logic:present name="<%= Admin.COMMENTS_NEEDING_REVIEW %>">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>

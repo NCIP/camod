@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * @author rajputs
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * See implementing classes for details
  */
 public interface PersonManager {
 	public List getAll();
 	public Person get(String id);
+    public Person getByUsername(String inUsername);
     public void save(Person person);
     public void remove(String id);
 }
