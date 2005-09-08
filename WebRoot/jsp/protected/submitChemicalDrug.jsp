@@ -20,15 +20,25 @@
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkOther( control ) {
-		ideControl = document.ChemicalDrugForm.otherName;
+	
+		var	test = "running function ckOther";
+		//document.write( test );
+		
+		var ideControl = document.otherName;
 			
-		if( control.value == 'Other' )
+		if( control.value == "Other" ) {
 			ideControl.disabled = false;
+			test = "Other found";
+		}	
 		else {
 			ideControl.value = null;
 			ideControl.disabled = true;
+			test = "Other not found";
 		}
+		document.write( test );
 	}
+		
+		
 		
 </SCRIPT>
 
@@ -58,7 +68,7 @@
 			<br>
 			<html:form action="<%= actionName %>" focus="name">			 
 			
-			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOther( this );">												
+			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOther(this);">												
 				<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>					
 			</html:select>	
 		</td>

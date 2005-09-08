@@ -18,6 +18,7 @@ var Style=[],Text=[],Count=0,sbw=0,move=0,hs="",mx,my,scl,sct,ww,wh,obj,sl,st,ih
 var HideTip = "eval(obj+sv+hl+';'+obj+sl+'=0;'+obj+st+'=-800')"
 var doc_root = ((ie5&&ua.indexOf("Opera")<0||ie4)&&document.compatMode=="CSS1Compat")? "document.documentElement":"document.body"
 var PX = (nn6)? "px" :"" 
+var FiltersEnabled = ""
 
 if(sNav) {
 	window.onresize = ReloadTip

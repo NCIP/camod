@@ -7,7 +7,7 @@
 <%@ page buffer="32kb"%>
 
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="../scripts/TipMessages.js" type=text/javascript></SCRIPT>	
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
 <!-- Main Content Begins -->  
 	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -34,7 +34,8 @@
                                               <a href="login.jsp"  onMouseOver="stm(Text[0],Style[0])" onMouseOut="htm()">Tool Tip Test 1</a>
                                               <a href='javascript: rs("commentWin","submitComment.jsp",435,265);'>Comment Test</a>
                                               <br>
-                                              Tag Test: <bean:message key="mainMenu.message"/> :Tag Test			    		                              
+                                              Tag Test: <bean:message key="mainMenu.message"/> :Tag Test	<br>
+                                              Strut Tag Test: <camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />:tag test		    		                              
                                           </td>
                                       </tr>
                                   </table>	

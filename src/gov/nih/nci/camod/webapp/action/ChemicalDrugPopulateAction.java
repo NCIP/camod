@@ -7,10 +7,12 @@ import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.ChemicalDrugForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -33,10 +35,13 @@ public class ChemicalDrugPopulateAction extends BaseAction{
 		ChemicalDrugForm chemicalDrugForm = ( ChemicalDrugForm ) form;
 		
 		String aTherapyID = request.getParameter( "aTherapyID" );
-		
+				
 		String modelID = "" + request.getSession().getAttribute( Constants.MODELID );		
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    			
 		AnimalModel am = animalModelManager.get( modelID );	
+		
+		//Prepopulate all dropdown fields, set the global Constants to the following
+		this.dropdown( request, response );
 		
 		//retrieve the list of all therapies from the current animalModel
 		List therapyList = am.getTherapyCollection();
@@ -53,15 +58,31 @@ public class ChemicalDrugPopulateAction extends BaseAction{
 		
 		chemicalDrugForm.setType( ty.getTreatment().getSexDistribution().getType() );
 		chemicalDrugForm.setAgeAtTreatment( ty.getTreatment().getAgeAtTreatment() );
-		chemicalDrugForm.setDosage( ty.getTreatment().getDosage() );		
+		
+		//Parse the doseUnit out of the Doseage
+		//only matches the .txt file
+		List doseUnitList = (ArrayList) request.getSession().getAttribute( Constants.Dropdowns.DOSAGEUNITSDROP );
+		String doseUnit = ty.getTreatment().getDosage();
+		System.out.println( "Checking for doseUnit matches" );
+		
+		for ( int i=0; i < doseUnitList.size(); i++ )
+		{
+			String t = (String) doseUnitList.get(i);
+			System.out.println("Unit=" + t);
+			
+			if ( doseUnit.indexOf( t )  != -1 )
+				System.out.println( "found a match" );
+		}
+		
+		
+		
+		chemicalDrugForm.setDosage( ty.getTreatment().getDosage() );
+		//chemicalDrugForm.setDoseUnit();
 		chemicalDrugForm.setName( ty.getAgent().getName() );
 		chemicalDrugForm.setRegimen(ty.getTreatment().getRegimen() );
 		chemicalDrugForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute() );		
 		chemicalDrugForm.setCASNumber( ty.getAgent().getCasNumber() );
 		chemicalDrugForm.setNSCNumber( ty.getAgent().getNscNumber().toString() );
-		
-		//Prepopulate all dropdown fields, set the global Constants to the following
-		this.dropdown( request, response );
 		
 		//Store the Form in session to be used by the JSP
 		request.getSession().setAttribute( Constants.FORMDATA, chemicalDrugForm );

@@ -67,18 +67,18 @@
 
       <attribute>
          <name>className</name>
-
       </attribute>
+      
       <attribute>
          <name>scope</name>
-
       </attribute>
+      
       <attribute>
          <name>var</name>
-
       </attribute>
 
    </tag>
+   
    <tag>
 
       <name>label</name>
@@ -88,55 +88,67 @@
          <name>key</name>
          <required>true</required>
          <rtexprvalue>true</rtexprvalue>
-
       </attribute>
+      
       <attribute>
          <name>colon</name>
          <required>false</required>
          <rtexprvalue>true</rtexprvalue>
-
       </attribute>
+      
       <attribute>
          <name>styleClass</name>
          <required>false</required>
          <rtexprvalue>true</rtexprvalue>
-
       </attribute>
+      
       <attribute>
          <name>errorClass</name>
          <required>false</required>
          <rtexprvalue>true</rtexprvalue>
-
       </attribute>
+      
       <attribute>
          <name>helpTip</name>
          <required>false</required>
          <rtexprvalue>true</rtexprvalue>
-
       </attribute>
+               
    </tag>
+   
    <tag> 
        <name>cshelp</name> 
        <tag-class>gov.nih.nci.camod.webapp.taglib.ContextSensitiveHelpTag</tag-class>
+       
        <attribute>
            <name>key</name>
            <required>true</required>
        </attribute>
+       
+       <attribute>
+           <name>image</name>
+           <required>false</required>
+       </attribute>
+       
        <attribute>
            <name>text</name>
            <required>true</required>
        </attribute>
+       
        <attribute>
            <name>href</name>
            <required>false</required>
        </attribute>
+       
        <attribute>
            <name>bundle</name>
            <required>false</required>
        </attribute>
+       
        <attribute>
          <name>styleClass</name>
          <required>false</required>
       </attribute>
+      
    </tag>
 </taglib>

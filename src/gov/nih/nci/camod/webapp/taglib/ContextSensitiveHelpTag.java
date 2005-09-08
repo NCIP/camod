@@ -2,6 +2,7 @@ package gov.nih.nci.camod.webapp.taglib;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 import javax.servlet.jsp.*;
@@ -21,6 +22,8 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	// Tag attributes
 	private String myKey = null;
 
+	private String myImage = null;
+	
 	private String myLabelName = null;
 
 	private String myHref = null;
@@ -59,6 +62,25 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 		return myKey;
 	}
 
+
+	/**
+	 * Sets the Image attribute. This is included in the tld file.
+	 * 
+	 * @jsp.attribute description="The key attribute used to look up the value
+	 *                in the properties file"
+	 * 
+	 * required="false"
+	 * 
+	 * rtexprvalue="false"
+	 */
+	public void setImage(String inKey) {
+		myImage = inKey;
+	}
+
+	public String getImage() {
+		return myImage;
+	}
+	
 	/**
 	 * Sets the text attribute. This is included in the tld file.
 	 * 
@@ -143,15 +165,32 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 			try {
 				// Get the text
 				ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
+				
+				//System.out.println( "myKey=" + myKey + "<");
+				//System.out.println( "bundle=" + theBundle.getKeys() );
+				//System.out.println( "myImage=" + myImage + "<" );
+				
 				String theText = theBundle.getString(myKey);
 				String theStyleClass = theBundle.getString(myStyleClass);
-
-				myPageContext.getOut().write(
-						"<a " + theHref + " onMouseOver=\"stm(" + theText + ","
-								+ theStyleClass + ")\" onMouseOut=\"htm();\">"
-								+ myLabelName + "</a>");
+				
+				if ( myImage != null )
+				{
+					myPageContext.getOut().write(
+							"<a " + theHref + " onMouseOver=\"stm(" + theText + ","
+							+ theStyleClass + ")\" onMouseOut=\"htm();\"><img src=\"" + myImage + "\" border=\"0\"/>"
+							+ "</a>");
+					
+				} else {
+					myPageContext.getOut().write(
+							"<a " + theHref + " onMouseOver=\"stm(" + theText + ","
+							+ theStyleClass + ")\" onMouseOut=\"htm();\">"
+							+ myLabelName + "</a>");
+				}
+					
+				
 			} catch (Exception e) {
-
+				e.printStackTrace();
+				
 				// Can't get bundle. Ignore tooltip
 				myPageContext.getOut().write(
 						"<a " + theHref + " \">" + myLabelName + "</a>");

@@ -1,5 +1,10 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
+
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -25,7 +30,9 @@
 	<tr>
                 <FORM name="input" action="http://www.atcc.org" method="get">
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">ATTC number (if available):</label></td>
+		<td class="formLabel"><label for="field1">ATTC number (if available):</label>
+			<camod:cshelp key="ABS_CANCER_MODEL.ATCC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField"><input class="actionButton" type="submit" value="Find ATTC #" />&nbsp;<input class="formFieldUnSized" type="text" name="field1" id="field1" size="10" /></td>
                 </FORM>      		
 	</tr>	
@@ -54,7 +61,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Parental Cell line:</label></td>
+		<td class="formLabel"><label for="field1">Parental Cell line:</label>
+			<camod:cshelp key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
 	</tr>
 
@@ -66,13 +75,17 @@
 
         <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Amount of Cells</label></td>
+		<td class="formLabel"><label for="field1">Amount of Cells</label>
+			<camod:cshelp key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField"><input class="formFieldUnSized" type="text" name="field1" id="field1" size="10" /></td>
 	</tr>	
 	
         <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor harvest date after transplant:</label></td>
+		<td class="formLabel"><label for="field1">Tumor harvest date after transplant:</label>
+			<camod:cshelp key="ABS_CANCER_MODEL.HARVEST_DATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
 	</tr>
 
