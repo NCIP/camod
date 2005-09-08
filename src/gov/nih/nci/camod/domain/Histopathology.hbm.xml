@@ -125,7 +125,7 @@
         	optional="true">
         	
         	<key column="histopathology_id"/>
-        	<many-to-one name="organ"
+        	<many-to-one name="organ" class="Organ"
             	column="organ_id"/> 
     	</join>   	
 	</class>

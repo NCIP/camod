@@ -46,7 +46,7 @@
         	optional="true">
         	
         	<key column="engineered_gene_id"/>
-        	<many-to-one name="environmentalFactor"
+        	<many-to-one name="environmentalFactor" class="EnvironmentalFactor"
             	column="env_factor_id"/> 
     	</join>
 	</subclass>
