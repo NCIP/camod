@@ -24,6 +24,9 @@
     <!-- InducedMutationManager -->
     <bean id="inducedMutationManager" class="gov.nih.nci.camod.service.impl.InducedMutationManagerImpl"/>
     
+    <!-- InducedMutationManager -->
+    <bean id="logManager" class="gov.nih.nci.camod.service.impl.LogManagerImpl"/>
+    
     <!-- MicroArrayDataManager -->
     <bean id="microArrayDataManager" class="gov.nih.nci.camod.service.impl.MicroArrayDataManagerImpl"/>
     
