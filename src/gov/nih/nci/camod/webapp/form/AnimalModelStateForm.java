@@ -15,8 +15,7 @@ public class AnimalModelStateForm extends ValidatorForm implements Serializable 
     protected String myEvent;
 
     public AnimalModelStateForm() {
-        myModelDescriptor = "Dave";
-        myComment = "Now is the time for all good men to come to the aid of their country";
+        myEvent = "";
     }
 
     public String getModelDescriptor() {
@@ -34,7 +33,7 @@ public class AnimalModelStateForm extends ValidatorForm implements Serializable 
     public void setComment(String inComment) {
         myComment = inComment;
     }
-    
+
     public String getModelId() {
         return myModelId;
     }
@@ -42,7 +41,7 @@ public class AnimalModelStateForm extends ValidatorForm implements Serializable 
     public void setModelId(String inModelId) {
         myModelId = inModelId;
     }
-    
+
     public String getAssignedTo() {
         return myAssignedTo;
     }
@@ -50,7 +49,7 @@ public class AnimalModelStateForm extends ValidatorForm implements Serializable 
     public void setAssignedTo(String inAssignedTo) {
         myAssignedTo = inAssignedTo;
     }
-   
+
     public String getEvent() {
         return myEvent;
     }
