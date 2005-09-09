@@ -8,6 +8,19 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.Agent;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.SexDistribution;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.Treatment;
+import gov.nih.nci.camod.service.AgentManager;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.GeneDeliveryManager;
+import gov.nih.nci.camod.service.SexDistributionManager;
+import gov.nih.nci.camod.service.TreatmentManager;
+import gov.nih.nci.camod.webapp.form.GeneDeliveryForm;
+import gov.nih.nci.camod.webapp.form.RadiationForm;
 
 /**
  * GeneDeliveryAction Class
@@ -88,7 +101,68 @@ public final class GeneDeliveryAction extends BaseAction {
         if (log.isDebugEnabled()) {
             log.debug("Entering 'save' method");
         }
+		// Create a form to edit
+		GeneDeliveryForm geneDelivForm = ( GeneDeliveryForm ) form;
+    	
+		System.out.println( "<EnvironmentalFactorAction save> following Characteristics:" + 
+								"\n\t ViralVector: " + geneDelivForm.getViralVector() + 
+								"\n\t OtherViralVector: " + geneDelivForm.getOtherViralVector() + 
+								"\n\t GeneInVirus: " + geneDelivForm.getGeneInVirus() + 
+								"\n\t Regimen: " + geneDelivForm.getRegimen() +
+								"\n\t ConceptCode: " + geneDelivForm.getConceptCode() +																
+								"\n\t user: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
+		
+		/* Grab the current modelID from the session */
+        String modelID = (String) request.getSession().getAttribute( Constants.MODELID );
+        
+        /* Create all the manager objects needed for Screen */
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
+        TreatmentManager treatmentManager = ( TreatmentManager ) getBean( "treatmentManager" );
+        AgentManager agentManager = ( AgentManager ) getBean( "agentManager" ); 
+        GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");        
+        
+        /* Set modelID in AnimalModel object */
+        AnimalModel animalModel = animalModelManager.get( modelID );        
+ 
+ 		/*1. Create Treatment object, set its regime, and save Treatment object.	*/	
+		Treatment treatment = new Treatment();
+		treatment.setRegimen(geneDelivForm.getRegimen());
+		
+		//save treatment object		
+		treatmentManager.save(treatment);
+		
+		/* 2. Create a GeneDelivery Object and set attributes from GUI, save GeneDelivery object */
+		GeneDelivery geneDelivery = new GeneDelivery();
+		geneDelivery.setViralVector(geneDelivForm.getViralVector());
+		geneDelivery.setGeneInVirus(geneDelivForm.getGeneInVirus());
+		geneDeliveryManager.save(geneDelivery);
+        
+        /*4. Create Therapy object, set its therapeuticExperiment property to false.
+    		4.1 set its treatment property (saved in #2).
+    		4.3 Add Therapy to animalModel 
+    		4.4 No need to explicity save Therapy object b/c 1...1 relationship with AnimalModel   	
+    		When TherapeuticExperiment property is false, tells us that this is an environmentalFactor
+    	*/
+        Therapy therapy = new Therapy();
+        therapy.setTherapeuticExperiment( false );    
+        therapy.setTreatment( treatment ); 
+        
+        /* 5. Add Therapy to AnimalModel */
+        animalModel.addTherapy( therapy );
 
-        return mapping.findForward("");
+		/* 6. save the animalModel = saves Therapy (Hibernate saves child in 1...1 relationships)  */  
+        animalModelManager.save( animalModel );
+        
+        /* TODO:  Implement conceptCode with Tree 
+		TO DO: convert this to a button to retrieve the evs# from the tree  
+		The evs# is inserted into Organ.conceptCode, then the OrganID is inserted   
+		into as the GeneDelivery.geneDeliveryID value   */
+	
+    	//Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
+        ActionMessages msg = new ActionMessages();
+        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "genedelivery.creation.successful" ) );
+        saveErrors( request, msg );
+     
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
 }

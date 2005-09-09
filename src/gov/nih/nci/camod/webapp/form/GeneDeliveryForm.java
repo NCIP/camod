@@ -30,6 +30,7 @@ public class GeneDeliveryForm extends BaseForm implements Serializable {
 	protected String otherViralVector;
 	protected String geneInVirus;
 	protected String regimen;
+	protected String conceptCode;
 	
 	/**
 	 * @return Returns the viralVector.
@@ -79,4 +80,16 @@ public class GeneDeliveryForm extends BaseForm implements Serializable {
 	public void setRegimen(String regimen) {
 		this.regimen = regimen;
 	}
+	/**
+	 * @return Returns the conceptCode.
+	 */
+	public String getConceptCode() {
+		return conceptCode;
+	}
+	/**
+	 * @param conceptCode The conceptCode to set.
+	 */
+	public void setConceptCode(String conceptCode) {
+		this.conceptCode = conceptCode;
+	}	
 }
