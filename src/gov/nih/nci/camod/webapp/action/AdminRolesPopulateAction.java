@@ -22,7 +22,7 @@ public class AdminRolesPopulateAction extends BaseAction {
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
-        log.info("Entering AdminRolesPopulateAction.execute");
+        log.trace("Entering execute");
 
         AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
@@ -35,47 +35,26 @@ public class AdminRolesPopulateAction extends BaseAction {
         // Editor specific curation states
         if (theRoles.contains(Constants.Admin.Roles.EDITOR)) {
 
-            // Add all the models by state for a user
-            theList = theAnimalModelManager.getAllByState("Edited-need more info");
-            if (theList != null && !theList.isEmpty()) {
-
-                List theReturnList = getModelsForUser(theUsername, theList);
-                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_MORE_INFO, theReturnList);
-            }
-
-            theList = theAnimalModelManager.getAllByState("Editor-assigned");
-            if (theList != null && !theList.isEmpty()) {
-                List theReturnList = getModelsForUser(theUsername, theList);
-                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITING, theReturnList);
-            }
+            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Edited-need more info",
+                    Constants.Admin.MODELS_NEEDING_MORE_INFO);
+            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Editor-assigned",
+                    Constants.Admin.MODELS_NEEDING_EDITING);
         }
 
         // Controller specific curation states
         if (theRoles.contains(Constants.Admin.Roles.CONTROLLER)) {
 
-            // Add all the models by state for a user
-            theList = theAnimalModelManager.getAllByState("Screened-approved");
-            if (theList != null && !theList.isEmpty()) {
-                List theReturnList = getModelsForUser(theUsername, theList);
-                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT, theReturnList);
-            }
+            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Screened-approved",
+                    Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT);
 
-            theList = theAnimalModelManager.getAllByState("Complete-not screened");
-            if (theList != null && !theList.isEmpty()) {
-                List theReturnList = getModelsForUser(theUsername, theList);
-                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT, theReturnList);
-            }
+            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Complete-not screened",
+                    Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT);
         }
 
         // Screener specific curation states
         if (theRoles.contains(Constants.Admin.Roles.SCREENER)) {
-
-            // Add all the models by state for a user
-            theList = theAnimalModelManager.getAllByState("Screener-assigned");
-            if (theList != null && !theList.isEmpty()) {
-                List theReturnList = getModelsForUser(theUsername, theList);
-                inRequest.setAttribute(Constants.Admin.MODELS_NEEDING_SCREENING, theReturnList);
-            }
+            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Screener-assigned",
+                    Constants.Admin.MODELS_NEEDING_SCREENING);
         }
 
         // TODO: This isn't correct
@@ -84,9 +63,32 @@ public class AdminRolesPopulateAction extends BaseAction {
             inRequest.setAttribute(Constants.Admin.COMMENTS_NEEDING_REVIEW, theList);
         }
 
-        log.info("Exiting AdminRolesPopulateAction.execute");
+        log.trace("Exiting execute");
 
         return inMapping.findForward("next");
+    }
+
+    // Check that the user owns these records and if so, add to the request
+    // using the passed in key
+    private void addModelsToRequest(HttpServletRequest inRequest, AnimalModelManager inManager, String inUsername,
+            String inState, String inKey) {
+
+        log.trace("Entering addModelsToRequest");
+
+        // Add all the models by state for a user
+        List theList = inManager.getAllByState(inState);
+        
+        // I found some models in this state
+        if (theList != null && !theList.isEmpty()) {
+            
+            // Only add the ones associated to the user
+            List theUserList = getModelsForUser(inUsername, theList);
+            if (theUserList.size() > 0) {
+                inRequest.setAttribute(inKey, theUserList);
+            }
+        }
+
+        log.trace("Exiting addModelsToRequest");
     }
 
     // Get the models for a specific user. We need to check the log table to see
@@ -94,7 +96,7 @@ public class AdminRolesPopulateAction extends BaseAction {
     // model and state is associated w/ this user
     private List getModelsForUser(String inUsername, List inModelList) {
 
-        log.info("Entering AdminRolesPopulateAction.getModelsForUser");
+        log.trace("Entering getModelsForUser");
 
         LogManager theLogManager = (LogManager) getBean("logManager");
 
@@ -111,7 +113,7 @@ public class AdminRolesPopulateAction extends BaseAction {
                     .getState(), inUsername);
 
             // If it's associated, the user needs to do something to the
-            // record
+            // record. Create the array
             if (theLog != null) {
                 theReturnList.add(theAnimalModel);
             }
@@ -119,7 +121,7 @@ public class AdminRolesPopulateAction extends BaseAction {
 
         log.debug("Number of records for user " + inUsername + " : " + theReturnList.size());
 
-        log.info("Exiting AdminRolesPopulateAction.getModelsForUser");
+        log.trace("Exiting getModelsForUser");
 
         return theReturnList;
     }

@@ -27,7 +27,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      */
     public Log getCurrentByModelAndAssigned(String inModelId, String inState, String inAssignedUsername) {
 
-        log.info("Entering LogManagerImpl.getCurrentByModelAndAssigned");
+        log.trace("Entering getCurrentByModelAndAssigned");
 
         Log theLog = null;
 
@@ -64,15 +64,17 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 
             // Grab the latest record if the user matches
             for (int i = 0; i < theLogs.size(); i++) {
+
                 if (theNewestDate == null) {
                     Log theCurrentLog = (Log) theLogs.get(i);
-                    if (theCurrentLog.getSubmitter().getId() == theAssignedPerson.getId()) {
+
+                    if (theCurrentLog.getSubmitter().getId().equals(theAssignedPerson.getId())) {
                         theLog = theCurrentLog;
                         theNewestDate = new Date(theLog.getTimestamp());
                     }
                 } else {
                     Log theCurrentLog = (Log) theLogs.get(i);
-                    if (theCurrentLog.getSubmitter().getId() == theAssignedPerson.getId()) {
+                    if (theCurrentLog.getSubmitter().getId().equals(theAssignedPerson.getId())) {
 
                         Date theDate = new Date(theLog.getTimestamp());
 
@@ -90,7 +92,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             e.printStackTrace();
         }
 
-        log.info("Exiting LogManagerImpl.getCurrentByModelAndAssigned");
+        log.trace("Exiting getCurrentByModelAndAssigned");
 
         return theLog;
     }
@@ -102,23 +104,23 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      */
     public List getAll() {
 
-        log.info("Entering LogManagerImpl.getAll");
+        log.trace("Entering getAll");
 
         List theLogs = null;
 
         try {
             theLogs = Search.query(Log.class);
         } catch (PersistenceException pe) {
-            log.error("Exception in LogManagerImpl.getAll", pe);
+            log.error("Exception in getAll", pe);
             System.out.println("PersistenceException in LogManagerImpl.getAll");
             pe.printStackTrace();
         } catch (Exception e) {
-            log.error("Exception in LogManagerImpl.getAll", e);
+            log.error("Exception in getAll", e);
             System.out.println("Exception in LogManagerImpl.getAll");
             e.printStackTrace();
         }
 
-        log.info("Exiting LogManagerImpl.getAll");
+        log.trace("Exiting getAll");
 
         return theLogs;
     }
@@ -132,7 +134,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      */
     public Log get(String inId) {
 
-        log.info("Entering LogManagerImpl.get");
+        log.trace("Entering get");
 
         Log theLog = null;
 
@@ -148,7 +150,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             e.printStackTrace();
         }
 
-        log.info("Entering LogManagerImpl.get");
+        log.trace("Entering get");
 
         return theLog;
     }
@@ -160,21 +162,21 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      */
     public void save(Log inLog) {
 
-        log.info("Entering LogManagerImpl.save");
+        log.trace("Entering LogManagerImpl.save");
 
         try {
             Persist.save(inLog);
         } catch (PersistenceException pe) {
-            log.error("Exception in LogManagerImpl.save", pe);
+            log.error("Exception in save", pe);
             System.out.println("PersistenceException in LogManagerImpl.save");
             pe.printStackTrace();
         } catch (Exception e) {
-            log.error("Exception in LogManagerImpl.save", e);
+            log.error("Exception in save", e);
             System.out.println("Exception in LogManagerImpl.save");
             e.printStackTrace();
         }
 
-        log.info("Exiting LogManagerImpl.save");
+        log.trace("Exiting LogManagerImpl.save");
     }
 
     /**
@@ -187,7 +189,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      */
     public void save(String inAssignedPerson, String inModelId, String inState, String inNotes) {
 
-        log.info("Entering LogManagerImpl.save");
+        log.trace("Entering save");
 
         try {
 
@@ -210,16 +212,16 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             Persist.save(theLog);
 
         } catch (PersistenceException pe) {
-            log.error("Exception in LogManagerImpl.save", pe);
+            log.error("Exception in save", pe);
             System.out.println("PersistenceException in LogManagerImpl.save");
             pe.printStackTrace();
         } catch (Exception e) {
-            log.error("Exception in LogManagerImpl.save", e);
+            log.error("Exception in save", e);
             System.out.println("Exception in LogManagerImpl.save");
             e.printStackTrace();
         }
 
-        log.info("Exiting LogManagerImpl.save");
+        log.trace("Exiting LogManagerImpl.save");
     }
 
     /**
@@ -229,19 +231,19 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      */
     public void remove(String inId) {
 
-        log.info("Entering LogManagerImpl.remove");
+        log.trace("Entering remove");
 
         try {
             log.debug("Removing id: " + inId);
             Persist.deleteById(Log.class, new Long(inId));
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in LogManagerImpl.remove");
+            System.out.println("PersistenceException in remove");
             pe.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Exception in LogManagerImpl.remove");
+            System.out.println("Exception in remove");
             e.printStackTrace();
         }
 
-        log.info("Exiting LogManagerImpl.remove");
+        log.trace("Exiting remove");
     }
 }
