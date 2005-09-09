@@ -964,6 +964,23 @@
     </action> 
     
      <!-- GeneDeliveryForm -->
+   	 <action path="/GeneDeliveryAction"
+	        type="gov.nih.nci.camod.webapp.action.GeneDeliveryAction"
+	        name="geneDeliveryForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitGeneDelivery">   	
+    </action>
+    
+    <action path="/GeneDeliveryPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.GeneDeliveryPopulateAction"
+    		name="geneDeliveryForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>     
+     
      <!-- GenomicSegmentForm -->
      
      <!-- GrowthFactorForm -->

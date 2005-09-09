@@ -37,6 +37,21 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
         AnimalModel animalModel = animalModelManager.get(modelID);
+        
+        // Print the list of GeneDelivery viralVestors for the Gene Delivery (Cardiogenic Intervention) Section
+        List virusList = animalModel.getGeneDeliveryCollection();
+        
+        if( virusList == null || virusList.size() == 0 ){
+        	System.out.println( "<AnimalModelTreePopulateAction populate> Empty GeneDeliveryCollection!" );
+        } else {
+	        for ( int i=0; i < virusList.size(); i++ )
+	        {
+	        	GeneDelivery geneDelivery = (GeneDelivery)virusList.get(i);
+	        	System.out.println( "geneDelivery= " + geneDelivery);
+	        	virusList.add( geneDelivery );
+	        }
+	        request.getSession().setAttribute( Constants.Submit.GENEDELIVERY_LIST, virusList );
+        }        
 
         // Print the list of EnvironmentalFactors for the Cardiogenic
         // Interventions Section
