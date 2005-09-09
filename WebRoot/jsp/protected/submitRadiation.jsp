@@ -45,7 +45,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Radiation</td>		
+			<td class="formTitle" height="20" colspan="3">Enter Radiation Information </td>		
 		</tr>
 
 		<tr>
@@ -104,11 +104,11 @@
 		</td>
 	</tr>
 
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Treatment Regimen:</label></td>
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Treatment Regimen:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
+		<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
 		</td>
 	</tr>
 
