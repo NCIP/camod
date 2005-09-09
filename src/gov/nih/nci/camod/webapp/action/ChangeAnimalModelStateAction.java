@@ -18,7 +18,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
-        log.info("Entering ChangeAnimalModelStateAction.execute");
+        log.trace("Entering ChangeAnimalModelStateAction.execute");
 
         // The user didn't press the cancel button
         if (!isCancelled(inRequest)) {
@@ -53,7 +53,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
             }
         }
         
-        log.info("Exiting ChangeAnimalModelStateAction.execute");
+        log.trace("Exiting ChangeAnimalModelStateAction.execute");
         
         return inMapping.findForward("next");
     }

@@ -1,6 +1,8 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.UserManager;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
@@ -17,19 +19,23 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
-        log.info("Entering ChangeAnimalModelStatePopulateAction.execute");
-
-        // Get the user manager bean to handle any role information
-        UserManager theUserManager = (UserManager) getBean("userManager");
+        log.trace("Entering ChangeAnimalModelStatePopulateAction.execute");
 
         // Get the attributes from the request
         String theModelId = inRequest.getParameter("ModelId");
         String theEvent = inRequest.getParameter("event");
+        
+        // Get the user manager bean to handle any role information
+        UserManager theUserManager = (UserManager) getBean("userManager");
+
+        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
         // Set up the form
         AnimalModelStateForm theForm = new AnimalModelStateForm();
         theForm.setEvent(theEvent);
         theForm.setModelId(theModelId);
+        theForm.setModelDescriptor(theAnimalModel.getModelDescriptor());
         inRequest.setAttribute("formdata", theForm);
 
         log.debug("The model id: " + theModelId + " and event: " + theEvent);
@@ -51,7 +57,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
             throw new IllegalArgumentException("Unknown event type: " + theEvent);
         }
 
-        log.info("Exiting ChangeAnimalModelStatePopulateAction.execute");
+        log.trace("Exiting ChangeAnimalModelStatePopulateAction.execute");
 
         return inMapping.findForward("next");
     }
