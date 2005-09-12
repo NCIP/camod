@@ -5,8 +5,6 @@ import gov.nih.nci.camod.service.LogManager;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
 import java.util.Date;
 import java.util.List;
@@ -19,81 +17,83 @@ public class LogManagerImpl extends BaseManager implements LogManager {
     /**
      * Get the latest Log object that matches the state/user and model
      * 
-     * @parameter inModelId is the animal model the Log is associated with
-     * @parameter inState is the current state of the animal model
-     * @parameter inAssignedUsername is the user that the model is assigned to
+     * @parameter inModel is the animal model the Log is associated with
+     * @parameter inUser is the user that the model is assigned to
      * 
      * @return the latest matching Log object. null if not found
      */
-    public Log getCurrentByModelAndAssigned(String inModelId, String inState, String inAssignedUsername) {
+    public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inUser) {
 
         log.trace("Entering getCurrentByModelAndAssigned");
 
         Log theLog = null;
 
         try {
+            theLog = QueryManagerSingleton.instance().getCurrentByModelAndAssigned(inModel, inUser);
 
-            // The following objects are needed for eQBE.
-            Log theQBELog = new Log();
+            /*
+             * // The following objects are needed for eQBE. Log theQBELog = new
+             * Log(); // Build the log object theQBELog.setCancerModel(inModel);
+             * theQBELog.setType(inModel.getState()); // TODO: should work? //
+             * theQBELog.setSubmitter(theAssignedPerson); // Apply evaluators to
+             * object properties // Evaluation theEvaluation = new Evaluation(); //
+             * theEvaluation.addEvaluator("log.type", Evaluator.EQUAL); //
+             * theEvaluation.addEvaluator("log.cancerModel", Evaluator.EQUAL); //
+             * TODO: Should work //
+             * theEvaluation.addEvaluator("log.submitter.id", Evaluator.EQUAL); //
+             * List theLogs = Search.query(theLog, theEvaluation);
+             * System.out.println("Before query in
+             * getCurrentByModelAndAssigned"); List theLogs =
+             * Search.query(theQBELog);
+             * 
+             * System.out.println("Number found in query: " + theLogs.size());
+             * Date theNewestDate = null; // Grab the latest record if the user
+             * matches for (int i = 0; i < theLogs.size(); i++) {
+             * 
+             * if (theNewestDate == null) { Log theCurrentLog = (Log)
+             * theLogs.get(i);
+             * 
+             * if (theCurrentLog.getSubmitter().getId().equals(inUser.getId())) {
+             * theLog = theCurrentLog; theNewestDate = new
+             * Date(theLog.getTimestamp()); } } else { Log theCurrentLog = (Log)
+             * theLogs.get(i); if
+             * (theCurrentLog.getSubmitter().getId().equals(inUser.getId())) {
+             * 
+             * Date theDate = new Date(theLog.getTimestamp());
+             * 
+             * if (theDate.after(theNewestDate)) { theNewestDate = theDate;
+             * theLog = theCurrentLog; } } } }
+             * 
+             */
 
-            AnimalModel theQBEAnimalModel = new AnimalModel();
-            theQBEAnimalModel.setId(Long.getLong(inModelId));
-
-            // Find the Person it's assigned to
-            Person theAssignedPerson = PersonManagerSingleton.instance().getByUsername(inAssignedUsername);
-
-            // Build the log object
-            theQBELog.setCancerModel(theQBEAnimalModel);
-            theQBELog.setType(inState);
-
-            // TODO: should work?
-            // theQBELog.setSubmitter(theAssignedPerson);
-
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("log.type", Evaluator.EQUAL);
-            theEvaluation.addEvaluator("log.cancerModel.id", Evaluator.EQUAL);
-
-            // TODO: Should work
-            // theEvaluation.addEvaluator("log.submitter.id", Evaluator.EQUAL);
-
-            // List theLogs = Search.query(theLog, theEvaluation);
-            List theLogs = Search.query(theQBELog, theEvaluation);
-
-            Date theNewestDate = null;
-
-            // Grab the latest record if the user matches
-            for (int i = 0; i < theLogs.size(); i++) {
-
-                if (theNewestDate == null) {
-                    Log theCurrentLog = (Log) theLogs.get(i);
-
-                    if (theCurrentLog.getSubmitter().getId().equals(theAssignedPerson.getId())) {
-                        theLog = theCurrentLog;
-                        theNewestDate = new Date(theLog.getTimestamp());
-                    }
-                } else {
-                    Log theCurrentLog = (Log) theLogs.get(i);
-                    if (theCurrentLog.getSubmitter().getId().equals(theAssignedPerson.getId())) {
-
-                        Date theDate = new Date(theLog.getTimestamp());
-
-                        if (theDate.after(theNewestDate)) {
-                            theNewestDate = theDate;
-                            theLog = theCurrentLog;
-                        }
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            log.error("Exception in LogManagerImpl.getCurrentByModelAndAssigned", e);
-            System.out.println("Exception in LogManagerImpl.getCurrentByModelAndAssigned");
-            e.printStackTrace();
+        } catch (PersistenceException e) {
+            log.error("Caught a PersistentException: " + e);
         }
-
         log.trace("Exiting getCurrentByModelAndAssigned");
 
+        return theLog;
+    }
+
+    /**
+     * Get the latest Log object that matches the state/user and model
+     * 
+     * @parameter inModelId is the animal model the Log is associated with
+     * 
+     * @return the latest matching Log object. null if not found
+     */
+    public Log getCurrentByModel(AnimalModel inModel) {
+
+        log.trace("Entering getCurrentByModel");
+        Log theLog = null;
+
+        try {
+            theLog = QueryManagerSingleton.instance().getCurrentByModel(inModel);
+
+        } catch (PersistenceException e) {
+            log.error("Caught a PersistentException: " + e);
+        }
+
+        log.trace("Exiting getCurrentByModel");
         return theLog;
     }
 
@@ -247,3 +247,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
         log.trace("Exiting remove");
     }
 }
+
+/*
+ * $Log: not supported by cvs2svn $
+ */

@@ -14,7 +14,7 @@ public class CurationManagerImpl extends AbstractCurationManager {
     }
 
     private void init() {
-        myActionFactory.registerAction("email", new EmailActionImpl());
+        myActionFactory.registerAction("emailAssignee", new EmailActionImpl());
     }
 
     public static void main(java.lang.String[] args) {
