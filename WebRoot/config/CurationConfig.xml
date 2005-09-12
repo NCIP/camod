@@ -12,7 +12,7 @@
 	<state default="false">
 	 	<name>Complete-not screened</name>
 	    <actions>
-		    <action>email:Coordinator</action>
+		    <action>emailAssignee</action>
 		</actions>
 		<next-valid-states>
 		    <next-valid-state>
@@ -24,7 +24,7 @@
 	<state default="false">
 	 	<name>Screener-assigned</name>
 	    <actions>
-		    <action>email:Screener</action>
+		    <action>emailAssignee</action>
 		</actions>
 		<next-valid-states>
 		    <next-valid-state>
@@ -54,7 +54,7 @@
 	<state default="false">
 	 	<name>Editor-assigned</name>
 		<actions>
-		    <action>email:Editor</action>
+		    <action>emailAssignee</action>
 		</actions>
 		<next-valid-states>
 		    <next-valid-state>
@@ -75,7 +75,7 @@
 	<state default="false">
 	 	<name>Edited-need more info</name>
 		<actions>
-		    <action>email:Submitter</action>
+		    <action>emailAssignee</action>
 		</actions>
 		<next-valid-states>
 		    <next-valid-state>
