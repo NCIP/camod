@@ -1,10 +1,8 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.LogManager;
+import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,32 +26,36 @@ public class AdminRolesPopulateAction extends BaseAction {
 
         // Get the list of roles for the current user
         List theRoles = (List) inRequest.getSession().getAttribute(Constants.CURRENTUSERROLES);
+
+        // Get the user
+        PersonManager thePersonManager = (PersonManager) getBean("personManager");
         String theUsername = (String) inRequest.getSession().getAttribute(Constants.CURRENTUSER);
+        Person theUser = (Person) thePersonManager.getByUsername(theUsername);
 
         List theList = null;
 
         // Editor specific curation states
         if (theRoles.contains(Constants.Admin.Roles.EDITOR)) {
 
-            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Edited-need more info",
+            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Edited-need more info",
                     Constants.Admin.MODELS_NEEDING_MORE_INFO);
-            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Editor-assigned",
+            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Editor-assigned",
                     Constants.Admin.MODELS_NEEDING_EDITING);
         }
 
         // Controller specific curation states
         if (theRoles.contains(Constants.Admin.Roles.CONTROLLER)) {
 
-            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Screened-approved",
+            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screened-approved",
                     Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT);
 
-            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Complete-not screened",
+            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Complete-not screened",
                     Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT);
         }
 
         // Screener specific curation states
         if (theRoles.contains(Constants.Admin.Roles.SCREENER)) {
-            addModelsToRequest(inRequest, theAnimalModelManager, theUsername, "Screener-assigned",
+            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screener-assigned",
                     Constants.Admin.MODELS_NEEDING_SCREENING);
         }
 
@@ -70,19 +72,20 @@ public class AdminRolesPopulateAction extends BaseAction {
 
     // Check that the user owns these records and if so, add to the request
     // using the passed in key
-    private void addModelsToRequest(HttpServletRequest inRequest, AnimalModelManager inManager, String inUsername,
+    private void addModelsToRequest(HttpServletRequest inRequest, AnimalModelManager inManager, Person inUser,
             String inState, String inKey) {
 
         log.trace("Entering addModelsToRequest");
 
         // Add all the models by state for a user
         List theList = inManager.getAllByState(inState);
-        
+        log.debug("Total models for state: " + inState + " size: " + theList.size());
+
         // I found some models in this state
         if (theList != null && !theList.isEmpty()) {
-            
+
             // Only add the ones associated to the user
-            List theUserList = getModelsForUser(inUsername, theList);
+            List theUserList = getModelsForUser(inUser, theList);
             if (theUserList.size() > 0) {
                 inRequest.setAttribute(inKey, theUserList);
             }
@@ -94,7 +97,7 @@ public class AdminRolesPopulateAction extends BaseAction {
     // Get the models for a specific user. We need to check the log table to see
     // if the log entry associated w/ this
     // model and state is associated w/ this user
-    private List getModelsForUser(String inUsername, List inModelList) {
+    private List getModelsForUser(Person inUser, List inModelList) {
 
         log.trace("Entering getModelsForUser");
 
@@ -102,15 +105,12 @@ public class AdminRolesPopulateAction extends BaseAction {
 
         List theReturnList = new ArrayList();
 
-        log.debug("Number of records found: " + inModelList.size());
-
         for (int i = 0; i < inModelList.size(); i++) {
 
             AnimalModel theAnimalModel = (AnimalModel) inModelList.get(i);
 
             // Is there an associated LOG for this user?
-            Log theLog = theLogManager.getCurrentByModelAndAssigned(theAnimalModel.getId().toString(), theAnimalModel
-                    .getState(), inUsername);
+            Log theLog = theLogManager.getCurrentByModelAndAssigned(theAnimalModel, inUser);
 
             // If it's associated, the user needs to do something to the
             // record. Create the array
@@ -119,7 +119,7 @@ public class AdminRolesPopulateAction extends BaseAction {
             }
         }
 
-        log.debug("Number of records for user " + inUsername + " : " + theReturnList.size());
+        log.debug("Number of records for user " + inUser.getUsername() + " : " + theReturnList.size());
 
         log.trace("Exiting getModelsForUser");
 
