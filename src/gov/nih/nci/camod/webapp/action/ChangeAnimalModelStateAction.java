@@ -39,17 +39,18 @@ public class ChangeAnimalModelStateAction extends BaseAction {
                 log.debug("Current state of model: " + theAnimalModel.getState());
         
                 theCurationManager.changeState(theAnimalModel, theForm.getEvent());
+                theAnimalModelManager.save(theAnimalModel);
                 
                 log.debug("New state of model: " + theAnimalModel.getState());
-
-                // Save the state change
-                theAnimalModelManager.save(theAnimalModel);
-
+                
                 LogManager theLogManager = (LogManager) getBean("logManager");
 
                 // Save the associated log comment to track the curation state
                 theLogManager.save(theForm.getAssignedTo(), theForm.getModelId(), theAnimalModel.getState(), theForm
                         .getComment());
+                
+                // Do any association actions since we've sucessfully changed state
+                theCurationManager.applyActionsForState(theAnimalModel);
             }
         }
         
