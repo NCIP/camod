@@ -11,7 +11,9 @@ import java.util.List;
  */
 public interface LogManager {
 
-    public Log getCurrentByModelAndAssigned(String inModelId, String inState, String inAssignedUsername);
+    public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inAssignedUser);
+
+    public Log getCurrentByModel(AnimalModel inModel);
 
     public List getAll();
 
