@@ -37,121 +37,122 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
         AnimalModel animalModel = animalModelManager.get(modelID);
-        
-        // Print the list of GeneDelivery viralVestors for the Gene Delivery (Cardiogenic Intervention) Section        
+
+        // Print the list of GeneDelivery viralVestors for the Gene Delivery
+        // (Cardiogenic Intervention) Section
         List virusList = animalModel.getGeneDeliveryCollection();
-        
+
         // Retrieve a list of all publications assoicated with this Animal model
         List publicationList = animalModel.getPublicationCollection();
         List pubList = new ArrayList();
-    
-        for ( int i=0; i<publicationList.size(); i++ )
-        {
-        	Publication pub = (Publication) publicationList.get(i);
-        	
-            System.out.println( "Adding Publication: " + pub.getTitle() );
-            
-        	pubList.add( pub );
+
+        for (int i = 0; i < publicationList.size(); i++) {
+            Publication pub = (Publication) publicationList.get(i);
+
+            System.out.println("Adding Publication: " + pub.getTitle());
+
+            pubList.add(pub);
         }
-        
-        if( virusList == null || virusList.size() == 0 ){
-        	System.out.println( "<AnimalModelTreePopulateAction populate> Empty GeneDeliveryCollection!" );
+
+        if (virusList == null || virusList.size() == 0) {
+            System.out.println("<AnimalModelTreePopulateAction populate> Empty GeneDeliveryCollection!");
         } else {
-	        for ( int i=0; i < virusList.size(); i++ )
-	        {
-	        	GeneDelivery geneDelivery = (GeneDelivery)virusList.get(i);
-	        	System.out.println( "geneDelivery= " + geneDelivery);
-	        	virusList.add( geneDelivery );
-	        }
-	        request.getSession().setAttribute( Constants.Submit.GENEDELIVERY_LIST, virusList );
-        }        
+            for (int i = 0; i < virusList.size(); i++) {
+                GeneDelivery geneDelivery = (GeneDelivery) virusList.get(i);
+                System.out.println("geneDelivery= " + geneDelivery);
+                virusList.add(geneDelivery);
+            }
+            request.getSession().setAttribute(Constants.Submit.GENEDELIVERY_LIST, virusList);
+        }
 
         // Print the list of EnvironmentalFactors for the Cardiogenic
         // Interventions Section
         List tyList = animalModel.getTherapyCollection();
-        
+
         List surgeryList = new ArrayList();
         List hormoneList = new ArrayList();
         List growthFactorList = new ArrayList();
         List viraltreatmentList = new ArrayList();
         List chemicaldrugList = new ArrayList();
-        List environFactorList = new ArrayList();        
+        List environFactorList = new ArrayList();
         List radiationList = new ArrayList();
         List nutritionalFactorList = new ArrayList();
-        
-        System.out.println( "<AnimalModelTreePopulateAction> Building Tree ...");
-        
-        if( tyList == null || tyList.size() == 0 ){
-        	System.out.println( "<AnimalModelTreePopulateAction populate> nothing!" );
+
+        System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
+
+        if (tyList == null || tyList.size() == 0) {
+            System.out.println("<AnimalModelTreePopulateAction populate> nothing!");
         } else {
-	        for ( int i=0; i < tyList.size(); i++ )
-	        {
-	        	Therapy ty = (Therapy)tyList.get(i);
-	        	
-	        	//check to see if it is an EnvironmentalFactor
-	        	if ( ty.getTherapeuticExperiment() == false ) {	        		
-	        		Agent agent = ty.getAgent();	      
-	        		
-	        		if ( agent.getType().equals( "Other") ) {
-	        			System.out.println( "\tAdded therapy to surgeryList" );
-	        			surgeryList.add( ty );
-	        		}
-	        		if ( agent.getType().equals( "Hormone") ) {
-	        			System.out.println( "\tAdded therapy to hormoneList" );
-	        			hormoneList.add( ty );
-	        		}	  
-	        		if ( agent.getType().equals( "Growth Factor") ) {
-	        			System.out.println( "\tAdded therapy to growthFactorList" );
-	        			growthFactorList.add( ty );
-	        		}	  
-	        		if ( agent.getType().equals( "Viral") ) {
-	        			System.out.println( "\tAdded therapy to viraltreatmentList" );
-	        			viraltreatmentList.add( ty );
-	        		}	
-	        		if ( agent.getType().equals( "Chemical / Drug") ) {
-	        			System.out.println( "\tAdded therapy to chemicaldrugList" );
-	        			chemicaldrugList.add( ty );
-	        		}	
-	        		if ( agent.getType().equals( "Environment") ) {
-	        			System.out.println( "\tAdded therapy to environFactorList" );
-	        			environFactorList.add( ty );
-	        		}
-	        		
-	        		if ( agent.getType().equals( "Nutrition") ) {
-	        			System.out.println( "\tAdded therapy to nutritionalFactorList" );
-	        			nutritionalFactorList.add( ty );
-	        		}
-	        		
-	        		if ( agent.getType().equals( "Radiation") ) {
-	        			System.out.println( "\tAdded therapy to radiationList" );
-	        			radiationList.add( ty );
-	        		}	
-	        	}	 	        	
-	        }
+            for (int i = 0; i < tyList.size(); i++) {
+                Therapy ty = (Therapy) tyList.get(i);
+
+                // check to see if it is an EnvironmentalFactor
+                if (ty.getTherapeuticExperiment() == false) {
+                    Agent agent = ty.getAgent();
+
+                    if (agent.getType().equals("Other")) {
+                        System.out.println("\tAdded therapy to surgeryList");
+                        surgeryList.add(ty);
+                    }
+                    if (agent.getType().equals("Hormone")) {
+                        System.out.println("\tAdded therapy to hormoneList");
+                        hormoneList.add(ty);
+                    }
+                    if (agent.getType().equals("Growth Factor")) {
+                        System.out.println("\tAdded therapy to growthFactorList");
+                        growthFactorList.add(ty);
+                    }
+                    if (agent.getType().equals("Viral")) {
+                        System.out.println("\tAdded therapy to viraltreatmentList");
+                        viraltreatmentList.add(ty);
+                    }
+                    if (agent.getType().equals("Chemical / Drug")) {
+                        System.out.println("\tAdded therapy to chemicaldrugList");
+                        chemicaldrugList.add(ty);
+                    }
+                    if (agent.getType().equals("Environment")) {
+                        System.out.println("\tAdded therapy to environFactorList");
+                        environFactorList.add(ty);
+                    }
+
+                    if (agent.getType().equals("Nutrition")) {
+                        System.out.println("\tAdded therapy to nutritionalFactorList");
+                        nutritionalFactorList.add(ty);
+                    }
+
+                    if (agent.getType().equals("Radiation")) {
+                        System.out.println("\tAdded therapy to radiationList");
+                        radiationList.add(ty);
+                    }
+                }
+            }
         }
-        
-        request.getSession().setAttribute( Constants.Submit.GROWTHFACTORS_LIST, growthFactorList );
-        request.getSession().setAttribute( Constants.Submit.HORMONE_LIST, hormoneList );
-        request.getSession().setAttribute( Constants.Submit.SURGERYOTHER_LIST, surgeryList );
-        request.getSession().setAttribute( Constants.Submit.VIRALTREATMENT_LIST, viraltreatmentList );
-        request.getSession().setAttribute( Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList );
-        request.getSession().setAttribute( Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList );
-        request.getSession().setAttribute( Constants.Submit.RADIATION_LIST, radiationList );
-        request.getSession().setAttribute( Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList );
-        
-        request.getSession().setAttribute( Constants.Submit.PUBLICATION_LIST, pubList );
-      
+
+        request.getSession().setAttribute(Constants.Submit.GROWTHFACTORS_LIST, growthFactorList);
+        request.getSession().setAttribute(Constants.Submit.HORMONE_LIST, hormoneList);
+        request.getSession().setAttribute(Constants.Submit.SURGERYOTHER_LIST, surgeryList);
+        request.getSession().setAttribute(Constants.Submit.VIRALTREATMENT_LIST, viraltreatmentList);
+        request.getSession().setAttribute(Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList);
+        request.getSession().setAttribute(Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList);
+        request.getSession().setAttribute(Constants.Submit.RADIATION_LIST, radiationList);
+        request.getSession().setAttribute(Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList);
+        request.getSession().setAttribute(Constants.Submit.PUBLICATION_LIST, pubList);
+
         UserManager theUserManager = (UserManager) getBean("userManager");
 
         // Set up the form. Should be only one controller
         AnimalModelStateForm theForm = new AnimalModelStateForm();
-        theForm.setModelId(modelID);
-
         List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.CONTROLLER);
-        theForm.setAssignedTo((String) theRoles.get(0));
-        request.setAttribute("formdata", theForm);
 
-        System.out.println("Before forward");
-		return mapping.findForward( "submitOverview" );
-	}
+        // Set the fields
+        theForm.setModelId(modelID);
+        theForm.setModelDescriptor(animalModel.getModelDescriptor());
+        theForm.setComment("Model has been moved to complete");
+        theForm.setAssignedTo((String) theRoles.get(0));
+        theForm.setEvent(Constants.Admin.Actions.COMPLETE);
+
+        request.setAttribute(Constants.FORMDATA, theForm);
+
+        return mapping.findForward("submitOverview");
+    }
 }
