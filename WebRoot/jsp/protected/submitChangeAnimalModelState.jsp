@@ -52,6 +52,7 @@
 			</td>
 		</tr>
         <html:hidden property="modelId" name="formdata" />
+        <html:hidden property="modelDescriptor" name="formdata" />
         <html:hidden property="event" name="formdata" />
 		<tr>
 			<td align="right" colspan="3">
