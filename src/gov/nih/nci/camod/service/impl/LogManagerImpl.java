@@ -5,6 +5,7 @@ import gov.nih.nci.camod.service.LogManager;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
+import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -209,7 +210,10 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             theLog.setType(inState);
             theLog.setNotes(inNotes);
 
+            // TODO: Commit for now until whole transaction mess it dealt with
+            HibernateUtil.beginTransaction();
             Persist.save(theLog);
+            HibernateUtil.commitTransaction();
 
         } catch (PersistenceException pe) {
             log.error("Exception in save", pe);
@@ -249,5 +253,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 }
 
 /*
- * $Log: not supported by cvs2svn $
+ * $Log: not supported by cvs2svn $ Revision 1.4 2005/09/12 18:22:14 georgeda
+ * Curation changes and addition of e-mail
+ * 
  */

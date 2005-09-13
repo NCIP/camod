@@ -34,7 +34,7 @@ public class QueryManagerImpl extends BaseManager {
                     + " and type = '" + inModel.getState() + "' and party_id = " + inUser.getId()
                     + " order by timestamp desc";
 
-            log.debug("SQL: " + theSQLString);
+            log.debug("getCurrentByModelAndAssigned - SQL: " + theSQLString);
 
             theResultSet = Search.query(theSQLString, new Object[0]);
 
@@ -80,6 +80,8 @@ public class QueryManagerImpl extends BaseManager {
             String theSQLString = "select log_id from log where abs_cancer_model_id = " + inModel.getId().toString()
                     + " and type = '" + inModel.getState() + "' order by timestamp desc";
 
+            log.debug("getCurrentByModel - SQL: " + theSQLString);
+
             theResultSet = Search.query(theSQLString, new Object[0]);
 
             if (theResultSet.next()) {
@@ -105,5 +107,7 @@ public class QueryManagerImpl extends BaseManager {
     }
 }
 /*
- * $Log: not supported by cvs2svn $
+ * $Log: not supported by cvs2svn $ Revision 1.1 2005/09/12 18:22:08 georgeda
+ * Curation changes and addition of e-mail
+ * 
  */

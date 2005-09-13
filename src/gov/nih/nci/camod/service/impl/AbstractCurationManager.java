@@ -19,7 +19,7 @@ public abstract class AbstractCurationManager implements CurationManager {
 
     protected final Log log = LogFactory.getLog(MailUtilityImpl.class);
 
-    private static final String ACTION_TOKENS = ":,";
+    private static final String ACTION_TOKENS = ":,=";
 
     private class State {
 
@@ -70,7 +70,7 @@ public abstract class AbstractCurationManager implements CurationManager {
 
     // Superclass adds action factory for configurable
     // behavior
-    protected CuratableActionFactory myActionFactory = new CuratableActionFactoryImpl();
+    protected CurateableActionFactory myActionFactory = new CurateableActionFactoryImpl();
 
     protected HashMap myStates = new HashMap();
 
@@ -212,9 +212,10 @@ public abstract class AbstractCurationManager implements CurationManager {
     /**
      * Apply any actions associated w/ the state of the curatable object
      * 
-     * @param inCurateableObj is the curatable object to apply actions for
+     * @param inCurateableObj
+     *            is the curatable object to apply actions for
      */
-    public void applyActionsForState(Curateable inCurateableObj) {
+    public void applyActionsForState(Curateable inCurateableObj, Map inArgs) {
 
         log.trace("Entering applyActionsForState");
 
@@ -238,11 +239,23 @@ public abstract class AbstractCurationManager implements CurationManager {
 
                 String theActionName = theTokenizer.nextToken();
 
-                // Get the arguments for the action
-                List theArgs = new ArrayList();
+                // Get the default arguments for the action
                 while (theTokenizer.hasMoreTokens()) {
+                    
                     String theArg = theTokenizer.nextToken();
-                    theArgs.add(theArg);
+
+                    // Break this down into a tag/value pair and add to the input map
+                    StringTokenizer theArgTokenizer = new StringTokenizer(theArg, ACTION_TOKENS);
+
+                    String theTag = theArgTokenizer.nextToken();
+                    String theValue = "";
+
+                    if (theArgTokenizer.hasMoreTokens()) {
+                        theValue = theArgTokenizer.nextToken();
+                    }
+
+                    // Add to the input map
+                    inArgs.put(theTag, theValue);
                 }
 
                 CurateableAction theAction = myActionFactory.getAction(theActionName);
@@ -251,11 +264,11 @@ public abstract class AbstractCurationManager implements CurationManager {
                 if (theAction != null) {
 
                     log.debug("Applying action: " + theActionEntry);
-                    
+
                     // Actions by default are not show stoppers if they
                     // don't work
                     try {
-                        theAction.execute(theArgs, inCurateableObj);
+                        theAction.execute(inArgs, inCurateableObj);
                     } catch (Exception e) {
                         log.warn("Unable to process action", e);
                     }

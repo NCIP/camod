@@ -10,4 +10,6 @@ import java.util.List;
 public interface UserManager {
 	public List getRolesForUser(String inUsername);
     public List getUsersForRole(String inRole);
+    public String getEmailForUser(String inUsername);
+    public String getEmailForController();
 }

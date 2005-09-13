@@ -14,15 +14,15 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.service.CurateableAction;
-import gov.nih.nci.camod.service.CuratableActionFactory;
+import gov.nih.nci.camod.service.CurateableActionFactory;
 
 import java.util.HashMap;
 
-public class CuratableActionFactoryImpl implements CuratableActionFactory {
+public class CurateableActionFactoryImpl implements CurateableActionFactory {
 
     private HashMap myActions = new HashMap();
 
-    CuratableActionFactoryImpl() {
+    CurateableActionFactoryImpl() {
  
     }
 

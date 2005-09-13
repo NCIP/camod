@@ -14,6 +14,8 @@ import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,7 +66,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List getAllByState(String inState) {
 
         // The list of AnimalModels to be returned
-        List theAnimalModels = null;
+        List theAnimalModels = new ArrayList();
 
         // The following two objects are needed for eQBE.
         AnimalModel theAnimalModel = new AnimalModel();
@@ -75,7 +77,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         theEvaluation.addEvaluator("animalModel.state", Evaluator.EQUAL);
 
         try {
-            theAnimalModels = Search.query(theAnimalModel, theEvaluation);
+            String theSQL = "select abs_cancer_model_id from abs_cancer_model where state = '" + inState + "'";
+
+            ResultSet theRS = Search.query(theSQL, new Object[0]);
+
+            while (theRS.next()) {
+                theAnimalModels
+                        .add(Search.queryById(AnimalModel.class, new Long(theRS.getLong("abs_cancer_model_id"))));
+            }
         } catch (Exception e) {
             System.out.println("Exception in AnimalModelManagerImpl.getAnimalModels(String username)");
             e.printStackTrace();

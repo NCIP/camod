@@ -15,11 +15,16 @@ package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Curateable;
 
+import java.util.Map;
+
 /**
  * This interface describes a realized/implementing CurationManager.
  */
 public interface CurationManager {
+
     public String getDefaultState();
+
     public Curateable changeState(Curateable inCuratableObject, String inEvent);
-    public void applyActionsForState(Curateable inCuratableObject);
+
+    public void applyActionsForState(Curateable inCuratableObject, Map inArgs);
 }
