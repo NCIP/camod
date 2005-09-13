@@ -62,10 +62,11 @@ public class EmailActionImpl extends BaseCurateableAction {
             // Customize the text based on the action.
             // TODO: Should be centralized.
             if (theForm.getEvent().equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
-                theMailSubject = "You have been assigned the following model to screen: "
+                theMailSubject = "You have been assigned screener for the following model: "
                         + theForm.getModelDescriptor();
             } else if (theForm.getEvent().equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
-                theMailSubject = "You have been assigned the following model to edit: " + theForm.getModelDescriptor();
+                theMailSubject = "You have been assigned editor for the following model: "
+                        + theForm.getModelDescriptor();
             } else if (theForm.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
                 theMailSubject = "The editor is requesting more information for the following model: "
                         + theForm.getModelDescriptor();
@@ -73,6 +74,8 @@ public class EmailActionImpl extends BaseCurateableAction {
                 theMailSubject = "The following model has been rejected: " + theForm.getModelDescriptor();
             } else if (theForm.getEvent().equals(Constants.Admin.Actions.APPROVE)) {
                 theMailSubject = "The following model has been approved: " + theForm.getModelDescriptor();
+            } else if (theForm.getEvent().equals(Constants.Admin.Actions.COMPLETE)) {
+                theMailSubject = "The following model has been completed: " + theForm.getModelDescriptor();
             } else {
                 theMailSubject = "The following model has changed: " + theForm.getModelDescriptor();
             }
@@ -96,6 +99,7 @@ public class EmailActionImpl extends BaseCurateableAction {
 }
 
 /*
- * $Log: not supported by cvs2svn $ Revision 1.2 2005/09/12 18:22:11 georgeda
+ * $Log: not supported by cvs2svn $ Revision 1.3 2005/09/13 19:18:46 georgeda
+ * Email updates and CSM integration Revision 1.2 2005/09/12 18:22:11 georgeda
  * Curation changes and addition of e-mail
  */
