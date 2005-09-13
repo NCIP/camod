@@ -61,19 +61,19 @@ public class ChemicalDrugPopulateAction extends BaseAction{
 		
 		//Parse the doseUnit out of the Doseage
 		//only matches the .txt file
-		List doseUnitList = (ArrayList) request.getSession().getAttribute( Constants.Dropdowns.DOSAGEUNITSDROP );
-		String doseUnit = ty.getTreatment().getDosage();
-		System.out.println( "Checking for doseUnit matches" );
+		//List doseUnitList = (ArrayList) request.getSession().getAttribute( Constants.Dropdowns.DOSAGEUNITSDROP );
+		//String doseUnit = ty.getTreatment().getDosage();
+		//System.out.println( "Checking for doseUnit matches" );
 		
-		for ( int i=0; i < doseUnitList.size(); i++ )
-		{
+		/*for ( int i=0; i < doseUnitList.size(); i++ )
+	     {
 			String t = (String) doseUnitList.get(i);
 			System.out.println("Unit=" + t);
 			
 			if ( doseUnit.indexOf( t )  != -1 )
 				System.out.println( "found a match" );
 		}
-		
+		*/
 		
 		
 		chemicalDrugForm.setDosage( ty.getTreatment().getDosage() );
