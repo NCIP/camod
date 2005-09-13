@@ -1130,7 +1130,23 @@
     </action>
          
      <!-- PublicationForm -->
-     	
+   	 <action path="/PublicationAction"
+	        type="gov.nih.nci.camod.webapp.action.PublicationAction"
+	        name="publicationForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitPublications">   	
+    </action>
+    
+    <action path="/PublicationPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.PublicationPopulateAction"
+    		name="publicationForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+         	
      <!-- RadiationForm -->
    	 <action path="/RadiationAction"
 	        type="gov.nih.nci.camod.webapp.action.RadiationAction"
@@ -1272,8 +1288,18 @@
    	        unknown="false"
 	        input="/submitModels"
 	        validate="false" >
+    </action>        
+
+    <action path="/PubMedPopulateAction"
+	        type="gov.nih.nci.camod.webapp.action.PubMedPopulateAction"
+	        name="publicationForm"
+	        scope="request"
+	        parameter="method"
+   	        unknown="false"
+	        input="/submitPublications"
+	        validate="false" >
     </action>
-            
+    
   </action-mappings>
 
   <controller processorClass="gov.nih.nci.camod.util.CustomRequestProcessor" nocache="true" inputForward="true" maxFileSize="2M" />
