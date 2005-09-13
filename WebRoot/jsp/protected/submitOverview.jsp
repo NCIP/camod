@@ -41,8 +41,11 @@
                     </td>
                     <td align="right" class="resultsBoxGreyEnd2">
                         <html:form action="ChangeAnimalModelToCompleteAction">
-                            <html:hidden property="modelId" name="formdata" />
-                            <html:hidden property="assignedTo" name="formdata" />
+                            <html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
+                            <html:hidden property="modelDescriptor" name="<%= Constants.FORMDATA %>" />
+                            <html:hidden property="assignedTo" name="<%= Constants.FORMDATA %>" />
+                            <html:hidden property="event" name="<%= Constants.FORMDATA %>" />
+                            <html:hidden property="comment" name="<%= Constants.FORMDATA %>" />
                             <html:submit>Set model status to Complete</html:submit>  
                         </html:form> 
                     </td>
