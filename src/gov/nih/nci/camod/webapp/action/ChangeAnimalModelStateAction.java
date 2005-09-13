@@ -1,9 +1,12 @@
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
+
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,8 +52,11 @@ public class ChangeAnimalModelStateAction extends BaseAction {
                 theLogManager.save(theForm.getAssignedTo(), theForm.getModelId(), theAnimalModel.getState(), theForm
                         .getComment());
                 
+                HashMap theMap = new HashMap();
+                theMap.put(Constants.FORMDATA, theForm);
+                
                 // Do any association actions since we've sucessfully changed state
-                theCurationManager.applyActionsForState(theAnimalModel);
+                theCurationManager.applyActionsForState(theAnimalModel, theMap);
             }
         }
         

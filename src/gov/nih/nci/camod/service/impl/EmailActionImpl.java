@@ -1,9 +1,11 @@
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.CurateableAction;
+import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
-import java.util.List;
+import java.util.Map;
 
 public class EmailActionImpl extends BaseCurateableAction {
 
@@ -34,43 +36,66 @@ public class EmailActionImpl extends BaseCurateableAction {
      * @param inObject
      *            the curatable object to get information from
      */
-    public void execute(List inArgs, Curateable inObject) {
+    public void execute(Map inArgs, Curateable inObject) {
 
         log.trace("Entering execute");
 
         log.debug("Arguments: " + inArgs);
 
-        AnimalModel theAnimalModel = (AnimalModel) inObject;
+        if (inArgs.containsKey(Constants.FORMDATA)) {
 
-        Log theLog = LogManagerSingleton.instance().getCurrentByModel(theAnimalModel);
+            AnimalModelStateForm theForm = (AnimalModelStateForm) inArgs.get(Constants.FORMDATA);
 
-        Person thePerson = (Person) theLog.getSubmitter();
+            AnimalModel theAnimalModel = (AnimalModel) inObject;
 
-        List theContactInfoList = thePerson.getContactInfoCollection();
+            Log theLog = LogManagerSingleton.instance().getCurrentByModel(theAnimalModel);
 
-        String[] theRecipients = new String[theContactInfoList.size()];
+            Person thePerson = (Person) theLog.getSubmitter();
 
-        for (int i = 0; i < theContactInfoList.size(); i++) {
-            ContactInfo theContactInfo = (ContactInfo) theContactInfoList.get(i);
-            theRecipients[i] = theContactInfo.getEmail();
-        }
+            // Get the e-mail for the user
+            String[] theRecipients = { UserManagerSingleton.instance().getEmailForUser(thePerson.getUsername()) };
 
-        try {
-            if (theRecipients.length > 0) {
-                MailUtilityImpl.sendMail(theRecipients, "Animal model assignment",
-                        "You have been assigned an animal model", "caMod");
+            // Build the message text
+            String theMailSubject = "";
+            String theMailText = theForm.getComment();
+
+            // Customize the text based on the action.
+            // TODO: Should be centralized.
+            if (theForm.getEvent().equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
+                theMailSubject = "You have been assigned the following model to screen: "
+                        + theForm.getModelDescriptor();
+            } else if (theForm.getEvent().equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
+                theMailSubject = "You have been assigned the following model to edit: " + theForm.getModelDescriptor();
+            } else if (theForm.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
+                theMailSubject = "The editor is requesting more information for the following model: "
+                        + theForm.getModelDescriptor();
+            } else if (theForm.getEvent().equals(Constants.Admin.Actions.REJECT)) {
+                theMailSubject = "The following model has been rejected: " + theForm.getModelDescriptor();
+            } else if (theForm.getEvent().equals(Constants.Admin.Actions.APPROVE)) {
+                theMailSubject = "The following model has been approved: " + theForm.getModelDescriptor();
             } else {
-                log.warn("No e-mail address assigned to user: " + thePerson.getUsername());
+                theMailSubject = "The following model has changed: " + theForm.getModelDescriptor();
             }
 
-        } catch (Exception e) {
-            log.error("Error sending e-mail:", e);
-        }
+            try {
+                if (theRecipients.length > 0) {
+                    MailUtilityImpl.sendMail(theRecipients, theMailSubject, theMailText, UserManagerSingleton
+                            .instance().getEmailForController());
+                } else {
+                    log.warn("No e-mail address assigned to user: " + thePerson.getUsername());
+                }
 
+            } catch (Exception e) {
+                log.error("Error sending e-mail:", e);
+            }
+        } else {
+            log.error("Missing argument formdata");
+        }
         log.trace("Exiting execute");
     }
 }
 
 /*
- * $Log: not supported by cvs2svn $
+ * $Log: not supported by cvs2svn $ Revision 1.2 2005/09/12 18:22:11 georgeda
+ * Curation changes and addition of e-mail
  */
