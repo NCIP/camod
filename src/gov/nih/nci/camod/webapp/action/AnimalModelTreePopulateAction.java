@@ -38,8 +38,21 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 
         AnimalModel animalModel = animalModelManager.get(modelID);
         
-        // Print the list of GeneDelivery viralVestors for the Gene Delivery (Cardiogenic Intervention) Section
+        // Print the list of GeneDelivery viralVestors for the Gene Delivery (Cardiogenic Intervention) Section        
         List virusList = animalModel.getGeneDeliveryCollection();
+        
+        // Retrieve a list of all publications assoicated with this Animal model
+        List publicationList = animalModel.getPublicationCollection();
+        List pubList = new ArrayList();
+    
+        for ( int i=0; i<publicationList.size(); i++ )
+        {
+        	Publication pub = (Publication) publicationList.get(i);
+        	
+            System.out.println( "Adding Publication: " + pub.getTitle() );
+            
+        	pubList.add( pub );
+        }
         
         if( virusList == null || virusList.size() == 0 ){
         	System.out.println( "<AnimalModelTreePopulateAction populate> Empty GeneDeliveryCollection!" );
@@ -124,7 +137,9 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute( Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList );
         request.getSession().setAttribute( Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList );
         request.getSession().setAttribute( Constants.Submit.RADIATION_LIST, radiationList );
-        request.getSession().setAttribute( Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList );        
+        request.getSession().setAttribute( Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList );
+        
+        request.getSession().setAttribute( Constants.Submit.PUBLICATION_LIST, pubList );
       
         UserManager theUserManager = (UserManager) getBean("userManager");
 

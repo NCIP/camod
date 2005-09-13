@@ -45,9 +45,8 @@
             <TABLE class=subhdrBG cellSpacing=0 cellPadding=0 width="100%" border=0>
               <TBODY>
               <TR>
-                <TD align=left height=50><A
-                  href="login.jsp"><IMG
-                  height=46 alt="Application Logo" hspace=10 src="/camod/images/mmhcclogo.gif" border=0></A>
+                <TD align=left height=50><html:link styleClass="footerMenuLink" action="login"><IMG
+                  height=46 alt="Application Logo" hspace=10 src="/camod/images/mmhcclogo.gif" border=0></html:link>
                  </TD></TR>
               </TBODY>
             </TABLE>            

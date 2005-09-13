@@ -20,7 +20,7 @@
 			
 			<TD><IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1></TD>				
 			
-			<td align="center" height="20" class="footerMenuItem" onmouseofver="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
+			<td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
 			  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="infoPrivacyNotice">PRIVACY NOTICE</html:link>&nbsp;&nbsp;
 			</td>
 			

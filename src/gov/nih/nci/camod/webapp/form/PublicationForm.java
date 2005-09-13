@@ -33,7 +33,21 @@ public class PublicationForm extends BaseForm implements Serializable {
 	protected String volume;
 	protected String startPage;	
 	protected String endPage;
-
+	protected String firstTimeReported;
+	
+	/**
+	 * @return Returns the authors.
+	 */
+	public String getFirstTimeReported() {
+		return firstTimeReported;
+	}
+	/**
+	 * @param authors The authors to set.
+	 */
+	public void setFirstTimeReported(String firstTimeReported) {
+		this.firstTimeReported = firstTimeReported;
+	}
+	
 	/**
 	 * @return Returns the authors.
 	 */

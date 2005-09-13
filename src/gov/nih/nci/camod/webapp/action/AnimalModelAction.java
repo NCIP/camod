@@ -1,9 +1,21 @@
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Availability;
+import gov.nih.nci.camod.domain.ContactInfo;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Phenotype;
+import gov.nih.nci.camod.domain.SexDistribution;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.util.EmailMessage;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
+
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,18 +25,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
-
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.ContactInfo;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Phenotype;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.Availability;
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.domain.AnimalModel;
 
 public final class AnimalModelAction extends BaseAction {
 	
@@ -93,12 +93,22 @@ public final class AnimalModelAction extends BaseAction {
 		//Strain
 		taxon.setEthnicityStrain( modelChar.getEthinicityStrain() );
 		
-		// if ( modelChar.getOtherEthinicityStrain() != null || ! modelChar.getOtherEthinicityStrain().equals( "" ) ) 
-		// {
-		//			System.out.println( "<AnimalModelAction saveNewModel> Someone entered in a new Strain " + modelChar.getOtherEthinicityStrain() );
-		//			System.out.println( "<AnimalModelAction saveNewModel> Sending a notice email to Ulli" );
-		// TODO: call a email function
-		//		}
+		 if ( modelChar.getOtherEthinicityStrain() != null || ! modelChar.getOtherEthinicityStrain().equals( "" ) ) 
+		 {
+			System.out.println( "<AnimalModelAction saveNewModel> Someone entered in a new Strain " + modelChar.getOtherEthinicityStrain() );
+			System.out.println( "<AnimalModelAction saveNewModel> Sending a notice email to : " );
+			
+			//call a email function
+			EmailMessage msg = new EmailMessage();
+			String strNewStrainMessage = "A new strain was entered " + modelChar.getOtherEthinicityStrain();
+			
+			// TODO: Send to multiple Recipients
+			//(server, sender, recipient, subject, messageBody)
+			msg.sendEmailMessage( Constants.Email.SERVER, Constants.Email.SENDER, Constants.Email.RECIPIENT, "Test Message subject", strNewStrainMessage );
+			
+			//set flag, add to strains
+			//TODO: Edit dropdown to not include flagged settings... display only if directly connected to current model
+		}
 			
 		//phenotype description
 		Phenotype phenotype = new Phenotype();

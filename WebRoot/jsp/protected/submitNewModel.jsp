@@ -12,15 +12,12 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
-<SCRIPT LANGUAGE="JavaScript" SRC="scripts/CalendarPopup.js"></SCRIPT>
 <SCRIPT LANGUAGE="JavaScript">
 	
-	var cal = new CalendarPopup();
-		
 	function chkOther( control ) {
-		ideControl = document.ModelCharacteristicsForm.otherEthinicityStrain;
-			
-		if( control.value == 'Other' )
+		ideControl = document.forms[0].otherEthinicityStrain;
+		
+		if( control.value == "Other" )
 			ideControl.disabled = false;
 		else {
 			ideControl.value = null;
@@ -184,8 +181,7 @@
 				  </html:form>			
 				</TABLE>
 			</td>
-		</tr>
-		
+		</tr>		
 	</TABLE>	
 </td></tr></TABLE>
 

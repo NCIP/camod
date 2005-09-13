@@ -210,8 +210,11 @@ public class NewDropdownUtil {
                 Strain strain = (Strain) strainList.get(j);
 
                 if (strain.getName() != null) {
-                    strainNames.add(strain.getName());
-                    System.out.println("Strain Name>>" + j + ": " + strain.getName());
+                  //  strainNames.add(strain.getName());
+                    if (!strainNames.contains(strain.getName())) {
+                    	strainNames.add(strain.getName());
+                    	System.out.println("Strain Name>>" + j + ": " + strain.getName());
+                    }
                 }
             }
         }

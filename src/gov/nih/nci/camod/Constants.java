@@ -127,6 +127,16 @@ public class Constants {
     public static final String USERMODELLIST = "usermodellist";
     
     /**
+     * Used to store basic email constants   
+     *
+     */     
+    public interface Email {
+    	public static final String SERVER = "nih.nci.gov";
+    	public static final String SENDER = "emice@nih.nci.gov";
+    	public static final String RECIPIENT = "ulliwagner@nih.nci.gov";    		
+    }
+    
+    /**
      *  Used to store lists for drop down menus
      */
     public interface Dropdowns {
@@ -136,6 +146,7 @@ public class Constants {
         public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
         public static final String ADMINISTRATIVEROUTEDROP = "adminroutedrop.db";
         public static final String AGEUNITSDROP = "AgeUnits.txt";
+        public static final String PUBDROP = "PublicationStatus.txt";
         
         //Specific to a single screen
         public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
@@ -200,7 +211,9 @@ public class Constants {
     	public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
     	public static final String RADIATION_LIST = "radiation_list";
     	public static final String SURGERYOTHER_LIST = "surgeryother_list";
-    	public static final String VIRALTREATMENT_LIST = "viraltreatment_list";    	    	
+    	public static final String VIRALTREATMENT_LIST = "viraltreatment_list";    	    
+    	
+    	public static final String PUBLICATION_LIST = "publication_list";
     }
     
     // /////////////////////////////////////////////////////////////

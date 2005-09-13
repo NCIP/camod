@@ -7,6 +7,8 @@
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Publication;
+import gov.nih.nci.camod.domain.PublicationStatus;
+
 import java.util.List;
 
 /**
@@ -19,5 +21,6 @@ public interface PublicationManager {
 	public List getAll();
 	public Publication get(String id);
     public void save(Publication publication);
+    public void savePublicationStatus( PublicationStatus publicationStatus );
     public void remove(String id);
 }
