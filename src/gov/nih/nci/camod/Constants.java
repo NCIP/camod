@@ -10,6 +10,9 @@ package gov.nih.nci.camod;
 public class Constants {
     //~ Static fields/initializers =============================================
    
+    /** The name of the camod resource bundle used in this application */
+    public static final String CAMOD_BUNDLE = "camod";
+    
     /** The name of the ResourceBundle used in this application */
     public static final String BUNDLE_KEY = "ApplicationResources";
     
@@ -67,6 +70,11 @@ public class Constants {
      */
     public static final String REGISTERED = "registered";
 
+    /**
+     * The key for the controller username in the camod.properties file
+     */
+    public static final String CONTROLLER_USERNAME_KEY = "controller.username";
+    
     /**
      * The name of the Administrator role, as specified in web.xml
      */
@@ -272,6 +280,11 @@ public class Constants {
              * A constant that defines the text for the generic reject action
              */
             public static final String REJECT = "reject";           
+            
+            /**
+             * A constant that defines the text for the complete
+             */
+            public static final String COMPLETE = "complete";
         }
         
         /**
