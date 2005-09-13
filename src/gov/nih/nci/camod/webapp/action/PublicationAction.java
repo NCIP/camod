@@ -168,10 +168,10 @@ public final class PublicationAction extends BaseAction {
 		
         PublicationStatus pubStatus = new PublicationStatus();
         pubStatus.setName( pubForm.getName() );
-        publicationManager.savePublicationStatus( pubStatus );
+        //publicationManager.savePublicationStatus( pubStatus );
 		
-        pub.setPublicationStatus( pubStatus );
-        publicationManager.save( pub );
+        //pub.setPublicationStatus( pubStatus );
+        publicationManager.save( pub, pubStatus );
 
     	//Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
         ActionMessages msg = new ActionMessages();
@@ -267,10 +267,10 @@ public final class PublicationAction extends BaseAction {
         
         PublicationStatus pubStatus = new PublicationStatus();
         pubStatus.setName( pubForm.getName() );
-        publicationManager.savePublicationStatus( pubStatus );
+        //publicationManager.savePublicationStats( pubStatus );
         
-        pub.setPublicationStatus( pubStatus );
-        publicationManager.save( pub );
+        //pub.setPublicationStatus( pubStatus );
+        publicationManager.save( pub, pubStatus );
         
         animalModel.addPublication( pub );
 

@@ -89,13 +89,13 @@
 		</td>
 		
 		<td class="formField">
-			<label valign="TOP" for="field1"><a href="">Click to look up PubMed Identifier</a></label><br>
+			<label valign="TOP" for="field1"><a href="#">Click to look up PubMed Identifier</a></label><br>
 			<br>
 			<br>
 			<label valign="TOP" for="field1">PMID &nbsp;</label>
 			<br>
-			<html:text styleClass="formFieldUnSized" size="20" property="pmid" name="formdata" onchange="getPubMed(this)" />
-			<html:link href="#" onclick="getPubMed(this);">Fill in Fields</html:link>
+			<html:text styleClass="formFieldUnSized" size="20" property="pmid" name="formdata" />
+			<html:button property="none" onclick="getPubMed(this)">Fill in Fields</html:button>
 			
 			<br>			
 	            <logic:messagesPresent>

@@ -20,7 +20,8 @@ import java.util.List;
 public interface PublicationManager {
 	public List getAll();
 	public Publication get(String id);
-    public void save(Publication publication);
+    public void save(Publication publication, PublicationStatus publicationStatus );
     public void savePublicationStatus( PublicationStatus publicationStatus );
     public void remove(String id);
+    public PublicationStatus getByName(String inName);
 }
