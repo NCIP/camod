@@ -95,8 +95,11 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
 
             List theList = Search.query( thePubStatus, theEvaluation );
 
+           // System.out.println( "theList=" + theList );
+            
             if ( theList != null && theList.size() > 0 ) {
-            	thePubStatus = ( PublicationStatus ) theList.get(0);
+            	//System.out.println( "<PublicationManagerImpl> list not empty!" );
+            	pubStatus = ( PublicationStatus ) theList.get(0);
             }
                
         } catch (PersistenceException pe) {
