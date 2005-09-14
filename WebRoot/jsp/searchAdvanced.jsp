@@ -405,7 +405,6 @@
 				<label for="box1">Check here to search for models with microarray data</label>
 			</td>
 		</tr>
-
 		<tr>
 
 		<td align="right" colspan="3">

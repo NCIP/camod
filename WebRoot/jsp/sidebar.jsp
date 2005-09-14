@@ -108,14 +108,7 @@
 	<TBODY>	
 
 <!-- Can place code here to determine what Main Menu is needed (this is placed on top of the main content in center of page)-->	
-<%
-	//TODO: NOTE: USE PREVIOUS CHECK ON THIS PAGE TO QUICKEN THIS!
-	if ( jspName.equals("viewModelCharacteristics.jsp") || jspName.equals("viewSpontaneousMutation.jsp") ||  jspName.equals("viewTransplantXenograft.jsp") || jspName.equals("viewGeneticDescription.jsp")  || jspName.equals("viewPublications.jsp") || jspName.equals("viewCarcinogenicInterventions.jsp")  || jspName.equals("viewHistopathology.jsp") || jspName.equals("viewTherapeuticApproaches.jsp") || jspName.equals("viewCellLines.jsp") || jspName.equals("viewImages.jsp") || jspName.equals("viewMicroarrays.jsp") || jspName.equals("viewGenomicSegment.jsp") || jspName.equals("viewTargetedModification.jsp") || jspName.equals("viewInducedMutation.jsp") || jspName.equals("viewEngineeredTransgene.jsp") ){
-		%><%@ include file="viewModelMenu.jsp" %><%	
-	}else {		
-		%><%@ include file="loginMenu.jsp" %><%	
-	}
-%>
+<%@ include file="loginMenu.jsp" %>
 
 <TR><TD valign=top width="100%">
 

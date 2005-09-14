@@ -1,5 +1,9 @@
 <%@ include file="/common/taglibs.jsp"%>
 
+<%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
+<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page import="java.util.List" %>
+
 <bean:define id="mdl" name="animalmodel"/>
 <TR><TD class=subMenuPrimaryTitle height=22>MODEL DETAILS</TD></TR>
 <TR><TD class=subMenuPrimaryGreyTitle height=27>
@@ -10,34 +14,98 @@
 <DIV>
 	<bean:parameter id="mdl" name="aModelID"/>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewModelCharacteristicsAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">MODEL CHARACTERISTICS</a>
+		<a href="/ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<%=mdl%>" styleClass="subMenuPrimary">MODEL CHARACTERISTICS</a>
 	<BR>	
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewGeneticDescriptionAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">GENETIC DESCRIPTION</a>	
+		<% 
+			AnimalModel am = (AnimalModel)request.getSession().getAttribute(Constants.ANIMALMODEL);
+			List l = am.getEngineeredGeneCollection();
+			int cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { %>
+		<a href="ViewModelAction.do?unprotected_method=populateEngineeredGene&aModelID=<%=mdl%>" styleClass="subMenuPrimary">GENETIC DESCRIPTION</a>	
+	    <%} else { %>
+		GENETIC DESCRIPTION
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewCarcinogenicInterventionsAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">CARCINOGENIC INTERVENTIONS</a>
+		<% 
+			l = am.getEnvironmentalFactorCollection();
+			cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { 
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populateCarcinogenicInterventions&aModelID=<%=mdl%>" styleClass="subMenuPrimary">CARCINOGENIC INTERVENTIONS</a>
+	    <%} else { %>
+		CARCINOGENIC INTERVENTIONS
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewPublicationsAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">PUBLICATIONS</a>	
+		<% 
+			l = am.getPublicationCollection();
+			cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { 
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populatePublications&aModelID=<%=mdl%>" styleClass="subMenuPrimary">PUBLICATIONS</a>	
+	    <%} else { %>
+		PUBLICATIONS
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewHistopathologyAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">HISTOPATHOLOGY</a>
+		<% 
+			l = am.getHistopathologyCollection();
+			cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { 
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populateHistopathology&aModelID=<%=mdl%>" styleClass="subMenuPrimary">HISTOPATHOLOGY</a>
+	    <%} else { %>
+		HISTOPATHOLOGY
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewTherapeuticApproachesAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">THERAPEUTIC APPROACHES</a>
+		<% 
+			l = am.getTherapyCollection();
+			cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { 
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populateTherapeuticApproaches&aModelID=<%=mdl%>" styleClass="subMenuPrimary">THERAPEUTIC APPROACHES</a>
+	    <%} else { %>
+		THERAPEUTIC APPROACHES
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewCellLinesAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">CELL LINES</a>
+		<% 
+			l = am.getCellLineCollection();
+			cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { 
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populateCellLines&aModelID=<%=mdl%>" styleClass="subMenuPrimary">CELL LINES</a>
+	    <%} else { %>
+		CELL LINES
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewImagesAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">IMAGES</a>
+		<% 
+			l = am.getImageCollection();
+			cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { 
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populateImages&aModelID=<%=mdl%>" styleClass="subMenuPrimary">IMAGES</a>
+	    <%} else { %>
+		IMAGES
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewMicroarraysAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">MICROARRAYS</a>	
+		<% 
+			l = am.getMicroArrayDataCollection();
+			cc = (l!=null)?l.size():0;
+			if ( cc > 0 ) { 
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populateMicroarrays&aModelID=<%=mdl%>" styleClass="subMenuPrimary">MICROARRAYS</a>	
+	    <%} else { %>
+		MICROARRAYS
+		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="ViewTransplantXenograftAction.do?aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANT/XENOGRAFT</a>	
+		<a href="ViewModelAction.do?unprotected_method=populateTransplantXenograft&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANT/XENOGRAFT</a>	
 	<BR>
 	<BR>
 	<!-- Add checks to see if in submission mode, if so add VIEW MY MODELS option -->

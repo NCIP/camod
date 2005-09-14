@@ -3,13 +3,20 @@
 <TR><TD class=subMenuPrimaryTitle height=22>SEARCH MOUSE MODELS</TD></TR>
 <TR><TD class=subMenuPrimaryItems>
 <DIV>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="searchTableOfContents">&nbsp;&nbsp;TABLE OF CONTENTS</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
+	<html:link styleClass="subMenuPrimary" action="searchTableOfContents">&nbsp;&nbsp;TABLE OF CONTENTS</html:link>
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="searchSimple">&nbsp;&nbsp;SIMPLE SEARCH</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
+	<html:link styleClass="subMenuPrimary" action="searchSimple">&nbsp;&nbsp;SIMPLE SEARCH</html:link>
 	<BR>	
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="searchAdvanced">&nbsp;&nbsp;ADVANCED SEARCH</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
+	<html:link styleClass="subMenuPrimary" action="searchAdvanced">&nbsp;&nbsp;ADVANCED SEARCH</html:link>
 	<BR>
-	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="searchResults">&nbsp;&nbsp;SEARCH RESULTS</html:link>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
+	<html:link styleClass="subMenuPrimary" action="searchDrugScreening">&nbsp;&nbsp;DRUG SCREENING</html:link>
+	<BR>	
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
+	<html:link styleClass="subMenuPrimary" action="searchResults">&nbsp;&nbsp;SEARCH RESULTS</html:link>
 </DIV>
 </TD></TR>
 

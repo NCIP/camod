@@ -1,3 +1,14 @@
+<%@ include file="/jsp/header.jsp" %>
+<%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
+
+<%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
+<%@ page import="gov.nih.nci.camod.domain.Histopathology" %>	
+<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page import="java.util.List" %>
+
+<bean:define id="mdl" name="animalmodel"/>
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -91,3 +102,5 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<%@ include file="/jsp/footer.jsp" %>

@@ -71,7 +71,7 @@
         	table="therapy_publication"
         	inverse="false" 
         	lazy="true" 
-        	cascade="all-delete-orphan">
+        	cascade="all">
         	
         	<key column="therapy_id"/>
         	<many-to-many column="publication_id"

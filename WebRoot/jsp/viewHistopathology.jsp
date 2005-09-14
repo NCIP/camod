@@ -80,7 +80,7 @@
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Onset</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 					<c:out value="${h.ageOfOnset}"/>
 				</td>
 			<tr>			
@@ -88,21 +88,21 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%">
 				<b>Average Weight of Tumor (mg)</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 				<c:out value="${h.weightOfTumor}"/>
 				</td>
 			<tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 					 <c:out value="${h.volumeOfTumor}"/>
 				mg<sup>3</sup></td>
 			<tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence (%)</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 					<c:out value="${h.relationalOperation}"/>&nbsp;
 					<c:out value="${h.tumorIncidenceRate}"/>
 				</td>
@@ -110,14 +110,14 @@
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 				<c:out value="${h.survivalInfo}"/>
 				</td>
 			<tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Macroscopic Lesion</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 					<c:out value="${h.grossDescription}"/>
 				</td>
 			<tr>
@@ -131,7 +131,7 @@
 			
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 				<bean:define id="dc" name="h" property="diseaseCollection"/>
 				<c:forEach var="d" items="${dc}">
 					<c:out value="${d.conceptCode}"/><br>
@@ -150,7 +150,7 @@
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 				<c:out value="${h.comments}"/>
 				</td>
 			<tr>
@@ -172,7 +172,7 @@
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Onset</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 						<c:out value="${m.ageOfOnset}"/>
 					</td>
 				<tr>			
@@ -180,21 +180,21 @@
 				<tr>
 					<td class="resultsBoxWhite" width="25%">
 					<b>Average Weight of Tumor (mg)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 					<c:out value="${m.weightOfTumor}"/>
 					</td>
 				<tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 						 <c:out value="${m.volumeOfTumor}"/>
 					mg<sup>3</sup></td>
 				<tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence (%)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 						<c:out value="${m.relationalOperation}"/>&nbsp;
 						<c:out value="${m.tumorIncidenceRate}"/>
 					</td>
@@ -202,28 +202,28 @@
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 					<c:out value="${m.survivalInfo}"/>
 					</td>
 				<tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Macroscopic Lesion</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 						<c:out value="${m.grossDescription}"/>
 					</td>
 				<tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 					<c:out value="${m.microscopicDescription}"/>
 					</td>
 				<tr>
 				
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 					<bean:define id="dc" name="m" property="diseaseCollection"/>
 					<c:forEach var="d" items="${dc}">
 						<c:out value="${d.conceptCode}"/><br>
@@ -233,7 +233,7 @@
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 						<c:out value="${m.geneticAlteration.observation}"/>
 						&nbsp; Method - &nbsp;
 						<c:out value="${m.geneticAlteration.methodOfObservation}"/>
@@ -242,7 +242,7 @@
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 					<c:out value="${m.comments}"/>
 					</td>
 				<tr>

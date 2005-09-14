@@ -241,6 +241,10 @@
 			path="/jsp/searchSimple.jsp"></forward>
 		
 		<forward
+			name="searchDrugScreening"
+			path="/jsp/searchDrugScreening.jsp"></forward>
+
+		<forward
 			name="searchTableOfContents"
 			path="/jsp/searchTableOfContents.jsp"></forward>
 		
@@ -260,6 +264,70 @@
 			name="viewModel"
 			path="/jsp/viewModel.jsp"></forward>
 		
+		<forward
+			name="viewCarcinogenicInterventions"
+			path="/jsp/viewCarcinogenicInterventions.jsp"></forward>
+		
+		<forward
+			name="viewCellLines"
+			path="/jsp/viewCellLines.jsp"></forward>
+		
+		<forward
+			name="viewEngineeredTransgene"
+			path="/jsp/viewEngineeredTransgene.jsp"></forward>
+		
+		<forward
+			name="viewGeneticDescription"
+			path="/jsp/viewGeneticDescription.jsp"></forward>
+		
+		<forward
+			name="viewGenomicSegment"
+			path="/jsp/viewGenomicSegment.jsp"></forward>
+		
+		<forward
+			name="viewHistopathology"
+			path="/jsp/viewHistopathology.jsp"></forward>
+		
+		<forward
+			name="viewImages"
+			path="/jsp/viewImages.jsp"></forward>
+		
+		<forward
+			name="viewInducedMutation"
+			path="/jsp/viewInducedMutation.jsp"></forward>
+		
+		<forward
+			name="viewMicroarrays"
+			path="/jsp/viewMicroarrays.jsp"></forward>
+		
+		<forward
+			name="viewModelCharacteristics"
+			path="/jsp/viewModelCharacteristics.jsp"></forward>
+		
+		<forward
+			name="viewModelMenu"
+			path="/jsp/viewModelMenu.jsp"></forward>
+		
+		<forward
+			name="viewPublications"
+			path="/jsp/viewPublications.jsp"></forward>
+		
+		<forward
+			name="viewSpontaneousMutation"
+			path="/jsp/viewSpontaneousMutation.jsp"></forward>
+		
+		<forward
+			name="viewTargetedModification"
+			path="/jsp/viewTargetedModification.jsp"></forward>
+		
+		<forward
+			name="viewTherapeuticApproaches"
+			path="/jsp/viewTherapeuticApproaches.jsp"></forward>
+		
+		<forward
+			name="viewTransplantXenograft"
+			path="/jsp/viewTransplantXenograft.jsp"></forward>
+				
 		<forward
 			name="zoomifyImage"
 			path="/jsp/zoomifyImage.jsp"></forward>
@@ -791,6 +859,11 @@
 			parameter="/jsp/searchSimple.jsp" />
 		
 		<action
+			path="/searchDrugScreening"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchDrugScreening.jsp" />
+
+		<action
 			path="/searchTableOfContents"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/searchTableOfContents.jsp" />
@@ -833,94 +906,14 @@
 	        input="/simpleSearch">    
     </action>
 
-    <action path="/viewModelAction"
+    <action path="/ViewModelAction"
 	        type="gov.nih.nci.camod.webapp.action.ViewModelAction"
 	        scope="request"
-	        parameter="method"
+	        parameter="unprotected_method"
    	        unknown="false"
 	        validate="false" >
     </action>
     
-     <action 
-         path="/ViewModelCharacteristicsAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateModelCharacteristics"
-         scope="request"
-         validate="false">
-     </action>
-
-     <action 
-         path="/ViewGeneticDescriptionAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateEngineeredGene"
-         scope="request"
-         validate="false">
-     </action>
-    
-     <action 
-         path="/ViewCarcinogenicInterventionsAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateCarcinogenicInterventions"
-         scope="request"
-         validate="false">
-     </action>
-    
-     <action 
-         path="/ViewPublicationsAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populatePublications"
-         scope="request"
-         validate="false">
-     </action>
-
-     <action 
-         path="/ViewHistopathologyAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateHistopathology"
-         scope="request"
-         validate="false">
-     </action>
-
-     <action 
-         path="/ViewTherapeuticApproachesAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateTherapeuticApproaches"
-         scope="request"
-         validate="false">
-     </action>
-
-     <action 
-         path="/ViewCellLinesAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateCellLines"
-         scope="request"
-         validate="false">
-     </action>
-
-     <action 
-         path="/ViewImagesAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateImages"
-         scope="request"
-         validate="false">
-     </action>
-
-     <action 
-         path="/ViewMicroarraysAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateMicroarrays"
-         scope="request"
-         validate="false">
-     </action>
-
-     <action 
-         path="/ViewTransplantXenograftAction"  
-         type="gov.nih.nci.camod.webapp.action.ViewModelAction"
-         parameter="populateTransplantXenograft"
-         scope="request"
-         validate="false">
-     </action>
-
      <!-- AssociatedExpressionForm -->     
      <!-- CellLineForm --> 
          

@@ -45,20 +45,20 @@
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Species</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<bean:write name="mdl" property="species.scientificName"/>
+				<c:out value="${mdl.species.scientificName}"/>
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
-				<bean:write name="mdl" property="species.ethnicityStrain"/>
+			<td class="GreyBoxRightEnd" width="80%">&nbsp;
+				<c:out value="${mdl.species.ethnicityStrain}"/>
 			</td>
 		</tr>		
 		
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Experimental Design</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">			
+			<td class="WhiteBoxRightEnd" width="80%">&nbsp;
 				<P>
 					<bean:write name="mdl" property="experimentDesign"/>
 				</P>			
@@ -69,15 +69,15 @@
 			<td class="GreyBox" width="20%"><b>Phenotype</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<P>
-					<bean:write name="mdl" property="phenotype.description"/>
+				<c:out value="${mdl.phenotype.description}"/>
 				</P>		
 			</td>
 		</tr>		
 
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
-				<bean:write name="mdl" property="phenotype.sexDistribution.type"/>
+			<td class="WhiteBoxRightEnd" width="80%">&nbsp;
+				<c:out value="${mdl.phenotype.sexDistribution.type}"/>
 			</td>
 		</tr>		               
         

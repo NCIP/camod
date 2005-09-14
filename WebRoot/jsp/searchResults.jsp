@@ -63,7 +63,7 @@
 							<%= intIdx %> 
 					</td>
 					<td class="<%= tdClass %>" width="32%">
-						<a href="ViewModelCharacteristicsAction.do?aModelID=<%=aModel.getId()%>">
+						<a href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<%=aModel.getId()%>">
 							<bean:write name="aModel"
 								   property="modelDescriptor" 
 								   filter="true"/> 

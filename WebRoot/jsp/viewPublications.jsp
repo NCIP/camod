@@ -35,32 +35,39 @@
 			</tr>
 			
 			<bean:define id="pubColl" name="mdl" property="publicationCollection"/>
-			<c:forEach var="p" items="${pubColl}">
-			<!-- Use code to generate Search Results similiar in format to the following static results -->			
+			<c:forEach var="p" items="${pubColl}" varStatus="stat">
 			<tr>
-				<td class="resultsBoxWhite" width="10%">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+				<td class="<c:out value="${tdClass}"/>" width="10%">
 					<c:out value="${p.publicationStatus.name}"/>
 				</td>
-				<td class="resultsBoxWhite" width="15%">
+				<td class="<c:out value="${tdClass}"/>" width="15%">
 					<c:out value="${p.authors}"/>
 				</td>
-				<td class="resultsBoxWhite" width="30%">
+				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:out value="${p.title}"/>
 				</td>
-				<td class="resultsBoxWhite" width="10%">
+				<td class="<c:out value="${tdClass}"/>" width="10%">
 					<c:out value="${p.journal}"/>
 				</td>
-				<td class="resultsBoxWhite" width="5%">
+				<td class="<c:out value="${tdClass}"/>" width="5%">
 					<c:out value="${p.year}"/>
 				</td>
-				<td class="resultsBoxWhite" width="10%">
+				<td class="<c:out value="${tdClass}"/>" width="10%">
 					<c:out value="${p.volume}"/>
 				</td>
-				<td class="resultsBoxWhite" width="10%">
+				<td class="<c:out value="${tdClass}"/>" width="10%">
 					<c:out value="${p.startPage}"/> - 
 					<c:out value="${p.endPage}"/> 
 				</td>
-				<td class="resultsBoxWhiteEnd" width="10%">
+				<td class="<c:out value="${tdClass}"/>End" width="10%">
 					<a href="">
 					<IMG src="images/pubmed_70.gif" align="middle">
 					</a>
