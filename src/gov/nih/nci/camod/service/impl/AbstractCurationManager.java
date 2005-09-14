@@ -17,7 +17,7 @@ import org.w3c.dom.*;
  */
 public abstract class AbstractCurationManager implements CurationManager {
 
-    protected final Log log = LogFactory.getLog(MailUtilityImpl.class);
+    protected final Log log = LogFactory.getLog(AbstractCurationManager.class);
 
     private static final String ACTION_TOKENS = ":,=";
 

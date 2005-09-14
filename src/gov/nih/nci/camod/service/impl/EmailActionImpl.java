@@ -3,6 +3,7 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.CurateableAction;
+import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
 import java.util.Map;
@@ -82,7 +83,7 @@ public class EmailActionImpl extends BaseCurateableAction {
 
             try {
                 if (theRecipients.length > 0) {
-                    MailUtilityImpl.sendMail(theRecipients, theMailSubject, theMailText, UserManagerSingleton
+                    MailUtil.sendMail(theRecipients, theMailSubject, theMailText, UserManagerSingleton
                             .instance().getEmailForController());
                 } else {
                     log.warn("No e-mail address assigned to user: " + thePerson.getUsername());
@@ -99,7 +100,10 @@ public class EmailActionImpl extends BaseCurateableAction {
 }
 
 /*
- * $Log: not supported by cvs2svn $ Revision 1.3 2005/09/13 19:18:46 georgeda
+ * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/09/13 20:26:35  georgeda
+ * More cleanup
+ * Revision 1.3 2005/09/13 19:18:46 georgeda
  * Email updates and CSM integration Revision 1.2 2005/09/12 18:22:11 georgeda
  * Curation changes and addition of e-mail
  */
