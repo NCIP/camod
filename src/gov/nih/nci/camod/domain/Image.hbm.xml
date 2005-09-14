@@ -40,6 +40,11 @@
         	column="staining" 
         	type="string"/>
         	
+        <!-- stainingUnctrlVocab -->
+          <property name="stainingUnctrlVocab" 
+        	column="staining_unctrl_vocab" 
+        	type="string"/>      
+        	
         <!-- fileServerLocation -->
         <property name="fileServerLocation" 
         	column="file_server_location" 

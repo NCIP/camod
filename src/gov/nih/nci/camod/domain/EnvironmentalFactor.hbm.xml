@@ -33,10 +33,20 @@
         	column="type" 
         	type="string"/>
         
+        <!-- typeUnctrlVocab -->
+         <property name="typeUnctrlVocab" 
+        	column="type_unctrl_vocab" 
+        	type="string"/>       
+        
         <!-- name -->
         <property name="name" 
         	column="name" 
         	type="string"/>
+        	
+        <!-- nameUnctrlVocab -->
+        <property name="nameUnctrlVocab" 
+        	column="name_unctrl_vocab" 
+        	type="string"/>        
         	
         <!-- CASNumber -->
         <property name="casNumber" 

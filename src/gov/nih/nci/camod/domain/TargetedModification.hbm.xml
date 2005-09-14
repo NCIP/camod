@@ -32,6 +32,11 @@
         	column="gene_id" 
         	type="string"/>
         	
+	<!-- modTypeUnctrlVocab -->
+        <property name="modTypeUnctrlVocab" 
+        	column="mod_type_unctrl_vocab" 
+        	type="string"/>	
+        	
         <!-- modificationTypeCollection (many-to-many bidirectional) -->
         <!-- Note: this collection will be used to synchronize state with the database. -->
         <bag name="modificationTypeCollection" 

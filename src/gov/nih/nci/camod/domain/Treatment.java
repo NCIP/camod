@@ -22,6 +22,7 @@ public class Treatment extends BaseObject implements Serializable {
 	private String regimen;
 	private String dosage;
 	private String administrativeRoute;
+	private String adminRouteUnctrlVocab;
 	private String ageAtTreatment;
 	private SexDistribution sexDistribution;
 	
@@ -49,6 +50,18 @@ public class Treatment extends BaseObject implements Serializable {
 	public void setAdministrativeRoute(String administrativeRoute) {
 		this.administrativeRoute = administrativeRoute;
 	}
+	/**
+	 * @return Returns the adminRouteUnctrlVocab.
+	 */
+	public String getAdminRouteUnctrlVocab() {
+		return adminRouteUnctrlVocab;
+	}
+	/**
+	 * @param adminRouteUnctrlVocab The adminRouteUnctrlVocab to set.
+	 */
+	public void setAdminRouteUnctrlVocab(String adminRouteUnctrlVocab) {
+		this.adminRouteUnctrlVocab = adminRouteUnctrlVocab;
+	}	
 	/**
 	 * @return Returns the ageAtTreatment.
 	 */
@@ -97,7 +110,7 @@ public class Treatment extends BaseObject implements Serializable {
 	public void setRegimen(String regimen) {
 		this.regimen = regimen;
 	}
-	/**
+	/** 
 	 * @see java.lang.Object#equals(Object)
 	 */
 	public boolean equals(Object object) {
@@ -110,7 +123,8 @@ public class Treatment extends BaseObject implements Serializable {
 				rhs.regimen).append(this.dosage, rhs.dosage).append(
 				this.sexDistribution, rhs.sexDistribution).append(this.id,
 				rhs.id).append(this.administrativeRoute,
-				rhs.administrativeRoute).isEquals();
+				rhs.administrativeRoute).append(this.adminRouteUnctrlVocab,
+						rhs.adminRouteUnctrlVocab).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
@@ -118,7 +132,8 @@ public class Treatment extends BaseObject implements Serializable {
 	public int hashCode() {
 		return new HashCodeBuilder(-1737623555, 1630365737).append(this.ageAtTreatment).append(
 				this.regimen).append(this.dosage).append(this.sexDistribution)
-				.append(this.id).append(this.administrativeRoute).toHashCode();
+				.append(this.id).append(this.administrativeRoute)
+				.append(this.adminRouteUnctrlVocab).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -128,6 +143,7 @@ public class Treatment extends BaseObject implements Serializable {
 				this.sexDistribution).append("id", this.id).append("regimen",
 				this.regimen).append("ageAtTreatment", this.ageAtTreatment)
 				.append("dosage", this.dosage).append("administrativeRoute",
-						this.administrativeRoute).toString();
+						this.administrativeRoute)
+						.append("adminRoute_unctrl_vocab", this.adminRouteUnctrlVocab).toString();
 	}
 }

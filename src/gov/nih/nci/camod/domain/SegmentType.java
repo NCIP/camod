@@ -20,6 +20,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class SegmentType extends BaseObject implements Serializable {
 	private Long id;
 	private String name;
+	private String nameUnctrlVocab;	
 	
 	/**
 	 * @return Returns the id.
@@ -46,6 +47,18 @@ public class SegmentType extends BaseObject implements Serializable {
 		this.name = name;
 	}
 	/**
+	 * @return Returns the nameUnctrlVocab.
+	 */
+	public String getNameUnctrlVocab() {
+		return nameUnctrlVocab;
+	}
+	/**
+	 * @param nameUnctrlVocab The nameUnctrlVocab to set.
+	 */
+	public void setNameUnctrlVocab(String nameUnctrlVocab) {
+		this.nameUnctrlVocab = nameUnctrlVocab;
+	}	
+	/**
 	 * @see java.lang.Object#equals(Object)
 	 */
 	public boolean equals(Object object) {
@@ -53,21 +66,23 @@ public class SegmentType extends BaseObject implements Serializable {
 			return false;
 		}
 		SegmentType rhs = (SegmentType) object;
-		return new EqualsBuilder().append(
-				this.name, rhs.name).append(this.id, rhs.id).isEquals();
+		return new EqualsBuilder().append(this.name, rhs.name)
+			.append(this.nameUnctrlVocab, rhs.nameUnctrlVocab).append(this.id, rhs.id).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-1323997925, -46474621).append(this.name).append(this.id)
+		return new HashCodeBuilder(-1323997925, -46474621).append(this.name)
+			.append(this.nameUnctrlVocab).append(this.id)
 				.toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return new ToStringBuilder(this).append("name", this.name).append("id",
+		return new ToStringBuilder(this).append("name", this.name)
+			.append("name_unctrl_vocab", this.nameUnctrlVocab).append("id",
 				this.id).toString();
 	}
 }

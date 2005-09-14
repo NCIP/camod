@@ -23,6 +23,7 @@ public class TargetedModification extends EngineeredGene {
 	private String blastocystName;
 	private String geneId;
 	private List modificationTypeCollection = new ArrayList();
+	private String modTypeUnctrlVocab;
 	
 	/**
 	 * @return Returns the modificationTypeCollection.
@@ -42,6 +43,18 @@ public class TargetedModification extends EngineeredGene {
 	public void addModificationType(ModificationType modificationType) {
 		modificationType.getTargetedModificationCollection().add(this);
 		modificationTypeCollection.add(modificationType);
+	}
+	/**
+	 * @return Returns the modTypeUnctrlVocab.
+	 */
+	public String getModTypeUnctrlVocab() {
+		return modTypeUnctrlVocab;
+	}
+	/**
+	 * @param modTypeUnctrlVocab The modTypeUnctrlVocab to set.
+	 */
+	public void setModTypeUnctrlVocab(String modTypeUnctrlVocab) {
+		this.modTypeUnctrlVocab = modTypeUnctrlVocab;
 	}	
 	/**
 	 * @return Returns the geneId.
@@ -79,7 +92,7 @@ public class TargetedModification extends EngineeredGene {
 	public void setEsCellLineName(String esCellLineName) {
 		this.esCellLineName = esCellLineName;
 	}
-	/**
+	/** 
 	 * @see java.lang.Object#equals(Object)
 	 */
 	public boolean equals(Object object) {
@@ -90,8 +103,9 @@ public class TargetedModification extends EngineeredGene {
 		return new EqualsBuilder().appendSuper(super.equals(object))
 				.append(this.modificationTypeCollection,
 						rhs.modificationTypeCollection).append(
-						this.esCellLineName, rhs.esCellLineName).append(
-						this.geneId, rhs.geneId).append(this.blastocystName,
+						this.esCellLineName, rhs.esCellLineName)
+						.append(this.modTypeUnctrlVocab, rhs.modTypeUnctrlVocab)
+						.append(this.geneId, rhs.geneId).append(this.blastocystName,
 						rhs.blastocystName).isEquals();
 	}
 	/**
@@ -100,7 +114,8 @@ public class TargetedModification extends EngineeredGene {
 	public int hashCode() {
 		return new HashCodeBuilder(1377742101, -963966355).appendSuper(
 				super.hashCode()).append(this.modificationTypeCollection)
-				.append(this.esCellLineName).append(this.geneId).append(
+				.append(this.esCellLineName).append(this.geneId)
+				.append(this.modTypeUnctrlVocab).append(
 						this.blastocystName).toHashCode();
 	}
 	/**
@@ -109,17 +124,17 @@ public class TargetedModification extends EngineeredGene {
 	public String toString() {
 		return new ToStringBuilder(this).append("conditionality",
 				this.getConditionality()).append("name", this.getName())
-				.append("expressionFeatureCollection",
-						this.getExpressionFeatureCollection()).append(
-						"esCellLineName", this.esCellLineName).append("id",
-						this.getId()).append("comments", this.getComments())
+				.append("expressionFeatureCollection", this.getExpressionFeatureCollection())
+				.append("esCellLineName", this.esCellLineName)
+				.append("id", this.getId()).append("comments", this.getComments())
 				.append("image", this.getImage()).append("cabioId",
 						this.getCabioId()).append("mutationIdentifier",
 						this.getMutationIdentifier()).append("blastocystName",
 						this.blastocystName).append(
 						"modificationTypeCollection",
-						this.modificationTypeCollection).append("geneId",
-						this.geneId).append("genotypeSummary",
+						this.modificationTypeCollection)
+						.append("modType_unctrl_vocab", this.modTypeUnctrlVocab)
+						.append("geneId", this.geneId).append("genotypeSummary",
 						this.getGenotypeSummary()).toString();
 	}
 }

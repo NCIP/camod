@@ -28,5 +28,11 @@
         <property name="name" 
         	column="name" 
         	type="string"/>
+        	
+        <!-- nameUnctrlVocab -->
+         <property name="nameUnctrlVocab" 
+        	column="name_unctrl_vocab" 
+        	type="string"/>       
+        
 	</class>
 </hibernate-mapping>

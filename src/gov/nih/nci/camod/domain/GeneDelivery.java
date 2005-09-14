@@ -20,6 +20,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class GeneDelivery extends BaseObject implements Serializable {
 	private Long id;
 	private String viralVector;
+	private String viralVectorUnctrlVocab;
 	private String geneInVirus;
 	private Organ organ;
 	private Treatment treatment;
@@ -84,8 +85,20 @@ public class GeneDelivery extends BaseObject implements Serializable {
 	public void setViralVector(String viralVector) {
 		this.viralVector = viralVector;
 	}
-	
 	/**
+	 * @return Returns the viralVectorUnctrlVocab.
+	 */
+	public String getViralVectorUnctrlVocab() {
+		return viralVectorUnctrlVocab;
+	}
+	/**
+	 * @param viralVectorUnctrlVocab The viralVectorUnctrlVocab to set.
+	 */
+	public void setViralVectorUnctrlVocab(String viralVectorUnctrlVocab) {
+		this.viralVectorUnctrlVocab = viralVectorUnctrlVocab;
+	}	
+	
+	/** _unctrl_vocab
 	 * @see java.lang.Object#equals(Object)
 	 */
 	public boolean equals(Object object) {
@@ -95,9 +108,10 @@ public class GeneDelivery extends BaseObject implements Serializable {
 		GeneDelivery rhs = (GeneDelivery) object;
 		return new EqualsBuilder().append(
 				this.geneInVirus, rhs.geneInVirus).append(this.treatment,
-				rhs.treatment).append(this.organ, rhs.organ).append(
-				this.viralVector, rhs.viralVector).append(this.id, rhs.id)
-				.isEquals();
+				rhs.treatment).append(this.organ, rhs.organ)
+				.append(this.viralVector, rhs.viralVector)
+				.append(this.viralVectorUnctrlVocab, rhs.viralVectorUnctrlVocab)				
+				.append(this.id, rhs.id).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
@@ -105,7 +119,7 @@ public class GeneDelivery extends BaseObject implements Serializable {
 	public int hashCode() {
 		return new HashCodeBuilder(651543349, -512038163).append(this.geneInVirus).append(
 				this.treatment).append(this.organ).append(this.viralVector)
-				.append(this.id).toHashCode();
+				.append(this.viralVectorUnctrlVocab).append(this.id).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -113,7 +127,8 @@ public class GeneDelivery extends BaseObject implements Serializable {
 	public String toString() {
 		return new ToStringBuilder(this).append("id", this.id).append(
 				"geneInVirus", this.geneInVirus).append("organ", this.organ)
-				.append("treatment", this.treatment).append("viralVector",
-						this.viralVector).toString();
+				.append("treatment", this.treatment)
+				.append("viralVector",this.viralVector)
+				.append("viralVector_unctrl_vocab",this.viralVectorUnctrlVocab).toString();
 	}
 }

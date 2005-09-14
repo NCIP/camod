@@ -22,6 +22,7 @@ public class Image extends BaseObject implements Serializable {
 	private String title;
 	private String description;
 	private String staining;
+	private String stainingUnctrlVocab;	
 	private String fileServerLocation;
 	private Availability availability;
 	
@@ -86,6 +87,18 @@ public class Image extends BaseObject implements Serializable {
 		this.staining = staining;
 	}
 	/**
+	 * @return Returns the stainingUnctrlVocab.
+	 */
+	public String getStainingUnctrlVocab() {
+		return stainingUnctrlVocab;
+	}
+	/**
+	 * @param stainingUnctrlVocab The stainingUnctrlVocab to set.
+	 */
+	public void setStainingUnctrlVocab(String stainingUnctrlVocab) {
+		this.stainingUnctrlVocab = stainingUnctrlVocab;
+	}	
+	/**
 	 * @return Returns the title.
 	 */
 	public String getTitle() {
@@ -109,7 +122,8 @@ public class Image extends BaseObject implements Serializable {
 				this.availability, rhs.availability).append(this.title,
 				rhs.title).append(this.description, rhs.description).append(
 				this.fileServerLocation, rhs.fileServerLocation).append(
-				this.id, rhs.id).append(this.staining, rhs.staining).isEquals();
+				this.id, rhs.id).append(this.staining, rhs.staining)
+				.append(this.stainingUnctrlVocab, rhs.stainingUnctrlVocab).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
@@ -117,7 +131,8 @@ public class Image extends BaseObject implements Serializable {
 	public int hashCode() {
 		return new HashCodeBuilder(1070912003, -540974217).append(this.availability).append(this.title)
 				.append(this.description).append(this.fileServerLocation)
-				.append(this.id).append(this.staining).toHashCode();
+				.append(this.id).append(this.staining)
+				.append(this.stainingUnctrlVocab).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -126,7 +141,8 @@ public class Image extends BaseObject implements Serializable {
 		return new ToStringBuilder(this).append("fileServerLocation",
 				this.fileServerLocation).append("id", this.id).append(
 				"description", this.description).append("availability",
-				this.availability).append("title", this.title).append(
-				"staining", this.staining).toString();
+				this.availability).append("title", this.title)
+				.append("staining", this.staining)
+				.append("staining_unctrl_vocab", this.stainingUnctrlVocab).toString();
 	}
 }

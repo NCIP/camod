@@ -29,6 +29,7 @@ public class Xenograft extends AbstractCancerModel {
 	private String cellAmount;
 	private Date harvestDate;
 	private String graftType;
+	private String graftTypeUnctrlVocab;
 	private TumorCode tumorCode;
 	private List invivoResultCollection = new ArrayList();
 	private Taxon originSpecies;
@@ -107,6 +108,18 @@ public class Xenograft extends AbstractCancerModel {
 	public void setGraftType(String graftType) {
 		this.graftType = graftType;
 	}
+	/**
+	 * @return Returns the graftTypeUnctrlVocab.
+	 */
+	public String getGraftTypeUnctrlVocab() {
+		return graftTypeUnctrlVocab;
+	}
+	/**
+	 * @param graftTypeUnctrlVocab The graftTypeUnctrlVocab to set.
+	 */
+	public void setGraftTypeUnctrlVocab(String graftTypeUnctrlVocab) {
+		this.graftTypeUnctrlVocab = graftTypeUnctrlVocab;
+	}	
 	/**
 	 * @return Returns the harvestDate.
 	 */
@@ -206,7 +219,7 @@ public class Xenograft extends AbstractCancerModel {
 	public void setTumorCode(TumorCode tumorCode) {
 		this.tumorCode = tumorCode;
 	}
-	/**
+	/**  
 	 * @see java.lang.Object#equals(Object)
 	 */
 	public boolean equals(Object object) {
@@ -218,9 +231,10 @@ public class Xenograft extends AbstractCancerModel {
 				this.originSpecies, rhs.originSpecies).append(this.tumorCode,
 				rhs.tumorCode).append(this.invivoResultCollection,
 				rhs.invivoResultCollection).append(this.graftType,
-				rhs.graftType).append(this.geneticManipulation,
-				rhs.geneticManipulation).append(this.administrativeSite,
-				rhs.administrativeSite).append(this.cellAmount, rhs.cellAmount)
+				rhs.graftType).append(this.graftTypeUnctrlVocab, rhs.graftTypeUnctrlVocab)
+				.append(this.geneticManipulation, rhs.geneticManipulation)
+				.append(this.administrativeSite, rhs.administrativeSite)
+				.append(this.cellAmount, rhs.cellAmount)
 				.append(this.atccNumber, rhs.atccNumber).append(
 						this.modificationDescription,
 						rhs.modificationDescription).append(
@@ -239,7 +253,8 @@ public class Xenograft extends AbstractCancerModel {
 				this.graftType).append(this.geneticManipulation).append(
 				this.administrativeSite).append(this.cellAmount).append(
 				this.atccNumber).append(this.modificationDescription).append(
-				this.parentalCellLineName).append(this.organ).append(
+				this.parentalCellLineName).append(this.organ)
+				.append(this.graftTypeUnctrlVocab).append(
 				this.harvestDate).append(this.name).append(this.hostSpecies)
 				.toHashCode();
 	}
@@ -260,6 +275,7 @@ public class Xenograft extends AbstractCancerModel {
 				.append("species", this.getSpecies())
 				.append("state", this.getState())
 				.append("graftType", this.graftType)
+				.append("graftType_unctrl_vocab", this.graftTypeUnctrlVocab)
 				.append("harvestDate", this.harvestDate)
 				.append("name", this.name)
 				.append("parentalCellLineName", this.parentalCellLineName)

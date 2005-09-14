@@ -60,6 +60,11 @@
         <!-- graftType -->
         <property name="graftType" 
         	column="graft_type" 
+        	type="string"/>
+        
+        <!-- graftTypeUnctrlVocab -->
+        <property name="graftTypeUnctrlVocab" 
+        	column="graft_type_unctrl_vocab" 
         	type="string"/>        
         
         <!-- tumorCode (many-to-one unidirectional) -->

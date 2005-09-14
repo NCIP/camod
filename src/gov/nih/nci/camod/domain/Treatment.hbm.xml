@@ -39,6 +39,11 @@
         	column="administrative_route" 
         	type="string"/>	
         
+        <!-- adminRouteUnctrlVocab -->
+        <property name="adminRouteUnctrlVocab" 
+        	column="admin_route_unctrl_vocab" 
+        	type="string"/>	        
+        
         <!-- ageAtTreatment -->
         <property name="ageAtTreatment" 
         	column="age_at_treatment" 
