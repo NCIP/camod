@@ -9,7 +9,8 @@ import gov.nih.nci.camod.domain.Phenotype;
 import gov.nih.nci.camod.domain.SexDistribution;
 import gov.nih.nci.camod.domain.Taxon;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.util.EmailMessage;
+import gov.nih.nci.camod.service.impl.UserManagerSingleton;
+import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 
 import java.text.SimpleDateFormat;
@@ -51,6 +52,7 @@ public final class AnimalModelAction extends BaseAction {
 																"\n\t breedingNotes: " + modelChar.getBreedingNotes() + 
 																"\n\t email: " + modelChar.getEmail() + 
 																"\n\t ethinicityStrain: " + modelChar.getEthinicityStrain() +
+																"\n\t otherEthinicityStrain: " + modelChar.getOtherEthinicityStrain() +
 																"\n\t experimentDesign: " + modelChar.getExperimentDesign() + 
 																"\n\t isToolMouse: " + modelChar.getIsToolMouse() + 
 																"\n\t modelDescriptor: " + modelChar.getModelDescriptor() +
@@ -93,19 +95,19 @@ public final class AnimalModelAction extends BaseAction {
 		//Strain
 		taxon.setEthnicityStrain( modelChar.getEthinicityStrain() );
 		
-		 if ( modelChar.getOtherEthinicityStrain() != null || ! modelChar.getOtherEthinicityStrain().equals( "" ) ) 
+		 if ( modelChar.getOtherEthinicityStrain() != null ) 
 		 {
 			System.out.println( "<AnimalModelAction saveNewModel> Someone entered in a new Strain " + modelChar.getOtherEthinicityStrain() );
 			System.out.println( "<AnimalModelAction saveNewModel> Sending a notice email to : " );
 			
-			//call a email function
-			EmailMessage msg = new EmailMessage();
-			String strNewStrainMessage = "A new strain was entered " + modelChar.getOtherEthinicityStrain();
 			
-			// TODO: Send to multiple Recipients
-			//(server, sender, recipient, subject, messageBody)
-			msg.sendEmailMessage( Constants.Email.SERVER, Constants.Email.SENDER, Constants.Email.RECIPIENT, "Test Message subject", strNewStrainMessage );
+	// TODO: Change email message		
+			String theMailSubject = "New Strain Added";
+			String theMailText = "All your base are belong to us.";
+			String recipients[] = { "schroedln@mail.nih.gov" };
 			
+            MailUtil.sendMail( recipients, theMailSubject, theMailText, UserManagerSingleton.instance().getEmailForController() );
+            
 			//set flag, add to strains
 			//TODO: Edit dropdown to not include flagged settings... display only if directly connected to current model
 		}
