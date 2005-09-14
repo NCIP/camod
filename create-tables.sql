@@ -107,6 +107,7 @@ create table abs_cancer_model (
    cell_amount varchar2(255),
    harvest_date date,
    graft_type varchar2(255),
+   graft_type_unctrl_vocab varchar2(255),
    tumor_code_id number(19,0),
    origin_species_id number(19,0),
    host_species_id number(19,0),
@@ -204,6 +205,7 @@ create table cell_line (
    comments varchar2(2000),
    experiment varchar2(2000),
    name varchar2(255),
+   name_unctrl_vocab varchar2(255),
    results varchar2(255),
    organ_id number(19,0),
    primary key (cell_line_id)
@@ -285,6 +287,7 @@ create table engineered_gene (
    description varchar2(255),
    es_cell_line_name varchar2(255),
    blastocyst_name varchar2(255),
+   mod_type_unctrl_vocab varchar2(255),
    primary key (engineered_gene_id)
 );
 create table env_fac_ind_mutation (
@@ -296,7 +299,9 @@ create table env_factor (
    env_factor_id number(19,0) not null,
    env_factor_type varchar2(255) not null,
    type varchar2(255),
+   type_unctrl_vocab varchar2(255),
    name varchar2(255),
+   name_unctrl_vocab varchar2(255),
    cas_number varchar2(255),
    nsc_number number(19,0),
    is_cmap_agent number(1,0),
@@ -323,6 +328,7 @@ create table gen_seg_segment_type (
 create table gene_delivery (
    gene_delivery_id number(19,0) not null,
    viral_vector varchar2(255),
+   viral_vector_unctrl_vocab varchar2(255),
    gene_in_virus varchar2(255),
    organ_id number(19,0) unique,
    treatment_id number(19,0) unique,
@@ -376,6 +382,7 @@ create table image (
    title varchar2(255),
    description varchar2(4000),
    staining varchar2(255),
+   staining_unctrl_vocab varchar2(255),
    file_server_location varchar2(255),
    availability_id number(19,0),
    primary key (image_id)
@@ -437,6 +444,7 @@ create table nomenclature (
 create table organ (
    organ_id number(19,0) not null,
    name varchar2(255),
+   name_unctrl_vocab varchar2(255),
    concept_code varchar2(255),
    primary key (organ_id)
 );
@@ -526,6 +534,7 @@ create table screening_result (
 create table segment_type (
    segment_type_id number(19,0) not null,
    name varchar2(255),
+   name_unctrl_vocab varchar2(255),
    primary key (segment_type_id)
 );
 create table sex_distribution (
@@ -586,6 +595,7 @@ create table treatment (
    regimen varchar2(255),
    dosage varchar2(255),
    administrative_route varchar2(255),
+   admin_route_unctrl_vocab varchar2(255),
    age_at_treatment varchar2(255),
    sex_distribution_id number(19,0),
    primary key (treatment_id)
