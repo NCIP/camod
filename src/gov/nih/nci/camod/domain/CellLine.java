@@ -25,7 +25,6 @@ public class CellLine extends BaseObject implements Serializable {
 	private String comments;
 	private String experiment;
 	private String name;
-	private String nameUnctrlVocab;	
 	private String results;
 	private List publicationCollection = new ArrayList();
 	private Organ organ;	
@@ -91,18 +90,6 @@ public class CellLine extends BaseObject implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return Returns the nameUnctrlVocab.
-	 */
-	public String getNameUnctrlVocab() {
-		return nameUnctrlVocab;
-	}
-	/**
-	 * @param nameUnctrlVocab The nameUnctrlVocab to set.
-	 */
-	public void setNameUnctrlVocab(String nameUnctrlVocab) {
-		this.nameUnctrlVocab = nameUnctrlVocab;
-	}	
-	/**
 	 * @return Returns the publicationCollection.
 	 */
 	public List getPublicationCollection() {
@@ -144,7 +131,7 @@ public class CellLine extends BaseObject implements Serializable {
 		return new EqualsBuilder().append(
 				this.experiment, rhs.experiment)
 				.append(this.comments, rhs.comments).append(this.organ, rhs.organ).append(
-				this.publicationCollection, rhs.publicationCollection).append(this.nameUnctrlVocab, rhs.nameUnctrlVocab)
+				this.publicationCollection, rhs.publicationCollection)
 				.append(this.name, rhs.name).append(this.results, rhs.results).append(
 				this.id, rhs.id).isEquals();
 	}
@@ -154,7 +141,7 @@ public class CellLine extends BaseObject implements Serializable {
 	public int hashCode() {
 		return new HashCodeBuilder(-1563857285, 1875579981).append(this.experiment).append(this.comments)
 				.append(this.organ).append(this.publicationCollection)
-				.append(this.name).append(this.nameUnctrlVocab).append(this.results).append(this.id)
+				.append(this.name).append(this.results).append(this.id)
 				.toHashCode();
 	}
 	/**
@@ -162,9 +149,8 @@ public class CellLine extends BaseObject implements Serializable {
 	 */
 	public String toString() {
 		return new ToStringBuilder(this).append("experiment", this.experiment)
-				.append("name", this.name).append("id", this.id).append(
-						"comments", this.comments).append("name_unctrl_vocab", this.nameUnctrlVocab)
-						.append("publicationCollection", this.publicationCollection)
+				.append("name", this.name).append("id", this.id).append("comments", this.comments)
+				.append("publicationCollection", this.publicationCollection)
 				.append("organ", this.organ).append("results", this.results)
 				.toString();
 	}
