@@ -205,7 +205,6 @@ create table cell_line (
    comments varchar2(2000),
    experiment varchar2(2000),
    name varchar2(255),
-   name_unctrl_vocab varchar2(255),
    results varchar2(255),
    organ_id number(19,0),
    primary key (cell_line_id)
@@ -444,7 +443,6 @@ create table nomenclature (
 create table organ (
    organ_id number(19,0) not null,
    name varchar2(255),
-   name_unctrl_vocab varchar2(255),
    concept_code varchar2(255),
    primary key (organ_id)
 );
