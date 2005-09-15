@@ -29,7 +29,7 @@ public class XenograftForm extends BaseForm implements Serializable {
 	// This form does not include properties from the parent class of Xenograft,
 	// AbstractCancerModel
 	protected String name;
-	protected String ATTCNumber;
+	protected String ATCCNumber;
 	protected String parentalCellLineName;
 	protected String ageAtTreatment;
 	protected String cellAmount;
@@ -54,16 +54,16 @@ public class XenograftForm extends BaseForm implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return Returns the ATTCNumber.
+	 * @return Returns the ATCCNumber.
 	 */
-	public String getATTCNumber() {
-		return ATTCNumber;
+	public String getATCCNumber() {
+		return ATCCNumber;
 	}
 	/**
-	 * @param ATTCNumber The ATTCNumber to set.
+	 * @param ATCCNumber The ATCCNumber to set.
 	 */
-	public void setATTCNumber(String ATTCNumber) {
-		this.ATTCNumber = ATTCNumber;
+	public void setATCCNumber(String ATCCNumber) {
+		this.ATCCNumber = ATCCNumber;
 	}	
 	/**
 	 * @return Returns the parentalCellLineName.
