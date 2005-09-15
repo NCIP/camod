@@ -26,35 +26,35 @@ public class CellLineForm extends BaseForm implements Serializable {
 	 */
 	public CellLineForm() {}
 	
-	protected String name;
-	protected String otherName;
+	protected String cellLineName;
+	protected String organName;
 	protected String experiment;
 	protected String results;
 	protected String comments;
 
 	/**
-	 * @return Returns the name.
+	 * @return Returns the cellLineName.
 	 */
-	public String getName() {
-		return name;
+	public String getCellLineName() {
+		return cellLineName;
 	}
 	/**
-	 * @param name The name to set.
+	 * @param cellLineName The cellLineName to set.
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setCellLineName(String cellLineName) {
+		this.cellLineName = cellLineName;
 	}
 	/**
-	 * @return Returns the otherName.
+	 * @return Returns the organName.
 	 */
-	public String getOtherName() {
-		return otherName;
+	public String getOrganName() {
+		return organName;
 	}
 	/**
-	 * @param otherName The otherName to set.
+	 * @param organName The organName to set.
 	 */
-	public void setOtherName(String otherName) {
-		this.otherName = otherName;
+	public void setOrganName(String organName) {
+		this.organName = organName;
 	}	
 	/**
 	 * @return Returns the experiment.

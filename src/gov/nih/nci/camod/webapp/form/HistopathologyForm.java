@@ -23,8 +23,8 @@ public class HistopathologyForm extends BaseForm implements Serializable {
 	 */
 	public HistopathologyForm() {}
 	
-	protected String name;
-	protected String otherName;	
+	protected String organName;
+	protected String diseaseName;	
 	protected String ageOfOnset;
 	protected String weightOfTumor;
 	protected String volumeOfTumor;
@@ -38,28 +38,28 @@ public class HistopathologyForm extends BaseForm implements Serializable {
 	protected String comments;
 
 	/**
-	 * @return Returns the name.
+	 * @return Returns the organName.
 	 */
-	public String getName() {
-		return name;
+	public String getOrganName() {
+		return organName;
 	}
 	/**
-	 * @param name The name to set.
+	 * @param organName The organName to set.
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setOrganName(String organName) {
+		this.organName = organName;
 	}
 	/**
-	 * @return Returns the otherName.
+	 * @return Returns the diseaseName.
 	 */
-	public String getOtherName() {
-		return otherName;
+	public String getDiseaseName() {
+		return diseaseName;
 	}
 	/**
-	 * @param otherName The otherName to set.
+	 * @param diseaseName The diseaseName to set.
 	 */
-	public void setOtherName(String otherName) {
-		this.otherName = otherName;
+	public void setDiseaseName(String diseaseName) {
+		this.diseaseName = diseaseName;
 	}	
 	/**
 	 * @return Returns the ageOfOnset.
