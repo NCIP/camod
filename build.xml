@@ -28,19 +28,10 @@
 		TARGET: copy_resource_directory
 		Copies all the bundle resources to the WEB-INF/classes/ folder
 	-->
-	<target name="copy_resource_directory" depends="compile">
+	<target name="copy_resource_directory" depends="compile">	
 		<copy todir="${build.classes.dir}">
-			<fileset dir="${source.dir}">
-				<include name="*.xml" />
-				<include name="*.properties" />
-				<include name="*.dtd" />
-				<include name="*.xsd" />
-			</fileset>
-		</copy>
-
-		<copy todir="${build.classes.dir}">
-			<fileset dir="${source.dir}">
-				<include name="*.xml" />
+			<fileset dir="${source.dir}">                                
+                                <include name="**/*.xml" />
 				<include name="*.properties" />
 				<include name="*.dtd" />
 				<include name="*.xsd" />
@@ -62,6 +53,7 @@
 			<zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
 			<zipfileset dir="${webapp.dir}/styles" prefix="styles" />
 			<zipfileset dir="${webapp.dir}/config" prefix="config" />
+                        <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
 			<webinf dir="${webapp.dir}/WEB-INF"/>
 			<classes dir="${build.classes.dir}" />
     	</war>
