@@ -29,11 +29,6 @@
         	column="name" 
         	type="string"/>
         	
-        <!-- nameUnctrlVocab -->
-        <property name="nameUnctrlVocab" 
-        	column="name_unctrl_vocab" 
-        	type="string"/>        	
-        	
         <!-- conceptCode -->
         <property name="conceptCode" 
         	column="concept_code" 

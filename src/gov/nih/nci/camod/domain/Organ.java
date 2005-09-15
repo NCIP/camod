@@ -22,7 +22,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Organ extends BaseObject implements Serializable {
 	private Long id;
 	private String name;
-	private String nameUnctrlVocab;	
 	private String conceptCode;
 	private List histopathologyCollection = new ArrayList();
 	
@@ -82,18 +81,6 @@ public class Organ extends BaseObject implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return Returns the nameUnctrlVocab.
-	 */
-	public String getNameUnctrlVocab() {
-		return nameUnctrlVocab;
-	}
-	/**
-	 * @param nameUnctrlVocab The nameUnctrlVocab to set.
-	 */
-	public void setNameUnctrlVocab(String nameUnctrlVocab) {
-		this.nameUnctrlVocab = nameUnctrlVocab;
-	}	
-	/**
 	 * @see java.lang.Object#equals(Object)
 	 */
 	public boolean equals(Object object) {
@@ -103,16 +90,15 @@ public class Organ extends BaseObject implements Serializable {
 		Organ rhs = (Organ) object;
 		return new EqualsBuilder().append(
 				this.histopathologyCollection, rhs.histopathologyCollection)
-				.append(this.name, rhs.name).append(this.nameUnctrlVocab, rhs.nameUnctrlVocab)
-				.append(this.conceptCode, rhs.conceptCode).append(this.id, rhs.id).isEquals();
+				.append(this.name, rhs.name).append(this.conceptCode, rhs.conceptCode)
+				.append(this.id, rhs.id).isEquals();
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
 		return new HashCodeBuilder(-5760707, 335803633).append(this.histopathologyCollection)
-			.append(this.name).append(this.conceptCode).append(this.id)
-				.append(this.nameUnctrlVocab).toHashCode();
+			.append(this.name).append(this.conceptCode).append(this.id).toHashCode();
 	}
 	/**
 	 * @see java.lang.Object#toString()
@@ -120,7 +106,6 @@ public class Organ extends BaseObject implements Serializable {
 	public String toString() {
 		return new ToStringBuilder(this).append("name", this.name).append(
 				"conceptCode", this.conceptCode).append("id", this.id).append(
-				"histopathologyCollection", this.histopathologyCollection)
-				.append("name_unctrl_vocab", this.nameUnctrlVocab).toString();
+				"histopathologyCollection", this.histopathologyCollection).toString();
 	}
 }
