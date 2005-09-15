@@ -164,7 +164,8 @@ public class Constants {
         public static final String NUTRITIONFACTORDROP = "nutritionfactordrop.db";
         public static final String RADIATIONDROP = "radiationdrop.db";
         public static final String SURGERYDROP = "surgerydrop.db";
-        public static final String VIRUSDROP = "virusdrop.db";	
+        public static final String VIRUSDROP = "virusdrop.db";
+        public static final String VIRALVECTORDROP = "viralvectordrop.db";
     }    
     
     /**
@@ -200,7 +201,6 @@ public class Constants {
     public static final String GENOMIC_SEG_CNT = "genomicSegCnt";
     public static final String TARGETED_MOD_CNT = "targetedModCnt";
     public static final String INDUCED_MUT_CNT = "inducedMutCnt";
-
     public static final String CLINICAL_PROTOCOLS = "clinProtocols";
 
 
