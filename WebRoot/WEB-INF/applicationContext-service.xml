@@ -65,4 +65,7 @@
     
     <!-- userManager -->
     <bean id="userManager" class="gov.nih.nci.camod.service.impl.UserManagerImpl"/>
+    
+    <!--  organManager -->
+    <bean id="organManager" class="gov.nih.nci.camod.service.impl.OrganManagerImpl"/>    
 </beans>
