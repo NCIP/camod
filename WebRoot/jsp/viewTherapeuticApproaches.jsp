@@ -297,77 +297,56 @@
 						<tr><td>&nbsp;</td></tr>
 					</c:otherwise>
 				</c:choose>
-				<tr><td>&nbsp;</td></tr>
 			</c:forEach>
 			<!-- end yeast data -->
 
+			<!-- invivo / Xenograft data-->
+			<c:set var="invivoColl" value="${invivoData[nscnum]}"/>
+ 			<c:choose>
+				<c:when test="${not empty invivoColl}">
+				  	<tr><td colspan="2">
+					<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+						<tr>
+							<td class="formTitleBlue" colspan="3" align="center">
+								In Vivo Screening Data Summary: <br/>
+								<b>NSC: &nbsp;&nbsp;<c:out value="${t.agent.nscNumber}"/><br/>
+								CAS: &nbsp;&nbsp; <c:out value="${t.agent.casNumber}"/><br/>
+								Hydrazinecarbothioamide, 2-[[5-(1-oxopropoxy)-2-pyridinyl]methylene]
+								</b>
+							</td>
+						</tr>
+						<tr>
+							<td class="greySubTitle" colspan="3">For approximately thirty years, the NCI used <em>in vivo </em>animal tumor models to screen compounds for potential antitumor activity.
+							</td>
+						</tr>
+						<c:forEach var="ivd" items="${invivoColl}" varStatus="stat2">
+							<c:choose>
+								<c:when test = "${stat2.count % 2 == 0}">
+									<c:set var="tdClass" value="resultsBoxWhite"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="tdClass" value="resultsBoxGrey"/>
+								</c:otherwise>
+							</c:choose>
+							<tr>
+								<td align="right" class="<c:out value="${tdClass}"/>"><c:out value="${stat2.count}"/></td>
+								<td class="<c:out value="${tdClass}"/>">
+								<c:out value="${ivd[1]}"/> in <c:out value="${ivd[2]}"/>
+								</td>
+								<td align="right" class="<c:out value="${tdClass}End"/>"> &nbsp;&nbsp;
+								<A href="detail3.htm?<c:out value="${ivd[0]}"/>" target="_blank">
+								<c:out value="${ivd[3]}"/></a>
+								</td>
+						  	</tr>
+					  	</c:forEach>
+					</table></td></tr>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
+			<!-- end invivo /xenograft data-->
+
             </c:forEach>
-
-		  	<tr><td colspan="2">
-				<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-					<tr>
-						<td class="formTitleBlue" colspan="11" align="center">
-							Publicly available data from the NCI Yeast Anticancer Drug Screen
-							<br>Stage 2 - Dose Response
-						</td>
-					</tr>
-					<tr>
-						<td class="greySubTitle" colspan="11">
-						<a href="javascript:expdesign2()"><br>Experimental Design - Stage 2 Testing</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:strains0()">
-							Yeast Strains used for Stage 2 Experiments
-						</a>
-						<br>
-					 	</td>
-					</tr>
-					<tr>
-						<td rowspan=2 class="greySubTitleLeft">Strain  /  Dosage <br>A= AveIng, D=DiffInh</td>
-						<td colspan=2 class="greySubTitleLeft">1.2<font face="symbol">m</font>M</td>
-						<td colspan=2 class="greySubTitleLeft">3.7 <font face="symbol">m</font>M</td>
-						<td colspan=2 class="greySubTitleLeft">11 <font face="symbol">m</font>M</td>
-						<td colspan=2 class="greySubTitleLeft">33 <font face="symbol">m</font>M</td>
-						<td colspan=2 class="greySubTitle">100 <font face="symbol">m</font>M</td>
-					</tr>
-					<tr>
-						<td class="greySubTitleLeft">A</td>
-						<td class="greySubTitleLeft">D</td>
-						<td class="greySubTitleLeft">A</td>
-						<td class="greySubTitleLeft">D</td>
-						<td class="greySubTitleLeft">A</td>
-						<td class="greySubTitleLeft">D</td>
-						<td class="greySubTitleLeft">A</td>
-						<td class="greySubTitleLeft">D</td>
-						<td class="greySubTitleLeft">A</td>
-						<td class="greySubTitle">D</td>
-					</tr>
-					<tr>
-						<td class="greySubTitleLeft">wt1</td>
-						<td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td>
-						<td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td>
-						<td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td>
-						<td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td>
-						<td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td>
-					</tr>
-					<tr><td class="greySubTitleLeft">rad18</td>
-						<td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-					<tr><td class="greySubTitleLeft">rad14</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-				
-					<tr><td class="greySubTitleLeft">rad50</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-					<tr><td class="greySubTitleLeft">rad52</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-				
-					<tr><td class="greySubTitleLeft">bub3</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-					<tr><td class="greySubTitleLeft">CLN2oe</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-					<tr><td class="greySubTitleLeft">mec2</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-				
-					<tr><td class="greySubTitleLeft">wt2</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-					<tr><td class="greySubTitleLeft">mgt1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-					<tr><td class="greySubTitleLeft">mlh1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-				
-					<tr><td class="greySubTitleLeft">sgs1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-					<tr><td class="greySubTitleLeft">rad50 EPP+</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhite">1</td><td class="resultsBoxWhite">1</td> <td class="resultsBoxWhiteEnd">1</td></tr>
-				</table>
-				</td></tr>
-			<tr><td>&nbsp;</td></tr>
-
 			<tr>
 				<td class="WhiteBox" width="100%" colspan="2"> <a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
 			</tr>

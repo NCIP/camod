@@ -202,6 +202,8 @@ public class Constants {
     public static final String TARGETED_MOD_CNT = "targetedModCnt";
     public static final String INDUCED_MUT_CNT = "inducedMutCnt";
     public static final String CLINICAL_PROTOCOLS = "clinProtocols";
+    public static final String YEAST_DATA = "yeastData";
+    public static final String INVIVO_DATA = "invivoData";
 
 
     // /////////////////////////////////////////////////////////////
