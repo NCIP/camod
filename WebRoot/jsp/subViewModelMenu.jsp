@@ -14,7 +14,7 @@
 <DIV>
 	<bean:parameter id="mdl" name="aModelID"/>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
-		<a href="/ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<%=mdl%>" styleClass="subMenuPrimary">MODEL CHARACTERISTICS</a>
+		<a href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID=<%=mdl%>" styleClass="subMenuPrimary">MODEL CHARACTERISTICS</a>
 	<BR>	
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
