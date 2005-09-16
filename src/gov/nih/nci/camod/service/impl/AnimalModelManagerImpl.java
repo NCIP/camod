@@ -1,69 +1,104 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * @author dgeorge
+ * 
+ * $Id: AnimalModelManagerImpl.java,v 1.8 2005-09-16 15:52:57 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
+import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
+ * Manages fetching/saving/updating of animal models
  */
 public class AnimalModelManagerImpl extends BaseManager implements AnimalModelManager {
 
-    public List getAll() {
-        List animalModels = null;
+    /**
+     * Get all of the animal models in the DB
+     * 
+     * @return the list of all animal models
+     * 
+     * @exception throws
+     *                an Exception if an error occurred
+     */
+    public List getAll() throws Exception {
+
+        log.trace("Entering getAll");
+
+        List theAnimalModels = null;
 
         try {
-            animalModels = Search.query(AnimalModel.class);
+            theAnimalModels = Search.query(AnimalModel.class);
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.getAnimalModels");
-            e.printStackTrace();
+            log.error("Exception occurred in getAll", e);
+            throw e;
         }
 
-        return animalModels;
+        log.trace("Exiting getAll");
+
+        return theAnimalModels;
     }
 
-    public List getAll(String username) {
+    /**
+     * Get all of the animal models submitted by a username
+     * 
+     * @param inUsername
+     *            the username the models are submitted by
+     * 
+     * @return the list of animal models
+     * 
+     * @exception throws
+     *                an Exception if an error occurred
+     */
+    public List getAllByUser(String inUsername) throws Exception {
+
+        log.trace("Entering getAll");
+
         // The list of AnimalModels to be returned
-        List animalModels = null;
+        List theAnimalModels = null;
 
         // The following two objects are needed for eQBE.
-        AnimalModel animalModel = new AnimalModel();
-        Person principalInvestigator = new Person();
-        principalInvestigator.setUsername(username);
-        animalModel.setPrincipalInvestigator(principalInvestigator);
-
-        // Apply evaluators to object properties
-        Evaluation evaluation = new Evaluation();
-        evaluation.addEvaluator("principalInvestigator.username", Evaluator.ILIKE_ANYWHERE);
+        AnimalModel theAnimalModel = new AnimalModel();
+        Person theSubmitter = new Person();
+        theSubmitter.setUsername(inUsername);
+        theAnimalModel.setSubmitter(theSubmitter);
 
         try {
-            animalModels = Search.query(animalModel, evaluation);
+            theAnimalModels = Search.query(theAnimalModel);
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.getAnimalModels(String username)");
-            e.printStackTrace();
+            log.error("Exception occurred in getAll", e);
+            throw e;
         }
 
-        return animalModels;
+        log.trace("Exiting getAllByState");
+
+        return theAnimalModels;
     }
 
-    public List getAllByState(String inState) {
+    /**
+     * Get all of the animal models of a specific state
+     * 
+     * @param inState
+     *            the state to query for
+     * 
+     * @return the list of animal models
+     * 
+     * @exception Exception
+     *                if an error occurred
+     */
+    public List getAllByState(String inState) throws Exception {
+
+        log.trace("Entering getAllByState");
 
         // The list of AnimalModels to be returned
         List theAnimalModels = new ArrayList();
@@ -72,121 +107,208 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         AnimalModel theAnimalModel = new AnimalModel();
         theAnimalModel.setState(inState);
 
-        // Apply evaluators to object properties
-        Evaluation theEvaluation = new Evaluation();
-        theEvaluation.addEvaluator("animalModel.state", Evaluator.EQUAL);
-
         try {
-            String theSQL = "select abs_cancer_model_id from abs_cancer_model where state = '" + inState + "'";
-
-            ResultSet theRS = Search.query(theSQL, new Object[0]);
-
-            while (theRS.next()) {
-                theAnimalModels
-                        .add(Search.queryById(AnimalModel.class, new Long(theRS.getLong("abs_cancer_model_id"))));
-            }
+            theAnimalModels = Search.query(theAnimalModel);
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.getAnimalModels(String username)");
-            e.printStackTrace();
+            log.error("Exception occurred in getAllByState", e);
+            throw e;
         }
+
+        log.trace("Exiting getAllByState");
 
         return theAnimalModels;
     }
 
-    public AnimalModel get(String id) {
+    /**
+     * Get a specific animal model
+     * 
+     * @param id
+     *            The unique id for the model
+     * 
+     * @return the animal model if found, null otherwise
+     * @throws Exception
+     * 
+     * @exception Exception
+     *                if an error occurred
+     */
+    public AnimalModel get(String id) throws Exception {
+
+        log.trace("Entering get");
+
         AnimalModel animalModel = null;
 
         try {
+            log.debug("Querying for id: " + id);
             animalModel = (AnimalModel) Search.queryById(AnimalModel.class, new Long(id));
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in AnimalModelManagerImpl.getAnimalModel(String id)");
-            pe.printStackTrace();
+            log.error("Exception occurred in getAnimalModel", pe);
+            throw pe;
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.getAnimalModel(String id)");
-            e.printStackTrace();
+            log.error("Exception occurred in getAnimalModel", e);
+            throw e;
         }
 
+        log.trace("Exiting get");
         return animalModel;
     }
 
-    public void save(AnimalModel animalModel) {
+    /**
+     * Save an animal model
+     * 
+     * @param id
+     *            The unique id for the model
+     * 
+     * @exception Exception
+     *                if an error occurred
+     */
+    public void save(AnimalModel inAnimalModel) throws Exception {
+
+        log.trace("Entering save");
+
         try {
-            Persist.save(animalModel);
+            // Begin an transaction
+            HibernateUtil.beginTransaction();
+
+            // Save the related objects
+            // NOTE: Will be fixed when cascading updates are correctly
+            // implemented
+            log.debug("Saving availability");
+            Persist.save(inAnimalModel.getAvailability());
+
+            log.debug("Saving phenotype");
+            Persist.save(inAnimalModel.getPhenotype());
+
+            log.debug("Saving species");
+            Persist.save(inAnimalModel.getSpecies());
+
+            log.debug("Saving PI");
+            Persist.save(inAnimalModel.getPrincipalInvestigator());
+
+            log.debug("Saving submitter");
+            Persist.save(inAnimalModel.getSubmitter());
+
+            // Save the base animal model
+            log.debug("Saving animal model");
+            Persist.save(inAnimalModel);
+
+            // Commit all changes or none
+            HibernateUtil.commitTransaction();
+
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in AnimalModelManagerImpl.saveAnimalModel");
-            pe.printStackTrace();
+            HibernateUtil.rollbackTransaction();
+            log.error("PersistenceException in save", pe);
+            throw pe;
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.saveAnimalModel");
-            e.printStackTrace();
+            HibernateUtil.rollbackTransaction();
+            log.error("Exception in save", e);
+            throw e;
         }
     }
 
-    public Long save(Person person, ContactInfo contactInfo, AnimalModel animalModel, Taxon taxon, Phenotype phenotype,
-            SexDistribution sexDistribution, Availability availability) {
+    /**
+     * Update an animal model and create an associated log entry
+     * 
+     * @param id
+     *            The unique id for the model
+     * @throws Exception
+     * 
+     * @exception Exception
+     *                if an error occurred
+     */
+    public void updateAndAddLog(AnimalModel inAnimalModel, Log inLog) throws Exception {
 
-        Long id = null; // Return id to the caller
+        log.trace("Entering updateAndAddLog");
 
         try {
 
-            // See if there's already a person that exists
-            Person thePerson = PersonManagerSingleton.instance().getByUsername(person.getUsername());
+            // Make sure they get saved together
+            HibernateUtil.beginTransaction();
+            Persist.save(inAnimalModel);
+            Persist.save(inLog);
+            HibernateUtil.commitTransaction();
 
-            if (thePerson != null) {
-                person = thePerson;
-            } else {
-                person.addContactInfo(contactInfo);
-                PersonManagerSingleton.instance().save(person);
-            }
-
-            // Save taxon
-            Persist.save(taxon);
-
-            // See if there's already a sex distribution that exists, otherwise
-            // save a new one
-            SexDistribution theSexDistribution = SexDistributionManagerSingleton.instance().getByType(
-                    sexDistribution.getType());
-
-            if (theSexDistribution != null) {
-                sexDistribution = theSexDistribution;
-            } else {
-                SexDistributionManagerSingleton.instance().save(sexDistribution);
-            }
-
-            phenotype.setSexDistribution(sexDistribution);
-            Persist.save(phenotype);
-
-            // Save availability
-            Persist.save(availability);
-
-            // Save animalModel
-            animalModel.setPrincipalInvestigator(person);
-            animalModel.setSpecies(taxon);
-            animalModel.setPhenotype(phenotype);
-            animalModel.setAvailability(availability);
-            Persist.save(animalModel);
-            id = animalModel.getId(); // Get the id of the just saved
-            // AnimalModel
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in AnimalModelManagerImpl.saveAnimalModel");
-            pe.printStackTrace();
+            HibernateUtil.rollbackTransaction();
+            log.error("PersistenceException in save", pe);
+            throw pe;
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.saveAnimalModel");
-            e.printStackTrace();
+            HibernateUtil.rollbackTransaction();
+            log.error("Exception in save", e);
+            throw e;
         }
 
-        return id;
+        log.trace("Exiting updateAndAddLog");
     }
 
-    public void remove(String id) {
+    /**
+     * Create a new/unsaved animal model
+     * 
+     * @param inModelCharacteristics
+     *            The values for the model and associated objects
+     * 
+     * @param inUsername
+     *            The submitter
+     * 
+     * @return the created and unsaved AnimalModel
+     */
+    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) {
+
+        log.trace("Entering create");
+
+        AnimalModel theAnimalModel = new AnimalModel();
+
+        log.trace("Exiting create");
+        return populateAnimalModel(inModelCharacteristics, inUsername, theAnimalModel);
+    }
+
+    /**
+     * Update the animal model w/ the new characteristics and save
+     * 
+     * @param inModelCharacteristics
+     *            The new values for the model and associated objects
+     * 
+     * @param inAnimalModel
+     *            The animal model to update
+     */
+    public void update(ModelCharacteristics inModelCharacteristics, AnimalModel inAnimalModel) throws Exception {
+
+        log.trace("Entering update");
+
+        log.debug("Updating animal model: " + inAnimalModel.getId());
+
+        // Populate w/ the new values and save
+        inAnimalModel = populateAnimalModel(inModelCharacteristics, null, inAnimalModel);
+        save(inAnimalModel);
+
+        log.trace("Exiting update");
+    }
+
+    /**
+     * Remove the animal model from the system. Should remove all associated
+     * data as well
+     * 
+     * @param id
+     *            The unique id of the animal model to delete
+     * 
+     * @throws Exception
+     *             An error occurred when attempting to delete the model
+     */
+    public void remove(String id) throws Exception {
+
+        log.trace("Entering remove");
+
         try {
+            log.debug("Removing animal model: " + id);
             Persist.deleteById(AnimalModel.class, new Long(id));
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in AnimalModelManagerImpl.removeAnimalModel");
-            pe.printStackTrace();
+            log.error("Unable to delete model: ", pe);
+            throw pe;
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.removeAnimalModel");
-            e.printStackTrace();
+            log.error("Unable to delete model: ", e);
+            throw e;
         }
+
+        log.trace("Exiting remove");
     }
 
     /**
@@ -196,17 +318,115 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * Note: This method is currently a dummy search method and simply returns
      * all the animal model objects in the database. Searching using eQBE needs
      * to be done.
+     * 
+     * @throws Exception
      */
-    public List search() {
+    public List search() throws Exception {
+
+        log.trace("Entering search");
+
         List animalModels = null;
 
         try {
             animalModels = Search.query(AnimalModel.class);
         } catch (Exception e) {
-            System.out.println("Exception in AnimalModelManagerImpl.search");
-            e.printStackTrace();
+            log.error("Exception occurred searching for models", e);
+            throw e;
         }
 
+        log.trace("Exiting search");
         return animalModels;
+    }
+
+    // Populate the model based on the model characteristics form passed in. It
+    // will update associated
+    // object if they exist, create them if they don't.
+    private AnimalModel populateAnimalModel(ModelCharacteristics inModelCharacteristics, String inUsername,
+            AnimalModel inAnimalModel) {
+
+        log.trace("Entering populateAnimalModel");
+
+        // Handle the person information
+        if (inUsername != null) {
+            Person thePerson = PersonManagerSingleton.instance().getByUsername(inUsername);
+            if (thePerson == null) {
+
+                // Create a new person
+                thePerson = new Person();
+                thePerson.setUsername(inUsername);
+
+                // Add the contact information
+                ContactInfo theContactInfo = new ContactInfo();
+                theContactInfo.setEmail(inModelCharacteristics.getEmail());
+                thePerson.addContactInfo(theContactInfo);
+            }
+
+            inAnimalModel.setSubmitter(thePerson);
+
+            // TODO: Change this to match the real PI
+            inAnimalModel.setPrincipalInvestigator(thePerson);
+        }
+
+        // Set the animal model information
+        inAnimalModel.setIsToolMouse(inModelCharacteristics.getIsToolMouse().equals("yes") ? true : false);
+        inAnimalModel.setUrl(inModelCharacteristics.getUrl());
+        inAnimalModel.setModelDescriptor(inModelCharacteristics.getModelDescriptor());
+        inAnimalModel.setExperimentDesign(inModelCharacteristics.getExperimentDesign());
+
+        // Create/reuse the taxon
+        Taxon theTaxon = inAnimalModel.getSpecies();
+        if (theTaxon == null) {
+            theTaxon = new Taxon();
+        }
+        theTaxon.setScientificName(inModelCharacteristics.getScientificName());
+        theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
+
+        // TODO: Handle other ethnicity strain. Where?
+
+        Phenotype thePhenotype = inAnimalModel.getPhenotype();
+        if (thePhenotype == null) {
+            thePhenotype = new Phenotype();
+        }
+
+        // Get the sex distribution
+        SexDistribution theSexDistribution = SexDistributionManagerSingleton.instance().getByType(
+                inModelCharacteristics.getType());
+
+        // Create the phenotype
+        thePhenotype.setDescription(inModelCharacteristics.getDescription());
+        thePhenotype.setBreedingNotes(inModelCharacteristics.getBreedingNotes());
+        thePhenotype.setSexDistribution(theSexDistribution);
+
+        // Get the availability
+        Availability theAvailability = inAnimalModel.getAvailability();
+
+        // When the model was created
+        if (theAvailability == null) {
+            theAvailability = new Availability();
+        }
+        theAvailability.setEnteredDate(new Date());
+
+        if (inModelCharacteristics.getReleaseDate().equals("immediately")) {
+            theAvailability.setReleaseDate(new Date());
+        } else {
+            // TODO: add popup calender to submitNewModel.jsp and convert the
+            // string to Date object here
+            // modelChar.getCalendarReleaseDate();
+            theAvailability.setReleaseDate(new Date());
+        }
+
+        // By default a new model's state is set to incomplete if it's not set
+        if (inAnimalModel.getState() == null) {
+            inAnimalModel.setState("Incomplete");
+        }
+
+        // Associated the created objects
+        inAnimalModel.setAvailability(theAvailability);
+        inAnimalModel.setPhenotype(thePhenotype);
+        inAnimalModel.setSpecies(theTaxon);
+
+        log.trace("Exiting populateAnimalModel");
+
+        return inAnimalModel;
     }
 }

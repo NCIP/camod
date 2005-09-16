@@ -1,10 +1,10 @@
-/*
- * LoginAction.java
- *
- * Created on June 24, 2005, 11:31 AM
- *
+/**
+ * 
+ * $Id: LoginAction.java,v 1.5 2005-09-16 15:52:55 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
-
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;

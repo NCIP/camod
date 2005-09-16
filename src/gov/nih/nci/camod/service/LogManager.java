@@ -1,3 +1,11 @@
+/**
+ *  @author dgeorge
+ *  
+ *  $Id: LogManager.java,v 1.3 2005-09-16 15:52:54 georgeda Exp $
+ *  
+ *  $Log: not supported by cvs2svn $
+ *  
+ */
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.*;
@@ -11,17 +19,17 @@ import java.util.List;
  */
 public interface LogManager {
 
-    public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inAssignedUser);
+    public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inAssignedUser) throws Exception;
 
-    public Log getCurrentByModel(AnimalModel inModel);
+    public Log getCurrentByModel(AnimalModel inModel) throws Exception;
 
-    public List getAll();
+    public List getAll() throws Exception;
 
-    public Log get(String inId);
+    public Log get(String inId) throws Exception;
 
-    public void save(Log inLog);
+    public void save(Log inLog) throws Exception;
+    
+    public Log create(String inAssignedPersonId, String inModelId, String inState, String inNotes) throws Exception;
 
-    public void save(String inAssignedPersonId, String inModelId, String inState, String inNotes);
-
-    public void remove(String inId);
+    public void remove(String inId) throws Exception;
 }

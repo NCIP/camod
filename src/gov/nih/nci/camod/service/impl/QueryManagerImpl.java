@@ -1,3 +1,11 @@
+/**
+ * @author dgeorge
+ * 
+ * $Id: QueryManagerImpl.java,v 1.3 2005-09-16 15:52:57 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.*;
@@ -107,7 +115,10 @@ public class QueryManagerImpl extends BaseManager {
     }
 }
 /*
- * $Log: not supported by cvs2svn $ Revision 1.1 2005/09/12 18:22:08 georgeda
+ * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/09/13 20:44:55  georgeda
+ * More changes
+ * Revision 1.1 2005/09/12 18:22:08 georgeda
  * Curation changes and addition of e-mail
  * 
  */

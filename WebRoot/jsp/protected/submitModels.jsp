@@ -36,9 +36,13 @@
 						      There are <%= size %> records returned.
 						     <br>						    
 								<logic:messagesPresent>
+								  <br>
+								  <b><font color=red>
 								  <html:messages id="errors">
 									<%=errors %>
 								  </html:messages>
+								  </font></b>
+								  
 								</logic:messagesPresent>						     			
 					      </td>				      
 					      <td>

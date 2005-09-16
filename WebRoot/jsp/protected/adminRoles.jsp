@@ -22,8 +22,23 @@
 						<td align="right"><img src="/camod/images/admin.gif"></td>
 					</tr>
 				</TABLE>
-				</td> 
-			</tr>
+				</tr>
+				<tr>
+	                <logic:messagesPresent>
+	                    <td>
+	                        <TABLE width="100%">
+	                            <tr>
+						        <br>
+								<b><font color=red>
+								    <html:messages id="errors">
+									    <%=errors %>
+								    </html:messages>
+								</font></b>
+				               </tr>
+				           </TABLE>
+				       </td>
+				    </logic:messagesPresent>
+				</tr>
 		</TABLE>
 		</td></tr>
 		<tr><td>

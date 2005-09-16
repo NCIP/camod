@@ -1,7 +1,16 @@
+/**
+ *  @author dgeorge
+ *  
+ *  $Id: ChangeAnimalModelStateAction.java,v 1.7 2005-09-16 15:52:56 georgeda Exp $
+ *  
+ *  $Log: not supported by cvs2svn $
+ *  
+ */
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
@@ -29,7 +38,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
             // Get the curation manager workflow XML
             CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath(
                     "/")
-                    + "/config/CurationConfig.xml");
+                    + Constants.Admin.MODEL_CURATION_WORKFLOW);
 
             // Get the animal model
             AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
@@ -38,30 +47,30 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 
             // Did the id match?
             if (theAnimalModel != null) {
-                
+
                 log.debug("Current state of model: " + theAnimalModel.getState());
-        
+
                 theCurationManager.changeState(theAnimalModel, theForm.getEvent());
-                theAnimalModelManager.save(theAnimalModel);
-                
+
                 log.debug("New state of model: " + theAnimalModel.getState());
-                
-                LogManager theLogManager = (LogManager) getBean("logManager");
 
                 // Save the associated log comment to track the curation state
-                theLogManager.save(theForm.getAssignedTo(), theForm.getModelId(), theAnimalModel.getState(), theForm
-                        .getComment());
-                
+                LogManager theLogManager = (LogManager) getBean("logManager");
+                Log theLog = theLogManager.create(theForm.getAssignedTo(), theForm.getModelId(), theAnimalModel
+                        .getState(), theForm.getComment());
+
+                theAnimalModelManager.updateAndAddLog(theAnimalModel, theLog);
+
+                // Do any association actions since we've sucessfully changed
+                // state
                 HashMap theMap = new HashMap();
                 theMap.put(Constants.FORMDATA, theForm);
-                
-                // Do any association actions since we've sucessfully changed state
                 theCurationManager.applyActionsForState(theAnimalModel, theMap);
             }
         }
-        
+
         log.trace("Exiting ChangeAnimalModelStateAction.execute");
-        
+
         return inMapping.findForward("next");
     }
 }

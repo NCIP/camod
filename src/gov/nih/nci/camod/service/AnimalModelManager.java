@@ -1,48 +1,41 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * 
+ * $Id: AnimalModelManager.java,v 1.5 2005-09-16 15:52:54 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Availability;
-import gov.nih.nci.camod.domain.ContactInfo;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Phenotype;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
 
 import java.util.List;
 
 /**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Interface for the AnimalModelManager class. See implementing classes for
+ * details.
  */
 public interface AnimalModelManager {
-	public List getAll();
-	
-	public List getAll(String username);
-    
-    public List getAllByState(String inState);
-    
-	public AnimalModel get(String id);
-    
-	public void save(AnimalModel animalModel);
-    
-	public Long save(
-    	Person person,
-		ContactInfo contactInfo,
-		AnimalModel animalModel,
-		Taxon taxon,
-		Phenotype phenotype,
-		SexDistribution sexDistribution,
-		Availability availability);
-    
-	public void remove(String id);
-	
-	public List search();
+
+    public List getAll() throws Exception;
+
+    public List getAllByUser(String username) throws Exception;
+
+    public List getAllByState(String inState) throws Exception;
+
+    public AnimalModel get(String id) throws Exception;
+
+    public void save(AnimalModel animalModel) throws Exception;
+
+    public void updateAndAddLog(AnimalModel inAnimalModel, Log inLog) throws Exception;
+
+    public void update(ModelCharacteristics inModelCharacteristics, AnimalModel inAnimalModel) throws Exception;
+
+    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername);
+
+    public void remove(String id) throws Exception;
+
+    public List search() throws Exception;
 }

@@ -1,3 +1,14 @@
+/**
+ *  @author dgeorge
+ *  
+ *  $Id: LogManagerImpl.java,v 1.6 2005-09-16 15:52:57 georgeda Exp $
+ *  
+ *  $Log: not supported by cvs2svn $ 
+ *  Revision 1.5 2005/09/13 20:45:01 georgeda 
+ *  More changes 
+ *  Revision 1.4 2005/09/12 18:22:14 georgeda 
+ *  Curation changes and addition of e-mail
+ */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.*;
@@ -22,8 +33,9 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      * @parameter inUser is the user that the model is assigned to
      * 
      * @return the latest matching Log object. null if not found
+     * @throws Exception
      */
-    public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inUser) {
+    public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inUser) throws Exception {
 
         log.trace("Entering getCurrentByModelAndAssigned");
 
@@ -69,6 +81,10 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 
         } catch (PersistenceException e) {
             log.error("Caught a PersistentException: " + e);
+            throw e;
+        } catch (Exception e) {
+            log.error("Caught an Exception: " + e);
+            throw e;
         }
         log.trace("Exiting getCurrentByModelAndAssigned");
 
@@ -81,8 +97,9 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      * @parameter inModelId is the animal model the Log is associated with
      * 
      * @return the latest matching Log object. null if not found
+     * @throws Exception
      */
-    public Log getCurrentByModel(AnimalModel inModel) {
+    public Log getCurrentByModel(AnimalModel inModel) throws Exception {
 
         log.trace("Entering getCurrentByModel");
         Log theLog = null;
@@ -92,6 +109,10 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 
         } catch (PersistenceException e) {
             log.error("Caught a PersistentException: " + e);
+            throw e;
+        } catch (Exception e) {
+            log.error("Caught an Exception: " + e);
+            throw e;
         }
 
         log.trace("Exiting getCurrentByModel");
@@ -102,8 +123,9 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      * Get all the Log objects in the system
      * 
      * @return all the Log objects in the system
+     * @throws Exception
      */
-    public List getAll() {
+    public List getAll() throws Exception {
 
         log.trace("Entering getAll");
 
@@ -113,12 +135,10 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             theLogs = Search.query(Log.class);
         } catch (PersistenceException pe) {
             log.error("Exception in getAll", pe);
-            System.out.println("PersistenceException in LogManagerImpl.getAll");
-            pe.printStackTrace();
+            throw pe;
         } catch (Exception e) {
             log.error("Exception in getAll", e);
-            System.out.println("Exception in LogManagerImpl.getAll");
-            e.printStackTrace();
+            throw e;
         }
 
         log.trace("Exiting getAll");
@@ -132,8 +152,9 @@ public class LogManagerImpl extends BaseManager implements LogManager {
      * @parameter inId the unique ID for the log object to fetch
      * 
      * @return the specific log object
+     * @throws Exception
      */
-    public Log get(String inId) {
+    public Log get(String inId) throws Exception {
 
         log.trace("Entering get");
 
@@ -143,12 +164,10 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             theLog = (Log) Search.queryById(Log.class, new Long(inId));
         } catch (PersistenceException pe) {
             log.error("Exception in LogManagerImpl.getAll", pe);
-            System.out.println("PersistenceException in LogManagerImpl.get");
-            pe.printStackTrace();
+            throw pe;
         } catch (Exception e) {
             log.error("Exception in LogManagerImpl.getAll", e);
-            System.out.println("Exception in LogManagerImpl.get");
-            e.printStackTrace();
+            throw e;
         }
 
         log.trace("Entering get");
@@ -159,22 +178,26 @@ public class LogManagerImpl extends BaseManager implements LogManager {
     /**
      * Save the log object
      * 
+     * @throws Exception
+     * 
      * @parameter inLog is the log object to save
      */
-    public void save(Log inLog) {
+    public void save(Log inLog) throws Exception {
 
         log.trace("Entering LogManagerImpl.save");
 
         try {
+            // TODO: Commit for now until whole transaction mess it dealt with
+            HibernateUtil.beginTransaction();
             Persist.save(inLog);
+            HibernateUtil.commitTransaction();
+
         } catch (PersistenceException pe) {
             log.error("Exception in save", pe);
-            System.out.println("PersistenceException in LogManagerImpl.save");
-            pe.printStackTrace();
+            throw pe;
         } catch (Exception e) {
             log.error("Exception in save", e);
-            System.out.println("Exception in LogManagerImpl.save");
-            e.printStackTrace();
+            throw e;
         }
 
         log.trace("Exiting LogManagerImpl.save");
@@ -182,15 +205,18 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 
     /**
      * Save the log object
+     * @throws Exception 
      * 
      * @parameter inAssignedPerson is the person who the model is assigned to
      * @parameter inModelId is the model assigned to the person
      * @parameter inState is the current state of the object
      * @parameter inNotes is any note(s) associated w/ the state transition
      */
-    public void save(String inAssignedPerson, String inModelId, String inState, String inNotes) {
+    public Log create(String inAssignedPerson, String inModelId, String inState, String inNotes) throws Exception {
 
-        log.trace("Entering save");
+        log.trace("Entering create");
+
+        Log theLog = new Log();
 
         try {
 
@@ -202,38 +228,30 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             Person theAssignedPerson = PersonManagerSingleton.instance().getByUsername(inAssignedPerson);
             AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(inModelId);
 
-            Log theLog = new Log();
-
             theLog.setCancerModel(theAnimalModel);
             theLog.setSubmitter(theAssignedPerson);
             theLog.setTimestamp((new Date()).toString());
             theLog.setType(inState);
             theLog.setNotes(inNotes);
 
-            // TODO: Commit for now until whole transaction mess it dealt with
-            HibernateUtil.beginTransaction();
-            Persist.save(theLog);
-            HibernateUtil.commitTransaction();
-
-        } catch (PersistenceException pe) {
-            log.error("Exception in save", pe);
-            System.out.println("PersistenceException in LogManagerImpl.save");
-            pe.printStackTrace();
         } catch (Exception e) {
             log.error("Exception in save", e);
-            System.out.println("Exception in LogManagerImpl.save");
-            e.printStackTrace();
+            throw e;
         }
 
-        log.trace("Exiting LogManagerImpl.save");
+        log.trace("Exiting create");
+
+        return theLog;
     }
 
     /**
      * Remove the log object
      * 
+     * @throws Exception
+     * 
      * @parameter inId the unique ID for the log object to remove
      */
-    public void remove(String inId) {
+    public void remove(String inId) throws Exception {
 
         log.trace("Entering remove");
 
@@ -241,19 +259,13 @@ public class LogManagerImpl extends BaseManager implements LogManager {
             log.debug("Removing id: " + inId);
             Persist.deleteById(Log.class, new Long(inId));
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in remove");
-            pe.printStackTrace();
+            log.error("Exception removing a log object: ", pe);
+            throw pe;
         } catch (Exception e) {
-            System.out.println("Exception in remove");
-            e.printStackTrace();
+            log.error("Exception removing a log object: ", e);
+            throw e;
         }
 
         log.trace("Exiting remove");
     }
 }
-
-/*
- * $Log: not supported by cvs2svn $ Revision 1.4 2005/09/12 18:22:14 georgeda
- * Curation changes and addition of e-mail
- * 
- */

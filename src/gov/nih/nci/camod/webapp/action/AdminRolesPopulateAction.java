@@ -1,3 +1,11 @@
+/**
+ * @author dgeorge
+ * 
+ * $Id: AdminRolesPopulateAction.java,v 1.7 2005-09-16 15:52:55 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -12,6 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.*;
 
+/**
+ * 
+ * Used to populate the list of animal models needing action for the various
+ * roles
+ * 
+ */
 public class AdminRolesPopulateAction extends BaseAction {
 
     /**
@@ -77,27 +91,38 @@ public class AdminRolesPopulateAction extends BaseAction {
 
         log.trace("Entering addModelsToRequest");
 
-        // Add all the models by state for a user
-        List theList = inManager.getAllByState(inState);
-        log.debug("Total models for state: " + inState + " size: " + theList.size());
+        try {
+            // Add all the models by state for a user
+            List theList = inManager.getAllByState(inState);
+            log.debug("Total models for state: " + inState + " size: " + theList.size());
 
-        // I found some models in this state
-        if (theList != null && !theList.isEmpty()) {
+            // I found some models in this state
+            if (theList != null && !theList.isEmpty()) {
 
-            // Only add the ones associated to the user
-            List theUserList = getModelsForUser(inUser, theList);
-            if (theUserList.size() > 0) {
-                inRequest.setAttribute(inKey, theUserList);
+                // Only add the ones associated to the user
+                List theUserList = getModelsForUser(inUser, theList);
+                if (theUserList.size() > 0) {
+                    inRequest.setAttribute(inKey, theUserList);
+                }
             }
-        }
+        } catch (Exception e) {
 
+            log.error("Unable to get models for state: " + inState);
+
+            // Encountered an error saving the model.
+            // created a new model successfully
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(inRequest, theMsg);
+
+        }
         log.trace("Exiting addModelsToRequest");
     }
 
     // Get the models for a specific user. We need to check the log table to see
     // if the log entry associated w/ this
     // model and state is associated w/ this user
-    private List getModelsForUser(Person inUser, List inModelList) {
+    private List getModelsForUser(Person inUser, List inModelList) throws Exception {
 
         log.trace("Entering getModelsForUser");
 

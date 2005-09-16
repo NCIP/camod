@@ -1048,7 +1048,15 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="submitNewModel">   	
+	        input="input">  
+	    <forward
+            name="failure"
+            path="/ReturnUserModels.do?method=returnUserModels">
+        </forward>  
+        <forward
+            name="input"
+            path="/AnimalModelPopulateAction.do?method=dropdown">
+        </forward>   	
     </action>    
     
     <action path="/AnimalModelPopulateAction"
@@ -1271,6 +1279,10 @@
    	        unknown="false"
 	        input="/submitModels"
 	        validate="false" >   
+	    <forward
+            name="failure"
+            path="/ReturnUserModels.do?method=returnUserModels">
+        </forward>
     </action>
                 
     <action path="/SetOptionsAction"

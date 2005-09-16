@@ -1,3 +1,10 @@
+/**
+ *  
+ *  $Id: SubmitAction.java,v 1.9 2005-09-16 15:52:55 georgeda Exp $
+ *  
+ *  $Log: not supported by cvs2svn $
+ *  
+ */
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -27,30 +34,37 @@ public class SubmitAction extends BaseAction {
         String modelID = request.getParameter("aModelID");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        AnimalModel am = animalModelManager.get(modelID);
 
-        request.getSession().setAttribute(Constants.MODELID, am.getId().toString());
-        request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
-        request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
+        String theForward = "AnimalModelTreePopulateAction";
 
-        UserManager theUserManager = (UserManager) getBean("userManager");
+        try {
+            AnimalModel am = animalModelManager.get(modelID);
 
-        AnimalModelStateForm theForm = new AnimalModelStateForm();
-        theForm.setModelId(am.getId().toString());
+            request.getSession().setAttribute(Constants.MODELID, am.getId().toString());
+            request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
+            request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
 
-        // Set up the form. Should be only one controller
-        List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.CONTROLLER);
-        theForm.setAssignedTo((String) theRoles.get(0));
-        request.setAttribute("formdata", theForm);
+            UserManager theUserManager = (UserManager) getBean("userManager");
 
-        // Add a message to be displayed in submitModles saying you've deleted a
-        // model
-        // ActionMessages msg = new ActionMessages();
-        // msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-        // "delete.successful" ) );
-        // saveErrors( request, msg );
+            AnimalModelStateForm theForm = new AnimalModelStateForm();
+            theForm.setModelId(am.getId().toString());
 
-        return mapping.findForward("AnimalModelTreePopulateAction");
+            // Set up the form. Should be only one controller
+            List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.CONTROLLER);
+            theForm.setAssignedTo((String) theRoles.get(0));
+            request.setAttribute(Constants.FORMDATA, theForm);
+
+        } catch (Exception e) {
+            log.error("Exception occurred in setModelConstants", e);
+
+            // Encountered an error saving the model.
+            // created a new model successfully
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+
+            theForward = "failure";
+        }
+        return mapping.findForward(theForward);
     }
-
 }

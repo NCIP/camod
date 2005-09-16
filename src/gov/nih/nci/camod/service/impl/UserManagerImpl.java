@@ -1,8 +1,10 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * @author dgeorge
+ * 
+ * $Id: UserManagerImpl.java,v 1.3 2005-09-16 15:52:57 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -16,7 +18,7 @@ import gov.nih.nci.security.exceptions.CSException;
 import java.util.*;
 
 /**
- * @author dgeorge
+ * Implementation of class used to wrap the CSM implementation
  */
 public class UserManagerImpl extends BaseManager implements UserManager {
 
@@ -24,17 +26,20 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
     /**
      * Constructor gets reference to authorization manager
-     * 
      */
     UserManagerImpl() {
+
+        log.trace("Entering UserManagerImpl");
+
         try {
             theAuthorizationMgr = SecurityServiceProvider.getAuthorizationManager(Constants.UPT_CONTEXT_NAME);
         } catch (CSException ex) {
-            System.out.println("CSException " + ex);
+            log.error("Error getting authorization manager", ex);
         } catch (Throwable e) {
-            e.printStackTrace();
+            log.error("Error getting authorization manager", e);
         }
 
+        log.trace("Exiting UserManagerImpl");
     }
 
     /**
@@ -47,6 +52,8 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      */
     public List getRolesForUser(String inUsername) {
 
+        log.trace("Entering getRolesForUser");
+
         List theRoles = new ArrayList();
 
         if (theAuthorizationMgr != null) {
@@ -54,6 +61,9 @@ public class UserManagerImpl extends BaseManager implements UserManager {
             theRoles.add(Constants.Admin.Roles.EDITOR);
             theRoles.add(Constants.Admin.Roles.SCREENER);
         }
+        log.info("User: " + inUsername + " and roles: " + theRoles);
+
+        log.trace("Exiting getRolesForUser");
 
         return theRoles;
     }
@@ -68,12 +78,18 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      */
     public List getUsersForRole(String inRoleName) {
 
+        log.trace("Entering getUsersForRole");
+
         List theUsers = new ArrayList();
 
         if (theAuthorizationMgr != null) {
             theUsers.add("camod_demo");
             theUsers.add("dgeorge");
         }
+
+        log.info("Role: " + inRoleName + " and users: " + theUsers);
+
+        log.trace("Exiting getUsersForRole");
 
         return theUsers;
     }
@@ -88,19 +104,25 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      */
     public String getEmailForUser(String inUsername) {
 
+        log.trace("Entering getEmailForUser");
+
         String theEmail = "";
 
         try {
             User theCurrentUser = theAuthorizationMgr.getUser(inUsername);
 
-            System.out.println("Username: " + theCurrentUser.getUserId() + "\nFirstName: "
-                    + theCurrentUser.getFirstName() + "\nLastName: " + theCurrentUser.getLastName() + "\nPhoneNumber: "
-                    + theCurrentUser.getPhoneNumber() + "\nPassword: " + theCurrentUser.getPassword());
+            log.info("Username: " + theCurrentUser.getUserId() + "\nFirstName: " + theCurrentUser.getFirstName()
+                    + "\nLastName: " + theCurrentUser.getLastName() + "\nPhoneNumber: "
+                    + theCurrentUser.getPhoneNumber() + "\nEmail: " + theCurrentUser.getEmailId());
 
             theEmail = theCurrentUser.getEmailId();
+
         } catch (Exception e) {
             log.warn("Could not fetch user from CSM", e);
         }
+
+        log.trace("Exiting getEmailForUser");
+
         return theEmail;
 
     }
@@ -114,6 +136,8 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * @return the list of users associated with the role
      */
     public String getEmailForController() {
+
+        log.trace("Entering getEmailForController");
 
         String theEmail = "";
 
@@ -129,7 +153,8 @@ public class UserManagerImpl extends BaseManager implements UserManager {
             log.warn("Unable to get controller username: ", e);
         }
 
+        log.trace("Exiting getEmailForController");
+
         return theEmail;
     }
 }
-/* $Log* */
