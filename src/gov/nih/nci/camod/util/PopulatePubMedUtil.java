@@ -2,11 +2,7 @@ package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.domain.Publication;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.util.StringTokenizer;
 
@@ -192,7 +188,7 @@ public class PopulatePubMedUtil implements Runnable{
     public static boolean 	get_AbstractString(String pubmedRecord){
         System.out.println("<PopulatePubMed.java get_AbstractString> Entering...");
         String pubmedAbstract = null;
-        StringBuffer buf = new StringBuffer();
+        
         boolean flag = false;
         if(pubmedRecord != null){
             if(pubmedRecord.indexOf("1: ")!=-1){
@@ -239,9 +235,8 @@ public class PopulatePubMedUtil implements Runnable{
                 }
                 if(firstToken.indexOf(";")!=-1){
                     firstToken = firstToken.substring(0,firstToken.indexOf(";"));
-                } else {
-                    firstToken = firstToken;
                 }
+                
                 if(firstToken.indexOf("-") !=-1){
                     int pageSeparator = firstToken.indexOf("-");
                     int pageLength = firstToken.length();
@@ -293,8 +288,6 @@ public class PopulatePubMedUtil implements Runnable{
                         }
                         
                     } else{
-                        int startPageIndex = pubmedAbstract.indexOf(startPage);
-                        int endPageIndex = pubmedAbstract.indexOf(endPage);
                         int pageIndex = pubmedAbstract.indexOf(startPage+"-"+endPage);
                         int pageIndexlength  = startPage.length() + endPage.length() + 1;
                         titleCol  = pubmedAbstract.substring(pageIndex + pageIndexlength);
@@ -316,9 +309,7 @@ public class PopulatePubMedUtil implements Runnable{
                 if(titleCol.indexOf("; discussion ")!=-1){
                     titleCol = titleCol.substring(titleCol.indexOf("-"),titleCol.length()).trim();
                     titleCol = titleCol.substring(titleCol.indexOf(" "), titleCol.length()).trim();
-                } else {
-                    titleCol = titleCol;
-                }
+                } 
                 
             } else {
                // System.out.println("<PopulatePubMed.java> ---------------HERE----------------");

@@ -8,7 +8,6 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.PublicationStatus;
-import gov.nih.nci.camod.domain.SexDistribution;
 import gov.nih.nci.camod.service.PublicationManager;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;

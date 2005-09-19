@@ -1,17 +1,13 @@
 package gov.nih.nci.camod.util;
 
+import gov.nih.nci.camod.Constants;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import gov.nih.nci.camod.Constants;
-import org.springframework.context.i18n.LocaleContextHolder;
 
 
 /**
@@ -26,7 +22,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  *  Modified by <a href="mailto:dan@getrolling.com">Dan Kibler </a> 
  *   to correct time pattern. Minutes should be mm not MM
  * 	(MM is month). 
- * @version $Revision: 1.2 $ $Date: 2005-08-15 14:19:33 $
+ * @version $Revision: 1.3 $ $Date: 2005-09-19 18:14:24 $
  */
 public class DateUtil {
     //~ Static fields/initializers =============================================
@@ -43,7 +39,6 @@ public class DateUtil {
      */
     public static String getDatePattern() {
         if (defaultDatePattern == null) {
-            Locale locale = LocaleContextHolder.getLocale();
             defaultDatePattern = ResourceBundle.getBundle(Constants.BUNDLE_KEY)
                                                .getString("date.format");
         }
