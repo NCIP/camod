@@ -1,7 +1,7 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
-<script language="JavaScript" src="scripts/EvsTree.js"></script>
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
 <FORM name="input" action="searchResults.do" method="get">
 
@@ -56,11 +56,11 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<a href="javascript:showTissueTree('input', 'mouse', 1)">
+		  	    <a href="javascript:showTissueTree('input', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
+				</a>
 				<INPUT name="organTissueName" type="hidden"/>
 		 		<INPUT name="organTissueCode" type="hidden"/>
-				</a>
 			</td>
 			<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="organ" id="organFieldId" size="25" /></td>
 		</tr>
@@ -70,7 +70,7 @@
 			<td class="formLabel">
 				<label for="field2">Diagnosis</label>
 				&nbsp;
-				<a href="javascript:showDiagnosisTree('input', 'mouse', 2)">
+		  	    <a href="javascript:showDiagnosisTree('input', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>
 				<input type="hidden" name="DiagnosisName"/>

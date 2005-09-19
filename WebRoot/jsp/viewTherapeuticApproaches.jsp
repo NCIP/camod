@@ -19,7 +19,7 @@
 				<td class="formTitle" height="20" colspan="9">
 				Therapeutic Approaches - Model:
 				<c:out value="${mdl.modelDescriptor}"/></td>				
-			</tr>			
+			</tr>
 			<tr>
 				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
 					<c:forEach var="t" items="${mdl.therapyCollection}" 

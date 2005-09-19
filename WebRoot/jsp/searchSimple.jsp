@@ -2,7 +2,7 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
-<script language="JavaScript" src="scripts/EvsTree.js"></script>
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
 <html:form action="SimpleSearchAction.do" focus="keyword">
 
@@ -58,11 +58,11 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<a href="javascript:showTissueTree('simpleSearchForm', 'mouse', 1)">
+		  	    <a href="javascript:showTissueTree('simpleSearchForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
+				</a>
 				<INPUT name="organTissueName" type="hidden"/>
 		 		<INPUT name="organTissueCode" type="hidden"/>
-				</a>
 			</td>
 			<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="organ" id="organFieldId" size="25" /></td>
 		</tr>

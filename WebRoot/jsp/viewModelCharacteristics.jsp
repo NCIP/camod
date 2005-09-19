@@ -11,7 +11,6 @@
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 
 		<tr>
@@ -20,7 +19,6 @@
 				<bean:write name="mdl" property="modelDescriptor"/>
 			</td>
 		</tr>
-		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Model Descriptor</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
@@ -98,46 +96,31 @@
 			</td>
 		</tr>		               
 
-<%      
-	final List avlbty = ((AnimalModel)mdl).getAnimalAvailabilityCollection();
-	final int cc = avlbty.size();
-%>
-
+		<c:if test="${not empty mdl.animalAvailabilityCollection}">
 		<tr><td>&nbsp;</td></tr>
-                
-                <tr>
+        <tr>
 			<td class="formTitle" height="20" colspan="2">Model Availability</td>		
 		</tr>
-		
-		<% if ( cc > 0 ) { %>
-		<logic:iterate id="av" 
-						name="avlbty" 
-						indexId="idx">
-				<% 
-					int intIdx = idx.intValue() + 1;
-					final String tdClass = ((intIdx%2)==0)?"WhiteBox":"GreyBox";
-				%>
-                
-		<tr>
-			<td class="<%= tdClass %>" width="20%">
-				<b>
-					<bean:write name="av" property="name"/>
-					- Stock #:
-					<bean:write name="av" property="stockNumber"/>
-				</b>
-			</td>
-			<td class="<%= tdClass %>End" width="80%">
-				<b>Strain:</b> TBD
-			</td>
-		</tr>
-		
-		</logic:iterate>
-	    <%} else { %>
-		     <TR>
-		  		<TD class="resultsBoxGreyEnd" colspan=4><B><I>No information is available. </I></B> 
-		   		</TD>
-		     </TR>
-		<%}%>		
+		<c:forEach var="av" items="${mdl.animalAvailabilityCollection}" varStatus="stat2">
+			<c:choose>
+				<c:when test = "${stat2.count % 2 == 0}">
+					<c:set var="tdClass" value="resultsBoxWhite"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="tdClass" value="resultsBoxGrey"/>
+				</c:otherwise>
+			</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<b><c:out value="${av.name}"/>- Stock #:<c:out value="${av.stockNumber}"/></b>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="80%">
+					<b>Strain:</b> TBD
+				</td>
+			</tr>
+		</c:forEach>
+		<tr><td>&nbsp;</td></tr>
+		</c:if>
 		<tr>
 			<td class="WhiteBox" width="100%" colspan="2"><a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
 		</tr>

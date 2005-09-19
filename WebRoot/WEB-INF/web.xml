@@ -128,6 +128,9 @@
 		<session-timeout>10</session-timeout>
 	</session-config>
 
+<!--  replace the following lines with a new script that will cache NCI Thesaurus
+      terms provided by caBIO EVS Tree package -->
+<!-- 
 	<servlet>
 		<servlet-name>EvsServlet</servlet-name>
 		<servlet-class>
@@ -140,7 +143,7 @@
 		<servlet-name>EvsServlet</servlet-name>
 		<url-pattern>/treeLoader</url-pattern>
 	</servlet-mapping>>
-
+-->
 
 	<!--
 		To specify mime mappings, create a file named mime-mappings.xml, put it in your project's mergedir.
