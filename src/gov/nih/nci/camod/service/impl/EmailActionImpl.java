@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.6 2005-09-16 15:52:57 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.7 2005-09-19 13:09:24 georgeda Exp $
  * 
- * $Log: not supported by cvs2svn $ Revision 1.5 2005/09/14 12:45:06 georgeda
+ * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/09/16 15:52:57  georgeda
+ * Changes due to manager re-write
+ * Revision 1.5 2005/09/14 12:45:06 georgeda
  * Renamed mail utility
  * 
  * Revision 1.4 2005/09/13 20:26:35 georgeda More cleanup Revision 1.3
@@ -23,7 +26,7 @@ import java.util.Map;
 /**
  * 
  * Action called by the curation workflow that sends an e-mail
- *
+ * 
  */
 public class EmailActionImpl extends BaseCurateableAction {
 
@@ -64,13 +67,12 @@ public class EmailActionImpl extends BaseCurateableAction {
             try {
                 AnimalModelStateForm theForm = (AnimalModelStateForm) inArgs.get(Constants.FORMDATA);
 
+                // Get the various domain objects
                 AnimalModel theAnimalModel = (AnimalModel) inObject;
-
                 Log theLog = LogManagerSingleton.instance().getCurrentByModel(theAnimalModel);
-
                 Person thePerson = (Person) theLog.getSubmitter();
 
-                // Get the e-mail for the user
+                // Get the e-mail for the assigned user
                 String[] theRecipients = { UserManagerSingleton.instance().getEmailForUser(thePerson.getUsername()) };
 
                 // Build the message text
@@ -88,6 +90,12 @@ public class EmailActionImpl extends BaseCurateableAction {
                 } else if (theForm.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
                     theMailSubject = "The editor is requesting more information for the following model: "
                             + theForm.getModelDescriptor();
+
+                    // Special case; we're sending out e-mail to someout outside
+                    // the curation process
+                    Person theSubmitter = (Person) theAnimalModel.getSubmitter();
+                    theRecipients = new String[] { UserManagerSingleton.instance().getEmailForUser(
+                            theSubmitter.getUsername()) };
                 } else if (theForm.getEvent().equals(Constants.Admin.Actions.REJECT)) {
                     theMailSubject = "The following model has been rejected: " + theForm.getModelDescriptor();
                 } else if (theForm.getEvent().equals(Constants.Admin.Actions.APPROVE)) {
