@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class Agent extends EnvironmentalFactor {
 	private Long nscNumber;
-	private boolean isCMAPAgent;
+	private Boolean isCMAPAgent;
 	private String evsId;
 	private String comments;
 	private String source;
@@ -112,13 +112,13 @@ public class Agent extends EnvironmentalFactor {
 	/**
 	 * @return Returns the isCMAPAgent.
 	 */
-	public boolean getIsCMAPAgent() {
+	public Boolean getIsCMAPAgent() {
 		return isCMAPAgent;
 	}
 	/**
 	 * @param isCMAPAgent The isCMAPAgent to set.
 	 */
-	public void setIsCMAPAgent(boolean isCMAPAgent) {
+	public void setIsCMAPAgent(Boolean isCMAPAgent) {
 		this.isCMAPAgent = isCMAPAgent;
 	}
 	/**

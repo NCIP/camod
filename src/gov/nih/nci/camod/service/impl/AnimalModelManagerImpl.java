@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.9 2005-09-19 12:55:24 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.10 2005-09-19 18:13:51 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/09/19 12:55:24  georgeda
+ * Handle empty sex distribution table
+ *
  * Revision 1.8  2005/09/16 15:52:57  georgeda
  * Changes due to manager re-write
  *
@@ -360,6 +363,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 // Create a new person
                 thePerson = new Person();
                 thePerson.setUsername(inUsername);
+                thePerson.setIsPrincipleInvestigator(new Boolean(true));
 
                 // Add the contact information
                 ContactInfo theContactInfo = new ContactInfo();
@@ -367,6 +371,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 thePerson.addContactInfo(theContactInfo);
             }
 
+            System.out.println("The person: " + thePerson.getUsername());
             inAnimalModel.setSubmitter(thePerson);
 
             // TODO: Change this to match the real PI
@@ -374,7 +379,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
 
         // Set the animal model information
-        inAnimalModel.setIsToolMouse(inModelCharacteristics.getIsToolMouse().equals("yes") ? true : false);
+        boolean isToolMouse = inModelCharacteristics.getIsToolMouse().equals("yes") ? true : false;
+        inAnimalModel.setIsToolMouse(new Boolean(isToolMouse));
         inAnimalModel.setUrl(inModelCharacteristics.getUrl());
         inAnimalModel.setModelDescriptor(inModelCharacteristics.getModelDescriptor());
         inAnimalModel.setExperimentDesign(inModelCharacteristics.getExperimentDesign());
