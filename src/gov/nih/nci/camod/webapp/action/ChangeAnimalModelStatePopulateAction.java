@@ -1,3 +1,11 @@
+/**
+ *  @author dgeorge
+ *  
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.5 2005-09-19 13:09:52 georgeda Exp $
+ *  
+ *  $Log: not supported by cvs2svn $
+ *  
+ */
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -24,7 +32,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
         // Get the attributes from the request
         String theModelId = inRequest.getParameter("ModelId");
         String theEvent = inRequest.getParameter("event");
-        
+
         // Get the user manager bean to handle any role information
         UserManager theUserManager = (UserManager) getBean("userManager");
 
