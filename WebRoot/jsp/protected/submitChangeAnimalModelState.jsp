@@ -33,13 +33,13 @@
 			</td>
 		</tr>
         <html:form action="ChangeAnimalModelStateAction">
-		<logic:notEmpty name="asignees" >
+		<logic:notEmpty name="<%=Constants.FORMDATA%>" property="assignees" >
 		    <tr>
 			    <td class="formRequiredNotice" width="5">*</td>
 			    <td class="formRequiredLabel"><label for="field1">Assigned To</label></td>
 			    <td class="formField">			
-			        <html:select property="assignedTo">
-					    <html:options name="asignees" />
+		            <html:select property="assignedTo">
+			            <html:options name="<%=Constants.FORMDATA%>" property="assignees"/>
 		            </html:select>
 			    </td>
 		    </tr>

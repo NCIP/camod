@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.5 2005-09-19 13:09:52 georgeda Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.6 2005-09-19 13:38:42 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.5  2005/09/19 13:09:52  georgeda
+ *  Added header
+ *
  *  
  */
 package gov.nih.nci.camod.webapp.action;
@@ -51,10 +54,10 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
         // Setting the action. This is used to customize the jsp display
         if (theEvent.equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
             inRequest.setAttribute("action", "Assigning Screener to ");
-            inRequest.setAttribute("asignees", theUserManager.getUsersForRole(Constants.Admin.Roles.SCREENER));
+            theForm.setAssignees(theUserManager.getUsersForRole(Constants.Admin.Roles.SCREENER));
         } else if (theEvent.equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
             inRequest.setAttribute("action", "Assigning Editor to ");
-            inRequest.setAttribute("asignees", theUserManager.getUsersForRole(Constants.Admin.Roles.EDITOR));
+            theForm.setAssignees(theUserManager.getUsersForRole(Constants.Admin.Roles.EDITOR));
         } else if (theEvent.equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
             inRequest.setAttribute("action", "Requesting more information for ");
         } else if (theEvent.equals(Constants.Admin.Actions.REJECT)) {

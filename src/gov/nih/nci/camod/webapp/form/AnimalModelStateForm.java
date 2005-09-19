@@ -1,9 +1,23 @@
+/**
+ * @author dgeorge
+ * 
+ * $Id: AnimalModelStateForm.java,v 1.3 2005-09-19 13:39:57 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.struts.validator.ValidatorForm;
 
+/**
+ * 
+ * Form used to change the state of an animal model during curation
+ *
+ */
 public class AnimalModelStateForm extends ValidatorForm implements Serializable {
 
     private static final long serialVersionUID = 3257850969634190134L;
@@ -13,6 +27,7 @@ public class AnimalModelStateForm extends ValidatorForm implements Serializable 
     protected String myModelId;
     protected String myAssignedTo;
     protected String myEvent;
+    protected List myAssignees;
 
     public AnimalModelStateForm() {
         myEvent = "";
@@ -56,5 +71,13 @@ public class AnimalModelStateForm extends ValidatorForm implements Serializable 
 
     public void setEvent(String inEvent) {
         myEvent = inEvent;
+    }
+
+    public List getAssignees() {
+        return myAssignees;
+    }
+
+    public void setAssignees(List inAssignees) {
+        myAssignees = inAssignees;
     }
 }
