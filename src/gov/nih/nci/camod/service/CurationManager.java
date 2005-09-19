@@ -1,20 +1,16 @@
 /**
- * Copyright (c) 2001, SAIC, its vendors, and suppliers. ALL RIGHTS RESERVED.
- *
- * @author: Johnita Beasley
- * @date: July 20, 2005
- *
- * Revision History
- * ----------------
- *
- * 2005 July 21    Johnita Beasley    Created and successfully compiled.
- * 2005 August 18  Sumeet Rajput      Integrated with caMOD codebase
- *
+ *  @author dgeorge
+ *  
+ *  $Id: CurationManager.java,v 1.6 2005-09-19 13:06:32 georgeda Exp $
+ *  
+ *  $Log: not supported by cvs2svn $
+ *  
  */
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Curateable;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +20,9 @@ public interface CurationManager {
 
     public String getDefaultState();
 
-    public Curateable changeState(Curateable inCuratableObject, String inEvent);
+    public List getAllStateNames();
+
+    public void changeState(Curateable inCuratableObject, String inEvent);
 
     public void applyActionsForState(Curateable inCuratableObject, Map inArgs);
 }

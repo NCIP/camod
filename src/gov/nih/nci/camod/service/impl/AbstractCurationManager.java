@@ -1,3 +1,10 @@
+/**
+ * @author dgeorge
+ * 
+ * $Id: AbstractCurationManager.java,v 1.7 2005-09-19 13:08:28 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Curateable;
@@ -21,6 +28,7 @@ public abstract class AbstractCurationManager implements CurationManager {
 
     private static final String ACTION_TOKENS = ":,=";
 
+    // Inner class used for mainting the state configuration from the xml file
     private class State {
 
         private String myName = null;
@@ -72,10 +80,11 @@ public abstract class AbstractCurationManager implements CurationManager {
     // behavior
     protected CurateableActionFactory myActionFactory = new CurateableActionFactoryImpl();
 
-    protected HashMap myStates = new HashMap();
+    protected Map myStates = new HashMap();
 
     private String myDefaultState = null;
 
+    // Initialize the curation model
     protected void init(String inWorkflowFile) {
 
         Document theCurationConfig = null;
@@ -174,11 +183,52 @@ public abstract class AbstractCurationManager implements CurationManager {
 
     }
 
+    /**
+     * Get the name of all states defined in the xml
+     * 
+     * @returns a list containing the names of all the states
+     */
+    public List getAllStateNames() {
+
+        log.trace("Entering getAllStateNames");
+
+        List theStateList = new ArrayList();
+
+        Iterator theKeys = myStates.keySet().iterator();
+
+        while (theKeys.hasNext()) {
+            String theKey = (String) theKeys.next();
+            State theState = (State) myStates.get(theKey);
+            theStateList.add(theState.getName());
+        }
+
+        log.info("State list: " + theStateList);
+
+        log.trace("Exiting getAllStateNames");
+
+        return theStateList;
+    }
+
+    /**
+     * Get the name of the state that's defined as the "default" state
+     * 
+     * @returns a list containing the names of all the states
+     */
     public String getDefaultState() {
+        log.trace("In getDefaultState");
         return myDefaultState;
     }
 
-    public Curateable changeState(Curateable inCurateableObj, String inEvent) {
+    /**
+     * Change to the next state based on the current state and the event
+     * 
+     * @param inCurateableObj
+     *            the curatable object to apply the action to
+     * 
+     * @param inEvent
+     *            the event being applied to the object
+     */
+    public void changeState(Curateable inCurateableObj, String inEvent) {
 
         log.trace("Entering changeState");
 
@@ -205,8 +255,6 @@ public abstract class AbstractCurationManager implements CurationManager {
         }
 
         log.trace("Exiting changeState");
-
-        return inCurateableObj;
     }
 
     /**
@@ -241,10 +289,11 @@ public abstract class AbstractCurationManager implements CurationManager {
 
                 // Get the default arguments for the action
                 while (theTokenizer.hasMoreTokens()) {
-                    
+
                     String theArg = theTokenizer.nextToken();
 
-                    // Break this down into a tag/value pair and add to the input map
+                    // Break this down into a tag/value pair and add to the
+                    // input map
                     StringTokenizer theArgTokenizer = new StringTokenizer(theArg, ACTION_TOKENS);
 
                     String theTag = theArgTokenizer.nextToken();

@@ -1,3 +1,11 @@
+/**
+ *  @author dgeorge
+ *  
+ *  $Id: CurationManagerImpl.java,v 1.5 2005-09-19 13:09:00 georgeda Exp $
+ *  
+ *  $Log: not supported by cvs2svn $
+ *  
+ */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.AnimalModel;
@@ -8,15 +16,25 @@ import gov.nih.nci.camod.service.CurationManager;
  */
 public class CurationManagerImpl extends AbstractCurationManager {
 
+    /**
+     * Constructor. Takes in a curation XML
+     * 
+     * @param inWorkflowFile
+     *            the XML file defining the curation flow
+     */
     public CurationManagerImpl(String inWorkflowFile) {
         super.init(inWorkflowFile);
         init();
     }
 
+    // Register any events associated w/ the curation flow
     private void init() {
         myActionFactory.registerAction("emailAssignee", new EmailActionImpl());
     }
 
+    /**
+     * Test main
+     */
     public static void main(java.lang.String[] args) {
         CurationManager theCurationManager = new CurationManagerImpl(
                 "C:/dev/workspace/camod_dev/WebRoot/config/CurationConfig.xml");
@@ -30,15 +48,13 @@ public class CurationManagerImpl extends AbstractCurationManager {
         System.out.println("2) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
         System.out.println("3) Current state: " + theAnimalModel.getState());
-        theCurationManager.changeState(theAnimalModel, "approved");
+        theCurationManager.changeState(theAnimalModel, "approve");
         System.out.println("4) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
         System.out.println("5) Current state: " + theAnimalModel.getState());
-        theCurationManager.changeState(theAnimalModel, "rejected");
+        theCurationManager.changeState(theAnimalModel, "need_more_info");
         System.out.println("6) Current state: " + theAnimalModel.getState());
-        theCurationManager.changeState(theAnimalModel, "rejected");
+        theCurationManager.changeState(theAnimalModel, "approve");
         System.out.println("7) Current state: " + theAnimalModel.getState());
-        theCurationManager.changeState(theAnimalModel, "approved");
-        System.out.println("8) Current state: " + theAnimalModel.getState());
     }
 }
