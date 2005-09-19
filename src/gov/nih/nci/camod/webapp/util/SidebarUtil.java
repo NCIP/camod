@@ -2,10 +2,6 @@ package gov.nih.nci.camod.webapp.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-
 public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 
 		public String findSubMenu( HttpServletRequest request, String jspName )
