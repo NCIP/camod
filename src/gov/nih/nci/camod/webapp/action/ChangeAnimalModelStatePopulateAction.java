@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.6 2005-09-19 13:38:42 georgeda Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.7 2005-09-19 14:21:47 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.6  2005/09/19 13:38:42  georgeda
+ *  Cleaned up parameter passing
+ *
  *  Revision 1.5  2005/09/19 13:09:52  georgeda
  *  Added header
  *
@@ -33,7 +36,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
         log.trace("Entering ChangeAnimalModelStatePopulateAction.execute");
 
         // Get the attributes from the request
-        String theModelId = inRequest.getParameter("ModelId");
+        String theModelId = inRequest.getParameter(Constants.Parameters.MODELID);
         String theEvent = inRequest.getParameter("event");
 
         // Get the user manager bean to handle any role information

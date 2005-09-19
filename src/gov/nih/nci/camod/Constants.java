@@ -8,14 +8,16 @@ package gov.nih.nci.camod;
  * </p>
  */
 public class Constants {
-    //~ Static fields/initializers =============================================
-   
+
+    // ~ Static fields/initializers
+    // =============================================
+
     /** The name of the camod resource bundle used in this application */
     public static final String CAMOD_BUNDLE = "camod";
-    
+
     /** The name of the ResourceBundle used in this application */
     public static final String BUNDLE_KEY = "ApplicationResources";
-    
+
     /** The application scoped attribute for persistence engine used */
     public static final String DAO_TYPE = "daoType";
     public static final String DAO_TYPE_HIBERNATE = "hibernate";
@@ -40,8 +42,7 @@ public class Constants {
     public static final String FILE_SEP = System.getProperty("file.separator");
 
     /** User home from System properties */
-    public static final String USER_HOME =
-        System.getProperty("user.home") + FILE_SEP;
+    public static final String USER_HOME = System.getProperty("user.home") + FILE_SEP;
 
     /**
      * The session scope attribute under which the breadcrumb ArrayStack is
@@ -50,8 +51,8 @@ public class Constants {
     public static final String BREADCRUMB = "breadcrumbs";
 
     /**
-     * The session scope attribute under which the User object for the
-     * currently logged in user is stored.
+     * The session scope attribute under which the User object for the currently
+     * logged in user is stored.
      */
     public static final String USER_KEY = "currentUserForm";
 
@@ -74,7 +75,7 @@ public class Constants {
      * The key for the controller username in the camod.properties file
      */
     public static final String CONTROLLER_USERNAME_KEY = "controller.username";
-    
+
     /**
      * The name of the Administrator role, as specified in web.xml
      */
@@ -86,14 +87,14 @@ public class Constants {
     public static final String USER_ROLE = "tomcat";
 
     /**
-     * The name of the user's role list, a request-scoped attribute
-     * when adding/editing a user.
+     * The name of the user's role list, a request-scoped attribute when
+     * adding/editing a user.
      */
     public static final String USER_ROLES = "userRoles";
 
     /**
-     * The name of the available roles list, a request-scoped attribute
-     * when adding/editing a user.
+     * The name of the available roles list, a request-scoped attribute when
+     * adding/editing a user.
      */
     public static final String AVAILABLE_ROLES = "availableRoles";
 
@@ -106,7 +107,7 @@ public class Constants {
      * The name of the configuration hashmap stored in application scope.
      */
     public static final String CONFIG = "appConfig";
-    
+
     /**
      * The request scope attribute that holds the person form.
      */
@@ -116,38 +117,41 @@ public class Constants {
      * The request scope attribute that holds the person list
      */
     public static final String PERSON_LIST = "personList";
-  
+
     /**
      * The request scope attribute that holds the login results
      */
     public static final String FAILURE = "failure";
-    
+
     /**
      * The request scope attribute that holds the login results
      */
     public static final String SUCCESS = "success";
-    
+
     public static final String UPT_CONTEXT_NAME = "camod";
-    
-    /** 
-     * Used to store list of models currently logged on user has previous entered
+
+    /**
+     * Used to store list of models currently logged on user has previous
+     * entered
      */
     public static final String USERMODELLIST = "usermodellist";
-    
+
     /**
-     * Used to store basic email constants   
-     *
-     */     
+     * Used to store basic email constants
+     * 
+     */
     public interface Email {
-    	public static final String SERVER = "nih.nci.gov";
-    	public static final String SENDER = "emice@nih.nci.gov";
-    	public static final String RECIPIENT = "ulliwagner@nih.nci.gov";    		
+
+        public static final String SERVER = "nih.nci.gov";
+        public static final String SENDER = "emice@nih.nci.gov";
+        public static final String RECIPIENT = "ulliwagner@nih.nci.gov";
     }
-    
+
     /**
-     *  Used to store lists for drop down menus
+     * Used to store lists for drop down menus
      */
     public interface Dropdowns {
+
         public static final String SPECIESDROP = "speciesdrop.db";
         public static final String STRAINDROP = "straindrop.db";
         public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
@@ -155,8 +159,8 @@ public class Constants {
         public static final String ADMINISTRATIVEROUTEDROP = "adminroutedrop.db";
         public static final String AGEUNITSDROP = "AgeUnits.txt";
         public static final String PUBDROP = "PublicationStatus.txt";
-        
-        //Specific to a single screen
+
+        // Specific to a single screen
         public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
         public static final String ENVIRONFACTORDROP = "envfactordrop.db";
         public static final String GROWTHFACTORDROP = "growfactordrop.db";
@@ -166,32 +170,39 @@ public class Constants {
         public static final String SURGERYDROP = "surgerydrop.db";
         public static final String VIRUSDROP = "virusdrop.db";
         public static final String VIRALVECTORDROP = "viralvectordrop.db";
-    }    
-    
+    }
+
     /**
-     * Used to determine the current model to edit on submission/edit
-     * also used to display the name of the model and it's current status
+     * Defines the global constants used as parameters to requests
+     */
+    public interface Parameters {
+        public static final String MODELID = "aModelID";
+    }
+
+    /**
+     * Used to determine the current model to edit on submission/edit also used
+     * to display the name of the model and it's current status
      */
     public static final String MODELID = "modelid";
     public static final String MODELDESCRIPTOR = "modeldescriptor";
     public static final String MODELSTATUS = "modelstatus";
-    
+
     /**
      * Used to prepopulate forms
      */
     public static final String FORMDATA = "formdata";
     public static final String ANIMALMODEL = "animalmodel";
-    
+
     /**
-     * Used to store username for current user 
+     * Used to store username for current user
      */
     public static final String CURRENTUSER = "camod.loggedon.username";
     public static final String CURRENTUSERROLES = "camod.loggedon.userroles";
     public static final String LOGINFAILED = "loginfailed";
 
     /**
-	 * Used for search results
-	 */
+     * Used for search results
+     */
     public static final String SEARCH_RESULTS = "searchResults";
     public static final String TRANSGENE_COLL = "transgeneColl";
     public static final String GENOMIC_SEG_COLL = "genomicSegColl";
@@ -205,29 +216,29 @@ public class Constants {
     public static final String YEAST_DATA = "yeastData";
     public static final String INVIVO_DATA = "invivoData";
 
-
     // /////////////////////////////////////////////////////////////
     // Submission specific constants
     // /////////////////////////////////////////////////////////////
-    
+
     public interface Submit {
-    	
-    	/**
-    	 * Used to store a list of names for the cardiogentic intervention section of the sidebar menu of the submission section
-    	 */
-    	public static final String CHEMICALDRUG_LIST = "chemicaldrug_list";
-    	public static final String ENVIRONMENTALFACTOR_LIST = "environmentalfactor_list";
-    	public static final String GENEDELIVERY_LIST = "genedelivery_list";
-    	public static final String GROWTHFACTORS_LIST = "growthfactors_list";
-    	public static final String HORMONE_LIST = "hormone_list";
-    	public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
-    	public static final String RADIATION_LIST = "radiation_list";
-    	public static final String SURGERYOTHER_LIST = "surgeryother_list";
-    	public static final String VIRALTREATMENT_LIST = "viraltreatment_list";    	    
-    	
-    	public static final String PUBLICATION_LIST = "publication_list";
+
+        /**
+         * Used to store a list of names for the cardiogentic intervention
+         * section of the sidebar menu of the submission section
+         */
+        public static final String CHEMICALDRUG_LIST = "chemicaldrug_list";
+        public static final String ENVIRONMENTALFACTOR_LIST = "environmentalfactor_list";
+        public static final String GENEDELIVERY_LIST = "genedelivery_list";
+        public static final String GROWTHFACTORS_LIST = "growthfactors_list";
+        public static final String HORMONE_LIST = "hormone_list";
+        public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
+        public static final String RADIATION_LIST = "radiation_list";
+        public static final String SURGERYOTHER_LIST = "surgeryother_list";
+        public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
+
+        public static final String PUBLICATION_LIST = "publication_list";
     }
-    
+
     // /////////////////////////////////////////////////////////////
     // Admin specific constants
     // /////////////////////////////////////////////////////////////
@@ -237,60 +248,61 @@ public class Constants {
         /**
          * Defines the different roles in the system
          */
-        public interface Roles
-        {
+        public interface Roles {
+
             /**
              * A constant that defines the controller role
              */
             public static final String CONTROLLER = "Controller";
-            
+
             /**
              * A constant that defines the Editor role
              */
             public static final String EDITOR = "Editor";
-            
+
             /**
              * A constant that defines the screener role
              */
             public static final String SCREENER = "Screener";
         }
-        
+
         /**
          * Defines the different roles in the system
          */
-        public interface Actions
-        {
+        public interface Actions {
+
             /**
              * A constant that defines the text for the generic approved action
              */
             public static final String APPROVE = "approve";
-            
+
             /**
              * A constant that defines the text for the assign editor action
              */
             public static final String ASSIGN_EDITOR = "assign_editor";
-            
+
             /**
              * A constant that defines the text for the assign screener action
              */
             public static final String ASSIGN_SCREENER = "assign_screener";
-            
+
             /**
-             * A constant that defines the text for the need more information action
+             * A constant that defines the text for the need more information
+             * action
              */
             public static final String NEED_MORE_INFO = "need_more_info";
-            
+
             /**
              * A constant that defines the text for the generic reject action
              */
-            public static final String REJECT = "reject";           
-            
+            public static final String REJECT = "reject";
+
             /**
              * A constant that defines the text for the complete
              */
             public static final String COMPLETE = "complete";
         }
-        
+
         /**
          * A constant that defines what file is used for the model curation
          * process
@@ -317,7 +329,7 @@ public class Constants {
          * the request
          */
         public static final String MODELS_NEEDING_EDITOR_ASSIGNMENT = "modelsNeedingEditorAssignment";
-        
+
         /** Used to set/pull the objects needing to be edited out of the request */
         public static final String MODELS_NEEDING_MORE_INFO = "modelsNeedingMoreInfo";
 
