@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.8 2005-09-16 15:52:57 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.9 2005-09-19 12:55:24 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/09/16 15:52:57  georgeda
+ * Changes due to manager re-write
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -174,6 +177,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             // implemented
             log.debug("Saving availability");
             Persist.save(inAnimalModel.getAvailability());
+
+            log.debug("Saving sexDistribution");
+            Persist.save(inAnimalModel.getPhenotype().getSexDistribution());
 
             log.debug("Saving phenotype");
             Persist.save(inAnimalModel.getPhenotype());
@@ -388,9 +394,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             thePhenotype = new Phenotype();
         }
 
-        // Get the sex distribution
+        // Get/create the sex distribution
         SexDistribution theSexDistribution = SexDistributionManagerSingleton.instance().getByType(
                 inModelCharacteristics.getType());
+        if (theSexDistribution == null) {
+            theSexDistribution = new SexDistribution();
+            theSexDistribution.setType(inModelCharacteristics.getType());
+        }
 
         // Create the phenotype
         thePhenotype.setDescription(inModelCharacteristics.getDescription());
