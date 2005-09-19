@@ -3,31 +3,17 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.webapp.form.RadiationForm;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.EnvironmentalFactor;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Treatment;
-import gov.nih.nci.camod.service.AgentManager;
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.EnvironmentalFactorManager;
-import gov.nih.nci.camod.service.SexDistributionManager;
-import gov.nih.nci.camod.service.TherapyManager;
-import gov.nih.nci.camod.service.TreatmentManager;
-import gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm;
-import gov.nih.nci.camod.webapp.form.RadiationForm;
+
+import org.apache.struts.action.*;
 
 /**
  * RadiationAction Class
@@ -164,7 +150,7 @@ public class RadiationAction extends BaseAction {
         agentManager.save( agent );
         
         //TherapeuticExperiment property is false, tells us that this is an environmentalFactor
-        therapy.setTherapeuticExperiment( false );
+        therapy.setTherapeuticExperiment( new Boolean(false) );
         therapy.setAgent( agent );
         therapy.setTreatment( treatment );
         therapyManager.save( therapy );
@@ -255,7 +241,7 @@ public class RadiationAction extends BaseAction {
     	*/
 
         Therapy therapy = new Therapy();
-        therapy.setTherapeuticExperiment( false );
+        therapy.setTherapeuticExperiment( new Boolean(false) );
         therapy.setAgent( agent );        
         therapy.setTreatment( treatment ); 
         

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.13 2005-09-16 15:52:56 georgeda Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.14 2005-09-19 18:15:28 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.13  2005/09/16 15:52:56  georgeda
+ *  Changes due to manager re-write
+ *
  *  
  */
 package gov.nih.nci.camod.webapp.action;
@@ -102,7 +105,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
                     Therapy ty = (Therapy) tyList.get(i);
 
                     // check to see if it is an EnvironmentalFactor
-                    if (ty.getTherapeuticExperiment() == false) {
+                    if (ty.getTherapeuticExperiment().booleanValue() == false) {
                         Agent agent = ty.getAgent();
 
                         if (agent.getType().equals("Other")) {

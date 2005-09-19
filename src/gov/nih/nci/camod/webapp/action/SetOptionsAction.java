@@ -4,14 +4,10 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.*;
 
 public class SetOptionsAction extends BaseAction {
 		
@@ -30,16 +26,13 @@ public class SetOptionsAction extends BaseAction {
                                 HttpServletRequest request,
                                 HttpServletResponse response)
     throws Exception {    	 
-    	  	 
-    	 //DropdownUtil drop = new DropdownUtil();
-    	 NewDropdownUtil drop = new NewDropdownUtil();
-    	 
+    	  	    	 
     	 String speciesName = request.getParameter( "speciesName" );
     	 String page = request.getParameter( "page" );
     	 
     	 System.out.println( "<SetOptionsActions execute> speciesName: " + speciesName + "  page: " + page );
     	 
-    	 drop.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesName );
+         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesName );
     	
     	 if( page.equals("submitNewModel" )) {    		 
 			 ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;

@@ -1,20 +1,18 @@
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
-
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.webapp.form.HormoneForm;
 import gov.nih.nci.camod.webapp.form.RadiationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+
+import org.apache.struts.action.*;
 
 public class RadiationPopulateAction extends BaseAction {
 	
@@ -116,17 +114,14 @@ public class RadiationPopulateAction extends BaseAction {
 	  throws Exception {
 		
 			System.out.println( "<RadiationPopulateAction dropdown> Entering void dropdown()" );
-			
+					
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			NewDropdownUtil drop = new NewDropdownUtil();
-		
-			//Prepopulate all dropdown fields, set the global Constants to the following
-			drop.populateDropdown( request, Constants.Dropdowns.RADIATIONDROP, "" );
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.RADIATIONDROP, "" );
 
-			drop.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
-			drop.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
-			drop.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
-			drop.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
 			
 			System.out.println( "<RadiationPopulateAction dropdown> Exiting void dropdown()" );
 

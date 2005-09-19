@@ -5,16 +5,14 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorForm;
-import gov.nih.nci.camod.webapp.form.RadiationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+
+import org.apache.struts.action.*;
 
 public class NutritionalFactorPopulateAction extends BaseAction{
 	
@@ -113,16 +111,13 @@ public class NutritionalFactorPopulateAction extends BaseAction{
 		  throws Exception {
 			
 				System.out.println( "<NutritionalFactorPopulateAction dropdown> Entering void dropdown()" );
-				
+							
 				//Prepopulate all dropdown fields, set the global Constants to the following
-				NewDropdownUtil drop = new NewDropdownUtil();
-			
-				//Prepopulate all dropdown fields, set the global Constants to the following
-				drop.populateDropdown( request, Constants.Dropdowns.NUTRITIONFACTORDROP, "" );
+                NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.NUTRITIONFACTORDROP, "" );
 
-				drop.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
-				drop.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
-				drop.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
+                NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+                NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
+                NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
 				
 				System.out.println( "<NutritionalFactorPopulateAction dropdown> Exiting void dropdown()" );
 

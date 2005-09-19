@@ -113,17 +113,14 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 	  throws Exception {
 		
 			System.out.println( "<EnvironmentalFactorPopulateAction dropdown> Entering void dropdown()" );
-			
-			//Prepopulate all dropdown fields, set the global Constants to the following
-			NewDropdownUtil drop = new NewDropdownUtil();
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			drop.populateDropdown( request, Constants.Dropdowns.ENVIRONFACTORDROP, "" );
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.ENVIRONFACTORDROP, "" );
 
-			drop.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
-			drop.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
-			drop.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
-			drop.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
 
 	}	
 }

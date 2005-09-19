@@ -112,12 +112,11 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 		System.out.println( "<ViralTreatmentPopulateAction dropdown> Entering... " );
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
-		NewDropdownUtil drop = new NewDropdownUtil();
 					
-		drop.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
-		drop.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.VIRUSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.VIRUSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
 	}
 }

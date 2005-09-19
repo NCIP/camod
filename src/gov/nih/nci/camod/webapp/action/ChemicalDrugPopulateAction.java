@@ -7,15 +7,12 @@ import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.ChemicalDrugForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.*;
 
 public class ChemicalDrugPopulateAction extends BaseAction{
 	
@@ -134,13 +131,11 @@ public class ChemicalDrugPopulateAction extends BaseAction{
 		System.out.println( "<ChemicalDrugPopulateAction dropdown> Entering... " );
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
-		NewDropdownUtil drop = new NewDropdownUtil();
-					
-		drop.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
-		drop.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.CHEMICALDRUGDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.CHEMICALDRUGDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
 	}
 
 }

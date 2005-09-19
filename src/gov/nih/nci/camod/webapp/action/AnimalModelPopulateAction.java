@@ -9,13 +9,10 @@ import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.*;
 
 public class AnimalModelPopulateAction extends BaseAction {
 
@@ -50,7 +47,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 		ContactInfo info = (ContactInfo) am.getPrincipalInvestigator().getContactInfoCollection().get(0);
 		modelChar.setEmail( info.getEmail() );
 		
-		if ( am.getIsToolMouse() )
+		if ( am.getIsToolMouse().booleanValue() )
 			modelChar.setIsToolMouse( "yes" );
 		else
 			modelChar.setIsToolMouse( "no" );
@@ -119,18 +116,16 @@ public class AnimalModelPopulateAction extends BaseAction {
 			System.out.println( "<AnimalModelPopulateAction dropdown> Entering... " );
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			//DropdownUtil drop = new DropdownUtil();
-			NewDropdownUtil drop = new NewDropdownUtil();
-			
-			drop.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
+			//DropdownUtil drop = new DropdownUtil()
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
 			
 			//TODO: Get specific list for speciesName ( for submitModelCharacteristics ) 
 			List speciesList = (List) request.getAttribute( Constants.Dropdowns.SPECIESDROP );			
 			System.out.println( "speciesList.get(0):" + speciesList.size()  );
 			
-			drop.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString() );						
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString() );						
 			
-			drop.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 
 				
 			//Store the values for the drop down menus in a Constants variable, used in the JSP
 			//request.getSession().setAttribute( Constants.Dropdowns.SPECIESDROP, speciesList );

@@ -9,13 +9,10 @@ import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.*;
 
 public class SurgeryPopulateAction extends BaseAction {
 	
@@ -114,10 +111,9 @@ public class SurgeryPopulateAction extends BaseAction {
 		System.out.println( "<SurgeryPopulateAction dropdown> Entering... " );
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
-		NewDropdownUtil drop = new NewDropdownUtil();
 					
-		drop.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
-		drop.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.SURGERYDROP, "" );		
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SURGERYDROP, "" );		
 	}	
 }

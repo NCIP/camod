@@ -162,9 +162,9 @@ public final class PublicationAction extends BaseAction {
 		}
                         
         if ( pubForm.getFirstTimeReported() != null && pubForm.getFirstTimeReported().equals( "yes" ) )
-        	pub.setFirstTimeReported( true );        	
+        	pub.setFirstTimeReported( new Boolean(true) );        	
         else
-        	pub.setFirstTimeReported( false );
+        	pub.setFirstTimeReported( new Boolean(false) );
 		
         PublicationStatus pubStatus = new PublicationStatus();
         pubStatus.setName( pubForm.getName() );
@@ -261,9 +261,9 @@ public final class PublicationAction extends BaseAction {
 		//  pub.setYear( Long.valueOf( pubForm.getYear().trim() ) );  
         
         if ( pubForm.getFirstTimeReported() != null && pubForm.getFirstTimeReported().equals( "yes" ) )
-        	pub.setFirstTimeReported( true );        	
+        	pub.setFirstTimeReported( new Boolean(true) );        	
         else
-        	pub.setFirstTimeReported( false );
+        	pub.setFirstTimeReported( new Boolean(false) );
         
         PublicationStatus pubStatus = new PublicationStatus();
         pubStatus.setName( pubForm.getName() );

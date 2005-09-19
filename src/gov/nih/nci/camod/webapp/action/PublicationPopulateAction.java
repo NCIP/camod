@@ -73,7 +73,7 @@ public class PublicationPopulateAction extends BaseAction {
 		if( pub.getPmid() !=  null  )
 			pubForm.setPmid( pub.getPmid().toString() );
 		
-		if( pub.isFirstTimeReported() )
+		if( pub.isFirstTimeReported().booleanValue() )
 			pubForm.setFirstTimeReported( "yes" );
 		else
 			pubForm.setFirstTimeReported( "no" );
@@ -129,9 +129,8 @@ public class PublicationPopulateAction extends BaseAction {
 			System.out.println( "<PublicationPopulateAction dropdown> Entering void dropdown()" );
 			
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			NewDropdownUtil drop = new NewDropdownUtil();
 		
-			drop.populateDropdown( request, Constants.Dropdowns.PUBDROP, "" );
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.PUBDROP, "" );
 
 	}	
 }

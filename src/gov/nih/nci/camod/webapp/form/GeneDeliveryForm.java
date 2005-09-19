@@ -7,8 +7,6 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * @author rajputs

@@ -4,14 +4,12 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.GeneDeliveryForm;
-import gov.nih.nci.camod.webapp.form.RadiationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+
+import org.apache.struts.action.*;
 
 public class GeneDeliveryPopulateAction extends BaseAction{
 	
@@ -100,10 +98,7 @@ public class GeneDeliveryPopulateAction extends BaseAction{
 			System.out.println( "<GeneDeliveryPopulateAction dropdown> Entering void dropdown()" );
 			
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			NewDropdownUtil drop = new NewDropdownUtil();
-		
-			//Prepopulate all dropdown fields, set the global Constants to the following
-			drop.populateDropdown( request, Constants.Dropdowns.VIRALVECTORDROP, "" );
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.VIRALVECTORDROP, "" );
 			
 			System.out.println( "<GeneDeliveryPopulateAction dropdown> Exiting void dropdown()" );
 

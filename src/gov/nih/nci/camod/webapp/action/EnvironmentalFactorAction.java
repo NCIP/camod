@@ -102,7 +102,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
     	*/
 
         Therapy therapy = new Therapy();
-        therapy.setTherapeuticExperiment( false );
+        therapy.setTherapeuticExperiment( new Boolean(false) );
         therapy.setAgent( agent );        
         therapy.setTreatment( treatment ); 
         
@@ -230,7 +230,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
         agentManager.save( agent );
         
         //TherapeuticExperiment property is false, tells us that this is an environmentalFactor
-        therapy.setTherapeuticExperiment( false );
+        therapy.setTherapeuticExperiment( new Boolean(false) );
         therapy.setAgent( agent );
         therapy.setTreatment( treatment );
         therapyManager.save( therapy );

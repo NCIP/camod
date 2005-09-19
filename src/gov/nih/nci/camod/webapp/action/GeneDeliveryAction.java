@@ -1,26 +1,14 @@
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.webapp.form.GeneDeliveryForm;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Treatment;
-import gov.nih.nci.camod.service.AgentManager;
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.GeneDeliveryManager;
-import gov.nih.nci.camod.service.SexDistributionManager;
-import gov.nih.nci.camod.service.TreatmentManager;
-import gov.nih.nci.camod.webapp.form.GeneDeliveryForm;
-import gov.nih.nci.camod.webapp.form.RadiationForm;
+
+import org.apache.struts.action.*;
 
 /**
  * GeneDeliveryAction Class
@@ -118,7 +106,6 @@ public final class GeneDeliveryAction extends BaseAction {
         /* Create all the manager objects needed for Screen */
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
         TreatmentManager treatmentManager = ( TreatmentManager ) getBean( "treatmentManager" );
-        AgentManager agentManager = ( AgentManager ) getBean( "agentManager" ); 
         GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");        
         
         /* Set modelID in AnimalModel object */
@@ -144,7 +131,7 @@ public final class GeneDeliveryAction extends BaseAction {
     		When TherapeuticExperiment property is false, tells us that this is an environmentalFactor
     	*/
         Therapy therapy = new Therapy();
-        therapy.setTherapeuticExperiment( false );    
+        therapy.setTherapeuticExperiment( new Boolean(false) );    
         therapy.setTreatment( treatment ); 
         
         /* 5. Add Therapy to AnimalModel */

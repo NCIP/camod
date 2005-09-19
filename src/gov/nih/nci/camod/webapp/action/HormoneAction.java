@@ -1,29 +1,16 @@
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
-
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Treatment;
-import gov.nih.nci.camod.service.AgentManager;
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.SexDistributionManager;
-import gov.nih.nci.camod.service.TherapyManager;
-import gov.nih.nci.camod.service.TreatmentManager;
+import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.webapp.form.HormoneForm;
-import gov.nih.nci.camod.webapp.form.HormoneForm;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 /**
  * HormoneAction Class
@@ -146,7 +133,7 @@ public class HormoneAction extends BaseAction {
         agentManager.save( agent );
         
         //TherapeuticExperiment property is false, tells us that this is an environmentalFactor
-        ty.setTherapeuticExperiment( false );
+        ty.setTherapeuticExperiment( new Boolean(false) );
         ty.setAgent( agent );
         ty.setTreatment( ts );
         therapyManager.save( ty );
@@ -213,7 +200,7 @@ public class HormoneAction extends BaseAction {
         
         //TherapeuticExperiment property is false, tells us that this is an environmentalFactor
         Therapy ty = new Therapy();
-        ty.setTherapeuticExperiment( false );
+        ty.setTherapeuticExperiment( new Boolean(false) );
         ty.setAgent( agent );
         ty.setTreatment( ts );
 		

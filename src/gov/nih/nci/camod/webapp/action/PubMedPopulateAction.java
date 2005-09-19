@@ -14,11 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 public class PubMedPopulateAction extends BaseAction {
 
@@ -41,10 +37,9 @@ public class PubMedPopulateAction extends BaseAction {
 			 
 			if (m.matches() && pmid != null && ! pmid.equals("") ) 
 			 {
-				PopulatePubMedUtil popPubMed = new PopulatePubMedUtil();
 				Publication pub = new Publication();
 				
-				popPubMed.populatePumMedRecord( Long.valueOf( pmid.trim() ), pub );			
+                PopulatePubMedUtil.populatePumMedRecord( Long.valueOf( pmid.trim() ), pub );			
 				
 				pubForm.setJournal( pub.getJournal() );
 				pubForm.setYear(  "" + pub.getYear() );
@@ -69,9 +64,8 @@ public class PubMedPopulateAction extends BaseAction {
 		        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "publication.incorrect.pmid" ) );
 		        saveErrors( request, msg );			        
 			}
-
-			NewDropdownUtil drop = new NewDropdownUtil();			
-			drop.populateDropdown(request, Constants.Dropdowns.PUBDROP, "" );
+		
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, "" );
 			
 			request.getSession().setAttribute( Constants.FORMDATA, pubForm );	
 			 

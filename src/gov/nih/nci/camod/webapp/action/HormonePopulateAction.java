@@ -1,21 +1,18 @@
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
-
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.HormoneForm;
-import gov.nih.nci.camod.webapp.form.SurgeryForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.*;
 
 public class HormonePopulateAction extends BaseAction {
 
@@ -111,10 +108,9 @@ public class HormonePopulateAction extends BaseAction {
 		System.out.println( "<HormonePopulateAction dropdown> Entering... " );
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
-		NewDropdownUtil drop = new NewDropdownUtil();
-							
-		drop.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.HORMONEDROP, "" );
-		drop.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+									
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
 	}	
 }
