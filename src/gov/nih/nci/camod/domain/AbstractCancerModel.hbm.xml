@@ -74,12 +74,12 @@
         <many-to-one
         	name="submitter"
         	column="submitter_id"
-        	class="Party"/>
+        	class="Person"/>
         	
         <!-- principalInvestigator (many-to-one unidirectional) -->
         <many-to-one
         	name="principalInvestigator"
         	column="principal_investigator_id"
-        	class="Party"/>
+        	class="Person"/>
 	</class>
 </hibernate-mapping>

@@ -7,11 +7,10 @@
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.ArrayList;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.util.List;
+
+import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -27,8 +26,8 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
 	private List publicationCollection = new ArrayList();
 	private Availability availability;
 	private Taxon species;
-	private Party submitter;
-	private Party principalInvestigator;
+	private Person submitter;
+	private Person principalInvestigator;
 	
 	/**
 	 * @return Returns the principalInvestigator.
@@ -39,19 +38,19 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
 	/**
 	 * @param principalInvestigator The principalInvestigator to set.
 	 */
-	public void setPrincipalInvestigator(Party principalInvestigator) {
+	public void setPrincipalInvestigator(Person principalInvestigator) {
 		this.principalInvestigator = principalInvestigator;
 	}
 	/**
 	 * @return Returns the submitter.
 	 */
-	public Party getSubmitter() {
+	public Person getSubmitter() {
 		return submitter;
 	}
 	/**
 	 * @param submitter The submitter to set.
 	 */
-	public void setSubmitter(Party submitter) {
+	public void setSubmitter(Person submitter) {
 		this.submitter = submitter;
 	}
 	/**
