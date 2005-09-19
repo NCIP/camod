@@ -30,12 +30,6 @@
 			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
 		</TD>
 		
-		<!-- link 2 begins -->
-		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="adminUsersAppointment.jsp">USERS APPOINTMENT</a>&nbsp;&nbsp;
-		</TD>
-		<!-- link 2 ends -->
-		
 		<TD>
 			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
 		</TD>
