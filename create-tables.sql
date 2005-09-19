@@ -458,6 +458,7 @@ create table party (
    middle_name varchar2(255),
    last_name varchar2(255),
    username varchar2(255),
+   is_principle_investigator number(1,0),
    name varchar2(255),
    primary key (party_id)
 );
