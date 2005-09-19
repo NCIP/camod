@@ -61,16 +61,16 @@
 			    <logic:iterate name="<%= Admin.MODELS_NEEDING_EDITING %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <html:link action="/viewModelCharacteristics"  paramId="ModelId" paramName="model"  paramProperty="id" >
+				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 	                        </html:link>
 			                <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 		                            Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Need More Info
 				                </html:link>
 				            </td>
@@ -97,16 +97,16 @@
 			    <logic:iterate name="<%= Admin.MODELS_NEEDING_MORE_INFO %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <html:link action="/viewModelCharacteristics"  paramId="ModelId" paramName="model"  paramProperty="id" >
+				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Need More Info
 				                </html:link>
 				            </td>
@@ -132,11 +132,11 @@
 			    <logic:iterate name="<%= Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <html:link action="/viewModelCharacteristics"  paramId="ModelId" paramName="model"  paramProperty="id" >
+				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 		                    <td class="resultsBoxWhiteNoStart" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_EDITOR %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_EDITOR %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Assign
 				                </html:link>
 	                        </td>
@@ -162,16 +162,16 @@
 			    <logic:iterate name="<%= Admin.MODELS_NEEDING_SCREENING %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <html:link action="/viewModelCharacteristics"  paramId="ModelId" paramName="model"  paramProperty="id" >
+				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Reject
 				                </html:link>
 				            </td>
@@ -199,12 +199,12 @@
 			    <logic:iterate name="<%= Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <html:link action="/viewModelCharacteristics"  paramId="ModelId" paramName="model"  paramProperty="id" >
+				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
 				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_SCREENER %>" 
-				                           paramId="ModelId" paramName="model" paramProperty="id">
+				                           paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id">
 				                    Assign
 				                </html:link>
 				            </td>
@@ -230,16 +230,16 @@
 			    <logic:iterate name="<%= Admin.COMMENTS_NEEDING_REVIEW %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <html:link action="/viewModelCharacteristics"  paramId="ModelId" paramName="model"  paramProperty="id" >
+				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="ModelId" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Reject
 				                </html:link>
 				            </td>
