@@ -163,7 +163,6 @@
 				<c:otherwise>
 				  <tr><td colspan="2">
 					<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-					<c:forEach var="p" items="${t.publicationCollection}" varStatus="stat2">
 					<tr>
 						<td class="greySubTitleLeft" width="10%">Publication Status</td>
 						<td class="greySubTitleLeft" width="15%">First Author</td>
@@ -174,7 +173,7 @@
 						<td class="greySubTitleLeft" width="10%">Pages</td>
 						<td class="greySubTitle" width="10%">Abstract in PubMed</td>
 					</tr>
-					
+					<c:forEach var="p" items="${t.publicationCollection}" varStatus="stat2">
 					<tr>
 						<c:choose>
 							<c:when test = "${stat2.count % 2 == 0}">
@@ -260,13 +259,13 @@
 							<tr>
 								<td class="formTitleBlue" colspan="11" align="center">
 									Publicly available data from the NCI Yeast Anticancer Drug Screen
-									<br>Stage <c:out value="${stat2.count}"/> - Dose Response
+									<br>Stage <c:out value="${stat2.count - 1}"/> - Dose Response
 								</td>
 							</tr>
 							<tr>
 								<td class="greySubTitle" colspan="11">
 								<a href="javascript:expdesign2()"><br>Experimental Design - Stage <c:out value="${stat2.count}"/> Testing</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:strains0()">
-									Yeast Strains used for Stage <c:out value="${stat2.count}"/> Experiments
+									Yeast Strains used for Stage <c:out value="${stat2.count - 1}"/> Experiments
 								</a>
 								<br>
 							 	</td>
