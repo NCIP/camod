@@ -36,5 +36,11 @@
         <property name="username" 
         	column="username" 
         	type="string"/>
+        	
+        <!-- username -->
+        <property name="isPrincipleInvestigator" 
+        	column="is_principle_investigator" 
+        	type="boolean"/>
+        	
 	</subclass>
 </hibernate-mapping>
