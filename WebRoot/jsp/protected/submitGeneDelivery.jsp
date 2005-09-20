@@ -13,9 +13,13 @@
 	
 	String actionName = "GeneDeliveryAction.do?method=save";
 	
-	if ( aTherapyID != null )
+	if ( aTherapyID != null  ) {
 		actionName = "GeneDeliveryAction.do?method=edit";
+	}
 %>
+
+
+<script language="JavaScript" src="scripts/EvsTree.js"></script>
 
 <SCRIPT LANGUAGE="JavaScript">
 	
@@ -61,6 +65,7 @@
 			<html:select styleClass="formFieldSized" size="1" property="viralVector" name="formdata" onclick="chkOther( this );">
 				<html:options name="<%= Dropdowns.VIRALVECTORDROP %>"/>					
 			</html:select>
+			
 			</td>
         </tr>
         
@@ -68,7 +73,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Viral Vector</label></td>
 		<td class="formField">		
-		<html:text styleClass="formFieldSized" size="30" property="otherViralVector" name="formdata"  disabled="true"/>		
+			<html:text styleClass="formFieldSized" size="30" property="otherViralVector" name="formdata"  disabled="true"/>		
 		</td>
 	</tr>        
         
@@ -76,7 +81,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gene</label></td>
 		<td class="formField">		
-		<html:text styleClass="formFieldSized" size="30" property="geneInVirus" name="formdata"  />
+			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" name="formdata"  />
 		</td>				
 	</tr>
 
@@ -84,18 +89,26 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Treatment Regimen:</label></td>
 		<td class="formField">
-		<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
 		</td>
 	</tr>
-
-
 		<!-- TO DO: convert this to a button to retrieve the evs# - taken from submitHistopatholoy.jsp  -->
 		<!-- The evs# is inserted into Organ.conceptCode, the the OrganID is inserted   -->
 		<!-- into as the GeneDelivery.geneDeliveryID value  -->
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel"><label for="field2">Location of Delivery</label>&nbsp;<IMG src="images\selectUP.gif" align=middle></td>
-		<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="conceptCode" id="conceptCode" size="25" /></td>
+		<td class="formRequiredLabel">Location of Delivery&nbsp;
+				<a href="javascript:showTissueTree( 'geneDeliveryForm', 'mouse', 1)">
+					<IMG src="images\selectUP.gif" align=middle border=0>
+
+			 		<html:hidden property="organTissueName" name="formdata" />
+			 		<html:hidden property="organTissueCode" name="formdata" />
+				</a>
+		</td>
+		
+		<td class="formField">		
+			<html:text styleClass="formFieldSized" property="organ" disabled="true" size="25" name="formdata"/>
+		</td>
 	</tr>		
 
 	<tr>
