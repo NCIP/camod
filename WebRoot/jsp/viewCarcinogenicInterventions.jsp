@@ -1,6 +1,5 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
-<%@ include file="/common/taglibs.jsp"%>
 
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
