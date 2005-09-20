@@ -25,9 +25,9 @@ public class PubMedPopulateAction extends BaseAction {
 	 	throws IOException, ServletException {
 		 
 		    System.out.println( "<PubMedPopulateAction> Entering..." );
-    	 	
+
 		    String pmid = request.getParameter( "pmid" );
-		 			 	
+			 	
 			//TODO: set the form values from the Publication obj
 			PublicationForm pubForm = ( PublicationForm ) form;
 
@@ -37,9 +37,10 @@ public class PubMedPopulateAction extends BaseAction {
 			 
 			if (m.matches() && pmid != null && ! pmid.equals("") ) 
 			 {
+				PopulatePubMedUtil popPubMed = new PopulatePubMedUtil();
 				Publication pub = new Publication();
 				
-                PopulatePubMedUtil.populatePumMedRecord( Long.valueOf( pmid.trim() ), pub );			
+				popPubMed.populatePumMedRecord( Long.valueOf( pmid.trim() ), pub );			
 				
 				pubForm.setJournal( pub.getJournal() );
 				pubForm.setYear(  "" + pub.getYear() );
@@ -50,7 +51,7 @@ public class PubMedPopulateAction extends BaseAction {
 				
 			} else {
 			    
-				System.out.println("<PubMedPopulateAction> Not a number, wrong!");
+				System.out.println("<PubMedPopulateAction> Not a valid number!");
 
 			    pubForm.setJournal( "" );
 				pubForm.setYear( "" );
@@ -64,8 +65,8 @@ public class PubMedPopulateAction extends BaseAction {
 		        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "publication.incorrect.pmid" ) );
 		        saveErrors( request, msg );			        
 			}
-		
-            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, "" );
+
+ 			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, "" );
 			
 			request.getSession().setAttribute( Constants.FORMDATA, pubForm );	
 			 
