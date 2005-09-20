@@ -2,11 +2,13 @@ package gov.nih.nci.camod.webapp.util;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
+import gov.nih.nci.camod.domain.GeneDelivery;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Strain;
 import gov.nih.nci.camod.domain.Taxon;
 import gov.nih.nci.camod.domain.Treatment;
 import gov.nih.nci.camod.service.AgentManager;
+import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.service.TaxonManager;
 import gov.nih.nci.camod.service.TreatmentManager;
 
@@ -65,7 +67,11 @@ public class NewDropdownUtil {
         if (inDropdownKey.equals( Constants.Dropdowns.ADMINISTRATIVEROUTEDROP )) {
             theReturnList = getAdminList(inRequest);
         }
-
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.VIRALVECTORDROP )) {
+            theReturnList = getViralVectorList(inRequest );
+        } 
+        
         //Environmental Factors - Carciogenic Interventions
         if (inDropdownKey.equals( Constants.Dropdowns.SURGERYDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Other" );
@@ -97,8 +103,8 @@ public class NewDropdownUtil {
                 
         if (inDropdownKey.equals( Constants.Dropdowns.ENVIRONFACTORDROP )) {
             theReturnList = getEnvironmentalFactorList(inRequest, "Environment" );
-        } 
-                  
+        }       
+        
         return theReturnList;
     }
 
@@ -262,6 +268,39 @@ public class NewDropdownUtil {
         
         return adminList;
     }
+        
+    /**
+     * Returns a list of all Administrative Routes
+     * 
+     * @return adminList
+     */
+    private static List getViralVectorList(HttpServletRequest inRequest) {
+
+        // Get values for dropdown lists for Species, Strains
+        GeneDeliveryManager geneDeliveryManager = ( GeneDeliveryManager ) getContext(inRequest).getBean("geneDeliveryManager");
+        
+        List geneDeliveryList = geneDeliveryManager.getAll();
+        List viralVectorList = new ArrayList();
+        GeneDelivery tmp;
+
+        // TODO: Fix once we know what we're doing w/ this
+        viralVectorList.add("Other");
+
+        if (geneDeliveryList != null) {
+            for (int i = 0; i < geneDeliveryList.size(); i++) {
+                tmp = (GeneDelivery) geneDeliveryList.get(i);
+
+                if (tmp.getViralVector() != null) {
+                    // if the speciesName is not already in the List, add it
+                    // (only get unique names)
+                    if (!viralVectorList.contains(tmp.getViralVector()) )
+                    	viralVectorList.add(tmp.getViralVector() );
+                }
+            } 
+        }
+        Collections.sort(viralVectorList);
+        return viralVectorList;
+    }
     
     /**
      * Returns a list for a type of environmental Factore
@@ -290,11 +329,8 @@ public class NewDropdownUtil {
                     	envList.add(tmp.getName());
                 }
             }
-        }
-            
+        }            
         Collections.sort(envList);
-
         return envList;
-    }
-    
+    }    
 }
