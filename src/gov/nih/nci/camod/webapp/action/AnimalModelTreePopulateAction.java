@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.15 2005-09-20 18:45:03 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.16 2005-09-20 19:10:57 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.15  2005/09/20 18:45:03  schroedn
+ *  Merged many changes, added GeneDelivery
+ *
  *  Revision 1.14  2005/09/19 18:15:28  georgeda
  *  Organized imports and changed boolean to Boolean
  *
@@ -108,40 +111,41 @@ public class AnimalModelTreePopulateAction extends BaseAction {
                 // check to see if it is an EnvironmentalFactor
                 if (ty.getTherapeuticExperiment().booleanValue() == false) {
                     Agent agent = ty.getAgent();
-
-                    if (agent.getType().equals("Other")) {
-                        System.out.println("\tAdded therapy to surgeryList");
-                        surgeryList.add(ty);
-                    }
-                    if (agent.getType().equals("Hormone")) {
-                        System.out.println(" therapy to hormoneList");
-                        hormoneList.add(ty);
-                    }
-                    if (agent.getType().equals("Growth Factor")) {
-                        System.out.println("\tAdded therapy to growthFactorList");
-                        growthFactorList.add(ty);
-                    }
-                    if (agent.getType().equals("Viral")) {
-                        System.out.println("\tAdded therapy to viraltreatmentList");
-                        viraltreatmentList.add(ty);
-                    }
-                    if (agent.getType().equals("Chemical / Drug")) {
-                        System.out.println("\tAdded therapy to chemicaldrugList");
-                        chemicaldrugList.add(ty);
-                    }
-                    if (agent.getType().equals("Environment")) {
-                        System.out.println("\tAdded therapy to environFactorList");
-                        environFactorList.add(ty);
-                    }
-
-                    if (agent.getType().equals("Nutrition")) {
-                        System.out.println("\tAdded therapy to nutritionalFactorList");
-                        nutritionalFactorList.add(ty);
-                    }
-
-                    if (agent.getType().equals("Radiation")) {
-                        System.out.println("\tAdded therapy to radiationList");
-                        radiationList.add(ty);
+                    if ( agent != null ) {
+	                    if (agent.getType().equals("Other")) {
+	                        System.out.println("\tAdded therapy to surgeryList");
+	                        surgeryList.add(ty);
+	                    }
+	                    if (agent.getType().equals("Hormone")) {
+	                        System.out.println(" therapy to hormoneList");
+	                        hormoneList.add(ty);
+	                    }
+	                    if (agent.getType().equals("Growth Factor")) {
+	                        System.out.println("\tAdded therapy to growthFactorList");
+	                        growthFactorList.add(ty);
+	                    }
+	                    if (agent.getType().equals("Viral")) {
+	                        System.out.println("\tAdded therapy to viraltreatmentList");
+	                        viraltreatmentList.add(ty);
+	                    }
+	                    if (agent.getType().equals("Chemical / Drug")) {
+	                        System.out.println("\tAdded therapy to chemicaldrugList");
+	                        chemicaldrugList.add(ty);
+	                    }
+	                    if (agent.getType().equals("Environment")) {
+	                        System.out.println("\tAdded therapy to environFactorList");
+	                        environFactorList.add(ty);
+	                    }
+	
+	                    if (agent.getType().equals("Nutrition")) {
+	                        System.out.println("\tAdded therapy to nutritionalFactorList");
+	                        nutritionalFactorList.add(ty);
+	                    }
+	
+	                    if (agent.getType().equals("Radiation")) {
+	                        System.out.println("\tAdded therapy to radiationList");
+	                        radiationList.add(ty);
+	                    }
                     }
                 }
             }
@@ -164,12 +168,12 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         AnimalModelStateForm theForm = new AnimalModelStateForm();
         List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.CONTROLLER);
 
-            // Set the fields
-            theForm.setModelId(modelID);
-            theForm.setModelDescriptor(animalModel.getModelDescriptor());
-            theForm.setComment("Model has been moved to complete");
-            theForm.setAssignedTo((String) theRoles.get(0));
-            theForm.setEvent(Constants.Admin.Actions.COMPLETE);
+        // Set the fields
+        theForm.setModelId(modelID);
+        theForm.setModelDescriptor(animalModel.getModelDescriptor());
+        theForm.setComment("Model has been moved to complete");
+        theForm.setAssignedTo((String) theRoles.get(0));
+        theForm.setEvent(Constants.Admin.Actions.COMPLETE);
 
         request.setAttribute(Constants.FORMDATA, theForm);
         
