@@ -265,10 +265,6 @@
 			path="/jsp/subViewModelMenu.jsp"></forward>
 		
 		<forward
-			name="viewModel"
-			path="/jsp/viewModel.jsp"></forward>
-		
-		<forward
 			name="viewCarcinogenicInterventions"
 			path="/jsp/viewCarcinogenicInterventions.jsp"></forward>
 		
