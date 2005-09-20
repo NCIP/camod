@@ -223,7 +223,7 @@ public class Constants {
     public interface Submit {
 
         /**
-         * Used to store a list of names for the cardiogentic intervention
+         * Used to store required lists for the cardiogentic intervention
          * section of the sidebar menu of the submission section
          */
         public static final String CHEMICALDRUG_LIST = "chemicaldrug_list";
@@ -235,8 +235,16 @@ public class Constants {
         public static final String RADIATION_LIST = "radiation_list";
         public static final String SURGERYOTHER_LIST = "surgeryother_list";
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
-
+        /**
+         * Used to store a list of names for the Publication
+         * section of the sidebar menu of the submission section
+         */
         public static final String PUBLICATION_LIST = "publication_list";
+        /**
+         * Used to store a list of names for the Cell Line
+         * section of the sidebar menu of the submission section
+         */        
+    	public static final String CELLLINE_LIST = "cellline_list";
     }
 
     // /////////////////////////////////////////////////////////////
