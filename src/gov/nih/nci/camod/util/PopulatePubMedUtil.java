@@ -145,8 +145,8 @@ public class PopulatePubMedUtil implements Runnable{
         }
     }
     
-    public static String getPubmedAbstract(Long pubMedID){	// to retrieve record from pub med if pubmedID exits
-
+    public static String getPubmedAbstract(Long pubMedID){	
+    	// to retrieve record from pub med if pubmedID exits
     	
     	System.out.println("<PopulatePubMed.java getPubmedAbstract> pubMedID=" + pubMedID );
         
@@ -207,6 +207,7 @@ public class PopulatePubMedUtil implements Runnable{
         }
         return flag;
     }
+    
     private static  String getAbstractString(String pubmedRecord){// retrieve the pubmed abstract
         String pubmedAbstract = null;
         if(pubmedRecord != null){
@@ -218,6 +219,7 @@ public class PopulatePubMedUtil implements Runnable{
         }
         return pubmedAbstract;
     }
+    
     private static String[] getPubMedPages(String pubMedAbstract){ // to get start colume and end colume for pub record
         System.out.println("<PopulatePubMed.java getPubMedPages> Entering..." );
         String[] pageArray = new String[2];
