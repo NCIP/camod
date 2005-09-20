@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.16 2005-09-20 19:10:57 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.17 2005-09-20 19:32:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.16  2005/09/20 19:10:57  schroedn
+ *  Added check for Agent != null, GeneDelivery has no Agent, uses GeneDelivery
+ *
  *  Revision 1.15  2005/09/20 18:45:03  schroedn
  *  Merged many changes, added GeneDelivery
  *
@@ -85,7 +88,20 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             System.out.println("\tAdded GeneDelivery= " + geneDelivery.getViralVector() );
             
             geneList.add( geneDelivery );
-        }           
+        }
+        
+        // Retrieve a list of all cell lines assoicated with this Animal model
+        List cellLineList = animalModel.getCellLineCollection();
+        List cellList = new ArrayList(); 
+        
+        for (int i = 0; i < cellLineList.size(); i++) {
+            CellLine cellLine = (CellLine) cellLineList.get(i);
+            
+            System.out.println("cellLine= " + cellLine);
+            
+            cellList.add(cellLine);
+    	} 
+        
 
         // Print the list of EnvironmentalFactors for the Cardiogenic
         // Interventions Section
@@ -161,6 +177,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList);
         request.getSession().setAttribute(Constants.Submit.PUBLICATION_LIST, pubList);
         request.getSession().setAttribute(Constants.Submit.GENEDELIVERY_LIST, geneList);
+        
+        request.getSession().setAttribute(Constants.Submit.CELLLINE_LIST, cellList);        
         
         UserManager theUserManager = (UserManager) getBean("userManager");
 
