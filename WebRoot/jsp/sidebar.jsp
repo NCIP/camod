@@ -79,8 +79,8 @@
 		     <b><%= session.getAttribute("camod.loggedon.username") %></b><br>
 		     <logic:present name="<%= Constants.CURRENTUSERROLES %>">
 			    <logic:iterate name="<%= Constants.CURRENTUSERROLES %>" id="role" type="String">
-			        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#475b82"> - <%=role%><br>
-			    </logic:iterate> 
+			        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#475b82"> - <c:out value="${role}" /><br>
+			    </logic:iterate>
 			 </logic:present>
 		     <a href="adminUserSettings.jsp">User Settings</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="LogoutAction.do">Log out</a>
 		     <br>
