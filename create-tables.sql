@@ -560,6 +560,7 @@ create table taxon (
    taxon_id number(19,0) not null,
    scientific_name varchar2(255),
    ethnicity_strain varchar2(255),
+   ethnicity_strain_unctrl_vocab varchar2(255),
    abbreviation varchar2(255),
    common_name varchar2(255),
    primary key (taxon_id)
@@ -622,11 +623,11 @@ alter table abs_can_mod_publication add constraint FK9377C2B3496C4E05 foreign ke
 alter table abs_cancer_model add constraint FKBC9267574D19DE94 foreign key (tumor_code_id) references tumor_code;
 alter table abs_cancer_model add constraint FKBC926757DF44C4B5 foreign key (taxon_id) references taxon;
 alter table abs_cancer_model add constraint FKBC9267576316BFA foreign key (host_species_id) references taxon;
-alter table abs_cancer_model add constraint FKBC926757346CAD81 foreign key (principal_investigator_id) references party;
+alter table abs_cancer_model add constraint FKBC9267572D8B96DA foreign key (principal_investigator_id) references party;
 alter table abs_cancer_model add constraint FKBC9267573E7277BC foreign key (origin_species_id) references taxon;
 alter table abs_cancer_model add constraint FKBC9267572175CA75 foreign key (phenotype_id) references phenotype;
 alter table abs_cancer_model add constraint FKBC9267573D222B55 foreign key (organ_id) references organ;
-alter table abs_cancer_model add constraint FKBC92675774AADA32 foreign key (submitter_id) references party;
+alter table abs_cancer_model add constraint FKBC9267576DC9C38B foreign key (submitter_id) references party;
 alter table abs_cancer_model add constraint FKBC9267579BE9D993 foreign key (par_abs_can_model_id) references abs_cancer_model;
 alter table abs_cancer_model add constraint FKBC92675765C8F094 foreign key (repository_info_id) references repository_info;
 alter table abs_cancer_model add constraint FKBC926757290CE83F foreign key (availability_id) references availability;
