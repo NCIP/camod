@@ -891,8 +891,26 @@
 	        validate="false" >
     </action>
     
-     <!-- AssociatedExpressionForm -->     
-     <!-- CellLineForm --> 
+     <!-- AssociatedExpressionForm -->
+     
+          
+     <!-- CellLineForm -->
+     <action path="/CellLineAction"
+	        type="gov.nih.nci.camod.webapp.action.CellLineAction"
+	        name="cellLineForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitCellLines">   	
+    </action>
+    
+    <action path="/CellLinePopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.CellLinePopulateAction"
+    		name="cellLineForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>      
          
      <!-- ChemicalDrugForm -->
      <action path="/ChemicalDrugAction"
@@ -922,8 +940,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="false"
-	        input="submitEnvironmentalFactors">   	
-    </action> 
+	        input="submitEnvironmentalFactors">
+   </action> 
     
     <action path="/EnvironmentalFactorPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.EnvironmentalFactorPopulateAction"

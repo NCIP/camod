@@ -1,8 +1,9 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>
-<%@ page import="gov.nih.nci.camod.domain.Publication" %>	
+<%@ page import="gov.nih.nci.camod.domain.Publication" %>
 <%@ page import="gov.nih.nci.camod.domain.GeneDelivery" %>	
-<%@ page import="gov.nih.nci.camod.domain.Therapy" %>	
+<%@ page import="gov.nih.nci.camod.domain.Therapy" %>
+<%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
@@ -104,9 +105,13 @@
 
 	<div id="menu7" class="masterTitle" onclick="SwitchMenu('sub7')" onmouseover="ChangeClass('menu7','masterTitleOver')" onmouseout="ChangeClass('menu7','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> CELL LINES</div>
 	<span class="submasterdiv" id="sub7">
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitCellLines">Enter Cell Lines</html:link><br><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitCellLines">Enter Cell Lines</html:link><br>
+			 <logic:iterate id="aCell" name="cellline_list" type="CellLine">
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="CellLinePopulateAction.do?method=populate" paramId="aCellID" paramName="aCell" paramProperty="id"><bean:write name="aCell" property="name" filter="true"/></html:link><br>
+			 </logic:iterate>
+		<br>
 	</span>
-	
+	  
 	<div id="menu8" class="masterTitle" onclick="SwitchMenu('sub8')" onmouseover="ChangeClass('menu8','masterTitleOver')" onmouseout="ChangeClass('menu8','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> IMAGES</div>
 	<span class="submasterdiv" id="sub8">
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitImages">Enter Images</html:link><br><br>

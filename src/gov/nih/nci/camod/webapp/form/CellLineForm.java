@@ -26,13 +26,26 @@ public class CellLineForm extends BaseForm implements Serializable {
 	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public CellLineForm() {}
-	
+
+	protected String clid;
 	protected String cellLineName;
 	protected String organName;
 	protected String experiment;
 	protected String results;
 	protected String comments;
 
+	/**
+	 * @return Returns the clid.
+	 */
+	public String getClid() {
+		return clid;
+	}
+	/**
+	 * @param clid The clid to set.
+	 */
+	public void setClid(String clid) {
+		this.clid = clid;
+	}
 	/**
 	 * @return Returns the cellLineName.
 	 */
