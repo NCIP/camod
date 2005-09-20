@@ -6,12 +6,9 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.util.*;
+
+import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -20,6 +17,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class Xenograft extends AbstractCancerModel {
+    
+    private static final long serialVersionUID = 3257445453799404851L;
+    
 	private String administrativeSite;
 	private String geneticManipulation;
 	private String modificationDescription;

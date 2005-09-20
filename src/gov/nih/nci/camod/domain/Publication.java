@@ -18,6 +18,8 @@ import org.apache.commons.lang.builder.*;
  */
 public class Publication extends BaseObject implements Serializable {
 
+    private static final long serialVersionUID = 3258755453799404851L;
+
     private Long id;
     private String volume;
     private Long endPage;

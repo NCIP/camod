@@ -20,6 +20,8 @@ import org.apache.commons.lang.builder.*;
  */
 public class Therapy extends BaseObject implements Serializable {
 
+    private static final long serialVersionUID = 3258525453799404851L;
+
     private Long id;
     private String experiment;
     private String comments;

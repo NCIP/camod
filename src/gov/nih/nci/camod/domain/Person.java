@@ -13,6 +13,8 @@ import org.apache.commons.lang.builder.*;
  */
 public class Person extends Party {
 
+    private static final long serialVersionUID = 3258795453799404851L;
+
     private String firstName;
     private String middleName;
     private String lastName;

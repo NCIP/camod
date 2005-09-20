@@ -16,6 +16,9 @@ import java.io.Serializable;
  */
 
 public class HormoneForm extends BaseForm implements Serializable {
+    
+    private static final long serialVersionUID = 3257215453799404851L;
+    
 	/**
 	 * Default empty constructor
 	 * @author pandyas

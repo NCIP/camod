@@ -9,6 +9,9 @@ import java.io.Serializable;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class AssociatedExpressionForm extends BaseForm implements Serializable {
+    
+    private static final long serialVersionUID = 3257405453799404851L;
+    
 	/**
 	 * Default empty constructor
 	 * @author pandyas

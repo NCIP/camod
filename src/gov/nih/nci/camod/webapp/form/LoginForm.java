@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionMapping;
 
 public class LoginForm extends BaseForm implements Serializable {
+    
+    private static final long serialVersionUID = 3257165453799404851L;
+    
 	/**
 	 * Default empty constructor
 	 * @author nschroedl

@@ -7,8 +7,6 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * @author rajputs
@@ -17,6 +15,9 @@ import org.apache.struts.action.ActionMapping;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class TargetedModificationForm extends BaseForm implements Serializable {
+    
+    private static final long serialVersionUID = 3257085453799404851L;
+    
 	/**
 	 * Default empty constructor
 	 * @author rajputs

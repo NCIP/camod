@@ -10,23 +10,28 @@ import java.io.Serializable;
 
 /**
  * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * 
+ * TODO To change the template for this generated type comment go to Window -
+ * Preferences - Java - Code Style - Code Templates
  */
 public class Strain implements Serializable {
-	private String name;
-	
-	/**
-	 * @return Returns the name.
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+
+    private static final long serialVersionUID = 3258585453799404851L;
+
+    private String name;
+
+    /**
+     * @return Returns the name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name
+     *            The name to set.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }

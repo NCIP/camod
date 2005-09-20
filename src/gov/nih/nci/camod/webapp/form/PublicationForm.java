@@ -15,6 +15,9 @@ import java.io.Serializable;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class PublicationForm extends BaseForm implements Serializable {
+    
+    private static final long serialVersionUID = 3257155453799404851L;
+    
 	/**
 	 * Default empty constructor
 	 * @author rajputs

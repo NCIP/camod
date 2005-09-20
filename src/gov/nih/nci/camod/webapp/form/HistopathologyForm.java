@@ -14,6 +14,9 @@ import java.io.Serializable;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class HistopathologyForm extends BaseForm implements Serializable {
+    
+    private static final long serialVersionUID = 3257225453799404851L;
+    
 	/**
 	 * Default empty constructor
 	 * @author pandyas

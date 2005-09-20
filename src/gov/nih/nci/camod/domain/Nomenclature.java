@@ -8,9 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.*;
 /**
  * @author rajputs
  *
@@ -18,6 +16,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class Nomenclature extends BaseObject implements Serializable {
+    
+    private static final long serialVersionUID = 3259115453799404851L;
+    
 	private Long id;
 	private String name;
 	

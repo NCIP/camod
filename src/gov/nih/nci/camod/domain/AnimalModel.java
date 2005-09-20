@@ -19,6 +19,8 @@ import org.apache.commons.lang.builder.*;
  */
 public class AnimalModel extends AbstractCancerModel {
 
+    private static final long serialVersionUID = 4259665453799404851L;
+
     private String url;
     private Boolean isToolMouse;
     private List cellLineCollection = new ArrayList();

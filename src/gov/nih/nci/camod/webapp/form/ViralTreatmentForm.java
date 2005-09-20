@@ -16,6 +16,9 @@ import java.io.Serializable;
  */
 
 public class ViralTreatmentForm extends BaseForm implements Serializable {
+    
+    private static final long serialVersionUID = 3257115453799404851L;
+    
 	/**
 	 * Default empty constructor
 	 * @author pandyas

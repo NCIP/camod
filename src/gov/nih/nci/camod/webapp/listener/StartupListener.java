@@ -1,29 +1,27 @@
 package gov.nih.nci.camod.webapp.listener;
 
+import gov.nih.nci.camod.Constants;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import javax.servlet.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import gov.nih.nci.camod.Constants;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- * StartupListener class used to initialize and database settings
- * and populate any application-wide drop-downs.
- *
+ * StartupListener class used to initialize and database settings and populate
+ * any application-wide drop-downs.
+ * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
- *
+ * 
  * @web.listener
  */
-public class StartupListener extends ContextLoaderListener
-    implements ServletContextListener {
+public class StartupListener extends ContextLoaderListener implements ServletContextListener {
+
+    private static final long serialVersionUID = 3257135453799404851L;
     
     private static final Log log = LogFactory.getLog(StartupListener.class);
 
@@ -67,9 +65,6 @@ public class StartupListener extends ContextLoaderListener
     }
 
     public static void setupContext(ServletContext context) {
-        ApplicationContext ctx = 
-            WebApplicationContextUtils.getRequiredWebApplicationContext(context);
-
         if (log.isDebugEnabled()) {
             log.debug("drop-down initialization complete [OK]");
         }
