@@ -27,7 +27,7 @@ public class Log extends BaseObject implements Serializable {
     private String timestamp;
     private AbstractCancerModel cancerModel;
     private Comments comment;
-    private Party submitter;
+    private Person submitter;
 
     /**
      * @return Returns the id.
@@ -137,7 +137,7 @@ public class Log extends BaseObject implements Serializable {
     /**
      * @return Returns the submitter.
      */
-    public Party getSubmitter() {
+    public Person getSubmitter() {
         return submitter;
     }
 
@@ -145,7 +145,7 @@ public class Log extends BaseObject implements Serializable {
      * @param submitter
      *            The submitter to set.
      */
-    public void setSubmitter(Party submitter) {
+    public void setSubmitter(Person submitter) {
         this.submitter = submitter;
     }
 

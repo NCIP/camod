@@ -44,9 +44,9 @@
         	column="timestamp" 
         	type="string"/> 
         	
-        <!-- Party (many-to-one) -->
+        <!-- Person (many-to-one) -->
         <many-to-one name="submitter"
-        	class="Party"
+        	class="Person"
         	column="party_id"/> 
         	
         <!-- AbstractCancerModel (many-to-one) -->

@@ -52,9 +52,9 @@
         	class="ModelSection"
         	column="model_section_id"/> 
         	
-        <!-- Party (many-to-one) -->
+        <!-- Person (many-to-one) -->
         <many-to-one name="submitter"
-        	class="Party"
+        	class="Person"
         	column="party_id"/>         	        	       	        	
         	
 	</class>

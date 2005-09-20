@@ -25,7 +25,7 @@ public class Comments extends BaseObject implements Serializable {
     private AbstractCancerModel cancerModel;
     private Availability availability;
     private ModelSection modelSection;
-    private Party submitter;
+    private Person submitter;
     private String state;
 
     /**
@@ -121,7 +121,7 @@ public class Comments extends BaseObject implements Serializable {
     /**
      * @return Returns the submitter.
      */
-    public Party getSubmitter() {
+    public Person getSubmitter() {
         return submitter;
     }
 
@@ -129,7 +129,7 @@ public class Comments extends BaseObject implements Serializable {
      * @param submitter
      *            The submitter to set.
      */
-    public void setSubmitter(Party submitter) {
+    public void setSubmitter(Person submitter) {
         this.submitter = submitter;
     }
 
