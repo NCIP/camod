@@ -1,6 +1,7 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>
 <%@ page import="gov.nih.nci.camod.domain.Publication" %>	
+<%@ page import="gov.nih.nci.camod.domain.GeneDelivery" %>	
 <%@ page import="gov.nih.nci.camod.domain.Therapy" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
@@ -40,7 +41,10 @@
 			  </logic:iterate>
 
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GeneDeliveryPopulateAction.do?method=dropdown">Enter Gene Delivery</html:link><br>
-		
+			  <logic:iterate id="aTherapy" name="genedelivery_list" type="GeneDelivery">
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="viralVector" filter="true"/></html:link><br>
+			  </logic:iterate>
+			  
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factors</html:link><br>		
 			  <logic:iterate id="aTherapy" name="growthfactors_list" type="Therapy">
 				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GrowthFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
