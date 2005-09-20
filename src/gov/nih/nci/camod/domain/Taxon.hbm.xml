@@ -34,6 +34,11 @@
         	column="ethnicity_strain" 
         	type="string"/>
         	
+        <!--  ethnicityStrainUnctrlVocab -->
+        <property name="ethnicityStrainUnctrlVocab" 
+        	column="ethnicity_strain_unctrl_vocab" 
+        	type="string"/>        
+        	
         <!-- abbreviation -->
         <property name="abbreviation" 
         	column="abbreviation" 
