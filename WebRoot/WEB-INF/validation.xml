@@ -52,55 +52,24 @@
         </field>
     </form>
     
-    <form name="environmentalFactorForm">
-        <field property="name" depends="required">
-            <arg0 key="EnvironmentalFactorForm.name"/>
-    	</field>    
-	</form>
 	
 	<form name="geneDeliveryForm">
         <field property="name" depends="required">
             <arg0 key="GeneDeliveryForm.name"/>
     	</field>    
 	</form>	
-	
-	<form name="growthFactorForm">
-        <field property="name" depends="required">
-            <arg0 key="GrowthFactorForm.name"/>
-    	</field>    
-	</form>	
-	
-	<form name="hormoneForm">
-        <field property="name" depends="required">
-            <arg0 key="HormoneForm.name"/>
-    	</field>    
-	</form>	
-	
-	<form name="nutritionalFactorForm">
-        <field property="name" depends="required">
-            <arg0 key="NutritionalFactorForm.name"/>
-    	</field>    
-	</form>	
-	
-	<form name="surgeryForm">
-        <field property="name" depends="required">
-            <arg0 key="SurgeryForm.name"/>
-    	</field>    
-	</form>
-	
-	<form name="radiationForm">
-        <field property="name" depends="required">
-            <arg0 key="RadiationForm.name"/>
-    	</field>    
-	</form>	
-	
+
 
 	
-	<form name="viralTreatmentForm">
-        <field property="name" depends="required">
-            <arg0 key="ViralTreatmentForm.name"/>
-    	</field>    
-	</form>
+	<form name="cellLineForm">
+        <field property="cellLineName" depends="required">
+            <arg0 key="CellLine.cellLineName"/>
+    	</field> 
+    	
+         <field property="organName" depends="required">
+            <arg0 key="CellLine.organName"/>
+    	</field>  
+	</form>	
 	
   </formset>
 </form-validation>
