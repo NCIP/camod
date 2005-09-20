@@ -54,7 +54,6 @@ public class OrganManagerImpl extends BaseManager implements OrganManager {
     }
 
     public Organ getByName(String inName) {
-
         Organ organ = null;
 
         try {
@@ -80,7 +79,6 @@ public class OrganManagerImpl extends BaseManager implements OrganManager {
             System.out.println("Exception in PersonManagerImpl.getByType");
             e.printStackTrace();
         }
-
         return organ;
     }
 
@@ -107,4 +105,5 @@ public class OrganManagerImpl extends BaseManager implements OrganManager {
             e.printStackTrace();
         }
     }
+    
 }
