@@ -16,8 +16,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("searchResults.jsp")) {
 				return "subSearchMenu.jsp";
 			} 
-			else if ( 	jspName.equals("viewModel.jsp") ||
-						jspName.equals("viewModelCharacteristics.jsp") || 
+			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 
 						jspName.equals("viewSpontaneousMutation.jsp") || 
 						jspName.equals("viewTransplantXenograft.jsp") || 
 						jspName.equals("viewGenomicSegment.jsp") || 
