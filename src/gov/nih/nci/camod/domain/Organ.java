@@ -6,7 +6,6 @@
  */
 package gov.nih.nci.camod.domain;
 
-import gov.nih.nci.evs.domain.Property;
 import gov.nih.nci.evs.query.EVSQuery;
 import gov.nih.nci.evs.query.EVSQueryImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
