@@ -76,12 +76,10 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="dosage" size="10" name="formdata" />
-			
+			<html:text styleClass="formFieldSized"  property="dosage" size="10" name="formdata" />			
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
 				<html:options name="<%= Dropdowns.DOSAGEUNITSDROP %>"/>					
-			</html:select>	
-
+			</html:select>
 		</td>
 	</tr>
 
