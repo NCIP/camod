@@ -6,6 +6,11 @@
  */
 package gov.nih.nci.camod.domain;
 
+import gov.nih.nci.evs.domain.Property;
+import gov.nih.nci.evs.query.EVSQuery;
+import gov.nih.nci.evs.query.EVSQueryImpl;
+import gov.nih.nci.system.applicationservice.ApplicationService;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +61,43 @@ public class Organ extends BaseObject implements Serializable {
      */
     public String getConceptCode() {
         return conceptCode;
+    }
+
+    /**
+     * @return Returns the conceptCode.
+     */
+    public String getEVSPreferredDescription() {
+
+        String thePreferedDesc = "";
+        
+        ApplicationService appService = ApplicationService
+                .getRemoteInstance("http://cabio.nci.nih.gov/cacore30/server/HTTPServer");
+
+        EVSQuery theQuery = new EVSQueryImpl();
+        theQuery.getConceptNameByCode("NCI_Thesaurus", conceptCode);
+        try {
+            List evsResults = (List) appService.evsSearch(theQuery);
+
+            if (evsResults.size() > 0) {
+                System.out.println("List: " + evsResults);
+                
+                String theDisplayName = (String) evsResults.get(0);
+                
+                EVSQuery theQuery2 = new EVSQueryImpl();
+                theQuery2.getPropertyValues("NCI_Thesaurus", theDisplayName, "Display_Name");
+                
+                List theSecondList = (List) appService.evsSearch(theQuery2);
+                
+                if (theSecondList.size() > 0)
+                {
+                    thePreferedDesc = (String) theSecondList.get(0);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("E: " + e);
+        }
+        return thePreferedDesc;
     }
 
     /**
