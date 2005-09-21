@@ -1,23 +1,17 @@
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.Organ;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.CellLineManager;
 import gov.nih.nci.camod.service.GeneDeliveryManager;
-import gov.nih.nci.camod.service.OrganManager;
 import gov.nih.nci.camod.webapp.form.CellLineForm;
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+
+import org.apache.struts.action.*;
 
 /**
  * CellLineAction Class
@@ -165,8 +159,8 @@ public final class CellLineAction extends BaseAction {
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
         
         //TODO: use managers to implement evs tree (organ code)
-        CellLineManager cellLineManager = (CellLineManager) getBean( "cellLineManager" );
-        OrganManager organManager = (OrganManager) getBean( "organManager" );
+        //CellLineManager cellLineManager = (CellLineManager) getBean( "cellLineManager" );
+        //OrganManager organManager = (OrganManager) getBean( "organManager" );
         GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager)getBean( "geneDeliveryManager" ); 
         
         /* Set modelID in AnimalModel object */

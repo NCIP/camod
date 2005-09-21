@@ -37,10 +37,8 @@ public class PubMedPopulateAction extends BaseAction {
 			 
 			if (m.matches() && pmid != null && ! pmid.equals("") ) 
 			 {
-				PopulatePubMedUtil popPubMed = new PopulatePubMedUtil();
 				Publication pub = new Publication();
-				
-				popPubMed.populatePumMedRecord( Long.valueOf( pmid.trim() ), pub );			
+                PopulatePubMedUtil.populatePumMedRecord( Long.valueOf( pmid.trim() ), pub );			
 				
 				pubForm.setJournal( pub.getJournal() );
 				pubForm.setYear(  "" + pub.getYear() );
