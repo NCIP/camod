@@ -71,5 +71,11 @@
     	</field>  
 	</form>	
 	
+	<form name="therapyForm">
+        <field property="name" depends="required">
+            <arg0 key="Therapy.compoundName"/>
+    	</field> 
+	</form>		
+	
   </formset>
 </form-validation>

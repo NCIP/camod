@@ -1182,8 +1182,25 @@
     </action>
     
      <!-- TargetedModificationForm -->
-     <!-- TherapyForm -->
      
+     <!-- TherapyForm -->
+          <action path="/TherapyAction"
+	        type="gov.nih.nci.camod.webapp.action.TherapyAction"
+	        name="viralTreatmentForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitTherapy">   	
+    </action>
+    
+    <action path="/TherapyPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.TherapyPopulateAction"
+    		name="therapyForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+         
      <!-- ViralTreatmentForm -->
           <action path="/ViralTreatmentAction"
 	        type="gov.nih.nci.camod.webapp.action.ViralTreatmentAction"
