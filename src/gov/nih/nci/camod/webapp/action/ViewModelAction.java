@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.5 2005-09-16 19:30:00 guruswas Exp $
+ *  $Id: ViewModelAction.java,v 1.6 2005-09-21 20:47:16 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.5  2005/09/16 19:30:00  guruswas
+ *  Display invivo data (from DTP) in the therapuetic approaches page
+ *
  *  Revision 1.4  2005/09/16 15:52:56  georgeda
  *  Changes due to manager re-write
  *
@@ -16,6 +19,7 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.DrugScreenResult;
+import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
 import java.util.*;
@@ -240,14 +244,14 @@ public class ViewModelAction extends BaseAction {
 			}
 		}
 		*/
-		String modelID = request.getParameter("aModelID");
+		String modelID = request.getParameter(Constants.Parameters.MODELID);
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel am = animalModelManager.get(modelID);
 		final List therapyColl = am.getTherapyCollection();
 		final int cc = (therapyColl!=null)?therapyColl.size():0;
 		log.info("Looking up clinical protocols for " + cc + " agents...");
-		ApplicationService appService = ApplicationService.getRemoteInstance(
-		"http://cabio.nci.nih.gov/cacore30/server/HTTPServer");
+        
+		ApplicationService appService = EvsTreeUtil.getApplicationService();
 
 		for(int i=0; i<cc; i++) {
 			Therapy t = (Therapy)therapyColl.get(i);
