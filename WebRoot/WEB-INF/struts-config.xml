@@ -931,6 +931,26 @@
     </action>
          
      <!-- ClinicalMarkerForm -->
+     
+     <action path="/ClinicalMarkerAction"
+	        type="gov.nih.nci.camod.webapp.action.ClinicalMarkerAction"
+	        name="clinicalMarkerForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitClinicalMarker">   	
+    </action>
+    
+    <action path="/ClinicalMarkerPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.ClinicalMarkerPopulateAction"
+    		name="clinicalMarkerForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>     
+     
+     
+     
      <!-- EngineeredTransgeneForm -->
      
      <!-- EnvironmentalFactorForm -->
