@@ -74,7 +74,7 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-				C<c:out value="${h.organ.conceptCode}"/>
+				C<c:out value="${h.organ.conceptCode}"/> - <c:out value="${h.organ.EVSPreferredDescription}"/>
 				</td>
 			</tr>
 
