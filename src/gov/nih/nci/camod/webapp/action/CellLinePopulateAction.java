@@ -6,13 +6,8 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.Organ;
-import gov.nih.nci.camod.domain.Publication;
-import gov.nih.nci.camod.domain.PublicationStatus;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.CellLineForm;
-import gov.nih.nci.camod.webapp.form.PublicationForm;
-import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
