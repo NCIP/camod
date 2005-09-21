@@ -130,28 +130,39 @@
 			</td>
 		</tr>
 
-		<tr>
-			<td class="GreyBox" width="35%">
-			<b>Transgene Integration</b></td>
-			<td class="GreyBoxRightEnd" width="65%">&nbsp;
-			TBD
-			</td>
-		</tr>
-
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">&nbsp;
-			<c:out value="${tg.locationOfIntegration}"/>
-			</td>
-		</tr>
-
+		<c:choose>
+			<c:when test="${not empty tg.locationOfIntegration}">
+				<tr>
+					<td class="GreyBox" width="35%">
+					<b>Transgene Integration</b></td>
+					<td class="GreyBoxRightEnd" width="65%">&nbsp;
+					Targeted
+					</td>
+				</tr>
+				<tr>
+					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
+					<td class="WhiteBoxRightEnd" width="65%">&nbsp;
+					<c:out value="${tg.locationOfIntegration}"/>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td class="GreyBox" width="35%">
+					<b>Transgene Integration</b></td>
+					<td class="GreyBoxRightEnd" width="65%">&nbsp;
+					Random
+					</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		
 		<tr>
 			<td class="GreyBox" width="35%"><b>Transgene</b></td>
 			<td class="GreyBoxRightEnd" width="65%">&nbsp;
 			<c:out value="${tg.name}"/>
 			</td>
 		</tr>
-		
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">&nbsp;
@@ -174,15 +185,21 @@
 			<c:out value="${rem.taxon.scientificName}"/>&nbsp;
 			<c:out value="${rem.taxon.ethnicityStrain}"/>
 			</td>
-		</tr>	
+		</tr>
 		</c:forEach>
 
+		<c:if test="${not empty tg.image.id}">
 		<tr>
 			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'><Img src="images/image1.jpg" width=50 height=50 border=0></a><br>( Click to view Image )
-			</td>			
+			<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
+			<Img src="http://caimage.nci.nih.gov/lizardtech/Model_Images/GeneticConstruct/<c:out value="${tg.image.id}"/>.jpg" 
+				width=50 height=50 border=0
+				alt="Click on the image to open in a new Browser window"></a>
+			<br/>( Click to View )
+			</td>
 		</tr>
+		</c:if>
 
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>

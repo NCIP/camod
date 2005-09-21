@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.6 2005-09-21 20:47:16 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.7 2005-09-21 21:02:24 guruswas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.6  2005/09/21 20:47:16  georgeda
+ *  Cleaned up
+ *
  *  Revision 1.5  2005/09/16 19:30:00  guruswas
  *  Display invivo data (from DTP) in the therapuetic approaches page
  *
@@ -136,6 +139,7 @@ public class ViewModelAction extends BaseAction {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		setCancerModel(request);
+		String modelID = request.getParameter("aModelID");
 		return mapping.findForward("viewCarcinogenicInterventions");
 	}
 

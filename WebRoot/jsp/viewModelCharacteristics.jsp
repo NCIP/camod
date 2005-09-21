@@ -29,14 +29,22 @@
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Official Nomenclature</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				TBD
+				<ul>
+					<c:forEach var="item" items="${mdl.engineeredGeneCollection}" varStatus="stat">
+					<li> <c:out value="${item.genotypeSummary.nomenclature.name}"/> </li>
+					</c:forEach>
+				</ul>
 			</td>
 		</tr>
 
 		<tr>
 			<td class="GreyBox" width="20%"><b>Genotype</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				TBD
+				<ul>
+					<c:forEach var="item" items="${mdl.engineeredGeneCollection}" varStatus="stat">
+					<li> <c:out value="${item.genotypeSummary.summary}"/> </li>
+					</c:forEach>
+				</ul>
 			</td>
 		</tr>
 
@@ -68,6 +76,15 @@
 			<td class="GreyBoxRightEnd" width="80%">
 				<P>
 				<c:out value="${mdl.phenotype.description}"/>
+				</P>		
+			</td>
+		</tr>		
+
+		<tr>
+			<td class="GreyBox" width="20%"><b>Breeding Notes</b></td>
+			<td class="GreyBoxRightEnd" width="80%">&nbsp;
+				<P>
+				<c:out value="${mdl.phenotype.breedingNotes}"/>
 				</P>		
 			</td>
 		</tr>		

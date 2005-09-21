@@ -61,7 +61,7 @@ public class Organ extends BaseObject implements Serializable {
     }
 
     /**
-     * @return Returns the conceptCode.
+     * @return Returns the EVS Preferred displayName
      */
     public String getEVSPreferredDescription() {
         return EvsTreeUtil.getEVSPreferedOrganDescription(conceptCode);

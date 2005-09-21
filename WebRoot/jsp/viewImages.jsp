@@ -36,14 +36,14 @@
 				<td class="<c:out value="${tdClass}"/>End">
 					<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
 					<Img src=" http://caimage.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&img=<c:out value="${p.id}"/>.sid" 
-						width=50 height=50 border=0
+						border=0
 						alt="Click on the image to open in a new Browser window"></a>
 					<br>
 					( Click to View )
 					<br>
 						<c:out value="${p.title}"/>
 					<br/>
-					Staining: <c:out value="${p.staining}"/> <br/>
+					<b>Staining:</b> <c:out value="${p.staining}"/> <br/>
 					<c:out value="${p.description}"/>
 					<br/>
 				</td>

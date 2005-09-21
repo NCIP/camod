@@ -286,8 +286,8 @@
 							<tr>
 								<td class="greySubTitleLeft"><c:out value="${strain}"/></td>
 								<c:forEach var="dosage" items="${stg.results[strain]}" varStatus="stat4">
-									<td class="resultsBoxWhite"><c:out value="${dosage.aveInh}"/></td>
-									<td class="resultsBoxWhite"><c:out value="${dosage.diffInh}"/></td>
+									<td class="resultsBoxWhite"><c:out value="${100*dosage.aveInh}"/></td>
+									<td class="resultsBoxWhite"><c:out value="${100*dosage.diffInh}"/></td>
 								</c:forEach>
 							</tr>
 							</c:forEach>

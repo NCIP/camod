@@ -75,8 +75,12 @@
 							   filter="true"/> 
 					</td>
 					<td class="<%= tdClass %>End" width="32%">
-						<b>Prostate Glands</b><br>Lymph Node (Metastasis)<br>Liver - Hepatocyte (Metastasis)<br>Lung (Metastasis)<br>Bone (Metastasis)
-					</td>			
+						<b>
+						<c:forEach var="o" items="${aModel.histopathologyCollection}">
+							<c:out value="${o.organ.EVSPreferredDescription}"/><br/>
+						</c:forEach>
+						</b>&nbsp;
+					</td>
 				</tr>
 		</logic:iterate>
 	    <%} else { %>

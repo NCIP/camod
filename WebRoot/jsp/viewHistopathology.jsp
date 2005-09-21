@@ -33,13 +33,13 @@
 				<td class="resultsBoxWhiteEnd">
 					<c:forEach var="h" items="${hpColl}">
 						<a href="">
-							C<c:out value="${h.organ.conceptCode}"/>
+							C<c:out value="${h.organ.conceptCode}"/> - <c:out value="${h.organ.EVSPreferredDescription}"/>
 						</a>
 						<bean:define id="mtsColl" name="h" property="metastatisCollection"/>
 						<c:forEach var="m" items="${mtsColl}">
 							<br>&nbsp;&nbsp;-&nbsp;
 							<a href="">
-								C<c:out value="${m.organ.conceptCode}"/>
+								C<c:out value="${m.organ.conceptCode}"/> - <c:out value="${m.organ.EVSPreferredDescription}"/>
 							</a>&nbsp;(Metastasis)
 						</c:forEach>
 						<br/>
@@ -67,14 +67,14 @@
 			<c:forEach var="h" items="${hpColl}">
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				Lesion / Tumor in C<c:out value="${h.organ.conceptCode}"/>
+				Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>
 				</td>
 			</tr>				
 			
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-				C<c:out value="${h.organ.conceptCode}"/> - <c:out value="${h.organ.EVSPreferredDescription}"/>
+				<c:out value="${h.organ.EVSPreferredDescription}"/>
 				</td>
 			</tr>
 
@@ -134,7 +134,7 @@
 				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 				<bean:define id="dc" name="h" property="diseaseCollection"/>
 				<c:forEach var="d" items="${dc}">
-					<c:out value="${d.conceptCode}"/><br>
+					<c:out value="${d.EVSPreferredDescription}"/><br>
 				</c:forEach>
 				</td>
 			</tr>
@@ -158,15 +158,15 @@
 			<bean:define id="mtsColl" name="h" property="metastatisCollection"/>
 			<c:forEach var="m" items="${mtsColl}">
 				<tr>
-					<td class="formTitleBlue" height="20" colspan="2">
-						Metastasis in C<c:out value="${m.organ.conceptCode}"/>
+					<td class="greySubTitleLeft" height="20" colspan="2">
+						Metastasis in <c:out value="${m.organ.EVSPreferredDescription}"/>
 					</td>
 				</tr>
 
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Organ / Tissue</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-					C<c:out value="${m.organ.conceptCode}"/>
+					<c:out value="${m.organ.EVSPreferredDescription}"/>
 					</td>
 				</tr>
 
@@ -226,11 +226,11 @@
 					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 					<bean:define id="dc" name="m" property="diseaseCollection"/>
 					<c:forEach var="d" items="${dc}">
-						<c:out value="${d.conceptCode}"/><br>
+						<c:out value="${d.EVSPreferredDescription}"/><br>
 					</c:forEach>
 					</td>
 				</tr>
-	
+
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
