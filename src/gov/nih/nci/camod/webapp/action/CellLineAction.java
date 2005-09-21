@@ -163,6 +163,8 @@ public final class CellLineAction extends BaseAction {
         
         /* Create all the manager objects needed for Screen */
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );
+        
+        //TODO: use managers to implement evs tree (organ code)
         CellLineManager cellLineManager = (CellLineManager) getBean( "cellLineManager" );
         OrganManager organManager = (OrganManager) getBean( "organManager" );
         GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager)getBean( "geneDeliveryManager" ); 
