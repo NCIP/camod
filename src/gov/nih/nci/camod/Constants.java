@@ -74,7 +74,7 @@ public class Constants {
     /**
      * The key for the controller username in the camod.properties file
      */
-    public static final String CONTROLLER_USERNAME_KEY = "controller.username";
+    public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
 
     /**
      * The name of the Administrator role, as specified in web.xml
@@ -137,17 +137,6 @@ public class Constants {
     public static final String USERMODELLIST = "usermodellist";
 
     /**
-     * Used to store basic email constants
-     * 
-     */
-    public interface Email {
-
-        public static final String SERVER = "nih.nci.gov";
-        public static final String SENDER = "emice@nih.nci.gov";
-        public static final String RECIPIENT = "ulliwagner@nih.nci.gov";
-    }
-
-    /**
      * Used to store lists for drop down menus
      */
     public interface Dropdowns {
@@ -176,6 +165,7 @@ public class Constants {
      * Defines the global constants used as parameters to requests
      */
     public interface Parameters {
+
         public static final String MODELID = "aModelID";
     }
 
@@ -236,15 +226,15 @@ public class Constants {
         public static final String SURGERYOTHER_LIST = "surgeryother_list";
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
         /**
-         * Used to store a list of names for the Publication
-         * section of the sidebar menu of the submission section
+         * Used to store a list of names for the Publication section of the
+         * sidebar menu of the submission section
          */
         public static final String PUBLICATION_LIST = "publication_list";
         /**
-         * Used to store a list of names for the Cell Line
-         * section of the sidebar menu of the submission section
-         */        
-    	public static final String CELLLINE_LIST = "cellline_list";
+         * Used to store a list of names for the Cell Line section of the
+         * sidebar menu of the submission section
+         */
+        public static final String CELLLINE_LIST = "cellline_list";
     }
 
     // /////////////////////////////////////////////////////////////
@@ -261,17 +251,22 @@ public class Constants {
             /**
              * A constant that defines the controller role
              */
-            public static final String CONTROLLER = "Controller";
+            public static final String SUBMITTER = "Public Submitter";
+
+            /**
+             * A constant that defines the controller role
+             */
+            public static final String COORDINATOR = "MMHCC Coordinator";
 
             /**
              * A constant that defines the Editor role
              */
-            public static final String EDITOR = "Editor";
+            public static final String EDITOR = "MMHCC Editor";
 
             /**
              * A constant that defines the screener role
              */
-            public static final String SCREENER = "Screener";
+            public static final String SCREENER = "MMHCC Screener";
         }
 
         /**
@@ -352,5 +347,28 @@ public class Constants {
          * the request
          */
         public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
+    }
+
+    /**
+     * 
+     * Constants used for fetching EVS data
+     *
+     */
+    public interface Evs {
+
+        /**
+         * The namespace to fetch the concepts from
+         */
+        public static final String NAMESPACE = "NCI_Thesaurus";
+        
+        /**
+         * The tag used to get the display name
+         */
+        public static final String DISPLAY_NAME_TAG = "Display_Name";
+        
+        /**
+         * The key for the URI in the camod.properties file
+         */
+        public static final String URI_KEY = "evs.uri";
     }
 }
