@@ -1186,7 +1186,7 @@
      <!-- TherapyForm -->
           <action path="/TherapyAction"
 	        type="gov.nih.nci.camod.webapp.action.TherapyAction"
-	        name="viralTreatmentForm"
+	        name="therapyForm"
 	        scope="request"
 	        parameter="method" 	     
 	        validate="false"
