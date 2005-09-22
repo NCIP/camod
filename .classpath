@@ -20,14 +20,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/JavaMail/javamail-1.3.3_01/lib/pop3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/JavaMail/javamail-1.3.3_01/lib/smtp.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/JavaMail/javamail-1.3.3_01/mail.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/client-new.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ApelonCommon.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ApelonDTS.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ApelonServer.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/CGAPTree.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/EvsTree.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/WebTree.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/acegi-security-0.8.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/antlr-2.7.5H3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/antlr.jar"/>
