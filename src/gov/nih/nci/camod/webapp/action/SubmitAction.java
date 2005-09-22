@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.9 2005-09-16 15:52:55 georgeda Exp $
+ *  $Id: SubmitAction.java,v 1.10 2005-09-22 15:18:43 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.9  2005/09/16 15:52:55  georgeda
+ *  Changes due to manager re-write
+ *
  *  
  */
 package gov.nih.nci.camod.webapp.action;
@@ -50,7 +53,7 @@ public class SubmitAction extends BaseAction {
             theForm.setModelId(am.getId().toString());
 
             // Set up the form. Should be only one controller
-            List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.CONTROLLER);
+            List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.COORDINATOR);
             theForm.setAssignedTo((String) theRoles.get(0));
             request.setAttribute(Constants.FORMDATA, theForm);
 

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.17 2005-09-20 19:32:40 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.18 2005-09-22 15:17:20 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.17  2005/09/20 19:32:40  pandyas
+ *  Added Cell Line functionality
+ *
  *  Revision 1.16  2005/09/20 19:10:57  schroedn
  *  Added check for Agent != null, GeneDelivery has no Agent, uses GeneDelivery
  *
@@ -184,7 +187,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 
         // Set up the form. Should be only one controller
         AnimalModelStateForm theForm = new AnimalModelStateForm();
-        List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.CONTROLLER);
+        List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.COORDINATOR);
 
         // Set the fields
         theForm.setModelId(modelID);
@@ -198,8 +201,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         } catch (Exception e) {
             log.error("Caught an exception populating the data: ", e);
 
-            // Encountered an error saving the model.
-            // created a new model successfully
+            // Encountered an error populating the data
             ActionMessages theMsg = new ActionMessages();
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, theMsg);

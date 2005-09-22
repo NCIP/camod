@@ -55,15 +55,22 @@
                                           <td valign="top">
 
                                               <table summary="" cellpadding="2" cellspacing="0" border="0" width="100%" class="sidebarSection">
-                                              
- 			       
                                                   <tr>
                                                       <td class="sidebarTitle" height="20">LOGIN TO caMOD</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent">
-                                                          <table cellpadding="2" cellspacing="0" border="0">                                                                                                                                                                             					                                                                                                                   
-                                                            
+                                                      <td colspan="3">
+                                                          <table cellpadding="2" cellspacing="0" border="0">                                                                                                                                                              					                                                                                                                   
+                                                              <logic:messagesPresent>
+	                                                                  <tr>
+						                                                  
+								                                          <b><font color=red>
+								                                              <html:messages id="errors">
+									                                              <%=errors %>
+								                                              </html:messages>
+								                                          </font></b>
+				                                                      </tr>
+				                                              </logic:messagesPresent>
                                                             <%
 					                                      		if( session.getAttribute( Constants.LOGINFAILED ) == "true" ) {
 					                                      			session.setAttribute( Constants.LOGINFAILED , null );

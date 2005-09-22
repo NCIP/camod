@@ -1,21 +1,28 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.3 2005-09-16 15:52:57 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.4 2005-09-22 15:15:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/09/16 15:52:57  georgeda
+ * Changes due to manager re-write
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Role;
 import gov.nih.nci.camod.service.UserManager;
-import gov.nih.nci.security.AuthorizationManager;
-import gov.nih.nci.security.SecurityServiceProvider;
+import gov.nih.nci.common.persistence.Search;
+import gov.nih.nci.security.*;
 import gov.nih.nci.security.authorization.domainobjects.User;
 import gov.nih.nci.security.exceptions.CSException;
 
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Implementation of class used to wrap the CSM implementation
@@ -23,6 +30,7 @@ import java.util.*;
 public class UserManagerImpl extends BaseManager implements UserManager {
 
     private AuthorizationManager theAuthorizationMgr = null;
+    private AuthenticationManager theAuthenticationMgr = null;
 
     /**
      * Constructor gets reference to authorization manager
@@ -33,10 +41,11 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
         try {
             theAuthorizationMgr = SecurityServiceProvider.getAuthorizationManager(Constants.UPT_CONTEXT_NAME);
+            theAuthenticationMgr = SecurityServiceProvider.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
         } catch (CSException ex) {
-            log.error("Error getting authorization manager", ex);
+            log.error("Error getting authorization managers", ex);
         } catch (Throwable e) {
-            log.error("Error getting authorization manager", e);
+            log.error("Error getting authorization managers", e);
         }
 
         log.trace("Exiting UserManagerImpl");
@@ -49,18 +58,45 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      *            the login name of the user
      * 
      * @return the list of roles associated with the user
+     * @throws Exception
      */
-    public List getRolesForUser(String inUsername) {
+    public List getRolesForUser(String inUsername) throws Exception {
 
         log.trace("Entering getRolesForUser");
 
         List theRoles = new ArrayList();
 
-        if (theAuthorizationMgr != null) {
-            theRoles.add(Constants.Admin.Roles.CONTROLLER);
-            theRoles.add(Constants.Admin.Roles.EDITOR);
-            theRoles.add(Constants.Admin.Roles.SCREENER);
+        try {
+            Person thePerson = new Person();
+            thePerson.setUsername(inUsername);
+
+            List thePeople = Search.query(thePerson);
+
+            if (thePeople.size() > 0) {
+                thePerson = (Person) thePeople.get(0);
+
+                List theRoleList = thePerson.getRoleCollection();
+
+                Iterator theIterator = theRoleList.iterator();
+
+                while (theIterator.hasNext()) {
+                    Role theRole = (Role) theIterator.next();
+                    theRoles.add(theRole.getName());
+                }
+            } else {
+                //throw new IllegalArgumentException("User: " + inUsername + " not in caMOD database");
+            }
+
+        } catch (Exception e) {
+            log.error("Unable to get roles for user (" + inUsername + ": ", e);
+            throw e;
         }
+
+        // TODO: temp
+        theRoles.add(Constants.Admin.Roles.COORDINATOR);
+        theRoles.add(Constants.Admin.Roles.EDITOR);
+        theRoles.add(Constants.Admin.Roles.SCREENER);
+        
         log.info("User: " + inUsername + " and roles: " + theRoles);
 
         log.trace("Exiting getRolesForUser");
@@ -75,23 +111,53 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      *            is the name of the role
      * 
      * @return the list of users associated with the role
+     * @throws Exception
      */
-    public List getUsersForRole(String inRoleName) {
+    public List getUsersForRole(String inRoleName) throws Exception {
 
         log.trace("Entering getUsersForRole");
 
-        List theUsers = new ArrayList();
+        List theUsersForRole = new ArrayList();
 
-        if (theAuthorizationMgr != null) {
-            theUsers.add("camod_demo");
-            theUsers.add("dgeorge");
+        Role theRole = new Role();
+        theRole.setName(inRoleName);
+
+        try {
+
+            List theRoles = Search.query(theRole);
+
+            if (theRoles.size() > 0) {
+                theRole = (Role) theRoles.get(0);
+
+                // Get the users for the role
+                List theUsers = theRole.getPartyCollection();
+                Iterator theIterator = theUsers.iterator();
+
+                // Gop through the list of returned Party objects
+                while (theIterator.hasNext()) {
+                    Object theObject = theIterator.next();
+
+                    // Only add when it's actually a person
+                    if (theObject instanceof Person) {
+                        Person thePerson = (Person) theObject;
+                        theUsersForRole.add(thePerson.getUsername());
+                    }
+                }
+
+            } else {
+                log.warn("Role not found in database: " + inRoleName);
+            }
+
+        } catch (Exception e) {
+            log.error("Unable to get roles for user: ", e);
+            throw e;
         }
 
-        log.info("Role: " + inRoleName + " and users: " + theUsers);
+        log.info("Role: " + inRoleName + " and users: " + theUsersForRole);
 
         log.trace("Exiting getUsersForRole");
 
-        return theUsers;
+        return theUsersForRole;
     }
 
     /**
@@ -135,9 +201,9 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * 
      * @return the list of users associated with the role
      */
-    public String getEmailForController() {
+    public String getEmailForCoordinator() {
 
-        log.trace("Entering getEmailForController");
+        log.trace("Entering getEmailForCoordinator");
 
         String theEmail = "";
 
@@ -145,16 +211,49 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
             // Get from default bundle
             ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-            String theController = theBundle.getString(Constants.CONTROLLER_USERNAME_KEY);
+            String theController = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
 
             theEmail = getEmailForUser(theController);
 
         } catch (Exception e) {
-            log.warn("Unable to get controller username: ", e);
+            log.warn("Unable to get coordinator email: ", e);
         }
 
-        log.trace("Exiting getEmailForController");
+        log.trace("Exiting getEmailForCoordinator");
 
         return theEmail;
+    }
+
+    /**
+     * Log in a user and get his roles.
+     * 
+     * @param inUsername
+     *            is the login name of the user
+     * 
+     * @return the list of users associated with the role
+     */
+    public boolean login(String inUsername, String inPassword, HttpServletRequest inRequest) {
+
+        boolean loginOk = false;
+        try {
+
+            loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+
+            // Does the user exist? Must also be in our database to login
+            List theRoles = getRolesForUser(inUsername);
+            inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
+
+            User theCurrentUser = theAuthorizationMgr.getUser(inUsername);
+
+            log.info("Username: " + theCurrentUser.getUserId() + "\nFirstName: " + theCurrentUser.getFirstName()
+                    + "\nLastName: " + theCurrentUser.getLastName() + "\nPhoneNumber: "
+                    + theCurrentUser.getPhoneNumber() + "\nEmail: " + theCurrentUser.getEmailId());
+
+        } catch (Exception e) {
+            log.error("Error logging in user: ", e);
+            loginOk = false;
+        }
+
+        return loginOk;
     }
 }

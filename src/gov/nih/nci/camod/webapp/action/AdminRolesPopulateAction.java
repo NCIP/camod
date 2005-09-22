@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesPopulateAction.java,v 1.7 2005-09-16 15:52:55 georgeda Exp $
+ * $Id: AdminRolesPopulateAction.java,v 1.8 2005-09-22 15:17:01 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/09/16 15:52:55  georgeda
+ * Changes due to manager re-write
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.action;
@@ -58,7 +61,7 @@ public class AdminRolesPopulateAction extends BaseAction {
         }
 
         // Controller specific curation states
-        if (theRoles.contains(Constants.Admin.Roles.CONTROLLER)) {
+        if (theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
 
             addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screened-approved",
                     Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT);
