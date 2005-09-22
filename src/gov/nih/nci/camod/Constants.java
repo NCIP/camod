@@ -72,7 +72,7 @@ public class Constants {
     public static final String REGISTERED = "registered";
 
     /**
-     * The key for the controller username in the camod.properties file
+     * The key for the coordinator username in the camod.properties file
      */
     public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
 
@@ -249,12 +249,12 @@ public class Constants {
         public interface Roles {
 
             /**
-             * A constant that defines the controller role
+             * A constant that defines the submitter role
              */
             public static final String SUBMITTER = "Public Submitter";
 
             /**
-             * A constant that defines the controller role
+             * A constant that defines the coordinator role
              */
             public static final String COORDINATOR = "MMHCC Coordinator";
 
