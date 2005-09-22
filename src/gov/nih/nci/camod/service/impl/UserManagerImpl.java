@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.4 2005-09-22 15:15:17 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.5 2005-09-22 18:55:49 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/09/22 15:15:17  georgeda
+ * More changes
+ *
  * Revision 1.3  2005/09/16 15:52:57  georgeda
  * Changes due to manager re-write
  *
@@ -91,11 +94,6 @@ public class UserManagerImpl extends BaseManager implements UserManager {
             log.error("Unable to get roles for user (" + inUsername + ": ", e);
             throw e;
         }
-
-        // TODO: temp
-        theRoles.add(Constants.Admin.Roles.COORDINATOR);
-        theRoles.add(Constants.Admin.Roles.EDITOR);
-        theRoles.add(Constants.Admin.Roles.SCREENER);
         
         log.info("User: " + inUsername + " and roles: " + theRoles);
 
@@ -172,6 +170,8 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
         log.trace("Entering getEmailForUser");
 
+        log.debug("Username: " + inUsername);
+        
         String theEmail = "";
 
         try {
@@ -211,9 +211,9 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
             // Get from default bundle
             ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-            String theController = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
+            String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
 
-            theEmail = getEmailForUser(theController);
+            theEmail = getEmailForUser(theCoordinator);
 
         } catch (Exception e) {
             log.warn("Unable to get coordinator email: ", e);

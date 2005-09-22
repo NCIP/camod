@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.10 2005-09-19 18:13:51 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.11 2005-09-22 18:55:53 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/09/19 18:13:51  georgeda
+ * Changed boolean to Boolean
+ *
  * Revision 1.9  2005/09/19 12:55:24  georgeda
  * Handle empty sex distribution table
  *
@@ -363,7 +366,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 // Create a new person
                 thePerson = new Person();
                 thePerson.setUsername(inUsername);
-                thePerson.setIsPrincipleInvestigator(new Boolean(true));
+                thePerson.setIsPrincipalInvestigator(new Boolean(true));
 
                 // Add the contact information
                 ContactInfo theContactInfo = new ContactInfo();

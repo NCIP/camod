@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.10 2005-09-22 15:18:43 georgeda Exp $
+ *  $Id: SubmitAction.java,v 1.11 2005-09-22 18:56:37 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.10  2005/09/22 15:18:43  georgeda
+ *  More changes
+ *
  *  Revision 1.9  2005/09/16 15:52:55  georgeda
  *  Changes due to manager re-write
  *
@@ -13,10 +16,9 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.UserManager;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
-import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,9 +34,10 @@ public class SubmitAction extends BaseAction {
     public ActionForward setModelConstants(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<SubmitAction setModelConstants> modelID=" + request.getParameter("aModelID"));
+        System.out.println("<SubmitAction setModelConstants> modelID="
+                + request.getParameter(Constants.Parameters.MODELID));
 
-        String modelID = request.getParameter("aModelID");
+        String modelID = request.getParameter(Constants.Parameters.MODELID);
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
@@ -47,14 +50,13 @@ public class SubmitAction extends BaseAction {
             request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
             request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
 
-            UserManager theUserManager = (UserManager) getBean("userManager");
-
             AnimalModelStateForm theForm = new AnimalModelStateForm();
             theForm.setModelId(am.getId().toString());
 
-            // Set up the form. Should be only one controller
-            List theRoles = theUserManager.getUsersForRole(Constants.Admin.Roles.COORDINATOR);
-            theForm.setAssignedTo((String) theRoles.get(0));
+            // Get the coordinator
+            ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
+            String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
+            theForm.setAssignedTo(theCoordinator);
             request.setAttribute(Constants.FORMDATA, theForm);
 
         } catch (Exception e) {
