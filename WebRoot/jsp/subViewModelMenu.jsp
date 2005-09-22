@@ -1,6 +1,7 @@
 <%@ include file="/common/taglibs.jsp"%>
 
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
+<%@ page import="gov.nih.nci.camod.domain.Therapy" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
 
@@ -29,9 +30,20 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getEnvironmentalFactorCollection();
+			l = am.getTherapyCollection();
 			cc = (l!=null)?l.size():0;
-			if ( cc > 0 ) { 
+			boolean found = false;
+			if ( cc > 0 ) {
+				for (int i=0; i<cc; i++) {
+					Therapy t = (Therapy)l.get(i);
+					Boolean isTE = t.getTherapeuticExperiment();
+					if (isTE != null && !isTE.booleanValue()) {
+						found = true;
+						break;
+					}
+				}
+			}
+			if (found) {
 		%>
 		<a href="ViewModelAction.do?unprotected_method=populateCarcinogenicInterventions&aModelID=<%=mdl%>" styleClass="subMenuPrimary">CARCINOGENIC INTERVENTIONS</a>
 	    <%} else { %>

@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.8 2005-09-22 15:23:41 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.9 2005-09-22 21:34:51 guruswas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.8  2005/09/22 15:23:41  georgeda
+ *  Cleaned up warnings
+ *
  *  Revision 1.7  2005/09/21 21:02:24  guruswas
  *  Display the organ, disease names from NCI Thesaurus
  *
@@ -142,7 +145,38 @@ public class ViewModelAction extends BaseAction {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		setCancerModel(request);
-		//String modelID = request.getParameter(Constants.Parameters.MODELID);
+		String modelID = request.getParameter(Constants.Parameters.MODELID);
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		AnimalModel am =null;
+		try {
+			am = animalModelManager.get(modelID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		final List therapyColl = am.getTherapyCollection();
+		final Map interventionTypeMap = new HashMap();
+		final int cc = (therapyColl!=null)?therapyColl.size():0;
+		for (int i=0; i<cc; i++) {
+			Therapy t = (Therapy)therapyColl.get(i);
+			Boolean isTE = t.getTherapeuticExperiment();
+			if (isTE != null && !isTE.booleanValue()) {
+				String myType = t.getAgent().getType();
+				if (myType == null || myType.length() == 0) {
+					myType = t.getAgent().getTypeUnctrlVocab();
+					if (myType == null || myType.length() == 0) {
+						myType = "Not specified";
+					}
+				}
+				List myTypeColl = (List)interventionTypeMap.get(myType);
+				if (myTypeColl == null) {
+					myTypeColl = new ArrayList();
+					interventionTypeMap.put(myType, myTypeColl);
+				}
+				myTypeColl.add(t);
+			}
+		}
+		request.getSession().setAttribute(Constants.CARCINOGENIC_INTERVENTIONS_COLL, interventionTypeMap);
 		return mapping.findForward("viewCarcinogenicInterventions");
 	}
 

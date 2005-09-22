@@ -25,7 +25,10 @@
 			
 			<br>
 			
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<c:set var="agentType" value="Chemical / Drug"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="6">Chemical / Drug</td>				
 			</tr>
@@ -39,28 +42,56 @@
 				<td class="greySubTitle" width="17%">Gender</td>				
 			</tr>
 			
-			<bean:define id="efc" name="mdl" property="environmentalFactorCollection"/>
-			<c:forEach var="ef" items="${efc}">
-			environmentalFactorCollection
-			<!-- Use code to generate Search Results similiar in format to the following static results -->			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
 			<tr>
-				<td class="resultsBoxWhite" width="17%">
-				<c:out value="${ef.name}"/>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
 				</td>
-				<td class="resultsBoxWhite" width="17%">
-				44mg</td>
-				<td class="resultsBoxWhite" width="17%">
-				Once a Month</td>
-				<td class="resultsBoxWhite" width="17%">
-				intraperitoneal</td>
-				<td class="resultsBoxWhite" width="17%">6 Months</td>
-				<td class="resultsBoxWhiteEnd" width="17%">Male</td>							
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.dosage}"/></td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<c:choose>
+						<c:when test="${empty cd.treatment.administrativeRoute}">
+							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.treatment.administrativeRoute}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">&nbsp;
+					<c:out value="${cd.treatment.sexDistribution.type}"/>
+				</td>
 			</tr>
 			</c:forEach>
 			</TABLE>
-			
 			<br>
-			
+			</c:if>
+
+			<c:set var="agentType" value="Growth Factor"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="3">Growth Factor</td>				
@@ -71,38 +102,129 @@
 				<td class="greySubTitleLeft" width="33%">Dose</td>
 				<td class="greySubTitle" width="33%">Treatment Regimen</td>		
 			</tr>
-						
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
 			<tr>
-				<td class="resultsBoxWhite" width="33%">56cp</td>
-				<td class="resultsBoxWhite" width="33%">33m</td>
-				<td class="resultsBoxWhiteEnd" width="33%">Liver</td>		
+				<td class="<c:out value="${tdClass}"/>" width="33%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="33%">&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="33%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>
 			</tr>
-			
-			</TABLE>			
-
+			</c:forEach>
+			</TABLE>		
 			<br>
+			</c:if>
 
+			<c:set var="agentType" value="Radiation"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="3">Radiation</td>				
 			</tr>
-			
 			<tr>
 				<td class="greySubTitleLeft" width="33%">Radiation</td>
 				<td class="greySubTitleLeft" width="33%">Dose</td>
 				<td class="greySubTitle" width="33%">Treatment Regimen</td>		
 			</tr>
-						
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
 			<tr>
-				<td class="resultsBoxWhite" width="33%">Radium-224 (Ra-224) (224Ra)</td>
-				<td class="resultsBoxWhite" width="33%">44cc</td>
-				<td class="resultsBoxWhiteEnd" width="33%">Nose</td>		
+				<td class="<c:out value="${tdClass}"/>" width="33%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="33%">&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="33%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>		
 			</tr>
-			
+			</c:forEach>
 			</TABLE>
-			
 			<br>
+			</c:if>
 			
+			<c:set var="agentType" value="Hormone"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="3">Hormone</td>				
+			</tr>
+			<tr>
+				<td class="greySubTitleLeft" width="33%">Hormone</td>
+				<td class="greySubTitleLeft" width="33%">Dose</td>
+				<td class="greySubTitle" width="33%">Treatment Regimen</td>		
+			</tr>
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="33%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="33%">&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="33%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>		
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+
+			<c:set var="agentType" value="Environment"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="6">Environment</td>				
@@ -117,47 +239,172 @@
 				<td class="greySubTitle" width="17%">Gender</td>				
 			</tr>
 			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
 			<tr>
-				<td class="resultsBoxWhite" width="20%">environmental cigarette smoke (ECS)</td>
-				<td class="resultsBoxWhite" width="14%">134sl</td>
-				<td class="resultsBoxWhite" width="17%">Every Day</td>
-				<td class="resultsBoxWhite" width="17%">in air</td>
-				<td class="resultsBoxWhite" width="17%">2years</td>
-				<td class="resultsBoxWhiteEnd" width="17%">both sexes</td>							
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.dosage}"/></td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<c:choose>
+						<c:when test="${empty cd.treatment.administrativeRoute}">
+							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.treatment.administrativeRoute}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">&nbsp;
+					<c:out value="${cd.treatment.sexDistribution.type}"/>
+				</td>
 			</tr>
-			
-			</TABLE>			
-
-                         <br>
-                         
+			</c:forEach>
+			</TABLE>		
+	        <br>
+	        </c:if>
+     
+			<c:set var="agentType" value="Viral"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="4">Gene Delivery</td>				
+				<td class="formTitleBlue" height="20" colspan="4">Viral Treatment</td>
 			</tr>
 			
 			<tr>
-				<td class="greySubTitleLeft" width="25%">Viral Vector</td>
-				<td class="greySubTitleLeft" width="25%">Gene</td>
-				<td class="greySubTitleLeft" width="25%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="25%">Location of Delivery</td>				
+				<td class="greySubTitleLeft" width="17%">Virus</td>
+				<td class="greySubTitleLeft" width="17%">Dose</td>
+				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
+				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
+				<td class="greySubTitleLeft" width="17%">Age</td>
+				<td class="greySubTitle" width="17%">Gender</td>				
 			</tr>
 			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
 			<tr>
-				<td class="resultsBoxWhite" width="25%">adenovirus</td>
-				<td class="resultsBoxWhite" width="25%">Gene X</td>
-				<td class="resultsBoxWhite" width="25%">Treatment 3x a day</td>
-				<td class="resultsBoxWhite" width="25%">oral</td>						
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.dosage}"/></td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<c:choose>
+						<c:when test="${empty cd.treatment.administrativeRoute}">
+							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.treatment.administrativeRoute}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">&nbsp;
+					<c:out value="${cd.treatment.sexDistribution.type}"/>
+				</td>
 			</tr>
-			
 			</TABLE>
-			
 			<br>
+			</c:if>
 
+			<c:set var="agentType" value="Surgery"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="4">Surgery</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="30%">Surgery</td>
+				<td class="greySubTitleLeft" width="30%">Treatment Regimen</td>
+				<td class="greySubTitleLeft" width="20%">Age</td>
+				<td class="greySubTitle" width="20%">Gender</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="30%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="30%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="20%">&nbsp;
+					<c:out value="${cd.treatment.sexDistribution.type}"/>
+				</td>
+			</tr>
+			</TABLE>
+			<br>
+			</c:if>
+
+			<c:set var="agentType" value="Nutrition"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="5">Nutrition</td>				
 			</tr>
-			
 			<tr>
 				<td class="greySubTitleLeft" width="20%">Nutritional Component / Diet</td>
 				<td class="greySubTitleLeft" width="20%">Dose</td>
@@ -166,20 +413,89 @@
 				<td class="greySubTitle" width="20%">Gender</td>				
 			</tr>
 			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
 			<tr>
-				<td class="resultsBoxWhite" width="20%">black tea (decaffeinated)</td>
-				<td class="resultsBoxWhite" width="20%">testdose</td>
-				<td class="resultsBoxWhite" width="20%">testTreat</td>
-				<td class="resultsBoxWhite" width="20%">2 years</td>
-				<td class="resultsBoxWhiteEnd" width="20%">female only</td>							
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.agent.name}">
+							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.agent.name}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:out value="${cd.treatment.dosage}"/></td>
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="20%">&nbsp;
+					<c:out value="${cd.treatment.sexDistribution.type}"/>
+				</td>
 			</tr>
-			
-			<tr>
-				<td class="GreyBox" width="100%" colspan="9"> <a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
-			</tr>
-			
+			</c:forEach>
 			</TABLE>
-			
+			</c:if>
+
+			<c:set var="cdList" value="${mdl.geneDeliveryCollection}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="3">Gene Delivery</td>				
+			</tr>
+			<tr>
+				<td class="greySubTitleLeft" width="30%">Viral Vector</td>
+				<td class="greySubTitleLeft" width="20%">Gene</td>
+				<td class="greySubTitleLeft" width="30%">Organ</td>
+				<td class="greySubTitle" width="20%">Treatment Regimen</td>		
+			</tr>
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="30%">&nbsp;
+					<c:choose>
+						<c:when test="${empty cd.viralVector}">
+							<c:out value="${cd.viralVectorUnctrlVocab}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${cd.viralVector}"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
+					<c:out value="${cd.geneInVirus}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="30%">&nbsp;
+					<c:out value="${cd.organ.EVSPreferredDescription}"/>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="20%">&nbsp;
+					<c:out value="${cd.treatment.regimen}"/>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </tr></td></TABLE>

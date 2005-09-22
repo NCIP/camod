@@ -205,6 +205,7 @@ public class Constants {
     public static final String CLINICAL_PROTOCOLS = "clinProtocols";
     public static final String YEAST_DATA = "yeastData";
     public static final String INVIVO_DATA = "invivoData";
+    public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
 
     // /////////////////////////////////////////////////////////////
     // Submission specific constants
