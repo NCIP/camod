@@ -458,7 +458,7 @@ create table party (
    middle_name varchar2(255),
    last_name varchar2(255),
    username varchar2(255),
-   is_principle_investigator number(1,0),
+   is_principal_investigator number(1,0),
    name varchar2(255),
    primary key (party_id)
 );
@@ -663,7 +663,7 @@ alter table cell_line add constraint FK61276CB13D222B55 foreign key (organ_id) r
 alter table cell_line_publication add constraint FKA8A4EB9E8258D935 foreign key (publication_id) references publication;
 alter table cell_line_publication add constraint FKA8A4EB9ED2525AC4 foreign key (cell_line_id) references cell_line;
 alter table comments add constraint FKDC17DDF495BE676C foreign key (model_section_id) references model_section;
-alter table comments add constraint FKDC17DDF43595FF35 foreign key (party_id) references party;
+alter table comments add constraint FKDC17DDF42EB4E88E foreign key (party_id) references party;
 alter table comments add constraint FKDC17DDF4496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table comments add constraint FKDC17DDF4290CE83F foreign key (availability_id) references availability;
 alter table eng_gene_exp_feature add constraint FK6FC0F1EBBEC26304 foreign key (expression_feature_id) references expression_feature;
@@ -696,7 +696,7 @@ alter table invivo_result add constraint FKC187E8CB46872875 foreign key (treatme
 alter table invivo_result add constraint FKC187E8CB457316D5 foreign key (agent_id) references env_factor;
 alter table log add constraint FK1A34477AB701F foreign key (comments_id) references comments;
 alter table log add constraint FK1A344496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
-alter table log add constraint FK1A3443595FF35 foreign key (party_id) references party;
+alter table log add constraint FK1A3442EB4E88E foreign key (party_id) references party;
 alter table micro_array_data add constraint FKC3D0BA2B290CE83F foreign key (availability_id) references availability;
 alter table organ_histopathology add constraint FK49AEA2A0D45FCF9F foreign key (histopathology_id) references histopathology;
 alter table organ_histopathology add constraint FK49AEA2A03D222B55 foreign key (organ_id) references organ;

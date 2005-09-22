@@ -38,8 +38,8 @@
         	type="string"/>
         	
         <!-- username -->
-        <property name="isPrincipleInvestigator" 
-        	column="is_principle_investigator" 
+        <property name="isPrincipalInvestigator" 
+        	column="is_principal_investigator" 
         	type="boolean"/>
         	
 	</subclass>

@@ -19,7 +19,7 @@ public class Person extends Party {
     private String middleName;
     private String lastName;
     private String username;
-    private Boolean isPrincipleInvestigtor;
+    private Boolean isPrincipalInvestigtor;
 
     /**
      * @return Returns the username.
@@ -84,16 +84,16 @@ public class Person extends Party {
     /**
      * @return Returns the isPrincipleInvestigator flag.
      */
-    public Boolean getIsPrincipleInvestigator() {
-        return isPrincipleInvestigtor;
+    public Boolean getIsPrincipalInvestigator() {
+        return isPrincipalInvestigtor;
     }
 
     /**
      * @param inIsPrincipleInvestigtor
      *            Set's whether or not this user is a PI
      */
-    public void setIsPrincipleInvestigator(Boolean inIsPrincipleInvestigtor) {
-        this.isPrincipleInvestigtor = inIsPrincipleInvestigtor;
+    public void setIsPrincipalInvestigator(Boolean inIsPrincipalInvestigtor) {
+        this.isPrincipalInvestigtor = inIsPrincipalInvestigtor;
     }
 
     /**
