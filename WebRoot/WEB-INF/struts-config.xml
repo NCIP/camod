@@ -1291,7 +1291,11 @@
          <forward 
     		name="next"
     		path="/jsp/protected/submitChangeAnimalModelState.jsp">
-    	 </forward>  	
+    	 </forward>  
+    	 <forward 
+    		name="failure"
+    		path="/AdminRolesPopulateAction.do">
+    	 </forward>	
      </action>
      <action 
          path="/ChangeAnimalModelStateAction"  
