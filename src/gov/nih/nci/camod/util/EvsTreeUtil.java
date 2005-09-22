@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.1 2005-09-21 20:34:59 georgeda Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.2 2005-09-22 13:04:31 georgeda Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/09/21 20:34:59  georgeda
+ *  Create util for fetching/caching EVS data
+ *
  *  
  */
 package gov.nih.nci.camod.util;
@@ -35,7 +38,8 @@ public class EvsTreeUtil {
      * Get a preferred name based on a concept code. Will return the cached
      * value if it has been fetched before.
      * 
-     * @param inConceptCode the concept code to get the preferred name for.
+     * @param inConceptCode
+     *            the concept code to get the preferred name for.
      * 
      * @return the preferred name, or an empty string if something goes wrong.
      */
@@ -53,13 +57,13 @@ public class EvsTreeUtil {
                 // Get the app service uri
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
-                ApplicationService appService = ApplicationService.getRemoteInstance(theBundle
+                ApplicationService theAppService = ApplicationService.getRemoteInstance(theBundle
                         .getString(Constants.Evs.URI_KEY));
 
                 EVSQuery theConceptNameQuery = new EVSQueryImpl();
                 theConceptNameQuery.getConceptNameByCode(Constants.Evs.NAMESPACE, inConceptCode);
 
-                List theConceptNames = (List) appService.evsSearch(theConceptNameQuery);
+                List theConceptNames = (List) theAppService.evsSearch(theConceptNameQuery);
 
                 // Should only be one
                 if (theConceptNames.size() > 0) {
@@ -71,7 +75,7 @@ public class EvsTreeUtil {
                             Constants.Evs.DISPLAY_NAME_TAG);
 
                     // Should only be one
-                    List theDisplayNameList = (List) appService.evsSearch(theDisplayNameQuery);
+                    List theDisplayNameList = (List) theAppService.evsSearch(theDisplayNameQuery);
 
                     if (theDisplayNameList.size() > 0) {
                         theDescription = (String) theDisplayNameList.get(0);
@@ -88,5 +92,18 @@ public class EvsTreeUtil {
         log.trace("Exiting getEVSPreferedOrganDescription");
 
         return theDescription;
+    }
+
+    /**
+     * Get the application service based on the properties file
+     * 
+     * @return the preferred name, or an empty string if something goes wrong.
+     */
+    public static ApplicationService getApplicationService() {
+
+        // Get the app service uri
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        return ApplicationService.getRemoteInstance(theBundle.getString(Constants.Evs.URI_KEY));
     }
 }
