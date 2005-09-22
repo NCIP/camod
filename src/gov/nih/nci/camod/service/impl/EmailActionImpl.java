@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.7 2005-09-19 13:09:24 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.8 2005-09-22 15:13:43 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/09/19 13:09:24  georgeda
+ * Send e-mail to submitter for certain states
+ *
  * Revision 1.6  2005/09/16 15:52:57  georgeda
  * Changes due to manager re-write
  * Revision 1.5 2005/09/14 12:45:06 georgeda
@@ -108,7 +111,7 @@ public class EmailActionImpl extends BaseCurateableAction {
 
                 if (theRecipients.length > 0) {
                     MailUtil.sendMail(theRecipients, theMailSubject, theMailText, UserManagerSingleton.instance()
-                            .getEmailForController());
+                            .getEmailForCoordinator());
                 } else {
                     log.warn("No e-mail address assigned to user: " + thePerson.getUsername());
                 }
