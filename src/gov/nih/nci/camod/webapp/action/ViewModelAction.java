@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.7 2005-09-21 21:02:24 guruswas Exp $
+ *  $Id: ViewModelAction.java,v 1.8 2005-09-22 15:23:41 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.7  2005/09/21 21:02:24  guruswas
+ *  Display the organ, disease names from NCI Thesaurus
+ *
  *  Revision 1.6  2005/09/21 20:47:16  georgeda
  *  Cleaned up
  *
@@ -139,7 +142,7 @@ public class ViewModelAction extends BaseAction {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		setCancerModel(request);
-		String modelID = request.getParameter("aModelID");
+		//String modelID = request.getParameter(Constants.Parameters.MODELID);
 		return mapping.findForward("viewCarcinogenicInterventions");
 	}
 
