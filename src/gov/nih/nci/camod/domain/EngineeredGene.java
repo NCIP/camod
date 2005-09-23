@@ -31,6 +31,30 @@ public class EngineeredGene extends BaseObject implements Serializable {
     private Conditionality conditionality;
     private MutationIdentifier mutationIdentifier;
     private List expressionFeatureCollection = new ArrayList();
+    private List geneFunctionCollection = new ArrayList();
+
+    /**
+     * @return Returns the geneFunctionCollection.
+     */
+    public List getGeneFunctionCollection() {
+        return geneFunctionCollection;
+    }
+
+    /**
+     * @param geneFunctionCollection
+     *            The geneFunctionCollection to set.
+     */
+    public void setGeneFunctionCollection(List geneFunctionCollection) {
+        this.geneFunctionCollection = geneFunctionCollection;
+    }
+
+    /**
+     * @param geneFunction
+     *            The geneFunction to add.
+     */
+    public void addGeneFunction(GeneFunction geneFunction) {
+        geneFunctionCollection.add(geneFunction);
+    }
 
     /**
      * @return Returns the expressionFeatureCollection.
