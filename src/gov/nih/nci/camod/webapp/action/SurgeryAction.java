@@ -133,10 +133,7 @@ public class SurgeryAction extends BaseAction {
 		Treatment ts = ty.getTreatment();
         
     	//Set the gender
-		SexDistribution sexDistribution = ts.getSexDistribution();
-		sexDistribution.setType( surgeryForm.getType() );		
-		//save the sexdistro
-		sexDistributionManager.save( sexDistribution );
+        SexDistribution sexDistribution = sexDistributionManager.getByType(surgeryForm.getType());
 		
 		//save the treatment
 		ts.setRegimen( surgeryForm.getRegimen() );
@@ -210,10 +207,7 @@ public class SurgeryAction extends BaseAction {
         AnimalModel animalModel = animalModelManager.get( modelID );
         
 		//Set the gender
-		SexDistribution sexDistribution = new SexDistribution();
-		sexDistribution.setType( surgeryForm.getType() );		
-		//save the sexdistro
-		sexDistributionManager.save( sexDistribution );
+        SexDistribution sexDistribution = sexDistributionManager.getByType(surgeryForm.getType());
 		
 		//Set the treatment
 		Treatment ts = new Treatment();

@@ -11,13 +11,18 @@ import java.util.List;
 
 /**
  * @author rajputs
- *
+ * 
  * See implementing classes for details
  */
 public interface PersonManager {
-	public List getAll();
-	public Person get(String id);
-    public Person getByUsername(String inUsername);
-    public void save(Person person);
-    public void remove(String id);
+
+    public List getAll() throws Exception;
+
+    public Person get(String id) throws Exception;
+
+    public Person getByUsername(String inUsername) throws Exception;
+
+    public void remove(String id) throws Exception;
+
+    public void save(Person person) throws Exception;
 }

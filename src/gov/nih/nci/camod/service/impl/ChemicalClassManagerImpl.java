@@ -1,15 +1,15 @@
 /**
  * @author
  * 
- * $Id: SexDistributionManagerImpl.java,v 1.5 2005-09-23 14:55:16 georgeda Exp $
+ * $Id: ChemicalClassManagerImpl.java,v 1.1 2005-09-23 14:55:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
  * 
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.service.SexDistributionManager;
+import gov.nih.nci.camod.domain.ChemicalClass;
+import gov.nih.nci.camod.service.ChemicalClassManager;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
@@ -18,35 +18,36 @@ import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 import java.util.List;
 
 /**
- * Manager provides lookup by type
+ * Manager provides lookup by name
  */
-public class SexDistributionManagerImpl extends BaseManager implements SexDistributionManager {
+public class ChemicalClassManagerImpl extends BaseManager implements ChemicalClassManager {
 
     /**
-     * Get the SexDistribution by it's type
+     * Get the ChemicalClass by it's name
      * 
-     * @param inType the type of the sex-distribution
+     * @param inName
+     *            the name of the chemical class
      * 
-     * @return the sex distribution that matches the type
+     * @return the ChemicalClass that matches the name
      */
-    public SexDistribution getByType(String inType) {
+    public ChemicalClass getByName(String inName) {
 
-        SexDistribution sexDistribution = null;
+        ChemicalClass theChemicalClass = null;
 
         try {
 
             // The following two objects are needed for eQBE.
-            SexDistribution theSexDistribution = new SexDistribution();
-            theSexDistribution.setType(inType);
+            ChemicalClass theQueryObj = new ChemicalClass();
+            theQueryObj.setChemicalClassName(inName);
 
             // Apply evaluators to object properties
             Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("sexDistribution.type", Evaluator.EQUAL);
+            theEvaluation.addEvaluator("chemicalClass.chemicalClassName", Evaluator.EQUAL);
 
-            List theList = Search.query(theSexDistribution, theEvaluation);
+            List theList = Search.query(theQueryObj, theEvaluation);
 
             if (theList != null && theList.size() > 0) {
-                sexDistribution = (SexDistribution) theList.get(0);
+                theChemicalClass = (ChemicalClass) theList.get(0);
             }
 
         } catch (PersistenceException pe) {
@@ -57,6 +58,6 @@ public class SexDistributionManagerImpl extends BaseManager implements SexDistri
             e.printStackTrace();
         }
 
-        return sexDistribution;
+        return theChemicalClass;
     }
 }

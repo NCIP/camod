@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.5 2005-09-16 15:52:54 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.6 2005-09-23 14:54:58 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/09/16 15:52:54  georgeda
+ * Changes due to manager re-write
+ *
  * 
  */
 package gov.nih.nci.camod.service;
@@ -33,7 +36,7 @@ public interface AnimalModelManager {
 
     public void update(ModelCharacteristics inModelCharacteristics, AnimalModel inAnimalModel) throws Exception;
 
-    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername);
+    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception;
 
     public void remove(String id) throws Exception;
 

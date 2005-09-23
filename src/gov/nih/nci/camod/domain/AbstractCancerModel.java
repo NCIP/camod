@@ -35,7 +35,7 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
     /**
      * @return Returns the principalInvestigator.
      */
-    public Party getPrincipalInvestigator() {
+    public Person getPrincipalInvestigator() {
         return principalInvestigator;
     }
 

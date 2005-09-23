@@ -65,9 +65,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
         AnimalModel animalModel = animalModelManager.get( modelID );        
  
 		/* 1.  Create and save SexDistribution Object */
-		SexDistribution sexDistribution = new SexDistribution();
-		sexDistribution.setType(envForm.getType());
-        sexDistributionManager.save( sexDistribution );
+		SexDistribution sexDistribution = sexDistributionManager.getByType(envForm.getType());
 		
  		/*2. Create Treatment object, set its sexDistribution property (saved in #1) and other values, and save Treatment object.	*/	
 		Treatment treatment = new Treatment();
@@ -209,10 +207,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 		Treatment treatment = therapy.getTreatment();
         
     	//Set the gender
-		SexDistribution sexDistribution = treatment.getSexDistribution();
-		sexDistribution.setType( envForm.getType() );		
-		//save the sexdistro
-		sexDistributionManager.save( sexDistribution );
+        SexDistribution sexDistribution = sexDistributionManager.getByType(envForm.getType());
 		
 		//save the treatment
 		treatment.setDosage(envForm.getDosage() + " " + envForm.getDoseUnit() );

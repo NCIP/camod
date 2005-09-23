@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.11 2005-09-22 18:55:53 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.12 2005-09-23 14:55:19 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/09/22 18:55:53  georgeda
+ * Get coordinator from user in properties file
+ *
  * Revision 1.10  2005/09/19 18:13:51  georgeda
  * Changed boolean to Boolean
  *
@@ -194,10 +197,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             Persist.save(inAnimalModel.getSpecies());
 
             log.debug("Saving PI");
-            Persist.save(inAnimalModel.getPrincipalInvestigator());
+            PersonManagerSingleton.instance().save(inAnimalModel.getPrincipalInvestigator());
 
             log.debug("Saving submitter");
-            Persist.save(inAnimalModel.getSubmitter());
+            PersonManagerSingleton.instance().save(inAnimalModel.getSubmitter());
 
             // Save the base animal model
             log.debug("Saving animal model");
@@ -207,12 +210,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             HibernateUtil.commitTransaction();
 
         } catch (PersistenceException pe) {
-            HibernateUtil.rollbackTransaction();
             log.error("PersistenceException in save", pe);
+            HibernateUtil.rollbackTransaction();
             throw pe;
         } catch (Exception e) {
-            HibernateUtil.rollbackTransaction();
             log.error("Exception in save", e);
+            HibernateUtil.rollbackTransaction();
             throw e;
         }
     }
@@ -262,8 +265,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            The submitter
      * 
      * @return the created and unsaved AnimalModel
+     * @throws Exception 
      */
-    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) {
+    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception {
 
         log.trace("Entering create");
 
@@ -354,7 +358,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     // will update associated
     // object if they exist, create them if they don't.
     private AnimalModel populateAnimalModel(ModelCharacteristics inModelCharacteristics, String inUsername,
-            AnimalModel inAnimalModel) {
+            AnimalModel inAnimalModel) throws Exception {
 
         log.trace("Entering populateAnimalModel");
 

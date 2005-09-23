@@ -128,11 +128,7 @@ public class RadiationAction extends BaseAction {
 		Treatment treatment = therapy.getTreatment();
         
     	//Set the gender
-		SexDistribution sexDistribution = treatment.getSexDistribution();
-		sexDistribution.setType( radiationForm.getType() );	
-		
-		//save the SexDistribution
-		sexDistributionManager.save( sexDistribution );
+        SexDistribution sexDistribution = sexDistributionManager.getByType(radiationForm.getType());
 		
 		//save the treatment
 		treatment.setDosage(radiationForm.getDosage() + " " + radiationForm.getDoseUnit());
@@ -207,9 +203,7 @@ public class RadiationAction extends BaseAction {
         AnimalModel animalModel = animalModelManager.get( modelID );        
  
 		/* 1.  Create and save SexDistribution Object */
-		SexDistribution sexDistribution = new SexDistribution();
-		sexDistribution.setType(radiationForm.getType());
-        sexDistributionManager.save( sexDistribution );
+        SexDistribution sexDistribution = sexDistributionManager.getByType(radiationForm.getType());
 		
  		/*2. Create Treatment object, set its sexDistribution property (saved in #1) and other values, and save Treatment object.	*/	
 		Treatment treatment = new Treatment();
