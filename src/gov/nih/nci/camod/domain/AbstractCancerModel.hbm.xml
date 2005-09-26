@@ -68,18 +68,21 @@
         <many-to-one
         	name="species"
         	column="taxon_id"
+        	cascade="all"
         	class="Taxon"/>
         	
 		<!-- submitter (many-to-one unidirectional) -->
         <many-to-one
         	name="submitter"
         	column="submitter_id"
+        	cascade="save-update"
         	class="Person"/>
         	
         <!-- principalInvestigator (many-to-one unidirectional) -->
         <many-to-one
         	name="principalInvestigator"
         	column="principal_investigator_id"
+        	cascade="save-update"
         	class="Person"/>
 	</class>
 </hibernate-mapping>
