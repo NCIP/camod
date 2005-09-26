@@ -7,8 +7,7 @@
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.apache.commons.lang.builder.*;
 
@@ -31,12 +30,12 @@ public class EngineeredGene extends BaseObject implements Serializable {
     private Conditionality conditionality;
     private MutationIdentifier mutationIdentifier;
     private List expressionFeatureCollection = new ArrayList();
-    private List geneFunctionCollection = new ArrayList();
+    private Set geneFunctionCollection = new HashSet();
 
     /**
      * @return Returns the geneFunctionCollection.
      */
-    public List getGeneFunctionCollection() {
+    public Set getGeneFunctionCollection() {
         return geneFunctionCollection;
     }
 
@@ -44,7 +43,7 @@ public class EngineeredGene extends BaseObject implements Serializable {
      * @param geneFunctionCollection
      *            The geneFunctionCollection to set.
      */
-    public void setGeneFunctionCollection(List geneFunctionCollection) {
+    public void setGeneFunctionCollection(Set geneFunctionCollection) {
         this.geneFunctionCollection = geneFunctionCollection;
     }
 
