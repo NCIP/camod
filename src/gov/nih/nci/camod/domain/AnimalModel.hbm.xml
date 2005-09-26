@@ -173,12 +173,14 @@
         <many-to-one
         	name="repositoryInfo"
         	column="repository_info_id"
+        	cascade="save-update"
         	class="RepositoryInfo"/>       
         	
         <!-- phenotype (many-to-one unidirectional) -->
         <many-to-one
         	name="phenotype"
         	column="phenotype_id"
+        	cascade="save-update"
         	class="Phenotype"/>   
 	</subclass>
 </hibernate-mapping>
