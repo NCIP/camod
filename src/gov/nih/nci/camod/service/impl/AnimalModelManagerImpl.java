@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.12 2005-09-23 14:55:19 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.13 2005-09-26 14:04:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/09/23 14:55:19  georgeda
+ * Made SexDistribution a reference table
+ *
  * Revision 1.11  2005/09/22 18:55:53  georgeda
  * Get coordinator from user in properties file
  *
@@ -44,21 +47,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *                an Exception if an error occurred
      */
     public List getAll() throws Exception {
-
-        log.trace("Entering getAll");
-
-        List theAnimalModels = null;
-
-        try {
-            theAnimalModels = Search.query(AnimalModel.class);
-        } catch (Exception e) {
-            log.error("Exception occurred in getAll", e);
-            throw e;
-        }
-
-        log.trace("Exiting getAll");
-
-        return theAnimalModels;
+        log.trace("In AnimalModelManagerImpl.getAll");
+        return super.getAll(AnimalModel.class);
     }
 
     /**
@@ -74,7 +64,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public List getAllByUser(String inUsername) throws Exception {
 
-        log.trace("Entering getAll");
+        log.trace("Entering AnimalModelManagerImpl.getAllByUser");
 
         // The list of AnimalModels to be returned
         List theAnimalModels = null;
@@ -92,7 +82,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             throw e;
         }
 
-        log.trace("Exiting getAllByState");
+        log.trace("Exiting AnimalModelManagerImpl.getAllByUser");
 
         return theAnimalModels;
     }
@@ -110,7 +100,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public List getAllByState(String inState) throws Exception {
 
-        log.trace("Entering getAllByState");
+        log.trace("Entering AnimalModelManagerImpl.getAllByState");
 
         // The list of AnimalModels to be returned
         List theAnimalModels = new ArrayList();
@@ -126,7 +116,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             throw e;
         }
 
-        log.trace("Exiting getAllByState");
+        log.trace("Exiting AnimalModelManagerImpl.getAllByState");
 
         return theAnimalModels;
     }
@@ -144,24 +134,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *                if an error occurred
      */
     public AnimalModel get(String id) throws Exception {
-
-        log.trace("Entering get");
-
-        AnimalModel animalModel = null;
-
-        try {
-            log.debug("Querying for id: " + id);
-            animalModel = (AnimalModel) Search.queryById(AnimalModel.class, new Long(id));
-        } catch (PersistenceException pe) {
-            log.error("Exception occurred in getAnimalModel", pe);
-            throw pe;
-        } catch (Exception e) {
-            log.error("Exception occurred in getAnimalModel", e);
-            throw e;
-        }
-
-        log.trace("Exiting get");
-        return animalModel;
+        log.trace("In AnimalModelManagerImpl.get");
+        return (AnimalModel) super.get(id, AnimalModel.class);
     }
 
     /**
@@ -174,50 +148,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *                if an error occurred
      */
     public void save(AnimalModel inAnimalModel) throws Exception {
-
-        log.trace("Entering save");
-
-        try {
-            // Begin an transaction
-            HibernateUtil.beginTransaction();
-
-            // Save the related objects
-            // NOTE: Will be fixed when cascading updates are correctly
-            // implemented
-            log.debug("Saving availability");
-            Persist.save(inAnimalModel.getAvailability());
-
-            log.debug("Saving sexDistribution");
-            Persist.save(inAnimalModel.getPhenotype().getSexDistribution());
-
-            log.debug("Saving phenotype");
-            Persist.save(inAnimalModel.getPhenotype());
-
-            log.debug("Saving species");
-            Persist.save(inAnimalModel.getSpecies());
-
-            log.debug("Saving PI");
-            PersonManagerSingleton.instance().save(inAnimalModel.getPrincipalInvestigator());
-
-            log.debug("Saving submitter");
-            PersonManagerSingleton.instance().save(inAnimalModel.getSubmitter());
-
-            // Save the base animal model
-            log.debug("Saving animal model");
-            Persist.save(inAnimalModel);
-
-            // Commit all changes or none
-            HibernateUtil.commitTransaction();
-
-        } catch (PersistenceException pe) {
-            log.error("PersistenceException in save", pe);
-            HibernateUtil.rollbackTransaction();
-            throw pe;
-        } catch (Exception e) {
-            log.error("Exception in save", e);
-            HibernateUtil.rollbackTransaction();
-            throw e;
-        }
+        log.trace("In AnimalModelManagerImpl.save");
+        super.save(inAnimalModel);
     }
 
     /**
@@ -269,11 +201,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception {
 
-        log.trace("Entering create");
+        log.trace("Entering AnimalModelManagerImpl.create");
 
         AnimalModel theAnimalModel = new AnimalModel();
 
-        log.trace("Exiting create");
+        log.trace("Exiting AnimalModelManagerImpl.create");
         return populateAnimalModel(inModelCharacteristics, inUsername, theAnimalModel);
     }
 
@@ -288,7 +220,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public void update(ModelCharacteristics inModelCharacteristics, AnimalModel inAnimalModel) throws Exception {
 
-        log.trace("Entering update");
+        log.trace("Entering AnimalModelManagerImpl.update");
 
         log.debug("Updating animal model: " + inAnimalModel.getId());
 
@@ -296,7 +228,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel = populateAnimalModel(inModelCharacteristics, null, inAnimalModel);
         save(inAnimalModel);
 
-        log.trace("Exiting update");
+        log.trace("Exiting AnimalModelManagerImpl.update");
     }
 
     /**
@@ -310,21 +242,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *             An error occurred when attempting to delete the model
      */
     public void remove(String id) throws Exception {
-
-        log.trace("Entering remove");
-
-        try {
-            log.debug("Removing animal model: " + id);
-            Persist.deleteById(AnimalModel.class, new Long(id));
-        } catch (PersistenceException pe) {
-            log.error("Unable to delete model: ", pe);
-            throw pe;
-        } catch (Exception e) {
-            log.error("Unable to delete model: ", e);
-            throw e;
-        }
-
-        log.trace("Exiting remove");
+        log.trace("In AnimalModelManagerImpl.remove");
+        super.remove(id, AnimalModel.class);
     }
 
     /**
