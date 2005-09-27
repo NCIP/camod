@@ -1,3 +1,10 @@
+/**
+ * 
+ * $Id: Constants.java,v 1.25 2005-09-27 16:34:31 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
 package gov.nih.nci.camod;
 
 /**
@@ -140,12 +147,14 @@ public class Constants {
      * Used to store lists for drop down menus
      */
     public interface Dropdowns {
+        
+        public static final String OTHER_OPTION = "Other";
 
         public static final String SPECIESDROP = "speciesdrop.db";
         public static final String STRAINDROP = "straindrop.db";
         public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
         public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
-        public static final String ADMINISTRATIVEROUTEDROP = "adminroutedrop.db";
+        public static final String ADMINISTRATIVEROUTEDROP = "AdministrativeRoutes.txt";
         public static final String AGEUNITSDROP = "AgeUnits.txt";
         public static final String PUBDROP = "PublicationStatus.txt";
 
