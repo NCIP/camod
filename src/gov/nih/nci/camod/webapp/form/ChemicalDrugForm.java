@@ -15,7 +15,7 @@ import java.io.Serializable;
  * Preferences - Java - Code Style - Code Templates
  */
 
-public class ChemicalDrugForm extends BaseForm implements Serializable {
+public class ChemicalDrugForm extends BaseForm implements Serializable, ChemicalDrugData {
 
     private static final long serialVersionUID = 3257335453799404851L;
 
