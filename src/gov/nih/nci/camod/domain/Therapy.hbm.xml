@@ -54,17 +54,23 @@
         	column="tumor_response" 
         	type="string"/>        	
         	
-        <!-- treatment (many-to-one unidirectional) -->
+        <!-- Treatment: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one) -->
         <many-to-one
         	name="treatment"
         	column="treatment_id"
-        	class="Treatment"/>
+        	class="Treatment"
+        	cascade="all"
+        	unique="true"/>
         
-        <!-- agent (many-to-one unidirectional) -->
+         <!-- Agent: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one) -->
         <many-to-one
         	name="agent"
         	column="env_factor_id"
-        	class="Agent"/>
+        	class="Agent"
+        	cascade="all"
+        	unique="true"/>
         
         <!-- publicationCollection (one-to-many unidirectional) -->
         <bag name="publicationCollection" 
