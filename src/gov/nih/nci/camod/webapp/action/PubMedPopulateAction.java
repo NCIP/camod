@@ -18,57 +18,61 @@ import org.apache.struts.action.*;
 
 public class PubMedPopulateAction extends BaseAction {
 
-	 public ActionForward execute( ActionMapping mapping, 
-			 					   ActionForm form, 
-			 					   HttpServletRequest request,
-			 					   HttpServletResponse response) 
-	 	throws IOException, ServletException {
-		 
-		    System.out.println( "<PubMedPopulateAction> Entering..." );
+    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws IOException, ServletException {
 
-		    String pmid = request.getParameter( "pmid" );
-			 	
-			//TODO: set the form values from the Publication obj
-			PublicationForm pubForm = ( PublicationForm ) form;
+        System.out.println("<PubMedPopulateAction> Entering...");
 
-			// Validate the input
-			Pattern p = Pattern.compile("[0-9]{" + pmid.length() + "}");
-			Matcher m = p.matcher( pmid );
-			 
-			if (m.matches() && pmid != null && ! pmid.equals("") ) 
-			 {
-				Publication pub = new Publication();
-                PopulatePubMedUtil.populatePumMedRecord( Long.valueOf( pmid.trim() ), pub );			
-				
-				pubForm.setJournal( pub.getJournal() );
-				pubForm.setYear(  "" + pub.getYear() );
-				pubForm.setVolume( pub.getVolume() );
-				pubForm.setTitle( pub.getTitle() );
-				pubForm.setStartPage( "" + pub.getStartPage() );
-				pubForm.setEndPage( "" + pub.getEndPage() );
-				
-			} else {
-			    
-				System.out.println("<PubMedPopulateAction> Not a valid number!");
+        String pmid = request.getParameter("pmid");
 
-			    pubForm.setJournal( "" );
-				pubForm.setYear( "" );
-				pubForm.setVolume( "" );
-				pubForm.setTitle( "" );
-				pubForm.setStartPage( "" );
-				pubForm.setEndPage( "" );
+        // TODO: set the form values from the Publication obj
+        PublicationForm pubForm = (PublicationForm) form;
 
-			     //Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
-		        ActionMessages msg = new ActionMessages();
-		        msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "publication.incorrect.pmid" ) );
-		        saveErrors( request, msg );			        
-			}
+        // Validate the input
+        Pattern p = Pattern.compile("[0-9]{" + pmid.length() + "}");
+        Matcher m = p.matcher(pmid);
 
- 			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, "" );
-			
-			request.getSession().setAttribute( Constants.FORMDATA, pubForm );	
-			 
-	        // Forward control to the specified success URI
-	        return mapping.findForward( "submitPublications" );
-	 }
+        if (m.matches() && pmid != null && !pmid.equals("")) {
+            Publication pub = new Publication();
+            PopulatePubMedUtil.populatePumMedRecord(Long.valueOf(pmid.trim()), pub);
+
+            pubForm.setJournal(pub.getJournal());
+            pubForm.setYear("" + pub.getYear());
+            pubForm.setVolume(pub.getVolume());
+            pubForm.setTitle(pub.getTitle());
+            pubForm.setStartPage("" + pub.getStartPage());
+            pubForm.setEndPage("" + pub.getEndPage());
+
+        } else {
+
+            System.out.println("<PubMedPopulateAction> Not a valid number!");
+
+            pubForm.setJournal("");
+            pubForm.setYear("");
+            pubForm.setVolume("");
+            pubForm.setTitle("");
+            pubForm.setStartPage("");
+            pubForm.setEndPage("");
+
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.incorrect.pmid"));
+            saveErrors(request, msg);
+        }
+
+        try {
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, "");
+        } catch (Exception e) {
+            log.error("Unable to get dropdown for " + Constants.Dropdowns.PUBDROP);
+
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
+        request.getSession().setAttribute(Constants.FORMDATA, pubForm);
+
+        // Forward control to the specified success URI
+        return mapping.findForward("submitPublications");
+    }
 }
