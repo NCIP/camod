@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.6 2005-09-23 14:54:58 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.7 2005-09-27 16:36:43 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/09/23 14:54:58  georgeda
+ * Made SexDistribution a reference table
+ *
  * Revision 1.5  2005/09/16 15:52:54  georgeda
  * Changes due to manager re-write
  *
@@ -12,6 +15,7 @@ package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
 
 import java.util.List;
@@ -41,4 +45,9 @@ public interface AnimalModelManager {
     public void remove(String id) throws Exception;
 
     public List search() throws Exception;
+    
+    public void updateChemicalDrug(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug, String inTherapyId) throws Exception;
+    
+    public void addChemicalDrug(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug) throws Exception;
+    
 }
