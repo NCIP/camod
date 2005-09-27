@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.7 2005-09-27 16:36:43 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.8 2005-09-27 19:17:15 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/09/27 16:36:43  georgeda
+ * Added ChemicalDrug screens
+ *
  * Revision 1.6  2005/09/23 14:54:58  georgeda
  * Made SexDistribution a reference table
  *
@@ -15,8 +18,7 @@ package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
+import gov.nih.nci.camod.webapp.form.*;
 
 import java.util.List;
 
@@ -46,8 +48,21 @@ public interface AnimalModelManager {
 
     public List search() throws Exception;
     
-    public void updateChemicalDrug(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug, String inTherapyId) throws Exception;
+    public void updateTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug, String inTherapyId) throws Exception;
     
-    public void addChemicalDrug(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug) throws Exception;
+    public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug) throws Exception;
+    
+    public void updateTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactor, String inTherapyId) throws Exception;
+    
+    public void addTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactor) throws Exception;
+    
+    public void updateTherapy(AnimalModel inAnimalModel, RadiationData inRadiation, String inTherapyId) throws Exception;
+    
+    public void addTherapy(AnimalModel inAnimalModel, RadiationData inRadiation) throws Exception;
+    
+    public void updateTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatment, String inTherapyId) throws Exception;
+    
+    public void addTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatment) throws Exception;
+    
     
 }

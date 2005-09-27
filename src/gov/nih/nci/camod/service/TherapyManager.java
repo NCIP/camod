@@ -7,7 +7,7 @@
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
+import gov.nih.nci.camod.webapp.form.*;
 
 import java.util.List;
 
@@ -27,7 +27,21 @@ public interface TherapyManager {
 
     public void remove(String id) throws Exception;
 
+    // The sub-class specific create/updates
     public Therapy create(ChemicalDrugData inChemicalDrugData);
 
     public void update(ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception;
+
+    public Therapy create(EnvironmentalFactorData inEnvironmentalFactorData);
+
+    public void update(EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception;
+    
+    public Therapy create(RadiationData inRadiationData);
+
+    public void update(RadiationData inRadiationData, Therapy inTherapy) throws Exception;
+    
+    public Therapy create(ViralTreatmentData inViralTreatment);
+
+    public void update(ViralTreatmentData inViralTreatment, Therapy inTherapy) throws Exception;
+    
 }

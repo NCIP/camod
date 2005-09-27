@@ -15,7 +15,7 @@ import java.io.Serializable;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 
-public class ViralTreatmentForm extends BaseForm implements Serializable {
+public class ViralTreatmentForm extends BaseForm implements Serializable, ViralTreatmentData {
     
     private static final long serialVersionUID = 3257115453799404851L;
     

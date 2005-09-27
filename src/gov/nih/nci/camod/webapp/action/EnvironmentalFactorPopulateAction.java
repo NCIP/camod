@@ -56,6 +56,7 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 				break;
 		}
 		
+        
 		envForm.setType(therapy.getTreatment().getSexDistribution().getType());
 		envForm.setDosage(therapy.getTreatment().getDosage());
 		envForm.setRegimen(therapy.getTreatment().getRegimen());

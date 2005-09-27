@@ -10,32 +10,15 @@ package gov.nih.nci.camod.webapp.form;
 /**
  * @author dgeorge
  * 
- * $Id: ChemicalDrugData.java,v 1.1 2005-09-27 16:52:17 georgeda Exp $
+ * $Id: ChemicalDrugData.java,v 1.2 2005-09-27 19:17:07 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/09/27 16:52:17  georgeda
+ * Initial revision
+ *
  * 
  */
-public interface ChemicalDrugData {
-
-    public String getAgeUnit();
-
-    public void setAgeUnit(String ageUnit);
-
-    public String getDoseUnit();
-
-    public void setDoseUnit(String d);
-
-    public String getName();
-
-    public void setName(String name);
-
-    public String getOtherName();
-
-    public void setOtherName(String otherName);
-
-    public String getDosage();
-
-    public void setDosage(String dosage);
+public interface ChemicalDrugData  extends CarcinogenicInterventionData {
 
     public String getNSCNumber();
 
@@ -44,24 +27,4 @@ public interface ChemicalDrugData {
     public String getCASNumber();
 
     public void setCASNumber(String CASNumber);
-
-    public String getAdministrativeRoute();
-
-    public void setAdministrativeRoute(String administrativeRoute);
-
-    public String getOtherAdministrativeRoute();
-
-    public void setOtherAdministrativeRoute(String otherAdministrativeRoute);
-
-    public String getRegimen();
-
-    public void setRegimen(String regimen);
-
-    public String getAgeAtTreatment();
-
-    public void setAgeAtTreatment(String ageAtTreatment);
-
-    public String getType();
-
-    public void setType(String type);
 }

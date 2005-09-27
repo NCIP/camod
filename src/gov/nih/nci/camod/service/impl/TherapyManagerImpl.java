@@ -8,7 +8,7 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TherapyManager;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
+import gov.nih.nci.camod.webapp.form.*;
 
 import java.util.List;
 
@@ -20,12 +20,67 @@ import java.util.List;
  */
 public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
+    public Therapy create(ViralTreatmentData inViralTreatmentData) {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+        populateCarcinogenicIntervention(inViralTreatmentData, theTherapy, "Viral");
+
+        return theTherapy;
+    }
+
+    public void update(ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateCarcinogenicIntervention(inViralTreatmentData, inTherapy, "Viral");
+        save(inTherapy);
+    }
+    
+    public Therapy create(RadiationData inRadiationData) {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+        populateCarcinogenicIntervention(inRadiationData, theTherapy, "Radiation");
+
+        return theTherapy;
+    }
+
+    public void update(RadiationData inRadiationData, Therapy inTherapy) throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateCarcinogenicIntervention(inRadiationData, inTherapy, "Radiation");
+        save(inTherapy);
+    }
+    
+    public Therapy create(EnvironmentalFactorData inEnvironmentalFactorData) {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+        populateCarcinogenicIntervention(inEnvironmentalFactorData, theTherapy, "Environment");
+
+        return theTherapy;
+    }
+
+    public void update(EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateCarcinogenicIntervention(inEnvironmentalFactorData, inTherapy, "Environment");
+        save(inTherapy);
+    }
+
     public Therapy create(ChemicalDrugData inChemicalDrugData) {
 
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateTherapy(inChemicalDrugData, theTherapy);
+        populateCarcinogenicIntervention(inChemicalDrugData, theTherapy, "Chemical / Drug");
+        populateChemicalDrug(inChemicalDrugData, theTherapy);
 
         return theTherapy;
     }
@@ -33,7 +88,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     public void update(ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
-        populateTherapy(inChemicalDrugData, inTherapy);
+        populateCarcinogenicIntervention(inChemicalDrugData, inTherapy, "Chemical / Drug");
+        populateChemicalDrug(inChemicalDrugData, inTherapy);
         save(inTherapy);
     }
 
@@ -57,36 +113,10 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         super.remove(id, Therapy.class);
     }
 
-    private void populateTherapy(ChemicalDrugData inChemicalDrug, Therapy theTherapy) {
-
-        // Set the treatment
-        Treatment theTreatment = theTherapy.getTreatment();
-        if (theTreatment == null) {
-            theTreatment = new Treatment();
-            theTherapy.setTreatment(theTreatment);
-        }
-
-        // Set the gender
-        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance()
-                .getByType(inChemicalDrug.getType());
-
-        // save the treatment
-        theTreatment.setRegimen(inChemicalDrug.getRegimen());
-        theTreatment.setSexDistribution(sexDistribution);
-
-        // Append the ageunit onto the age at treatment variable
-        theTreatment.setAgeAtTreatment(inChemicalDrug.getAgeAtTreatment() + " " + inChemicalDrug.getAgeUnit());
-        theTreatment.setDosage(inChemicalDrug.getDosage() + " " + inChemicalDrug.getDoseUnit());
-        theTreatment.setAdministrativeRoute(inChemicalDrug.getAdministrativeRoute());
+    private void populateChemicalDrug(ChemicalDrugData inChemicalDrug, Therapy theTherapy) {
 
         // Agent IS-A an EnvironmentalFactor
         Agent theAgent = theTherapy.getAgent();
-        if (theAgent == null) {
-            theAgent = new Agent();
-            theTherapy.setAgent(theAgent);
-        }
-
-        theAgent.setName(inChemicalDrug.getName());
 
         String theNSCNumber = inChemicalDrug.getNSCNumber().trim();
         if (theNSCNumber != null && theNSCNumber.length() > 0) {
@@ -100,7 +130,40 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         if (theCasNumber != null && theCasNumber.length() > 0) {
             theAgent.setCasNumber(theCasNumber);
         }
-        theAgent.setType("Chemical / Drug");
+    }
+
+    private void populateCarcinogenicIntervention(CarcinogenicInterventionData inCarcinogenicIntervention,
+            Therapy theTherapy, String inType) {
+
+        // Set the treatment
+        Treatment theTreatment = theTherapy.getTreatment();
+        if (theTreatment == null) {
+            theTreatment = new Treatment();
+            theTherapy.setTreatment(theTreatment);
+        }
+
+        // Set the gender
+        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(
+                inCarcinogenicIntervention.getType());
+
+        // save the treatment
+        theTreatment.setRegimen(inCarcinogenicIntervention.getRegimen());
+        theTreatment.setSexDistribution(sexDistribution);
+
+        // Append the ageunit onto the age at treatment variable
+        theTreatment.setAgeAtTreatment(inCarcinogenicIntervention.getAgeAtTreatment() + " "
+                + inCarcinogenicIntervention.getAgeUnit());
+        theTreatment.setDosage(inCarcinogenicIntervention.getDosage() + " " + inCarcinogenicIntervention.getDoseUnit());
+        theTreatment.setAdministrativeRoute(inCarcinogenicIntervention.getAdministrativeRoute());
+
+        // Agent IS-A an EnvironmentalFactor
+        Agent theAgent = theTherapy.getAgent();
+        if (theAgent == null) {
+            theAgent = new Agent();
+            theTherapy.setAgent(theAgent);
+        }
+        theAgent.setType(inType);
+        theAgent.setName(inCarcinogenicIntervention.getName());
 
         // TherapeuticExperiment property is false, tells us that this is an
         // environmentalFactor

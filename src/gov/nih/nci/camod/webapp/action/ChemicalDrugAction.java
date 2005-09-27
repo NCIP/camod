@@ -90,7 +90,7 @@ public class ChemicalDrugAction extends BaseAction {
 
         try {
 
-            animalModelManager.updateChemicalDrug(animalModel, chemicalDrugForm, aTherapyID);
+            animalModelManager.updateTherapy(animalModel, chemicalDrugForm, aTherapyID);
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -146,12 +146,12 @@ public class ChemicalDrugAction extends BaseAction {
         
         try {
 
-            animalModelManager.addChemicalDrug(animalModel, chemicalDrugForm);
+            animalModelManager.addTherapy(animalModel, chemicalDrugForm);
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
             ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("chemicaldrug.edit.successful"));
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("chemicaldrug.creation.successful"));
             saveErrors(request, msg);
 
         } catch (Exception e) {
