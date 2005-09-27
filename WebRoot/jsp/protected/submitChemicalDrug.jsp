@@ -68,7 +68,7 @@
 			<br>
 			<html:form action="<%= actionName %>" focus="name">			 
 			
-			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOther(this);">												
+			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOther(this);">										
 				<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>					
 			</html:select>	
 		</td>
@@ -123,7 +123,7 @@
 		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOther( this );">												
+			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute" name="formdata" onclick="chkOther( this );">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>	
 		</td>
