@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.13 2005-09-26 14:04:36 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.14 2005-09-27 16:44:49 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/09/26 14:04:36  georgeda
+ * Cleanup for cascade fix and common manager code
+ *
  * Revision 1.12  2005/09/23 14:55:19  georgeda
  * Made SexDistribution a reference table
  *
@@ -25,6 +28,7 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
@@ -197,7 +201,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            The submitter
      * 
      * @return the created and unsaved AnimalModel
-     * @throws Exception 
+     * @throws Exception
      */
     public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception {
 
@@ -371,4 +375,62 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         return inAnimalModel;
     }
+
+    /**
+     * Update a chemical/drug therapy
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inChemicalDrug
+     *            the new chemical drug data
+     * @param inTherapyId
+     *            the terapy id we're updating
+     * 
+     * @throws Exception
+     */
+    public void updateChemicalDrug(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug, String inTherapyId)
+            throws Exception {
+
+        log.trace("Entering AnimalModelManagerImpl.updateChemicalDrug");
+
+        // retrieve the list of all therapies from the current animalModel
+        List theTherapyList = inAnimalModel.getTherapyCollection();
+
+        Therapy theTherapy = null;
+
+        // find the specific one we need
+        for (int i = 0; i < theTherapyList.size(); i++) {
+            theTherapy = (Therapy) theTherapyList.get(i);
+            if (theTherapy.getId().toString().equals(inTherapyId)) {
+                log.debug("found a match for id: " + inTherapyId);
+                break;
+            }
+        }
+
+        if (theTherapy != null) {
+            TherapyManagerSingleton.instance().update(inChemicalDrug, theTherapy);
+        } else {
+            throw new IllegalArgumentException("Unknown therapy: " + inTherapyId);
+        }
+        log.trace("Exiting AnimalModelManagerImpl.updateChemicalDrug");
+    }
+
+    /**
+     * Add a chemical/drug therapy
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inChemicalDrug
+     *            the new chemical drug data
+     * @throws Exception
+     */
+    public void addChemicalDrug(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug) throws Exception {
+
+        log.trace("Entering AnimalModelManagerImpl.addChemicalDrug");
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inChemicalDrug);
+        inAnimalModel.addTherapy(theTherapy);
+        save(inAnimalModel);
+        log.trace("Exiting AnimalModelManagerImpl.addChemicalDrug");
+    }
+
 }
