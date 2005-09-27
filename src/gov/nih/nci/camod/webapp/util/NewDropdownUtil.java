@@ -1,25 +1,13 @@
 package gov.nih.nci.camod.webapp.util;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.Species;
-import gov.nih.nci.camod.domain.Strain;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Treatment;
-import gov.nih.nci.camod.service.AgentManager;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.service.TaxonManager;
-import gov.nih.nci.camod.service.TreatmentManager;
+import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,7 +19,7 @@ public class NewDropdownUtil {
     private static Map ourFileBasedLists = new HashMap();
 
     public static void populateDropdown(HttpServletRequest inRequest, String inDropdownKey, String inFilter)
-            throws IllegalArgumentException {
+            throws Exception {
 
         List theList = null;
         if (inDropdownKey.indexOf(".txt") != -1) {
@@ -51,7 +39,7 @@ public class NewDropdownUtil {
         inRequest.setAttribute(inDropdownKey, theList);
     }
 
-    private static List getDatabaseDropdown(HttpServletRequest inRequest, String inDropdownKey, String inFilter) {
+    private static List getDatabaseDropdown(HttpServletRequest inRequest, String inDropdownKey, String inFilter) throws Exception {
 
         List theReturnList = null;
 
@@ -64,45 +52,41 @@ public class NewDropdownUtil {
             theReturnList = getStrainsList(inRequest, inFilter);
         }
         
-        if (inDropdownKey.equals( Constants.Dropdowns.ADMINISTRATIVEROUTEDROP )) {
-            theReturnList = getAdminList(inRequest);
-        }
-        
         if (inDropdownKey.equals( Constants.Dropdowns.VIRALVECTORDROP )) {
             theReturnList = getViralVectorList(inRequest );
         } 
         
         //Environmental Factors - Carciogenic Interventions
         if (inDropdownKey.equals( Constants.Dropdowns.SURGERYDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Other" );
+            theReturnList = getEnvironmentalFactorList("Other" );
         }
 
         if (inDropdownKey.equals( Constants.Dropdowns.HORMONEDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Hormone" );
+            theReturnList = getEnvironmentalFactorList("Hormone" );
         }
         
         if (inDropdownKey.equals( Constants.Dropdowns.GROWTHFACTORDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Growth Factor" );
+            theReturnList = getEnvironmentalFactorList("Growth Factor" );
         }
         
         if (inDropdownKey.equals( Constants.Dropdowns.CHEMICALDRUGDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Chemical / Drug" );
+            theReturnList = getEnvironmentalFactorList("Chemical / Drug" );
         }
         
         if (inDropdownKey.equals( Constants.Dropdowns.VIRUSDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Viral" );
+            theReturnList = getEnvironmentalFactorList("Viral" );
         }
         
         if (inDropdownKey.equals( Constants.Dropdowns.RADIATIONDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Radiation" );
+            theReturnList = getEnvironmentalFactorList("Radiation" );
         }        
         
         if (inDropdownKey.equals( Constants.Dropdowns.NUTRITIONFACTORDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Nutrition" );
+            theReturnList = getEnvironmentalFactorList("Nutrition" );
         }        
                 
         if (inDropdownKey.equals( Constants.Dropdowns.ENVIRONFACTORDROP )) {
-            theReturnList = getEnvironmentalFactorList(inRequest, "Environment" );
+            theReturnList = getEnvironmentalFactorList("Environment" );
         }       
         
         return theReturnList;
@@ -233,41 +217,6 @@ public class NewDropdownUtil {
 
         return strainNames;
     }
-    
-    /**
-     * Returns a list of all Administrative Routes
-     * 
-     * @return adminList
-     */
-    private static List getAdminList(HttpServletRequest inRequest) {
-
-        // Get values for dropdown lists for Species, Strains
-        TreatmentManager treatmentManager = ( TreatmentManager ) getContext(inRequest).getBean("treatmentManager");
-        
-        List treatmentList = treatmentManager.getAll();
-        List adminList = new ArrayList();
-        Treatment tmp;
-
-        // TODO: Fix once we know what we're doing w/ this
-        adminList.add("Other");
-
-        if (treatmentList != null) {
-            for (int i = 0; i < treatmentList.size(); i++) {
-                tmp = (Treatment) treatmentList.get(i);
-
-                if (tmp.getAdministrativeRoute() != null) {
-                    // if the speciesName is not already in the List, add it
-                    // (only get unique names)
-                    if (!adminList.contains(tmp.getAdministrativeRoute()) )
-                    	adminList.add(tmp.getAdministrativeRoute() );
-                }
-            } 
-        }
-        
-        Collections.sort(adminList);
-        
-        return adminList;
-    }
         
     /**
      * Returns a list of all Administrative Routes
@@ -284,7 +233,7 @@ public class NewDropdownUtil {
         GeneDelivery tmp;
 
         // TODO: Fix once we know what we're doing w/ this
-        viralVectorList.add("Other");
+        viralVectorList.add(Constants.Dropdowns.OTHER_OPTION);
 
         if (geneDeliveryList != null) {
             for (int i = 0; i < geneDeliveryList.size(); i++) {
@@ -307,30 +256,10 @@ public class NewDropdownUtil {
      * 
      * @return envList
      */
-    private static List getEnvironmentalFactorList(HttpServletRequest inRequest, String type) {
-
-        AgentManager agentManager = (AgentManager) getContext(inRequest).getBean("agentManager");
+    private static List getEnvironmentalFactorList(String type) throws Exception {
+        List theList = QueryManagerSingleton.instance().getEnvironmentalFactors(type);
         
-        List agentList = agentManager.getAll();
-        List envList = new ArrayList();
-        Agent tmp;
-
-        // TODO: Fix once we know what we're doing w/ this
-        envList.add("Other");
-
-        if (agentList != null) {
-            for (int i = 0; i < agentList.size(); i++) {
-                tmp = (Agent) agentList.get(i);
-                
-                if (tmp.getName() != null) {
-                    // if the surgery is not already in the List, add it
-                    // (only get unique names)
-                    if ( !envList.contains(tmp.getName()) && tmp.getType().equals( type ) )
-                    	envList.add(tmp.getName());
-                }
-            }
-        }            
-        Collections.sort(envList);
-        return envList;
+        theList.add(Constants.Dropdowns.OTHER_OPTION);
+        return theList;
     }    
 }
