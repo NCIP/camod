@@ -7,7 +7,6 @@
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Agent;
-import java.util.List;
 
 /**
  * @author rajputs
@@ -16,7 +15,7 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface AgentManager {
-	public List getAll();
+	
 	public Agent get(String id);
     public void save(Agent agent);
     public void remove(String id);

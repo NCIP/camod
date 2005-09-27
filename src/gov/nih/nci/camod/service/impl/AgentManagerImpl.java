@@ -11,7 +11,6 @@ import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-import java.util.List;
 
 /**
  * @author rajputs
@@ -20,19 +19,6 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class AgentManagerImpl extends BaseManager implements AgentManager {
-	
-	public List getAll() {		
-		List agents = null;
-		
-		try {
-			agents = Search.query(Agent.class);
-		} catch (Exception e) {
-			System.out.println("Exception in AgentManagerImpl.getAll");
-			e.printStackTrace();
-		}
-		
-		return agents;
-	}
 	
 	public Agent get(String id) {
 		Agent agent = null;
