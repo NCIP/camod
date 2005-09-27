@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesPopulateAction.java,v 1.9 2005-09-22 18:56:47 georgeda Exp $
+ * $Id: AdminRolesPopulateAction.java,v 1.10 2005-09-27 16:48:53 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/09/22 18:56:47  georgeda
+ * Get coordinator from user in properties file
+ *
  * Revision 1.8  2005/09/22 15:17:01  georgeda
  * More changes
  *
@@ -115,8 +118,6 @@ public class AdminRolesPopulateAction extends BaseAction {
 
             log.error("Unable to get models for state: " + inState);
 
-            // Encountered an error saving the model.
-            // created a new model successfully
             ActionMessages theMsg = new ActionMessages();
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(inRequest, theMsg);
