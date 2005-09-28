@@ -1,14 +1,8 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.9 2005-09-28 12:46:12 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.10 2005-09-28 14:11:53 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.8  2005/09/27 19:17:15  georgeda
- * Refactor of CI managers
- *
- * Revision 1.7  2005/09/27 16:36:43  georgeda
- * Added ChemicalDrug screens
- *
  * Revision 1.6  2005/09/23 14:54:58  georgeda
  * Made SexDistribution a reference table
  *
@@ -20,6 +14,7 @@
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.GeneDelivery;
 import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.webapp.form.*;
 
@@ -50,6 +45,10 @@ public interface AnimalModelManager {
     public void remove(String id) throws Exception;
 
     public List search() throws Exception;
+    
+    public void saveXenograft( XenograftForm inXenograftForm, Xenograft inXenograft, AnimalModel inAnimalModel ) throws Exception;
+    
+    public void saveGeneDelivery( GeneDeliveryForm inGeneDeliveryForm, GeneDelivery inGeneDelivery, AnimalModel inAnimalModel ) throws Exception;
     
     public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug) throws Exception;
     

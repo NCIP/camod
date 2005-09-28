@@ -1,15 +1,9 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.16 2005-09-28 12:46:12 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.17 2005-09-28 14:14:00 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.15  2005/09/27 19:17:16  georgeda
- * Refactor of CI managers
- *
- * Revision 1.14  2005/09/27 16:44:49  georgeda
- * Added ChemicalDrug handling
- *
  * Revision 1.13  2005/09/26 14:04:36  georgeda
  * Cleanup for cascade fix and common manager code
  *
@@ -30,10 +24,22 @@
  *
  * 
  */
+
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Availability;
+import gov.nih.nci.camod.domain.ContactInfo;
+import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Phenotype;
+import gov.nih.nci.camod.domain.SexDistribution;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
@@ -206,7 +212,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            The submitter
      * 
      * @return the created and unsaved AnimalModel
-     * @throws Exception
+     * @throws Exception 
      */
     public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception {
 
@@ -230,7 +236,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void update(ModelCharacteristics inModelCharacteristics, AnimalModel inAnimalModel) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.update");
-
         log.debug("Updating animal model: " + inAnimalModel.getId());
 
         // Populate w/ the new values and save
@@ -309,8 +314,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             System.out.println("The person: " + thePerson.getUsername());
             inAnimalModel.setSubmitter(thePerson);
 
-            // TODO: Change this to match the real PI
-            inAnimalModel.setPrincipalInvestigator(thePerson);
+            // Change this to match the real PI
+            inAnimalModel.setPrincipalInvestigator( thePerson );
         }
 
         // Set the animal model information
@@ -327,9 +332,42 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
         theTaxon.setScientificName(inModelCharacteristics.getScientificName());
         theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
+     
+        // Problem when editing and this doesn't change, the admin will get two emails about the same STRAIN        
+        if( inModelCharacteristics.getEthnicityStrainUnctrlVocab() != null ) { 
+        	if ( ! inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals( "" ) ) {
+	        	
+        		log.trace( "Sending Notification eMail - new EthinicityStrain added" );	        	
+        		
+                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+                
+                //Iterate through all the reciepts in the config file
+	        	String recipients = theBundle.getString( Constants.EmailMessage.RECIPIENTS );
+	        	StringTokenizer st = new StringTokenizer( recipients, "," );
+	        	String inRecipients[] = new String[ st.countTokens() ];
+	        		        	
+	        	for ( int i=0; i<inRecipients.length; i++)
+	        		inRecipients[i] = st.nextToken();	        	
 
-        // TODO: Handle other ethnicity strain. Where?
-
+	        	String inSubject      = theBundle.getString(Constants.EmailMessage.SUBJECT);
+	        	String inMessage      = theBundle.getString(Constants.EmailMessage.MESSAGE) + 
+	        							" Strain added ( " + inModelCharacteristics.getEthnicityStrainUnctrlVocab() + " ) and is awaiting your approval.";
+	        	String inFrom         = theBundle.getString(Constants.EmailMessage.FROM);
+	        	//String inSender  	  = theBundle.getString(Constants.EmailMessage.SENDER);
+	        	
+	        	//Send the email
+	        	try {        		
+	        		MailUtil.sendMail( inRecipients, inSubject, inMessage, inFrom );
+	            } catch (Exception e) {
+	                System.out.println("Caught exception" + e);
+	                e.printStackTrace();
+	            }
+	            
+	        	// 2. Set flag, this Strain will need to be approved before being added the list
+	        	theTaxon.setEthnicityStrainUnctrlVocab( inModelCharacteristics.getEthnicityStrainUnctrlVocab() );	        	
+        	}
+        }
+        
         Phenotype thePhenotype = inAnimalModel.getPhenotype();
         if (thePhenotype == null) {
             thePhenotype = new Phenotype();
@@ -380,6 +418,40 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         return inAnimalModel;
     }
+    
+    public void saveXenograft( XenograftForm inXenograftForm, Xenograft inXenograft, AnimalModel inAnimalModel ) 
+    	throws Exception {
+    	 
+    	 log.trace( "Entering saveXenograft" );
+    	 
+    	 if ( inXenograft == null ) {
+	    	 inXenograft = XenograftManagerSingleton.instance().create( inXenograftForm, null, inAnimalModel );
+	    	 inAnimalModel.addXenograft( inXenograft );
+    	 } else {
+	    	 XenograftManagerSingleton.instance().update( inXenograftForm, inXenograft, inAnimalModel );    		 
+    	 }
+    	 
+    	 save( inAnimalModel );
+    	 
+    	 log.trace( "Exiting saveXenograft" );
+    }    
+    
+    public void saveGeneDelivery( GeneDeliveryForm inGeneDeliveryForm, GeneDelivery inGeneDelivery, AnimalModel inAnimalModel ) 
+	throws Exception {
+	 
+	 log.trace( "Entering saveGeneDelivery" );
+	 
+	 if ( inGeneDelivery == null ) {
+		 inGeneDelivery = GeneDeliveryManagerSingleton.instance().create( inGeneDeliveryForm, null, inAnimalModel );
+    	 inAnimalModel.addGeneDelivery( inGeneDelivery );
+	 } else {
+		 GeneDeliveryManagerSingleton.instance().update( inGeneDeliveryForm, inGeneDelivery, inAnimalModel );    		 
+	 }
+	 
+	 save( inAnimalModel );
+	 
+	 log.trace( "Exiting saveXenograft" );
+}    
 
     /**
      * Add a chemical/drug therapy
