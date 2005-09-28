@@ -30,12 +30,12 @@
 			</tr>			
 					
             <tr>
-                <logic:notEqual name="<%= Constants.MODELSTATUS%>" value="Incomplete">
+                <logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Incomplete">
                     <td class="resultsBoxGreyBothEnd">
                 		    This model's status is currently set to <b><%= request.getSession().getAttribute( Constants.MODELSTATUS ) %></b>                		
                     </td>
                 </logic:notEqual>
-                <logic:equal name="<%= Constants.MODELSTATUS%>" value="Incomplete">
+                <logic:equal name="<%= Constants.MODELSTATUS %>" value="Incomplete">
                     <td class="resultsBoxGrey">
                 		    This model's status is currently set to <b><%= request.getSession().getAttribute( Constants.MODELSTATUS ) %></b>                		
                     </td>
@@ -65,6 +65,7 @@
                 </td>
             </tr>
 			</TABLE>
+			
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </tr></td></TABLE>

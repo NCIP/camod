@@ -55,13 +55,15 @@ public class AnimalModelPopulateAction extends BaseAction {
 		modelChar.setScientificName( am.getSpecies().getScientificName() );
 		modelChar.setEthinicityStrain( am.getSpecies().getEthnicityStrain() );
 		
-		modelChar.setExperimentDesign( am.getExperimentDesign() );
+		if ( am.getSpecies().getEthnicityStrainUnctrlVocab() != null )
+		{
+			modelChar.setEthnicityStrainUnctrlVocab( am.getSpecies().getEthnicityStrainUnctrlVocab() ); 
+		}
 		
-		modelChar.setType( am.getPhenotype().getSexDistribution().getType() );
-		
+		modelChar.setExperimentDesign( am.getExperimentDesign() );		
+		modelChar.setType( am.getPhenotype().getSexDistribution().getType() );		
 		modelChar.setBreedingNotes( am.getPhenotype().getBreedingNotes() );		
-		modelChar.setDescription( am.getPhenotype().getDescription() );
-		
+		modelChar.setDescription( am.getPhenotype().getDescription() );		
 		modelChar.setUrl( am.getUrl() );
 		  
 		// TODO: Release date; get Calender working
@@ -116,21 +118,18 @@ public class AnimalModelPopulateAction extends BaseAction {
 			System.out.println( "<AnimalModelPopulateAction dropdown> Entering... " );
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			//DropdownUtil drop = new DropdownUtil()
             NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
 			
 			//TODO: Get specific list for speciesName ( for submitModelCharacteristics ) 
 			List speciesList = (List) request.getAttribute( Constants.Dropdowns.SPECIESDROP );			
-			System.out.println( "speciesList.get(0):" + speciesList.size()  );
+			System.out.println( "speciesList.get(0):" + speciesList.size() );
 			
-            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString() );						
-			
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString() );									
             NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 
 				
 			//Store the values for the drop down menus in a Constants variable, used in the JSP
 			//request.getSession().setAttribute( Constants.Dropdowns.SPECIESDROP, speciesList );
 			request.getSession().setAttribute( Constants.Dropdowns.STRAINDROP, "" );
 			//request.getSession().setAttribute( Constants.Dropdowns.SEXDISTRIBUTIONDROP, sexDistList );		  		
-	}
-	
+	}	
 }

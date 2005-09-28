@@ -16,7 +16,7 @@
 	var cal = new CalendarPopup();
 
 	function chkOther( control ) {
-		ideControl = document.ModelCharacteristicsForm.otherEthinicityStrain;
+		ideControl = document.forms[0].ethnicityStrainUnctrlVocab;
 			
 		if( control.value == 'Other' )
 			ideControl.disabled = false;
@@ -120,7 +120,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">if other Strain</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" property="ethinicityStrain" name="formdata" size="30"/>			
+					<html:text styleClass="formFieldSized" property="ethnicityStrainUnctrlVocab" name="formdata" size="30"/>			
 			</td>
 		</tr>
 

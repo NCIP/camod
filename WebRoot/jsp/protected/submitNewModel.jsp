@@ -15,7 +15,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkOther( control ) {
-		ideControl = document.forms[0].otherEthinicityStrain;
+		ideControl = document.forms[0].ethnicityStrainUnctrlVocab;
 		
 		if( control.value == "Other" )
 			ideControl.disabled = false;
@@ -57,8 +57,8 @@
 				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
-					<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor">
-					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
+				<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor">
+				<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
 			</td>
 		</tr>
 		
@@ -66,7 +66,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">PI's Email Address</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" property="email" size="30"/>
+				<html:text styleClass="formFieldSized" property="email" size="30"/>
 			</td>
 		</tr>
 
@@ -105,7 +105,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">if other Strain</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" property="otherEthinicityStrain" disabled="true" size="30"/>			
+				<html:text styleClass="formFieldSized" property="ethnicityStrainUnctrlVocab" disabled="true" size="30"/>			
 			</td>
 		</tr>
 
@@ -115,7 +115,7 @@
 				<camod:cshelp key="ABS_CANCER_MODEL.EXPERIMENT_DESIGN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experimentDesign" cols="32" rows="4"/>
+				<html:textarea styleClass="formFieldSized" property="experimentDesign" cols="32" rows="4"/>
 			</td>
 		</tr>
 
@@ -123,7 +123,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field2"><b>Phenotype</b></label></td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="description" cols="32" rows="4"/>			
+				<html:textarea styleClass="formFieldSized" property="description" cols="32" rows="4"/>			
 			</td>
 		</tr>
 
@@ -141,7 +141,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Breeding Notes</label></td>
 			<td class="formField">
-					<html:text styleClass="formFieldSized" property="breedingNotes" size="30"/>			
+				<html:text styleClass="formFieldSized" property="breedingNotes" size="30"/>			
 			</td>
 		</tr>
 
@@ -151,7 +151,7 @@
 				<camod:cshelp key="ABS_CANCER_MODEL.URL" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-					<html:text styleClass="formFieldSized" property="url" size="30"/>
+				<html:text styleClass="formFieldSized" property="url" size="30"/>
 			</td>
 		</tr>
 

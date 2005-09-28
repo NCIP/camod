@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  * @author georgeda
  *
  */
-public class MailUtil {
+ public class MailUtil {
 
     static private final Log log = LogFactory.getLog(MailUtil.class);
 
@@ -29,7 +29,7 @@ public class MailUtil {
      * @param inFrom - who the message is from
      * 
      */
-    public static void sendMail(String inRecipients[], String inSubject, String inMessage, String inFrom)
+    static public void sendMail(String inRecipients[], String inSubject, String inMessage, String inFrom)
             throws MessagingException {
 
         log.trace("Entering sendMail");

@@ -8,12 +8,6 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public class XenograftForm extends BaseForm implements Serializable {
     
     private static final long serialVersionUID = 3257125453799404851L;
@@ -33,6 +27,7 @@ public class XenograftForm extends BaseForm implements Serializable {
 	protected String ATCCNumber;
 	protected String parentalCellLineName;
 	protected String ageAtTreatment;
+	protected String ageUnit;
 	protected String cellAmount;
 	protected String harvestDate;
 	protected String modificationDescription;	
@@ -40,8 +35,48 @@ public class XenograftForm extends BaseForm implements Serializable {
 	protected String administrativeSite;
 	protected String graftType;
 	protected String otherGraftType;
-
 	
+	protected String hostScientificName;
+	protected String hostEthinicityStrain;
+	protected String otherHostEthinicityStrain;
+	
+	/**
+	 * @return Returns the name.
+	 */
+	public String getHostScientificName() {
+		return hostScientificName;
+	}
+	/**
+	 * @param name The name to set.
+	 */
+	public void setHostScientificName(String name) {
+		this.hostScientificName = name;
+	}
+	/**
+	 * @return Returns the name.
+	 */
+	public String getHostEthinicityStrain() {
+		return hostEthinicityStrain;
+	}
+	/**
+	 * @param name The name to set.
+	 */
+	public void setHostEthinicityStrain(String name) {
+		this.hostEthinicityStrain = name;
+	}
+	/**
+	 * @return Returns the name.
+	 */
+	public String getOtherHostEthinicityStrain() {
+		return otherHostEthinicityStrain;
+	}
+	/**
+	 * @param name The name to set.
+	 */
+	public void setOtherHostEthinicityStrain(String name) {
+		this.otherHostEthinicityStrain = name;
+	}
+
 	/**
 	 * @return Returns the name.
 	 */
@@ -53,6 +88,18 @@ public class XenograftForm extends BaseForm implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return Returns the AgeUnit.
+	 */
+	public String getAgeUnit() {
+		return ageUnit;
+	}
+	/**
+	 * @param name The ageUnit to set.
+	 */
+	public void setAgeUnit(String unit) {
+		this.ageUnit = name;
 	}
 	/**
 	 * @return Returns the ATCCNumber.

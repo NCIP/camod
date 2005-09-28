@@ -1222,25 +1222,40 @@
     </action>
          
      <!-- ViralTreatmentForm -->
-          <action path="/ViralTreatmentAction"
-	        type="gov.nih.nci.camod.webapp.action.ViralTreatmentAction"
-	        name="viralTreatmentForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="submitViralTreatment">   	
+     <action path="/ViralTreatmentAction"
+        type="gov.nih.nci.camod.webapp.action.ViralTreatmentAction"
+        name="viralTreatmentForm"
+        scope="request"
+        parameter="method" 	     
+        validate="false"
+        input="submitViralTreatment">   	
     </action>
     
     <action path="/ViralTreatmentPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.ViralTreatmentPopulateAction"
-    		name="viralTreatmentForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
+		type="gov.nih.nci.camod.webapp.action.ViralTreatmentPopulateAction"
+		name="viralTreatmentForm"    		
+        scope="request"
+        parameter="method"
+		validate="false">		
     </action>
     
      <!-- XenograftForm -->
+     <action path="/XenograftAction"
+        type="gov.nih.nci.camod.webapp.action.XenograftAction"
+        name="xenograftForm"
+        scope="request"
+        parameter="method" 	     
+        validate="false"
+        input="submitTransplantXenograft">   	
+    </action>
     
+    <action path="/XenograftPopulateAction"
+		type="gov.nih.nci.camod.webapp.action.XenograftPopulateAction"
+		name="xenograftForm"    		
+        scope="request"
+        parameter="method"
+		validate="false">		
+    </action>
     
      <!-- Admin functionality action -->	
   

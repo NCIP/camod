@@ -7,7 +7,9 @@ import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public class SetOptionsAction extends BaseAction {
 		
@@ -33,7 +35,7 @@ public class SetOptionsAction extends BaseAction {
     	 System.out.println( "<SetOptionsActions execute> speciesName: " + speciesName + "  page: " + page );
     	 
          NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesName );
-    	
+    	        
     	 if( page.equals("submitNewModel" )) {    		 
 			 ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;
 			 request.getSession().setAttribute( Constants.FORMDATA, modelChar );			 
@@ -45,6 +47,6 @@ public class SetOptionsAction extends BaseAction {
 			 return mapping.findForward( "submitModelCharacteristics" );
     	 }
     	 else
-    		 return mapping.findForward( "submitNewModel" );
-    }        
+    		 return mapping.findForward( "submitNewModel" );	        	     
+    }
 }

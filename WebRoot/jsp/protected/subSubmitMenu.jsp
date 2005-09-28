@@ -4,6 +4,7 @@
 <%@ page import="gov.nih.nci.camod.domain.GeneDelivery" %>	
 <%@ page import="gov.nih.nci.camod.domain.Therapy" %>
 <%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
+<%@ page import="gov.nih.nci.camod.domain.Xenograft" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
@@ -132,7 +133,11 @@
         
 	<div id="menu11" class="masterTitle" onclick="SwitchMenu('sub11')" onmouseover="ChangeClass('menu11','masterTitleOver')" onmouseout="ChangeClass('menu11','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> XENOGRAFT</div>
 	<span class="submasterdiv" id="sub11">
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitTransplantXenograft">Enter Transplant/Xenograft</html:link><br>	
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="XenograftPopulateAction.do?method=dropdown">Enter Transplant/Xenograft</html:link><br>
+			 <logic:iterate id="aXenograft" name="xenograft_list" type="Xenograft">
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="XenograftPopulateAction.do?method=populate" paramId="aXenograftID" paramName="aXenograft" paramProperty="id"><bean:write name="aXenograft" property="name" filter="true"/></html:link><br>
+			 </logic:iterate>
+		<br>	
 	</span>	
 </DIV>
 

@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ModelCharacteristics.java,v 1.1 2005-09-16 15:52:58 georgeda Exp $
+ *  $Id: ModelCharacteristics.java,v 1.2 2005-09-28 15:12:22 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/09/16 15:52:58  georgeda
+ *  Changes due to manager re-write
+ *
  *  
  */
 package gov.nih.nci.camod.webapp.form;
@@ -74,4 +77,8 @@ public interface ModelCharacteristics {
     public String getReleaseDate();
 
     public void setReleaseDate(String a);
+    
+    public void setEthnicityStrainUnctrlVocab( String a );
+    
+    public String getEthnicityStrainUnctrlVocab();
 }

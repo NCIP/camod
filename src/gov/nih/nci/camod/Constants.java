@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.25 2005-09-27 16:34:31 georgeda Exp $
+ * $Id: Constants.java,v 1.26 2005-09-28 15:12:35 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/09/27 16:34:31  georgeda
+ * Changed administravive route drop down
+ *
  *
  */
 package gov.nih.nci.camod;
@@ -168,6 +171,11 @@ public class Constants {
         public static final String SURGERYDROP = "surgerydrop.db";
         public static final String VIRUSDROP = "virusdrop.db";
         public static final String VIRALVECTORDROP = "viralvectordrop.db";
+        public static final String GRAFTTYPEDROP = "grafttypedrop.db";
+        
+        // These two are used to display the species and strain currently in the AnimalModelCharacteristics        
+        public static final String MODELSPECIES = "modelspecies";
+        public static final String MODELSTRAIN = "modelstrain";
     }
 
     /**
@@ -235,6 +243,8 @@ public class Constants {
         public static final String RADIATION_LIST = "radiation_list";
         public static final String SURGERYOTHER_LIST = "surgeryother_list";
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
+        public static final String XENOGRAFT_LIST = "xenograft_list";
+        
         /**
          * Used to store a list of names for the Publication section of the
          * sidebar menu of the submission section
@@ -358,7 +368,16 @@ public class Constants {
          */
         public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
     }
-
+    public interface EmailMessage {
+    	
+    	public static final String SENDER = "email.sender";
+    	public static final String RECIPIENTS = "email.recipients";
+    	public static final String FROM = "email.from";
+    	public static final String MESSAGE = "email.message";
+    	public static final String SUBJECT = "email.subject";
+    	
+    }
+    
     /**
      * 
      * Constants used for fetching EVS data

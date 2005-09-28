@@ -98,9 +98,9 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel">Location of Delivery&nbsp;
-				<a href="javascript:showTissueTree( 'geneDeliveryForm', 'mouse', 1)">
-					<IMG src="images\selectUP.gif" align=middle border=0>
-
+		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+				<IMG src="images\selectUP.gif" align=middle border=0>
+				</a>
 			 		<html:hidden property="organTissueName" name="formdata" />
 			 		<html:hidden property="organTissueCode" name="formdata" />
 				</a>

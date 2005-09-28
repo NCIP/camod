@@ -6,7 +6,10 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.webapp.form.XenograftForm;
+
 import java.util.List;
 
 /**
@@ -16,8 +19,10 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface XenograftManager {
-	public List getAll();
-	public Xenograft get(String id);
-    public void save(Xenograft xenograft);
-    public void remove(String id);
+	public List getAll() throws Exception;
+	public Xenograft get(String id) throws Exception;
+    public void save(Xenograft xenograft) throws Exception;
+    public void remove(String id) throws Exception;
+    public Xenograft create(XenograftForm inXenograftForm, String inUsername, AnimalModel inAnimalModel ) throws Exception;
+    public void update(XenograftForm inXenograftForm, Xenograft inXenograft, AnimalModel inAnimalModel ) throws Exception;
 }
