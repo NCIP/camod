@@ -3,7 +3,7 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.GeneDeliveryManager;
+//import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.webapp.form.CellLineForm;
 
 import java.util.List;
@@ -161,7 +161,7 @@ public final class CellLineAction extends BaseAction {
         //TODO: use managers to implement evs tree (organ code)
         //CellLineManager cellLineManager = (CellLineManager) getBean( "cellLineManager" );
         //OrganManager organManager = (OrganManager) getBean( "organManager" );
-        GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager)getBean( "geneDeliveryManager" ); 
+       // GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager)getBean( "geneDeliveryManager" ); 
         
         /* Set modelID in AnimalModel object */
         AnimalModel animalModel = animalModelManager.get( modelID );         
@@ -183,7 +183,7 @@ public final class CellLineAction extends BaseAction {
         //Create GeneDelivery object, set its organName, and save GeneDelivery object
         GeneDelivery geneDelivery = new GeneDelivery();
         geneDelivery.setOrgan(organ);
-        geneDeliveryManager.save(geneDelivery);
+        //geneDeliveryManager.save(geneDelivery);
         
 		System.out.println( "<CellLineAction save> Created and saved GeneDelivery object");
 		
