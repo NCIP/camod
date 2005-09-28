@@ -96,6 +96,7 @@
         <many-to-one
         	name="hostSpecies"
         	column="host_species_id"
+        	cascade="all-delete-orphan"
         	class="Taxon"/>    
         	
         <!-- organ: this is really a one-to-one relationship with unique=true -->
