@@ -9,6 +9,7 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.*;
+import gov.nih.nci.camod.webapp.form.cibase.*;
 
 import java.util.List;
 
@@ -25,8 +26,12 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateCarcinogenicIntervention(inViralTreatmentData, theTherapy, "Viral");
-
+        populateName(inViralTreatmentData, theTherapy, "Viral");
+        populateAgeGender(inViralTreatmentData, theTherapy);
+        populateTreatment(inViralTreatmentData, theTherapy);
+        populateDose(inViralTreatmentData, theTherapy);
+        populateAdministration(inViralTreatmentData, theTherapy);
+        
         return theTherapy;
     }
 
@@ -34,16 +39,26 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
         log.trace("In TherapyManagerImpl.update");
 
-        populateCarcinogenicIntervention(inViralTreatmentData, inTherapy, "Viral");
+        populateName(inViralTreatmentData, inTherapy, "Viral");
+        populateAgeGender(inViralTreatmentData, inTherapy);
+        populateTreatment(inViralTreatmentData, inTherapy);
+        populateDose(inViralTreatmentData, inTherapy);
+        populateAdministration(inViralTreatmentData, inTherapy);
+        
         save(inTherapy);
     }
-    
+
     public Therapy create(RadiationData inRadiationData) {
 
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateCarcinogenicIntervention(inRadiationData, theTherapy, "Radiation");
+        
+        populateName(inRadiationData, theTherapy, "Radiation");
+        populateAgeGender(inRadiationData, theTherapy);
+        populateTreatment(inRadiationData, theTherapy);
+        populateDose(inRadiationData, theTherapy);
+        populateAdministration(inRadiationData, theTherapy);
 
         return theTherapy;
     }
@@ -52,16 +67,26 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
         log.trace("In TherapyManagerImpl.update");
 
-        populateCarcinogenicIntervention(inRadiationData, inTherapy, "Radiation");
+        populateName(inRadiationData, inTherapy, "Radiation");
+        populateAgeGender(inRadiationData, inTherapy);
+        populateTreatment(inRadiationData, inTherapy);
+        populateDose(inRadiationData, inTherapy);
+        populateAdministration(inRadiationData, inTherapy);
+        
         save(inTherapy);
     }
-    
+
     public Therapy create(EnvironmentalFactorData inEnvironmentalFactorData) {
 
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateCarcinogenicIntervention(inEnvironmentalFactorData, theTherapy, "Environment");
+        
+        populateName(inEnvironmentalFactorData, theTherapy, "Environment");
+        populateAgeGender(inEnvironmentalFactorData, theTherapy);
+        populateTreatment(inEnvironmentalFactorData, theTherapy);
+        populateDose(inEnvironmentalFactorData, theTherapy);
+        populateAdministration(inEnvironmentalFactorData, theTherapy);
 
         return theTherapy;
     }
@@ -70,7 +95,12 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
         log.trace("In TherapyManagerImpl.update");
 
-        populateCarcinogenicIntervention(inEnvironmentalFactorData, inTherapy, "Environment");
+        populateName(inEnvironmentalFactorData, inTherapy, "Environment");
+        populateAgeGender(inEnvironmentalFactorData, inTherapy);
+        populateTreatment(inEnvironmentalFactorData, inTherapy);
+        populateDose(inEnvironmentalFactorData, inTherapy);
+        populateAdministration(inEnvironmentalFactorData, inTherapy);
+        
         save(inTherapy);
     }
 
@@ -79,7 +109,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateCarcinogenicIntervention(inChemicalDrugData, theTherapy, "Chemical / Drug");
+        
+        populateName(inChemicalDrugData, theTherapy, "Chemical / Drug");
+        populateAgeGender(inChemicalDrugData, theTherapy);
+        populateTreatment(inChemicalDrugData, theTherapy);
+        populateDose(inChemicalDrugData, theTherapy);
+        populateAdministration(inChemicalDrugData, theTherapy);
+        
         populateChemicalDrug(inChemicalDrugData, theTherapy);
 
         return theTherapy;
@@ -88,7 +124,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     public void update(ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
-        populateCarcinogenicIntervention(inChemicalDrugData, inTherapy, "Chemical / Drug");
+        
+        populateName(inChemicalDrugData, inTherapy, "Chemical / Drug");
+        populateAgeGender(inChemicalDrugData, inTherapy);
+        populateTreatment(inChemicalDrugData, inTherapy);
+        populateDose(inChemicalDrugData, inTherapy);
+        populateAdministration(inChemicalDrugData, inTherapy);
+        
         populateChemicalDrug(inChemicalDrugData, inTherapy);
         save(inTherapy);
     }
@@ -132,8 +174,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         }
     }
 
-    private void populateCarcinogenicIntervention(CarcinogenicInterventionData inCarcinogenicIntervention,
-            Therapy theTherapy, String inType) {
+    private void populateAgeGender(AgeGenderData inAgeGender, Therapy theTherapy) {
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -143,18 +184,67 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         }
 
         // Set the gender
-        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(
-                inCarcinogenicIntervention.getType());
+        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(inAgeGender.getType());
 
         // save the treatment
-        theTreatment.setRegimen(inCarcinogenicIntervention.getRegimen());
         theTreatment.setSexDistribution(sexDistribution);
 
         // Append the ageunit onto the age at treatment variable
-        theTreatment.setAgeAtTreatment(inCarcinogenicIntervention.getAgeAtTreatment() + " "
-                + inCarcinogenicIntervention.getAgeUnit());
-        theTreatment.setDosage(inCarcinogenicIntervention.getDosage() + " " + inCarcinogenicIntervention.getDoseUnit());
-        theTreatment.setAdministrativeRoute(inCarcinogenicIntervention.getAdministrativeRoute());
+        theTreatment.setAgeAtTreatment(inAgeGender.getAgeAtTreatment() + " " + inAgeGender.getAgeUnit());
+    }
+
+    private void populateTreatment(TreatmentData inTreatment, Therapy theTherapy) {
+
+        // Set the treatment
+        Treatment theTreatment = theTherapy.getTreatment();
+        if (theTreatment == null) {
+            theTreatment = new Treatment();
+            theTherapy.setTreatment(theTreatment);
+        }
+
+        // save the treatment
+        theTreatment.setRegimen(inTreatment.getRegimen());
+    }
+
+    private void populateAdministration(AdministrationData inAdministrationData, Therapy theTherapy) {
+
+        // Set the treatment
+        Treatment theTreatment = theTherapy.getTreatment();
+        if (theTreatment == null) {
+            theTreatment = new Treatment();
+            theTherapy.setTreatment(theTreatment);
+        }
+
+        theTreatment.setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
+
+        // Agent IS-A an EnvironmentalFactor
+        Agent theAgent = theTherapy.getAgent();
+        if (theAgent == null) {
+            theAgent = new Agent();
+            theTherapy.setAgent(theAgent);
+        }
+    }
+
+    private void populateDose(DoseData inDoseData, Therapy theTherapy) {
+
+        // Set the treatment
+        Treatment theTreatment = theTherapy.getTreatment();
+        if (theTreatment == null) {
+            theTreatment = new Treatment();
+            theTherapy.setTreatment(theTreatment);
+        }
+
+        theTreatment.setDosage(inDoseData.getDosage() + " " + inDoseData.getDoseUnit());
+    }
+
+    private void populateName(NameData inNameData, Therapy theTherapy, String inType) {
+
+        // Set the treatment
+        Treatment theTreatment = theTherapy.getTreatment();
+        if (theTreatment == null) {
+            theTreatment = new Treatment();
+            theTherapy.setTreatment(theTreatment);
+        }
 
         // Agent IS-A an EnvironmentalFactor
         Agent theAgent = theTherapy.getAgent();
@@ -163,12 +253,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             theTherapy.setAgent(theAgent);
         }
         theAgent.setType(inType);
-        theAgent.setName(inCarcinogenicIntervention.getName());
-
-        // TherapeuticExperiment property is false, tells us that this is an
-        // environmentalFactor
+        theAgent.setName(inNameData.getName());
         theTherapy.setTherapeuticExperiment(new Boolean(false));
-        theTherapy.setAgent(theAgent);
-        theTherapy.setTreatment(theTreatment);
     }
 }
