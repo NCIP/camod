@@ -14,7 +14,7 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GeneDeliveryForm extends BaseForm implements Serializable {
+public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeliveryData {
 
     private static final long serialVersionUID = 3257355453799404851L;	
 	/**

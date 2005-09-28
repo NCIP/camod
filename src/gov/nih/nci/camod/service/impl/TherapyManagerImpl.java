@@ -1,8 +1,9 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * @author dgeorge
+ * 
+ * $Id: TherapyManagerImpl.java,v 1.6 2005-09-28 21:20:01 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -11,16 +12,196 @@ import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.camod.webapp.form.cibase.*;
 
-import java.util.List;
-
 /**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
+ * Implementation of the TherapyManager interface. Creates/saves/updates the
+ * different types of therapies based on the specific interface passed in
  */
 public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inSurgeryData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
+    public Therapy create(SurgeryData inSurgeryData) {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+        populateName(inSurgeryData, theTherapy, "Other");
+        populateTreatment(inSurgeryData, theTherapy);
+        populateAgeGender(inSurgeryData, theTherapy);
+
+        return theTherapy;
+    }
+
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inSurgeryData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(SurgeryData inSurgeryData, Therapy inTherapy) throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateName(inSurgeryData, inTherapy, "Other");
+        populateTreatment(inSurgeryData, inTherapy);
+        populateAgeGender(inSurgeryData, inTherapy);
+
+        save(inTherapy);
+    }
+
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inNutritionalFactorData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
+    public Therapy create(NutritionalFactorData inNutritionalFactorData) {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+        populateName(inNutritionalFactorData, theTherapy, "Nutrition");
+        populateTreatment(inNutritionalFactorData, theTherapy);
+        populateAgeGender(inNutritionalFactorData, theTherapy);
+        populateDose(inNutritionalFactorData, theTherapy);
+
+        return theTherapy;
+    }
+
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inNutritionalFactorData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(NutritionalFactorData inNutritionalFactorData, Therapy inTherapy) throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateName(inNutritionalFactorData, inTherapy, "Nutrition");
+        populateTreatment(inNutritionalFactorData, inTherapy);
+        populateAgeGender(inNutritionalFactorData, inTherapy);
+        populateDose(inNutritionalFactorData, inTherapy);
+
+        save(inTherapy);
+    }
+
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inHormoneData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
+    public Therapy create(HormoneData inHormoneData) {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+        populateName(inHormoneData, theTherapy, "Hormone");
+        populateTreatment(inHormoneData, theTherapy);
+        populateDose(inHormoneData, theTherapy);
+
+        return theTherapy;
+    }
+
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inHormoneData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(HormoneData inHormoneData, Therapy inTherapy) throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateName(inHormoneData, inTherapy, "Hormone");
+        populateTreatment(inHormoneData, inTherapy);
+        populateDose(inHormoneData, inTherapy);
+
+        save(inTherapy);
+    }
+
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inGrowthFactorData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
+    public Therapy create(GrowthFactorData inGrowthFactorData) {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+        populateName(inGrowthFactorData, theTherapy, "Growth Factor");
+        populateAgeGender(inGrowthFactorData, theTherapy);
+        populateTreatment(inGrowthFactorData, theTherapy);
+        populateDose(inGrowthFactorData, theTherapy);
+
+        return theTherapy;
+    }
+
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inGrowthFactorData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void update(GrowthFactorData inGrowthFactorData, Therapy inTherapy) throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateName(inGrowthFactorData, inTherapy, "Growth Factor");
+        populateAgeGender(inGrowthFactorData, inTherapy);
+        populateTreatment(inGrowthFactorData, inTherapy);
+        populateDose(inGrowthFactorData, inTherapy);
+
+        save(inTherapy);
+    }
+
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inViralTreatmentData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
     public Therapy create(ViralTreatmentData inViralTreatmentData) {
 
         log.trace("In TherapyManagerImpl.create");
@@ -31,10 +212,22 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateTreatment(inViralTreatmentData, theTherapy);
         populateDose(inViralTreatmentData, theTherapy);
         populateAdministration(inViralTreatmentData, theTherapy);
-        
+
         return theTherapy;
     }
 
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inViralTreatmentData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public void update(ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
@@ -44,16 +237,24 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateTreatment(inViralTreatmentData, inTherapy);
         populateDose(inViralTreatmentData, inTherapy);
         populateAdministration(inViralTreatmentData, inTherapy);
-        
+
         save(inTherapy);
     }
 
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inRadiationData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
     public Therapy create(RadiationData inRadiationData) {
 
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        
+
         populateName(inRadiationData, theTherapy, "Radiation");
         populateAgeGender(inRadiationData, theTherapy);
         populateTreatment(inRadiationData, theTherapy);
@@ -63,6 +264,18 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         return theTherapy;
     }
 
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inRadiationData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public void update(RadiationData inRadiationData, Therapy inTherapy) throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
@@ -72,16 +285,24 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateTreatment(inRadiationData, inTherapy);
         populateDose(inRadiationData, inTherapy);
         populateAdministration(inRadiationData, inTherapy);
-        
+
         save(inTherapy);
     }
 
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inEnvironmentalFactorData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
     public Therapy create(EnvironmentalFactorData inEnvironmentalFactorData) {
 
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        
+
         populateName(inEnvironmentalFactorData, theTherapy, "Environment");
         populateAgeGender(inEnvironmentalFactorData, theTherapy);
         populateTreatment(inEnvironmentalFactorData, theTherapy);
@@ -91,6 +312,18 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         return theTherapy;
     }
 
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inEnvironmentalFactorData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public void update(EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
@@ -100,61 +333,109 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateTreatment(inEnvironmentalFactorData, inTherapy);
         populateDose(inEnvironmentalFactorData, inTherapy);
         populateAdministration(inEnvironmentalFactorData, inTherapy);
-        
+
         save(inTherapy);
     }
 
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inChemicalDrugData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
     public Therapy create(ChemicalDrugData inChemicalDrugData) {
 
         log.trace("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        
+
         populateName(inChemicalDrugData, theTherapy, "Chemical / Drug");
         populateAgeGender(inChemicalDrugData, theTherapy);
         populateTreatment(inChemicalDrugData, theTherapy);
         populateDose(inChemicalDrugData, theTherapy);
         populateAdministration(inChemicalDrugData, theTherapy);
-        
+
         populateChemicalDrug(inChemicalDrugData, theTherapy);
 
         return theTherapy;
     }
 
+    /**
+     * Update a therapy object with the correct data filled in.
+     * 
+     * @param inChemicalDrugData
+     *            the interface to update the therapy object from
+     * 
+     * @param inTherapy
+     *            the therapy object to update
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public void update(ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
-        
+
         populateName(inChemicalDrugData, inTherapy, "Chemical / Drug");
         populateAgeGender(inChemicalDrugData, inTherapy);
         populateTreatment(inChemicalDrugData, inTherapy);
         populateDose(inChemicalDrugData, inTherapy);
         populateAdministration(inChemicalDrugData, inTherapy);
-        
+
         populateChemicalDrug(inChemicalDrugData, inTherapy);
         save(inTherapy);
     }
 
-    public List getAll() throws Exception {
-        log.trace("In TherapyManagerImpl.getAll");
-        return super.getAll(Therapy.class);
-    }
-
+    /**
+     * Get a specific Therapy by id
+     * 
+     * @param id
+     *            the unique id for a therapy
+     * 
+     * @return the matching Therapy object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public Therapy get(String id) throws Exception {
         log.trace("In TherapyManagerImpl.get");
         return (Therapy) super.get(id, Therapy.class);
     }
 
+    /**
+     * Save Therapy
+     * 
+     * @param therapy
+     *            the therapy to save
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public void save(Therapy therapy) throws Exception {
         log.trace("In TherapyManagerImpl.save");
         super.save(therapy);
     }
 
+    /**
+     * Remove a specific Therapy by id
+     * 
+     * @param id
+     *            the unique id for a therapy
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public void remove(String id) throws Exception {
         log.trace("In TherapyManagerImpl.save");
         super.remove(id, Therapy.class);
     }
 
+    /////////////////////////////////////////////////////////
+    // Populate methods for the specific interfaces that
+    // each interface implements
+    /////////////////////////////////////////////////////////
     private void populateChemicalDrug(ChemicalDrugData inChemicalDrug, Therapy theTherapy) {
 
         // Agent IS-A an EnvironmentalFactor

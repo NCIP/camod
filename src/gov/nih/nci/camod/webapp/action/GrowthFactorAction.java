@@ -1,11 +1,16 @@
+/**
+ * $Id: GrowthFactorAction.java,v 1.5 2005-09-28 21:20:12 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ */
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.GrowthFactorForm;
-
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,9 +76,6 @@ public class GrowthFactorAction extends BaseAction {
 
         System.out.println("<GrowthFactorAction edit> Entering... ");
 
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-
         // Grab the current Therapy we are working with related to this
         // animalModel
         String aTherapyID = request.getParameter("aTherapyID");
@@ -86,69 +88,27 @@ public class GrowthFactorAction extends BaseAction {
                 + "\n\t doseUnit: " + growthFactorForm.getDoseUnit() + "\n\t ageAtTreatment: "
                 + growthFactorForm.getAgeAtTreatment() + "\n\t ageUnit: " + growthFactorForm.getAgeUnit());
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean("sexDistributionManager");
-        TreatmentManager treatmentManager = (TreatmentManager) getBean("treatmentManager");
-        AgentManager agentManager = (AgentManager) getBean("agentManager");
         TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
-        AnimalModel animalModel = animalModelManager.get(modelID);
+        try {
 
-        // retrieve the list of all therapies from the current animalModel
-        List therapyList = animalModel.getTherapyCollection();
+            Therapy theTherapy = therapyManager.get(aTherapyID);
+            therapyManager.update(growthFactorForm, theTherapy);
 
-        Therapy ty = new Therapy();
-        int therapyNumber = 0;
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("growthFactor.edit.successful"));
+            saveErrors(request, msg);
 
-        // find the specific one we need
-        for (int i = 0; i < therapyList.size(); i++) {
-            ty = (Therapy) therapyList.get(i);
-            System.out.println(" searching ... id=" + ty.getId().toString() + " is it equal? " + aTherapyID);
-            if (ty.getId().toString().equals(aTherapyID)) {
-                therapyNumber = i;
-                System.out.println("found a match!");
-                break;
-            }
+        } catch (Exception e) {
+
+            log.error("Unable to get add a chemical drug action: ", e);
+
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
         }
-
-        // Set the treatment
-        Treatment ts = ty.getTreatment();
-
-        // Set the gender
-        SexDistribution sexDistribution = sexDistributionManager.getByType(growthFactorForm.getType());
-
-        // save the treatment
-        ts.setRegimen(growthFactorForm.getRegimen());
-        ts.setSexDistribution(sexDistribution);
-        // Append the ageunit onto the age at treatment variable
-        ts.setAgeAtTreatment(growthFactorForm.getAgeAtTreatment() + " " + growthFactorForm.getAgeUnit());
-        ts.setDosage(growthFactorForm.getDosage() + " " + growthFactorForm.getDoseUnit());
-        treatmentManager.save(ts);
-
-        // Agent IS-A an EnvironmentalFactor
-        Agent agent = ty.getAgent();
-        agent.setName(growthFactorForm.getName());
-        agent.setType("Growth Factor");
-        agentManager.save(agent);
-
-        // TherapeuticExperiment property is false, tells us that this is an
-        // environmentalFactor
-        ty.setTherapeuticExperiment(new Boolean(false));
-        ty.setAgent(agent);
-        ty.setTreatment(ts);
-        therapyManager.save(ty);
-        therapyList.set(therapyNumber, ty);
-
-        animalModel.setTherapyCollection(therapyList);
-
-        // Persist all changes to the db
-        // animalModelManager.save( animalModel );
-
-        // Add a message to be displayed in submitOverview.jsp saying you've
-        // created a new model successfully
-        ActionMessages msg = new ActionMessages();
-        msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("growthFactor.edit.successful"));
-        saveErrors(request, msg);
 
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
@@ -183,48 +143,23 @@ public class GrowthFactorAction extends BaseAction {
                 + growthFactorForm.getAgeAtTreatment() + "\n\t ageUnit: " + growthFactorForm.getAgeUnit());
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean("sexDistributionManager");
-        TreatmentManager treatmentManager = (TreatmentManager) getBean("treatmentManager");
-        AgentManager agentManager = (AgentManager) getBean("agentManager");
-
         AnimalModel animalModel = animalModelManager.get(modelID);
 
-        // Set the gender
-        SexDistribution sexDistribution = sexDistributionManager.getByType(growthFactorForm.getType());
+        try {
+            animalModelManager.addTherapy(animalModel, growthFactorForm);
 
-        // Set the treatment
-        Treatment ts = new Treatment();
-        ts.setRegimen(growthFactorForm.getRegimen());
-        ts.setSexDistribution(sexDistribution);
-        // Append the ageunit onto the age at treatment variable
-        ts.setAgeAtTreatment(growthFactorForm.getAgeAtTreatment() + " " + growthFactorForm.getAgeUnit());
-        ts.setDosage(growthFactorForm.getDosage() + " " + growthFactorForm.getDoseUnit());
-        treatmentManager.save(ts);
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("growthFactor.creation.successful"));
+            saveErrors(request, msg);
 
-        // Agent IS-A an EnvironmentalFactor
-        Agent agent = new Agent();
-        agent.setName(growthFactorForm.getName());
-        agent.setType("Growth Factor");
-        agentManager.save(agent);
+        } catch (Exception e) {
 
-        // TherapeuticExperiment property is false, tells us that this is an
-        // environmentalFactor
-        Therapy ty = new Therapy();
-        ty.setTherapeuticExperiment(new Boolean(false));
-        ty.setAgent(agent);
-        ty.setTreatment(ts);
+            log.error("Unable to get add an environmental factor: ", e);
 
-        // Add therapy to animalModel
-        animalModel.addTherapy(ty);
-
-        // Persist all changes to the db
-        animalModelManager.save(animalModel);
-
-        // Add a message to be displayed in submitOverview.jsp saying you've
-        // created a new model successfully
-        ActionMessages msg = new ActionMessages();
-        msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("growthFactor.creation.successful"));
-        saveErrors(request, msg);
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
         return mapping.findForward("AnimalModelTreePopulateAction");
     }

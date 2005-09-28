@@ -1,25 +1,19 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * @author dgeorge
+ * 
+ * $Id: TherapyManager.java,v 1.5 2005-09-28 21:19:49 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.webapp.form.*;
 
-import java.util.List;
-
 /**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
+ * Interface for managing the therapy objects
  */
 public interface TherapyManager {
-
-    public List getAll() throws Exception;
 
     public Therapy get(String id) throws Exception;
 
@@ -27,7 +21,9 @@ public interface TherapyManager {
 
     public void remove(String id) throws Exception;
 
-    // The sub-class specific create/updates
+    /////////////////////////////////////////////////
+    // The interface specific create/updates
+    /////////////////////////////////////////////////
     public Therapy create(ChemicalDrugData inChemicalDrugData);
 
     public void update(ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception;
@@ -35,13 +31,28 @@ public interface TherapyManager {
     public Therapy create(EnvironmentalFactorData inEnvironmentalFactorData);
 
     public void update(EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception;
-    
+
     public Therapy create(RadiationData inRadiationData);
 
     public void update(RadiationData inRadiationData, Therapy inTherapy) throws Exception;
-    
-    public Therapy create(ViralTreatmentData inViralTreatment);
 
-    public void update(ViralTreatmentData inViralTreatment, Therapy inTherapy) throws Exception;
-    
+    public Therapy create(ViralTreatmentData inViralTreatmentData);
+
+    public void update(ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception;
+
+    public Therapy create(GrowthFactorData inGrowthFactorData);
+
+    public void update(GrowthFactorData inGrowthFactorData, Therapy inTherapy) throws Exception;
+
+    public Therapy create(HormoneData inHormoneData);
+
+    public void update(HormoneData inHormoneData, Therapy inTherapy) throws Exception;
+
+    public Therapy create(NutritionalFactorData inNutritionalFactorData);
+
+    public void update(NutritionalFactorData inNutritionalFactorData, Therapy inTherapy) throws Exception;
+
+    public Therapy create(SurgeryData inSurgeryData);
+
+    public void update(SurgeryData inSurgeryData, Therapy inTherapy) throws Exception;
 }

@@ -1,3 +1,9 @@
+/**
+ * 
+ * $Id: EnvironmentalFactorAction.java,v 1.11 2005-09-28 21:20:11 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ */
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;

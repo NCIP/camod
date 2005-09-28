@@ -13,8 +13,9 @@ public class DropdownUtil extends BaseAction {
      * Returns a list of all Species and Strains
      * 
      * @return speciesStrainList
+     * @throws Exception 
      */
-    public List getSpeciesList() {
+    public List getSpeciesList() throws Exception {
         
         // Get values for dropdown lists for Species, Strains
         // First get a list of all taxons
@@ -57,8 +58,9 @@ public class DropdownUtil extends BaseAction {
      * 
      * @param speciesName
      * @return
+     * @throws Exception 
      */
-    public List getStrainList(String speciesName) {
+    public List getStrainList(String speciesName) throws Exception {
         TaxonManager taxonManager = (TaxonManager) getBean("taxonManager");
 
         Species species = new Species();

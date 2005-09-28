@@ -153,8 +153,9 @@ public class NewDropdownUtil {
      * Returns a list of all Species and Strains
      * 
      * @return speciesNames
+     * @throws Exception 
      */
-    private static List getSpeciesList(HttpServletRequest inRequest) {
+    private static List getSpeciesList(HttpServletRequest inRequest) throws Exception {
 
         // Get values for dropdown lists for Species, Strains
         // First get a list of all taxons
@@ -191,8 +192,9 @@ public class NewDropdownUtil {
      * 
      * @param speciesName
      * @return strainNames
+     * @throws Exception 
      */
-    private static List getStrainsList( HttpServletRequest inRequest, String speciesName ) {
+    private static List getStrainsList( HttpServletRequest inRequest, String speciesName ) throws Exception {
     	
         TaxonManager taxonManager = ( TaxonManager) getContext(inRequest).getBean("taxonManager");
 

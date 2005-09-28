@@ -1,11 +1,11 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorForm;
-
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,8 +68,6 @@ public class NutritionalFactorAction extends BaseAction {
         if (log.isDebugEnabled()) {
             log.debug("Entering 'edit' method");
         }
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
         // Grab the current Therapy we are working with related to this
         // animalModel
@@ -84,67 +82,27 @@ public class NutritionalFactorAction extends BaseAction {
                 + nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean("sexDistributionManager");
-        TreatmentManager treatmentManager = (TreatmentManager) getBean("treatmentManager");
-        AgentManager agentManager = (AgentManager) getBean("agentManager");
         TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
-        AnimalModel animalModel = animalModelManager.get(modelID);
+        try {
 
-        // retrieve the list of all therapies from the current animalModel
-        List therapyList = animalModel.getTherapyCollection();
+            Therapy theTherapy = therapyManager.get(aTherapyID);
+            therapyManager.update(nutritForm, theTherapy);
 
-        Therapy therapy = new Therapy();
-        int therapyNumber = 0;
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.edit.successful"));
+            saveErrors(request, msg);
 
-        // find the specific one we need
-        for (int i = 0; i < therapyList.size(); i++) {
-            therapy = (Therapy) therapyList.get(i);
-            System.out.println(" searching ... id=" + therapy.getId().toString() + " = " + aTherapyID);
-            if (therapy.getId().toString().equals(aTherapyID)) {
-                therapyNumber = i;
-                System.out.println("found a match!");
-                break;
-            }
+        } catch (Exception e) {
+
+            log.error("Unable to get add a chemical drug action: ", e);
+
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
         }
-
-        // Set the treatment
-        Treatment treatment = therapy.getTreatment();
-
-        // Set the gender
-        SexDistribution sexDistribution = sexDistributionManager.getByType(nutritForm.getType());
-
-        // save the treatment
-        treatment.setDosage(nutritForm.getDosage() + " " + nutritForm.getDoseUnit());
-        treatment.setRegimen(nutritForm.getRegimen());
-        treatment.setSexDistribution(sexDistribution);
-
-        // Append the ageunit onto the age at treatment variable
-        treatment.setAgeAtTreatment(nutritForm.getAgeAtTreatment() + " " + nutritForm.getAgeUnit());
-        treatmentManager.save(treatment);
-
-        // Agent IS-A an EnvironmentalFactor
-        Agent agent = therapy.getAgent();
-        agent.setName(nutritForm.getName());
-        agent.setType("Nutrition");
-        agentManager.save(agent);
-
-        // TherapeuticExperiment property is false, tells us that this is an
-        // environmentalFactor
-        therapy.setTherapeuticExperiment(new Boolean(false));
-        therapy.setAgent(agent);
-        therapy.setTreatment(treatment);
-        therapyManager.save(therapy);
-        therapyList.set(therapyNumber, therapy);
-
-        animalModel.setTherapyCollection(therapyList);
-
-        // Add a message to be displayed in submitOverview.jsp saying you've
-        // created a new model successfully
-        ActionMessages msg = new ActionMessages();
-        msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.edit.successful"));
-        saveErrors(request, msg);
 
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
@@ -177,75 +135,25 @@ public class NutritionalFactorAction extends BaseAction {
 
         /* Create all the manager objects needed for Screen */
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        SexDistributionManager sexDistributionManager = (SexDistributionManager) getBean("sexDistributionManager");
-        TreatmentManager treatmentManager = (TreatmentManager) getBean("treatmentManager");
-        AgentManager agentManager = (AgentManager) getBean("agentManager");
 
         /* Set modelID in AnimalModel object */
         AnimalModel animalModel = animalModelManager.get(modelID);
 
-        /* 1. Create and save SexDistribution Object */
-        SexDistribution sexDistribution = sexDistributionManager.getByType(nutritForm.getType());
+        try {
+            animalModelManager.addTherapy(animalModel, nutritForm);
 
-        /*
-         * 2. Create Treatment object, set its sexDistribution property (saved
-         * in #1) and other values, and save Treatment object.
-         */
-        Treatment treatment = new Treatment();
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.creation.successful"));
+            saveErrors(request, msg);
 
-        // Append the dose unit onto dose, if not null
-        treatment.setDosage(nutritForm.getAgeAtTreatment() + " " + nutritForm.getDoseUnit());
-        treatment.setRegimen(nutritForm.getRegimen());
-        treatment.setAgeAtTreatment(nutritForm.getAgeAtTreatment() + " " + nutritForm.getAgeUnit());
+        } catch (Exception e) {
 
-        // set its sexDistribution property in treatment
-        treatment.setSexDistribution(sexDistribution);
+            log.error("Unable to get add an environmental factor: ", e);
 
-        // save treatment object
-        treatmentManager.save(treatment);
-
-        System.out.println("<NutritionalFactorAction save> Created and saved Treatment");
-
-        /*
-         * 3. Create Agent, fill it with data meant for EnvironmentalFactor
-         * (since Agent IS-A an EnvironmentalFactor) and then save it.
-         */
-        Agent agent = new Agent();
-        agent.setName(nutritForm.getName());
-
-        agent.setType("Nutrition");
-        agentManager.save(agent);
-
-        /*
-         * 4. Create Therapy object, set its therapeuticExperiment property to
-         * false. 4.1 set its treatment property (saved in #2). 4.2 set its
-         * agent property (saved in #3). 4.3 Add Therapy to animalModel 4.4 No
-         * need to explicity save Therapy object b/c 1...1 relationship with
-         * AnimalModel When TherapeuticExperiment property is false, tells us
-         * that this is an environmentalFactor
-         */
-
-        Therapy therapy = new Therapy();
-        therapy.setTherapeuticExperiment(new Boolean(false));
-        therapy.setAgent(agent);
-        therapy.setTreatment(treatment);
-
-        /* 5. Add Therapy to AnimalModel */
-        animalModel.addTherapy(therapy);
-
-        /*
-         * 6. save the animalModel = saves Therapy (Hibernate saves child in
-         * 1...1 relationships)
-         */
-        animalModelManager.save(animalModel);
-
-        System.out.println("<NutritionalFactorAction save> saved the animalModel");
-
-        // Add a message to be displayed in submitOverview.jsp saying you've
-        // created a new model successfully
-        ActionMessages msg = new ActionMessages();
-        msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.creation.successful"));
-        saveErrors(request, msg);
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
         return mapping.findForward("AnimalModelTreePopulateAction");
     }

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class NutritionalFactorForm extends BaseForm implements Serializable {
+public class NutritionalFactorForm extends BaseForm implements Serializable, NutritionalFactorData {
 
     private static final long serialVersionUID = 3257025453799404851L;
 

@@ -14,7 +14,7 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class GrowthFactorForm extends BaseForm implements Serializable {
+public class GrowthFactorForm extends BaseForm implements Serializable, GrowthFactorData {
 
     private static final long serialVersionUID = 3257235453799404851L;
 

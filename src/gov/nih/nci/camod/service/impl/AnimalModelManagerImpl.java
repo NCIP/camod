@@ -1,12 +1,23 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.18 2005-09-28 15:12:29 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.19 2005-09-28 21:20:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/09/28 15:12:29  schroedn
+ * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
+ *
  * Revision 1.17  2005/09/28 14:14:00  schroedn
  * Added saveXenograft and saveGeneDelivery
  *
+ * Revision 1.16  2005/09/28 12:46:12  georgeda
+ * Cleanup of animal manager
+ *
+ * Revision 1.15  2005/09/27 19:17:16  georgeda
+ * Refactor of CI managers
+ *
+ * Revision 1.14  2005/09/27 16:44:49  georgeda
+ * Added ChemicalDrug handling
  * Revision 1.13  2005/09/26 14:04:36  georgeda
  * Cleanup for cascade fix and common manager code
  *
@@ -31,36 +42,16 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Availability;
-import gov.nih.nci.camod.domain.ContactInfo;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Phenotype;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
-import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
-import gov.nih.nci.camod.webapp.form.GeneDeliveryForm;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
-import gov.nih.nci.camod.webapp.form.RadiationData;
-import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
-import gov.nih.nci.camod.webapp.form.XenograftForm;
+import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Manages fetching/saving/updating of animal models
@@ -226,7 +217,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            The submitter
      * 
      * @return the created and unsaved AnimalModel
-     * @throws Exception 
+     * @throws Exception
      */
     public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception {
 
@@ -329,7 +320,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             inAnimalModel.setSubmitter(thePerson);
 
             // Change this to match the real PI
-            inAnimalModel.setPrincipalInvestigator( thePerson );
+            inAnimalModel.setPrincipalInvestigator(thePerson);
         }
 
         // Set the animal model information
@@ -346,42 +337,45 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
         theTaxon.setScientificName(inModelCharacteristics.getScientificName());
         theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
-     
-        // Problem when editing and this doesn't change, the admin will get two emails about the same STRAIN        
-        if( inModelCharacteristics.getEthnicityStrainUnctrlVocab() != null ) { 
-        	if ( ! inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals( "" ) ) {
-	        	
-        		log.trace( "Sending Notification eMail - new EthinicityStrain added" );	        	
-        		
-                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-                
-                //Iterate through all the reciepts in the config file
-	        	String recipients = theBundle.getString( Constants.EmailMessage.RECIPIENTS );
-	        	StringTokenizer st = new StringTokenizer( recipients, "," );
-	        	String inRecipients[] = new String[ st.countTokens() ];
-	        		        	
-	        	for ( int i=0; i<inRecipients.length; i++)
-	        		inRecipients[i] = st.nextToken();	        	
 
-	        	String inSubject      = theBundle.getString(Constants.EmailMessage.SUBJECT);
-	        	String inMessage      = theBundle.getString(Constants.EmailMessage.MESSAGE) + 
-	        							" Strain added ( " + inModelCharacteristics.getEthnicityStrainUnctrlVocab() + " ) and is awaiting your approval.";
-	        	String inFrom         = theBundle.getString(Constants.EmailMessage.FROM);
-	        	//String inSender  	  = theBundle.getString(Constants.EmailMessage.SENDER);
-	        	
-	        	//Send the email
-	        	try {        		
-	        		MailUtil.sendMail( inRecipients, inSubject, inMessage, inFrom );
-	            } catch (Exception e) {
-	                System.out.println("Caught exception" + e);
-	                e.printStackTrace();
-	            }
-	            
-	        	// 2. Set flag, this Strain will need to be approved before being added the list
-	        	theTaxon.setEthnicityStrainUnctrlVocab( inModelCharacteristics.getEthnicityStrainUnctrlVocab() );	        	
-        	}
+        // Problem when editing and this doesn't change, the admin will get two
+        // emails about the same STRAIN
+        if (inModelCharacteristics.getEthnicityStrainUnctrlVocab() != null) {
+            if (!inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals("")) {
+
+                log.trace("Sending Notification eMail - new EthinicityStrain added");
+
+                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+                // Iterate through all the reciepts in the config file
+                String recipients = theBundle.getString(Constants.EmailMessage.RECIPIENTS);
+                StringTokenizer st = new StringTokenizer(recipients, ",");
+                String inRecipients[] = new String[st.countTokens()];
+
+                for (int i = 0; i < inRecipients.length; i++)
+                    inRecipients[i] = st.nextToken();
+
+                String inSubject = theBundle.getString(Constants.EmailMessage.SUBJECT);
+                String inMessage = theBundle.getString(Constants.EmailMessage.MESSAGE) + " Strain added ( "
+                        + inModelCharacteristics.getEthnicityStrainUnctrlVocab() + " ) and is awaiting your approval.";
+                String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
+                // String inSender =
+                // theBundle.getString(Constants.EmailMessage.SENDER);
+
+                // Send the email
+                try {
+                    MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom);
+                } catch (Exception e) {
+                    System.out.println("Caught exception" + e);
+                    e.printStackTrace();
+                }
+
+                // 2. Set flag, this Strain will need to be approved before
+                // being added the list
+                theTaxon.setEthnicityStrainUnctrlVocab(inModelCharacteristics.getEthnicityStrainUnctrlVocab());
+            }
         }
-        
+
         Phenotype thePhenotype = inAnimalModel.getPhenotype();
         if (thePhenotype == null) {
             thePhenotype = new Phenotype();
@@ -432,54 +426,53 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         return inAnimalModel;
     }
-    
-    public void saveXenograft( XenograftForm inXenograftForm, Xenograft inXenograft, AnimalModel inAnimalModel ) 
-    	throws Exception {
-    	 
-    	 log.trace( "Entering saveXenograft" );
-    	 
-    	 if ( inXenograft == null ) {
-	    	 inXenograft = XenograftManagerSingleton.instance().create( inXenograftForm, null, inAnimalModel );
-	    	 inAnimalModel.addXenograft( inXenograft );
-    	 } else {
-	    	 XenograftManagerSingleton.instance().update( inXenograftForm, inXenograft, inAnimalModel );    		 
-    	 }
-    	 
-    	 save( inAnimalModel );
-    	 
-    	 log.trace( "Exiting saveXenograft" );
-    }    
-    
-    public void saveGeneDelivery( GeneDeliveryForm inGeneDeliveryForm, GeneDelivery inGeneDelivery, AnimalModel inAnimalModel ) 
-	throws Exception {
-	 
-	 log.trace( "Entering saveGeneDelivery" );
-	 
-	 if ( inGeneDelivery == null ) {
-		 inGeneDelivery = GeneDeliveryManagerSingleton.instance().create( inGeneDeliveryForm, null, inAnimalModel );
-    	 inAnimalModel.addGeneDelivery( inGeneDelivery );
-	 } else {
-		 GeneDeliveryManagerSingleton.instance().update( inGeneDeliveryForm, inGeneDelivery, inAnimalModel );    		 
-	 }
-	 
-	 save( inAnimalModel );
-	 
-	 log.trace( "Exiting saveXenograft" );
-}    
+
+    public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception {
+
+        log.trace("Entering saveXenograft");
+
+        Xenograft theXenograft = XenograftManagerSingleton.instance().create(inXenograftData, inAnimalModel);
+        
+        inAnimalModel.addXenograft(theXenograft);
+        save(inAnimalModel);
+
+        log.trace("Exiting saveXenograft");
+    }
+
+    /**
+     * Add a gene delivery
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inGeneDeliveryData
+     *            the gene delivery
+     * @throws Exception
+     */
+    public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception {
+
+        log.trace("Entering addGeneDelivery");
+
+        GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance().create(inGeneDeliveryData);
+
+        inAnimalModel.addGeneDelivery(theGeneDelivery);
+        save(inAnimalModel);
+
+        log.trace("Exiting addGeneDelivery");
+    }
 
     /**
      * Add a chemical/drug therapy
      * 
      * @param inAnimalModel
      *            the animal model that has the therapy
-     * @param inChemicalDrug
+     * @param inChemicalDrugData
      *            the new chemical drug data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inChemicalDrug);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inChemicalDrugData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -490,14 +483,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * 
      * @param inAnimalModel
      *            the animal model that has the therapy
-     * @param inEnvironmentalFactor
+     * @param inEnvironmentalFactorData
      *            the ef data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactor) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData)
+            throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inEnvironmentalFactor);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inEnvironmentalFactorData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -534,6 +528,78 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inViralTreatmentData);
+        inAnimalModel.addTherapy(theTherapy);
+        save(inAnimalModel);
+        log.trace("Exiting AnimalModelManagerImpl.addTherapy");
+    }
+
+    /**
+     * Add a growth factor
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inGrowthFactorData
+     *            the new growth factor data
+     * @throws Exception
+     */
+    public void addTherapy(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData) throws Exception {
+
+        log.trace("Entering AnimalModelManagerImpl.addTherapy");
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inGrowthFactorData);
+        inAnimalModel.addTherapy(theTherapy);
+        save(inAnimalModel);
+        log.trace("Exiting AnimalModelManagerImpl.addTherapy");
+    }
+
+    /**
+     * Add a hormone
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inHormoneData
+     *            the new growth factor data
+     * @throws Exception
+     */
+    public void addTherapy(AnimalModel inAnimalModel, HormoneData inHormoneData) throws Exception {
+
+        log.trace("Entering AnimalModelManagerImpl.addTherapy");
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inHormoneData);
+        inAnimalModel.addTherapy(theTherapy);
+        save(inAnimalModel);
+        log.trace("Exiting AnimalModelManagerImpl.addTherapy");
+    }
+
+    /**
+     * Add a nutritional factor
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inNutritionalFactorData
+     *            the new nutrional factor data
+     * @throws Exception
+     */
+    public void addTherapy(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) throws Exception {
+
+        log.trace("Entering AnimalModelManagerImpl.addTherapy");
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inNutritionalFactorData);
+        inAnimalModel.addTherapy(theTherapy);
+        save(inAnimalModel);
+        log.trace("Exiting AnimalModelManagerImpl.addTherapy");
+    }
+
+    /**
+     * Add a surgery/other
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inSurgeryData
+     *            the new surgery data
+     * @throws Exception
+     */
+    public void addTherapy(AnimalModel inAnimalModel, SurgeryData inSurgeryData) throws Exception {
+
+        log.trace("Entering AnimalModelManagerImpl.addTherapy");
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inSurgeryData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");

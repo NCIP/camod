@@ -15,7 +15,7 @@ import java.io.Serializable;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 
-public class HormoneForm extends BaseForm implements Serializable {
+public class HormoneForm extends BaseForm implements Serializable, HormoneData {
     
     private static final long serialVersionUID = 3257215453799404851L;
     
