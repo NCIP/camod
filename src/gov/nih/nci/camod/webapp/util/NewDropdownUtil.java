@@ -4,6 +4,7 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.service.TaxonManager;
+import gov.nih.nci.camod.service.XenograftManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 
 import java.io.*;
@@ -50,6 +51,14 @@ public class NewDropdownUtil {
         
         if (inDropdownKey.equals( Constants.Dropdowns.STRAINDROP )) {
             theReturnList = getStrainsList(inRequest, inFilter);
+        }
+        
+        if (inDropdownKey.equals( Constants.Dropdowns.ADMINISTRATIVEROUTEDROP )) {
+           // theReturnList = getAdminList(inRequest);
+        }
+
+        if (inDropdownKey.equals( Constants.Dropdowns.GRAFTTYPEDROP )) {
+            theReturnList = getGrafttypeList(inRequest);
         }
         
         if (inDropdownKey.equals( Constants.Dropdowns.VIRALVECTORDROP )) {
@@ -176,6 +185,7 @@ public class NewDropdownUtil {
 
         return speciesNames;
     }
+    
     /**
      * Based on a species name retrieve a list of all Strains
      * 
@@ -196,14 +206,16 @@ public class NewDropdownUtil {
 
         if (strainList != null) {
             // print out strainNames
-            for (int j = 0; j < strainList.size(); j++) {
+        	for (int j = 0; j < strainList.size(); j++) {
                 Strain strain = (Strain) strainList.get(j);
 
+               //strainNames.add(strain);
+                
                 if (strain.getName() != null) {
-                  //  strainNames.add(strain.getName());
-                    if (!strainNames.contains(strain.getName())) {
-                    	strainNames.add(strain.getName());
-                    	System.out.println("Strain Name>>" + j + ": " + strain.getName());
+                    
+                    if ( !strainNames.contains(strain.getName()) ) {
+                    	strainNames.add(strain.getName());                    	
+                    	System.out.println( "Strain Name>>" + j + ": " + strain.getName() );
                     }
                 }
             }
@@ -219,6 +231,47 @@ public class NewDropdownUtil {
     }
         
     /**
+     * Returns a list of all Graft Types
+     * 
+     * @return graftList
+     */
+    private static List getGrafttypeList(HttpServletRequest inRequest) {
+
+        // Get values for dropdown lists for Species, Strains
+        XenograftManager xenograftManager = ( XenograftManager ) getContext(inRequest).getBean("xenograftManager");
+        
+        List xenograftList = null;
+        
+        try {
+        	xenograftList = xenograftManager.getAll();
+        } catch (Exception e) {
+           // TODO: Add error log handler here
+           //log.error("Unable to getAll Xenografts ", e);
+        }
+        
+        List graftList = new ArrayList();
+        Xenograft tmp;
+        
+        graftList.add("Other");
+
+        if (xenograftList != null) {
+            for (int i = 0; i < xenograftList.size(); i++) {
+                tmp = (Xenograft) xenograftList.get(i);
+
+                if (tmp.getName() != null) {
+                    // if the speciesName is not already in the List, add it
+                    // (only get unique names)
+                    if (!graftList.contains( tmp.getName() ) )
+                    	graftList.add( tmp.getName() );
+                }
+            } 
+        }
+        
+        Collections.sort(graftList);        
+        return graftList;
+    }
+    
+    /**
      * Returns a list of all Administrative Routes
      * 
      * @return adminList
@@ -228,7 +281,12 @@ public class NewDropdownUtil {
         // Get values for dropdown lists for Species, Strains
         GeneDeliveryManager geneDeliveryManager = ( GeneDeliveryManager ) getContext(inRequest).getBean("geneDeliveryManager");
         
-        List geneDeliveryList = geneDeliveryManager.getAll();
+        List geneDeliveryList = null;
+        
+        try {
+        	 geneDeliveryList = geneDeliveryManager.getAll();
+        } catch (Exception e) {}
+        
         List viralVectorList = new ArrayList();
         GeneDelivery tmp;
 
