@@ -2,7 +2,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,9 +71,6 @@ public class ViralTreatmentAction extends BaseAction {
 
         System.out.println("<ViralTreatmentAction edit> Entering... ");
 
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-
         // Grab the current Therapy we are working with related to this
         // animalModel
         String aTherapyID = request.getParameter("aTherapyID");
@@ -84,12 +83,12 @@ public class ViralTreatmentAction extends BaseAction {
                 + "\n\t doseUnit: " + viralTreatmentForm.getDoseUnit() + "\n\t ageAtTreatment: "
                 + viralTreatmentForm.getAgeAtTreatment() + "\n\t ageUnit: " + viralTreatmentForm.getAgeUnit());
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-
-        AnimalModel animalModel = animalModelManager.get(modelID);
+        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
         try {
-            animalModelManager.updateTherapy(animalModel, viralTreatmentForm, aTherapyID);
+
+            Therapy theTherapy = therapyManager.get(aTherapyID);
+            therapyManager.update(viralTreatmentForm, theTherapy);
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

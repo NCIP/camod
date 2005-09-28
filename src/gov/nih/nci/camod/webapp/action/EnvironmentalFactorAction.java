@@ -40,7 +40,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
         /* Create all the manager objects needed for Screen */
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel animalModel = animalModelManager.get(modelID);
-        
+
         try {
             animalModelManager.addTherapy(animalModel, envForm);
 
@@ -88,13 +88,10 @@ public final class EnvironmentalFactorAction extends BaseAction {
      */
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         if (log.isDebugEnabled()) {
             log.debug("Entering 'edit' method");
         }
-
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
         // Grab the current Therapy we are working with related to this
         // animalModel
@@ -110,11 +107,12 @@ public final class EnvironmentalFactorAction extends BaseAction {
                 + "\n\t type: " + envForm.getType() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        AnimalModel animalModel = animalModelManager.get(modelID);
-        
+        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+
         try {
-            animalModelManager.updateTherapy(animalModel, envForm, aTherapyID);
+
+            Therapy theTherapy = therapyManager.get(aTherapyID);
+            therapyManager.update(envForm, theTherapy);
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

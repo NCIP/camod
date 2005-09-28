@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.8 2005-09-27 19:17:15 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.9 2005-09-28 12:46:12 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/09/27 19:17:15  georgeda
+ * Refactor of CI managers
+ *
  * Revision 1.7  2005/09/27 16:36:43  georgeda
  * Added ChemicalDrug screens
  *
@@ -48,20 +51,12 @@ public interface AnimalModelManager {
 
     public List search() throws Exception;
     
-    public void updateTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug, String inTherapyId) throws Exception;
-    
     public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug) throws Exception;
-    
-    public void updateTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactor, String inTherapyId) throws Exception;
     
     public void addTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactor) throws Exception;
     
-    public void updateTherapy(AnimalModel inAnimalModel, RadiationData inRadiation, String inTherapyId) throws Exception;
-    
     public void addTherapy(AnimalModel inAnimalModel, RadiationData inRadiation) throws Exception;
-    
-    public void updateTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatment, String inTherapyId) throws Exception;
-    
+       
     public void addTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatment) throws Exception;
     
     

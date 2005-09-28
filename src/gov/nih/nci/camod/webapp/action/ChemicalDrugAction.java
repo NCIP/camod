@@ -1,8 +1,10 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.ChemicalDrugForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,9 +71,6 @@ public class ChemicalDrugAction extends BaseAction {
 
         System.out.println("<ChemicalDrugAction edit> Entering... ");
 
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-
         // Grab the current Therapy we are working with related to this
         // animalModel
         String aTherapyID = request.getParameter("aTherapyID");
@@ -82,15 +81,15 @@ public class ChemicalDrugAction extends BaseAction {
                 + "\n\t otherName: " + chemicalDrugForm.getOtherName() + "\n\t type: " + chemicalDrugForm.getType()
                 + "\n\t regimen: " + chemicalDrugForm.getRegimen() + "\n\t dosage: " + chemicalDrugForm.getDosage()
                 + "\n\t doseUnit: " + chemicalDrugForm.getDoseUnit() + "\n\t ageAtTreatment: "
-                + chemicalDrugForm.getAgeAtTreatment() + "\n\t ageUnit: " + chemicalDrugForm.getAgeUnit() + 
-                "\n\t administrativeRoute: " + chemicalDrugForm.getAdministrativeRoute());
+                + chemicalDrugForm.getAgeAtTreatment() + "\n\t ageUnit: " + chemicalDrugForm.getAgeUnit()
+                + "\n\t administrativeRoute: " + chemicalDrugForm.getAdministrativeRoute());
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        AnimalModel animalModel = animalModelManager.get(modelID);
+        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
         try {
 
-            animalModelManager.updateTherapy(animalModel, chemicalDrugForm, aTherapyID);
+            Therapy theTherapy = therapyManager.get(aTherapyID);
+            therapyManager.update(chemicalDrugForm, theTherapy);
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -141,9 +140,9 @@ public class ChemicalDrugAction extends BaseAction {
                 + chemicalDrugForm.getCASNumber() + "\n\t ageUnit: " + chemicalDrugForm.getAgeUnit());
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        
+
         AnimalModel animalModel = animalModelManager.get(modelID);
-        
+
         try {
 
             animalModelManager.addTherapy(animalModel, chemicalDrugForm);
@@ -162,7 +161,7 @@ public class ChemicalDrugAction extends BaseAction {
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, theMsg);
         }
-        
+
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.15 2005-09-27 19:17:16 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.16 2005-09-28 12:46:12 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/09/27 19:17:16  georgeda
+ * Refactor of CI managers
+ *
  * Revision 1.14  2005/09/27 16:44:49  georgeda
  * Added ChemicalDrug handling
  *
@@ -379,33 +382,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     }
 
     /**
-     * Update a chemical/drug therapy
-     * 
-     * @param inAnimalModel
-     *            the animal model that has the therapy
-     * @param inChemicalDrug
-     *            the new chemical drug data
-     * @param inTherapyId
-     *            the terapy id we're updating
-     * 
-     * @throws Exception
-     */
-    public void updateTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrug, String inTherapyId)
-            throws Exception {
-
-        log.trace("Entering AnimalModelManagerImpl.updateTherapy");
-
-        Therapy theTherapy = findTherapy(inAnimalModel, inTherapyId);
-
-        if (theTherapy != null) {
-            TherapyManagerSingleton.instance().update(inChemicalDrug, theTherapy);
-        } else {
-            throw new IllegalArgumentException("Unknown therapy: " + inTherapyId);
-        }
-        log.trace("Exiting AnimalModelManagerImpl.updateTherapy");
-    }
-
-    /**
      * Add a chemical/drug therapy
      * 
      * @param inAnimalModel
@@ -421,33 +397,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
-    }
-
-    /**
-     * Update an environmental factor therapy
-     * 
-     * @param inAnimalModel
-     *            the animal model that has the therapy
-     * @param inEnvironmentalFactor
-     *            the new chemical drug data
-     * @param inTherapyId
-     *            the terapy id we're updating
-     * 
-     * @throws Exception
-     */
-    public void updateTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactor, String inTherapyId)
-            throws Exception {
-
-        log.trace("Entering AnimalModelManagerImpl.updateTherapy");
-
-        Therapy theTherapy = findTherapy(inAnimalModel, inTherapyId);
-
-        if (theTherapy != null) {
-            TherapyManagerSingleton.instance().update(inEnvironmentalFactor, theTherapy);
-        } else {
-            throw new IllegalArgumentException("Unknown therapy: " + inTherapyId);
-        }
-        log.trace("Exiting AnimalModelManagerImpl.updateTherapy");
     }
 
     /**
@@ -467,33 +416,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
     }
-    
-    /**
-     * Update an environmental factor therapy
-     * 
-     * @param inAnimalModel
-     *            the animal model that has the therapy
-     * @param inRadiationData
-     *            the new radiation data
-     * @param inTherapyId
-     *            the therapy id we're updating
-     * 
-     * @throws Exception
-     */
-    public void updateTherapy(AnimalModel inAnimalModel, RadiationData inRadiationData, String inTherapyId)
-            throws Exception {
-
-        log.trace("Entering AnimalModelManagerImpl.updateTherapy");
-
-        Therapy theTherapy = findTherapy(inAnimalModel, inTherapyId);
-
-        if (theTherapy != null) {
-            TherapyManagerSingleton.instance().update(inRadiationData, theTherapy);
-        } else {
-            throw new IllegalArgumentException("Unknown therapy: " + inTherapyId);
-        }
-        log.trace("Exiting AnimalModelManagerImpl.updateTherapy");
-    }
 
     /**
      * Add an environmental factor therapy
@@ -512,33 +434,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
     }
-    
-    /**
-     * Update an environmental factor therapy
-     * 
-     * @param inAnimalModel
-     *            the animal model that has the therapy
-     * @param inViralTreatmentData
-     *            the new viral treatment data
-     * @param inTherapyId
-     *            the therapy id we're updating
-     * 
-     * @throws Exception
-     */
-    public void updateTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData, String inTherapyId)
-            throws Exception {
-
-        log.trace("Entering AnimalModelManagerImpl.updateTherapy");
-
-        Therapy theTherapy = findTherapy(inAnimalModel, inTherapyId);
-
-        if (theTherapy != null) {
-            TherapyManagerSingleton.instance().update(inViralTreatmentData, theTherapy);
-        } else {
-            throw new IllegalArgumentException("Unknown therapy: " + inTherapyId);
-        }
-        log.trace("Exiting AnimalModelManagerImpl.updateTherapy");
-    }
 
     /**
      * Add an environmental factor therapy
@@ -556,24 +451,5 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
-    }
-    
-    // Find a therapy based on the id
-    private Therapy findTherapy(AnimalModel inAnimalModel, String inTherapyId) {
-        Therapy theTherapy = null;
-
-        // retrieve the list of all therapies from the current animalModel
-        List theTherapyList = inAnimalModel.getTherapyCollection();
-
-        // find the specific one we need
-        for (int i = 0; i < theTherapyList.size(); i++) {
-            theTherapy = (Therapy) theTherapyList.get(i);
-            if (theTherapy.getId().toString().equals(inTherapyId)) {
-                log.debug("found a match for id: " + inTherapyId);
-                break;
-            }
-        }
-
-        return theTherapy;
     }
 }

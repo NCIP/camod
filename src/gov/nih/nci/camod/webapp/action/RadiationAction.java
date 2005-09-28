@@ -5,7 +5,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.RadiationForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,9 +72,6 @@ public class RadiationAction extends BaseAction {
             log.debug("Entering 'edit' method");
         }
 
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-
         // Grab the current Therapy we are working with related to this
         // animalModel
         String aTherapyID = request.getParameter("aTherapyID");
@@ -87,12 +86,12 @@ public class RadiationAction extends BaseAction {
                 + radiationForm.getAgeAtTreatment() + "\n\t type: " + radiationForm.getType() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-
-        AnimalModel animalModel = animalModelManager.get(modelID);
+        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
         try {
-            animalModelManager.updateTherapy(animalModel, radiationForm, aTherapyID);
+
+            Therapy theTherapy = therapyManager.get(aTherapyID);
+            therapyManager.update(radiationForm, theTherapy);
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
