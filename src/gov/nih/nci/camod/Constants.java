@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.26 2005-09-28 15:12:35 schroedn Exp $
+ * $Id: Constants.java,v 1.27 2005-09-29 18:56:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2005/09/28 15:12:35  schroedn
+ * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
+ *
  * Revision 1.25  2005/09/27 16:34:31  georgeda
  * Changed administravive route drop down
  *
@@ -172,6 +175,7 @@ public class Constants {
         public static final String VIRUSDROP = "virusdrop.db";
         public static final String VIRALVECTORDROP = "viralvectordrop.db";
         public static final String GRAFTTYPEDROP = "grafttypedrop.db";
+        public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
         
         // These two are used to display the species and strain currently in the AnimalModelCharacteristics        
         public static final String MODELSPECIES = "modelspecies";
