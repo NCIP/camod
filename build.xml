@@ -32,7 +32,7 @@
 		<copy todir="${build.classes.dir}">
 			<fileset dir="${source.dir}">                                
                                 <include name="**/*.xml" />
-				<include name="*.properties" />
+				<include name="**/*.properties" />
 				<include name="*.dtd" />
 				<include name="*.xsd" />
 			</fileset>
