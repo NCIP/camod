@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: BaseManager.java,v 1.2 2005-09-26 14:02:38 georgeda Exp $
+ * $Id: BaseManager.java,v 1.3 2005-09-29 18:31:14 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/09/26 14:02:38  georgeda
+ * Added common code
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -33,7 +36,7 @@ public class BaseManager implements Manager {
      * @exception throws
      *                an Exception if an error occurred
      */
-    public List getAll(Class inClass) throws Exception {
+    protected List getAll(Class inClass) throws Exception {
 
         log.trace("Entering BaseManager.getAll");
 
@@ -63,7 +66,7 @@ public class BaseManager implements Manager {
      * @exception Exception
      *                if an error occurred
      */
-    public Object get(String inId, Class inClass) throws Exception {
+    protected Object get(String inId, Class inClass) throws Exception {
 
         log.trace("Entering BaseManager.get");
 
@@ -93,7 +96,7 @@ public class BaseManager implements Manager {
      * @exception Exception
      *                if an error occurred
      */
-    public void save(Object inObject) throws Exception {
+    protected void save(Object inObject) throws Exception {
 
         log.trace("Entering BaseManager.save");
 
@@ -129,7 +132,7 @@ public class BaseManager implements Manager {
      * @throws Exception
      *             An error occurred when attempting to delete the object
      */
-    public void remove(String inId, Class inClass) throws Exception {
+    protected void remove(String inId, Class inClass) throws Exception {
 
         log.trace("Entering BaseManager.remove");
 
