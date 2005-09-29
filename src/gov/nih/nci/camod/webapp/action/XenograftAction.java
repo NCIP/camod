@@ -78,7 +78,6 @@ public final class XenograftAction extends BaseAction {
         log.info("<XenograftAction edit> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
                 + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
                 + xenograftForm.getParentalCellLineName() + "\n\t getAgeAtTreatment: "
-                + xenograftForm.getAgeAtTreatment() + "\n\t getAgeUnit: " + xenograftForm.getAgeUnit()
                 + "\n\t getCellAmount: " + xenograftForm.getCellAmount() + "\n\t getHarvestDate: "
                 + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
                 + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
@@ -147,7 +146,6 @@ public final class XenograftAction extends BaseAction {
         log.info("<XenograftAction save> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
                 + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
                 + xenograftForm.getParentalCellLineName() + "\n\t getAgeAtTreatment: "
-                + xenograftForm.getAgeAtTreatment() + "\n\t getAgeUnit: " + xenograftForm.getAgeUnit()
                 + "\n\t getCellAmount: " + xenograftForm.getCellAmount() + "\n\t getHarvestDate: "
                 + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
                 + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "

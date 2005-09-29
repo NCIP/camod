@@ -28,8 +28,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     protected String name;
     protected String ATCCNumber;
     protected String parentalCellLineName;
-    protected String ageAtTreatment;
-    protected String ageUnit;
     protected String cellAmount;
     protected String harvestDate;
     protected String modificationDescription;
@@ -103,21 +101,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     }
 
     /**
-     * @return Returns the AgeUnit.
-     */
-    public String getAgeUnit() {
-        return ageUnit;
-    }
-
-    /**
-     * @param name
-     *            The ageUnit to set.
-     */
-    public void setAgeUnit(String unit) {
-        this.ageUnit = name;
-    }
-
-    /**
      * @return Returns the ATCCNumber.
      */
     public String getATCCNumber() {
@@ -145,21 +128,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
      */
     public void setParentalCellLineName(String parentalCellLineName) {
         this.parentalCellLineName = parentalCellLineName;
-    }
-
-    /**
-     * @return Returns the ageAtTreatment.
-     */
-    public String getAgeAtTreatment() {
-        return ageAtTreatment;
-    }
-
-    /**
-     * @param ageAtTreatment
-     *            The ageAtTreatment to set.
-     */
-    public void setAgeAtTreatment(String ageAtTreatment) {
-        this.ageAtTreatment = ageAtTreatment;
     }
 
     /**

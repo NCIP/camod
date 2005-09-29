@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.1 2005-09-28 21:20:25 georgeda Exp $
+ * $Id: XenograftData.java,v 1.2 2005-09-29 18:31:59 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/09/28 21:20:25  georgeda
+ * Finished up converting to new manager
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -29,10 +32,6 @@ public interface XenograftData {
 
     public void setName(String name);
 
-    public String getAgeUnit();
-
-    public void setAgeUnit(String unit);
-
     public String getATCCNumber();
 
     public void setATCCNumber(String ATCCNumber);
@@ -40,10 +39,6 @@ public interface XenograftData {
     public String getParentalCellLineName();
 
     public void setParentalCellLineName(String parentalCellLineName);
-
-    public String getAgeAtTreatment();
-
-    public void setAgeAtTreatment(String ageAtTreatment);
 
     public String getCellAmount();
 
