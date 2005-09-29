@@ -16,9 +16,7 @@
 
 <%
 	String aXenograftID = request.getParameter( "aXenograftID" );
-	String modelSpecies = request.getParameter( Constants.Dropdowns.MODELSPECIES );
-	String modelStrain = request.getParameter( Constants.Dropdowns.MODELSTRAIN );
-	
+
 	//if aXenograftID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
@@ -59,6 +57,7 @@
 		form.submit();
 	}		
 	
+
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -100,7 +99,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Species / Strain</label></td>
 		<td class="formField">
-				<%= modelSpecies %> / <%= modelStrain %>
+				<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
 		</td>
 	</tr>
 
@@ -114,19 +113,7 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Mice Age:</label></td>
-		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
-			
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
-				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
-			</html:select>
-		</td>
-	</tr>
-
-        <tr>
+    <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Amount of Cells</label>
 			<camod:cshelp key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
@@ -246,5 +233,28 @@
 	
 	</td></tr></TABLE>
 </tr></td></TABLE>
-
+<SCRIPT>
+	function checkOthers()
+	{
+	    ideControl = document.forms[0].graftType;
+	    ideOtherControl = document.forms[0].otherGraftType;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}
+		
+	    ideControl = document.forms[0].hostEthinicityStrain;
+	    ideOtherControl = document.forms[0].otherHostEthinicityStrain;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}
+	}
+	
+	checkOthers();
+</SCRIPT>
 <%@ include file="/jsp/footer.jsp" %>
