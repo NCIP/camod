@@ -13,6 +13,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("searchAdvanced.jsp") || 
 						jspName.equals("searchDrugScreening.jsp") || 
 						jspName.equals("searchTableOfContents.jsp") || 
+						jspName.equals("searchResultsDrugScreen.jsp") || 
 						jspName.equals("searchResults.jsp")) {
 				return "subSearchMenu.jsp";
 			} 

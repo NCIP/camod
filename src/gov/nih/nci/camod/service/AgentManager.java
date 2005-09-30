@@ -7,6 +7,8 @@
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Agent;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author rajputs
@@ -19,4 +21,6 @@ public interface AgentManager {
 	public Agent get(String id);
     public void save(Agent agent);
     public void remove(String id);
+	public Collection getClinicalProtocols(Agent a);
+	public List getYeastResults(Agent a);
 }

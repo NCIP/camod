@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.27 2005-09-29 18:56:01 pandyas Exp $
+ * $Id: Constants.java,v 1.28 2005-09-30 18:42:28 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2005/09/29 18:56:01  pandyas
+ * added clinical marker drop constant
+ *
  * Revision 1.26  2005/09/28 15:12:35  schroedn
  * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
  *
@@ -218,15 +221,18 @@ public class Constants {
     public static final String TRANSGENE_COLL = "transgeneColl";
     public static final String GENOMIC_SEG_COLL = "genomicSegColl";
     public static final String TARGETED_MOD_COLL = "targetedModColl";
+    public static final String TARGETED_MOD_GENE_MAP = "targetedModGeneMap";
     public static final String INDUCED_MUT_COLL = "inducedMutColl";
     public static final String TRANSGENE_CNT = "transgeneCnt";
     public static final String GENOMIC_SEG_CNT = "genomicSegCnt";
     public static final String TARGETED_MOD_CNT = "targetedModCnt";
     public static final String INDUCED_MUT_CNT = "inducedMutCnt";
+    public static final String THERAPEUTIC_APPROACHES_COLL = "therapeuticApproachesColl";
     public static final String CLINICAL_PROTOCOLS = "clinProtocols";
     public static final String YEAST_DATA = "yeastData";
     public static final String INVIVO_DATA = "invivoData";
     public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
+    public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
 
     // /////////////////////////////////////////////////////////////
     // Submission specific constants

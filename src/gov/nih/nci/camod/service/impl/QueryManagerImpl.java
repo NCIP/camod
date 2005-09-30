@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.6 2005-09-27 16:46:59 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.7 2005-09-30 18:42:26 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/09/27 16:46:59  georgeda
+ * Added environmental factor dropdown query
+ *
  * Revision 1.5  2005/09/26 14:04:14  georgeda
  * Use HQL instead of SQL
  *
@@ -217,7 +220,7 @@ public class QueryManagerImpl extends BaseManager {
         ResultSet theResultSet = null;
         try {
 
-            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," + "\n"
+            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor || ' ' || acm.ADMINISTRATIVE_SITE || ' '," + "\n"
                     + "       tx.ethnicity_strain," + "\n" + "       count(*)" + "\n" + "  from invivo_Result sr,"
                     + "\n" + "       env_factor a," + "\n" + "       XENOGRAFT_INVIVO_RESULT ymsr," + "\n"
                     + "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "       taxon tx" + "\n"
@@ -226,8 +229,8 @@ public class QueryManagerImpl extends BaseManager {
                     + "   and sr.treatment_id = t.treatment_id" + "\n"
                     + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n"
                     + "   and acm.taxon_id = tx.taxon_id" + "\n" + "   and a.nsc_number = ?" + "\n"
-                    + " group by acm.abs_cancer_model_id, acm.model_descriptor, tx.ethnicity_strain" + "\n"
-                    + " order by 3, 2";
+                    + " group by acm.abs_cancer_model_id, acm.model_descriptor || ' ' || acm.ADMINISTRATIVE_SITE || ' ', tx.ethnicity_strain" + "\n"
+                    + " order by 2, 3";
             log.info("getInvivoResults - SQL: " + theSQLString);
 
             Object[] params = new Object[1];
@@ -276,7 +279,10 @@ public class QueryManagerImpl extends BaseManager {
     }
 }
 /*
- * $Log: not supported by cvs2svn $ Revision 1.5 2005/09/26 14:04:14 georgeda Use
+ * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/09/27 16:46:59  georgeda
+ * Added environmental factor dropdown query
+ * Revision 1.5 2005/09/26 14:04:14 georgeda Use
  * HQL instead of SQL Revision 1.4 2005/09/16 19:30:04 guruswas Display invivo
  * data (from DTP) in the therapuetic approaches page
  * 
