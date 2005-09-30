@@ -44,8 +44,8 @@
 			</tr>
 			<tr>
 				<td class="greySubTitleLeft" width="25%">Organ / Tissue</td>
-				<td class="<c:out value="${tdClass}"/>End">&nbsp;
-					<c:out value="${p.organ.conceptCode}"/>
+				<td class="<c:out value="${tdClass}"/>End">
+					<c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>

@@ -76,7 +76,18 @@
 		<% 
 			l = am.getTherapyCollection();
 			cc = (l!=null)?l.size():0;
-			if ( cc > 0 ) { 
+			found = false;
+			if ( cc > 0 ) {
+				for (int i=0; i<cc; i++) {
+					Therapy t = (Therapy)l.get(i);
+					Boolean isTE = t.getTherapeuticExperiment();
+					if (isTE != null && isTE.booleanValue()) {
+						found = true;
+						break;
+					}
+				}
+			}
+			if (found) {
 		%>
 		<a href="ViewModelAction.do?unprotected_method=populateTherapeuticApproaches&aModelID=<%=mdl%>" styleClass="subMenuPrimary">THERAPEUTIC APPROACHES</a>
 	    <%} else { %>

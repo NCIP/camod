@@ -26,7 +26,6 @@
 		<tr>
 			<td class="GreyBox" width="20%"><b>Engineered Transgene</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				&nbsp;
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
 					<li>
@@ -34,14 +33,13 @@
 							<bean:write name="eg" property="name"/>
 						</html:link>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Genomic Segment</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				&nbsp;
 				<ul>
 					<logic:iterate id="eg" name="gsc" indexId="idx">
 					<li>
@@ -49,14 +47,13 @@
 							<bean:write name="eg" property="name"/>
 						</html:link>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 
 		<tr>
 			<td class="GreyBox" width="20%"><b>Targeted Modification</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				&nbsp;
 				<ul>
 					<logic:iterate id="eg" name="tmc" indexId="idx">
 					<li>
@@ -64,14 +61,13 @@
 							<bean:write name="eg" property="name"/>
 						</html:link>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 		
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Induced Mutation</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				&nbsp;
 				<ul>
 					<logic:iterate id="eg" name="mdl" property="engineeredGeneCollection" indexId="idx">
 					<% if ( eg instanceof gov.nih.nci.camod.domain.InducedMutation ) { %>
@@ -81,14 +77,13 @@
 						</html:link>
 					<%}%>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Spontaneous Mutation</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				&nbsp;
 <%      
 	final List spc = ((AnimalModel)mdl).getSpontaneousMutationCollection();
 	final int cc2 = (spc != null)?spc.size():0;
@@ -101,7 +96,7 @@
 							<bean:write name="sm" property="name"/>
 					</html:link>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 		<%}%>
 			</td>			
 		</tr>			
@@ -288,6 +283,154 @@
 </c:if>
 <!-- End Genomic Segment -->
 
+<!-- Targeted modification-->
+<c:if test="${not empty targetedModColl}">
+<c:forEach var="tm" items="${targetedModColl}">
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+		<tr>
+			<td class="formTitle" height="20" colspan="2">
+				Targeted Modification - Model:<c:out value="${mdl.modelDescriptor}"/>
+			</td>
+		</tr>
+        <tr>
+            <td class="GreyBox"><b>Gene</b></td>
+            <td class="GreyBoxRightEnd">&nbsp;<c:out value="${tm.name}"/></td>
+        </tr>
+                 
+        <tr>
+            <td class="resultsBoxWhite"><b>Modification Type</b></td>
+            <td class="resultsBoxWhiteEnd">&nbsp;
+				<c:choose>
+					<c:when test="${empty tm.modificationTypeCollection}">
+						<c:out value="${tm.modTypeUnctrlVocab}"/>
+					</c:when>
+					<c:otherwise>
+					<li>
+						<c:forEach var="modType" items="${tm.modificationTypeCollection}">
+							<li><c:out value="${modType.name}"/></li>
+						</c:forEach>
+					</li>
+					</c:otherwise>
+				</c:choose>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="GreyBox"><b>Genetic Background - Donor</b></td>
+            <td class="GreyBoxRightEnd">&nbsp;
+            	<c:out value="${tm.esCellLineName}"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="resultsBoxWhite"><b>Genetic Background - Recipient</b></td>
+            <td class="resultsBoxWhiteEnd">&nbsp;<c:out value="${tm.blastocystName}"/></td>
+        </tr>
+
+		<c:if test="${not empty tm.image.id}">
+		<tr>
+			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
+			<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
+			<Img src="http://caimage.nci.nih.gov/lizardtech/Model_Images/GeneticConstruct/<c:out value="${tm.image.id}"/>.jpg" 
+				width=50 height=50 border=0
+				alt="Click on the image to open in a new Browser window"></a>
+			<br/>( Click to View )
+			</td>
+		</tr>
+		</c:if>
+
+		<c:set var="tmId" value="${tm.id}"/>
+		<c:set var="gene" value="${targetedModGeneMap[tmId]}"/>
+		<c:if test="${not empty gene}">
+	        <tr>
+	            <td class="resultsBoxGrey"><b>Gene Info</b></td>
+	            <td class="resultsBoxGreyEnd">&nbsp;
+	            <c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
+	            <c:out value="${gene.symbol}"/>.&nbsp; 
+	            <c:out value="${gene.fullName}"/>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td valign="top" class="resultsBoxWhite"><b> Sequence ID</b></td>
+	            <td class="resultsBoxWhiteEnd">
+					<ul>
+						<c:forEach var="seq" items="${gene.nucleicAcidSequenceCollection}">
+							<li>
+							<a target="_blank" 
+				 				href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=Nucleotide&amp;CMD=Search&amp;term=<c:out value="${seq.accessionNumber}"/>">
+				 				<c:out value="${seq.accessionNumber}"/>
+				 		</A>&nbsp;</li>
+						</c:forEach>
+					</ul>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td class="resultsBoxGrey"><b>Database Links</b></td>
+	            <td class="resultsBoxGreyEnd">&nbsp;
+					<A target="_blank" href="http://www.ncbi.nlm.nih.gov/UniGene/clust.cgi?ORG=<c:out value="${gene.taxon.abbreviation}"/>&amp;CID=<c:out value="${gene.clusterId}"/>">UniGene</A>
+						&nbsp;|&nbsp;
+			        <A target="_blank" href="http://cgap.nci.nih.gov/Genes/GeneInfo?ORG=Mm&CID=<c:out value="${gene.clusterId}"/>">CGAP</A>
+	           	</td>
+	        </tr>
+	        <tr>
+	            <td class="resultsBoxWhite"><b>Function(s) of Targeted Gene</b></td>
+	            <td class="resultsBoxWhiteEnd">&nbsp;TBD
+	            </td>
+	        </tr>
+	        <tr>
+	            <td class="resultsBoxGrey"><b>Conditional Type</b></td>
+	            <td class="resultsBoxGreyEnd">&nbsp;TBD
+	            </td>
+	        </tr>
+	        <tr>
+	            <td valign="top" class="resultsBoxWhite"><b>Gene Ontology</b></td>
+	            <td valign="top" class="resultsBoxWhiteEnd"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
+					<ul>
+						<c:forEach var="ont" items="${gene.geneOntologyCollection}">
+							<li>
+							<a target="_blank" 
+				 				href="http://cgap.nci.nih.gov/Genes/GOBrowser?CMD=open&NODE=">
+				 				<c:out value="${ont.name}"/>
+					 		</a></li>
+						</c:forEach>
+					</ul>
+	           	</td>
+	        </tr>
+	        <tr>
+	            <td valign="top" class="resultsBoxGrey"><b>BioCarta Pathways</b></td>
+	            <td valign="top" class="resultsBoxGreyEnd">
+		        <font size="-2" color="#666699">Pathway information courtesy of <A target="_blank" href="http://www.biocarta.com">BioCarta</a></font>
+		        <br>
+					<ul>
+						<c:forEach var="item" items="${gene.pathwayCollection}">
+							<li>
+							<a target="_blank" 
+				 				href="http://cmap.nci.nih.gov/Pathways/BioCarta/<c:out value="${item.name}"/>">
+				 				<c:out value="${item.displayValue}"/>
+					 		</a></li>
+						</c:forEach>
+					</ul>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td valign="top" class="resultsBoxWhite"><b>Libraries and Tissues (from EST data)</b></td>
+	            <td valign="top" class="resultsBoxWhiteEnd">TBD
+	            </td>
+	        </tr>
+	        <tr>
+	            <td valign="top" class="resultsBoxGrey"><b>Protein Similarities (from UniGene)</b></td>
+	            <td valign="top" class="resultsBoxGreyEnd">TBD
+	           	</td>
+	        </tr>
+		</c:if>
+	</TABLE>
+</td></tr>
+</TABLE>
+</c:forEach>
+</c:if>
+<!-- End Targeted modification-->
 
 <!-- Induced Mutation-->
 <c:if test="${not empty inducedMutColl}">

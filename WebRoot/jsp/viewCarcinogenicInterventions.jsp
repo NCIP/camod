@@ -75,7 +75,7 @@
 						<c:otherwise>
 							<c:out value="${cd.treatment.administrativeRoute}"/>
 						</c:otherwise>
-					</c:choose>
+					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
 					<c:out value="${cd.treatment.ageAtTreatment}"/>
@@ -291,7 +291,7 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="4">Viral Treatment</td>
+				<td class="formTitleBlue" height="20" colspan="6">Viral Treatment</td>
 			</tr>
 			
 			<tr>
@@ -345,6 +345,7 @@
 					<c:out value="${cd.treatment.sexDistribution.type}"/>
 				</td>
 			</tr>
+			</c:forEach>
 			</TABLE>
 			<br>
 			</c:if>
@@ -394,6 +395,7 @@
 					<c:out value="${cd.treatment.sexDistribution.type}"/>
 				</td>
 			</tr>
+			</c:forEach>
 			</TABLE>
 			<br>
 			</c:if>

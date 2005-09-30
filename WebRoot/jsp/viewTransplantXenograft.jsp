@@ -52,51 +52,46 @@
 			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.cellAmount}"/></td>
 		</tr>	
 		
-		<tr>		
-			<td class="WhiteBox"><b>Mice Age:<b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;TBD</td>
-		</tr>
-
         <tr>
-			<td class="GreyBox"><b>Tumor harvest date after transplant:<b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.harvestDate}"/></td>
+			<td class="WhiteBox"><b>Tumor harvest date after transplant:<b></td>
+			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.harvestDate}"/></td>
 		</tr>
 	
 		<tr>		
-			<td class="WhiteBox"><b>ATCC number of Cell Line:</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.atccNumber}"/></td>   		
+			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
+			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.atccNumber}"/></td>   		
 		</tr>	
 		
 		<tr>
-			<td class="GreyBox"><b>Method of Modification:</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.modificationDescription}"/></td>
+			<td class="WhiteBox"><b>Method of Modification:</b></td>
+			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.modificationDescription}"/></td>
 		</tr>
 	
 		<tr>		
-			<td class="WhiteBox"><b>Genetic Alteration:</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.geneticManipulation}"/></td>
+			<td class="GreyBox"><b>Genetic Alteration:</b></td>
+			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.geneticManipulation}"/></td>
 		</tr>
 	
 		<tr>		
-			<td class="GreyBox"><b>Host Species</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;
+			<td class="WhiteBox"><b>Host Species</b></td>
+			<td class="WhiteBoxRightEnd">&nbsp;
 				<c:out value="${xt.hostSpecies.scientificName}"/>&nbsp;(<c:out value="${xt.hostSpecies.abbreviation}"/>)
 			</td>
 		</tr>
 	
 		<tr>		
-			<td class="WhiteBox"><b>Host Strain</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.hostSpecies.ethnicityStrain}"/></td>
+			<td class="GreyBox"><b>Host Strain</b></td>
+			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.hostSpecies.ethnicityStrain}"/></td>
 		</tr>
 		
 		<tr>		
-			<td class="GreyBox"><b>Site of Administration:</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.administrativeSite}"/></td>
+			<td class="WhiteBox"><b>Site of Administration:</b></td>
+			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.administrativeSite}"/></td>
 		</tr>	
 	
 		<tr>
-			<td class="WhiteBox"><b>Graft Type</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;
+			<td class="GreyBox"><b>Graft Type</b></td>
+			<td class="GreyBoxRightEnd">&nbsp;
 			<c:choose>
 				<c:when test="${empty xt.graftType}">
 					<c:out value="${xt.graftTypeUnctrlVocab}"/>
@@ -109,16 +104,9 @@
 		</tr>
 
 		<tr>
-			<td class="GreyBox"><b>Organ of the Graft/Transplant</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;
-			<c:choose>
-				<c:when test="${empty xt.organ.conceptCode}">
-					<c:out value="${xt.organ.name}"/>
-				</c:when>
-				<c:otherwise>
-					<c:out value="${xt.organ.conceptCode}"/>
-				</c:otherwise>
-			</c:choose>
+			<td class="WhiteBox"><b>Organ of the Graft/Transplant</b></td>
+			<td class="WhiteBoxRightEnd">
+				<c:out value="${xt.organ.EVSPreferredDescription}"/>&nbsp;
 			</td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
