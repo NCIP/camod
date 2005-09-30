@@ -1,14 +1,8 @@
 /**
  * 
- * $Id: Constants.java,v 1.28 2005-09-30 18:42:28 guruswas Exp $
+ * $Id: Constants.java,v 1.29 2005-09-30 18:47:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.27  2005/09/29 18:56:01  pandyas
- * added clinical marker drop constant
- *
- * Revision 1.26  2005/09/28 15:12:35  schroedn
- * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
- *
  * Revision 1.25  2005/09/27 16:34:31  georgeda
  * Changed administravive route drop down
  *
@@ -166,7 +160,20 @@ public class Constants {
         public static final String ADMINISTRATIVEROUTEDROP = "AdministrativeRoutes.txt";
         public static final String AGEUNITSDROP = "AgeUnits.txt";
         public static final String PUBDROP = "PublicationStatus.txt";
+        public static final String TOXICITYGRADESDROP = "ToxicityGrades.txt";        
+        
 
+        // Various Dose Units        
+        public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
+        public static final String ENVFACTORUNITSDROP = "EnvFactorUnits.txt";
+        public static final String GENOMESEGSIZEUNITSDROP = "GenomeSegSizeUnits.txt";        
+        public static final String HISTOPATHUNITSDROP = "HistopathUnits.txt";        
+        public static final String HORMONEUNITSDROP = "HormoneUnits.txt";         
+        public static final String NUTFACTORUNITSDROP = "NutFactorUnits.txt";
+        public static final String RADIATIONUNITSDROP = "RadiationUnits.txt";        
+        public static final String VIRALTREATUNITSDROP = "ViralTreatUnits.txt";
+        
+        
         // Specific to a single screen
         public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
         public static final String ENVIRONFACTORDROP = "envfactordrop.db";
@@ -178,11 +185,14 @@ public class Constants {
         public static final String VIRUSDROP = "virusdrop.db";
         public static final String VIRALVECTORDROP = "viralvectordrop.db";
         public static final String GRAFTTYPEDROP = "grafttypedrop.db";
-        public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
-        
+
         // These two are used to display the species and strain currently in the AnimalModelCharacteristics        
         public static final String MODELSPECIES = "modelspecies";
         public static final String MODELSTRAIN = "modelstrain";
+       
+        public static final String CHEMICALCLASSESDROP = "ChemicalClasses.txt";
+        public static final String BIOLOGICALPROCESSDROP = "BiologicalProcess.txt";
+        public static final String THERAPEUTICTARGETSDROP = "TherapeuticTargets.txt";
     }
 
     /**
@@ -254,7 +264,7 @@ public class Constants {
         public static final String SURGERYOTHER_LIST = "surgeryother_list";
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
         public static final String XENOGRAFT_LIST = "xenograft_list";
-        
+                
         /**
          * Used to store a list of names for the Publication section of the
          * sidebar menu of the submission section
@@ -387,7 +397,6 @@ public class Constants {
     	public static final String SUBJECT = "email.subject";
     	
     }
-    
     /**
      * 
      * Constants used for fetching EVS data
