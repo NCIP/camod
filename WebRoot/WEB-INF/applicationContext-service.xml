@@ -2,7 +2,8 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 
-<beans> 
+<beans>
+
     <!-- BaseManager -->
     <bean id="manager" class="gov.nih.nci.camod.service.impl.BaseManager"/>    
     
@@ -63,6 +64,15 @@
     <!-- agentManager -->
     <bean id="agentManager" class="gov.nih.nci.camod.service.impl.AgentManagerImpl"/>
     
+    <!-- agentTargetManager -->
+    <bean id="agentTargetManager" class="gov.nih.nci.camod.service.impl.AgentTargetManagerImpl"/> 
+    
+    <!-- biologicalProcessManager   -->    
+    <bean id="biologicalProcessManager" class="gov.nih.nci.camod.service.impl.BiologicalProcessManagerImpl"/>
+    
+    <!-- chemicalClassManager   -->    
+    <bean id="chemicalClassManager" class="gov.nih.nci.camod.service.impl.ChemicalClassManagerImpl"/>
+            
     <!-- userManager -->
     <bean id="userManager" class="gov.nih.nci.camod.service.impl.UserManagerImpl"/>
     
