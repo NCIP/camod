@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.5 2005-09-22 18:55:49 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.6 2005-09-30 19:49:58 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/09/22 18:55:49  georgeda
+ * Get coordinator from user in properties file
+ *
  * Revision 1.4  2005/09/22 15:15:17  georgeda
  * More changes
  *
@@ -87,7 +90,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
                     theRoles.add(theRole.getName());
                 }
             } else {
-                //throw new IllegalArgumentException("User: " + inUsername + " not in caMOD database");
+                throw new IllegalArgumentException("User: " + inUsername + " not in caMOD database");
             }
 
         } catch (Exception e) {
