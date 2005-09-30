@@ -6,18 +6,29 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
+import gov.nih.nci.camod.webapp.form.CellLineData;
 import java.util.List;
 
 /**
- * @author rajputs
+ * @author pandyas
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface CellLineManager {
-	public List getAll();
-	public CellLine get(String id);
-    public void save(CellLine cellLine);
-    public void remove(String id);
+	
+	public List getAll() throws Exception;
+	
+	public CellLine get(String id) throws Exception;
+	
+	public void save(CellLine cellLine) throws Exception;
+	
+    public void remove(String id) throws Exception;	
+	
+	public CellLine create(CellLineData inCellLineData, AnimalModel inAnimalModel ) throws Exception;
+	
+	public void update(CellLineData inCellLineData, CellLine inCellLine, AnimalModel inAnimalModel) throws Exception;	
+    
 }
