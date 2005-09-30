@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.12 2005-09-28 21:19:50 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.13 2005-09-30 18:57:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/09/28 21:19:50  georgeda
+ * Finished up converting to new manager
+ *
  * Revision 1.11  2005/09/28 15:12:30  schroedn
  * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
  *
@@ -10,6 +13,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/09/28 21:19:50  georgeda
+ * Finished up converting to new manager
+ *
  * Revision 1.9  2005/09/28 12:46:12  georgeda
  * Cleanup of animal manager
  *
@@ -79,5 +85,7 @@ public interface AnimalModelManager {
     public void addTherapy(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) throws Exception;
 
     public void addTherapy(AnimalModel inAnimalModel, SurgeryData inSurgeryData) throws Exception;
+    
+    public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception;    
 
 }
