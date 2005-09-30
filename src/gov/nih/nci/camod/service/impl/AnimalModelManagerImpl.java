@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.19 2005-09-28 21:20:02 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.20 2005-09-30 18:59:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/09/28 21:20:02  georgeda
+ * Finished up converting to new manager
+ *
  * Revision 1.18  2005/09/28 15:12:29  schroedn
  * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
  *
@@ -604,4 +607,24 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
     }
+    /**
+     * Add a cell line
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the cell line
+     * @param inSurgeryData
+     *            the new cell line data
+     * @throws Exception
+     */    
+    public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception {
+
+        log.trace("Entering saveCellLine");
+
+        CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData, inAnimalModel);
+        
+        inAnimalModel.addCellLine(theCellLine);
+        save(inAnimalModel);
+
+        log.trace("Exiting saveCellLine");
+    }     
 }

@@ -106,7 +106,7 @@
 
 	<div id="menu7" class="masterTitle" onclick="SwitchMenu('sub7')" onmouseover="ChangeClass('menu7','masterTitleOver')" onmouseout="ChangeClass('menu7','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> CELL LINES</div>
 	<span class="submasterdiv" id="sub7">
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitCellLines">Enter Cell Lines</html:link><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="CellLinePopulateAction.do?method=dropdown">Enter Cell Lines</html:link><br>
 			 <logic:iterate id="aCell" name="cellline_list" type="CellLine">
 			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="CellLinePopulateAction.do?method=populate" paramId="aCellID" paramName="aCell" paramProperty="id"><bean:write name="aCell" property="name" filter="true"/></html:link><br>
 			 </logic:iterate>

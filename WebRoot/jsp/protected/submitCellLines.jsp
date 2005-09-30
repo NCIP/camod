@@ -4,11 +4,6 @@
 
 <%@ page import="gov.nih.nci.camod.webapp.form.CellLineForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
-<%@ page import='gov.nih.nci.camod.Constants.Dropdowns.*' %>
-
-<!-- needed for tooltips -->
-<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
 <%
 	String aCellID = request.getParameter( "aCellID" );
@@ -16,23 +11,23 @@
 	//if aCellID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
-	String actionName = "CellLineAction.do?method=edit";
+	String actionName = "CellLineAction.do?method=save";
 	
-	if ( aCellID == null || aCellID.equals( "null" ) ){
-		actionName = "CellLineAction.do?method=save";
-	}		
+	if ( aCellID != null )
+		actionName = "CellLineAction.do?method=edit";			
 %>
+
+<script language="JavaScript" src="scripts/EvsTree.js"></script>
 
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-<!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">	
 	<tr>
+		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 	
@@ -44,24 +39,33 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label></td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="cellLineName">					
-			<html:text styleClass="formFieldSized" size="30" property="cellLineName" />			
+			<html:form action="<%= actionName %>" focus="cellLineName">
+								
+			<html:text styleClass="formFieldSized" size="30" name="formdata" property="cellLineName" />			
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel"><label for="field2">Organ / Tissue</label>&nbsp;<IMG src="images\selectUP.gif" align=middle></td>
+		<td class="formRequiredLabel"><label for="field2">Organ / Tissue</label>&nbsp;
+			<a href="javascript:showTissueTree( 'cellLineForm', 'mouse', 1)">
+			<IMG src="images\selectUP.gif" align=middle border=0>
+			
+			 	<html:hidden property="organTissueName" name="formdata" />
+			 	<html:hidden property="organTissueCode" name="formdata" />
+			</a>			
+		</td>
+			
 		<td class="formField">
-			<html:text styleClass="formFieldSized" size="30" property="organName" disabled="true"/>
+			<html:text styleClass="formFieldSized" size="25" property="organName" name="formdata" disabled="true"/>
 		</td>
 	</tr>
-
+	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Experiment:</label></td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" name="formdata" property="experiment" cols="32" rows="4"/>			
 			</td>
 	</tr>
 
@@ -69,7 +73,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Results:</label></td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" name="formdata" property="results" cols="32" rows="4"/>			
 			</td>
 	</tr>
 	
@@ -77,7 +81,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comments:</label></td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" name="formdata" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>	
 
