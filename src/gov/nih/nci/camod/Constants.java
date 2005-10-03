@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.31 2005-10-03 15:31:00 pandyas Exp $
+ * $Id: Constants.java,v 1.32 2005-10-03 16:07:39 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2005/10/03 15:31:00  pandyas
+ * added clinical marker and histopathology constants
+ *
  * Revision 1.30  2005/10/03 13:04:19  georgeda
  * Updates from search changes
  *
@@ -174,7 +177,7 @@ public class Constants {
         public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
         public static final String ENVFACTORUNITSDROP = "EnvFactorUnits.txt";
         public static final String GENOMESEGSIZEUNITSDROP = "GenomeSegSizeUnits.txt";        
-        public static final String HISTOPATHUNITSDROP = "HistopathUnits.txt";
+        public static final String HISTOPATHVOLUMEUNITSDROP = "HistopathVolumeUnits.txt";
         public static final String HISTOPATHWEIGHTUNITSDROP = "HistopathWeightUnits.txt";
         public static final String HORMONEUNITSDROP = "HormoneUnits.txt";         
         public static final String NUTFACTORUNITSDROP = "NutFactorUnits.txt";
