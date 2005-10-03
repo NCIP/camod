@@ -917,7 +917,6 @@
     </action>
          
      <!-- ClinicalMarkerForm -->
-     
      <action path="/ClinicalMarkerAction"
 	        type="gov.nih.nci.camod.webapp.action.ClinicalMarkerAction"
 	        name="clinicalMarkerForm"
@@ -996,6 +995,22 @@
     </action>
     
      <!-- HistopathologyForm -->
+     <action path="/HistopathologyAction"
+	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
+	        name="histopathologyForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitHistopathology">   	
+    </action>
+    
+    <action path="/HistopathologyPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.HistopathologyPopulateAction"
+    		name="histopathologyForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>     
      
    	 <!-- HormoneForm -->
    	 <action path="/HormoneAction"
