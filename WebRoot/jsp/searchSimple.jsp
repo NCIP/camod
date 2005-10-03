@@ -58,8 +58,8 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Species</label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="species" >
 					<html:options name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
