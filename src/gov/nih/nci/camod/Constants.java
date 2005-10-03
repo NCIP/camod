@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.30 2005-10-03 13:04:19 georgeda Exp $
+ * $Id: Constants.java,v 1.31 2005-10-03 15:31:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2005/10/03 13:04:19  georgeda
+ * Updates from search changes
+ *
  * Revision 1.29  2005/09/30 18:47:46  pandyas
  * added all differences to my copy before uploading
  *
@@ -165,18 +168,18 @@ public class Constants {
         public static final String AGEUNITSDROP = "AgeUnits.txt";
         public static final String PUBDROP = "PublicationStatus.txt";
         public static final String TOXICITYGRADESDROP = "ToxicityGrades.txt";        
-        
+        public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
 
         // Various Dose Units        
         public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
         public static final String ENVFACTORUNITSDROP = "EnvFactorUnits.txt";
         public static final String GENOMESEGSIZEUNITSDROP = "GenomeSegSizeUnits.txt";        
-        public static final String HISTOPATHUNITSDROP = "HistopathUnits.txt";        
+        public static final String HISTOPATHUNITSDROP = "HistopathUnits.txt";
+        public static final String HISTOPATHWEIGHTUNITSDROP = "HistopathWeightUnits.txt";
         public static final String HORMONEUNITSDROP = "HormoneUnits.txt";         
         public static final String NUTFACTORUNITSDROP = "NutFactorUnits.txt";
         public static final String RADIATIONUNITSDROP = "RadiationUnits.txt";        
         public static final String VIRALTREATUNITSDROP = "ViralTreatUnits.txt";
-        
         
         // Specific to a single screen
         public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
@@ -279,6 +282,7 @@ public class Constants {
         public static final String SURGERYOTHER_LIST = "surgeryother_list";
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
         public static final String XENOGRAFT_LIST = "xenograft_list";
+        public static final String HISTOPATHOLOGY_LIST = "histopathology_list";
                 
         /**
          * Used to store a list of names for the Publication section of the
