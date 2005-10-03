@@ -121,12 +121,8 @@
 		    type="gov.nih.nci.camod.webapp.form.XenograftForm"/>
 
 		<form-bean
-			name="simpleSearchForm"
-		    type="gov.nih.nci.camod.webapp.form.SimpleSearchForm"/>
-
-		<form-bean
-			name="drugScreenSearchForm"
-		    type="gov.nih.nci.camod.webapp.form.DrugScreenSearchForm"/>
+			name="searchForm"
+		    type="gov.nih.nci.camod.webapp.form.SearchForm"/>
 
   </form-beans>
 
@@ -233,24 +229,12 @@
 			path="/jsp/registerUserPass.jsp"></forward>
 		
 		<forward
-			name="searchAdvanced"
-			path="/jsp/searchAdvanced.jsp"></forward>
-		
-		<forward
 			name="searchMenu"
 			path="/jsp/searchMenu.jsp"></forward>
 		
 		<forward
 			name="searchResults"
 			path="/jsp/searchResults.jsp"></forward>
-		
-		<forward
-			name="searchResultsDrugScreen"
-			path="/jsp/searchResultsDrugScreen.jsp"></forward>
-
-		<forward
-			name="searchSimple"
-			path="/jsp/searchSimple.jsp"></forward>
 		
 		<forward
 			name="searchDrugScreening"
@@ -839,16 +823,6 @@
 			parameter="/jsp/searchResults.jsp" />
 		
 		<action
-			path="/searchResultsDrugScreen"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchResultsDrugScreen.jsp" />
-
-		<action
-			path="/searchSimple"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchSimple.jsp" />
-		
-		<action
 			path="/searchDrugScreening"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/searchDrugScreening.jsp" />
@@ -886,24 +860,13 @@
 			validate="false" />
 
 	 <!--  search forms -->
-    <action path="/SimpleSearchAction"
-	        type="gov.nih.nci.camod.webapp.action.SimpleSearchAction"
-	        name="simpleSearchForm"
+    <action path="/SearchAction"
+	        type="gov.nih.nci.camod.webapp.action.SearchAction"
+	        name="searchForm"
 	        scope="request"
 	        parameter="unprotected_method" 
 	        unknown="false"
-	        validate="false"
-	        input="/simpleSearch">    
-    </action>
-
-    <action path="/DrugScreenSearchAction"
-	        type="gov.nih.nci.camod.webapp.action.DrugScreenSearchAction"
-	        name="drugScreenSearchForm"
-	        scope="request"
-	        parameter="unprotected_method" 
-	        unknown="false"
-	        validate="false"
-	        input="/drugScreenSearch">
+	        validate="false">    
     </action>
 
     <action path="/ViewModelAction"
@@ -954,7 +917,6 @@
     </action>
          
      <!-- ClinicalMarkerForm -->
-     
      
      <action path="/ClinicalMarkerAction"
 	        type="gov.nih.nci.camod.webapp.action.ClinicalMarkerAction"
@@ -1034,22 +996,6 @@
     </action>
     
      <!-- HistopathologyForm -->
-          <action path="/HistopathologyAction"
-	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
-	        name="histopathologyForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="submitHistopathology">   	
-    </action>
-    
-    <action path="/HistopathologyPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.HistopathologyPopulateAction"
-    		name="histopathologyForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
-    </action>     
      
    	 <!-- HormoneForm -->
    	 <action path="/HormoneAction"
@@ -1262,40 +1208,25 @@
     </action>
          
      <!-- ViralTreatmentForm -->
-     <action path="/ViralTreatmentAction"
-        type="gov.nih.nci.camod.webapp.action.ViralTreatmentAction"
-        name="viralTreatmentForm"
-        scope="request"
-        parameter="method" 	     
-        validate="false"
-        input="submitViralTreatment">   	
+          <action path="/ViralTreatmentAction"
+	        type="gov.nih.nci.camod.webapp.action.ViralTreatmentAction"
+	        name="viralTreatmentForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitViralTreatment">   	
     </action>
     
     <action path="/ViralTreatmentPopulateAction"
-		type="gov.nih.nci.camod.webapp.action.ViralTreatmentPopulateAction"
-		name="viralTreatmentForm"    		
-        scope="request"
-        parameter="method"
-		validate="false">		
+    		type="gov.nih.nci.camod.webapp.action.ViralTreatmentPopulateAction"
+    		name="viralTreatmentForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
     </action>
     
      <!-- XenograftForm -->
-     <action path="/XenograftAction"
-        type="gov.nih.nci.camod.webapp.action.XenograftAction"
-        name="xenograftForm"
-        scope="request"
-        parameter="method" 	     
-        validate="false"
-        input="submitTransplantXenograft">   	
-    </action>
     
-    <action path="/XenograftPopulateAction"
-		type="gov.nih.nci.camod.webapp.action.XenograftPopulateAction"
-		name="xenograftForm"    		
-        scope="request"
-        parameter="method"
-		validate="false">		
-    </action>
     
      <!-- Admin functionality action -->	
   
@@ -1406,6 +1337,32 @@
 	        input="/submitPublications"
 	        validate="false" >
     </action>
+    
+    <!-- Search actions -->
+    <action path="/SimpleSearchPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.SimpleSearchPopulateAction"
+    		name="searchForm"    		
+            scope="request"
+            parameter="unprotected_method"
+			validate="false">	
+	    <forward
+            name="next"
+            path="/jsp/searchSimple.jsp">
+        </forward>	
+    </action>
+    
+        <!-- Search actions -->
+    <action path="/AdvancedSearchPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AdvancedSearchPopulateAction"
+    		name="searchForm"    		
+            scope="request"
+            parameter="unprotected_method"
+			validate="false">	
+	    <forward
+            name="next"
+            path="/jsp/searchAdvanced.jsp">
+        </forward>	
+    </action>       
     
   </action-mappings>
 

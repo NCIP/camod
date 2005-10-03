@@ -1,15 +1,18 @@
 /**
  * 
- * $Id: SimpleSearchAction.java,v 1.2 2005-09-16 15:52:56 georgeda Exp $
+ * $Id: SearchAction.java,v 1.1 2005-10-03 13:52:04 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/09/16 15:52:56  georgeda
+ * Changes due to manager re-write
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.webapp.form.SimpleSearchForm;
+import gov.nih.nci.camod.webapp.form.SearchForm;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,17 +29,17 @@ import org.apache.struts.action.*;
  * Action used to implement the search for animal models
  *
  */
-public final class SimpleSearchAction extends BaseAction {
+public final class SearchAction extends BaseAction {
 
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
-        SimpleSearchForm ssf = (SimpleSearchForm) form;
+        SearchForm ssf = (SearchForm) form;
 
         log.debug("Keyword: " + ssf.getKeyword());
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         try {
-            List results = animalModelManager.search();
+            List results = animalModelManager.search(ssf);
             request.getSession().setAttribute(Constants.SEARCH_RESULTS, results);
         } catch (Exception e) {
             log.error("Unable to fetch models ", e);

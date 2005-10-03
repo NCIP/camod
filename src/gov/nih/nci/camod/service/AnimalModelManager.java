@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.13 2005-09-30 18:57:35 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.14 2005-10-03 13:51:14 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/09/30 18:57:35  pandyas
+ * added for cell line
+ *
  * Revision 1.12  2005/09/28 21:19:50  georgeda
  * Finished up converting to new manager
  *
@@ -13,6 +16,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/09/30 18:57:35  pandyas
+ * added for cell line
+ *
  * Revision 1.12  2005/09/28 21:19:50  georgeda
  * Finished up converting to new manager
  *
@@ -63,7 +69,7 @@ public interface AnimalModelManager {
 
     public void remove(String id) throws Exception;
 
-    public List search() throws Exception;
+    public List search(SearchData inSearchData) throws Exception;
 
     public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception;
 

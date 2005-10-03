@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.20 2005-09-30 18:59:06 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.21 2005-10-03 13:51:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2005/09/30 18:59:06  pandyas
+ * modified for cell line
+ *
  * Revision 1.19  2005/09/28 21:20:02  georgeda
  * Finished up converting to new manager
  *
@@ -278,21 +281,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * 
      * @throws Exception
      */
-    public List search() throws Exception {
+    public List search(SearchData inSearchData) throws Exception {
 
-        log.trace("Entering search");
-
-        List animalModels = null;
-
-        try {
-            animalModels = Search.query(AnimalModel.class);
-        } catch (Exception e) {
-            log.error("Exception occurred searching for models", e);
-            throw e;
-        }
-
-        log.trace("Exiting search");
-        return animalModels;
+        log.trace("In search");
+        return QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
     }
 
     // Populate the model based on the model characteristics form passed in. It
@@ -435,7 +427,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Entering saveXenograft");
 
         Xenograft theXenograft = XenograftManagerSingleton.instance().create(inXenograftData, inAnimalModel);
-        
+
         inAnimalModel.addXenograft(theXenograft);
         save(inAnimalModel);
 
@@ -607,6 +599,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
     }
+
     /**
      * Add a cell line
      * 
@@ -615,16 +608,16 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @param inSurgeryData
      *            the new cell line data
      * @throws Exception
-     */    
+     */
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception {
 
         log.trace("Entering saveCellLine");
 
         CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData, inAnimalModel);
-        
+
         inAnimalModel.addCellLine(theCellLine);
         save(inAnimalModel);
 
         log.trace("Exiting saveCellLine");
-    }     
+    }
 }

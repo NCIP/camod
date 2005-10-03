@@ -1,10 +1,11 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
-<html:form action="SimpleSearchAction.do" focus="keyword">
+<html:form action="SearchAction.do" focus="keyword">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -21,35 +22,24 @@
 			<!-- <td class="formMessage" align="left" FONT="9"><a href="advancedsearch.html">Advanced Search <a> </td> -->
 		</tr>
 
+
 		<tr>
-			<td class="formRequiredNotice" width="0">&nbsp;</td>
-			<td class="formRequiredLabel"><label for="field1">Model Name / Model Descriptor</label></td>
-			<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formRequiredLabel"><label for="field1">Model Name /Model Descriptor </label> 
+				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
+			</td>
 		</tr>
-		
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel"><label for="field2">PI's Name</label></td>
 			
-			<td class="formField">
-			<select class="formFieldSized"  name="field2" id="field2" size="1">
-				<option value="option1"></option>
-                                <OPTION value="65">Abate-Chen, Cory</option>
-                                <OPTION value="403">Al-Ubaidi, Muayyad</option>
-                                <OPTION value="562">Almholt, Kasper</option>
-                                <OPTION value="184">Arbeit, Jeff</option>
-                                <OPTION value="306">Arnold, Andrew</option>
-                                <OPTION value="293">Arteaga, Carlos</option>
-                                <OPTION value="539">Ben-Neriah, Yinon</option>
-                                <OPTION value="74">Balmain, Allan</option>
-                                <OPTION value="570">Baron, Beverly</option>
-                                <OPTION value="571">Basson, Craig</option>
-                                <OPTION value="602">Baylin, Stephen</option>
-                                <OPTION value="250">Benezra, Robert</option>
-                                <OPTION value="502">Blasco, Maria</option>
-                                <OPTION value="178">Bradley, Allan</option>
-                                <OPTION value="498">Bremner, Rod</option>
-			</select>			
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="piName" >
+					<html:options name="<%= Dropdowns.PRINCIPALINVESTIGATORQUERYDROP %>" />										
+				</html:select>			
 			</td>
 		</tr>
 
@@ -58,7 +48,7 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-		  	    <a href="javascript:showTissueTree('simpleSearchForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 				<INPUT name="organTissueName" type="hidden"/>
@@ -68,20 +58,12 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Species</label></td>
-			
-			<td class="formField">
-			<select class="formFieldSized"  name="field2" id="field2" size="1">
-                                <OPTION value=""></OPTION>
-                                <OPTION value="1">Mouse(Mus musculus)</OPTION>
-                                <OPTION value="8">Rat(Rattus norvegicus)</OPTION>
-                                <OPTION value="9">Rat(Rattus rattus)</OPTION>
-                                <OPTION value="12">Mongolian gerbil (Meriones unguiculatus)</OPTION>
-                                <OPTION value="13">Syrian (golden) hamster (Mesocricetus auratus)</OPTION>
-                                <OPTION value="14">Guinea pig (Cavia porcellus)</OPTION>
-                                <OPTION value="16">Mouse(in vivo)</OPTION>
-			</select>			
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="species" >
+					<html:options name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
 

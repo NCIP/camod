@@ -1,9 +1,11 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
-<FORM name="input" action="searchResults.do" method="get">
+<html:form action="SearchAction.do" focus="keyword">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -20,41 +22,30 @@
 		</tr>
 		
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formRequiredLabel"><label for="field1">Model Name / Model Descriptor</label></td>
-			<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formRequiredLabel"><label for="field1">Model Name /Model Descriptor:</label> 
+				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
+			</td>
 		</tr>
 		
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">PI's Name</label></td>
+			<td class="formRequiredNotice" width="0">&nbsp;</td>
+			<td class="formLabel"><label for="field2">PI's Name:</label></td>
 			
-			<td class="formField">
-			<select class="formFieldSized"  name="field2" id="field2" size="1">
-				<option value="option1"></option>
-                                <OPTION value="65">Abate-Chen, Cory</option>
-                                <OPTION value="403">Al-Ubaidi, Muayyad</option>
-                                <OPTION value="562">Almholt, Kasper</option>
-                                <OPTION value="184">Arbeit, Jeff</option>
-                                <OPTION value="306">Arnold, Andrew</option>
-                                <OPTION value="293">Arteaga, Carlos</option>
-                                <OPTION value="539">Ben-Neriah, Yinon</option>
-                                <OPTION value="74">Balmain, Allan</option>
-                                <OPTION value="570">Baron, Beverly</option>
-                                <OPTION value="571">Basson, Craig</option>
-                                <OPTION value="602">Baylin, Stephen</option>
-                                <OPTION value="250">Benezra, Robert</option>
-                                <OPTION value="502">Blasco, Maria</option>
-                                <OPTION value="178">Bradley, Allan</option>
-                                <OPTION value="498">Bremner, Rod</option>
-			</select>			
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="piName" >
+					<html:options name="<%= Dropdowns.PRINCIPALINVESTIGATORQUERYDROP %>" />										
+				</html:select>			
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel">
-				<label for="field2">Site of Lesion/Tumor</label>
+				<label for="field2">Site of Lesion/Tumor:</label>
 				&nbsp;
 		  	    <a href="javascript:showTissueTree('input', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
@@ -82,20 +73,12 @@
 		</tr>
 		
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Species</label></td>
-			
-			<td class="formField">
-			<select class="formFieldSized"  name="field2" id="field2" size="1">
-                                <OPTION value=""></OPTION>
-                                <OPTION value="1">Mouse(Mus musculus)</OPTION>
-                                <OPTION value="8">Rat(Rattus norvegicus)</OPTION>
-                                <OPTION value="9">Rat(Rattus rattus)</OPTION>
-                                <OPTION value="12">Mongolian gerbil (Meriones unguiculatus)</OPTION>
-                                <OPTION value="13">Syrian (golden) hamster (Mesocricetus auratus)</OPTION>
-                                <OPTION value="14">Guinea pig (Cavia porcellus)</OPTION>
-                                <OPTION value="16">Mouse(in vivo)</OPTION>
-			</select>			
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formLabel"><label for="field3"><b>Species:</b></label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="species" >
+					<html:options name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
 
@@ -104,13 +87,10 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field1">Phenotype:</label>
-			</td>
-
-			<td class="formField">
-				<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Phenotype:</label></td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="phenotype" size="30"/>
 			</td>
 		</tr>
 
@@ -185,154 +165,60 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field3">Select Chemical/Drug</label>
-			</td>
-			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-                                        <OPTION value=""></OPTION> 
-                                        <OPTION value="0" >Other</OPTION>
-                                        <OPTION value="8" >1,1-dimethylhydrazine (UDMH)</OPTION>
-                                        <OPTION value="37" >1,2,5,6-dibenzanthracene</OPTION>
-                                        <OPTION value="33" >1,2-dibromoethane</OPTION>
-                                        <OPTION value="35" >1,2-dimethylhydrazine-di-HCl (DMH)</OPTION>
-                                        <OPTION value="38" >1,3-butadiene</OPTION>
-                                        <OPTION value="39" >1,4-dimethanesulfonoxybutane (myleran)</OPTION>
-                                        <OPTION value="1" >1-aminobenzo[a]pyrene (1-ABaP)</OPTION>
-                                        <OPTION value="3" >1-ethyl-1-nitrosourea (ethylnitrosourea) (ENU)</OPTION>
-                                        <OPTION value="36" >12-O-tetradecanoylphorbol-13-acetate (TPA)</OPTION>
-                                        <OPTION value="45" >2,3,7,8-tetrachorodibenzo-p-dioxin (TCDD)</OPTION>
-                                        <OPTION value="48" >3-methylcholanthrene (MCA) (MC)</OPTION>
-                                        <OPTION value="471" >4-hydroxytamoxifen (4OHT; Sigma)</OPTION>
-                                        <OPTION value="59" >7,12-dimethylbenz[a]anthracene (DMBA)</OPTION>
-                                        <OPTION value="60" >9,10-dimethyl-1,2-benzanthracene (DMBA)</OPTION>
-                                        <OPTION value="440" >AP20187</OPTION>
-                                        <OPTION value="441" >AP20187</OPTION>
-                                        <OPTION value="472" >Diethylnitrosamine</OPTION>
-                                        <OPTION value="638" >Goitrogen</OPTION>
-                                        <OPTION value="102" >N-butyl-N-(4-hydroxybutyl)nitrosamine (BBN)</OPTION>
-                                        <OPTION value="103" >N-diethylnitrosamine (N,N-diethylnitrosamine) (N-nitrosodiethylamine) (DEN) (NDEA)</OPTION>
-                                        <OPTION value="104" >N-ethyl-N'-nitro-N-nitrosoguanidine</OPTION>
-                                        <OPTION value="106" >N-ethyl-N-nitrosourea (N-nitrosoethylurea) (ENU)</OPTION>
-                                        <OPTION value="436" >N-nitroso-bis-(2-oxopropyl) amine (BOP)</OPTION>
-                                        <OPTION value="636" >PPARg ligand troglitazone</OPTION>
-                                        <OPTION value="466" >RU486</OPTION>
-                                        <OPTION value="467" >RU486</OPTION>
-                                        <OPTION value="469" >RU486</OPTION>
-                                        <OPTION value="463" >SB203580 hydrochloride</OPTION>
-                                        <OPTION value="473" >amphiregulin (AR)</OPTION>
-                                        <OPTION value="64" >azoxymethane (AOM)</OPTION>
-                                        <OPTION value="67" >benzo[a]pyrene (BP) (BaP) (B[a]P)</OPTION>
-                                        <OPTION value="408" >cyclophosphamide</OPTION>
-                                        <OPTION value="85" >dextran sulfate sodium (DSS)</OPTION>
-                                        <OPTION value="439" >diethylnitrosamine</OPTION>
-                                        <OPTION value="645" >diethylnitrosamine (DEN)</OPTION>
-                                        <OPTION value="651" >diethylnitrosamine (DEN)</OPTION>
-                                        <OPTION value="435" >diethylnitrosamine (DEN) [55-18-5] </OPTION>
-                                        <OPTION value="89" >dimethylbenzanthracene (DMBA)</OPTION>
-                                        <OPTION value="646" >dimethylnitrosamine (DMN) </OPTION>
-                                        <OPTION value="608" >doxycycline</OPTION>
-				</select>
+			<td class="formLabel"><label for="field3">Select Chemical/Drug:</label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="chemicalDrug" >
+					<html:options name="<%= Dropdowns.CHEMICALDRUGQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field3">Select Growth Factor:</label>
-			</td>
-			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-                                        <OPTION value="">
-                                        <OPTION value="0" >Other
-                                        <OPTION value="650" >562
-                                        <OPTION value="412" >bFGF
-                                        <OPTION value="9" >insulin-like growth factor 1 (IGF1) (IGF-1) (human recombinant)
-				</select>
+			<td class="formLabel"><label for="field3">Select Growth Factor:</label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="growthFactor" >
+					<html:options name="<%= Dropdowns.GROWTHFACTORQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field3">Select Hormone:</label>
+			<td class="formLabel"><label for="field3">Select Hormone:</label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="hormone" >
+					<html:options name="<%= Dropdowns.HORMONEQUERYDROP %>" />										
+				</html:select>				
 			</td>
-			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-                                        <OPTION value="">
-                                        <OPTION value="0" >Other
-                                        <OPTION value="10" >19-nor-progesterone
-                                        <OPTION value="11" >androsterone
-                                        <OPTION value="146" >diethylstilbestrol (DES)
-                                        <OPTION value="147" >dihydrotestosterone (DHT)
-                                        <OPTION value="148" >estradiol (17beta-estradiol) (E2)
-                                        <OPTION value="151" >estrogen
-                                        <OPTION value="163" >progesterone
-				</select>
+		</tr>
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Select Radiation:</label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="radiation" >
+					<html:options name="<%= Dropdowns.RADIATIONQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field3">Select Radiation:</label>
-			</td>
-			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-                                        <OPTION value="">
-                                        <OPTION value="0" >Other
-                                        <OPTION value="25" >Iodine-131 (I-131) (131I)
-                                        <OPTION value="168" >Radium-224 (Ra-224) (224Ra)
-                                        <OPTION value="175" >X-radiation
-                                        <OPTION value="628" >cobalt-60
-                                        <OPTION value="23" >gamma-radiation
-                                        <OPTION value="173" >ultraviolet-B radiation (UVB)
-				</select>
+			<td class="formLabel"><label for="field3">Select Virus:</label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="viral" >
+					<html:options name="<%= Dropdowns.VIRUSQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
-
+		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field3">Select Virus:</label>
-			</td>
-
-			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-                                        <OPTION value="">
-                                        <OPTION value="0" >Other
-                                        <OPTION value="15" >A-MuLV (Abelson murine leukemia virus)
-                                        <OPTION value="460" >Adeno-Cre
-                                        <OPTION value="458" >Adeno-Cre 
-                                        <OPTION value="16" >Adenovirus (recombinant, expressing Cre recombinase)
-                                        <OPTION value="17" >Adenovirus (recombinant, expressing LacZ)
-                                        <OPTION value="413" >Adenovirus Serotype 5 expressing bFGF
-                                        <OPTION value="19" >Friend leukemia virus
-                                        <OPTION value="176" >Friend leukemia virus - "regressing" (RFV)
-                                        <OPTION value="178" >Graffi MuLV (Graffi murine leukemia virus)
-                                        <OPTION value="180" >MLV (M-MuLV) (MoMuLV) (Moloney murine leukemia virus)
-                                        <OPTION value="437" >MOL4070LTR
-                                        <OPTION value="407" >RCAS-Akt (Constitutively acitve, form P. Vogt)
-                                        <OPTION value="406" >RCAS-Ras (K-Ras 4B, G12D, from T. Jacks)
-                                        <OPTION value="616" >adenovirus vector encoding human XPA gene
-				</select>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field3">Select Surgery:</label>
-			</td>
-			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-                                            <OPTION value="">
-                                            <OPTION value="0" >Other
-                                            <OPTION value="27" >adrenalectomy
-                                            <OPTION value="29" >mechanical stimulation
-                                            <OPTION value="434" >orthotopic ovary implantation
-                                            <OPTION value="30" >splenectomy
-				</select>
+			<td class="formLabel"><label for="field3">Select Surgery:</label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="surgery" >
+					<html:options name="<%= Dropdowns.SURGERYQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
 
@@ -341,13 +227,10 @@
 		</tr>
 
 		<tr>
-
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field1">Cell Line:</label>
-			</td>
-			<td class="formField">
-				<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Cell Line:</label></td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="cellLine" size="30"/>
 			</td>
 		</tr>
 
@@ -407,20 +290,23 @@
 		</tr>
 		<tr>
 
-		<td align="right" colspan="3">
 
-			<!-- action buttons begins -->
-			<TABLE cellpadding="4" cellspacing="0" border="0">
-			<tr>
-				<td>
-					<input class="actionButton" type="submit" value="Search" />
-				</td>
-				<td>
-					<input class="actionButton" type="reset" value="Reset" />
-				</td>
-			</tr>
-			</TABLE>
-
+			<td align="right" colspan="3">
+				<!-- action buttons begins -->
+				<TABLE cellpadding="4" cellspacing="0" border="0">
+					<tr>
+					  <html:submit styleClass="actionButton">
+						  <bean:message key="button.submit"/>
+					  </html:submit>
+					  
+					  <html:reset styleClass="actionButton">
+					  	  <bean:message key="button.reset"/>
+	  				  </html:reset>
+				  </html:form>			
+				  	</tr>
+				</TABLE>
+			</td>
+		</tr>
 		<!-- action buttons end -->
 	</td></tr></TABLE>
 </td></tr></TABLE>	

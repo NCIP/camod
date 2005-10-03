@@ -7,10 +7,10 @@
 	<html:link styleClass="subMenuPrimary" action="searchTableOfContents">&nbsp;&nbsp;TABLE OF CONTENTS</html:link>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
-	<html:link styleClass="subMenuPrimary" action="searchSimple">&nbsp;&nbsp;SIMPLE SEARCH</html:link>
+	<html:link styleClass="subMenuPrimary" action="SimpleSearchPopulateAction?unprotected_method=populate">&nbsp;&nbsp;SIMPLE SEARCH</html:link>
 	<BR>	
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
-	<html:link styleClass="subMenuPrimary" action="searchAdvanced">&nbsp;&nbsp;ADVANCED SEARCH</html:link>
+	<html:link styleClass="subMenuPrimary" action="AdvancedSearchPopulateAction?unprotected_method=populate">&nbsp;&nbsp;ADVANCED SEARCH</html:link>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>
 	<html:link styleClass="subMenuPrimary" action="searchDrugScreening">&nbsp;&nbsp;DRUG SCREENING</html:link>
