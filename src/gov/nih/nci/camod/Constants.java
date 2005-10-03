@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.29 2005-09-30 18:47:46 pandyas Exp $
+ * $Id: Constants.java,v 1.30 2005-10-03 13:04:19 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2005/09/30 18:47:46  pandyas
+ * added all differences to my copy before uploading
+ *
  * Revision 1.25  2005/09/27 16:34:31  georgeda
  * Changed administravive route drop down
  *
@@ -151,6 +154,7 @@ public class Constants {
      */
     public interface Dropdowns {
         
+    	public static final String ADD_BLANK_OPTION = "ADD_BLANK_OPTION";
         public static final String OTHER_OPTION = "Other";
 
         public static final String SPECIESDROP = "speciesdrop.db";
@@ -185,7 +189,18 @@ public class Constants {
         public static final String VIRUSDROP = "virusdrop.db";
         public static final String VIRALVECTORDROP = "viralvectordrop.db";
         public static final String GRAFTTYPEDROP = "grafttypedrop.db";
-
+        public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
+        
+        // Query dropdowns
+        public static final String CHEMICALDRUGQUERYDROP = "chemdrugquerydrop.db";
+        public static final String GROWTHFACTORQUERYDROP = "growfactorquerydrop.db";
+        public static final String HORMONEQUERYDROP = "hormonequerydrop.db";
+        public static final String RADIATIONQUERYDROP = "radiationquerydrop.db";
+        public static final String VIRUSQUERYDROP = "virusquerydrop.db";
+        public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
+        public static final String SPECIESQUERYDROP = "speciesquerydrop.db";
+        public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
+        
         // These two are used to display the species and strain currently in the AnimalModelCharacteristics        
         public static final String MODELSPECIES = "modelspecies";
         public static final String MODELSTRAIN = "modelstrain";
