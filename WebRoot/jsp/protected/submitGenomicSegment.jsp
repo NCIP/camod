@@ -1,7 +1,39 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
 
-<form name="input" action="submitOverview.jsp" method="get">
+<%@ page import="gov.nih.nci.camod.domain.GenomicSegment" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.GenomicSegmentForm" %>	
+<%@ page import="gov.nih.nci.camod.Constants.*" %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
+<%
+	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
+
+	//if aGenomicSegmentID is passed in, then we are dealing with a previously entered model and are editing it
+	//otherwise, create a new one
+	
+	String actionName = "GenomicSegmentAction.do?method=save";
+	
+	if ( aGenomicSegmentID != null )
+		actionName = "GenomicSegmentAction.do?method=edit";
+%>
+
+<SCRIPT LANGUAGE="JavaScript">
+		
+	function chkOther( control ) {
+		ideControl = document.forms[0].otherSegmentName;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+</SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -19,16 +51,19 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field3">Integration</label></td>
 			<td class="formField">
-				<input id="radio1" name="radio5" checked="checked" type="radio"> <label for="field5">Random</label>
-				<br>
-				<input id="radio2" name="radio5" type="radio"> <label for="field5">Targeted</label>
+				<html:form action="<%= actionName %>" focus="locationOfIntegration">	
+		
+				<html:radio property="locationOfIntegration" value="Random" /> Random 
+				<html:radio property="locationOfIntegration" value="Targeted" /> Targeted
 			</td>
 		</tr>		
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Location of Integration</label></td>
-			<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="locationOfIntegration" disabled="true" size="10" name="formdata"/>
+			</td>
 		</tr>
 
 		<tr>
@@ -36,60 +71,70 @@
 
 			<td class="formLabel"><label for="field3"><b>Segment Type</b></label></td>
 			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-					<option value="option1"></option>
-					<option value="option2">Other</option>
-					<option value="option3">Cosmid</option>
-					<option value="option4">YAC</option>
-					<option value="option3">BAC</option>
-					<option value="option4">Plasmid</option>
-				</select>
-				<br>If Segment Type is not listed, then please select "Other"<br> from the above selection list and then specify it below: 
+			<html:select styleClass="formFieldSized" size="1" property="segmentName" onchange="chkOther( this );" >
+				<html:options name="<%= Dropdowns.GENOMICSEGMENTDROP %>" />										
+			</html:select>
+			<br>
+			-if category you are looking for is not listed, <br>select "Other" and enter the category in the text field below:
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Other Segment Type</label></td>
-			<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="otherSegmentName" disabled="true" size="10" name="formdata"/>
+			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Segment Size</label></td>
-			<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="segmentSize" size="10" name="formdata"/>
+			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Designator</label></td>
-			<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="cloneDesignator" size="10" name="formdata"/>
+			</td>
 		</tr>
 
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Gene(s)<br>(separate multiple entries by comma)</label></td>
-			<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+			<td class="formField">
+				<html:textarea styleClass="formFieldSized" property="genes" rows="4" cols="32" name="formdata"/>
+			</td>
 		</tr>
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Markers(s)<br>(separate multiple entries by comma)</label></td>
-			<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+			<td class="formField">
+				<html:textarea styleClass="formFieldSized" property="markers" rows="4" cols="32" name="formdata"/>
+			</td>
 		</tr>
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Comments</label></td>
-			<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+			<td class="formField">
+				<html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" name="formdata"/>
+			</td>
 		</tr>				
 
-                <tr>
-                        <td class="formRequiredNotice" width="5">&nbsp;</td>
-                        <td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
-                       <td class="formField"><input class="formFieldUnSized" type="text" name="field1" id="field1" size="10" /></td>
-                </tr>	
+        <tr>
+               <td class="formRequiredNotice" width="5">&nbsp;</td>
+               <td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
+               <td class="formField">
+					<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
+				</td>
+        </tr>	
 		
 		<tr>
 			<td class="formTitle" height="20" colspan="6">&nbsp;</td>				
@@ -99,33 +144,43 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 			<td class="formField">
-				<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
-				<input class="actionButton" type="submit" value="Browse" />
+				<html:text styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/>
 			</td>			
 		</tr>		
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Title of Construct<br>(Enter info only when uploading image)</label></td>
-			<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+			<td class="formField">
+				<html:textarea styleClass="formUnFieldSized" property="title" rows="4" cols="32" name="formdata"/>
+			</td>
 		</tr>
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
-			<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+			<td class="formField">
+				<html:textarea styleClass="formFieldUnSized" property="descriptionOfConstruct"  rows="4" cols="32"  name="formdata"/>	
+			</td>
 		</tr>
 
 		<tr>
 			<td align="right" colspan="3">
-				<!-- action buttons begins -->
-				<table cellpadding="4" cellspacing="0" border="0">
-					<tr>
-						<td><input class="actionButton" type="submit" value="Submit" /></td>
-						<td><input class="actionButton" type="reset" value="Reset" /></td>
-					</tr>
-				</table>
-				<!-- action buttons end -->
+			<TABLE cellpadding="4" cellspacing="0" border="0">
+			
+				  <html:submit styleClass="actionButton">
+					  <bean:message key="button.submit"/>
+				  </html:submit>
+				  
+				  <html:reset styleClass="actionButton">
+				  	  <bean:message key="button.reset"/>
+  				  </html:reset>
+				
+				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
+				  <input type="hidden" name="aGenomicSegmentID" value="<%= aGenomicSegmentID %>">
+				  	
+				</html:form>			
+			</TABLE>
 			</td>
 		</tr>		
 

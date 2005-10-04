@@ -81,10 +81,22 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         inXenograft.setAtccNumber(inXenograftData.getATCCNumber());
         inXenograft.setCellAmount(inXenograftData.getCellAmount());
 
-        Taxon theTaxon = new Taxon();
-        theTaxon.setScientificName(inXenograftData.getHostScientificName());
-        theTaxon.setEthnicityStrain(inXenograftData.getHostEthinicityStrain());
+        //Taxon theTaxon = new Taxon();
+        //theTaxon.setScientificName(inXenograftData.getHostScientificName());
+        //theTaxon.setEthnicityStrain(inXenograftData.getHostEthinicityStrain());
 
+        // Find the matching taxon in the db and reuse it
+        Taxon theTaxon = new Taxon();
+        List taxonList = (List) TaxonManagerSingleton.instance().getAll(  );
+        
+        for( int i=0; i < taxonList.size(); i++ ) {
+        	theTaxon = (Taxon) taxonList.get(i);
+        	if ( theTaxon.getEthnicityStrain() != null ) {
+	        	if ( theTaxon.getEthnicityStrain().equals( inXenograftData.getHostEthinicityStrain() ))
+	        		break;
+        	}
+        }
+        
         if (inXenograftData.getOtherHostEthinicityStrain() != null) {
 
             // TODO: Send an email
@@ -95,7 +107,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         }
 
         // Taxon
-        inXenograft.setHostSpecies(theTaxon);
+        inXenograft.setHostSpecies( theTaxon );
         inXenograft.setOriginSpecies(inAnimalModel.getSpecies());
 
         // Convert String into a Date

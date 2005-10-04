@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.20 2005-09-28 15:13:57 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.21 2005-10-04 20:13:20 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.20  2005/09/28 15:13:57  schroedn
+ *  Merged changes, tested
+ *
  *  Revision 1.18  2005/09/22 15:17:20  georgeda
  *  More changes
  *
@@ -30,14 +33,18 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
+import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneDelivery;
 import gov.nih.nci.camod.domain.Publication;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -127,6 +134,44 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             xenoList.add(xenograft);
     	} 
         
+        
+        //Retrieve the list all SpontaneousMutations assoc with this AnimalModel
+        List spontaneousMutationList = animalModel.getSpontaneousMutationCollection();
+        List mutationList  = new ArrayList();
+        
+        for (int i = 0; i < spontaneousMutationList.size(); i++) {
+            SpontaneousMutation spontaneousMutation = (SpontaneousMutation) spontaneousMutationList.get(i);
+            
+            System.out.println("\tAdded spontaneousMutationList= " + spontaneousMutation.getName() );
+            
+            mutationList.add(spontaneousMutation);
+    	} 
+
+        //Retrieve the list all SpontaneousMutations assoc with this AnimalModel
+        List inducedMutationList = animalModel.getEngineeredGeneCollection();
+        List inducedList  = new ArrayList();
+        List targetedList = new ArrayList();
+        List segmentList = new ArrayList();
+        
+        for (int i = 0; i < inducedMutationList.size(); i++) {
+        	EngineeredGene inducedMutation = (EngineeredGene) inducedMutationList.get(i);       
+        	
+        	if ( inducedMutation.getMutationIdentifier().equals( "IM") ) {
+        		System.out.println("\tAdded inducedMutationList= " + inducedMutation.getName() );            
+        		inducedList.add(inducedMutation);
+        	}
+        	
+           	if ( inducedMutation.getMutationIdentifier().equals( "TM") ) {
+        		System.out.println("\tAdded inducedMutationList= " + inducedMutation.getName() );            
+        		targetedList.add(inducedMutation);
+        	}
+
+           	if ( inducedMutation.getMutationIdentifier().equals( "GS") ) {
+        		System.out.println("\tAdded inducedMutationList= " + inducedMutation.getName() );            
+        		segmentList.add(inducedMutation);
+        	}                      
+    	}
+        
         // Print the list of EnvironmentalFactors for the Cardiogenic
         // Interventions Section
         List tyList = animalModel.getTherapyCollection();
@@ -202,12 +247,14 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.PUBLICATION_LIST, pubList);
         request.getSession().setAttribute(Constants.Submit.GENEDELIVERY_LIST, geneList);
         request.getSession().setAttribute(Constants.Submit.XENOGRAFT_LIST, xenoList);
-       
-        request.getSession().setAttribute(Constants.Submit.CELLLINE_LIST, cellList);        
+        request.getSession().setAttribute(Constants.Submit.SPONTANEOUSMUTATION_LIST, mutationList);
+        request.getSession().setAttribute(Constants.Submit.INDUCEDMUTATION_LIST, inducedList);        
+        request.getSession().setAttribute(Constants.Submit.CELLLINE_LIST, cellList);
+        request.getSession().setAttribute(Constants.Submit.TARGETEDMODIFICATION_LIST, targetedList);
+        request.getSession().setAttribute(Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
         
-       // UserManager theUserManager = (UserManager) getBean("userManager");
-
-           // Set up the form. Should be only one coordinator
+            // UserManager theUserManager = (UserManager) getBean("userManager");
+            // Set up the form. Should be only one coordinator
             // Get the coordinator
             ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
             String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);

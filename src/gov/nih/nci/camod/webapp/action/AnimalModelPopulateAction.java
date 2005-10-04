@@ -119,17 +119,45 @@ public class AnimalModelPopulateAction extends BaseAction {
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
             NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
-			
-			//TODO: Get specific list for speciesName ( for submitModelCharacteristics ) 
+
 			List speciesList = (List) request.getAttribute( Constants.Dropdowns.SPECIESDROP );			
 			System.out.println( "speciesList.get(0):" + speciesList.size() );
 			
             NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString() );									
             NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 
-				
-			//Store the values for the drop down menus in a Constants variable, used in the JSP
-			//request.getSession().setAttribute( Constants.Dropdowns.SPECIESDROP, speciesList );
-			request.getSession().setAttribute( Constants.Dropdowns.STRAINDROP, "" );
-			//request.getSession().setAttribute( Constants.Dropdowns.SEXDISTRIBUTIONDROP, sexDistList );		  		
+//			request.getSession().setAttribute( Constants.Dropdowns.STRAINDROP, "" );
 	}	
+	
+	/**
+	 * Repopulate the Strain dropdown with it's matching species
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward setStrainDropdown( ActionMapping mapping, 
+										    ActionForm form,
+										    HttpServletRequest request,
+										    HttpServletResponse response )
+		throws Exception {			
+		
+		//XenograftForm xenograftForm = ( XenograftForm ) form;
+		ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;
+		
+		NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, modelChar.getScientificName() );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
+        
+        request.getSession().setAttribute( Constants.FORMDATA, modelChar );
+   	 	
+        String page = request.getParameter( "page" );
+        
+        if( page.equals("modelChar"))        	
+        	return mapping.findForward( "submitModelCharacteristics" );
+        else
+        	return mapping.findForward( "submitNewModel" );
+	}
 }

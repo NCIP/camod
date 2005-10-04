@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.32 2005-10-03 16:07:39 pandyas Exp $
+ * $Id: Constants.java,v 1.33 2005-10-04 20:09:41 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2005/10/03 16:07:39  pandyas
+ * modified histopathology constant name to reflect contents
+ *
  * Revision 1.31  2005/10/03 15:31:00  pandyas
  * added clinical marker and histopathology constants
  *
@@ -162,9 +165,9 @@ public class Constants {
         
     	public static final String ADD_BLANK_OPTION = "ADD_BLANK_OPTION";
         public static final String OTHER_OPTION = "Other";
-
         public static final String SPECIESDROP = "speciesdrop.db";
         public static final String STRAINDROP = "straindrop.db";
+        
         public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
         public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
         public static final String ADMINISTRATIVEROUTEDROP = "AdministrativeRoutes.txt";
@@ -183,6 +186,8 @@ public class Constants {
         public static final String NUTFACTORUNITSDROP = "NutFactorUnits.txt";
         public static final String RADIATIONUNITSDROP = "RadiationUnits.txt";        
         public static final String VIRALTREATUNITSDROP = "ViralTreatUnits.txt";
+        public static final String TARGETEDMODIFICATIONDROP = "TargetedModificationTypes.txt";
+        public static final String GENOMICSEGMENTDROP = "SegmentTypes.txt";
         
         // Specific to a single screen
         public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
@@ -196,6 +201,7 @@ public class Constants {
         public static final String VIRALVECTORDROP = "viralvectordrop.db";
         public static final String GRAFTTYPEDROP = "grafttypedrop.db";
         public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
+        public static final String INDUCEDMUTATIONDROP = "inducedmutationdrop.db";        
         
         // Query dropdowns
         public static final String CHEMICALDRUGQUERYDROP = "chemdrugquerydrop.db";
@@ -206,7 +212,7 @@ public class Constants {
         public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
         public static final String SPECIESQUERYDROP = "speciesquerydrop.db";
         public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
-        
+                
         // These two are used to display the species and strain currently in the AnimalModelCharacteristics        
         public static final String MODELSPECIES = "modelspecies";
         public static final String MODELSTRAIN = "modelstrain";
@@ -285,8 +291,10 @@ public class Constants {
         public static final String SURGERYOTHER_LIST = "surgeryother_list";
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
         public static final String XENOGRAFT_LIST = "xenograft_list";
-        public static final String HISTOPATHOLOGY_LIST = "histopathology_list";
-                
+        public static final String SPONTANEOUSMUTATION_LIST = "spontaneousmutation_list";
+        public static final String INDUCEDMUTATION_LIST = "inducedmutation_list";
+        public static final String TARGETEDMODIFICATION_LIST= "targetedmodification_list";
+        public static final String GENOMICSEGMENT_LIST = "genomicsegment_list";
         /**
          * Used to store a list of names for the Publication section of the
          * sidebar menu of the submission section

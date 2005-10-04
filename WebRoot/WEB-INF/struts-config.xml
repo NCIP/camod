@@ -975,6 +975,22 @@
     </action>     
      
      <!-- GenomicSegmentForm -->
+     <action path="/GenomicSegmentAction"
+	        type="gov.nih.nci.camod.webapp.action.GenomicSegmentAction"
+	        name="genomicSegmentForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitGenomicSegment">   	
+    </action>
+    
+    <action path="/GenomicSegmentPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.GenomicSegmentPopulateAction"
+    		name="genomicSegmentForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
      
      <!-- GrowthFactorForm -->
      <action path="/GrowthFactorAction"
@@ -1183,7 +1199,41 @@
     </action>
      
      <!-- SpontaneousMutationForm -->
+     <action path="/SpontaneousMutationAction"
+	        type="gov.nih.nci.camod.webapp.action.SpontaneousMutationAction"
+	        name="spontaneousMutationForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitSpontaneousMutation">   	
+    </action>
     
+    <action path="/SpontaneousMutationPopulateAction"
+	        type="gov.nih.nci.camod.webapp.action.SpontaneousMutationPopulateAction"
+	        name="spontaneousMutationForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"> 	
+    </action>  
+    
+     <!-- InducedMutationForm -->
+     <action path="/InducedMutationAction"
+	        type="gov.nih.nci.camod.webapp.action.InducedMutationAction"
+	        name="inducedMutationForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitInducedMutation">   	
+    </action>
+    
+    <action path="/InducedMutationPopulateAction"
+	        type="gov.nih.nci.camod.webapp.action.InducedMutationPopulateAction"
+	        name="inducedMutationForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"> 	
+    </action>  
+      
      <!-- SurgeryForm -->
      <action path="/SurgeryAction"
 	        type="gov.nih.nci.camod.webapp.action.SurgeryAction"
@@ -1203,7 +1253,23 @@
     </action>
     
      <!-- TargetedModificationForm -->
-     
+     <action path="/TargetedModificationAction"
+	        type="gov.nih.nci.camod.webapp.action.TargetedModificationAction"
+	        name="targetedModificationForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitTargetedModification">   	
+    </action>
+    
+    <action path="/TargetedModificationPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.TargetedModificationPopulateAction"
+    		name="targetedModificationForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
+    
      <!-- TherapyForm -->
           <action path="/TherapyAction"
 	        type="gov.nih.nci.camod.webapp.action.TherapyAction"

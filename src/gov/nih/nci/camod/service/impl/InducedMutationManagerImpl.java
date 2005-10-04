@@ -6,71 +6,67 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.service.InducedMutationManager;
-import gov.nih.nci.common.persistence.Persist;
-import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
+import gov.nih.nci.camod.webapp.form.InducedMutationForm;
+
 import java.util.List;
 
-/**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager {
 	
-	public List getAll() {		
-		List inducedMutations = null;
-		
-		try {
-			inducedMutations = Search.query(InducedMutation.class);
-		} catch (Exception e) {
-			System.out.println("Exception in InducedMutationManagerImpl.getAll");
-			e.printStackTrace();
-		}
-		
-		return inducedMutations;
-	}
-	
-	public InducedMutation get(String id) {
-		InducedMutation inducedMutation = null;
-		
-		try {
-			inducedMutation = (InducedMutation) Search.queryById(InducedMutation.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in InducedMutationManagerImpl.get");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in InducedMutationManagerImpl.get");
-			e.printStackTrace();
-		}
-		
-		return inducedMutation;
+    public List getAll() throws Exception {
+        log.trace("In InducedMutationManagerImpl.getAll");
+        return super.getAll(InducedMutation.class);
     }
 
-    public void save(InducedMutation inducedMutation) {    	
-    	try {
-			Persist.save(inducedMutation);			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in InducedMutationManagerImpl.save");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in InducedMutationManagerImpl.save");
-			e.printStackTrace();
-		}
+    public InducedMutation get(String id) throws Exception {
+        log.trace("In InducedMutationManagerImpl.get");
+        return (InducedMutation) super.get(id, InducedMutation.class);
     }
 
-    public void remove(String id) {    	
-    	try {
-			Persist.deleteById(InducedMutation.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in InducedMutationManagerImpl.remove");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in InducedMutationManagerImpl.remove");
-			e.printStackTrace();
-		}
+    public void save(InducedMutation InducedMutation) throws Exception {
+        log.trace("In InducedMutationManagerImpl.save");
+        super.save(InducedMutation);
     }
+
+    public void remove(String id) throws Exception {
+        log.trace("In InducedMutationManagerImpl.remove");
+        super.remove(id, InducedMutation.class);
+    }
+
+    public InducedMutation create(InducedMutationForm inInducedMutationForm, AnimalModel inAnimalModel) throws Exception {
+
+        log.trace("Entering InducedMutationManagerImpl.create");
+
+        InducedMutation theInducedMutation = new InducedMutation();
+
+        populateInducedMutation(inInducedMutationForm, theInducedMutation, inAnimalModel);
+       
+        log.trace("Exiting InducedMutationManagerImpl.create");
+        
+        return theInducedMutation;
+    }
+
+    public void update(InducedMutationForm inInducedMutationData, InducedMutation inInducedMutation, AnimalModel inAnimalModel)
+            throws Exception {
+
+        log.trace("Entering InducedMutationManagerImpl.update");
+        log.debug("Updating InducedMutationForm: " + inInducedMutation.getId());
+
+        // Populate w/ the new values and save
+        populateInducedMutation(inInducedMutationData, inInducedMutation, inAnimalModel);
+       // save(inInducedMutation);
+
+        log.trace("Exiting InducedMutationManagerImpl.update");
+    }
+
+    private void populateInducedMutation(InducedMutationForm inInducedMutationData, InducedMutation inInducedMutation, AnimalModel inAnimalModel)
+            throws Exception {
+    	
+        log.trace("Entering populateInducedMutation");
+        	
+        log.trace("Exiting populateInducedMutation");
+    }
+    
 }

@@ -38,6 +38,9 @@ public class GenomicSegmentForm extends BaseForm implements Serializable {
 	protected String fileServerLocation;
 	protected String title;
 	protected String description;
+	protected String DescriptionOfConstruct;
+	protected String genes;
+	protected String markers;
 	
 	/**
 	 * @return Returns the locationOfIntegration.
@@ -158,6 +161,25 @@ public class GenomicSegmentForm extends BaseForm implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getGenes() {
+		return genes;
+	}
+	public void setGenes(String genes) {
+		this.genes = genes;
+	}
+	public String getMarkers() {
+		return markers;
+	}
+	public void setMarkers(String markers) {
+		this.markers = markers;
+	}
+	public String getDescriptionOfConstruct() {
+		return DescriptionOfConstruct;
+	}
+	public void setDescriptionOfConstruct(String descriptionOfConstruct) {
+		DescriptionOfConstruct = descriptionOfConstruct;
 	}	
 	
 

@@ -39,6 +39,7 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 	protected String numberMGI;
 	protected String fileServerLocation;
 	protected String title;
+	protected String descriptionOfConstruct;
 	
 	/**
 	 * @return Returns the name.
@@ -159,6 +160,24 @@ public class TargetedModificationForm extends BaseForm implements Serializable {
 	 */
 	public void setNumberMGI(String numberMGI) {
 		this.numberMGI = numberMGI;
+	}
+	public String getFileServerLocation() {
+		return fileServerLocation;
+	}
+	public void setFileServerLocation(String fileServerLocation) {
+		this.fileServerLocation = fileServerLocation;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescriptionOfConstruct() {
+		return descriptionOfConstruct;
+	}
+	public void setDescriptionOfConstruct(String descriptionOfConstruct) {
+		this.descriptionOfConstruct = descriptionOfConstruct;
 	}
 
 }

@@ -1,5 +1,39 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
+
+<%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.TargetedModificationForm" %>	
+<%@ page import="gov.nih.nci.camod.Constants.*" %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
+<%
+	String aTargetedModificationID = request.getParameter( "aTargetedModificationID" );
+
+	//if aInducedMutationID is passed in, then we are dealing with a previously entered model and are editing it
+	//otherwise, create a new one
+	
+	String actionName = "TargetedModificationAction.do?method=save";
+	
+	if ( aTargetedModificationID != null )
+		actionName = "TargetedModificationAction.do?method=edit";
+%>
+
+<SCRIPT LANGUAGE="JavaScript">
+		
+	function chkOther( control ) {
+		ideControl = document.forms[0].otherType;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+</SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -18,45 +52,53 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Targeted Gene/Locus</label></td>
-		<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+		<td class="formRequiredLabel"><label for="field1">Targeted Gene/Locus:</label></td>
+		<td class="formField">
+			<html:form action="<%= actionName %>" focus="name">	
+			
+			<html:text styleClass="formFieldSized" property="name" size="10" name="formdata"/>		
+		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Type of Modification</label></td>
+		<td class="formRequiredLabel"><label for="field3">Type of Modification:</label></td>
 		<td class="formField">
-			<select class="formFieldSized" name="field3" id="field3" multiple="true" size="4">
-				<option value="option1">Null Mod</option>
-				<option value="option2">Amino Acid</option>
-				<option value="option3">Insertion</option>
-				<option value="option3">Misense</option>
-			</select>
+			<html:select styleClass="formFieldSized" size="1" property="modificationType" onchange="chkOther( this );" >
+				<html:options name="<%= Dropdowns.TARGETEDMODIFICATIONDROP %>" />										
+			</html:select>
+			<br>
+			-if category you are looking for is not listed, <br>select "Other" and enter the category in the text field below:
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other modification type</label></td>
-		<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+		<td class="formLabel"><label for="field1">Other modification type:</label></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="otherModificationType" disabled="true" size="10" name="formdata"/>	
+		</td>
 	</tr>
 
 	<tr>
-                <FORM name="input" action="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene" method="get">
+               
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene ID ( Entrez )</label></td>
-		<td class="formField"><input class="actionButton" type="reset" value="Find ID" />&nbsp;<input class="formFieldUnSized" type="text" name="field1" id="field1" size="10" /></td>
-                </FORM>
+		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="geneId" size="10" name="formdata"/>	
 	</tr>
+
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Genetic Background</td>
 		<td class="formField">
-			<label valign="TOP" for="field1">Donor (e.g. BAC library) &nbsp;</label><br><input class="formFieldSized3" type="text" name="field1" id="field1" size="10" />
+			<label valign="TOP" for="field1">ES Cell Line &nbsp;</label><br>
+				<html:text styleClass="formFieldSized" property="esCellLineName" size="10" name="formdata"/>
 			<br>
 			<br>
-			<label valign="TOP" for="field1">Recipient (ES cell line) &nbsp;</label><br><input class="formFieldSized3" type="text" name="field1" id="field1" size="10" />
+			<label valign="TOP" for="field1">Blastocyst&nbsp;</label><br>
+				<html:text styleClass="formFieldSized" property="blastocystName" size="10" name="formdata"/>
 		</td>
 	</tr>
 
@@ -64,28 +106,33 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Conditional?</td>
 		<td class="formField">
-			<input type="radio" id="radio1" name="radio5" checked="checked" /> <label for="field5">Conditional</label>
-			<br>
-			<input type="radio" id="radio2" name="radio5" /> <label for="field5">Not Conditional</label>
+			<html:radio property="conditionedBy" value="yes" /> Conditional 
+			<html:radio property="conditionedBy" value="no" /> Not Conditional  
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Conditional Description</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="description" size="10" name="formdata"/>
+		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Additional Features</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="comments" size="10" name="formdata"/>
+		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
-		<td class="formField"><input class="formFieldUnSized" type="text" name="field1" id="field1" size="10" /></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
+		</td>
 	</tr>		
 	
 	<tr>
@@ -95,33 +142,44 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
-		<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
-			<input class="actionButton" type="submit" value="Browse" />
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/>			
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Title of Construct <br>(enter info only when uploading image)</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:textarea styleClass="formUnFieldSized" property="title" rows="4" cols="30" name="formdata"/>
+		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Description of Construct<br>(enter info only when uploading image)</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldUnSized" property="descriptionOfConstruct"  rows="4" cols="30"  name="formdata"/>
+		</td>
 	</tr>
 
 	<tr>
 		<td align="right" colspan="3">
-			<!-- action buttons begins -->
 			<TABLE cellpadding="4" cellspacing="0" border="0">
-				<tr>
-					<td><input class="actionButton" type="submit" value="Submit" /></td>
-					<td><input class="actionButton" type="reset" value="Reset" /></td>
-				</tr>
+			
+				  <html:submit styleClass="actionButton">
+					  <bean:message key="button.submit"/>
+				  </html:submit>
+				  
+				  <html:reset styleClass="actionButton">
+				  	  <bean:message key="button.reset"/>
+  				  </html:reset>
+				
+				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
+				  <input type="hidden" name="aTargetedModificationID" value="<%= aTargetedModificationID %>">
+				  	
+				</html:form>			
 			</TABLE>
-			<!-- action buttons end -->
 		</td>
 	</tr>
 	</TABLE>

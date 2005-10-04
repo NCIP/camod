@@ -6,7 +6,11 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.webapp.form.GenomicSegmentForm;
+
 import java.util.List;
 
 /**
@@ -16,8 +20,10 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface GenomicSegmentManager {
-	public List getAll();
-	public GenomicSegment get(String id);
-    public void save(GenomicSegment genomicSegment);
-    public void remove(String id);
+	public List getAll() throws Exception;
+	public GenomicSegment get(String id) throws Exception;
+	public void save(GenomicSegment GenomicSegment) throws Exception;
+	public void remove(String id) throws Exception;
+	public EngineeredGene create(GenomicSegmentForm inGenomicSegmentForm, AnimalModel inAnimalModel) throws Exception;
+	public void update(GenomicSegmentForm inGenomicSegmentData, EngineeredGene inEngineeredGene, AnimalModel inAnimalModel) throws Exception;
 }

@@ -33,10 +33,9 @@
 	
 	function getOptions( control ) {
 		form = control.form;
-		form.action = "SetOptionsAction.do?page=submitModelCharacteristics&speciesName=";
-		form.action += control.value;
+		form.action = "AnimalModelPopulateAction.do?method=setStrainDropdown&page=modelChar";
 		form.submit();
-	}
+	}	
 	
 </SCRIPT>
 

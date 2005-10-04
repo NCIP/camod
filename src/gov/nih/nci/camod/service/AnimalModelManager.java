@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.14 2005-10-03 13:51:14 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.15 2005-10-04 20:10:16 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/10/03 13:51:14  georgeda
+ * Search changes
+ *
  * Revision 1.13  2005/09/30 18:57:35  pandyas
  * added for cell line
  *
@@ -16,6 +19,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/10/03 13:51:14  georgeda
+ * Search changes
+ *
  * Revision 1.13  2005/09/30 18:57:35  pandyas
  * added for cell line
  *
@@ -94,4 +100,12 @@ public interface AnimalModelManager {
     
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception;    
 
+    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationForm inSpontaneousMutationForm) throws Exception;
+    
+    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationForm inInducedMutationForm) throws Exception;
+    
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationForm inTargetedModificationForm) throws Exception;
+    
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentForm inGenomicSegmentForm) throws Exception;
+    
 }

@@ -5,6 +5,9 @@
 <%@ page import="gov.nih.nci.camod.domain.Therapy" %>
 <%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
 <%@ page import="gov.nih.nci.camod.domain.Xenograft" %>	
+<%@ page import="gov.nih.nci.camod.domain.InducedMutation" %>
+<%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>	
+<%@ page import="gov.nih.nci.camod.domain.SpontaneousMutation" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
@@ -22,12 +25,46 @@
 	<div id="menu2" class="masterTitle" onclick="SwitchMenu('sub2')" onmouseover="ChangeClass('menu2','masterTitleOver')" onmouseout="ChangeClass('menu2','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> GENETIC DESCRIPTION</div>
 	<span class="submasterdiv" id="sub2">
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitEngineeredTransgene">Enter Engineered Transgene</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitGenomicSegment">Enter Genomic Segment</html:link><br>
-			&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="submitGenomicSegment">Segment 12p</html:link><br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuDarkRed" action="submitAssocExpression">Enter Assoc Expression</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitTargetedModification">Enter Targeted Modification</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitInducedMutation">Enter Induced Mutation</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitSpontaneousMutation">Enter Spontaneous Mutation</html:link><br><br>
+		
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GenomicSegmentPopulateAction.do?method=dropdown">Enter Genomic Segment</html:link><br>
+				<logic:iterate id="aGenomicSegment" name="genomicsegment_list" type="EngineeredGene">
+			  &nbsp;&nbsp;&nbsp;&nbsp;
+			  <img src="images/aquadot.jpg" border="0"> 
+			      <html:link styleClass="subMenuBlue" action="GenomicSegmentPopulateAction.do?method=populate" paramId="aGenomicSegmentID" paramName="aGenomicSegment" paramProperty="id">
+			      		<bean:write name="aGenomicSegment" property="name" filter="true"/>
+			      </html:link><br>
+		</logic:iterate>		
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="images/plus.gif" border="0"><html:link styleClass="subMenuDarkRed" action="submitAssocExpression">Enter Assoc Expression</html:link><br>
+		
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="TargetedModificationPopulateAction.do?method=dropdown">Enter Targeted Modification</html:link><br>
+		<logic:iterate id="aTargetedModification" name="targetedmodification_list" type="EngineeredGene">
+			  &nbsp;&nbsp;&nbsp;&nbsp;
+			  <img src="images/aquadot.jpg" border="0"> 
+			      <html:link styleClass="subMenuBlue" action="TargetedModificationPopulateAction.do?method=populate" paramId="aTargetedModificationID" paramName="aTargetedModification" paramProperty="id">
+			      		<bean:write name="aTargetedModification" property="name" filter="true"/>
+			      </html:link><br>
+		</logic:iterate>
+		
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="InducedMutationPopulateAction.do?method=dropdown">Enter Induced Mutation</html:link><br>
+		<logic:iterate id="aInducedMutation" name="inducedmutation_list" type="EngineeredGene">
+			  &nbsp;&nbsp;&nbsp;&nbsp;
+			  <img src="images/aquadot.jpg" border="0"> 
+			      <html:link styleClass="subMenuBlue" action="InducedMutationPopulateAction.do?method=populate" paramId="aInducedMutationID" paramName="aInducedMutation" paramProperty="id">
+			      		<bean:write name="aInducedMutation" property="name" filter="true"/>
+			      </html:link><br>
+		</logic:iterate>
+		
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="SpontaneousMutationPopulateAction.do?method=dropdown">Enter Spontaneous Mutation</html:link><br><br>
+  	    <logic:iterate id="aSpontaneousMutation" name="spontaneousmutation_list" type="SpontaneousMutation">
+			  &nbsp;&nbsp;&nbsp;&nbsp;
+			  <img src="images/aquadot.jpg" border="0"> 
+			      <html:link styleClass="subMenuBlue" action="SpontaneousMutationPopulateAction.do?method=populate" paramId="aSpontaneousMutationID" paramName="aSpontaneousMutation" paramProperty="id">
+				      	<bean:write name="aSpontaneousMutation" property="name" filter="true"/>
+			      </html:link><br>
+		</logic:iterate>
+		
 	</span>
 
 	<div id="menu3" class="masterTitle" onclick="SwitchMenu('sub3')" onmouseover="ChangeClass('menu3','masterTitleOver')" onmouseout="ChangeClass('menu3','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> CARCINOGENIC INTERVENTIONS</div>

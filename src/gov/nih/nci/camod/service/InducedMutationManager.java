@@ -6,18 +6,18 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.webapp.form.InducedMutationForm;
+
 import java.util.List;
 
-/**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public interface InducedMutationManager {
-	public List getAll();
-	public InducedMutation get(String id);
-    public void save(InducedMutation inducedMutation);
-    public void remove(String id);
+	public List getAll() throws Exception;
+	public InducedMutation get(String id) throws Exception;
+	public void save(InducedMutation InducedMutation) throws Exception;
+	public void remove(String id) throws Exception;
+	public InducedMutation create(InducedMutationForm inInducedMutationData, AnimalModel inAnimalModel) throws Exception;
+	public void update(InducedMutationForm inInducedMutationData, InducedMutation inInducedMutation, AnimalModel inAnimalModel) throws Exception;
 }
+

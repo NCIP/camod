@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.21 2005-10-03 13:51:36 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.22 2005-10-04 20:12:52 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/10/03 13:51:36  georgeda
+ * Search changes
+ *
  * Revision 1.20  2005/09/30 18:59:06  pandyas
  * modified for cell line
  *
@@ -326,13 +329,25 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.setExperimentDesign(inModelCharacteristics.getExperimentDesign());
 
         // Create/reuse the taxon
-        Taxon theTaxon = inAnimalModel.getSpecies();
-        if (theTaxon == null) {
-            theTaxon = new Taxon();
+        //Taxon theTaxon = inAnimalModel.getSpecies();
+        //if (theTaxon == null) {
+        //    theTaxon = new Taxon();
+        // }
+        //theTaxon.setScientificName(inModelCharacteristics.getScientificName());
+        //theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
+        
+        // Find the matching taxon in the db and reuse it
+        Taxon theTaxon = new Taxon();
+        List taxonList = (List) TaxonManagerSingleton.instance().getAll(  );
+        
+        for( int i=0; i < taxonList.size(); i++ ) {
+        	theTaxon = (Taxon) taxonList.get(i);
+        	if ( theTaxon.getEthnicityStrain() != null ) {
+	        	if ( theTaxon.getEthnicityStrain().equals( inModelCharacteristics.getEthinicityStrain() ))
+	        		break;
+        	}
         }
-        theTaxon.setScientificName(inModelCharacteristics.getScientificName());
-        theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
-
+     
         // Problem when editing and this doesn't change, the admin will get two
         // emails about the same STRAIN
         if (inModelCharacteristics.getEthnicityStrainUnctrlVocab() != null) {
@@ -619,5 +634,63 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
 
         log.trace("Exiting saveCellLine");
+    }     
+    
+    /**
+     * Add a SpontaneousMutation
+     */   
+    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationForm inSpontaneousMutationForm) throws Exception {
+
+        log.trace( "Entering addGeneticDescription (spontaneousMutation)" );
+
+        SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create( inSpontaneousMutationForm, inAnimalModel );
+        System.out.println(theSpontaneousMutation.getName() );
+        
+        //inAnimalModel.addSpontaneousMutation( theSpontaneousMutation );
+        //save( inAnimalModel );
+
+        log.trace("Exiting addGeneticDescription (spontaneousMutation)");
+    }         
+    
+    /**
+     * Add a InducedMutation 
+     */   
+    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationForm inInducedMutationForm) throws Exception {
+
+        log.trace( "Entering addGeneticDescription (inducedMutation)" );
+
+        EngineeredGene theGene = InducedMutationManagerSingleton.instance().create( inInducedMutationForm, inAnimalModel );
+        System.out.println(theGene.getName() );
+        
+        //inAnimalModel.addEngineeredGene( theGene );
+        //save( inAnimalModel );
+
+        log.trace("Exiting addGeneticDescription (inducedMutation)");
+    }   
+    
+    /**
+     * Add a TargetedModification 
+     */   
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationForm inTargetedModificationForm) throws Exception {
+
+        log.trace( "Entering addGeneticDescription (TargetedModification)" );
+
+        EngineeredGene theGene = TargetedModificationManagerSingleton.instance().create( inTargetedModificationForm, inAnimalModel );
+        System.out.println(theGene.getName() );
+        //inAnimalModel.addEngineeredGene( theGene );
+        //save( inAnimalModel );
+
+        log.trace("Exiting addGeneticDescription (TargetedModification)");
+    }
+    
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentForm inGenomicSegmentForm) throws Exception {
+        log.trace( "Entering addGeneticDescription (GenomicSegment)" );
+
+        EngineeredGene theGene = GenomicSegmentManagerSingleton.instance().create( inGenomicSegmentForm, inAnimalModel );
+        System.out.println(theGene.getName() );
+        //inAnimalModel.addEngineeredGene( theGene );
+        //save( inAnimalModel );
+
+        log.trace("Exiting addGeneticDescription (GenomicSegment)");
     }
 }

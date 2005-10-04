@@ -52,8 +52,7 @@
 	
 	function getOptions( control ) {
 		form = control.form;
-		form.action  = "XenograftAction.do?method=SetStrainDropdown&speciesName=";
-		form.action += control.value;
+		form.action  = "XenograftPopulateAction.do?method=setStrainDropdown";
 		form.submit();
 	}		
 	
