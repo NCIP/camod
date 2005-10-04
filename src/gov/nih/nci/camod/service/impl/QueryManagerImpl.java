@@ -1,12 +1,9 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.8 2005-10-03 13:51:48 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.9 2005-10-04 20:19:43 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.7  2005/09/30 18:42:26  guruswas
- * intial implementation of drug screening search and display page
- *
  * Revision 1.6  2005/09/27 16:46:59  georgeda
  * Added environmental factor dropdown query
  *
@@ -48,329 +45,371 @@ import org.hibernate.Query;
  */
 public class QueryManagerImpl extends BaseManager {
 
-	/**
-	 * Return the list of environmental factor names
-	 * 
-	 * @param inType
-	 *            the type of environmental factor
-	 * 
-	 * @return a sorted list of unique environmental factors
-	 * @throws PersistenceException
-	 */
-	public List getEnvironmentalFactors(String inType) throws PersistenceException {
+    /**
+     * Return the list of environmental factor names
+     * 
+     * @param inType
+     *            the type of environmental factor
+     * 
+     * @return a sorted list of unique environmental factors
+     * @throws PersistenceException
+     */
+    public List getEnvironmentalFactors(String inType) throws PersistenceException {
 
-		log.trace("Entering QueryManagerImpl.getAdministrativeRoutes");
+        log.trace("Entering QueryManagerImpl.getAdministrativeRoutes");
 
-		// Format the query
-		HQLParameter[] theParams = new HQLParameter[1];
-		theParams[0] = new HQLParameter();
-		theParams[0].setName("type");
-		theParams[0].setValue(inType);
-		theParams[0].setType(Hibernate.STRING);
+        // Format the query
+        HQLParameter[] theParams = new HQLParameter[1];
+        theParams[0] = new HQLParameter();
+        theParams[0].setName("type");
+        theParams[0].setValue(inType);
+        theParams[0].setType(Hibernate.STRING);
 
-		String theHQLQuery = "select distinct ef.name from EnvironmentalFactor as ef where ef.type = :type and ef.name is not null order by ef.name asc ";
+        String theHQLQuery = "select distinct ef.name from EnvironmentalFactor as ef where ef.type = :type and ef.name is not null order by ef.name asc ";
 
-		List theList = Search.query(theHQLQuery, theParams);
+        List theList = Search.query(theHQLQuery, theParams);
 
-		log.debug("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
 
-		log.trace("Exiting QueryManagerImpl.getAdministrativeRoutes");
-		return theList;
-	}
+        log.trace("Exiting QueryManagerImpl.getAdministrativeRoutes");
+        return theList;
+    }
 
-	/**
-	 * Return the list of environmental factor names
-	 * 
-	 * @param inType
-	 *            the type of environmental factor
-	 * 
-	 * @return a sorted list of unique environmental factors
-	 * @throws PersistenceException
-	 */
-	public List getQueryOnlyEnvironmentalFactors(String inType) throws PersistenceException {
+    /**
+     * Return the list of environmental factor names
+     * 
+     * @param inType
+     *            the type of environmental factor
+     * 
+     * @return a sorted list of unique environmental factors
+     * @throws PersistenceException
+     */
+    public List getQueryOnlyEnvironmentalFactors(String inType) throws PersistenceException {
 
-		log.trace("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
-		ResultSet theResultSet = null;
-		List theEnvFactors = new ArrayList();
-		try {
+        log.trace("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
+        ResultSet theResultSet = null;
+        List theEnvFactors = new ArrayList();
+        try {
 
-			// Format the query
-			String theSQLQuery = "SELECT distinct ef.name " + "FROM env_factor ef " + "WHERE ef.type = ? "
-					+ "  AND ef.name IS NOT null " + "  AND ef.env_factor_id IN " + "    (SELECT t.env_factor_id "
-					+ "     FROM therapy t, animal_model_therapy at " + "     WHERE t.therapeutic_experiment = 0 "
-					+ "       AND t.therapy_id = at.therapy_id) " + "ORDER BY ef.name asc ";
+            // Format the query
+            String theSQLQuery = "SELECT distinct ef.name " + "FROM env_factor ef " + "WHERE ef.type = ? "
+                    + "  AND ef.name IS NOT null " + "  AND ef.env_factor_id IN (SELECT t.env_factor_id "
+                    + "     FROM therapy t, animal_model_therapy at WHERE t.therapeutic_experiment = 0 "
+                    + "       AND t.therapy_id = at.therapy_id) ORDER BY ef.name asc ";
 
-			Object[] theParams = new Object[1];
-			theParams[0] = inType;
-			theResultSet = Search.query(theSQLQuery, theParams);
+            Object[] theParams = new Object[1];
+            theParams[0] = inType;
+            theResultSet = Search.query(theSQLQuery, theParams);
 
-			while (theResultSet.next()) {
-				theEnvFactors.add(theResultSet.getString(1));
-			}
+            while (theResultSet.next()) {
+                theEnvFactors.add(theResultSet.getString(1));
+            }
 
-			log.trace("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
-		} catch (Exception e) {
-			log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
-			throw new PersistenceException("Exception in getQueryOnlyEnvironmentalFactors: " + e);
-		} finally {
-			if (theResultSet != null) {
-				try {
-					theResultSet.close();
-				} catch (Exception e) {
-				}
-			}
-		}
-		return theEnvFactors;
-	}
+            log.trace("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
+        } catch (Exception e) {
+            log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
+            throw new PersistenceException("Exception in getQueryOnlyEnvironmentalFactors: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return theEnvFactors;
+    }
 
-	/**
-	 * Return the list of species associated with animal models
-	 * 
-	 * @return a sorted list of unique species
-	 * 
-	 * @throws PersistenceException
-	 */
-	public List getQueryOnlySpecies() throws PersistenceException {
+    /**
+     * Return the list of environmental factor names which were used to induce a
+     * mutation
+     * 
+     * @return a sorted list of unique environmental factors
+     * @throws PersistenceException
+     */
+    public List getQueryOnlyInducedMutationAgents() throws PersistenceException {
 
-		log.trace("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
+        log.trace("Entering QueryManagerImpl.getQueryOnlyInducedMutationAgents");
+        ResultSet theResultSet = null;
+        List theAgents = new ArrayList();
+        try {
 
-		// Format the query
-		String theSQLString = "SELECT distinct scientific_name FROM taxon WHERE scientific_name IS NOT NULL AND taxon_id IN (select distinct taxon_id from abs_cancer_model)";
+            // Format the query
+            String theSQLQuery = "SELECT distinct ef.name " + "FROM env_factor ef, env_fac_ind_mutation im "
+                    + "WHERE ef.name IS NOT null " + "  AND ef.env_factor_id = im.env_factor_id";
 
-		ResultSet theResultSet = null;
+            Object[] theParams = new Object[0];
+            theResultSet = Search.query(theSQLQuery, theParams);
 
-		List theSpeciesList = new ArrayList();
+            while (theResultSet.next()) {
+                theAgents.add(theResultSet.getString(1));
+            }
 
-		try {
+            log.trace("Exiting QueryManagerImpl.getQueryOnlyInducedMutationAgents");
+        } catch (Exception e) {
+            log.error("Exception in getQueryOnlyInducedMutationAgents", e);
+            throw new PersistenceException("Exception in getQueryOnlyInducedMutationAgents: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return theAgents;
+    }
 
-			log.info("getModelsIds - SQL: " + theSQLString);
+    /**
+     * Return the list of species associated with animal models
+     * 
+     * @return a sorted list of unique species
+     * 
+     * @throws PersistenceException
+     */
+    public List getQueryOnlySpecies() throws PersistenceException {
 
-			Object[] params = new Object[0];
-			theResultSet = Search.query(theSQLString, params);
+        log.trace("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
 
-			while (theResultSet.next()) {
-				theSpeciesList.add(theResultSet.getString(1));
-			}
+        // Format the query
+        String theSQLString = "SELECT distinct scientific_name FROM taxon " +
+                "WHERE scientific_name IS NOT NULL " +
+                "    AND taxon_id IN (select distinct taxon_id from abs_cancer_model)";
 
-		} catch (Exception e) {
-			log.error("Exception in getQueryOnlySpecies", e);
-			throw new PersistenceException("Exception in getQueryOnlySpecies: " + e);
-		} finally {
-			if (theResultSet != null) {
-				try {
-					theResultSet.close();
-				} catch (Exception e) {
-				}
-			}
-		}
-		return theSpeciesList;
-	}
+        ResultSet theResultSet = null;
 
-	/**
-	 * Return the list of PI's sorted by last name
-	 * 
-	 * @return a sorted list of People objects
-	 * @throws PersistenceException
-	 */
-	public List getPrincipalInvestigators() throws PersistenceException {
+        List theSpeciesList = new ArrayList();
 
-		log.trace("Entering QueryManagerImpl.getPrincipalInvestigators");
+        try {
 
-		// Format the query
-		HQLParameter[] theParams = new HQLParameter[0];
-		String theHQLQuery = "from Person where is_principal_investigator = 1 order by last_name asc";
+            log.info("getModelsIds - SQL: " + theSQLString);
 
-		List theList = Search.query(theHQLQuery, theParams);
+            Object[] params = new Object[0];
+            theResultSet = Search.query(theSQLString, params);
 
-		log.debug("Found matching items: " + theList.size());
+            while (theResultSet.next()) {
+                theSpeciesList.add(theResultSet.getString(1));
+            }
 
-		log.trace("Exiting QueryManagerImpl.getPrincipalInvestigators");
-		return theList;
-	}
+        } catch (Exception e) {
+            log.error("Exception in getQueryOnlySpecies", e);
+            throw new PersistenceException("Exception in getQueryOnlySpecies: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return theSpeciesList;
+    }
 
-	/**
-	 * Return the list of species associated with animal models
-	 * 
-	 * @return a sorted list of unique species
-	 * 
-	 * @throws PersistenceException
-	 */
-	public List getQueryOnlyPrincipalInvestigators() throws PersistenceException {
+    /**
+     * Return the list of PI's sorted by last name
+     * 
+     * @return a sorted list of People objects
+     * @throws PersistenceException
+     */
+    public List getPrincipalInvestigators() throws PersistenceException {
 
-		log.trace("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
+        log.trace("Entering QueryManagerImpl.getPrincipalInvestigators");
 
-		// Format the query
-		String theSQLString = "SELECT last_name, first_name "
-				+ "FROM party "
-				+ "WHERE is_principal_investigator = 1 "
-				+ "  AND first_name IS NOT NULL "
-				+ "  AND last_name IS NOT NULL "
-				+ "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model WHERE state = 'Edited-approved')"
-				+ "ORDER BY last_name ASC";
+        // Format the query
+        HQLParameter[] theParams = new HQLParameter[0];
+        String theHQLQuery = "from Person where is_principal_investigator = 1 order by last_name asc";
 
-		ResultSet theResultSet = null;
+        List theList = Search.query(theHQLQuery, theParams);
 
-		List thePIList = new ArrayList();
+        log.debug("Found matching items: " + theList.size());
 
-		try {
+        log.trace("Exiting QueryManagerImpl.getPrincipalInvestigators");
+        return theList;
+    }
 
-			log.info("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
+    /**
+     * Return the list of species associated with animal models
+     * 
+     * @return a sorted list of unique species
+     * 
+     * @throws PersistenceException
+     */
+    public List getQueryOnlyPrincipalInvestigators() throws PersistenceException {
 
-			Object[] params = new Object[0];
-			theResultSet = Search.query(theSQLString, params);
+        log.trace("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
 
-			while (theResultSet.next()) {
-				String thePIEntry = theResultSet.getString(1) + "," + theResultSet.getString(2);
-				thePIList.add(thePIEntry);
-			}
+        // Format the query
+        String theSQLString = "SELECT last_name, first_name "
+                + "FROM party "
+                + "WHERE is_principal_investigator = 1 "
+                + "  AND first_name IS NOT NULL "
+                + "  AND last_name IS NOT NULL "
+                + "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model WHERE state = 'Edited-approved')"
+                + "ORDER BY last_name ASC";
 
-		} catch (Exception e) {
-			log.error("Exception in getQueryOnlyPrincipalInvestigators", e);
-			throw new PersistenceException("Exception in getQueryOnlyPrincipalInvestigators: " + e);
-		} finally {
-			if (theResultSet != null) {
-				try {
-					theResultSet.close();
-				} catch (Exception e) {
-				}
-			}
-		}
-		return thePIList;
-	}
+        ResultSet theResultSet = null;
 
-	/**
-	 * Return the latest log for an animal model
-	 * 
-	 * @param inModel
-	 *            the animal model to get the latest log for
-	 * 
-	 * @return the current log for an animal model
-	 * @throws PersistenceException
-	 */
-	public Log getCurrentLog(AnimalModel inModel) throws PersistenceException {
+        List thePIList = new ArrayList();
 
-		log.trace("Entering QueryManagerImpl.getCurrentLog");
+        try {
 
-		HQLParameter[] theParams = new HQLParameter[1];
-		theParams[0] = new HQLParameter();
-		theParams[0].setName("abs_cancer_model_id");
-		theParams[0].setValue(inModel.getId());
-		theParams[0].setType(Hibernate.LONG);
+            log.info("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
 
-		String theHQLQuery = "from Log where abs_cancer_model_id = :abs_cancer_model_id order by timestamp desc";
-		log.debug("The HQL query: " + theHQLQuery);
-		List theLogs = Search.query(theHQLQuery, theParams);
+            Object[] params = new Object[0];
+            theResultSet = Search.query(theSQLString, params);
 
-		Log theLog = null;
-		if (theLogs != null && theLogs.size() > 0) {
-			theLog = (Log) theLogs.get(0);
-			log.debug("Found a matching object: " + theLog.getId());
-		} else {
-			log.debug("No object found.");
-		}
+            while (theResultSet.next()) {
+                String thePIEntry = theResultSet.getString(1) + "," + theResultSet.getString(2);
+                thePIList.add(thePIEntry);
+            }
 
-		log.trace("Exiting QueryManagerImpl.getCurrentLog");
+        } catch (Exception e) {
+            log.error("Exception in getQueryOnlyPrincipalInvestigators", e);
+            throw new PersistenceException("Exception in getQueryOnlyPrincipalInvestigators: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return thePIList;
+    }
 
-		return theLog;
-	}
+    /**
+     * Return the latest log for an animal model
+     * 
+     * @param inModel
+     *            the animal model to get the latest log for
+     * 
+     * @return the current log for an animal model
+     * @throws PersistenceException
+     */
+    public Log getCurrentLog(AnimalModel inModel) throws PersistenceException {
 
-	/**
-	 * Return the latest log for an animal model/user combo
-	 * 
-	 * @param inModel
-	 *            the animal model to get the latest log for
-	 * @param inUser
-	 *            the user to get the latest log for
-	 * 
-	 * @return the current log for an animal model/user combination
-	 * @throws PersistenceException
-	 */
-	public Log getCurrentLogForUser(AnimalModel inModel, Person inUser) throws PersistenceException {
+        log.trace("Entering QueryManagerImpl.getCurrentLog");
 
-		log.trace("Entering QueryManagerImpl.getCurrentLogForUser");
+        HQLParameter[] theParams = new HQLParameter[1];
+        theParams[0] = new HQLParameter();
+        theParams[0].setName("abs_cancer_model_id");
+        theParams[0].setValue(inModel.getId());
+        theParams[0].setType(Hibernate.LONG);
 
-		// Format the query
-		HQLParameter[] theParams = new HQLParameter[2];
-		theParams[0] = new HQLParameter();
-		theParams[0].setName("abs_cancer_model_id");
-		theParams[0].setValue(inModel.getId());
-		theParams[0].setType(Hibernate.LONG);
-		theParams[1] = new HQLParameter();
-		theParams[1].setName("party_id");
-		theParams[1].setValue(inUser.getId());
-		theParams[1].setType(Hibernate.LONG);
+        String theHQLQuery = "from Log where abs_cancer_model_id = :abs_cancer_model_id order by timestamp desc";
+        log.debug("The HQL query: " + theHQLQuery);
+        List theLogs = Search.query(theHQLQuery, theParams);
 
-		String theHQLQuery = "from Log where abs_cancer_model_id = :abs_cancer_model_id and party_id = :party_id order by timestamp desc";
-		log.debug("the HQL Query: " + theHQLQuery);
-		List theLogs = Search.query(theHQLQuery, theParams);
+        Log theLog = null;
+        if (theLogs != null && theLogs.size() > 0) {
+            theLog = (Log) theLogs.get(0);
+            log.debug("Found a matching object: " + theLog.getId());
+        } else {
+            log.debug("No object found.");
+        }
 
-		Log theLog = null;
-		if (theLogs != null && theLogs.size() > 0) {
-			theLog = (Log) theLogs.get(0);
-			log.debug("Found a matching object: " + theLog.getId());
-		} else {
-			log.debug("No object found.");
-		}
+        log.trace("Exiting QueryManagerImpl.getCurrentLog");
 
-		log.trace("Exiting QueryManagerImpl.getCurrentLogForUser");
-		return theLog;
-	}
+        return theLog;
+    }
 
-	/**
-	 * Get yeast screen result data (ave inibition etc.) for a given Agent
-	 * (drug)
-	 * 
-	 * @param agent
-	 *            refers to the compound that was used in the yeast experiment
-	 * @param stage
-	 *            is the stage of the experiment (0, 1, or 2)
-	 * 
-	 * @return the results
-	 * @throws PersistenceException
-	 */
-	public DrugScreenResult getYeastScreenResults(Agent agent, String stage) throws PersistenceException {
-		DrugScreenResult dsr = new DrugScreenResult();
+    /**
+     * Return the latest log for an animal model/user combo
+     * 
+     * @param inModel
+     *            the animal model to get the latest log for
+     * @param inUser
+     *            the user to get the latest log for
+     * 
+     * @return the current log for an animal model/user combination
+     * @throws PersistenceException
+     */
+    public Log getCurrentLogForUser(AnimalModel inModel, Person inUser) throws PersistenceException {
 
-		ResultSet theResultSet = null;
-		try {
+        log.trace("Entering QueryManagerImpl.getCurrentLogForUser");
 
-			String theSQLString = "select tx.ethnicity_strain," + "\n" + "       t.dosage," + "\n"
-					+ "       sr.aveinh aveinh," + "\n" + "       sr.diffinh diffinh" + "\n"
-					+ "  from screening_Result sr," + "\n" + "       env_factor a," + "\n"
-					+ "       YST_MDL_SCRNING_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n"
-					+ "       treatment t," + "\n" + "       taxon tx" + "\n" + " where sr.agent_id = a.env_factor_id"
-					+ "\n" + "   and sr.screening_result_id = ymsr.screening_result_id" + "\n"
-					+ "   and sr.treatment_id = t.treatment_id" + "\n"
-					+ "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n"
-					+ "   and acm.taxon_id = tx.taxon_id" + "\n" + "   and a.nsc_number = ?" + "\n"
-					+ "   and sr.stage = ?" + "\n" + " order by 1, 2";
-			log.info("getYeastScreenResults - SQL: " + theSQLString);
+        // Format the query
+        HQLParameter[] theParams = new HQLParameter[2];
+        theParams[0] = new HQLParameter();
+        theParams[0].setName("abs_cancer_model_id");
+        theParams[0].setValue(inModel.getId());
+        theParams[0].setType(Hibernate.LONG);
+        theParams[1] = new HQLParameter();
+        theParams[1].setName("party_id");
+        theParams[1].setValue(inUser.getId());
+        theParams[1].setType(Hibernate.LONG);
 
-			Object[] params = new Object[2];
-			params[0] = agent.getNscNumber();
-			params[1] = stage;
-			theResultSet = Search.query(theSQLString, params);
-			while (theResultSet.next()) {
-				final String strain = theResultSet.getString(1);
-				final String dosage = theResultSet.getString(2);
-				final float aveinh = theResultSet.getFloat(3);
-				final float diffinh = theResultSet.getFloat(4);
-				dsr.addEntry(strain, dosage, aveinh, diffinh);
-			}
-			log.info("Got " + dsr.strainCount + " strains");
-		} catch (Exception e) {
-			log.error("Exception in getYeastScreenResults", e);
-			throw new PersistenceException("Exception in getYeastScreenResults: " + e);
-		} finally {
-			if (theResultSet != null) {
-				try {
-					theResultSet.close();
-				} catch (Exception e) {
-				}
-			}
-		}
-		return dsr;
-	}
+        String theHQLQuery = "from Log where abs_cancer_model_id = :abs_cancer_model_id and party_id = :party_id order by timestamp desc";
+        log.debug("the HQL Query: " + theHQLQuery);
+        List theLogs = Search.query(theHQLQuery, theParams);
+
+        Log theLog = null;
+        if (theLogs != null && theLogs.size() > 0) {
+            theLog = (Log) theLogs.get(0);
+            log.debug("Found a matching object: " + theLog.getId());
+        } else {
+            log.debug("No object found.");
+        }
+
+        log.trace("Exiting QueryManagerImpl.getCurrentLogForUser");
+        return theLog;
+    }
+
+    /**
+     * Get yeast screen result data (ave inibition etc.) for a given Agent
+     * (drug)
+     * 
+     * @param agent
+     *            refers to the compound that was used in the yeast experiment
+     * @param stage
+     *            is the stage of the experiment (0, 1, or 2)
+     * 
+     * @return the results
+     * @throws PersistenceException
+     */
+    public DrugScreenResult getYeastScreenResults(Agent agent, String stage) throws PersistenceException {
+        DrugScreenResult dsr = new DrugScreenResult();
+
+        ResultSet theResultSet = null;
+        try {
+
+            String theSQLString = "select tx.ethnicity_strain," + "\n" + "       t.dosage," + "\n"
+                    + "       sr.aveinh aveinh," + "\n" + "       sr.diffinh diffinh" + "\n"
+                    + "  from screening_Result sr," + "\n" + "       env_factor a," + "\n"
+                    + "       YST_MDL_SCRNING_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n"
+                    + "       treatment t," + "\n" + "       taxon tx" + "\n" + " where sr.agent_id = a.env_factor_id"
+                    + "\n" + "   and sr.screening_result_id = ymsr.screening_result_id" + "\n"
+                    + "   and sr.treatment_id = t.treatment_id" + "\n"
+                    + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n"
+                    + "   and acm.taxon_id = tx.taxon_id" + "\n" + "   and a.nsc_number = ?" + "\n"
+                    + "   and sr.stage = ?" + "\n" + " order by 1, 2";
+            log.info("getYeastScreenResults - SQL: " + theSQLString);
+
+            Object[] params = new Object[2];
+            params[0] = agent.getNscNumber();
+            params[1] = stage;
+            theResultSet = Search.query(theSQLString, params);
+            while (theResultSet.next()) {
+                final String strain = theResultSet.getString(1);
+                final String dosage = theResultSet.getString(2);
+                final float aveinh = theResultSet.getFloat(3);
+                final float diffinh = theResultSet.getFloat(4);
+                dsr.addEntry(strain, dosage, aveinh, diffinh);
+            }
+            log.info("Got " + dsr.strainCount + " strains");
+        } catch (Exception e) {
+            log.error("Exception in getYeastScreenResults", e);
+            throw new PersistenceException("Exception in getYeastScreenResults: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return dsr;
+    }
 
     /**
      * Get the invivo (Xenograft) data (from DTP) for a given Agent.nscNumber
@@ -390,7 +429,7 @@ public class QueryManagerImpl extends BaseManager {
         ResultSet theResultSet = null;
         try {
 
-            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor || ' ' || acm.ADMINISTRATIVE_SITE || ' '," + "\n"
+            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," + "\n"
                     + "       tx.ethnicity_strain," + "\n" + "       count(*)" + "\n" + "  from invivo_Result sr,"
                     + "\n" + "       env_factor a," + "\n" + "       XENOGRAFT_INVIVO_RESULT ymsr," + "\n"
                     + "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "       taxon tx" + "\n"
@@ -399,8 +438,8 @@ public class QueryManagerImpl extends BaseManager {
                     + "   and sr.treatment_id = t.treatment_id" + "\n"
                     + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n"
                     + "   and acm.taxon_id = tx.taxon_id" + "\n" + "   and a.nsc_number = ?" + "\n"
-                    + " group by acm.abs_cancer_model_id, acm.model_descriptor || ' ' || acm.ADMINISTRATIVE_SITE || ' ', tx.ethnicity_strain" + "\n"
-                    + " order by 2, 3";
+                    + " group by acm.abs_cancer_model_id, acm.model_descriptor, tx.ethnicity_strain" + "\n"
+                    + " order by 3, 2";
             log.info("getInvivoResults - SQL: " + theSQLString);
 
             Object[] params = new Object[1];
@@ -430,286 +469,385 @@ public class QueryManagerImpl extends BaseManager {
         return results;
     }
 
-	/**
-	 * Get the model id's for any model that has a histopathology associated
-	 * with a specific organ.
-	 * 
-	 * @param inOrgan
-	 *            the organ to search for
-	 * 
-	 * @return a list of matching model id
-	 * 
-	 * @throws PersistenceException
-	 */
-	private String getModelIdsForHistopathologyOrgan(String inOrgan) throws PersistenceException {
+    /**
+     * Get the model id's for any model that has a histopathology associated
+     * with a specific organ.
+     * 
+     * @param inOrgan
+     *            the organ to search for
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForHistopathologyOrgan(String inConceptCodes) throws PersistenceException {
 
-		String theSQLString = "SELECT ani_hist.abs_cancer_model_id " + "FROM ani_mod_histopathology ani_hist "
-				+ "WHERE ani_hist.histopathology_id IN " + "    (SELECT h.histopathology_id "
-				+ "     FROM histopathology h, organ_histopathology oh, organ o "
-				+ "     WHERE h.histopathology_id = oh.histopathology_id " + "         AND oh.organ_id = o.organ_id "
-				+ "         AND o.name LIKE '%" + inOrgan + "%')";
+        String theConceptCodeList = "";
 
-		return getModelIds(theSQLString);
+        StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
 
-	}
+        while (theTokenizer.hasMoreElements()) {
+            theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
 
-	/**
-	 * Get the model id's for any model that has a cellline w/ a matching name
-	 * 
-	 * @param inCellLineName
-	 *            the text to search for in the cell-line
-	 * 
-	 * @return a list of matching model id
-	 * 
-	 * @throws PersistenceException
-	 */
-	private String getModelIdsForCellLine(String inCellLineName) throws PersistenceException {
+            // Only tack on a , if it's not the last element
+            if (theTokenizer.hasMoreElements()) {
+                theConceptCodeList += ",";
+            }
+        }
 
-		String theSQLString = "SELECT ani_cell.abs_cancer_model_id " + "FROM ani_mod_cell_line ani_cell "
-				+ "WHERE ani_cell.cell_line_id IN " + "    (SELECT c.cell_line_id " + "     FROM cell_line c "
-				+ "     WHERE c.name LIKE '%" + inCellLineName + "%')";
+        String theSQLString = "SELECT distinct ani_hist.abs_cancer_model_id " + "FROM ani_mod_histopathology ani_hist "
+                + "WHERE ani_hist.histopathology_id IN (SELECT h.histopathology_id "
+                + "     FROM histopathology h, organ_histopathology oh, organ o "
+                + "     WHERE h.histopathology_id = oh.histopathology_id AND oh.organ_id = o.organ_id "
+                + "         AND o.concept_code IN (" + theConceptCodeList + "))";
 
-		return getModelIds(theSQLString);
+        Object[] theParams = new Object[0];
+        return getModelIds(theSQLString, theParams);
 
-	}
+    }
 
-	/**
-	 * Get the model id's for any model that has a histopathology associated
-	 * with a specific organ.
-	 * 
-	 * @param inDisease
-	 *            the disease to search for
-	 * 
-	 * @return a list of matching model id
-	 * 
-	 * @throws PersistenceException
-	 */
-	private String getModelIdsForHistopathologyDisease(String inDisease) throws PersistenceException {
+    /**
+     * Get the model id's for any model that has a cellline w/ a matching name
+     * 
+     * @param inCellLineName
+     *            the text to search for in the cell-line
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForCellLine(String inCellLineName) throws PersistenceException {
 
-		String theSQLString = "SELECT ani_hist.abs_cancer_model_id " + "FROM ani_mod_histopathology ani_hist "
-				+ "WHERE ani_hist.histopathology_id IN " + "    (SELECT h.histopathology_id "
-				+ "     FROM histopathology h, histopathology_disease hd, disease d "
-				+ "     WHERE h.histopathology_id = hd.histopathology_id "
-				+ "         AND hd.disease_id = d.disease_id " + "         AND d.name LIKE '%" + inDisease + "%')";
+        String theSQLString = "SELECT distinct ani_cell.abs_cancer_model_id FROM ani_mod_cell_line ani_cell "
+                + "WHERE ani_cell.cell_line_id IN (SELECT c.cell_line_id FROM cell_line c "
+                + "     WHERE c.name LIKE ?)";
 
-		return getModelIds(theSQLString);
+        Object[] theParams = new Object[1];
+        theParams[0] = "%" + inCellLineName + "%";
+        return getModelIds(theSQLString, theParams);
 
-	}
+    }
 
-	/**
-	 * Get the model id's for any model that has a histopathology associated
-	 * with a specific organ.
-	 * 
-	 * @param inType
-	 *            the EF type
-	 * @param inName
-	 *            the name to look for
-	 * 
-	 * @return a list of matching model id
-	 * 
-	 * @throws PersistenceException
-	 */
-	private String getModelIdsForEnvironmentalFactor(String inType, String inName) throws PersistenceException {
+    /**
+     * Get the model id's for any model that has a histopathology associated
+     * with a specific organ.
+     * 
+     * @param inDisease
+     *            the disease to search for
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForHistopathologyDisease(String inConceptCodes) throws PersistenceException {
 
-		String theSQLString = "SELECT ani_th.abs_cancer_model_id " + "FROM animal_model_therapy ani_th "
-				+ "WHERE ani_th.therapy_id IN " + "    (SELECT t.therapy_id " + "     FROM therapy t, env_factor ef"
-				+ "     WHERE t.env_factor_id = ef.env_factor_id AND ef.name = '" + inName + "')";
+        String theConceptCodeList = "";
 
-		return getModelIds(theSQLString);
-	}
+        StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
 
-	public List searchForAnimalModels(SearchData inSearchData) throws Exception {
+        while (theTokenizer.hasMoreElements()) {
+            theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
 
-		List theAnimalModels = null;
+            // Only tack on a , if it's not the last element
+            if (theTokenizer.hasMoreElements()) {
+                theConceptCodeList += ",";
+            }
+        }
 
-		System.out.println("Search data: " + inSearchData.getModelDescriptor());
-		System.out.println("Search data: " + inSearchData.getSpecies());
-		System.out.println("Search data: " + inSearchData.getPiName());
+        String theSQLString = "SELECT distinct ani_hist.abs_cancer_model_id " + "FROM ani_mod_histopathology ani_hist "
+                + "WHERE ani_hist.histopathology_id IN (SELECT h.histopathology_id "
+                + "     FROM histopathology h, histopathology_disease hd, disease d "
+                + "     WHERE h.histopathology_id = hd.histopathology_id "
+                + "         AND hd.disease_id = d.disease_id AND d.concept_code IN (" + theConceptCodeList + "))";
 
-		String theHQLQuery = "from AnimalModel as am where am.state = 'Edited-approved' ";
+        Object[] theParams = new Object[0];
+        return getModelIds(theSQLString, theParams);
 
-		// PI criteria
-		if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0) {
+    }
 
-			StringTokenizer theTokenizer = new StringTokenizer(inSearchData.getPiName());
-			String theLastName = theTokenizer.nextToken(",").trim();
-			String theFirstName = theTokenizer.nextToken().trim();
+    /**
+     * Get the models with the associated engineered gene
+     * 
+     * @param inGeneName
+     *            the name of the transgene or targeted modification
+     * 
+     * @param isEngineeredTransgene
+     *            are we looking for a transgene?
+     * 
+     * @param isEngineeredTransgene
+     *            are we looking for an induced mutation?
+     * 
+     * @param inGenomicSegDesignator
+     *            the name of the genomic segment designator
+     * 
+     * @param inInducedMutationAgent
+     *            the name of Agent which induced the mutation. Exact match.
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     * 
+     */
+    private String getModelIdsForEngineeredGenes(String inGeneName, boolean isEngineeredTransgene,
+            boolean isTargetedModification, String inGenomicSegDesignator, String inInducedMutationAgent)
+            throws PersistenceException {
 
-			theHQLQuery += " AND am.principalInvestigator IN (from Person as p where p.lastName = '" + theLastName
-					+ "' AND p.firstName = '" + theFirstName + "')";
-		}
+        List theList = new ArrayList();
 
-		// Model descriptor criteria
-		if (inSearchData.getModelDescriptor() != null && inSearchData.getModelDescriptor().length() > 0) {
+        String theSQLString = "SELECT distinct ani_ge.abs_cancer_model_id "
+                + "FROM ani_mod_engineered_gene ani_ge WHERE ";
 
-			theHQLQuery += " AND am.modelDescriptor like '%" + inSearchData.getModelDescriptor() + "%'";
-		}
+        String OR = " ";
 
-		// Species criteria
-		if (inSearchData.getSpecies() != null && inSearchData.getSpecies().length() > 0) {
+        if (isEngineeredTransgene == true) {
+            theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
+                    + " FROM engineered_gene WHERE name LIKE ? AND engineered_gene_type = 'T')";
+            OR = " OR ";
+            theList.add("%" + inGeneName + "%");
+        }
+        if (isTargetedModification == true) {
+            theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
+                    + " FROM engineered_gene WHERE name LIKE ? AND engineered_gene_type = 'TM')";
+            OR = " OR ";
+            theList.add("%" + inGeneName + "%");
+        }
+        if (inInducedMutationAgent != null) {
+            theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
+                    + " FROM engineered_gene WHERE engineered_gene_id IN ("
+                    + " SELECT distinct im.engineered_gene_id FROM env_factor ef, env_fac_ind_mutation im "
+                    + " WHERE ef.name = ? "
+                    + " AND ef.env_factor_id = im.env_factor_id) AND engineered_gene_type = 'IM')";
+            OR = " OR ";
+            theList.add(inInducedMutationAgent);
+        }
 
-			theHQLQuery += "AND am.species IN (from Taxon as t where t.scientificName = '" + inSearchData.getSpecies()
-					+ "')";
-		}
+        // Convert the params
+        Object[] theParams = new Object[theList.size()];
+        for (int i = 0; i < theList.size(); i++) {
+            theParams[i] = theList.get(i);
+        }
 
-		// Search for organ
-		if (inSearchData.getOrgan() != null && inSearchData.getOrgan().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(inSearchData.getOrgan())
-					+ ")";
-		}
+        return getModelIds(theSQLString, theParams);
+    }
 
-		// Search for disease
-		if (inSearchData.getDisease() != null && inSearchData.getDisease().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForHistopathologyDisease(inSearchData.getDisease()) + ")";
-		}
+    /**
+     * Get the model id's for any model that has a histopathology associated
+     * with a specific organ.
+     * 
+     * @param inType
+     *            the EF type
+     * @param inName
+     *            the name to look for
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForEnvironmentalFactor(String inType, String inName) throws PersistenceException {
 
-		// ///////////////////////////////////////
-		// Carcinogenic interventions
-		// ///////////////////////////////////////
+        String theSQLString = "SELECT distinct ani_th.abs_cancer_model_id " + "FROM animal_model_therapy ani_th "
+                + "WHERE ani_th.therapy_id IN (SELECT t.therapy_id FROM therapy t, env_factor ef"
+                + "     WHERE t.env_factor_id = ef.env_factor_id AND ef.name = ? AND ef.type = ?)";
 
-		// Search for chemical/drug
-		if (inSearchData.getChemicalDrug() != null && inSearchData.getChemicalDrug().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEnvironmentalFactor("Chemical / Drug", inSearchData.getChemicalDrug()) + ")";
-		}
+        Object[] theParams = new Object[2];
+        theParams[0] = inName;
+        theParams[1] = inType;
+        return getModelIds(theSQLString, theParams);
+    }
 
-		// Search for Surgery
-		if (inSearchData.getSurgery() != null && inSearchData.getSurgery().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEnvironmentalFactor("Surgery", inSearchData.getSurgery()) + ")";
-		}
+    public List searchForAnimalModels(SearchData inSearchData) throws Exception {
 
-		// Search for Hormone
-		if (inSearchData.getHormone() != null && inSearchData.getHormone().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEnvironmentalFactor("Hormone", inSearchData.getHormone()) + ")";
-		}
+        log.trace("Entering searchForAnimalModels");
 
-		// Search for Growth Factor
-		if (inSearchData.getGrowthFactor() != null && inSearchData.getGrowthFactor().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEnvironmentalFactor("Growth Factor", inSearchData.getGrowthFactor()) + ")";
-		}
+        List theAnimalModels = null;
 
-		// Search for Radiation
-		if (inSearchData.getRadiation() != null && inSearchData.getRadiation().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEnvironmentalFactor("Radiation", inSearchData.getRadiation()) + ")";
-		}
+        String theHQLQuery = "from AnimalModel as am where am.state = 'Edited-approved' ";
 
-		// Search for Viral
-		if (inSearchData.getViral() != null && inSearchData.getViral().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForEnvironmentalFactor("Viral", inSearchData.getViral()) + ")";
-		}
+        // PI criteria
+        if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0) {
 
-		// Search for phenotype
-		if (inSearchData.getPhenotype() != null && inSearchData.getPhenotype().length() > 0) {
-			theHQLQuery += " AND am.phenotype IN (from Phenotype as p where p.description like '%"
-					+ inSearchData.getPhenotype() + "%')";
-		}
+            StringTokenizer theTokenizer = new StringTokenizer(inSearchData.getPiName());
+            String theLastName = theTokenizer.nextToken(",").trim();
+            String theFirstName = theTokenizer.nextToken().trim();
 
-		// Search for cellline
-		if (inSearchData.getCellLine() != null && inSearchData.getCellLine().length() > 0) {
-			theHQLQuery += " AND abs_cancer_model_id IN (" + getModelIdsForCellLine(inSearchData.getCellLine()) + ")";
-		}
+            theHQLQuery += " AND am.principalInvestigator IN (from Person as p where p.lastName = '" + theLastName
+                    + "' AND p.firstName = '" + theFirstName + "')";
+        }
 
-		// Add order by clause
-		theHQLQuery += " ORDER BY am.modelDescriptor asc";
+        // Model descriptor criteria
+        if (inSearchData.getModelDescriptor() != null && inSearchData.getModelDescriptor().length() > 0) {
 
-		try {
-			log.info("HQL Query: " + theHQLQuery);
-			// HQLParameter[] theParameters = new HQLParameter[0];
-			// animalModels = Search.query(theHQLQuery, theParameters);
-			Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-			theAnimalModels = theQuery.list();
-		} catch (Exception e) {
-			log.error("Exception occurred searching for models", e);
-			throw e;
-		}
+            theHQLQuery += " AND am.modelDescriptor like '%" + inSearchData.getModelDescriptor() + "%'";
+        }
 
-		return theAnimalModels;
-	}
+        // Species criteria
+        if (inSearchData.getSpecies() != null && inSearchData.getSpecies().length() > 0) {
 
-	/**
-	 * Get the model id's for any model that has a histopathology associated
-	 * with a specific organ.
-	 * 
-	 * @param inType
-	 *            the EF type
-	 * @param inName
-	 *            the name to look for
-	 * 
-	 * @return a list of matching model id
-	 * 
-	 * @throws PersistenceException
-	 */
-	private String getModelIds(String inSQLString) throws PersistenceException {
+            theHQLQuery += "AND am.species IN (from Taxon as t where t.scientificName = '" + inSearchData.getSpecies()
+                    + "')";
+        }
 
-		String theModelIds = "";
+        // Search for organ
+        if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0) {
+            theHQLQuery += " AND abs_cancer_model_id IN ("
+                    + getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode()) + ")";
+        }
 
-		ResultSet theResultSet = null;
-		try {
+        // Search for disease
+        if (inSearchData.getDiagnosisCode() != null && inSearchData.getDiagnosisCode().trim().length() > 0) {
+            theHQLQuery += " AND abs_cancer_model_id IN ("
+                    + getModelIdsForHistopathologyDisease(inSearchData.getDiagnosisCode()) + ")";
+        }
 
-			log.info("getModelsIds - SQL: " + inSQLString);
+        // ///////////////////////////////////////
+        // Carcinogenic interventions
+        // ///////////////////////////////////////
 
-			Object[] params = new Object[0];
-			theResultSet = Search.query(inSQLString, params);
+        if (inSearchData.isSearchCarcinogenicInterventions() == true) {
 
-			if (theResultSet.next()) {
-				theModelIds += theResultSet.getString(1);
-			}
+            log.debug("Searching for Carcinogenic Interventions");
 
-			while (theResultSet.next()) {
-				theModelIds += "," + theResultSet.getString(1);
-			}
+            // Search for chemical/drug
+            if (inSearchData.getChemicalDrug() != null && inSearchData.getChemicalDrug().length() > 0) {
+                theHQLQuery += " AND abs_cancer_model_id IN ("
+                        + getModelIdsForEnvironmentalFactor("Chemical / Drug", inSearchData.getChemicalDrug()) + ")";
+            }
 
-		} catch (Exception e) {
-			log.error("Exception in getYeastScreenResults", e);
-			throw new PersistenceException("Exception in getYeastScreenResults: " + e);
-		} finally {
-			if (theResultSet != null) {
-				try {
-					theResultSet.close();
-				} catch (Exception e) {
-				}
-			}
-		}
+            // Search for Surgery
+            if (inSearchData.getSurgery() != null && inSearchData.getSurgery().length() > 0) {
+                theHQLQuery += " AND abs_cancer_model_id IN ("
+                        + getModelIdsForEnvironmentalFactor("Surgery", inSearchData.getSurgery()) + ")";
+            }
 
-		if (theModelIds.equals("")) {
-			theModelIds = "-1";
-		}
-		return theModelIds;
-	}
+            // Search for Hormone
+            if (inSearchData.getHormone() != null && inSearchData.getHormone().length() > 0) {
+                theHQLQuery += " AND abs_cancer_model_id IN ("
+                        + getModelIdsForEnvironmentalFactor("Hormone", inSearchData.getHormone()) + ")";
+            }
 
-	public static void main(String[] inArgs) {
+            // Search for Growth Factor
+            if (inSearchData.getGrowthFactor() != null && inSearchData.getGrowthFactor().length() > 0) {
+                theHQLQuery += " AND abs_cancer_model_id IN ("
+                        + getModelIdsForEnvironmentalFactor("Growth Factor", inSearchData.getGrowthFactor()) + ")";
+            }
 
-		// Format the query
-		// HQLParameter[] theParams = new HQLParameter[0];
-		// String theHQLQuery = "select distinct tr.administrativeRoute from
-		// Treatment as tr where tr.administrativeRoute is not null order by
-		// tr.administrativeRoute asc ";
-		//        
-		//
-		// try {
-		// List theList = Search.query(theHQLQuery, theParams);
-		// System.out.println("Num returned: " + theList.size());
-		// System.out.println("Num 1: " + theList.get(0));
-		// System.out.println("Num 2: " + theList.get(1));
-		// } catch (Exception e) {
-		// System.out.println("Exception: " + e);
-		// e.printStackTrace();
-		// }
+            // Search for Radiation
+            if (inSearchData.getRadiation() != null && inSearchData.getRadiation().length() > 0) {
+                theHQLQuery += " AND abs_cancer_model_id IN ("
+                        + getModelIdsForEnvironmentalFactor("Radiation", inSearchData.getRadiation()) + ")";
+            }
 
-		try {
-			System.out.println("Model ids: "
-					+ QueryManagerSingleton.instance().getModelIdsForHistopathologyOrgan("Skin"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            // Search for Viral
+            if (inSearchData.getViral() != null && inSearchData.getViral().length() > 0) {
+                theHQLQuery += " AND abs_cancer_model_id IN ("
+                        + getModelIdsForEnvironmentalFactor("Viral", inSearchData.getViral()) + ")";
+            }
+        }
 
-	}
+        // Only call if some of the data is set
+        if ((inSearchData.getGeneName() != null && inSearchData.getGeneName().length() > 0)
+                || (inSearchData.getGenomicSegDesignator() != null && inSearchData.getGenomicSegDesignator().length() > 0)
+                || (inSearchData.getInducedMutationAgent() != null && inSearchData.getInducedMutationAgent().length() > 0)) {
+
+            // Search for engineered genes
+            theHQLQuery += " AND abs_cancer_model_id IN ("
+                    + getModelIdsForEngineeredGenes(inSearchData.getGeneName(), inSearchData.isEngineeredTransgene(),
+                            inSearchData.isTargetedModification(), inSearchData.getGenomicSegDesignator(), inSearchData
+                                    .getInducedMutationAgent()) + ")";
+        }
+
+        // Search for phenotype
+        if (inSearchData.getPhenotype() != null && inSearchData.getPhenotype().length() > 0) {
+            theHQLQuery += " AND am.phenotype IN (from Phenotype as p where p.description like '%"
+                    + inSearchData.getPhenotype() + "%')";
+        }
+
+        // Search for cellline
+        if (inSearchData.getCellLine() != null && inSearchData.getCellLine().length() > 0) {
+            theHQLQuery += " AND abs_cancer_model_id IN (" + getModelIdsForCellLine(inSearchData.getCellLine()) + ")";
+        }
+
+        // Add order by clause
+        theHQLQuery += " ORDER BY am.modelDescriptor asc";
+
+        try {
+            log.info("HQL Query: " + theHQLQuery);
+            // HQLParameter[] theParameters = new HQLParameter[0];
+            // animalModels = Search.query(theHQLQuery, theParameters);
+            Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+            theAnimalModels = theQuery.list();
+        } catch (Exception e) {
+            log.error("Exception occurred searching for models", e);
+            throw e;
+        }
+
+        log.trace("Exiting searchForAnimalModels");
+
+        return theAnimalModels;
+    }
+
+    /**
+     * Extract the model ID's for an sql query
+     * with a specific organ.
+     * 
+     * @param inSQLString
+     *            the SQL string that returns a set of IDs
+     * @param inParameters
+     *            the parameters to bind in the query
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIds(String inSQLString, Object inParameters[]) throws PersistenceException {
+
+        log.trace("In getModelIds");
+
+        String theModelIds = "";
+
+        ResultSet theResultSet = null;
+        try {
+
+            log.info("getModelsIds - SQL: " + inSQLString);
+
+            theResultSet = Search.query(inSQLString, inParameters);
+
+            if (theResultSet.next()) {
+                theModelIds += theResultSet.getString(1);
+            }
+
+            while (theResultSet.next()) {
+                theModelIds += "," + theResultSet.getString(1);
+            }
+
+        } catch (Exception e) {
+            log.error("Exception in getModelIds", e);
+            throw new PersistenceException("Exception in getModelIds: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+
+        if (theModelIds.equals("")) {
+            theModelIds = "-1";
+        }
+        return theModelIds;
+    }
+
+    public static void main(String[] inArgs) {
+
+        try {
+            System.out.println("Model ids: "
+                    + QueryManagerSingleton.instance().getModelIdsForHistopathologyOrgan("Skin"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 /*
  * $Log: not supported by cvs2svn $ Revision 1.6 2005/09/27 16:46:59 georgeda

@@ -39,7 +39,7 @@
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="piName" >
 					<html:options name="<%= Dropdowns.PRINCIPALINVESTIGATORQUERYDROP %>" />										
-				</html:select>			
+				</html:select>
 			</td>
 		</tr>
 

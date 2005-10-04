@@ -5,7 +5,51 @@
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
-<html:form action="SearchAction.do" focus="keyword">
+<SCRIPT LANGUAGE="JavaScript">
+	
+	function transferFields() {
+		document.searchForm.diagnosisCode.value = document.searchForm.DiagnosisCode.value;
+	}
+	
+	function toggleField(control, field)
+	{
+		if( control.checked == false ) {
+		    field.disabled = true;
+		}
+		else {
+		    field.disabled = false;
+		}
+	}
+		
+	function checkFields() {
+	
+	    // Do the CI fields
+		theCIFlag = document.searchForm.searchCarcinogenicInterventions;
+		toggleField(theCIFlag, document.searchForm.chemicalDrug);
+		toggleField(theCIFlag, document.searchForm.growthFactor);
+		toggleField(theCIFlag, document.searchForm.hormone);
+		toggleField(theCIFlag, document.searchForm.radiation);
+		toggleField(theCIFlag, document.searchForm.viral);
+		toggleField(theCIFlag, document.searchForm.surgery);
+		
+		
+		theTargModFlag = document.searchForm.targetedModification;
+		theEndTransGeneFlag = document.searchForm.engineeredTransgene;
+		
+		if (theTargModFlag.checked == true || theEndTransGeneFlag.checked == true) {
+		    document.searchForm.geneName.disabled = false;
+		}
+		else {
+		    document.searchForm.geneName.disabled = true;
+		    document.searchForm.geneName.value = null;
+		}
+	}
+		
+</SCRIPT>
+
+
+
+<html:form action="SearchAction.do" focus="keyword" onsubmit="transferFields()">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -45,9 +89,9 @@
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel">
-				<label for="field2">Site of Lesion/Tumor:</label>
+				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-		  	    <a href="javascript:showTissueTree('input', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 				<INPUT name="organTissueName" type="hidden"/>
@@ -61,11 +105,12 @@
 			<td class="formLabel">
 				<label for="field2">Diagnosis</label>
 				&nbsp;
-		  	    <a href="javascript:showDiagnosisTree('input', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showDiagnosisTree('searchForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>
 				<input type="hidden" name="DiagnosisName"/>
 			    <input type="hidden" name="DiagnosisCode"/>
+			    <input type="hidden" name="diagnosisCode"/>
 			</td>
 			<td class="formField">
 				<input class="formFieldSized" type="text" disabled="true" name="TumorClassification" id="field3" size="25" />
@@ -99,25 +144,23 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-
-			<td class="formLabel">
-				<label for="field1">Gene Name:</label>
-			</td>
-			<td class="formField">
-				<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Gene Name:</label></td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="geneName" size="30"/>
 			</td>
 		</tr>
-
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">
 				<label for="field1">&nbsp;</label>
 			</td>
 			<td class="formField">
-				<input type="checkbox" name="box1" id="box1" checked="checked" /> <label for="box1">Engineered Transgene</label>
-				<br />
-				<input type="checkbox" name="box2" id="box2" /> <label for="box2">Targeted Modification</label>
+                <html:checkbox property="engineeredTransgene" onchange="checkFields()" />	
+			    <label for="box1">Engineered Transgene</label>			
+			    </br>
+                <html:checkbox property="targetedModification" onchange="checkFields()" />	
+			    <label for="box1">Targeted Modification</label>			
 			</td>
 		</tr>
 
@@ -126,9 +169,8 @@
 			<td class="formLabel">
 				<label for="field1">Genomic Segment Designator:</label>
 			</td>
-
-			<td class="formField">
-				<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="genomicSegDesignator" size="30"/>
 			</td>
 		</tr>
 		<tr>
@@ -136,14 +178,10 @@
 			<td class="formLabel">
 				<label for="field3">Select Inducing Agent for Induced Mutation</label>
 			</td>
-
-			<td class="formField">
-				<select class="formFieldSized" name="field3" id="field3" size="1">
-                                    <OPTION value="">
-                                    <OPTION value="1">Chemical
-                                    <OPTION value="2">Radiation
-                                    <OPTION value="3">Transgene
-				</select>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="inducedMutationAgent" >
+					<html:options name="<%= Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP %>" />										
+				</html:select>				
 			</td>
 		</tr>
 
@@ -158,8 +196,8 @@
 			</td>
 
 			<td class="formField">
-				<input type="checkbox" name="box1" id="box1" checked="checked" /> 
-				<label for="box1">Check here to search for models with <br>Carcinogenic interventions data</label>
+                <html:checkbox property="searchCarcinogenicInterventions" onchange="checkFields()" />	
+			    <label for="box1">Check here to search for models with <br>Carcinogenic interventions data</label>			
 			</td>
 		</tr>
 
@@ -237,7 +275,14 @@
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Therapeutic Approaches</td>
 		</tr>
-
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel">Models with Therapeutic Approaches</td>
+			<td class="formField">
+				<input type="checkbox" name="box1" id="box1" checked="checked" /> 
+				<label for="box1">Check here to search for models with <br>therapeutic approaches data</label>
+			</td>
+		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">
@@ -245,15 +290,6 @@
 			</td>
 			<td class="formField">
 				<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">Models with Therapeutic Approaches</td>
-			<td class="formField">
-				<input type="checkbox" name="box1" id="box1" checked="checked" /> 
-				<label for="box1">Check here to search for models with <br>therapeutic approaches data</label>
 			</td>
 		</tr>
 
@@ -268,13 +304,7 @@
 				<input type="checkbox" name="box1" id="box1" checked="checked" /> 
 				<label for="box1">Check here to search for models with Metastasis</label>
 			</td>
-		</tr>		
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Search for Models with Metastasis in Organ</label>&nbsp;<IMG src="images\selectUP.gif" align=middle></td>
-			<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="field3" id="field3" size="25" /></td>
-		</tr>		
+		</tr>	
 		
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Microarray Data</td>
@@ -310,5 +340,9 @@
 		<!-- action buttons end -->
 	</td></tr></TABLE>
 </td></tr></TABLE>	
+
+<SCRIPT LANGUAGE="JavaScript">
+    checkFields();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

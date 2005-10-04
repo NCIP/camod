@@ -153,9 +153,13 @@ public class NewDropdownUtil {
 		else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORDROP)) {
 			theReturnList = getPrincipalInvestigatorList(inRequest, inFilter);
 		} 
+        
 		else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP)) {
 			theReturnList = getQueryOnlyPrincipalInvestigatorList(inRequest, inFilter);
-		} 
+		}
+        else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP)) {
+            theReturnList = getQueryOnlyInducedMutationAgentList(inRequest, inFilter);
+        }
 		else {
 			log.error("No matching dropdown for key: " + inDropdownKey);
 			theReturnList = new ArrayList();
@@ -450,5 +454,17 @@ public class NewDropdownUtil {
 
 		return QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators();
 	}
-	
+    
+    /**
+     * Returns a list of all Agents that were used to induce a mutation
+     * 
+     * @return list of agent names
+     * @throws Exception
+     */
+    private static List getQueryOnlyInducedMutationAgentList(HttpServletRequest inRequest, String inAddBlank) throws Exception {
+
+        log.trace("Entering NewDropdownUtil.getQueryOnlyInducedMutationAgentList");
+
+        return QueryManagerSingleton.instance().getQueryOnlyInducedMutationAgents();
+    }
 }

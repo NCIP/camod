@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.33 2005-10-04 20:09:41 schroedn Exp $
+ * $Id: Constants.java,v 1.34 2005-10-04 20:18:48 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2005/10/04 20:09:41  schroedn
+ * Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
+ *
  * Revision 1.32  2005/10/03 16:07:39  pandyas
  * modified histopathology constant name to reflect contents
  *
@@ -212,7 +215,8 @@ public class Constants {
         public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
         public static final String SPECIESQUERYDROP = "speciesquerydrop.db";
         public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
-                
+        public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
+        
         // These two are used to display the species and strain currently in the AnimalModelCharacteristics        
         public static final String MODELSPECIES = "modelspecies";
         public static final String MODELSTRAIN = "modelstrain";

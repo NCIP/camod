@@ -12,33 +12,35 @@ import org.apache.struts.action.ActionMapping;
 
 public class AdvancedSearchPopulateAction extends BaseAction {
 
-	/**
-	 * Pre-populate all field values in the form <FormName> Used by <jspName>
-	 * 
-	 */
-	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Pre-populate all field values in the form <FormName> Used by <jspName>
+     * 
+     */
+    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.trace("In AdvancedSearchPopulateAction.populate");
+        log.trace("In AdvancedSearchPopulateAction.populate");
 
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GROWTHFACTORQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HORMONEQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.RADIATIONQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VIRUSQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SURGERYQUERYDROP,
-				Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GROWTHFACTORQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HORMONEQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.RADIATIONQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VIRUSQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SURGERYQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
 
-		return mapping.findForward("next");
-	}
+        return mapping.findForward("next");
+    }
 
 }
