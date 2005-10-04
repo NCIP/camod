@@ -1289,7 +1289,7 @@
     </action>
          
      <!-- ViralTreatmentForm -->
-          <action path="/ViralTreatmentAction"
+     <action path="/ViralTreatmentAction"
 	        type="gov.nih.nci.camod.webapp.action.ViralTreatmentAction"
 	        name="viralTreatmentForm"
 	        scope="request"
@@ -1307,7 +1307,22 @@
     </action>
     
      <!-- XenograftForm -->
+     <action path="/XenograftAction"
+	        type="gov.nih.nci.camod.webapp.action.XenograftAction"
+	        name="xenograftForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitTransplantXenograft">   	
+    </action>
     
+    <action path="/XenograftPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.XenograftPopulateAction"
+    		name="XenograftForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
     
      <!-- Admin functionality action -->	
   
