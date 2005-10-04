@@ -2,12 +2,14 @@ package gov.nih.nci.camod.webapp.util;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Strain;
 import gov.nih.nci.camod.domain.Taxon;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.GeneDeliveryManager;
+import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.service.TaxonManager;
 import gov.nih.nci.camod.service.XenograftManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
@@ -90,7 +92,11 @@ public class NewDropdownUtil {
 		else if (inDropdownKey.equals(Constants.Dropdowns.VIRALVECTORDROP)) {
 			theReturnList = getViralVectorList(inRequest);
 		}
-
+		
+        if (inDropdownKey.equals( Constants.Dropdowns.INDUCEDMUTATIONDROP )) {
+            theReturnList = getInducedMutationList( inRequest );
+        }     
+        
 		// Environmental Factors - Carciogenic Interventions
 		else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYDROP)) {
 			theReturnList = getEnvironmentalFactorList("Other");
@@ -454,7 +460,7 @@ public class NewDropdownUtil {
 
 		return QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators();
 	}
-    
+	    
     /**
      * Returns a list of all Agents that were used to induce a mutation
      * 
@@ -466,5 +472,46 @@ public class NewDropdownUtil {
         log.trace("Entering NewDropdownUtil.getQueryOnlyInducedMutationAgentList");
 
         return QueryManagerSingleton.instance().getQueryOnlyInducedMutationAgents();
+    }
+    
+    /**
+     * Returns a list of all Graft Types
+     * 
+     * @return graftList
+     */
+    private static List getInducedMutationList(HttpServletRequest inRequest) {
+
+        // Get values for dropdown lists for Species, Strains
+        InducedMutationManager inducedMutationManager = ( InducedMutationManager ) getContext(inRequest).getBean("inducedMutationManager");
+        
+        List inducedMutationList = null;
+        
+        try {
+        	inducedMutationList = inducedMutationManager.getAll();
+        } catch (Exception e) {
+           // TODO: Add error log handler here
+           //log.error("Unable to getAll InducedMutations ", e);
+        }
+        
+        List mutationList = new ArrayList();
+        InducedMutation tmp;
+        
+        mutationList.add( "Other" );
+
+        if ( inducedMutationList != null ) {
+            for (int i = 0; i < inducedMutationList.size(); i++) {
+                tmp = (InducedMutation) inducedMutationList.get(i);
+
+                if ( tmp.getName() != null ) {
+                    // if the speciesName is not already in the List, add it
+                    // (only get unique names)
+                    if ( ! mutationList.contains( tmp.getName() ) )
+                    	mutationList.add( tmp.getName() );
+                }
+            } 
+        }
+        
+        Collections.sort( mutationList );        
+        return mutationList;
     }
 }
