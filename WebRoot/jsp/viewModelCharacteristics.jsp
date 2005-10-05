@@ -29,22 +29,34 @@
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Official Nomenclature</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<ul>
-					<c:forEach var="item" items="${mdl.engineeredGeneCollection}" varStatus="stat">
-					<li> <c:out value="${item.genotypeSummary.nomenclature.name}"/> </li>
+				<c:set var="items" value="${mdl.distinctNomenclatureFromEngineeredGeneCollection}"/>
+				<logic:notEmpty name="items">
+				<ul>    
+					<c:forEach var="item" items="${items}" varStatus="stat">
+					<li> <c:out value="${item}"/> </li>
 					</c:forEach>
 				</ul>
+				</logic:notEmpty>
+				<logic:empty name="items">
+				    <br/>
+				</logic:empty>
 			</td>
 		</tr>
 
 		<tr>
 			<td class="GreyBox" width="20%"><b>Genotype</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				<ul>
-					<c:forEach var="item" items="${mdl.engineeredGeneCollection}" varStatus="stat">
-					<li> <c:out value="${item.genotypeSummary.summary}"/> </li>
+			    <c:set var="items" value="${mdl.distinctGenotypeFromEngineeredGeneCollection}"/>
+			    <logic:notEmpty name="items">
+				<ul>    
+					<c:forEach var="item" items="${items}" varStatus="stat">
+					<li> <c:out value="${item}"/> </li>
 					</c:forEach>
 				</ul>
+				</logic:notEmpty>
+				<logic:empty name="items">
+				    <br/>
+				</logic:empty>
 			</td>
 		</tr>
 

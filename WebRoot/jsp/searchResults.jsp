@@ -76,8 +76,8 @@
 					</td>
 					<td class="<%= tdClass %>End" width="32%">
 						<b>
-						<c:forEach var="o" items="${aModel.histopathologyCollection}">
-							<c:out value="${o.organ.EVSPreferredDescription}"/><br/>
+						<c:forEach var="o" items="${aModel.distinctOrgansFromHistopathologyCollection}">
+							<c:out value="${o}"/><br/>
 						</c:forEach>
 						</b>&nbsp;
 					</td>
