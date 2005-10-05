@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.35 2005-10-05 16:21:50 pandyas Exp $
+ * $Id: Constants.java,v 1.36 2005-10-05 19:24:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2005/10/05 16:21:50  pandyas
+ * added histopthology and therapy lists
+ *
  * Revision 1.34  2005/10/04 20:18:48  georgeda
  * Updates from search changes
  *
@@ -303,7 +306,9 @@ public class Constants {
         public static final String TARGETEDMODIFICATION_LIST= "targetedmodification_list";
         public static final String GENOMICSEGMENT_LIST = "genomicsegment_list";
         public static final String HISTOPATHOLOGY_LIST = "histopathology_list";
-        public static final String THERAPY_LIST = "therapy_list";        
+        public static final String THERAPY_LIST = "therapy_list";
+        public static final String CLINICALMARKER_LIST = "clinicalmarker_list";
+        
         /**
          * Used to store a list of names for the Publication section of the
          * sidebar menu of the submission section
