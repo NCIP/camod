@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.11 2005-10-05 15:23:34 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.12 2005-10-05 20:27:59 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/05 15:23:34  georgeda
+ * Changed the theraputic approaches query to return all models w/ TA's if the search string passed in was blank
+ *
  * Revision 1.10  2005/10/05 13:04:47  georgeda
  * Completed advanced search
  *
@@ -930,6 +933,55 @@ public class QueryManagerImpl extends BaseManager {
         return theModelIds;
     }
 
+	public List getModelsForThisCompound(Long nscNumber)  throws PersistenceException {
+		List models = new ArrayList();
+        int cc = 0;
+        ResultSet theResultSet = null;
+        try {
+
+            String theSQLString = 
+		    "select acm.abs_cancer_model_id, " + "\n" +
+			"       acm.model_descriptor," + "\n" +
+			"       tx.abbreviation || ' ' || tx.ethnicity_strain" + "\n" + 
+			"  from abs_cancer_model acm," + "\n" +
+			"       animal_model_therapy amt," + "\n" +
+			"       therapy t," + "\n" +
+			"       env_factor ef," + "\n" +
+			"       taxon tx" + "\n" +
+			" where acm.abs_cancer_model_id = amt.abs_cancer_model_id" + "\n" +
+			"   and acm.abs_cancer_model_type = 'AM'" + "\n" +
+			"   and amt.therapy_id = t.therapy_id" + "\n" +
+			"   and t.env_factor_id = ef.env_factor_id" + "\n" +
+			"   and acm.taxon_id = tx.taxon_id" + "\n" +
+			"   and ef.nsc_number = ?";
+            log.info("getInvivoResults - SQL: " + theSQLString);
+
+            Object[] params = new Object[1];
+            params[0] = nscNumber;
+            theResultSet = Search.query(theSQLString, params);
+            while (theResultSet.next()) {
+                String[] item = new String[3];
+                item[0] = theResultSet.getString(1); // the id
+                item[1] = theResultSet.getString(2); // model descriptor
+                item[2] = theResultSet.getString(3); // strain
+                models.add(item);
+                cc++;
+            }
+            log.info("Got " + cc + " animal models");
+        } catch (Exception e) {
+            log.error("Exception in getModelsForThisCompound", e);
+            throw new PersistenceException("Exception in getModelsForThisCompound: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }		
+		return models;
+	}
+
     public static void main(String[] inArgs) {
 
         try {
@@ -942,7 +994,10 @@ public class QueryManagerImpl extends BaseManager {
     }
 }
 /*
- * $Log: not supported by cvs2svn $ Revision 1.10 2005/10/05 13:04:47 georgeda
+ * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/05 15:23:34  georgeda
+ * Changed the theraputic approaches query to return all models w/ TA's if the search string passed in was blank
+ * Revision 1.10 2005/10/05 13:04:47 georgeda
  * Completed advanced search Revision 1.9 2005/10/04 20:19:43 georgeda Updates
  * from search changes Revision 1.6 2005/09/27 16:46:59 georgeda Added
  * environmental factor dropdown query Revision 1.5 2005/09/26 14:04:14 georgeda

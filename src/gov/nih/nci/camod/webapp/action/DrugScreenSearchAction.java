@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.1 2005-09-30 18:42:24 guruswas Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.2 2005-10-05 20:28:00 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/09/30 18:42:24  guruswas
+ * intial implementation of drug screening search and display page
+ *
  * Revision 1.2  2005/09/16 15:52:56  georgeda
  * Changes due to manager re-write
  *
@@ -71,6 +74,7 @@ public final class DrugScreenSearchAction extends BaseAction {
 			final HashMap clinProtocols = new HashMap();
 			final HashMap yeastResults = new HashMap();
 			final HashMap invivoResults = new HashMap();
+			final HashMap preClinicalResults = new HashMap();
 			for(int i=0; i<agtCount; i++) {
 				Agent a = (Agent)agents.get(i);
 				if (a != null) {
@@ -79,6 +83,14 @@ public final class DrugScreenSearchAction extends BaseAction {
 						if (theForm.isDoClinical()) {
 							Collection protocols = myAgentManager.getClinicalProtocols(a);
 							clinProtocols.put(nscNumber, protocols);
+						}
+						if (theForm.isDoPreClinical()) {
+							try {
+								List models = QueryManagerSingleton.instance().getModelsForThisCompound(nscNumber);
+								preClinicalResults.put(nscNumber, models);
+							}catch (Exception x) {
+								x.printStackTrace();
+							}
 						}
 						if (theForm.isDoYeast()) {
 							// get the yeast data
@@ -96,6 +108,7 @@ public final class DrugScreenSearchAction extends BaseAction {
 			request.getSession().setAttribute(Constants.CLINICAL_PROTOCOLS, clinProtocols);
 			request.getSession().setAttribute(Constants.YEAST_DATA, yeastResults);
 			request.getSession().setAttribute(Constants.INVIVO_DATA, invivoResults);
+			request.getSession().setAttribute(Constants.PRECLINICAL_MODELS, preClinicalResults);
         } catch (Exception e) {
             log.error("Exception occurred in DrugScreenSearchAction.execute()", e);
             request.getSession().setAttribute(Constants.SEARCH_RESULTS, new ArrayList());

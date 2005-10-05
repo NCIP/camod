@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.36 2005-10-05 19:24:14 pandyas Exp $
+ * $Id: Constants.java,v 1.37 2005-10-05 20:27:59 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2005/10/05 19:24:14  pandyas
+ * added clinical marker list
+ *
  * Revision 1.35  2005/10/05 16:21:50  pandyas
  * added histopthology and therapy lists
  *
@@ -278,6 +281,7 @@ public class Constants {
     public static final String CLINICAL_PROTOCOLS = "clinProtocols";
     public static final String YEAST_DATA = "yeastData";
     public static final String INVIVO_DATA = "invivoData";
+    public static final String PRECLINICAL_MODELS = "preClinicalModels";
     public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
     public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
 
