@@ -124,6 +124,10 @@
 			name="searchForm"
 		    type="gov.nih.nci.camod.webapp.form.SearchForm"/>
 
+		<form-bean
+			name="drugScreenSearchForm"
+		    type="gov.nih.nci.camod.webapp.form.DrugScreenSearchForm"/>
+
   </form-beans>
 
   <!-- ========== Global Exceptions Definitions =================================== -->
@@ -239,6 +243,10 @@
 		<forward
 			name="searchDrugScreening"
 			path="/jsp/searchDrugScreening.jsp"></forward>
+
+		<forward
+			name="searchResultsDrugScreen"
+			path="/jsp/searchResultsDrugScreen.jsp"></forward>
 
 		<forward
 			name="searchTableOfContents"
@@ -1010,6 +1018,7 @@
 			validate="false">		
     </action>
     
+
      <!-- HistopathologyForm -->
      <action path="/HistopathologyAction"
 	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
@@ -1307,6 +1316,7 @@
     </action>
     
      <!-- XenograftForm -->
+
      <action path="/XenograftAction"
 	        type="gov.nih.nci.camod.webapp.action.XenograftAction"
 	        name="xenograftForm"
@@ -1315,7 +1325,8 @@
 	        validate="false"
 	        input="submitTransplantXenograft">   	
     </action>
-    
+
+
     <action path="/XenograftPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.XenograftPopulateAction"
     		name="xenograftForm"    		
@@ -1323,7 +1334,7 @@
             parameter="method"
 			validate="false">		
     </action>
-    
+
      <!-- Admin functionality action -->	
   
      <action 
@@ -1446,7 +1457,17 @@
             path="/jsp/searchSimple.jsp">
         </forward>	
     </action>
-    
+
+    <action path="/DrugScreenSearchAction"
+	        type="gov.nih.nci.camod.webapp.action.DrugScreenSearchAction"
+	        name="drugScreenSearchForm"
+	        scope="request"
+	        parameter="unprotected_method" 
+	        unknown="false"
+	        validate="false"
+	        input="/drugScreenSearch">
+    </action>
+        
         <!-- Search actions -->
     <action path="/AdvancedSearchPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AdvancedSearchPopulateAction"
