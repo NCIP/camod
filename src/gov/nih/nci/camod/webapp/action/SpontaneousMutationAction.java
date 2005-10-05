@@ -2,7 +2,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.SpontaneousMutationManager;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,11 +73,50 @@ public class SpontaneousMutationAction extends BaseAction {
                               HttpServletRequest request,
                               HttpServletResponse response)
     throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
+    	
+        log.trace("Entering save");
+
+        // Create a form to edit
+        SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, spontaneousMutationForm);
+             
+        // Grab the current SpontaneousMutation we are working with related to this
+        String aSpontaneousMutationID = request.getParameter("aSpontaneousMutationID");
+
+        log.info("<SpontaneousMutationAction edit> following Characteristics:" 
+        		+ "\n\t name: " + spontaneousMutationForm.getName()
+                + "\n\t getNumberMGI: " + spontaneousMutationForm.getNumberMGI()
+                + "\n\t getObservation: " + spontaneousMutationForm.getObservation() 
+                + "\n\t getMethodofObservation: " + spontaneousMutationForm.getMethodOfObservation()
+                + "\n\t getComments: " + spontaneousMutationForm.getComments()
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+
+        SpontaneousMutationManager spontaneousMutationManager = (SpontaneousMutationManager) getBean("spontaneousMutationManager");
+        
+        try {
+        	
+        	SpontaneousMutation theSpontaneousMutation = spontaneousMutationManager.get( aSpontaneousMutationID );
+        	spontaneousMutationManager.update( spontaneousMutationForm, theSpontaneousMutation );
+        	
+            log.info( "SpontaneousMutation edited" );
+
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("spontaneousmutation.edit.successful"));
+            saveErrors(request, msg);
+
+        } catch (Exception e) {
+            log.error("Exception ocurred creating SpontaneousMutation", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
         }
 
-        return mapping.findForward("");
+        log.trace("Exiting save");
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
     /**

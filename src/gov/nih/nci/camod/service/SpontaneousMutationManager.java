@@ -18,7 +18,7 @@ public interface SpontaneousMutationManager {
 
     public SpontaneousMutation create(SpontaneousMutationForm inSpontaneousMutationData, AnimalModel inAnimalModel) throws Exception;
     
-    public void update(SpontaneousMutationForm inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation, AnimalModel inAnimalModel) throws Exception;        
+    public void update(SpontaneousMutationForm inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation) throws Exception;        
 
 }
 

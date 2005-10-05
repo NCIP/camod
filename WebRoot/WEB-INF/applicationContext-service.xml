@@ -80,6 +80,6 @@
     <bean id="organManager" class="gov.nih.nci.camod.service.impl.OrganManagerImpl"/>    
     
     <!--  SpontaneousMutation -->
-    <bean id="spontaneousMutation" class="gov.nih.nci.camod.service.impl.SpontaneousMutationManagerImpl"/>
+    <bean id="spontaneousMutationManager" class="gov.nih.nci.camod.service.impl.SpontaneousMutationManagerImpl"/>
        
 </beans>

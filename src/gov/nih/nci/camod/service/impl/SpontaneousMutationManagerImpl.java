@@ -14,6 +14,8 @@ import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SpontaneousMutationManagerImpl extends BaseManager implements SpontaneousMutationManager {
 
@@ -50,15 +52,15 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         return theSpontaneousMutation;
     }
 
-    public void update(SpontaneousMutationForm inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation, AnimalModel inAnimalModel)
+    public void update(SpontaneousMutationForm inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation )
             throws Exception {
 
         log.trace("Entering SpontaneousMutationManagerImpl.update");
         log.debug("Updating SpontaneousMutationForm: " + inSpontaneousMutation.getId());
 
         // Populate w/ the new values and save
-        populateSpontaneousMutation(inSpontaneousMutationData, inSpontaneousMutation, inAnimalModel);
-       // save(inSpontaneousMutation);
+        populateSpontaneousMutation(inSpontaneousMutationData, inSpontaneousMutation, null);
+        save(inSpontaneousMutation);
 
         log.trace("Exiting SpontaneousMutationManagerImpl.update");
     }
@@ -68,6 +70,26 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
     	
         log.trace("Entering populateSpontaneousMutation");
         	
+        inSpontaneousMutation.setName( inSpontaneousMutationData.getName() );
+        inSpontaneousMutation.setComments( inSpontaneousMutationData.getComments() );
+        
+        GeneticAlteration inGeneticAlteration = new GeneticAlteration();
+        inGeneticAlteration.setObservation( inSpontaneousMutationData.getObservation() );
+        inGeneticAlteration.setMethodOfObservation( inSpontaneousMutationData.getMethodOfObservation() );
+        
+        inSpontaneousMutation.addGeneticAlteration( inGeneticAlteration );
+        
+        //TODO: Don't create duplicate MutationIdentifiers, search for existing numbers first
+        MutationIdentifier inMutationIdentifier = new MutationIdentifier();
+        
+        String strNumberMGI = inSpontaneousMutationData.getNumberMGI().trim();
+        Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+		Matcher m = p.matcher( strNumberMGI );				
+		if (m.matches() && strNumberMGI != null && ! strNumberMGI.equals("") ) {
+			 inMutationIdentifier.setNumberMGI( Long.valueOf( strNumberMGI ) );
+			 inSpontaneousMutation.setMutationIdentifier( inMutationIdentifier );
+		}
+   
         log.trace("Exiting populateSpontaneousMutation");
     }
 }

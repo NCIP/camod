@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.22 2005-10-04 20:12:52 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.23 2005-10-05 15:17:48 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/10/04 20:12:52  schroedn
+ * Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
+ *
  * Revision 1.21  2005/10/03 13:51:36  georgeda
  * Search changes
  *
@@ -646,8 +649,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create( inSpontaneousMutationForm, inAnimalModel );
         System.out.println(theSpontaneousMutation.getName() );
         
-        //inAnimalModel.addSpontaneousMutation( theSpontaneousMutation );
-        //save( inAnimalModel );
+        inAnimalModel.addSpontaneousMutation( theSpontaneousMutation );
+        save( inAnimalModel );
 
         log.trace("Exiting addGeneticDescription (spontaneousMutation)");
     }         
