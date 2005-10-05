@@ -33,7 +33,7 @@
 				<logic:notEmpty name="items">
 				<ul>    
 					<c:forEach var="item" items="${items}" varStatus="stat">
-					<li> <c:out value="${item}"/> </li>
+					<li> <c:out value="${item}" escapeXml="false"/> </li>
 					</c:forEach>
 				</ul>
 				</logic:notEmpty>
