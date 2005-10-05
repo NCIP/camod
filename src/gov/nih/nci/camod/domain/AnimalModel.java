@@ -6,6 +6,7 @@
  */
 package gov.nih.nci.camod.domain;
 
+import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +89,75 @@ public class AnimalModel extends AbstractCancerModel {
      */
     public List getHistopathologyCollection() {
         return histopathologyCollection;
+    }
+
+    /**
+     * @return Returns the histopathologyCollection.
+     */
+    public List getDistinctOrgansFromHistopathologyCollection() {
+
+        List theList = new ArrayList();
+        for (int i = 0, j = histopathologyCollection.size(); i < j; i++) {
+            Histopathology theHistopathology = (Histopathology) histopathologyCollection.get(i);
+
+            if (!theList.contains(theHistopathology.getOrgan().getEVSPreferredDescription())) {
+                theList.add(theHistopathology.getOrgan().getEVSPreferredDescription());
+            }
+        }
+
+        Collections.sort(theList);
+
+        return theList;
+    }
+
+    /**
+     * @return Returns the histopathologyCollection.
+     */
+    public List getDistinctNomenclatureFromEngineeredGeneCollection() {
+
+        List theList = new ArrayList();
+        for (int i = 0, j = engineeredGeneCollection.size(); i < j; i++) {
+            EngineeredGene theEngineeredGene = (EngineeredGene) engineeredGeneCollection.get(i);
+
+            String theNomenclature = theEngineeredGene.getGenotypeSummary().getNomenclature().getName();
+
+            if (theNomenclature != null) {
+                theNomenclature = theNomenclature.trim();
+
+                if (!theList.contains(theNomenclature) && theNomenclature.length() > 0) {
+                    theList.add(theNomenclature);
+                }
+            }
+        }
+
+        Collections.sort(theList);
+
+        return theList;
+    }
+
+    /**
+     * @return Returns the histopathologyCollection.
+     */
+    public List getDistinctGenotypeFromEngineeredGeneCollection() {
+
+        List theList = new ArrayList();
+        for (int i = 0, j = engineeredGeneCollection.size(); i < j; i++) {
+            EngineeredGene theEngineeredGene = (EngineeredGene) engineeredGeneCollection.get(i);
+
+            String theGenotype = theEngineeredGene.getGenotypeSummary().getGenotype();
+
+            if (theGenotype != null) {
+                theGenotype = theGenotype.trim();
+
+                if (!theList.contains(theGenotype) && theGenotype.length() > 0) {
+                    theList.add(theGenotype);
+                }
+            }
+        }
+
+        Collections.sort(theList);
+
+        return theList;
     }
 
     /**
