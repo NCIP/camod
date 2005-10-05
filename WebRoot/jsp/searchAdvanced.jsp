@@ -43,6 +43,8 @@
 		    document.searchForm.geneName.disabled = true;
 		    document.searchForm.geneName.value = null;
 		}
+		
+		toggleField(document.searchForm.searchTherapeuticApproaches, document.searchForm.therapeuticApproach);
 	}
 		
 </SCRIPT>
@@ -279,32 +281,29 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Therapeutic Approaches</td>
 			<td class="formField">
-				<input type="checkbox" name="box1" id="box1" checked="checked" /> 
+			    <html:checkbox property="searchTherapeuticApproaches" onchange="checkFields()" />	
 				<label for="box1">Check here to search for models with <br>therapeutic approaches data</label>
 			</td>
 		</tr>
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field1">Compound/Drug:</label>
-			</td>
-			<td class="formField">
-				<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
+		    <td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Compound/Drug:</label></td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="therapeuticApproach" size="30"/>
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Histopathology</td>
 		</tr>		
-		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Metastasis</td>
 			<td class="formField">
-				<input type="checkbox" name="box1" id="box1" checked="checked" /> 
+			    <html:checkbox property="searchHistoMetastasis" />	
 				<label for="box1">Check here to search for models with Metastasis</label>
 			</td>
-		</tr>	
+		</tr>
 		
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Microarray Data</td>
@@ -314,13 +313,11 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Microarray Data</td>
 			<td class="formField">
-				<input type="checkbox" name="box1" id="box1" checked="checked" /> 
+			    <html:checkbox property="searchMicroArrayData" />	
 				<label for="box1">Check here to search for models with microarray data</label>
 			</td>
 		</tr>
 		<tr>
-
-
 			<td align="right" colspan="3">
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
@@ -338,7 +335,7 @@
 			</td>
 		</tr>
 		<!-- action buttons end -->
-	</td></tr></TABLE>
+	</TABLE>
 </td></tr></TABLE>	
 
 <SCRIPT LANGUAGE="JavaScript">

@@ -40,13 +40,17 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     protected String organTissueName;
     protected String diagnosisCode;
     protected String diagnosisName;
-    protected boolean searchCarcinogenicInterventions = false;
     protected String inducedMutationAgent;
-    protected boolean engineeredTransgene = false;
-    protected boolean targetedModification = false;
     protected String geneName;
     protected String genomicSegDesignator;
-
+    protected String therapeuticApproach;
+    protected boolean searchCarcinogenicInterventions = false;
+    protected boolean searchTherapeuticApproaches = false;
+    protected boolean engineeredTransgene = false;
+    protected boolean targetedModification = false;
+    protected boolean searchHistoMetastasis = false;
+    protected boolean searchMicroArrayData = false;
+    
     public void setHormone(String hormone) {
         this.hormone = hormone;
     }
@@ -248,4 +252,36 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     public void setGenomicSegDesignator(String genomicSegDesignator) {
         this.genomicSegDesignator = genomicSegDesignator;
     }
+
+	public boolean isSearchTherapeuticApproaches() {
+		return searchTherapeuticApproaches;
+	}
+
+	public void setSearchTherapeuticApproaches(boolean searchTherapeuticApproaches) {
+		this.searchTherapeuticApproaches = searchTherapeuticApproaches;
+	}
+
+	public String getTherapeuticApproach() {
+		return therapeuticApproach;
+	}
+
+	public void setTherapeuticApproach(String therapeuticApproach) {
+		this.therapeuticApproach = therapeuticApproach;
+	}
+
+	public boolean isSearchHistoMetastasis() {
+		return searchHistoMetastasis;
+	}
+
+	public void setSearchHistoMetastasis(boolean searchHistoMetastasis) {
+		this.searchHistoMetastasis = searchHistoMetastasis;
+	}
+
+	public boolean isSearchMicroArrayData() {
+		return searchMicroArrayData;
+	}
+
+	public void setSearchMicroArrayData(boolean searchMicroArrayData) {
+		this.searchMicroArrayData = searchMicroArrayData;
+	}
 }
