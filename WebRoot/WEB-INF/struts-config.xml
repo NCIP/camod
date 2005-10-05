@@ -1318,7 +1318,7 @@
     
     <action path="/XenograftPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.XenograftPopulateAction"
-    		name="XenograftForm"    		
+    		name="xenograftForm"    		
             scope="request"
             parameter="method"
 			validate="false">		
