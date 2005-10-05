@@ -28,7 +28,7 @@ public interface XenograftManager {
 
     public void remove(String id) throws Exception;
 
-    public Xenograft create(XenograftData inXenograftForm, AnimalModel inAnimalModel) throws Exception;
+    public Xenograft create(XenograftData inXenograftData, AnimalModel inAnimalModel) throws Exception;
 
     public void update(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
             throws Exception;
