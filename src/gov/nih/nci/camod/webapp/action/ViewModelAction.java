@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.10 2005-09-30 18:42:24 guruswas Exp $
+ *  $Id: ViewModelAction.java,v 1.11 2005-10-06 13:37:01 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.10  2005/09/30 18:42:24  guruswas
+ *  intial implementation of drug screening search and display page
+ *
  *  Revision 1.9  2005/09/22 21:34:51  guruswas
  *  First stab at carcinogenic intervention pages
  *
@@ -310,8 +313,6 @@ public class ViewModelAction extends BaseAction {
 		final List therapyColl = am.getTherapyCollection();
 		final int cc = (therapyColl!=null)?therapyColl.size():0;
 		log.info("Looking up clinical protocols for " + cc + " agents...");
-        
-		ApplicationService appService = EvsTreeUtil.getApplicationService();
 
 		for(int i=0; i<cc; i++) {
 			Therapy t = (Therapy)therapyColl.get(i);
