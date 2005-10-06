@@ -59,7 +59,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
             throws Exception {
 
         log.trace("Entering XenograftManagerImpl.update");
-        log.debug("Updating XenograftForm: " + inXenograft.getId());
+        log.debug("Updating XenograftData: " + inXenograft.getId());
 
         // Populate w/ the new values and save
         populateXenograft(inXenograftData, inXenograft, inAnimalModel);
