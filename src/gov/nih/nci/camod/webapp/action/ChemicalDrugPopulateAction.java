@@ -17,7 +17,7 @@ import org.apache.struts.action.*;
 public class ChemicalDrugPopulateAction extends BaseAction {
 
     /**
-     * Pre-populate all field values in the form SurgeryForm Used by <jspName>
+     * Pre-populate all field values in the form ChemicalDrug Used by <jspName>
      * 
      */
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
