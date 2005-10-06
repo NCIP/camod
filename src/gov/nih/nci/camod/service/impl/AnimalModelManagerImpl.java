@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.26 2005-10-06 20:41:51 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.27 2005-10-06 20:43:45 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2005/10/06 20:41:51  schroedn
+ * InducedMutation, TargetedMutation, GenomicSegment changes
+ *
  * Revision 1.25  2005/10/06 19:33:10  pandyas
  * modified for Therapy screen
  *
@@ -89,13 +92,14 @@ import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
 import gov.nih.nci.camod.webapp.form.GrowthFactorData;
 import gov.nih.nci.camod.webapp.form.HormoneData;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
 import gov.nih.nci.camod.webapp.form.RadiationData;
 import gov.nih.nci.camod.webapp.form.SearchData;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
 import gov.nih.nci.camod.webapp.form.SurgeryData;
 import gov.nih.nci.camod.webapp.form.TargetedModificationData;
+import gov.nih.nci.camod.webapp.form.TherapyData;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
 import gov.nih.nci.camod.webapp.form.XenograftData;
 import gov.nih.nci.common.persistence.Persist;
