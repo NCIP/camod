@@ -111,7 +111,7 @@ public final class GenomicSegmentAction extends BaseAction {
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-            
+            System.out.println(theAnimalModel.getModelDescriptor() );
            // theAnimalModelManager.addGeneticDescription( theAnimalModel, genomicSegmentForm );
 
             log.info("New GenomicSegment created");
