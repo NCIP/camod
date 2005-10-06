@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.6 2005-09-28 21:20:01 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.7 2005-10-06 19:30:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/09/28 21:20:01  georgeda
+ * Finished up converting to new manager
+ *
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -537,4 +540,118 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         theAgent.setName(inNameData.getName());
         theTherapy.setTherapeuticExperiment(new Boolean(false));
     }
+    
+ 
+    /**
+     * Create a therapy object with the correct data filled in.
+     * 
+     * @param inTherapyData
+     *            the interface to create the therapy object from
+     * 
+     * @returns a therapy
+     */
+    public Therapy create(TherapyData inTherapyData) throws Exception {
+
+        log.trace("In TherapyManagerImpl.create");
+
+        Therapy theTherapy = new Therapy();
+
+        populateAgeGender(inTherapyData, theTherapy);
+        populateDose(inTherapyData, theTherapy);
+        populateTherapy(inTherapyData, theTherapy);
+
+        return theTherapy;
+    }    
+    
+    public void update(TherapyData inTherapyData, Therapy inTherapy) 
+    	throws Exception {
+
+        log.trace("In TherapyManagerImpl.update");
+
+        populateAgeGender(inTherapyData, inTherapy);
+        populateDose(inTherapyData, inTherapy);
+        populateTherapy(inTherapyData, inTherapy);
+        save(inTherapy);
+
+    }
+    
+    private void populateTherapy(TherapyData inTherapyData, Therapy theTherapy)
+    throws Exception {
+    	
+    	log.trace("Entering populateTherapy");
+    	
+    	/* populateName method without otherName */
+    	
+        // Set the treatment
+        Treatment theTreatment = theTherapy.getTreatment();
+        if (theTreatment == null) {
+            theTreatment = new Treatment();
+            theTherapy.setTreatment(theTreatment);
+        }
+
+        // Agent IS-A an EnvironmentalFactor
+        Agent theAgent = theTherapy.getAgent();
+        if (theAgent == null) {
+            theAgent = new Agent();
+            theTherapy.setAgent(theAgent);
+        }
+        //theAgent.setType(inType);
+        theAgent.setName(inTherapyData.getName());
+        theTherapy.setTherapeuticExperiment(new Boolean(true)); 
+        
+        // Set the administrative route
+        theTreatment.setAdministrativeRoute(inTherapyData.getAdministrativeRoute());
+
+        //Set NSC and CAS
+        String theNSCNumber = inTherapyData.getNSCNumber().trim();
+        if (theNSCNumber != null && theNSCNumber.length() > 0) {
+            try {
+                theAgent.setNscNumber(Long.valueOf(theNSCNumber));
+            } catch (NumberFormatException e) {
+                log.error("Bad NSC number: " + theNSCNumber);
+            }
+        }        
+        String theCasNumber = inTherapyData.getCASNumber().trim();
+        if (theCasNumber != null && theCasNumber.length() > 0) {
+            theAgent.setCasNumber(theCasNumber);
+        }    	
+        
+    	//Therapy object attributes
+        theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());		
+        theTherapy.setBiomarker(inTherapyData.getBiomarker());
+        theTherapy.setTumorResponse(inTherapyData.getTumorResponse());
+        theTherapy.setExperiment(inTherapyData.getExperiment());
+        theTherapy.setResults(inTherapyData.getResults());		
+        theTherapy.setComments(inTherapyData.getComments());    	
+    	System.out.println("Got Therapy attributes in populateTherapy");
+    	
+        //Get/create the ChemicalClass
+        //TODO Loop through all the selections
+        //List chemicalClassList = new Array();
+        ChemicalClass theChemicalClass = ChemicalClassManagerSingleton.instance().getByName(
+        		inTherapyData.getChemicalClassName());
+        if (theChemicalClass == null) {
+        	theChemicalClass = new ChemicalClass();
+        	theChemicalClass.setChemicalClassName(inTherapyData.getChemicalClassName());
+        }
+        System.out.println("Got ChemicalClass attributes in populateTherapy");
+        
+        //Get/create the BiologicalProcess
+        BiologicalProcess theBiologicalProcess = BiologicalProcessManagerSingleton.instance().getByName(
+        		inTherapyData.getProcessName());
+        if (theBiologicalProcess == null) {
+        	theBiologicalProcess = new BiologicalProcess();
+        	theBiologicalProcess.setProcessName(inTherapyData.getProcessName());
+        }
+        System.out.println("Got BiologicalProcess attributes in populateTherapy");
+        
+        //Get/create the AgentTarget
+        AgentTarget theAgentTarget = AgentTargetManagerSingleton.instance().getByName(
+        		inTherapyData.getTargetName());
+        if (theAgentTarget == null) {
+        	theAgentTarget = new AgentTarget();
+        	theAgentTarget.setTargetName(inTherapyData.getTargetName());
+        }        
+        log.trace("Exiting populateTherapy");
+    }    
 }

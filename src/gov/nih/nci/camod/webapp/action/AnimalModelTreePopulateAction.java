@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.21 2005-10-04 20:13:20 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.22 2005-10-06 19:27:55 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.21  2005/10/04 20:13:20  schroedn
+ *  Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
+ *
  *  Revision 1.20  2005/09/28 15:13:57  schroedn
  *  Merged changes, tested
  *
@@ -184,6 +187,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         List environFactorList = new ArrayList();
         List radiationList = new ArrayList();
         List nutritionalFactorList = new ArrayList();
+        List therapyList = new ArrayList();
         
         System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
 
@@ -192,7 +196,18 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         } else {
             for (int i = 0; i < tyList.size(); i++) {
                 Therapy ty = (Therapy) tyList.get(i);
-
+                
+                // check to see if it is a Therapy
+                if (ty.getTherapeuticExperiment().booleanValue() == true) {
+                	Agent agent = ty.getAgent();
+                	if ( agent != null ) {
+                		if (agent.getType() == null) {
+                		System.out.println("\tAdded therapy to therapyList");
+                		therapyList.add(ty);                		
+                		}
+                	}
+                }
+            
                 // check to see if it is an EnvironmentalFactor
                 if (ty.getTherapeuticExperiment().booleanValue() == false) {
                     Agent agent = ty.getAgent();
@@ -252,7 +267,10 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.CELLLINE_LIST, cellList);
         request.getSession().setAttribute(Constants.Submit.TARGETEDMODIFICATION_LIST, targetedList);
         request.getSession().setAttribute(Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
+        request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
         
+        System.out.println("3");
+       
             // UserManager theUserManager = (UserManager) getBean("userManager");
             // Set up the form. Should be only one coordinator
             // Get the coordinator

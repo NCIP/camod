@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.16 2005-10-06 13:36:10 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.17 2005-10-06 19:29:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/10/06 13:36:10  georgeda
+ * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
+ *
  * Revision 1.15  2005/10/04 20:10:16  schroedn
  * Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
  *
@@ -22,6 +25,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/10/06 13:36:10  georgeda
+ * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
+ *
  * Revision 1.15  2005/10/04 20:10:16  schroedn
  * Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
  *
@@ -85,7 +91,7 @@ public interface AnimalModelManager {
 
     public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception;
 
-    public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryForm) throws Exception;
+    public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception;
 
     public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData) throws Exception;
 
@@ -113,5 +119,7 @@ public interface AnimalModelManager {
     public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationForm inTargetedModificationForm) throws Exception;
     
     public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentForm inGenomicSegmentForm) throws Exception;
+    
+    public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception; 
     
 }

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManager.java,v 1.5 2005-09-28 21:19:49 georgeda Exp $
+ * $Id: TherapyManager.java,v 1.6 2005-10-06 19:28:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/09/28 21:19:49  georgeda
+ * Finished up converting to new manager
+ *
  */
 package gov.nih.nci.camod.service;
 
@@ -55,4 +58,8 @@ public interface TherapyManager {
     public Therapy create(SurgeryData inSurgeryData);
 
     public void update(SurgeryData inSurgeryData, Therapy inTherapy) throws Exception;
+    
+    public Therapy create(TherapyData inTherapyData) throws Exception;
+    
+    public void update(TherapyData inTherapyData, Therapy inTherapy) throws Exception;    
 }

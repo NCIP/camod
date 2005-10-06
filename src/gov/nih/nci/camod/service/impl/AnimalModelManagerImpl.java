@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.24 2005-10-06 13:36:09 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.25 2005-10-06 19:33:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/10/06 13:36:09  georgeda
+ * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
+ *
  * Revision 1.23  2005/10/05 15:17:48  schroedn
  * SpontaneousMutation create and edit now working
  *
@@ -699,4 +702,25 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Exiting addGeneticDescription (GenomicSegment)");
     }
+    
+    /**
+     * Add a therapy
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the therapy
+     * @param inChemicalDrugData
+     *            the new therapy data
+     * @throws Exception
+     */
+     
+    public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception {
+    	
+    	System.out.println( "<AnimalModelManagerImpl addTherapy>");
+    	   
+        log.trace("Entering AnimalModelManagerImpl.addTherapy");
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inTherapyData);
+        inAnimalModel.addTherapy(theTherapy);
+        save(inAnimalModel);
+        log.trace("Exiting AnimalModelManagerImpl.addTherapy");
+    }     
 }
