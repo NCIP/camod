@@ -51,15 +51,18 @@
             <arg0 key="ModelCharacteristicsForm.releaseDate"/>
         </field>
     </form>
-    
-	
+
 	<form name="geneDeliveryForm">
         <field property="name" depends="required">
             <arg0 key="GeneDeliveryForm.name"/>
     	</field>    
 	</form>	
 
-
+	<form name="inducedMutationForm">
+        <field property="name" depends="required">
+            <arg0 key="InducedMutationForm.name"/>
+    	</field>    
+	</form>	
 	
 	<form name="cellLineForm">
         <field property="cellLineName" depends="required">

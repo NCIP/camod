@@ -1,8 +1,7 @@
 package gov.nih.nci.camod.service;
 
-import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
+import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
 
 import java.util.List;
 
@@ -16,9 +15,9 @@ public interface SpontaneousMutationManager {
 
     public void remove(String id) throws Exception;
 
-    public SpontaneousMutation create(SpontaneousMutationForm inSpontaneousMutationData, AnimalModel inAnimalModel) throws Exception;
+    public SpontaneousMutation create(SpontaneousMutationData inSpontaneousMutationData) throws Exception;
     
-    public void update(SpontaneousMutationForm inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation) throws Exception;        
+    public void update(SpontaneousMutationData inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation) throws Exception;        
 
 }
 

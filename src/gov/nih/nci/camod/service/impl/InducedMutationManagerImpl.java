@@ -1,17 +1,27 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * @author schroedln
+ * 
+ * $Id: InducedMutationManagerImpl.java,v 1.4 2005-10-06 20:41:49 schroedn Exp $
+ * $Log: not supported by cvs2svn $
+ * 
  */
+
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.EnvironmentalFactor;
+import gov.nih.nci.camod.domain.GeneticAlteration;
 import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.service.InducedMutationManager;
-import gov.nih.nci.camod.webapp.form.InducedMutationForm;
+import gov.nih.nci.camod.util.MailUtil;
+import gov.nih.nci.camod.webapp.form.InducedMutationData;
 
 import java.util.List;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager {
 	
@@ -35,38 +45,135 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         super.remove(id, InducedMutation.class);
     }
 
-    public InducedMutation create(InducedMutationForm inInducedMutationForm, AnimalModel inAnimalModel) throws Exception {
+    public InducedMutation create(InducedMutationData inInducedMutationData) throws Exception {
 
         log.trace("Entering InducedMutationManagerImpl.create");
 
         InducedMutation theInducedMutation = new InducedMutation();
 
-        populateInducedMutation(inInducedMutationForm, theInducedMutation, inAnimalModel);
+        populateInducedMutation(inInducedMutationData, theInducedMutation);
        
         log.trace("Exiting InducedMutationManagerImpl.create");
         
         return theInducedMutation;
     }
 
-    public void update(InducedMutationForm inInducedMutationData, InducedMutation inInducedMutation, AnimalModel inAnimalModel)
+    public void update(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation)
             throws Exception {
 
-        log.trace("Entering InducedMutationManagerImpl.update");
-        log.debug("Updating InducedMutationForm: " + inInducedMutation.getId());
+        log.trace( "Entering InducedMutationManagerImpl.update" );
+        log.debug( "Updating InducedMutationForm: " + inInducedMutation.getId() );
 
         // Populate w/ the new values and save
-        populateInducedMutation(inInducedMutationData, inInducedMutation, inAnimalModel);
-       // save(inInducedMutation);
+        populateInducedMutation(inInducedMutationData, inInducedMutation);
+        save(inInducedMutation);
 
         log.trace("Exiting InducedMutationManagerImpl.update");
     }
 
-    private void populateInducedMutation(InducedMutationForm inInducedMutationData, InducedMutation inInducedMutation, AnimalModel inAnimalModel)
+    private void populateInducedMutation(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation)
             throws Exception {
     	
         log.trace("Entering populateInducedMutation");
-        	
-        log.trace("Exiting populateInducedMutation");
-    }
-    
+        
+        EnvironmentalFactor inEnvironFactor = null;
+        
+        // Check to see if a Environmental Factor already exists, 
+        // if it does edit it else create a new EnvironmentalFactor
+        if ( inInducedMutation.getEnvironmentalFactorCollection().size() > 0 )
+        	inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactorCollection().get(0);
+        else
+        	inEnvironFactor = new EnvironmentalFactor();
+        
+        //Inducing Agent Category type
+        inEnvironFactor.setType( inInducedMutationData.getType() );
+        
+        // Other type
+        if (  inInducedMutationData.getOtherType() != null ) {
+	        if (!inInducedMutationData.getOtherType().equals("")) {
+	
+	            log.trace("Sending Notification eMail - new InducedMutation Agent added");
+	            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+	
+	            // Iterate through all the reciepts in the config file
+	            String recipients = theBundle.getString(Constants.EmailMessage.RECIPIENTS);
+	            StringTokenizer st = new StringTokenizer(recipients, ",");
+	            String inRecipients[] = new String[st.countTokens()];
+	
+	            for (int i = 0; i < inRecipients.length; i++)
+	                inRecipients[i] = st.nextToken();
+	
+	            String inSubject = theBundle.getString(Constants.EmailMessage.SUBJECT);
+	            String inMessage = theBundle.getString(Constants.EmailMessage.MESSAGE) + " Inducing Agent Type added ( "
+	                    + inInducedMutationData.getOtherType() + " ) and is awaiting your approval.";
+	            String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
+	            // theBundle.getString(Constants.EmailMessage.SENDER);
+	
+	            // Send the email
+	            try {
+	            	log.trace("Sending Notification eMail - new InducedMutation Agent added");
+	                MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom);
+	                log.trace("Notification eMail sent");
+	            } catch (Exception e) {
+	            	log.trace("Caught exception " + e);
+	                //System.out.println("Caught exception" + e);
+	                e.printStackTrace();
+	            }
+	
+	            // 2. Set flag, this Strain will need to be approved before  being added the list
+	            inEnvironFactor.setTypeUnctrlVocab( inInducedMutationData.getOtherType() );
+	        }
+	    }
+        
+        //CAS Number
+        inEnvironFactor.setCasNumber( inInducedMutationData.getCASNumber() );
+                
+        //Name of Inducing Agent
+        inEnvironFactor.setName( inInducedMutationData.getName() );
+                
+        //inEnvironFactor.setNameUnctrlVocab( );
+        if ( inInducedMutation.getEnvironmentalFactorCollection().size() < 1 )            
+        	inInducedMutation.addEnvironmentalFactor( inEnvironFactor );
+
+        // GeneID        
+        inInducedMutation.setGeneId( inInducedMutationData.getGeneId() );
+                        
+        //Description
+        inInducedMutation.setDescription( inInducedMutationData.getDescription() );
+        
+        // Check for exisiting GeneticAlteration
+        GeneticAlteration inGeneticAlteration = null;
+        if ( inInducedMutation.getGeneticAlterationCollection().size() > 0 )
+        	inGeneticAlteration = (GeneticAlteration) inInducedMutation.getGeneticAlterationCollection().get(0);
+        else
+        	inGeneticAlteration = new GeneticAlteration();
+        
+        //Observaton                
+        inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
+        
+        //Method of Observation
+        inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
+        
+        // Only save if saving a new GeneticAlteration
+        if ( inInducedMutation.getGeneticAlterationCollection().size() < 1 )
+        	inInducedMutation.addGeneticAlteration( inGeneticAlteration );
+        
+        // MGI Number                
+        // Check for exisiting MutationIdentifier
+        MutationIdentifier inMutationIdentifier = null;
+        if ( inInducedMutation.getMutationIdentifier() != null )
+        	inMutationIdentifier = inInducedMutation.getMutationIdentifier();
+        else
+        	inMutationIdentifier = new MutationIdentifier();
+        
+        String strNumberMGI = inInducedMutationData.getNumberMGI().trim();
+        Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+		Matcher m = p.matcher( strNumberMGI );				
+		if (m.matches() && strNumberMGI != null && ! strNumberMGI.equals("") ) {
+			 inMutationIdentifier.setNumberMGI( Long.valueOf( strNumberMGI ) );
+			 inInducedMutation.setMutationIdentifier( inMutationIdentifier );
+		}
+				
+		log.trace("Exiting populateInducedMutation");
+    }    
 }

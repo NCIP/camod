@@ -37,9 +37,7 @@
 		}
 		document.write( test );
 	}
-		
-		
-		
+
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

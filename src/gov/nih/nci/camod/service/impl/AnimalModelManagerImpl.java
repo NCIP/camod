@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.25 2005-10-06 19:33:10 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.26 2005-10-06 20:41:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/10/06 19:33:10  pandyas
+ * modified for Therapy screen
+ *
  * Revision 1.24  2005/10/06 13:36:09  georgeda
  * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
  *
@@ -60,16 +63,51 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Availability;
+import gov.nih.nci.camod.domain.CellLine;
+import gov.nih.nci.camod.domain.ContactInfo;
+import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Phenotype;
+import gov.nih.nci.camod.domain.SexDistribution;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
+import gov.nih.nci.camod.domain.TargetedModification;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.*;
+import gov.nih.nci.camod.webapp.form.CellLineData;
+import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
+import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
+import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
+import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
+import gov.nih.nci.camod.webapp.form.GrowthFactorData;
+import gov.nih.nci.camod.webapp.form.HormoneData;
+import gov.nih.nci.camod.webapp.form.InducedMutationData;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristics;
+import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
+import gov.nih.nci.camod.webapp.form.RadiationData;
+import gov.nih.nci.camod.webapp.form.SearchData;
+import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
+import gov.nih.nci.camod.webapp.form.SurgeryData;
+import gov.nih.nci.camod.webapp.form.TargetedModificationData;
+import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
+import gov.nih.nci.camod.webapp.form.XenograftData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 /**
  * Manages fetching/saving/updating of animal models
@@ -648,11 +686,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a SpontaneousMutation
      */   
-    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationForm inSpontaneousMutationForm) throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationData inSpontaneousMutationData) throws Exception {
 
         log.trace( "Entering addGeneticDescription (spontaneousMutation)" );
 
-        SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create( inSpontaneousMutationForm, inAnimalModel );
+        SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create( inSpontaneousMutationData );
         System.out.println(theSpontaneousMutation.getName() );
         
         inAnimalModel.addSpontaneousMutation( theSpontaneousMutation );
@@ -664,15 +702,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a InducedMutation 
      */   
-    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationForm inInducedMutationForm) throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception {
 
         log.trace( "Entering addGeneticDescription (inducedMutation)" );
 
-        EngineeredGene theGene = InducedMutationManagerSingleton.instance().create( inInducedMutationForm, inAnimalModel );
-        System.out.println(theGene.getName() );
-        
-        //inAnimalModel.addEngineeredGene( theGene );
-        //save( inAnimalModel );
+        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create( inInducedMutationData );        
+        inAnimalModel.addEngineeredGene( theInducedMutation );
+        save( inAnimalModel );
 
         log.trace("Exiting addGeneticDescription (inducedMutation)");
     }   
@@ -680,24 +716,27 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a TargetedModification 
      */   
-    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationForm inTargetedModificationForm) throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData) throws Exception {
 
         log.trace( "Entering addGeneticDescription (TargetedModification)" );
 
-        EngineeredGene theGene = TargetedModificationManagerSingleton.instance().create( inTargetedModificationForm, inAnimalModel );
-        System.out.println(theGene.getName() );
-        //inAnimalModel.addEngineeredGene( theGene );
-        //save( inAnimalModel );
+        TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create( inTargetedModificationData );
+        //System.out.println(theGene.getName() );
+
+        inAnimalModel.addEngineeredGene( theTargetedModification );
+        save( inAnimalModel );
 
         log.trace("Exiting addGeneticDescription (TargetedModification)");
     }
     
-    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentForm inGenomicSegmentForm) throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData) throws Exception {
+    	
         log.trace( "Entering addGeneticDescription (GenomicSegment)" );
 
-        EngineeredGene theGene = GenomicSegmentManagerSingleton.instance().create( inGenomicSegmentForm, inAnimalModel );
-        System.out.println(theGene.getName() );
-        //inAnimalModel.addEngineeredGene( theGene );
+        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create( inGenomicSegmentData );
+        System.out.println(theGenomicSegment.getName() );
+        
+        //inAnimalModel.addEngineeredGene( theGenomicSegment );
         //save( inAnimalModel );
 
         log.trace("Exiting addGeneticDescription (GenomicSegment)");

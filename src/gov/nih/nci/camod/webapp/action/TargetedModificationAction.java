@@ -2,13 +2,19 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TargetedModificationManager;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 /**
  * TargetedModificationAction Class
@@ -66,11 +72,58 @@ public final class TargetedModificationAction extends BaseAction {
                               HttpServletRequest request,
                               HttpServletResponse response)
     throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
+    	
+        log.trace("Entering edit");
+
+        TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, targetedModificationForm);
+                
+        // Grab the current SpontaneousMutation we are working with related to this
+        String aTargetedModificationID = request.getParameter("aTargetedModificationID");
+
+        log.info("<TargetedModificationAction save> following Characteristics:" 
+        		+ "\n\t getName: " + targetedModificationForm.getName()
+                + "\n\t getModificationType: " + targetedModificationForm.getModificationType()              
+                + "\n\t getOtherModificationType: " + targetedModificationForm.getOtherModificationType() 
+                + "\n\t getGeneId: " + targetedModificationForm.getGeneId()
+                + "\n\t getEsCellLineName: " + targetedModificationForm.getEsCellLineName()
+                + "\n\t getBlastocystName: " + targetedModificationForm.getBlastocystName()
+                + "\n\t getConditionedBy: " + targetedModificationForm.getConditionedBy()
+                + "\n\t getDescription: " + targetedModificationForm.getDescription()
+                + "\n\t getComments: " + targetedModificationForm.getComments()
+                + "\n\t getNumberMGI: " + targetedModificationForm.getNumberMGI()
+                + "\n\t getFileServerLocation: " + targetedModificationForm.getFileServerLocation()
+                + "\n\t getTitle: " + targetedModificationForm.getTitle()
+                + "\n\t getDescriptionOfConstruct: " + targetedModificationForm.getDescriptionOfConstruct()
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+
+
+        TargetedModificationManager targetedModificationManager = (TargetedModificationManager) getBean("targetedModificationManager");
+        
+        try {
+        	
+        	TargetedModification theTargetedModification = targetedModificationManager.get( aTargetedModificationID );
+        	targetedModificationManager.update( targetedModificationForm, theTargetedModification );
+        	
+            log.info( "TargetedModification edited" );
+
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "targetedmodification.edit.successful"));
+            saveErrors(request, msg);
+
+        } catch (Exception e) {
+            log.error("Exception ocurred creating SpontaneousMutation", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
         }
 
-        return mapping.findForward("");
+        log.trace("Exiting edit");
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
     /**
@@ -89,26 +142,26 @@ public final class TargetedModificationAction extends BaseAction {
         log.trace("Entering save");
 
         // Create a form to edit
-        TargetedModificationForm TargetedModificationForm = (TargetedModificationForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, TargetedModificationForm);
+        TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, targetedModificationForm);
              
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<TargetedModificationAction save> following Characteristics:" 
-        		+ "\n\t getType: " + TargetedModificationForm.getName()
-                + "\n\t getOtherType: " + TargetedModificationForm.getModificationType()              
-                + "\n\t getCASNumber: " + TargetedModificationForm.getOtherModificationType() 
-                + "\n\t getGeneId: " + TargetedModificationForm.getGeneId()
-                + "\n\t getName: " + TargetedModificationForm.getEsCellLineName()
-                + "\n\t getDescription: " + TargetedModificationForm.getBlastocystName()
-                + "\n\t getObservation: " + TargetedModificationForm.getConditionedBy()
-                + "\n\t getMethodObservation: " + TargetedModificationForm.getDescription()
-                + "\n\t getNumberMGI: " + TargetedModificationForm.getComments()
-                + "\n\t getObservation: " + TargetedModificationForm.getNumberMGI()
-                + "\n\t getMethodObservation: " + TargetedModificationForm.getFileServerLocation()
-                + "\n\t getNumberMGI: " + TargetedModificationForm.getTitle()
-                + "\n\t getDescriptionOfConstruct: " + TargetedModificationForm.getDescriptionOfConstruct()
+        		+ "\n\t getName: " + targetedModificationForm.getName()
+                + "\n\t getModificationType: " + targetedModificationForm.getModificationType()              
+                + "\n\t getOtherModificationType: " + targetedModificationForm.getOtherModificationType() 
+                + "\n\t getGeneId: " + targetedModificationForm.getGeneId()
+                + "\n\t getEsCellLineName: " + targetedModificationForm.getEsCellLineName()
+                + "\n\t getBlastocystName: " + targetedModificationForm.getBlastocystName()
+                + "\n\t getConditionedBy: " + targetedModificationForm.getConditionedBy()
+                + "\n\t getDescription: " + targetedModificationForm.getDescription()
+                + "\n\t getComments: " + targetedModificationForm.getComments()
+                + "\n\t getNumberMGI: " + targetedModificationForm.getNumberMGI()
+                + "\n\t getFileServerLocation: " + targetedModificationForm.getFileServerLocation()
+                + "\n\t getTitle: " + targetedModificationForm.getTitle()
+                + "\n\t getDescriptionOfConstruct: " + targetedModificationForm.getDescriptionOfConstruct()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {
@@ -116,7 +169,7 @@ public final class TargetedModificationAction extends BaseAction {
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
-            theAnimalModelManager.addGeneticDescription( theAnimalModel, TargetedModificationForm );
+            theAnimalModelManager.addGeneticDescription( theAnimalModel, targetedModificationForm );
 
             log.info("New TargetedModification created");
 

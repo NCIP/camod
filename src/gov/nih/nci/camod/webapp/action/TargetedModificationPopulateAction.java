@@ -1,8 +1,16 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.Conditionality;
+import gov.nih.nci.camod.domain.Image;
+import gov.nih.nci.camod.domain.ModificationType;
+import gov.nih.nci.camod.domain.MutationIdentifier;
+import gov.nih.nci.camod.domain.TargetedModification;
+import gov.nih.nci.camod.service.impl.TargetedModificationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +26,39 @@ public class TargetedModificationPopulateAction extends BaseAction {
 	
 	    System.out.println( "<TargetedModificationPopulateAction populate> Entering populate() " );
 	
-	    TargetedModificationForm TargetedModificationForm = (TargetedModificationForm) form;
-	    request.getSession().setAttribute(Constants.FORMDATA, TargetedModificationForm);       
+	    TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
+	    	    
+	    String aTargetedModificationID = request.getParameter("aTargetedModificationID");
+	    TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().get(aTargetedModificationID);
+	    
+	    targetedModificationForm.setName( theTargetedModification.getName() );
+	    targetedModificationForm.setBlastocystName( theTargetedModification.getBlastocystName() );
+	    targetedModificationForm.setComments( theTargetedModification.getComments() );
+	    targetedModificationForm.setGeneId( theTargetedModification.getGeneId() );
+	    targetedModificationForm.setEsCellLineName( theTargetedModification.getEsCellLineName() );
+	    
+	    Conditionality cond = theTargetedModification.getConditionality();
+	    targetedModificationForm.setConditionedBy( cond.getConditionedBy() );	    
+	    targetedModificationForm.setDescription( cond.getDescription() );		    
+	    
+	    Image image = theTargetedModification.getImage();
+	    targetedModificationForm.setFileServerLocation( image.getFileServerLocation() );
+	    targetedModificationForm.setTitle( image.getTitle() );
+	    targetedModificationForm.setDescriptionOfConstruct( image.getDescription() );
+	    
+	    List modTypeList = theTargetedModification.getModificationTypeCollection();
+	    
+	    ModificationType modType = (ModificationType) modTypeList.get(0);
+	    targetedModificationForm.setModificationType( modType.getName() );
+	    
+	    targetedModificationForm.setOtherModificationType( theTargetedModification.getModTypeUnctrlVocab() );
+	    
+	    MutationIdentifier theMutationIdentifier = theTargetedModification.getMutationIdentifier();
+	    
+	    if( theMutationIdentifier != null )
+	    	targetedModificationForm.setNumberMGI( theMutationIdentifier.getNumberMGI().toString() );	    
+	    
+	    request.getSession().setAttribute(Constants.FORMDATA, targetedModificationForm);       
 	
 	    // setup dropdown menus
 	    this.dropdown(request, response);
@@ -33,8 +72,8 @@ public class TargetedModificationPopulateAction extends BaseAction {
 	    System.out.println( "<TargetedModificationPopulateAction dropdown> Entering dropdown()" );
 	
 	    // blank out the FORMDATA Constant field
-	    TargetedModificationForm TargetedModificationForm = (TargetedModificationForm) form;
-	    request.getSession().setAttribute(Constants.FORMDATA, TargetedModificationForm);       
+	    TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
+	    request.getSession().setAttribute(Constants.FORMDATA, targetedModificationForm);       
 	    
 	    // setup dropdown menus
 	    this.dropdown(request, response);

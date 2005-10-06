@@ -2,13 +2,7 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-public class SpontaneousMutationForm extends BaseForm implements Serializable {
+public class SpontaneousMutationForm extends BaseForm implements Serializable, SpontaneousMutationData  {
     
     private static final long serialVersionUID = 3257055453799404851L;
     

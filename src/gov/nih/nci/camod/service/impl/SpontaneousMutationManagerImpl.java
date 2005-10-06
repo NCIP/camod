@@ -6,13 +6,12 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.GeneticAlteration;
+import gov.nih.nci.camod.domain.MutationIdentifier;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.service.SpontaneousMutationManager;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
+import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
 
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,7 +38,7 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         super.remove(id, SpontaneousMutation.class);
     }
 
-    public SpontaneousMutation create(SpontaneousMutationForm inSpontaneousMutationData, AnimalModel inAnimalModel) throws Exception {
+    public SpontaneousMutation create(SpontaneousMutationData inSpontaneousMutationData) throws Exception {
 
         log.trace("Entering SpontaneousMutationManagerImpl.create");
 
@@ -47,25 +46,25 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 
         log.trace("Exiting SpontaneousMutationManagerImpl.create");
         
-        populateSpontaneousMutation(inSpontaneousMutationData, theSpontaneousMutation, inAnimalModel);
+        populateSpontaneousMutation(inSpontaneousMutationData, theSpontaneousMutation);
 
         return theSpontaneousMutation;
     }
 
-    public void update(SpontaneousMutationForm inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation )
+    public void update(SpontaneousMutationData inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation )
             throws Exception {
 
         log.trace("Entering SpontaneousMutationManagerImpl.update");
         log.debug("Updating SpontaneousMutationForm: " + inSpontaneousMutation.getId());
 
         // Populate w/ the new values and save
-        populateSpontaneousMutation(inSpontaneousMutationData, inSpontaneousMutation, null);
+        populateSpontaneousMutation(inSpontaneousMutationData, inSpontaneousMutation);
         save(inSpontaneousMutation);
 
         log.trace("Exiting SpontaneousMutationManagerImpl.update");
     }
 
-    private void populateSpontaneousMutation(SpontaneousMutationForm inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation, AnimalModel inAnimalModel)
+    private void populateSpontaneousMutation(SpontaneousMutationData inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation)
             throws Exception {
     	
         log.trace("Entering populateSpontaneousMutation");

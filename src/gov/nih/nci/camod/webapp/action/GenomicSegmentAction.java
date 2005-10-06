@@ -89,22 +89,22 @@ public final class GenomicSegmentAction extends BaseAction {
         log.trace("Entering save");
 
         // Create a form to edit
-        GenomicSegmentForm GenomicSegmentForm = (GenomicSegmentForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, GenomicSegmentForm);
+        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);
              
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<GenomicSegmentAction save> following Characteristics:" 
-        		+ "\n\t getLocationOfIntegration: " + GenomicSegmentForm.getLocationOfIntegration()
-                + "\n\t getSegmentName: " + GenomicSegmentForm.getSegmentName()              
-                + "\n\t getOtherSegmentName: " + GenomicSegmentForm.getOtherSegmentName() 
-                + "\n\t getComments: " + GenomicSegmentForm.getComments()
-                + "\n\t getCloneDesignator: " + GenomicSegmentForm.getCloneDesignator()
-                + "\n\t getNumberMGI: " + GenomicSegmentForm.getNumberMGI()
-                + "\n\t getDescription: " + GenomicSegmentForm.getDescription()
-                + "\n\t getFileServerLocation: " + GenomicSegmentForm.getFileServerLocation()
-                + "\n\t getTitle: " + GenomicSegmentForm.getTitle()          
+        		+ "\n\t getLocationOfIntegration: " + genomicSegmentForm.getLocationOfIntegration()
+                + "\n\t getSegmentName: " + genomicSegmentForm.getSegmentName()              
+                + "\n\t getOtherSegmentName: " + genomicSegmentForm.getOtherSegmentName() 
+                + "\n\t getComments: " + genomicSegmentForm.getComments()
+                + "\n\t getCloneDesignator: " + genomicSegmentForm.getCloneDesignator()
+                + "\n\t getNumberMGI: " + genomicSegmentForm.getNumberMGI()
+                + "\n\t getDescription: " + genomicSegmentForm.getDescription()
+                + "\n\t getFileServerLocation: " + genomicSegmentForm.getFileServerLocation()
+                + "\n\t getTitle: " + genomicSegmentForm.getTitle()          
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {
@@ -112,7 +112,7 @@ public final class GenomicSegmentAction extends BaseAction {
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
-            theAnimalModelManager.addGeneticDescription( theAnimalModel, GenomicSegmentForm );
+           // theAnimalModelManager.addGeneticDescription( theAnimalModel, genomicSegmentForm );
 
             log.info("New GenomicSegment created");
 

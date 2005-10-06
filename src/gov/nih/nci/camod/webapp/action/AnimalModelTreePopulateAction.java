@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.22 2005-10-06 19:27:55 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.23 2005-10-06 20:40:12 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.22  2005/10/06 19:27:55  pandyas
+ *  modified for Therapy screen
+ *
  *  Revision 1.21  2005/10/04 20:13:20  schroedn
  *  Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
  *
@@ -38,8 +41,11 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
+import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
@@ -151,29 +157,35 @@ public class AnimalModelTreePopulateAction extends BaseAction {
     	} 
 
         //Retrieve the list all SpontaneousMutations assoc with this AnimalModel
-        List inducedMutationList = animalModel.getEngineeredGeneCollection();
+        List engineeredGeneList = animalModel.getEngineeredGeneCollection();
         List inducedList  = new ArrayList();
         List targetedList = new ArrayList();
         List segmentList = new ArrayList();
         
-        for (int i = 0; i < inducedMutationList.size(); i++) {
-        	EngineeredGene inducedMutation = (EngineeredGene) inducedMutationList.get(i);       
+        for (int i = 0; i < engineeredGeneList.size(); i++) {
+        	EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);       
         	
-        	if ( inducedMutation.getMutationIdentifier().equals( "IM") ) {
-        		System.out.println("\tAdded inducedMutationList= " + inducedMutation.getName() );            
-        		inducedList.add(inducedMutation);
+        	if ( engineeredGene instanceof InducedMutation ) {            
+        		InducedMutation inInduced = (InducedMutation) engineeredGeneList.get(i);
+        		if ( inInduced.getEnvironmentalFactor() != null) {	            	
+	        		inducedList.add((InducedMutation) engineeredGeneList.get(i));
+	            	System.out.println( "\tAdded a Induced Mutation" );
+        		}
         	}
         	
-           	if ( inducedMutation.getMutationIdentifier().equals( "TM") ) {
-        		System.out.println("\tAdded inducedMutationList= " + inducedMutation.getName() );            
-        		targetedList.add(inducedMutation);
+        	if ( engineeredGene instanceof TargetedModification ) {
+        		TargetedModification inTargeted = (TargetedModification) engineeredGeneList.get(i);
+        		System.out.println( "\tTargeted NAME:" +  inTargeted.getName() );
+            	targetedList.add( (TargetedModification) engineeredGeneList.get(i) );
+            	System.out.println( "\tAdded a TargetedModification" );
         	}
-
-           	if ( inducedMutation.getMutationIdentifier().equals( "GS") ) {
-        		System.out.println("\tAdded inducedMutationList= " + inducedMutation.getName() );            
-        		segmentList.add(inducedMutation);
-        	}                      
-    	}
+        	
+        	if ( engineeredGene instanceof GenomicSegment ) {
+            	segmentList.add(engineeredGene);
+            	System.out.println( "\tAdded a GenomicSegment");
+        	}
+        	
+        }
         
         // Print the list of EnvironmentalFactors for the Cardiogenic
         // Interventions Section
@@ -269,8 +281,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
         request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
         
-        System.out.println("3");
-       
+        System.out.println( "TargedModList: " + targetedList);
+        
             // UserManager theUserManager = (UserManager) getBean("userManager");
             // Set up the form. Should be only one coordinator
             // Get the coordinator

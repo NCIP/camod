@@ -2,7 +2,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.webapp.form.InducedMutationForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,11 +72,53 @@ public final class InducedMutationAction extends BaseAction {
                               HttpServletRequest request,
                               HttpServletResponse response)
     throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
+    	
+        log.trace("Entering edit");
+
+        // Create a form to edit
+        InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, inducedMutationForm);
+             
+        // Grab the current SpontaneousMutation we are working with related to this
+        String aInducedMutationID = request.getParameter("aInducedMutationID");
+
+        log.info("<InducedMutationAction save> following Characteristics:" 
+        		+ "\n\t getType: " + inducedMutationForm.getType()
+                + "\n\t getOtherType: " + inducedMutationForm.getOtherType()              
+                + "\n\t getCASNumber: " + inducedMutationForm.getCASNumber() 
+                + "\n\t getGeneId: " + inducedMutationForm.getGeneId()
+                + "\n\t getName: " + inducedMutationForm.getName()
+                + "\n\t getDescription: " + inducedMutationForm.getDescription()
+                + "\n\t getObservation: " + inducedMutationForm.getObservation()
+                + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation()
+                + "\n\t getNumberMGI: " + inducedMutationForm.getNumberMGI()
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        
+        InducedMutationManager inducedMutationManager = (InducedMutationManager) getBean("inducedMutationManager");
+        
+        try {
+        	InducedMutation theInducedMutation = inducedMutationManager.get( aInducedMutationID );
+        	inducedMutationManager.update( inducedMutationForm, theInducedMutation );
+        
+            log.info("InducedMutation edited");
+
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.edit.successful"));
+            saveErrors(request, msg);
+
+        } catch (Exception e) {
+            log.error("Exception ocurred editing InducedMutation", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
         }
 
-        return mapping.findForward("");
+        log.trace("Exiting edit");
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
     /**

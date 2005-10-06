@@ -74,7 +74,7 @@ public class SpontaneousMutationAction extends BaseAction {
                               HttpServletResponse response)
     throws Exception {
     	
-        log.trace("Entering save");
+        log.trace("Entering edit");
 
         // Create a form to edit
         SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
@@ -115,7 +115,7 @@ public class SpontaneousMutationAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.trace("Exiting save");
+        log.trace("Exiting edit");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 

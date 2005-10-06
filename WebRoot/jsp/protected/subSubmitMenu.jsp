@@ -6,8 +6,10 @@
 <%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
 <%@ page import="gov.nih.nci.camod.domain.Xenograft" %>	
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation" %>
-<%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>	
+<%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>
+<%@ page import="gov.nih.nci.camod.domain.EnvironmentalFactor" %>	
 <%@ page import="gov.nih.nci.camod.domain.SpontaneousMutation" %>	
+<%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
@@ -39,7 +41,7 @@
 		<img src="images/plus.gif" border="0"><html:link styleClass="subMenuDarkRed" action="submitAssocExpression">Enter Assoc Expression</html:link><br>
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="TargetedModificationPopulateAction.do?method=dropdown">Enter Targeted Modification</html:link><br>
-		<logic:iterate id="aTargetedModification" name="targetedmodification_list" type="EngineeredGene">
+		<logic:iterate id="aTargetedModification" name="targetedmodification_list" type="TargetedModification">
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="TargetedModificationPopulateAction.do?method=populate" paramId="aTargetedModificationID" paramName="aTargetedModification" paramProperty="id">
@@ -48,11 +50,11 @@
 		</logic:iterate>
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="InducedMutationPopulateAction.do?method=dropdown">Enter Induced Mutation</html:link><br>
-		<logic:iterate id="aInducedMutation" name="inducedmutation_list" type="EngineeredGene">
+		<logic:iterate id="aInducedMutation" name="inducedmutation_list" type="InducedMutation">
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="InducedMutationPopulateAction.do?method=populate" paramId="aInducedMutationID" paramName="aInducedMutation" paramProperty="id">
-			      		<bean:write name="aInducedMutation" property="name" filter="true"/>
+			      		<bean:write name="aInducedMutation" property="environmentalFactor.name" filter="true"/>
 			      </html:link><br>
 		</logic:iterate>
 		

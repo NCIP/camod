@@ -6,11 +6,10 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GenomicSegment;
 import gov.nih.nci.camod.service.GenomicSegmentManager;
-import gov.nih.nci.camod.webapp.form.GenomicSegmentForm;
+import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
+
 import java.util.List;
 
 public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSegmentManager {
@@ -35,33 +34,33 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 	        super.remove(id, GenomicSegment.class);
 	    }
 
-	    public EngineeredGene create(GenomicSegmentForm inGenomicSegmentForm, AnimalModel inAnimalModel) throws Exception {
+	    public GenomicSegment create(GenomicSegmentData inGenomicSegmentData) throws Exception {
 
 	        log.trace("Entering GenomicSegmentManagerImpl.create");
 
-	        EngineeredGene theEngineeredGene = new GenomicSegment();
+	        GenomicSegment inGenomicSegment= new GenomicSegment();
 
-	        populateGenomicSegment(inGenomicSegmentForm, theEngineeredGene, inAnimalModel);
+	        populateGenomicSegment(inGenomicSegmentData, inGenomicSegment);
 	       
 	        log.trace("Exiting GenomicSegmentManagerImpl.create");
 	        
-	        return theEngineeredGene;
+	        return inGenomicSegment;
 	    }
 
-	    public void update(GenomicSegmentForm inGenomicSegmentData, EngineeredGene inEngineeredGene, AnimalModel inAnimalModel)
+	    public void update(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment)
 	            throws Exception {
 
 	        log.trace("Entering GenomicSegmentManagerImpl.update");
-	        log.debug("Updating GenomicSegmentForm: " + inEngineeredGene.getId());
+	        log.debug("Updating GenomicSegmentForm: " + inGenomicSegment.getId());
 
 	        // Populate w/ the new values and save
-	        populateGenomicSegment(inGenomicSegmentData, inEngineeredGene, inAnimalModel);
+	        populateGenomicSegment(inGenomicSegmentData, inGenomicSegment);
 	       // save(inGenomicSegment);
 
 	        log.trace("Exiting GenomicSegmentManagerImpl.update");
 	    }
 
-	    private void populateGenomicSegment(GenomicSegmentForm inGenomicSegmentData, EngineeredGene inEngineeredGene, AnimalModel inAnimalModel)
+	    private void populateGenomicSegment(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment)
 	            throws Exception {
 	    	
 	        log.trace("Entering populateGenomicSegment");

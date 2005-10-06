@@ -14,7 +14,7 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class InducedMutationForm extends BaseForm implements Serializable {
+public class InducedMutationForm extends BaseForm implements Serializable, InducedMutationData {
     
     private static final long serialVersionUID = 3257175453799404851L;
     

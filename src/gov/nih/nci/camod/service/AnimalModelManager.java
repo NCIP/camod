@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.17 2005-10-06 19:29:50 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.18 2005-10-06 20:41:38 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/10/06 19:29:50  pandyas
+ * modified for Therapy screen
+ *
  * Revision 1.16  2005/10/06 13:36:10  georgeda
  * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
  *
@@ -25,6 +28,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/10/06 19:29:50  pandyas
+ * modified for Therapy screen
+ *
  * Revision 1.16  2005/10/06 13:36:10  georgeda
  * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
  *
@@ -112,13 +118,13 @@ public interface AnimalModelManager {
     
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception;    
 
-    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationForm inSpontaneousMutationForm) throws Exception;
+    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationData inSpontaneousMutationData) throws Exception;
     
-    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationForm inInducedMutationForm) throws Exception;
+    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception;
     
-    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationForm inTargetedModificationForm) throws Exception;
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData) throws Exception;
     
-    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentForm inGenomicSegmentForm) throws Exception;
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData) throws Exception;
     
     public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception; 
     
