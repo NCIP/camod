@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModelCharacteristicsForm.java,v 1.4 2005-09-28 15:12:22 schroedn Exp $
+ * $Id: ModelCharacteristicsForm.java,v 1.5 2005-10-06 13:36:08 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/09/28 15:12:22  schroedn
+ * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
+ *
  * Revision 1.3  2005/09/16 15:52:58  georgeda
  * Changes due to manager re-write
  *
@@ -17,7 +20,7 @@ import java.io.Serializable;
  * Form for submitting/editing AnimalModel
  * 
  */
-public class ModelCharacteristicsForm extends BaseForm implements ModelCharacteristics, Serializable {
+public class ModelCharacteristicsForm extends BaseForm implements ModelCharacteristicsData, Serializable {
 
     private static final long serialVersionUID = 3257850969634190134L;
 

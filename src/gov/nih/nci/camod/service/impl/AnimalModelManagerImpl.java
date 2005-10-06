@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.23 2005-10-05 15:17:48 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.24 2005-10-06 13:36:09 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2005/10/05 15:17:48  schroedn
+ * SpontaneousMutation create and edit now working
+ *
  * Revision 1.22  2005/10/04 20:12:52  schroedn
  * Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
  *
@@ -222,7 +225,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Create a new/unsaved animal model
      * 
-     * @param inModelCharacteristics
+     * @param inModelCharacteristicsData
      *            The values for the model and associated objects
      * 
      * @param inUsername
@@ -231,32 +234,32 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @return the created and unsaved AnimalModel
      * @throws Exception
      */
-    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception {
+    public AnimalModel create(ModelCharacteristicsData inModelCharacteristicsData, String inUsername) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.create");
 
         AnimalModel theAnimalModel = new AnimalModel();
 
         log.trace("Exiting AnimalModelManagerImpl.create");
-        return populateAnimalModel(inModelCharacteristics, inUsername, theAnimalModel);
+        return populateAnimalModel(inModelCharacteristicsData, inUsername, theAnimalModel);
     }
 
     /**
      * Update the animal model w/ the new characteristics and save
      * 
-     * @param inModelCharacteristics
+     * @param inModelCharacteristicsData
      *            The new values for the model and associated objects
      * 
      * @param inAnimalModel
      *            The animal model to update
      */
-    public void update(ModelCharacteristics inModelCharacteristics, AnimalModel inAnimalModel) throws Exception {
+    public void update(ModelCharacteristicsData inModelCharacteristicsData, AnimalModel inAnimalModel) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.update");
         log.debug("Updating animal model: " + inAnimalModel.getId());
 
         // Populate w/ the new values and save
-        inAnimalModel = populateAnimalModel(inModelCharacteristics, null, inAnimalModel);
+        inAnimalModel = populateAnimalModel(inModelCharacteristicsData, null, inAnimalModel);
         save(inAnimalModel);
 
         log.trace("Exiting AnimalModelManagerImpl.update");
@@ -296,7 +299,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     // Populate the model based on the model characteristics form passed in. It
     // will update associated
     // object if they exist, create them if they don't.
-    private AnimalModel populateAnimalModel(ModelCharacteristics inModelCharacteristics, String inUsername,
+    private AnimalModel populateAnimalModel(ModelCharacteristicsData inModelCharacteristics, String inUsername,
             AnimalModel inAnimalModel) throws Exception {
 
         log.trace("Entering populateAnimalModel");

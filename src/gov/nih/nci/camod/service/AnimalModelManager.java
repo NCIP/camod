@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.15 2005-10-04 20:10:16 schroedn Exp $
+ * $Id: AnimalModelManager.java,v 1.16 2005-10-06 13:36:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/10/04 20:10:16  schroedn
+ * Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
+ *
  * Revision 1.14  2005/10/03 13:51:14  georgeda
  * Search changes
  *
@@ -19,6 +22,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/10/04 20:10:16  schroedn
+ * Added Spontaneous Mutation, InducedMutation, Histopathology, TargetedModification and GenomicSegment
+ *
  * Revision 1.14  2005/10/03 13:51:14  georgeda
  * Search changes
  *
@@ -69,9 +75,9 @@ public interface AnimalModelManager {
 
     public void updateAndAddLog(AnimalModel inAnimalModel, Log inLog) throws Exception;
 
-    public void update(ModelCharacteristics inModelCharacteristics, AnimalModel inAnimalModel) throws Exception;
+    public void update(ModelCharacteristicsData inModelCharacteristics, AnimalModel inAnimalModel) throws Exception;
 
-    public AnimalModel create(ModelCharacteristics inModelCharacteristics, String inUsername) throws Exception;
+    public AnimalModel create(ModelCharacteristicsData inModelCharacteristics, String inUsername) throws Exception;
 
     public void remove(String id) throws Exception;
 
