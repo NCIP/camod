@@ -176,7 +176,7 @@ public final class TherapyAction extends BaseAction {
 
         } catch (Exception e) {
 
-            log.error("Unable to get add a chemical drug action: ", e);
+            log.error("Unable to get add a therapy action: ", e);
 
             ActionMessages theMsg = new ActionMessages();
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
