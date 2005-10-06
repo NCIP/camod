@@ -207,7 +207,7 @@ public class Agent extends EnvironmentalFactor {
      */
     public String toString() {
         return new ToStringBuilder(this).append("chemicalClassCollection", this.chemicalClassCollection).append("name",
-                this.getName()).append("inducedMutationCollection", this.getInducedMutationCollection()).append(
+                this.getName()).append(
                 "source", this.source).append("id", this.getId()).append("comments", this.comments).append(
                 "agentTargetCollection", this.agentTargetCollection).append("CMAPAgent", this.getIsCMAPAgent()).append(
                 "casNumber", this.getCasNumber()).append("type", this.getType()).append("biologicalProcessCollection",

@@ -41,7 +41,7 @@ public class TargetedModification extends EngineeredGene {
     public void setModificationTypeCollection(List modificationTypeCollection) {
         this.modificationTypeCollection = modificationTypeCollection;
     }
-
+    
     /**
      * @param modificationType
      *            The modificationType to add.
@@ -138,13 +138,18 @@ public class TargetedModification extends EngineeredGene {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("conditionality", this.getConditionality()).append("name",
-                this.getName()).append("expressionFeatureCollection", this.getExpressionFeatureCollection()).append(
-                "esCellLineName", this.esCellLineName).append("id", this.getId())
-                .append("comments", this.getComments()).append("image", this.getImage()).append("cabioId",
-                        this.getCabioId()).append("mutationIdentifier", this.getMutationIdentifier()).append(
-                        "blastocystName", this.blastocystName).append("modificationTypeCollection",
-                        this.modificationTypeCollection).append("modType_unctrl_vocab", this.modTypeUnctrlVocab)
-                .append("geneId", this.geneId).append("genotypeSummary", this.getGenotypeSummary()).toString();
+    	
+    	return geneId;
+    	
+//        return new ToStringBuilder(this).append("conditionality", this.getConditionality()).append("name",
+//                this.getName()).append("expressionFeatureCollection", this.getExpressionFeatureCollection()).append(
+//                "esCellLineName", this.esCellLineName).append("id", this.getId())
+//                .append("comments", this.getComments()).append("image", this.getImage()).append("cabioId",
+//                        this.getCabioId()).append("mutationIdentifier", this.getMutationIdentifier()).append(
+//                        "blastocystName",
+//						this.blastocystName).append(
+//						"modificationTypeCollection",
+//                        this.modificationTypeCollection).append("modType_unctrl_vocab", this.modTypeUnctrlVocab)
+//                .append("geneId", this.geneId).append("genotypeSummary", this.getGenotypeSummary()).toString();
     }
 }

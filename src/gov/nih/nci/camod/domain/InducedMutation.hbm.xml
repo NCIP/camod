@@ -39,15 +39,20 @@
             	unique="true"
             	class="GeneticAlteration"/>
         </bag>
-        
-    	<!-- environmentalFactor (many-to-one bidirectional) -->
-        <join table="env_fac_ind_mutation" 
-        	inverse="true" 
-        	optional="true">
+    	
+    	<!-- environmentalFactorCollection (one-to-many unidirectional) -->
+        <bag name="environmentalFactorCollection" 
+        	table="env_fac_ind_mutation"
+        	inverse="false" 
+        	lazy="true" 
+        	cascade="all-delete-orphan">
         	
         	<key column="engineered_gene_id"/>
-        	<many-to-one name="environmentalFactor" class="EnvironmentalFactor"
-            	column="env_factor_id"/> 
-    	</join>
+        	<many-to-many column="env_factor_id"
+            	unique="true"
+            	class="EnvironmentalFactor"/>
+        </bag>
+        
+        	
 	</subclass>
 </hibernate-mapping>

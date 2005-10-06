@@ -93,7 +93,9 @@ public class Conditionality extends BaseObject implements Serializable {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("conditionedBy", this.conditionedBy).append("id", this.id).append(
-                "description", this.description).toString();
+        return "no";
+        
+        //new ToStringBuilder(this).append("conditionedBy", this.conditionedBy).append("id", this.id).append(
+        //        "description", this.description).toString();
     }
 }

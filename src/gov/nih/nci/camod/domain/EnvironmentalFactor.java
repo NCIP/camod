@@ -7,8 +7,6 @@
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.lang.builder.*;
 
@@ -28,7 +26,6 @@ public class EnvironmentalFactor extends BaseObject implements Serializable {
     private String name;
     private String nameUnctrlVocab;
     private String casNumber;
-    private List inducedMutationCollection = new ArrayList();
 
     /**
      * @return Returns the casNumber.
@@ -43,30 +40,6 @@ public class EnvironmentalFactor extends BaseObject implements Serializable {
      */
     public void setCasNumber(String casNumber) {
         this.casNumber = casNumber;
-    }
-
-    /**
-     * @return Returns the inducedMutationCollection.
-     */
-    public List getInducedMutationCollection() {
-        return inducedMutationCollection;
-    }
-
-    /**
-     * @param inducedMutationCollection
-     *            The inducedMutationCollection to set.
-     */
-    public void setInducedMutationCollection(List inducedMutationCollection) {
-        this.inducedMutationCollection = inducedMutationCollection;
-    }
-
-    /**
-     * @param inducedMutation
-     *            The inducedMutation to add.
-     */
-    public void addInducedMutation(InducedMutation inducedMutation) {
-        inducedMutation.setEnvironmentalFactor(this);
-        inducedMutationCollection.add(inducedMutation);
     }
 
     /**
@@ -154,8 +127,7 @@ public class EnvironmentalFactor extends BaseObject implements Serializable {
         EnvironmentalFactor rhs = (EnvironmentalFactor) object;
         return new EqualsBuilder().append(this.casNumber, rhs.casNumber).append(this.type, rhs.type).append(
                 this.nameUnctrlVocab, rhs.nameUnctrlVocab).append(this.name, rhs.name).append(this.id, rhs.id).append(
-                this.typeUnctrlVocab, rhs.typeUnctrlVocab).append(this.inducedMutationCollection,
-                rhs.inducedMutationCollection).isEquals();
+                this.typeUnctrlVocab, rhs.typeUnctrlVocab).isEquals();
     }
 
     /**
@@ -163,17 +135,15 @@ public class EnvironmentalFactor extends BaseObject implements Serializable {
      */
     public int hashCode() {
         return new HashCodeBuilder(1041064431, -1510046889).append(this.casNumber).append(this.type).append(this.name)
-                .append(this.nameUnctrlVocab).append(this.id).append(this.typeUnctrlVocab).append(
-                        this.inducedMutationCollection).toHashCode();
+                .append(this.nameUnctrlVocab).append(this.id).append(this.typeUnctrlVocab).toHashCode();
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("name", this.name).append("inducedMutationCollection",
-                this.inducedMutationCollection).append("id", this.id).append("casNumber", this.casNumber).append(
-                "name_unctrl_vocab", this.nameUnctrlVocab).append("type_unctrl_vocab", this.typeUnctrlVocab).append(
-                "type", this.type).toString();
+        return new ToStringBuilder(this).append("name", this.name).append("id", this.id).append("casNumber",
+                this.casNumber).append("name_unctrl_vocab", this.nameUnctrlVocab).append("type_unctrl_vocab",
+                this.typeUnctrlVocab).append("type", this.type).toString();
     }
 }

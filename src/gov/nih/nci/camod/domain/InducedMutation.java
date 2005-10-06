@@ -11,20 +11,15 @@ import java.util.List;
 
 import org.apache.commons.lang.builder.*;
 
-/**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class InducedMutation extends EngineeredGene {
 
     private static final long serialVersionUID = 3259235453799404851L;
 
     private String geneId;
     private String description;
-    private EnvironmentalFactor environmentalFactor;
+    //private EnvironmentalFactor environmentalFactor;
     private List geneticAlterationCollection = new ArrayList();
+    private List environmentalFactorCollection = new ArrayList();
 
     /**
      * @return Returns the geneticAlterationCollection.
@@ -47,6 +42,40 @@ public class InducedMutation extends EngineeredGene {
      */
     public void addGeneticAlteration(GeneticAlteration geneticAlteration) {
         geneticAlterationCollection.add(geneticAlteration);
+    }
+
+    /**
+     * @return Returns the geneticAlterationCollection.
+     */
+    public List getEnvironmentalFactorCollection() {
+        return environmentalFactorCollection;
+    }
+
+    /**
+     * @param geneticAlterationCollection
+     *            The geneticAlterationCollection to set.
+     */
+    public void setEnvironmentalFactorCollection(List environmentalFactorCollection) {
+        this.environmentalFactorCollection = environmentalFactorCollection;
+    }
+    
+    //TODO: this is not how we should do this and we should clean this up later
+    public EnvironmentalFactor getEnvironmentalFactor () {
+    	
+		//EnvironmentalFactor nick = (EnvironmentalFactor) environmentalFactorCollection.get(0);
+		//System.out.println( "******************* Nick=" + nick.getName() );
+    	if ( environmentalFactorCollection.size() > 0 )
+    		return (EnvironmentalFactor) environmentalFactorCollection.get(0);
+    	else
+    		return null;
+    }
+    
+    /**
+     * @param geneticAlteration
+     *            The geneticAlteration to add.
+     */
+    public void addEnvironmentalFactor(EnvironmentalFactor environmentalFactor) {
+        environmentalFactorCollection.add(environmentalFactor);
     }
 
     /**
@@ -81,18 +110,19 @@ public class InducedMutation extends EngineeredGene {
 
     /**
      * @return Returns the environmentalFactor.
-     */
+     *
     public EnvironmentalFactor getEnvironmentalFactor() {
         return environmentalFactor;
     }
 
-    /**
+    **
      * @param environmentalFactor
      *            The environmentalFactor to set.
-     */
+     *
     public void setEnvironmentalFactor(EnvironmentalFactor environmentalFactor) {
         this.environmentalFactor = environmentalFactor;
     }
+    */
 
     /**
      * @see java.lang.Object#equals(Object)
@@ -102,8 +132,7 @@ public class InducedMutation extends EngineeredGene {
             return false;
         }
         InducedMutation rhs = (InducedMutation) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.environmentalFactor,
-                rhs.environmentalFactor).append(this.description, rhs.description).append(
+        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.description, rhs.description).append(
                 this.geneticAlterationCollection, rhs.geneticAlterationCollection).append(this.geneId, rhs.geneId)
                 .isEquals();
     }
@@ -112,8 +141,8 @@ public class InducedMutation extends EngineeredGene {
      * @see java.lang.Object#hashCode()
      */
     public int hashCode() {
-        return new HashCodeBuilder(185645383, 717000701).appendSuper(super.hashCode()).append(this.environmentalFactor)
-                .append(this.description).append(this.geneticAlterationCollection).append(this.geneId).toHashCode();
+        return new HashCodeBuilder(185645383, 717000701).appendSuper(super.hashCode()).append(
+        		this.description).append(this.geneticAlterationCollection).append(this.geneId).toHashCode();
     }
 
     /**
@@ -125,7 +154,7 @@ public class InducedMutation extends EngineeredGene {
                 "id", this.getId()).append("comments", this.getComments()).append("description", this.description)
                 .append("image", this.getImage()).append("cabioId", this.getCabioId()).append(
                         "geneticAlterationCollection", this.geneticAlterationCollection).append("mutationIdentifier",
-                        this.getMutationIdentifier()).append("environmentalFactor", this.environmentalFactor).append(
+                        this.getMutationIdentifier()).append(
                         "genotypeSummary", this.getGenotypeSummary()).append("geneId", this.geneId).toString();
     }
 }

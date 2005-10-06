@@ -53,17 +53,5 @@
         	column="cas_number" 
         	type="string"/>
         	
-        <!-- inducedMutationCollection (one-to-many bidirectional) -->
-        <bag name="inducedMutationCollection" 
-        	table="env_fac_ind_mutation"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="env_factor_id"/>
-        	<many-to-many column="engineered_gene_id"
-            	unique="true"
-            	class="InducedMutation"/>
-        </bag>
 	</class>
 </hibernate-mapping>
