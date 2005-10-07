@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.1 2005-10-03 13:52:04 georgeda Exp $
+ * $Id: SearchAction.java,v 1.2 2005-10-07 21:14:24 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/03 13:52:04  georgeda
+ * Search changes
+ *
  * Revision 1.2  2005/09/16 15:52:56  georgeda
  * Changes due to manager re-write
  *
@@ -27,7 +30,7 @@ import org.apache.struts.action.*;
 /**
  * 
  * Action used to implement the search for animal models
- *
+ * 
  */
 public final class SearchAction extends BaseAction {
 
@@ -52,6 +55,6 @@ public final class SearchAction extends BaseAction {
         }
 
         // Forward control to the specified success URI
-        return mapping.findForward("searchResults");
+        return mapping.findForward("next");
     }
 }
