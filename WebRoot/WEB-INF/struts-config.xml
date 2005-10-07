@@ -19,6 +19,10 @@
 		 <form-bean
 			name="associatedExpressionForm"
 		    type="gov.nih.nci.camod.webapp.form.AssociatedExpressionForm"/>
+		    
+		 <form-bean
+			name="associatedMetastasisForm"
+		    type="gov.nih.nci.camod.webapp.form.AssociatedMetastasisForm"/>		    
 
 		 <form-bean
 			name="cellLineForm"
@@ -886,6 +890,24 @@
     </action>
     
      <!-- AssociatedExpressionForm -->
+     
+     <!-- AssociatedMetastasisForm -->
+     <action path="/AssociatedMetastasisAction"
+	        type="gov.nih.nci.camod.webapp.action.AssociatedMetastasisAction"
+	        name="associatedMetastasisForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitAssocMetastasis">   	
+    </action>
+    
+    <action path="/AssociatedMetastasisAction"
+    		type="gov.nih.nci.camod.webapp.action.AssociatedMetastasisPopulateAction"
+    		name="associatedMetastasisForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>      
      
           
      <!-- CellLineForm -->
