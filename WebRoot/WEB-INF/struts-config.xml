@@ -879,6 +879,11 @@
 	        parameter="unprotected_method" 
 	        unknown="false"
 	        validate="false">    
+	    <forward
+            name="next"
+            path="/jsp/searchResults.jsp"
+            redirect="true">
+        </forward>   	
     </action>
 
     <action path="/ViewModelAction"
