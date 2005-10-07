@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.27 2005-10-06 20:43:45 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.28 2005-10-07 16:27:54 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2005/10/06 20:43:45  schroedn
+ * Fixed missing reference
+ *
  * Revision 1.26  2005/10/06 20:41:51  schroedn
  * InducedMutation, TargetedMutation, GenomicSegment changes
  *
@@ -66,52 +69,16 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Availability;
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.ContactInfo;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.InducedMutation;
-import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Phenotype;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.SpontaneousMutation;
-import gov.nih.nci.camod.domain.TargetedModification;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.CellLineData;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
-import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
-import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
-import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
-import gov.nih.nci.camod.webapp.form.GrowthFactorData;
-import gov.nih.nci.camod.webapp.form.HormoneData;
-import gov.nih.nci.camod.webapp.form.InducedMutationData;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
-import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
-import gov.nih.nci.camod.webapp.form.RadiationData;
-import gov.nih.nci.camod.webapp.form.SearchData;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
-import gov.nih.nci.camod.webapp.form.SurgeryData;
-import gov.nih.nci.camod.webapp.form.TargetedModificationData;
-import gov.nih.nci.camod.webapp.form.TherapyData;
-import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
-import gov.nih.nci.camod.webapp.form.XenograftData;
+import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Manages fetching/saving/updating of animal models
@@ -338,7 +305,17 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List search(SearchData inSearchData) throws Exception {
 
         log.trace("In search");
-        return QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
+        List theAnimalModels = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
+
+        List theDisplayList = new ArrayList();
+
+        // Add AnimalModel DTO's so that the paganation works quickly
+        for (int i = 0, j = theAnimalModels.size(); i < j; i++) {
+            AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
+            theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
+        }
+
+        return theDisplayList;
     }
 
     // Populate the model based on the model characteristics form passed in. It

@@ -454,21 +454,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("id", this.getId()).append("experimentDesign",
-                this.getExperimentDesign()).append("principalInvestigator", this.getPrincipalInvestigator()).append(
-                "repositoryInfo", this.repositoryInfo).append("url", this.url).append("species", this.getSpecies())
-                .append("geneDeliveryCollection", this.geneDeliveryCollection).append("xenograftCollection",
-                        this.xenograftCollection).append("histopathologyCollection", this.histopathologyCollection)
-                .append("animalAvailabilityCollection", this.animalAvailabilityCollection).append("therapyCollection",
-                        this.therapyCollection).append("spontaneousMutationCollection",
-                        this.spontaneousMutationCollection).append("isToolMouse", this.isToolMouse).append(
-                        "imageCollection", this.imageCollection).append("environmentalFactorCollection",
-                        this.environmentalFactorCollection).append("engineeredGeneCollection",
-                        this.engineeredGeneCollection)
-                .append("microArrayDataCollection", this.microArrayDataCollection).append("phenotype", this.phenotype)
-                .append("cellLineCollection", this.cellLineCollection).append("state", this.getState()).append(
-                        "availability", this.getAvailability()).append("submitter", this.getSubmitter()).append(
-                        "publicationCollection", this.getPublicationCollection()).append("modelDescriptor",
-                        this.getModelDescriptor()).toString();
+        
+        System.out.println("In to string!!!!!");
+        return "Snarf";
     }
 }
