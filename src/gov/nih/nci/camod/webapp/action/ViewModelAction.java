@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.11 2005-10-06 13:37:01 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.12 2005-10-07 21:15:03 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.11  2005/10/06 13:37:01  georgeda
+ *  Removed informational message
+ *
  *  Revision 1.10  2005/09/30 18:42:24  guruswas
  *  intial implementation of drug screening search and display page
  *
@@ -47,6 +50,7 @@ import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -407,6 +411,12 @@ public class ViewModelAction extends BaseAction {
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		setCancerModel(request);
+        
+        ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
+        
+        request.setAttribute("uri_start", theBundle.getString(Constants.CaArray.URI_START));
+        request.setAttribute("uri_end", theBundle.getString(Constants.CaArray.URI_END));
+        
 		return mapping.findForward("viewMicroarrays");
 	}
 

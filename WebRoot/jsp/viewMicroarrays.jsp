@@ -29,10 +29,9 @@
 					<bean:define id="maColl" name="mdl" property="microArrayDataCollection"/>
 					<c:forEach var="ma" items="${maColl}">
 	                	<li>
-	                	<a href="caarray-db.nci.nih.gov">
-						<c:out value="${ma.experimentName}"/>
-	                	</a>
-	                	</li>
+	                	<c:set var="uri" value="${uri_start}${ma.experimentId}${uri_end}"/>
+	                	<a href='<c:out value="${uri}"/>'><c:out value="${ma.experimentName}"/></a>
+				        </li>
 					</c:forEach>
                 </ul>
 				</td>
