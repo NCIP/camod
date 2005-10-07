@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.37 2005-10-05 20:27:59 guruswas Exp $
+ * $Id: Constants.java,v 1.38 2005-10-07 21:13:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2005/10/05 20:27:59  guruswas
+ * implementation of drug screening search page
+ *
  * Revision 1.36  2005/10/05 19:24:14  pandyas
  * added clinical marker list
  *
@@ -170,6 +173,14 @@ public class Constants {
      */
     public static final String USERMODELLIST = "usermodellist";
 
+    /**
+     * Used to store lists for drop down menus
+     */
+    public interface CaArray {
+        public static final String URI_START = "caarray.uri_start";
+        public static final String URI_END = "caarray.uri_end";
+    }
+    
     /**
      * Used to store lists for drop down menus
      */
