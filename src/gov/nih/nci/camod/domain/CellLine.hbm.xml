@@ -61,6 +61,7 @@
         <many-to-one
         	name="organ"
         	column="organ_id"
-        	class="Organ"/>
+        	class="Organ"
+        	cascade="all-delete-orphan"/>
 	</class>
 </hibernate-mapping>
