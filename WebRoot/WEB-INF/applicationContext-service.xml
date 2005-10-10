@@ -10,6 +10,9 @@
     <!-- CellLineManager -->
     <bean id="cellLineManager" class="gov.nih.nci.camod.service.impl.CellLineManagerImpl"/>
     
+    <!-- CommentsManager -->
+    <bean id="commentsManager" class="gov.nih.nci.camod.service.impl.CommentsManagerImpl"/>
+    
     <!-- EnvironmentalFactorManager -->
     <bean id="environmentalFactorManager" class="gov.nih.nci.camod.service.impl.EnvironmentalFactorManagerImpl"/>
     

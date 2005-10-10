@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.12 2005-10-07 21:15:03 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.13 2005-10-10 14:12:24 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.12  2005/10/07 21:15:03  georgeda
+ *  Added caarray variables
+ *
  *  Revision 1.11  2005/10/06 13:37:01  georgeda
  *  Removed informational message
  *
@@ -34,16 +37,8 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.domain.impl.GeneImpl;
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.EngineeredGene;
-import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.InducedMutation;
-import gov.nih.nci.camod.domain.TargetedModification;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Transgene;
-import gov.nih.nci.camod.service.AgentManager;
-import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
@@ -51,18 +46,11 @@ import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
 import java.util.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.*;
 
 public class ViewModelAction extends BaseAction {
 	/**
@@ -85,6 +73,42 @@ public class ViewModelAction extends BaseAction {
 		request.getSession().setAttribute(Constants.ANIMALMODEL, am);
 	}
 
+    /**
+     * sets the cancer model object in the session
+     * 
+     * @param request
+     *            the httpRequest
+     * @throws Exception
+     */
+    private void setComments(HttpServletRequest request, String inSection) throws Exception {
+
+        String theCommentsId = request.getParameter(Constants.Parameters.COMMENTSID);
+
+        CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
+
+        List theCommentsList = new ArrayList();
+        if (theCommentsId != null && theCommentsId.length() > 0) {
+            Comments theComments = theCommentsManager.get(theCommentsId);
+            if (theComments != null) {
+                System.out.println("Found a comment: " + theComments.getRemark());
+                theCommentsList.add(theComments);
+            }
+        } 
+        
+        // Get all comments that are either approved or owned by this user
+        else {
+            PersonManager thePersonManager = (PersonManager) getBean("personManager");
+            Person theCurrentUser = thePersonManager.getByUsername((String) request.getSession().getAttribute(
+                    Constants.CURRENTUSER));
+            
+            AnimalModel theAnimalModel = (AnimalModel) request.getSession().getAttribute(Constants.ANIMALMODEL);
+            
+            theCommentsList = theCommentsManager.getAllBySection(inSection, theCurrentUser, theAnimalModel);
+        }
+
+        request.setAttribute(Constants.Parameters.COMMENTSLIST, theCommentsList);
+    }
+    
 	/**
 	 * @param mapping
 	 * @param form
@@ -97,6 +121,7 @@ public class ViewModelAction extends BaseAction {
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		setCancerModel(request);
+        setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
 		return mapping.findForward("viewModelCharacteristics");
 	}
 

@@ -43,7 +43,15 @@
 		</td></tr>
 		<tr><td>
 		<br>
-		
+
+       <!-- setup some useful variables -->
+       <% pageContext.setAttribute("modelIdTag", Parameters.MODELID); %>
+       <% pageContext.setAttribute("modelSectionTag", Parameters.MODELSECTIONNAME); %>
+	   <% pageContext.setAttribute("commentsIdTag", Parameters.COMMENTSID); %>
+	   <% pageContext.setAttribute("reject", Admin.Actions.REJECT); %>
+	   <% pageContext.setAttribute("approve", Admin.Actions.APPROVE); %>
+	   <% pageContext.setAttribute("assign_screener", Admin.Actions.ASSIGN_SCREENER); %>
+			    		
 		<!-- Start the various sections per role -->
 		 		
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
@@ -227,21 +235,53 @@
 		        <tr>
 				    <td class="resultsBoxWhiteEnd" colspan="3">You have been assigned the following Comments to Review
 			    </tr>
-			    <logic:iterate name="<%= Admin.COMMENTS_NEEDING_REVIEW %>" id="model" type="gov.nih.nci.camod.domain.AnimalModel">
+
+			    <logic:iterate name="<%= Admin.COMMENTS_NEEDING_REVIEW %>" id="comments" type="gov.nih.nci.camod.domain.Comments">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
-				            </html:link>
+				            
+				            <c:set var="uri" value="ViewModelSectionAction.do?${modelIdTag}=${comments.cancerModel.id}&${modelSectionTag}=${comments.modelSection.name}&${commentsIdTag}=${comments.id}"/>
+				            <a href="<c:out value="${uri}"/>">
+				            
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out value="${comments.cancerModel.modelDescriptor}"/>
+				            </a>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?event=${approve}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <a href="<c:out value="${uri}"/>">
 				                    Approve
-				                </html:link>
+				                </a>
 				            </td>
-				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				            <td class="resultsBoxWhiteNoStart" width="25" >
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?event=${reject}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <a href="<c:out value="${uri}"/>">
 				                    Reject
-				                </html:link>
+				                </a>
+				            </td>				            
+				        </td>
+			        </tr>
+			    </logic:iterate>		
+			</TABLE>
+		</logic:present>
+		<logic:present name="<%= Admin.COMMENTS_NEEDING_ASSIGNMENT %>">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
+			    <tr>
+				    <td class="formTitleBlue" height="20" colspan="3">Comments to Review</td>				
+			    </tr>			
+		        <tr>
+				    <td class="resultsBoxWhiteEnd" colspan="3">You have been assigned the following Comments to Review
+			    </tr>
+			    <logic:iterate name="<%= Admin.COMMENTS_NEEDING_ASSIGNMENT %>" id="comments" type="gov.nih.nci.camod.domain.Comments">
+			        <tr>
+				        <td class="resultsBoxWhiteNoEnd">
+				            <c:set var="uri" value="ViewModelSectionAction.do?${modelIdTag}=${comments.cancerModel.id}&${modelSectionTag}=${comments.modelSection.name}&${commentsIdTag}=${comments.id}"/>
+				            <a href="<c:out value="${uri}"/>">
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out value="${comments.cancerModel.modelDescriptor}"/>
+				            </a>
+				            <td class="resultsBoxWhiteNoStart" width="25" >
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?event=${assign_screener}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <a href="<c:out value="${uri}"/>">
+				                    Assign
+				                </a>
 				            </td>
 				        </td>
 			        </tr>

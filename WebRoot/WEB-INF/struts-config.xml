@@ -31,7 +31,11 @@
 		 <form-bean
 			name="chemicalDrugForm"
 		    type="gov.nih.nci.camod.webapp.form.ChemicalDrugForm"/>	
-		    
+		 
+		 <form-bean
+			name="commentsStateForm"
+		    type="gov.nih.nci.camod.webapp.form.CommentsStateForm"/>
+		 
 		 <form-bean
 			name="clinicalMarkerForm"
 		    type="gov.nih.nci.camod.webapp.form.ClinicalMarkerForm"/>
@@ -894,6 +898,66 @@
 	        validate="false" >
     </action>
     
+    <!-- Note, the forwards are the same as the names in the model section table in the database --> 
+    <action path="/ViewModelSectionAction"
+	        type="gov.nih.nci.camod.webapp.action.ViewModelSectionAction"
+	        scope="request"
+	        parameter="unprotected_method"
+   	        unknown="false"
+	        validate="false" >
+	<forward 
+    		name="General Information Page"
+    		path="/ViewModelAction.do?unprotected_method=populateModelCharacteristics">
+        </forward>
+        <forward 
+    		name="Engineered Transgene Page"
+    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
+        </forward>
+        <forward 
+    		name="Genomic Segment Page"
+    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
+        </forward>
+        <forward 
+    		name="Targeted Modification Page"
+    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
+        </forward>
+        <forward 
+    		name="Induced Mutation Page"
+    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
+        </forward>
+        <forward 
+    		name="Carcinogenic Interventions Page"
+    		path="/ViewModelAction.do?unprotected_method=populateCarcinogenicInterventions">
+        </forward>
+        <forward 
+    		name="Publications page"
+    		path="/ViewModelAction.do?unprotected_method=populatePublications">
+        </forward>
+        <forward 
+    		name="Histopathology Page"
+    		path="/ViewModelAction.do?unprotected_method=populateHistopathology">
+        </forward>
+        <forward 
+    		name="Therapeutic Approaches Page"
+    		path="/ViewModelAction.do?unprotected_method=populateTherapeuticApproaches">
+        </forward>
+        <forward 
+    		name="Cell Lines Page"
+    		path="/ViewModelAction.do?unprotected_method=populateCellLines">
+        </forward>
+        <forward 
+    		name="Images Page"
+    		path="/ViewModelAction.do?unprotected_method=populateImages">
+        </forward>
+        <forward 
+    		name="Microarray Page"
+    		path="/ViewModelAction.do?unprotected_method=populateMicroarrays">
+        </forward>
+        <forward 
+    		name="Genetic Description Page"
+    		path="/ViewModelAction.do?unprotected_method=viewTransplantXenograft">
+        </forward>
+    </action>
      <!-- AssociatedExpressionForm -->
      
      <!-- AssociatedMetastasisForm -->
@@ -1401,7 +1465,8 @@
          parameter="protected">   	
          <forward 
     		name="next"
-    		path="/ReturnUserModels.do?method=returnUserModels">
+    		path="/ReturnUserModels.do?method=returnUserModels"
+    		redirect="true">
     	 </forward>  	
      </action>
       <action 
@@ -1428,6 +1493,32 @@
     	 </forward>  	
      </action>
 	 
+	      <action 
+         path="/ChangeCommentsStateAction"  
+         type="gov.nih.nci.camod.webapp.action.ChangeCommentsStateAction"
+         name="commentsStateForm"
+         parameter="protected"
+         >   	
+         <forward 
+    		name="next"
+    		path="/AdminRolesPopulateAction.do"
+    		redirect="true">
+    	 </forward>  	
+     </action>
+	 <action 
+         path="/ChangeCommentsStatePopulateAction"  
+         type="gov.nih.nci.camod.webapp.action.ChangeCommentsStatePopulateAction" 
+         parameter="protected">   	
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitChangeCommentState.jsp">
+    	 </forward>  
+    	 <forward 
+    		name="failure"
+    		path="/AdminRolesPopulateAction.do">
+    	 </forward>	
+     </action>
+     
     <!-- UserAction -->
     <action path="/UserAction"
 	        type="gov.nih.nci.camod.webapp.action.UserAction"

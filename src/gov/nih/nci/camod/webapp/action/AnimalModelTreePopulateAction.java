@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.23 2005-10-06 20:40:12 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.24 2005-10-10 14:11:45 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.23  2005/10/06 20:40:12  schroedn
+ *  InducedMutation, TargetedMutation, GenomicSegment changes
+ *
  *  Revision 1.22  2005/10/06 19:27:55  pandyas
  *  modified for Therapy screen
  *
@@ -294,7 +297,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             // Set the fields
             theForm.setModelId(modelID);
             theForm.setModelDescriptor(animalModel.getModelDescriptor());
-            theForm.setComment("Model has been moved to complete");
+            theForm.setNote("Model has been moved to complete");
             theForm.setAssignedTo(theCoordinator);
             theForm.setEvent(Constants.Admin.Actions.COMPLETE);
 

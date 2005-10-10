@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: LogManager.java,v 1.3 2005-09-16 15:52:54 georgeda Exp $
+ *  $Id: LogManager.java,v 1.4 2005-10-10 14:07:19 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.3  2005/09/16 15:52:54  georgeda
+ *  Changes due to manager re-write
+ *
  *  
  */
 package gov.nih.nci.camod.service;
@@ -19,6 +22,8 @@ import java.util.List;
  */
 public interface LogManager {
 
+	public Log getCurrentByCommentsAndAssigned(Comments inComments, Person inAssignedUser) throws Exception;
+	
     public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inAssignedUser) throws Exception;
 
     public Log getCurrentByModel(AnimalModel inModel) throws Exception;

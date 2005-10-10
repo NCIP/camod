@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: LogManagerImpl.java,v 1.7 2005-09-26 14:09:36 georgeda Exp $
+ *  $Id: LogManagerImpl.java,v 1.8 2005-10-10 14:09:00 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.7  2005/09/26 14:09:36  georgeda
+ *  Cleanup for common manager code
+ *
  *  Revision 1.6  2005/09/16 15:52:57  georgeda
  *  Changes due to manager re-write
  * 
@@ -35,8 +38,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 	 * @return the latest matching Log object. null if not found
 	 * @throws Exception
 	 */
-	public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inUser)
-			throws Exception {
+	public Log getCurrentByModelAndAssigned(AnimalModel inModel, Person inUser) throws Exception {
 
 		log.trace("Entering LogManagerImpl.getCurrentByModelAndAssigned");
 
@@ -44,9 +46,37 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 
 		try {
 
-			theLog = QueryManagerSingleton.instance().getCurrentLogForUser(
-					inModel, inUser);
+			theLog = QueryManagerSingleton.instance().getCurrentLogForUser(inModel, inUser);
 
+		} catch (PersistenceException e) {
+			log.error("Caught a PersistentException: ", e);
+			throw e;
+		} catch (Exception e) {
+			log.error("Caught an Exception: ", e);
+			throw e;
+		}
+		log.trace("Exiting LogManagerImpl.getCurrentByModelAndAssigned");
+
+		return theLog;
+	}
+
+	/**
+	 * Get the latest Log object that matches the state/user and comments
+	 * 
+	 * @parameter inComments is the comments the Log is associated with
+	 * @parameter inUser is the user that the model is assigned to
+	 * 
+	 * @return the latest matching Log object. null if not found
+	 * @throws Exception
+	 */
+	public Log getCurrentByCommentsAndAssigned(Comments inComments, Person inUser) throws Exception {
+
+		log.trace("Entering LogManagerImpl.getCurrentByCommentsAndAssigned");
+
+		Log theLog = null;
+
+		try {
+			theLog = QueryManagerSingleton.instance().getCurrentLogForUser(inComments, inUser);
 		} catch (PersistenceException e) {
 			log.error("Caught a PersistentException: ", e);
 			throw e;
@@ -94,7 +124,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 	 */
 	public List getAll() throws Exception {
 		log.trace("In  LogManagerImpl.getAll");
-        return super.getAll(Log.class);
+		return super.getAll(Log.class);
 	}
 
 	/**
@@ -108,7 +138,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 	public Log get(String inId) throws Exception {
 
 		log.trace("In LogManagerImpl.get");
-        return (Log) super.get(inId, Log.class);
+		return (Log) super.get(inId, Log.class);
 	}
 
 	/**
@@ -120,8 +150,8 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 	 */
 	public void save(Log inLog) throws Exception {
 		log.trace("In LogManagerImpl.save");
-        super.save(inLog);
-    }
+		super.save(inLog);
+	}
 
 	/**
 	 * Save the log object
@@ -133,8 +163,7 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 	 * @parameter inState is the current state of the object
 	 * @parameter inNotes is any note(s) associated w/ the state transition
 	 */
-	public Log create(String inAssignedPerson, String inModelId,
-			String inState, String inNotes) throws Exception {
+	public Log create(String inAssignedPerson, String inModelId, String inState, String inNotes) throws Exception {
 
 		log.trace("Entering LogManagerImpl.create");
 
@@ -147,10 +176,8 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 			log.debug("State: " + inState);
 			log.debug("Notes: " + inNotes);
 
-			Person theAssignedPerson = PersonManagerSingleton.instance()
-					.getByUsername(inAssignedPerson);
-			AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance()
-					.get(inModelId);
+			Person theAssignedPerson = PersonManagerSingleton.instance().getByUsername(inAssignedPerson);
+			AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(inModelId);
 
 			theLog.setCancerModel(theAnimalModel);
 			theLog.setSubmitter(theAssignedPerson);
@@ -177,6 +204,6 @@ public class LogManagerImpl extends BaseManager implements LogManager {
 	 */
 	public void remove(String inId) throws Exception {
 		log.trace("In LogManagerImpl.remove");
-        super.remove(inId, Log.class);
+		super.remove(inId, Log.class);
 	}
 }

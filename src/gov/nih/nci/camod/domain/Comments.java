@@ -16,7 +16,7 @@ import org.apache.commons.lang.builder.*;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Comments extends BaseObject implements Serializable {
+public class Comments extends BaseObject implements Serializable, Curateable {
 
     private static final long serialVersionUID = 3259595453799404851L;
 

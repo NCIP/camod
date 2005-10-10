@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStateAction.java,v 1.7 2005-09-16 15:52:56 georgeda Exp $
+ *  $Id: ChangeAnimalModelStateAction.java,v 1.8 2005-10-10 14:12:01 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.7  2005/09/16 15:52:56  georgeda
+ *  Changes due to manager re-write
+ *
  *  
  */
 package gov.nih.nci.camod.webapp.action;
@@ -57,7 +60,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
                 // Save the associated log comment to track the curation state
                 LogManager theLogManager = (LogManager) getBean("logManager");
                 Log theLog = theLogManager.create(theForm.getAssignedTo(), theForm.getModelId(), theAnimalModel
-                        .getState(), theForm.getComment());
+                        .getState(), theForm.getNote());
 
                 theAnimalModelManager.updateAndAddLog(theAnimalModel, theLog);
 

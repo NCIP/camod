@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.8 2005-09-22 15:13:43 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.9 2005-10-10 14:08:13 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/09/22 15:13:43  georgeda
+ * Update
+ *
  * Revision 1.7  2005/09/19 13:09:24  georgeda
  * Send e-mail to submitter for certain states
  *
@@ -19,10 +22,13 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Curateable;
+import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.CurateableAction;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
+import gov.nih.nci.camod.webapp.form.AnimalModelStateData;
 
 import java.util.Map;
 
@@ -68,7 +74,7 @@ public class EmailActionImpl extends BaseCurateableAction {
         if (inArgs.containsKey(Constants.FORMDATA)) {
 
             try {
-                AnimalModelStateForm theForm = (AnimalModelStateForm) inArgs.get(Constants.FORMDATA);
+                AnimalModelStateData theData = (AnimalModelStateData) inArgs.get(Constants.FORMDATA);
 
                 // Get the various domain objects
                 AnimalModel theAnimalModel = (AnimalModel) inObject;
@@ -80,33 +86,33 @@ public class EmailActionImpl extends BaseCurateableAction {
 
                 // Build the message text
                 String theMailSubject = "";
-                String theMailText = theForm.getComment();
+                String theMailText = theData.getNote();
 
                 // Customize the text based on the action.
                 // TODO: Should be centralized.
-                if (theForm.getEvent().equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
+                if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
                     theMailSubject = "You have been assigned screener for the following model: "
-                            + theForm.getModelDescriptor();
-                } else if (theForm.getEvent().equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
+                            + theData.getModelDescriptor();
+                } else if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
                     theMailSubject = "You have been assigned editor for the following model: "
-                            + theForm.getModelDescriptor();
-                } else if (theForm.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
+                            + theData.getModelDescriptor();
+                } else if (theData.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
                     theMailSubject = "The editor is requesting more information for the following model: "
-                            + theForm.getModelDescriptor();
+                            + theData.getModelDescriptor();
 
                     // Special case; we're sending out e-mail to someout outside
                     // the curation process
                     Person theSubmitter = (Person) theAnimalModel.getSubmitter();
                     theRecipients = new String[] { UserManagerSingleton.instance().getEmailForUser(
                             theSubmitter.getUsername()) };
-                } else if (theForm.getEvent().equals(Constants.Admin.Actions.REJECT)) {
-                    theMailSubject = "The following model has been rejected: " + theForm.getModelDescriptor();
-                } else if (theForm.getEvent().equals(Constants.Admin.Actions.APPROVE)) {
-                    theMailSubject = "The following model has been approved: " + theForm.getModelDescriptor();
-                } else if (theForm.getEvent().equals(Constants.Admin.Actions.COMPLETE)) {
-                    theMailSubject = "The following model has been completed: " + theForm.getModelDescriptor();
+                } else if (theData.getEvent().equals(Constants.Admin.Actions.REJECT)) {
+                    theMailSubject = "The following model has been rejected: " + theData.getModelDescriptor();
+                } else if (theData.getEvent().equals(Constants.Admin.Actions.APPROVE)) {
+                    theMailSubject = "The following model has been approved: " + theData.getModelDescriptor();
+                } else if (theData.getEvent().equals(Constants.Admin.Actions.COMPLETE)) {
+                    theMailSubject = "The following model has been completed: " + theData.getModelDescriptor();
                 } else {
-                    theMailSubject = "The following model has changed: " + theForm.getModelDescriptor();
+                    theMailSubject = "The following model has changed: " + theData.getModelDescriptor();
                 }
 
                 if (theRecipients.length > 0) {

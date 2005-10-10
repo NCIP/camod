@@ -3,7 +3,6 @@
 <%@ include file="/common/taglibs.jsp" %>
 
 <%@ page buffer="32kb"%>
-<%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <!-- submitChangeAnimalModelState.jsp -->
@@ -29,10 +28,10 @@
 
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
-			    <bean:write name="action" /> AnimalModel <bean:write property="modelDescriptor" name="formdata" />
+			    Comment for AnimalModel <c:out value="${formdata.modelDescriptor}" />
 			</td>
 		</tr>
-        <html:form action="ChangeAnimalModelStateAction">
+        <html:form action="ChangeCommentsStateAction">
 		<logic:notEmpty name="<%=Constants.FORMDATA%>" property="assignees" >
 		    <tr>
 			    <td class="formRequiredNotice" width="5">*</td>
@@ -53,6 +52,7 @@
 		</tr>
         <html:hidden property="modelId" name="formdata" />
         <html:hidden property="modelDescriptor" name="formdata" />
+        <html:hidden property="commentsId" name="formdata" />
         <html:hidden property="event" name="formdata" />
 		<tr>
 			<td align="right" colspan="3">
