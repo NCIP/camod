@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.28 2005-10-07 16:27:54 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.29 2005-10-10 14:08:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2005/10/07 16:27:54  georgeda
+ * Implemented paganation
+ *
  * Revision 1.27  2005/10/06 20:43:45  schroedn
  * Fixed missing reference
  *
@@ -168,6 +171,24 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         return theAnimalModels;
     }
 
+    /**
+     * Get all of the models of a specific state
+     * 
+     * @param inState
+     *            the state to query for
+     * 
+     * @return the list of models
+     * 
+     * @exception Exception
+     *                if an error occurred
+     */
+    public List getAllByStateForPerson(String inState, Person inPerson) throws Exception {
+
+        log.trace("In CommentsManagerImpl.getAllByStateForPerson");
+
+        return QueryManagerSingleton.instance().getModelsByStateForPerson(inState, inPerson);
+    }
+    
     /**
      * Get a specific animal model
      * 

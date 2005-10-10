@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.18 2005-10-06 20:41:38 schroedn Exp $
+ * $Id: AnimalModelManager.java,v 1.19 2005-10-10 14:06:44 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/10/06 20:41:38  schroedn
+ * InducedMutation, TargetedMutation, GenomicSegment changes
+ *
  * Revision 1.17  2005/10/06 19:29:50  pandyas
  * modified for Therapy screen
  *
@@ -28,6 +31,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/10/06 20:41:38  schroedn
+ * InducedMutation, TargetedMutation, GenomicSegment changes
+ *
  * Revision 1.17  2005/10/06 19:29:50  pandyas
  * modified for Therapy screen
  *
@@ -78,8 +84,8 @@ public interface AnimalModelManager {
     public List getAll() throws Exception;
 
     public List getAllByUser(String username) throws Exception;
-
-    public List getAllByState(String inState) throws Exception;
+    
+    public List getAllByStateForPerson(String inState, Person inPerson) throws Exception;
 
     public AnimalModel get(String id) throws Exception;
 
