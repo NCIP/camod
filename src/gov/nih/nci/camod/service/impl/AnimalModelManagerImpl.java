@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.29 2005-10-10 14:08:02 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.30 2005-10-10 20:05:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2005/10/10 14:08:02  georgeda
+ * Performance improvement
+ *
  * Revision 1.28  2005/10/07 16:27:54  georgeda
  * Implemented paganation
  *
@@ -677,12 +680,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering saveCellLine");
 
-        CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData, inAnimalModel);
+        CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData);
 
         inAnimalModel.addCellLine(theCellLine);
         save(inAnimalModel);
 
-        log.trace("Exiting saveCellLine");
+        log.trace("Exiting addCellLine");
     }     
     
     /**
