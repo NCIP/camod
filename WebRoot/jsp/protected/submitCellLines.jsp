@@ -5,6 +5,8 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.CellLineForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+
 <%
 	String aCellID = request.getParameter( "aCellID" );
 	
@@ -16,8 +18,6 @@
 	if ( aCellID != null )
 		actionName = "CellLineAction.do?method=edit";			
 %>
-
-<script language="JavaScript" src="scripts/EvsTree.js"></script>
 
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -48,18 +48,14 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue</label>&nbsp;
-			<a href="javascript:showTissueTree( 'cellLineForm', 'mouse', 1)">
-			<IMG src="images\selectUP.gif" align=middle border=0>
-			
-			 	<html:hidden property="organTissueName" name="formdata" />
-			 	<html:hidden property="organTissueCode" name="formdata" />
-			</a>			
-		</td>
-			
-		<td class="formField">
-			<html:text styleClass="formFieldSized" size="25" property="organName" name="formdata" disabled="true"/>
-		</td>
-	</tr>
+		  	    <a href="javascript:showTissueTree('cellLineForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
+				<IMG src="images\selectUP.gif" align=middle border=0>
+				</a>
+				<INPUT name="organTissueName" type="hidden"/>
+		 		<INPUT name="organTissueCode" type="hidden"/>
+			</td>
+			<td class="formField"><input class="formFieldSized" type="text"  name="organ" id="organFieldId" size="25" disabled="true" /></td>
+		</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>

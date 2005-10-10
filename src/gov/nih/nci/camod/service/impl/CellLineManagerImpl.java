@@ -6,8 +6,8 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
+import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.service.CellLineManager;
 import gov.nih.nci.camod.webapp.form.CellLineData;
 
@@ -41,32 +41,32 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 		super.remove(id, CellLine.class);
 	}
 
-    public CellLine create(CellLineData inCellLineData, AnimalModel inAnimalModel) throws Exception {
+    public CellLine create(CellLineData inCellLineData) throws Exception {
 
         log.trace("Entering CellLineManagerImpl.create");
 
         CellLine theCellLine = new CellLine();
 
         log.trace("Exiting CellLineManagerImpl.create");
-        populateCellLine(inCellLineData, theCellLine, inAnimalModel);
+        populateCellLine(inCellLineData, theCellLine);
 
         return theCellLine;
     }
 
-    public void update(CellLineData inCellLineData, CellLine inCellLine, AnimalModel inAnimalModel)
+    public void update(CellLineData inCellLineData, CellLine inCellLine)
     throws Exception {
 
     	log.trace("Entering CellLineManagerImpl.update");
     	log.debug("Updating CellLineForm: " + inCellLine.getId());
 
     	// Populate w/ the new values and save
-    	populateCellLine(inCellLineData, inCellLine, inAnimalModel);
+    	populateCellLine(inCellLineData, inCellLine);
     	save(inCellLine);
 
     	log.trace("Exiting CellLineManagerImpl.update");
     }    
 
-	private void populateCellLine( CellLineData inCellLineData, CellLine inCellLine, AnimalModel inAnimalModel) 
+	private void populateCellLine( CellLineData inCellLineData, CellLine inCellLine) 
 	throws Exception {
 
 		log.trace( "Entering populateCellLine" );
@@ -77,18 +77,21 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 		inCellLine.setComments(inCellLineData.getComments());
 	
         /*
-         * Add a Organ to AnimalModel with correct IDs, conceptCode 
-         
-        System.out.println("Saving: getOrgan=" + inCellLineData.getOrgan() + " Not Saving organTissueName="
-                + inCellLineData.getOrganTissueName());
+         * Add a Organ to AnimalModel with correct ID, conceptCode 
+        */ 
+        System.out.println("Saving: getOrgan=" + inCellLineData.getOrgan() 
+        		+ " Not Saving organTissueName=" + inCellLineData.getOrganTissueName());
 
         if (inCellLine.getOrgan() == null) {
-        	System.out.println("<populateCellLine> inCellLine.getOrgan() == null");
+        	System.out.println("<populateCellLine> inCellLine.getOrgan() == null loop ");
         	inCellLine.setOrgan(new Organ());
         }
         inCellLine.getOrgan().setName(inCellLineData.getOrganTissueName());
+        System.out.println("<populateCellLine> getOrganTissueName= " +inCellLineData.getOrganTissueName());
+        
         inCellLine.getOrgan().setConceptCode(inCellLineData.getOrganTissueCode());
-		*/
+        System.out.println("<populateCellLine> getConceptCode= " +inCellLineData.getOrganTissueCode());
+        
 		log.trace("Exiting populateCellLine");
         }
 }

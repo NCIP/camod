@@ -27,30 +27,15 @@ public class CellLineForm extends BaseForm implements Serializable, CellLineData
 	 */
 	public CellLineForm() {}
 
-	protected String clid;
 	protected String cellLineName;
-	protected String organName;
 	protected String experiment;
 	protected String results;
 	protected String comments;
-	
-	protected String conceptCode;
+
 	protected String organ;
 	protected String organTissueName;
 	protected String organTissueCode;	
 
-	/**
-	 * @return Returns the clid.
-	 */
-	public String getClid() {
-		return clid;
-	}
-	/**
-	 * @param clid The clid to set.
-	 */
-	public void setClid(String clid) {
-		this.clid = clid;
-	}
 	/**
 	 * @return Returns the cellLineName.
 	 */
@@ -63,18 +48,7 @@ public class CellLineForm extends BaseForm implements Serializable, CellLineData
 	public void setCellLineName(String cellLineName) {
 		this.cellLineName = cellLineName;
 	}
-	/**
-	 * @return Returns the organName.
-	 */
-	public String getOrganName() {
-		return organName;
-	}
-	/**
-	 * @param organName The organName to set.
-	 */
-	public void setOrganName(String organName) {
-		this.organName = organName;
-	}	
+
 	/**
 	 * @return Returns the experiment.
 	 */
@@ -112,18 +86,6 @@ public class CellLineForm extends BaseForm implements Serializable, CellLineData
 		this.comments = comments;
 	}
 	/**
-	 * @return Returns the conceptCode.
-	 */
-	public String getConceptCode() {
-		return conceptCode;
-	}
-	/**
-	 * @param conceptCode The conceptCode to set.
-	 */
-	public void setConceptCode(String conceptCode) {
-		this.conceptCode = conceptCode;
-	}
-	/**
 	 * @return Returns the organ.
 	 */	
 	public String getOrgan() {
@@ -148,13 +110,13 @@ public class CellLineForm extends BaseForm implements Serializable, CellLineData
 		this.organTissueName = organTissueName;
 	}
 	/**
-	 * @return Returns the organTissueCode.
+	 * @return Returns the organTissueCode (concept code).
 	 */	
 	public String getOrganTissueCode() {
 		return organTissueCode;
 	}
 	/**
-	 * @param organTissueCode The organTissueCode to set.
+	 * @param organTissueCode The organTissueCode (concept code) to set .
 	 */	
 	public void setOrganTissueCode( String organTissueCode ) {
 		this.organTissueCode = organTissueCode;

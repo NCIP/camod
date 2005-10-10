@@ -32,8 +32,8 @@ public class CellLinePopulateAction  extends BaseAction {
 		CellLineForm cellLineForm = ( CellLineForm ) form;
 		request.getSession().setAttribute( Constants.FORMDATA, cellLineForm );		
 		
-    	// Grab the current Therapy we are working with related to this animalModel
-    	String aCellID = request.getParameter( "aCellID" );		
+    	// Grab the current Cell Line we are working with related to this animalModel
+    	String aCellID = request.getParameter( "aCellID" );
 		
 		// Grab the current modelID from the session 
 		String modelID = "" + request.getSession().getAttribute( Constants.MODELID );		
@@ -53,19 +53,21 @@ public class CellLinePopulateAction  extends BaseAction {
 			if ( cell.getId().toString().equals( aCellID ) )
 				break;
 		}
-
 		cellLineForm.setCellLineName(cell.getName());
 		cellLineForm.setExperiment( cell.getExperiment() );
 		cellLineForm.setResults( cell.getResults() );
-		cellLineForm.setComments(cell.getComments());
+		cellLineForm.setComments(cell.getComments());		
 
-		/*Use GeneDelivery to get to Organ object
-		GeneDelivery gene = new GeneDelivery();
-		cellLineForm.setOrganName(gene.getOrgan().getName());
+		/*set Organ attributes*/
+		System.out.println( "<CellLinePopulateAction populate> get the Organ attributes" );
+
+		//TODO fix EVS to show EVSPreferredDescription so it can be retrieved
+		cellLineForm.setOrgan( cell.getOrgan().getEVSPreferredDescription() );
+		System.out.println( "OrganName= " +cell.getOrgan().getEVSPreferredDescription());		
 		
-		cellLineForm.setOrganTissueCode( gene.getOrgan().getConceptCode() );
-		cellLineForm.setOrganTissueName( gene.getOrgan().getName() );		
-		*/
+		cellLineForm.setOrganTissueCode( cell.getOrgan().getConceptCode());
+		System.out.println( "OrganTissueCode= " +cell.getOrgan().getConceptCode());
+
 		//Store the Form in session to be used by the JSP
 		request.getSession().setAttribute( Constants.FORMDATA, cellLineForm );
 		

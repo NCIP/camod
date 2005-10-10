@@ -71,50 +71,45 @@ public final class CellLineAction extends BaseAction {
         
         CellLineForm cellLineForm = ( CellLineForm ) form;
 
-		// Grab the current modelID from the session
-        String theModelId = (String) request.getSession().getAttribute( Constants.MODELID );
-
 		// Grab the current aCellID from the session
         String aCellID = request.getParameter( "aCellID" );        
     	
 		System.out.println( "<CellLineAction save> following Characteristics:" + 
-								"\n\t name: " + cellLineForm.getCellLineName() + 
-								"\n\t otherName: " + cellLineForm.getOrganName() + 
-								"\n\t dosage: " + cellLineForm.getExperiment() + 
-								"\n\t administrativeRoute: " + cellLineForm.getResults() +
-								"\n\t regimen: " + cellLineForm.getComments() +
-								"\n\t user: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
+				"\n\t CellLineName: " + cellLineForm.getCellLineName() + 
+				"\n\t Experiment: " + cellLineForm.getExperiment() + 
+				"\n\t Results: " + cellLineForm.getResults() +
+				"\n\t Comments: " + cellLineForm.getComments() +
+				"\n\t Organ: "      + cellLineForm.getOrgan() +
+				"\n\t organTissueName: "  + cellLineForm.getOrganTissueName() +									
+				"\n\t organTissueCode: "  + cellLineForm.getOrganTissueCode() +							
+				"\n\t user: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
 		
-		String theForward = "AnimalModelTreePopulateAction";
+
 		
-	    try {		
-        
-	    	// Use the current animalModel based on the ID stored in the session
-            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-            
+	    try {
+	    	
             CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
+            
             CellLine theCellLine = theCellLineManager.get(aCellID);
             
-            theCellLineManager.update(cellLineForm, theCellLine, theAnimalModel);
+            theCellLineManager.update(cellLineForm, theCellLine);
 
             ActionMessages msg = new ActionMessages();
             msg.add( ActionMessages.GLOBAL_MESSAGE, new ActionMessage( "cellline.edit.successful" ) );
             saveErrors( request, msg );
         
-	    } catch( Exception e ) {
-            log.error("Exception ocurred creating CellLine", e);
+        } catch (Exception e) {
+
+            log.error("Exception ocurred creating GeneDelivery", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, msg);
+        }
 
-            theForward = "failure";
-	    }
-	    
         log.trace("Exiting edit");
-        return mapping.findForward(theForward);
+        return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
     /**
@@ -139,15 +134,17 @@ public final class CellLineAction extends BaseAction {
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);        
 
 		System.out.println( "<CellLineAction save> following Characteristics:" + 
-								"\n\t name: " + cellLineForm.getCellLineName() + 
-								"\n\t otherName: " + cellLineForm.getOrganName() + 
-								"\n\t dosage: " + cellLineForm.getExperiment() + 
-								"\n\t administrativeRoute: " + cellLineForm.getResults() +
-								"\n\t regimen: " + cellLineForm.getComments() +
-								"\n\t ConceptCode: "      + cellLineForm.getOrgan() +
-								"\n\t organTissueCode: "  + cellLineForm.getOrganTissueCode() +
-								"\n\t organTissueName: "  + cellLineForm.getOrganTissueName() +								
+								"\n\t CellLineName: " + cellLineForm.getCellLineName() + 
+								"\n\t Experiment: " + cellLineForm.getExperiment() + 
+								"\n\t Results: " + cellLineForm.getResults() +
+								"\n\t Comments: " + cellLineForm.getComments() +
+								"\n\t Organ: "      + cellLineForm.getOrgan() +
+								"\n\t organTissueName: "  + cellLineForm.getOrganTissueName() +									
+								"\n\t organTissueCode: "  + cellLineForm.getOrganTissueCode() +							
 								"\n\t user: " + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
+		
+		String theForward = "AnimalModelTreePopulateAction";		
+		
 	    try {		
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -163,16 +160,18 @@ public final class CellLineAction extends BaseAction {
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("cellline.creation.successful"));
             saveErrors(request, msg);	
         
-        } catch (Exception e) {
-            log.error("Exception ocurred creating Cell Line", e);
+	    } catch( Exception e ) {
+            log.error("Exception ocurred creating Xenograft", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, msg);
-        }
 
+            theForward = "failure";
+	    }
+	    
         log.trace("Exiting save");
-        return mapping.findForward("AnimalModelTreePopulateAction");    
+        return mapping.findForward(theForward);    
     }
 }
