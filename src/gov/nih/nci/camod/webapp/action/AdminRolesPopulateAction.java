@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesPopulateAction.java,v 1.10 2005-09-27 16:48:53 georgeda Exp $
+ * $Id: AdminRolesPopulateAction.java,v 1.11 2005-10-10 14:11:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/09/27 16:48:53  georgeda
+ * Cleaned up comment
+ *
  * Revision 1.9  2005/09/22 18:56:47  georgeda
  * Get coordinator from user in properties file
  *
@@ -18,16 +21,21 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.CommentsManager;
+import gov.nih.nci.camod.service.PersonManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 /**
  * 
@@ -37,124 +45,119 @@ import org.apache.struts.action.*;
  */
 public class AdminRolesPopulateAction extends BaseAction {
 
-    /**
-     * Action used to populate the various admin lists for the curation process
-     */
-    public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
-            HttpServletResponse inResponse) throws Exception {
+	/**
+	 * Action used to populate the various admin lists for the curation process
+	 */
+	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
+			HttpServletResponse inResponse) throws Exception {
 
-        log.trace("Entering execute");
+		log.trace("Entering AdminRolesPopulateAction.execute");
 
-        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
 
-        // Get the list of roles for the current user
-        List theRoles = (List) inRequest.getSession().getAttribute(Constants.CURRENTUSERROLES);
+		// Get the list of roles for the current user
+		List theRoles = (List) inRequest.getSession().getAttribute(Constants.CURRENTUSERROLES);
 
-        // Get the user
-        PersonManager thePersonManager = (PersonManager) getBean("personManager");
-        String theUsername = (String) inRequest.getSession().getAttribute(Constants.CURRENTUSER);
-        Person theUser = (Person) thePersonManager.getByUsername(theUsername);
+		// Get the user
+		PersonManager thePersonManager = (PersonManager) getBean("personManager");
+		String theUsername = (String) inRequest.getSession().getAttribute(Constants.CURRENTUSER);
+		Person theUser = (Person) thePersonManager.getByUsername(theUsername);
 
-        List theList = null;
+		// Editor specific curation states
+		if (theRoles.contains(Constants.Admin.Roles.EDITOR)) {
 
-        // Editor specific curation states
-        if (theRoles.contains(Constants.Admin.Roles.EDITOR)) {
+			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Edited-need more info",
+					Constants.Admin.MODELS_NEEDING_MORE_INFO);
+			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Editor-assigned",
+					Constants.Admin.MODELS_NEEDING_EDITING);
+		}
 
-            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Edited-need more info",
-                    Constants.Admin.MODELS_NEEDING_MORE_INFO);
-            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Editor-assigned",
-                    Constants.Admin.MODELS_NEEDING_EDITING);
-        }
+		// Coordinator specific curation states
+		if (theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
 
-        // Coordinator specific curation states
-        if (theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
+			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screened-approved",
+					Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT);
 
-            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screened-approved",
-                    Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT);
+			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Complete-not screened",
+					Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT);
 
-            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Complete-not screened",
-                    Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT);
-        }
+			addCommentsToRequest(inRequest, theCommentsManager, theUser, "Complete-not screened",
+					Constants.Admin.COMMENTS_NEEDING_ASSIGNMENT);
+		}
 
-        // Screener specific curation states
-        if (theRoles.contains(Constants.Admin.Roles.SCREENER)) {
-            addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screener-assigned",
-                    Constants.Admin.MODELS_NEEDING_SCREENING);
-        }
+		// Screener specific curation states
+		if (theRoles.contains(Constants.Admin.Roles.SCREENER)) {
 
-        // TODO: This isn't correct
-        theList = null; // theAnimalModelManager.getAllByState("Incomplete");
-        if (theList != null && !theList.isEmpty()) {
-            inRequest.setAttribute(Constants.Admin.COMMENTS_NEEDING_REVIEW, theList);
-        }
+			// Models needing screening
+			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screener-assigned",
+					Constants.Admin.MODELS_NEEDING_SCREENING);
 
-        log.trace("Exiting execute");
+			// Comment screening as well
+			addCommentsToRequest(inRequest, theCommentsManager, theUser, "Screener-assigned",
+					Constants.Admin.COMMENTS_NEEDING_REVIEW);
+		}
 
-        return inMapping.findForward("next");
-    }
+		log.trace("Exiting AdminRolesPopulateAction.execute");
 
-    // Check that the user owns these records and if so, add to the request
-    // using the passed in key
-    private void addModelsToRequest(HttpServletRequest inRequest, AnimalModelManager inManager, Person inUser,
-            String inState, String inKey) {
+		return inMapping.findForward("next");
+	}
 
-        log.trace("Entering addModelsToRequest");
+	// Check that the user owns these records and if so, add to the request
+	// using the passed in key
+	private void addCommentsToRequest(HttpServletRequest inRequest, CommentsManager inManager, Person inUser,
+			String inState, String inKey) {
 
-        try {
-            // Add all the models by state for a user
-            List theList = inManager.getAllByState(inState);
-            log.debug("Total models for state: " + inState + " size: " + theList.size());
+		log.trace("Entering AdminRolesPopulateAction.addCommentsToRequest");
 
-            // I found some models in this state
-            if (theList != null && !theList.isEmpty()) {
+		try {
+			// Add all the models by state for a user
+			List theList = inManager.getAllByStateForPerson(inState, inUser);
 
-                // Only add the ones associated to the user
-                List theUserList = getModelsForUser(inUser, theList);
-                if (theUserList.size() > 0) {
-                    inRequest.setAttribute(inKey, theUserList);
-                }
-            }
-        } catch (Exception e) {
+			if (theList.size() > 0) {
+				inRequest.setAttribute(inKey, theList);
+			}
+			System.out.println("Total comments for state: " + inState + " size: " + theList.size());
 
-            log.error("Unable to get models for state: " + inState);
+			log.debug("Total comments for state: " + inState + " size: " + theList.size());
 
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(inRequest, theMsg);
+		} catch (Exception e) {
 
-        }
-        log.trace("Exiting addModelsToRequest");
-    }
+			log.error("Unable to get comments for state: " + inState, e);
 
-    // Get the models for a specific user. We need to check the log table to see
-    // if the log entry associated w/ this
-    // model and state is associated w/ this user
-    private List getModelsForUser(Person inUser, List inModelList) throws Exception {
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(inRequest, theMsg);
 
-        log.trace("Entering getModelsForUser");
+		}
+		log.trace("Exiting AdminRolesPopulateAction.addModelsToRequest");
+	}
 
-        LogManager theLogManager = (LogManager) getBean("logManager");
+	// Check that the user owns these records and if so, add to the request
+	// using the passed in key
+	private void addModelsToRequest(HttpServletRequest inRequest, AnimalModelManager inManager, Person inUser,
+			String inState, String inKey) {
 
-        List theReturnList = new ArrayList();
+		log.trace("Entering AdminRolesPopulateAction.addModelsToRequest");
 
-        for (int i = 0; i < inModelList.size(); i++) {
+		try {
+			// Add all the models by state for a user
+			List theList = inManager.getAllByStateForPerson(inState, inUser);
+			log.debug("Total models for state: " + inState + " size: " + theList.size());
 
-            AnimalModel theAnimalModel = (AnimalModel) inModelList.get(i);
+			if (theList.size() > 0) {
+				inRequest.setAttribute(inKey, theList);
+			}
 
-            // Is there an associated LOG for this user?
-            Log theLog = theLogManager.getCurrentByModelAndAssigned(theAnimalModel, inUser);
+		} catch (Exception e) {
 
-            // If it's associated, the user needs to do something to the
-            // record. Create the array
-            if (theLog != null) {
-                theReturnList.add(theAnimalModel);
-            }
-        }
+			log.error("Unable to get models for state: " + inState, e);
 
-        log.debug("Number of records for user " + inUser.getUsername() + " : " + theReturnList.size());
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(inRequest, theMsg);
 
-        log.trace("Exiting getModelsForUser");
-
-        return theReturnList;
-    }
+		}
+		log.trace("Exiting AdminRolesPopulateAction.addModelsToRequest");
+	}
 }
