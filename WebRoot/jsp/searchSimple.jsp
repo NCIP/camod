@@ -12,7 +12,11 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
                 <tr>
-                        <td class="formTitle" height="20" colspan="3">Keyword Search:&nbsp;&nbsp;<input type="text" name="field3" id="field3" size="45" />&nbsp;&nbsp;<input class="actionButton" type="submit" value="Search" /></td>
+                        <td class="formTitle" height="20" colspan="3">
+                            Keyword Search:&nbsp;&nbsp;
+                            <html:text styleClass="formFieldSized" property="keyword" size="45"/>
+                            &nbsp;&nbsp;
+                            <input class="actionButton" type="submit" value="Search" /></td>
                 </tr>
                 
                 <tr><td>&nbsp;</td></tr>
