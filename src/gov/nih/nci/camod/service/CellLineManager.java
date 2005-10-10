@@ -27,8 +27,8 @@ public interface CellLineManager {
 	
     public void remove(String id) throws Exception;	
 	
-	public CellLine create(CellLineData inCellLineData, AnimalModel inAnimalModel ) throws Exception;
+	public CellLine create(CellLineData inCellLineData ) throws Exception;
 	
-	public void update(CellLineData inCellLineData, CellLine inCellLine, AnimalModel inAnimalModel) throws Exception;	
+	public void update(CellLineData inCellLineData, CellLine inCellLine) throws Exception;	
     
 }
