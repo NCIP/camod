@@ -9,7 +9,7 @@
 <TR><TD class=subMenuPrimaryTitle height=22>MODEL DETAILS</TD></TR>
 <TR><TD class=subMenuPrimaryGreyTitle height=27>
 	Viewing Model: <b>
-	<c:out value="${mdl.modelDescriptor}"/></b>
+	<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></b>
 </TD></TR>
 <TR><TD class=subMenuPrimaryItems>
 <DIV>
