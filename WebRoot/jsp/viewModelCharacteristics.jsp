@@ -4,8 +4,8 @@
 
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.domain.Histopathology" %>	
-<%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <bean:define id="mdl" name="animalmodel"/>
 
@@ -16,13 +16,13 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 				Model Characteristics - Model:
-				<bean:write name="mdl" property="modelDescriptor"/>
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="GreyBox" width="20%"><b>Model Descriptor</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				<bean:write name="mdl" property="modelDescriptor"/>
+			    <c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>			
 		</tr>
 		
@@ -87,7 +87,7 @@
 			<td class="GreyBox" width="20%"><b>Phenotype</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<P>
-				<c:out value="${mdl.phenotype.description}"/>
+				<c:out value="${mdl.phenotype.description}" escapeXml="false"/>
 				</P>		
 			</td>
 		</tr>		
@@ -150,10 +150,23 @@
 		</c:forEach>
 		<tr><td>&nbsp;</td></tr>
 		</c:if>
+		
+		
+		<c:forEach var="comments" items="${aCommentsList}" >
+			<tr>
+			    <td class="WhiteBox" width="100%" colspan="2"><c:out value="${comments.remark}"/></td>
+			</tr>
+		</c:forEach>
+		<br>
+		
+		<!--  set some attributes to build the URL -->
+		<% pageContext.setAttribute("modelIdTag", Parameters.MODELID); %>
+	    <% pageContext.setAttribute("modelSectionTag", Parameters.MODELSECTIONNAME); %>
+		<% pageContext.setAttribute("modelSectionValue", Pages.MODEL_CHARACTERISTICS); %>
+		<c:set var="submitComment" value="javascript: rs('commentWin','submitComment.do?${modelIdTag}=${mdl.id}&${modelSectionTag}=${modelSectionValue}',415,250);"/>
 		<tr>
-			<td class="WhiteBox" width="100%" colspan="2"><a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
+			<td class="WhiteBox" width="100%" colspan="2"><a href='<c:out value="${submitComment}"/>'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
 		</tr>
-
 	</TABLE>
 	
 </td></tr>
