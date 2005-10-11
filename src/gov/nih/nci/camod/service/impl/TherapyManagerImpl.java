@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.7 2005-10-06 19:30:22 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.8 2005-10-11 16:45:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/06 19:30:22  pandyas
+ * modified for Therapy screen
+ *
  * Revision 1.6  2005/09/28 21:20:01  georgeda
  * Finished up converting to new manager
  *
@@ -619,7 +622,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     	//Therapy object attributes
         theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());		
         theTherapy.setBiomarker(inTherapyData.getBiomarker());
-        theTherapy.setTumorResponse(inTherapyData.getTumorResponse());
+        theTherapy.setTumorResponse(inTherapyData.getTumorResponse() + " " + inTherapyData.getTumorAgeUnit());
         theTherapy.setExperiment(inTherapyData.getExperiment());
         theTherapy.setResults(inTherapyData.getResults());		
         theTherapy.setComments(inTherapyData.getComments());    	
