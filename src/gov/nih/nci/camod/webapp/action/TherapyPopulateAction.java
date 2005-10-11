@@ -141,7 +141,7 @@ public class TherapyPopulateAction extends BaseAction {
 			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.BIOLOGICALPROCESSDROP, "" );
 			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.THERAPEUTICTARGETSDROP, "" );
 			
-            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMTHERAPYDOSEUNITSDROP, "" );
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TOXICITYGRADESDROP, "");
