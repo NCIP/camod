@@ -115,7 +115,7 @@ public class NutritionalFactorPopulateAction extends BaseAction{
 				//Prepopulate all dropdown fields, set the global Constants to the following
                 NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.NUTRITIONFACTORDROP, "" );
 
-                NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+                NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NUTFACTORUNITSDROP, "" );
                 NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
                 NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
 				

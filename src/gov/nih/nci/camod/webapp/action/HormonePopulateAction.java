@@ -111,6 +111,6 @@ public class HormonePopulateAction extends BaseAction {
 									
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEDROP, "" );
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEUNITSDROP, "" );
 	}	
 }
