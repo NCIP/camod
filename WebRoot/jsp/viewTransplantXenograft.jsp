@@ -117,4 +117,12 @@
 	</td></tr></TABLE>
 </tr></td></TABLE>
 
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.XENOGRAFT); %>
+    <%@ include file="/jsp/includeComments.jsp" %>
+    </TABLE>
+</TABLE>
+
 <%@ include file="/jsp/footer.jsp" %>

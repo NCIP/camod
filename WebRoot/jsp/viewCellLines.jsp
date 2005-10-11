@@ -33,41 +33,42 @@
 				</c:choose>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${p.name}"/>
+				<c:out value="${p.name}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td class="greySubTitleLeft" width="25%">Name of Cell Line</td>
-				<td class="<c:out value="${tdClass}"/>End">
+				<td class="resultsBoxWhite" width="25%">Name of Cell Line</td>
+				<td class="resultsBoxWhiteEnd">&nbsp;
 					<c:out value="${p.name}"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="greySubTitleLeft" width="25%">Organ / Tissue</td>
-				<td class="<c:out value="${tdClass}"/>End">
+				<td class="resultsBoxGrey" width="25%">Organ / Tissue</td>
+				<td class="resultsBoxGreyEnd">&nbsp;
 					<c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td class="greySubTitleLeft" width="25%">Experiment</td>
-				<td class="<c:out value="${tdClass}"/>End">
+				<td class="resultsBoxWhite" width="25%">Experiment</td>
+				<td class="resultsBoxWhiteEnd">&nbsp;
 					<c:out value="${p.experiment}"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="greySubTitleLeft" width="25%">Results</td>
-				<td class="<c:out value="${tdClass}"/>End">
+				<td class="resultsBoxGrey" width="25%">Results</td>
+				<td class="resultsBoxGreyEnd">&nbsp;
 					<c:out value="${p.results}"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="greySubTitleLeft" width="25%">Comments</td>
-				<td class="<c:out value="${tdClass}"/>End">&nbsp;
+				<td class="resultsBoxWhite" width="25%">Comments</td>
+				<td class="resultsBoxWhiteEnd">&nbsp;
 					<c:out value="${p.comments}"/>
 				</td>
 			</tr>
+			<tr><td></td></tr>
 			<tr>
-				<td class="greySubTitleLeft" colspan=2><b>Publications:</b></td>
+				<td class="greySubTitleLeftEnd" colspan=2><b>Publications:</b></td>
 			</tr>
 			<c:choose>
 				<c:when test="${empty p.publicationCollection}">
@@ -133,13 +134,18 @@
 			</c:choose >
 			<tr><td colspan="2">&nbsp;</td></tr>
 			</c:forEach>
-			<tr>
-				<td class="WhiteBoxEnd" width="100%" colspan="2">
-				<a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
-			</tr>		
+		
 			</TABLE>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.CELL_LINES); %>
+    <%@ include file="/jsp/includeComments.jsp" %>
+    </TABLE>
+</TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>

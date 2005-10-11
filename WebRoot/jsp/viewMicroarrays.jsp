@@ -37,12 +37,9 @@
 				</td>
 			</tr>
 			
-			<tr>
-				<td class="WhiteBox" width="100%" colspan="9">
-				<a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle>
-				<b>Place your comment here</b></a>
-				</td>
-			</tr>
+            <tr><td></td></tr>
+            <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.MICROARRAY); %>
+            <%@ include file="/jsp/includeComments.jsp" %>			
 			
 			</TABLE>
 		</td>

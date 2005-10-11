@@ -154,7 +154,7 @@
 				<c:out value="${h.comments}"/>
 				</td>
 			</tr>
-
+            <tr><td></td></tr>
 			<bean:define id="mtsColl" name="h" property="metastatisCollection"/>
 			<c:forEach var="m" items="${mtsColl}">
 				<tr>
@@ -246,13 +246,24 @@
 					<c:out value="${m.comments}"/>
 					</td>
 				</tr>
+				<tr><td></td></tr>
 			</c:forEach>
-
 			</c:forEach>
 			
 			</TABLE>
 		</td>
 		</tr>
 		</TABLE>
-</td></tr></TABLE></td></tr></TABLE>
+    </td></tr></TABLE>
+    </td></tr>
+</TABLE>
+
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.HISTOPATHOLOGY); %>
+    <%@ include file="/jsp/includeComments.jsp" %>
+    </TABLE>
+</TABLE>
+
 <%@ include file="/jsp/footer.jsp" %>

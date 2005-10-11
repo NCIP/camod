@@ -61,8 +61,9 @@
 	<c:out value="${t.comments}"/>
 	</td>
 <tr>
+<tr><td></td></tr>
 <tr>
-	<td class="greySubTitleLeft" colspan=2><b>Publications:</b></td>
+	<td class="greySubTitleLeftEnd" colspan=2><b>Publications:</b></td>
 </tr>
 <c:choose>
 	<c:when test="${empty t.publicationCollection}">

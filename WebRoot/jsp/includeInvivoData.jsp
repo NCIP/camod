@@ -40,7 +40,7 @@
 </c:when>
 <c:otherwise>
 	<tr>
-		<td class="greySubTitleLeft" colspan=2>
+		<td class="greySubTitleLeftEnd" colspan=2>
 		<b>No Invivo Drug Screening Data found </b>
 		</td>
 	</tr>
