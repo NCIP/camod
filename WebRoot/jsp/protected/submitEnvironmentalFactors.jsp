@@ -45,7 +45,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Information for Environmental Factors </td>
+		<td class="formTitle" height="20" colspan="3">Environmental Factors </td>
 	</tr>
 
 	<tr>
@@ -76,9 +76,10 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="dosage" size="10" name="formdata" />			
+			<html:text styleClass="formFieldSized"  property="dosage" size="10" name="formdata" />
+			<label for="field1">&nbsp;Units&nbsp;</label>			
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
-				<html:options name="<%= Dropdowns.DOSAGEUNITSDROP %>"/>					
+				<html:options name="<%= Dropdowns.ENVFACTORUNITSDROP %>"/>					
 			</html:select>
 		</td>
 	</tr>
@@ -118,7 +119,7 @@
 		<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
-			
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>

@@ -96,7 +96,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Species / Strain</label></td>
+		<td class="formLabel"><label for="field3">Species / Strain:</label></td>
 		<td class="formField">
 				<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
 		</td>
@@ -114,7 +114,7 @@
 
     <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Amount of Cells</label>
+		<td class="formLabel"><label for="field1">Amount of Cells:</label>
 			<camod:cshelp key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
@@ -150,7 +150,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Host Species</label></td>
+		<td class="formRequiredLabel"><label for="field3">Host Species:</label></td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="hostScientificName" onchange="getOptions(this);" >
 				<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
@@ -160,7 +160,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Host Strain</label></td>
+		<td class="formLabel"><label for="field3">Host Strain:</label></td>
 		<td class="formField">
 		<br>
 			<html:select styleClass="formFieldSized" size="1" property="hostEthinicityStrain" onchange="chkOtherStrain(this)">
@@ -190,7 +190,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Graft Type</label></td>
+		<td class="formRequiredLabel"><label for="field3">Graft Type:</label></td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="graftType" onclick="chkOtherGraft(this);">
 				<html:options name="<%= Dropdowns.GRAFTTYPEDROP %>" />	
