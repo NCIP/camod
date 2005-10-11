@@ -1017,10 +1017,24 @@
 			validate="false">		
     </action>     
      
-     
-     
-     <!-- EngineeredTransgeneForm -->
-     
+    <!-- EngineeredTransgeneForm -->
+          <action path="/EngineeredTransgeneAction"
+	        type="gov.nih.nci.camod.webapp.action.EngineeredTransgeneAction"
+	        name="engineeredTransgeneForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitEngineeredTransgene">
+   </action> 
+    
+    <action path="/EngineeredTransgenePopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.EngineeredTransgenePopulateAction"
+    		name="engineeredTransgeneForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action> 
+    
      <!-- EnvironmentalFactorForm -->
      <action path="/EnvironmentalFactorAction"
 	        type="gov.nih.nci.camod.webapp.action.EnvironmentalFactorAction"

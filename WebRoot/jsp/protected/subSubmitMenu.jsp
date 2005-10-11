@@ -7,6 +7,8 @@
 <%@ page import="gov.nih.nci.camod.domain.Xenograft" %>	
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation" %>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>
+<%@ page import="gov.nih.nci.camod.domain.Transgene" %>
+<%@ page import="gov.nih.nci.camod.domain.GenomicSegment" %>
 <%@ page import="gov.nih.nci.camod.domain.EnvironmentalFactor" %>	
 <%@ page import="gov.nih.nci.camod.domain.SpontaneousMutation" %>	
 <%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>	
@@ -26,14 +28,21 @@
 
 	<div id="menu2" class="masterTitle" onclick="SwitchMenu('sub2')" onmouseover="ChangeClass('menu2','masterTitleOver')" onmouseout="ChangeClass('menu2','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> GENETIC DESCRIPTION</div>
 	<span class="submasterdiv" id="sub2">
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitEngineeredTransgene">Enter Engineered Transgene</html:link><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="EngineeredTransgenePopulateAction.do?method=dropdown">Enter Engineered Transgene</html:link><br>
+				<logic:iterate id="aEngineeredTransgene" name="engineeredtransgene_list" type="Transgene">
+			  &nbsp;&nbsp;&nbsp;&nbsp;
+			  <img src="images/aquadot.jpg" border="0"> 
+			      <html:link styleClass="subMenuBlue" action="EngineeredTransgenePopulateAction.do?method=populate" paramId="aEngineeredTransgeneID" paramName="aEngineeredTransgene" paramProperty="id">
+			      		<bean:write name="aEngineeredTransgene" property="locationOfIntegration" filter="true"/>
+			      </html:link><br>
+		</logic:iterate>		
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GenomicSegmentPopulateAction.do?method=dropdown">Enter Genomic Segment</html:link><br>
-				<logic:iterate id="aGenomicSegment" name="genomicsegment_list" type="EngineeredGene">
+		<logic:iterate id="aGenomicSegment" name="genomicsegment_list" type="GenomicSegment">
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="GenomicSegmentPopulateAction.do?method=populate" paramId="aGenomicSegmentID" paramName="aGenomicSegment" paramProperty="id">
-			      		<bean:write name="aGenomicSegment" property="name" filter="true"/>
+			      		<bean:write name="aGenomicSegment" property="locationOfIntegration" filter="true"/>
 			      </html:link><br>
 		</logic:iterate>		
 		

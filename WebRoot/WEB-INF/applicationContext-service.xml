@@ -82,7 +82,10 @@
     <!--  organManager -->
     <bean id="organManager" class="gov.nih.nci.camod.service.impl.OrganManagerImpl"/>    
     
-    <!--  SpontaneousMutation -->
+    <!--  spontaneousMutation -->
     <bean id="spontaneousMutationManager" class="gov.nih.nci.camod.service.impl.SpontaneousMutationManagerImpl"/>
-       
+    
+    <!--  engineeredTransgene -->
+    <bean id="engineeredTransgeneManager" class="gov.nih.nci.camod.service.impl.EngineeredTransgeneManagerImpl"/>
+           
 </beans>

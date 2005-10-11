@@ -1,6 +1,129 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
 
+<%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm" %>	
+<%@ page import="gov.nih.nci.camod.Constants.*" %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
+
+<%
+	String aEngineeredTransgeneID = request.getParameter( "aEngineeredTransgeneID" );
+	
+	EngineeredTransgeneForm theEngineeredTransgeneForm = (EngineeredTransgeneForm) request.getSession().getAttribute(Constants.FORMDATA);
+	
+	boolean booleanLocationOfIntegration = true;
+	if (theEngineeredTransgeneForm.getLocationOfIntegration() != null )
+		if ( theEngineeredTransgeneForm.getLocationOfIntegration().equals("Targeted") )
+			booleanLocationOfIntegration = false;
+		
+	boolean	booleanConditionalDescription = false;
+	if (theEngineeredTransgeneForm.getConditionedBy() != null )
+		if (theEngineeredTransgeneForm.getConditionedBy().equals("Not Conditional") )
+			booleanConditionalDescription = true;
+		
+	//if aEngineeredTransgeneID is passed in, then we are dealing with a previously entered model and are editing it
+	//otherwise, create a new one
+	
+	String actionName = "EngineeredTransgeneAction.do?method=save";
+	
+	if ( aEngineeredTransgeneID != null )
+		actionName = "EngineeredTransgeneAction.do?method=edit";
+
+%>
+
+<SCRIPT LANGUAGE="JavaScript">
+	function chkIntegration( control ) {
+		ideControl = document.forms[0].otherLocationOfIntegration;
+			
+		if( control.value == 'Targeted' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+	function chkOther( control ) {
+		ideControl = document.forms[0].otherScientificName;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+	function chkOther_t1( control ) {
+		ideControl = document.forms[0].transcriptional1_otherSpecies;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+	function chkOther_t2( control ) {
+		ideControl = document.forms[0].transcriptional2_otherSpecies;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+	function chkOther_t3( control ) {
+		ideControl = document.forms[0].transcriptional3_otherSpecies;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+	function chkOther_PS( control ) {
+		ideControl = document.forms[0].polyASignal_otherSpecies;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
+	function chkOther_SS( control ) {
+		ideControl = document.forms[0].spliceSites_otherSpecies;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+							
+	function chkConditional( control ) {
+		ideControl = document.forms[0].description;
+			
+		if( control.value == 'Conditional' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+
+</SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -22,16 +145,19 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Transgene Integration</label></td>
 		<td class="formField">
-			<input id="radio1" name="radio5" checked="checked" type="radio"> <label for="field5">Random</label>
-			<br>
-			<input id="radio2" name="radio5" type="radio"> <label for="field5">Targeted</label>
+			<html:form action="<%= actionName %>" focus="locationOfIntegration">	
+
+			<html:radio property="locationOfIntegration" value="Random" onchange="chkIntegration(this);" /> Random 
+			<html:radio property="locationOfIntegration" value="Targeted" onchange="chkIntegration(this);" /> Targeted
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Location of Integration *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)</td>
-		<td class="formField"><input class="formFieldSized" type="text" name="field1" id="field1" size="30" /></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="<%= booleanLocationOfIntegration %>" size="10" name="formdata"/>
+		</td>
 	</tr>
 
 	<tr>
@@ -40,69 +166,23 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Transgene 1</label></td>
+		<td class="formRequiredLabel"><label for="field1">Transgene</label></td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
 					<td class="standardText" width="33%">Transgene<br>
-						<input type="text" name="field1" id="field1" size="20" />
+						<html:text styleClass="formFieldUnSized" property="name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<select name="field3" id="field3" size="1">
-                                                        <OPTION value="">
-                                                        <OPTION value="0" >Other
-                                                        <OPTION value="1" >(Human)Homo Sapiens
-                                                        <OPTION value="2" >(Mouse)Mus Musculus
-                                                        <OPTION value="3" >(Cattle)Bos Taurus
-                                                        <OPTION value="4" >(Dog)Canis Familiaris
-                                                        <OPTION value="5" >(Goat)Capra Hircus
-                                                        <OPTION value="6" >(Horse)Equus Caballus
-                                                        <OPTION value="7" >(Sheep)Ovis Aries
-                                                        <OPTION value="8" >(Rat)Rattus Norvegicus
-                                                        <OPTION value="9" >(Rat)Rattus Rattus
-                                                        <OPTION value="10" >(Pig)Sus Scrofa
-                                                        <OPTION value="11" >(Cat)Felis Catus
-						</select>						
+						<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="chkOther( this );" >
+							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
-						<input type="text" name="field1" id="field1" size="20" />
+						<html:text styleClass="formFieldUnSized" property="otherScientificName" disabled="true" size="20" name="formdata"/>
 					</td>
 				</tr>
 			</TABLE>	
-		</td>
-	</tr>
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Transgene 2</label></td>
-		<td class="formField">
-			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
-				<tr>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
-					</td>
-					<td class="standardText" width="33%">
-						<select name="field3" id="field3" size="1">
-                                                        <OPTION value="">
-                                                        <OPTION value="0" >Other
-                                                        <OPTION value="1" >(Human)Homo Sapiens
-                                                        <OPTION value="2" >(Mouse)Mus Musculus
-                                                        <OPTION value="3" >(Cattle)Bos Taurus
-                                                        <OPTION value="4" >(Dog)Canis Familiaris
-                                                        <OPTION value="5" >(Goat)Capra Hircus
-                                                        <OPTION value="6" >(Horse)Equus Caballus
-                                                        <OPTION value="7" >(Sheep)Ovis Aries
-                                                        <OPTION value="8" >(Rat)Rattus Norvegicus
-                                                        <OPTION value="9" >(Rat)Rattus Rattus
-                                                        <OPTION value="10" >(Pig)Sus Scrofa
-                                                        <OPTION value="11" >(Cat)Felis Catus
-						</select>						
-					</td>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
-					</td>
-				</tr>
-			</TABLE>
 		</td>
 	</tr>
 	
@@ -116,31 +196,19 @@
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">Regulatory Element<br>
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Transgene<br>
+						<html:text styleClass="formFieldUnSized" property="transcriptional1_name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<select name="field3" id="field3" size="1">
-                                                        <OPTION value="">
-                                                        <OPTION value="0" >Other
-                                                        <OPTION value="1" >(Human)Homo Sapiens
-                                                        <OPTION value="2" >(Mouse)Mus Musculus
-                                                        <OPTION value="3" >(Cattle)Bos Taurus
-                                                        <OPTION value="4" >(Dog)Canis Familiaris
-                                                        <OPTION value="5" >(Goat)Capra Hircus
-                                                        <OPTION value="6" >(Horse)Equus Caballus
-                                                        <OPTION value="7" >(Sheep)Ovis Aries
-                                                        <OPTION value="8" >(Rat)Rattus Norvegicus
-                                                        <OPTION value="9" >(Rat)Rattus Rattus
-                                                        <OPTION value="10" >(Pig)Sus Scrofa
-                                                        <OPTION value="11" >(Cat)Felis Catus
-						</select>						
+						<html:select styleClass="formFieldSized" size="1" property="transcriptional1_species" onchange="chkOther_t1( this );" >
+							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
-						<input type="text" name="field1" id="field1" size="20" />
+						<html:text styleClass="formFieldUnSized" property="transcriptional1_otherSpecies" disabled="true" size="20" name="formdata"/>
 					</td>
 				</tr>
-			</TABLE>	
+			</TABLE>		
 		</td>
 	</tr>
 	
@@ -150,31 +218,19 @@
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Transgene<br>
+						<html:text styleClass="formFieldUnSized" property="transcriptional2_name" size="20" name="formdata"/>
 					</td>
-					<td class="standardText" width="33%">
-						<select name="field3" id="field3" size="1">
-                                                        <OPTION value="">
-                                                        <OPTION value="0" >Other
-                                                        <OPTION value="1" >(Human)Homo Sapiens
-                                                        <OPTION value="2" >(Mouse)Mus Musculus
-                                                        <OPTION value="3" >(Cattle)Bos Taurus
-                                                        <OPTION value="4" >(Dog)Canis Familiaris
-                                                        <OPTION value="5" >(Goat)Capra Hircus
-                                                        <OPTION value="6" >(Horse)Equus Caballus
-                                                        <OPTION value="7" >(Sheep)Ovis Aries
-                                                        <OPTION value="8" >(Rat)Rattus Norvegicus
-                                                        <OPTION value="9" >(Rat)Rattus Rattus
-                                                        <OPTION value="10" >(Pig)Sus Scrofa
-                                                        <OPTION value="11" >(Cat)Felis Catus
-						</select>						
+					<td class="standardText" width="33%">Species of Origin<br>
+						<html:select styleClass="formFieldSized" size="1" property="transcriptional2_species" onchange="chkOther_t2( this );" >
+							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+						</html:select>					
 					</td>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Other Species<br>
+						<html:text styleClass="formFieldUnSized" property="transcriptional2_otherSpecies" disabled="true" size="20" name="formdata"/>
 					</td>
 				</tr>
-			</TABLE>
+			</TABLE>	
 		</td>
 	</tr>	
 	
@@ -184,31 +240,19 @@
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Transgene<br>
+						<html:text styleClass="formFieldUnSized" property="transcriptional3_name" size="20" name="formdata"/>
 					</td>
-					<td class="standardText" width="33%">
-						<select name="field3" id="field3" size="1">
-                                                        <OPTION value="">
-                                                        <OPTION value="0" >Other
-                                                        <OPTION value="1" >(Human)Homo Sapiens
-                                                        <OPTION value="2" >(Mouse)Mus Musculus
-                                                        <OPTION value="3" >(Cattle)Bos Taurus
-                                                        <OPTION value="4" >(Dog)Canis Familiaris
-                                                        <OPTION value="5" >(Goat)Capra Hircus
-                                                        <OPTION value="6" >(Horse)Equus Caballus
-                                                        <OPTION value="7" >(Sheep)Ovis Aries
-                                                        <OPTION value="8" >(Rat)Rattus Norvegicus
-                                                        <OPTION value="9" >(Rat)Rattus Rattus
-                                                        <OPTION value="10" >(Pig)Sus Scrofa
-                                                        <OPTION value="11" >(Cat)Felis Catus
-						</select>						
+					<td class="standardText" width="33%">Species of Origin<br>
+						<html:select styleClass="formFieldSized" size="1" property="transcriptional3_species" onchange="chkOther_t3( this );" >
+							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+						</html:select>					
 					</td>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Other Species<br>
+						<html:text styleClass="formFieldUnSized" property="transcriptional3_otherSpecies" disabled="true" size="20" name="formdata"/>
 					</td>
 				</tr>
-			</TABLE>
+			</TABLE>	
 		</td>
 	</tr>	
 
@@ -218,31 +262,19 @@
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Transgene<br>
+						<html:text styleClass="formFieldUnSized" property="polyASignal_name" size="20" name="formdata"/>
 					</td>
-					<td class="standardText" width="33%">
-						<select name="field3" id="field3" size="1">
-                                                        <OPTION value="">
-                                                        <OPTION value="0" >Other
-                                                        <OPTION value="1" >(Human)Homo Sapiens
-                                                        <OPTION value="2" >(Mouse)Mus Musculus
-                                                        <OPTION value="3" >(Cattle)Bos Taurus
-                                                        <OPTION value="4" >(Dog)Canis Familiaris
-                                                        <OPTION value="5" >(Goat)Capra Hircus
-                                                        <OPTION value="6" >(Horse)Equus Caballus
-                                                        <OPTION value="7" >(Sheep)Ovis Aries
-                                                        <OPTION value="8" >(Rat)Rattus Norvegicus
-                                                        <OPTION value="9" >(Rat)Rattus Rattus
-                                                        <OPTION value="10" >(Pig)Sus Scrofa
-                                                        <OPTION value="11" >(Cat)Felis Catus
-						</select>						
+					<td class="standardText" width="33%">Species of Origin<br>
+						<html:select styleClass="formFieldSized" size="1" property="polyASignal_species" onchange="chkOther_PS( this );" >
+							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+						</html:select>					
 					</td>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Other Species<br>
+						<html:text styleClass="formFieldUnSized" property="polyASignal_otherSpecies" disabled="true" size="20" name="formdata"/>
 					</td>
 				</tr>
-			</TABLE>
+			</TABLE>	
 		</td>
 	</tr>
 
@@ -252,66 +284,61 @@
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Transgene<br>
+						<html:text styleClass="formFieldUnSized" property="spliceSites_name" size="20" name="formdata"/>
 					</td>
-					<td class="standardText" width="33%">
-						<select name="field3" id="field3" size="1">
-                                                        <OPTION value="">
-                                                        <OPTION value="0" >Other
-                                                        <OPTION value="1" >(Human)Homo Sapiens
-                                                        <OPTION value="2" >(Mouse)Mus Musculus
-                                                        <OPTION value="3" >(Cattle)Bos Taurus
-                                                        <OPTION value="4" >(Dog)Canis Familiaris
-                                                        <OPTION value="5" >(Goat)Capra Hircus
-                                                        <OPTION value="6" >(Horse)Equus Caballus
-                                                        <OPTION value="7" >(Sheep)Ovis Aries
-                                                        <OPTION value="8" >(Rat)Rattus Norvegicus
-                                                        <OPTION value="9" >(Rat)Rattus Rattus
-                                                        <OPTION value="10" >(Pig)Sus Scrofa
-                                                        <OPTION value="11" >(Cat)Felis Catus
-						</select>						
+					<td class="standardText" width="33%">Species of Origin<br>
+						<html:select styleClass="formFieldSized" size="1" property="spliceSites_species" onchange="chkOther_SS( this );" >
+							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+						</html:select>					
 					</td>
-					<td class="standardText" width="33%">
-						<input type="text" name="field1" id="field1" size="20" />
+					<td class="standardText" width="33%">Other Species<br>
+						<html:text styleClass="formFieldUnSized" property="spliceSites_otherSpecies" disabled="true" size="20" name="formdata"/>
 					</td>
 				</tr>
-			</TABLE>
+			</TABLE>	
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
-		<td class="formField"><input class="formFieldUnSized" type="text" name="field1" id="field1" size="10" /></td>
+		<td class="formLabel"><label for="field2">MGI Number</label></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
+		</td>
 	</tr>	
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Gene Functions<br>(seperate each entry by a comma)</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldUnSized" property="geneFunctions"  rows="4" cols="32"  name="formdata"/>		
+		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Conditional?</label></td>
 		<td class="formField">
-			<input id="radio1" name="radio5" checked="checked" type="radio"> <label for="field5">Conditional</label>
-			<br>
-			<input id="radio2" name="radio5" type="radio"> <label for="field5">Not Conditional</label>
+			<html:radio property="conditionedBy" value="Conditional" onchange="chkConditional(this);" /> Conditional 
+			<html:radio property="conditionedBy" value="Not Conditional" onchange="chkConditional(this);" /> Not Conditional
 		</td>
 	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Conditional Description</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldUnSized" property="description" disabled="<%= booleanConditionalDescription %>" rows="4" cols="32"  name="formdata"/>		
+		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Additional Features</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldUnSized" property="comments"  rows="4" cols="32"  name="formdata"/>	
+		</td>
 	</tr>
 	
 	<tr>
@@ -322,35 +349,43 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 		<td class="formField">
-			<input class="formFieldSized" type="text" name="field1" id="field1" size="30" />
-			<input class="actionButton" type="submit" value="Browse" />
+			<html:text styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/> Browse
 		</td>			
 	</tr>		
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Title of Construct<br>(Enter info only when uploading image)</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:textarea styleClass="formUnFieldSized" property="title" rows="4" cols="32" name="formdata"/>
+		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
-		<td class="formField"><textarea class="formFieldSized" name="field2" id="field2" cols="32" rows="4"></textarea></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldUnSized" property="descriptionOfConstruct" rows="4" cols="32"  name="formdata"/>	
+		</td>
 	</tr>
-
 	
 	<tr>
 		<td align="right" colspan="3">
-			<!-- action buttons begins -->
 			<TABLE cellpadding="4" cellspacing="0" border="0">
-
-				<tr>
-					<td><input class="actionButton" type="submit" value="Submit" /></td>
-					<td><input class="actionButton" type="reset" value="Reset" /></td>
-				</tr>
+			
+				  <html:submit styleClass="actionButton">
+					  <bean:message key="button.submit"/>
+				  </html:submit>
+				  
+				  <html:reset styleClass="actionButton">
+				  	  <bean:message key="button.reset"/>
+  				  </html:reset>
+				
+				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
+				  <input type="hidden" name="aEngineeredTransgeneID" value="<%= aEngineeredTransgeneID %>">
+				  	
+				</html:form>			
 			</TABLE>
-			<!-- action buttons end -->
 		</td>
 	</tr>
 </TABLE>
