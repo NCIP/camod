@@ -50,7 +50,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Gene Delivery Information </td>
+		<td class="formTitle" height="20" colspan="3">Gene Delivery</td>
 	</tr>
 
         <tr>

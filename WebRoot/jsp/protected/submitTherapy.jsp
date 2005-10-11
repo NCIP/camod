@@ -33,7 +33,7 @@
 	</tr>
 
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Information for Therapies:</td>
+		<td class="formTitle" height="20" colspan="3">Therapy</td>
 	</tr>
 
 	<tr>
