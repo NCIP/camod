@@ -85,9 +85,9 @@
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" name="formdata"/>
-			
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
-				<html:options name="<%= Dropdowns.DOSAGEUNITSDROP %>"/>					
+				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>					
 			</html:select>	
 		</td>
 	</tr>
