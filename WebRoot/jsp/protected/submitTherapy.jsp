@@ -123,9 +123,10 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose (Number only):</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized"  property="dosage" size="10" name="formdata" />			
+			<html:text styleClass="formFieldUnSized"  property="dosage" size="10" name="formdata" />
+			<label for="field1">&nbsp;Units&nbsp;</label>			
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
-				<html:options name="<%= Dropdowns.DOSAGEUNITSDROP %>"/>					
+				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>					
 			</html:select>
 		</td>
 	</tr>
@@ -143,6 +144,7 @@
 		<td class="formLabel"><label for="field1">Mouse Age:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
@@ -170,6 +172,7 @@
 			<label for="field3">Time to preneoplastic lesion malignancy metastais</label>
 			<br>
 			<html:text styleClass="formFieldUnSized" property="tumorResponse"  size="10" name="formdata"/>
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="tumorAgeUnit" name="formdata">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
