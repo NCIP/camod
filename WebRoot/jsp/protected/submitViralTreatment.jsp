@@ -49,7 +49,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Virus</label></td>
+		<td class="formRequiredLabel"><label for="field3">Virus:</label></td>
 
 		<td class="formField">
 		<br>

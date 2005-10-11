@@ -50,7 +50,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>	
-			<td class="formRequiredLabel"><label for="field3">Radiation</label></td>
+			<td class="formRequiredLabel"><label for="field3">Radiation:</label></td>
 			<td class="formField">
 			<br>
 			<label for="field3">(if Radiation is not listed, then please<br>select "Other" from the list and specify it below)</label>
