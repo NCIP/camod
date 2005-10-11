@@ -33,6 +33,10 @@
 		    type="gov.nih.nci.camod.webapp.form.ChemicalDrugForm"/>	
 		 
 		 <form-bean
+			name="commentsForm"
+		    type="gov.nih.nci.camod.webapp.form.CommentsForm"/>
+		    
+		 <form-bean
 			name="commentsStateForm"
 		    type="gov.nih.nci.camod.webapp.form.CommentsStateForm"/>
 		 
@@ -379,10 +383,6 @@
 		<forward
 			name="submitClinicalMarkers"
 			path="/jsp/protected/submitClinicalMarkers.jsp"></forward>
-		
-		<forward
-			name="submitComment"
-			path="/jsp/protected/submitComment.jsp"></forward>
 		
 		<forward
 			name="submitEngineeredTransgene"
@@ -910,22 +910,6 @@
     		path="/ViewModelAction.do?unprotected_method=populateModelCharacteristics">
         </forward>
         <forward 
-    		name="Engineered Transgene Page"
-    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
-        </forward>
-        <forward 
-    		name="Genomic Segment Page"
-    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
-        </forward>
-        <forward 
-    		name="Targeted Modification Page"
-    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
-        </forward>
-        <forward 
-    		name="Induced Mutation Page"
-    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
-        </forward>
-        <forward 
     		name="Carcinogenic Interventions Page"
     		path="/ViewModelAction.do?unprotected_method=populateCarcinogenicInterventions">
         </forward>
@@ -955,7 +939,7 @@
         </forward>
         <forward 
     		name="Genetic Description Page"
-    		path="/ViewModelAction.do?unprotected_method=viewTransplantXenograft">
+    		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
         </forward>
     </action>
      <!-- AssociatedExpressionForm -->
@@ -1492,8 +1476,25 @@
     		path="/AdminRolesPopulateAction.do">
     	 </forward>  	
      </action>
-	 
-	      <action 
+	 <action 
+         path="/AddCommentsAction"  
+         type="gov.nih.nci.camod.webapp.action.AddCommentsAction"
+         name="commentsForm"
+         parameter="unprotected_method"
+         >   	
+     </action>
+     <action 
+         path="/AddCommentsPopulateAction"  
+         type="gov.nih.nci.camod.webapp.action.AddCommentsPopulateAction"
+         name="commentsForm"
+         parameter="unprotected_method"
+         >
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitComment.jsp">
+    	 </forward>  	
+     </action>
+	 <action 
          path="/ChangeCommentsStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStateAction"
          name="commentsStateForm"

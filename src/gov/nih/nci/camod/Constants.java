@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.39 2005-10-10 14:05:38 georgeda Exp $
+ * $Id: Constants.java,v 1.40 2005-10-11 18:12:08 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2005/10/10 14:05:38  georgeda
+ * Cleanup and additions for comment curation
+ *
  * Revision 1.37  2005/10/05 20:27:59  guruswas
  * implementation of drug screening search page
  *
@@ -213,22 +216,18 @@ public class Constants {
 
 		public static final String MODELSECTIONNAME = "aModelSectionName";
 		
+        public static final String MODELSECTIONVALUE = "modelSectionValue";
+        
 		public static final String COMMENTSID = "aCommentsID";
 		
 		public static final String COMMENTSLIST = "aCommentsList";
+        
+        
 	}
 
 	public interface Pages {
-		
+        
 		public static final String MODEL_CHARACTERISTICS = "General Information Page";
-
-		public static final String ENGINEERED_TRANSGEENE = "Engineered Transgene Page";
-
-		public static final String GENOMIC_SEGMENT = "Genomic Segment Page";
-
-		public static final String TARGETED_MODIFICATION = "Targeted Modification Page";
-
-		public static final String INDUCED_MUTATION = "Induced Mutation Page";
 
 		public static final String CARCINOGENIC_INTERVENTION = "Carcinogenic Interventions Page";
 
@@ -245,6 +244,8 @@ public class Constants {
 		public static final String MICROARRAY = "Microarray Page";
 
 		public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
+        
+        public static final String XENOGRAFT = "Xenograft Page";
 	}
 
 	/**

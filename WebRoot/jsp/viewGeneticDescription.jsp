@@ -100,11 +100,6 @@
 		<%}%>
 			</td>			
 		</tr>			
-
-        <tr>
-			<td class="WhiteBox" width="100%" colspan="2"><a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
-		</tr>
-		
 	</TABLE>
 	
 </td></tr>
@@ -207,11 +202,6 @@
 			<c:out value="${tg.mutationIdentifier.numberMGI}"/>
 			</td>			
 		</tr>
-				
-		<tr>
-			<td class="WhiteBox" width="100%" colspan="2"><a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> Place your comment here</a></td>
-		</tr>
-		
 	</TABLE>
 	
 </td></tr>
@@ -497,6 +487,15 @@
 </TABLE>
 </c:forEach>
 </c:if>
+
 <!-- End Induced Mutation-->
+
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.GENETIC_DESCRIPTION); %>
+    <%@ include file="/jsp/includeComments.jsp" %>
+    </TABLE>
+</TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>

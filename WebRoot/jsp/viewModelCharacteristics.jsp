@@ -151,22 +151,9 @@
 		<tr><td>&nbsp;</td></tr>
 		</c:if>
 		
-		
-		<c:forEach var="comments" items="${aCommentsList}" >
-			<tr>
-			    <td class="WhiteBox" width="100%" colspan="2"><c:out value="${comments.remark}"/></td>
-			</tr>
-		</c:forEach>
-		<br>
-		
-		<!--  set some attributes to build the URL -->
-		<% pageContext.setAttribute("modelIdTag", Parameters.MODELID); %>
-	    <% pageContext.setAttribute("modelSectionTag", Parameters.MODELSECTIONNAME); %>
-		<% pageContext.setAttribute("modelSectionValue", Pages.MODEL_CHARACTERISTICS); %>
-		<c:set var="submitComment" value="javascript: rs('commentWin','submitComment.do?${modelIdTag}=${mdl.id}&${modelSectionTag}=${modelSectionValue}',415,250);"/>
-		<tr>
-			<td class="WhiteBox" width="100%" colspan="2"><a href='<c:out value="${submitComment}"/>'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
-		</tr>
+		<% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.MODEL_CHARACTERISTICS); %>
+		<tr><td>&nbsp;</td></tr>
+		<%@ include file="/jsp/includeComments.jsp" %>
 	</TABLE>
 	
 </td></tr>

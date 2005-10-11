@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <curation-states xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost:8080/camod/config/CurationConfig.xsd" >
-	<state default="false">
+	<state default="true">
 	 	<name>Complete-not screened</name>
 	    <actions>
 		    <action>emailAssignee</action>

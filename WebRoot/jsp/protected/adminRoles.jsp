@@ -259,16 +259,20 @@
 				            </td>				            
 				        </td>
 			        </tr>
-			    </logic:iterate>		
+			    </logic:iterate>
+			    <tr><td>&nbsp;</td></tr>
 			</TABLE>
 		</logic:present>
+		</td></tr>
+		<tr><td>
+		
 		<logic:present name="<%= Admin.COMMENTS_NEEDING_ASSIGNMENT %>">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			    <tr>
-				    <td class="formTitleBlue" height="20" colspan="3">Comments to Review</td>				
+				    <td class="formTitleBlue" height="20" colspan="3">Comments Needing Assignment</td>				
 			    </tr>			
 		        <tr>
-				    <td class="resultsBoxWhiteEnd" colspan="3">You have been assigned the following Comments to Review
+				    <td class="resultsBoxWhiteEnd" colspan="3">You need to assign reviewers for the following comments
 			    </tr>
 			    <logic:iterate name="<%= Admin.COMMENTS_NEEDING_ASSIGNMENT %>" id="comments" type="gov.nih.nci.camod.domain.Comments">
 			        <tr>
