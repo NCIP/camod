@@ -14,7 +14,7 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EngineeredTransgeneForm extends BaseForm implements Serializable {
+public class EngineeredTransgeneForm extends BaseForm implements Serializable, EngineeredTransgeneData {
     
     private static final long serialVersionUID = 3257305453799404851L;
     
@@ -28,8 +28,10 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable {
 	public EngineeredTransgeneForm() {}
 	
 	protected String locationOfIntegration;
+	protected String otherLocationOfIntegration;
 	protected String name;
 	protected String scientificName;
+	protected String otherScientificName;
 	protected String numberMGI;
 	protected String function;
 	protected String conditionedBy;
@@ -37,6 +39,23 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable {
 	protected String comments;
 	protected String fileServerLocation;
 	protected String title;
+	protected String descriptionOfConstruct;
+	protected String geneFunctions;
+	protected String transcriptional1_name;
+	protected String transcriptional1_species;
+	protected String transcriptional1_otherSpecies;
+	protected String transcriptional2_name;
+	protected String transcriptional2_species;
+	protected String transcriptional2_otherSpecies;
+	protected String transcriptional3_name;
+	protected String transcriptional3_species;
+	protected String transcriptional3_otherSpecies;
+	protected String polyASignal_name;
+	protected String polyASignal_species;
+	protected String polyASignal_otherSpecies;
+	protected String spliceSites_name;
+	protected String spliceSites_species;
+	protected String spliceSites_otherSpecies;
 	
 	/**
 	 * @return Returns the locationOfIntegration.
@@ -157,5 +176,122 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable {
 	 */
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getOtherLocationOfIntegration() {
+		return otherLocationOfIntegration;
+	}
+	public void setOtherLocationOfIntegration(String otherLocationOfIntegration) {
+		this.otherLocationOfIntegration = otherLocationOfIntegration;
+	}
+	public String getOtherScientificName() {
+		return otherScientificName;
+	}
+	public void setOtherScientificName(String otherScientificName) {
+		this.otherScientificName = otherScientificName;
+	}
+	public String getPolyASignal_name() {
+		return polyASignal_name;
+	}
+	public void setPolyASignal_name(String polyASignal_name) {
+		this.polyASignal_name = polyASignal_name;
+	}
+	public String getPolyASignal_otherSpecies() {
+		return polyASignal_otherSpecies;
+	}
+	public void setPolyASignal_otherSpecies(String polyASignal_otherSpecies) {
+		this.polyASignal_otherSpecies = polyASignal_otherSpecies;
+	}
+	public String getPolyASignal_species() {
+		return polyASignal_species;
+	}
+	public void setPolyASignal_species(String polyASignal_species) {
+		this.polyASignal_species = polyASignal_species;
+	}
+	public String getSpliceSites_name() {
+		return spliceSites_name;
+	}
+	public void setSpliceSites_name(String spliceSites_name) {
+		this.spliceSites_name = spliceSites_name;
+	}
+	public String getSpliceSites_otherSpecies() {
+		return spliceSites_otherSpecies;
+	}
+	public void setSpliceSites_otherSpecies(String spliceSites_otherSpecies) {
+		this.spliceSites_otherSpecies = spliceSites_otherSpecies;
+	}
+	public String getSpliceSites_species() {
+		return spliceSites_species;
+	}
+	public void setSpliceSites_species(String spliceSites_species) {
+		this.spliceSites_species = spliceSites_species;
+	}
+	public String getTranscriptional1_name() {
+		return transcriptional1_name;
+	}
+	public void setTranscriptional1_name(String transcriptional1_name) {
+		this.transcriptional1_name = transcriptional1_name;
+	}
+	public String getTranscriptional1_otherSpecies() {
+		return transcriptional1_otherSpecies;
+	}
+	public void setTranscriptional1_otherSpecies(
+			String transcriptional1_otherSpecies) {
+		this.transcriptional1_otherSpecies = transcriptional1_otherSpecies;
+	}
+	public String getTranscriptional1_species() {
+		return transcriptional1_species;
+	}
+	public void setTranscriptional1_species(String transcriptional1_species) {
+		this.transcriptional1_species = transcriptional1_species;
+	}
+	public String getTranscriptional2_name() {
+		return transcriptional2_name;
+	}
+	public void setTranscriptional2_name(String transcriptional2_name) {
+		this.transcriptional2_name = transcriptional2_name;
+	}
+	public String getTranscriptional2_otherSpecies() {
+		return transcriptional2_otherSpecies;
+	}
+	public void setTranscriptional2_otherSpecies(
+			String transcriptional2_otherSpecies) {
+		this.transcriptional2_otherSpecies = transcriptional2_otherSpecies;
+	}
+	public String getTranscriptional2_species() {
+		return transcriptional2_species;
+	}
+	public void setTranscriptional2_species(String transcriptional2_species) {
+		this.transcriptional2_species = transcriptional2_species;
+	}
+	public String getTranscriptional3_name() {
+		return transcriptional3_name;
+	}
+	public void setTranscriptional3_name(String transcriptional3_name) {
+		this.transcriptional3_name = transcriptional3_name;
+	}
+	public String getTranscriptional3_otherSpecies() {
+		return transcriptional3_otherSpecies;
+	}
+	public void setTranscriptional3_otherSpecies(
+			String transcriptional3_otherSpecies) {
+		this.transcriptional3_otherSpecies = transcriptional3_otherSpecies;
+	}
+	public String getTranscriptional3_species() {
+		return transcriptional3_species;
+	}
+	public void setTranscriptional3_species(String transcriptional3_species) {
+		this.transcriptional3_species = transcriptional3_species;
+	}
+	public String getGeneFunctions() {
+		return geneFunctions;
+	}
+	public void setGeneFunctions(String geneFunctions) {
+		this.geneFunctions = geneFunctions;
+	}
+	public String getDescriptionOfConstruct() {
+		return descriptionOfConstruct;
+	}
+	public void setDescriptionOfConstruct(String descriptionOfConstruct) {
+		this.descriptionOfConstruct = descriptionOfConstruct;
 	}
 }

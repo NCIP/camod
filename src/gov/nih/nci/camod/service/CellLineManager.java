@@ -6,7 +6,6 @@
  */
 package gov.nih.nci.camod.service;
 
-import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.webapp.form.CellLineData;
 import java.util.List;

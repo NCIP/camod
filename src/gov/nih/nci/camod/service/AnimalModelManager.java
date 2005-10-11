@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.19 2005-10-10 14:06:44 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.20 2005-10-11 20:52:53 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/10/10 14:06:44  georgeda
+ * Performance improvement
+ *
  * Revision 1.18  2005/10/06 20:41:38  schroedn
  * InducedMutation, TargetedMutation, GenomicSegment changes
  *
@@ -31,6 +34,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/10/10 14:06:44  georgeda
+ * Performance improvement
+ *
  * Revision 1.18  2005/10/06 20:41:38  schroedn
  * InducedMutation, TargetedMutation, GenomicSegment changes
  *
@@ -132,6 +138,8 @@ public interface AnimalModelManager {
     
     public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData) throws Exception;
     
+    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData) throws Exception;
+
     public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception; 
     
 }

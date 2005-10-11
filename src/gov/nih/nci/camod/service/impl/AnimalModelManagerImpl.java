@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.30 2005-10-10 20:05:19 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.31 2005-10-11 20:52:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2005/10/10 20:05:19  pandyas
+ * removed animalmodel reference in populate method
+ *
  * Revision 1.29  2005/10/10 14:08:02  georgeda
  * Performance improvement
  *
@@ -75,16 +78,55 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.AnimalModelSearchResult;
+import gov.nih.nci.camod.domain.Availability;
+import gov.nih.nci.camod.domain.CellLine;
+import gov.nih.nci.camod.domain.ContactInfo;
+import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Phenotype;
+import gov.nih.nci.camod.domain.SexDistribution;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
+import gov.nih.nci.camod.domain.TargetedModification;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.*;
+import gov.nih.nci.camod.webapp.form.CellLineData;
+import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
+import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
+import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
+import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
+import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
+import gov.nih.nci.camod.webapp.form.GrowthFactorData;
+import gov.nih.nci.camod.webapp.form.HormoneData;
+import gov.nih.nci.camod.webapp.form.InducedMutationData;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
+import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
+import gov.nih.nci.camod.webapp.form.RadiationData;
+import gov.nih.nci.camod.webapp.form.SearchData;
+import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
+import gov.nih.nci.camod.webapp.form.SurgeryData;
+import gov.nih.nci.camod.webapp.form.TargetedModificationData;
+import gov.nih.nci.camod.webapp.form.TherapyData;
+import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
+import gov.nih.nci.camod.webapp.form.XenograftData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 /**
  * Manages fetching/saving/updating of animal models
@@ -739,12 +781,25 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace( "Entering addGeneticDescription (GenomicSegment)" );
 
         GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create( inGenomicSegmentData );
-        System.out.println(theGenomicSegment.getName() );
+        //System.out.println(theGenomicSegment.getName() );
         
-        //inAnimalModel.addEngineeredGene( theGenomicSegment );
-        //save( inAnimalModel );
+        inAnimalModel.addEngineeredGene( theGenomicSegment );
+        save( inAnimalModel );
 
         log.trace("Exiting addGeneticDescription (GenomicSegment)");
+    }
+    
+    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData) throws Exception {
+    	
+        log.trace( "Entering addGeneticDescription (EngineeredTransgene)" );
+
+        Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().create( inEngineeredTransgeneData );
+        //System.out.println(theGenomicSegment.getName() );
+        
+        inAnimalModel.addEngineeredGene( theEngineeredTransgene );
+        save( inAnimalModel );
+
+        log.trace("Exiting addGeneticDescription (EngineeredTransgene)");
     }
     
     /**

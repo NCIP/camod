@@ -2,13 +2,19 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.GenomicSegment;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.GenomicSegmentManager;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 /**
  * GenomicSegmentAction Class
@@ -66,11 +72,56 @@ public final class GenomicSegmentAction extends BaseAction {
                               HttpServletRequest request,
                               HttpServletResponse response)
     throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
+        log.trace("Entering edit");
+
+        // Create a form to edit
+        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
+             
+        // Grab the current modelID from the session
+        String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
+        
+        log.info("<GenomicSegmentAction save> following Characteristics:" 
+        		+ "\n\t getLocationOfIntegration: " + genomicSegmentForm.getLocationOfIntegration()
+        		+ "\n\t getOtherLocationOfIntegration: " + genomicSegmentForm.getOtherLocationOfIntegration()
+                + "\n\t getSegmentName: " + genomicSegmentForm.getSegmentName()              
+                + "\n\t getOtherSegmentName: " + genomicSegmentForm.getOtherSegmentName() 
+                + "\n\t getComments: " + genomicSegmentForm.getComments()
+                + "\n\t getCloneDesignator: " + genomicSegmentForm.getCloneDesignator()
+                + "\n\t getNumberMGI: " + genomicSegmentForm.getNumberMGI()
+                + "\n\t getDescription: " + genomicSegmentForm.getDescription()
+                + "\n\t getFileServerLocation: " + genomicSegmentForm.getFileServerLocation()
+                + "\n\t getTitle: " + genomicSegmentForm.getTitle()          
+                + "\n\t" + (String) request.getSession().getAttribute("camod.loggedon.username"));
+
+        String theForward = "AnimalModelTreePopulateAction";
+        
+        try {
+
+            log.info("GenomicSegment edit");
+            
+            // retrieve model and update w/ new values
+            GenomicSegmentManager genomicSegmentManager = (GenomicSegmentManager) getBean("genomicSegmentManager");
+            GenomicSegment theGenomicSegment = genomicSegmentManager.get(aGenomicSegmentID);
+
+            genomicSegmentManager.update(genomicSegmentForm, theGenomicSegment);
+            
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.edit.successful"));
+            saveErrors(request, msg);
+
+        } catch (Exception e) {
+            log.error("Exception ocurred creating GenomicSegment", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
         }
 
-        return mapping.findForward("");
+        log.trace("Exiting edit");
+        return mapping.findForward(theForward);
     }
 
     /**
@@ -107,12 +158,14 @@ public final class GenomicSegmentAction extends BaseAction {
                 + "\n\t getTitle: " + genomicSegmentForm.getTitle()          
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
+        String theForward = "AnimalModelTreePopulateAction";
+        
         try {
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-            System.out.println(theAnimalModel.getModelDescriptor() );
-           // theAnimalModelManager.addGeneticDescription( theAnimalModel, genomicSegmentForm );
+            
+            theAnimalModelManager.addGeneticDescription( theAnimalModel, genomicSegmentForm );
 
             log.info("New GenomicSegment created");
 
@@ -132,6 +185,6 @@ public final class GenomicSegmentAction extends BaseAction {
         }
 
         log.trace("Exiting save");
-        return mapping.findForward("AnimalModelTreePopulateAction");
+        return mapping.findForward(theForward);
     }
 }

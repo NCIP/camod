@@ -1,11 +1,17 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.Image;
+import gov.nih.nci.camod.domain.MutationIdentifier;
+import gov.nih.nci.camod.domain.SegmentType;
+import gov.nih.nci.camod.service.impl.GenomicSegmentManagerSingleton;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -17,8 +23,46 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 	
 	    System.out.println( "<GenomicSegmentPopulateAction populate> Entering populate() " );
 	
-	    GenomicSegmentForm GenomicSegmentForm = (GenomicSegmentForm) form;
-	    request.getSession().setAttribute(Constants.FORMDATA, GenomicSegmentForm);       
+	    GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
+	 
+	    String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
+	    GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().get(aGenomicSegmentID);
+	 
+	    if ( theGenomicSegment.getLocationOfIntegration().equals("Random") ) {
+	    	genomicSegmentForm.setLocationOfIntegration( theGenomicSegment.getLocationOfIntegration() );
+	    } else {
+	    	genomicSegmentForm.setLocationOfIntegration("Targeted");
+	    	genomicSegmentForm.setOtherLocationOfIntegration(theGenomicSegment.getLocationOfIntegration() );	    	
+	    }
+	    
+	    SegmentType inSegmentType = (SegmentType) theGenomicSegment.getSegmentTypeCollection().get(0);
+	    genomicSegmentForm.setSegmentName(inSegmentType.getName());
+	    	    
+	    if (inSegmentType.getNameUnctrlVocab() != null )
+	    	genomicSegmentForm.setOtherSegmentName( inSegmentType.getNameUnctrlVocab() );
+
+	    genomicSegmentForm.setSegmentSize( theGenomicSegment.getSegmentSize() );
+	    genomicSegmentForm.setCloneDesignator( theGenomicSegment.getCloneDesignator() );
+	    
+	    //Gene(s)
+	    
+	    //Marker(s)
+	    
+	    //Commentes
+	    genomicSegmentForm.setComments( theGenomicSegment.getComments() );
+	    
+	    //MGI Number
+	    MutationIdentifier inMutationIdentifier = theGenomicSegment.getMutationIdentifier();
+	    if ( inMutationIdentifier != null )
+	    	genomicSegmentForm.setNumberMGI( inMutationIdentifier.getNumberMGI().toString() );	    
+	    
+	    //Image
+	    Image inImage = theGenomicSegment.getImage();
+	    genomicSegmentForm.setTitle( inImage.getTitle() );	    
+	    genomicSegmentForm.setFileServerLocation( inImage.getFileServerLocation() );
+	    genomicSegmentForm.setDescriptionOfConstruct( inImage.getDescription() );
+	    
+	    request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);       
 	
 	    // setup dropdown menus
 	    this.dropdown(request, response);
@@ -33,10 +77,10 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 	
 	    // blank out the FORMDATA Constant field
 	    GenomicSegmentForm GenomicSegmentForm = (GenomicSegmentForm) form;
-	    request.getSession().setAttribute(Constants.FORMDATA, GenomicSegmentForm);       
+	    request.getSession().setAttribute( Constants.FORMDATA, GenomicSegmentForm );       
 	    
 	    // setup dropdown menus
-	    this.dropdown(request, response);
+	    this.dropdown( request, response );
 	    
 	   return mapping.findForward( "submitGenomicSegment" );
 	} 

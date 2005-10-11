@@ -7,10 +7,15 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.Image;
+import gov.nih.nci.camod.domain.MutationIdentifier;
+import gov.nih.nci.camod.domain.SegmentType;
 import gov.nih.nci.camod.service.GenomicSegmentManager;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSegmentManager {
 	
@@ -39,7 +44,6 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 	        log.trace("Entering GenomicSegmentManagerImpl.create");
 
 	        GenomicSegment inGenomicSegment= new GenomicSegment();
-
 	        populateGenomicSegment(inGenomicSegmentData, inGenomicSegment);
 	       
 	        log.trace("Exiting GenomicSegmentManagerImpl.create");
@@ -55,7 +59,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 
 	        // Populate w/ the new values and save
 	        populateGenomicSegment(inGenomicSegmentData, inGenomicSegment);
-	       // save(inGenomicSegment);
+	        save(inGenomicSegment);
 
 	        log.trace("Exiting GenomicSegmentManagerImpl.update");
 	    }
@@ -63,8 +67,63 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 	    private void populateGenomicSegment(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment)
 	            throws Exception {
 	    	
-	        log.trace("Entering populateGenomicSegment");
-	        	
+	        log.trace("Entering populateGenomicSegment");	       
+	        
+	        if ( inGenomicSegmentData.getLocationOfIntegration().equals( "Targeted" ) )
+	        	inGenomicSegment.setLocationOfIntegration( inGenomicSegmentData.getOtherLocationOfIntegration() );
+	        else
+	        	inGenomicSegment.setLocationOfIntegration( inGenomicSegmentData.getLocationOfIntegration() );
+	    	        	        
+	        inGenomicSegment.setComments( inGenomicSegmentData.getComments() );
+	        inGenomicSegment.setSegmentSize( inGenomicSegmentData.getSegmentSize() );
+	        inGenomicSegment.setCloneDesignator( inGenomicSegmentData.getCloneDesignator() );
+
+			// SegmentType
+			// TODO: Find matching existing segment type
+	        SegmentType inSegmentType = null;	        
+	        if( inGenomicSegment.getSegmentTypeCollection().size() > 0 )
+	        	inSegmentType = (SegmentType) inGenomicSegment.getSegmentTypeCollection().get(0);
+	        else
+	        	inSegmentType = new SegmentType();
+	        
+	        inSegmentType.setName( inGenomicSegmentData.getSegmentName() );	       	        
+	        
+	        // TODO: Send Email
+	        if ( inGenomicSegmentData.getOtherSegmentName() != null ) {
+	        	inSegmentType.setNameUnctrlVocab( inGenomicSegmentData.getOtherSegmentName() );
+	        }
+	        
+	        inGenomicSegment.addSegmentType( inSegmentType );
+	        
+			// Upload Construct Map
+			// Check for exisiting Image for this TargetedModification
+			Image image = null;
+			if (inGenomicSegment.getImage() != null)
+				image = inGenomicSegment.getImage();
+			else
+				image = new Image();
+
+			image.setFileServerLocation(inGenomicSegmentData.getFileServerLocation());
+			image.setTitle(inGenomicSegmentData.getTitle());
+			image.setDescription(inGenomicSegmentData.getDescriptionOfConstruct());
+			inGenomicSegment.setImage(image);
+					
+			// MGI Number
+			// Check for exisiting MutationIdentifier
+			MutationIdentifier inMutationIdentifier = null;
+			if (inGenomicSegment.getMutationIdentifier() != null)
+				inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
+			else
+				inMutationIdentifier = new MutationIdentifier();
+
+			String strNumberMGI = inGenomicSegmentData.getNumberMGI().trim();
+			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+			Matcher m = p.matcher(strNumberMGI);
+			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+				inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+			}
+			
 	        log.trace("Exiting populateGenomicSegment");
-	    }
+	    }	    
 }

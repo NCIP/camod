@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.24 2005-10-10 14:11:45 georgeda Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.25 2005-10-11 20:52:55 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.24  2005/10/10 14:11:45  georgeda
+ *  Changes for comment curation
+ *
  *  Revision 1.23  2005/10/06 20:40:12  schroedn
  *  InducedMutation, TargetedMutation, GenomicSegment changes
  *
@@ -50,6 +53,7 @@ import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
@@ -164,6 +168,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         List inducedList  = new ArrayList();
         List targetedList = new ArrayList();
         List segmentList = new ArrayList();
+        List engineeredList = new ArrayList();
         
         for (int i = 0; i < engineeredGeneList.size(); i++) {
         	EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);       
@@ -177,17 +182,21 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         	}
         	
         	if ( engineeredGene instanceof TargetedModification ) {
-        		TargetedModification inTargeted = (TargetedModification) engineeredGeneList.get(i);
-        		System.out.println( "\tTargeted NAME:" +  inTargeted.getName() );
+        		//TargetedModification inTargeted = (TargetedModification) engineeredGeneList.get(i);        		
             	targetedList.add( (TargetedModification) engineeredGeneList.get(i) );
             	System.out.println( "\tAdded a TargetedModification" );
         	}
         	
         	if ( engineeredGene instanceof GenomicSegment ) {
-            	segmentList.add(engineeredGene);
+            	//GenomicSegment inGenomicSegment = (GenomicSegment) engineeredGeneList.get(i);
+        		segmentList.add( (GenomicSegment) engineeredGeneList.get(i) );            	
             	System.out.println( "\tAdded a GenomicSegment");
-        	}
+        	}    
         	
+        	if ( engineeredGene instanceof Transgene ) {
+        		engineeredList.add( (Transgene) engineeredGeneList.get(i) );            	
+            	System.out.println( "\tAdded a Transgene");
+        	}
         }
         
         // Print the list of EnvironmentalFactors for the Cardiogenic
@@ -283,16 +292,17 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.TARGETEDMODIFICATION_LIST, targetedList);
         request.getSession().setAttribute(Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
         request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
+        request.getSession().setAttribute(Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
         
         System.out.println( "TargedModList: " + targetedList);
         
-            // UserManager theUserManager = (UserManager) getBean("userManager");
-            // Set up the form. Should be only one coordinator
-            // Get the coordinator
-            ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-            String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
+        // UserManager theUserManager = (UserManager) getBean("userManager");
+        // Set up the form. Should be only one coordinator
+        // Get the coordinator
+        ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
+        String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
 
-            AnimalModelStateForm theForm = new AnimalModelStateForm();
+        AnimalModelStateForm theForm = new AnimalModelStateForm();
 
             // Set the fields
             theForm.setModelId(modelID);
@@ -301,7 +311,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             theForm.setAssignedTo(theCoordinator);
             theForm.setEvent(Constants.Admin.Actions.COMPLETE);
 
-            request.setAttribute(Constants.FORMDATA, theForm);
+        request.setAttribute(Constants.FORMDATA, theForm);
             
         } catch (Exception e) {
             log.error("Caught an exception populating the data: ", e);
@@ -311,6 +321,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, theMsg);
         }
+        
         return mapping.findForward("submitOverview");
     }
 }

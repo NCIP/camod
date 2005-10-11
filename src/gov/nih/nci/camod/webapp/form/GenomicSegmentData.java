@@ -6,6 +6,10 @@ public interface GenomicSegmentData {
 	
 	public void setLocationOfIntegration(String locationOfIntegration);
 	
+	public String getOtherLocationOfIntegration();
+	
+	public void setOtherLocationOfIntegration(String otherLocationOfIntegration);
+	
 	public String getSegmentName();
 	
 	public void setSegmentName(String segmentName);
