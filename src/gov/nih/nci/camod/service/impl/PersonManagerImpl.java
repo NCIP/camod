@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: PersonManagerImpl.java,v 1.5 2005-09-23 14:55:12 georgeda Exp $
+ * $Id: PersonManagerImpl.java,v 1.6 2005-10-11 18:13:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/09/23 14:55:12  georgeda
+ * Made SexDistribution a reference table
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -87,30 +90,31 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
 
         Person person = null;
 
-        try {
+        if (inUsername != null && inUsername.length() > 0) {
+            try {
 
-            // The following two objects are needed for eQBE.
-            Person thePerson = new Person();
-            thePerson.setUsername(inUsername);
+                // The following two objects are needed for eQBE.
+                Person thePerson = new Person();
+                thePerson.setUsername(inUsername);
 
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("person.username", Evaluator.EQUAL);
+                // Apply evaluators to object properties
+                Evaluation theEvaluation = new Evaluation();
+                theEvaluation.addEvaluator("person.username", Evaluator.EQUAL);
 
-            List thePersonList = Search.query(thePerson, theEvaluation);
+                List thePersonList = Search.query(thePerson, theEvaluation);
 
-            if (thePersonList != null && thePersonList.size() > 0) {
-                person = (Person) thePersonList.get(0);
+                if (thePersonList != null && thePersonList.size() > 0) {
+                    person = (Person) thePersonList.get(0);
+                }
+
+            } catch (PersistenceException pe) {
+                log.error("PersistenceException in getByUsername", pe);
+                throw pe;
+            } catch (Exception e) {
+                log.error("Exception in getByUsername", e);
+                throw e;
             }
-
-        } catch (PersistenceException pe) {
-            log.error("PersistenceException in getByUsername", pe);
-            throw pe;
-        } catch (Exception e) {
-            log.error("Exception in getByUsername", e);
-            throw e;
         }
-
         return person;
     }
 
