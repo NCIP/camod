@@ -44,7 +44,7 @@
 					<logic:iterate id="eg" name="gsc" indexId="idx">
 					<li>
 						<html:link action="viewEngineeredTransgene">
-							<bean:write name="eg" property="name"/>
+							<bean:write name="eg" property="cloneDesignator"/>
 						</html:link>
 					</logic:iterate>
 				</ul>&nbsp;
