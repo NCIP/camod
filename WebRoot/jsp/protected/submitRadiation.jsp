@@ -45,7 +45,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Enter Radiation Information </td>		
+			<td class="formTitle" height="20" colspan="3">Radiation</td>		
 		</tr>
 
 		<tr>
@@ -75,9 +75,9 @@
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized"  property="dosage" size="10" name="formdata" />
-			
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
-				<html:options name="<%= Dropdowns.DOSAGEUNITSDROP %>"/>					
+				<html:options name="<%= Dropdowns.RADIATIONUNITSDROP %>"/>					
 			</html:select>
 	</tr>
 
@@ -117,7 +117,7 @@
 			<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
-			
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>

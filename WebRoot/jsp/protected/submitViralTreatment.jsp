@@ -85,19 +85,6 @@
 		</td>
 	</tr>
 
-
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Dose:</label></td>
-		<td class="formField">			
-			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" name="formdata"/>
-			
-			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
-				<html:options name="<%= Dropdowns.DOSAGEUNITSDROP %>"/>					
-			</html:select>	
-		</td>
-	</tr>
-
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
@@ -105,6 +92,18 @@
 			<html:text styleClass="formFieldSized" property="otherAdministrativeRoute"  size="30" name="formdata"/>
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Dose:</label></td>
+		<td class="formField">			
+			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" name="formdata"/>
+			<label for="field1">&nbsp;Units&nbsp;</label>
+			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
+				<html:options name="<%= Dropdowns.VIRALTREATUNITSDROP %>"/>					
+			</html:select>	
+		</td>
+	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -119,7 +118,7 @@
 		<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
-			
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>

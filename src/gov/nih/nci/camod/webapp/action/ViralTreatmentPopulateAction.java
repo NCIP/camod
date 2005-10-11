@@ -116,7 +116,7 @@ public class ViralTreatmentPopulateAction extends BaseAction {
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.VIRUSDROP, "" );
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.VIRALTREATUNITSDROP, "" );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
 	}
 }

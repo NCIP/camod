@@ -119,7 +119,7 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
             NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.ENVIRONFACTORDROP, "" );
 
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
-            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ENVFACTORUNITSDROP, "" );
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
 
