@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.40 2005-10-11 18:12:08 georgeda Exp $
+ * $Id: Constants.java,v 1.41 2005-10-11 19:56:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2005/10/11 18:12:08  georgeda
+ * More comment changes
+ *
  * Revision 1.39  2005/10/10 14:05:38  georgeda
  * Cleanup and additions for comment curation
  *
@@ -350,6 +353,10 @@ public class Constants {
 		public static final String GENOMICSEGMENT_LIST = "genomicsegment_list";
 
 		public static final String HISTOPATHOLOGY_LIST = "histopathology_list";
+		
+		public static final String ASSOCMETASTSIS_LIST = "associatedmetastatis_list";		
+		
+				
 
 		public static final String THERAPY_LIST = "therapy_list";
 
