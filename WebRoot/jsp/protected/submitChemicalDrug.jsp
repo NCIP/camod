@@ -93,24 +93,23 @@
 	</tr>
 	
 	<tr>
-        
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">NSC number:</label></td>
-		<td class="formField">
-			 <html:text styleClass="formFieldSized" property="NSCNumber"  size="30" name="formdata"/>
-		</td>
-              
-               
+			<td class="formRequiredNotice" width="3">&nbsp;</td>
+			<td class="formLabel"><label for="field1">NSC number:</label></td>
+			<td class="formField">		
+				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber" name="formdata" />
+			</td>
 	</tr>
-
+	<!-- changed linkd to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
 	<tr>
-        
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">CAS number:</label></td>
-		<td class="formField">	                
-			<html:text styleClass="formFieldSized" property="CASNumber"  size="30" name="formdata"/>
-		</td>
-
+			<td class="formRequiredNotice" width="3">&nbsp;</td>
+			<td class="formLabel"><label for="field1">CAS number:</label></td>
+			<td class="formField">		
+				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber" name="formdata" />
+			</td>
 	</tr>	
 	
 	<tr>
@@ -148,7 +147,7 @@
 		<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
-			
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
