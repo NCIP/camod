@@ -121,7 +121,7 @@
 	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Dose (Number only):</label></td>
+		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized"  property="dosage" size="10" name="formdata" />
 			<label for="field1">&nbsp;Units&nbsp;</label>			
