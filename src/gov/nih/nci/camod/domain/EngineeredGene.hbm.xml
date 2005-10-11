@@ -86,7 +86,8 @@
         </bag>    
         
         <!-- geneFunctionCollection (one-to-many bidirectional) -->
-        <set name="geneFunctionCollection">
+        <set name="geneFunctionCollection"
+	         cascade="all-delete-orphan">
             <key column="engineered_gene_id"/>
             <one-to-many class="GeneFunction"/>
         </set>
