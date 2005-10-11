@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.41 2005-10-11 19:56:19 pandyas Exp $
+ * $Id: Constants.java,v 1.42 2005-10-11 20:51:12 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2005/10/11 19:56:19  pandyas
+ * added constant for assc met list
+ *
  * Revision 1.40  2005/10/11 18:12:08  georgeda
  * More comment changes
  *
@@ -356,6 +359,7 @@ public class Constants {
 		
 		public static final String ASSOCMETASTSIS_LIST = "associatedmetastatis_list";		
 		
+		public static final String ENGINEEREDTRANSGENE_LIST = "engineeredtransgene_list";
 				
 
 		public static final String THERAPY_LIST = "therapy_list";
