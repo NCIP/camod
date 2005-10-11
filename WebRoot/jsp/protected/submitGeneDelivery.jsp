@@ -55,7 +55,7 @@
 
         <tr>
             <td class="formRequiredNotice" width="5">&nbsp;</td>
-            <td class="formLabel"><label for="field2">Viral Vector</label></td>
+            <td class="formLabel"><label for="field2">Viral Vector:</label></td>
             <td class="formField">
             <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
             <br>		
@@ -71,7 +71,7 @@
         
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Viral Vector</label></td>
+		<td class="formLabel"><label for="field1">Other Viral Vector:</label></td>
 		<td class="formField">		
 			<html:text styleClass="formFieldSized" size="30" property="otherViralVector" name="formdata"  disabled="true"/>		
 		</td>
@@ -79,7 +79,7 @@
         
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene</label></td>
+		<td class="formLabel"><label for="field1">Gene:</label></td>
 		<td class="formField">		
 			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" name="formdata"  />
 		</td>				
@@ -97,7 +97,7 @@
 		<!-- into as the GeneDelivery.geneDeliveryID value  -->
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel">Location of Delivery&nbsp;
+		<td class="formRequiredLabel">Location of Delivery:&nbsp;
 		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>

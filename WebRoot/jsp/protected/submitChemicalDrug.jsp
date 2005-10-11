@@ -58,7 +58,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Chemical/Drug</label></td>
+		<td class="formRequiredLabel"><label for="field3">Chemical/Drug:</label></td>
 		<td class="formField">
 			<br>
 			<label for="field3">(if Chemical/Drug is not listed, then please<br>select "Other" from the list and specify it below)</label>
