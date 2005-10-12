@@ -144,7 +144,7 @@ public class AnimalModel extends AbstractCancerModel {
         for (int i = 0, j = engineeredGeneCollection.size(); i < j; i++) {
             EngineeredGene theEngineeredGene = (EngineeredGene) engineeredGeneCollection.get(i);
 
-            String theGenotype = theEngineeredGene.getGenotypeSummary().getGenotype();
+            String theGenotype = theEngineeredGene.getGenotypeSummary().getSummary();
 
             if (theGenotype != null) {
                 theGenotype = theGenotype.trim();
