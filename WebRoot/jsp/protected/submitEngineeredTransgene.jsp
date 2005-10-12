@@ -2,28 +2,19 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
+<%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>	
 <%@ page import="gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm" %>	
 <%@ page import="gov.nih.nci.camod.Constants.*" %>
-
 <%@ page import="java.util.List" %>
-<%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
+
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
 <%
 	String aEngineeredTransgeneID = request.getParameter( "aEngineeredTransgeneID" );
-	
-	EngineeredTransgeneForm theEngineeredTransgeneForm = (EngineeredTransgeneForm) request.getSession().getAttribute(Constants.FORMDATA);
-	
-	boolean booleanLocationOfIntegration = true;
-	if (theEngineeredTransgeneForm.getLocationOfIntegration() != null )
-		if ( theEngineeredTransgeneForm.getLocationOfIntegration().equals("Targeted") )
-			booleanLocationOfIntegration = false;
-		
-	boolean	booleanConditionalDescription = false;
-	if (theEngineeredTransgeneForm.getConditionedBy() != null )
-		if (theEngineeredTransgeneForm.getConditionedBy().equals("Not Conditional") )
-			booleanConditionalDescription = true;
-		
+
 	//if aEngineeredTransgeneID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
@@ -122,18 +113,17 @@
 			ideControl.disabled = true;
 		}
 	}
-
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-<!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+
 	<tr>
+		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 	
@@ -156,7 +146,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Location of Integration *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="<%= booleanLocationOfIntegration %>" size="10" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" name="formdata"/>
 		</td>
 	</tr>
 
@@ -174,7 +164,7 @@
 						<html:text styleClass="formFieldUnSized" property="name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="chkOther( this );" >
+						<html:select styleClass="formFieldUnSized" size="1" property="scientificName" onchange="chkOther( this );" >
 							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 						</html:select>					
 					</td>
@@ -200,7 +190,7 @@
 						<html:text styleClass="formFieldUnSized" property="transcriptional1_name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<html:select styleClass="formFieldSized" size="1" property="transcriptional1_species" onchange="chkOther_t1( this );" >
+						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional1_species" onchange="chkOther_t1( this );" >
 							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 						</html:select>					
 					</td>
@@ -222,7 +212,7 @@
 						<html:text styleClass="formFieldUnSized" property="transcriptional2_name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<html:select styleClass="formFieldSized" size="1" property="transcriptional2_species" onchange="chkOther_t2( this );" >
+						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional2_species" onchange="chkOther_t2( this );" >
 							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 						</html:select>					
 					</td>
@@ -244,7 +234,7 @@
 						<html:text styleClass="formFieldUnSized" property="transcriptional3_name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<html:select styleClass="formFieldSized" size="1" property="transcriptional3_species" onchange="chkOther_t3( this );" >
+						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional3_species" onchange="chkOther_t3( this );" >
 							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 						</html:select>					
 					</td>
@@ -266,7 +256,7 @@
 						<html:text styleClass="formFieldUnSized" property="polyASignal_name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<html:select styleClass="formFieldSized" size="1" property="polyASignal_species" onchange="chkOther_PS( this );" >
+						<html:select styleClass="formFieldUnSized" size="1" property="polyASignal_species" onchange="chkOther_PS( this );" >
 							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 						</html:select>					
 					</td>
@@ -288,7 +278,7 @@
 						<html:text styleClass="formFieldUnSized" property="spliceSites_name" size="20" name="formdata"/>
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
-						<html:select styleClass="formFieldSized" size="1" property="spliceSites_species" onchange="chkOther_SS( this );" >
+						<html:select styleClass="formFieldUnSized" size="1" property="spliceSites_species" onchange="chkOther_SS( this );" >
 							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
 						</html:select>					
 					</td>
@@ -312,7 +302,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Gene Functions<br>(seperate each entry by a comma)</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldUnSized" property="geneFunctions"  rows="4" cols="32"  name="formdata"/>		
+			<html:textarea styleClass="formFieldSized" property="geneFunctions"  rows="4" cols="32"  name="formdata"/>		
 		</td>
 	</tr>
 	
@@ -329,7 +319,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Conditional Description</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldUnSized" property="description" disabled="<%= booleanConditionalDescription %>" rows="4" cols="32"  name="formdata"/>		
+			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="32"  name="formdata"/>		
 		</td>
 	</tr>
 
@@ -337,7 +327,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Additional Features</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldUnSized" property="comments"  rows="4" cols="32"  name="formdata"/>	
+			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  name="formdata"/>	
 		</td>
 	</tr>
 	
@@ -349,7 +339,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/> Browse
+			<html:file styleClass="formFieldSized" size="40" property="fileServerLocation" name="formdata"/>		
 		</td>			
 	</tr>		
 
@@ -357,7 +347,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Title of Construct<br>(Enter info only when uploading image)</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formUnFieldSized" property="title" rows="4" cols="32" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="32" name="formdata"/>
 		</td>
 	</tr>
 
@@ -365,7 +355,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldUnSized" property="descriptionOfConstruct" rows="4" cols="32"  name="formdata"/>	
+			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct" rows="4" cols="32"  name="formdata"/>	
 		</td>
 	</tr>
 	
@@ -393,6 +383,31 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<SCRIPT>
+	function checkOthers()
+	{
+	    ideControl = document.forms[0].conditionedBy;
+	    ideOtherControl = document.forms[0].description;
+			
+		if( ideControl[1].checked == true )
+			ideOtherControl.disabled = true;
+		else {
+			ideOtherControl.disabled = false;
+		}
+		
+	    ideControl = document.forms[0].locationOfIntegration;
+	    ideOtherControl = document.forms[0].otherLocationOfIntegration;
+			
+		if( ideControl[0].checked == true )
+			ideOtherControl.disabled = true;
+		else {
+			ideOtherControl.disabled = false;
+		}
+	}
+	
+	checkOthers();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
 

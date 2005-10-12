@@ -35,6 +35,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
+		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 	
@@ -43,8 +44,8 @@
 	</tr>
 	
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene Name:</label></td>
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel"><label for="field1">Gene Name:</label></td>
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="name">	
 			

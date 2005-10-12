@@ -12,13 +12,6 @@
 <%
 	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
 
-	GenomicSegmentForm theGenomicSegmentForm = (GenomicSegmentForm) request.getSession().getAttribute(Constants.FORMDATA);
-	
-	boolean booleanLocationOfIntegration = true;
-	if (theGenomicSegmentForm.getLocationOfIntegration() != null )
-		if (theGenomicSegmentForm.getLocationOfIntegration().equals("Targeted") )
-			booleanLocationOfIntegration = false;	
-		
 	//if aGenomicSegmentID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
@@ -56,9 +49,10 @@
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
+	
 		<tr>
+			<html:errors/>
 			<td class="formMessage" colspan="3">* indicates a required field</td>
 		</tr>
 		
@@ -85,7 +79,7 @@
 								  </label>
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="<%= booleanLocationOfIntegration %>" size="10" name="formdata"/>
+				<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" name="formdata"/>
 			</td>
 		</tr>
 
@@ -114,7 +108,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Segment Size</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="segmentSize" size="10" name="formdata"/>
+				<html:text styleClass="formFieldUnSized" property="segmentSize" size="20" name="formdata"/>
 			</td>
 		</tr>
 
@@ -122,10 +116,18 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Designator</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="cloneDesignator" size="10" name="formdata"/>
+				<html:text styleClass="formFieldUnSized" property="cloneDesignator" size="20" name="formdata"/>
 			</td>
 		</tr>
 		
+		<tr>
+           <td class="formRequiredNotice" width="5">&nbsp;</td>
+           <td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
+           <td class="formField">
+				<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>
+			</td>
+        </tr>	
+        
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Comments</label></td>
@@ -133,14 +135,6 @@
 				<html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" name="formdata"/>
 			</td>
 		</tr>				
-
-        <tr>
-           <td class="formRequiredNotice" width="5">&nbsp;</td>
-           <td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
-           <td class="formField">
-				<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
-			</td>
-        </tr>	
 		
 		<tr>
 			<td class="formTitle" height="20" colspan="6">&nbsp;</td>				
@@ -150,7 +144,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/>
+				<html:text styleClass="formFieldSized" property="fileServerLocation" size="30" name="formdata"/> Browse
 			</td>			
 		</tr>		
 
@@ -158,7 +152,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Title of Construct<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formUnFieldSized" property="title" rows="4" cols="32" name="formdata"/>
+				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="32" name="formdata"/>
 			</td>
 		</tr>
 		
@@ -166,7 +160,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldUnSized" property="descriptionOfConstruct"  rows="4" cols="32"  name="formdata"/>	
+				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="32"  name="formdata"/>	
 			</td>
 		</tr>
 
@@ -189,8 +183,33 @@
 			</TABLE>
 			</td>
 		</tr>		
-
+		
 	</TABLE>	
 </td></tr></TABLE>
+
+<SCRIPT>
+	function checkOthers()
+	{
+	    ideControl = document.forms[0].segmentName;
+	    ideOtherControl = document.forms[0].otherSegmentName;
+				
+		if( ideControl.value == "Other" )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}
+		
+	    ideControl = document.forms[0].locationOfIntegration;
+	    ideOtherControl = document.forms[0].otherLocationOfIntegration;
+			
+		if( ideControl[0].checked == true )
+			ideOtherControl.disabled = true;
+		else {
+			ideOtherControl.disabled = false;
+		}
+	}
+	
+	checkOthers();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

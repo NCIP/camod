@@ -1023,8 +1023,12 @@
 	        name="engineeredTransgeneForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitEngineeredTransgene">
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/EngineeredTransgenePopulateAction.do?method=dropdown">
+        </forward>  
    </action> 
     
     <action path="/EngineeredTransgenePopulateAction"
@@ -1077,8 +1081,12 @@
 	        name="genomicSegmentForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitGenomicSegment">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/GenomicSegmentPopulateAction.do?method=dropdown">
+        </forward>     	
     </action>
     
     <action path="/GenomicSegmentPopulateAction"
@@ -1266,8 +1274,12 @@
 	        name="publicationForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitPublications">   	
+	        validate="true"
+	        input="input"> 
+        <forward
+            name="input"
+            path="/PublicationPopulateAction.do?method=dropdown">
+        </forward>  	          	
     </action>
     
     <action path="/PublicationPopulateAction"
@@ -1302,8 +1314,12 @@
 	        name="spontaneousMutationForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitSpontaneousMutation">   	
+	        validate="true"
+	        input="input">
+        <forward
+            name="input"
+            path="/SpontaneousMutationPopulateAction.do?method=dropdown">
+        </forward>  	           	
     </action>
     
     <action path="/SpontaneousMutationPopulateAction"
@@ -1321,7 +1337,11 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="submitInducedMutation">   	
+	        input="input">
+	    <forward
+            name="input"
+            path="/InducedMutationPopulateAction.do?method=dropdown">
+        </forward>     	
     </action>
     
     <action path="/InducedMutationPopulateAction"
@@ -1356,8 +1376,12 @@
 	        name="targetedModificationForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitTargetedModification">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/TargetedModificationPopulateAction.do?method=dropdown">
+        </forward>     	
     </action>
     
     <action path="/TargetedModificationPopulateAction"
@@ -1411,8 +1435,12 @@
 	        name="xenograftForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitTransplantXenograft">   	
+	        validate="true"
+	        input="input"> 
+	    <forward
+            name="input"
+            path="/XenograftPopulateAction.do?method=dropdown">
+        </forward>    	
     </action>
 
 
@@ -1573,7 +1601,7 @@
 	        name="publicationForm"
 	        scope="request"
 	        parameter="method"
-   	        unknown="false"
+   	        unknown="true"
 	        input="/submitPublications"
 	        validate="false" >
     </action>

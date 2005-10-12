@@ -45,6 +45,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
+		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 	
@@ -54,11 +55,18 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel">Inducing Agent Category</td>
-		<td class="formField">
-			
+		<td class="formRequiredLabel"><label for="field1">Name of Inducing Agent</label></td>
+		<td class="formField">					
 			<html:form action="<%= actionName %>" focus="name">	
 				
+			<html:text styleClass="formFieldSized" property="name" size="10" name="formdata"/>		
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel">Inducing Agent Category</td>
+		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="type" onchange="chkOther( this );" >
 				<html:options name="<%= Dropdowns.INDUCEDMUTATIONDROP %>" />										
 			</html:select>
@@ -71,7 +79,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Category</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="otherType" disabled="true" size="10" name="formdata"/>		
+			<html:text styleClass="formFieldSized" property="otherType" disabled="true" size="30" name="formdata"/>		
 		</td>
 	</tr>
 
@@ -79,7 +87,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">CAS number</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="CASNumber" size="10" name="formdata"/>		
+			<html:text styleClass="formFieldUnSized" property="CASNumber" size="20" name="formdata"/>		
 		</td>
 	</tr>
 	
@@ -87,39 +95,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gene ID ( Entrez )</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="geneId" size="10" name="formdata"/>		
-		</td>
-	</tr>
-
-	<tr>
-		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Inducing Agent</label></td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="name" size="10" name="formdata"/>		
-		</td>
-	</tr>
-
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Description:</label></td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="description" size="10" name="formdata"/>		
-		</td>
-	</tr>
-
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Observation:</label></td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="observation" size="10" name="formdata"/>		
-		</td>
-	</tr>
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Method of Observation:</label></td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="methodOfObservation" size="10" name="formdata"/>		
+			<html:text styleClass="formFieldUnSized" property="geneId" size="20" name="formdata"/>		
 		</td>
 	</tr>
 	
@@ -127,7 +103,31 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">MGI Number:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>		
+			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>		
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Observation:</label></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32"  name="formdata"/>		
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Method of Observation:</label></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"  name="formdata"/>		
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Description:</label></td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32"  name="formdata"/>		
 		</td>
 	</tr>
 	

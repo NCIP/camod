@@ -42,6 +42,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
+		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 
@@ -83,8 +84,8 @@
 	</tr>	
 	
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel2">
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel">
 			For publications with a PubMed record, <br>look up the Pubmed Identifier (PMID number),<br> enter it in the PMID field and <br>click the "Fill in Fields" button. <br>The program will retrieve the citation <br>data from PubMed and populate the fields<br> automatically. Click "Save Data"<br>to submit the publication to the database.
 		</td>
 		

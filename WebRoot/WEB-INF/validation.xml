@@ -75,10 +75,64 @@
 	</form>	
 	
 	<form name="therapyForm">
-        <field property="name" depends="required">
+        <field property="compoundName" depends="required">
             <arg0 key="Therapy.compoundName"/>
     	</field> 
 	</form>		
+
+	<form name="engineeredTransgeneForm">
+        <field property="locationOfIntegration" depends="required">
+            <arg0 key="EngineeredTransgeneForm.locationOfIntegration"/>
+    	</field> 
+    	<field property="name" depends="required">
+            <arg0 key="EngineeredTransgeneForm.name"/>
+    	</field> 
+    	<field property="transcriptional1_name" depends="required">
+            <arg0 key="EngineeredTransgeneForm.transcriptional1_name"/>
+    	</field> 
+	</form>	
+
+	<form name="genomicSegmentForm">
+        <field property="locationOfIntegration" depends="required">
+            <arg0 key="GenomicSegmentForm.locationOfIntegration"/>
+    	</field> 
+	</form>	
 	
+	<form name="targetedModificationForm">
+        <field property="name" depends="required">
+            <arg0 key="TargetedModificationForm.name"/>
+    	</field> 
+	</form>		
+
+	<form name="inducedMutationForm">
+        <field property="name" depends="required">
+            <arg0 key="InducedMutationForm.name"/>
+    	</field> 
+	</form>		
+	
+	<form name="spontaneousMutationForm">
+        <field property="name" depends="required">
+            <arg0 key="SpontaneousMutationForm.name"/>
+    	</field> 
+	</form>		
+	
+	<form name="xenograftForm">
+        <field property="name" depends="required">
+            <arg0 key="XenograftForm.name"/>
+    	</field> 
+	</form>		
+	
+	<form name="publicationForm">
+        <field property="authors" depends="required">
+            <arg0 key="PublicationForm.authors"/>
+    	</field> 
+        <field property="firstTimeReported" depends="required">
+            <arg0 key="PublicationForm.firstTimeReported"/>
+    	</field> 
+        <field property="pmid" depends="required">
+            <arg0 key="PublicationForm.pmid"/>
+    	</field>     	    	
+	</form>		
+										
   </formset>
 </form-validation>

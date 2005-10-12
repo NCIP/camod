@@ -10,7 +10,7 @@
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
 <%
 	String aTargetedModificationID = request.getParameter( "aTargetedModificationID" );
-
+			
 	//if aInducedMutationID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
@@ -33,6 +33,16 @@
 		}
 	}
 	
+	function chkConditional( control ) {
+		ideControl = document.forms[0].description;
+			
+		if( control.value == 'yes' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -43,6 +53,7 @@
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	<tr>
+		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 
@@ -106,8 +117,8 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Conditional?</td>
 		<td class="formField">
-			<html:radio property="conditionedBy" value="yes" /> Conditional 
-			<html:radio property="conditionedBy" value="no" /> Not Conditional  
+			<html:radio property="conditionedBy" value="yes" onchange="chkConditional(this);" /> Conditional 
+			<html:radio property="conditionedBy" value="no" onchange="chkConditional(this);" /> Not Conditional  
 		</td>
 	</tr>
 
@@ -115,7 +126,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Conditional Description</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="description" size="10" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="30" name="formdata"/>
 		</td>
 	</tr>
 
@@ -143,7 +154,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/>			
+			<html:file styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/>			
 		</td>
 	</tr>
 
@@ -151,7 +162,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Title of Construct <br>(enter info only when uploading image)</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formUnFieldSized" property="title" rows="4" cols="30" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="30" name="formdata"/>
 		</td>
 	</tr>
 
@@ -159,7 +170,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Description of Construct<br>(enter info only when uploading image)</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldUnSized" property="descriptionOfConstruct"  rows="4" cols="30"  name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="30"  name="formdata"/>
 		</td>
 	</tr>
 
@@ -182,10 +193,27 @@
 			</TABLE>
 		</td>
 	</tr>
-	</TABLE>
+</TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+
+<SCRIPT>
+	function checkOthers()
+	{
+	    ideControl = document.forms[0].conditionedBy;
+	    ideOtherControl = document.forms[0].description;
+					
+		if( ideControl[0].checked == true )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}
+	}
+			
+	checkOthers();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
