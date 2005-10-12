@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.14 2005-10-11 18:15:10 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.15 2005-10-12 17:24:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/10/11 18:15:10  georgeda
+ * More comment changes
+ *
  * Revision 1.13  2005/10/10 14:09:41  georgeda
  * Changes for comment curation and performance improvement
  *
@@ -108,10 +111,14 @@ public class QueryManagerImpl extends BaseManager {
         try {
 
             // Format the query
-            String theSQLQuery = "SELECT distinct ef.name " + "FROM env_factor ef " + "WHERE ef.type = ? "
-                    + "  AND ef.name IS NOT null " + "  AND ef.env_factor_id IN (SELECT t.env_factor_id "
-                    + "     FROM therapy t, animal_model_therapy at WHERE t.therapeutic_experiment = 0 "
-                    + "       AND t.therapy_id = at.therapy_id) ORDER BY ef.name asc ";
+            String theSQLQuery = "SELECT distinct ef.name "
+                    + "FROM env_factor ef "
+                    + "WHERE ef.type = ? "
+                    + "  AND ef.name IS NOT null "
+                    + "  AND ef.env_factor_id IN (SELECT t.env_factor_id "
+                    + "     FROM therapy t, animal_model_therapy at, abs_cancer_model am WHERE t.therapeutic_experiment = 0 "
+                    + "       AND t.therapy_id = at.therapy_id "
+                    + "       AND am.abs_cancer_model_id = at.abs_cancer_model_id AND am.state = 'Edited-approved') ORDER BY ef.name asc ";
 
             Object[] theParams = new Object[1];
             theParams[0] = inType;
@@ -151,8 +158,8 @@ public class QueryManagerImpl extends BaseManager {
         try {
 
             // Format the query
-            String theSQLQuery = "SELECT distinct ef.name " + "FROM env_factor ef, env_fac_ind_mutation im "
-                    + "WHERE ef.name IS NOT null " + "  AND ef.env_factor_id = im.env_factor_id";
+            String theSQLQuery = "SELECT distinct ef.name FROM env_factor ef, env_fac_ind_mutation im "
+                    + "WHERE ef.name IS NOT null AND ef.env_factor_id = im.env_factor_id";
 
             Object[] theParams = new Object[0];
             theResultSet = Search.query(theSQLQuery, theParams);
@@ -188,8 +195,8 @@ public class QueryManagerImpl extends BaseManager {
         log.trace("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
 
         // Format the query
-        String theSQLString = "SELECT distinct scientific_name FROM taxon " + "WHERE scientific_name IS NOT NULL "
-                + "    AND taxon_id IN (select distinct taxon_id from abs_cancer_model)";
+        String theSQLString = "SELECT distinct scientific_name FROM taxon WHERE scientific_name IS NOT NULL "
+                + "    AND taxon_id IN (select distinct taxon_id from abs_cancer_model where state = 'Edited-approved')";
 
         ResultSet theResultSet = null;
 
