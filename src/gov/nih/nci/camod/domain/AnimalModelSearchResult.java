@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.2 2005-10-12 18:09:29 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.3 2005-10-12 18:18:48 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/12 18:09:29  georgeda
+ * Update for metastatis organs
+ *
  * Revision 1.1  2005/10/07 16:27:50  georgeda
  * Implemented paganation
  *
@@ -120,10 +123,10 @@ public class AnimalModelSearchResult {
 
             for (int i = 0, j = theOrgans.size(); i < j; i++) {
                 String theOrgan = (String) theOrgans.get(i);
-                myTumorSites += theOrgan + " (Metastatis)<br>";
+                myMetastatisSites += theOrgan + " (Metastatis)<br>";
             }
         }
-        return myTumorSites;
+        return myMetastatisSites;
     }
 
     // Fetch the animal model from the DB
