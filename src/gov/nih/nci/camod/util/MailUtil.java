@@ -20,6 +20,7 @@ import org.apache.commons.logging.LogFactory;
     static private final Log log = LogFactory.getLog(MailUtil.class);
 
     static private ResourceBundle macroBundle = null;
+    static private String lineseparator = System.getProperty("line.separator");
 
     private MailUtil() {
     }
@@ -101,7 +102,7 @@ import org.apache.commons.logging.LogFactory;
      */
     static public void sendMail(String inRecipients[], String inSubject, String inMessage, String inFrom, String[] messageStds)
             throws MessagingException {
-        log.trace("Entering sendMail(String, String, String, String[])");
+        log.trace("Entering sendMail(String, String, String, String, String[])");
 
         try {
 
@@ -147,7 +148,8 @@ import org.apache.commons.logging.LogFactory;
             if (null == inMessage || "".equals(inMessage)) {
                 theEmailMessage.setContent(constructMessageFromMacros(messageStds), "text/plain");
             } else {
-                theEmailMessage.setContent(constructMessageFromMacros(messageStds) + "\n\n" + inMessage , "text/plain");
+                theEmailMessage.setContent(constructMessageFromMacros(messageStds)
+                        + lineseparator + lineseparator + inMessage , "text/plain");
             }
 
             log.debug("Sending email to: " + inRecipients);
@@ -159,7 +161,7 @@ import org.apache.commons.logging.LogFactory;
             log.error("Unable to send e-mail", e);
         }
 
-        log.trace("Exiting sendMail(String, String, String, String[])");
+        log.trace("Exiting sendMail(String, String, String, String, String[])");
     }
 
     /**
@@ -177,7 +179,7 @@ import org.apache.commons.logging.LogFactory;
             return "A problem was encountered in generating automated e-mail. Please contact System Administrator";
         }
         for (int i = 0; i < macros.length; i++) {
-            sb.append(macroBundle.getString(macros[i])).append("\n");
+            sb.append(macroBundle.getString(macros[i])).append(lineseparator).append(lineseparator);
         }
         return sb.toString();
     }
@@ -199,7 +201,7 @@ import org.apache.commons.logging.LogFactory;
         String[] theRecipients = new String[1];
         theRecipients[0] = new String("georgeda@mail.nih.gov");
 
-        String[] theMessageKeys = {"defaultbody","alternative1","alternative2"};
+        String[] theMessageKeys = {"approve","assign_editor","assign_screener", "need_more_info", "reject","complete"};
 
         try {
             sendMail(theRecipients, "Testing", "Hello there!", "georgeda@mail.nih.gov");
