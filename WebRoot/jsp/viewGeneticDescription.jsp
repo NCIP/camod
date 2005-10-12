@@ -161,22 +161,48 @@
 		</tr>
 
 		<bean:define id="remColl" name="tg" property="regulatoryElementCollection"/>
-		<c:forEach var="rem" items="${remColl}">
 		<tr>
 			<td class="GreyBox" width="35%"><b>Transcriptional (Promoter)</b></td>
-			<td class="GreyBoxRightEnd" width="65%">&nbsp;
-			<c:out value="${rem.name}"/>
-			</td>
+			<td class="GreyBoxRightEnd" width="65%">
+			<c:if test="${not empty remColl}">
+			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+				<tr>
+					<td class="formTitle" width="65%"><b>Transcriptional (Promoter)</b></td>
+					<td class="formTitle" width="35%"><b>Species</b></td>
+				</tr>
+				<c:forEach var="rem" items="${remColl}">
+					<tr>
+						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
+						<td class="WhiteBoxRightEnd" width="65%">&nbsp;
+							<c:out value="${rem.taxon.scientificName}"/>&nbsp;
+							<c:out value="${rem.taxon.ethnicityStrain}"/>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+			</c:if>
+		</td>
 		</tr>
-		
+
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Species of Origin for Transcriptional (Promoter)</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">&nbsp;
-			<c:out value="${rem.taxon.scientificName}"/>&nbsp;
-			<c:out value="${rem.taxon.ethnicityStrain}"/>
+			<td class="WhiteBox" width="35%"><b>Gene Function</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
+			<ul>
+			<c:forEach var="gf" items="${tg.geneFunctionCollection}">
+				<li><c:out value="${gf.function}"/></li>
+			</c:forEach>
+			</ul>
 			</td>
 		</tr>
-		</c:forEach>
+
+		<tr>
+			<td class="GreyBox" width="35%"><b>Conditional Type</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.conditionality.conditionedBy}"/>&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Conditional Description</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.conditionality.description}"/>&nbsp;</td>
+		</tr>
 
 		<c:if test="${not empty tg.image.id}">
 		<tr>
@@ -189,11 +215,37 @@
 			<br/>( Click to View )
 			</td>
 		</tr>
+
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Title of the construct</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.image.title}"/>&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="GreyBox" width="35%"><b>Description of the construct</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.image.description}"/>&nbsp;</td>
+		</tr>
 		</c:if>
+
 
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><i>TBD==><br/>Heart : not detected<br>Prostate Glands></i> </td>
+			<td class="WhiteBoxRightEnd" width="65%">
+			<c:if test="${not empty tg.expressionFeatureCollection}">
+			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+				<tr>
+					<td class="formTitle" width="65%"><b>Organ</b></td>
+					<td class="formTitle" width="35%"><b>Expression Level</b></td>
+				</tr>
+				<c:forEach var="el" items="${tg.expressionFeatureCollection}">
+					<tr>
+						<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+						<td class="WhiteBoxRightEnd">
+						<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+					</tr>
+				</c:forEach>
+			</table>
+			</c:if>
+			</td>
 		</tr>	
 		
         <tr>
@@ -201,6 +253,10 @@
 			<td class="GreyBoxRightEnd" width="65%">&nbsp;
 			<c:out value="${tg.mutationIdentifier.numberMGI}"/>
 			</td>			
+		</tr>
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Additional Features</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
 	
@@ -266,6 +322,10 @@
 			<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.locationOfIntegration}"/></td>
 		</tr>	
+		<tr>
+			<td class="GreyBox" width="35%"><b>Additional Features</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.comments}"/>&nbsp;</td>
+		</tr>
 	</TABLE>
 </td></tr>
 </TABLE>
@@ -329,7 +389,20 @@
 			<br/>( Click to View )
 			</td>
 		</tr>
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Title of the construct</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="GreyBox" width="35%"><b>Description of the construct</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
+		</tr>
 		</c:if>
+
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Additional Features</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
+		</tr>
 
 		<c:set var="tmId" value="${tm.id}"/>
 		<c:set var="gene" value="${targetedModGeneMap[tmId]}"/>
@@ -482,6 +555,10 @@
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">&nbsp;<c:out value="${im.mutationIdentifier.numberMGI}"/></td>
 		</tr>
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Additional Features</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${im.comments}"/>&nbsp;</td>
+		</tr>
 	</TABLE>
 </td></tr>
 </TABLE>
@@ -489,13 +566,5 @@
 </c:if>
 
 <!-- End Induced Mutation-->
-
-<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td>
-	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
-    <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.GENETIC_DESCRIPTION); %>
-    <%@ include file="/jsp/includeComments.jsp" %>
-    </TABLE>
-</TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
