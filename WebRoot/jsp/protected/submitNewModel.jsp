@@ -9,8 +9,11 @@
 <%@ page import="java.util.List" %>
 
 <!-- needed for tooltips -->
-<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
+<SCRIPT src="/camod/scripts/CalendarPopup.js" type=text/javascript></SCRIPT>	
+
+<SCRIPT LANGUAGE="JavaScript" ID="js1">
+var cal1 = new CalendarPopup();
+</SCRIPT>
 
 <SCRIPT LANGUAGE="JavaScript">
 	
@@ -30,6 +33,26 @@
 		form.action = "AnimalModelPopulateAction.do?method=setStrainDropdown&page=newModel";
 		form.submit();
 	}	
+	
+	function immediateRelease()
+	{
+	    document.forms[0].calendarReleaseDateDisp.value = null;
+	    document.forms[0].calendarReleaseDate.value = null;
+	    
+	    return true;
+	}
+	
+	function selectFromCalendar()
+	{
+		cal1.select(document.forms[0].calendarReleaseDateDisp,
+		            'calendarReleaseDateDisp',
+		            'MM/dd/yyyy'); 
+	    return true;
+	}
+	
+	function transferFields() {
+		document.forms[0].calendarReleaseDate.value = document.forms[0].calendarReleaseDateDisp.value;
+	}
 	
 </SCRIPT>
 
@@ -56,7 +79,7 @@
 				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
-				<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor">
+				<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor" onsubmit="transferFields()">
 				<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
 			</td>
 		</tr>
@@ -155,13 +178,13 @@
 		</tr>
 
 		<tr>
-			
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><b>Record Release Date</b></td>
 			<td class="formField">
-				<html:radio property="releaseDate" value="immediately" /> Release record immediately <br> 
-				<html:radio property="releaseDate" value="after" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 
-				<html:text styleClass="formFieldSized2" disabled="true" property="calendarReleaseDate" size="10"/>	<br>
+				<html:radio property="releaseDate" value="immediately" onclick="return immediateRelease();" /> Release record immediately <br> 
+				<html:radio property="releaseDate" value="after" onclick="return selectFromCalendar();" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 
+				<html:hidden styleClass="formFieldSized2" disabled="false" property="calendarReleaseDate" />
+				<INPUT styleClass="formFieldSized2" disabled="true" property="calendarReleaseDateDisp" id="calendarReleaseDateDisp" size="10"/>	<br>
 			</td>
 		</tr>
 
