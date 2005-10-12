@@ -111,6 +111,32 @@ public class AnimalModel extends AbstractCancerModel {
     }
 
     /**
+     * @return Returns the unique organs.
+     */
+    public List getDistinctMetastatisOrgansFromHistopathologyCollection() {
+
+        List theList = new ArrayList();
+        for (int i = 0, j = histopathologyCollection.size(); i < j; i++) {
+            Histopathology theHistopathology = (Histopathology) histopathologyCollection.get(i);
+
+            List theMetastatisCollection = theHistopathology.getMetastatisCollection();
+
+            for (int k = 0, l = theMetastatisCollection.size(); k < l; k++) {
+                Histopathology theMetastatis = (Histopathology) theMetastatisCollection.get(k);
+
+                String theMetastatisOrgan = theMetastatis.getOrgan().getEVSPreferredDescription();
+                if (!theList.contains(theMetastatisOrgan)) {
+                    theList.add(theMetastatisOrgan);
+                }
+            }
+        }
+
+        Collections.sort(theList);
+
+        return theList;
+    }
+    
+    /**
      * @return Returns the histopathologyCollection.
      */
     public List getDistinctNomenclatureFromEngineeredGeneCollection() {

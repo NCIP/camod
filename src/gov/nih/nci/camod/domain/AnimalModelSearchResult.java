@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.1 2005-10-07 16:27:50 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.2 2005-10-12 18:09:29 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/07 16:27:50  georgeda
+ * Implemented paganation
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -18,6 +21,7 @@ public class AnimalModelSearchResult {
 
     private String myAnimalModelId;
     private String myTumorSites = null;
+    private String myMetastatisSites = null;
     private String mySpecies = null;
     private String myModelDescriptor = null;
 
@@ -92,15 +96,33 @@ public class AnimalModelSearchResult {
 
             for (int i = 0, j = theOrgans.size(); i < j; i++) {
                 String theOrgan = (String) theOrgans.get(i);
-                myTumorSites += theOrgan;
-
-                // Add a <br>
-                if (i < j - 1) {
-                    myTumorSites += "<br>";
-                }
+                myTumorSites += "<b>" + theOrgan + "</b><br>";
             }
         }
 
+        return myTumorSites;
+    }
+
+    /**
+     * Return the list of metastatis sites. It will fetch the animal model from
+     * the DB if it hasn't already happened.
+     * 
+     * @return the list of metastatis sites for the associated model
+     * @throws Exception
+     */
+    public String getMetastatisSites() throws Exception {
+
+        if (myMetastatisSites == null) {
+            fetchAnimalModel();
+
+            myMetastatisSites = "";
+            List theOrgans = myAnimalModel.getDistinctMetastatisOrgansFromHistopathologyCollection();
+
+            for (int i = 0, j = theOrgans.size(); i < j; i++) {
+                String theOrgan = (String) theOrgans.get(i);
+                myTumorSites += theOrgan + " (Metastatis)<br>";
+            }
+        }
         return myTumorSites;
     }
 
