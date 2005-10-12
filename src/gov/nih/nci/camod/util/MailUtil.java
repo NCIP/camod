@@ -94,11 +94,12 @@ import org.apache.commons.logging.LogFactory;
     /**
      * @param inRecipients - the list of people to send e-mail to
      * @param inSubject - the subject of the e-mail
-     * @param inMessage - an array of Strings to be used as keys to create the message to send
+     * @param inMessage - String to be used as an additional custom note within the body of content
      * @param inFrom - who the message is from
+     * @param messageStds - an array of Strings to be used as keys to create the message to send
      *
      */
-    static public void sendMail(String inRecipients[], String inSubject, String inFrom, String[] inMessage)
+    static public void sendMail(String inRecipients[], String inSubject, String inMessage, String inFrom, String[] messageStds)
             throws MessagingException {
         log.trace("Entering sendMail(String, String, String, String[])");
 
@@ -143,7 +144,11 @@ import org.apache.commons.logging.LogFactory;
 
             // Setting the Subject and Content Type
             theEmailMessage.setSubject(inSubject);
-            theEmailMessage.setContent(constructMessageFromMacros(inMessage), "text/plain");
+            if (null == inMessage || "".equals(inMessage)) {
+                theEmailMessage.setContent(constructMessageFromMacros(messageStds), "text/plain");
+            } else {
+                theEmailMessage.setContent(constructMessageFromMacros(messageStds) + "\n\n" + inMessage , "text/plain");
+            }
 
             log.debug("Sending email to: " + inRecipients);
             log.debug("email subject: " + inSubject);
@@ -198,7 +203,7 @@ import org.apache.commons.logging.LogFactory;
 
         try {
             sendMail(theRecipients, "Testing", "Hello there!", "georgeda@mail.nih.gov");
-            sendMail(theRecipients, "Testing 2", "georgeda@mail.nih.gov", theMessageKeys);
+            sendMail(theRecipients, "Testing 2", "Additional custom note goes here.", "georgeda@mail.nih.gov", theMessageKeys);
         } catch (Exception e) {
             System.out.println("Caught exception" + e);
             e.printStackTrace();
