@@ -190,12 +190,14 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
 			image = inEngineeredTransgene.getImage();
 		else
 			image = new Image();
-
+		
+		System.out.println( "\tGET inEngineeredTransgeneData.getFileServerLocation() " + inEngineeredTransgeneData.getFileServerLocation() );
+		
 		image.setFileServerLocation(inEngineeredTransgeneData.getFileServerLocation());
 		image.setTitle(inEngineeredTransgeneData.getTitle());
 		image.setDescription(inEngineeredTransgeneData.getDescriptionOfConstruct());
 		inEngineeredTransgene.setImage(image);
-
+	
     	log.trace("Exiting populateEngineeredTransgene");    
     }
 }

@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.4 2005-10-06 20:41:49 schroedn Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.5 2005-10-12 20:10:49 schroedn Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/06 20:41:49  schroedn
+ * InducedMutation, TargetedMutation, GenomicSegment changes
+ *
  * 
  */
 
@@ -78,8 +81,8 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         
         EnvironmentalFactor inEnvironFactor = null;
         
-        // Check to see if a Environmental Factor already exists, 
-        // if it does edit it else create a new EnvironmentalFactor
+        //Check to see if a Environmental Factor already exists, 
+        //if it does edit it else create a new EnvironmentalFactor
         if ( inInducedMutation.getEnvironmentalFactorCollection().size() > 0 )
         	inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactorCollection().get(0);
         else
@@ -88,14 +91,14 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         //Inducing Agent Category type
         inEnvironFactor.setType( inInducedMutationData.getType() );
         
-        // Other type
+        //Other type
         if (  inInducedMutationData.getOtherType() != null ) {
 	        if (!inInducedMutationData.getOtherType().equals("")) {
 	
 	            log.trace("Sending Notification eMail - new InducedMutation Agent added");
 	            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 	
-	            // Iterate through all the reciepts in the config file
+	            //Iterate through all the reciepts in the config file
 	            String recipients = theBundle.getString(Constants.EmailMessage.RECIPIENTS);
 	            StringTokenizer st = new StringTokenizer(recipients, ",");
 	            String inRecipients[] = new String[st.countTokens()];
@@ -109,7 +112,7 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
 	            String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
 	            // theBundle.getString(Constants.EmailMessage.SENDER);
 	
-	            // Send the email
+	            //Send the email
 	            try {
 	            	log.trace("Sending Notification eMail - new InducedMutation Agent added");
 	                MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom);
@@ -120,7 +123,7 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
 	                e.printStackTrace();
 	            }
 	
-	            // 2. Set flag, this Strain will need to be approved before  being added the list
+	            //2. Set flag, this Strain will need to be approved before  being added the list
 	            inEnvironFactor.setTypeUnctrlVocab( inInducedMutationData.getOtherType() );
 	        }
 	    }
@@ -141,25 +144,30 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         //Description
         inInducedMutation.setDescription( inInducedMutationData.getDescription() );
         
-        // Check for exisiting GeneticAlteration
+        //Check for exisiting GeneticAlteration
         GeneticAlteration inGeneticAlteration = null;
+        System.out.println( "\tGeneticAlteration=" + inInducedMutation.getGeneticAlterationCollection().size() );        
         if ( inInducedMutation.getGeneticAlterationCollection().size() > 0 )
         	inGeneticAlteration = (GeneticAlteration) inInducedMutation.getGeneticAlterationCollection().get(0);
         else
         	inGeneticAlteration = new GeneticAlteration();
         
-        //Observaton                
+        //Observaton               
+        //if ( inInducedMutationData.getObservation() != null )
         inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
         
         //Method of Observation
+        //if ( inInducedMutationData.getMethodOfObservation() != null )
         inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
         
-        // Only save if saving a new GeneticAlteration
-        if ( inInducedMutation.getGeneticAlterationCollection().size() < 1 )
-        	inInducedMutation.addGeneticAlteration( inGeneticAlteration );
+        System.out.println( "inGeneticAlteration method=" + inGeneticAlteration.getMethodOfObservation() + " obj=" + inGeneticAlteration.getObservation() );
         
-        // MGI Number                
-        // Check for exisiting MutationIdentifier
+        //Only save if saving a new GeneticAlteration
+        if ( inInducedMutation.getGeneticAlterationCollection().size() == 0 )
+        	inInducedMutation.addGeneticAlteration( inGeneticAlteration );
+       
+        //MGI Number                
+        //Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;
         if ( inInducedMutation.getMutationIdentifier() != null )
         	inMutationIdentifier = inInducedMutation.getMutationIdentifier();

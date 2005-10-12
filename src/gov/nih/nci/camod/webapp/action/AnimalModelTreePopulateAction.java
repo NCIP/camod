@@ -1,9 +1,14 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.25 2005-10-11 20:52:55 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.26 2005-10-12 20:10:49 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.25  2005/10/11 20:52:55  schroedn
+ *  EngineeredTransgene and GenomicSegment edit/save works, not image
+ *
+ *  TODO EngineeredTransgene - 'Other' Species not working
+ *
  *  Revision 1.24  2005/10/10 14:11:45  georgeda
  *  Changes for comment curation
  *
@@ -108,7 +113,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         for (int i = 0; i < publicationList.size(); i++) {
             Publication pub = (Publication) publicationList.get(i);
 
-            System.out.println("Adding Publication: " + pub.getTitle());
+            //System.out.println("Adding Publication: " + pub.getTitle());
 
             pubList.add(pub);
         }
@@ -121,7 +126,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         for (int i = 0; i < geneDeliveryList.size(); i++) {
         	GeneDelivery geneDelivery = (GeneDelivery) geneDeliveryList.get(i);
                         
-            System.out.println("\tAdded GeneDelivery= " + geneDelivery.getViralVector() );
+            //System.out.println("\tAdded GeneDelivery= " + geneDelivery.getViralVector() );
             
             geneList.add( geneDelivery );
         }
@@ -133,7 +138,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         for (int i = 0; i < cellLineList.size(); i++) {
             CellLine cellLine = (CellLine) cellLineList.get(i);
             
-            System.out.println("\tAdded CellLine= " + cellLine);
+            //System.out.println("\tAdded CellLine= " + cellLine);
             
             cellList.add(cellLine);
     	} 
@@ -145,7 +150,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         for (int i = 0; i < xenograftList.size(); i++) {
             Xenograft xenograft = (Xenograft) xenograftList.get(i);
             
-            System.out.println("\tAdded Xenograft= " + xenograft);
+            //System.out.println("\tAdded Xenograft= " + xenograft);
             
             xenoList.add(xenograft);
     	} 
@@ -158,7 +163,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         for (int i = 0; i < spontaneousMutationList.size(); i++) {
             SpontaneousMutation spontaneousMutation = (SpontaneousMutation) spontaneousMutationList.get(i);
             
-            System.out.println("\tAdded spontaneousMutationList= " + spontaneousMutation.getName() );
+            //System.out.println("\tAdded spontaneousMutationList= " + spontaneousMutation.getName() );
             
             mutationList.add(spontaneousMutation);
     	} 
@@ -177,25 +182,25 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         		InducedMutation inInduced = (InducedMutation) engineeredGeneList.get(i);
         		if ( inInduced.getEnvironmentalFactor() != null) {	            	
 	        		inducedList.add((InducedMutation) engineeredGeneList.get(i));
-	            	System.out.println( "\tAdded a Induced Mutation" );
+	            	//System.out.println( "\tAdded a Induced Mutation" );
         		}
         	}
         	
         	if ( engineeredGene instanceof TargetedModification ) {
         		//TargetedModification inTargeted = (TargetedModification) engineeredGeneList.get(i);        		
             	targetedList.add( (TargetedModification) engineeredGeneList.get(i) );
-            	System.out.println( "\tAdded a TargetedModification" );
+            	//System.out.println( "\tAdded a TargetedModification" );
         	}
         	
         	if ( engineeredGene instanceof GenomicSegment ) {
             	//GenomicSegment inGenomicSegment = (GenomicSegment) engineeredGeneList.get(i);
         		segmentList.add( (GenomicSegment) engineeredGeneList.get(i) );            	
-            	System.out.println( "\tAdded a GenomicSegment");
+            	//System.out.println( "\tAdded a GenomicSegment");
         	}    
         	
         	if ( engineeredGene instanceof Transgene ) {
         		engineeredList.add( (Transgene) engineeredGeneList.get(i) );            	
-            	System.out.println( "\tAdded a Transgene");
+            	//System.out.println( "\tAdded a Transgene");
         	}
         }
         
@@ -226,7 +231,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
                 	Agent agent = ty.getAgent();
                 	if ( agent != null ) {
                 		if (agent.getType() == null) {
-                		System.out.println("\tAdded therapy to therapyList");
+                		//System.out.println("\tAdded therapy to therapyList");
                 		therapyList.add(ty);                		
                 		}
                 	}
@@ -237,37 +242,37 @@ public class AnimalModelTreePopulateAction extends BaseAction {
                     Agent agent = ty.getAgent();
                     if ( agent != null ) {
 	                    if (agent.getType().equals("Other")) {
-	                        System.out.println("\tAdded therapy to surgeryList");
+	                       // System.out.println("\tAdded therapy to surgeryList");
 	                        surgeryList.add(ty);
 	                    }
 	                    if (agent.getType().equals("Hormone")) {
-	                        System.out.println(" therapy to hormoneList");
+	                       // System.out.println(" therapy to hormoneList");
 	                        hormoneList.add(ty);
 	                    }
 	                    if (agent.getType().equals("Growth Factor")) {
-	                        System.out.println("\tAdded therapy to growthFactorList");
+	                       // System.out.println("\tAdded therapy to growthFactorList");
 	                        growthFactorList.add(ty);
 	                    }
 	                    if (agent.getType().equals("Viral")) {
-	                        System.out.println("\tAdded therapy to viraltreatmentList");
+	                      //  System.out.println("\tAdded therapy to viraltreatmentList");
 	                        viraltreatmentList.add(ty);
 	                    }
 	                    if (agent.getType().equals("Chemical / Drug")) {
-	                        System.out.println("\tAdded therapy to chemicaldrugList");
+	                       // System.out.println("\tAdded therapy to chemicaldrugList");
 	                        chemicaldrugList.add(ty);
 	                    }
 	                    if (agent.getType().equals("Environment")) {
-	                        System.out.println("\tAdded therapy to environFactorList");
+	                       // System.out.println("\tAdded therapy to environFactorList");
 	                        environFactorList.add(ty);
 	                    }
 	
 	                    if (agent.getType().equals("Nutrition")) {
-	                        System.out.println("\tAdded therapy to nutritionalFactorList");
+	                       // System.out.println("\tAdded therapy to nutritionalFactorList");
 	                        nutritionalFactorList.add(ty);
 	                    }
 	
 	                    if (agent.getType().equals("Radiation")) {
-	                        System.out.println("\tAdded therapy to radiationList");
+	                       // System.out.println("\tAdded therapy to radiationList");
 	                        radiationList.add(ty);
 	                    }
                     }
@@ -294,7 +299,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
         request.getSession().setAttribute(Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
         
-        System.out.println( "TargedModList: " + targetedList);
+      //  System.out.println( "TargedModList: " + targetedList);
         
         // UserManager theUserManager = (UserManager) getBean("userManager");
         // Set up the form. Should be only one coordinator

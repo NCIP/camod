@@ -42,9 +42,9 @@ public class InducedMutationPopulateAction extends BaseAction {
 	    inducedMutationForm.setDescription( theInducedMutation.getDescription() );
 	    
 	    MutationIdentifier identifier = theInducedMutation.getMutationIdentifier();
-	    inducedMutationForm.setNumberMGI( identifier.getNumberMGI().toString() );
-	    
-	     
+	    if( identifier != null )
+	    	inducedMutationForm.setNumberMGI( identifier.getNumberMGI().toString() );
+	    	     
 	    List geneticList = theInducedMutation.getGeneticAlterationCollection();
 	    GeneticAlteration geneticAlt = (GeneticAlteration) geneticList.get(0);
 	    
