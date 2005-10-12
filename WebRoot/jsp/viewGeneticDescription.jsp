@@ -73,7 +73,14 @@
 					<% if ( eg instanceof gov.nih.nci.camod.domain.InducedMutation ) { %>
 					<li>
 						<html:link action="viewEngineeredTransgene">
-							<bean:write name="eg" property="name"/>
+							<c:choose>
+								<c:when test="${empty eg.environmentalFactor.name}">
+									<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>
+								</c:when>
+								<c:otherwise>
+						            <c:out value="${eg.environmentalFactor.name}"/>
+								</c:otherwise>
+							</c:choose>
 						</html:link>
 					<%}%>
 					</logic:iterate>
@@ -156,7 +163,7 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">&nbsp;
-			TBD
+			<c:out value="${tg.taxonCollection[0].scientificName}"/>
 			</td>
 		</tr>
 
@@ -255,7 +262,7 @@
 			</td>			
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Additional Features</b></td>
+			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
@@ -378,17 +385,12 @@
 		</c:if>
 
         <tr>
-			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
-			<td class="GreyBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.mutationIdentifier.numberMGI}"/></td>
-		</tr>				
+			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.mutationIdentifier.numberMGI}"/></td>
+		</tr>
 
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.locationOfIntegration}"/></td>
-		</tr>	
-
-		<tr>
-			<td class="GreyBox" width="35%"><b>Additional Features</b></td>
+			<td class="GreyBox" width="35%"><b>Comments</b></td>
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
@@ -506,7 +508,7 @@
 		</c:if>
 
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Additional Features</b></td>
+			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
 		</tr>
 
@@ -662,7 +664,7 @@
 			<td class="GreyBoxRightEnd" width="65%">&nbsp;<c:out value="${im.mutationIdentifier.numberMGI}"/></td>
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Additional Features</b></td>
+			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${im.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>

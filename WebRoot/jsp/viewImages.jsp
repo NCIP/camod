@@ -41,10 +41,10 @@
 					<br>
 					( Click to View )
 					<br>
-						<c:out value="${p.title}"/>
+						<b>Title:</b> <c:out value="${p.title}"/>
 					<br/>
 					<b>Staining:</b> <c:out value="${p.staining}"/> <br/>
-					<c:out value="${p.description}"/>
+					<b>Description:</b> <c:out value="${p.description}"/>
 					<br/>
 				</td>
 			</tr>

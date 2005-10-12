@@ -125,7 +125,7 @@
 		</tr>
 
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Principal Investigator Lab</b></td>
+			<td class="WhiteBox" width="20%"><b>Principal Investigator / Lab</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<a href=""> TBD
 				</a>

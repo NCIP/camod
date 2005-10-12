@@ -6,7 +6,9 @@
 	<td class="resultsBoxWhite" width="25%"><b>NSC Number</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${agt.nscNumber}"/>
+	<c:if test="${not empty agt.nscNumber}">
 	(<a href="#">Chemical Structure</a>)
+	</c:if>
 	</td>
 <tr>
 <tr>

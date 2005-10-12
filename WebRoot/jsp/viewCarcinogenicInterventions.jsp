@@ -336,7 +336,7 @@
 						<c:otherwise>
 							<c:out value="${cd.treatment.administrativeRoute}"/>
 						</c:otherwise>
-					</c:choose>
+					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
 					<c:out value="${cd.treatment.ageAtTreatment}"/>

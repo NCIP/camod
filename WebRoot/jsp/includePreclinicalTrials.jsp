@@ -4,63 +4,63 @@
 	</td>
 </tr>	
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Experiment \ Treatment Regiment</b></td>
+	<td class="resultsBoxWhite" width="25%"><b>Experiment \ Treatment Regimen</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.regimen}"/>
 	</td>
-<tr>
+</tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Experiment</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.experiment}"/>
 	</td>
-<tr>			
+</tr>			
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Results</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.results}"/>
 	</td>
-<tr>
+</tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Toxicity Grade</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.toxicityGrade}"/>
 	</td>
-<tr>			
+</tr>			
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Dose</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.dosage}"/>
 	</td>
+</tr>
 <tr>
-<tr>
-	<td class="resultsBoxGrey" width="25%"><b>Mouse Age at treatment</b></td>
+	<td class="resultsBoxGrey" width="25%"><b>Age at treatment</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.ageAtTreatment}"/>
 	</td>
-<tr>			
+</tr>			
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Gender</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.sexDistribution.type}"/>
 	</td>
-<tr>
+</tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Administration Route</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.administrativeRoute}"/>
 	</td>
-<tr>			
+</tr>			
 <tr>
-	<td class="resultsBoxGrey" width="25%"><i>Biomarker</i></td>
-	<td class="resultsBoxGreyEnd" width="75%"><c:out value="${t.experiment}"/></td>
+	<td class="resultsBoxGrey" width="25%"><b>Biomarker</b></td>
+	<td class="resultsBoxGreyEnd" width="75%"><c:out value="${t.biomarker}"/>&nbsp;</td>
+</tr>
 <tr>
-<tr>
-	<td class="resultsBoxWhite" width="25%"><b>Additional Information</b></td>
+	<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.comments}"/>
 	</td>
-<tr>
+</tr>
 <tr><td></td></tr>
 <tr>
 	<td class="greySubTitleLeftEnd" colspan=2><b>Publications:</b></td>

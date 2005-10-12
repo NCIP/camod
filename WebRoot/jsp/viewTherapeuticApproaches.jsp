@@ -6,6 +6,7 @@
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 
 <bean:define id="mdl" name="animalmodel"/>
+<bean:define id="ta" name="therapeuticApproachesColl"/>
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
@@ -21,7 +22,7 @@
 			</tr>
 			<tr>
 				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
-					<c:forEach var="t" items="${mdl.therapyCollection}" 
+					<c:forEach var="t" items="${ta}" 
 					       varStatus="stat">
 					       <c:out value="${t.agent.name}"/><br/>
 					</c:forEach>
@@ -30,7 +31,6 @@
 			</TABLE>
 			<br>
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-				<bean:define id="ta" name="therapeuticApproachesColl"/>
 				<c:forEach var="t" items="${ta}" varStatus="stat">
 					<c:set var="agt" value="${t.agent}"/>
 					<%@ include file="/jsp/includeAgentDetails.jsp" %>

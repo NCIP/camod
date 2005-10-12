@@ -24,14 +24,8 @@
 	<c:forEach var="xt" items="${mdl.xenograftCollection}" 
 			       varStatus="stat">
 		<tr>
-			<td class="formTitleBlue" colspan="2" align="center">
-				<c:out value="${xt.modelDescriptor}"/><br/>
-				<a href="ViewModelAction.do?unprotected_method=populateModelCharacteristics&aModelID='<c:out value="${xt.id}"/>'"><i>Click here to view additional information on this Xenograft model</i></a>
-			</td>
-		</tr>
-		<tr>
 			<td class="WhiteBox"><b>Cell Line/Transplant:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.modelDescriptor}"/></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.name}"/></td>
 		</tr>
 	
 		<tr>
