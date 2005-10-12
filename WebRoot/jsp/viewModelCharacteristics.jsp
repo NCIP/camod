@@ -91,7 +91,14 @@
 				</P>		
 			</td>
 		</tr>		
-
+		<tr>
+			<td class="WhiteBox" width="20%"><b>Website for add. info</b></td>
+			<td class="WhiteBoxRightEnd" width="80%">
+				<P>
+				<c:out value="${mdl.url}"/>
+				</P>		
+			</td>
+		</tr>		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Breeding Notes</b></td>
 			<td class="GreyBoxRightEnd" width="80%">&nbsp;

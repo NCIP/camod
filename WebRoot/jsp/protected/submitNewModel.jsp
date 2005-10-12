@@ -9,7 +9,9 @@
 <%@ page import="java.util.List" %>
 
 <!-- needed for tooltips -->
-<SCRIPT src="/camod/scripts/CalendarPopup.js" type=text/javascript></SCRIPT>	
+<SCRIPT src="/camod/scripts/CalendarPopup.js" type=text/javascript></SCRIPT>
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 
 <SCRIPT LANGUAGE="JavaScript" ID="js1">
 var cal1 = new CalendarPopup();
@@ -70,7 +72,7 @@ var cal1 = new CalendarPopup();
 		</tr>
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">General Information</td>
+			<td class="formTitle" height="20" colspan="3">Model Characteristics</td>
 		</tr>
 
 		<tr>

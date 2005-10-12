@@ -3,6 +3,9 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- Needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -69,7 +72,7 @@
 		
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formRequiredLabel"><label for="field1">Model Name /Model Descriptor:</label> 
+			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> 
 				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			

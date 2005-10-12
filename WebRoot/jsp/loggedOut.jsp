@@ -15,7 +15,7 @@
 				</tr>			
 				
 				<tr>
-					<td class="resultsBoxWhiteEnd">Session Ended.<br><html:link action="login">Login</html:link></td> 
+					<td class="resultsBoxWhiteEnd">Thank you using caMOD.<br><html:link action="login">Login</html:link></td> 
 				</tr>
 				
 			</TABLE>
