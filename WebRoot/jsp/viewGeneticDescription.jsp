@@ -278,6 +278,32 @@
 				Genomic Segment - Model:<c:out value="${mdl.modelDescriptor}"/>
 			</td>
 		</tr>
+		<c:choose>
+			<c:when test="${not empty gs.locationOfIntegration}">
+				<tr>
+					<td class="GreyBox" width="35%">
+					<b>Transgene Integration</b></td>
+					<td class="GreyBoxRightEnd" width="65%">&nbsp;
+					Targeted
+					</td>
+				</tr>
+				<tr>
+					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
+					<td class="WhiteBoxRightEnd" width="65%">&nbsp;
+					<c:out value="${gs.locationOfIntegration}"/>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td class="GreyBox" width="35%">
+					<b>Transgene Integration</b></td>
+					<td class="GreyBoxRightEnd" width="65%">&nbsp;
+					Random
+					</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
 		<tr>
 			<td class="GreyBox" width="35%"><b>Segment Type</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
@@ -309,9 +335,47 @@
 		</tr>
 
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Segment expressed in ...</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">TBD<i>Heart : not detected<br>Prostate Glands</i> </td>
-		</tr>	
+			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
+			<c:if test="${not empty gs.expressionFeatureCollection}">
+			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+				<tr>
+					<td class="formTitle" width="65%"><b>Organ</b></td>
+					<td class="formTitle" width="35%"><b>Expression Level</b></td>
+				</tr>
+				<c:forEach var="el" items="${gs.expressionFeatureCollection}">
+					<tr>
+						<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+						<td class="WhiteBoxRightEnd">
+						<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+					</tr>
+				</c:forEach>
+			</table>
+			</c:if>
+			</td>
+		</tr>
+	
+		<c:if test="${not empty gs.image.id}">
+		<tr>
+			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
+			<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
+			<Img src="http://caimage.nci.nih.gov/lizardtech/Model_Images/GeneticConstruct/<c:out value="${gs.image.id}"/>.jpg" 
+				width=50 height=50 border=0
+				alt="Click on the image to open in a new Browser window"></a>
+			<br/>( Click to View )
+			</td>
+		</tr>
+
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Title of the construct</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.image.title}"/>&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="GreyBox" width="35%"><b>Description of the construct</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.image.description}"/>&nbsp;</td>
+		</tr>
+		</c:if>
 
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
@@ -322,6 +386,7 @@
 			<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.locationOfIntegration}"/></td>
 		</tr>	
+
 		<tr>
 			<td class="GreyBox" width="35%"><b>Additional Features</b></td>
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.comments}"/>&nbsp;</td>
@@ -377,6 +442,47 @@
             <td class="resultsBoxWhite"><b>Genetic Background - Recipient</b></td>
             <td class="resultsBoxWhiteEnd">&nbsp;<c:out value="${tm.blastocystName}"/></td>
         </tr>
+
+		<tr>
+			<td class="GreyBox" width="35%"><b>Conditional Type</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.conditionality.conditionedBy}"/>&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Conditional Description</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.conditionality.description}"/>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td class="GreyBox" width="35%"><b>Gene Function</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
+			<ul>
+			<c:forEach var="gf" items="${tm.geneFunctionCollection}">
+				<li><c:out value="${gf.function}"/></li>
+			</c:forEach>
+			</ul>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
+			<c:if test="${not empty tm.expressionFeatureCollection}">
+			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+				<tr>
+					<td class="formTitle" width="65%"><b>Organ</b></td>
+					<td class="formTitle" width="35%"><b>Expression Level</b></td>
+				</tr>
+				<c:forEach var="el" items="${tm.expressionFeatureCollection}">
+					<tr>
+						<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+						<td class="WhiteBoxRightEnd">
+						<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+					</tr>
+				</c:forEach>
+			</table>
+			</c:if>
+			</td>
+		</tr>
 
 		<c:if test="${not empty tm.image.id}">
 		<tr>

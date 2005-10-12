@@ -350,7 +350,7 @@
 			<br>
 			</c:if>
 
-			<c:set var="agentType" value="Surgery"/>
+			<c:set var="agentType" value="Other"/>
 			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
