@@ -1,9 +1,14 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.31 2005-10-11 20:52:51 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.32 2005-10-12 15:55:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2005/10/11 20:52:51  schroedn
+ * EngineeredTransgene and GenomicSegment edit/save works, not image
+ *
+ * TODO EngineeredTransgene - 'Other' Species not working
+ *
  * Revision 1.30  2005/10/10 20:05:19  pandyas
  * removed animalmodel reference in populate method
  *
@@ -423,24 +428,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.setExperimentDesign(inModelCharacteristics.getExperimentDesign());
 
         // Create/reuse the taxon
-        //Taxon theTaxon = inAnimalModel.getSpecies();
-        //if (theTaxon == null) {
-        //    theTaxon = new Taxon();
-        // }
-        //theTaxon.setScientificName(inModelCharacteristics.getScientificName());
-        //theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
-        
-        // Find the matching taxon in the db and reuse it
-        Taxon theTaxon = new Taxon();
-        List taxonList = (List) TaxonManagerSingleton.instance().getAll(  );
-        
-        for( int i=0; i < taxonList.size(); i++ ) {
-        	theTaxon = (Taxon) taxonList.get(i);
-        	if ( theTaxon.getEthnicityStrain() != null ) {
-	        	if ( theTaxon.getEthnicityStrain().equals( inModelCharacteristics.getEthinicityStrain() ))
-	        		break;
-        	}
+        Taxon theTaxon = inAnimalModel.getSpecies();
+        if (theTaxon == null) {
+            theTaxon = new Taxon();
         }
+        theTaxon.setScientificName(inModelCharacteristics.getScientificName());
+        theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
      
         // Problem when editing and this doesn't change, the admin will get two
         // emails about the same STRAIN
