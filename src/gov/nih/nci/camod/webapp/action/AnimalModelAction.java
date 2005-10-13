@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.13 2005-09-16 15:53:49 georgeda Exp $
+ * $Id: AnimalModelAction.java,v 1.14 2005-10-13 20:47:42 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/09/16 15:53:49  georgeda
+ * Changes due to manager re-write
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.action;
@@ -45,7 +48,7 @@ public final class AnimalModelAction extends BaseAction {
 
         log.info("<AnimalModelAction saveNewModel> New Model Being created with following Characteristics:"
                 + "\n\t description: " + theModelChar.getDescription() + "\n\t breedingNotes: "
-                + theModelChar.getBreedingNotes() + "\n\t email: " + theModelChar.getEmail()
+                + theModelChar.getBreedingNotes() + "\n\t PI: " + theModelChar.getPrincipalInvestigator()
                 + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() + "\n\t experimentDesign: "
                 + theModelChar.getExperimentDesign() + "\n\t isToolMouse: " + theModelChar.getIsToolMouse()
                 + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName()
@@ -120,7 +123,7 @@ public final class AnimalModelAction extends BaseAction {
 
         log.info("editExistingModel - New Model Being created with following Characteristics:" + "\n\t description: "
                 + theModelChar.getDescription() + "\n\t breedingNotes: " + theModelChar.getBreedingNotes()
-                + "\n\t email: " + theModelChar.getEmail() + "\n\t ethinicityStrain: "
+                + "\n\t PI: " + theModelChar.getPrincipalInvestigator() + "\n\t ethinicityStrain: "
                 + theModelChar.getEthinicityStrain() + "\n\t experimentDesign: " + theModelChar.getExperimentDesign()
                 + "\n\t isToolMouse: " + theModelChar.getIsToolMouse() + "\n\t modelDescriptor: "
                 + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName() + "\n\t releaseDate: "

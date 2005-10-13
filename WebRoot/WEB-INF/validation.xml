@@ -32,9 +32,6 @@
         <field property="modelDescriptor" depends="required">
             <arg0 key="ModelCharacteristicsForm.modelDescriptor"/>
         </field>
-        <field property="email" depends="required">
-            <arg0 key="ModelCharacteristicsForm.email"/>
-        </field>
         <field property="scientificName" depends="required">
             <arg0 key="ModelCharacteristicsForm.scientificName"/>
         </field>

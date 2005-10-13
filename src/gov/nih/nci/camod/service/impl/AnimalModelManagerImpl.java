@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.32 2005-10-12 15:55:16 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.33 2005-10-13 20:47:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2005/10/12 15:55:16  georgeda
+ * Do not reuse taxon since it has an uncontolled vocab
+ *
  * Revision 1.31  2005/10/11 20:52:51  schroedn
  * EngineeredTransgene and GenomicSegment edit/save works, not image
  *
@@ -83,55 +86,16 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.AnimalModelSearchResult;
-import gov.nih.nci.camod.domain.Availability;
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.ContactInfo;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.InducedMutation;
-import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Phenotype;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.SpontaneousMutation;
-import gov.nih.nci.camod.domain.TargetedModification;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Transgene;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.CellLineData;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
-import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
-import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
-import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
-import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
-import gov.nih.nci.camod.webapp.form.GrowthFactorData;
-import gov.nih.nci.camod.webapp.form.HormoneData;
-import gov.nih.nci.camod.webapp.form.InducedMutationData;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
-import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
-import gov.nih.nci.camod.webapp.form.RadiationData;
-import gov.nih.nci.camod.webapp.form.SearchData;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
-import gov.nih.nci.camod.webapp.form.SurgeryData;
-import gov.nih.nci.camod.webapp.form.TargetedModificationData;
-import gov.nih.nci.camod.webapp.form.TherapyData;
-import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
-import gov.nih.nci.camod.webapp.form.XenograftData;
+import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Manages fetching/saving/updating of animal models
@@ -238,7 +202,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         return QueryManagerSingleton.instance().getModelsByStateForPerson(inState, inPerson);
     }
-    
+
     /**
      * Get a specific animal model
      * 
@@ -399,27 +363,23 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         // Handle the person information
         if (inUsername != null) {
-            Person thePerson = PersonManagerSingleton.instance().getByUsername(inUsername);
-            if (thePerson == null) {
+            Person theSubmitter = PersonManagerSingleton.instance().getByUsername(inUsername);
+            if (theSubmitter == null) {
 
-                // Create a new person
-                thePerson = new Person();
-                thePerson.setUsername(inUsername);
-                thePerson.setIsPrincipalInvestigator(new Boolean(true));
-
-                // Add the contact information
-                ContactInfo theContactInfo = new ContactInfo();
-                theContactInfo.setEmail(inModelCharacteristics.getEmail());
-                thePerson.addContactInfo(theContactInfo);
+                throw new IllegalArgumentException("Unknown user: " + inUsername);
             }
-
-            System.out.println("The person: " + thePerson.getUsername());
-            inAnimalModel.setSubmitter(thePerson);
-
-            // Change this to match the real PI
-            inAnimalModel.setPrincipalInvestigator(thePerson);
+            inAnimalModel.setSubmitter(theSubmitter);
         }
 
+        Person thePI = PersonManagerSingleton.instance().getByUsername(
+                inModelCharacteristics.getPrincipalInvestigator());
+
+        if (thePI == null) {
+            throw new IllegalArgumentException("Unknown principal investigator: " + inUsername);
+        }
+
+        inAnimalModel.setPrincipalInvestigator(thePI);
+        
         // Set the animal model information
         boolean isToolMouse = inModelCharacteristics.getIsToolMouse().equals("yes") ? true : false;
         inAnimalModel.setIsToolMouse(new Boolean(isToolMouse));
@@ -434,7 +394,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
         theTaxon.setScientificName(inModelCharacteristics.getScientificName());
         theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
-     
+
         // Problem when editing and this doesn't change, the admin will get two
         // emails about the same STRAIN
         if (inModelCharacteristics.getEthnicityStrainUnctrlVocab() != null) {
@@ -721,80 +681,88 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
 
         log.trace("Exiting addCellLine");
-    }     
-    
+    }
+
     /**
      * Add a SpontaneousMutation
-     */   
-    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationData inSpontaneousMutationData) throws Exception {
+     */
+    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationData inSpontaneousMutationData)
+            throws Exception {
 
-        log.trace( "Entering addGeneticDescription (spontaneousMutation)" );
+        log.trace("Entering addGeneticDescription (spontaneousMutation)");
 
-        SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create( inSpontaneousMutationData );
-        System.out.println(theSpontaneousMutation.getName() );
-        
-        inAnimalModel.addSpontaneousMutation( theSpontaneousMutation );
-        save( inAnimalModel );
+        SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create(
+                inSpontaneousMutationData);
+        System.out.println(theSpontaneousMutation.getName());
+
+        inAnimalModel.addSpontaneousMutation(theSpontaneousMutation);
+        save(inAnimalModel);
 
         log.trace("Exiting addGeneticDescription (spontaneousMutation)");
-    }         
-    
+    }
+
     /**
-     * Add a InducedMutation 
-     */   
-    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception {
+     * Add a InducedMutation
+     */
+    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData)
+            throws Exception {
 
-        log.trace( "Entering addGeneticDescription (inducedMutation)" );
+        log.trace("Entering addGeneticDescription (inducedMutation)");
 
-        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create( inInducedMutationData );        
-        inAnimalModel.addEngineeredGene( theInducedMutation );
-        save( inAnimalModel );
+        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create(inInducedMutationData);
+        inAnimalModel.addEngineeredGene(theInducedMutation);
+        save(inAnimalModel);
 
         log.trace("Exiting addGeneticDescription (inducedMutation)");
-    }   
-    
+    }
+
     /**
-     * Add a TargetedModification 
-     */   
-    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData) throws Exception {
+     * Add a TargetedModification
+     */
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData)
+            throws Exception {
 
-        log.trace( "Entering addGeneticDescription (TargetedModification)" );
+        log.trace("Entering addGeneticDescription (TargetedModification)");
 
-        TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create( inTargetedModificationData );
-        //System.out.println(theGene.getName() );
+        TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(
+                inTargetedModificationData);
+        // System.out.println(theGene.getName() );
 
-        inAnimalModel.addEngineeredGene( theTargetedModification );
-        save( inAnimalModel );
+        inAnimalModel.addEngineeredGene(theTargetedModification);
+        save(inAnimalModel);
 
         log.trace("Exiting addGeneticDescription (TargetedModification)");
     }
-    
-    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData) throws Exception {
-    	
-        log.trace( "Entering addGeneticDescription (GenomicSegment)" );
 
-        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create( inGenomicSegmentData );
-        //System.out.println(theGenomicSegment.getName() );
-        
-        inAnimalModel.addEngineeredGene( theGenomicSegment );
-        save( inAnimalModel );
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData)
+            throws Exception {
+
+        log.trace("Entering addGeneticDescription (GenomicSegment)");
+
+        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inGenomicSegmentData);
+        // System.out.println(theGenomicSegment.getName() );
+
+        inAnimalModel.addEngineeredGene(theGenomicSegment);
+        save(inAnimalModel);
 
         log.trace("Exiting addGeneticDescription (GenomicSegment)");
     }
-    
-    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData) throws Exception {
-    	
-        log.trace( "Entering addGeneticDescription (EngineeredTransgene)" );
 
-        Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().create( inEngineeredTransgeneData );
-        //System.out.println(theGenomicSegment.getName() );
-        
-        inAnimalModel.addEngineeredGene( theEngineeredTransgene );
-        save( inAnimalModel );
+    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData)
+            throws Exception {
+
+        log.trace("Entering addGeneticDescription (EngineeredTransgene)");
+
+        Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().create(
+                inEngineeredTransgeneData);
+        // System.out.println(theGenomicSegment.getName() );
+
+        inAnimalModel.addEngineeredGene(theEngineeredTransgene);
+        save(inAnimalModel);
 
         log.trace("Exiting addGeneticDescription (EngineeredTransgene)");
     }
-    
+
     /**
      * Add a therapy
      * 
@@ -804,15 +772,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new therapy data
      * @throws Exception
      */
-     
+
     public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception {
-    	
-    	System.out.println( "<AnimalModelManagerImpl addTherapy>");
-    	   
+
+        System.out.println("<AnimalModelManagerImpl addTherapy>");
+
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inTherapyData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
-    }     
+    }
 }

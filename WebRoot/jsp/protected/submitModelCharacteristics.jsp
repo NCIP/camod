@@ -78,9 +78,11 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">PI's Email Address</label></td>
-			<td class="formField">					
-					<html:text styleClass="formFieldSized" property="email" name="formdata" size="30"/>
+			<td class="formRequiredLabel"><label for="field1">Principal Investigator</label></td>
+			<td class="formField">
+				<html:select styleClass="formFieldSized" size="1" property="principalInvestigator">
+					<html:optionsCollection name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>" />	
+				</html:select>
 			</td>
 		</tr>
 

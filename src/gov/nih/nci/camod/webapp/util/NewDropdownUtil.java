@@ -1,26 +1,13 @@
 package gov.nih.nci.camod.webapp.util;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.InducedMutation;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Species;
-import gov.nih.nci.camod.domain.Strain;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Xenograft;
-import gov.nih.nci.camod.service.GeneDeliveryManager;
-import gov.nih.nci.camod.service.InducedMutationManager;
-import gov.nih.nci.camod.service.TaxonManager;
-import gov.nih.nci.camod.service.XenograftManager;
+import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -444,7 +431,10 @@ public class NewDropdownUtil {
             for (int i = 0; i < thePIList.size(); i++) {
                 Person thePerson = (Person) thePIList.get(i);
                 if (thePerson.getIsPrincipalInvestigator() != null) {
-                    theReturnList.add(thePerson.getLastName().trim() + ", " + thePerson.getFirstName().trim());
+
+                    String theDisplayName = thePerson.getLastName().trim() + ", " + thePerson.getFirstName().trim();
+                    DropdownOption theOption = new DropdownOption(theDisplayName, thePerson.getUsername());
+                    theReturnList.add(theOption);
                 }
             }
         }

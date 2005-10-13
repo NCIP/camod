@@ -2,7 +2,6 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
@@ -16,148 +15,138 @@ import org.apache.struts.action.*;
 
 public class AnimalModelPopulateAction extends BaseAction {
 
-	/**
-	 * Pre-populate all field values in the form ModelCharacteristicsForm 
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward populate( ActionMapping mapping, 
-								   ActionForm form,
-						           HttpServletRequest request,
-						           HttpServletResponse response )
-	  throws Exception {	
-		  
-		System.out.println( "<AnimalModelPopulateAction populate> Entering... " );
+    /**
+     * Pre-populate all field values in the form ModelCharacteristicsForm
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		// Create a form to edit
-		ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;
-		
-		// Use the current animalModel based on the ID stored in the session
-		String modelID = "" + request.getSession().getAttribute( Constants.MODELID );		
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean( "animalModelManager" );	    		    			
-		AnimalModel am = animalModelManager.get( modelID );	
-		
-		modelChar.setModelDescriptor( am.getModelDescriptor() );
-	
-		ContactInfo info = (ContactInfo) am.getPrincipalInvestigator().getContactInfoCollection().get(0);
-		modelChar.setEmail( info.getEmail() );
-		
-		if ( am.getIsToolMouse().booleanValue() )
-			modelChar.setIsToolMouse( "yes" );
-		else
-			modelChar.setIsToolMouse( "no" );
-		
-		modelChar.setScientificName( am.getSpecies().getScientificName() );
-		modelChar.setEthinicityStrain( am.getSpecies().getEthnicityStrain() );
-		
-		if ( am.getSpecies().getEthnicityStrainUnctrlVocab() != null )
-		{
-			modelChar.setEthnicityStrainUnctrlVocab( am.getSpecies().getEthnicityStrainUnctrlVocab() ); 
-		}
-		
-		modelChar.setExperimentDesign( am.getExperimentDesign() );		
-		modelChar.setType( am.getPhenotype().getSexDistribution().getType() );		
-		modelChar.setBreedingNotes( am.getPhenotype().getBreedingNotes() );		
-		modelChar.setDescription( am.getPhenotype().getDescription() );		
-		modelChar.setUrl( am.getUrl() );
-		  
-		// TODO: Release date; get Calender working
-		modelChar.setReleaseDate( "after" );
-		modelChar.setCalendarReleaseDate( am.getAvailability().getReleaseDate().toString() );				
-		
-		//Prepopulate all dropdown fields, set the global Constants to the following
-		this.dropdown( request, response );
-		
-		//Store the Form in session to be used by the JSP
-		request.getSession().setAttribute( Constants.FORMDATA, modelChar );
-		
-		return mapping.findForward( "submitModelCharacteristics" );
+        System.out.println("<AnimalModelPopulateAction populate> Entering... ");
 
-	}
-	
-	/**
-	 * Populate the dropdown menus for createNewModel
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward dropdown( ActionMapping mapping, 
-			   					   ActionForm form,
-			   					   HttpServletRequest request,
-			   					   HttpServletResponse response )
-	  throws Exception {	
-		
-		System.out.println( "<AnimalModelPopulateAction dropdown> ... " );
-		
-		//setup dropdown menus
-		this.dropdown( request, response );
-		
-		return mapping.findForward( "submitNewModel" );
-	}
+        // Create a form to edit
+        ModelCharacteristicsForm modelChar = (ModelCharacteristicsForm) form;
 
-	/**
-	 * Populate all drowpdowns for this type of form 
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws Exception
-	 */
-	public void dropdown( HttpServletRequest request,
-						  HttpServletResponse response )
-	  throws Exception {
-		
-			System.out.println( "<AnimalModelPopulateAction dropdown> Entering... " );
-		
-			//Prepopulate all dropdown fields, set the global Constants to the following
-            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
+        // Use the current animalModel based on the ID stored in the session
+        String modelID = "" + request.getSession().getAttribute(Constants.MODELID);
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel am = animalModelManager.get(modelID);
 
-			List speciesList = (List) request.getAttribute( Constants.Dropdowns.SPECIESDROP );			
-			System.out.println( "speciesList.get(0):" + speciesList.size() );
-			
-            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString() );									
-            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 
-//			request.getSession().setAttribute( Constants.Dropdowns.STRAINDROP, "" );
-	}	
-	
-	/**
-	 * Repopulate the Strain dropdown with it's matching species
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward setStrainDropdown( ActionMapping mapping, 
-										    ActionForm form,
-										    HttpServletRequest request,
-										    HttpServletResponse response )
-		throws Exception {			
-		
-		//XenograftForm xenograftForm = ( XenograftForm ) form;
-		ModelCharacteristicsForm modelChar = ( ModelCharacteristicsForm ) form;
-		
-		NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.STRAINDROP, modelChar.getScientificName() );
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SPECIESDROP, "" );
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
-        
-        request.getSession().setAttribute( Constants.FORMDATA, modelChar );
-   	 	
-        String page = request.getParameter( "page" );
-        
-        if( page.equals("modelChar"))        	
-        	return mapping.findForward( "submitModelCharacteristics" );
+        modelChar.setModelDescriptor(am.getModelDescriptor());
+
+        modelChar.setPrincipalInvestigator(am.getPrincipalInvestigator().getUsername());
+
+        if (am.getIsToolMouse().booleanValue())
+            modelChar.setIsToolMouse("yes");
         else
-        	return mapping.findForward( "submitNewModel" );
-	}
+            modelChar.setIsToolMouse("no");
+
+        modelChar.setScientificName(am.getSpecies().getScientificName());
+        modelChar.setEthinicityStrain(am.getSpecies().getEthnicityStrain());
+
+        if (am.getSpecies().getEthnicityStrainUnctrlVocab() != null) {
+            modelChar.setEthnicityStrainUnctrlVocab(am.getSpecies().getEthnicityStrainUnctrlVocab());
+        }
+
+        modelChar.setExperimentDesign(am.getExperimentDesign());
+        modelChar.setType(am.getPhenotype().getSexDistribution().getType());
+        modelChar.setBreedingNotes(am.getPhenotype().getBreedingNotes());
+        modelChar.setDescription(am.getPhenotype().getDescription());
+        modelChar.setUrl(am.getUrl());
+
+        // TODO: Release date; get Calender working
+        modelChar.setReleaseDate("after");
+        modelChar.setCalendarReleaseDate(am.getAvailability().getReleaseDate().toString());
+
+        // Prepopulate all dropdown fields, set the global Constants to the
+        // following
+        this.dropdown(request, response);
+
+        // Store the Form in session to be used by the JSP
+        request.getSession().setAttribute(Constants.FORMDATA, modelChar);
+
+        return mapping.findForward("submitModelCharacteristics");
+
+    }
+
+    /**
+     * Populate the dropdown menus for createNewModel
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        System.out.println("<AnimalModelPopulateAction dropdown> ... ");
+
+        // setup dropdown menus
+        this.dropdown(request, response);
+
+        return mapping.findForward("submitNewModel");
+    }
+
+    /**
+     * Populate all drowpdowns for this type of form
+     * 
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        System.out.println("<AnimalModelPopulateAction dropdown> Entering... ");
+
+        // Prepopulate all dropdown fields, set the global Constants to the
+        // following
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESDROP, "");
+
+        List speciesList = (List) request.getAttribute(Constants.Dropdowns.SPECIESDROP);
+        System.out.println("speciesList.get(0):" + speciesList.size());
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, speciesList.get(0).toString());
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "");
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP, "");
+    }
+
+    /**
+     * Repopulate the Strain dropdown with it's matching species
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward setStrainDropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        // XenograftForm xenograftForm = ( XenograftForm ) form;
+        ModelCharacteristicsForm modelChar = (ModelCharacteristicsForm) form;
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, modelChar.getScientificName());
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "");
+
+        request.getSession().setAttribute(Constants.FORMDATA, modelChar);
+
+        String page = request.getParameter("page");
+
+        if (page.equals("modelChar"))
+            return mapping.findForward("submitModelCharacteristics");
+        else
+            return mapping.findForward("submitNewModel");
+    }
 }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModelCharacteristicsForm.java,v 1.5 2005-10-06 13:36:08 georgeda Exp $
+ * $Id: ModelCharacteristicsForm.java,v 1.6 2005-10-13 20:48:00 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/06 13:36:08  georgeda
+ * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
+ *
  * Revision 1.4  2005/09/28 15:12:22  schroedn
  * Added GeneDelivery and Xenograft/Transplant, businass logic in Managers
  *
@@ -27,7 +30,7 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String modelDescriptor;
     protected String name;
     protected String summary;
-    protected String email;
+    protected String principalInvestigator;
     protected String isToolMouse = "no";
     protected String scientificName;
     protected String ethinicityStrain;
@@ -67,7 +70,7 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     public void setEthnicityStrainUnctrlVocab(String a) {
         this.ethnicityStrainUnctrlVocab = a;
     }
-    
+
     public String getCalendarReleaseDate() {
         return calendarReleaseDate;
     }
@@ -92,12 +95,12 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
         this.summary = a;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPrincipalInvestigator() {
+        return principalInvestigator;
     }
 
-    public void setEmail(String a) {
-        this.email = a;
+    public void setPrincipalInvestigator(String a) {
+        this.principalInvestigator = a;
     }
 
     public String getIsToolMouse() {
