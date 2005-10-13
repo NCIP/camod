@@ -66,7 +66,7 @@ public final class XenograftAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering edit");
+        log.trace("<XenograftAction> Entering edit");
 
         // Create a form to edit
         XenograftForm xenograftForm = (XenograftForm) form;
@@ -75,19 +75,21 @@ public final class XenograftAction extends BaseAction {
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         String aXenograftID = request.getParameter("aXenograftID");
 
-        log.info("<XenograftAction edit> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
-                + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
-                + xenograftForm.getParentalCellLineName() + "\n\t getAgeAtTreatment: "
-                + "\n\t getCellAmount: " + xenograftForm.getCellAmount() + "\n\t getHarvestDate: "
-                + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
-                + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
-                + xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
-                + xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()
-                + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
-                + xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
-                + xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
-                + xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<XenograftAction edit> following Characteristics:" 
+        		+ "\n\t name: " + xenograftForm.getName()
+                + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() 
+                + "\n\t ParentalCellLineName: " + xenograftForm.getParentalCellLineName() 
+                + "\n\t getCellAmount: " + xenograftForm.getCellAmount() 
+                + "\n\t getHarvestDate: "  + xenograftForm.getHarvestDate() 
+                + "\n\t getModificationDescription: " + xenograftForm.getModificationDescription() 
+                + "\n\t getGeneticManipulation: " + xenograftForm.getGeneticManipulation() 
+                + "\n\t getAdministrativeSite: " + xenograftForm.getAdministrativeSite() 
+                + "\n\t getGraftType: " + xenograftForm.getGraftType() 
+                + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() 
+                + "\n\t getHostScientificName: " + xenograftForm.getHostScientificName() 
+                + "\n\t getHostEthinicityStrain: "  + xenograftForm.getHostEthinicityStrain() 
+                + "\n\t getOtherHostEthinicityStrain: " + xenograftForm.getOtherHostEthinicityStrain() 
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
 
@@ -118,7 +120,7 @@ public final class XenograftAction extends BaseAction {
             theForward = "failure";
         }
 
-        log.trace("Exiting edit");
+        log.trace("<XenograftAction> Exiting edit");
         return mapping.findForward(theForward);
     }
 
@@ -135,7 +137,7 @@ public final class XenograftAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering save");
+        log.trace("<XenograftAction> Entering save");
 
         // Create a form to edit
         XenograftForm xenograftForm = (XenograftForm) form;
@@ -144,18 +146,19 @@ public final class XenograftAction extends BaseAction {
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<XenograftAction save> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
-                + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
-                + xenograftForm.getParentalCellLineName() + "\n\t getAgeAtTreatment: "
-                + "\n\t getCellAmount: " + xenograftForm.getCellAmount() + "\n\t getHarvestDate: "
-                + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
-                + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
-                + xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
-                + xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()
-                + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
-                + xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
-                + xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
-                + xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+                + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() 
+                + "\n\t ParentalCellLineName: " + xenograftForm.getParentalCellLineName() 
+                + "\n\t getCellAmount: " + xenograftForm.getCellAmount() 
+                + "\n\t getHarvestDate: " + xenograftForm.getHarvestDate() 
+                + "\n\t getModificationDescription: " + xenograftForm.getModificationDescription() 
+                + "\n\t getGeneticManipulation: " + xenograftForm.getGeneticManipulation() 
+                + "\n\t getAdministrativeSite: " + xenograftForm.getAdministrativeSite() 
+                + "\n\t getGraftType: "  + xenograftForm.getGraftType() 
+                + "\n\t getOtherGraftType: "  + xenograftForm.getOtherGraftType() 
+                + "\n\t getHostScientificName: "  + xenograftForm.getHostScientificName() 
+                + "\n\t getHostEthinicityStrain: " + xenograftForm.getHostEthinicityStrain() 
+                + "\n\t getOtherHostEthinicityStrain: "  + xenograftForm.getOtherHostEthinicityStrain() 
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {
             // retrieve model and update w/ new values
@@ -181,7 +184,7 @@ public final class XenograftAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.trace("Exiting save");
+        log.trace("<XenograftAction> Exiting save");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 

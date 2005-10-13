@@ -24,8 +24,6 @@ public class XenograftPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<XenograftPopulateAction populate> Entering populate() ");
-
         // Create a form to edit
         XenograftForm xenograftForm = (XenograftForm) form;
         request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
@@ -118,7 +116,7 @@ public class XenograftPopulateAction extends BaseAction {
         // setup dropdown menus
         this.dropdown(request, response);
 
-        System.out.println("<XenograftPopulateAction dropdown> before return submitRadiation ");
+        System.out.println("<XenograftPopulateAction dropdown> before return submitTransplantXenograft ");
 
         return mapping.findForward("submitTransplantXenograft");
 

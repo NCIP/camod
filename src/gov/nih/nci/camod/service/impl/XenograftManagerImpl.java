@@ -6,6 +6,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.XenograftManager;
 import gov.nih.nci.camod.webapp.form.XenograftData;
@@ -70,7 +71,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
     private void populateXenograft(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
             throws Exception {
-
+    	
         log.trace("Entering populateXenograft");
 
         inXenograft.setName(inXenograftData.getName());
@@ -134,13 +135,19 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         inXenograft.setGraftType(inXenograftData.getGraftType());
 
         // Send an email when this happens
-        if (inXenograftData.getOtherGraftType() != null) {
-
+        if (inXenograftData.getOtherGraftType() != null || inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION));
+        {
             // TODO: send an email
+        	System.out.println("graft type equals other");
             System.out.println("SENDING EMAIL GRAFT");
 
-            inXenograft.setGraftType(null);
+            inXenograft.setGraftType(Constants.Dropdowns.OTHER_OPTION);
             inXenograft.setGraftTypeUnctrlVocab(inXenograftData.getOtherGraftType());
+        }
+        if (inXenograftData.getOtherGraftType() == null) 
+        {
+        	System.out.println("selected graft type from drop down");
+        	inXenograft.setGraftType(inXenograftData.getGraftType());
         }
 
         log.trace("Exiting populateXenograft");
