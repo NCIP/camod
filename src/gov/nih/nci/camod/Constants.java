@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.42 2005-10-11 20:51:12 schroedn Exp $
+ * $Id: Constants.java,v 1.43 2005-10-13 16:18:51 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2005/10/11 20:51:12  schroedn
+ * Added constant for ENGINEEREDTRANSGENE_LIST
+ *
  * Revision 1.41  2005/10/11 19:56:19  pandyas
  * added constant for assc met list
  *
@@ -155,6 +158,8 @@ public class Constants {
 		public static final String TARGETEDMODIFICATIONDROP = "TargetedModificationTypes.txt";
 
 		public static final String GENOMICSEGMENTDROP = "SegmentTypes.txt";
+		
+		public static final String GROWTHFACTORDOSEUNITSDROP = "GrowthFactorDoseUnits.txt";
 
 		// Specific to a single screen
 		public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
@@ -359,8 +364,7 @@ public class Constants {
 		
 		public static final String ASSOCMETASTSIS_LIST = "associatedmetastatis_list";		
 		
-		public static final String ENGINEEREDTRANSGENE_LIST = "engineeredtransgene_list";
-				
+		public static final String ENGINEEREDTRANSGENE_LIST = "engineeredtransgene_list";				
 
 		public static final String THERAPY_LIST = "therapy_list";
 
