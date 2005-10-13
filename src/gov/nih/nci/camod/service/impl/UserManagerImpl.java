@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.6 2005-09-30 19:49:58 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.7 2005-10-13 17:00:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/09/30 19:49:58  georgeda
+ * Make sure user is in db
+ *
  * Revision 1.5  2005/09/22 18:55:49  georgeda
  * Get coordinator from user in properties file
  *
@@ -97,7 +100,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
             log.error("Unable to get roles for user (" + inUsername + ": ", e);
             throw e;
         }
-        
+
         log.info("User: " + inUsername + " and roles: " + theRoles);
 
         log.trace("Exiting getRolesForUser");
@@ -134,7 +137,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
                 List theUsers = theRole.getPartyCollection();
                 Iterator theIterator = theUsers.iterator();
 
-                // Gop through the list of returned Party objects
+                // Go through the list of returned Party objects
                 while (theIterator.hasNext()) {
                     Object theObject = theIterator.next();
 
@@ -174,7 +177,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
         log.trace("Entering getEmailForUser");
 
         log.debug("Username: " + inUsername);
-        
+
         String theEmail = "";
 
         try {
@@ -197,10 +200,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
     }
 
     /**
-     * Get an e-mail address for a user
-     * 
-     * @param inUsername
-     *            is the login name of the user
+     * Get an e-mail address for the coordinator
      * 
      * @return the list of users associated with the role
      */
@@ -228,10 +228,14 @@ public class UserManagerImpl extends BaseManager implements UserManager {
     }
 
     /**
-     * Log in a user and get his roles.
+     * Log in a user and get roles.
      * 
      * @param inUsername
      *            is the login name of the user
+     * @param inPassword
+     *            password
+     * @param inRequest
+     *            Used to store the roles
      * 
      * @return the list of users associated with the role
      */
@@ -245,12 +249,6 @@ public class UserManagerImpl extends BaseManager implements UserManager {
             // Does the user exist? Must also be in our database to login
             List theRoles = getRolesForUser(inUsername);
             inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
-
-            User theCurrentUser = theAuthorizationMgr.getUser(inUsername);
-
-            log.info("Username: " + theCurrentUser.getUserId() + "\nFirstName: " + theCurrentUser.getFirstName()
-                    + "\nLastName: " + theCurrentUser.getLastName() + "\nPhoneNumber: "
-                    + theCurrentUser.getPhoneNumber() + "\nEmail: " + theCurrentUser.getEmailId());
 
         } catch (Exception e) {
             log.error("Error logging in user: ", e);
