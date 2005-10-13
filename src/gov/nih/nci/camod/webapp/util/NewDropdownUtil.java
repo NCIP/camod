@@ -372,6 +372,8 @@ public class NewDropdownUtil {
 
         // TODO: Fix once we know what we're doing w/ this
         viralVectorList.add(Constants.Dropdowns.OTHER_OPTION);
+        //  TODO: Remive this before production - used to test other field toggle
+        viralVectorList.add("Dummy Viral Vector");        
 
         if (geneDeliveryList != null) {
             for (int i = 0; i < geneDeliveryList.size(); i++) {
