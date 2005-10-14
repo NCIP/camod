@@ -135,7 +135,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Method of Modification:</label></td>
+		<td class="formLabel"><label for="field1">Method of Modification:</label>
+		<camod:cshelp key="ABS_CANCER_MODEL.MODIFICATION_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="modificationDescription"  size="30" name="formdata"/>
 		</td>
@@ -143,7 +145,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Genetic Alteration:</label></td>
+		<td class="formLabel"><label for="field1">Genetic Alteration:</label>
+		<camod:cshelp key="ABS_CANCER_MODEL.GENETIC_MANIPULATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="geneticManipulation"  size="30" name="formdata"/>
 		</td>
@@ -183,7 +187,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Site of Administration:</label></td>
+		<td class="formLabel"><label for="field1">Site of Administration:</label>
+		<camod:cshelp key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="administrativeSite"  size="30" name="formdata"/>
 		</td>
