@@ -7,6 +7,10 @@
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+
 <%
 	String aCellID = request.getParameter( "aCellID" );
 	
@@ -37,7 +41,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label></td>
+		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label>
+		<camod:cshelp key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="cellLineName">
 								
@@ -47,7 +53,8 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel"><label for="field2">Organ / Tissue</label>&nbsp;
+		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
+		<camod:cshelp key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showTissueTree('cellLineForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
@@ -59,7 +66,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Experiment:</label></td>
+		<td class="formLabel"><label for="field1">Experiment:</label>
+		<camod:cshelp key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" name="formdata" property="experiment" cols="32" rows="4"/>			
 			</td>
@@ -67,7 +76,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Results:</label></td>
+		<td class="formLabel"><label for="field1">Results:</label>
+		<camod:cshelp key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" name="formdata" property="results" cols="32" rows="4"/>			
 			</td>
@@ -75,7 +86,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comments:</label></td>
+		<td class="formLabel"><label for="field1">Comments:</label>
+		<camod:cshelp key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" name="formdata" property="comments" cols="32" rows="4"/>			
 			</td>

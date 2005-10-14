@@ -5,6 +5,10 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.TherapyForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
 	
@@ -112,7 +116,9 @@
  	</tr>			
     <TR align="LEFT" valign="TOP">
         <td class="formRequiredNotice" width="5">&nbsp;</td>        
-        <TD class="formLabel">Toxicity Grade:</TD>
+        <TD class="formLabel"><label for="field1">Toxicity Grade:</label>
+        <camod:cshelp key="THERAPY.TOXICITY_GRADE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+        </TD>
 		<td class="formField">
 			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" name="formdata">												
 				<html:options name="<%= Dropdowns.TOXICITYGRADESDROP %>"/>					
@@ -159,7 +165,9 @@
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Biomarker:</label></td>
+		<td class="formLabel"><label for="field1">Biomarker:</label>
+		<camod:cshelp key="THERAPY.BIOMARKER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" size="30" property="biomarker" name="formdata" />			
 			</td>
@@ -167,7 +175,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor Progression:</label></td>
+		<td class="formLabel"><label for="field1">Tumor Progression:</label>
+		<camod:cshelp key="THERAPY.TUMOR_RESPONSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">		
 			<label for="field3">Time to preneoplastic lesion malignancy metastais</label>
 			<br>
@@ -180,7 +190,9 @@
 	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Experiment:</label></td>
+		<td class="formLabel"><label for="field1">Experiment:</label>
+		<camod:cshelp key="THERAPY.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
 			</td>
@@ -188,7 +200,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Results:</label></td>
+		<td class="formLabel"><label for="field1">Results:</label>
+		<camod:cshelp key="THERAPY.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
 			</td>
@@ -196,7 +210,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comments:</label></td>
+		<td class="formLabel"><label for="field1">Comments:</label>
+		<camod:cshelp key="THERAPY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
 			</td>
