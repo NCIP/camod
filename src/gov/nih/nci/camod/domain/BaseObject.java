@@ -3,38 +3,60 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 
 import gov.nih.nci.camod.util.HashCodeUtil;
+import gov.nih.nci.camod.util.GUIDGenerator;
 
 /**
- * Base class for Model objects.  Child objects should implement toString(), 
- * equals() and hashCode();
+ * Base class for Persisted Domain objects.
  *
- * <p>
- * <a href="BaseObject.java.html"><i>View Source</i></a>
- * </p>
- *
- * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
+ * @author piparom
  */
+
 public abstract class BaseObject implements Serializable {    
   
   private Long id = null;
   
-  private void setId(Long id) { this.id = id; }
+  // private internal non-persistent properties
+  // used for equality evaluations of newly created transient
+  // domain objects (null id objects)
   
-  public Long getId() { return id; }    
+  // assign new global unique identifier
+  private final String internalGUID = GUIDGenerator.getInstance().genNewGuid();
+  
+  // initialize persisted state to false
+  private boolean persisted = false;
+  
+  
+  private void setId(Long id) { 
+    this.id = id; 
+
+    // pkid assigned by hibernate - set perstisted state
+    this.persisted = true;
+  }
+  
+  public Long getId() { return id; }      
     
   public boolean equals(Object o) {
     if (this == o) return true;        
     if ((o == null) || (!(o instanceof BaseObject))) return false;
     
     final BaseObject obj = (BaseObject) o;
-    if (HashCodeUtil.notEqual(this.getId(), obj.getId())) return false;
+    
+    if (this.persisted) {      
+      if (HashCodeUtil.notEqual(this.getId(), obj.getId())) return false;
+    } else {
+      if (!(this.internalGUID.equals(obj.internalGUID))) return false; 
+    }
     
     return true;
   }
   
-   public int hashCode() {
-    int result = HashCodeUtil.SEED;        
-    result = HashCodeUtil.hash(result, this.getId());     
+  public int hashCode() {
+    int result = HashCodeUtil.SEED;
+    if (this.persisted) {
+      result = HashCodeUtil.hash(result, this.getId());     
+    } else {
+      result = HashCodeUtil.hash(result, this.internalGUID);
+    }
     return result;
   }
 
@@ -44,6 +66,9 @@ public abstract class BaseObject implements Serializable {
       result += id.toString();
     } else {
       result += "Null";
+      if (!this.persisted) {
+        result += " - GUID (temporary): "+this.internalGUID;
+      }
     }    
     return result;
   } 
