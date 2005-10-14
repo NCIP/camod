@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author pandyas
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class Log extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259215453799404851L;
-
-    private Long id;
+    
     private String notes;
     private String type;
     private String subsystem;
@@ -28,21 +26,7 @@ public class Log extends BaseObject implements Serializable {
     private AbstractCancerModel cancerModel;
     private Comments comment;
     private Person submitter;
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+ 
 
     /**
      * @return Returns the notes.
@@ -149,35 +133,21 @@ public class Log extends BaseObject implements Serializable {
         this.submitter = submitter;
     }
 
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1727118201, -1843324729).append(this.notes).append(this.type)
-                .append(this.subsystem).append(this.timestamp).append(this.cancerModel).append(this.comment).append(
-                        this.submitter).append(this.id).toHashCode();
-    }
-
+  
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("id", this.id).append("notes", this.notes).append("type", this.type)
-                .append("subsystem", this.subsystem).append("timestamp", this.timestamp).append("cancerModel",
-                        this.cancerModel).append("comment", this.comment).append("submitter", this.submitter)
-                .toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getTimestamp() + " - " + this.getNotes();
+       return result;
+     }  
+     
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Log)) {
-            return false;
-        }
-        Log rhs = (Log) object;
-        return new EqualsBuilder().append(this.notes, rhs.notes).append(this.type, rhs.type).append(this.subsystem,
-                rhs.subsystem).append(this.timestamp, rhs.timestamp).append(this.cancerModel, rhs.cancerModel).append(
-                this.comment, rhs.comment).append(this.submitter, rhs.submitter).append(this.id, rhs.id).isEquals();
-    }
+     
+  
 }

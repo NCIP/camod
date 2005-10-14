@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.util.*;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -219,76 +218,18 @@ public class Xenograft extends AbstractCancerModel {
 	public void setTumorCode(TumorCode tumorCode) {
 		this.tumorCode = tumorCode;
 	}
-	/**  
-	 * @see java.lang.Object#equals(Object)
-	 */
-	public boolean equals(Object object) {
-		if (!(object instanceof Xenograft)) {
-			return false;
-		}
-		Xenograft rhs = (Xenograft) object;
-		return new EqualsBuilder().appendSuper(super.equals(object)).append(
-				this.originSpecies, rhs.originSpecies).append(this.tumorCode,
-				rhs.tumorCode).append(this.invivoResultCollection,
-				rhs.invivoResultCollection).append(this.graftType,
-				rhs.graftType).append(this.graftTypeUnctrlVocab, rhs.graftTypeUnctrlVocab)
-				.append(this.geneticManipulation, rhs.geneticManipulation)
-				.append(this.administrativeSite, rhs.administrativeSite)
-				.append(this.cellAmount, rhs.cellAmount)
-				.append(this.atccNumber, rhs.atccNumber).append(
-						this.modificationDescription,
-						rhs.modificationDescription).append(
-						this.parentalCellLineName, rhs.parentalCellLineName)
-				.append(this.organ, rhs.organ).append(this.harvestDate,
-						rhs.harvestDate).append(this.name, rhs.name).append(
-						this.hostSpecies, rhs.hostSpecies).isEquals();
-	}
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode() {
-		return new HashCodeBuilder(-2123253831, 472004439).appendSuper(
-				super.hashCode()).append(this.originSpecies).append(
-				this.tumorCode).append(this.invivoResultCollection).append(
-				this.graftType).append(this.geneticManipulation).append(
-				this.administrativeSite).append(this.cellAmount).append(
-				this.atccNumber).append(this.modificationDescription).append(
-				this.parentalCellLineName).append(this.organ)
-				.append(this.graftTypeUnctrlVocab).append(
-				this.harvestDate).append(this.name).append(this.hostSpecies)
-				.toHashCode();
-	}
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", this.getId())
-				.append("experimentDesign", this.getExperimentDesign())
-				.append("geneticManipulation", this.geneticManipulation)
-				.append("invivoResultCollection", this.invivoResultCollection)
-				.append("hostSpecies", this.hostSpecies)
-				.append("principalInvestigator",
-						this.getPrincipalInvestigator())
-				.append("atccNumber", this.atccNumber)
-				.append("originSpecies", this.originSpecies)
-				.append("species", this.getSpecies())
-				.append("state", this.getState())
-				.append("graftType", this.graftType)
-				.append("graftType_unctrl_vocab", this.graftTypeUnctrlVocab)
-				.append("harvestDate", this.harvestDate)
-				.append("name", this.name)
-				.append("parentalCellLineName", this.parentalCellLineName)
-				.append("availability", this.getAvailability())
-				.append("cellAmount", this.cellAmount)
-				.append("submitter", this.getSubmitter())
-				.append("tumorCode", this.tumorCode)
-				.append("publicationCollection",
-						this.getPublicationCollection())
-				.append("organ", this.organ)
-				.append("administrativeSite", this.administrativeSite)
-				.append("modelDescriptor", this.getModelDescriptor())
-				.append("modificationDescription", this.modificationDescription)
-				.toString();
-	}
+   /**
+     * @see java.lang.Object#toString()
+     */
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getName();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
+    }
 }

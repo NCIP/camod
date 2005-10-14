@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class Publication extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3258755453799404851L;
-
-    private Long id;
+    
     private String volume;
     private Long endPage;
     private Long year;
@@ -76,21 +74,7 @@ public class Publication extends BaseObject implements Serializable {
     public void setEndPage(Long endPage) {
         this.endPage = endPage;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+  
 
     /**
      * @return Returns the journal.
@@ -197,38 +181,18 @@ public class Publication extends BaseObject implements Serializable {
         this.year = year;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Publication)) {
-            return false;
-        }
-        Publication rhs = (Publication) object;
-        return new EqualsBuilder().append(this.publicationStatus, rhs.publicationStatus)
-                .append(this.volume, rhs.volume).append(this.endPage, rhs.endPage).append(this.year, rhs.year).append(
-                        this.pmid, rhs.pmid).append(this.title, rhs.title).append(this.firstTimeReported,
-                        rhs.firstTimeReported).append(this.journal, rhs.journal).append(this.startPage, rhs.startPage)
-                .append(this.authors, rhs.authors).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1959885453, 1508278755).append(this.publicationStatus).append(this.volume).append(
-                this.endPage).append(this.year).append(this.pmid).append(this.title).append(this.firstTimeReported)
-                .append(this.journal).append(this.startPage).append(this.authors).append(this.id).toHashCode();
-    }
-
-    /**
+     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("journal", this.journal).append("authors", this.authors).append(
-                "publicationStatus", this.publicationStatus).append("endPage", this.endPage).append("startPage",
-                this.startPage).append("pmid", this.pmid).append("id", this.id).append("title", this.title).append(
-                "volume", this.volume).append("firstTimeReported", this.firstTimeReported).append("year", this.year)
-                .toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getTitle();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

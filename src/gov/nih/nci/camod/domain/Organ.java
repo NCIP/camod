@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -23,8 +22,7 @@ import org.apache.commons.lang.builder.*;
 public class Organ extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259095453799404851L;
-
-    private Long id;
+    
     private String name;
     private String conceptCode;
     private List histopathologyCollection = new ArrayList();
@@ -74,21 +72,7 @@ public class Organ extends BaseObject implements Serializable {
     public void setConceptCode(String conceptCode) {
         this.conceptCode = conceptCode;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
 
     /**
      * @return Returns the name.
@@ -105,31 +89,18 @@ public class Organ extends BaseObject implements Serializable {
         this.name = name;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Organ)) {
-            return false;
-        }
-        Organ rhs = (Organ) object;
-        return new EqualsBuilder().append(this.histopathologyCollection, rhs.histopathologyCollection).append(
-                this.name, rhs.name).append(this.conceptCode, rhs.conceptCode).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-5760707, 335803633).append(this.histopathologyCollection).append(this.name).append(
-                this.conceptCode).append(this.id).toHashCode();
-    }
-
-    /**
+      /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("name", this.name).append("conceptCode", this.conceptCode).append("id",
-                this.id).append("histopathologyCollection", this.histopathologyCollection).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getName();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class Party extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259045453799404851L;
-
-    private Long id;
+    
     private List contactInfoCollection = new ArrayList();
     private List roleCollection = new ArrayList();
 
@@ -49,21 +47,7 @@ public class Party extends BaseObject implements Serializable {
         role.getPartyCollection().add(this);
         roleCollection.add(role);
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+  
 
     /**
      * @return Returns the contactInfoCollection.
@@ -86,30 +70,16 @@ public class Party extends BaseObject implements Serializable {
     }
 
     /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Party)) {
-            return false;
-        }
-        Party rhs = (Party) object;
-        return new EqualsBuilder().append(this.roleCollection, rhs.roleCollection).append(this.contactInfoCollection,
-                rhs.contactInfoCollection).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1530808795, -1178033565).append(this.roleCollection).append(
-                this.contactInfoCollection).append(this.id).toHashCode();
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("id", this.id).append("contactInfoCollection",
-                this.contactInfoCollection).append("roleCollection", this.roleCollection).toString();
+     public String toString() {
+       String result = super.toString();             
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

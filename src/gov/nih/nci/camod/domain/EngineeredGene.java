@@ -9,7 +9,6 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.*;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -20,8 +19,7 @@ import org.apache.commons.lang.builder.*;
 public class EngineeredGene extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259475453799404851L;
-
-    private Long id;
+    
     private Long cabioId;
     private String name;
     private String comments;
@@ -167,22 +165,7 @@ public class EngineeredGene extends BaseObject implements Serializable {
     public void setCabioId(Long cabioId) {
         this.cabioId = cabioId;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+   
     /**
      * @return Returns the name.
      */
@@ -197,39 +180,14 @@ public class EngineeredGene extends BaseObject implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof EngineeredGene)) {
-            return false;
-        }
-        EngineeredGene rhs = (EngineeredGene) object;
-        return new EqualsBuilder().append(this.comments, rhs.comments).append(this.mutationIdentifier,
-                rhs.mutationIdentifier).append(this.genotypeSummary, rhs.genotypeSummary).append(
-                this.expressionFeatureCollection, rhs.expressionFeatureCollection).append(this.conditionality,
-                rhs.conditionality).append(this.image, rhs.image).append(this.cabioId, rhs.cabioId).append(this.name,
-                rhs.name).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1677938719, 1609774333).append(this.comments).append(this.mutationIdentifier)
-                .append(this.genotypeSummary).append(this.expressionFeatureCollection).append(this.conditionality)
-                .append(this.image).append(this.cabioId).append(this.name).append(this.id).toHashCode();
-    }
+  
 
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("conditionality", this.conditionality).append("name", this.name)
-                .append("expressionFeatureCollection", this.expressionFeatureCollection).append("id", this.id).append(
-                        "comments", this.comments).append("image", this.image).append("cabioId", this.cabioId).append(
-                        "mutationIdentifier", this.mutationIdentifier).append("genotypeSummary", this.genotypeSummary)
-                .toString();
-    }
+       String result = super.toString() + " - ";      
+       result += this.getName();
+       return result;
+    }    
 }

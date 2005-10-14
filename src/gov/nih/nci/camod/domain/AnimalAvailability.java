@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class AnimalAvailability extends BaseObject implements Serializable {
     
     private static final long serialVersionUID = 4259705453799404851L;
-    
-	private Long id;
+    	
 	private String name;
 	private String stockNumber;
 	private List animalDistributorCollection = new ArrayList();
@@ -46,18 +44,7 @@ public class AnimalAvailability extends BaseObject implements Serializable {
 		animalDistributor.getAnimalAvailabilityCollection().add(this);
 		animalDistributorCollection.add(animalDistributor);
 	}
-	/**
-	 * @return Returns the id.
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	/**
 	 * @return Returns the name.
 	 */
@@ -82,30 +69,20 @@ public class AnimalAvailability extends BaseObject implements Serializable {
 	public void setStockNumber(String stockNumber) {
 		this.stockNumber = stockNumber;
 	}
-	/**
-	 * @see java.lang.Object#equals(Object)
-	 */
-	public boolean equals(Object object) {
-		if (!(object instanceof AnimalAvailability)) {
-			return false;
-		}
-		AnimalAvailability rhs = (AnimalAvailability) object;
-		return new EqualsBuilder().append(
-				this.stockNumber, rhs.stockNumber).append(this.name, rhs.name)
-				.append(this.id, rhs.id).isEquals();
-	}
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode() {
-		return new HashCodeBuilder(-1592551365, 1293638993).append(this.stockNumber).append(this.name)
-				.append(this.id).toHashCode();
-	}
+	
 	/**
 	 * @see java.lang.Object#toString()
 	 */
-	public String toString() {
-		return new ToStringBuilder(this).append("name", this.name).append("id",
-				this.id).append("stockNumber", this.stockNumber).toString();
-	}
+        public String toString() {
+          String result = super.toString() + " - ";      
+          result += this.getName();                
+          return result;
+        }       
+        
+     public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
+    }
+        
 }

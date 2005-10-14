@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class Phenotype extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3258775453799404851L;
-
-    private Long id;
+    
     private String breedingNotes;
     private String description;
     private SexDistribution sexDistribution;
@@ -70,46 +68,18 @@ public class Phenotype extends BaseObject implements Serializable {
         this.description = description;
     }
 
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Phenotype)) {
-            return false;
-        }
-        Phenotype rhs = (Phenotype) object;
-        return new EqualsBuilder().append(this.description, rhs.description).append(this.sexDistribution,
-                rhs.sexDistribution).append(this.breedingNotes, rhs.breedingNotes).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(640880873, -980896221).append(this.description).append(this.sexDistribution).append(
-                this.breedingNotes).append(this.id).toHashCode();
-    }
-
-    /**
+      /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("sexDistribution", this.sexDistribution).append("id", this.id).append(
-                "description", this.description).append("breedingNotes", this.breedingNotes).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getDescription();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

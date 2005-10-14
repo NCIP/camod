@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author pandyas

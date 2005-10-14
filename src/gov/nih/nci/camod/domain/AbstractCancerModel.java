@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class AbstractCancerModel extends BaseObject implements Serializable, CancerModel {
 
     private static final long serialVersionUID = 4259765453799404851L;
-
-    private Long id;
+    
     private String experimentDesign;
     private String modelDescriptor;
     private String state;
@@ -144,22 +142,7 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
     public void setExperimentDesign(String experimentDesign) {
         this.experimentDesign = experimentDesign;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+  
     /**
      * @return Returns the modelDescriptor.
      */
@@ -176,38 +159,18 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
     }
 
     /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof AbstractCancerModel)) {
-            return false;
-        }
-        AbstractCancerModel rhs = (AbstractCancerModel) object;
-        return new EqualsBuilder().append(this.principalInvestigator, rhs.principalInvestigator).append(
-                this.experimentDesign, rhs.experimentDesign).append(this.availability, rhs.availability).append(
-                this.submitter, rhs.submitter).append(this.state, rhs.state).append(this.publicationCollection,
-                rhs.publicationCollection).append(this.modelDescriptor, rhs.modelDescriptor).append(this.id, rhs.id)
-                .append(this.species, rhs.species).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-294059533, -659032637).append(this.principalInvestigator).append(
-                this.experimentDesign).append(this.availability).append(this.submitter).append(this.state).append(
-                this.publicationCollection).append(this.modelDescriptor).append(this.id).append(this.species)
-                .toHashCode();
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("species", this.species).append("state", this.state).append("id",
-                this.id).append("availability", this.availability).append("experimentDesign", this.experimentDesign)
-                .append("submitter", this.submitter).append("principalInvestigator", this.principalInvestigator)
-                .append("publicationCollection", this.publicationCollection).append("modelDescriptor",
-                        this.modelDescriptor).toString();
+      String result = super.toString() + " - ";      
+      result += this.getModelDescriptor();                
+      return result;
+    }       
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+    
 }

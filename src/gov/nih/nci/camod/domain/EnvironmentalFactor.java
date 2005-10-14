@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class EnvironmentalFactor extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259445453799404851L;
-
-    private Long id;
+    
     private String type;
     private String typeUnctrlVocab;
     private String name;
@@ -40,21 +38,6 @@ public class EnvironmentalFactor extends BaseObject implements Serializable {
      */
     public void setCasNumber(String casNumber) {
         this.casNumber = casNumber;
-    }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
@@ -117,33 +100,15 @@ public class EnvironmentalFactor extends BaseObject implements Serializable {
         this.typeUnctrlVocab = typeUnctrlVocab;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof EnvironmentalFactor)) {
-            return false;
-        }
-        EnvironmentalFactor rhs = (EnvironmentalFactor) object;
-        return new EqualsBuilder().append(this.casNumber, rhs.casNumber).append(this.type, rhs.type).append(
-                this.nameUnctrlVocab, rhs.nameUnctrlVocab).append(this.name, rhs.name).append(this.id, rhs.id).append(
-                this.typeUnctrlVocab, rhs.typeUnctrlVocab).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1041064431, -1510046889).append(this.casNumber).append(this.type).append(this.name)
-                .append(this.nameUnctrlVocab).append(this.id).append(this.typeUnctrlVocab).toHashCode();
-    }
-
-    /**
-     * @see java.lang.Object#toString()
-     */
     public String toString() {
-        return new ToStringBuilder(this).append("name", this.name).append("id", this.id).append("casNumber",
-                this.casNumber).append("name_unctrl_vocab", this.nameUnctrlVocab).append("type_unctrl_vocab",
-                this.typeUnctrlVocab).append("type", this.type).toString();
+       String result = super.toString() + " - ";      
+       result += this.getName();  
+       return result;
+     }    
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

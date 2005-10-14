@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class Histopathology extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259275453799404851L;
-
-    private Long id;
+    
     private String comments;
     private String grossDescription;
     private String relationalOperation;
@@ -198,21 +196,7 @@ public class Histopathology extends BaseObject implements Serializable {
     public void setGrossDescription(String grossDescription) {
         this.grossDescription = grossDescription;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+  
 
     /**
      * @return Returns the microscopicDescription.
@@ -304,49 +288,20 @@ public class Histopathology extends BaseObject implements Serializable {
         this.weightOfTumor = weightOfTumor;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Histopathology)) {
-            return false;
-        }
-        Histopathology rhs = (Histopathology) object;
-        return new EqualsBuilder().append(this.diseaseCollection, rhs.diseaseCollection).append(this.comments,
-                rhs.comments).append(this.metastatisCollection, rhs.metastatisCollection).append(this.grossDescription,
-                rhs.grossDescription).append(this.relationalOperation, rhs.relationalOperation).append(
-                this.volumeOfTumor, rhs.volumeOfTumor).append(this.comparativeData, rhs.comparativeData).append(
-                this.tumorIncidenceRate, rhs.tumorIncidenceRate).append(this.geneticAlteration, rhs.geneticAlteration)
-                .append(this.clinicalMarkerCollection, rhs.clinicalMarkerCollection).append(this.weightOfTumor,
-                        rhs.weightOfTumor).append(this.survivalInfo, rhs.survivalInfo).append(this.organ, rhs.organ)
-                .append(this.ageOfOnset, rhs.ageOfOnset)
-                .append(this.microscopicDescription, rhs.microscopicDescription).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1967347847, 453124975).append(this.diseaseCollection).append(this.comments).append(
-                this.metastatisCollection).append(this.grossDescription).append(this.relationalOperation).append(
-                this.volumeOfTumor).append(this.comparativeData).append(this.tumorIncidenceRate).append(
-                this.geneticAlteration).append(this.clinicalMarkerCollection).append(this.weightOfTumor).append(
-                this.survivalInfo).append(this.organ).append(this.ageOfOnset).append(this.microscopicDescription)
-                .append(this.id).toHashCode();
-    }
-
+  
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("weightOfTumor", this.weightOfTumor).append("id", this.id).append(
-                "geneticAlteration", this.geneticAlteration).append("relationalOperation", this.relationalOperation)
-                .append("survivalInfo", this.survivalInfo).append("comparativeData", this.comparativeData).append(
-                        "grossDescription", this.grossDescription).append("ageOfOnset", this.ageOfOnset).append(
-                        "volumeOfTumor", this.volumeOfTumor).append("diseaseCollection", this.diseaseCollection)
-                .append("comments", this.comments).append("tumorIncidenceRate", this.tumorIncidenceRate).append(
-                        "metastatisCollection", this.metastatisCollection).append("organ", this.organ).append(
-                        "clinicalMarkerCollection", this.clinicalMarkerCollection).append("microscopicDescription",
-                        this.microscopicDescription).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getGrossDescription() + " - " + this.getComments();
+       return result;
+     }  
+     
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+     
 }

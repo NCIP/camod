@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class AnimalDistributor extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 4259685453799404851L;
-
-    private Long id;
+    
     private String name;
     private List animalAvailabilityCollection = new ArrayList();
 
@@ -40,22 +38,7 @@ public class AnimalDistributor extends BaseObject implements Serializable {
     public void setAnimalAvailabilityCollection(List animalAvailabilityCollection) {
         this.animalAvailabilityCollection = animalAvailabilityCollection;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+   
     /**
      * @return Returns the name.
      */
@@ -72,30 +55,17 @@ public class AnimalDistributor extends BaseObject implements Serializable {
     }
 
     /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof AnimalDistributor)) {
-            return false;
-        }
-        AnimalDistributor rhs = (AnimalDistributor) object;
-        return new EqualsBuilder().append(this.animalAvailabilityCollection, rhs.animalAvailabilityCollection).append(
-                this.name, rhs.name).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1926372733, 899020659).append(this.animalAvailabilityCollection).append(this.name)
-                .append(this.id).toHashCode();
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("name", this.name).append("id", this.id).append(
-                "animalAvailabilityCollection", this.animalAvailabilityCollection).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getName();                
+       return result;
+     }     
+     
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

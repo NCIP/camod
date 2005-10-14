@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class Therapy extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3258525453799404851L;
-
-    private Long id;
+    
     private String experiment;
     private String comments;
     private String results;
@@ -161,21 +159,7 @@ public class Therapy extends BaseObject implements Serializable {
     public void setExperiment(String experiment) {
         this.experiment = experiment;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+ 
 
     /**
      * @return Returns the results.
@@ -207,40 +191,18 @@ public class Therapy extends BaseObject implements Serializable {
         this.treatment = treatment;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Therapy)) {
-            return false;
-        }
-        Therapy rhs = (Therapy) object;
-        return new EqualsBuilder().append(this.tumorResponse, rhs.tumorResponse).append(this.comments, rhs.comments)
-                .append(this.experiment, rhs.experiment).append(this.therapeuticExperiment, rhs.therapeuticExperiment)
-                .append(this.agent, rhs.agent).append(this.toxicityGrade, rhs.toxicityGrade).append(this.treatment,
-                        rhs.treatment).append(this.publicationCollection, rhs.publicationCollection).append(
-                        this.biomarker, rhs.biomarker).append(this.results, rhs.results).append(this.id, rhs.id)
-                .isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(288096921, 542841797).append(this.tumorResponse).append(this.comments).append(
-                this.experiment).append(this.therapeuticExperiment).append(this.agent).append(this.toxicityGrade)
-                .append(this.treatment).append(this.publicationCollection).append(this.biomarker).append(this.results)
-                .append(this.id).toHashCode();
-    }
-
-    /**
+     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("experiment", this.experiment).append("tumorResponse",
-                this.tumorResponse).append("id", this.id).append("comments", this.comments).append("agent", this.agent)
-                .append("publicationCollection", this.publicationCollection).append("biomarker", this.biomarker)
-                .append("therapeuticExperiment", this.therapeuticExperiment).append("treatment", this.treatment)
-                .append("results", this.results).append("toxicityGrade", this.toxicityGrade).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getExperiment();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

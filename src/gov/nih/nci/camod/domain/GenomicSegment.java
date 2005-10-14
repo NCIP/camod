@@ -9,7 +9,6 @@ package gov.nih.nci.camod.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -93,40 +92,20 @@ public class GenomicSegment extends EngineeredGene {
     public void setSegmentSize(String segmentSize) {
         this.segmentSize = segmentSize;
     }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof GenomicSegment)) {
-            return false;
-        }
-        GenomicSegment rhs = (GenomicSegment) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.locationOfIntegration,
-                rhs.locationOfIntegration).append(this.segmentTypeCollection, rhs.segmentTypeCollection).append(
-                this.segmentSize, rhs.segmentSize).append(this.cloneDesignator, rhs.cloneDesignator).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1013910251, -2066007607).appendSuper(super.hashCode()).append(
-                this.locationOfIntegration).append(this.segmentTypeCollection).append(this.segmentSize).append(
-                this.cloneDesignator).toHashCode();
-    }
-
+ 
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("conditionality", this.getConditionality()).append(
-                "locationOfIntegration", this.locationOfIntegration).append("name", this.getName()).append(
-                "expressionFeatureCollection", this.getExpressionFeatureCollection()).append("id", this.getId())
-                .append("comments", this.getComments()).append("image", this.getImage()).append("segmentSize",
-                        this.segmentSize).append("cabioId", this.getCabioId()).append("cloneDesignator",
-                        this.cloneDesignator).append("mutationIdentifier", this.getMutationIdentifier()).append(
-                        "segmentTypeCollection", this.segmentTypeCollection).append("genotypeSummary",
-                        this.getGenotypeSummary()).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getLocationOfIntegration()+" - "+this.getCloneDesignator()+" - "+this.getSegmentSize();
+       return result;
+     }  
+     
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+     
 }

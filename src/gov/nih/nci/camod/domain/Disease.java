@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs TODO To change the template for this generated type comment
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class Disease extends BaseObject implements Serializable {
 
 	private static final long serialVersionUID = 3259515453799404851L;
-
-	private Long id;
+	
 
 	private String name;
 
@@ -75,21 +73,6 @@ public class Disease extends BaseObject implements Serializable {
 	}
 
 	/**
-	 * @return Returns the id.
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            The id to set.
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
 	 * @return Returns the name.
 	 */
 	public String getName() {
@@ -105,32 +88,18 @@ public class Disease extends BaseObject implements Serializable {
 	}
 
 	/**
-	 * @see java.lang.Object#equals(Object)
-	 */
-	public boolean equals(Object object) {
-		if (!(object instanceof Disease)) {
-			return false;
-		}
-		Disease rhs = (Disease) object;
-		return new EqualsBuilder().append(this.name, rhs.name).append(
-				this.conceptCode, rhs.conceptCode).append(this.id, rhs.id)
-				.isEquals();
-	}
-
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode() {
-		return new HashCodeBuilder(-211577967, 1317175173).append(this.name)
-				.append(this.conceptCode).append(this.id).toHashCode();
-	}
-
-	/**
 	 * @see java.lang.Object#toString()
 	 */
-	public String toString() {
-		return new ToStringBuilder(this).append("name", this.name).append(
-				"conceptCode", this.conceptCode).append("id", this.id)
-				.toString();
-	}
+    public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getName();  
+       return result;
+     }    
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
+    }
+    
 }

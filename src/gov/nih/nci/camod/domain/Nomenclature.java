@@ -8,7 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
+
 /**
  * @author rajputs
  *
@@ -18,22 +18,9 @@ import org.apache.commons.lang.builder.*;
 public class Nomenclature extends BaseObject implements Serializable {
     
     private static final long serialVersionUID = 3259115453799404851L;
-    
-	private Long id;
+    	
 	private String name;
 	
-	/**
-	 * @return Returns the id.
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 	/**
 	 * @return Returns the name.
 	 */
@@ -46,29 +33,19 @@ public class Nomenclature extends BaseObject implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/**
-	 * @see java.lang.Object#equals(Object)
-	 */
-	public boolean equals(Object object) {
-		if (!(object instanceof Nomenclature)) {
-			return false;
-		}
-		Nomenclature rhs = (Nomenclature) object;
-		return new EqualsBuilder().append(
-				this.name, rhs.name).append(this.id, rhs.id).isEquals();
-	}
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode() {
-		return new HashCodeBuilder(-1721999747, 548338829).append(this.name).append(this.id)
-				.toHashCode();
-	}
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return new ToStringBuilder(this).append("name", this.name).append("id",
-				this.id).toString();
-	}
+        
+   /**
+     * @see java.lang.Object#toString()
+     */
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getName();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
+    }
 }

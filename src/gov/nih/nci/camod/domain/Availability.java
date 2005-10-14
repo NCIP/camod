@@ -9,7 +9,6 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -20,8 +19,7 @@ import org.apache.commons.lang.builder.*;
 public class Availability extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259655453799404851L;
-
-    private Long id;
+    
     private Date enteredDate;
     private String visibleTo;
     private Date modifiedDate;
@@ -41,22 +39,7 @@ public class Availability extends BaseObject implements Serializable {
     public void setEnteredDate(Date enteredDate) {
         this.enteredDate = enteredDate;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+   
     /**
      * @return Returns the modifiedDate.
      */
@@ -100,35 +83,21 @@ public class Availability extends BaseObject implements Serializable {
      */
     public void setVisibleTo(String visibleTo) {
         this.visibleTo = visibleTo;
-    }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Availability)) {
-            return false;
-        }
-        Availability rhs = (Availability) object;
-        return new EqualsBuilder().append(this.enteredDate, rhs.enteredDate).append(this.visibleTo, rhs.visibleTo)
-                .append(this.modifiedDate, rhs.modifiedDate).append(this.releaseDate, rhs.releaseDate).append(this.id,
-                        rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1736335199, -1526405401).append(this.enteredDate).append(this.visibleTo).append(
-                this.modifiedDate).append(this.releaseDate).append(this.id).toHashCode();
-    }
+    }  
 
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("id", this.id).append("releaseDate", this.releaseDate).append(
-                "enteredDate", this.enteredDate).append("visibleTo", this.visibleTo).append("modifiedDate",
-                this.modifiedDate).toString();
+      String result = super.toString() + " - ";      
+      result += this.getEnteredDate()+" - "+this.getModifiedDate()+" - "+this.getReleaseDate();                
+      return result;
+    }     
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+
 }

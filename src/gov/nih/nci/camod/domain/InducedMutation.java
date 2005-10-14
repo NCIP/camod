@@ -9,8 +9,6 @@ package gov.nih.nci.camod.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
-
 public class InducedMutation extends EngineeredGene {
 
     private static final long serialVersionUID = 3259235453799404851L;
@@ -124,37 +122,20 @@ public class InducedMutation extends EngineeredGene {
     }
     */
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof InducedMutation)) {
-            return false;
-        }
-        InducedMutation rhs = (InducedMutation) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.description, rhs.description).append(
-                this.geneticAlterationCollection, rhs.geneticAlterationCollection).append(this.geneId, rhs.geneId)
-                .isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(185645383, 717000701).appendSuper(super.hashCode()).append(
-        		this.description).append(this.geneticAlterationCollection).append(this.geneId).toHashCode();
-    }
 
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("conditionality", this.getConditionality()).append("name",
-                this.getName()).append("expressionFeatureCollection", this.getExpressionFeatureCollection()).append(
-                "id", this.getId()).append("comments", this.getComments()).append("description", this.description)
-                .append("image", this.getImage()).append("cabioId", this.getCabioId()).append(
-                        "geneticAlterationCollection", this.geneticAlterationCollection).append("mutationIdentifier",
-                        this.getMutationIdentifier()).append(
-                        "genotypeSummary", this.getGenotypeSummary()).append("geneId", this.geneId).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getGeneId() + " - " + this.getDescription();
+       return result;
+     }  
+     
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+     
 }

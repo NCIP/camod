@@ -9,7 +9,6 @@ package gov.nih.nci.camod.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -86,38 +85,18 @@ public class Transgene extends EngineeredGene {
         this.locationOfIntegration = locationOfIntegration;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Transgene)) {
-            return false;
-        }
-        Transgene rhs = (Transgene) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.taxonCollection, rhs.taxonCollection)
-                .append(this.locationOfIntegration, rhs.locationOfIntegration).append(this.regulatoryElementCollection,
-                        rhs.regulatoryElementCollection).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1792793975, 1838484929).appendSuper(super.hashCode()).append(this.taxonCollection)
-                .append(this.locationOfIntegration).append(this.regulatoryElementCollection).toHashCode();
-    }
-
-    /**
+     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("conditionality", this.getConditionality()).append(
-                "locationOfIntegration", this.locationOfIntegration).append("name", this.getName()).append(
-                "expressionFeatureCollection", this.getExpressionFeatureCollection()).append("id", this.getId())
-                .append("comments", this.getComments()).append("image", this.getImage()).append("cabioId",
-                        this.getCabioId()).append("taxonCollection", this.taxonCollection).append("mutationIdentifier",
-                        this.getMutationIdentifier()).append("regulatoryElementCollection",
-                        this.regulatoryElementCollection).append("genotypeSummary", this.getGenotypeSummary())
-                .toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getLocationOfIntegration();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

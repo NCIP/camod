@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class CellLine extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259655453799404851L;
-
-    private Long id;
+    
     private String comments;
     private String experiment;
     private String name;
@@ -73,21 +71,6 @@ public class CellLine extends BaseObject implements Serializable {
      */
     public void setExperiment(String experiment) {
         this.experiment = experiment;
-    }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
@@ -143,34 +126,20 @@ public class CellLine extends BaseObject implements Serializable {
         this.results = results;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof CellLine)) {
-            return false;
-        }
-        CellLine rhs = (CellLine) object;
-        return new EqualsBuilder().append(this.experiment, rhs.experiment).append(this.comments, rhs.comments).append(
-                this.organ, rhs.organ).append(this.publicationCollection, rhs.publicationCollection).append(this.name,
-                rhs.name).append(this.results, rhs.results).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1563857285, 1875579981).append(this.experiment).append(this.comments).append(
-                this.organ).append(this.publicationCollection).append(this.name).append(this.results).append(this.id)
-                .toHashCode();
-    }
-
+ 
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("experiment", this.experiment).append("name", this.name).append("id",
-                this.id).append("comments", this.comments).append("publicationCollection", this.publicationCollection)
-                .append("organ", this.organ).append("results", this.results).toString();
+      String result = super.toString() + " - ";      
+      result += this.getName();          
+      return result;
+    }     
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+    
 }

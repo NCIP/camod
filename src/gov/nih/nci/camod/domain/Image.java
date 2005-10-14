@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class Image extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259255453799404851L;
-    
-    private Long id;
+        
     private String title;
     private String description;
     private String staining;
@@ -71,22 +69,7 @@ public class Image extends BaseObject implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    }  
 
     /**
      * @return Returns the staining.
@@ -131,38 +114,21 @@ public class Image extends BaseObject implements Serializable {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Image)) {
-            return false;
-        }
-        Image rhs = (Image) object;
-        return new EqualsBuilder().append(this.availability, rhs.availability).append(this.title, rhs.title).append(
-                this.description, rhs.description).append(this.fileServerLocation, rhs.fileServerLocation).append(
-                this.id, rhs.id).append(this.staining, rhs.staining).append(this.stainingUnctrlVocab,
-                rhs.stainingUnctrlVocab).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1070912003, -540974217).append(this.availability).append(this.title).append(
-                this.description).append(this.fileServerLocation).append(this.id).append(this.staining).append(
-                this.stainingUnctrlVocab).toHashCode();
-    }
+    }  
 
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("fileServerLocation", this.fileServerLocation).append("id", this.id)
-                .append("description", this.description).append("availability", this.availability).append("title",
-                        this.title).append("staining", this.staining).append("staining_unctrl_vocab",
-                        this.stainingUnctrlVocab).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getTitle() + " - " + this.getDescription();
+       return result;
+     }  
+     
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+     
 }

@@ -6,7 +6,6 @@
  */
 package gov.nih.nci.camod.domain;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -36,29 +35,17 @@ public class Organization extends Party {
     }
 
     /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Organization)) {
-            return false;
-        }
-        Organization rhs = (Organization) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.name, rhs.name).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1894703301, -1280846395).appendSuper(super.hashCode()).append(this.name)
-                .toHashCode();
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("name", this.name).append("id", this.getId()).append(
-                "contactInfoCollection", this.getContactInfoCollection()).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getName();   
+       return result;
+     }           
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

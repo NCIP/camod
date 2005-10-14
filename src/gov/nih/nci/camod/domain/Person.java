@@ -6,7 +6,6 @@
  */
 package gov.nih.nci.camod.domain;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -96,34 +95,18 @@ public class Person extends Party {
         this.isPrincipalInvestigtor = inIsPrincipalInvestigtor;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Person)) {
-            return false;
-        }
-        Person rhs = (Person) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.username, rhs.username).append(
-                this.middleName, rhs.middleName).append(this.firstName, rhs.firstName).append(this.lastName,
-                rhs.lastName).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1768193905, -237999699).appendSuper(super.hashCode()).append(this.username).append(
-                this.middleName).append(this.firstName).append(this.lastName).toHashCode();
-    }
-
-    /**
+     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("middleName", this.middleName).append("id", this.getId()).append(
-                "lastName", this.lastName).append("username", this.username).append("contactInfoCollection",
-                this.getContactInfoCollection()).append("firstName", this.firstName).append("roleCollection",
-                this.getRoleCollection()).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getUsername();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

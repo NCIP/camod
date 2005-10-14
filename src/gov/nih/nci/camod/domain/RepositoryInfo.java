@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,26 +18,11 @@ import org.apache.commons.lang.builder.*;
 public class RepositoryInfo extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3258705453799404851L;
-
-    private Long id;
+    
     private Long inTheRepository;
     private String sentEmailContent;
     private Long suggestSubmission;
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+ 
 
     /**
      * @return Returns the inTheRepository.
@@ -85,33 +69,18 @@ public class RepositoryInfo extends BaseObject implements Serializable {
         this.suggestSubmission = suggestSubmission;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof RepositoryInfo)) {
-            return false;
-        }
-        RepositoryInfo rhs = (RepositoryInfo) object;
-        return new EqualsBuilder().append(this.inTheRepository, rhs.inTheRepository).append(this.sentEmailContent,
-                rhs.sentEmailContent).append(this.suggestSubmission, rhs.suggestSubmission).append(this.id, rhs.id)
-                .isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(2091782299, 1949449931).append(this.inTheRepository).append(this.sentEmailContent)
-                .append(this.suggestSubmission).append(this.id).toHashCode();
-    }
-
-    /**
+     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("suggestSubmission", this.suggestSubmission).append("id", this.id)
-                .append("sentEmailContent", this.sentEmailContent).append("inTheRepository", this.inTheRepository)
-                .toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getSentEmailContent();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

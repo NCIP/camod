@@ -10,7 +10,6 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -441,47 +440,20 @@ public class AnimalModel extends AbstractCancerModel {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof AnimalModel)) {
-            return false;
-        }
-        AnimalModel rhs = (AnimalModel) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.spontaneousMutationCollection,
-                rhs.spontaneousMutationCollection).append(this.phenotype, rhs.phenotype).append(
-                this.animalAvailabilityCollection, rhs.animalAvailabilityCollection).append(this.repositoryInfo,
-                rhs.repositoryInfo).append(this.geneDeliveryCollection, rhs.geneDeliveryCollection).append(
-                this.histopathologyCollection, rhs.histopathologyCollection).append(this.therapyCollection,
-                rhs.therapyCollection).append(this.cellLineCollection, rhs.cellLineCollection).append(
-                this.imageCollection, rhs.imageCollection).append(this.isToolMouse, rhs.isToolMouse).append(this.url,
-                rhs.url).append(this.engineeredGeneCollection, rhs.engineeredGeneCollection).append(
-                this.xenograftCollection, rhs.xenograftCollection).append(this.environmentalFactorCollection,
-                rhs.environmentalFactorCollection).append(this.microArrayDataCollection, rhs.microArrayDataCollection)
-                .isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(795592963, -1409924013).appendSuper(super.hashCode()).append(
-                this.spontaneousMutationCollection).append(this.phenotype).append(this.animalAvailabilityCollection)
-                .append(this.repositoryInfo).append(this.geneDeliveryCollection).append(this.histopathologyCollection)
-                .append(this.therapyCollection).append(this.cellLineCollection).append(this.imageCollection).append(
-                        this.isToolMouse).append(this.url).append(this.engineeredGeneCollection).append(
-                        this.xenograftCollection).append(this.environmentalFactorCollection).append(
-                        this.microArrayDataCollection).toHashCode();
-    }
-
+  
     /**
      * @see java.lang.Object#toString()
-     */
+     */    
     public String toString() {
-        
-        System.out.println("In to string!!!!!");
-        return "Snarf";
+      String result = super.toString() + " - ";      
+      result += this.getUrl();                
+      return result;
+    }         
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+
 }

@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class GeneFunction extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259355453799404851L;
-
-    private Long id;
+    
     private String function;
     private EngineeredGene engineeredGene;
 
@@ -54,46 +52,21 @@ public class GeneFunction extends BaseObject implements Serializable {
         this.function = function;
     }
 
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof GeneFunction)) {
-            return false;
-        }
-        GeneFunction rhs = (GeneFunction) object;
-        return new EqualsBuilder().append(this.engineeredGene, rhs.engineeredGene).append(this.function, rhs.function)
-                .append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1837155983, 150113011).append(this.engineeredGene).append(this.function).append(
-                this.id).toHashCode();
-    }
+  
 
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("id", this.id).append("function", this.function).append(
-                "engineeredGene", this.engineeredGene).toString();
+       String result = super.toString() + " - ";      
+       result += this.getFunction();
+       return result;
+    }    
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+    
 }

@@ -9,7 +9,6 @@ package gov.nih.nci.camod.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -176,42 +175,20 @@ public class Agent extends EnvironmentalFactor {
     public void setSource(String source) {
         this.source = source;
     }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Agent)) {
-            return false;
-        }
-        Agent rhs = (Agent) object;
-        return new EqualsBuilder().appendSuper(super.equals(object)).append(this.comments, rhs.comments).append(
-                this.biologicalProcessCollection, rhs.biologicalProcessCollection).append(this.isCMAPAgent,
-                rhs.isCMAPAgent).append(this.nscNumber, rhs.nscNumber).append(this.agentTargetCollection,
-                rhs.agentTargetCollection).append(this.chemicalClassCollection, rhs.chemicalClassCollection).append(
-                this.evsId, rhs.evsId).append(this.source, rhs.source).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1778933711, 682933745).appendSuper(super.hashCode()).append(this.comments).append(
-                this.biologicalProcessCollection).append(this.isCMAPAgent).append(this.nscNumber).append(
-                this.agentTargetCollection).append(this.chemicalClassCollection).append(this.evsId).append(this.source)
-                .toHashCode();
-    }
+  
 
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("chemicalClassCollection", this.chemicalClassCollection).append("name",
-                this.getName()).append(
-                "source", this.source).append("id", this.getId()).append("comments", this.comments).append(
-                "agentTargetCollection", this.agentTargetCollection).append("CMAPAgent", this.getIsCMAPAgent()).append(
-                "casNumber", this.getCasNumber()).append("type", this.getType()).append("biologicalProcessCollection",
-                this.biologicalProcessCollection).append("evsId", this.evsId).append("nscNumber", this.nscNumber)
-                .toString();
+      String result = super.toString() + " - ";      
+      result += this.getEvsId();                
+      return result;
+    }       
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

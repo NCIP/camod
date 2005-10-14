@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class Conditionality extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259575453799404851L;
-
-    private Long id;
+    
     private String conditionedBy;
     private String description;
 
@@ -52,50 +50,18 @@ public class Conditionality extends BaseObject implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
+    } 
 
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Conditionality)) {
-            return false;
-        }
-        Conditionality rhs = (Conditionality) object;
-        return new EqualsBuilder().append(this.conditionedBy, rhs.conditionedBy).append(this.description,
-                rhs.description).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-394824585, -1813869519).append(this.conditionedBy).append(this.description).append(
-                this.id).toHashCode();
-    }
-
-    /**
-     * @see java.lang.Object#toString()
-     */
     public String toString() {
-        return "no";
-        
-        //new ToStringBuilder(this).append("conditionedBy", this.conditionedBy).append("id", this.id).append(
-        //        "description", this.description).toString();
+       String result = super.toString() + " - ";      
+       result += this.getDescription();     
+       return result;
+     }    
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+    
 }

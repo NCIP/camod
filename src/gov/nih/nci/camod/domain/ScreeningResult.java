@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class ScreeningResult extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3258675453799404851L;
-
-    private Long id;
+    
     private String stage;
     private Float diffinh;
     private Float aveinh;
@@ -87,21 +85,7 @@ public class ScreeningResult extends BaseObject implements Serializable {
     public void setDiffinh(Float diffinh) {
         this.diffinh = diffinh;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+  
 
     /**
      * @return Returns the inhibitionRate.
@@ -133,33 +117,18 @@ public class ScreeningResult extends BaseObject implements Serializable {
         this.stage = stage;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof ScreeningResult)) {
-            return false;
-        }
-        ScreeningResult rhs = (ScreeningResult) object;
-        return new EqualsBuilder().append(this.agent, rhs.agent).append(this.diffinh, rhs.diffinh).append(this.aveinh,
-                rhs.aveinh).append(this.treatment, rhs.treatment).append(this.stage, rhs.stage).append(this.id, rhs.id)
-                .append(this.inhibitionRate, rhs.inhibitionRate).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-801918033, -2181113).append(this.agent).append(this.diffinh).append(this.aveinh)
-                .append(this.treatment).append(this.stage).append(this.id).append(this.inhibitionRate).toHashCode();
-    }
-
-    /**
+     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("aveinh", this.aveinh).append("inhibitionRate", this.inhibitionRate)
-                .append("id", this.id).append("agent", this.agent).append("diffinh", this.diffinh).append("stage",
-                        this.stage).append("treatment", this.treatment).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getStage();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

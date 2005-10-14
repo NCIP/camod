@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,25 +18,10 @@ import org.apache.commons.lang.builder.*;
 public class MutationIdentifier extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259135453799404851L;
-
-    private Long id;
+    
     private Long numberMGI;
 
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+  
     /**
      * @return Returns the numberMGI.
      */
@@ -53,28 +37,18 @@ public class MutationIdentifier extends BaseObject implements Serializable {
         this.numberMGI = numberMGI;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof MutationIdentifier)) {
-            return false;
-        }
-        MutationIdentifier rhs = (MutationIdentifier) object;
-        return new EqualsBuilder().append(this.numberMGI, rhs.numberMGI).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(642166741, 2129744149).append(this.numberMGI).append(this.id).toHashCode();
-    }
-
-    /**
+     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("id", this.id).append("numberMGI", this.numberMGI).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       if (this.getNumberMGI() != null) result += this.getNumberMGI();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

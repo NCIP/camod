@@ -8,7 +8,6 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -19,8 +18,7 @@ import org.apache.commons.lang.builder.*;
 public class Treatment extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3258485453799404851L;
-
-    private Long id;
+    
     private String regimen;
     private String dosage;
     private String administrativeRoute;
@@ -103,21 +101,7 @@ public class Treatment extends BaseObject implements Serializable {
         this.dosage = dosage;
     }
 
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+ 
     /**
      * @return Returns the regimen.
      */
@@ -134,35 +118,17 @@ public class Treatment extends BaseObject implements Serializable {
     }
 
     /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Treatment)) {
-            return false;
-        }
-        Treatment rhs = (Treatment) object;
-        return new EqualsBuilder().append(this.ageAtTreatment, rhs.ageAtTreatment).append(this.regimen, rhs.regimen)
-                .append(this.dosage, rhs.dosage).append(this.sexDistribution, rhs.sexDistribution).append(this.id,
-                        rhs.id).append(this.administrativeRoute, rhs.administrativeRoute).append(
-                        this.adminRouteUnctrlVocab, rhs.adminRouteUnctrlVocab).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1737623555, 1630365737).append(this.ageAtTreatment).append(this.regimen).append(
-                this.dosage).append(this.sexDistribution).append(this.id).append(this.administrativeRoute).append(
-                this.adminRouteUnctrlVocab).toHashCode();
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        return new ToStringBuilder(this).append("sexDistribution", this.sexDistribution).append("id", this.id).append(
-                "regimen", this.regimen).append("ageAtTreatment", this.ageAtTreatment).append("dosage", this.dosage)
-                .append("administrativeRoute", this.administrativeRoute).append("adminRoute_unctrl_vocab",
-                        this.adminRouteUnctrlVocab).toString();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getRegimen()+" - "+this.getDosage();
+       return result;
+     }  
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
 }

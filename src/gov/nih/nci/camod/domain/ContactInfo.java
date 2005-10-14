@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.*;
 
 /**
  * @author rajputs
@@ -21,8 +20,7 @@ import org.apache.commons.lang.builder.*;
 public class ContactInfo extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259535453799404851L;
-
-    private Long id;
+    
     private String city;
     private String state;
     private String address;
@@ -93,22 +91,7 @@ public class ContactInfo extends BaseObject implements Serializable {
     public void setFax(String fax) {
         this.fax = fax;
     }
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+  
     /**
      * @return Returns the institute.
      */
@@ -200,35 +183,18 @@ public class ContactInfo extends BaseObject implements Serializable {
     }
 
     /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof ContactInfo)) {
-            return false;
-        }
-        ContactInfo rhs = (ContactInfo) object;
-        return new EqualsBuilder().append(this.phone, rhs.phone).append(this.institute, rhs.institute).append(
-                this.address, rhs.address).append(this.email, rhs.email).append(this.lab, rhs.lab).append(this.state,
-                rhs.state).append(this.partyCollection, rhs.partyCollection).append(this.zip, rhs.zip).append(this.fax,
-                rhs.fax).append(this.city, rhs.city).append(this.id, rhs.id).isEquals();
-    }
-
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(1132890619, 1368783481).append(this.phone).append(this.institute).append(
-                this.address).append(this.email).append(this.lab).append(this.state).append(this.partyCollection)
-                .append(this.zip).append(this.fax).append(this.city).append(this.id).toHashCode();
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return new ToStringBuilder(this).append("state", this.state).append("phone", this.phone).append("id", this.id)
-                .append("partyCollection", this.partyCollection).append("institute", this.institute).append("email",
-                        this.email).append("address", this.address).append("lab", this.lab).append("fax", this.fax)
-                .append("zip", this.zip).append("city", this.city).toString();
+       String result = super.toString() + " - ";      
+       result += this.getAddress()+" - "+this.getCity()+", "+this.getState()+" "+this.getZip();     
+       return result;
+    }    
+    
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
+    
 }
