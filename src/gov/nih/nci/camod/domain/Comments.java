@@ -19,30 +19,14 @@ import org.apache.commons.lang.builder.*;
 public class Comments extends BaseObject implements Serializable, Curateable {
 
     private static final long serialVersionUID = 3259595453799404851L;
-
-    private Long id;
+    
     private String remark;
     private AbstractCancerModel cancerModel;
     private Availability availability;
     private ModelSection modelSection;
     private Person submitter;
     private String state;
-
-    /**
-     * @return Returns the id.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            The id to set.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+ 
     /**
      * @return Returns the name.
      */
@@ -133,35 +117,16 @@ public class Comments extends BaseObject implements Serializable, Curateable {
         this.submitter = submitter;
     }
 
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode() {
-        return new HashCodeBuilder(-1727118201, -1843324729).append(this.remark).append(this.cancerModel).append(
-                this.state).append(this.availability).append(this.modelSection).append(this.submitter).append(this.id)
-                .toHashCode();
+     public String toString() {
+       String result = super.toString() + " - ";      
+       result += this.getRemark(); 
+       return result;
+     }    
+     
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false;           
+      return true;
     }
-
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
-        return new ToStringBuilder(this).append("remark", this.remark).append("state", this.state).append(
-                "cancerModel", this.cancerModel).append("availability", this.availability).append("modelSection",
-                this.modelSection).append("submitter", this.submitter).append("id", this.id).toString();
-    }
-
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    public boolean equals(Object object) {
-        if (!(object instanceof Comments)) {
-            return false;
-        }
-        Comments rhs = (Comments) object;
-        return new EqualsBuilder().append(this.remark, rhs.remark).append(this.state, rhs.state).append(
-                this.cancerModel, rhs.cancerModel).append(this.availability, rhs.availability).append(
-                this.modelSection, rhs.modelSection).append(this.submitter, rhs.submitter).append(this.id, rhs.id)
-                .isEquals();
-    }
+     
 }
