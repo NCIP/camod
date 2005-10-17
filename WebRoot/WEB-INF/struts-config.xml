@@ -233,6 +233,10 @@
 			path="/jsp/login.jsp"></forward>
 		
 		<forward
+			name="viewLicense"
+			path="/jsp/viewLicense.jsp"></forward>
+			
+		<forward
 			name="loginMenu"
 			path="/jsp/loginMenu.jsp"></forward>
 		
