@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.43 2005-10-13 16:18:51 pandyas Exp $
+ * $Id: Constants.java,v 1.44 2005-10-17 13:25:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.43  2005/10/13 16:18:51  pandyas
+ * added constant for growth factor dose units
+ *
  * Revision 1.42  2005/10/11 20:51:12  schroedn
  * Added constant for ENGINEEREDTRANSGENE_LIST
  *
@@ -216,6 +219,9 @@ public class Constants {
 		public static final String BIOLOGICALPROCESSDROP = "BiologicalProcess.txt";
 
 		public static final String THERAPEUTICTARGETSDROP = "TherapeuticTargets.txt";
+		
+		// Used for user management
+		public static final String USERSDROP = "users.db";
 	}
 
 	/**
@@ -224,6 +230,8 @@ public class Constants {
 	public interface Parameters {
 
 		public static final String MODELID = "aModelID";
+		
+		public static final String PERSONID = "aPersonID";
 
 		public static final String MODELSECTIONNAME = "aModelSectionName";
 		
@@ -289,7 +297,13 @@ public class Constants {
 	 * Used for search results
 	 */
 	public static final String SEARCH_RESULTS = "searchResults";
-
+	
+	public static final String ADMIN_COMMENTS_SEARCH_RESULTS = "adminCommentsSearchResults";
+	
+	public static final String ADMIN_MODEL_SEARCH_RESULTS = "adminModelSearchResults";
+	
+	public static final String ADMIN_ROLES_SEARCH_RESULTS = "adminRolesSearchResults";
+	
 	public static final String TRANSGENE_COLL = "transgeneColl";
 
 	public static final String GENOMIC_SEG_COLL = "genomicSegColl";
@@ -394,6 +408,12 @@ public class Constants {
 		 */
 		public interface Roles {
 
+			/**
+			 * A constant that defines the submitter role
+			 */
+			public static final String ALL = "All";
+
+			
 			/**
 			 * A constant that defines the submitter role
 			 */
