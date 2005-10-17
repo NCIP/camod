@@ -21,6 +21,8 @@ public interface PersonManager {
     public Person get(String id) throws Exception;
 
     public Person getByUsername(String inUsername) throws Exception;
+    
+    public List getByRole(String inRole) throws Exception;
 
     public void remove(String id) throws Exception;
 

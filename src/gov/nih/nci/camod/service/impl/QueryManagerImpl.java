@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.15 2005-10-12 17:24:23 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.16 2005-10-17 13:12:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/10/12 17:24:23  georgeda
+ * Get species only from approved models
+ *
  * Revision 1.14  2005/10/11 18:15:10  georgeda
  * More comment changes
  *
@@ -38,6 +41,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Comments;
@@ -249,6 +253,55 @@ public class QueryManagerImpl extends BaseManager {
         return theList;
     }
 
+    /**
+     * Return the list of PI's sorted by last name
+     * 
+     * @return a sorted list of People objects
+     * @throws PersistenceException
+     */
+    public List getPeopleByRole(String inRole) throws PersistenceException {
+
+        log.trace("Entering QueryManagerImpl.getPeopleByRole");
+
+        String theHQLQuery = "from Person where username is not null " ;
+        
+        if (!inRole.equals(Constants.Admin.Roles.ALL))
+        {
+        	theHQLQuery += " AND party_id in (" + getPartyIdsForRole(inRole) + ") ";
+        }
+        
+        // Complete the query
+        theHQLQuery += " order by last_name asc";
+        
+        HQLParameter[] theParams = new HQLParameter[0];
+        List theList = Search.query(theHQLQuery, theParams);
+
+        log.debug("Found matching items: " + theList.size());
+
+        log.trace("Exiting QueryManagerImpl.getPeopleByRole");
+        return theList;
+    }
+    
+    /**
+     * Get the model id's for any model that has a histopathology with a parent
+     * histopathology
+     * 
+     * @return a list of matching model ids
+     * 
+     * @throws PersistenceException
+     */
+    private String getPartyIdsForRole(String inRole) throws PersistenceException {
+
+        String theSQLString = "SELECT distinct pr.party_id FROM party_role pr "
+                + "WHERE pr.role_id IN (SELECT role_id FROM role r "
+                + "     WHERE r.name = ?)";
+
+        Object[] theParams = new Object[1];
+        theParams[0] = inRole;
+        return getModelIds(theSQLString, theParams);
+
+    }
+    
     /**
      * Return the list of species associated with animal models
      * 
