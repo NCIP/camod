@@ -31,6 +31,10 @@
 		 <form-bean
 			name="chemicalDrugForm"
 		    type="gov.nih.nci.camod.webapp.form.ChemicalDrugForm"/>	
+		
+		 <form-bean
+			name="clinicalMarkerForm"
+		    type="gov.nih.nci.camod.webapp.form.ClinicalMarkerForm"/>
 		 
 		 <form-bean
 			name="commentsForm"
@@ -39,10 +43,18 @@
 		 <form-bean
 			name="commentsStateForm"
 		    type="gov.nih.nci.camod.webapp.form.CommentsStateForm"/>
-		 
-		 <form-bean
-			name="clinicalMarkerForm"
-		    type="gov.nih.nci.camod.webapp.form.ClinicalMarkerForm"/>
+		    
+		<form-bean
+			name="curationAssignmentForm"
+		    type="gov.nih.nci.camod.webapp.form.CurationAssignmentForm"/>
+
+		<form-bean
+			name="rolesAssignmentForm"
+		    type="gov.nih.nci.camod.webapp.form.RolesAssignmentForm"/>
+		    
+		<form-bean
+			name="editUserForm"
+		    type="gov.nih.nci.camod.webapp.form.EditUserForm"/>		
 		    
 		<form-bean
 			name="engineeredTransgeneForm"
@@ -91,10 +103,6 @@
 		<form-bean
 			name="modelCharacteristicsForm"
 		    type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
-		    
-		<form-bean
-			name="modelAssignmentForm"
-		    type="gov.nih.nci.camod.webapp.form.ModelAssignmentForm"/>
 		    
 		<form-bean
 			name="nutritionalFactorForm"
@@ -345,10 +353,6 @@
 			path="/jsp/zoomifyImage.jsp"></forward>
 		
 		<forward
-			name="adminCommentScreening"
-			path="/jsp/protected/adminCommentScreening.jsp"></forward>
-		
-		<forward
 			name="adminMenu"
 			path="/jsp/protected/adminMenu.jsp"></forward>
 				
@@ -509,15 +513,60 @@
    <action-mappings>
 
 		<action
-			path="/adminCommentScreening"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminCommentScreening.jsp" />
-		
-		<action
 			path="/adminUserSettings"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/adminUserSettings.jsp" />
-		
+
+		<action
+			path="/adminRoles"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminRoles.jsp" />
+
+		<action
+			path="/adminCommentsAssignment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminCommentsAssignment.jsp" />
+
+		<action
+			path="/adminModelsAssignment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminModelsAssignment.jsp" />
+
+		<action
+			path="/adminRolesAssignment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminRolesAssignment.jsp" />
+
+		<action
+			path="/adminEditUserRoles"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminEditUserRoles.jsp" />
+
+		<action
+			path="/adminEditUser"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminEditUser.jsp" />
+						
+		<action
+			path="/adminRolesAssignment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminRolesAssignment.jsp" />
+				
+		<action
+			path="/adminUserManagement"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminUserManagement.jsp" />
+					
+		<action
+			path="/searchAdvanced"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchAdvanced.jsp" />
+			
+		<action
+			path="/searchSimple"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchSimple.jsp" />
+			
 		<action
 			path="/subAdminMenu"
 			type="org.apache.struts.actions.ForwardAction"
@@ -544,6 +593,21 @@
 			parameter="/jsp/protected/submitCellLines.jsp" />
 		
 		<action
+			path="/submitChangeCommentState"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitChangeCommentState.jsp" />
+
+		<action
+			path="/submitChangeAnimalModelState"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitChangeAnimalModelState.jsp" />
+						
+		<action
+			path="/submitComment"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitComment.jsp" />
+			
+		<action
 			path="/submitChemicalDrug"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitChemicalDrug.jsp" />
@@ -552,11 +616,6 @@
 			path="/submitClinicalMarkers"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitClinicalMarkers.jsp" />
-		
-		<action
-			path="/submitComment"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitComment.jsp" />
 		
 		<action
 			path="/submitEngineeredTransgene"
@@ -1460,20 +1519,131 @@
          parameter="protected">	
          <forward 
     		name="next"
-    		path="/jsp/protected/adminRoles.jsp">
+    		path="/adminRoles.do">
     	 </forward>  	
      </action>
      
      <action 
          path="/AdminModelsAssignmentPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminModelsAssignmentPopulateAction"
-         name="modelAssignmentForm"
+         name="curationAssignmentForm"
          parameter="protected">	
          <forward
+            redirect="true"
 			name="next"
-			path="/jsp/protected/adminModelsAssignment.jsp">
+			path="/adminModelsAssignment.do">
 		</forward>
      </action>
+         
+     <action 
+         path="/AdminCommentsAssignmentPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.AdminCommentsAssignmentPopulateAction"
+         name="curationAssignmentForm"
+         parameter="protected">	
+         <forward
+            redirect="true"
+			name="next"
+			path="/adminCommentsAssignment.do">
+		</forward>
+     </action>
+     
+     <action 
+         path="/AdminRolesAssignmentPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.AdminRolesAssignmentPopulateAction"
+         name="rolesAssignmentForm"
+         parameter="protected">	
+         <forward
+            redirect="true"
+			name="next"
+			path="/adminRolesAssignment.do">
+		</forward>
+     </action>
+     
+     <action 
+         path="/AdminEditUserRolesPopulateAction"  
+         type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesPopulateAction" 
+         name="rolesAssignmentForm"
+         parameter="protected">   	
+         <forward 
+            redirect="true"
+    		name="next"
+    		path="/adminEditUserRoles.do">
+    	 </forward>  
+    	 <forward 
+    	    redirect="true"
+    		name="failure"
+    		path="/AdminRolesAssignmentPopulateAction.do">
+    	 </forward>	
+     </action>
+     
+     <action 
+         path="/AdminEditUserRolesAction"  
+         type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesAction" 
+         name="rolesAssignmentForm"
+         parameter="protected">   	
+         <forward 
+            redirect="true"
+    		name="next"
+    		path="/AdminRolesAssignmentPopulateAction.do">
+    	 </forward>  
+     </action>
+     
+     <action 
+         path="/AdminUserManagementPopulateAction"  
+         type="gov.nih.nci.camod.webapp.action.AdminUserManagementPopulateAction" 
+         name="editUserForm"
+         parameter="protected">   	
+         <forward 
+    		name="next"
+    		path="/adminUserManagement.do">
+    	 </forward>  
+    	 <forward 
+    		name="failure"
+    		path="/AdminRolesPopulateAction.do">
+    	 </forward>	
+     </action>
+     
+     <action 
+         path="/AdminEditUserRolesAction"  
+         type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesAction" 
+         name="rolesAssignmentForm"
+         parameter="protected">   	
+         <forward 
+    		name="next"
+    		path="/AdminRolesAssignmentPopulateAction.do">
+    	 </forward>  
+     </action>
+ 
+     <action 
+         path="/AdminEditUserPopulateAction"  
+         type="gov.nih.nci.camod.webapp.action.AdminEditUserPopulateAction" 
+         name="editUserForm"
+         parameter="protected">   	
+         <forward 
+    		name="next"
+    		path="/adminEditUser.do">
+    	 </forward>
+    	 <forward 
+    		name="failure"
+    		path="/AdminUserManagementPopulateAction.do">
+    	 </forward>  
+     </action>
+     <action 
+         path="/AdminEditUserAction"  
+         type="gov.nih.nci.camod.webapp.action.AdminEditUserAction" 
+         name="editUserForm"
+         parameter="protected">   	
+         <forward 
+            redirect="true"
+    		name="next"
+    		path="/AdminUserManagementPopulateAction.do">
+    	 </forward>
+    	 <forward 
+    		name="baddata"
+    		path="/adminEditUser.do">
+    	 </forward>  
+     </action>
+     
      
      <action 
          path="/ChangeAnimalModelToCompletePopulateAction"  
@@ -1481,7 +1651,7 @@
          parameter="protected">   	
          <forward 
     		name="next"
-    		path="/jsp/protected/submitOverview.jsp">
+    		path="/submitOverview.do">
     	 </forward>  	
      </action>
      <action 
@@ -1495,19 +1665,21 @@
     		redirect="true">
     	 </forward>  	
      </action>
+     
       <action 
          path="/ChangeAnimalModelStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
          parameter="protected">   	
          <forward 
     		name="next"
-    		path="/jsp/protected/submitChangeAnimalModelState.jsp">
+    		path="/submitChangeAnimalModelState.do">
     	 </forward>  
     	 <forward 
     		name="failure"
     		path="/AdminRolesPopulateAction.do">
     	 </forward>	
      </action>
+     
      <action 
          path="/ChangeAnimalModelStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
@@ -1518,13 +1690,14 @@
     		path="/AdminRolesPopulateAction.do">
     	 </forward>  	
      </action>
+     
 	 <action 
          path="/AddCommentsAction"  
          type="gov.nih.nci.camod.webapp.action.AddCommentsAction"
          name="commentsForm"
-         parameter="unprotected_method"
-         >   	
+         parameter="unprotected_method">   	
      </action>
+     
      <action 
          path="/AddCommentsPopulateAction"  
          type="gov.nih.nci.camod.webapp.action.AddCommentsPopulateAction"
@@ -1532,8 +1705,9 @@
          parameter="unprotected_method"
          >
          <forward 
+            redirect="true"
     		name="next"
-    		path="/jsp/protected/submitComment.jsp">
+    		path="/submitComment.do">
     	 </forward>  	
      </action>
 	 <action 
@@ -1553,10 +1727,12 @@
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStatePopulateAction" 
          parameter="protected">   	
          <forward 
+            redirect="true"
     		name="next"
-    		path="/jsp/protected/submitChangeCommentState.jsp">
+    		path="/submitChangeCommentState.do">
     	 </forward>  
     	 <forward 
+    	    redirect="true"
     		name="failure"
     		path="/AdminRolesPopulateAction.do">
     	 </forward>	
@@ -1615,7 +1791,7 @@
 			validate="false">	
 	    <forward
             name="next"
-            path="/jsp/searchSimple.jsp">
+            path="/searchSimple.do">
         </forward>	
     </action>
 
@@ -1638,7 +1814,7 @@
 			validate="false">	
 	    <forward
             name="next"
-            path="/jsp/searchAdvanced.jsp">
+            path="/searchAdvanced.do">
         </forward>	
     </action>       
     
