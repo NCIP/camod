@@ -1,14 +1,16 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserPopulateAction.java,v 1.1 2005-10-17 13:28:45 georgeda Exp $
+ * $Id: AdminEditUserPopulateAction.java,v 1.2 2005-10-17 16:30:24 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:28:45  georgeda
+ * Initial revision
+ *
  *
  */
 package gov.nih.nci.camod.webapp.action;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.webapp.form.EditUserForm;
@@ -16,11 +18,7 @@ import gov.nih.nci.camod.webapp.form.EditUserForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 /**
  * 
@@ -40,8 +38,6 @@ public class AdminEditUserPopulateAction extends BaseAction {
 		EditUserForm theForm = (EditUserForm) inForm;
 
 		String theAction = (String) inRequest.getParameter("action");
-		
-		inRequest.getSession().setAttribute(Constants.FORMDATA, theForm);
 
 		String theForward = "next";
 

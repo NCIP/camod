@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserAction.java,v 1.2 2005-10-17 13:55:34 georgeda Exp $
+ * $Id: AdminEditUserAction.java,v 1.3 2005-10-17 16:30:24 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/17 13:55:34  georgeda
+ * Handle cancel
+ *
  * Revision 1.1  2005/10/17 13:28:45  georgeda
  * Initial revision
  *
@@ -54,52 +57,50 @@ public class AdminEditUserAction extends BaseAction {
     String processEdit(EditUserForm inForm, HttpServletRequest inRequest) {
         String theForward = "next";
 
-        // The user didn't press the cancel button
-        if (!isCancelled(inRequest)) {
-            try {
+        try {
 
-                Person thePerson = PersonManagerSingleton.instance().get(inForm.getId());
+            Person thePerson = PersonManagerSingleton.instance().get(inForm.getId());
 
-                if (thePerson == null) {
-                    ActionMessages theMsg = new ActionMessages();
-                    theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-                    saveErrors(inRequest, theMsg);
-                    throw new IllegalArgumentException("Unknown userid: " + inForm.getId());
-                }
-
-                if (inForm.getUsername() != null) {
-                    Person theExistingPerson = PersonManagerSingleton.instance().getByUsername(inForm.getUsername());
-                    if (theExistingPerson != null && !theExistingPerson.equals(thePerson)) {
-                        ActionMessages theMsg = new ActionMessages();
-                        theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("admin.user.usernameexists"));
-                        saveErrors(inRequest, theMsg);
-
-                        throw new IllegalArgumentException("User with username: " + inForm.getUsername()
-                                + " already exists");
-                    }
-                }
-
-                thePerson.setLastName(inForm.getLastName());
-                thePerson.setFirstName(inForm.getFirstName());
-                thePerson.setUsername(inForm.getUsername());
-                thePerson.setIsPrincipalInvestigator(new Boolean(inForm.isPrincipalInvestigator()));
-
-                PersonManagerSingleton.instance().save(thePerson);
-
-            } catch (IllegalArgumentException e) {
-                theForward = "baddata";
-                log.error("Bad user data: ", e);
-            } catch (Exception e) {
-
-                log.error("Unable to get user: ", e);
-
-                // Encountered an error saving the model.
-                // created a new model successfully
+            if (thePerson == null) {
                 ActionMessages theMsg = new ActionMessages();
                 theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
                 saveErrors(inRequest, theMsg);
+                throw new IllegalArgumentException("Unknown userid: " + inForm.getId());
             }
+
+            if (inForm.getUsername() != null) {
+                Person theExistingPerson = PersonManagerSingleton.instance().getByUsername(inForm.getUsername());
+                if (theExistingPerson != null && !theExistingPerson.equals(thePerson)) {
+                    ActionMessages theMsg = new ActionMessages();
+                    theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("admin.user.usernameexists"));
+                    saveErrors(inRequest, theMsg);
+
+                    throw new IllegalArgumentException("User with username: " + inForm.getUsername()
+                            + " already exists");
+                }
+            }
+
+            thePerson.setLastName(inForm.getLastName());
+            thePerson.setFirstName(inForm.getFirstName());
+            thePerson.setUsername(inForm.getUsername());
+            thePerson.setIsPrincipalInvestigator(new Boolean(inForm.isPrincipalInvestigator()));
+
+            PersonManagerSingleton.instance().save(thePerson);
+
+        } catch (IllegalArgumentException e) {
+            theForward = "baddata";
+            log.error("Bad user data: ", e);
+        } catch (Exception e) {
+
+            log.error("Unable to get user: ", e);
+
+            // Encountered an error saving the model.
+            // created a new model successfully
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(inRequest, theMsg);
         }
+
         log.trace("Exiting execute");
 
         return theForward;
