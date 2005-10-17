@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: PersonManagerImpl.java,v 1.6 2005-10-11 18:13:36 georgeda Exp $
+ * $Id: PersonManagerImpl.java,v 1.7 2005-10-17 13:14:11 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/11 18:13:36  georgeda
+ * Return a null pointer if the username is null
+ *
  * Revision 1.5  2005/09/23 14:55:12  georgeda
  * Made SexDistribution a reference table
  *
@@ -13,13 +16,12 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.PersonManager;
-import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,16 +38,8 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      *                If an error occurrs fetching the users
      */
     public List getAll() throws Exception {
-        List persons = null;
-
-        try {
-            persons = Search.query(Person.class);
-        } catch (Exception e) {
-            log.error("Exception in getAll", e);
-            throw e;
-        }
-
-        return persons;
+    	log.trace("In PersonManagerImpl.getAll");
+    	return super.getAll(Person.class);
     }
 
     /**
@@ -60,19 +54,8 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      *                If an error occurrs fetching the user
      */
     public Person get(String id) throws Exception {
-        Person person = null;
-
-        try {
-            person = (Person) Search.queryById(Person.class, new Long(id));
-        } catch (PersistenceException pe) {
-            log.error("PersistenceException in get", pe);
-            throw pe;
-        } catch (Exception e) {
-            log.error("Exception in get", e);
-            throw e;
-        }
-
-        return person;
+    	log.trace("In PersonManagerImpl.get");
+    	return (Person) super.get(id, Person.class);
     }
 
     /**
@@ -119,6 +102,36 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
     }
 
     /**
+     * Get all people assigned to a certain role.
+     * 
+     * @param inRole
+     *            The role 
+     * 
+     * @returns a list of Person objects corresponding to the role
+     * 
+     * @exception Exception
+     *                If an error occurrs fetching the user
+     */
+    public List getByRole(String inRole) throws Exception {
+
+        List thePeople = new ArrayList();
+
+        if (inRole != null && inRole.length() > 0) {
+            try {
+                thePeople = QueryManagerSingleton.instance().getPeopleByRole(inRole);
+               
+            } catch (PersistenceException pe) {
+                log.error("PersistenceException in getByRole", pe);
+                throw pe;
+            } catch (Exception e) {
+                log.error("Exception in getByRole", e);
+                throw e;
+            }
+        }
+        return thePeople;
+    }
+    
+    /**
      * Save the person object
      * 
      * @param person
@@ -128,31 +141,8 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      *                If we're unable to save the person
      */
     public void save(Person person) throws Exception {
-
-        log.trace("Entering save");
-
-        try {
-
-            // Begin an transaction
-            HibernateUtil.beginTransaction();
-
-            // Save the object
-            Persist.save(person);
-
-            // Commit an transaction
-            HibernateUtil.commitTransaction();
-
-        } catch (Exception e) {
-
-            log.error("Exception in save", e);
-
-            // Rollback a transaction
-            HibernateUtil.rollbackTransaction();
-
-            throw e;
-        }
-
-        log.trace("Exiting save");
+    	log.trace("In PersonManagerImpl.save");
+    	super.save(person);
     }
 
     /**
@@ -165,22 +155,7 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      *                If it was unable to remove the person
      */
     public void remove(String id) throws Exception {
-        try {
-            // Begin an transaction
-            HibernateUtil.beginTransaction();
-
-            Persist.deleteById(Person.class, new Long(id));
-
-            // Commit an transaction
-            HibernateUtil.commitTransaction();
-
-        } catch (Exception e) {
-            log.error("Exception in getByUsername", e);
-
-            // Rollback a transaction
-            HibernateUtil.rollbackTransaction();
-
-            throw e;
-        }
+    	log.trace("In PersonManagerImpl.remove");
+        super.remove(id, Person.class);
     }
 }
