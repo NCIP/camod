@@ -17,17 +17,46 @@
 
 	<tr>
 		<td class="greyBox" height="20" colspan="3">
-                        The application accepts the submission of Affymetrix and Spotted Array Experiments.<br><br>
-                        * If you are submitting an Affymetrix experiment you can upload the various Affymetrix Files (*.dat, *.cel, *.chp, *.txt). All the data is stored in the MAGE-OM complaint caArray database and available for retrieval at a later time.<br><br>
-                        * Spotted Array Experiments must be accompanied by a Gene Array List (*.gal) file and a GenePix Results (*.gpr) file. Additional file formats will be added in response to community feedback. <br><br>
-                        <b>Microarray data is stored in the caArray portal. Follow these simple steps to upload micro-array data to caArray.</b>
+    The application accepts the submission of Affymetrix and Spotted Array Experiments.<br><br>
+    <ul style="list-style-type: square">
+    <li style="padding-bottom:8px">If you are submitting an Affymetrix experiment you can upload the various Affymetrix Files (*.dat, *.cel, *.chp, *.txt). All the data is stored in the MIAME complaint caArray database and available for retrieval at a later time.</li>
+    <li style="padding-bottom:8px">Spotted Array Experiments must be accompanied by a Gene Array List (*.gal) file and a GenePix Results (*.gpr) file. Additional file formats will be added in response to community feedback.</li>
+    </ul>
+    <b>Microarray data is stored in the caArray portal. Follow these simple steps to upload micro-array data to caArray.
+    <ol >
+    	<li style="padding-bottom:7px">Click <a href="http://caarraydb.nci.nih.gov/" target="_caArray">here</a> to login into caArray. A new browser window will be opened (please turn off any popup blockers for this site) <br/>
+    		If you do not have a login userId (or have forgotten your id), please follow the instructions on the caArray page to obtain an account.
+    	</li>
+    	<li style="padding-bottom:7px">
+    		Submit micro-array data by following the on-screen instructions. (refer to the caArray user guide if you need additional help)
+    	</li>
+    	<li style="padding-bottom:7px">
+    		Set the visibility of the micro-array experiment to "public".
+    	</li>
+    	<li style="padding-bottom:7px">
+    		When you are done completing the upload of micro-array data to caArray, please make a note of <br/>
+    		(a) The experiment name (b) The system generated "Experiment Id" (looks like 10007638)
+    	</li>
+    	<li style="padding-bottom:7px">
+    		Logout of the caArray application and close the caArray window.
+    	</li>
+    	<li style="padding-bottom:7px">
+    		Email caMOD development team (mailto:mmhcc-dev@list.nih.gov) requesting that the micro-array data be associated
+    		with your cancer model. Please include the micro-array experiment name(s) and the experiment Id(s) in your email.
+    	</li>
+    	<li style="padding-bottom:7px">
+    		The micro array data will be linked to your cancer model within 24 hours (excluding holidays). You will be notified 
+    		via email when this task is completed.
+    	</li>
+    </ol>
+    </b>
 		</td>
 	</tr>
 
 	<tr>
 		<td class="whiteBox" height="20" colspan="3">
-                        If your data is stored in another location enter the URL below <br><br>
-                       <input class="formFieldSized" type="text" name="field1" id="field1" size="30" />&nbsp;<input class="actionButton" type="submit" value="GO" /><br><br>
+                        <font size="-2">If your data is stored in another location enter the URL below <br><br>
+                       <input class="formFieldSized" type="text" name="field1" id="field1" size="30" />&nbsp;<input class="actionButton" type="submit" value="GO" /><br><br></font>
 		</td>
 	</tr>
 </TABLE>
