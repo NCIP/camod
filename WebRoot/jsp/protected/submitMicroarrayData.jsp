@@ -18,10 +18,9 @@
 	<tr>
 		<td class="greyBox" height="20" colspan="3">
                         The application accepts the submission of Affymetrix and Spotted Array Experiments.<br><br>
-                        * If you are submitting an Affymetrix experiment you can upload the various Affymetrix Files (*.dat, *.cel, *.chp, *.txt). The *.txt file is parsed and the data is then stored in the database. All other files are stored in the file system for retrieval at a later time.<br><br>
+                        * If you are submitting an Affymetrix experiment you can upload the various Affymetrix Files (*.dat, *.cel, *.chp, *.txt). All the data is stored in the MAGE-OM complaint caArray database and available for retrieval at a later time.<br><br>
                         * Spotted Array Experiments must be accompanied by a Gene Array List (*.gal) file and a GenePix Results (*.gpr) file. Additional file formats will be added in response to community feedback. <br><br>
-                        If you have all the required infomation, click on <input class="actionButton" type="submit" value="Proceed" />.<br><br>
-                        <b>Microarray data is stored in the Gene Expression Data Portal(Director's Challenge).</b>
+                        <b>Microarray data is stored in the caArray portal. Follow these simple steps to upload micro-array data to caArray.</b>
 		</td>
 	</tr>
 
