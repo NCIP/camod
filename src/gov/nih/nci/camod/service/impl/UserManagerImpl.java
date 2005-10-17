@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.7 2005-10-13 17:00:06 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.8 2005-10-17 13:10:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/13 17:00:06  georgeda
+ * Cleanup
+ *
  * Revision 1.6  2005/09/30 19:49:58  georgeda
  * Make sure user is in db
  *
@@ -21,15 +24,21 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.Role;
 import gov.nih.nci.camod.service.UserManager;
 import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.security.*;
+import gov.nih.nci.security.AuthenticationManager;
+import gov.nih.nci.security.AuthorizationManager;
+import gov.nih.nci.security.SecurityServiceProvider;
 import gov.nih.nci.security.authorization.domainobjects.User;
 import gov.nih.nci.security.exceptions.CSException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -196,6 +205,38 @@ public class UserManagerImpl extends BaseManager implements UserManager {
         log.trace("Exiting getEmailForUser");
 
         return theEmail;
+
+    }
+
+    /**
+     * Get an e-mail address for a user
+     * 
+     * @param inUsername
+     *            is the login name of the user
+     * 
+     * @return the list of users associated with the role
+     */
+    public ContactInfo getContactInformationForUser(String inUsername) {
+
+        log.trace("Entering getContactInformationForUser");
+
+        log.debug("Username: " + inUsername);
+
+        ContactInfo theContactInfo = new ContactInfo();
+
+        try {
+            User theCurrentUser = theAuthorizationMgr.getUser(inUsername);
+            theContactInfo.setInstitute(theCurrentUser.getOrganization());
+            theContactInfo.setEmail(theCurrentUser.getEmailId());
+            theContactInfo.setPhone(theCurrentUser.getPhoneNumber());
+
+        } catch (Exception e) {
+            log.warn("Could not fetch user from CSM", e);
+        }
+
+        log.trace("Exiting getEmailForUser");
+
+        return theContactInfo;
 
     }
 
