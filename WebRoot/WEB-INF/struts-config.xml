@@ -165,6 +165,10 @@
 			path="/jsp/error.jsp"></forward>
 		
 		<forward
+			name="noAccess"
+			path="/jsp/noAccess.jsp"></forward>
+			
+		<forward
 			name="evsTreeImage"
 			path="/jsp/evsTreeImage.jsp"></forward>
 		
@@ -547,11 +551,6 @@
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/adminEditUser.jsp" />
 						
-		<action
-			path="/adminRolesAssignment"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminRolesAssignment.jsp" />
-				
 		<action
 			path="/adminUserManagement"
 			type="org.apache.struts.actions.ForwardAction"
