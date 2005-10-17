@@ -19,13 +19,13 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Models Assignment</td>		
+		    <td class="formTitle" height="20" colspan="4">Roles Assignment</td>		
 		</tr>
-		<html:form action="AdminModelsAssignmentPopulateAction">
+		<html:form action="AdminRolesAssignmentPopulateAction">
 		    
 			    <td class=resultsBoxGreyNoEnd>			
-			        <html:select property="currentState">
-			            <html:options name="<%=Constants.FORMDATA%>" property="states"/>
+			        <html:select property="currentRole">
+			            <html:options name="<%=Constants.FORMDATA%>" property="roles"/>
 		            </html:select>
 			    </td>
 		    
@@ -41,8 +41,8 @@
 	 </TABLE>
 	<br>	
 
-    <c:if test="${not empty adminModelSearchResults}">
-	<display:table id="row" name="${sessionScope.adminModelSearchResults}"
+    <c:if test="${not empty adminRolesSearchResults}">
+	<display:table id="row" name="${sessionScope.adminRolesSearchResults}"
       pagesize = "15"
 	  cellpadding="5" 
 	  cellspacing="0" 
@@ -52,15 +52,19 @@
  	    <display:column title="No." >
  	        <c:out value="${row_rowNum}"/>
  	    </display:column>      
-		<display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" >
-			<c:out escapeXml="false" value="${row.modelDescriptor}"/>
+		<display:column href="/camod/AdminEditUserRolesPopulateAction.do?" paramId="<%=Constants.Parameters.PERSONID%>" paramProperty="id" title="User" >
+			<c:out escapeXml="false" value="${row.displayName}"/>
 		</display:column>
-		<display:column title="Submitter's Name">
-			<c:out escapeXml="false" value="${row.submitterName}"/>
+		<display:column title="Member Status">
+		    <c:forEach var="role" items="${row.roles}">
+		        <c:out value="${role}"/><br>
+		    </c:forEach>&nbsp
 		</display:column>     
-		<display:column title="Entered on">
-			<c:out value="${row.submittedDate}"/>
-		</display:column>	                   
+		<display:column title="Contact Information">
+			<c:out value="${row.contactInfo.institute}"/><br>
+			<c:out value="${row.contactInfo.email}"/><br>
+			<c:out value="${row.contactInfo.phone}"/><br>
+		</display:column>
 	</display:table>
 	</c:if>
 

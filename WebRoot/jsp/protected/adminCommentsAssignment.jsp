@@ -1,6 +1,13 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- setup some useful variables -->
+<% pageContext.setAttribute("modelIdTag", Parameters.MODELID); %>
+<% pageContext.setAttribute("modelSectionTag", Parameters.MODELSECTIONNAME); %>
+<% pageContext.setAttribute("commentsIdTag", Parameters.COMMENTSID); %>
+
+	   
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
@@ -19,9 +26,9 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Models Assignment</td>		
+		    <td class="formTitle" height="20" colspan="4">Comments Assignment</td>		
 		</tr>
-		<html:form action="AdminModelsAssignmentPopulateAction">
+		<html:form action="AdminCommentsAssignmentPopulateAction">
 		    
 			    <td class=resultsBoxGreyNoEnd>			
 			        <html:select property="currentState">
@@ -41,8 +48,8 @@
 	 </TABLE>
 	<br>	
 
-    <c:if test="${not empty adminModelSearchResults}">
-	<display:table id="row" name="${sessionScope.adminModelSearchResults}"
+    <c:if test="${not empty adminCommentsSearchResults}">
+	<display:table id="row" name="${sessionScope.adminCommentsSearchResults}"
       pagesize = "15"
 	  cellpadding="5" 
 	  cellspacing="0" 
@@ -52,8 +59,11 @@
  	    <display:column title="No." >
  	        <c:out value="${row_rowNum}"/>
  	    </display:column>      
-		<display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" >
-			<c:out escapeXml="false" value="${row.modelDescriptor}"/>
+ 	    				          
+ 	    <c:set var="uri" value="/camod/ViewModelSectionAction.do?${modelIdTag}=${row.modelId}&${modelSectionTag}=${row.modelSection}&${commentsIdTag}=${row.id}"/>
+ 
+		<display:column href="<%= (String) pageContext.getAttribute("uri") %>" title="Section/Model Descriptor" >
+			<c:out escapeXml="false" value="${row.modelSection}"/> - <c:out value="${row.modelDescriptor}"/>
 		</display:column>
 		<display:column title="Submitter's Name">
 			<c:out escapeXml="false" value="${row.submitterName}"/>
