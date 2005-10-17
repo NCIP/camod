@@ -6,6 +6,11 @@
  */
 package gov.nih.nci.camod.domain;
 
+import gov.nih.nci.camod.service.impl.UserManagerSingleton;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 /**
  * @author rajputs
@@ -13,12 +18,41 @@ package gov.nih.nci.camod.domain;
 public class Person extends Party {
 
     private static final long serialVersionUID = 3258795453799404851L;
+    
+    private final Log log = LogFactory.getLog(Person.class);
 
     private String firstName;
     private String middleName;
     private String lastName;
     private String username;
     private Boolean isPrincipalInvestigtor;
+
+    /**
+     * NOTE: the following two methods do NOT user the getXXX naming because it
+     * causes problems with the common persistence package
+     */
+    /**
+     * @return Returns the display name
+     */
+    public String displayName() {
+        return lastName + ", " + firstName;
+    }
+
+    /**
+     * @return Returns the e-mail address
+     */
+    public String emailAddress() {
+
+        String theEmailAddress = "";
+
+        try {
+            theEmailAddress = UserManagerSingleton.instance().getEmailForUser(username);
+        } catch (Exception e) {
+            log.error("Unable to get email address for user: " + username);
+        }
+
+        return theEmailAddress;
+    }
 
     /**
      * @return Returns the username.
@@ -95,18 +129,20 @@ public class Person extends Party {
         this.isPrincipalInvestigtor = inIsPrincipalInvestigtor;
     }
 
-     /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getUsername();
-       return result;
-     }  
-    
+    public String toString() {
+        String result = super.toString() + " - ";
+        result += this.getUsername();
+        return result;
+    }
+
     public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }
