@@ -139,6 +139,7 @@ public class AnimalModelPopulateAction extends BaseAction {
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, modelChar.getScientificName());
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP, "");
 
         request.getSession().setAttribute(Constants.FORMDATA, modelChar);
 
