@@ -32,12 +32,11 @@
                                       </tr>
                                       <tr>
                                           <td class="welcomeContent" valign="top">
-                                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                                              <a href="login.jsp"  onMouseOver="stm(Text[0],Style[0])" onMouseOut="htm()">Tool Tip Test 1</a>
-                                              <a href='javascript: rs("commentWin","submitComment.jsp",435,265);'>Comment Test</a>
-                                              <br>
-                                              Tag Test: <bean:message key="mainMenu.message"/> :Tag Test	<br>
-                                              Strut Tag Test: <camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />:tag test		    		                              
+<a href="/camod/SimpleSearchPopulateAction.do?unprotected_method=populate">Search Models</a>
+ - Query the Cancer Models database for models submitted by fellow researchers. Retrieve information about the making of models, their genetic description, histopathology, derived cell lines, associated images, carcinogenic agents, and therapeutic trials. Links to associated publications and other resources are provided.
+<br><br>
+<a href="/camod/ReturnUserModels.do?method=returnUserModels">Submit Models</a>
+ - Submit your model for human cancer here. Rodent models recapitulate many aspects of the genesis, progression, and clinical course of human cancers and are valuable resources to cancer researchers engaged in a variety of investigations
                                           </td>
                                       </tr>
                                   </table>	
