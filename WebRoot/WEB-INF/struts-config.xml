@@ -1700,7 +1700,6 @@
          parameter="unprotected_method"
          >
          <forward 
-            redirect="true"
     		name="next"
     		path="/submitComment.do">
     	 </forward>  	
