@@ -4,6 +4,7 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
+import gov.nih.nci.common.persistence.Search;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -157,6 +158,10 @@ public class NewDropdownUtil {
 
         else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP)) {
             theReturnList = getQueryOnlyInducedMutationAgentList(inRequest, inFilter);
+        }
+
+        else if (inDropdownKey.equals(Constants.Dropdowns.USERSDROP)) {
+            theReturnList = getUsersList(inRequest, inFilter);
         }
 
         else {
@@ -475,24 +480,17 @@ public class NewDropdownUtil {
     }
 
     /**
-     * Returns a list of all Graft Types
+     * Returns a list of all induced mutations
      * 
      * @return graftList
      */
-    private static List getInducedMutationList(HttpServletRequest inRequest) {
+    private static List getInducedMutationList(HttpServletRequest inRequest) throws Exception {
 
         // Get values for dropdown lists for Species, Strains
         InducedMutationManager inducedMutationManager = (InducedMutationManager) getContext(inRequest).getBean(
                 "inducedMutationManager");
 
-        List inducedMutationList = null;
-
-        try {
-            inducedMutationList = inducedMutationManager.getAll();
-        } catch (Exception e) {
-            // TODO: Add error log handler here
-            // log.error("Unable to getAll InducedMutations ", e);
-        }
+        List inducedMutationList = inducedMutationManager.getAll();
 
         List mutationList = new ArrayList();
         InducedMutation tmp;
@@ -515,4 +513,35 @@ public class NewDropdownUtil {
         Collections.sort(mutationList);
         return mutationList;
     }
+
+    
+    /**
+     * Returns a list of all users
+     * 
+     * @return list of users
+     * @throws Exception
+     */
+    private static List getUsersList(HttpServletRequest inRequest, String inAddBlank) throws Exception {
+
+        log.trace("Entering NewDropdownUtil.getUsersList");
+
+        List thePersonList = Search.query(Person.class);
+
+        List theReturnList = new ArrayList();
+
+        // Add all of the display names
+        if (thePersonList != null) {
+            for (int i = 0; i < thePersonList.size(); i++) {
+                Person thePerson = (Person) thePersonList.get(i);
+
+                DropdownOption theOption = new DropdownOption(thePerson.displayName(), thePerson.getId().toString());
+                theReturnList.add(theOption);
+            }
+        }
+
+        log.trace("Exiting NewDropdownUtil.getUsersList");
+
+        return theReturnList;
+    }
+
 }
