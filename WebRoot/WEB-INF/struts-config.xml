@@ -1273,7 +1273,7 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="submitModelCharacteristics">   	
+	        input="submitModelCharacteristics">
     </action>
         
     <action path="/ReturnUserModels"
@@ -1721,7 +1721,6 @@
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStatePopulateAction" 
          parameter="protected">   	
          <forward 
-            redirect="true"
     		name="next"
     		path="/submitChangeCommentState.do">
     	 </forward>  
