@@ -53,12 +53,6 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td class="whiteBox" height="20" colspan="3">
-                        <font size="-2">If your data is stored in another location enter the URL below <br><br>
-                       <input class="formFieldSized" type="text" name="field1" id="field1" size="30" />&nbsp;<input class="actionButton" type="submit" value="GO" /><br><br></font>
-		</td>
-	</tr>
 </TABLE>
 
 <!-- -->
