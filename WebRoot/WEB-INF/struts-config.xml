@@ -165,10 +165,6 @@
 			path="/jsp/error.jsp"></forward>
 		
 		<forward
-			name="noAccess"
-			path="/jsp/noAccess.jsp"></forward>
-			
-		<forward
 			name="evsTreeImage"
 			path="/jsp/evsTreeImage.jsp"></forward>
 		
