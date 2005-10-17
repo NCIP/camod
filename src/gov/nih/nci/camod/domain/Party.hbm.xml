@@ -47,7 +47,7 @@
         	table="party_role"
         	inverse="false"
         	lazy="true" 
-        	cascade="all-delete-orphan">
+        	>
         	
         	<key column="party_id"/>
         	<many-to-many class="Role" 
