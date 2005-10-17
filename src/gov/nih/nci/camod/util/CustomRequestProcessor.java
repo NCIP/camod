@@ -6,15 +6,9 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.RequestProcessor;
+import org.apache.struts.action.*;
 import org.apache.struts.config.ForwardConfig;
 
 /**
@@ -26,122 +20,116 @@ import org.apache.struts.config.ForwardConfig;
  */
 public class CustomRequestProcessor extends RequestProcessor {
 
-	public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		log.trace("Entering process");
-		super.process(request, response);
-		log.trace("Exiting process");
-	}
+        log.trace("Entering process");
+        super.process(request, response);
+        log.trace("Exiting process");
+    }
 
-	protected ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response,
-			Action action, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
+    protected ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response,
+            Action action, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
 
-		log.trace("Entering processActionPerform");
+        log.trace("Entering processActionPerform");
 
-		// Check custom ActionMapping Parameter
-		if (mapping.getParameter().toString().equals("method") || mapping.getParameter().toString().equals("protected")) {
+        // Check custom ActionMapping Parameter
+        if (mapping.getParameter().toString().equals("method") || mapping.getParameter().toString().equals("protected")) {
 
-			HttpSession session = request.getSession();
-			String user = (String) session.getAttribute(Constants.CURRENTUSER);
+            HttpSession session = request.getSession();
+            String user = (String) session.getAttribute(Constants.CURRENTUSER);
 
-			if (user == null) {
-				log.info("User not authorized.  Sending to login page");
-				request.getSession().setAttribute(Constants.LOGINFAILED, "true");
-				return mapping.findForward("login");
-			}
-		}
+            if (user == null) {
+                log.info("User not authorized.  Sending to login page");
+                request.getSession().setAttribute(Constants.LOGINFAILED, "true");
+                return mapping.findForward("login");
+            }
+        }
 
-		// Print the forwards and mapping
-		String[] theForwards = mapping.findForwards();
-		for (int i = 0, j = theForwards.length; i < j; i++) {
-			log.info("Forward: " + theForwards[i]);
-		}
-		log.info("Mapping: " + mapping);
+        // Check to make sure the user has the correct privleges
+        String thePath = mapping.getPath();
 
-		// Process the action
-		ActionForward theForward = super.processActionPerform(request, response, action, form, mapping);
-		log.info("ActionForward : " + theForward);
+        // Controlled access; check roles
+        if (thePath.indexOf("AdminUserManagementPopulateAction") != -1 
+                || thePath.indexOf("AdminRolesAssignment") != -1
+                || thePath.indexOf("adminEditUserRoles") != -1 
+                || thePath.indexOf("adminEditUser") != -1
+                || thePath.indexOf("adminUserManagement") != -1
+                || thePath.indexOf("AdminEditUserRolesPopulateAction") != -1
+                || thePath.indexOf("AdminEditUserRolesAction") != -1
+                || thePath.indexOf("AdminEditUserPopulateAction") != -1 
+                || thePath.indexOf("AdminEditUserAction") != -1) {
 
-		log.trace("Exiting processActionPerform");
-		return theForward;
-	}
+            List theRoles = (List) request.getSession().getAttribute(Constants.CURRENTUSERROLES);
 
-	protected ActionForward processException(HttpServletRequest request, HttpServletResponse response,
-			Exception exception, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
+            if (theRoles == null || !theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
+                log.debug("Accessing page: " + thePath + " without proper role");
 
-		log.trace("Entering processException");
+                return mapping.findForward("noAccess");
+            }
+        }
 
-		ActionForward theForward = super.processException(request, response, exception, form, mapping);
+        // Print the forwards and mapping
+        String[] theForwards = mapping.findForwards();
+        for (int i = 0, j = theForwards.length; i < j; i++) {
+            log.info("Forward: " + theForwards[i]);
+        }
+        log.info("Mapping: " + mapping);
 
-		log.info("ActionForward:" + theForward);
+        // Process the action
+        ActionForward theForward = super.processActionPerform(request, response, action, form, mapping);
+        log.info("ActionForward : " + theForward);
 
-		log.trace("Exiting processException");
-		return theForward;
-	}
+        log.trace("Exiting processActionPerform");
+        return theForward;
+    }
 
-	protected boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-			ActionMapping mapping) throws IOException, ServletException {
+    protected ActionForward processException(HttpServletRequest request, HttpServletResponse response,
+            Exception exception, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
 
-		log.trace("Entering processValidate");
+        log.trace("Entering processException");
 
-		boolean validate = super.processValidate(request, response, form, mapping);
-		log.info("Validate result: " + validate);
+        ActionForward theForward = super.processException(request, response, exception, form, mapping);
 
-		log.trace("Exiting validate");
+        log.info("ActionForward:" + theForward);
 
-		return validate;
-	}
+        log.trace("Exiting processException");
+        return theForward;
+    }
 
-	protected boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
-			throws IOException, ServletException {
+    protected boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+            ActionMapping mapping) throws IOException, ServletException {
 
-		log.trace("Entering processForward");
+        log.trace("Entering processValidate");
 
-		boolean forward = super.processForward(request, response, mapping);
-		log.info("Forward result: " + forward);
+        boolean validate = super.processValidate(request, response, form, mapping);
+        log.info("Validate result: " + validate);
 
-		log.trace("Exiting processForward");
+        log.trace("Exiting validate");
 
-		return forward;
-	}
+        return validate;
+    }
 
-	protected void processForwardConfig(HttpServletRequest request, HttpServletResponse response, ForwardConfig config)
-			throws IOException, ServletException {
+    protected boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
+            throws IOException, ServletException {
 
-		log.trace("Entering processForwardConfig");
+        log.trace("Entering processForward");
 
-		super.processForwardConfig(request, response, config);
+        boolean forward = super.processForward(request, response, mapping);
+        log.info("Forward result: " + forward);
 
-		log.info("The ForwardConfig: " + config);
-		log.trace("Exiting processForwardConfig");
-	}
+        log.trace("Exiting processForward");
 
-	protected boolean processRoles(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
-			throws IOException, ServletException {
+        return forward;
+    }
 
-		log.trace("Entering processRoles");
+    protected void processForwardConfig(HttpServletRequest request, HttpServletResponse response, ForwardConfig config)
+            throws IOException, ServletException {
 
-		String thePath = mapping.getPath();
+        log.trace("Entering processForwardConfig");
 
-		boolean roles = true;
+        super.processForwardConfig(request, response, config);
 
-		// Controlled access; check roles
-		if (thePath.indexOf("AdminUserManagement") != -1 || thePath.indexOf("AdminRolesAssignment") != -1) {
-
-			List theRoles = (List) request.getSession().getAttribute(Constants.CURRENTUSERROLES);
-
-			if (theRoles == null || !theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
-				log.debug("Accessing page: " + thePath + " without proper role");
-				roles = false;
-			}
-		}
-
-		roles = (roles && super.processRoles(request, response, mapping));
-
-		log.info("Roles result: " + roles);
-
-		log.trace("Exiting processRoles");
-
-		return roles;
-	}
+        log.info("The ForwardConfig: " + config);
+        log.trace("Exiting processForwardConfig");
+    }
 }
