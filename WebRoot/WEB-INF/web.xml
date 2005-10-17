@@ -125,7 +125,7 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>60</session-timeout>
 	</session-config>
 
 <!--  replace the following lines with a new script that will cache NCI Thesaurus
