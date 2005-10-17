@@ -21,6 +21,7 @@ public class LogoutAction extends BaseAction {
 		System.out.println( "<LogoutAction execute> Logging Off" );
 		
 		request.getSession().setAttribute( "camod.loggedon.username", null );
+		request.getSession().invalidate();
 		return mapping.findForward( "loggedOut" );
 	}
 
