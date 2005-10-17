@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminModelsAssignmentPopulateAction.java,v 1.3 2005-10-17 13:29:12 georgeda Exp $
+ * $Id: AdminModelsAssignmentPopulateAction.java,v 1.4 2005-10-17 18:20:08 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/17 13:29:12  georgeda
+ * Updates
+ *
  * Revision 1.2  2005/10/10 14:10:48  georgeda
  * Changes for comment curation
  *
@@ -22,17 +25,12 @@ import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.webapp.form.CurationAssignmentForm;
 import gov.nih.nci.common.persistence.Search;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 /**
  * 
@@ -42,54 +40,56 @@ import org.apache.struts.action.ActionMessages;
  */
 public class AdminModelsAssignmentPopulateAction extends BaseAction {
 
-	/**
-	 * Action used to populate the various admin lists for the curation process
-	 */
-	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
-			HttpServletResponse inResponse) throws Exception {
+    /**
+     * Action used to populate the various admin lists for the curation process
+     */
+    public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
+            HttpServletResponse inResponse) throws Exception {
 
-		log.trace("Entering execute");
+        log.trace("Entering execute");
 
-		// Get the curation manager workflow XML
-		CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath("/")
-				+ Constants.Admin.MODEL_CURATION_WORKFLOW);
+        // Get the curation manager workflow XML
+        CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath("/")
+                + Constants.Admin.MODEL_CURATION_WORKFLOW);
 
-		CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
-		theForm.setStates(theCurationManager.getAllStateNames());
+        CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
+        theForm.setStates(theCurationManager.getAllStateNames());
 
-		inRequest.getSession().setAttribute(Constants.FORMDATA, theForm);
+        inRequest.getSession().setAttribute(Constants.FORMDATA, theForm);
 
-		if (theForm.getCurrentState() != null) {
-			try {
-				AnimalModel theQBEModel = new AnimalModel();
-				theQBEModel.setState(theForm.getCurrentState());
+        if (theForm.getCurrentState() != null) {
+            try {
+                AnimalModel theQBEModel = new AnimalModel();
+                theQBEModel.setState(theForm.getCurrentState());
 
-				// Get the models
-				List theModels = Search.query(theQBEModel);
+                // Get the models
+                List theModels = Search.query(theQBEModel);
 
-				// Create a display list
-		        List theDisplayList = new ArrayList();
+                // Create a display list
+                List theDisplayList = new ArrayList();
 
-		        // Add AnimalModel DTO's so that the paganation works quickly
-		        for (int i = 0, j = theModels.size(); i < j; i++) {
-		            AnimalModel theAnimalModel = (AnimalModel) theModels.get(i);
-		            theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
-		        }
-		       
-		        inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_SEARCH_RESULTS, theDisplayList);
-			} catch (Exception e) {
-				log.error("Unable to get models for state: " + theForm.getCurrentState());
+                // Add AnimalModel DTO's so that the paganation works quickly
+                for (int i = 0, j = theModels.size(); i < j; i++) {
+                    AnimalModel theAnimalModel = (AnimalModel) theModels.get(i);
+                    theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
+                }
 
-				// Encountered an error saving the model.
-				// created a new model successfully
-				ActionMessages theMsg = new ActionMessages();
-				theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-				saveErrors(inRequest, theMsg);
-			}
-		}
+                Collections.sort(theDisplayList);
 
-		log.trace("Exiting execute");
+                inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_SEARCH_RESULTS, theDisplayList);
+            } catch (Exception e) {
+                log.error("Unable to get models for state: " + theForm.getCurrentState());
 
-		return inMapping.findForward("next");
-	}
+                // Encountered an error saving the model.
+                // created a new model successfully
+                ActionMessages theMsg = new ActionMessages();
+                theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+                saveErrors(inRequest, theMsg);
+            }
+        }
+
+        log.trace("Exiting execute");
+
+        return inMapping.findForward("next");
+    }
 }
