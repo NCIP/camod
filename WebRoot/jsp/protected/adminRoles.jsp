@@ -70,7 +70,7 @@
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
 				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 	                        </html:link>
 			                <td class="resultsBoxWhiteNoSides" width="25" >
 				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
@@ -106,7 +106,7 @@
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
 				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
 				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
@@ -141,7 +141,7 @@
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
 				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 		                    <td class="resultsBoxWhiteNoStart" width="25" >
 				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_EDITOR %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
@@ -171,7 +171,7 @@
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
 				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
 				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
@@ -208,7 +208,7 @@
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
 				            <html:link action="ViewModelAction.do?unprotected_method=populateModelCharacteristics" paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id" >
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><bean:write name="model" property="modelDescriptor" />
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
 				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_SCREENER %>" 
@@ -243,7 +243,7 @@
 				            <c:set var="uri" value="ViewModelSectionAction.do?${modelIdTag}=${comments.cancerModel.id}&${modelSectionTag}=${comments.modelSection.name}&${commentsIdTag}=${comments.id}"/>
 				            <a href="<c:out value="${uri}"/>">
 				            
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out value="${comments.cancerModel.modelDescriptor}"/>
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out escapeXml="false" value="${comments.cancerModel.modelDescriptor}"/>
 				            </a>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
 				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?event=${approve}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
