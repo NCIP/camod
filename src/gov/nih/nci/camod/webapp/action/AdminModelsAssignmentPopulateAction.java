@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminModelsAssignmentPopulateAction.java,v 1.2 2005-10-10 14:10:48 georgeda Exp $
+ * $Id: AdminModelsAssignmentPopulateAction.java,v 1.3 2005-10-17 13:29:12 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/10 14:10:48  georgeda
+ * Changes for comment curation
+ *
  * Revision 1.1  2005/09/19 19:53:51  georgeda
  * New model assignment functionality
  *
@@ -13,11 +16,13 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.AnimalModelSearchResult;
 import gov.nih.nci.camod.service.CurationManager;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
-import gov.nih.nci.camod.webapp.form.ModelAssignmentForm;
+import gov.nih.nci.camod.webapp.form.CurationAssignmentForm;
 import gov.nih.nci.common.persistence.Search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,18 +54,29 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 		CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath("/")
 				+ Constants.Admin.MODEL_CURATION_WORKFLOW);
 
-		ModelAssignmentForm theForm = (ModelAssignmentForm) inForm;
+		CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
 		theForm.setStates(theCurationManager.getAllStateNames());
 
-		inRequest.setAttribute(Constants.FORMDATA, theForm);
+		inRequest.getSession().setAttribute(Constants.FORMDATA, theForm);
 
 		if (theForm.getCurrentState() != null) {
 			try {
 				AnimalModel theQBEModel = new AnimalModel();
 				theQBEModel.setState(theForm.getCurrentState());
 
+				// Get the models
 				List theModels = Search.query(theQBEModel);
-				inRequest.setAttribute("models", theModels);
+
+				// Create a display list
+		        List theDisplayList = new ArrayList();
+
+		        // Add AnimalModel DTO's so that the paganation works quickly
+		        for (int i = 0, j = theModels.size(); i < j; i++) {
+		            AnimalModel theAnimalModel = (AnimalModel) theModels.get(i);
+		            theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
+		        }
+		       
+		        inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_SEARCH_RESULTS, theDisplayList);
 			} catch (Exception e) {
 				log.error("Unable to get models for state: " + theForm.getCurrentState());
 

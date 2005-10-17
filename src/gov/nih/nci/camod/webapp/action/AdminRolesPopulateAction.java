@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesPopulateAction.java,v 1.11 2005-10-10 14:11:25 georgeda Exp $
+ * $Id: AdminRolesPopulateAction.java,v 1.12 2005-10-17 13:29:12 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/10 14:11:25  georgeda
+ * Changes for comment curation and performance improvement
+ *
  * Revision 1.10  2005/09/27 16:48:53  georgeda
  * Cleaned up comment
  *
@@ -117,7 +120,6 @@ public class AdminRolesPopulateAction extends BaseAction {
 			if (theList.size() > 0) {
 				inRequest.setAttribute(inKey, theList);
 			}
-			System.out.println("Total comments for state: " + inState + " size: " + theList.size());
 
 			log.debug("Total comments for state: " + inState + " size: " + theList.size());
 
@@ -144,7 +146,7 @@ public class AdminRolesPopulateAction extends BaseAction {
 			// Add all the models by state for a user
 			List theList = inManager.getAllByStateForPerson(inState, inUser);
 			log.debug("Total models for state: " + inState + " size: " + theList.size());
-
+			
 			if (theList.size() > 0) {
 				inRequest.setAttribute(inKey, theList);
 			}
