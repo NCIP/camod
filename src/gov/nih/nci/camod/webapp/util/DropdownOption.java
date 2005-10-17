@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DropdownOption.java,v 1.1 2005-10-13 20:48:11 georgeda Exp $
+ * $Id: DropdownOption.java,v 1.2 2005-10-17 14:11:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/13 20:48:11  georgeda
+ * Correctly handle the PI
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.util;
@@ -13,7 +16,7 @@ package gov.nih.nci.camod.webapp.util;
  * the label
  * 
  */
-public class DropdownOption {
+public class DropdownOption implements Comparable {
 
     String myLabel;
     String myValue;
@@ -29,5 +32,12 @@ public class DropdownOption {
 
     public String getValue() {
         return myValue;
+    }
+
+    public int compareTo(Object inObject) {
+        
+        DropdownOption theOption = (DropdownOption) inObject;
+        
+        return this.myLabel.compareTo(theOption.myLabel);
     }
 }

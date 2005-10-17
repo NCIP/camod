@@ -541,6 +541,7 @@ public class NewDropdownUtil {
 
         log.trace("Exiting NewDropdownUtil.getUsersList");
 
+        Collections.sort(theReturnList);
         return theReturnList;
     }
 
