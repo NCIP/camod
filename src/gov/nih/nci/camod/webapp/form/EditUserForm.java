@@ -2,6 +2,10 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionMapping;
+
 public class EditUserForm extends BaseForm implements Serializable {
     
     private static final long serialVersionUID = 3257098753799404851L;
@@ -10,7 +14,7 @@ public class EditUserForm extends BaseForm implements Serializable {
 	protected String firstName;
 	protected String username;
 	protected String id;
-	protected boolean isPrincipalInvestigator;
+	protected boolean principalInvestigator;
 	
 	public String getFirstName() {
 		return firstName;
@@ -18,12 +22,7 @@ public class EditUserForm extends BaseForm implements Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public boolean isPrincipalInvestigator() {
-		return isPrincipalInvestigator;
-	}
-	public void setPrincipalInvestigator(boolean isPrincipalInvestigator) {
-		this.isPrincipalInvestigator = isPrincipalInvestigator;
-	}
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -42,4 +41,16 @@ public class EditUserForm extends BaseForm implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+    
+    public boolean isPrincipalInvestigator() {
+        return principalInvestigator;
+    }
+    
+    public void setPrincipalInvestigator(boolean principalInvestigator) {
+        this.principalInvestigator = principalInvestigator;
+    }
+    
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        this.principalInvestigator = false;
+    }
 }
