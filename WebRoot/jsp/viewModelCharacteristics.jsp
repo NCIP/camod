@@ -96,7 +96,7 @@
 			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
 				<c:out value="${mdl.url}"/>
-				</P>		
+				</P>&nbsp;
 			</td>
 		</tr>		
 		<tr>
@@ -115,20 +115,27 @@
 			</td>
 		</tr>		               
         
+        <% 
+            AnimalModel theModel = (AnimalModel) pageContext.getAttribute("mdl");
+            pageContext.setAttribute("emailAddress", theModel.getSubmitter().emailAddress());
+            pageContext.setAttribute("displayName", theModel.getSubmitter().displayName());
+        %>
 		<tr>
 			<td class="GreyBox" width="20%"><b>Submitted by</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				<a href="#">
-					TBD
-				</a>
+				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>
 			</td>
 		</tr>
 
+        <% 
+            pageContext.setAttribute("emailAddress", theModel.getPrincipalInvestigator().emailAddress());
+            pageContext.setAttribute("displayName", theModel.getPrincipalInvestigator().displayName());
+        %>
+                  
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Principal Investigator / Lab</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<a href=""> TBD
-				</a>
+				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>
 			</td>
 		</tr>		               
 
