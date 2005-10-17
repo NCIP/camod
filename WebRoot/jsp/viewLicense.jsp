@@ -31,7 +31,7 @@ By submitting data to the MMHCC Cancer Models Database, you are certifying that 
 <a href="mmhcc_disclaimer.html">Use Guidelines</a>
 by clicking on the buttons below.</P>
 
-<B><P align="justify">I HAVE READ AND UNDERSTOOD THE ABOVE PROVISIONS, AND SIGNIFY MY AGREEMENT BY <a href="index.jsp">CLICKING HERE</a>.</P>
+<B><P align="justify">I HAVE READ AND UNDERSTOOD THE ABOVE PROVISIONS, AND SIGNIFY MY AGREEMENT BY <a href="/camod/login.do">CLICKING HERE</a>.</P>
 
 </B>
 
