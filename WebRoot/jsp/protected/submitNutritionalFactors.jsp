@@ -5,6 +5,10 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.NutritionalFactorForm" %>	
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
 	
@@ -18,9 +22,9 @@
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
-	
-	function chkOther( control ) {
-		ideControl = document.NutritionalFactorForm.otherName;
+
+	function chkOtherName( control ) {
+		ideControl = document.forms[0].otherName;
 			
 		if( control.value == 'Other' )
 			ideControl.disabled = false;
@@ -29,20 +33,20 @@
 			ideControl.disabled = true;
 		}
 	}
-		
-</SCRIPT>
+	
+</script>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	
-<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins">
-	<tr><td>
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center">
-		<tr>
-			<html:errors/>
-			<td class="formMessage" colspan="3">* indicates a required field</td>
-		</tr>
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	
+	<tr>
+		<td class="formMessage" colspan="3">* indicates a required field</td>
+	</tr>
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Nutritional Factor</td>
@@ -58,23 +62,26 @@
 			<br>
 			<html:form action="<%= actionName %>" focus="name">			 
 			
-			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOther( this );">												
+			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOtherName( this );">												
+			
 				<html:options name="<%= Dropdowns.NUTRITIONFACTORDROP %>"/>					
-			</html:select>
+			</html:select>	
 		</td>
 	</tr>
 
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Nutritional Factors:</label></td>
-			<td class="formField">					
-					<html:text styleClass="formFieldSized" size="30" property="otherName" name="formdata"  disabled="true"/>		
-			</td>
-		</tr>
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Other Nutritional Factors:</label></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="otherName"  size="30" name="formdata" />
+		</td>
+	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Dose:</label></td>
+		<td class="formLabel"><label for="field1">Dose:</label>
+		<camod:cshelp key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" name="formdata"/>
 			<label for="field1">&nbsp;Units&nbsp;</label>
@@ -86,7 +93,9 @@
 
 	<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Treatment Regimen:</label></td>
+			<td class="formLabel"><label for="field1">Treatment Regimen:</label>
+			<camod:cshelp key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
+			</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
 		</td>
@@ -141,4 +150,18 @@
 	</td></tr></TABLE>
 </tr></td></TABLE>
 
+<SCRIPT>
+	function checkOthers()
+	{
+	    ideControl = document.forms[0].name;
+	    ideOtherControl = document.forms[0].otherName;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}
+	
+	checkOthers();
+</SCRIPT>
 <%@ include file="/jsp/footer.jsp" %>

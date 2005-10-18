@@ -58,6 +58,7 @@
 		  	    <a href="javascript:showTissueTree('cellLineForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
+				<INPUT name="organ" type="hidden"/>					
 				<INPUT name="organTissueName" type="hidden"/>
 		 		<INPUT name="organTissueCode" type="hidden"/>
 			</td>
