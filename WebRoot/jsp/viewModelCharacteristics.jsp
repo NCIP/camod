@@ -95,7 +95,7 @@
 			<td class="WhiteBox" width="20%"><b>Website for add. info</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
-				<c:out value="${mdl.url}"/>
+				<a href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>
 				</P>&nbsp;
 			</td>
 		</tr>		
@@ -117,8 +117,14 @@
         
         <% 
             AnimalModel theModel = (AnimalModel) pageContext.getAttribute("mdl");
-            pageContext.setAttribute("emailAddress", theModel.getSubmitter().emailAddress());
-            pageContext.setAttribute("displayName", theModel.getSubmitter().displayName());
+            if (theModel.getSubmitter() != null) {
+                pageContext.setAttribute("emailAddress", theModel.getSubmitter().emailAddress());
+                pageContext.setAttribute("displayName", theModel.getSubmitter().displayName());
+            }
+            else {
+                pageContext.setAttribute("emailAddress", "");
+                pageContext.setAttribute("displayName", "");
+            }
         %>
 		<tr>
 			<td class="GreyBox" width="20%"><b>Submitted by</b></td>
@@ -128,8 +134,14 @@
 		</tr>
 
         <% 
-            pageContext.setAttribute("emailAddress", theModel.getPrincipalInvestigator().emailAddress());
-            pageContext.setAttribute("displayName", theModel.getPrincipalInvestigator().displayName());
+            if (theModel.getPrincipalInvestigator() != null) {
+                pageContext.setAttribute("emailAddress", theModel.getPrincipalInvestigator().emailAddress());
+                pageContext.setAttribute("displayName", theModel.getPrincipalInvestigator().displayName());
+            }
+            else {
+                pageContext.setAttribute("emailAddress", "");
+                pageContext.setAttribute("displayName", "");
+            }
         %>
                   
 		<tr>
