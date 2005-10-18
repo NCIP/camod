@@ -53,27 +53,25 @@ public class ChemicalDrugPopulateAction extends BaseAction {
         if (ty.getTreatment().getAgeAtTreatment() != null) {
             chemicalDrugForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
         }
-
-        // Parse the doseUnit out of the Doseage
-        // only matches the .txt file
-        // List doseUnitList = (ArrayList) request.getSession().getAttribute(
-        // Constants.Dropdowns.DOSAGEUNITSDROP );
-        // String doseUnit = ty.getTreatment().getDosage();
-        // System.out.println( "Checking for doseUnit matches" );
-
-        /*
-         * for ( int i=0; i < doseUnitList.size(); i++ ) { String t = (String)
-         * doseUnitList.get(i); System.out.println("Unit=" + t);
-         * 
-         * if ( doseUnit.indexOf( t ) != -1 ) System.out.println( "found a
-         * match" ); }
-         */
-
+        
+        // Set the other name and/or selected name from database
+        if (ty.getAgent().getNameUnctrlVocab() != null) {
+        	chemicalDrugForm.setName(Constants.Dropdowns.OTHER_OPTION);
+        	chemicalDrugForm.setOtherName(ty.getAgent().getNameUnctrlVocab());
+        } else {
+        	chemicalDrugForm.setName(ty.getAgent().getName());
+        }          
+        
+        // Set the other flag or the selected administrative route from database
+        if (ty.getTreatment().getAdminRouteUnctrlVocab() != null) {
+            chemicalDrugForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);        	
+            chemicalDrugForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
+        } else {
+        	chemicalDrugForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+        }        
+        
         chemicalDrugForm.setDosage(ty.getTreatment().getDosage());
-        // chemicalDrugForm.setDoseUnit();
-        chemicalDrugForm.setName(ty.getAgent().getName());
         chemicalDrugForm.setRegimen(ty.getTreatment().getRegimen());
-        chemicalDrugForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
         chemicalDrugForm.setCASNumber(ty.getAgent().getCasNumber());
         
         if (ty.getAgent().getNscNumber() != null) {

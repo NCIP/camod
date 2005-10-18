@@ -53,14 +53,19 @@ public class RadiationPopulateAction extends BaseAction {
 				break;
 		}
 		
+        // Set the otherName and/or the selected name attribute
+        if (therapy.getAgent().getNameUnctrlVocab() != null) {
+        	radiationForm.setName(Constants.Dropdowns.OTHER_OPTION);        	
+        	radiationForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+        } else {
+        	radiationForm.setName(therapy.getAgent().getName());
+        }		
+		
 		radiationForm.setType(therapy.getTreatment().getSexDistribution().getType());
 		radiationForm.setDosage(therapy.getTreatment().getDosage());
 		radiationForm.setRegimen(therapy.getTreatment().getRegimen());
 		radiationForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
 		radiationForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-		
-		radiationForm.setName(therapy.getAgent().getName());
-		radiationForm.setRegimen(therapy.getTreatment().getRegimen());
 		
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );

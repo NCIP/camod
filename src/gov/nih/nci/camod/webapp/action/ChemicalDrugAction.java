@@ -65,9 +65,9 @@ public class ChemicalDrugAction extends BaseAction {
      */
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
-        }
+
+            log.debug("<ChemicalDrugAction> Entering 'edit' method");
+
 
         System.out.println("<ChemicalDrugAction edit> Entering... ");
 
@@ -122,7 +122,7 @@ public class ChemicalDrugAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         if (log.isDebugEnabled()) {
-            log.debug("Entering 'save' method");
+            log.debug("<ChemicalDrugAction> Entering 'save' method");
         }
 
         System.out.println("<ChemicalDrugAction save> Entering... ");

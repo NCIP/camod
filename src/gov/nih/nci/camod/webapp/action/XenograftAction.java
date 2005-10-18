@@ -66,7 +66,7 @@ public final class XenograftAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("<XenograftAction> Entering edit");
+        log.debug("<XenograftAction> Entering edit");
 
         // Create a form to edit
         XenograftForm xenograftForm = (XenograftForm) form;
@@ -120,7 +120,7 @@ public final class XenograftAction extends BaseAction {
             theForward = "failure";
         }
 
-        log.trace("<XenograftAction> Exiting edit");
+        log.debug("<XenograftAction> Exiting edit");
         return mapping.findForward(theForward);
     }
 

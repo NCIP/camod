@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.8 2005-10-11 16:45:47 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.9 2005-10-18 21:59:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/11 16:45:47  pandyas
+ * fixed tumor response dose unit retrieval that was not working
+ *
  * Revision 1.7  2005/10/06 19:30:22  pandyas
  * modified for Therapy screen
  *
@@ -13,6 +16,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.*;
@@ -34,7 +38,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(SurgeryData inSurgeryData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
         populateName(inSurgeryData, theTherapy, "Other");
@@ -58,7 +62,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void update(SurgeryData inSurgeryData, Therapy inTherapy) throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+        log.debug("In TherapyManagerImpl.update");
 
         populateName(inSurgeryData, inTherapy, "Other");
         populateTreatment(inSurgeryData, inTherapy);
@@ -77,7 +81,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(NutritionalFactorData inNutritionalFactorData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
         populateName(inNutritionalFactorData, theTherapy, "Nutrition");
@@ -102,7 +106,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void update(NutritionalFactorData inNutritionalFactorData, Therapy inTherapy) throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+        log.debug("In TherapyManagerImpl.update");
 
         populateName(inNutritionalFactorData, inTherapy, "Nutrition");
         populateTreatment(inNutritionalFactorData, inTherapy);
@@ -122,12 +126,14 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(HormoneData inHormoneData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
         populateName(inHormoneData, theTherapy, "Hormone");
+        populateAgeGender(inHormoneData, theTherapy);        
         populateTreatment(inHormoneData, theTherapy);
         populateDose(inHormoneData, theTherapy);
+        populateAdministration(inHormoneData, theTherapy);        
 
         return theTherapy;
     }
@@ -146,11 +152,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void update(HormoneData inHormoneData, Therapy inTherapy) throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+        log.debug("In TherapyManagerImpl.update");
 
         populateName(inHormoneData, inTherapy, "Hormone");
+        populateAgeGender(inHormoneData, inTherapy);        
         populateTreatment(inHormoneData, inTherapy);
         populateDose(inHormoneData, inTherapy);
+        populateAdministration(inHormoneData, inTherapy);         
 
         save(inTherapy);
     }
@@ -165,7 +173,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(GrowthFactorData inGrowthFactorData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
         populateName(inGrowthFactorData, theTherapy, "Growth Factor");
@@ -190,7 +198,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void update(GrowthFactorData inGrowthFactorData, Therapy inTherapy) throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+        log.debug("In TherapyManagerImpl.update");
 
         populateName(inGrowthFactorData, inTherapy, "Growth Factor");
         populateAgeGender(inGrowthFactorData, inTherapy);
@@ -210,7 +218,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(ViralTreatmentData inViralTreatmentData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
         populateName(inViralTreatmentData, theTherapy, "Viral");
@@ -236,7 +244,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void update(ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+        log.debug("In TherapyManagerImpl.update");
 
         populateName(inViralTreatmentData, inTherapy, "Viral");
         populateAgeGender(inViralTreatmentData, inTherapy);
@@ -257,7 +265,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(RadiationData inRadiationData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
 
@@ -284,7 +292,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void update(RadiationData inRadiationData, Therapy inTherapy) throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+        log.debug("In TherapyManagerImpl.update");
 
         populateName(inRadiationData, inTherapy, "Radiation");
         populateAgeGender(inRadiationData, inTherapy);
@@ -305,7 +313,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(EnvironmentalFactorData inEnvironmentalFactorData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
 
@@ -353,7 +361,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(ChemicalDrugData inChemicalDrugData) {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
 
@@ -382,7 +390,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void update(ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+        log.debug("In TherapyManagerImpl.update");
 
         populateName(inChemicalDrugData, inTherapy, "Chemical / Drug");
         populateAgeGender(inChemicalDrugData, inTherapy);
@@ -420,7 +428,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      *                when anything goes wrong.
      */
     public void save(Therapy therapy) throws Exception {
-        log.trace("In TherapyManagerImpl.save");
+        log.debug("In TherapyManagerImpl.save");
         super.save(therapy);
     }
 
@@ -434,7 +442,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      *                when anything goes wrong.
      */
     public void remove(String id) throws Exception {
-        log.trace("In TherapyManagerImpl.save");
+        log.debug("In TherapyManagerImpl.save");
         super.remove(id, Therapy.class);
     }
 
@@ -443,6 +451,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     // each interface implements
     /////////////////////////////////////////////////////////
     private void populateChemicalDrug(ChemicalDrugData inChemicalDrug, Therapy theTherapy) {
+    	
+        log.debug("In TherapyManagerImpl.populateChemicalDrug");    	
 
         // Agent IS-A an EnvironmentalFactor
         Agent theAgent = theTherapy.getAgent();
@@ -462,6 +472,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateAgeGender(AgeGenderData inAgeGender, Therapy theTherapy) {
+    	
+        log.debug("In TherapyManagerImpl.populateAgeGender");    	
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -481,6 +493,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateTreatment(TreatmentData inTreatment, Therapy theTherapy) {
+    	
+        log.debug("In TherapyManagerImpl.populateTreatment");     	
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -494,6 +508,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateAdministration(AdministrationData inAdministrationData, Therapy theTherapy) {
+    	
+        log.debug("In TherapyManagerImpl.populateAdministration");      	
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -501,9 +517,25 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             theTreatment = new Treatment();
             theTherapy.setTreatment(theTreatment);
         }
+        
+        /* Set other adminstrative route or selected adminstrative route */
+        //anytime admin route is other 
+        if (inAdministrationData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION)) {
+        	System.out.println("admin route equals other");
+            // TODO: Send an email
+            System.out.println("SENDING EMAIL STRAIN");
+            
+            theTreatment.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+            theTreatment.setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
+        //anytime admin route is not other, set uncontrolled vocab to null (covers editing)
+        } else {
+        	System.out.println("admin route not other");
+        	
+        	theTreatment.setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
+        	theTreatment.setAdminRouteUnctrlVocab(null);
+        }
 
-        theTreatment.setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
-
+        
         // Agent IS-A an EnvironmentalFactor
         Agent theAgent = theTherapy.getAgent();
         if (theAgent == null) {
@@ -525,6 +557,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateName(NameData inNameData, Therapy theTherapy, String inType) {
+    	
+        log.debug("In TherapyManagerImpl.populateName");     	
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -540,7 +574,24 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             theTherapy.setAgent(theAgent);
         }
         theAgent.setType(inType);
-        theAgent.setName(inNameData.getName());
+        
+        /* Set other name or selected chemical name */
+        //  anytime the name is "other"
+        if (inNameData.getName().equals(Constants.Dropdowns.OTHER_OPTION) ) {
+        	System.out.println("Name is other");        	
+
+            // TODO: Send an email
+            System.out.println("SENDING EMAIL STRAIN");
+            theAgent.setName(Constants.Dropdowns.OTHER_OPTION);
+            theAgent.setNameUnctrlVocab(inNameData.getOtherName());
+        }
+        //anytime name is not other, set uncontrolled vocab to null (covers editing)
+        else  {
+        	System.out.println("Name is not other");        	
+        	theAgent.setName(inNameData.getName());
+        	theAgent.setNameUnctrlVocab(null);
+        }        
+        
         theTherapy.setTherapeuticExperiment(new Boolean(false));
     }
     
@@ -555,7 +606,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public Therapy create(TherapyData inTherapyData) throws Exception {
 
-        log.trace("In TherapyManagerImpl.create");
+        log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
 
@@ -569,7 +620,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     public void update(TherapyData inTherapyData, Therapy inTherapy) 
     	throws Exception {
 
-        log.trace("In TherapyManagerImpl.update");
+    	log.debug("In TherapyManagerImpl.update");
 
         populateAgeGender(inTherapyData, inTherapy);
         populateDose(inTherapyData, inTherapy);

@@ -54,17 +54,28 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 			therapy = (Therapy)therapyList.get(i);
 			if ( therapy.getId().toString().equals( aTherapyID) )
 				break;
-		}
-		
+		}		
+
+        // Set the otherName and/or the selected name attribute
+        if (therapy.getAgent().getNameUnctrlVocab() != null) {
+        	envForm.setName(Constants.Dropdowns.OTHER_OPTION);        	
+        	envForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+        } else {
+        	envForm.setName(therapy.getAgent().getName());
+        }
         
+        // Set the other administrative route and/or the selected administrative route
+        if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+        	envForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);        	
+        	envForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+        } else {
+        	envForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+        }        
+		
 		envForm.setType(therapy.getTreatment().getSexDistribution().getType());
 		envForm.setDosage(therapy.getTreatment().getDosage());
-		envForm.setRegimen(therapy.getTreatment().getRegimen());
-		envForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
-		envForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-		
-		envForm.setName(therapy.getAgent().getName());
-		envForm.setRegimen(therapy.getTreatment().getRegimen());
+		envForm.setRegimen(therapy.getTreatment().getRegimen());		
+		envForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());		
 		
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );

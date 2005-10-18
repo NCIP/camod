@@ -68,6 +68,10 @@ public class CellLinePopulateAction  extends BaseAction {
 		cellLineForm.setOrganTissueCode( cell.getOrgan().getConceptCode());
 		System.out.println( "OrganTissueCode= " +cell.getOrgan().getConceptCode());
 
+		//do we need this?
+		cellLineForm.setOrganTissueName( cell.getOrgan().getName() );
+		System.out.println( "OrganTissueName= " + cell.getOrgan().getName()); 		
+
 		//Store the Form in session to be used by the JSP
 		request.getSession().setAttribute( Constants.FORMDATA, cellLineForm );
 		

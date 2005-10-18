@@ -22,57 +22,59 @@ import java.util.List;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class XenograftManagerImpl extends BaseManager implements XenograftManager {
+public class XenograftManagerImpl extends BaseManager implements
+		XenograftManager {
 
-    public List getAll() throws Exception {
-        log.trace("In XenograftManagerImpl.getAll");
-        return super.getAll(Xenograft.class);
-    }
+	public List getAll() throws Exception {
+		log.trace("In XenograftManagerImpl.getAll");
+		return super.getAll(Xenograft.class);
+	}
 
-    public Xenograft get(String id) throws Exception {
-        log.trace("In XenograftManagerImpl.get");
-        return (Xenograft) super.get(id, Xenograft.class);
-    }
+	public Xenograft get(String id) throws Exception {
+		log.trace("In XenograftManagerImpl.get");
+		return (Xenograft) super.get(id, Xenograft.class);
+	}
 
-    public void save(Xenograft xenograft) throws Exception {
-        log.trace("In XenograftManagerImpl.save");
-        super.save(xenograft);
-    }
+	public void save(Xenograft xenograft) throws Exception {
+		log.trace("In XenograftManagerImpl.save");
+		super.save(xenograft);
+	}
 
-    public void remove(String id) throws Exception {
-        log.trace("In XenograftManagerImpl.remove");
-        super.remove(id, Xenograft.class);
-    }
+	public void remove(String id) throws Exception {
+		log.trace("In XenograftManagerImpl.remove");
+		super.remove(id, Xenograft.class);
+	}
 
-    public Xenograft create(XenograftData inXenograftData, AnimalModel inAnimalModel) throws Exception {
+	public Xenograft create(XenograftData inXenograftData,
+			AnimalModel inAnimalModel) throws Exception {
 
-        log.trace("Entering XenograftManagerImpl.create");
+		log.debug("Entering XenograftManagerImpl.create");
 
-        Xenograft theXenograft = new Xenograft();
+		Xenograft theXenograft = new Xenograft();
 
-        log.trace("Exiting XenograftManagerImpl.create");
-        populateXenograft(inXenograftData, theXenograft, inAnimalModel);
+		log.trace("Exiting XenograftManagerImpl.create");
+		populateXenograft(inXenograftData, theXenograft, inAnimalModel);
 
-        return theXenograft;
-    }
+		return theXenograft;
+	}
 
-    public void update(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
-            throws Exception {
+	public void update(XenograftData inXenograftData, Xenograft inXenograft,
+			AnimalModel inAnimalModel) throws Exception {
 
-        log.trace("Entering XenograftManagerImpl.update");
-        log.debug("Updating XenograftData: " + inXenograft.getId());
+		log.debug("Entering XenograftManagerImpl.update");
+		log.debug("Updating XenograftData: " + inXenograft.getId());
 
-        // Populate w/ the new values and save
-        populateXenograft(inXenograftData, inXenograft, inAnimalModel);
-        save(inXenograft);
+		// Populate w/ the new values and save
+		populateXenograft(inXenograftData, inXenograft, inAnimalModel);
+		save(inXenograft);
 
-        log.trace("Exiting XenograftManagerImpl.update");
-    }
+		log.debug("Exiting XenograftManagerImpl.update");
+	}
 
-    private void populateXenograft(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
+private void populateXenograft(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
             throws Exception {
     	
-        log.trace("Entering populateXenograft");
+        log.debug("Entering populateXenograft");
 
         inXenograft.setName(inXenograftData.getName());
         inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
@@ -82,9 +84,9 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         inXenograft.setAtccNumber(inXenograftData.getATCCNumber());
         inXenograft.setCellAmount(inXenograftData.getCellAmount());
 
-        //Taxon theTaxon = new Taxon();
-        //theTaxon.setScientificName(inXenograftData.getHostScientificName());
-        //theTaxon.setEthnicityStrain(inXenograftData.getHostEthinicityStrain());
+        // Taxon theTaxon = new Taxon();
+        // theTaxon.setScientificName(inXenograftData.getHostScientificName());
+        // theTaxon.setEthnicityStrain(inXenograftData.getHostEthinicityStrain());
 
         // Find the matching taxon in the db and reuse it
         Taxon theTaxon = new Taxon();
@@ -130,26 +132,23 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                 }
             }
         }
-
-        // Graft Type
-        inXenograft.setGraftType(inXenograftData.getGraftType());
-
-        // Send an email when this happens
-        if (inXenograftData.getOtherGraftType() != null || inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION));
-        {
+        
+        //anytime the graft type is "other"
+        if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION) )   {
             // TODO: send an email
         	System.out.println("graft type equals other");
             System.out.println("SENDING EMAIL GRAFT");
 
             inXenograft.setGraftType(Constants.Dropdowns.OTHER_OPTION);
             inXenograft.setGraftTypeUnctrlVocab(inXenograftData.getOtherGraftType());
-        }
-        if (inXenograftData.getOtherGraftType() == null) 
-        {
-        	System.out.println("selected graft type from drop down");
+        }        
+        // anytime graft type is not other set uncontrolled vocab to null (covers editing)
+        else   {
+        	System.out.println("graft type not other");
         	inXenograft.setGraftType(inXenograftData.getGraftType());
-        }
+        	inXenograft.setGraftTypeUnctrlVocab(null);
+        } 
 
-        log.trace("Exiting populateXenograft");
+        log.debug("Exiting populateXenograft");
     }
 }

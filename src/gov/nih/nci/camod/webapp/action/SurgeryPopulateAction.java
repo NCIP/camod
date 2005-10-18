@@ -40,22 +40,27 @@ public class SurgeryPopulateAction extends BaseAction {
 		//retrieve the list of all therapies from the current animalModel
 		List therapyList = am.getTherapyCollection();
 		
-		Therapy ty = new Therapy();
+		Therapy therapy = new Therapy();
 		
 		//find the specific one we need
 		for ( int i=0; i<therapyList.size(); i++ )
 		{
-			ty = (Therapy)therapyList.get(i);
-			if ( ty.getId().toString().equals( aTherapyID) )
+			therapy = (Therapy)therapyList.get(i);
+			if ( therapy.getId().toString().equals( aTherapyID) )
 				break;
 		}
 		
-		//System.out.println( "sexDistro=" + ty.getTreatment().getSexDistribution().getType() );
-		surgeryForm.setType( ty.getTreatment().getSexDistribution().getType() );
-		surgeryForm.setAgeAtTreatment( ty.getTreatment().getAgeAtTreatment() );
-		//surgeryForm.setAgeUnit();
-		surgeryForm.setName( ty.getAgent().getName() );
-		surgeryForm.setRegimen(ty.getTreatment().getRegimen() );
+        // Set the otherName and/or the selected name attribute
+        if (therapy.getAgent().getNameUnctrlVocab() != null) {
+        	surgeryForm.setName(Constants.Dropdowns.OTHER_OPTION);        	
+        	surgeryForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+        } else {
+        	surgeryForm.setName(therapy.getAgent().getName());
+        }		
+		
+		surgeryForm.setType( therapy.getTreatment().getSexDistribution().getType() );
+		surgeryForm.setAgeAtTreatment( therapy.getTreatment().getAgeAtTreatment() );
+		surgeryForm.setRegimen(therapy.getTreatment().getRegimen() );
 		
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );

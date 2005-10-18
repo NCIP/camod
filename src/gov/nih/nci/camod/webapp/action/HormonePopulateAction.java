@@ -40,19 +40,37 @@ public class HormonePopulateAction extends BaseAction {
 		//retrieve the list of all therapies from the current animalModel
 		List therapyList = am.getTherapyCollection();
 		
-		Therapy ty = new Therapy();
+		Therapy therapy = new Therapy();
 		
 		//find the specific one we need
 		for ( int i=0; i<therapyList.size(); i++ )
 		{
-			ty = (Therapy)therapyList.get(i);
-			if ( ty.getId().toString().equals( aTherapyID) )
+			therapy = (Therapy)therapyList.get(i);
+			if ( therapy.getId().toString().equals( aTherapyID) )
 				break;
 		}
 		
-		hormoneForm.setDosage( ty.getTreatment().getDosage() );
-		hormoneForm.setName( ty.getAgent().getName() );
-		hormoneForm.setRegimen(ty.getTreatment().getRegimen() );
+        // Set the otherName and/or the selected name attribute
+        if (therapy.getAgent().getNameUnctrlVocab() != null) {
+        	hormoneForm.setName(Constants.Dropdowns.OTHER_OPTION);        	
+        	hormoneForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+        } else {
+        	hormoneForm.setName(therapy.getAgent().getName());
+        }
+        
+        // Set the other administrative route and/or the selected administrative route
+        if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+        	hormoneForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);        	
+        	hormoneForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+        } else {
+        	hormoneForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+        }         
+		
+		hormoneForm.setDosage( therapy.getTreatment().getDosage() );
+		hormoneForm.setRegimen(therapy.getTreatment().getRegimen() );
+		hormoneForm.setType(therapy.getTreatment().getSexDistribution().getType());
+		hormoneForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());		
+		
 		
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );
@@ -108,9 +126,11 @@ public class HormonePopulateAction extends BaseAction {
 		System.out.println( "<HormonePopulateAction dropdown> Entering... " );
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
-									
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
+
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEDROP, "" );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );        
 	}	
 }

@@ -60,10 +60,12 @@ public class TherapyPopulateAction extends BaseAction {
         } 
         
         therapyForm.setDosage(ty.getTreatment().getDosage());
-        // chemicalDrugForm.setDoseUnit();
         therapyForm.setName(ty.getAgent().getName());
-        therapyForm.setCASNumber(ty.getAgent().getCasNumber());
         therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());        
+        
+        if (ty.getAgent().getCasNumber() != null) {        
+        therapyForm.setCASNumber(ty.getAgent().getCasNumber());
+        }        
         
         if (ty.getAgent().getNscNumber() != null) {
         	therapyForm.setNSCNumber(ty.getAgent().getNscNumber().toString());

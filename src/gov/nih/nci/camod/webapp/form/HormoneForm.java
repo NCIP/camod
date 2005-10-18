@@ -32,8 +32,13 @@ public class HormoneForm extends BaseForm implements Serializable, HormoneData {
 	protected String name;
 	protected String otherName;
 	protected String dosage;
-	protected String regimen;
 	protected String doseUnit;
+	protected String regimen;
+    protected String administrativeRoute;
+    protected String otherAdministrativeRoute;
+    protected String ageAtTreatment;
+    protected String ageUnit;
+    protected String type;	
 	
 	public String getDoseUnit() {
 		return doseUnit;
@@ -91,5 +96,76 @@ public class HormoneForm extends BaseForm implements Serializable, HormoneData {
 	public void setRegimen(String regimen) {
 		this.regimen = regimen;
 	}	
+    /**
+     * @return Returns the administrativeRoute.
+     */
+    public String getAdministrativeRoute() {
+        return administrativeRoute;
+    }
+
+    /**
+     * @param administrativeRoute
+     *            The administrativeRoute to set.
+     */
+    public void setAdministrativeRoute(String administrativeRoute) {
+        this.administrativeRoute = administrativeRoute;
+    }
+
+    /**
+     * @return Returns the otherAdministrativeRoute.
+     */
+    public String getOtherAdministrativeRoute() {
+        return otherAdministrativeRoute;
+    }
+
+    /**
+     * @param otherAdministrativeRoute
+     *            The otherAdministrativeRoute to set.
+     */
+    public void setOtherAdministrativeRoute(String otherAdministrativeRoute) {
+        this.otherAdministrativeRoute = otherAdministrativeRoute;
+    }
+    /**
+     * @return Returns the ageAtTreatment.
+     */
+    public String getAgeAtTreatment() {
+        return ageAtTreatment;
+    }
+
+    /**
+     * @param ageAtTreatment
+     *            The ageAtTreatment to set.
+     */
+    public void setAgeAtTreatment(String ageAtTreatment) {
+        this.ageAtTreatment = ageAtTreatment;
+    }
+    /**
+     * @return Returns the ageUnit.
+     */
+    public String getAgeUnit() {
+        return ageUnit;
+    }
+
+    /**
+     * @param ageUnit
+     *            The ageUnit to set.
+     */
+    public void setAgeUnit(String ageUnit) {
+        this.ageUnit = ageUnit;
+    }
+    /**
+     * @return Returns the type.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type
+     *            The type to set.
+     */
+    public void setType(String type) {
+        this.type = type;
+    }    
 
 }

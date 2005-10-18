@@ -42,22 +42,30 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 		//retrieve the list of all therapies from the current animalModel
 		List therapyList = am.getTherapyCollection();
 		
-		Therapy ty = new Therapy();
+		Therapy therapy = new Therapy();
 		
 		//find the specific one we need
 		for ( int i=0; i<therapyList.size(); i++ )
 		{
-			ty = (Therapy)therapyList.get(i);
-			if ( ty.getId().toString().equals( aTherapyID) )
+			therapy = (Therapy)therapyList.get(i);
+			if ( therapy.getId().toString().equals( aTherapyID) )
 				break;
 		}
 		
-		viralTreatmentForm.setType( ty.getTreatment().getSexDistribution().getType() );
-		viralTreatmentForm.setAgeAtTreatment( ty.getTreatment().getAgeAtTreatment() );
-		viralTreatmentForm.setDosage( ty.getTreatment().getDosage() );		
-		viralTreatmentForm.setName( ty.getAgent().getName() );
-		viralTreatmentForm.setRegimen(ty.getTreatment().getRegimen() );
-		viralTreatmentForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute() );		
+        // Set the otherName and/or the selected name attribute
+        if (therapy.getAgent().getNameUnctrlVocab() != null) {
+        	viralTreatmentForm.setName(Constants.Dropdowns.OTHER_OPTION);        	
+        	viralTreatmentForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+        } else {
+        	viralTreatmentForm.setName(therapy.getAgent().getName());
+        }
+		
+		viralTreatmentForm.setType( therapy.getTreatment().getSexDistribution().getType() );
+		viralTreatmentForm.setAgeAtTreatment( therapy.getTreatment().getAgeAtTreatment() );
+		viralTreatmentForm.setDosage( therapy.getTreatment().getDosage() );		
+
+		viralTreatmentForm.setRegimen(therapy.getTreatment().getRegimen() );
+		viralTreatmentForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute() );		
 		
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );

@@ -53,13 +53,19 @@ public class NutritionalFactorPopulateAction extends BaseAction{
 					break;
 			}
 			
+	        // Set the otherName and/or the selected name attribute
+	        if (therapy.getAgent().getNameUnctrlVocab() != null) {
+	        	nutritForm.setName(Constants.Dropdowns.OTHER_OPTION);        	
+	        	nutritForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+	        } else {
+	        	nutritForm.setName(therapy.getAgent().getName());
+	        }			
+			
 			nutritForm.setType(therapy.getTreatment().getSexDistribution().getType());
 			nutritForm.setDosage(therapy.getTreatment().getDosage());
 			nutritForm.setRegimen(therapy.getTreatment().getRegimen());
 			nutritForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-			
-			nutritForm.setName(therapy.getAgent().getName());
-			nutritForm.setRegimen(therapy.getTreatment().getRegimen());
+
 			
 			//Prepopulate all dropdown fields, set the global Constants to the following
 			this.dropdown( request, response );

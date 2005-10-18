@@ -43,11 +43,11 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 
     public CellLine create(CellLineData inCellLineData) throws Exception {
 
-        log.trace("Entering CellLineManagerImpl.create");
+        log.debug("Entering CellLineManagerImpl.create");
 
         CellLine theCellLine = new CellLine();
 
-        log.trace("Exiting CellLineManagerImpl.create");
+        log.debug("Exiting CellLineManagerImpl.create");
         populateCellLine(inCellLineData, theCellLine);
 
         return theCellLine;
@@ -56,20 +56,20 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
     public void update(CellLineData inCellLineData, CellLine inCellLine)
     throws Exception {
 
-    	log.trace("Entering CellLineManagerImpl.update");
+    	log.debug("Entering CellLineManagerImpl.update");
     	log.debug("Updating CellLineForm: " + inCellLine.getId());
 
     	// Populate w/ the new values and save
     	populateCellLine(inCellLineData, inCellLine);
     	save(inCellLine);
 
-    	log.trace("Exiting CellLineManagerImpl.update");
+    	log.debug("Exiting CellLineManagerImpl.update");
     }    
 
 	private void populateCellLine( CellLineData inCellLineData, CellLine inCellLine) 
 	throws Exception {
 
-		log.trace( "Entering populateCellLine" );
+		log.debug( "Entering populateCellLine" );
 
 		inCellLine.setName(inCellLineData.getCellLineName());
 		inCellLine.setExperiment( inCellLineData.getExperiment() );
@@ -92,6 +92,6 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
         inCellLine.getOrgan().setConceptCode(inCellLineData.getOrganTissueCode());
         System.out.println("<populateCellLine> getConceptCode= " +inCellLineData.getOrganTissueCode());
         
-		log.trace("Exiting populateCellLine");
+		log.debug("Exiting populateCellLine");
         }
 }

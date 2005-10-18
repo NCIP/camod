@@ -40,21 +40,28 @@ public class GrowthFactorPopulateAction extends BaseAction {
 		//retrieve the list of all therapies from the current animalModel
 		List therapyList = am.getTherapyCollection();
 		
-		Therapy ty = new Therapy();
+		Therapy therapy = new Therapy();
 		
 		//find the specific one we need
 		for ( int i=0; i<therapyList.size(); i++ )
 		{
-			ty = (Therapy)therapyList.get(i);
-			if ( ty.getId().toString().equals( aTherapyID) )
+			therapy = (Therapy)therapyList.get(i);
+			if ( therapy.getId().toString().equals( aTherapyID) )
 				break;
 		}
 		
-		growthFactorForm.setType( ty.getTreatment().getSexDistribution().getType() );
-		growthFactorForm.setAgeAtTreatment( ty.getTreatment().getAgeAtTreatment() );
-		growthFactorForm.setDosage( ty.getTreatment().getDosage() );		
-		growthFactorForm.setName( ty.getAgent().getName() );
-		growthFactorForm.setRegimen(ty.getTreatment().getRegimen() );
+        // Set the otherName and/or the selected name attribute
+        if (therapy.getAgent().getNameUnctrlVocab() != null) {
+        	growthFactorForm.setName(Constants.Dropdowns.OTHER_OPTION);        	
+        	growthFactorForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+        } else {
+        	growthFactorForm.setName(therapy.getAgent().getName());
+        }		
+		
+		growthFactorForm.setType( therapy.getTreatment().getSexDistribution().getType() );
+		growthFactorForm.setAgeAtTreatment( therapy.getTreatment().getAgeAtTreatment() );
+		growthFactorForm.setDosage( therapy.getTreatment().getDosage() );
+		growthFactorForm.setRegimen(therapy.getTreatment().getRegimen() );
 		
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );
@@ -109,11 +116,11 @@ public class GrowthFactorPopulateAction extends BaseAction {
 		
 		System.out.println( "<GrowthFactorPopulateAction dropdown> Entering... " );
 	
-		//Prepopulate all dropdown fields, set the global Constants to the following
+		//Prepopulate all dropdow2n fields, set the global Constants to the following
 					
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.DOSAGEUNITSDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.GROWTHFACTORDOSEUNITSDROP, "" );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.GROWTHFACTORDROP, "" );		
 	}		
 
