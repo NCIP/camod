@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.16 2005-10-17 13:12:47 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.17 2005-10-18 16:24:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/10/17 13:12:47  georgeda
+ * Added new method
+ *
  * Revision 1.15  2005/10/12 17:24:23  georgeda
  * Get species only from approved models
  *
@@ -263,16 +266,15 @@ public class QueryManagerImpl extends BaseManager {
 
         log.trace("Entering QueryManagerImpl.getPeopleByRole");
 
-        String theHQLQuery = "from Person where username is not null " ;
-        
-        if (!inRole.equals(Constants.Admin.Roles.ALL))
-        {
-        	theHQLQuery += " AND party_id in (" + getPartyIdsForRole(inRole) + ") ";
+        String theHQLQuery = "from Person where username is not null ";
+
+        if (!inRole.equals(Constants.Admin.Roles.ALL)) {
+            theHQLQuery += " AND party_id in (" + getPartyIdsForRole(inRole) + ") ";
         }
-        
+
         // Complete the query
         theHQLQuery += " order by last_name asc";
-        
+
         HQLParameter[] theParams = new HQLParameter[0];
         List theList = Search.query(theHQLQuery, theParams);
 
@@ -281,7 +283,7 @@ public class QueryManagerImpl extends BaseManager {
         log.trace("Exiting QueryManagerImpl.getPeopleByRole");
         return theList;
     }
-    
+
     /**
      * Get the model id's for any model that has a histopathology with a parent
      * histopathology
@@ -293,15 +295,14 @@ public class QueryManagerImpl extends BaseManager {
     private String getPartyIdsForRole(String inRole) throws PersistenceException {
 
         String theSQLString = "SELECT distinct pr.party_id FROM party_role pr "
-                + "WHERE pr.role_id IN (SELECT role_id FROM role r "
-                + "     WHERE r.name = ?)";
+                + "WHERE pr.role_id IN (SELECT role_id FROM role r " + "     WHERE r.name = ?)";
 
         Object[] theParams = new Object[1];
         theParams[0] = inRole;
         return getModelIds(theSQLString, theParams);
 
     }
-    
+
     /**
      * Return the list of species associated with animal models
      * 
@@ -598,6 +599,37 @@ public class QueryManagerImpl extends BaseManager {
         Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
         theQuery.setParameter("party_id", inPerson.getId());
         theQuery.setParameter("state", inState);
+
+        List theComments = theQuery.list();
+
+        if (theComments == null) {
+            theComments = new ArrayList();
+        }
+        return theComments;
+    }
+
+    /**
+     * Return all of the models associated which have the passed in user as
+     * either the submitter _or_ the PI
+     * 
+     * @param inUsername
+     * 
+     * @return a list of matching models
+     * 
+     * @throws PersistenceException
+     */
+    public List getModelsByUser(String inUsername) throws PersistenceException {
+
+        log.trace("Entering QueryManagerImpl.getModelsByUser");
+
+        String theHQLQuery = "from AnimalModel as am where "
+                + " am.submitter in (from Person where username = :username) or"
+                + " am.principalInvestigator in (from Person where username = :username) "
+                + " order by model_descriptor";
+        log.debug("The HQL query: " + theHQLQuery);
+
+        Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+        theQuery.setParameter("username", inUsername);
 
         List theComments = theQuery.list();
 
