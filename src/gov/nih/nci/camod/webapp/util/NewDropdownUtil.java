@@ -377,8 +377,8 @@ public class NewDropdownUtil {
 
         // TODO: Fix once we know what we're doing w/ this
         viralVectorList.add(Constants.Dropdowns.OTHER_OPTION);
-        //  TODO: Remive this before production - used to test other field toggle
-        viralVectorList.add("Dummy Viral Vector");        
+        // TODO: Remive this before production - used to test other field toggle
+        viralVectorList.add("Dummy Viral Vector");
 
         if (geneDeliveryList != null) {
             for (int i = 0; i < geneDeliveryList.size(); i++) {
@@ -439,9 +439,11 @@ public class NewDropdownUtil {
                 Person thePerson = (Person) thePIList.get(i);
                 if (thePerson.getIsPrincipalInvestigator() != null) {
 
-                    String theDisplayName = thePerson.getLastName().trim() + ", " + thePerson.getFirstName().trim();
-                    DropdownOption theOption = new DropdownOption(theDisplayName, thePerson.getUsername());
-                    theReturnList.add(theOption);
+                    String theDisplayName = thePerson.displayName();
+                    if (theDisplayName.length() > 0) {
+                        DropdownOption theOption = new DropdownOption(theDisplayName, thePerson.getUsername());
+                        theReturnList.add(theOption);
+                    }
                 }
             }
         }
@@ -514,7 +516,6 @@ public class NewDropdownUtil {
         return mutationList;
     }
 
-    
     /**
      * Returns a list of all users
      * 
