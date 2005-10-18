@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.33 2005-10-13 20:47:25 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.34 2005-10-18 16:23:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2005/10/13 20:47:25  georgeda
+ * Correctly handle the PI
+ *
  * Revision 1.32  2005/10/12 15:55:16  georgeda
  * Do not reuse taxon since it has an uncontolled vocab
  *
@@ -128,27 +131,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public List getAllByUser(String inUsername) throws Exception {
 
-        log.trace("Entering AnimalModelManagerImpl.getAllByUser");
-
-        // The list of AnimalModels to be returned
-        List theAnimalModels = null;
-
-        // The following two objects are needed for eQBE.
-        AnimalModel theAnimalModel = new AnimalModel();
-        Person theSubmitter = new Person();
-        theSubmitter.setUsername(inUsername);
-        theAnimalModel.setSubmitter(theSubmitter);
-
-        try {
-            theAnimalModels = Search.query(theAnimalModel);
-        } catch (Exception e) {
-            log.error("Exception occurred in getAll", e);
-            throw e;
-        }
-
-        log.trace("Exiting AnimalModelManagerImpl.getAllByUser");
-
-        return theAnimalModels;
+        log.trace("In AnimalModelManagerImpl.getAllByUser");
+        
+        return QueryManagerSingleton.instance().getModelsByUser(inUsername);
     }
 
     /**
