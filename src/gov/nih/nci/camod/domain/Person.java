@@ -11,14 +11,13 @@ import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * @author rajputs
  */
 public class Person extends Party {
 
     private static final long serialVersionUID = 3258795453799404851L;
-    
+
     private final Log log = LogFactory.getLog(Person.class);
 
     private String firstName;
@@ -35,7 +34,12 @@ public class Person extends Party {
      * @return Returns the display name
      */
     public String displayName() {
-        return lastName + ", " + firstName;
+
+        String theDisplayName = "";
+        if (lastName != null && firstName != null) {
+            theDisplayName = lastName.trim() + ", " + firstName.trim();
+        }
+        return theDisplayName;
     }
 
     /**
