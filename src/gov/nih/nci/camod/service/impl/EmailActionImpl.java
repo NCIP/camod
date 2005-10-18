@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.9 2005-10-10 14:08:13 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.10 2005-10-18 20:39:02 stewardd Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/10 14:08:13  georgeda
+ * Changes for comment curation
+ *
  * Revision 1.8  2005/09/22 15:13:43  georgeda
  * Update
  *
@@ -31,6 +34,7 @@ import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateData;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 
@@ -87,15 +91,18 @@ public class EmailActionImpl extends BaseCurateableAction {
                 // Build the message text
                 String theMailSubject = "";
                 String theMailText = theData.getNote();
+                String[] theMailStandardText = null;
 
                 // Customize the text based on the action.
                 // TODO: Should be centralized.
                 if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
                     theMailSubject = "You have been assigned screener for the following model: "
                             + theData.getModelDescriptor();
+                    theMailStandardText= new String[] {Constants.Admin.Actions.ASSIGN_SCREENER};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
                     theMailSubject = "You have been assigned editor for the following model: "
                             + theData.getModelDescriptor();
+                    theMailStandardText= new String[] {Constants.Admin.Actions.ASSIGN_EDITOR};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
                     theMailSubject = "The editor is requesting more information for the following model: "
                             + theData.getModelDescriptor();
@@ -105,19 +112,29 @@ public class EmailActionImpl extends BaseCurateableAction {
                     Person theSubmitter = (Person) theAnimalModel.getSubmitter();
                     theRecipients = new String[] { UserManagerSingleton.instance().getEmailForUser(
                             theSubmitter.getUsername()) };
+                    theMailStandardText= new String[] {Constants.Admin.Actions.NEED_MORE_INFO};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.REJECT)) {
                     theMailSubject = "The following model has been rejected: " + theData.getModelDescriptor();
+                    theMailStandardText= new String[] {Constants.Admin.Actions.REJECT};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.APPROVE)) {
                     theMailSubject = "The following model has been approved: " + theData.getModelDescriptor();
+                    theMailStandardText= new String[] {Constants.Admin.Actions.APPROVE};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.COMPLETE)) {
                     theMailSubject = "The following model has been completed: " + theData.getModelDescriptor();
+                    theMailStandardText= new String[] {Constants.Admin.Actions.COMPLETE};
                 } else {
                     theMailSubject = "The following model has changed: " + theData.getModelDescriptor();
                 }
 
                 if (theRecipients.length > 0) {
+                    TreeMap valuesForVariables = new TreeMap();
+                    valuesForVariables.put("name", theAnimalModel.getSubmitter().displayName());
+                    valuesForVariables.put("submitter", theAnimalModel.getSubmitter().displayName());
+                    valuesForVariables.put("modelstate", theAnimalModel.getState());
+                    valuesForVariables.put("species",theAnimalModel.getSpecies());
+                    valuesForVariables.put("piname", theAnimalModel.getPrincipalInvestigator().displayName());
                     MailUtil.sendMail(theRecipients, theMailSubject, theMailText, UserManagerSingleton.instance()
-                            .getEmailForCoordinator());
+                            .getEmailForCoordinator(), theMailStandardText, valuesForVariables);
                 } else {
                     log.warn("No e-mail address assigned to user: " + thePerson.getUsername());
                 }
