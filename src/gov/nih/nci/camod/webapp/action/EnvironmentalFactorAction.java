@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorAction.java,v 1.11 2005-09-28 21:20:11 georgeda Exp $
+ * $Id: EnvironmentalFactorAction.java,v 1.12 2005-10-19 19:27:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/09/28 21:20:11  georgeda
+ * Finished up converting to new manager
+ *
  */
 package gov.nih.nci.camod.webapp.action;
 
@@ -33,12 +36,15 @@ public final class EnvironmentalFactorAction extends BaseAction {
 
         EnvironmentalFactorForm envForm = (EnvironmentalFactorForm) form;
 
-        System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
-                + envForm.getName() + "\n\t otherName: " + envForm.getOtherName() + "\n\t dosage: "
-                + envForm.getDosage() + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
-                + "\n\t regimen: " + envForm.getRegimen() + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
-                + "\n\t type: " + envForm.getType() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        System.out.println("<EnvironmentalFactorAction save> following Characteristics:" 
+        		+ "\n\t name: " + envForm.getName() 
+        		+ "\n\t otherName: " + envForm.getOtherName() 
+        		+ "\n\t dosage: " + envForm.getDosage() 
+        		+ "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
+                + "\n\t regimen: " + envForm.getRegimen() 
+                + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
+                + "\n\t type: " + envForm.getType() 
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         /* Grab the current modelID from the session */
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -106,12 +112,15 @@ public final class EnvironmentalFactorAction extends BaseAction {
         // Create a form to edit
         EnvironmentalFactorForm envForm = (EnvironmentalFactorForm) form;
 
-        System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
-                + envForm.getName() + "\n\t otherName: " + envForm.getOtherName() + "\n\t dosage: "
-                + envForm.getDosage() + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
-                + "\n\t regimen: " + envForm.getRegimen() + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
-                + "\n\t type: " + envForm.getType() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        System.out.println("<EnvironmentalFactorAction save> following Characteristics:" 
+        		+ "\n\t name: " + envForm.getName() 
+        		+ "\n\t otherName: " + envForm.getOtherName() 
+        		+ "\n\t dosage: " + envForm.getDosage() 
+        		+ "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
+                + "\n\t regimen: " + envForm.getRegimen() 
+                + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
+                + "\n\t type: " + envForm.getType() 
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
