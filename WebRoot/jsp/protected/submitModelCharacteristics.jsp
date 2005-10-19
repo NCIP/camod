@@ -137,7 +137,9 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field2"><b>Phenotype</b></label></td>
+			<td class="formLabel"><label for="field2"><b>Phenotype</b></label>
+			<camod:cshelp key="PHENOTYPE.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="description" name="formdata" cols="32" rows="4"/>			
 			</td>
@@ -155,7 +157,9 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Breeding Notes</label></td>
+			<td class="formLabel"><label for="field1">Breeding Notes</label>
+			<camod:cshelp key="PHENOTYPE.BREEDING_NOTES" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">
 					<html:text styleClass="formFieldSized" property="breedingNotes" name="formdata" size="30"/>			
 			</td>
@@ -173,7 +177,9 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><b>Record Release Date</b></td>
+			<td class="formLabel"><b>Record Release Date</b>
+			<camod:cshelp key="AVAILABILITY.RELEASE_DATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">
 				<html:radio property="releaseDate" value="immediately" /> Release record immediately <br> 
 				<html:radio property="releaseDate" onclick="openCalendar()" value="after" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 
