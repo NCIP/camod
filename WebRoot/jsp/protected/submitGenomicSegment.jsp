@@ -9,6 +9,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+
 <%
 	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
 
@@ -62,7 +66,9 @@
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field3">Integration</label></td>
+			<td class="formRequiredLabel"><label for="field3">Integration</label>
+			<camod:cshelp key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">
 				<html:form action="<%= actionName %>" focus="locationOfIntegration">	
 		
@@ -114,7 +120,9 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Designator</label></td>
+			<td class="formLabel"><label for="field1">Designator</label>
+			<camod:cshelp key="ENGINEERED_GENE.CLONE_DESIGNATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldUnSized" property="cloneDesignator" size="20" name="formdata"/>
 			</td>
@@ -122,7 +130,9 @@
 		
 		<tr>
            <td class="formRequiredNotice" width="5">&nbsp;</td>
-           <td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
+           <td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label>
+           <camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+           </td>
            <td class="formField">
 				<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>
 			</td>
@@ -130,7 +140,9 @@
         
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Comments</label></td>
+			<td class="formLabel"><label for="field2">Comments</label>
+			<camod:cshelp key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" name="formdata"/>
 			</td>

@@ -9,6 +9,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+
 <%
 	String aInducedMutationID = request.getParameter( "aInducedMutationID" );
 
@@ -85,7 +89,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">CAS number</label></td>
+		<td class="formLabel"><label for="field1">CAS number</label>
+		<camod:cshelp key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="CASNumber" size="20" name="formdata"/>		
 		</td>
@@ -93,7 +99,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene ID ( Entrez )</label></td>
+		<td class="formLabel"><label for="field1">Gene ID ( Entrez )</label>
+		<camod:cshelp key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="geneId" size="20" name="formdata"/>		
 		</td>
@@ -109,7 +117,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Observation:</label></td>
+		<td class="formLabel"><label for="field2">Observation:</label>
+		<camod:cshelp key="GENETIC_ALTERATION.OBSERVATION_INDUCED_MUTATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32"  name="formdata"/>		
 		</td>

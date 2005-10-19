@@ -81,7 +81,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comments Field</label></td>
+		<td class="formLabel"><label for="field1">Comments Field</label>
+		<camod:cshelp key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">			
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="3" cols="30" name="formdata"/>
 		</td>

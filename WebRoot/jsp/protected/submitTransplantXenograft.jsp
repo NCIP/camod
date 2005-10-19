@@ -77,7 +77,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Cell Line/Transplant:</label></td>
+		<td class="formRequiredLabel"><label for="field1">Cell Line/Transplant:</label>
+		<camod:cshelp key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 				<html:form action="<%= actionName %>" focus="name">			 
 				

@@ -63,7 +63,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Targeted Gene/Locus:</label></td>
+		<td class="formRequiredLabel"><label for="field1">Targeted Gene/Locus:</label>
+		<camod:cshelp key="ENGINEERED_GENE.NAME_TARGETEDMODIFICATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="name">	
 			
@@ -73,7 +75,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Type of Modification:</label></td>
+		<td class="formRequiredLabel"><label for="field3">Type of Modification:</label>
+		<camod:cshelp key="MODIFICATION_TYPE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="modificationType" onchange="chkOther( this );" >
 				<html:options name="<%= Dropdowns.TARGETEDMODIFICATIONDROP %>" />										
@@ -94,7 +98,9 @@
 	<tr>
                
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label></td>
+		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label>
+		<camod:cshelp key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="geneId" size="10" name="formdata"/>	
 	</tr>
@@ -124,7 +130,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Conditional Description</label></td>
+		<td class="formLabel"><label for="field2">Conditional Description</label>
+		<camod:cshelp key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="30" name="formdata"/>
 		</td>
@@ -140,7 +148,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label></td>
+		<td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label>
+		<camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
 		</td>

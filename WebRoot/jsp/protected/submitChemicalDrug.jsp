@@ -119,7 +119,9 @@
 	<!-- changed linkd to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
-			<td class="formLabel"><label for="field1">CAS number:</label></td>
+			<td class="formLabel"><label for="field1">CAS number:</label>
+			<camod:cshelp key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
