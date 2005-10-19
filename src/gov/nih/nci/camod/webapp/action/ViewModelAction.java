@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.14 2005-10-11 18:15:25 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.15 2005-10-19 18:56:00 guruswas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.14  2005/10/11 18:15:25  georgeda
+ *  More comment changes
+ *
  *  Revision 1.13  2005/10/10 14:12:24  georgeda
  *  Changes for comment curation
  *
@@ -484,5 +487,40 @@ public class ViewModelAction extends BaseAction {
         setComments(request, Constants.Pages.XENOGRAFT);
         
         return mapping.findForward("viewTransplantXenograft");
+    }
+
+    /**
+     * Populate the session and/or request with the objects necessary to display
+     * the page.
+     * 
+     * @param mapping
+     *            the struts action mapping
+     * @param form
+     *            the web form
+     * @param request
+     *            HTTPRequest
+     * @param response
+     *            HTTPResponse
+     * @return
+     * @throws Exception
+     */
+    public ActionForward populateXenograftDetails(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String modelID = request.getParameter("xModelID");
+        String nsc = request.getParameter("nsc");
+		if(nsc != null && nsc.length()==0) return mapping.findForward("viewModelCharacteristics");
+        log.info("<populateXenograftDetails> modelID:" + modelID);
+        log.info("<populateXenograftDetails> nsc:" + nsc);
+		XenograftManager mgr = (XenograftManager) getBean("xenograftManager");
+        Xenograft x = null;
+        try {
+            x = mgr.get(modelID);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        request.getSession().setAttribute(Constants.ANIMALMODEL, x);
+        request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
+        return mapping.findForward("viewInvivoDetails");
     }
 }

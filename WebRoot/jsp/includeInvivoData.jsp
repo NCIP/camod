@@ -31,7 +31,7 @@
 				<c:out value="${ivd[1]}"/> in <c:out value="${ivd[2]}"/>
 				</td>
 				<td align="right" class="<c:out value="${tdClass}End"/>"> &nbsp;&nbsp;
-				<A href="detail3.htm?<c:out value="${ivd[0]}"/>" target="_blank">
+				<a href="ViewModelAction.do?unprotected_method=populateXenograftDetails&xModelID=<c:out value="${ivd[0]}"/>&nsc=<c:out value="${agt.nscNumber}"/>" styleClass="subMenuPrimary"/>
 				<c:out value="${ivd[3]}"/></a>
 				</td>
 		  	</tr>

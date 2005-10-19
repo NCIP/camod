@@ -154,7 +154,13 @@
 		<c:if test="${not empty mdl.animalAvailabilityCollection}">
 		<tr><td>&nbsp;</td></tr>
         <tr>
-			<td class="formTitle" height="20" colspan="2">Model Availability</td>		
+			<td class="formTitle" height="20" colspan="2">Model Availability: This model is available from</td>
+		</tr>
+		<tr><td colspan="2"><table cellpadding="5" cellspacing="0" border="0" width="99%">
+		<tr>
+			<td class="formTitleBlue" width="30%">Strain</td>				
+			<td class="formTitleBlue" width="45%">Distributor</td>
+			<td class="formTitleBlue" width="25%">Stock number</td>
 		</tr>
 		<c:forEach var="av" items="${mdl.animalAvailabilityCollection}" varStatus="stat2">
 			<c:choose>
@@ -166,14 +172,40 @@
 				</c:otherwise>
 			</c:choose>
 			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<b><c:out value="${av.name}"/>- Stock #:<c:out value="${av.stockNumber}"/></b>
+				<td class="<c:out value="${tdClass}"/>End" >
+				<c:out value="${av.name}"/>&nbsp;
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="80%">
-					<b>Strain:</b> TBD
+				<td class="<c:out value="${tdClass}"/>End" width="45%">
+					<c:set var="dist" value="${av.animalDistributorCollection[0]}"/>
+					<c:choose>
+						<c:when test = "${dist.id == 1}">
+							<c:out value="${dist.name}"/>
+						</c:when>
+						<c:when test = "${dist.id == 2}">
+							<a target="_distributor" href="http://jaxmice.jax.org/jaxmice-cgi/jaxmicedb.cgi?objtype=pricedetail&stock=<c:out value="${av.stockNumber}"/>">
+							<c:out value="${dist.name}"/>
+							</a>
+						</c:when>
+						<c:when test = "${dist.id == 3}">
+							<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}"/>">
+							<c:out value="${dist.name}"/>
+							</a>
+						</c:when>
+						<c:when test = "${dist.id == 4}">
+							<c:out value="${dist.name}"/>
+						</c:when>
+					</c:choose>
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="25%">
+					<c:choose>
+						<c:when test = "${dist.id != 1}">
+							<c:out value="${av.stockNumber}"/>
+						</c:when>
+					</c:choose>&nbsp;
 				</td>
 			</tr>
 		</c:forEach>
+		</table></td></tr>
 		<tr><td>&nbsp;</td></tr>
 		</c:if>
 		

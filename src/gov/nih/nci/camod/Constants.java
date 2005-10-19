@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.44 2005-10-17 13:25:17 georgeda Exp $
+ * $Id: Constants.java,v 1.45 2005-10-19 18:56:26 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2005/10/17 13:25:17  georgeda
+ * Work for comments/users
+ *
  * Revision 1.43  2005/10/13 16:18:51  pandyas
  * added constant for growth factor dose units
  *
@@ -335,6 +338,7 @@ public class Constants {
 	public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
 
 	public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
+	public static final String NSC_NUMBER = "nsc";
 
 	// /////////////////////////////////////////////////////////////
 	// Submission specific constants
