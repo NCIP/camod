@@ -59,7 +59,15 @@ public class RadiationPopulateAction extends BaseAction {
         	radiationForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
         } else {
         	radiationForm.setName(therapy.getAgent().getName());
-        }		
+        }
+        
+        // Set the other administrative route and/or the selected administrative route
+        if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+        	radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);        	
+        	radiationForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+        } else {
+        	radiationForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+        }        
 		
 		radiationForm.setType(therapy.getTreatment().getSexDistribution().getType());
 		radiationForm.setDosage(therapy.getTreatment().getDosage());
