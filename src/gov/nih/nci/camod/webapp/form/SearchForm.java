@@ -1,9 +1,7 @@
-/*
- * LogonForm.java
- * Created on Jun 24, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * $Id: SearchForm.java,v 1.4 2005-10-19 20:19:26 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -12,15 +10,6 @@ import java.io.Serializable;
 public class SearchForm extends BaseForm implements Serializable, SearchData {
 
     private static final long serialVersionUID = 3257045453799404851L;
-
-    /**
-     * Default empty constructor
-     * 
-     * @author nschroedl
-     * 
-     */
-    public SearchForm() {
-    }
 
     protected String keyword;
     protected String piName;
