@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.9 2005-10-18 21:59:34 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.10 2005-10-19 19:26:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/18 21:59:34  pandyas
+ * fixed other field
+ *
  * Revision 1.8  2005/10/11 16:45:47  pandyas
  * fixed tumor response dose unit retrieval that was not working
  *
@@ -180,6 +183,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateAgeGender(inGrowthFactorData, theTherapy);
         populateTreatment(inGrowthFactorData, theTherapy);
         populateDose(inGrowthFactorData, theTherapy);
+        populateAdministration(inGrowthFactorData, theTherapy); 
+       
 
         return theTherapy;
     }
@@ -204,6 +209,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateAgeGender(inGrowthFactorData, inTherapy);
         populateTreatment(inGrowthFactorData, inTherapy);
         populateDose(inGrowthFactorData, inTherapy);
+        populateAdministration(inGrowthFactorData, inTherapy);        
 
         save(inTherapy);
     }

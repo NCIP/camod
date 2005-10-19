@@ -32,27 +32,15 @@ public class GrowthFactorForm extends BaseForm implements Serializable, GrowthFa
     protected String name;
     protected String otherName;
     protected String dosage;
+    protected String doseUnit;    
+    protected String administrativeRoute;
+    protected String otherAdministrativeRoute;    
     protected String regimen;
     protected String ageAtTreatment;
+    protected String ageUnit;    
     protected String type;
-    protected String doseUnit;
-    protected String ageUnit;
 
-    public String getAgeUnit() {
-        return ageUnit;
-    }
 
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
-    }
-
-    public String getDoseUnit() {
-        return doseUnit;
-    }
-
-    public void setDoseUnit(String d) {
-        this.doseUnit = d;
-    }
 
     /**
      * @return Returns the name.
@@ -98,6 +86,43 @@ public class GrowthFactorForm extends BaseForm implements Serializable, GrowthFa
     public void setDosage(String dosage) {
         this.dosage = dosage;
     }
+    public String getDoseUnit() {
+        return doseUnit;
+    }
+
+    public void setDoseUnit(String d) {
+        this.doseUnit = d;
+    }    
+    
+    /**
+     * @return Returns the administrativeRoute.
+     */
+    public String getAdministrativeRoute() {
+        return administrativeRoute;
+    }
+
+    /**
+     * @param administrativeRoute
+     *            The administrativeRoute to set.
+     */
+    public void setAdministrativeRoute(String administrativeRoute) {
+        this.administrativeRoute = administrativeRoute;
+    }
+
+    /**
+     * @return Returns the otherAdministrativeRoute.
+     */
+    public String getOtherAdministrativeRoute() {
+        return otherAdministrativeRoute;
+    }
+
+    /**
+     * @param otherAdministrativeRoute
+     *            The otherAdministrativeRoute to set.
+     */
+    public void setOtherAdministrativeRoute(String otherAdministrativeRoute) {
+        this.otherAdministrativeRoute = otherAdministrativeRoute;
+    }    
 
     /**
      * @return Returns the regimen.
@@ -128,6 +153,13 @@ public class GrowthFactorForm extends BaseForm implements Serializable, GrowthFa
     public void setAgeAtTreatment(String ageAtTreatment) {
         this.ageAtTreatment = ageAtTreatment;
     }
+    public String getAgeUnit() {
+        return ageUnit;
+    }
+
+    public void setAgeUnit(String ageUnit) {
+        this.ageUnit = ageUnit;
+    }    
 
     /**
      * @return Returns the type.

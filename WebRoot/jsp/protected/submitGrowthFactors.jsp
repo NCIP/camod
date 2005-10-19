@@ -34,6 +34,17 @@
 		}
 	}
 	
+	function chkOtherAdminRoute( control ) {
+		ideControl = document.forms[0].otherAdministrativeRoute;
+		
+		if( control.value == "Other" )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}	
+	
 </script>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -89,6 +100,30 @@
 			</html:select>	
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field3">Administrative Routes:</label>
+		<camod:cshelp key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+		<br>
+		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>
+			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute" name="formdata" onclick="chkOtherAdminRoute(this);">												
+				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
+			</html:select>			
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
+		<td class="formField">					
+			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeRoute" disabled="true"/>			
+		</td>
+	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -157,7 +192,17 @@
 			ideOtherControl.disabled = false;
 		else {
 			ideOtherControl.disabled = true;
-		}		
+		}
+		
+	    ideControl = document.forms[0].administrativeRoute;
+	    ideOtherControl = document.forms[0].otherAdministrativeRoute;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}
+	}				
 	
 	checkOthers();
 </SCRIPT>

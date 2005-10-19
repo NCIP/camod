@@ -1,7 +1,10 @@
 /**
- * $Id: GrowthFactorAction.java,v 1.5 2005-09-28 21:20:12 georgeda Exp $
+ * $Id: GrowthFactorAction.java,v 1.6 2005-10-19 19:26:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/09/28 21:20:12  georgeda
+ * Finished up converting to new manager
+ *
  */
 package gov.nih.nci.camod.webapp.action;
 
@@ -136,11 +139,17 @@ public class GrowthFactorAction extends BaseAction {
 
         GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 
-        System.out.println("<GrowthFactorAction save> Adding... " + "\n\t name: " + growthFactorForm.getName()
-                + "\n\t otherName: " + growthFactorForm.getOtherName() + "\n\t type: " + growthFactorForm.getType()
-                + "\n\t regimen: " + growthFactorForm.getRegimen() + "\n\t dosage: " + growthFactorForm.getDosage()
-                + "\n\t doseUnit: " + growthFactorForm.getDoseUnit() + "\n\t ageAtTreatment: "
-                + growthFactorForm.getAgeAtTreatment() + "\n\t ageUnit: " + growthFactorForm.getAgeUnit());
+        System.out.println("<GrowthFactorAction save> Adding... " 
+        		+ "\n\t name: " + growthFactorForm.getName()
+                + "\n\t otherName: " + growthFactorForm.getOtherName() 
+                + "\n\t type: " + growthFactorForm.getType()
+                + "\n\t regimen: " + growthFactorForm.getRegimen() 
+                + "\n\t dosage: " + growthFactorForm.getDosage()
+                + "\n\t doseUnit: " + growthFactorForm.getDoseUnit() 
+        		+ "\n\t administrativeRoute: " + growthFactorForm.getAdministrativeRoute()                
+                + "\n\t ageAtTreatment: " + growthFactorForm.getAgeAtTreatment() 
+                + "\n\t ageUnit: " + growthFactorForm.getAgeUnit()
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));                
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel animalModel = animalModelManager.get(modelID);

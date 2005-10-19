@@ -56,7 +56,15 @@ public class GrowthFactorPopulateAction extends BaseAction {
         	growthFactorForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
         } else {
         	growthFactorForm.setName(therapy.getAgent().getName());
-        }		
+        }
+        
+        // Set the other administrative route and/or the selected administrative route
+        if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+        	growthFactorForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);        	
+        	growthFactorForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+        } else {
+        	growthFactorForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+        }        
 		
 		growthFactorForm.setType( therapy.getTreatment().getSexDistribution().getType() );
 		growthFactorForm.setAgeAtTreatment( therapy.getTreatment().getAgeAtTreatment() );
@@ -117,7 +125,7 @@ public class GrowthFactorPopulateAction extends BaseAction {
 		System.out.println( "<GrowthFactorPopulateAction dropdown> Entering... " );
 	
 		//Prepopulate all dropdow2n fields, set the global Constants to the following
-					
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );					
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.GROWTHFACTORDOSEUNITSDROP, "" );

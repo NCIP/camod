@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.34 2005-10-18 16:23:31 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.35 2005-10-19 19:26:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2005/10/18 16:23:31  georgeda
+ * Changed getModelsByUser to return models where the PI is the user as well
+ *
  * Revision 1.33  2005/10/13 20:47:25  georgeda
  * Correctly handle the PI
  *
@@ -470,6 +473,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     }
 
     public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception {
+    	
+    	System.out.println("<AnimalModelManagerImpl populate> Entering addXenograft() ");
 
         log.trace("Entering saveXenograft");
 
@@ -478,6 +483,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.addXenograft(theXenograft);
         save(inAnimalModel);
 
+        System.out.println("<AnimalModelManagerImpl populate> Exiting addXenograft() ");
+        
         log.trace("Exiting saveXenograft");
     }
 
@@ -492,14 +499,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception {
 
-        log.trace("Entering addGeneDelivery");
+        log.info("<AnimalModelManagerImpl> Entering addGeneDelivery");
 
         GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance().create(inGeneDeliveryData);
 
         inAnimalModel.addGeneDelivery(theGeneDelivery);
         save(inAnimalModel);
 
-        log.trace("Exiting addGeneDelivery");
+        log.info("<AnimalModelManagerImpl> Exiting addGeneDelivery");
     }
 
     /**
@@ -658,14 +665,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      */
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception {
 
-        log.trace("Entering saveCellLine");
+        log.debug("<AnimalModelManagerImpl> Entering saveCellLine");
 
         CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData);
 
         inAnimalModel.addCellLine(theCellLine);
         save(inAnimalModel);
 
-        log.trace("Exiting addCellLine");
+        log.debug("<AnimalModelManagerImpl> Exiting addCellLine");
     }
 
     /**
