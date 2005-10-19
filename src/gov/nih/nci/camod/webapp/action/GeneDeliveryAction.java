@@ -73,13 +73,16 @@ public final class GeneDeliveryAction extends BaseAction {
         // Grab the current therapy
         String aTherapyID = request.getParameter("aTherapyID");
 
-        log.info("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t ViralVector: "
-                + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
-                + geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
-                + "\n\t Regimen: " + geneDeliveryForm.getRegimen() + "\n\t ConceptCode: " + geneDeliveryForm.getOrgan()
-                + "\n\t organTissueCode: " + geneDeliveryForm.getOrganTissueCode() + "\n\t organTissueName: "
-                + geneDeliveryForm.getOrganTissueName() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info( "<GeneDeliveryAction save> following Characteristics:" + 
+				"\n\t ViralVector: "      + geneDeliveryForm.getViralVector() + 
+				"\n\t OtherViralVector: " + geneDeliveryForm.getOtherViralVector() + 
+				"\n\t GeneInVirus: "      + geneDeliveryForm.getGeneInVirus() + 
+				"\n\t Regimen: "          + geneDeliveryForm.getRegimen() +
+				"\n\t organ attribute (not sent to DB server): " + geneDeliveryForm.getOrgan()	+					
+				"\n\t Prefered organName: " + geneDeliveryForm.getOrganName() +
+				"\n\t organTissueCode: "  + geneDeliveryForm.getOrganTissueCode() +
+				"\n\t organTissueName: "  + geneDeliveryForm.getOrganTissueName() +
+				"\n\t user: "             + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
 
         try {
 
@@ -124,7 +127,7 @@ public ActionForward save( ActionMapping mapping,
                                HttpServletResponse response )
     throws Exception {
     	
-    	log.trace( "Entering save" );        
+    	log.debug( "<GeneDeliveryAction> Entering save" );        
         
 		// Create a form to edit
 		GeneDeliveryForm geneDeliveryForm = ( GeneDeliveryForm ) form;
@@ -132,12 +135,13 @@ public ActionForward save( ActionMapping mapping,
 		// Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         
-        log.info( "<EnvironmentalFactorAction save> following Characteristics:" + 
+        log.info( "<GeneDeliveryAction save> following Characteristics:" + 
 						"\n\t ViralVector: "      + geneDeliveryForm.getViralVector() + 
 						"\n\t OtherViralVector: " + geneDeliveryForm.getOtherViralVector() + 
 						"\n\t GeneInVirus: "      + geneDeliveryForm.getGeneInVirus() + 
 						"\n\t Regimen: "          + geneDeliveryForm.getRegimen() +
-						"\n\t ConceptCode: "      + geneDeliveryForm.getOrgan() +
+						"\n\t organ attribute (not sent to DB server): " + geneDeliveryForm.getOrgan()	+					
+						"\n\t getOrganName: " + geneDeliveryForm.getOrganName() +
 						"\n\t organTissueCode: "  + geneDeliveryForm.getOrganTissueCode() +
 						"\n\t organTissueName: "  + geneDeliveryForm.getOrganTissueName() +
 						"\n\t user: "             + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
@@ -160,7 +164,7 @@ public ActionForward save( ActionMapping mapping,
             saveErrors(request, msg);
             
 	    } catch( Exception e ) {
-            log.error("Exception ocurred creating Xenograft", e);
+            log.error("Exception ocurred creating GeneDelivery", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();

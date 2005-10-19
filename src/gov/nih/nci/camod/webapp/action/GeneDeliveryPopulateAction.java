@@ -50,16 +50,35 @@ public class GeneDeliveryPopulateAction extends BaseAction{
 			if ( gene.getId().toString().equals( aTherapyID) )
 				break;
         }
+
+		System.out.println( "<GeneDeliveryPopulateAction populate> get the non-Organ attributes" );
 		
-        geneDeliveryForm.setViralVector( gene.getViralVector() );
+        // Set the otherViralVector and/or the selected viral vector attribute
+        if (gene.getViralVectorUnctrlVocab() != null) {
+        	geneDeliveryForm.setViralVector(Constants.Dropdowns.OTHER_OPTION);        	
+        	geneDeliveryForm.setOtherViralVector(gene.getViralVectorUnctrlVocab());
+        } else {
+        	geneDeliveryForm.setViralVector( gene.getViralVector() );
+        }        
+        
         geneDeliveryForm.setGeneInVirus( gene.getGeneInVirus() );
         geneDeliveryForm.setRegimen( gene.getTreatment().getRegimen() );
-        geneDeliveryForm.setOrgan( gene.getOrgan().getName() );
+        geneDeliveryForm.setType( gene.getTreatment().getSexDistribution().getType() );
+        geneDeliveryForm.setAgeAtTreatment( gene.getTreatment().getAgeAtTreatment() );        
         
-        geneDeliveryForm.setOrganTissueCode( gene.getOrgan().getConceptCode() );
-        geneDeliveryForm.setOrganTissueName( gene.getOrgan().getName() );
-        
-        //gene.getOrgan().getId();
+		/*set Organ attributes*/
+		System.out.println( "<GeneDeliveryPopulateAction populate> get the Organ attributes" );
+
+		//Always display EVSPreferredDescription from Organ instead of OrganName from DB
+		geneDeliveryForm.setOrganName( gene.getOrgan().getEVSPreferredDescription() );
+		System.out.println( "setOrganName= " +gene.getOrgan().getEVSPreferredDescription());
+		
+		geneDeliveryForm.setOrganTissueCode( gene.getOrgan().getConceptCode());
+		System.out.println( "OrganTissueCode= " +gene.getOrgan().getConceptCode());
+		
+        geneDeliveryForm.setOrgan( gene.getOrgan().getEVSPreferredDescription() );
+		System.out.println( "setOrgan= " + gene.getOrgan().getEVSPreferredDescription()); 
+		
         
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );
@@ -116,6 +135,8 @@ public class GeneDeliveryPopulateAction extends BaseAction{
 				
 			//Prepopulate all dropdown fields, set the global Constants to the following
 			NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.VIRALVECTORDROP, "" );
+	        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
+	        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );			
 			
 			System.out.println( "<GeneDeliveryPopulateAction dropdown> Exiting void dropdown()" );
 

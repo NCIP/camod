@@ -30,34 +30,15 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
 	protected String otherViralVector;
 	protected String geneInVirus;
 	protected String regimen;
-	protected String conceptCode;
+    protected String type;
+    protected String ageAtTreatment;    
+    protected String ageUnit;	
+
 	protected String organ;
+	protected String organName;	
 	protected String organTissueName;
 	protected String organTissueCode;
-	
-	public String getOrganTissueName() {
-		return organTissueName;
-	}
-	
-	public void setOrganTissueName( String o ) {
-		this.organTissueName = o;
-	}
-	
-	public String getOrganTissueCode() {
-		return organTissueCode;
-	}
-	
-	public void setOrganTissueCode( String o ) {
-		this.organTissueCode = o;
-	}
-	
-	public String getOrgan() {
-		return organ;
-	}
-	
-	public void setOrgan( String o ) {
-		this.organ = o;
-	}
+
 	
 	/**
 	 * @return Returns the viralVector.
@@ -107,16 +88,79 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
 	public void setRegimen(String regimen) {
 		this.regimen = regimen;
 	}
-	/**
-	 * @return Returns the conceptCode.
-	 */
-	public String getConceptCode() {
-		return conceptCode;
-	}
-	/**
-	 * @param conceptCode The conceptCode to set.
-	 */
-	public void setConceptCode(String conceptCode) {
-		this.conceptCode = conceptCode;
+    /**
+     * @return Returns the type.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type
+     *            The type to set.
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+    /**
+     * @return Returns the ageAtTreatment.
+     */
+    public String getAgeAtTreatment() {
+        return ageAtTreatment;
+    }
+
+    /**
+     * @param ageAtTreatment
+     *            The ageAtTreatment to set.
+     */
+    public void setAgeAtTreatment(String ageAtTreatment) {
+        this.ageAtTreatment = ageAtTreatment;
+    }    
+    /**
+     * @return Returns the ageUnit.
+     */    
+    public String getAgeUnit() {
+        return ageUnit;
+    }
+    /**
+     * @param ageUnit
+     *            The ageUnit to set.
+     */
+    public void setAgeUnit(String ageUnit) {
+        this.ageUnit = ageUnit;
+    }    
+	
+	public String getOrgan() {
+		return organ;
 	}	
+	public void setOrgan( String organ ) {
+		this.organ = organ;
+	}	
+	public String getOrganName() {
+		return organName;
+	}
+	
+	public void setOrganName( String organName ) {
+		this.organName = organName;
+	}	
+	public String getOrganTissueName() {
+		return organTissueName;
+	}
+	
+	public void setOrganTissueName( String organTissueName ) {
+		this.organTissueName = organTissueName;
+	}
+	
+	public String getOrganTissueCode() {
+		return organTissueCode;
+	}
+	
+	public void setOrganTissueCode( String organTissueCode ) {
+		this.organTissueCode = organTissueCode;
+	}
+	
+
+	
+
+	
 }
