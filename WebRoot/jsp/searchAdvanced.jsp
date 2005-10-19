@@ -10,10 +10,6 @@
 
 <SCRIPT LANGUAGE="JavaScript">
 	
-	function transferFields() {
-		document.searchForm.diagnosisCode.value = document.searchForm.DiagnosisCode.value;
-	}
-	
 	function toggleField(control, field)
 	{
 		if( control.checked == false ) {
@@ -96,7 +92,7 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 				<INPUT name="organTissueName" type="hidden"/>
@@ -110,15 +106,14 @@
 			<td class="formLabel">
 				<label for="field2">Diagnosis</label>
 				&nbsp;
-		  	    <a href="javascript:showDiagnosisTree('searchForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showDiagnosisTree('searchForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>
-				<input type="hidden" name="DiagnosisName"/>
-			    <input type="hidden" name="DiagnosisCode"/>
+				<input type="hidden" name="diagnosisName"/>
 			    <input type="hidden" name="diagnosisCode"/>
 			</td>
 			<td class="formField">
-				<input class="formFieldSized" type="text" disabled="true" name="TumorClassification" id="field3" size="25" />
+				<input class="formFieldSized" type="text" disabled="true" name="tumorClassification" id="field3" size="25" />
 			</td>
 		</tr>
 		
