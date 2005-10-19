@@ -73,10 +73,10 @@ public class OrganManagerImpl extends BaseManager implements OrganManager {
             }
 
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in PersonManagerImpl.getByType");
+            System.out.println("PersistenceException in OrganManagerImpl.getByName");
             pe.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Exception in PersonManagerImpl.getByType");
+            System.out.println("Exception in OrganManagerImpl.getByName");
             e.printStackTrace();
         }
         return organ;
