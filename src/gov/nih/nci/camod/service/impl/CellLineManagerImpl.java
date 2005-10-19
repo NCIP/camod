@@ -47,8 +47,8 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 
         CellLine theCellLine = new CellLine();
 
-        log.debug("Exiting CellLineManagerImpl.create");
         populateCellLine(inCellLineData, theCellLine);
+        log.debug("Exiting CellLineManagerImpl.create");        
 
         return theCellLine;
     }
