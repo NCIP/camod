@@ -1,20 +1,12 @@
-/*
- * Created on Aug 23, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-package gov.nih.nci.camod.webapp.form;
-
-import gov.nih.nci.camod.webapp.form.cibase.*;
-
-
 /**
  * @author dgeorge
  * 
- * $Id: ChemicalDrugData.java,v 1.3 2005-09-28 13:58:46 georgeda Exp $
+ * $Id: ChemicalDrugData.java,v 1.4 2005-10-20 20:31:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/09/28 13:58:46  georgeda
+ * More work on manager interface for CI
+ *
  * Revision 1.2  2005/09/27 19:17:07  georgeda
  * Refactor of CI managers
  *
@@ -23,6 +15,10 @@ import gov.nih.nci.camod.webapp.form.cibase.*;
  *
  * 
  */
+package gov.nih.nci.camod.webapp.form;
+
+import gov.nih.nci.camod.webapp.form.cibase.*;
+
 
 public interface ChemicalDrugData  extends NameData, DoseData, AgeGenderData, TreatmentData,
 AdministrationData {
