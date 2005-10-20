@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.48 2005-10-20 21:20:17 pandyas Exp $
+ * $Id: Constants.java,v 1.49 2005-10-20 21:35:22 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2005/10/20 21:20:17  pandyas
+ * add animal availability list
+ *
  * Revision 1.47  2005/10/20 21:14:15  stewardd
  * added constants used in e-mail generation of InducedMutationManagerImpl and TargetedModificationManagerImpl classe.
  *
@@ -305,6 +308,8 @@ public class Constants {
 	public static final String FORMDATA = "formdata";
 
 	public static final String ANIMALMODEL = "animalmodel";
+    
+    public static final String XENOGRAFTMODEL = "xenograftmodel";
 
 	/**
 	 * Used to store username for current user
