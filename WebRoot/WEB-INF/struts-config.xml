@@ -353,6 +353,10 @@
 			path="/jsp/viewTransplantXenograft.jsp"></forward>
 				
 		<forward
+			name="viewInvivoDetails"
+			path="/jsp/viewInvivoDetails.jsp"></forward>
+
+		<forward
 			name="zoomifyImage"
 			path="/jsp/zoomifyImage.jsp"></forward>
 		
