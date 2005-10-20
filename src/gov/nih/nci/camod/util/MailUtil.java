@@ -161,7 +161,7 @@ public class MailUtil {
             if (null == inMessage || "".equals(inMessage)) {
                 theEmailMessage.setContent(buildContent(valuesForVariables,constructTemplateFromMacros(messageStds)), "text/plain");
             } else {
-                theEmailMessage.setContent(constructTemplateFromMacros(messageStds)
+                theEmailMessage.setContent(buildContent(valuesForVariables,constructTemplateFromMacros(messageStds))
                         + lineseparator + lineseparator + inMessage , "text/plain");
             }
 
@@ -292,7 +292,8 @@ public class MailUtil {
         System.out.println(buildContent(valuesForVariables, constructTemplateFromMacros(macrosUsed)));
         try {
             sendMail(theRecipients, "Testing", "Hello there!", "georgeda@mail.nih.gov");
-            sendMail(theRecipients, "Testing 2",
+            sendMail(theRecipients,
+                    "Testing 2",
                     "Additional custom note goes here.",
                     "georgeda@mail.nih.gov",
                     theMessageKeys,
