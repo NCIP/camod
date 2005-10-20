@@ -88,7 +88,7 @@
 	</tr>        
         
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formLabel"><label for="field1">Gene:</label>
 		<camod:cshelp key="GENE_DELIVERY.GENE_IN_VIRUS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
@@ -108,7 +108,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formRequiredNotice" width="0">*</td>
+		<td class="formRequiredNotice" width="0">&nbsp;</td>
 		<td class="formRequiredLabel"><label for="field2">Location of Delivery:</label>
 		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
