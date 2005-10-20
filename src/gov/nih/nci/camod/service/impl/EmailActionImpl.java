@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.12 2005-10-20 19:15:39 stewardd Exp $
+ * $Id: EmailActionImpl.java,v 1.13 2005-10-20 19:24:20 stewardd Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/10/20 19:15:39  stewardd
+ * Employs new EmailUtil API supporting e-mail content built from ResourceBundle-stored templates with support for variables (via Velocity API)
+ *
  * Revision 1.11  2005/10/20 19:13:01  stewardd
  * Employs new EmailUtil API supporting e-mail content built from ResourceBundle-stored templates with support for variables (via Velocity API)
  *
@@ -100,6 +103,8 @@ public class EmailActionImpl extends BaseCurateableAction {
                 String[] theMailStandardText = null;
 
                 // Customize the text based on the action.
+                // Do so by specifying what template to use for e-mail content
+                // Templates are represented here by keys that map to stored text blocks--see MailUtil class
                 // TODO: Should be centralized.
                 if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
                     theMailSubject = "You have been assigned screener for the following model: "
@@ -137,7 +142,7 @@ public class EmailActionImpl extends BaseCurateableAction {
 
                     // TODO modify the variables used and their values as needed by final choice of templates
 
-                    // gather message keys and variable values to build the e-mail content with
+                    // gather variable values to build the e-mail content with
                     TreeMap valuesForVariables = new TreeMap();
                     valuesForVariables.put("name", theAnimalModel.getSubmitter().displayName());
                     valuesForVariables.put("submitter", theAnimalModel.getSubmitter().displayName());
