@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.46 2005-10-20 19:28:28 georgeda Exp $
+ * $Id: Constants.java,v 1.47 2005-10-20 21:14:15 stewardd Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.46  2005/10/20 19:28:28  georgeda
+ * Added TOC constants
+ *
  * Revision 1.45  2005/10/19 18:56:26  guruswas
  * implemented invivo details page
  *
@@ -488,6 +491,44 @@ public class Constants {
 			 */
 			public static final String COMPLETE = "complete";
 		}
+
+		/**
+         * A constant that defines string used as a variable name in e-mail
+		 */
+		public static final String INDUCED_MUTATION_AGENT_NAME = "inducedmutationagentname";
+
+		/**
+		 * A constant that defines string used as a variable name in e-mail
+		 */
+		public static final String INDUCED_MUTATION_AGENT_TYPE = "inducedmutationagenttype";
+
+        /**
+         * A constant that defines string used as key for e-mail content associated with
+         * induced mutation agent additions
+         */
+		public static final String INDUCED_MUTATION_AGENT_ADDED = "inducedmutationagentadded";
+
+        /**
+         * A constant that defines string used as a variable name in e-mail
+         */
+        public static final String TARGETED_MODIFICATION_NAME = "targetedmodificationname";
+
+        /**
+         * A constant that defines string used as a variable name in e-mail
+         */
+        public static final String TARGETED_MODIFICATION_TYPE = "targetedmodificationtype";
+
+		/**
+		 * A constant that defines string used as key for e-mail content associated with
+         * targeted modification additions
+		 */
+		public static final String TARGETED_MODIFICATION_ADDED = "targetedmodificationadded";
+
+		/**
+		 * A constant that defines string used as key for e-mail content associated with
+         * non-controlled vocabulary use
+		 */
+		public static final String NONCONTROLLED_VOCABULARY = "noncontrolledvocab";
 
 		/**
 		 * A constant that defines what file is used for the model curation
