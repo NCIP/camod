@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.10 2005-10-18 20:39:02 stewardd Exp $
+ * $Id: EmailActionImpl.java,v 1.11 2005-10-20 19:13:01 stewardd Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/10/18 20:39:02  stewardd
+ * Checked in as a work-in-progress for the sake of not breaking the build. The altered signature of MailUtil.sendmail is accounted for in this revision. The outcome of calling sendmail herein is not tested but at least the code will permit the build without compile errors. Testing of course will be performed immediately and a new revision checked in as necessary.
+ *
  * Revision 1.9  2005/10/10 14:08:13  georgeda
  * Changes for comment curation
  *
@@ -127,14 +130,24 @@ public class EmailActionImpl extends BaseCurateableAction {
                 }
 
                 if (theRecipients.length > 0) {
+
+                    // TODO modify the variables used and their values as needed by final choice of templates
+
+                    // gather message keys and variable values to build the e-mail content with
                     TreeMap valuesForVariables = new TreeMap();
                     valuesForVariables.put("name", theAnimalModel.getSubmitter().displayName());
                     valuesForVariables.put("submitter", theAnimalModel.getSubmitter().displayName());
                     valuesForVariables.put("modelstate", theAnimalModel.getState());
                     valuesForVariables.put("species",theAnimalModel.getSpecies());
                     valuesForVariables.put("piname", theAnimalModel.getPrincipalInvestigator().displayName());
-                    MailUtil.sendMail(theRecipients, theMailSubject, theMailText, UserManagerSingleton.instance()
-                            .getEmailForCoordinator(), theMailStandardText, valuesForVariables);
+
+                    // launch the email
+                    MailUtil.sendMail(theRecipients,
+                                      theMailSubject,
+                                      theMailText,
+                                      UserManagerSingleton.instance().getEmailForCoordinator(),
+                                      theMailStandardText,
+                                      valuesForVariables);
                 } else {
                     log.warn("No e-mail address assigned to user: " + thePerson.getUsername());
                 }
