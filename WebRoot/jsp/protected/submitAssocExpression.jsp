@@ -19,7 +19,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;<IMG src="images\selectUP.gif" align=middle></td>
+		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
+		<camod:cshelp key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<IMG src="images\selectUP.gif" align=middle></td>
 		<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="field3" id="field3" size="25" /></td>
 	</tr>
 
