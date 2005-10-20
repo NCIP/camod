@@ -127,7 +127,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Method of Observation:</label></td>
+		<td class="formLabel"><label for="field2">Method of Observation:</label>
+		<camod:cshelp key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"  name="formdata"/>		
 		</td>
