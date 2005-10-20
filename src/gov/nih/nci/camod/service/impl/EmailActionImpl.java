@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.11 2005-10-20 19:13:01 stewardd Exp $
- * 
+ * $Id: EmailActionImpl.java,v 1.12 2005-10-20 19:15:39 stewardd Exp $
+ *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/20 19:13:01  stewardd
+ * Employs new EmailUtil API supporting e-mail content built from ResourceBundle-stored templates with support for variables (via Velocity API)
+ *
  * Revision 1.10  2005/10/18 20:39:02  stewardd
  * Checked in as a work-in-progress for the sake of not breaking the build. The altered signature of MailUtil.sendmail is accounted for in this revision. The outcome of calling sendmail herein is not tested but at least the code will permit the build without compile errors. Testing of course will be performed immediately and a new revision checked in as necessary.
  *
@@ -127,6 +130,7 @@ public class EmailActionImpl extends BaseCurateableAction {
                     theMailStandardText= new String[] {Constants.Admin.Actions.COMPLETE};
                 } else {
                     theMailSubject = "The following model has changed: " + theData.getModelDescriptor();
+                    theMailStandardText= new String[] {};
                 }
 
                 if (theRecipients.length > 0) {
