@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.5 2005-10-19 18:08:18 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.6 2005-10-20 20:02:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/19 18:08:18  pandyas
+ * added age and gender to genedelivery
+ *
  * Revision 1.4  2005/09/28 21:20:01  georgeda
  * Finished up converting to new manager
  *
@@ -19,9 +22,8 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
-import gov.nih.nci.camod.webapp.form.cibase.AgeGenderData;
-
 import java.util.List;
+import gov.nih.nci.camod.util.EvsTreeUtil;
 
 public class GeneDeliveryManagerImpl extends BaseManager implements GeneDeliveryManager {
 
@@ -75,11 +77,6 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
 
         log.info("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
         
-        /* Set the treatment
-        if (inGeneDelivery.getTreatment() == null) {
-            inGeneDelivery.setTreatment(new Treatment());
-        } */
-        
         // Set the treatment
         Treatment theTreatment = inGeneDelivery.getTreatment();
         if (theTreatment == null) {
@@ -94,7 +91,6 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         theTreatment.setSexDistribution(sexDistribution);
 
         // Append the ageunit onto the age at treatment variable
-        //inGeneDelivery.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment() + " " + inGeneDeliveryData.getAgeUnit());
         theTreatment.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment() + " " + inGeneDeliveryData.getAgeUnit());
         
         //anytime the viral vector is "other"
@@ -116,23 +112,34 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         inGeneDelivery.getTreatment().setRegimen(inGeneDeliveryData.getRegimen());
         inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
 
-
         /*
          * Add a Organ to AnimalModel with correct IDs, conceptCode 
          */
-        System.out.println("Saving: getOrganName=" + inGeneDeliveryData.getOrganName() + 
-        		"\n\t Not Saving organTissueName=" + inGeneDeliveryData.getOrganTissueName() +
-        		"\n\t Not Saving organ name for GUI presentation=" + inGeneDeliveryData.getOrgan());        		
-
+        
+        //new submission - organ will be null
         if (inGeneDelivery.getOrgan() == null) {
+        	System.out.println("Creating new Organ object");        	
         	inGeneDelivery.setOrgan(new Organ());
         }
-        //store OrganName in Organ table of DB - we are displaying EVSPreferedName so we will not use OrganName
-        System.out.println("populateGeneDelivery - getOrganName(): " + inGeneDeliveryData.getOrganName());
-        inGeneDelivery.getOrgan().setName(inGeneDeliveryData.getOrganName());
-        
-        inGeneDelivery.getOrgan().setConceptCode(inGeneDeliveryData.getOrganTissueCode());
-        System.out.println("populateGeneDelivery - getOrganTissueCode(): " +inGeneDeliveryData.getOrganTissueCode());
+
+        String newConceptCode = inGeneDeliveryData.getOrganTissueCode();
+    	System.out.println("newConceptCode: " + newConceptCode);
+    	
+        String oldConceptCode = inGeneDelivery.getOrgan().getConceptCode();
+    	System.out.println("oldConceptCode: " + oldConceptCode); 
+    	
+        if( !newConceptCode.equals(oldConceptCode) ) 
+        {
+       	System.out.println("Organ is new or was modified so retrieve attributes");
+        //always get/store organ name through the concept code - never deal with converting name back and forth
+        String preferedOrganName = EvsTreeUtil.getEVSPreferedOrganDescription(inGeneDeliveryData.getOrganTissueCode());
+        	
+        System.out.println("preferedOrganName: " + preferedOrganName);
+        inGeneDelivery.getOrgan().setName(preferedOrganName); 
+            
+        System.out.println("populateGeneDelivery - getOrgan().setConceptCode - OrganTissueCode: " +inGeneDeliveryData.getOrganTissueCode());
+        inGeneDelivery.getOrgan().setConceptCode(inGeneDeliveryData.getOrganTissueCode());            
+        }
 
         log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
     }

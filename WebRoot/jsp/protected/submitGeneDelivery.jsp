@@ -11,6 +11,7 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
+
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
 	
@@ -41,7 +42,6 @@
 	}
 	
 	
-	
 </script>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -70,7 +70,7 @@
             <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
             <br>		
 			<br>
-			<html:form action="<%= actionName %>" focus="name" >	
+			<html:form action="<%= actionName %>" focus="name" onsubmit="transferFields()">	
 			
 			<html:select styleClass="formFieldSized" size="1" property="viralVector" name="formdata" onclick="chkOtherViralVector( this );">
 				<html:options name="<%= Dropdowns.VIRALVECTORDROP %>"/>					
@@ -107,19 +107,20 @@
 		</td>
 	</tr>
 	
-		<!-- The evs# is inserted into Organ.conceptCode, the the OrganID is inserted   -->
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Location of Delivery:</label>
-		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
+		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
-				
+				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>
-		 		<INPUT name="organTissueCode" type="hidden"/>
+
 			</td>
-			<td class="formField"><input class="formFieldSized" type="text"  name="organ" id="organFieldId" size="40"  /></td>
-		</tr>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="organ" size="30" name="formdata"/>
+			</td>
+	</tr>
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>

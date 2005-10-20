@@ -65,7 +65,7 @@ public final class GeneDeliveryAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering edit");
+        log.info("<GeneDeliveryAction> Entering edit");
 
         // Create a form to edit
         GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
@@ -73,13 +73,11 @@ public final class GeneDeliveryAction extends BaseAction {
         // Grab the current therapy
         String aTherapyID = request.getParameter("aTherapyID");
 
-        log.info( "<GeneDeliveryAction save> following Characteristics:" + 
+        log.info( "<GeneDeliveryAction edit> following Characteristics:" + 
 				"\n\t ViralVector: "      + geneDeliveryForm.getViralVector() + 
 				"\n\t OtherViralVector: " + geneDeliveryForm.getOtherViralVector() + 
 				"\n\t GeneInVirus: "      + geneDeliveryForm.getGeneInVirus() + 
 				"\n\t Regimen: "          + geneDeliveryForm.getRegimen() +
-				"\n\t organ attribute (not sent to DB server): " + geneDeliveryForm.getOrgan()	+					
-				"\n\t Prefered organName: " + geneDeliveryForm.getOrganName() +
 				"\n\t organTissueCode: "  + geneDeliveryForm.getOrganTissueCode() +
 				"\n\t organTissueName: "  + geneDeliveryForm.getOrganTissueName() +
 				"\n\t user: "             + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
@@ -107,7 +105,7 @@ public final class GeneDeliveryAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.trace("Exiting edit");
+        log.info("<GeneDeliveryAction> Exiting edit");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -136,16 +134,14 @@ public ActionForward save( ActionMapping mapping,
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         
         log.info( "<GeneDeliveryAction save> following Characteristics:" + 
-						"\n\t ViralVector: "      + geneDeliveryForm.getViralVector() + 
-						"\n\t OtherViralVector: " + geneDeliveryForm.getOtherViralVector() + 
-						"\n\t GeneInVirus: "      + geneDeliveryForm.getGeneInVirus() + 
-						"\n\t Regimen: "          + geneDeliveryForm.getRegimen() +
-						"\n\t organ attribute (not sent to DB server): " + geneDeliveryForm.getOrgan()	+					
-						"\n\t getOrganName: " + geneDeliveryForm.getOrganName() +
-						"\n\t organTissueCode: "  + geneDeliveryForm.getOrganTissueCode() +
-						"\n\t organTissueName: "  + geneDeliveryForm.getOrganTissueName() +
-						"\n\t user: "             + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
-		
+				"\n\t ViralVector: "      + geneDeliveryForm.getViralVector() + 
+				"\n\t OtherViralVector: " + geneDeliveryForm.getOtherViralVector() + 
+				"\n\t GeneInVirus: "      + geneDeliveryForm.getGeneInVirus() + 
+				"\n\t Regimen: "          + geneDeliveryForm.getRegimen() +
+				"\n\t organTissueCode: "  + geneDeliveryForm.getOrganTissueCode() +
+				"\n\t organTissueName: "  + geneDeliveryForm.getOrganTissueName() +
+				"\n\t user: "             + (String) request.getSession().getAttribute( "camod.loggedon.username" ) );
+				
 		String theForward = "AnimalModelTreePopulateAction";
 		
 	    try {
@@ -174,6 +170,6 @@ public ActionForward save( ActionMapping mapping,
             theForward = "failure";
 	    }
 	    
-        log.trace("Exiting save");
+        log.trace("<GeneDeliveryAction> Exiting save");
         return mapping.findForward(theForward);    
     }}

@@ -68,18 +68,14 @@ public class GeneDeliveryPopulateAction extends BaseAction{
         
 		/*set Organ attributes*/
 		System.out.println( "<GeneDeliveryPopulateAction populate> get the Organ attributes" );
-
-		//Always display EVSPreferredDescription from Organ instead of OrganName from DB
-		geneDeliveryForm.setOrganName( gene.getOrgan().getEVSPreferredDescription() );
-		System.out.println( "setOrganName= " +gene.getOrgan().getEVSPreferredDescription());
 		
-		geneDeliveryForm.setOrganTissueCode( gene.getOrgan().getConceptCode());
-		System.out.println( "OrganTissueCode= " +gene.getOrgan().getConceptCode());
-		
+		//since we are always querying from concept code (save and edit), simply display VSPreferredDescription
         geneDeliveryForm.setOrgan( gene.getOrgan().getEVSPreferredDescription() );
 		System.out.println( "setOrgan= " + gene.getOrgan().getEVSPreferredDescription()); 
-		
-        
+
+		geneDeliveryForm.setOrganTissueCode( gene.getOrgan().getConceptCode());
+		System.out.println( "OrganTissueCode= " +gene.getOrgan().getConceptCode());		
+
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );
 

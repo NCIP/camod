@@ -35,7 +35,6 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
     protected String ageUnit;	
 
 	protected String organ;
-	protected String organName;	
 	protected String organTissueName;
 	protected String organTissueCode;
 
@@ -136,13 +135,7 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
 	public void setOrgan( String organ ) {
 		this.organ = organ;
 	}	
-	public String getOrganName() {
-		return organName;
-	}
-	
-	public void setOrganName( String organName ) {
-		this.organName = organName;
-	}	
+
 	public String getOrganTissueName() {
 		return organTissueName;
 	}
