@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.15 2005-10-19 18:56:00 guruswas Exp $
+ *  $Id: ViewModelAction.java,v 1.16 2005-10-20 21:35:37 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.15  2005/10/19 18:56:00  guruswas
+ *  implemented invivo details page
+ *
  *  Revision 1.14  2005/10/11 18:15:25  georgeda
  *  More comment changes
  *
@@ -512,6 +515,7 @@ public class ViewModelAction extends BaseAction {
         log.info("<populateXenograftDetails> modelID:" + modelID);
         log.info("<populateXenograftDetails> nsc:" + nsc);
 		XenograftManager mgr = (XenograftManager) getBean("xenograftManager");
+        
         Xenograft x = null;
         try {
             x = mgr.get(modelID);
@@ -519,7 +523,8 @@ public class ViewModelAction extends BaseAction {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        request.getSession().setAttribute(Constants.ANIMALMODEL, x);
+        setCancerModel(request);
+        request.getSession().setAttribute(Constants.XENOGRAFTMODEL, x);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
         return mapping.findForward("viewInvivoDetails");
     }

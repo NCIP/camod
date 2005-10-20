@@ -5,7 +5,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 
-<bean:define id="mdl" name="animalmodel"/>
+<bean:define id="mdl" name="xenograftmodel"/>
 <bean:define id="nsc" name="nsc"/>
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
