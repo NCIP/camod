@@ -1,7 +1,10 @@
 /**
- * $Id: SearchForm.java,v 1.4 2005-10-19 20:19:26 georgeda Exp $
+ * $Id: SearchForm.java,v 1.5 2005-10-20 19:29:32 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/19 20:19:26  georgeda
+ * Cleanup
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -39,6 +42,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     protected boolean targetedModification = false;
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
+    protected boolean searchXenograft = false;
     
     public void setHormone(String hormone) {
         this.hormone = hormone;
@@ -273,4 +277,12 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
 	public void setSearchMicroArrayData(boolean searchMicroArrayData) {
 		this.searchMicroArrayData = searchMicroArrayData;
 	}
+    
+    public boolean isSearchXenograft() {
+        return searchXenograft;
+    }
+    
+    public void setSearchXenograft(boolean searchXenograft) {
+        this.searchXenograft = searchXenograft;
+    }
 }

@@ -121,5 +121,9 @@ public interface SearchData {
 	public boolean isSearchMicroArrayData();
 
 	public void setSearchMicroArrayData(boolean b);
+    
+    public boolean isSearchXenograft();
+
+    public void setSearchXenograft(boolean b);
 	
 }
