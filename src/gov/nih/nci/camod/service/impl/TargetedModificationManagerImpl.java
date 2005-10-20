@@ -19,6 +19,7 @@ import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,7 +125,16 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 				// Send the email
 				try {
 					log	.trace("Sending Notification eMail - new Targeted Modification added");
-					MailUtil.sendMail(inRecipients, inSubject, inMessage,inFrom);
+
+                    // gather message keys and variable values to build the e-mail content with
+                    String[] messageKeys = {Constants.Admin.INDUCED_MUTATION_AGENT_ADDED};
+                    TreeMap values = new TreeMap();
+                    values.put(Constants.Admin.TARGETED_MODIFICATION_NAME, inTargetedModificationData.getName());
+                    values.put(Constants.Admin.TARGETED_MODIFICATION_TYPE,
+                            inTargetedModificationData.getOtherModificationType());
+
+                    // Send the email
+					MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
 					log.trace("Notification eMail sent");
 				} catch (Exception e) {
 					log.trace("Caught exception " + e);

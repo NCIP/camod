@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.5 2005-10-12 20:10:49 schroedn Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.6 2005-10-20 21:12:53 stewardd Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/12 20:10:49  schroedn
+ * Added Validation
+ *
  * Revision 1.4  2005/10/06 20:41:49  schroedn
  * InducedMutation, TargetedMutation, GenomicSegment changes
  *
@@ -23,6 +26,7 @@ import gov.nih.nci.camod.webapp.form.InducedMutationData;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -115,7 +119,15 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
 	            //Send the email
 	            try {
 	            	log.trace("Sending Notification eMail - new InducedMutation Agent added");
-	                MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom);
+
+                    // gather message keys and variable values to build the e-mail content with
+                    String[] messageKeys = {Constants.Admin.INDUCED_MUTATION_AGENT_ADDED};
+                    TreeMap values = new TreeMap();
+                    values.put(Constants.Admin.INDUCED_MUTATION_AGENT_NAME, inInducedMutationData.getName());
+                    values.put(Constants.Admin.INDUCED_MUTATION_AGENT_TYPE,inInducedMutationData.getOtherType());
+
+                    // Send the email
+	                MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
 	                log.trace("Notification eMail sent");
 	            } catch (Exception e) {
 	            	log.trace("Caught exception " + e);
