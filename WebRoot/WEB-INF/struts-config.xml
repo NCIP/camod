@@ -22,8 +22,8 @@
 		    
 		 <form-bean
 			name="associatedMetastasisForm"
-		    type="gov.nih.nci.camod.webapp.form.AssociatedMetastasisForm"/>		    
-
+		    type="gov.nih.nci.camod.webapp.form.AssociatedMetastasisForm"/>	
+		    
 		 <form-bean
 			name="cellLineForm"
 		    type="gov.nih.nci.camod.webapp.form.CellLineForm"/>
@@ -1004,7 +1004,6 @@
     		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
         </forward>
     </action>
-     <!-- AssociatedExpressionForm -->
      
      <!-- AssociatedMetastasisForm -->
      <action path="/AssociatedMetastasisAction"
@@ -1024,6 +1023,66 @@
 			validate="false">		
     </action>      
      
+     <!-- AvailabilityForms -->
+    <action path="/AvailabilityAction"
+    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
+    		name="availabilityForm" 
+         parameter="protected">    		   		
+         <forward 
+            redirect="true"
+    		name="next"
+    		path="/AvailabilityPopulateAction.do">
+    	 </forward>
+    </action> 
+
+    <action path="/JacksonLabPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
+    		name="availabilityForm"    		
+            scope="request"
+            parameter="method"            
+			validate="false">
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitJacksonLab.jsp">
+    	 </forward>									
+    </action>    
+
+    <action path="/MMHCCRepoPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
+    		name="availabilityForm"    		
+            scope="request"
+            parameter="method"            
+			validate="false">
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitMMHCCRepo.jsp">
+    	 </forward>									
+    </action>
+
+    <action path="/InvestigatorPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
+    		name="availabilityForm"    		
+            scope="request"
+            parameter="method"            
+			validate="false">
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitInvestigator.jsp">
+    	 </forward>									
+    </action> 
+    
+   <action path="/IMSRPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
+    		name="availabilityForm"    		
+            scope="request"
+            parameter="method"            
+			validate="false">
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitIMSR.jsp">
+    	 </forward>		
+    </action> 
+ 
           
      <!-- CellLineForm -->
      <action path="/CellLineAction"
