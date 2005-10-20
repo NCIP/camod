@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.36 2005-10-20 18:55:38 stewardd Exp $
- * 
+ * $Id: AnimalModelManagerImpl.java,v 1.37 2005-10-20 20:39:50 stewardd Exp $
+ *
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2005/10/20 18:55:38  stewardd
+ * Employs new EmailUtil API supporting e-mail content built from ResourceBundle-stored templates with support for variables (via Velocity API)
+ *
  * Revision 1.35  2005/10/19 19:26:35  pandyas
  * added admin route to growth factor
  *
@@ -89,7 +92,7 @@
  * Revision 1.8  2005/09/16 15:52:57  georgeda
  * Changes due to manager re-write
  *
- * 
+ *
  */
 
 package gov.nih.nci.camod.service.impl;
@@ -113,9 +116,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get all of the animal models in the DB
-     * 
+     *
      * @return the list of all animal models
-     * 
+     *
      * @exception throws
      *                an Exception if an error occurred
      */
@@ -126,30 +129,30 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get all of the animal models submitted by a username
-     * 
+     *
      * @param inUsername
      *            the username the models are submitted by
-     * 
+     *
      * @return the list of animal models
-     * 
+     *
      * @exception throws
      *                an Exception if an error occurred
      */
     public List getAllByUser(String inUsername) throws Exception {
 
         log.trace("In AnimalModelManagerImpl.getAllByUser");
-        
+
         return QueryManagerSingleton.instance().getModelsByUser(inUsername);
     }
 
     /**
      * Get all of the animal models of a specific state
-     * 
+     *
      * @param inState
      *            the state to query for
-     * 
+     *
      * @return the list of animal models
-     * 
+     *
      * @exception Exception
      *                if an error occurred
      */
@@ -178,12 +181,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get all of the models of a specific state
-     * 
+     *
      * @param inState
      *            the state to query for
-     * 
+     *
      * @return the list of models
-     * 
+     *
      * @exception Exception
      *                if an error occurred
      */
@@ -196,13 +199,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get a specific animal model
-     * 
+     *
      * @param id
      *            The unique id for the model
-     * 
+     *
      * @return the animal model if found, null otherwise
      * @throws Exception
-     * 
+     *
      * @exception Exception
      *                if an error occurred
      */
@@ -213,10 +216,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Save an animal model
-     * 
+     *
      * @param id
      *            The unique id for the model
-     * 
+     *
      * @exception Exception
      *                if an error occurred
      */
@@ -227,11 +230,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Update an animal model and create an associated log entry
-     * 
+     *
      * @param id
      *            The unique id for the model
      * @throws Exception
-     * 
+     *
      * @exception Exception
      *                if an error occurred
      */
@@ -262,13 +265,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Create a new/unsaved animal model
-     * 
+     *
      * @param inModelCharacteristicsData
      *            The values for the model and associated objects
-     * 
+     *
      * @param inUsername
      *            The submitter
-     * 
+     *
      * @return the created and unsaved AnimalModel
      * @throws Exception
      */
@@ -284,10 +287,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Update the animal model w/ the new characteristics and save
-     * 
+     *
      * @param inModelCharacteristicsData
      *            The new values for the model and associated objects
-     * 
+     *
      * @param inAnimalModel
      *            The animal model to update
      */
@@ -306,10 +309,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Remove the animal model from the system. Should remove all associated
      * data as well
-     * 
+     *
      * @param id
      *            The unique id of the animal model to delete
-     * 
+     *
      * @throws Exception
      *             An error occurred when attempting to delete the model
      */
@@ -321,11 +324,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Search for animal models based on: - modelName - piName - siteOfTumor -
      * speciesName
-     * 
+     *
      * Note: This method is currently a dummy search method and simply returns
      * all the animal model objects in the database. Searching using eQBE needs
      * to be done.
-     * 
+     *
      * @throws Exception
      */
     public List search(SearchData inSearchData) throws Exception {
@@ -370,7 +373,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
 
         inAnimalModel.setPrincipalInvestigator(thePI);
-        
+
         // Set the animal model information
         boolean isToolMouse = inModelCharacteristics.getIsToolMouse().equals("yes") ? true : false;
         inAnimalModel.setIsToolMouse(new Boolean(isToolMouse));
@@ -411,7 +414,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 // theBundle.getString(Constants.EmailMessage.SENDER);
 
                 // gather message keys and variable values to build the e-mail content with
-                String[] messageKeys = {"uncontrolledvocab"};
+                String[] messageKeys = {Constants.Admin.NONCONTROLLED_VOCABULARY};
                 TreeMap values = new TreeMap();
                 values.put("submitter",inAnimalModel.getSubmitter());
                 values.put("model",inAnimalModel.getModelDescriptor());
@@ -483,7 +486,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     }
 
     public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception {
-    	
+
     	System.out.println("<AnimalModelManagerImpl populate> Entering addXenograft() ");
 
         log.trace("Entering saveXenograft");
@@ -494,13 +497,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
 
         System.out.println("<AnimalModelManagerImpl populate> Exiting addXenograft() ");
-        
+
         log.trace("Exiting saveXenograft");
     }
 
     /**
      * Add a gene delivery
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inGeneDeliveryData
@@ -521,7 +524,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a chemical/drug therapy
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inChemicalDrugData
@@ -539,7 +542,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add an environmental factor therapy
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inEnvironmentalFactorData
@@ -558,7 +561,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add an environmental factor therapy
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inRadiationData
@@ -576,7 +579,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add an environmental factor therapy
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inViralTreatmentData
@@ -594,7 +597,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a growth factor
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inGrowthFactorData
@@ -612,7 +615,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a hormone
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inHormoneData
@@ -630,7 +633,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a nutritional factor
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inNutritionalFactorData
@@ -648,7 +651,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a surgery/other
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inSurgeryData
@@ -666,7 +669,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a cell line
-     * 
+     *
      * @param inAnimalModel
      *            the animal model that has the cell line
      * @param inSurgeryData
