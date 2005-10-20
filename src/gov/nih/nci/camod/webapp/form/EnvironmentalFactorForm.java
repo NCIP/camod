@@ -1,19 +1,18 @@
 /**
  * @author pandyas
  * 
- * $Id: EnvironmentalFactorForm.java,v 1.7 2005-09-27 19:17:10 georgeda Exp $
+ * $Id: EnvironmentalFactorForm.java,v 1.8 2005-10-20 20:33:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/09/27 19:17:10  georgeda
+ * Refactor of CI managers
+ *
  *
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- * 
- */
 public class EnvironmentalFactorForm extends BaseForm implements Serializable, EnvironmentalFactorData {
 
     private static final long serialVersionUID = 3257295453799404851L;
