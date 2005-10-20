@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.47 2005-10-20 21:14:15 stewardd Exp $
+ * $Id: Constants.java,v 1.48 2005-10-20 21:20:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2005/10/20 21:14:15  stewardd
+ * added constants used in e-mail generation of InducedMutationManagerImpl and TargetedModificationManagerImpl classe.
+ *
  * Revision 1.46  2005/10/20 19:28:28  georgeda
  * Added TOC constants
  *
@@ -415,6 +418,8 @@ public class Constants {
 		 * sidebar menu of the submission section
 		 */
 		public static final String CELLLINE_LIST = "cellline_list";
+		
+		public static final String ANIMALAVAILABILITY_LIST = "availability_list";
 	}
 
 	// /////////////////////////////////////////////////////////////
