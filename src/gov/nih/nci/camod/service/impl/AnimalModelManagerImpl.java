@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.35 2005-10-19 19:26:35 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.36 2005-10-20 18:55:38 stewardd Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2005/10/19 19:26:35  pandyas
+ * added admin route to growth factor
+ *
  * Revision 1.34  2005/10/18 16:23:31  georgeda
  * Changed getModelsByUser to return models where the PI is the user as well
  *
@@ -407,9 +410,16 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 // String inSender =
                 // theBundle.getString(Constants.EmailMessage.SENDER);
 
+                // gather message keys and variable values to build the e-mail content with
+                String[] messageKeys = {"uncontrolledvocab"};
+                TreeMap values = new TreeMap();
+                values.put("submitter",inAnimalModel.getSubmitter());
+                values.put("model",inAnimalModel.getModelDescriptor());
+                values.put("modelstate",inAnimalModel.getState());
+
                 // Send the email
                 try {
-                    MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom);
+                    MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
                 } catch (Exception e) {
                     System.out.println("Caught exception" + e);
                     e.printStackTrace();
