@@ -1,19 +1,14 @@
-/*
- * Created on Aug 23, 2005
+/**
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Id: ChemicalDrugForm.java,v 1.5 2005-10-20 20:32:12 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 
 public class ChemicalDrugForm extends BaseForm implements Serializable, ChemicalDrugData {
 

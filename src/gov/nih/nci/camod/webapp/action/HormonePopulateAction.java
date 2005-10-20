@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: HormonePopulateAction.java,v 1.7 2005-10-20 20:38:41 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -27,7 +35,7 @@ public class HormonePopulateAction extends BaseAction {
 						           HttpServletResponse response)
 	  throws Exception {
 	  
-		System.out.println( "<SurgeryPopulateAction populate> ... " );
+		System.out.println( "<HormonePopulateAction populate> ... " );
 		
 		HormoneForm hormoneForm = ( HormoneForm ) form;
 		

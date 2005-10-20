@@ -1,8 +1,9 @@
-/*
- * Created on May 5, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * 
+ * $Id: CellLine.java,v 1.7 2005-10-20 20:25:00 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.domain;
 
@@ -11,12 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class CellLine extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3259655453799404851L;

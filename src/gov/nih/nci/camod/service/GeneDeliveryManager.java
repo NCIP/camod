@@ -1,8 +1,9 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * 
+ * $Id: GeneDeliveryManager.java,v 1.5 2005-10-20 20:23:17 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.service;
 
@@ -11,12 +12,6 @@ import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
 
 import java.util.List;
 
-/**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public interface GeneDeliveryManager {
 
     public List getAll() throws Exception;

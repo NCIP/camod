@@ -1,19 +1,16 @@
-/*
- * Created on Jun 24, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * @author pandyas
+ * 
+ * $Id: CellLineForm.java,v 1.9 2005-10-20 20:27:27 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
+
 public class CellLineForm extends BaseForm implements Serializable, CellLineData {
     
     private static final long serialVersionUID = 3257355453799404851L;

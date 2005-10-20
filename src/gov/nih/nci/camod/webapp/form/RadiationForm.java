@@ -1,27 +1,22 @@
-/*
- * Created on Aug 19, 2005
+/**
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author pandyas
+ * 
+ * $Id: RadiationForm.java,v 1.5 2005-10-20 20:35:27 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class RadiationForm extends BaseForm implements Serializable, RadiationData {
 
     private static final long serialVersionUID = 3257035453799404851L;
 
     /**
      * Default empty constructor
-     * 
-     * @author pandyas
      * 
      * TODO To change the template for this generated type comment go to Window -
      * Preferences - Java - Code Style - Code Templates

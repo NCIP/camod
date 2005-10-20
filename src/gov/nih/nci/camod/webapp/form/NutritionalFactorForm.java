@@ -1,21 +1,23 @@
+/**
+ *
+ * @author pandyas
+ * 
+ * $Id: NutritionalFactorForm.java,v 1.5 2005-10-20 20:34:59 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class NutritionalFactorForm extends BaseForm implements Serializable, NutritionalFactorData {
 
     private static final long serialVersionUID = 3257025453799404851L;
 
     /**
      * Default empty constructor
-     * 
-     * @author pandyas
      * 
      * TODO To change the template for this generated type comment go to Window -
      * Preferences - Java - Code Style - Code Templates

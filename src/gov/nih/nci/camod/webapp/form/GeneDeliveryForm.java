@@ -1,19 +1,15 @@
-/*
- * Created on Jun 24, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * 
+ * $Id: GeneDeliveryForm.java,v 1.11 2005-10-20 20:22:54 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
+
 public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeliveryData {
 
     private static final long serialVersionUID = 3257355453799404851L;	

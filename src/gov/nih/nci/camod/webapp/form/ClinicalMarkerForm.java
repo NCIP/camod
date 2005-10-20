@@ -1,29 +1,20 @@
-/*
- * Created on Aug 19, 2005
+/**
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author pandyas
+ * 
+ * $Id: ClinicalMarkerForm.java,v 1.3 2005-10-20 20:32:45 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- * 
- */
 public class ClinicalMarkerForm extends BaseForm implements Serializable {
 
     private static final long serialVersionUID = 3257325453799404851L;
 
-    /**
-     * Default empty constructor
-     * 
-     * @author pandyas
-     * 
-     * TODO To change the template for this generated type comment go to Window -
-     * Preferences - Java - Code Style - Code Templates
-     */
     public ClinicalMarkerForm() {
     }
 

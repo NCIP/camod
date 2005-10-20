@@ -1,19 +1,16 @@
-/*
- * Created on Aug 23, 2005
+/**
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author pandyas
+ * 
+ * $Id: HormoneForm.java,v 1.6 2005-10-20 20:34:30 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author pandyas
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 
 public class HormoneForm extends BaseForm implements Serializable, HormoneData {
     
@@ -21,7 +18,6 @@ public class HormoneForm extends BaseForm implements Serializable, HormoneData {
     
 	/**
 	 * Default empty constructor
-	 * @author pandyas
 	 *
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
