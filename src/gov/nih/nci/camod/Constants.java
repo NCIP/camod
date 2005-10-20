@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.45 2005-10-19 18:56:26 guruswas Exp $
+ * $Id: Constants.java,v 1.46 2005-10-20 19:28:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.45  2005/10/19 18:56:26  guruswas
+ * implemented invivo details page
+ *
  * Revision 1.44  2005/10/17 13:25:17  georgeda
  * Work for comments/users
  *
@@ -113,6 +116,14 @@ public class Constants {
     public interface CaArray {
         public static final String URI_START = "caarray.uri_start";
         public static final String URI_END = "caarray.uri_end";
+    }
+    
+    /**
+     * Used in table of contents searching
+     */
+    public interface TOCSearch {
+        public static final String TOC_QUERY_FILE = "config/TOCQueryConfig.xml";
+        public static final String TOC_QUERY_RESULTS = "TOC_QUERY_RESULTS";
     }
     
 	/**
@@ -243,6 +254,8 @@ public class Constants {
 		public static final String COMMENTSID = "aCommentsID";
 		
 		public static final String COMMENTSLIST = "aCommentsList";
+        
+        public static final String TOCQUERYKEY = "aTOCQueryKey";
         
         
 	}
