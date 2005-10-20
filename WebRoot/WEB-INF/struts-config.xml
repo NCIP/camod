@@ -1791,6 +1791,32 @@
             path="/searchSimple.do">
         </forward>	
     </action>
+    <action path="/SearchTableOfContentsPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.SearchTableOfContentsPopulateAction"
+    		name="searchForm"    		
+            scope="request"
+            parameter="unprotected_method"
+			validate="false">	
+	    <forward
+            name="next"
+            path="/searchTableOfContents.do">
+        </forward>	
+    </action>
+    <action path="/ViewTOCSearchResultsAction"
+    		type="gov.nih.nci.camod.webapp.action.ViewTOCSearchResultsAction"
+    		name="searchForm"    		
+            scope="request"
+            parameter="unprotected_method"
+			validate="false">	
+	    <forward
+            name="next"
+            path="/searchResults.do">
+        </forward>	
+        <forward
+            name="failure"
+            path="/searchTableOfContents.do">
+        </forward>	
+    </action>
 
     <action path="/DrugScreenSearchAction"
 	        type="gov.nih.nci.camod.webapp.action.DrugScreenSearchAction"

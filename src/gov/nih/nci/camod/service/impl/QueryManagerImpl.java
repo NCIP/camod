@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.17 2005-10-18 16:24:31 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.18 2005-10-20 19:28:58 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/10/18 16:24:31  georgeda
+ * Added getModelsByUser
+ *
  * Revision 1.16  2005/10/17 13:12:47  georgeda
  * Added new method
  *
@@ -801,7 +804,7 @@ public class QueryManagerImpl extends BaseManager {
     private String getModelIdsForHistoMetastasis() throws PersistenceException {
 
         String theSQLString = "SELECT distinct ani_hist.abs_cancer_model_id FROM ani_mod_histopathology ani_hist "
-                + "WHERE ani_hist.histopathology_id IN (SELECT h.histopathology_id FROM histopathology h "
+                + "WHERE ani_hist.histopathology_id IN (SELECT h.parent_histopathology_id FROM histopathology h "
                 + "     WHERE h.parent_histopathology_id IS NOT NULL)";
 
         Object[] theParams = new Object[0];
@@ -809,6 +812,23 @@ public class QueryManagerImpl extends BaseManager {
 
     }
 
+    /**
+     * Get the model id's for any model that has a histopathology with a parent
+     * histopathology
+     * 
+     * @return a list of matching model ids
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForXenograft() throws PersistenceException {
+
+        String theSQLString = "SELECT distinct par_abs_can_model_id FROM abs_cancer_model ";
+               
+        Object[] theParams = new Object[0];
+        return getModelIds(theSQLString, theParams);
+
+    }
+    
     /**
      * Get the model id's for any model that has associated microarray data
      * 
@@ -1086,11 +1106,67 @@ public class QueryManagerImpl extends BaseManager {
         return theAnimalModels;
     }
 
-    private List keywordSearch(String inFromClause, String inOrderByClause, String inKeyword) throws Exception {
+    public int countMatchingAnimalModels(SearchData inSearchData) throws Exception {
 
-        // Use the like search functionality
+        log.trace("Entering countMatchingAnimalModels");
+
+
+        String theFromClause = "select count (am) from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate ";
+        List theCountResults = null;
+        
+        if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0) {
+            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
+            String theWhereClause = buildKeywordSearchWhereClause(inSearchData.getKeyword());
+            
+            try {
+                String theHQLQuery = theFromClause + theWhereClause;
+
+                log.info("HQL Query: " + theHQLQuery);
+
+                String theKeyword = "%" + inSearchData.getKeyword() + "%";
+                Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+                theQuery.setParameter("keyword", theKeyword);
+
+                theCountResults = theQuery.list();
+                
+            } catch (Exception e) {
+                log.error("Exception occurred searching for models", e);
+                throw e;
+            }
+        } else {
+            log.debug("Doing a criteria search");
+            String theWhereClause = buildCriteriaSearchWhereClause(inSearchData);
+            
+            try {
+                String theHQLQuery = theFromClause + theWhereClause;
+
+                log.info("HQL Query: " + theHQLQuery);
+
+                Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+                theCountResults = theQuery.list();
+                
+            } catch (Exception e) {
+                log.error("Exception occurred searching for models", e);
+                throw e;
+            }
+        }
+
+        int theCount = -1;
+        if (theCountResults != null && theCountResults.size() > 0)
+        {
+            Integer theInt = (Integer) theCountResults.get(0);
+            theCount = theInt.intValue();
+        }
+        log.trace("Exiting searchForAnimalModels");
+
+        return theCount;
+    }
+    
+    // Build the where clause for the search and the count
+    private String buildKeywordSearchWhereClause(String inKeyword) throws Exception
+    {
         String theKeyword = "%" + inKeyword + "%";
-
+        
         String theWhereClause = "";
 
         theWhereClause += " AND (am.modelDescriptor like :keyword ";
@@ -1111,6 +1187,13 @@ public class QueryManagerImpl extends BaseManager {
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForTherapeuticApproach(inKeyword) + "))";
 
+        return theWhereClause;
+    }
+    
+    private List keywordSearch(String inFromClause, String inOrderByClause, String inKeyword) throws Exception {
+
+        String theWhereClause = buildKeywordSearchWhereClause(inKeyword);
+        
         List theAnimalModels = null;
 
         try {
@@ -1118,6 +1201,7 @@ public class QueryManagerImpl extends BaseManager {
 
             log.info("HQL Query: " + theHQLQuery);
 
+            String theKeyword = "%" + inKeyword + "%";
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("keyword", theKeyword);
 
@@ -1130,8 +1214,8 @@ public class QueryManagerImpl extends BaseManager {
         return theAnimalModels;
     }
 
-    private List criteriaSearch(String inFromClause, String inOrderByClause, SearchData inSearchData) throws Exception {
-
+    private String buildCriteriaSearchWhereClause(SearchData inSearchData) throws Exception
+    {
         String theWhereClause = "";
 
         // PI criteria
@@ -1255,6 +1339,18 @@ public class QueryManagerImpl extends BaseManager {
         if (inSearchData.isSearchMicroArrayData()) {
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForMicroArrayData() + ")";
         }
+        
+        // Search for therapeutic approaches
+        if (inSearchData.isSearchXenograft()) {
+            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForXenograft() + ")";
+        }
+        
+        return theWhereClause;
+        
+    }
+    private List criteriaSearch(String inFromClause, String inOrderByClause, SearchData inSearchData) throws Exception {
+
+        String theWhereClause = buildCriteriaSearchWhereClause(inSearchData);
 
         List theAnimalModels = null;
 

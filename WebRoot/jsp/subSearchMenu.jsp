@@ -4,7 +4,7 @@
 <TR><TD class=subMenuPrimaryItems>
 <DIV>
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
-	<html:link styleClass="subMenuPrimary" action="searchTableOfContents">&nbsp;&nbsp;TABLE OF CONTENTS</html:link>
+	<html:link styleClass="subMenuPrimary" action="SearchTableOfContentsPopulateAction?unprotected_method=populate">&nbsp;&nbsp;TABLE OF CONTENTS</html:link>
 	<BR>
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
 	<html:link styleClass="subMenuPrimary" action="SimpleSearchPopulateAction?unprotected_method=populate">&nbsp;&nbsp;SIMPLE SEARCH</html:link>
