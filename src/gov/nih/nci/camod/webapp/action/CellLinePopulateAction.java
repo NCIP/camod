@@ -1,3 +1,12 @@
+/**
+ * @author pandyas
+ * 
+ * $Id: CellLinePopulateAction.java,v 1.7 2005-10-20 20:26:21 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.webapp.action;
 
 import java.util.List;
@@ -45,32 +54,28 @@ public class CellLinePopulateAction  extends BaseAction {
 		//retrieve the list of all cell lines from the current animalModel
 		List cellList = am.getCellLineCollection();
 		
-		CellLine cell = new CellLine();
+		CellLine cellLine = new CellLine();
 		
 		//find the specific one we need
 		for ( int i=0; i<cellList.size(); i++ ) {
-			cell = (CellLine)cellList.get(i);
-			if ( cell.getId().toString().equals( aCellID ) )
+			cellLine = (CellLine)cellList.get(i);
+			if ( cellLine.getId().toString().equals( aCellID ) )
 				break;
 		}
-		cellLineForm.setCellLineName(cell.getName());
-		cellLineForm.setExperiment( cell.getExperiment() );
-		cellLineForm.setResults( cell.getResults() );
-		cellLineForm.setComments(cell.getComments());		
+		cellLineForm.setCellLineName(cellLine.getName());
+		cellLineForm.setExperiment( cellLine.getExperiment() );
+		cellLineForm.setResults( cellLine.getResults() );
+		cellLineForm.setComments(cellLine.getComments());		
 
 		/*set Organ attributes*/
 		System.out.println( "<CellLinePopulateAction populate> get the Organ attributes" );
 
-		//TODO fix EVS to show EVSPreferredDescription so it can be retrieved
-		cellLineForm.setOrgan( cell.getOrgan().getEVSPreferredDescription() );
-		System.out.println( "OrganName= " +cell.getOrgan().getEVSPreferredDescription());		
-		
-		cellLineForm.setOrganTissueCode( cell.getOrgan().getConceptCode());
-		System.out.println( "OrganTissueCode= " +cell.getOrgan().getConceptCode());
+		//since we are always querying from concept code (save and edit), simply display VSPreferredDescription
+		cellLineForm.setOrgan( cellLine.getOrgan().getEVSPreferredDescription() );
+		System.out.println( "setOrgan= " + cellLine.getOrgan().getEVSPreferredDescription()); 
 
-		//do we need this?
-		cellLineForm.setOrganTissueName( cell.getOrgan().getName() );
-		System.out.println( "OrganTissueName= " + cell.getOrgan().getName()); 		
+		cellLineForm.setOrganTissueCode( cellLine.getOrgan().getConceptCode());
+		System.out.println( "OrganTissueCode= " +cellLine.getOrgan().getConceptCode());	 		
 
 		//Store the Form in session to be used by the JSP
 		request.getSession().setAttribute( Constants.FORMDATA, cellLineForm );

@@ -53,17 +53,18 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
-		<camod:cshelp key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		  	    <a href="javascript:showTissueTree('cellLineForm', 'descendants=true;isaFlag=false;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
+		<td class="formRequiredLabel"><label for="field2">Location of Delivery:</label>
+		  	    <a href="javascript:showTissueTree('cellLineForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
-				<INPUT name="organ" type="hidden"/>					
+				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>
-		 		<INPUT name="organTissueCode" type="hidden"/>
+
 			</td>
-			<td class="formField"><input class="formFieldSized" type="text"  name="organ" id="organFieldId" size="25" disabled="true" /></td>
-		</tr>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="organ" size="30" name="formdata"/>
+			</td>
+	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
