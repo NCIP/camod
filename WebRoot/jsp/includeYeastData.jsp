@@ -3,8 +3,9 @@
 <c:forEach var="stg" items="${yst}" varStatus="stat2">
 		<c:choose>
 		<c:when test="${stg.strainCount <= 0}">
+		
 		<tr>
-			<td class="greySubTitleLeft" colspan=2>
+			<td class="greySubTitleLeftEnd" colspan=2>
 			<b>Data unavailable for NCI Yeast Anticancer Drug Screen </b>
 			<br>Stage <c:out value="${stat2.count - 1}"/>
 			</td>
