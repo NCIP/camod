@@ -100,7 +100,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gene ID ( Entrez )</label>
-		<camod:cshelp key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<!-- Add GENE_ID tool tip when ready  -->
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="geneId" size="20" name="formdata"/>		
