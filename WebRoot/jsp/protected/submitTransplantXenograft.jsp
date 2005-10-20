@@ -86,16 +86,18 @@
 				<html:text styleClass="formFieldSized" property="name"  size="30" name="formdata"/>
 		</td>
 	</tr>
-
+	
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">ATTC number (if available):</label>
+			<td class="formRequiredNotice" width="3">&nbsp;</td>
+			<td class="formLabel"><label for="field1">ATTC number (if available):</label>
 			<camod:cshelp key="ABS_CANCER_MODEL.ATCC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ATCCNumber"  size="10" name="formdata"/>	
-		</td>         		
-	</tr>	
+			</td>
+			<td class="formField">		
+				<input type=button value="Find ATTC #" onClick="myRef = window.open('http://www.atcc.org/','mywin',
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<html:text styleClass="formFieldUnSized" size="10" property="ATCCNumber" name="formdata" />
+			</td>
+	</tr>		
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
