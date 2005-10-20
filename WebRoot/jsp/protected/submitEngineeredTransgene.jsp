@@ -144,7 +144,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Location of Integration *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)</td>
+		<td class="formLabel"><label for="field1">Location of Integration *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)
+		<camod:cshelp key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" name="formdata"/>
 		</td>
@@ -156,7 +158,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Transgene</label></td>
+		<td class="formRequiredLabel"><label for="field1">Transgene</label>
+		<camod:cshelp key="ENGINEERED_GENE.NAME_TRANSGENE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
@@ -182,7 +186,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Transcriptional 1</label></td>
+		<td class="formRequiredLabel"><label for="field1">Transcriptional 1</label>
+		<camod:cshelp key="REGULATORY_ELEMENT.NAME_Transcriptional1" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
@@ -248,7 +254,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Poly A Signal</label></td>
+		<td class="formLabel"><label for="field1">Poly A Signal</label>
+		<camod:cshelp key="REGULATORY_ELEMENT.NAME_PolyA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
@@ -292,7 +300,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">MGI Number</label></td>
+		<td class="formLabel"><label for="field2">MGI Number</label>
+		<camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
 		</td>
@@ -300,7 +310,9 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Gene Functions<br>(seperate each entry by a comma)</label></td>
+		<td class="formLabel"><label for="field2">Gene Functions<br>(seperate each entry by a comma)</label>
+		<camod:cshelp key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="geneFunctions"  rows="4" cols="32"  name="formdata"/>		
 		</td>
@@ -325,7 +337,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Additional Features</label></td>
+		<td class="formLabel"><label for="field2">Additional Features</label>
+		<camod:cshelp key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  name="formdata"/>	
 		</td>
@@ -353,7 +367,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
+		<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label>
+		<camod:cshelp key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct" rows="4" cols="32"  name="formdata"/>	
 		</td>
