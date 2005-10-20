@@ -18,7 +18,7 @@
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
 				Therapeutic Approaches - Model:
-				<c:out value="${mdl.modelDescriptor}"/></td>				
+				<c:out escapeXml="false" value="${mdl.modelDescriptor}"/></td>				
 			</tr>
 			<tr>
 				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
