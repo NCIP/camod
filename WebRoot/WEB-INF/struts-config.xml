@@ -23,6 +23,10 @@
 		 <form-bean
 			name="associatedMetastasisForm"
 		    type="gov.nih.nci.camod.webapp.form.AssociatedMetastasisForm"/>	
+
+		 <form-bean
+			name="availabilityForm"
+		    type="gov.nih.nci.camod.webapp.form.AvailabilityForm"/>	
 		    
 		 <form-bean
 			name="cellLineForm"
@@ -1024,16 +1028,14 @@
     </action>      
      
      <!-- AvailabilityForms -->
-    <action path="/AvailabilityAction"
-    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
-    		name="availabilityForm" 
-         parameter="protected">    		   		
-         <forward 
-            redirect="true"
-    		name="next"
-    		path="/AvailabilityPopulateAction.do">
-    	 </forward>
-    </action> 
+     <action path="/JacksonLabAction"
+	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
+	        name="availabilityForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitJacksonLab">   	
+     </action>    
 
     <action path="/JacksonLabPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
@@ -1047,6 +1049,15 @@
     	 </forward>									
     </action>    
 
+     <action path="/MMHCCRepoAction"
+	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
+	        name="availabilityForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitMMHCCRepo">   	
+     </action>
+
     <action path="/MMHCCRepoPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
     		name="availabilityForm"    		
@@ -1059,6 +1070,15 @@
     	 </forward>									
     </action>
 
+     <action path="/InvestigatorAction"
+	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
+	        name="availabilityForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitInvestigator">   	
+     </action>
+
     <action path="/InvestigatorPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
     		name="availabilityForm"    		
@@ -1070,6 +1090,15 @@
     		path="/jsp/protected/submitInvestigator.jsp">
     	 </forward>									
     </action> 
+    
+     <action path="/IMSRAction"
+	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
+	        name="availabilityForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitIMSR">   	
+     </action>    
     
    <action path="/IMSRPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
