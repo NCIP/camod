@@ -14,7 +14,7 @@
 <hibernate-mapping package="gov.nih.nci.camod.domain">
 	<class name="ExpressionLevelDesc" 
     	table="exp_level_desc"
-        lazy="true">
+        lazy="true" mutable="false">
 
 	    <!-- id -->
 	    <id name="id" 

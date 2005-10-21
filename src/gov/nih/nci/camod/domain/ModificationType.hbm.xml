@@ -14,7 +14,7 @@
 <hibernate-mapping package="gov.nih.nci.camod.domain">
 	<class name="ModificationType" 
     	table="modification_type"
-        lazy="true">
+        lazy="true" mutable="false">
 
 	    <!-- id -->
 	    <id name="id" 

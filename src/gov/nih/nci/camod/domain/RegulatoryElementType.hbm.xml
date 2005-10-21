@@ -14,7 +14,7 @@
 <hibernate-mapping package="gov.nih.nci.camod.domain">
 	<class name="RegulatoryElementType" 
     	table="reg_element_type"
-        lazy="true">
+        lazy="true" mutable="false">
 
 	    <!-- id -->
 	    <id name="id" 
