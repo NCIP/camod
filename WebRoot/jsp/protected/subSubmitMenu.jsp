@@ -11,7 +11,8 @@
 <%@ page import="gov.nih.nci.camod.domain.GenomicSegment" %>
 <%@ page import="gov.nih.nci.camod.domain.EnvironmentalFactor" %>	
 <%@ page import="gov.nih.nci.camod.domain.SpontaneousMutation" %>	
-<%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>	
+<%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>
+<%@ page import="gov.nih.nci.camod.domain.AnimalAvailability" %>		
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
@@ -177,10 +178,16 @@
 
 	<div id="menu10" class="masterTitle" onclick="SwitchMenu('sub10')" onmouseover="ChangeClass('menu10','masterTitleOver')" onmouseout="ChangeClass('menu10','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> MODEL AVAILABILITY</div>
 	<span class="submasterdiv" id="sub10">
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitJacksonLab">Available from Jackson Lab.</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitMMHCCRepo">Available from MMHCC Repo.</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitInvestigator">Available from Investigator</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitIMSR">Available from IMSR</html:link><br><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="JacksonLabPopulateAction.do?method=dropdown">Available from Jackson Lab.</html:link><br>
+			 <logic:iterate id="aAvailability" name="availability_list" type="AnimalAvailability">
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="JacksonLabPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="name" filter="true"/></html:link><br>
+			 </logic:iterate>		
+		
+		
+		
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="MMHCCRepoPopulateAction.do?method=dropdown">Available from MMHCC Repo.</html:link><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="InvestigatorPopulateAction.do?method=dropdown">Available from Investigator</html:link><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="IMSRPopulateAction.do?method=dropdown">Available from IMSR</html:link><br><br>
 	</span>
         
 	<div id="menu11" class="masterTitle" onclick="SwitchMenu('sub11')" onmouseover="ChangeClass('menu11','masterTitleOver')" onmouseout="ChangeClass('menu11','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> XENOGRAFT</div>

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.26 2005-10-12 20:10:49 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.27 2005-10-21 16:07:01 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.26  2005/10/12 20:10:49  schroedn
+ *  Added Validation
+ *
  *  Revision 1.25  2005/10/11 20:52:55  schroedn
  *  EngineeredTransgene and GenomicSegment edit/save works, not image
  *
@@ -48,6 +51,7 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
+import gov.nih.nci.camod.domain.AnimalAvailability;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.EngineeredGene;
@@ -142,6 +146,18 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             
             cellList.add(cellLine);
     	} 
+        
+        // Retrieve a list of all availablty entries assoicated with this Animal model
+        List availabilityList = animalModel.getAnimalAvailabilityCollection();
+        List availList = new ArrayList(); 
+     
+        for (int i = 0; i < availabilityList.size(); i++) {
+            AnimalAvailability availability = (AnimalAvailability) availabilityList.get(i);
+            
+            //System.out.println("\tAdded Availability = " + availability);
+            
+            availList.add(availability);
+    	}        
         
         //Retrive the list of all Xenograft transplants assoicated with this Animal Model
         List xenoList = new ArrayList();
@@ -298,6 +314,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
         request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
         request.getSession().setAttribute(Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
+        request.getSession().setAttribute(Constants.Submit.ANIMALAVAILABILITY_LIST, availList);
+        
         
       //  System.out.println( "TargedModList: " + targetedList);
         

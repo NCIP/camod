@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.37 2005-10-20 20:39:50 stewardd Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.38 2005-10-21 16:07:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2005/10/20 20:39:50  stewardd
+ * modified to use constant value instead of a hard coded string in messageKeys
+ *
  * Revision 1.36  2005/10/20 18:55:38  stewardd
  * Employs new EmailUtil API supporting e-mail content built from ResourceBundle-stored templates with support for variables (via Velocity API)
  *
@@ -788,4 +791,25 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
     }
+    
+    /**
+     * Add an Availability
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the Availability
+     * @param inAvailabilityData
+     *            the new therapy data
+     * @throws Exception
+     */
+
+    public void addAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception {
+
+        System.out.println("<AnimalModelManagerImpl addAvailability>");
+
+        log.trace("Entering AnimalModelManagerImpl.addAvailability");
+        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().create(inAvailabilityData, inAnimalModel);
+        inAnimalModel.addAnimalAvailability(theAvailability);
+        save(inAnimalModel);
+        log.trace("Exiting AnimalModelManagerImpl.addAvailability");
+    }    
 }

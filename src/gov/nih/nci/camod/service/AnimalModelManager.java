@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.20 2005-10-11 20:52:53 schroedn Exp $
+ * $Id: AnimalModelManager.java,v 1.21 2005-10-21 16:07:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2005/10/11 20:52:53  schroedn
+ * EngineeredTransgene and GenomicSegment edit/save works, not image
+ *
+ * TODO EngineeredTransgene - 'Other' Species not working
+ *
  * Revision 1.19  2005/10/10 14:06:44  georgeda
  * Performance improvement
  *
@@ -34,6 +39,11 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2005/10/11 20:52:53  schroedn
+ * EngineeredTransgene and GenomicSegment edit/save works, not image
+ *
+ * TODO EngineeredTransgene - 'Other' Species not working
+ *
  * Revision 1.19  2005/10/10 14:06:44  georgeda
  * Performance improvement
  *
@@ -141,5 +151,7 @@ public interface AnimalModelManager {
     public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData) throws Exception;
 
     public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception; 
+    
+    public void addAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception;     
     
 }
