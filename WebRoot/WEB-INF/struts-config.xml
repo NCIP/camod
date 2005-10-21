@@ -355,7 +355,11 @@
 		<forward
 			name="viewTransplantXenograft"
 			path="/jsp/viewTransplantXenograft.jsp"></forward>
-				
+		
+		<forward
+			name="viewLizardImage"
+			path="/jsp/viewLizardImage.jsp"></forward>
+
 		<forward
 			name="viewInvivoDetails"
 			path="/jsp/viewInvivoDetails.jsp"></forward>
@@ -563,7 +567,12 @@
 			path="/adminUserManagement"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/adminUserManagement.jsp" />
-					
+			
+		<action
+			path="/viewLizardImage"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/viewLizardImage.jsp" />
+			
 		<action
 			path="/searchAdvanced"
 			type="org.apache.struts.actions.ForwardAction"
