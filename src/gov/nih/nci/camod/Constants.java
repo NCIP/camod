@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.49 2005-10-20 21:35:22 georgeda Exp $
+ * $Id: Constants.java,v 1.50 2005-10-21 19:36:56 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2005/10/20 21:35:22  georgeda
+ * Added xenograft constant
+ *
  * Revision 1.48  2005/10/20 21:20:17  pandyas
  * add animal availability list
  *
@@ -162,6 +165,8 @@ public class Constants {
 
 		public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
 
+		public static final String HOSTSPECIESDROP = "HostSpecies.txt";
+		
 		// Various Dose Units
 		public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
 
@@ -247,6 +252,20 @@ public class Constants {
 		public static final String USERSDROP = "users.db";
 	}
 
+	/**
+	 * Defines the global constants used as parameters for ftp requests
+	 */
+	public interface Images {
+		
+		public static final String FTPSERVER = "ftp.server";
+	
+		public static final String FTPUSERNAME = "ftp.username";
+		
+		public static final String FTPPASSWORD = "ftp.password";
+		
+		public static final String FTPSTORAGEDIRECTORY = "ftp.storagedirectory"; 
+	}
+	
 	/**
 	 * Defines the global constants used as parameters to requests
 	 */
