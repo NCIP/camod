@@ -5,6 +5,7 @@
 <%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>	
 <%@ page import="gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.EngineeredTransgeneData" %>	
 <%@ page import="gov.nih.nci.camod.Constants.*" %>
 <%@ page import="java.util.List" %>
 
@@ -22,7 +23,6 @@
 	
 	if ( aEngineeredTransgeneID != null )
 		actionName = "EngineeredTransgeneAction.do?method=edit";
-
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -113,6 +113,9 @@
 			ideControl.disabled = true;
 		}
 	}
+
+
+
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -135,7 +138,7 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Transgene Integration</label></td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="locationOfIntegration">	
+			<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">	
 
 			<html:radio property="locationOfIntegration" value="Random" onchange="chkIntegration(this);" /> Random 
 			<html:radio property="locationOfIntegration" value="Targeted" onchange="chkIntegration(this);" /> Targeted
@@ -169,7 +172,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="scientificName" onchange="chkOther( this );" >
-							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+							<html:options name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -197,7 +200,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional1_species" onchange="chkOther_t1( this );" >
-							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+							<html:options name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -219,7 +222,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional2_species" onchange="chkOther_t2( this );" >
-							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+							<html:options name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -241,7 +244,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional3_species" onchange="chkOther_t3( this );" >
-							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+							<html:options name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -265,7 +268,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="polyASignal_species" onchange="chkOther_PS( this );" >
-							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+							<html:options name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -287,7 +290,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="spliceSites_species" onchange="chkOther_SS( this );" >
-							<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+							<html:options name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -304,7 +307,7 @@
 		<camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>
 		</td>
 	</tr>	
 	
@@ -353,7 +356,31 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 		<td class="formField">
-			<html:file styleClass="formFieldSized" size="40" property="fileServerLocation" name="formdata"/>		
+		
+		<% 
+			 // Only display a thumbnail if Image exists
+		     EngineeredTransgeneForm theEngineeredTransgeneForm = (EngineeredTransgeneForm) request.getSession().getAttribute("formdata");
+				
+			 if ( theEngineeredTransgeneForm.getFileServerLocation() != null ) {
+			 	if ( ! theEngineeredTransgeneForm.getFileServerLocation().equals( "" ) ) {
+			 	
+			 		pageContext.setAttribute("fileServerLocationName", theEngineeredTransgeneForm.getFileServerLocation() );
+		%>
+					<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${fileServerLocationName}',600,600);"/>
+				
+					Current Image: <bean:write name="formdata" property="fileServerLocation"/><br>
+					Current Image Thumbnail: <br>
+						
+					<a href='<c:out value="${uri}"/>'>			
+					
+					<img src="http://caimage.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&amp;img=<bean:write name='formdata' property='fileServerLocation'/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
+					Click to View</a><br><br>									
+		<% 
+				} 
+			} 			
+		%>
+						
+			<html:file styleClass="formFieldSized" size="40" property="fileLocation" name="formdata"/>			
 		</td>			
 	</tr>		
 
@@ -420,6 +447,60 @@
 		else {
 			ideOtherControl.disabled = false;
 		}
+		
+		ideControl = document.forms[0].scientificName;		
+		ideOtherControl = document.forms[0].otherScientificName;
+		
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}				
+		
+		ideControl = document.forms[0].transcriptional1_species;
+	    ideOtherControl = document.forms[0].transcriptional1_otherSpecies;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}						
+		
+		ideControl = document.forms[0].transcriptional2_species;
+	    ideOtherControl = document.forms[0].transcriptional2_otherSpecies;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}					
+						
+		ideControl = document.forms[0].transcriptional3_species;
+	    ideOtherControl = document.forms[0].transcriptional3_otherSpecies;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}					
+		
+		ideControl = document.forms[0].polyASignal_species;
+	    ideOtherControl = document.forms[0].polyASignal_otherSpecies;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}					
+		
+		ideControl = document.forms[0].spliceSites_species;
+	    ideOtherControl = document.forms[0].spliceSites_otherSpecies;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}					
 	}
 	
 	checkOthers();

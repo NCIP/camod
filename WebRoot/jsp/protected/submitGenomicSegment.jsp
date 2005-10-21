@@ -69,7 +69,7 @@
 			<td class="formRequiredLabel"><label for="field3">Integration</label>
 			</td>
 			<td class="formField">
-				<html:form action="<%= actionName %>" focus="locationOfIntegration">	
+				<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">	
 		
 				<html:radio property="locationOfIntegration" value="Random" onchange="chkIntegration(this);" /> Random 
 				<html:radio property="locationOfIntegration" value="Targeted" onchange="chkIntegration(this);" /> Targeted
@@ -155,7 +155,32 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="fileServerLocation" size="30" name="formdata"/> Browse
+						
+			<% 
+				 // Only display a thumbnail if Image exists
+			     GenomicSegmentForm theGenomicSegmentForm = (GenomicSegmentForm) request.getSession().getAttribute("formdata");
+					
+				 if ( theGenomicSegmentForm.getFileServerLocation() != null ) {
+				 	if ( ! theGenomicSegmentForm.getFileServerLocation().equals( "" ) ) {
+				 	
+				 		pageContext.setAttribute("fileServerLocationName", theGenomicSegmentForm.getFileServerLocation() );
+			%>
+						<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${fileServerLocationName}',600,600);"/>
+					
+						Current Image: <bean:write name="formdata" property="fileServerLocation"/><br>
+						Current Image Thumbnail: <br>
+							
+						<a href='<c:out value="${uri}"/>'>			
+						
+						<img src="http://caimage.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&amp;img=<bean:write name='formdata' property='fileServerLocation'/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
+						Click to View</a><br><br>									
+			<% 
+					} 
+				} 			
+			%>
+						
+			<html:file styleClass="formFieldSized" size="40" property="fileLocation" name="formdata"/>	
+				
 			</td>			
 		</tr>		
 

@@ -96,14 +96,7 @@
 			<label valign="TOP" for="field1">PMID &nbsp;</label>
 			<br>
 			<html:text styleClass="formFieldUnSized" size="20" property="pmid" name="formdata" />
-			<html:button property="none" onclick="getPubMed(this)">Fill in Fields</html:button>
-			
-			<br>			
-	            <logic:messagesPresent>
-				      <html:messages id="overview">
-				        <%=overview %>
-				      </html:messages>
-				</logic:messagesPresent>
+			<html:button property="none" onclick="getPubMed(this)">Fill in Fields</html:button>			
 		</td>
 	</tr>
 

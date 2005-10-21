@@ -67,7 +67,7 @@
 		<camod:cshelp key="ENGINEERED_GENE.NAME_TARGETEDMODIFICATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="name">	
+			<html:form action="<%= actionName %>" focus="name" enctype="multipart/form-data">	
 			
 			<html:text styleClass="formFieldSized" property="name" size="10" name="formdata"/>		
 		</td>
@@ -166,7 +166,31 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 		<td class="formField">
-			<html:file styleClass="formFieldSized" property="fileServerLocation" size="10" name="formdata"/>			
+					
+		<% 
+			 // Only display a thumbnail if Image exists
+		     TargetedModificationForm theTargetedModificationForm = (TargetedModificationForm) request.getSession().getAttribute("formdata");
+				
+			 if ( theTargetedModificationForm.getFileServerLocation() != null ) {
+			 	if ( ! theTargetedModificationForm.getFileServerLocation().equals( "" ) ) {
+			 	
+			 		pageContext.setAttribute("fileServerLocationName", theTargetedModificationForm.getFileServerLocation() );
+		%>
+					<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${fileServerLocationName}',600,600);"/>
+				
+					Current Image: <bean:write name="formdata" property="fileServerLocation"/><br>
+					Current Image Thumbnail: <br>
+						
+					<a href='<c:out value="${uri}"/>'>			
+					
+					<img src="http://caimage.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&amp;img=<bean:write name='formdata' property='fileServerLocation'/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
+					Click to View</a><br><br>									
+		<% 
+				} 
+			} 			
+		%>
+						
+			<html:file styleClass="formFieldSized" size="40" property="fileLocation" name="formdata"/>	
 		</td>
 	</tr>
 
