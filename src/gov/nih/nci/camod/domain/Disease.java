@@ -12,12 +12,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import gov.nih.nci.camod.util.Duplicatable;
 
 /**
  * @author rajputs TODO To change the template for this generated type comment
  *         go to Window - Preferences - Java - Code Style - Code Templates
  */
-public class Disease extends BaseObject implements Serializable {
+public class Disease extends BaseObject implements Serializable, Duplicatable {
 
 	private static final long serialVersionUID = 3259515453799404851L;
 	

@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.*;
 
+import gov.nih.nci.camod.util.Duplicatable;
 
 /**
  * @author rajputs
@@ -16,7 +17,7 @@ import java.util.*;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class EngineeredGene extends BaseObject implements Serializable {
+public class EngineeredGene extends BaseObject implements Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259475453799404851L;
     

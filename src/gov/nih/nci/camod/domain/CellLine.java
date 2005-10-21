@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.7 2005-10-20 20:25:00 pandyas Exp $
+ * $Id: CellLine.java,v 1.8 2005-10-21 19:40:21 piparom Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/20 20:25:00  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.domain;
@@ -11,8 +14,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import gov.nih.nci.camod.util.Duplicatable;
 
-public class CellLine extends BaseObject implements Serializable {
+public class CellLine extends BaseObject implements Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259655453799404851L;
     

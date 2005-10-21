@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import gov.nih.nci.camod.util.Duplicatable;
 
 /**
  * @author rajputs
@@ -17,7 +18,7 @@ import java.util.List;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Therapy extends BaseObject implements Serializable {
+public class Therapy extends BaseObject implements Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3258525453799404851L;
     
