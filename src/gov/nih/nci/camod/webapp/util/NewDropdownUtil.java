@@ -42,6 +42,11 @@ public class NewDropdownUtil {
             theList.add(0, "");
         }
 
+        // Add a blank as the first line
+        if (Constants.Dropdowns.ADD_BLANK_DROPDOWN_OPTION.equals(inFilter)) {
+            theList.add(0, new DropdownOption("", ""));
+        }
+        
         if (theList == null) {
             throw new IllegalArgumentException("Unknown dropdown list key: " + inDropdownKey);
         }
