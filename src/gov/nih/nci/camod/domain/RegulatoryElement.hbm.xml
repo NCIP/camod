@@ -40,6 +40,7 @@
         <many-to-one
         	name="taxon"
         	column="taxon_id"
-        	class="Taxon"/>
+        	class="Taxon"
+        	cascade="all-delete-orphan"/>
 	</class>
 </hibernate-mapping>
