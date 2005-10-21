@@ -103,7 +103,7 @@ public final class GenomicSegmentAction extends BaseAction {
             GenomicSegmentManager genomicSegmentManager = (GenomicSegmentManager) getBean("genomicSegmentManager");
             GenomicSegment theGenomicSegment = genomicSegmentManager.get(aGenomicSegmentID);
 
-            genomicSegmentManager.update(genomicSegmentForm, theGenomicSegment);
+            genomicSegmentManager.update(genomicSegmentForm, theGenomicSegment, request);
             
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -165,7 +165,7 @@ public final class GenomicSegmentAction extends BaseAction {
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
-            theAnimalModelManager.addGeneticDescription( theAnimalModel, genomicSegmentForm );
+            theAnimalModelManager.addGeneticDescription( theAnimalModel, genomicSegmentForm, request );
 
             log.info("New GenomicSegment created");
 

@@ -8,6 +8,8 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+import org.apache.struts.upload.FormFile;
+
 /**
  * @author pandyas
  *
@@ -37,7 +39,8 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	protected String conditionedBy;
 	protected String description;
 	protected String comments;
-	protected String fileServerLocation;
+	protected String fileServerLocation;	
+	protected FormFile fileLocation;	
 	protected String title;
 	protected String descriptionOfConstruct;
 	protected String geneFunctions;
@@ -153,18 +156,6 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	/**
-	 * @return Returns the fileServerLocation.
-	 */
-	public String getFileServerLocation() {
-		return fileServerLocation;
-	}
-	/**
-	 * @param fileServerLocation The fileServerLocation to set.
-	 */
-	public void setFileServerLocation(String fileServerLocation) {
-		this.fileServerLocation = fileServerLocation;
-	}	
 	/**
 	 * @return Returns the title.
 	 */
@@ -293,5 +284,17 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	}
 	public void setDescriptionOfConstruct(String descriptionOfConstruct) {
 		this.descriptionOfConstruct = descriptionOfConstruct;
+	}
+	public FormFile getFileLocation() {
+		return fileLocation;
+	}
+	public void setFileLocation(FormFile fileLocation) {
+		this.fileLocation = fileLocation;
+	}
+	public String getFileServerLocation() {
+		return fileServerLocation;
+	}
+	public void setFileServerLocation(String fileServerLocation) {
+		this.fileServerLocation = fileServerLocation;
 	}
 }

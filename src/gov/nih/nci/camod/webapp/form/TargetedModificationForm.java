@@ -8,6 +8,8 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+import org.apache.struts.upload.FormFile;
+
 /**
  * @author rajputs
  *
@@ -37,7 +39,8 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 	protected String description;
 	protected String comments;
 	protected String numberMGI;
-	protected String fileServerLocation;
+	protected String fileServerLocation;	
+	protected FormFile fileLocation;	
 	protected String title;
 	protected String descriptionOfConstruct;
 	
@@ -178,6 +181,12 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 	}
 	public void setDescriptionOfConstruct(String descriptionOfConstruct) {
 		this.descriptionOfConstruct = descriptionOfConstruct;
+	}
+	public FormFile getFileLocation() {
+		return fileLocation;
+	}
+	public void setFileLocation(FormFile fileLocation) {
+		this.fileLocation = fileLocation;
 	}
 
 }

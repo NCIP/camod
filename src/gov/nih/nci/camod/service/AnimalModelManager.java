@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.21 2005-10-21 16:07:37 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.22 2005-10-21 19:38:37 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/10/21 16:07:37  pandyas
+ * implementation of animal availability
+ *
  * Revision 1.20  2005/10/11 20:52:53  schroedn
  * EngineeredTransgene and GenomicSegment edit/save works, not image
  *
@@ -39,6 +42,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/10/21 16:07:37  pandyas
+ * implementation of animal availability
+ *
  * Revision 1.20  2005/10/11 20:52:53  schroedn
  * EngineeredTransgene and GenomicSegment edit/save works, not image
  *
@@ -90,6 +96,8 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.webapp.form.*;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Interface for the AnimalModelManager class. See implementing classes for
@@ -144,11 +152,11 @@ public interface AnimalModelManager {
     
     public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception;
     
-    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData) throws Exception;
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData, HttpServletRequest request) throws Exception;
     
-    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData) throws Exception;
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception;
     
-    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData) throws Exception;
+    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request) throws Exception;
 
     public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception; 
     

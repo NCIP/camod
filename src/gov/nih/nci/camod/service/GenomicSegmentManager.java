@@ -11,6 +11,8 @@ import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface GenomicSegmentManager {
 	public List getAll() throws Exception;
 	
@@ -20,7 +22,7 @@ public interface GenomicSegmentManager {
 	
 	public void remove(String id) throws Exception;
 	
-	public GenomicSegment create(GenomicSegmentData inGenomicSegmentData) throws Exception;
+	public GenomicSegment create(GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception;
 	
-	public void update(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment) throws Exception;
+	public void update(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment, HttpServletRequest request) throws Exception;
 }

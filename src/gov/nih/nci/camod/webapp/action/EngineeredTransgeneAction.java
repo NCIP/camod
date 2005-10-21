@@ -131,7 +131,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
             EngineeredTransgeneManager engineeredTransgeneManager = (EngineeredTransgeneManager) getBean("engineeredTransgeneManager");
             Transgene theEngineeredTransgene = engineeredTransgeneManager.get(aEngineeredTransgeneID);
 
-            engineeredTransgeneManager.update(engineeredTransgeneForm, theEngineeredTransgene);
+            engineeredTransgeneManager.update(engineeredTransgeneForm, theEngineeredTransgene, request);
             
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -222,7 +222,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
-            theAnimalModelManager.addGeneticDescription( theAnimalModel, engineeredTransgeneForm );
+            theAnimalModelManager.addGeneticDescription( theAnimalModel, engineeredTransgeneForm, request );
 
             log.info("New EngineeredTransgene created");
 

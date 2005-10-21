@@ -1,5 +1,7 @@
 package gov.nih.nci.camod.webapp.form;
 
+import org.apache.struts.upload.FormFile;
+
 public interface GenomicSegmentData {
 	
 	public String getLocationOfIntegration();
@@ -33,6 +35,10 @@ public interface GenomicSegmentData {
 	public String getNumberMGI();
 	
 	public void setNumberMGI(String numberMGI);
+	
+	public FormFile getFileLocation();
+	
+	public void setFileLocation(FormFile fileLocation);
 	
 	public String getFileServerLocation();
 	

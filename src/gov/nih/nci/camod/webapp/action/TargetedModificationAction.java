@@ -103,7 +103,7 @@ public final class TargetedModificationAction extends BaseAction {
         try {
         	
         	TargetedModification theTargetedModification = targetedModificationManager.get( aTargetedModificationID );
-        	targetedModificationManager.update( targetedModificationForm, theTargetedModification );
+        	targetedModificationManager.update( targetedModificationForm, theTargetedModification, request );
         	
             log.info( "TargetedModification edited" );
 
@@ -169,7 +169,7 @@ public final class TargetedModificationAction extends BaseAction {
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
-            theAnimalModelManager.addGeneticDescription( theAnimalModel, targetedModificationForm );
+            theAnimalModelManager.addGeneticDescription( theAnimalModel, targetedModificationForm, request );
 
             log.info("New TargetedModification created");
 

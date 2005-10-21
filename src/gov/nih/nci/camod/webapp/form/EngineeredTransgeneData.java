@@ -1,5 +1,7 @@
 package gov.nih.nci.camod.webapp.form;
 
+import org.apache.struts.upload.FormFile;
+
 public interface EngineeredTransgeneData {
 
 	public String getLocationOfIntegration();
@@ -33,6 +35,10 @@ public interface EngineeredTransgeneData {
 	public String getComments();
 	
 	public void setComments(String comments);
+	
+	public FormFile getFileLocation();
+	
+	public void setFileLocation(FormFile fileLocation);
 	
 	public String getFileServerLocation();
 	

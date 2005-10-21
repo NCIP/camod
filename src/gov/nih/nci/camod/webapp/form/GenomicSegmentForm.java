@@ -8,6 +8,8 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+import org.apache.struts.upload.FormFile;
+
 
 /**
  * @author rajputs
@@ -35,7 +37,8 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
 	protected String cloneDesignator;
 	protected String comments;
 	protected String numberMGI;
-	protected String fileServerLocation;
+	protected String fileServerLocation;	
+	protected FormFile fileLocation;	
 	protected String title;
 	protected String description;
 	protected String DescriptionOfConstruct;
@@ -141,15 +144,6 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
 	/**
 	 * @return Returns the fileServerLocation.
 	 */
-	public String getFileServerLocation() {
-		return fileServerLocation;
-	}
-	/**
-	 * @param fileServerLocation The fileServerLocation to set.
-	 */
-	public void setFileServerLocation(String fileServerLocation) {
-		this.fileServerLocation = fileServerLocation;
-	}
 	/**
 	 * @return Returns the title.
 	 */
@@ -192,6 +186,18 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
 	}
 	public void setDescriptionOfConstruct(String descriptionOfConstruct) {
 		DescriptionOfConstruct = descriptionOfConstruct;
+	}
+	public FormFile getFileLocation() {
+		return fileLocation;
+	}
+	public void setFileLocation(FormFile fileLocation) {
+		this.fileLocation = fileLocation;
+	}
+	public String getFileServerLocation() {
+		return fileServerLocation;
+	}
+	public void setFileServerLocation(String fileServerLocation) {
+		this.fileServerLocation = fileServerLocation;
 	}	
 	
 

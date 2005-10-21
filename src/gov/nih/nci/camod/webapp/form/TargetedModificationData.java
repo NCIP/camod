@@ -1,5 +1,7 @@
 package gov.nih.nci.camod.webapp.form;
 
+import org.apache.struts.upload.FormFile;
+
 public interface TargetedModificationData {
 	public String getName();
 	
@@ -44,6 +46,10 @@ public interface TargetedModificationData {
 	public String getFileServerLocation();
 	
 	public void setFileServerLocation(String fileServerLocation);
+	
+	public FormFile getFileLocation();
+	
+	public void setFileLocation(FormFile fileLocation);
 	
 	public String getTitle();
 	

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.38 2005-10-21 16:07:26 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.39 2005-10-21 19:38:37 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2005/10/21 16:07:26  pandyas
+ * implementation of animal availability
+ *
  * Revision 1.37  2005/10/20 20:39:50  stewardd
  * modified to use constant value instead of a hard coded string in messageKeys
  *
@@ -111,6 +114,8 @@ import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Manages fetching/saving/updating of animal models
@@ -727,13 +732,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a TargetedModification
      */
-    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData)
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData, HttpServletRequest request)
             throws Exception {
 
         log.trace("Entering addGeneticDescription (TargetedModification)");
 
         TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(
-                inTargetedModificationData);
+                inTargetedModificationData, request);
         // System.out.println(theGene.getName() );
 
         inAnimalModel.addEngineeredGene(theTargetedModification);
@@ -742,12 +747,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting addGeneticDescription (TargetedModification)");
     }
 
-    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData)
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, HttpServletRequest request)
             throws Exception {
 
         log.trace("Entering addGeneticDescription (GenomicSegment)");
 
-        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inGenomicSegmentData);
+        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inGenomicSegmentData, request);
         // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theGenomicSegment);
@@ -756,13 +761,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting addGeneticDescription (GenomicSegment)");
     }
 
-    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData)
+    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request)
             throws Exception {
 
         log.trace("Entering addGeneticDescription (EngineeredTransgene)");
 
         Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().create(
-                inEngineeredTransgeneData);
+                inEngineeredTransgeneData, request);
         // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theEngineeredTransgene);

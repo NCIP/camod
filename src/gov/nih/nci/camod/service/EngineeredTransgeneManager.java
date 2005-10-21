@@ -5,6 +5,8 @@ import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface EngineeredTransgeneManager {
 	
 	public List getAll() throws Exception;
@@ -15,7 +17,7 @@ public interface EngineeredTransgeneManager {
 
     public void remove(String id) throws Exception;
 
-    public Transgene create(EngineeredTransgeneData inEngineeredTransgeneData) throws Exception;
+    public Transgene create(EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request) throws Exception;
 
-    public void update(EngineeredTransgeneData inEngineeredTransgeneData, Transgene inEngineeredTransgene) throws Exception;
+    public void update(EngineeredTransgeneData inEngineeredTransgeneData, Transgene inEngineeredTransgene, HttpServletRequest request) throws Exception;
 }

@@ -304,7 +304,7 @@ public class NewDropdownUtil {
 
                     if (!strainNames.contains(strain.getName())) {
                         strainNames.add(strain.getName());
-                        System.out.println("Strain Name>>" + j + ": " + strain.getName());
+                       // System.out.println("Strain Name>>" + j + ": " + strain.getName());
                     }
                 }
             }
@@ -478,7 +478,9 @@ public class NewDropdownUtil {
 
         log.trace("Entering NewDropdownUtil.getQueryOnlyInducedMutationAgentList");
 
-        return QueryManagerSingleton.instance().getQueryOnlyInducedMutationAgents();
+        List inducedMutationList = QueryManagerSingleton.instance().getQueryOnlyInducedMutationAgents();
+        inducedMutationList.add( "Other" );
+        return inducedMutationList;
     }
 
     /**

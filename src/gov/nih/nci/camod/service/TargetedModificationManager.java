@@ -11,6 +11,8 @@ import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface TargetedModificationManager {
 	public List getAll() throws Exception;
 	
@@ -20,7 +22,7 @@ public interface TargetedModificationManager {
 	
 	public void remove(String id) throws Exception;
 	
-	public TargetedModification create(TargetedModificationData inTargetedModificationForm) throws Exception;
+	public TargetedModification create(TargetedModificationData inTargetedModificationForm, HttpServletRequest request) throws Exception;
 	
-	public void update(TargetedModificationData inTargetedModificationData, TargetedModification theTargetedModification) throws Exception;	
+	public void update(TargetedModificationData inTargetedModificationData, TargetedModification theTargetedModification, HttpServletRequest request) throws Exception;	
 }
