@@ -1,9 +1,12 @@
 /**
  * @author
  * 
- * $Id: ChemicalClassManagerImpl.java,v 1.1 2005-09-23 14:55:06 georgeda Exp $
+ * $Id: ChemicalClassManagerImpl.java,v 1.2 2005-10-21 17:55:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/09/23 14:55:06  georgeda
+ * Made SexDistribution a reference table
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -51,10 +54,10 @@ public class ChemicalClassManagerImpl extends BaseManager implements ChemicalCla
             }
 
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in PersonManagerImpl.getByType");
+            System.out.println("PersistenceException in ChemicalClassManagerImpl.getByName");
             pe.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Exception in PersonManagerImpl.getByType");
+            System.out.println("Exception in ChemicalClassManagerImpl.getByName");
             e.printStackTrace();
         }
 

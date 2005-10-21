@@ -102,10 +102,10 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
             }
                
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in PersonManagerImpl.getByType");
+            System.out.println("PersistenceException in PublicationManagerImpl.getByName");
             pe.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Exception in PersonManagerImpl.getByType");
+            System.out.println("Exception in PublicationManagerImpl.getByName");
             e.printStackTrace();
         }
         
@@ -116,10 +116,10 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
     	try {
 			Persist.save( publicationStatus );			
 		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PublicationManagerImpl.save");
+			System.out.println("PersistenceException in PublicationManagerImpl.savePublicationStatus");
 			pe.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Exception in PublicationManagerImpl.save");
+			System.out.println("Exception in PublicationManagerImpl.savePublicationStatus");
 			e.printStackTrace();
 		}
     }

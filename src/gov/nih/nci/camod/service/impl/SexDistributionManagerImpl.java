@@ -1,9 +1,12 @@
 /**
  * @author
  * 
- * $Id: SexDistributionManagerImpl.java,v 1.5 2005-09-23 14:55:16 georgeda Exp $
+ * $Id: SexDistributionManagerImpl.java,v 1.6 2005-10-21 17:55:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/09/23 14:55:16  georgeda
+ * Made SexDistribution a reference table
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -50,10 +53,10 @@ public class SexDistributionManagerImpl extends BaseManager implements SexDistri
             }
 
         } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in PersonManagerImpl.getByType");
+            System.out.println("PersistenceException in SexDistributionManagerImpl.getByType");
             pe.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Exception in PersonManagerImpl.getByType");
+            System.out.println("Exception in SexDistributionManagerImpl.getByType");
             e.printStackTrace();
         }
 
