@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.50 2005-10-21 19:36:56 schroedn Exp $
+ * $Id: Constants.java,v 1.51 2005-10-21 20:46:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.50  2005/10/21 19:36:56  schroedn
+ * Added Constants for Image upload and retrieval
+ *
  * Revision 1.49  2005/10/20 21:35:22  georgeda
  * Added xenograft constant
  *
@@ -103,6 +106,11 @@ public class Constants {
 	 */
 	public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
 
+    /**
+     * The key for the coordinator username in the camod.properties file
+     */
+    public static final String USER_UPDATE_NOTIFY_KEY = "user_settings.user_update_notify";
+    
 	/**
 	 * The name of the Administrator role, as specified in web.xml
 	 */
@@ -144,6 +152,8 @@ public class Constants {
 	public interface Dropdowns {
 
 		public static final String ADD_BLANK_OPTION = "ADD_BLANK_OPTION";
+        
+        public static final String ADD_BLANK_DROPDOWN_OPTION = "ADD_BLANK_DROPDOWN_OPTION";
 
 		public static final String OTHER_OPTION = "Other";
 
