@@ -1,3 +1,11 @@
-(Mouse)Mus musculus
-(Rat)Rattus norvegicus
-(Rat)Rattus rattus
+
+Mus musculus
+Rattus norvegicus
+Rattus rattus
+Bos taurus
+Canis familiaris
+Capra hircus
+Equus Caballus
+Homo sapiens
+Ovis aries
+Other
