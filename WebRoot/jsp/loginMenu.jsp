@@ -19,7 +19,7 @@
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="register">REGISTER</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="RegisterUserPopulateAction">REGISTER</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>

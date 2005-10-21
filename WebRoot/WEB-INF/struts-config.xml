@@ -135,6 +135,10 @@
 		<form-bean
 			name="therapyForm"
 		    type="gov.nih.nci.camod.webapp.form.TherapyForm"/>
+		
+		<form-bean
+			name="userSettingsForm"
+		    type="gov.nih.nci.camod.webapp.form.UserSettingsForm"/>
 		    
 		<form-bean
 			name="viralTreatmentForm"
@@ -255,10 +259,6 @@
 		<forward
 			name="registerSuccess"
 			path="/jsp/registerSuccess.jsp"></forward>
-		
-		<forward
-			name="registerUserPass"
-			path="/jsp/registerUserPass.jsp"></forward>
 		
 		<forward
 			name="searchMenu"
@@ -533,6 +533,11 @@
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/adminUserSettings.jsp" />
 
+		<action
+			path="/adminUserSettingsSent"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/adminUserSettingsSent.jsp" />
+			
 		<action
 			path="/adminRoles"
 			type="org.apache.struts.actions.ForwardAction"
@@ -1744,6 +1749,82 @@
     	 </forward>  
      </action>
      
+     <action 
+         path="/AdminUserSettingsPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.AdminUserSettingsPopulateAction"
+         name="userSettingsForm"
+         parameter="protected"
+         validate="false">	
+         <forward 
+    		name="next"
+    		path="/adminUserSettings.do">
+    	 </forward>
+     </action>
+     
+     <action 
+         path="/AdminUserSettingsAction"
+         type="gov.nih.nci.camod.webapp.action.AdminUserSettingsAction"
+         name="userSettingsForm"
+         parameter="protected"
+         validate="true"
+         input="input">	
+         <forward 
+    		name="input"
+    		path="/adminUserSettings.do">
+    	 </forward>
+         <forward 
+    		name="failure"
+    		path="/AdminUserSettingsPopulateAction.do">
+    	 </forward>
+         <forward 
+            redirect="true"
+    		name="next"
+    		path="/adminUserSettingsSent.do">
+    	 </forward>
+    	 <forward 
+    	    redirect="true"
+    		name="cancel"
+    		path="/ReturnUserModels.do?method=returnUserModels">
+    	 </forward>
+     </action>
+     
+     <action 
+         path="/RegisterUserPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.RegisterUserPopulateAction"
+         name="userSettingsForm"
+         input="input"
+         validate="false"
+         parameter="unprotected_method">
+         <forward 
+    		name="next"
+    		path="/register.do">
+    	 </forward>
+     </action>
+     
+     <action 
+         path="/RegisterUserAction"
+         type="gov.nih.nci.camod.webapp.action.RegisterUserAction"
+         name="userSettingsForm"
+         input="input"
+         validate="true"
+         parameter="unprotected_method">
+         <forward 
+    		name="input"
+    		path="/RegisterUserPopulateAction.do">
+    	 </forward>	
+         <forward 
+    		name="failure"
+    		path="/register.do">
+    	 </forward>
+         <forward 
+    		name="next"
+    		path="/registerSuccess.do">
+    	 </forward>
+    	 <forward 
+    		name="cancel"
+    		path="/login.do">
+    	 </forward>
+     </action>
      
      <action 
          path="/ChangeAnimalModelToCompletePopulateAction"  

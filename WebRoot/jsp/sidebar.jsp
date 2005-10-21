@@ -82,7 +82,7 @@
 			        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#475b82"> - <c:out value="${role}" /><br>
 			    </logic:iterate>
 			 </logic:present>
-		     <a href="/camod/adminUserSettings.do">User Settings</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/camod/LogoutAction.do">Log out</a>
+		     <a href="/camod/AdminUserSettingsPopulateAction.do">User Settings</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/camod/LogoutAction.do">Log out</a>
 		     <br>
 		</TD></TR></TABLE>
 		</TD></TR>

@@ -130,6 +130,67 @@
             <arg0 key="PublicationForm.pmid"/>
     	</field>     	    	
 	</form>		
-										
+
+  	<form name="userSettingsForm">
+        <field property="firstName" depends="required, maxlength">
+            <arg0 key="UserSettingsForm.firstName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="lastName" depends="required, maxlength">
+            <arg0 key="UserSettingsForm.lastName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="email" depends="required,email">
+            <arg0 key="UserSettingsForm.email"/>
+        </field>
+        <field property="phone" depends="required">
+            <arg0 key="UserSettingsForm.phone"/>
+        </field>
+        <field property="piUsername" depends="validwhen">
+            <arg0 key="UserSettingsForm.piFirstName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>(principalInvestigator == 'true')</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>        
+        <field property="piFirstName" depends="validwhen, maxlength">
+            <arg0 key="UserSettingsForm.piFirstName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>(principalInvestigator == 'true')</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="piLastName" depends="validwhen, maxlength">
+            <arg0 key="UserSettingsForm.piLastName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>(principalInvestigator == 'true')</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+    </form>
+    					
   </formset>
 </form-validation>

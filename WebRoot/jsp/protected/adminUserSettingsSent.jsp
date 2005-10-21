@@ -11,11 +11,11 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<td class="formTitle" height="20">Registration Success</td>				
+				<td class="formTitle" height="20">Update Settings Success</td>				
 			</tr>			
 			
 			<tr>
-				<td class="resultsBoxWhiteEnd">Thank you for registering, please check your email for a confirmation.  This could take up to 72 hours.</td> 
+				<td class="resultsBoxWhiteEnd">Thank you for updating your settings. Please check your email for a confirmation.  This could take up to 72 hours.</td> 
 			</tr>
 			
 			</TABLE>
