@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.41 2005-10-24 17:10:39 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.42 2005-10-24 18:05:36 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2005/10/24 17:10:39  georgeda
+ * First pass at duplicate
+ *
  * Revision 1.40  2005/10/24 13:28:06  georgeda
  * Cleanup changes
  *
@@ -503,6 +506,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         // When the model was created
         if (theAvailability == null) {
             theAvailability = new Availability();
+        } else {
+            theAvailability.setModifiedDate(new Date());
         }
         theAvailability.setEnteredDate(new Date());
 

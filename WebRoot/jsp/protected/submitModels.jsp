@@ -62,23 +62,25 @@
 		</tr>
 
 		<tr>
-			<td class="greySubTitleLeft" width="10%">Duplicate<br>Record</td>
+			<td class="greySubTitleLeft" width="5%">Duplicate<br>Record</td>
 			<td class="greySubTitleLeft" width="40%">Model Descriptor</td>
-			<td class="greySubTitleLeft" width="30%">Entered on</td>
-			<td class="greySubTitle" width="10%">Remove</td>
+			<td class="greySubTitleLeft" width="20%">Entered on</td>
+			<td class="greySubTitleLeft" width="20%">Modified on</td>
+			<td class="greySubTitle" width="5%">Remove</td>
 		</tr>
 
 		<tr>
-			<td class="resultsBoxWhite" width="10%">&nbsp;</td>
+			<td class="resultsBoxWhite" width="5%">&nbsp;</td>
 			<td class="resultsBoxWhite" width="40%"><html:link action="AnimalModelPopulateAction?method=dropdown"><font color=red><b>Add New Model</font></b></html:link></td>
-			<td class="resultsBoxWhite" width="30%"><%= new java.util.Date() %></td>
-			<td class="resultsBoxWhiteEnd" width="10%">&nbsp;</td>
+			<td class="resultsBoxWhite" width="20%"><%= new java.util.Date() %></td>
+			<td class="resultsBoxWhite" width="20%">&nbsp;</td>
+			<td class="resultsBoxWhiteEnd" width="5%">&nbsp;</td>
 		</tr>
 						
 		<% if ( size > 0 ) { %>
 		<logic:iterate id="aModel" name="usermodellist" type="AnimalModel">
 	         <TR>
-	             <td class="resultsBoxGrey" width="10%">
+	             <td class="resultsBoxGrey" width="5%">
 	             	<center>
 	             	    <c:set var="dupLink" value="return confirm('Are you sure you want to duplicate this record (${aModel.modelDescriptor})?');"/>   
 	                    <c:set var="uri" value="/camod/DuplicateAnimalModelAction.do?method=duplicate&aModelID=${aModel.id}"/>
@@ -88,10 +90,13 @@
 	             <td class="resultsBoxGrey" width="40%">
 					<html:link action="SubmitAction.do?method=setModelConstants" paramId="aModelID" paramName="aModel" paramProperty="id"><bean:write name="aModel" property="modelDescriptor" filter="true"/> (<bean:write name="aModel" property="state" filter="true"/>)</html:link>	             
 	             </td>
-	             <td class="resultsBoxGrey" width="30%">
+	             <td class="resultsBoxGrey" width="20%">
 	                <bean:write name="aModel" property="availability.enteredDate" filter="true"/>
 	             </td>
-	             <td class="resultsBoxGreyEnd" width="10%">
+	             <td class="resultsBoxGrey" width="20%">
+	                <bean:write name="aModel" property="availability.modifiedDate" filter="true"/>&nbsp;
+	             </td>
+	             <td class="resultsBoxGreyEnd" width="5%">
 	                <center>
 	                    <c:set var="deleteLink" value="return confirm('Are you sure you want to delete this record (${aModel.modelDescriptor})?');"/>   
 	                    <c:set var="uri" value="/camod/DeleteAnimalModelAction.do?method=delete&aModelID=${aModel.id}"/>
