@@ -80,8 +80,10 @@
 	         <TR>
 	             <td class="resultsBoxGrey" width="10%">
 	             	<center>
-	             		<html:link action="DuplicateAnimalModelAction?method=duplicate" paramId="aModelID" paramName="aModel" paramProperty="id" onclick="return confirm('Are you sure you want to duplicate this record?');"><IMG src="images/dupRecord.gif" border=0></html:link>
-	             	</center>
+	             	    <c:set var="dupLink" value="return confirm('Are you sure you want to duplicate this record (${aModel.modelDescriptor})?');"/>   
+	                    <c:set var="uri" value="/camod/DuplicateAnimalModelAction.do?method=duplicate&aModelID=${aModel.id}"/>
+	                    <a href='<c:out value="${uri}"/>' onclick='<c:out value="${dupLink}"/>' ><IMG src="images/dupRecord.gif" border=0></a>  
+	       	        </center>
 	             </td>
 	             <td class="resultsBoxGrey" width="40%">
 					<html:link action="SubmitAction.do?method=setModelConstants" paramId="aModelID" paramName="aModel" paramProperty="id"><bean:write name="aModel" property="modelDescriptor" filter="true"/> (<bean:write name="aModel" property="state" filter="true"/>)</html:link>	             
@@ -91,8 +93,9 @@
 	             </td>
 	             <td class="resultsBoxGreyEnd" width="10%">
 	                <center>
-		                <bean:parameter id="modID" name="aModel" value="id"/>		               
-	                	<html:link action="DeleteAnimalModelAction?method=delete" paramId="aModelID" paramName="aModel" paramProperty="id" onclick="return confirm('Are you sure you want to delete this record?');"><IMG src="images/remove.gif" border=0></html:link>	                	
+	                    <c:set var="deleteLink" value="return confirm('Are you sure you want to delete this record (${aModel.modelDescriptor})?');"/>   
+	                    <c:set var="uri" value="/camod/DeleteAnimalModelAction.do?method=delete&aModelID=${aModel.id}"/>
+	                    <a href='<c:out value="${uri}"/>' onclick='<c:out value="${deleteLink}"/>' ><IMG src="images/remove.gif" border=0/></a>               	
 	                </center>
 	             </td>                     
 	         </TR>
