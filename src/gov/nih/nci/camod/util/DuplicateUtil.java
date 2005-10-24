@@ -74,92 +74,106 @@ public class DuplicateUtil {
   
   private static Object duplicateBeanImpl(Object src, List srcHistory, List dupHistory, String path, Collection excludedProperties) throws Exception {    
     Object duplicate = null;    
-     
-    try {
-      // reset history collections on root duplicate
-      if (srcHistory == null) {
-        srcHistory = new ArrayList();
-      }   
+    
+    if (src != null) {
 
-      if (dupHistory == null) {
-        dupHistory = new ArrayList();
-      }         
-      
-      // check if we've already duplicated this object
-      if (!srcHistory.contains(src)) {
-        // add this src object to the history
-        srcHistory.add(src);       
-        
-        // instantiate a new instance of this class        
-        duplicate = (Object) src.getClass().newInstance();                
-        
-        // add this new duplicate object to history
-        dupHistory.add(duplicate);
+      try {
+        // reset history collections on root duplicate
+        if (srcHistory == null) {
+          srcHistory = new ArrayList();
+        }   
 
-        Map beanProps = PropertyUtils.describe(src);
-        Iterator props = beanProps.entrySet().iterator();
-        log.debug("***** DEEP COPYING PUBLIC PROPERTIES: "+src.getClass().getName());        
-        
-        // loop thru bean properties
-        while (props.hasNext()) {          
-          Map.Entry entry = (Map.Entry) props.next();               
-          Object propValue = entry.getValue();                    
-          
-          if (entry.getKey() != null) {                  
-            String propName = entry.getKey().toString(); 
-            
-            // determine path name
-            String pathName = "";
-            if (path != null) {
-              pathName = path+".";
-            }
-            pathName += propName;                           
-            
-            // exclude built-in getClass property and hibernate dynamic properties
-            // and if property is in excluded list
-            if (!propName.equals("class") && !propName.equals("hibernateLazyInitializer") && !propName.equals("callbacks")
-                && !(excludedProperties != null && excludedProperties.contains(pathName))) {
-              Class propertyType = PropertyUtils.getPropertyType(duplicate, propName); 
-                           
-              log.debug("** copying property: "+pathName);  
+        if (dupHistory == null) {
+          dupHistory = new ArrayList();
+        }         
 
-              // check if property is a collection
-              if (propValue instanceof java.util.Collection) {    
-                Collection collectionProperty = (Collection) propValue;
-                if (!collectionProperty.isEmpty()) {       
-                  // get collection property -
-                  // *note: bean class is responsible for instatiating collection on construction
-                  Collection duplicateCollection = (Collection) PropertyUtils.getProperty(duplicate, propName);
-                  if (duplicateCollection != null) {
-                    // iterate thru collection, duplicate elements and add to collection
-                    for (Iterator iter = collectionProperty.iterator(); iter.hasNext();) {                    
-                      Object collectionEntry = iter.next();                          
-                      duplicateCollection.add(duplicateProperty(collectionEntry, srcHistory, dupHistory, pathName, excludedProperties));                                      
-                    }
-                  }                             
-                }           
-              } else {
-                // set member property in duplicate object             
-                try {                              
-                  BeanUtils.setProperty(duplicate, propName, duplicateProperty(propValue, srcHistory, dupHistory, pathName, excludedProperties));                
-                } catch (Exception ex) {
-                  // do nothing. skip and move on. property value may be null, or no set method found.           
-                  log.info("** property "+propName+" not copied.  Either no set method, or value not set or null.");
-                }
-              } // collection condition                
-            }
-          } // key=null check
-        } // loop end
-      } else {
-        // this src object has already been duplicated, so return a reference
-        // to the duplicate created earlier rather than re-duplicate        
-        duplicate = dupHistory.get(srcHistory.indexOf(src));
-        log.debug("** skipping - already duplicated: "+src.getClass().getName());          
-      }
-    } catch (Exception ex) {
-      throw new Exception("Error during Bean Duplicate: "+ex); 
-    } 
-        
+        // check if we've already duplicated this object
+        if (!srcHistory.contains(src)) {
+          // add this src object to the history
+          srcHistory.add(src);       
+
+          // instantiate a new instance of this class       
+          // check for virtual enahancer classes (i.e. hibernate lazy loaders)
+          Class duplicateClass = null;
+          if (src.getClass().getName().indexOf("$$Enhancer") > -1) {
+            duplicateClass = src.getClass().getSuperclass();                 
+          } else {
+            duplicateClass = src.getClass();                
+          }
+
+          duplicate = (Object) duplicateClass.newInstance(); 
+
+          // add this new duplicate object to history
+          dupHistory.add(duplicate);
+
+          Map beanProps = PropertyUtils.describe(src);
+          Iterator props = beanProps.entrySet().iterator();
+          log.debug("***** DEEP COPYING: "+duplicateClass.getName());               
+
+          // loop thru bean properties
+          while (props.hasNext()) {          
+            Map.Entry entry = (Map.Entry) props.next();               
+            Object propValue = entry.getValue();                    
+
+            if (entry.getKey() != null) {                  
+              String propName = entry.getKey().toString(); 
+
+              // determine path name
+              String pathName = "";
+              if (path != null) {
+                pathName = path+".";
+              }
+              pathName += propName;                           
+
+              // exclude built-in getClass property and hibernate dynamic properties
+              // and if property is in excluded list
+
+            /* if (!propName.equals("class") && !propName.equals("hibernateLazyInitializer") && !propName.equals("callbacks")
+                  && !(excludedProperties != null && excludedProperties.contains(pathName))) { */
+
+              if (!(excludedProperties != null && excludedProperties.contains(pathName))) {                        
+                Class propertyType = PropertyUtils.getPropertyType(duplicate, propName); 
+
+                //log.debug("** copying property: "+pathName);  
+
+                // check if property is a collection
+                if (propValue instanceof java.util.Collection) {    
+                  Collection collectionProperty = (Collection) propValue;
+                  if (!collectionProperty.isEmpty()) {       
+                    // get collection property -
+                    // *note: bean class is responsible for instatiating collection on construction
+                    Collection duplicateCollection = (Collection) PropertyUtils.getProperty(duplicate, propName);
+                    if (duplicateCollection != null) {
+                      // iterate thru collection, duplicate elements and add to collection
+                      for (Iterator iter = collectionProperty.iterator(); iter.hasNext();) {                    
+                        Object collectionEntry = iter.next();                          
+                        duplicateCollection.add(duplicateProperty(collectionEntry, srcHistory, dupHistory, pathName, excludedProperties));                                      
+                      }
+                    }                             
+                  }           
+                } else {
+                  // set member property in duplicate object             
+                  try {                                           
+                    BeanUtils.setProperty(duplicate, propName, duplicateProperty(propValue, srcHistory, dupHistory, pathName, excludedProperties));                
+                  } catch (Exception ex) {
+                    // do nothing. skip and move on. property value may be null, or no set method found.           
+                    log.info("** property "+propName+" not copied.  Either no set method, or value not set or null.");
+                  }
+                } // collection condition                
+              }
+            } // key=null check
+          } // loop end
+        } else {
+          // this src object has already been duplicated, so return a reference
+          // to the duplicate created earlier rather than re-duplicate        
+          duplicate = dupHistory.get(srcHistory.indexOf(src));
+          log.debug("** skipping - already duplicated: "+src.getClass().getName());          
+        }
+      } catch (Exception ex) {
+        throw new Exception("Error during Bean Duplicate: "+ex); 
+      } 
+    } // src=null check
+    
     return duplicate;                
   }
     
@@ -168,9 +182,10 @@ public class DuplicateUtil {
     // otherwise return a reference
     if (obj instanceof Duplicatable) {       
       return duplicateBeanImpl(obj, srcHistory, dupHistory, path, excludedProperties);
-    } else {
+    } else {      
       return obj;
     }                    
   }  
   
 }
+
