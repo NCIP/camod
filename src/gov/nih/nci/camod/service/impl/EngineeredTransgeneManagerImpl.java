@@ -2,29 +2,13 @@ package gov.nih.nci.camod.service.impl;
 
 //import gov.nih.nci.camod.domain.EngineeredTransgene;
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Conditionality;
-import gov.nih.nci.camod.domain.EngineeredGene;
-import gov.nih.nci.camod.domain.GeneFunction;
-import gov.nih.nci.camod.domain.Image;
-import gov.nih.nci.camod.domain.MutationIdentifier;
-import gov.nih.nci.camod.domain.RegulatoryElement;
-import gov.nih.nci.camod.domain.RegulatoryElementType;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.EngineeredTransgeneManager;
 import gov.nih.nci.camod.util.FtpUtil;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -119,8 +103,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		// Transcriptional 1
 		Taxon tax1 = new Taxon();
 		RegulatoryElement regElement = new RegulatoryElement();
-		RegulatoryElementType regElementType = new RegulatoryElementType();
-		regElementType.setName("Transcriptional1");
+		RegulatoryElementType regElementType = RegulatoryElementTypeManagerSingleton.instance().getByType("Transcriptional 1");
+		
 		regElement.setRegulatoryElementType( regElementType );
 		regElement.setName( inEngineeredTransgeneData.getTranscriptional1_name() );
 		
@@ -139,8 +123,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			if ( ! inEngineeredTransgeneData.getTranscriptional2_name().equals( "" ) ) {	
 				Taxon tax2 = new Taxon();
 				RegulatoryElement regElement2 = new RegulatoryElement();
-				RegulatoryElementType regElementType2 = new RegulatoryElementType();
-				regElementType2.setName("Transcriptional2");
+				RegulatoryElementType regElementType2 = RegulatoryElementTypeManagerSingleton.instance().getByType("Transcriptional 2");
 				regElement2.setRegulatoryElementType( regElementType2 );
 				regElement2.setName( inEngineeredTransgeneData.getTranscriptional2_name() );
 				
@@ -161,8 +144,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			if ( ! inEngineeredTransgeneData.getTranscriptional3_name().equals( "" ) ) {
 				Taxon tax3 = new Taxon();
 				RegulatoryElement regElement3 = new RegulatoryElement();
-				RegulatoryElementType regElementType3 = new RegulatoryElementType();
-				regElementType3.setName("Transcriptional3");
+				RegulatoryElementType regElementType3 = RegulatoryElementTypeManagerSingleton.instance().getByType("Transcriptional 3");
 				regElement3.setRegulatoryElementType( regElementType3 );
 				regElement3.setName( inEngineeredTransgeneData.getTranscriptional3_name() );
 				
@@ -183,8 +165,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			if ( ! inEngineeredTransgeneData.getPolyASignal_name().equals( "" ) )	{
 				Taxon taxPolyASignal = new Taxon();
 				RegulatoryElement regElementPolyASignal = new RegulatoryElement();
-				RegulatoryElementType regElementTypePolyASignal = new RegulatoryElementType();
-				regElementTypePolyASignal.setName("Poly A Signal");
+				RegulatoryElementType regElementTypePolyASignal = RegulatoryElementTypeManagerSingleton.instance().getByType("Poly A Signal");
 				regElementPolyASignal.setRegulatoryElementType( regElementTypePolyASignal );
 				regElementPolyASignal.setName( inEngineeredTransgeneData.getPolyASignal_name() );
 				
@@ -205,8 +186,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			if ( ! inEngineeredTransgeneData.getSpliceSites_name().equals( "" ) ) {
 				Taxon taxSpliceSites = new Taxon();
 				RegulatoryElement regElementSpliceSites = new RegulatoryElement();
-				RegulatoryElementType regElementTypeSpliceSites = new RegulatoryElementType();
-				regElementTypeSpliceSites.setName("Splice Site");
+				RegulatoryElementType regElementTypeSpliceSites = RegulatoryElementTypeManagerSingleton.instance().getByType("Splice Site");
 				regElementSpliceSites.setRegulatoryElementType( regElementTypeSpliceSites );
 				regElementSpliceSites.setName( inEngineeredTransgeneData.getSpliceSites_name() );
 				
