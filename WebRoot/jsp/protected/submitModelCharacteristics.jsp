@@ -26,9 +26,11 @@ var cal1 = new CalendarPopup();
 	  	
 		if( strain.value == 'Other' ) {
 			otherStrain.disabled = false;
+			otherStrain.className = "formFieldSized";
 		}
 		else {
-			otherStrain.value = null;
+			otherStrain.value = '';
+			otherStrain.className = "formFieldSizedDisabled";
 			otherStrain.disabled = true;
 		}
 	}
@@ -41,8 +43,8 @@ var cal1 = new CalendarPopup();
 	
 	function immediateRelease()
 	{
-	    document.forms[0].calendarReleaseDateDisp.value = null;
-	    document.forms[0].calendarReleaseDate.value = null;
+	    document.forms[0].calendarReleaseDateDisp.value = '';
+	    document.forms[0].calendarReleaseDate.value = '';
 	    
 	    return true;
 	}
@@ -120,7 +122,7 @@ var cal1 = new CalendarPopup();
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
-					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
+					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" filter="false"/>										
 				</html:select>				
 			</td>
 		</tr>

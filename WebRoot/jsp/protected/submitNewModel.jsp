@@ -26,10 +26,12 @@ var cal1 = new CalendarPopup();
 	  	
 		if( strain.value == 'Other' ) {
 			otherStrain.disabled = false;
+			otherStrain.className = "formFieldSized";
 		}
 		else {
-			otherStrain.value = null;
+			otherStrain.value = '';
 			otherStrain.disabled = true;
+			otherStrain.className = "formFieldSizedDisabled";
 		}
 	}
 	
@@ -41,8 +43,8 @@ var cal1 = new CalendarPopup();
 	
 	function immediateRelease()
 	{
-	    document.forms[0].calendarReleaseDateDisp.value = null;
-	    document.forms[0].calendarReleaseDate.value = null;
+	    document.forms[0].calendarReleaseDateDisp.value = '';
+	    document.forms[0].calendarReleaseDate.value = '';
 	    
 	    return true;
 	}
