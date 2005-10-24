@@ -8,13 +8,15 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+import org.apache.struts.upload.FormFile;
+
 /**
  * @author rajputs
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ImageForm extends BaseForm implements Serializable {
+public class ImageForm extends BaseForm implements Serializable, ImageData {
     
     private static final long serialVersionUID = 3257195453799404851L;
     
@@ -30,68 +32,51 @@ public class ImageForm extends BaseForm implements Serializable {
 	protected String fileServerLocation;
 	protected String title;
 	protected String description;
+	protected String DescriptionOfConstruct;
+	protected FormFile fileLocation;	
 	protected String staining;
 	protected String otherStaining;
 
-	/**
-	 * @return Returns the fileServerLocation.
-	 */
-	public String getFileServerLocation() {
-		return fileServerLocation;
-	}
-	/**
-	 * @param fileServerLocation The fileServerLocation to set.
-	 */
-	public void setFileServerLocation(String fileServerLocation) {
-		this.fileServerLocation = fileServerLocation;
-	}
-	/**
-	 * @return Returns the title.
-	 */
-	public String getTitle() {
-		return title;
-	}
-	/**
-	 * @param title The title to set.
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}	
-	/**
-	 * @return Returns the description.
-	 */
 	public String getDescription() {
 		return description;
 	}
-	/**
-	 * @param description The description to set.
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	/**
-	 * @return Returns the staining.
-	 */
-	public String getStaining() {
-		return staining;
+	public String getDescriptionOfConstruct() {
+		return DescriptionOfConstruct;
 	}
-	/**
-	 * @param staining The staining to set.
-	 */
-	public void setStaining(String staining) {
-		this.staining = staining;
+	public void setDescriptionOfConstruct(String descriptionOfConstruct) {
+		DescriptionOfConstruct = descriptionOfConstruct;
 	}
-	/**
-	 * @return Returns the otherStaining.
-	 */
+	public FormFile getFileLocation() {
+		return fileLocation;
+	}
+	public void setFileLocation(FormFile fileLocation) {
+		this.fileLocation = fileLocation;
+	}
+	public String getFileServerLocation() {
+		return fileServerLocation;
+	}
+	public void setFileServerLocation(String fileServerLocation) {
+		this.fileServerLocation = fileServerLocation;
+	}
 	public String getOtherStaining() {
 		return otherStaining;
 	}
-	/**
-	 * @param otherStaining The otherStaining to set.
-	 */
 	public void setOtherStaining(String otherStaining) {
 		this.otherStaining = otherStaining;
+	}
+	public String getStaining() {
+		return staining;
+	}
+	public void setStaining(String staining) {
+		this.staining = staining;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}	
 }

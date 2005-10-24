@@ -28,7 +28,7 @@ String aFileServerLocation = request.getParameter( "aFileServerLocation" );
   
   <body>
 	The filename is:  <%= aFileServerLocation %> <br>
-	<Img src="http://caimage.nci.nih.gov/lizardtech/iserv/getimage?cat=Model&img=<%= aFileServerLocation %>" width="400" height="400" border="0" /><br>			
+	<Img src="http://caimage-dev.nci.nih.gov/lizardtech/iserv/getimage?cat=Model&img=<%= aFileServerLocation %>" width="400" height="400" border="0" /><br>			
 	<br>
   </body>
 </html>

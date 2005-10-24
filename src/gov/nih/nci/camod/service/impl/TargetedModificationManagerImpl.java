@@ -121,12 +121,12 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 
 				for (int i = 0; i < inRecipients.length; i++)
 					inRecipients[i] = st.nextToken();
-
+				
 				String inSubject = theBundle
 						.getString(Constants.EmailMessage.SUBJECT);
 				String inMessage = theBundle
 						.getString(Constants.EmailMessage.MESSAGE)
-						+ " Targeted Modification added ( "
+				 		+ " Targeted Modification added ( "
 						+ inTargetedModificationData.getOtherModificationType()
 						+ " ) and is awaiting your approval.";
 				String inFrom = theBundle.getString(Constants.EmailMessage.FROM);

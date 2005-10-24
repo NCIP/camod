@@ -107,7 +107,7 @@ private void populateXenograft(XenograftData inXenograftData, Xenograft inXenogr
             // TODO refine email content
             
             // gather message keys and variable values to build the e-mail content with
-            String[] messageKeys = {"uncontrolledvocab"};
+         //   String[] messageKeys = {"uncontrolledvocab"};
             TreeMap values = new TreeMap();
             values.put("submitter",inAnimalModel.getSubmitter());
             values.put("model",inAnimalModel.getModelDescriptor());
@@ -147,7 +147,7 @@ private void populateXenograft(XenograftData inXenograftData, Xenograft inXenogr
             // TODO: refine email content
 
             // gather message keys and variable values to build the e-mail content with
-            String[] messageKeys = {"uncontrolledvocab"};
+      //      String[] messageKeys = {"uncontrolledvocab"};
             TreeMap values = new TreeMap();
             values.put("submitter",inAnimalModel.getSubmitter());
             values.put("model",inAnimalModel.getModelDescriptor());

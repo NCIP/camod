@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.53 2005-10-24 18:44:41 georgeda Exp $
+ * $Id: Constants.java,v 1.54 2005-10-24 21:04:03 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2005/10/24 18:44:41  georgeda
+ * Do species from dropdown
+ *
  * Revision 1.52  2005/10/24 13:26:28  georgeda
  * Cleanup changes
  *
@@ -472,6 +475,7 @@ public class Constants {
 
 		public static final String CLINICALMARKER_LIST = "clinicalmarker_list";
 
+		public static final String IMAGE_LIST = "image_list";
 		/**
 		 * Used to store a list of names for the Publication section of the
 		 * sidebar menu of the submission section

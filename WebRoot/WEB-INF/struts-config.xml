@@ -1525,6 +1525,28 @@
 	        parameter="method" 	     
 	        validate="false"> 	
     </action>  
+
+     <!-- imageForm -->
+     <action path="/ImageAction"
+	        type="gov.nih.nci.camod.webapp.action.ImageAction"
+	        name="imageForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input"> 
+	    <forward
+            name="input"
+            path="/ImagePopulateAction.do?method=dropdown">
+        </forward>    	
+    </action>
+
+    <action path="/ImagePopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.ImagePopulateAction"
+    		name="imageForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>
       
      <!-- SurgeryForm -->
      <action path="/SurgeryAction"

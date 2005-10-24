@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.6 2005-10-20 21:12:53 stewardd Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.7 2005-10-24 21:04:03 schroedn Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 21:12:53  stewardd
+ * modified to use extended MailUtil API
+ *
  * Revision 1.5  2005/10/12 20:10:49  schroedn
  * Added Validation
  *
@@ -153,31 +156,32 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         // GeneID        
         inInducedMutation.setGeneId( inInducedMutationData.getGeneId() );
                         
-        //Description
+        // Description
         inInducedMutation.setDescription( inInducedMutationData.getDescription() );
         
-        //Check for exisiting GeneticAlteration
-        GeneticAlteration inGeneticAlteration = null;
-        System.out.println( "\tGeneticAlteration=" + inInducedMutation.getGeneticAlterationCollection().size() );        
-        if ( inInducedMutation.getGeneticAlterationCollection().size() > 0 )
+         
+        // Check for exisiting GeneticAlteration
+        GeneticAlteration inGeneticAlteration = null;        
+        if ( inInducedMutation.getGeneticAlterationCollection().size() > 0 ) {
         	inGeneticAlteration = (GeneticAlteration) inInducedMutation.getGeneticAlterationCollection().get(0);
-        else
+        	if( inInducedMutationData.getObservation() == null )
+        		inGeneticAlteration.setObservation( " " );
+        	else
+        		inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
+    		inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
+        	//inInducedMutation.addGeneticAlteration( inGeneticAlteration );       
+        } else if ( inInducedMutationData.getObservation() != null || inInducedMutationData.getMethodOfObservation() != null ) {
         	inGeneticAlteration = new GeneticAlteration();
-        
-        //Observaton               
-        //if ( inInducedMutationData.getObservation() != null )
-        inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
-        
-        //Method of Observation
-        //if ( inInducedMutationData.getMethodOfObservation() != null )
-        inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
-        
-        System.out.println( "inGeneticAlteration method=" + inGeneticAlteration.getMethodOfObservation() + " obj=" + inGeneticAlteration.getObservation() );
-        
-        //Only save if saving a new GeneticAlteration
-        if ( inInducedMutation.getGeneticAlterationCollection().size() == 0 )
-        	inInducedMutation.addGeneticAlteration( inGeneticAlteration );
+        	if( inInducedMutationData.getObservation() == null )
+        		inGeneticAlteration.setObservation( " " );
+        	else
+        		inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
+        	inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
+    		inInducedMutation.addGeneticAlteration( inGeneticAlteration );       
+        } else
+        	System.out.println( " " );
        
+        
         //MGI Number                
         //Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;

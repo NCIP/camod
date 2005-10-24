@@ -150,7 +150,13 @@
             <arg0 key="SpontaneousMutationForm.name"/>
     	</field> 
 	</form>		
-	
+
+	<form name="imageForm">
+        <field property="title" depends="required">
+            <arg0 key="ImageForm.title"/>
+    	</field> 
+	</form>	
+		
 	<form name="xenograftForm">
         <field property="name" depends="required">
             <arg0 key="XenograftForm.name"/>

@@ -7,6 +7,7 @@
 <%@ page import="gov.nih.nci.camod.domain.Xenograft" %>	
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation" %>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>
+<%@ page import="gov.nih.nci.camod.domain.Image" %>
 <%@ page import="gov.nih.nci.camod.domain.Transgene" %>
 <%@ page import="gov.nih.nci.camod.domain.GenomicSegment" %>
 <%@ page import="gov.nih.nci.camod.domain.EnvironmentalFactor" %>	
@@ -168,7 +169,11 @@
 	  
 	<div id="menu8" class="masterTitle" onclick="SwitchMenu('sub8')" onmouseover="ChangeClass('menu8','masterTitleOver')" onmouseout="ChangeClass('menu8','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> IMAGES</div>
 	<span class="submasterdiv" id="sub8">
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitImages">Enter Images</html:link><br><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="ImagePopulateAction.do?method=dropdown">Enter Images</html:link><br>
+			 <logic:iterate id="aImage" name="image_list" type="Image">
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ImagePopulateAction.do?method=populate" paramId="aImageID" paramName="aImage" paramProperty="id"><bean:write name="aImage" property="title" filter="true"/></html:link><br>
+			 </logic:iterate>
+		<br>		
 	</span>
 	
 	<div id="menu9" class="masterTitle" onclick="SwitchMenu('sub9')" onmouseover="ChangeClass('menu9','masterTitleOver')" onmouseout="ChangeClass('menu9','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> MICROARRAYS</div>
