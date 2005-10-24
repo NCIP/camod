@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.55 2005-10-24 21:16:59 pandyas Exp $
+ * $Id: Constants.java,v 1.56 2005-10-24 22:00:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.55  2005/10/24 21:16:59  pandyas
+ * added availability constants
+ *
  * Revision 1.54  2005/10/24 21:04:03  schroedn
  * Added Image to submission
  *
@@ -490,6 +493,8 @@ public class Constants {
 		 * sidebar menu of the submission section
 		 */
 		public static final String CELLLINE_LIST = "cellline_list";
+		
+		public static final String ANIMALAVAILABILITY_LIST = "availability_list";
 
 		/**
 		 * Used to store animal model availability for the Model Availability section of the
