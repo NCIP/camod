@@ -33,8 +33,7 @@
         <many-to-one
         	name="regulatoryElementType"
         	column="reg_element_type_id"
-        	class="RegulatoryElementType"
-        	cascade="all-delete-orphan"/>
+        	class="RegulatoryElementType"/>
         	
         <!-- taxon (many-to-one unidirectional) -->
         <many-to-one
