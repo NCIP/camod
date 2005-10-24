@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.42 2005-10-24 18:05:36 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.43 2005-10-24 21:00:17 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2005/10/24 18:05:36  georgeda
+ * Show the modified date in the returned models
+ *
  * Revision 1.41  2005/10/24 17:10:39  georgeda
  * First pass at duplicate
  *
@@ -819,7 +822,19 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Exiting addGeneticDescription (EngineeredTransgene)");
     }
-
+    
+    public void addImage(AnimalModel inAnimalModel, ImageData inImageData, HttpServletRequest request) 
+    	throws Exception {
+	
+	    log.trace("Entering addImage (Image)");
+	
+	    Image theImage = ImageManagerSingleton.instance().create( inImageData, request );	    	    
+	    inAnimalModel.addImage( theImage );
+	    save(inAnimalModel);
+	
+	    log.trace("Exiting addImage (Image)");
+	}
+    
     /**
      * Add a therapy
      * 
@@ -835,9 +850,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         System.out.println("<AnimalModelManagerImpl addTherapy>");
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
+        
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inTherapyData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
+        
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
     }
 
