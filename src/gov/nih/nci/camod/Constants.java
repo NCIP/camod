@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.52 2005-10-24 13:26:28 georgeda Exp $
+ * $Id: Constants.java,v 1.53 2005-10-24 18:44:41 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2005/10/24 13:26:28  georgeda
+ * Cleanup changes
+ *
  * Revision 1.51  2005/10/21 20:46:21  georgeda
  * Added user registration settings
  *
@@ -175,7 +178,7 @@ public class Constants {
 
 		public static final String SPECIESDROP = "speciesdrop.db";
 		
-		public static final String NEWSPECIESDROP = "newspeciesdrop.db";
+		public static final String NEWSPECIESDROP = "ModelSpecies.txt";
 
 		public static final String STRAINDROP = "straindrop.db";
 
