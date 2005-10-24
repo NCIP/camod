@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.18 2005-10-20 19:28:58 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.19 2005-10-24 19:36:57 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/10/20 19:28:58  georgeda
+ * Added TOC functionality
+ *
  * Revision 1.17  2005/10/18 16:24:31  georgeda
  * Added getModelsByUser
  *
@@ -782,7 +785,7 @@ public class QueryManagerImpl extends BaseManager {
             }
         }
 
-        String theSQLString = "SELECT distinct ani_hist.abs_cancer_model_id " + "FROM ani_mod_histopathology ani_hist "
+        String theSQLString = "SELECT distinct ani_hist.abs_cancer_model_id FROM ani_mod_histopathology ani_hist "
                 + "WHERE ani_hist.histopathology_id IN (SELECT h.histopathology_id "
                 + "     FROM histopathology h, organ_histopathology oh, organ o "
                 + "     WHERE h.histopathology_id = oh.histopathology_id AND oh.organ_id = o.organ_id "
@@ -859,7 +862,7 @@ public class QueryManagerImpl extends BaseManager {
 
         String theSQLString = "SELECT distinct ani_cell.abs_cancer_model_id FROM ani_mod_cell_line ani_cell "
                 + "WHERE ani_cell.cell_line_id IN (SELECT c.cell_line_id FROM cell_line c "
-                + "     WHERE c.name LIKE ?)";
+                + "     WHERE upper(c.name) LIKE ?)";
 
         Object[] theParams = new Object[1];
         theParams[0] = "%" + inCellLineName + "%";
@@ -883,7 +886,7 @@ public class QueryManagerImpl extends BaseManager {
         String theSQLString = "SELECT distinct ani_ther.abs_cancer_model_id " + "FROM animal_model_therapy ani_ther "
                 + "WHERE ani_ther.therapy_id IN (SELECT t.therapy_id FROM therapy t, env_factor e "
                 + "     WHERE t.therapeutic_experiment = 1 AND t.env_factor_id = e.env_factor_id "
-                + "         AND e.name like ?)";
+                + "         AND upper(e.name) like ?)";
 
         String theSQLTheraputicApproach = "%";
         if (inTherapeuticApproach != null && inTherapeuticApproach.trim().length() > 0) {
@@ -969,15 +972,15 @@ public class QueryManagerImpl extends BaseManager {
 
         if (isEngineeredTransgene == true && inGeneName.length() > 0) {
             theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
-                    + " FROM engineered_gene WHERE name LIKE ? AND engineered_gene_type = 'T')";
+                    + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'T')";
             OR = " OR ";
-            theList.add("%" + inGeneName + "%");
+            theList.add("%" + inGeneName.toUpperCase() + "%");
         }
         if (isTargetedModification == true && inGeneName.length() > 0) {
             theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
-                    + " FROM engineered_gene WHERE name LIKE ? AND engineered_gene_type = 'TM')";
+                    + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'TM')";
             OR = " OR ";
-            theList.add("%" + inGeneName + "%");
+            theList.add("%" + inGeneName.toUpperCase() + "%");
         }
         if (inInducedMutationAgent != null && inInducedMutationAgent.length() > 0) {
             theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
@@ -990,8 +993,8 @@ public class QueryManagerImpl extends BaseManager {
         }
         if (inGenomicSegDesignator != null && inGenomicSegDesignator.length() > 0) {
             theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
-                    + " FROM engineered_gene WHERE clone_designator LIKE ? AND engineered_gene_type = 'GS')";
-            theList.add(inGenomicSegDesignator);
+                    + " FROM engineered_gene WHERE upper(clone_designator) LIKE ? AND engineered_gene_type = 'GS')";
+            theList.add(inGenomicSegDesignator.toUpperCase());
         }
 
         // Convert the params
@@ -1020,15 +1023,15 @@ public class QueryManagerImpl extends BaseManager {
                 + "FROM ani_mod_engineered_gene ani_ge WHERE ";
 
         theSQLString += " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
-                + " FROM engineered_gene WHERE name LIKE ?)";
+                + " FROM engineered_gene WHERE upper(name) LIKE ?)";
 
         theSQLString += " OR ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
                 + " FROM engineered_gene WHERE engineered_gene_id IN ("
                 + " SELECT distinct im.engineered_gene_id FROM env_factor ef, env_fac_ind_mutation im "
-                + " WHERE ef.name = ? " + " AND ef.env_factor_id = im.env_factor_id) AND engineered_gene_type = 'IM')";
+                + " WHERE upper(ef.name) like ? " + " AND ef.env_factor_id = im.env_factor_id) AND engineered_gene_type = 'IM')";
 
         theSQLString += " OR ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
-                + " FROM engineered_gene WHERE clone_designator LIKE ? AND engineered_gene_type = 'GS')";
+                + " FROM engineered_gene WHERE upper(clone_designator) LIKE ? AND engineered_gene_type = 'GS')";
 
         // Convert the params
         Object[] theParams = new Object[3];
@@ -1077,7 +1080,7 @@ public class QueryManagerImpl extends BaseManager {
 
         String theSQLString = "SELECT distinct ani_th.abs_cancer_model_id FROM animal_model_therapy ani_th "
                 + "WHERE ani_th.therapy_id IN (SELECT t.therapy_id FROM therapy t, env_factor ef"
-                + "     WHERE t.env_factor_id = ef.env_factor_id AND ef.name like ?)";
+                + "     WHERE t.env_factor_id = ef.env_factor_id AND upper(ef.name) like ?)";
 
         Object[] theParams = new Object[1];
         theParams[0] = inKeyword;
@@ -1165,13 +1168,13 @@ public class QueryManagerImpl extends BaseManager {
     // Build the where clause for the search and the count
     private String buildKeywordSearchWhereClause(String inKeyword) throws Exception
     {
-        String theKeyword = "%" + inKeyword + "%";
+        String theKeyword = "%" + inKeyword.toUpperCase() + "%";
         
         String theWhereClause = "";
 
         theWhereClause += " AND (am.modelDescriptor like :keyword ";
 
-        theWhereClause += " OR am.species IN (from Taxon as t where t.scientificName like :keyword )";
+        theWhereClause += " OR am.species IN (from Taxon as t where upper(t.scientificName) like :keyword )";
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(theKeyword) + ")";
 
@@ -1181,7 +1184,7 @@ public class QueryManagerImpl extends BaseManager {
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForAnyEngineeredGene(inKeyword) + ")";
 
-        theWhereClause += " OR am.phenotype IN (from Phenotype as p where p.description like :keyword )";
+        theWhereClause += " OR am.phenotype IN (from Phenotype as p where upper(p.description) like :keyword )";
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForCellLine(inKeyword) + ")";
 
@@ -1201,7 +1204,7 @@ public class QueryManagerImpl extends BaseManager {
 
             log.info("HQL Query: " + theHQLQuery);
 
-            String theKeyword = "%" + inKeyword + "%";
+            String theKeyword = "%" + inKeyword.toUpperCase() + "%";
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("keyword", theKeyword);
 
@@ -1232,7 +1235,7 @@ public class QueryManagerImpl extends BaseManager {
         // Model descriptor criteria
         if (inSearchData.getModelDescriptor() != null && inSearchData.getModelDescriptor().length() > 0) {
 
-            theWhereClause += " AND am.modelDescriptor like '%" + inSearchData.getModelDescriptor() + "%'";
+            theWhereClause += " AND upper(am.modelDescriptor) like '%" + inSearchData.getModelDescriptor().toUpperCase() + "%'";
         }
 
         // Species criteria
@@ -1313,8 +1316,8 @@ public class QueryManagerImpl extends BaseManager {
 
         // Search for phenotype
         if (inSearchData.getPhenotype() != null && inSearchData.getPhenotype().length() > 0) {
-            theWhereClause += " AND am.phenotype IN (from Phenotype as p where p.description like '%"
-                    + inSearchData.getPhenotype() + "%')";
+            theWhereClause += " AND am.phenotype IN (from Phenotype as p where upper(p.description) like '%"
+                    + inSearchData.getPhenotype().toUpperCase() + "%')";
         }
 
         // Search for cellline
