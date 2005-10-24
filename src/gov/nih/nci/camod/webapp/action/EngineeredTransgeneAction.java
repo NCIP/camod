@@ -125,8 +125,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
         
         try {
 
-            log.info("GenomicSegment edit");
-            
+            log.info("EngineeredTransgene edit");            
             // retrieve model and update w/ new values
             EngineeredTransgeneManager engineeredTransgeneManager = (EngineeredTransgeneManager) getBean("engineeredTransgeneManager");
             Transgene theEngineeredTransgene = engineeredTransgeneManager.get(aEngineeredTransgeneID);

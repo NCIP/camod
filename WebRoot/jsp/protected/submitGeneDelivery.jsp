@@ -83,7 +83,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Viral Vector:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherViralVector" onclick="checkOthers( this );"/>			
+			<html:text styleClass="formFieldSized" size="30" disabled="true" property="otherViralVector" onclick="checkOthers( this );"/>			
 		</td>
 	</tr>        
         

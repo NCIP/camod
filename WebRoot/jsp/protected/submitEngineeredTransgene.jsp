@@ -334,7 +334,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Conditional Description</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="32"  name="formdata"/>		
+			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="32" name="formdata"/>		
 		</td>
 	</tr>
 
@@ -433,10 +433,10 @@
 	    ideControl = document.forms[0].conditionedBy;
 	    ideOtherControl = document.forms[0].description;
 			
-		if( ideControl[1].checked == true )
-			ideOtherControl.disabled = true;
-		else {
+		if( ideControl[2].checked == true )
 			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
 		}
 		
 	    ideControl = document.forms[0].locationOfIntegration;

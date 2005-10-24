@@ -42,9 +42,12 @@ public class TargetedModificationPopulateAction extends BaseAction {
 	    targetedModificationForm.setDescription( cond.getDescription() );		    
 	    
 	    Image image = theTargetedModification.getImage();
-	    targetedModificationForm.setFileServerLocation( image.getFileServerLocation() );
-	    targetedModificationForm.setTitle( image.getTitle() );
-	    targetedModificationForm.setDescriptionOfConstruct( image.getDescription() );
+	    if ( image != null )
+	    {
+		    targetedModificationForm.setFileServerLocation( image.getFileServerLocation() );
+		    targetedModificationForm.setTitle( image.getTitle() );
+		    targetedModificationForm.setDescriptionOfConstruct( image.getDescription() );
+	    }
 	    
 	    List modTypeList = theTargetedModification.getModificationTypeCollection();
 	    

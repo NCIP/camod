@@ -8,7 +8,7 @@
 package gov.nih.nci.camod.util;
 
 import java.util.*;
-import java.lang.reflect.Method;
+//import java.lang.reflect.Method;
 import org.apache.commons.beanutils.*;
 import org.apache.commons.logging.*;
 
@@ -132,7 +132,7 @@ public class DuplicateUtil {
                   && !(excludedProperties != null && excludedProperties.contains(pathName))) { */
 
               if (!(excludedProperties != null && excludedProperties.contains(pathName))) {                        
-                Class propertyType = PropertyUtils.getPropertyType(duplicate, propName); 
+                //Class propertyType = PropertyUtils.getPropertyType(duplicate, propName); 
 
                 //log.debug("** copying property: "+pathName);  
 

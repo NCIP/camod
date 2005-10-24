@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.28 2005-10-24 13:28:17 georgeda Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.29 2005-10-24 21:04:47 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.28  2005/10/24 13:28:17  georgeda
+ *  Cleanup changes
+ *
  *  Revision 1.27  2005/10/21 16:07:01  pandyas
  *  implementation of animal availability
  *
@@ -222,6 +225,10 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             	//System.out.println( "\tAdded a Transgene");
         	}
         }
+
+        //Retrieve List of Images in Images Category       
+        List imageCollection = animalModel.getImageCollection();
+        
         
         // Print the list of EnvironmentalFactors for the Cardiogenic
         // Interventions Section
@@ -318,7 +325,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
         request.getSession().setAttribute(Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
         request.getSession().setAttribute(Constants.Submit.ANIMALAVAILABILITY_LIST, availList);
-        
+        request.getSession().setAttribute(Constants.Submit.IMAGE_LIST, imageCollection);
         
       //  System.out.println( "TargedModList: " + targetedList);
         

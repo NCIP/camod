@@ -14,6 +14,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 public interface GenomicSegmentManager {
+	
 	public List getAll() throws Exception;
 	
 	public GenomicSegment get(String id) throws Exception;

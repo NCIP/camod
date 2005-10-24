@@ -21,7 +21,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class EngineeredTransgenePopulateAction extends BaseAction{
+public class EngineeredTransgenePopulateAction extends BaseAction {
 	
     public ActionForward populate( ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response ) 
 		throws Exception {

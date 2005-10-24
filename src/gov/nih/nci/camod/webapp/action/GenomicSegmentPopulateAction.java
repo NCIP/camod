@@ -58,9 +58,12 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 	    
 	    //Image
 	    Image inImage = theGenomicSegment.getImage();
-	    genomicSegmentForm.setTitle( inImage.getTitle() );	    
-	    genomicSegmentForm.setFileServerLocation( inImage.getFileServerLocation() );
-	    genomicSegmentForm.setDescriptionOfConstruct( inImage.getDescription() );
+	    if ( inImage != null ) 
+	    {
+		    genomicSegmentForm.setTitle( inImage.getTitle() );	    
+		    genomicSegmentForm.setFileServerLocation( inImage.getFileServerLocation() );
+		    genomicSegmentForm.setDescriptionOfConstruct( inImage.getDescription() );
+	    }
 	    
 	    request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);       
 	

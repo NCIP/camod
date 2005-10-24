@@ -33,6 +33,17 @@
 		}
 	}
 	
+	function chkTypeMod( control ) {
+		ideControl = document.forms[0].otherModificationType ;
+			
+		if( control.value == 'Other' )
+			ideControl.disabled = false;
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}
+	}
+	
 	function chkConditional( control ) {
 		ideControl = document.forms[0].description;
 			
@@ -79,7 +90,7 @@
 		<camod:cshelp key="MODIFICATION_TYPE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="modificationType" onchange="chkOther( this );" >
+			<html:select styleClass="formFieldSized" size="1" property="modificationType" onchange="chkTypeMod( this );" >
 				<html:options name="<%= Dropdowns.TARGETEDMODIFICATIONDROP %>" />										
 			</html:select>
 			<br>
