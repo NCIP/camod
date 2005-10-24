@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserAction.java,v 1.3 2005-10-17 16:30:24 georgeda Exp $
+ * $Id: AdminEditUserAction.java,v 1.4 2005-10-24 13:28:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/17 16:30:24  georgeda
+ * Cleanup
+ *
  * Revision 1.2  2005/10/17 13:55:34  georgeda
  * Handle cancel
  *
@@ -45,7 +48,7 @@ public class AdminEditUserAction extends BaseAction {
 
             EditUserForm theForm = (EditUserForm) inForm;
 
-            if (theForm.getId() == null) {
+            if (theForm.getId() == null || theForm.getId().length() == 0) {
                 theForward = processAdd(theForm, inRequest);
             } else {
                 theForward = processEdit(theForm, inRequest);

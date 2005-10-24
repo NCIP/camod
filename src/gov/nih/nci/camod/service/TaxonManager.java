@@ -21,6 +21,8 @@ public interface TaxonManager {
     public List getAll() throws Exception;
 
     public Taxon get(String id) throws Exception;
+    
+    public String getCommonNameFromScientificName(String inScientificName) throws Exception;
 
     public void save(Taxon taxon) throws Exception;
 

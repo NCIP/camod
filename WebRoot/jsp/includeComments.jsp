@@ -25,12 +25,14 @@
 
 <tr>
     <c:forEach var="comments" items="${aCommentsList}" >
+        <tr>
           <% 
              Comments theComments = (Comments) pageContext.getAttribute("comments");
              pageContext.setAttribute("emailAddress", theComments.getSubmitter().emailAddress());
              pageContext.setAttribute("displayName", theComments.getSubmitter().displayName());
           %>
-        <td class="WhiteBoxNoEnd" width="30%" colspan="1"><a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a></td>
-        <td class="WhiteBox" width="70%" colspan="1"><c:out value="${comments.remark}"/></td>
+            <td class="WhiteBoxNoEnd" width="30%" colspan="1"><a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a></td>
+            <td class="WhiteBox" width="70%" colspan="1"><c:out value="${comments.remark}"/></td>
+        </tr>
     </c:forEach>
 </tr>

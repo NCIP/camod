@@ -30,7 +30,6 @@
 					<html:optionsCollection name="<%= Dropdowns.USERSDROP %>" />	
 				</html:select>
 			</td>
-		    
 		
 	        <td  class="resultsBoxGreyNoSides" align="center" colspan="1">
 				<TABLE cellpadding="4" cellspacing="0" border="0">	

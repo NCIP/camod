@@ -21,7 +21,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp</td>
 			<td class="formLabel"><label for="field1">Coordinator</label></td>
 			<td class="formField">
-			    <html:form action="AdminEditUserRolesAction.do">
+			    <html:form method="get" action="AdminEditUserRolesAction.do">
 			    <html:checkbox styleClass="formFieldSized" property="coordinator"> </html:checkbox>
 			</td>
 		</tr>

@@ -43,7 +43,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field2">First Name</label></td>
 			<td class="formField">
-			    <html:form action="AdminEditUserAction.do">
+			    <html:form method="get" action="AdminEditUserAction.do">
 				<html:text styleClass="formFieldSized" property="firstName" size="30"/>
 			</td>
 		</tr>
@@ -64,7 +64,6 @@
 			</td>
 		</tr>
 		
-
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Principal Investigator</label></td>
@@ -73,6 +72,8 @@
 			</td>
 		</tr>
 	
+	    <html:hidden property="id" />
+	    
 		<tr>
 			<td align="right" colspan="3">
 				<TABLE cellpadding="4" cellspacing="0" border="0">

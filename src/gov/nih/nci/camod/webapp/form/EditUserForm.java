@@ -7,18 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionMapping;
 
 public class EditUserForm extends BaseForm implements Serializable {
-    
-    private static final long serialVersionUID = 3257098753799404851L;
-	
+
+	private static final long serialVersionUID = 3257098753799404851L;
+
 	protected String lastName;
+
 	protected String firstName;
+
 	protected String username;
+
 	protected String id;
+
 	protected boolean principalInvestigator;
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -26,31 +31,40 @@ public class EditUserForm extends BaseForm implements Serializable {
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
-    
-    public boolean isPrincipalInvestigator() {
-        return principalInvestigator;
-    }
-    
-    public void setPrincipalInvestigator(boolean principalInvestigator) {
-        this.principalInvestigator = principalInvestigator;
-    }
-    
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        this.principalInvestigator = false;
-    }
+
+	public boolean isPrincipalInvestigator() {
+		return principalInvestigator;
+	}
+
+	public void setPrincipalInvestigator(boolean principalInvestigator) {
+		this.principalInvestigator = principalInvestigator;
+	}
+
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+		this.principalInvestigator = false;
+		this.lastName = null;
+		this.firstName = null;
+		this.username = null;
+		this.id = null;
+	}
 }

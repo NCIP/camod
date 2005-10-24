@@ -10,25 +10,27 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<SCRIPT src="/camod/scripts/CalendarPopup.js" type=text/javascript></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript" ID="js1">
+var cal1 = new CalendarPopup();
+</SCRIPT>
 
 <SCRIPT LANGUAGE="JavaScript">
-	var cal = new CalendarPopup();
-
-	function chkOther( control ) {
-		ideControl = document.forms[0].ethnicityStrainUnctrlVocab;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
-	}
 	
-	function goCal() {
-		cal.select(document.ModelCharacteristicsForm.calendarReleaseDate,'anchor1','MM/dd/yyyy'); 
-		return false;
+	function chkOther() {
+	
+	    var strain = document.forms[0].ethinicityStrain;
+	    var otherStrain = document.forms[0].ethnicityStrainUnctrlVocab;
+	  	
+		if( strain.value == 'Other' ) {
+			otherStrain.disabled = false;
+		}
+		else {
+			otherStrain.value = null;
+			otherStrain.disabled = true;
+		}
 	}
 	
 	function getOptions( control ) {
@@ -37,6 +39,31 @@
 		form.submit();
 	}	
 	
+	function immediateRelease()
+	{
+	    document.forms[0].calendarReleaseDateDisp.value = null;
+	    document.forms[0].calendarReleaseDate.value = null;
+	    
+	    return true;
+	}
+	
+	function selectFromCalendar()
+	{
+		cal1.select(document.forms[0].calendarReleaseDateDisp,
+		            'calendarReleaseDateDisp',
+		            'MM/dd/yyyy'); 
+	    return true;
+	}
+	
+	function transferFields() {
+		document.forms[0].calendarReleaseDate.value = document.forms[0].calendarReleaseDateDisp.value;
+		document.forms[0].calendarReleaseDate.disabled = false;
+	}
+	
+	function setFields() {
+		document.forms[0].calendarReleaseDateDisp.value = document.forms[0].calendarReleaseDate.value;
+	}
+	
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -44,19 +71,10 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
 		<tr>
-			<td class="formMessage" colspan="3">
-			
 		
-				<logic:messagesPresent>
-				  <ul>
-				    <font color="red">
-				      <html:messages id="error">
-				        <li><%=error %></li>
-				      </html:messages>
-				    </font>
-				  </ul>
-				</logic:messagesPresent>
-			 
+			<html:errors/>		
+			
+			<td class="formMessage" colspan="3">
 				* indicates a required field
 			</td>
 		</tr>
@@ -71,8 +89,8 @@
 				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
-					<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor">
-					<html:text styleClass="formFieldSized" property="modelDescriptor" name="formdata" size="30"/>
+					<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor" onsubmit="transferFields()">
+					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
 			</td>
 		</tr>
 
@@ -92,8 +110,8 @@
 				<camod:cshelp key="ABS_CANCER_MODEL.IS_TOOL_MOUSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
 			</td>
 			<td class="formField">
-				<html:radio property="isToolMouse" value="yes" name="formdata"/> Yes 
-				<html:radio property="isToolMouse" value="no" name="formdata"/> No  
+				<html:radio property="isToolMouse" value="yes" /> Yes 
+				<html:radio property="isToolMouse" value="no" /> No  
 			</td>
 		</tr>
 		
@@ -101,8 +119,8 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="scientificName" name="formdata" onchange="getOptions(this);" >
-					<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
+					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
 				</html:select>				
 			</td>
 		</tr>
@@ -111,7 +129,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" name="formdata" onclick="chkOther(this);">
+				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOther();">
 					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
 				</html:select>
 			</td>
@@ -121,7 +139,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">if other Strain</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" property="ethnicityStrainUnctrlVocab" name="formdata" size="30"/>			
+					<html:text styleClass="formFieldSized" property="ethnicityStrainUnctrlVocab" size="30"/>			
 			</td>
 		</tr>
 
@@ -131,7 +149,7 @@
 					<camod:cshelp key="ABS_CANCER_MODEL.EXPERIMENT_DESIGN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experimentDesign" name="formdata" cols="32" rows="4"/>
+					<html:textarea styleClass="formFieldSized" property="experimentDesign" cols="32" rows="4"/>
 			</td>
 		</tr>
 
@@ -141,7 +159,7 @@
 			<camod:cshelp key="PHENOTYPE.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="description" name="formdata" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="description" cols="32" rows="4"/>			
 			</td>
 		</tr>
 
@@ -149,7 +167,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Gender</b></label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="type" name="formdata">												
+				<html:select styleClass="formFieldSized" size="1" property="type" >												
 					<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 				</html:select>
 			</td>
@@ -161,7 +179,7 @@
 			<camod:cshelp key="PHENOTYPE.BREEDING_NOTES" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-					<html:text styleClass="formFieldSized" property="breedingNotes" name="formdata" size="30"/>			
+					<html:text styleClass="formFieldSized" property="breedingNotes" size="30"/>			
 			</td>
 		</tr>
 
@@ -171,7 +189,7 @@
 					<camod:cshelp key="ABS_CANCER_MODEL.URL" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-					<html:text styleClass="formFieldSized" property="url" name="formdata" size="30"/>
+					<html:text styleClass="formFieldSized" property="url" size="30"/>
 			</td>
 		</tr>
 
@@ -181,9 +199,10 @@
 			<camod:cshelp key="AVAILABILITY.RELEASE_DATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-				<html:radio property="releaseDate" value="immediately" /> Release record immediately <br> 
-				<html:radio property="releaseDate" onclick="openCalendar()" value="after" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 
-				<html:text  styleClass="formFieldSized2" disabled="true" property="calendarReleaseDate" size="10"/>	
+				<html:radio property="releaseDate" value="immediately" onclick="return immediateRelease();" /> Release record immediately <br> 
+				<html:radio property="releaseDate" value="after" onclick="return selectFromCalendar();" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 
+				<html:hidden disabled="false" property="calendarReleaseDate" />
+				<INPUT styleClass="formFieldSized2" disabled="true" property="calendarReleaseDateDisp" id="calendarReleaseDateDisp" size="10"/>	<br>
 			</td>
 		</tr>
 
@@ -206,6 +225,11 @@
 		
 	</TABLE>	
 </td></tr></TABLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+	chkOther();
+	setFields();
+</SCRIPT>	
 
 <%@ include file="/jsp/footer.jsp" %>
 

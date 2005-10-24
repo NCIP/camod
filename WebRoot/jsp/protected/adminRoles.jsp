@@ -48,6 +48,7 @@
        <% pageContext.setAttribute("modelIdTag", Parameters.MODELID); %>
        <% pageContext.setAttribute("modelSectionTag", Parameters.MODELSECTIONNAME); %>
 	   <% pageContext.setAttribute("commentsIdTag", Parameters.COMMENTSID); %>
+	   <% pageContext.setAttribute("eventTag", Parameters.EVENT); %>
 	   <% pageContext.setAttribute("reject", Admin.Actions.REJECT); %>
 	   <% pageContext.setAttribute("approve", Admin.Actions.APPROVE); %>
 	   <% pageContext.setAttribute("assign_screener", Admin.Actions.ASSIGN_SCREENER); %>
@@ -73,12 +74,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 	                        </html:link>
 			                <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 		                            Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.NEED_MORE_INFO %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Need More Info
 				                </html:link>
 				            </td>
@@ -109,12 +110,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.NEED_MORE_INFO %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.NEED_MORE_INFO %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Need More Info
 				                </html:link>
 				            </td>
@@ -144,7 +145,7 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 		                    <td class="resultsBoxWhiteNoStart" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_EDITOR %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.ASSIGN_EDITOR %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Assign
 				                </html:link>
 	                        </td>
@@ -174,12 +175,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.REJECT %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.REJECT %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Reject
 				                </html:link>
 				            </td>
@@ -211,7 +212,7 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?event=" + Admin.Actions.ASSIGN_SCREENER %>" 
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.ASSIGN_SCREENER %>" 
 				                           paramId="<%=Constants.Parameters.MODELID%>" paramName="model" paramProperty="id">
 				                    Assign
 				                </html:link>
@@ -246,13 +247,13 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out escapeXml="false" value="${comments.cancerModel.modelDescriptor}"/>
 				            </a>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?event=${approve}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${approve}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Approve
 				                </a>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?event=${reject}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${reject}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Reject
 				                </a>
@@ -282,7 +283,7 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out value="${comments.cancerModel.modelDescriptor}"/>
 				            </a>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?event=${assign_screener}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${assign_screener}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Assign
 				                </a>

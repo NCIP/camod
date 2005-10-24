@@ -1383,7 +1383,15 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="submitModelCharacteristics">
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitModelCharacteristics.do">
+        </forward>  
+	   	<forward
+            name="failure"
+            path="/AnimalModelPopulateAction.do?method=populate">
+        </forward>  
     </action>
         
     <action path="/ReturnUserModels"
@@ -1670,7 +1678,6 @@
          name="rolesAssignmentForm"
          parameter="protected">   	
          <forward 
-            redirect="true"
     		name="next"
     		path="/adminEditUserRoles.do">
     	 </forward>  
@@ -1687,7 +1694,6 @@
          name="rolesAssignmentForm"
          parameter="protected">   	
          <forward 
-            redirect="true"
     		name="next"
     		path="/AdminRolesAssignmentPopulateAction.do">
     	 </forward>  
@@ -1827,15 +1833,6 @@
      </action>
      
      <action 
-         path="/ChangeAnimalModelToCompletePopulateAction"  
-         type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
-         parameter="protected">   	
-         <forward 
-    		name="next"
-    		path="/submitOverview.do">
-    	 </forward>  	
-     </action>
-     <action 
          path="/ChangeAnimalModelToCompleteAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
          name="animalModelStateForm"
@@ -1850,6 +1847,7 @@
       <action 
          path="/ChangeAnimalModelStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
+         name="animalModelStateForm"
          parameter="protected">   	
          <forward 
     		name="next"
@@ -1902,9 +1900,11 @@
     		redirect="true">
     	 </forward>  	
      </action>
+     
 	 <action 
          path="/ChangeCommentsStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStatePopulateAction" 
+         
          parameter="protected">   	
          <forward 
     		name="next"

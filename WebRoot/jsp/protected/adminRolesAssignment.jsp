@@ -22,14 +22,11 @@
 		    <td class="formTitle" height="20" colspan="4">Roles Assignment</td>		
 		</tr>
 		<html:form action="AdminRolesAssignmentPopulateAction">
-		    
-			    <td class=resultsBoxGreyNoEnd>			
-			        <html:select property="currentRole">
-			            <html:options name="<%=Constants.FORMDATA%>" property="roles"/>
-		            </html:select>
-			    </td>
-		    
-		
+		    <td class=resultsBoxGreyNoEnd>			
+		        <html:select property="currentRole">
+		            <html:options name="<%=Constants.Dropdowns.ROLESDROP%>" />
+	            </html:select>
+		    </td>
 	        <td  class="resultsBoxGreyNoStart" align="right" colspan="3">
 				<TABLE cellpadding="4" cellspacing="0" border="0">	
 			        <html:submit styleClass="actionButton">

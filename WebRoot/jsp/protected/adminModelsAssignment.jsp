@@ -25,7 +25,7 @@
 		    
 			    <td class=resultsBoxGreyNoEnd>			
 			        <html:select property="currentState">
-			            <html:options name="<%=Constants.FORMDATA%>" property="states"/>
+			            <html:options name="<%=Constants.Dropdowns.CURATIONSTATESDROP%>"/>
 		            </html:select>
 			    </td>
 		    

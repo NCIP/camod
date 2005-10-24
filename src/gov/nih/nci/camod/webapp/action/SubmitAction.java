@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.11 2005-09-22 18:56:37 georgeda Exp $
+ *  $Id: SubmitAction.java,v 1.12 2005-10-24 13:28:17 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.11  2005/09/22 18:56:37  georgeda
+ *  Get coordinator from user in properties file
+ *
  *  Revision 1.10  2005/09/22 15:18:43  georgeda
  *  More changes
  *
@@ -55,7 +58,7 @@ public class SubmitAction extends BaseAction {
 
             // Get the coordinator
             ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-            String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
+            String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
             theForm.setAssignedTo(theCoordinator);
             request.setAttribute(Constants.FORMDATA, theForm);
 

@@ -29,8 +29,13 @@
     </form>
     
     <form name="modelCharacteristicsForm">
-        <field property="modelDescriptor" depends="required">
+        <field property="modelDescriptor" depends="required, maxlength">
             <arg0 key="ModelCharacteristicsForm.modelDescriptor"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
         </field>
         <field property="scientificName" depends="required">
             <arg0 key="ModelCharacteristicsForm.scientificName"/>
@@ -38,8 +43,29 @@
         <field property="ethinicityStrain" depends="required">
             <arg0 key="ModelCharacteristicsForm.ethinicityStrain"/>
         </field>
-        <field property="description" depends="required">
+        <field property="description" depends="required, maxlength">
             <arg0 key="ModelCharacteristicsForm.description"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>4000</var-value>
+            </var>
+        </field>
+        <field property="breedingNotes" depends="maxlength">
+            <arg0 key="ModelCharacteristicsForm.breedingNotes"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="url" depends="maxlength">
+            <arg0 key="ModelCharacteristicsForm.url"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
         </field>
         <field property="type" depends="required">
             <arg0 key="ModelCharacteristicsForm.type"/>
@@ -47,6 +73,18 @@
         <field property="releaseDate" depends="required">
             <arg0 key="ModelCharacteristicsForm.releaseDate"/>
         </field>
+        <field property="ethnicityStrainUnctrlVocab" depends="validwhen, maxlength">
+            <arg0 key="ModelCharacteristicsForm.ethnicityStrainUnctrlVocab"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((ethinicityStrain != 'Other') or ((ethinicityStrain == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>     
     </form>
 
 	<form name="geneDeliveryForm">

@@ -19,14 +19,17 @@ var cal1 = new CalendarPopup();
 
 <SCRIPT LANGUAGE="JavaScript">
 	
-	function chkOther( control ) {
-		ideControl = document.forms[0].ethnicityStrainUnctrlVocab;
-		
-		if( control.value == "Other" )
-			ideControl.disabled = false;
+	function chkOther() {
+	
+	    var strain = document.forms[0].ethinicityStrain;
+	    var otherStrain = document.forms[0].ethnicityStrainUnctrlVocab;
+	  	
+		if( strain.value == 'Other' ) {
+			otherStrain.disabled = false;
+		}
 		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
+			otherStrain.value = null;
+			otherStrain.disabled = true;
 		}
 	}
 	
@@ -54,6 +57,7 @@ var cal1 = new CalendarPopup();
 	
 	function transferFields() {
 		document.forms[0].calendarReleaseDate.value = document.forms[0].calendarReleaseDateDisp.value;
+		document.forms[0].calendarReleaseDate.disabled = false;
 	}
 	
 </SCRIPT>
@@ -112,7 +116,7 @@ var cal1 = new CalendarPopup();
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
-					<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
 				</html:select>			
 			</td>
 		</tr>
@@ -121,7 +125,7 @@ var cal1 = new CalendarPopup();
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOther(this);">
+				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOther();">
 					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
 				</html:select>
 			</td>
@@ -187,7 +191,7 @@ var cal1 = new CalendarPopup();
 			<td class="formField">
 				<html:radio property="releaseDate" value="immediately" onclick="return immediateRelease();" /> Release record immediately <br> 
 				<html:radio property="releaseDate" value="after" onclick="return selectFromCalendar();" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 
-				<html:hidden styleClass="formFieldSized2" disabled="false" property="calendarReleaseDate" />
+				<html:hidden disabled="false" property="calendarReleaseDate" />
 				<INPUT styleClass="formFieldSized2" disabled="true" property="calendarReleaseDateDisp" id="calendarReleaseDateDisp" size="10"/>	<br>
 			</td>
 		</tr>
@@ -210,6 +214,10 @@ var cal1 = new CalendarPopup();
 		</tr>		
 	</TABLE>	
 </td></tr></TABLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+	chkOther();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
 

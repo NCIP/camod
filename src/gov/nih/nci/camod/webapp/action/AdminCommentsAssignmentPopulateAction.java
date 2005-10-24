@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminCommentsAssignmentPopulateAction.java,v 1.1 2005-10-17 13:28:45 georgeda Exp $
+ * $Id: AdminCommentsAssignmentPopulateAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:28:45  georgeda
+ * Initial revision
+ *
  * Revision 1.2  2005/10/10 14:10:48  georgeda
  * Changes for comment curation
  *
@@ -17,9 +20,8 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.CommentsSearchResult;
-import gov.nih.nci.camod.service.CurationManager;
-import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.webapp.form.CurationAssignmentForm;
+import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import gov.nih.nci.common.persistence.Search;
 
 import java.util.ArrayList;
@@ -50,17 +52,14 @@ public class AdminCommentsAssignmentPopulateAction extends BaseAction {
 
 		log.trace("Entering execute");
 
-		// Get the curation manager workflow XML
-		CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext().getRealPath("/")
-				+ Constants.Admin.COMMENT_CURATION_WORKFLOW);
-
 		CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
-		theForm.setStates(theCurationManager.getAllStateNames());
 
-		inRequest.getSession().setAttribute(Constants.FORMDATA, theForm);
+		try {
+			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.CURATIONSTATESDROP,
+					Constants.Admin.COMMENT_CURATION_WORKFLOW);
 
-		if (theForm.getCurrentState() != null) {
-			try {
+			if (theForm.getCurrentState() != null) {
+
 				Comments theQBEComments = new Comments();
 				theQBEComments.setState(theForm.getCurrentState());
 
@@ -77,16 +76,15 @@ public class AdminCommentsAssignmentPopulateAction extends BaseAction {
 				}
 
 				inRequest.getSession().setAttribute(Constants.ADMIN_COMMENTS_SEARCH_RESULTS, theDisplayList);
-				
-			} catch (Exception e) {
-				log.error("Unable to get comments for state: " + theForm.getCurrentState());
-
-				// Encountered an error saving the model.
-				// created a new model successfully
-				ActionMessages theMsg = new ActionMessages();
-				theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-				saveErrors(inRequest, theMsg);
 			}
+		} catch (Exception e) {
+			
+			log.error("Unable to get comments for state: " + theForm.getCurrentState());
+
+			// Encountered an error
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(inRequest, theMsg);
 		}
 
 		log.trace("Exiting execute");

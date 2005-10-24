@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModelCharacteristicsForm.java,v 1.6 2005-10-13 20:48:00 georgeda Exp $
+ * $Id: ModelCharacteristicsForm.java,v 1.7 2005-10-24 13:28:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/13 20:48:00  georgeda
+ * Correctly handle the PI
+ *
  * Revision 1.5  2005/10/06 13:36:08  georgeda
  * Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
  *
@@ -41,7 +44,6 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String url;
     protected String releaseDate = "immediately";
     protected String calendarReleaseDate;
-    protected String otherEthinicityStrain;
     protected String ethnicityStrainUnctrlVocab;
 
     public ModelCharacteristicsForm() {
@@ -53,14 +55,6 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
 
     public void setModelDescriptor(String a) {
         this.modelDescriptor = a;
-    }
-
-    public String getOtherEthinicityStrain() {
-        return otherEthinicityStrain;
-    }
-
-    public void setOtherEthinicityStrain(String a) {
-        this.otherEthinicityStrain = a;
     }
 
     public String getEthnicityStrainUnctrlVocab() {

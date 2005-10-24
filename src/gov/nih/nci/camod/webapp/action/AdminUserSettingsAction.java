@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminUserSettingsAction.java,v 1.1 2005-10-21 20:47:04 georgeda Exp $
+ * $Id: AdminUserSettingsAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/21 20:47:04  georgeda
+ * Initial revision
+ *
  *
  */
 package gov.nih.nci.camod.webapp.action;
@@ -46,7 +49,7 @@ public class AdminUserSettingsAction extends BaseAction {
 
                 // Get from default bundle
                 ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-                String theUsersToNotify = theBundle.getString(Constants.USER_UPDATE_NOTIFY_KEY);
+                String theUsersToNotify = theBundle.getString(Constants.BundleKeys.USER_UPDATE_NOTIFY_KEY);
 
                 StringTokenizer theTokenizer = new StringTokenizer(theUsersToNotify, ",");
 

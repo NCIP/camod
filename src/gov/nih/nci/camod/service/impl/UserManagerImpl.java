@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.8 2005-10-17 13:10:16 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.9 2005-10-24 13:28:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/17 13:10:16  georgeda
+ * Get contact information
+ *
  * Revision 1.7  2005/10/13 17:00:06  georgeda
  * Cleanup
  *
@@ -255,7 +258,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
             // Get from default bundle
             ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-            String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
+            String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
 
             theEmail = getEmailForUser(theCoordinator);
 

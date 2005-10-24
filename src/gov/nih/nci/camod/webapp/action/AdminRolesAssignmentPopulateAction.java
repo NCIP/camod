@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesAssignmentPopulateAction.java,v 1.1 2005-10-17 13:29:00 georgeda Exp $
+ * $Id: AdminRolesAssignmentPopulateAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:29:00  georgeda
+ * Initial revision
+ *
  * Revision 1.2  2005/10/10 14:10:48  georgeda
  * Changes for comment curation
  *
@@ -19,6 +22,7 @@ import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.PersonSearchResult;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.webapp.form.RolesAssignmentForm;
+import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,45 +52,38 @@ public class AdminRolesAssignmentPopulateAction extends BaseAction {
 
 		log.trace("Entering execute");
 
-		// Generate the roles list
-		List theRoles = new ArrayList();
-		theRoles.add(Constants.Admin.Roles.ALL);
-		theRoles.add(Constants.Admin.Roles.COORDINATOR);
-		theRoles.add(Constants.Admin.Roles.EDITOR);
-		theRoles.add(Constants.Admin.Roles.SCREENER);
+		RolesAssignmentForm theForm = (RolesAssignmentForm) inForm;
+		
+		// Null out any old data
+		inRequest.getSession().setAttribute(Constants.ADMIN_ROLES_SEARCH_RESULTS, null);
+		
+		try {
 
-		RolesAssignmentForm theForm = (RolesAssignmentForm) inForm;;
-        theForm.setRoles(theRoles);
-        
-		inRequest.getSession().setAttribute(Constants.FORMDATA, theForm);
+			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.ROLESDROP, "");
 
-		if (theForm.getCurrentRole() != null) {
-
-			try {
+			if (theForm.getCurrentRole() != null) {
 
 				// Get the models
 				List theUsers = PersonManagerSingleton.instance().getByRole(theForm.getCurrentRole());
-				
-				// Create a display list
-		        List theDisplayList = new ArrayList();
-		        
-		        // Add AnimalModel DTO's so that the paganation works quickly
-		        for (int i = 0, j = theUsers.size(); i < j; i++) {
-		            Person thePerson = (Person) theUsers.get(i);
-		            theDisplayList.add(new PersonSearchResult(thePerson));
-		        }
-		        
-				inRequest.getSession().setAttribute(Constants.ADMIN_ROLES_SEARCH_RESULTS, theDisplayList);
-				
-			} catch (Exception e) {
-				log.error("Unable to get users for role: " + theForm.getCurrentRole());
 
-				// Encountered an error saving the model.
-				// created a new model successfully
-				ActionMessages theMsg = new ActionMessages();
-				theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-				saveErrors(inRequest, theMsg);
+				// Create a display list
+				List theDisplayList = new ArrayList();
+
+				// Add AnimalModel DTO's so that the paganation works quickly
+				for (int i = 0, j = theUsers.size(); i < j; i++) {
+					Person thePerson = (Person) theUsers.get(i);
+					theDisplayList.add(new PersonSearchResult(thePerson));
+				}
+
+				inRequest.getSession().setAttribute(Constants.ADMIN_ROLES_SEARCH_RESULTS, theDisplayList);
 			}
+		} catch (Exception e) {
+			log.error("Unable to get users for role: " + theForm.getCurrentRole());
+
+			// Encountered an error
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(inRequest, theMsg);
 		}
 
 		log.trace("Exiting execute");

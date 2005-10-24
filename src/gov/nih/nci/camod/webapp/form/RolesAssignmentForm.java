@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RolesAssignmentForm.java,v 1.1 2005-10-17 13:11:44 georgeda Exp $
+ * $Id: RolesAssignmentForm.java,v 1.2 2005-10-24 13:28:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:11:44  georgeda
+ * Initial revision
+ *
  * Revision 1.1  2005/09/19 19:54:06  georgeda
  * New model assignment functionality
  *
@@ -12,7 +15,6 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,8 +29,6 @@ import org.apache.struts.validator.ValidatorForm;
 public class RolesAssignmentForm extends ValidatorForm implements Serializable {
 
 	private static final long serialVersionUID = 6227851900634170134L;
-
-	protected List myRoles;
 	
 	protected String myPersonId;
 	
@@ -41,14 +41,6 @@ public class RolesAssignmentForm extends ValidatorForm implements Serializable {
 	protected boolean screener = false;
 
 	protected boolean editor = false;
-
-	public List getRoles() {
-		return myRoles;
-	}
-
-	public void setRoles(List inRoles) {
-		myRoles = inRoles;
-	}
 
 	public String getDisplayName() {
 		return myDisplayName;
@@ -99,7 +91,9 @@ public class RolesAssignmentForm extends ValidatorForm implements Serializable {
 	}
 	
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		System.out.println("In reset?");
+		this.myPersonId = null;
+		this.myCurrentRole = null;
+		this.myDisplayName = null;
 		this.screener = false;
 		this.coordinator = false;
 		this.editor = false;

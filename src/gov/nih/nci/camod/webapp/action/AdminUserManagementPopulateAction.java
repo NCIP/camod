@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminUserManagementPopulateAction.java,v 1.1 2005-10-17 13:29:00 georgeda Exp $
+ * $Id: AdminUserManagementPopulateAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:29:00  georgeda
+ * Initial revision
+ *
  * Revision 1.2  2005/10/10 14:10:48  georgeda
  * Changes for comment curation
  *
@@ -15,7 +18,6 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.webapp.form.EditUserForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,21 +44,16 @@ public class AdminUserManagementPopulateAction extends BaseAction {
 
 		log.trace("Entering execute");
 
-		EditUserForm theForm = (EditUserForm) inForm;
-
-		inRequest.getSession().setAttribute(Constants.FORMDATA, theForm);
-
 		String theForward = "next";
 		try {
-			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERSDROP,"");
+			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERSDROP, "");
 		} catch (Exception e) {
-			
+
 			theForward = "failure";
-			
+
 			log.error("Unable to get roles for user");
 
-			// Encountered an error saving the model.
-			// created a new model successfully
+			// Encountered an error 
 			ActionMessages theMsg = new ActionMessages();
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(inRequest, theMsg);

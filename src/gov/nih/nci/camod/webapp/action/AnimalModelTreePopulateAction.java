@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.27 2005-10-21 16:07:01 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.28 2005-10-24 13:28:17 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.27  2005/10/21 16:07:01  pandyas
+ *  implementation of animal availability
+ *
  *  Revision 1.26  2005/10/12 20:10:49  schroedn
  *  Added Validation
  *
@@ -323,7 +326,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         // Set up the form. Should be only one coordinator
         // Get the coordinator
         ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-        String theCoordinator = theBundle.getString(Constants.COORDINATOR_USERNAME_KEY);
+        String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
 
         AnimalModelStateForm theForm = new AnimalModelStateForm();
 

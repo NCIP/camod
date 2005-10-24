@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.51 2005-10-21 20:46:21 georgeda Exp $
+ * $Id: Constants.java,v 1.52 2005-10-24 13:26:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2005/10/21 20:46:21  georgeda
+ * Added user registration settings
+ *
  * Revision 1.50  2005/10/21 19:36:56  schroedn
  * Added Constants for Image upload and retrieval
  *
@@ -102,16 +105,6 @@ public class Constants {
 	public static final String HTTPS_PORT = "httpsPort";
 
 	/**
-	 * The key for the coordinator username in the camod.properties file
-	 */
-	public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
-
-    /**
-     * The key for the coordinator username in the camod.properties file
-     */
-    public static final String USER_UPDATE_NOTIFY_KEY = "user_settings.user_update_notify";
-    
-	/**
 	 * The name of the Administrator role, as specified in web.xml
 	 */
 	public static final String ADMIN_ROLE = "admin";
@@ -121,7 +114,6 @@ public class Constants {
 	 */
 	public static final String CONFIG = "appConfig";
 
-
 	public static final String UPT_CONTEXT_NAME = "camod";
 
 	/**
@@ -130,34 +122,60 @@ public class Constants {
 	 */
 	public static final String USERMODELLIST = "usermodellist";
 
-    /**
-     * Used to store lists for drop down menus
-     */
-    public interface CaArray {
-        public static final String URI_START = "caarray.uri_start";
-        public static final String URI_END = "caarray.uri_end";
-    }
-    
-    /**
-     * Used in table of contents searching
-     */
-    public interface TOCSearch {
-        public static final String TOC_QUERY_FILE = "config/TOCQueryConfig.xml";
-        public static final String TOC_QUERY_RESULTS = "TOC_QUERY_RESULTS";
-    }
-    
+	public interface BundleKeys {
+		/**
+		 * The key for the coordinator username in the camod.properties file
+		 */
+		public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
+
+		/**
+		 * The key for the coordinator username in the camod.properties file
+		 */
+		public static final String NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY = "model.new_unctrl_vocab_notify";
+
+		/**
+		 * The key for the coordinator username in the camod.properties file
+		 */
+		public static final String NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY = "model.new_unctrl_vocab_subject";
+		
+		/**
+		 * The key for the coordinator username in the camod.properties file
+		 */
+		public static final String USER_UPDATE_NOTIFY_KEY = "user_settings.user_update_notify";
+	}
+
+	/**
+	 * Used to store lists for drop down menus
+	 */
+	public interface CaArray {
+		public static final String URI_START = "caarray.uri_start";
+
+		public static final String URI_END = "caarray.uri_end";
+	}
+
+	/**
+	 * Used in table of contents searching
+	 */
+	public interface TOCSearch {
+		public static final String TOC_QUERY_FILE = "config/TOCQueryConfig.xml";
+
+		public static final String TOC_QUERY_RESULTS = "TOC_QUERY_RESULTS";
+	}
+
 	/**
 	 * Used to store lists for drop down menus
 	 */
 	public interface Dropdowns {
 
 		public static final String ADD_BLANK_OPTION = "ADD_BLANK_OPTION";
-        
-        public static final String ADD_BLANK_DROPDOWN_OPTION = "ADD_BLANK_DROPDOWN_OPTION";
+
+		public static final String ADD_BLANK_DROPDOWN_OPTION = "ADD_BLANK_DROPDOWN_OPTION";
 
 		public static final String OTHER_OPTION = "Other";
 
 		public static final String SPECIESDROP = "speciesdrop.db";
+		
+		public static final String NEWSPECIESDROP = "newspeciesdrop.db";
 
 		public static final String STRAINDROP = "straindrop.db";
 
@@ -176,7 +194,7 @@ public class Constants {
 		public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
 
 		public static final String HOSTSPECIESDROP = "HostSpecies.txt";
-		
+
 		// Various Dose Units
 		public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
 
@@ -199,7 +217,7 @@ public class Constants {
 		public static final String TARGETEDMODIFICATIONDROP = "TargetedModificationTypes.txt";
 
 		public static final String GENOMICSEGMENTDROP = "SegmentTypes.txt";
-		
+
 		public static final String GROWTHFACTORDOSEUNITSDROP = "GrowthFactorDoseUnits.txt";
 
 		// Specific to a single screen
@@ -257,49 +275,58 @@ public class Constants {
 		public static final String BIOLOGICALPROCESSDROP = "BiologicalProcess.txt";
 
 		public static final String THERAPEUTICTARGETSDROP = "TherapeuticTargets.txt";
-		
+
 		// Used for user management
 		public static final String USERSDROP = "users.db";
+
+		// Used for curation
+		public static final String CURATIONSTATESDROP = "curationstates.db";
+
+		// Used for curation
+		public static final String USERSFORROLEDROP = "usersforrole.db";
+
+		// Used for role assignment
+		public static final String ROLESDROP = "roles.db";
 	}
 
 	/**
 	 * Defines the global constants used as parameters for ftp requests
 	 */
 	public interface Images {
-		
+
 		public static final String FTPSERVER = "ftp.server";
-	
+
 		public static final String FTPUSERNAME = "ftp.username";
-		
+
 		public static final String FTPPASSWORD = "ftp.password";
-		
-		public static final String FTPSTORAGEDIRECTORY = "ftp.storagedirectory"; 
+
+		public static final String FTPSTORAGEDIRECTORY = "ftp.storagedirectory";
 	}
-	
+
 	/**
 	 * Defines the global constants used as parameters to requests
 	 */
 	public interface Parameters {
 
 		public static final String MODELID = "aModelID";
-		
+
 		public static final String PERSONID = "aPersonID";
 
 		public static final String MODELSECTIONNAME = "aModelSectionName";
-		
-        public static final String MODELSECTIONVALUE = "modelSectionValue";
-        
+
+		public static final String MODELSECTIONVALUE = "modelSectionValue";
+
 		public static final String COMMENTSID = "aCommentsID";
-		
+
 		public static final String COMMENTSLIST = "aCommentsList";
-        
-        public static final String TOCQUERYKEY = "aTOCQueryKey";
-        
-        
+
+		public static final String TOCQUERYKEY = "aTOCQueryKey";
+
+		public static final String EVENT = "aEvent";
 	}
 
 	public interface Pages {
-        
+
 		public static final String MODEL_CHARACTERISTICS = "General Information Page";
 
 		public static final String CARCINOGENIC_INTERVENTION = "Carcinogenic Interventions Page";
@@ -317,8 +344,8 @@ public class Constants {
 		public static final String MICROARRAY = "Microarray Page";
 
 		public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
-        
-        public static final String XENOGRAFT = "Xenograft Page";
+
+		public static final String XENOGRAFT = "Xenograft Page";
 	}
 
 	/**
@@ -337,8 +364,8 @@ public class Constants {
 	public static final String FORMDATA = "formdata";
 
 	public static final String ANIMALMODEL = "animalmodel";
-    
-    public static final String XENOGRAFTMODEL = "xenograftmodel";
+
+	public static final String XENOGRAFTMODEL = "xenograftmodel";
 
 	/**
 	 * Used to store username for current user
@@ -353,13 +380,13 @@ public class Constants {
 	 * Used for search results
 	 */
 	public static final String SEARCH_RESULTS = "searchResults";
-	
+
 	public static final String ADMIN_COMMENTS_SEARCH_RESULTS = "adminCommentsSearchResults";
-	
+
 	public static final String ADMIN_MODEL_SEARCH_RESULTS = "adminModelSearchResults";
-	
+
 	public static final String ADMIN_ROLES_SEARCH_RESULTS = "adminRolesSearchResults";
-	
+
 	public static final String TRANSGENE_COLL = "transgeneColl";
 
 	public static final String GENOMIC_SEG_COLL = "genomicSegColl";
@@ -391,6 +418,7 @@ public class Constants {
 	public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
 
 	public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
+
 	public static final String NSC_NUMBER = "nsc";
 
 	// /////////////////////////////////////////////////////////////
@@ -432,10 +460,10 @@ public class Constants {
 		public static final String GENOMICSEGMENT_LIST = "genomicsegment_list";
 
 		public static final String HISTOPATHOLOGY_LIST = "histopathology_list";
-		
-		public static final String ASSOCMETASTSIS_LIST = "associatedmetastatis_list";		
-		
-		public static final String ENGINEEREDTRANSGENE_LIST = "engineeredtransgene_list";				
+
+		public static final String ASSOCMETASTSIS_LIST = "associatedmetastatis_list";
+
+		public static final String ENGINEEREDTRANSGENE_LIST = "engineeredtransgene_list";
 
 		public static final String THERAPY_LIST = "therapy_list";
 
@@ -452,7 +480,7 @@ public class Constants {
 		 * sidebar menu of the submission section
 		 */
 		public static final String CELLLINE_LIST = "cellline_list";
-		
+
 		public static final String ANIMALAVAILABILITY_LIST = "availability_list";
 	}
 
@@ -472,7 +500,6 @@ public class Constants {
 			 */
 			public static final String ALL = "All";
 
-			
 			/**
 			 * A constant that defines the submitter role
 			 */
@@ -532,7 +559,7 @@ public class Constants {
 		}
 
 		/**
-         * A constant that defines string used as a variable name in e-mail
+		 * A constant that defines string used as a variable name in e-mail
 		 */
 		public static final String INDUCED_MUTATION_AGENT_NAME = "inducedmutationagentname";
 
@@ -541,31 +568,31 @@ public class Constants {
 		 */
 		public static final String INDUCED_MUTATION_AGENT_TYPE = "inducedmutationagenttype";
 
-        /**
-         * A constant that defines string used as key for e-mail content associated with
-         * induced mutation agent additions
-         */
+		/**
+		 * A constant that defines string used as key for e-mail content
+		 * associated with induced mutation agent additions
+		 */
 		public static final String INDUCED_MUTATION_AGENT_ADDED = "inducedmutationagentadded";
 
-        /**
-         * A constant that defines string used as a variable name in e-mail
-         */
-        public static final String TARGETED_MODIFICATION_NAME = "targetedmodificationname";
-
-        /**
-         * A constant that defines string used as a variable name in e-mail
-         */
-        public static final String TARGETED_MODIFICATION_TYPE = "targetedmodificationtype";
+		/**
+		 * A constant that defines string used as a variable name in e-mail
+		 */
+		public static final String TARGETED_MODIFICATION_NAME = "targetedmodificationname";
 
 		/**
-		 * A constant that defines string used as key for e-mail content associated with
-         * targeted modification additions
+		 * A constant that defines string used as a variable name in e-mail
+		 */
+		public static final String TARGETED_MODIFICATION_TYPE = "targetedmodificationtype";
+
+		/**
+		 * A constant that defines string used as key for e-mail content
+		 * associated with targeted modification additions
 		 */
 		public static final String TARGETED_MODIFICATION_ADDED = "targetedmodificationadded";
 
 		/**
-		 * A constant that defines string used as key for e-mail content associated with
-         * non-controlled vocabulary use
+		 * A constant that defines string used as key for e-mail content
+		 * associated with non-controlled vocabulary use
 		 */
 		public static final String NONCONTROLLED_VOCABULARY = "noncontrolledvocab";
 
@@ -592,7 +619,7 @@ public class Constants {
 		 * request
 		 */
 		public static final String COMMENTS_NEEDING_ASSIGNMENT = "commentsNeedingAssignment";
-		
+
 		/** Used to set/pull the objects needing to be edited out of the request */
 		public static final String MODELS_NEEDING_EDITING = "modelsNeedingEditing";
 

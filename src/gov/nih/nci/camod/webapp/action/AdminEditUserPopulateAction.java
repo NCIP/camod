@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserPopulateAction.java,v 1.2 2005-10-17 16:30:24 georgeda Exp $
+ * $Id: AdminEditUserPopulateAction.java,v 1.3 2005-10-24 13:28:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/17 16:30:24  georgeda
+ * Cleanup
+ *
  * Revision 1.1  2005/10/17 13:28:45  georgeda
  * Initial revision
  *
@@ -48,7 +51,6 @@ public class AdminEditUserPopulateAction extends BaseAction {
 			theForm.setUsername(null);
 			theForm.setId(null);
 			theForm.setPrincipalInvestigator(false);
-			
 		} 
 		
 		// Update an existing user

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CommentsStateForm.java,v 1.1 2005-10-10 14:12:36 georgeda Exp $
+ * $Id: CommentsStateForm.java,v 1.2 2005-10-24 13:28:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/10 14:12:36  georgeda
+ * Initial revision
+ *
  * Revision 1.3  2005/09/19 13:39:57  georgeda
  * Cleaned up parameter passing
  *
@@ -12,84 +15,79 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.apache.struts.validator.ValidatorForm;
 
 /**
  * 
  * Form used to change the state of an animal model during curation
- *
+ * 
  */
 public class CommentsStateForm extends ValidatorForm implements CommentsStateData, Serializable {
 
-    private static final long serialVersionUID = 3257850969634190134L;
+	private static final long serialVersionUID = 3257850969634190134L;
 
-    protected String myModelDescriptor;
-    protected String myNote;
-    protected String myModelId;
-    protected String myCommentsId;
-    protected String myAssignedTo;
-    protected String myEvent;
-    protected List myAssignees;
+	protected String myModelDescriptor;
 
-    public CommentsStateForm() {
-        myEvent = "";
-    }
+	protected String myNote;
 
-    public String getModelDescriptor() {
-        return myModelDescriptor;
-    }
+	protected String myModelId;
 
-    public void setModelDescriptor(String inModelDescriptor) {
-        myModelDescriptor = inModelDescriptor;
-    }
+	protected String myCommentsId;
 
-    public String getNote() {
-        return myNote;
-    }
+	protected String myAssignedTo;
 
-    public void setNote(String inNote) {
-        myNote = inNote;
-    }
+	protected String myEvent;
 
-    public String getModelId() {
-        return myModelId;
-    }
+	public CommentsStateForm() {
+		myEvent = "";
+	}
 
-    public void setModelId(String inModelId) {
-        myModelId = inModelId;
-    }
+	public String getModelDescriptor() {
+		return myModelDescriptor;
+	}
 
-    public String getCommentsId() {
-        return myCommentsId;
-    }
+	public void setModelDescriptor(String inModelDescriptor) {
+		myModelDescriptor = inModelDescriptor;
+	}
 
-    public void setCommentsId(String inCommentsId) {
-        myCommentsId = inCommentsId;
-    }
-    
-    public String getAssignedTo() {
-        return myAssignedTo;
-    }
+	public String getNote() {
+		return myNote;
+	}
 
-    public void setAssignedTo(String inAssignedTo) {
-        myAssignedTo = inAssignedTo;
-    }
+	public void setNote(String inNote) {
+		myNote = inNote;
+	}
 
-    public String getEvent() {
-        return myEvent;
-    }
+	public String getModelId() {
+		return myModelId;
+	}
 
-    public void setEvent(String inEvent) {
-        myEvent = inEvent;
-    }
+	public void setModelId(String inModelId) {
+		myModelId = inModelId;
+	}
 
-    public List getAssignees() {
-        return myAssignees;
-    }
+	public String getCommentsId() {
+		return myCommentsId;
+	}
 
-    public void setAssignees(List inAssignees) {
-        myAssignees = inAssignees;
-    }
+	public void setCommentsId(String inCommentsId) {
+		myCommentsId = inCommentsId;
+	}
+
+	public String getAssignedTo() {
+		return myAssignedTo;
+	}
+
+	public void setAssignedTo(String inAssignedTo) {
+		myAssignedTo = inAssignedTo;
+	}
+
+	public String getEvent() {
+		return myEvent;
+	}
+
+	public void setEvent(String inEvent) {
+		myEvent = inEvent;
+	}
 }

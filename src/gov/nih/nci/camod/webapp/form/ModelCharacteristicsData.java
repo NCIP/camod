@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ModelCharacteristicsData.java,v 1.2 2005-10-13 20:48:00 georgeda Exp $
+ *  $Id: ModelCharacteristicsData.java,v 1.3 2005-10-24 13:28:30 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2005/10/13 20:48:00  georgeda
+ *  Correctly handle the PI
+ *
  *  Revision 1.1  2005/10/06 13:36:08  georgeda
  *  Changed ModelCharacteristics interface to be consistent w/ the rest of the interfaces
  *
@@ -27,10 +30,6 @@ public interface ModelCharacteristicsData {
     public String getModelDescriptor();
 
     public void setModelDescriptor(String a);
-
-    public String getOtherEthinicityStrain();
-
-    public void setOtherEthinicityStrain(String a);
 
     public String getCalendarReleaseDate();
 

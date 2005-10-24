@@ -82,4 +82,33 @@ public class TaxonManagerImpl extends BaseManager implements TaxonManager {
 
         return strains;
     }
+    
+    public String getCommonNameFromScientificName(String inScientificName) throws Exception {
+        
+    	String theCommonName = "";
+
+        try {
+            // List of taxons matching the scientificName in the species
+            List taxons = null;
+
+            // Taxon example to be used for searching
+            Taxon taxon = new Taxon();
+            taxon.setScientificName(inScientificName);
+
+            // Get the matching taxons
+            taxons = Search.query(taxon);
+
+            if (taxons != null && !taxons.isEmpty()) {
+            	
+            	Taxon theTaxon = (Taxon) taxons.get(0);
+            	theCommonName = theTaxon.getCommonName();
+            }
+
+        } catch (Exception e) {
+            log.error("Exception when fetching common name: " + e);
+            throw e;
+        }
+
+        return theCommonName;
+    }
 }

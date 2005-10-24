@@ -30,13 +30,11 @@
 		</tr>
 		<html:form action="AdminCommentsAssignmentPopulateAction">
 		    
-			    <td class=resultsBoxGreyNoEnd>			
-			        <html:select property="currentState">
-			            <html:options name="<%=Constants.FORMDATA%>" property="states"/>
-		            </html:select>
-			    </td>
-		    
-		
+			<td class=resultsBoxGreyNoEnd>			
+			    <html:select property="currentState">
+			        <html:options name="<%=Constants.Dropdowns.CURATIONSTATESDROP%>"/>
+		        </html:select>
+			</td>
 	        <td  class="resultsBoxGreyNoStart" align="right" colspan="3">
 				<TABLE cellpadding="4" cellspacing="0" border="0">	
 			        <html:submit styleClass="actionButton">

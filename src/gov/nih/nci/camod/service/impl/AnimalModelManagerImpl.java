@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.39 2005-10-21 19:38:37 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.40 2005-10-24 13:28:06 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2005/10/21 19:38:37  schroedn
+ * Added caImage ftp capabilities for EngineeredTransgene, GenomicSegment and TargetedModification
+ *
  * Revision 1.38  2005/10/21 16:07:26  pandyas
  * implementation of animal availability
  *
@@ -104,16 +107,60 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalAvailability;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.AnimalModelSearchResult;
+import gov.nih.nci.camod.domain.Availability;
+import gov.nih.nci.camod.domain.CellLine;
+import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Phenotype;
+import gov.nih.nci.camod.domain.SexDistribution;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
+import gov.nih.nci.camod.domain.TargetedModification;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.*;
+import gov.nih.nci.camod.webapp.form.AvailabilityData;
+import gov.nih.nci.camod.webapp.form.CellLineData;
+import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
+import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
+import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
+import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
+import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
+import gov.nih.nci.camod.webapp.form.GrowthFactorData;
+import gov.nih.nci.camod.webapp.form.HormoneData;
+import gov.nih.nci.camod.webapp.form.InducedMutationData;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
+import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
+import gov.nih.nci.camod.webapp.form.RadiationData;
+import gov.nih.nci.camod.webapp.form.SearchData;
+import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
+import gov.nih.nci.camod.webapp.form.SurgeryData;
+import gov.nih.nci.camod.webapp.form.TargetedModificationData;
+import gov.nih.nci.camod.webapp.form.TherapyData;
+import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
+import gov.nih.nci.camod.webapp.form.XenograftData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
-import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -124,9 +171,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get all of the animal models in the DB
-     *
+     * 
      * @return the list of all animal models
-     *
+     * 
      * @exception throws
      *                an Exception if an error occurred
      */
@@ -137,12 +184,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get all of the animal models submitted by a username
-     *
+     * 
      * @param inUsername
      *            the username the models are submitted by
-     *
+     * 
      * @return the list of animal models
-     *
+     * 
      * @exception throws
      *                an Exception if an error occurred
      */
@@ -155,12 +202,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get all of the animal models of a specific state
-     *
+     * 
      * @param inState
      *            the state to query for
-     *
+     * 
      * @return the list of animal models
-     *
+     * 
      * @exception Exception
      *                if an error occurred
      */
@@ -189,12 +236,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get all of the models of a specific state
-     *
+     * 
      * @param inState
      *            the state to query for
-     *
+     * 
      * @return the list of models
-     *
+     * 
      * @exception Exception
      *                if an error occurred
      */
@@ -207,13 +254,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Get a specific animal model
-     *
+     * 
      * @param id
      *            The unique id for the model
-     *
+     * 
      * @return the animal model if found, null otherwise
      * @throws Exception
-     *
+     * 
      * @exception Exception
      *                if an error occurred
      */
@@ -224,10 +271,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Save an animal model
-     *
+     * 
      * @param id
      *            The unique id for the model
-     *
+     * 
      * @exception Exception
      *                if an error occurred
      */
@@ -238,11 +285,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Update an animal model and create an associated log entry
-     *
+     * 
      * @param id
      *            The unique id for the model
      * @throws Exception
-     *
+     * 
      * @exception Exception
      *                if an error occurred
      */
@@ -273,13 +320,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Create a new/unsaved animal model
-     *
+     * 
      * @param inModelCharacteristicsData
      *            The values for the model and associated objects
-     *
+     * 
      * @param inUsername
      *            The submitter
-     *
+     * 
      * @return the created and unsaved AnimalModel
      * @throws Exception
      */
@@ -295,10 +342,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Update the animal model w/ the new characteristics and save
-     *
+     * 
      * @param inModelCharacteristicsData
      *            The new values for the model and associated objects
-     *
+     * 
      * @param inAnimalModel
      *            The animal model to update
      */
@@ -317,10 +364,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Remove the animal model from the system. Should remove all associated
      * data as well
-     *
+     * 
      * @param id
      *            The unique id of the animal model to delete
-     *
+     * 
      * @throws Exception
      *             An error occurred when attempting to delete the model
      */
@@ -332,11 +379,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Search for animal models based on: - modelName - piName - siteOfTumor -
      * speciesName
-     *
+     * 
      * Note: This method is currently a dummy search method and simply returns
      * all the animal model objects in the database. Searching using eQBE needs
      * to be done.
-     *
+     * 
      * @throws Exception
      */
     public List search(SearchData inSearchData) throws Exception {
@@ -394,52 +441,60 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         if (theTaxon == null) {
             theTaxon = new Taxon();
         }
+
+        String theCommonName = TaxonManagerSingleton.instance().getCommonNameFromScientificName(
+                inModelCharacteristics.getScientificName());
+
+        // Set the scientific/common names and ethnicity strain
+        theTaxon.setCommonName(theCommonName);
         theTaxon.setScientificName(inModelCharacteristics.getScientificName());
         theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
 
-        // Problem when editing and this doesn't change, the admin will get two
-        // emails about the same STRAIN
-        if (inModelCharacteristics.getEthnicityStrainUnctrlVocab() != null) {
-            if (!inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals("")) {
+        // Other is not selected, null out the uncontrolled vocab
+        if (!theTaxon.getEthnicityStrain().equals(Constants.Dropdowns.OTHER_OPTION)) {
+            theTaxon.setEthnicityStrainUnctrlVocab(null);
+        }
 
-                log.trace("Sending Notification eMail - new EthinicityStrain added");
+        // Other option different than the one set
+        else if (!inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals(
+                theTaxon.getEthnicityStrainUnctrlVocab())) {
 
-                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+            log.trace("Sending Notification eMail - new EthinicityStrain added");
 
-                // Iterate through all the reciepts in the config file
-                String recipients = theBundle.getString(Constants.EmailMessage.RECIPIENTS);
-                StringTokenizer st = new StringTokenizer(recipients, ",");
-                String inRecipients[] = new String[st.countTokens()];
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
-                for (int i = 0; i < inRecipients.length; i++)
-                    inRecipients[i] = st.nextToken();
-
-                String inSubject = theBundle.getString(Constants.EmailMessage.SUBJECT);
-                String inMessage = theBundle.getString(Constants.EmailMessage.MESSAGE) + " Strain added ( "
-                        + inModelCharacteristics.getEthnicityStrainUnctrlVocab() + " ) and is awaiting your approval.";
-                String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
-                // String inSender =
-                // theBundle.getString(Constants.EmailMessage.SENDER);
-
-                // gather message keys and variable values to build the e-mail content with
-                String[] messageKeys = {Constants.Admin.NONCONTROLLED_VOCABULARY};
-                TreeMap values = new TreeMap();
-                values.put("submitter",inAnimalModel.getSubmitter());
-                values.put("model",inAnimalModel.getModelDescriptor());
-                values.put("modelstate",inAnimalModel.getState());
-
-                // Send the email
-                try {
-                    MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
-                } catch (Exception e) {
-                    System.out.println("Caught exception" + e);
-                    e.printStackTrace();
-                }
-
-                // 2. Set flag, this Strain will need to be approved before
-                // being added the list
-                theTaxon.setEthnicityStrainUnctrlVocab(inModelCharacteristics.getEthnicityStrainUnctrlVocab());
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
             }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "EthinicityStrain");
+            values.put("value", inModelCharacteristics.getEthnicityStrainUnctrlVocab());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }
+
+            // 2. Set flag, this Strain will need to be approved before
+            // being added the list
+            theTaxon.setEthnicityStrainUnctrlVocab(inModelCharacteristics.getEthnicityStrainUnctrlVocab());
         }
 
         Phenotype thePhenotype = inAnimalModel.getPhenotype();
@@ -469,19 +524,20 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
         theAvailability.setEnteredDate(new Date());
 
-        if (inModelCharacteristics.getReleaseDate().equals("immediately")) {
-            theAvailability.setReleaseDate(new Date());
-        } else {
-            // TODO: add popup calender to submitNewModel.jsp and convert the
-            // string to Date object here
-            // modelChar.getCalendarReleaseDate();
-            theAvailability.setReleaseDate(new Date());
-        }
+        // Convert the date
+        Date theDate = new Date();
+        if (!inModelCharacteristics.getReleaseDate().equals("immediately")) {
 
-        // By default a new model's state is set to incomplete if it's not set
-        if (inAnimalModel.getState() == null) {
-            inAnimalModel.setState("Incomplete");
+            // Convert the string to a date. Default to "now" if there are any
+            // errors
+            DateFormat theDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            try {
+                theDate = theDateFormat.parse(inModelCharacteristics.getCalendarReleaseDate());
+            } catch (Exception e) {
+                log.error("Error parsing release date, defaulting to now", e);
+            }
         }
+        theAvailability.setReleaseDate(theDate);
 
         // Associated the created objects
         inAnimalModel.setAvailability(theAvailability);
@@ -495,7 +551,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception {
 
-    	System.out.println("<AnimalModelManagerImpl populate> Entering addXenograft() ");
+        System.out.println("<AnimalModelManagerImpl populate> Entering addXenograft() ");
 
         log.trace("Entering saveXenograft");
 
@@ -511,7 +567,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a gene delivery
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inGeneDeliveryData
@@ -532,7 +588,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a chemical/drug therapy
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inChemicalDrugData
@@ -550,7 +606,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add an environmental factor therapy
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inEnvironmentalFactorData
@@ -569,7 +625,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add an environmental factor therapy
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inRadiationData
@@ -587,7 +643,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add an environmental factor therapy
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inViralTreatmentData
@@ -605,7 +661,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a growth factor
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inGrowthFactorData
@@ -623,7 +679,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a hormone
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inHormoneData
@@ -641,7 +697,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a nutritional factor
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inNutritionalFactorData
@@ -659,7 +715,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a surgery/other
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the therapy
      * @param inSurgeryData
@@ -677,7 +733,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
     /**
      * Add a cell line
-     *
+     * 
      * @param inAnimalModel
      *            the animal model that has the cell line
      * @param inSurgeryData
@@ -732,8 +788,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a TargetedModification
      */
-    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData, HttpServletRequest request)
-            throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData,
+            HttpServletRequest request) throws Exception {
 
         log.trace("Entering addGeneticDescription (TargetedModification)");
 
@@ -747,12 +803,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting addGeneticDescription (TargetedModification)");
     }
 
-    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, HttpServletRequest request)
-            throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
+            HttpServletRequest request) throws Exception {
 
         log.trace("Entering addGeneticDescription (GenomicSegment)");
 
-        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inGenomicSegmentData, request);
+        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inGenomicSegmentData,
+                request);
         // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theGenomicSegment);
@@ -761,8 +818,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting addGeneticDescription (GenomicSegment)");
     }
 
-    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request)
-            throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData,
+            HttpServletRequest request) throws Exception {
 
         log.trace("Entering addGeneticDescription (EngineeredTransgene)");
 
@@ -796,7 +853,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
     }
-    
+
     /**
      * Add an Availability
      * 
@@ -812,9 +869,10 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         System.out.println("<AnimalModelManagerImpl addAvailability>");
 
         log.trace("Entering AnimalModelManagerImpl.addAvailability");
-        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().create(inAvailabilityData, inAnimalModel);
+        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().create(inAvailabilityData,
+                inAnimalModel);
         inAnimalModel.addAnimalAvailability(theAvailability);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addAvailability");
-    }    
+    }
 }
