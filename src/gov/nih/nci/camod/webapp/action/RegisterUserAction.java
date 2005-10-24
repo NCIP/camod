@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RegisterUserAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
+ * $Id: RegisterUserAction.java,v 1.3 2005-10-24 15:12:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/24 13:28:17  georgeda
+ * Cleanup changes
+ *
  * Revision 1.1  2005/10/21 20:47:04  georgeda
  * Initial revision
  *
@@ -12,6 +15,8 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.UserSettingsForm;
 
@@ -64,8 +69,8 @@ public class RegisterUserAction extends BaseAction {
                 }
 
                 // Build the message text
-                String theMailSubject = "caMOD: The following user is requesting a new account: " + theForm.getFirstName()
-                        + " " + theForm.getLastName();
+                String theMailSubject = "caMOD: The following user is requesting a new account: "
+                        + theForm.getFirstName() + " " + theForm.getLastName();
                 String[] theMessageKeys = { "add_new_user" };
 
                 if (theRecipients.length > 0) {
@@ -77,6 +82,25 @@ public class RegisterUserAction extends BaseAction {
                     valuesForVariables.put("email", theForm.getEmail());
                     valuesForVariables.put("phone", theForm.getPhone());
                     valuesForVariables.put("affiliation", theForm.getAffiliation());
+
+                    // PI data
+                    valuesForVariables.put("isPi", Boolean.toString(theForm.isPrincipalInvestigator()));
+
+                    if (theForm.isPrincipalInvestigator() == false) {
+                        String thePiUsername = theForm.getPiUsername();
+                        if (thePiUsername != null && thePiUsername.length() > 0) {
+                            Person thePerson = PersonManagerSingleton.instance().getByUsername(thePiUsername);
+                            valuesForVariables.put("piName", thePerson.displayName());
+                        } else {
+                            valuesForVariables.put("piName", "");
+                            valuesForVariables.put("newPiName", theForm.getPiLastName() + ", "
+                                    + theForm.getPiFirstName());
+                        }
+                    } else {
+                        valuesForVariables.put("piName", "");
+                        valuesForVariables.put("piName", "");
+                        valuesForVariables.put("newPiName", "");
+                    }
 
                     // launch the email
                     MailUtil.sendMail(theRecipients, theMailSubject, "", theForm.getEmail(), theMessageKeys,
