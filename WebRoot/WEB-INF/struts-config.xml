@@ -1407,6 +1407,7 @@
             parameter="method"         
             validate="false" >  
     <forward 
+            redirect="true"
     		name="modeldeleted"
     		path="/ReturnUserModels.do?method=returnUserModels"></forward>	                         
     </action>
@@ -1417,6 +1418,7 @@
             parameter="method"         
             validate="false" >  
     <forward 
+            redirect="true"
     		name="duplicatesuccessful"
     		path="/ReturnUserModels.do?method=returnUserModels"></forward>                                     
    </action>
