@@ -238,12 +238,16 @@ public class NewDropdownUtil {
 
         BufferedReader in = new BufferedReader(new FileReader(inFilename));
 
+        boolean isDropdownOption = false;
+
         String str;
         while ((str = in.readLine()) != null) {
             log.info("Reading value from file: " + str);
 
             // It's a DropdownOption file
-            if (str.indexOf(",") > 0) {
+            if (str.indexOf("DROPDOWN_OPTION") > 0) {
+                isDropdownOption = true;
+            } else if (isDropdownOption == true) {
                 StringTokenizer theTokenizer = new StringTokenizer(str);
                 String theLabel = theTokenizer.nextToken(",");
                 String theValue = theTokenizer.nextToken(",");
