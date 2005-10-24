@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.15 2005-10-24 13:28:17 georgeda Exp $
+ * $Id: AnimalModelAction.java,v 1.16 2005-10-24 17:11:00 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/10/24 13:28:17  georgeda
+ * Cleanup changes
+ *
  * Revision 1.14  2005/10/13 20:47:42  georgeda
  * Correctly handle the PI
  *
@@ -34,270 +37,271 @@ import org.apache.struts.action.*;
  */
 public final class AnimalModelAction extends BaseAction {
 
-	/**
-	 * Save a new AnimalModel
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Save a new AnimalModel
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.trace("Entering save");
+        log.trace("Entering save");
 
-		ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
+        ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
 
-		log.info("<AnimalModelAction saveNewModel> New Model Being created with following Characteristics:"
-				+ "\n\t description: " + theModelChar.getDescription() + "\n\t breedingNotes: "
-				+ theModelChar.getBreedingNotes() + "\n\t PI: " + theModelChar.getPrincipalInvestigator()
-				+ "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() + "\n\t experimentDesign: "
-				+ theModelChar.getExperimentDesign() + "\n\t isToolMouse: " + theModelChar.getIsToolMouse()
-				+ "\n\t modelDescriptor: " + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName()
-				+ "\n\t releaseDate: " + theModelChar.getReleaseDate() + "\n\t scientificName: "
-				+ theModelChar.getScientificName() + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: "
-				+ theModelChar.getType() + "\n\t url: " + theModelChar.getUrl() + "\n\t calendarReleaseDate: "
-				+ theModelChar.getCalendarReleaseDate() + "\n\t currentUser: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<AnimalModelAction saveNewModel> New Model Being created with following Characteristics:"
+                + "\n\t description: " + theModelChar.getDescription() + "\n\t breedingNotes: "
+                + theModelChar.getBreedingNotes() + "\n\t PI: " + theModelChar.getPrincipalInvestigator()
+                + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() + "\n\t experimentDesign: "
+                + theModelChar.getExperimentDesign() + "\n\t isToolMouse: " + theModelChar.getIsToolMouse()
+                + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName()
+                + "\n\t releaseDate: " + theModelChar.getReleaseDate() + "\n\t scientificName: "
+                + theModelChar.getScientificName() + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: "
+                + theModelChar.getType() + "\n\t url: " + theModelChar.getUrl() + "\n\t calendarReleaseDate: "
+                + theModelChar.getCalendarReleaseDate() + "\n\t currentUser: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		String theForward = "AnimalModelTreePopulateAction";
+        String theForward = "AnimalModelTreePopulateAction";
 
-		try {
+        try {
 
-			// Get the user
-			String theUsername = (String) request.getSession().getAttribute(Constants.CURRENTUSER);
+            // Get the user
+            String theUsername = (String) request.getSession().getAttribute(Constants.CURRENTUSER);
 
-			// Get the manager and create the animal model
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.create(theModelChar, theUsername);
+            // Get the manager and create the animal model
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.create(theModelChar, theUsername);
 
-			// Set the animal model to the default state
-			if (theAnimalModel.getState() == null) {
+            // Set the animal model to the default state
+            if (theAnimalModel.getState() == null) {
 
-				// Get the curation manager workflow XML
-				CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext()
-						.getRealPath("/")
-						+ Constants.Admin.MODEL_CURATION_WORKFLOW);
+                // Get the curation manager workflow XML
+                CurationManager theCurationManager = new CurationManagerImpl(getServlet().getServletContext()
+                        .getRealPath("/")
+                        + Constants.Admin.MODEL_CURATION_WORKFLOW);
 
-				theAnimalModel.setState(theCurationManager.getDefaultState());
-			}
+                theAnimalModel.setState(theCurationManager.getDefaultState());
+            }
 
-			// save the model
-			theAnimalModelManager.save(theAnimalModel);
+            // save the model
+            theAnimalModelManager.save(theAnimalModel);
 
-			log.info("New model created with id: " + theAnimalModel.getId());
+            log.info("New model created with id: " + theAnimalModel.getId());
 
-			// Setup global constants to use for submission / editing process
-			request.getSession().setAttribute(Constants.MODELID, theAnimalModel.getId().toString());
-			request.getSession().setAttribute(Constants.MODELDESCRIPTOR, theAnimalModel.getModelDescriptor());
-			request.getSession().setAttribute(Constants.MODELSTATUS, theAnimalModel.getState());
+            // Setup global constants to use for submission / editing process
+            request.getSession().setAttribute(Constants.MODELID, theAnimalModel.getId().toString());
+            request.getSession().setAttribute(Constants.MODELDESCRIPTOR, theAnimalModel.getModelDescriptor());
+            request.getSession().setAttribute(Constants.MODELSTATUS, theAnimalModel.getState());
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("creation.successful"));
-			saveErrors(request, msg);
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("creation.successful"));
+            saveErrors(request, msg);
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			log.error("Exception ocurred creating model", e);
+            log.error("Exception ocurred creating model", e);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
 
-			theForward = "failure";
-		}
+            theForward = "failure";
+        }
 
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}
+        log.trace("Exiting save");
+        return mapping.findForward(theForward);
+    }
 
-	/**
-	 * Used to update a animalModel.
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Used to update a animalModel.
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.trace("Entering edit");
+        log.trace("Entering edit");
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
+        ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
 
-		log.info("editExistingModel - New Model Being created with following Characteristics:" + "\n\t description: "
-				+ theModelChar.getDescription() + "\n\t breedingNotes: " + theModelChar.getBreedingNotes()
-				+ "\n\t PI: " + theModelChar.getPrincipalInvestigator() + "\n\t ethinicityStrain: "
-				+ theModelChar.getEthinicityStrain() + "\n\t experimentDesign: " + theModelChar.getExperimentDesign()
-				+ "\n\t isToolMouse: " + theModelChar.getIsToolMouse() + "\n\t modelDescriptor: "
-				+ theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName() + "\n\t releaseDate: "
-				+ theModelChar.getReleaseDate() + "\n\t scientificName: " + theModelChar.getScientificName()
-				+ "\n\t summary: " + theModelChar.getSummary() + "\n\t type: " + theModelChar.getType() + "\n\t url: "
-				+ theModelChar.getUrl() + "\n\t calendarReleaseDate: " + theModelChar.getCalendarReleaseDate()
-				+ "\n\t currentUser: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("editExistingModel - New Model Being created with following Characteristics:" + "\n\t description: "
+                + theModelChar.getDescription() + "\n\t breedingNotes: " + theModelChar.getBreedingNotes()
+                + "\n\t PI: " + theModelChar.getPrincipalInvestigator() + "\n\t ethinicityStrain: "
+                + theModelChar.getEthinicityStrain() + "\n\t experimentDesign: " + theModelChar.getExperimentDesign()
+                + "\n\t isToolMouse: " + theModelChar.getIsToolMouse() + "\n\t modelDescriptor: "
+                + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName() + "\n\t releaseDate: "
+                + theModelChar.getReleaseDate() + "\n\t scientificName: " + theModelChar.getScientificName()
+                + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: " + theModelChar.getType() + "\n\t url: "
+                + theModelChar.getUrl() + "\n\t calendarReleaseDate: " + theModelChar.getCalendarReleaseDate()
+                + "\n\t currentUser: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		String theForward = "AnimalModelTreePopulateAction";
+        String theForward = "AnimalModelTreePopulateAction";
 
-		try {
+        try {
 
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-			// retrieve model and update w/ new values
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-			theAnimalModelManager.update(theModelChar, theAnimalModel);
+            // retrieve model and update w/ new values
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+            theAnimalModelManager.update(theModelChar, theAnimalModel);
 
-			// Setup global constants to use for submission / editing process
-			request.getSession().setAttribute(Constants.MODELID, theAnimalModel.getId().toString());
-			request.getSession().setAttribute(Constants.MODELDESCRIPTOR, theAnimalModel.getModelDescriptor());
-			request.getSession().setAttribute(Constants.MODELSTATUS, theAnimalModel.getState());
+            // Setup global constants to use for submission / editing process
+            request.getSession().setAttribute(Constants.MODELID, theAnimalModel.getId().toString());
+            request.getSession().setAttribute(Constants.MODELDESCRIPTOR, theAnimalModel.getModelDescriptor());
+            request.getSession().setAttribute(Constants.MODELSTATUS, theAnimalModel.getState());
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// edited a model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("modelchar.edit.successful"));
-			saveErrors(request, msg);
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // edited a model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("modelchar.edit.successful"));
+            saveErrors(request, msg);
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			log.error("Exception ocurred editing model", e);
+            log.error("Exception ocurred editing model", e);
 
-			// Encountered an error saving the model.
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
+            // Encountered an error saving the model.
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
 
-			theForward = "failure";
-		}
+            theForward = "failure";
+        }
 
-		log.trace("Exiting edit");
+        log.trace("Exiting edit");
 
-		return mapping.findForward(theForward);
-	}
+        return mapping.findForward(theForward);
+    }
 
-	/**
-	 * Creates an exact duplicate of a AnimalModel
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Creates an exact duplicate of a AnimalModel
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		System.out.println("<AnimalModelAction duplicateModel> modelID=" + request.getParameter("aModelID"));
+        System.out.println("<AnimalModelAction duplicateModel> modelID=" + request.getParameter("aModelID"));
 
-		String modelID = request.getParameter("aModelID");
+        String modelID = request.getParameter("aModelID");
 
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-		// retrieve model by it's id
-		AnimalModel animalModel = animalModelManager.get(modelID);
+        // retrieve model by it's id
+        AnimalModel animalModel = animalModelManager.get(modelID);
 
-		// create a new model
-		animalModelManager.save(animalModel);
+        AnimalModel theDuplicatedModel = animalModelManager.duplicate(animalModel);
 
-		return mapping.findForward("duplicatesuccessful");
-	}
+        log.info("Duplicated model id: " + theDuplicatedModel.getId());
 
-	/**
-	 * Delete a AnimalModel based on it's id
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+        return mapping.findForward("duplicatesuccessful");
+    }
 
-		System.out.println("<AnimalModelAction DeleteModel> modelID=" + request.getParameter("aModelID"));
+    /**
+     * Delete a AnimalModel based on it's id
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		// Retrieve the parameter passed by the URL
-		String modelID = request.getParameter("aModelID");
+        System.out.println("<AnimalModelAction DeleteModel> modelID=" + request.getParameter("aModelID"));
 
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		animalModelManager.remove(modelID);
+        // Retrieve the parameter passed by the URL
+        String modelID = request.getParameter("aModelID");
 
-		// Add a message to be displayed in submitModles saying you've deleted a
-		// model
-		ActionMessages msg = new ActionMessages();
-		msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("delete.successful"));
-		saveErrors(request, msg);
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        animalModelManager.remove(modelID);
 
-		return mapping.findForward("modeldeleted");
+        // Add a message to be displayed in submitModles saying you've deleted a
+        // model
+        ActionMessages msg = new ActionMessages();
+        msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("delete.successful"));
+        saveErrors(request, msg);
 
-	}
+        return mapping.findForward("modeldeleted");
 
-	/**
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public ActionForward returnUserModels(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) {
-		System.out.println("<UserAction ReturnUserModels> Entering... ");
+    }
 
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+    /**
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     */
+    public ActionForward returnUserModels(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
+        System.out.println("<UserAction ReturnUserModels> Entering... ");
 
-		try {
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-			List amList = animalModelManager.getAllByUser((String) request.getSession().getAttribute(
-					Constants.CURRENTUSER));
+        try {
 
-			// sort list by modelDescriptor, ignoring case
-			Collections.sort(amList, new _sortAnimalModels());
-			request.getSession().setAttribute(Constants.USERMODELLIST, amList);
+            List amList = animalModelManager.getAllByUser((String) request.getSession().getAttribute(
+                    Constants.CURRENTUSER));
 
-		} catch (Exception e) {
+            // sort list by modelDescriptor, ignoring case
+            Collections.sort(amList, new _sortAnimalModels());
+            request.getSession().setAttribute(Constants.USERMODELLIST, amList);
 
-			log.error("Unable to fetch models for user: ", e);
-			request.getSession().setAttribute(Constants.USERMODELLIST, new ArrayList());
+        } catch (Exception e) {
 
-			// Set the error message
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            log.error("Unable to fetch models for user: ", e);
+            request.getSession().setAttribute(Constants.USERMODELLIST, new ArrayList());
 
-		return mapping.findForward("submitModels");
-	}
+            // Set the error message
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+
+        return mapping.findForward("submitModels");
+    }
 }
 
 class _sortAnimalModels implements java.util.Comparator {
 
-	public void SortAnimalModels() {
-	}
+    public void SortAnimalModels() {
+    }
 
-	public int compare(Object oo1, Object oo2) {
-		AnimalModel o1 = (AnimalModel) oo1;
-		AnimalModel o2 = (AnimalModel) oo2;
+    public int compare(Object oo1, Object oo2) {
+        AnimalModel o1 = (AnimalModel) oo1;
+        AnimalModel o2 = (AnimalModel) oo2;
 
-		if (o1.getModelDescriptor().compareToIgnoreCase(o2.getModelDescriptor()) > 0)
-			return 1;
-		else if (o1.getModelDescriptor().compareToIgnoreCase(o2.getModelDescriptor()) < 0)
-			return -1;
-		else
-			return 0;
-	}
+        if (o1.getModelDescriptor().compareToIgnoreCase(o2.getModelDescriptor()) > 0)
+            return 1;
+        else if (o1.getModelDescriptor().compareToIgnoreCase(o2.getModelDescriptor()) < 0)
+            return -1;
+        else
+            return 0;
+    }
 }

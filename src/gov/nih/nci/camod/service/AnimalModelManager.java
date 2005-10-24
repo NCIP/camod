@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.22 2005-10-21 19:38:37 schroedn Exp $
+ * $Id: AnimalModelManager.java,v 1.23 2005-10-24 17:10:39 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/10/21 19:38:37  schroedn
+ * Added caImage ftp capabilities for EngineeredTransgene, GenomicSegment and TargetedModification
+ *
  * Revision 1.21  2005/10/21 16:07:37  pandyas
  * implementation of animal availability
  *
@@ -42,6 +45,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/10/21 19:38:37  schroedn
+ * Added caImage ftp capabilities for EngineeredTransgene, GenomicSegment and TargetedModification
+ *
  * Revision 1.21  2005/10/21 16:07:37  pandyas
  * implementation of animal availability
  *
@@ -114,6 +120,8 @@ public interface AnimalModelManager {
     public AnimalModel get(String id) throws Exception;
 
     public void save(AnimalModel animalModel) throws Exception;
+    
+    public AnimalModel duplicate(AnimalModel animalModel) throws Exception;
 
     public void updateAndAddLog(AnimalModel inAnimalModel, Log inLog) throws Exception;
 
