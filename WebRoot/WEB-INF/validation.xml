@@ -193,11 +193,11 @@
             <arg0 key="UserSettingsForm.phone"/>
         </field>
         <field property="piUsername" depends="validwhen">
-            <arg0 key="UserSettingsForm.piFirstName"/>
+            <arg0 key="UserSettingsForm.piUsername"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>test</var-name>
-                <var-value>(principalInvestigator == 'true')</var-value>
+                <var-value>((principalInvestigator == 'true') or ((*this* != null) or ((piFirstName != null) or (piLastName != null))))</var-value>
             </var>
             <var>
                 <var-name>maxlength</var-name>
@@ -209,7 +209,7 @@
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>test</var-name>
-                <var-value>(principalInvestigator == 'true')</var-value>
+                <var-value>((principalInvestigator == 'true') or ((piUsername != null) or (*this* != null)))</var-value>
             </var>
             <var>
                 <var-name>maxlength</var-name>
@@ -221,7 +221,7 @@
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>test</var-name>
-                <var-value>(principalInvestigator == 'true')</var-value>
+                <var-value>((principalInvestigator == 'true') or ((piUsername != null) or (*this* != null)))</var-value>
             </var>
             <var>
                 <var-name>maxlength</var-name>
