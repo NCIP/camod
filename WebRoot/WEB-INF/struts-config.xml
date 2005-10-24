@@ -1703,6 +1703,7 @@
          path="/AdminUserManagementPopulateAction"  
          type="gov.nih.nci.camod.webapp.action.AdminUserManagementPopulateAction" 
          name="editUserForm"
+         validate="false"
          parameter="protected">   	
          <forward 
     		name="next"
@@ -1729,6 +1730,7 @@
          path="/AdminEditUserPopulateAction"  
          type="gov.nih.nci.camod.webapp.action.AdminEditUserPopulateAction" 
          name="editUserForm"
+         validate="false"
          parameter="protected">   	
          <forward 
     		name="next"
@@ -1743,7 +1745,13 @@
          path="/AdminEditUserAction"  
          type="gov.nih.nci.camod.webapp.action.AdminEditUserAction" 
          name="editUserForm"
-         parameter="protected">   	
+         validate="true"
+         input="input"
+         parameter="protected">	
+         <forward 
+    		name="input"
+    		path="/adminEditUser.do">
+    	 </forward>  	
          <forward 
             redirect="true"
     		name="next"

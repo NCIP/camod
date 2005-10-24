@@ -229,6 +229,32 @@
             </var>
         </field>
     </form>
-    					
+    
+    <form name="editUserForm">
+        <field property="firstName" depends="required, maxlength">
+            <arg0 key="EditUserForm.firstName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="lastName" depends="required, maxlength">
+            <arg0 key="EditUserForm.lastName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="username" depends="maxlength">
+            <arg0 key="EditUserForm.username"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>20</var-value>
+            </var>
+        </field>
+    </form>		
   </formset>
 </form-validation>

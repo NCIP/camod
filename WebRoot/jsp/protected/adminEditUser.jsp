@@ -65,8 +65,8 @@
 		</tr>
 		
 		<tr>
-			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Principal Investigator</label></td>
+			<td class="formRequiredNotice" width="5">&nbsp</td>
+			<td class="formLabel"><label for="field1">Principal Investigator</label></td>
 			<td class="formField">
 			    <html:checkbox styleClass="formFieldSized" property="principalInvestigator"> </html:checkbox>
 			</td>
