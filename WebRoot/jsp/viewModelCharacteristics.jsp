@@ -78,7 +78,7 @@
 			<td class="WhiteBox" width="20%"><b>Experimental Design</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">&nbsp;
 				<P>
-					<bean:write name="mdl" property="experimentDesign"/>
+				    <c:out value="${mdl.experimentDesign}" escapeXml="false" />
 				</P>			
 			</td>
 		</tr>		               
