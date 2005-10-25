@@ -11,6 +11,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22497,C22499,C22498</value>
 			        </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -20,6 +24,10 @@
 				    <parameter>
 				        <name>organTissueCode</name>
 				        <value>C22500,C22502,C22509,C22508,C22510,C22521,C22526,C22527,C22533,C22532,C22528,C22529,C22531,C22530,C22522,C22524,C22523,C22525,C22511,C22513,C22514,C22512,C22515,C22517,C22516,C22518,C22519,C22507,C24044,C22639,C22640,C22641,C22642,C24043,C24045,C22643,C24041,C22520,C24042,C22501,C22503,C22506,C22505,C22504</value>
+			        </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
 			        </parameter>
 				</parameters>
 			</query>
@@ -31,6 +39,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22634,C22646,C22649,C22648,C22647,C22650,C22651,C22652,C22639,C22640,C22641,C22642,C22635,C22636,C22638,C22637,C22645,C22644</value>
 				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -41,6 +53,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22534,C22550,C22535,C22543,C22545,C22547,C22546,C22548,C22544,C22537,C22536,C22539,C22541,C22540,C22542,C22538,C22549</value>
 				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -51,6 +67,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22551,C22569,C22568,C22570,C22585,C22584,C22572,C22575,C22582,C22574,C22576,C22577,C22578,C22579,C22581,C22573,C22580,C22583,C22586,C22587,C22588,C22595,C22589,C22571,C22590,C22593,C22592,C22591,C22594,C22565,C22564,C22556,C22557,C22558,C22567,C22559,C22566,C22561,C22553,C22555,C22554,C22560,C22596,C24191,C22563,C22552,C22562</value>
 				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -61,6 +81,10 @@
 				        <name>organTissueCode</name>
 				        <value>C24194,C22679,C22681,C22680,C22682,C22684,C22683,C22685,C22687,C22686,C22689,C22688,C22691,C22694,C22696,C22698,C22695,C22693,C22692,C22690,C22709,C22708,C22703,C22705,C22704,C22697,C22707,C22706,C22699,C24198,C22701,C22700,C22702</value>
 				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -70,7 +94,11 @@
 				    <parameter>
 				        <name>organTissueCode</name>
 				        <value>C22604,C22631,C22628,C24189,C22629,C24190,C22632,C22630,C22605,C22606,C22617,C22616,C22619,C22618,C22607,C22624,C22613,C22612,C22615,C22614,C22609,C22608,C22611,C22610,C22621,C22620,C22623,C22622,C22625,C22626,C22627</value>
-				</parameter>
+				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>			
 			<query>
@@ -81,6 +109,10 @@
 				        <name>organTissueCode</name>
 				        <value>C24192,C22653,C22667,C22655,C22654,C22656,C22666,C22661,C22660,C22663,C22662,C22657,C22659,C22658,C22665,C22664,C22677,C22676,C22668,C22669,C22678,C22671,C22673,C22672,C22675,C22674,C22670,C22165,C22167,C22166,C24047,C24048,C24046,C22169,C22173,C22172,C22175,C22177,C22174,C22176,C22168,C22178,C22181,C22185,C22180,C22184,C22182,C22183,C22186,C22179,C22170,C22171,C24193</value>
 				   </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -91,6 +123,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22597,C22599,C22600,C22601,C22603,C22602,C24050,C22598</value>
 				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>			
 			<query>
@@ -101,6 +137,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22710,C22723,C22724,C22725,C22726,C22727,C22711,C22717,C22722,C22716,C22719,C22718,C22721,C22720,C22712,C22713,C22715,C22714</value>
 				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -111,6 +151,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22728,C22737,C22739,C22740,C22729,C22738,C22730,C22736,C22731,C22733,C22735,C22734,C22732</value>
 				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>			
 		</queries>
@@ -126,6 +170,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22166,C24047,C24048,C24046,C22169</value>
 			        </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -135,6 +183,10 @@
 				    <parameter>
 				        <name>organTissueCode</name>
 				        <value>C22549</value>
+			        </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
 			        </parameter>
 				</parameters>
 			</query>
@@ -146,6 +198,10 @@
 				        <name>organTissueCode</name>
 				        <value>C22606,C22617,C22616,C22619,C22618,C22607,C22624,C22613,C22612,C22615,C22614,C22609,C22608,C22611,C22610,C22621,C22620,C22623,C22622</value>
 			        </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
 				</parameters>
 			</query>
 			<query>
@@ -155,6 +211,10 @@
 				    <parameter>
 				        <name>organTissueCode</name>
 				        <value>C22515,C22517,C22516,C22518,C22519</value>
+			        </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
 			        </parameter>
 				</parameters>
 			</query>
@@ -170,6 +230,10 @@
 				    <parameter>
 				        <name>searchHistoMetastasis</name>
 				        <value>true</value>
+			        </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
 			        </parameter>
 				</parameters>
 			</query>

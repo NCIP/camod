@@ -33,7 +33,7 @@
 
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name /Model Descriptor </label> 
+			<td class="formLabel"><label for="field1">Model Name / Model Descriptor </label> 
 				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
@@ -71,7 +71,7 @@
 			<td class="formLabel"><label for="field3">Species</label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="species" >
-					<html:options name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
+					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
 				</html:select>				
 			</td>
 		</tr>
@@ -81,10 +81,9 @@
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
 					<tr>
-					  <html:submit styleClass="actionButton">
-						  <bean:message key="button.submit"/>
+					  <html:submit styleClass="actionButton" >
+						  Search
 					  </html:submit>
-					  
 					  <html:reset styleClass="actionButton">
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>

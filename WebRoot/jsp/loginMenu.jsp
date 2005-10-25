@@ -15,7 +15,7 @@
 		<!-- link 1 ends -->
 
 		<TD>
-			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
+			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
@@ -23,7 +23,7 @@
 		</TD>
 		
 		<TD>
-			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
+			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
 		</TD>
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
@@ -31,7 +31,7 @@
 		</TD>
 		
 		<TD>
-			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
+			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
 		</TD>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
@@ -39,7 +39,7 @@
 		</TD>
 		
 		<TD>
-			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
+			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
 		</TD>		
 		
 		<% 
@@ -51,7 +51,7 @@
 		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" action="/AdminRolesPopulateAction">ADMIN</html:link>&nbsp;&nbsp;
 		</TD>
 		<TD>
-			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
+			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
 		</TD>		
 		<% } %>
 
@@ -60,7 +60,7 @@
 		</TD>
 		
 		<TD>
-			<IMG height=16 alt="" src="images/mainMenuSeparator.gif" width=1>
+			<IMG height=16 alt="" src="/camod/images/mainMenuSeparator.gif" width=1>
 		</TD>
 		
 		</TR>

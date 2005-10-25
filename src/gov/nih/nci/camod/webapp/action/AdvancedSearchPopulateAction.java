@@ -23,8 +23,8 @@ public class AdvancedSearchPopulateAction extends BaseAction {
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK_OPTION);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
+                Constants.Dropdowns.ADD_BLANK_DROPDOWN_OPTION);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK_OPTION);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GROWTHFACTORQUERYDROP,

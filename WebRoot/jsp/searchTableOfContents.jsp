@@ -40,7 +40,7 @@
 				            <td class="resultsBoxWhiteEnd">
 				                <ul><li>
 				                <html:link action="ViewTOCSearchResultsAction.do" paramId="<%=Constants.Parameters.TOCQUERYKEY%>" paramName="query" paramProperty="key" >
-				                    <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${query.description}" /> ( <c:out value="${query.size}" /> )
+				                    <c:out value="${query.description}" /> ( <c:out value="${query.size}" /> )
 	                            </html:link>
 	                            </li></ul>
 				            </td>
