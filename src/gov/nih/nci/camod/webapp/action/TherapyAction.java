@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.6 2005-10-20 20:40:03 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.7 2005-10-25 19:42:15 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 20:40:03  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -88,9 +91,9 @@ public final class TherapyAction extends BaseAction {
 				"\n\t NSCNumber: " + therapyForm.getNSCNumber() + 
 				"\n\t CASNumber: " + therapyForm.getCASNumber() + 
 				"\n\t toxicityGrade: " + therapyForm.getToxicityGrade() +
-				"\n\t chemicalClassName: " + therapyForm.getChemicalClassName() +
-				"\n\t processName: " + therapyForm.getProcessName() +
-				"\n\t targetName: " + therapyForm.getType() +
+				"\n\t chemicalClasses: " + therapyForm.getSelectedChemicalClasses() +
+				"\n\t processes: " + therapyForm.getSelectedProcesses() +
+				"\n\t targets: " + therapyForm.getSelectedTargets() +
 				"\n\t dosage: " + therapyForm.getAdministrativeRoute() +
 				"\n\t type: " + therapyForm.getType() +
 				"\n\t age: " + therapyForm.getAgeAtTreatment() +
@@ -155,8 +158,8 @@ public final class TherapyAction extends BaseAction {
 							"\n\t NSCNumber: " + therapyForm.getNSCNumber() + 
 							"\n\t CASNumber: " + therapyForm.getCASNumber() + 
 							"\n\t toxicityGrade: " + therapyForm.getToxicityGrade() +
-							"\n\t chemicalClassName: " + therapyForm.getChemicalClassName() +
-							"\n\t processName: " + therapyForm.getProcessName() +
+							"\n\t chemicalClasses: " + therapyForm.getChemicalClasses() +
+							"\n\t processName: " + therapyForm.getProcesses() +
 							"\n\t targetName: " + therapyForm.getType() +
 							"\n\t dosage: " + therapyForm.getAdministrativeRoute() +
 							"\n\t type: " + therapyForm.getType() +

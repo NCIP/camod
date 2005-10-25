@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.10 2005-10-19 19:26:35 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.11 2005-10-25 19:42:15 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/10/19 19:26:35  pandyas
+ * added admin route to growth factor
+ *
  * Revision 1.9  2005/10/18 21:59:34  pandyas
  * fixed other field
  *
@@ -24,6 +27,8 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.camod.webapp.form.cibase.*;
+
+import java.util.List;
 
 /**
  * Implementation of the TherapyManager interface. Creates/saves/updates the
@@ -133,10 +138,10 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
         Therapy theTherapy = new Therapy();
         populateName(inHormoneData, theTherapy, "Hormone");
-        populateAgeGender(inHormoneData, theTherapy);        
+        populateAgeGender(inHormoneData, theTherapy);
         populateTreatment(inHormoneData, theTherapy);
         populateDose(inHormoneData, theTherapy);
-        populateAdministration(inHormoneData, theTherapy);        
+        populateAdministration(inHormoneData, theTherapy);
 
         return theTherapy;
     }
@@ -158,10 +163,10 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         log.debug("In TherapyManagerImpl.update");
 
         populateName(inHormoneData, inTherapy, "Hormone");
-        populateAgeGender(inHormoneData, inTherapy);        
+        populateAgeGender(inHormoneData, inTherapy);
         populateTreatment(inHormoneData, inTherapy);
         populateDose(inHormoneData, inTherapy);
-        populateAdministration(inHormoneData, inTherapy);         
+        populateAdministration(inHormoneData, inTherapy);
 
         save(inTherapy);
     }
@@ -183,8 +188,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateAgeGender(inGrowthFactorData, theTherapy);
         populateTreatment(inGrowthFactorData, theTherapy);
         populateDose(inGrowthFactorData, theTherapy);
-        populateAdministration(inGrowthFactorData, theTherapy); 
-       
+        populateAdministration(inGrowthFactorData, theTherapy);
 
         return theTherapy;
     }
@@ -209,7 +213,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateAgeGender(inGrowthFactorData, inTherapy);
         populateTreatment(inGrowthFactorData, inTherapy);
         populateDose(inGrowthFactorData, inTherapy);
-        populateAdministration(inGrowthFactorData, inTherapy);        
+        populateAdministration(inGrowthFactorData, inTherapy);
 
         save(inTherapy);
     }
@@ -452,13 +456,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         super.remove(id, Therapy.class);
     }
 
-    /////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////
     // Populate methods for the specific interfaces that
     // each interface implements
-    /////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////
     private void populateChemicalDrug(ChemicalDrugData inChemicalDrug, Therapy theTherapy) {
-    	
-        log.debug("In TherapyManagerImpl.populateChemicalDrug");    	
+
+        log.debug("In TherapyManagerImpl.populateChemicalDrug");
 
         // Agent IS-A an EnvironmentalFactor
         Agent theAgent = theTherapy.getAgent();
@@ -478,8 +482,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateAgeGender(AgeGenderData inAgeGender, Therapy theTherapy) {
-    	
-        log.debug("In TherapyManagerImpl.populateAgeGender");    	
+
+        log.debug("In TherapyManagerImpl.populateAgeGender");
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -499,8 +503,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateTreatment(TreatmentData inTreatment, Therapy theTherapy) {
-    	
-        log.debug("In TherapyManagerImpl.populateTreatment");     	
+
+        log.debug("In TherapyManagerImpl.populateTreatment");
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -514,8 +518,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateAdministration(AdministrationData inAdministrationData, Therapy theTherapy) {
-    	
-        log.debug("In TherapyManagerImpl.populateAdministration");      	
+
+        log.debug("In TherapyManagerImpl.populateAdministration");
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -523,25 +527,25 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             theTreatment = new Treatment();
             theTherapy.setTreatment(theTreatment);
         }
-        
+
         /* Set other adminstrative route or selected adminstrative route */
-        //anytime admin route is other 
+        // anytime admin route is other
         if (inAdministrationData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION)) {
-        	System.out.println("admin route equals other");
+            System.out.println("admin route equals other");
             // TODO: Send an email
             System.out.println("SENDING EMAIL STRAIN");
-            
+
             theTreatment.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
             theTreatment.setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
-        //anytime admin route is not other, set uncontrolled vocab to null (covers editing)
+            // anytime admin route is not other, set uncontrolled vocab to null
+            // (covers editing)
         } else {
-        	System.out.println("admin route not other");
-        	
-        	theTreatment.setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
-        	theTreatment.setAdminRouteUnctrlVocab(null);
+            System.out.println("admin route not other");
+
+            theTreatment.setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
+            theTreatment.setAdminRouteUnctrlVocab(null);
         }
 
-        
         // Agent IS-A an EnvironmentalFactor
         Agent theAgent = theTherapy.getAgent();
         if (theAgent == null) {
@@ -563,8 +567,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
     }
 
     private void populateName(NameData inNameData, Therapy theTherapy, String inType) {
-    	
-        log.debug("In TherapyManagerImpl.populateName");     	
+
+        log.debug("In TherapyManagerImpl.populateName");
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -580,28 +584,28 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             theTherapy.setAgent(theAgent);
         }
         theAgent.setType(inType);
-        
+
         /* Set other name or selected chemical name */
-        //  anytime the name is "other"
-        if (inNameData.getName().equals(Constants.Dropdowns.OTHER_OPTION) ) {
-        	System.out.println("Name is other");        	
+        // anytime the name is "other"
+        if (inNameData.getName().equals(Constants.Dropdowns.OTHER_OPTION)) {
+            System.out.println("Name is other");
 
             // TODO: Send an email
             System.out.println("SENDING EMAIL STRAIN");
             theAgent.setName(Constants.Dropdowns.OTHER_OPTION);
             theAgent.setNameUnctrlVocab(inNameData.getOtherName());
         }
-        //anytime name is not other, set uncontrolled vocab to null (covers editing)
-        else  {
-        	System.out.println("Name is not other");        	
-        	theAgent.setName(inNameData.getName());
-        	theAgent.setNameUnctrlVocab(null);
-        }        
-        
+        // anytime name is not other, set uncontrolled vocab to null (covers
+        // editing)
+        else {
+            System.out.println("Name is not other");
+            theAgent.setName(inNameData.getName());
+            theAgent.setNameUnctrlVocab(null);
+        }
+
         theTherapy.setTherapeuticExperiment(new Boolean(false));
     }
-    
- 
+
     /**
      * Create a therapy object with the correct data filled in.
      * 
@@ -621,12 +625,11 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateTherapy(inTherapyData, theTherapy);
 
         return theTherapy;
-    }    
-    
-    public void update(TherapyData inTherapyData, Therapy inTherapy) 
-    	throws Exception {
+    }
 
-    	log.debug("In TherapyManagerImpl.update");
+    public void update(TherapyData inTherapyData, Therapy inTherapy) throws Exception {
+
+        log.debug("In TherapyManagerImpl.update");
 
         populateAgeGender(inTherapyData, inTherapy);
         populateDose(inTherapyData, inTherapy);
@@ -634,14 +637,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         save(inTherapy);
 
     }
-    
-    private void populateTherapy(TherapyData inTherapyData, Therapy theTherapy)
-    throws Exception {
-    	
-    	log.trace("Entering populateTherapy");
-    	
-    	/* populateName method without otherName */
-    	
+
+    private void populateTherapy(TherapyData inTherapyData, Therapy theTherapy) throws Exception {
+
+        log.trace("Entering populateTherapy");
+
+        /* populateName method without otherName */
+
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
         if (theTreatment == null) {
@@ -655,14 +657,14 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             theAgent = new Agent();
             theTherapy.setAgent(theAgent);
         }
-        //theAgent.setType(inType);
+        // theAgent.setType(inType);
         theAgent.setName(inTherapyData.getName());
-        theTherapy.setTherapeuticExperiment(new Boolean(true)); 
-        
+        theTherapy.setTherapeuticExperiment(new Boolean(true));
+
         // Set the administrative route
         theTreatment.setAdministrativeRoute(inTherapyData.getAdministrativeRoute());
 
-        //Set NSC and CAS
+        // Set NSC and CAS
         String theNSCNumber = inTherapyData.getNSCNumber().trim();
         if (theNSCNumber != null && theNSCNumber.length() > 0) {
             try {
@@ -670,48 +672,67 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             } catch (NumberFormatException e) {
                 log.error("Bad NSC number: " + theNSCNumber);
             }
-        }        
+        }
         String theCasNumber = inTherapyData.getCASNumber().trim();
         if (theCasNumber != null && theCasNumber.length() > 0) {
             theAgent.setCasNumber(theCasNumber);
-        }    	
-        
-    	//Therapy object attributes
-        theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());		
+        }
+
+        // Therapy object attributes
+        theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());
         theTherapy.setBiomarker(inTherapyData.getBiomarker());
         theTherapy.setTumorResponse(inTherapyData.getTumorResponse() + " " + inTherapyData.getTumorAgeUnit());
         theTherapy.setExperiment(inTherapyData.getExperiment());
-        theTherapy.setResults(inTherapyData.getResults());		
-        theTherapy.setComments(inTherapyData.getComments());    	
-    	System.out.println("Got Therapy attributes in populateTherapy");
-    	
-        //Get/create the ChemicalClass
-        //TODO Loop through all the selections
-        //List chemicalClassList = new Array();
-        ChemicalClass theChemicalClass = ChemicalClassManagerSingleton.instance().getByName(
-        		inTherapyData.getChemicalClassName());
-        if (theChemicalClass == null) {
-        	theChemicalClass = new ChemicalClass();
-        	theChemicalClass.setChemicalClassName(inTherapyData.getChemicalClassName());
+        theTherapy.setResults(inTherapyData.getResults());
+        theTherapy.setComments(inTherapyData.getComments());
+        System.out.println("Got Therapy attributes in populateTherapy");
+
+        // Get the ChemicalClass
+        String[] theChemicalClasses = inTherapyData.getSelectedChemicalClasses();
+        List theCurrentChemicalClassList = theTherapy.getAgent().getChemicalClassCollection();
+        theCurrentChemicalClassList.clear();
+        if (theChemicalClasses != null) {
+            for (int i = 0; i < theChemicalClasses.length; i++) {
+                ChemicalClass theChemicalClass = ChemicalClassManagerSingleton.instance().getByName(
+                        theChemicalClasses[i]);
+                if (theChemicalClass == null) {
+                    log.error("Unknown chemical class name: " + theChemicalClasses[i]);
+                } else {
+                    theCurrentChemicalClassList.add(theChemicalClass);
+                }
+            }
         }
-        System.out.println("Got ChemicalClass attributes in populateTherapy");
-        
-        //Get/create the BiologicalProcess
-        BiologicalProcess theBiologicalProcess = BiologicalProcessManagerSingleton.instance().getByName(
-        		inTherapyData.getProcessName());
-        if (theBiologicalProcess == null) {
-        	theBiologicalProcess = new BiologicalProcess();
-        	theBiologicalProcess.setProcessName(inTherapyData.getProcessName());
+
+        // Get the biological process
+        String[] theProcesses = inTherapyData.getSelectedProcesses();
+        List theCurrentProcessList = theTherapy.getAgent().getBiologicalProcessCollection();
+        theCurrentProcessList.clear();
+        if (theProcesses != null) {
+            for (int i = 0; i < theProcesses.length; i++) {
+                BiologicalProcess theBiologicalProcess = BiologicalProcessManagerSingleton.instance().getByName(
+                        theProcesses[i]);
+                if (theBiologicalProcess == null) {
+                    log.error("Unknown biological process name: " + theProcesses[i]);
+                } else {
+                    theCurrentProcessList.add(theBiologicalProcess);
+                }
+            }
         }
-        System.out.println("Got BiologicalProcess attributes in populateTherapy");
-        
-        //Get/create the AgentTarget
-        AgentTarget theAgentTarget = AgentTargetManagerSingleton.instance().getByName(
-        		inTherapyData.getTargetName());
-        if (theAgentTarget == null) {
-        	theAgentTarget = new AgentTarget();
-        	theAgentTarget.setTargetName(inTherapyData.getTargetName());
-        }        
+
+        // Get the agent target
+        String[] theTargets = inTherapyData.getSelectedTargets();
+        List theCurrentAgentList = theTherapy.getAgent().getAgentTargetCollection();
+        theCurrentAgentList.clear();
+        if (theTargets != null) {
+            for (int i = 0; i < theTargets.length; i++) {
+                AgentTarget theAgentTarget = AgentTargetManagerSingleton.instance().getByName(theTargets[i]);
+                if (theAgentTarget == null) {
+                    log.error("Unknown agent target name: " + theTargets[i]);
+                } else {
+                    theCurrentAgentList.add(theAgentTarget);
+                }
+            }
+        }
         log.trace("Exiting populateTherapy");
-    }    
+    }
 }

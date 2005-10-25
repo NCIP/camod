@@ -7,8 +7,143 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
+<SCRIPT>
+
+function removeAllSelected()
+{
+    removeSelected(document.forms[0].selectedChemicalClasses, document.forms[0].chemicalClasses);
+    removeSelected(document.forms[0].selectedProcesses, document.forms[0].processes);
+    removeSelected(document.forms[0].selectedTargets, document.forms[0].targets);
+    unselectAll();
+}
+
+function removeSelected(selectedGroup, group)
+{
+    for (var i=0; i < selectedGroup.options.length; i++)  
+    {  
+        for (var j = 0; j < group.options.length; j++)  
+        {
+            if (group.options[j].value == selectedGroup.options[i].value)
+            {
+                group.options[j] = null;
+                break;
+            }
+        }
+    }
+}
+
+function selectAll()
+{
+    select(document.forms[0].selectedChemicalClasses);
+    select(document.forms[0].selectedProcesses);
+    select(document.forms[0].selectedTargets);
+}
+
+function unselectAll()
+{
+    unselect(document.forms[0].selectedChemicalClasses);
+    unselect(document.forms[0].selectedProcesses);
+    unselect(document.forms[0].selectedTargets);
+}
+
+function select(group)
+{   
+    for (var i=0; i < group.options.length; i++)  
+    {  
+        group.options[i].selected = true;    
+    }
+}
+
+function unselect(group)
+{   
+    for (var i=0; i < group.options.length; i++)  
+    {  
+        group.options[i].selected = false;    
+    }
+}
+
+/****************************
+ * sortItems(obj)
+ *
+ * Sorts items in a select
+ * box.
+ ****************************/
+function sortItems(obj)  
+{   var temp_opts = new Array();
+    var temp = new Object();
+    for (var i=0; i<obj.options.length; i++)
+        temp_opts[i] = obj.options[i];
+    
+    for (var x=0; x<temp_opts.length-1; x++)  
+    {   for (var y=(x+1); y<temp_opts.length; y++)  
+        {   if(temp_opts[x].text > temp_opts[y].text)  
+            {   temp = temp_opts[x].text;
+                temp_opts[x].text = temp_opts[y].text;
+                temp_opts[y].text = temp;
+                temp = temp_opts[x].value;
+                temp_opts[x].value = temp_opts[y].value;
+                temp_opts[y].value = temp;
+            }
+        }
+    }
+
+    for (var i=0; i<obj.options.length; i++) 
+    {   obj.options[i].value = temp_opts[i].value;
+        obj.options[i].text = temp_opts[i].text;
+    }
+} // end function sortItems()
+
+/*******************************************
+ * transferItem(source, destination, sort)
+ *
+ * Transfers items from one select
+ * box to a different text box. With 
+ * an optional sort flag.
+ *******************************************/
+function transferItem(source, destination, sort)
+{   var i = 0;
+    var newitem;
+    var retval = false;
+        
+    while (i < source.options.length)
+    {   if (source.options[i].selected) 
+        {   
+	        var value=source.options[i].value;
+	        var duplicate = false;
+			for (j=0; j < destination.options.length; j++)
+			{
+				if (destination.options[j].value == value)
+				{ // its a duplicate, dont add it
+					duplicate = true;
+				}
+			} 
+			if ( ! duplicate)
+			{
+	        	newitem = new Option(source.options[i].text, source.options[i].value, 0, 0);
+            	destination.options[destination.options.length] = newitem;
+            	retval = true;
+            	source.options[i] = null;
+            } 
+            else
+            {
+	            source.options[i] = null;
+	            i = i+1;
+            }
+        }
+        else
+            i = i + 1;
+    }
+    
+    // Sort items 
+    if(sort == "YES")
+        sortItems(destination);
+    else
+        sortItems(source);
+
+} // end function transferItem()
+
+</SCRIPT>
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
 	
@@ -26,12 +161,16 @@
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-<!-- -->
 
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="left" width="100%" height="100%">
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%" height="100%">
 	
+    <tr>
+	    <td colspan="3">
+	        <html:errors/>
+	    </td>
+	</tr>
 	<tr>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
@@ -46,9 +185,9 @@
 		<camod:cshelp key="ENV_FACTOR.NSC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="name">			 
+			<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">			 
 			
-			<html:text styleClass="formFieldSized" size="30" property="name" name="formdata" />	
+			<html:text styleClass="formFieldSized" size="30" property="name" />	
 		</td>
 	</tr>
 	
@@ -60,7 +199,7 @@
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber" name="formdata" />
+				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber" />
 			</td>
 	</tr>
 	<!-- changed linkd to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
@@ -72,52 +211,87 @@
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber" name="formdata" />
+				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber" />
 			</td>
 	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>        
-		<td class="formRequiredLabel"><label for="field3">Chemical Class:</label></td>
+		<td class="formLabel"><label for="field3">Chemical Class:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="5"  property="chemicalClassName" name="formdata">												
-			<html:options name="<%= Dropdowns.CHEMICALCLASSESDROP %>"/>					
-			</html:select>
-			
-			<input TYPE="BUTTON" VALUE="->"><a href='javascript: addIt();'></a>
-			<input TYPE="BUTTON" VALUE="<-" ONCLICK="delIt();"></input>
-
-			<html:select styleClass="formFieldSized" size="5" style="width: 150px" property="selectedChemicalClassName" name="formdata">												
-			</html:select>
+		    <center>
+		    <table>
+		    <tr>
+			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" property="chemicalClasses">												
+			    <html:options name="<%= Dropdowns.CHEMICALCLASSESDROP %>"/>					
+			    </html:select>
+			</tr>
+			<br>
+			<tr>
+			    <a href="javascript: transferItem(document.forms[0].chemicalClasses, document.forms[0].selectedChemicalClasses, 'YES');"><img border="0" src="/camod/images/downarrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].selectedChemicalClasses, document.forms[0].chemicalClasses, 'YES');"><img border="0" src="/camod/images/uparrow.gif"></a>
+            </tr>
+            <br>
+            <tr>
+			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" property="selectedChemicalClasses" >												
+			        <html:options property="selectedChemicalClasses" />
+			    </html:select>
+			</tr>
+			</table>
+			</center>
 		</td>
  	</tr>   
     
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>        
-		<td class="formRequiredLabel"><label for="field3">Biological Process:</label></td>
+		<td class="formLabel"><label for="field3">Biological Process:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="5"  property="processName" name="formdata">												
-			<html:options name="<%= Dropdowns.BIOLOGICALPROCESSDROP %>"/>					
-			</html:select>
-			<input TYPE="BUTTON" VALUE="->" ONCLICK="addIt();"></input>
-			<input TYPE="BUTTON" VALUE="<-" ONCLICK="delIt();"></input>
-
-			<html:select styleClass="formFieldSized" size="5" style="width: 150px" property="selectedProcessName" name="formdata">												
-			</html:select>
+		    <center>
+		    <table>
+		    <tr>
+			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" property="processes">												
+			    <html:options name="<%= Dropdowns.BIOLOGICALPROCESSDROP %>"/>					
+			    </html:select>
+			</tr>
+			<br>
+			<tr>
+			    <a href="javascript: transferItem(document.forms[0].processes, document.forms[0].selectedProcesses, 'YES');"><img border="0" src="/camod/images/downarrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].selectedProcesses, document.forms[0].processes, 'YES');"><img border="0" src="/camod/images/uparrow.gif"></a>
+            </tr>
+            <br>
+            <tr>
+			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" property="selectedProcesses" >												
+			        <html:options property="selectedProcesses" />
+			    </html:select>
+			</tr>
+			</table>
+			</center>
 		</td>
  	</tr>    					
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>        
-		<td class="formRequiredLabel"><label for="field3">Target:</label></td>
+		<td class="formLabel"><label for="field3">Target:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="5"  property="targetName" name="formdata">												
-			<html:options name="<%= Dropdowns.THERAPEUTICTARGETSDROP %>"/>					
-			</html:select>
-			<input TYPE="BUTTON" VALUE="->" ONCLICK="addIt();"></input>
-			<input TYPE="BUTTON" VALUE="<-" ONCLICK="delIt();"></input>
-
-			<html:select styleClass="formFieldSized" size="5" style="width: 150px" property="selectedTargetName" name="formdata">												
-			</html:select>
+		    <center>
+		    <table>
+		    <tr>
+			    <html:select styleClass="formFieldUnSized" size="5"  multiple="true" style="width: 500px" property="targets" >												
+			    <html:options name="<%= Dropdowns.THERAPEUTICTARGETSDROP %>"/>					
+			    </html:select>
+			</tr>
+			<br>
+			<tr>
+			    <a href="javascript: transferItem(document.forms[0].targets, document.forms[0].selectedTargets, 'YES');"><img border="0" src="/camod/images/downarrow.gif"></a>
+			    <a href="javascript: transferItem(document.forms[0].selectedTargets, document.forms[0].targets, 'YES');"><img border="0" src="/camod/images/uparrow.gif"></a>
+            </tr>
+            <br>
+            <tr>
+			    <html:select styleClass="formFieldUnSized" size="5" multiple="true" style="width: 500px" property="selectedTargets" >
+			    <html:options property="selectedTargets" />
+			    </html:select>
+			</tr>
+			</table>
+			</center>
 		</td>
  	</tr>			
     <TR align="LEFT" valign="TOP">
@@ -126,7 +300,7 @@
         <camod:cshelp key="THERAPY.TOXICITY_GRADE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
         </TD>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" >												
 				<html:options name="<%= Dropdowns.TOXICITYGRADESDROP %>"/>					
 			</html:select>
 		</td>
@@ -135,10 +309,10 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized"  property="dosage" size="10" name="formdata" />
+			<html:text styleClass="formFieldUnSized"  property="dosage" size="10"  />
 			<label for="field1">&nbsp;Units&nbsp;</label>			
-			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
-				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>					
+			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
+				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>				
 			</html:select>
 		</td>
 	</tr>
@@ -146,7 +320,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
@@ -155,9 +329,9 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Mouse Age:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10"/>
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -166,7 +340,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Adminstration Route:</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" size="30" property="administrativeRoute" name="formdata" />			
+				<html:text styleClass="formFieldSized" size="30" property="administrativeRoute" />			
 			</td>
 	</tr>
 	<tr>
@@ -175,7 +349,7 @@
 		<camod:cshelp key="THERAPY.BIOMARKER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" size="30" property="biomarker" name="formdata" />			
+				<html:text styleClass="formFieldSized" size="30" property="biomarker" />			
 			</td>
 	</tr>			
 	
@@ -187,9 +361,9 @@
 		<td class="formField">		
 			<label for="field3">Time to preneoplastic lesion malignancy metastais</label>
 			<br>
-			<html:text styleClass="formFieldUnSized" property="tumorResponse"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="tumorResponse"  size="10" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="tumorAgeUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="tumorAgeUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>			
@@ -200,7 +374,7 @@
 		<camod:cshelp key="THERAPY.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="experiment" cols="60" rows="3"/>			
 			</td>
 	</tr>
 
@@ -210,7 +384,7 @@
 		<camod:cshelp key="THERAPY.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="results" cols="60" rows="3"/>			
 			</td>
 	</tr>
 	
@@ -220,7 +394,7 @@
 		<camod:cshelp key="THERAPY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="comments" cols="60" rows="3"/>			
 			</td>
 	</tr>		
 	
@@ -251,5 +425,9 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<SCRIPT>
+    removeAllSelected();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

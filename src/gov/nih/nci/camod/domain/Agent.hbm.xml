@@ -47,8 +47,7 @@
         <bag name="biologicalProcessCollection" 
         	table="agent_biological_process"
         	inverse="false"
-        	lazy="true" 
-        	cascade="all-delete-orphan">
+        	lazy="true">
         	
         	<key column="env_factor_id"/>
         	<many-to-many class="BiologicalProcess" 
@@ -60,8 +59,7 @@
         <bag name="chemicalClassCollection" 
         	table="agent_chemical_class"
         	inverse="false"
-        	lazy="true" 
-        	cascade="all-delete-orphan">
+        	lazy="true">
         	
         	<key column="env_factor_id"/>
         	<many-to-many class="ChemicalClass" 
@@ -73,8 +71,7 @@
         <bag name="agentTargetCollection" 
         	table="agent_agent_target"
         	inverse="false"
-        	lazy="true" 
-        	cascade="all-delete-orphan">
+        	lazy="true">
         	
         	<key column="env_factor_id"/>
         	<many-to-many class="AgentTarget" 

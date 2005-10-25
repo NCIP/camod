@@ -1589,13 +1589,17 @@
     </action>
     
      <!-- TherapyForm -->
-          <action path="/TherapyAction"
+     <action path="/TherapyAction"
 	        type="gov.nih.nci.camod.webapp.action.TherapyAction"
 	        name="therapyForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitTherapy">   	
+	        validate="true"
+	        input="input">	
+         <forward 
+    		name="input"
+    		path="/submitTherapy.do">
+    	 </forward>  	   	
     </action>
     
     <action path="/TherapyPopulateAction"
