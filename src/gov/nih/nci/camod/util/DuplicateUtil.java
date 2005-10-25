@@ -8,7 +8,6 @@
 package gov.nih.nci.camod.util;
 
 import java.util.*;
-//import java.lang.reflect.Method;
 import org.apache.commons.beanutils.*;
 import org.apache.commons.logging.*;
 
@@ -108,7 +107,7 @@ public class DuplicateUtil {
 
           Map beanProps = PropertyUtils.describe(src);
           Iterator props = beanProps.entrySet().iterator();
-          log.debug("***** DEEP COPYING: "+duplicateClass.getName());               
+          log.debug("***** DUPLICATE Deep-Copy of Class: "+duplicateClass.getName());               
 
           // loop thru bean properties
           while (props.hasNext()) {          
@@ -125,16 +124,11 @@ public class DuplicateUtil {
               }
               pathName += propName;                           
 
-              // exclude built-in getClass property and hibernate dynamic properties
-              // and if property is in excluded list
-
-            /* if (!propName.equals("class") && !propName.equals("hibernateLazyInitializer") && !propName.equals("callbacks")
-                  && !(excludedProperties != null && excludedProperties.contains(pathName))) { */
-
+              // do no copy property if it is in the excluded list
               if (!(excludedProperties != null && excludedProperties.contains(pathName))) {                        
-                //Class propertyType = PropertyUtils.getPropertyType(duplicate, propName); 
+                Class propertyType = PropertyUtils.getPropertyType(duplicate, propName); 
 
-                //log.debug("** copying property: "+pathName);  
+                log.debug("** processing copy of property: "+pathName);  
 
                 // check if property is a collection
                 if (propValue instanceof java.util.Collection) {    
@@ -153,11 +147,12 @@ public class DuplicateUtil {
                   }           
                 } else {
                   // set member property in duplicate object             
-                  try {                                           
-                    BeanUtils.setProperty(duplicate, propName, duplicateProperty(propValue, srcHistory, dupHistory, pathName, excludedProperties));                
+                  try {             
+                    //log.debug("** copying property: "+pathName);  
+                    BeanUtils.copyProperty(duplicate, propName, duplicateProperty(propValue, srcHistory, dupHistory, pathName, excludedProperties));                
                   } catch (Exception ex) {
                     // do nothing. skip and move on. property value may be null, or no set method found.           
-                    log.info("** property "+propName+" not copied.  Either no set method, or value not set or null.");
+                    log.info("** property '"+propName+"' not copied.  Either no set method, or null.");
                   }
                 } // collection condition                
               }
