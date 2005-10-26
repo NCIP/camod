@@ -32,7 +32,10 @@ function unselectAll()
     unselect(document.forms[0].selectedTargets);
 }
 
-
+function chkOtherAdminRoute() {
+    chkOther(document.forms[0].administrativeRoute, 
+             document.forms[0].otherAdministrativeRoute);
+}
 
 </SCRIPT>
 <%
@@ -229,10 +232,26 @@ function unselectAll()
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Adminstration Route:</label></td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" size="30" property="administrativeRoute" />			
-			</td>
+		<td class="formLabel"><label for="field1">Administrative Routes:</label>
+		<camod:cshelp key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+		<br>
+		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>
+			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute" onclick="chkOtherAdminRoute();">												
+				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
+			</html:select>			
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
+		<td class="formField">					
+			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeRoute" disabled="true"/>			
+		</td>
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -319,6 +338,7 @@ function unselectAll()
 
 <SCRIPT>
     removeAllSelected();
+    chkOtherAdminRoute();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

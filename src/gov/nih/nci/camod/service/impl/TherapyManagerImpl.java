@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.11 2005-10-25 19:42:15 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.12 2005-10-26 14:10:48 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/25 19:42:15  georgeda
+ * Finished Therapy page
+ *
  * Revision 1.10  2005/10/19 19:26:35  pandyas
  * added admin route to growth factor
  *
@@ -623,6 +626,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateAgeGender(inTherapyData, theTherapy);
         populateDose(inTherapyData, theTherapy);
         populateTherapy(inTherapyData, theTherapy);
+        populateAdministration(inTherapyData, theTherapy);
 
         return theTherapy;
     }
@@ -634,6 +638,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateAgeGender(inTherapyData, inTherapy);
         populateDose(inTherapyData, inTherapy);
         populateTherapy(inTherapyData, inTherapy);
+        populateAdministration(inTherapyData, inTherapy);
         save(inTherapy);
 
     }

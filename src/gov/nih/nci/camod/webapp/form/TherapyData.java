@@ -1,9 +1,12 @@
 /**
  *  @author pandyas
  *  
- *  $Id: TherapyData.java,v 1.2 2005-10-25 19:42:15 georgeda Exp $
+ *  $Id: TherapyData.java,v 1.3 2005-10-26 14:10:49 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2005/10/25 19:42:15  georgeda
+ *  Finished Therapy page
+ *
  *  Revision 1.1  2005/10/06 19:27:25  pandyas
  *  modified for Therapy screen
  *
@@ -14,15 +17,14 @@
  */
 package gov.nih.nci.camod.webapp.form;
 
-import gov.nih.nci.camod.webapp.form.cibase.AgeGenderData;
-import gov.nih.nci.camod.webapp.form.cibase.DoseData;
+import gov.nih.nci.camod.webapp.form.cibase.*;
 
 /**
  * 
  * Interface describing fields for a therapy
  * 
  */
-public interface TherapyData extends DoseData, AgeGenderData {
+public interface TherapyData extends DoseData, AgeGenderData, AdministrationData {
 
     public String getName();
 
@@ -63,10 +65,6 @@ public interface TherapyData extends DoseData, AgeGenderData {
     public String[] getSelectedTargets();
 
     public void setSelectedTargets(String[] selectedTargets);
-
-    public String getAdministrativeRoute();
-
-    public void setAdministrativeRoute(String administrativeRoute);
 
     public String getBiomarker();
 

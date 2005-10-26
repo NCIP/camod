@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.6 2005-10-25 19:42:15 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.7 2005-10-26 14:10:49 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/25 19:42:15  georgeda
+ * Finished Therapy page
+ *
  * Revision 1.5  2005/10/20 20:40:21  pandyas
  * added javadocs
  *
@@ -71,6 +74,7 @@ public class TherapyPopulateAction extends BaseAction {
         therapyForm.setDosage(ty.getTreatment().getDosage());
         therapyForm.setName(ty.getAgent().getName());
         therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+        therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
 
         if (ty.getAgent().getCasNumber() != null) {
             therapyForm.setCASNumber(ty.getAgent().getCasNumber());
@@ -164,6 +168,7 @@ public class TherapyPopulateAction extends BaseAction {
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TOXICITYGRADESDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "");
 
         System.out.println("<TherapyPopulateAction dropdown> Exiting void dropdown()");
 

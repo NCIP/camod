@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: TherapyForm.java,v 1.6 2005-10-25 19:42:15 georgeda Exp $
+ * $Id: TherapyForm.java,v 1.7 2005-10-26 14:10:49 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/25 19:42:15  georgeda
+ * Finished Therapy page
+ *
  * Revision 1.5  2005/10/20 20:35:52  pandyas
  * added javadocs
  *
@@ -38,6 +41,7 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     protected String ageAtTreatment;
     protected String ageUnit;
     protected String administrativeRoute;
+    protected String otherAdministrativeRoute;
     protected String biomarker;
     protected String tumorResponse;
     protected String tumorAgeUnit;
@@ -373,6 +377,21 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
      */
     public void setComments(String comments) {
         this.comments = comments;
+    }
+    
+    /**
+     * @return Returns the other administrative route
+     */
+    public String getOtherAdministrativeRoute() {
+        return otherAdministrativeRoute;
+    }
+
+    /**
+     * @param otherAdministrativeRoute
+     *            The other administrative route to set
+     */
+    public void setOtherAdministrativeRoute(String otherAdministrativeRoute) {
+        this.otherAdministrativeRoute = otherAdministrativeRoute;
     }
     
     public void reset(ActionMapping mapping, HttpServletRequest request) {
