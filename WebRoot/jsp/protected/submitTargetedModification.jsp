@@ -8,6 +8,13 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
+
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<script language="JavaScript" src="scripts/global.js"></script>
+<SCRIPT>
+
+
 <%
 	String aTargetedModificationID = request.getParameter( "aTargetedModificationID" );
 			
@@ -110,7 +117,7 @@
                
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label>
-		<!-- Add GENE_ID tool tip when ready  -->
+		<camod:cshelp key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="geneId" size="10" name="formdata"/>	

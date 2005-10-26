@@ -52,6 +52,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel">Principal Investigator:
+		<camod:cshelp key="ANIMAL_AVAILABILITY.PRINCIPAL_INVESTIGATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="stockNumber">
