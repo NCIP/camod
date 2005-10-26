@@ -50,6 +50,12 @@
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.administrativeRoute}"/>
 	</td>
+</tr>
+<tr>
+	<td class="resultsBoxWhite" width="25%"><b>Other Administration Route</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<c:out value="${t.treatment.adminRouteUnctrlVocab}"/>
+	</td>
 </tr>			
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Biomarker</b></td>
