@@ -286,9 +286,6 @@ public class NewDropdownUtil {
         List speciesNames = new ArrayList();
         Taxon tmp;
 
-        // TODO: Fix once we know what we're doing w/ this
-        speciesNames.add("Other");
-
         if (taxonList != null) {
             for (int i = 0; i < taxonList.size(); i++) {
                 tmp = (Taxon) taxonList.get(i);
@@ -301,8 +298,10 @@ public class NewDropdownUtil {
                 }
             }
         }
+        
         Collections.sort(speciesNames);
-
+        addOther(speciesNames);
+        
         return speciesNames;
     }
 
@@ -357,10 +356,8 @@ public class NewDropdownUtil {
         if (strainNames.size() > 0)
             Collections.sort(strainNames);
 
-        if (!strainNames.contains(Constants.Dropdowns.OTHER_OPTION)) {
-            strainNames.add(Constants.Dropdowns.OTHER_OPTION);
-        }
-
+        addOther(strainNames);
+       
         return strainNames;
     }
 
@@ -382,8 +379,6 @@ public class NewDropdownUtil {
         List graftList = new ArrayList();
         Xenograft tmp;
 
-        graftList.add("Other");
-
         if (xenograftList != null) {
             for (int i = 0; i < xenograftList.size(); i++) {
                 tmp = (Xenograft) xenograftList.get(i);
@@ -398,9 +393,11 @@ public class NewDropdownUtil {
         }
 
         Collections.sort(graftList);
+        addOther(graftList);
+
         return graftList;
     }
-    
+
     /**
      * Returns a list of all Administrative Routes
      * 
@@ -419,9 +416,7 @@ public class NewDropdownUtil {
 
         List viralVectorList = new ArrayList();
         GeneDelivery tmp;
-        
-        viralVectorList.add(Constants.Dropdowns.OTHER_OPTION);
-        
+
         if (geneDeliveryList != null) {
             for (int i = 0; i < geneDeliveryList.size(); i++) {
                 tmp = (GeneDelivery) geneDeliveryList.get(i);
@@ -435,6 +430,9 @@ public class NewDropdownUtil {
             }
         }
         Collections.sort(viralVectorList);
+
+        addOther(viralVectorList);
+
         return viralVectorList;
     }
 
@@ -444,10 +442,10 @@ public class NewDropdownUtil {
      * @return envList
      */
     private static List getEnvironmentalFactorList(String type) throws Exception {
-        List theList = QueryManagerSingleton.instance().getEnvironmentalFactors(type);
+        List theEnvFactorList = QueryManagerSingleton.instance().getEnvironmentalFactors(type);
 
-        theList.add(Constants.Dropdowns.OTHER_OPTION);
-        return theList;
+        addOther(theEnvFactorList);
+        return theEnvFactorList;
     }
 
     /**
@@ -456,10 +454,10 @@ public class NewDropdownUtil {
      * @return envList
      */
     private static List getQueryOnlyEnvironmentalFactorList(String type) throws Exception {
-        List theList = QueryManagerSingleton.instance().getQueryOnlyEnvironmentalFactors(type);
+        List theEnvFactorList = QueryManagerSingleton.instance().getQueryOnlyEnvironmentalFactors(type);
 
-        theList.add(Constants.Dropdowns.OTHER_OPTION);
-        return theList;
+        addOther(theEnvFactorList);
+        return theEnvFactorList;
     }
 
     /**
@@ -521,7 +519,7 @@ public class NewDropdownUtil {
         log.trace("Entering NewDropdownUtil.getQueryOnlyInducedMutationAgentList");
 
         List inducedMutationList = QueryManagerSingleton.instance().getQueryOnlyInducedMutationAgents();
-        inducedMutationList.add("Other");
+        addOther(inducedMutationList);
         return inducedMutationList;
     }
 
@@ -541,8 +539,6 @@ public class NewDropdownUtil {
         List mutationList = new ArrayList();
         InducedMutation tmp;
 
-        mutationList.add("Other");
-
         if (inducedMutationList != null) {
             for (int i = 0; i < inducedMutationList.size(); i++) {
                 tmp = (InducedMutation) inducedMutationList.get(i);
@@ -557,6 +553,8 @@ public class NewDropdownUtil {
         }
 
         Collections.sort(mutationList);
+        addOther(mutationList);
+        
         return mutationList;
     }
 
@@ -708,6 +706,18 @@ public class NewDropdownUtil {
 
         return theRoles;
     }
-    
-    
+
+    /**
+     * Add Other to the list in the first spot if it's not already there.
+     * Removes it and put's it in the first spot if it is.
+     */
+    private static void addOther(List inList) {
+
+        if (!inList.contains(Constants.Dropdowns.OTHER_OPTION)) {
+            inList.add(0, Constants.Dropdowns.OTHER_OPTION);
+        } else {
+            inList.remove(Constants.Dropdowns.OTHER_OPTION);
+            inList.add(0, Constants.Dropdowns.OTHER_OPTION);
+        }
+    }
 }
