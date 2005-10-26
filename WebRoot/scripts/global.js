@@ -9,6 +9,22 @@ function chkOther(vocab, otherVocab) {
 	}
 }
 
+function chkOtherName() {
+
+    var name = document.forms[0].name;
+    var otherName = document.forms[0].otherName;
+
+    chkOther(name, otherName);  	
+}
+
+function chkOtherAdminRoute() {
+
+	var route = document.forms[0].administrativeRoute;
+	var otherRoute = document.forms[0].otherAdministrativeRoute;
+	
+    chkOther(route, otherRoute);  	
+}
+	
 function disableField(field)
 {
 		field.value = '';

@@ -1476,8 +1476,12 @@
 	        name="radiationForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitRadiation">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitRadiation.do">
+        </forward>  	     	
     </action>
     
     <action path="/RadiationPopulateAction"
@@ -1560,8 +1564,12 @@
 	        name="surgeryForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitSurgeryOther">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitSurgeryOther.do">
+        </forward>    	
     </action>
     
     <action path="/SurgeryPopulateAction"
@@ -1622,8 +1630,12 @@
 	        name="viralTreatmentForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitViralTreatment">   	
+	        validate="true"
+	        input="input">
+	     <forward 
+    		name="input"
+    		path="/submitViralTreatment.do">
+    	 </forward>  	 
     </action>
     
     <action path="/ViralTreatmentPopulateAction"

@@ -7,7 +7,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
@@ -17,24 +17,13 @@
 	
 	String actionName = "SurgeryAction.do?method=save";
 	
-	if ( aTherapyID != null )
+	if ( aTherapyID != null && aTherapyID.length() > 0) {
 		actionName = "SurgeryAction.do?method=edit";
-%>
-
-<SCRIPT LANGUAGE="JavaScript">
-
-	function chkOtherName( control ) {
-		ideControl = document.forms[0].otherName;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
 	}
-	
-</script>
+    else {
+        aTherapyID = "";
+    }
+%>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -45,6 +34,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
+	    <html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 	
@@ -62,7 +52,7 @@
 			<br>
 			<html:form action="<%= actionName %>" focus="name">			 
 			
-			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOtherName( this );">												
+			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName( this );">												
 				<html:options name="<%= Dropdowns.SURGERYDROP %>"/>					
 			</html:select>			
 		</td>
@@ -82,7 +72,7 @@
 		<camod:cshelp key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="regimen" size="30" />
 		</td>
 	</tr>
 
@@ -90,9 +80,9 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -102,7 +92,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
@@ -134,17 +124,6 @@
 </tr></td></TABLE>
 
 <SCRIPT>
-	function checkOthers()
-	{
-	    ideControl = document.forms[0].name;
-	    ideOtherControl = document.forms[0].otherName;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}		
-	
-	checkOthers();
+chkOtherName();
 </SCRIPT>
 <%@ include file="/jsp/footer.jsp" %>
