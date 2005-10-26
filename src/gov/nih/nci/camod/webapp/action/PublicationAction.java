@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: PublicationAction.java,v 1.6 2005-10-26 20:12:43 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.webapp.action;
 
 import java.util.List;
@@ -168,9 +176,6 @@ public final class PublicationAction extends BaseAction {
 		
         PublicationStatus pubStatus = new PublicationStatus();
         pubStatus.setName( pubForm.getName() );
-        //publicationManager.savePublicationStatus( pubStatus );
-		
-        //pub.setPublicationStatus( pubStatus );
         publicationManager.save( pub, pubStatus );
 
     	//Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully 
