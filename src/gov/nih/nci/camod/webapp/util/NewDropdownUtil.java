@@ -206,11 +206,12 @@ public class NewDropdownUtil {
 
         log.trace("Entering NewDropdownUtil.getTextFileDropdown");
 
-        List theReturnList = null;
+        List theReturnList = new ArrayList();
 
         if (ourFileBasedLists.containsKey(inDropdownKey)) {
             log.debug("Dropdown already cached");
-            theReturnList = (List) ourFileBasedLists.get(inDropdownKey);
+            List theCachedList = (List) ourFileBasedLists.get(inDropdownKey);
+            theReturnList.addAll(theCachedList);
         } else {
 
             String theFilename = inRequest.getSession().getServletContext().getRealPath("/config/dropdowns") + "/"
@@ -222,7 +223,7 @@ public class NewDropdownUtil {
             if (theList.size() != 0) {
                 log.debug("Caching new dropdown: " + theList);
                 ourFileBasedLists.put(inDropdownKey, theList);
-                theReturnList = theList;
+                theReturnList.addAll(theList);
             }
         }
 
@@ -414,18 +415,15 @@ public class NewDropdownUtil {
 
         List viralVectorList = new ArrayList();
         GeneDelivery tmp;
-
-        // TODO: Fix once we know what we're doing w/ this
+        
         viralVectorList.add(Constants.Dropdowns.OTHER_OPTION);
-        // TODO: Remive this before production - used to test other field toggle
-        viralVectorList.add("Dummy Viral Vector");
-
+        
         if (geneDeliveryList != null) {
             for (int i = 0; i < geneDeliveryList.size(); i++) {
                 tmp = (GeneDelivery) geneDeliveryList.get(i);
 
                 if (tmp.getViralVector() != null) {
-                    // if the speciesName is not already in the List, add it
+                    // if the name is not already in the List, add it
                     // (only get unique names)
                     if (!viralVectorList.contains(tmp.getViralVector()))
                         viralVectorList.add(tmp.getViralVector());
