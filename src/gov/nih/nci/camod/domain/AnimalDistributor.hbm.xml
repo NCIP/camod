@@ -35,8 +35,7 @@
         <bag name="animalAvailabilityCollection"
         	table="ani_ava_ani_distributor"
         	inverse="true" 
-        	lazy="true"
-        	cascade="all-delete-orphan">
+        	lazy="true">
         	
         	<key column="animal_distributor_id"/>
         	<many-to-many class="AnimalAvailability" 
