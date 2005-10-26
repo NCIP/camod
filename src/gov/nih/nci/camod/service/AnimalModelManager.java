@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.25 2005-10-26 20:16:07 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.26 2005-10-26 20:42:13 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/10/26 20:16:07  pandyas
+ * implemented model availability
+ *
  * Revision 1.24  2005/10/24 21:04:03  schroedn
  * Added Image to submission
  *
@@ -51,6 +54,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/10/26 20:16:07  pandyas
+ * implemented model availability
+ *
  * Revision 1.24  2005/10/24 21:04:03  schroedn
  * Added Image to submission
  *
@@ -186,4 +192,5 @@ public interface AnimalModelManager {
     
     public void addInvestigatorAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception;     
     
+    public void addAssociatedExpression(AnimalModel inAnimalModel, Transgene inTransgene, AssociatedExpressionData inAssociatedExpressionData ) throws Exception;
 }

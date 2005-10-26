@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.44 2005-10-26 20:16:57 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.45 2005-10-26 20:42:52 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2005/10/26 20:16:57  pandyas
+ * implemented model availability
+ *
  * Revision 1.43  2005/10/24 21:00:17  schroedn
  * addImage added
  *
@@ -870,7 +873,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new therapy data
      * @throws Exception
      */
-
     public void addAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception {
 
         System.out.println("<AnimalModelManagerImpl addAvailability>");
@@ -881,7 +883,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
         log.info("Exiting AnimalModelManagerImpl.addAvailability");
     }
-    
+        
     /**
      * Add an Availability
      * 
@@ -901,5 +903,18 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.addAnimalAvailability(theAvailability);
         save(inAnimalModel);
         log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
-    }    
+    }   
+
+    public void addAssociatedExpression( AnimalModel inAnimalModel, Transgene inTransgene, AssociatedExpressionData inAssociatedExpressionData ) throws Exception {
+
+    	System.out.println("<AnimalModelManagerImpl addAssociatedExpression>");
+        log.trace("Entering AnimalModelManagerImpl.addAssociatedExpression");
+
+    	//addAssociatedExpression (ExpressionFeature
+    	EngineeredTransgeneManagerSingleton.instance().createAssocExpression( inAssociatedExpressionData, inTransgene );
+    	    	
+    	save( inAnimalModel );
+    	
+    	log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
+    }
 }
