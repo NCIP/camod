@@ -1213,8 +1213,12 @@
 	        name="environmentalFactorForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitEnvironmentalFactors">
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitEnvironmentalFactors.do">
+        </forward>     	 
    </action> 
     
     <action path="/EnvironmentalFactorPopulateAction"
