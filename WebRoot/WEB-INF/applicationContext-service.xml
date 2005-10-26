@@ -87,5 +87,11 @@
     
     <!--  engineeredTransgene -->
     <bean id="engineeredTransgeneManager" class="gov.nih.nci.camod.service.impl.EngineeredTransgeneManagerImpl"/>
+    
+    <!--  animalDistributorManager -->
+    <bean id="animalDistributorManager" class="gov.nih.nci.camod.service.impl.AnimalDistributorManagerImpl"/>     
+    
+    <!--  animalAvailabilityManager -->
+    <bean id="availabilityManager" class="gov.nih.nci.camod.service.impl.AvailabilityManagerImpl"/>    
            
 </beans>
