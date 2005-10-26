@@ -10,7 +10,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 <SCRIPT src="/camod/scripts/CalendarPopup.js" type=text/javascript></SCRIPT>
 
 <SCRIPT LANGUAGE="JavaScript" ID="js1">
@@ -19,20 +19,12 @@ var cal1 = new CalendarPopup();
 
 <SCRIPT LANGUAGE="JavaScript">
 	
-	function chkOther() {
+	function chkOtherStrain() {
 	
 	    var strain = document.forms[0].ethinicityStrain;
 	    var otherStrain = document.forms[0].ethnicityStrainUnctrlVocab;
-	  	
-		if( strain.value == 'Other' ) {
-			otherStrain.disabled = false;
-			otherStrain.className = "formFieldSized";
-		}
-		else {
-			otherStrain.value = '';
-			otherStrain.className = "formFieldSizedDisabled";
-			otherStrain.disabled = true;
-		}
+	
+	    chkOther(strain, otherStrain);  	
 	}
 	
 	function getOptions( control ) {
@@ -131,7 +123,7 @@ var cal1 = new CalendarPopup();
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOther();">
+				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOtherStrain();">
 					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
 				</html:select>
 			</td>
@@ -229,7 +221,7 @@ var cal1 = new CalendarPopup();
 </td></tr></TABLE>
 
 <SCRIPT LANGUAGE="JavaScript">
-	chkOther();
+	chkOtherStrain();
 	setFields();
 </SCRIPT>	
 

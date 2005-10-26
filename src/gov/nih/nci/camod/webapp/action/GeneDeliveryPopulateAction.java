@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.8 2005-10-20 20:24:22 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.9 2005-10-26 13:45:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/20 20:24:22  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.action;
@@ -86,9 +89,6 @@ public class GeneDeliveryPopulateAction extends BaseAction{
 		//Prepopulate all dropdown fields, set the global Constants to the following
 		this.dropdown( request, response );
 
-		//Store the Form in session to be used by the JSP
-		request.getSession().setAttribute( Constants.FORMDATA, geneDeliveryForm );		
-		
 		return mapping.findForward("submitGeneDelivery");
 
 	}
@@ -110,10 +110,6 @@ public class GeneDeliveryPopulateAction extends BaseAction{
 	  throws Exception {	
 		
 		System.out.println( "<GeneDeliveryPopulateAction dropdown> Entering dropdown() " );
-		
-		//blank out the FORMDATA Constant field
-		GeneDeliveryForm GeneDelivForm = ( GeneDeliveryForm ) form;
-		request.getSession().setAttribute( Constants.FORMDATA, GeneDelivForm );
 		
 		//setup dropdown menus
 		this.dropdown( request, response );

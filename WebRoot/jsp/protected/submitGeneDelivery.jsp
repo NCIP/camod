@@ -6,11 +6,10 @@
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
-
 
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
@@ -30,15 +29,9 @@
 
 <SCRIPT LANGUAGE="JavaScript">
 
-	function chkOtherViralVector( control ) {
-		ideControl = document.forms[0].otherViralVector;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+	function chkOtherViralVector() {
+	    chkOther(document.forms[0].viralVector, 
+	             document.forms[0].otherViralVector);
 	}
 	
 	
@@ -70,9 +63,9 @@
             <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
             <br>		
 			<br>
-			<html:form action="<%= actionName %>" focus="name" onsubmit="transferFields()">	
+			<html:form action="<%= actionName %>" focus="name" >	
 			
-			<html:select styleClass="formFieldSized" size="1" property="viralVector" name="formdata" onclick="chkOtherViralVector( this );">
+			<html:select styleClass="formFieldSized" size="1" property="viralVector" onclick="chkOtherViralVector();">
 				<html:options name="<%= Dropdowns.VIRALVECTORDROP %>"/>					
 			</html:select>
 			
@@ -83,17 +76,17 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Viral Vector:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" disabled="true" property="otherViralVector" onclick="checkOthers( this );"/>			
+			<html:text styleClass="formFieldSized" size="30" disabled="true" property="otherViralVector"/>			
 		</td>
 	</tr>        
         
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formLabel"><label for="field1">Gene:</label>
+		<td class="formRequiredLabel"><label for="field1">Gene:</label>
 		<camod:cshelp key="GENE_DELIVERY.GENE_IN_VIRUS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
-			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" name="formdata"  />
+			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" />
 		</td>				
 	</tr>
 
@@ -103,13 +96,13 @@
 		<camod:cshelp key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="regimen" size="30"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="0">&nbsp;</td>
-		<td class="formRequiredLabel"><label for="field2">Location of Delivery:</label>
+		<td class="formLabel"><label for="field2">Injection Site:</label>
 		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
@@ -118,7 +111,7 @@
 
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="organ" size="30" name="formdata"/>
+				<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"/>
 			</td>
 	</tr>
 		
@@ -126,9 +119,9 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10"/>
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit">												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -138,7 +131,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="type">												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
@@ -172,19 +165,7 @@
 </tr></td></TABLE>
 
 <SCRIPT>
-	function checkOthers()
-	{
-	    ideControl = document.forms[0].viralVector;
-	    ideOtherControl = document.forms[0].otherViralVector;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-		
-	
-	checkOthers();
+    chkOtherViralVector();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
