@@ -49,7 +49,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
 	    //      and are retrieving the dropdowns for this page from a text file ( HostSpecies.txt)
 	    //      We need to get the list from
 	    NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HOSTSPECIESDROP, "" );
-	    List dropdownTaxList = (List) request.getAttribute( Constants.Dropdowns.HOSTSPECIESDROP );
+	    List dropdownTaxList = (List) request.getSession().getAttribute( Constants.Dropdowns.HOSTSPECIESDROP );
 	   
 	    engineeredTransgeneForm.setName( theEngineeredTransgene.getName() );
 	    

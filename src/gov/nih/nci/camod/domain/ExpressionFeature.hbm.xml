@@ -28,12 +28,14 @@
         <many-to-one
         	name="organ"
         	column="organ_id"
-        	class="Organ"/>
+        	class="Organ"
+        	cascade="all-delete-orphan"/>
         	
         <!-- expressionLevelDesc (many-to-one unidirectional) -->
         <many-to-one
         	name="expressionLevelDesc"
         	column="exp_level_desc_id"
-        	class="ExpressionLevelDesc"/>
+        	class="ExpressionLevelDesc"
+        	cascade="all-delete-orphan"/>
 	</class>
 </hibernate-mapping>

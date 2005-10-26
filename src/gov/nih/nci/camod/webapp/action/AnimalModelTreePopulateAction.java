@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.30 2005-10-26 20:14:42 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.31 2005-10-26 20:40:51 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.30  2005/10/26 20:14:42  pandyas
+ *  implemented model availability
+ *
  *  Revision 1.29  2005/10/24 21:04:47  schroedn
  *  Bug fixes, Javascript and Other fields
  *
@@ -233,6 +236,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         List targetedList = new ArrayList();
         List segmentList = new ArrayList();
         List engineeredList = new ArrayList();
+        List associatedExpressionList = new ArrayList();
         
         for (int i = 0; i < engineeredGeneList.size(); i++) {
         	EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);       
@@ -249,6 +253,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         		//TargetedModification inTargeted = (TargetedModification) engineeredGeneList.get(i);        		
             	targetedList.add( (TargetedModification) engineeredGeneList.get(i) );
             	//System.out.println( "\tAdded a TargetedModification" );
+
         	}
         	
         	if ( engineeredGene instanceof GenomicSegment ) {
@@ -260,6 +265,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         	if ( engineeredGene instanceof Transgene ) {
         		engineeredList.add( (Transgene) engineeredGeneList.get(i) );            	
             	//System.out.println( "\tAdded a Transgene");
+            	associatedExpressionList.addAll( engineeredGene.getExpressionFeatureCollection() );
+            	System.out.println("\n\n\tassociatedExpressionList:" + associatedExpressionList );
         	}
         }
 
@@ -362,6 +369,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
         request.getSession().setAttribute(Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
         request.getSession().setAttribute(Constants.Submit.IMAGE_LIST, imageCollection);
+        request.getSession().setAttribute(Constants.Submit.ASSOCIATEDEXPRESSION_LIST, associatedExpressionList);
         
         request.getSession().setAttribute(Constants.Submit.INVESTIGATOR_LIST, investigatorList);
         request.getSession().setAttribute(Constants.Submit.JACKSONLAB_LIST, jacksonLabList);

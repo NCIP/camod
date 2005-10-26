@@ -1,6 +1,7 @@
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
 
 import java.util.List;
@@ -20,4 +21,9 @@ public interface EngineeredTransgeneManager {
     public Transgene create(EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request) throws Exception;
 
     public void update(EngineeredTransgeneData inEngineeredTransgeneData, Transgene inEngineeredTransgene, HttpServletRequest request) throws Exception;
+
+    public void createAssocExpression( AssociatedExpressionData inAssociatedExpressionData, Transgene inEngineeredTransgene ) throws Exception;		
+    
+    public void updateAssociatedExpression( AssociatedExpressionData inAssociatedExpressionData, Transgene inEngineeredTransgene ) throws Exception;
+    
 }

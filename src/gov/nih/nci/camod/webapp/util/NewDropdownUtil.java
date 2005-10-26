@@ -91,8 +91,12 @@ public class NewDropdownUtil {
 
         else if (inDropdownKey.equals(Constants.Dropdowns.VIRALVECTORDROP)) {
             theReturnList = getViralVectorList(inRequest);
-        }
-
+        }        
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVEL)) {
+            theReturnList = getExpressionLevelList(inRequest);
+        }    
+        
         else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONDROP)) {
             theReturnList = getInducedMutationList(inRequest);
         }
@@ -396,7 +400,7 @@ public class NewDropdownUtil {
         Collections.sort(graftList);
         return graftList;
     }
-
+    
     /**
      * Returns a list of all Administrative Routes
      * 
@@ -585,6 +589,40 @@ public class NewDropdownUtil {
         Collections.sort(theReturnList);
         return theReturnList;
     }
+    
+    /**
+     * Returns a list of all Expression Level Descriptions
+     * 
+     * @return list of users
+     * @throws Exception
+     */
+    private static List getExpressionLevelList(HttpServletRequest inRequest ) throws Exception {
+        // Get values for dropdown lists for Species, Strains
+        ExpressionLevelDescManager expressionLevelDescManager = (ExpressionLevelDescManager) getContext(inRequest).getBean("expressionLevelDescManager");
+
+        List expList = null;
+
+        expList = expressionLevelDescManager.getAll();
+
+        List expressionLevelList = new ArrayList();
+        ExpressionLevelDesc tmp;
+
+        if (expList != null) {
+            for (int i = 0; i < expList.size(); i++) {
+                tmp = (ExpressionLevelDesc) expList.get(i);
+
+                if (tmp.getExpressionLevel() != null) {
+                    // if the speciesName is not already in the List, add it
+                    // (only get unique names)
+                    if (!expressionLevelList.contains(tmp.getExpressionLevel()))
+                    	expressionLevelList.add(tmp.getExpressionLevel());
+                }
+            }
+        }
+        Collections.sort(expressionLevelList);
+        return expressionLevelList;
+
+    }
 
     /**
      * Returns a list of all states for a curation flow
@@ -670,4 +708,6 @@ public class NewDropdownUtil {
 
         return theRoles;
     }
+    
+    
 }

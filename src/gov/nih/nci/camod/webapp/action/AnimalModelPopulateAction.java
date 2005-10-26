@@ -138,7 +138,6 @@ public class AnimalModelPopulateAction extends BaseAction {
 
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, theSpecies);
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "");
-
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP, "");
 
 		log.trace("Exiting AnimalModelPopulateAction.dropdown");

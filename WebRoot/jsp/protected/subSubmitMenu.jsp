@@ -7,6 +7,7 @@
 <%@ page import="gov.nih.nci.camod.domain.Xenograft" %>	
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation" %>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene" %>
+<%@ page import="gov.nih.nci.camod.domain.ExpressionFeature" %>
 <%@ page import="gov.nih.nci.camod.domain.Image" %>
 <%@ page import="gov.nih.nci.camod.domain.Transgene" %>
 <%@ page import="gov.nih.nci.camod.domain.GenomicSegment" %>
@@ -31,12 +32,29 @@
 	<div id="menu2" class="masterTitle" onclick="SwitchMenu('sub2')" onmouseover="ChangeClass('menu2','masterTitleOver')" onmouseout="ChangeClass('menu2','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> GENETIC DESCRIPTION</div>
 	<span class="submasterdiv" id="sub2">
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="EngineeredTransgenePopulateAction.do?method=dropdown">Enter Engineered Transgene</html:link><br>
-				<logic:iterate id="aEngineeredTransgene" name="engineeredtransgene_list" type="Transgene">
+		
+		<logic:iterate id="aEngineeredTransgene" name="engineeredtransgene_list" type="Transgene">
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="EngineeredTransgenePopulateAction.do?method=populate" paramId="aEngineeredTransgeneID" paramName="aEngineeredTransgene" paramProperty="id">
 			      		<bean:write name="aEngineeredTransgene" property="locationOfIntegration" filter="true"/>
 			      </html:link><br>
+			      
+			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      <img src="images/plus.gif" border="0"> 
+			      <html:link styleClass="subMenuDarkRed" action="AssociatedExpressionPopulateAction.do?method=dropdown" paramId="aEngineeredTransgeneID" paramName="aEngineeredTransgene" paramProperty="id">Enter Assoc Expression</html:link><br>
+
+				<bean:define id="expressionFeatureList" name="aEngineeredTransgene" property="expressionFeatureCollection" />
+				<logic:iterate id="aExpressionFeature" name="expressionFeatureList" type="ExpressionFeature">
+					
+					<bean:define id="aAssociatedExpressionID" name="aExpressionFeature" property="id" />
+					<bean:define id="aEngineeredTransgeneID" name="aEngineeredTransgene" property="id" />
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="images/aquadot_red.jpg" border="0"> 
+					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aEngineeredTransgeneID }' /> "><bean:write name="aExpressionFeature" property="organ.name" filter="true"/></a><br>
+				</logic:iterate>
+					
 		</logic:iterate>		
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GenomicSegmentPopulateAction.do?method=dropdown">Enter Genomic Segment</html:link><br>
@@ -47,10 +65,7 @@
 			      		<bean:write name="aGenomicSegment" property="locationOfIntegration" filter="true"/>
 			      </html:link><br>
 		</logic:iterate>		
-		
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<img src="images/plus.gif" border="0"><html:link styleClass="subMenuDarkRed" action="submitAssocExpression">Enter Assoc Expression</html:link><br>
-		
+			
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="TargetedModificationPopulateAction.do?method=dropdown">Enter Targeted Modification</html:link><br>
 		<logic:iterate id="aTargetedModification" name="targetedmodification_list" type="TargetedModification">
 			  &nbsp;&nbsp;&nbsp;&nbsp;
@@ -69,7 +84,7 @@
 			      </html:link><br>
 		</logic:iterate>
 		
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="SpontaneousMutationPopulateAction.do?method=dropdown">Enter Spontaneous Mutation</html:link><br><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="SpontaneousMutationPopulateAction.do?method=dropdown">Enter Spontaneous Mutation</html:link><br>
   	    <logic:iterate id="aSpontaneousMutation" name="spontaneousmutation_list" type="SpontaneousMutation">
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 

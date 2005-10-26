@@ -1,5 +1,28 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
+
+<%@ page import="gov.nih.nci.camod.Constants.*" %>
+<%@ page import=" gov.nih.nci.camod.webapp.form.AssociatedExpressionForm" %>
+
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+
+<%
+	String aEngineeredGeneID = request.getParameter( "aEngineeredTransgeneID" );
+	String aAssociatedExpressionID = request.getParameter( "aAssociatedExpressionID" );
+	
+	//if aEngineeredGeneID is passed in, then we are dealing with a previously entered model and are editing it
+	//otherwise, create a new one
+	
+	String actionName = "AssociatedExpressionAction.do?method=save";
+	
+	if ( aAssociatedExpressionID != null )
+		actionName = "AssociatedExpressionAction.do?method=edit";
+%>
+
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -21,39 +44,57 @@
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
 		<camod:cshelp key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		<IMG src="images\selectUP.gif" align=middle></td>
-		<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="field3" id="field3" size="25" /></td>
+
+		<a href="javascript:showTissueTree('associatedExpressionForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+				<IMG src="images\selectUP.gif" align=middle border=0>
+			</a>
+
+		</td>
+		<td class="formField">
+			
+			<html:form action="<%= actionName %>" focus="name">	
+
+			<html:hidden property="organTissueCode" name="formdata" />
+			<html:hidden property="organTissueName" name="formdata" />
+			
+			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30" name="formdata"/>
+			
+		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Expression Level:</label></td>
 		<td class="formField">				
-                                <select class="formFieldSized" name="field3" id="field3" size="1">
-                                        <OPTION value=""></OPTION>
-                                        <OPTION value="1">Other</OPTION>
-                                        <OPTION value="8">1</OPTION>
-                                        <OPTION value="9">2</OPTION>
-				</select>
+			<html:select styleClass="formFieldSized" size="1" property="expressionLevel" name="formdata" >
+				<html:options name="<%= Dropdowns.EXPRESSIONLEVEL %>" />										
+			</html:select>
 		</td>
 	</tr>
 
 	<tr>
 		<td align="right" colspan="3">
-			<!-- action buttons begins -->
 			<TABLE cellpadding="4" cellspacing="0" border="0">
-
-				<tr>
-					<td><input class="actionButton" type="submit" value="Submit" /></td>
-					<td><input class="actionButton" type="reset" value="Reset" /></td>
-				</tr>
+			
+				  <html:submit styleClass="actionButton">
+					  <bean:message key="button.submit"/>
+				  </html:submit>
+				  
+				  <html:reset styleClass="actionButton">
+				  	  <bean:message key="button.reset"/>
+  				  </html:reset>
+				
+				  <!--  Done this way since html:hidden doesn't seem to work correctly -->				 
+				  <input type="hidden" name="aAssociatedExpressionID" value="<%= aAssociatedExpressionID %>">
+				  <input type="hidden" name="engineeredGeneID" value="<%= aEngineeredGeneID %>">
+				  	
+				</html:form>			
 			</TABLE>
-			<!-- action buttons end -->
 		</td>
 	</tr>
 </TABLE>
 
-<!-- -->
+	<!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.56 2005-10-24 22:00:48 pandyas Exp $
+ * $Id: Constants.java,v 1.57 2005-10-26 20:40:30 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.56  2005/10/24 22:00:48  pandyas
+ * added back availability_list so it doesn't break everyone else
+ *
  * Revision 1.55  2005/10/24 21:16:59  pandyas
  * added availability constants
  *
@@ -256,6 +259,8 @@ public class Constants {
 		public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
 
 		public static final String INDUCEDMUTATIONDROP = "inducedmutationdrop.db";
+		
+		public static final String EXPRESSIONLEVEL = "expressionlevel.db";
 
 		// Query dropdowns
 		public static final String CHEMICALDRUGQUERYDROP = "chemdrugquerydrop.db";
@@ -482,6 +487,8 @@ public class Constants {
 		public static final String CLINICALMARKER_LIST = "clinicalmarker_list";
 
 		public static final String IMAGE_LIST = "image_list";
+		
+		public static final String ASSOCIATEDEXPRESSION_LIST = "associatedexpression_list";
 		/**
 		 * Used to store a list of names for the Publication section of the
 		 * sidebar menu of the submission section

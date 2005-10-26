@@ -75,6 +75,9 @@
     
     <!-- chemicalClassManager   -->    
     <bean id="chemicalClassManager" class="gov.nih.nci.camod.service.impl.ChemicalClassManagerImpl"/>
+     
+    <!-- expressionLevelDescManager --> 
+    <bean id="expressionLevelDescManager" class="gov.nih.nci.camod.service.impl.ExpressionLevelDescManagerImpl"/>
             
     <!-- userManager -->
     <bean id="userManager" class="gov.nih.nci.camod.service.impl.UserManagerImpl"/>

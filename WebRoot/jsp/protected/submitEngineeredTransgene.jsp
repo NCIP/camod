@@ -314,7 +314,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Gene Functions<br>(seperate each entry by a comma)</label>
-		<camod:cshelp key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="geneFunctions"  rows="4" cols="32"  name="formdata"/>		
@@ -332,7 +332,9 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Conditional Description</label></td>
+		<td class="formLabel"><label for="field2">Conditional Description</label>
+			<camod:cshelp key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="32" name="formdata"/>		
 		</td>
@@ -341,7 +343,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Additional Features</label>
-		<camod:cshelp key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  name="formdata"/>	
@@ -395,7 +397,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label>
-		<camod:cshelp key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct" rows="4" cols="32"  name="formdata"/>	

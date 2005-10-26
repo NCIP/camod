@@ -1027,6 +1027,28 @@
 			validate="false">		
     </action>      
      
+     <!-- AssociatedExpressionForm -->
+     <action path="/AssociatedExpressionAction"
+	        type="gov.nih.nci.camod.webapp.action.AssociatedExpressionAction"
+	        name="associatedExpressionForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">  
+	    <forward
+            name="input"
+            path="/AssociatedExpressionPopulateAction.do?method=dropdown">
+        </forward>   	
+    </action>
+    
+    <action path="/AssociatedExpressionPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AssociatedExpressionPopulateAction"
+    		name="associatedExpressionForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action> 
+    
      <!-- AvailabilityForms -->
      <action path="/JacksonLabAction"
 	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
@@ -1942,6 +1964,7 @@
     		path="/submitComment.do">
     	 </forward>  	
      </action>
+     
 	 <action 
          path="/ChangeCommentsStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStateAction"
