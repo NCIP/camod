@@ -26,7 +26,7 @@
 
 		 <form-bean
 			name="availabilityForm"
-		    type="gov.nih.nci.camod.webapp.form.AvailabilityForm"/>	
+		    type="gov.nih.nci.camod.webapp.form.AvailabilityForm"/>
 		    
 		 <form-bean
 			name="cellLineForm"
@@ -435,7 +435,7 @@
 		<forward
 			name="submitIMSR"
 			path="/jsp/protected/submitIMSR.jsp"></forward>
-		
+			
 		<forward
 			name="submitImages"
 			path="/jsp/protected/submitImages.jsp"></forward>
@@ -672,12 +672,7 @@
 			path="/submitHormone"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitHormone.jsp" />
-		
-		<action
-			path="/submitIMSR"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitIMSR.jsp" />
-		
+			
 		<action
 			path="/submitImages"
 			type="org.apache.struts.actions.ForwardAction"
@@ -687,21 +682,12 @@
 			path="/submitInducedMutation"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitInducedMutation.jsp" />
-		
+			
+		<!-- Removed forward to submitJacksonLab, IMSR, MMHCC (not used) -->
 		<action
 			path="/submitInvestigator"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitInvestigator.jsp" />
-		
-		<action
-			path="/submitJacksonLab"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitJacksonLab.jsp" />
-		
-		<action
-			path="/submitMMHCCRepo"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitMMHCCRepo.jsp" />
 		
 		<action
 			path="/submitMenu"
@@ -1085,7 +1071,7 @@
     </action>
 
      <action path="/InvestigatorAction"
-	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
+	        type="gov.nih.nci.camod.webapp.action.AvailabilityInvestigatorAction"
 	        name="availabilityForm"
 	        scope="request"
 	        parameter="method" 	     
@@ -1094,16 +1080,12 @@
      </action>
 
     <action path="/InvestigatorPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AvailabilityInvestigatorPopulateAction"
     		name="availabilityForm"    		
             scope="request"
             parameter="method"            
-			validate="false">
-         <forward 
-    		name="next"
-    		path="/jsp/protected/submitInvestigator.jsp">
-    	 </forward>									
-    </action> 
+			validate="false">	
+    </action>
     
      <action path="/IMSRAction"
 	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
@@ -1124,9 +1106,9 @@
     		name="next"
     		path="/jsp/protected/submitIMSR.jsp">
     	 </forward>		
-    </action> 
- 
-          
+    </action>     
+
+      
      <!-- CellLineForm -->
      <action path="/CellLineAction"
 	        type="gov.nih.nci.camod.webapp.action.CellLineAction"
