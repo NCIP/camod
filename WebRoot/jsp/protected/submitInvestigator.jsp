@@ -4,6 +4,7 @@
 
 <%@ page import="gov.nih.nci.camod.webapp.form.AvailabilityForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.Dropdowns.*' %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
@@ -14,7 +15,6 @@
 	
 	//if aAvailabilityID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
-	
 	String actionName = "InvestigatorAction.do?method=save";
 	
 	if ( aAvailabilityID != null )
@@ -34,7 +34,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Investigator Information </td>
+		<td class="formTitle" height="20" colspan="3">Available from Investigator</td>
 	</tr>
 	
         <tr>
@@ -42,21 +42,21 @@
 		<td class="formLabel"><label for="field1">Strain Name:</label>
 		<camod:cshelp key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
-			<td class="formField">
+		<td class="formField">
 				<html:form action="<%= actionName %>" focus="name">
-				<html:text styleClass="formFieldSized" size="30" property="name" name="formdata" />			
-			</td>
+				<html:hidden property="source" />
+				<html:text styleClass="formFieldSized" size="40" property="name"  name="formdata"/>			
+		</td>
 	</tr>
 	
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Investigator Email Address:</label>
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel">Principal Investigator:
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="stockNumber" size="10" name="formdata" />
-			<html:select styleClass="formFieldUnSized" size="1" property="principalInvestigator" name="formdata">												
-				<html:options name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>"/>					
-			</html:select>
+				<html:select styleClass="formFieldSized" size="1" property="stockNumber">
+					<html:optionsCollection name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>" />	
+				</html:select>
 		</td>
 	</tr>		
         

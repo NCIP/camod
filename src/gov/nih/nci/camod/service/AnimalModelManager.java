@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.24 2005-10-24 21:04:03 schroedn Exp $
+ * $Id: AnimalModelManager.java,v 1.25 2005-10-26 20:16:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/10/24 21:04:03  schroedn
+ * Added Image to submission
+ *
  * Revision 1.23  2005/10/24 17:10:39  georgeda
  * First pass at duplicate
  *
@@ -48,6 +51,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/10/24 21:04:03  schroedn
+ * Added Image to submission
+ *
  * Revision 1.23  2005/10/24 17:10:39  georgeda
  * First pass at duplicate
  *
@@ -176,6 +182,8 @@ public interface AnimalModelManager {
     
     public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception; 
     
-    public void addAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception;     
+    public void addAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception;
+    
+    public void addInvestigatorAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception;     
     
 }

@@ -2,7 +2,7 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityAction.java,v 1.2 2005-10-26 20:14:34 pandyas Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.1 2005-10-26 20:14:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * 
@@ -16,6 +16,7 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.AvailabilityManager;
 import gov.nih.nci.camod.webapp.form.AvailabilityForm;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -25,9 +26,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 /**
- * AvailabilityAction Class
+ * AvailabilityInvestigatorAction Class
  */
-public class AvailabilityAction extends BaseAction {
+public class AvailabilityInvestigatorAction extends BaseAction {
 
     /**
      * Delete
@@ -77,7 +78,7 @@ public class AvailabilityAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityAction> Entering edit");
+        log.info("<AvailabilityInvestigatorAction> Entering edit");
 
         // Create a form to edit
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -85,7 +86,7 @@ public class AvailabilityAction extends BaseAction {
         // Grab the current aAvailabilityID from the session
         String aAvailabilityID = request.getParameter("aAvailabilityID");        
         
-        System.out.println("<AvailabilityAction edit> following Characteristics:" 
+        System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" 
         		+ "\n\t name: " + availabilityForm.getName()
                 + "\n\t stockNuber: " + availabilityForm.getStockNumber() 
                 + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -98,7 +99,7 @@ public class AvailabilityAction extends BaseAction {
         try {
             AnimalAvailability theAvailability = availabilityManager.get(aAvailabilityID);            
           
-            availabilityManager.update(availabilityForm, theAvailability);
+            availabilityManager.updateInvestigatorAvailability(availabilityForm, theAvailability);
         	
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -107,7 +108,7 @@ public class AvailabilityAction extends BaseAction {
             saveErrors(request, msg);
             
         } catch (Exception e) {
-            log.error("Exception ocurred creating Availability", e);
+            log.error("Exception ocurred creating Investigator Availability", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -117,7 +118,7 @@ public class AvailabilityAction extends BaseAction {
             theForward = "failure";
         }
 
-        log.info("<AvailabilityAction> Exiting edit");
+        log.info("<AvailabilityInvestigatorAction> Exiting edit");
         return mapping.findForward(theForward);        	
         }
 
@@ -134,7 +135,7 @@ public class AvailabilityAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityAction> Entering save");
+        log.info("<AvailabilityInvestigatorAction> Entering save");
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);         
@@ -142,7 +143,7 @@ public class AvailabilityAction extends BaseAction {
         // Create a form to edit
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-        log.info("<AvailabilityAction edit> following Characteristics:" 
+        System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" 
         		+ "\n\t name: " + availabilityForm.getName()
                 + "\n\t stockNuber: " + availabilityForm.getStockNumber() 
                 + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -154,9 +155,9 @@ public class AvailabilityAction extends BaseAction {
         AnimalModel animalModel = theAnimalModelManager.get(modelID);        
 
         try {
-            theAnimalModelManager.addAvailability(animalModel, availabilityForm);
+            theAnimalModelManager.addInvestigatorAvailability(animalModel, availabilityForm);
 
-            log.info("New Availability created");
+            log.info("New Investigator Availability created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -165,7 +166,7 @@ public class AvailabilityAction extends BaseAction {
             saveErrors(request, msg);
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating Availability", e);
+            log.error("Exception ocurred creating Investigator Availability", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -173,8 +174,9 @@ public class AvailabilityAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.trace("<AvailabilityAction> Exiting save");
+        log.trace("<AvailabilityInvestigatorAction> Exiting save");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }    
 	
 }
+

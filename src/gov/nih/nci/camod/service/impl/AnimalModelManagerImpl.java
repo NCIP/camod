@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.43 2005-10-24 21:00:17 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.44 2005-10-26 20:16:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.43  2005/10/24 21:00:17  schroedn
+ * addImage added
+ *
  * Revision 1.42  2005/10/24 18:05:36  georgeda
  * Show the modified date in the returned models
  *
@@ -872,11 +875,31 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         System.out.println("<AnimalModelManagerImpl addAvailability>");
 
-        log.trace("Entering AnimalModelManagerImpl.addAvailability");
-        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().create(inAvailabilityData,
-                inAnimalModel);
+        log.info("Entering AnimalModelManagerImpl.addAvailability");
+        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().create(inAvailabilityData);
         inAnimalModel.addAnimalAvailability(theAvailability);
         save(inAnimalModel);
-        log.trace("Exiting AnimalModelManagerImpl.addAvailability");
+        log.info("Exiting AnimalModelManagerImpl.addAvailability");
     }
+    
+    /**
+     * Add an Availability
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the Availability
+     * @param inAvailabilityData
+     *            the new therapy data
+     * @throws Exception
+     */
+
+    public void addInvestigatorAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception {
+
+        System.out.println("<AnimalModelManagerImpl addInvestigatorAvailability>");
+
+        log.info("Entering AnimalModelManagerImpl.addInvestigatorAvailability");
+        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().createInvestigator(inAvailabilityData);
+        inAnimalModel.addAnimalAvailability(theAvailability);
+        save(inAnimalModel);
+        log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
+    }    
 }

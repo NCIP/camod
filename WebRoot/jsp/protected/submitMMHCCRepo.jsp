@@ -33,7 +33,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">MMHCC Repository </td>
+		<td class="formTitle" height="20" colspan="3">Available from  MMHCC Repository </td>
 			<html:form action="<%= actionName %>" focus="name">		
 	</tr>
 	
@@ -42,10 +42,11 @@
 			<td class="formLabel"><label for="field1">Strain Name:</label>
 					<camod:cshelp key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
-			<td class="formField">		
+			<td class="formField">
+			<html:hidden property="source" />		
 				<input type=button value="Find Info" onClick="myRef = window.open('http://mouse.ncifcrf.gov','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="name" name="formdata" />
+				<html:text styleClass="formFieldUnSized" size="40" property="name" name="formdata" />
 			</td>
 	</tr>
 	

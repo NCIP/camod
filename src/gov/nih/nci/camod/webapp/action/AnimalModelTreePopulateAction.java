@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.29 2005-10-24 21:04:47 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.30 2005-10-26 20:14:42 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.29  2005/10/24 21:04:47  schroedn
+ *  Bug fixes, Javascript and Other fields
+ *
  *  Revision 1.28  2005/10/24 13:28:17  georgeda
  *  Cleanup changes
  *
@@ -58,6 +61,7 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalAvailability;
+import gov.nih.nci.camod.domain.AnimalDistributor;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.EngineeredGene;
@@ -155,15 +159,48 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         
         // Retrieve a list of all availablty entries assoicated with this Animal model
         List availabilityList = animalModel.getAnimalAvailabilityCollection();
-        List availList = new ArrayList(); 
-     
+        //System.out.println("availabilityList.size()" + availabilityList.size());
+        List investigatorList = new ArrayList();        
+        List jacksonLabList = new ArrayList();
+        List mmhccList = new ArrayList();
+        List imsrList = new ArrayList(); 
+ 
         for (int i = 0; i < availabilityList.size(); i++) {
             AnimalAvailability availability = (AnimalAvailability) availabilityList.get(i);
+        	
+        	if (availability.getAnimalDistributorCollection() != null) {
+        		List animalDistributorList = availability.getAnimalDistributorCollection();
+        		//System.out.println("animalDistributorList.size()" + animalDistributorList.size());
+        		
+                for (int j = 0; j < animalDistributorList.size(); j++) {
+                AnimalDistributor animalDistributor = (AnimalDistributor) animalDistributorList.get(j);
+        		System.out.println("\tanimalDistributor.getName(): " + animalDistributor.getName());
+       		
+        			if(animalDistributor.getName().equals("Jackson Laboratory")) {
+                    
+        				System.out.println("\tAdded Jackson Laboratory Availability = " + availability);            
+        				jacksonLabList.add(availability);
+        			}        		
+            		if(animalDistributor.getName().equals("Investigator")) {
             
-            //System.out.println("\tAdded Availability = " + availability);
-            
-            availList.add(availability);
-    	}        
+            			System.out.println("\tAdded Investigator Availability = " + availability);            
+            			investigatorList.add(availability);
+            		}
+            	
+            		if(animalDistributor.getName().equals("MMHCC Repository")) {
+                    
+            			System.out.println("\tAdded MMHCC Repository Availability = " + availability);            
+            			mmhccList.add(availability);
+            		}            	
+            		if(animalDistributor.getName().equals("IMSR")) {
+                    
+            		System.out.println("\tAdded IMSR Repository Availability = " + availability);            
+            		imsrList.add(availability);
+            		} 
+            		
+            	} //end of if  
+        	}
+         }  //end of for       
         
         //Retrive the list of all Xenograft transplants assoicated with this Animal Model
         List xenoList = new ArrayList();
@@ -324,8 +361,12 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
         request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
         request.getSession().setAttribute(Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
-        request.getSession().setAttribute(Constants.Submit.ANIMALAVAILABILITY_LIST, availList);
         request.getSession().setAttribute(Constants.Submit.IMAGE_LIST, imageCollection);
+        
+        request.getSession().setAttribute(Constants.Submit.INVESTIGATOR_LIST, investigatorList);
+        request.getSession().setAttribute(Constants.Submit.JACKSONLAB_LIST, jacksonLabList);
+        request.getSession().setAttribute(Constants.Submit.MMHCC_LIST, mmhccList);
+        request.getSession().setAttribute(Constants.Submit.IMSR_LIST, imsrList);        
         
       //  System.out.println( "TargedModList: " + targetedList);
         

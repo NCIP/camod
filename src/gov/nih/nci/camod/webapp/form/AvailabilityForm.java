@@ -3,9 +3,12 @@ package gov.nih.nci.camod.webapp.form;
 /**
  * @author pandyas
  * 
- * $Id: AvailabilityForm.java,v 1.1 2005-10-21 16:06:33 pandyas Exp $
+ * $Id: AvailabilityForm.java,v 1.2 2005-10-26 20:14:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/21 16:06:33  pandyas
+ * implementation of animal availability
+ *
  *
  * 
  */
@@ -17,10 +20,9 @@ public class AvailabilityForm extends BaseForm implements Serializable, Availabi
     private static final long serialVersionUID = 3257125453799404851L;	
 	
     protected String name;
-    
+    protected String source;
     protected String stockNumber;
-    
-    protected String principalInvestigator;    
+ 
     
     public AvailabilityForm() {
     }    
@@ -55,12 +57,13 @@ public class AvailabilityForm extends BaseForm implements Serializable, Availabi
         this.stockNumber = stockNumber;
     }
 
-    public String getPrincipalInvestigator() {
-        return principalInvestigator;
-    }
+	public String getSource() {
+		return source;
+	}
 
-    public void setPrincipalInvestigator(String principalInvestigator) {
-        this.principalInvestigator = principalInvestigator;
-    }    
+	public void setSource(String source) {
+		this.source = source;
+	}
+   
 
 }

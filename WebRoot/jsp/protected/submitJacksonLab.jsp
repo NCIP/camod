@@ -32,7 +32,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Jackson Labratory Information </td>
+		<td class="formTitle" height="20" colspan="3">Available from Jackson Laboratory</td>
 	</tr>
 	
 		<tr>
@@ -41,17 +41,18 @@
 					<camod:cshelp key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-			<html:form action="<%= actionName %>" focus="name">		
+			<html:form action="<%= actionName %>" focus="name">	
+			<html:hidden property="source" />	
 				<input type=button value="Find Info" onClick="myRef = window.open('http://jaxmice.jax.org/index.html','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="50" property="name" name="formdata" />
+				<html:text styleClass="formFieldUnSized" size="40" property="name" name="formdata" />
 			</td>
 	</tr>                
 
 	
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field1">Stock#:
+			<td class="formRequiredLabel">Stock#:
             <camod:cshelp key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
             </td>
 			<td class="formField">
