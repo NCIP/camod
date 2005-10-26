@@ -1226,9 +1226,13 @@
 	        type="gov.nih.nci.camod.webapp.action.GeneDeliveryAction"
 	        name="geneDeliveryForm"
 	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="submitGeneDelivery">   	
+	        parameter="method"
+	        input="input"
+	        validate="true">
+	    <forward
+            name="input"
+            path="/submitGeneDelivery.do">
+        </forward>     	 	
     </action>
     
     <action path="/GeneDeliveryPopulateAction"
