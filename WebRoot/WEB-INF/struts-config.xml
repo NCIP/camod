@@ -1151,8 +1151,12 @@
 	        name="chemicalDrugForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitChemicalDrug">   	
+	        validate="true"
+	        input="input">   	
+	    <forward
+            name="input"
+            path="/submitChemicalDrug.do">
+        </forward>  
     </action>
     
     <action path="/ChemicalDrugPopulateAction"

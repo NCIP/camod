@@ -10,7 +10,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
@@ -26,26 +26,20 @@
 
 <SCRIPT LANGUAGE="JavaScript">
 
-	function chkOtherName( control ) {
-		ideControl = document.forms[0].otherName;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+	function chkOtherName() {
+	
+	    var name = document.forms[0].name;
+	    var otherName = document.forms[0].otherName;
+	
+	    chkOther(name, otherName);  	
 	}
 	
 	function chkOtherAdminRoute( control ) {
-		ideControl = document.forms[0].otherAdministrativeRoute;
+	
+		var route = document.forms[0].administrativeRoute;
+		var otherRoute = document.forms[0].otherAdministrativeRoute;
 		
-		if( control.value == "Other" )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+        chkOther(route, otherRoute);  	
 	}
 	
 </script>
@@ -60,7 +54,10 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
-		<td class="formMessage" colspan="3">* indicates a required field</td>
+		<html:errors/>		
+		<td class="formMessage" colspan="3">
+			* indicates a required field
+		</td>
 	</tr>
 	
 	<tr>
@@ -77,7 +74,7 @@
 			<br>
 			<html:form action="<%= actionName %>" focus="name">			 
 			
-			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOtherName(this);">										
+			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName(this);">										
 				<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>					
 			</html:select>	
 		</td>
@@ -87,7 +84,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Chemical/Drug:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherName"  size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="otherName"  size="30" />
 		</td>
 	</tr>
 
@@ -97,9 +94,9 @@
 		<camod:cshelp key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>					
 			</html:select>	
 		</td>
@@ -113,7 +110,7 @@
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber" name="formdata" />
+				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber"  />
 			</td>
 	</tr>
 	<!-- changed linkd to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
@@ -125,7 +122,7 @@
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber" name="formdata" />
+				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber"  />
 			</td>
 	</tr>	
 	
@@ -139,7 +136,7 @@
 		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute" name="formdata" onclick="chkOtherAdminRoute(this);">												
+			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute(this);">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>	
 		</td>
@@ -149,7 +146,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherAdministrativeRoute"  size="30" name="formdata" />			
+			<html:text styleClass="formFieldSized" property="otherAdministrativeRoute"  size="30"  />			
 		</td>
 	</tr>
 
@@ -159,7 +156,7 @@
 		<camod:cshelp key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen" size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="regimen" size="30" />
 		</td>
 	</tr>
 
@@ -167,9 +164,9 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -181,7 +178,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
