@@ -1279,8 +1279,12 @@
 	        name="growthFactorForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitGrowthFactors">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitGrowthFactors.do">
+        </forward>     	  	
     </action>
     
     <action path="/GrowthFactorPopulateAction"
@@ -1316,8 +1320,12 @@
 	        name="hormoneForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitHormone">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitHormone.do">
+        </forward>     	  	
     </action>
     
     <action path="/HormonePopulateAction"
@@ -1442,8 +1450,12 @@
 	        name="nutritionalFactorForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitNutritionalFactors">   	
+	        validate="true"
+	        input="input">  
+	     <forward
+            name="input"
+            path="/submitNutritionalFactors.do">
+        </forward>   	
     </action>
     
     <action path="/NutritionalFactorPopulateAction"

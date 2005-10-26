@@ -19,9 +19,12 @@
 	
 	String actionName = "GeneDeliveryAction.do?method=save";
 	
-	if ( aTherapyID != null  ) {
+	if ( aTherapyID != null && aTherapyID.length() > 0) {
 		actionName = "GeneDeliveryAction.do?method=edit";
 	}
+    else {
+        aTherapyID = "";
+    }
 %>
 
 

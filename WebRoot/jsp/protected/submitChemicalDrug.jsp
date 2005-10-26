@@ -20,30 +20,13 @@
 	
 	String actionName = "ChemicalDrugAction.do?method=save";
 	
-	if ( aTherapyID != null )
+	if ( aTherapyID != null && aTherapyID.length() > 0) {
 		actionName = "ChemicalDrugAction.do?method=edit";
+	}
+    else {
+        aTherapyID = "";
+    }
 %>
-
-<SCRIPT LANGUAGE="JavaScript">
-
-	function chkOtherName() {
-	
-	    var name = document.forms[0].name;
-	    var otherName = document.forms[0].otherName;
-	
-	    chkOther(name, otherName);  	
-	}
-	
-	function chkOtherAdminRoute( control ) {
-	
-		var route = document.forms[0].administrativeRoute;
-		var otherRoute = document.forms[0].otherAdministrativeRoute;
-		
-        chkOther(route, otherRoute);  	
-	}
-	
-</script>
-
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -74,7 +57,7 @@
 			<br>
 			<html:form action="<%= actionName %>" focus="name">			 
 			
-			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName(this);">										
+			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName();">										
 				<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>					
 			</html:select>	
 		</td>
@@ -136,7 +119,7 @@
 		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute(this);">												
+			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>	
 		</td>
@@ -210,28 +193,8 @@
 </tr></td></TABLE>
 
 <SCRIPT>
-	function checkOthers()
-	{
-	    ideControl = document.forms[0].name;
-	    ideOtherControl = document.forms[0].otherName;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-		
-	    ideControl = document.forms[0].administrativeRoute;
-	    ideOtherControl = document.forms[0].otherAdministrativeRoute;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-	}
-	
-	checkOthers();
+chkOtherName();
+chkOtherAdminRoute();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

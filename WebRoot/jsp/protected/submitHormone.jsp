@@ -7,7 +7,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
@@ -17,35 +17,13 @@
 	
 	String actionName = "HormoneAction.do?method=save";
 	
-	if ( aTherapyID != null )
+	if ( aTherapyID != null && aTherapyID.length() > 0) {
 		actionName = "HormoneAction.do?method=edit";
+	}
+    else {
+        aTherapyID = "";
+    }
 %>
-
-<SCRIPT LANGUAGE="JavaScript">
-
-	function chkOtherName( control ) {
-		ideControl = document.forms[0].otherName;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
-	}
-	
-	function chkOtherAdminRoute( control ) {
-		ideControl = document.forms[0].otherAdministrativeRoute;
-		
-		if( control.value == "Other" )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
-	}
-	
-</script>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -56,6 +34,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
+	    <html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 	
@@ -73,7 +52,7 @@
 			
 			<html:form action="<%= actionName %>" focus="name">			 
 			
-			<html:select styleClass="formFieldSized" size="1" property="name" name="formdata" onclick="chkOtherName( this );">												
+			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName();">												
 				<html:options name="<%= Dropdowns.HORMONEDROP %>"/>					
 			</html:select>			
 		</td>
@@ -83,7 +62,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Hormone:</label></td>
 		<td class="formField">
-			  <html:text styleClass="formFieldSized" property="otherName"  size="30" name="formdata"/>
+			  <html:text styleClass="formFieldSized" property="otherName"  size="30" />
 		</td>
 	</tr>
 
@@ -93,9 +72,9 @@
 		<camod:cshelp key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
 				<html:options name="<%= Dropdowns.HORMONEUNITSDROP %>"/>					
 			</html:select>	
  		</td>
@@ -111,7 +90,7 @@
 		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute" name="formdata" onclick="chkOtherAdminRoute(this);">												
+			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>			
 		</td>
@@ -131,7 +110,7 @@
 		<camod:cshelp key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen"  size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="regimen"  size="30" />
 		</td>
 	</tr>
 	
@@ -139,9 +118,9 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -151,7 +130,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Gender:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="type" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
 		</td>
@@ -182,27 +161,7 @@
 </tr></td></TABLE>
 
 <SCRIPT>
-	function checkOthers()
-	{
-	    ideControl = document.forms[0].name;
-	    ideOtherControl = document.forms[0].otherName;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-		
-	    ideControl = document.forms[0].administrativeRoute;
-	    ideOtherControl = document.forms[0].otherAdministrativeRoute;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-	}
-	
-	checkOthers();
+chkOtherName();
+chkOtherAdminRoute();
 </SCRIPT>
 <%@ include file="/jsp/footer.jsp" %>
