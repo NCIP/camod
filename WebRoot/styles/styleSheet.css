@@ -157,6 +157,19 @@ A.subMenuBlue:hover {
 	COLOR: #ffffff; BACKGROUND-COLOR: #0000CC
 }
 
+R:link {
+	COLOR: #D15C5C; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+}
+A.subMenuMedRed:visited {
+	COLOR: #D15C5C; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+}
+A.subMenuMedRed:active {
+	COLOR: #D15C5C; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+}
+A.subMenuMedRed:hover {
+	COLOR: #ffffff; BACKGROUND-COLOR: #D15C5C
+}
+
 .masterTitle {
 	cursor:pointer;
 	margin-bottom: 5px;
