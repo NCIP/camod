@@ -24,7 +24,20 @@
 	if ( aSpontaneousMutationID != null )
 		actionName = "SpontaneousMutationAction.do?method=edit";
 %>
+<SCRIPT LANGUAGE="JavaScript">
+		
+	function chkObservation( control ) {
+		ideControl = document.forms[0].methodOfObservation;
 
+		if( control.value != null && control.value != "" )
+			ideControl.disabled = false
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}	
+	 }
+	 
+</SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -57,7 +70,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Observation:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="observation"  size="30" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32" onkeypress="chkObservation( this );" name="formdata"/>
 		</td>
 	</tr>
 	
@@ -65,17 +78,19 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Observation:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="methodOfObservation"  size="30" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true"  name="formdata"/>
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">
-			<label for="field2"><a href="http://www.informatics.jax.org/">MGI Number:</a></label>
+			<label for="field2">MGI Number</a></label>
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="numberMGI"  size="30" name="formdata"/>
+			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>			
+			<html:text styleClass="formFieldUnSized" property="numberMGI"  size="20" name="formdata"/>
 		</td>
 	</tr>	
 	
@@ -85,7 +100,7 @@
 		<camod:cshelp key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">			
-			<html:textarea styleClass="formFieldSized" property="comments"  rows="3" cols="30" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32" name="formdata"/>
 		</td>
 	</tr>
 	
@@ -114,5 +129,22 @@
 
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<SCRIPT>
+	function checkOthers()
+	{			
+	    ideControl = document.forms[0].observation;
+	    ideOtherControl = document.forms[0].methodOfObservation;
+	
+		if( ideControl.value != "" )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}		
+	}
+	
+	checkOthers();
+	
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
