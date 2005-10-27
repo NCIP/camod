@@ -50,9 +50,6 @@
     <!-- genomicSegmentManager -->
     <bean id="genomicSegmentManager" class="gov.nih.nci.camod.service.impl.GenomicSegmentManagerImpl"/>
     
-    <!-- histopathologyManager -->
-    <bean id="histopathologyManager" class="gov.nih.nci.camod.service.impl.HistopathologyManagerImpl"/>
-    
     <!-- ImageManager -->
     <bean id="imageManager" class="gov.nih.nci.camod.service.impl.ImageManagerImpl"/>
     
