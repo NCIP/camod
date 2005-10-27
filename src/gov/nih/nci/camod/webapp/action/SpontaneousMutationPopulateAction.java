@@ -31,13 +31,15 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
         spontaneousMutationForm.setComments(theSpontaneousMutation.getComments() );
                
         List geneticList = theSpontaneousMutation.getGeneticAlterationCollection();
-        GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-        
-        spontaneousMutationForm.setObservation( theGeneticAlteration.getObservation() );
-        spontaneousMutationForm.setMethodOfObservation( theGeneticAlteration.getMethodOfObservation() );
+        if ( geneticList.size() > 0 ) {
+	        GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);        
+	        spontaneousMutationForm.setObservation( theGeneticAlteration.getObservation() );
+	        spontaneousMutationForm.setMethodOfObservation( theGeneticAlteration.getMethodOfObservation() );
+        }
         
         MutationIdentifier inMutationIdentifier = theSpontaneousMutation.getMutationIdentifier();
-        spontaneousMutationForm.setNumberMGI( inMutationIdentifier.getNumberMGI().toString() );
+        if ( inMutationIdentifier != null)
+        	spontaneousMutationForm.setNumberMGI( inMutationIdentifier.getNumberMGI().toString() );
         
         request.getSession().setAttribute(Constants.FORMDATA, spontaneousMutationForm);       
 

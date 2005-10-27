@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.7 2005-10-24 21:04:03 schroedn Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.8 2005-10-27 20:54:31 schroedn Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/24 21:04:03  schroedn
+ * Added Image to submission
+ *
  * Revision 1.6  2005/10/20 21:12:53  stewardd
  * modified to use extended MailUtil API
  *
@@ -160,28 +163,24 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         inInducedMutation.setDescription( inInducedMutationData.getDescription() );
         
          
-        // Check for exisiting GeneticAlteration
-        GeneticAlteration inGeneticAlteration = null;        
-        if ( inInducedMutation.getGeneticAlterationCollection().size() > 0 ) {
-        	inGeneticAlteration = (GeneticAlteration) inInducedMutation.getGeneticAlterationCollection().get(0);
-        	if( inInducedMutationData.getObservation() == null )
-        		inGeneticAlteration.setObservation( " " );
-        	else
-        		inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
-    		inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
-        	//inInducedMutation.addGeneticAlteration( inGeneticAlteration );       
-        } else if ( inInducedMutationData.getObservation() != null || inInducedMutationData.getMethodOfObservation() != null ) {
-        	inGeneticAlteration = new GeneticAlteration();
-        	if( inInducedMutationData.getObservation() == null )
-        		inGeneticAlteration.setObservation( " " );
-        	else
-        		inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
-        	inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
-    		inInducedMutation.addGeneticAlteration( inGeneticAlteration );       
-        } else
-        	System.out.println( " " );
-       
+        //Observation and Method of Observation
+        List geneticList = inInducedMutation.getGeneticAlterationCollection();
         
+        if ( geneticList.size() > 0 ) {
+        	GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
+			inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
+			inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );        	
+        } else {	        
+	        if( inInducedMutationData.getObservation() != null ) {
+	        	if ( ! inInducedMutationData.getObservation().equals( "" ) ) {
+					GeneticAlteration inGeneticAlteration = new GeneticAlteration();
+					inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
+					inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
+					inInducedMutation.addGeneticAlteration( inGeneticAlteration );
+	        	}
+	        }
+        }
+
         //MGI Number                
         //Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;

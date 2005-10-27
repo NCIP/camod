@@ -113,9 +113,7 @@
 			ideControl.disabled = true;
 		}
 	}
-
-
-
+	
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -307,6 +305,8 @@
 		<camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
+			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>
 		</td>
 	</tr>	
@@ -424,17 +424,13 @@
 	</tr>
 </TABLE>
 
-<!-- -->
-	</td></tr></TABLE>
-</tr></td></TABLE>
-
 <SCRIPT>
 	function checkOthers()
 	{
 	    ideControl = document.forms[0].conditionedBy;
 	    ideOtherControl = document.forms[0].description;
 			
-		if( ideControl[2].checked == true )
+		if( ideControl[0].checked == true )
 			ideOtherControl.disabled = false;
 		else {
 			ideOtherControl.disabled = true;
@@ -506,6 +502,12 @@
 	
 	checkOthers();
 </SCRIPT>
+
+<!-- -->
+	</td></tr></TABLE>
+</tr></td></TABLE>
+
+
 
 <%@ include file="/jsp/footer.jsp" %>
 

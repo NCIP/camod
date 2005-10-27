@@ -72,12 +72,23 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         inSpontaneousMutation.setName( inSpontaneousMutationData.getName() );
         inSpontaneousMutation.setComments( inSpontaneousMutationData.getComments() );
         
-        GeneticAlteration inGeneticAlteration = new GeneticAlteration();
-        inGeneticAlteration.setObservation( inSpontaneousMutationData.getObservation() );
-        inGeneticAlteration.setMethodOfObservation( inSpontaneousMutationData.getMethodOfObservation() );
+        List geneticList = inSpontaneousMutation.getGeneticAlterationCollection();
         
-        inSpontaneousMutation.addGeneticAlteration( inGeneticAlteration );
-        
+        if ( geneticList.size() > 0 ) {
+        	GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
+			inGeneticAlteration.setObservation( inSpontaneousMutationData.getObservation() );
+			inGeneticAlteration.setMethodOfObservation( inSpontaneousMutationData.getMethodOfObservation() );        	
+        } else {	        
+	        if( inSpontaneousMutationData.getObservation() != null ) {
+	        	if ( ! inSpontaneousMutationData.getObservation().equals( "" ) ) {
+					GeneticAlteration inGeneticAlteration = new GeneticAlteration();
+					inGeneticAlteration.setObservation( inSpontaneousMutationData.getObservation() );
+					inGeneticAlteration.setMethodOfObservation( inSpontaneousMutationData.getMethodOfObservation() );
+					inSpontaneousMutation.addGeneticAlteration( inGeneticAlteration );
+	        	}
+	        }
+        }
+
         //TODO: Don't create duplicate MutationIdentifiers, search for existing numbers first
         MutationIdentifier inMutationIdentifier = new MutationIdentifier();
         

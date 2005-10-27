@@ -38,6 +38,17 @@
 		}
 	}
 	
+	function chkObservation( control ) {
+		ideControl = document.forms[0].methodOfObservation;
+
+		if( control.value != null && control.value != "" )
+			ideControl.disabled = false
+		else {
+			ideControl.value = null;
+			ideControl.disabled = true;
+		}	
+	 }
+	 
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -93,6 +104,8 @@
 		<camod:cshelp key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
+			<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 			<html:text styleClass="formFieldUnSized" property="CASNumber" size="20" name="formdata"/>		
 		</td>
 	</tr>
@@ -103,6 +116,8 @@
 		<camod:cshelp key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
+		<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
+		'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 			<html:text styleClass="formFieldUnSized" property="geneId" size="20" name="formdata"/>		
 		</td>
 	</tr>
@@ -111,6 +126,8 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">MGI Number:</label></td>
 		<td class="formField">
+			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>		
 		</td>
 	</tr>
@@ -121,7 +138,7 @@
 		<camod:cshelp key="GENETIC_ALTERATION.OBSERVATION_INDUCED_MUTATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32"  name="formdata"/>		
+			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32"  name="formdata" onkeypress="chkObservation(this);"/>		
 		</td>
 	</tr>
 	
@@ -131,7 +148,7 @@
 		<camod:cshelp key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"  name="formdata"/>		
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true" name="formdata"/>		
 		</td>
 	</tr>
 	
@@ -166,5 +183,31 @@
 
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<SCRIPT>
+	function checkOthers()
+	{	
+	    ideControl = document.forms[0].type;
+	    ideOtherControl = document.forms[0].otherType;
+			
+		if( ideControl.value == 'Other' )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}		
+		
+	    ideControl = document.forms[0].observation;
+	    ideOtherControl = document.forms[0].methodOfObservation;
+	
+		if( ideControl.value != "" )
+			ideOtherControl.disabled = false;
+		else {
+			ideOtherControl.disabled = true;
+		}		
+	}
+	
+	checkOthers();
+	
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

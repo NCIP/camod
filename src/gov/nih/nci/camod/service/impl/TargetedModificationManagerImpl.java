@@ -95,18 +95,29 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		// set Targeted Gene/Locus
 		theTargetedModification.setName( inTargetedModificationData.getName() );
 
-		// Type of Modification
-		ModificationType inModificationType = null;
-		if ( theTargetedModification.getModificationTypeCollection().size() > 0 )
-			inModificationType = (ModificationType) theTargetedModification.getModificationTypeCollection().get(0);
-		else
-			inModificationType = new ModificationType();
-		
-		inModificationType.setName(inTargetedModificationData.getModificationType());
-		
-		if ( theTargetedModification.getModificationTypeCollection().size() < 1 )			
-			theTargetedModification.addModificationType(inModificationType);
-
+//		// Type of Modification
+//		List modTypeCollection = theTargetedModification.getModificationTypeCollection();
+//
+//		if ( modTypeCollection.size() > 0 ) {
+//			ModificationType inModificationType = (ModificationType) theTargetedModification.getModificationTypeCollection().get(0);	
+//			inModificationType.setName(inTargetedModificationData.getModificationType());		
+//		} else {
+//			ModificationType inModificationType = new ModificationType();
+//			inModificationType.setName(inTargetedModificationData.getModificationType());
+//			theTargetedModification.addModificationType(inModificationType);
+//		}	
+//		
+		// ModificationType
+		ModificationType inModificationType = null;	        
+        if( theTargetedModification.getModificationTypeCollection().size() > 0 )
+        	inModificationType = (ModificationType) theTargetedModification.getModificationTypeCollection().get(0);
+        else
+        	inModificationType = new ModificationType();
+        
+        inModificationType.setName( inTargetedModificationData.getModificationType() );	       	        
+               
+        theTargetedModification.addModificationType( inModificationType );
+        
 		// Other - Type of Modification
 		if (inTargetedModificationData.getOtherModificationType() != null) {
 			if (!inTargetedModificationData.getOtherModificationType().equals("")) {
@@ -170,7 +181,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		// Conditional?
 		// Check for exisiting Conditionality for this TargetedModification
 		Conditionality inConditionality = null;
-		if (theTargetedModification.getConditionality() != null)
+		if (theTargetedModification.getConditionality() != null )
 			inConditionality = theTargetedModification.getConditionality();
 		else
 			inConditionality = new Conditionality();

@@ -79,8 +79,9 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Location of Integration<br>
-													  (Required field when "Targeted" is selected<br>
-													  for the "Transgene Integration" field) </label>
+													  (Required field when "Targeted"<br>
+													  is selected for the "Transgene <br>
+													  Integration" field) </label>
 			<camod:cshelp key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
@@ -129,10 +130,12 @@
 		
 		<tr>
            <td class="formRequiredNotice" width="5">&nbsp;</td>
-           <td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label>
+           <td class="formLabel"><label for="field2">MGI Number</label>
            <camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
            </td>
            <td class="formField">
+				<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>           
 				<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>
 			</td>
         </tr>	

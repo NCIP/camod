@@ -45,11 +45,12 @@ public class InducedMutationPopulateAction extends BaseAction {
 	    if( identifier != null )
 	    	inducedMutationForm.setNumberMGI( identifier.getNumberMGI().toString() );
 	    	     
-	    List geneticList = theInducedMutation.getGeneticAlterationCollection();
-	    GeneticAlteration geneticAlt = (GeneticAlteration) geneticList.get(0);
-	    
-	    inducedMutationForm.setObservation( geneticAlt.getObservation() );
-	    inducedMutationForm.setMethodOfObservation( geneticAlt.getMethodOfObservation() );
+        List geneticList = theInducedMutation.getGeneticAlterationCollection();
+        if ( geneticList.size() > 0 ) {
+	        GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);        
+	        inducedMutationForm.setObservation( theGeneticAlteration.getObservation() );
+	        inducedMutationForm.setMethodOfObservation( theGeneticAlteration.getMethodOfObservation() );
+        }
         
 	    // setup dropdown menus
         this.dropdown(request, response);
