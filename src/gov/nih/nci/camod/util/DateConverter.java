@@ -25,19 +25,19 @@ public class DateConverter implements Converter {
     public Object convert(Class type, Object value) {
         if (value == null) {
             return null;
-        } else if (type == Date.class) {
+        } else if (type == Date.class || type == java.sql.Date.class) {
             return convertToDate(type, value);
         } else if (type == String.class) {
             return convertToString(type, value);
         }
-
+        
         throw new ConversionException("Could not convert " +
                                       value.getClass().getName() + " to " +
                                       type.getName());
     }
 
     protected Object convertToDate(Class type, Object value) {
-        DateFormat df = new SimpleDateFormat(DateUtil.getDatePattern());
+        SimpleDateFormat df = new SimpleDateFormat(DateUtil.getDatePattern());
         if (value instanceof String) {
             try {
                 if (StringUtils.isEmpty(value.toString())) {
@@ -48,13 +48,15 @@ public class DateConverter implements Converter {
             } catch (Exception pe) {
                 throw new ConversionException("Error converting String to Date");
             }
+        } else if (value instanceof java.sql.Date) {
+           return (Date) value;
         }
 
         throw new ConversionException("Could not convert " +
                                       value.getClass().getName() + " to " +
                                       type.getName());
     }
-
+    
     protected Object convertToString(Class type, Object value) {
         DateFormat df = new SimpleDateFormat(DateUtil.getDatePattern());
         if (value instanceof Date) {
@@ -66,5 +68,5 @@ public class DateConverter implements Converter {
         }
 
         return value.toString();
-    }
+    }      
 }
