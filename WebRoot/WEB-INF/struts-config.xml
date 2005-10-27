@@ -683,12 +683,26 @@
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitInducedMutation.jsp" />
 			
-		<!-- Removed forward to submitJacksonLab, IMSR, MMHCC (not used) -->
 		<action
 			path="/submitInvestigator"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitInvestigator.jsp" />
 		
+		<action
+			path="/submitJacksonLab"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitJacksonLab.jsp" />
+		
+		<action
+			path="/submitMMHCCRepo"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitMMHCCRepo.jsp" />
+			
+		<action
+			path="/submitIMSR"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitIMSR.jsp" />
+
 		<action
 			path="/submitMenu"
 			type="org.apache.struts.actions.ForwardAction"
@@ -1055,8 +1069,12 @@
 	        name="availabilityForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitJacksonLab">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitJacksonLab.do">
+        </forward>   	
      </action>    
 
     <action path="/JacksonLabPopulateAction"
@@ -1067,7 +1085,7 @@
 			validate="false">
          <forward 
     		name="next"
-    		path="/jsp/protected/submitJacksonLab.jsp">
+    		path="/submitJacksonLab.do">
     	 </forward>									
     </action>    
 
@@ -1076,8 +1094,12 @@
 	        name="availabilityForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitMMHCCRepo">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitMMHCCRepo.do">
+        </forward>   	 	
      </action>
 
     <action path="/MMHCCRepoPopulateAction"
@@ -1088,7 +1110,7 @@
 			validate="false">
          <forward 
     		name="next"
-    		path="/jsp/protected/submitMMHCCRepo.jsp">
+    		path="/submitMMHCCRepo.do">
     	 </forward>									
     </action>
 
@@ -1097,8 +1119,12 @@
 	        name="availabilityForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitInvestigator">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitInvestigator.do">
+        </forward>   	 	 	
      </action>
 
     <action path="/InvestigatorPopulateAction"
@@ -1114,8 +1140,12 @@
 	        name="availabilityForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitIMSR">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitIMSR.do">
+        </forward>	
      </action>    
     
    <action path="/IMSRPopulateAction"
@@ -1126,7 +1156,7 @@
 			validate="false">
          <forward 
     		name="next"
-    		path="/jsp/protected/submitIMSR.jsp">
+    		path="/submitIMSR.do">
     	 </forward>		
      </action>     
 

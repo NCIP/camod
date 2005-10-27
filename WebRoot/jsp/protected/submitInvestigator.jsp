@@ -30,6 +30,7 @@
 	<TABLE  cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
+	    <html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
 	</tr>
 	
@@ -38,20 +39,20 @@
 	</tr>
 	
         <tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Strain Name:</label>
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
 		<camod:cshelp key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 				<html:form action="<%= actionName %>" focus="name">
 				<html:hidden property="source" />
-				<html:text styleClass="formFieldSized" size="40" property="name"  name="formdata"/>			
+				<html:text styleClass="formFieldSized" size="40" property="name"  />			
 		</td>
 	</tr>
 	
 	<tr>
-		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel">Principal Investigator:
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel">Principal Investigator:
 		<camod:cshelp key="ANIMAL_AVAILABILITY.PRINCIPAL_INVESTIGATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
