@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.58 2005-10-27 15:29:59 georgeda Exp $
+ * $Id: Constants.java,v 1.59 2005-10-27 17:13:19 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.58  2005/10/27 15:29:59  georgeda
+ * Cleanup
+ *
  * Revision 1.57  2005/10/26 20:40:30  schroedn
  * Added AssocExpression to EngineeredTransgene submission page
  *
@@ -424,21 +427,14 @@ public class Constants {
 	public static final String TARGETED_MOD_CNT = "targetedModCnt";
 
 	public static final String INDUCED_MUT_CNT = "inducedMutCnt";
-
 	public static final String THERAPEUTIC_APPROACHES_COLL = "therapeuticApproachesColl";
-
 	public static final String CLINICAL_PROTOCOLS = "clinProtocols";
-
 	public static final String YEAST_DATA = "yeastData";
-
 	public static final String INVIVO_DATA = "invivoData";
-
 	public static final String PRECLINICAL_MODELS = "preClinicalModels";
-
+	public static final String PUBLICATIONS = "publications";
 	public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
-
 	public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
-
 	public static final String NSC_NUMBER = "nsc";
 
 	// /////////////////////////////////////////////////////////////
