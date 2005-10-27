@@ -5,99 +5,101 @@
 <beans>
 
     <!-- BaseManager -->
-    <bean id="manager" class="gov.nih.nci.camod.service.impl.BaseManager"/>    
-    
-    <!-- CellLineManager -->
-    <bean id="cellLineManager" class="gov.nih.nci.camod.service.impl.CellLineManagerImpl"/>
-    
-    <!-- CommentsManager -->
-    <bean id="commentsManager" class="gov.nih.nci.camod.service.impl.CommentsManagerImpl"/>
-    
-    <!-- EnvironmentalFactorManager -->
-    <bean id="environmentalFactorManager" class="gov.nih.nci.camod.service.impl.EnvironmentalFactorManagerImpl"/>
-    
-    <!-- GeneDeliveryManager -->
-    <bean id="geneDeliveryManager" class="gov.nih.nci.camod.service.impl.GeneDeliveryManagerImpl"/>
-    
-    <!-- GenomicSegmentManager -->
-    <bean id="genomicSegmentManager" class="gov.nih.nci.camod.service.impl.GenomicSegmentManagerImpl"/>
-    
-    <!-- HistopathologyManager -->
-    <bean id="histopathologyManager" class="gov.nih.nci.camod.service.impl.HistopathologyManagerImpl"/>
-    
-    <!-- ImageManager -->
-    <bean id="imageManager" class="gov.nih.nci.camod.service.impl.ImageManagerImpl"/>
-    
-    <!-- InducedMutationManager -->
-    <bean id="inducedMutationManager" class="gov.nih.nci.camod.service.impl.InducedMutationManagerImpl"/>
-    
-    <!-- InducedMutationManager -->
-    <bean id="logManager" class="gov.nih.nci.camod.service.impl.LogManagerImpl"/>
-    
-    <!-- MicroArrayDataManager -->
-    <bean id="microArrayDataManager" class="gov.nih.nci.camod.service.impl.MicroArrayDataManagerImpl"/>
-    
-    <!-- PersonManager -->
-    <bean id="personManager" class="gov.nih.nci.camod.service.impl.PersonManagerImpl"/>
-    
-    <!-- PublicationManager -->
-    <bean id="publicationManager" class="gov.nih.nci.camod.service.impl.PublicationManagerImpl"/>
-    
-    <!-- TargetedModificationManager -->
-    <bean id="targetedModificationManager" class="gov.nih.nci.camod.service.impl.TargetedModificationManagerImpl"/>
-    
-    <!-- TherapyManager -->
-    <bean id="therapyManager" class="gov.nih.nci.camod.service.impl.TherapyManagerImpl"/>
-    
-    <!-- TransgeneManager -->
-    <bean id="transgeneManager" class="gov.nih.nci.camod.service.impl.TransgeneManagerImpl"/>
-    
-    <!-- XenograftManager -->
-    <bean id="xenograftManager" class="gov.nih.nci.camod.service.impl.XenograftManagerImpl"/>
-    
-    <!-- AnimalModelManager -->
-    <bean id="animalModelManager" class="gov.nih.nci.camod.service.impl.AnimalModelManagerImpl"/>
-    
-    <!-- TaxonManager -->
-    <bean id="taxonManager" class="gov.nih.nci.camod.service.impl.TaxonManagerImpl"/>
-    
-    <!-- SexDistributionManager -->
-    <bean id="sexDistributionManager" class="gov.nih.nci.camod.service.impl.SexDistributionManagerImpl"/>    
-    
-    <!-- treatmentManager -->
-    <bean id="treatmentManager" class="gov.nih.nci.camod.service.impl.TreatmentManagerImpl"/>    
+    <bean id="manager" class="gov.nih.nci.camod.service.impl.BaseManager"/> 
     
     <!-- agentManager -->
     <bean id="agentManager" class="gov.nih.nci.camod.service.impl.AgentManagerImpl"/>
     
     <!-- agentTargetManager -->
     <bean id="agentTargetManager" class="gov.nih.nci.camod.service.impl.AgentTargetManagerImpl"/> 
+
+    <!--  animalAvailabilityManager -->
+    <bean id="availabilityManager" class="gov.nih.nci.camod.service.impl.AvailabilityManagerImpl"/>    
+
+    <!--  animalDistributorManager -->
+    <bean id="animalDistributorManager" class="gov.nih.nci.camod.service.impl.AnimalDistributorManagerImpl"/>     
+
+    <!-- animalModelManager -->
+    <bean id="animalModelManager" class="gov.nih.nci.camod.service.impl.AnimalModelManagerImpl"/>
     
     <!-- biologicalProcessManager   -->    
     <bean id="biologicalProcessManager" class="gov.nih.nci.camod.service.impl.BiologicalProcessManagerImpl"/>
+
+    <!-- cellLineManager -->
+    <bean id="cellLineManager" class="gov.nih.nci.camod.service.impl.CellLineManagerImpl"/>
     
     <!-- chemicalClassManager   -->    
     <bean id="chemicalClassManager" class="gov.nih.nci.camod.service.impl.ChemicalClassManagerImpl"/>
-     
-    <!-- expressionLevelDescManager --> 
-    <bean id="expressionLevelDescManager" class="gov.nih.nci.camod.service.impl.ExpressionLevelDescManagerImpl"/>
-            
-    <!-- userManager -->
-    <bean id="userManager" class="gov.nih.nci.camod.service.impl.UserManagerImpl"/>
-    
-    <!--  organManager -->
-    <bean id="organManager" class="gov.nih.nci.camod.service.impl.OrganManagerImpl"/>    
-    
-    <!--  spontaneousMutation -->
-    <bean id="spontaneousMutationManager" class="gov.nih.nci.camod.service.impl.SpontaneousMutationManagerImpl"/>
+       
+    <!-- commentsManager -->
+    <bean id="commentsManager" class="gov.nih.nci.camod.service.impl.CommentsManagerImpl"/>    
+
     
     <!--  engineeredTransgene -->
     <bean id="engineeredTransgeneManager" class="gov.nih.nci.camod.service.impl.EngineeredTransgeneManagerImpl"/>
+
+    <!-- expressionLevelDescManager --> 
+    <bean id="expressionLevelDescManager" class="gov.nih.nci.camod.service.impl.ExpressionLevelDescManagerImpl"/>
+     
+    <!-- environmentalFactorManager -->
+    <bean id="environmentalFactorManager" class="gov.nih.nci.camod.service.impl.EnvironmentalFactorManagerImpl"/>
     
-    <!--  animalDistributorManager -->
-    <bean id="animalDistributorManager" class="gov.nih.nci.camod.service.impl.AnimalDistributorManagerImpl"/>     
+    <!-- geneDeliveryManager -->
+    <bean id="geneDeliveryManager" class="gov.nih.nci.camod.service.impl.GeneDeliveryManagerImpl"/>
     
-    <!--  animalAvailabilityManager -->
-    <bean id="availabilityManager" class="gov.nih.nci.camod.service.impl.AvailabilityManagerImpl"/>    
+    <!-- genomicSegmentManager -->
+    <bean id="genomicSegmentManager" class="gov.nih.nci.camod.service.impl.GenomicSegmentManagerImpl"/>
+    
+    <!-- histopathologyManager -->
+    <bean id="histopathologyManager" class="gov.nih.nci.camod.service.impl.HistopathologyManagerImpl"/>
+    
+    <!-- ImageManager -->
+    <bean id="imageManager" class="gov.nih.nci.camod.service.impl.ImageManagerImpl"/>
+    
+    <!-- inducedMutationManager -->
+    <bean id="inducedMutationManager" class="gov.nih.nci.camod.service.impl.InducedMutationManagerImpl"/>
+    
+    <!-- inducedMutationManager -->
+    <bean id="logManager" class="gov.nih.nci.camod.service.impl.LogManagerImpl"/>
+    
+    <!-- microArrayDataManager -->
+    <bean id="microArrayDataManager" class="gov.nih.nci.camod.service.impl.MicroArrayDataManagerImpl"/>
+
+    <!--  organManager -->
+    <bean id="organManager" class="gov.nih.nci.camod.service.impl.OrganManagerImpl"/>    
+    
+    <!-- personManager -->
+    <bean id="personManager" class="gov.nih.nci.camod.service.impl.PersonManagerImpl"/>
+    
+    <!-- publicationManager -->
+    <bean id="publicationManager" class="gov.nih.nci.camod.service.impl.PublicationManagerImpl"/>
+    
+    <!-- targetedModificationManager -->
+    <bean id="targetedModificationManager" class="gov.nih.nci.camod.service.impl.TargetedModificationManagerImpl"/>
+    
+    <!-- therapyManager -->
+    <bean id="therapyManager" class="gov.nih.nci.camod.service.impl.TherapyManagerImpl"/>
+    
+    <!-- transgeneManager -->
+    <bean id="transgeneManager" class="gov.nih.nci.camod.service.impl.TransgeneManagerImpl"/>
+    
+    <!-- taxonManager -->
+    <bean id="taxonManager" class="gov.nih.nci.camod.service.impl.TaxonManagerImpl"/>
+    
+    <!-- sexDistributionManager -->
+    <bean id="sexDistributionManager" class="gov.nih.nci.camod.service.impl.SexDistributionManagerImpl"/>    
+
+    <!--  spontaneousMutation -->
+    <bean id="spontaneousMutationManager" class="gov.nih.nci.camod.service.impl.SpontaneousMutationManagerImpl"/>
+    
+    <!-- treatmentManager -->
+    <bean id="treatmentManager" class="gov.nih.nci.camod.service.impl.TreatmentManagerImpl"/>    
+           
+    <!-- userManager -->
+    <bean id="userManager" class="gov.nih.nci.camod.service.impl.UserManagerImpl"/>
+    
+    <!-- XenograftManager -->
+    <bean id="xenograftManager" class="gov.nih.nci.camod.service.impl.XenograftManagerImpl"/>
+    
            
 </beans>
