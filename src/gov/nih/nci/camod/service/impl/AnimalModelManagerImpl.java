@@ -1,12 +1,9 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.47 2005-10-27 15:29:59 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.48 2005-10-27 17:15:22 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
- * Revision 1.46  2005/10/27 12:52:50  georgeda
- * Refactor of publication manager
- *
  * Revision 1.45  2005/10/26 20:42:52  schroedn
  * merged changes, Added AssocExpression to EngineeredTransgene submission page
  *
@@ -128,52 +125,11 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalAvailability;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.AnimalModelSearchResult;
-import gov.nih.nci.camod.domain.Availability;
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.Image;
-import gov.nih.nci.camod.domain.InducedMutation;
-import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Phenotype;
-import gov.nih.nci.camod.domain.Publication;
-import gov.nih.nci.camod.domain.SexDistribution;
-import gov.nih.nci.camod.domain.SpontaneousMutation;
-import gov.nih.nci.camod.domain.TargetedModification;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Transgene;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
-import gov.nih.nci.camod.webapp.form.AvailabilityData;
-import gov.nih.nci.camod.webapp.form.CellLineData;
-import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
-import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
-import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
-import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
-import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
-import gov.nih.nci.camod.webapp.form.GrowthFactorData;
-import gov.nih.nci.camod.webapp.form.HormoneData;
-import gov.nih.nci.camod.webapp.form.ImageData;
-import gov.nih.nci.camod.webapp.form.InducedMutationData;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
-import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
-import gov.nih.nci.camod.webapp.form.PublicationData;
-import gov.nih.nci.camod.webapp.form.RadiationData;
-import gov.nih.nci.camod.webapp.form.SearchData;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
-import gov.nih.nci.camod.webapp.form.SurgeryData;
-import gov.nih.nci.camod.webapp.form.TargetedModificationData;
-import gov.nih.nci.camod.webapp.form.TherapyData;
-import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
-import gov.nih.nci.camod.webapp.form.XenograftData;
+import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -181,13 +137,7 @@ import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -969,18 +919,17 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
     }
 
-    public void addAssociatedExpression(AnimalModel inAnimalModel, Transgene inTransgene,
-            AssociatedExpressionData inAssociatedExpressionData) throws Exception {
+    public void addAssociatedExpression( AnimalModel inAnimalModel, EngineeredGene inEngineeredGene, AssociatedExpressionData inAssociatedExpressionData ) throws Exception {
 
         System.out.println("<AnimalModelManagerImpl addAssociatedExpression>");
         log.trace("Entering AnimalModelManagerImpl.addAssociatedExpression");
 
-        // addAssociatedExpression (ExpressionFeature
-        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData, inTransgene);
-
-        save(inAnimalModel);
-
-        log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
+    	//addAssociatedExpression (ExpressionFeature
+    	EngineeredTransgeneManagerSingleton.instance().createAssocExpression( inAssociatedExpressionData, inEngineeredGene );
+    	    	
+    	save( inAnimalModel );
+    	
+    	log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
 
     public void addPublication(AnimalModel inAnimalModel, PublicationData inPublicationData) throws Exception {
