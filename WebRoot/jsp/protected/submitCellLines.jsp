@@ -19,8 +19,13 @@
 	
 	String actionName = "CellLineAction.do?method=save";
 	
-	if ( aCellID != null )
-		actionName = "CellLineAction.do?method=edit";			
+    if ( aCellID != null && aCellID.length() > 0) {
+		actionName = "CellLineAction.do?method=edit";
+	}
+    else {
+        aCellID = "";
+    }
+    
 %>
 
 
@@ -47,7 +52,7 @@
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="cellLineName">
 								
-			<html:text styleClass="formFieldSized" size="30" name="formdata" property="cellLineName" />			
+			<html:text styleClass="formFieldSized" size="30" property="cellLineName" />			
 		</td>
 	</tr>
 
@@ -62,7 +67,7 @@
 
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="organ" size="30" name="formdata"/>
+				<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30" />
 			</td>
 	</tr>
 	
@@ -72,7 +77,7 @@
 		<camod:cshelp key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" name="formdata" property="experiment" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
 			</td>
 	</tr>
 
@@ -82,7 +87,7 @@
 		<camod:cshelp key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" name="formdata" property="results" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
 			</td>
 	</tr>
 	
@@ -92,7 +97,7 @@
 		<camod:cshelp key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" name="formdata" property="comments" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
 			</td>
 	</tr>	
 

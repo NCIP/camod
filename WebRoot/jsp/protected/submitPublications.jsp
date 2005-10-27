@@ -60,7 +60,7 @@
 		<td class="formField">
 			<label>(e.g. Doe JR)</label>
 			<br>
-			<html:text styleClass="formFieldSized" size="30" property="authors" name="formdata"/>
+			<html:text styleClass="formFieldSized" size="30" property="authors" />
 		</td>
 	</tr>
 
@@ -68,7 +68,7 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Publication Status:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="name" name="formdata">												
+			<html:select styleClass="formFieldUnSized" size="1" property="name" >												
 				<html:options name="<%= Dropdowns.PUBDROP %>"/>					
 			</html:select>				
 		</td>
@@ -95,7 +95,7 @@
 			<br>
 			<label valign="TOP" for="field1">PMID &nbsp;</label>
 			<br>
-			<html:text styleClass="formFieldUnSized" size="20" property="pmid" name="formdata" />
+			<html:text styleClass="formFieldUnSized" size="20" property="pmid"  />
 			<html:button property="none" onclick="getPubMed(this)">Fill in Fields</html:button>			
 		</td>
 	</tr>
@@ -104,7 +104,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Title of Publication</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="30" property="title" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" size="30" property="title" />
 		</td>
 	</tr>
 
@@ -112,7 +112,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Year of Publication:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="year" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" size="10" property="year" />
 		</td>
 	</tr>
 
@@ -120,7 +120,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Journal:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="20" property="journal" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" size="20" property="journal" />
 		</td>
 	</tr>
 
@@ -128,7 +128,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Volume:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="volume" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" size="10" property="volume" />
 		</td>
 	</tr>
 
@@ -136,7 +136,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Start Page:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="startPage" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" size="10" property="startPage" />
 		</td>
 	</tr>
 
@@ -144,7 +144,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">End Page:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="10" property="endPage" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" size="10" property="endPage" />
 		</td>
 	</tr>
 

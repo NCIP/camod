@@ -22,8 +22,12 @@
 	
 	String actionName = "ImageAction.do?method=save";
 	
-	if ( aImageID != null )
+	if ( aImageID != null && aImageID.length() > 0) {
 		actionName = "ImageAction.do?method=edit";
+	}
+	else {
+	    aImageID = "";
+	}
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -34,6 +38,7 @@
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 		<tr>
+		    <html:errors/>
 			<td class="formMessage" colspan="3">* indicates a required field</td>
 		</tr>
 
@@ -48,30 +53,19 @@
 			
 			<html:form action="<%= actionName %>" focus="fileLocation" enctype="multipart/form-data">	
 			
-			<% 
-				 // Only display a thumbnail if Image exists
-			     ImageForm theImageForm = (ImageForm) request.getSession().getAttribute("formdata");
+			<c:if test="${not empty imageForm.fileServerLocation}">
+				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${imageForm.fileServerLocation}',600,600);"/>
+			
+				Current Image: <c:out value="${imageForm.fileServerLocation}"/><br>
+				Current Image Thumbnail: <br>
 					
-				 if ( theImageForm.getFileServerLocation() != null ) {
-				 	if ( ! theImageForm.getFileServerLocation().equals( "" ) ) {
-				 	
-				 		pageContext.setAttribute("fileServerLocationName", theImageForm.getFileServerLocation() );
-			%>
-						<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${fileServerLocationName}',600,600);"/>
-					
-						Current Image: <bean:write name="formdata" property="fileServerLocation"/><br>
-						Current Image Thumbnail: <br>
-							
-						<a href='<c:out value="${uri}"/>'>			
+				<a href='<c:out value="${uri}"/>'>			
+				
+				<img src="http://caimage-dev.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&amp;img=<c:out value="${imageForm.fileServerLocation}"/>&amp;thumbspec=" main="" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
+				Click to View</a><br><br>									
+			</c:if>
 						
-						<img src="http://caimage-dev.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&amp;img=<bean:write name='formdata' property='fileServerLocation'/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
-						Click to View</a><br><br>									
-			<% 
-					} 
-				} 			
-			%>
-						
-			<html:file styleClass="formFieldSized" size="40" property="fileLocation" name="formdata"/>	
+			<html:file styleClass="formFieldSized" size="40" property="fileLocation"/>	
 			
 			</td>
 		</tr>
@@ -80,7 +74,7 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Title of Construct<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="32" name="formdata"/>
+				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="40"/>
 			</td>
 		</tr>
 
@@ -88,7 +82,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="32"  name="formdata"/>	
+				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="40" />	
 		</tr>
 
 		<tr>
