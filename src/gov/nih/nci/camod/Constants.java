@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.57 2005-10-26 20:40:30 schroedn Exp $
+ * $Id: Constants.java,v 1.58 2005-10-27 15:29:59 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.57  2005/10/26 20:40:30  schroedn
+ * Added AssocExpression to EngineeredTransgene submission page
+ *
  * Revision 1.56  2005/10/24 22:00:48  pandyas
  * added back availability_list so it doesn't break everyone else
  *
@@ -309,15 +312,15 @@ public class Constants {
 	/**
 	 * Defines the global constants used as parameters for ftp requests
 	 */
-	public interface Images {
+	public interface CaImage {
 
-		public static final String FTPSERVER = "ftp.server";
+		public static final String FTPSERVER = "caimage.ftp.server";
 
-		public static final String FTPUSERNAME = "ftp.username";
+		public static final String FTPUSERNAME = "caimage.ftp.username";
 
-		public static final String FTPPASSWORD = "ftp.password";
+		public static final String FTPPASSWORD = "caimage.ftp.password";
 
-		public static final String FTPSTORAGEDIRECTORY = "ftp.storagedirectory";
+		public static final String FTPSTORAGEDIRECTORY = "caimage.ftp.storagedirectory";
 	}
 
 	/**

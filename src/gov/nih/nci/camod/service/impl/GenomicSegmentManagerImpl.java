@@ -179,10 +179,10 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 		                ResourceBundle theBundle = ResourceBundle.getBundle( "camod" );
 
 		                // Iterate through all the reciepts in the config file
-		                String ftpServer = 	theBundle.getString( Constants.Images.FTPSERVER );
-		                String ftpUsername = theBundle.getString( Constants.Images.FTPUSERNAME );
-	                	String ftpPassword = theBundle.getString( Constants.Images.FTPPASSWORD );
-		                String ftpStorageDirectory = theBundle.getString( Constants.Images.FTPSTORAGEDIRECTORY );
+		                String ftpServer = 	theBundle.getString( Constants.CaImage.FTPSERVER );
+		                String ftpUsername = theBundle.getString( Constants.CaImage.FTPUSERNAME );
+	                	String ftpPassword = theBundle.getString( Constants.CaImage.FTPPASSWORD );
+		                String ftpStorageDirectory = theBundle.getString( Constants.CaImage.FTPSTORAGEDIRECTORY );
 		                
 		                //Upload the file to caIMAGE
 			            FtpUtil ftpUtil = new FtpUtil();	           		            

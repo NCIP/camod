@@ -34,10 +34,9 @@ public final class ImageAction extends BaseAction {
                                 HttpServletRequest request,
                                 HttpServletResponse response)
     throws Exception {
-        if (log.isDebugEnabled()) {
+        
             log.debug("Entering 'delete' method");
-        }
-
+      
         return mapping.findForward("");
     }
 
@@ -77,9 +76,6 @@ public final class ImageAction extends BaseAction {
 
         // Create a form to edit
         ImageForm imageForm = (ImageForm) form;
-        //request.getSession().setAttribute(Constants.FORMDATA, imageForm);
-        // Create a form to edit
-        //EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
                                   
         // Grab the current modelID from the session
         String aImageID = request.getParameter("aImageID");
@@ -95,11 +91,13 @@ public final class ImageAction extends BaseAction {
         try {
         	
             log.info("Image edit");            
+            
             // retrieve model and update w/ new values
             ImageManager imageManager = (ImageManager) getBean("imageManager");
             Image theImage = imageManager.get(aImageID);
 
-            imageManager.update(imageForm, theImage, request);
+            String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+            imageManager.update(imageForm, theImage, inPath);
             
             log.info("New Image created");
 
@@ -157,7 +155,8 @@ public final class ImageAction extends BaseAction {
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
-            theAnimalModelManager.addImage( theAnimalModel, imageForm, request );
+            String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+            theAnimalModelManager.addImage( theAnimalModel, imageForm, inPath);
 
             log.info("New Image created");
 

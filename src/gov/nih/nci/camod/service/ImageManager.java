@@ -11,11 +11,9 @@ import gov.nih.nci.camod.webapp.form.ImageData;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 public interface ImageManager {
-	
-	public List getAll() throws Exception;
+
+    public List getAll() throws Exception;
 
     public Image get(String id) throws Exception;
 
@@ -23,8 +21,8 @@ public interface ImageManager {
 
     public void remove(String id) throws Exception;
 
-    public Image create(ImageData inImageData, HttpServletRequest request) throws Exception;
+    public Image create(ImageData inImageData, String inPath) throws Exception;
 
-    public void update(ImageData inImageData, Image inImage, HttpServletRequest request) throws Exception;   	
-    
+    public void update(ImageData inImageData, Image inImage, String inPath) throws Exception;
+
 }

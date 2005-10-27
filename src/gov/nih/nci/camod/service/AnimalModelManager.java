@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.27 2005-10-27 12:52:40 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.28 2005-10-27 15:29:59 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2005/10/27 12:52:40  georgeda
+ * Refactor of publication manager
+ *
  * Revision 1.26  2005/10/26 20:42:13  schroedn
  * merged changes, Added AssocExpression to EngineeredTransgene submission page
  *
@@ -57,6 +60,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2005/10/27 12:52:40  georgeda
+ * Refactor of publication manager
+ *
  * Revision 1.26  2005/10/26 20:42:13  schroedn
  * merged changes, Added AssocExpression to EngineeredTransgene submission page
  *
@@ -190,7 +196,7 @@ public interface AnimalModelManager {
     
     public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request) throws Exception;
 
-    public void addImage(AnimalModel inAnimalModel, ImageData inImageData, HttpServletRequest request) throws Exception;
+    public void addImage(AnimalModel inAnimalModel, ImageData inImageData, String inPath) throws Exception;
     
     public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception; 
     
