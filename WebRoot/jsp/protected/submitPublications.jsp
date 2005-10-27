@@ -93,7 +93,7 @@
 			<label valign="TOP" for="field1"><a href="#">Click to look up PubMed Identifier</a></label><br>
 			<br>
 			<br>
-			<label valign="TOP" for="field1">PMID &nbsp;</label>
+			<label valign="TOP" for="field1">PMID: &nbsp;</label>
 			<br>
 			<html:text styleClass="formFieldUnSized" size="20" property="pmid"  />
 			<html:button property="none" onclick="getPubMed(this)">Fill in Fields</html:button>			
@@ -102,7 +102,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Title of Publication</label></td>
+		<td class="formLabel"><label for="field1">Title of Publication:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" size="30" property="title" />
 		</td>

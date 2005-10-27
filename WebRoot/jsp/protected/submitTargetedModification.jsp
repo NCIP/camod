@@ -76,7 +76,7 @@
 	</tr>
 
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Information for the Targeted Modification</td>
+		<td class="formTitle" height="20" colspan="3">Targeted Modification</td>
 	</tr>
 
 	<tr>
@@ -126,13 +126,13 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel">Genetic Background</td>
+		<td class="formLabel">Genetic Background:</td>
 		<td class="formField">
-			<label valign="TOP" for="field1">ES Cell Line &nbsp;</label><br>
+			<label valign="TOP" for="field1">ES Cell Line: &nbsp;</label><br>
 				<html:text styleClass="formFieldSized" property="esCellLineName" size="10" name="formdata"/>
 			<br>
 			<br>
-			<label valign="TOP" for="field1">Blastocyst&nbsp;</label><br>
+			<label valign="TOP" for="field1">Blastocyst:&nbsp;</label><br>
 				<html:text styleClass="formFieldSized" property="blastocystName" size="10" name="formdata"/>
 		</td>
 	</tr>
@@ -148,7 +148,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Conditional Description</label>
+		<td class="formLabel"><label for="field2">Conditional Description:</label>
 		<camod:cshelp key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -158,7 +158,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Additional Features</label>
+		<td class="formLabel"><label for="field2">Additional Features:</label>
 		<camod:cshelp key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -168,7 +168,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label>
+		<td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number:</a></label>
 		<camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -182,7 +182,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
+		<td class="formLabel"><label for="field1">Upload Construct Map (Image):</label></td>
 		<td class="formField">
 					
 		<% 

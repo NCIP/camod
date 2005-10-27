@@ -54,12 +54,12 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Information for Induced Mutation:</td>
+		<td class="formTitle" height="20" colspan="3">Induced Mutation:</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Name of Inducing Agent</label></td>
+		<td class="formRequiredLabel"><label for="field1">Name of Inducing Agent:</label></td>
 		<td class="formField">					
 			<html:form action="<%= actionName %>" focus="name">	
 				
@@ -69,7 +69,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel">Inducing Agent Category</td>
+		<td class="formRequiredLabel">Inducing Agent Category:</td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="type" onchange="chkOther( this );" >
 				<html:options name="<%= Dropdowns.INDUCEDMUTATIONDROP %>" />										
@@ -81,7 +81,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Category</label></td>
+		<td class="formLabel"><label for="field1">Other Category:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="otherType" disabled="true" size="30" name="formdata"/>		
 		</td>
@@ -89,7 +89,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">CAS number</label>
+		<td class="formLabel"><label for="field1">CAS number:</label>
 		<camod:cshelp key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -99,7 +99,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gene ID ( Entrez )</label>
+		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label>
 		<camod:cshelp key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">

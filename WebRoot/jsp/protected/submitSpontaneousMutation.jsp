@@ -40,7 +40,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Information for Spontaneous Mutation:</td>
+		<td class="formTitle" height="20" colspan="3">Spontaneous Mutation:</td>
 	</tr>
 	
 	<tr>
@@ -72,7 +72,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">
-			<label for="field2"><a href="http://www.informatics.jax.org/">MGI Number</a></label>
+			<label for="field2"><a href="http://www.informatics.jax.org/">MGI Number:</a></label>
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="numberMGI"  size="30" name="formdata"/>
@@ -81,7 +81,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comments Field</label>
+		<td class="formLabel"><label for="field1">Comments Field:</label>
 		<camod:cshelp key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">			
