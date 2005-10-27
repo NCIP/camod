@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorPopulateAction.java,v 1.6 2005-10-20 20:39:17 pandyas Exp $
+ * $Id: NutritionalFactorPopulateAction.java,v 1.7 2005-10-27 19:25:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 20:39:17  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -127,11 +130,11 @@ public class NutritionalFactorPopulateAction extends BaseAction{
 				System.out.println( "<NutritionalFactorPopulateAction dropdown> Entering void dropdown()" );
 							
 				//Prepopulate all dropdown fields, set the global Constants to the following
-                NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.NUTRITIONFACTORDROP, "" );
+                NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.NUTRITIONFACTORDROP, Constants.Dropdowns.ADD_BLANK );
 
                 NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NUTFACTORUNITSDROP, "" );
                 NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
-                NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
+                NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK );
 				
 				System.out.println( "<NutritionalFactorPopulateAction dropdown> Exiting void dropdown()" );
 

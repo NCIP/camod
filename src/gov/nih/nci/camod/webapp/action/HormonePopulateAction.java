@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: HormonePopulateAction.java,v 1.7 2005-10-20 20:38:41 pandyas Exp $
+ * $Id: HormonePopulateAction.java,v 1.8 2005-10-27 19:25:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/20 20:38:41  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -135,10 +138,10 @@ public class HormonePopulateAction extends BaseAction {
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
 
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEDROP, "" );
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEDROP, Constants.Dropdowns.ADD_BLANK );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.HORMONEUNITSDROP, "" );
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );        
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, Constants.Dropdowns.ADD_BLANK );
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK );        
 	}	
 }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationPopulateAction.java,v 1.7 2005-10-20 20:39:44 pandyas Exp $
+ * $Id: RadiationPopulateAction.java,v 1.8 2005-10-27 19:25:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/20 20:39:44  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -137,12 +140,12 @@ public class RadiationPopulateAction extends BaseAction {
 			System.out.println( "<RadiationPopulateAction dropdown> Entering void dropdown()" );
 					
 			//Prepopulate all dropdown fields, set the global Constants to the following
-            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.RADIATIONDROP, "" );
+            NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.RADIATIONDROP, Constants.Dropdowns.ADD_BLANK );
 
-            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, Constants.Dropdowns.ADD_BLANK );
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.RADIATIONUNITSDROP, "" );
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "" );
-            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );
+            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK );
 			
 			System.out.println( "<RadiationPopulateAction dropdown> Exiting void dropdown()" );
 

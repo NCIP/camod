@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugPopulateAction.java,v 1.10 2005-10-20 20:37:29 pandyas Exp $
+ * $Id: ChemicalDrugPopulateAction.java,v 1.11 2005-10-27 19:25:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/10/20 20:37:29  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -106,11 +109,7 @@ public class ChemicalDrugPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         System.out.println("<ChemicalDrugPopulateAction dropdown> ... ");
-
-        // blank out the FORMDATA Constant field
-        ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, chemicalDrugForm);
-
+     
         // setup dropdown menus
         this.dropdown(request, response);
 
@@ -132,12 +131,12 @@ public class ChemicalDrugPopulateAction extends BaseAction {
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGDROP, Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMTHERAPYDOSEUNITSDROP, "");
         System.out.println("Before admin");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, Constants.Dropdowns.ADD_BLANK);
 
         System.out.println("Finishing dropdown");
     }

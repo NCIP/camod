@@ -113,6 +113,9 @@
     </form>
 
 	<form name="geneDeliveryForm">
+	    <field property="viralVector" depends="validwhen, maxlength">
+            <arg0 key="GeneDeliveryForm.viralVector"/>
+        </field>
         <field property="otherViralVector" depends="validwhen, maxlength">
             <arg0 key="GeneDeliveryForm.otherViralVector"/>
             <var>
@@ -124,7 +127,10 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
-        </field>     
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="ModelCharacteristicsForm.type"/>
+        </field>
         <field property="geneInVirus" depends="required, maxlength">
             <arg0 key="GeneDeliveryForm.geneInVirus"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -152,6 +158,15 @@
 	</form>	
 
 	<form name="chemicalDrugForm">
+	    <field property="name" depends="required">
+            <arg0 key="ChemicalDrugForm.name"/>
+        </field>
+        <field property="administrativeRoute" depends="required">
+            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
+        </field>     
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="ChemicalDrugForm.otherName"/>
             <var>
@@ -202,6 +217,9 @@
 	</form>	
 	
 	<form name="environmentalFactorForm">
+	    <field property="name" depends="required">
+            <arg0 key="EnvironmentalFactorForm.name"/>
+        </field>
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="EnvironmentalFactorForm.otherName"/>
             <var>
@@ -213,6 +231,12 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
+        </field>
+        <field property="administrativeRoute" depends="required">
+            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -253,6 +277,9 @@
 	</form>
 	
 	<form name="growthFactorForm">
+	    <field property="name" depends="required">
+	        <arg0 key="GrowthFactorForm.name"/>
+	    </field>
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="GrowthFactorForm.otherName"/>
             <var>
@@ -264,6 +291,12 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
+        </field>
+        <field property="administrativeRoute" depends="required">
+            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -304,6 +337,9 @@
 	</form>
 	
 	<form name="hormoneForm">
+	    <field property="name" depends="required">
+            <arg0 key="HormoneForm.name"/>
+        </field>
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="HormoneForm.otherName"/>
             <var>
@@ -315,6 +351,12 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
+        </field>
+        <field property="administrativeRoute" depends="required">
+            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -355,6 +397,9 @@
 	</form>		
 
 	<form name="nutritionalFactorForm">
+        <field property="name" depends="required">
+            <arg0 key="NutritionalFactorsForm.name"/>
+        </field>
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="NutritionalFactorsForm.otherName"/>
             <var>
@@ -366,6 +411,9 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -394,6 +442,9 @@
 	</form>		
 	
 	<form name="radiationForm">
+        <field property="name" depends="required">
+            <arg0 key="RadiationForm.name"/>
+        </field>
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="RadiationForm.otherName"/>
             <var>
@@ -405,6 +456,12 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
+        </field>
+        <field property="administrativeRoute" depends="required">
+            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -445,6 +502,9 @@
 	</form>	
 
 	<form name="surgeryForm">
+        <field property="name" depends="required">
+            <arg0 key="SurgeryForm.name"/>
+        </field>
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="SurgeryForm.otherName"/>
             <var>
@@ -456,6 +516,9 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -476,6 +539,9 @@
 	</form>	
 	
 	<form name="viralTreatmentForm">
+	    <field property="name" depends="required">
+            <arg0 key="ViralTreatmentForm.name"/>
+        </field>
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="ViralTreatmentForm.otherName"/>
             <var>
@@ -487,6 +553,12 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
+        </field>
+        <field property="type" depends="required">
+            <arg0 key="CarcinogenicIntervention.type"/>
+        </field>
+        <field property="administrativeRoute" depends="required">
+            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>

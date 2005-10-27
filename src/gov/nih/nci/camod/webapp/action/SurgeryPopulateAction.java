@@ -117,8 +117,8 @@ public class SurgeryPopulateAction extends BaseAction {
 	
 		//Prepopulate all dropdown fields, set the global Constants to the following
 					
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK );			 		
         NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );
-        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SURGERYDROP, "" );		
+        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SURGERYDROP, Constants.Dropdowns.ADD_BLANK );		
 	}	
 }

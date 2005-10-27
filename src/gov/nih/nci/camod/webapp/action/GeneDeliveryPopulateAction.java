@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.9 2005-10-26 13:45:16 georgeda Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.10 2005-10-27 19:25:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/26 13:45:16  georgeda
+ * More cleanup
+ *
  * Revision 1.8  2005/10/20 20:24:22  pandyas
  * added javadocs
  *
@@ -133,8 +136,8 @@ public class GeneDeliveryPopulateAction extends BaseAction{
 			System.out.println( "<GeneDeliveryPopulateAction dropdown> Entering void dropdown()" );
 				
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.VIRALVECTORDROP, "" );
-	        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, "" );			 		
+			NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.VIRALVECTORDROP, Constants.Dropdowns.ADD_BLANK );
+	        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK );			 		
 	        NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.AGEUNITSDROP, "" );			
 			
 			System.out.println( "<GeneDeliveryPopulateAction dropdown> Exiting void dropdown()" );
