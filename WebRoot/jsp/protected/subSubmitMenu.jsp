@@ -52,27 +52,67 @@
 					
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aEngineeredTransgeneID }' /> "><bean:write name="aExpressionFeature" property="organ.name" filter="true"/></a><br>
-				</logic:iterate>
+					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aEngineeredTransgeneID }' /> ">
+						<bean:write name="aExpressionFeature" property="organ.name" filter="true"/>
+					</a><br>
 					
+				</logic:iterate>					
 		</logic:iterate>		
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GenomicSegmentPopulateAction.do?method=dropdown">Enter Genomic Segment</html:link><br>
 		<logic:iterate id="aGenomicSegment" name="genomicsegment_list" type="GenomicSegment">
+		
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="GenomicSegmentPopulateAction.do?method=populate" paramId="aGenomicSegmentID" paramName="aGenomicSegment" paramProperty="id">
 			      		<bean:write name="aGenomicSegment" property="locationOfIntegration" filter="true"/>
 			      </html:link><br>
+			      
+			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      <img src="images/plus.gif" border="0"> 
+			      <html:link styleClass="subMenuDarkRed" action="AssociatedExpressionPopulateAction.do?method=dropdown" paramId="aEngineeredTransgeneID" paramName="aGenomicSegment" paramProperty="id">Enter Assoc Expression</html:link><br>
+			      
+			    <bean:define id="expressionFeatureList" name="aGenomicSegment" property="expressionFeatureCollection" />
+				<logic:iterate id="aExpressionFeature" name="expressionFeatureList" type="ExpressionFeature">
+					
+					<bean:define id="aAssociatedExpressionID" name="aExpressionFeature" property="id" />
+					<bean:define id="aGenomicSegmentID" name="aGenomicSegment" property="id" />
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="images/aquadot_red.jpg" border="0"> 
+					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aGenomicSegmentID }' /> ">
+						<bean:write name="aExpressionFeature" property="organ.name" filter="true"/>
+					</a><br>
+					
+				</logic:iterate>	
 		</logic:iterate>		
 			
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="TargetedModificationPopulateAction.do?method=dropdown">Enter Targeted Modification</html:link><br>
 		<logic:iterate id="aTargetedModification" name="targetedmodification_list" type="TargetedModification">
+			  
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="TargetedModificationPopulateAction.do?method=populate" paramId="aTargetedModificationID" paramName="aTargetedModification" paramProperty="id">
 			      		<bean:write name="aTargetedModification" property="name" filter="true"/>
 			      </html:link><br>
+			      
+			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      <img src="images/plus.gif" border="0"> 
+			      <html:link styleClass="subMenuDarkRed" action="AssociatedExpressionPopulateAction.do?method=dropdown" paramId="aEngineeredTransgeneID" paramName="aTargetedModification" paramProperty="id">Enter Assoc Expression</html:link><br>
+			      
+			    <bean:define id="expressionFeatureList" name="aTargetedModification" property="expressionFeatureCollection" />
+				<logic:iterate id="aExpressionFeature" name="expressionFeatureList" type="ExpressionFeature">
+					
+					<bean:define id="aAssociatedExpressionID" name="aExpressionFeature" property="id" />
+					<bean:define id="aTargetedModificationID" name="aTargetedModification" property="id" />
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="images/aquadot_red.jpg" border="0"> 
+					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aTargetedModificationID }' /> ">
+						<bean:write name="aExpressionFeature" property="organ.name" filter="true"/>
+					</a><br>
+					
+				</logic:iterate>	
 		</logic:iterate>
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="InducedMutationPopulateAction.do?method=dropdown">Enter Induced Mutation</html:link><br>

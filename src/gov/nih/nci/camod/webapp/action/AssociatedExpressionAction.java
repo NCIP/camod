@@ -1,8 +1,10 @@
 package gov.nih.nci.camod.webapp.action;
 
+import java.util.List;
+
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.EngineeredTransgeneManager;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionForm;
@@ -38,7 +40,7 @@ public class AssociatedExpressionAction extends BaseAction {
         request.getSession().setAttribute(Constants.FORMDATA, associatedExpressionForm);
              
         // Grab the current modelID from the session
-        //String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         
         // Grab the current Engineered Transgene that is being edited from the session
         String aEngineeredGeneID = request.getParameter("engineeredGeneID");
@@ -61,10 +63,16 @@ public class AssociatedExpressionAction extends BaseAction {
         
         try {
         	
-            EngineeredTransgeneManager theEngineeredTransgeneManager = (EngineeredTransgeneManager) getBean( "engineeredTransgeneManager" );
-            Transgene engGene = theEngineeredTransgeneManager.get( aEngineeredGeneID );
+            EngineeredTransgeneManager theEngineeredTransgeneManager = (EngineeredTransgeneManager) getBean( "engineeredTransgeneManager" );        
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");            
+            AnimalModel theAnimalModel = theAnimalModelManager.get( theModelId );
             
-            theEngineeredTransgeneManager.updateAssociatedExpression( associatedExpressionForm, engGene );
+            List engineeredGeneList = theAnimalModel.getEngineeredGeneCollection();
+            for (int i = 0; i < engineeredGeneList.size(); i++) {
+            	EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);    
+            	if ( engineeredGene.getId().toString().equals(aEngineeredGeneID) ) 
+            		theEngineeredTransgeneManager.updateAssociatedExpression( associatedExpressionForm, engineeredGene );
+            }
             
             log.info("New AssociatedExpression created");
 
@@ -112,9 +120,6 @@ public class AssociatedExpressionAction extends BaseAction {
         // Grab the current Engineered Transgene that is being edited from the session
         String aEngineeredGeneID = request.getParameter("engineeredGeneID");
         
-        // Grab the current modelID from the session
-        //String aAssociatedExpressionID = request.getParameter("aAssociatedExpressionID");
-        
         log.info("<AssocExpression save> following Characteristics:" 
         		+ "\n\t getExpressionLevel: " + associatedExpressionForm.getExpressionLevel()
                 + "\n\t getName: " + associatedExpressionForm.getName()        
@@ -131,10 +136,13 @@ public class AssociatedExpressionAction extends BaseAction {
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get( theModelId );
             
-            EngineeredTransgeneManager theEngineeredTransgeneManager = (EngineeredTransgeneManager) getBean( "engineeredTransgeneManager" );
-            Transgene engGene = theEngineeredTransgeneManager.get( aEngineeredGeneID );
-           
-            theAnimalModelManager.addAssociatedExpression( theAnimalModel, engGene, associatedExpressionForm  );
+            List engineeredGeneList = theAnimalModel.getEngineeredGeneCollection();
+            for (int i = 0; i < engineeredGeneList.size(); i++) {
+            	EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);                	
+            	if ( engineeredGene.getId().toString().equals( aEngineeredGeneID ) ) {
+            		theAnimalModelManager.addAssociatedExpression( theAnimalModel, engineeredGene, associatedExpressionForm  );
+            	}
+            }           
 
             log.info("New AssociatedExpression created");
 

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.31 2005-10-26 20:40:51 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.32 2005-10-27 17:17:34 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.31  2005/10/26 20:40:51  schroedn
+ *  Added AssocExpression to EngineeredTransgene submission page
+ *
  *  Revision 1.30  2005/10/26 20:14:42  pandyas
  *  implemented model availability
  *
@@ -253,6 +256,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
         		//TargetedModification inTargeted = (TargetedModification) engineeredGeneList.get(i);        		
             	targetedList.add( (TargetedModification) engineeredGeneList.get(i) );
             	//System.out.println( "\tAdded a TargetedModification" );
+            	//associatedExpressionList.addAll( engineeredGene.getExpressionFeatureCollection() );
 
         	}
         	
@@ -260,13 +264,14 @@ public class AnimalModelTreePopulateAction extends BaseAction {
             	//GenomicSegment inGenomicSegment = (GenomicSegment) engineeredGeneList.get(i);
         		segmentList.add( (GenomicSegment) engineeredGeneList.get(i) );            	
             	//System.out.println( "\tAdded a GenomicSegment");
+        		//associatedExpressionList.addAll( engineeredGene.getExpressionFeatureCollection() );
         	}    
         	
         	if ( engineeredGene instanceof Transgene ) {
         		engineeredList.add( (Transgene) engineeredGeneList.get(i) );            	
             	//System.out.println( "\tAdded a Transgene");
-            	associatedExpressionList.addAll( engineeredGene.getExpressionFeatureCollection() );
-            	System.out.println("\n\n\tassociatedExpressionList:" + associatedExpressionList );
+            	//associatedExpressionList.addAll( engineeredGene.getExpressionFeatureCollection() );
+            	//System.out.println("\n\n\tassociatedExpressionList:" + associatedExpressionList );
         	}
         }
 

@@ -87,7 +87,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		log.trace("Exiting EngineeredTransgeneManagerImpl.update");
 	}
 	
-	public void createAssocExpression( AssociatedExpressionData inAssociatedExpressionData, Transgene inEngineeredTransgene ) 
+	public void createAssocExpression( AssociatedExpressionData inAssociatedExpressionData, EngineeredGene inEngineeredTransgene ) 
 		throws Exception {
 		
 		log.trace("Entering EngineeredTransgeneManagerImpl.createAssocExpression");
@@ -97,7 +97,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		log.trace("Exiting EngineeredTransgeneManagerImpl.createAssocExpression");	
 	}
 	
-	public void updateAssociatedExpression( AssociatedExpressionData inAssociatedExpressionData, Transgene inEngineeredTransgene ) 
+	public void updateAssociatedExpression( AssociatedExpressionData inAssociatedExpressionData, EngineeredGene inEngineeredTransgene ) 
 		throws Exception {
 		
 		log.trace("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
@@ -127,7 +127,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
         log.trace("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
 	}
 	
-	private void populateAssocExpression( AssociatedExpressionData inAssociatedExpressionData, Transgene inEngineeredTransgene )
+	private void populateAssocExpression( AssociatedExpressionData inAssociatedExpressionData, EngineeredGene inEngineeredTransgene )
 		throws Exception {
 		
 		log.trace("Entering populateAssocExpression");
@@ -143,7 +143,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		
 		expFeature.setExpressionLevelDesc( expLevelDesc );		
 		inEngineeredTransgene.addExpressionFeature( expFeature );
-	
 		log.trace("Exiting populateAssocExpression");
 	}
 	
