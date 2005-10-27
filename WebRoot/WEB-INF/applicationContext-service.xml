@@ -22,6 +22,9 @@
     <!-- GenomicSegmentManager -->
     <bean id="genomicSegmentManager" class="gov.nih.nci.camod.service.impl.GenomicSegmentManagerImpl"/>
     
+    <!-- HistopathologyManager -->
+    <bean id="histopathologyManager" class="gov.nih.nci.camod.service.impl.HistopathologyManagerImpl"/>
+    
     <!-- ImageManager -->
     <bean id="imageManager" class="gov.nih.nci.camod.service.impl.ImageManagerImpl"/>
     
