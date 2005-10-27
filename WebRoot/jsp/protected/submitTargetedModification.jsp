@@ -2,6 +2,7 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
+<%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>	
 <%@ page import="gov.nih.nci.camod.webapp.form.TargetedModificationForm" %>	
 <%@ page import="gov.nih.nci.camod.Constants.*" %>
@@ -12,8 +13,6 @@
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
-<SCRIPT>
-
 
 <%
 	String aTargetedModificationID = request.getParameter( "aTargetedModificationID" );
@@ -54,13 +53,14 @@
 	function chkConditional( control ) {
 		ideControl = document.forms[0].description;
 			
-		if( control.value == 'yes' )
+		if( control.value == 'Conditional' )
 			ideControl.disabled = false;
 		else {
 			ideControl.value = null;
 			ideControl.disabled = true;
 		}
 	}
+	
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -120,7 +120,9 @@
 		<camod:cshelp key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="geneId" size="10" name="formdata"/>	
+			<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
+			<html:text styleClass="formFieldUnSized" property="geneId" size="20" name="formdata"/>	
 	</tr>
 
 
@@ -141,18 +143,18 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Conditional?</td>
 		<td class="formField">
-			<html:radio property="conditionedBy" value="yes" onchange="chkConditional(this);" /> Conditional 
-			<html:radio property="conditionedBy" value="no" onchange="chkConditional(this);" /> Not Conditional  
+			<html:radio property="conditionedBy" value="Conditional" onchange="chkConditional(this);" /> Conditional 
+			<html:radio property="conditionedBy" value="Not Conditional" onchange="chkConditional(this);" /> Not Conditional
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Conditional Description:</label>
-		<camod:cshelp key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<td class="formLabel"><label for="field2">Conditional Description</label>
+			<camod:cshelp key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="30" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="32" name="formdata"/>		
 		</td>
 	</tr>
 
@@ -168,11 +170,13 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2"><a href="http://www.informatics.jax.org/">MGI Number:</a></label>
+		<td class="formLabel"><label for="field2">MGI Number</label>
 		<camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="numberMGI" size="10" name="formdata"/>
+			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
+			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>
 		</td>
 	</tr>		
 	
@@ -253,21 +257,22 @@
 	</td></tr></TABLE>
 </tr></td></TABLE>
 
-
 <SCRIPT>
+
 	function checkOthers()
 	{
 	    ideControl = document.forms[0].conditionedBy;
 	    ideOtherControl = document.forms[0].description;
-					
+			
 		if( ideControl[0].checked == true )
 			ideOtherControl.disabled = false;
 		else {
 			ideOtherControl.disabled = true;
 		}
 	}
-			
+	
 	checkOthers();
+
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
