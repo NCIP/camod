@@ -352,31 +352,35 @@ public class NewDropdownUtil {
         List strainList = new ArrayList();
         List strainNames = new ArrayList();
 
-        strainList = taxonManager.getStrains(species);
+        if (speciesName != null && speciesName.length() > 0) {
+            strainList = taxonManager.getStrains(species);
 
-        if (strainList != null) {
-            // print out strainNames
-            for (int j = 0; j < strainList.size(); j++) {
-                Strain strain = (Strain) strainList.get(j);
+            if (strainList != null) {
+                // print out strainNames
+                for (int j = 0; j < strainList.size(); j++) {
+                    Strain strain = (Strain) strainList.get(j);
 
-                // strainNames.add(strain);
+                    // strainNames.add(strain);
 
-                if (strain.getName() != null) {
+                    if (strain.getName() != null) {
 
-                    if (!strainNames.contains(strain.getName())) {
-                        strainNames.add(strain.getName());
+                        if (!strainNames.contains(strain.getName())) {
+                            strainNames.add(strain.getName());
+                        }
                     }
                 }
             }
+
+            // Sort the list in 'abc' order
+            if (strainNames.size() > 0)
+                Collections.sort(strainNames);
+
+            addOther(strainNames);
+            addBlank(strainNames);
+        } else {
+            addBlank(strainNames);
         }
 
-        // Sort the list in 'abc' order
-        if (strainNames.size() > 0)
-            Collections.sort(strainNames);
-
-        addOther(strainNames);
-        addBlank(strainNames);
-        
         return strainNames;
     }
 
@@ -759,8 +763,8 @@ public class NewDropdownUtil {
     }
 
     /**
-     * Add "" to the list in the first spot if it's not already there.
-     * Removes it and put's it in the first spot if it is.
+     * Add "" to the list in the first spot if it's not already there. Removes
+     * it and put's it in the first spot if it is.
      */
     private static void addBlank(List inList) {
 
@@ -773,8 +777,8 @@ public class NewDropdownUtil {
     }
 
     /**
-     * Add "" to the list in the first spot if it's not already there.
-     * Removes it and put's it in the first spot if it is.
+     * Add "" to the list in the first spot if it's not already there. Removes
+     * it and put's it in the first spot if it is.
      */
     private static void addBlankOption(List inList) {
 
