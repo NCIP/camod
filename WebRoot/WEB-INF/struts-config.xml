@@ -1128,7 +1128,7 @@
     		name="next"
     		path="/jsp/protected/submitIMSR.jsp">
     	 </forward>		
-    </action>     
+     </action>     
 
       
      <!-- CellLineForm -->
@@ -1137,8 +1137,12 @@
 	        name="cellLineForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
-	        input="submitCellLines">   	
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitCellLines.do">
+        </forward>   		
     </action>
     
     <action path="/CellLinePopulateAction"
@@ -1480,7 +1484,7 @@
 	        input="input"> 
         <forward
             name="input"
-            path="/PublicationPopulateAction.do?method=dropdown">
+            path="/submitPublications.do">
         </forward>  	          	
     </action>
     
@@ -1568,7 +1572,7 @@
 	        input="input"> 
 	    <forward
             name="input"
-            path="/ImagePopulateAction.do?method=dropdown">
+            path="/submitImages.do">
         </forward>    	
     </action>
 

@@ -606,7 +606,72 @@
             </var>
     	</field>
 	</form>		
-
+	
+	<form name="imageForm">
+        <field property="fileLocation" depends="required,maxlength">
+            <arg0 key="ImageForm.fileLocation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+        <field property="title" depends="required,maxlength">
+            <arg0 key="ImageForm.title"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+       <field property="descriptionOfConstruct" depends="maxlength">
+            <arg0 key="ImageForm.DescriptionOfConstruct"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+    </form>
+    	
+	<form name="cellLineForm">
+        <field property="cellLineName" depends="required,maxlength">
+            <arg0 key="CellLineForm.cellLineName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+    	<field property="organTissueCode" depends="required">
+            <arg0 key="CellLineForm.organTissueCode"/>
+    	</field>
+    	<field property="comments" depends="maxlength">
+            <arg0 key="CellLineForm.comments"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="experiment" depends="maxlength">
+            <arg0 key="CellLineForm.experiment"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="results" depends="maxlength">
+            <arg0 key="CellLineForm.results"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+	</form>
+	
 	<form name="engineeredTransgeneForm">
         <field property="locationOfIntegration" depends="required">
             <arg0 key="EngineeredTransgeneForm.locationOfIntegration"/>
@@ -656,15 +721,48 @@
 	</form>		
 	
 	<form name="publicationForm">
-        <field property="authors" depends="required">
+        <field property="authors" depends="required,maxlength">
             <arg0 key="PublicationForm.authors"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
     	</field> 
         <field property="firstTimeReported" depends="required">
             <arg0 key="PublicationForm.firstTimeReported"/>
     	</field> 
-        <field property="pmid" depends="required">
+        <field property="pmid" depends="required, integer">
             <arg0 key="PublicationForm.pmid"/>
-    	</field>     	    	
+    	</field>
+       <field property="title" depends="maxlength">
+            <arg0 key="PublicationForm.title"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="year" depends="integer">
+            <arg0 key="PublicationForm.year"/>
+    	</field>
+       <field property="journal" depends="maxlength">
+            <arg0 key="PublicationForm.journal"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="volume" depends="integer">
+            <arg0 key="PublicationForm.volume"/>
+    	</field>
+    	<field property="startPage" depends="integer">
+            <arg0 key="PublicationForm.startPage"/>
+    	</field>
+    	<field property="endPage" depends="integer">
+            <arg0 key="PublicationForm.endPage"/>
+    	</field>
 	</form>		
 
   	<form name="userSettingsForm">
