@@ -12,7 +12,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
 	String aXenograftID = request.getParameter( "aXenograftID" );
@@ -22,32 +22,23 @@
 	
 	String actionName = "XenograftAction.do?method=save";
 	
-	if ( aXenograftID != null )
+	if ( aXenograftID != null && aXenograftID.length() > 0) {
 		actionName = "XenograftAction.do?method=edit";
+	}
+	else
+	{
+	    aXenograftID = "";
+	}
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
 		
-	function chkOtherGraft( control ) {
-		ideControl = document.forms[0].otherGraftType;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+	function chkOtherGraft() {		
+		chkOther(document.forms[0].graftType, document.forms[0].otherGraftType);
 	}
 	
-	function chkOtherStrain( control ) {
-		ideControl = document.forms[0].otherHostEthinicityStrain;
-		
-		if( control.value == "Other" )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+	function chkOtherStrain() {
+		chkOther(document.forms[0].hostEthinicityStrain, document.forms[0].otherHostEthinicityStrain);
 	}
 	
 	function getOptions( control ) {
@@ -83,7 +74,7 @@
 		<td class="formField">
 				<html:form action="<%= actionName %>" focus="name">			 
 				
-				<html:text styleClass="formFieldSized" property="name"  size="30" name="formdata"/>
+				<html:text styleClass="formFieldSized" property="name"  size="30" />
 		</td>
 	</tr>
 	
@@ -95,7 +86,7 @@
 			<td class="formField">		
 				<input type=button value="Find ATTC #" onClick="myRef = window.open('http://www.atcc.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="ATCCNumber" name="formdata" />
+				<html:text styleClass="formFieldUnSized" size="10" property="ATCCNumber"  />
 			</td>
 	</tr>		
 	
@@ -113,7 +104,7 @@
 			<camod:cshelp key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="parentalCellLineName"  size="30" name="formdata"/>	
+			<html:text styleClass="formFieldSized" property="parentalCellLineName"  size="30" />	
 		</td>
 	</tr>
 
@@ -123,7 +114,7 @@
 			<camod:cshelp key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
-			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="10" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="10" />
 		</td>
 	</tr>	
 	
@@ -133,7 +124,7 @@
 			<camod:cshelp key="ABS_CANCER_MODEL.HARVEST_DATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
-			<html:text styleClass="formFieldUnSized" property="harvestDate"  size="15" name="formdata"/>&nbsp;(Use date format: dd/MM/yyyy)		
+			<html:text styleClass="formFieldUnSized" property="harvestDate"  size="15" />&nbsp;(Use date format: dd/MM/yyyy)		
 		</td>
 	</tr>
 	
@@ -143,7 +134,7 @@
 		<camod:cshelp key="ABS_CANCER_MODEL.MODIFICATION_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="modificationDescription"  size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="modificationDescription"  size="30" />
 		</td>
 	</tr>
 
@@ -153,7 +144,7 @@
 		<camod:cshelp key="ABS_CANCER_MODEL.GENETIC_MANIPULATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="geneticManipulation"  size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="geneticManipulation"  size="30" />
 		</td>
 	</tr>
 
@@ -162,7 +153,7 @@
 		<td class="formRequiredLabel"><label for="field3">Host Species:</label></td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="hostScientificName" onchange="getOptions(this);" >
-				<html:options name="<%= Dropdowns.SPECIESDROP %>" />										
+				<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
 			</html:select>
 		</td>
 	</tr>
@@ -172,7 +163,7 @@
 		<td class="formLabel"><label for="field3">Host Strain:</label></td>
 		<td class="formField">
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="hostEthinicityStrain" onchange="chkOtherStrain(this)">
+			<html:select styleClass="formFieldSized" size="1" property="hostEthinicityStrain" onchange="chkOtherStrain()">
 				<html:options name="<%= Dropdowns.STRAINDROP %>" />
 			</html:select>
 		<br>
@@ -185,7 +176,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">if other Strain:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" disabled="true" property="otherHostEthinicityStrain" size="30" name="formdata"/>	
+			<html:text styleClass="formFieldSized" disabled="true" property="otherHostEthinicityStrain" size="30" />	
 		</td>
 	</tr>
 	
@@ -195,7 +186,7 @@
 		<camod:cshelp key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="administrativeSite"  size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="administrativeSite"  size="30" />
 		</td>
 	</tr>	
 
@@ -203,7 +194,7 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Graft Type:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="graftType" onclick="chkOtherGraft(this);">
+			<html:select styleClass="formFieldSized" size="1" property="graftType" onclick="chkOtherGraft();">
 				<html:options name="<%= Dropdowns.GRAFTTYPEDROP %>" />	
 			</html:select>
 		<br>
@@ -216,7 +207,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">If other Graft Type:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" disabled="true" property="otherGraftType"  size="30" name="formdata"/>	
+			<html:text styleClass="formFieldSized" disabled="true" property="otherGraftType"  size="30" />	
 		</td>
 	</tr>	
 	
@@ -244,29 +235,9 @@
 	</td></tr></TABLE>
 </tr></td></TABLE>
 
-<SCRIPT>
-	function checkOthers()
-	{
-	    ideControl = document.forms[0].graftType;
-	    ideOtherControl = document.forms[0].otherGraftType;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-		
-	    ideControl = document.forms[0].hostEthinicityStrain;
-	    ideOtherControl = document.forms[0].otherHostEthinicityStrain;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-	}
-	
-	checkOthers();
+<SCRIPT LANGUAGE="JavaScript">
+chkOtherGraft();
+chkOtherStrain();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

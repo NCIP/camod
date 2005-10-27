@@ -39,13 +39,33 @@ public class NewDropdownUtil {
         }
 
         // Add a blank as the first line
-        if (Constants.Dropdowns.ADD_BLANK_OPTION.equals(inFilter)) {
-            theList.add(0, "");
+        if (Constants.Dropdowns.ADD_BLANK.equals(inFilter)) {
+            addBlank(theList);
         }
 
         // Add a blank as the first line
-        if (Constants.Dropdowns.ADD_BLANK_DROPDOWN_OPTION.equals(inFilter)) {
-            theList.add(0, new DropdownOption("", ""));
+        else if (Constants.Dropdowns.ADD_BLANK_OPTION.equals(inFilter)) {
+            addBlankOption(theList);
+        }
+
+        // Add a blank as the first line
+        else if (Constants.Dropdowns.ADD_OTHER.equals(inFilter)) {
+            addOther(theList);
+        }
+
+        // Add a blank as the first line
+        else if (Constants.Dropdowns.ADD_OTHER_OPTION.equals(inFilter)) {
+            addOtherOption(theList);
+        }
+
+        else if (Constants.Dropdowns.ADD_BLANK_AND_OTHER.equals(inFilter)) {
+            addOther(theList);
+            addBlank(theList);
+        }
+
+        else if (Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION.equals(inFilter)) {
+            addOtherOption(theList);
+            addBlankOption(theList);
         }
 
         if (theList == null) {
@@ -91,12 +111,12 @@ public class NewDropdownUtil {
 
         else if (inDropdownKey.equals(Constants.Dropdowns.VIRALVECTORDROP)) {
             theReturnList = getViralVectorList(inRequest);
-        }        
-        
+        }
+
         else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVEL)) {
             theReturnList = getExpressionLevelList(inRequest);
-        }    
-        
+        }
+
         else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONDROP)) {
             theReturnList = getInducedMutationList(inRequest);
         }
@@ -298,10 +318,10 @@ public class NewDropdownUtil {
                 }
             }
         }
-        
+
         Collections.sort(speciesNames);
         addOther(speciesNames);
-        
+
         return speciesNames;
     }
 
@@ -345,8 +365,6 @@ public class NewDropdownUtil {
 
                     if (!strainNames.contains(strain.getName())) {
                         strainNames.add(strain.getName());
-                        // System.out.println("Strain Name>>" + j + ": " +
-                        // strain.getName());
                     }
                 }
             }
@@ -357,7 +375,8 @@ public class NewDropdownUtil {
             Collections.sort(strainNames);
 
         addOther(strainNames);
-       
+        addBlank(strainNames);
+        
         return strainNames;
     }
 
@@ -554,7 +573,7 @@ public class NewDropdownUtil {
 
         Collections.sort(mutationList);
         addOther(mutationList);
-        
+
         return mutationList;
     }
 
@@ -587,16 +606,17 @@ public class NewDropdownUtil {
         Collections.sort(theReturnList);
         return theReturnList;
     }
-    
+
     /**
      * Returns a list of all Expression Level Descriptions
      * 
      * @return list of users
      * @throws Exception
      */
-    private static List getExpressionLevelList(HttpServletRequest inRequest ) throws Exception {
+    private static List getExpressionLevelList(HttpServletRequest inRequest) throws Exception {
         // Get values for dropdown lists for Species, Strains
-        ExpressionLevelDescManager expressionLevelDescManager = (ExpressionLevelDescManager) getContext(inRequest).getBean("expressionLevelDescManager");
+        ExpressionLevelDescManager expressionLevelDescManager = (ExpressionLevelDescManager) getContext(inRequest)
+                .getBean("expressionLevelDescManager");
 
         List expList = null;
 
@@ -613,7 +633,7 @@ public class NewDropdownUtil {
                     // if the speciesName is not already in the List, add it
                     // (only get unique names)
                     if (!expressionLevelList.contains(tmp.getExpressionLevel()))
-                    	expressionLevelList.add(tmp.getExpressionLevel());
+                        expressionLevelList.add(tmp.getExpressionLevel());
                 }
             }
         }
@@ -720,4 +740,52 @@ public class NewDropdownUtil {
             inList.add(0, Constants.Dropdowns.OTHER_OPTION);
         }
     }
+
+    /**
+     * Add Other to the list in the first spot if it's not already there.
+     * Removes it and put's it in the first spot if it is.
+     */
+    private static void addOtherOption(List inList) {
+
+        DropdownOption theDropdownOption = new DropdownOption(Constants.Dropdowns.OTHER_OPTION,
+                Constants.Dropdowns.OTHER_OPTION);
+
+        if (!inList.contains(theDropdownOption)) {
+            inList.add(0, theDropdownOption);
+        } else {
+            inList.remove(theDropdownOption);
+            inList.add(0, theDropdownOption);
+        }
+    }
+
+    /**
+     * Add "" to the list in the first spot if it's not already there.
+     * Removes it and put's it in the first spot if it is.
+     */
+    private static void addBlank(List inList) {
+
+        if (!inList.contains("")) {
+            inList.add(0, "");
+        } else {
+            inList.remove("");
+            inList.add(0, "");
+        }
+    }
+
+    /**
+     * Add "" to the list in the first spot if it's not already there.
+     * Removes it and put's it in the first spot if it is.
+     */
+    private static void addBlankOption(List inList) {
+
+        DropdownOption theDropdownOption = new DropdownOption("", "");
+
+        if (!inList.contains(theDropdownOption)) {
+            inList.add(0, theDropdownOption);
+        } else {
+            inList.remove(theDropdownOption);
+            inList.add(0, theDropdownOption);
+        }
+    }
+
 }

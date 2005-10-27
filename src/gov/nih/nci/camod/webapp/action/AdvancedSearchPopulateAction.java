@@ -22,23 +22,23 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         log.trace("In AdvancedSearchPopulateAction.populate");
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
-                Constants.Dropdowns.ADD_BLANK_DROPDOWN_OPTION);
+                Constants.Dropdowns.ADD_BLANK_OPTION);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GROWTHFACTORQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HORMONEQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.RADIATIONQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VIRUSQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SURGERYQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
 
         return mapping.findForward("next");
     }

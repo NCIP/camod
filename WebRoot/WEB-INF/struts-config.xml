@@ -1713,7 +1713,7 @@
 	        input="input"> 
 	    <forward
             name="input"
-            path="/XenograftPopulateAction.do?method=dropdown">
+            path="/submitTransplantXenograft.do">
         </forward>    	
     </action>
 

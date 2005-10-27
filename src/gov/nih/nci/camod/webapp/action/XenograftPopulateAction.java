@@ -26,7 +26,6 @@ public class XenograftPopulateAction extends BaseAction {
 
         // Create a form to edit
         XenograftForm xenograftForm = (XenograftForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
 
         // Grab the current Therapy we are working with related to this
         // animalModel
@@ -97,10 +96,6 @@ public class XenograftPopulateAction extends BaseAction {
 
         System.out.println("<XenograftPopulateAction dropdown> Entering dropdown() ");
 
-        // blank out the FORMDATA Constant field
-        XenograftForm xenograftForm = (XenograftForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
-
         // Retrieve the AnimalModel current Species and Strain set in
         // ModelCharacteristics
         // This is displayed on the JSP page right above the HOST STRAIN /
@@ -135,11 +130,35 @@ public class XenograftPopulateAction extends BaseAction {
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
+                Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP,
+                Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
         System.out.println("<XenograftPopulateAction dropdown> Exiting void dropdown()");
     }
+
+    /**
+     * Repopulate the Strain dropdown with it's matching species
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward setStrainDropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        XenograftForm xenograftForm = (XenograftForm) form;
+
+        NewDropdownUtil
+                .populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getHostScientificName());
+
+        return mapping.findForward("submitTransplantXenograft");
+    }
+
 }

@@ -17,8 +17,13 @@
 	//otherwise, create a new one
 	String actionName = "InvestigatorAction.do?method=save";
 	
-	if ( aAvailabilityID != null )
+	if ( aAvailabilityID != null && aAvailabilityID.length() > 0) {
 		actionName = "InvestigatorAction.do?method=edit";
+	}
+	else
+	{
+	    aAvailabilityID = "";
+	}
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

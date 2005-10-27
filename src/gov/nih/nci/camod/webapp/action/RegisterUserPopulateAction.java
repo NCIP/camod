@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RegisterUserPopulateAction.java,v 1.1 2005-10-21 20:47:04 georgeda Exp $
+ * $Id: RegisterUserPopulateAction.java,v 1.2 2005-10-27 18:32:19 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/21 20:47:04  georgeda
+ * Initial revision
+ *
  *
  */
 package gov.nih.nci.camod.webapp.action;
@@ -32,7 +35,7 @@ public class RegisterUserPopulateAction extends BaseAction {
         log.trace("Entering execute");
 
         try {
-            NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP, Constants.Dropdowns.ADD_BLANK_DROPDOWN_OPTION);
+            NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP, Constants.Dropdowns.ADD_BLANK_OPTION);
         } catch (Exception e) {
 
             log.error("Unable to get user settings: ", e);

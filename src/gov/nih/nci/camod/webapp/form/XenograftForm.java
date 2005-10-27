@@ -8,6 +8,10 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionMapping;
+
 public class XenograftForm extends BaseForm implements Serializable, XenograftData {
 
     private static final long serialVersionUID = 3257125453799404851L;
@@ -234,4 +238,21 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     public void setOtherGraftType(String otherGraftType) {
         this.otherGraftType = otherGraftType;
     }
+
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        name = null;
+        ATCCNumber = null;
+        parentalCellLineName = null;
+        cellAmount = null;
+        harvestDate = null;
+        modificationDescription = null;
+        geneticManipulation = null;
+        administrativeSite = null;
+        graftType = null;
+        otherGraftType = null;
+        hostScientificName = null;
+        hostEthinicityStrain = null;
+        otherHostEthinicityStrain = null;
+    }
+
 }

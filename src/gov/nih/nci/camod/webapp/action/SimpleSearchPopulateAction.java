@@ -22,9 +22,9 @@ public class SimpleSearchPopulateAction extends BaseAction {
         log.trace("In AdvancedSearchPopulateAction.populate");
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+                Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
-                Constants.Dropdowns.ADD_BLANK_DROPDOWN_OPTION);
+                Constants.Dropdowns.ADD_BLANK_OPTION);
 
         return mapping.findForward("next");
     }

@@ -870,6 +870,215 @@
                 <var-value>20</var-value>
             </var>
         </field>
-    </form>		
+    </form>
+    
+    	<form name="therapyForm">
+        <field property="name" depends="required,maxlength">
+            <arg0 key="Therapy.name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+    	<field property="NSCNumber" depends="integer">
+            <arg0 key="Therapy.nscNumber"/>
+    	</field>
+    	<field property="CASNumber" depends="maxlength">
+            <arg0 key="Therapy.casNumber"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="dosage" depends="maxlength">
+            <arg0 key="Therapy.dosage"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+     	<field property="ageAtTreatment" depends="maxlength">
+            <arg0 key="Therapy.ageAtTreatment"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="otherAdministrativeRoute" depends="validwhen, maxlength">
+            <arg0 key="Therapy.otherAdministrativeRoute"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((administrativeRoute != 'Other') or (*this* != null))</var-value>
+            </var>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>     
+       	<field property="biomarker" depends="maxlength">
+            <arg0 key="Therapy.biomarker"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="tumorResponse" depends="maxlength">
+            <arg0 key="Therapy.tumorResponse"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="comments" depends="maxlength">
+            <arg0 key="Therapy.comments"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="experiment" depends="maxlength">
+            <arg0 key="Therapy.experiment"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="results" depends="maxlength">
+            <arg0 key="Therapy.results"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+	</form>		
+	
+	<form name="imageForm">
+        <field property="fileLocation" depends="required,maxlength">
+            <arg0 key="ImageForm.fileLocation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+        <field property="title" depends="required,maxlength">
+            <arg0 key="ImageForm.title"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+       <field property="descriptionOfConstruct" depends="maxlength">
+            <arg0 key="ImageForm.DescriptionOfConstruct"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+    </form>
+    	
+	<form name="xenograftForm">
+        <field property="name" depends="required,maxlength">
+            <arg0 key="XenograftForm.name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+    	<field property="ATCCNumber" depends="maxlength">
+            <arg0 key="XenograftForm.ATCCNumber"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="parentalCellLineName" depends="maxlength">
+            <arg0 key="XenograftForm.parentalCellLineName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="cellAmount" depends="integer">
+            <arg0 key="XenograftForm.cellAmount"/>
+    	</field>
+    	<field property="modificationDescription" depends="maxlength">
+            <arg0 key="XenograftForm.modificationDescription"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="geneticManipulation" depends="maxlength">
+            <arg0 key="XenograftForm.geneticManipulation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="hostScientificName" depends="required">
+            <arg0 key="XenograftForm.hostScientificName"/>
+    	</field>
+    	<field property="otherHostEthinicityStrain" depends="validwhen,maxlength">
+    	    <arg0 key="XenograftForm.otherHostEthinicityStrain"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((hostEthinicityStrain != 'Other') or ((hostEthinicityStrain == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="graftType" depends="required">
+            <arg0 key="XenograftForm.graftType"/>
+    	</field>
+    	<field property="otherGraftType" depends="validwhen,maxlength">
+    	    <arg0 key="XenograftForm.otherGraftType"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((graftType != 'Other') or ((graftType == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="administrativeSite" depends="maxlength">
+            <arg0 key="XenograftForm.administrativeSite"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="harvestDate" depends="maxlength">
+            <arg0 key="XenograftForm.harvestDate"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>10</var-value>
+            </var>
+    	</field>
+	</form>
   </formset>
 </form-validation>
