@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.59 2005-10-27 17:13:19 guruswas Exp $
+ * $Id: Constants.java,v 1.60 2005-10-27 18:31:50 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.59  2005/10/27 17:13:19  guruswas
+ * added publications to capture all publications
+ *
  * Revision 1.58  2005/10/27 15:29:59  georgeda
  * Cleanup
  *
@@ -188,9 +191,17 @@ public class Constants {
 	 */
 	public interface Dropdowns {
 
-		public static final String ADD_BLANK_OPTION = "ADD_BLANK_OPTION";
+        public static final String ADD_BLANK = "ADD_BLANK";
 
-		public static final String ADD_BLANK_DROPDOWN_OPTION = "ADD_BLANK_DROPDOWN_OPTION";
+        public static final String ADD_OTHER = "ADD_OTHER";
+
+        public static final String ADD_BLANK_AND_OTHER = "ADD_BLANK_AND_OTHER";
+
+        public static final String ADD_BLANK_OPTION = "ADD_BLANK_OPTION";
+
+        public static final String ADD_OTHER_OPTION = "ADD_OTHER_OPTION";
+
+        public static final String ADD_BLANK_AND_OTHER_OPTION = "ADD_BLANK_AND_OTHER_OPTION";
 
 		public static final String OTHER_OPTION = "Other";
 
