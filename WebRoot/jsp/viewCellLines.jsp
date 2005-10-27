@@ -122,7 +122,7 @@
 							<c:out value="${pub.endPage}"/> 
 						</td>
 						<td class="<c:out value="${tdClass}"/>End" width="10%">
-							<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
+							<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${pub.pmid}"/>">
 							<IMG src="images/pubmed_70.gif" align="middle">
 							</a>
 						</td>

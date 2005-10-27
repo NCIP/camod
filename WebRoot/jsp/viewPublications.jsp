@@ -6,6 +6,7 @@
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 
 <bean:define id="mdl" name="animalmodel"/>
+<bean:define id="pubColl" name="publications"/>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -34,7 +35,6 @@
 				<td class="greySubTitle" width="10%">Abstract in PubMed</td>
 			</tr>
 			
-			<bean:define id="pubColl" name="mdl" property="publicationCollection"/>
 			<c:forEach var="p" items="${pubColl}" varStatus="stat">
 			<tr>
 				<c:choose>

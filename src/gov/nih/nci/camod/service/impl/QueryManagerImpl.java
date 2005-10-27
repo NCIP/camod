@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.19 2005-10-24 19:36:57 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.20 2005-10-27 18:13:48 guruswas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/10/24 19:36:57  georgeda
+ * Changed searching to case insensitive
+ *
  * Revision 1.18  2005/10/20 19:28:58  georgeda
  * Added TOC functionality
  *
@@ -56,6 +59,7 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.util.DrugScreenResult;
 import gov.nih.nci.camod.webapp.form.SearchData;
 import gov.nih.nci.common.persistence.Search;
@@ -1467,8 +1471,67 @@ public class QueryManagerImpl extends BaseManager {
         return models;
     }
 
-    public static void main(String[] inArgs) {
+    public List getAllPublications(long absCancerModelId) throws PersistenceException {
+        List publications = new ArrayList();
+        int cc = 0;
+        ResultSet theResultSet = null;
+        try {
+            String theSQLString = 
+				"select publication_id, year, authors" + "\n" +
+				"  from publication" + "\n" +
+				" where publication_id in (" + "\n" +
+				"	select min(publication_id) publication_id" + "\n" +
+				"	  from publication" + "\n" +
+				"	 where pmid in (" + "\n" +
+				"		select distinct pmid" + "\n" +
+				"		  from animal_model_therapy amt," + "\n" +
+				"		       therapy_publication tp," + "\n" +
+				"		       publication p" + "\n" +
+				"		 where amt.abs_cancer_model_id = ?" + "\n" +
+				"		   and amt.therapy_id = tp.therapy_id" + "\n" +
+				"		   and tp.publication_id = p.publication_id" + "\n" +
+				"		union" + "\n" +
+				"		select distinct pmid" + "\n" +
+				"		  from ani_mod_cell_line acl," + "\n" +
+				"		       cell_line_publication cp," + "\n" +
+				"		       publication p" + "\n" +
+				"		 where acl.abs_cancer_model_id = ?" + "\n" +
+				"		   and acl.cell_line_id = cp.cell_line_id" + "\n" +
+				"		   and cp.publication_id = p.publication_id" + "\n" +
+				"		union" + "\n" +
+				"		select distinct pmid" + "\n" +
+				"		  from abs_can_mod_publication acmp," + "\n" +
+				"		       publication p" + "\n" +
+				"		 where acmp.abs_cancer_model_id = ?" + "\n" +
+				"		   and acmp.publication_id = p.publication_id )" + "\n" +
+				"	 group by pmid )" + "\n" +
+				" order by year desc, authors" + "\n";  
+			log.info("getAllPublications - SQL: " + theSQLString);
+            Object[] params = new Object[3];
+            params[0] = params[1] = params[2] = String.valueOf(absCancerModelId);
+            theResultSet = Search.query(theSQLString, params);
+            while (theResultSet.next()) {
+				String pid = theResultSet.getString(1); // the publication_id
+				Publication p = (Publication)get(pid, Publication.class);
+				publications.add(p);
+                cc++;
+            }
+            log.info("Got " + cc + " publications");
+        } catch (Exception e) {
+            log.error("Exception in getAllPublications", e);
+            throw new PersistenceException("Exception in getAllPublications: " + e);
+        } finally {
+            if (theResultSet != null) {
+                try {
+                    theResultSet.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return publications;
+    }
 
+	public static void main(String[] inArgs) {
         try {
             System.out.println("Model ids: "
                     + QueryManagerSingleton.instance().getModelIdsForHistopathologyOrgan("Skin"));

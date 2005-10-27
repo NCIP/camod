@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.16 2005-10-20 21:35:37 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.17 2005-10-27 18:13:48 guruswas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.16  2005/10/20 21:35:37  georgeda
+ *  Fixed xenograft display bug
+ *
  *  Revision 1.15  2005/10/19 18:56:00  guruswas
  *  implemented invivo details page
  *
@@ -294,9 +297,16 @@ public class ViewModelAction extends BaseAction {
     public ActionForward populatePublications(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         setCancerModel(request);
-        
+        String modelID = request.getParameter("aModelID");
+		List pubs = null;
+        try {
+	        pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        request.getSession().setAttribute(Constants.PUBLICATIONS, pubs);
         setComments(request, Constants.Pages.PUBLICATIONS);
-        
         return mapping.findForward("viewPublications");
     }
 
