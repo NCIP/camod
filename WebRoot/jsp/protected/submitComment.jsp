@@ -14,7 +14,7 @@
 	<TABLE width="100%" height="100%" border="0">
 	    <html:form action="AddCommentsAction" focus="remark" >
 		<tr>
-			<td><b>Comments<br>The comment field holds maximum 400 characters.</b></td>
+			<td><b>Comments<br>The comment field holds maximum 2000 characters.</b></td>
 		</tr>
 		<tr>
 			<td>
