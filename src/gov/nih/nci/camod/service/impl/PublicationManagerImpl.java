@@ -1,138 +1,103 @@
 /*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Id: PublicationManagerImpl.java,v 1.7 2005-10-27 12:52:50 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.PublicationStatus;
 import gov.nih.nci.camod.service.PublicationManager;
-import gov.nih.nci.common.persistence.Persist;
+import gov.nih.nci.camod.webapp.form.PublicationData;
 import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
 import java.util.List;
 
 /**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Manager for Publication objects
  */
 public class PublicationManagerImpl extends BaseManager implements PublicationManager {
-	
-	public List getAll() {		
-		List publications = null;
-		
-		try {
-			publications = Search.query(Publication.class);
-		} catch (Exception e) {
-			System.out.println("Exception in PublicationManagerImpl.getAll");
-			e.printStackTrace();
-		}
-		
-		return publications;
+
+	public Publication create(PublicationData inPublicationData) throws Exception {
+		Publication thePublication = new Publication();
+		populate(inPublicationData, thePublication);
+
+		return thePublication;
 	}
-	
-	public Publication get(String id) {
-		Publication publication = null;
-		
-		try {
-			publication = (Publication) Search.queryById(Publication.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PublicationManagerImpl.get");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in PublicationManagerImpl.get");
-			e.printStackTrace();
+
+	public void update(PublicationData inPublicationData, Publication inPublication) throws Exception {
+		populate(inPublicationData, inPublication);
+	}
+
+	private void populate(PublicationData inPublicationData, Publication inPublication) throws Exception {
+
+		inPublication.setAuthors(inPublicationData.getAuthors());
+		inPublication.setTitle(inPublicationData.getTitle());
+		inPublication.setJournal(inPublicationData.getJournal());
+		inPublication.setVolume(inPublicationData.getVolume());
+
+		String strPub = inPublicationData.getPmid().trim();
+		inPublication.setPmid(Long.valueOf(strPub));
+
+		strPub = inPublicationData.getStartPage().trim();
+		inPublication.setStartPage(Long.valueOf(strPub));
+
+		strPub = inPublicationData.getEndPage().trim();
+		inPublication.setEndPage(Long.valueOf(strPub));
+
+		strPub = inPublicationData.getYear().trim();
+		inPublication.setYear(Long.valueOf(strPub));
+
+		if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes")) {
+			inPublication.setFirstTimeReported(new Boolean(true));
+		} else {
+			inPublication.setFirstTimeReported(new Boolean(false));
 		}
-		
-		return publication;
-    }
 
-    public void save(Publication publication, PublicationStatus publicationStatus ) {    	
-    	try {
-    		
-            // See if there's already a sex distribution that exists, otherwise
-            // save a new one
-            PublicationStatus thePublication = PublicationManagerSingleton.instance().getByName( publicationStatus.getName() );
-            
-            if (thePublication != null) {
-            	publicationStatus = thePublication;
-            } else {
-            	PublicationManagerSingleton.instance().savePublicationStatus( publicationStatus );
-            }
-            
-            publication.setPublicationStatus( publicationStatus );
-            
-			Persist.save(publication);			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PublicationManagerImpl.save");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in PublicationManagerImpl.save");
-			e.printStackTrace();
+		PublicationStatus pubStatus = PublicationManagerSingleton.instance().getPublicationStatusByName(
+				inPublicationData.getName());
+		inPublication.setPublicationStatus(pubStatus);
+	}
+
+	public List getAll() throws Exception {
+
+		log.trace("In PublicationManagerImpl.getAll");
+
+		return super.getAll(Publication.class);
+	}
+
+	public Publication get(String id) throws Exception {
+		log.trace("In PublicationManagerImpl.get");
+		return (Publication) super.get(id, Publication.class);
+	}
+
+	public void save(Publication publication) throws Exception {
+		log.trace("In PublicationManagerImpl.save");
+		super.save(publication);
+	}
+
+	public PublicationStatus getPublicationStatusByName(String inName) throws Exception {
+
+		log.trace("In PublicationManagerImpl.getPublicationStatusByName");
+
+		PublicationStatus pubStatus = null;
+
+		// The following two objects are needed for eQBE.
+		PublicationStatus thePubStatus = new PublicationStatus();
+		thePubStatus.setName(inName);
+
+		List theList = Search.query(thePubStatus);
+
+		if (theList != null && theList.size() > 0) {
+			pubStatus = (PublicationStatus) theList.get(0);
 		}
-    }
 
-    public PublicationStatus getByName(String inName) {
+		return pubStatus;
+	}
 
-        PublicationStatus pubStatus = null;
-
-        try {
-            // The following two objects are needed for eQBE.
-            PublicationStatus thePubStatus = new PublicationStatus();
-            thePubStatus.setName( inName  );
-
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator( "publicationStatus.name", Evaluator.EQUAL  );
-
-            List theList = Search.query( thePubStatus, theEvaluation );
-
-           // System.out.println( "theList=" + theList );
-            
-            if ( theList != null && theList.size() > 0 ) {
-            	//System.out.println( "<PublicationManagerImpl> list not empty!" );
-            	pubStatus = ( PublicationStatus ) theList.get(0);
-            }
-               
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in PublicationManagerImpl.getByName");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in PublicationManagerImpl.getByName");
-            e.printStackTrace();
-        }
-        
-        return pubStatus;
-    }
-    
-    public void savePublicationStatus(PublicationStatus publicationStatus) {    	
-    	try {
-			Persist.save( publicationStatus );			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PublicationManagerImpl.savePublicationStatus");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in PublicationManagerImpl.savePublicationStatus");
-			e.printStackTrace();
-		}
-    }
-    
-    public void remove(String id) {    	
-    	try {
-			Persist.deleteById(Publication.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in PublicationManagerImpl.remove");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in PublicationManagerImpl.remove");
-			e.printStackTrace();
-		}
-    }
+	public void remove(String id) throws Exception {
+		log.trace("In PublicationManagerImpl.remove");
+		super.remove(id, Publication.class);
+	}
 }
