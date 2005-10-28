@@ -5,10 +5,12 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.impl.XenograftManagerSingleton;
 import gov.nih.nci.camod.webapp.form.XenograftForm;
+import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +33,7 @@ public class XenograftPopulateAction extends BaseAction {
         // animalModel
         String aXenograftID = request.getParameter("aXenograftID");
         request.setAttribute("aXenograftID", aXenograftID);
-        
+
         Xenograft xeno = XenograftManagerSingleton.instance().get(aXenograftID);
 
         xenograftForm.setName(xeno.getName());
@@ -52,7 +54,6 @@ public class XenograftPopulateAction extends BaseAction {
             xenograftForm.setHostEthinicityStrain(tax.getEthnicityStrain());
         }
 
-        // String inputFormatString = "dd/MM/yyyy hh:mm a";
         String outputFormatString = "MM/dd/yyyy";
 
         if (xeno.getHarvestDate() != null) {
@@ -74,7 +75,7 @@ public class XenograftPopulateAction extends BaseAction {
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
-        this.dropdown(request, response);
+        this.dropdown(request, response, xenograftForm);
 
         // Store the Form in session to be used by the JSP
         request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
@@ -111,7 +112,7 @@ public class XenograftPopulateAction extends BaseAction {
         request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrain());
 
         // setup dropdown menus
-        this.dropdown(request, response);
+        this.dropdown(request, response, (XenograftForm) form);
 
         System.out.println("<XenograftPopulateAction dropdown> before return submitTransplantXenograft ");
 
@@ -126,7 +127,8 @@ public class XenograftPopulateAction extends BaseAction {
      * @param response
      * @throws Exception
      */
-    public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    private void dropdown(HttpServletRequest request, HttpServletResponse response, XenograftForm form)
+            throws Exception {
 
         System.out.println("<XenograftPopulateAction dropdown> Entering void dropdown()");
 
@@ -134,7 +136,18 @@ public class XenograftPopulateAction extends BaseAction {
         // following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
                 Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, "");
+
+        String theSpecies = form.getHostScientificName();
+        if (theSpecies == null) {
+            List speciesList = (List) request.getSession().getAttribute(Constants.Dropdowns.NEWSPECIESDROP);
+            DropdownOption theOption = (DropdownOption) speciesList.get(0);
+            theSpecies = theOption.getValue();
+        }
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, theSpecies);
+
+        // Prepopulate all dropdown fields, set the global Constants to the
+        // following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP,
                 Constants.Dropdowns.ADD_BLANK_AND_OTHER);

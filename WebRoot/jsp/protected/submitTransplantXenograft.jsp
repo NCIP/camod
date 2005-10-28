@@ -25,8 +25,7 @@
 	if ( aXenograftID != null && aXenograftID.length() > 0) {
 		actionName = "XenograftAction.do?method=edit";
 	}
-	else
-	{
+	else {
 	    aXenograftID = "";
 	}
 %>
