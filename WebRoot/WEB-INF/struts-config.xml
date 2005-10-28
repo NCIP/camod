@@ -1349,9 +1349,8 @@
     	 </forward>					
     </action> 
     
-     <!-- ClinicalMarkerForm -->
      <action path="/ClinicalMarkerAction"
-	        type="gov.nih.nci.camod.webapp.action.ClinicalMarkerAction"
+	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
 	        name="clinicalMarkerForm"
 	        scope="request"
 	        parameter="method" 	     
@@ -1364,7 +1363,7 @@
     </action>
     
     <action path="/ClinicalMarkerPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.ClinicalMarkerPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.HistopathologyPopulateAction"
     		name="clinicalMarkerForm"    		
             scope="request"
             parameter="method"
