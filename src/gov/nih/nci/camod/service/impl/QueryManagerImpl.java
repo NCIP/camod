@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.20 2005-10-27 18:13:48 guruswas Exp $
+ * $Id: QueryManagerImpl.java,v 1.21 2005-10-28 20:16:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2005/10/27 18:13:48  guruswas
+ * Show all publications in the publications display page.
+ *
  * Revision 1.19  2005/10/24 19:36:57  georgeda
  * Changed searching to case insensitive
  *
@@ -345,7 +348,7 @@ public class QueryManagerImpl extends BaseManager {
             theResultSet = Search.query(theSQLString, params);
 
             while (theResultSet.next()) {
-                String thePIEntry = theResultSet.getString(1) + "," + theResultSet.getString(2);
+                String thePIEntry = theResultSet.getString(1) + ", " + theResultSet.getString(2);
                 thePIList.add(thePIEntry);
             }
 
