@@ -126,7 +126,8 @@
         	
         	<key column="histopathology_id"/>
         	<many-to-one name="organ" class="Organ"
-            	column="organ_id"/> 
+            	column="organ_id"
+        	cascade="all-delete-orphan" /> 
     	</join>   	
 	</class>
 </hibernate-mapping>
