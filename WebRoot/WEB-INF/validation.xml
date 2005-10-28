@@ -81,7 +81,7 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="url" depends="maxlength">
+        <field property="url" depends="maxlength,url">
             <arg0 key="ModelCharacteristicsForm.url"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>

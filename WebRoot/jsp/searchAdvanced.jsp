@@ -70,7 +70,7 @@
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> 
-				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
 					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
@@ -93,7 +93,7 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>

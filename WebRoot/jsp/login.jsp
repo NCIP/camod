@@ -96,9 +96,7 @@
                                                               </tr>
                                                               <tr>
                                                                   <td>
-                                                                      <html:submit>
-                                                                          <bean:message key="button.submit"/>
-                                                                      </html:submit>
+                                                                      <html:submit value="Login"/>
                                                                       </html:form>
                                                                   </td>
 				      

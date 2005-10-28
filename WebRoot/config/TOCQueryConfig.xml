@@ -243,7 +243,7 @@
         <description>Rat models</description>
 	    <queries>
 			<query>
-			 	<description>Rattus Norvegicus models</description>
+			 	<description><![CDATA[<i>Rattus norvegicus</i> models]]></description>
 			 	<key>Rattus_Norvegicus_Query</key>
 			 	<parameters>
 				    <parameter>
@@ -253,7 +253,7 @@
 				</parameters>
 			</query>
 			<query>
-			 	<description>Rattus Rattus models</description>
+			 	<description><![CDATA[<i>Rattus rattus</i> models]]></description>
 			 	<key>Rattus_Rattus_Query</key>
 			 	<parameters>
 				    <parameter>
