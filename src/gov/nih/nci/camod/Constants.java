@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.60 2005-10-27 18:31:50 georgeda Exp $
+ * $Id: Constants.java,v 1.61 2005-10-28 12:47:11 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.60  2005/10/27 18:31:50  georgeda
+ * New dropdown options
+ *
  * Revision 1.59  2005/10/27 17:13:19  guruswas
  * added publications to capture all publications
  *
@@ -342,6 +345,8 @@ public class Constants {
 	 */
 	public interface Parameters {
 
+        public static final String ACTION = "action";
+        
 		public static final String MODELID = "aModelID";
 
 		public static final String PERSONID = "aPersonID";
