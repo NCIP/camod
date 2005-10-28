@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.7 2005-10-20 20:40:39 pandyas Exp $
+ * $Id: ViralTreatmentAction.java,v 1.8 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/20 20:40:39  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -26,147 +29,124 @@ import org.apache.struts.action.*;
 
 public class ViralTreatmentAction extends BaseAction {
 
-    /**
-     * Delete
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'delete' method");
-        }
+	/**
+	 * Edit
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("Entering 'edit' method");
+		}
 
-        return mapping.findForward("");
-    }
+		System.out.println("<ViralTreatmentAction edit> Entering... ");
 
-    /**
-     * Cancel
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+		// Grab the current Therapy we are working with related to this
+		// animalModel
+		String aTherapyID = request.getParameter("aTherapyID");
 
-        return mapping.findForward("");
-    }
+		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
-    /**
-     * Edit
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
-        }
+		System.out.println("<ViralTreatmentAction editing> editing... " + "\n\t name: " + viralTreatmentForm.getName()
+				+ "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
+				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
+				+ "\n\t doseUnit: " + viralTreatmentForm.getDoseUnit() + "\n\t ageAtTreatment: "
+				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageUnit: " + viralTreatmentForm.getAgeUnit());
 
-        System.out.println("<ViralTreatmentAction edit> Entering... ");
+		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
-        // Grab the current Therapy we are working with related to this
-        // animalModel
-        String aTherapyID = request.getParameter("aTherapyID");
+		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-        ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
+		try {
 
-        System.out.println("<ViralTreatmentAction editing> editing... " + "\n\t name: " + viralTreatmentForm.getName()
-                + "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
-                + "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
-                + "\n\t doseUnit: " + viralTreatmentForm.getDoseUnit() + "\n\t ageAtTreatment: "
-                + viralTreatmentForm.getAgeAtTreatment() + "\n\t ageUnit: " + viralTreatmentForm.getAgeUnit());
+			if (theAction.equals("Delete")) {
+				therapyManager.remove(aTherapyID);
 
-        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("viralTreatment.delete.successful"));
+				saveErrors(request, msg);
 
-        try {
+			} else {
 
-            Therapy theTherapy = therapyManager.get(aTherapyID);
-            therapyManager.update(viralTreatmentForm, theTherapy);
+				Therapy theTherapy = therapyManager.get(aTherapyID);
+				therapyManager.update(viralTreatmentForm, theTherapy);
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("viralTreatment.edit.successful"));
-            saveErrors(request, msg);
+				// Add a message to be displayed in submitOverview.jsp saying
+				// you've
+				// created a new model successfully
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("viralTreatment.edit.successful"));
+				saveErrors(request, msg);
+			}
+		} catch (Exception e) {
 
-        } catch (Exception e) {
+			log.error("Unable to get add a chemical drug action: ", e);
 
-            log.error("Unable to get add a chemical drug action: ", e);
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(request, theMsg);
+		}
 
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, theMsg);
-        }
+		return mapping.findForward("AnimalModelTreePopulateAction");
+	}
 
-        return mapping.findForward("AnimalModelTreePopulateAction");
-    }
+	/**
+	 * Save
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("Entering 'save' method");
+		}
 
-    /**
-     * Save
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'save' method");
-        }
+		System.out.println("<ViralTreatmentAction save> Entering... ");
 
-        System.out.println("<ViralTreatmentAction save> Entering... ");
+		// Grab the current modelID from the session
+		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
-        ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
+		System.out.println("<GrowthFactorAction save> Adding... " + "\n\t name: " + viralTreatmentForm.getName()
+				+ "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
+				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
+				+ "\n\t doseUnit: " + viralTreatmentForm.getDoseUnit() + "\n\t ageAtTreatment: "
+				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageUnit: " + viralTreatmentForm.getAgeUnit());
 
-        System.out.println("<GrowthFactorAction save> Adding... " + "\n\t name: " + viralTreatmentForm.getName()
-                + "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
-                + "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
-                + "\n\t doseUnit: " + viralTreatmentForm.getDoseUnit() + "\n\t ageAtTreatment: "
-                + viralTreatmentForm.getAgeAtTreatment() + "\n\t ageUnit: " + viralTreatmentForm.getAgeUnit());
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		AnimalModel animalModel = animalModelManager.get(modelID);
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        AnimalModel animalModel = animalModelManager.get(modelID);
+		try {
+			animalModelManager.addTherapy(animalModel, viralTreatmentForm);
 
-        try {
-            animalModelManager.addTherapy(animalModel, viralTreatmentForm);
+			// Add a message to be displayed in submitOverview.jsp saying you've
+			// created a new model successfully
+			ActionMessages msg = new ActionMessages();
+			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("viralTreatment.creation.successful"));
+			saveErrors(request, msg);
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("viralTreatment.creation.successful"));
-            saveErrors(request, msg);
+		} catch (Exception e) {
 
-        } catch (Exception e) {
+			log.error("Unable to get add a chemical drug action: ", e);
 
-            log.error("Unable to get add a chemical drug action: ", e);
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(request, theMsg);
+		}
 
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, theMsg);
-        }
-
-        return mapping.findForward("AnimalModelTreePopulateAction");
-    }
+		return mapping.findForward("AnimalModelTreePopulateAction");
+	}
 
 }

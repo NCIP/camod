@@ -31,6 +31,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
 	    EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;	 
 	    
 	    String aEngineeredTransgeneID = request.getParameter("aEngineeredTransgeneID");
+	    request.setAttribute("aEngineeredTransgeneID", aEngineeredTransgeneID);
 	    Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().get(aEngineeredTransgeneID);
 	    
 	    //Tansgene Integration

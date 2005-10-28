@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.8 2005-10-27 12:53:24 georgeda Exp $
+ * $Id: CellLinePopulateAction.java,v 1.9 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/27 12:53:24  georgeda
+ * Added validation
+ *
  * Revision 1.7  2005/10/20 20:26:21  pandyas
  * EVSTree (organ) functions properly
  *
@@ -41,6 +44,7 @@ public class CellLinePopulateAction extends BaseAction {
 		// Grab the current Cell Line we are working with related to this
 		// animalModel
 		String aCellID = request.getParameter("aCellID");
+		request.setAttribute("aCellID", aCellID);
 
 		CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
 		CellLine cellLine = theCellLineManager.get(aCellID);

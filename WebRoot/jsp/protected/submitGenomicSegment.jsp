@@ -214,7 +214,13 @@
 				  <html:reset styleClass="actionButton">
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
-				
+
+  				  <c:if test="${not empty aGenomicSegmentID}">
+	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+						  <bean:message key="button.delete"/>
+					  </html:submit>
+			      </c:if>
+				      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="aGenomicSegmentID" value="<%= aGenomicSegmentID %>">
 				  	

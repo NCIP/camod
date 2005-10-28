@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorAction.java,v 1.6 2005-10-20 20:39:04 pandyas Exp $
+ * $Id: NutritionalFactorAction.java,v 1.7 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 20:39:04  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -26,144 +29,118 @@ import org.apache.struts.action.*;
  */
 public class NutritionalFactorAction extends BaseAction {
 
-    /**
-     * Delete
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'delete' method");
-        }
+	/**
+	 * Edit
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("Entering 'edit' method");
+		}
 
-        return mapping.findForward("");
-    }
+		// Grab the current Therapy we are working with related to this
+		// animalModel
+		String aTherapyID = request.getParameter("aTherapyID");
 
-    /**
-     * Cancel
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+		// Create a form to edit
+		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
 
-        return mapping.findForward("");
-    }
+		System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
+				+ nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
+				+ nutritForm.getDosage() + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
+				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
+				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-    /**
-     * Edit
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
-        }
+		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
-        // Grab the current Therapy we are working with related to this
-        // animalModel
-        String aTherapyID = request.getParameter("aTherapyID");
+		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-        // Create a form to edit
-        NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
+		try {
 
-        System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
-                + nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
-                + nutritForm.getDosage() + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
-                + nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+			if (theAction.equals("Delete")) {
+				therapyManager.remove(aTherapyID);
 
-        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.delete.successful"));
+				saveErrors(request, msg);
 
-        try {
+			} else {
 
-            Therapy theTherapy = therapyManager.get(aTherapyID);
-            therapyManager.update(nutritForm, theTherapy);
+				Therapy theTherapy = therapyManager.get(aTherapyID);
+				therapyManager.update(nutritForm, theTherapy);
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.edit.successful"));
-            saveErrors(request, msg);
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.edit.successful"));
+				saveErrors(request, msg);
+			}
+		} catch (Exception e) {
 
-        } catch (Exception e) {
+			log.error("Unable to get add a chemical drug action: ", e);
 
-            log.error("Unable to get add a chemical drug action: ", e);
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(request, theMsg);
+		}
 
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, theMsg);
-        }
+		return mapping.findForward("AnimalModelTreePopulateAction");
+	}
 
-        return mapping.findForward("AnimalModelTreePopulateAction");
-    }
+	/**
+	 * Save
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("Entering 'save' method");
+		}
+		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
 
-    /**
-     * Save
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'save' method");
-        }
-        NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
+		System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
+				+ nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
+				+ nutritForm.getDosage() + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
+				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
+				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-        System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
-                + nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
-                + nutritForm.getDosage() + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
-                + nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+		/* Grab the current modelID from the session */
+		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        /* Grab the current modelID from the session */
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+		/* Create all the manager objects needed for Screen */
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-        /* Create all the manager objects needed for Screen */
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		/* Set modelID in AnimalModel object */
+		AnimalModel animalModel = animalModelManager.get(modelID);
 
-        /* Set modelID in AnimalModel object */
-        AnimalModel animalModel = animalModelManager.get(modelID);
+		try {
+			animalModelManager.addTherapy(animalModel, nutritForm);
 
-        try {
-            animalModelManager.addTherapy(animalModel, nutritForm);
+			ActionMessages msg = new ActionMessages();
+			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.creation.successful"));
+			saveErrors(request, msg);
 
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.creation.successful"));
-            saveErrors(request, msg);
+		} catch (Exception e) {
 
-        } catch (Exception e) {
+			log.error("Unable to get add an environmental factor: ", e);
 
-            log.error("Unable to get add an environmental factor: ", e);
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(request, theMsg);
+		}
 
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, theMsg);
-        }
-
-        return mapping.findForward("AnimalModelTreePopulateAction");
-    }
+		return mapping.findForward("AnimalModelTreePopulateAction");
+	}
 
 }

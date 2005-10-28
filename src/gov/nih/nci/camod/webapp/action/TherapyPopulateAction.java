@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.8 2005-10-27 19:42:05 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.9 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/27 19:42:05  georgeda
+ * Cleanup
+ *
  * Revision 1.7  2005/10/26 14:10:49  georgeda
  * Added other administrative route to therapy
  *
@@ -32,148 +35,154 @@ import org.apache.struts.action.*;
 
 public class TherapyPopulateAction extends BaseAction {
 
-    /**
-     * Pre-populate all field values in the form <FormName> Used by <jspName>
-     * 
-     */
-    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        
-        log.trace("Entering TherapyPopulateAction.populate");
+	/**
+	 * Pre-populate all field values in the form <FormName> Used by <jspName>
+	 * 
+	 */
+	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        // Create a form to edit
-        TherapyForm therapyForm = (TherapyForm) form;
+		log.trace("Entering TherapyPopulateAction.populate");
 
-        // Grab the current Therapy we are working with related to this
-        // animalModel
-        String aTherapyID = request.getParameter("aTherapyID");
+		// Create a form to edit
+		TherapyForm therapyForm = (TherapyForm) form;
 
-        String modelID = "" + request.getSession().getAttribute(Constants.MODELID);
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        AnimalModel am = animalModelManager.get(modelID);
+		// Grab the current Therapy we are working with related to this
+		// animalModel
+		String aTherapyID = request.getParameter("aTherapyID");
+		request.setAttribute("aTherapyID", aTherapyID);
 
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
-        this.dropdown(request, response);
+		String modelID = "" + request.getSession().getAttribute(Constants.MODELID);
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		AnimalModel am = animalModelManager.get(modelID);
 
-        // retrieve the list of all therapies from the current animalModel
-        List therapyList = am.getTherapyCollection();
+		// Prepopulate all dropdown fields, set the global Constants to the
+		// following
+		this.dropdown(request, response);
 
-        Therapy ty = new Therapy();
+		// retrieve the list of all therapies from the current animalModel
+		List therapyList = am.getTherapyCollection();
 
-        // find the specific one we need
-        for (int i = 0; i < therapyList.size(); i++) {
-            ty = (Therapy) therapyList.get(i);
-            if (ty.getId().toString().equals(aTherapyID)) {
-                break;
-            }
-        }
+		Therapy ty = new Therapy();
 
-        therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
-        if (ty.getTreatment().getAgeAtTreatment() != null) {
-            therapyForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
-        }
+		// find the specific one we need
+		for (int i = 0; i < therapyList.size(); i++) {
+			ty = (Therapy) therapyList.get(i);
+			if (ty.getId().toString().equals(aTherapyID)) {
+				break;
+			}
+		}
 
-        therapyForm.setDosage(ty.getTreatment().getDosage());
-        therapyForm.setName(ty.getAgent().getName());
-        therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
-        therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
+		if (ty.getTreatment().getSexDistribution() != null) {
+			therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
+		}
+		if (ty.getTreatment().getAgeAtTreatment() != null) {
+			therapyForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
+		}
 
-        if (ty.getAgent().getCasNumber() != null) {
-            therapyForm.setCASNumber(ty.getAgent().getCasNumber());
-        }
+		therapyForm.setDosage(ty.getTreatment().getDosage());
+		therapyForm.setName(ty.getAgent().getName());
+		therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+		therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
 
-        if (ty.getAgent().getNscNumber() != null) {
-            therapyForm.setNSCNumber(ty.getAgent().getNscNumber().toString());
-        }
+		if (ty.getAgent().getCasNumber() != null) {
+			therapyForm.setCASNumber(ty.getAgent().getCasNumber());
+		}
 
-        // Therapy object attributes
-        therapyForm.setToxicityGrade(ty.getToxicityGrade());
-        therapyForm.setBiomarker(ty.getBiomarker());
-        therapyForm.setTumorResponse(ty.getTumorResponse());
-        therapyForm.setExperiment(ty.getExperiment());
-        therapyForm.setResults(ty.getResults());
-        therapyForm.setComments(ty.getComments());
+		if (ty.getAgent().getNscNumber() != null) {
+			therapyForm.setNSCNumber(ty.getAgent().getNscNumber().toString());
+		}
 
-        // Get the collection of agent targets
-        List theAgentTargetsList = ty.getAgent().getAgentTargetCollection();
-        String[] theTargets = new String[theAgentTargetsList.size()];
-        for (int i = 0; i < theAgentTargetsList.size(); i++) {
-            AgentTarget theAgentTarget = (AgentTarget) theAgentTargetsList.get(i);
-            theTargets[i] = theAgentTarget.getTargetName();
-        }
-        therapyForm.setSelectedTargets(theTargets);
+		// Therapy object attributes
+		therapyForm.setToxicityGrade(ty.getToxicityGrade());
+		therapyForm.setBiomarker(ty.getBiomarker());
+		therapyForm.setTumorResponse(ty.getTumorResponse());
+		therapyForm.setExperiment(ty.getExperiment());
+		therapyForm.setResults(ty.getResults());
+		therapyForm.setComments(ty.getComments());
 
-        // Get the collection of biological processes
-        List theProcessesList = ty.getAgent().getBiologicalProcessCollection();
-        String[] theProcesses = new String[theProcessesList.size()];
-        for (int i = 0; i < theProcessesList.size(); i++) {
-            BiologicalProcess theBiologicalProcess = (BiologicalProcess) theProcessesList.get(i);
-            theProcesses[i] = theBiologicalProcess.getProcessName();
-        }
-        therapyForm.setSelectedProcesses(theProcesses);
+		// Get the collection of agent targets
+		List theAgentTargetsList = ty.getAgent().getAgentTargetCollection();
+		String[] theTargets = new String[theAgentTargetsList.size()];
+		for (int i = 0; i < theAgentTargetsList.size(); i++) {
+			AgentTarget theAgentTarget = (AgentTarget) theAgentTargetsList.get(i);
+			theTargets[i] = theAgentTarget.getTargetName();
+		}
+		therapyForm.setSelectedTargets(theTargets);
 
-        // Get the collection of biological processes
-        List theChemicalClassesList = ty.getAgent().getChemicalClassCollection();
-        String[] theChemicalClasses = new String[theChemicalClassesList.size()];
-        for (int i = 0; i < theChemicalClassesList.size(); i++) {
-            ChemicalClass theChemicalClass = (ChemicalClass) theChemicalClassesList.get(i);
-            theChemicalClasses[i] = theChemicalClass.getChemicalClassName();
-        }
-        therapyForm.setSelectedChemicalClasses(theChemicalClasses);
+		// Get the collection of biological processes
+		List theProcessesList = ty.getAgent().getBiologicalProcessCollection();
+		String[] theProcesses = new String[theProcessesList.size()];
+		for (int i = 0; i < theProcessesList.size(); i++) {
+			BiologicalProcess theBiologicalProcess = (BiologicalProcess) theProcessesList.get(i);
+			theProcesses[i] = theBiologicalProcess.getProcessName();
+		}
+		therapyForm.setSelectedProcesses(theProcesses);
 
-        log.trace("Exiting TherapyPopulateAction.populate");
+		// Get the collection of biological processes
+		List theChemicalClassesList = ty.getAgent().getChemicalClassCollection();
+		String[] theChemicalClasses = new String[theChemicalClassesList.size()];
+		for (int i = 0; i < theChemicalClassesList.size(); i++) {
+			ChemicalClass theChemicalClass = (ChemicalClass) theChemicalClassesList.get(i);
+			theChemicalClasses[i] = theChemicalClass.getChemicalClassName();
+		}
+		therapyForm.setSelectedChemicalClasses(theChemicalClasses);
 
-        return mapping.findForward("submitTherapy");
-    }
+		log.trace("Exiting TherapyPopulateAction.populate");
 
-    /**
-     * Populate the dropdown menus for submitEnvironmentalFactors
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+		return mapping.findForward("submitTherapy");
+	}
 
-        System.out.println("<TherapyPopulateAction dropdown> Entering ActionForward dropdown()");
+	/**
+	 * Populate the dropdown menus for submitEnvironmentalFactors
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        // setup dropdown menus
-        this.dropdown(request, response);
+		System.out.println("<TherapyPopulateAction dropdown> Entering ActionForward dropdown()");
 
-        System.out.println("<TherapyPopulateAction dropdown> Exiting ActionForward dropdown()");
+		// setup dropdown menus
+		this.dropdown(request, response);
 
-        return mapping.findForward("submitTherapy");
-    }
+		System.out.println("<TherapyPopulateAction dropdown> Exiting ActionForward dropdown()");
 
-    /**
-     * Populate all drowpdowns for this type of form
-     * 
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return mapping.findForward("submitTherapy");
+	}
 
-        System.out.println("<TherapyPopulateAction dropdown> Entering void dropdown()");
+	/**
+	 * Populate all drowpdowns for this type of form
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALCLASSESDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.BIOLOGICALPROCESSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.THERAPEUTICTARGETSDROP, "");
+		System.out.println("<TherapyPopulateAction dropdown> Entering void dropdown()");
 
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMTHERAPYDOSEUNITSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP, Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TOXICITYGRADESDROP, Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, Constants.Dropdowns.ADD_BLANK);
+		// Prepopulate all dropdown fields, set the global Constants to the
+		// following
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALCLASSESDROP, "");
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.BIOLOGICALPROCESSDROP, "");
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.THERAPEUTICTARGETSDROP, "");
 
-        System.out.println("<TherapyPopulateAction dropdown> Exiting void dropdown()");
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMTHERAPYDOSEUNITSDROP, "");
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP,
+				Constants.Dropdowns.ADD_BLANK);
+		NewDropdownUtil
+				.populateDropdown(request, Constants.Dropdowns.TOXICITYGRADESDROP, Constants.Dropdowns.ADD_BLANK);
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP,
+				Constants.Dropdowns.ADD_BLANK);
 
-    }
+		System.out.println("<TherapyPopulateAction dropdown> Exiting void dropdown()");
+
+	}
 }

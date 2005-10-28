@@ -32,7 +32,8 @@ public class PublicationPopulateAction extends BaseAction {
         // Grab the current Therapy we are working with related to this
         // animalModel
         String aPubID = request.getParameter("aPubID");
-
+        request.setAttribute("aPubID", aPubID);
+        
         // Use the current animalModel based on the ID stored in the session
         PublicationManager thePublicationManager = (PublicationManager) getBean("publicationManager");
         Publication thePublication = thePublicationManager.get(aPubID);

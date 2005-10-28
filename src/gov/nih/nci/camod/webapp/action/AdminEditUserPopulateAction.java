@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserPopulateAction.java,v 1.3 2005-10-24 13:28:17 georgeda Exp $
+ * $Id: AdminEditUserPopulateAction.java,v 1.4 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/24 13:28:17  georgeda
+ * Cleanup changes
+ *
  * Revision 1.2  2005/10/17 16:30:24  georgeda
  * Cleanup
  *
@@ -13,6 +16,8 @@
  *
  */
 package gov.nih.nci.camod.webapp.action;
+
+import java.util.Enumeration;
 
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
@@ -42,6 +47,13 @@ public class AdminEditUserPopulateAction extends BaseAction {
 
 		String theAction = (String) inRequest.getParameter("action");
 
+           Enumeration theEnum = inRequest.getParameterNames();
+            
+            while(theEnum.hasMoreElements())
+            {
+                System.out.println(theEnum.nextElement());
+            }
+            
 		String theForward = "next";
 
 		// Add a brand new user

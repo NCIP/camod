@@ -19,6 +19,8 @@ public class ImagePopulateAction extends BaseAction {
         ImageForm imageForm = (ImageForm) form;
 
         String aImageID = request.getParameter("aImageID");
+        request.setAttribute("aImageID", aImageID);
+        
         Image inImage = ImageManagerSingleton.instance().get(aImageID);
 
         System.out.println("FILESERVERLOCATION=" + inImage.getFileServerLocation());

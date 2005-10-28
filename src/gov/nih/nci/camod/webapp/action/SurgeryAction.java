@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.4 2005-09-28 21:20:11 georgeda Exp $
+ * $Id: SurgeryAction.java,v 1.5 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/09/28 21:20:11  georgeda
+ * Finished up converting to new manager
+ *
  */
 package gov.nih.nci.camod.webapp.action;
 
@@ -21,141 +24,118 @@ import org.apache.struts.action.*;
 
 public class SurgeryAction extends BaseAction {
 
-    /**
-     * Delete
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'delete' method");
-        }
+	/**
+	 * Edit
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("Entering 'edit' method");
+		}
 
-        return mapping.findForward("");
-    }
+		System.out.println("<SurgeryAction edit> Entering... ");
 
-    /**
-     * Cancel
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+		// Grab the current Therapy we are working with related to this
+		// animalModel
+		String aTherapyID = request.getParameter("aTherapyID");
 
-        return mapping.findForward("");
-    }
+		SurgeryForm surgeryForm = (SurgeryForm) form;
 
-    /**
-     * Edit
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'edit' method");
-        }
+		System.out.println("<SurgeryAction editing> editing... " + "\n\t name: " + surgeryForm.getName()
+				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
+				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageUnit: " + surgeryForm.getAgeUnit());
 
-        System.out.println("<SurgeryAction edit> Entering... ");
+		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
-        // Grab the current Therapy we are working with related to this
-        // animalModel
-        String aTherapyID = request.getParameter("aTherapyID");
+		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-        SurgeryForm surgeryForm = (SurgeryForm) form;
+		try {
 
-        System.out.println("<SurgeryAction editing> editing... " + "\n\t name: " + surgeryForm.getName()
-                + "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
-                + "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageUnit: " + surgeryForm.getAgeUnit());
+			if (theAction.equals("Delete")) {
+				therapyManager.remove(aTherapyID);
 
-        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.delete.successful"));
+				saveErrors(request, msg);
 
-        try {
+			} else {
 
-            Therapy theTherapy = therapyManager.get(aTherapyID);
-            therapyManager.update(surgeryForm, theTherapy);
+				Therapy theTherapy = therapyManager.get(aTherapyID);
+				therapyManager.update(surgeryForm, theTherapy);
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.edit.successful"));
-            saveErrors(request, msg);
+				// Add a message to be displayed in submitOverview.jsp saying
+				// you've
+				// created a new model successfully
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.edit.successful"));
+				saveErrors(request, msg);
+			}
+		} catch (Exception e) {
 
-        } catch (Exception e) {
+			log.error("Unable to get add a chemical drug action: ", e);
 
-            log.error("Unable to get add a chemical drug action: ", e);
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(request, theMsg);
+		}
 
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, theMsg);
-        }
+		return mapping.findForward("AnimalModelTreePopulateAction");
+	}
 
-        return mapping.findForward("AnimalModelTreePopulateAction");
-    }
+	/**
+	 * Save
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("Entering 'save' method");
+		}
 
-    /**
-     * Save
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'save' method");
-        }
+		System.out.println("<SurgeryAction save> Entering... ");
 
-        System.out.println("<SurgeryAction save> Entering... ");
+		// Grab the current modelID from the session
+		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+		SurgeryForm surgeryForm = (SurgeryForm) form;
 
-        SurgeryForm surgeryForm = (SurgeryForm) form;
+		System.out.println("<SurgeryAction save> Adding... " + "\n\t name: " + surgeryForm.getName()
+				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
+				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageUnit: " + surgeryForm.getAgeUnit());
 
-        System.out.println("<SurgeryAction save> Adding... " + "\n\t name: " + surgeryForm.getName()
-                + "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
-                + "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageUnit: " + surgeryForm.getAgeUnit());
+		/* Create all the manager objects needed for Screen */
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		AnimalModel animalModel = animalModelManager.get(modelID);
 
-        /* Create all the manager objects needed for Screen */
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        AnimalModel animalModel = animalModelManager.get(modelID);
+		try {
+			animalModelManager.addTherapy(animalModel, surgeryForm);
 
-        try {
-            animalModelManager.addTherapy(animalModel, surgeryForm);
+			ActionMessages msg = new ActionMessages();
+			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.creation.successful"));
+			saveErrors(request, msg);
 
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.creation.successful"));
-            saveErrors(request, msg);
+		} catch (Exception e) {
 
-        } catch (Exception e) {
+			log.error("Unable to get add an environmental factor: ", e);
 
-            log.error("Unable to get add an environmental factor: ", e);
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+			saveErrors(request, theMsg);
+		}
 
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, theMsg);
-        }
-
-        return mapping.findForward("AnimalModelTreePopulateAction");
-    }
+		return mapping.findForward("AnimalModelTreePopulateAction");
+	}
 }

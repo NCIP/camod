@@ -46,8 +46,12 @@ function chkOtherAdminRoute() {
 	
 	String actionName = "TherapyAction.do?method=save";
 	
-	if ( aTherapyID != null )
+    if ( aTherapyID != null && aTherapyID.length() > 0) {
 		actionName = "TherapyAction.do?method=edit";
+	}
+    else {
+        aTherapyID = "";
+    }
 %>
 
 <script language="JavaScript" src="scripts/initIt.js"></script>
@@ -321,6 +325,12 @@ function chkOtherAdminRoute() {
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
 	  				  
+	  				  <c:if test="${not empty aTherapyID}">
+		  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+							  <bean:message key="button.delete"/>
+						  </html:submit>
+				      </c:if>
+				      
 					  <!--  Done this way since html:hidden doesn't seem to work correctly -->
   				  	  <input type="hidden" name="aTherapyID" value="<%= aTherapyID %>">	  				  
 				  

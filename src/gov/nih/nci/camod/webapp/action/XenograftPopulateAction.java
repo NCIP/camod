@@ -30,6 +30,8 @@ public class XenograftPopulateAction extends BaseAction {
         // Grab the current Therapy we are working with related to this
         // animalModel
         String aXenograftID = request.getParameter("aXenograftID");
+        request.setAttribute("aXenograftID", aXenograftID);
+        
         Xenograft xeno = XenograftManagerSingleton.instance().get(aXenograftID);
 
         xenograftForm.setName(xeno.getName());
@@ -41,7 +43,7 @@ public class XenograftPopulateAction extends BaseAction {
         xenograftForm.setCellAmount(xeno.getCellAmount());
 
         Taxon tax = xeno.getHostSpecies();
-        xenograftForm.setHostScientificName(tax.getCommonName());
+        xenograftForm.setHostScientificName(tax.getScientificName());
 
         if (tax.getEthnicityStrainUnctrlVocab() != null) {
             xenograftForm.setHostEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);

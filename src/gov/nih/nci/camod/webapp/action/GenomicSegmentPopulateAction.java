@@ -26,6 +26,8 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 	    GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
 	 
 	    String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
+	    request.setAttribute("aGenomicSegmentID", aGenomicSegmentID);
+	    
 	    GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().get(aGenomicSegmentID);
 	 
 	    if ( theGenomicSegment.getLocationOfIntegration().equals("Random") ) {

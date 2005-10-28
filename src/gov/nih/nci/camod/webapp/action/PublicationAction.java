@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationAction.java,v 1.7 2005-10-27 12:53:00 georgeda Exp $
+ * $Id: PublicationAction.java,v 1.8 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/27 12:53:00  georgeda
+ * Refactor of publication manager
+ *
  * Revision 1.6  2005/10/26 20:12:43  pandyas
  * clean up, java docs
  *
@@ -21,146 +24,117 @@ import gov.nih.nci.camod.webapp.form.PublicationForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 /**
  * PublicationAction Class
  */
 public final class PublicationAction extends BaseAction {
 
-	/**
-	 * Delete
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		if (log.isDebugEnabled()) {
-			log.debug("Entering 'delete' method");
-		}
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		return mapping.findForward("");
-	}
+        log.debug("Entering PublicationAction.edit");
 
-	/**
-	 * Cancel
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+        // Create a form to edit
+        PublicationForm pubForm = (PublicationForm) form;
 
-		return mapping.findForward("");
-	}
+        log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
+                + "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
+                + pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
+                + pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
+                + pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
+                + pubForm.getFirstTimeReported() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+        // Grab the current Therapy we are working with related to this
+        // animalModel
+        String aPubID = request.getParameter("aPubID");
 
-		log.debug("Entering PublicationAction.edit");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        
+        try {
+            PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
+            if (theAction.equals("Delete")) {
+                publicationManager.remove(aPubID);
+                
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.delete.successful"));
+                saveErrors(request, msg);
+                
+            } else {
 
-		// Create a form to edit
-		PublicationForm pubForm = (PublicationForm) form;
+                Publication thePublication = publicationManager.get(aPubID);
+                publicationManager.update(pubForm, thePublication);
 
-		log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
-				+ "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
-				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
-				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
-				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
-				+ pubForm.getFirstTimeReported() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (Exception e) {
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aPubID = request.getParameter("aPubID");
+            log.error("Unable to update a publication: ", e);
 
-		try {
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
-			PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
-			Publication thePublication = publicationManager.get(aPubID);
-			publicationManager.update(pubForm, thePublication);
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.edit.successful"));
-			saveErrors(request, msg);
+    /**
+     * Called from submitEnvironmentalFactors.jsp
+     * 
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		} catch (Exception e) {
+        log.debug("Entering 'save' method");
 
-			log.error("Unable to update a publication: ", e);
+        PublicationForm pubForm = (PublicationForm) form;
 
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, theMsg);
-		}
+        log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
+                + "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
+                + pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
+                + pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
+                + pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
+                + pubForm.getFirstTimeReported() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+        /* Grab the current modelID from the session */
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-	/**
-	 * Called from submitEnvironmentalFactors.jsp
-	 * 
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+        try {
+            AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-		log.debug("Entering 'save' method");
+            AnimalModel animalModel = animalModelManager.get(modelID);
 
-		PublicationForm pubForm = (PublicationForm) form;
+            animalModelManager.addPublication(animalModel, pubForm);
 
-		log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
-				+ "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
-				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
-				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
-				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
-				+ pubForm.getFirstTimeReported() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
+            saveErrors(request, msg);
 
-		/* Grab the current modelID from the session */
-		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+        } catch (Exception e) {
 
-		try {
-			AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            log.error("Unable to add a publication: ", e);
 
-			AnimalModel animalModel = animalModelManager.get(modelID);
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
-			animalModelManager.addPublication(animalModel, pubForm);
-
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
-			saveErrors(request, msg);
-
-		} catch (Exception e) {
-
-			log.error("Unable to add a publication: ", e);
-
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, theMsg);
-		}
-
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 }

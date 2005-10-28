@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.2 2005-10-27 16:27:06 georgeda Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.3 2005-10-28 12:47:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/27 16:27:06  georgeda
+ * More validation
+ *
  * Revision 1.1  2005/10/26 20:14:34  pandyas
  * implemented model availability
  *
@@ -43,6 +46,8 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         // Grab the current Availability we are working with related to this
         // animalModel
         String aAvailabilityID = request.getParameter("aAvailabilityID");
+        request.setAttribute("aAvailabilityID", aAvailabilityID);
+        
         AnimalAvailability avilablity = AvailabilityManagerSingleton.instance().get(aAvailabilityID);
         System.out.println("avilablity (id and name): " + avilablity);
 
