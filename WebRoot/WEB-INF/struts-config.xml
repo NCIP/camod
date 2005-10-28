@@ -1305,7 +1305,11 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="false"
-	        input="submitHistopathology">   	
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitHistopathology.do">
+        </forward>	           	
     </action>
     
     <action path="/HistopathologyPopulateAction"
@@ -1316,7 +1320,7 @@
 			validate="false">
          <forward 
     		name="next"
-    		path="/jsp/protected/submitHistopathology.jsp">
+    		path="/submitHistopathology.do">
     	 </forward>						
     </action>  
     
@@ -1326,7 +1330,11 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="false"
-	        input="submitAssocMetastasis">   	
+	        input="input"> 
+	    <forward
+            name="input"
+            path="/submitAssocMetastasis.do">
+        </forward>	          	
     </action>
     
     <action path="/AssociatedMetastasisPopulateAction"
@@ -1337,7 +1345,7 @@
 			validate="false">
          <forward 
     		name="next"
-    		path="/jsp/protected/submitAssocMetastasis.jsp">
+    		path="/submitAssocMetastasis.do">
     	 </forward>					
     </action> 
     
@@ -1348,7 +1356,11 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="false"
-	        input="submitClinicalMarkers">   	
+	        input="input"> 
+	    <forward
+            name="input"
+            path="/submitClinicalMarkers.do">
+        </forward>	          	
     </action>
     
     <action path="/ClinicalMarkerPopulateAction"
@@ -1358,6 +1370,21 @@
             parameter="method"
 			validate="false">		
     </action>    
+     
+   	 <!-- HormoneForm -->
+   	 <action path="/HormoneAction"
+	        type="gov.nih.nci.camod.webapp.action.HormoneAction"
+	        name="hormoneForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <forward
+            name="input"
+            path="/submitHormone.do">
+        </forward>     	  	
+    </action>
+       
      
    	 <!-- HormoneForm -->
    	 <action path="/HormoneAction"
