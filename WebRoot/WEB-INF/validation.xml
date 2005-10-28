@@ -59,9 +59,6 @@
         <field property="principalInvestigator" depends="required">
             <arg0 key="ModelCharacteristicsForm.principalInvestigator"/>
         </field>
-        <field property="type" depends="required">
-            <arg0 key="ModelCharacteristicsForm.type"/>
-        </field>
         <field property="scientificName" depends="required">
             <arg0 key="ModelCharacteristicsForm.scientificName"/>
         </field>
@@ -91,9 +88,6 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
-        </field>
-        <field property="type" depends="required">
-            <arg0 key="ModelCharacteristicsForm.type"/>
         </field>
         <field property="releaseDate" depends="required">
             <arg0 key="ModelCharacteristicsForm.releaseDate"/>
@@ -128,9 +122,6 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="type" depends="required">
-            <arg0 key="ModelCharacteristicsForm.type"/>
-        </field>
         <field property="geneInVirus" depends="required, maxlength">
             <arg0 key="GeneDeliveryForm.geneInVirus"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -161,12 +152,6 @@
 	    <field property="name" depends="required">
             <arg0 key="ChemicalDrugForm.name"/>
         </field>
-        <field property="administrativeRoute" depends="required">
-            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
-        </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
-        </field>     
         <field property="otherName" depends="validwhen, maxlength">
             <arg0 key="ChemicalDrugForm.otherName"/>
             <var>
@@ -232,12 +217,6 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="administrativeRoute" depends="required">
-            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
-        </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
-        </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -291,12 +270,6 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
-        </field>
-        <field property="administrativeRoute" depends="required">
-            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
-        </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -352,12 +325,6 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="administrativeRoute" depends="required">
-            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
-        </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
-        </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -412,9 +379,6 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
-        </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -456,12 +420,6 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
-        </field>
-        <field property="administrativeRoute" depends="required">
-            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
-        </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -517,9 +475,6 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
-        </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -553,12 +508,6 @@
                 <var-name>maxlength</var-name>
                 <var-value>255</var-value>
             </var>
-        </field>
-        <field property="type" depends="required">
-            <arg0 key="CarcinogenicIntervention.type"/>
-        </field>
-        <field property="administrativeRoute" depends="required">
-            <arg0 key="CarcinogenicIntervention.administrativeRoute"/>
         </field>
         <field property="ageAtTreatment" depends="maxlength">
             <arg0 key="CarcinogenicIntervention.ageAtTreatment"/>
@@ -854,8 +803,13 @@
                 <var-value>255</var-value>
             </var>
     	</field>
-    	<field property="volume" depends="integer">
+    	<field property="volume" depends="maxlength">
             <arg0 key="PublicationForm.volume"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
     	</field>
     	<field property="startPage" depends="integer">
             <arg0 key="PublicationForm.startPage"/>
