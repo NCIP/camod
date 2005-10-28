@@ -8,6 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.Duplicatable;
 
 /**
@@ -26,6 +27,18 @@ public class GeneDelivery extends BaseObject implements Serializable, Duplicatab
     private Organ organ;
     private Treatment treatment;
 
+    /**
+     * @return Returns the display name.
+     */
+    public String getDisplayName() {
+        String theDisplayName = viralVector;
+        if (viralVector.equals(Constants.Dropdowns.OTHER_OPTION))
+        {
+            theDisplayName += " - " + viralVectorUnctrlVocab;
+        }
+        return theDisplayName;
+    }
+    
     /**
      * @return Returns the treatment.
      */

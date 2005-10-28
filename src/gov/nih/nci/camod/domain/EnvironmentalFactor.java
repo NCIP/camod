@@ -6,9 +6,10 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.io.Serializable;
-
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.Duplicatable;
+
+import java.io.Serializable;
 
 /**
  * @author rajputs
@@ -41,6 +42,18 @@ public class EnvironmentalFactor extends BaseObject implements Serializable, Dup
         this.casNumber = casNumber;
     }
 
+    /**
+     * @return Returns the display name.
+     */
+    public String getDisplayName() {
+        String theDisplayName = name;
+        if (name.equals(Constants.Dropdowns.OTHER_OPTION))
+        {
+            theDisplayName += " - " + nameUnctrlVocab;
+        }
+        return theDisplayName;
+    }
+    
     /**
      * @return Returns the name.
      */

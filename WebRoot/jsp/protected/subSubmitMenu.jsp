@@ -140,47 +140,47 @@
 	<span class="submasterdiv" class="submenu"  id="sub3">
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="ChemicalDrugPopulateAction.do?method=dropdown">Enter Chemical/Drug</html:link><br>
 			  <logic:iterate id="aTherapy" name="chemicaldrug_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ChemicalDrugPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ChemicalDrugPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="EnvironmentalFactorPopulateAction.do?method=dropdown">Enter Environmental Factors</html:link><br>
 			  <logic:iterate id="aTherapy" name="environmentalfactor_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="EnvironmentalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="EnvironmentalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GeneDeliveryPopulateAction.do?method=dropdown">Enter Gene Delivery</html:link><br>
 			  <logic:iterate id="aTherapy" name="genedelivery_list" type="GeneDelivery">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="viralVector" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 			  
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factors</html:link><br>		
 			  <logic:iterate id="aTherapy" name="growthfactors_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GrowthFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GrowthFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 			  
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="HormonePopulateAction.do?method=dropdown">Enter Hormone</html:link><br>
 			  <logic:iterate id="aTherapy" name="hormone_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="HormonePopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="HormonePopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="NutritionalFactorPopulateAction.do?method=dropdown">Enter Nutritional Factors</html:link><br>
 			  <logic:iterate id="aTherapy" name="nutritionalfactors_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="NutritionalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="NutritionalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>		
 		
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="RadiationPopulateAction.do?method=dropdown">Enter Radiation</html:link><br>
 			  <logic:iterate id="aTherapy" name="radiation_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="RadiationPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="RadiationPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>		
 
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="SurgeryPopulateAction.do?method=dropdown">Enter Surgery/Other</html:link><br>				  
 			  <logic:iterate id="aTherapy" name="surgeryother_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="SurgeryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="SurgeryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 		  
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="ViralTreatmentPopulateAction.do?method=dropdown">Enter Viral Treatment</html:link><br>
 			  <logic:iterate id="aTherapy" name="viraltreatment_list" type="Therapy">
-			  	&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ViralTreatmentPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ViralTreatmentPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 		<br>
 	</span>	
@@ -209,7 +209,7 @@
 	<span class="submasterdiv" id="sub6">
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="TherapyPopulateAction.do?method=dropdown">Enter Therapy</html:link><br>
 			  <logic:iterate id="aTherapy" name="therapy_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="TherapyPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.name" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="TherapyPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 			  <br>		
 	</span>
