@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.3 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.4 2005-10-28 17:45:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.2  2005/10/27 16:27:06  georgeda
  * More validation
  *
@@ -47,24 +50,24 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         // animalModel
         String aAvailabilityID = request.getParameter("aAvailabilityID");
         request.setAttribute("aAvailabilityID", aAvailabilityID);
-        
+
         AnimalAvailability avilablity = AvailabilityManagerSingleton.instance().get(aAvailabilityID);
         System.out.println("avilablity (id and name): " + avilablity);
 
         // display strin name
         availabilityForm.setName(avilablity.getName());
 
-        // display stock number (PI name)
-        System.out.println("avilablity.getStockNumber(): " + avilablity.getStockNumber());
+        if (avilablity.getStockNumber() != null && avilablity.getStockNumber().length() > 0) {
 
-        // get the username from the PI-id stored under stock_number in
-        // AnimalAvailability table
-        Person thePerson = PersonManagerSingleton.instance().get(avilablity.getStockNumber());
-        System.out.println("thePerson: " + thePerson);
+            // get the username from the PI-id stored under stock_number in
+            // AnimalAvailability table
+            Person thePerson = PersonManagerSingleton.instance().get(avilablity.getStockNumber());
+            System.out.println("thePerson: " + thePerson);
 
-        availabilityForm.setStockNumber(thePerson.getUsername());
-        System.out.println("thePerson.getUsername(): " + thePerson.getUsername());
-
+            availabilityForm.setStockNumber(thePerson.getUsername());
+            System.out.println("thePerson.getUsername(): " + thePerson.getUsername());
+        }
+        
         System.out.println("<AvailabilityInvestigatorPopulateAction populate> Exiting ");
 
         return mapping.findForward("submitInvestigator");
@@ -113,7 +116,8 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         System.out.println("<AvailabilityInvestigatorPopulateAction dropdown> Entering ");
 
         // Prepopulate dropdown field on submitInvestigator screen only
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
     }
 
 }
