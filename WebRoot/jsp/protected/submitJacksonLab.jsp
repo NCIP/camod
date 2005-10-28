@@ -1,4 +1,5 @@
 <%@ include file="/jsp/header.jsp"%>
+<%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
 <%@ page import="gov.nih.nci.camod.webapp.form.AvailabilityForm"%>
