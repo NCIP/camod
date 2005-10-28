@@ -8,6 +8,10 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionMapping;
+
 /**
  * @author rajputs
  *
@@ -159,4 +163,17 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
 	public void setEndPage(String endPage) {
 		this.endPage = endPage;
 	}
+    
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        authors = null;
+        name = null;
+        pmid = null;
+        title = null;
+        year = null;
+        journal = null;
+        volume = null;
+        startPage = null;
+        endPage = null;
+        firstTimeReported = null;
+    }
 }
