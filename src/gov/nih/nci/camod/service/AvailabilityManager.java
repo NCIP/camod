@@ -2,17 +2,20 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityManager.java,v 1.2 2005-10-26 20:15:43 pandyas Exp $
+ * $Id: AvailabilityManager.java,v 1.3 2005-10-28 17:42:18 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/26 20:15:43  pandyas
+ * implemented model availability
+ *
  * 
  */
 
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.AnimalAvailability;
-import gov.nih.nci.camod.domain.AnimalDistributor;
 import gov.nih.nci.camod.webapp.form.AvailabilityData;
+
 import java.util.List;
 
 public interface AvailabilityManager {
@@ -22,8 +25,6 @@ public interface AvailabilityManager {
     public AnimalAvailability get(String id) throws Exception;
 
     public void save(AnimalAvailability availability) throws Exception;
-    
-    public void saveAnimalDistributor( AnimalDistributor animalDistributor );    
 
     public void remove(String id) throws Exception;
 

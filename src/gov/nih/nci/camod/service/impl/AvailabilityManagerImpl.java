@@ -1,22 +1,8 @@
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.AnimalAvailability;
-/**
- *
- * @author pandyas
- * 
- * $Id: AvailabilityManagerImpl.java,v 1.2 2005-10-26 20:14:52 pandyas Exp $
- * 
- * $Log: not supported by cvs2svn $
- * 
- */
-
-import gov.nih.nci.camod.domain.AnimalDistributor;
-import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AvailabilityManager;
 import gov.nih.nci.camod.webapp.form.AvailabilityData;
-import gov.nih.nci.common.persistence.Persist;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
 
 import java.util.List;
 
@@ -40,18 +26,6 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         log.trace("In AvailabilityManagerImpl.remove");
         super.remove(id, AnimalAvailability.class);
     }
-    
-    public void saveAnimalDistributor(AnimalDistributor animalDistributor) {    	
-    	try {
-			Persist.save( animalDistributor );			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in AvailabilityManagerImpl.saveAnimalDistributor");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in AvailabilityManagerImpl.saveAnimalDistributor");
-			e.printStackTrace();
-		}
-    }    
     
     public AnimalAvailability create(AvailabilityData inAvailabilityData) 
     throws Exception {
