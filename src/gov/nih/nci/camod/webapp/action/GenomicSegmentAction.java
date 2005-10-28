@@ -94,7 +94,7 @@ public final class GenomicSegmentAction extends BaseAction {
 		try {
 			GenomicSegmentManager genomicSegmentManager = (GenomicSegmentManager) getBean("genomicSegmentManager");
 
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				
 				log.info("GenomicSegment delete");
 				

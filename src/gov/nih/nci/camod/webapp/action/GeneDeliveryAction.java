@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.11 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: GeneDeliveryAction.java,v 1.12 2005-10-28 14:50:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.10  2005/10/20 20:22:19  pandyas
  * added javadocs
  *
@@ -27,131 +30,132 @@ import org.apache.struts.action.*;
  */
 public final class GeneDeliveryAction extends BaseAction {
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.info("<GeneDeliveryAction> Entering edit");
+        log.info("<GeneDeliveryAction> Entering edit");
 
-		// Create a form to edit
-		GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
+        // Create a form to edit
+        GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
 
-		// Grab the current therapy
-		String aTherapyID = request.getParameter("aTherapyID");
+        // Grab the current therapy
+        String aTherapyID = request.getParameter("aTherapyID");
 
-		log.info("<GeneDeliveryAction edit> following Characteristics:" + "\n\t ViralVector: "
-				+ geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
-				+ geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
-				+ "\n\t Regimen: " + geneDeliveryForm.getRegimen() + "\n\t organTissueCode: "
-				+ geneDeliveryForm.getOrganTissueCode() + "\n\t organTissueName: "
-				+ geneDeliveryForm.getOrganTissueName() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<GeneDeliveryAction edit> following Characteristics:" + "\n\t ViralVector: "
+                + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
+                + geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
+                + "\n\t Regimen: " + geneDeliveryForm.getRegimen() + "\n\t organTissueCode: "
+                + geneDeliveryForm.getOrganTissueCode() + "\n\t organTissueName: "
+                + geneDeliveryForm.getOrganTissueName() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {
+        try {
 
-			GeneDeliveryManager theGeneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
-			if (theAction.equals("Delete")) {
-				theGeneDeliveryManager.remove(aTherapyID);
+            GeneDeliveryManager theGeneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
+            if ("Delete".equals(theAction)) {
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.delete.successful"));
-				saveErrors(request, msg);
+                theGeneDeliveryManager.remove(aTherapyID);
 
-			} else {
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.delete.successful"));
+                saveErrors(request, msg);
 
-				GeneDelivery theGeneDelivery = theGeneDeliveryManager.get(aTherapyID);
-				theGeneDeliveryManager.update(geneDeliveryForm, theGeneDelivery);
+            } else {
 
-				// Add a message to be displayed in submitOverview.jsp saying
-				// you've
-				// created a new model successfully
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.edit.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
+                GeneDelivery theGeneDelivery = theGeneDeliveryManager.get(aTherapyID);
+                theGeneDeliveryManager.update(geneDeliveryForm, theGeneDelivery);
 
-			log.error("Exception ocurred creating GeneDelivery", e);
+                // Add a message to be displayed in submitOverview.jsp saying
+                // you've
+                // created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (Exception e) {
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            log.error("Exception ocurred creating GeneDelivery", e);
 
-		log.info("<GeneDeliveryAction> Exiting edit");
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+        log.info("<GeneDeliveryAction> Exiting edit");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-		log.debug("<GeneDeliveryAction> Entering save");
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		// Create a form to edit
-		GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
+        log.debug("<GeneDeliveryAction> Entering save");
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        // Create a form to edit
+        GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
 
-		log.info("<GeneDeliveryAction save> following Characteristics:" + "\n\t ViralVector: "
-				+ geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
-				+ geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
-				+ "\n\t Regimen: " + geneDeliveryForm.getRegimen() + "\n\t organTissueCode: "
-				+ geneDeliveryForm.getOrganTissueCode() + "\n\t organTissueName: "
-				+ geneDeliveryForm.getOrganTissueName() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		String theForward = "AnimalModelTreePopulateAction";
+        log.info("<GeneDeliveryAction save> following Characteristics:" + "\n\t ViralVector: "
+                + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
+                + geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
+                + "\n\t Regimen: " + geneDeliveryForm.getRegimen() + "\n\t organTissueCode: "
+                + geneDeliveryForm.getOrganTissueCode() + "\n\t organTissueName: "
+                + geneDeliveryForm.getOrganTissueName() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+        String theForward = "AnimalModelTreePopulateAction";
 
-			theAnimalModelManager.addGeneDelivery(theAnimalModel, geneDeliveryForm);
+        try {
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-			log.info("New GeneDelivery created");
+            theAnimalModelManager.addGeneDelivery(theAnimalModel, geneDeliveryForm);
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.creation.successful"));
-			saveErrors(request, msg);
+            log.info("New GeneDelivery created");
 
-		} catch (Exception e) {
-			log.error("Exception ocurred creating GeneDelivery", e);
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.creation.successful"));
+            saveErrors(request, msg);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
+        } catch (Exception e) {
+            log.error("Exception ocurred creating GeneDelivery", e);
 
-			theForward = "failure";
-		}
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
 
-		log.trace("<GeneDeliveryAction> Exiting save");
-		return mapping.findForward(theForward);
-	}
+            theForward = "failure";
+        }
+
+        log.trace("<GeneDeliveryAction> Exiting save");
+        return mapping.findForward(theForward);
+    }
 }

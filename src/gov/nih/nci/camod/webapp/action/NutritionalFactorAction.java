@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorAction.java,v 1.7 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: NutritionalFactorAction.java,v 1.8 2005-10-28 14:50:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.6  2005/10/20 20:39:04  pandyas
  * added javadocs
  *
@@ -64,7 +67,7 @@ public class NutritionalFactorAction extends BaseAction {
 
 		try {
 
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
 
 				ActionMessages msg = new ActionMessages();

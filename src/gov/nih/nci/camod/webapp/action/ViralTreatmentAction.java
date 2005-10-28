@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.8 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: ViralTreatmentAction.java,v 1.9 2005-10-28 14:50:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.7  2005/10/20 20:40:39  pandyas
  * added javadocs
  *
@@ -64,8 +67,7 @@ public class ViralTreatmentAction extends BaseAction {
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
-
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
 
 				ActionMessages msg = new ActionMessages();

@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.2 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.3 2005-10-28 14:50:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.1  2005/10/26 20:14:34  pandyas
  * implemented model availability
  *
@@ -67,7 +70,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
 
 		try {
 
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				availabilityManager.remove(aAvailabilityID);
 
 				ActionMessages msg = new ActionMessages();

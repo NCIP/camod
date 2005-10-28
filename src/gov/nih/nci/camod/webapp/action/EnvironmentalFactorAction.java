@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorAction.java,v 1.13 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: EnvironmentalFactorAction.java,v 1.14 2005-10-28 14:50:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.12  2005/10/19 19:27:28  pandyas
  * fixed println statement
  *
@@ -106,7 +109,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 
 		try {
 
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
 
 				ActionMessages msg = new ActionMessages();

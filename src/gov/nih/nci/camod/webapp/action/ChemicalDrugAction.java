@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.10 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: ChemicalDrugAction.java,v 1.11 2005-10-28 14:50:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.9  2005/10/20 20:37:16  pandyas
  * added javadocs
  *
@@ -64,7 +67,7 @@ public class ChemicalDrugAction extends BaseAction {
 
 		try {
 
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
 
 				ActionMessages msg = new ActionMessages();

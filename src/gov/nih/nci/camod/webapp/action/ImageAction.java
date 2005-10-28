@@ -54,7 +54,7 @@ public final class ImageAction extends BaseAction {
 		try {
 			ImageManager imageManager = (ImageManager) getBean("imageManager");
 			
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				imageManager.remove(aImageID);
 
 				ActionMessages msg = new ActionMessages();

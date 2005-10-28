@@ -91,7 +91,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
 
 			EngineeredTransgeneManager engineeredTransgeneManager = (EngineeredTransgeneManager) getBean("engineeredTransgeneManager");
 
-			if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
 				engineeredTransgeneManager.remove(aEngineeredTransgeneID);
 
 				ActionMessages msg = new ActionMessages();

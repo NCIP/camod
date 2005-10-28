@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationAction.java,v 1.8 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: PublicationAction.java,v 1.9 2005-10-28 14:50:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.7  2005/10/27 12:53:00  georgeda
  * Refactor of publication manager
  *
@@ -65,7 +68,7 @@ public final class PublicationAction extends BaseAction {
         
         try {
             PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
-            if (theAction.equals("Delete")) {
+            if ("Delete".equals(theAction)) {
                 publicationManager.remove(aPubID);
                 
                 ActionMessages msg = new ActionMessages();
