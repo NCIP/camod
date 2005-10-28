@@ -15,6 +15,7 @@
 <%@ page import="gov.nih.nci.camod.domain.SpontaneousMutation" %>	
 <%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalAvailability" %>
+<%@ page import="gov.nih.nci.camod.domain.Histopathology" %>
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
