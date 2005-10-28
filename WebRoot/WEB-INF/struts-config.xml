@@ -1023,24 +1023,6 @@
         </forward>
     </action>
      
-     <!-- AssociatedMetastasisForm -->
-     <action path="/AssociatedMetastasisAction"
-	        type="gov.nih.nci.camod.webapp.action.AssociatedMetastasisAction"
-	        name="associatedMetastasisForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="submitAssocMetastasis">   	
-    </action>
-    
-    <action path="/AssociatedMetastasisAction"
-    		type="gov.nih.nci.camod.webapp.action.AssociatedMetastasisPopulateAction"
-    		name="associatedMetastasisForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
-    </action>      
-     
      <!-- AssociatedExpressionForm -->
      <action path="/AssociatedExpressionAction"
 	        type="gov.nih.nci.camod.webapp.action.AssociatedExpressionAction"
@@ -1205,24 +1187,6 @@
 			validate="false">		
     </action>
          
-     <!-- ClinicalMarkerForm -->
-     <action path="/ClinicalMarkerAction"
-	        type="gov.nih.nci.camod.webapp.action.ClinicalMarkerAction"
-	        name="clinicalMarkerForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="submitClinicalMarker">   	
-    </action>
-    
-    <action path="/ClinicalMarkerPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.ClinicalMarkerPopulateAction"
-    		name="clinicalMarkerForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
-    </action>     
-     
     <!-- EngineeredTransgeneForm -->
           <action path="/EngineeredTransgeneAction"
 	        type="gov.nih.nci.camod.webapp.action.EngineeredTransgeneAction"
@@ -1334,7 +1298,7 @@
     </action>
     
 
-     <!-- HistopathologyForm -->
+     <!-- HistopathologyForm(s) -->
      <action path="/HistopathologyAction"
 	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
 	        name="histopathologyForm"
@@ -1349,8 +1313,51 @@
     		name="histopathologyForm"    		
             scope="request"
             parameter="method"
+			validate="false">
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitHistopathology.jsp">
+    	 </forward>						
+    </action>  
+    
+     <action path="/AssociatedMetastasisAction"
+	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
+	        name="histopathologyForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitAssocMetastasis">   	
+    </action>
+    
+    <action path="/AssociatedMetastasisPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.HistopathologyPopulateAction"
+    		name="histopathologyForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+         <forward 
+    		name="next"
+    		path="/jsp/protected/submitAssocMetastasis.jsp">
+    	 </forward>					
+    </action> 
+    
+     <!-- ClinicalMarkerForm -->
+     <action path="/ClinicalMarkerAction"
+	        type="gov.nih.nci.camod.webapp.action.ClinicalMarkerAction"
+	        name="clinicalMarkerForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="submitClinicalMarkers">   	
+    </action>
+    
+    <action path="/ClinicalMarkerPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.ClinicalMarkerPopulateAction"
+    		name="clinicalMarkerForm"    		
+            scope="request"
+            parameter="method"
 			validate="false">		
-    </action>     
+    </action>    
      
    	 <!-- HormoneForm -->
    	 <action path="/HormoneAction"
