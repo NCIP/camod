@@ -135,7 +135,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
                     // Generate a random filename
                     RandomGUID theGUID = new RandomGUID();
-                    String uniqueFileName = theGUID.toString();
+                    String uniqueFileName = theGUID.toString() + "." + fileType;
 
                     // Retrieve ftp data from a resource bundle
                     ResourceBundle theBundle = ResourceBundle.getBundle("camod");
