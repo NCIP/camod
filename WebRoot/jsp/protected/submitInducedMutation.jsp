@@ -11,43 +11,41 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aInducedMutationID = request.getParameter( "aInducedMutationID" );
+	String aInducedMutationID = (String) request.getAttribute("aInducedMutationID");
 
 	//if aInducedMutationID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "InducedMutationAction.do?method=save";
 	
-	if ( aInducedMutationID != null )
+	if ( aInducedMutationID != null && aInducedMutationID.length() > 0) {
 		actionName = "InducedMutationAction.do?method=edit";
+	}
+	else {
+	    aInducedMutationID = "";
+	}
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
 		
-	function chkOther( control ) {
-		ideControl = document.forms[0].otherType;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+	function chkInducingAgent() {
+	    chkOther(document.forms[0].type, document.forms[0].otherType);
 	}
 	
-	function chkObservation( control ) {
-		ideControl = document.forms[0].methodOfObservation;
-
-		if( control.value != null && control.value != "" )
-			ideControl.disabled = false
+	function chkObservation() {
+	
+	    observation = document.forms[0].observation;
+	
+		if( observation.value != null && observation.value != "" ) {
+			enableField(document.forms[0].methodOfObservation);
+		}
 		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
+			disableField(document.forms[0].methodOfObservation);
 		}	
-	 }
+	}
 	 
 </SCRIPT>
 
@@ -74,7 +72,7 @@
 		<td class="formField">					
 			<html:form action="<%= actionName %>" focus="name">	
 				
-			<html:text styleClass="formFieldSized" property="name" size="10" name="formdata"/>		
+			<html:text styleClass="formFieldSized" property="name" size="10" />		
 		</td>
 	</tr>
 	
@@ -82,7 +80,7 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel">Inducing Agent Category:</td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="type" onchange="chkOther( this );" >
+			<html:select styleClass="formFieldSized" size="1" property="type" onchange="chkInducingAgent();" >
 				<html:options name="<%= Dropdowns.INDUCEDMUTATIONDROP %>" />										
 			</html:select>
 			<br>
@@ -94,7 +92,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Category:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherType" disabled="true" size="30" name="formdata"/>		
+			<html:text styleClass="formFieldSized" property="otherType" disabled="true" size="30" />		
 		</td>
 	</tr>
 
@@ -106,7 +104,7 @@
 		<td class="formField">
 			<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="CASNumber" size="20" name="formdata"/>		
+			<html:text styleClass="formFieldUnSized" property="CASNumber" size="20" />		
 		</td>
 	</tr>
 	
@@ -118,7 +116,7 @@
 		<td class="formField">
 		<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
 		'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="geneId" size="20" name="formdata"/>		
+			<html:text styleClass="formFieldUnSized" property="geneId" size="20" />		
 		</td>
 	</tr>
 	
@@ -128,7 +126,7 @@
 		<td class="formField">
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>		
+			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />		
 		</td>
 	</tr>
 	
@@ -138,7 +136,7 @@
 		<camod:cshelp key="GENETIC_ALTERATION.OBSERVATION_INDUCED_MUTATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32"  name="formdata" onkeypress="chkObservation(this);"/>		
+			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32" onkeypress="chkObservation();"/>		
 		</td>
 	</tr>
 	
@@ -148,7 +146,7 @@
 		<camod:cshelp key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true" name="formdata"/>		
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true" />		
 		</td>
 	</tr>
 	
@@ -156,7 +154,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Description:</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32"  name="formdata"/>		
+			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32"  />		
 		</td>
 	</tr>
 	
@@ -172,6 +170,12 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 				
+				  <c:if test="${not empty aInducedMutationID}">
+	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+						  <bean:message key="button.delete"/>
+					  </html:submit>
+			      </c:if>
+			      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="aInducedMutationID" value="<%= aInducedMutationID %>">
 				  	
@@ -185,29 +189,8 @@
 </tr></td></TABLE>
 
 <SCRIPT>
-	function checkOthers()
-	{	
-	    ideControl = document.forms[0].type;
-	    ideOtherControl = document.forms[0].otherType;
-			
-		if( ideControl.value == 'Other' )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}		
-		
-	    ideControl = document.forms[0].observation;
-	    ideOtherControl = document.forms[0].methodOfObservation;
-	
-		if( ideControl.value != "" )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}		
-	}
-	
-	checkOthers();
-	
+chkInducingAgent();
+chkObservation();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

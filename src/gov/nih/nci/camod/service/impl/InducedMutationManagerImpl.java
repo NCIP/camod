@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.8 2005-10-27 20:54:31 schroedn Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.9 2005-10-31 18:00:24 georgeda Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/27 20:54:31  schroedn
+ * added buttons and caIMAGE dev server locations
+ *
  * Revision 1.7  2005/10/24 21:04:03  schroedn
  * Added Image to submission
  *
@@ -109,7 +112,7 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
 	            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 	
 	            //Iterate through all the reciepts in the config file
-	            String recipients = theBundle.getString(Constants.EmailMessage.RECIPIENTS);
+	            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
 	            StringTokenizer st = new StringTokenizer(recipients, ",");
 	            String inRecipients[] = new String[st.countTokens()];
 	

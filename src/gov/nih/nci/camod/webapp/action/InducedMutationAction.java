@@ -20,47 +20,10 @@ import org.apache.struts.action.ActionMessages;
  * InducedMutationAction Class
  */
 public final class InducedMutationAction extends BaseAction {
-	
-    /**
-     * Delete
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward delete(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request,
-                                HttpServletResponse response)
-    throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'delete' method");
-        }
 
-        return mapping.findForward("");
-    }
-
-	/**
-	 * Cancel
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-    public ActionForward duplicate(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request,
-                                HttpServletResponse response)
-    throws Exception {
-    	
-    	 return mapping.findForward("");
-    }    
-    
-    
     /**
      * Edit
+     * 
      * @param mapping
      * @param form
      * @param request
@@ -68,50 +31,45 @@ public final class InducedMutationAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward edit(ActionMapping mapping, ActionForm form,
-                              HttpServletRequest request,
-                              HttpServletResponse response)
-    throws Exception {
-    	
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
         log.trace("Entering edit");
 
-        // Create a form to edit
-        InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, inducedMutationForm);
-             
-        // Grab the current SpontaneousMutation we are working with related to this
+        // Grab the current SpontaneousMutation we are working with related to
+        // this
         String aInducedMutationID = request.getParameter("aInducedMutationID");
 
-        log.info("<InducedMutationAction save> following Characteristics:" 
-        		+ "\n\t getType: " + inducedMutationForm.getType()
-                + "\n\t getOtherType: " + inducedMutationForm.getOtherType()              
-                + "\n\t getCASNumber: " + inducedMutationForm.getCASNumber() 
-                + "\n\t getGeneId: " + inducedMutationForm.getGeneId()
-                + "\n\t getName: " + inducedMutationForm.getName()
-                + "\n\t getDescription: " + inducedMutationForm.getDescription()
-                + "\n\t getObservation: " + inducedMutationForm.getObservation()
-                + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation()
-                + "\n\t getNumberMGI: " + inducedMutationForm.getNumberMGI()
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
-        
-        InducedMutationManager inducedMutationManager = (InducedMutationManager) getBean("inducedMutationManager");
-        
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+
         try {
-        	InducedMutation theInducedMutation = inducedMutationManager.get( aInducedMutationID );
-        	inducedMutationManager.update( inducedMutationForm, theInducedMutation );
-        
-            log.info("InducedMutation edited");
+            InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
+            InducedMutationManager inducedMutationManager = (InducedMutationManager) getBean("inducedMutationManager");
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.edit.successful"));
-            saveErrors(request, msg);
+            if ("Delete".equals(theAction)) {
+                inducedMutationManager.remove(aInducedMutationID);
 
+                log.info("InducedMutation deleted");
+
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.delete.successful"));
+                saveErrors(request, msg);
+
+            } else {
+
+                InducedMutation theInducedMutation = inducedMutationManager.get(aInducedMutationID);
+                inducedMutationManager.update(inducedMutationForm, theInducedMutation);
+
+                log.info("InducedMutation edited");
+
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.edit.successful"));
+                saveErrors(request, msg);
+            }
         } catch (Exception e) {
             log.error("Exception ocurred editing InducedMutation", e);
 
-            // Encountered an error saving the model.
+            // Encountered an error
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, msg);
@@ -139,33 +97,29 @@ public final class InducedMutationAction extends BaseAction {
         // Create a form to edit
         InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
         request.getSession().setAttribute(Constants.FORMDATA, inducedMutationForm);
-             
+
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
-    	
-        log.info("<InducedMutationAction save> following Characteristics:" 
-        		+ "\n\t getType: " + inducedMutationForm.getType()
-                + "\n\t getOtherType: " + inducedMutationForm.getOtherType()              
-                + "\n\t getCASNumber: " + inducedMutationForm.getCASNumber() 
-                + "\n\t getGeneId: " + inducedMutationForm.getGeneId()
-                + "\n\t getName: " + inducedMutationForm.getName()
-                + "\n\t getDescription: " + inducedMutationForm.getDescription()
-                + "\n\t getObservation: " + inducedMutationForm.getObservation()
-                + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation()
-                + "\n\t getNumberMGI: " + inducedMutationForm.getNumberMGI()
+
+        log.info("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "
+                + inducedMutationForm.getType() + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
+                + "\n\t getCASNumber: " + inducedMutationForm.getCASNumber() + "\n\t getGeneId: "
+                + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
+                + "\n\t getDescription: " + inducedMutationForm.getDescription() + "\n\t getObservation: "
+                + inducedMutationForm.getObservation() + "\n\t getMethodObservation: "
+                + inducedMutationForm.getMethodOfObservation() + "\n\t getNumberMGI: "
+                + inducedMutationForm.getNumberMGI()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-            
+
             theAnimalModelManager.addGeneticDescription(theAnimalModel, inducedMutationForm);
 
             log.info("New InducedMutation created");
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.creation.successful"));
             saveErrors(request, msg);
@@ -173,7 +127,7 @@ public final class InducedMutationAction extends BaseAction {
         } catch (Exception e) {
             log.error("Exception ocurred creating InducedMutation", e);
 
-            // Encountered an error saving the model.
+            // Encountered an error
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, msg);
