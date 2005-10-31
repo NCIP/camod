@@ -152,7 +152,7 @@ public class DuplicateUtil {
                     BeanUtils.copyProperty(duplicate, propName, duplicateProperty(propValue, srcHistory, dupHistory, pathName, excludedProperties));                
                   } catch (Exception ex) {
                     // do nothing. skip and move on. property value may be null, or no set method found.           
-                    log.info("** property '"+propName+"' not copied.  Either no set method, or null.");
+                    log.debug("** property '"+propName+"' not copied.  Either no set method, or null.");
                   }
                 } // collection condition                
               }
