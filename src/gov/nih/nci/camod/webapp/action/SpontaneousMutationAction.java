@@ -10,58 +10,17 @@ import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 /**
  * SpontaneousMutationAction Class
  */
 
 public class SpontaneousMutationAction extends BaseAction {
-	
-    /**
-     * Delete
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward delete(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request,
-                                HttpServletResponse response)
-    throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Entering 'delete' method");
-        }
 
-        return mapping.findForward("");
-    }
-
-	/**
-	 * Cancel
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-    public ActionForward duplicate(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request,
-                                HttpServletResponse response)
-    throws Exception {
-    	
-    	 return mapping.findForward("");
-    }    
-    
-    
     /**
      * Edit
+     * 
      * @param mapping
      * @param form
      * @param request
@@ -69,43 +28,53 @@ public class SpontaneousMutationAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward edit(ActionMapping mapping, ActionForm form,
-                              HttpServletRequest request,
-                              HttpServletResponse response)
-    throws Exception {
-    	
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
         log.trace("Entering edit");
 
-        // Create a form to edit
-        SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, spontaneousMutationForm);
-             
-        // Grab the current SpontaneousMutation we are working with related to this
+        // Grab the current SpontaneousMutation we are working with related to
+        // this
         String aSpontaneousMutationID = request.getParameter("aSpontaneousMutationID");
 
-        log.info("<SpontaneousMutationAction edit> following Characteristics:" 
-        		+ "\n\t name: " + spontaneousMutationForm.getName()
-                + "\n\t getNumberMGI: " + spontaneousMutationForm.getNumberMGI()
-                + "\n\t getObservation: " + spontaneousMutationForm.getObservation() 
-                + "\n\t getMethodofObservation: " + spontaneousMutationForm.getMethodOfObservation()
-                + "\n\t getComments: " + spontaneousMutationForm.getComments()
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-        SpontaneousMutationManager spontaneousMutationManager = (SpontaneousMutationManager) getBean("spontaneousMutationManager");
-        
         try {
-        	
-        	SpontaneousMutation theSpontaneousMutation = spontaneousMutationManager.get( aSpontaneousMutationID );
-        	spontaneousMutationManager.update( spontaneousMutationForm, theSpontaneousMutation );
-        	
-            log.info( "SpontaneousMutation edited" );
+            SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("spontaneousmutation.edit.successful"));
-            saveErrors(request, msg);
+            SpontaneousMutationManager spontaneousMutationManager = (SpontaneousMutationManager) getBean("spontaneousMutationManager");
 
+            if ("Delete".equals(theAction)) {
+                spontaneousMutationManager.remove(aSpontaneousMutationID);
+
+                log.info("SpontaneousMutation deleted");
+
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("spontaneousmutation.delete.successful"));
+                saveErrors(request, msg);
+
+            } else {
+
+                log.info("<SpontaneousMutationAction edit> following Characteristics:" + "\n\t name: "
+                        + spontaneousMutationForm.getName() + "\n\t getNumberMGI: "
+                        + spontaneousMutationForm.getNumberMGI() + "\n\t getObservation: "
+                        + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
+                        + spontaneousMutationForm.getMethodOfObservation() + "\n\t getComments: "
+                        + spontaneousMutationForm.getComments()
+                        + (String) request.getSession().getAttribute("camod.loggedon.username"));
+
+                SpontaneousMutation theSpontaneousMutation = spontaneousMutationManager.get(aSpontaneousMutationID);
+                spontaneousMutationManager.update(spontaneousMutationForm, theSpontaneousMutation);
+
+                log.info("SpontaneousMutation edited");
+
+                // Add a message to be displayed in submitOverview.jsp saying
+                // you've
+                // created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("spontaneousmutation.edit.successful"));
+                saveErrors(request, msg);
+            }
         } catch (Exception e) {
             log.error("Exception ocurred creating SpontaneousMutation", e);
 
@@ -137,23 +106,22 @@ public class SpontaneousMutationAction extends BaseAction {
         // Create a form to edit
         SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
         request.getSession().setAttribute(Constants.FORMDATA, spontaneousMutationForm);
-             
+
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<SpontaneousMutationAction save> following Characteristics:" 
-        		+ "\n\t name: " + spontaneousMutationForm.getName()
-                + "\n\t getNumberMGI: " + spontaneousMutationForm.getNumberMGI()
-                + "\n\t getObservation: " + spontaneousMutationForm.getObservation() 
-                + "\n\t getMethodofObservation: " + spontaneousMutationForm.getMethodOfObservation()
-                + "\n\t getComments: " + spontaneousMutationForm.getComments()
+        log.info("<SpontaneousMutationAction save> following Characteristics:" + "\n\t name: "
+                + spontaneousMutationForm.getName() + "\n\t getNumberMGI: " + spontaneousMutationForm.getNumberMGI()
+                + "\n\t getObservation: " + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
+                + spontaneousMutationForm.getMethodOfObservation() + "\n\t getComments: "
+                + spontaneousMutationForm.getComments()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-            
+
             theAnimalModelManager.addGeneticDescription(theAnimalModel, spontaneousMutationForm);
 
             log.info("New SpontaneousMutation created");

@@ -777,13 +777,8 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="numberMGI" depends="maxlength">
+        <field property="numberMGI" depends="integer">
             <arg0 key="GenomicSegmentForm.numberMGI"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
         </field>
         <field property="comments" depends="maxlength">
             <arg0 key="GenomicSegmentForm.comments"/>
@@ -875,20 +870,15 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="numberMGI" depends="maxlength">
+        <field property="numberMGI" depends="integer">
             <arg0 key="TargetedModificationForm.numberMGI"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
         </field>
         <field property="comments" depends="maxlength">
             <arg0 key="TargetedModificationForm.comments"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
-                <var-value>255</var-value>
+                <var-value>2000</var-value>
             </var>
         </field>
         <field property="fileLocation" depends="maxlength">
@@ -973,13 +963,8 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="numberMGI" depends="maxlength">
+        <field property="numberMGI" depends="integer">
             <arg0 key="InducedMutationForm.numberMGI"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
         </field>
         <field property="description" depends="maxlength">
             <arg0 key="InducedMutationForm.description"/>
@@ -992,9 +977,41 @@
 	</form>		
 	
 	<form name="spontaneousMutationForm">
-        <field property="name" depends="required">
+        <field property="name" depends="required,maxlength">
             <arg0 key="SpontaneousMutationForm.name"/>
-    	</field> 
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="observation" depends="maxlength">
+            <arg0 key="SpontaneousMutationForm.observation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="methodOfObservation" depends="maxlength">
+            <arg0 key="SpontaneousMutationForm.methodOfObservation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="numberMGI" depends="integer">
+            <arg0 key="SpontaneousMutationForm.numberMGI"/>
+        </field>
+        <field property="comments" depends="maxlength">
+            <arg0 key="SpontaneousMutationForm.comments"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>2000</var-value>
+            </var>
+        </field>
 	</form>		
 
 	<form name="imageForm">
@@ -1150,96 +1167,6 @@
         </field>
     </form>
     
-    	<form name="therapyForm">
-        <field property="name" depends="required,maxlength">
-            <arg0 key="TherapyForm.name"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field> 
-    	<field property="NSCNumber" depends="integer">
-            <arg0 key="TherapyForm.nscNumber"/>
-    	</field>
-    	<field property="CASNumber" depends="maxlength">
-            <arg0 key="TherapyForm.casNumber"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-    	<field property="dosage" depends="maxlength">
-            <arg0 key="TherapyForm.dosage"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-     	<field property="ageAtTreatment" depends="maxlength">
-            <arg0 key="TherapyForm.ageAtTreatment"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-        <field property="otherAdministrativeRoute" depends="validwhen, maxlength">
-            <arg0 key="TherapyForm.otherAdministrativeRoute"/>
-            <var>
-                <var-name>test</var-name>
-                <var-value>((administrativeRoute != 'Other') or (*this* != null))</var-value>
-            </var>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-        </field>     
-       	<field property="biomarker" depends="maxlength">
-            <arg0 key="TherapyForm.biomarker"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-    	<field property="tumorResponse" depends="maxlength">
-            <arg0 key="TherapyForm.tumorResponse"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-    	<field property="comments" depends="maxlength">
-            <arg0 key="TherapyForm.comments"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-    	<field property="experiment" depends="maxlength">
-            <arg0 key="TherapyForm.experiment"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-    	<field property="results" depends="maxlength">
-            <arg0 key="TherapyForm.results"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field>
-	</form>		
-	
 	<form name="imageForm">
         <field property="fileLocation" depends="required,maxlength">
             <arg0 key="ImageForm.fileLocation"/>

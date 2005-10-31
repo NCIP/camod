@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.9 2005-10-31 18:00:24 georgeda Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.10 2005-10-31 18:55:51 georgeda Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/31 18:00:24  georgeda
+ * Validation changes
+ *
  * Revision 1.8  2005/10/27 20:54:31  schroedn
  * added buttons and caIMAGE dev server locations
  *
@@ -24,23 +27,15 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.EnvironmentalFactor;
-import gov.nih.nci.camod.domain.GeneticAlteration;
-import gov.nih.nci.camod.domain.InducedMutation;
-import gov.nih.nci.camod.domain.MutationIdentifier;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
 
 public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager {
-	
+
     public List getAll() throws Exception {
         log.trace("In InducedMutationManagerImpl.getAll");
         return super.getAll(InducedMutation.class);
@@ -68,17 +63,16 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         InducedMutation theInducedMutation = new InducedMutation();
 
         populateInducedMutation(inInducedMutationData, theInducedMutation);
-       
+
         log.trace("Exiting InducedMutationManagerImpl.create");
-        
+
         return theInducedMutation;
     }
 
-    public void update(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation)
-            throws Exception {
+    public void update(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation) throws Exception {
 
-        log.trace( "Entering InducedMutationManagerImpl.update" );
-        log.debug( "Updating InducedMutationForm: " + inInducedMutation.getId() );
+        log.trace("Entering InducedMutationManagerImpl.update");
+        log.debug("Updating InducedMutationForm: " + inInducedMutation.getId());
 
         // Populate w/ the new values and save
         populateInducedMutation(inInducedMutationData, inInducedMutation);
@@ -89,117 +83,114 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
 
     private void populateInducedMutation(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation)
             throws Exception {
-    	
-        log.trace("Entering populateInducedMutation");
-        
-        EnvironmentalFactor inEnvironFactor = null;
-        
-        //Check to see if a Environmental Factor already exists, 
-        //if it does edit it else create a new EnvironmentalFactor
-        if ( inInducedMutation.getEnvironmentalFactorCollection().size() > 0 )
-        	inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactorCollection().get(0);
-        else
-        	inEnvironFactor = new EnvironmentalFactor();
-        
-        //Inducing Agent Category type
-        inEnvironFactor.setType( inInducedMutationData.getType() );
-        
-        //Other type
-        if (  inInducedMutationData.getOtherType() != null ) {
-	        if (!inInducedMutationData.getOtherType().equals("")) {
-	
-	            log.trace("Sending Notification eMail - new InducedMutation Agent added");
-	            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-	
-	            //Iterate through all the reciepts in the config file
-	            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-	            StringTokenizer st = new StringTokenizer(recipients, ",");
-	            String inRecipients[] = new String[st.countTokens()];
-	
-	            for (int i = 0; i < inRecipients.length; i++)
-	                inRecipients[i] = st.nextToken();
-	
-	            String inSubject = theBundle.getString(Constants.EmailMessage.SUBJECT);
-	            String inMessage = theBundle.getString(Constants.EmailMessage.MESSAGE) + " Inducing Agent Type added ( "
-	                    + inInducedMutationData.getOtherType() + " ) and is awaiting your approval.";
-	            String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
-	            // theBundle.getString(Constants.EmailMessage.SENDER);
-	
-	            //Send the email
-	            try {
-	            	log.trace("Sending Notification eMail - new InducedMutation Agent added");
 
-                    // gather message keys and variable values to build the e-mail content with
-                    String[] messageKeys = {Constants.Admin.INDUCED_MUTATION_AGENT_ADDED};
+        log.trace("Entering populateInducedMutation");
+
+        EnvironmentalFactor inEnvironFactor = null;
+
+        // Check to see if a Environmental Factor already exists,
+        // if it does edit it else create a new EnvironmentalFactor
+        if (inInducedMutation.getEnvironmentalFactorCollection().size() > 0)
+            inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactorCollection().get(0);
+        else
+            inEnvironFactor = new EnvironmentalFactor();
+
+        // Inducing Agent Category type
+        inEnvironFactor.setType(inInducedMutationData.getType());
+
+        // Other type
+        if (inInducedMutationData.getOtherType() != null) {
+            if (!inInducedMutationData.getOtherType().equals("")) {
+
+                log.trace("Sending Notification eMail - new InducedMutation Agent added");
+                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+                // Iterate through all the reciepts in the config file
+                String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+                StringTokenizer st = new StringTokenizer(recipients, ",");
+                String inRecipients[] = new String[st.countTokens()];
+
+                for (int i = 0; i < inRecipients.length; i++)
+                    inRecipients[i] = st.nextToken();
+
+                String inSubject = theBundle.getString(Constants.EmailMessage.SUBJECT);
+                String inMessage = theBundle.getString(Constants.EmailMessage.MESSAGE)
+                        + " Inducing Agent Type added ( " + inInducedMutationData.getOtherType()
+                        + " ) and is awaiting your approval.";
+                String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
+                // theBundle.getString(Constants.EmailMessage.SENDER);
+
+                // Send the email
+                try {
+                    log.trace("Sending Notification eMail - new InducedMutation Agent added");
+
+                    // gather message keys and variable values to build the
+                    // e-mail content with
+                    String[] messageKeys = { Constants.Admin.INDUCED_MUTATION_AGENT_ADDED };
                     TreeMap values = new TreeMap();
                     values.put(Constants.Admin.INDUCED_MUTATION_AGENT_NAME, inInducedMutationData.getName());
-                    values.put(Constants.Admin.INDUCED_MUTATION_AGENT_TYPE,inInducedMutationData.getOtherType());
+                    values.put(Constants.Admin.INDUCED_MUTATION_AGENT_TYPE, inInducedMutationData.getOtherType());
 
                     // Send the email
-	                MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
-	                log.trace("Notification eMail sent");
-	            } catch (Exception e) {
-	            	log.trace("Caught exception " + e);
-	                //System.out.println("Caught exception" + e);
-	                e.printStackTrace();
-	            }
-	
-	            //2. Set flag, this Strain will need to be approved before  being added the list
-	            inEnvironFactor.setTypeUnctrlVocab( inInducedMutationData.getOtherType() );
-	        }
-	    }
-        
-        //CAS Number
-        inEnvironFactor.setCasNumber( inInducedMutationData.getCASNumber() );
-                
-        //Name of Inducing Agent
-        inEnvironFactor.setName( inInducedMutationData.getName() );
-                
-        //inEnvironFactor.setNameUnctrlVocab( );
-        if ( inInducedMutation.getEnvironmentalFactorCollection().size() < 1 )            
-        	inInducedMutation.addEnvironmentalFactor( inEnvironFactor );
+                    MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
+                    log.trace("Notification eMail sent");
+                } catch (Exception e) {
+                    log.trace("Caught exception " + e);
+                    // System.out.println("Caught exception" + e);
+                    e.printStackTrace();
+                }
 
-        // GeneID        
-        inInducedMutation.setGeneId( inInducedMutationData.getGeneId() );
-                        
-        // Description
-        inInducedMutation.setDescription( inInducedMutationData.getDescription() );
-        
-         
-        //Observation and Method of Observation
-        List geneticList = inInducedMutation.getGeneticAlterationCollection();
-        
-        if ( geneticList.size() > 0 ) {
-        	GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-			inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
-			inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );        	
-        } else {	        
-	        if( inInducedMutationData.getObservation() != null ) {
-	        	if ( ! inInducedMutationData.getObservation().equals( "" ) ) {
-					GeneticAlteration inGeneticAlteration = new GeneticAlteration();
-					inGeneticAlteration.setObservation( inInducedMutationData.getObservation() );
-					inGeneticAlteration.setMethodOfObservation( inInducedMutationData.getMethodOfObservation() );
-					inInducedMutation.addGeneticAlteration( inGeneticAlteration );
-	        	}
-	        }
+                // 2. Set flag, this Strain will need to be approved before
+                // being added the list
+                inEnvironFactor.setTypeUnctrlVocab(inInducedMutationData.getOtherType());
+            }
         }
 
-        //MGI Number                
-        //Check for exisiting MutationIdentifier
+        // CAS Number
+        inEnvironFactor.setCasNumber(inInducedMutationData.getCASNumber());
+
+        // Name of Inducing Agent
+        inEnvironFactor.setName(inInducedMutationData.getName());
+
+        // inEnvironFactor.setNameUnctrlVocab( );
+        if (inInducedMutation.getEnvironmentalFactorCollection().size() < 1)
+            inInducedMutation.addEnvironmentalFactor(inEnvironFactor);
+
+        // GeneID
+        inInducedMutation.setGeneId(inInducedMutationData.getGeneId());
+
+        // Description
+        inInducedMutation.setDescription(inInducedMutationData.getDescription());
+
+        // Observation and Method of Observation
+        List geneticList = inInducedMutation.getGeneticAlterationCollection();
+
+        if (geneticList.size() > 0) {
+            GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
+            inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
+            inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
+        } else {
+            if (inInducedMutationData.getObservation() != null) {
+                if (!inInducedMutationData.getObservation().equals("")) {
+                    GeneticAlteration inGeneticAlteration = new GeneticAlteration();
+                    inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
+                    inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
+                    inInducedMutation.addGeneticAlteration(inGeneticAlteration);
+                }
+            }
+        }
+
+        // MGI Number
+        // Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;
-        if ( inInducedMutation.getMutationIdentifier() != null )
-        	inMutationIdentifier = inInducedMutation.getMutationIdentifier();
+        if (inInducedMutation.getMutationIdentifier() != null)
+            inMutationIdentifier = inInducedMutation.getMutationIdentifier();
         else
-        	inMutationIdentifier = new MutationIdentifier();
-        
-        String strNumberMGI = inInducedMutationData.getNumberMGI().trim();
-        Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-		Matcher m = p.matcher( strNumberMGI );				
-		if (m.matches() && strNumberMGI != null && ! strNumberMGI.equals("") ) {
-			 inMutationIdentifier.setNumberMGI( Long.valueOf( strNumberMGI ) );
-			 inInducedMutation.setMutationIdentifier( inMutationIdentifier );
-		}
-				
-		log.trace("Exiting populateInducedMutation");
-    }    
+            inMutationIdentifier = new MutationIdentifier();
+
+        inMutationIdentifier.setNumberMGI(Long.valueOf(inInducedMutationData.getNumberMGI().trim()));
+        inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+
+        log.trace("Exiting populateInducedMutation");
+    }
 }

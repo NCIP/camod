@@ -15,8 +15,6 @@ import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -94,8 +92,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
 
                 // Remove all the targeted modifications from the list
                 theTargetedModification.getModificationTypeCollection().clear();
-                
-                /*
+
                 log.trace("Sending Notification eMail - new Targeted Modification added");
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
@@ -134,7 +131,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
                     // System.out.println("Caught exception" + e);
                     e.printStackTrace();
                 }
-*/
+
                 // 2. Set flag, this Strain will need to be approved before
                 // being added the list
                 theTargetedModification.setModTypeUnctrlVocab(inTargetedModificationData.getOtherModificationType());
@@ -275,13 +272,8 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         else
             inMutationIdentifier = new MutationIdentifier();
 
-        String strNumberMGI = inTargetedModificationData.getNumberMGI().trim();
-        Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-        Matcher m = p.matcher(strNumberMGI);
-        if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
-            inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
-            theTargetedModification.setMutationIdentifier(inMutationIdentifier);
-        }
+        inMutationIdentifier.setNumberMGI(Long.valueOf(inTargetedModificationData.getNumberMGI().trim()));
+        theTargetedModification.setMutationIdentifier(inMutationIdentifier);
 
         theTargetedModification.setComments(inTargetedModificationData.getComments());
 

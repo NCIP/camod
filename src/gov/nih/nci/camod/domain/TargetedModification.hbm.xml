@@ -42,8 +42,7 @@
         <bag name="modificationTypeCollection" 
         	table="tar_mod_modification_type"
         	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
+        	lazy="true">
         	
         	<key column="engineered_gene_id"/>
         	<many-to-many column="modification_type_id"

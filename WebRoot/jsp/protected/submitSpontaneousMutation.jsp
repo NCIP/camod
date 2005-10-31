@@ -11,31 +11,37 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aSpontaneousMutationID = request.getParameter( "aSpontaneousMutationID" );
+	String aSpontaneousMutationID = (String) request.getAttribute( "aSpontaneousMutationID" );
 
 	//if aXenograftID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "SpontaneousMutationAction.do?method=save";
 	
-	if ( aSpontaneousMutationID != null )
+	if ( aSpontaneousMutationID != null && aSpontaneousMutationID.length() > 0) {
 		actionName = "SpontaneousMutationAction.do?method=edit";
+	}
+	else
+	{
+	    aSpontaneousMutationID = "";
+	}
 %>
 <SCRIPT LANGUAGE="JavaScript">
 		
-	function chkObservation( control ) {
-		ideControl = document.forms[0].methodOfObservation;
-
-		if( control.value != null && control.value != "" )
-			ideControl.disabled = false
+	function chkObservation() {
+	
+	    observation = document.forms[0].observation;
+	
+		if( observation.value != null && observation.value != "" ) {
+			enableField(document.forms[0].methodOfObservation);
+		}
 		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
+			disableField(document.forms[0].methodOfObservation);
 		}	
-	 }
+	}
 	 
 </SCRIPT>
 
@@ -62,7 +68,7 @@
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="name">	
 			
-			<html:text styleClass="formFieldSized" property="name"  size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" property="name"  size="30" />
 		</td>
 	</tr>
 	
@@ -70,7 +76,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Observation:</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32" onkeypress="chkObservation( this );" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32" onkeypress="chkObservation();" />
 		</td>
 	</tr>
 	
@@ -78,7 +84,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Observation:</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true"  name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true"  />
 		</td>
 	</tr>
 	
@@ -90,7 +96,7 @@
 		<td class="formField">
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>			
-			<html:text styleClass="formFieldUnSized" property="numberMGI"  size="20" name="formdata"/>
+			<html:text styleClass="formFieldUnSized" property="numberMGI"  size="20" />
 		</td>
 	</tr>	
 	
@@ -100,7 +106,7 @@
 		<camod:cshelp key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">			
-			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32" name="formdata"/>
+			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32" />
 		</td>
 	</tr>
 	
@@ -115,7 +121,13 @@
 				  <html:reset styleClass="actionButton">
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
-				
+  				  
+				  <c:if test="${not empty aSpontaneousMutationID}">
+	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+						  <bean:message key="button.delete"/>
+					  </html:submit>
+			      </c:if>
+			      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="aSpontaneousMutationID" value="<%= aSpontaneousMutationID %>">
 				  	
@@ -131,20 +143,7 @@
 </tr></td></TABLE>
 
 <SCRIPT>
-	function checkOthers()
-	{			
-	    ideControl = document.forms[0].observation;
-	    ideOtherControl = document.forms[0].methodOfObservation;
-	
-		if( ideControl.value != "" )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}		
-	}
-	
-	checkOthers();
-	
+chkObservation();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
