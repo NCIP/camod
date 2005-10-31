@@ -20,7 +20,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("In AdvancedSearchPopulateAction.populate");
-
+		
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,

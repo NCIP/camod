@@ -11,7 +11,7 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
-	String aAvailabilityID = request.getParameter( "aAvailabilityID" );
+	String aAvailabilityID = (String) request.getAttribute( "aAvailabilityID" );
 	
 	//if aAvailabilityID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
@@ -81,8 +81,7 @@
 	  				  </html:reset>
 
 				      <c:if test="${not empty aAvailabilityID}">
-						  <html:submit property="action" styleClass="actionButton"
-							  onclick="confirm('Are you sure you want to delete?');">
+						  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 						      <bean:message key="button.delete" />
 						  </html:submit>
 					  </c:if>

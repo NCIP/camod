@@ -16,97 +16,102 @@ import org.apache.struts.action.ActionMapping;
 
 public class PublicationPopulateAction extends BaseAction {
 
-    /**
-     * Pre-populate all field values in the form EnvironmentalFactorForm Used by
-     * submitEnvironmentalFactors
-     * 
-     */
-    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+	/**
+	 * Pre-populate all field values in the form EnvironmentalFactorForm Used by
+	 * submitEnvironmentalFactors
+	 * 
+	 */
+	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        System.out.println("<PublicationPopulateAction populate> Entering populate() ");
+		System.out.println("<PublicationPopulateAction populate> Entering populate() ");
 
-        // Create a form to edit
-        PublicationForm pubForm = (PublicationForm) form;
+		// Create a form to edit
+		PublicationForm pubForm = (PublicationForm) form;
 
-        // Grab the current Therapy we are working with related to this
-        // animalModel
-        String aPubID = request.getParameter("aPubID");
-        request.setAttribute("aPubID", aPubID);
-        
-        // Use the current animalModel based on the ID stored in the session
-        PublicationManager thePublicationManager = (PublicationManager) getBean("publicationManager");
-        Publication thePublication = thePublicationManager.get(aPubID);
+		// Grab the current Therapy we are working with related to this
+		// animalModel
+		String aPubID = request.getParameter("aPubID");
 
-        pubForm.setAuthors(thePublication.getAuthors());
+		// Use the current animalModel based on the ID stored in the session
+		PublicationManager thePublicationManager = (PublicationManager) getBean("publicationManager");
+		Publication thePublication = thePublicationManager.get(aPubID);
 
-        pubForm.setTitle(thePublication.getTitle());
+		if (thePublication == null) {
+			request.setAttribute("aPubID", null);
+		} else {
+			request.setAttribute("aPubID", aPubID);
 
-        pubForm.setJournal(thePublication.getJournal());
-        pubForm.setVolume(thePublication.getVolume());
+			pubForm.setAuthors(thePublication.getAuthors());
 
-        if (thePublication.getYear() != null) {
-            pubForm.setYear(thePublication.getYear().toString());
-        }
-        if (thePublication.getStartPage() != null) {
-            pubForm.setStartPage(thePublication.getStartPage().toString());
-        }
-        if (thePublication.getEndPage() != null) {
-            pubForm.setEndPage(thePublication.getEndPage().toString());
-        }
-        if (thePublication.getPmid() != null) {
-            pubForm.setPmid(thePublication.getPmid().toString());
-        }
+			pubForm.setTitle(thePublication.getTitle());
 
-        if (thePublication.isFirstTimeReported().booleanValue()) {
-            pubForm.setFirstTimeReported("yes");
-        } else {
-            pubForm.setFirstTimeReported("no");
-        }
+			pubForm.setJournal(thePublication.getJournal());
+			pubForm.setVolume(thePublication.getVolume());
 
-        PublicationStatus pubStatus = thePublication.getPublicationStatus();
-        pubForm.setName(pubStatus.getName());
+			if (thePublication.getYear() != null) {
+				pubForm.setYear(thePublication.getYear().toString());
+			}
+			if (thePublication.getStartPage() != null) {
+				pubForm.setStartPage(thePublication.getStartPage().toString());
+			}
+			if (thePublication.getEndPage() != null) {
+				pubForm.setEndPage(thePublication.getEndPage().toString());
+			}
+			if (thePublication.getPmid() != null) {
+				pubForm.setPmid(thePublication.getPmid().toString());
+			}
 
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
-        this.dropdown(request, response);
+			if (thePublication.isFirstTimeReported().booleanValue()) {
+				pubForm.setFirstTimeReported("yes");
+			} else {
+				pubForm.setFirstTimeReported("no");
+			}
 
-        return mapping.findForward("submitPublications");
-    }
+			PublicationStatus pubStatus = thePublication.getPublicationStatus();
+			pubForm.setName(pubStatus.getName());
+		}
 
-    /**
-     * Populate the dropdown menus for submitEnvironmentalFactors
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+		// Prepopulate all dropdown fields, set the global Constants to the
+		// following
+		this.dropdown(request, response);
 
-        this.dropdown(request, response);
+		return mapping.findForward("submitPublications");
+	}
 
-        return mapping.findForward("submitPublications");
-    }
+	/**
+	 * Populate the dropdown menus for submitEnvironmentalFactors
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-    /**
-     * Populate all drowpdowns for this type of form
-     * 
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		this.dropdown(request, response);
 
-        System.out.println("<PublicationPopulateAction dropdown> Entering void dropdown()");
+		return mapping.findForward("submitPublications");
+	}
 
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
+	/**
+	 * Populate all drowpdowns for this type of form
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, Constants.Dropdowns.ADD_BLANK);
+		System.out.println("<PublicationPopulateAction dropdown> Entering void dropdown()");
 
-    }
+		// Prepopulate all dropdown fields, set the global Constants to the
+		// following
+
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PUBDROP, Constants.Dropdowns.ADD_BLANK);
+
+	}
 }

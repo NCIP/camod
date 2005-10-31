@@ -9,7 +9,7 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
-	String aAvailabilityID = request.getParameter( "aAvailabilityID" );
+	String aAvailabilityID = (String) request.getAttribute( "aAvailabilityID" );
 	
 	//if aAvailabilityID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one

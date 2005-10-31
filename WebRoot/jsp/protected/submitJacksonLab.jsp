@@ -10,7 +10,7 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
-		String aAvailabilityID = request.getParameter("aAvailabilityID");
+		String aAvailabilityID = (String) request.getAttribute("aAvailabilityID");
 
 		//if aAvailabilityID is passed in, then we are dealing with a previously entered model and are editing it
 		//otherwise, create a new one
@@ -23,6 +23,7 @@
 			aAvailabilityID = "";
 		}
 %>
+
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins"
 	width="100%" height="100%">
@@ -48,26 +49,20 @@
 					<tr>
 						<td class="formRequiredNotice" width="5">*</td>
 						<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
-						<camod:cshelp key="ANIMAL_AVAILABILITY.NAME"
-							image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
-						<td class="formField"><html:form action="<%= actionName %>"
-							focus="name">
+						<camod:cshelp key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
+						<td class="formField"><html:form action="<%= actionName %>" focus="name">
 							<html:hidden property="source" />
-							<input type=button value="Find Info"
-								onClick="myRef = window.open('http://jaxmice.jax.org/index.html','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-							<html:text styleClass="formFieldUnSized" size="40"
-								property="name" /></td>
+							<input type=button value="Find Info" onClick="myRef = window.open('http://jaxmice.jax.org/index.html','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+							<html:text styleClass="formFieldUnSized" size="40" property="name" />
+						</td>
 					</tr>
 
 
 					<tr>
 						<td class="formRequiredNotice" width="5">&nbsp;</td>
-						<td class="formLabel">Stock#: <camod:cshelp
-							key="ANIMAL_AVAILABILITY.STOCK_NUMBER"
-							image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
-						<td class="formField"><html:text styleClass="formFieldSized"
-							size="30" property="stockNumber" /></td>
+						<td class="formLabel">Stock#: 
+						     <camod:cshelp key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
+						<td class="formField"><html:text styleClass="formFieldSized" size="30" property="stockNumber" /></td>
 					</tr>
 
 					<tr>
@@ -90,8 +85,7 @@
 							</c:if>
 
 							<!--  Done this way since html:hidden doesn't seem to work correctly -->
-							<input type="hidden" name="aAvailabilityID"
-								value="<%= aAvailabilityID %>">
+							<input type="hidden" name="aAvailabilityID" value="<%= aAvailabilityID %>">
 
 							</html:form>
 						</TABLE>

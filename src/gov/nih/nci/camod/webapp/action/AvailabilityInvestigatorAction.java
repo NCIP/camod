@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.3 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.4 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.2  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -25,6 +28,7 @@ import gov.nih.nci.camod.webapp.form.AvailabilityForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -64,8 +68,6 @@ public class AvailabilityInvestigatorAction extends BaseAction {
 		/* Create all the manager objects needed for Screen */
 		AvailabilityManager availabilityManager = (AvailabilityManager) getBean("availabilityManager");
 
-		String theForward = "AnimalModelTreePopulateAction";
-
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
@@ -97,12 +99,10 @@ public class AvailabilityInvestigatorAction extends BaseAction {
 			ActionMessages msg = new ActionMessages();
 			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
 			saveErrors(request, msg);
-
-			theForward = "failure";
 		}
 
 		log.info("<AvailabilityInvestigatorAction> Exiting edit");
-		return mapping.findForward(theForward);
+		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
 
 	/**

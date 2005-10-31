@@ -11,39 +11,45 @@ import org.apache.struts.action.*;
 
 public class ImagePopulateAction extends BaseAction {
 
-    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        System.out.println("<ImagePopulateAction populate> Entering populate() ");
+		System.out.println("<ImagePopulateAction populate> Entering populate() ");
 
-        ImageForm imageForm = (ImageForm) form;
+		ImageForm imageForm = (ImageForm) form;
 
-        String aImageID = request.getParameter("aImageID");
-        request.setAttribute("aImageID", aImageID);
-        
-        Image inImage = ImageManagerSingleton.instance().get(aImageID);
+		String aImageID = request.getParameter("aImageID");
 
-        System.out.println("FILESERVERLOCATION=" + inImage.getFileServerLocation());
-        // Image
-        // Image inImage = theImage.getImage();
-        if (inImage != null) {
-            imageForm.setTitle(inImage.getTitle());
-            imageForm.setFileServerLocation(inImage.getFileServerLocation());
-            imageForm.setDescriptionOfConstruct(inImage.getDescription());
+		Image inImage = ImageManagerSingleton.instance().get(aImageID);
 
-            // TODO: Display a message on the current image, uploading another
-            // image will replace current image
-            // TODO: Display thumbnail and viewer for image already uploaded
-        }
+		// Handle back arrow
+		if (inImage == null) {
+			request.setAttribute("aImageID", null);
+		} else {
+			request.setAttribute("aImageID", aImageID);
 
-        return mapping.findForward("submitImages");
-    }
+			System.out.println("FILESERVERLOCATION=" + inImage.getFileServerLocation());
+			// Image
+			// Image inImage = theImage.getImage();
+			if (inImage != null) {
+				imageForm.setTitle(inImage.getTitle());
+				imageForm.setFileServerLocation(inImage.getFileServerLocation());
+				imageForm.setDescriptionOfConstruct(inImage.getDescription());
 
-    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+				// TODO: Display a message on the current image, uploading
+				// another
+				// image will replace current image
+				// TODO: Display thumbnail and viewer for image already uploaded
+			}
+		}
+		return mapping.findForward("submitImages");
+	}
 
-        System.out.println("<ImagePopulateAction dropdown> Entering dropdown()");
+	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        return mapping.findForward("submitImages");
-    }
+		System.out.println("<ImagePopulateAction dropdown> Entering dropdown()");
+
+		return mapping.findForward("submitImages");
+	}
 }

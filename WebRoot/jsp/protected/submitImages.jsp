@@ -14,7 +14,7 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
-	String aImageID = request.getParameter( "aImageID" );
+	String aImageID = (String) request.getAttribute( "aImageID" );
 
 	// if aImageID is passed in, then we are dealing with 
 	// a previously entered model and are editing it

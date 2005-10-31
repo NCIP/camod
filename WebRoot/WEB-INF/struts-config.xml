@@ -151,7 +151,7 @@
 		<form-bean
 			name="searchForm"
 		    type="gov.nih.nci.camod.webapp.form.SearchForm"/>
-
+		    
 		<form-bean
 			name="drugScreenSearchForm"
 		    type="gov.nih.nci.camod.webapp.form.DrugScreenSearchForm"/>
@@ -522,7 +522,8 @@
 			
      	<forward
      		name="AnimalModelTreePopulateAction"
-     		path="/AnimalModelTreePopulateAction.do"></forward>		
+     		path="/AnimalModelTreePopulateAction.do">
+        </forward>		
       </global-forwards>
 
   <!-- ========== Action Mapping Definitions =================================== -->
@@ -959,13 +960,13 @@
     <action path="/SearchAction"
 	        type="gov.nih.nci.camod.webapp.action.SearchAction"
 	        name="searchForm"
-	        scope="request"
+	        scope="session"
 	        parameter="unprotected_method" 
 	        unknown="false"
 	        validate="false">    
 	    <forward
             name="next"
-            path="/jsp/searchResults.jsp"
+            path="/searchResults.do"
             redirect="true">
         </forward>   	
     </action>
@@ -1459,14 +1460,26 @@
             parameter="method"
 			validate="false">		
     </action>
-    
+
     <!--  Generate the list of items on the submission subMenu -->
 	<action path="/AnimalModelTreePopulateAction"
+			type="gov.nih.nci.camod.webapp.action.AnimalModelTreePopulateActionSetup"
+			parameter="method"
+			validate="false">
+		<forward
+		    redirect="true"
+            name="next"
+            path="/AnimalModelTreePopulateActionFinal.do">
+        </forward>
+	</action>
+	
+	<!--  Generate the list of items on the submission subMenu -->
+	<action path="/AnimalModelTreePopulateActionFinal"
 			type="gov.nih.nci.camod.webapp.action.AnimalModelTreePopulateAction"
 			parameter="method"
 			validate="false">
 	</action>
-
+	
     <!-- changed input so the page returns to correct jsp on failed validation -->
     <action path="/EditAnimalModel"
 	        type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
@@ -2109,7 +2122,7 @@
     <action path="/SimpleSearchPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.SimpleSearchPopulateAction"
     		name="searchForm"    		
-            scope="request"
+            scope="session"
             parameter="unprotected_method"
 			validate="false">	
 	    <forward
@@ -2117,10 +2130,9 @@
             path="/searchSimple.do">
         </forward>	
     </action>
+    
     <action path="/SearchTableOfContentsPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.SearchTableOfContentsPopulateAction"
-    		name="searchForm"    		
-            scope="request"
             parameter="unprotected_method"
 			validate="false">	
 	    <forward
@@ -2128,10 +2140,9 @@
             path="/searchTableOfContents.do">
         </forward>	
     </action>
+    
     <action path="/ViewTOCSearchResultsAction"
     		type="gov.nih.nci.camod.webapp.action.ViewTOCSearchResultsAction"
-    		name="searchForm"    		
-            scope="request"
             parameter="unprotected_method"
 			validate="false">	
 	    <forward
@@ -2158,7 +2169,7 @@
     <action path="/AdvancedSearchPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AdvancedSearchPopulateAction"
     		name="searchForm"    		
-            scope="request"
+            scope="session"
             parameter="unprotected_method"
 			validate="false">	
 	    <forward

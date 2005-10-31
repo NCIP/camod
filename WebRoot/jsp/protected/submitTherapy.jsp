@@ -39,7 +39,7 @@ function chkOtherAdminRoute() {
 
 </SCRIPT>
 <%
-	String aTherapyID = request.getParameter( "aTherapyID" );
+	String aTherapyID = (String) request.getAttribute( "aTherapyID" );
 	
 	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one

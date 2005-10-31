@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.4 2005-10-28 17:45:10 georgeda Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.5 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/28 17:45:10  georgeda
+ * PI no longer required
+ *
  * Revision 1.3  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -34,90 +37,98 @@ import org.apache.struts.action.*;
 
 public class AvailabilityInvestigatorPopulateAction extends BaseAction {
 
-    /**
-     * Pre-populate all field values in the form <FormName> Used by <jspName>
-     * 
-     */
-    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+	/**
+	 * Pre-populate all field values in the form <FormName> Used by <jspName>
+	 * 
+	 */
+	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        System.out.println("<AvailabilityInvestigatorPopulateAction populate> Entering ");
+		System.out.println("<AvailabilityInvestigatorPopulateAction populate> Entering ");
 
-        // Create a form to edit
-        AvailabilityForm availabilityForm = (AvailabilityForm) form;
+		// Create a form to edit
+		AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-        // Grab the current Availability we are working with related to this
-        // animalModel
-        String aAvailabilityID = request.getParameter("aAvailabilityID");
-        request.setAttribute("aAvailabilityID", aAvailabilityID);
+		// Grab the current Availability we are working with related to this
+		// animalModel
+		String aAvailabilityID = request.getParameter("aAvailabilityID");
 
-        AnimalAvailability avilablity = AvailabilityManagerSingleton.instance().get(aAvailabilityID);
-        System.out.println("avilablity (id and name): " + avilablity);
+		AnimalAvailability avilablity = AvailabilityManagerSingleton.instance().get(aAvailabilityID);
+		System.out.println("avilablity (id and name): " + avilablity);
 
-        // display strin name
-        availabilityForm.setName(avilablity.getName());
+		if (avilablity == null) {
+			request.setAttribute("aAvailabilityID", null);
+		} else {
+			
+			request.setAttribute("aAvailabilityID", aAvailabilityID);
+			// display strin name
+			availabilityForm.setName(avilablity.getName());
 
-        if (avilablity.getStockNumber() != null && avilablity.getStockNumber().length() > 0) {
+			if (avilablity.getStockNumber() != null && avilablity.getStockNumber().length() > 0) {
 
-            // get the username from the PI-id stored under stock_number in
-            // AnimalAvailability table
-            Person thePerson = PersonManagerSingleton.instance().get(avilablity.getStockNumber());
-            System.out.println("thePerson: " + thePerson);
+				// get the username from the PI-id stored under stock_number in
+				// AnimalAvailability table
+				Person thePerson = PersonManagerSingleton.instance().get(avilablity.getStockNumber());
+				System.out.println("thePerson: " + thePerson);
 
-            availabilityForm.setStockNumber(thePerson.getUsername());
-            System.out.println("thePerson.getUsername(): " + thePerson.getUsername());
-        }
-        
-        System.out.println("<AvailabilityInvestigatorPopulateAction populate> Exiting ");
+				availabilityForm.setStockNumber(thePerson.getUsername());
+				System.out.println("thePerson.getUsername(): " + thePerson.getUsername());
+			}
+		}
+		
+		// setup dropdown menus
+		this.dropdown(request, response);
+		
+		System.out.println("<AvailabilityInvestigatorPopulateAction populate> Exiting ");
 
-        return mapping.findForward("submitInvestigator");
-    }
+		return mapping.findForward("submitInvestigator");
+	}
 
-    /**
-     * Populate the dropdown menus for 4 submission screens for Animal
-     * Availability
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+	/**
+	 * Populate the dropdown menus for 4 submission screens for Animal
+	 * Availability
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        System.out.println("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Entering ");
+		System.out.println("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Entering ");
 
-        // blank out the FORMDATA Constant field
-        AvailabilityForm availabilityForm = (AvailabilityForm) form;
+		// blank out the FORMDATA Constant field
+		AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-        String theSource = (String) request.getParameter("lab");
-        availabilityForm.setSource(theSource);
+		String theSource = (String) request.getParameter("lab");
+		availabilityForm.setSource(theSource);
 
-        // setup dropdown menus
-        this.dropdown(request, response);
+		// setup dropdown menus
+		this.dropdown(request, response);
 
-        System.out.println("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Exiting ");
+		System.out.println("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Exiting ");
 
-        return mapping.findForward("submitInvestigator");
+		return mapping.findForward("submitInvestigator");
 
-    }
+	}
 
-    /**
-     * Populate all drowpdowns for this type of form
-     * 
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	/**
+	 * Populate all drowpdowns for this type of form
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<AvailabilityInvestigatorPopulateAction dropdown> Entering ");
+		System.out.println("<AvailabilityInvestigatorPopulateAction dropdown> Entering ");
 
-        // Prepopulate dropdown field on submitInvestigator screen only
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
-    }
+		// Prepopulate dropdown field on submitInvestigator screen only
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP,
+				Constants.Dropdowns.ADD_BLANK_OPTION);
+	}
 
 }

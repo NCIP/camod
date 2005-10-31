@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorPopulateAction.java,v 1.11 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: EnvironmentalFactorPopulateAction.java,v 1.12 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.10  2005/10/27 19:25:06  georgeda
  * Validation changes
  *
@@ -14,16 +17,15 @@
 
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -46,58 +48,47 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 		// Grab the current Therapy we are working with related to this
 		// animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
-		request.setAttribute("aTherapyID", aTherapyID);
 
-		/* Grab the current modelID from the session */
-		String modelID = "" + request.getSession().getAttribute(Constants.MODELID);
-		System.out.println("<EnvironmentalFactorAction save> Grabed the current modelID");
+		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+		Therapy therapy = therapyManager.get(aTherapyID);
 
-		// Use the current animalModel based on the ID stored in the session
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		AnimalModel am = animalModelManager.get(modelID);
-
-		// retrieve the list of all therapies from the current animalModel
-		List therapyList = am.getTherapyCollection();
-
-		Therapy therapy = new Therapy();
-
-		// find the specific one we need
-		for (int i = 0; i < therapyList.size(); i++) {
-			therapy = (Therapy) therapyList.get(i);
-			if (therapy.getId().toString().equals(aTherapyID))
-				break;
-		}
-
-		// Set the otherName and/or the selected name attribute
-		if (therapy.getAgent().getNameUnctrlVocab() != null) {
-			envForm.setName(Constants.Dropdowns.OTHER_OPTION);
-			envForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+		// Handle back-arrow on the delete
+		if (therapy == null) {
+			request.setAttribute("aTherapyID", null);
 		} else {
-			envForm.setName(therapy.getAgent().getName());
-		}
 
-		// Set the other administrative route and/or the selected administrative
-		// route
-		if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
-			envForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-			envForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
-		} else {
-			envForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
-		}
+			request.setAttribute("aTherapyID", aTherapyID);
 
-		if (therapy.getTreatment().getSexDistribution() != null) {
-			envForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			// Set the otherName and/or the selected name attribute
+			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+				envForm.setName(Constants.Dropdowns.OTHER_OPTION);
+				envForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+			} else {
+				envForm.setName(therapy.getAgent().getName());
+			}
+
+			// Set the other administrative route and/or the selected
+			// administrative
+			// route
+			if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+				envForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+				envForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+			} else {
+				envForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+			}
+
+			if (therapy.getTreatment().getSexDistribution() != null) {
+				envForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			}
+			envForm.setDosage(therapy.getTreatment().getDosage());
+			envForm.setRegimen(therapy.getTreatment().getRegimen());
+			envForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
+
 		}
-		envForm.setDosage(therapy.getTreatment().getDosage());
-		envForm.setRegimen(therapy.getTreatment().getRegimen());
-		envForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
-
-		// Store the Form in session to be used by the JSP
-		request.getSession().setAttribute(Constants.FORMDATA, envForm);
 
 		return mapping.findForward("submitEnvironmentalFactors");
 

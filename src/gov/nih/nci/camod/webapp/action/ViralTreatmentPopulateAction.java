@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentPopulateAction.java,v 1.8 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: ViralTreatmentPopulateAction.java,v 1.9 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.7  2005/10/27 19:25:06  georgeda
  * Validation changes
  *
@@ -14,12 +17,9 @@
 
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
-
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -44,40 +44,35 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
 		String aTherapyID = request.getParameter("aTherapyID");
-		request.setAttribute("aTherapyID", aTherapyID);
 
-		String modelID = "" + request.getSession().getAttribute(Constants.MODELID);
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		AnimalModel am = animalModelManager.get(modelID);
+		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+		Therapy therapy = therapyManager.get(aTherapyID);
 
-		// retrieve the list of all therapies from the current animalModel
-		List therapyList = am.getTherapyCollection();
-
-		Therapy therapy = new Therapy();
-
-		// find the specific one we need
-		for (int i = 0; i < therapyList.size(); i++) {
-			therapy = (Therapy) therapyList.get(i);
-			if (therapy.getId().toString().equals(aTherapyID))
-				break;
-		}
-
-		// Set the otherName and/or the selected name attribute
-		if (therapy.getAgent().getNameUnctrlVocab() != null) {
-			viralTreatmentForm.setName(Constants.Dropdowns.OTHER_OPTION);
-			viralTreatmentForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+		// Handle back-arrow on the delete
+		if (therapy == null) {
+			request.setAttribute("aTherapyID", null);
 		} else {
-			viralTreatmentForm.setName(therapy.getAgent().getName());
-		}
 
-		if (therapy.getTreatment().getSexDistribution() != null) {
-			viralTreatmentForm.setType(therapy.getTreatment().getSexDistribution().getType());
-		}
-		viralTreatmentForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-		viralTreatmentForm.setDosage(therapy.getTreatment().getDosage());
+			request.setAttribute("aTherapyID", aTherapyID);
 
-		viralTreatmentForm.setRegimen(therapy.getTreatment().getRegimen());
-		viralTreatmentForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+			// Set the otherName and/or the selected name attribute
+			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+				viralTreatmentForm.setName(Constants.Dropdowns.OTHER_OPTION);
+				viralTreatmentForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+			} else {
+				viralTreatmentForm.setName(therapy.getAgent().getName());
+			}
+
+			if (therapy.getTreatment().getSexDistribution() != null) {
+				viralTreatmentForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			}
+			viralTreatmentForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
+			viralTreatmentForm.setDosage(therapy.getTreatment().getDosage());
+
+			viralTreatmentForm.setRegimen(therapy.getTreatment().getRegimen());
+			viralTreatmentForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+
+		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.11 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.12 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.10  2005/10/27 19:25:06  georgeda
  * Validation changes
  *
@@ -17,18 +20,17 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.webapp.form.GeneDeliveryForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public class GeneDeliveryPopulateAction extends BaseAction {
 
@@ -47,49 +49,44 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 		// Grab the current Therapy we are working with related to this
 		// animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
-		request.setAttribute("aTherapyID", aTherapyID);
+		GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
+		GeneDelivery gene = geneDeliveryManager.get(aTherapyID);
 
-		// Grab the current modelID from the session
-		String modelID = "" + request.getSession().getAttribute(Constants.MODELID);
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		AnimalModel am = animalModelManager.get(modelID);
-
-		System.out.println("<GeneDeliveryPopulateAction populate> Grab the current modelID= " + modelID);
-
-		List geneDeliveryList = am.getGeneDeliveryCollection();
-		GeneDelivery gene = new GeneDelivery();
-
-		for (int i = 0; i < geneDeliveryList.size(); i++) {
-			gene = (GeneDelivery) geneDeliveryList.get(i);
-			if (gene.getId().toString().equals(aTherapyID))
-				break;
-		}
-
-		System.out.println("<GeneDeliveryPopulateAction populate> get the non-Organ attributes");
-
-		// Set the otherViralVector and/or the selected viral vector attribute
-		if (gene.getViralVectorUnctrlVocab() != null) {
-			geneDeliveryForm.setViralVector(Constants.Dropdowns.OTHER_OPTION);
-			geneDeliveryForm.setOtherViralVector(gene.getViralVectorUnctrlVocab());
+		// Handle back-arrow on the delete
+		if (gene == null) {
+			request.setAttribute("aTherapyID", null);
 		} else {
-			geneDeliveryForm.setViralVector(gene.getViralVector());
+
+			request.setAttribute("aTherapyID", aTherapyID);
+
+			// Set the otherViralVector and/or the selected viral vector
+			// attribute
+			if (gene.getViralVectorUnctrlVocab() != null) {
+				geneDeliveryForm.setViralVector(Constants.Dropdowns.OTHER_OPTION);
+				geneDeliveryForm.setOtherViralVector(gene.getViralVectorUnctrlVocab());
+			} else {
+				geneDeliveryForm.setViralVector(gene.getViralVector());
+			}
+
+			geneDeliveryForm.setGeneInVirus(gene.getGeneInVirus());
+			geneDeliveryForm.setRegimen(gene.getTreatment().getRegimen());
+
+			if (gene.getTreatment().getSexDistribution() != null) {
+				geneDeliveryForm.setType(gene.getTreatment().getSexDistribution().getType());
+			}
+			geneDeliveryForm.setAgeAtTreatment(gene.getTreatment().getAgeAtTreatment());
+
+			/* set Organ attributes */
+			System.out.println("<GeneDeliveryPopulateAction populate> get the Organ attributes");
+
+			// since we are always querying from concept code (save and edit),
+			// simply display VSPreferredDescription
+			geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
+			System.out.println("setOrgan= " + gene.getOrgan().getEVSPreferredDescription());
+
+			geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
+			System.out.println("OrganTissueCode= " + gene.getOrgan().getConceptCode());
 		}
-
-		geneDeliveryForm.setGeneInVirus(gene.getGeneInVirus());
-		geneDeliveryForm.setRegimen(gene.getTreatment().getRegimen());
-		geneDeliveryForm.setType(gene.getTreatment().getSexDistribution().getType());
-		geneDeliveryForm.setAgeAtTreatment(gene.getTreatment().getAgeAtTreatment());
-
-		/* set Organ attributes */
-		System.out.println("<GeneDeliveryPopulateAction populate> get the Organ attributes");
-
-		// since we are always querying from concept code (save and edit),
-		// simply display VSPreferredDescription
-		geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
-		System.out.println("setOrgan= " + gene.getOrgan().getEVSPreferredDescription());
-
-		geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
-		System.out.println("OrganTissueCode= " + gene.getOrgan().getConceptCode());
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following

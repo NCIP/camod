@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.9 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: CellLinePopulateAction.java,v 1.10 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.8  2005/10/27 12:53:24  georgeda
  * Added validation
  *
@@ -15,7 +18,6 @@
 
 package gov.nih.nci.camod.webapp.action;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.service.CellLineManager;
 import gov.nih.nci.camod.webapp.form.CellLineForm;
@@ -44,29 +46,32 @@ public class CellLinePopulateAction extends BaseAction {
 		// Grab the current Cell Line we are working with related to this
 		// animalModel
 		String aCellID = request.getParameter("aCellID");
-		request.setAttribute("aCellID", aCellID);
 
 		CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
 		CellLine cellLine = theCellLineManager.get(aCellID);
 
-		cellLineForm.setCellLineName(cellLine.getName());
-		cellLineForm.setExperiment(cellLine.getExperiment());
-		cellLineForm.setResults(cellLine.getResults());
-		cellLineForm.setComments(cellLine.getComments());
+		if (cellLine == null) {
+			request.setAttribute("aCellID", null);
+		} else {
+			request.setAttribute("aCellID", aCellID);
 
-		/* set Organ attributes */
-		System.out.println("<CellLinePopulateAction populate> get the Organ attributes");
+			cellLineForm.setCellLineName(cellLine.getName());
+			cellLineForm.setExperiment(cellLine.getExperiment());
+			cellLineForm.setResults(cellLine.getResults());
+			cellLineForm.setComments(cellLine.getComments());
 
-		// since we are always querying from concept code (save and edit),
-		// simply display VSPreferredDescription
-		cellLineForm.setOrgan(cellLine.getOrgan().getEVSPreferredDescription());
-		System.out.println("setOrgan= " + cellLine.getOrgan().getEVSPreferredDescription());
+			/* set Organ attributes */
+			System.out.println("<CellLinePopulateAction populate> get the Organ attributes");
 
-		cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
-		System.out.println("OrganTissueCode= " + cellLine.getOrgan().getConceptCode());
+			// since we are always querying from concept code (save and edit),
+			// simply display VSPreferredDescription
+			cellLineForm.setOrgan(cellLine.getOrgan().getEVSPreferredDescription());
+			System.out.println("setOrgan= " + cellLine.getOrgan().getEVSPreferredDescription());
 
-		// Store the Form in session to be used by the JSP
-		request.getSession().setAttribute(Constants.FORMDATA, cellLineForm);
+			cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
+			System.out.println("OrganTissueCode= " + cellLine.getOrgan().getConceptCode());
+
+		}
 
 		System.out.println("<CellLinePopulateAction populate> Exited");
 

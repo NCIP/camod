@@ -11,7 +11,7 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
 <%
-	String aPubID = request.getParameter( "aPubID" );
+	String aPubID = (String) request.getAttribute( "aPubID" );
 	
 	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one

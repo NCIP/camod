@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugPopulateAction.java,v 1.13 2005-10-28 17:44:19 georgeda Exp $
+ * $Id: ChemicalDrugPopulateAction.java,v 1.14 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/10/28 17:44:19  georgeda
+ * Fixed sex distribution error
+ *
  * Revision 1.12  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -32,107 +35,112 @@ import org.apache.struts.action.ActionMapping;
 
 public class ChemicalDrugPopulateAction extends BaseAction {
 
-    /**
-     * Pre-populate all field values in the form ChemicalDrug Used by <jspName>
-     * 
-     */
-    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+	/**
+	 * Pre-populate all field values in the form ChemicalDrug Used by <jspName>
+	 * 
+	 */
+	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        System.out.println("<ChemicalDrugPopulateAction populate> ... ");
+		System.out.println("<ChemicalDrugPopulateAction populate> ... ");
 
-        ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
+		ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
 
-        String aTherapyID = request.getParameter("aTherapyID");
-        request.setAttribute("aTherapyID", aTherapyID);
+		String aTherapyID = request.getParameter("aTherapyID");
 
-        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-        Therapy ty = therapyManager.get(aTherapyID);
+		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+		Therapy ty = therapyManager.get(aTherapyID);
 
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
-        this.dropdown(request, response);
+		// Prepopulate all dropdown fields, set the global Constants to the
+		// following
+		this.dropdown(request, response);
 
-        if (ty.getTreatment().getSexDistribution() != null) {
-            chemicalDrugForm.setType(ty.getTreatment().getSexDistribution().getType());
-        }
-        if (ty.getTreatment().getAgeAtTreatment() != null) {
-            chemicalDrugForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
-        }
+		if (ty == null) {
+			request.setAttribute("aAvailabilityID", null);
+		} else {
+			request.setAttribute("aTherapyID", aTherapyID);
 
-        // Set the other name and/or selected name from database
-        if (ty.getAgent().getNameUnctrlVocab() != null) {
-            chemicalDrugForm.setName(Constants.Dropdowns.OTHER_OPTION);
-            chemicalDrugForm.setOtherName(ty.getAgent().getNameUnctrlVocab());
-        } else {
-            chemicalDrugForm.setName(ty.getAgent().getName());
-        }
+			if (ty.getTreatment().getSexDistribution() != null) {
+				chemicalDrugForm.setType(ty.getTreatment().getSexDistribution().getType());
+			}
+			if (ty.getTreatment().getAgeAtTreatment() != null) {
+				chemicalDrugForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
+			}
 
-        // Set the other flag or the selected administrative route from database
-        if (ty.getTreatment().getAdminRouteUnctrlVocab() != null) {
-            chemicalDrugForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-            chemicalDrugForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
-        } else {
-            chemicalDrugForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
-        }
+			// Set the other name and/or selected name from database
+			if (ty.getAgent().getNameUnctrlVocab() != null) {
+				chemicalDrugForm.setName(Constants.Dropdowns.OTHER_OPTION);
+				chemicalDrugForm.setOtherName(ty.getAgent().getNameUnctrlVocab());
+			} else {
+				chemicalDrugForm.setName(ty.getAgent().getName());
+			}
 
-        chemicalDrugForm.setDosage(ty.getTreatment().getDosage());
-        chemicalDrugForm.setRegimen(ty.getTreatment().getRegimen());
-        chemicalDrugForm.setCASNumber(ty.getAgent().getCasNumber());
+			// Set the other flag or the selected administrative route from
+			// database
+			if (ty.getTreatment().getAdminRouteUnctrlVocab() != null) {
+				chemicalDrugForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+				chemicalDrugForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
+			} else {
+				chemicalDrugForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+			}
 
-        if (ty.getAgent().getNscNumber() != null) {
-            chemicalDrugForm.setNSCNumber(ty.getAgent().getNscNumber().toString());
-        }
+			chemicalDrugForm.setDosage(ty.getTreatment().getDosage());
+			chemicalDrugForm.setRegimen(ty.getTreatment().getRegimen());
+			chemicalDrugForm.setCASNumber(ty.getAgent().getCasNumber());
 
-        return mapping.findForward("submitChemicalDrug");
-    }
+			if (ty.getAgent().getNscNumber() != null) {
+				chemicalDrugForm.setNSCNumber(ty.getAgent().getNscNumber().toString());
+			}
+		}
+		return mapping.findForward("submitChemicalDrug");
+	}
 
-    /**
-     * Populate the dropdown menus for submitSurgeryOther
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+	/**
+	 * Populate the dropdown menus for submitSurgeryOther
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-        System.out.println("<ChemicalDrugPopulateAction dropdown> ... ");
+		System.out.println("<ChemicalDrugPopulateAction dropdown> ... ");
 
-        // setup dropdown menus
-        this.dropdown(request, response);
+		// setup dropdown menus
+		this.dropdown(request, response);
 
-        System.out.println("<ChemicalDrugPopulateAction> exiting... ");
+		System.out.println("<ChemicalDrugPopulateAction> exiting... ");
 
-        return mapping.findForward("submitChemicalDrug");
-    }
+		return mapping.findForward("submitChemicalDrug");
+	}
 
-    /**
-     * Populate all drowpdowns for this type of form
-     * 
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	/**
+	 * Populate all drowpdowns for this type of form
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<ChemicalDrugPopulateAction dropdown> Entering... ");
+		System.out.println("<ChemicalDrugPopulateAction dropdown> Entering... ");
 
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP,
-                Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGDROP, Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMTHERAPYDOSEUNITSDROP, "");
-        System.out.println("Before admin");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP,
-                Constants.Dropdowns.ADD_BLANK);
+		// Prepopulate all dropdown fields, set the global Constants to the
+		// following
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP,
+				Constants.Dropdowns.ADD_BLANK);
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGDROP, Constants.Dropdowns.ADD_BLANK);
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMTHERAPYDOSEUNITSDROP, "");
+		System.out.println("Before admin");
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP,
+				Constants.Dropdowns.ADD_BLANK);
 
-        System.out.println("Finishing dropdown");
-    }
+		System.out.println("Finishing dropdown");
+	}
 
 }

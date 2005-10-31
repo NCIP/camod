@@ -12,7 +12,7 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
-	String aCellID = request.getParameter( "aCellID" );
+	String aCellID = (String) request.getAttribute( "aCellID" );
 	
 	//if aCellID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one

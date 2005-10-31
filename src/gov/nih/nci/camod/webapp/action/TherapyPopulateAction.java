@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.9 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.10 2005-10-31 13:46:28 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.8  2005/10/27 19:42:05  georgeda
  * Cleanup
  *
@@ -21,8 +24,11 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.domain.AgentTarget;
+import gov.nih.nci.camod.domain.BiologicalProcess;
+import gov.nih.nci.camod.domain.ChemicalClass;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.TherapyForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -31,7 +37,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public class TherapyPopulateAction extends BaseAction {
 
@@ -50,84 +58,74 @@ public class TherapyPopulateAction extends BaseAction {
 		// Grab the current Therapy we are working with related to this
 		// animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
-		request.setAttribute("aTherapyID", aTherapyID);
 
-		String modelID = "" + request.getSession().getAttribute(Constants.MODELID);
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		AnimalModel am = animalModelManager.get(modelID);
+		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+		Therapy ty = therapyManager.get(aTherapyID);
+
+		if (ty == null) {
+			request.setAttribute("aTherapyID", null);
+		} else {
+			request.setAttribute("aTherapyID", aTherapyID);
+
+			if (ty.getTreatment().getSexDistribution() != null) {
+				therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
+			}
+			if (ty.getTreatment().getAgeAtTreatment() != null) {
+				therapyForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
+			}
+
+			therapyForm.setDosage(ty.getTreatment().getDosage());
+			therapyForm.setName(ty.getAgent().getName());
+			therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+			therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
+
+			if (ty.getAgent().getCasNumber() != null) {
+				therapyForm.setCASNumber(ty.getAgent().getCasNumber());
+			}
+
+			if (ty.getAgent().getNscNumber() != null) {
+				therapyForm.setNSCNumber(ty.getAgent().getNscNumber().toString());
+			}
+
+			// Therapy object attributes
+			therapyForm.setToxicityGrade(ty.getToxicityGrade());
+			therapyForm.setBiomarker(ty.getBiomarker());
+			therapyForm.setTumorResponse(ty.getTumorResponse());
+			therapyForm.setExperiment(ty.getExperiment());
+			therapyForm.setResults(ty.getResults());
+			therapyForm.setComments(ty.getComments());
+
+			// Get the collection of agent targets
+			List theAgentTargetsList = ty.getAgent().getAgentTargetCollection();
+			String[] theTargets = new String[theAgentTargetsList.size()];
+			for (int i = 0; i < theAgentTargetsList.size(); i++) {
+				AgentTarget theAgentTarget = (AgentTarget) theAgentTargetsList.get(i);
+				theTargets[i] = theAgentTarget.getTargetName();
+			}
+			therapyForm.setSelectedTargets(theTargets);
+
+			// Get the collection of biological processes
+			List theProcessesList = ty.getAgent().getBiologicalProcessCollection();
+			String[] theProcesses = new String[theProcessesList.size()];
+			for (int i = 0; i < theProcessesList.size(); i++) {
+				BiologicalProcess theBiologicalProcess = (BiologicalProcess) theProcessesList.get(i);
+				theProcesses[i] = theBiologicalProcess.getProcessName();
+			}
+			therapyForm.setSelectedProcesses(theProcesses);
+
+			// Get the collection of biological processes
+			List theChemicalClassesList = ty.getAgent().getChemicalClassCollection();
+			String[] theChemicalClasses = new String[theChemicalClassesList.size()];
+			for (int i = 0; i < theChemicalClassesList.size(); i++) {
+				ChemicalClass theChemicalClass = (ChemicalClass) theChemicalClassesList.get(i);
+				theChemicalClasses[i] = theChemicalClass.getChemicalClassName();
+			}
+			therapyForm.setSelectedChemicalClasses(theChemicalClasses);
+		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
-
-		// retrieve the list of all therapies from the current animalModel
-		List therapyList = am.getTherapyCollection();
-
-		Therapy ty = new Therapy();
-
-		// find the specific one we need
-		for (int i = 0; i < therapyList.size(); i++) {
-			ty = (Therapy) therapyList.get(i);
-			if (ty.getId().toString().equals(aTherapyID)) {
-				break;
-			}
-		}
-
-		if (ty.getTreatment().getSexDistribution() != null) {
-			therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
-		}
-		if (ty.getTreatment().getAgeAtTreatment() != null) {
-			therapyForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
-		}
-
-		therapyForm.setDosage(ty.getTreatment().getDosage());
-		therapyForm.setName(ty.getAgent().getName());
-		therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
-		therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
-
-		if (ty.getAgent().getCasNumber() != null) {
-			therapyForm.setCASNumber(ty.getAgent().getCasNumber());
-		}
-
-		if (ty.getAgent().getNscNumber() != null) {
-			therapyForm.setNSCNumber(ty.getAgent().getNscNumber().toString());
-		}
-
-		// Therapy object attributes
-		therapyForm.setToxicityGrade(ty.getToxicityGrade());
-		therapyForm.setBiomarker(ty.getBiomarker());
-		therapyForm.setTumorResponse(ty.getTumorResponse());
-		therapyForm.setExperiment(ty.getExperiment());
-		therapyForm.setResults(ty.getResults());
-		therapyForm.setComments(ty.getComments());
-
-		// Get the collection of agent targets
-		List theAgentTargetsList = ty.getAgent().getAgentTargetCollection();
-		String[] theTargets = new String[theAgentTargetsList.size()];
-		for (int i = 0; i < theAgentTargetsList.size(); i++) {
-			AgentTarget theAgentTarget = (AgentTarget) theAgentTargetsList.get(i);
-			theTargets[i] = theAgentTarget.getTargetName();
-		}
-		therapyForm.setSelectedTargets(theTargets);
-
-		// Get the collection of biological processes
-		List theProcessesList = ty.getAgent().getBiologicalProcessCollection();
-		String[] theProcesses = new String[theProcessesList.size()];
-		for (int i = 0; i < theProcessesList.size(); i++) {
-			BiologicalProcess theBiologicalProcess = (BiologicalProcess) theProcessesList.get(i);
-			theProcesses[i] = theBiologicalProcess.getProcessName();
-		}
-		therapyForm.setSelectedProcesses(theProcesses);
-
-		// Get the collection of biological processes
-		List theChemicalClassesList = ty.getAgent().getChemicalClassCollection();
-		String[] theChemicalClasses = new String[theChemicalClassesList.size()];
-		for (int i = 0; i < theChemicalClassesList.size(); i++) {
-			ChemicalClass theChemicalClass = (ChemicalClass) theChemicalClassesList.get(i);
-			theChemicalClasses[i] = theChemicalClass.getChemicalClassName();
-		}
-		therapyForm.setSelectedChemicalClasses(theChemicalClasses);
-
 		log.trace("Exiting TherapyPopulateAction.populate");
 
 		return mapping.findForward("submitTherapy");
