@@ -21,40 +21,6 @@ import org.apache.struts.action.ActionMessages;
  */
 public final class GenomicSegmentAction extends BaseAction {
 
-	/**
-	 * Delete
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		if (log.isDebugEnabled()) {
-			log.debug("Entering 'delete' method");
-		}
-
-		return mapping.findForward("");
-	}
-
-	/**
-	 * Cancel
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		return mapping.findForward("");
-	}
 
 	/**
 	 * Edit

@@ -11,42 +11,38 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
+	String aGenomicSegmentID = (String) request.getAttribute( "aGenomicSegmentID" );
 
 	//if aGenomicSegmentID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "GenomicSegmentAction.do?method=save";
 	
-	if ( aGenomicSegmentID != null )
-		actionName = "GenomicSegmentAction.do?method=edit";
+	if ( aGenomicSegmentID != null && aGenomicSegmentID.length() > 0) {
+		actionName = "GenomicSegmentAction.do?method=edit";	
+	}
+    else {
+        aGenomicSegmentID = "";
+    }
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
-		
-	function chkOther( control ) {
-		ideControl = document.forms[0].otherSegmentName;
-			
-		if( control.value == 'Other' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+	
+	function chkSegmentName() {
+	    chkOther(document.forms[0].segmentName, document.forms[0].otherSegmentName);
 	}
 	
-	function chkIntegration( control ) {
-		ideControl = document.forms[0].otherLocationOfIntegration;
-			
-		if( control.value == 'Targeted' )
-			ideControl.disabled = false;
-		else {
-			ideControl.value = null;
-			ideControl.disabled = true;
-		}
+	function chkIntegration(control) {
+	
+	    if (document.forms[0].locationOfIntegration[1].checked == true) {
+	        enableField(document.forms[0].otherLocationOfIntegration);
+	    }
+        else {
+            disableField(document.forms[0].otherLocationOfIntegration);
+        }
 	}
 	
 </SCRIPT>
@@ -85,7 +81,7 @@
 			<camod:cshelp key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" name="formdata"/>
+				<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" />
 			</td>
 		</tr>
 
@@ -94,7 +90,7 @@
 
 			<td class="formLabel"><label for="field3"><b>Segment Type</b></label></td>
 			<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="segmentName" onchange="chkOther( this );" >
+			<html:select styleClass="formFieldSized" size="1" property="segmentName" onchange="chkSegmentName();" >
 				<html:options name="<%= Dropdowns.GENOMICSEGMENTDROP %>" />										
 			</html:select>
 			<br>
@@ -106,7 +102,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Other Segment Type</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="otherSegmentName" disabled="true" size="10" name="formdata"/>
+				<html:text styleClass="formFieldSized" property="otherSegmentName" disabled="true" size="10" />
 			</td>
 		</tr>
 
@@ -114,7 +110,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Segment Size</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldUnSized" property="segmentSize" size="20" name="formdata"/>
+				<html:text styleClass="formFieldUnSized" property="segmentSize" size="20" />
 			</td>
 		</tr>
 
@@ -124,7 +120,7 @@
 			<camod:cshelp key="ENGINEERED_GENE.CLONE_DESIGNATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldUnSized" property="cloneDesignator" size="20" name="formdata"/>
+				<html:text styleClass="formFieldUnSized" property="cloneDesignator" size="20" />
 			</td>
 		</tr>
 		
@@ -136,7 +132,7 @@
            <td class="formField">
 				<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>           
-				<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" name="formdata"/>
+				<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />
 			</td>
         </tr>	
         
@@ -146,7 +142,7 @@
 			<camod:cshelp key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" name="formdata"/>
+				<html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" />
 			</td>
 		</tr>				
 		
@@ -170,7 +166,7 @@
 			%>
 						<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${fileServerLocationName}',600,600);"/>
 					
-						Current Image: <bean:write name="formdata" property="fileServerLocation"/><br>
+						Current Image: <c:out value="${genomicSegmentForm.fileServerLocation}"/><br>
 						Current Image Thumbnail: <br>
 							
 						<a href='<c:out value="${uri}"/>'>			
@@ -182,7 +178,7 @@
 				} 			
 			%>
 						
-			<html:file styleClass="formFieldSized" size="40" property="fileLocation" name="formdata"/>	
+			<html:file styleClass="formFieldSized" size="40" property="fileLocation" />	
 				
 			</td>			
 		</tr>		
@@ -191,7 +187,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Title of Construct<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="32" name="formdata"/>
+				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="32" />
 			</td>
 		</tr>
 		
@@ -199,7 +195,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
-				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="32"  name="formdata"/>	
+				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="32"  />	
 			</td>
 		</tr>
 
@@ -233,28 +229,8 @@
 </td></tr></TABLE>
 
 <SCRIPT>
-	function checkOthers()
-	{
-	    ideControl = document.forms[0].segmentName;
-	    ideOtherControl = document.forms[0].otherSegmentName;
-				
-		if( ideControl.value == "Other" )
-			ideOtherControl.disabled = false;
-		else {
-			ideOtherControl.disabled = true;
-		}
-		
-	    ideControl = document.forms[0].locationOfIntegration;
-	    ideOtherControl = document.forms[0].otherLocationOfIntegration;
-			
-		if( ideControl[0].checked == true )
-			ideOtherControl.disabled = true;
-		else {
-			ideOtherControl.disabled = false;
-		}
-	}
-	
-	checkOthers();
+chkSegmentName();
+chkIntegration();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

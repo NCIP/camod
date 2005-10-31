@@ -734,12 +734,187 @@
         <field property="locationOfIntegration" depends="required">
             <arg0 key="GenomicSegmentForm.locationOfIntegration"/>
     	</field> 
+        <field property="otherLocationOfIntegration" depends="validwhen, maxlength">
+            <arg0 key="GenomicSegmentForm.otherLocationOfIntegration"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((locationOfIntegration == 'Random') or ((locationOfIntegration == 'Targeted') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="segmentName" depends="required">
+            <arg0 key="GenomicSegmentForm.segmentName"/>
+    	</field>
+        <field property="otherSegmentName" depends="validwhen, maxlength">
+            <arg0 key="GenomicSegmentForm.otherSegmentName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((segmentName != 'Other') or ((segmentName == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="segmentSize" depends="maxlength">
+            <arg0 key="GenomicSegmentForm.segmentSize"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="cloneDesignator" depends="maxlength">
+            <arg0 key="GenomicSegmentForm.cloneDesignator"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="numberMGI" depends="maxlength">
+            <arg0 key="GenomicSegmentForm.numberMGI"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="comments" depends="maxlength">
+            <arg0 key="GenomicSegmentForm.comments"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="fileLocation" depends="maxlength">
+            <arg0 key="GenomicSegmentForm.fileLocation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="descriptionOfConstruct" depends="maxlength">
+            <arg0 key="GenomicSegmentForm.DescriptionOfConstruct"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="title" depends="maxlength">
+            <arg0 key="GenomicSegmentForm.title"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
 	</form>	
 	
 	<form name="targetedModificationForm">
-        <field property="name" depends="required">
+        <field property="name" depends="required,maxlength">
             <arg0 key="TargetedModificationForm.name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="modificationType" depends="required">
+            <arg0 key="TargetedModificationForm.modificationType"/>
     	</field> 
+       <field property="otherModificationType" depends="validwhen, maxlength">
+            <arg0 key="TargetedModificationForm.otherModificationType"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((modificationType != 'Other') or ((modificationType == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="description" depends="maxlength">
+            <arg0 key="TargetedModificationForm.description"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="geneId" depends="maxlength">
+            <arg0 key="TargetedModificationForm.geneId"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="esCellLineName" depends="maxlength">
+            <arg0 key="TargetedModificationForm.esCellLineName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="blastocystName" depends="maxlength">
+            <arg0 key="TargetedModificationForm.blastocystName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="numberMGI" depends="maxlength">
+            <arg0 key="TargetedModificationForm.numberMGI"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="comments" depends="maxlength">
+            <arg0 key="TargetedModificationForm.comments"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="fileLocation" depends="maxlength">
+            <arg0 key="TargetedModificationForm.fileLocation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="descriptionOfConstruct" depends="maxlength">
+            <arg0 key="TargetedModificationForm.DescriptionOfConstruct"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="title" depends="maxlength">
+            <arg0 key="TargetedModificationForm.title"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
 	</form>		
 
 	<form name="inducedMutationForm">

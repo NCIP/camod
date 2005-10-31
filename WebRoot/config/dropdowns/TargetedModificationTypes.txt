@@ -1,3 +1,5 @@
+
+Other
 Null Modification
 Amino Acid
 Deletion
@@ -8,4 +10,3 @@ Point Mutation
 Regulatory Sequence
 loxP Sites
 test
-Other
