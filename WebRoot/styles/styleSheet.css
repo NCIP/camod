@@ -344,6 +344,10 @@ INPUT.formField {
 INPUT.formFieldDisabled {
 	BORDER-RIGHT: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; FONT-SIZE: 1em; BORDER-LEFT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif
 }
+INPUT.formFieldUnSizedDisabled {
+	BORDER-RIGHT: #5c5c5c 1px solid;  PADDING-RIGHT: 0.3em; PADDING-TOP: 0.3em; PADDING-LEFT: 0.3em; PADDING-BOTTOM: 0.3em;  BORDER-TOP: #5c5c5c 1px solid; FONT-SIZE: 1em; BORDER-LEFT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #CCCCCC
+}
+
 TEXTAREA.formField {
 	BORDER-RIGHT: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; FONT-SIZE: 1em; BORDER-LEFT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif
 }

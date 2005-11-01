@@ -24,7 +24,32 @@ function chkOtherAdminRoute() {
 	
     chkOther(route, otherRoute);  	
 }
-	
+
+function disableFieldUnsized(field)
+{
+		field.value = '';
+		field.disabled = true;
+		field.className = "formFieldUnSizedDisabled";
+}
+
+
+function enableFieldUnsized(field)
+{
+    field.disabled = false;
+    field.className = "formFieldUnSized";
+}
+
+
+function chkOtherUnsized(vocab, otherVocab) {
+	if( vocab.value == 'Other' ) {
+		enableFieldUnsized(otherVocab);
+	}
+	else {
+	    disableFieldUnsized(otherVocab);
+	}
+}
+
+
 function disableField(field)
 {
 		field.value = '';

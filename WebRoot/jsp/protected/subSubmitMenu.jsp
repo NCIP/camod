@@ -38,7 +38,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="EngineeredTransgenePopulateAction.do?method=populate" paramId="aEngineeredTransgeneID" paramName="aEngineeredTransgene" paramProperty="id">
-			      		<bean:write name="aEngineeredTransgene" property="locationOfIntegration" filter="true"/>
+			      		<bean:write name="aEngineeredTransgene" property="name" filter="true"/>
 			      </html:link><br>
 			      
 			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

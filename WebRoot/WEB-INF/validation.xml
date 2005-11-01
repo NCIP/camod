@@ -81,7 +81,7 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="url" depends="maxlength,url">
+        <field property="url" depends="maxlength">
             <arg0 key="ModelCharacteristicsForm.url"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
@@ -717,18 +717,203 @@
             </var>
     	</field>
 	</form>
-	
+
 	<form name="engineeredTransgeneForm">
-        <field property="locationOfIntegration" depends="required">
+	    <field property="locationOfIntegration" depends="required">
             <arg0 key="EngineeredTransgeneForm.locationOfIntegration"/>
     	</field> 
-    	<field property="name" depends="required">
+        <field property="otherLocationOfIntegration" depends="validwhen,maxlength">
+            <arg0 key="EngineeredTransgeneForm.otherLocationOfIntegration"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((locationOfIntegration != 'Targeted') or ((locationOfIntegration == 'Targeted') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="name" depends="required,maxlength">
             <arg0 key="EngineeredTransgeneForm.name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
     	</field> 
-    	<field property="transcriptional1_name" depends="required">
+        <field property="otherScientificName" depends="validwhen,maxlength">
+            <arg0 key="EngineeredTransgeneForm.otherScientificName"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((scientificName != 'Other') or ((scientificName == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+        <field property="transcriptional1_name" depends="required,maxlength">
             <arg0 key="EngineeredTransgeneForm.transcriptional1_name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
     	</field> 
-	</form>	
+        <field property="transcriptional1_otherSpecies" depends="validwhen,maxlength">
+            <arg0 key="EngineeredTransgeneForm.transcriptional1_otherSpecies"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((transcriptional1_species != 'Other') or ((transcriptional1_species == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="transcriptional2_name" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.transcriptional2_name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+        <field property="transcriptional2_otherSpecies" depends="validwhen,maxlength">
+            <arg0 key="EngineeredTransgeneForm.transcriptional2_otherSpecies"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((transcriptional2_species != 'Other') or ((transcriptional2_species == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="transcriptional3_name" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.transcriptional3_name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+        <field property="transcriptional3_otherSpecies" depends="validwhen,maxlength">
+            <arg0 key="EngineeredTransgeneForm.transcriptional3_otherSpecies"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((transcriptional3_species != 'Other') or ((transcriptional3_species == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="polyASignal_name" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.polyASignal_name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+        <field property="polyASignal_otherSpecies" depends="validwhen,maxlength">
+            <arg0 key="EngineeredTransgeneForm.polyASignal_otherSpecies"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((polyASignal_species != 'Other') or ((polyASignal_species == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="spliceSites_name" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.spliceSites_name"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field> 
+        <field property="spliceSites_otherSpecies" depends="validwhen,maxlength">
+            <arg0 key="EngineeredTransgeneForm.spliceSites_otherSpecies"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((spliceSites_species != 'Other') or ((spliceSites_species == 'Other') and (*this* != null)))</var-value>
+            </var>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>    		
+        <field property="description" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.description"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="numberMGI" depends="integer">
+            <arg0 key="TargetedModificationForm.numberMGI"/>
+        </field>
+        <field property="comments" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.comments"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>2000</var-value>
+            </var>
+        </field>
+        <field property="fileLocation" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.fileLocation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="descriptionOfConstruct" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.DescriptionOfConstruct"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="title" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.title"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="comments" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.comments"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+        <field property="geneFunctions" depends="maxlength">
+            <arg0 key="EngineeredTransgeneForm.geneFunctions"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+        </field>
+	</form>
 
 	<form name="genomicSegmentForm">
         <field property="locationOfIntegration" depends="required">

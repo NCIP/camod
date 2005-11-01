@@ -12,6 +12,7 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
 <SCRIPT src="/camod/scripts/CalendarPopup.js" type=text/javascript></SCRIPT>
+<SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 
 <SCRIPT LANGUAGE="JavaScript" ID="js1">
 var cal1 = new CalendarPopup();
@@ -74,13 +75,14 @@ var cal1 = new CalendarPopup();
 		</tr>
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">General Information</td>
+			<td class="formTitle" height="20" colspan="3">Model Characteristics</a>
+			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Model Descriptor</label>
-				<camod:cshelp key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane', HH_HELP_CONTEXT, 3)" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
 					<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor" onsubmit="transferFields()">
