@@ -68,7 +68,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Cell Line/Transplant:</label>
-		<camod:cshelp key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp key="ABS_CANCER_MODEL.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 				<html:form action="<%= actionName %>" focus="name">			 
@@ -91,7 +91,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Species / Strain:</label></td>
+		<td class="formLabel"><label for="field3">Host Species / Strain:</label></td>
 		<td class="formField">
 				<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
 		</td>

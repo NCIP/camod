@@ -145,15 +145,15 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field2"><b>Phenotype</b></label></td>
+			<td class="formRequiredLabel"><label for="field2">Phenotype</label></td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="description" cols="32" rows="4"/>			
 			</td>
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field3"><b>Gender</b></label></td>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Gender</label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="type">												
 					<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					

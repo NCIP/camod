@@ -17,11 +17,6 @@
 
 	<tr>
 		<td class="greyBox" height="20" colspan="3">
-    The application accepts the submission of Affymetrix and Spotted Array Experiments.<br><br>
-    <ul style="list-style-type: square">
-    <li style="padding-bottom:8px">If you are submitting an Affymetrix experiment you can upload the various Affymetrix Files (*.dat, *.cel, *.chp, *.txt). All the data is stored in the MIAME complaint caArray database and available for retrieval at a later time.</li>
-    <li style="padding-bottom:8px">Spotted Array Experiments must be accompanied by a Gene Array List (*.gal) file and a GenePix Results (*.gpr) file. Additional file formats will be added in response to community feedback.</li>
-    </ul>
     <b>Microarray data is stored in the caArray portal. Follow these simple steps to upload micro-array data to caArray.
     <ol >
     	<li style="padding-bottom:7px">Click <a href="http://caarraydb.nci.nih.gov/" target="_caArray">here</a> to login into caArray. A new browser window will be opened (please turn off any popup blockers for this site) <br/>
@@ -50,6 +45,11 @@
     	</li>
     </ol>
     </b>
+        The application accepts the submission of Affymetrix and Spotted Array Experiments.<br><br>
+    <ul style="list-style-type: square">
+    <li style="padding-bottom:8px">If you are submitting an Affymetrix experiment you can upload the various Affymetrix Files (*.dat, *.cel, *.chp, *.txt). All the data is stored in the MIAME complaint caArray database and available for retrieval at a later time.</li>
+    <li style="padding-bottom:8px">Spotted Array Experiments must be accompanied by a Gene Array List (*.gal) file and a GenePix Results (*.gpr) file. Additional file formats will be added in response to community feedback.</li>
+    </ul>
 		</td>
 	</tr>
 

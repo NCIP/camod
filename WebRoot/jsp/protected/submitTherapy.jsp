@@ -79,9 +79,7 @@ function chkOtherAdminRoute() {
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Drug / Compound Name:</label>
-		<camod:cshelp key="ENV_FACTOR.NSC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
+		<td class="formRequiredLabel"><label for="field3">Drug / Compound Name:</label></td>
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">			 
 			

@@ -82,7 +82,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Model Descriptor</label>
-				<camod:cshelp href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane', HH_HELP_CONTEXT, 3)" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT, 3)" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
 					<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor" onsubmit="transferFields()">
@@ -151,7 +151,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field2"><b>Phenotype</b></label>
+			<td class="formRequiredLabel"><label for="field2">Phenotype</label>
 			<camod:cshelp key="PHENOTYPE.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
@@ -160,8 +160,8 @@ var cal1 = new CalendarPopup();
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field3"><b>Gender</b></label></td>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Gender</label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="type" >												
 					<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					

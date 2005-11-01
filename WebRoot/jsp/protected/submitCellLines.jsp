@@ -40,7 +40,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Enter Cell Line Generated from the Model </td>
+		<td class="formTitle" height="20" colspan="3">Cell Line</td>
 	</tr>
 	
 	<tr>
