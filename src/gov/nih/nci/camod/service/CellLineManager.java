@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLineManager.java,v 1.6 2005-10-20 20:28:37 pandyas Exp $
+ * $Id: CellLineManager.java,v 1.7 2005-11-01 18:14:28 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 20:28:37  pandyas
+ * added javadocs
+ *
  *
  * 
  */
@@ -11,6 +14,7 @@ package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.webapp.form.CellLineData;
+
 import java.util.List;
 
 

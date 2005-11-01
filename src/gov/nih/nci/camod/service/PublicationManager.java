@@ -1,7 +1,9 @@
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.PublicationStatus;
+import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.webapp.form.PublicationData;
 
 import java.util.List;
@@ -12,6 +14,10 @@ public interface PublicationManager {
 
 	public void update(PublicationData inPublicationData, Publication inPublication) throws Exception;
 
+	public void addCellLinePublication( PublicationData inPublicationData, CellLine inCellLine ) throws Exception;
+
+	public void addTherapyPublication( PublicationData inPublicationData, Therapy inTherapy ) throws Exception;
+	
 	public List getAll() throws Exception;
 
 	public Publication get(String id) throws Exception;
@@ -21,4 +27,5 @@ public interface PublicationManager {
 	public void remove(String id) throws Exception;
 
 	public PublicationStatus getPublicationStatusByName(String inName) throws Exception;
+	
 }

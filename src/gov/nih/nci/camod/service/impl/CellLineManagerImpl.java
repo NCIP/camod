@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLineManagerImpl.java,v 1.7 2005-10-20 20:26:09 pandyas Exp $
+ * $Id: CellLineManagerImpl.java,v 1.8 2005-11-01 18:14:28 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/20 20:26:09  pandyas
+ * EVSTree (organ) functions properly
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -68,9 +71,9 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 
     	log.debug("Exiting CellLineManagerImpl.update");
     }    
-
+    
 	private void populateCellLine( CellLineData inCellLineData, CellLine inCellLine) 
-	throws Exception {
+		throws Exception {
 
 		log.debug( "Entering populateCellLine" );
 

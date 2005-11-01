@@ -41,7 +41,28 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
 	protected String startPage;	
 	protected String endPage;
 	protected String firstTimeReported;
+	protected String aPubID;
+	protected String aCellID;
+	protected String aTherapyID;
 	
+	public String getACellID() {
+		return aCellID;
+	}
+	public void setACellID(String ACellID) {
+		aCellID = ACellID;
+	}
+	public String getAPubID() {
+		return aPubID;
+	}
+	public void setAPubID(String APubID) {
+		aPubID = APubID;
+	}
+	public String getATherapyID() {
+		return aTherapyID;
+	}
+	public void setATherapyID(String ATherapyID) {
+		aTherapyID = ATherapyID;
+	}
 	/**
 	 * @return Returns the authors.
 	 */

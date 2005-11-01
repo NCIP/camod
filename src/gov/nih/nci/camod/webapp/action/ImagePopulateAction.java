@@ -28,7 +28,7 @@ public class ImagePopulateAction extends BaseAction {
 		} else {
 			request.setAttribute("aImageID", aImageID);
 
-			System.out.println("FILESERVERLOCATION=" + inImage.getFileServerLocation());
+			//System.out.println("FILESERVERLOCATION=" + inImage.getFileServerLocation());
 			// Image
 			// Image inImage = theImage.getImage();
 			if (inImage != null) {

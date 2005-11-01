@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationData.java,v 1.1 2005-10-27 12:53:09 georgeda Exp $
+ * $Id: PublicationData.java,v 1.2 2005-11-01 18:14:28 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/27 12:53:09  georgeda
+ * Refactor of publication manager
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -53,4 +56,16 @@ public interface PublicationData {
 	public String getEndPage();
 
 	public void setEndPage(String endPage);
+	
+	public String getACellID();
+	
+	public void setACellID(String aCellID);
+	
+	public String getAPubID();
+	
+	public void setAPubID(String aPubID);
+	
+	public String getATherapyID();
+	
+	public void setATherapyID(String aTherapyID);
 }

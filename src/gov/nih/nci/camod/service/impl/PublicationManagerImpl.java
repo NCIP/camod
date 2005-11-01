@@ -1,13 +1,18 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.7 2005-10-27 12:52:50 georgeda Exp $
+ * $Id: PublicationManagerImpl.java,v 1.8 2005-11-01 18:14:28 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/27 12:52:50  georgeda
+ * Refactor of publication manager
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.PublicationStatus;
+import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.service.PublicationManager;
 import gov.nih.nci.camod.webapp.form.PublicationData;
 import gov.nih.nci.common.persistence.Search;
@@ -19,18 +24,39 @@ import java.util.List;
  */
 public class PublicationManagerImpl extends BaseManager implements PublicationManager {
 
-	public Publication create(PublicationData inPublicationData) throws Exception {
+	public Publication create(PublicationData inPublicationData) 
+		throws Exception {
+		
 		Publication thePublication = new Publication();
 		populate(inPublicationData, thePublication);
 
 		return thePublication;
 	}
 
-	public void update(PublicationData inPublicationData, Publication inPublication) throws Exception {
+	public void update(PublicationData inPublicationData, Publication inPublication) 
+		throws Exception {
+		
 		populate(inPublicationData, inPublication);
+		save( inPublication );
 	}
 
-	private void populate(PublicationData inPublicationData, Publication inPublication) throws Exception {
+	public void addCellLinePublication( PublicationData inPublicationData, CellLine inCellLine ) 
+		throws Exception {
+		
+		Publication inPublication = create( inPublicationData );
+		inCellLine.addPublication( inPublication );		 		
+		CellLineManagerSingleton.instance().save( inCellLine );		
+	}
+	public void addTherapyPublication( PublicationData inPublicationData, Therapy inTherapy )
+		throws Exception {
+	
+		Publication inPublication = create( inPublicationData );
+		inTherapy.addPublication( inPublication );		 		
+		TherapyManagerSingleton.instance().save( inTherapy );				
+	}
+	
+	private void populate(PublicationData inPublicationData, Publication inPublication) 
+		throws Exception {
 
 		inPublication.setAuthors(inPublicationData.getAuthors());
 		inPublication.setTitle(inPublicationData.getTitle());

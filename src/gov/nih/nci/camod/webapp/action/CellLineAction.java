@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLineAction.java,v 1.12 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: CellLineAction.java,v 1.13 2005-11-01 18:14:28 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.11  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -15,14 +18,20 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CellLineManager;
 import gov.nih.nci.camod.webapp.form.CellLineForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.*;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 /**
  * CellLineAction Class

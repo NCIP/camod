@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.33 2005-10-31 13:46:28 georgeda Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.34 2005-11-01 18:14:28 schroedn Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.33  2005/10/31 13:46:28  georgeda
+ *  Updates to handle back arrow
+ *
  *  Revision 1.32  2005/10/27 17:17:34  schroedn
  *  Enter Assoc Expression to Engineered Transgene, Genomic Segment, Targeted Modification
  *
@@ -172,9 +175,6 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 
 			for (int i = 0; i < cellLineList.size(); i++) {
 				CellLine cellLine = (CellLine) cellLineList.get(i);
-
-				// System.out.println("\tAdded CellLine= " + cellLine);
-
 				cellList.add(cellLine);
 			}
 
@@ -269,36 +269,19 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					InducedMutation inInduced = (InducedMutation) engineeredGeneList.get(i);
 					if (inInduced.getEnvironmentalFactor() != null) {
 						inducedList.add((InducedMutation) engineeredGeneList.get(i));
-						// System.out.println( "\tAdded a Induced Mutation" );
 					}
 				}
 
 				if (engineeredGene instanceof TargetedModification) {
-					// TargetedModification inTargeted = (TargetedModification)
-					// engineeredGeneList.get(i);
 					targetedList.add((TargetedModification) engineeredGeneList.get(i));
-					// System.out.println( "\tAdded a TargetedModification" );
-					// associatedExpressionList.addAll(
-					// engineeredGene.getExpressionFeatureCollection() );
-
 				}
 
 				if (engineeredGene instanceof GenomicSegment) {
-					// GenomicSegment inGenomicSegment = (GenomicSegment)
-					// engineeredGeneList.get(i);
 					segmentList.add((GenomicSegment) engineeredGeneList.get(i));
-					// System.out.println( "\tAdded a GenomicSegment");
-					// associatedExpressionList.addAll(
-					// engineeredGene.getExpressionFeatureCollection() );
 				}
 
 				if (engineeredGene instanceof Transgene) {
 					engineeredList.add((Transgene) engineeredGeneList.get(i));
-					// System.out.println( "\tAdded a Transgene");
-					// associatedExpressionList.addAll(
-					// engineeredGene.getExpressionFeatureCollection() );
-					// System.out.println("\n\n\tassociatedExpressionList:" +
-					// associatedExpressionList );
 				}
 			}
 

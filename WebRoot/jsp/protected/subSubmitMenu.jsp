@@ -210,16 +210,55 @@
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="TherapyPopulateAction.do?method=dropdown">Enter Therapy</html:link><br>
 			  <logic:iterate id="aTherapy" name="therapy_list" type="Therapy">
 				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="TherapyPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
+			 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="images/plus.gif" border="0"> 
+				<html:link styleClass="subMenuDarkRed" action="PublicationPopulateAction.do?method=dropdown" paramId="aTherapyID" paramName="aTherapy" paramProperty="id">Enter Publication</html:link>
+				<br>
+			    
+				<bean:define id="publicationList" name="aTherapy" property="publicationCollection" />
+				<logic:iterate id="aPublication" name="publicationList" type="Publication">
+				
+					<bean:define id="aPublicationID" name="aPublication" property="id" />
+					<bean:define id="aTherapyID" name="aTherapy" property="id" />
+				
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="images/aquadot_red.jpg" border="0"> 
+					<a href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
+				
+				</logic:iterate>				 
 			  </logic:iterate>
-			  <br>		
+  		      <br>		
 	</span>
 
 	<div id="menu7" class="masterTitle" onclick="SwitchMenu('sub7')" onmouseover="ChangeClass('menu7','masterTitleOver')" onmouseout="ChangeClass('menu7','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> CELL LINES</div>
 	<span class="submasterdiv" id="sub7">
 		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="CellLinePopulateAction.do?method=dropdown">Enter Cell Lines</html:link><br>
-			 <logic:iterate id="aCell" name="cellline_list" type="CellLine">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="CellLinePopulateAction.do?method=populate" paramId="aCellID" paramName="aCell" paramProperty="id"><bean:write name="aCell" property="name" filter="true"/></html:link><br>
-			 </logic:iterate>
+			 <logic:iterate id="aCell" name="cellline_list" type="CellLine">			 
+				 &nbsp;&nbsp;&nbsp;&nbsp;
+				 <img src="images/aquadot.jpg" border="0"> 
+				 <html:link styleClass="subMenuBlue" action="CellLinePopulateAction.do?method=populate" paramId="aCellID" paramName="aCell" paramProperty="id">
+				 		<bean:write name="aCell" property="name" filter="true"/>
+				 </html:link><br>		
+				 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <img src="images/plus.gif" border="0"> 
+			    <html:link styleClass="subMenuDarkRed" action="PublicationPopulateAction.do?method=dropdown" paramId="aCellID" paramName="aCell" paramProperty="id">Enter Publication</html:link>
+			    <br>
+			    
+				<bean:define id="publicationList" name="aCell" property="publicationCollection" />
+				<logic:iterate id="aPublication" name="publicationList" type="Publication">
+				
+					<bean:define id="aPublicationID" name="aPublication" property="id" />
+					<bean:define id="aCellID" name="aCell" property="id" />
+				
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="images/aquadot_red.jpg" border="0"> 
+					<a href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
+				
+				</logic:iterate>	
+			 
+			 </logic:iterate>		    
 		<br>
 	</span>
 	  

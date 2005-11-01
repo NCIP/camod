@@ -6,32 +6,38 @@
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 <%@ page import='gov.nih.nci.camod.Constants.Dropdowns.*' %>
 
-<!-- needed for tooltips -->
+<!-- Needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
-<%
-	String aPubID = (String) request.getAttribute( "aPubID" );
-	
-	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
-	//otherwise, create a new one
-	
-	String actionName = "PublicationAction.do?method=edit";
-	
-	if ( aPubID == null || aPubID.equals( "null" ) ){
-		actionName = "PublicationAction.do?method=save";
-	}		
-%>
+<c:set var="actionName" value="PublicationAction.do?method=save" />
+
+<c:if test="${not empty publicationForm.APubID}">
+	<c:set var="actionName" value="PublicationAction.do?method=edit" />
+</c:if>
+
+<c:if test="${not empty publicationForm.ACellID}">
+	<c:set var="actionName" value="PublicationAction.do?method=addCellLinePublication&aCellID=${publicationForm.ACellID}"/>
+</c:if>
+
+<c:if test="${not empty publicationForm.ATherapyID}">
+	<c:set var="actionName" value="PublicationAction.do?method=addTherapyPublication&aTherapyID=${publicationForm.ATherapyID}" />
+</c:if>
 
 <SCRIPT LANGUAGE="JavaScript">
 
 	function getPubMed( control ) {
+		alert( "pmid value=" + document.forms[0].pmid.value );
+		
 		form = control.form;
-		form.action = "PubMedPopulateAction.do?pmid=";
-		form.action += document.forms[0].pmid.value;
+		document.forms[0].action = "PubMedPopulateAction.do?pmid=";
+		document.forms[0].action += document.forms[0].pmid.value;
+		
+		alert( "form action=" + document.form.action );
+		
 		form.submit();
 	}	
-	
+
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -53,8 +59,8 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel">
-			<label for="field1">First Author:</label>
-			<html:form action="<%= actionName %>" focus="name">	
+			<label for="field1">First Author:</label>						
+			<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">	
 		</td>
 		
 		<td class="formField">
@@ -76,7 +82,10 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Is this the publication in which the model was reported for the first time?</label></td>
+		<td class="formRequiredLabel">
+				Is this the publication in which the model<br>
+				was reported for the first time?
+		</td>
 		<td class="formField">
 			<html:radio property="firstTimeReported" value="yes" /> Yes 
 			<html:radio property="firstTimeReported" value="no" /> No  
@@ -86,16 +95,23 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel">
-			For publications with a PubMed record, <br>look up the Pubmed Identifier (PMID number),<br> enter it in the PMID field and <br>click the "Fill in Fields" button. <br>The program will retrieve the citation <br>data from PubMed and populate the fields<br> automatically. Click "Save Data"<br>to submit the publication to the database.
+			For publications with a PubMed record, <br>
+			look up the Pubmed Identifier (PMID number),<br>
+			enter it in the PMID field and <br>
+			click the "Fill in Fields" button. <br>
+			The program will retrieve the citation <br>
+			data from PubMed and populate the fields<br>
+			automatically. Click "Save Data"<br>
+			to submit the publication to the database.
 		</td>
 		
 		<td class="formField">
-			<label valign="TOP" for="field1"><a href="#">Click to look up PubMed Identifier</a></label><br>
-			<br>
-			<br>
+			<label valign="TOP" for="field1"><a href="#" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">Click to look up PubMed Identifier</a></label>
+			<br><br><br>
 			<label valign="TOP" for="field1">PMID: &nbsp;</label>
 			<br>
-			<html:text styleClass="formFieldUnSized" size="20" property="pmid"  />
+			<html:text styleClass="formFieldUnSized" size="20" property="pmid" />
 			<html:button property="none" onclick="getPubMed(this)">Fill in Fields</html:button>			
 		</td>
 	</tr>
@@ -104,7 +120,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Title of Publication:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="30" property="title" />
+			<html:text styleClass="formFieldSized" size="50" property="title" />
 		</td>
 	</tr>
 
@@ -120,7 +136,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Journal:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" size="20" property="journal" />
+			<html:text styleClass="formFieldUnSized" size="30" property="journal" />
 		</td>
 	</tr>
 
@@ -160,16 +176,18 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
   				  
-  				  <c:if test="${not empty aPubID}">
+  				  <c:if test="${not empty publicationForm.APubID}">
 	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>
 			      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aPubID" value="<%= aPubID %>">
-			  
-			  </html:form>			
+				  <html:hidden property="APubID" />
+  				  <html:hidden property="ACellID" />
+  				  <html:hidden property="ATherapyID" />
+ 
+ 			  </html:form>			
 			</TABLE>
 			
 		</td></tr></TABLE>

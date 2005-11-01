@@ -24,7 +24,9 @@ public class PubMedPopulateAction extends BaseAction {
         System.out.println("<PubMedPopulateAction> Entering...");
 
         String pmid = request.getParameter("pmid");
-
+        
+        System.out.println( "PMID=" + pmid );
+        
         // TODO: set the form values from the Publication obj
         PublicationForm pubForm = (PublicationForm) form;
 
