@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AdminEditUserRolesAction.java,v 1.1 2005-10-17 13:28:45 georgeda Exp $
+ *  $Id: AdminEditUserRolesAction.java,v 1.2 2005-11-01 15:54:46 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/10/17 13:28:45  georgeda
+ *  Initial revision
+ *
  *  Revision 1.8  2005/10/10 14:12:01  georgeda
  *  Changes for comment curation
  *
@@ -27,11 +30,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 public class AdminEditUserRolesAction extends BaseAction {
 
@@ -88,6 +87,7 @@ public class AdminEditUserRolesAction extends BaseAction {
 					}
 
 					thePerson.setRoleCollection(theRolesList);
+                    PersonManagerSingleton.instance().save(thePerson);
 				}
 			} catch (Exception e) {
 
