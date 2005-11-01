@@ -2,7 +2,9 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp" %>
 
+<%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.webapp.form.PublicationForm" %>
+<%@ page import="gov.nih.nci.camod.webapp.form.PublicationData" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 <%@ page import='gov.nih.nci.camod.Constants.Dropdowns.*' %>
 
@@ -30,10 +32,10 @@
 		alert( "pmid value=" + document.forms[0].pmid.value );
 		
 		form = control.form;
-		document.forms[0].action = "PubMedPopulateAction.do?pmid=";
-		document.forms[0].action += document.forms[0].pmid.value;
+		form.action = "PubMedPopulateAction.do?pmid=";
+		form.action += document.forms[0].pmid.value;
 		
-		alert( "form action=" + document.form.action );
+		alert( "form action=" + form.action );
 		
 		form.submit();
 	}	
@@ -101,7 +103,7 @@
 			click the "Fill in Fields" button. <br>
 			The program will retrieve the citation <br>
 			data from PubMed and populate the fields<br>
-			automatically. Click "Save Data"<br>
+			automatically. Click "Submit"<br>
 			to submit the publication to the database.
 		</td>
 		
@@ -112,7 +114,7 @@
 			<label valign="TOP" for="field1">PMID: &nbsp;</label>
 			<br>
 			<html:text styleClass="formFieldUnSized" size="20" property="pmid" />
-			<html:button property="none" onclick="getPubMed(this)">Fill in Fields</html:button>			
+			<html:submit property="action" styleClass="actionButton" >Fill in Fields</html:submit>		
 		</td>
 	</tr>
 

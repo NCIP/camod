@@ -17,9 +17,13 @@ import org.apache.struts.action.ActionMapping;
 public class PublicationPopulateAction extends BaseAction {
 
 	/**
-	 * Pre-populate all field values in the form EnvironmentalFactorForm Used by
-	 * submitEnvironmentalFactors
 	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
 	 */
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
 		throws Exception {
@@ -43,11 +47,6 @@ public class PublicationPopulateAction extends BaseAction {
 
 		if ( thePublication != null) {
 			
-			//request.setAttribute("aPubID", null);
-			//} else {
-			
-//			request.setAttribute("aPubID", aPubID);
-
 			pubForm.setAuthors(thePublication.getAuthors());
 
 			pubForm.setTitle(thePublication.getTitle());
@@ -81,26 +80,33 @@ public class PublicationPopulateAction extends BaseAction {
 		// following
 		this.dropdown(request, response);
 		
-		//request.getSession().setAttribute(Constants.FORMDATA, pubForm);   
-		
 		return mapping.findForward("submitPublications");
 	}
 
+	/**
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
 		throws Exception {
-
+		
+		String aPubID = request.getParameter( "aPubID" );	
 		String aCellID = request.getParameter( "aCellID" );
 		String aTherapyID = request.getParameter( "aTherapyID" );
 		
 		// Create a form to edit
 		PublicationForm pubForm = (PublicationForm) form;
 		
+		pubForm.setAPubID( aPubID );
 		pubForm.setACellID( aCellID );
 		pubForm.setATherapyID( aTherapyID );
 
-		//request.getSession().setAttribute(Constants.FORMDATA, pubForm);  
-		
-		this.dropdown(request, response);
+		this.dropdown( request, response );
 		
 		return mapping.findForward("submitPublications");
 	}

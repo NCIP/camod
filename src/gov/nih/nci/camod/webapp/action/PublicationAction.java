@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationAction.java,v 1.10 2005-11-01 18:14:28 schroedn Exp $
+ * $Id: PublicationAction.java,v 1.11 2005-11-01 20:48:41 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/01 18:14:28  schroedn
+ * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
+ *
  * Revision 1.9  2005/10/28 14:50:55  georgeda
  * Fixed null pointer problem
  *
@@ -80,18 +83,25 @@ public final class PublicationAction extends BaseAction {
                 + "\n\t FirstTimeReported: "  + pubForm.getFirstTimeReported() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+    	
         try {
-        		
-    		CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
-        	CellLine theCellLine = theCellLineManager.get(aCellID);		
-        	
-        	PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
-        	publicationManager.addCellLinePublication( pubForm, theCellLine );
-        	
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
-            saveErrors(request, msg);
 
+            if( "Fill in Fields".equals(theAction)) {
+            	return mapping.findForward("PubMedPopulateAction");
+            } else {
+                	
+	    		CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
+	        	CellLine theCellLine = theCellLineManager.get(aCellID);		
+	        	
+	        	PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
+	        	publicationManager.addCellLinePublication( pubForm, theCellLine );
+	        	
+	            ActionMessages msg = new ActionMessages();
+	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
+	            saveErrors(request, msg);
+            }
+            
         } catch (Exception e) {
 
             log.error("Unable to add a publication: ", e);
@@ -104,9 +114,15 @@ public final class PublicationAction extends BaseAction {
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
     
-    /**
-     * Called from submitEnvironmentalFactors.jsp
-     */
+	/**
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
     public ActionForward addTherapyPublication(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
     	throws Exception {
    	
@@ -132,19 +148,26 @@ public final class PublicationAction extends BaseAction {
                 + "\n\t APubID: "  + pubForm.getAPubID()
                 + "\n\t FirstTimeReported: "  + pubForm.getFirstTimeReported() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
         try {        	
 
-    		TherapyManager theTherapyManager = (TherapyManager) getBean("therapyManager");
-        	Therapy theTherapy = theTherapyManager.get(aTherapyID);		
-        	
-        	PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
-        	publicationManager.addTherapyPublication( pubForm, theTherapy );
-        	
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
-            saveErrors(request, msg);
-
+            if( "Fill in Fields".equals(theAction)) {
+            	return mapping.findForward("PubMedPopulateAction");
+            } else {
+            
+	    		TherapyManager theTherapyManager = (TherapyManager) getBean("therapyManager");
+	        	Therapy theTherapy = theTherapyManager.get(aTherapyID);		
+	        	
+	        	PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
+	        	publicationManager.addTherapyPublication( pubForm, theTherapy );
+	        	
+	            ActionMessages msg = new ActionMessages();
+	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
+	            saveErrors(request, msg);
+            }
+            
         } catch (Exception e) {
 
             log.error("Unable to add a publication: ", e);
@@ -207,6 +230,8 @@ public final class PublicationAction extends BaseAction {
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.delete.successful"));
                 saveErrors(request, msg);
                 
+            } else if ( "Fill in Fields".equals(theAction)) {
+            	return mapping.findForward("PubMedPopulateAction");
             } else {
 
                 Publication thePublication = publicationManager.get(aPubID);
@@ -216,6 +241,7 @@ public final class PublicationAction extends BaseAction {
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.edit.successful"));
                 saveErrors(request, msg);
             }
+            
         } catch (Exception e) {
 
             log.error("Unable to update a publication: ", e);
@@ -228,10 +254,15 @@ public final class PublicationAction extends BaseAction {
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
-    /**
-     * Called from submitEnvironmentalFactors.jsp
-     * 
-     */
+	/**
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -252,17 +283,23 @@ public final class PublicationAction extends BaseAction {
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         /* Grab the current modelID from the session */
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);        
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        
         try {
-            AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-            AnimalModel animalModel = animalModelManager.get(modelID);
-            animalModelManager.addPublication(animalModel, pubForm);
-        	
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
-            saveErrors(request, msg);
-
+            if( "Fill in Fields".equals(theAction)) {
+            	return mapping.findForward("PubMedPopulateAction");
+            } else {
+	            
+	            AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+	            AnimalModel animalModel = animalModelManager.get(modelID);
+	            animalModelManager.addPublication(animalModel, pubForm);
+	        	
+	            ActionMessages msg = new ActionMessages();
+	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
+	            saveErrors(request, msg);
+            }
+            
         } catch (Exception e) {
 
             log.error("Unable to add a publication: ", e);

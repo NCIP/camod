@@ -23,13 +23,15 @@ public class PubMedPopulateAction extends BaseAction {
 
         System.out.println("<PubMedPopulateAction> Entering...");
 
-        String pmid = request.getParameter("pmid");
-        
-        System.out.println( "PMID=" + pmid );
+        //String pmid = request.getParameter("pmid");       
+        //System.out.println( "PMID=" + pmid );
         
         // TODO: set the form values from the Publication obj
         PublicationForm pubForm = (PublicationForm) form;
-
+        String pmid = pubForm.getPmid(); 
+        
+        System.out.println( "pmid=" + pmid );
+        
         // Validate the input
         Pattern p = Pattern.compile("[0-9]{" + pmid.length() + "}");
         Matcher m = p.matcher(pmid);

@@ -523,10 +523,17 @@
      	<forward
      		name="AnimalModelTreePopulateAction"
      		path="/AnimalModelTreePopulateAction.do">
+        </forward>		        
+        
+     	<forward
+     		name="PubMedPopulateAction"
+     		path="/PubMedPopulateAction.do">
         </forward>		
+                
       </global-forwards>
 
   <!-- ========== Action Mapping Definitions =================================== -->
+  
    <action-mappings>
 
 		<action
