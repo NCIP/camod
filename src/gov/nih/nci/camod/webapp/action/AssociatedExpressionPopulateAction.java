@@ -90,7 +90,7 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
 	
 	    System.out.println( "<AssociatedExpressionPopulateAction dropdown> Entering void dropdown()" );
 	    
-	    NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.EXPRESSIONLEVEL, "" );
+	    NewDropdownUtil.populateDropdown( request, Constants.Dropdowns.EXPRESSIONLEVEL, Constants.Dropdowns.ADD_BLANK );
 	    
 	    System.out.println( "<AssociatedExpressionPopulateAction dropdown> Exiting void dropdown()" );
 	}	
