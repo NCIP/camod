@@ -1,0 +1,362 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<head>
+<title>Searching the caMOD Database</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="generator" content="RoboHelp by eHelp Corporation www.ehelp.com">
+<link rel="stylesheet" href="default_ns.css"><script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='default.css'>");}
+//-->
+</script>
+<style>
+<!--
+body { background-color:#ffffff; }
+-->
+</style><script language=JavaScript><!-- 
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+} 
+ 
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//--></script>
+
+<style type="text/css">
+<!--
+table.whs1 { float:aligncenter; width:100%; border-spacing:0px; }
+table.whs2 { background-color:#ffffff; width:100%; border-spacing:0px; }
+td.whs3 { x-cell-content-align:center; text-align:center; height:62px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+table.whs4 { width:100%; border-spacing:0px; }
+td.whs5 { x-cell-content-align:center; text-align:center; width:113px; height:62px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs6 { x-cell-content-align:center; text-align:center; width:25%; height:62px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs7 { x-cell-content-align:bottom; text-align:right; width:673px; height:62px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs8 { background-color:#660099; x-cell-content-align:center; text-align:center; height:9px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs9 { x-cell-content-align:center; text-align:center; height:2px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs10 { x-cell-content-align:center; text-align:center; height:16px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+table.whs11 { width:100%; height:16px; border-spacing:0px; }
+td.whs12 { x-cell-content-align:center; text-align:center; width:53px; height:16px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs13 { x-cell-content-align:center; text-align:center; width:44px; height:16px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs14 { x-cell-content-align:center; text-align:center; width:30px; height:16px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs15 { x-cell-content-align:center; text-align:center; width:72px; height:16px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs16 { width:38px; height:16px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs17 { background-color:#660099; x-cell-content-align:center; text-align:center; height:2px; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+table.whs18 { float:aligncenter; width:85%; border-spacing:5px; }
+td.whs19 { padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; }
+h2.whs20 { text-align:center; }
+hr.whs21 { float:aligncenter; border:none; }
+td.whs22 { text-align:center; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; }
+-->
+</style><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style><script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="MM_preloadImages('backto_OVER.gif','home_OVER.gif','newsearch_OVER.gif','help_OVER.gif','generalinfo_OVER.gif','geneticdes_OVER.gif','carcinoagents_OVEr.gif','publications_OVEr.gif','histo_OVER.gif','approaches_OVER.gif','celllines_OVER.gif','images_OVER.gif')" style="color: #000000;"><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("caMOD_2.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script><div align=center>
+<table x-use-null-cells cellspacing="0" width="100%" class="whs1">
+
+<tr>
+<a 
+ href="http://cancer.gov/"
+	target=_blank></a></td></tr>
+</table>
+</div>
+<table x-use-null-cells cellspacing="0" width="100%" bgcolor="#FFFFFF" class="whs2">
+
+<tr>
+<td height="62" align="center" valign="middle" class="whs3">
+<table x-use-null-cells cellspacing="0" width="100%" class="whs4">
+
+<tr>
+<td height="62" align="center" valign="middle" width="113px" class="whs5"></td>
+<td height="62" align="center" valign="middle" width="25%" class="whs6"></td>
+<td height="62" align="right" valign="bottom" width="673px" class="whs7"></td></tr>
+</table></td></tr>
+
+<tr>
+<td height="9" align="center" valign="middle" bgcolor="#660099" class="whs8"></td></tr>
+
+<tr>
+<td height="2" align="center" valign="middle" class="whs9"></td></tr>
+
+<tr>
+<td height="16" align="center" valign="middle" class="whs10">
+<table x-use-null-cells cellspacing="0" height="16" width="100%" class="whs11">
+
+<tr>
+<td height="16" align="center" valign="middle" width="53px" class="whs12"></td>
+<td height="16" align="center" valign="middle" width="44px" class="whs13"><a href="index.jsp"
+													onMouseOut="MM_swapImgRestore()"
+													onMouseOver="MM_swapImage('Image2','','images/home_OVER.gif',1)"></a></td>
+<td height="16" align="center" valign="middle" width="30px" class="whs14"></td>
+<td height="16" align="center" valign="middle" width="72px" class="whs15"><a href="search.jsp"
+													onMouseOut="MM_swapImgRestore()"
+													onMouseOver="MM_swapImage('Image3','','images/newsearch_OVER.gif',1)"></a></td>
+<td height="16" align="center" valign="middle" width="30px" class="whs14"></td>
+<td height="16" width="38px" class="whs16"><a href="search_help.html"
+													onMouseOut="MM_swapImgRestore()"
+													onMouseOver="MM_swapImage('Image4','','images/help_OVER.gif',1)"></a></td>
+<td height="16" align="center" valign="middle" class="whs10"></td></tr>
+</table></td></tr>
+
+<tr>
+<td height="2" align="center" valign="middle" class="whs9"></td></tr>
+
+<tr>
+<td height="2" align="center" valign="middle" bgcolor="#660099" class="whs17"></td></tr>
+</table>
+
+<p>&nbsp;</p>
+
+<div align=center>
+<table x-use-null-cells cellspacing="5" width="85%" class="whs18">
+
+<tr>
+<td class="whs19">
+<h2 align="center" class="whs20">Help for Searching the Cancer Models Database</td></tr>
+
+<tr>
+<td class="whs19">
+<ul>
+	
+	<li class=kadov-p
+		class=kadov-p><a href="#simple">Simple Search Mode</a></li>
+	
+	<li class=kadov-p
+		class=kadov-p><a href="#advanced">Advanced Search Mode</a></li>
+	
+	<li class=kadov-p
+		class=kadov-p><a href="#combine">Combining Search Criteria</a></li>
+	
+	<li class=kadov-p
+		class=kadov-p><a href="#plug-in">How to view MrSid images</a></li>
+</ul></td></tr>
+
+<tr>
+<td class="whs19">
+
+<hr align="center" class="whs21">
+</td></tr>
+
+<tr>
+<td class=label
+	style="padding-left: 5px;
+			padding-top: 5px;
+			padding-right: 5px;
+			padding-bottom: 5px;">
+<a name=simple></a>
+Simple Search Mode </td></tr>
+
+<tr>
+<td class="whs19">In the simple search mode you can enter 
+ search criteria for 
+<ul>
+	
+	<li class=kadov-p
+		class=kadov-p><b style="font-weight: bold;">Model Descriptor / 
+ Model Name</b><br>
+	Enter the name or parts of the model name. The search will return all 
+ models that contain the word or letter combination you entered. </li>
+	
+	<li class=kadov-p
+		class=kadov-p><b style="font-weight: bold;">Site of the Tumor</b><br>
+	Select for models that develop lesions in specific organs. Selecting 
+ the organ is a two-step process: Select the organ system in the first 
+ drop-down list. The content of the second drop-down list will change depending 
+ on your selection. </li>
+	
+	<li class=kadov-p
+		class=kadov-p><b style="font-weight: bold;">Species of the Model</b><br>
+	Select the species of the model.</li>
+</ul></td></tr>
+
+<tr>
+<td class=label
+	style="padding-left: 5px;
+			padding-top: 5px;
+			padding-right: 5px;
+			padding-bottom: 5px;">
+<a name=advanced></a>
+Advanced Search Mode</td></tr>
+
+<tr>
+<td class="whs19">The Advanced Search Mode can be used 
+ in addition to the simple search. It allows you to specify your search.<br>
+In the Advanced Search Mode you can search for: 
+<ul>
+	
+	<li class=kadov-p
+		class=kadov-p><b style="font-weight: bold;">Genetic Description</b> 
+ <br>
+	Enter the Gene Name and specify if the gene was used as transgene, 
+ was knocked out (targeted mutation) or was the targeted transgene. You 
+ can select all three method of genome manipulation, but you can also leave 
+ all boxed unchecked and retrieve all models with manipulations of this 
+ gene. </li>
+	
+	<li class=kadov-p
+		class=kadov-p>
+	<b style="font-weight: bold;">Carcinogenic Agents</b><br>
+	The carcinogenic agents are divided in different categories. A drop-down 
+ list shows items sorted by category. The lists contain only agents and 
+ treatments that were used with models in the database. Therefore, selecting 
+ one of these list items will retrieve at least one matching record. 
+	
+	<ul>
+		
+		<li class=kadov-p
+			class=kadov-p><b style="font-weight: bold;">Chemical / Drug</b><br>
+		Search for a listed chemical or drug. This will retrieve models 
+ that were exposed to this chemical or drug. </li>
+		
+		<li class=kadov-p
+			class=kadov-p><b style="font-weight: bold;">Growth Factor</b><br>
+		Search for a listed growth factor. This will retrieve models that 
+ were treated with the growth factor. </li>
+		
+		<li class=kadov-p
+			class=kadov-p><b style="font-weight: bold;">Hormone</b><br>
+		Search for a listed hormone. This will retrieve models that were 
+ exposed to this hormone. </li>
+		
+		<li class=kadov-p
+			class=kadov-p><b style="font-weight: bold;">Radiation</b><br>
+		Search for a listed type of radiation. This will retrieve models 
+ that were exposed to this type of radiation. </li>
+		
+		<li class=kadov-p
+			class=kadov-p><b style="font-weight: bold;">Virus</b><br>
+		Search for a listed virus. This will retrieve models that were 
+ exposed to this virus. </li>
+		
+		<li class=kadov-p
+			class=kadov-p><b style="font-weight: bold;">Surgery</b><br>
+		Search for a listed surgeries and other treatments. </li>
+	</ul>
+	</li>
+	
+	<li class=kadov-p
+		class=kadov-p><b style="font-weight: bold;">Cell Lines</b><br>
+	Enter the name or parts of the name to search for a specific cell line 
+ and/or select the species that the cell line was derived from. </li>
+	
+	<li class=kadov-p
+		class=kadov-p><b style="font-weight: bold;">Therapeutic Approaches</b><br>
+	Enter the name or parts of the name of the compound that was used in 
+ therapeutic experiments. </li>
+</ul></td></tr>
+
+<tr>
+<td class=label
+	style="padding-left: 5px;
+			padding-top: 5px;
+			padding-right: 5px;
+			padding-bottom: 5px;">
+<a name=combine></a>
+Combining Search Criteria</td></tr>
+
+<tr>
+<td class="whs19">You can combine search criteria. They 
+ will be connected by an &quot;AND&quot; statement. That means if you search 
+ e.g. for models where the model descriptor / name contains &quot;WAP&quot; 
+ the search might return 6 matches. If you search for models where the 
+ model descriptor / name contains &quot;WAP&quot; and the the tumor site 
+ is mammary gland the search might return less than 6 matches, because 
+ both search criteria need to be fulfilled in order to get matching records. 
+ This is an easy way to narrow the number of retrieved records.</td></tr>
+
+<tr>
+<td class=label
+	style="padding-left: 5px;
+			padding-top: 5px;
+			padding-right: 5px;
+			padding-bottom: 5px;"><a name=plug-in>How to view MrSid images</a></td></tr>
+
+<tr>
+<td class="whs19">MrSid images are high-qualitiy images 
+ that have been compressed. The images are shown in the MrSid image viewer. 
+ The software allows the user to zoom in and out, move the pan to the left, 
+ right, up and down, or show the complete image (full size view). Depending 
+ on the selection made by the user the specific part of the image will 
+ be downloaded from the server. This might take a moment. Please be patient. 
+ </td></tr>
+
+<tr>
+<td align="center" class="whs22"></td></tr>
+</table>
+</div>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

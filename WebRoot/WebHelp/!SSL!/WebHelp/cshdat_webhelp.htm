@@ -1,0 +1,302 @@
+<html>
+<head>
+<title>caMOD 2</title>
+
+<meta name="generator" content="RoboHelp by eHelp Corporation   www.ehelp.com">
+<meta name="description" content="WebHelp 5.50">
+</head>
+<body>
+<script language="JavaScript">
+<!--
+
+var gArrayCsh = new Array();
+
+var gstrWindowOption = "";
+var gstrURL = "";
+var gbWithNavPane = false;
+
+function CshEntityItem(strAliasId, nTopicNum, strUrl) 
+{
+    this.strAliasId = strAliasId;
+    this.nTopicNum = nTopicNum;
+    this.strUrl = strUrl;
+}
+
+
+//Try to get to topic number from hash string
+function GetTopicNumberAuto(strMayBeNumber)
+{
+   var nNum = -1;
+   if (strMayBeNumber.length >= 1)
+   {
+		var strTmp = strMayBeNumber;
+		var iEnd = strTmp.length;
+		for (var i=0; i<iEnd; i++)
+		{
+			  var ch = strTmp.charAt(i);
+			  if (!((ch == "0") || (ch == "1") ||
+			        (ch == "2") || (ch == "3") ||
+			        (ch == "4") || (ch == "5") ||
+			        (ch == "6") || (ch == "7") ||
+			        (ch == "8") || (ch == "9")))
+			      return GetTopicNumberById(strTmp);
+		}
+		nNum = parseInt(strTmp);
+   }
+   return nNum;
+}
+
+function GetTopicNumber(strHashString)
+{
+	var nTopicEndPos = strHashString.indexOf(',')
+	if (nTopicEndPos == -1) { // no window option.
+		return GetTopicNumberOnly(strHashString);
+	}
+	else {
+		var strWindowOption = strHashString.substring(nTopicEndPos + 1, strHashString.length);
+		var strWithNavPane = 'withnavpane=true';
+		if (strWindowOption.toLowerCase().indexOf(strWithNavPane) == 0)
+		{
+			if (strWindowOption.length > strWithNavPane.length)
+				gstrWindowOption = strWindowOption.substring(strWithNavPane.length + 1);
+			else
+				gstrWindowOption = "";
+			gbWithNavPane = true;
+		}
+		else
+			gstrWindowOption = strWindowOption;
+		return GetTopicNumberOnly(strHashString.substring(0, nTopicEndPos));		
+	}
+}
+
+function GetTopicNumberOnly(strTopicString)
+{
+	var nEqualPos = strTopicString.indexOf('=');
+	if (nEqualPos == -1) {
+		return GetTopicNumberAuto(strTopicString);
+	}
+	else {
+		var strValue=strTopicString.substring(nEqualPos + 1, strTopicString.length);
+		if (strTopicString.toLowerCase().indexOf("topicnumber") == 0) {
+			return parseInt(strValue);
+		} else if (strTopicString.toLowerCase().indexOf("topicid") == 0) {
+			return GetTopicNumberById(strValue);
+		} else if (strTopicString.toLowerCase().indexOf("remoteurl") == 0) {
+			gstrURL = strValue;
+			return -1;
+		}
+
+	}
+}
+
+//Find HomePage of the WebHelp system
+// we try to get the topic from remote project if it exists.
+function RedirectToHomePage()
+{
+	if (parent && parent != this && parent.goNext)
+	{
+		var sHome = parent.goNext();
+		if (sHome != "")
+			RedirectTo(sHome);
+	}
+}
+
+function getHomePage()
+{
+	if (parent && parent != this && parent.getRelHomePage)
+	{
+		return parent.getRelHomePage(document.location.href);
+	}
+	return "";
+}
+
+function addRemoteProject(strPath)
+{
+	if (parent && parent != this && parent.addProject)
+	{
+		parent.addProject(strPath);
+	}
+}
+
+//Redirect page to...
+function RedirectTo(strUrl)
+{
+   if (gstrWindowOption.length != 0) {
+		var wnd = window.open(strUrl, "HelpStub", gstrWindowOption);
+		// close current window and rename the stub window to current window.
+		wnd.focus();
+		if (parent)
+			parent.close();
+   }
+   else {
+	parent.document.location.href = strUrl;
+	window.focus();
+  }
+}
+
+//Prompt the user that we can not find...
+function FailToFind(strMsg)
+{
+    RedirectToHomePage();
+}
+
+//Find topic by topic number (defined in h file)
+function FindTopicByTopicNum(nTopicNum)
+{
+	var i = 0;
+	var iEnd = gArrayCsh.length;
+	for (i=0; i<iEnd; i++)
+	{
+		if (gArrayCsh[i].nTopicNum == nTopicNum)
+		{
+			var strURL = gArrayCsh[i].strUrl;
+			if (gbWithNavPane)
+			{
+				var strHomePage = getHomePage();
+				if (strHomePage.length != 0)
+					strURL = strHomePage + strURL;
+			}	
+			RedirectTo(strURL);
+			return true;
+		}
+	}
+	FailToFind("Fail to find topic assocaite with topic number: " + nTopicNum);
+	return false;
+}
+
+//Find topic by topic id (alias id defined in ali file)
+function GetTopicNumberById(strTopicId)
+{
+   var i = 0;
+   var iEnd = gArrayCsh.length;
+   for (i=0; i<iEnd; i++)
+   {
+	if (gArrayCsh[i].strAliasId == strTopicId)
+	{
+	    return gArrayCsh[i].nTopicNum;
+	 }
+   }
+   gstrURL = "";
+   return -1;
+}
+
+//Set Context-sensitive help entity...
+function SetCsh(n, strAliasId, nTopicNum, strUrl)
+{
+   gArrayCsh[n] = new CshEntityItem(strAliasId,nTopicNum,strUrl);
+}
+
+
+function getHash()
+{
+	if (parent && parent != this)
+		return parent.location.hash;
+	else
+		return "";
+}
+//-->
+</script>
+<script language="javascript">
+<!--
+  SetCsh(0,"assigning_screener_help",44,"Assigning_a_Screener.htm");
+  SetCsh(1,"model_availability_help",28,"Model_Availability.htm");
+  SetCsh(2,"environmental_factor_help",12,"Environmental_Factors.htm");
+  SetCsh(3,"submit_edit_models_help",2,"Submit_and_Edit_Models_Page.htm");
+  SetCsh(4,"user_management_help",40,"User_Management.htm");
+  SetCsh(5,"approve_animal_model_help",49,"Screening_a_Model.htm");
+  SetCsh(6,"roles_management_help",47,"Roles_Management.htm");
+  SetCsh(7,"gene_delivery_help",13,"Gene_Delivery.htm");
+  SetCsh(8,"data_tree_help",32,"Navigating_a_Data_Tree.htm");
+  SetCsh(9,"histopathology_help",21,"Histopathology.htm");
+  SetCsh(10,"nutritional_factor_help",16,"Nutritional_Factor.htm");
+  SetCsh(11,"screening_model_help",51,"Screening_a_Model.htm");
+  SetCsh(12,"help_admin_help",43,"Administration_Basics.htm");
+  SetCsh(13,"simple_search_help",31,"Simple_Search_Mode.htm");
+  SetCsh(14,"therapy_help",24,"Therapy.htm");
+  SetCsh(15,"clinical_markers_help",23,"Clinical_Marker.htm");
+  SetCsh(16,"login_page_help",1,"caMOD_Login_Page.htm");
+  SetCsh(17,"help_submission_help",42,"Administration_Basics.htm");
+  SetCsh(18,"help_searching_help",41,"caMOD_Database_Search_Overview.htm");
+  SetCsh(19,"models_assignment_help",38,"Models_Assignment.htm");
+  SetCsh(20,"surgery_help",18,"Surgery.htm");
+  SetCsh(21,"administration_roles_help",36,"Administration_Roles.htm");
+  SetCsh(22,"advanced_search_help",34,"Advanced_Search_Mode.htm");
+  SetCsh(23,"spontaneous_mutation",10,"Spontaneous_Mutation.htm");
+  SetCsh(24,"induced_mutation_help",9,"Induced_Mutation.htm");
+  SetCsh(25,"drug_screening_help",35,"Drug_Screening.htm");
+  SetCsh(26,"whats_new_help",48,"What_s_New_in_caMOD.htm");
+  SetCsh(27,"engineered_transgene_help",5,"Engineered_Transgene,htm.htm");
+  SetCsh(28,"model_characteristics_help",3,"Model_Characteristics.htm");
+  SetCsh(29,"rejecting_model_help",50,"Screening_a_Model.htm");
+  SetCsh(30,"add_user_help",46,"Adding_a_New_User.htm");
+  SetCsh(31,"comments_assignment_help",37,"Comments_Assignment.htm");
+  SetCsh(32,"hormone_help",15,"Hormone.htm");
+  SetCsh(33,"roles_assignment_help",39,"Roles_Assignment.htm");
+  SetCsh(34,"growth_factor_help",14,"Growth_Factor.htm");
+  SetCsh(35,"associated_expression_help",7,"Associated_Expression_Targeted_Modification.htm");
+  SetCsh(36,"genomic_segment_help",6,"Genomic_Segment.htm");
+  SetCsh(37,"user_settings_help",45,"User_Settings.htm");
+  SetCsh(38,"cell_lines_help",25,"Cell_Lines.htm");
+  SetCsh(39,"associated_metastasis_help",22,"Metastasis.htm");
+  SetCsh(40,"chemical_drug_help",11,"Chemical_Drug.htm");
+  SetCsh(41,"toc_help",33,"caMOD_Table_of_Contents.htm");
+  SetCsh(42,"xenograft_transplant_help",29,"Transplant_Xenograft.htm");
+  SetCsh(43,"register_user_help",30,"Creating_a_New_User_Account.htm");
+  SetCsh(44,"viral_treatment_help",19,"Viral_Treatment.htm");
+  SetCsh(45,"targeted_modification_help",8,"Targeted_Modification.htm");
+  SetCsh(46,"microarray_data_help",27,"Microarray_Data.htm");
+  SetCsh(47,"images_help",26,"Images.htm");
+  SetCsh(48,"publications_help",20,"Publications.htm");
+  SetCsh(49,"radiation_help",17,"Radiation.htm");
+  SetCsh(50,"model_status_help",4,"Model_Status_Page.htm");
+
+
+//-->
+</script>
+<script language="javascript">
+<!--
+//Find CSH according to hash string after this page
+if (getHash().length > 0)
+{
+   // VH 05/16/00 now support 
+   // TopicID=
+   // TopicNumber=
+   // RemoteURL=   
+   // and WindowsOptions
+   // with the format #a=xxx,b=xxx,c=xxx...
+   var strHashString = getHash().toString();
+   // change ? to : for remote URL. because java applet have some problem to pass a URL with two : inside the URL so we changed it. 
+   // so here need to change it back.
+   strHashString = strHashString.substring(1,strHashString.length);
+   strHashString = strHashString.replace("%072%057%057", "://");
+   var nTopicNum = GetTopicNumber(strHashString);
+
+   if (nTopicNum != -1)
+   {
+      FindTopicByTopicNum(nTopicNum);
+   }
+   else
+   {
+      if (gstrURL.length > 0) 
+	RedirectTo(gstrURL);
+      else
+      	RedirectToHomePage();
+   }
+}
+else
+{
+   RedirectToHomePage();
+}
+//-->
+</script>
+<noscript>
+ <p> Your browser does not support JavaScript. WebHelp Context-Sensitive Help requires JavaScript support to run.</p>
+</noscript>
+</body>
+</html>
+
+
+
+
+
+
