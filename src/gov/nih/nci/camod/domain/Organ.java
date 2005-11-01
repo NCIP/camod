@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -20,7 +21,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Organ extends BaseObject implements Serializable, Duplicatable {
+public class Organ extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259095453799404851L;
     
@@ -98,10 +99,31 @@ public class Organ extends BaseObject implements Serializable, Duplicatable {
        result += this.getName();
        return result;
      }  
-    
+           
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final Organ obj = (Organ) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      // compare by evs description name if possible, otherwise organ name
+      if ((o instanceof Organ) && (this.getEVSPreferredDescription() != null) && (((Organ)o).getEVSPreferredDescription() != null)) {   
+        int result = this.getEVSPreferredDescription().compareTo( ((Organ)o).getEVSPreferredDescription() );
+        if (result != 0) { return result; }               
+      } else if ((o instanceof Organ) && (this.getName() != null) && (((Organ)o).getName() != null)) { 
+         int result = this.getName().compareTo( ((Organ)o).getName() );
+         if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }    
 }

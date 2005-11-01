@@ -41,7 +41,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the engineeredGeneCollection.
      */
     public List getEngineeredGeneCollection() {
-        return engineeredGeneCollection;
+      Collections.sort(engineeredGeneCollection);
+      return engineeredGeneCollection;                
     }
 
     /**
@@ -64,7 +65,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the spontaneousMutationCollection.
      */
     public List getSpontaneousMutationCollection() {
-        return spontaneousMutationCollection;
+      Collections.sort(spontaneousMutationCollection);
+      return spontaneousMutationCollection;                
     }
 
     /**
@@ -87,7 +89,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the histopathologyCollection.
      */
     public List getHistopathologyCollection() {
-        return histopathologyCollection;
+      Collections.sort(spontaneousMutationCollection);
+      return spontaneousMutationCollection;               
     }
 
     /**
@@ -205,6 +208,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the environmentalFactorCollection.
      */
     public List getEnvironmentalFactorCollection() {
+        Collections.sort(environmentalFactorCollection);      
         return environmentalFactorCollection;
     }
 
@@ -228,7 +232,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the animalAvailabilityCollection.
      */
     public List getAnimalAvailabilityCollection() {
-        return animalAvailabilityCollection;
+      Collections.sort(animalAvailabilityCollection);    
+      return animalAvailabilityCollection;      
     }
 
     /**
@@ -251,7 +256,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the geneDeliveryCollection.
      */
     public List getGeneDeliveryCollection() {
-        return geneDeliveryCollection;
+      Collections.sort(geneDeliveryCollection);    
+      return geneDeliveryCollection;                    
     }
 
     /**
@@ -319,7 +325,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the therapyCollection.
      */
     public List getTherapyCollection() {
-        return therapyCollection;
+      Collections.sort(therapyCollection);    
+      return therapyCollection;            
     }
 
     /**
@@ -342,7 +349,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the xenograftCollection.
      */
     public List getXenograftCollection() {
-        return xenograftCollection;
+      Collections.sort(xenograftCollection);    
+      return xenograftCollection;            
     }
 
     /**
@@ -361,7 +369,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the microArrayDataCollection.
      */
     public List getMicroArrayDataCollection() {
-        return microArrayDataCollection;
+      Collections.sort(microArrayDataCollection);    
+      return microArrayDataCollection;                      
     }
 
     /**
@@ -384,7 +393,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the imageCollection.
      */
     public List getImageCollection() {
-        return imageCollection;
+      Collections.sort(imageCollection);    
+      return imageCollection;                    
     }
 
     /**
@@ -407,7 +417,8 @@ public class AnimalModel extends AbstractCancerModel {
      * @return Returns the cellLineCollection.
      */
     public List getCellLineCollection() {
-        return cellLineCollection;
+      Collections.sort(cellLineCollection);    
+      return cellLineCollection;           
     }
 
     /**

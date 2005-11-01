@@ -8,9 +8,12 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.List;
+import java.util.*;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -18,7 +21,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Therapy extends BaseObject implements Serializable, Duplicatable {
+public class Therapy extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3258525453799404851L;
     
@@ -112,7 +115,8 @@ public class Therapy extends BaseObject implements Serializable, Duplicatable {
      * @return Returns the publicationCollection.
      */
     public List getPublicationCollection() {
-        return publicationCollection;
+        Collections.sort(publicationCollection);    
+        return publicationCollection;                 
     }
 
     /**
@@ -199,11 +203,28 @@ public class Therapy extends BaseObject implements Serializable, Duplicatable {
        String result = super.toString() + " - ";      
        result += this.getExperiment();
        return result;
-     }  
+     }          
     
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final Therapy obj = (Therapy) o;
+      if (HashCodeUtil.notEqual(this.getAgent(), obj.getAgent())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getAgent());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof Therapy) && (this.getAgent() != null) && (((Therapy)o).getAgent() != null)) {   
+        int result = this.getAgent().compareTo( ((Therapy)o).getAgent() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }    
 }

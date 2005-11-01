@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import gov.nih.nci.camod.util.Duplicatable;
 
@@ -111,7 +112,8 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
      * @return Returns the publicationCollection.
      */
     public List getPublicationCollection() {
-        return publicationCollection;
+      Collections.sort(publicationCollection);
+      return publicationCollection;          
     }
 
     /**

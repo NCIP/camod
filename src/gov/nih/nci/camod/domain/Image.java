@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -16,7 +17,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Image extends BaseObject implements Serializable, Duplicatable {
+public class Image extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259255453799404851L;
         
@@ -124,12 +125,29 @@ public class Image extends BaseObject implements Serializable, Duplicatable {
        String result = super.toString() + " - ";      
        result += this.getTitle() + " - " + this.getDescription();
        return result;
-     }  
-     
+     }        
+    
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final Image obj = (Image) o;
+      if (HashCodeUtil.notEqual(this.getTitle(), obj.getTitle())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getTitle());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof Image) && (this.getTitle() != null) && (((Image)o).getTitle() != null)) {   
+        int result = this.getTitle().compareTo( ((Image)o).getTitle() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
      
 }

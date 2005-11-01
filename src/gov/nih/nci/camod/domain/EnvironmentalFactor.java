@@ -11,13 +11,16 @@ import gov.nih.nci.camod.util.Duplicatable;
 
 import java.io.Serializable;
 
+import gov.nih.nci.camod.util.Duplicatable; 
+import gov.nih.nci.camod.util.HashCodeUtil;
+
 /**
- * @author rajputs
+ * @author rajputs 
  * 
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactor extends BaseObject implements Serializable, Duplicatable {
+public class EnvironmentalFactor extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259445453799404851L;
     
@@ -122,7 +125,25 @@ public class EnvironmentalFactor extends BaseObject implements Serializable, Dup
     
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final EnvironmentalFactor obj = (EnvironmentalFactor) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof EnvironmentalFactor) && (this.getName() != null) && (((EnvironmentalFactor)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((EnvironmentalFactor)o).getName() );
+        if (result != 0) { return result; }        
+      }
+
+      return super.compareTo(o);
+    }      
+
 }

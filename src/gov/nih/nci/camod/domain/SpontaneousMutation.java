@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -18,7 +19,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class SpontaneousMutation extends BaseObject implements Serializable, Duplicatable {
+public class SpontaneousMutation extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3258605453799404851L;
     
@@ -104,10 +105,28 @@ public class SpontaneousMutation extends BaseObject implements Serializable, Dup
        result += this.getName();
        return result;
      }  
+      
     
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final SpontaneousMutation obj = (SpontaneousMutation) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof SpontaneousMutation) && (this.getName() != null) && (((SpontaneousMutation)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((SpontaneousMutation)o).getName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }    
 }

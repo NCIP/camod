@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -17,7 +18,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class EngineeredGene extends BaseObject implements Serializable, Duplicatable {
+public class EngineeredGene extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259475453799404851L;
     
@@ -58,7 +59,8 @@ public class EngineeredGene extends BaseObject implements Serializable, Duplicat
      * @return Returns the expressionFeatureCollection.
      */
     public List getExpressionFeatureCollection() {
-        return expressionFeatureCollection;
+        Collections.sort(expressionFeatureCollection);    
+        return expressionFeatureCollection;                 
     }
 
     /**
@@ -190,5 +192,29 @@ public class EngineeredGene extends BaseObject implements Serializable, Duplicat
        String result = super.toString() + " - ";      
        result += this.getName();
        return result;
-    }    
+    }        
+              
+    public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false; 
+      final EngineeredGene obj = (EngineeredGene) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
+      return true;
+    }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof EngineeredGene) && (this.getName() != null) && (((EngineeredGene)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((EngineeredGene)o).getName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
 }

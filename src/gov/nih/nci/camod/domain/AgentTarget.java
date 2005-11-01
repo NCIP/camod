@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class AgentTarget extends BaseObject implements Serializable {
+public class AgentTarget extends BaseObject implements Serializable, Comparable {
 
     private static final long serialVersionUID = 4259725453799404851L;
     
@@ -61,11 +62,29 @@ public class AgentTarget extends BaseObject implements Serializable {
       String result = super.toString() + " - ";      
       result += this.getTargetName();                
       return result;
-    }       
+    }           
     
-    public boolean equals(Object o) {
+     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final AgentTarget obj = (AgentTarget) o;
+      if (HashCodeUtil.notEqual(this.getTargetName(), obj.getTargetName())) return false;
       return true;
-    }     
+    }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getTargetName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof AgentTarget) && (this.getTargetName() != null) && (((AgentTarget)o).getTargetName() != null)) {   
+        int result = this.getTargetName().compareTo( ((AgentTarget)o).getTargetName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
 }

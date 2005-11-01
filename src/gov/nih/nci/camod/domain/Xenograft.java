@@ -8,6 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.util.*;
 
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -15,7 +16,7 @@ import java.util.*;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class Xenograft extends AbstractCancerModel {
+public class Xenograft extends AbstractCancerModel implements Comparable {
     
     private static final long serialVersionUID = 3257445453799404851L;
     
@@ -225,11 +226,28 @@ public class Xenograft extends AbstractCancerModel {
        String result = super.toString() + " - ";      
        result += this.getName();
        return result;
-     }  
-    
+     }    
+        
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final Xenograft obj = (Xenograft) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof Xenograft) && (this.getName() != null) && (((Xenograft)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((Xenograft)o).getName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }    
 }

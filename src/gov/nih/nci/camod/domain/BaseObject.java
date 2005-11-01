@@ -11,7 +11,7 @@ import gov.nih.nci.camod.util.GUIDGenerator;
  * @author piparom
  */
 
-public abstract class BaseObject implements Serializable {    
+public abstract class BaseObject implements Comparable, Serializable {    
   
   private Long id = null;
   
@@ -72,5 +72,17 @@ public abstract class BaseObject implements Serializable {
     }    
     return result;
   } 
+  
+  public int compareTo(Object o) {                   
+    if (o instanceof BaseObject) {
+      BaseObject tgt = (BaseObject) o;
+      if (this.getId() == null && tgt.getId() == null) return -1;
+      if (this.getId() != null && tgt.getId() == null) return 1;
+      if (this.getId() == null && tgt.getId() != null) return -1;
+
+      return this.getId().compareTo(tgt.getId());   
+    }
+    return 0;
+  }        
   
 }

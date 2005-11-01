@@ -7,6 +7,7 @@
 package gov.nih.nci.camod.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -33,7 +34,8 @@ public class Agent extends EnvironmentalFactor {
      * @return Returns the agentTargetCollection.
      */
     public List getAgentTargetCollection() {
-        return agentTargetCollection;
+      Collections.sort(agentTargetCollection);
+      return agentTargetCollection;                    
     }
 
     /**
@@ -41,7 +43,7 @@ public class Agent extends EnvironmentalFactor {
      *            The agentTargetCollection to set.
      */
     public void setAgentTargetCollection(List agentTargetCollection) {
-        this.agentTargetCollection = agentTargetCollection;
+        this.agentTargetCollection = agentTargetCollection; 
     }
 
     /**
@@ -57,7 +59,8 @@ public class Agent extends EnvironmentalFactor {
      * @return Returns the chemicalClassCollection.
      */
     public List getChemicalClassCollection() {
-        return chemicalClassCollection;
+      Collections.sort(chemicalClassCollection);
+      return chemicalClassCollection;        
     }
 
     /**
@@ -81,7 +84,8 @@ public class Agent extends EnvironmentalFactor {
      * @return Returns the biologicalProcessCollection.
      */
     public List getBiologicalProcessCollection() {
-        return biologicalProcessCollection;
+      Collections.sort(biologicalProcessCollection);
+      return biologicalProcessCollection;                       
     }
 
     /**

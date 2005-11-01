@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.8 2005-10-21 19:40:21 piparom Exp $
+ * $Id: CellLine.java,v 1.9 2005-11-01 17:12:23 piparom Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/21 19:40:21  piparom
+ * implementation of Duplicatable interface on deep-copy domain beans
+ *
  * Revision 1.7  2005/10/20 20:25:00  pandyas
  * added javadocs
  *
@@ -12,11 +15,14 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.List;
+import java.util.*;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
-public class CellLine extends BaseObject implements Serializable, Duplicatable {
+public class CellLine extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259655453799404851L;
     
@@ -91,7 +97,8 @@ public class CellLine extends BaseObject implements Serializable, Duplicatable {
      * @return Returns the publicationCollection.
      */
     public List getPublicationCollection() {
-        return publicationCollection;
+      Collections.sort(publicationCollection);    
+      return publicationCollection;       
     }
 
     /**
@@ -135,10 +142,29 @@ public class CellLine extends BaseObject implements Serializable, Duplicatable {
       return result;
     }     
     
+    
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final CellLine obj = (CellLine) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof CellLine) && (this.getName() != null) && (((CellLine)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((CellLine)o).getName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
     
 }

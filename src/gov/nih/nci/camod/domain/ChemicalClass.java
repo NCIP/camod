@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class ChemicalClass extends BaseObject implements Serializable {
+public class ChemicalClass extends BaseObject implements Serializable, Comparable {
 
     private static final long serialVersionUID = 3259635453799404851L;
 
@@ -63,11 +64,28 @@ public class ChemicalClass extends BaseObject implements Serializable {
        result += this.getChemicalClassName();           
        return result;
      }     
-     
+    
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final ChemicalClass obj = (ChemicalClass) o;
+      if (HashCodeUtil.notEqual(this.getChemicalClassName(), obj.getChemicalClassName())) return false;
       return true;
     }
      
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getChemicalClassName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof ChemicalClass) && (this.getChemicalClassName() != null) && (((ChemicalClass)o).getChemicalClassName() != null)) {   
+        int result = this.getChemicalClassName().compareTo( ((ChemicalClass)o).getChemicalClassName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
 }

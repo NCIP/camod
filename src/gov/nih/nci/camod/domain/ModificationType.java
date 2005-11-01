@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -17,7 +18,7 @@ import java.util.List;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class ModificationType extends BaseObject implements Serializable {
+public class ModificationType extends BaseObject implements Comparable, Serializable {
 
     private static final long serialVersionUID = 3259155453799404851L;
 
@@ -61,11 +62,30 @@ public class ModificationType extends BaseObject implements Serializable {
        String result = super.toString() + " - ";      
        result += this.getName();
        return result;
-     }  
-    
+     }    
+   
+   
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final ModificationType obj = (ModificationType) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof ModificationType) && (this.getName() != null) && (((ModificationType)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((ModificationType)o).getName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }    
+
 }
