@@ -78,7 +78,7 @@
 													  (Required field when "Targeted"<br>
 													  is selected for the "Transgene <br>
 													  Integration" field) </label>
-			<camod:cshelp key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" />
@@ -117,7 +117,7 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Designator</label>
-			<camod:cshelp key="ENGINEERED_GENE.CLONE_DESIGNATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.CLONE_DESIGNATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldUnSized" property="cloneDesignator" size="20" />
@@ -127,7 +127,7 @@
 		<tr>
            <td class="formRequiredNotice" width="5">&nbsp;</td>
            <td class="formLabel"><label for="field2">MGI Number</label>
-           <camod:cshelp key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+           <camod:cshelp mapId="genomic_segment_help" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
            </td>
            <td class="formField">
 				<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
@@ -139,7 +139,7 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Comments</label>
-			<camod:cshelp key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" />

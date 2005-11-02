@@ -46,7 +46,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label>
-		<camod:cshelp key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="cellLineName">
@@ -73,7 +73,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Experiment:</label>
-		<camod:cshelp key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
@@ -83,7 +83,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Results:</label>
-		<camod:cshelp key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
@@ -93,7 +93,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comments:</label>
-		<camod:cshelp key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
@@ -104,14 +104,14 @@
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
-				
-					  <html:submit styleClass="actionButton">
-						  <bean:message key="button.submit"/>
-					  </html:submit>
-					  
-					  <html:reset styleClass="actionButton">
-					  	  <bean:message key="button.reset"/>
-	  				  </html:reset>
+			
+				  <html:submit styleClass="actionButton">
+					  <bean:message key="button.submit"/>
+				  </html:submit>
+				  
+				  <html:reset styleClass="actionButton">
+				  	  <bean:message key="button.reset"/>
+  				  </html:reset>
 	  				  
   				  <c:if test="${not empty aCellID}">
 	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">

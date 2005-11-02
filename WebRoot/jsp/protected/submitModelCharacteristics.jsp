@@ -82,7 +82,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Model Descriptor</label>
-				<camod:cshelp href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT, 3)" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
 					<html:form action="EditAnimalModel.do?method=edit" focus="modelDescriptor" onsubmit="transferFields()">
@@ -103,7 +103,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Is this model a toolmouse?</label>
-				<camod:cshelp key="ABS_CANCER_MODEL.IS_TOOL_MOUSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
+				<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.IS_TOOL_MOUSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
 			</td>
 			<td class="formField">
 				<html:radio property="isToolMouse" value="yes" /> Yes 
@@ -142,7 +142,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Experimental Design</label>
-					<camod:cshelp key="ABS_CANCER_MODEL.EXPERIMENT_DESIGN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+					<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.EXPERIMENT_DESIGN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="experimentDesign" cols="32" rows="4"/>
@@ -182,7 +182,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Website for add. info</label>
-					<camod:cshelp key="ABS_CANCER_MODEL.URL" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+					<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.URL" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 					<html:text styleClass="formFieldSized" property="url" size="30"/>
@@ -192,7 +192,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><b>Record Release Date</b>
-			<camod:cshelp key="AVAILABILITY.RELEASE_DATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="model_characteristics_help" key="AVAILABILITY.RELEASE_DATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:radio property="releaseDate" value="immediately" onclick="return immediateRelease();" /> Release record immediately <br> 

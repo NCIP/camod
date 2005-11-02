@@ -103,7 +103,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comments Field:</label>
-		<camod:cshelp key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="spontaneous_mutation_help" key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">			
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32" />

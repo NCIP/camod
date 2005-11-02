@@ -15,7 +15,7 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<td class="formTitle" height="20" colspan=2>Model Status</td>				
+				<td class="formTitle" height="20" colspan=2>Model Status &nbsp;<camod:cshelp mapId="model_status_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 			</tr>			
 
 			<tr>

@@ -12,7 +12,7 @@
 	<TABLE summary="" cellpadding="6" cellspacing="0" border="0" align="left">
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Microarray Data </td>
+		<td class="formTitle" height="20" colspan="3">Microarray Data &nbsp;<camod:cshelp mapId="microarray_data_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>

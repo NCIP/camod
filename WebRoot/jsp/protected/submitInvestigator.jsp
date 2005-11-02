@@ -46,7 +46,7 @@
         <tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
-		<camod:cshelp key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 				<html:form action="<%= actionName %>" focus="name">
@@ -58,7 +58,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Principal Investigator:
-		<camod:cshelp key="ANIMAL_AVAILABILITY.PRINCIPAL_INVESTIGATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.PRINCIPAL_INVESTIGATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="stockNumber">
