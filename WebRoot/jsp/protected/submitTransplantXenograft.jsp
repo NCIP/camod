@@ -139,7 +139,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Host Species:</label></td>
+		<td class="formRequiredLabel"><label for="field3">Donor Species:</label></td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="hostScientificName" onchange="getOptions(this);" >
 				<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
@@ -149,7 +149,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Host Strain:</label></td>
+		<td class="formLabel"><label for="field3">Donor Strain:</label></td>
 		<td class="formField">
 		<br>
 			<html:select styleClass="formFieldSized" size="1" property="hostEthinicityStrain" onchange="chkOtherStrain()">
