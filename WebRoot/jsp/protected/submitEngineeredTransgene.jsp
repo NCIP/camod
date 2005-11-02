@@ -337,7 +337,7 @@
 						
 					<a href='<c:out value="${uri}"/>'>			
 					
-					<img src="<%= caImageServer %><c:out value="${engineeredTransgeneForm.fileServerLocation}"/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
+					<img src="<%= caImageServer %><c:out value="${engineeredTransgeneForm.fileServerLocation}"/>" height="40" width="40"  alt="<c:out value="${engineeredTransgeneForm.fileServerLocation}"/>" target="_blank">				
 					Click to View</a><br><br>									
 		    </c:if>
 						

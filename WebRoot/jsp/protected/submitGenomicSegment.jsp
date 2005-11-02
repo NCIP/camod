@@ -164,28 +164,17 @@
 			<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
 			<td class="formField">
 						
-			<% 
-				 // Only display a thumbnail if Image exists
-			     GenomicSegmentForm theGenomicSegmentForm = (GenomicSegmentForm) request.getSession().getAttribute("formdata");
+			<c:if test="${not empty genomicSegmentForm.fileServerLocation}">
+				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${genomicSegment.fileServerLocation}',600,600);"/>
+			
+				Current Image: <c:out value="${genomicSegmentForm.fileServerLocation}"/><br>
+				Current Image Thumbnail: <br>
 					
-				 if ( theGenomicSegmentForm.getFileServerLocation() != null ) {
-				 	if ( ! theGenomicSegmentForm.getFileServerLocation().equals( "" ) ) {
-				 	
-				 		pageContext.setAttribute("fileServerLocationName", theGenomicSegmentForm.getFileServerLocation() );
-			%>
-						<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${fileServerLocationName}',600,600);"/>
-					
-						Current Image: <c:out value="${genomicSegmentForm.fileServerLocation}"/><br>
-						Current Image Thumbnail: <br>
-							
-						<a href='<c:out value="${uri}"/>'>			
-						
-						<img src="<%= caImageServer %><bean:write name='formdata' property='fileServerLocation'/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
-						Click to View</a><br><br>									
-			<% 
-					} 
-				} 			
-			%>
+				<a href='<c:out value="${uri}"/>'>							
+				<img src="<%= caImageServer %><c:out value="${genomicSegmentForm.fileServerLocation}"/>" height="40" width="40" alt="<c:out value="${genomicSegmentForm.fileServerLocation}"/>" target="_blank">				
+				Click to View</a>
+				<br><br>													
+			</c:if>
 						
 			<html:file styleClass="formFieldSized" size="40" property="fileLocation" />	
 				

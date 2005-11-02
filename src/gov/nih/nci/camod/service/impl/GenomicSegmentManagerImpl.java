@@ -140,6 +140,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         if (inGenomicSegment.getImage() != null) {
             Image image = inGenomicSegment.getImage();
             image.setTitle(inGenomicSegmentData.getTitle());
+            //image.setFileServerLocation( );
             image.setDescription(inGenomicSegmentData.getDescriptionOfConstruct());
             inGenomicSegment.setImage(image);
         }
@@ -147,7 +148,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this GenomicSegment
-        if (inGenomicSegmentData.getFileLocation() != null) {
+        if (inGenomicSegmentData.getFileLocation().getFileName() != null && ! inGenomicSegmentData.getFileLocation().getFileName().equals( "" )) {
         	        	        
         	ImageForm inImageData = new ImageForm();
         	
@@ -160,6 +161,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         	
         	Image image = ImageManagerSingleton.instance().create( inImageData, inPath );
         	
+        	System.out.println( "Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle() + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId() );
         	inGenomicSegment.setImage(image);        	
         }
         
@@ -171,14 +173,18 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 		else
 			inMutationIdentifier = new MutationIdentifier();
 
-		String strNumberMGI = inGenomicSegmentData.getNumberMGI().trim();
-		Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-		Matcher m = p.matcher(strNumberMGI);
-		if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
-			inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
-			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+		if ( inGenomicSegmentData.getNumberMGI() == null || inGenomicSegmentData.getNumberMGI().equals( "" ))	{
+			inGenomicSegment.setMutationIdentifier( null );
+		} else {
+			String strNumberMGI = inGenomicSegmentData.getNumberMGI().trim();
+			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+			Matcher m = p.matcher(strNumberMGI);
+			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+				inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+			}
 		}
-        
+		
         log.trace("Exiting populateGenomicSegment");
     }
 }

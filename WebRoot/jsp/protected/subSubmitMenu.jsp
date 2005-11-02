@@ -133,7 +133,7 @@
 				      	<bean:write name="aSpontaneousMutation" property="name" filter="true"/>
 			      </html:link><br>
 		</logic:iterate>
-		
+		<br>
 	</span>
 
 	<div id="menu3" class="masterTitle" onclick="SwitchMenu('sub3')" onmouseover="ChangeClass('menu3','masterTitleOver')" onmouseout="ChangeClass('menu3','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> CARCINOGENIC INTERVENTIONS</div>

@@ -280,15 +280,19 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			inMutationIdentifier = inEngineeredTransgene.getMutationIdentifier();
 		else
 			inMutationIdentifier = new MutationIdentifier();
-
-		String strNumberMGI = inEngineeredTransgeneData.getNumberMGI().trim();
-		Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-		Matcher m = p.matcher(strNumberMGI);
-		if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
-			inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
-			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
+		
+		if ( inEngineeredTransgeneData.getNumberMGI() == null || inEngineeredTransgeneData.getNumberMGI().equals( "" ))	{
+			inEngineeredTransgene.setMutationIdentifier( null );
+		} else {
+			String strNumberMGI = inEngineeredTransgeneData.getNumberMGI().trim();
+			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+			Matcher m = p.matcher(strNumberMGI);
+			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+				inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
+			}
 		}
-
+		
 		// Gene Functions
 		Set geneList = null;
 		if (inEngineeredTransgene.getGeneFunctionCollection() != null) {
@@ -333,7 +337,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this GenomicSegment
-        if (inEngineeredTransgeneData.getFileLocation() != null) {
+        if (inEngineeredTransgeneData.getFileLocation().getFileName() != null && ! inEngineeredTransgeneData.getFileLocation().getFileName().equals( "" )) {
         	        	        
         	ImageForm inImageData = new ImageForm();
         	

@@ -70,7 +70,7 @@
 				Current Image Thumbnail: <br>
 					
 				<a href='<c:out value="${uri}"/>'>							
-				<img src="<%= caImageServer %><c:out value="${imageForm.fileServerLocation}"/>&amp;thumbspec=" main="" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
+				<img src="<%= caImageServer %><c:out value="${imageForm.fileServerLocation}"/>" height="40" width="40" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
 				Click to View</a>
 				<br><br>									
 				

@@ -173,10 +173,6 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                 engineeredTransgeneForm.setTitle(inImage.getTitle());
                 engineeredTransgeneForm.setFileServerLocation(inImage.getFileServerLocation());
                 engineeredTransgeneForm.setDescriptionOfConstruct(inImage.getDescription());
-
-                // TODO: Display a message on the current image, uploading
-                // another image will replace current image
-                // TODO: Display thumbnail and viewer for image already uploaded
             }
 
         }

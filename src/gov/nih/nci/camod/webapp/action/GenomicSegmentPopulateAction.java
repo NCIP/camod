@@ -22,11 +22,12 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         System.out.println("<GenomicSegmentPopulateAction populate> Entering populate() ");
-
-        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
-
+        
+        // setup dropdown menus
+        this.dropdown(request, response);
+        
         String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
-
+        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
         GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().get(aGenomicSegmentID);
 
         if (theGenomicSegment == null) {
@@ -64,17 +65,15 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 
             // Image
             Image inImage = theGenomicSegment.getImage();
-            if (inImage != null) {
+            if (inImage != null) {            	
                 genomicSegmentForm.setTitle(inImage.getTitle());
                 genomicSegmentForm.setFileServerLocation(inImage.getFileServerLocation());
                 genomicSegmentForm.setDescriptionOfConstruct(inImage.getDescription());
             }
 
         }
-
-        // setup dropdown menus
-        this.dropdown(request, response);
-
+        request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);
+        
         return mapping.findForward("submitGenomicSegment");
     }
 
@@ -84,8 +83,8 @@ public class GenomicSegmentPopulateAction extends BaseAction {
         System.out.println("<GenomicSegmentPopulateAction dropdown> Entering dropdown()");
 
         // blank out the FORMDATA Constant field
-        GenomicSegmentForm GenomicSegmentForm = (GenomicSegmentForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, GenomicSegmentForm);
+        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);
 
         // setup dropdown menus
         this.dropdown(request, response);

@@ -163,9 +163,6 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 } else {
                     // TODO: Add error for struts explaining that image is of an
                     // invalid type
-//    	            ActionMessages msg = new ActionMessages();
-//    	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.upload.unsuccessful"));
-//    	            saveErrors(request, msg);
     	            
                     System.out.println("Invalid file type! " + fileType);
                 }

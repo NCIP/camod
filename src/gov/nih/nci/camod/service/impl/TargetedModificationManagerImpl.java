@@ -9,16 +9,16 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TargetedModificationManager;
-import gov.nih.nci.camod.util.FtpUtil;
 import gov.nih.nci.camod.util.MailUtil;
+import gov.nih.nci.camod.webapp.form.ImageForm;
 import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 
-import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.upload.FormFile;
 
 public class TargetedModificationManagerImpl extends BaseManager implements TargetedModificationManager {
 
@@ -164,110 +164,43 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
 
         // Upload Construct File location, Title of Construct, Description of
         // Construct
-        // Check for exisiting Image for this TargetedModification
-        if (inTargetedModificationData.getFileLocation() != null) {
-            System.out.println("<TargetedModificationManagerImpl> Uploading a file");
-
-            // If this is a new Image, upload it to the server
-            FormFile f = inTargetedModificationData.getFileLocation();
-
-            Image image = new Image();
-
-            // Retrieve the file type
-            String fileType = null;
-            StringTokenizer strToken = new StringTokenizer(f.getFileName(), ".");
-
-            while (strToken.hasMoreTokens()) {
-                fileType = strToken.nextToken();
-                System.out.println("Token=" + fileType);
-            }
-
-            System.out.println("<TargetedModificationManagerImpl> fileType is: " + fileType + " FileName is: "
-                    + f.getFileName() + " Type is: " + f.getContentType());
-
-            // Check the file type
-            if (fileType != null) {
-                if (fileType.equals("jpg") || fileType.equals("jpeg") || fileType.equals("gif")
-                        || fileType.equals("tif") || fileType.equals("sid")) {
-                    System.out.println("<TargetedModificationManagerImpl> Valid file type " + fileType);
-                    System.out.println("<TargetedModificationManagerImpl> FileName is: " + f.getFileName()
-                            + " Type is: " + f.getContentType());
-
-                    InputStream in = null;
-                    OutputStream out = null;
-
-                    try {
-                        // Get an input stream on the form file
-                        in = f.getInputStream();
-
-                        // Create an output stream to a file
-                        // this file is stored on the jboss server
-                        // TODO: Set a max size for this file
-                        out = new BufferedOutputStream(new FileOutputStream(request.getSession().getServletContext()
-                                .getRealPath("/config/temp.jpg")));
-
-                        byte[] buffer = new byte[512];
-                        while (in.read(buffer) != -1) {
-                            out.write(buffer);
-                        }
-                    } finally {
-                        if (out != null)
-                            out.close();
-                        if (in != null)
-                            in.close();
-                    }
-
-                    String theFilename = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
-                    File uploadFile = new File(theFilename);
-
-                    // TODO: Retrieve list of files from server, create a unique
-                    // file name, will require a more advanced FTPUtil
-                    // TODO: Add ability to delete images from caIMAGE Ftp,
-                    // requires more advanced FTPUtil
-
-                    // Get the current time and append the modelID, should be
-                    // good enough to always be unique
-                    long time = System.currentTimeMillis();
-                    String uniqueFileName = time + "_"
-                            + request.getSession().getAttribute(Constants.MODELID).toString() + "." + fileType;
-
-                    // Retrieve ftp data from a resource bundle
-                    ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-                    // Iterate through all the reciepts in the config file
-                    String ftpServer = theBundle.getString(Constants.CaImage.FTPSERVER);
-                    String ftpUsername = theBundle.getString(Constants.CaImage.FTPUSERNAME);
-                    String ftpPassword = theBundle.getString(Constants.CaImage.FTPPASSWORD);
-                    String ftpStorageDirectory = theBundle.getString(Constants.CaImage.FTPSTORAGEDIRECTORY);
-
-                    // Upload the file to caIMAGE
-                    FtpUtil ftpUtil = new FtpUtil();
-                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName,
-                            uploadFile);
-
-                    image.setFileServerLocation(uniqueFileName);
-                    image.setTitle(inTargetedModificationData.getTitle());
-                    image.setDescription(inTargetedModificationData.getDescriptionOfConstruct());
-                    theTargetedModification.setImage(image);
-
-                } else {
-                    // TODO: Add error for struts explaining that image is of an
-                    // invalid type
-                    System.out.println("Invalid file type! " + fileType);
-                }
-            }
+        // Check for exisiting Image for this GenomicSegment
+        if (inTargetedModificationData.getFileLocation().getFileName() != null && ! inTargetedModificationData.getFileLocation().getFileName().equals( "" )) {
+        	        	        
+        	ImageForm inImageData = new ImageForm();
+        	
+        	String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+        	
+        	inImageData.setDescriptionOfConstruct( inTargetedModificationData.getDescriptionOfConstruct());
+        	inImageData.setTitle( inTargetedModificationData.getTitle() );
+        	inImageData.setFileServerLocation( inTargetedModificationData.getFileServerLocation() );
+        	inImageData.setFileLocation( inTargetedModificationData.getFileLocation() );
+        	
+        	Image image = ImageManagerSingleton.instance().create( inImageData, inPath );
+        	
+        	System.out.println( "Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle() + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId() );
+        	theTargetedModification.setImage(image);        	
         }
 
-        // MGI Number
-        // Check for exisiting MutationIdentifier
-        MutationIdentifier inMutationIdentifier = null;
-        if (theTargetedModification.getMutationIdentifier() != null)
-            inMutationIdentifier = theTargetedModification.getMutationIdentifier();
-        else
-            inMutationIdentifier = new MutationIdentifier();
+		// MGI Number
+		// Check for exisiting MutationIdentifier
+		MutationIdentifier inMutationIdentifier = null;
+		if (theTargetedModification.getMutationIdentifier() != null)
+			inMutationIdentifier = theTargetedModification.getMutationIdentifier();
+		else
+			inMutationIdentifier = new MutationIdentifier();
 
-        inMutationIdentifier.setNumberMGI(Long.valueOf(inTargetedModificationData.getNumberMGI().trim()));
-        theTargetedModification.setMutationIdentifier(inMutationIdentifier);
+		if ( inTargetedModificationData.getNumberMGI() == null || inTargetedModificationData.getNumberMGI().equals( "" ))	{
+			theTargetedModification.setMutationIdentifier( null );
+		} else {
+			String strNumberMGI = inTargetedModificationData.getNumberMGI().trim();
+			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+			Matcher m = p.matcher(strNumberMGI);
+			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+				theTargetedModification.setMutationIdentifier(inMutationIdentifier);
+			}
+		}
 
         theTargetedModification.setComments(inTargetedModificationData.getComments());
 

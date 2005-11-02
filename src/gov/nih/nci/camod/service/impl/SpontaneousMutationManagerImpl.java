@@ -6,11 +6,15 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.GeneticAlteration;
+import gov.nih.nci.camod.domain.MutationIdentifier;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.service.SpontaneousMutationManager;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SpontaneousMutationManagerImpl extends BaseManager implements SpontaneousMutationManager {
 
@@ -70,10 +74,16 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 
         List geneticList = inSpontaneousMutation.getGeneticAlterationCollection();
 
+        System.out.println( "Testing");
+        
         if (geneticList.size() > 0) {
-            GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-            inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
-            inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
+        	if( inSpontaneousMutationData.getObservation() != null && ! inSpontaneousMutationData.getObservation().equals( "" ) ) {
+		        GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
+		        inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
+		        inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
+    		} else {
+    			geneticList.remove(0);
+    		}        			
         } else {
             if (inSpontaneousMutationData.getObservation() != null) {
                 if (!inSpontaneousMutationData.getObservation().equals("")) {
@@ -85,11 +95,26 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
             }
         }
 
-        MutationIdentifier inMutationIdentifier = new MutationIdentifier();
+		// MGI Number
+		// Check for exisiting MutationIdentifier
+		MutationIdentifier inMutationIdentifier = null;
+		if (inSpontaneousMutation.getMutationIdentifier() != null)
+			inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
+		else
+			inMutationIdentifier = new MutationIdentifier();
 
-        inMutationIdentifier.setNumberMGI(Long.valueOf(inSpontaneousMutationData.getNumberMGI().trim()));
-        inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
-
+		if ( inSpontaneousMutationData.getNumberMGI() == null || inSpontaneousMutationData.getNumberMGI().equals( "" ))	{
+			inSpontaneousMutation.setMutationIdentifier( null );
+		} else {
+			String strNumberMGI = inSpontaneousMutationData.getNumberMGI().trim();
+			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+			Matcher m = p.matcher(strNumberMGI);
+			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+				inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+			}
+		}
+		
         log.trace("Exiting populateSpontaneousMutation");
     }
 }
