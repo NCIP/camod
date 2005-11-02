@@ -8,8 +8,11 @@
 package gov.nih.nci.camod.util;
 
 import java.util.*;
-import org.apache.commons.beanutils.*;
-import org.apache.commons.logging.*;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * DuplicateUtil - Bean Deep-Copy Utility
