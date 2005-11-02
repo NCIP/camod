@@ -1,10 +1,20 @@
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+<%@ page import="gov.nih.nci.camod.Constants.CaImage" %>
+<%@ page import="java.util.*" %>
 
-String aFileServerLocation = request.getParameter( "aFileServerLocation" );
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	
+	String aFileServerLocation = request.getParameter( "aFileServerLocation" );
+	     
+	// Retrieve ftp data from a resource bundle
+	ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+	
+	// Retrieve the server location
+	String caImageServer = theBundle.getString(CaImage.CAIMAGESERVERVIEW);
+
+	System.out.println( "caImageServer=" + caImageServer );
 
 %>
 
@@ -28,7 +38,7 @@ String aFileServerLocation = request.getParameter( "aFileServerLocation" );
   
   <body>
 	The filename is:  <%= aFileServerLocation %> <br>
-	<Img src="http://caimage-dev.nci.nih.gov/lizardtech/iserv/getimage?cat=Model&img=<%= aFileServerLocation %>" width="400" height="400" border="0" /><br>			
-	<br>
+	<Img src="<%= caImageServer %><%= aFileServerLocation %>" width="400" height="400" border="0" /><br><br>			
+
   </body>
 </html>

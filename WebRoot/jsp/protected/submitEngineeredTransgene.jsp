@@ -9,11 +9,22 @@
 <%@ page import="gov.nih.nci.camod.Constants.*" %>
 <%@ page import="java.util.List" %>
 
+<%@ page import="gov.nih.nci.camod.Constants.CaImage" %>
+<%@ page import="java.util.*" %>
+
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
+	// Retrieve ftp data from a resource bundle
+	ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+	
+	// Retrieve the server location
+	String caImageServer = theBundle.getString(CaImage.CAIMAGESERVERTHUMBVIEW);
+
+	System.out.println( "caImageServer=" + caImageServer );
+	
 	String aEngineeredTransgeneID = request.getParameter( "aEngineeredTransgeneID" );
 
 	//if aEngineeredTransgeneID is passed in, then we are dealing with a previously entered model and are editing it
@@ -326,7 +337,7 @@
 						
 					<a href='<c:out value="${uri}"/>'>			
 					
-					<img src="http://caimage.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&amp;img=<c:out value="${engineeredTransgeneForm.fileServerLocation}"/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
+					<img src="<%= caImageServer %><c:out value="${engineeredTransgeneForm.fileServerLocation}"/>&amp;thumbspec=" main="" alt="<bean:write name='formdata' property='fileServerLocation'/>" target="_blank">				
 					Click to View</a><br><br>									
 		    </c:if>
 						

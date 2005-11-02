@@ -13,8 +13,14 @@ import gov.nih.nci.camod.util.FtpUtil;
 import gov.nih.nci.camod.util.RandomGUID;
 import gov.nih.nci.camod.webapp.form.ImageData;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 import org.apache.struts.upload.FormFile;
 
@@ -100,9 +106,9 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
             if (fileType != null) {
                 if (fileType.equals("jpg") || fileType.equals("jpeg") || fileType.equals("gif")
                         || fileType.equals("tif") || fileType.equals("sid")) {
-                    System.out.println("<ImageDataManagerImpl> Valid file type " + fileType);
-                    System.out.println("<ImageDataManagerImpl> FileName is: " + f.getFileName() + " Type is: "
-                            + f.getContentType());
+
+                	System.out.println("<ImageDataManagerImpl> Valid file type " + fileType);
+                	System.out.println("<ImageDataManagerImpl> FileName is: " + f.getFileName() + " Type is: " + f.getContentType());
 
                     InputStream in = null;
                     OutputStream out = null;
@@ -148,18 +154,19 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
                     // Upload the file to caIMAGE
                     FtpUtil ftpUtil = new FtpUtil();
-                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName,
-                            uploadFile);
+                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile);
 
                     inImage.setTitle(inImageData.getTitle());
                     inImage.setFileServerLocation(uniqueFileName);
                     inImage.setDescription(inImageData.getDescriptionOfConstruct());
-
-                    // inImage.setImage(image);
-
+                    
                 } else {
                     // TODO: Add error for struts explaining that image is of an
                     // invalid type
+//    	            ActionMessages msg = new ActionMessages();
+//    	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.upload.unsuccessful"));
+//    	            saveErrors(request, msg);
+    	            
                     System.out.println("Invalid file type! " + fileType);
                 }
             }

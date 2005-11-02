@@ -8,12 +8,22 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
+<%@ page import="gov.nih.nci.camod.Constants.CaImage" %>
+<%@ page import="java.util.*" %>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
+	// Retrieve ftp data from a resource bundle
+	ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+	
+	// Retrieve the server location
+	String caImageServer = theBundle.getString(CaImage.CAIMAGESERVERTHUMBVIEW);
+
+	System.out.println( "caImageServer=" + caImageServer );
+
 	String aImageID = (String) request.getAttribute( "aImageID" );
 
 	// if aImageID is passed in, then we are dealing with 
@@ -59,10 +69,11 @@
 				Current Image: <c:out value="${imageForm.fileServerLocation}"/><br>
 				Current Image Thumbnail: <br>
 					
-				<a href='<c:out value="${uri}"/>'>			
+				<a href='<c:out value="${uri}"/>'>							
+				<img src="<%= caImageServer %><c:out value="${imageForm.fileServerLocation}"/>&amp;thumbspec=" main="" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
+				Click to View</a>
+				<br><br>									
 				
-				<img src="http://caimage-dev.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&amp;img=<c:out value="${imageForm.fileServerLocation}"/>&amp;thumbspec=" main="" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
-				Click to View</a><br><br>									
 			</c:if>
 						
 			<html:file styleClass="formFieldSized" size="40" property="fileLocation"/>	

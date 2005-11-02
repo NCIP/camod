@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.62 2005-11-02 16:33:41 georgeda Exp $
+ * $Id: Constants.java,v 1.63 2005-11-02 17:15:58 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.62  2005/11/02 16:33:41  georgeda
+ * Misc fixes
+ *
  * Revision 1.61  2005/10/28 12:47:11  georgeda
  * Action constant
  *
@@ -341,6 +344,11 @@ public class Constants {
 		public static final String FTPPASSWORD = "caimage.ftp.password";
 
 		public static final String FTPSTORAGEDIRECTORY = "caimage.ftp.storagedirectory";
+		
+		public static final String CAIMAGESERVERVIEW = "caimage.ftp.serverviewurl";
+		
+		public static final String CAIMAGESERVERTHUMBVIEW = "caimage.ftp.serverthumbviewurl";
+		
 	}
 
 	/**

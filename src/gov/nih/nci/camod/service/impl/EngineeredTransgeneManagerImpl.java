@@ -1,7 +1,6 @@
 package gov.nih.nci.camod.service.impl;
 
 //import gov.nih.nci.camod.domain.EngineeredTransgene;
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Conditionality;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.ExpressionFeature;
@@ -16,18 +15,12 @@ import gov.nih.nci.camod.domain.Taxon;
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.service.EngineeredTransgeneManager;
 import gov.nih.nci.camod.util.EvsTreeUtil;
-import gov.nih.nci.camod.util.FtpUtil;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
+import gov.nih.nci.camod.webapp.form.ImageForm;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -35,7 +28,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.upload.FormFile;
+//import org.apache.struts.upload.FormFile;
 
 public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		EngineeredTransgeneManager {
@@ -337,90 +330,24 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			inEngineeredTransgene.setImage(image);
 		}
 		
-		// Upload Construct File location, Title of Construct, Description of Construct
-		// Check for exisiting Image for this TargetedModification		
-		if( inEngineeredTransgeneData.getFileLocation() != null  ) 
-		{
-			System.out.println( "<EngineeredTransgeneManagerImpl populateEngineeredTransgene> Uploading a file" );
-						
-			//If this is a new Image, upload it to the server
-			FormFile f = inEngineeredTransgeneData.getFileLocation();			
-				
-			Image image = new Image();
-			
-			//Retrieve the file type
-			String fileType = null;
-			StringTokenizer strToken = new StringTokenizer( f.getFileName(), "." );						
-			
-			while ( strToken.hasMoreTokens() ){				
-				fileType = strToken.nextToken();
-				System.out.println( "Token=" + fileType );
-			}
-			
-			System.out.println( "<EngineeredTransgeneManagerImpl populateEngineeredTransgene> fileType is: " + fileType + " FileName is: " + f.getFileName() + " Type is: " + f.getContentType() );
-			
-			//Check the file type
-			if ( fileType != null ) {
-				if ( fileType.equals( "jpg" ) || fileType.equals( "jpeg" ) || fileType.equals( "gif" ) || fileType.equals( "tif" ) || fileType.equals( "sid" ) )
-				{
-					System.out.println( "<EngineeredTransgeneManagerImpl populateEngineeredTransgene> Valid file type " + fileType );
-					System.out.println( "<EngineeredTransgeneManagerImpl populateEngineeredTransgene> FileName is: " + f.getFileName() + " Type is: " + f.getContentType() );
-					
-					InputStream in = null;
-					OutputStream out = null;
-					
-					try {
-						//Get an input stream on the form file
-						in = f.getInputStream();
-						
-						//Create an output stream to a file
-						//this file is stored on the jboss server
-						//TODO: Set a max size for this file
-						out = new BufferedOutputStream(new FileOutputStream( request.getSession().getServletContext().getRealPath("/config/temp.jpg") ));
-						
-						byte[] buffer = new byte[512];
-						while ( in.read(buffer) != -1) {
-							out.write(buffer);				
-						}			
-					} finally {
-						if (out!=null) out.close();
-						if (in!=null) in.close();
-					}
-					
-		            String theFilename = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
-		            File uploadFile = new File( theFilename );
-		            
-		            //TODO: Retrieve list of files from server, create a unique file name, will require a more advanced FTPUtil
-		            //TODO: Add ability to delete images from caIMAGE Ftp, requires more advanced FTPUtil
-		            
-		            //Get the current time and append the modelID, should be good enough to always be unique
-		            long time = System.currentTimeMillis(); 
-		            String uniqueFileName = time + "_" + request.getSession().getAttribute( Constants.MODELID ).toString() + "." + fileType;
-		            
-		            //Retrieve ftp data from a resource bundle
-	                ResourceBundle theBundle = ResourceBundle.getBundle( "camod" );
-
-	                // Iterate through all the reciepts in the config file
-	                String ftpServer = 	theBundle.getString( Constants.CaImage.FTPSERVER );
-	                String ftpUsername = theBundle.getString( Constants.CaImage.FTPUSERNAME );
-                	String ftpPassword = theBundle.getString( Constants.CaImage.FTPPASSWORD );
-	                String ftpStorageDirectory = theBundle.getString( Constants.CaImage.FTPSTORAGEDIRECTORY );
-	                
-	                //Upload the file to caIMAGE
-		            FtpUtil ftpUtil = new FtpUtil();	           		            
-		            ftpUtil.upload( ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile );
-		            
-					image.setFileServerLocation( uniqueFileName );				
-					image.setTitle(inEngineeredTransgeneData.getTitle());
-					image.setDescription(inEngineeredTransgeneData.getDescriptionOfConstruct());
-					inEngineeredTransgene.setImage(image);
-					
-				} else {
-					//TODO: Add error for struts explaining that image is of an invalid type
-					System.out.println( "Invalid file type! " + fileType );
-				}
-	 		}		
-		}
+        // Upload Construct File location, Title of Construct, Description of
+        // Construct
+        // Check for exisiting Image for this GenomicSegment
+        if (inEngineeredTransgeneData.getFileLocation() != null) {
+        	        	        
+        	ImageForm inImageData = new ImageForm();
+        	
+        	String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+        	
+        	inImageData.setDescriptionOfConstruct( inEngineeredTransgeneData.getDescriptionOfConstruct());
+        	inImageData.setTitle( inEngineeredTransgeneData.getTitle() );
+        	inImageData.setFileServerLocation( inEngineeredTransgeneData.getFileServerLocation() );
+        	inImageData.setFileLocation( inEngineeredTransgeneData.getFileLocation() );
+        	
+        	Image image = ImageManagerSingleton.instance().create( inImageData, inPath );
+        	
+        	inEngineeredTransgene.setImage(image);        	
+        }
 		
 		log.trace("Exiting populateEngineeredTransgene");
 	}
