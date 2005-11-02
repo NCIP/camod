@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.12 2005-11-02 19:07:25 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.13 2005-11-02 19:44:20 schroedn Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/02 19:07:25  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.10  2005/10/31 18:55:51  georgeda
  * More validation changes
  *
@@ -36,6 +39,8 @@ import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager {
 
@@ -163,9 +168,13 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         List geneticList = inInducedMutation.getGeneticAlterationCollection();
 
         if (geneticList.size() > 0) {
-            GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-            inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
-            inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
+        	if( inInducedMutationData.getObservation() != null && ! inInducedMutationData.getObservation().equals( "" ) ) {
+		        GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
+		        inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
+		        inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
+        	} else {
+        		geneticList.remove(0);
+        	}
         } else {
             if (inInducedMutationData.getObservation() != null) {
                 if (!inInducedMutationData.getObservation().equals("")) {
@@ -177,20 +186,26 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             }
         }
 
-        // MGI Number
-        // Check for exisiting MutationIdentifier
-        MutationIdentifier inMutationIdentifier = null;
-        if (inInducedMutation.getMutationIdentifier() != null)
-            inMutationIdentifier = inInducedMutation.getMutationIdentifier();
-        else
-            inMutationIdentifier = new MutationIdentifier();
-            
-		inInducedMutation.setComments(inInducedMutationData.getComments());            
-		
+		// MGI Number
+		// Check for exisiting MutationIdentifier
+		MutationIdentifier inMutationIdentifier = null;
+		if (inInducedMutation.getMutationIdentifier() != null) {			
+			inMutationIdentifier = inInducedMutation.getMutationIdentifier();
+		}
+		else
+			inMutationIdentifier = new MutationIdentifier();
 
-        inMutationIdentifier.setNumberMGI(Long.valueOf(inInducedMutationData.getNumberMGI().trim()));
-        inInducedMutation.setMutationIdentifier(inMutationIdentifier);
-
+		if ( inInducedMutationData.getNumberMGI() == null || inInducedMutationData.getNumberMGI().equals( "" ))	{
+			inInducedMutation.setMutationIdentifier( null );
+		} else {
+			String strNumberMGI = inInducedMutationData.getNumberMGI().trim();
+			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+			Matcher m = p.matcher(strNumberMGI);
+			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+				inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+			}
+		}
         log.trace("Exiting populateInducedMutation");
     }
 }
