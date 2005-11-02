@@ -155,6 +155,7 @@ public class PopulatePubMedUtil implements Runnable{
         InputStream inputStream = null;
         int lineCounter = 0;
         
+        try {
         if(  pubMedID != null ){
             try{
                 URL url = new URL("http://www.ncbi.nlm.nih.gov/entrez/utils/pmfetch.fcgi?db=PubMed&id="+pubMedID+"&report=abstract&mode=html");
@@ -182,6 +183,7 @@ public class PopulatePubMedUtil implements Runnable{
             }                        
         }// end if
         
+        } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return buf.toString();
     }
     
@@ -190,6 +192,8 @@ public class PopulatePubMedUtil implements Runnable{
         String pubmedAbstract = null;
         
         boolean flag = false;
+        
+        try {
         if(pubmedRecord != null){
             if(pubmedRecord.indexOf("1: ")!=-1){
                 int i = pubmedRecord.indexOf("1: ");
@@ -198,18 +202,19 @@ public class PopulatePubMedUtil implements Runnable{
                 while(token.hasMoreTokens()){
                     String nextToken = token.nextToken();
                     if(nextToken.equals("Error")){
-                        //System.out.println("<PopulatePubMed.java> ----------"+nextToken+"-------------");
                         flag = true;
                         break;
                     }
                 }
             }
         }
+        } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return flag;
     }
     
     private static  String getAbstractString(String pubmedRecord){// retrieve the pubmed abstract
         String pubmedAbstract = null;
+        try {
         if(pubmedRecord != null){
             if( pubmedRecord.indexOf("1: ")!=-1){
                 int i = pubmedRecord.indexOf("1: ");
@@ -217,12 +222,15 @@ public class PopulatePubMedUtil implements Runnable{
                 System.out.println( "<PopulatePubMed.java getAbstractString> \n<PopulatePubMed.java getAbstractString> **** pubmedAbstract *****\n" + pubmedAbstract + "\n<PopulatePubMed.java getAbstractString>  **** pubmedAbstract *****\n");
             }
         }
+        } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return pubmedAbstract;
     }
     
     private static String[] getPubMedPages(String pubMedAbstract){ // to get start colume and end colume for pub record
         System.out.println("<PopulatePubMed.java getPubMedPages> Entering..." );
         String[] pageArray = new String[2];
+        
+        try {
         if(pubMedAbstract != null){
             if(pubMedAbstract.indexOf(":") !=-1 && pubMedAbstract.indexOf("[epub ahead of print].")==-1){
                 
@@ -256,15 +264,19 @@ public class PopulatePubMedUtil implements Runnable{
                 }                                
             }           
         }
+        } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return pageArray;
     }
     private static  String getPublicationTitle(String pubmedAbstract){// to get the title of the record
         System.out.println("<PopulatePubMed.java getPublicationTitle> Entering..." );
-        
+	
         String endPage = null;
         String startPage = null;
         String[] pageArray = null;
         String titleCol = null;
+        
+        try {
+        	
         if(pubmedAbstract != null){
             //System.out.println("<PopulatePubMed.java> %%%%%%%%%%%%%%%pubmedAbstract:"+pubmedAbstract);
             if(pubmedAbstract.indexOf("Comment in:")==-1){
@@ -296,15 +308,12 @@ public class PopulatePubMedUtil implements Runnable{
                         titleCol = titleCol.substring(0,titleCol.indexOf(".")).trim();
                     }
                 } else{
-                   // System.out.println("<PopulatePubMed.java> **************");
                     pubmedAbstract = pubmedAbstract.substring(pubmedAbstract.indexOf(".")+1);
-                   // System.out.println("<PopulatePubMed.java> pubmedAbstract after the break:"+pubmedAbstract);
                     
                     if(pubmedAbstract.indexOf("[Epub ahead of print].")!=-1){
                         int bracetIndex = pubmedAbstract.indexOf("[Epub ahead of print].");
                         int ePubLength = "[Epub ahead of print].".length();
                         pubmedAbstract = pubmedAbstract.substring(bracetIndex+ePubLength+1);
-                       // System.out.println("<PopulatePubMed.java> pubmedAbstract after 0---090- the break:"+pubmedAbstract);
                         titleCol = pubmedAbstract.substring(0,pubmedAbstract.indexOf(".")).trim();
                     }
                 }
@@ -314,29 +323,32 @@ public class PopulatePubMedUtil implements Runnable{
                 } 
                 
             } else {
-               // System.out.println("<PopulatePubMed.java> ---------------HERE----------------");
                 String  titleCol1 = pubmedAbstract.substring((pubmedAbstract.indexOf(".")+1));
-               // System.out.println("<PopulatePubMed.java> the titleCol1 is:"+titleCol1);
                 int titleCol2Int = titleCol1.indexOf(".");
                 String titleCol2 = titleCol1.substring(titleCol2Int+1).trim();
-               // System.out.println("<PopulatePubMed.java> titleCol2 is:"+titleCol2);
                 titleCol= titleCol2.substring(0,titleCol2.indexOf("."));
             }
         }
+        } catch (Exception e) { 
+        	System.out.println( "Exception=" + e );
+        }
+        
         return titleCol;
     }
     
     private String getPublicationVolume(String pubmedAbstract){// volume of the publication
         System.out.println("<PopulatePubMed.java getPublicationVolume> Entering..." );
         String volumeString = null;
+        
+        try {
         if(pubmedAbstract != null ){
             int j = pubmedAbstract.indexOf(";");
             if(pubmedAbstract.indexOf(":") !=-1 && pubmedAbstract.indexOf("[epub ahead of print]")==-1){
                 int k = pubmedAbstract.indexOf(":");
                 volumeString = pubmedAbstract.substring(j,k);
-               // System.out.println("<PopulatePubMed.java> ((((((((((((((((((volumeString:"+volumeString);
             }
         }
+        } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return volumeString;
     }
     
@@ -346,7 +358,7 @@ public class PopulatePubMedUtil implements Runnable{
         String year = null;
         int j=0;
         int k=0;
-        
+        try {
         if(pubmedAbstract != null){            
             if(pubmedAbstract.indexOf("[epub ahead of print]")==-1){                
                 j = pubmedAbstract.indexOf(".");
@@ -354,7 +366,6 @@ public class PopulatePubMedUtil implements Runnable{
                 yearString = pubmedAbstract.substring(j+1, k).trim();
                 System.out.println("<PopulatePubMed.java>  yearString in section1:"+yearString);
             } else{                
-                //System.out.println("<PopulatePubMed.java getPublicationYear> else" );
                 j = pubmedAbstract.indexOf(";");
                 yearString = pubmedAbstract.substring(0, j);                
             }                       
@@ -364,13 +375,10 @@ public class PopulatePubMedUtil implements Runnable{
                 year = token.nextToken();
                 byte[] bytes = year.getBytes();
                 int t = 0;
-               // System.out.println("<PopulatePubMed.java> ===="+yearString+"===="+bytes.length);
                 if(bytes.length == 4){
                     ByteArrayInputStream byteInput = new ByteArrayInputStream(bytes);
                     int readByte = byteInput.read();
-                  //  System.out.println("<PopulatePubMed.java> readByte:"+readByte);
                     while(readByte <= 57 && readByte >= 48){
-                      //  System.out.println("<PopulatePubMed.java> 1111");
                         readByte = byteInput.read();
                         t++;
                         statusYear = true;
@@ -381,6 +389,7 @@ public class PopulatePubMedUtil implements Runnable{
                 }
             }
         }
+        } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return null;
     }
     private static String getJournal(String pubmedAbstract){// in what journal that was published
@@ -389,11 +398,11 @@ public class PopulatePubMedUtil implements Runnable{
         String year = null;
         String yearString = null;
         int j= 0;
+        
+        try {
         if(pubmedAbstract != null){
             if(pubmedAbstract.indexOf("[epub ahead of print]")==-1){
-                year = getPublicationYear(pubmedAbstract);
-              //  System.out.println("<PopulatePubMed.java> the YEAR is :"+year);
-                
+                year = getPublicationYear(pubmedAbstract);                
                 if(year!=null) {
                     
                     j= pubmedAbstract.indexOf(year);
@@ -405,13 +414,13 @@ public class PopulatePubMedUtil implements Runnable{
             }
             
             year = getPublicationYear(pubmedAbstract);
-            //System.out.println("<PopulatePubMed.java> the year is:"+year);
             if(yearString!=null) {
                 int k = yearString.indexOf(year);
                 journal = yearString.substring(0,(k-2));
             }//end of if
             
         }
+        } catch (Exception e ) { System.out.println( "Exception e=" + e);}
         return journal;
     }
     
