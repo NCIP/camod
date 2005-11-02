@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugPopulateAction.java,v 1.14 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: ChemicalDrugPopulateAction.java,v 1.15 2005-11-02 21:47:33 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.13  2005/10/28 17:44:19  georgeda
  * Fixed sex distribution error
  *
@@ -56,7 +59,7 @@ public class ChemicalDrugPopulateAction extends BaseAction {
 		this.dropdown(request, response);
 
 		if (ty == null) {
-			request.setAttribute("aAvailabilityID", null);
+			request.setAttribute("deleted", "true");
 		} else {
 			request.setAttribute("aTherapyID", aTherapyID);
 

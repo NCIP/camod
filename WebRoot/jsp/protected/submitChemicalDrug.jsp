@@ -6,6 +6,7 @@
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
 
 <!-- needed for tooltips -->
@@ -13,8 +14,8 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aTherapyID = (String) request.getAttribute( "aTherapyID" );
-	
+	String aTherapyID = request.getParameter( "aTherapyID" );
+    
 	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
@@ -55,7 +56,7 @@
 			<label for="field3">(if Chemical/Drug is not listed, then please<br>select "Other" from the list and specify it below)</label>
 			<br>
 			<br>
-			<html:form action="<%= actionName %>" focus="name">			 
+			<html:form action="<%= actionName %>" focus="name" >			 
 			
 			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName();">										
 				<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>					

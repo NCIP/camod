@@ -31,13 +31,13 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
         EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
 
         String aEngineeredTransgeneID = request.getParameter("aEngineeredTransgeneID");
-
+        engineeredTransgeneForm.setTransgeneId(aEngineeredTransgeneID);
+        
         Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().get(aEngineeredTransgeneID);
 
         if (theEngineeredTransgene == null) {
-            request.setAttribute("aEngineeredTransgeneID", null);
+            request.setAttribute("deleted", "true");
         } else {
-            request.setAttribute("aEngineeredTransgeneID", aEngineeredTransgeneID);
 
             // Tansgene Integration
             if (theEngineeredTransgene.getLocationOfIntegration().equals("Random")) {

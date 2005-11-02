@@ -31,10 +31,10 @@ public class GenomicSegmentPopulateAction extends BaseAction {
         GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().get(aGenomicSegmentID);
 
         if (theGenomicSegment == null) {
-            request.setAttribute("aGenomicSegmentID", null);
+            request.setAttribute("deleted", "true");
         } else {
-            request.setAttribute("aGenomicSegmentID", aGenomicSegmentID);
-
+            genomicSegmentForm.setSegmentId(aGenomicSegmentID);
+            
             if (theGenomicSegment.getLocationOfIntegration().equals("Random")) {
                 genomicSegmentForm.setLocationOfIntegration(theGenomicSegment.getLocationOfIntegration());
             } else {
@@ -72,7 +72,6 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             }
 
         }
-        request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);
         
         return mapping.findForward("submitGenomicSegment");
     }
@@ -81,10 +80,6 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         System.out.println("<GenomicSegmentPopulateAction dropdown> Entering dropdown()");
-
-        // blank out the FORMDATA Constant field
-        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);
 
         // setup dropdown menus
         this.dropdown(request, response);

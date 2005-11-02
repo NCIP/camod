@@ -31,5 +31,9 @@ public interface ImageData {
 	public String getTitle();
 	
 	public void setTitle(String title);
+    
+    public String getImageId();
+    
+    public void setImageId(String imageId);
 
 }

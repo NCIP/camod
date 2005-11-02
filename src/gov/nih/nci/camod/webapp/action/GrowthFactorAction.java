@@ -1,7 +1,10 @@
 /**
- * $Id: GrowthFactorAction.java,v 1.9 2005-11-02 19:02:08 pandyas Exp $
+ * $Id: GrowthFactorAction.java,v 1.10 2005-11-02 21:48:09 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/02 19:02:08  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.8  2005/10/28 14:50:55  georgeda
  * Fixed null pointer problem
  *
@@ -61,8 +64,8 @@ public class GrowthFactorAction extends BaseAction {
 		// animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
 		
-		//	Grab the current modelID we are working with
-        String modelID = request.getParameter("aModelID");		
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 

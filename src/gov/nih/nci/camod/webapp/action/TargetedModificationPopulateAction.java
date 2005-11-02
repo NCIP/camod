@@ -33,9 +33,9 @@ public class TargetedModificationPopulateAction extends BaseAction {
                 aTargetedModificationID);
 
         if (theTargetedModification == null) {
-            request.setAttribute("aTargetedModificationID", null);
+            request.setAttribute("deleted", "true");
         } else {
-            request.setAttribute("aTargetedModificationID", aTargetedModificationID);
+            targetedModificationForm.setModificationId(aTargetedModificationID);
 
             targetedModificationForm.setName(theTargetedModification.getName());
             targetedModificationForm.setBlastocystName(theTargetedModification.getBlastocystName());

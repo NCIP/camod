@@ -11,7 +11,7 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
 <%
-	String aCellID = (String) request.getAttribute( "aCellID" );
+	String aCellID = request.getParameter( "aCellID" );
 	
 	//if aCellID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one

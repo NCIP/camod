@@ -59,6 +59,7 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	protected String spliceSites_name;
 	protected String spliceSites_species;
 	protected String spliceSites_otherSpecies;
+    protected String transgeneId;
 	
 	/**
 	 * @return Returns the locationOfIntegration.
@@ -297,4 +298,12 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	public void setFileServerLocation(String fileServerLocation) {
 		this.fileServerLocation = fileServerLocation;
 	}
+    
+    public String getTransgeneId() {
+        return transgeneId;
+    }
+    
+    public void setTransgeneId(String transgeneId) {
+        this.transgeneId = transgeneId;
+    }
 }

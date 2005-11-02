@@ -107,7 +107,7 @@
     </form>
 
 	<form name="geneDeliveryForm">
-	    <field property="viralVector" depends="validwhen, maxlength">
+	    <field property="viralVector" depends="required">
             <arg0 key="GeneDeliveryForm.viralVector"/>
         </field>
         <field property="otherViralVector" depends="validwhen, maxlength">
@@ -559,7 +559,7 @@
 	
 	<form name="therapyForm">
         <field property="name" depends="required,maxlength">
-            <arg0 key="Therapy.name"/>
+            <arg0 key="TherapyForm.name"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -567,10 +567,10 @@
             </var>
     	</field> 
     	<field property="NSCNumber" depends="integer">
-            <arg0 key="Therapy.nscNumber"/>
+            <arg0 key="TherapyForm.nscNumber"/>
     	</field>
     	<field property="CASNumber" depends="maxlength">
-            <arg0 key="Therapy.casNumber"/>
+            <arg0 key="TherapyForm.casNumber"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -578,7 +578,7 @@
             </var>
     	</field>
     	<field property="dosage" depends="maxlength">
-            <arg0 key="Therapy.dosage"/>
+            <arg0 key="TherapyForm.dosage"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -586,7 +586,7 @@
             </var>
     	</field>
      	<field property="ageAtTreatment" depends="maxlength">
-            <arg0 key="Therapy.ageAtTreatment"/>
+            <arg0 key="TherapyForm.ageAtTreatment"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -594,7 +594,7 @@
             </var>
     	</field>
         <field property="otherAdministrativeRoute" depends="validwhen, maxlength">
-            <arg0 key="Therapy.otherAdministrativeRoute"/>
+            <arg0 key="TherapyForm.otherAdministrativeRoute"/>
             <var>
                 <var-name>test</var-name>
                 <var-value>((administrativeRoute != 'Other') or (*this* != null))</var-value>
@@ -606,7 +606,7 @@
             </var>
         </field>     
        	<field property="biomarker" depends="maxlength">
-            <arg0 key="Therapy.biomarker"/>
+            <arg0 key="TherapyForm.biomarker"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -614,7 +614,7 @@
             </var>
     	</field>
     	<field property="tumorResponse" depends="maxlength">
-            <arg0 key="Therapy.tumorResponse"/>
+            <arg0 key="TherapyForm.tumorResponse"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -622,7 +622,7 @@
             </var>
     	</field>
     	<field property="comments" depends="maxlength">
-            <arg0 key="Therapy.comments"/>
+            <arg0 key="TherapyForm.comments"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -630,7 +630,7 @@
             </var>
     	</field>
     	<field property="experiment" depends="maxlength">
-            <arg0 key="Therapy.experiment"/>
+            <arg0 key="TherapyForm.experiment"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>
@@ -638,7 +638,7 @@
             </var>
     	</field>
     	<field property="results" depends="maxlength">
-            <arg0 key="Therapy.results"/>
+            <arg0 key="TherapyForm.results"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
                 <var-name>maxlength</var-name>

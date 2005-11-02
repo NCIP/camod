@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationAction.java,v 1.10 2005-11-02 19:02:08 pandyas Exp $
+ * $Id: RadiationAction.java,v 1.11 2005-11-02 21:48:09 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/02 19:02:08  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.9  2005/10/28 14:50:55  georgeda
  * Fixed null pointer problem
  *
@@ -50,8 +53,8 @@ public class RadiationAction extends BaseAction {
 			log.debug("Entering 'edit' method");
 		}
 		
-		//	Grab the current modelID we are working with
-        String modelID = request.getParameter("aModelID");		
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		// Grab the current Therapy we are working with related to this
 		// animalModel

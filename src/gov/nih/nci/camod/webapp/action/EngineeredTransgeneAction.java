@@ -39,7 +39,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
 		EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
 
 		// Grab the current modelID from the session
-		String aEngineeredTransgeneID = request.getParameter("aEngineeredTransgeneID");
+		String aEngineeredTransgeneID = engineeredTransgeneForm.getTransgeneId();
 
 		log.info("<EngineeredTransgeneAction save> following Characteristics:"
 
@@ -144,7 +144,6 @@ public final class EngineeredTransgeneAction extends BaseAction {
 
 		// Create a form to edit
 		EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, engineeredTransgeneForm);
 
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);

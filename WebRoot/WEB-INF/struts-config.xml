@@ -993,7 +993,7 @@
 	        parameter="unprotected_method"
    	        unknown="false"
 	        validate="false" >
-	<forward 
+	    <forward 
     		name="General Information Page"
     		path="/ViewModelAction.do?unprotected_method=populateModelCharacteristics">
         </forward>
@@ -1205,7 +1205,7 @@
 	        input="input">
 	    <forward
             name="input"
-            path="/EngineeredTransgenePopulateAction.do?method=dropdown">
+            path="/submitEngineeredTransgene.do">
         </forward>  
    </action> 
     
@@ -1268,10 +1268,11 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input">
+	        input="input"
+	        >
 	    <forward
             name="input"
-            path="/GenomicSegmentPopulateAction.do?method=dropdown">
+            path="/submitGenomicSegment.do">
         </forward>     	
     </action>
     
@@ -1603,7 +1604,7 @@
 	        input="input">
         <forward
             name="input"
-            path="/SpontaneousMutationPopulateAction.do?method=dropdown">
+            path="/submitSpontaneousMutation.do">
         </forward>  	           	
     </action>
     
@@ -1625,7 +1626,7 @@
 	        input="input">
 	    <forward
             name="input"
-            path="/InducedMutationPopulateAction.do?method=dropdown">
+            path="/submitInducedMutation.do">
         </forward>     	
     </action>
     
@@ -1691,7 +1692,7 @@
 	        input="input">
 	    <forward
             name="input"
-            path="/TargetedModificationPopulateAction.do?method=dropdown">
+            path="/submitTargetedModification.do">
         </forward>     	
     </action>
     

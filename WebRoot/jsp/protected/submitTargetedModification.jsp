@@ -26,7 +26,9 @@
 
 	System.out.println( "caImageServer=" + caImageServer );
 	
-	String aTargetedModificationID = (String) request.getAttribute( "aTargetedModificationID" );
+	TargetedModificationForm form = (TargetedModificationForm) request.getAttribute( "targetedModificationForm" );
+	
+	String aTargetedModificationID = form.getModificationId();
 			
 	//if aInducedMutationID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
@@ -231,15 +233,14 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 
-  				  <c:if test="${not empty aTargetedModificationID}">
+  				  <c:if test="${not empty targetedModificationForm.modificationId}">
 	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>
 			      
-				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aTargetedModificationID" value="<%= aTargetedModificationID %>">
-				  	
+				  <html:hidden property="modificationId"/>
+				  
 				</html:form>			
 			</TABLE>
 		</td>

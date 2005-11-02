@@ -36,8 +36,8 @@ public final class InducedMutationAction extends BaseAction {
 
         log.trace("Entering edit");
         
-		//	Grab the current modelID we are working with
-        String modelID = request.getParameter("aModelID");        
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID); 
 
         // Grab the current SpontaneousMutation we are working with related to
         // this

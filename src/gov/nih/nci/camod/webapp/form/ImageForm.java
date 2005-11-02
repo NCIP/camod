@@ -38,6 +38,7 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected FormFile fileLocation;
     protected String staining;
     protected String otherStaining;
+    protected String imageId;
 
     public String getDescription() {
         return description;
@@ -97,5 +98,15 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    
+    public String getImageId() {
+        return imageId;
+    }
+
+    
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 }

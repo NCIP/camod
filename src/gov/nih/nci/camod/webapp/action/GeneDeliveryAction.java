@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.13 2005-11-02 19:02:08 pandyas Exp $
+ * $Id: GeneDeliveryAction.java,v 1.14 2005-11-02 21:48:09 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/02 19:02:08  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.12  2005/10/28 14:50:55  georgeda
  * Fixed null pointer problem
  *
@@ -54,8 +57,8 @@ public final class GeneDeliveryAction extends BaseAction {
         // Grab the current therapy
         String aTherapyID = request.getParameter("aTherapyID");
         
-		//	Grab the current modelID we are working with
-        String modelID = request.getParameter("aModelID");        
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<GeneDeliveryAction edit> following Characteristics:" + "\n\t ViralVector: "
                 + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "

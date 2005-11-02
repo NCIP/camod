@@ -45,6 +45,8 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
 	protected String genes;
 	protected String markers;
 	protected String otherLocationOfIntegration;
+    protected String segmentId;
+    
 	/**
 	 * @return Returns the locationOfIntegration.
 	 */
@@ -198,7 +200,15 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
 	}
 	public void setFileServerLocation(String fileServerLocation) {
 		this.fileServerLocation = fileServerLocation;
-	}	
+	}
+    
+    public String getSegmentId() {
+        return segmentId;
+    }
+    
+    public void setSegmentId(String segmentId) {
+        this.segmentId = segmentId;
+    }	
 	
 
 }

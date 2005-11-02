@@ -32,15 +32,14 @@ public final class TargetedModificationAction extends BaseAction {
 
         log.trace("Entering edit");
         
-		//	Grab the current modelID we are working with
-        String modelID = request.getParameter("aModelID");        
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, targetedModificationForm);
 
         // Grab the current SpontaneousMutation we are working with related to
         // this
-        String aTargetedModificationID = request.getParameter("aTargetedModificationID");
+        String aTargetedModificationID = targetedModificationForm.getModificationId();
 
         log.info("<TargetedModificationAction save> following Characteristics:" + "\n\t getName: "
                 + targetedModificationForm.getName() + "\n\t getModificationType: "
@@ -114,7 +113,6 @@ public final class TargetedModificationAction extends BaseAction {
 
         // Create a form to edit
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, targetedModificationForm);
 
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);

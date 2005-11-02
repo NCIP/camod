@@ -123,4 +123,9 @@ public interface EngineeredTransgeneData {
 	public String getDescriptionOfConstruct();
 	
 	public void setDescriptionOfConstruct(String descriptionOfConstruct);
+    
+    public String getTransgeneId();
+    
+    public void setTransgeneId(String transgeneId);
+    
 }

@@ -14,7 +14,7 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aInducedMutationID = (String) request.getAttribute("aInducedMutationID");
+	String aInducedMutationID = request.getParameter("aInducedMutationID");
 
 	//if aInducedMutationID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one

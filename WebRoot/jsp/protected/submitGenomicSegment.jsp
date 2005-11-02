@@ -23,19 +23,16 @@
 
 	System.out.println( "caImageServer=" + caImageServer );
 	
-	String aGenomicSegmentID = (String) request.getAttribute( "aGenomicSegmentID" );
+	GenomicSegmentForm form = (GenomicSegmentForm) request.getAttribute( "genomicSegmentForm" );
 
 	//if aGenomicSegmentID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "GenomicSegmentAction.do?method=save";
 	
-	if ( aGenomicSegmentID != null && aGenomicSegmentID.length() > 0) {
+	if ( form.getSegmentId() != null && form.getSegmentId().length() > 0) {
 		actionName = "GenomicSegmentAction.do?method=edit";	
 	}
-    else {
-        aGenomicSegmentID = "";
-    }
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -209,14 +206,14 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 
-  				  <c:if test="${not empty aGenomicSegmentID}">
+  				  <c:if test="${not empty genomicSegmentForm.segmentId}">
 	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>
 				      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aGenomicSegmentID" value="<%= aGenomicSegmentID %>">
+				  <html:hidden property="segmentId"/>
 				  	
 				</html:form>			
 			</TABLE>

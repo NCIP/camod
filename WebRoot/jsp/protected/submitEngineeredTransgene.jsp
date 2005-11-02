@@ -25,8 +25,10 @@
 
 	System.out.println( "caImageServer=" + caImageServer );
 	
-	String aEngineeredTransgeneID = request.getParameter( "aEngineeredTransgeneID" );
-
+	EngineeredTransgeneForm form = (EngineeredTransgeneForm) request.getAttribute( "engineeredTransgeneForm" );
+	
+	String aEngineeredTransgeneID = form.getTransgeneId();
+	
 	//if aEngineeredTransgeneID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
@@ -374,14 +376,13 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 				
-		          <c:if test="${not empty aEngineeredTransgeneID}">
+		          <c:if test="${not empty engineeredTransgeneForm.transgeneId}">
 	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>
 			      
-				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aEngineeredTransgeneID" value="<%= aEngineeredTransgeneID %>">
+				  <html:hidden property="transgeneId"/>
 				  	
 				</html:form>			
 			</TABLE>

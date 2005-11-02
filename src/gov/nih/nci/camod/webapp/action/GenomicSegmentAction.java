@@ -40,10 +40,10 @@ public final class GenomicSegmentAction extends BaseAction {
 		GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
 
 		// Grab the current modelID from the session
-		String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
+		String aGenomicSegmentID = genomicSegmentForm.getSegmentId();
 		
-		//	Grab the current modelID we are working with
-        String modelID = request.getParameter("aModelID");		
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);	
 
 		log.info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
 				+ genomicSegmentForm.getLocationOfIntegration() + "\n\t getOtherLocationOfIntegration: "

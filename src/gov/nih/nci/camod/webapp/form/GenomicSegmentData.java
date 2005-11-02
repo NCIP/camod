@@ -63,4 +63,8 @@ public interface GenomicSegmentData {
 	public String getDescriptionOfConstruct();
 	
 	public void setDescriptionOfConstruct(String descriptionOfConstruct);
+    
+    public String getSegmentId();
+    
+    public void setSegmentId(String segmentId);
 }

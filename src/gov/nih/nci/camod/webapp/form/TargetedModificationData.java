@@ -58,4 +58,8 @@ public interface TargetedModificationData {
 	public String getDescriptionOfConstruct();
 	
 	public void setDescriptionOfConstruct(String descriptionOfConstruct);
+    
+    public String getModificationId();
+    
+    public void setModificationId(String modificationId);
 }

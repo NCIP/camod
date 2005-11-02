@@ -43,6 +43,7 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 	protected FormFile fileLocation;	
 	protected String title;
 	protected String descriptionOfConstruct;
+    protected String modificationId;
 	
 	/**
 	 * @return Returns the name.
@@ -188,5 +189,13 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 	public void setFileLocation(FormFile fileLocation) {
 		this.fileLocation = fileLocation;
 	}
+    
+    public String getModificationId() {
+        return modificationId;
+    }
+    
+    public void setModificationId(String modificationId) {
+        this.modificationId = modificationId;
+    }
 
 }
