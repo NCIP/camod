@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.50 2005-11-02 20:56:04 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.51 2005-11-02 21:46:09 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.50  2005/11/02 20:56:04  schroedn
+ * Added Staining to Image submission
+ *
  * Revision 1.49  2005/11/02 19:02:55  pandyas
  * Added e-mail functionality
  *
@@ -523,17 +526,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
 
         // Get/create the sex distribution
-        SexDistribution theSexDistribution = SexDistributionManagerSingleton.instance().getByType(
-                inModelCharacteristics.getType());
-        if (theSexDistribution == null) {
-            theSexDistribution = new SexDistribution();
-            theSexDistribution.setType(inModelCharacteristics.getType());
+        if (inModelCharacteristics.getType() != null) {
+            SexDistribution theSexDistribution = SexDistributionManagerSingleton.instance().getByType(
+                    inModelCharacteristics.getType());
+            thePhenotype.setSexDistribution(theSexDistribution);
         }
 
         // Create the phenotype
         thePhenotype.setDescription(inModelCharacteristics.getDescription());
         thePhenotype.setBreedingNotes(inModelCharacteristics.getBreedingNotes());
-        thePhenotype.setSexDistribution(theSexDistribution);
 
         // Get the availability
         Availability theAvailability = inAnimalModel.getAvailability();
@@ -927,17 +928,19 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
     }
 
-    public void addAssociatedExpression( AnimalModel inAnimalModel, EngineeredGene inEngineeredGene, AssociatedExpressionData inAssociatedExpressionData ) throws Exception {
+    public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene,
+            AssociatedExpressionData inAssociatedExpressionData) throws Exception {
 
         System.out.println("<AnimalModelManagerImpl addAssociatedExpression>");
         log.trace("Entering AnimalModelManagerImpl.addAssociatedExpression");
 
-    	//addAssociatedExpression (ExpressionFeature
-    	EngineeredTransgeneManagerSingleton.instance().createAssocExpression( inAssociatedExpressionData, inEngineeredGene );
-    	    	
-    	save( inAnimalModel );
-    	
-    	log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
+        // addAssociatedExpression (ExpressionFeature
+        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData,
+                inEngineeredGene);
+
+        save(inAnimalModel);
+
+        log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
 
     public void addPublication(AnimalModel inAnimalModel, PublicationData inPublicationData) throws Exception {
