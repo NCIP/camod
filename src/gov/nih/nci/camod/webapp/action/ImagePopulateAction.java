@@ -1,8 +1,10 @@
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.service.impl.ImageManagerSingleton;
 import gov.nih.nci.camod.webapp.form.ImageForm;
+import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +37,10 @@ public class ImagePopulateAction extends BaseAction {
 				imageForm.setTitle(inImage.getTitle());
 				imageForm.setFileServerLocation(inImage.getFileServerLocation());
 				imageForm.setDescriptionOfConstruct(inImage.getDescription());
-
+				
+				imageForm.setStaining( inImage.getStaining() );
+				imageForm.setOtherStaining( inImage.getStainingUnctrlVocab() );
+				
 				// TODO: Display a message on the current image, uploading
 				// another
 				// image will replace current image
@@ -49,7 +54,9 @@ public class ImagePopulateAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		System.out.println("<ImagePopulateAction dropdown> Entering dropdown()");
-
+		
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, "");
+		
 		return mapping.findForward("submitImages");
 	}
 }

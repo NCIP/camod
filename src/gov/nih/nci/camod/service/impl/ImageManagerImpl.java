@@ -7,9 +7,11 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.service.ImageManager;
 import gov.nih.nci.camod.util.FtpUtil;
+import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.util.RandomGUID;
 import gov.nih.nci.camod.webapp.form.ImageData;
 
@@ -19,8 +21,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 import org.apache.struts.upload.FormFile;
 
@@ -46,34 +50,77 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         super.remove(id, Image.class);
     }
 
-    public Image create(ImageData inImageData, String inPath) throws Exception {
+    public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath) throws Exception {
 
         log.trace("Entering ImageManagerImpl.create");
 
         Image inImage = new Image();
-        populateImage(inImageData, inImage, inPath);
+        populateImage(inAnimalModel, inImageData, inImage, inPath);
 
         log.trace("Exiting ImageManagerImpl.create");
 
         return inImage;
     }
 
-    public void update(ImageData inImageData, Image inImage, String inPath) throws Exception {
+    public void update(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath) throws Exception {
 
         log.trace("Entering ImageManagerImpl.update");
         log.debug("Updating ImageForm: " + inImage.getId());
 
         // Populate w/ the new values and save
-        populateImage(inImageData, inImage, inPath);
+        populateImage(inAnimalModel, inImageData, inImage, inPath);
         save(inImage);
 
         log.trace("Exiting ImageManagerImpl.update");
     }
 
-    private void populateImage(ImageData inImageData, Image inImage, String inPath) throws Exception {
+    private void populateImage(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath) throws Exception {
 
         log.trace("Entering populateImage");
 
+        if( inImageData.getStaining() != null && ! inImageData.getStaining().equals( "" ) )
+        {
+        	inImage.setStaining( inImageData.getStaining());
+        	
+        	if ( inImageData.getStaining().equals( "Other") ){
+        		inImage.setStainingUnctrlVocab( inImageData.getOtherStaining() );
+        		
+                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+                // Iterate through all the reciepts in the config file
+                String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+                StringTokenizer st = new StringTokenizer(recipients, ",");
+                String inRecipients[] = new String[st.countTokens()];
+                for (int i = 0; i < inRecipients.length; i++) {
+                    inRecipients[i] = st.nextToken();
+                }                                
+                
+                String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+                String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+                // gather message keys and variable values to build the e-mail
+                // content with
+                String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+                Map values = new TreeMap();
+                values.put("type", "SegmentName");
+                values.put("value", inImageData.getOtherStaining() );
+                values.put("submitter", inAnimalModel.getSubmitter());
+                values.put("model", inAnimalModel.getModelDescriptor());
+                values.put("modelstate", inAnimalModel.getState());
+
+                // Send the email
+                try {
+                    MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+                } catch (Exception e) {
+                    log.error("Caught exception sending mail: ", e);
+                    e.printStackTrace();
+                }   
+        	}
+        } else {
+        	inImage.setStaining( null );
+        	inImage.setStainingUnctrlVocab( null );
+        }
+        
         if (inImage != null) {
             // Image image = inImage.getImage();
             inImage.setTitle(inImageData.getTitle());

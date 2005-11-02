@@ -1,6 +1,7 @@
 package gov.nih.nci.camod.service.impl;
 
 //import gov.nih.nci.camod.domain.EngineeredTransgene;
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Conditionality;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.ExpressionFeature;
@@ -348,7 +349,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
         	inImageData.setFileServerLocation( inEngineeredTransgeneData.getFileServerLocation() );
         	inImageData.setFileLocation( inEngineeredTransgeneData.getFileLocation() );
         	
-        	Image image = ImageManagerSingleton.instance().create( inImageData, inPath );
+        	Image image = ImageManagerSingleton.instance().create( new AnimalModel(), inImageData, inPath );
         	
         	inEngineeredTransgene.setImage(image);        	
         }

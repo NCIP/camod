@@ -13,7 +13,6 @@ import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.domain.SegmentType;
 import gov.nih.nci.camod.service.GenomicSegmentManager;
-import gov.nih.nci.camod.util.FtpUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
 import gov.nih.nci.camod.webapp.form.ImageForm;
@@ -159,7 +158,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         	inImageData.setFileServerLocation( inGenomicSegmentData.getFileServerLocation() );
         	inImageData.setFileLocation( inGenomicSegmentData.getFileLocation() );
         	
-        	Image image = ImageManagerSingleton.instance().create( inImageData, inPath );
+        	Image image = ImageManagerSingleton.instance().create( new AnimalModel(), inImageData, inPath );
         	
         	System.out.println( "Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle() + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId() );
         	inGenomicSegment.setImage(image);        	

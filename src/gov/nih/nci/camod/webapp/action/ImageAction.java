@@ -69,7 +69,13 @@ public final class ImageAction extends BaseAction {
 				Image theImage = imageManager.get(aImageID);
 
 				String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
-				imageManager.update(imageForm, theImage, inPath);
+				
+				// Grab the current modelID from the session
+				String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+				AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+				AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+				
+				imageManager.update(theAnimalModel, imageForm, theImage, inPath);
 
 				log.info("New Image created");
 

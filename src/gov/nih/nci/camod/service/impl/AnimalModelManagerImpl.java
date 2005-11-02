@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.49 2005-11-02 19:02:55 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.50 2005-11-02 20:56:04 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2005/11/02 19:02:55  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.48  2005/10/27 17:15:22  schroedn
  * Updated addAssociatedExpression for all Genetic Descriptions
  *
@@ -598,7 +601,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("<AnimalModelManagerImpl> Entering addGeneDelivery");
 
         GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance().create(inAnimalModel, inGeneDeliveryData);
-
         inAnimalModel.addGeneDelivery(theGeneDelivery);
         save(inAnimalModel);
 
@@ -762,9 +764,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception {
 
         log.debug("<AnimalModelManagerImpl> Entering saveCellLine");
-
         CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData);
-
         inAnimalModel.addCellLine(theCellLine);
         save(inAnimalModel);
 
@@ -778,11 +778,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             throws Exception {
 
         log.trace("Entering addGeneticDescription (spontaneousMutation)");
-
         SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create(
                 inSpontaneousMutationData);
-        System.out.println(theSpontaneousMutation.getName());
-
+        //System.out.println(theSpontaneousMutation.getName());
         inAnimalModel.addSpontaneousMutation(theSpontaneousMutation);
         save(inAnimalModel);
 
@@ -856,7 +854,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering addImage (Image)");
 
-        Image theImage = ImageManagerSingleton.instance().create(inImageData, inPath);
+        Image theImage = ImageManagerSingleton.instance().create(inAnimalModel, inImageData, inPath);
         inAnimalModel.addImage(theImage);
         save(inAnimalModel);
 

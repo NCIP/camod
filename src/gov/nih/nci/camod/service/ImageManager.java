@@ -6,6 +6,7 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.webapp.form.ImageData;
 
@@ -21,8 +22,8 @@ public interface ImageManager {
 
     public void remove(String id) throws Exception;
 
-    public Image create(ImageData inImageData, String inPath) throws Exception;
+    public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath) throws Exception;
 
-    public void update(ImageData inImageData, Image inImage, String inPath) throws Exception;
+    public void update(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath) throws Exception;
 
 }

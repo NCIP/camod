@@ -176,7 +176,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         	inImageData.setFileServerLocation( inTargetedModificationData.getFileServerLocation() );
         	inImageData.setFileLocation( inTargetedModificationData.getFileLocation() );
         	
-        	Image image = ImageManagerSingleton.instance().create( inImageData, inPath );
+        	Image image = ImageManagerSingleton.instance().create( new AnimalModel(), inImageData, inPath );
         	
         	System.out.println( "Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle() + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId() );
         	theTargetedModification.setImage(image);        	

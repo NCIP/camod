@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.64 2005-11-02 20:28:59 pandyas Exp $
+ * $Id: Constants.java,v 1.65 2005-11-02 20:56:04 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.64  2005/11/02 20:28:59  pandyas
+ * modified GeneDelivery dropdown source
+ *
  * Revision 1.63  2005/11/02 17:15:58  schroedn
  * Updated Image viewer, added constants and properties to camod.properties, merged code to ease changes later
  *
@@ -263,6 +266,8 @@ public class Constants {
 		public static final String GENOMICSEGMENTDROP = "SegmentTypes.txt";
 
 		public static final String GROWTHFACTORDOSEUNITSDROP = "GrowthFactorDoseUnits.txt";
+		
+		public static final String STAININGDROP = "Staining.txt";
 
 		// Specific to a single screen
 		public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";

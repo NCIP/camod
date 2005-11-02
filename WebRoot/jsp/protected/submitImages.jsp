@@ -13,7 +13,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
 	// Retrieve ftp data from a resource bundle
@@ -39,6 +39,14 @@
 	    aImageID = "";
 	}
 %>
+
+<SCRIPT LANGUAGE="JavaScript">
+	
+	function chkStaining() {
+	    chkOther(document.forms[0].staining, document.forms[0].otherStaining);
+	}
+	
+</SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -72,8 +80,7 @@
 				<a href='<c:out value="${uri}"/>'>							
 				<img src="<%= caImageServer %><c:out value="${imageForm.fileServerLocation}"/>" height="40" width="40" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
 				Click to View</a>
-				<br><br>									
-				
+				<br><br>													
 			</c:if>
 						
 			<html:file styleClass="formFieldSized" size="40" property="fileLocation"/>	
@@ -96,6 +103,27 @@
 				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="40" />	
 		</tr>
 
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+
+			<td class="formLabel"><label for="field3"><b>Staining Type</b></label></td>
+			<td class="formField">
+			<html:select styleClass="formFieldSized" size="1" property="staining" onchange="chkStaining();" >
+				<html:options name="<%= Dropdowns.STAININGDROP %>" />										
+			</html:select>
+			<br>
+			-if category you are looking for is not listed, <br>select "Other" and enter the category in the text field below:
+			</td>
+		</tr>
+
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field1">Other Staining Type</label></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="otherStaining" disabled="true" size="10" />
+			</td>
+		</tr>
+				
 		<tr>
 			<td align="right" colspan="3">
 				<TABLE cellpadding="4" cellspacing="0" border="0">
@@ -126,5 +154,9 @@
 	<!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<SCRIPT>
+	chkStaining();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
