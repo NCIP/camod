@@ -31,11 +31,12 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 			<c:if test="${empty editUserForm.id}">
-			    Add User
+			    Add User 
 			</c:if>
 			<c:if test="${not empty editUserForm.id}">
 			    Edit User
 			</c:if>
+			&nbsp;<camod:cshelp mapId="add_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 			</td>
 		</tr>
 

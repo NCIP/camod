@@ -26,7 +26,7 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Comments Assignment</td>		
+		    <td class="formTitle" height="20" colspan="4">Comments Assignment &nbsp;<camod:cshelp mapId="comments_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		<html:form action="AdminCommentsAssignmentPopulateAction">
 		    

@@ -19,7 +19,7 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Models Assignment</td>		
+		    <td class="formTitle" height="20" colspan="4">Models Assignment &nbsp;<camod:cshelp mapId="models_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		<html:form action="AdminModelsAssignmentPopulateAction">
 		    

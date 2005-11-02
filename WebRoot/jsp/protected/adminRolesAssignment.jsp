@@ -19,7 +19,7 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Roles Assignment</td>		
+		    <td class="formTitle" height="20" colspan="4">Roles Management &nbsp;<camod:cshelp mapId="roles_management_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		<html:form action="AdminRolesAssignmentPopulateAction">
 		    <td class=resultsBoxGreyNoEnd>			

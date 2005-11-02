@@ -21,7 +21,7 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="3">User Management</td>		
+		    <td class="formTitle" height="20" colspan="3">User Management &nbsp;<camod:cshelp mapId="user_management_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		<html:form action="AdminEditUserPopulateAction">
 		    
