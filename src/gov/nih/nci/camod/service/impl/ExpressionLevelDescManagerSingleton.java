@@ -5,7 +5,7 @@ import gov.nih.nci.camod.service.ExpressionLevelDescManager;
 /**
  * @author schroedln
  * 
- * Singleton class for the BiologicalProcessManager
+ * Singleton class for the ExpressionLevelDescManagerSingleton
  */
 public class ExpressionLevelDescManagerSingleton {
 
