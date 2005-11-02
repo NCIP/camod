@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.6 2005-10-20 20:02:42 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.7 2005-11-02 19:02:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 20:02:42  pandyas
+ * EVSTree (organ) functions properly
+ *
  * Revision 1.5  2005/10/19 18:08:18  pandyas
  * added age and gender to genedelivery
  *
@@ -23,7 +26,13 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
 import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+
 import gov.nih.nci.camod.util.EvsTreeUtil;
+import gov.nih.nci.camod.util.MailUtil;
 
 public class GeneDeliveryManagerImpl extends BaseManager implements GeneDeliveryManager {
 
@@ -47,32 +56,32 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         super.remove(id, GeneDelivery.class);
     }
 
-    public GeneDelivery create(GeneDeliveryData inGeneDeliveryForm) throws Exception {
+    public GeneDelivery create(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryForm) throws Exception {
 
         log.info("Entering GeneDeliveryManagerImpl.create");
 
         GeneDelivery theGeneDelivery = new GeneDelivery();
 
-        populateGeneDelivery(inGeneDeliveryForm, theGeneDelivery);
+        populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, theGeneDelivery);
         
         log.info("Exiting GeneDeliveryManagerImpl.create");        
         return theGeneDelivery;
     }
 
-    public void update(GeneDeliveryData inGeneDeliveryForm, GeneDelivery inGeneDelivery) throws Exception {
+    public void update(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryForm, GeneDelivery inGeneDelivery) throws Exception {
 
         log.info("Entering GeneDeliveryManagerImpl.update");
         log.info("Updating GeneDeliveryForm: " + inGeneDelivery.getId());
 
         // Populate w/ the new values and save
-        populateGeneDelivery(inGeneDeliveryForm, inGeneDelivery);
+        populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, inGeneDelivery);
 
         save(inGeneDelivery);
 
         log.debug("Exiting GeneDeliveryManagerImpl.update");
     }
 
-    private void populateGeneDelivery(GeneDeliveryData inGeneDeliveryData, GeneDelivery inGeneDelivery)
+    private void populateGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData, GeneDelivery inGeneDelivery)
             throws Exception {
 
         log.info("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
@@ -98,6 +107,37 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
             // TODO: send an email
         	System.out.println("viral vector equals other");
             System.out.println("SENDING EMAIL VIRAL VECTOR");
+            
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
+            }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "ViralVector");
+            values.put("value", inGeneDeliveryData.getOtherViralVector());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }            
 
             inGeneDelivery.setViralVector(Constants.Dropdowns.OTHER_OPTION);
             inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData.getOtherViralVector());

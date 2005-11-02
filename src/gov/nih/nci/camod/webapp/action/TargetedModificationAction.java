@@ -31,6 +31,9 @@ public final class TargetedModificationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering edit");
+        
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");        
 
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
         request.getSession().setAttribute(Constants.FORMDATA, targetedModificationForm);
@@ -59,6 +62,9 @@ public final class TargetedModificationAction extends BaseAction {
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
         try {
+	        // retrieve animal model by it's id	        
+	        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);        	
 
             if ("Delete".equals(theAction)) {
 
@@ -70,7 +76,7 @@ public final class TargetedModificationAction extends BaseAction {
                 
             } else {
                 TargetedModification theTargetedModification = targetedModificationManager.get(aTargetedModificationID);
-                targetedModificationManager.update(targetedModificationForm, theTargetedModification, request);
+                targetedModificationManager.update(theAnimalModel, targetedModificationForm, theTargetedModification, request);
 
                 log.info("TargetedModification edited");
 

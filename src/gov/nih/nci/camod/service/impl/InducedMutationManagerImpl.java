@@ -1,7 +1,7 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.11 2005-11-02 16:33:48 georgeda Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.12 2005-11-02 19:07:25 pandyas Exp $
  * $Log: not supported by cvs2svn $
  * Revision 1.10  2005/10/31 18:55:51  georgeda
  * More validation changes
@@ -59,32 +59,32 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         super.remove(id, InducedMutation.class);
     }
 
-    public InducedMutation create(InducedMutationData inInducedMutationData) throws Exception {
+    public InducedMutation create(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception {
 
         log.trace("Entering InducedMutationManagerImpl.create");
 
         InducedMutation theInducedMutation = new InducedMutation();
 
-        populateInducedMutation(inInducedMutationData, theInducedMutation);
+        populateInducedMutation(inAnimalModel, inInducedMutationData, theInducedMutation);
 
         log.trace("Exiting InducedMutationManagerImpl.create");
 
         return theInducedMutation;
     }
 
-    public void update(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation) throws Exception {
+    public void update(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData, InducedMutation inInducedMutation) throws Exception {
 
         log.trace("Entering InducedMutationManagerImpl.update");
         log.debug("Updating InducedMutationForm: " + inInducedMutation.getId());
 
         // Populate w/ the new values and save
-        populateInducedMutation(inInducedMutationData, inInducedMutation);
+        populateInducedMutation(inAnimalModel, inInducedMutationData, inInducedMutation);
         save(inInducedMutation);
 
         log.trace("Exiting InducedMutationManagerImpl.update");
     }
 
-    private void populateInducedMutation(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation)
+    private void populateInducedMutation(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData, InducedMutation inInducedMutation)
             throws Exception {
 
         log.trace("Entering populateInducedMutation");
@@ -112,34 +112,28 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
                 String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
                 StringTokenizer st = new StringTokenizer(recipients, ",");
                 String inRecipients[] = new String[st.countTokens()];
-
-                for (int i = 0; i < inRecipients.length; i++)
+                for (int i = 0; i < inRecipients.length; i++) {
                     inRecipients[i] = st.nextToken();
+                }
 
-                String inSubject = theBundle.getString(Constants.EmailMessage.SUBJECT);
-                String inMessage = theBundle.getString(Constants.EmailMessage.MESSAGE)
-                        + " Inducing Agent Type added ( " + inInducedMutationData.getOtherType()
-                        + " ) and is awaiting your approval.";
-                String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
-                // theBundle.getString(Constants.EmailMessage.SENDER);
+                String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+                String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+                // gather message keys and variable values to build the e-mail
+                // content with
+                String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+                Map values = new TreeMap();
+                values.put("type", "OtherInducedMutation");
+                values.put("value", inInducedMutationData.getOtherType());
+                values.put("submitter", inAnimalModel.getSubmitter());
+                values.put("model", inAnimalModel.getModelDescriptor());
+                values.put("modelstate", inAnimalModel.getState());
 
                 // Send the email
                 try {
-                    log.trace("Sending Notification eMail - new InducedMutation Agent added");
-
-                    // gather message keys and variable values to build the
-                    // e-mail content with
-                    String[] messageKeys = { Constants.Admin.INDUCED_MUTATION_AGENT_ADDED };
-                    TreeMap values = new TreeMap();
-                    values.put(Constants.Admin.INDUCED_MUTATION_AGENT_NAME, inInducedMutationData.getName());
-                    values.put(Constants.Admin.INDUCED_MUTATION_AGENT_TYPE, inInducedMutationData.getOtherType());
-
-                    // Send the email
-                    MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
-                    log.trace("Notification eMail sent");
+                    MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
                 } catch (Exception e) {
-                    log.trace("Caught exception " + e);
-                    // System.out.println("Caught exception" + e);
+                    log.error("Caught exception sending mail: ", e);
                     e.printStackTrace();
                 }
 
@@ -190,8 +184,9 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             inMutationIdentifier = inInducedMutation.getMutationIdentifier();
         else
             inMutationIdentifier = new MutationIdentifier();
-
-        inInducedMutation.setComments(inInducedMutationData.getComments());
+            
+		inInducedMutation.setComments(inInducedMutationData.getComments());            
+		
 
         inMutationIdentifier.setNumberMGI(Long.valueOf(inInducedMutationData.getNumberMGI().trim()));
         inInducedMutation.setMutationIdentifier(inMutationIdentifier);

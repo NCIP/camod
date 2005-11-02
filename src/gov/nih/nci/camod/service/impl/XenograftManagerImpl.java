@@ -9,12 +9,16 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.XenograftManager;
+import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.XenograftData;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 /**
@@ -96,13 +100,36 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
 			// TODO refine email content
 
-			// gather message keys and variable values to build the e-mail
-			// content with
-			// String[] messageKeys = {"uncontrolledvocab"};
-			TreeMap values = new TreeMap();
-			values.put("submitter", inAnimalModel.getSubmitter());
-			values.put("model", inAnimalModel.getModelDescriptor());
-			values.put("modelstate", inAnimalModel.getState());
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
+            }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "HostEthinicityStrain");
+            values.put("value", inXenograftData.getOtherHostEthinicityStrain());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }
 
 			theTaxon.setEthnicityStrain(null);
 			theTaxon.setEthnicityStrainUnctrlVocab(inXenograftData.getOtherHostEthinicityStrain());
@@ -136,13 +163,36 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 		if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION)) {
 			// TODO: refine email content
 
-			// gather message keys and variable values to build the e-mail
-			// content with
-			// String[] messageKeys = {"uncontrolledvocab"};
-			TreeMap values = new TreeMap();
-			values.put("submitter", inAnimalModel.getSubmitter());
-			values.put("model", inAnimalModel.getModelDescriptor());
-			values.put("modelstate", inAnimalModel.getState());
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
+            }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "GraftType");
+            values.put("value", inXenograftData.getOtherGraftType());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }
 
 			inXenograft.setGraftType(Constants.Dropdowns.OTHER_OPTION);
 			inXenograft.setGraftTypeUnctrlVocab(inXenograftData.getOtherGraftType());

@@ -6,6 +6,7 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.GenomicSegment;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
 
@@ -23,7 +24,7 @@ public interface GenomicSegmentManager {
 	
 	public void remove(String id) throws Exception;
 	
-	public GenomicSegment create(GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception;
+	public GenomicSegment create(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception;
 	
-	public void update(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment, HttpServletRequest request) throws Exception;
+	public void update(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment, HttpServletRequest request) throws Exception;
 }

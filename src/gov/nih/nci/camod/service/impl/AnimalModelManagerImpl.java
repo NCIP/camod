@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.48 2005-10-27 17:15:22 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.49 2005-11-02 19:02:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2005/10/27 17:15:22  schroedn
+ * Updated addAssociatedExpression for all Genetic Descriptions
+ *
  * Revision 1.45  2005/10/26 20:42:52  schroedn
  * merged changes, Added AssocExpression to EngineeredTransgene submission page
  *
@@ -137,7 +140,14 @@ import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -587,7 +597,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.info("<AnimalModelManagerImpl> Entering addGeneDelivery");
 
-        GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance().create(inGeneDeliveryData);
+        GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance().create(inAnimalModel, inGeneDeliveryData);
 
         inAnimalModel.addGeneDelivery(theGeneDelivery);
         save(inAnimalModel);
@@ -607,7 +617,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inChemicalDrugData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inChemicalDrugData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -626,7 +636,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inEnvironmentalFactorData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inEnvironmentalFactorData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -644,7 +654,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTherapy(AnimalModel inAnimalModel, RadiationData inRadiationData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inRadiationData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inRadiationData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -662,7 +672,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inViralTreatmentData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inViralTreatmentData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -680,7 +690,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTherapy(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inGrowthFactorData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inGrowthFactorData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -698,7 +708,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTherapy(AnimalModel inAnimalModel, HormoneData inHormoneData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inHormoneData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inHormoneData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -716,7 +726,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTherapy(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inNutritionalFactorData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inNutritionalFactorData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -734,7 +744,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public void addTherapy(AnimalModel inAnimalModel, SurgeryData inSurgeryData) throws Exception {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inSurgeryData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inSurgeryData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
         log.trace("Exiting AnimalModelManagerImpl.addTherapy");
@@ -787,7 +797,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering addGeneticDescription (inducedMutation)");
 
-        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create(inInducedMutationData);
+        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create(inAnimalModel, inInducedMutationData);
         inAnimalModel.addEngineeredGene(theInducedMutation);
         save(inAnimalModel);
 
@@ -803,7 +813,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Entering addGeneticDescription (TargetedModification)");
 
         TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(
-                inTargetedModificationData, request);
+        		inAnimalModel, inTargetedModificationData, request);
         // System.out.println(theGene.getName() );
 
         inAnimalModel.addEngineeredGene(theTargetedModification);
@@ -817,7 +827,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering addGeneticDescription (GenomicSegment)");
 
-        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inGenomicSegmentData,
+        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inAnimalModel, inGenomicSegmentData,
                 request);
         // System.out.println(theGenomicSegment.getName() );
 
@@ -869,7 +879,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
 
-        Therapy theTherapy = TherapyManagerSingleton.instance().create(inTherapyData);
+        Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inTherapyData);
         inAnimalModel.addTherapy(theTherapy);
         save(inAnimalModel);
 
@@ -944,4 +954,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
+  
+ 
 }

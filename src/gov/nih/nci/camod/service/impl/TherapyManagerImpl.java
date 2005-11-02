@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.12 2005-10-26 14:10:48 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.13 2005-11-02 19:02:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/10/26 14:10:48  georgeda
+ * Added other administrative route to therapy
+ *
  * Revision 1.11  2005/10/25 19:42:15  georgeda
  * Finished Therapy page
  *
@@ -28,10 +31,15 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.*;
 import gov.nih.nci.camod.webapp.form.cibase.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 /**
  * Implementation of the TherapyManager interface. Creates/saves/updates the
@@ -47,12 +55,12 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(SurgeryData inSurgeryData) {
+    public Therapy create(AnimalModel inAnimalModel, SurgeryData inSurgeryData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateName(inSurgeryData, theTherapy, "Other");
+        populateName(inAnimalModel, inSurgeryData, theTherapy, "Other");
         populateTreatment(inSurgeryData, theTherapy);
         populateAgeGender(inSurgeryData, theTherapy);
 
@@ -71,11 +79,11 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(SurgeryData inSurgeryData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, SurgeryData inSurgeryData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
-        populateName(inSurgeryData, inTherapy, "Other");
+        populateName(inAnimalModel, inSurgeryData, inTherapy, "Other");
         populateTreatment(inSurgeryData, inTherapy);
         populateAgeGender(inSurgeryData, inTherapy);
 
@@ -90,12 +98,12 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(NutritionalFactorData inNutritionalFactorData) {
+    public Therapy create(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateName(inNutritionalFactorData, theTherapy, "Nutrition");
+        populateName(inAnimalModel, inNutritionalFactorData, theTherapy, "Nutrition");
         populateTreatment(inNutritionalFactorData, theTherapy);
         populateAgeGender(inNutritionalFactorData, theTherapy);
         populateDose(inNutritionalFactorData, theTherapy);
@@ -115,11 +123,11 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(NutritionalFactorData inNutritionalFactorData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
-        populateName(inNutritionalFactorData, inTherapy, "Nutrition");
+        populateName(inAnimalModel, inNutritionalFactorData, inTherapy, "Nutrition");
         populateTreatment(inNutritionalFactorData, inTherapy);
         populateAgeGender(inNutritionalFactorData, inTherapy);
         populateDose(inNutritionalFactorData, inTherapy);
@@ -135,16 +143,16 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(HormoneData inHormoneData) {
+    public Therapy create(AnimalModel inAnimalModel, HormoneData inHormoneData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateName(inHormoneData, theTherapy, "Hormone");
+        populateName(inAnimalModel, inHormoneData, theTherapy, "Hormone");
         populateAgeGender(inHormoneData, theTherapy);
         populateTreatment(inHormoneData, theTherapy);
         populateDose(inHormoneData, theTherapy);
-        populateAdministration(inHormoneData, theTherapy);
+        populateAdministration(inAnimalModel, inHormoneData, theTherapy);
 
         return theTherapy;
     }
@@ -161,15 +169,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(HormoneData inHormoneData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, HormoneData inHormoneData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
-        populateName(inHormoneData, inTherapy, "Hormone");
+        populateName(inAnimalModel, inHormoneData, inTherapy, "Hormone");
         populateAgeGender(inHormoneData, inTherapy);
         populateTreatment(inHormoneData, inTherapy);
         populateDose(inHormoneData, inTherapy);
-        populateAdministration(inHormoneData, inTherapy);
+        populateAdministration(inAnimalModel, inHormoneData, inTherapy);
 
         save(inTherapy);
     }
@@ -182,16 +190,16 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(GrowthFactorData inGrowthFactorData) {
+    public Therapy create(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateName(inGrowthFactorData, theTherapy, "Growth Factor");
+        populateName(inAnimalModel, inGrowthFactorData, theTherapy, "Growth Factor");
         populateAgeGender(inGrowthFactorData, theTherapy);
         populateTreatment(inGrowthFactorData, theTherapy);
         populateDose(inGrowthFactorData, theTherapy);
-        populateAdministration(inGrowthFactorData, theTherapy);
+        populateAdministration(inAnimalModel, inGrowthFactorData, theTherapy);
 
         return theTherapy;
     }
@@ -208,15 +216,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(GrowthFactorData inGrowthFactorData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
-        populateName(inGrowthFactorData, inTherapy, "Growth Factor");
+        populateName(inAnimalModel, inGrowthFactorData, inTherapy, "Growth Factor");
         populateAgeGender(inGrowthFactorData, inTherapy);
         populateTreatment(inGrowthFactorData, inTherapy);
         populateDose(inGrowthFactorData, inTherapy);
-        populateAdministration(inGrowthFactorData, inTherapy);
+        populateAdministration(inAnimalModel, inGrowthFactorData, inTherapy);
 
         save(inTherapy);
     }
@@ -229,16 +237,16 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(ViralTreatmentData inViralTreatmentData) {
+    public Therapy create(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
-        populateName(inViralTreatmentData, theTherapy, "Viral");
+        populateName(inAnimalModel, inViralTreatmentData, theTherapy, "Viral");
         populateAgeGender(inViralTreatmentData, theTherapy);
         populateTreatment(inViralTreatmentData, theTherapy);
         populateDose(inViralTreatmentData, theTherapy);
-        populateAdministration(inViralTreatmentData, theTherapy);
+        populateAdministration(inAnimalModel, inViralTreatmentData, theTherapy);
 
         return theTherapy;
     }
@@ -255,15 +263,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
-        populateName(inViralTreatmentData, inTherapy, "Viral");
+        populateName(inAnimalModel, inViralTreatmentData, inTherapy, "Viral");
         populateAgeGender(inViralTreatmentData, inTherapy);
         populateTreatment(inViralTreatmentData, inTherapy);
         populateDose(inViralTreatmentData, inTherapy);
-        populateAdministration(inViralTreatmentData, inTherapy);
+        populateAdministration(inAnimalModel, inViralTreatmentData, inTherapy);
 
         save(inTherapy);
     }
@@ -276,17 +284,17 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(RadiationData inRadiationData) {
+    public Therapy create(AnimalModel inAnimalModel, RadiationData inRadiationData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
 
-        populateName(inRadiationData, theTherapy, "Radiation");
+        populateName(inAnimalModel, inRadiationData, theTherapy, "Radiation");
         populateAgeGender(inRadiationData, theTherapy);
         populateTreatment(inRadiationData, theTherapy);
         populateDose(inRadiationData, theTherapy);
-        populateAdministration(inRadiationData, theTherapy);
+        populateAdministration(inAnimalModel, inRadiationData, theTherapy);
 
         return theTherapy;
     }
@@ -303,15 +311,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(RadiationData inRadiationData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, RadiationData inRadiationData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
-        populateName(inRadiationData, inTherapy, "Radiation");
+        populateName(inAnimalModel, inRadiationData, inTherapy, "Radiation");
         populateAgeGender(inRadiationData, inTherapy);
         populateTreatment(inRadiationData, inTherapy);
         populateDose(inRadiationData, inTherapy);
-        populateAdministration(inRadiationData, inTherapy);
+        populateAdministration(inAnimalModel, inRadiationData, inTherapy);
 
         save(inTherapy);
     }
@@ -324,17 +332,17 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(EnvironmentalFactorData inEnvironmentalFactorData) {
+    public Therapy create(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
 
-        populateName(inEnvironmentalFactorData, theTherapy, "Environment");
+        populateName(inAnimalModel, inEnvironmentalFactorData, theTherapy, "Environment");
         populateAgeGender(inEnvironmentalFactorData, theTherapy);
         populateTreatment(inEnvironmentalFactorData, theTherapy);
         populateDose(inEnvironmentalFactorData, theTherapy);
-        populateAdministration(inEnvironmentalFactorData, theTherapy);
+        populateAdministration(inAnimalModel, inEnvironmentalFactorData, theTherapy);
 
         return theTherapy;
     }
@@ -351,15 +359,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
 
-        populateName(inEnvironmentalFactorData, inTherapy, "Environment");
+        populateName(inAnimalModel, inEnvironmentalFactorData, inTherapy, "Environment");
         populateAgeGender(inEnvironmentalFactorData, inTherapy);
         populateTreatment(inEnvironmentalFactorData, inTherapy);
         populateDose(inEnvironmentalFactorData, inTherapy);
-        populateAdministration(inEnvironmentalFactorData, inTherapy);
+        populateAdministration(inAnimalModel, inEnvironmentalFactorData, inTherapy);
 
         save(inTherapy);
     }
@@ -372,17 +380,17 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(ChemicalDrugData inChemicalDrugData) {
+    public Therapy create(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData) {
 
         log.debug("In TherapyManagerImpl.create");
 
         Therapy theTherapy = new Therapy();
 
-        populateName(inChemicalDrugData, theTherapy, "Chemical / Drug");
+        populateName(inAnimalModel, inChemicalDrugData, theTherapy, "Chemical / Drug");
         populateAgeGender(inChemicalDrugData, theTherapy);
         populateTreatment(inChemicalDrugData, theTherapy);
         populateDose(inChemicalDrugData, theTherapy);
-        populateAdministration(inChemicalDrugData, theTherapy);
+        populateAdministration(inAnimalModel, inChemicalDrugData, theTherapy);
 
         populateChemicalDrug(inChemicalDrugData, theTherapy);
 
@@ -401,15 +409,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
-        populateName(inChemicalDrugData, inTherapy, "Chemical / Drug");
+        populateName(inAnimalModel, inChemicalDrugData, inTherapy, "Chemical / Drug");
         populateAgeGender(inChemicalDrugData, inTherapy);
         populateTreatment(inChemicalDrugData, inTherapy);
         populateDose(inChemicalDrugData, inTherapy);
-        populateAdministration(inChemicalDrugData, inTherapy);
+        populateAdministration(inAnimalModel, inChemicalDrugData, inTherapy);
 
         populateChemicalDrug(inChemicalDrugData, inTherapy);
         save(inTherapy);
@@ -520,7 +528,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         theTreatment.setRegimen(inTreatment.getRegimen());
     }
 
-    private void populateAdministration(AdministrationData inAdministrationData, Therapy theTherapy) {
+    private void populateAdministration(AnimalModel inAnimalModel, AdministrationData inAdministrationData, Therapy theTherapy) {
 
         log.debug("In TherapyManagerImpl.populateAdministration");
 
@@ -535,13 +543,48 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         // anytime admin route is other
         if (inAdministrationData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION)) {
             System.out.println("admin route equals other");
-            // TODO: Send an email
-            System.out.println("SENDING EMAIL STRAIN");
-
+            
             theTreatment.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-            theTreatment.setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
-            // anytime admin route is not other, set uncontrolled vocab to null
-            // (covers editing)
+            theTreatment.setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());            
+
+            log.trace("Sending Notification eMail - new Administrative Route added");
+            
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");            
+
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
+            }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "AdministrativeRoute");
+            values.put("value", inAdministrationData.getOtherAdministrativeRoute());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }
+
+    
+                
+
+
+        // anytime admin route is not other, set uncontrolled vocab to null (covers editing)
         } else {
             System.out.println("admin route not other");
 
@@ -569,7 +612,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         theTreatment.setDosage(inDoseData.getDosage() + " " + inDoseData.getDoseUnit());
     }
 
-    private void populateName(NameData inNameData, Therapy theTherapy, String inType) {
+    private void populateName(AnimalModel inAnimalModel, NameData inNameData, Therapy theTherapy, String inType) {
 
         log.debug("In TherapyManagerImpl.populateName");
 
@@ -595,6 +638,38 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
             // TODO: Send an email
             System.out.println("SENDING EMAIL STRAIN");
+
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
+            }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "TherapyName");
+            values.put("value", inNameData.getOtherName());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }            
+            
             theAgent.setName(Constants.Dropdowns.OTHER_OPTION);
             theAgent.setNameUnctrlVocab(inNameData.getOtherName());
         }
@@ -617,7 +692,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * 
      * @returns a therapy
      */
-    public Therapy create(TherapyData inTherapyData) throws Exception {
+    public Therapy create(AnimalModel inAnimaModel, TherapyData inTherapyData) throws Exception {
 
         log.debug("In TherapyManagerImpl.create");
 
@@ -626,19 +701,19 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         populateAgeGender(inTherapyData, theTherapy);
         populateDose(inTherapyData, theTherapy);
         populateTherapy(inTherapyData, theTherapy);
-        populateAdministration(inTherapyData, theTherapy);
+        populateAdministration(inAnimaModel, inTherapyData, theTherapy);
 
         return theTherapy;
     }
 
-    public void update(TherapyData inTherapyData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, TherapyData inTherapyData, Therapy inTherapy) throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
         populateAgeGender(inTherapyData, inTherapy);
         populateDose(inTherapyData, inTherapy);
         populateTherapy(inTherapyData, inTherapy);
-        populateAdministration(inTherapyData, inTherapy);
+        populateAdministration(inAnimalModel, inTherapyData, inTherapy);
         save(inTherapy);
 
     }

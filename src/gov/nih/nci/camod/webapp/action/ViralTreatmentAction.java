@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.9 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: ViralTreatmentAction.java,v 1.10 2005-11-02 19:02:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.8  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -49,6 +52,9 @@ public class ViralTreatmentAction extends BaseAction {
 		}
 
 		System.out.println("<ViralTreatmentAction edit> Entering... ");
+		
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");		
 
 		// Grab the current Therapy we are working with related to this
 		// animalModel
@@ -67,6 +73,10 @@ public class ViralTreatmentAction extends BaseAction {
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
+	        // retrieve animal model by it's id	        
+	        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID); 			
+			
             if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
 
@@ -77,7 +87,7 @@ public class ViralTreatmentAction extends BaseAction {
 			} else {
 
 				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(viralTreatmentForm, theTherapy);
+				therapyManager.update(theAnimalModel, viralTreatmentForm, theTherapy);
 
 				// Add a message to be displayed in submitOverview.jsp saying
 				// you've

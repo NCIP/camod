@@ -6,15 +6,23 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.GenomicSegment;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.domain.SegmentType;
 import gov.nih.nci.camod.service.GenomicSegmentManager;
+import gov.nih.nci.camod.util.FtpUtil;
+import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
 import gov.nih.nci.camod.webapp.form.ImageForm;
 
 import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,32 +50,32 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         super.remove(id, GenomicSegment.class);
     }
 
-    public GenomicSegment create(GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception {
+    public GenomicSegment create(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception {
 
         log.trace("Entering GenomicSegmentManagerImpl.create");
 
         GenomicSegment inGenomicSegment = new GenomicSegment();
-        populateGenomicSegment(inGenomicSegmentData, inGenomicSegment, request);
+        populateGenomicSegment(inAnimalModel, inGenomicSegmentData, inGenomicSegment, request);
 
         log.trace("Exiting GenomicSegmentManagerImpl.create");
 
         return inGenomicSegment;
     }
 
-    public void update(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment,
+    public void update(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment,
             HttpServletRequest request) throws Exception {
 
         log.trace("Entering GenomicSegmentManagerImpl.update");
         log.debug("Updating GenomicSegmentForm: " + inGenomicSegment.getId());
 
         // Populate w/ the new values and save
-        populateGenomicSegment(inGenomicSegmentData, inGenomicSegment, request);
+        populateGenomicSegment(inAnimalModel, inGenomicSegmentData, inGenomicSegment, request);
         save(inGenomicSegment);
 
         log.trace("Exiting GenomicSegmentManagerImpl.update");
     }
 
-    private void populateGenomicSegment(GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment,
+    private void populateGenomicSegment(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment,
             HttpServletRequest request) throws Exception {
 
         log.trace("Entering populateGenomicSegment");
@@ -94,6 +102,37 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         // TODO: Send Email
         if (inGenomicSegmentData.getOtherSegmentName() != null) {
             inSegmentType.setNameUnctrlVocab(inGenomicSegmentData.getOtherSegmentName());
+            
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
+            }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "SegmentName");
+            values.put("value", inGenomicSegmentData.getOtherSegmentName());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }            
         }
 
         inGenomicSegment.addSegmentType(inSegmentType);

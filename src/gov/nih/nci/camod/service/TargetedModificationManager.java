@@ -6,6 +6,7 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 
@@ -22,7 +23,7 @@ public interface TargetedModificationManager {
 	
 	public void remove(String id) throws Exception;
 	
-	public TargetedModification create(TargetedModificationData inTargetedModificationForm, HttpServletRequest request) throws Exception;
+	public TargetedModification create(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationForm, HttpServletRequest request) throws Exception;
 	
-	public void update(TargetedModificationData inTargetedModificationData, TargetedModification theTargetedModification, HttpServletRequest request) throws Exception;	
+	public void update(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData, TargetedModification theTargetedModification, HttpServletRequest request) throws Exception;	
 }

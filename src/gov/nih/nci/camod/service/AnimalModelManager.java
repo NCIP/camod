@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.29 2005-10-27 17:16:25 schroedn Exp $
+ * $Id: AnimalModelManager.java,v 1.30 2005-11-02 19:03:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2005/10/27 17:16:25  schroedn
+ * merged changes, modded addAssociatedExpression
+ *
  * Revision 1.28  2005/10/27 15:29:59  georgeda
  * Cleanup
  *
@@ -63,6 +66,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2005/10/27 17:16:25  schroedn
+ * merged changes, modded addAssociatedExpression
+ *
  * Revision 1.28  2005/10/27 15:29:59  georgeda
  * Cleanup
  *
@@ -213,4 +219,5 @@ public interface AnimalModelManager {
     public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene, AssociatedExpressionData inAssociatedExpressionData ) throws Exception;
 
     public void addPublication( AnimalModel inAnimalModel, PublicationData inPublicationData) throws Exception;
+   
 }

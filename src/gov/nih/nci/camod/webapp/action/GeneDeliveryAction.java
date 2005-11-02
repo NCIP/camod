@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.12 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: GeneDeliveryAction.java,v 1.13 2005-11-02 19:02:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.11  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -50,6 +53,9 @@ public final class GeneDeliveryAction extends BaseAction {
 
         // Grab the current therapy
         String aTherapyID = request.getParameter("aTherapyID");
+        
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");        
 
         log.info("<GeneDeliveryAction edit> following Characteristics:" + "\n\t ViralVector: "
                 + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
@@ -73,9 +79,12 @@ public final class GeneDeliveryAction extends BaseAction {
                 saveErrors(request, msg);
 
             } else {
+    	        // retrieve animal model by it's id	        
+    	        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+    	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);             	
 
                 GeneDelivery theGeneDelivery = theGeneDeliveryManager.get(aTherapyID);
-                theGeneDeliveryManager.update(geneDeliveryForm, theGeneDelivery);
+                theGeneDeliveryManager.update(theAnimalModel, geneDeliveryForm, theGeneDelivery);
 
                 // Add a message to be displayed in submitOverview.jsp saying
                 // you've

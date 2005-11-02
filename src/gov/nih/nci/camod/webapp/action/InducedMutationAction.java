@@ -35,6 +35,9 @@ public final class InducedMutationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering edit");
+        
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");        
 
         // Grab the current SpontaneousMutation we are working with related to
         // this
@@ -43,6 +46,7 @@ public final class InducedMutationAction extends BaseAction {
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
         try {
+        	
             InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
             InducedMutationManager inducedMutationManager = (InducedMutationManager) getBean("inducedMutationManager");
 
@@ -56,9 +60,12 @@ public final class InducedMutationAction extends BaseAction {
                 saveErrors(request, msg);
 
             } else {
+    	        // retrieve animal model by it's id	        
+    	        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+    	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);             	
 
                 InducedMutation theInducedMutation = inducedMutationManager.get(aInducedMutationID);
-                inducedMutationManager.update(inducedMutationForm, theInducedMutation);
+                inducedMutationManager.update(theAnimalModel, inducedMutationForm, theInducedMutation);
 
                 log.info("InducedMutation edited");
 

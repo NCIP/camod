@@ -1,7 +1,10 @@
 /**
- * $Id: HormoneAction.java,v 1.6 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: HormoneAction.java,v 1.7 2005-11-02 19:02:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.5  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -50,6 +53,9 @@ public class HormoneAction extends BaseAction {
 		// Grab the current Therapy we are working with related to this
 		// animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
+		
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");		
 
 		HormoneForm hormoneForm = (HormoneForm) form;
 
@@ -71,9 +77,12 @@ public class HormoneAction extends BaseAction {
 				saveErrors(request, msg);
 
 			} else {
+		        // retrieve animal model by it's id	        
+		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);				
 				
 				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(hormoneForm, theTherapy);
+				therapyManager.update(theAnimalModel, hormoneForm, theTherapy);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("hormone.edit.successful"));

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorAction.java,v 1.14 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: EnvironmentalFactorAction.java,v 1.15 2005-11-02 19:02:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.13  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -93,6 +96,9 @@ public final class EnvironmentalFactorAction extends BaseAction {
 		// Grab the current Therapy we are working with related to this
 		// animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
+		
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");		
 
 		// Create a form to edit
 		EnvironmentalFactorForm envForm = (EnvironmentalFactorForm) form;
@@ -108,7 +114,6 @@ public final class EnvironmentalFactorAction extends BaseAction {
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
-
             if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
 
@@ -117,9 +122,12 @@ public final class EnvironmentalFactorAction extends BaseAction {
 				saveErrors(request, msg);
 
 			} else {
+		        // retrieve animal model by it's id	        
+		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);				
 
 				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(envForm, theTherapy);
+				therapyManager.update(theAnimalModel, envForm, theTherapy);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("environmentalfactor.edit.successful"));

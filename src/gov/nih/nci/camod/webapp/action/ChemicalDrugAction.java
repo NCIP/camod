@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.11 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: ChemicalDrugAction.java,v 1.12 2005-11-02 19:02:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.10  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -49,9 +52,11 @@ public class ChemicalDrugAction extends BaseAction {
 
 		System.out.println("<ChemicalDrugAction edit> Entering... ");
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
+		// Grab the current Therapy we are working with related to this animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
+
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");
 
 		ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
 
@@ -65,8 +70,7 @@ public class ChemicalDrugAction extends BaseAction {
 		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {
-
+		try {	        
             if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
 
@@ -75,9 +79,12 @@ public class ChemicalDrugAction extends BaseAction {
 				saveErrors(request, msg);
 
 			} else {
+		        // retrieve animal model by it's id	        
+		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);				
 
 				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(chemicalDrugForm, theTherapy);
+				therapyManager.update(theAnimalModel, chemicalDrugForm, theTherapy);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("chemicaldrug.edit.successful"));

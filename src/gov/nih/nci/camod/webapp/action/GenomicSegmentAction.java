@@ -41,6 +41,9 @@ public final class GenomicSegmentAction extends BaseAction {
 
 		// Grab the current modelID from the session
 		String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
+		
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");		
 
 		log.info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
 				+ genomicSegmentForm.getLocationOfIntegration() + "\n\t getOtherLocationOfIntegration: "
@@ -58,6 +61,7 @@ public final class GenomicSegmentAction extends BaseAction {
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
+			
 			GenomicSegmentManager genomicSegmentManager = (GenomicSegmentManager) getBean("genomicSegmentManager");
 
             if ("Delete".equals(theAction)) {
@@ -71,13 +75,17 @@ public final class GenomicSegmentAction extends BaseAction {
 				saveErrors(request, msg);
 
 			} else {
-				log.info("GenomicSegment edit");
+				log.info("GenomicSegment edit");				
+				
+		        // retrieve animal model by it's id	        
+		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);
 
 				// retrieve model and update w/ new values
 
 				GenomicSegment theGenomicSegment = genomicSegmentManager.get(aGenomicSegmentID);
 
-				genomicSegmentManager.update(genomicSegmentForm, theGenomicSegment, request);
+				genomicSegmentManager.update(theAnimalModel, genomicSegmentForm, theGenomicSegment, request);
 
 				// Add a message to be displayed in submitOverview.jsp saying
 				// you've

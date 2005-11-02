@@ -6,6 +6,7 @@
  */
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 
@@ -20,8 +21,8 @@ public interface InducedMutationManager {
 	
 	public void remove(String id) throws Exception;
 	
-	public InducedMutation create(InducedMutationData inInducedMutationData) throws Exception;
+	public InducedMutation create(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception;
 	
-	public void update(InducedMutationData inInducedMutationData, InducedMutation inInducedMutation) throws Exception;
+	public void update(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData, InducedMutation inInducedMutation) throws Exception;
 }
 

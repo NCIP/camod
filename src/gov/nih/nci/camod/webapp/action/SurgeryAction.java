@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.6 2005-10-28 14:50:55 georgeda Exp $
+ * $Id: SurgeryAction.java,v 1.7 2005-11-02 19:02:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/28 14:50:55  georgeda
+ * Fixed null pointer problem
+ *
  * Revision 1.5  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -44,6 +47,9 @@ public class SurgeryAction extends BaseAction {
 		}
 
 		System.out.println("<SurgeryAction edit> Entering... ");
+		
+		//	Grab the current modelID we are working with
+        String modelID = request.getParameter("aModelID");		
 
 		// Grab the current Therapy we are working with related to this
 		// animalModel
@@ -60,6 +66,9 @@ public class SurgeryAction extends BaseAction {
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
+	        // retrieve animal model by it's id	        
+	        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);			
 
             if ("Delete".equals(theAction)) {
 				therapyManager.remove(aTherapyID);
@@ -71,7 +80,7 @@ public class SurgeryAction extends BaseAction {
 			} else {
 
 				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(surgeryForm, theTherapy);
+				therapyManager.update(theAnimalModel, surgeryForm, theTherapy);
 
 				// Add a message to be displayed in submitOverview.jsp saying
 				// you've

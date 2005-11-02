@@ -42,35 +42,35 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         super.remove(id, TargetedModification.class);
     }
 
-    public TargetedModification create(TargetedModificationData inTargetedModificationData, HttpServletRequest request)
+    public TargetedModification create(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData, HttpServletRequest request)
             throws Exception {
 
         log.trace("Entering TargetedModificationManagerImpl.create");
 
         TargetedModification theTargetedModification = new TargetedModification();
 
-        populateTargetedModification(inTargetedModificationData, theTargetedModification, request);
+        populateTargetedModification(inAnimalModel, inTargetedModificationData, theTargetedModification, request);
 
         log.trace("Exiting TargetedModificationManagerImpl.create");
 
         return theTargetedModification;
     }
 
-    public void update(TargetedModificationData inTargetedModificationData,
+    public void update(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData,
             TargetedModification theTargetedModification, HttpServletRequest request) throws Exception {
 
         log.trace("Entering TargetedModificationManagerImpl.update");
         log.debug("Updating TargetedModificationForm: " + theTargetedModification.getId());
 
         // Populate w/ the new values and save
-        populateTargetedModification(inTargetedModificationData, theTargetedModification, request);
+        populateTargetedModification(inAnimalModel, inTargetedModificationData, theTargetedModification, request);
 
         save(theTargetedModification);
 
         log.trace("Exiting TargetedModificationManagerImpl.update");
     }
 
-    private void populateTargetedModification(TargetedModificationData inTargetedModificationData,
+    private void populateTargetedModification(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData,
             TargetedModification theTargetedModification, HttpServletRequest request) throws Exception {
 
         log.trace("Entering populateTargetedModification");
@@ -94,41 +94,35 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
                 theTargetedModification.getModificationTypeCollection().clear();
 
                 log.trace("Sending Notification eMail - new Targeted Modification added");
+
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
                 // Iterate through all the reciepts in the config file
-                String recipients = theBundle.getString(Constants.EmailMessage.RECIPIENTS);
+                String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
                 StringTokenizer st = new StringTokenizer(recipients, ",");
                 String inRecipients[] = new String[st.countTokens()];
-
-                for (int i = 0; i < inRecipients.length; i++)
+                for (int i = 0; i < inRecipients.length; i++) {
                     inRecipients[i] = st.nextToken();
+                }
 
-                String inSubject = theBundle.getString(Constants.EmailMessage.SUBJECT);
-                String inMessage = theBundle.getString(Constants.EmailMessage.MESSAGE)
-                        + " Targeted Modification added ( " + inTargetedModificationData.getOtherModificationType()
-                        + " ) and is awaiting your approval.";
-                String inFrom = theBundle.getString(Constants.EmailMessage.FROM);
-                // theBundle.getString(Constants.EmailMessage.SENDER);
+                String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+                String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+                // gather message keys and variable values to build the e-mail
+                // content with
+                String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+                Map values = new TreeMap();
+                values.put("type", "TargetedModification");
+                values.put("value", inTargetedModificationData.getOtherModificationType());
+                values.put("submitter", inAnimalModel.getSubmitter());
+                values.put("model", inAnimalModel.getModelDescriptor());
+                values.put("modelstate", inAnimalModel.getState());
 
                 // Send the email
                 try {
-                    log.trace("Sending Notification eMail - new Targeted Modification added");
-
-                    // gather message keys and variable values to build the
-                    // e-mail content with
-                    String[] messageKeys = { Constants.Admin.INDUCED_MUTATION_AGENT_ADDED };
-                    TreeMap values = new TreeMap();
-                    values.put(Constants.Admin.TARGETED_MODIFICATION_NAME, inTargetedModificationData.getName());
-                    values.put(Constants.Admin.TARGETED_MODIFICATION_TYPE, inTargetedModificationData
-                            .getOtherModificationType());
-
-                    // Send the email
-                    MailUtil.sendMail(inRecipients, inSubject, inMessage, inFrom, messageKeys, values);
-                    log.trace("Notification eMail sent");
+                    MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
                 } catch (Exception e) {
-                    log.trace("Caught exception " + e);
-                    // System.out.println("Caught exception" + e);
+                    log.error("Caught exception sending mail: ", e);
                     e.printStackTrace();
                 }
 
