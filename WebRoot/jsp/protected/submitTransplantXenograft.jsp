@@ -117,16 +117,6 @@
 		</td>
 	</tr>	
 	
-        <tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor harvest date after transplant:</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.HARVEST_DATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">		
-			<html:text styleClass="formFieldUnSized" property="harvestDate"  size="15" />&nbsp;(Use date format: dd/MM/yyyy)		
-		</td>
-	</tr>
-	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Modification:</label>

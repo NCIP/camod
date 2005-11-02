@@ -143,15 +143,7 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Additional Features:</label>
-		<camod:cshelp mapId="targeted_modification_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="comments" size="10" />
-		</td>
-	</tr>
+
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -163,8 +155,17 @@
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />
 		</td>
-	</tr>		
+	</tr>
 	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Comment:</label>
+		<camod:cshelp mapId="targeted_modification_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+		    <html:textarea styleClass="formFieldSized" property="comments" rows="4" cols="32" />
+		</td>
+	</tr>
 	<tr>
 		<td class="formTitle" height="20" colspan="6">&nbsp;</td>				
 	</tr>

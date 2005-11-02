@@ -78,7 +78,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Age:</label></td>
+		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" />
 			<label for="field1">&nbsp;Units&nbsp;</label>

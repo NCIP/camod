@@ -162,7 +162,7 @@ public class AnimalModelPopulateAction extends BaseAction {
         ModelCharacteristicsForm modelChar = (ModelCharacteristicsForm) form;
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, modelChar.getScientificName());
-
+        modelChar.setEthinicityStrain("");
         String page = request.getParameter("page");
 
         if (page.equals("modelChar"))

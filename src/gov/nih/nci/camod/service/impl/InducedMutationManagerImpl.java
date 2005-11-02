@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.10 2005-10-31 18:55:51 georgeda Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.11 2005-11-02 16:33:48 georgeda Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/10/31 18:55:51  georgeda
+ * More validation changes
+ *
  * Revision 1.9  2005/10/31 18:00:24  georgeda
  * Validation changes
  *
@@ -187,6 +190,8 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             inMutationIdentifier = inInducedMutation.getMutationIdentifier();
         else
             inMutationIdentifier = new MutationIdentifier();
+
+        inInducedMutation.setComments(inInducedMutationData.getComments());
 
         inMutationIdentifier.setNumberMGI(Long.valueOf(inInducedMutationData.getNumberMGI().trim()));
         inInducedMutation.setMutationIdentifier(inMutationIdentifier);

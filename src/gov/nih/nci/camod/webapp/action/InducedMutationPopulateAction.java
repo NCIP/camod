@@ -56,6 +56,10 @@ public class InducedMutationPopulateAction extends BaseAction {
                 inducedMutationForm.setObservation(theGeneticAlteration.getObservation());
                 inducedMutationForm.setMethodOfObservation(theGeneticAlteration.getMethodOfObservation());
             }
+            
+            if (theInducedMutation.getComments() != null) {
+                inducedMutationForm.setComments(theInducedMutation.getComments());
+            }
         }
         // setup dropdown menus
         this.dropdown(request, response);

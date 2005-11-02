@@ -105,20 +105,12 @@ public class NewDropdownUtil {
             theReturnList = getStrainsList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.GRAFTTYPEDROP)) {
-            theReturnList = getGrafttypeList(inRequest);
-        }
-
         else if (inDropdownKey.equals(Constants.Dropdowns.VIRALVECTORDROP)) {
             theReturnList = getViralVectorList(inRequest);
         }
 
         else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVEL)) {
             theReturnList = getExpressionLevelList(inRequest);
-        }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONDROP)) {
-            theReturnList = getInducedMutationList(inRequest);
         }
 
         // Environmental Factors - Carciogenic Interventions
@@ -385,43 +377,6 @@ public class NewDropdownUtil {
     }
 
     /**
-     * Returns a list of all Graft Types
-     * 
-     * @return graftList
-     * @throws Exception
-     */
-    private static List getGrafttypeList(HttpServletRequest inRequest) throws Exception {
-
-        // Get values for dropdown lists for Species, Strains
-        XenograftManager xenograftManager = (XenograftManager) getContext(inRequest).getBean("xenograftManager");
-
-        List xenograftList = null;
-
-        xenograftList = xenograftManager.getAll();
-
-        List graftList = new ArrayList();
-        Xenograft tmp;
-
-        if (xenograftList != null) {
-            for (int i = 0; i < xenograftList.size(); i++) {
-                tmp = (Xenograft) xenograftList.get(i);
-
-                if (tmp.getName() != null) {
-                    // if the speciesName is not already in the List, add it
-                    // (only get unique names)
-                    if (!graftList.contains(tmp.getName()))
-                        graftList.add(tmp.getName());
-                }
-            }
-        }
-
-        Collections.sort(graftList);
-        addOther(graftList);
-
-        return graftList;
-    }
-
-    /**
      * Returns a list of all Administrative Routes
      * 
      * @return adminList
@@ -544,41 +499,6 @@ public class NewDropdownUtil {
         List inducedMutationList = QueryManagerSingleton.instance().getQueryOnlyInducedMutationAgents();
         addOther(inducedMutationList);
         return inducedMutationList;
-    }
-
-    /**
-     * Returns a list of all induced mutations
-     * 
-     * @return graftList
-     */
-    private static List getInducedMutationList(HttpServletRequest inRequest) throws Exception {
-
-        // Get values for dropdown lists for Species, Strains
-        InducedMutationManager inducedMutationManager = (InducedMutationManager) getContext(inRequest).getBean(
-                "inducedMutationManager");
-
-        List inducedMutationList = inducedMutationManager.getAll();
-
-        List mutationList = new ArrayList();
-        InducedMutation tmp;
-
-        if (inducedMutationList != null) {
-            for (int i = 0; i < inducedMutationList.size(); i++) {
-                tmp = (InducedMutation) inducedMutationList.get(i);
-
-                if (tmp.getName() != null) {
-                    // if the speciesName is not already in the List, add it
-                    // (only get unique names)
-                    if (!mutationList.contains(tmp.getName()))
-                        mutationList.add(tmp.getName());
-                }
-            }
-        }
-
-        Collections.sort(mutationList);
-        addOther(mutationList);
-
-        return mutationList;
     }
 
     /**

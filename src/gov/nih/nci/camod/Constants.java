@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.61 2005-10-28 12:47:11 georgeda Exp $
+ * $Id: Constants.java,v 1.62 2005-11-02 16:33:41 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.61  2005/10/28 12:47:11  georgeda
+ * Action constant
+ *
  * Revision 1.60  2005/10/27 18:31:50  georgeda
  * New dropdown options
  *
@@ -274,11 +277,11 @@ public class Constants {
 
 		public static final String VIRALVECTORDROP = "viralvectordrop.db";
 
-		public static final String GRAFTTYPEDROP = "grafttypedrop.db";
+		public static final String GRAFTTYPEDROP = "GraftTypes.txt";
 
 		public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
 
-		public static final String INDUCEDMUTATIONDROP = "inducedmutationdrop.db";
+		public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 		
 		public static final String EXPRESSIONLEVEL = "expressionlevel.db";
 

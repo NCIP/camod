@@ -38,4 +38,8 @@ public interface InducedMutationData {
 	
 	public void setNumberMGI(String numberMGI);
 
+    public String getComments();
+    
+    public void setComments(String comments);
+    
 }

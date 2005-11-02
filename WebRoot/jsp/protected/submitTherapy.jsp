@@ -189,18 +189,16 @@ function chkOtherAdminRoute() {
 			</table>
 			</center>
 		</td>
- 	</tr>			
-    <TR align="LEFT" valign="TOP">
-        <td class="formRequiredNotice" width="5">&nbsp;</td>        
-        <TD class="formLabel"><label for="field1">Toxicity Grade:</label>
-        <camod:cshelp mapId="therapy_help" key="THERAPY.TOXICITY_GRADE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-        </TD>
-		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" >												
-				<html:options name="<%= Dropdowns.TOXICITYGRADESDROP %>"/>					
-			</html:select>
+ 	</tr>
+ 	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Experiment:</label>
+		<camod:cshelp mapId="therapy_help" key="THERAPY.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
-	</tr>	
+			<td class="formField">
+					<html:textarea styleClass="formFieldSized" property="experiment" cols="60" rows="3"/>			
+			</td>
+	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label></td>
@@ -210,6 +208,28 @@ function chkOtherAdminRoute() {
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>				
 			</html:select>
+		</td>
+	</tr> 
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Administrative Route:</label>
+		<camod:cshelp key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+		<br>
+		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>
+			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute" onclick="chkOtherAdminRoute();">												
+				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
+			</html:select>			
+		</td>
+	</tr>	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
+		<td class="formField">					
+			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeRoute" disabled="true"/>			
 		</td>
 	</tr>
 	<tr>
@@ -223,7 +243,7 @@ function chkOtherAdminRoute() {
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Mouse Age:</label></td>
+		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10"/>
 			<label for="field1">&nbsp;Units&nbsp;</label>
@@ -234,37 +254,24 @@ function chkOtherAdminRoute() {
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Administrative Routes:</label>
-		<camod:cshelp key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-		<br>
-		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
-		<br>
-		<br>
-			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute" onclick="chkOtherAdminRoute();">												
-				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
-			</html:select>			
-		</td>
-	</tr>
-
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
-		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeRoute" disabled="true"/>			
-		</td>
-	</tr>
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Biomarker:</label>
-		<camod:cshelp mapId="therapy_help" key="THERAPY.BIOMARKER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<td class="formLabel"><label for="field1">Results:</label>
+		<camod:cshelp mapId="therapy_help" key="THERAPY.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" size="30" property="biomarker" />			
+					<html:textarea styleClass="formFieldSized" property="results" cols="60" rows="3"/>			
 			</td>
-	</tr>			
-	
+	</tr>
+    <tr align="LEFT" valign="TOP">
+        <td class="formRequiredNotice" width="5">&nbsp;</td>        
+        <TD class="formLabel"><label for="field1">Toxicity Grade:</label>
+        <camod:cshelp mapId="therapy_help" key="THERAPY.TOXICITY_GRADE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+        </TD>
+		<td class="formField">
+			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" >												
+				<html:options name="<%= Dropdowns.TOXICITYGRADESDROP %>"/>					
+			</html:select>
+		</td>
+	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Tumor Progression:</label>
@@ -282,27 +289,16 @@ function chkOtherAdminRoute() {
 	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Experiment:</label>
-		<camod:cshelp mapId="therapy_help" key="THERAPY.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<td class="formLabel"><label for="field1">Biomarker:</label>
+		<camod:cshelp mapId="therapy_help" key="THERAPY.BIOMARKER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="experiment" cols="60" rows="3"/>			
+				<html:text styleClass="formFieldSized" size="30" property="biomarker" />			
 			</td>
-	</tr>
-
+	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Results:</label>
-		<camod:cshelp mapId="therapy_help" key="THERAPY.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="results" cols="60" rows="3"/>			
-			</td>
-	</tr>
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comments:</label>
+		<td class="formLabel"><label for="field1">Comment:</label>
 		<camod:cshelp mapId="therapy_help" key="THERAPY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">

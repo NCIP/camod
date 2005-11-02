@@ -82,7 +82,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Administrative Routes:</label>
+		<td class="formLabel"><label for="field3">Administrative Route:</label>
 		<camod:cshelp mapId="growth_factor_help" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">

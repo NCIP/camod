@@ -138,7 +138,7 @@
         
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Comments</label>
+			<td class="formLabel"><label for="field2">Comment</label>
 			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
