@@ -10,7 +10,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
         <tr><td>&nbsp;</td></tr>
         <tr>
-			<td class="formTitleBlue" height="20" colspan="3">Drug Screening Data</td>		
+			<td class="formTitleBlue" height="20" colspan="3">Drug Screening Data <camod:cshelp mapId="drug_screening_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
         <TR>
 	        <TD class=formRequiredNotice width=5>&nbsp;</TD>

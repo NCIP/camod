@@ -57,7 +57,7 @@
 
                                               <table summary="" cellpadding="2" cellspacing="0" border="0" width="100%" class="sidebarSection">
                                                   <tr>
-                                                      <td class="sidebarTitle" height="20">LOGIN TO caMOD</td>
+                                                      <td class="sidebarTitle" height="20">LOGIN TO caMOD &nbsp <camod:cshelp mapId="login_page_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
                                                   </tr>
                                                   <tr>
                                                       <td colspan="3">

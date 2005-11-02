@@ -66,7 +66,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Register for an account</td>
+			<td class="formTitle" height="20" colspan="3">Register for an account &nbsp <camod:cshelp mapId="register_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		</tr>
 
 		<tr>

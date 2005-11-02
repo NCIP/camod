@@ -3,6 +3,8 @@
 <%@ page import='gov.nih.nci.camod.Constants' %>
 <%@ page import='java.util.List' %>
 
+<SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
+
 <TR><TD class=subMenuPrimaryTitle height=22>ADMINISTRATION</TD></TR>
 <TR><TD class=subMenuPrimaryItems>
 
@@ -25,7 +27,7 @@
 	<%
 	   }
 	%>	
-	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="helpDesk.jsp">&nbsp;&nbsp;HELP DESK</html:link>	
+	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,0)">&nbsp;&nbsp;HELP</html:link>	
 </DIV>
 
 <BR>

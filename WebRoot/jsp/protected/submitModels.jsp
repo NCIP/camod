@@ -18,7 +18,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
 
 		<tr>
-			<td class="formTitle" height="20" colspan="4">Submit and Edit Models</td>		
+			<td class="formTitle" height="20" colspan="4">Submit and Edit Models &nbsp;<camod:cshelp mapId="submit_edit_models_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 
 		<tr>
@@ -31,7 +31,7 @@
 						      To edit one of your existing models click on the name of the model.<br>
 						      To add a new model select "<html:link action="AnimalModelPopulateAction.do?method=dropdown"><font color=red>Add New Model</font></html:link>".<br>
 							<br>
-						      If you are unfamiliar with the submission process please refer to <html:link action="help">HELP</html:link>.<br>
+						      If you are unfamiliar with the submission process please refer to <html:link href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,2)">HELP</html:link>.<br>
 							<br>
 						      There are <%= size %> records returned.
 						     <br>						    

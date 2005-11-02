@@ -1,3 +1,4 @@
+<SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 <TR><TD height="100%" class=subMenu valign=top width=190>
 	  
 <!-- standard submenu begins -->
@@ -69,7 +70,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		href="help.jsp">HELP</A></TD></TR>
+		 href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,0)" >HELP</A></TD></TR>
 
 	<%
 	if( session.getAttribute("camod.loggedon.username") != null ) {

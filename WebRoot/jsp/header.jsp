@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-	<TITLE>caMOD Wireframes development</TITLE>
+	<TITLE>caMOD 2.0</TITLE>
 	<LINK href="/camod/styles/styleSheet.css" type=text/css rel=stylesheet>	
 	<SCRIPT src="/camod/scripts/script.js" type=text/javascript></SCRIPT>
 	<SCRIPT src="/camod/scripts/TipCode.js" type=text/javascript></SCRIPT>		
