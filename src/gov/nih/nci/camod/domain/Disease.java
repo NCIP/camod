@@ -36,7 +36,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
 	 * @return Returns the histopathologyCollection.
 	 */
 	public List getHistopathologyCollection() {
-            Collections.sort(histopathologyCollection);    
+             if (histopathologyCollection != null) Collections.sort(histopathologyCollection);    
             return histopathologyCollection;                 
 	}
 

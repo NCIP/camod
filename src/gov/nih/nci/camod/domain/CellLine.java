@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.9 2005-11-01 17:12:23 piparom Exp $
+ * $Id: CellLine.java,v 1.10 2005-11-02 17:24:47 piparom Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/01 17:12:23  piparom
+ * updates for collection sorts.. implementation of compareTo, and updates to equal/hashcode
+ *
  * Revision 1.8  2005/10/21 19:40:21  piparom
  * implementation of Duplicatable interface on deep-copy domain beans
  *
@@ -97,7 +100,7 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      * @return Returns the publicationCollection.
      */
     public List getPublicationCollection() {
-      Collections.sort(publicationCollection);    
+       if (publicationCollection != null) Collections.sort(publicationCollection);    
       return publicationCollection;       
     }
 

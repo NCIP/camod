@@ -45,7 +45,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      * @return Returns the metastatisCollection.
      */
     public List getMetastatisCollection() {
-        Collections.sort(metastatisCollection);    
+        if (metastatisCollection != null) Collections.sort(metastatisCollection);    
         return metastatisCollection;                 
     }
 
@@ -99,7 +99,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      * @return Returns the diseaseCollection.
      */
     public List getDiseaseCollection() {
-        Collections.sort(diseaseCollection);    
+        if (diseaseCollection != null) Collections.sort(diseaseCollection);    
         return diseaseCollection;                  
     }
 
@@ -124,7 +124,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      * @return Returns the clinicalMarkerCollection.
      */
     public List getClinicalMarkerCollection() {
-        Collections.sort(clinicalMarkerCollection);    
+        if (clinicalMarkerCollection != null) Collections.sort(clinicalMarkerCollection);    
         return clinicalMarkerCollection;              
     }
 

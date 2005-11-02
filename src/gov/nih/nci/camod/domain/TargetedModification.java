@@ -31,7 +31,7 @@ public class TargetedModification extends EngineeredGene {
      * @return Returns the modificationTypeCollection.
      */
     public List getModificationTypeCollection() {
-        Collections.sort(modificationTypeCollection);    
+        if (modificationTypeCollection != null) Collections.sort(modificationTypeCollection);    
         return modificationTypeCollection;           
     }
 

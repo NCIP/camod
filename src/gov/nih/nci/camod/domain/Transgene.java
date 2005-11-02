@@ -53,7 +53,7 @@ public class Transgene extends EngineeredGene {
      * @return Returns the regulatoryElementCollection.
      */
     public List getRegulatoryElementCollection() {
-        Collections.sort(regulatoryElementCollection);    
+        if (regulatoryElementCollection != null) Collections.sort(regulatoryElementCollection);    
         return regulatoryElementCollection;                       
     }
 

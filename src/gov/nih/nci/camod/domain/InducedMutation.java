@@ -48,7 +48,7 @@ public class InducedMutation extends EngineeredGene {
      * @return Returns the geneticAlterationCollection.
      */
     public List getEnvironmentalFactorCollection() {
-        Collections.sort(environmentalFactorCollection);    
+        if (environmentalFactorCollection != null) Collections.sort(environmentalFactorCollection);    
         return environmentalFactorCollection;         
     }
 

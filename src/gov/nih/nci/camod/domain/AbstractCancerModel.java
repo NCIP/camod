@@ -111,8 +111,8 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
     /**
      * @return Returns the publicationCollection.
      */
-    public List getPublicationCollection() {
-      Collections.sort(publicationCollection);
+    public List getPublicationCollection() {      
+      if (publicationCollection != null) Collections.sort(publicationCollection);
       return publicationCollection;          
     }
 

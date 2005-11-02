@@ -59,7 +59,7 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
      * @return Returns the expressionFeatureCollection.
      */
     public List getExpressionFeatureCollection() {
-        Collections.sort(expressionFeatureCollection);    
+         if (expressionFeatureCollection != null) Collections.sort(expressionFeatureCollection);    
         return expressionFeatureCollection;                 
     }
 
