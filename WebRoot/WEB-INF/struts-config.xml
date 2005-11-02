@@ -1326,15 +1326,11 @@
             scope="request"
             parameter="method"
 			validate="false">
-         <forward 
-    		name="next"
-    		path="/submitHistopathology.do">
-    	 </forward>						
     </action>  
     
      <action path="/AssociatedMetastasisAction"
 	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
-	        name="histopathologyForm"
+	        name="associatedMetastasisForm"
 	        scope="request"
 	        parameter="method" 	     
 	        validate="false"
@@ -1346,15 +1342,11 @@
     </action>
     
     <action path="/AssociatedMetastasisPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.HistopathologyPopulateAction"
-    		name="histopathologyForm"    		
+    		type="gov.nih.nci.camod.webapp.action.AssociatedMetastasisPopulateAction"
+    		name="associatedMetastasisForm"    		
             scope="request"
             parameter="method"
 			validate="false">
-         <forward 
-    		name="next"
-    		path="/submitAssocMetastasis.do">
-    	 </forward>					
     </action> 
     
      <action path="/ClinicalMarkerAction"
@@ -1371,12 +1363,12 @@
     </action>
     
     <action path="/ClinicalMarkerPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.HistopathologyPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.ClinicalMarkerPopulateAction"
     		name="clinicalMarkerForm"    		
             scope="request"
             parameter="method"
 			validate="false">		
-    </action>    
+    </action>       
      
    	 <!-- HormoneForm -->
    	 <action path="/HormoneAction"
