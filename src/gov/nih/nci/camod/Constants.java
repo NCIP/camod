@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.63 2005-11-02 17:15:58 schroedn Exp $
+ * $Id: Constants.java,v 1.64 2005-11-02 20:28:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.63  2005/11/02 17:15:58  schroedn
+ * Updated Image viewer, added constants and properties to camod.properties, merged code to ease changes later
+ *
  * Revision 1.62  2005/11/02 16:33:41  georgeda
  * Misc fixes
  *
@@ -278,7 +281,7 @@ public class Constants {
 
 		public static final String VIRUSDROP = "virusdrop.db";
 
-		public static final String VIRALVECTORDROP = "viralvectordrop.db";
+		public static final String VIRALVECTORDROP = "ViralVectors.txt";
 
 		public static final String GRAFTTYPEDROP = "GraftTypes.txt";
 

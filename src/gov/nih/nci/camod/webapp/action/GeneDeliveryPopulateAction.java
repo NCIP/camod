@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.12 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.13 2005-11-02 20:29:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.11  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -133,7 +136,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VIRALVECTORDROP, Constants.Dropdowns.ADD_BLANK);
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VIRALVECTORDROP, "");
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP,
 				Constants.Dropdowns.ADD_BLANK);
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
