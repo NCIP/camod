@@ -6,10 +6,7 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 
 /**

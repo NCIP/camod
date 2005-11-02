@@ -6,14 +6,11 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.List;
-import java.util.*;
-
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author rajputs

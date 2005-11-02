@@ -8,11 +8,9 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 import java.io.Serializable;
-
-import gov.nih.nci.camod.util.Duplicatable; 
-import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs 

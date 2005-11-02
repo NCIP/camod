@@ -6,9 +6,6 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.List;
 import java.util.*;
 
 public class InducedMutation extends EngineeredGene {

@@ -32,7 +32,12 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
      * @return Returns the display name.
      */
     public String getDisplayName() {
-        String theDisplayName = viralVector;
+        String theDisplayName = "";
+        if (viralVector != null) {
+            theDisplayName = viralVector;
+        }
+        
+  
         if (viralVector.equals(Constants.Dropdowns.OTHER_OPTION))
         {
             theDisplayName += " - " + viralVectorUnctrlVocab;

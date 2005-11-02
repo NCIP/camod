@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.10 2005-11-02 17:24:47 piparom Exp $
+ * $Id: CellLine.java,v 1.11 2005-11-02 19:10:52 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/02 17:24:47  piparom
+ * fixed issue in collection fetching..added null checking prior to sorting
+ *
  * Revision 1.9  2005/11/01 17:12:23  piparom
  * updates for collection sorts.. implementation of compareTo, and updates to equal/hashcode
  *
@@ -16,14 +19,11 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.List;
-import java.util.*;
-
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+
+import java.io.Serializable;
+import java.util.*;
 
 public class CellLine extends BaseObject implements Comparable, Serializable, Duplicatable {
 

@@ -6,16 +6,10 @@
  */
 package gov.nih.nci.camod.domain;
 
-import gov.nih.nci.camod.util.EvsTreeUtil;
+import gov.nih.nci.camod.util.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.List;
 import java.util.*;
-
-import gov.nih.nci.camod.util.Duplicatable;
-import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs TODO To change the template for this generated type comment
