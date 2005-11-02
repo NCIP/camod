@@ -26,9 +26,9 @@ public class ImagePopulateAction extends BaseAction {
 
 		// Handle back arrow
 		if (inImage == null) {
-			request.setAttribute("aImageID", null);
+			request.setAttribute("deleted", "true");
 		} else {
-			request.setAttribute("aImageID", aImageID);
+			imageForm.setImageId(aImageID);
 
 			//System.out.println("FILESERVERLOCATION=" + inImage.getFileServerLocation());
 			// Image

@@ -40,7 +40,7 @@ public final class ImageAction extends BaseAction {
 		ImageForm imageForm = (ImageForm) form;
 
 		// Grab the current modelID from the session
-		String aImageID = request.getParameter("aImageID");
+		String aImageID = imageForm.getImageId();
 
 		log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
 				+ imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()

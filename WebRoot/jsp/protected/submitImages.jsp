@@ -24,7 +24,7 @@
 
 	System.out.println( "caImageServer=" + caImageServer );
 
-	String aImageID = (String) request.getAttribute( "aImageID" );
+	ImageForm form = (ImageForm) request.getAttribute( "imageForm" );
 
 	// if aImageID is passed in, then we are dealing with 
 	// a previously entered model and are editing it
@@ -32,11 +32,8 @@
 	
 	String actionName = "ImageAction.do?method=save";
 	
-	if ( aImageID != null && aImageID.length() > 0) {
+	if ( form.getImageId() != null && form.getImageId().length() > 0) {
 		actionName = "ImageAction.do?method=edit";
-	}
-	else {
-	    aImageID = "";
 	}
 %>
 
@@ -143,7 +140,7 @@
 				      </c:if>
 				      					
 					  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-					  <input type="hidden" name="aImageID" value="<%= aImageID %>">
+					  <html:hidden property="imageId"/>
 					  	
 					</html:form>			
 				</TABLE>
