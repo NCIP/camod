@@ -70,8 +70,8 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp</td>
-			<td class="formLabel"><label for="field2">Institute / Organization</label></td>
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>
 			<html:form action="RegisterUserAction.do">
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="affiliation" size="30"/>
@@ -111,14 +111,14 @@
 						
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp</td>
-			<td class="formLabel"><label for="field1">Principal Investigator</label></td>
+			<td class="formLabel"><label for="field1">Check if you are a principal investigator / lab chief</label></td>
 			<td class="formField" align="left" >
 			    <html:checkbox styleClass="formFieldSized" property="principalInvestigator" onclick="checkFields()" > </html:checkbox>
 			</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Associated Principal Investigator</label></td>
+			<td class="formRequiredLabel"><label for="field1">If you are not a principal investigator / lab chief, select your principal investigator from the list.  If your principal investigator is not in the list, please fill in information below.</label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSizedEnabled" size="1" property="piUsername"  onchange="checkFields()" >
 					<html:optionsCollection name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>" />	

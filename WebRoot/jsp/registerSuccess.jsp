@@ -15,7 +15,7 @@
 			</tr>			
 			
 			<tr>
-				<td class="resultsBoxWhiteEnd">Thank you for registering, please check your email for a confirmation.  This could take up to 72 hours.</td> 
+				<td class="resultsBoxWhiteEnd">Thank you for registering, please check your email for a confirmation.  Your account information will be send to you soon.</td> 
 			</tr>
 			
 			</TABLE>
