@@ -12,19 +12,16 @@
 
 <%
 	String aCellID = request.getParameter( "aCellID" );
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
 	//if aCellID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "CellLineAction.do?method=save";
 	
-    if ( aCellID != null && aCellID.length() > 0) {
+    if ( aCellID != null && aCellID.length() > 0 && isDeleted == null) {
 		actionName = "CellLineAction.do?method=edit";
 	}
-    else {
-        aCellID = "";
-    }
-    
 %>
 
 

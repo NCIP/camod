@@ -36,7 +36,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
         Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().get(aEngineeredTransgeneID);
 
         if (theEngineeredTransgene == null) {
-            request.setAttribute("deleted", "true");
+        	request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
 
             // Tansgene Integration

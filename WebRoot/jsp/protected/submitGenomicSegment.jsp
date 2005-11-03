@@ -27,10 +27,11 @@
 
 	//if aGenomicSegmentID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
 	String actionName = "GenomicSegmentAction.do?method=save";
 	
-	if ( form.getSegmentId() != null && form.getSegmentId().length() > 0) {
+	if ( form.getSegmentId() != null && form.getSegmentId().length() > 0 && isDeleted == null) {
 		actionName = "GenomicSegmentAction.do?method=edit";	
 	}
 %>

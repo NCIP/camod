@@ -26,7 +26,7 @@ public class ImagePopulateAction extends BaseAction {
 
 		// Handle back arrow
 		if (inImage == null) {
-			request.setAttribute("deleted", "true");
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			imageForm.setImageId(aImageID);
 

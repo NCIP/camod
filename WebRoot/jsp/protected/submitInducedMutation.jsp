@@ -15,17 +15,15 @@
 
 <%
 	String aInducedMutationID = request.getParameter("aInducedMutationID");
-
+    String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
+    
 	//if aInducedMutationID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "InducedMutationAction.do?method=save";
 	
-	if ( aInducedMutationID != null && aInducedMutationID.length() > 0) {
+	if ( aInducedMutationID != null && aInducedMutationID.length() > 0 && isDeleted == null) {
 		actionName = "InducedMutationAction.do?method=edit";
-	}
-	else {
-	    aInducedMutationID = "";
 	}
 %>
 

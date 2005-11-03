@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.13 2005-11-02 20:29:09 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.14 2005-11-03 13:59:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/02 20:29:09  pandyas
+ * modified GeneDelivery dropdown source
+ *
  * Revision 1.12  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -57,7 +60,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 
 		// Handle back-arrow on the delete
 		if (gene == null) {
-			request.setAttribute("aTherapyID", null);
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
 			request.setAttribute("aTherapyID", aTherapyID);

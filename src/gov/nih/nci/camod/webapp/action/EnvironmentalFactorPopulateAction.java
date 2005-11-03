@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorPopulateAction.java,v 1.13 2005-11-02 21:48:09 georgeda Exp $
+ * $Id: EnvironmentalFactorPopulateAction.java,v 1.14 2005-11-03 13:59:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/02 21:48:09  georgeda
+ * Fixed validate
+ *
  * Revision 1.12  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -55,7 +58,7 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 
         // Handle back-arrow on the delete
         if (therapy == null) {
-            request.setAttribute("aTherapyID", null);
+            request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
 
             request.setAttribute("aTherapyID", aTherapyID);

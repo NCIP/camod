@@ -31,8 +31,8 @@
 	// otherwise, create a new one
 	
 	String actionName = "ImageAction.do?method=save";
-	
-	if ( form.getImageId() != null && form.getImageId().length() > 0) {
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
+	if ( form.getImageId() != null && form.getImageId().length() > 0 && isDeleted == null) {
 		actionName = "ImageAction.do?method=edit";
 	}
 %>

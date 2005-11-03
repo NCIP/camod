@@ -11,18 +11,16 @@
 
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
 	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "SurgeryAction.do?method=save";
 	
-	if ( aTherapyID != null && aTherapyID.length() > 0) {
+	if ( aTherapyID != null && aTherapyID.length() > 0 && isDeleted == null) {
 		actionName = "SurgeryAction.do?method=edit";
 	}
-    else {
-        aTherapyID = "";
-    }
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

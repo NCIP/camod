@@ -1,6 +1,9 @@
 package gov.nih.nci.camod.webapp.action;
 
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.GeneticAlteration;
+import gov.nih.nci.camod.domain.MutationIdentifier;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.service.impl.SpontaneousMutationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
 
@@ -9,7 +12,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public class SpontaneousMutationPopulateAction extends BaseAction {
 
@@ -24,7 +29,7 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
                 aSpontaneousMutationID);
 
         if (theSpontaneousMutation == null) {
-            request.setAttribute("aSpontaneousMutationID", null);
+        	request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
 
             request.setAttribute("aSpontaneousMutationID", aSpontaneousMutationID);

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.10 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.11 2005-11-03 13:59:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.9  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -63,7 +66,7 @@ public class TherapyPopulateAction extends BaseAction {
 		Therapy ty = therapyManager.get(aTherapyID);
 
 		if (ty == null) {
-			request.setAttribute("aTherapyID", null);
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			request.setAttribute("aTherapyID", aTherapyID);
 

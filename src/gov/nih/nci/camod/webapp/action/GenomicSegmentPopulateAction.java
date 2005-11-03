@@ -31,7 +31,7 @@ public class GenomicSegmentPopulateAction extends BaseAction {
         GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().get(aGenomicSegmentID);
 
         if (theGenomicSegment == null) {
-            request.setAttribute("deleted", "true");
+        	request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
             genomicSegmentForm.setSegmentId(aGenomicSegmentID);
             

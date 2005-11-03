@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.5 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.6 2005-11-03 13:59:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.4  2005/10/28 17:45:10  georgeda
  * PI no longer required
  *
@@ -57,7 +60,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
 		System.out.println("avilablity (id and name): " + avilablity);
 
 		if (avilablity == null) {
-			request.setAttribute("aAvailabilityID", null);
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			
 			request.setAttribute("aAvailabilityID", aAvailabilityID);

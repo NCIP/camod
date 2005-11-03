@@ -29,7 +29,7 @@ public class InducedMutationPopulateAction extends BaseAction {
         InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().get(aInducedMutationID);
 
         if (theInducedMutation == null) {
-            request.setAttribute("aInducedMutationID", null);
+        	request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
             request.setAttribute("aInducedMutationID", aInducedMutationID);
 

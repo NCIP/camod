@@ -15,18 +15,12 @@
 
 <%
 	String aSpontaneousMutationID = request.getParameter( "aSpontaneousMutationID" );
-
-	//if aXenograftID is passed in, then we are dealing with a previously entered model and are editing it
-	//otherwise, create a new one
-	
+    String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
+    
 	String actionName = "SpontaneousMutationAction.do?method=save";
 	
-	if ( aSpontaneousMutationID != null && aSpontaneousMutationID.length() > 0) {
+	if ( aSpontaneousMutationID != null && aSpontaneousMutationID.length() > 0 && isDeleted == null) {
 		actionName = "SpontaneousMutationAction.do?method=edit";
-	}
-	else
-	{
-	    aSpontaneousMutationID = "";
 	}
 %>
 <SCRIPT LANGUAGE="JavaScript">

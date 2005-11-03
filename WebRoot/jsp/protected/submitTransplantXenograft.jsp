@@ -16,17 +16,15 @@
 
 <%
 	String aXenograftID = request.getParameter( "aXenograftID" );
-
+    String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
+    
 	//if aXenograftID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "XenograftAction.do?method=save";
 	
-	if ( aXenograftID != null && aXenograftID.length() > 0) {
+	if ( aXenograftID != null && aXenograftID.length() > 0 && isDeleted == null) {
 		actionName = "XenograftAction.do?method=edit";
-	}
-	else {
-	    aXenograftID = "";
 	}
 %>
 

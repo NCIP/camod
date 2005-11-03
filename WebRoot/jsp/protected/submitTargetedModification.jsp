@@ -29,17 +29,15 @@
 	TargetedModificationForm form = (TargetedModificationForm) request.getAttribute( "targetedModificationForm" );
 	
 	String aTargetedModificationID = form.getModificationId();
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 			
 	//if aInducedMutationID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "TargetedModificationAction.do?method=save";
 	
-	if ( aTargetedModificationID != null && aTargetedModificationID.length() > 0) {
+	if ( aTargetedModificationID != null && aTargetedModificationID.length() > 0 && isDeleted == null) {
 		actionName = "TargetedModificationAction.do?method=edit";
-	}
-	else {
-	    aTargetedModificationID = "";
 	}
 %>
 

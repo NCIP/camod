@@ -36,7 +36,7 @@ public class XenograftPopulateAction extends BaseAction {
 		Xenograft xeno = XenograftManagerSingleton.instance().get(aXenograftID);
 
 		if (xeno == null) {
-			request.setAttribute("aXenograftID", null);
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			request.setAttribute("aXenograftID", aXenograftID);
 			xenograftForm.setName(xeno.getName());

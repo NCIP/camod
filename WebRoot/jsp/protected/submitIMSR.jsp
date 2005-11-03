@@ -10,18 +10,15 @@
 
 <%
 	String aAvailabilityID = request.getParameter( "aAvailabilityID" );
-	
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
+    
 	//if aAvailabilityID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "IMSRAction.do?method=save";
 	
-    if ( aAvailabilityID != null && aAvailabilityID.length() > 0) {
+    if ( aAvailabilityID != null && aAvailabilityID.length() > 0 && isDeleted == null) {
 		actionName = "IMSRAction.do?method=edit";
-	}
-	else
-	{
-	    aAvailabilityID = "";
 	}
 %>
 

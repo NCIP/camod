@@ -40,18 +40,16 @@ function chkOtherAdminRoute() {
 </SCRIPT>
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
 	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "TherapyAction.do?method=save";
 	
-    if ( aTherapyID != null && aTherapyID.length() > 0) {
+    if ( aTherapyID != null && aTherapyID.length() > 0 && isDeleted == null) {
 		actionName = "TherapyAction.do?method=edit";
 	}
-    else {
-        aTherapyID = "";
-    }
 %>
 
 <script language="JavaScript" src="scripts/initIt.js"></script>

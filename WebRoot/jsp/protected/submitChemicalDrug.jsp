@@ -8,6 +8,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.*" %>
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
+<%@ page import="gov.nih.nci.camod.Constants.Parameters" %>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
@@ -15,18 +16,16 @@
 
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
+    String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
     
 	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "ChemicalDrugAction.do?method=save";
 	
-	if ( aTherapyID != null && aTherapyID.length() > 0) {
+	if ( aTherapyID != null && aTherapyID.length() > 0 && isDeleted == null) {
 		actionName = "ChemicalDrugAction.do?method=edit";
 	}
-    else {
-        aTherapyID = "";
-    }
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

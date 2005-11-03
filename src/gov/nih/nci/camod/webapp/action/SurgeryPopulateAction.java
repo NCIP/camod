@@ -33,7 +33,7 @@ public class SurgeryPopulateAction extends BaseAction {
 
 		// Handle back-arrow on the delete
 		if (therapy == null) {
-			request.setAttribute("aTherapyID", null);
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
 			request.setAttribute("aTherapyID", aTherapyID);

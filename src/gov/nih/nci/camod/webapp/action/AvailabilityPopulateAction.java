@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityPopulateAction.java,v 1.5 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: AvailabilityPopulateAction.java,v 1.6 2005-11-03 13:59:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.4  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -19,6 +22,7 @@
 
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalAvailability;
 import gov.nih.nci.camod.service.impl.AvailabilityManagerSingleton;
 import gov.nih.nci.camod.webapp.form.AvailabilityForm;
@@ -26,7 +30,9 @@ import gov.nih.nci.camod.webapp.form.AvailabilityForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public class AvailabilityPopulateAction extends BaseAction {
 
@@ -53,7 +59,7 @@ public class AvailabilityPopulateAction extends BaseAction {
 
 		// Handle back arrow in browser
 		if (avilablity == null) {
-			request.setAttribute("aAvailabilityID", null);
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			request.setAttribute("aAvailabilityID", aAvailabilityID);
 			availabilityForm.setName(avilablity.getName());

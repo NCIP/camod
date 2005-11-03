@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.10 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: CellLinePopulateAction.java,v 1.11 2005-11-03 13:59:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.9  2005/10/28 12:47:26  georgeda
  * Added delete functionality
  *
@@ -18,6 +21,7 @@
 
 package gov.nih.nci.camod.webapp.action;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.service.CellLineManager;
 import gov.nih.nci.camod.webapp.form.CellLineForm;
@@ -51,7 +55,7 @@ public class CellLinePopulateAction extends BaseAction {
 		CellLine cellLine = theCellLineManager.get(aCellID);
 
 		if (cellLine == null) {
-			request.setAttribute("aCellID", null);
+			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			request.setAttribute("aCellID", aCellID);
 

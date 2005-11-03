@@ -28,17 +28,15 @@
 	EngineeredTransgeneForm form = (EngineeredTransgeneForm) request.getAttribute( "engineeredTransgeneForm" );
 	
 	String aEngineeredTransgeneID = form.getTransgeneId();
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
 	//if aEngineeredTransgeneID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "EngineeredTransgeneAction.do?method=save";
 	
-	if ( aEngineeredTransgeneID != null && aEngineeredTransgeneID.length()> 0) {
+	if ( aEngineeredTransgeneID != null && aEngineeredTransgeneID.length()> 0 && isDeleted == null) {
 		actionName = "EngineeredTransgeneAction.do?method=edit";
-	}
-	else {
-	    aEngineeredTransgeneID = "";
 	}
 %>
 

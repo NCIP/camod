@@ -75,6 +75,9 @@ public class PublicationPopulateAction extends BaseAction {
 			PublicationStatus pubStatus = thePublication.getPublicationStatus();
 			pubForm.setName(pubStatus.getName());
 		}
+		else {
+			pubForm.setAPubID(null);
+		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
