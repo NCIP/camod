@@ -9,24 +9,16 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
     private static final long serialVersionUID = 3257165451799414811L;
 
     protected String username;
-
     protected String lastName;
-
     protected String firstName;
-
     protected String affiliation;
-
     protected String phone;
-
     protected String email;
-
     protected String piUsername;
-
     protected boolean isPrincipalInvestigator = false;
-
     protected String piLastName;
-
     protected String piFirstName;
+    protected String piEmail;
 
     /**
      * @return Returns the username.
@@ -57,6 +49,7 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
         piUsername = null;
         piLastName = null;
         piFirstName = null;
+        piEmail = null;
     }
 
     /**
@@ -192,5 +185,13 @@ public class UserSettingsForm extends BaseForm implements UserSettingsData, Seri
      */
     public void setPiUsername(String piUsername) {
         this.piUsername = piUsername;
+    }
+
+    public String getPiEmail() {
+        return piEmail;
+    }
+
+    public void setPiEmail(String piEmail) {
+        this.piEmail = piEmail;
     }
 }

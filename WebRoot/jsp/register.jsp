@@ -19,6 +19,9 @@
 			document.forms[0].piUsername.disabled = true;
 			document.forms[0].piUsername.value= '';
 			document.forms[0].piUsername.className = "formFieldSizedDisabled";
+			document.forms[0].piEmail.disabled = true;
+			document.forms[0].piEmail.value= '';
+			document.forms[0].piEmail.className = "formFieldSizedDisabled";
 		}
 		else {
 		    document.forms[0].piUsername.disabled = false;
@@ -31,6 +34,8 @@
 		        document.forms[0].piFirstName.className = "formFieldSizedEnabled";
 			    document.forms[0].piLastName.disabled = false;
 			    document.forms[0].piLastName.className = "formFieldSizedEnabled";
+			    document.forms[0].piEmail.disabled = false;
+			    document.forms[0].piEmail.className = "formFieldSizedEnabled";
 		    }
 		    else {
 		        document.forms[0].piFirstName.disabled = true;
@@ -39,6 +44,9 @@
 			    document.forms[0].piLastName.disabled = true;
 			    document.forms[0].piLastName.value= '';
 			    document.forms[0].piLastName.className = "formFieldSizedDisabled";
+			    document.forms[0].piEmail.disabled = true;
+			    document.forms[0].piEmail.value= '';
+			    document.forms[0].piEmail.className = "formFieldSizedDisabled";
 		    }
 		}
 	}
@@ -140,7 +148,13 @@
 				<html:text styleClass="formFieldSizedEnabled" property="piLastName" size="30"/>
 			</td>
 		</tr>
-		
+		<tr>
+			<td class="formRequiredNotice" width="0">*</td>
+			<td class="formRequiredLabel"><label for="field1">Principal Investigator E-mail</label></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSizedEnabled" property="piEmail" size="30"/>
+			</td>
+		</tr>		
 		<tr>
 			<td align="right" colspan="3">
 				<TABLE cellpadding="4" cellspacing="0" border="0">

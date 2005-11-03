@@ -55,5 +55,9 @@ public interface UserSettingsData {
 
 	public String getPiUsername();
 
-	public void setPiUsername(String piUsername);
+	public void setPiUsername(String piEmail);
+    
+    public String getPiEmail();
+
+    public void setPiEmail(String piEmail);
 }
