@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.53 2005-11-03 17:22:35 schroedn Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.54 2005-11-03 18:11:04 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2005/11/03 17:22:35  schroedn
+ * Changed how Associated Expression for Genetic Description were coded, cleaned up
+ *
  * Revision 1.52  2005/11/03 17:01:30  georgeda
  * Change taxon creation strat.
  *
@@ -467,13 +470,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         // Create/reuse the taxon
         Taxon theTaxon = inAnimalModel.getSpecies();
 
-        String theOldVocab = theTaxon.getEthnicityStrainUnctrlVocab();
+        String theOldVocab = "";
 
         if (theTaxon == null) {
             theTaxon = TaxonManagerSingleton.instance().create(inModelCharacteristics.getScientificName(),
                     inModelCharacteristics.getEthinicityStrain(),
                     inModelCharacteristics.getEthnicityStrainUnctrlVocab());
         } else {
+            theOldVocab = theTaxon.getEthnicityStrainUnctrlVocab();
             TaxonManagerSingleton.instance().update(inModelCharacteristics.getScientificName(),
                     inModelCharacteristics.getEthinicityStrain(),
                     inModelCharacteristics.getEthnicityStrainUnctrlVocab(), theTaxon);
@@ -931,14 +935,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
     }
 
-    public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene, AssociatedExpressionData inAssociatedExpressionData) 
-    	throws Exception {
+    public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene,
+            AssociatedExpressionData inAssociatedExpressionData) throws Exception {
 
         System.out.println("<AnimalModelManagerImpl addAssociatedExpression>");
         log.trace("Entering AnimalModelManagerImpl.addAssociatedExpression");
 
         // addAssociatedExpression (ExpressionFeature)
-        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData, inEngineeredGene);
+        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData,
+                inEngineeredGene);
         save(inAnimalModel);
 
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
