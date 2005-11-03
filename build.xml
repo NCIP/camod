@@ -55,6 +55,7 @@
 			<zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
 			<zipfileset dir="${webapp.dir}/styles" prefix="styles" />
 			<zipfileset dir="${webapp.dir}/config" prefix="config" />
+			<zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
                         <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
 			<webinf dir="${webapp.dir}/WEB-INF"/>
 			<classes dir="${build.classes.dir}" />
