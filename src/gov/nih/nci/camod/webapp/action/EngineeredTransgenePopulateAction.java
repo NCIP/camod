@@ -1,15 +1,10 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Conditionality;
-import gov.nih.nci.camod.domain.GeneFunction;
-import gov.nih.nci.camod.domain.Image;
-import gov.nih.nci.camod.domain.MutationIdentifier;
-import gov.nih.nci.camod.domain.RegulatoryElement;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.impl.EngineeredTransgeneManagerSingleton;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm;
+import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
 import java.util.List;
@@ -17,9 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.*;
 
 public class EngineeredTransgenePopulateAction extends BaseAction {
 
@@ -62,7 +55,9 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
 
             engineeredTransgeneForm.setName(theEngineeredTransgene.getName());
 
-            if (dropdownTaxList.contains(tax.getScientificName())) {
+            DropdownOption theOption = new DropdownOption("",tax.getScientificName());
+            
+            if (dropdownTaxList.contains(theOption)) {
                 System.out.println("\t(Transgene) Matched the list");
                 engineeredTransgeneForm.setScientificName(tax.getScientificName());
             } else {
@@ -83,7 +78,8 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setTranscriptional1_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    if (dropdownTaxList.contains(tax_reg1.getScientificName())) {
+                    theOption = new DropdownOption("",tax_reg1.getScientificName());
+                    if (dropdownTaxList.contains(theOption)) {
                         engineeredTransgeneForm.setTranscriptional1_species(tax_reg1.getScientificName());
                     } else {
                         engineeredTransgeneForm.setTranscriptional1_species("Other");
@@ -95,7 +91,8 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setTranscriptional2_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    if (dropdownTaxList.contains(tax_reg1.getScientificName())) {
+                    theOption = new DropdownOption("",tax_reg1.getScientificName());
+                    if (dropdownTaxList.contains(theOption)) {
                         engineeredTransgeneForm.setTranscriptional2_species(tax_reg1.getScientificName());
                     } else {
                         engineeredTransgeneForm.setTranscriptional2_species("Other");
@@ -106,8 +103,9 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                 if (regElement.getRegulatoryElementType().getName().equals("Transcriptional 3")) {
                     engineeredTransgeneForm.setTranscriptional3_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
-
-                    if (dropdownTaxList.contains(tax_reg1.getScientificName())) {
+                    
+                    theOption = new DropdownOption("",tax_reg1.getScientificName());
+                    if (dropdownTaxList.contains(theOption)) {
                         engineeredTransgeneForm.setTranscriptional3_species(tax_reg1.getScientificName());
                     } else {
                         engineeredTransgeneForm.setTranscriptional3_species("Other");
@@ -119,7 +117,8 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setPolyASignal_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    if (dropdownTaxList.contains(tax_reg1.getScientificName())) {
+                    theOption = new DropdownOption("",tax_reg1.getScientificName());
+                    if (dropdownTaxList.contains(theOption)) {
                         engineeredTransgeneForm.setPolyASignal_species(tax_reg1.getScientificName());
                     } else {
                         engineeredTransgeneForm.setPolyASignal_species("Other");
@@ -131,7 +130,8 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setSpliceSites_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    if (dropdownTaxList.contains(tax_reg1.getScientificName())) {
+                    theOption = new DropdownOption("", tax_reg1.getScientificName());
+                    if (dropdownTaxList.contains(theOption)) {
                         engineeredTransgeneForm.setSpliceSites_species(tax_reg1.getScientificName());
                     } else {
                         engineeredTransgeneForm.setSpliceSites_species("Other");
