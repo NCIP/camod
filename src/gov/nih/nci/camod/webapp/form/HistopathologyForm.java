@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyForm.java,v 1.5 2005-11-03 18:52:44 pandyas Exp $
+ * $Id: HistopathologyForm.java,v 1.6 2005-11-03 21:48:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/03 18:52:44  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -33,9 +36,9 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 	protected String organTissueName;
 	protected String organTissueCode;	
 	
-	protected String diseaseName;
-    protected String diagnosisCode;
     protected String diagnosisName;
+    protected String diagnosisCode;
+    protected String tumorClassification;
     
 	protected String ageOfOnset;
     protected String ageUnit;
@@ -86,18 +89,7 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 	public void setOrganTissueCode( String organTissueCode ) {
 		this.organTissueCode = organTissueCode;
 	}	
-	/**
-	 * @return Returns the diseaseName.
-	 */
-	public String getDiseaseName() {
-		return diseaseName;
-	}
-	/**
-	 * @param diseaseName The diseaseName to set.
-	 */
-	public void setDiseaseName(String diseaseName) {
-		this.diseaseName = diseaseName;
-	}
+
     public String getDiagnosisCode() {
         return diagnosisCode;
     }
@@ -260,5 +252,13 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
-	}	
+	}
+    
+    public String getTumorClassification() {
+        return tumorClassification;
+    }
+    
+    public void setTumorClassification(String tumorClassification) {
+        this.tumorClassification = tumorClassification;
+    }	
 }

@@ -216,7 +216,7 @@
 				  <bean:define id="aHistopathologyID" name="aHistopathology" property="id" />
 					
 				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot_red.jpg" border="0"> 
-				  <a href="AssociatedMetastasisPopulateAction.do?method=populate&aAssociatedMetastasisID=<c:out value='${ aAssociatedMetastasisID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
+				  <a class="subMenuMedRed" href="AssociatedMetastasisPopulateAction.do?method=populate&aAssociatedMetastasisID=<c:out value='${ aAssociatedMetastasisID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
 					<bean:write name="aAssociatedMetastasis" property="organ.name" filter="true"/>
 				  </a><br>					
 				</logic:iterate>

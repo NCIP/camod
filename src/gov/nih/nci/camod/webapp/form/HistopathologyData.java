@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyData.java,v 1.1 2005-11-03 18:52:44 pandyas Exp $
+ * $Id: HistopathologyData.java,v 1.2 2005-11-03 21:48:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/11/03 18:52:44  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 
@@ -19,13 +22,13 @@ public interface HistopathologyData  {
 	public String getOrganTissueCode();
 	public void setOrganTissueCode( String organTissueCode );
 	
-	public String getDiseaseName();
-	public void setDiseaseName(String diseaseName);
+	public String getDiagnosisName();
+	public void setDiagnosisName(String diagnosisName);
 	public void setDiagnosisCode(String diagnosisCode);
 	public String getDiagnosisCode();
-	public void setDiagnosisName(String diagnosisName);
-	public String getDiagnosisName();	
-	
+	public void setTumorClassification(String tumorClassification);
+	public String getTumorClassification();	
+    
 	public String getAgeOfOnset();
 	public void setAgeOfOnset(String ageOfOnset);
     public String getAgeUnit();

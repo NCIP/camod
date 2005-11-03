@@ -71,10 +71,10 @@
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>	
 		</td>
+		<html:hidden property="diagnosisName"/>
+		<html:hidden property="diagnosisCode"/>
 		<td class="formField">
-			<html:hidden property="diagnosisCode"/>			
-			<input type="hidden" name="diagnosisName"/>
-			<html:text styleClass="formFieldSized" disabled="true" property="diseaseName" size="30" name="formdata" />
+			<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification" name="formdata" size="25" />
 		</td>
 	</tr>
 

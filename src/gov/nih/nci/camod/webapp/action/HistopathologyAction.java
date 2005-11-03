@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.3 2005-11-03 18:54:10 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.4 2005-11-03 21:48:07 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/11/03 18:54:10  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 
@@ -94,7 +97,7 @@ public class HistopathologyAction extends BaseAction {
      		   + "\n\t  HistopathID: "      + aHistopathologyID         		
     			+ "\n\t organTissueName: "  + histopathologyForm.getOrganTissueName() 									
     			+ "\n\t organTissueCode: "  + histopathologyForm.getOrganTissueCode() 	
-                + "\n\t diseaseName: " + histopathologyForm.getDiseaseName()
+                + "\n\t diseaseName: " + histopathologyForm.getDiagnosisName()
                 + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()            
                 + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName()  
                 + "\n\t ageOfOnset: " + histopathologyForm.getAgeOfOnset() 
@@ -165,7 +168,7 @@ public class HistopathologyAction extends BaseAction {
         		   + "\n\t aAssociatedMetastasisID: "      + aAssociatedMetastasisID         		   
     			   + "\n\t organTissueName: "  + assocMetastasisForm.getOrganTissueName() 									
     			   + "\n\t organTissueCode: "  + assocMetastasisForm.getOrganTissueCode() 	
-                   + "\n\t diseaseName: " + assocMetastasisForm.getDiseaseName()
+                   + "\n\t diseaseName: " + assocMetastasisForm.getDiagnosisName()
                    + "\n\t diseaseCode: " + assocMetastasisForm.getDiagnosisCode()            
                    + "\n\t diagnosisName: " + assocMetastasisForm.getDiagnosisName()               
                    + "\n\t ageOfOnset: " + assocMetastasisForm.getAgeOfOnset() 
@@ -288,7 +291,7 @@ public class HistopathologyAction extends BaseAction {
        System.out.println("<HistopathologyAction save> following Characteristics:" 
 			   + "\n\t organTissueName: "  + histopathologyForm.getOrganTissueName() 									
 			   + "\n\t organTissueCode: "  + histopathologyForm.getOrganTissueCode() 	
-               + "\n\t diseaseName: " + histopathologyForm.getDiseaseName()
+               + "\n\t diseaseName: " + histopathologyForm.getDiagnosisName()
                + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()            
                + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName()               
                + "\n\t ageOfOnset: " + histopathologyForm.getAgeOfOnset() 
@@ -360,7 +363,7 @@ public class HistopathologyAction extends BaseAction {
        		   + "\n\t ParentHistopathID: "      + aHistopathID    		   
 			   + "\n\t organTissueName: "  + assocMetastasisForm.getOrganTissueName() 									
 			   + "\n\t organTissueCode: "  + assocMetastasisForm.getOrganTissueCode() 	
-               + "\n\t diseaseName: " + assocMetastasisForm.getDiseaseName()
+               + "\n\t diseaseName: " + assocMetastasisForm.getDiagnosisName()
                + "\n\t diseaseCode: " + assocMetastasisForm.getDiagnosisCode()            
                + "\n\t diagnosisName: " + assocMetastasisForm.getDiagnosisName()               
                + "\n\t ageOfOnset: " + assocMetastasisForm.getAgeOfOnset() 

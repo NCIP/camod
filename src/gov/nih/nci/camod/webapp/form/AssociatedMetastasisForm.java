@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: AssociatedMetastasisForm.java,v 1.1 2005-11-03 18:52:44 pandyas Exp $
+ * $Id: AssociatedMetastasisForm.java,v 1.2 2005-11-03 21:48:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/11/03 18:52:44  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 
@@ -31,9 +34,9 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
 	protected String organTissueName;
 	protected String organTissueCode;	
 	
-	protected String diseaseName;
+	protected String diagnosisName;
     protected String diagnosisCode;
-    protected String diagnosisName;
+    protected String tumorClassification;
     
 	protected String ageOfOnset;
     protected String ageUnit;
@@ -47,7 +50,7 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
 	protected String methodOfObservation;
 	protected String comparativeData;
 	protected String comments;
-
+    
 	/**
 	 * @return Returns the parent histopathologyID.
 	 */	
@@ -97,18 +100,7 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
 	public void setOrganTissueCode( String organTissueCode ) {
 		this.organTissueCode = organTissueCode;
 	}	
-	/**
-	 * @return Returns the diseaseName.
-	 */
-	public String getDiseaseName() {
-		return diseaseName;
-	}
-	/**
-	 * @param diseaseName The diseaseName to set.
-	 */
-	public void setDiseaseName(String diseaseName) {
-		this.diseaseName = diseaseName;
-	}
+
     public String getDiagnosisCode() {
         return diagnosisCode;
     }
@@ -271,6 +263,14 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
-	}		
+	}
+    
+    public String getTumorClassification() {
+        return tumorClassification;
+    }
+    
+    public void setTumorClassification(String tumorClassification) {
+        this.tumorClassification = tumorClassification;
+    }		
 	
 }
