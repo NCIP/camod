@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DropdownOption.java,v 1.3 2005-10-24 13:28:39 georgeda Exp $
+ * $Id: DropdownOption.java,v 1.4 2005-11-03 19:08:42 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/24 13:28:39  georgeda
+ * Cleanup changes
+ *
  * Revision 1.2  2005/10/17 14:11:23  georgeda
  * Sort returned user list
  *
@@ -25,7 +28,7 @@ public class DropdownOption implements Comparable {
 
 	String myValue;
 
-	DropdownOption(String inLabel, String inValue) {
+	public DropdownOption(String inLabel, String inValue) {
 		myLabel = inLabel;
 		myValue = inValue;
 	}
