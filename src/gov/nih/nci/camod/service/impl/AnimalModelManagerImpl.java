@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.54 2005-11-03 18:11:04 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.55 2005-11-03 18:57:13 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.54  2005/11/03 18:11:04  georgeda
+ * Fix old vocab problem
+ *
  * Revision 1.53  2005/11/03 17:22:35  schroedn
  * Changed how Associated Expression for Genetic Description were coded, cleaned up
  *
@@ -961,5 +964,42 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
+    
+    public void addHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData) throws Exception{
+
+        log.info("Entering AnimalModelManagerImpl.addHistopathology_1");
+        
+        Histopathology theHistopathology = HistopathologyManagerSingleton.instance().createHistopathology(inHistopathologyData);
+        inAnimalModel.addHistopathology(theHistopathology);
+       
+        save(inAnimalModel);
+        
+        log.info("Exiting AnimalModelManagerImpl.addHistopathology");    	
+    } 
+    
+    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception{
+
+        log.info("Entering AnimalModelManagerImpl.addAssociatedMetastasis_1");
+        
+        //Histopathology theHistopathology = 
+        HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData, inHistopathology);
+        //inAnimalModel.addHistopathology(theHistopathology);
+       
+        save(inAnimalModel);
+        
+        log.info("Exiting AnimalModelManagerImpl.addHistopathology");    	
+    }    
+    
+    public void addClinicalMarker(AnimalModel inAnimalModel, ClinicalMarkerData inClinicalMarkerData) throws Exception{
+
+        log.info("Entering AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
+        
+        //TODO - Fix this
+        //Histopathology theHistopathology = HistopathologyManagerSingleton.instance().create(inClinicalMarkerData);
+        //inAnimalModel.addHistopathology(theHistopathology);
+        save(inAnimalModel);
+        
+        log.info("Exiting AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");    	
+    }    
 
 }

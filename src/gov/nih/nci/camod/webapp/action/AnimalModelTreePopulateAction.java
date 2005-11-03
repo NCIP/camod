@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.34 2005-11-01 18:14:28 schroedn Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.35 2005-11-03 18:54:10 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.34  2005/11/01 18:14:28  schroedn
+ *  Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
+ *
  *  Revision 1.33  2005/10/31 13:46:28  georgeda
  *  Updates to handle back arrow
  *
@@ -79,6 +82,7 @@ import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneDelivery;
 import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
@@ -237,6 +241,22 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 				// System.out.println("\tAdded Xenograft= " + xenograft);
 
 				xenoList.add(xenograft);
+			}
+			
+			// Retrieve a list of all Histopathology entries assoicated with this Animal model			
+	        List histopathologyList = animalModel.getHistopathologyCollection();
+	        System.out.println("histopathologyList.size(): " + histopathologyList.size());
+	        List histopathList = new ArrayList();
+	        // The associatedMetatasisList and clinMarkerList are populated in subSubmit.jsp
+	        List associatedMetatasisList = new ArrayList();
+	        List clinicalMarkerList = new ArrayList();
+	        
+			for (int i = 0; i < histopathologyList.size(); i++) {
+				Histopathology histopathology = (Histopathology) histopathologyList.get(i);	
+				 System.out.println("\tAdded histopathologyList= " + histopathology.getOrgan().getName());
+				 
+				 histopathList.add(histopathology);
+ 
 			}
 
 			// Retrieve the list all SpontaneousMutations assoc with this
@@ -398,6 +418,10 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			request.getSession().setAttribute(Constants.Submit.JACKSONLAB_LIST, jacksonLabList);
 			request.getSession().setAttribute(Constants.Submit.MMHCC_LIST, mmhccList);
 			request.getSession().setAttribute(Constants.Submit.IMSR_LIST, imsrList);
+	        /* Histopathology */
+	        request.getSession().setAttribute(Constants.Submit.HISTOPATHOLOGY_LIST, histopathList); 
+	        request.getSession().setAttribute(Constants.Submit.ASSOCMETASTSIS_LIST, associatedMetatasisList); 
+	        request.getSession().setAttribute(Constants.Submit.CLINICALMARKER_LIST, clinicalMarkerList);			
 
 			// System.out.println( "TargedModList: " + targetedList);
 

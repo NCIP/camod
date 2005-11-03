@@ -1,8 +1,11 @@
-/*
- * Created on Aug 19, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * 
+ * @author pandyas
+ * 
+ * $Id: ClinicalMarkerForm.java,v 1.5 2005-11-03 18:52:44 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -28,23 +31,23 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
     public ClinicalMarkerForm() {
     }
     
-	protected String parentHistopathID;    
+	protected String histopathologyID;   
 
     protected String name;
     protected String value;
 
     
 	/**
-	 * @return Returns the parentHistopathID.
+	 * @return Returns the parent histopathologyID.
 	 */	
-	public String getParentHistopathID() {
-		return parentHistopathID;
+	public String getHistopathologyID() {
+		return histopathologyID;
 	}
 	/**
-	 * @param parentHistopathID The parentHistopathID to set.
+	 * @param parent histopathologyID The histopathologyID to set.
 	 */	
-	public void setParentHistopathID( String parentHistopathID ) {
-		this.parentHistopathID = parentHistopathID;
+	public void setHistopathologyID( String histopathologyID ) {
+		this.histopathologyID = histopathologyID;
 	}    
     /**
      * @return Returns the name.

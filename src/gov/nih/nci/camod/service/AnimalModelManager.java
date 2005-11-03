@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.30 2005-11-02 19:03:25 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.31 2005-11-03 18:54:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2005/11/02 19:03:25  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.29  2005/10/27 17:16:25  schroedn
  * merged changes, modded addAssociatedExpression
  *
@@ -66,6 +69,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2005/11/02 19:03:25  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.29  2005/10/27 17:16:25  schroedn
  * merged changes, modded addAssociatedExpression
  *
@@ -219,5 +225,11 @@ public interface AnimalModelManager {
     public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene, AssociatedExpressionData inAssociatedExpressionData ) throws Exception;
 
     public void addPublication( AnimalModel inAnimalModel, PublicationData inPublicationData) throws Exception;
+    
+    public void addHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData) throws Exception;
+    
+    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception;    
+    
+    public void addClinicalMarker(AnimalModel inAnimalModel, ClinicalMarkerData inClinicalMarkerData) throws Exception;    
    
 }

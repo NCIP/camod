@@ -16,6 +16,7 @@
 <%@ page import="gov.nih.nci.camod.domain.TargetedModification" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalAvailability" %>
 <%@ page import="gov.nih.nci.camod.domain.Histopathology" %>
+<%@ page import="gov.nih.nci.camod.domain.ClinicalMarker" %>
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
@@ -196,13 +197,34 @@
 
 	<div id="menu5" class="masterTitle" onclick="SwitchMenu('sub5')" onmouseover="ChangeClass('menu5','masterTitleOver')" onmouseout="ChangeClass('menu5','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> HISTOPATHOLOGY</div>
 	<span class="submasterdiv" id="sub5">
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitHistopathology">Enter Histopathology</html:link><br>
-		&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="submitHistopathology">Mammary Gland</html:link><a class="subMenuBlue" href="submitHistopathology.jsp"></a><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuDarkRed" action="submitAssocMetastasis">Enter Assoc Metastasis</html:link><br>
-		&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="submitHistopathology">Liver</html:link><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuDarkRed" action="submitAssocMetastasis">Enter Assoc Metastasis</html:link><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="submitHistopathology">Heart (Metastasis)</html:link><br>
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="submitClinicalMarkers">Enter Clinical Marker</html:link><br><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="HistopathologyPopulateAction.do?method=dropdown">Enter Histopathology</html:link><br>
+		
+		<logic:iterate id="aHistopathology" name="histopathology_list" type="Histopathology">
+			  &nbsp;&nbsp;&nbsp;&nbsp; <img src="images/aquadot.jpg" border="0"> 
+			  <html:link styleClass="subMenuBlue" action="HistopathologyPopulateAction.do?method=populate" paramId="aHistopathologyID" paramName="aHistopathology" paramProperty="id">
+			      <bean:write name="aHistopathology" property="organ.name" filter="true"/>
+			  </html:link><br>
+
+				  <!-- Begin Associated Metastasis Loop -->			      
+			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/plus.gif" border="0"> 
+			      <html:link styleClass="subMenuDarkRed" action="AssociatedMetastasisPopulateAction.do?method=dropdown" paramId="aHistopathologyID" paramName="aHistopathology" paramProperty="id">Enter Assoc Metastasis</html:link><br>
+			      
+				  <bean:define id="associatedMetastasisList" name="aHistopathology" property="metastatisCollection" />
+				  <logic:iterate id="aAssociatedMetastasis" name="associatedMetastasisList" type="Histopathology">
+					
+				  <bean:define id="aAssociatedMetastasisID" name="aAssociatedMetastasis" property="id" />
+				  <bean:define id="aHistopathologyID" name="aHistopathology" property="id" />
+					
+				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot_red.jpg" border="0"> 
+				  <a href="AssociatedMetastasisPopulateAction.do?method=populate&aAssociatedMetastasisID=<c:out value='${ aAssociatedMetastasisID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
+					<bean:write name="aAssociatedMetastasis" property="organ.name" filter="true"/>
+				  </a><br>					
+				</logic:iterate>
+				<!-- End Associated Metastasis Loop -->
+
+
+		</logic:iterate>
+		<br>
 	</span>
 
 	<div id="menu6" class="masterTitle" onclick="SwitchMenu('sub6')" onmouseover="ChangeClass('menu6','masterTitleOver')" onmouseout="ChangeClass('menu6','masterTitle')"><IMG height=5 alt="" src="images/subMenuArrow.gif" width=5> THERAPEUTIC APPROACHES</div>

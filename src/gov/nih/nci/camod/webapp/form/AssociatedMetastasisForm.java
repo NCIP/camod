@@ -2,22 +2,18 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyForm.java,v 1.5 2005-11-03 18:52:44 pandyas Exp $
+ * $Id: AssociatedMetastasisForm.java,v 1.1 2005-11-03 18:52:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * 
  */
+
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-/**
- * @author pandyas
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-public class HistopathologyForm extends BaseForm implements Serializable, HistopathologyData  {
-    
+
+public class AssociatedMetastasisForm extends BaseForm implements Serializable, AssociatedMetastasisData {
+
     private static final long serialVersionUID = 3257225453799404851L;
     
 	/**
@@ -27,7 +23,9 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 	 * TODO To change the template for this generated type comment go to
 	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
-	public HistopathologyForm() {}
+	public AssociatedMetastasisForm() {}
+	
+	protected String histopathologyID;
 	
 	protected String organ;
 	protected String organTissueName;
@@ -50,6 +48,19 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 	protected String comparativeData;
 	protected String comments;
 
+	/**
+	 * @return Returns the parent histopathologyID.
+	 */	
+	public String getHistopathologyID() {
+		return histopathologyID;
+	}
+	/**
+	 * @param parent histopathologyID The histopathologyID to set.
+	 */	
+	public void setHistopathologyID( String histopathologyID ) {
+		this.histopathologyID = histopathologyID;
+	}	
+	
 	/**
 	 * @return Returns the organ.
 	 */	
@@ -260,5 +271,6 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
-	}	
+	}		
+	
 }
