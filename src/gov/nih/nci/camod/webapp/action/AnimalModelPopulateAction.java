@@ -61,7 +61,9 @@ public class AnimalModelPopulateAction extends BaseAction {
         }
 
         modelChar.setExperimentDesign(am.getExperimentDesign());
-        modelChar.setType(am.getPhenotype().getSexDistribution().getType());
+        if (am.getPhenotype().getSexDistribution() != null) {
+            modelChar.setType(am.getPhenotype().getSexDistribution().getType());
+        }
         modelChar.setBreedingNotes(am.getPhenotype().getBreedingNotes());
         modelChar.setDescription(am.getPhenotype().getDescription());
         modelChar.setUrl(am.getUrl());
