@@ -29,76 +29,80 @@ import java.util.TreeMap;
  */
 public class XenograftManagerImpl extends BaseManager implements XenograftManager {
 
-	public List getAll() throws Exception {
-		log.trace("In XenograftManagerImpl.getAll");
-		return super.getAll(Xenograft.class);
-	}
+    public List getAll() throws Exception {
+        log.trace("In XenograftManagerImpl.getAll");
+        return super.getAll(Xenograft.class);
+    }
 
-	public Xenograft get(String id) throws Exception {
-		log.trace("In XenograftManagerImpl.get");
-		return (Xenograft) super.get(id, Xenograft.class);
-	}
+    public Xenograft get(String id) throws Exception {
+        log.trace("In XenograftManagerImpl.get");
+        return (Xenograft) super.get(id, Xenograft.class);
+    }
 
-	public void save(Xenograft xenograft) throws Exception {
-		log.trace("In XenograftManagerImpl.save");
-		super.save(xenograft);
-	}
+    public void save(Xenograft xenograft) throws Exception {
+        log.trace("In XenograftManagerImpl.save");
+        super.save(xenograft);
+    }
 
-	public void remove(String id) throws Exception {
-		log.trace("In XenograftManagerImpl.remove");
-		super.remove(id, Xenograft.class);
-	}
+    public void remove(String id) throws Exception {
+        log.trace("In XenograftManagerImpl.remove");
+        super.remove(id, Xenograft.class);
+    }
 
-	public Xenograft create(XenograftData inXenograftData, AnimalModel inAnimalModel) throws Exception {
+    public Xenograft create(XenograftData inXenograftData, AnimalModel inAnimalModel) throws Exception {
 
-		log.debug("Entering XenograftManagerImpl.create");
+        log.debug("Entering XenograftManagerImpl.create");
 
-		Xenograft theXenograft = new Xenograft();
+        Xenograft theXenograft = new Xenograft();
 
-		log.trace("Exiting XenograftManagerImpl.create");
-		populateXenograft(inXenograftData, theXenograft, inAnimalModel);
+        log.trace("Exiting XenograftManagerImpl.create");
+        populateXenograft(inXenograftData, theXenograft, inAnimalModel);
 
-		return theXenograft;
-	}
+        return theXenograft;
+    }
 
-	public void update(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
-			throws Exception {
+    public void update(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
+            throws Exception {
 
-		log.debug("Entering XenograftManagerImpl.update");
-		log.debug("Updating XenograftData: " + inXenograft.getId());
+        log.debug("Entering XenograftManagerImpl.update");
+        log.debug("Updating XenograftData: " + inXenograft.getId());
 
-		// Populate w/ the new values and save
-		populateXenograft(inXenograftData, inXenograft, inAnimalModel);
-		save(inXenograft);
+        // Populate w/ the new values and save
+        populateXenograft(inXenograftData, inXenograft, inAnimalModel);
+        save(inXenograft);
 
-		log.debug("Exiting XenograftManagerImpl.update");
-	}
+        log.debug("Exiting XenograftManagerImpl.update");
+    }
 
-	private void populateXenograft(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
-			throws Exception {
+    private void populateXenograft(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
+            throws Exception {
 
-		log.debug("Entering populateXenograft");
+        log.debug("Entering populateXenograft");
 
-		inXenograft.setName(inXenograftData.getName());
-		inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
-		inXenograft.setGeneticManipulation(inXenograftData.getGeneticManipulation());
-		inXenograft.setModificationDescription(inXenograftData.getModificationDescription());
-		inXenograft.setParentalCellLineName(inXenograftData.getParentalCellLineName());
-		inXenograft.setAtccNumber(inXenograftData.getATCCNumber());
-		inXenograft.setCellAmount(inXenograftData.getCellAmount());
+        inXenograft.setName(inXenograftData.getName());
+        inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
+        inXenograft.setGeneticManipulation(inXenograftData.getGeneticManipulation());
+        inXenograft.setModificationDescription(inXenograftData.getModificationDescription());
+        inXenograft.setParentalCellLineName(inXenograftData.getParentalCellLineName());
+        inXenograft.setAtccNumber(inXenograftData.getATCCNumber());
+        inXenograft.setCellAmount(inXenograftData.getCellAmount());
 
-		// Taxon theTaxon = new Taxon();
-		// theTaxon.setScientificName(inXenograftData.getHostScientificName());
-		// theTaxon.setEthnicityStrain(inXenograftData.getHostEthinicityStrain());
+        Taxon theTaxon = inXenograft.getHostSpecies();
+        String theOldVocab = "";
+        if (theTaxon == null) {
+            theTaxon = TaxonManagerSingleton.instance().create(inXenograftData.getHostScientificName(),
+                    inXenograftData.getHostEthinicityStrain(), inXenograftData.getOtherHostEthinicityStrain());
+        } else {
+            theOldVocab = theTaxon.getEthnicityStrainUnctrlVocab();
+            TaxonManagerSingleton.instance()
+                    .update(inXenograftData.getHostScientificName(), inXenograftData.getHostEthinicityStrain(),
+                            inXenograftData.getOtherHostEthinicityStrain(), theTaxon);
+        }
 
-		// Find the matching taxon in the db and reuse it
-		Taxon theTaxon = new Taxon();
-		theTaxon.setEthnicityStrain(inXenograftData.getHostEthinicityStrain());
-		theTaxon.setScientificName(inXenograftData.getHostScientificName());
+        if (inXenograftData.getOtherHostEthinicityStrain() != null
+                && !inXenograftData.getOtherHostEthinicityStrain().equals(theOldVocab)) {
 
-		if (inXenograftData.getOtherHostEthinicityStrain() != null) {
-
-			// TODO refine email content
+            // TODO refine email content
 
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
@@ -130,38 +134,35 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
             }
+        }
 
-			theTaxon.setEthnicityStrain(null);
-			theTaxon.setEthnicityStrainUnctrlVocab(inXenograftData.getOtherHostEthinicityStrain());
-		}
+        // Taxon
+        inXenograft.setHostSpecies(theTaxon);
+        inXenograft.setOriginSpecies(inAnimalModel.getSpecies());
 
-		// Taxon
-		inXenograft.setHostSpecies(theTaxon);
-		inXenograft.setOriginSpecies(inAnimalModel.getSpecies());
+        // Convert String into a Date
+        if (inXenograftData.getHarvestDate() != null) {
+            if (!inXenograftData.getHarvestDate().equals("")) {
+                try {
 
-		// Convert String into a Date
-		if (inXenograftData.getHarvestDate() != null) {
-			if (!inXenograftData.getHarvestDate().equals("")) {
-				try {
+                    String inputFormatString = "dd/MM/yyyy";
 
-					String inputFormatString = "dd/MM/yyyy";
+                    // parse the input - turn it into a date object
+                    DateFormat inputFormat = new SimpleDateFormat(inputFormatString);
+                    Date dateTimeValue = inputFormat.parse(inXenograftData.getHarvestDate());
+                    inXenograft.setHarvestDate(dateTimeValue);
 
-					// parse the input - turn it into a date object
-					DateFormat inputFormat = new SimpleDateFormat(inputFormatString);
-					Date dateTimeValue = inputFormat.parse(inXenograftData.getHarvestDate());
-					inXenograft.setHarvestDate(dateTimeValue);
+                } catch (Exception e) {
+                    // TODO: Possibly setup validator here to catch incorrect
+                    // formatting of date field
+                    System.out.println("Error: Incorrect format! " + e);
+                }
+            }
+        }
 
-				} catch (Exception e) {
-					// TODO: Possibly setup validator here to catch incorrect
-					// formatting of date field
-					System.out.println("Error: Incorrect format! " + e);
-				}
-			}
-		}
-
-		// anytime the graft type is "other"
-		if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION)) {
-			// TODO: refine email content
+        // anytime the graft type is "other"
+        if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION)) {
+            // TODO: refine email content
 
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
@@ -194,17 +195,17 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                 e.printStackTrace();
             }
 
-			inXenograft.setGraftType(Constants.Dropdowns.OTHER_OPTION);
-			inXenograft.setGraftTypeUnctrlVocab(inXenograftData.getOtherGraftType());
-		}
-		// anytime graft type is not other set uncontrolled vocab to null
-		// (covers editing)
-		else {
-			System.out.println("graft type not other");
-			inXenograft.setGraftType(inXenograftData.getGraftType());
-			inXenograft.setGraftTypeUnctrlVocab(null);
-		}
+            inXenograft.setGraftType(Constants.Dropdowns.OTHER_OPTION);
+            inXenograft.setGraftTypeUnctrlVocab(inXenograftData.getOtherGraftType());
+        }
+        // anytime graft type is not other set uncontrolled vocab to null
+        // (covers editing)
+        else {
+            System.out.println("graft type not other");
+            inXenograft.setGraftType(inXenograftData.getGraftType());
+            inXenograft.setGraftTypeUnctrlVocab(null);
+        }
 
-		log.debug("Exiting populateXenograft");
-	}
+        log.debug("Exiting populateXenograft");
+    }
 }
