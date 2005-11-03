@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.13 2005-11-02 19:44:20 schroedn Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.14 2005-11-03 19:23:47 schroedn Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/02 19:44:20  schroedn
+ * Merged changes, modified Image function, fix MGI num bug
+ *
  * Revision 1.12  2005/11/02 19:07:25  pandyas
  * Added e-mail functionality
  *
@@ -164,6 +167,9 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         // Description
         inInducedMutation.setDescription(inInducedMutationData.getDescription());
 
+        //Comments
+        inInducedMutation.setComments( inInducedMutationData.getComments() );
+        
         // Observation and Method of Observation
         List geneticList = inInducedMutation.getGeneticAlterationCollection();
 

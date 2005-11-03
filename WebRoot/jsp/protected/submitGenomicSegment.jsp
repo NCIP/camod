@@ -163,8 +163,8 @@
 			<td class="formField">
 						
 			<c:if test="${not empty genomicSegmentForm.fileServerLocation}">
-				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${genomicSegment.fileServerLocation}',600,600);"/>
-			
+				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${genomicSegmentForm.fileServerLocation}',600,600);"/>
+				
 				Current Image: <c:out value="${genomicSegmentForm.fileServerLocation}"/><br>
 				Current Image Thumbnail: <br>
 					

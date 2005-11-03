@@ -35,7 +35,6 @@
         <many-to-one
         	name="expressionLevelDesc"
         	column="exp_level_desc_id"
-        	class="ExpressionLevelDesc"
-        	cascade="all-delete-orphan"/>
+        	class="ExpressionLevelDesc"/>
 	</class>
 </hibernate-mapping>

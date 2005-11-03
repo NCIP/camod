@@ -45,7 +45,7 @@ public class InducedMutationPopulateAction extends BaseAction {
             inducedMutationForm.setGeneId(theInducedMutation.getGeneId());
             inducedMutationForm.setName(environFactor.getName());
             inducedMutationForm.setDescription(theInducedMutation.getDescription());
-
+            
             MutationIdentifier identifier = theInducedMutation.getMutationIdentifier();
             if (identifier != null)
                 inducedMutationForm.setNumberMGI(identifier.getNumberMGI().toString());
