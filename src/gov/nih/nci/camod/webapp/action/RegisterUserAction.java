@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RegisterUserAction.java,v 1.3 2005-10-24 15:12:21 georgeda Exp $
+ * $Id: RegisterUserAction.java,v 1.4 2005-11-03 20:04:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/10/24 15:12:21  georgeda
+ * Cleaned up user registration e-mail
+ *
  * Revision 1.2  2005/10/24 13:28:17  georgeda
  * Cleanup changes
  *
@@ -95,6 +98,7 @@ public class RegisterUserAction extends BaseAction {
                             valuesForVariables.put("piName", "");
                             valuesForVariables.put("newPiName", theForm.getPiLastName() + ", "
                                     + theForm.getPiFirstName());
+                            valuesForVariables.put("piEmail", theForm.getPiEmail());
                         }
                     } else {
                         valuesForVariables.put("piName", "");
