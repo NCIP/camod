@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
@@ -33,6 +34,12 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
 	public List getAnimalDistributorCollection() {
 		return animalDistributorCollection;
 	}
+        
+        public List getAnimalDistributorCollectionSorted() {      
+          if (animalDistributorCollection != null) return new ArrayList(new TreeSet(animalDistributorCollection));
+          return null;
+        }    
+        
 	/**
 	 * @param animalDistributorCollection The animalDistributorCollection to set.
 	 */

@@ -42,7 +42,7 @@ public class Xenograft extends AbstractCancerModel implements Comparable {
      * @throws Exception 
      */
     public List getInvivoResultCollectionByNSC(String inNSCNumber) throws Exception {
-        return QueryManagerSingleton.instance().getInvivoResultCollectionByNSC(inNSCNumber, getId().toString());
+        return QueryManagerSingleton.instance().getInvivoResultCollectionByNSC(inNSCNumber, getId().toString()); 
     }
     
 	/**
@@ -146,7 +146,13 @@ public class Xenograft extends AbstractCancerModel implements Comparable {
 	 */
 	public List getInvivoResultCollection() {
 		return invivoResultCollection;
-	}
+	}        
+           
+        public List getInvivoResultCollectionSorted() {      
+          if (invivoResultCollection != null) return new ArrayList(new TreeSet(invivoResultCollection));
+          return null;
+        }    
+        
 	/**
 	 * @param invivoResultCollection The invivoResultCollection to set.
 	 */

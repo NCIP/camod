@@ -8,6 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 
 /**
@@ -31,6 +32,11 @@ public class GenomicSegment extends EngineeredGene {
     public List getSegmentTypeCollection() {
         return segmentTypeCollection;
     }
+    
+    public List getSegmentTypeCollectionSorted() {      
+      if (segmentTypeCollection != null) return new ArrayList(new TreeSet(segmentTypeCollection));
+      return null;
+    }   
 
     /**
      * @param segmentTypeCollection

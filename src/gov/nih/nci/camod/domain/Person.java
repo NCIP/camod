@@ -11,10 +11,12 @@ import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import gov.nih.nci.camod.util.HashCodeUtil;
+
 /**
  * @author rajputs
  */
-public class Person extends Party {
+public class Person extends Party implements Comparable {
 
     private static final long serialVersionUID = 3258795453799404851L;
 
@@ -142,11 +144,26 @@ public class Person extends Party {
         return result;
     }
 
-    public boolean equals(Object o) {
-        if (!super.equals(o))
-            return false;
-        if (!(this.getClass().isInstance(o)))
-            return false;
-        return true;
+     public boolean equals(Object o) {
+      if (!super.equals(o)) return false;            
+      if (!(this.getClass().isInstance(o))) return false; 
+      final Person obj = (Person) o;
+      if (HashCodeUtil.notEqual(this.getLastName(), obj.getLastName())) return false;
+      return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getLastName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof Person) && (this.getLastName() != null) && (((Person)o).getLastName() != null)) {   
+        int result = this.getLastName().compareTo( ((Person)o).getLastName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }  
 }

@@ -41,11 +41,15 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the metastatisCollection.
      */
-    public List getMetastatisCollection() {
-        if (metastatisCollection != null) Collections.sort(metastatisCollection);    
+    public List getMetastatisCollection() {        
         return metastatisCollection;                 
     }
 
+    public List getMetastatisCollectionSorted() {      
+      if (metastatisCollection != null) return new ArrayList(new TreeSet(metastatisCollection));
+      return null;
+    }   
+    
     /**
      * @param metastatisCollection
      *            The metastatisCollection to set.
@@ -95,10 +99,14 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the diseaseCollection.
      */
-    public List getDiseaseCollection() {
-        if (diseaseCollection != null) Collections.sort(diseaseCollection);    
+    public List getDiseaseCollection() {        
         return diseaseCollection;                  
     }
+    
+     public List getDiseaseCollectionSorted() {      
+      if (diseaseCollection != null) return new ArrayList(new TreeSet(diseaseCollection));
+      return null;
+    }   
 
     /**
      * @param diseaseCollection
@@ -120,10 +128,14 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the clinicalMarkerCollection.
      */
-    public List getClinicalMarkerCollection() {
-        if (clinicalMarkerCollection != null) Collections.sort(clinicalMarkerCollection);    
+    public List getClinicalMarkerCollection() {        
         return clinicalMarkerCollection;              
     }
+    
+    public List getClinicalMarkerCollectionSorted() {      
+      if (clinicalMarkerCollection != null) return new ArrayList(new TreeSet(clinicalMarkerCollection));
+      return null;
+    }   
 
     /**
      * @param clinicalMarkerCollection

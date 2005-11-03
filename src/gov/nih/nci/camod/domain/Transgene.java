@@ -29,6 +29,12 @@ public class Transgene extends EngineeredGene {
     public List getTaxonCollection() {
         return taxonCollection;
     }
+    
+    public List getTaxonCollectionSorted() {      
+      if (taxonCollection != null) return new ArrayList(new TreeSet(taxonCollection));
+      return null;
+    }    
+    
 
     /**
      * @param taxonCollection
@@ -49,11 +55,15 @@ public class Transgene extends EngineeredGene {
     /**
      * @return Returns the regulatoryElementCollection.
      */
-    public List getRegulatoryElementCollection() {
-        if (regulatoryElementCollection != null) Collections.sort(regulatoryElementCollection);    
+    public List getRegulatoryElementCollection() {         
         return regulatoryElementCollection;                       
     }
 
+    public List getRegulatoryElementCollectionSorted() {      
+      if (regulatoryElementCollection != null) return new ArrayList(new TreeSet(regulatoryElementCollection));
+      return null;
+    }   
+    
     /**
      * @param regulatoryElementCollection
      *            The regulatoryElementCollection to set.

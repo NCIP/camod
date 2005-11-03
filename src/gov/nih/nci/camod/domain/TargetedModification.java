@@ -27,11 +27,15 @@ public class TargetedModification extends EngineeredGene {
     /**
      * @return Returns the modificationTypeCollection.
      */
-    public List getModificationTypeCollection() {
-        if (modificationTypeCollection != null) Collections.sort(modificationTypeCollection);    
+    public List getModificationTypeCollection() {        
         return modificationTypeCollection;           
     }
 
+    public List getModificationTypeCollectionSorted() {      
+      if (modificationTypeCollection != null) return new ArrayList(new TreeSet(modificationTypeCollection));
+      return null;
+    }   
+    
     /**
      * @param modificationTypeCollection
      *            The modificationTypeCollection to set.

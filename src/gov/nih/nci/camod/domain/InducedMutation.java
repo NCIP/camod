@@ -24,7 +24,12 @@ public class InducedMutation extends EngineeredGene {
     public List getGeneticAlterationCollection() {
         return geneticAlterationCollection;
     }
-
+   
+    public List getGeneticAlterationCollectionSorted() {      
+      if (geneticAlterationCollection != null) return new ArrayList(new TreeSet(geneticAlterationCollection));
+      return null;
+    }   
+    
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.
@@ -44,11 +49,15 @@ public class InducedMutation extends EngineeredGene {
     /**
      * @return Returns the geneticAlterationCollection.
      */
-    public List getEnvironmentalFactorCollection() {
-        if (environmentalFactorCollection != null) Collections.sort(environmentalFactorCollection);    
+    public List getEnvironmentalFactorCollection() {        
         return environmentalFactorCollection;         
     }
 
+    public List getEnvironmentalFactorCollectionSorted() {      
+      if (environmentalFactorCollection != null) return new ArrayList(new TreeSet(environmentalFactorCollection));
+      return null;
+    }   
+    
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.

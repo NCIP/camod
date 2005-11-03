@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 
@@ -31,6 +32,12 @@ public class ChemicalClass extends BaseObject implements Serializable, Comparabl
     public List getAgentCollection() {
         return agentCollection;
     }
+    
+    public List getAgentCollectionSorted() {      
+      if (agentCollection != null) return new ArrayList(new TreeSet(agentCollection));
+      return null;
+    }    
+
 
     /**
      * @param agentCollection

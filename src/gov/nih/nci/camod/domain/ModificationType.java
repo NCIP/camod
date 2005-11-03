@@ -8,6 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.List;
 
 import gov.nih.nci.camod.util.HashCodeUtil;
@@ -31,6 +32,11 @@ public class ModificationType extends BaseObject implements Comparable, Serializ
     public List getTargetedModificationCollection() {
         return targetedModificationCollection;
     }
+    
+    public List getTargetedModificationCollectionSorted() {      
+      if (targetedModificationCollection != null) return new ArrayList(new TreeSet(targetedModificationCollection));
+      return null;
+    }   
 
     /**
      * @param targetedModificationCollection

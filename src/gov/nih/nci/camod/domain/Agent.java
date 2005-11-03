@@ -31,10 +31,14 @@ public class Agent extends EnvironmentalFactor {
     /**
      * @return Returns the agentTargetCollection.
      */
-    public List getAgentTargetCollection() {      
-      if (agentTargetCollection != null) Collections.sort(agentTargetCollection);
+    public List getAgentTargetCollection() {            
       return agentTargetCollection;                    
     }
+
+    public List getAgentTargetCollectionSorted() {      
+      if (agentTargetCollection != null) return new ArrayList(new TreeSet(agentTargetCollection));
+      return null;
+    }    
 
     /**
      * @param agentTargetCollection
@@ -56,11 +60,15 @@ public class Agent extends EnvironmentalFactor {
     /**
      * @return Returns the chemicalClassCollection.
      */
-    public List getChemicalClassCollection() {      
-      if (chemicalClassCollection != null) Collections.sort(chemicalClassCollection);
+    public List getChemicalClassCollection() {            
       return chemicalClassCollection;        
     }
 
+    public List getChemicalClassCollectionSorted() {      
+      if (chemicalClassCollection != null) return new ArrayList(new TreeSet(chemicalClassCollection));
+      return null;
+    }    
+    
     /**
      * @param chemicalClassCollection
      *            The chemicalClassCollection to set.
@@ -81,11 +89,16 @@ public class Agent extends EnvironmentalFactor {
     /**
      * @return Returns the biologicalProcessCollection.
      */
-    public List getBiologicalProcessCollection() {     
-      if (biologicalProcessCollection != null) Collections.sort(biologicalProcessCollection);
+    public List getBiologicalProcessCollection() {           
       return biologicalProcessCollection;                       
     }
 
+    public List getBiologicalProcessCollectionSorted() {      
+      if (biologicalProcessCollection != null) return new ArrayList(new TreeSet(biologicalProcessCollection));
+      return null;
+    }    
+    
+    
     /**
      * @param biologicalProcessCollection
      *            The biologicalProcessCollection to set.

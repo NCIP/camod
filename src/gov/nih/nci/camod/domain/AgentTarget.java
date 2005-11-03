@@ -8,6 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.List;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
@@ -31,6 +32,11 @@ public class AgentTarget extends BaseObject implements Serializable, Comparable 
     public List getAgentCollection() {
         return agentCollection;
     }
+    
+    public List getAgentCollectionSorted() {      
+      if (agentCollection != null) return new ArrayList(new TreeSet(agentCollection));
+      return null;
+    }    
 
     /**
      * @param agentCollection

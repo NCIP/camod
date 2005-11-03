@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
@@ -49,7 +50,12 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
     public List getGeneticAlterationCollection() {
         return geneticAlterationCollection;
     }
-
+    
+    public List getGeneticAlterationCollectionSorted() {      
+      if (geneticAlterationCollection != null) return new ArrayList(new TreeSet(geneticAlterationCollection));
+      return null;
+    }    
+    
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.

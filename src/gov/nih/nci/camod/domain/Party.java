@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 
 
@@ -31,6 +32,11 @@ public class Party extends BaseObject implements Serializable {
     public List getRoleCollection() {
         return roleCollection;
     }
+    
+    public List getRoleCollectionSorted() {      
+      if (roleCollection != null) return new ArrayList(new TreeSet(roleCollection));
+      return null;
+    }       
 
     /**
      * @param roleCollection
@@ -56,6 +62,12 @@ public class Party extends BaseObject implements Serializable {
     public List getContactInfoCollection() {
         return contactInfoCollection;
     }
+    
+    public List getContactInfoCollectionSorted() {      
+      if (contactInfoCollection != null) return new ArrayList(new TreeSet(contactInfoCollection));
+      return null;
+    }       
+
 
     /**
      * @param contactInfoCollection

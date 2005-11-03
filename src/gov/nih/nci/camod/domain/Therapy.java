@@ -111,10 +111,14 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     /**
      * @return Returns the publicationCollection.
      */
-    public List getPublicationCollection() {
-        if (publicationCollection != null) Collections.sort(publicationCollection);    
+    public List getPublicationCollection() {        
         return publicationCollection;                 
     }
+    
+     public List getPublicationCollectionSorted() {      
+      if (publicationCollection != null) return new ArrayList(new TreeSet(publicationCollection));
+      return null;
+    }   
 
     /**
      * @param publicationCollection

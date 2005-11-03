@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -16,7 +17,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class InvivoResult extends BaseObject implements Serializable, Duplicatable {
+public class InvivoResult extends BaseObject implements Serializable, Duplicatable, Comparable {
 
     private static final long serialVersionUID = 3259235453799404851L;
     
@@ -142,10 +143,28 @@ public class InvivoResult extends BaseObject implements Serializable, Duplicatab
        return result;
      }  
     
+
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final InvivoResult obj = (InvivoResult) o;
+      if (HashCodeUtil.notEqual(this.getAgent(), obj.getAgent())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getAgent());    
+      return result + super.hashCode();    
+    }  
     
+    public int compareTo(Object o) {
+      if ((o instanceof InvivoResult) && (this.getAgent() != null) && (((InvivoResult)o).getAgent() != null)) {   
+        int result = this.getAgent().compareTo( ((InvivoResult)o).getAgent() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
 }

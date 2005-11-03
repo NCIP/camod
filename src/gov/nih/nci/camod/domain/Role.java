@@ -9,6 +9,9 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
+
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 
 /**
@@ -17,7 +20,7 @@ import java.util.List;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Role extends BaseObject implements Serializable {
+public class Role extends BaseObject implements Serializable, Comparable {
 
     private static final long serialVersionUID = 3258695453799404851L;
     
@@ -31,6 +34,11 @@ public class Role extends BaseObject implements Serializable {
         return partyCollection;
     }
 
+    public List getPartyCollectionSorted() {      
+      if (partyCollection != null) return new ArrayList(new TreeSet(partyCollection));
+      return null;
+    }    
+    
     /**
      * @param partyCollection
      *            The partyCollection to set.
@@ -64,9 +72,27 @@ public class Role extends BaseObject implements Serializable {
        return result;
      }  
     
-    public boolean equals(Object o) {
+     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final Role obj = (Role) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof Role) && (this.getName() != null) && (((Role)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((Role)o).getName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
 }

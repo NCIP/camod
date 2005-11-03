@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.11 2005-11-02 19:10:52 georgeda Exp $
+ * $Id: CellLine.java,v 1.12 2005-11-03 16:54:55 piparom Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/02 19:10:52  georgeda
+ * Removed warnings
+ *
  * Revision 1.10  2005/11/02 17:24:47  piparom
  * fixed issue in collection fetching..added null checking prior to sorting
  *
@@ -99,11 +102,15 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
     /**
      * @return Returns the publicationCollection.
      */
-    public List getPublicationCollection() {
-       if (publicationCollection != null) Collections.sort(publicationCollection);    
+    public List getPublicationCollection() {        
       return publicationCollection;       
     }
 
+    public List getPublicationCollectionSorted() {      
+      if (publicationCollection != null) return new ArrayList(new TreeSet(publicationCollection));
+      return null;
+    }   
+    
     /**
      * @param publicationCollection
      *            The publicationCollection to set.

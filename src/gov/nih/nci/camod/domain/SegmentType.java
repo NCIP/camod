@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -16,7 +17,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class SegmentType extends BaseObject implements Serializable, Duplicatable {
+public class SegmentType extends BaseObject implements Serializable, Duplicatable, Comparable {
 
     private static final long serialVersionUID = 3258655453799404851L;
     
@@ -65,7 +66,25 @@ public class SegmentType extends BaseObject implements Serializable, Duplicatabl
     
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final SegmentType obj = (SegmentType) o;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getName());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof SegmentType) && (this.getName() != null) && (((SegmentType)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((SegmentType)o).getName() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
 }

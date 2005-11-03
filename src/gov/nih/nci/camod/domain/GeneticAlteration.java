@@ -9,6 +9,7 @@ package gov.nih.nci.camod.domain;
 import java.io.Serializable;
 
 import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
@@ -16,7 +17,7 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class GeneticAlteration extends BaseObject implements Serializable, Duplicatable {
+public class GeneticAlteration extends BaseObject implements Serializable, Duplicatable, Comparable {
 
     private static final long serialVersionUID = 3259335453799404851L;
     
@@ -64,10 +65,29 @@ public class GeneticAlteration extends BaseObject implements Serializable, Dupli
        return result;
      }  
      
+   
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
+      if (!(this.getClass().isInstance(o))) return false; 
+      final GeneticAlteration obj = (GeneticAlteration) o;
+      if (HashCodeUtil.notEqual(this.getObservation(), obj.getObservation())) return false;
       return true;
     }
+     
+    public int hashCode() {
+      int result = HashCodeUtil.SEED;
+      result = HashCodeUtil.hash(result, this.getObservation());    
+      return result + super.hashCode();    
+    }  
+    
+    public int compareTo(Object o) {
+      if ((o instanceof GeneticAlteration) && (this.getObservation() != null) && (((GeneticAlteration)o).getObservation() != null)) {   
+        int result = this.getObservation().compareTo( ((GeneticAlteration)o).getObservation() );
+        if (result != 0) { return result; }               
+      }
+
+      return super.compareTo(o);
+    }      
+
      
 }

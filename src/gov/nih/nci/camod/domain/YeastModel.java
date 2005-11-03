@@ -8,6 +8,7 @@ package gov.nih.nci.camod.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 
 /**
@@ -29,6 +30,11 @@ public class YeastModel extends AbstractCancerModel {
     public List getTargetedModificationCollection() {
         return targetedModificationCollection;
     }
+    
+    public List getTargetedModificationCollectionSorted() {      
+      if (targetedModificationCollection != null) return new ArrayList(new TreeSet(targetedModificationCollection));
+      return null;
+    }    
 
     /**
      * @param targetedModificationCollection
@@ -48,6 +54,11 @@ public class YeastModel extends AbstractCancerModel {
     public List getScreeningResultCollection() {
         return screeningResultCollection;
     }
+    
+    public List getScreeningResultCollectionSorted() {      
+      if (screeningResultCollection != null) return new ArrayList(new TreeSet(screeningResultCollection));
+      return null;
+    }    
 
     /**
      * @param screeningResultCollection

@@ -10,6 +10,7 @@ import gov.nih.nci.camod.util.EvsTreeUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.List;
 
 import gov.nih.nci.camod.util.Duplicatable;
@@ -35,6 +36,11 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
     public List getHistopathologyCollection() {
         return histopathologyCollection;
     }
+    
+    public List getHistopathologyCollectionSorted() {      
+      if (histopathologyCollection != null) return new ArrayList(new TreeSet(histopathologyCollection));
+      return null;
+    }       
 
     /**
      * @param histopathologyCollection

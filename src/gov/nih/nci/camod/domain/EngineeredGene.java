@@ -38,7 +38,12 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     public Set getGeneFunctionCollection() {
         return geneFunctionCollection;
     }
-
+        
+    public List getGeneFunctionCollectionSorted() {      
+      if (geneFunctionCollection != null) return new ArrayList(new TreeSet(geneFunctionCollection));
+      return null;
+    }   
+    
     /**
      * @param geneFunctionCollection
      *            The geneFunctionCollection to set.
@@ -58,10 +63,14 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the expressionFeatureCollection.
      */
-    public List getExpressionFeatureCollection() {
-         if (expressionFeatureCollection != null) Collections.sort(expressionFeatureCollection);    
+    public List getExpressionFeatureCollection() {         
         return expressionFeatureCollection;                 
     }
+    
+    public List getExpressionFeatureCollectionSorted() {      
+      if (expressionFeatureCollection != null) return new ArrayList(new TreeSet(expressionFeatureCollection));
+      return null;
+    }   
 
     /**
      * @param expressionFeatureCollection
