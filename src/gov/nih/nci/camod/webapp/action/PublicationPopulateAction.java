@@ -37,7 +37,7 @@ public class PublicationPopulateAction extends BaseAction {
 		String aCellID = request.getParameter("aCellID");
 		String aTherapyID = request.getParameter("aTherapyID");
 		
-		pubForm.setAPubID( aPubID );
+		
 		pubForm.setACellID( aCellID );
 		pubForm.setATherapyID( aTherapyID );
 		
@@ -46,7 +46,7 @@ public class PublicationPopulateAction extends BaseAction {
 		Publication thePublication = thePublicationManager.get(aPubID);
 
 		if ( thePublication != null) {
-			
+            pubForm.setAPubID( aPubID );
 			pubForm.setAuthors(thePublication.getAuthors());
 
 			pubForm.setTitle(thePublication.getTitle());
