@@ -157,17 +157,17 @@ A.subMenuBlue:hover {
 	COLOR: #ffffff; BACKGROUND-COLOR: #0000CC
 }
 
-R:link {
-	COLOR: #D15C5C; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+A:subMenuMedRed:link {
+	COLOR: #ff6666; WHITE-SPACE: nowrap; TEXT-DECORATION: none
 }
 A.subMenuMedRed:visited {
-	COLOR: #D15C5C; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+	COLOR: #ff6666; WHITE-SPACE: nowrap; TEXT-DECORATION: none
 }
 A.subMenuMedRed:active {
-	COLOR: #D15C5C; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+	COLOR: #ff6666; WHITE-SPACE: nowrap; TEXT-DECORATION: none
 }
 A.subMenuMedRed:hover {
-	COLOR: #ffffff; BACKGROUND-COLOR: #D15C5C
+	COLOR: #ffffff; BACKGROUND-COLOR: #ff6666
 }
 
 .masterTitle {

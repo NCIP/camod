@@ -1,12 +1,13 @@
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
-
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.EngineeredGene;
-import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.domain.ExpressionFeature;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.TargetedModification;
+import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.service.AssociatedExpressionManager;
 import gov.nih.nci.camod.service.EngineeredTransgeneManager;
+import gov.nih.nci.camod.service.GenomicSegmentManager;
+import gov.nih.nci.camod.service.TargetedModificationManager;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,25 +36,17 @@ public class AssociatedExpressionAction extends BaseAction {
 
         log.trace("Entering edit");
 
+        
         // Create a form to edit
         AssociatedExpressionForm associatedExpressionForm = (AssociatedExpressionForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, associatedExpressionForm);
-             
-        // Grab the current modelID from the session
-        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
-        
+
         // Grab the current Engineered Transgene that is being edited from the session
-        String aEngineeredGeneID = request.getParameter("engineeredGeneID");
-        
-        // Grab the current modelID from the session
         String aAssociatedExpressionID = request.getParameter("aAssociatedExpressionID");
         
-        associatedExpressionForm.setEngineeredGeneID( aAssociatedExpressionID );
-        
-        log.info("<AssocExpression save> following Characteristics:" 
+        log.info("<AssocExpression edit> following Characteristics:" 
         		+ "\n\t getExpressionLevel: " + associatedExpressionForm.getExpressionLevel()
                 + "\n\t getName: " + associatedExpressionForm.getName()        
-                + "\n\t getEngineeredGeneID: " + aEngineeredGeneID
+                + "\n\t aAssociatedExpressionID: " + aAssociatedExpressionID
                 + "\n\t getOrganTissueCode: " + associatedExpressionForm.getOrganTissueCode()
                 + "\n\t getOrganTissueName: " + associatedExpressionForm.getOrganTissueName()
                 + "\n\t getOrgan: " + associatedExpressionForm.getOrgan()
@@ -62,18 +55,11 @@ public class AssociatedExpressionAction extends BaseAction {
         String theForward = "AnimalModelTreePopulateAction";
         
         try {
+
+        	AssociatedExpressionManager theAssociatedExpressionManager = (AssociatedExpressionManager) getBean( "associatedExpressionManager");
+        	ExpressionFeature theExpressionFeature = theAssociatedExpressionManager.get( aAssociatedExpressionID );
+        	theAssociatedExpressionManager.update( associatedExpressionForm, theExpressionFeature );
         	
-            EngineeredTransgeneManager theEngineeredTransgeneManager = (EngineeredTransgeneManager) getBean( "engineeredTransgeneManager" );        
-            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");            
-            AnimalModel theAnimalModel = theAnimalModelManager.get( theModelId );
-            
-            List engineeredGeneList = theAnimalModel.getEngineeredGeneCollection();
-            for (int i = 0; i < engineeredGeneList.size(); i++) {
-            	EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);    
-            	if ( engineeredGene.getId().toString().equals(aEngineeredGeneID) ) 
-            		theEngineeredTransgeneManager.updateAssociatedExpression( associatedExpressionForm, engineeredGene );
-            }
-            
             log.info("New AssociatedExpression created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
@@ -109,21 +95,24 @@ public class AssociatedExpressionAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering save");
-
-        // Create a form to edit
+        
+        // Create a form to save
         AssociatedExpressionForm associatedExpressionForm = (AssociatedExpressionForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, associatedExpressionForm);
              
         // Grab the current modelID from the session
-        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        //String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         
         // Grab the current Engineered Transgene that is being edited from the session
-        String aEngineeredGeneID = request.getParameter("engineeredGeneID");
+    	String aEngineeredTransgeneID = request.getParameter( "aEngineeredTransgeneID" );
+    	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
+    	String aTargetedModificationID = request.getParameter( "aTargetedModificationID" );    
         
         log.info("<AssocExpression save> following Characteristics:" 
         		+ "\n\t getExpressionLevel: " + associatedExpressionForm.getExpressionLevel()
                 + "\n\t getName: " + associatedExpressionForm.getName()        
-                + "\n\t getEngineeredGeneID: " + aEngineeredGeneID
+                + "\n\t aEngineeredTransgeneID: " + aEngineeredTransgeneID
+                + "\n\t aGenomicSegmentID: " + aGenomicSegmentID
+                + "\n\t aTargetedModificationID: " + aTargetedModificationID
                 + "\n\t getOrganTissueCode: " + associatedExpressionForm.getOrganTissueCode()
                 + "\n\t getOrganTissueName: " + associatedExpressionForm.getOrganTissueName()
                 + "\n\t getOrgan: " + associatedExpressionForm.getOrgan()
@@ -132,18 +121,31 @@ public class AssociatedExpressionAction extends BaseAction {
         String theForward = "AnimalModelTreePopulateAction";
         
         try {
-            // retrieve model and update w/ new values
-            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-            AnimalModel theAnimalModel = theAnimalModelManager.get( theModelId );
-            
-            List engineeredGeneList = theAnimalModel.getEngineeredGeneCollection();
-            for (int i = 0; i < engineeredGeneList.size(); i++) {
-            	EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);                	
-            	if ( engineeredGene.getId().toString().equals( aEngineeredGeneID ) ) {
-            		theAnimalModelManager.addAssociatedExpression( theAnimalModel, engineeredGene, associatedExpressionForm  );
-            	}
-            }           
-
+        
+        	AssociatedExpressionManager theAssociatedExpressionManager = (AssociatedExpressionManager) getBean( "associatedExpressionManager");
+        	ExpressionFeature theExpressionFeature = theAssociatedExpressionManager.create( associatedExpressionForm );
+        	
+        	if ( aEngineeredTransgeneID != null ){
+        		 EngineeredTransgeneManager theEngineeredTransgeneManager = (EngineeredTransgeneManager) getBean( "engineeredTransgeneManager" );
+        		 Transgene theTransgene = theEngineeredTransgeneManager.get( aEngineeredTransgeneID );
+        		 theTransgene.addExpressionFeature( theExpressionFeature );
+        		 theEngineeredTransgeneManager.save(theTransgene);
+        		 //save it
+        		 
+        	} else if ( aGenomicSegmentID != null ) {
+        		GenomicSegmentManager theGenomicSegmentManager = (GenomicSegmentManager) getBean( "genomicSegmentManager" );
+        		GenomicSegment theGenomicSegment = theGenomicSegmentManager.get( aGenomicSegmentID );
+        		theGenomicSegment.addExpressionFeature( theExpressionFeature );
+        		theGenomicSegmentManager.save( theGenomicSegment );
+        		//save it
+        	} else if ( aTargetedModificationID != null ) {
+        		TargetedModificationManager theTargetedModificationManager = (TargetedModificationManager) getBean("targetedModificationManager");
+        		TargetedModification theTargetedModification = theTargetedModificationManager.get( aTargetedModificationID );
+        		theTargetedModification.addExpressionFeature( theExpressionFeature );
+        		theTargetedModificationManager.save(theTargetedModification);
+        		//save it
+        	} else {}
+     
             log.info("New AssociatedExpression created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've

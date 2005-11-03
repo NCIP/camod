@@ -53,7 +53,7 @@
 					
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aEngineeredTransgeneID }' /> ">
+					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />">
 						<bean:write name="aExpressionFeature" property="organ.name" filter="true"/>
 					</a><br>
 					
@@ -71,7 +71,7 @@
 			      
 			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			      <img src="images/plus.gif" border="0"> 
-			      <html:link styleClass="subMenuDarkRed" action="AssociatedExpressionPopulateAction.do?method=dropdown" paramId="aEngineeredTransgeneID" paramName="aGenomicSegment" paramProperty="id">Enter Assoc Expression</html:link><br>
+			      <html:link styleClass="subMenuDarkRed" action="AssociatedExpressionPopulateAction.do?method=dropdown" paramId="aGenomicSegmentID" paramName="aGenomicSegment" paramProperty="id">Enter Assoc Expression</html:link><br>
 			      
 			    <bean:define id="expressionFeatureList" name="aGenomicSegment" property="expressionFeatureCollection" />
 				<logic:iterate id="aExpressionFeature" name="expressionFeatureList" type="ExpressionFeature">
@@ -81,7 +81,7 @@
 					
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aGenomicSegmentID }' /> ">
+					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />">
 						<bean:write name="aExpressionFeature" property="organ.name" filter="true"/>
 					</a><br>
 					
@@ -99,7 +99,7 @@
 			      
 			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			      <img src="images/plus.gif" border="0"> 
-			      <html:link styleClass="subMenuDarkRed" action="AssociatedExpressionPopulateAction.do?method=dropdown" paramId="aEngineeredTransgeneID" paramName="aTargetedModification" paramProperty="id">Enter Assoc Expression</html:link><br>
+			      <html:link styleClass="subMenuDarkRed" action="AssociatedExpressionPopulateAction.do?method=dropdown" paramId="aTargetedModificationID" paramName="aTargetedModification" paramProperty="id">Enter Assoc Expression</html:link><br>
 			      
 			    <bean:define id="expressionFeatureList" name="aTargetedModification" property="expressionFeatureCollection" />
 				<logic:iterate id="aExpressionFeature" name="expressionFeatureList" type="ExpressionFeature">
@@ -109,7 +109,7 @@
 					
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aTargetedModificationID }' /> ">
+					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />">
 						<bean:write name="aExpressionFeature" property="organ.name" filter="true"/>
 					</a><br>
 					
@@ -224,7 +224,7 @@
 				
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
+					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
 				
 				</logic:iterate>				 
 			  </logic:iterate>
@@ -254,10 +254,9 @@
 				
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
+					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
 				
-				</logic:iterate>	
-			 
+				</logic:iterate>				 
 			 </logic:iterate>		    
 		<br>
 	</span>

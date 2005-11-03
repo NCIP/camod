@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.52 2005-11-03 17:01:30 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.53 2005-11-03 17:22:35 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2005/11/03 17:01:30  georgeda
+ * Change taxon creation strat.
+ *
  * Revision 1.51  2005/11/02 21:46:09  georgeda
  * Fixed creation of sex distribution
  *
@@ -928,16 +931,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
     }
 
-    public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene,
-            AssociatedExpressionData inAssociatedExpressionData) throws Exception {
+    public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene, AssociatedExpressionData inAssociatedExpressionData) 
+    	throws Exception {
 
         System.out.println("<AnimalModelManagerImpl addAssociatedExpression>");
         log.trace("Entering AnimalModelManagerImpl.addAssociatedExpression");
 
-        // addAssociatedExpression (ExpressionFeature
-        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData,
-                inEngineeredGene);
-
+        // addAssociatedExpression (ExpressionFeature)
+        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData, inEngineeredGene);
         save(inAnimalModel);
 
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");

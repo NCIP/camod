@@ -34,7 +34,6 @@
     <!-- commentsManager -->
     <bean id="commentsManager" class="gov.nih.nci.camod.service.impl.CommentsManagerImpl"/>    
 
-    
     <!--  engineeredTransgene -->
     <bean id="engineeredTransgeneManager" class="gov.nih.nci.camod.service.impl.EngineeredTransgeneManagerImpl"/>
 
@@ -94,6 +93,9 @@
            
     <!-- userManager -->
     <bean id="userManager" class="gov.nih.nci.camod.service.impl.UserManagerImpl"/>
+    
+    <!--  associatedExpressionManager -->
+    <bean id="associatedExpressionManager" class="gov.nih.nci.camod.service.impl.AssociatedExpressionManagerImpl"/>
     
     <!-- XenograftManager -->
     <bean id="xenograftManager" class="gov.nih.nci.camod.service.impl.XenograftManagerImpl"/>

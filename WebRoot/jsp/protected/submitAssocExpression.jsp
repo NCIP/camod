@@ -10,14 +10,19 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
-	String aEngineeredGeneID = request.getParameter( "aEngineeredTransgeneID" );
+	String aEngineeredTransgeneID = request.getParameter( "aEngineeredTransgeneID" );
+	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
+	String aTargetedModificationID = request.getParameter( "aTargetedModificationID" );
 	String aAssociatedExpressionID = request.getParameter( "aAssociatedExpressionID" );
-	
-	//if aEngineeredGeneID is passed in, then we are dealing with a previously entered model and are editing it
-	//otherwise, create a new one
 	
 	String actionName = "AssociatedExpressionAction.do?method=save";
 	
+	if ( aEngineeredTransgeneID != null )
+		actionName = "AssociatedExpressionAction.do?method=save&aEngineeredTransgeneID=" + aEngineeredTransgeneID;
+	if ( aGenomicSegmentID != null )
+		actionName = "AssociatedExpressionAction.do?method=save&aGenomicSegmentID=" + aGenomicSegmentID;
+	if ( aTargetedModificationID != null )
+		actionName = "AssociatedExpressionAction.do?method=save&aTargetedModificationID=" + aTargetedModificationID;
 	if ( aAssociatedExpressionID != null )
 		actionName = "AssociatedExpressionAction.do?method=edit";
 %>
@@ -86,7 +91,6 @@
 				
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->				 
 				  <input type="hidden" name="aAssociatedExpressionID" value="<%= aAssociatedExpressionID %>">
-				  <input type="hidden" name="engineeredGeneID" value="<%= aEngineeredGeneID %>">
 				  	
 				</html:form>			
 			</TABLE>
