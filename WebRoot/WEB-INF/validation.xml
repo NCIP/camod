@@ -645,34 +645,7 @@
                 <var-value>255</var-value>
             </var>
     	</field>
-	</form>		
-	
-	<form name="imageForm">
-        <field property="fileLocation" depends="required,maxlength">
-            <arg0 key="ImageForm.fileLocation"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field> 
-        <field property="title" depends="required,maxlength">
-            <arg0 key="ImageForm.title"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field> 
-       <field property="descriptionOfConstruct" depends="maxlength">
-            <arg0 key="ImageForm.DescriptionOfConstruct"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field> 
-    </form>
+	</form>
     	
 	<form name="cellLineForm">
         <field property="cellLineName" depends="required,maxlength">
@@ -1206,12 +1179,6 @@
             </var>
         </field>
 	</form>		
-
-	<form name="imageForm">
-        <field property="title" depends="required">
-            <arg0 key="ImageForm.title"/>
-    	</field> 
-	</form>	
 	
 	<form name="publicationForm">
         <field property="authors" depends="required,maxlength">
@@ -1267,6 +1234,9 @@
 	</form>		
 
   	<form name="userSettingsForm">
+        <field property="affiliation" depends="required">
+            <arg0 key="UserSettingsForm.affiliation"/>
+        </field>
         <field property="firstName" depends="required, maxlength">
             <arg0 key="UserSettingsForm.firstName"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -1325,6 +1295,13 @@
                 <var-value>255</var-value>
             </var>
         </field>
+        <field property="piEmail" depends="validwhen,email">
+            <arg0 key="UserSettingsForm.piEmail"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>((principalInvestigator == 'true') or ((piUsername != null) or (*this* != null)))</var-value>
+            </var>
+        </field>
     </form>
     
     <form name="editUserForm">
@@ -1355,14 +1332,6 @@
     </form>
     
 	<form name="imageForm">
-        <field property="fileLocation" depends="required,maxlength">
-            <arg0 key="ImageForm.fileLocation"/>
-            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-            <var>
-                <var-name>maxlength</var-name>
-                <var-value>255</var-value>
-            </var>
-    	</field> 
         <field property="title" depends="required,maxlength">
             <arg0 key="ImageForm.title"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
