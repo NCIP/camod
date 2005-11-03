@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.17 2005-10-27 18:13:48 guruswas Exp $
+ *  $Id: ViewModelAction.java,v 1.18 2005-11-03 15:47:11 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.17  2005/10/27 18:13:48  guruswas
+ *  Show all publications in the publications display page.
+ *
  *  Revision 1.16  2005/10/20 21:35:37  georgeda
  *  Fixed xenograft display bug
  *
@@ -536,6 +539,7 @@ public class ViewModelAction extends BaseAction {
         setCancerModel(request);
         request.getSession().setAttribute(Constants.XENOGRAFTMODEL, x);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
+        request.getSession().setAttribute(Constants.XENOGRAFTRESULTLIST, x.getInvivoResultCollectionByNSC(nsc));
         return mapping.findForward("viewInvivoDetails");
     }
 }

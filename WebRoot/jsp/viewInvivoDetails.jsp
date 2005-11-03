@@ -46,7 +46,7 @@
 				<td class="greySubTitle">Treated/Controls(%)</td>
 			</tr>
 			<c:set var="tdClass" value="resultsBoxGrey"/>
-			<c:forEach var="r" items="${mdl.invivoResultCollection}" 
+			<c:forEach var="r" items="${xenograftresultlist}" 
 				       varStatus="stat">
 				<c:if test="${r.agent.nscNumber == nsc}">
 				<c:choose>

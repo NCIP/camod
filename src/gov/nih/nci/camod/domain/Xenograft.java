@@ -6,9 +6,10 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.*;
-
+import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.HashCodeUtil;
+
+import java.util.*;
 
 /**
  * @author rajputs
@@ -36,6 +37,14 @@ public class Xenograft extends AbstractCancerModel implements Comparable {
 	private Taxon hostSpecies;
 	private Organ organ;
 	
+    /**
+     * @return Returns the invivoResultCollection.
+     * @throws Exception 
+     */
+    public List getInvivoResultCollectionByNSC(String inNSCNumber) throws Exception {
+        return QueryManagerSingleton.instance().getInvivoResultCollectionByNSC(inNSCNumber, getId().toString());
+    }
+    
 	/**
 	 * @return Returns the organ.
 	 */
