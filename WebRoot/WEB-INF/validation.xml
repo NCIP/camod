@@ -712,6 +712,12 @@
     	</field>
 	</form>
 
+  	<form name="associatedExpressionForm">
+        <field property="organTissueCode" depends="required">
+            <arg0 key="AssociatedExpressionForm.organTissueCode"/>
+        </field>
+    </form>
+    
 	<form name="engineeredTransgeneForm">
 	    <field property="locationOfIntegration" depends="required">
             <arg0 key="EngineeredTransgeneForm.locationOfIntegration"/>
