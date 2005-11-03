@@ -1349,7 +1349,171 @@
             </var>
     	</field> 
     </form>
-    	
+
+	<form name="histopathologyForm">
+        <field property="organTissueCode" depends="required">
+            <arg0 key="HistopathologyForm.organTissueCode"/>
+    	</field> 
+        <field property="diagnosisCode" depends="required">
+            <arg0 key="HistopathologyForm.diagnosisCode"/>
+    	</field> 
+    	<field property="ageOfOnset" depends="maxlength">
+            <arg0 key="HistopathologyForm.ageOfOnset"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="weightOfTumor" depends="float">
+            <arg0 key="HistopathologyForm.weightOfTumor"/>
+    	</field> 
+        <field property="volumeOfTumor" depends="float">
+            <arg0 key="HistopathologyForm.volumeOfTumor"/>
+    	</field>
+        <field property="tumorIncidenceRate" depends="float">
+            <arg0 key="HistopathologyForm.tumorIncidenceRate"/>
+    	</field> 
+    	<field property="survivalInfo" depends="maxlength">
+            <arg0 key="HistopathologyForm.survivalInfo"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="grossDescription" depends="maxlength">
+            <arg0 key="HistopathologyForm.grossDescription"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="microscopicDescription" depends="maxlength">
+            <arg0 key="HistopathologyForm.microscopicDescription"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>2000</var-value>
+            </var>
+    	</field>
+    	<field property="observation" depends="maxlength">
+            <arg0 key="HistopathologyForm.observation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="methodOfObservation" depends="maxlength">
+            <arg0 key="HistopathologyForm.methodOfObservation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="comparativeData" depends="maxlength">
+            <arg0 key="HistopathologyForm.ageOfOnset"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="comments" depends="maxlength">
+            <arg0 key="HistopathologyForm.comment"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    </form>
+    
+    <form name="associatedMetastasisForm">
+        <field property="organTissueCode" depends="required">
+            <arg0 key="HistopathologyForm.organTissueCode"/>
+    	</field> 
+        <field property="diagnosisCode" depends="required">
+            <arg0 key="HistopathologyForm.diagnosisCode"/>
+    	</field> 
+    	<field property="ageOfOnset" depends="maxlength">
+            <arg0 key="AssociatedMetastasisForm.ageOfOnset"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+        <field property="weightOfTumor" depends="float">
+            <arg0 key="AssociatedMetastasisForm.weightOfTumor"/>
+    	</field> 
+        <field property="volumeOfTumor" depends="float">
+            <arg0 key="AssociatedMetastasisForm.volumeOfTumor"/>
+    	</field>
+        <field property="tumorIncidenceRate" depends="float">
+            <arg0 key="AssociatedMetastasisForm.tumorIncidenceRate"/>
+    	</field> 
+    	<field property="survivalInfo" depends="maxlength">
+            <arg0 key="HistopathologyForm.survivalInfo"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="grossDescription" depends="maxlength">
+            <arg0 key="HistopathologyForm.grossDescription"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="microscopicDescription" depends="maxlength">
+            <arg0 key="HistopathologyForm.microscopicDescription"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>2000</var-value>
+            </var>
+    	</field>
+    	<field property="observation" depends="maxlength">
+            <arg0 key="HistopathologyForm.observation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="methodOfObservation" depends="maxlength">
+            <arg0 key="HistopathologyForm.methodOfObservation"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="comparativeData" depends="maxlength">
+            <arg0 key="HistopathologyForm.ageOfOnset"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    	<field property="comments" depends="maxlength">
+            <arg0 key="HistopathologyForm.comment"/>
+            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+            <var>
+                <var-name>maxlength</var-name>
+                <var-value>255</var-value>
+            </var>
+    	</field>
+    </form>
+    
 	<form name="xenograftForm">
         <field property="name" depends="required,maxlength">
             <arg0 key="XenograftForm.name"/>

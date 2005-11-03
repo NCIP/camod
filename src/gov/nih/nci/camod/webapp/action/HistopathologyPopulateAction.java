@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.3 2005-11-03 21:48:07 georgeda Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.4 2005-11-03 22:29:12 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/11/03 21:48:07  georgeda
+ * Cleanup
+ *
  * Revision 1.2  2005/11/03 18:54:10  pandyas
  * Modified for histopathology screens
  *
@@ -47,9 +50,9 @@ public class HistopathologyPopulateAction extends BaseAction {
         Histopathology theHistopathology = HistopathologyManagerSingleton.instance().get(aHistopatholgyID);
 
         if (theHistopathology == null) {
-            request.setAttribute("aHistopatholgyID", null);
+            request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
-            request.setAttribute("aHistopatholgyID", aHistopatholgyID);
+            request.setAttribute("aHistopathologyID", aHistopatholgyID);
 
             // Prepopulate all dropdown fields, set the global Constants to the
             // following
@@ -101,9 +104,6 @@ public class HistopathologyPopulateAction extends BaseAction {
         // following
         this.dropdown(request, response);
 
-        // Store the Form in session to be used by the JSP
-        request.getSession().setAttribute(Constants.FORMDATA, histopathologyForm);
-
         return mapping.findForward("submitHistopathology");
     }
 
@@ -121,10 +121,6 @@ public class HistopathologyPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         System.out.println("<HistopathologyPopulateAction dropdown> Entering ActionForward dropdown()");
-
-        // blank out the FORMDATA Constant field
-        HistopathologyForm histopathologyForm = (HistopathologyForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, histopathologyForm);
 
         // setup dropdown menus
         this.dropdown(request, response);

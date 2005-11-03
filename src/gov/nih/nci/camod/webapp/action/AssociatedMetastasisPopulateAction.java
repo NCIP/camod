@@ -96,9 +96,6 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
         // following
         this.dropdown(request, response);
 
-        // Store the Form in session to be used by the JSP
-        request.getSession().setAttribute(Constants.FORMDATA, assocMetastasisForm);
-
         return mapping.findForward("submitAssocMetastasis");
     }
 
@@ -116,10 +113,6 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         System.out.println("<AssociatedMetastasisPopulateAction dropdown> Entering ActionForward dropdown()");
-
-        // blank out the FORMDATA Constant field
-        AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
-        request.getSession().setAttribute(Constants.FORMDATA, assocMetastasisForm);
 
         // setup dropdown menus
         this.dropdown(request, response);
