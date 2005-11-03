@@ -104,7 +104,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
         	
         	if( expFeature.getId().toString().equals( inAssociatedExpressionData.getEngineeredGeneID() )) {        		        		
         		        		        		
-        		String preferedOrganName = EvsTreeUtil.getEVSPreferedOrganDescription(inAssociatedExpressionData.getOrganTissueCode());
+        		String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inAssociatedExpressionData.getOrganTissueCode());
         		Organ organ = expFeature.getOrgan();
         		organ.setName(preferedOrganName);
         		organ.setConceptCode( inAssociatedExpressionData.getOrganTissueCode());
@@ -128,7 +128,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		
 		ExpressionFeature expFeature = new ExpressionFeature();
 		
-		String preferedOrganName = EvsTreeUtil.getEVSPreferedOrganDescription(inAssociatedExpressionData.getOrganTissueCode());
+		String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inAssociatedExpressionData.getOrganTissueCode());
 		expFeature.setOrgan( new Organ() );
 		expFeature.getOrgan().setName(preferedOrganName);
 		expFeature.getOrgan().setConceptCode( inAssociatedExpressionData.getOrganTissueCode());

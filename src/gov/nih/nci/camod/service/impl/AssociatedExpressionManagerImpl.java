@@ -51,7 +51,7 @@ public class AssociatedExpressionManagerImpl extends BaseManager implements Asso
 	private void populate(AssociatedExpressionData inAssociatedExpressionData, ExpressionFeature inExpressionFeature) 
 		throws Exception 
 	{
-		String preferedOrganName = EvsTreeUtil.getEVSPreferedOrganDescription(inAssociatedExpressionData.getOrganTissueCode());
+		String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inAssociatedExpressionData.getOrganTissueCode());
 		inExpressionFeature.setOrgan( new Organ() );
 		inExpressionFeature.getOrgan().setName(preferedOrganName);
 		inExpressionFeature.getOrgan().setConceptCode( inAssociatedExpressionData.getOrganTissueCode());

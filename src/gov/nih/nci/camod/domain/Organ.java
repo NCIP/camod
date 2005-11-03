@@ -70,7 +70,7 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
      * @return Returns the EVS Preferred displayName
      */
     public String getEVSPreferredDescription() {
-        return EvsTreeUtil.getEVSPreferedOrganDescription(conceptCode);
+        return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
     }
 
     /**

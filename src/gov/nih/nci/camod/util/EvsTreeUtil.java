@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.2 2005-09-22 13:04:31 georgeda Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.3 2005-11-03 21:47:56 georgeda Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2005/09/22 13:04:31  georgeda
+ *  Added app server call
+ *
  *  Revision 1.1  2005/09/21 20:34:59  georgeda
  *  Create util for fetching/caching EVS data
  *
@@ -29,7 +32,7 @@ public class EvsTreeUtil {
 
     static private final Log log = LogFactory.getLog(EvsTreeUtil.class);
 
-    static private Map ourOrganDescriptions = new HashMap();
+    static private Map ourDescriptions = new HashMap();
 
     private EvsTreeUtil() {
     }
@@ -43,14 +46,14 @@ public class EvsTreeUtil {
      * 
      * @return the preferred name, or an empty string if something goes wrong.
      */
-    public static synchronized String getEVSPreferedOrganDescription(String inConceptCode) {
+    public static synchronized String getEVSPreferedDescription(String inConceptCode) {
 
-        log.trace("Entering getEVSPreferedOrganDescription");
+        log.trace("Entering getEVSPreferedDescription");
 
         String theDescription = "";
 
-        if (ourOrganDescriptions.containsKey(inConceptCode)) {
-            theDescription = (String) ourOrganDescriptions.get(inConceptCode);
+        if (ourDescriptions.containsKey(inConceptCode)) {
+            theDescription = (String) ourDescriptions.get(inConceptCode);
         } else {
 
             try {
@@ -81,7 +84,7 @@ public class EvsTreeUtil {
                         theDescription = (String) theDisplayNameList.get(0);
 
                         // Cache for next time
-                        ourOrganDescriptions.put(inConceptCode, theDescription);
+                        ourDescriptions.put(inConceptCode, theDescription);
                     }
                 }
 
@@ -89,7 +92,7 @@ public class EvsTreeUtil {
                 log.error("Exception getting preferred description: ", e);
             }
         }
-        log.trace("Exiting getEVSPreferedOrganDescription");
+        log.trace("Exiting getEVSPreferedDescription");
 
         return theDescription;
     }

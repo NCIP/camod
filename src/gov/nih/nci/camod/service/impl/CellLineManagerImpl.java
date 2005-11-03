@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLineManagerImpl.java,v 1.8 2005-11-01 18:14:28 schroedn Exp $
+ * $Id: CellLineManagerImpl.java,v 1.9 2005-11-03 21:47:48 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/01 18:14:28  schroedn
+ * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
+ *
  * Revision 1.7  2005/10/20 20:26:09  pandyas
  * EVSTree (organ) functions properly
  *
@@ -102,7 +105,7 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
         {
        	System.out.println("Organ is new or was modified so retrieve attributes");
         //always get/store organ name through the concept code - never deal with converting name back and forth
-        String preferedOrganName = EvsTreeUtil.getEVSPreferedOrganDescription(inCellLineData.getOrganTissueCode());
+        String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inCellLineData.getOrganTissueCode());
         	
         System.out.println("preferedOrganName: " + preferedOrganName);
         inCellLine.getOrgan().setName(preferedOrganName); 

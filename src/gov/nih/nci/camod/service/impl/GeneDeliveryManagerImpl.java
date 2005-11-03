@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.7 2005-11-02 19:02:55 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.8 2005-11-03 21:47:48 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/02 19:02:55  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.6  2005/10/20 20:02:42  pandyas
  * EVSTree (organ) functions properly
  *
@@ -172,7 +175,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         {
        	System.out.println("Organ is new or was modified so retrieve attributes");
         //always get/store organ name through the concept code - never deal with converting name back and forth
-        String preferedOrganName = EvsTreeUtil.getEVSPreferedOrganDescription(inGeneDeliveryData.getOrganTissueCode());
+        String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inGeneDeliveryData.getOrganTissueCode());
         	
         System.out.println("preferedOrganName: " + preferedOrganName);
         inGeneDelivery.getOrgan().setName(preferedOrganName); 
