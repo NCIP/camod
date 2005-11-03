@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.51 2005-11-02 21:46:09 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.52 2005-11-03 17:01:30 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2005/11/02 21:46:09  georgeda
+ * Fixed creation of sex distribution
+ *
  * Revision 1.50  2005/11/02 20:56:04  schroedn
  * Added Staining to Image submission
  *
@@ -153,7 +156,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
-
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -461,26 +463,22 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         // Create/reuse the taxon
         Taxon theTaxon = inAnimalModel.getSpecies();
+
+        String theOldVocab = theTaxon.getEthnicityStrainUnctrlVocab();
+
         if (theTaxon == null) {
-            theTaxon = new Taxon();
-        }
-
-        String theCommonName = TaxonManagerSingleton.instance().getCommonNameFromScientificName(
-                inModelCharacteristics.getScientificName());
-
-        // Set the scientific/common names and ethnicity strain
-        theTaxon.setCommonName(theCommonName);
-        theTaxon.setScientificName(inModelCharacteristics.getScientificName());
-        theTaxon.setEthnicityStrain(inModelCharacteristics.getEthinicityStrain());
-
-        // Other is not selected, null out the uncontrolled vocab
-        if (!theTaxon.getEthnicityStrain().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            theTaxon.setEthnicityStrainUnctrlVocab(null);
+            theTaxon = TaxonManagerSingleton.instance().create(inModelCharacteristics.getScientificName(),
+                    inModelCharacteristics.getEthinicityStrain(),
+                    inModelCharacteristics.getEthnicityStrainUnctrlVocab());
+        } else {
+            TaxonManagerSingleton.instance().update(inModelCharacteristics.getScientificName(),
+                    inModelCharacteristics.getEthinicityStrain(),
+                    inModelCharacteristics.getEthnicityStrainUnctrlVocab(), theTaxon);
         }
 
         // Other option different than the one set
-        else if (!inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals(
-                theTaxon.getEthnicityStrainUnctrlVocab())) {
+        if (Constants.Dropdowns.OTHER_OPTION.equals(theTaxon.getEthnicityStrain())
+                && !inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals(theOldVocab)) {
 
             log.trace("Sending Notification eMail - new EthinicityStrain added");
 
@@ -601,7 +599,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.info("<AnimalModelManagerImpl> Entering addGeneDelivery");
 
-        GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance().create(inAnimalModel, inGeneDeliveryData);
+        GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance()
+                .create(inAnimalModel, inGeneDeliveryData);
         inAnimalModel.addGeneDelivery(theGeneDelivery);
         save(inAnimalModel);
 
@@ -781,7 +780,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Entering addGeneticDescription (spontaneousMutation)");
         SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create(
                 inSpontaneousMutationData);
-        //System.out.println(theSpontaneousMutation.getName());
+        // System.out.println(theSpontaneousMutation.getName());
         inAnimalModel.addSpontaneousMutation(theSpontaneousMutation);
         save(inAnimalModel);
 
@@ -796,7 +795,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering addGeneticDescription (inducedMutation)");
 
-        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create(inAnimalModel, inInducedMutationData);
+        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create(inAnimalModel,
+                inInducedMutationData);
         inAnimalModel.addEngineeredGene(theInducedMutation);
         save(inAnimalModel);
 
@@ -812,7 +812,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Entering addGeneticDescription (TargetedModification)");
 
         TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(
-        		inAnimalModel, inTargetedModificationData, request);
+                inAnimalModel, inTargetedModificationData, request);
         // System.out.println(theGene.getName() );
 
         inAnimalModel.addEngineeredGene(theTargetedModification);
@@ -826,8 +826,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering addGeneticDescription (GenomicSegment)");
 
-        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inAnimalModel, inGenomicSegmentData,
-                request);
+        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inAnimalModel,
+                inGenomicSegmentData, request);
         // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theGenomicSegment);
@@ -955,6 +955,5 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
-  
- 
+
 }

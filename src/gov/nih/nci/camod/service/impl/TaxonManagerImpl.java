@@ -6,11 +6,10 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TaxonManager;
 import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
-import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
 import java.util.*;
 
@@ -21,6 +20,18 @@ import java.util.*;
  * Preferences - Java - Code Style - Code Templates
  */
 public class TaxonManagerImpl extends BaseManager implements TaxonManager {
+
+    public Taxon create(String inScientificName, String inStrain, String inOtherStrain) {
+
+        Taxon theTaxon = new Taxon();
+        populate(theTaxon, inScientificName, inStrain, inOtherStrain);
+
+        return theTaxon;
+    }
+
+    public void update(String inScientificName, String inStrain, String inOtherStrain, Taxon inTaxon) {
+        populate(inTaxon, inScientificName, inStrain, inOtherStrain);
+    }
 
     public List getAll() throws Exception {
         log.trace("In TaxonManagerImpl.getAll");
@@ -55,12 +66,8 @@ public class TaxonManagerImpl extends BaseManager implements TaxonManager {
             Taxon taxon = new Taxon();
             taxon.setScientificName(species.getName());
 
-            // Apply evaluators to object properties
-            Evaluation evaluation = new Evaluation();
-            evaluation.addEvaluator("scientificName", Evaluator.ILIKE_ANYWHERE);
-
             // Get the matching taxons
-            taxons = Search.query(taxon, evaluation);
+            taxons = Search.query(taxon);
 
             if (taxons != null && !taxons.isEmpty()) {
                 strains = new ArrayList();
@@ -82,10 +89,23 @@ public class TaxonManagerImpl extends BaseManager implements TaxonManager {
 
         return strains;
     }
-    
-    public String getCommonNameFromScientificName(String inScientificName) throws Exception {
-        
-    	String theCommonName = "";
+
+    private void populate(Taxon inTaxon, String inScientificName, String inStrain, String inOtherStrain) {
+        inTaxon.setScientificName(inScientificName);
+        inTaxon.setCommonName(getCommonNameFromScientificName(inScientificName));
+        inTaxon.setEthnicityStrain(inStrain);
+
+        // Other is not selected, null out the uncontrolled vocab
+        if (!inStrain.equals(Constants.Dropdowns.OTHER_OPTION)) {
+            inTaxon.setEthnicityStrainUnctrlVocab(null);
+        } else {
+            inTaxon.setEthnicityStrainUnctrlVocab(inOtherStrain);
+        }
+    }
+
+    private String getCommonNameFromScientificName(String inScientificName) {
+
+        String theCommonName = "";
 
         try {
             // List of taxons matching the scientificName in the species
@@ -98,15 +118,20 @@ public class TaxonManagerImpl extends BaseManager implements TaxonManager {
             // Get the matching taxons
             taxons = Search.query(taxon);
 
-            if (taxons != null && !taxons.isEmpty()) {
-            	
-            	Taxon theTaxon = (Taxon) taxons.get(0);
-            	theCommonName = theTaxon.getCommonName();
+            if (taxons != null) {
+
+                for (int i = 0; i < taxons.size(); i++) {
+                    Taxon theTaxon = (Taxon) taxons.get(i);
+
+                    if (theTaxon.getCommonName() != null && theTaxon.getCommonName().length() > 0) {
+                        theCommonName = theTaxon.getCommonName();
+                        break;
+                    }
+                }
             }
 
         } catch (Exception e) {
             log.error("Exception when fetching common name: " + e);
-            throw e;
         }
 
         return theCommonName;

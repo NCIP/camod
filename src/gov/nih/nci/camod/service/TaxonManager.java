@@ -18,11 +18,13 @@ import java.util.List;
  */
 public interface TaxonManager {
 
+    public Taxon create(String inScientificName, String inStrain, String inOtherStrain);
+    
+    public void update(String inScientificName, String inStrain, String inOtherStrain, Taxon inTaxon);
+    
     public List getAll() throws Exception;
 
     public Taxon get(String id) throws Exception;
-    
-    public String getCommonNameFromScientificName(String inScientificName) throws Exception;
 
     public void save(Taxon taxon) throws Exception;
 
