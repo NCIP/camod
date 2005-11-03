@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.65 2005-11-02 20:56:04 schroedn Exp $
+ * $Id: Constants.java,v 1.66 2005-11-03 13:57:58 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.65  2005/11/02 20:56:04  schroedn
+ * Added Staining to Image submission
+ *
  * Revision 1.64  2005/11/02 20:28:59  pandyas
  * modified GeneDelivery dropdown source
  *
@@ -160,6 +163,7 @@ public class Constants {
 	 * entered
 	 */
 	public static final String USERMODELLIST = "usermodellist";
+	
 
 	public interface BundleKeys {
 		/**
@@ -381,6 +385,8 @@ public class Constants {
 		public static final String TOCQUERYKEY = "aTOCQueryKey";
 
 		public static final String EVENT = "aEvent";
+		
+		public static final String DELETED = "deleted";
 	}
 
 	public interface Pages {
@@ -424,7 +430,9 @@ public class Constants {
 	public static final String ANIMALMODEL = "animalmodel";
 
 	public static final String XENOGRAFTMODEL = "xenograftmodel";
-
+	
+	public static final String XENOGRAFTRESULTLIST = "xenograftresultlist";
+	
 	/**
 	 * Used to store username for current user
 	 */
