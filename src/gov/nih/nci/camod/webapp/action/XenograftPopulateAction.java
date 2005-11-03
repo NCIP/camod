@@ -154,8 +154,7 @@ public class XenograftPopulateAction extends BaseAction {
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP,
-				Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
 		System.out.println("<XenograftPopulateAction dropdown> Exiting void dropdown()");
 	}
@@ -176,8 +175,7 @@ public class XenograftPopulateAction extends BaseAction {
 		XenograftForm xenograftForm = (XenograftForm) form;
 		
 		request.setAttribute("aXenograftID", request.getParameter("aXenograftID"));
-		NewDropdownUtil
-				.populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getHostScientificName());
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getHostScientificName());
 
 		return mapping.findForward("submitTransplantXenograft");
 	}
