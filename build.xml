@@ -6,7 +6,11 @@
 
     <!-- stage specific attributes -->
     <filter filtersfile="${tier}_camod.properties" />
-    <filter filtersfile="${tier}_db.properties" />
+    <filter token="db.host" value="${db.host}"/>
+    <filter token="db.port" value="${db.port}"/>
+    <filter token="db.username" value="${db.username}"/>
+    <filter token="db.password" value="${db.password}"/>
+    <filter token="db.dbname" value="${db.dbname}"/>
 
     <!-- DEFAULT BUILD, does everything -->    
     <target name="clean-build-compile" depends="build_war" /> 
