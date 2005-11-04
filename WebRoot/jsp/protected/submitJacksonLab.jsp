@@ -21,6 +21,9 @@
 		if (aAvailabilityID != null && aAvailabilityID.length() > 0 && isDeleted == null) {
 			actionName = "JacksonLabAction.do?method=edit";
 		}
+		else {
+		    aAvailabilityID = "";
+		}
 %>
 
 

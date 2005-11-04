@@ -50,6 +50,9 @@ function chkOtherAdminRoute() {
     if ( aTherapyID != null && aTherapyID.length() > 0 && isDeleted == null) {
 		actionName = "TherapyAction.do?method=edit";
 	}
+	else {
+	    aTherapyID = "";
+	}
 %>
 
 <script language="JavaScript" src="scripts/initIt.js"></script>

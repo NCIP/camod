@@ -38,6 +38,10 @@
 	if ( aEngineeredTransgeneID != null && aEngineeredTransgeneID.length()> 0 && isDeleted == null) {
 		actionName = "EngineeredTransgeneAction.do?method=edit";
 	}
+	else {
+	    aEngineeredTransgeneID = "";
+	}
+	
 %>
 
 <SCRIPT LANGUAGE="JavaScript">

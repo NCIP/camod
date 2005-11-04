@@ -23,6 +23,9 @@
 	if ( aAssociatedMetastasisID != null && aAssociatedMetastasisID.length() > 0 && isDeleted == null) {
 		actionName = "AssociatedMetastasisAction.do?method=editMetastasis";
 	}
+	else {
+	    aAssociatedMetastasisID = "";
+	}
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

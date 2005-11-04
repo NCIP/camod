@@ -23,6 +23,9 @@
 	if ( aHistopathologyID != null && aHistopathologyID.length() > 0 && isDeleted == null) {
 		actionName = "HistopathologyAction.do?method=editHistopathology";
 	} 
+	else {
+	    aHistopathologyID = "";
+	}
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

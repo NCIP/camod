@@ -25,6 +25,9 @@
 	if ( aInducedMutationID != null && aInducedMutationID.length() > 0 && isDeleted == null) {
 		actionName = "InducedMutationAction.do?method=edit";
 	}
+	else {
+	    aInducedMutationID = "";
+	}
 %>
 
 <SCRIPT LANGUAGE="JavaScript">

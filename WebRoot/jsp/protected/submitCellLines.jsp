@@ -22,6 +22,9 @@
     if ( aCellID != null && aCellID.length() > 0 && isDeleted == null) {
 		actionName = "CellLineAction.do?method=edit";
 	}
+	else {
+	    aCellID = "";
+	}
 %>
 
 

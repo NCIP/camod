@@ -22,6 +22,9 @@
 	if ( aTherapyID != null && aTherapyID.length() > 0 && isDeleted == null) {
 		actionName = "GeneDeliveryAction.do?method=edit";
 	}
+	else {
+	    aTherapyID = "";
+	}
 %>
 
 

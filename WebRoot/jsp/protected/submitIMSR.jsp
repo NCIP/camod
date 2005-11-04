@@ -20,6 +20,9 @@
     if ( aAvailabilityID != null && aAvailabilityID.length() > 0 && isDeleted == null) {
 		actionName = "IMSRAction.do?method=edit";
 	}
+	else {
+		aAvailabilityID = "";
+	}
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

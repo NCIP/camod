@@ -22,6 +22,9 @@
 	if ( aSpontaneousMutationID != null && aSpontaneousMutationID.length() > 0 && isDeleted == null) {
 		actionName = "SpontaneousMutationAction.do?method=edit";
 	}
+	else {
+	    aSpontaneousMutationID = "";
+	}
 %>
 <SCRIPT LANGUAGE="JavaScript">
 		
