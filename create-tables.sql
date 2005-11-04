@@ -291,8 +291,7 @@ create table engineered_gene (
 );
 create table env_fac_ind_mutation (
    engineered_gene_id number(19,0) not null,
-   env_factor_id number(19,0),
-   primary key (engineered_gene_id)
+   env_factor_id number(19,0) not null unique
 );
 create table env_factor (
    env_factor_id number(19,0) not null,
@@ -573,8 +572,8 @@ create table therapy (
    toxicity_grade varchar2(255),
    biomarker varchar2(255),
    tumor_response varchar2(255),
-   treatment_id number(19,0),
-   env_factor_id number(19,0),
+   treatment_id number(19,0) unique,
+   env_factor_id number(19,0) unique,
    therapeutic_experiment number(1,0),
    primary key (therapy_id)
 );
