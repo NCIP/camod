@@ -395,7 +395,7 @@ TRUNCATE TABLE Role;
 
 INSERT INTO Role(Role_ID, Name)
 SELECT User_Type, Role_Description
-FROM datop.UserType@camodop_datop;
+FROM datop.UserType@camodop_datop where user_type in (1, 2, 3);
 
 commit;
 
@@ -412,13 +412,68 @@ commit;
 
 /*************************Image********************************/
 
-TRUNCATE TABLE camoddev.Image;
+--UPDATE TABLE IMAGE
 
-insert INTO camoddev.Image (Image_id, Title, Description, staining)
-SELECT ImageUID, IMAGETitle, ImageDescription, stainType
-FROM datop.Imagedata@camodop_datop;
+CREATE OR REPLACE procedure IMAGE_LD as
+  
+ CURSOR DATABASECROSSCUR IS
+  (SELECT ImageUID, IMAGETitle, ImageDescription, stainType, 
+  CATALOGKEY, IMAGENAME, substr(IMAGENAME, instr(IMAGENAME, '.')) file_extension 
+FROM datop.Imagedata@camodop_datop);
 
-commit;
+  aID number:=0;
+
+BEGIN
+
+   EXECUTE IMMEDIATE('TRUNCATE TABLE IMAGE REUSE STORAGE ');  
+
+   FOR aRec in DATABASECROSSCUR LOOP
+      aID := aID + 1;
+
+	IF aRec.CATALOGKEY = 18 then
+      INSERT INTO IMAGE (
+	Image_id, Title, Description, staining, file_server_location)
+      VALUES
+     (aRec.ImageUID,
+      aRec.IMAGETitle,
+      aREC.ImageDescription,
+	aRec.stainType,
+	'http://caimage.nci.nih.gov/lizardtech/Model_Images/GeneticConstruct/'||aRec.IMAGENAME);
+
+	ELSIF aRec.CATALOGKEY = 19 AND aRec.file_extension = '.sid' then
+      INSERT INTO IMAGE (
+	Image_id, Title, Description, staining, file_server_location)
+      VALUES
+     (aRec.ImageUID,
+      aRec.IMAGETitle,
+      aREC.ImageDescription,
+	aRec.stainType,
+	'http://caimage.nci.nih.gov/lizardtech//iserv/getthumb?cat=Model'||'&'||'img='||aRec.IMAGENAME||'; catalogviewtumors.jsp?cat=Model'||'&'||'img='||aRec.IMAGENAME);
+	
+	ELSIF aRec.CATALOGKEY = 19 then
+      INSERT INTO IMAGE (
+	Image_id, Title, Description, staining, file_server_location)
+      VALUES
+     (aRec.ImageUID,
+      aRec.IMAGETitle,
+      aREC.ImageDescription,
+	aRec.stainType,
+	'http://caimage.nci.nih.gov/lizardtech/Model_Images/Model/'||aRec.IMAGENAME);
+		
+	END IF;
+
+      IF MOD(aID, 500) = 0 THEN
+         COMMIT;
+      END IF;
+
+   END LOOP;
+
+COMMIT;
+
+END;
+/
+
+EXECUTE image_LD;
 
 /*******************************************************************/
 
@@ -1529,21 +1584,62 @@ CREATE TABLE MICRO_ARRAY_DATA_TMP
   AVAILABILITY_ID      NUMBER(19)                   NULL
 );
 
-TRUNCATE TABLE camoddev.MICRO_ARRAY_DATA_TMP;
+CREATE OR REPLACE procedure MICRO_ARRAY_DATA_TMP_LD as
 
- insert INTO camoddev.MICRO_ARRAY_DATA_TMP (
-	MICRO_ARRAY_DATA_ID,
-	ModelID,
-  	EXPERIMENT_NAME,
-  	EXPERIMENT_ID)  
- SELECT 
+  CURSOR DATABASECROSSCUR IS
+  (SELECT 
 	rownum,
 	ModelID,
 	EXPERIMENTNAME,
 	EXPERIMENTID	
- FROM datop.Microarray@camodop_datop;
+ FROM datop.Microarray@camodop_datop where experimentID not in (299, 300, 303, 304)
+  );
 
-commit;
+  aID number:=0;
+
+BEGIN
+
+   EXECUTE IMMEDIATE('TRUNCATE TABLE MICRO_ARRAY_DATA_TMP REUSE STORAGE');
+
+   FOR aRec in DATABASECROSSCUR LOOP
+      aID := aID + 1;
+
+     If aRec.EXPERIMENTID = 160 Then 
+	INSERT INTO MICRO_ARRAY_DATA_TMP
+	(MICRO_ARRAY_DATA_ID,
+	ModelID,
+  	EXPERIMENT_NAME,
+  	EXPERIMENT_ID)
+      VALUES
+     (aRec.ROWNUM,
+	aRec.modelID,
+      aRec.EXPERIMENTNAME,
+      1015897540258547);
+    ELSIF aRec.EXPERIMENTID = 307 Then 
+	INSERT INTO MICRO_ARRAY_DATA_TMP
+		(MICRO_ARRAY_DATA_ID,
+	ModelID,
+  	EXPERIMENT_NAME,
+  	EXPERIMENT_ID)
+      VALUES
+     (aRec.ROWNUM,
+	aRec.modelID,
+      aRec.EXPERIMENTNAME,
+      1015897540503881);
+   END IF;
+
+      IF MOD(aID, 500) = 0 THEN
+         COMMIT;
+      END IF;
+
+   END LOOP;
+
+COMMIT;
+
+END;
+/
+
+EXECUTE MICRO_ARRAY_DATA_TMP_LD;
 
 TRUNCATE TABLE camoddev.MICRO_ARRAY_DATA;
 
@@ -1577,7 +1673,8 @@ TRUNCATE TABLE camoddev.Regulatory_Element;
 insert INTO camoddev.Regulatory_Element (Regulatory_Element_ID, Name, 
 	Reg_Element_Type_ID, Taxon_ID)
 SELECT ElementUID, Name, ElementTypeKey, SpeciesKey
-FROM datop.RegulatoryElement@camodop_datop;
+FROM datop.RegulatoryElement@camodop_datop
+where ElementTypeKey != 6;
 
 commit;
 
@@ -1640,7 +1737,7 @@ TRUNCATE TABLE camoddev.Party_Role;
 
 insert INTO camoddev.Party_Role (Party_ID, Role_ID)
 SELECT SubmitterKey, UserTypeKey
-FROM datop.User_Role@camodop_datop;
+FROM datop.User_Role@camodop_datop where UserTypeKey in (1, 2, 3);
 
 commit;
 
@@ -1757,7 +1854,7 @@ CREATE OR REPLACE procedure ABS_CANCER_MODEL_TMP_01_LD as
 
   CURSOR DATABASECROSSCUR IS
   (select rownum, ModelUID, ModelName, SubmitterKey, URL, ModelTypeKey, speciesKey, StrainKey, 
-	decode(Visibility, 
+	experimentdesign, decode(Visibility, 
 0, 'Incomplete',                                                                                          
 1, 'Complete-not screened',                                                                               
 2, 'Screener-assigned',                                                                                   
@@ -1795,7 +1892,7 @@ BEGIN
 		URL,
 		IS_TOOL_MOUSE,
 		speciesKey,
-		strainKey, state)
+		strainKey, state, experiment_design)
       VALUES
      (aRec.ROWNUM,
       aRec.ModelUID,
@@ -1806,7 +1903,7 @@ BEGIN
       0,
 	aRec.speciesKey,
 	aRec.strainKey,
-	aRec.state);
+	aRec.state, aRec.experimentdesign);
 
 	ELSE 
       INSERT INTO ABS_CANCER_MODEL_TMP
@@ -1818,7 +1915,7 @@ BEGIN
 		URL,
 		IS_TOOL_MOUSE,
 		speciesKey,
-		strainKey, state)
+		strainKey, state, experiment_design)
       VALUES
      (aRec.ROWNUM,
       aRec.ModelUID,
@@ -1829,7 +1926,7 @@ BEGIN
       1,
 	aRec.speciesKey,
 	aRec.strainKey,
-	aRec.state);
+	aRec.state, aRec.experimentdesign);
 
 	END IF;
 
@@ -1873,7 +1970,7 @@ BEGIN
 		Taxon_ID,
 		ADMINISTRATIVE_SITE,
 		TUMOR_CODE_ID,
-		HOST_SPECIES_ID, state)
+		HOST_SPECIES_ID, state, name)
       VALUES
      (aRec.ROWNUM + V_MAXROW,
       aRec.Xenograft_ID,
@@ -1884,7 +1981,8 @@ BEGIN
 	aRec.AdministrativeSite,
 	aRec.Tumor_Code_ID,
 	aRec.Hostspecies_ID,
-	'Reviewed-approved');
+	'Reviewed-approved',
+	aRec.ModelDescriptor);
 
       IF MOD(aID, 500) = 0 THEN
          COMMIT;
@@ -2011,10 +2109,12 @@ from update_PAR_ABS upa where ACMT.Xenograft_UID = upa.XenograftUID);
 DROP view update_PAR_ABS;
 
 -- update Experiment_design
-update ABS_CANCER_MODEL_TMP at set Experiment_Design = (select al.comments_lob 
-	from datop.ANIMALMODEL_LOB@camodop_datop al
-	where at.Modeluid = al.AnimalmodelUID);
+create table animalmodel_lob_tmp as select * from datop.ANIMALMODEL_LOB@camodop_datop;
+update ABS_CANCER_MODEL_TMP at set Experiment_Design = NVL((select al.comments_lob 
+	from animalmodel_lob_tmp al
+	where at.Modeluid = al.AnimalmodelUID), at.Experiment_Design);
 Commit;
+Drop table animalmodel_lob_tmp;
 
 -- update repository_info_id 
 update ABS_CANCER_MODEL_TMP a set repository_info_id = NVL((select b.repository_info_id 
@@ -2083,6 +2183,11 @@ update ABS_CANCER_MODEL_TMP set PRINCIPAL_INVESTIGATOR_ID = submitter_ID
 	where submitter_ID in (select submitterUID from SUBMITTER_IS_ALSO_PI_STG);
 Commit;
 
+update ABS_CANCER_MODEL_TMP a set PRINCIPAL_INVESTIGATOR_ID = NVL((select submitterkey_PI
+from submitter_is_not_pi_stg b where a.submitter_ID = b.submitterkey
+and a.modelUID = b.modelUID), a.PRINCIPAL_INVESTIGATOR_ID);
+Commit;
+
 Create table ABS_CANCER_MODEL_TMP_01 as select * from ABS_CANCER_MODEL_TMP;
 Alter table ABS_CANCER_MODEL_TMP_01 drop (ModelUID, Xenograft_ID, YeastModel_ID, 
 	SpeciesKey, StrainKey, Xenograft_UID);
@@ -2092,6 +2197,7 @@ Insert into ABS_CANCER_MODEL select * from ABS_CANCER_MODEL_TMP_01;
 commit;
 
 DROP table ABS_CANCER_MODEL_TMP_01;	
+
 
 
 
@@ -2183,16 +2289,18 @@ BEGIN
    FOR aRec in DATABASECROSSCUR LOOP
       aID := aID + 1;
 
+	IF aRec.type = 'IM' then
       INSERT INTO ENGINEERED_GENE_TMP (
 	ENGINEERED_GENE_ID,
 	GenotypesUID,
   	ENGINEERED_GENE_Type,
 	Name,
-	Comments,
+	Description,
 	Location_of_Integration,
 	Gene_ID,
 	ES_Cell_Line_Name,
-	modelkey)
+	modelkey,
+	conditionality_ID)
       VALUES
      (aRec.ROWNUM + V_MAXROW,
       aRec.GenotypesUID,
@@ -2202,7 +2310,34 @@ BEGIN
 	aRec.GeneLocation,
 	aRec.LocusLinkID,
 	aRec.RecipientStrain,
-	aRec.modelkey);
+	aRec.modelkey,
+	aRec.GenotypesUID);
+
+	ELSE
+      INSERT INTO ENGINEERED_GENE_TMP (
+	ENGINEERED_GENE_ID,
+	GenotypesUID,
+  	ENGINEERED_GENE_Type,
+	Name,
+	Comments,
+	Location_of_Integration,
+	Gene_ID,
+	ES_Cell_Line_Name,
+	modelkey,
+	conditionality_ID)
+      VALUES
+     (aRec.ROWNUM + V_MAXROW,
+      aRec.GenotypesUID,
+      aREC.Type,
+	aRec.GeneName,
+	aRec.Additional_Feature,
+	aRec.GeneLocation,
+	aRec.LocusLinkID,
+	aRec.RecipientStrain,
+	aRec.modelkey,
+	aRec.GenotypesUID);
+	
+	END IF;
 
       IF MOD(aID, 500) = 0 THEN
          COMMIT;
@@ -2719,7 +2854,7 @@ TRUNCATE TABLE camoddev.ANI_MOD_HISTOPATHOLOGY;
 INSERT INTO camoddev.ANI_MOD_HISTOPATHOLOGY(ABS_Cancer_Model_id, HISTOPATHOLOGY_ID)
 SELECT a.ABS_CANCER_MODEL_id, b.HISTOPATHOLOGYUID
 FROM ABS_CANCER_MODEL_tmp a, datop.HISTOPATHOLOGY@camodop_datop b
-Where a.ModelUID = b.ModelKEY;
+Where a.ModelUID = b.ModelKEY and b.METASTASISOF is null;
 
 commit;
 
