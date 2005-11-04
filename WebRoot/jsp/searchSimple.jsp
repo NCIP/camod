@@ -9,6 +9,11 @@
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
+<script>
+    function blankKeyword() {
+        document.searchForm.keyword.value = '';
+    }
+</script>
 <html:form action="SearchAction.do" focus="keyword">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -85,7 +90,7 @@
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
 					<tr>
-					  <html:submit styleClass="actionButton" >
+					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  Search
 					  </html:submit>
 					  <html:reset styleClass="actionButton">

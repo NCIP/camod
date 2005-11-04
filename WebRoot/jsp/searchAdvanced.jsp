@@ -11,6 +11,10 @@
 
 <SCRIPT LANGUAGE="JavaScript">
 	
+	function blankKeyword() {
+        document.searchForm.keyword.value = '';
+    }
+    
 	function toggleField(control, field)
 	{
 		if( control.checked == false ) {
@@ -322,7 +326,7 @@
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
 					<tr>
-					  <html:submit styleClass="actionButton">
+					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  <bean:message key="button.submit"/>
 					  </html:submit>
 					  
