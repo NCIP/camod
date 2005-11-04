@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.55 2005-11-03 18:57:13 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.56 2005-11-04 14:44:25 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.55  2005/11/03 18:57:13  pandyas
+ * Modified for histopathology screens
+ *
  * Revision 1.54  2005/11/03 18:11:04  georgeda
  * Fix old vocab problem
  *
@@ -981,10 +984,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.info("Entering AnimalModelManagerImpl.addAssociatedMetastasis_1");
         
-        //Histopathology theHistopathology = 
         HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData, inHistopathology);
-        //inAnimalModel.addHistopathology(theHistopathology);
-       
         save(inAnimalModel);
         
         log.info("Exiting AnimalModelManagerImpl.addHistopathology");    	

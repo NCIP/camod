@@ -29,67 +29,64 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
 
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
-        System.out.println("aHistopathID: " + aHistopathologyID);
+        log.debug("aHistopathID: " + aHistopathologyID);
 
         // Grab the current aAssocMetastasisID we are working with related to
         // this animalModel
         String aAssociatedMetastasisID = request.getParameter("aAssociatedMetastasisID");
-        System.out.println("aAssocMetastasisID: " + aAssociatedMetastasisID);
+        log.debug("aAssocMetastasisID: " + aAssociatedMetastasisID);
 
         HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
-        Histopathology theHistopathology = histopathologyManager.get(aHistopathologyID);
-        List assocMetList = theHistopathology.getMetastatisCollection();
+        Histopathology associatedMetastasis = histopathologyManager.get(aAssociatedMetastasisID);
+        if (associatedMetastasis == null) {
+            request.setAttribute(Constants.Parameters.DELETED, "true");
+        } else {
+            request.setAttribute("aAssociatedMetastasisID", aAssociatedMetastasisID);
 
-        // Find the associtated metastasis we are dealing with
-        for (int i = 0; i < assocMetList.size(); i++) {
-            Histopathology histopathology = (Histopathology) assocMetList.get(i);
-
-            if (histopathology.getId().toString().equals(aAssociatedMetastasisID)) {
-                /* Set Histopathology attributes */
-                assocMetastasisForm.setAgeOfOnset(histopathology.getAgeOfOnset());
-                if (histopathology.getWeightOfTumor() != null) {
-                    assocMetastasisForm.setWeightOfTumor(histopathology.getWeightOfTumor().toString());
-                }
-                if (histopathology.getVolumeOfTumor() != null) {
-                    assocMetastasisForm.setVolumeOfTumor(histopathology.getVolumeOfTumor().toString());
-                }
-                if (histopathology.getTumorIncidenceRate() != null) {
-                    assocMetastasisForm.setTumorIncidenceRate(histopathology.getTumorIncidenceRate().toString());
-                }
-                assocMetastasisForm.setSurvivalInfo(histopathology.getSurvivalInfo());
-                assocMetastasisForm.setGrossDescription(histopathology.getGrossDescription());
-                assocMetastasisForm.setMicroscopicDescription(histopathology.getMicroscopicDescription());
-
-                assocMetastasisForm.setComparativeData(histopathology.getComparativeData());
-                assocMetastasisForm.setComments(histopathology.getComments());
-
-                /* set Organ attributes */
-                Organ organ = histopathology.getOrgan();
-                System.out.println("<AssociatedMetastasisAction populate> get the Organ attributes");
-
-                // since we are always querying from concept code (save and
-                // edit), simply display EVSPreferredDescription
-                assocMetastasisForm.setOrgan(organ.getEVSPreferredDescription());
-                System.out.println("setOrgan= " + organ.getEVSPreferredDescription());
-
-                assocMetastasisForm.setOrganTissueCode(organ.getConceptCode());
-                System.out.println("OrganTissueCode= " + organ.getConceptCode());
-
-                /* Set Disease object attributes */
-                List diseaseList = histopathology.getDiseaseCollection();
-
-                Disease disease = (Disease) diseaseList.get(0);
-                assocMetastasisForm.setDiagnosisName(disease.getName());
-                assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
-                assocMetastasisForm.setTumorClassification(disease.getName());
-
-                /* Set GeneticAlteration attributes */
-                assocMetastasisForm.setObservation(histopathology.getGeneticAlteration().getObservation());
-                assocMetastasisForm.setMethodOfObservation(histopathology.getGeneticAlteration()
-                        .getMethodOfObservation());
-
+            /* Set Histopathology attributes */
+            assocMetastasisForm.setAgeOfOnset(associatedMetastasis.getAgeOfOnset());
+            if (associatedMetastasis.getWeightOfTumor() != null) {
+                assocMetastasisForm.setWeightOfTumor(associatedMetastasis.getWeightOfTumor().toString());
             }
+            if (associatedMetastasis.getVolumeOfTumor() != null) {
+                assocMetastasisForm.setVolumeOfTumor(associatedMetastasis.getVolumeOfTumor().toString());
+            }
+            if (associatedMetastasis.getTumorIncidenceRate() != null) {
+                assocMetastasisForm.setTumorIncidenceRate(associatedMetastasis.getTumorIncidenceRate().toString());
+            }
+            assocMetastasisForm.setSurvivalInfo(associatedMetastasis.getSurvivalInfo());
+            assocMetastasisForm.setGrossDescription(associatedMetastasis.getGrossDescription());
+            assocMetastasisForm.setMicroscopicDescription(associatedMetastasis.getMicroscopicDescription());
 
+            assocMetastasisForm.setComparativeData(associatedMetastasis.getComparativeData());
+            assocMetastasisForm.setComments(associatedMetastasis.getComments());
+
+            /* set Organ attributes */
+            Organ organ = associatedMetastasis.getOrgan();
+            System.out.println("<AssociatedMetastasisAction populate> get the Organ attributes");
+
+            // since we are always querying from concept code (save and
+            // edit), simply display EVSPreferredDescription
+            assocMetastasisForm.setOrgan(organ.getEVSPreferredDescription());
+            System.out.println("setOrgan= " + organ.getEVSPreferredDescription());
+
+            assocMetastasisForm.setOrganTissueCode(organ.getConceptCode());
+            System.out.println("OrganTissueCode= " + organ.getConceptCode());
+
+            /* Set Disease object attributes */
+            List diseaseList = associatedMetastasis.getDiseaseCollection();
+
+            Disease disease = (Disease) diseaseList.get(0);
+            assocMetastasisForm.setDiagnosisName(disease.getName());
+            assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
+            assocMetastasisForm.setTumorClassification(disease.getName());
+
+            /* Set GeneticAlteration attributes */
+            if (associatedMetastasis.getGeneticAlteration() != null) {
+                assocMetastasisForm.setObservation(associatedMetastasis.getGeneticAlteration().getObservation());
+                assocMetastasisForm.setMethodOfObservation(associatedMetastasis.getGeneticAlteration()
+                        .getMethodOfObservation());
+            }
         }
 
         // Prepopulate all dropdown fields, set the global Constants to the

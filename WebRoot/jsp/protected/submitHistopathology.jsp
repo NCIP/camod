@@ -45,7 +45,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
-			<camod:cshelp key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="histopathology_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
 			<a href="javascript:showTissueTree('histopathologyForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
@@ -54,7 +54,7 @@
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="organ">
 
-			<html:hidden property="organTissueCode" />
+			<html:hidden property="organTissueCode"/>
 			<input type="hidden" name="organTissueName" />				
 			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 		</td>
@@ -63,7 +63,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-			<camod:cshelp key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="histopathology_help" key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
 			<a href="javascript:showDiagnosisTree('histopathologyForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
@@ -79,7 +79,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age of Tumor Onset:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.AGE_OF_ONSET" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.AGE_OF_ONSET" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageOfOnset"  size="10" />
@@ -109,7 +109,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Tumor Frequency (%)<br>(Enter numbers only):</label>
-		<camod:cshelp key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="tumorIncidenceRate" size="30" />
@@ -119,7 +119,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Survival Information:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.SURVIVAL_INFO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.SURVIVAL_INFO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="survivalInfo" size="30" />
@@ -129,7 +129,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Lesion:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.GROSS_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.GROSS_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="grossDescription" size="30" />
@@ -139,7 +139,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Microscopic Description (Field holds 2,000 characters):</label>
-		<camod:cshelp key="HISTOPATHOLOGY.MICROSCOPIC_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.MICROSCOPIC_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized"  property="microscopicDescription" cols="32" rows="4"/>			
@@ -149,7 +149,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Genetic Alterations found in the Tumor:</label>
-		<camod:cshelp key="GENETIC_ALTERATION.OBSERVATION_HISTO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="GENETIC_ALTERATION.OBSERVATION_HISTO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="observation" size="30" />
@@ -159,7 +159,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Observation:</label>
-		<camod:cshelp key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="methodOfObservation" size="30" />
@@ -169,7 +169,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Human Data:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.COMPARATIVE_DATA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.COMPARATIVE_DATA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="comparativeData" size="30" />
@@ -179,7 +179,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Comments:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized"  property="comments" cols="32" rows="4"/>			

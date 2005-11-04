@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManager.java,v 1.1 2005-11-03 18:54:43 pandyas Exp $
+ * $Id: HistopathologyManager.java,v 1.2 2005-11-04 14:44:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/11/03 18:54:43  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 
@@ -30,7 +33,7 @@ public interface HistopathologyManager {
     
     public void updateHistopathology(HistopathologyData inHistopathologyData, Histopathology theHistopathology) throws Exception;
     
-    public void updateAssociatedMetastasis(AssociatedMetastasisData inAssociatedMetastasisData, Histopathology inHistopathology, String inAssociatedMetastasisID) throws Exception;    
+    public void updateAssociatedMetastasis(AssociatedMetastasisData inAssociatedMetastasisData, Histopathology inAssociatedMetastasis) throws Exception;    
 
     public void updateClinicalMarker(ClinicalMarkerData inClinicalMarkerData, Histopathology inHistopathology) throws Exception;    
     

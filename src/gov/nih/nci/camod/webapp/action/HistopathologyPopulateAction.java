@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.4 2005-11-03 22:29:12 georgeda Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.5 2005-11-04 14:44:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/03 22:29:12  georgeda
+ * Added validation/delete capabilities to histo screens
+ *
  * Revision 1.3  2005/11/03 21:48:07  georgeda
  * Cleanup
  *
@@ -45,7 +48,7 @@ public class HistopathologyPopulateAction extends BaseAction {
 
         // Grab the current aHistopathID from the session
         String aHistopatholgyID = request.getParameter("aHistopathologyID");
-        System.out.println("aHistopatholgyID: " + aHistopatholgyID);
+        log.debug("aHistopatholgyID: " + aHistopatholgyID);
 
         Histopathology theHistopathology = HistopathologyManagerSingleton.instance().get(aHistopatholgyID);
 
@@ -96,9 +99,11 @@ public class HistopathologyPopulateAction extends BaseAction {
             histopathologyForm.setComments(theHistopathology.getComments());
 
             /* Set GeneticAlteration attributes */
-            histopathologyForm.setObservation(theHistopathology.getGeneticAlteration().getObservation());
-            histopathologyForm
-                    .setMethodOfObservation(theHistopathology.getGeneticAlteration().getMethodOfObservation());
+            if (theHistopathology.getGeneticAlteration() != null) {
+                histopathologyForm.setObservation(theHistopathology.getGeneticAlteration().getObservation());
+                histopathologyForm.setMethodOfObservation(theHistopathology.getGeneticAlteration()
+                        .getMethodOfObservation());
+            }
         }
         // Prepopulate all dropdown fields, set the global Constants to the
         // following

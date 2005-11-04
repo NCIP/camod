@@ -14,17 +14,15 @@
 <%
 	String aHistopathologyID = request.getParameter( "aHistopathologyID" );
 	String aAssociatedMetastasisID = request.getParameter( "aAssociatedMetastasisID" );
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
 	//if aAssocMetastasisID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	String actionName = "AssociatedMetastasisAction.do?method=saveMetastasis";
 	
-	if ( aAssociatedMetastasisID != null && aAssociatedMetastasisID.length() > 0 ) {
+	if ( aAssociatedMetastasisID != null && aAssociatedMetastasisID.length() > 0 && isDeleted == null) {
 		actionName = "AssociatedMetastasisAction.do?method=editMetastasis";
-	} else {
-        aAssociatedMetastasisID = "";
-    }		
-		
+	}
 %>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -47,7 +45,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
-			<camod:cshelp key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="associated_metastasis_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
 			<a href="javascript:showTissueTree('associatedMetastasisForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
@@ -56,7 +54,7 @@
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="organ">
 
-			<html:hidden property="organTissueCode" />
+			<html:hidden property="organTissueCode"/>
 			<input type="hidden" name="organTissueName" />				
 			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 		</td>
@@ -65,7 +63,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-			<camod:cshelp key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp mapId="associated_metastasis_help" key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
 			<a href="javascript:showDiagnosisTree('associatedMetastasisForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
@@ -81,7 +79,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age of Metastasis Onset:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.AGE_OF_ONSET" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.AGE_OF_ONSET" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageOfOnset"  size="10" />
@@ -111,7 +109,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Metastasis Incidence over lifetime (%)<br>(Enter numbers only):</label>
-		<camod:cshelp key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="tumorIncidenceRate" size="30" />
@@ -121,7 +119,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Survival Information:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.SURVIVAL_INFO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.SURVIVAL_INFO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="survivalInfo" size="30" />
@@ -131,7 +129,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Lesion:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.GROSS_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.GROSS_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="grossDescription" size="30" />
@@ -141,7 +139,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Microscopic Description (Field holds 2,000 characters):</label>
-		<camod:cshelp key="HISTOPATHOLOGY.MICROSCOPIC_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.MICROSCOPIC_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized"  property="microscopicDescription" cols="32" rows="4"/>			
@@ -151,7 +149,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Genetic Alterations found in the Tumor:</label>
-		<camod:cshelp key="GENETIC_ALTERATION.OBSERVATION_HISTO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="GENETIC_ALTERATION.OBSERVATION_HISTO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="observation" size="30" />
@@ -161,7 +159,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Observation:</label>
-		<camod:cshelp key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="methodOfObservation" size="30" />
@@ -171,7 +169,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Human Data:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.COMPARATIVE_DATA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.COMPARATIVE_DATA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="comparativeData" size="30" />
@@ -181,7 +179,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Comments:</label>
-		<camod:cshelp key="HISTOPATHOLOGY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized"  property="comments" cols="32" rows="4"/>			
@@ -192,15 +190,22 @@
 		<td align="right" colspan="3">
 			<!-- action buttons begins -->
 			<TABLE cellpadding="4" cellspacing="0" border="0">
-				
-					  <html:submit styleClass="actionButton">
-						  <bean:message key="button.submit"/>
-					  </html:submit>
-					  
-					  <html:reset styleClass="actionButton">
-					  	  <bean:message key="button.reset"/>
-	  				  </html:reset>
+			
+				  <html:submit styleClass="actionButton">
+					  <bean:message key="button.submit"/>
+				  </html:submit>
+				  
+				  <html:reset styleClass="actionButton">
+				  	  <bean:message key="button.reset"/>
+  				  </html:reset>
 	  				  
+	  		      <c:if test="${not empty aAssociatedMetastasisID}">
+	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+						  <bean:message key="button.delete"/>
+					  </html:submit>
+			      </c:if>
+			      
+	  				 
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="histopathologyID" value="<%= aHistopathologyID %>">
 				  <input type="hidden" name="aAssociatedMetastasisID" value="<%= aAssociatedMetastasisID %>">
