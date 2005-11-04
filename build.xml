@@ -1,103 +1,98 @@
 <project name="caMOD" default="clean-build-compile" basedir=".">
-	
-	<property file="localbuild.properties" />
+    
+    <property file="localbuild.properties" />
         
-	<property file="build.properties" />
+    <property file="build.properties" />
 
-	<!-- DEFAULT BUILD, does everything -->	
-	<target name="clean-build-compile-deploy" depends="deploy" /> 
-	
-	<!-- DEFAULT BUILD, does everything -->	
-	<target name="clean-build-compile" depends="build_war" /> 
-	
-	<!--
-	TARGET: COMPILE
-		Compiles the source directory
-	-->
-	<target name="compile">
-		<delete dir="${build.classes.dir}" />
-		<mkdir dir="${build.classes.dir}" />
-		<javac srcdir="${source.dir}" destdir="${build.classes.dir}" source="1.4" debug="true" debuglevel="lines,vars,source">
-		 <classpath>
-		 	 <fileset dir="${source.lib.dir}">
-	 	        <include name="*.jar"/>
-	 	      </fileset>
-		 </classpath>
-		</javac>
-	</target>
-	
-	<!--
-		TARGET: copy_resource_directory
-		Copies all the bundle resources to the WEB-INF/classes/ folder
-	-->
-	<target name="copy_resource_directory" depends="compile">	
-		<copy todir="${build.classes.dir}">
-			<fileset dir="${source.dir}">                                
-                                <include name="**/*.xml" />
-				<include name="**/*.properties" />
-				<include name="*.dtd" />
-				<include name="*.xsd" />
-			</fileset>
-		</copy>
+    <!-- stage specific attributes -->
+    <filter filtersfile="${tier}_camod.properties" />
+    <filter filtersfile="${tier}_db.properties" />
+
+    <!-- DEFAULT BUILD, does everything -->    
+    <target name="clean-build-compile" depends="build_war" /> 
+    
+    <!--
+    TARGET: COMPILE
+        Compiles the source directory
+    -->
+    <target name="compile">
+        <delete dir="${build.classes.dir}" />
+        <mkdir dir="${build.classes.dir}" />
+        <javac srcdir="${source.dir}" 
+               destdir="${build.classes.dir}" 
+               source="1.4" 
+               debug="true" 
+               debuglevel="lines,vars,source">
+         <classpath>
+              <fileset dir="${source.lib.dir}">
+                 <include name="*.jar"/>
+               </fileset>
+         </classpath>
+        </javac>
     </target>
     
-	<!--
-		TARGET: build_war
-		This will build the war file
-	-->
+    <!--
+        TARGET: copy_resource_directory
+        Copies all the bundle resources to the WEB-INF/classes/ folder
+    -->
+    <target name="copy_resource_directory" depends="compile">
+        <copy todir="${build.classes.dir}" filtering="true" >
+            <fileset dir="${source.dir}">                                
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
+                <include name="*.dtd" />
+                <include name="*.xsd" />
+            </fileset>
+        </copy>
+    </target>
+    
+    <!--
+        TARGET: build_war
+        This will build the war file
+    -->
     <target name="build_war" depends="copy_resource_directory">
-    	<mkdir dir="${build.dir}/build"/>
-		<delete file="${build.dir}/build/${app.war.name}.war" />
-		<war destfile="${build.dir}/build/${app.war.name}.war" webxml="${webapp.dir}/WEB-INF/web.xml">
-			<fileset file="${webapp.dir}/*.*" />
-			<zipfileset dir="${webapp.dir}/common" prefix="common" />
-			<zipfileset dir="${webapp.dir}/images" prefix="images" />
-			<zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
-			<zipfileset dir="${webapp.dir}/styles" prefix="styles" />
-			<zipfileset dir="${webapp.dir}/config" prefix="config" />
-			<zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
-                        <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
-			<webinf dir="${webapp.dir}/WEB-INF"/>
-			<classes dir="${build.classes.dir}" />
-    	</war>
-	</target>
-	
-	<!-- Copy war file to JBOSS directory -->
-    <target name="deploy" depends="build_war"
-        description="Deploy '${app.war.name}.war' to local JBoss">
-    	<delete file="${jboss.home}/server/${jboss.instance}/deploy/${app.war.name}.war"/>
-        <copy file="${build.dir}/build/${app.war.name}.war"
-            todir="${jboss.home}/server/${jboss.instance}/deploy"/>
-    </target>				
-	
-	<!-- Setup Hibernate Mappings -->
+        <mkdir dir="${build.dir}/build"/>
+        <delete file="${build.dir}/build/${app.war.name}.war" />
+        <war destfile="${build.dir}/build/${app.war.name}.war" 
+             webxml="${webapp.dir}/WEB-INF/web.xml">
+            <fileset file="${webapp.dir}/*.*" />
+            <zipfileset dir="${webapp.dir}/common" prefix="common" />
+            <zipfileset dir="${webapp.dir}/images" prefix="images" />
+            <zipfileset dir="${webapp.dir}/scripts" prefix="scripts" />
+            <zipfileset dir="${webapp.dir}/styles" prefix="styles" />
+            <zipfileset dir="${webapp.dir}/config" prefix="config" />
+            <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
+            <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
+            <webinf dir="${webapp.dir}/WEB-INF"/>
+            <classes dir="${build.classes.dir}" />
+        </war>
+    </target>
+    
+    <!-- Setup Hibernate Mappings -->
 
     <!-- import properties (app settings, classpath, jar file locations) -->
     <import file="properties.xml"/>
-	
+    
     <!-- =================================================================== -->
     <!-- The "db-prepare" target generates the database schema and creates   --> 
     <!-- tables based on the mapping files                                   -->
     <!-- =================================================================== -->
-    <target name="setup-db"
-        description="creates database tables">    	
-    	
-    	<echo>db-prepare, schemaexport</echo>   
-    	
+    <target name="setup-db" description="creates database tables">        
+        
+        <echo>db-prepare, schemaexport</echo>   
+        
         <taskdef name="schemaexport"
             classname="org.hibernate.tool.hbm2ddl.SchemaExportTask">        
             <classpath>
                   <path refid="all.classpath"/> 
             </classpath> 
         </taskdef>
-    	
+        
         <generate-database-properties/>
         <schemaexport quiet="no" text="no" drop="no" delimiter=";" 
             properties="database.properties" output="create-tables.sql">
-            <fileset dir="${build.dir}/src/gov/nih/nci/camod/domain" includes="**/*.hbm.xml"/>        	
+            <fileset dir="${build.dir}/src/gov/nih/nci/camod/domain" 
+                     includes="**/*.hbm.xml"/>            
         </schemaexport>
-    	
     </target>
-	
 </project>
-	
