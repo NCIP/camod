@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.3 2005-11-04 14:44:25 georgeda Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.4 2005-11-07 19:15:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/11/04 14:44:25  georgeda
+ * Cleaned up histopathology/assoc metastasis
+ *
  * Revision 1.2  2005/11/03 21:47:48  georgeda
  * Changed EVS api
  *
@@ -20,7 +23,6 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.HistopathologyManager;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.webapp.form.*;
-
 import java.util.List;
 
 public class HistopathologyManagerImpl extends BaseManager implements HistopathologyManager {
@@ -204,50 +206,6 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         save(inAssociatedMetastasis);
 
         log.info("Exiting HistopathologyManagerImpl.updateAssociatedMetastasis");
-    }
-
-    public Histopathology createClinicalMarker(ClinicalMarkerData inClinicalMarkerData) throws Exception {
-
-        log.info("Entering HistopathologyManagerImpl.createClinicalMarker");
-
-        Histopathology theHistopathology = new Histopathology();
-        populateClinicalMarker(inClinicalMarkerData, theHistopathology);
-
-        log.info("Exiting HistopathologyManagerImpl.createClinicalMarker");
-
-        return theHistopathology;
-
-    }
-
-    public void updateClinicalMarker(ClinicalMarkerData inClinicalMarkerData, Histopathology inHistopathology)
-            throws Exception {
-
-        log.info("Entering HistopathologyManagerImpl.updateClinicalMarker");
-        log.info("Updating HistopathologyData: " + inHistopathology.getId());
-
-        // Populate w/ the new values and save
-        populateClinicalMarker(inClinicalMarkerData, inHistopathology);
-        save(inHistopathology);
-
-        log.info("Exiting HistopathologyManagerImpl.updateClinicalMarker");
-    }
-
-    private void populateClinicalMarker(ClinicalMarkerData inClinicalMarkerData, Histopathology inHistopathology) {
-
-        log.info("<HistopathologyManagerImpl> Entering populateClinicalMarker");
-
-        // create new ClinicalMarker to be used as the current ClinicalMarker
-        ClinicalMarker theClinicalMarker = new ClinicalMarker();
-
-        theClinicalMarker.setName(inClinicalMarkerData.getName());
-        theClinicalMarker.setValue(inClinicalMarkerData.getValue());
-
-        /* Add ClinicalMarker object to Histopathology obejct */
-
-        inHistopathology.addClinicalMarker(theClinicalMarker);
-        System.out.println("HistopathologyManagerImpl> Added ClinicalMarker to Histopathology ");
-
-        log.info("<HistopathologyManagerImpl> Exiting populateClinicalMarker");
     }
 
 }

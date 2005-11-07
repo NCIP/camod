@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.56 2005-11-04 14:44:25 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.57 2005-11-07 19:15:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.56  2005/11/04 14:44:25  georgeda
+ * Cleaned up histopathology/assoc metastasis
+ *
  * Revision 1.55  2005/11/03 18:57:13  pandyas
  * Modified for histopathology screens
  *
@@ -990,13 +993,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("Exiting AnimalModelManagerImpl.addHistopathology");    	
     }    
     
-    public void addClinicalMarker(AnimalModel inAnimalModel, ClinicalMarkerData inClinicalMarkerData) throws Exception{
+    public void addClinicalMarker(AnimalModel inAnimalModel, Histopathology inHistopathology, ClinicalMarkerData inClinicalMarkerData) throws Exception{
+    	
 
         log.info("Entering AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
         
-        //TODO - Fix this
-        //Histopathology theHistopathology = HistopathologyManagerSingleton.instance().create(inClinicalMarkerData);
-        //inAnimalModel.addHistopathology(theHistopathology);
+        ClinicalMarkerManagerSingleton.instance().create(inClinicalMarkerData, inHistopathology);
         save(inAnimalModel);
         
         log.info("Exiting AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");    	

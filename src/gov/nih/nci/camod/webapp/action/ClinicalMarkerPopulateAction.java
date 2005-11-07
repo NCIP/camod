@@ -2,19 +2,20 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerPopulateAction.java,v 1.2 2005-11-03 18:54:10 pandyas Exp $
+ * $Id: ClinicalMarkerPopulateAction.java,v 1.3 2005-11-07 19:14:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/11/03 18:54:10  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.ClinicalMarker;
-import gov.nih.nci.camod.domain.Histopathology;
-import gov.nih.nci.camod.service.HistopathologyManager;
+import gov.nih.nci.camod.service.ClinicalMarkerManager;
 import gov.nih.nci.camod.webapp.form.ClinicalMarkerForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import javax.servlet.http.HttpServletRequest;
@@ -36,33 +37,29 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 						           HttpServletResponse response)
 	  throws Exception {
 		
-		System.out.println( "<HistopathologyPopulateAction populate> Entered" );
+		System.out.println( "<ClinicalMarkerPopulateAction populate> Entered" );
 		
 		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
 
        	// Grab the current aHistopathID from the session
-       	String aHistopathID = request.getParameter("histopathologyID");
-       	System.out.println( "aHistopathID: " +aHistopathID );
+       	String aHistopathologyID = request.getParameter("aHistopathologyID");
+       	System.out.println( "aHistopathologyID: " +aHistopathologyID );
     	
-    	String aClinicalMarkerID = request.getParameter( "clinicalMarkerID" );		
+    	String aClinicalMarkerID = request.getParameter( "aClinicalMarkerID" );		
     	System.out.println( "aClinicalMarkerID: = " +aClinicalMarkerID);  
     	
-        HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean( "theHistopathologyManager" );
-        Histopathology theHistopathology = theHistopathologyManager.get( aHistopathID ); 
-        List clinicalMarkerList = theHistopathology.getClinicalMarkerCollection();
-
-        //Find the clinical marker we are dealing with
-        for( int i=0; i < clinicalMarkerList.size(); i++ ) 
-        {
-        	ClinicalMarker theClinicalMarker =  (ClinicalMarker)clinicalMarkerList.get(i);
-        	
-        	if( theClinicalMarker.getId().toString().equals( aClinicalMarkerID ) ) {
+    	ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean( "clinicalMarkerManager" );
+    	ClinicalMarker theClinicalMarker = theClinicalMarkerManager.get( aClinicalMarkerID ); 
+    	
+        if (theClinicalMarker == null) {
+            request.setAttribute(Constants.Parameters.DELETED, "true");
+        } else {
+            request.setAttribute("aClinicalMarkerID", aClinicalMarkerID);
         		
         		clinicalMarkerForm.setName(theClinicalMarker.getName());
+            if (theClinicalMarker.getValue() != null) {        		
         		clinicalMarkerForm.setValue(theClinicalMarker.getValue());
-        		
-        	}
-   	
+            }   	
         }
         
         // Prepopulate all dropdown fields, set the global Constants to the following

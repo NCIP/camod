@@ -30,7 +30,10 @@
     
     <!-- chemicalClassManager   -->    
     <bean id="chemicalClassManager" class="gov.nih.nci.camod.service.impl.ChemicalClassManagerImpl"/>
-       
+
+    <!-- clinicalMarkerManager -->
+    <bean id="clinicalMarkerManager" class="gov.nih.nci.camod.service.impl.ClinicalMarkerManagerImpl"/>
+           
     <!-- commentsManager -->
     <bean id="commentsManager" class="gov.nih.nci.camod.service.impl.CommentsManagerImpl"/>    
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.31 2005-11-03 18:54:43 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.32 2005-11-07 19:15:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2005/11/03 18:54:43  pandyas
+ * Modified for histopathology screens
+ *
  * Revision 1.30  2005/11/02 19:03:25  pandyas
  * Added e-mail functionality
  *
@@ -69,6 +72,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2005/11/03 18:54:43  pandyas
+ * Modified for histopathology screens
+ *
  * Revision 1.30  2005/11/02 19:03:25  pandyas
  * Added e-mail functionality
  *
@@ -230,6 +236,6 @@ public interface AnimalModelManager {
     
     public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception;    
     
-    public void addClinicalMarker(AnimalModel inAnimalModel, ClinicalMarkerData inClinicalMarkerData) throws Exception;    
+    public void addClinicalMarker(AnimalModel inAnimalModel, Histopathology inHistopathology, ClinicalMarkerData inClinicalMarkerData) throws Exception;   
    
 }

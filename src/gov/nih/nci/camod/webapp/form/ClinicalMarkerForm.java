@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerForm.java,v 1.5 2005-11-03 18:52:44 pandyas Exp $
+ * $Id: ClinicalMarkerForm.java,v 1.6 2005-11-07 19:13:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/03 18:52:44  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -31,7 +34,7 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
     public ClinicalMarkerForm() {
     }
     
-	protected String histopathologyID;   
+	protected String histopathologyID;
 
     protected String name;
     protected String value;
@@ -48,7 +51,7 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
 	 */	
 	public void setHistopathologyID( String histopathologyID ) {
 		this.histopathologyID = histopathologyID;
-	}    
+	} 
     /**
      * @return Returns the name.
      */

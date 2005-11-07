@@ -8,14 +8,15 @@
 <%
 	String aHistopathologyID = request.getParameter( "aHistopathologyID" );
 	String aClinicalMarkerID = request.getParameter( "aClinicalMarkerID" );
+	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);	
 	
-	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
+	//if aClinicalMarkerID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
-	String actionName = "ClinicalMarkerAction.do?method=saveClinicalMarker";
+	String actionName = "ClinicalMarkerAction.do?method=save";
 	
-	if ( aClinicalMarkerID != null && aClinicalMarkerID.length() > 0 ) {
-		actionName = "ClinicalMarkerAction.do?method=editClinicalMarker";
+	if ( aClinicalMarkerID != null && aClinicalMarkerID.length() > 0 && isDeleted == null) {
+		actionName = "ClinicalMarkerAction.do?method=edit";
 	} else {
         aClinicalMarkerID = "";
     }
@@ -39,7 +40,7 @@
 	</tr>
 
         <TR align="LEFT" valign="TOP">
-                <td class="formRequiredNotice" width="5">&nbsp;</td>        
+                <td class="formRequiredNotice" width="5">*</td>        
                 <TD class="formLabel">Select Clinical Marker:</TD>
 			<td class="formField">			
 					<html:form action="<%= actionName %>" focus="name">
@@ -50,7 +51,7 @@
 	</tr>
 
         <TR align="LEFT" valign="TOP">
-            <td class="formRequiredNotice" width="5">&nbsp;</td>        
+            <td class="formRequiredNotice" width="5">&nbsp;</td>                    
             <TD class="formLabel">Value:</TD>
 			<td class="formField">
 			<html:text styleClass="formFieldSized" size="30" property="value" />			
@@ -70,9 +71,15 @@
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
 	  				  
+	  		      <c:if test="${not empty aClinicalMarkerID}">
+	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+						  <bean:message key="button.delete"/>
+					  </html:submit>
+			      </c:if>	  				  
+	  				  
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="histopathologyID" value="<%= aHistopathologyID %>">
-				  <input type="hidden" name="clinicalMarkerID" value="<%= aClinicalMarkerID %>">
+				  <input type="hidden" name="aHistopathologyID" value="<%= aHistopathologyID %>">
+				  <input type="hidden" name="aClinicalMarkerID" value="<%= aClinicalMarkerID %>">
 				  
 				  </html:form>			
 				</TABLE>

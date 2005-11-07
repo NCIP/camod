@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.7 2005-11-07 13:57:16 georgeda Exp $
+ * $Id: HistopathologyAction.java,v 1.8 2005-11-07 19:14:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/07 13:57:16  georgeda
+ * Minor tweaks
+ *
  * Revision 1.6  2005/11/04 14:44:25  georgeda
  * Cleaned up histopathology/assoc metastasis
  *
@@ -28,12 +31,9 @@ import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.HistopathologyManager;
 import gov.nih.nci.camod.webapp.form.AssociatedMetastasisForm;
-import gov.nih.nci.camod.webapp.form.ClinicalMarkerForm;
 import gov.nih.nci.camod.webapp.form.HistopathologyForm;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -132,7 +132,7 @@ public class HistopathologyAction extends BaseAction {
 		log.info("<HistopathologyAction> Entering 'editMetastasis' method");
 
 		// Grab the current aHistopathID from the session
-		String aHistopathologyID = request.getParameter("histopathologyID");
+		String aHistopathologyID = request.getParameter("aHistopathologyID");
 
 		// Grab the current aAssocMetastasisID we are working with related to
 		// this animalModel
@@ -183,61 +183,6 @@ public class HistopathologyAction extends BaseAction {
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.edit.successful"));
 				saveErrors(request, msg);
 			}
-		} catch (Exception e) {
-
-			log.error("Unable to get a Histpathology action: ", e);
-
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, theMsg);
-		}
-
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
-
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward editClinicalMarker(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		log.info("<HistopathologyAction> Entering 'editClinicalMarker' method");
-
-		// Grab the current aHistopathID from the session
-		String aHistopathologyID = request.getParameter("aHistopathologyID");
-
-		// Grab the current aAssocMetastasisID we are working with related to
-		// this animalModel
-		String aClinicalMarkerID = request.getParameter("aClinicalMarkerID");
-		log.debug("aClinicalMarkerID: " + aClinicalMarkerID);
-
-		// Create a form to edit
-		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
-
-		log.debug("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: "
-				+ aHistopathologyID + "\n\t ClinicalMarkerID: " + aClinicalMarkerID + "\n\t Name: "
-				+ clinicalMarkerForm.getName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
-
-		HistopathologyManager histopathManager = (HistopathologyManager) getBean("histopathManager");
-
-		try {
-			Histopathology theHistopath = histopathManager.get(aHistopathologyID);
-			histopathManager.updateClinicalMarker(clinicalMarkerForm, theHistopath);
-
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.edit.successful"));
-			saveErrors(request, msg);
-
 		} catch (Exception e) {
 
 			log.error("Unable to get a Histpathology action: ", e);
@@ -336,10 +281,10 @@ public class HistopathologyAction extends BaseAction {
 		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		// Grab the current aHistopathID from the session
-		String aHistopathID = request.getParameter("aHistopathologyID");
+		String aHistopathologyID = request.getParameter("aHistopathologyID");
 
 		log.debug("<HistopathologyAction saveMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
-				+ aHistopathID + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
+				+ aHistopathologyID + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
 				+ "\n\t organTissueCode: " + assocMetastasisForm.getOrganTissueCode() + "\n\t diseaseName: "
 				+ assocMetastasisForm.getDiagnosisName() + "\n\t diseaseCode: "
 				+ assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
@@ -365,7 +310,7 @@ public class HistopathologyAction extends BaseAction {
 			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-			Histopathology theParentHistopathology = histopathologyManager.get(aHistopathID);
+			Histopathology theParentHistopathology = histopathologyManager.get(aHistopathologyID);
 
 			theAnimalModelManager.addAssociatedMetastasis(theAnimalModel, theParentHistopathology, assocMetastasisForm);
 
@@ -390,64 +335,5 @@ public class HistopathologyAction extends BaseAction {
 		return mapping.findForward(theForward);
 	}
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward saveClinicalMarker(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		log.info("<HistopathologyAction> Entering 'saveClinicalMarker' method");
-
-		// Create a form to edit
-		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, clinicalMarkerForm);
-
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
-
-		// Grab the current aHistopathID from the session
-		String aHistopathID = request.getParameter("aHistopathologyID");
-
-		System.out.println("<HistopathologyAction saveClinicalMarker> following Characteristics:"
-				+ "\n\t ParentHistopathID: " + aHistopathID + "\n\t Name: " + clinicalMarkerForm.getName()
-				+ "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
-
-		String theForward = "AnimalModelTreePopulateAction";
-
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-
-			theAnimalModelManager.addClinicalMarker(theAnimalModel, clinicalMarkerForm);
-
-			log.info("New clinical marker created");
-
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.creation.successful"));
-			saveErrors(request, msg);
-
-			log.info("<HistopathologyAction> Exiting 'saveClinicalMarker' method");
-
-		} catch (Exception e) {
-			log.error("Exception ocurred creating AssociatedExpression", e);
-
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
-
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}
 
 }
