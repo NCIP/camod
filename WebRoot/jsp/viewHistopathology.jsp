@@ -31,14 +31,14 @@
 		<% if ( cc > 0 ) { %>
 			<tr>
 				<td class="resultsBoxWhiteEnd">
-					<c:forEach var="h" items="${hpColl}">
-						<a href="">
+					<c:forEach var="h" items="${hpColl}" varStatus="histstat">
+						<a href="<c:out value="#histo_${histstat.count}"/>">
 							C<c:out value="${h.organ.conceptCode}"/> - <c:out value="${h.organ.EVSPreferredDescription}"/>
 						</a>
 						<bean:define id="mtsColl" name="h" property="metastatisCollection"/>
-						<c:forEach var="m" items="${mtsColl}">
+						<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
 							<br>&nbsp;&nbsp;-&nbsp;
-							<a href="">
+							<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
 								C<c:out value="${m.organ.conceptCode}"/> - <c:out value="${m.organ.EVSPreferredDescription}"/>
 							</a>&nbsp;(Metastasis)
 						</c:forEach>
@@ -64,7 +64,8 @@
 
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
-			<c:forEach var="h" items="${hpColl}">
+			<c:forEach var="h" items="${hpColl}" varStatus="histstat">
+			<a name="<c:out value="histo_${histstat.count}"/>"/>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
 				Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>
@@ -111,21 +112,21 @@
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-				<c:out value="${h.survivalInfo}"/>
+				<c:out value="${h.survivalInfo}" escapeXml="false"/>
 				</td>
 			</tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-					<c:out value="${h.grossDescription}"/>
+					<c:out value="${h.grossDescription}" escapeXml="false"/>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-				<c:out value="${h.microscopicDescription}"/>
+				<c:out value="${h.microscopicDescription}" escapeXml="false"/>
 				</td>
 			</tr>
 			
@@ -142,25 +143,26 @@
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${h.geneticAlteration.observation}"/>
+					<c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>
 					<c:if test="${not empty m.geneticAlteration.methodOfObservation}"><br/>
 					Method - &nbsp;
-					<c:out value="${m.geneticAlteration.methodOfObservation}"/>
-					</c:if>
+					<c:out value="${m.geneticAlteration.methodOfObservation}" escapeXml="false"/>
+					</c:if>&nbsp;
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-				<c:out value="${h.comments}"/>
+				<c:out value="${h.comments}" escapeXml="false" />
 				</td>
 			</tr>
             <tr><td></td></tr>
 			<bean:define id="mtsColl" name="h" property="metastatisCollection"/>
-			<c:forEach var="m" items="${mtsColl}">
+			<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
+			    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>
 				<tr>
-					<td class="greySubTitleLeft" height="20" colspan="2">
+					<td class="greySubTitleLeftEnd" height="20" colspan="2">
 						Metastasis in <c:out value="${m.organ.EVSPreferredDescription}"/>
 					</td>
 				</tr>

@@ -25,73 +25,75 @@
 			       varStatus="stat">
 		<tr>
 			<td class="WhiteBox"><b>Cell Line/Transplant:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.name}"/></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.name}"/>&nbsp;</td>
 		</tr>
 	
 		<tr>
 			<td class="GreyBox"><b>Parental Cell line:</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.parentalCellLineName}"/></td>
+			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.parentalCellLineName}"/>&nbsp;</td>
 		</tr>
 	
 		<tr>		
 			<td class="WhiteBox"><b>Species</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;
-				<c:out value="${xt.originSpecies.scientificName}"/>&nbsp;(<c:out value="${xt.originSpecies.abbreviation}"/>)
+			<td class="WhiteBoxRightEnd">
+				<c:out value="${xt.originSpecies.scientificName}"/>&nbsp;
+				<c:if test="${not empty xt.originSpecies.abbreviation}">(<c:out value="${xt.originSpecies.abbreviation}"/>)</c:if>
 				<c:out value="${xt.originSpecies.ethnicityStrain}"/>
 			</td>
 		</tr>
 	
         <tr>
 			<td class="GreyBox"><b>Amount of Cells<b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.cellAmount}"/></td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.cellAmount}"/>&nbsp;</td>
 		</tr>	
 		
         <tr>
 			<td class="WhiteBox"><b>Tumor harvest date after transplant:<b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.harvestDate}"/></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.harvestDate}"/>&nbsp;</td>
 		</tr>
 	
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.atccNumber}"/></td>   		
+			<td class="GreyBoxRightEnd"><c:out value="${xt.atccNumber}"/>&nbsp;</td>   		
 		</tr>	
 		
 		<tr>
 			<td class="WhiteBox"><b>Method of Modification:</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.modificationDescription}"/></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.modificationDescription}"/>&nbsp;</td>
 		</tr>
 	
 		<tr>		
 			<td class="GreyBox"><b>Genetic Alteration:</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.geneticManipulation}"/></td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.geneticManipulation}"/>&nbsp;</td>
 		</tr>
 	
 		<tr>		
 			<td class="WhiteBox"><b>Host Species</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;
-				<c:out value="${xt.hostSpecies.scientificName}"/>&nbsp;(<c:out value="${xt.hostSpecies.abbreviation}"/>)
+			<td class="WhiteBoxRightEnd">
+			    <c:if test="${not empty xt.hostSpecies.scientificName}"><c:out value="${xt.hostSpecies.scientificName}"/></c:if>
+				<c:if test="${not empty xt.hostSpecies.abbreviation}}">(<c:out value="${xt.hostSpecies.abbreviation}"/>)</c:if>&nbsp;
 			</td>
 		</tr>
 	
 		<tr>		
 			<td class="GreyBox"><b>Host Strain</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.hostSpecies.ethnicityStrain}"/></td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.hostSpecies.ethnicityStrain}"/>&nbsp;</td>
 		</tr>
 		
 		<tr>		
 			<td class="WhiteBox"><b>Site of Administration:</b></td>
-			<td class="WhiteBoxRightEnd">&nbsp;<c:out value="${xt.administrativeSite}"/></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.administrativeSite}"/>&nbsp;</td>
 		</tr>	
 	
 		<tr>
 			<td class="GreyBox"><b>Graft Type</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;
+			<td class="GreyBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.graftType}">
-					<c:out value="${xt.graftTypeUnctrlVocab}"/>
+					<c:out value="${xt.graftTypeUnctrlVocab}"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.graftType}"/>
+					<c:out value="${xt.graftType}"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>

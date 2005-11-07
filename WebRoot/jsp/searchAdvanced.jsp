@@ -325,7 +325,6 @@
 			<td align="right" colspan="3">
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
-					<tr>
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  <bean:message key="button.submit"/>
 					  </html:submit>
@@ -333,8 +332,7 @@
 					  <html:reset styleClass="actionButton">
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
-				  </html:form>			
-				  	</tr>
+				  </html:form>		
 				</TABLE>
 			</td>
 		</tr>

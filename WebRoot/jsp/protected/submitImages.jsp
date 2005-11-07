@@ -103,7 +103,7 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 
-			<td class="formLabel"><label for="field3"><b>Staining Type</b></label></td>
+			<td class="formLabel"><label for="field3">Staining Type</label></td>
 			<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="staining" onchange="chkStaining();" >
 				<html:options name="<%= Dropdowns.STAININGDROP %>" />										

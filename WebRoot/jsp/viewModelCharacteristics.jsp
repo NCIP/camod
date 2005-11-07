@@ -69,16 +69,16 @@
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
-			<td class="GreyBoxRightEnd" width="80%">&nbsp;
-				<c:out value="${mdl.species.ethnicityStrain}"/>
+			<td class="GreyBoxRightEnd" width="80%">
+				<c:out value="${mdl.species.ethnicityStrain}"/>&nbsp;
 			</td>
 		</tr>		
 		
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Experimental Design</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">&nbsp;
+			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
-				    <c:out value="${mdl.experimentDesign}" escapeXml="false" />
+				    <c:out value="${mdl.experimentDesign}" escapeXml="false" />&nbsp;
 				</P>			
 			</td>
 		</tr>		               
@@ -95,23 +95,23 @@
 			<td class="WhiteBox" width="20%"><b>Website for add. info</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
-				<a href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>
-				</P>&nbsp;
+				<a href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;
+				</P>
 			</td>
 		</tr>		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Breeding Notes</b></td>
-			<td class="GreyBoxRightEnd" width="80%">&nbsp;
+			<td class="GreyBoxRightEnd" width="80%">
 				<P>
-				<c:out value="${mdl.phenotype.breedingNotes}"/>
+				<c:out value="${mdl.phenotype.breedingNotes}"/>&nbsp;
 				</P>		
 			</td>
 		</tr>		
 
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">&nbsp;
-				<c:out value="${mdl.phenotype.sexDistribution.type}"/>
+			<td class="WhiteBoxRightEnd" width="80%">
+				<c:out value="${mdl.phenotype.sexDistribution.type}"/>&nbsp;
 			</td>
 		</tr>		               
         
@@ -129,7 +129,7 @@
 		<tr>
 			<td class="GreyBox" width="20%"><b>Submitted by</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>
+				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>&nbsp;
 			</td>
 		</tr>
 
@@ -147,7 +147,7 @@
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Principal Investigator / Lab</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>
+				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>&nbsp;
 			</td>
 		</tr>		               
 
@@ -156,7 +156,7 @@
         <tr>
 			<td class="formTitle" height="20" colspan="2">Model Availability: This model is available from</td>
 		</tr>
-		<tr><td colspan="2"><table cellpadding="5" cellspacing="0" border="0" width="99%">
+		<tr><td colspan="2"><table cellpadding="5" cellspacing="0" border="0" width="100%">
 		<tr>
 			<td class="formTitleBlue" width="30%">Strain</td>				
 			<td class="formTitleBlue" width="45%">Distributor</td>
@@ -172,10 +172,10 @@
 				</c:otherwise>
 			</c:choose>
 			<tr>
-				<td class="<c:out value="${tdClass}"/>End" >
+				<td class="<c:out value="${tdClass}"/>" width="30%">
 				<c:out value="${av.name}"/>&nbsp;
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="45%">
+				<td class="<c:out value="${tdClass}"/>" width="45%">
 					<c:set var="dist" value="${av.animalDistributorCollection[0]}"/>
 					<c:choose>
 						<c:when test = "${dist.id == 1}">
@@ -206,11 +206,11 @@
 			</tr>
 		</c:forEach>
 		</table></td></tr>
-		<tr><td>&nbsp;</td></tr>
+
 		</c:if>
 		
-		<% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.MODEL_CHARACTERISTICS); %>
 		<tr><td>&nbsp;</td></tr>
+		<% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.MODEL_CHARACTERISTICS); %>
 		<%@ include file="/jsp/includeComments.jsp" %>
 	</TABLE>
 	

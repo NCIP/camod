@@ -272,7 +272,7 @@
 						<c:otherwise>
 							<c:out value="${cd.treatment.administrativeRoute}"/>
 						</c:otherwise>
-					</c:choose>
+					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">&nbsp;
 					<c:out value="${cd.treatment.ageAtTreatment}"/>
@@ -449,13 +449,14 @@
 			</tr>
 			</c:forEach>
 			</TABLE>
+			<br>
 			</c:if>
 
 			<c:set var="cdList" value="${mdl.geneDeliveryCollection}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="3">Gene Delivery</td>				
+				<td class="formTitleBlue" height="20" colspan="4">Gene Delivery</td>				
 			</tr>
 			<tr>
 				<td class="greySubTitleLeft" width="30%">Viral Vector</td>
@@ -486,7 +487,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">&nbsp;
 					<c:out value="${cd.geneInVirus}"/>
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="30%">&nbsp;
+				<td class="<c:out value="${tdClass}"/>" width="30%">&nbsp;
 					<c:out value="${cd.organ.EVSPreferredDescription}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="20%">&nbsp;

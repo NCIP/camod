@@ -50,7 +50,7 @@
 				     </display:column>     
 				     <display:column title="Tumor Sites">
 				         <c:out escapeXml="false" value="${row.tumorSites}"/>
-				         <c:out escapeXml="false" value="${row.metastatisSites}"/>
+				         <c:out escapeXml="false" value="${row.metastatisSites}"/>&nbsp;
 				     </display:column>	                   
 	          </display:table>	
 	          

@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.6 2005-11-04 14:44:25 georgeda Exp $
+ * $Id: HistopathologyAction.java,v 1.7 2005-11-07 13:57:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/04 14:44:25  georgeda
+ * Cleaned up histopathology/assoc metastasis
+ *
  * Revision 1.5  2005/11/03 22:29:12  georgeda
  * Added validation/delete capabilities to histo screens
  *
@@ -333,7 +336,7 @@ public class HistopathologyAction extends BaseAction {
 		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		// Grab the current aHistopathID from the session
-		String aHistopathID = request.getParameter("histopathologyID");
+		String aHistopathID = request.getParameter("aHistopathologyID");
 
 		log.debug("<HistopathologyAction saveMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
 				+ aHistopathID + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
@@ -410,7 +413,7 @@ public class HistopathologyAction extends BaseAction {
 		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		// Grab the current aHistopathID from the session
-		String aHistopathID = request.getParameter("histopathologyID");
+		String aHistopathID = request.getParameter("aHistopathologyID");
 
 		System.out.println("<HistopathologyAction saveClinicalMarker> following Characteristics:"
 				+ "\n\t ParentHistopathID: " + aHistopathID + "\n\t Name: " + clinicalMarkerForm.getName()

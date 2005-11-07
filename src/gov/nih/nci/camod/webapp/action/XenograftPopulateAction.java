@@ -104,18 +104,6 @@ public class XenograftPopulateAction extends BaseAction {
 
 		System.out.println("<XenograftPopulateAction dropdown> Entering dropdown() ");
 
-		// Retrieve the AnimalModel current Species and Strain set in
-		// ModelCharacteristics
-		// This is displayed on the JSP page right above the HOST STRAIN /
-		// SPECIES
-		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		AnimalModel animalModel = animalModelManager.get(modelID);
-
-		Taxon theTaxon = animalModel.getSpecies();
-		request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theTaxon.getScientificName());
-		request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrain());
-
 		// setup dropdown menus
 		this.dropdown(request, response, (XenograftForm) form);
 
@@ -137,6 +125,18 @@ public class XenograftPopulateAction extends BaseAction {
 
 		System.out.println("<XenograftPopulateAction dropdown> Entering void dropdown()");
 
+		// Retrieve the AnimalModel current Species and Strain set in
+		// ModelCharacteristics
+		// This is displayed on the JSP page right above the HOST STRAIN /
+		// SPECIES
+		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		AnimalModel animalModel = animalModelManager.get(modelID);
+
+		Taxon theTaxon = animalModel.getSpecies();
+		request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theTaxon.getScientificName());
+		request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrain());
+		
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,

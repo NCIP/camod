@@ -42,6 +42,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
             request.setAttribute("aAssociatedMetastasisID", aAssociatedMetastasisID);
+            request.setAttribute("aHistopathologyID", aHistopathologyID);
 
             /* Set Histopathology attributes */
             assocMetastasisForm.setAgeOfOnset(associatedMetastasis.getAgeOfOnset());

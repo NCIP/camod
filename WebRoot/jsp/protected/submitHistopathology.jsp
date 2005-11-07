@@ -73,9 +73,9 @@
 			</a>	
 		</td>
 		<html:hidden property="diagnosisName"/>
-		<html:hidden property="diagnosisCode"/>
+		<html:hidden property="diagnosisCode" value="C26416"/>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"  size="25" />
+			<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="25" />
 		</td>
 	</tr>
 		

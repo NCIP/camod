@@ -90,9 +90,6 @@
 						<%@ include file="/jsp/includeInvivoData.jsp" %>
 					</c:if>
 	            </c:forEach>
-				<tr>
-					<td class="WhiteBox" width="100%" colspan="2"> <a href='javascript: rs("commentWin","submitComment.jsp",415,250);'><IMG src="images/comment.gif" border=0 align=middle> <b>Place your comment here</b></a></td>
-				</tr>
 			</TABLE>
 		</td></tr></TABLE>
 	</td></tr></TABLE>

@@ -21,7 +21,7 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
         <tr>
-            <td class="formTitle" height="20" colspan="3">
+            <td class="formTitleBlue" height="20" colspan="3">
                 Keyword Search:&nbsp;&nbsp;
                 <html:text styleClass="formFieldSized" property="keyword" size="45"/>
                 &nbsp;&nbsp;
@@ -30,12 +30,9 @@
         </tr>
         
         <tr><td>&nbsp;</td></tr>
-        <tr><td><i>OR</i> </td>
-        </tr>
-        <tr><td>&nbsp;</td></tr>
                 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Simple Search</td>
+			<td class="formTitleBlue" height="20" colspan="3">Simple Search</td>
 			<!-- <td class="formMessage" align="left" FONT="9"><a href="advancedsearch.html">Advanced Search <a> </td> -->
 		</tr>
 
@@ -84,12 +81,12 @@
 				</html:select>				
 			</td>
 		</tr>
-
+	
 		<tr>
 			<td align="right" colspan="3">
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
-					<tr>
+					
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  Search
 					  </html:submit>
@@ -97,7 +94,7 @@
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
 				  </html:form>			
-				  	</tr>
+				  	
 				</TABLE>
 			</td>
 		</tr>

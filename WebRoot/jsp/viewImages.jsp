@@ -10,13 +10,13 @@
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
-	<tr><td valign="top">
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%" >
+	<tr><td valign="top" colspan="2">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="formTitle" height="20">
+				<td class="formTitle" height="20" colspan="2">
 				Images - Model:
 				<c:out value="${mdl.modelDescriptor}"/></td>				
 			</tr>			
@@ -33,7 +33,7 @@
 					</c:otherwise>
 				</c:choose>
 
-				<td class="<c:out value="${tdClass}"/>End">
+				<td class="<c:out value="${tdClass}"/>End" colspan="2">
 					<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
 					<Img src=" http://caimage.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&img=<c:out value="${p.id}"/>.sid" 
 						border=0

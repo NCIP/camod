@@ -19,7 +19,7 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 			Genetic Description - Model:
-			<bean:write name="mdl" property="modelDescriptor"/>
+			<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
 
@@ -29,9 +29,9 @@
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
 					<li>
-						<html:link action="viewEngineeredTransgene">
+					    <a href="<c:out value="#eng_trans_${idx}"/>">
 							<bean:write name="eg" property="name"/>
-						</html:link>
+						</a>
 					</logic:iterate>
 				</ul>&nbsp;
 			</td>			
@@ -43,9 +43,9 @@
 				<ul>
 					<logic:iterate id="eg" name="gsc" indexId="idx">
 					<li>
-						<html:link action="viewEngineeredTransgene">
+						<a href="<c:out value="#gen_seg_${idx}"/>">
 							<bean:write name="eg" property="cloneDesignator"/>
-						</html:link>
+						</a>
 					</logic:iterate>
 				</ul>&nbsp;
 			</td>			
@@ -57,9 +57,9 @@
 				<ul>
 					<logic:iterate id="eg" name="tmc" indexId="idx">
 					<li>
-						<html:link action="viewEngineeredTransgene">
+						<a href="<c:out value="#targ_mod_${idx}"/>">
 							<bean:write name="eg" property="name"/>
-						</html:link>
+						</a>
 					</logic:iterate>
 				</ul>&nbsp;
 			</td>			
@@ -69,10 +69,13 @@
 			<td class="WhiteBox" width="20%"><b>Induced Mutation</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<ul>
+				    <c:set var="count" value="0"/>
 					<logic:iterate id="eg" name="mdl" property="engineeredGeneCollection" indexId="idx">
 					<% if ( eg instanceof gov.nih.nci.camod.domain.InducedMutation ) { %>
+					
 					<li>
-						<html:link action="viewEngineeredTransgene">
+						<a href="<c:out value="#ind_mut_${count}"/>">
+						    <c:set var="count" value="${count + 1}"/>s
 							<c:choose>
 								<c:when test="${empty eg.environmentalFactor.name}">
 									<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>
@@ -81,7 +84,7 @@
 						            <c:out value="${eg.environmentalFactor.name}"/>
 								</c:otherwise>
 							</c:choose>
-						</html:link>
+						</a>
 					<%}%>
 					</logic:iterate>
 				</ul>&nbsp;
@@ -96,16 +99,19 @@
 	final int cc2 = (spc != null)?spc.size():0;
 	System.out.println("Spon. mut. coll size()=" + cc2);
 %>
+                <ul>
 		<% if ( cc2 > 0 ) { %>
-				<ul>
+				
 					<logic:iterate id="sm" name="mdl" property="spontaneousMutationCollection" indexId="idx">
-					<li><html:link action="viewSpontaneousMutation">
-							<bean:write name="sm" property="name"/>
-					</html:link>
+						<li>
+						<a href="<c:out value="#spon_mut_${idx}"/>">
+								<bean:write name="sm" property="name"/>
+						</a>
 					</logic:iterate>
-				</ul>&nbsp;
+				
 		<%}%>
-			</td>			
+		        </ul>&nbsp;
+			</td>
 		</tr>			
 	</TABLE>
 	
@@ -115,15 +121,17 @@
 <!-- Transgene -->
 <% int cc = ((List)tgc).size(); %>
 <% if ( cc > 0 ) { %>
-<c:forEach var="tg" items="${tgc}">
+<c:set var="count" value="0"/>
+<c:forEach var="tg" items="${tgc}" >
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	
+	<a name="<c:out value="eng_trans_${count}"/>"/>
+	<c:set var="count" value="${count + 1}"/>
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Engineered Transgene - Model:
-				<c:out value="${mdl.modelDescriptor}"/>
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
 
@@ -132,14 +140,14 @@
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
-					<td class="GreyBoxRightEnd" width="65%">&nbsp;
+					<td class="GreyBoxRightEnd" width="65%">
 					Targeted
 					</td>
 				</tr>
 				<tr>
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
-					<td class="WhiteBoxRightEnd" width="65%">&nbsp;
-					<c:out value="${tg.locationOfIntegration}"/>
+					<td class="WhiteBoxRightEnd" width="65%">
+					<c:out value="${tg.locationOfIntegration}"/>&nbsp;
 					</td>
 				</tr>
 			</c:when>
@@ -147,7 +155,7 @@
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
-					<td class="GreyBoxRightEnd" width="65%">&nbsp;
+					<td class="GreyBoxRightEnd" width="65%">
 					Random
 					</td>
 				</tr>
@@ -156,14 +164,14 @@
 		
 		<tr>
 			<td class="GreyBox" width="35%"><b>Transgene</b></td>
-			<td class="GreyBoxRightEnd" width="65%">&nbsp;
-			<c:out value="${tg.name}"/>
+			<td class="GreyBoxRightEnd" width="65%">
+			<c:out value="${tg.name}"/>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">&nbsp;
-			<c:out value="${tg.taxonCollection[0].scientificName}"/>
+			<td class="WhiteBoxRightEnd" width="65%">
+			<c:out value="${tg.taxonCollection[0].scientificName}"/>&nbsp;
 			</td>
 		</tr>
 
@@ -180,9 +188,9 @@
 				<c:forEach var="rem" items="${remColl}">
 					<tr>
 						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
-						<td class="WhiteBoxRightEnd" width="65%">&nbsp;
+						<td class="WhiteBoxRightEnd" width="65%">
 							<c:out value="${rem.taxon.scientificName}"/>&nbsp;
-							<c:out value="${rem.taxon.ethnicityStrain}"/>
+							<c:out value="${rem.taxon.ethnicityStrain}"/>&nbsp;
 						</td>
 					</tr>
 				</c:forEach>
@@ -198,7 +206,7 @@
 			<c:forEach var="gf" items="${tg.geneFunctionCollection}">
 				<li><c:out value="${gf.function}"/></li>
 			</c:forEach>
-			</ul>
+			</ul>&nbsp;
 			</td>
 		</tr>
 
@@ -251,14 +259,14 @@
 					</tr>
 				</c:forEach>
 			</table>
-			</c:if>
+			</c:if>&nbsp;
 			</td>
 		</tr>	
 		
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
-			<td class="GreyBoxRightEnd" width="65%">&nbsp;
-			<c:out value="${tg.mutationIdentifier.numberMGI}"/>
+			<td class="GreyBoxRightEnd" width="65%">
+			<c:out value="${tg.mutationIdentifier.numberMGI}"/>&nbsp;
 			</td>			
 		</tr>
 		<tr>
@@ -275,14 +283,17 @@
 
 
 <!-- Genomic Segment -->
+<c:set var="count" value="0"/>
 <c:if test="${not empty genomicSegColl}">
 <c:forEach var="gs" items="${genomicSegColl}">
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
+    <a name="<c:out value="gen_seg_${count}"/>"/>
+	<c:set var="count" value="${count + 1}"/>
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Genomic Segment - Model:<c:out value="${mdl.modelDescriptor}"/>
+				Genomic Segment - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
 		<c:choose>
@@ -290,14 +301,14 @@
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
-					<td class="GreyBoxRightEnd" width="65%">&nbsp;
-					Targeted
+					<td class="GreyBoxRightEnd" width="65%">
+					Targeted&nbsp;
 					</td>
 				</tr>
 				<tr>
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
-					<td class="WhiteBoxRightEnd" width="65%">&nbsp;
-					<c:out value="${gs.locationOfIntegration}"/>
+					<td class="WhiteBoxRightEnd" width="65%">
+					<c:out value="${gs.locationOfIntegration}"/>&nbsp;
 					</td>
 				</tr>
 			</c:when>
@@ -305,8 +316,8 @@
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
-					<td class="GreyBoxRightEnd" width="65%">&nbsp;
-					Random
+					<td class="GreyBoxRightEnd" width="65%">
+					Random&nbsp;
 					</td>
 				</tr>
 			</c:otherwise>
@@ -319,10 +330,10 @@
 					<li>
 						<c:choose>
 							<c:when test="${empty segtype.name}">
-								<c:out value="${segtype.nameUnctrlVocab}"/>
+								<c:out value="${segtype.nameUnctrlVocab}"/>&nbsp;
 							</c:when>
 							<c:otherwise>
-								<c:out value="${segtype.name}"/>
+								<c:out value="${segtype.name}"/>&nbsp;
 							</c:otherwise>
 						</c:choose>
 					</li>
@@ -333,12 +344,12 @@
 
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Designator</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.cloneDesignator}"/></td>			
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.cloneDesignator}"/>&nbsp;</td>			
 		</tr>		
 		
 		<tr>
 			<td class="GreyBox" width="35%"><b>Segment Size</b></td>
-			<td class="GreyBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.segmentSize}"/></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.segmentSize}"/>&nbsp;</td>
 		</tr>
 
 		<tr>
@@ -358,6 +369,9 @@
 					</tr>
 				</c:forEach>
 			</table>
+			</c:if>
+			<c:if test="${empty gs.expressionFeatureCollection}">
+			    &nbsp;
 			</c:if>
 			</td>
 		</tr>
@@ -386,7 +400,7 @@
 
         <tr>
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">&nbsp;<c:out value="${gs.mutationIdentifier.numberMGI}"/></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.mutationIdentifier.numberMGI}"/>&nbsp;</td>
 		</tr>
 
 		<tr>
@@ -401,48 +415,51 @@
 <!-- End Genomic Segment -->
 
 <!-- Targeted modification-->
+<c:set var="count" value="0"/>
 <c:if test="${not empty targetedModColl}">
 <c:forEach var="tm" items="${targetedModColl}">
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
+	<a name="<c:out value="targ_mod_${count}"/>"/>
+	<c:set var="count" value="${count + 1}"/>
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Targeted Modification - Model:<c:out value="${mdl.modelDescriptor}"/>
+				Targeted Modification - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
         <tr>
             <td class="GreyBox"><b>Gene</b></td>
-            <td class="GreyBoxRightEnd">&nbsp;<c:out value="${tm.name}"/></td>
+            <td class="GreyBoxRightEnd"><c:out value="${tm.name}"/>&nbsp;</td>
         </tr>
                  
         <tr>
-            <td class="resultsBoxWhite"><b>Modification Type</b></td>
-            <td class="resultsBoxWhiteEnd">&nbsp;
-				<c:choose>
-					<c:when test="${empty tm.modificationTypeCollection}">
-						<c:out value="${tm.modTypeUnctrlVocab}"/>
-					</c:when>
-					<c:otherwise>
-					<li>
-						<c:forEach var="modType" items="${tm.modificationTypeCollection}">
-							<li><c:out value="${modType.name}"/></li>
-						</c:forEach>
-					</li>
-					</c:otherwise>
-				</c:choose>
+            <td class="WhiteBox"><b>Modification Type</b></td>
+            <td class="WhiteBoxRightEnd">
+				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
+				    <li>
+						<c:choose>
+							<c:when test="${empty modType.name}">
+								<c:out value="${modType.modTypeUnctrlVocab}"/>&nbsp;
+							</c:when>
+							<c:otherwise>
+								<c:out value="${modType.name}"/>&nbsp;
+							</c:otherwise>
+						</c:choose>
+					</li>	
+				</c:forEach>
             </td>
         </tr>
 
         <tr>
             <td class="GreyBox"><b>Genetic Background - Donor</b></td>
-            <td class="GreyBoxRightEnd">&nbsp;
-            	<c:out value="${tm.esCellLineName}"/>
+            <td class="GreyBoxRightEnd">
+            	<c:out value="${tm.esCellLineName}"/>&nbsp;
             </td>
         </tr>
         <tr>
-            <td class="resultsBoxWhite"><b>Genetic Background - Recipient</b></td>
-            <td class="resultsBoxWhiteEnd">&nbsp;<c:out value="${tm.blastocystName}"/></td>
+            <td class="WhiteBox"><b>Genetic Background - Recipient</b></td>
+            <td class="WhiteBoxRightEnd"><c:out value="${tm.blastocystName}"/>&nbsp;</td>
         </tr>
 
 		<tr>
@@ -517,14 +534,14 @@
 		<c:if test="${not empty gene}">
 	        <tr>
 	            <td class="resultsBoxGrey"><b>Gene Info</b></td>
-	            <td class="resultsBoxGreyEnd">&nbsp;
+	            <td class="resultsBoxGreyEnd">
 	            <c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
 	            <c:out value="${gene.symbol}"/>.&nbsp; 
-	            <c:out value="${gene.fullName}"/>
+	            <c:out value="${gene.fullName}"/>&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="resultsBoxWhite"><b> Sequence ID</b></td>
+	            <td valign="top" class="resultsBoxWhite"><b>Sequence ID</b></td>
 	            <td class="resultsBoxWhiteEnd">
 					<ul>
 						<c:forEach var="seq" items="${gene.nucleicAcidSequenceCollection}">
@@ -604,64 +621,74 @@
 <!-- End Targeted modification-->
 
 <!-- Induced Mutation-->
+<c:set var="count" value="0"/>
 <c:if test="${not empty inducedMutColl}">
 <c:forEach var="im" items="${inducedMutColl}">
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
+	<a name="<c:out value="ind_mut_${count}"/>"/>
+	<c:set var="count" value="${count + 1}"/>
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Induced Mutation - Model:<c:out value="${mdl.modelDescriptor}"/>
+				Induced Mutation - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
         <tr>
             <td class="GreyBox"><b>Description of the induced mutation</b></td>
-            <td class="GreyBoxRightEnd">&nbsp;<c:out value="${im.description}"/></td>
+            <td class="GreyBoxRightEnd"><c:out value="${im.description}"/>&nbsp;</td>
         </tr>
                  
         <tr>
-            <td class="resultsBoxWhite"><b>Inducing Agent Category</b></td>
-            <td class="resultsBoxWhiteEnd">&nbsp;
+            <td class="WhiteBox"><b>Inducing Agent Category</b></td>
+            <td class="WhiteBoxRightEnd">
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.type}">
-						<c:out value="${im.environmentalFactor.typeUnctrlVocab}"/>
+						<c:out value="${im.environmentalFactor.typeUnctrlVocab}"/>&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <c:out value="${im.environmentalFactor.type}"/>
+			            <c:out value="${im.environmentalFactor.type}"/>&nbsp;
 					</c:otherwise>
 				</c:choose>
             </td>
         </tr>
                  
         <tr>
-            <td class="resultsBoxGrey"><b>Inducing Agent Name</b></td>
-            <td class="resultsBoxGreyEnd">&nbsp;
+            <td class="GreyBox"><b>Inducing Agent Name</b></td>
+            <td class="GreyBoxRightEnd">
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.name}">
-						<c:out value="${im.environmentalFactor.nameUnctrlVocab}"/>
+						<c:out value="${im.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <c:out value="${im.environmentalFactor.name}"/>
+			            <c:out value="${im.environmentalFactor.name}"/>&nbsp;
 					</c:otherwise>
 				</c:choose>
             </td>
         </tr>
-
-		<c:if test="${not empty im.geneticAlterationCollection}">
-	        <tr>
-				<td class="greySubTitle" align="center"><b>Mutated Locus/Gene (Observation)<b></td>
-				<td class="greySubTitle" align="center"><b>Method of Observation<b></td>
-	        </tr>
-			<c:forEach var="gene" items="${im.geneticAlterationCollection}">
-		        <tr>
-		            <td class="resultsBoxWhite"><c:out value="${gene.observation}"/></td>
-		            <td class="resultsBoxWhiteEnd"><c:out value="${gene.methodOfObservation}"/></td>
-		        </tr>
-			</c:forEach>
-		</c:if>
+		
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
+				<c:if test="${not empty im.geneticAlterationCollection}">
+					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+						<tr>
+							<td class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></td>
+							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
+						</tr>
+						<c:forEach var="gene" items="${im.geneticAlterationCollection}">
+							<tr>
+					            <td class="WhiteBox"><c:out value="${gene.observation}"/>&nbsp;</td>
+					            <td class="WhiteBoxRightEnd"><c:out value="${gene.methodOfObservation}"/>&nbsp;</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+			</td>
+		</tr>
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
-			<td class="GreyBoxRightEnd" width="65%">&nbsp;<c:out value="${im.mutationIdentifier.numberMGI}"/></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${im.mutationIdentifier.numberMGI}"/>&nbsp;</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
