@@ -56,7 +56,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Spontaneous Mutation:</td>
+		<td class="formTitle" height="20" colspan="3">Spontaneous Mutation</td>
 	</tr>
 	
 	<tr>
@@ -88,7 +88,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">
-			<label for="field2">MGI Number</a></label>
+			<label for="field2">MGI Number:</a></label>
 		</td>
 		<td class="formField">
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
@@ -99,7 +99,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comments Field:</label>
+		<td class="formLabel"><label for="field1">Comment:</label>
 		<camod:cshelp mapId="spontaneous_mutation_help" key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">			

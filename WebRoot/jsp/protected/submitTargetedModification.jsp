@@ -146,7 +146,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Conditional Description</label>
+		<td class="formLabel"><label for="field2">Conditional Description:</label>
 			<camod:cshelp mapId="targeted_modification_help" key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -158,7 +158,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">MGI Number</label>
+		<td class="formLabel"><label for="field2">MGI Number:</label>
 		<camod:cshelp mapId="targeted_modification_help" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -205,7 +205,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Title of Construct <br>(enter info only when uploading image)</label></td>
+		<td class="formLabel"><label for="field2">Title of Construct: <br>(enter info only when uploading image)</label></td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="30" />
 		</td>
@@ -213,7 +213,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Description of Construct<br>(enter info only when uploading image)</label></td>
+		<td class="formLabel"><label for="field2">Description of Construct:<br>(enter info only when uploading image)</label></td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="30"  />
 		</td>

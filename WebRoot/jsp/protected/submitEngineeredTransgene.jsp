@@ -110,7 +110,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Transgene Integration</label></td>
+		<td class="formRequiredLabel"><label for="field3">Transgene Integration:</label></td>
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">	
 
@@ -121,7 +121,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Location of Integration *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)
+		<td class="formLabel"><label for="field1">Location of Integration: *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)
 		<camod:cshelp mapId="engineered_transgene_help" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -130,21 +130,21 @@
 	</tr>
 
 	<tr>
-		<td class="formTitle" colspan="3">Transgene (coding sequence only)</td>
+		<td class="formTitle" colspan="3">Transgene (coding sequence only):</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Transgene</label>
+		<td class="formRequiredLabel"><label for="field1">Transgene:</label>
 		<camod:cshelp mapId="engineered_transgene_help" key="ENGINEERED_GENE.NAME_TRANSGENE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">Transgene<br>
+					<td class="standardText" width="33%">Transgene:<br>
 						<html:text styleClass="formFieldUnSized" property="name" size="20" />
 					</td>
-					<td class="standardText" width="33%">Species of Origin<br>
+					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="scientificName" onchange="chkName();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
@@ -158,26 +158,26 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" colspan="3">Transcriptional (Promoter)</td>
+		<td class="formTitle" colspan="3">Transcriptional (Promoter):</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Transcriptional 1</label>
+		<td class="formRequiredLabel"><label for="field1">Transcriptional 1:</label>
 		<camod:cshelp mapId="engineered_transgene_help" key="REGULATORY_ELEMENT.NAME_Transcriptional1" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">Regulatory Element<br>
+					<td class="standardText" width="33%">Regulatory Element:<br>
 						<html:text styleClass="formFieldUnSized" property="transcriptional1_name" size="20" />
 					</td>
-					<td class="standardText" width="33%">Species of Origin<br>
+					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional1_species" onchange="chkOther_t1();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
-					<td class="standardText" width="33%">Other Species<br>
+					<td class="standardText" width="33%">Other Species:<br>
 						<html:text styleClass="formFieldUnSized" property="transcriptional1_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
@@ -187,19 +187,19 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Transcriptional 2</label></td>
+		<td class="formLabel"><label for="field1">Transcriptional 2:</label></td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">Regulatory Element<br>
+					<td class="standardText" width="33%">Regulatory Element:<br>
 						<html:text styleClass="formFieldUnSized" property="transcriptional2_name" size="20" />
 					</td>
-					<td class="standardText" width="33%">Species of Origin<br>
+					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional2_species" onchange="chkOther_t2();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
-					<td class="standardText" width="33%">Other Species<br>
+					<td class="standardText" width="33%">Other Species:<br>
 						<html:text styleClass="formFieldUnSized" property="transcriptional2_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
@@ -209,14 +209,14 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Transcriptional 3</label></td>
+		<td class="formLabel"><label for="field1">Transcriptional 3:</label></td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">Regulatory Element<br>
+					<td class="standardText" width="33%">Regulatory Element:<br>
 						<html:text styleClass="formFieldUnSized" property="transcriptional3_name" size="20" />
 					</td>
-					<td class="standardText" width="33%">Species of Origin<br>
+					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional3_species" onchange="chkOther_t3();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
@@ -231,21 +231,21 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Poly A Signal</label>
+		<td class="formLabel"><label for="field1">Poly A Signal:</label>
 		<camod:cshelp key="REGULATORY_ELEMENT.NAME_PolyA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">Regulatory Element<br>
+					<td class="standardText" width="33%">Regulatory Element:<br>
 						<html:text styleClass="formFieldUnSized" property="polyASignal_name" size="20" />
 					</td>
-					<td class="standardText" width="33%">Species of Origin<br>
+					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="polyASignal_species" onchange="chkOther_PS();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
-					<td class="standardText" width="33%">Other Species<br>
+					<td class="standardText" width="33%">Other Species:<br>
 						<html:text styleClass="formFieldUnSized" property="polyASignal_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
@@ -255,19 +255,19 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Splice Sites / Intron</label></td>
+		<td class="formLabel"><label for="field1">Splice Sites / Intron:</label></td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
 				<tr>
-					<td class="standardText" width="33%">Regulatory Element<br>
+					<td class="standardText" width="33%">Regulatory Element:<br>
 						<html:text styleClass="formFieldUnSized" property="spliceSites_name" size="20" />
 					</td>
-					<td class="standardText" width="33%">Species of Origin<br>
+					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldUnSized" size="1" property="spliceSites_species" onchange="chkOther_SS();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
-					<td class="standardText" width="33%">Other Species<br>
+					<td class="standardText" width="33%">Other Species:<br>
 						<html:text styleClass="formFieldUnSized" property="spliceSites_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
@@ -277,7 +277,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Gene Functions<br>(seperate each entry by a comma)</label>
+		<td class="formLabel"><label for="field2">Gene Functions:<br>(seperate each entry by a comma)</label>
 			<camod:cshelp mapId="engineered_transgene_help" key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -296,7 +296,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Conditional Description</label>
+		<td class="formLabel"><label for="field2">Conditional Description:</label>
 			<camod:cshelp mapId="engineered_transgene_help" key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -305,7 +305,7 @@
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">MGI Number</label>
+		<td class="formLabel"><label for="field2">MGI Number:</label>
 		<camod:cshelp mapId="engineered_transgene_help" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -316,7 +316,7 @@
 	</tr>	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Comment</label>
+		<td class="formLabel"><label for="field2">Comment:</label>
 			<camod:cshelp mapId="engineered_transgene_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -330,7 +330,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
+		<td class="formLabel"><label for="field1">Upload Construct Map (Image):</label></td>
 		<td class="formField">
 		
 			<c:if test="${not empty engineeredTransgeneForm.fileServerLocation}">
@@ -351,7 +351,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Title of Construct<br>(Enter info only when uploading image)</label></td>
+		<td class="formLabel"><label for="field2">Title of Construct:<br>(Enter info only when uploading image)</label></td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="32" />
 		</td>
@@ -359,7 +359,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label>
+		<td class="formLabel"><label for="field2">Description of Construct:<br>(Enter info only when uploading image)</label>
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct" rows="4" cols="32"  />	

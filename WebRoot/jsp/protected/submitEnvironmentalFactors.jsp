@@ -43,7 +43,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Environmental Factors</label></td>
+		<td class="formRequiredLabel"><label for="field3">Environmental Factor:</label></td>
 		<td class="formField">		
 			<br>
 			<label for="field3">(if Enviromental Factor is not listed, then please<br>select "Other" from the list and specify it below)</label>
@@ -59,7 +59,7 @@
 	</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Environmental Factors</label></td>
+			<td class="formLabel"><label for="field1">Other Environmental Factor:</label></td>
 			<td class="formField">					
 					<html:text styleClass="formFieldSized" size="30" property="otherName"   disabled="true"/>			
 			</td>
