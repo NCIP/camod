@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.35 2005-11-03 18:54:10 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.36 2005-11-07 17:43:55 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.35  2005/11/03 18:54:10  pandyas
+ *  Modified for histopathology screens
+ *
  *  Revision 1.34  2005/11/01 18:14:28  schroedn
  *  Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
  *
@@ -251,12 +254,17 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 	        List associatedMetatasisList = new ArrayList();
 	        List clinicalMarkerList = new ArrayList();
 	        
-			for (int i = 0; i < histopathologyList.size(); i++) {
+			for (int i = 0; i < histopathologyList.size(); i++) {				
 				Histopathology histopathology = (Histopathology) histopathologyList.get(i);	
 				 System.out.println("\tAdded histopathologyList= " + histopathology.getOrgan().getName());
 				 
 				 histopathList.add(histopathology);
- 
+
+			/*	 if(histopathology.getClinicalMarkerCollection() != null) {
+						ClinicalMarker clinicalMarker = (ClinicalMarker) histopathologyList.get(i);					 
+						 System.out.println("\tAdded to clinicalMarkerList= " + clinicalMarker.getName());					 
+						clinicalMarkerList.add(clinicalMarker);					 
+				 } */ 				 
 			}
 
 			// Retrieve the list all SpontaneousMutations assoc with this
@@ -325,7 +333,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
 
 			if (tyList == null || tyList.size() == 0) {
-				System.out.println("<AnimalModelTreePopulateAction populate> nothing!");
+				System.out.println("<AnimalModelTreePopulateAction populate> no Therapy to add!");
 			} else {
 				for (int i = 0; i < tyList.size(); i++) {
 					Therapy ty = (Therapy) tyList.get(i);
