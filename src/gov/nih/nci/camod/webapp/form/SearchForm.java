@@ -1,7 +1,10 @@
 /**
- * $Id: SearchForm.java,v 1.5 2005-10-20 19:29:32 georgeda Exp $
+ * $Id: SearchForm.java,v 1.6 2005-11-07 16:54:51 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/20 19:29:32  georgeda
+ * Added xenograft search functionality
+ *
  * Revision 1.4  2005/10/19 20:19:26  georgeda
  * Cleanup
  *
@@ -43,7 +46,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
     protected boolean searchXenograft = false;
-    
+
     public void setHormone(String hormone) {
         this.hormone = hormone;
     }
@@ -191,98 +194,122 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     public boolean isSearchCarcinogenicInterventions() {
         return searchCarcinogenicInterventions;
     }
-    
+
     public void setSearchCarcinogenicInterventions(boolean searchCarcinogenicInterventions) {
         this.searchCarcinogenicInterventions = searchCarcinogenicInterventions;
     }
 
-    
     public String getInducedMutationAgent() {
         return inducedMutationAgent;
     }
 
-    
     public void setInducedMutationAgent(String inducedMutationAgent) {
         this.inducedMutationAgent = inducedMutationAgent;
     }
 
-    
     public boolean isEngineeredTransgene() {
         return engineeredTransgene;
     }
 
-    
     public void setEngineeredTransgene(boolean engineeredTransgene) {
         this.engineeredTransgene = engineeredTransgene;
     }
 
-    
     public boolean isTargetedModification() {
         return targetedModification;
     }
 
-    
     public void setTargetedModification(boolean targetedModification) {
         this.targetedModification = targetedModification;
     }
 
-    
     public String getGeneName() {
         return geneName;
     }
 
-    
     public void setGeneName(String geneName) {
         this.geneName = geneName;
     }
 
-    
     public String getGenomicSegDesignator() {
         return genomicSegDesignator;
     }
 
-    
     public void setGenomicSegDesignator(String genomicSegDesignator) {
         this.genomicSegDesignator = genomicSegDesignator;
     }
 
-	public boolean isSearchTherapeuticApproaches() {
-		return searchTherapeuticApproaches;
-	}
+    public boolean isSearchTherapeuticApproaches() {
+        return searchTherapeuticApproaches;
+    }
 
-	public void setSearchTherapeuticApproaches(boolean searchTherapeuticApproaches) {
-		this.searchTherapeuticApproaches = searchTherapeuticApproaches;
-	}
+    public void setSearchTherapeuticApproaches(boolean searchTherapeuticApproaches) {
+        this.searchTherapeuticApproaches = searchTherapeuticApproaches;
+    }
 
-	public String getTherapeuticApproach() {
-		return therapeuticApproach;
-	}
+    public String getTherapeuticApproach() {
+        return therapeuticApproach;
+    }
 
-	public void setTherapeuticApproach(String therapeuticApproach) {
-		this.therapeuticApproach = therapeuticApproach;
-	}
+    public void setTherapeuticApproach(String therapeuticApproach) {
+        this.therapeuticApproach = therapeuticApproach;
+    }
 
-	public boolean isSearchHistoMetastasis() {
-		return searchHistoMetastasis;
-	}
+    public boolean isSearchHistoMetastasis() {
+        return searchHistoMetastasis;
+    }
 
-	public void setSearchHistoMetastasis(boolean searchHistoMetastasis) {
-		this.searchHistoMetastasis = searchHistoMetastasis;
-	}
+    public void setSearchHistoMetastasis(boolean searchHistoMetastasis) {
+        this.searchHistoMetastasis = searchHistoMetastasis;
+    }
 
-	public boolean isSearchMicroArrayData() {
-		return searchMicroArrayData;
-	}
+    public boolean isSearchMicroArrayData() {
+        return searchMicroArrayData;
+    }
 
-	public void setSearchMicroArrayData(boolean searchMicroArrayData) {
-		this.searchMicroArrayData = searchMicroArrayData;
-	}
-    
+    public void setSearchMicroArrayData(boolean searchMicroArrayData) {
+        this.searchMicroArrayData = searchMicroArrayData;
+    }
+
     public boolean isSearchXenograft() {
         return searchXenograft;
     }
-    
+
     public void setSearchXenograft(boolean searchXenograft) {
         this.searchXenograft = searchXenograft;
+    }
+
+    /**
+     * Reset all fields that are not used in the simple search. Since the form
+     * is used for both the simple and advanced search and is stored in the
+     * session to allow users to quickly use the back arrow to refine their
+     * search we need to make sure that when the user clicks on the simple
+     * search page the options from the advanced search page are reset.
+     * 
+     */
+    public void simpleSearchReset() {
+
+        chemicalDrug = null;
+        hormone = null;
+        growthFactor = null;
+        radiation = null;
+        viral = null;
+        surgery = null;
+        phenotype = null;
+        disease = null;
+        cellLine = null;
+        diagnosisCode = null;
+        diagnosisName = null;
+        inducedMutationAgent = null;
+        geneName = null;
+        genomicSegDesignator = null;
+        therapeuticApproach = null;
+        searchCarcinogenicInterventions = false;
+        searchTherapeuticApproaches = false;
+        engineeredTransgene = false;
+        targetedModification = false;
+        searchHistoMetastasis = false;
+        searchMicroArrayData = false;
+        searchXenograft = false;
     }
 }
