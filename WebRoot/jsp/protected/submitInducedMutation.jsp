@@ -64,7 +64,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Induced Mutation:</td>
+		<td class="formTitle" height="20" colspan="3">Induced Mutation</td>
 	</tr>
 
 	<tr>
@@ -99,7 +99,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">CAS number:</label>
+		<td class="formLabel"><label for="field1">CAS Number:</label>
 		<camod:cshelp mapId="induced_mutation_help" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -123,22 +123,12 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">MGI Number:</label></td>
+		<td class="formLabel"><label for="field2">Description:</label></td>
 		<td class="formField">
-			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
-			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />		
+			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32"  />		
 		</td>
-	</tr>
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Comment:</label>
-			<camod:cshelp mapId="induced_mutation_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  />	
-		</td>
-	</tr>
+	</tr>	
+
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Observation:</label>
@@ -158,12 +148,23 @@
 			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true" />		
 		</td>
 	</tr>
-	
+		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Description:</label></td>
+		<td class="formLabel"><label for="field2">MGI number:</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32"  />		
+			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
+			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />		
+		</td>
+	</tr>
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Comment:</label>
+			<camod:cshelp mapId="induced_mutation_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  />	
 		</td>
 	</tr>
 	
