@@ -1194,6 +1194,28 @@
             parameter="method"
 			validate="false">		
     </action>
+    
+   	 <!-- ClinicalMarkerForm -->    
+     <action path="/ClinicalMarkerAction"
+	        type="gov.nih.nci.camod.webapp.action.ClinicalMarkerAction"
+	        name="clinicalMarkerForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="input"> 
+	    <forward
+            name="input"
+            path="/submitClinicalMarkers.do">
+        </forward>	          	
+    </action>
+    
+    <action path="/ClinicalMarkerPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.ClinicalMarkerPopulateAction"
+    		name="clinicalMarkerForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">		
+    </action>    
          
     <!-- EngineeredTransgeneForm -->
           <action path="/EngineeredTransgeneAction"
@@ -1349,27 +1371,6 @@
             parameter="method"
 			validate="false">
     </action> 
-    
-     <action path="/ClinicalMarkerAction"
-	        type="gov.nih.nci.camod.webapp.action.HistopathologyAction"
-	        name="clinicalMarkerForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="false"
-	        input="input"> 
-	    <forward
-            name="input"
-            path="/submitClinicalMarkers.do">
-        </forward>	          	
-    </action>
-    
-    <action path="/ClinicalMarkerPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.ClinicalMarkerPopulateAction"
-    		name="clinicalMarkerForm"    		
-            scope="request"
-            parameter="method"
-			validate="false">		
-    </action>       
      
    	 <!-- HormoneForm -->
    	 <action path="/HormoneAction"
