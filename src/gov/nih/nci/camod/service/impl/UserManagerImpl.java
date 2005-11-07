@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.9 2005-10-24 13:28:06 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.10 2005-11-07 13:58:29 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/24 13:28:06  georgeda
+ * Cleanup changes
+ *
  * Revision 1.8  2005/10/17 13:10:16  georgeda
  * Get contact information
  *
@@ -209,6 +212,19 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
         return theEmail;
 
+    }
+
+    /**
+     * Update the roles for the current user
+     */
+    public void updateCurrentUserRoles(HttpServletRequest inRequest) {
+        String theCurrentUser = (String) inRequest.getSession().getAttribute(Constants.CURRENTUSER);
+        try {
+            List theRoles = getRolesForUser(theCurrentUser);
+            inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
+        } catch (Exception e) {
+            log.info("Unable to update user roles for " + theCurrentUser, e);
+        }
     }
 
     /**
