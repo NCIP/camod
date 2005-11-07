@@ -49,7 +49,28 @@
             </fileset>
         </copy>
     </target>
-    
+
+    <!-- =================================================================== -->
+    <!-- The "db-prepare" target generates the database schema and creates   --> 
+    <!-- tables based on the mapping files                                   -->
+    <!-- =================================================================== -->
+    <target name="process-files" description="processes parameter substiution for files">        
+        
+        <echo>process-files</echo>   
+        
+        <copy todir="${build.classes.dir}" filtering="true" >
+            <fileset dir="${source.dir}">                                
+                <include name="hibernate.cfg.xml" />
+                <include name="camod.properties" />
+            </fileset>
+        </copy>
+    	<move todir="${source.dir}">
+            <fileset dir="${build.classes.dir}">                                
+                 <include name="hibernate.cfg.xml" />
+                 <include name="camod.properties" />
+             </fileset>
+    	</move>
+    </target>
     <!--
         TARGET: build_war
         This will build the war file
