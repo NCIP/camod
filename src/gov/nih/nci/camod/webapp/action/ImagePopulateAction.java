@@ -41,12 +41,14 @@ public class ImagePopulateAction extends BaseAction {
 				imageForm.setStaining( inImage.getStaining() );
 				imageForm.setOtherStaining( inImage.getStainingUnctrlVocab() );
 				
+                imageForm.setThumbUrl(inImage.getThumbUrl());
 				// TODO: Display a message on the current image, uploading
 				// another
 				// image will replace current image
 				// TODO: Display thumbnail and viewer for image already uploaded
 			}
 		}
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, "");
 		return mapping.findForward("submitImages");
 	}
 
