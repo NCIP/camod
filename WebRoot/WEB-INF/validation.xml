@@ -18,7 +18,19 @@
    </global>
    
   <formset>
-  
+    <form name="drugScreenSearchForm">
+        <field property="NSCNumber" depends="required,integer">
+            <arg0 key="DrugScreenSearchForm.NSCNumber"/>
+        </field>
+        <field property="doYeast" depends="validwhen">
+            <arg0 key="DrugScreenSearchForm.select"/>
+            <var>
+                <var-name>test</var-name>
+                <var-value>(((doYeast == 'true') or (doInvivo == 'true')) or ((doPreClinical == 'true') or (doClinical == 'true')))</var-value>
+            </var>
+        </field>   
+    </form>	
+    
   	<form name="availabilityForm">
         <field property="name" depends="required,maxlength">
             <arg0 key="AvailabilityForm.name"/>

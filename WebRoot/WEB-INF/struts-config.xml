@@ -2049,8 +2049,7 @@
          path="/ChangeCommentsStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStateAction"
          name="commentsStateForm"
-         parameter="protected"
-         >   	
+         parameter="protected">   	
          <forward 
     		name="next"
     		path="/AdminRolesPopulateAction.do"
@@ -2061,7 +2060,7 @@
 	 <action 
          path="/ChangeCommentsStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStatePopulateAction" 
-         
+         name="commentsStateForm"
          parameter="protected">   	
          <forward 
     		name="next"
@@ -2159,13 +2158,16 @@
 	        type="gov.nih.nci.camod.webapp.action.DrugScreenSearchAction"
 	        name="drugScreenSearchForm"
 	        scope="request"
-	        parameter="unprotected_method" 
+	        parameter="unprotected_method"
+	        validate="true"
 	        unknown="false"
-	        validate="false"
-	        input="/drugScreenSearch">
+	        input="input">
+	    <forward
+            name="input"
+            path="/searchDrugScreening.do">
+        </forward>     	
     </action>
-        
-        <!-- Search actions -->
+
     <action path="/AdvancedSearchPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AdvancedSearchPopulateAction"
     		name="searchForm"    		

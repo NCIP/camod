@@ -8,7 +8,6 @@
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
-        <tr><td>&nbsp;</td></tr>
         <tr>
 		    <html:errors/>
 		    <td class="formMessage" colspan="3">* indicates a required field</td>
