@@ -69,7 +69,7 @@
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field3">Integration</label>
+			<td class="formRequiredLabel"><label for="field3">Integration:</label>
 			</td>
 			<td class="formField">
 				<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">	
@@ -81,7 +81,7 @@
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Location of Integration<br>
+			<td class="formLabel"><label for="field1">Location of Integration:<br>
 													  (Required field when "Targeted"<br>
 													  is selected for the "Transgene <br>
 													  Integration" field) </label>
@@ -95,7 +95,7 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 
-			<td class="formLabel"><label for="field3"><b>Segment Type</b></label></td>
+			<td class="formLabel"><label for="field3"><b>Segment Type:</b></label></td>
 			<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="segmentName" onchange="chkSegmentName();" >
 				<html:options name="<%= Dropdowns.GENOMICSEGMENTDROP %>" />										
@@ -107,7 +107,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Segment Type</label></td>
+			<td class="formLabel"><label for="field1">Other Segment Type:</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="otherSegmentName" disabled="true" size="10" />
 			</td>
@@ -115,7 +115,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Segment Size</label></td>
+			<td class="formLabel"><label for="field1">Segment Size:</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldUnSized" property="segmentSize" size="20" />
 			</td>
@@ -123,7 +123,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Designator</label>
+			<td class="formLabel"><label for="field1">Designator:</label>
 			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.CLONE_DESIGNATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
@@ -133,7 +133,7 @@
 		
 		<tr>
            <td class="formRequiredNotice" width="5">&nbsp;</td>
-           <td class="formLabel"><label for="field2">MGI Number</label>
+           <td class="formLabel"><label for="field2">MGI Number:</label>
            <camod:cshelp mapId="genomic_segment_help" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
            </td>
            <td class="formField">
@@ -145,7 +145,7 @@
         
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Comment</label>
+			<td class="formLabel"><label for="field2">Comment:</label>
 			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
@@ -159,7 +159,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Upload Construct Map (Image)</label></td>
+			<td class="formLabel"><label for="field1">Upload Construct Map (Image):</label></td>
 			<td class="formField">
 						
 			<c:if test="${not empty genomicSegmentForm.fileServerLocation}">
@@ -181,7 +181,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Title of Construct<br>(Enter info only when uploading image)</label></td>
+			<td class="formLabel"><label for="field2">Title of Construct:<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="32" />
 			</td>
@@ -189,7 +189,7 @@
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
+			<td class="formLabel"><label for="field2">Description of Construct:<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="32"  />	
 			</td>
