@@ -38,7 +38,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Environmental Factors </td>
+		<td class="formTitle" height="20" colspan="3">Environmental Factor </td>
 	</tr>
 
 	<tr>
