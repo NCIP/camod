@@ -11,8 +11,6 @@ import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.util.DrugScreenResult;
 import gov.nih.nci.camod.util.EvsTreeUtil;
-import gov.nih.nci.common.persistence.Persist;
-import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
@@ -29,44 +27,48 @@ import java.util.List;
  */
 public class AgentManagerImpl extends BaseManager implements AgentManager {
 	
-	public Agent get(String id) {
-		Agent agent = null;
-		
-		try {
-			agent = (Agent) Search.queryById(Agent.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in AgentManagerImpl.get");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in AgentManagerImpl.get");
-			e.printStackTrace();
-		}
-		
-		return agent;
+    /**
+     * Get a specific Agent by id
+     * 
+     * @param id
+     *            the unique id for a Agent
+     * 
+     * @return the matching Agent object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public Agent get(String id) throws Exception {
+        log.trace("In AgentManagerImpl.get");
+        return (Agent) super.get(id, Agent.class);
     }
 
-    public void save(Agent agent) {   
-    	try {
-			Persist.save(agent);			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in AgentManagerImpl.save");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in AgentManagerImpl.save");
-			e.printStackTrace();
-		}
+    /**
+     * Save Agent
+     * 
+     * @param Agent
+     *            the Agent to save
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void save(Agent agent) throws Exception {
+        log.debug("In AgentManagerImpl.save");
+        super.save(agent);
     }
 
-    public void remove(String id) {    
-    	try {
-			Persist.deleteById(Agent.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in AgentManagerImpl.remove");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in AgentManagerImpl.remove");
-			e.printStackTrace();
-		}
+    /**
+     * Remove a specific Agent by id
+     * 
+     * @param id
+     *            the unique id for a Agent
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void remove(String id) throws Exception {
+        log.debug("In AgentManagerImpl.save");
+        super.remove(id, Agent.class);
     }
 
 	public Collection getClinicalProtocols(Agent a) {

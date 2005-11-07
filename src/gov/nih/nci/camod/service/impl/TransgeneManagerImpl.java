@@ -8,9 +8,6 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.service.TransgeneManager;
-import gov.nih.nci.common.persistence.Persist;
-import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
 import java.util.List;
 
 /**
@@ -21,56 +18,63 @@ import java.util.List;
  */
 public class TransgeneManagerImpl extends BaseManager implements TransgeneManager {
 	
-	public List getAll() {		
-		List transgenes = null;
-		
-		try {
-			transgenes = Search.query(Transgene.class);
-		} catch (Exception e) {
-			System.out.println("Exception in TransgeneManagerImpl.getAll");
-			e.printStackTrace();
-		}
-		
-		return transgenes;
-	}
+    /**
+     * Get all Transgene by id
+     * 
+     * 
+     * @return the matching Transgene objects, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public List getAll() throws Exception {
+        log.trace("In TransgeneManagerImpl.getAll");
+        return super.getAll(Transgene.class);
+    }
 	
-	public Transgene get(String id) {
-		Transgene transgene = null;
-		
-		try {
-			transgene = (Transgene) Search.queryById(Transgene.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in TransgeneManagerImpl.get");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in TransgeneManagerImpl.get");
-			e.printStackTrace();
-		}
-		
-		return transgene;
+    /**
+     * Get a specific Transgene by id
+     * 
+     * @param id
+     *            the unique id for a Transgene
+     * 
+     * @return the matching Therapy object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public Transgene get(String id) throws Exception {
+        log.trace("In TransgeneManagerImpl.get");
+        return (Transgene) super.get(id, Transgene.class);
     }
 
-    public void save(Transgene transgene) {    	
-    	try {
-			Persist.save(transgene);			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in TransgeneManagerImpl.save");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in TransgeneManagerImpl.save");
-			e.printStackTrace();
-		}
+
+
+    /**
+     * Save Transgene
+     * 
+     * @param Transgene
+     *            the Transgene to save
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void save(Transgene transgene) throws Exception {
+        log.debug("In TransgeneManagerImpl.save");
+        super.save(transgene);
     }
 
-    public void remove(String id) {    	
-    	try {
-			Persist.deleteById(Transgene.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in TransgeneManagerImpl.remove");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in TransgeneManagerImpl.remove");
-			e.printStackTrace();
-		}
+    /**
+     * Remove a specific Transgene by id
+     * 
+     * @param id
+     *            the unique id for a Transgene
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void remove(String id) throws Exception {
+        log.debug("In TransgeneManagerImpl.save");
+        super.remove(id, Transgene.class);
     }
 }

@@ -1,9 +1,12 @@
 /**
  * @author
  * 
- * $Id: ChemicalClassManagerImpl.java,v 1.2 2005-10-21 17:55:31 pandyas Exp $
+ * $Id: ChemicalClassManagerImpl.java,v 1.3 2005-11-07 20:43:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/21 17:55:31  pandyas
+ * fixed exception message
+ *
  * Revision 1.1  2005/09/23 14:55:06  georgeda
  * Made SexDistribution a reference table
  *
@@ -33,34 +36,35 @@ public class ChemicalClassManagerImpl extends BaseManager implements ChemicalCla
      * 
      * @return the ChemicalClass that matches the name
      */
-    public ChemicalClass getByName(String inName) {
+    public ChemicalClass getByName(String inName) throws Exception {
 
         ChemicalClass theChemicalClass = null;
 
-        try {
+        if (inName != null && inName.length() > 0) {         
+        	try {
 
-            // The following two objects are needed for eQBE.
-            ChemicalClass theQueryObj = new ChemicalClass();
-            theQueryObj.setChemicalClassName(inName);
+        		// The following two objects are needed for eQBE.
+        		ChemicalClass theQueryObj = new ChemicalClass();
+        		theQueryObj.setChemicalClassName(inName);
 
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("chemicalClass.chemicalClassName", Evaluator.EQUAL);
+        		// Apply evaluators to object properties
+        		Evaluation theEvaluation = new Evaluation();
+        		theEvaluation.addEvaluator("chemicalClass.chemicalClassName", Evaluator.EQUAL);
 
-            List theList = Search.query(theQueryObj, theEvaluation);
+        		List theList = Search.query(theQueryObj, theEvaluation);
 
-            if (theList != null && theList.size() > 0) {
-                theChemicalClass = (ChemicalClass) theList.get(0);
+        		if (theList != null && theList.size() > 0) {
+        			theChemicalClass = (ChemicalClass) theList.get(0);
+        		}
+
+            } catch (PersistenceException pe) {
+                log.error("PersistenceException in getByName", pe);
+                throw pe;
+            } catch (Exception e) {
+                log.error("Exception in getByName", e);
+                throw e;
             }
-
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in ChemicalClassManagerImpl.getByName");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in ChemicalClassManagerImpl.getByName");
-            e.printStackTrace();
         }
-
         return theChemicalClass;
     }
 }

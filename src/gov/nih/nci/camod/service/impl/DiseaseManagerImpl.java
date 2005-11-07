@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: DiseaseManagerImpl.java,v 1.1 2005-11-03 18:54:29 pandyas Exp $
+ * $Id: DiseaseManagerImpl.java,v 1.2 2005-11-07 20:43:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/11/03 18:54:29  pandyas
+ * Modified for histopathology screens
+ *
  * 
  */
 
@@ -33,34 +36,36 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager {
      * 
      * @return the Disease that matches the name
      */
-    public Disease getByName(String inName) {
+    public Disease getByName(String inName) throws Exception {
 
     	Disease theDisease = null;
+    	
+        if (inName != null && inName.length() > 0) {    	
 
-        try {
+        	try {
 
-            // The following two objects are needed for eQBE.
-        	Disease theQueryObj = new Disease();
-            theQueryObj.setName(inName);
+        		// The following two objects are needed for eQBE.
+        		Disease theQueryObj = new Disease();
+        		theQueryObj.setName(inName);
 
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("Disease.inName", Evaluator.EQUAL);
+        		// Apply evaluators to object properties
+        		Evaluation theEvaluation = new Evaluation();
+        		theEvaluation.addEvaluator("Disease.inName", Evaluator.EQUAL);
 
-            List theList = Search.query(theQueryObj, theEvaluation);
+        		List theList = Search.query(theQueryObj, theEvaluation);
 
-            if (theList != null && theList.size() > 0) {
-                theDisease = (Disease) theList.get(0);
-            }
+        		if (theList != null && theList.size() > 0) {
+        			theDisease = (Disease) theList.get(0);
+        		}
 
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in DiseaseManagerImpl.getByName");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in DiseaseManagerImpl.getByName");
-            e.printStackTrace();
+        	} catch (PersistenceException pe) {
+        		log.error("PersistenceException in getByName", pe);
+        		throw pe;
+        	} catch (Exception e) {
+        		log.error("Exception in getByName", e);
+        		throw e;
+        	}
         }
-
         return theDisease;
     }	
 	

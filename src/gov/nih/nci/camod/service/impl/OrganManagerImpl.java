@@ -1,15 +1,17 @@
 /**
  * 
- * $Id: OrganManagerImpl.java,v 1.4 2005-11-03 18:55:44 pandyas Exp $
+ * $Id: OrganManagerImpl.java,v 1.5 2005-11-07 20:43:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/03 18:55:44  pandyas
+ * added Docs
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.service.OrganManager;
-import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
@@ -25,86 +27,89 @@ import java.util.List;
  */
 public class OrganManagerImpl extends BaseManager implements OrganManager {
 
-    public List getAll() {
-        List organs = null;
-
-        try {
-            organs = Search.query(Organ.class);
-        } catch (Exception e) {
-            System.out.println("Exception in OrganManagerImpl.getAll");
-            e.printStackTrace();
-        }
-
-        return organs;
+    /**
+     * Get all Organ by id
+     * 
+     * 
+     * @return the matching Organ objects, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public List getAll() throws Exception {
+        log.trace("In OrganManagerImpl.getAll");
+        return super.getAll(Organ.class);
     }
 
-    public Organ get(String id) {
+    /**
+     * Get a specific Organ by id
+     * 
+     * @param id
+     *            the unique id for a Organ
+     * 
+     * @return the matching Organ object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public Organ get(String id) throws Exception {
+        log.trace("In OrganManagerImpl.get");
+        return (Organ) super.get(id, Organ.class);
+    }
+
+    /**
+     * Get a specific Organ by name
+     * 
+     * @param name
+     *            the unique name for a Organ
+     * 
+     * @return the matching Organ, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */    
+    public Organ getByName(String inName) throws Exception{
         Organ organ = null;
 
-        try {
-            organ = (Organ) Search.queryById(Organ.class, new Long(id));
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in OrganManagerImpl.get");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in OrganManagerImpl.get");
-            e.printStackTrace();
-        }
+        if (inName != null && inName.length() > 0) {        
+        	try {
 
+        		// The following two objects are needed for eQBE.
+        		Organ theOrgan = new Organ();
+        		theOrgan.setName(inName);
+
+        		// Apply evaluators to object properties
+        		Evaluation theEvaluation = new Evaluation();
+        		theEvaluation.addEvaluator("organ.name", Evaluator.EQUAL);
+
+        		List theList = Search.query(theOrgan, theEvaluation);
+
+        		if (theList != null && theList.size() > 0) {
+        			organ = (Organ) theList.get(0);
+        		}
+
+        	} catch (PersistenceException pe) {
+        		log.error("PersistenceException in getByName", pe);
+        		throw pe;
+        	} catch (Exception e) {
+        		log.error("Exception in getByName", e);
+        		throw e;
+        	}
+        }
         return organ;
     }
 
-    public Organ getByName(String inName) {
-        Organ organ = null;
-
-        try {
-
-            // The following two objects are needed for eQBE.
-            Organ theOrgan = new Organ();
-            theOrgan.setName(inName);
-
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("organ.name", Evaluator.EQUAL);
-
-            List theList = Search.query(theOrgan, theEvaluation);
-
-            if (theList != null && theList.size() > 0) {
-                organ = (Organ) theList.get(0);
-            }
-
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in OrganManagerImpl.getByName");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in OrganManagerImpl.getByName");
-            e.printStackTrace();
-        }
-        return organ;
-    }
-
-    public void save(Organ organ) {
-        try {
-            Persist.save(organ);
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in OrganManagerImpl.save");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in OrganManagerImpl.save");
-            e.printStackTrace();
-        }
-    }
-
-    public void remove(String id) {
-        try {
-            Persist.deleteById(Organ.class, new Long(id));
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in OrganManagerImpl.remove");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in OrganManagerImpl.remove");
-            e.printStackTrace();
-        }
-    }
-    
+    /**
+     * Save Organ
+     * 
+     * @param Organ
+     *            the Organ to save
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void save(Organ organ) throws Exception {
+        log.debug("In OrganManagerImpl.save");
+        super.save(organ);
+    }    
 }

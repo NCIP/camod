@@ -24,34 +24,35 @@ public class ExpressionLevelDescManagerImpl extends BaseManager implements Expre
      * 
      * @return the ExpressionLevelDesc that matches the name
      */
-    public ExpressionLevelDesc getByName(String inName) {
+    public ExpressionLevelDesc getByName(String inName) throws Exception {
 
     	ExpressionLevelDesc theExpressionLevelDesc = null;
 
-        try {
+        if (inName != null && inName.length() > 0) {     	
+        	try {
 
-            // The following two objects are needed for eQBE.
-        	ExpressionLevelDesc theQueryObj = new ExpressionLevelDesc();
-            theQueryObj.setExpressionLevel(inName);
+        		// The following two objects are needed for eQBE.
+        		ExpressionLevelDesc theQueryObj = new ExpressionLevelDesc();
+        		theQueryObj.setExpressionLevel(inName);
 
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("ExpressionLevelDesc.ExpressionLevelDescName", Evaluator.EQUAL);
+        		// Apply evaluators to object properties
+        		Evaluation theEvaluation = new Evaluation();
+        		theEvaluation.addEvaluator("ExpressionLevelDesc.ExpressionLevelDescName", Evaluator.EQUAL);
 
-            List theList = Search.query(theQueryObj, theEvaluation);
+        		List theList = Search.query(theQueryObj, theEvaluation);
 
-            if (theList != null && theList.size() > 0) {
-                theExpressionLevelDesc = (ExpressionLevelDesc) theList.get(0);
+        		if (theList != null && theList.size() > 0) {
+        			theExpressionLevelDesc = (ExpressionLevelDesc) theList.get(0);
+        		}
+
+            } catch (PersistenceException pe) {
+                log.error("PersistenceException in getByName", pe);
+                throw pe;
+            } catch (Exception e) {
+                log.error("Exception in getByName", e);
+                throw e;
             }
-
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in ExpressionLevelDescManagerImpl.getByType");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in ExpressionLevelDescManagerImpl.getByType");
-            e.printStackTrace();
         }
-
         return theExpressionLevelDesc;
     }		
 }

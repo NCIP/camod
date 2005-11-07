@@ -8,12 +8,10 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.BiologicalProcess;
 import gov.nih.nci.camod.service.BiologicalProcessManager;
-import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
-
 import java.util.List;
 
 /**
@@ -32,87 +30,80 @@ public class BiologicalProcessManagerImpl extends BaseManager implements Biologi
      * 
      * @return the BiologicalProcess that matches the name
      */
-    public BiologicalProcess getByName(String inName) {
+    public BiologicalProcess getByName(String inName) throws Exception {
 
     	BiologicalProcess theBiologicalProcess = null;
 
-        try {
+        if (inName != null && inName.length() > 0) {    	
+        	try {
 
-            // The following two objects are needed for eQBE.
-        	BiologicalProcess theQueryObj = new BiologicalProcess();
-            theQueryObj.setProcessName(inName);
+        		// The following two objects are needed for eQBE.
+        		BiologicalProcess theQueryObj = new BiologicalProcess();
+        		theQueryObj.setProcessName(inName);
 
-            // Apply evaluators to object properties
-            Evaluation theEvaluation = new Evaluation();
-            theEvaluation.addEvaluator("biologicalProcess.biologicalProcessName", Evaluator.EQUAL);
+        		// Apply evaluators to object properties
+        		Evaluation theEvaluation = new Evaluation();
+        		theEvaluation.addEvaluator("biologicalProcess.biologicalProcessName", Evaluator.EQUAL);
 
-            List theList = Search.query(theQueryObj, theEvaluation);
+        		List theList = Search.query(theQueryObj, theEvaluation);
 
-            if (theList != null && theList.size() > 0) {
-                theBiologicalProcess = (BiologicalProcess) theList.get(0);
+        		if (theList != null && theList.size() > 0) {
+        			theBiologicalProcess = (BiologicalProcess) theList.get(0);
+        		}
+
+            } catch (PersistenceException pe) {
+                log.error("PersistenceException in getByName", pe);
+                throw pe;
+            } catch (Exception e) {
+                log.error("Exception in getByName", e);
+                throw e;
             }
-
-        } catch (PersistenceException pe) {
-            System.out.println("PersistenceException in BiologicalProcessManagerImpl.getByType");
-            pe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception in BiologicalProcessManagerImpl.getByType");
-            e.printStackTrace();
         }
-
         return theBiologicalProcess;
     }	
 	
-	public List getAll() {		
-		List bioProcess = null;
-		
-		try {
-			bioProcess = Search.query(BiologicalProcess.class);
-		} catch (Exception e) {
-			System.out.println("Exception in BiologicalProcessManagerImpl.getAll");
-			e.printStackTrace();
-		}
-		
-		return bioProcess;
-	}
+    /**
+     * Get all BiologicalProcess by id
+     * 
+     * 
+     * @return the matching BiologicalProcess objects, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public List getAll() throws Exception {
+        log.trace("In BiologicalProcessManagerImpl.getAll");
+        return super.getAll(BiologicalProcess.class);
+    }
 	
-	public BiologicalProcess get(String id) {
-		BiologicalProcess bioProcess = null;
-		
-		try {
-			bioProcess = (BiologicalProcess) Search.queryById(BiologicalProcess.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in BiologicalProcessManagerImpl.get");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in BiologicalProcessManagerImpl.get");
-			e.printStackTrace();
-		}
-		
-		return bioProcess;
+    /**
+     * Get a specific BiologicalProcess by id
+     * 
+     * @param id
+     *            the unique id for a BiologicalProcess
+     * 
+     * @return the matching BiologicalProcess object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public BiologicalProcess get(String id) throws Exception {
+        log.trace("In BiologicalProcessManagerImpl.get");
+        return (BiologicalProcess) super.get(id, BiologicalProcess.class);
     }
 
-    public void save(BiologicalProcess bioProcess) {   
-    	try {
-			Persist.save(bioProcess);			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in BiologicalProcessManagerImpl.save");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in BiologicalProcessManagerImpl.save");
-			e.printStackTrace();
-		}
+    /**
+     * Save BiologicalProcess
+     * 
+     * @param BiologicalProcess
+     *            the BiologicalProcess to save
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void save(BiologicalProcess biologicalProcess) throws Exception {
+        log.debug("In BiologicalProcessManagerImpl.save");
+        super.save(biologicalProcess);
     }
 
-    public void remove(String id) {    
-    	try {
-			Persist.deleteById(BiologicalProcess.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in BiologicalProcessManagerImpl.remove");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in BiologicalProcessManagerImpl.remove");
-			e.printStackTrace();
-		}
-    }
 }

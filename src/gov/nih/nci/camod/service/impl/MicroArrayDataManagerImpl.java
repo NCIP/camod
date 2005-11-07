@@ -8,9 +8,6 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.MicroArrayData;
 import gov.nih.nci.camod.service.MicroArrayDataManager;
-import gov.nih.nci.common.persistence.Persist;
-import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
 import java.util.List;
 
 /**
@@ -21,56 +18,61 @@ import java.util.List;
  */
 public class MicroArrayDataManagerImpl extends BaseManager implements MicroArrayDataManager {
 	
-	public List getAll() {		
-		List microArrayDatas = null;
-		
-		try {
-			microArrayDatas = Search.query(MicroArrayData.class);
-		} catch (Exception e) {
-			System.out.println("Exception in MicroArrayDataManagerImpl.getAll");
-			e.printStackTrace();
-		}
-		
-		return microArrayDatas;
-	}
+    /**
+     * Get all MicroArrayData by id
+     * 
+     * 
+     * @return the matching MicroArrayData objects, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public List getAll() throws Exception {
+        log.trace("In MicroArrayDataManagerImpl.getAll");
+        return super.getAll(MicroArrayData.class);
+    }
 	
-	public MicroArrayData get(String id) {
-		MicroArrayData microArrayData = null;
-		
-		try {
-			microArrayData = (MicroArrayData) Search.queryById(MicroArrayData.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in MicroArrayDataManagerImpl.get");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in MicroArrayDataManagerImpl.get");
-			e.printStackTrace();
-		}
-		
-		return microArrayData;
+    /**
+     * Get a specific MicroArrayData by id
+     * 
+     * @param id
+     *            the unique id for a MicroArrayData
+     * 
+     * @return the matching MicroArrayData object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public MicroArrayData get(String id) throws Exception {
+        log.trace("In MicroArrayDataManagerImpl.get");
+        return (MicroArrayData) super.get(id, MicroArrayData.class);
     }
 
-    public void save(MicroArrayData microArrayData) {    	
-    	try {
-			Persist.save(microArrayData);			
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in MicroArrayDataManagerImpl.save");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in MicroArrayDataManagerImpl.save");
-			e.printStackTrace();
-		}
+    /**
+     * Save MicroArrayData
+     * 
+     * @param MicroArrayData
+     *            the MicroArrayData to save
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void save(MicroArrayData microArrayData) throws Exception {
+        log.debug("In MicroArrayDataManagerImpl.save");
+        super.save(microArrayData);
     }
 
-    public void remove(String id) {    	
-    	try {
-			Persist.deleteById(MicroArrayData.class, new Long(id));
-		} catch (PersistenceException pe) {
-			System.out.println("PersistenceException in MicroArrayDataManagerImpl.remove");
-			pe.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception in MicroArrayDataManagerImpl.remove");
-			e.printStackTrace();
-		}
+    /**
+     * Remove a specific MicroArrayData by id
+     * 
+     * @param id
+     *            the unique id for a MicroArrayData
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public void remove(String id) throws Exception {
+        log.debug("In MicroArrayDataManagerImpl.save");
+        super.remove(id, MicroArrayData.class);
     }
 }
