@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface MicroArrayDataManager {
-	public List getAll();
-	public MicroArrayData get(String id);
-    public void save(MicroArrayData microArrayData);
-    public void remove(String id);
+	public List getAll() throws Exception;
+	public MicroArrayData get(String id) throws Exception;
+    public void save(MicroArrayData microArrayData) throws Exception;
+    public void remove(String id) throws Exception;
 }

@@ -7,6 +7,6 @@ public interface DiseaseManager {
 	
 	public List getAll() throws Exception;
 	
-    public Disease getByName(String inName);	
+    public Disease getByName(String inName) throws Exception;	
 
 }

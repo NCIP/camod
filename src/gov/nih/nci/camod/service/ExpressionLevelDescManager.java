@@ -8,6 +8,6 @@ public interface ExpressionLevelDescManager {
 
 	public List getAll() throws Exception;
 	
-    public ExpressionLevelDesc getByName(String inName);
+    public ExpressionLevelDesc getByName(String inName) throws Exception;
 
 }

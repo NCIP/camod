@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: BiologicalProcessManager.java,v 1.2 2005-10-20 20:41:49 pandyas Exp $
+ * $Id: BiologicalProcessManager.java,v 1.3 2005-11-07 20:43:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/20 20:41:49  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -20,6 +23,6 @@ import gov.nih.nci.camod.domain.BiologicalProcess;
  */
 public interface BiologicalProcessManager {
 	
-    public BiologicalProcess getByName(String inName);
+    public BiologicalProcess getByName(String inName) throws Exception;
 
 }

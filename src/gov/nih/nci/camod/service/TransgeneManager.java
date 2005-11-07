@@ -16,8 +16,8 @@ import java.util.List;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface TransgeneManager {
-	public List getAll();
-	public Transgene get(String id);
-    public void save(Transgene transgene);
-    public void remove(String id);
+	public List getAll() throws Exception;
+	public Transgene get(String id) throws Exception;
+    public void save(Transgene transgene) throws Exception;
+    public void remove(String id) throws Exception;
 }
