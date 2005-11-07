@@ -1,8 +1,8 @@
-/*
- * Created on May 5, 2005
+/**
+ * $Id: AnimalDistributor.java,v 1.5 2005-11-07 17:46:07 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package gov.nih.nci.camod.domain;
 
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 
