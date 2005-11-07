@@ -16,14 +16,6 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	// Retrieve ftp data from a resource bundle
-	ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-	
-	// Retrieve the server location
-	String caImageServer = theBundle.getString(CaImage.CAIMAGESERVERTHUMBVIEW);
-
-	System.out.println( "caImageServer=" + caImageServer );
-
 	ImageForm form = (ImageForm) request.getAttribute( "imageForm" );
 
 	// if aImageID is passed in, then we are dealing with 
@@ -69,13 +61,10 @@
 			<html:form action="<%= actionName %>" focus="fileLocation" enctype="multipart/form-data">	
 			
 			<c:if test="${not empty imageForm.fileServerLocation}">
-				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${imageForm.fileServerLocation}',600,600);"/>
-			
-				Current Image: <c:out value="${imageForm.fileServerLocation}"/><br>
 				Current Image Thumbnail: <br>
 					
-				<a href='<c:out value="${uri}"/>'>							
-				<img src="<%= caImageServer %><c:out value="${imageForm.fileServerLocation}"/>" height="40" width="40" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
+				<a href='<c:out value="${imageForm.imageUrl}"/>'>						
+				<img src="<c:out value="${imageForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${imageForm.fileServerLocation}"/>" target="_blank">				
 				Click to View</a>
 				<br><br>													
 			</c:if>

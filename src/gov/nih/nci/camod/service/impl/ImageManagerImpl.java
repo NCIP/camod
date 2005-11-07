@@ -74,17 +74,17 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         log.trace("Exiting ImageManagerImpl.update");
     }
 
-    private void populateImage(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath) throws Exception {
+    private void populateImage(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath)
+            throws Exception {
 
         log.trace("Entering populateImage");
 
-        if( inImageData.getStaining() != null && ! inImageData.getStaining().equals( "" ) )
-        {
-        	inImage.setStaining( inImageData.getStaining());
-        	
-        	if ( inImageData.getStaining().equals( "Other") ){
-        		inImage.setStainingUnctrlVocab( inImageData.getOtherStaining() );
-        		
+        if (inImageData.getStaining() != null && !inImageData.getStaining().equals("")) {
+            inImage.setStaining(inImageData.getStaining());
+
+            if (inImageData.getStaining().equals("Other")) {
+                inImage.setStainingUnctrlVocab(inImageData.getOtherStaining());
+
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
                 // Iterate through all the reciepts in the config file
@@ -93,8 +93,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 String inRecipients[] = new String[st.countTokens()];
                 for (int i = 0; i < inRecipients.length; i++) {
                     inRecipients[i] = st.nextToken();
-                }                                
-                
+                }
+
                 String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
                 String inFrom = inAnimalModel.getSubmitter().emailAddress();
 
@@ -103,7 +103,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
                 Map values = new TreeMap();
                 values.put("type", "SegmentName");
-                values.put("value", inImageData.getOtherStaining() );
+                values.put("value", inImageData.getOtherStaining());
                 values.put("submitter", inAnimalModel.getSubmitter());
                 values.put("model", inAnimalModel.getModelDescriptor());
                 values.put("modelstate", inAnimalModel.getState());
@@ -114,18 +114,16 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 } catch (Exception e) {
                     log.error("Caught exception sending mail: ", e);
                     e.printStackTrace();
-                }   
-        	}
+                }
+            }
         } else {
-        	inImage.setStaining( null );
-        	inImage.setStainingUnctrlVocab( null );
+            inImage.setStaining(null);
+            inImage.setStainingUnctrlVocab(null);
         }
-        
+
         if (inImage != null) {
-            // Image image = inImage.getImage();
             inImage.setTitle(inImageData.getTitle());
             inImage.setDescription(inImageData.getDescriptionOfConstruct());
-            // inImage.setImage(image);
         }
 
         // Upload Construct File location, Title of Construct, Description of
@@ -133,7 +131,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         // Check for exisiting Image for this Image
         if (inImageData.getFileLocation() != null) {
             System.out.println("<ImageDataManagerImpl> Uploading a file");
-           
+
             // If this is a new Image, upload it to the server
             FormFile f = inImageData.getFileLocation();
 
@@ -152,10 +150,11 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
             // Check the file type
             if (fileType != null) {
                 if (fileType.equals("jpg") || fileType.equals("jpeg") || fileType.equals("gif")
-                        || fileType.equals("tif") || fileType.equals("sid")) {
+                        || fileType.equals("sid") || fileType.equals("tif")) {
 
-                	System.out.println("<ImageDataManagerImpl> Valid file type " + fileType);
-                	System.out.println("<ImageDataManagerImpl> FileName is: " + f.getFileName() + " Type is: " + f.getContentType());
+                    System.out.println("<ImageDataManagerImpl> Valid file type " + fileType);
+                    System.out.println("<ImageDataManagerImpl> FileName is: " + f.getFileName() + " Type is: "
+                            + f.getContentType());
 
                     InputStream in = null;
                     OutputStream out = null;
@@ -197,21 +196,34 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                     String ftpServer = theBundle.getString(Constants.CaImage.FTPSERVER);
                     String ftpUsername = theBundle.getString(Constants.CaImage.FTPUSERNAME);
                     String ftpPassword = theBundle.getString(Constants.CaImage.FTPPASSWORD);
-                    String ftpStorageDirectory = theBundle.getString(Constants.CaImage.FTPSTORAGEDIRECTORY);
+                    String ftpStorageDirectory = theBundle.getString(Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
+
+                    String serverViewUrl = theBundle.getString(Constants.CaImage.CAIMAGESERVERVIEW);
 
                     // Upload the file to caIMAGE
                     FtpUtil ftpUtil = new FtpUtil();
-                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile);
+                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName,
+                            uploadFile);
 
                     inImage.setTitle(inImageData.getTitle());
-                    inImage.setFileServerLocation(uniqueFileName);
+
                     inImage.setDescription(inImageData.getDescriptionOfConstruct());
-                    
+
+                    // Do something fancy for the sid images
+                    if (fileType.equals("sid")) {
+
+                        String sidThumbView = theBundle.getString(Constants.CaImage.CAIMAGESIDTHUMBVIEW);
+                        String theThumbUrl = sidThumbView + uniqueFileName;
+                        String theViewUrl = Constants.CaImage.LEGACYJSP + Constants.CaImage.IMGTAG + uniqueFileName;
+
+                        inImage.setFileServerLocation(theThumbUrl + Constants.CaImage.FILESEP + theViewUrl);
+                    } else {
+                        inImage.setFileServerLocation(serverViewUrl + uniqueFileName);
+                    }
+
                 } else {
-                    // TODO: Add error for struts explaining that image is of an
-                    // invalid type
-    	            
-                    System.out.println("Invalid file type! " + fileType);
+
+                    throw new IllegalArgumentException("Unknown file type: " + fileType);
                 }
             }
         }

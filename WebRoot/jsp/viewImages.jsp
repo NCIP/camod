@@ -4,6 +4,8 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
+<%@ page import="gov.nih.nci.camod.Constants.*" %>
+<%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
 
 <bean:define id="mdl" name="animalmodel"/>
 
@@ -32,14 +34,11 @@
 						<c:set var="tdClass" value="resultsBoxGrey"/>
 					</c:otherwise>
 				</c:choose>
-
+			
 				<td class="<c:out value="${tdClass}"/>End" colspan="2">
-					<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
-					<Img src=" http://caimage.nci.nih.gov/lizardtech/iserv/getthumb?cat=Model&img=<c:out value="${p.id}"/>.sid" 
-						border=0
-						alt="Click on the image to open in a new Browser window"></a>
-					<br>
-					( Click to View )
+					<a href='<c:out value="${p.imageUrl}"/>'>
+					<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">
+					( Click to View )</a>
 					<br>
 						<b>Title:</b> <c:out value="${p.title}"/>
 					<br/>

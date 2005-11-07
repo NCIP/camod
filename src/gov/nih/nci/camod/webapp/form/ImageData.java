@@ -36,4 +36,12 @@ public interface ImageData {
     
     public void setImageId(String imageId);
 
+    public String getImageUrl();
+    
+    public void setImageUrl(String imageUrl);
+    
+    public String getThumbUrl();
+    
+    public void setThumbUrl(String thumbUrl);
+    
 }

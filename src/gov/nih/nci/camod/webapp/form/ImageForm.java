@@ -5,31 +5,19 @@
  * Window - Preferences - Java - Code Style - Code Templates
  */
 package gov.nih.nci.camod.webapp.form;
+/**
+ * $Id: ImageForm.java,v 1.7 2005-11-07 21:57:34 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ */
 
 import java.io.Serializable;
 
 import org.apache.struts.upload.FormFile;
 
-/**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class ImageForm extends BaseForm implements Serializable, ImageData {
 
     private static final long serialVersionUID = 3257195453799404851L;
-
-    /**
-     * Default empty constructor
-     * 
-     * @author rajputs
-     * 
-     * TODO To change the template for this generated type comment go to Window -
-     * Preferences - Java - Code Style - Code Templates
-     */
-    public ImageForm() {
-    }
 
     protected String fileServerLocation;
     protected String title;
@@ -39,6 +27,8 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected String staining;
     protected String otherStaining;
     protected String imageId;
+    protected String imageUrl;
+    protected String thumbUrl;
 
     public String getDescription() {
         return description;
@@ -108,5 +98,25 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     
     public void setImageId(String imageId) {
         this.imageId = imageId;
+    }
+
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    
+    public String getThumbUrl() {
+        return thumbUrl;
+    }
+
+    
+    public void setThumbUrl(String thumbUrl) {
+        this.thumbUrl = thumbUrl;
     }
 }
