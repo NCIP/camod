@@ -51,12 +51,12 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
     public Xenograft create(XenograftData inXenograftData, AnimalModel inAnimalModel) throws Exception {
 
-        log.debug("Entering XenograftManagerImpl.create");
+        log.info("<XenograftManagerImpl> Entering XenograftManagerImpl.create");
 
         Xenograft theXenograft = new Xenograft();
-
-        log.trace("Exiting XenograftManagerImpl.create");
         populateXenograft(inXenograftData, theXenograft, inAnimalModel);
+        
+        log.info("<XenograftManagerImpl> Exiting XenograftManagerImpl.create");        
 
         return theXenograft;
     }
@@ -64,23 +64,66 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
     public void update(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
             throws Exception {
 
-        log.debug("Entering XenograftManagerImpl.update");
-        log.debug("Updating XenograftData: " + inXenograft.getId());
+        log.info("Entering XenograftManagerImpl.update");
+        log.info("Updating XenograftData: " + inXenograft.getId());
 
         // Populate w/ the new values and save
         populateXenograft(inXenograftData, inXenograft, inAnimalModel);
         save(inXenograft);
 
-        log.debug("Exiting XenograftManagerImpl.update");
+        log.info("Exiting XenograftManagerImpl.update");
     }
 
     private void populateXenograft(XenograftData inXenograftData, Xenograft inXenograft, AnimalModel inAnimalModel)
             throws Exception {
 
-        log.debug("Entering populateXenograft");
+        log.info("Entering XenograftManagerImpl.populateXenograft");
 
         inXenograft.setName(inXenograftData.getName());
-        inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
+        
+        /* Set other adminstrative site or selected adminstrative site */
+        // save directly in administrativeSite column of table
+        if (inXenograftData.getAdministrativeSite().equals(Constants.Dropdowns.OTHER_OPTION)) {
+            System.out.println("admin site equals other");        
+            inXenograft.setAdministrativeSite(inXenograftData.getOtherAdministrativeSite());
+            //Send e-mail for other administrativeSite 
+            
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+            // Iterate through all the reciepts in the config file
+            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+            StringTokenizer st = new StringTokenizer(recipients, ",");
+            String inRecipients[] = new String[st.countTokens()];
+            for (int i = 0; i < inRecipients.length; i++) {
+                inRecipients[i] = st.nextToken();
+            }
+
+            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+            // gather message keys and variable values to build the e-mail
+            // content with
+            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+            Map values = new TreeMap();
+            values.put("type", "Xenograft AdministrativeSite");
+            values.put("value", inXenograftData.getOtherAdministrativeSite());
+            values.put("submitter", inAnimalModel.getSubmitter());
+            values.put("model", inAnimalModel.getModelDescriptor());
+            values.put("modelstate", inAnimalModel.getState());
+
+            // Send the email
+            try {
+                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            } catch (Exception e) {
+                log.error("Caught exception sending mail: ", e);
+                e.printStackTrace();
+            }            
+            
+            
+        }
+        else {
+        	inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
+        }
         inXenograft.setGeneticManipulation(inXenograftData.getGeneticManipulation());
         inXenograft.setModificationDescription(inXenograftData.getModificationDescription());
         inXenograft.setParentalCellLineName(inXenograftData.getParentalCellLineName());
@@ -206,6 +249,6 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
             inXenograft.setGraftTypeUnctrlVocab(null);
         }
 
-        log.debug("Exiting populateXenograft");
+        log.info("Exiting XenograftManagerImpl.populateXenograft");
     }
 }

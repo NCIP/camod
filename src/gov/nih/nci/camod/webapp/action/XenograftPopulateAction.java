@@ -29,7 +29,7 @@ public class XenograftPopulateAction extends BaseAction {
 		// Create a form to edit
 		XenograftForm xenograftForm = (XenograftForm) form;
 
-		// Grab the current Therapy we are working with related to this
+		// Grab the current Xenograft we are working with related to this
 		// animalModel
 		String aXenograftID = request.getParameter("aXenograftID");
 
@@ -40,7 +40,23 @@ public class XenograftPopulateAction extends BaseAction {
 		} else {
 			request.setAttribute("aXenograftID", aXenograftID);
 			xenograftForm.setName(xeno.getName());
-			xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
+			
+            // Set the other administrative site and/or the selected admin site
+			// We need to comapre the stored value with the config file because we are 
+			// storing 'Other' AdministrativeSite directly into the database
+			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, "");
+			List xenoAdminSiteDropList = (List)request.getSession().getAttribute(Constants.Dropdowns.XENOGRAFTADMINSITESDROP);
+			//If AdministrativeSite is from list set the value
+			if (xenoAdminSiteDropList.contains(xeno.getAdministrativeSite())) {
+                	System.out.println("\t otherAdministrativeSite Matched the list");
+                	xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
+				} else {
+				//If AdministrativeSite is not from list set the "other" and enable the text field					
+	                System.out.println("\t otherAdministrativeSite Didn't Match the list");					
+					xenograftForm.setAdministrativeSite(Constants.Dropdowns.OTHER_OPTION);
+					xenograftForm.setOtherAdministrativeSite(xeno.getAdministrativeSite());					
+			}			
+			
 			xenograftForm.setGeneticManipulation(xeno.getGeneticManipulation());
 			xenograftForm.setModificationDescription(xeno.getModificationDescription());
 			xenograftForm.setParentalCellLineName(xeno.getParentalCellLineName());
@@ -155,7 +171,7 @@ public class XenograftPopulateAction extends BaseAction {
 		// following
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, "");		
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);		
 
 		System.out.println("<XenograftPopulateAction dropdown> Exiting void dropdown()");
 	}

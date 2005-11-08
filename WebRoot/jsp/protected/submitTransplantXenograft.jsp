@@ -32,7 +32,12 @@
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
-		
+	function getOptions( control ) {
+		form = control.form;
+		form.action  = "XenograftPopulateAction.do?method=setStrainDropdown";
+		form.submit();
+	}
+	
 	function chkOtherGraft() {		
 		chkOther(document.forms[0].graftType, document.forms[0].otherGraftType);
 	}
@@ -41,13 +46,13 @@
 		chkOther(document.forms[0].hostEthinicityStrain, document.forms[0].otherHostEthinicityStrain);
 	}
 	
-	function getOptions( control ) {
-		form = control.form;
-		form.action  = "XenograftPopulateAction.do?method=setStrainDropdown";
-		form.submit();
-	}		
-	
+	function chkOtherAdminSite() {
 
+		var site = document.forms[0].administrativeSite;
+		var otherSite = document.forms[0].otherAdministrativeSite;
+	
+    	chkOther(site, otherSite);  	
+}		
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -84,9 +89,9 @@
 			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ATCC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
-				<input type=button value="Find ATTC #" onClick="myRef = window.open('http://www.atcc.org/','mywin',
+				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="ATCCNumber"  />
+				<html:text styleClass="formFieldUnSized" size="15" property="ATCCNumber"  />
 			</td>
 	</tr>		
 	
@@ -114,7 +119,7 @@
 			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
-			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="10" />
+			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="15" />
 		</td>
 	</tr>	
 	
