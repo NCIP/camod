@@ -543,15 +543,7 @@
 	        <tr>
 	            <td valign="top" class="resultsBoxWhite"><b>Sequence ID</b></td>
 	            <td class="resultsBoxWhiteEnd">
-					<ul>
-						<c:forEach var="seq" items="${gene.nucleicAcidSequenceCollection}">
-							<li>
-							<a target="_blank" 
-				 				href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=Nucleotide&amp;CMD=Search&amp;term=<c:out value="${seq.accessionNumber}"/>">
-				 				<c:out value="${seq.accessionNumber}"/>
-				 		</A>&nbsp;</li>
-						</c:forEach>
-					</ul>
+						&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
@@ -564,12 +556,12 @@
 	        </tr>
 	        <tr>
 	            <td class="resultsBoxWhite"><b>Function(s) of Targeted Gene</b></td>
-	            <td class="resultsBoxWhiteEnd">&nbsp;TBD
+	            <td class="resultsBoxWhiteEnd">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
 	            <td class="resultsBoxGrey"><b>Conditional Type</b></td>
-	            <td class="resultsBoxGreyEnd">&nbsp;TBD
+	            <td class="resultsBoxGreyEnd">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
@@ -604,12 +596,12 @@
 	        </tr>
 	        <tr>
 	            <td valign="top" class="resultsBoxWhite"><b>Libraries and Tissues (from EST data)</b></td>
-	            <td valign="top" class="resultsBoxWhiteEnd">TBD
+	            <td valign="top" class="resultsBoxWhiteEnd">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
 	            <td valign="top" class="resultsBoxGrey"><b>Protein Similarities (from UniGene)</b></td>
-	            <td valign="top" class="resultsBoxGreyEnd">TBD
+	            <td valign="top" class="resultsBoxGreyEnd">&nbsp;
 	           	</td>
 	        </tr>
 		</c:if>
