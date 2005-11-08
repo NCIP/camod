@@ -45,7 +45,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Nutritional Factors:</label></td>
+		<td class="formRequiredLabel"><label for="field3">Nutritional Factor:</label></td>
 		<td class="formField">
 			<br>
 			<label for="field3">(if Nutritional Factor is not listed, then please<br>select "Other" from the list and specify it below)</label>
@@ -62,7 +62,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Nutritional Factors:</label></td>
+		<td class="formLabel"><label for="field1">Other Nutritional Factor:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="otherName" size="30"  />
 		</td>
