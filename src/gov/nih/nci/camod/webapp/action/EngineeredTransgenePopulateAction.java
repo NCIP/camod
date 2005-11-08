@@ -62,7 +62,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                 engineeredTransgeneForm.setScientificName(tax.getScientificName());
             } else {
                 System.out.println("\t(Transgene) Didn't Match the list");
-                engineeredTransgeneForm.setScientificName("Other");
+                engineeredTransgeneForm.setScientificName(Constants.Dropdowns.OTHER_OPTION);
                 engineeredTransgeneForm.setOtherScientificName(tax.getScientificName());
             }
 
