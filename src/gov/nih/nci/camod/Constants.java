@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.68 2005-11-08 16:46:33 georgeda Exp $
+ * $Id: Constants.java,v 1.69 2005-11-08 17:46:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.68  2005/11/08 16:46:33  georgeda
+ * Changes for images
+ *
  * Revision 1.67  2005/11/07 21:55:10  georgeda
  * Changes for images
  *
@@ -299,6 +302,8 @@ public class Constants {
 		public static final String VIRALVECTORDROP = "ViralVectors.txt";
 
 		public static final String GRAFTTYPEDROP = "GraftTypes.txt";
+		
+		public static final String XENOGRAFTADMINSITESDROP = "XenograftAdministrativeSites.txt";		
 
 		public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
 
