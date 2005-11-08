@@ -107,7 +107,7 @@
 		</logic:iterate>
 	    <%} else { %>
 		     <TR>
-		  		<TD class="resultsBoxGreyEnd" colspan=4><B><I>No models found!</I></B> 
+		  		<TD class="resultsBoxGreyEnd" colspan=5><B><I>No models found!</I></B> 
 		   		</TD>
 		     </TR>
 		<%}%>		
