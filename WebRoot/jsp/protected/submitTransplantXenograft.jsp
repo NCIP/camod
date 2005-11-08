@@ -180,7 +180,7 @@
 		<label for="field3">- if Administration Site is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
+			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminRoute();">												
 				<html:options name="<%= Dropdowns.XENOGRAFTADMINSITESDROP %>"/>					
 			</html:select>			
 		</td>
