@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.57 2005-11-07 19:15:17 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.58 2005-11-08 16:48:24 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.57  2005/11/07 19:15:17  pandyas
+ * modified for clinical marker screen
+ *
  * Revision 1.56  2005/11/04 14:44:25  georgeda
  * Cleaned up histopathology/assoc metastasis
  *
@@ -871,7 +874,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering addImage (Image)");
 
-        Image theImage = ImageManagerSingleton.instance().create(inAnimalModel, inImageData, inPath);
+        Image theImage = ImageManagerSingleton.instance().create(inAnimalModel, inImageData, inPath, Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
         inAnimalModel.addImage(theImage);
         save(inAnimalModel);
 

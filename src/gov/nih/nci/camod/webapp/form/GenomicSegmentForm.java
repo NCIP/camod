@@ -46,6 +46,8 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
 	protected String markers;
 	protected String otherLocationOfIntegration;
     protected String segmentId;
+    protected String imageUrl;
+    protected String thumbUrl;
     
 	/**
 	 * @return Returns the locationOfIntegration.
@@ -210,5 +212,20 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
         this.segmentId = segmentId;
     }	
 	
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    public String getThumbUrl() {
+        return thumbUrl;
+    }
+
+    public void setThumbUrl(String thumbUrl) {
+        this.thumbUrl = thumbUrl;
+    }
 
 }

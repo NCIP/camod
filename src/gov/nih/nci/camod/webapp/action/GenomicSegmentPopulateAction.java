@@ -22,19 +22,19 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         System.out.println("<GenomicSegmentPopulateAction populate> Entering populate() ");
-        
+
         // setup dropdown menus
         this.dropdown(request, response);
-        
+
         String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
         GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
         GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().get(aGenomicSegmentID);
 
         if (theGenomicSegment == null) {
-        	request.setAttribute(Constants.Parameters.DELETED, "true");
+            request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
             genomicSegmentForm.setSegmentId(aGenomicSegmentID);
-            
+
             if (theGenomicSegment.getLocationOfIntegration().equals("Random")) {
                 genomicSegmentForm.setLocationOfIntegration(theGenomicSegment.getLocationOfIntegration());
             } else {
@@ -65,14 +65,16 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 
             // Image
             Image inImage = theGenomicSegment.getImage();
-            if (inImage != null) {            	
+            if (inImage != null) {
                 genomicSegmentForm.setTitle(inImage.getTitle());
                 genomicSegmentForm.setFileServerLocation(inImage.getFileServerLocation());
                 genomicSegmentForm.setDescriptionOfConstruct(inImage.getDescription());
+                genomicSegmentForm.setImageUrl(inImage.getImageUrl());
+                genomicSegmentForm.setThumbUrl(inImage.getThumbUrl());
             }
 
         }
-        
+
         return mapping.findForward("submitGenomicSegment");
     }
 

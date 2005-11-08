@@ -17,14 +17,6 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	// Retrieve ftp data from a resource bundle
-	ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-	
-	// Retrieve the server location
-	String caImageServer = theBundle.getString(CaImage.CAIMAGESERVERTHUMBVIEW);
-
-	System.out.println( "caImageServer=" + caImageServer );
-	
 	EngineeredTransgeneForm form = (EngineeredTransgeneForm) request.getAttribute( "engineeredTransgeneForm" );
 	
 	String aEngineeredTransgeneID = form.getTransgeneId();
@@ -334,17 +326,14 @@
 		<td class="formField">
 		
 			<c:if test="${not empty engineeredTransgeneForm.fileServerLocation}">
-				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${engineeredTransgeneForm.fileServerLocation}',600,600);"/>
-			
-					Current Image: <c:out value="${engineeredTransgeneForm.fileServerLocation}"/><br>
-					Current Image Thumbnail: <br>
-						
-					<a href='<c:out value="${uri}"/>'>			
+				Current Image Thumbnail: <br>
 					
-					<img src="<%= caImageServer %><c:out value="${engineeredTransgeneForm.fileServerLocation}"/>" height="40" width="40"  alt="<c:out value="${engineeredTransgeneForm.fileServerLocation}"/>" target="_blank">				
-					Click to View</a><br><br>									
-		    </c:if>
-						
+				<a href='<c:out value="${engineeredTransgeneForm.imageUrl}"/>'>						
+				<img src="<c:out value="${engineeredTransgeneForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${engineeredTransgeneForm.fileServerLocation}"/>" target="_blank">				
+				Click to View</a>
+				<br><br>													
+			</c:if>
+
 			<html:file styleClass="formFieldSized" size="40" property="fileLocation" />			
 		</td>			
 	</tr>		

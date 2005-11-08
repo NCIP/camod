@@ -67,4 +67,12 @@ public interface GenomicSegmentData {
     public String getSegmentId();
     
     public void setSegmentId(String segmentId);
+    
+    public String getImageUrl();
+    
+    public void setImageUrl(String imageUrl);
+    
+    public String getThumbUrl();
+    
+    public void setThumbUrl(String thumbUrl);
 }

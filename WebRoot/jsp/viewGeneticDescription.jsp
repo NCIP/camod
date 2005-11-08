@@ -223,9 +223,9 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
-			<Img src="http://caimage.nci.nih.gov/lizardtech/Model_Images/GeneticConstruct/<c:out value="${tg.image.id}"/>.jpg" 
-				width=50 height=50 border=0
+			<a href='<c:out value="${tg.image.imageUrl}"/>'>
+			<img src="<c:out value="${tg.image.thumbUrl}"/>" 
+				height="40" width="40" border=0
 				alt="Click on the image to open in a new Browser window"></a>
 			<br/>( Click to View )
 			</td>
@@ -380,9 +380,9 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
-			<Img src="http://caimage.nci.nih.gov/lizardtech/Model_Images/GeneticConstruct/<c:out value="${gs.image.id}"/>.jpg" 
-				width=50 height=50 border=0
+			<a href='<c:out value="${gs.image.imageUrl}"/>'>
+			<img src="<c:out value="${gs.image.thumbUrl}"/>" 
+				height="40" width="40" border=0
 				alt="Click on the image to open in a new Browser window"></a>
 			<br/>( Click to View )
 			</td>
@@ -507,9 +507,9 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<a href='javascript: rs("commentWin","zoomifyImage.jsp",1025,625);'>
-			<Img src="http://caimage.nci.nih.gov/lizardtech/Model_Images/GeneticConstruct/<c:out value="${tm.image.id}"/>.jpg" 
-				width=50 height=50 border=0
+			<a href='<c:out value="${tm.image.imageUrl}"/>'>
+			<img src="<c:out value="${tm.image.thumbUrl}"/>" 
+				height="40" width="40" border=0
 				alt="Click on the image to open in a new Browser window"></a>
 			<br/>( Click to View )
 			</td>

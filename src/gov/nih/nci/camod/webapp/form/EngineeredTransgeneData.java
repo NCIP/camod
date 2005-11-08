@@ -128,4 +128,11 @@ public interface EngineeredTransgeneData {
     
     public void setTransgeneId(String transgeneId);
     
+    public String getImageUrl();
+    
+    public void setImageUrl(String imageUrl);
+    
+    public String getThumbUrl();
+    
+    public void setThumbUrl(String thumbUrl);
 }

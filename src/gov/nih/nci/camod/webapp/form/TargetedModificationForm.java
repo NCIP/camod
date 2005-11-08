@@ -19,15 +19,6 @@ import org.apache.struts.upload.FormFile;
 public class TargetedModificationForm extends BaseForm implements Serializable, TargetedModificationData {
     
     private static final long serialVersionUID = 3257085453799404851L;
-    
-	/**
-	 * Default empty constructor
-	 * @author rajputs
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
-	 */
-	public TargetedModificationForm() {}
 	
 	protected String name;
 	protected String modificationType;
@@ -44,6 +35,8 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 	protected String title;
 	protected String descriptionOfConstruct;
     protected String modificationId;
+    protected String imageUrl;
+    protected String thumbUrl;
 	
 	/**
 	 * @return Returns the name.
@@ -196,6 +189,22 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
     
     public void setModificationId(String modificationId) {
         this.modificationId = modificationId;
+    }
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    public String getThumbUrl() {
+        return thumbUrl;
+    }
+    
+    public void setThumbUrl(String thumbUrl) {
+        this.thumbUrl = thumbUrl;
     }
 
 }

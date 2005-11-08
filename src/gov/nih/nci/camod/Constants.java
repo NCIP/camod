@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.67 2005-11-07 21:55:10 georgeda Exp $
+ * $Id: Constants.java,v 1.68 2005-11-08 16:46:33 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.67  2005/11/07 21:55:10  georgeda
+ * Changes for images
+ *
  * Revision 1.66  2005/11/03 13:57:58  georgeda
  * Delete functionality changes
  *
@@ -362,8 +365,10 @@ public class Constants {
         
         public static final String FTPGENCONSTORAGEDIRECTORY = "caimage.ftp.genconstoragedirectory";
 		
-		public static final String CAIMAGESERVERVIEW = "caimage.view.uri";
-		
+		public static final String CAIMAGEMODELSERVERVIEW = "caimage.modelview.uri";
+        
+        public static final String CAIMAGEGENCONSERVERVIEW = "caimage.modelview.uri";
+        
 		public static final String CAIMAGESIDTHUMBVIEW = "caimage.sidthumbview.uri";
         
         public static final String CAIMAGESIDVIEWURISTART = "caimage.sidview.uri_start";
@@ -371,9 +376,12 @@ public class Constants {
         public static final String CAIMAGEWINDOWSTART = "caimage.window.start";
         public static final String CAIMAGEWINDOWEND = "caimage.window.end";
         
-        public static final String IMGTAG = "img=";
-        public static final String LEGACYJSP = "catalogviewtumors.jsp?cat=Model&";
+        public static final String CAIMAGEMODEL = "caimage.model";
+        public static final String CAIMAGEGENCON = "caimage.gencon";
+        
+        public static final String LEGACYJSP = "catalogviewtumors.jsp?";
         public static final String FILESEP = ";";
+        public static final String IMGTAG = "img=";
 	}
 
 	/**

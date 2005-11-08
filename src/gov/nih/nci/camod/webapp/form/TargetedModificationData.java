@@ -62,4 +62,12 @@ public interface TargetedModificationData {
     public String getModificationId();
     
     public void setModificationId(String modificationId);
+    
+    public String getImageUrl();
+    
+    public void setImageUrl(String imageUrl);
+    
+    public String getThumbUrl();
+    
+    public void setThumbUrl(String thumbUrl);
 }

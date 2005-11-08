@@ -50,32 +50,34 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         super.remove(id, Image.class);
     }
 
-    public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath) throws Exception {
+    public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath, String inStorageDirKey)
+            throws Exception {
 
         log.trace("Entering ImageManagerImpl.create");
 
         Image inImage = new Image();
-        populateImage(inAnimalModel, inImageData, inImage, inPath);
+        populateImage(inAnimalModel, inImageData, inImage, inPath, inStorageDirKey);
 
         log.trace("Exiting ImageManagerImpl.create");
 
         return inImage;
     }
 
-    public void update(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath) throws Exception {
+    public void update(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath,
+            String inStorageDirKey) throws Exception {
 
         log.trace("Entering ImageManagerImpl.update");
         log.debug("Updating ImageForm: " + inImage.getId());
 
         // Populate w/ the new values and save
-        populateImage(inAnimalModel, inImageData, inImage, inPath);
+        populateImage(inAnimalModel, inImageData, inImage, inPath, inStorageDirKey);
         save(inImage);
 
         log.trace("Exiting ImageManagerImpl.update");
     }
 
-    private void populateImage(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath)
-            throws Exception {
+    private void populateImage(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath,
+            String inStorageDirKey) throws Exception {
 
         log.trace("Entering populateImage");
 
@@ -196,9 +198,15 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                     String ftpServer = theBundle.getString(Constants.CaImage.FTPSERVER);
                     String ftpUsername = theBundle.getString(Constants.CaImage.FTPUSERNAME);
                     String ftpPassword = theBundle.getString(Constants.CaImage.FTPPASSWORD);
-                    String ftpStorageDirectory = theBundle.getString(Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
+                    String ftpStorageDirectory = theBundle.getString(inStorageDirKey);
 
-                    String serverViewUrl = theBundle.getString(Constants.CaImage.CAIMAGESERVERVIEW);
+                    // Determine which path to do the view in
+                    String serverViewUrl = "";
+                    if (inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) {
+                        serverViewUrl = theBundle.getString(Constants.CaImage.CAIMAGEGENCONSERVERVIEW);
+                    } else {
+                        serverViewUrl = theBundle.getString(Constants.CaImage.CAIMAGEMODELSERVERVIEW);
+                    }
 
                     // Upload the file to caIMAGE
                     FtpUtil ftpUtil = new FtpUtil();
@@ -212,11 +220,18 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                     // Do something fancy for the sid images
                     if (fileType.equals("sid")) {
 
+                        String theType = "";
+                        if (inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) {
+                            theType = theBundle.getString(Constants.CaImage.CAIMAGEGENCON);
+                        } else {
+                            theType = theBundle.getString(Constants.CaImage.CAIMAGEMODEL);
+                        }
+                        
                         String sidThumbView = theBundle.getString(Constants.CaImage.CAIMAGESIDTHUMBVIEW);
-                        String theThumbUrl = sidThumbView + uniqueFileName;
-                        String theViewUrl = Constants.CaImage.LEGACYJSP + Constants.CaImage.IMGTAG + uniqueFileName;
-
+                        String theThumbUrl =  sidThumbView + theType + uniqueFileName;
+                        String theViewUrl = Constants.CaImage.LEGACYJSP + theType + uniqueFileName;
                         inImage.setFileServerLocation(theThumbUrl + Constants.CaImage.FILESEP + theViewUrl);
+                        
                     } else {
                         inImage.setFileServerLocation(serverViewUrl + uniqueFileName);
                     }

@@ -49,7 +49,8 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         super.remove(id, GenomicSegment.class);
     }
 
-    public GenomicSegment create(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception {
+    public GenomicSegment create(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
+            HttpServletRequest request) throws Exception {
 
         log.trace("Entering GenomicSegmentManagerImpl.create");
 
@@ -61,8 +62,8 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         return inGenomicSegment;
     }
 
-    public void update(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment,
-            HttpServletRequest request) throws Exception {
+    public void update(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
+            GenomicSegment inGenomicSegment, HttpServletRequest request) throws Exception {
 
         log.trace("Entering GenomicSegmentManagerImpl.update");
         log.debug("Updating GenomicSegmentForm: " + inGenomicSegment.getId());
@@ -74,8 +75,8 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         log.trace("Exiting GenomicSegmentManagerImpl.update");
     }
 
-    private void populateGenomicSegment(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, GenomicSegment inGenomicSegment,
-            HttpServletRequest request) throws Exception {
+    private void populateGenomicSegment(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
+            GenomicSegment inGenomicSegment, HttpServletRequest request) throws Exception {
 
         log.trace("Entering populateGenomicSegment");
 
@@ -101,7 +102,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         // TODO: Send Email
         if (inGenomicSegmentData.getOtherSegmentName() != null) {
             inSegmentType.setNameUnctrlVocab(inGenomicSegmentData.getOtherSegmentName());
-            
+
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
             // Iterate through all the reciepts in the config file
@@ -131,7 +132,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
             } catch (Exception e) {
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
-            }            
+            }
         }
 
         inGenomicSegment.addSegmentType(inSegmentType);
@@ -139,7 +140,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         if (inGenomicSegment.getImage() != null) {
             Image image = inGenomicSegment.getImage();
             image.setTitle(inGenomicSegmentData.getTitle());
-            //image.setFileServerLocation( );
+            // image.setFileServerLocation( );
             image.setDescription(inGenomicSegmentData.getDescriptionOfConstruct());
             inGenomicSegment.setImage(image);
         }
@@ -147,43 +148,46 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this GenomicSegment
-        if (inGenomicSegmentData.getFileLocation().getFileName() != null && ! inGenomicSegmentData.getFileLocation().getFileName().equals( "" )) {
-        	        	        
-        	ImageForm inImageData = new ImageForm();
-        	
-        	String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
-        	
-        	inImageData.setDescriptionOfConstruct( inGenomicSegmentData.getDescriptionOfConstruct());
-        	inImageData.setTitle( inGenomicSegmentData.getTitle() );
-        	inImageData.setFileServerLocation( inGenomicSegmentData.getFileServerLocation() );
-        	inImageData.setFileLocation( inGenomicSegmentData.getFileLocation() );
-        	
-        	Image image = ImageManagerSingleton.instance().create( new AnimalModel(), inImageData, inPath );
-        	
-        	System.out.println( "Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle() + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId() );
-        	inGenomicSegment.setImage(image);        	
-        }
-        
-		// MGI Number
-		// Check for exisiting MutationIdentifier
-		MutationIdentifier inMutationIdentifier = null;
-		if (inGenomicSegment.getMutationIdentifier() != null)
-			inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
-		else
-			inMutationIdentifier = new MutationIdentifier();
+        if (inGenomicSegmentData.getFileLocation().getFileName() != null
+                && !inGenomicSegmentData.getFileLocation().getFileName().equals("")) {
 
-		if ( inGenomicSegmentData.getNumberMGI() == null || inGenomicSegmentData.getNumberMGI().equals( "" ))	{
-			inGenomicSegment.setMutationIdentifier( null );
-		} else {
-			String strNumberMGI = inGenomicSegmentData.getNumberMGI().trim();
-			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-			Matcher m = p.matcher(strNumberMGI);
-			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
-				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
-				inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
-			}
-		}
-		
+            ImageForm inImageData = new ImageForm();
+
+            String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+
+            inImageData.setDescriptionOfConstruct(inGenomicSegmentData.getDescriptionOfConstruct());
+            inImageData.setTitle(inGenomicSegmentData.getTitle());
+            inImageData.setFileServerLocation(inGenomicSegmentData.getFileServerLocation());
+            inImageData.setFileLocation(inGenomicSegmentData.getFileLocation());
+
+            Image image = ImageManagerSingleton.instance().create(new AnimalModel(), inImageData, inPath,
+                    Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
+
+            System.out.println("Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle()
+                    + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId());
+            inGenomicSegment.setImage(image);
+        }
+
+        // MGI Number
+        // Check for exisiting MutationIdentifier
+        MutationIdentifier inMutationIdentifier = null;
+        if (inGenomicSegment.getMutationIdentifier() != null)
+            inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
+        else
+            inMutationIdentifier = new MutationIdentifier();
+
+        if (inGenomicSegmentData.getNumberMGI() == null || inGenomicSegmentData.getNumberMGI().equals("")) {
+            inGenomicSegment.setMutationIdentifier(null);
+        } else {
+            String strNumberMGI = inGenomicSegmentData.getNumberMGI().trim();
+            Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
+            Matcher m = p.matcher(strNumberMGI);
+            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+                inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+                inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+            }
+        }
+
         log.trace("Exiting populateGenomicSegment");
     }
 }

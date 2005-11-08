@@ -21,139 +21,140 @@ import org.apache.struts.action.ActionMessages;
  */
 public final class ImageAction extends BaseAction {
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.trace("Entering save");
+        log.trace("Entering save");
 
-		// Create a form to edit
-		ImageForm imageForm = (ImageForm) form;
+        // Create a form to edit
+        ImageForm imageForm = (ImageForm) form;
 
-		// Grab the current modelID from the session
-		String aImageID = imageForm.getImageId();
+        // Grab the current modelID from the session
+        String aImageID = imageForm.getImageId();
 
-		log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
-				+ imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
-				+ "\n\t getDescription: " + imageForm.getDescription()
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
+                + imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
+                + "\n\t getDescription: " + imageForm.getDescription()
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		String theForward = "AnimalModelTreePopulateAction";
+        String theForward = "AnimalModelTreePopulateAction";
 
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {
-			ImageManager imageManager = (ImageManager) getBean("imageManager");
-			
+        try {
+            ImageManager imageManager = (ImageManager) getBean("imageManager");
+
             if ("Delete".equals(theAction)) {
-				imageManager.remove(aImageID);
+                imageManager.remove(aImageID);
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.delete.successful"));
-				saveErrors(request, msg);
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.delete.successful"));
+                saveErrors(request, msg);
 
-			} else {
-				log.info("Image edit");
+            } else {
+                log.info("Image edit");
 
-				// retrieve model and update w/ new values
+                // retrieve model and update w/ new values
 
-				Image theImage = imageManager.get(aImageID);
+                Image theImage = imageManager.get(aImageID);
 
-				String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
-				
-				// Grab the current modelID from the session
-				String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
-				AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-				AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-				
-				imageManager.update(theAnimalModel, imageForm, theImage, inPath);
+                String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
 
-				log.info("New Image created");
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-				// Add a message to be displayed in submitOverview.jsp saying
-				// you've
-				// created a new model successfully
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.edit.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
-			log.error("Exception ocurred creating Image", e);
+                imageManager.update(theAnimalModel, imageForm, theImage, inPath,
+                        Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+                log.info("New Image created");
 
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}
+                // Add a message to be displayed in submitOverview.jsp saying
+                // you've
+                // created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (Exception e) {
+            log.error("Exception ocurred creating Image", e);
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-		log.trace("Entering save");
+        log.trace("Exiting save");
+        return mapping.findForward(theForward);
+    }
 
-		// Create a form to edit
-		ImageForm imageForm = (ImageForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, imageForm);
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        log.trace("Entering save");
 
-		log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
-				+ imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
-				+ "\n\t getDescription: " + imageForm.getDescription()
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        // Create a form to edit
+        ImageForm imageForm = (ImageForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, imageForm);
 
-		String theForward = "AnimalModelTreePopulateAction";
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+        log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
+                + imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
+                + "\n\t getDescription: " + imageForm.getDescription()
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-			String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
-			theAnimalModelManager.addImage(theAnimalModel, imageForm, inPath);
+        String theForward = "AnimalModelTreePopulateAction";
 
-			log.info("New Image created");
+        try {
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.creation.successful"));
-			saveErrors(request, msg);
+            String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+            theAnimalModelManager.addImage(theAnimalModel, imageForm, inPath);
 
-		} catch (Exception e) {
-			log.error("Exception ocurred creating Image", e);
+            log.info("New Image created");
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.creation.successful"));
+            saveErrors(request, msg);
 
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}
+        } catch (Exception e) {
+            log.error("Exception ocurred creating Image", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+
+        log.trace("Exiting save");
+        return mapping.findForward(theForward);
+    }
 }

@@ -173,6 +173,8 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                 engineeredTransgeneForm.setTitle(inImage.getTitle());
                 engineeredTransgeneForm.setFileServerLocation(inImage.getFileServerLocation());
                 engineeredTransgeneForm.setDescriptionOfConstruct(inImage.getDescription());
+                engineeredTransgeneForm.setImageUrl(inImage.getImageUrl());
+                engineeredTransgeneForm.setThumbUrl(inImage.getThumbUrl());
             }
 
         }

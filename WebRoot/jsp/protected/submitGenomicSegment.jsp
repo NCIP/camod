@@ -15,14 +15,7 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
 
-<%	// Retrieve ftp data from a resource bundle
-	ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-	
-	// Retrieve the server location
-	String caImageServer = theBundle.getString(CaImage.CAIMAGESERVERTHUMBVIEW);
-
-	System.out.println( "caImageServer=" + caImageServer );
-	
+<%	
 	GenomicSegmentForm form = (GenomicSegmentForm) request.getAttribute( "genomicSegmentForm" );
 
 	//if aGenomicSegmentID is passed in, then we are dealing with a previously entered model and are editing it
@@ -161,15 +154,12 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Upload Construct Map (Image):</label></td>
 			<td class="formField">
-						
+			
 			<c:if test="${not empty genomicSegmentForm.fileServerLocation}">
-				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${genomicSegmentForm.fileServerLocation}',600,600);"/>
-				
-				Current Image: <c:out value="${genomicSegmentForm.fileServerLocation}"/><br>
 				Current Image Thumbnail: <br>
 					
-				<a href='<c:out value="${uri}"/>'>							
-				<img src="<%= caImageServer %><c:out value="${genomicSegmentForm.fileServerLocation}"/>" height="40" width="40" alt="<c:out value="${genomicSegmentForm.fileServerLocation}"/>" target="_blank">				
+				<a href='<c:out value="${genomicSegmentForm.imageUrl}"/>'>						
+				<img src="<c:out value="${genomicSegmentForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${genomicSegmentForm.fileServerLocation}"/>" target="_blank">				
 				Click to View</a>
 				<br><br>													
 			</c:if>

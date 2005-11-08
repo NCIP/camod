@@ -52,6 +52,9 @@ public class TargetedModificationPopulateAction extends BaseAction {
                 targetedModificationForm.setFileServerLocation(image.getFileServerLocation());
                 targetedModificationForm.setTitle(image.getTitle());
                 targetedModificationForm.setDescriptionOfConstruct(image.getDescription());
+                targetedModificationForm.setDescriptionOfConstruct(image.getDescription());
+                targetedModificationForm.setThumbUrl(image.getThumbUrl());
+                targetedModificationForm.setImageUrl(image.getImageUrl());
             }
 
             List modTypeList = theTargetedModification.getModificationTypeCollection();

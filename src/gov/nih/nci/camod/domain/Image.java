@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.7 2005-11-07 21:55:24 georgeda Exp $
+ * $Id: Image.java,v 1.8 2005-11-08 16:47:49 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/07 21:55:24  georgeda
+ * Changes for images
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -75,8 +78,15 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
                 // Setup the server location
                 String sidUrlStart = theBundle.getString(CaImage.CAIMAGESIDVIEWURISTART);
                 String sidUrlEnd = theBundle.getString(CaImage.CAIMAGESIDVIEWURIEND);
-
-                theUrl = sidUrlStart + theImage + sidUrlEnd;
+                String gencon = theBundle.getString(Constants.CaImage.CAIMAGEGENCON);
+                String model = theBundle.getString(Constants.CaImage.CAIMAGEMODEL);
+                String theType = "";
+                if (fileServerLocation.indexOf(gencon) == -1) {
+                    theType = model;
+                } else {
+                    theType = gencon;
+                }
+                theUrl = sidUrlStart + theType + theImage + sidUrlEnd;
             }
             theUrl = windowStart + theUrl + windowEnd;
 

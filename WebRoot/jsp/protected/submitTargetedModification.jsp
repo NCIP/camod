@@ -17,15 +17,7 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
 
-<%
-	// Retrieve ftp data from a resource bundle
-	ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-	
-	// Retrieve the server location
-	String caImageServer = theBundle.getString(CaImage.CAIMAGESERVERTHUMBVIEW);
-
-	System.out.println( "caImageServer=" + caImageServer );
-	
+<%	
 	TargetedModificationForm form = (TargetedModificationForm) request.getAttribute( "targetedModificationForm" );
 	
 	String aTargetedModificationID = form.getModificationId();
@@ -185,20 +177,16 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Upload Construct Map (Image):</label></td>
 		<td class="formField">
-					
+				
 			<c:if test="${not empty targetedModificationForm.fileServerLocation}">
-			
-				<c:set var="uri" value="javascript: rs('commentWin','viewLizardImage.do?aFileServerLocation=${targetedModificationForm.fileServerLocation}',600,600);"/>
-			
-				Current Image: <c:out value="${targetedModificationForm.fileServerLocation}"/><br>
 				Current Image Thumbnail: <br>
 					
-				<a href='<c:out value="${uri}"/>'>			
-				
-				<img src="<%= caImageServer %><c:out value="${targetedModificationForm.fileServerLocation}"/>" height="40" width="40" alt="<c:out value="${targetedModificationForm.fileServerLocation}"/>" target="_blank">				
-				Click to View</a><br><br>									
-		    </c:if>			
-		    
+				<a href='<c:out value="${targetedModificationForm.imageUrl}"/>'>						
+				<img src="<c:out value="${targetedModificationForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${targetedModificationForm.fileServerLocation}"/>" target="_blank">				
+				Click to View</a>
+				<br><br>													
+			</c:if>
+					
 			<html:file styleClass="formFieldSized" size="40" property="fileLocation" />	
 		</td>
 	</tr>

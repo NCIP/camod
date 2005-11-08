@@ -42,6 +42,7 @@ public class ImagePopulateAction extends BaseAction {
 				imageForm.setOtherStaining( inImage.getStainingUnctrlVocab() );
 				
                 imageForm.setThumbUrl(inImage.getThumbUrl());
+                imageForm.setImageUrl(inImage.getImageUrl());
 				// TODO: Display a message on the current image, uploading
 				// another
 				// image will replace current image

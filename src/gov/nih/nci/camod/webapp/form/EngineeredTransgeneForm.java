@@ -60,6 +60,8 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	protected String spliceSites_species;
 	protected String spliceSites_otherSpecies;
     protected String transgeneId;
+    protected String imageUrl;
+    protected String thumbUrl;
 	
 	/**
 	 * @return Returns the locationOfIntegration.
@@ -305,5 +307,21 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
     
     public void setTransgeneId(String transgeneId) {
         this.transgeneId = transgeneId;
+    }
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    public String getThumbUrl() {
+        return thumbUrl;
+    }
+
+    public void setThumbUrl(String thumbUrl) {
+        this.thumbUrl = thumbUrl;
     }
 }

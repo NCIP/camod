@@ -22,8 +22,8 @@ public interface ImageManager {
 
     public void remove(String id) throws Exception;
 
-    public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath) throws Exception;
+    public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath, String inStorageDirKey) throws Exception;
 
-    public void update(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath) throws Exception;
+    public void update(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath, String inStorageDirKey) throws Exception;
 
 }
