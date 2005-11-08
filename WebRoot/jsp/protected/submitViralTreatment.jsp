@@ -95,14 +95,14 @@
 		<td class="formLabel"><label for="field1">Dose:</label>
 		<camod:cshelp mapId="viral_treatment_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
-		<td class="formField">			
-			<html:text styleClass="formFieldSized" property="dosage"  size="15" />
+		<td class="formField">
+			<html:text styleClass="formFieldUnSized" property="dosage" size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
 				<html:options name="<%= Dropdowns.VIRALTREATUNITSDROP %>"/>					
 			</html:select>	
 		</td>
-	</tr>	
+	</tr>		
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
