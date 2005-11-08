@@ -68,14 +68,14 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label>
-		<camod:cshelp mapId="environmental_factor_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="growth_factor_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="dosage" size="10"  />
-			<label for="field1">&nbsp;Units&nbsp;</label>			
+			<html:text styleClass="formFieldUnSized" property="dosage"  size="15" />
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
 				<html:options name="<%= Dropdowns.ENVFACTORUNITSDROP %>"/>					
-			</html:select>
+			</html:select>	
 		</td>
 	</tr>
 
@@ -89,7 +89,7 @@
 		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
+			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>			
 		</td>
@@ -117,7 +117,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" />
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
