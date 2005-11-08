@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.69 2005-11-08 17:46:20 pandyas Exp $
+ * $Id: Constants.java,v 1.70 2005-11-08 21:59:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.69  2005/11/08 17:46:20  pandyas
+ * added for Xenograft
+ *
  * Revision 1.68  2005/11/08 16:46:33  georgeda
  * Changes for images
  *
@@ -127,6 +130,7 @@
  */
 package gov.nih.nci.camod;
 
+
 /**
  * Constant values used throughout the application.
  * 
@@ -136,88 +140,90 @@ package gov.nih.nci.camod;
  */
 public class Constants {
 
-	// ~ Static fields/initializers
-	// =============================================
+    // ~ Static fields/initializers
+    // =============================================
 
-	/** The name of the camod resource bundle used in this application */
-	public static final String CAMOD_BUNDLE = "camod";
+    /** The name of the camod resource bundle used in this application */
+    public static final String CAMOD_BUNDLE = "camod";
 
-	/** The name of the ResourceBundle used in this application */
-	public static final String BUNDLE_KEY = "ApplicationResources";
+    /** The name of the ResourceBundle used in this application */
+    public static final String BUNDLE_KEY = "ApplicationResources";
 
-	/** The application scoped attribute for persistence engine used */
-	public static final String DAO_TYPE = "daoType";
+    /** The application scoped attribute for persistence engine used */
+    public static final String DAO_TYPE = "daoType";
 
-	public static final String DAO_TYPE_HIBERNATE = "hibernate";
+    public static final String DAO_TYPE_HIBERNATE = "hibernate";
 
-	/** Application scoped attributes for SSL Switching */
-	public static final String HTTP_PORT = "httpPort";
+    /** Application scoped attributes for SSL Switching */
+    public static final String HTTP_PORT = "httpPort";
 
-	public static final String HTTPS_PORT = "httpsPort";
+    public static final String HTTPS_PORT = "httpsPort";
 
-	/**
-	 * The name of the Administrator role, as specified in web.xml
-	 */
-	public static final String ADMIN_ROLE = "admin";
+    /**
+     * The name of the Administrator role, as specified in web.xml
+     */
+    public static final String ADMIN_ROLE = "admin";
 
-	/**
-	 * The name of the configuration hashmap stored in application scope.
-	 */
-	public static final String CONFIG = "appConfig";
+    /**
+     * The name of the configuration hashmap stored in application scope.
+     */
+    public static final String CONFIG = "appConfig";
 
-	public static final String UPT_CONTEXT_NAME = "camod";
+    public static final String UPT_CONTEXT_NAME = "camod";
 
-	/**
-	 * Used to store list of models currently logged on user has previous
-	 * entered
-	 */
-	public static final String USERMODELLIST = "usermodellist";
-	
+    /**
+     * Used to store list of models currently logged on user has previous
+     * entered
+     */
+    public static final String USERMODELLIST = "usermodellist";
 
-	public interface BundleKeys {
-		/**
-		 * The key for the coordinator username in the camod.properties file
-		 */
-		public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
+    public interface BundleKeys {
 
-		/**
-		 * The key for the coordinator username in the camod.properties file
-		 */
-		public static final String NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY = "model.new_unctrl_vocab_notify";
+        /**
+         * The key for the coordinator username in the camod.properties file
+         */
+        public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
 
-		/**
-		 * The key for the coordinator username in the camod.properties file
-		 */
-		public static final String NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY = "model.new_unctrl_vocab_subject";
-		
-		/**
-		 * The key for the coordinator username in the camod.properties file
-		 */
-		public static final String USER_UPDATE_NOTIFY_KEY = "user_settings.user_update_notify";
-	}
+        /**
+         * The key for the coordinator username in the camod.properties file
+         */
+        public static final String NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY = "model.new_unctrl_vocab_notify";
 
-	/**
-	 * Used to store lists for drop down menus
-	 */
-	public interface CaArray {
-		public static final String URI_START = "caarray.uri_start";
+        /**
+         * The key for the coordinator username in the camod.properties file
+         */
+        public static final String NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY = "model.new_unctrl_vocab_subject";
 
-		public static final String URI_END = "caarray.uri_end";
-	}
+        /**
+         * The key for the coordinator username in the camod.properties file
+         */
+        public static final String USER_UPDATE_NOTIFY_KEY = "user_settings.user_update_notify";
+    }
 
-	/**
-	 * Used in table of contents searching
-	 */
-	public interface TOCSearch {
-		public static final String TOC_QUERY_FILE = "config/TOCQueryConfig.xml";
+    /**
+     * Used to store lists for drop down menus
+     */
+    public interface CaArray {
 
-		public static final String TOC_QUERY_RESULTS = "TOC_QUERY_RESULTS";
-	}
+        public static final String URI_START = "caarray.uri_start";
 
-	/**
-	 * Used to store lists for drop down menus
-	 */
-	public interface Dropdowns {
+        public static final String URI_END = "caarray.uri_end";
+    }
+
+    /**
+     * Used in table of contents searching
+     */
+    public interface TOCSearch {
+
+        public static final String TOC_QUERY_FILE = "config/TOCQueryConfig.xml";
+
+        public static final String TOC_QUERY_RESULTS = "TOC_QUERY_RESULTS";
+    }
+
+    /**
+     * Used to store lists for drop down menus
+     */
+    public interface Dropdowns {
 
         public static final String ADD_BLANK = "ADD_BLANK";
 
@@ -231,551 +237,559 @@ public class Constants {
 
         public static final String ADD_BLANK_AND_OTHER_OPTION = "ADD_BLANK_AND_OTHER_OPTION";
 
-		public static final String OTHER_OPTION = "Other";
+        public static final String OTHER_OPTION = "Other";
 
-		public static final String SPECIESDROP = "speciesdrop.db";
-		
-		public static final String NEWSPECIESDROP = "ModelSpecies.txt";
+        public static final String SPECIESDROP = "speciesdrop.db";
 
-		public static final String STRAINDROP = "straindrop.db";
+        public static final String NEWSPECIESDROP = "ModelSpecies.txt";
 
-		public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
+        public static final String STRAINDROP = "straindrop.db";
 
-		public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
+        public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
 
-		public static final String ADMINISTRATIVEROUTEDROP = "AdministrativeRoutes.txt";
+        public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
 
-		public static final String AGEUNITSDROP = "AgeUnits.txt";
+        public static final String ADMINISTRATIVEROUTEDROP = "AdministrativeRoutes.txt";
 
-		public static final String PUBDROP = "PublicationStatus.txt";
+        public static final String AGEUNITSDROP = "AgeUnits.txt";
 
-		public static final String TOXICITYGRADESDROP = "ToxicityGrades.txt";
+        public static final String PUBDROP = "PublicationStatus.txt";
 
-		public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
+        public static final String TOXICITYGRADESDROP = "ToxicityGrades.txt";
 
-		public static final String HOSTSPECIESDROP = "HostSpecies.txt";
+        public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
 
-		// Various Dose Units
-		public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
+        public static final String HOSTSPECIESDROP = "HostSpecies.txt";
 
-		public static final String ENVFACTORUNITSDROP = "EnvFactorUnits.txt";
+        // Various Dose Units
+        public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
 
-		public static final String GENOMESEGSIZEUNITSDROP = "GenomeSegSizeUnits.txt";
+        public static final String ENVFACTORUNITSDROP = "EnvFactorUnits.txt";
 
-		public static final String HISTOPATHVOLUMEUNITSDROP = "HistopathVolumeUnits.txt";
+        public static final String GENOMESEGSIZEUNITSDROP = "GenomeSegSizeUnits.txt";
 
-		public static final String HISTOPATHWEIGHTUNITSDROP = "HistopathWeightUnits.txt";
+        public static final String HISTOPATHVOLUMEUNITSDROP = "HistopathVolumeUnits.txt";
 
-		public static final String HORMONEUNITSDROP = "HormoneUnits.txt";
+        public static final String HISTOPATHWEIGHTUNITSDROP = "HistopathWeightUnits.txt";
 
-		public static final String NUTFACTORUNITSDROP = "NutFactorUnits.txt";
+        public static final String HORMONEUNITSDROP = "HormoneUnits.txt";
 
-		public static final String RADIATIONUNITSDROP = "RadiationUnits.txt";
+        public static final String NUTFACTORUNITSDROP = "NutFactorUnits.txt";
 
-		public static final String VIRALTREATUNITSDROP = "ViralTreatUnits.txt";
+        public static final String RADIATIONUNITSDROP = "RadiationUnits.txt";
 
-		public static final String TARGETEDMODIFICATIONDROP = "TargetedModificationTypes.txt";
+        public static final String VIRALTREATUNITSDROP = "ViralTreatUnits.txt";
 
-		public static final String GENOMICSEGMENTDROP = "SegmentTypes.txt";
+        public static final String TARGETEDMODIFICATIONDROP = "TargetedModificationTypes.txt";
 
-		public static final String GROWTHFACTORDOSEUNITSDROP = "GrowthFactorDoseUnits.txt";
-		
-		public static final String STAININGDROP = "Staining.txt";
+        public static final String GENOMICSEGMENTDROP = "SegmentTypes.txt";
 
-		// Specific to a single screen
-		public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
+        public static final String GROWTHFACTORDOSEUNITSDROP = "GrowthFactorDoseUnits.txt";
 
-		public static final String ENVIRONFACTORDROP = "envfactordrop.db";
+        public static final String STAININGDROP = "Staining.txt";
 
-		public static final String GROWTHFACTORDROP = "growfactordrop.db";
+        // Specific to a single screen
+        public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
 
-		public static final String HORMONEDROP = "hormonedrop.db";
+        public static final String ENVIRONFACTORDROP = "envfactordrop.db";
 
-		public static final String NUTRITIONFACTORDROP = "nutritionfactordrop.db";
+        public static final String GROWTHFACTORDROP = "growfactordrop.db";
 
-		public static final String RADIATIONDROP = "radiationdrop.db";
+        public static final String HORMONEDROP = "hormonedrop.db";
 
-		public static final String SURGERYDROP = "surgerydrop.db";
+        public static final String NUTRITIONFACTORDROP = "nutritionfactordrop.db";
 
-		public static final String VIRUSDROP = "virusdrop.db";
+        public static final String RADIATIONDROP = "radiationdrop.db";
 
-		public static final String VIRALVECTORDROP = "ViralVectors.txt";
+        public static final String SURGERYDROP = "surgerydrop.db";
 
-		public static final String GRAFTTYPEDROP = "GraftTypes.txt";
-		
-		public static final String XENOGRAFTADMINSITESDROP = "XenograftAdministrativeSites.txt";		
+        public static final String VIRUSDROP = "virusdrop.db";
 
-		public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
+        public static final String VIRALVECTORDROP = "ViralVectors.txt";
 
-		public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
-		
-		public static final String EXPRESSIONLEVEL = "expressionlevel.db";
+        public static final String GRAFTTYPEDROP = "GraftTypes.txt";
 
-		// Query dropdowns
-		public static final String CHEMICALDRUGQUERYDROP = "chemdrugquerydrop.db";
+        public static final String XENOGRAFTADMINSITESDROP = "XenograftAdministrativeSites.txt";
 
-		public static final String GROWTHFACTORQUERYDROP = "growfactorquerydrop.db";
+        public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
 
-		public static final String HORMONEQUERYDROP = "hormonequerydrop.db";
+        public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
-		public static final String RADIATIONQUERYDROP = "radiationquerydrop.db";
+        public static final String EXPRESSIONLEVEL = "expressionlevel.db";
 
-		public static final String VIRUSQUERYDROP = "virusquerydrop.db";
+        // Query dropdowns
+        public static final String CHEMICALDRUGQUERYDROP = "chemdrugquerydrop.db";
 
-		public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
+        public static final String GROWTHFACTORQUERYDROP = "growfactorquerydrop.db";
 
-		public static final String SPECIESQUERYDROP = "speciesquerydrop.db";
+        public static final String HORMONEQUERYDROP = "hormonequerydrop.db";
 
-		public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
+        public static final String RADIATIONQUERYDROP = "radiationquerydrop.db";
 
-		public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
+        public static final String VIRUSQUERYDROP = "virusquerydrop.db";
 
-		// These two are used to display the species and strain currently in the
-		// AnimalModelCharacteristics
-		public static final String MODELSPECIES = "modelspecies";
+        public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
 
-		public static final String MODELSTRAIN = "modelstrain";
+        public static final String SPECIESQUERYDROP = "speciesquerydrop.db";
 
-		public static final String CHEMICALCLASSESDROP = "ChemicalClasses.txt";
+        public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
 
-		public static final String BIOLOGICALPROCESSDROP = "BiologicalProcess.txt";
+        public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
 
-		public static final String THERAPEUTICTARGETSDROP = "TherapeuticTargets.txt";
+        // These two are used to display the species and strain currently in the
+        // AnimalModelCharacteristics
+        public static final String MODELSPECIES = "modelspecies";
 
-		// Used for user management
-		public static final String USERSDROP = "users.db";
+        public static final String MODELSTRAIN = "modelstrain";
 
-		// Used for curation
-		public static final String CURATIONSTATESDROP = "curationstates.db";
+        public static final String CHEMICALCLASSESDROP = "ChemicalClasses.txt";
 
-		// Used for curation
-		public static final String USERSFORROLEDROP = "usersforrole.db";
+        public static final String BIOLOGICALPROCESSDROP = "BiologicalProcess.txt";
 
-		// Used for role assignment
-		public static final String ROLESDROP = "roles.db";
-	}
+        public static final String THERAPEUTICTARGETSDROP = "TherapeuticTargets.txt";
 
-	/**
-	 * Defines the global constants used as parameters for ftp requests
-	 */
-	public interface CaImage {
+        // Used for user management
+        public static final String USERSDROP = "users.db";
 
-		public static final String FTPSERVER = "caimage.ftp.server";
+        // Used for curation
+        public static final String CURATIONSTATESDROP = "curationstates.db";
 
-		public static final String FTPUSERNAME = "caimage.ftp.username";
+        // Used for curation
+        public static final String USERSFORROLEDROP = "usersforrole.db";
 
-		public static final String FTPPASSWORD = "caimage.ftp.password";
+        // Used for role assignment
+        public static final String ROLESDROP = "roles.db";
+    }
 
-		public static final String FTPMODELSTORAGEDIRECTORY = "caimage.ftp.modelstoragedirectory";
-        
+    /**
+     * Defines the global constants used as parameters for ftp requests
+     */
+    public interface CaImage {
+
+        public static final String FTPSERVER = "caimage.ftp.server";
+
+        public static final String FTPUSERNAME = "caimage.ftp.username";
+
+        public static final String FTPPASSWORD = "caimage.ftp.password";
+
+        public static final String FTPMODELSTORAGEDIRECTORY = "caimage.ftp.modelstoragedirectory";
+
         public static final String FTPGENCONSTORAGEDIRECTORY = "caimage.ftp.genconstoragedirectory";
-		
-		public static final String CAIMAGEMODELSERVERVIEW = "caimage.modelview.uri";
-        
+
+        public static final String CAIMAGEMODELSERVERVIEW = "caimage.modelview.uri";
+
         public static final String CAIMAGEGENCONSERVERVIEW = "caimage.modelview.uri";
-        
-		public static final String CAIMAGESIDTHUMBVIEW = "caimage.sidthumbview.uri";
-        
+
+        public static final String CAIMAGESIDTHUMBVIEW = "caimage.sidthumbview.uri";
+
         public static final String CAIMAGESIDVIEWURISTART = "caimage.sidview.uri_start";
         public static final String CAIMAGESIDVIEWURIEND = "caimage.sidview.uri_end";
         public static final String CAIMAGEWINDOWSTART = "caimage.window.start";
         public static final String CAIMAGEWINDOWEND = "caimage.window.end";
-        
+
         public static final String CAIMAGEMODEL = "caimage.model";
         public static final String CAIMAGEGENCON = "caimage.gencon";
-        
+
         public static final String LEGACYJSP = "catalogviewtumors.jsp?";
         public static final String FILESEP = ";";
         public static final String IMGTAG = "img=";
-	}
+    }
 
-	/**
-	 * Defines the global constants used as parameters to requests
-	 */
-	public interface Parameters {
+    public interface Ldap {
+        public static final String INITIAL_CONTEXT_FACTORY_KEY = "ldap.initial.context.factory";
+        public static final String PROVIDER_URL_KEY = "ldap.provider.url";
+        public static final String SECURITY_AUTHENTICATION_KEY = "ldap.security.authentication";
+        public static final String SECURITY_PROTOCOL_KEY = "ldap.security.protocol";
+        public static final String CONTEXT_KEY = "ldap.context";
+    }
+
+    /**
+     * Defines the global constants used as parameters to requests
+     */
+    public interface Parameters {
 
         public static final String ACTION = "action";
-        
-		public static final String MODELID = "aModelID";
 
-		public static final String PERSONID = "aPersonID";
+        public static final String MODELID = "aModelID";
 
-		public static final String MODELSECTIONNAME = "aModelSectionName";
+        public static final String PERSONID = "aPersonID";
 
-		public static final String MODELSECTIONVALUE = "modelSectionValue";
+        public static final String MODELSECTIONNAME = "aModelSectionName";
 
-		public static final String COMMENTSID = "aCommentsID";
+        public static final String MODELSECTIONVALUE = "modelSectionValue";
 
-		public static final String COMMENTSLIST = "aCommentsList";
+        public static final String COMMENTSID = "aCommentsID";
 
-		public static final String TOCQUERYKEY = "aTOCQueryKey";
+        public static final String COMMENTSLIST = "aCommentsList";
 
-		public static final String EVENT = "aEvent";
-		
-		public static final String DELETED = "deleted";
-	}
+        public static final String TOCQUERYKEY = "aTOCQueryKey";
 
-	public interface Pages {
+        public static final String EVENT = "aEvent";
 
-		public static final String MODEL_CHARACTERISTICS = "General Information Page";
+        public static final String DELETED = "deleted";
+    }
 
-		public static final String CARCINOGENIC_INTERVENTION = "Carcinogenic Interventions Page";
+    public interface Pages {
 
-		public static final String PUBLICATIONS = "Publications page";
+        public static final String MODEL_CHARACTERISTICS = "General Information Page";
 
-		public static final String HISTOPATHOLOGY = "Histopathology Page";
+        public static final String CARCINOGENIC_INTERVENTION = "Carcinogenic Interventions Page";
 
-		public static final String THERAPEUTIC_APPROACHES = "Therapeutic Approaches Page";
+        public static final String PUBLICATIONS = "Publications page";
 
-		public static final String CELL_LINES = "Cell Lines Page";
+        public static final String HISTOPATHOLOGY = "Histopathology Page";
 
-		public static final String IMAGES = "Images Page";
+        public static final String THERAPEUTIC_APPROACHES = "Therapeutic Approaches Page";
 
-		public static final String MICROARRAY = "Microarray Page";
+        public static final String CELL_LINES = "Cell Lines Page";
 
-		public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
+        public static final String IMAGES = "Images Page";
 
-		public static final String XENOGRAFT = "Xenograft Page";
-	}
+        public static final String MICROARRAY = "Microarray Page";
 
-	/**
-	 * Used to determine the current model to edit on submission/edit also used
-	 * to display the name of the model and it's current status
-	 */
-	public static final String MODELID = "modelid";
+        public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
 
-	public static final String MODELDESCRIPTOR = "modeldescriptor";
+        public static final String XENOGRAFT = "Xenograft Page";
+    }
 
-	public static final String MODELSTATUS = "modelstatus";
+    /**
+     * Used to determine the current model to edit on submission/edit also used
+     * to display the name of the model and it's current status
+     */
+    public static final String MODELID = "modelid";
 
-	/**
-	 * Used to prepopulate forms
-	 */
-	public static final String FORMDATA = "formdata";
+    public static final String MODELDESCRIPTOR = "modeldescriptor";
 
-	public static final String ANIMALMODEL = "animalmodel";
+    public static final String MODELSTATUS = "modelstatus";
 
-	public static final String XENOGRAFTMODEL = "xenograftmodel";
-	
-	public static final String XENOGRAFTRESULTLIST = "xenograftresultlist";
-	
-	/**
-	 * Used to store username for current user
-	 */
-	public static final String CURRENTUSER = "camod.loggedon.username";
+    /**
+     * Used to prepopulate forms
+     */
+    public static final String FORMDATA = "formdata";
 
-	public static final String CURRENTUSERROLES = "camod.loggedon.userroles";
+    public static final String ANIMALMODEL = "animalmodel";
 
-	public static final String LOGINFAILED = "loginfailed";
+    public static final String XENOGRAFTMODEL = "xenograftmodel";
 
-	/**
-	 * Used for search results
-	 */
-	public static final String SEARCH_RESULTS = "searchResults";
+    public static final String XENOGRAFTRESULTLIST = "xenograftresultlist";
 
-	public static final String ADMIN_COMMENTS_SEARCH_RESULTS = "adminCommentsSearchResults";
+    /**
+     * Used to store username for current user
+     */
+    public static final String CURRENTUSER = "camod.loggedon.username";
 
-	public static final String ADMIN_MODEL_SEARCH_RESULTS = "adminModelSearchResults";
+    public static final String CURRENTUSERROLES = "camod.loggedon.userroles";
 
-	public static final String ADMIN_ROLES_SEARCH_RESULTS = "adminRolesSearchResults";
+    public static final String LOGINFAILED = "loginfailed";
 
-	public static final String TRANSGENE_COLL = "transgeneColl";
+    /**
+     * Used for search results
+     */
+    public static final String SEARCH_RESULTS = "searchResults";
 
-	public static final String GENOMIC_SEG_COLL = "genomicSegColl";
+    public static final String ADMIN_COMMENTS_SEARCH_RESULTS = "adminCommentsSearchResults";
 
-	public static final String TARGETED_MOD_COLL = "targetedModColl";
+    public static final String ADMIN_MODEL_SEARCH_RESULTS = "adminModelSearchResults";
 
-	public static final String TARGETED_MOD_GENE_MAP = "targetedModGeneMap";
+    public static final String ADMIN_ROLES_SEARCH_RESULTS = "adminRolesSearchResults";
 
-	public static final String INDUCED_MUT_COLL = "inducedMutColl";
+    public static final String TRANSGENE_COLL = "transgeneColl";
 
-	public static final String TRANSGENE_CNT = "transgeneCnt";
+    public static final String GENOMIC_SEG_COLL = "genomicSegColl";
 
-	public static final String GENOMIC_SEG_CNT = "genomicSegCnt";
+    public static final String TARGETED_MOD_COLL = "targetedModColl";
 
-	public static final String TARGETED_MOD_CNT = "targetedModCnt";
+    public static final String TARGETED_MOD_GENE_MAP = "targetedModGeneMap";
 
-	public static final String INDUCED_MUT_CNT = "inducedMutCnt";
-	public static final String THERAPEUTIC_APPROACHES_COLL = "therapeuticApproachesColl";
-	public static final String CLINICAL_PROTOCOLS = "clinProtocols";
-	public static final String YEAST_DATA = "yeastData";
-	public static final String INVIVO_DATA = "invivoData";
-	public static final String PRECLINICAL_MODELS = "preClinicalModels";
-	public static final String PUBLICATIONS = "publications";
-	public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
-	public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
-	public static final String NSC_NUMBER = "nsc";
+    public static final String INDUCED_MUT_COLL = "inducedMutColl";
 
-	// /////////////////////////////////////////////////////////////
-	// Submission specific constants
-	// /////////////////////////////////////////////////////////////
+    public static final String TRANSGENE_CNT = "transgeneCnt";
 
-	public interface Submit {
+    public static final String GENOMIC_SEG_CNT = "genomicSegCnt";
 
-		/**
-		 * Used to store required lists for the cardiogentic intervention
-		 * section of the sidebar menu of the submission section
-		 */
-		public static final String CHEMICALDRUG_LIST = "chemicaldrug_list";
+    public static final String TARGETED_MOD_CNT = "targetedModCnt";
 
-		public static final String ENVIRONMENTALFACTOR_LIST = "environmentalfactor_list";
+    public static final String INDUCED_MUT_CNT = "inducedMutCnt";
+    public static final String THERAPEUTIC_APPROACHES_COLL = "therapeuticApproachesColl";
+    public static final String CLINICAL_PROTOCOLS = "clinProtocols";
+    public static final String YEAST_DATA = "yeastData";
+    public static final String INVIVO_DATA = "invivoData";
+    public static final String PRECLINICAL_MODELS = "preClinicalModels";
+    public static final String PUBLICATIONS = "publications";
+    public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
+    public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
+    public static final String NSC_NUMBER = "nsc";
 
-		public static final String GENEDELIVERY_LIST = "genedelivery_list";
+    // /////////////////////////////////////////////////////////////
+    // Submission specific constants
+    // /////////////////////////////////////////////////////////////
 
-		public static final String GROWTHFACTORS_LIST = "growthfactors_list";
+    public interface Submit {
 
-		public static final String HORMONE_LIST = "hormone_list";
+        /**
+         * Used to store required lists for the cardiogentic intervention
+         * section of the sidebar menu of the submission section
+         */
+        public static final String CHEMICALDRUG_LIST = "chemicaldrug_list";
 
-		public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
+        public static final String ENVIRONMENTALFACTOR_LIST = "environmentalfactor_list";
 
-		public static final String RADIATION_LIST = "radiation_list";
+        public static final String GENEDELIVERY_LIST = "genedelivery_list";
 
-		public static final String SURGERYOTHER_LIST = "surgeryother_list";
+        public static final String GROWTHFACTORS_LIST = "growthfactors_list";
 
-		public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
+        public static final String HORMONE_LIST = "hormone_list";
 
-		public static final String XENOGRAFT_LIST = "xenograft_list";
+        public static final String NUTRITIONALFACTORS_LIST = "nutritionalfactors_list";
 
-		public static final String SPONTANEOUSMUTATION_LIST = "spontaneousmutation_list";
+        public static final String RADIATION_LIST = "radiation_list";
 
-		public static final String INDUCEDMUTATION_LIST = "inducedmutation_list";
+        public static final String SURGERYOTHER_LIST = "surgeryother_list";
 
-		public static final String TARGETEDMODIFICATION_LIST = "targetedmodification_list";
+        public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
 
-		public static final String GENOMICSEGMENT_LIST = "genomicsegment_list";
+        public static final String XENOGRAFT_LIST = "xenograft_list";
 
-		public static final String HISTOPATHOLOGY_LIST = "histopathology_list";
+        public static final String SPONTANEOUSMUTATION_LIST = "spontaneousmutation_list";
 
-		public static final String ASSOCMETASTSIS_LIST = "associatedmetastatis_list";
+        public static final String INDUCEDMUTATION_LIST = "inducedmutation_list";
 
-		public static final String ENGINEEREDTRANSGENE_LIST = "engineeredtransgene_list";
+        public static final String TARGETEDMODIFICATION_LIST = "targetedmodification_list";
 
-		public static final String THERAPY_LIST = "therapy_list";
+        public static final String GENOMICSEGMENT_LIST = "genomicsegment_list";
 
-		public static final String CLINICALMARKER_LIST = "clinicalmarker_list";
-
-		public static final String IMAGE_LIST = "image_list";
-		
-		public static final String ASSOCIATEDEXPRESSION_LIST = "associatedexpression_list";
-		/**
-		 * Used to store a list of names for the Publication section of the
-		 * sidebar menu of the submission section
-		 */
-		public static final String PUBLICATION_LIST = "publication_list";
-
-		/**
-		 * Used to store a list of names for the Cell Line section of the
-		 * sidebar menu of the submission section
-		 */
-		public static final String CELLLINE_LIST = "cellline_list";
-		
-		public static final String ANIMALAVAILABILITY_LIST = "availability_list";
-
-		/**
-		 * Used to store animal model availability for the Model Availability section of the
-		 * sidebar menu of the submission section
-		 */
-		public static final String INVESTIGATOR_LIST = "investigator_list";
-		public static final String JACKSONLAB_LIST = "jacksonlab_list";
-		public static final String MMHCC_LIST = "mmhcc_list";
-		public static final String IMSR_LIST = "imsr_list";	
-	}
-
-	// /////////////////////////////////////////////////////////////
-	// Admin specific constants
-	// /////////////////////////////////////////////////////////////
-
-	public interface Admin {
-
-		/**
-		 * Defines the different roles in the system
-		 */
-		public interface Roles {
-
-			/**
-			 * A constant that defines the submitter role
-			 */
-			public static final String ALL = "All";
-
-			/**
-			 * A constant that defines the submitter role
-			 */
-			public static final String SUBMITTER = "Public Submitter";
-
-			/**
-			 * A constant that defines the coordinator role
-			 */
-			public static final String COORDINATOR = "MMHCC Coordinator";
-
-			/**
-			 * A constant that defines the Editor role
-			 */
-			public static final String EDITOR = "MMHCC Editor";
-
-			/**
-			 * A constant that defines the screener role
-			 */
-			public static final String SCREENER = "MMHCC Screener";
-		}
-
-		/**
-		 * Defines the different roles in the system
-		 */
-		public interface Actions {
-
-			/**
-			 * A constant that defines the text for the generic approved action
-			 */
-			public static final String APPROVE = "approve";
-
-			/**
-			 * A constant that defines the text for the assign editor action
-			 */
-			public static final String ASSIGN_EDITOR = "assign_editor";
-
-			/**
-			 * A constant that defines the text for the assign screener action
-			 */
-			public static final String ASSIGN_SCREENER = "assign_screener";
-
-			/**
-			 * A constant that defines the text for the need more information
-			 * action
-			 */
-			public static final String NEED_MORE_INFO = "need_more_info";
-
-			/**
-			 * A constant that defines the text for the generic reject action
-			 */
-			public static final String REJECT = "reject";
-
-			/**
-			 * A constant that defines the text for the complete
-			 */
-			public static final String COMPLETE = "complete";
-		}
-
-		/**
-		 * A constant that defines string used as a variable name in e-mail
-		 */
-		public static final String INDUCED_MUTATION_AGENT_NAME = "inducedmutationagentname";
-
-		/**
-		 * A constant that defines string used as a variable name in e-mail
-		 */
-		public static final String INDUCED_MUTATION_AGENT_TYPE = "inducedmutationagenttype";
-
-		/**
-		 * A constant that defines string used as key for e-mail content
-		 * associated with induced mutation agent additions
-		 */
-		public static final String INDUCED_MUTATION_AGENT_ADDED = "inducedmutationagentadded";
-
-		/**
-		 * A constant that defines string used as a variable name in e-mail
-		 */
-		public static final String TARGETED_MODIFICATION_NAME = "targetedmodificationname";
-
-		/**
-		 * A constant that defines string used as a variable name in e-mail
-		 */
-		public static final String TARGETED_MODIFICATION_TYPE = "targetedmodificationtype";
-
-		/**
-		 * A constant that defines string used as key for e-mail content
-		 * associated with targeted modification additions
-		 */
-		public static final String TARGETED_MODIFICATION_ADDED = "targetedmodificationadded";
-
-		/**
-		 * A constant that defines string used as key for e-mail content
-		 * associated with non-controlled vocabulary use
-		 */
-		public static final String NONCONTROLLED_VOCABULARY = "noncontrolledvocab";
-
-		/**
-		 * A constant that defines what file is used for the model curation
-		 * process
-		 */
-		public static final String MODEL_CURATION_WORKFLOW = "config/CurationConfig.xml";
-
-		/**
-		 * A constant that defines what file is used for the comment curation
-		 * process
-		 */
-		public static final String COMMENT_CURATION_WORKFLOW = "config/CommentCurationConfig.xml";
-
-		/**
-		 * Used to set/pull the objects needing to be reviewed out of the
-		 * request
-		 */
-		public static final String COMMENTS_NEEDING_REVIEW = "commentsNeedingReview";
-
-		/**
-		 * Used to set/pull the objects needing to be reviewed out of the
-		 * request
-		 */
-		public static final String COMMENTS_NEEDING_ASSIGNMENT = "commentsNeedingAssignment";
-
-		/** Used to set/pull the objects needing to be edited out of the request */
-		public static final String MODELS_NEEDING_EDITING = "modelsNeedingEditing";
-
-		/**
-		 * Used to set/pull the objects needing to be assigned an editor out of
-		 * the request
-		 */
-		public static final String MODELS_NEEDING_EDITOR_ASSIGNMENT = "modelsNeedingEditorAssignment";
-
-		/** Used to set/pull the objects needing to be edited out of the request */
-		public static final String MODELS_NEEDING_MORE_INFO = "modelsNeedingMoreInfo";
-
-		/**
-		 * Used to set/pull the objects needing to be screened out of the
-		 * request
-		 */
-		public static final String MODELS_NEEDING_SCREENING = "modelsNeedingScreening";
-
-		/**
-		 * Used to set/pull the objects needing to be assigned a screener out of
-		 * the request
-		 */
-		public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
-	}
-
-	public interface EmailMessage {
-
-		public static final String SENDER = "email.sender";
-
-		public static final String RECIPIENTS = "email.recipients";
-
-		public static final String FROM = "email.from";
-
-		public static final String MESSAGE = "email.message";
-
-		public static final String SUBJECT = "email.subject";
-
-	}
-
-	/**
-	 * 
-	 * Constants used for fetching EVS data
-	 * 
-	 */
-	public interface Evs {
-
-		/**
-		 * The namespace to fetch the concepts from
-		 */
-		public static final String NAMESPACE = "NCI_Thesaurus";
-
-		/**
-		 * The tag used to get the display name
-		 */
-		public static final String DISPLAY_NAME_TAG = "Display_Name";
-
-		/**
-		 * The key for the URI in the camod.properties file
-		 */
-		public static final String URI_KEY = "evs.uri";
-	}
+        public static final String HISTOPATHOLOGY_LIST = "histopathology_list";
+
+        public static final String ASSOCMETASTSIS_LIST = "associatedmetastatis_list";
+
+        public static final String ENGINEEREDTRANSGENE_LIST = "engineeredtransgene_list";
+
+        public static final String THERAPY_LIST = "therapy_list";
+
+        public static final String CLINICALMARKER_LIST = "clinicalmarker_list";
+
+        public static final String IMAGE_LIST = "image_list";
+
+        public static final String ASSOCIATEDEXPRESSION_LIST = "associatedexpression_list";
+        /**
+         * Used to store a list of names for the Publication section of the
+         * sidebar menu of the submission section
+         */
+        public static final String PUBLICATION_LIST = "publication_list";
+
+        /**
+         * Used to store a list of names for the Cell Line section of the
+         * sidebar menu of the submission section
+         */
+        public static final String CELLLINE_LIST = "cellline_list";
+
+        public static final String ANIMALAVAILABILITY_LIST = "availability_list";
+
+        /**
+         * Used to store animal model availability for the Model Availability
+         * section of the sidebar menu of the submission section
+         */
+        public static final String INVESTIGATOR_LIST = "investigator_list";
+        public static final String JACKSONLAB_LIST = "jacksonlab_list";
+        public static final String MMHCC_LIST = "mmhcc_list";
+        public static final String IMSR_LIST = "imsr_list";
+    }
+
+    // /////////////////////////////////////////////////////////////
+    // Admin specific constants
+    // /////////////////////////////////////////////////////////////
+
+    public interface Admin {
+
+        /**
+         * Defines the different roles in the system
+         */
+        public interface Roles {
+
+            /**
+             * A constant that defines the submitter role
+             */
+            public static final String ALL = "All";
+
+            /**
+             * A constant that defines the submitter role
+             */
+            public static final String SUBMITTER = "Public Submitter";
+
+            /**
+             * A constant that defines the coordinator role
+             */
+            public static final String COORDINATOR = "MMHCC Coordinator";
+
+            /**
+             * A constant that defines the Editor role
+             */
+            public static final String EDITOR = "MMHCC Editor";
+
+            /**
+             * A constant that defines the screener role
+             */
+            public static final String SCREENER = "MMHCC Screener";
+        }
+
+        /**
+         * Defines the different roles in the system
+         */
+        public interface Actions {
+
+            /**
+             * A constant that defines the text for the generic approved action
+             */
+            public static final String APPROVE = "approve";
+
+            /**
+             * A constant that defines the text for the assign editor action
+             */
+            public static final String ASSIGN_EDITOR = "assign_editor";
+
+            /**
+             * A constant that defines the text for the assign screener action
+             */
+            public static final String ASSIGN_SCREENER = "assign_screener";
+
+            /**
+             * A constant that defines the text for the need more information
+             * action
+             */
+            public static final String NEED_MORE_INFO = "need_more_info";
+
+            /**
+             * A constant that defines the text for the generic reject action
+             */
+            public static final String REJECT = "reject";
+
+            /**
+             * A constant that defines the text for the complete
+             */
+            public static final String COMPLETE = "complete";
+        }
+
+        /**
+         * A constant that defines string used as a variable name in e-mail
+         */
+        public static final String INDUCED_MUTATION_AGENT_NAME = "inducedmutationagentname";
+
+        /**
+         * A constant that defines string used as a variable name in e-mail
+         */
+        public static final String INDUCED_MUTATION_AGENT_TYPE = "inducedmutationagenttype";
+
+        /**
+         * A constant that defines string used as key for e-mail content
+         * associated with induced mutation agent additions
+         */
+        public static final String INDUCED_MUTATION_AGENT_ADDED = "inducedmutationagentadded";
+
+        /**
+         * A constant that defines string used as a variable name in e-mail
+         */
+        public static final String TARGETED_MODIFICATION_NAME = "targetedmodificationname";
+
+        /**
+         * A constant that defines string used as a variable name in e-mail
+         */
+        public static final String TARGETED_MODIFICATION_TYPE = "targetedmodificationtype";
+
+        /**
+         * A constant that defines string used as key for e-mail content
+         * associated with targeted modification additions
+         */
+        public static final String TARGETED_MODIFICATION_ADDED = "targetedmodificationadded";
+
+        /**
+         * A constant that defines string used as key for e-mail content
+         * associated with non-controlled vocabulary use
+         */
+        public static final String NONCONTROLLED_VOCABULARY = "noncontrolledvocab";
+
+        /**
+         * A constant that defines what file is used for the model curation
+         * process
+         */
+        public static final String MODEL_CURATION_WORKFLOW = "config/CurationConfig.xml";
+
+        /**
+         * A constant that defines what file is used for the comment curation
+         * process
+         */
+        public static final String COMMENT_CURATION_WORKFLOW = "config/CommentCurationConfig.xml";
+
+        /**
+         * Used to set/pull the objects needing to be reviewed out of the
+         * request
+         */
+        public static final String COMMENTS_NEEDING_REVIEW = "commentsNeedingReview";
+
+        /**
+         * Used to set/pull the objects needing to be reviewed out of the
+         * request
+         */
+        public static final String COMMENTS_NEEDING_ASSIGNMENT = "commentsNeedingAssignment";
+
+        /** Used to set/pull the objects needing to be edited out of the request */
+        public static final String MODELS_NEEDING_EDITING = "modelsNeedingEditing";
+
+        /**
+         * Used to set/pull the objects needing to be assigned an editor out of
+         * the request
+         */
+        public static final String MODELS_NEEDING_EDITOR_ASSIGNMENT = "modelsNeedingEditorAssignment";
+
+        /** Used to set/pull the objects needing to be edited out of the request */
+        public static final String MODELS_NEEDING_MORE_INFO = "modelsNeedingMoreInfo";
+
+        /**
+         * Used to set/pull the objects needing to be screened out of the
+         * request
+         */
+        public static final String MODELS_NEEDING_SCREENING = "modelsNeedingScreening";
+
+        /**
+         * Used to set/pull the objects needing to be assigned a screener out of
+         * the request
+         */
+        public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
+    }
+
+    public interface EmailMessage {
+
+        public static final String SENDER = "email.sender";
+
+        public static final String RECIPIENTS = "email.recipients";
+
+        public static final String FROM = "email.from";
+
+        public static final String MESSAGE = "email.message";
+
+        public static final String SUBJECT = "email.subject";
+
+    }
+
+    /**
+     * 
+     * Constants used for fetching EVS data
+     * 
+     */
+    public interface Evs {
+
+        /**
+         * The namespace to fetch the concepts from
+         */
+        public static final String NAMESPACE = "NCI_Thesaurus";
+
+        /**
+         * The tag used to get the display name
+         */
+        public static final String DISPLAY_NAME_TAG = "Display_Name";
+
+        /**
+         * The key for the URI in the camod.properties file
+         */
+        public static final String URI_KEY = "evs.uri";
+    }
 }
