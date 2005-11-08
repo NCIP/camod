@@ -146,7 +146,7 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">Did you know message. Did you know message. Did you know message. Did you know message. </td>
+                                                      <td class="sidebarContent" valign="top">The initial phase of UAT starts November 9th.</td>
 
                                                   </tr>
                                               </table>
