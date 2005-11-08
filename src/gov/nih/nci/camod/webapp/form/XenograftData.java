@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.2 2005-09-29 18:31:59 georgeda Exp $
+ * $Id: XenograftData.java,v 1.3 2005-11-08 17:47:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/09/29 18:31:59  georgeda
+ * Removed mice age
+ *
  * Revision 1.1  2005/09/28 21:20:25  georgeda
  * Finished up converting to new manager
  *
@@ -59,6 +62,10 @@ public interface XenograftData {
     public String getAdministrativeSite();
 
     public void setAdministrativeSite(String administrativeSite);
+    
+    public String getOtherAdministrativeSite(); 
+
+    public void setOtherAdministrativeSite(String otherAdministrativeSite);    
 
     public String getGraftType();
 

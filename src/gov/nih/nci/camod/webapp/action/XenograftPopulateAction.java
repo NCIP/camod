@@ -155,6 +155,7 @@ public class XenograftPopulateAction extends BaseAction {
 		// following
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, "");		
 
 		System.out.println("<XenograftPopulateAction dropdown> Exiting void dropdown()");
 	}

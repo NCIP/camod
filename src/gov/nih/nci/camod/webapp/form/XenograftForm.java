@@ -37,6 +37,7 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     protected String modificationDescription;
     protected String geneticManipulation;
     protected String administrativeSite;
+    protected String otherAdministrativeSite;    
     protected String graftType;
     protected String otherGraftType;
 
@@ -208,7 +209,21 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     public void setAdministrativeSite(String administrativeSite) {
         this.administrativeSite = administrativeSite;
     }
+    /**
+     * @return Returns the otherAdministrativeSite.
+     */
+    public String getOtherAdministrativeSite() {
+        return otherAdministrativeSite;
+    }
 
+    /**
+     * @param otherAdministrativeSite
+     *            The otherAdministrativeSite to set.
+     */
+    public void setOtherAdministrativeSite(String otherAdministrativeSite) {
+        this.otherAdministrativeSite = otherAdministrativeSite;
+    }
+    
     /**
      * @return Returns the graftType.
      */

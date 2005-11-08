@@ -25,6 +25,14 @@ function chkOtherAdminRoute() {
     chkOther(route, otherRoute);  	
 }
 
+function chkOtherAdminSite() {
+
+	var site = document.forms[0].administrativeSite;
+	var otherSite = document.forms[0].otherAdministrativeSite;
+	
+    chkOther(site, otherSite);  	
+}
+
 function disableFieldUnsized(field)
 {
 		field.value = '';
