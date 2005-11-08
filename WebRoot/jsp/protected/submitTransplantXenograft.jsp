@@ -181,22 +181,7 @@
 			</html:select>
 		</td>		
 	</tr>
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Site of Administration:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-		<br>
-		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
-		<br>
-		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminSite();">												
-				<html:options name="<%= Dropdowns.XENOGRAFTADMINSITESDROP %>"/>					
-			</html:select>			
-		</td>
-	</tr>
+
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
