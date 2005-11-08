@@ -51,6 +51,7 @@ public class LDAPUtil {
                     if (theAttribute.getID().equals("mail"))
                     {
                         theEmailAddress = theAttribute.get().toString();
+                        break;
                     }
                 }
             }
