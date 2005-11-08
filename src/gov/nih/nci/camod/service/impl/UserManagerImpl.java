@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.10 2005-11-07 13:58:29 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.11 2005-11-08 22:32:44 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/07 13:58:29  georgeda
+ * Dynamically update roles
+ *
  * Revision 1.9  2005/10/24 13:28:06  georgeda
  * Cleanup changes
  *
@@ -30,21 +33,15 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.ContactInfo;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Role;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.UserManager;
+import gov.nih.nci.camod.util.LDAPUtil;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.security.AuthenticationManager;
-import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.SecurityServiceProvider;
-import gov.nih.nci.security.authorization.domainobjects.User;
 import gov.nih.nci.security.exceptions.CSException;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,7 +50,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class UserManagerImpl extends BaseManager implements UserManager {
 
-    private AuthorizationManager theAuthorizationMgr = null;
     private AuthenticationManager theAuthenticationMgr = null;
 
     /**
@@ -64,12 +60,11 @@ public class UserManagerImpl extends BaseManager implements UserManager {
         log.trace("Entering UserManagerImpl");
 
         try {
-            theAuthorizationMgr = SecurityServiceProvider.getAuthorizationManager(Constants.UPT_CONTEXT_NAME);
             theAuthenticationMgr = SecurityServiceProvider.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
         } catch (CSException ex) {
-            log.error("Error getting authorization managers", ex);
+            log.error("Error getting authentication managers", ex);
         } catch (Throwable e) {
-            log.error("Error getting authorization managers", e);
+            log.error("Error getting authentication managers", e);
         }
 
         log.trace("Exiting UserManagerImpl");
@@ -196,16 +191,9 @@ public class UserManagerImpl extends BaseManager implements UserManager {
         String theEmail = "";
 
         try {
-            User theCurrentUser = theAuthorizationMgr.getUser(inUsername);
-
-            log.info("Username: " + theCurrentUser.getUserId() + "\nFirstName: " + theCurrentUser.getFirstName()
-                    + "\nLastName: " + theCurrentUser.getLastName() + "\nPhoneNumber: "
-                    + theCurrentUser.getPhoneNumber() + "\nEmail: " + theCurrentUser.getEmailId());
-
-            theEmail = theCurrentUser.getEmailId();
-
+            theEmail = LDAPUtil.getEmailAddressForUser(inUsername);
         } catch (Exception e) {
-            log.warn("Could not fetch user from CSM", e);
+            log.warn("Could not fetch user from LDAP", e);
         }
 
         log.trace("Exiting getEmailForUser");
@@ -244,13 +232,12 @@ public class UserManagerImpl extends BaseManager implements UserManager {
         ContactInfo theContactInfo = new ContactInfo();
 
         try {
-            User theCurrentUser = theAuthorizationMgr.getUser(inUsername);
-            theContactInfo.setInstitute(theCurrentUser.getOrganization());
-            theContactInfo.setEmail(theCurrentUser.getEmailId());
-            theContactInfo.setPhone(theCurrentUser.getPhoneNumber());
+            theContactInfo.setInstitute("");
+            theContactInfo.setEmail(LDAPUtil.getEmailAddressForUser(inUsername));
+            theContactInfo.setPhone("");
 
         } catch (Exception e) {
-            log.warn("Could not fetch user from CSM", e);
+            log.warn("Could not fetch user from LDAP", e);
         }
 
         log.trace("Exiting getEmailForUser");
