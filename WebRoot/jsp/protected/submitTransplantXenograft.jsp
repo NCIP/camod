@@ -176,10 +176,14 @@
 		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  >
-				<html:optionsCollection name="<%= Dropdowns.XENOGRAFTADMINSITESDROP %>" />										
-			</html:select>
-		</td>		
+		<br>
+		<label for="field3">- if Administration Site is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>
+			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
+				<html:options name="<%= Dropdowns.XENOGRAFTADMINSITESDROP %>"/>					
+			</html:select>			
+		</td>
 	</tr>
 
 	
