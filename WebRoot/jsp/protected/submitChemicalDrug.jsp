@@ -70,7 +70,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Chemical/Drug:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherName"  size="30" />
+			<html:text styleClass="formFieldSized" property="otherName"  size="40" />
 		</td>
 	</tr>
 
@@ -80,7 +80,7 @@
 		<camod:cshelp mapId="chemical_drug_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="dosage"  size="10" />
+			<html:text styleClass="formFieldUnSized" property="dosage"  size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>					
@@ -96,7 +96,8 @@
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber"  />
+				<label for="field1">&nbsp;&nbsp;</label>
+				<html:text styleClass="formFieldUnSized" size="15" property="NSCNumber"  />
 			</td>
 	</tr>
 	<!-- changed linkd to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
@@ -108,7 +109,8 @@
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber"  />
+				<label for="field1">&nbsp;&nbsp;</label>
+				<html:text styleClass="formFieldUnSized" size="15" property="CASNumber"  />
 			</td>
 	</tr>	
 	
@@ -132,7 +134,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Administrative Route:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherAdministrativeRoute"  size="30"  />			
+			<html:text styleClass="formFieldSized" property="otherAdministrativeRoute"  size="40"  />			
 		</td>
 	</tr>
 
@@ -142,7 +144,7 @@
 		<camod:cshelp mapId="chemical_drug_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="regimen" size="30" />
+			<html:text styleClass="formFieldSized" property="regimen" size="40" />
 		</td>
 	</tr>
 
@@ -150,7 +152,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10" />
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
