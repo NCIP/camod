@@ -1201,7 +1201,7 @@
 	        name="clinicalMarkerForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"
+	        validate="true"
 	        input="input"> 
 	    <forward
             name="input"
