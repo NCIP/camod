@@ -39,8 +39,9 @@
 
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name / Model Descriptor </label> 
+			<td class="formLabel"><label for="field1">Model Name / Model Descriptor  
 				<camod:cshelp mapId="simple_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				</label>
 			</td>
 			<td class="formField">			
 					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
