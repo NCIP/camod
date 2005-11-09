@@ -55,7 +55,14 @@ public final class ImageAction extends BaseAction {
             ImageManager imageManager = (ImageManager) getBean("imageManager");
 
             if ("Delete".equals(theAction)) {
-                imageManager.remove(aImageID);
+                
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                
+                imageManager.remove(aImageID, theAnimalModel);
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.delete.successful"));

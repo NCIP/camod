@@ -6,9 +6,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.GeneticAlteration;
-import gov.nih.nci.camod.domain.MutationIdentifier;
-import gov.nih.nci.camod.domain.SpontaneousMutation;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.SpontaneousMutationManager;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
 
@@ -33,9 +31,9 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         super.save(SpontaneousMutation);
     }
 
-    public void remove(String id) throws Exception {
-        log.trace("In SpontaneousMutationManagerImpl.remove");
-        super.remove(id, SpontaneousMutation.class);
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+        inAnimalModel.getEngineeredGeneCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public SpontaneousMutation create(SpontaneousMutationData inSpontaneousMutationData) throws Exception {

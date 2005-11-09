@@ -23,9 +23,11 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 		super.save(availability);
 	}
 
-	public void remove(String id) throws Exception {
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
 		log.trace("In AvailabilityManagerImpl.remove");
-		super.remove(id, AnimalAvailability.class);
+        
+        inAnimalModel.getAnimalAvailabilityCollection().remove(get(id));
+		super.save(inAnimalModel);
 	}
 
 	public AnimalAvailability create(AvailabilityData inAvailabilityData) throws Exception {

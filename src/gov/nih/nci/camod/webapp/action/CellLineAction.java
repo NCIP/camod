@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLineAction.java,v 1.13 2005-11-01 18:14:28 schroedn Exp $
+ * $Id: CellLineAction.java,v 1.14 2005-11-09 00:17:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/01 18:14:28  schroedn
+ * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
+ *
  * Revision 1.12  2005/10/28 14:50:55  georgeda
  * Fixed null pointer problem
  *
@@ -70,7 +73,14 @@ public final class CellLineAction extends BaseAction {
 		try {
 			CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
             if ("Delete".equals(theAction)) {
-				theCellLineManager.remove(aCellID);
+                
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                
+				theCellLineManager.remove(aCellID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("cellline.delete.successful"));

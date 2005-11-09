@@ -1,9 +1,6 @@
 package gov.nih.nci.camod.service;
 
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.Publication;
-import gov.nih.nci.camod.domain.PublicationStatus;
-import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.webapp.form.PublicationData;
 
 import java.util.List;
@@ -24,7 +21,7 @@ public interface PublicationManager {
 
 	public void save(Publication publication) throws Exception;
 
-	public void remove(String id) throws Exception;
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 
 	public PublicationStatus getPublicationStatusByName(String inName) throws Exception;
 	

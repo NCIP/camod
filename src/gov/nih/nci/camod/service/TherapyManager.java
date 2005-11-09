@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManager.java,v 1.7 2005-11-02 19:03:25 pandyas Exp $
+ * $Id: TherapyManager.java,v 1.8 2005-11-09 00:17:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/02 19:03:25  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.6  2005/10/06 19:28:14  pandyas
  * modified for Therapy screen
  *
@@ -26,7 +29,7 @@ public interface TherapyManager {
 
     public void save(Therapy therapy) throws Exception;
 
-    public void remove(String id) throws Exception;
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 
     /////////////////////////////////////////////////
     // The interface specific create/updates

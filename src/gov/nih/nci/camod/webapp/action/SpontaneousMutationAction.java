@@ -45,7 +45,14 @@ public class SpontaneousMutationAction extends BaseAction {
             SpontaneousMutationManager spontaneousMutationManager = (SpontaneousMutationManager) getBean("spontaneousMutationManager");
 
             if ("Delete".equals(theAction)) {
-                spontaneousMutationManager.remove(aSpontaneousMutationID);
+
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+
+                spontaneousMutationManager.remove(aSpontaneousMutationID, theAnimalModel);
 
                 log.info("SpontaneousMutation deleted");
 

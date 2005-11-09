@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.13 2005-11-02 21:47:01 georgeda Exp $
+ * $Id: ChemicalDrugAction.java,v 1.14 2005-11-09 00:17:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/02 21:47:01  georgeda
+ * Fixed validate
+ *
  * Revision 1.12  2005/11/02 19:02:08  pandyas
  * Added e-mail functionality
  *
@@ -73,18 +76,20 @@ public class ChemicalDrugAction extends BaseAction {
 		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {	        
+		try {	    
+            // retrieve animal model by it's id         
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);                
+            
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID);
+                
+				therapyManager.remove(aTherapyID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("chemicaldrug.delete.successful"));
 				saveErrors(request, msg);
 
 			} else {
-		        // retrieve animal model by it's id	        
-		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);				
 
 				Therapy theTherapy = therapyManager.get(aTherapyID);
 				therapyManager.update(theAnimalModel, chemicalDrugForm, theTherapy);

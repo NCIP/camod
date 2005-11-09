@@ -66,8 +66,8 @@ public final class TargetedModificationAction extends BaseAction {
 	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);        	
 
             if ("Delete".equals(theAction)) {
-
-                targetedModificationManager.remove(aTargetedModificationID);
+             
+                targetedModificationManager.remove(aTargetedModificationID, theAnimalModel);
                 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("targetedmodification.delete.successful"));

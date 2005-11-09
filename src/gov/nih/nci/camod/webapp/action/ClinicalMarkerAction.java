@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: ClinicalMarkerAction.java,v 1.4 2005-11-07 19:14:14 pandyas Exp $
+ * $Id: ClinicalMarkerAction.java,v 1.5 2005-11-09 00:17:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/07 19:14:14  pandyas
+ * modified for clinical marker screen
+ *
  */
 
 package gov.nih.nci.camod.webapp.action;
@@ -47,6 +50,7 @@ public class ClinicalMarkerAction extends BaseAction {
 		// Grab the current aAssocMetastasisID we are working with related to
 		// this animalModel
 		String aClinicalMarkerID = request.getParameter("aClinicalMarkerID");
+        String aHistopathologyID = request.getParameter("aHistopathologyID");
 		log.debug("aClinicalMarkerID: " + aClinicalMarkerID);
 
 		// Create a form to edit
@@ -64,7 +68,11 @@ public class ClinicalMarkerAction extends BaseAction {
 		try {
 			
             if ("Delete".equals(theAction)) {
-            	theClinicalMarkerManager.remove(aClinicalMarkerID);
+                
+                HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");  
+                Histopathology theHistopathology = theHistopathologyManager.get(aHistopathologyID);         
+                
+            	theClinicalMarkerManager.remove(aClinicalMarkerID, theHistopathology);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.delete.successful"));

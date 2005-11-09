@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.8 2005-11-07 19:14:14 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.9 2005-11-09 00:17:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/07 19:14:14  pandyas
+ * modified for clinical marker screen
+ *
  * Revision 1.7  2005/11/07 13:57:16  georgeda
  * Minor tweaks
  *
@@ -46,294 +49,302 @@ import org.apache.struts.action.ActionMessages;
 
 public class HistopathologyAction extends BaseAction {
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward editHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward editHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.info("<HistopathologyAction> Entering 'edit' method");
+        log.info("<HistopathologyAction> Entering 'edit' method");
 
-		// Grab the current aHistopathID from the session
-		String aHistopathologyID = request.getParameter("aHistopathologyID");
+        // Grab the current aHistopathID from the session
+        String aHistopathologyID = request.getParameter("aHistopathologyID");
 
-		// Create a form to edit
-		HistopathologyForm histopathologyForm = (HistopathologyForm) form;
+        // Create a form to edit
+        HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
-		log.debug("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
-				+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
-				+ histopathologyForm.getOrganTissueCode() + "\n\t diseaseName: "
-				+ histopathologyForm.getDiagnosisName() + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()
-				+ "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() + "\n\t ageOfOnset: "
-				+ histopathologyForm.getAgeOfOnset() + "\n\t weightOfTumor: " + histopathologyForm.getWeightOfTumor()
-				+ "\n\t volumeOfTumor: " + histopathologyForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
-				+ histopathologyForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
-				+ histopathologyForm.getMethodOfObservation() + "\n\t grossDescription: "
-				+ histopathologyForm.getGrossDescription() + "\n\t microscopicDescription: "
-				+ histopathologyForm.getMicroscopicDescription() + "\n\t observation: "
-				+ histopathologyForm.getObservation() + "\n\t methodOfObservation: "
-				+ histopathologyForm.getMethodOfObservation() + "\n\t comparativeData: "
-				+ histopathologyForm.getComparativeData() + "\n\t comments: " + histopathologyForm.getComments()
-				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.debug("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
+                + "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
+                + histopathologyForm.getOrganTissueCode() + "\n\t diseaseName: "
+                + histopathologyForm.getDiagnosisName() + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()
+                + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() + "\n\t ageOfOnset: "
+                + histopathologyForm.getAgeOfOnset() + "\n\t weightOfTumor: " + histopathologyForm.getWeightOfTumor()
+                + "\n\t volumeOfTumor: " + histopathologyForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
+                + histopathologyForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
+                + histopathologyForm.getMethodOfObservation() + "\n\t grossDescription: "
+                + histopathologyForm.getGrossDescription() + "\n\t microscopicDescription: "
+                + histopathologyForm.getMicroscopicDescription() + "\n\t observation: "
+                + histopathologyForm.getObservation() + "\n\t methodOfObservation: "
+                + histopathologyForm.getMethodOfObservation() + "\n\t comparativeData: "
+                + histopathologyForm.getComparativeData() + "\n\t comments: " + histopathologyForm.getComments()
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {
+        try {
 
-			if ("Delete".equals(theAction)) {
-				histopathologyManager.remove(aHistopathologyID);
+            if ("Delete".equals(theAction)) {
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.delete.successful"));
-				saveErrors(request, msg);
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-			} else {
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-				Histopathology theHistopathology = histopathologyManager.get(aHistopathologyID);
-				histopathologyManager.updateHistopathology(histopathologyForm, theHistopathology);
+                histopathologyManager.remove(aHistopathologyID, theAnimalModel);
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.edit.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.delete.successful"));
+                saveErrors(request, msg);
 
-			log.error("Unable to get a Histpathology action: ", e);
+            } else {
 
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, theMsg);
-		}
+                Histopathology theHistopathology = histopathologyManager.get(aHistopathologyID);
+                histopathologyManager.updateHistopathology(histopathologyForm, theHistopathology);
 
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (Exception e) {
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward editMetastasis(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+            log.error("Unable to get a Histpathology action: ", e);
 
-		log.info("<HistopathologyAction> Entering 'editMetastasis' method");
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
-		// Grab the current aHistopathID from the session
-		String aHistopathologyID = request.getParameter("aHistopathologyID");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-		// Grab the current aAssocMetastasisID we are working with related to
-		// this animalModel
-		String aAssociatedMetastasisID = request.getParameter("aAssociatedMetastasisID");
-		System.out.println("aAssocMetastasisID: " + aAssociatedMetastasisID);
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward editMetastasis(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		// Create a form to edit
-		AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
+        log.info("<HistopathologyAction> Entering 'editMetastasis' method");
 
-		log.debug("<HistopathologyAction editMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
-				+ aHistopathologyID + "\n\t aAssociatedMetastasisID: " + aAssociatedMetastasisID
-				+ "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName() + "\n\t organTissueCode: "
-				+ assocMetastasisForm.getOrganTissueCode() + "\n\t diseaseName: "
-				+ assocMetastasisForm.getDiagnosisName() + "\n\t diseaseCode: "
-				+ assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
-				+ assocMetastasisForm.getDiagnosisName() + "\n\t ageOfOnset: " + assocMetastasisForm.getAgeOfOnset()
-				+ "\n\t weightOfTumor: " + assocMetastasisForm.getWeightOfTumor() + "\n\t volumeOfTumor: "
-				+ assocMetastasisForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
-				+ assocMetastasisForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
-				+ assocMetastasisForm.getMethodOfObservation() + "\n\t grossDescription: "
-				+ assocMetastasisForm.getGrossDescription() + "\n\t microscopicDescription: "
-				+ assocMetastasisForm.getMicroscopicDescription() + "\n\t observation: "
-				+ assocMetastasisForm.getObservation() + "\n\t methodOfObservation: "
-				+ assocMetastasisForm.getMethodOfObservation() + "\n\t comparativeData: "
-				+ assocMetastasisForm.getComparativeData() + "\n\t comments: " + assocMetastasisForm.getComments()
-				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        // Grab the current aHistopathID from the session
+        String aHistopathologyID = request.getParameter("aHistopathologyID");
 
-		HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        // Grab the current aAssocMetastasisID we are working with related to
+        // this animalModel
+        String aAssociatedMetastasisID = request.getParameter("aAssociatedMetastasisID");
+        System.out.println("aAssocMetastasisID: " + aAssociatedMetastasisID);
 
-		try {
+        // Create a form to edit
+        AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
 
-			if ("Delete".equals(theAction)) {
-				histopathologyManager.remove(aAssociatedMetastasisID);
+        log.debug("<HistopathologyAction editMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
+                + aHistopathologyID + "\n\t aAssociatedMetastasisID: " + aAssociatedMetastasisID
+                + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName() + "\n\t organTissueCode: "
+                + assocMetastasisForm.getOrganTissueCode() + "\n\t diseaseName: "
+                + assocMetastasisForm.getDiagnosisName() + "\n\t diseaseCode: "
+                + assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
+                + assocMetastasisForm.getDiagnosisName() + "\n\t ageOfOnset: " + assocMetastasisForm.getAgeOfOnset()
+                + "\n\t weightOfTumor: " + assocMetastasisForm.getWeightOfTumor() + "\n\t volumeOfTumor: "
+                + assocMetastasisForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
+                + assocMetastasisForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
+                + assocMetastasisForm.getMethodOfObservation() + "\n\t grossDescription: "
+                + assocMetastasisForm.getGrossDescription() + "\n\t microscopicDescription: "
+                + assocMetastasisForm.getMicroscopicDescription() + "\n\t observation: "
+                + assocMetastasisForm.getObservation() + "\n\t methodOfObservation: "
+                + assocMetastasisForm.getMethodOfObservation() + "\n\t comparativeData: "
+                + assocMetastasisForm.getComparativeData() + "\n\t comments: " + assocMetastasisForm.getComments()
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.delete.successful"));
-				saveErrors(request, msg);
+        HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-			} else {
+        try {
 
-				Histopathology theAssociatedMetastasis = histopathologyManager.get(aAssociatedMetastasisID);
-				// Pass in the histopathology_id (aAssociatedMetastasisID) of
-				// the current metastatsis also
-				histopathologyManager.updateAssociatedMetastasis(assocMetastasisForm, theAssociatedMetastasis);
+            if ("Delete".equals(theAction)) {
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.edit.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
+                Histopathology theHistopathology = histopathologyManager.get(aHistopathologyID);
+                histopathologyManager.removeAssociatedMetastasis(aAssociatedMetastasisID, theHistopathology);
 
-			log.error("Unable to get a Histpathology action: ", e);
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.delete.successful"));
+                saveErrors(request, msg);
 
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, theMsg);
-		}
+            } else {
 
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+                Histopathology theAssociatedMetastasis = histopathologyManager.get(aAssociatedMetastasisID);
+                // Pass in the histopathology_id (aAssociatedMetastasisID) of
+                // the current metastatsis also
+                histopathologyManager.updateAssociatedMetastasis(assocMetastasisForm, theAssociatedMetastasis);
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward saveHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (Exception e) {
 
-		log.info("<HistopathologyAction> Entering 'save' method");
+            log.error("Unable to get a Histpathology action: ", e);
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
-		// Create a form to edit
-		HistopathologyForm histopathologyForm = (HistopathologyForm) form;
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-		log.debug("<HistopathologyAction save> following Characteristics:" + "\n\t organTissueName: "
-				+ histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
-				+ histopathologyForm.getOrganTissueCode() + "\n\t diseaseName: "
-				+ histopathologyForm.getDiagnosisName() + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()
-				+ "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() + "\n\t ageOfOnset: "
-				+ histopathologyForm.getAgeOfOnset() + "\n\t weightOfTumor: " + histopathologyForm.getWeightOfTumor()
-				+ "\n\t volumeOfTumor: " + histopathologyForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
-				+ histopathologyForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
-				+ histopathologyForm.getMethodOfObservation() + "\n\t grossDescription: "
-				+ histopathologyForm.getGrossDescription() + "\n\t microscopicDescription: "
-				+ histopathologyForm.getMicroscopicDescription() + "\n\t observation: "
-				+ histopathologyForm.getObservation() + "\n\t methodOfObservation: "
-				+ histopathologyForm.getMethodOfObservation() + "\n\t comparativeData: "
-				+ histopathologyForm.getComparativeData() + "\n\t comments: " + histopathologyForm.getComments()
-				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward saveHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		try {
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+        log.info("<HistopathologyAction> Entering 'save' method");
 
-			theAnimalModelManager.addHistopathology(theAnimalModel, histopathologyForm);
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-			log.info("New histopathology created");
+        // Create a form to edit
+        HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.creation.successful"));
-			saveErrors(request, msg);
+        log.debug("<HistopathologyAction save> following Characteristics:" + "\n\t organTissueName: "
+                + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
+                + histopathologyForm.getOrganTissueCode() + "\n\t diseaseName: "
+                + histopathologyForm.getDiagnosisName() + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()
+                + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() + "\n\t ageOfOnset: "
+                + histopathologyForm.getAgeOfOnset() + "\n\t weightOfTumor: " + histopathologyForm.getWeightOfTumor()
+                + "\n\t volumeOfTumor: " + histopathologyForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
+                + histopathologyForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
+                + histopathologyForm.getMethodOfObservation() + "\n\t grossDescription: "
+                + histopathologyForm.getGrossDescription() + "\n\t microscopicDescription: "
+                + histopathologyForm.getMicroscopicDescription() + "\n\t observation: "
+                + histopathologyForm.getObservation() + "\n\t methodOfObservation: "
+                + histopathologyForm.getMethodOfObservation() + "\n\t comparativeData: "
+                + histopathologyForm.getComparativeData() + "\n\t comments: " + histopathologyForm.getComments()
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-			log.info("<HistopathologyAction> Exiting 'save' method");
+        try {
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-		} catch (Exception e) {
+            theAnimalModelManager.addHistopathology(theAnimalModel, histopathologyForm);
 
-			log.error("Unable to get add an histopathology: ", e);
+            log.info("New histopathology created");
 
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, theMsg);
-		}
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.creation.successful"));
+            saveErrors(request, msg);
 
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+            log.info("<HistopathologyAction> Exiting 'save' method");
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward saveMetastasis(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+        } catch (Exception e) {
 
-		log.info("<HistopathologyAction> Entering 'saveMetastasis' method");
+            log.error("Unable to get add an histopathology: ", e);
 
-		// Create a form to edit
-		AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, assocMetastasisForm);
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-		// Grab the current aHistopathID from the session
-		String aHistopathologyID = request.getParameter("aHistopathologyID");
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward saveMetastasis(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.debug("<HistopathologyAction saveMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
-				+ aHistopathologyID + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
-				+ "\n\t organTissueCode: " + assocMetastasisForm.getOrganTissueCode() + "\n\t diseaseName: "
-				+ assocMetastasisForm.getDiagnosisName() + "\n\t diseaseCode: "
-				+ assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
-				+ assocMetastasisForm.getDiagnosisName() + "\n\t ageOfOnset: " + assocMetastasisForm.getAgeOfOnset()
-				+ "\n\t weightOfTumor: " + assocMetastasisForm.getWeightOfTumor() + "\n\t volumeOfTumor: "
-				+ assocMetastasisForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
-				+ assocMetastasisForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
-				+ assocMetastasisForm.getMethodOfObservation() + "\n\t grossDescription: "
-				+ assocMetastasisForm.getGrossDescription() + "\n\t microscopicDescription: "
-				+ assocMetastasisForm.getMicroscopicDescription() + "\n\t observation: "
-				+ assocMetastasisForm.getObservation() + "\n\t methodOfObservation: "
-				+ assocMetastasisForm.getMethodOfObservation() + "\n\t comparativeData: "
-				+ assocMetastasisForm.getComparativeData() + "\n\t comments: " + assocMetastasisForm.getComments()
-				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<HistopathologyAction> Entering 'saveMetastasis' method");
 
-		String theForward = "AnimalModelTreePopulateAction";
+        // Create a form to edit
+        AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, assocMetastasisForm);
 
-		try {
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-			HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
+        // Grab the current aHistopathID from the session
+        String aHistopathologyID = request.getParameter("aHistopathologyID");
 
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+        log.debug("<HistopathologyAction saveMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
+                + aHistopathologyID + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
+                + "\n\t organTissueCode: " + assocMetastasisForm.getOrganTissueCode() + "\n\t diseaseName: "
+                + assocMetastasisForm.getDiagnosisName() + "\n\t diseaseCode: "
+                + assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
+                + assocMetastasisForm.getDiagnosisName() + "\n\t ageOfOnset: " + assocMetastasisForm.getAgeOfOnset()
+                + "\n\t weightOfTumor: " + assocMetastasisForm.getWeightOfTumor() + "\n\t volumeOfTumor: "
+                + assocMetastasisForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
+                + assocMetastasisForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
+                + assocMetastasisForm.getMethodOfObservation() + "\n\t grossDescription: "
+                + assocMetastasisForm.getGrossDescription() + "\n\t microscopicDescription: "
+                + assocMetastasisForm.getMicroscopicDescription() + "\n\t observation: "
+                + assocMetastasisForm.getObservation() + "\n\t methodOfObservation: "
+                + assocMetastasisForm.getMethodOfObservation() + "\n\t comparativeData: "
+                + assocMetastasisForm.getComparativeData() + "\n\t comments: " + assocMetastasisForm.getComments()
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-			Histopathology theParentHistopathology = histopathologyManager.get(aHistopathologyID);
+        String theForward = "AnimalModelTreePopulateAction";
 
-			theAnimalModelManager.addAssociatedMetastasis(theAnimalModel, theParentHistopathology, assocMetastasisForm);
+        try {
 
-			log.info("New metastasis created");
+            HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
 
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.creation.successful"));
-			saveErrors(request, msg);
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-			log.info("<HistopathologyAction> Exiting 'saveMetastasis' method");
+            Histopathology theParentHistopathology = histopathologyManager.get(aHistopathologyID);
 
-		} catch (Exception e) {
-			log.error("Exception ocurred creating AssociatedExpression", e);
+            theAnimalModelManager.addAssociatedMetastasis(theAnimalModel, theParentHistopathology, assocMetastasisForm);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            log.info("New metastasis created");
 
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.creation.successful"));
+            saveErrors(request, msg);
 
+            log.info("<HistopathologyAction> Exiting 'saveMetastasis' method");
+
+        } catch (Exception e) {
+            log.error("Exception ocurred creating AssociatedExpression", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+
+        log.trace("Exiting save");
+        return mapping.findForward(theForward);
+    }
 
 }

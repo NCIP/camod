@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.8 2005-11-03 21:47:48 georgeda Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.9 2005-11-09 00:17:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/03 21:47:48  georgeda
+ * Changed EVS api
+ *
  * Revision 1.7  2005/11/02 19:02:55  pandyas
  * Added e-mail functionality
  *
@@ -54,9 +57,10 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         super.save(geneDelivery);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.debug("In GeneDeliveryManagerImpl.remove");
-        super.remove(id, GeneDelivery.class);
+        inAnimalModel.getGeneDeliveryCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public GeneDelivery create(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryForm) throws Exception {

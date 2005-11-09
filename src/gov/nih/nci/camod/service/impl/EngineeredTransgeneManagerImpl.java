@@ -49,9 +49,10 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         super.save(engineeredGene);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In EngineeredTransgeneManagerImpl.remove");
-        super.remove(id, EngineeredGene.class);
+        inAnimalModel.getEngineeredGeneCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public Transgene create(EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request)

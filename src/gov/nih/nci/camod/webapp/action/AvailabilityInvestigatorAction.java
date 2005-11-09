@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.4 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.5 2005-11-09 00:17:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.3  2005/10/28 14:50:55  georgeda
  * Fixed null pointer problem
  *
@@ -40,124 +43,131 @@ import org.apache.struts.action.ActionMessages;
  */
 public class AvailabilityInvestigatorAction extends BaseAction {
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.info("<AvailabilityInvestigatorAction> Entering edit");
+        log.info("<AvailabilityInvestigatorAction> Entering edit");
 
-		// Create a form to edit
-		AvailabilityForm availabilityForm = (AvailabilityForm) form;
+        // Create a form to edit
+        AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-		// Grab the current aAvailabilityID from the session
-		String aAvailabilityID = request.getParameter("aAvailabilityID");
+        // Grab the current aAvailabilityID from the session
+        String aAvailabilityID = request.getParameter("aAvailabilityID");
 
-		System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
-				+ availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
+                + availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		/* Create all the manager objects needed for Screen */
-		AvailabilityManager availabilityManager = (AvailabilityManager) getBean("availabilityManager");
+        /* Create all the manager objects needed for Screen */
+        AvailabilityManager availabilityManager = (AvailabilityManager) getBean("availabilityManager");
 
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {
+        try {
 
             if ("Delete".equals(theAction)) {
-				availabilityManager.remove(aAvailabilityID);
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.delete.successful"));
-				saveErrors(request, msg);
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-			} else {
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-				AnimalAvailability theAvailability = availabilityManager.get(aAvailabilityID);
+                availabilityManager.remove(aAvailabilityID, theAnimalModel);
 
-				availabilityManager.updateInvestigatorAvailability(availabilityForm, theAvailability);
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.delete.successful"));
+                saveErrors(request, msg);
 
-				// Add a message to be displayed in submitOverview.jsp saying
-				// you've
-				// created a new model successfully
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.creation.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
-			log.error("Exception ocurred creating Investigator Availability", e);
+            } else {
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+                AnimalAvailability theAvailability = availabilityManager.get(aAvailabilityID);
 
-		log.info("<AvailabilityInvestigatorAction> Exiting edit");
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+                availabilityManager.updateInvestigatorAvailability(availabilityForm, theAvailability);
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+                // Add a message to be displayed in submitOverview.jsp saying
+                // you've
+                // created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.creation.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (Exception e) {
+            log.error("Exception ocurred creating Investigator Availability", e);
 
-		log.info("<AvailabilityInvestigatorAction> Entering save");
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-		// Grab the current modelID from the session
-		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+        log.info("<AvailabilityInvestigatorAction> Exiting edit");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-		// Create a form to edit
-		AvailabilityForm availabilityForm = (AvailabilityForm) form;
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
-				+ availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<AvailabilityInvestigatorAction> Entering save");
 
-		/* Create all the manager objects needed for Screen */
-		AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		/* Set modelID in AnimalModel object */
-		AnimalModel animalModel = theAnimalModelManager.get(modelID);
+        // Create a form to edit
+        AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-		try {
-			theAnimalModelManager.addInvestigatorAvailability(animalModel, availabilityForm);
+        System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
+                + availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-			log.info("New Investigator Availability created");
+        /* Create all the manager objects needed for Screen */
+        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.creation.successful"));
-			saveErrors(request, msg);
+        /* Set modelID in AnimalModel object */
+        AnimalModel animalModel = theAnimalModelManager.get(modelID);
 
-		} catch (Exception e) {
-			log.error("Exception ocurred creating Investigator Availability", e);
+        try {
+            theAnimalModelManager.addInvestigatorAvailability(animalModel, availabilityForm);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            log.info("New Investigator Availability created");
 
-		log.trace("<AvailabilityInvestigatorAction> Exiting save");
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.creation.successful"));
+            saveErrors(request, msg);
+
+        } catch (Exception e) {
+            log.error("Exception ocurred creating Investigator Availability", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+
+        log.trace("<AvailabilityInvestigatorAction> Exiting save");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
 }

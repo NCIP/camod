@@ -19,7 +19,7 @@ public interface InducedMutationManager {
 	
 	public void save(InducedMutation InducedMutation) throws Exception;
 	
-	public void remove(String id) throws Exception;
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 	
 	public InducedMutation create(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception;
 	

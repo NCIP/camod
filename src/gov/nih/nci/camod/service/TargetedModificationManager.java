@@ -21,7 +21,7 @@ public interface TargetedModificationManager {
 	
 	public void save(TargetedModification TargetedModification) throws Exception;
 	
-	public void remove(String id) throws Exception;
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 	
 	public TargetedModification create(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationForm, HttpServletRequest request) throws Exception;
 	

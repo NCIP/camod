@@ -92,7 +92,14 @@ public final class EngineeredTransgeneAction extends BaseAction {
 			EngineeredTransgeneManager engineeredTransgeneManager = (EngineeredTransgeneManager) getBean("engineeredTransgeneManager");
 
             if ("Delete".equals(theAction)) {
-				engineeredTransgeneManager.remove(aEngineeredTransgeneID);
+                
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                
+				engineeredTransgeneManager.remove(aEngineeredTransgeneID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("engineeredtransgene.delete.successful"));

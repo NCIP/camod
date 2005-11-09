@@ -18,5 +18,5 @@ public interface ClinicalMarkerManager {
     public void update(ClinicalMarkerData inClinicalMarkerData, ClinicalMarker inClinicalMarker)
     throws Exception; 
     
-    public void remove(String id) throws Exception;    
+    public void remove(String id, Histopathology inHistopathology) throws Exception;    
 }

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLineManagerImpl.java,v 1.9 2005-11-03 21:47:48 georgeda Exp $
+ * $Id: CellLineManagerImpl.java,v 1.10 2005-11-09 00:17:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/03 21:47:48  georgeda
+ * Changed EVS api
+ *
  * Revision 1.8  2005/11/01 18:14:28  schroedn
  * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
  *
@@ -14,8 +17,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.Organ;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.CellLineManager;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.webapp.form.CellLineData;
@@ -45,9 +47,11 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 		super.save(cellLine);    	     
 	}
 
-	public void remove(String id) throws Exception {		
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception {		
 		log.trace("In CellLineManagerImpl.remove");		
-		super.remove(id, CellLine.class);
+        
+        inAnimalModel.getCellLineCollection().remove(get(id));
+		super.save(inAnimalModel);
 	}
 
     public CellLine create(CellLineData inCellLineData) throws Exception {

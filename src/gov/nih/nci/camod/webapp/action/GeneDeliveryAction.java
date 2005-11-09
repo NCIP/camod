@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.14 2005-11-02 21:48:09 georgeda Exp $
+ * $Id: GeneDeliveryAction.java,v 1.15 2005-11-09 00:17:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/02 21:48:09  georgeda
+ * Fixed validate
+ *
  * Revision 1.13  2005/11/02 19:02:08  pandyas
  * Added e-mail functionality
  *
@@ -71,20 +74,20 @@ public final class GeneDeliveryAction extends BaseAction {
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
         try {
+            // retrieve animal model by it's id         
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);                
 
             GeneDeliveryManager theGeneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
             if ("Delete".equals(theAction)) {
 
-                theGeneDeliveryManager.remove(aTherapyID);
+                theGeneDeliveryManager.remove(aTherapyID, theAnimalModel);
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.delete.successful"));
                 saveErrors(request, msg);
 
             } else {
-    	        // retrieve animal model by it's id	        
-    	        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-    	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);             	
 
                 GeneDelivery theGeneDelivery = theGeneDeliveryManager.get(aTherapyID);
                 theGeneDeliveryManager.update(theAnimalModel, geneDeliveryForm, theGeneDelivery);

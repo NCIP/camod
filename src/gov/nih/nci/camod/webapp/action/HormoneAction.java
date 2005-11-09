@@ -1,7 +1,10 @@
 /**
- * $Id: HormoneAction.java,v 1.8 2005-11-02 21:48:09 georgeda Exp $
+ * $Id: HormoneAction.java,v 1.9 2005-11-09 00:17:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/02 21:48:09  georgeda
+ * Fixed validate
+ *
  * Revision 1.7  2005/11/02 19:02:08  pandyas
  * Added e-mail functionality
  *
@@ -56,9 +59,6 @@ public class HormoneAction extends BaseAction {
 		// Grab the current Therapy we are working with related to this
 		// animalModel
 		String aTherapyID = request.getParameter("aTherapyID");
-		
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		HormoneForm hormoneForm = (HormoneForm) form;
 
@@ -72,18 +72,20 @@ public class HormoneAction extends BaseAction {
 
 		try {
 
+            // Grab the current modelID from the session
+            String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+            
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID);
+				therapyManager.remove(aTherapyID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("hormone.delete.successful"));
 				saveErrors(request, msg);
 
-			} else {
-		        // retrieve animal model by it's id	        
-		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);				
-				
+			} else {				
 				Therapy theTherapy = therapyManager.get(aTherapyID);
 				therapyManager.update(theAnimalModel, hormoneForm, theTherapy);
 

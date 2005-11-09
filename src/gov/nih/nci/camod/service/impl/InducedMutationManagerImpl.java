@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.14 2005-11-03 19:23:47 schroedn Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.15 2005-11-09 00:17:16 georgeda Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/03 19:23:47  schroedn
+ * Minor bug fixes
+ *
  * Revision 1.13  2005/11/02 19:44:20  schroedn
  * Merged changes, modified Image function, fix MGI num bug
  *
@@ -62,9 +65,10 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         super.save(InducedMutation);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In InducedMutationManagerImpl.remove");
-        super.remove(id, InducedMutation.class);
+        inAnimalModel.getEngineeredGeneCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public InducedMutation create(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData) throws Exception {

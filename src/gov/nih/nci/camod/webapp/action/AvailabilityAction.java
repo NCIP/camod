@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityAction.java,v 1.5 2005-10-31 13:46:28 georgeda Exp $
+ * $Id: AvailabilityAction.java,v 1.6 2005-11-09 00:17:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/31 13:46:28  georgeda
+ * Updates to handle back arrow
+ *
  * Revision 1.4  2005/10/28 14:50:55  georgeda
  * Fixed null pointer problem
  *
@@ -75,7 +78,14 @@ public class AvailabilityAction extends BaseAction {
 		try {
 
             if ("Delete".equals(theAction)) {
-				availabilityManager.remove(aAvailabilityID);
+                
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                
+				availabilityManager.remove(aAvailabilityID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.delete.successful"));

@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.8 2005-11-01 18:14:28 schroedn Exp $
+ * $Id: PublicationManagerImpl.java,v 1.9 2005-11-09 00:17:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/01 18:14:28  schroedn
+ * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
+ *
  * Revision 1.7  2005/10/27 12:52:50  georgeda
  * Refactor of publication manager
  *
@@ -9,6 +12,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.PublicationStatus;
@@ -24,106 +28,103 @@ import java.util.List;
  */
 public class PublicationManagerImpl extends BaseManager implements PublicationManager {
 
-	public Publication create(PublicationData inPublicationData) 
-		throws Exception {
-		
-		Publication thePublication = new Publication();
-		populate(inPublicationData, thePublication);
+    public Publication create(PublicationData inPublicationData) throws Exception {
 
-		return thePublication;
-	}
+        Publication thePublication = new Publication();
+        populate(inPublicationData, thePublication);
 
-	public void update(PublicationData inPublicationData, Publication inPublication) 
-		throws Exception {
-		
-		populate(inPublicationData, inPublication);
-		save( inPublication );
-	}
+        return thePublication;
+    }
 
-	public void addCellLinePublication( PublicationData inPublicationData, CellLine inCellLine ) 
-		throws Exception {
-		
-		Publication inPublication = create( inPublicationData );
-		inCellLine.addPublication( inPublication );		 		
-		CellLineManagerSingleton.instance().save( inCellLine );		
-	}
-	public void addTherapyPublication( PublicationData inPublicationData, Therapy inTherapy )
-		throws Exception {
-	
-		Publication inPublication = create( inPublicationData );
-		inTherapy.addPublication( inPublication );		 		
-		TherapyManagerSingleton.instance().save( inTherapy );				
-	}
-	
-	private void populate(PublicationData inPublicationData, Publication inPublication) 
-		throws Exception {
+    public void update(PublicationData inPublicationData, Publication inPublication) throws Exception {
 
-		inPublication.setAuthors(inPublicationData.getAuthors());
-		inPublication.setTitle(inPublicationData.getTitle());
-		inPublication.setJournal(inPublicationData.getJournal());
-		inPublication.setVolume(inPublicationData.getVolume());
+        populate(inPublicationData, inPublication);
+        save(inPublication);
+    }
 
-		String strPub = inPublicationData.getPmid().trim();
-		inPublication.setPmid(Long.valueOf(strPub));
+    public void addCellLinePublication(PublicationData inPublicationData, CellLine inCellLine) throws Exception {
 
-		strPub = inPublicationData.getStartPage().trim();
-		inPublication.setStartPage(Long.valueOf(strPub));
+        Publication inPublication = create(inPublicationData);
+        inCellLine.addPublication(inPublication);
+        CellLineManagerSingleton.instance().save(inCellLine);
+    }
 
-		strPub = inPublicationData.getEndPage().trim();
-		inPublication.setEndPage(Long.valueOf(strPub));
+    public void addTherapyPublication(PublicationData inPublicationData, Therapy inTherapy) throws Exception {
 
-		strPub = inPublicationData.getYear().trim();
-		inPublication.setYear(Long.valueOf(strPub));
+        Publication inPublication = create(inPublicationData);
+        inTherapy.addPublication(inPublication);
+        TherapyManagerSingleton.instance().save(inTherapy);
+    }
 
-		if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes")) {
-			inPublication.setFirstTimeReported(new Boolean(true));
-		} else {
-			inPublication.setFirstTimeReported(new Boolean(false));
-		}
+    private void populate(PublicationData inPublicationData, Publication inPublication) throws Exception {
 
-		PublicationStatus pubStatus = PublicationManagerSingleton.instance().getPublicationStatusByName(
-				inPublicationData.getName());
-		inPublication.setPublicationStatus(pubStatus);
-	}
+        inPublication.setAuthors(inPublicationData.getAuthors());
+        inPublication.setTitle(inPublicationData.getTitle());
+        inPublication.setJournal(inPublicationData.getJournal());
+        inPublication.setVolume(inPublicationData.getVolume());
 
-	public List getAll() throws Exception {
+        String strPub = inPublicationData.getPmid().trim();
+        inPublication.setPmid(Long.valueOf(strPub));
 
-		log.trace("In PublicationManagerImpl.getAll");
+        strPub = inPublicationData.getStartPage().trim();
+        inPublication.setStartPage(Long.valueOf(strPub));
 
-		return super.getAll(Publication.class);
-	}
+        strPub = inPublicationData.getEndPage().trim();
+        inPublication.setEndPage(Long.valueOf(strPub));
 
-	public Publication get(String id) throws Exception {
-		log.trace("In PublicationManagerImpl.get");
-		return (Publication) super.get(id, Publication.class);
-	}
+        strPub = inPublicationData.getYear().trim();
+        inPublication.setYear(Long.valueOf(strPub));
 
-	public void save(Publication publication) throws Exception {
-		log.trace("In PublicationManagerImpl.save");
-		super.save(publication);
-	}
+        if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes")) {
+            inPublication.setFirstTimeReported(new Boolean(true));
+        } else {
+            inPublication.setFirstTimeReported(new Boolean(false));
+        }
 
-	public PublicationStatus getPublicationStatusByName(String inName) throws Exception {
+        PublicationStatus pubStatus = PublicationManagerSingleton.instance().getPublicationStatusByName(
+                inPublicationData.getName());
+        inPublication.setPublicationStatus(pubStatus);
+    }
 
-		log.trace("In PublicationManagerImpl.getPublicationStatusByName");
+    public List getAll() throws Exception {
 
-		PublicationStatus pubStatus = null;
+        log.trace("In PublicationManagerImpl.getAll");
 
-		// The following two objects are needed for eQBE.
-		PublicationStatus thePubStatus = new PublicationStatus();
-		thePubStatus.setName(inName);
+        return super.getAll(Publication.class);
+    }
 
-		List theList = Search.query(thePubStatus);
+    public Publication get(String id) throws Exception {
+        log.trace("In PublicationManagerImpl.get");
+        return (Publication) super.get(id, Publication.class);
+    }
 
-		if (theList != null && theList.size() > 0) {
-			pubStatus = (PublicationStatus) theList.get(0);
-		}
+    public void save(Publication publication) throws Exception {
+        log.trace("In PublicationManagerImpl.save");
+        super.save(publication);
+    }
 
-		return pubStatus;
-	}
+    public PublicationStatus getPublicationStatusByName(String inName) throws Exception {
 
-	public void remove(String id) throws Exception {
-		log.trace("In PublicationManagerImpl.remove");
-		super.remove(id, Publication.class);
-	}
+        log.trace("In PublicationManagerImpl.getPublicationStatusByName");
+
+        PublicationStatus pubStatus = null;
+
+        // The following two objects are needed for eQBE.
+        PublicationStatus thePubStatus = new PublicationStatus();
+        thePubStatus.setName(inName);
+
+        List theList = Search.query(thePubStatus);
+
+        if (theList != null && theList.size() > 0) {
+            pubStatus = (PublicationStatus) theList.get(0);
+        }
+
+        return pubStatus;
+    }
+
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+        log.trace("In PublicationManagerImpl.remove");
+        inAnimalModel.getPublicationCollection().remove(get(id));
+        super.save(inAnimalModel);
+    }
 }

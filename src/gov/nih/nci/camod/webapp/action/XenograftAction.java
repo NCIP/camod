@@ -18,156 +18,156 @@ import org.apache.struts.action.*;
  */
 public final class XenograftAction extends BaseAction {
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.debug("<XenograftAction> Entering edit");
+        log.debug("<XenograftAction> Entering edit");
 
-		// Create a form to edit
-		XenograftForm xenograftForm = (XenograftForm) form;
+        // Create a form to edit
+        XenograftForm xenograftForm = (XenograftForm) form;
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
-		String aXenograftID = request.getParameter("aXenograftID");
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        String aXenograftID = request.getParameter("aXenograftID");
 
-		log.info("<XenograftAction edit> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
-				+ "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
-				+ xenograftForm.getParentalCellLineName() + "\n\t getCellAmount: " + xenograftForm.getCellAmount()
-				+ "\n\t getHarvestDate: " + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
-				+ xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
-				+ xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
-				+ xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()
-				+ "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
-				+ xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
-				+ xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
-				+ xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<XenograftAction edit> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
+                + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
+                + xenograftForm.getParentalCellLineName() + "\n\t getCellAmount: " + xenograftForm.getCellAmount()
+                + "\n\t getHarvestDate: " + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
+                + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
+                + xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
+                + xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()
+                + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
+                + xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
+                + xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
+                + xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {
-			XenograftManager xenograftManager = (XenograftManager) getBean("xenograftManager");
+        try {
+            XenograftManager xenograftManager = (XenograftManager) getBean("xenograftManager");
 
-			if ("Delete".equals(theAction)) {
-				xenograftManager.remove(aXenograftID);
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.delete.successful"));
-				saveErrors(request, msg);
+            if ("Delete".equals(theAction)) {
+                xenograftManager.remove(aXenograftID, theAnimalModel);
 
-			} else {
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.delete.successful"));
+                saveErrors(request, msg);
 
-				// retrieve model and update w/ new values
-				AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-				AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+            } else {
 
-				Xenograft theXenograft = xenograftManager.get(aXenograftID);
+                Xenograft theXenograft = xenograftManager.get(aXenograftID);
 
-				xenograftManager.update(xenograftForm, theXenograft, theAnimalModel);
+                xenograftManager.update(xenograftForm, theXenograft, theAnimalModel);
 
-				// Add a message to be displayed in submitOverview.jsp saying
-				// you've
-				// created a new model successfully
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.edit.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
-			log.error("Exception ocurred creating Xenograft", e);
+                // Add a message to be displayed in submitOverview.jsp saying
+                // you've
+                // created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (Exception e) {
+            log.error("Exception ocurred creating Xenograft", e);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-		log.debug("<XenograftAction> Exiting edit");
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+        log.debug("<XenograftAction> Exiting edit");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.trace("<XenograftAction> Entering save");
+        log.trace("<XenograftAction> Entering save");
 
-		// Create a form to edit
-		XenograftForm xenograftForm = (XenograftForm) form;
+        // Create a form to edit
+        XenograftForm xenograftForm = (XenograftForm) form;
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		log.info("<XenograftAction save> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
-				+ "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
-				+ xenograftForm.getParentalCellLineName() + "\n\t getCellAmount: " + xenograftForm.getCellAmount()
-				+ "\n\t getHarvestDate: " + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
-				+ xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
-				+ xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
-				+ xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()
-				+ "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
-				+ xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
-				+ xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
-				+ xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<XenograftAction save> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
+                + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
+                + xenograftForm.getParentalCellLineName() + "\n\t getCellAmount: " + xenograftForm.getCellAmount()
+                + "\n\t getHarvestDate: " + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
+                + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
+                + xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
+                + xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()
+                + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
+                + xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
+                + xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
+                + xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+        try {
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-			theAnimalModelManager.addXenograft(theAnimalModel, xenograftForm);
+            theAnimalModelManager.addXenograft(theAnimalModel, xenograftForm);
 
-			log.info("New Xenograft created");
+            log.info("New Xenograft created");
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.creation.successful"));
-			saveErrors(request, msg);
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.creation.successful"));
+            saveErrors(request, msg);
 
-		} catch (Exception e) {
-			log.error("Exception ocurred creating Xenograft", e);
+        } catch (Exception e) {
+            log.error("Exception ocurred creating Xenograft", e);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-		log.trace("<XenograftAction> Exiting save");
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
+        log.trace("<XenograftAction> Exiting save");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-	public ActionForward SetStrainDropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    public ActionForward SetStrainDropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		String speciesName = request.getParameter("speciesName");
+        String speciesName = request.getParameter("speciesName");
 
-		System.out.println("<SetStrainDropdown execute> speciesName: " + speciesName);
+        System.out.println("<SetStrainDropdown execute> speciesName: " + speciesName);
 
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, speciesName);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, speciesName);
 
-		XenograftForm xenograftForm = (XenograftForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
-		return mapping.findForward("submitTransplantXenograft");
-	}
+        XenograftForm xenograftForm = (XenograftForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
+        return mapping.findForward("submitTransplantXenograft");
+    }
 }

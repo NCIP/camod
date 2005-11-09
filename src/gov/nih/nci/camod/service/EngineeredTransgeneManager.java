@@ -1,7 +1,6 @@
 package gov.nih.nci.camod.service;
 
-import gov.nih.nci.camod.domain.EngineeredGene;
-import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
 
@@ -17,7 +16,7 @@ public interface EngineeredTransgeneManager {
 
     public void save(Transgene engineeredGene) throws Exception;
 
-    public void remove(String id) throws Exception;
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 
     public Transgene create(EngineeredTransgeneData inEngineeredTransgeneData, HttpServletRequest request) throws Exception;
 

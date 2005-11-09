@@ -44,9 +44,10 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         super.save(GenomicSegment);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In GenomicSegmentManagerImpl.remove");
-        super.remove(id, GenomicSegment.class);
+        inAnimalModel.getEngineeredGeneCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public GenomicSegment create(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,

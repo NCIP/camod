@@ -37,9 +37,10 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         super.save(TargetedModification);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In TargetedModificationManagerImpl.remove");
-        super.remove(id, TargetedModification.class);
+        inAnimalModel.getEngineeredGeneCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public TargetedModification create(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData, HttpServletRequest request)

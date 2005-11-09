@@ -68,7 +68,13 @@ public final class GenomicSegmentAction extends BaseAction {
 				
 				log.info("GenomicSegment delete");
 				
-				genomicSegmentManager.remove(aGenomicSegmentID);
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                
+				genomicSegmentManager.remove(aGenomicSegmentID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.delete.successful"));

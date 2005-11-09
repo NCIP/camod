@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorAction.java,v 1.16 2005-11-02 21:48:17 georgeda Exp $
+ * $Id: EnvironmentalFactorAction.java,v 1.17 2005-11-09 00:17:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/11/02 21:48:17  georgeda
+ * Fixed validate
+ *
  * Revision 1.15  2005/11/02 19:02:08  pandyas
  * Added e-mail functionality
  *
@@ -118,7 +121,14 @@ public final class EnvironmentalFactorAction extends BaseAction {
 
 		try {
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID);
+                
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                
+				therapyManager.remove(aTherapyID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("environmentalfactor.delete.successful"));

@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.4 2005-11-07 19:15:17 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.5 2005-11-09 00:17:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/07 19:15:17  pandyas
+ * modified for clinical marker screen
+ *
  * Revision 1.3  2005/11/04 14:44:25  georgeda
  * Cleaned up histopathology/assoc metastasis
  *
@@ -42,9 +45,25 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         super.save(histopathology);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In HistopathologyManagerImpl.save");
-        super.remove(id, Histopathology.class);
+        
+        Histopathology theHistopathology = get(id);
+        
+        inAnimalModel.getHistopathologyCollection().remove(theHistopathology);
+        super.save(inAnimalModel);
+    }
+
+    public void removeAssociatedMetastasis(String id, Histopathology inHistopathology) throws Exception {
+
+        log.info("Entering HistopathologyManagerImpl.createMetastasis");
+
+        Histopathology theMetastasis = get(id);
+
+        inHistopathology.getMetastatisCollection().remove(theMetastasis);
+        save(inHistopathology);
+
+        log.info("Exiting HistopathologyManagerImpl.createMetastasis");
     }
 
     public Histopathology createHistopathology(HistopathologyData inHistopathologyData) throws Exception {
@@ -115,7 +134,7 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
             inHistopathology.getOrgan().addHistopathology(inHistopathology);
             System.out.println("Added histopathology to Organ");
         }
-        
+
         /*
          * Add a Disease to AnimalModel with correct IDs, conceptCode
          */

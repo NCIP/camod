@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.8 2005-11-02 21:48:09 georgeda Exp $
+ * $Id: SurgeryAction.java,v 1.9 2005-11-09 00:17:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/02 21:48:09  georgeda
+ * Fixed validate
+ *
  * Revision 1.7  2005/11/02 19:02:08  pandyas
  * Added e-mail functionality
  *
@@ -74,7 +77,7 @@ public class SurgeryAction extends BaseAction {
 	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);			
 
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID);
+				therapyManager.remove(aTherapyID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.delete.successful"));

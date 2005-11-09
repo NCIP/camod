@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.11 2005-11-02 21:48:09 georgeda Exp $
+ * $Id: ViralTreatmentAction.java,v 1.12 2005-11-09 00:17:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/02 21:48:09  georgeda
+ * Fixed validate
+ *
  * Revision 1.10  2005/11/02 19:02:08  pandyas
  * Added e-mail functionality
  *
@@ -81,7 +84,7 @@ public class ViralTreatmentAction extends BaseAction {
 	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID); 			
 			
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID);
+				therapyManager.remove(aTherapyID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("viralTreatment.delete.successful"));

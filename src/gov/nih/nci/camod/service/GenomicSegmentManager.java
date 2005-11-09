@@ -22,7 +22,7 @@ public interface GenomicSegmentManager {
 	
 	public void save(GenomicSegment GenomicSegment) throws Exception;
 	
-	public void remove(String id) throws Exception;
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 	
 	public GenomicSegment create(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData, HttpServletRequest request) throws Exception;
 	

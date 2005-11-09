@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationAction.java,v 1.11 2005-11-01 20:48:41 schroedn Exp $
+ * $Id: PublicationAction.java,v 1.12 2005-11-09 00:17:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/01 20:48:41  schroedn
+ * Fixed bugs concerning "Fill in Fields"
+ *
  * Revision 1.10  2005/11/01 18:14:28  schroedn
  * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
  *
@@ -47,61 +50,55 @@ import org.apache.struts.action.ActionMessages;
  * PublicationAction Class
  */
 public final class PublicationAction extends BaseAction {
-	
-	/**
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-    public ActionForward addCellLinePublication(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
-    	throws Exception {
-   	
+
+    /**
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward addCellLinePublication(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
         log.debug("Entering addCellLinePublication method");
 
         PublicationForm pubForm = (PublicationForm) form;
-        
+
         String aCellID = request.getParameter("aCellID");
-        
-        pubForm.setACellID( aCellID );
-        
+
+        pubForm.setACellID(aCellID);
+
         log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
-                + "\n\t Aurthur: " + pubForm.getAuthors() 
-                + "\n\t Year: " + pubForm.getYear() 
-                + "\n\t Volume: " + pubForm.getVolume() 
-                + "\n\t PMID: " + pubForm.getPmid() 
-                + "\n\t Start Page: " + pubForm.getStartPage() 
-                + "\n\t End Page: " + pubForm.getEndPage()
-                + "\n\t Title: " + pubForm.getTitle() 
-                + "\n\t journal: " + pubForm.getJournal() 
-                + "\n\t ACellID: "  + pubForm.getACellID()
-                + "\n\t ATherapyID: "  + pubForm.getATherapyID()
-                + "\n\t APubID: "  + pubForm.getAPubID()
-                + "\n\t FirstTimeReported: "  + pubForm.getFirstTimeReported() + "\n\t user: "
+                + "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
+                + pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
+                + pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
+                + pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t ACellID: "
+                + pubForm.getACellID() + "\n\t ATherapyID: " + pubForm.getATherapyID() + "\n\t APubID: "
+                + pubForm.getAPubID() + "\n\t FirstTimeReported: " + pubForm.getFirstTimeReported() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
-    	
+
         try {
 
-            if( "Fill in Fields".equals(theAction)) {
-            	return mapping.findForward("PubMedPopulateAction");
+            if ("Fill in Fields".equals(theAction)) {
+                return mapping.findForward("PubMedPopulateAction");
             } else {
-                	
-	    		CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
-	        	CellLine theCellLine = theCellLineManager.get(aCellID);		
-	        	
-	        	PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
-	        	publicationManager.addCellLinePublication( pubForm, theCellLine );
-	        	
-	            ActionMessages msg = new ActionMessages();
-	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
-	            saveErrors(request, msg);
+
+                CellLineManager theCellLineManager = (CellLineManager) getBean("cellLineManager");
+                CellLine theCellLine = theCellLineManager.get(aCellID);
+
+                PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
+                publicationManager.addCellLinePublication(pubForm, theCellLine);
+
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
+                saveErrors(request, msg);
             }
-            
+
         } catch (Exception e) {
 
             log.error("Unable to add a publication: ", e);
@@ -113,61 +110,55 @@ public final class PublicationAction extends BaseAction {
 
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
-    
-	/**
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-    public ActionForward addTherapyPublication(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
-    	throws Exception {
-   	
+
+    /**
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward addTherapyPublication(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
         log.debug("Entering addCellLinePublication method");
 
         PublicationForm pubForm = (PublicationForm) form;
-        
+
         String aTherapyID = request.getParameter("aTherapyID");
-   
-        pubForm.setATherapyID( aTherapyID );
-        
+
+        pubForm.setATherapyID(aTherapyID);
+
         log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
-                + "\n\t Aurthur: " + pubForm.getAuthors() 
-                + "\n\t Year: " + pubForm.getYear() 
-                + "\n\t Volume: " + pubForm.getVolume() 
-                + "\n\t PMID: " + pubForm.getPmid() 
-                + "\n\t Start Page: " + pubForm.getStartPage() 
-                + "\n\t End Page: " + pubForm.getEndPage()
-                + "\n\t Title: " + pubForm.getTitle() 
-                + "\n\t journal: " + pubForm.getJournal() 
-                + "\n\t ACellID: "  + pubForm.getACellID()
-                + "\n\t ATherapyID: "  + pubForm.getATherapyID()
-                + "\n\t APubID: "  + pubForm.getAPubID()
-                + "\n\t FirstTimeReported: "  + pubForm.getFirstTimeReported() + "\n\t user: "
+                + "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
+                + pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
+                + pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
+                + pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t ACellID: "
+                + pubForm.getACellID() + "\n\t ATherapyID: " + pubForm.getATherapyID() + "\n\t APubID: "
+                + pubForm.getAPubID() + "\n\t FirstTimeReported: " + pubForm.getFirstTimeReported() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
-        
+
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-        try {        	
+        try {
 
-            if( "Fill in Fields".equals(theAction)) {
-            	return mapping.findForward("PubMedPopulateAction");
+            if ("Fill in Fields".equals(theAction)) {
+                return mapping.findForward("PubMedPopulateAction");
             } else {
-            
-	    		TherapyManager theTherapyManager = (TherapyManager) getBean("therapyManager");
-	        	Therapy theTherapy = theTherapyManager.get(aTherapyID);		
-	        	
-	        	PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
-	        	publicationManager.addTherapyPublication( pubForm, theTherapy );
-	        	
-	            ActionMessages msg = new ActionMessages();
-	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
-	            saveErrors(request, msg);
+
+                TherapyManager theTherapyManager = (TherapyManager) getBean("therapyManager");
+                Therapy theTherapy = theTherapyManager.get(aTherapyID);
+
+                PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
+                publicationManager.addTherapyPublication(pubForm, theTherapy);
+
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
+                saveErrors(request, msg);
             }
-            
+
         } catch (Exception e) {
 
             log.error("Unable to add a publication: ", e);
@@ -179,7 +170,7 @@ public final class PublicationAction extends BaseAction {
 
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
-    
+
     /**
      * Edit
      * 
@@ -197,41 +188,41 @@ public final class PublicationAction extends BaseAction {
 
         // Create a form to edit
         PublicationForm pubForm = (PublicationForm) form;
-        
+
         String aPubID = pubForm.getAPubID();
-        
-        //pubForm.setAPubID( aPubID );
-        
+
+        // pubForm.setAPubID( aPubID );
+
         log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
-                + "\n\t Aurthur: " + pubForm.getAuthors() 
-                + "\n\t Year: " + pubForm.getYear() 
-                + "\n\t Volume: " + pubForm.getVolume() 
-                + "\n\t PMID: " + pubForm.getPmid() 
-                + "\n\t Start Page: " + pubForm.getStartPage() 
-                + "\n\t End Page: " + pubForm.getEndPage()
-                + "\n\t Title: " + pubForm.getTitle() 
-                + "\n\t journal: " + pubForm.getJournal() 
-                + "\n\t FirstTimeReported: "  + pubForm.getFirstTimeReported()
-                + "\n\t ACellID: "  + pubForm.getACellID()
-                + "\n\t ATherapyID: "  + pubForm.getATherapyID()
-                + "\n\t APubID: "  + pubForm.getAPubID()
-                + "\n\t user: "  + (String) request.getSession().getAttribute("camod.loggedon.username"));
-     
+                + "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
+                + pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
+                + pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
+                + pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
+                + pubForm.getFirstTimeReported() + "\n\t ACellID: " + pubForm.getACellID() + "\n\t ATherapyID: "
+                + pubForm.getATherapyID() + "\n\t APubID: " + pubForm.getAPubID() + "\n\t user: "
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
-        
+
         try {
-        	
+
             PublicationManager publicationManager = (PublicationManager) getBean("publicationManager");
-            
+
             if ("Delete".equals(theAction)) {
-                publicationManager.remove(aPubID);
-                
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+
+                publicationManager.remove(aPubID, theAnimalModel);
+
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.delete.successful"));
                 saveErrors(request, msg);
-                
-            } else if ( "Fill in Fields".equals(theAction)) {
-            	return mapping.findForward("PubMedPopulateAction");
+
+            } else if ("Fill in Fields".equals(theAction)) {
+                return mapping.findForward("PubMedPopulateAction");
             } else {
 
                 Publication thePublication = publicationManager.get(aPubID);
@@ -241,7 +232,7 @@ public final class PublicationAction extends BaseAction {
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.edit.successful"));
                 saveErrors(request, msg);
             }
-            
+
         } catch (Exception e) {
 
             log.error("Unable to update a publication: ", e);
@@ -254,15 +245,15 @@ public final class PublicationAction extends BaseAction {
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
-	/**
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
+    /**
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -271,35 +262,31 @@ public final class PublicationAction extends BaseAction {
         PublicationForm pubForm = (PublicationForm) form;
 
         log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
-                + "\n\t Aurthur: " + pubForm.getAuthors() 
-                + "\n\t Year: " + pubForm.getYear() 
-                + "\n\t Volume: " + pubForm.getVolume() 
-                + "\n\t PMID: " + pubForm.getPmid() 
-                + "\n\t Start Page: " + pubForm.getStartPage() 
-                + "\n\t End Page: " + pubForm.getEndPage()
-                + "\n\t Title: " + pubForm.getTitle() 
-                + "\n\t journal: " + pubForm.getJournal() 
-                + "\n\t FirstTimeReported: "  + pubForm.getFirstTimeReported() + "\n\t user: "
+                + "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
+                + pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
+                + pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
+                + pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t FirstTimeReported: "
+                + pubForm.getFirstTimeReported() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         /* Grab the current modelID from the session */
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);        
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
-        
+
         try {
-            if( "Fill in Fields".equals(theAction)) {
-            	return mapping.findForward("PubMedPopulateAction");
+            if ("Fill in Fields".equals(theAction)) {
+                return mapping.findForward("PubMedPopulateAction");
             } else {
-	            
-	            AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-	            AnimalModel animalModel = animalModelManager.get(modelID);
-	            animalModelManager.addPublication(animalModel, pubForm);
-	        	
-	            ActionMessages msg = new ActionMessages();
-	            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
-	            saveErrors(request, msg);
+
+                AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel animalModel = animalModelManager.get(modelID);
+                animalModelManager.addPublication(animalModel, pubForm);
+
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.creation.successful"));
+                saveErrors(request, msg);
             }
-            
+
         } catch (Exception e) {
 
             log.error("Unable to add a publication: ", e);

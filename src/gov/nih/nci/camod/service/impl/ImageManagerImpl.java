@@ -45,9 +45,11 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         super.save(Image);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In ImageManagerImpl.remove");
-        super.remove(id, Image.class);
+        
+        inAnimalModel.getImageCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath, String inStorageDirKey)

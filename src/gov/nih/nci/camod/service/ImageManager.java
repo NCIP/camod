@@ -20,7 +20,7 @@ public interface ImageManager {
 
     public void save(Image Image) throws Exception;
 
-    public void remove(String id) throws Exception;
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 
     public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath, String inStorageDirKey) throws Exception;
 

@@ -44,9 +44,11 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         super.save(xenograft);
     }
 
-    public void remove(String id) throws Exception {
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In XenograftManagerImpl.remove");
-        super.remove(id, Xenograft.class);
+
+        inAnimalModel.getXenograftCollection().remove(get(id));
+        super.save(inAnimalModel);
     }
 
     public Xenograft create(XenograftData inXenograftData, AnimalModel inAnimalModel) throws Exception {
@@ -55,8 +57,8 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
         Xenograft theXenograft = new Xenograft();
         populateXenograft(inXenograftData, theXenograft, inAnimalModel);
-        
-        log.info("<XenograftManagerImpl> Exiting XenograftManagerImpl.create");        
+
+        log.info("<XenograftManagerImpl> Exiting XenograftManagerImpl.create");
 
         return theXenograft;
     }
@@ -80,14 +82,14 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         log.info("Entering XenograftManagerImpl.populateXenograft");
 
         inXenograft.setName(inXenograftData.getName());
-        
+
         /* Set other adminstrative site or selected adminstrative site */
         // save directly in administrativeSite column of table
         if (inXenograftData.getAdministrativeSite().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            System.out.println("admin site equals other");        
+            System.out.println("admin site equals other");
             inXenograft.setAdministrativeSite(inXenograftData.getOtherAdministrativeSite());
-            //Send e-mail for other administrativeSite 
-            
+            // Send e-mail for other administrativeSite
+
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
             // Iterate through all the reciepts in the config file
@@ -117,12 +119,10 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
             } catch (Exception e) {
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
-            }            
-            
-            
-        }
-        else {
-        	inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
+            }
+
+        } else {
+            inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
         }
         inXenograft.setGeneticManipulation(inXenograftData.getGeneticManipulation());
         inXenograft.setModificationDescription(inXenograftData.getModificationDescription());

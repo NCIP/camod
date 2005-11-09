@@ -51,7 +51,14 @@ public final class InducedMutationAction extends BaseAction {
             InducedMutationManager inducedMutationManager = (InducedMutationManager) getBean("inducedMutationManager");
 
             if ("Delete".equals(theAction)) {
-                inducedMutationManager.remove(aInducedMutationID);
+                
+                // Grab the current modelID from the session
+                String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                
+                inducedMutationManager.remove(aInducedMutationID, theAnimalModel);
 
                 log.info("InducedMutation deleted");
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryManager.java,v 1.6 2005-11-02 19:03:25 pandyas Exp $
+ * $Id: GeneDeliveryManager.java,v 1.7 2005-11-09 00:17:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/02 19:03:25  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.5  2005/10/20 20:23:17  pandyas
  * added javadocs
  *
@@ -26,5 +29,5 @@ public interface GeneDeliveryManager {
 
     public void update(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryForm, GeneDelivery theGeneDelivery) throws Exception;
 
-    public void remove(String id) throws Exception;
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 }

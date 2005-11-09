@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManager.java,v 1.6 2005-10-20 20:43:54 pandyas Exp $
+ * $Id: XenograftManager.java,v 1.7 2005-11-09 00:17:06 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 20:43:54  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.service;
@@ -22,7 +25,7 @@ public interface XenograftManager {
 
     public void save(Xenograft xenograft) throws Exception;
 
-    public void remove(String id) throws Exception;
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 
     public Xenograft create(XenograftData inXenograftData, AnimalModel inAnimalModel) throws Exception;
 

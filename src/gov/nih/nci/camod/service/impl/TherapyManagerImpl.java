@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.13 2005-11-02 19:02:55 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.14 2005-11-09 00:17:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/02 19:02:55  pandyas
+ * Added e-mail functionality
+ *
  * Revision 1.12  2005/10/26 14:10:48  georgeda
  * Added other administrative route to therapy
  *
@@ -462,9 +465,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void remove(String id) throws Exception {
-        log.debug("In TherapyManagerImpl.save");
-        super.remove(id, Therapy.class);
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+        log.debug("In TherapyManagerImpl.remove");
+        
+        Therapy theTherapy = get(id);
+        
+        inAnimalModel.getTherapyCollection().remove(theTherapy);
+        super.save(inAnimalModel);
     }
 
     // ///////////////////////////////////////////////////////
