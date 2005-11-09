@@ -122,7 +122,7 @@
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
 
-	  				  <c:if test="${not empty aImageID}">
+	  				  <c:if test="${not empty imageForm.imageId}">
 		  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 							  <bean:message key="button.delete"/>
 						  </html:submit>

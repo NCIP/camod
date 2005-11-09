@@ -41,7 +41,7 @@
 
         <TR align="LEFT" valign="TOP">
                 <td class="formRequiredNotice" width="5">*</td>        
-                <TD class="formLabel">Select Clinical Marker:</TD>
+                <TD class="formRequiredLabel">Select Clinical Marker:</TD>
 			<td class="formField">			
 					<html:form action="<%= actionName %>" focus="name">
 					<html:select styleClass="formFieldSized" size="1" property="name" onchange="getOptions(this);" >
