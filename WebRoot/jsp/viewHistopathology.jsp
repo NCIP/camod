@@ -43,11 +43,14 @@
 							</a>&nbsp;(Metastasis)
 						</c:forEach>
 						<br/>
+						<bean:define id="cmColl" name="h" property="clinicalMarkerCollection"/>
+						<br>
+						<b>Clincal Markers</b>
+						<c:forEach var="c" items="${cmColl}">
+							<br>&nbsp;&nbsp;
+							<c:out value="${c.name}"/> ( <c:out value="${c.value}"/> )
+						</c:forEach>
 					</c:forEach>
-					<br><br>
-					<b>Clincal Markers</b> TBD<br/>
-					<br>&nbsp;&nbsp;Marker XYZ ( Value: High )
-					<br>&nbsp;&nbsp;Marker XYZ ( Value: High )
 				</td>				
 			</tr>	
 	    <%} else { %>
@@ -68,65 +71,65 @@
 			<a name="<c:out value="histo_${histstat.count}"/>"/>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>
+				Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
 			</tr>				
 			
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-				<c:out value="${h.organ.EVSPreferredDescription}"/>
+				<c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Onset</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-					<c:out value="${h.ageOfOnset}"/>
+				<td class="resultsBoxGreyEnd" width="75%">
+					<c:out value="${h.ageOfOnset}"/>&nbsp;
 				</td>
 			</tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%">
 				<b>Average Weight of Tumor (mg)</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-				<c:out value="${h.weightOfTumor}"/>
+				<td class="resultsBoxWhiteEnd" width="75%">
+				<c:out value="${h.weightOfTumor}"/>&nbsp;
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-					 <c:out value="${h.volumeOfTumor}"/>
+				<td class="resultsBoxGreyEnd" width="75%">
+					 <c:out value="${h.volumeOfTumor}"/>&nbsp;
 				</td>
 			</tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence (%)</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.relationalOperation}"/>
-					<c:out value="${h.tumorIncidenceRate}"/>
+					<c:out value="${h.tumorIncidenceRate}"/>&nbsp;
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-				<c:out value="${h.survivalInfo}" escapeXml="false"/>
+				<td class="resultsBoxGreyEnd" width="75%">
+				<c:out value="${h.survivalInfo}" escapeXml="false"/>&nbsp;
 				</td>
 			</tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-					<c:out value="${h.grossDescription}" escapeXml="false"/>
+				<td class="resultsBoxWhiteEnd" width="75%">
+					<c:out value="${h.grossDescription}" escapeXml="false"/>&nbsp;
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-				<c:out value="${h.microscopicDescription}" escapeXml="false"/>
+				<td class="resultsBoxGreyEnd" width="75%">
+				<c:out value="${h.microscopicDescription}" escapeXml="false"/>&nbsp;
 				</td>
 			</tr>
 			
@@ -136,7 +139,7 @@
 				<bean:define id="dc" name="h" property="diseaseCollection"/>
 				<c:forEach var="d" items="${dc}">
 					<c:out value="${d.EVSPreferredDescription}"/><br>
-				</c:forEach>
+				</c:forEach>&nbsp;
 				</td>
 			</tr>
 
@@ -153,8 +156,8 @@
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-				<c:out value="${h.comments}" escapeXml="false" />
+				<td class="resultsBoxWhiteEnd" width="75%">
+				<c:out value="${h.comments}" escapeXml="false" />&nbsp;
 				</td>
 			</tr>
             <tr><td></td></tr>
@@ -163,75 +166,75 @@
 			    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>
 				<tr>
 					<td class="greySubTitleLeftEnd" height="20" colspan="2">
-						Metastasis in <c:out value="${m.organ.EVSPreferredDescription}"/>
+						Metastasis in <c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
 					</td>
 				</tr>
 
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Organ / Tissue</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${m.organ.EVSPreferredDescription}"/>
+					<c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
 					</td>
 				</tr>
 
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Age at Onset of Metastasis</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-						<c:out value="${m.ageOfOnset}"/>
+					<td class="resultsBoxGreyEnd" width="75%">
+						<c:out value="${m.ageOfOnset}"/>&nbsp;
 					</td>
 				</tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%">
 					<b>Average Weight of Tumor (mg)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-					<c:out value="${m.weightOfTumor}"/>
+					<td class="resultsBoxWhiteEnd" width="75%">
+					<c:out value="${m.weightOfTumor}"/>&nbsp;
 					</td>
 				</tr>
 
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-						 <c:out value="${m.volumeOfTumor}"/>
+					<td class="resultsBoxGreyEnd" width="75%">
+						 <c:out value="${m.volumeOfTumor}"/>&nbsp;
 					</td>
 				</tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Incidence of Metastasis(%)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+					<td class="resultsBoxWhiteEnd" width="75%">
 						<c:out value="${m.relationalOperation}"/>
-						<c:out value="${m.tumorIncidenceRate}"/>
+						<c:out value="${m.tumorIncidenceRate}"/>&nbsp;
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-					<c:out value="${m.survivalInfo}"/>
+					<td class="resultsBoxGreyEnd" width="75%">
+					<c:out value="${m.survivalInfo}"/>&nbsp;
 					</td>
 				</tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-						<c:out value="${m.grossDescription}"/>
+					<td class="resultsBoxWhiteEnd" width="75%">
+						<c:out value="${m.grossDescription}"/>&nbsp;
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-					<c:out value="${m.microscopicDescription}"/>
+					<td class="resultsBoxGreyEnd" width="75%">
+					<c:out value="${m.microscopicDescription}"/>&nbsp;
 					</td>
 				</tr>
 				
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+					<td class="resultsBoxWhiteEnd" width="75%">
 					<bean:define id="dc" name="m" property="diseaseCollection"/>
 					<c:forEach var="d" items="${dc}">
 						<c:out value="${d.EVSPreferredDescription}"/><br>
-					</c:forEach>
+					</c:forEach>&nbsp;
 					</td>
 				</tr>
 
@@ -249,8 +252,8 @@
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-					<c:out value="${m.comments}"/>
+					<td class="resultsBoxWhiteEnd" width="75%">
+					<c:out value="${m.comments}"/>&nbsp;
 					</td>
 				</tr>
 				<tr><td></td></tr>
