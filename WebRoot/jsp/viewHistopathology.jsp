@@ -29,34 +29,41 @@
 	System.out.println("Histopathology rowCount==>" + cc);
 %>
 		<% if ( cc > 0 ) { %>
-			<tr>
-				<td class="resultsBoxWhiteEnd">
-					<c:forEach var="h" items="${hpColl}" varStatus="histstat">
+		    <c:forEach var="h" items="${hpColl}" varStatus="histstat">
+			    <tr>
+			  	    <td class="resultsBoxWhiteNoBottom" align="left">
 						<a href="<c:out value="#histo_${histstat.count}"/>">
-							C<c:out value="${h.organ.conceptCode}"/> - <c:out value="${h.organ.EVSPreferredDescription}"/>
+							<c:out value="${h.organ.EVSPreferredDescription}"/>
 						</a>
 						<bean:define id="mtsColl" name="h" property="metastatisCollection"/>
 						<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
 							<br>&nbsp;&nbsp;-&nbsp;
 							<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
-								C<c:out value="${m.organ.conceptCode}"/> - <c:out value="${m.organ.EVSPreferredDescription}"/>
+								<c:out value="${m.organ.EVSPreferredDescription}"/>
 							</a>&nbsp;(Metastasis)
 						</c:forEach>
-						<br/>
+	                    <br>
 						<bean:define id="cmColl" name="h" property="clinicalMarkerCollection"/>
-						<br>
 						<c:if test="${not empty cmColl}">
-							<b>Clinical Markers</b>
-							<c:forEach var="c" items="${cmColl}">
-								<br>&nbsp;&nbsp;
-								<c:out value="${c.name}"/> ( <c:out value="${c.value}"/> )
-							</c:forEach>
-							<br>&nbsp;
-							<br>&nbsp;
+						    <br>
+							<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="50%">
+							    <tr>
+								    <td class="formTitle" width="65%"><b>Clinical Marker Name</b></td>
+								    <td class="formTitle" width="35%"><b>Value</b></td>
+							    </tr>
+							    <c:forEach var="c" items="${cmColl}">
+								    <tr>
+						                <td class="WhiteBox"><c:out value="${c.name}"/></td>
+						                <td class="WhiteBoxRightEnd"><c:out value="${c.value}"/>&nbsp;</td>
+								    </tr>
+							    </c:forEach>
+						    </table>
 						</c:if>
-					</c:forEach>
-				</td>				
-			</tr>
+				    </td>			
+			    </tr>
+			</c:forEach>
+			<tr><td class="resultsBoxWhiteOnlyTop">&nbsp;</td></tr>
+			<br>
 		</TABLE>	
 	    <%} else { %>
 		     <TR>
@@ -67,7 +74,7 @@
 		<%}%>		
 			
 	</TABLE>
-		
+	
 	<c:forEach var="h" items="${hpColl}" varStatus="histstat">
 		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 		
