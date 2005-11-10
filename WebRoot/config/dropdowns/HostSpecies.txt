@@ -2,6 +2,9 @@ TYPE=DROPDOWN_OPTION
 Mouse (Mus musculus),Mus musculus
 Rat (Rattus norvegicus),Rattus norvegicus
 Rat (Rattus rattus),Rattus rattus
+Mongolian gerbil (Meriones unguiculatus),Meriones unguiculatus
+Syrian (golden) hamster (Mesocricetus auratus),Mesocricetus auratus
+Guinea pig (Cavia porcellus), Cavia porcellus
 Cattle (Bos taurus),Bos taurus
 Dog (Canis familiaris),Dog
 Goat (Capra hircus),Capra hircus
