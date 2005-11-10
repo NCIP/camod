@@ -110,7 +110,8 @@
 		<td class="formField">
 			<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="geneId" size="20" />	
+			<label for="field1">&nbsp;&nbsp;</label>
+			<html:text styleClass="formFieldUnSized" property="geneId" size="15" />	
 	</tr>
 
 
@@ -150,13 +151,14 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">MGI Number:</label>
+		<td class="formLabel"><label for="field2">MGI number:</label>
 		<camod:cshelp mapId="targeted_modification_help" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />
+			<label for="field1">&nbsp;&nbsp;</label>
+			<html:text styleClass="formFieldUnSized" property="numberMGI" size="15" />
 		</td>
 	</tr>
 	
