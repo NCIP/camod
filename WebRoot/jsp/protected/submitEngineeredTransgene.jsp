@@ -137,12 +137,12 @@
 						<html:text styleClass="formFieldUnSized" property="name" size="20" />
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
-						<html:select styleClass="formFieldUnSized" size="1" property="scientificName" onchange="chkName();" >
+						<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="chkName();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
-						<html:text styleClass="formFieldUnSized" property="otherScientificName" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" size="20" property="otherScientificName" disabled="true"  />
 					</td>
 				</tr>
 			</TABLE>	
@@ -165,12 +165,12 @@
 						<html:text styleClass="formFieldUnSized" property="transcriptional1_name" size="20" />
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
-						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional1_species" onchange="chkOther_t1();" >
+						<html:select styleClass="formFieldSized" size="1" property="transcriptional1_species" onchange="chkOther_t1();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldUnSized" property="transcriptional1_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="transcriptional1_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
 			</TABLE>		
@@ -187,12 +187,12 @@
 						<html:text styleClass="formFieldUnSized" property="transcriptional2_name" size="20" />
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
-						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional2_species" onchange="chkOther_t2();" >
+						<html:select styleClass="formFieldSized" size="1" property="transcriptional2_species" onchange="chkOther_t2();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldUnSized" property="transcriptional2_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="transcriptional2_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -209,12 +209,12 @@
 						<html:text styleClass="formFieldUnSized" property="transcriptional3_name" size="20" />
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
-						<html:select styleClass="formFieldUnSized" size="1" property="transcriptional3_species" onchange="chkOther_t3();" >
+						<html:select styleClass="formFieldSized" size="1" property="transcriptional3_species" onchange="chkOther_t3();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
-						<html:text styleClass="formFieldUnSized" property="transcriptional3_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="transcriptional3_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -233,12 +233,12 @@
 						<html:text styleClass="formFieldUnSized" property="polyASignal_name" size="20" />
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
-						<html:select styleClass="formFieldUnSized" size="1" property="polyASignal_species" onchange="chkOther_PS();" >
+						<html:select styleClass="formFieldSized" size="1" property="polyASignal_species" onchange="chkOther_PS();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldUnSized" property="polyASignal_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="polyASignal_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -255,12 +255,12 @@
 						<html:text styleClass="formFieldUnSized" property="spliceSites_name" size="20" />
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
-						<html:select styleClass="formFieldUnSized" size="1" property="spliceSites_species" onchange="chkOther_SS();" >
+						<html:select styleClass="formFieldSized" size="1" property="spliceSites_species" onchange="chkOther_SS();" >
 							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldUnSized" property="spliceSites_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="spliceSites_otherSpecies" disabled="true" size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -297,13 +297,14 @@
 	</tr>
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">MGI Number:</label>
+		<td class="formLabel"><label for="field2">MGI number:</label>
 		<camod:cshelp mapId="engineered_transgene_help" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />
+			<label for="field1">&nbsp;&nbsp;</label>
+			<html:text styleClass="formFieldUnSized" size="15" property="numberMGI"  />
 		</td>
 	</tr>	
 	<tr>
