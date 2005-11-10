@@ -52,7 +52,7 @@
 					<c:out value="${p.authors}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<c:out value="${p.title}"/>
+					<c:out value="${p.title}" escapeXml="false" />
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
 					<c:out value="${p.journal}"/>
