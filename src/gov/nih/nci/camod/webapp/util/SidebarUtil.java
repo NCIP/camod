@@ -1,5 +1,7 @@
 package gov.nih.nci.camod.webapp.util;
 
+import gov.nih.nci.camod.Constants;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
@@ -20,12 +22,12 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 
 						jspName.equals("viewSpontaneousMutation.jsp") || 
 						jspName.equals("viewTransplantXenograft.jsp") || 
-						jspName.equals("viewInvivoDetails.jsp") || 
 						jspName.equals("viewGenomicSegment.jsp") || 
 						jspName.equals("viewTargetedModification.jsp") || 
 						jspName.equals("viewInducedMutation.jsp") || 
 						jspName.equals("viewEngineeredTransgene.jsp") || 
 						jspName.equals("viewGeneticDescription.jsp") || 
+                        jspName.equals("viewInvivoDetails.jsp") ||
 						jspName.equals("viewPublications.jsp") ||
 						jspName.equals("viewCarcinogenicInterventions.jsp")  || 
 						jspName.equals("viewHistopathology.jsp")  || 
@@ -33,7 +35,15 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("viewCellLines.jsp") || 
 						jspName.equals("viewImages.jsp") || 
 						jspName.equals("viewMicroarrays.jsp") ){
-					return "subViewModelMenu.jsp";
+                
+                    String theSubMenu = "subViewModelMenu.jsp";
+                    
+                    // For special cases when we don't have an animal model
+                    if (request.getSession().getAttribute(Constants.ANIMALMODEL) == null) {
+                        theSubMenu = "subSearchMenu.jsp";
+                    }
+
+					return theSubMenu;
 			} 
 			else if (	jspName.equals("adminRoles.jsp") || 
 						jspName.equals("helpAdmin.jsp") || 
