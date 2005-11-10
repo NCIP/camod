@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.2 2005-10-05 20:28:00 guruswas Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.3 2005-11-10 22:07:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/05 20:28:00  guruswas
+ * implementation of drug screening search page
+ *
  * Revision 1.1  2005/09/30 18:42:24  guruswas
  * intial implementation of drug screening search and display page
  *
@@ -94,13 +97,13 @@ public final class DrugScreenSearchAction extends BaseAction {
 						}
 						if (theForm.isDoYeast()) {
 							// get the yeast data
-							List yeastStages = myAgentManager.getYeastResults(a);
-							yeastResults.put(nscNumber, yeastStages);
+							List yeastStages = myAgentManager.getYeastResults(a, false);
+							yeastResults.put(a.getId(), yeastStages);
 						}
 						if (theForm.isDoInvivo()) {
 							// now get invivo/Xenograft data
-							List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a);
-							invivoResults.put(nscNumber, xenograftResults);
+							List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
+							invivoResults.put(a.getId(), xenograftResults);
 						}
 					}
 				}

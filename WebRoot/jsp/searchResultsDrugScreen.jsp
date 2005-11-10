@@ -84,9 +84,11 @@
 						<%@ include file="/jsp/includeClinicalTrials.jsp" %>
 					</c:if>
 					<c:if test="${searchOption.doYeast}">
+					    <c:set var="agentId" value="${agt.id}"/>
 						<%@ include file="/jsp/includeYeastData.jsp" %>
 					</c:if>
 					<c:if test="${searchOption.doInvivo}">
+					    <c:set var="agentId" value="${agt.id}"/>
 						<%@ include file="/jsp/includeInvivoData.jsp" %>
 					</c:if>
 	            </c:forEach>

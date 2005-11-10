@@ -2,16 +2,20 @@
 
 /**
  * 
- * $Id: includeInvivoData.jsp,v 1.6 2005-11-10 17:06:20 schroedn Exp $
+ * $Id: includeInvivoData.jsp,v 1.7 2005-11-10 22:07:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/10 17:06:20  schroedn
+ * Defect #12 fix schroedln (11/9/05)
+ * Added the administrative site to the, In Vivo Screening Data Summary.
+ *
  *
  */
 
 %>
 
 <!-- invivo / Xenograft data-->
-<c:set var="invivoColl" value="${invivoData[nscnum]}"/>
+<c:set var="invivoColl" value="${invivoData[agentId]}"/>
 <c:choose>
 <c:when test="${not empty invivoColl}">
   	<tr><td colspan="2">

@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.23 2005-11-10 17:08:58 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.24 2005-11-10 22:07:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2005/11/10 17:08:58  schroedn
+ * Defect #12 fix schroedln (11/9/05)
+ * Added the administrative site to the, In Vivo Screening Data Summary. Edited SQL query getInvivoResults
+ *
  * Revision 1.22  2005/11/03 13:58:40  georgeda
  * Added function to get an InvivoResults for a specific NSC number
  *
@@ -717,7 +721,7 @@ public class QueryManagerImpl extends BaseManager {
 	 * @return the results
 	 * @throws PersistenceException
 	 */
-	public DrugScreenResult getYeastScreenResults(Agent agent, String stage) throws PersistenceException {
+	public DrugScreenResult getYeastScreenResults(Agent agent, String stage, boolean useNscNumber) throws PersistenceException {
 		DrugScreenResult dsr = new DrugScreenResult();
 
 		ResultSet theResultSet = null;
@@ -731,13 +735,27 @@ public class QueryManagerImpl extends BaseManager {
 					+ "\n" + "   and sr.screening_result_id = ymsr.screening_result_id" + "\n"
 					+ "   and sr.treatment_id = t.treatment_id" + "\n"
 					+ "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n"
-					+ "   and acm.taxon_id = tx.taxon_id" + "\n" + "   and a.nsc_number = ?" + "\n"
-					+ "   and sr.stage = ?" + "\n" + " order by 1, 2";
+					+ "   and acm.taxon_id = tx.taxon_id" + "\n"
+                    + "   and sr.stage = ?" + "\n";
+            
+            // We query for the agent id on the drug screen search pages and the nsc number on
+            // the theraputic approaches pages
+            Long theParam;
+            if (useNscNumber == true) {
+                theSQLString += "   and a.nsc_number = ?" + "\n";
+                theParam = agent.getNscNumber();
+            } else {
+                theSQLString += "   and a.env_factor_id = ?" + "\n";
+                theParam = agent.getId();
+            }
+                            
+			theSQLString += " order by 1, 2";
+            
 			log.info("getYeastScreenResults - SQL: " + theSQLString);
 
 			Object[] params = new Object[2];
-			params[0] = agent.getNscNumber();
-			params[1] = stage;
+			params[0] = stage;
+            params[1] = theParam;
 			theResultSet = Search.query(theSQLString, params);
 			while (theResultSet.next()) {
 				final String strain = theResultSet.getString(1);
@@ -773,10 +791,11 @@ public class QueryManagerImpl extends BaseManager {
 	 *         of records
 	 * @throws PersistenceException
 	 */
-	public List getInvivoResults(Agent agent) throws PersistenceException {
+	public List getInvivoResults(Agent agent, boolean useNscNumber) throws PersistenceException {
 		List results = new ArrayList();
 		int cc = 0;
 		ResultSet theResultSet = null;
+        log.info("Env factor_id=" + agent.getId());
 		try {
 
 			String theSQLString = 
@@ -795,14 +814,24 @@ public class QueryManagerImpl extends BaseManager {
 					+ "   and sr.invivo_result_id = ymsr.invivo_result_id" + "\n"
 					+ "   and sr.treatment_id = t.treatment_id" + "\n"
 					+ "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n"
-					+ "   and acm.taxon_id = tx.taxon_id" + "\n" 
-					+ "   and a.nsc_number = ?" + "\n"
-					+ " group by acm.abs_cancer_model_id, acm.model_descriptor, tx.ethnicity_strain, acm.administrative_site" + "\n"
-					+ " order by 3, 2";			
+					+ "   and acm.taxon_id = tx.taxon_id" + "\n";
+            
+            Long theParam;
+            if (useNscNumber == true) {
+                theSQLString += "   and a.nsc_number = ?" + "\n";
+                theParam = agent.getNscNumber();
+            } else {
+                theSQLString += "   and a.env_factor_id = ?" + "\n";
+                theParam = agent.getId();
+            }
+            
+            theSQLString += " group by acm.abs_cancer_model_id, acm.model_descriptor, tx.ethnicity_strain, acm.administrative_site" + "\n"
+					+ " order by 3, 2";
+            
 			log.info("getInvivoResults - SQL: " + theSQLString);
 
 			Object[] params = new Object[1];
-			params[0] = agent.getNscNumber();
+			params[0] = theParam;
 			theResultSet = Search.query(theSQLString, params);
 			while (theResultSet.next()) {
 				String[] item = new String[5];
@@ -1508,7 +1537,7 @@ public class QueryManagerImpl extends BaseManager {
 					+ "   and acm.abs_cancer_model_type = 'AM'" + "\n" + "   and amt.therapy_id = t.therapy_id" + "\n"
 					+ "   and t.env_factor_id = ef.env_factor_id" + "\n" + "   and acm.taxon_id = tx.taxon_id" + "\n"
 					+ "   and ef.nsc_number = ?";
-			log.info("getInvivoResults - SQL: " + theSQLString);
+			log.info("getModelsForThisCompound - SQL: " + theSQLString);
 
 			Object[] params = new Object[1];
 			params[0] = nscNumber;

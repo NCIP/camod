@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.20 2005-11-10 18:12:23 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.21 2005-11-10 22:07:36 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.20  2005/11/10 18:12:23  georgeda
+ *  Use constant
+ *
  *  Revision 1.19  2005/11/07 13:57:39  georgeda
  *  Minor tweaks
  *
@@ -393,11 +396,11 @@ public class ViewModelAction extends BaseAction {
 					Collection protocols = myAgentManager.getClinicalProtocols(a);
 					clinProtocols.put(nscNumber, protocols);
 					// get the yeast data
-					List yeastStages = myAgentManager.getYeastResults(a);
-					yeastResults.put(nscNumber, yeastStages);
+					List yeastStages = myAgentManager.getYeastResults(a, true);
+					yeastResults.put(a.getId(), yeastStages);
 					// now get invivo/Xenograft data
-					List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a);
-					invivoResults.put(nscNumber, xenograftResults);
+					List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
+					invivoResults.put(a.getId(), xenograftResults);
 				}
 			}
 		}

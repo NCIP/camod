@@ -1,8 +1,8 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * $Log: not supported by cvs2svn $
+ * 
+ * $Id: AgentManagerImpl.java,v 1.5 2005-11-10 22:07:36 georgeda Exp $
+ * 
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -19,12 +19,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public class AgentManagerImpl extends BaseManager implements AgentManager {
 	
     /**
@@ -103,7 +97,7 @@ public class AgentManagerImpl extends BaseManager implements AgentManager {
 		return protocols;
 	}
 
-	public List getYeastResults(Agent a) {
+	public List getYeastResults(Agent a, boolean useNscNumber) {
 		// get yeast results
 		ArrayList yeastStages = new ArrayList();
 		for(int k=0; k<=2; k++) {
@@ -112,7 +106,7 @@ public class AgentManagerImpl extends BaseManager implements AgentManager {
 			log.info ("Calling getYeastScreenResults:" + a.getNscNumber() + " stage=" + stg);
 			DrugScreenResult dsr=null;
 			try {
-				dsr = QueryManagerSingleton.instance().getYeastScreenResults(a, stg);
+				dsr = QueryManagerSingleton.instance().getYeastScreenResults(a, stg, useNscNumber);
 			} catch (PersistenceException e) {
 				e.printStackTrace();
 			}

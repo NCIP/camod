@@ -1,5 +1,5 @@
 <!-- yeast data -->
-<c:set var="yst" value="${yeastData[nscnum]}"/>
+<c:set var="yst" value="${yeastData[agentId]}"/>
 <c:forEach var="stg" items="${yst}" varStatus="stat2">
 		<c:choose>
 		<c:when test="${stg.strainCount <= 0}">

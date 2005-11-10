@@ -37,6 +37,7 @@
 					<%@ include file="/jsp/includePreclinicalTrials.jsp" %>
 					<c:set var="nscnum" value="${agt.nscNumber}"/>
 					<%@ include file="/jsp/includeClinicalTrials.jsp" %>
+					<c:set var="agentId" value="${agt.id}"/>
 					<%@ include file="/jsp/includeYeastData.jsp" %>
 					<%@ include file="/jsp/includeInvivoData.jsp" %>
 	            </c:forEach>
