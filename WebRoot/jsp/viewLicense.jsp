@@ -28,7 +28,7 @@ By submitting data to the MMHCC Cancer Models Database, you are certifying that 
 &nbsp; You may browse, download, and use the data for non-commercial, scientific and educational purposes. However, you may encounter documents or portions of documents contributed by private institutions or organizations.
 &nbsp;Other parties may retain all rights to publish or produce these documents.&nbsp;Commercial use of the documents on this site may be protected under United States and foreign copyright laws.
 &nbsp;In addition, some of the data may be the subject of patent applications or issued patents, and you may need to seek a license for its commercial use.  You are encouraged to review important
-<a href="mmhcc_disclaimer.html">Use Guidelines</a>
+<html:link action="infoPrivacyNotice">Use Guidelines</html:link>
 by clicking on the buttons below.</P>
 
 <B><P align="justify">I HAVE READ AND UNDERSTOOD THE ABOVE PROVISIONS, AND SIGNIFY MY AGREEMENT BY <a href="/camod/login.do">CLICKING HERE</a>.</P>
@@ -37,7 +37,7 @@ by clicking on the buttons below.</P>
 
 <P>&nbsp;</P>
 <p align="justify">
-<html:link action="infoDisclaimer">USE GUIDELINES</html:link>: Posting of Data and Results/Downloading of Materials/Copyright Status/Privacy Notice/Monitoring of Website/External Links/Disclaimer of Liability/Disclaimer of Endorsement
+<html:link action="infoPrivacyNotice">USE GUIDELINES</html:link>: Posting of Data and Results/Downloading of Materials/Copyright Status/Privacy Notice/Monitoring of Website/External Links/Disclaimer of Liability/Disclaimer of Endorsement
       <P>Please send comments and suggestions to <A 
       href="mailto:ncicb@pop.nci.nih.gov?subject=Cancer Model Database(caMOD)">ncicb@pop.nci.nih.gov</A> 
       | <A 
