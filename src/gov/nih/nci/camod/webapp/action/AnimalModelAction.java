@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.16 2005-10-24 17:11:00 georgeda Exp $
+ * $Id: AnimalModelAction.java,v 1.17 2005-11-10 18:41:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/10/24 17:11:00  georgeda
+ * First pass at duplicate
+ *
  * Revision 1.15  2005/10/24 13:28:17  georgeda
  * Cleanup changes
  *
@@ -57,11 +60,13 @@ public final class AnimalModelAction extends BaseAction {
         log.info("<AnimalModelAction saveNewModel> New Model Being created with following Characteristics:"
                 + "\n\t description: " + theModelChar.getDescription() + "\n\t breedingNotes: "
                 + theModelChar.getBreedingNotes() + "\n\t PI: " + theModelChar.getPrincipalInvestigator()
-                + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() + "\n\t experimentDesign: "
-                + theModelChar.getExperimentDesign() + "\n\t isToolMouse: " + theModelChar.getIsToolMouse()
+                + "\n\t experimentDesign: " + theModelChar.getExperimentDesign() + "\n\t isToolMouse: " + theModelChar.getIsToolMouse()
                 + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName()
-                + "\n\t releaseDate: " + theModelChar.getReleaseDate() + "\n\t scientificName: "
-                + theModelChar.getScientificName() + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: "
+                + "\n\t releaseDate: " + theModelChar.getReleaseDate() 
+                + "\n\t scientificName: " + theModelChar.getScientificName() 
+                + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() 
+                + "\n\t ethnicityStrainUnctrlVocab: " + theModelChar.getEthnicityStrainUnctrlVocab()                 
+                + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: "
                 + theModelChar.getType() + "\n\t url: " + theModelChar.getUrl() + "\n\t calendarReleaseDate: "
                 + theModelChar.getCalendarReleaseDate() + "\n\t currentUser: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -140,13 +145,15 @@ public final class AnimalModelAction extends BaseAction {
 
         ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
 
-        log.info("editExistingModel - New Model Being created with following Characteristics:" + "\n\t description: "
-                + theModelChar.getDescription() + "\n\t breedingNotes: " + theModelChar.getBreedingNotes()
-                + "\n\t PI: " + theModelChar.getPrincipalInvestigator() + "\n\t ethinicityStrain: "
-                + theModelChar.getEthinicityStrain() + "\n\t experimentDesign: " + theModelChar.getExperimentDesign()
+        log.info("editExistingModel - New Model Being created with following Characteristics:" 
+        		+ "\n\t description: " + theModelChar.getDescription() + "\n\t breedingNotes: " + theModelChar.getBreedingNotes()
+                + "\n\t PI: " + theModelChar.getPrincipalInvestigator() 
+                + "\n\t experimentDesign: " + theModelChar.getExperimentDesign()
                 + "\n\t isToolMouse: " + theModelChar.getIsToolMouse() + "\n\t modelDescriptor: "
                 + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName() + "\n\t releaseDate: "
                 + theModelChar.getReleaseDate() + "\n\t scientificName: " + theModelChar.getScientificName()
+                + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() 
+                + "\n\t ethnicityStrainUnctrlVocab: " + theModelChar.getEthnicityStrainUnctrlVocab()
                 + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: " + theModelChar.getType() + "\n\t url: "
                 + theModelChar.getUrl() + "\n\t calendarReleaseDate: " + theModelChar.getCalendarReleaseDate()
                 + "\n\t currentUser: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
