@@ -144,7 +144,7 @@
 				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ChemicalDrugPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="EnvironmentalFactorPopulateAction.do?method=dropdown">Enter Environmental Factors</html:link><br>
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="EnvironmentalFactorPopulateAction.do?method=dropdown">Enter Environmental Factor</html:link><br>
 			  <logic:iterate id="aTherapy" name="environmentalfactor_list" type="Therapy">
 				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="EnvironmentalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
@@ -154,7 +154,7 @@
 				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
 			  
-		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factors</html:link><br>		
+		<img src="images/plus.gif" border="0"> <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factor</html:link><br>		
 			  <logic:iterate id="aTherapy" name="growthfactors_list" type="Therapy">
 				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GrowthFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
 			  </logic:iterate>
