@@ -129,12 +129,12 @@ public class AnimalModelPopulateAction extends BaseAction {
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HOSTSPECIESDROP,
                 Constants.Dropdowns.ADD_BLANK_OPTION);
 
         String theSpecies = inForm.getScientificName();
         if (theSpecies == null) {
-            List speciesList = (List) request.getSession().getAttribute(Constants.Dropdowns.NEWSPECIESDROP);
+            List speciesList = (List) request.getSession().getAttribute(Constants.Dropdowns.HOSTSPECIESDROP);
             DropdownOption theOption = (DropdownOption) speciesList.get(0);
             theSpecies = theOption.getValue();
         }

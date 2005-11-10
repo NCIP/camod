@@ -116,7 +116,7 @@ var cal1 = new CalendarPopup();
 			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
-					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" filter="false"/>										
+					<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" filter="false"/>										
 				</html:select>				
 			</td>
 		</tr>
