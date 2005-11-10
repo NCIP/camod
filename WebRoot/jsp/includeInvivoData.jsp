@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: includeInvivoData.jsp,v 1.6 2005-11-10 17:06:20 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <!-- invivo / Xenograft data-->
 <c:set var="invivoColl" value="${invivoData[nscnum]}"/>
 <c:choose>
@@ -7,7 +19,8 @@
 		<tr>
 			<td class="formTitleBlue" colspan="3" align="center">
 				In Vivo Screening Data Summary: <br/>
-				<b>NSC: &nbsp;&nbsp;<c:out value="${agt.nscNumber}"/><br/>
+				<b>
+				NSC: &nbsp;&nbsp;<c:out value="${agt.nscNumber}"/><br/>
 				CAS: &nbsp;&nbsp; <c:out value="${agt.casNumber}"/><br/>
 				</b>
 			</td>
@@ -28,11 +41,11 @@
 			<tr>
 				<td align="right" class="<c:out value="${tdClass}"/>"><c:out value="${stat2.count}"/></td>
 				<td class="<c:out value="${tdClass}"/>">
-				<c:out value="${ivd[1]}"/> in <c:out value="${ivd[2]}"/>
+					<c:out value="${ivd[1]}"/> in <c:out value="${ivd[2]}"/> (<c:out value="${ivd[3]}"/>)
 				</td>
 				<td align="right" class="<c:out value="${tdClass}End"/>"> &nbsp;&nbsp;
-				<a href="ViewModelAction.do?unprotected_method=populateXenograftDetails&aModelID=<c:out value="${mdl.id}"/>&xModelID=<c:out value="${ivd[0]}"/>&nsc=<c:out value="${agt.nscNumber}"/>" styleClass="subMenuPrimary"/>
-				<c:out value="${ivd[3]}"/></a>
+					<a href="ViewModelAction.do?unprotected_method=populateXenograftDetails&aModelID=<c:out value="${mdl.id}"/>&xModelID=<c:out value="${ivd[0]}"/>&nsc=<c:out value="${agt.nscNumber}"/>" styleClass="subMenuPrimary"/>
+					<c:out value="${ivd[4]}"/></a>
 				</td>
 		  	</tr>
 	  	</c:forEach>
@@ -41,7 +54,7 @@
 <c:otherwise>
 	<tr>
 		<td class="greySubTitleLeftEnd" colspan=2>
-		<b>No Invivo Drug Screening Data found </b>
+			<b>No Invivo Drug Screening Data found </b>
 		</td>
 	</tr>
 </c:otherwise>
