@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.22 2005-11-03 13:58:40 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.23 2005-11-10 17:08:58 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/11/03 13:58:40  georgeda
+ * Added function to get an InvivoResults for a specific NSC number
+ *
  * Revision 1.21  2005/10/28 20:16:21  georgeda
  * Added space
  *
@@ -776,28 +779,38 @@ public class QueryManagerImpl extends BaseManager {
 		ResultSet theResultSet = null;
 		try {
 
-			String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," + "\n"
-					+ "       tx.ethnicity_strain," + "\n" + "       count(*)" + "\n" + "  from invivo_Result sr,"
-					+ "\n" + "       env_factor a," + "\n" + "       XENOGRAFT_INVIVO_RESULT ymsr," + "\n"
-					+ "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "       taxon tx" + "\n"
+			String theSQLString = 
+				      "select acm.abs_cancer_model_id," + "\n" 
+					+ "       acm.model_descriptor," + "\n"
+					+ "       tx.ethnicity_strain," + "\n"
+					+ "       acm.administrative_site," + "\n"
+					+ "       count(*)" + "\n" 					
+					+ "  from invivo_Result sr,"	+ "\n" 
+					+ "       env_factor a," + "\n" 
+					+ "       XENOGRAFT_INVIVO_RESULT ymsr," + "\n"
+					+ "       abs_cancer_model acm," + "\n" 
+					+ "       treatment t," + "\n" 
+					+ "       taxon tx" + "\n"
 					+ " where sr.agent_id = a.env_factor_id" + "\n"
 					+ "   and sr.invivo_result_id = ymsr.invivo_result_id" + "\n"
 					+ "   and sr.treatment_id = t.treatment_id" + "\n"
 					+ "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n"
-					+ "   and acm.taxon_id = tx.taxon_id" + "\n" + "   and a.nsc_number = ?" + "\n"
-					+ " group by acm.abs_cancer_model_id, acm.model_descriptor, tx.ethnicity_strain" + "\n"
-					+ " order by 3, 2";
+					+ "   and acm.taxon_id = tx.taxon_id" + "\n" 
+					+ "   and a.nsc_number = ?" + "\n"
+					+ " group by acm.abs_cancer_model_id, acm.model_descriptor, tx.ethnicity_strain, acm.administrative_site" + "\n"
+					+ " order by 3, 2";			
 			log.info("getInvivoResults - SQL: " + theSQLString);
 
 			Object[] params = new Object[1];
 			params[0] = agent.getNscNumber();
 			theResultSet = Search.query(theSQLString, params);
 			while (theResultSet.next()) {
-				String[] item = new String[4];
+				String[] item = new String[5];
 				item[0] = theResultSet.getString(1); // the id
 				item[1] = theResultSet.getString(2); // model descriptor
 				item[2] = theResultSet.getString(3); // strain
-				item[3] = theResultSet.getString(4); // record count
+				item[3] = theResultSet.getString(4); // administrative site
+				item[4] = theResultSet.getString(5); // record count
 				results.add(item);
 				cc++;
 			}
