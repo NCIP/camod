@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.19 2005-11-07 13:57:39 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.20 2005-11-10 18:12:23 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.19  2005/11/07 13:57:39  georgeda
+ *  Minor tweaks
+ *
  *  Revision 1.18  2005/11/03 15:47:11  georgeda
  *  Fixed slow invivo results
  *
@@ -80,7 +83,7 @@ public class ViewModelAction extends BaseAction {
 	 *            the httpRequest
 	 */
 	private void setCancerModel(HttpServletRequest request) {
-		String modelID = request.getParameter("aModelID");
+		String modelID = request.getParameter(Constants.Parameters.MODELID);
 		System.out.println("<setCancerModel> modelID" + modelID);
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel am = null;
