@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: XenograftPopulateAction.java,v 1.15 2005-11-11 16:28:26 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -152,12 +160,12 @@ public class XenograftPopulateAction extends BaseAction {
 		
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
-				Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HOSTSPECIESDROP,
+                Constants.Dropdowns.ADD_BLANK_OPTION);
 
 		String theSpecies = form.getHostScientificName();
 		if (theSpecies == null) {
-			List speciesList = (List) request.getSession().getAttribute(Constants.Dropdowns.NEWSPECIESDROP);
+			List speciesList = (List) request.getSession().getAttribute(Constants.Dropdowns.HOSTSPECIESDROP);
 			DropdownOption theOption = (DropdownOption) speciesList.get(0);
 			theSpecies = theOption.getValue();
 		}

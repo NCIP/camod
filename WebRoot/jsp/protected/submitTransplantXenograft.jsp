@@ -148,7 +148,7 @@
 		<td class="formRequiredLabel"><label for="field3">Donor Species:</label></td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="hostScientificName" onchange="getOptions(this);" >
-				<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
+				<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
 			</html:select>
 		</td>
 	</tr>
@@ -235,8 +235,8 @@
   				  </html:reset>
 
 			      <c:if test="${not empty aXenograftID}">
-					  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
-					      <bean:message key="button.delete" />
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+						  <bean:message key="button.delete"/>
 					  </html:submit>
 				  </c:if>
 				  				
