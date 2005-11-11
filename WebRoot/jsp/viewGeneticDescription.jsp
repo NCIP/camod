@@ -533,40 +533,40 @@
 		<c:set var="gene" value="${targetedModGeneMap[tmId]}"/>
 		<c:if test="${not empty gene}">
 	        <tr>
-	            <td class="resultsBoxGrey"><b>Gene Info</b></td>
-	            <td class="resultsBoxGreyEnd">
+	            <td class="GreyBox"><b>Gene Info</b></td>
+	            <td class="GreyBoxRightEnd">
 	            <c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
 	            <c:out value="${gene.symbol}"/>.&nbsp; 
 	            <c:out value="${gene.fullName}"/>&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="resultsBoxWhite"><b>Sequence ID</b></td>
-	            <td class="resultsBoxWhiteEnd">
+	            <td valign="top" class="WhiteBox"><b>Sequence ID</b></td>
+	            <td class="WhiteBoxRightEnd">
 						&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td class="resultsBoxGrey"><b>Database Links</b></td>
-	            <td class="resultsBoxGreyEnd">&nbsp;
+	            <td class="GreyBox"><b>Database Links</b></td>
+	            <td class="GreyBoxRightEnd">&nbsp;
 					<A target="_blank" href="http://www.ncbi.nlm.nih.gov/UniGene/clust.cgi?ORG=<c:out value="${gene.taxon.abbreviation}"/>&amp;CID=<c:out value="${gene.clusterId}"/>">UniGene</A>
 						&nbsp;|&nbsp;
 			        <A target="_blank" href="http://cgap.nci.nih.gov/Genes/GeneInfo?ORG=Mm&CID=<c:out value="${gene.clusterId}"/>">CGAP</A>
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td class="resultsBoxWhite"><b>Function(s) of Targeted Gene</b></td>
-	            <td class="resultsBoxWhiteEnd">&nbsp;
+	            <td class="WhiteBox"><b>Function(s) of Targeted Gene</b></td>
+	            <td class="WhiteBoxRightEnd">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td class="resultsBoxGrey"><b>Conditional Type</b></td>
-	            <td class="resultsBoxGreyEnd">&nbsp;
+	            <td class="GreyBox"><b>Conditional Type</b></td>
+	            <td class="GreyBoxRightEnd">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="resultsBoxWhite"><b>Gene Ontology</b></td>
-	            <td valign="top" class="resultsBoxWhiteEnd"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
+	            <td valign="top" class="WhiteBox"><b>Gene Ontology</b></td>
+	            <td valign="top" class="WhiteBoxRightEnd"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
 					<ul>
 						<c:forEach var="ont" items="${gene.geneOntologyCollection}">
 							<li>
@@ -579,8 +579,8 @@
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="resultsBoxGrey"><b>BioCarta Pathways</b></td>
-	            <td valign="top" class="resultsBoxGreyEnd">
+	            <td valign="top" class="GreyBox"><b>BioCarta Pathways</b></td>
+	            <td valign="top" class="GreyBoxRightEnd">
 		        <font size="-2" color="#666699">Pathway information courtesy of <A target="_blank" href="http://www.biocarta.com">BioCarta</a></font>
 		        <br>
 					<ul>
@@ -595,13 +595,13 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="resultsBoxWhite"><b>Libraries and Tissues (from EST data)</b></td>
-	            <td valign="top" class="resultsBoxWhiteEnd">&nbsp;
+	            <td valign="top" class="WhiteBox"><b>Libraries and Tissues (from EST data)</b></td>
+	            <td valign="top" class="WhiteBoxRightEnd">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="resultsBoxGrey"><b>Protein Similarities (from UniGene)</b></td>
-	            <td valign="top" class="resultsBoxGreyEnd">&nbsp;
+	            <td valign="top" class="GreyBox"><b>Protein Similarities (from UniGene)</b></td>
+	            <td valign="top" class="GreyBoxRightEnd">&nbsp;
 	           	</td>
 	        </tr>
 		</c:if>
