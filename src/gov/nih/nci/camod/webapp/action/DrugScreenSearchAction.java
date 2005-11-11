@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.3 2005-11-10 22:07:36 georgeda Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.4 2005-11-11 21:24:19 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/11/10 22:07:36  georgeda
+ * Fixed part of bug #21
+ *
  * Revision 1.2  2005/10/05 20:28:00  guruswas
  * implementation of drug screening search page
  *
@@ -55,11 +58,7 @@ public final class DrugScreenSearchAction extends BaseAction {
         request.getSession().setAttribute(Constants.DRUG_SCREEN_OPTIONS, theForm);
 
 		// The following two objects are needed for eQBE.
-/*        Agent agt = new Agent();
-		Long myNSCNumber = new Long(theForm.getNSCNumber());
-		agt.setNscNumber(myNSCNumber);
-		List agents = null;
-*/        try {
+        try {
 			HQLParameter[] theParams = new HQLParameter[1];
 			theParams[0] = new HQLParameter();
 			theParams[0].setName("nscNumber");
@@ -71,7 +70,7 @@ public final class DrugScreenSearchAction extends BaseAction {
 			List agents = Search.query(theHQLQuery, theParams);
 
 			//agents = Search.query(agt);
-            request.getSession().setAttribute(Constants.SEARCH_RESULTS, agents);
+            request.getSession().setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, agents);
 			final int agtCount = (agents!=null)?agents.size():0;
 			AgentManager myAgentManager = (AgentManager)getBean("agentManager");
 			final HashMap clinProtocols = new HashMap();
@@ -114,7 +113,7 @@ public final class DrugScreenSearchAction extends BaseAction {
 			request.getSession().setAttribute(Constants.PRECLINICAL_MODELS, preClinicalResults);
         } catch (Exception e) {
             log.error("Exception occurred in DrugScreenSearchAction.execute()", e);
-            request.getSession().setAttribute(Constants.SEARCH_RESULTS, new ArrayList());
+            request.getSession().setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, new ArrayList());
             // Set the error message
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));

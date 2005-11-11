@@ -1,8 +1,17 @@
+<%
+/*
+ *  $Log: not supported by cvs2svn $
+ *
+ *  $Id: searchResultsDrugScreen.jsp,v 1.5 2005-11-11 21:27:38 georgeda Exp $
+ */
+%>
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
-<bean:define id="agentList" name="searchResults"/>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
+
+<bean:define id="agentList" name="<%=Constants.DRUG_SCREEN_SEARCH_RESULTS%>"/>
 <bean:define id="searchOption" name="drugScreenSearchOptions"/>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

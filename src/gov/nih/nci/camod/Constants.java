@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.71 2005-11-11 15:37:57 georgeda Exp $
+ * $Id: Constants.java,v 1.72 2005-11-11 21:24:19 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.71  2005/11/11 15:37:57  georgeda
+ * Fixed IE error with action name
+ *
  * Revision 1.70  2005/11/08 21:59:31  georgeda
  * LDAP code
  *
@@ -489,6 +492,8 @@ public class Constants {
      * Used for search results
      */
     public static final String SEARCH_RESULTS = "searchResults";
+    
+    public static final String DRUG_SCREEN_SEARCH_RESULTS = "drugScreenSearchResults";
 
     public static final String ADMIN_COMMENTS_SEARCH_RESULTS = "adminCommentsSearchResults";
 
