@@ -17,7 +17,16 @@
 				<tr>
 					<td class="formTitleBlue" colspan="11" align="center">
 						Publicly available data from the NCI Yeast Anticancer Drug Screen
-						<br>Stage <c:out value="${stat2.count - 1}"/> - Dose Response
+						<br>Stage
+							<c:if test="${stat2.count-1=='0'}">
+								<c:out value="${stat2.count - 1}"/> - Crude Sensitivity Screen
+							</c:if>
+							<c:if test="${stat2.count-1=='1'}">
+								<c:out value="${stat2.count - 1}"/> - Crude Selectivity Screen
+							</c:if>
+							<c:if test="${stat2.count-1=='2'}">
+								<c:out value="${stat2.count - 1}"/> - Dose Response
+							</c:if>
 					</td>
 				</tr>
 				<tr>
