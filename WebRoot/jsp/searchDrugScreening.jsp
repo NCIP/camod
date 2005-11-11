@@ -43,19 +43,19 @@
 
         <TR>
         <TD class=formRequiredNotice width=5>&nbsp;</TD>
-        <TD class=formLabel>Pre-Clincial Trials</TD>
+        <TD class=formLabel>Pre-Clinical Trials</TD>
         <TD class=formField>
 	        <html:checkbox property="doPreClinical"/>
-        	<LABEL for=box1>Find pre-clincial trials with this compound</LABEL> 
+        	<LABEL for=box1>Find pre-clinical trials with this compound</LABEL> 
         </TD>
         </TR>
 
         <TR>
         <TD class=formRequiredNotice width=5>&nbsp;</TD>
-        <TD class=formLabel>Clincial Trials</TD>
+        <TD class=formLabel>Clinical Trials</TD>
         <TD class=formField>
 	        <html:checkbox property="doClinical"/>
-        	<LABEL for=box1>Find clincial trials with this compound</LABEL> 
+        	<LABEL for=box1>Find clinical trials with this compound</LABEL> 
         </TD>
         </TR>
 
