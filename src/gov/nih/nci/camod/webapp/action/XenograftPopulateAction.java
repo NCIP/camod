@@ -98,9 +98,6 @@ public class XenograftPopulateAction extends BaseAction {
 		// following
 		this.dropdown(request, response, xenograftForm);
 
-		// Store the Form in session to be used by the JSP
-		request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
-
 		return mapping.findForward("submitTransplantXenograft");
 
 	}
