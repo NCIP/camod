@@ -1,8 +1,9 @@
-/*
- * Created on May 3, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * 
+ * $Id: Xenograft.java,v 1.9 2005-11-11 16:27:26 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.domain;
 
