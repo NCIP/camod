@@ -26,22 +26,6 @@
 	<c:set var="actionName" value="PublicationAction.do?method=addTherapyPublication&aTherapyID=${publicationForm.ATherapyID}" />
 </c:if>
 
-<SCRIPT LANGUAGE="JavaScript">
-
-	function getPubMed( control ) {
-		alert( "pmid value=" + document.forms[0].pmid.value );
-		
-		form = control.form;
-		form.action = "PubMedPopulateAction.do?pmid=";
-		form.action += document.forms[0].pmid.value;
-		
-		alert( "form action=" + form.action );
-		
-		form.submit();
-	}	
-
-</SCRIPT>
-
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -114,7 +98,7 @@
 			<label valign="TOP" for="field1">PMID: &nbsp;</label>
 			<br>
 			<html:text styleClass="formFieldUnSized" size="20" property="pmid" />
-			<html:submit property="action" styleClass="actionButton" >Fill in Fields</html:submit>		
+			<html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" >Fill in Fields</html:submit>		
 		</td>
 	</tr>
 
@@ -179,7 +163,7 @@
   				  </html:reset>
   				  
   				  <c:if test="${not empty publicationForm.APubID}">
-	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>

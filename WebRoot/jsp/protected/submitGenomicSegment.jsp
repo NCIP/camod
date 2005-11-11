@@ -199,7 +199,7 @@
   				  </html:reset>
 
   				  <c:if test="${not empty genomicSegmentForm.segmentId}">
-	  				  <html:submit property="action" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>

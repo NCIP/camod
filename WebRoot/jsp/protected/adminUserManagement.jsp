@@ -33,14 +33,14 @@
 		
 	        <td  class="resultsBoxGreyNoSides" align="center" colspan="1">
 				<TABLE cellpadding="4" cellspacing="0" border="0">	
-			        <html:submit property="action" styleClass="actionButton">
+			        <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
 					    <bean:message key="button.edit"/>
 				    </html:submit>	
 				</TABLE>
 			</td>
 		    <td  class="resultsBoxGreyNoStart" align="center" colspan="1">
 				<TABLE cellpadding="4" cellspacing="0" border="0">	
-			        <html:submit property="action" styleClass="actionButton">
+			        <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
 					    <bean:message key="button.add"/>
 				    </html:submit>	
 				</TABLE>
