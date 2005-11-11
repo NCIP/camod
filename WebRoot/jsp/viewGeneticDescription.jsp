@@ -75,7 +75,7 @@
 					
 					<li>
 						<a href="<c:out value="#ind_mut_${count}"/>">
-						    <c:set var="count" value="${count + 1}"/>s
+						    <c:set var="count" value="${count + 1}"/>
 							<c:choose>
 								<c:when test="${empty eg.environmentalFactor.name}">
 									<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>
@@ -570,8 +570,9 @@
 					<ul>
 						<c:forEach var="ont" items="${gene.geneOntologyCollection}">
 							<li>
+							<c:set var="paddedNode"><fmt:formatNumber value="${ont.id}" minIntegerDigits="7" groupingUsed="false" /></c:set>
 							<a target="_blank" 
-				 				href="http://cgap.nci.nih.gov/Genes/GOBrowser?CMD=open&NODE=">
+				 				href="http://cgap.nci.nih.gov/Genes/GOBrowser?CMD=open&NODE=<c:out value="${paddedNode}"/>">
 				 				<c:out value="${ont.name}"/>
 					 		</a></li>
 						</c:forEach>
