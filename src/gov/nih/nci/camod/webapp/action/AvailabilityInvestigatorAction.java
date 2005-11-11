@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.5 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.6 2005-11-11 15:38:58 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.4  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -99,7 +102,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
                 // you've
                 // created a new model successfully
                 ActionMessages msg = new ActionMessages();
-                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.creation.successful"));
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.edit.successful"));
                 saveErrors(request, msg);
             }
         } catch (Exception e) {
