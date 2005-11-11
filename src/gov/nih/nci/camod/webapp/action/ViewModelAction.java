@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.21 2005-11-10 22:07:36 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.22 2005-11-11 18:39:30 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.21  2005/11/10 22:07:36  georgeda
+ *  Fixed part of bug #21
+ *
  *  Revision 1.20  2005/11/10 18:12:23  georgeda
  *  Use constant
  *
@@ -209,7 +212,6 @@ public class ViewModelAction extends BaseAction {
 						log.info("Got " + geneCount + " Gene Objects");
 						if (geneCount > 0) {
 							myGene = (Gene) resultList.get(0);
-							myGene.getNucleicAcidSequenceCollection();
 							log.info("Gene:" + geneId + " ==>" + myGene);
 							tmGeneMap.put(tm.getId(), myGene);
 						}
