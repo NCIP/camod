@@ -32,7 +32,7 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
     }
 
     public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-        inAnimalModel.getEngineeredGeneCollection().remove(get(id));
+        inAnimalModel.getSpontaneousMutationCollection().remove(get(id));
         super.save(inAnimalModel);
     }
 
