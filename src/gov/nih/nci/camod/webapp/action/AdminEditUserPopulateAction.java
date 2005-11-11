@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserPopulateAction.java,v 1.4 2005-10-28 12:47:26 georgeda Exp $
+ * $Id: AdminEditUserPopulateAction.java,v 1.5 2005-11-11 15:38:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/28 12:47:26  georgeda
+ * Added delete functionality
+ *
  * Revision 1.3  2005/10/24 13:28:17  georgeda
  * Cleanup changes
  *
@@ -17,11 +20,12 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.Enumeration;
-
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.webapp.form.EditUserForm;
+
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +49,7 @@ public class AdminEditUserPopulateAction extends BaseAction {
 
 		EditUserForm theForm = (EditUserForm) inForm;
 
-		String theAction = (String) inRequest.getParameter("action");
+		String theAction = (String) inRequest.getParameter(Constants.Parameters.ACTION);
 
            Enumeration theEnum = inRequest.getParameterNames();
             
