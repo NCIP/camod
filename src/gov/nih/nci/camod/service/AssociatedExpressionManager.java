@@ -1,5 +1,6 @@
 package gov.nih.nci.camod.service;
 
+import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.ExpressionFeature;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
 
@@ -13,7 +14,7 @@ public interface AssociatedExpressionManager {
 
 	public void save(ExpressionFeature expressionFeature) throws Exception;
 
-	public void remove(String id) throws Exception;
+	public void remove(String id, EngineeredGene inTransgene) throws Exception;
 	
 	public ExpressionFeature create( AssociatedExpressionData inAssociatedExpressionData ) throws Exception;
 	

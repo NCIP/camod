@@ -14,17 +14,37 @@
 	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
 	String aTargetedModificationID = request.getParameter( "aTargetedModificationID" );
 	String aAssociatedExpressionID = request.getParameter( "aAssociatedExpressionID" );
+    String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
 	String actionName = "AssociatedExpressionAction.do?method=save";
 	
-	if ( aEngineeredTransgeneID != null )
+	// Handle adding to eng. trans
+	if ( aEngineeredTransgeneID != null && aEngineeredTransgeneID.length() > 0 && isDeleted == null) {
 		actionName = "AssociatedExpressionAction.do?method=save&aEngineeredTransgeneID=" + aEngineeredTransgeneID;
-	if ( aGenomicSegmentID != null )
+	} else {
+	    aEngineeredTransgeneID = "";
+	}
+	
+	// Handle adding to genomic seg
+	if ( aGenomicSegmentID != null && aGenomicSegmentID.length() > 0 && isDeleted == null) {
 		actionName = "AssociatedExpressionAction.do?method=save&aGenomicSegmentID=" + aGenomicSegmentID;
-	if ( aTargetedModificationID != null )
+	} else {
+	    aGenomicSegmentID = "";
+	}
+	
+	// Handle the add to targ mod.
+	if ( aTargetedModificationID != null && aTargetedModificationID.length() > 0 && isDeleted == null) {
 		actionName = "AssociatedExpressionAction.do?method=save&aTargetedModificationID=" + aTargetedModificationID;
-	if ( aAssociatedExpressionID != null )
+	} else {
+	    aTargetedModificationID = "";
+	}
+	
+	// Handle editing of assoc expr.
+	if ( aAssociatedExpressionID != null && aAssociatedExpressionID.length() > 0 && isDeleted == null) {
 		actionName = "AssociatedExpressionAction.do?method=edit";
+	} else {
+	    aAssociatedExpressionID = "";
+	}
 %>
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
@@ -90,9 +110,23 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 				
+				  <c:if test="${not empty aAssociatedExpressionID}">
+					  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+					      <bean:message key="button.delete" />
+					  </html:submit>
+				  </c:if>
+				  
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->				 
 				  <input type="hidden" name="aAssociatedExpressionID" value="<%= aAssociatedExpressionID %>">
-				  	
+				  <c:if test="${not empty aGenomicSegmentID}">
+				      <input type="hidden" name="aGenomicSegmentID" value="<%= aGenomicSegmentID %>">
+				  </c:if>
+				  <c:if test="${not empty aTargetedModificationID}">
+				      <input type="hidden" name="aTargetedModificationID" value="<%= aTargetedModificationID %>">
+				  </c:if>
+				  <c:if test="${not empty aEngineeredTransgeneID}">
+				      <input type="hidden" name="aEngineeredTransgeneID" value="<%= aEngineeredTransgeneID %>">
+				  </c:if>
 				</html:form>			
 			</TABLE>
 		</td>
@@ -100,7 +134,7 @@
 </TABLE>
 
 	<!-- -->
-	</td></tr></TABLE>
-</tr></td></TABLE>
+</TABLE>
+</tr></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>

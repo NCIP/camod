@@ -1,8 +1,6 @@
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.ExpressionFeature;
-import gov.nih.nci.camod.domain.ExpressionLevelDesc;
-import gov.nih.nci.camod.domain.Organ;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AssociatedExpressionManager;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
@@ -28,9 +26,10 @@ public class AssociatedExpressionManagerImpl extends BaseManager implements Asso
 		super.save(expressionFeature);
 	}
 
-	public void remove(String id) throws Exception {
+	public void remove(String id, EngineeredGene inEngineeredGene) throws Exception {
 		log.trace("In AssociatedExpressionManagerImpl.remove");
-		super.remove(id, ExpressionFeature.class);
+        inEngineeredGene.getExpressionFeatureCollection().remove(get(id));
+		super.save(inEngineeredGene);
 	}
 	
 	public ExpressionFeature create( AssociatedExpressionData inAssociatedExpressionData ) 
