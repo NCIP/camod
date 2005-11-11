@@ -38,7 +38,7 @@
 				 	</td>
 				</tr>
 				<tr>
-					<td rowspan=2 class="greySubTitleLeft">Strain  /  Dosage <br>A= AveIng, D=DiffInh</td>
+					<td rowspan=2 class="greySubTitleLeft">Strain  /  Dosage <br>A= AveInh, D=DiffInh</td>
 					<c:forEach var="dosage" items="${stg.dosages}" varStatus="stat3">
 					    <c:set var="roundedDosage"><fmt:formatNumber value="${dosage}" minFractionDigits="2" maxFractionDigits="2"/></c:set>
 						<td colspan=2 class="greySubTitleLeftEnd"><p align="right"><c:out value="${roundedDosage}"/><font face="symbol">m</font>M</p></td>
