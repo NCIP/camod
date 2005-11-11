@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.70 2005-11-08 21:59:31 georgeda Exp $
+ * $Id: Constants.java,v 1.71 2005-11-11 15:37:57 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.70  2005/11/08 21:59:31  georgeda
+ * LDAP code
+ *
  * Revision 1.69  2005/11/08 17:46:20  pandyas
  * added for Xenograft
  *
@@ -408,7 +411,7 @@ public class Constants {
      */
     public interface Parameters {
 
-        public static final String ACTION = "action";
+        public static final String ACTION = "submitAction";
 
         public static final String MODELID = "aModelID";
 
