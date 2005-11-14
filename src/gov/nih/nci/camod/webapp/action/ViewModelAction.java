@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.22 2005-11-11 18:39:30 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.23 2005-11-14 14:21:44 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.22  2005/11/11 18:39:30  georgeda
+ *  Removed unneeded call
+ *
  *  Revision 1.21  2005/11/10 22:07:36  georgeda
  *  Fixed part of bug #21
  *
@@ -96,7 +99,7 @@ public class ViewModelAction extends BaseAction {
 		try {
 			am = animalModelManager.get(modelID);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			log.error("Unable to get cancer model in setCancerModel");
 			e.printStackTrace();
 		}
 		request.getSession().setAttribute(Constants.ANIMALMODEL, am);
@@ -165,7 +168,7 @@ public class ViewModelAction extends BaseAction {
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel am = animalModelManager.get(modelID);
 
-		final List egc = am.getEngineeredGeneCollection();
+		final List egc = am.getEngineeredGeneCollectionSorted();
 		final int egcCnt = (egc != null) ? egc.size() : 0;
 		final List tgc = new ArrayList();
 		int tgCnt = 0;// Transgene
@@ -175,6 +178,7 @@ public class ViewModelAction extends BaseAction {
 		int tmCnt = 0;// TargetedModification
 		final Map tmGeneMap = new HashMap();
 		final List imc = new ArrayList();
+		final List smc = am.getSpontaneousMutationCollectionSorted();
 		int imCnt = 0;// InducedMutation
 		for (int i = 0; i < egcCnt; i++) {
 			EngineeredGene eg = (EngineeredGene) egc.get(i);
@@ -230,6 +234,7 @@ public class ViewModelAction extends BaseAction {
 		request.getSession().setAttribute(Constants.TARGETED_MOD_COLL, tmc);
 		request.getSession().setAttribute(Constants.TARGETED_MOD_GENE_MAP, tmGeneMap);
 		request.getSession().setAttribute(Constants.INDUCED_MUT_COLL, imc);
+		request.getSession().setAttribute(Constants.SPONTANEOUS_MUT_COLL, smc);
 		System.out.println("<populateEngineeredGene> set attributes done.");
 
 		setComments(request, Constants.Pages.GENETIC_DESCRIPTION);
@@ -257,14 +262,9 @@ public class ViewModelAction extends BaseAction {
 		setCancerModel(request);
 		String modelID = request.getParameter(Constants.Parameters.MODELID);
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		AnimalModel am = null;
-		try {
-			am = animalModelManager.get(modelID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		final List therapyColl = am.getTherapyCollection();
+		AnimalModel am = animalModelManager.get(modelID);
+		
+		final List therapyColl = am.getTherapyCollectionSorted();
 		final Map interventionTypeMap = new HashMap();
 		final int cc = (therapyColl != null) ? therapyColl.size() : 0;
 		for (int i = 0; i < cc; i++) {
@@ -317,7 +317,7 @@ public class ViewModelAction extends BaseAction {
 		try {
 			pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			log.error("Unable to get publications");
 			e.printStackTrace();
 		}
 		request.getSession().setAttribute(Constants.PUBLICATIONS, pubs);
@@ -379,7 +379,7 @@ public class ViewModelAction extends BaseAction {
 		String modelID = request.getParameter(Constants.Parameters.MODELID);
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel am = animalModelManager.get(modelID);
-		final List therapyColl = am.getTherapyCollection();
+		final List therapyColl = am.getTherapyCollectionSorted();
 		final int cc = (therapyColl != null) ? therapyColl.size() : 0;
 		log.info("Looking up clinical protocols for " + cc + " agents...");
 
@@ -542,13 +542,8 @@ public class ViewModelAction extends BaseAction {
 		log.info("<populateXenograftDetails> nsc:" + nsc);
 		XenograftManager mgr = (XenograftManager) getBean("xenograftManager");
 
-		Xenograft x = null;
-		try {
-			x = mgr.get(modelID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Xenograft x = mgr.get(modelID);
+		
 		setCancerModel(request);
 		request.getSession().setAttribute(Constants.XENOGRAFTMODEL, x);
 		request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
