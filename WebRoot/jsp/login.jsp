@@ -107,7 +107,7 @@
                                                                   </td>
 				      
                                                                   <td>					    
-                                                                      <FORM name="input" action="help.jsp" method="get">
+                                                                      <FORM name="input" action="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,1)" method="get">
                                                                           <input class="actionButton" type="submit" value="Help" />
                                                                       </FORM>					   
                                                                   </td> 
