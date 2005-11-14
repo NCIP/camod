@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.9 2005-11-09 00:17:16 georgeda Exp $
+ * $Id: PublicationManagerImpl.java,v 1.10 2005-11-14 14:18:58 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/09 00:17:16  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.8  2005/11/01 18:14:28  schroedn
  * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
  *
@@ -39,21 +42,32 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
     public void update(PublicationData inPublicationData, Publication inPublication) throws Exception {
 
         populate(inPublicationData, inPublication);
-        save(inPublication);
+        super.save(inPublication);
+    }
+
+    public void removeCellLinePublication(String id, CellLine inCellLine) throws Exception {
+    	
+        inCellLine.getPublicationCollection().remove(get(id));
+        super.save(inCellLine);
+    }
+
+    public void removeTherapyPublication(String id, Therapy inTherapy) throws Exception {
+        inTherapy.getPublicationCollection().remove(get(id));
+        super.save(inTherapy);
     }
 
     public void addCellLinePublication(PublicationData inPublicationData, CellLine inCellLine) throws Exception {
 
         Publication inPublication = create(inPublicationData);
         inCellLine.addPublication(inPublication);
-        CellLineManagerSingleton.instance().save(inCellLine);
+        super.save(inCellLine);
     }
 
     public void addTherapyPublication(PublicationData inPublicationData, Therapy inTherapy) throws Exception {
 
         Publication inPublication = create(inPublicationData);
         inTherapy.addPublication(inPublication);
-        TherapyManagerSingleton.instance().save(inTherapy);
+        super.save(inTherapy);
     }
 
     private void populate(PublicationData inPublicationData, Publication inPublication) throws Exception {

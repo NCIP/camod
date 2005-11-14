@@ -15,6 +15,10 @@ public interface PublicationManager {
 
 	public void addTherapyPublication( PublicationData inPublicationData, Therapy inTherapy ) throws Exception;
 	
+	public void removeCellLinePublication( String id, CellLine inCellLine ) throws Exception;
+
+	public void removeTherapyPublication(String id, Therapy inTherapy ) throws Exception;
+	
 	public List getAll() throws Exception;
 
 	public Publication get(String id) throws Exception;
