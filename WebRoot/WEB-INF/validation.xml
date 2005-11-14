@@ -33,7 +33,7 @@
             <arg0 key="DrugScreenSearchForm.NSCNumber"/>
         </field>
         <field property="doYeast" depends="validwhen">
-            <arg0 key="DrugScreenSearchForm.select"/>
+            <msg name="validwhen" key="DrugScreenSearchForm.select"/>
             <var>
                 <var-name>test</var-name>
                 <var-value>(((doYeast == 'true') or (doInvivo == 'true')) or ((doPreClinical == 'true') or (doClinical == 'true')))</var-value>

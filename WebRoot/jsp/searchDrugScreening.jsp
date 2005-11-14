@@ -8,8 +8,20 @@
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
-        <tr>
-		    <html:errors/>
+	    <tr>          
+		    <td colspan="3">          
+	            <logic:messagesPresent>
+		            <b><font color=red>
+		                <ul>
+		                    <html:messages id="error"> 
+		                        <li><bean:write name="error"/></li>
+		                    </html:messages>
+		                </ul> 
+		            </font></b> 
+	            </logic:messagesPresent>
+			</td>
+		</tr>
+		<tr>
 		    <td class="formMessage" colspan="3">* indicates a required field</td>
 	    </tr>
         <tr>
