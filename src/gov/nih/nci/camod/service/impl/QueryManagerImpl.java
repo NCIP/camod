@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.25 2005-11-14 14:19:13 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.26 2005-11-14 15:14:41 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/11/14 14:19:13  georgeda
+ * Cleanup
+ *
  * Revision 1.24  2005/11/10 22:07:36  georgeda
  * Fixed part of bug #21
  *
@@ -752,7 +755,7 @@ public class QueryManagerImpl extends BaseManager {
                 theParam = agent.getId();
             }
                             
-			theSQLString += " order by 1, 2";
+			theSQLString += " order by tx.ethnicity_strain, to_number(t.dosage)";
             
 			log.info("getYeastScreenResults - SQL: " + theSQLString);
 
