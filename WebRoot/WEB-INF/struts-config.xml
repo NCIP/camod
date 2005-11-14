@@ -528,7 +528,28 @@
      	<forward
      		name="PubMedPopulateAction"
      		path="/PubMedPopulateAction.do">
-        </forward>		
+        </forward>
+        
+		<forward
+			name="expDesignStage0"
+			path="/jsp/expDesignStage0.jsp">
+		</forward>
+			
+		<forward
+			name="expDesignStage1"
+			path="/jsp/expDesignStage1.jsp"></forward>			
+			
+		<forward
+			name="expDesignStage2"
+			path="/jsp/expDesignStage2.jsp"></forward>
+			
+		<forward
+			name="yeastStrainsStage01"
+			path="/jsp/yeastStrainsStage01.jsp"></forward>
+			
+		<forward
+			name="yeastStrainsStage2"
+			path="/jsp/yeastStrainsStage2.jsp"></forward>										        		
                 
       </global-forwards>
 
@@ -870,6 +891,31 @@
 			path="/infoWhatsNew"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/infoWhatsNew.jsp" />
+			
+		<action
+			path="/expDesignStage0"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/expDesignStage0.jsp" />
+			
+		<action
+			path="/expDesignStage1"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/expDesignStage1.jsp" />			
+			
+		<action
+			path="/expDesignStage2"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/expDesignStage2.jsp" />
+			
+		<action
+			path="/yeastStrainsStage01"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/yeastStrainsStage01.jsp" />						
+			
+		<action
+			path="/yeastStrainsStage2"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/yeastStrainsStage2.jsp" />			
 		
 		<action
 			path="/loggedOut"
