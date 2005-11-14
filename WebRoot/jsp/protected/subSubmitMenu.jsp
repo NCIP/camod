@@ -261,7 +261,7 @@
 				
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
+					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aTherapyID=<c:out value='${aTherapyID}'/>"><c:out value="${aPublication.authors}"/></a><br>
 				
 				</logic:iterate>				 
 			  </logic:iterate>
@@ -291,7 +291,7 @@
 				
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' /> "><bean:write name="aPublication" property="authors" filter="true"/></a><br>
+					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aCellID=<c:out value='${aCellID }'/>"><bean:write name="aPublication" property="authors" filter="true"/></a><br>
 				
 				</logic:iterate>				 
 			 </logic:iterate>		    

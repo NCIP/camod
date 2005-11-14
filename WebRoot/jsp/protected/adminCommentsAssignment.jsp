@@ -2,6 +2,9 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 <!-- setup some useful variables -->
 <% pageContext.setAttribute("modelIdTag", Parameters.MODELID); %>
 <% pageContext.setAttribute("modelSectionTag", Parameters.MODELSECTIONNAME); %>
@@ -61,7 +64,7 @@
  	    <c:set var="uri" value="/camod/ViewModelSectionAction.do?${modelIdTag}=${row.modelId}&${modelSectionTag}=${row.modelSection}&${commentsIdTag}=${row.id}"/>
  
 		<display:column href="<%= (String) pageContext.getAttribute("uri") %>" title="Section/Model Descriptor" >
-			<c:out escapeXml="false" value="${row.modelSection}"/> - <c:out value="${row.modelDescriptor}"/>
+			<c:out escapeXml="false" value="${row.modelSection}"/> - <c:out value="${row.modelDescriptor}" escapeXml="false"/>
 		</display:column>
 		<display:column title="Submitter's Name">
 			<c:out escapeXml="false" value="${row.submitterName}"/>

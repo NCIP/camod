@@ -6,6 +6,9 @@
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 <%      
 	List results = (List) request.getSession().getAttribute( Constants.USERMODELLIST );
 	int size = results.size();

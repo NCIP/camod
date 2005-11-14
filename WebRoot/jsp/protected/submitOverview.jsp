@@ -2,6 +2,9 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp" %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page buffer="32kb"%>
 

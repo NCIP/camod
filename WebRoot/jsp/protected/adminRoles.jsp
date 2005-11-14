@@ -3,6 +3,9 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 <!-- adminRoles.jsp -->
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">

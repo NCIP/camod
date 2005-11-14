@@ -29,7 +29,7 @@
 
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
-			    <bean:write name="action" /> AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" />
+			    <bean:write name="action" /> AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" escapeXml="false" />
 			</td>
 		</tr>
         <html:form action="ChangeAnimalModelStateAction">

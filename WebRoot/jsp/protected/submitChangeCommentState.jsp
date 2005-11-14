@@ -28,7 +28,7 @@
 
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
-			    Comment for AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" />
+			    Comment for AnimalModel <c:out value="${animalModelStateForm.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
         <html:form action="ChangeCommentsStateAction">

@@ -18,11 +18,11 @@
 	<c:set var="actionName" value="PublicationAction.do?method=edit" />
 </c:if>
 
-<c:if test="${not empty publicationForm.ACellID}">
+<c:if test="${empty publicationForm.APubID && not empty publicationForm.ACellID}">
 	<c:set var="actionName" value="PublicationAction.do?method=addCellLinePublication&aCellID=${publicationForm.ACellID}"/>
 </c:if>
 
-<c:if test="${not empty publicationForm.ATherapyID}">
+<c:if test="${empty publicationForm.APubID && not empty publicationForm.ATherapyID}">
 	<c:set var="actionName" value="PublicationAction.do?method=addTherapyPublication&aTherapyID=${publicationForm.ATherapyID}" />
 </c:if>
 
