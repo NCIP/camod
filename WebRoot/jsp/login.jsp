@@ -131,7 +131,7 @@
                                                   </tr>
 
                                                   <tr>
-                                                      <td class="sidebarContent"><html:link action="infoWhatsNew"><IMG src="images/bullet_point.gif" border=0>&nbsp;View What's New</html:link></td>
+                                                      <td class="sidebarContent"><IMG src="images/bullet_point.gif" border=0>&nbsp;<html:link action="infoWhatsNew">View What's New</html:link></td>
                                                   </tr>
                                               </table>
                                           </td>
