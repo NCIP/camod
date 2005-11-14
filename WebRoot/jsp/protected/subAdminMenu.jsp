@@ -9,25 +9,31 @@
 <TR><TD class=subMenuPrimaryItems>
 
 <DIV>
-	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="AdminRolesPopulateAction">&nbsp;&nbsp;ADMIN ROLES</html:link>
+	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
+	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminRolesPopulateAction">ADMIN ROLES</html:link>
 	<BR>
-	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="AdminCommentsAssignmentPopulateAction">&nbsp;&nbsp;VIEW COMMENT ASSIGNMENT</html:link>
+	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
+	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminCommentsAssignmentPopulateAction">VIEW COMMENT ASSIGNMENT</html:link>
 	<BR>
-	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="AdminModelsAssignmentPopulateAction">&nbsp;&nbsp;VIEW MODEL ASSIGNMENT</html:link>
+	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
+	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminModelsAssignmentPopulateAction">VIEW MODEL ASSIGNMENT</html:link>
 	<BR>
 	<% 
 	   List theRoles = (List) pageContext.getSession().getAttribute(Constants.CURRENTUSERROLES);
 	   if (theRoles.contains(Admin.Roles.COORDINATOR))
 	   {
 	%>  
-	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="AdminRolesAssignmentPopulateAction">&nbsp;&nbsp;ROLE MANAGEMENT</html:link>
+	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
+	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminRolesAssignmentPopulateAction">ROLE MANAGEMENT</html:link>
 	<BR>
-	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" action="AdminUserManagementPopulateAction">&nbsp;&nbsp;USER MANAGEMENT</html:link>
+	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
+	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminUserManagementPopulateAction">USER MANAGEMENT</html:link>
 	<BR>
 	<%
 	   }
 	%>	
-	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5><html:link styleClass="subMenuPrimary" href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,0)">&nbsp;&nbsp;HELP</html:link>	
+	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
+	&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,0)">HELP</html:link>	
 </DIV>
 
 <BR>
