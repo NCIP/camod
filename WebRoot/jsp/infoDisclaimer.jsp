@@ -36,7 +36,7 @@
 				you may need to seek a license for its commercial use. You are encouraged to review important Use Guidelines by 
 				clicking on the buttons below.
 				<br><br>
-				<a href="infoPrivacyNotice.jsp"><b>USE GUIDELINES:</b></a> Posting of Data and Results/Downloading of Materials/Copyright Status/Privacy 
+				<a href="infoPrivacyNotice.do"><b>USE GUIDELINES:</b></a> Posting of Data and Results/Downloading of Materials/Copyright Status/Privacy 
 				Notice/Monitoring of Website/External Links/Disclaimer of Liability/Disclaimer of Endorsement 
 				
 				
