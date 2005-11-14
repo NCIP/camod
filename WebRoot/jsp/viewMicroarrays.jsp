@@ -16,7 +16,7 @@
 			<tr>
 				<td class="formTitle" height="20">
 				Microarrays - Model:
-				<c:out value="${mdl.modelDescriptor}"/></td>
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
 			</tr>			
 			
 			<tr>

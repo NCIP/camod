@@ -4,12 +4,13 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
-
+    
 <bean:define id="mdl" name="animalmodel"/>
-<bean:define id="tgc" name="transgeneColl"/>
-<bean:define id="tmc" name="targetedModColl"/>
-<bean:define id="imc" name="inducedMutColl"/>
-<bean:define id="gsc" name="genomicSegColl"/>
+<bean:define id="tgc" name="<%=Constants.TRANSGENE_COLL%>"/>
+<bean:define id="tmc" name="<%=Constants.TARGETED_MOD_COLL%>"/>
+<bean:define id="imc" name="<%=Constants.INDUCED_MUT_COLL%>"/>
+<bean:define id="gsc" name="<%=Constants.GENOMIC_SEG_COLL%>"/>
+<bean:define id="smc" name="<%=Constants.SPONTANEOUS_MUT_COLL%>"/>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -90,29 +91,19 @@
 				</ul>&nbsp;
 			</td>			
 		</tr>
-		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Spontaneous Mutation</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-<%      
-	final List spc = ((AnimalModel)mdl).getSpontaneousMutationCollection();
-	final int cc2 = (spc != null)?spc.size():0;
-	System.out.println("Spon. mut. coll size()=" + cc2);
-%>
-                <ul>
-		<% if ( cc2 > 0 ) { %>
-				
-					<logic:iterate id="sm" name="mdl" property="spontaneousMutationCollection" indexId="idx">
+				<ul>
+				    <logic:iterate id="sm" name="smc" indexId="idx">
 						<li>
 						<a href="<c:out value="#spon_mut_${idx}"/>">
 								<bean:write name="sm" property="name"/>
 						</a>
 					</logic:iterate>
-				
-		<%}%>
-		        </ul>&nbsp;
-			</td>
-		</tr>			
+				</ul>&nbsp;
+			</td>			
+		</tr>
 	</TABLE>
 	
 </td></tr>
@@ -686,6 +677,53 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${im.comments}"/>&nbsp;</td>
+		</tr>
+	</TABLE>
+</td></tr>
+</TABLE>
+</c:forEach>
+</c:if>
+
+<!-- Spontaneous Mutation-->
+<c:set var="count" value="0"/>
+<c:if test="${not empty smc}">
+<c:forEach var="sm" items="${smc}">
+<TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+	<tr><td>
+	<a name="<c:out value="spon_mut_${count}"/>"/>
+	<c:set var="count" value="${count + 1}"/>
+	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+		<tr>
+			<td class="formTitle" height="20" colspan="2">
+				Spontaneous Mutation - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="GreyBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<c:if test="${not empty sm.geneticAlterationCollection}">
+					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+						<tr>
+							<td class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></td>
+							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
+						</tr>
+						<c:forEach var="gene" items="${sm.geneticAlterationCollection}">
+							<tr>
+					            <td class="WhiteBox"><c:out value="${gene.observation}"/>&nbsp;</td>
+					            <td class="WhiteBoxRightEnd"><c:out value="${gene.methodOfObservation}"/>&nbsp;</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+			</td>
+		</tr>
+        <tr>
+			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${sm.mutationIdentifier.numberMGI}"/>&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="GreyBox" width="35%"><b>Comments</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${sm.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
 </td></tr>

@@ -19,7 +19,7 @@
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
 					Xenograft - Model:
-					<c:out value="${xm.modelDescriptor}"/>
+					<c:out value="${xm.modelDescriptor}" escapeXml="false"/>
 				</td>				
 			</tr>			
 			<tr>

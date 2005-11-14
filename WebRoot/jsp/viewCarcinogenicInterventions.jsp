@@ -18,7 +18,8 @@
 			<tr>
 				<td class="formTitle" height="20" colspan="6">
 					Carcinogenic Agents - Model:
-					<c:out value="${mdl.modelDescriptor}"/></td>				
+					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				</td>				
 			</tr>
 			
 			</TABLE>

@@ -24,6 +24,12 @@
 		        <html:text styleClass="formFieldSized" property="NSCNumber" size="30"/>
 	        </TD>
         </TR>
+        <TR>
+	        <TD class=formRequiredNotice width=5>*</TD>
+	        <TD colspan="2" class=formRequiredLabel>
+	        	<LABEL for=field1>One or more of the following selections must be checked</LABEL>
+	        </TD>
+        </TR>
 		<TR>
 	        <TD class=formRequiredNotice width=5>&nbsp;</TD>
 	        <TD class=formLabel>DTP yeast Screening Data</TD>

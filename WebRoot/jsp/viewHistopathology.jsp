@@ -10,7 +10,7 @@
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
-	<bean:define id="hpColl" name="mdl" property="histopathologyCollection"/>
+	<bean:define id="hpColl" name="mdl" property="histopathologyCollectionSorted"/>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
@@ -20,11 +20,11 @@
 			<tr>
 				<td class="formTitle" height="20" >
 				Histopathology - Model:
-				<c:out value="${mdl.modelDescriptor}"/>
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 				</td>				
 			</tr>
 <%      
-	final List histopathColl = ((AnimalModel)mdl).getHistopathologyCollection();
+	final List histopathColl = ((AnimalModel)mdl).getHistopathologyCollectionSorted();
 	final int cc = (histopathColl!=null)?histopathColl.size():0;
 	System.out.println("Histopathology rowCount==>" + cc);
 %>
@@ -35,7 +35,7 @@
 						<a href="<c:out value="#histo_${histstat.count}"/>">
 							<c:out value="${h.organ.EVSPreferredDescription}"/>
 						</a>
-						<bean:define id="mtsColl" name="h" property="metastatisCollection"/>
+						<bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
 						<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
 							<br>&nbsp;&nbsp;-&nbsp;
 							<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
@@ -43,7 +43,7 @@
 							</a>&nbsp;(Metastasis)
 						</c:forEach>
 	                    <br>
-						<bean:define id="cmColl" name="h" property="clinicalMarkerCollection"/>
+						<bean:define id="cmColl" name="h" property="clinicalMarkerCollectionSorted"/>
 						<c:if test="${not empty cmColl}">
 						    <br>
 							<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="50%">
@@ -174,7 +174,7 @@
 	            <td></td>
 	        </tr>
         </TABLE>
-	    <bean:define id="mtsColl" name="h" property="metastatisCollection"/>
+	    <bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
 	    <c:forEach var="m" items="${mtsColl}" varStatus="metastat">
             <TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>

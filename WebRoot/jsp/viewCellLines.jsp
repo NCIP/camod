@@ -18,10 +18,10 @@
 			align="center" width="100%">	
 			<tr>
 				<td class="formTitle" height="20" colspan="2">
-				Cell Lines - Model:
-				<c:out value="${mdl.modelDescriptor}"/></td>				
+				    Cell Lines - Model: <c:out value="${mdl.modelDescriptor}" escapeXml="false" />
+				</td>				
 			</tr>
-			<c:forEach var="p" items="${mdl.cellLineCollection}" 
+			<c:forEach var="p" items="${mdl.cellLineCollectionSorted}" 
 				       varStatus="stat">
 				<c:choose>
 					<c:when test = "${stat.count % 2 == 0}">

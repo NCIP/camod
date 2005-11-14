@@ -20,10 +20,10 @@
 			<tr>
 				<td class="formTitle" height="20" colspan="2">
 				Images - Model:
-				<c:out value="${mdl.modelDescriptor}"/></td>				
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false" /></td>				
 			</tr>			
 
-			<c:forEach var="p" items="${mdl.imageCollection}" 
+			<c:forEach var="p" items="${mdl.imageCollectionSorted}" 
 				       varStatus="stat">
 			<tr>
 				<c:choose>

@@ -3,6 +3,9 @@
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<!-- needed for tooltips -->
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 <SCRIPT LANGUAGE="JavaScript">
 		
 	function checkFields() {

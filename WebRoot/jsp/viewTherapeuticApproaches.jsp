@@ -22,16 +22,18 @@
 			</tr>
 			<tr>
 				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
-					<c:forEach var="t" items="${ta}" 
-					       varStatus="stat">
-					       <c:out value="${t.agent.name}"/><br/>
+					<c:forEach var="t" items="${ta}" varStatus="stat">
+					    <a href="<c:out value="#therap_${stat.count}"/>">
+							 <c:out value="${t.agent.name}"/><br/>
+						</a>  
 					</c:forEach>
 				</td>
 			</tr>
 			</TABLE>
-			<br>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-				<c:forEach var="t" items="${ta}" varStatus="stat">
+			<br>	
+			<c:forEach var="t" items="${ta}" varStatus="stat">
+				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+				    <a name="<c:out value="therap_${stat.count}"/>"/>
 					<c:set var="agt" value="${t.agent}"/>
 					<%@ include file="/jsp/includeAgentDetails.jsp" %>
 					<%@ include file="/jsp/includePreclinicalTrials.jsp" %>
@@ -40,8 +42,9 @@
 					<c:set var="agentId" value="${agt.id}"/>
 					<%@ include file="/jsp/includeYeastData.jsp" %>
 					<%@ include file="/jsp/includeInvivoData.jsp" %>
-	            </c:forEach>
-			</TABLE>
+			    </TABLE>
+			</c:forEach>
+			<br/>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </td></tr></TABLE>
