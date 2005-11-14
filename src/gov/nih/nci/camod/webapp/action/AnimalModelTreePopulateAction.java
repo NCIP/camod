@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.36 2005-11-07 17:43:55 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.37 2005-11-14 14:19:51 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.36  2005/11/07 17:43:55  pandyas
+ *  cleaned up item from problem tab
+ *
  *  Revision 1.35  2005/11/03 18:54:10  pandyas
  *  Modified for histopathology screens
  *
@@ -37,7 +40,7 @@
  *  Revision 1.25  2005/10/11 20:52:55  schroedn
  *  EngineeredTransgene and GenomicSegment edit/save works, not image
  *
- *  TODO EngineeredTransgene - 'Other' Species not working
+ *  EngineeredTransgene - 'Other' Species not working
  *
  *  Revision 1.24  2005/10/10 14:11:45  georgeda
  *  Changes for comment curation

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.24 2005-11-10 22:07:36 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.25 2005-11-14 14:19:13 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/11/10 22:07:36  georgeda
+ * Fixed part of bug #21
+ *
  * Revision 1.23  2005/11/10 17:08:58  schroedn
  * Defect #12 fix schroedln (11/9/05)
  * Added the administrative site to the, In Vivo Screening Data Summary. Edited SQL query getInvivoResults
@@ -527,6 +530,7 @@ public class QueryManagerImpl extends BaseManager {
 		log.trace("Entering QueryManagerImpl.getCommentsBySectionForPerson");
 
 		// If no person, only get approved items
+        // TODO: make the states a constant
 		String theStateHQL = "(c.state = 'Screened-approved'";
 		if (inPerson == null) {
 			theStateHQL += ") ";
@@ -534,7 +538,6 @@ public class QueryManagerImpl extends BaseManager {
 			theStateHQL += "or c.submitter = :party_id) ";
 		}
 
-		// TODO: make the states a constant
 		String theHQLQuery = "from Comments as c where "
 				+ theStateHQL
 				+ " and c.cancerModel in ("

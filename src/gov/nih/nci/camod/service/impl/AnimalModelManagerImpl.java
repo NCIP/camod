@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.58 2005-11-08 16:48:24 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.59 2005-11-14 14:17:57 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.58  2005/11/08 16:48:24  georgeda
+ * Changes for images
+ *
  * Revision 1.57  2005/11/07 19:15:17  pandyas
  * modified for clinical marker screen
  *
@@ -79,7 +82,7 @@
  * Revision 1.31  2005/10/11 20:52:51  schroedn
  * EngineeredTransgene and GenomicSegment edit/save works, not image
  *
- * TODO EngineeredTransgene - 'Other' Species not working
+ * EngineeredTransgene - 'Other' Species not working
  *
  * Revision 1.30  2005/10/10 20:05:19  pandyas
  * removed animalmodel reference in populate method

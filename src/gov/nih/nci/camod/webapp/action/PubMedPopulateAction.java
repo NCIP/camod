@@ -22,11 +22,7 @@ public class PubMedPopulateAction extends BaseAction {
             HttpServletResponse response) throws IOException, ServletException {
 
         System.out.println("<PubMedPopulateAction> Entering...");
-
-        //String pmid = request.getParameter("pmid");       
-        //System.out.println( "PMID=" + pmid );
         
-        // TODO: set the form values from the Publication obj
         PublicationForm pubForm = (PublicationForm) form;
         String pmid = pubForm.getPmid(); 
         
@@ -58,8 +54,6 @@ public class PubMedPopulateAction extends BaseAction {
             pubForm.setStartPage("");
             pubForm.setEndPage("");
 
-            // Add a message to be displayed in submitOverview.jsp saying you've
-            // created a new model successfully
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("publication.incorrect.pmid"));
             saveErrors(request, msg);

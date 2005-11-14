@@ -1,21 +1,13 @@
 /*
- * Created on July 20, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
+ * 
+ * $Id: Comments.java,v 1.8 2005-11-14 14:16:51 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-
 import gov.nih.nci.camod.util.Duplicatable;
 
-/**
- * @author pandyas
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class Comments extends BaseObject implements Serializable, Curateable, Duplicatable {
 
     private static final long serialVersionUID = 3259595453799404851L;

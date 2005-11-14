@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.16 2005-11-11 16:27:44 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.17 2005-11-14 14:19:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/11/11 16:27:44  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -146,9 +149,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         if (inXenograftData.getOtherHostEthinicityStrain() != null
                 && !inXenograftData.getOtherHostEthinicityStrain().equals(theOldVocab)) {
 
-            // TODO refine email content
-
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+            ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
 
             // Iterate through all the reciepts in the config file
             String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
@@ -206,8 +207,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
         // anytime the graft type is "other"
         if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            // TODO: refine email content
-
+          
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
             // Iterate through all the reciepts in the config file

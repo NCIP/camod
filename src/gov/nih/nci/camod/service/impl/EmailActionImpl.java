@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.13 2005-10-20 19:24:20 stewardd Exp $
+ * $Id: EmailActionImpl.java,v 1.14 2005-11-14 14:18:22 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/10/20 19:24:20  stewardd
+ * modified comments in code for accuracy
+ *
  * Revision 1.12  2005/10/20 19:15:39  stewardd
  * Employs new EmailUtil API supporting e-mail content built from ResourceBundle-stored templates with support for variables (via Velocity API)
  *
@@ -139,8 +142,6 @@ public class EmailActionImpl extends BaseCurateableAction {
                 }
 
                 if (theRecipients.length > 0) {
-
-                    // TODO modify the variables used and their values as needed by final choice of templates
 
                     // gather variable values to build the e-mail content with
                     TreeMap valuesForVariables = new TreeMap();

@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.9 2005-11-09 00:17:16 georgeda Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.10 2005-11-14 14:18:33 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/09 00:17:16  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.8  2005/11/03 21:47:48  georgeda
  * Changed EVS api
  *
@@ -111,9 +114,6 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         
         //anytime the viral vector is "other"
         if (inGeneDeliveryData.getViralVector().equals(Constants.Dropdowns.OTHER_OPTION) )   {
-            // TODO: send an email
-        	System.out.println("viral vector equals other");
-            System.out.println("SENDING EMAIL VIRAL VECTOR");
             
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 

@@ -1,16 +1,9 @@
 /*
- * Created on Jul 21, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
+ * 
+ * $Id: CancerModel.java,v 1.2 2005-11-14 14:16:51 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
-/**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public interface CancerModel extends Curateable {
 }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.32 2005-11-07 19:15:33 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.33 2005-11-14 14:17:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2005/11/07 19:15:33  pandyas
+ * modified for clinical marker screen
+ *
  * Revision 1.31  2005/11/03 18:54:43  pandyas
  * Modified for histopathology screens
  *
@@ -39,7 +42,7 @@
  * Revision 1.20  2005/10/11 20:52:53  schroedn
  * EngineeredTransgene and GenomicSegment edit/save works, not image
  *
- * TODO EngineeredTransgene - 'Other' Species not working
+ * EngineeredTransgene - 'Other' Species not working
  *
  * Revision 1.19  2005/10/10 14:06:44  georgeda
  * Performance improvement
@@ -72,6 +75,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2005/11/07 19:15:33  pandyas
+ * modified for clinical marker screen
+ *
  * Revision 1.31  2005/11/03 18:54:43  pandyas
  * Modified for histopathology screens
  *
@@ -108,7 +114,7 @@
  * Revision 1.20  2005/10/11 20:52:53  schroedn
  * EngineeredTransgene and GenomicSegment edit/save works, not image
  *
- * TODO EngineeredTransgene - 'Other' Species not working
+ * EngineeredTransgene - 'Other' Species not working
  *
  * Revision 1.19  2005/10/10 14:06:44  georgeda
  * Performance improvement

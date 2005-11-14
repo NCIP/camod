@@ -1,8 +1,7 @@
 /*
- * Created on May 5, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
+ * 
+ * $Id: AgentTarget.java,v 1.6 2005-11-14 14:16:51 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -12,13 +11,6 @@ import java.util.TreeSet;
 import java.util.List;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
-
-/**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class AgentTarget extends BaseObject implements Serializable, Comparable {
 
     private static final long serialVersionUID = 4259725453799404851L;

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.72 2005-11-11 21:24:19 georgeda Exp $
+ * $Id: Constants.java,v 1.73 2005-11-14 14:15:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.72  2005/11/11 21:24:19  georgeda
+ * Defect #29.  Separate drug screening and animal model search results.
+ *
  * Revision 1.71  2005/11/11 15:37:57  georgeda
  * Fixed IE error with action name
  *
@@ -511,6 +514,8 @@ public class Constants {
 
     public static final String INDUCED_MUT_COLL = "inducedMutColl";
 
+    public static final String SPONTANEOUS_MUT_COLL = "spontaneousMutColl";
+    
     public static final String TRANSGENE_CNT = "transgeneCnt";
 
     public static final String GENOMIC_SEG_CNT = "genomicSegCnt";

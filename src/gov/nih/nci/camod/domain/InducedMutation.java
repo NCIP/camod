@@ -68,9 +68,6 @@ public class InducedMutation extends EngineeredGene {
     
     //TODO: this is not how we should do this and we should clean this up later
     public EnvironmentalFactor getEnvironmentalFactor () {
-    	
-		//EnvironmentalFactor nick = (EnvironmentalFactor) environmentalFactorCollection.get(0);
-		//System.out.println( "******************* Nick=" + nick.getName() );
     	if ( environmentalFactorCollection.size() > 0 )
     		return (EnvironmentalFactor) environmentalFactorCollection.get(0);
     	else

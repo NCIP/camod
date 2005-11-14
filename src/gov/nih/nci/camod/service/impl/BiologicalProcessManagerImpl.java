@@ -1,10 +1,9 @@
-package gov.nih.nci.camod.service.impl;
 /*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
+ * 
+ * $Id: BiologicalProcessManagerImpl.java,v 1.3 2005-11-14 14:18:13 georgeda Exp $
  */
+package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.BiologicalProcess;
 import gov.nih.nci.camod.service.BiologicalProcessManager;
@@ -14,12 +13,6 @@ import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 import java.util.List;
 
-/**
- * @author pandyas
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public class BiologicalProcessManagerImpl extends BaseManager implements BiologicalProcessManager {
 
     /**

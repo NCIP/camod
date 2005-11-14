@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.14 2005-11-09 00:17:16 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.15 2005-11-14 14:19:22 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/09 00:17:16  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.13  2005/11/02 19:02:55  pandyas
  * Added e-mail functionality
  *
@@ -641,11 +644,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         /* Set other name or selected chemical name */
         // anytime the name is "other"
         if (inNameData.getName().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            System.out.println("Name is other");
-
-            // TODO: Send an email
-            System.out.println("SENDING EMAIL STRAIN");
-
+          
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
             // Iterate through all the reciepts in the config file

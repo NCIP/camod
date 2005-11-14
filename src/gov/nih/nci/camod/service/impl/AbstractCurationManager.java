@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AbstractCurationManager.java,v 1.7 2005-09-19 13:08:28 georgeda Exp $
+ * $Id: AbstractCurationManager.java,v 1.8 2005-11-14 14:17:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/09/19 13:08:28  georgeda
+ * Slight change to interface
+ *
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -96,8 +99,6 @@ public abstract class AbstractCurationManager implements CurationManager {
 
             // Create an instance of the DocumentBuilderFactory
             DocumentBuilderFactory theDocumentBuilderFactory = DocumentBuilderFactory.newInstance();
-
-            // TODO: Get the validation working
             theDocumentBuilderFactory.setValidating(false);
             theDocumentBuilderFactory.setNamespaceAware(true);
 

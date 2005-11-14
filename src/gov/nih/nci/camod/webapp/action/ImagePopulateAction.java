@@ -44,9 +44,7 @@ public class ImagePopulateAction extends BaseAction {
                 imageForm.setThumbUrl(inImage.getThumbUrl());
                 imageForm.setImageUrl(inImage.getImageUrl());
 				// TODO: Display a message on the current image, uploading
-				// another
-				// image will replace current image
-				// TODO: Display thumbnail and viewer for image already uploaded
+				// another image will replace current image
 			}
 		}
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, "");

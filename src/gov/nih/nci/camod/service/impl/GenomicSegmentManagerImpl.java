@@ -91,7 +91,6 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         inGenomicSegment.setCloneDesignator(inGenomicSegmentData.getCloneDesignator());
 
         // SegmentType
-        // TODO: Find matching existing segment type
         SegmentType inSegmentType = null;
         if (inGenomicSegment.getSegmentTypeCollection().size() > 0)
             inSegmentType = (SegmentType) inGenomicSegment.getSegmentTypeCollection().get(0);
@@ -100,7 +99,6 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 
         inSegmentType.setName(inGenomicSegmentData.getSegmentName());
 
-        // TODO: Send Email
         if (inGenomicSegmentData.getOtherSegmentName() != null) {
             inSegmentType.setNameUnctrlVocab(inGenomicSegmentData.getOtherSegmentName());
 
