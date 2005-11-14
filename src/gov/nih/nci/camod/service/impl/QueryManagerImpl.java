@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.26 2005-11-14 15:14:41 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.27 2005-11-14 16:52:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2005/11/14 15:14:41  schroedn
+ * Defect #18
+ * Changed the order the Stage 2 - Dose Reponse for is sorted, now Strain / Dosage is in order. Problem was the Dosage is stored iin Treatment as a VARCHAR instead of an integer.
+ *
  * Revision 1.25  2005/11/14 14:19:13  georgeda
  * Cleanup
  *
@@ -584,13 +588,21 @@ public class QueryManagerImpl extends BaseManager {
 
 		log.trace("Entering QueryManagerImpl.getCommentsByStateForPerson");
 
-		String theHQLQuery = "from Comments as c where c.state = :state and c.id in ("
-				+ "select l.comment from Log as l where l.submitter = :party_id and l.type = :state)";
+		String theHQLQuery = "from Comments as c where c.state = :state and c.id in (";
+        Query theQuery = null; 
+        if (inPerson == null) {
+            theHQLQuery += "select l.comment from Log as l where l.type = :state)";
+            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+            theQuery.setParameter("state", inState);
+        }
+        else {
+            theHQLQuery += "select l.comment from Log as l where l.submitter = :party_id and l.type = :state)";
+            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+            theQuery.setParameter("party_id", inPerson.getId());
+            theQuery.setParameter("state", inState);
+        }
+        
 		log.debug("The HQL query: " + theHQLQuery);
-
-		Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-		theQuery.setParameter("party_id", inPerson.getId());
-		theQuery.setParameter("state", inState);
 
 		List theComments = theQuery.list();
 
@@ -621,13 +633,22 @@ public class QueryManagerImpl extends BaseManager {
 
 		log.trace("Entering QueryManagerImpl.getCurrentLog");
 
-		String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in ("
-				+ "select l.cancerModel from Log as l where l.submitter = :party_id and l.type = :state)";
+		String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (";
+        Query theQuery = null; 
+        
+        if (inPerson == null) {
+            theHQLQuery += "select l.cancerModel from Log as l where l.type = :state)";
+            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+            theQuery.setParameter("state", inState);
+        }
+        else {
+            theHQLQuery += "select l.cancerModel from Log as l where l.submitter = :party_id and l.type = :state)";
+            theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+            theQuery.setParameter("party_id", inPerson.getId());
+            theQuery.setParameter("state", inState);
+        }
+        
 		log.debug("The HQL query: " + theHQLQuery);
-
-		Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
-		theQuery.setParameter("party_id", inPerson.getId());
-		theQuery.setParameter("state", inState);
 
 		List theComments = theQuery.list();
 

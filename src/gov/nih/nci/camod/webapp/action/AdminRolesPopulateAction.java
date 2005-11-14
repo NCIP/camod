@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesPopulateAction.java,v 1.12 2005-10-17 13:29:12 georgeda Exp $
+ * $Id: AdminRolesPopulateAction.java,v 1.13 2005-11-14 16:53:11 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/10/17 13:29:12  georgeda
+ * Updates
+ *
  * Revision 1.11  2005/10/10 14:11:25  georgeda
  * Changes for comment curation and performance improvement
  *
@@ -79,13 +82,13 @@ public class AdminRolesPopulateAction extends BaseAction {
 		// Coordinator specific curation states
 		if (theRoles.contains(Constants.Admin.Roles.COORDINATOR)) {
 
-			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Screened-approved",
+			addModelsToRequest(inRequest, theAnimalModelManager, null, "Screened-approved",
 					Constants.Admin.MODELS_NEEDING_EDITOR_ASSIGNMENT);
 
-			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Complete-not screened",
+			addModelsToRequest(inRequest, theAnimalModelManager, null, "Complete-not screened",
 					Constants.Admin.MODELS_NEEDING_SCREENER_ASSIGNMENT);
 
-			addCommentsToRequest(inRequest, theCommentsManager, theUser, "Complete-not screened",
+			addCommentsToRequest(inRequest, theCommentsManager, null, "Complete-not screened",
 					Constants.Admin.COMMENTS_NEEDING_ASSIGNMENT);
 		}
 
