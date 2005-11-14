@@ -40,7 +40,7 @@
 				Notice/Monitoring of Website/External Links/Disclaimer of Liability/Disclaimer of Endorsement 
 				
 				
-				</P
+				</P>
 				</td> 
 			</tr>
 			
