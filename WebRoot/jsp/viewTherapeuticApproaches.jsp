@@ -35,11 +35,11 @@
 				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 				    <a name="<c:out value="therap_${stat.count}"/>"/>
 					<c:set var="agt" value="${t.agent}"/>
+					<c:set var="agentId" value="${agt.id}"/>
+					<c:set var="nscnum" value="${agt.nscNumber}"/>
 					<%@ include file="/jsp/includeAgentDetails.jsp" %>
 					<%@ include file="/jsp/includePreclinicalTrials.jsp" %>
-					<c:set var="nscnum" value="${agt.nscNumber}"/>
 					<%@ include file="/jsp/includeClinicalTrials.jsp" %>
-					<c:set var="agentId" value="${agt.id}"/>
 					<%@ include file="/jsp/includeYeastData.jsp" %>
 					<%@ include file="/jsp/includeInvivoData.jsp" %>
 			    </TABLE>
