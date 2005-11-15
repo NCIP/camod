@@ -16,7 +16,12 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("searchDrugScreening.jsp") || 
 						jspName.equals("searchTableOfContents.jsp") || 
 						jspName.equals("searchResultsDrugScreen.jsp") || 
-						jspName.equals("searchResults.jsp")) {
+						jspName.equals("searchResults.jsp")||
+						jspName.equals("expDesignStage0.jsp")||
+						jspName.equals("expDesignStage1.jsp")||
+						jspName.equals("expDesignStage2.jsp")||
+						jspName.equals("yeastStrainsStage01.jsp")||
+						jspName.equals("yeastStrainsStage2.jsp")) {
 				return "subSearchMenu.jsp";
 			} 
 			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 

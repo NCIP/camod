@@ -1,3 +1,4 @@
+
 <!-- yeast data -->
 <c:set var="yst" value="${yeastData[agentId]}"/>
 <c:forEach var="stg" items="${yst}" varStatus="stat2">
@@ -31,10 +32,26 @@
 				</tr>
 				<tr>
 					<td class="greySubTitle" colspan="11">
-					<a href="javascript:expdesign2()"><br>Experimental Design - Stage <c:out value="${stat2.count}"/> Testing</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:strains0()">
-						Yeast Strains used for Stage <c:out value="${stat2.count - 1}"/> Experiments
-					</a>
-					<br>
+						<br>
+							<c:if test="${stat2.count-1=='0'}">
+								<html:link action="expDesignStage0">Experimental Design - Stage <c:out value="${stat2.count - 1}"/> Testing
+								</html:link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<html:link action="yeastStrainsStage01">Yeast Strains used for Stage <c:out value="${stat2.count - 1}"/> Experiments
+								</html:link>								
+							</c:if>
+							<c:if test="${stat2.count-1=='1'}">
+								<html:link action="expDesignStage1">Experimental Design - Stage <c:out value="${stat2.count - 1}"/> Testing
+								</html:link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<html:link action="yeastStrainsStage01">Yeast Strains used for Stage <c:out value="${stat2.count - 1}"/> Experiments
+								</html:link>								
+							</c:if>
+							<c:if test="${stat2.count-1=='2'}">
+								<html:link action="expDesignStage2">Experimental Design - Stage <c:out value="${stat2.count - 1}"/> Testing
+								</html:link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<html:link action="yeastStrainsStage2">Yeast Strains used for Stage <c:out value="${stat2.count - 1}"/> Experiments
+								</html:link>								
+							</c:if>						
+						<br>
 				 	</td>
 				</tr>
 				<tr>
