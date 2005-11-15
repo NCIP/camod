@@ -96,6 +96,7 @@ function chkOtherAdminRoute() {
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber" />
 			</td>
 	</tr>
@@ -108,6 +109,7 @@ function chkOtherAdminRoute() {
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<label for="field1">&nbsp;&nbsp;</label>
 				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber" />
 			</td>
 	</tr>	
@@ -204,7 +206,7 @@ function chkOtherAdminRoute() {
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized"  property="dosage" size="10"  />
+			<html:text styleClass="formFieldUnSized"  property="dosage" size="15"  />
 			<label for="field1">&nbsp;Units&nbsp;</label>			
 			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>				
@@ -213,7 +215,7 @@ function chkOtherAdminRoute() {
 	</tr> 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Administrative Route:</label>
+		<td class="formLabel"><label for="field3">Administrative Route:</label>
 		<camod:cshelp key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -221,7 +223,7 @@ function chkOtherAdminRoute() {
 		<label for="field3">- if Administration Route is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldUnSized" size="1" property="administrativeRoute" onclick="chkOtherAdminRoute();">												
+			<html:select styleClass="formFieldSized" size="1" property="administrativeRoute"  onclick="chkOtherAdminRoute();">												
 				<html:options name="<%= Dropdowns.ADMINISTRATIVEROUTEDROP %>"/>					
 			</html:select>			
 		</td>
@@ -246,7 +248,7 @@ function chkOtherAdminRoute() {
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age at Treatment:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="10"/>
+			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15"/>
 			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
@@ -267,9 +269,9 @@ function chkOtherAdminRoute() {
         <TD class="formLabel"><label for="field1">Toxicity Grade:</label>
         <camod:cshelp mapId="therapy_help" key="THERAPY.TOXICITY_GRADE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
         </TD>
-		<td class="formField">
+		<td class="formField" >
 			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" >												
-				<html:options name="<%= Dropdowns.TOXICITYGRADESDROP %>"/>					
+				<html:options name="<%= Dropdowns.TOXICITYGRADESDROP %>" />					
 			</html:select>
 		</td>
 	</tr>	
@@ -281,7 +283,7 @@ function chkOtherAdminRoute() {
 		<td class="formField">		
 			<label for="field3">Time to preneoplastic lesion malignancy metastais</label>
 			<br>
-			<html:text styleClass="formFieldUnSized" property="tumorResponse"  size="10" />
+			<html:text styleClass="formFieldUnSized" property="tumorResponse"  size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="tumorAgeUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
