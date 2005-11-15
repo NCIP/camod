@@ -1,7 +1,7 @@
 <!-- clinical trials protocols -->
 <c:set var="cp" value="${clinProtocols[agentId]}"/>
 
-<c:if test="${not empty cp}">
+<c:if test="${not empty cp && foundClinicalData == 0}">
 	<c:set var="foundClinicalData" value="1"/>
 	<tr>
 	    <td class="formTitleBlue" height="20" colspan="2" align="center">
