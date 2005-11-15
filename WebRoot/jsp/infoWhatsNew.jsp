@@ -42,32 +42,32 @@
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Utilization of NCI Thesaurus
+																														<TD class="resultsBoxWhite" width="20%">Utilization of NCI Thesaurus
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	caMOD 2.0 utilized the vocabulary services of NCI Thesaurus. The mouse anatomy and disease vocabularies have been updated by the Pathology working group of the Mouse Models of Human Cancers Consortium (MMHCC).
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Utilization of CSM
+																														<TD class="resultsBoxWhite" width="20%">Utilization of CSM
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	caMOD 2.0 utilizes the the Common Security Module (CSM) for user authentication.
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - previously entered models
+																														<TD class="resultsBoxWhite" width="20%">Submission - previously entered models
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	After the user logs in the submission his/her previously entered models and models records in which he/she is listed a Principal Investigator are listed.
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Model Characteristics
+																														<TD class="resultsBoxWhite" width="20%">Submission - Model Characteristics
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	The scope of the cancer models database was expanded to include tool mice. Tool mice or tool animals are strains that can be used to generate cancer models and do normally not develop tumors. Tool mice are commonly used to generate conditional knock out animals. 
 		Examples for tool strains are Cre-expressing strains or strains that carry one or more floxed allels.
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Genetic Description
+																														<TD class="resultsBoxWhite" width="20%">Submission - Genetic Description
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%"> 
 	<ul><li>A field was added to all pages in this part of the application to allow the submitter to enter the MGI (Mouse Genome Informatics) identifier which will enable the retrieval of additional information from the informatics resources at the Jackson Laboratory.
@@ -80,7 +80,7 @@
 																													
 																													
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Carcinogenic Intervention
+																														<TD class="resultsBoxWhite" width="20%">Submission - Carcinogenic Intervention
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">
 	<ul><li>A page for entering information on Gene Delivery was added to this part of the application. Gene deliveries are done by viruses that carry a gene. 
@@ -88,14 +88,14 @@
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Publication
+																														<TD class="resultsBoxWhite" width="20%">Submission - Publication
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">
 	The user is asked to indicate if a particular publication the existence of the animal model was reported for the first time. Eventually this feature will be used to link to records in the Mouse Tumor Biology Database at the Jackson Laboratory. 
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Histopathology
+																														<TD class="resultsBoxWhite" width="20%">Submission - Histopathology
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	
 	<ul><li>Users can submit information about clinical markers and their values that were found in or are associated with specific tumor types.
@@ -104,7 +104,7 @@
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Therapeutic Approaches
+																														<TD class="resultsBoxWhite" width="20%">Submission - Therapeutic Approaches
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">
 	<ul><li>To better identify the drug, users can enter the NSC and the CAS number for the compound.
@@ -113,59 +113,59 @@
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Microarray Data
+																														<TD class="resultsBoxWhite" width="20%">Submission - Microarray Data
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	Micrroarray data are stored in MAGE-compliant caArray application instead of the Gene Expression Data Portal (GEDP).
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Images
+																														<TD class="resultsBoxWhite" width="20%">Submission - Images
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">		The text field for entering the staining method was replaced by a controlled vocabulary. 
 
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Xenograft
+																														<TD class="resultsBoxWhite" width="20%">Submission - Xenograft
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	Xenograft
 	Xenograft models can now be entered in a specifically designed part of the application. The Xenograft page was extended by the following fields: ATCC number, Cell amount, harvest date, graft type. 
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Submission - Model Availability
+																														<TD class="resultsBoxWhite" width="20%">Submission - Model Availability
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	Users can now enter information about the availability of the animal model from more sources as in caMOD 1.0. They can also indicate if the tool strains that were used to generate the model are available from one or more sources. The users can make multiple entries per model.
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Admission
+																														<TD class="resultsBoxWhite" width="20%">Admission
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	Users who have been assigned the roles of coordinator, screener, and editor will be presented with a to-do list of tasks when the access the Admin part after logging in.
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Search - Simple Search
+																														<TD class="resultsBoxWhite" width="20%">Search - Simple Search
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">
 	The simple search was expanded by a keyword search option.
 																														</TD>
 																													</TR>
 <TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Search - Advanced Search
+																														<TD class="resultsBoxWhite" width="20%">Search - Advanced Search
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	The advanced search includes now a query option for drugs or compounds used in therapeutic experiments, an option to query for models that develop metastases, and a keyword search.
 																														</TD>
 																													</TR>
 <TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Search - Search Detail Pages
+																														<TD class="resultsBoxWhite" width="20%">Search - Search Detail Pages
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	
 	The therapeutic approaches pages includes information about drug screens in yeast and in-vivo, as well as clinical trials.
 																														</TD>
 																													</TR>
 <TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Search - Navigation
+																														<TD class="resultsBoxWhite" width="20%">Search - Navigation
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	
 	Only search detail pages that contain data will have active links on the left side menu bar. 
@@ -173,7 +173,7 @@
 																													</TR>
 
 <TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Search - Drug Screening 
+																														<TD class="resultsBoxWhite" width="20%">Search - Drug Screening 
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	The user can query for results of drug tested in yeast strains, xenograft and allograft mouse models (titled for this purpose as in-vivo models), pre-clinical models, and humans. The tests in yeast and in-vivo models were performed by the Developmental Therapeutics Program of the National Cancer Institute. Information about pre-clinical models is retrieved from the models part of caMOD, and human data are retrieved via caBIO from clinical trials. 
 																														</TD>
@@ -198,7 +198,7 @@
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Table 
+																														<TD class="resultsBoxWhite" width="20%">Table 
                                 of Contents
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	A table 
@@ -212,7 +212,7 @@
 																														</TD>
 																													</TR>
 																													<TR>
-																														<TD class="resultsBoxWhite" width="20%"><IMG src="images/bullet_point.gif">&nbsp;Environmental 
+																														<TD class="resultsBoxWhite" width="20%">Environmental 
                                 Exposures and Dietary Regimen added
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	Models 
