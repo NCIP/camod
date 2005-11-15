@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.5 2005-10-17 18:19:28 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.6 2005-11-15 19:10:23 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/17 18:19:28  georgeda
+ * Added ability to sort
+ *
  * Revision 1.4  2005/10/17 13:27:54  georgeda
  * Updates
  *
@@ -32,7 +35,7 @@ public class AnimalModelSearchResult implements Comparable {
 
     private String myTumorSites = null;
 
-    private String myMetastatisSites = null;
+    private String myMetastasisSites = null;
 
     private String mySpecies = null;
 
@@ -125,18 +128,18 @@ public class AnimalModelSearchResult implements Comparable {
      */
     public String getMetastatisSites() throws Exception {
 
-        if (myMetastatisSites == null) {
+        if (myMetastasisSites == null) {
             fetchAnimalModel();
 
-            myMetastatisSites = "";
+            myMetastasisSites = "";
             List theOrgans = myAnimalModel.getDistinctMetastatisOrgansFromHistopathologyCollection();
 
             for (int i = 0, j = theOrgans.size(); i < j; i++) {
                 String theOrgan = (String) theOrgans.get(i);
-                myMetastatisSites += theOrgan + " (Metastatis)<br>";
+                myMetastasisSites += theOrgan + " (Metastasis)<br>";
             }
         }
-        return myMetastatisSites;
+        return myMetastasisSites;
     }
 
     /**
