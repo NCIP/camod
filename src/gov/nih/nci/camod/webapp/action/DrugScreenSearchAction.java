@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.4 2005-11-11 21:24:19 georgeda Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.5 2005-11-15 22:13:46 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/11 21:24:19  georgeda
+ * Defect #29.  Separate drug screening and animal model search results.
+ *
  * Revision 1.3  2005/11/10 22:07:36  georgeda
  * Fixed part of bug #21
  *
@@ -68,28 +71,43 @@ public final class DrugScreenSearchAction extends BaseAction {
 			String theHQLQuery = "from Agent where nsc_number = :nscNumber";
 			log.debug("The HQL query: " + theHQLQuery);
 			List agents = Search.query(theHQLQuery, theParams);
-
-			//agents = Search.query(agt);
-            request.getSession().setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, agents);
+            
+            request.setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, agents);
 			final int agtCount = (agents!=null)?agents.size():0;
 			AgentManager myAgentManager = (AgentManager)getBean("agentManager");
 			final HashMap clinProtocols = new HashMap();
 			final HashMap yeastResults = new HashMap();
 			final HashMap invivoResults = new HashMap();
 			final HashMap preClinicalResults = new HashMap();
+            String theAgentName = null;
+            String theCasNumber = null;
+            
+            Long theNscNumber = new Long(theForm.getNSCNumber());
+            
 			for(int i=0; i<agtCount; i++) {
 				Agent a = (Agent)agents.get(i);
 				if (a != null) {
-					Long nscNumber = a.getNscNumber();
-					if (nscNumber != null) {
+                    theNscNumber = a.getNscNumber();
+                    
+                    // Get the name
+                    if (theAgentName == null) {
+                        theAgentName = a.getName();
+                    }
+                    
+                    // Get the cas number
+                    if (theCasNumber == null) {
+                        theCasNumber = a.getCasNumber();
+                    }
+                    
+					if (theNscNumber != null) {
 						if (theForm.isDoClinical()) {
 							Collection protocols = myAgentManager.getClinicalProtocols(a);
-							clinProtocols.put(nscNumber, protocols);
+							clinProtocols.put(a.getId(), protocols);
 						}
 						if (theForm.isDoPreClinical()) {
 							try {
-								List models = QueryManagerSingleton.instance().getModelsForThisCompound(nscNumber);
-								preClinicalResults.put(nscNumber, models);
+								List models = QueryManagerSingleton.instance().getModelsForThisCompound(theNscNumber);
+								preClinicalResults.put(a.getId(), models);
 							}catch (Exception x) {
 								x.printStackTrace();
 							}
@@ -107,10 +125,13 @@ public final class DrugScreenSearchAction extends BaseAction {
 					}
 				}
 			}
-			request.getSession().setAttribute(Constants.CLINICAL_PROTOCOLS, clinProtocols);
-			request.getSession().setAttribute(Constants.YEAST_DATA, yeastResults);
-			request.getSession().setAttribute(Constants.INVIVO_DATA, invivoResults);
-			request.getSession().setAttribute(Constants.PRECLINICAL_MODELS, preClinicalResults);
+			request.setAttribute(Constants.CLINICAL_PROTOCOLS, clinProtocols);
+			request.setAttribute(Constants.YEAST_DATA, yeastResults);
+			request.setAttribute(Constants.INVIVO_DATA, invivoResults);
+			request.setAttribute(Constants.PRECLINICAL_MODELS, preClinicalResults);
+            request.setAttribute("agentName", theAgentName);
+            request.setAttribute("casNumber", theCasNumber);
+            request.setAttribute("nscNumber", theNscNumber);
         } catch (Exception e) {
             log.error("Exception occurred in DrugScreenSearchAction.execute()", e);
             request.getSession().setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, new ArrayList());

@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.23 2005-11-14 14:21:44 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.24 2005-11-15 22:13:46 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.23  2005/11/14 14:21:44  georgeda
+ *  Added sorting and spontaneous mutation
+ *
  *  Revision 1.22  2005/11/11 18:39:30  georgeda
  *  Removed unneeded call
  *
@@ -399,7 +402,9 @@ public class ViewModelAction extends BaseAction {
 					clinProtocols.put(nscNumber, protocols);
 					// get the yeast data
 					List yeastStages = myAgentManager.getYeastResults(a, true);
-					yeastResults.put(a.getId(), yeastStages);
+                    if (yeastStages.size() > 0) {
+					    yeastResults.put(a.getId(), yeastStages);
+                    }
 					// now get invivo/Xenograft data
 					List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
 					invivoResults.put(a.getId(), xenograftResults);

@@ -1,33 +1,35 @@
 
 <!-- yeast data -->
 <c:set var="yst" value="${yeastData[agentId]}"/>
-<c:forEach var="stg" items="${yst}" varStatus="stat2">
-		<c:choose>
-		<c:when test="${stg.strainCount <= 0}">
-		
-		<tr>
-			<td class="greySubTitleLeftEnd" colspan=2>
-			<b>Data unavailable for NCI Yeast Anticancer Drug Screen </b>
-			<br>Stage <c:out value="${stat2.count - 1}"/>
-			</td>
-		</tr>
-		</c:when>
-		<c:otherwise>
+<c:if test="${not empty yst}">
+	<c:forEach var="stg" items="${yst}" varStatus="stat2">
+		<c:if test="${stg.strainCount <= 0}">
+		    <table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="greySubTitleLeftEnd" colspan=2>
+				<b>Data unavailable for NCI Yeast Anticancer Drug Screen </b>
+				<br>Stage <c:out value="${stat2.count - 1}"/>
+				</td>
+			</tr>
+		</c:if>
+	    <c:if test="${stg.strainCount > 0}">
+		    <c:set var="foundYstData" value="1"/>
 		  	<tr><td colspan="2">
 			<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 				<tr>
 					<td class="formTitleBlue" colspan="11" align="center">
 						Publicly available data from the NCI Yeast Anticancer Drug Screen
-						<br>Stage
-							<c:if test="${stat2.count-1=='0'}">
-								<c:out value="${stat2.count - 1}"/> - Crude Sensitivity Screen
-							</c:if>
-							<c:if test="${stat2.count-1=='1'}">
-								<c:out value="${stat2.count - 1}"/> - Crude Selectivity Screen
-							</c:if>
-							<c:if test="${stat2.count-1=='2'}">
-								<c:out value="${stat2.count - 1}"/> - Dose Response
-							</c:if>
+						<br>
+						Stage
+						<c:if test="${stat2.count-1=='0'}">
+							<c:out value="${stat2.count - 1}"/> - Crude Sensitivity Screen
+						</c:if>
+						<c:if test="${stat2.count-1=='1'}">
+							<c:out value="${stat2.count - 1}"/> - Crude Selectivity Screen
+						</c:if>
+						<c:if test="${stat2.count-1=='2'}">
+							<c:out value="${stat2.count - 1}"/> - Dose Response
+						</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -81,9 +83,9 @@
 				</c:forEach>
 			</table>
 			</td></tr>
-			<tr><td>&nbsp;</td></tr>
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
+		</c:if>
+		<tr><td>&nbsp;</td></tr>
+	</c:forEach>
+</c:if>
 <!-- end yeast data -->
 

@@ -1,7 +1,10 @@
 /**
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/10 22:07:36  georgeda
+ * Fixed part of bug #21
+ *
  * 
- * $Id: AgentManagerImpl.java,v 1.5 2005-11-10 22:07:36 georgeda Exp $
+ * $Id: AgentManagerImpl.java,v 1.6 2005-11-15 22:13:46 georgeda Exp $
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -100,6 +103,9 @@ public class AgentManagerImpl extends BaseManager implements AgentManager {
 	public List getYeastResults(Agent a, boolean useNscNumber) {
 		// get yeast results
 		ArrayList yeastStages = new ArrayList();
+        
+        boolean foundResults = false;
+        
 		for(int k=0; k<=2; k++) {
 			// do the query
 			String stg = String.valueOf(k);
@@ -110,8 +116,16 @@ public class AgentManagerImpl extends BaseManager implements AgentManager {
 			} catch (PersistenceException e) {
 				e.printStackTrace();
 			}
+            if (dsr.strainCount > 0) {
+                foundResults = true;
+            }
 			yeastStages.add(dsr);
 		}
+        
+        // Only return a list if some data was found
+        if (foundResults == false) {
+            yeastStages = new ArrayList();
+        }
 		return yeastStages;
 	}
 }
