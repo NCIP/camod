@@ -1007,7 +1007,12 @@
 			type="gov.nih.nci.camod.webapp.action.ReloadAction"
 			roles="admin"
 			unknown="false"
-			validate="false" />
+			validate="false" />			
+			
+		<action
+			path="/searchResultsDrugScreen"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/searchResultsDrugScreen.jsp" />			
 
 	 <!--  search forms -->
     <action path="/SearchAction"
@@ -2212,7 +2217,12 @@
 	    <forward
             name="input"
             path="/searchDrugScreening.do">
-        </forward>     	
+        </forward>
+	    <forward
+            name="next"
+            path="/searchResultsDrugScreen.do"
+            redirect="true">
+        </forward>             	
     </action>
 
     <action path="/AdvancedSearchPopulateAction"
