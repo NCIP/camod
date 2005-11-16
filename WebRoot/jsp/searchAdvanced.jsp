@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: searchAdvanced.jsp,v 1.21 2005-11-16 14:57:39 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -326,7 +338,7 @@
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
-						  <bean:message key="button.submit"/>
+						  Search
 					  </html:submit>
 					  
 					  <html:reset styleClass="actionButton">
