@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.11 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.12 2005-11-16 19:29:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.10  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -116,7 +119,7 @@ public class TherapyPopulateAction extends BaseAction {
 			}
 			therapyForm.setSelectedProcesses(theProcesses);
 
-			// Get the collection of biological processes
+			// Get the collection of Chemical Classes
 			List theChemicalClassesList = ty.getAgent().getChemicalClassCollection();
 			String[] theChemicalClasses = new String[theChemicalClassesList.size()];
 			for (int i = 0; i < theChemicalClassesList.size(); i++) {
