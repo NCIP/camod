@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.23 2005-11-16 19:43:30 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.24 2005-11-16 21:33:24 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2005/11/16 19:43:30  georgeda
+ * Added clear to search forms
+ *
  * Revision 1.22  2005/11/16 16:32:43  georgeda
  * Defect #46.  Made disabling/enabling fields consistent between IE/Firefox
  *
@@ -336,10 +339,6 @@
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  Search
 					  </html:submit>
-					  
-					  <html:reset styleClass="actionButton">
-					  	  <bean:message key="button.reset"/>
-	  				  </html:reset>
 	  				  
 	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
 					  	  <bean:message key="button.clear"/>

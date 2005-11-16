@@ -91,10 +91,6 @@
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  Search
 					  </html:submit>
-					  
-					  <html:reset styleClass="actionButton">
-					  	  <bean:message key="button.reset"/>
-	  				  </html:reset>
 	  				  
 	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
 					  	  <bean:message key="button.clear"/>
