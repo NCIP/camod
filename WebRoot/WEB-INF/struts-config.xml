@@ -1014,8 +1014,8 @@
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/searchResultsDrugScreen.jsp" />			
 
-	 <!--  search forms -->
-    <action path="/SearchAction"
+	<!--  search forms -->
+    <action path="/SearchAdvancedAction"
 	        type="gov.nih.nci.camod.webapp.action.SearchAction"
 	        name="searchForm"
 	        scope="session"
@@ -1026,9 +1026,31 @@
             name="next"
             path="/searchResults.do"
             redirect="true">
+        </forward>
+        <forward
+            name="back"
+            path="/searchAdvanced.do">
         </forward>   	
     </action>
 
+    <action path="/SearchSimpleAction"
+	        type="gov.nih.nci.camod.webapp.action.SearchAction"
+	        name="searchForm"
+	        scope="session"
+	        parameter="unprotected_method" 
+	        unknown="false"
+	        validate="false">    
+	    <forward
+            name="next"
+            path="/searchResults.do"
+            redirect="true">
+        </forward>
+        <forward
+            name="back"
+            path="/searchSimple.do">
+        </forward>   	
+    </action>
+    
     <action path="/ViewModelAction"
 	        type="gov.nih.nci.camod.webapp.action.ViewModelAction"
 	        scope="request"

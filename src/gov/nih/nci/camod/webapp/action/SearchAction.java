@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.2 2005-10-07 21:14:24 georgeda Exp $
+ * $Id: SearchAction.java,v 1.3 2005-11-16 19:43:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/07 21:14:24  georgeda
+ * Changed the forward action
+ *
  * Revision 1.1  2005/10/03 13:52:04  georgeda
  * Search changes
  *
@@ -18,7 +21,6 @@ import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,25 +38,36 @@ public final class SearchAction extends BaseAction {
 
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
-        SearchForm ssf = (SearchForm) form;
+        SearchForm theForm = (SearchForm) form;
 
-        log.debug("Keyword: " + ssf.getKeyword());
+        log.debug("Keyword: " + theForm.getKeyword());
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        try {
-            List results = animalModelManager.search(ssf);
-            request.getSession().setAttribute(Constants.SEARCH_RESULTS, results);
-        } catch (Exception e) {
-            log.error("Unable to fetch models ", e);
-            request.getSession().setAttribute(Constants.SEARCH_RESULTS, new ArrayList());
+        String theForward = "next";
 
-            // Set the error message
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, msg);
+        // Clear the form
+        if ("Clear".equals(theAction)) {
+            theForm.allFieldsReset();
+            theForward = "back";
         }
 
-        // Forward control to the specified success URI
-        return mapping.findForward("next");
+        // Do the search
+        else {
+            
+            try {
+                AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+
+                List results = animalModelManager.search(theForm);
+                request.getSession().setAttribute(Constants.SEARCH_RESULTS, results);
+            } catch (Exception e) {
+
+                // Set the error message
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+                saveErrors(request, msg);
+            }
+        }
+
+        return mapping.findForward(theForward);
     }
 }

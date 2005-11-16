@@ -14,7 +14,7 @@
         document.searchForm.keyword.value = '';
     }
 </script>
-<html:form action="SearchAction.do" focus="keyword">
+<html:form action="SearchSimpleAction.do" focus="keyword">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -91,9 +91,15 @@
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  Search
 					  </html:submit>
+					  
 					  <html:reset styleClass="actionButton">
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
+	  				  
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
+					  	  <bean:message key="button.clear"/>
+	  				  </html:submit>
+	  				  
 				  </html:form>			
 				  	
 				</TABLE>

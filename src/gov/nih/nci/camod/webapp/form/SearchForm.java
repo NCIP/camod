@@ -1,7 +1,10 @@
 /**
- * $Id: SearchForm.java,v 1.6 2005-11-07 16:54:51 georgeda Exp $
+ * $Id: SearchForm.java,v 1.7 2005-11-16 19:43:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/07 16:54:51  georgeda
+ * Fixed problem w/ advanced search options being used in simple search
+ *
  * Revision 1.5  2005/10/20 19:29:32  georgeda
  * Added xenograft search functionality
  *
@@ -311,5 +314,19 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
         searchHistoMetastasis = false;
         searchMicroArrayData = false;
         searchXenograft = false;
+    }
+    
+    /**
+     * Reset all fields.
+     */
+    public void allFieldsReset() {
+
+        keyword = null;
+        piName = null;
+        modelDescriptor = null;
+        organ = null;
+        species = null;
+        
+        simpleSearchReset();
     }
 }

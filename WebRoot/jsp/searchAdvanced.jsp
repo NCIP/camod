@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.22 2005-11-16 16:32:43 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.23 2005-11-16 19:43:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/11/16 16:32:43  georgeda
+ * Defect #46.  Made disabling/enabling fields consistent between IE/Firefox
+ *
  * Revision 1.21  2005/11/16 14:57:39  schroedn
  * Defect #50
  *
@@ -27,7 +30,7 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <SCRIPT LANGUAGE="JavaScript">
-
+	
 	function blankKeyword() {
         document.searchForm.keyword.value = '';
     }
@@ -60,7 +63,7 @@
 
 
 
-<html:form action="SearchAction.do" focus="keyword" onsubmit="transferFields()">
+<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="transferFields()">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -329,6 +332,7 @@
 			<td align="right" colspan="3">
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">
+					  
 					  <html:submit styleClass="actionButton" onclick="blankKeyword()">
 						  Search
 					  </html:submit>
@@ -336,6 +340,11 @@
 					  <html:reset styleClass="actionButton">
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
+	  				  
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
+					  	  <bean:message key="button.clear"/>
+	  				  </html:submit>
+	  				  
 				  </html:form>		
 				</TABLE>
 			</td>
