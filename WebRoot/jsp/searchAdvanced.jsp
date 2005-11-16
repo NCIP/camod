@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.21 2005-11-16 14:57:39 schroedn Exp $
+ * $Id: searchAdvanced.jsp,v 1.22 2005-11-16 16:32:43 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/11/16 14:57:39  schroedn
+ * Defect #50
+ *
+ * Changed the text on Submit button to 'Search'
+ *
  *
  */
 
@@ -17,26 +22,16 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 <SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <SCRIPT LANGUAGE="JavaScript">
-	
+
 	function blankKeyword() {
         document.searchForm.keyword.value = '';
     }
-    
-	function toggleField(control, field)
-	{
-		if( control.checked == false ) {
-		    field.disabled = true;
-		}
-		else {
-		    field.disabled = false;
-		}
-	}
-		
+	
 	function checkFields() {
 	
 	    // Do the CI fields
@@ -48,16 +43,14 @@
 		toggleField(theCIFlag, document.searchForm.viral);
 		toggleField(theCIFlag, document.searchForm.surgery);
 		
-		
 		theTargModFlag = document.searchForm.targetedModification;
 		theEndTransGeneFlag = document.searchForm.engineeredTransgene;
 		
 		if (theTargModFlag.checked == true || theEndTransGeneFlag.checked == true) {
-		    document.searchForm.geneName.disabled = false;
+		    enableField(document.searchForm.geneName);
 		}
 		else {
-		    document.searchForm.geneName.disabled = true;
-		    document.searchForm.geneName.value = null;
+		    disableField(document.searchForm.geneName);
 		}
 		
 		toggleField(document.searchForm.searchTherapeuticApproaches, document.searchForm.therapeuticApproach);
@@ -108,7 +101,6 @@
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
-				&nbsp;
 				<camod:cshelp mapId="advanced_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
@@ -116,7 +108,7 @@
 				<INPUT name="organTissueName" type="hidden"/>
 		 		<INPUT name="organTissueCode" type="hidden"/>
 			</td>
-			<td class="formField"><input class="formFieldSized" type="text" disabled="true" name="organ" id="organFieldId" size="25" /></td>
+			<td class="formField"><input class="formFieldSizedDisabled" type="text" disabled="true" name="organ" id="organFieldId" size="25" /></td>
 		</tr>
 		
 		<tr>
@@ -131,7 +123,7 @@
 			    <input type="hidden" name="diagnosisCode"/>
 			</td>
 			<td class="formField">
-				<input class="formFieldSized" type="text" disabled="true" name="tumorClassification" id="field3" size="25" />
+				<input class="formFieldSizedDisabled" type="text" disabled="true" name="tumorClassification" id="field3" size="25" />
 			</td>
 		</tr>
 		
@@ -174,10 +166,10 @@
 				<label for="field1">&nbsp;</label>
 			</td>
 			<td class="formField">
-                <html:checkbox property="engineeredTransgene" onchange="checkFields()" />	
+                <html:checkbox property="engineeredTransgene" onclick="checkFields()" />	
 			    <label for="box1">Engineered Transgene</label>			
 			    </br>
-                <html:checkbox property="targetedModification" onchange="checkFields()" />	
+                <html:checkbox property="targetedModification" onclick="checkFields()" />	
 			    <label for="box1">Targeted Modification</label>			
 			</td>
 		</tr>
@@ -214,7 +206,7 @@
 			</td>
 
 			<td class="formField">
-                <html:checkbox property="searchCarcinogenicInterventions" onchange="checkFields()" />	
+                <html:checkbox property="searchCarcinogenicInterventions" onclick="checkFields()" />	
 			    <label for="box1">Check here to search for models with <br>Carcinogenic interventions data</label>			
 			</td>
 		</tr>
@@ -297,7 +289,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Therapeutic Approaches</td>
 			<td class="formField">
-			    <html:checkbox property="searchTherapeuticApproaches" onchange="checkFields()" />	
+			    <html:checkbox property="searchTherapeuticApproaches" onclick="checkFields()" />	
 				<label for="box1">Check here to search for models with <br>therapeutic approaches data</label>
 			</td>
 		</tr>

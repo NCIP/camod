@@ -1,3 +1,12 @@
+function toggleField(control, field)
+{
+	if( control.checked == false ) {
+	    disableField(field);
+	}
+	else {
+	    enableField(field);
+	}
+}
 
 function chkOther(vocab, otherVocab) {
 	
@@ -47,7 +56,6 @@ function chkOtherUnsized(vocab, otherVocab) {
 	    disableFieldUnsized(otherVocab);
 	}
 }
-
 
 function disableField(field)
 {
