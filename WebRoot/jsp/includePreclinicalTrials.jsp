@@ -34,7 +34,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Age at treatment</b></td>
+	<td class="resultsBoxGrey" width="25%"><b>Age at Treatment</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.ageAtTreatment}"/>
 	</td>
