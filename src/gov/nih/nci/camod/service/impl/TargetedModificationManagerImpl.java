@@ -1,8 +1,9 @@
-/*
- * Created on Jun 17, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/**
+ * 
+ * $Id: TargetedModificationManagerImpl.java,v 1.18 2005-11-16 19:32:59 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -33,12 +34,12 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
     }
 
     public void save(TargetedModification TargetedModification) throws Exception {
-        log.trace("In TargetedModificationManagerImpl.save");
+        log.info("In TargetedModificationManagerImpl.save");
         super.save(TargetedModification);
     }
 
     public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-        log.trace("In TargetedModificationManagerImpl.remove");
+        log.info("In TargetedModificationManagerImpl.remove");
         inAnimalModel.getEngineeredGeneCollection().remove(get(id));
         super.save(inAnimalModel);
     }
@@ -46,13 +47,13 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
     public TargetedModification create(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData, HttpServletRequest request)
             throws Exception {
 
-        log.trace("Entering TargetedModificationManagerImpl.create");
+        log.info("Entering TargetedModificationManagerImpl.create");
 
         TargetedModification theTargetedModification = new TargetedModification();
 
         populateTargetedModification(inAnimalModel, inTargetedModificationData, theTargetedModification, request);
 
-        log.trace("Exiting TargetedModificationManagerImpl.create");
+        log.info("Exiting TargetedModificationManagerImpl.create");
 
         return theTargetedModification;
     }
@@ -60,77 +61,107 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
     public void update(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData,
             TargetedModification theTargetedModification, HttpServletRequest request) throws Exception {
 
-        log.trace("Entering TargetedModificationManagerImpl.update");
-        log.debug("Updating TargetedModificationForm: " + theTargetedModification.getId());
+        log.info("Entering TargetedModificationManagerImpl.update");
+        log.info("Updating TargetedModificationForm: " + theTargetedModification.getId());
 
         // Populate w/ the new values and save
         populateTargetedModification(inAnimalModel, inTargetedModificationData, theTargetedModification, request);
 
         save(theTargetedModification);
 
-        log.trace("Exiting TargetedModificationManagerImpl.update");
+        log.info("Exiting TargetedModificationManagerImpl.update");
     }
 
     private void populateTargetedModification(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData,
             TargetedModification theTargetedModification, HttpServletRequest request) throws Exception {
 
-        log.trace("Entering populateTargetedModification");
+        log.info("Entering populateTargetedModification");
 
         // set Targeted Gene/Locus
         theTargetedModification.setName(inTargetedModificationData.getName());
 
-        if (!inTargetedModificationData.getModificationType().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            ModificationType theModificationType = ModificationTypeManagerSingleton.instance().getByName(
-                    inTargetedModificationData.getModificationType());
+        // Get Modification Types
+        String[] theModificationTypes = inTargetedModificationData.getModificationType();
 
-            if (!theTargetedModification.getModificationTypeCollection().contains(theModificationType)) {
-                theTargetedModification.addModificationType(theModificationType);
-            }
-        }
-        // Other - Type of Modification
-        if (inTargetedModificationData.getOtherModificationType() != null) {
-            if (!inTargetedModificationData.getOtherModificationType().equals("")) {
+        List theCurrentModificationTypeList = theTargetedModification.getModificationTypeCollection();
+        theCurrentModificationTypeList.clear();
 
-                // Remove all the targeted modifications from the list
-                theTargetedModification.getModificationTypeCollection().clear();
+        //if other is one of the (multiple) selections
+        if (Arrays.asList(theModificationTypes).contains(Constants.Dropdowns.OTHER_OPTION)) {
+        	log.error("the Modification Type selection(s) includes other ");
+            for (int i = 0; i < theModificationTypes.length; i++)   {
+            	ModificationType modificationType = ModificationTypeManagerSingleton.instance().getByName(
+                		theModificationTypes[i]);
+            	log.error("theModificationTypes[i] (containing other): " + theModificationTypes[i]);
+                
+            	//Add an other selection and send e-mail
+                if (theModificationTypes[i].equals(Constants.Dropdowns.OTHER_OPTION)) {
+                	//log.error("other theModificationTypes[i]: " + theModificationTypes[i]);                	
+            		//add ModTypeUnctrlVocab to Engineered Transgene Table column
+            		theTargetedModification.setModTypeUnctrlVocab(inTargetedModificationData.getOtherModificationType());
+            		
+                	// Add selections if not already in DB (No duplicates - during editing phase)
+                	if (!theTargetedModification.getModificationTypeCollection().contains(Constants.Dropdowns.OTHER_OPTION)) {
+                    	//add id for other into the bridge table  
+                		theCurrentModificationTypeList.add(modificationType);
+                		
+                		// Send e-mail: 
+                        log.info("Sending Notification eMail - new Targeted Modification added");
 
-                log.trace("Sending Notification eMail - new Targeted Modification added");
+                        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
-                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+                        // Iterate through all the reciepts in the config file
+                        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+                        StringTokenizer st = new StringTokenizer(recipients, ",");
+                        String inRecipients[] = new String[st.countTokens()];
+                        for (int j = 0; j < inRecipients.length; j++) {
+                            inRecipients[j] = st.nextToken();
+                        }
 
-                // Iterate through all the reciepts in the config file
-                String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-                StringTokenizer st = new StringTokenizer(recipients, ",");
-                String inRecipients[] = new String[st.countTokens()];
-                for (int i = 0; i < inRecipients.length; i++) {
-                    inRecipients[i] = st.nextToken();
+                        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+                        String inFrom = inAnimalModel.getSubmitter().emailAddress();
+
+                        // gather message keys and variable values to build the e-mail
+                        // content with
+                        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+                        Map values = new TreeMap();
+                        values.put("type", "TargetedModification");
+                        values.put("value", inTargetedModificationData.getOtherModificationType());
+                        values.put("submitter", inAnimalModel.getSubmitter());
+                        values.put("model", inAnimalModel.getModelDescriptor());
+                        values.put("modelstate", inAnimalModel.getState());
+
+                        // Send the email
+                        try {
+                            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+                        } catch (Exception e) {
+                            log.error("Caught exception sending mail: ", e);
+                            e.printStackTrace();
+                        }                		
+                    }
+                } else {
+                		// Add the non-other selection(s) 
+                		//log.error("modification type name is not other: " + modificationType);
+                		// Add selections if not already in DB (No duplicates - during editing phase)
+                		if (!theTargetedModification.getModificationTypeCollection().contains(modificationType)) {                	
+                			theCurrentModificationTypeList.add(modificationType);
+                		}
                 }
-
-                String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-                String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-                // gather message keys and variable values to build the e-mail
-                // content with
-                String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                Map values = new TreeMap();
-                values.put("type", "TargetedModification");
-                values.put("value", inTargetedModificationData.getOtherModificationType());
-                values.put("submitter", inAnimalModel.getSubmitter());
-                values.put("model", inAnimalModel.getModelDescriptor());
-                values.put("modelstate", inAnimalModel.getState());
-
-                // Send the email
-                try {
-                    MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                } catch (Exception e) {
-                    log.error("Caught exception sending mail: ", e);
-                    e.printStackTrace();
-                }
-
-                // 2. Set flag, this Strain will need to be approved before
-                // being added the list
-                theTargetedModification.setModTypeUnctrlVocab(inTargetedModificationData.getOtherModificationType());
-            }
+            }   //end of for loop
+        } else {
+        		log.error("the Modification Type selection(s) does not include other ");
+        		//clear out the uncontrolledVocab if editing model
+        		theTargetedModification.setModTypeUnctrlVocab("");
+        		//Get the selection
+        		for (int i = 0; i < theModificationTypes.length; i++) {
+        			ModificationType modificationType = ModificationTypeManagerSingleton.instance().getByName(
+                		theModificationTypes[i]);
+        			//log.error("theModificationTypes[i] (selection does not include other): " + theModificationTypes[i]);
+        			// Add selections if not already in DB (No duplicates - during editing phase)
+        			if (!theTargetedModification.getModificationTypeCollection().contains(modificationType)) {        		
+                	theCurrentModificationTypeList.add(modificationType);
+        			}   		
+        		}  //end of for
         }
 
         // Gene Id
@@ -205,6 +236,6 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
 
         theTargetedModification.setComments(inTargetedModificationData.getComments());
 
-        log.trace("Exiting populateTargetedModification");
+        log.info("Exiting populateTargetedModification");
     }
 }
