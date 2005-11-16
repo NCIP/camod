@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.27 2005-11-14 16:52:37 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.28 2005-11-16 21:40:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2005/11/14 16:52:37  georgeda
+ * Fixed admin problem
+ *
  * Revision 1.26  2005/11/14 15:14:41  schroedn
  * Defect #18
  * Changed the order the Stage 2 - Dose Reponse for is sorted, now Strain / Dosage is in order. Problem was the Dosage is stored iin Treatment as a VARCHAR instead of an integer.
@@ -77,12 +80,7 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Comments;
-import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.domain.Publication;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.util.DrugScreenResult;
 import gov.nih.nci.camod.webapp.form.SearchData;
 import gov.nih.nci.common.persistence.Search;
@@ -91,9 +89,7 @@ import gov.nih.nci.common.persistence.hibernate.HQLParameter;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -148,6 +144,7 @@ public class QueryManagerImpl extends BaseManager {
 		log.trace("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
 		ResultSet theResultSet = null;
 		List theEnvFactors = new ArrayList();
+        
 		try {
 
 			// Format the query
@@ -167,7 +164,29 @@ public class QueryManagerImpl extends BaseManager {
 			while (theResultSet.next()) {
 				theEnvFactors.add(theResultSet.getString(1));
 			}
+            
+            // Add any uncontrolled vocabs
+            theSQLQuery = "SELECT distinct ef.name_unctrl_vocab "
+                    + "FROM env_factor ef "
+                    + "WHERE ef.type = ? "
+                    + "  AND ef.name_unctrl_vocab IS NOT null "
+                    + "  AND ef.env_factor_id IN (SELECT t.env_factor_id "
+                    + "     FROM therapy t, animal_model_therapy at, abs_cancer_model am WHERE t.therapeutic_experiment = 0 "
+                    + "       AND t.therapy_id = at.therapy_id "
+                    + "       AND am.abs_cancer_model_id = at.abs_cancer_model_id AND am.state = 'Edited-approved') ORDER BY ef.name_unctrl_vocab asc ";
 
+            theResultSet = Search.query(theSQLQuery, theParams);
+
+            while (theResultSet.next()) {
+                String theEnvFactor = theResultSet.getString(1);
+                if (!theEnvFactors.contains(theEnvFactor)) {
+                    theEnvFactors.add(theResultSet.getString(1));
+                }
+            }
+            
+
+            Collections.sort(theEnvFactors);
+            
 			log.trace("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
 		} catch (Exception e) {
 			log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
@@ -1185,11 +1204,12 @@ public class QueryManagerImpl extends BaseManager {
 
 		String theSQLString = "SELECT distinct ani_th.abs_cancer_model_id FROM animal_model_therapy ani_th "
 				+ "WHERE ani_th.therapy_id IN (SELECT t.therapy_id FROM therapy t, env_factor ef"
-				+ "     WHERE t.env_factor_id = ef.env_factor_id AND ef.name = ? AND ef.type = ?)";
+				+ "     WHERE t.env_factor_id = ef.env_factor_id AND (ef.name = ? OR ef.name_unctrl_vocab = ?) AND ef.type = ?)";
 
-		Object[] theParams = new Object[2];
+		Object[] theParams = new Object[3];
 		theParams[0] = inName;
-		theParams[1] = inType;
+        theParams[1] = inName;
+		theParams[2] = inType;
 		return getModelIds(theSQLString, theParams);
 	}
 
@@ -1351,8 +1371,8 @@ public class QueryManagerImpl extends BaseManager {
 			String theLastName = theTokenizer.nextToken(",").trim();
 			String theFirstName = theTokenizer.nextToken().trim();
 
-			theWhereClause += " AND am.principalInvestigator IN (from Person as p where p.lastName = '" + theLastName
-					+ "' AND p.firstName = '" + theFirstName + "')";
+			theWhereClause += " AND am.principalInvestigator IN (from Person as p where p.lastName like '%" + theLastName
+					+ "%' AND p.firstName like '%" + theFirstName + "%')";
 		}
 
 		// Model descriptor criteria
@@ -1395,10 +1415,10 @@ public class QueryManagerImpl extends BaseManager {
 						+ getModelIdsForEnvironmentalFactor("Chemical / Drug", inSearchData.getChemicalDrug()) + ")";
 			}
 
-			// Search for Surgery
+			// Search for Surgery/Other
 			if (inSearchData.getSurgery() != null && inSearchData.getSurgery().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
-						+ getModelIdsForEnvironmentalFactor("Surgery", inSearchData.getSurgery()) + ")";
+						+ getModelIdsForEnvironmentalFactor("Other", inSearchData.getSurgery()) + ")";
 			}
 
 			// Search for Hormone
