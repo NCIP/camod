@@ -76,10 +76,9 @@
 	</TABLE>
 	
 	<c:forEach var="h" items="${hpColl}" varStatus="histstat">
-		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-		
-			<a name="<c:out value="histo_${histstat.count}"/>"/>
+		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 			<tr>
+			    <a name="<c:out value="histo_${histstat.count}"/>"/>
 				<td class="formTitleBlue" height="20" colspan="2">
 				Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
@@ -177,8 +176,8 @@
 	    <bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
 	    <c:forEach var="m" items="${mtsColl}" varStatus="metastat">
             <TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
-			    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>
 				<tr>
+				    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>
 					<td class="greySubTitleLeftEnd" height="20" colspan="2">
 						Metastasis in <c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
 						</td>
