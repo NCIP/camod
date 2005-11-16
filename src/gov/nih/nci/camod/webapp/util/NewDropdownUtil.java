@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.37 2005-11-16 19:26:30 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.38 2005-11-16 21:36:40 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2005/11/16 19:26:30  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -441,8 +444,6 @@ public class NewDropdownUtil {
      */
     private static List getQueryOnlyEnvironmentalFactorList(String type) throws Exception {
         List theEnvFactorList = QueryManagerSingleton.instance().getQueryOnlyEnvironmentalFactors(type);
-
-        addOther(theEnvFactorList);
         return theEnvFactorList;
     }
 
