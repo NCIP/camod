@@ -35,7 +35,7 @@ public class Person extends Party implements Comparable {
     /**
      * @return Returns the display name
      */
-    public String displayName() {
+    public String getDisplayName() {
 
         String theDisplayName = "";
         if (lastName != null && firstName != null) {
@@ -47,7 +47,7 @@ public class Person extends Party implements Comparable {
     /**
      * @return Returns the e-mail address
      */
-    public String emailAddress() {
+    public String getEmailAddress() {
 
         String theEmailAddress = "";
 

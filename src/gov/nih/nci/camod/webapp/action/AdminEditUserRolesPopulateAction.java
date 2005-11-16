@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserRolesPopulateAction.java,v 1.1 2005-10-17 13:28:45 georgeda Exp $
+ * $Id: AdminEditUserRolesPopulateAction.java,v 1.2 2005-11-16 15:31:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:28:45  georgeda
+ * Initial revision
+ *
  * Revision 1.2  2005/10/10 14:10:48  georgeda
  * Changes for comment curation
  *
@@ -63,7 +66,7 @@ public class AdminEditUserRolesPopulateAction extends BaseAction {
 			}
 
 			theForm.setPersonId(thePersonId);
-			theForm.setDisplayName(thePerson.displayName());
+			theForm.setDisplayName(thePerson.getDisplayName());
 			List theRoles = UserManagerSingleton.instance().getRolesForUser(thePerson.getUsername());
 
 			for (int i = 0, j = theRoles.size(); i < j; i++) {

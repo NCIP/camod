@@ -457,7 +457,7 @@ public class NewDropdownUtil {
                 Person thePerson = (Person) thePIList.get(i);
                 if (thePerson.getIsPrincipalInvestigator() != null) {
 
-                    String theDisplayName = thePerson.displayName();
+                    String theDisplayName = thePerson.getDisplayName();
                     if (theDisplayName.length() > 0) {
                         DropdownOption theOption = new DropdownOption(theDisplayName, thePerson.getUsername());
                         theReturnList.add(theOption);
@@ -520,7 +520,7 @@ public class NewDropdownUtil {
             for (int i = 0; i < thePersonList.size(); i++) {
                 Person thePerson = (Person) thePersonList.get(i);
 
-                DropdownOption theOption = new DropdownOption(thePerson.displayName(), thePerson.getId().toString());
+                DropdownOption theOption = new DropdownOption(thePerson.getDisplayName(), thePerson.getId().toString());
                 theReturnList.add(theOption);
             }
         }
@@ -619,7 +619,7 @@ public class NewDropdownUtil {
                     // Only add when it's actually a person
                     if (theObject instanceof Person) {
                         Person thePerson = (Person) theObject;
-                        theUserList.add(new DropdownOption(thePerson.displayName(), thePerson.getUsername()));
+                        theUserList.add(new DropdownOption(thePerson.getDisplayName(), thePerson.getUsername()));
                     }
                 }
 

@@ -1,3 +1,10 @@
+<%
+ /*
+  *   $Id: viewModelCharacteristics.jsp,v 1.19 2005-11-16 15:31:35 georgeda Exp $
+  *   
+  *   $Log: not supported by cvs2svn $
+  */
+%>
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -115,39 +122,29 @@
 			</td>
 		</tr>		               
         
-        <% 
-            AnimalModel theModel = (AnimalModel) pageContext.getAttribute("mdl");
-            if (theModel.getSubmitter() != null) {
-                pageContext.setAttribute("emailAddress", theModel.getSubmitter().emailAddress());
-                pageContext.setAttribute("displayName", theModel.getSubmitter().displayName());
-            }
-            else {
-                pageContext.setAttribute("emailAddress", "");
-                pageContext.setAttribute("displayName", "");
-            }
-        %>
 		<tr>
 			<td class="GreyBox" width="20%"><b>Submitted by</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>&nbsp;
+			    <c:if test="${not empty mdl.submitter.emailAddress}">
+				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>">
+				</c:if>
+				<c:out value="${mdl.submitter.displayName}"/>
+				<c:if test="${not empty mdl.submitter.emailAddress}">
+				    </a>
+				</c:if>
 			</td>
 		</tr>
-
-        <% 
-            if (theModel.getPrincipalInvestigator() != null) {
-                pageContext.setAttribute("emailAddress", theModel.getPrincipalInvestigator().emailAddress());
-                pageContext.setAttribute("displayName", theModel.getPrincipalInvestigator().displayName());
-            }
-            else {
-                pageContext.setAttribute("emailAddress", "");
-                pageContext.setAttribute("displayName", "");
-            }
-        %>
                   
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Principal Investigator / Lab</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a>&nbsp;
+				<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
+				    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
+				</c:if>
+				<c:out value="${mdl.principalInvestigator.displayName}"/>
+				<c:if test="${mdl.principalInvestigator.emailAddress}">
+				    </a>
+				</c:if>
 			</td>
 		</tr>		               
 

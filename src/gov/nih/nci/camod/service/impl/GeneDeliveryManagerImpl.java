@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.10 2005-11-14 14:18:33 georgeda Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.11 2005-11-16 15:31:05 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/14 14:18:33  georgeda
+ * Cleanup
+ *
  * Revision 1.9  2005/11/09 00:17:16  georgeda
  * Fixed delete w/ constraints
  *
@@ -126,7 +129,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
             }
 
             String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
             // gather message keys and variable values to build the e-mail
             // content with

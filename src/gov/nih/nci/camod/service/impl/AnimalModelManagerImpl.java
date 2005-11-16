@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.59 2005-11-14 14:17:57 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.60 2005-11-16 15:31:05 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.59  2005/11/14 14:17:57  georgeda
+ * Cleanup
+ *
  * Revision 1.58  2005/11/08 16:48:24  georgeda
  * Changes for images
  *
@@ -515,7 +518,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             }
 
             String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
             // gather message keys and variable values to build the e-mail
             // content with

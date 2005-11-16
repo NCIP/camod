@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AdminEditUserRolesAction.java,v 1.3 2005-11-07 13:53:18 georgeda Exp $
+ *  $Id: AdminEditUserRolesAction.java,v 1.4 2005-11-16 15:31:16 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.3  2005/11/07 13:53:18  georgeda
+ *  Dynamically update roles
+ *
  *  Revision 1.2  2005/11/01 15:54:46  georgeda
  *  Call the manager to save the person
  *
@@ -62,7 +65,7 @@ public class AdminEditUserRolesAction extends BaseAction {
 				// Did the id match?
 				if (thePerson != null) {
 
-					log.debug("Changing the roles for user: " + thePerson.displayName());
+					log.debug("Changing the roles for user: " + thePerson.getDisplayName());
 
 					List theRolesList = new ArrayList();
 

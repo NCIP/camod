@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.15 2005-11-09 00:17:16 georgeda Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.16 2005-11-16 15:31:05 georgeda Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/11/09 00:17:16  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.14  2005/11/03 19:23:47  schroedn
  * Minor bug fixes
  *
@@ -129,7 +132,7 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
                 }
 
                 String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-                String inFrom = inAnimalModel.getSubmitter().emailAddress();
+                String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
                 // gather message keys and variable values to build the e-mail
                 // content with

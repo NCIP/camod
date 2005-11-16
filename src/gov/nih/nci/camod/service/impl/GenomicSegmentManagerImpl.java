@@ -113,7 +113,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
             }
 
             String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
             // gather message keys and variable values to build the e-mail
             // content with

@@ -169,7 +169,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
 
         String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);        
        
-        String inFrom = theAnimalModel.getSubmitter().emailAddress();
+        String inFrom = theAnimalModel.getSubmitter().getEmailAddress();
         /* Get the e-mail resource ended */
 
         // Transgene Integration

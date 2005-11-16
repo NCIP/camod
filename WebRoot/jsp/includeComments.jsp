@@ -1,3 +1,10 @@
+<%
+ /*
+  *   $Id: includeComments.jsp,v 1.4 2005-11-16 15:31:35 georgeda Exp $
+  *   
+  *   $Log: not supported by cvs2svn $
+  */
+%>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 <%@ page import='gov.nih.nci.camod.Constants' %>
 <%@ page import='gov.nih.nci.camod.domain.Comments' %>
@@ -26,12 +33,15 @@
 <tr>
     <c:forEach var="comments" items="${aCommentsList}" >
         <tr>
-          <% 
-             Comments theComments = (Comments) pageContext.getAttribute("comments");
-             pageContext.setAttribute("emailAddress", theComments.getSubmitter().emailAddress());
-             pageContext.setAttribute("displayName", theComments.getSubmitter().displayName());
-          %>
-            <td class="WhiteBoxNoEnd" width="30%" colspan="1"><a href="mailto:<c:out value="${emailAddress}"/>"><c:out value="${displayName}"/></a></td>
+            <td class="WhiteBoxNoEnd" width="30%" colspan="1">
+                <c:if test="${not empty comments.submitter.emailAddress}">
+				    <a href="mailto:<c:out value="${comments.submitter.emailAddress}"/>">
+				</c:if>
+				<c:out value="${comments.submitter.displayName}"/>
+				<c:if test="${not empty comments.submitter.emailAddress}">
+				    </a>
+				</c:if>
+            </td>
             <td class="WhiteBox" width="70%" colspan="1"><c:out value="${comments.remark}"/></td>
         </tr>
     </c:forEach>

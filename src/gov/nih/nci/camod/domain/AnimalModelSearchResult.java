@@ -1,9 +1,14 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.6 2005-11-15 19:10:23 schroedn Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.7 2005-11-16 15:31:05 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/15 19:10:23  schroedn
+ * Defect #49
+ *
+ * Fixed misspelling of Metastasis in getMetastatisSites
+ *
  * Revision 1.5  2005/10/17 18:19:28  georgeda
  * Added ability to sort
  *
@@ -153,13 +158,13 @@ public class AnimalModelSearchResult implements Comparable {
         if (mySubmitterName == null) {
             fetchAnimalModel();
 
-            String theEmailAddress = myAnimalModel.getSubmitter().emailAddress();
+            String theEmailAddress = myAnimalModel.getSubmitter().getEmailAddress();
 
             if (theEmailAddress.length() > 0) {
                 mySubmitterName = "<a href=\"mailto:" + theEmailAddress + "\"/>"
-                        + myAnimalModel.getSubmitter().displayName();
+                        + myAnimalModel.getSubmitter().getDisplayName();
             } else {
-                mySubmitterName = myAnimalModel.getSubmitter().displayName();
+                mySubmitterName = myAnimalModel.getSubmitter().getDisplayName();
             }
         }
         return mySubmitterName;

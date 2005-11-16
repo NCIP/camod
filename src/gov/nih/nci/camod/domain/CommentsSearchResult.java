@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CommentsSearchResult.java,v 1.1 2005-10-17 13:25:52 georgeda Exp $
+ * $Id: CommentsSearchResult.java,v 1.2 2005-11-16 15:31:05 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:25:52  georgeda
+ * Initial revision
+ *
  * Revision 1.3  2005/10/12 18:18:48  georgeda
  * Small fix
  *
@@ -118,13 +121,13 @@ public class CommentsSearchResult {
 		if (mySubmitterName == null) {
 			fetchComments();
 
-			String theEmailAddress = myComments.getSubmitter().emailAddress();
+			String theEmailAddress = myComments.getSubmitter().getEmailAddress();
 
 			if (theEmailAddress.length() > 0) {
 				mySubmitterName = "<a href=\"mailto:" + theEmailAddress + "\"/>"
-						+ myComments.getSubmitter().displayName();
+						+ myComments.getSubmitter().getDisplayName();
 			} else {
-				mySubmitterName = myComments.getSubmitter().displayName();
+				mySubmitterName = myComments.getSubmitter().getDisplayName();
 			}
 		}
 		return mySubmitterName;

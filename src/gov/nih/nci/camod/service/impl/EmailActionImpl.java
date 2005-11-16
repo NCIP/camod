@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.14 2005-11-14 14:18:22 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.15 2005-11-16 15:31:05 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/14 14:18:22  georgeda
+ * Cleanup
+ *
  * Revision 1.13  2005/10/20 19:24:20  stewardd
  * modified comments in code for accuracy
  *
@@ -145,11 +148,11 @@ public class EmailActionImpl extends BaseCurateableAction {
 
                     // gather variable values to build the e-mail content with
                     TreeMap valuesForVariables = new TreeMap();
-                    valuesForVariables.put("name", theAnimalModel.getSubmitter().displayName());
-                    valuesForVariables.put("submitter", theAnimalModel.getSubmitter().displayName());
+                    valuesForVariables.put("name", theAnimalModel.getSubmitter().getDisplayName());
+                    valuesForVariables.put("submitter", theAnimalModel.getSubmitter().getDisplayName());
                     valuesForVariables.put("modelstate", theAnimalModel.getState());
                     valuesForVariables.put("species",theAnimalModel.getSpecies());
-                    valuesForVariables.put("piname", theAnimalModel.getPrincipalInvestigator().displayName());
+                    valuesForVariables.put("piname", theAnimalModel.getPrincipalInvestigator().getDisplayName());
 
                     // launch the email
                     MailUtil.sendMail(theRecipients,

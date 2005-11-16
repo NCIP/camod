@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.15 2005-11-14 14:19:22 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.16 2005-11-16 15:31:05 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/11/14 14:19:22  georgeda
+ * Cleanup
+ *
  * Revision 1.14  2005/11/09 00:17:16  georgeda
  * Fixed delete w/ constraints
  *
@@ -570,7 +573,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             }
 
             String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
             // gather message keys and variable values to build the e-mail
             // content with
@@ -656,7 +659,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             }
 
             String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().emailAddress();
+            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
             // gather message keys and variable values to build the e-mail
             // content with

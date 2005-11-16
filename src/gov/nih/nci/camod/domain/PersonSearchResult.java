@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: PersonSearchResult.java,v 1.1 2005-10-17 13:15:31 georgeda Exp $
+ * $Id: PersonSearchResult.java,v 1.2 2005-11-16 15:31:05 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/10/17 13:15:31  georgeda
+ * Initial revision
+ *
  * Revision 1.3  2005/10/12 18:18:48  georgeda
  * Small fix
  *
@@ -67,7 +70,7 @@ public class PersonSearchResult {
 
 		if (myDisplayName == null) {
 			fetchPerson();
-			myDisplayName = myPerson.displayName();
+			myDisplayName = myPerson.getDisplayName();
 		}
 		return myDisplayName;
 	}
