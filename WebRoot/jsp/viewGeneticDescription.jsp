@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: viewGeneticDescription.jsp,v 1.20 2005-11-16 15:17:27 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -420,13 +432,13 @@
 			</td>
 		</tr>
         <tr>
-            <td class="GreyBox"><b>Gene</b></td>
-            <td class="GreyBoxRightEnd"><c:out value="${tm.name}"/>&nbsp;</td>
+            <td class="GreyBox" width="35%"><b>Gene</b></td>
+            <td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.name}"/>&nbsp;</td>
         </tr>
                  
         <tr>
-            <td class="WhiteBox"><b>Modification Type</b></td>
-            <td class="WhiteBoxRightEnd">
+            <td class="WhiteBox" width="35%"><b>Modification Type</b></td>
+            <td class="WhiteBoxRightEnd" width="65%">
 				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
 				    <li>
 						<c:choose>
@@ -443,14 +455,14 @@
         </tr>
 
         <tr>
-            <td class="GreyBox"><b>Genetic Background - Donor</b></td>
-            <td class="GreyBoxRightEnd">
+            <td class="GreyBox" width="35%"><b>Genetic Background - Donor</b></td>
+            <td class="GreyBoxRightEnd" width="65%">
             	<c:out value="${tm.esCellLineName}"/>&nbsp;
             </td>
         </tr>
         <tr>
-            <td class="WhiteBox"><b>Genetic Background - Recipient</b></td>
-            <td class="WhiteBoxRightEnd"><c:out value="${tm.blastocystName}"/>&nbsp;</td>
+            <td class="WhiteBox" width="35%"><b>Genetic Background - Recipient</b></td>
+            <td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.blastocystName}"/>&nbsp;</td>
         </tr>
 
 		<tr>
@@ -463,7 +475,7 @@
 		</tr>
 
 		<tr>
-			<td class="GreyBox" width="35%"><b>Gene Function</b></td>
+			<td class="GreyBox" width="35%"><b>Function(s) of Targeted Gene</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 			<ul>
 			<c:forEach var="gf" items="${tm.geneFunctionCollection}">
@@ -524,40 +536,40 @@
 		<c:set var="gene" value="${targetedModGeneMap[tmId]}"/>
 		<c:if test="${not empty gene}">
 	        <tr>
-	            <td class="GreyBox"><b>Gene Info</b></td>
-	            <td class="GreyBoxRightEnd">
+	            <td class="GreyBox" width="35%"><b>Gene Info</b></td>
+	            <td class="GreyBoxRightEnd" width="65%">
 	            <c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
 	            <c:out value="${gene.symbol}"/>.&nbsp; 
 	            <c:out value="${gene.fullName}"/>&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="WhiteBox"><b>Sequence ID</b></td>
-	            <td class="WhiteBoxRightEnd">
+	            <td valign="top" class="WhiteBox" width="35%"><b>Sequence ID</b></td>
+	            <td class="WhiteBoxRightEnd" width="65%">
 						&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td class="GreyBox"><b>Database Links</b></td>
-	            <td class="GreyBoxRightEnd">&nbsp;
+	            <td class="GreyBox" width="35%"><b>Database Links</b></td>
+	            <td class="GreyBoxRightEnd" width="65%">&nbsp;
 					<A target="_blank" href="http://www.ncbi.nlm.nih.gov/UniGene/clust.cgi?ORG=<c:out value="${gene.taxon.abbreviation}"/>&amp;CID=<c:out value="${gene.clusterId}"/>">UniGene</A>
 						&nbsp;|&nbsp;
 			        <A target="_blank" href="http://cgap.nci.nih.gov/Genes/GeneInfo?ORG=Mm&CID=<c:out value="${gene.clusterId}"/>">CGAP</A>
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td class="WhiteBox"><b>Function(s) of Targeted Gene</b></td>
-	            <td class="WhiteBoxRightEnd">&nbsp;
+	            <td class="WhiteBox" width="35%"><b>Function(s) of Targeted Gene</b></td>
+	            <td class="WhiteBoxRightEnd" width="65%">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td class="GreyBox"><b>Conditional Type</b></td>
-	            <td class="GreyBoxRightEnd">&nbsp;
+	            <td class="GreyBox" width="35%"><b>Conditional Type</b></td>
+	            <td class="GreyBoxRightEnd" width="65%">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="WhiteBox"><b>Gene Ontology</b></td>
-	            <td valign="top" class="WhiteBoxRightEnd"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
+	            <td valign="top" class="WhiteBox" width="35%"><b>Gene Ontology</b></td>
+	            <td valign="top" class="WhiteBoxRightEnd" width="65%"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
 					<ul>
 						<c:forEach var="ont" items="${gene.geneOntologyCollection}">
 							<li>
@@ -571,8 +583,8 @@
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="GreyBox"><b>BioCarta Pathways</b></td>
-	            <td valign="top" class="GreyBoxRightEnd">
+	            <td valign="top" class="GreyBox" width="35%"><b>BioCarta Pathways</b></td>
+	            <td valign="top" class="GreyBoxRightEnd" width="65%">
 		        <font size="-2" color="#666699">Pathway information courtesy of <A target="_blank" href="http://www.biocarta.com">BioCarta</a></font>
 		        <br>
 					<ul>
@@ -587,13 +599,13 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="WhiteBox"><b>Libraries and Tissues (from EST data)</b></td>
-	            <td valign="top" class="WhiteBoxRightEnd">&nbsp;
+	            <td valign="top" class="WhiteBox" width="35%"><b>Libraries and Tissues (from EST data)</b></td>
+	            <td valign="top" class="WhiteBoxRightEnd" width="65%">&nbsp;
 	            </td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="GreyBox"><b>Protein Similarities (from UniGene)</b></td>
-	            <td valign="top" class="GreyBoxRightEnd">&nbsp;
+	            <td valign="top" class="GreyBox" width="35%"><b>Protein Similarities (from UniGene)</b></td>
+	            <td valign="top" class="GreyBoxRightEnd" width="65%">&nbsp;
 	           	</td>
 	        </tr>
 		</c:if>
