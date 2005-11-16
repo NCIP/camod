@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.18 2005-11-16 19:32:59 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.19 2005-11-16 19:47:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/11/16 19:32:59  pandyas
+ * Modified Targeted Modification Types dropdown to allow multiple selections, allow the user to select "other" by itself, and allow users to select "other" along with one or more selection
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -119,7 +122,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
                         }
 
                         String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-                        String inFrom = inAnimalModel.getSubmitter().emailAddress();
+                        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
                         // gather message keys and variable values to build the e-mail
                         // content with
