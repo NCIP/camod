@@ -21,7 +21,7 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
     private static final long serialVersionUID = 3257085453799404851L;
 	
 	protected String name;
-	protected String modificationType;
+	protected String[] modificationType;
 	protected String otherModificationType;
 	protected String geneId;
 	protected String esCellLineName;
@@ -53,13 +53,13 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 	/**
 	 * @return Returns the modificationType.
 	 */
-	public String getModificationType() {
+	public String[] getModificationType() {
 		return modificationType;
 	}
 	/**
 	 * @param modificationType The modificationType to set.
 	 */
-	public void setModificationType(String modificationType) {
+	public void setModificationType(String[] modificationType) {
 		this.modificationType = modificationType;
 	}
 	/**

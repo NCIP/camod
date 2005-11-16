@@ -1,10 +1,17 @@
+/**
+ * 
+ * $Id: TargetedModificationPopulateAction.java,v 1.8 2005-11-16 19:27:47 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Conditionality;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.ModificationType;
-import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.service.impl.TargetedModificationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
@@ -38,6 +45,25 @@ public class TargetedModificationPopulateAction extends BaseAction {
             targetedModificationForm.setModificationId(aTargetedModificationID);
 
             targetedModificationForm.setName(theTargetedModification.getName());
+            
+			// Get the collection of Targeted Modifications
+			List theTargetedModificationList = theTargetedModification.getModificationTypeCollection();
+			String[] theTargetedMod = new String[theTargetedModificationList.size()];
+			for (int i = 0; i < theTargetedModificationList.size(); i++) {
+				ModificationType theModificationType = (ModificationType) theTargetedModificationList.get(i);				
+				theTargetedMod[i] = theModificationType.getName();
+				log.error("theTargetedMod[i]: " +theTargetedMod[i] );
+				//if the selection is "other"
+				if ( theTargetedMod[i].equalsIgnoreCase("Other")) {
+					//log.error("Other Modification Type Selected. " +theTargetedMod[i] );
+					targetedModificationForm.setModificationType(theTargetedMod);
+					targetedModificationForm.setOtherModificationType(theTargetedModification.getModTypeUnctrlVocab());
+				} else {
+					//log.error("Another non-other Modification Type Selected. " +theTargetedMod[i] );
+					targetedModificationForm.setModificationType(theTargetedMod);
+				}			
+			}
+            
             targetedModificationForm.setBlastocystName(theTargetedModification.getBlastocystName());
             targetedModificationForm.setComments(theTargetedModification.getComments());
             targetedModificationForm.setGeneId(theTargetedModification.getGeneId());
@@ -56,21 +82,6 @@ public class TargetedModificationPopulateAction extends BaseAction {
                 targetedModificationForm.setThumbUrl(image.getThumbUrl());
                 targetedModificationForm.setImageUrl(image.getImageUrl());
             }
-
-            List modTypeList = theTargetedModification.getModificationTypeCollection();
-
-            if (modTypeList.size() > 0) {
-                ModificationType modType = (ModificationType) modTypeList.get(0);
-                targetedModificationForm.setModificationType(modType.getName());
-            } else {
-                targetedModificationForm.setModificationType(Constants.Dropdowns.OTHER_OPTION);
-            }
-            targetedModificationForm.setOtherModificationType(theTargetedModification.getModTypeUnctrlVocab());
-
-            MutationIdentifier theMutationIdentifier = theTargetedModification.getMutationIdentifier();
-
-            if (theMutationIdentifier != null)
-                targetedModificationForm.setNumberMGI(theMutationIdentifier.getNumberMGI().toString());
 
         }
 

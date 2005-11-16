@@ -85,7 +85,7 @@
 		<camod:cshelp mapId="targeted_modification_help" key="MODIFICATION_TYPE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="modificationType" onchange="chkTypeMod( this );" >
+			<html:select styleClass="formFieldSized" multiple="true" size="5" property="modificationType" onchange="chkTypeMod( this );" >
 				<html:options name="<%= Dropdowns.TARGETEDMODIFICATIONDROP %>" />										
 			</html:select>
 			<br>

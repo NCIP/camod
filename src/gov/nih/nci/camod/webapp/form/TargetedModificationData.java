@@ -7,9 +7,9 @@ public interface TargetedModificationData {
 	
 	public void setName(String name);
 	
-	public String getModificationType();
+	public String[] getModificationType();
 	
-	public void setModificationType(String modificationType);
+	public void setModificationType(String[] modificationType);
 	
 	public String getOtherModificationType();
 	
