@@ -3,8 +3,11 @@
  *  author:  pandyas
  *
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2005/11/15 17:38:22  pandyas
+ *  Fixed Defects #7-8 and #9-11:  6 Links to experimental design and yeast strains, formatting 3 experimental design headers
  *
- *  $Id: yeastStrainsStage01.jsp,v 1.2 2005-11-15 17:38:22 pandyas Exp $
+ *
+ *  $Id: yeastStrainsStage01.jsp,v 1.3 2005-11-16 14:23:16 georgeda Exp $
  *
  */
 %>
@@ -24,7 +27,7 @@
 
 			</TABLE>
 			<br>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+			<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 				<TR>
 					<TD class="formTitleBlue" align="center" width="17%" height="20"><B>Strain</B></TD>
 					<TD class="formTitleBlue" align="center" width="83%" height="20"><B>Genotype</B></TD> 
