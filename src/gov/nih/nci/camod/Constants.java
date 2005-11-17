@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.73 2005-11-14 14:15:37 georgeda Exp $
+ * $Id: Constants.java,v 1.74 2005-11-17 20:42:03 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.73  2005/11/14 14:15:37  georgeda
+ * Cleanup
+ *
  * Revision 1.72  2005/11/11 21:24:19  georgeda
  * Defect #29.  Separate drug screening and animal model search results.
  *
@@ -387,7 +390,7 @@ public class Constants {
 
         public static final String CAIMAGEMODELSERVERVIEW = "caimage.modelview.uri";
 
-        public static final String CAIMAGEGENCONSERVERVIEW = "caimage.modelview.uri";
+        public static final String CAIMAGEGENCONSERVERVIEW = "caimage.genconview.uri";
 
         public static final String CAIMAGESIDTHUMBVIEW = "caimage.sidthumbview.uri";
 
