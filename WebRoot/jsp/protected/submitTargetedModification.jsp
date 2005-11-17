@@ -177,7 +177,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Upload Construct Map (Image):</label></td>
+		<td class="formLabel"><label for="field1">Upload Construct Map<br>(Image of type .jpg , .jpeg, .gif, .sid or .tif):</label></td>
 		<td class="formField">
 				
 			<c:if test="${not empty targetedModificationForm.fileServerLocation}">

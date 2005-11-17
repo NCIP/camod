@@ -55,7 +55,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Upload Construct Map (Image)</label></td>
+			<td class="formRequiredLabel"><label for="field1">Upload Construct Map<br>(Image of type .jpg , .jpeg, .gif, .sid or .tif)</label></td>
 			<td class="formField">
 			
 			<html:form action="<%= actionName %>" focus="fileLocation" enctype="multipart/form-data">	
