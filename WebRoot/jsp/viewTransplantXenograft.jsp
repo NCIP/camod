@@ -30,7 +30,7 @@
 	
 		<tr>
 			<td class="GreyBox"><b>Parental Cell line:</b></td>
-			<td class="GreyBoxRightEnd">&nbsp;<c:out value="${xt.parentalCellLineName}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.parentalCellLineName}"/>&nbsp;</td>
 		</tr>
 	
 		<tr>		

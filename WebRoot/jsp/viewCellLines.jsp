@@ -33,36 +33,36 @@
 				</c:choose>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${p.name}"/>&nbsp;
+				<c:out value="${p.name}"/>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%">Name of Cell Line</td>
-				<td class="resultsBoxWhiteEnd">&nbsp;
+				<td class="resultsBoxWhiteEnd">
 					<c:out value="${p.name}"/>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%">Organ / Tissue</td>
-				<td class="resultsBoxGreyEnd">&nbsp;
+				<td class="resultsBoxGreyEnd">
 					<c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%">Experiment</td>
-				<td class="resultsBoxWhiteEnd">&nbsp;
+				<td class="resultsBoxWhiteEnd">
 					<c:out value="${p.experiment}"/>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%">Results</td>
-				<td class="resultsBoxGreyEnd">&nbsp;
+				<td class="resultsBoxGreyEnd">
 					<c:out value="${p.results}"/>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%">Comments</td>
-				<td class="resultsBoxWhiteEnd">&nbsp;
+				<td class="resultsBoxWhiteEnd">
 					<c:out value="${p.comments}"/>
 				</td>
 			</tr>

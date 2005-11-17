@@ -144,11 +144,11 @@
 		
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+				<td class="resultsBoxWhiteEnd" width="75%">
 				<bean:define id="dc" name="h" property="diseaseCollection"/>
 				<c:forEach var="d" items="${dc}">
-					<c:out value="${d.EVSPreferredDescription}"/><br>
-					</c:forEach>&nbsp;
+					<c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
+					</c:forEach>
 					</td>
 				</tr>
 	
@@ -159,7 +159,7 @@
 					<c:if test="${not empty m.geneticAlteration.methodOfObservation}"><br/>
 					Method - &nbsp;
 					<c:out value="${m.geneticAlteration.methodOfObservation}" escapeXml="false"/>
-						</c:if>&nbsp;
+						</c:if>
 					</td>
 				</tr>
 	
@@ -253,7 +253,7 @@
 	
 					<tr>
 						<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Metastasis</b></td>
-						<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+						<td class="resultsBoxGreyEnd" width="75%">
 							<c:out value="${m.geneticAlteration.observation}"/>
 						&nbsp; 
 						<c:if test="${not empty m.geneticAlteration.methodOfObservation}"><br/>
