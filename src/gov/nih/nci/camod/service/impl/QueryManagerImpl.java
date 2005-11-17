@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.28 2005-11-16 21:40:30 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.29 2005-11-17 19:40:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2005/11/16 21:40:30  georgeda
+ * Defect #46, added code to handle CI's correctly.
+ *
  * Revision 1.27  2005/11/14 16:52:37  georgeda
  * Fixed admin problem
  *
@@ -1188,6 +1191,23 @@ public class QueryManagerImpl extends BaseManager {
 		return getModelIds(theSQLString, theParams);
 	}
 
+    /**
+     * Get the model id's that have an environmental factor
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForAnyEnvironmentalFactor() throws PersistenceException {
+
+        String theSQLString = "SELECT distinct ani_th.abs_cancer_model_id FROM animal_model_therapy ani_th "
+                + "WHERE ani_th.therapy_id IN (SELECT t.therapy_id FROM therapy t"
+                + "     WHERE t.therapeutic_experiment=0)";
+
+        Object[] theParams = new Object[0];
+        return getModelIds(theSQLString, theParams);
+    }
+    
 	/**
 	 * Get the model id's that have a matching environmental factor
 	 * 
@@ -1409,41 +1429,55 @@ public class QueryManagerImpl extends BaseManager {
 
 			log.debug("Searching for Carcinogenic Interventions");
 
+            boolean searchForSpecificCI = false;
+            
 			// Search for chemical/drug
 			if (inSearchData.getChemicalDrug() != null && inSearchData.getChemicalDrug().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
 						+ getModelIdsForEnvironmentalFactor("Chemical / Drug", inSearchData.getChemicalDrug()) + ")";
+                searchForSpecificCI = true;
 			}
 
 			// Search for Surgery/Other
 			if (inSearchData.getSurgery() != null && inSearchData.getSurgery().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
 						+ getModelIdsForEnvironmentalFactor("Other", inSearchData.getSurgery()) + ")";
+                searchForSpecificCI = true;
 			}
 
 			// Search for Hormone
 			if (inSearchData.getHormone() != null && inSearchData.getHormone().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
 						+ getModelIdsForEnvironmentalFactor("Hormone", inSearchData.getHormone()) + ")";
+                searchForSpecificCI = true;
 			}
 
 			// Search for Growth Factor
 			if (inSearchData.getGrowthFactor() != null && inSearchData.getGrowthFactor().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
 						+ getModelIdsForEnvironmentalFactor("Growth Factor", inSearchData.getGrowthFactor()) + ")";
+                searchForSpecificCI = true;
 			}
 
 			// Search for Radiation
 			if (inSearchData.getRadiation() != null && inSearchData.getRadiation().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
 						+ getModelIdsForEnvironmentalFactor("Radiation", inSearchData.getRadiation()) + ")";
+                searchForSpecificCI = true;
 			}
 
 			// Search for Viral
 			if (inSearchData.getViral() != null && inSearchData.getViral().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
 						+ getModelIdsForEnvironmentalFactor("Viral", inSearchData.getViral()) + ")";
+                searchForSpecificCI = true;
 			}
+            
+            // Search for any model w/ a CI
+            if (searchForSpecificCI == false) {
+                theWhereClause += " AND abs_cancer_model_id IN ("
+                    + getModelIdsForAnyEnvironmentalFactor() + ")";
+            }
 		}
 
 		// Only call if some of the data is set
