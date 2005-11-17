@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.23 2005-11-17 21:28:44 schroedn Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.24 2005-11-17 22:39:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2005/11/17 21:28:44  schroedn
+ * Defect #141
+ *
+ * Capitized word
+ *
  * Revision 1.22  2005/11/17 21:26:39  schroedn
  * Bug #140
  *
@@ -45,7 +50,7 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 			Genetic Description - Model:
-			<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+			<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 
@@ -55,7 +60,7 @@
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
 					<li>
-					    <a href="<c:out value="#eng_trans_${idx}"/>">
+					    <a href="<c:out value="#eng_trans_${idx}"/>">&nbsp;
 							<bean:write name="eg" property="name"/>
 						</a>
 					</logic:iterate>
@@ -69,7 +74,7 @@
 				<ul>
 					<logic:iterate id="eg" name="gsc" indexId="idx">
 					<li>
-						<a href="<c:out value="#gen_seg_${idx}"/>">
+						<a href="<c:out value="#gen_seg_${idx}"/>">&nbsp;
 							<bean:write name="eg" property="cloneDesignator"/>
 						</a>
 					</logic:iterate>
@@ -87,7 +92,7 @@
 							<bean:write name="eg" property="name"/>
 						</a>
 					</logic:iterate>
-				</ul>&nbsp;
+				</ul>
 			</td>			
 		</tr>
 		
@@ -100,14 +105,14 @@
 					<% if ( eg instanceof gov.nih.nci.camod.domain.InducedMutation ) { %>
 					
 					<li>
-						<a href="<c:out value="#ind_mut_${count}"/>">
+						<a href="<c:out value="#ind_mut_${count}"/>">&nbsp;
 						    <c:set var="count" value="${count + 1}"/>
 							<c:choose>
 								<c:when test="${empty eg.environmentalFactor.name}">
-									<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>
+									<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
 								</c:when>
 								<c:otherwise>
-						            <c:out value="${eg.environmentalFactor.name}"/>
+						            <c:out value="${eg.environmentalFactor.name}"/>&nbsp;
 								</c:otherwise>
 							</c:choose>
 						</a>
@@ -122,7 +127,7 @@
 				<ul>
 				    <logic:iterate id="sm" name="smc" indexId="idx">
 						<li>
-						<a href="<c:out value="#spon_mut_${idx}"/>">
+						<a href="<c:out value="#spon_mut_${idx}"/>">&nbsp;
 								<bean:write name="sm" property="name"/>
 						</a>
 					</logic:iterate>
@@ -141,13 +146,13 @@
 <c:forEach var="tg" items="${tgc}" >
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
-	<a name="<c:out value="eng_trans_${count}"/>"/>
+	<a name="<c:out value="eng_trans_${count}"/>"/>&nbsp;
 	<c:set var="count" value="${count + 1}"/>
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Engineered Transgene - Model:
-				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 
@@ -222,7 +227,7 @@
 			<c:forEach var="gf" items="${tg.geneFunctionCollection}">
 				<li><c:out value="${gf.function}"/></li>
 			</c:forEach>
-			</ul>&nbsp;
+			</ul>
 			</td>
 		</tr>
 
@@ -309,7 +314,7 @@
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Genomic Segment - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				Genomic Segment - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 		<c:choose>
@@ -396,7 +401,7 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<a href='<c:out value="${gs.image.imageUrl}"/>'>
+			<a href='<c:out value="${gs.image.imageUrl}"/>'>&nbsp;
 			<img src="<c:out value="${gs.image.thumbUrl}"/>" 
 				height="40" width="40" border=0
 				alt="Click on the image to open in a new Browser window"></a>
@@ -441,7 +446,7 @@
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Targeted Modification - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				Targeted Modification - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
         <tr>
@@ -492,7 +497,7 @@
 			<td class="GreyBoxRightEnd" width="65%">
 			<ul>
 			<c:forEach var="gf" items="${tm.geneFunctionCollection}">
-				<li><c:out value="${gf.function}"/></li>
+				<li><c:out value="${gf.function}"/></li>&nbsp;
 			</c:forEach>
 			</ul>
 			</td>
@@ -513,7 +518,7 @@
 						<td class="WhiteBoxRightEnd">
 						<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
 					</tr>
-				</c:forEach>
+				</c:forEach>&nbsp;
 			</table>
 			</c:if>
 			</td>
