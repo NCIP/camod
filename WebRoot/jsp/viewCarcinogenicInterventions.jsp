@@ -39,7 +39,7 @@
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age</td>
+				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
 				<td class="greySubTitle" width="17%">Gender</td>				
 			</tr>
 			
@@ -236,7 +236,7 @@
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age</td>
+				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
 				<td class="greySubTitle" width="17%">Gender</td>				
 			</tr>
 			
@@ -300,7 +300,7 @@
 				<td class="greySubTitleLeft" width="17%">Dose</td>
 				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>
 				<td class="greySubTitleLeft" width="17%">Administrative Route</td>
-				<td class="greySubTitleLeft" width="17%">Age</td>
+				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
 				<td class="greySubTitle" width="17%">Gender</td>				
 			</tr>
 			
@@ -362,7 +362,7 @@
 			<tr>
 				<td class="greySubTitleLeft" width="30%">Surgery</td>
 				<td class="greySubTitleLeft" width="30%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="20%">Age</td>
+				<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
 				<td class="greySubTitle" width="20%">Gender</td>				
 			</tr>
 			
@@ -412,7 +412,7 @@
 				<td class="greySubTitleLeft" width="20%">Nutritional Component / Diet</td>
 				<td class="greySubTitleLeft" width="20%">Dose</td>
 				<td class="greySubTitleLeft" width="20%">Treatment Regimen</td>
-				<td class="greySubTitleLeft" width="20%">Age</td>
+				<td class="greySubTitleLeft" width="20%">Age at Treatment</td>
 				<td class="greySubTitle" width="20%">Gender</td>				
 			</tr>
 			
