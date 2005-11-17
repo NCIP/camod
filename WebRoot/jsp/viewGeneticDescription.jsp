@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.22 2005-11-17 21:26:39 schroedn Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.23 2005-11-17 21:28:44 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/11/17 21:26:39  schroedn
+ * Bug #140
+ *
+ * Capitalized the word construct in "Title of the construct"
+ *
  * Revision 1.21  2005/11/17 17:46:56  georgeda
  * Defect #58, removed functions and conditional type.
  *
@@ -247,7 +252,7 @@
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.image.title}"/>&nbsp;</td>
 		</tr>
 		<tr>
-			<td class="GreyBox" width="35%"><b>Description of the construct</b></td>
+			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.image.description}"/>&nbsp;</td>
 		</tr>
 		</c:if>
@@ -404,7 +409,7 @@
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.image.title}"/>&nbsp;</td>
 		</tr>
 		<tr>
-			<td class="GreyBox" width="35%"><b>Description of the construct</b></td>
+			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.image.description}"/>&nbsp;</td>
 		</tr>
 		</c:if>
@@ -530,7 +535,7 @@
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
 		</tr>
 		<tr>
-			<td class="GreyBox" width="35%"><b>Description of the construct</b></td>
+			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
 		</tr>
 		</c:if>
