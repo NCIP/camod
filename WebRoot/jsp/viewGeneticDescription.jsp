@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.21 2005-11-17 17:46:56 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.22 2005-11-17 21:26:39 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/11/17 17:46:56  georgeda
+ * Defect #58, removed functions and conditional type.
+ *
  * Revision 1.20  2005/11/16 15:17:27  schroedn
  * Defect #59
  *
@@ -240,7 +243,7 @@
 		</tr>
 
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Title of the construct</b></td>
+			<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.image.title}"/>&nbsp;</td>
 		</tr>
 		<tr>
@@ -397,7 +400,7 @@
 		</tr>
 
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Title of the construct</b></td>
+			<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.image.title}"/>&nbsp;</td>
 		</tr>
 		<tr>
@@ -523,7 +526,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Title of the construct</b></td>
+			<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
 		</tr>
 		<tr>
