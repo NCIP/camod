@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.19 2005-11-16 15:31:35 georgeda Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.20 2005-11-17 18:36:47 georgeda Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.19  2005/11/16 15:31:35  georgeda
+  *   Defect #41. Clean up of email functionality
+  *
   */
 %>
 <%@ include file="/jsp/header.jsp" %>
@@ -176,19 +179,23 @@
 					<c:set var="dist" value="${av.animalDistributorCollection[0]}"/>
 					<c:choose>
 						<c:when test = "${dist.id == 1}">
+						    <!-- Investigator -->
 							<c:out value="${dist.name}"/>
 						</c:when>
 						<c:when test = "${dist.id == 2}">
+						    <!-- Jackson Lab -->
 							<a target="_distributor" href="http://jaxmice.jax.org/jaxmice-cgi/jaxmicedb.cgi?objtype=pricedetail&stock=<c:out value="${av.stockNumber}"/>">
 							<c:out value="${dist.name}"/>
 							</a>
 						</c:when>
 						<c:when test = "${dist.id == 3}">
+						    <!-- MMHC Repo -->
 							<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}"/>">
 							<c:out value="${dist.name}"/>
 							</a>
 						</c:when>
 						<c:when test = "${dist.id == 4}">
+						    <!-- IMSR -->
 							<c:out value="${dist.name}"/>
 						</c:when>
 					</c:choose>
@@ -198,6 +205,15 @@
 						<c:when test = "${dist.id != 1}">
 							<c:out value="${av.stockNumber}"/>
 						</c:when>
+						<c:otherwise>
+							<c:if test="${not empty av.principalInvestigator.emailAddress}">
+							    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
+							</c:if>
+							<c:out value="${av.principalInvestigator.displayName}"/>
+							<c:if test="${av.principalInvestigator.emailAddress}">
+							    </a>
+							</c:if>						
+						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 			</tr>
