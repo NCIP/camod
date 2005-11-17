@@ -3,8 +3,11 @@
  *  author:  pandyas
  *
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2005/11/15 17:38:22  pandyas
+ *  Fixed Defects #7-8 and #9-11:  6 Links to experimental design and yeast strains, formatting 3 experimental design headers
  *
- *  $Id: expDesignStage1.jsp,v 1.2 2005-11-15 17:38:22 pandyas Exp $
+ *
+ *  $Id: expDesignStage1.jsp,v 1.3 2005-11-17 18:01:25 pandyas Exp $
  *
  */
 %>
@@ -24,7 +27,7 @@
 
 			</TABLE>
 			<br>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+			<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 				<TR>
 					<TD class="formTitleBlue" height="20"><B>Experimental Design</B></TD>
 				</TR>
@@ -32,7 +35,7 @@
 				<td colspan="9">
 			<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 				<TR>
-	  				<TD class="resultsBoxWhiteEnd" width="100%">
+	  				<TD class="resultsBoxGreyEnd" width="100%">
 					Stage 1 experiments were performed at two doses, 5 <FONT face=Symbol>m</FONT>M and 50<FONT face=Symbol>m</FONT>M, in duplicate. 
 			  		</TD>
 				</TR>
