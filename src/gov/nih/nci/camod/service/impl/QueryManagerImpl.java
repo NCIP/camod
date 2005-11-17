@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.29 2005-11-17 19:40:02 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.30 2005-11-17 20:22:09 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2005/11/17 19:40:02  georgeda
+ * Defect #48.  Now searches for all CI's if no specific CI is selected
+ *
  * Revision 1.28  2005/11/16 21:40:30  georgeda
  * Defect #46, added code to handle CI's correctly.
  *
@@ -1651,21 +1654,35 @@ public class QueryManagerImpl extends BaseManager {
 		int cc = 0;
 		ResultSet theResultSet = null;
 		try {
-			String theSQLString = "select publication_id, year, authors" + "\n" + "  from publication" + "\n"
-					+ " where publication_id in (" + "\n" + "	select min(publication_id) publication_id" + "\n"
-					+ "	  from publication" + "\n" + "	 where pmid in (" + "\n" + "		select distinct pmid" + "\n"
-					+ "		  from animal_model_therapy amt," + "\n" + "		       therapy_publication tp," + "\n"
-					+ "		       publication p" + "\n" + "		 where amt.abs_cancer_model_id = ?" + "\n"
+			String theSQLString = "select publication_id, year, authors" + "\n" 
+                    + "  from publication" + "\n"
+					+ "  where publication_id in (" + "\n" 
+                    + "	  select min(publication_id) publication_id" + "\n"
+					+ "	  from (" + "\n" 
+                    + "		select p.pmid, p.publication_id" + "\n"
+					+ "		  from animal_model_therapy amt," + "\n" 
+                    + "		       therapy_publication tp," + "\n"
+					+ "		       publication p" + "\n" 
+                    + "		  where amt.abs_cancer_model_id = ?" + "\n"
 					+ "		   and amt.therapy_id = tp.therapy_id" + "\n"
-					+ "		   and tp.publication_id = p.publication_id" + "\n" + "		union" + "\n"
-					+ "		select distinct pmid" + "\n" + "		  from ani_mod_cell_line acl," + "\n"
-					+ "		       cell_line_publication cp," + "\n" + "		       publication p" + "\n"
-					+ "		 where acl.abs_cancer_model_id = ?" + "\n" + "		   and acl.cell_line_id = cp.cell_line_id"
-					+ "\n" + "		   and cp.publication_id = p.publication_id" + "\n" + "		union" + "\n"
-					+ "		select distinct pmid" + "\n" + "		  from abs_can_mod_publication acmp," + "\n"
-					+ "		       publication p" + "\n" + "		 where acmp.abs_cancer_model_id = ?" + "\n"
-					+ "		   and acmp.publication_id = p.publication_id )" + "\n" + "	 group by pmid )" + "\n"
+					+ "		   and tp.publication_id = p.publication_id" + "\n" 
+                    + "		union" + "\n"
+					+ "		select p.pmid, p.publication_id" + "\n" 
+                    + "		  from ani_mod_cell_line acl," + "\n"
+					+ "		       cell_line_publication cp," + "\n" 
+                    + "		       publication p" + "\n"
+					+ "		 where acl.abs_cancer_model_id = ?" + "\n" 
+                    + "		   and acl.cell_line_id = cp.cell_line_id" + "\n" 
+                    + "		   and cp.publication_id = p.publication_id" + "\n" 
+                    + "		union" + "\n"
+					+ "		select p.pmid, p.publication_id" + "\n" 
+                    + "		  from abs_can_mod_publication acmp," + "\n"
+					+ "		       publication p" + "\n" 
+                    + "		 where acmp.abs_cancer_model_id = ?" + "\n"
+					+ "		   and acmp.publication_id = p.publication_id )" + "\n" 
+                    + "	 group by pmid )" + "\n"
 					+ " order by year desc, authors" + "\n";
+            
 			log.info("getAllPublications - SQL: " + theSQLString);
 			Object[] params = new Object[3];
 			params[0] = params[1] = params[2] = String.valueOf(absCancerModelId);
