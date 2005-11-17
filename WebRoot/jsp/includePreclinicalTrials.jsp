@@ -1,69 +1,70 @@
+<%
+ /*
+ * $Log: not supported by cvs2svn $
+ *
+ * $Id: includePreclinicalTrials.jsp,v 1.7 2005-11-17 21:15:10 georgeda Exp $
+ */
+%>
 <tr>
 	<td class="formTitleBlue" height="20" colspan="2">
 		Summary of the pre-clinical study in <c:out value="${agt.name}"/>
 	</td>
 </tr>	
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Experiment \ Treatment Regimen</b></td>
+	<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-	<c:out value="${t.treatment.regimen}"/>
-	</td>
-</tr>
-<tr>
-	<td class="resultsBoxGrey" width="25%"><b>Experiment</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.experiment}"/>
 	</td>
 </tr>			
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Results</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.results}"/>
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Toxicity Grade</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhite" width="25%"><b>Toxicity Grade</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.toxicityGrade}"/>
 	</td>
 </tr>			
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Dose</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxGrey" width="25%"><b>Dose</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.dosage}"/>
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Age at Treatment</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhite" width="25%"><b>Age at Treatment</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.ageAtTreatment}"/>
 	</td>
 </tr>			
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Gender</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxGrey" width="25%"><b>Gender</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.sexDistribution.type}"/>
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Administration Route</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhite" width="25%"><b>Administration Route</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.administrativeRoute}"/>
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Other Administration Route</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxGrey" width="25%"><b>Other Administration Route</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.adminRouteUnctrlVocab}"/>
 	</td>
 </tr>			
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Biomarker</b></td>
-	<td class="resultsBoxGreyEnd" width="75%"><c:out value="${t.biomarker}"/>&nbsp;</td>
+	<td class="resultsBoxWhite" width="25%"><b>Biomarker</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%"><c:out value="${t.biomarker}"/>&nbsp;</td>
 </tr>
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.comments}"/>
 	</td>
 </tr>
