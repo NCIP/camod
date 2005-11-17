@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.20 2005-11-16 15:17:27 schroedn Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.21 2005-11-17 17:46:56 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2005/11/16 15:17:27  schroedn
+ * Defect #59
+ *
+ * Rename the "Gene Function" field to "Function(s) of Targeted Gene" field
+ *
  *
  */
 
@@ -556,16 +561,6 @@
 						&nbsp;|&nbsp;
 			        <A target="_blank" href="http://cgap.nci.nih.gov/Genes/GeneInfo?ORG=Mm&CID=<c:out value="${gene.clusterId}"/>">CGAP</A>
 	           	</td>
-	        </tr>
-	        <tr>
-	            <td class="WhiteBox" width="35%"><b>Function(s) of Targeted Gene</b></td>
-	            <td class="WhiteBoxRightEnd" width="65%">&nbsp;
-	            </td>
-	        </tr>
-	        <tr>
-	            <td class="GreyBox" width="35%"><b>Conditional Type</b></td>
-	            <td class="GreyBoxRightEnd" width="65%">&nbsp;
-	            </td>
 	        </tr>
 	        <tr>
 	            <td valign="top" class="WhiteBox" width="35%"><b>Gene Ontology</b></td>
