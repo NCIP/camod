@@ -1,9 +1,9 @@
 <SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
-<TR><TD height="100%" class=subMenu valign=top width=190>
+<TR><TD height="100%" class=subMenu valign=top width="50">
 	  
 <!-- standard submenu begins -->
 	  
-    <TABLE height="100%" cellSpacing=0 cellPadding=0 width=190 summary="" border=0>
+    <TABLE height="100%" cellSpacing=0 cellPadding=0 width="50%" summary="" border=0>
       <TBODY>   
       
 <!-- Place Code here to determine the sub-Menu Links -->
@@ -75,7 +75,7 @@
 	<%
 	if( session.getAttribute("camod.loggedon.username") != null ) {
 		%>
-		<TR><TD class="loggedInBox" width="100%">Currently logged on as:<br>
+		<TR><TD class="loggedInBox" width="100%">Currently logged in as:<br>
 		<TABLE><TR><TD class="loggedInBoxBorderless">
 		     <b><%= session.getAttribute("camod.loggedon.username") %></b><br>
 		     <logic:present name="<%= Constants.CURRENTUSERROLES %>">
