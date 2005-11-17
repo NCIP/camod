@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.30 2005-11-17 20:22:09 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.31 2005-11-17 22:31:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2005/11/17 20:22:09  georgeda
+ * Defect #158.  Fixed issue w/ author name being returned for first matching pmid instead of pub. associated with animal model.
+ *
  * Revision 1.29  2005/11/17 19:40:02  georgeda
  * Defect #48.  Now searches for all CI's if no specific CI is selected
  *
@@ -1339,7 +1342,7 @@ public class QueryManagerImpl extends BaseManager {
 
 		String theWhereClause = "";
 
-		theWhereClause += " AND (am.modelDescriptor like :keyword ";
+		theWhereClause += " AND (upper(am.modelDescriptor) like :keyword ";
 
 		theWhereClause += " OR am.species IN (from Taxon as t where upper(t.scientificName) like :keyword )";
 
