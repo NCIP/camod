@@ -15,7 +15,7 @@
 			</tr>			
 			
 			<tr>
-				<td class="resultsBoxWhiteEnd">Thank you for registering, please check your email for a confirmation.  Your account information will be sent to you soon.</td> 
+				<td class="resultsBoxWhiteEnd">Thank you for registering.  Your account information will be emailed to you by the Application Support Team.</td> 
 			</tr>
 			
 			</TABLE>
