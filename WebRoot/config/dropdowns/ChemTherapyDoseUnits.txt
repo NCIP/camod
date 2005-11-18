@@ -9,7 +9,7 @@ Dilution factor 10^2
 Dilution factor 10^3
 grams/kg/injection
 International Units/animal/injection
-mg/kg
+mg/kg/body weight
 mg/mouse/injection
 micrograms per hour
 micrograms/kg/injection
