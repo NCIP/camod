@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.11 2005-11-08 22:32:44 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.12 2005-11-18 21:05:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/08 22:32:44  georgeda
+ * LDAP changes
+ *
  * Revision 1.10  2005/11/07 13:58:29  georgeda
  * Dynamically update roles
  *
@@ -102,6 +105,28 @@ public class UserManagerImpl extends BaseManager implements UserManager {
                     Role theRole = (Role) theIterator.next();
                     theRoles.add(theRole.getName());
                 }
+
+                // Check for superuser priv
+                try {
+
+                    // Get from default bundle
+                    ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
+                    String theSuperusers = theBundle.getString(Constants.BundleKeys.SUPERUSER_USERNAMES_KEY);
+
+                    StringTokenizer theTokenizer = new StringTokenizer(theSuperusers, ",");
+
+                    while (theTokenizer.hasMoreTokens()) {
+                        
+                        if (theTokenizer.nextToken().equals(inUsername)) {
+                            theRoles.add(Constants.Admin.Roles.SUPER_USER);
+                            break;
+                        }
+                    }
+
+                } catch (Exception e) {
+                    log.error("Cannot get superuser information from bundle", e);
+                }
+
             } else {
                 throw new IllegalArgumentException("User: " + inUsername + " not in caMOD database");
             }

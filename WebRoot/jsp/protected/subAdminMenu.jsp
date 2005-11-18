@@ -1,3 +1,12 @@
+<%
+/*
+ * $Id: subAdminMenu.jsp,v 1.10 2005-11-18 21:07:44 georgeda Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ *
+ */
+%>
+
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 <%@ page import='gov.nih.nci.camod.Constants' %>
@@ -28,6 +37,16 @@
 	<BR>
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
 	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminUserManagementPopulateAction">USER MANAGEMENT</html:link>
+	<BR>
+	<%
+	   }
+	%>	
+	<% 
+	   if (theRoles.contains(Admin.Roles.SUPER_USER))
+	   {
+	%>
+    <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
+	&nbsp;<html:link styleClass="subMenuPrimary" action="AdminEditModelsPopulateAction">EDIT MODELS</html:link>
 	<BR>
 	<%
 	   }

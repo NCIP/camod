@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: Constants.java,v 1.74 2005-11-17 20:42:03 schroedn Exp $
+ * $Id: Constants.java,v 1.75 2005-11-18 21:04:54 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.74  2005/11/17 20:42:03  schroedn
+ * Defect #93
+ *
+ * Fixed CAIMAGEGENCONSERVERVIEW variable to point to correct property in camod.properties. This allows for GeneticConstruts to be saved in correct directory on caImage server.
+ *
  * Revision 1.73  2005/11/14 14:15:37  georgeda
  * Cleanup
  *
@@ -196,6 +201,11 @@ public class Constants {
          */
         public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
 
+        /**
+         * The key for the coordinator username in the camod.properties file
+         */
+        public static final String SUPERUSER_USERNAMES_KEY = "superuser.usernames";
+        
         /**
          * The key for the coordinator username in the camod.properties file
          */
@@ -637,6 +647,11 @@ public class Constants {
              */
             public static final String COORDINATOR = "MMHCC Coordinator";
 
+            /**
+             * A constant that defines the coordinator role
+             */
+            public static final String SUPER_USER = "MMHCC SuperUser";
+            
             /**
              * A constant that defines the Editor role
              */

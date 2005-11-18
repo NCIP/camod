@@ -57,6 +57,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
                         jspName.equals("adminRolesAssignment.jsp") || 
                         jspName.equals("adminEditUserRoles.jsp") || 
                         jspName.equals("adminEditUser.jsp") || 
+                        jspName.equals("adminEditModels.jsp") || 
                         jspName.equals("adminUserManagement.jsp") ||  
 						jspName.equals("helpDesk.jsp") ) {	
 					return "subAdminMenu.jsp";
