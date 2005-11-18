@@ -1,7 +1,10 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/14 14:16:51  georgeda
+ * Cleanup
+ *
  * 
- * $Id: AnimalModel.java,v 1.14 2005-11-14 14:16:51 georgeda Exp $
+ * $Id: AnimalModel.java,v 1.15 2005-11-18 15:20:21 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -17,6 +20,7 @@ public class AnimalModel extends AbstractCancerModel {
     private Boolean isToolMouse;
     private List cellLineCollection = new ArrayList();
     private List spontaneousMutationCollection = new ArrayList();
+    private Set logCollection = new HashSet();
     private List imageCollection = new ArrayList();
     private List microArrayDataCollection = new ArrayList();
     private List xenograftCollection = new ArrayList();
@@ -29,6 +33,30 @@ public class AnimalModel extends AbstractCancerModel {
     private RepositoryInfo repositoryInfo;
     private Phenotype phenotype;
 
+    /**
+     * @return Returns the logCollection.
+     */
+    public Set getLogCollection() {
+        return logCollection;
+    }
+        
+    /**
+     * @param logCollection
+     *            The logCollection to set.
+     */
+    public void setLogCollection(Set logCollection) {
+        this.logCollection = logCollection;
+    }
+
+    /**
+     * @param log
+     *            The log to add.
+     */
+    public void addLog(Log log) {
+        logCollection.add(log);
+    }
+
+    
     /**
      * @return Returns the engineeredGeneCollection.
      */

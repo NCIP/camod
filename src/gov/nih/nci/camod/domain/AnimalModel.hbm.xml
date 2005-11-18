@@ -27,6 +27,13 @@
         	column="is_tool_mouse" 
         	type="boolean"/>
         	
+        <!-- logCollection (one-to-many bidirectional) -->
+        <set name="logCollection"
+	         cascade="all">
+            <key column="abs_cancer_model_id"/>
+            <one-to-many class="Log"/>
+        </set>
+        
         <!-- cellLineCollection (one-to-many unidirectional) -->
         <bag name="cellLineCollection" 
         	table="ani_mod_cell_line"

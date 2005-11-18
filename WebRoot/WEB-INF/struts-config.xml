@@ -1584,10 +1584,15 @@
             scope="request"
             parameter="method"         
             validate="false" >  
-    <forward 
+        <forward 
             redirect="true"
     		name="modeldeleted"
-    		path="/ReturnUserModels.do?method=returnUserModels"></forward>	                         
+    		path="/ReturnUserModels.do?method=returnUserModels">
+        </forward>
+        <forward 
+    		name="failure"
+    		path="/ReturnUserModels.do?method=returnUserModels">
+        </forward>	                         
     </action>
    
     <action path="/DuplicateAnimalModelAction"
@@ -1595,10 +1600,15 @@
             scope="request"
             parameter="method"         
             validate="false" >  
-    <forward 
+        <forward 
             redirect="true"
     		name="duplicatesuccessful"
-    		path="/ReturnUserModels.do?method=returnUserModels"></forward>                                     
+    		path="/ReturnUserModels.do?method=returnUserModels">
+        </forward>
+        <forward 
+    		name="failure"
+    		path="/ReturnUserModels.do?method=returnUserModels">
+        </forward>	                                      
    </action>
    
    

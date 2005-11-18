@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.17 2005-11-10 18:41:53 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.18 2005-11-18 15:20:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/11/10 18:41:53  pandyas
+ * minor change to comments
+ *
  * Revision 1.16  2005/10/24 17:11:00  georgeda
  * First pass at duplicate
  *
@@ -60,15 +63,14 @@ public final class AnimalModelAction extends BaseAction {
         log.info("<AnimalModelAction saveNewModel> New Model Being created with following Characteristics:"
                 + "\n\t description: " + theModelChar.getDescription() + "\n\t breedingNotes: "
                 + theModelChar.getBreedingNotes() + "\n\t PI: " + theModelChar.getPrincipalInvestigator()
-                + "\n\t experimentDesign: " + theModelChar.getExperimentDesign() + "\n\t isToolMouse: " + theModelChar.getIsToolMouse()
-                + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName()
-                + "\n\t releaseDate: " + theModelChar.getReleaseDate() 
-                + "\n\t scientificName: " + theModelChar.getScientificName() 
-                + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() 
-                + "\n\t ethnicityStrainUnctrlVocab: " + theModelChar.getEthnicityStrainUnctrlVocab()                 
-                + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: "
-                + theModelChar.getType() + "\n\t url: " + theModelChar.getUrl() + "\n\t calendarReleaseDate: "
-                + theModelChar.getCalendarReleaseDate() + "\n\t currentUser: "
+                + "\n\t experimentDesign: " + theModelChar.getExperimentDesign() + "\n\t isToolMouse: "
+                + theModelChar.getIsToolMouse() + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor()
+                + "\n\t name: " + theModelChar.getName() + "\n\t releaseDate: " + theModelChar.getReleaseDate()
+                + "\n\t scientificName: " + theModelChar.getScientificName() + "\n\t ethinicityStrain: "
+                + theModelChar.getEthinicityStrain() + "\n\t ethnicityStrainUnctrlVocab: "
+                + theModelChar.getEthnicityStrainUnctrlVocab() + "\n\t summary: " + theModelChar.getSummary()
+                + "\n\t type: " + theModelChar.getType() + "\n\t url: " + theModelChar.getUrl()
+                + "\n\t calendarReleaseDate: " + theModelChar.getCalendarReleaseDate() + "\n\t currentUser: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
@@ -145,16 +147,15 @@ public final class AnimalModelAction extends BaseAction {
 
         ModelCharacteristicsForm theModelChar = (ModelCharacteristicsForm) form;
 
-        log.info("editExistingModel - New Model Being created with following Characteristics:" 
-        		+ "\n\t description: " + theModelChar.getDescription() + "\n\t breedingNotes: " + theModelChar.getBreedingNotes()
-                + "\n\t PI: " + theModelChar.getPrincipalInvestigator() 
-                + "\n\t experimentDesign: " + theModelChar.getExperimentDesign()
-                + "\n\t isToolMouse: " + theModelChar.getIsToolMouse() + "\n\t modelDescriptor: "
-                + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName() + "\n\t releaseDate: "
-                + theModelChar.getReleaseDate() + "\n\t scientificName: " + theModelChar.getScientificName()
-                + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain() 
-                + "\n\t ethnicityStrainUnctrlVocab: " + theModelChar.getEthnicityStrainUnctrlVocab()
-                + "\n\t summary: " + theModelChar.getSummary() + "\n\t type: " + theModelChar.getType() + "\n\t url: "
+        log.info("editExistingModel - New Model Being created with following Characteristics:" + "\n\t description: "
+                + theModelChar.getDescription() + "\n\t breedingNotes: " + theModelChar.getBreedingNotes()
+                + "\n\t PI: " + theModelChar.getPrincipalInvestigator() + "\n\t experimentDesign: "
+                + theModelChar.getExperimentDesign() + "\n\t isToolMouse: " + theModelChar.getIsToolMouse()
+                + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName()
+                + "\n\t releaseDate: " + theModelChar.getReleaseDate() + "\n\t scientificName: "
+                + theModelChar.getScientificName() + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain()
+                + "\n\t ethnicityStrainUnctrlVocab: " + theModelChar.getEthnicityStrainUnctrlVocab() + "\n\t summary: "
+                + theModelChar.getSummary() + "\n\t type: " + theModelChar.getType() + "\n\t url: "
                 + theModelChar.getUrl() + "\n\t calendarReleaseDate: " + theModelChar.getCalendarReleaseDate()
                 + "\n\t currentUser: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
@@ -210,20 +211,35 @@ public final class AnimalModelAction extends BaseAction {
     public ActionForward duplicate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<AnimalModelAction duplicateModel> modelID=" + request.getParameter("aModelID"));
+        log.info("<AnimalModelAction duplicateModel> modelID=" + request.getParameter("aModelID"));
 
-        String modelID = request.getParameter("aModelID");
+        String theForward = "duplicatesuccessful";
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        try {
 
-        // retrieve model by it's id
-        AnimalModel animalModel = animalModelManager.get(modelID);
+            String modelID = request.getParameter("aModelID");
 
-        AnimalModel theDuplicatedModel = animalModelManager.duplicate(animalModel);
+            AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-        log.info("Duplicated model id: " + theDuplicatedModel.getId());
+            // retrieve model by it's id
+            AnimalModel animalModel = animalModelManager.get(modelID);
 
-        return mapping.findForward("duplicatesuccessful");
+            AnimalModel theDuplicatedModel = animalModelManager.duplicate(animalModel);
+
+            log.info("Duplicated model id: " + theDuplicatedModel.getId());
+
+        } catch (Exception e) {
+
+            log.error("Exception ocurred duplicating model", e);
+
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+
+            theForward = "failure";
+        }
+
+        return mapping.findForward(theForward);
     }
 
     /**
@@ -239,22 +255,34 @@ public final class AnimalModelAction extends BaseAction {
     public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<AnimalModelAction DeleteModel> modelID=" + request.getParameter("aModelID"));
+        log.info("<AnimalModelAction DeleteModel> modelID=" + request.getParameter("aModelID"));
 
-        // Retrieve the parameter passed by the URL
-        String modelID = request.getParameter("aModelID");
+        String theForward = "modeldeleted";
+        try {
+            // Retrieve the parameter passed by the URL
+            String modelID = request.getParameter("aModelID");
+            
+            AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            animalModelManager.remove(modelID);
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        animalModelManager.remove(modelID);
+            // Add a message to be displayed in submitModles saying you've
+            // deleted a
+            // model
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("delete.successful"));
+            saveErrors(request, msg);
 
-        // Add a message to be displayed in submitModles saying you've deleted a
-        // model
-        ActionMessages msg = new ActionMessages();
-        msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("delete.successful"));
-        saveErrors(request, msg);
+        } catch (Exception e) {
 
-        return mapping.findForward("modeldeleted");
+            log.error("Exception ocurred deleting model", e);
 
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+            
+            theForward = "failure";
+        }
+        return mapping.findForward(theForward);
     }
 
     /**
@@ -267,7 +295,7 @@ public final class AnimalModelAction extends BaseAction {
      */
     public ActionForward returnUserModels(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        System.out.println("<UserAction ReturnUserModels> Entering... ");
+        log.info("<UserAction ReturnUserModels> Entering... ");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
