@@ -132,8 +132,8 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Conditional?</td>
 		<td class="formField">
-			<html:radio property="conditionedBy" value="Conditional" onchange="chkConditional(this);" /> Conditional 
-			<html:radio property="conditionedBy" value="Not Conditional" onchange="chkConditional(this);" /> Not Conditional
+			<html:radio property="conditionedBy" value="Conditional" onclick="chkConditional(this);" /> Conditional 
+			<html:radio property="conditionedBy" value="Not Conditional" onclick="chkConditional(this);" /> Not Conditional
 		</td>
 	</tr>
 

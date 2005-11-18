@@ -106,8 +106,8 @@
 		<td class="formField">
 			<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">	
 
-			<html:radio property="locationOfIntegration" value="Random" onchange="chkIntegration(this);" /> Random 
-			<html:radio property="locationOfIntegration" value="Targeted" onchange="chkIntegration(this);" /> Targeted
+			<html:radio property="locationOfIntegration" value="Random" onclick="chkIntegration(this);" /> Random 
+			<html:radio property="locationOfIntegration" value="Targeted" onclick="chkIntegration(this);" /> Targeted
 		</td>
 	</tr>
 
