@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.20 2005-11-17 18:36:47 georgeda Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.21 2005-11-18 20:12:52 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.20  2005/11/17 18:36:47  georgeda
+  *   Defect #57, add a mailto link for Investigator availabilty
+  *
   *   Revision 1.19  2005/11/16 15:31:35  georgeda
   *   Defect #41. Clean up of email functionality
   *
@@ -179,42 +182,53 @@
 					<c:set var="dist" value="${av.animalDistributorCollection[0]}"/>
 					<c:choose>
 						<c:when test = "${dist.id == 1}">
-						    <!-- Investigator -->
-							<c:out value="${dist.name}"/>
-						</c:when>
-						<c:when test = "${dist.id == 2}">
-						    <!-- Jackson Lab -->
-							<a target="_distributor" href="http://jaxmice.jax.org/jaxmice-cgi/jaxmicedb.cgi?objtype=pricedetail&stock=<c:out value="${av.stockNumber}"/>">
-							<c:out value="${dist.name}"/>
-							</a>
-						</c:when>
-						<c:when test = "${dist.id == 3}">
-						    <!-- MMHC Repo -->
-							<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}"/>">
-							<c:out value="${dist.name}"/>
-							</a>
-						</c:when>
-						<c:when test = "${dist.id == 4}">
-						    <!-- IMSR -->
-							<c:out value="${dist.name}"/>
-						</c:when>
-					</c:choose>
-				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="25%">
-					<c:choose>
-						<c:when test = "${dist.id != 1}">
-							<c:out value="${av.stockNumber}"/>
-						</c:when>
-						<c:otherwise>
+						    <!-- Investigator: Populate the PI name in distributor column -->
 							<c:if test="${not empty av.principalInvestigator.emailAddress}">
-							    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
+							    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
 							</c:if>
 							<c:out value="${av.principalInvestigator.displayName}"/>
 							<c:if test="${av.principalInvestigator.emailAddress}">
 							    </a>
-							</c:if>						
-						</c:otherwise>
-					</c:choose>&nbsp;
+							</c:if>	
+						</c:when>
+						<c:when test = "${dist.id == 2}">
+						<!-- Jackson Lab: If stock# not empty link to stock#, else link to main distributor page -->
+							<c:choose>
+								<c:when test="${not empty av.stockNumber}">						    
+									<a target="_distributor" href="http://jaxmice.jax.org/jaxmice-cgi/jaxmicedb.cgi?objtype=pricedetail&stock=<c:out value="${av.stockNumber}"/>">
+									<c:out value="${dist.name}"/>
+								</c:when>							
+								<c:otherwise>
+									<a target="_distributor" href="http://jaxmice.jax.org/index.html"/>
+									<c:out value="${dist.name}"/></a>
+								</c:otherwise>							
+							</c:choose>
+						</c:when>
+						<c:when test = "${dist.id == 3}">
+						<!-- MMHC Repo -->
+						<c:choose>
+							<c:when test="${not empty av.stockNumber}">												
+								<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}"/>">
+								<c:out value="${dist.name}"/></a>
+							</c:when>							
+							<c:otherwise>								
+								<a target="_distributor" href="http://mouse.ncifcrf.gov">
+								<c:out value="${dist.name}"/></a>								
+							</c:otherwise>							
+						</c:choose>
+						</c:when>
+						<c:when test = "${dist.id == 4}">
+						<!-- IMSR -->
+							<a target="_distributor" href="http://www.informatics.jax.org/imsr/index.jsp">						
+							<c:out value="${dist.name}"/>
+						</c:when>
+					</c:choose>
+				</td>
+				<!-- Add stock number if not Investigator (already displayed under distributor)  -->
+				<td class="<c:out value="${tdClass}"/>End" width="25%">
+						<c:if test = "${dist.id != 1}">
+							<c:out value="${av.stockNumber}"/>
+						</c:if>&nbsp;
 				</td>
 			</tr>
 		</c:forEach>
