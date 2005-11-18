@@ -13,7 +13,7 @@ import gov.nih.nci.camod.util.HashCodeUtil;
 import java.io.Serializable;
 
 /**
- * @author rajputs 
+ * @author rajputs
  * 
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class EnvironmentalFactor extends BaseObject implements Comparable, Serializable, Duplicatable {
 
     private static final long serialVersionUID = 3259445453799404851L;
-    
+
     private String type;
     private String typeUnctrlVocab;
     private String name;
@@ -48,13 +48,15 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      */
     public String getDisplayName() {
         String theDisplayName = name;
-        if (name.equals(Constants.Dropdowns.OTHER_OPTION))
-        {
+        if (Constants.Dropdowns.OTHER_OPTION.equals(name)) {
             theDisplayName += " - " + nameUnctrlVocab;
+        } else if (theDisplayName == null && nameUnctrlVocab != null) {
+            theDisplayName = "Other - " + nameUnctrlVocab;
         }
+
         return theDisplayName;
     }
-    
+
     /**
      * @return Returns the name.
      */
@@ -116,32 +118,38 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     }
 
     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getName();  
-       return result;
-     }    
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final EnvironmentalFactor obj = (EnvironmentalFactor) o;
-      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
-      return true;
+        String result = super.toString() + " - ";
+        result += this.getName();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getName());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof EnvironmentalFactor) && (this.getName() != null) && (((EnvironmentalFactor)o).getName() != null)) {   
-        int result = this.getName().compareTo( ((EnvironmentalFactor)o).getName() );
-        if (result != 0) { return result; }        
-      }
 
-      return super.compareTo(o);
-    }      
+    public boolean equals(Object o) {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final EnvironmentalFactor obj = (EnvironmentalFactor) o;
+        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
+            return false;
+        return true;
+    }
+
+    public int hashCode() {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getName());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o) {
+        if ((o instanceof EnvironmentalFactor) && (this.getName() != null)
+                && (((EnvironmentalFactor) o).getName() != null)) {
+            int result = this.getName().compareTo(((EnvironmentalFactor) o).getName());
+            if (result != 0) {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 
 }

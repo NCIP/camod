@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.16 2005-11-16 15:31:05 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.17 2005-11-18 22:50:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/11/16 15:31:05  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.15  2005/11/14 14:19:22  georgeda
  * Cleanup
  *
@@ -132,7 +135,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData, Therapy inTherapy)
+            throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
@@ -225,7 +229,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData, Therapy inTherapy)
+            throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
@@ -272,7 +277,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData, Therapy inTherapy)
+            throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
@@ -368,7 +374,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy)
+            throws Exception {
 
         log.trace("In TherapyManagerImpl.update");
 
@@ -418,7 +425,8 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception {
+    public void update(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData, Therapy inTherapy)
+            throws Exception {
 
         log.debug("In TherapyManagerImpl.update");
 
@@ -473,9 +481,9 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
      */
     public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.debug("In TherapyManagerImpl.remove");
-        
+
         Therapy theTherapy = get(id);
-        
+
         inAnimalModel.getTherapyCollection().remove(theTherapy);
         super.save(inAnimalModel);
     }
@@ -541,28 +549,32 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         theTreatment.setRegimen(inTreatment.getRegimen());
     }
 
-    private void populateAdministration(AnimalModel inAnimalModel, AdministrationData inAdministrationData, Therapy theTherapy) {
+    private void populateAdministration(AnimalModel inAnimalModel, AdministrationData inAdministrationData,
+            Therapy theTherapy) {
 
         log.debug("In TherapyManagerImpl.populateAdministration");
 
-        // Set the treatment
-        Treatment theTreatment = theTherapy.getTreatment();
-        if (theTreatment == null) {
-            theTreatment = new Treatment();
-            theTherapy.setTreatment(theTreatment);
+        if (inAdministrationData.getAdministrativeRoute() != null
+                && inAdministrationData.getAdministrativeRoute().length() > 0) {
+            // Set the treatment
+            Treatment theTreatment = theTherapy.getTreatment();
+            if (theTreatment == null) {
+                theTreatment = new Treatment();
+                theTherapy.setTreatment(theTreatment);
+            }
         }
 
         /* Set other adminstrative route or selected adminstrative route */
         // anytime admin route is other
         if (inAdministrationData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            System.out.println("admin route equals other");
-            
-            theTreatment.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-            theTreatment.setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());            
+            log.info("admin route equals other");
+
+            theTherapy.getTreatment().setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+            theTherapy.getTreatment().setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
 
             log.trace("Sending Notification eMail - new Administrative Route added");
-            
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");            
+
+            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
             // Iterate through all the reciepts in the config file
             String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
@@ -593,16 +605,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
                 e.printStackTrace();
             }
 
-    
-                
+            // anytime admin route is not other, set uncontrolled vocab to null
+            // (covers editing)
+        } else if (inAdministrationData.getAdministrativeRoute() != null) {
+            log.info("admin route not other");
 
-
-        // anytime admin route is not other, set uncontrolled vocab to null (covers editing)
-        } else {
-            System.out.println("admin route not other");
-
-            theTreatment.setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
-            theTreatment.setAdminRouteUnctrlVocab(null);
+            theTherapy.getTreatment().setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
+            theTherapy.getTreatment().setAdminRouteUnctrlVocab(null);
         }
 
         // Agent IS-A an EnvironmentalFactor
@@ -647,7 +656,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         /* Set other name or selected chemical name */
         // anytime the name is "other"
         if (inNameData.getName().equals(Constants.Dropdowns.OTHER_OPTION)) {
-          
+
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
             // Iterate through all the reciepts in the config file
@@ -677,15 +686,15 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
             } catch (Exception e) {
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
-            }            
-            
+            }
+
             theAgent.setName(Constants.Dropdowns.OTHER_OPTION);
             theAgent.setNameUnctrlVocab(inNameData.getOtherName());
         }
         // anytime name is not other, set uncontrolled vocab to null (covers
         // editing)
         else {
-            System.out.println("Name is not other");
+            log.info("Name is not other");
             theAgent.setName(inNameData.getName());
             theAgent.setNameUnctrlVocab(null);
         }
@@ -774,7 +783,6 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         theTherapy.setExperiment(inTherapyData.getExperiment());
         theTherapy.setResults(inTherapyData.getResults());
         theTherapy.setComments(inTherapyData.getComments());
-        System.out.println("Got Therapy attributes in populateTherapy");
 
         // Get the ChemicalClass
         String[] theChemicalClasses = inTherapyData.getSelectedChemicalClasses();

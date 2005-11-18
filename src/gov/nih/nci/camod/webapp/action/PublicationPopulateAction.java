@@ -65,7 +65,7 @@ public class PublicationPopulateAction extends BaseAction {
 			if (thePublication.getPmid() != null) {
 				pubForm.setPmid(thePublication.getPmid().toString());
 			}
-			if (thePublication.isFirstTimeReported().booleanValue()) {
+			if (thePublication.isFirstTimeReported() != null && thePublication.isFirstTimeReported().booleanValue()) {
 				pubForm.setFirstTimeReported("yes");
 			} else {
 				pubForm.setFirstTimeReported("no");

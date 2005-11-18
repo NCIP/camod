@@ -90,7 +90,7 @@ public class InducedMutationPopulateAction extends BaseAction {
         System.out.println("<InducedMutationPopulateAction dropdown> Entering void dropdown()");
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONDROP,
-                Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+                Constants.Dropdowns.ADD_BLANK_OPTION);
 
         System.out.println("<InducedMutationPopulateAction dropdown> Exiting void dropdown()");
     }

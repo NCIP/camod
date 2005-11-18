@@ -1,10 +1,13 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/17 18:36:47  georgeda
+ * Defect #57, add a mailto link for Investigator availabilty
+ *
  * Revision 1.7  2005/11/14 14:16:51  georgeda
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.8 2005-11-17 18:36:47 georgeda Exp $
+ * $Id: AnimalAvailability.java,v 1.9 2005-11-18 22:50:02 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -57,6 +60,18 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
         animalDistributorCollection.add(animalDistributor);
     }
 
+    /**
+     * @return Returns the display name.
+     */
+    public String getDisplayName() {
+        
+        String theDisplayName = name;
+        if (theDisplayName == null) {
+            theDisplayName = "Strain";
+        }
+        return theDisplayName;
+    }
+    
     /**
      * @return Returns the name.
      */

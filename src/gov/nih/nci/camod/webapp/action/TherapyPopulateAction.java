@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.12 2005-11-16 19:29:13 pandyas Exp $
+ * $Id: TherapyPopulateAction.java,v 1.13 2005-11-18 22:50:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/16 19:29:13  pandyas
+ * modified typo in comments
+ *
  * Revision 1.11  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -73,6 +76,7 @@ public class TherapyPopulateAction extends BaseAction {
 		} else {
 			request.setAttribute("aTherapyID", aTherapyID);
 
+            if (ty.getTreatment() != null) {
 			if (ty.getTreatment().getSexDistribution() != null) {
 				therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
 			}
@@ -81,10 +85,13 @@ public class TherapyPopulateAction extends BaseAction {
 			}
 
 			therapyForm.setDosage(ty.getTreatment().getDosage());
-			therapyForm.setName(ty.getAgent().getName());
-			therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
-			therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
+            therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+            therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
 
+            }
+            
+			therapyForm.setName(ty.getAgent().getName());
+			
 			if (ty.getAgent().getCasNumber() != null) {
 				therapyForm.setCASNumber(ty.getAgent().getCasNumber());
 			}

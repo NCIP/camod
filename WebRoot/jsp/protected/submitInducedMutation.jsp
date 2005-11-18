@@ -82,7 +82,7 @@
 		<td class="formRequiredLabel">Inducing Agent Category:</td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="type" onchange="chkInducingAgent();" >
-				<html:options name="<%= Dropdowns.INDUCEDMUTATIONDROP %>" />										
+				<html:optionsCollection name="<%= Dropdowns.INDUCEDMUTATIONDROP %>" />										
 			</html:select>
 			<br>
 			-if category you are looking for is not listed, <br>select "Other" and enter the category in the text field below:

@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.5 2005-11-09 00:17:16 georgeda Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.6 2005-11-18 22:50:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/09 00:17:16  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.4  2005/11/07 19:15:17  pandyas
  * modified for clinical marker screen
  *
@@ -47,9 +50,9 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
 
     public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In HistopathologyManagerImpl.save");
-        
+
         Histopathology theHistopathology = get(id);
-        
+
         inAnimalModel.getHistopathologyCollection().remove(theHistopathology);
         super.save(inAnimalModel);
     }
@@ -98,33 +101,33 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         /*
          * Add a Organ to AnimalModel with correct IDs, conceptCode
          */
-        System.out.println("inHistopathology.getOrgan()" + inHistopathology.getOrgan());
+        log.info("inHistopathology.getOrgan()" + inHistopathology.getOrgan());
 
         // new submission - organ will be null
         if (inHistopathology.getOrgan() == null) {
 
-            System.out.println("Creating new Organ object");
+            log.info("Creating new Organ object");
             inHistopathology.setOrgan(new Organ());
         }
 
         String newConceptCode = inHistopathologyData.getOrganTissueCode();
-        System.out.println("newConceptCode: " + newConceptCode);
+        log.info("newConceptCode: " + newConceptCode);
 
         String oldConceptCode = inHistopathology.getOrgan().getConceptCode();
-        System.out.println("oldConceptCode: " + oldConceptCode);
+        log.info("oldConceptCode: " + oldConceptCode);
 
         if (!newConceptCode.equals(oldConceptCode)) {
-            System.out.println("Organ is new or was modified so retrieve attributes");
+            log.info("Organ is new or was modified so retrieve attributes");
             /*
              * Always get/store organ name through the concept code - never deal
              * with converting name back and forth
              */
             String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getOrganTissueCode());
 
-            System.out.println("preferedOrganName: " + preferedOrganName);
+            log.info("preferedOrganName: " + preferedOrganName);
             inHistopathology.getOrgan().setName(preferedOrganName);
 
-            System.out.println("populateMetastasis - getOrgan().setConceptCode - OrganTissueCode: "
+            log.info("populateMetastasis - getOrgan().setConceptCode - OrganTissueCode: "
                     + inHistopathologyData.getOrganTissueCode());
             inHistopathology.getOrgan().setConceptCode(inHistopathologyData.getOrganTissueCode());
         }
@@ -132,27 +135,37 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         /* Add histopathology to Organ if it's not already there */
         if (!inHistopathology.getOrgan().getHistopathologyCollection().contains(inHistopathology)) {
             inHistopathology.getOrgan().addHistopathology(inHistopathology);
-            System.out.println("Added histopathology to Organ");
+            log.info("Added histopathology to Organ");
         }
 
-        /*
-         * Add a Disease to AnimalModel with correct IDs, conceptCode
-         */
-        Disease inDisease = null;
+        Disease theDisease = null;
         if (inHistopathology.getDiseaseCollection().size() > 0) {
-            System.out.println("Creating new Disease object");
-            inDisease = (Disease) inHistopathology.getDiseaseCollection().get(0);
-            inDisease.setConceptCode(inHistopathologyData.getDiagnosisCode());
-            inDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
+
+            theDisease = (Disease) inHistopathology.getDiseaseCollection().get(0);
+
+            /*
+             * Add a Disease to AnimalModel with correct IDs, conceptCode
+             */
+            String oldDiseaseConceptCode = theDisease.getConceptCode();
+            String newDiseaseConceptCode = inHistopathologyData.getDiagnosisCode();
+
+            if (!newDiseaseConceptCode.equals(oldDiseaseConceptCode)) {
+
+                log.info("Creating new Disease object");
+                theDisease = (Disease) inHistopathology.getDiseaseCollection().get(0);
+                theDisease.setConceptCode(inHistopathologyData.getDiagnosisCode());
+
+                theDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
+            }
 
         } else {
-            inDisease = new Disease();
-            inDisease.setConceptCode(inHistopathologyData.getDiagnosisCode());
-            inDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
-            inHistopathology.addDisease(inDisease);
+            theDisease = new Disease();
+            theDisease.setConceptCode(inHistopathologyData.getDiagnosisCode());
+            theDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
+            inHistopathology.addDisease(theDisease);
         }
 
-        System.out.println("Saving: Histopathology object attributes ");
+        log.info("Saving: Histopathology object attributes ");
         inHistopathology.setComments(inHistopathologyData.getComments());
         inHistopathology.setGrossDescription(inHistopathologyData.getGrossDescription());
 
@@ -164,7 +177,7 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         inHistopathology.setSurvivalInfo(inHistopathologyData.getSurvivalInfo());
         inHistopathology.setMicroscopicDescription(inHistopathologyData.getMicroscopicDescription());
         inHistopathology.setComparativeData(inHistopathologyData.getComparativeData());
-        System.out.println("inHistopathologyData.getComparativeData():  " + inHistopathologyData.getComparativeData());
+        log.info("inHistopathologyData.getComparativeData():  " + inHistopathologyData.getComparativeData());
 
         if (inHistopathologyData.getWeightOfTumor() != null && inHistopathologyData.getWeightOfTumor().length() > 0) {
             inHistopathology.setWeightOfTumor(Float.valueOf(inHistopathologyData.getWeightOfTumor()));
@@ -180,7 +193,7 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         if (inHistopathology.getGeneticAlteration() == null && inHistopathologyData.getObservation() != null
                 && inHistopathologyData.getObservation().length() > 0) {
             inHistopathology.setGeneticAlteration(new GeneticAlteration());
-            System.out.println("Saving: inHistopathology.getGeneticAlteration() attributes ");
+            log.info("Saving: inHistopathology.getGeneticAlteration() attributes ");
 
             inHistopathology.getGeneticAlteration().setObservation(inHistopathologyData.getObservation());
             inHistopathology.getGeneticAlteration().setMethodOfObservation(

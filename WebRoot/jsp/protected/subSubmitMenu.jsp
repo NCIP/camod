@@ -316,19 +316,19 @@
 	<span class="submasterdiv" id="sub10">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="JacksonLabPopulateAction.do?method=dropdown&lab=Jackson Laboratory">Available from Jackson Lab.</html:link><br>
 			 <logic:iterate id="aAvailability" name="jacksonlab_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="JacksonLabPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="name" filter="true"/></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="JacksonLabPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="displayName" filter="true"/></html:link><br>
 			 </logic:iterate>		
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="MMHCCRepoPopulateAction.do?method=dropdown&lab=MMHCC Repository">Available from MMHCC Repo.</html:link><br>
 			 <logic:iterate id="aAvailability" name="mmhcc_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="MMHCCRepoPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="name" filter="true"/></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="MMHCCRepoPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="displayName" filter="true"/></html:link><br>
 			 </logic:iterate>
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="InvestigatorPopulateAction.do?method=dropdown&lab=Investigator">Available from Investigator</html:link><br>
 			 <logic:iterate id="aAvailability" name="investigator_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="InvestigatorPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="name" filter="true"/></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="InvestigatorPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="displayName" filter="true"/></html:link><br>
 			 </logic:iterate>			 		
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="IMSRPopulateAction.do?method=dropdown&lab=IMSR">Available from IMSR</html:link><br>
 			 <logic:iterate id="aAvailability" name="imsr_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="IMSRPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="name" filter="true"/></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="IMSRPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><bean:write name="aAvailability" property="displayName" filter="true"/></html:link><br>
 			 </logic:iterate>
 			 <br>
 	</span>

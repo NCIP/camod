@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.16 2005-11-14 14:22:37 georgeda Exp $
+ * $Id: XenograftPopulateAction.java,v 1.17 2005-11-18 22:50:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/11/14 14:22:37  georgeda
+ * Cleanup
+ *
  * Revision 1.15  2005/11/11 16:28:26  pandyas
  * expanded species list
  *
@@ -80,6 +83,7 @@ public class XenograftPopulateAction extends BaseAction {
             xenograftForm.setCellAmount(xeno.getCellAmount());
 
             Taxon tax = xeno.getHostSpecies();
+            if (tax != null) {
             xenograftForm.setHostScientificName(tax.getScientificName());
 
             if (tax.getEthnicityStrainUnctrlVocab() != null) {
@@ -88,7 +92,7 @@ public class XenograftPopulateAction extends BaseAction {
             } else {
                 xenograftForm.setHostEthinicityStrain(tax.getEthnicityStrain());
             }
-
+            }
             String outputFormatString = "MM/dd/yyyy";
 
             if (xeno.getHarvestDate() != null) {

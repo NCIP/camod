@@ -49,27 +49,27 @@
 	}
 	
 	function chkName() {
-	     chkOtherUnsized(document.forms[0].scientificName,document.forms[0].otherScientificName);
+	     chkOther(document.forms[0].scientificName,document.forms[0].otherScientificName);
 	}
 	
 	function chkOther_t1() {
-	     chkOtherUnsized(document.forms[0].transcriptional1_species, document.forms[0].transcriptional1_otherSpecies);
+	     chkOther(document.forms[0].transcriptional1_species, document.forms[0].transcriptional1_otherSpecies);
 	}
 		
 	function chkOther_t2() {
-	     chkOtherUnsized(document.forms[0].transcriptional2_species, document.forms[0].transcriptional2_otherSpecies);
+	     chkOther(document.forms[0].transcriptional2_species, document.forms[0].transcriptional2_otherSpecies);
 	}
 
 	function chkOther_t3() {
-	     chkOtherUnsized(document.forms[0].transcriptional3_species, document.forms[0].transcriptional3_otherSpecies);
+	     chkOther(document.forms[0].transcriptional3_species, document.forms[0].transcriptional3_otherSpecies);
 	}
 	
 	function chkOther_PS() {
-	    chkOtherUnsized(document.forms[0].polyASignal_species, document.forms[0].polyASignal_otherSpecies);
+	    chkOther(document.forms[0].polyASignal_species, document.forms[0].polyASignal_otherSpecies);
 	}
 	
 	function chkOther_SS() {
-		chkOtherUnsized(document.forms[0].spliceSites_species, document.forms[0].spliceSites_otherSpecies);
+		chkOther(document.forms[0].spliceSites_species, document.forms[0].spliceSites_otherSpecies);
 	}
 							
 	function chkConditional() {

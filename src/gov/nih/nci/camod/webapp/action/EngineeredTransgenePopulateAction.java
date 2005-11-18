@@ -25,45 +25,41 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
 
         String aEngineeredTransgeneID = request.getParameter("aEngineeredTransgeneID");
         engineeredTransgeneForm.setTransgeneId(aEngineeredTransgeneID);
-        
+
         Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().get(aEngineeredTransgeneID);
 
         if (theEngineeredTransgene == null) {
-        	request.setAttribute(Constants.Parameters.DELETED, "true");
+            request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
 
             // Tansgene Integration
-            if (theEngineeredTransgene.getLocationOfIntegration().equals("Random")) {
-                engineeredTransgeneForm.setLocationOfIntegration(theEngineeredTransgene.getLocationOfIntegration());
+            if (theEngineeredTransgene.getLocationOfIntegration() == null
+                    || theEngineeredTransgene.getLocationOfIntegration().equals("Random")) {
+                engineeredTransgeneForm.setLocationOfIntegration("Random");
             } else {
                 engineeredTransgeneForm.setLocationOfIntegration("Targeted");
                 engineeredTransgeneForm
                         .setOtherLocationOfIntegration(theEngineeredTransgene.getLocationOfIntegration());
             }
+            engineeredTransgeneForm.setName(theEngineeredTransgene.getName());
 
             // Transgene (coding sequence only)
             List taxList = theEngineeredTransgene.getTaxonCollection();
-            Taxon tax = (Taxon) taxList.get(0);
-
-            // NOTE: This is needed because we are storing 'Other' Species
-            // selections directly into the database
-            // and are retrieving the dropdowns for this page from a text file (
-            // HostSpecies.txt)
-            // We need to get the list from
+            DropdownOption theOption = null;
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HOSTSPECIESDROP, "");
             List dropdownTaxList = (List) request.getSession().getAttribute(Constants.Dropdowns.HOSTSPECIESDROP);
 
-            engineeredTransgeneForm.setName(theEngineeredTransgene.getName());
+            if (taxList.size() > 0) {
 
-            DropdownOption theOption = new DropdownOption("",tax.getScientificName());
-            
-            if (dropdownTaxList.contains(theOption)) {
-                System.out.println("\t(Transgene) Matched the list");
-                engineeredTransgeneForm.setScientificName(tax.getScientificName());
-            } else {
-                System.out.println("\t(Transgene) Didn't Match the list");
-                engineeredTransgeneForm.setScientificName(Constants.Dropdowns.OTHER_OPTION);
-                engineeredTransgeneForm.setOtherScientificName(tax.getScientificName());
+                Taxon tax = (Taxon) taxList.get(0);
+                theOption = new DropdownOption("", tax.getScientificName());
+
+                if (dropdownTaxList.contains(theOption)) {
+                    engineeredTransgeneForm.setScientificName(tax.getScientificName());
+                } else if (tax.getScientificName() != null) {
+                    engineeredTransgeneForm.setScientificName(Constants.Dropdowns.OTHER_OPTION);
+                    engineeredTransgeneForm.setOtherScientificName(tax.getScientificName());
+                }
             }
 
             // Transcriptional (Promoter) 1
@@ -78,12 +74,15 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setTranscriptional1_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    theOption = new DropdownOption("",tax_reg1.getScientificName());
-                    if (dropdownTaxList.contains(theOption)) {
-                        engineeredTransgeneForm.setTranscriptional1_species(tax_reg1.getScientificName());
-                    } else {
-                        engineeredTransgeneForm.setTranscriptional1_species("Other");
-                        engineeredTransgeneForm.setTranscriptional1_otherSpecies(tax_reg1.getScientificName());
+                    if (tax_reg1 != null) {
+                        theOption = new DropdownOption("", tax_reg1.getScientificName());
+                        if (dropdownTaxList.contains(theOption)) {
+                            engineeredTransgeneForm.setTranscriptional1_species(tax_reg1.getScientificName());
+                        } else if (tax_reg1.getScientificName() != null) {
+
+                            engineeredTransgeneForm.setTranscriptional1_species("Other");
+                            engineeredTransgeneForm.setTranscriptional1_otherSpecies(tax_reg1.getScientificName());
+                        }
                     }
                 }
 
@@ -91,25 +90,29 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setTranscriptional2_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    theOption = new DropdownOption("",tax_reg1.getScientificName());
-                    if (dropdownTaxList.contains(theOption)) {
-                        engineeredTransgeneForm.setTranscriptional2_species(tax_reg1.getScientificName());
-                    } else {
-                        engineeredTransgeneForm.setTranscriptional2_species("Other");
-                        engineeredTransgeneForm.setTranscriptional2_otherSpecies(tax_reg1.getScientificName());
+                    if (tax_reg1 != null) {
+                        theOption = new DropdownOption("", tax_reg1.getScientificName());
+                        if (dropdownTaxList.contains(theOption)) {
+                            engineeredTransgeneForm.setTranscriptional2_species(tax_reg1.getScientificName());
+                        } else if (tax_reg1.getScientificName() != null) {
+                            engineeredTransgeneForm.setTranscriptional2_species("Other");
+                            engineeredTransgeneForm.setTranscriptional2_otherSpecies(tax_reg1.getScientificName());
+                        }
                     }
                 }
 
                 if (regElement.getRegulatoryElementType().getName().equals("Transcriptional 3")) {
                     engineeredTransgeneForm.setTranscriptional3_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
-                    
-                    theOption = new DropdownOption("",tax_reg1.getScientificName());
-                    if (dropdownTaxList.contains(theOption)) {
-                        engineeredTransgeneForm.setTranscriptional3_species(tax_reg1.getScientificName());
-                    } else {
-                        engineeredTransgeneForm.setTranscriptional3_species("Other");
-                        engineeredTransgeneForm.setTranscriptional3_otherSpecies(tax_reg1.getScientificName());
+
+                    if (tax_reg1 != null) {
+                        theOption = new DropdownOption("", tax_reg1.getScientificName());
+                        if (dropdownTaxList.contains(theOption)) {
+                            engineeredTransgeneForm.setTranscriptional3_species(tax_reg1.getScientificName());
+                        } else if (tax_reg1.getScientificName() != null) {
+                            engineeredTransgeneForm.setTranscriptional3_species("Other");
+                            engineeredTransgeneForm.setTranscriptional3_otherSpecies(tax_reg1.getScientificName());
+                        }
                     }
                 }
 
@@ -117,12 +120,14 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setPolyASignal_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    theOption = new DropdownOption("",tax_reg1.getScientificName());
-                    if (dropdownTaxList.contains(theOption)) {
-                        engineeredTransgeneForm.setPolyASignal_species(tax_reg1.getScientificName());
-                    } else {
-                        engineeredTransgeneForm.setPolyASignal_species("Other");
-                        engineeredTransgeneForm.setPolyASignal_otherSpecies(tax_reg1.getScientificName());
+                    if (tax_reg1 != null) {
+                        theOption = new DropdownOption("", tax_reg1.getScientificName());
+                        if (dropdownTaxList.contains(theOption)) {
+                            engineeredTransgeneForm.setPolyASignal_species(tax_reg1.getScientificName());
+                        } else if (tax_reg1.getScientificName() != null) {
+                            engineeredTransgeneForm.setPolyASignal_species("Other");
+                            engineeredTransgeneForm.setPolyASignal_otherSpecies(tax_reg1.getScientificName());
+                        }
                     }
                 }
 
@@ -130,12 +135,14 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                     engineeredTransgeneForm.setSpliceSites_name(regElement.getName());
                     tax_reg1 = regElement.getTaxon();
 
-                    theOption = new DropdownOption("", tax_reg1.getScientificName());
-                    if (dropdownTaxList.contains(theOption)) {
-                        engineeredTransgeneForm.setSpliceSites_species(tax_reg1.getScientificName());
-                    } else {
-                        engineeredTransgeneForm.setSpliceSites_species("Other");
-                        engineeredTransgeneForm.setSpliceSites_otherSpecies(tax_reg1.getScientificName());
+                    if (tax_reg1 != null) {
+                        theOption = new DropdownOption("", tax_reg1.getScientificName());
+                        if (dropdownTaxList.contains(theOption)) {
+                            engineeredTransgeneForm.setSpliceSites_species(tax_reg1.getScientificName());
+                        } else if (tax_reg1.getScientificName() != null) {
+                            engineeredTransgeneForm.setSpliceSites_species("Other");
+                            engineeredTransgeneForm.setSpliceSites_otherSpecies(tax_reg1.getScientificName());
+                        }
                     }
                 }
             }
