@@ -32,7 +32,7 @@
 <TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins">
 	<tr><td>
 	
-	<TABLE summary="" cellpadding="3" cellspacing="1" border="0" align="center">
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center">
 		<tr>
 			<html:errors/>
 			<td class="formMessage" colspan="3">* indicates a required field</td>
