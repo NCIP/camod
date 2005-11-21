@@ -42,7 +42,7 @@
     		<a href="mailto:mmhcc-dev@list.nih.gov">Email</a> the caMOD development team requesting that the microarray data be associated with your cancer model. Include the microarray experiment name(s) and the experiment ID(s) in your email.
     	</li>
     	<li style="padding-bottom:7px">
-    		The microarray data will be linked to your cancer model within 24 hours (excluding holidays and weekends). You will be notified by email when this task is completed.
+    		The microarray data will be linked to your cancer model within 24 hours (excluding Government holidays and weekends). You will be notified by email when this task is completed.
     	</li>
     </ol>
     </b>
