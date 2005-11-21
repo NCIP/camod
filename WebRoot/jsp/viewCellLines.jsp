@@ -37,31 +37,31 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="resultsBoxWhite" width="25%">Name of Cell Line</td>
+				<td class="resultsBoxWhite" width="25%"><b>Name of Cell Line</b></td>
 				<td class="resultsBoxWhiteEnd">
 					<c:out value="${p.name}"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="resultsBoxGrey" width="25%">Organ / Tissue</td>
+				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd">
 					<c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td class="resultsBoxWhite" width="25%">Experiment</td>
+				<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
 				<td class="resultsBoxWhiteEnd">
 					<c:out value="${p.experiment}"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="resultsBoxGrey" width="25%">Results</td>
+				<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
 				<td class="resultsBoxGreyEnd">
 					<c:out value="${p.results}"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="resultsBoxWhite" width="25%">Comments</td>
+				<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
 				<td class="resultsBoxWhiteEnd">
 					<c:out value="${p.comments}"/>
 				</td>
