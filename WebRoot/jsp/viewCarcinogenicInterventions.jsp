@@ -261,9 +261,10 @@
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/></td>
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>
+					<c:out value="${cd.treatment.regimen}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
@@ -457,13 +458,15 @@
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
-				<td class="formTitleBlue" height="20" colspan="4">Gene Delivery</td>				
+				<td class="formTitleBlue" height="20" colspan="6">Gene Delivery</td>				
 			</tr>
 			<tr>
-				<td class="greySubTitleLeft" width="30%">Viral Vector</td>
-				<td class="greySubTitleLeft" width="20%">Gene</td>
-				<td class="greySubTitleLeft" width="30%">Organ</td>
-				<td class="greySubTitle" width="20%">Treatment Regimen</td>		
+				<td class="greySubTitleLeft" width="17%">Viral Vector</td>
+				<td class="greySubTitleLeft" width="17%">Gene</td>
+				<td class="greySubTitleLeft" width="17%">Organ</td>
+				<td class="greySubTitleLeft" width="17%">Treatment Regimen</td>	
+				<td class="greySubTitleLeft" width="17%">Age at Treatment</td>
+				<td class="greySubTitle" width="17%">Gender</td>
 			</tr>
 			<c:forEach var="cd" items="${cdList}" varStatus="stat">
 				<c:choose>
@@ -491,8 +494,14 @@
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:out value="${cd.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
-				<td class="<c:out value="${tdClass}"/>End" width="20%">
+				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+				</td>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+				</td>
+				<td class="<c:out value="${tdClass}"/>End" width="17%">
+					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
 				</td>
 			</tr>
 			</c:forEach>
