@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.29 2005-11-21 18:59:26 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.30 2005-11-21 19:42:52 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2005/11/21 18:59:26  georgeda
+ * Defect #106, check for Random instead of null location of integration
+ *
  * Revision 1.28  2005/11/21 18:08:41  schroedn
  * Defects #137, 136, 135
  *
@@ -83,7 +86,7 @@
 							<bean:write name="eg" property="name"/>
 						</a>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 
@@ -97,7 +100,7 @@
 							<bean:write name="eg" property="cloneDesignator"/>
 						</a>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 
@@ -111,7 +114,7 @@
 							<bean:write name="eg" property="name"/>
 						</a>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 		
@@ -137,7 +140,7 @@
 						</a>
 					<%}%>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 		<tr>
@@ -150,7 +153,7 @@
 								<bean:write name="sm" property="name"/>
 						</a>
 					</logic:iterate>
-				</ul>
+				</ul>&nbsp;
 			</td>			
 		</tr>
 	</TABLE>
@@ -293,21 +296,24 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			<c:if test="${not empty tg.expressionFeatureCollection}">
-				<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
-					<tr>
-						<td class="formTitle" width="65%"><b>Organ</b></td>
-						<td class="formTitle" width="35%"><b>Expression Level</b></td>
-					</tr>
-					<c:forEach var="el" items="${tg.expressionFeatureCollection}">
+				<c:if test="${not empty tg.expressionFeatureCollection}">
+					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
-							<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
-							<td class="WhiteBoxRightEnd">
-							<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+							<td class="formTitle" width="65%"><b>Organ</b></td>
+							<td class="formTitle" width="35%"><b>Expression Level</b></td>
 						</tr>
-					</c:forEach>
-				</table>
-			</c:if>&nbsp;
+						<c:forEach var="el" items="${tg.expressionFeatureCollection}">
+							<tr>
+								<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+								<td class="WhiteBoxRightEnd">
+								<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:if test="${empty tg.expressionFeatureCollection}">
+				    &nbsp;
+				</c:if>
 			</td>
 		</tr>	
 		
@@ -407,21 +413,24 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			<c:if test="${not empty gs.expressionFeatureCollection}">
-			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
-				<tr>
-					<td class="formTitle" width="65%"><b>Organ</b></td>
-					<td class="formTitle" width="35%"><b>Expression Level</b></td>
-				</tr>
-				<c:forEach var="el" items="${gs.expressionFeatureCollection}">
-					<tr>
-						<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
-						<td class="WhiteBoxRightEnd">
-						<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
-					</tr>
-				</c:forEach>
-			</table>
-			</c:if>&nbsp;
+				<c:if test="${not empty gs.expressionFeatureCollection}">
+					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+						<tr>
+							<td class="formTitle" width="65%"><b>Organ</b></td>
+							<td class="formTitle" width="35%"><b>Expression Level</b></td>
+						</tr>
+						<c:forEach var="el" items="${gs.expressionFeatureCollection}">
+							<tr>
+								<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+								<td class="WhiteBoxRightEnd">
+								<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:if test="${empty gs.expressionFeatureCollection}">
+				    &nbsp;
+				</c:if>
 			</td>
 		</tr>
 	
@@ -547,21 +556,24 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			<c:if test="${not empty tm.expressionFeatureCollection}">
-			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
-				<tr>
-					<td class="formTitle" width="65%"><b>Organ</b></td>
-					<td class="formTitle" width="35%"><b>Expression Level</b></td>
-				</tr>
-				<c:forEach var="el" items="${tm.expressionFeatureCollection}">
-					<tr>
-						<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
-						<td class="WhiteBoxRightEnd">
-						<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
-					</tr>
-				</c:forEach>&nbsp;
-			</table>
-			</c:if>&nbsp;
+				<c:if test="${not empty tm.expressionFeatureCollection}">
+					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
+						<tr>
+							<td class="formTitle" width="65%"><b>Organ</b></td>
+							<td class="formTitle" width="35%"><b>Expression Level</b></td>
+						</tr>
+						<c:forEach var="el" items="${tm.expressionFeatureCollection}">
+							<tr>
+								<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+								<td class="WhiteBoxRightEnd">
+								<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:if test="${empty tm.expressionFeatureCollection}">
+				    &nbsp;
+				</c:if>
 			</td>
 		</tr>
 
@@ -720,14 +732,9 @@
         <tr>
             <td class="GreyBox"><b>CAS Number</b></td>
             <td class="GreyBoxRightEnd">            	     
-            	<c:choose>
-					<c:when test="${empty im.environmentalFactor.type}">
-						&nbsp;
-					</c:when>
-					<c:otherwise>
+				<c:if test="${not empty im.environmentalFactor.type}">
 			            <a href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&searchlist=<c:out value="${im.environmentalFactor.casNumber}"/>&Submit=Submit" target="blank"><c:out value="${im.environmentalFactor.casNumber}"/></a>
-					</c:otherwise>
-				</c:choose>
+				</c:if>&nbsp;
             </td>
         </tr>
 				

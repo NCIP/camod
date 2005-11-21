@@ -90,17 +90,20 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         inGenomicSegment.setSegmentSize(inGenomicSegmentData.getSegmentSize());
         inGenomicSegment.setCloneDesignator(inGenomicSegmentData.getCloneDesignator());
 
-        // SegmentType
-        SegmentType inSegmentType = null;
-        if (inGenomicSegment.getSegmentTypeCollection().size() > 0)
-            inSegmentType = (SegmentType) inGenomicSegment.getSegmentTypeCollection().get(0);
-        else
-            inSegmentType = new SegmentType();
+        // SegmentType.  Reuse if it's aready there, update otherwise.
+        SegmentType theSegmentType = null;
+        if (inGenomicSegment.getSegmentTypeCollection().size() > 0) {
+            theSegmentType = (SegmentType) inGenomicSegment.getSegmentTypeCollection().get(0);
+        }
+        else {
+            theSegmentType = new SegmentType();
+            inGenomicSegment.addSegmentType(theSegmentType);
+        }
 
-        inSegmentType.setName(inGenomicSegmentData.getSegmentName());
+        theSegmentType.setName(inGenomicSegmentData.getSegmentName());
 
         if (inGenomicSegmentData.getOtherSegmentName() != null) {
-            inSegmentType.setNameUnctrlVocab(inGenomicSegmentData.getOtherSegmentName());
+            theSegmentType.setNameUnctrlVocab(inGenomicSegmentData.getOtherSegmentName());
 
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
@@ -133,8 +136,6 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
                 e.printStackTrace();
             }
         }
-
-        inGenomicSegment.addSegmentType(inSegmentType);
 
         if (inGenomicSegment.getImage() != null) {
             Image image = inGenomicSegment.getImage();
