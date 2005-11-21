@@ -1,14 +1,18 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.8 2005-11-16 19:27:47 pandyas Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.9 2005-11-21 16:54:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/16 19:27:47  pandyas
+ * Modified Targeted Modification Types dropdown to allow multiple selections, allow the user to select "other" by itself, and allow users to select "other" along with one or more selection
+ *
  * 
  */
 
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.domain.Conditionality;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.ModificationType;
@@ -45,6 +49,10 @@ public class TargetedModificationPopulateAction extends BaseAction {
             targetedModificationForm.setModificationId(aTargetedModificationID);
 
             targetedModificationForm.setName(theTargetedModification.getName());
+            MutationIdentifier theMutationIdentifier = theTargetedModification.getMutationIdentifier();
+            if (theMutationIdentifier != null) {
+                targetedModificationForm.setNumberMGI(theMutationIdentifier.getNumberMGI().toString());
+            }
             
 			// Get the collection of Targeted Modifications
 			List theTargetedModificationList = theTargetedModification.getModificationTypeCollection();

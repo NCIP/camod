@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.25 2005-11-21 14:43:38 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.26 2005-11-21 16:54:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/11/21 14:43:38  georgeda
+ * Defect #64, replace boolean number with text
+ *
  * Revision 1.24  2005/11/17 22:39:42  pandyas
  * Follow up to Defect #103: formatting &nbsp
  *
@@ -63,11 +66,11 @@
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
 					<li>
-					    <a href="<c:out value="#eng_trans_${idx}"/>">&nbsp;
+					    <a href="<c:out value="#eng_trans_${idx}"/>">
 							<bean:write name="eg" property="name"/>
 						</a>
 					</logic:iterate>
-				</ul>&nbsp;
+				</ul>
 			</td>			
 		</tr>
 
@@ -77,11 +80,11 @@
 				<ul>
 					<logic:iterate id="eg" name="gsc" indexId="idx">
 					<li>
-						<a href="<c:out value="#gen_seg_${idx}"/>">&nbsp;
+						<a href="<c:out value="#gen_seg_${idx}"/>">
 							<bean:write name="eg" property="cloneDesignator"/>
 						</a>
 					</logic:iterate>
-				</ul>&nbsp;
+				</ul>
 			</td>			
 		</tr>
 
@@ -108,20 +111,20 @@
 					<% if ( eg instanceof gov.nih.nci.camod.domain.InducedMutation ) { %>
 					
 					<li>
-						<a href="<c:out value="#ind_mut_${count}"/>">&nbsp;
+						<a href="<c:out value="#ind_mut_${count}"/>">
 						    <c:set var="count" value="${count + 1}"/>
 							<c:choose>
 								<c:when test="${empty eg.environmentalFactor.name}">
 									<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
 								</c:when>
 								<c:otherwise>
-						            <c:out value="${eg.environmentalFactor.name}"/>&nbsp;
+						            <c:out value="${eg.environmentalFactor.name}"/>
 								</c:otherwise>
 							</c:choose>
 						</a>
 					<%}%>
 					</logic:iterate>
-				</ul>&nbsp;
+				</ul>
 			</td>			
 		</tr>
 		<tr>
@@ -130,11 +133,11 @@
 				<ul>
 				    <logic:iterate id="sm" name="smc" indexId="idx">
 						<li>
-						<a href="<c:out value="#spon_mut_${idx}"/>">&nbsp;
+						<a href="<c:out value="#spon_mut_${idx}"/>">
 								<bean:write name="sm" property="name"/>
 						</a>
 					</logic:iterate>
-				</ul>&nbsp;
+				</ul>
 			</td>			
 		</tr>
 	</TABLE>
@@ -230,7 +233,7 @@
 			<c:forEach var="gf" items="${tg.geneFunctionCollection}">
 				<li><c:out value="${gf.function}"/></li>
 			</c:forEach>
-			</ul>
+			</ul>&nbsp;
 			</td>
 		</tr>
 
@@ -278,19 +281,19 @@
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 			<c:if test="${not empty tg.expressionFeatureCollection}">
-			<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
-				<tr>
-					<td class="formTitle" width="65%"><b>Organ</b></td>
-					<td class="formTitle" width="35%"><b>Expression Level</b></td>
-				</tr>
-				<c:forEach var="el" items="${tg.expressionFeatureCollection}">
+				<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 					<tr>
-						<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
-						<td class="WhiteBoxRightEnd">
-						<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+						<td class="formTitle" width="65%"><b>Organ</b></td>
+						<td class="formTitle" width="35%"><b>Expression Level</b></td>
 					</tr>
-				</c:forEach>
-			</table>
+					<c:forEach var="el" items="${tg.expressionFeatureCollection}">
+						<tr>
+							<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+							<td class="WhiteBoxRightEnd">
+							<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</c:if>&nbsp;
 			</td>
 		</tr>	
@@ -298,7 +301,11 @@
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<c:out value="${tg.mutationIdentifier.numberMGI}"/>&nbsp;
+			<c:if test="${not empty tg.mutationIdentifier.numberMGI}">
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tg.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
+				    <c:out value="${tg.mutationIdentifier.numberMGI}"/>
+				</a>
+			</c:if>&nbsp;
 			</td>			
 		</tr>
 		<tr>
@@ -401,10 +408,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-			</c:if>
-			<c:if test="${empty gs.expressionFeatureCollection}">
-			    &nbsp;
-			</c:if>
+			</c:if>&nbsp;
 			</td>
 		</tr>
 	
@@ -432,7 +436,13 @@
 
         <tr>
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.mutationIdentifier.numberMGI}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="65%">
+			    <c:if test="${not empty gs.mutationIdentifier.numberMGI}">
+					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${gs.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${gs.mutationIdentifier.numberMGI}"/>
+					</a>
+			    </c:if>&nbsp;
+			</td>
 		</tr>
 
 		<tr>
@@ -517,7 +527,7 @@
 			<c:forEach var="gf" items="${tm.geneFunctionCollection}">
 				<li><c:out value="${gf.function}"/></li>&nbsp;
 			</c:forEach>
-			</ul>
+			</ul>&nbsp;
 			</td>
 		</tr>
 
@@ -538,7 +548,7 @@
 					</tr>
 				</c:forEach>&nbsp;
 			</table>
-			</c:if>
+			</c:if>&nbsp;
 			</td>
 		</tr>
 
@@ -562,7 +572,16 @@
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
 		</tr>
 		</c:if>
-
+        <tr>
+			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<c:if test="${not empty tm.mutationIdentifier.numberMGI}">
+					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tm.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${tm.mutationIdentifier.numberMGI}"/>
+					</a>
+			    </c:if>&nbsp;
+			</td>
+		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
@@ -705,12 +724,18 @@
 							</tr>
 						</c:forEach>
 					</table>
-				</c:if>
+				</c:if>&nbsp;
 			</td>
 		</tr>
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${im.mutationIdentifier.numberMGI}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<c:if test="${not empty im.mutationIdentifier.numberMGI}">
+					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${im.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${im.mutationIdentifier.numberMGI}"/>
+					</a>
+			    </c:if>&nbsp;
+			</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
@@ -752,12 +777,18 @@
 							</tr>
 						</c:forEach>
 					</table>
-				</c:if>
+				</c:if>&nbsp;
 			</td>
 		</tr>
         <tr>
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${sm.mutationIdentifier.numberMGI}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="65%">
+				<c:if test="${not empty sm.mutationIdentifier.numberMGI}">
+					<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${sm.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${sm.mutationIdentifier.numberMGI}"/>
+					</a>
+			    </c:if>&nbsp;
+			</td>
 		</tr>
 		<tr>
 			<td class="GreyBox" width="35%"><b>Comments</b></td>
