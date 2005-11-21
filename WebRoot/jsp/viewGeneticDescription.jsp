@@ -2,9 +2,16 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.28 2005-11-21 18:08:41 schroedn Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.29 2005-11-21 18:59:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2005/11/21 18:08:41  schroedn
+ * Defects #137, 136, 135
+ *
+ * Resorted Induced Mutation
+ * Added CAS number
+ * Added Gene ID
+ *
  * Revision 1.27  2005/11/21 17:49:54  georgeda
  * Defect #134, added gene name to search results
  *
@@ -169,7 +176,7 @@
 		</tr>
 
 		<c:choose>
-			<c:when test="${not empty tg.locationOfIntegration}">
+			<c:when test="${tg.locationOfIntegration != 'Random'}">
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
@@ -342,7 +349,7 @@
 			</td>
 		</tr>
 		<c:choose>
-			<c:when test="${not empty gs.locationOfIntegration}">
+			<c:when test="${gs.locationOfIntegration != 'Random'}">
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
