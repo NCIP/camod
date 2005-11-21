@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.31 2005-11-17 22:31:02 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.32 2005-11-21 18:38:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2005/11/17 22:31:02  georgeda
+ * Defect #131, upper case the modelDescriptor when doing a keyword search
+ *
  * Revision 1.30  2005/11/17 20:22:09  georgeda
  * Defect #158.  Fixed issue w/ author name being returned for first matching pmid instead of pub. associated with animal model.
  *
@@ -1124,31 +1127,31 @@ public class QueryManagerImpl extends BaseManager {
 
 		String OR = " ";
 
-		if (isEngineeredTransgene == true && inGeneName.length() > 0) {
+		if (isEngineeredTransgene == true && inGeneName.trim().length() > 0) {
 			theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
 					+ " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'T')";
 			OR = " OR ";
-			theList.add("%" + inGeneName.toUpperCase() + "%");
+			theList.add("%" + inGeneName.trim().toUpperCase() + "%");
 		}
-		if (isTargetedModification == true && inGeneName.length() > 0) {
+		if (isTargetedModification == true && inGeneName.trim().length() > 0) {
 			theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
 					+ " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'TM')";
 			OR = " OR ";
-			theList.add("%" + inGeneName.toUpperCase() + "%");
+			theList.add("%" + inGeneName.trim().toUpperCase() + "%");
 		}
-		if (inInducedMutationAgent != null && inInducedMutationAgent.length() > 0) {
+		if (inInducedMutationAgent != null && inInducedMutationAgent.trim().length() > 0) {
 			theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
 					+ " FROM engineered_gene WHERE engineered_gene_id IN ("
 					+ " SELECT distinct im.engineered_gene_id FROM env_factor ef, env_fac_ind_mutation im "
 					+ " WHERE ef.name = ? "
 					+ " AND ef.env_factor_id = im.env_factor_id) AND engineered_gene_type = 'IM')";
 			OR = " OR ";
-			theList.add(inInducedMutationAgent);
+			theList.add(inInducedMutationAgent.trim());
 		}
-		if (inGenomicSegDesignator != null && inGenomicSegDesignator.length() > 0) {
+		if (inGenomicSegDesignator != null && inGenomicSegDesignator.trim().length() > 0) {
 			theSQLString += OR + " ani_ge.engineered_gene_id IN (SELECT distinct engineered_gene_id "
 					+ " FROM engineered_gene WHERE upper(clone_designator) LIKE ? AND engineered_gene_type = 'GS')";
-			theList.add(inGenomicSegDesignator.toUpperCase());
+			theList.add(inGenomicSegDesignator.trim().toUpperCase());
 		}
 
 		// Convert the params
@@ -1289,7 +1292,7 @@ public class QueryManagerImpl extends BaseManager {
 		String theFromClause = "select count (am) from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate ";
 		List theCountResults = null;
 
-		if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0) {
+		if (inSearchData.getKeyword() != null && inSearchData.getKeyword().trim().length() > 0) {
 			log.debug("Doing a keyword search: " + inSearchData.getKeyword());
 			String theWhereClause = buildKeywordSearchWhereClause(inSearchData.getKeyword());
 
@@ -1298,7 +1301,7 @@ public class QueryManagerImpl extends BaseManager {
 
 				log.info("HQL Query: " + theHQLQuery);
 
-				String theKeyword = "%" + inSearchData.getKeyword() + "%";
+				String theKeyword = "%" + inSearchData.getKeyword().toUpperCase().trim() + "%";
 				Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
 				theQuery.setParameter("keyword", theKeyword);
 
@@ -1338,7 +1341,7 @@ public class QueryManagerImpl extends BaseManager {
 
 	// Build the where clause for the search and the count
 	private String buildKeywordSearchWhereClause(String inKeyword) throws Exception {
-		String theKeyword = "%" + inKeyword.toUpperCase() + "%";
+		String theKeyword = "%" + inKeyword.toUpperCase().trim() + "%";
 
 		String theWhereClause = "";
 
@@ -1402,10 +1405,10 @@ public class QueryManagerImpl extends BaseManager {
 		}
 
 		// Model descriptor criteria
-		if (inSearchData.getModelDescriptor() != null && inSearchData.getModelDescriptor().length() > 0) {
+		if (inSearchData.getModelDescriptor() != null && inSearchData.getModelDescriptor().trim().length() > 0) {
 
 			theWhereClause += " AND upper(am.modelDescriptor) like '%"
-					+ inSearchData.getModelDescriptor().toUpperCase() + "%'";
+					+ inSearchData.getModelDescriptor().toUpperCase().trim() + "%'";
 		}
 
 		// Species criteria
@@ -1438,9 +1441,9 @@ public class QueryManagerImpl extends BaseManager {
             boolean searchForSpecificCI = false;
             
 			// Search for chemical/drug
-			if (inSearchData.getChemicalDrug() != null && inSearchData.getChemicalDrug().length() > 0) {
+			if (inSearchData.getChemicalDrug() != null && inSearchData.getChemicalDrug().trim().length() > 0) {
 				theWhereClause += " AND abs_cancer_model_id IN ("
-						+ getModelIdsForEnvironmentalFactor("Chemical / Drug", inSearchData.getChemicalDrug()) + ")";
+						+ getModelIdsForEnvironmentalFactor("Chemical / Drug", inSearchData.getChemicalDrug().trim()) + ")";
                 searchForSpecificCI = true;
 			}
 
@@ -1487,9 +1490,9 @@ public class QueryManagerImpl extends BaseManager {
 		}
 
 		// Only call if some of the data is set
-		if ((inSearchData.getGeneName() != null && inSearchData.getGeneName().length() > 0)
-				|| (inSearchData.getGenomicSegDesignator() != null && inSearchData.getGenomicSegDesignator().length() > 0)
-				|| (inSearchData.getInducedMutationAgent() != null && inSearchData.getInducedMutationAgent().length() > 0)) {
+		if ((inSearchData.getGeneName() != null && inSearchData.getGeneName().trim().length() > 0)
+				|| (inSearchData.getGenomicSegDesignator() != null && inSearchData.getGenomicSegDesignator().trim().length() > 0)
+				|| (inSearchData.getInducedMutationAgent() != null && inSearchData.getInducedMutationAgent().trim().length() > 0)) {
 
 			// Search for engineered genes
 			theWhereClause += " AND abs_cancer_model_id IN ("
@@ -1499,14 +1502,14 @@ public class QueryManagerImpl extends BaseManager {
 		}
 
 		// Search for phenotype
-		if (inSearchData.getPhenotype() != null && inSearchData.getPhenotype().length() > 0) {
+		if (inSearchData.getPhenotype() != null && inSearchData.getPhenotype().trim().length() > 0) {
 			theWhereClause += " AND am.phenotype IN (from Phenotype as p where upper(p.description) like '%"
-					+ inSearchData.getPhenotype().toUpperCase() + "%')";
+					+ inSearchData.getPhenotype().trim().toUpperCase() + "%')";
 		}
 
 		// Search for cellline
-		if (inSearchData.getCellLine() != null && inSearchData.getCellLine().length() > 0) {
-			theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForCellLine(inSearchData.getCellLine())
+		if (inSearchData.getCellLine() != null && inSearchData.getCellLine().trim().length() > 0) {
+			theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForCellLine(inSearchData.getCellLine().trim())
 					+ ")";
 		}
 
@@ -1514,7 +1517,7 @@ public class QueryManagerImpl extends BaseManager {
 		if (inSearchData.isSearchTherapeuticApproaches()) {
 
 			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForTherapeuticApproach(inSearchData.getTherapeuticApproach()) + ")";
+					+ getModelIdsForTherapeuticApproach(inSearchData.getTherapeuticApproach().trim()) + ")";
 		}
 
 		// Search for therapeutic approaches
