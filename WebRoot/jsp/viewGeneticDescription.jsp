@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.27 2005-11-21 17:49:54 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.28 2005-11-21 18:08:41 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2005/11/21 17:49:54  georgeda
+ * Defect #134, added gene name to search results
+ *
  * Revision 1.26  2005/11/21 16:54:36  georgeda
  * Defect #105, added MGI number for targeted modification and added hyperlink to search pages
  *
@@ -678,11 +681,21 @@
 				Induced Mutation - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
+		
         <tr>
-            <td class="GreyBox"><b>Description of the induced mutation</b></td>
-            <td class="GreyBoxRightEnd"><c:out value="${im.description}"/>&nbsp;</td>
-        </tr>
-                 
+            <td class="GreyBox"><b>Inducing Agent Name</b></td>
+            <td class="GreyBoxRightEnd">
+				<c:choose>
+					<c:when test="${empty im.environmentalFactor.name}">
+						<c:out value="${im.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+					</c:when>
+					<c:otherwise>
+			            <c:out value="${im.environmentalFactor.name}"/>&nbsp;
+					</c:otherwise>
+				</c:choose>
+            </td>
+        </tr>     
+              
         <tr>
             <td class="WhiteBox"><b>Inducing Agent Category</b></td>
             <td class="WhiteBoxRightEnd">
@@ -696,19 +709,38 @@
 				</c:choose>
             </td>
         </tr>
-                 
+        
         <tr>
-            <td class="GreyBox"><b>Inducing Agent Name</b></td>
-            <td class="GreyBoxRightEnd">
-				<c:choose>
-					<c:when test="${empty im.environmentalFactor.name}">
-						<c:out value="${im.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+            <td class="GreyBox"><b>CAS Number</b></td>
+            <td class="GreyBoxRightEnd">            	     
+            	<c:choose>
+					<c:when test="${empty im.environmentalFactor.type}">
+						&nbsp;
 					</c:when>
 					<c:otherwise>
-			            <c:out value="${im.environmentalFactor.name}"/>&nbsp;
+			            <a href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&searchlist=<c:out value="${im.environmentalFactor.casNumber}"/>&Submit=Submit" target="blank"><c:out value="${im.environmentalFactor.casNumber}"/></a>
 					</c:otherwise>
 				</c:choose>
             </td>
+        </tr>
+				
+        <tr>
+            <td class="WhiteBox"><b>Gene ID</b></td>
+            <td class="WhiteBoxRightEnd">
+            	<c:choose>
+					<c:when test="${empty im.geneId}">
+						&nbsp;
+					</c:when>
+					<c:otherwise>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${im.geneId}"/>" target="blank"><c:out value="${im.geneId}"/></a>
+					</c:otherwise>
+				</c:choose>            	
+            </td>
+        </tr>
+				         
+        <tr>
+            <td class="GreyBox"><b>Description of the induced mutation</b></td>
+            <td class="GreyBoxRightEnd"><c:out value="${im.description}"/>&nbsp;</td>
         </tr>
 		
 		<tr>
@@ -730,6 +762,7 @@
 				</c:if>&nbsp;
 			</td>
 		</tr>
+		
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
@@ -740,10 +773,12 @@
 			    </c:if>&nbsp;
 			</td>
 		</tr>
+		
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${im.comments}"/>&nbsp;</td>
 		</tr>
+		
 	</TABLE>
 </td></tr>
 </TABLE>
