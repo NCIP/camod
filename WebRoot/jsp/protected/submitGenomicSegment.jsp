@@ -115,8 +115,8 @@
 		</tr>
 
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Designator:</label>
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formRequiredLabel"><label for="field1">Designator:</label>
 			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.CLONE_DESIGNATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">

@@ -67,7 +67,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="GenomicSegmentPopulateAction.do?method=populate" paramId="aGenomicSegmentID" paramName="aGenomicSegment" paramProperty="id">
-			      		<bean:write name="aGenomicSegment" property="locationOfIntegration" filter="true"/>
+			      		<bean:write name="aGenomicSegment" property="cloneDesignator" filter="true"/>
 			      </html:link><br>
 			      
 			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

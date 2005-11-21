@@ -949,7 +949,7 @@
                 <var-value>255</var-value>
             </var>
         </field>
-        <field property="cloneDesignator" depends="maxlength">
+        <field property="cloneDesignator" depends="required, maxlength">
             <arg0 key="GenomicSegmentForm.cloneDesignator"/>
             <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
             <var>
