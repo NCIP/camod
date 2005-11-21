@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.26 2005-11-21 16:54:36 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.27 2005-11-21 17:49:54 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2005/11/21 16:54:36  georgeda
+ * Defect #105, added MGI number for targeted modification and added hyperlink to search pages
+ *
  * Revision 1.25  2005/11/21 14:43:38  georgeda
  * Defect #64, replace boolean number with text
  *
@@ -761,9 +764,13 @@
 				Spontaneous Mutation - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 			</td>
 		</tr>
+        <tr>
+            <td class="GreyBox" width="35%"><b>Gene</b></td>
+            <td class="GreyBoxRightEnd" width="65%"><c:out value="${sm.name}"/>&nbsp;</td>
+        </tr>
 		<tr>
-			<td class="GreyBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+			<td class="WhiteBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty sm.geneticAlterationCollection}">
 					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
@@ -781,8 +788,8 @@
 			</td>
 		</tr>
         <tr>
-			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
+			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
 				<c:if test="${not empty sm.mutationIdentifier.numberMGI}">
 					<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${sm.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
 					    <c:out value="${sm.mutationIdentifier.numberMGI}"/>
@@ -791,8 +798,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="GreyBox" width="35%"><b>Comments</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${sm.comments}"/>&nbsp;</td>
+			<td class="WhiteBox" width="35%"><b>Comments</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${sm.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
 </td></tr>
