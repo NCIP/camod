@@ -38,9 +38,9 @@
 						<bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
 						<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
 							<br>&nbsp;&nbsp;-&nbsp;
-							<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">&nbsp;
-								<c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
-							</a>&nbsp;(Metastasis)
+							<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
+								<c:out value="${m.organ.EVSPreferredDescription}"/>
+							</a>(Metastasis)
 						</c:forEach>
 	                    <br>
 						<bean:define id="cmColl" name="h" property="clinicalMarkerCollectionSorted"/>
@@ -156,16 +156,20 @@
 					<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
 						<c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>&nbsp;
-					<c:if test="${not empty m.geneticAlteration.methodOfObservation}">&nbsp;<br/>
+					<c:if test="${not empty h.geneticAlteration.methodOfObservation}">&nbsp;<br/>
 					Method - &nbsp;
-					<c:out value="${m.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;
+					<c:out value="${h.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;
 						</c:if>
 					</td>
 				</tr>
-	
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
+					<td class="resultsBoxWhite" width="25%"><b>Human Data</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
+					<c:out value="${h.comparativeData}" escapeXml="false" />&nbsp;
+				</td>	
+				<tr>
+					<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
 					<c:out value="${h.comments}" escapeXml="false" />&nbsp;
 				</td>
 			</tr>
@@ -261,10 +265,14 @@
 						</c:if>
 					</td>
 				</tr>
-	
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
+					<td class="resultsBoxWhite" width="25%"><b>Human Data</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
+					<c:out value="${m.comparativeData}" escapeXml="false" />&nbsp;
+				</td>
+				<tr>
+					<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
 					<c:out value="${m.comments}"/>&nbsp;
 					</td>
 				</tr>
