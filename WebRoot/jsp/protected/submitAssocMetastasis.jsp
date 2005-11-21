@@ -1,3 +1,11 @@
+<%
+/*
+ * $Log: not supported by cvs2svn $
+ *
+ * $Id: submitAssocMetastasis.jsp,v 1.11 2005-11-21 22:04:26 georgeda Exp $
+ *
+ */   
+%>
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp" %>
@@ -111,7 +119,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Metastasis Incidence over lifetime (%)<br>(Enter numbers only):</label>
+		<td class="formLabel"><label for="field1">Metastasis Tumor Frequency over lifetime (%)<br>(Enter numbers only):</label>
 		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
@@ -171,7 +179,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Human Data:</label>
+		<td class="formLabel"><label for="field1">Comparative Data from other Species:</label>
 		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.COMPARATIVE_DATA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">

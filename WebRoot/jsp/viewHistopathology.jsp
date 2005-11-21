@@ -1,3 +1,11 @@
+<%
+/*
+ * $Log: not supported by cvs2svn $
+ *
+ * $Id: viewHistopathology.jsp,v 1.20 2005-11-21 22:04:26 georgeda Exp $
+ *
+ */   
+%>
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -114,7 +122,7 @@
 				</tr>			
 	
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence (%)</b></td>
+					<td class="resultsBoxWhite" width="25%"><b>Tumor Frequency (%)</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 						<c:out value="${h.relationalOperation}"/>&nbsp;
 					<c:out value="${h.tumorIncidenceRate}"/>&nbsp;
@@ -163,7 +171,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Human Data</b></td>
+					<td class="resultsBoxWhite" width="25%"><b>Comparative Data from other Species</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.comparativeData}" escapeXml="false" />&nbsp;
 				</td>	
@@ -217,7 +225,7 @@
 				</tr>			
 	
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Incidence of Metastasis(%)</b></td>
+					<td class="resultsBoxWhite" width="25%"><b>Frequency of Metastasis(%)</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 						<c:out value="${m.relationalOperation}"/>&nbsp;
 						<c:out value="${m.tumorIncidenceRate}"/>&nbsp;
@@ -266,7 +274,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Human Data</b></td>
+					<td class="resultsBoxWhite" width="25%"><b>Comparative Data from other Species</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${m.comparativeData}" escapeXml="false" />&nbsp;
 				</td>
