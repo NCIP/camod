@@ -58,8 +58,8 @@
 	</tr>
 
         <tr>
-            <td class="formRequiredNotice" width="5">&nbsp;</td>
-            <td class="formLabel"><label for="field2">Viral Vector:</label>
+            <td class="formRequiredNotice" width="5">*</td>
+            <td class="formRequiredLabel"><label for="field2">Viral Vector:</label>
             <camod:cshelp mapId="gene_delivery_help" key="GENE_DELIVERY.VIRAL_VECTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
             </td>
             <td class="formField">
