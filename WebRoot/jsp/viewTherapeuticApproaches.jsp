@@ -33,7 +33,7 @@
 			<br>	
 			<c:forEach var="t" items="${ta}" varStatus="stat">
 				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
-				    <a name="<c:out value="therap_${stat.count}"/>"/>
+				    <tr><td><a name="<c:out value="therap_${stat.count}"/>"/>&nbsp;</td></tr>
 					<c:set var="agt" value="${t.agent}"/>
 					<c:set var="agentId" value="${agt.id}"/>
 					<c:set var="nscnum" value="${agt.nscNumber}"/>
