@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.24 2005-11-17 22:39:42 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.25 2005-11-21 14:43:38 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/11/17 22:39:42  pandyas
+ * Follow up to Defect #103: formatting &nbsp
+ *
  * Revision 1.23  2005/11/17 21:28:44  schroedn
  * Defect #141
  *
@@ -233,7 +236,15 @@
 
 		<tr>
 			<td class="GreyBox" width="35%"><b>Conditional Type</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.conditionality.conditionedBy}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<c:if test="${tg.conditionality.conditionedBy == 1}">
+				    Conditional
+				</c:if>
+				<c:if test="${tg.conditionality.conditionedBy == 0}">
+				    Not Conditional
+				</c:if>&nbsp;
+			</td>
+			
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Conditional Description</b></td>
@@ -485,7 +496,14 @@
 
 		<tr>
 			<td class="GreyBox" width="35%"><b>Conditional Type</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.conditionality.conditionedBy}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd" width="65%">
+			    <c:if test="${tm.conditionality.conditionedBy == 1}">
+				    Conditional
+				</c:if>
+				<c:if test="${tm.conditionality.conditionedBy == 0}">
+				    Not Conditional
+				</c:if>&nbsp;
+			</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Conditional Description</b></td>
