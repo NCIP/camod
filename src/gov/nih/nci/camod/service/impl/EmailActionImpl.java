@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.15 2005-11-16 15:31:05 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.16 2005-11-21 16:09:49 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/11/16 15:31:05  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.14  2005/11/14 14:18:22  georgeda
  * Cleanup
  *
@@ -101,8 +104,10 @@ public class EmailActionImpl extends BaseCurateableAction {
                 Person thePerson = (Person) theLog.getSubmitter();
 
                 // Get the e-mail for the assigned user
-                String[] theRecipients = { UserManagerSingleton.instance().getEmailForUser(thePerson.getUsername()) };
-
+                String[] theRecipients = null;
+                String[] theAssignee = { UserManagerSingleton.instance().getEmailForUser(thePerson.getUsername()) };
+                String[] theCoordinator = new String[] { UserManagerSingleton.instance().getEmailForCoordinator() };
+                
                 // Build the message text
                 String theMailSubject = "";
                 String theMailText = theData.getNote();
@@ -115,28 +120,29 @@ public class EmailActionImpl extends BaseCurateableAction {
                 if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
                     theMailSubject = "You have been assigned screener for the following model: "
                             + theData.getModelDescriptor();
+                    theRecipients = theAssignee;
                     theMailStandardText= new String[] {Constants.Admin.Actions.ASSIGN_SCREENER};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
                     theMailSubject = "You have been assigned editor for the following model: "
                             + theData.getModelDescriptor();
+                    theRecipients = theAssignee;
                     theMailStandardText= new String[] {Constants.Admin.Actions.ASSIGN_EDITOR};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
                     theMailSubject = "The editor is requesting more information for the following model: "
                             + theData.getModelDescriptor();
 
-                    // Special case; we're sending out e-mail to someout outside
-                    // the curation process
-                    Person theSubmitter = (Person) theAnimalModel.getSubmitter();
-                    theRecipients = new String[] { UserManagerSingleton.instance().getEmailForUser(
-                            theSubmitter.getUsername()) };
+                    theRecipients = theCoordinator;
                     theMailStandardText= new String[] {Constants.Admin.Actions.NEED_MORE_INFO};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.REJECT)) {
                     theMailSubject = "The following model has been rejected: " + theData.getModelDescriptor();
+                    theRecipients = theCoordinator;
                     theMailStandardText= new String[] {Constants.Admin.Actions.REJECT};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.APPROVE)) {
+                    theRecipients = theCoordinator;
                     theMailSubject = "The following model has been approved: " + theData.getModelDescriptor();
                     theMailStandardText= new String[] {Constants.Admin.Actions.APPROVE};
                 } else if (theData.getEvent().equals(Constants.Admin.Actions.COMPLETE)) {
+                    theRecipients = theCoordinator;
                     theMailSubject = "The following model has been completed: " + theData.getModelDescriptor();
                     theMailStandardText= new String[] {Constants.Admin.Actions.COMPLETE};
                 } else {
