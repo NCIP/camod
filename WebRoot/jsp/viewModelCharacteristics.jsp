@@ -1,8 +1,12 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.21 2005-11-18 20:12:52 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.22 2005-11-21 20:25:22 georgeda Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.21  2005/11/18 20:12:52  pandyas
+  *   Defect #56:
+  *   The stock number is linked if available.  If not available, the distributor is linked to the main web page for that distributor.  The PI (stored in stock number) for Investigator will be displayed in the column for distributor with the stock number left blank.  IMSR doesn't link to stock number at this timel, but the main page is linked to the distributor.
+  *
   *   Revision 1.20  2005/11/17 18:36:47  georgeda
   *   Defect #57, add a mailto link for Investigator availabilty
   *
@@ -108,7 +112,7 @@
 			<td class="WhiteBox" width="20%"><b>Website for add. info</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
-				<a href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;
+				<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;
 				</P>
 			</td>
 		</tr>		
