@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.6 2005-11-17 20:57:17 georgeda Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.7 2005-11-22 15:17:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/17 20:57:17  georgeda
+ * Defect #117, handle back arrow gracefully
+ *
  * Revision 1.5  2005/11/15 22:13:46  georgeda
  * Cleanup of drug screening
  *
@@ -105,7 +108,7 @@ public final class DrugScreenSearchAction extends BaseAction {
 					if (theNscNumber != null) {
 						if (theForm.isDoClinical()) {
 							Collection protocols = myAgentManager.getClinicalProtocols(a);
-							clinProtocols.put(a.getId(), protocols);
+							clinProtocols.put(theNscNumber, protocols);
 						}
 						if (theForm.isDoPreClinical()) {
 							try {

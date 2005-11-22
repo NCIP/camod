@@ -1,5 +1,5 @@
 <!-- clinical trials protocols -->
-<c:set var="cp" value="${clinProtocols[agentId]}"/>
+<c:set var="cp" value="${clinProtocols[nscnum]}"/>
 
 <c:if test="${not empty cp && foundClinicalData == 0}">
 	<c:set var="foundClinicalData" value="1"/>

@@ -32,6 +32,12 @@
 			</TABLE>
 			<br>	
 			<c:forEach var="t" items="${ta}" varStatus="stat">
+			
+			    <c:set var="foundYstData" value="0"/>
+			    <c:set var="foundInvivoData" value="0"/>
+			    <c:set var="foundPreClinicalData" value="0"/>
+			    <c:set var="foundClinicalData" value="0"/>
+			    
 				<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 				    <tr><td><a name="<c:out value="therap_${stat.count}"/>"/>&nbsp;</td></tr>
 					<c:set var="agt" value="${t.agent}"/>
