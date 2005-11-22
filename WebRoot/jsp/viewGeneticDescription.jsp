@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.30 2005-11-21 19:42:52 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.31 2005-11-22 18:14:01 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2005/11/21 19:42:52  georgeda
+ * Defect #139, do not add the segment type everytime; only when null.
+ *
  * Revision 1.29  2005/11/21 18:59:26  georgeda
  * Defect #106, check for Random instead of null location of integration
  *
@@ -514,21 +517,33 @@
 				</c:forEach>
             </td>
         </tr>
-
+       <tr>
+            <td class="GreyBox"><b>Gene ID</b></td>
+            <td class="GreyBoxRightEnd">
+            	<c:choose>
+					<c:when test="${empty tm.geneId}">
+						&nbsp;
+					</c:when>
+					<c:otherwise>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${tm.geneId}"/>" target="blank"><c:out value="${tm.geneId}"/></a>
+					</c:otherwise>
+				</c:choose>            	
+            </td>
+        </tr>
         <tr>
-            <td class="GreyBox" width="35%"><b>Genetic Background - Donor</b></td>
-            <td class="GreyBoxRightEnd" width="65%">
+            <td class="WhiteBox" width="35%"><b>Genetic Background - Donor</b></td>
+            <td class="WhiteBoxRightEnd" width="65%">
             	<c:out value="${tm.esCellLineName}"/>&nbsp;
             </td>
         </tr>
         <tr>
-            <td class="WhiteBox" width="35%"><b>Genetic Background - Recipient</b></td>
-            <td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.blastocystName}"/>&nbsp;</td>
+            <td class="GreyBox" width="35%"><b>Genetic Background - Recipient</b></td>
+            <td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.blastocystName}"/>&nbsp;</td>
         </tr>
 
 		<tr>
-			<td class="GreyBox" width="35%"><b>Conditional Type</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+			<td class="WhiteBox" width="35%"><b>Conditional Type</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 			    <c:if test="${tm.conditionality.conditionedBy == 1}">
 				    Conditional
 				</c:if>
@@ -538,13 +553,13 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Conditional Description</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.conditionality.description}"/>&nbsp;</td>
+			<td class="GreyBox" width="35%"><b>Conditional Description</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.conditionality.description}"/>&nbsp;</td>
 		</tr>
 
 		<tr>
-			<td class="GreyBox" width="35%"><b>Function(s) of Targeted Gene</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+			<td class="WhiteBox" width="35%"><b>Function(s) of Targeted Gene</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 			<ul>
 			<c:forEach var="gf" items="${tm.geneFunctionCollection}">
 				<li><c:out value="${gf.function}"/></li>&nbsp;
@@ -579,8 +594,8 @@
 
 		<c:if test="${not empty tm.image.id}">
 		<tr>
-			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+			<td class="WhiteBox" width="35%"><b>Construct Map ( Image )</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 			<a href='<c:out value="${tm.image.imageUrl}"/>'>
 			<img src="<c:out value="${tm.image.thumbUrl}"/>" 
 				height="40" width="40" border=0
@@ -593,8 +608,8 @@
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
 		</tr>
 		<tr>
-			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
+			<td class="WhiteBox" width="35%"><b>Description of the Construct</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
 		</tr>
 		</c:if>
         <tr>
