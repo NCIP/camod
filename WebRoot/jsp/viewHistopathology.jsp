@@ -1,8 +1,11 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2005/11/21 22:04:26  georgeda
+ * Defects #168,169,179.  Changed wording on submit and view pages
  *
- * $Id: viewHistopathology.jsp,v 1.20 2005-11-21 22:04:26 georgeda Exp $
+ *
+ * $Id: viewHistopathology.jsp,v 1.21 2005-11-22 18:58:52 georgeda Exp $
  *
  */   
 %>
@@ -88,64 +91,75 @@
 			<tr>
 			    <a name="<c:out value="histo_${histstat.count}"/>"/>&nbsp;
 				<td class="formTitleBlue" height="20" colspan="2">
-				Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
+					Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
 				</td>
 			</tr>				
 			
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Organ / Tissue</b></td>
+				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
+					<c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
+				</td>
+			</tr>
+
+			<tr>
+				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-				<c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
-					</td>
-				</tr>
+				    <bean:define id="dc" name="h" property="diseaseCollection"/>
+				    <c:forEach var="d" items="${dc}">
+					    <c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
+					</c:forEach>
+				</td>
+			</tr>
+				
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Onset</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
+					<c:out value="${h.ageOfOnset}"/>&nbsp;
+				</td>
+			</tr>			
 	
-				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Onset</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
-						<c:out value="${h.ageOfOnset}"/>&nbsp;
-					</td>
-				</tr>			
-	
-				<tr>
-					<td class="resultsBoxWhite" width="25%">
-					<b>Average Weight of Tumor (mg)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+			<tr>
+				<td class="resultsBoxWhite" width="25%">
+					<b>Average Weight of Tumor (mg)</b>
+				</td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.weightOfTumor}"/>&nbsp;
-					</td>
-				</tr>
-	
-				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
-						 <c:out value="${h.volumeOfTumor}"/>&nbsp;
-					</td>
-				</tr>			
-	
-				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Tumor Frequency (%)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
-						<c:out value="${h.relationalOperation}"/>&nbsp;
+				</td>
+			</tr>
+
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
+					 <c:out value="${h.volumeOfTumor}"/>&nbsp;
+				</td>
+			</tr>			
+
+			<tr>
+				<td class="resultsBoxWhite" width="25%"><b>Tumor Frequency (%)</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
+					<c:out value="${h.relationalOperation}"/>&nbsp;
 					<c:out value="${h.tumorIncidenceRate}"/>&nbsp;
-					</td>
-				</tr>
-	
-				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+				</td>
+			</tr>
+
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<c:out value="${h.survivalInfo}" escapeXml="false"/>&nbsp;
-					</td>
-				</tr>			
+				</td>
+			</tr>			
+
+			<tr>
+				<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
+					<c:out value="${h.grossDescription}" escapeXml="false"/>&nbsp;
+				</td>
+			</tr>
 	
-				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
-						<c:out value="${h.grossDescription}" escapeXml="false"/>&nbsp;
-					</td>
-				</tr>
-	
-				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<c:out value="${h.microscopicDescription}" escapeXml="false"/>&nbsp;
 				</td>
 			</tr>
@@ -153,31 +167,33 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-				<bean:define id="dc" name="h" property="diseaseCollection"/>
-				<c:forEach var="d" items="${dc}">
-					<c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
+				    <bean:define id="dc" name="h" property="diseaseCollection"/>
+				    <c:forEach var="d" items="${dc}">
+					    <c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
 					</c:forEach>
-					</td>
-				</tr>
+				</td>
+			</tr>
 	
-				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
-						<c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>&nbsp;
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
+					<c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>&nbsp;
 					<c:if test="${not empty h.geneticAlteration.methodOfObservation}">&nbsp;<br/>
-					Method - &nbsp;
-					<c:out value="${h.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;
-						</c:if>
-					</td>
-				</tr>
-				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Comparative Data from other Species</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+						Method - &nbsp;
+						<c:out value="${h.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;
+					</c:if>
+				</td>
+			</tr>
+				
+			<tr>
+				<td class="resultsBoxWhite" width="25%"><b>Comparative Data from other Species</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.comparativeData}" escapeXml="false" />&nbsp;
-				</td>	
-				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+				</td>
+			</tr>	
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<c:out value="${h.comments}" escapeXml="false" />&nbsp;
 				</td>
 			</tr>
@@ -192,37 +208,45 @@
 				    <a name="<c:out value="metas_${histstat.count}_${metastat.count}"/>"/>&nbsp;
 					<td class="greySubTitleLeftEnd" height="20" colspan="2">
 						Metastasis in <c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
-						</td>
-					</tr>
+					</td>
+				</tr>
 	
-					<tr>
-						<td class="resultsBoxWhite" width="25%"><b>Organ / Tissue</b></td>
-						<td class="resultsBoxWhiteEnd" width="75%">
+				<tr>
+					<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
 						<c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
-						</td>
-					</tr>
-	
-					<tr>
+					</td>
+				</tr>
+				<tr>
+					<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
+					<td class="resultsBoxWhiteEnd" width="75%">
+						<bean:define id="dc" name="m" property="diseaseCollection"/>
+						<c:forEach var="d" items="${dc}">
+							<c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
+						</c:forEach>&nbsp;
+					</td>
+				</tr>	
+				<tr>
 						<td class="resultsBoxGrey" width="25%"><b>Age at Onset of Metastasis</b></td>
 						<td class="resultsBoxGreyEnd" width="75%">
 							<c:out value="${m.ageOfOnset}"/>&nbsp;
-					</td>
+					    </td>
 				</tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%">
 					<b>Average Weight of Tumor (mg)</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${m.weightOfTumor}"/>&nbsp;
-						</td>
-					</tr>
-	
-					<tr>
-						<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-						<td class="resultsBoxGreyEnd" width="75%">
-							 <c:out value="${m.volumeOfTumor}"/>&nbsp;
+					    <c:out value="${m.weightOfTumor}"/>&nbsp;
 					</td>
-				</tr>			
+				</tr>
+	
+				<tr>
+					<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
+						 <c:out value="${m.volumeOfTumor}"/>&nbsp;
+				    </td>
+			    </tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Frequency of Metastasis(%)</b></td>
@@ -235,7 +259,7 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${m.survivalInfo}"/>&nbsp;
+						<c:out value="${m.survivalInfo}"/>&nbsp;
 					</td>
 				</tr>			
 	
@@ -249,27 +273,17 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${m.microscopicDescription}"/>&nbsp;
+						<c:out value="${m.microscopicDescription}"/>&nbsp;
 					</td>
 				</tr>
-				
-				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
-					<bean:define id="dc" name="m" property="diseaseCollection"/>
-					<c:forEach var="d" items="${dc}">
-						<c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
-						</c:forEach>&nbsp;
-						</td>
-					</tr>
 	
-					<tr>
-						<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Metastasis</b></td>
-						<td class="resultsBoxGreyEnd" width="75%">
-							<c:out value="${m.geneticAlteration.observation}"/>	&nbsp; 
+				<tr>
+					<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Metastasis</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
+						<c:out value="${m.geneticAlteration.observation}"/>	&nbsp; 
 						<c:if test="${not empty m.geneticAlteration.methodOfObservation}"><br/>
-						Method - &nbsp;
-						<c:out value="${m.geneticAlteration.methodOfObservation}"/>&nbsp;
+							Method - &nbsp;
+							<c:out value="${m.geneticAlteration.methodOfObservation}"/>&nbsp;
 						</c:if>
 					</td>
 				</tr>

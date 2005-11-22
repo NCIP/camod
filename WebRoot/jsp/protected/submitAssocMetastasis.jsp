@@ -1,8 +1,11 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/21 22:04:26  georgeda
+ * Defects #168,169,179.  Changed wording on submit and view pages
  *
- * $Id: submitAssocMetastasis.jsp,v 1.11 2005-11-21 22:04:26 georgeda Exp $
+ *
+ * $Id: submitAssocMetastasis.jsp,v 1.12 2005-11-22 18:58:52 georgeda Exp $
  *
  */   
 %>
@@ -81,7 +84,7 @@
 			</a>	
 		</td>
 		<html:hidden property="diagnosisName"/>
-		<html:hidden property="diagnosisCode" value="C26416"/>
+		<html:hidden property="diagnosisCode"/>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="25" />
 		</td>
