@@ -62,11 +62,24 @@
 							<c:out value="${cd.agent.name}"/>
 						</c:otherwise>
 					</c:choose>
+					<c:if test="${not empty cd.agent.nscNumber}">
+						<br>NSC: 
+						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.agent.nscNumber}"/>">
+						    <c:out value="${cd.agent.nscNumber}"/>
+						</a>
+					</c:if>
+					<c:if test="${not empty cd.agent.casNumber}">
+						<br>CAS: 
+						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.agent.casNumber}"/>">
+						    <c:out value="${cd.agent.casNumber}"/>
+						</a>    
+					</c:if>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/></td>
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>
+					<c:out value="${cd.treatment.regimen}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
