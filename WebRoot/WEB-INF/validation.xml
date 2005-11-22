@@ -19,6 +19,9 @@
    
   <formset>
     <form name="clinicalMarkerForm">
+        <field property="name" depends="required">
+            <arg0 key="ClinicalMarkerForm.name"/>
+        </field>
         <field property="value" depends="maxlength">
             <arg0 key="ClinicalMarkerForm.value"/>
             <var>
