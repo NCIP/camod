@@ -59,7 +59,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
 	 */
 	public String getEVSPreferredDescription() {
 		String thePreferedDesc = null;
-		if ("000000".equals(conceptCode)) {
+		if ("000000".equals(conceptCode) || "C000000".equals(conceptCode)) {
 			thePreferedDesc = name;
 		} else {
 			thePreferedDesc = EvsTreeUtil.getEVSPreferedDescription(conceptCode);

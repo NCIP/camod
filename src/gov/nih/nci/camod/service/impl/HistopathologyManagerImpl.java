@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.6 2005-11-18 22:50:02 georgeda Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.7 2005-11-22 16:35:43 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/18 22:50:02  georgeda
+ * Defect #184.  Cleanup editing of old models
+ *
  * Revision 1.5  2005/11/09 00:17:16  georgeda
  * Fixed delete w/ constraints
  *
@@ -149,19 +152,32 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
             String oldDiseaseConceptCode = theDisease.getConceptCode();
             String newDiseaseConceptCode = inHistopathologyData.getDiagnosisCode();
 
-            if (!newDiseaseConceptCode.equals(oldDiseaseConceptCode)) {
+            // It's a new concept code, or the concept code is a "catch-all" for any user entered data
+            if (!newDiseaseConceptCode.equals(oldDiseaseConceptCode) || inHistopathologyData.getDiagnosisCode().indexOf("000000") != -1) {
 
                 log.info("Creating new Disease object");
                 theDisease = (Disease) inHistopathology.getDiseaseCollection().get(0);
                 theDisease.setConceptCode(inHistopathologyData.getDiagnosisCode());
 
-                theDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
+                // Hack to handle user entered tumor classifications
+                if (inHistopathologyData.getDiagnosisCode().indexOf("000000") != -1) {
+                    theDisease.setName(inHistopathologyData.getDiagnosisName());
+                } else {
+                    theDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
+                }
+               
             }
 
         } else {
             theDisease = new Disease();
             theDisease.setConceptCode(inHistopathologyData.getDiagnosisCode());
-            theDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
+            
+            // Hack to handle user entered tumor classifications
+            if (inHistopathologyData.getDiagnosisCode().indexOf("000000") != -1) {
+                theDisease.setName(inHistopathologyData.getDiagnosisName());
+            } else {
+                theDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
+            }
             inHistopathology.addDisease(theDisease);
         }
 
