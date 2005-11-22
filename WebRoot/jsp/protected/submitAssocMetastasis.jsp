@@ -1,11 +1,14 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/22 18:58:52  georgeda
+ * Defect #171, move location of Disease to match submission page
+ *
  * Revision 1.11  2005/11/21 22:04:26  georgeda
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.12 2005-11-22 18:58:52 georgeda Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.13 2005-11-22 19:44:44 georgeda Exp $
  *
  */   
 %>
@@ -142,7 +145,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Lesion:</label>
+		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Description:</label>
 		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.GROSS_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
