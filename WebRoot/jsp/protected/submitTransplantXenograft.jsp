@@ -82,66 +82,6 @@
 				<html:text styleClass="formFieldSized" property="name"  size="30" />
 		</td>
 	</tr>
-	
-	<tr>
-			<td class="formRequiredNotice" width="3">&nbsp;</td>
-			<td class="formLabel"><label for="field1">ATTC number (if available):</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ATCC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-			</td>
-			<td class="formField">		
-				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
-				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="15" property="ATCCNumber"  />
-			</td>
-	</tr>		
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Host Species / Strain:</label></td>
-		<td class="formField">
-				<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Parental Cell line:</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="parentalCellLineName"  size="30" />	
-		</td>
-	</tr>
-
-    <tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Amount of Cells:</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">		
-			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="15" />
-		</td>
-	</tr>	
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Method of Modification:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.MODIFICATION_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="modificationDescription"  size="30" />
-		</td>
-	</tr>
-
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Genetic Alteration:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.GENETIC_MANIPULATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" property="geneticManipulation"  size="30" />
-		</td>
-	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
@@ -174,32 +114,6 @@
 			<html:text styleClass="formFieldSized" disabled="true" property="otherHostEthinicityStrain" size="30" />	
 		</td>
 	</tr>
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Site of Administration:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">
-		<br>
-		<label for="field3">- if Administration Site is not listed, <br>then please select "Other" and then specify it below:</label>
-		<br>
-		<br>
-			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminSite();">												
-				<html:options name="<%= Dropdowns.XENOGRAFTADMINSITESDROP %>"/>					
-			</html:select>			
-		</td>
-	</tr>
-
-	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Other Site of Administration:</label></td>
-		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeSite" disabled="true"/>			
-		</td>
-	</tr>		
-		
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
@@ -221,6 +135,88 @@
 			<html:text styleClass="formFieldSized" disabled="true" property="otherGraftType"  size="30" />	
 		</td>
 	</tr>	
+
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Parental Cell line:</label>
+			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="parentalCellLineName"  size="30" />	
+		</td>
+	</tr>			
+	<tr>
+			<td class="formRequiredNotice" width="3">&nbsp;</td>
+			<td class="formLabel"><label for="field1">ATTC number (if available):</label>
+			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ATCC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
+			<td class="formField">		
+				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<html:text styleClass="formFieldUnSized" size="15" property="ATCCNumber"  />
+			</td>
+	</tr>		
+
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Genetic Alteration:</label>
+		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.GENETIC_MANIPULATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="geneticManipulation"  size="30" />
+		</td>
+	</tr>	
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Method of Modification:</label>
+		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.MODIFICATION_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="modificationDescription"  size="30" />
+		</td>
+	</tr>
+
+
+    <tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Amount of Cells:</label>
+			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">		
+			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="15" />
+		</td>
+	</tr>
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Site of Administration:</label>
+		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+		<br>
+		<label for="field3">- if Administration Site is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>
+			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminSite();">												
+				<html:options name="<%= Dropdowns.XENOGRAFTADMINSITESDROP %>"/>					
+			</html:select>			
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Other Site of Administration:</label></td>
+		<td class="formField">					
+			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeSite" disabled="true"/>			
+		</td>
+	</tr>	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field3">Host Species / Strain:</label></td>
+		<td class="formField">
+				<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
+		</td>
+	</tr>		
 	
 	<tr>
 		<td align="right" colspan="3">
