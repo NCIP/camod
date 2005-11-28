@@ -34,6 +34,8 @@
 	        </TD>
 	        <TD class=formField>
 		        <html:text styleClass="formFieldSized" property="NSCNumber" size="30"/>
+		        <br>
+		        <a href="http://dtp.nci.nih.gov/dtpstandard/ChemData/index.jsp" target="blank">Search for NSC numbers</a>
 	        </TD>
         </TR>
         <TR>
