@@ -17,6 +17,8 @@
 	System.out.println( "SIZE: " + size );
 %>
 
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
@@ -27,7 +29,7 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 
 				<tr>
-					<td class="formTitle" height="20" colspan="4">Search Results</td>
+					<td class="formTitle" height="20" colspan="4">Search Results&nbsp;<camod:cshelp mapId="search_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 				</tr>
 			</TABLE>
 			
