@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.34 2005-11-28 18:31:57 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.35 2005-11-28 19:06:08 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2005/11/28 18:31:57  georgeda
+ * Defect #64, fix for newly submitted models
+ *
  * Revision 1.33  2005/11/28 16:21:40  pandyas
  * Defect #187:  Changed Comments to Comment
  *
@@ -346,6 +349,9 @@
 	</TABLE>
 	
 </td></tr>
+<tr>
+    <td><a href="#">Top</a></td>
+</tr>
 </TABLE>
 </c:forEach>
 <%}%>
@@ -485,6 +491,9 @@
 		</tr>
 	</TABLE>
 </td></tr>
+<tr>
+    <td><a href="#">Top</a></td>
+</tr>
 </TABLE>
 </c:forEach>
 </c:if>
@@ -703,6 +712,9 @@
 		</c:if>
 	</TABLE>
 </td></tr>
+<tr>
+    <td><a href="#">Top</a></td>
+</tr>
 </TABLE>
 </c:forEach>
 </c:if>
@@ -817,6 +829,9 @@
 		
 	</TABLE>
 </td></tr>
+<tr>
+    <td><a href="#">Top</a></td>
+</tr>
 </TABLE>
 </c:forEach>
 </c:if>
@@ -874,6 +889,9 @@
 		</tr>
 	</TABLE>
 </td></tr>
+<tr>
+    <td><a href="#">Top</a></td>
+</tr>
 </TABLE>
 </c:forEach>
 </c:if>
