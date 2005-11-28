@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftAction.java,v 1.13 2005-11-11 16:28:03 pandyas Exp $
+ * $Id: XenograftAction.java,v 1.14 2005-11-28 22:51:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/11 16:28:03  pandyas
+ * added javadocs
+ *
  * 
  */
 
@@ -58,7 +61,9 @@ public final class XenograftAction extends BaseAction {
                 + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
                 + xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
                 + xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
-                + xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
+                + xenograftForm.getOtherHostEthinicityStrain() 
+                + "\n\t organTissueCode: " + xenograftForm.getOrganTissueName()                
+                + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
@@ -134,7 +139,9 @@ public final class XenograftAction extends BaseAction {
                 + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() + "\n\t getHostScientificName: "
                 + xenograftForm.getHostScientificName() + "\n\t getHostEthinicityStrain: "
                 + xenograftForm.getHostEthinicityStrain() + "\n\t getOtherHostEthinicityStrain: "
-                + xenograftForm.getOtherHostEthinicityStrain() + "\n\t user: "
+                + xenograftForm.getOtherHostEthinicityStrain() 
+                + "\n\t organTissueCode: " + xenograftForm.getOrganTissueName()  
+                + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {
