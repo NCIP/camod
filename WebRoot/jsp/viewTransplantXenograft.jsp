@@ -28,7 +28,7 @@
 			<td class="GreyBoxRightEnd"><c:out value="${xt.name}"/>&nbsp;</td>
 		</tr>
 		<tr>		
-			<td class="WhiteBox"><b>Host Species</b></td>
+			<td class="WhiteBox"><b>Donor Species</b></td>
 			<td class="WhiteBoxRightEnd">
 			    <c:if test="${not empty xt.hostSpecies.scientificName}"><c:out value="${xt.hostSpecies.scientificName}"/></c:if>
 				<c:if test="${not empty xt.hostSpecies.abbreviation}}">(<c:out value="${xt.hostSpecies.abbreviation}"/>)</c:if>&nbsp;
@@ -36,7 +36,7 @@
 		</tr>
 	
 		<tr>		
-			<td class="GreyBox"><b>Host Strain</b></td>
+			<td class="GreyBox"><b>Donor Strain</b></td>
 			<td class="GreyBoxRightEnd">
 				<c:choose>
 					<c:when test="${empty xt.hostSpecies.ethnicityStrain}">
@@ -73,7 +73,9 @@
 		</tr>
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.atccNumber}"/>&nbsp;</td>   		
+			<td class="GreyBoxRightEnd">
+			<a target="_atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${xt.atccNumber}"/>">
+			<c:out value="${xt.atccNumber}"/>&nbsp;</td>   		
 		</tr>
 
 		<tr>		
@@ -94,7 +96,7 @@
 			<td class="GreyBoxRightEnd"><c:out value="${xt.administrativeSite}"/>&nbsp;</td>
 		</tr>			
 		<tr>		
-			<td class="WhiteBox"><b>Species</b></td>
+			<td class="WhiteBox"><b>Host Species and Strain</b></td>
 			<td class="WhiteBoxRightEnd">
 				<c:out value="${xt.originSpecies.scientificName}"/>&nbsp;
 				<c:if test="${not empty xt.originSpecies.abbreviation}">(<c:out value="${xt.originSpecies.abbreviation}"/>)</c:if>
