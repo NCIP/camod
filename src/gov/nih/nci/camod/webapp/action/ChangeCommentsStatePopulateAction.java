@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeCommentsStatePopulateAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
+ *  $Id: ChangeCommentsStatePopulateAction.java,v 1.3 2005-11-28 13:49:30 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2005/10/24 13:28:17  georgeda
+ *  Cleanup changes
+ *
  *  Revision 1.1  2005/10/10 14:09:56  georgeda
  *  Initial revision
  *
@@ -84,9 +87,9 @@ public class ChangeCommentsStatePopulateAction extends BaseAction {
 				inRequest.setAttribute("action", "Assigning Screener to ");
 				NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERSFORROLEDROP,
 						Constants.Admin.Roles.SCREENER);
-			} else if (theEvent.equals(Constants.Admin.Actions.REJECT)) {
+			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_REJECT)) {
 				inRequest.setAttribute("action", "Rejecting ");
-			} else if (theEvent.equals(Constants.Admin.Actions.APPROVE)) {
+			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_APPROVE)) {
 				inRequest.setAttribute("action", "Approving ");
 			} else {
 				throw new IllegalArgumentException("Unknown event type: " + theEvent);

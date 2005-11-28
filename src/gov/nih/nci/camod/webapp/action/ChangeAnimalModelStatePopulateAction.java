@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.9 2005-10-24 13:28:17 georgeda Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.10 2005-11-28 13:48:37 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.9  2005/10/24 13:28:17  georgeda
+ *  Cleanup changes
+ *
  *  Revision 1.8  2005/09/22 15:17:36  georgeda
  *  More changes
  *
@@ -87,7 +90,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				theForm.setAssignedTo(theLog.getSubmitter().getUsername());
 				inRequest.setAttribute("action", "Requesting more information for ");
 
-			} else if (theEvent.equals(Constants.Admin.Actions.REJECT)) {
+			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_REJECT)) {
 
 				// Assign to the coordinator
 				ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
@@ -95,7 +98,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				theForm.setAssignedTo(theCoordinator);
 
 				inRequest.setAttribute("action", "Rejecting ");
-			} else if (theEvent.equals(Constants.Admin.Actions.APPROVE)) {
+			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_APPROVE) || theEvent.equals(Constants.Admin.Actions.EDITOR_APPROVE)) {
 
 				// Assign to the coordinator
 				ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);

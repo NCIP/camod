@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.75 2005-11-18 21:04:54 georgeda Exp $
+ * $Id: Constants.java,v 1.76 2005-11-28 13:41:35 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.75  2005/11/18 21:04:54  georgeda
+ * Defect #130, added superuser
+ *
  * Revision 1.74  2005/11/17 20:42:03  schroedn
  * Defect #93
  *
@@ -671,8 +674,13 @@ public class Constants {
             /**
              * A constant that defines the text for the generic approved action
              */
-            public static final String APPROVE = "approve";
+            public static final String SCREENER_APPROVE = "screener_approve";
 
+            /**
+             * A constant that defines the text for the generic approved action
+             */
+            public static final String EDITOR_APPROVE = "editor_approve";
+            
             /**
              * A constant that defines the text for the assign editor action
              */
@@ -692,7 +700,7 @@ public class Constants {
             /**
              * A constant that defines the text for the generic reject action
              */
-            public static final String REJECT = "reject";
+            public static final String SCREENER_REJECT = "screener_reject";
 
             /**
              * A constant that defines the text for the complete

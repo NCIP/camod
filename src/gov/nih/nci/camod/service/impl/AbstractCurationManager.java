@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AbstractCurationManager.java,v 1.8 2005-11-14 14:17:47 georgeda Exp $
+ * $Id: AbstractCurationManager.java,v 1.9 2005-11-28 13:43:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/14 14:17:47  georgeda
+ * Cleanup
+ *
  * Revision 1.7  2005/09/19 13:08:28  georgeda
  * Slight change to interface
  *
@@ -53,14 +56,9 @@ public abstract class AbstractCurationManager implements CurationManager {
                 theNextState = (String) myNextValidStates.get(inEvent);
             }
 
-            // Invalid event. Map to the "all" event
+            // Invalid event. 
             if (theNextState.equals("")) {
-
-                inEvent = "all";
-
-                if (myNextValidStates.containsKey(inEvent)) {
-                    theNextState = (String) myNextValidStates.get(inEvent);
-                }
+                throw new IllegalArgumentException("No matching state for event:" + inEvent);
             }
 
             return theNextState;

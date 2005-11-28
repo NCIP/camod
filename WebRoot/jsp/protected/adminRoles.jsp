@@ -52,8 +52,9 @@
        <% pageContext.setAttribute("modelSectionTag", Parameters.MODELSECTIONNAME); %>
 	   <% pageContext.setAttribute("commentsIdTag", Parameters.COMMENTSID); %>
 	   <% pageContext.setAttribute("eventTag", Parameters.EVENT); %>
-	   <% pageContext.setAttribute("reject", Admin.Actions.REJECT); %>
-	   <% pageContext.setAttribute("approve", Admin.Actions.APPROVE); %>
+	   <% pageContext.setAttribute("screener_reject", Admin.Actions.SCREENER_REJECT); %>
+	   <% pageContext.setAttribute("screener_approve", Admin.Actions.SCREENER_APPROVE); %>
+	   <% pageContext.setAttribute("editor_approve", Admin.Actions.EDITOR_APPROVE); %>
 	   <% pageContext.setAttribute("assign_screener", Admin.Actions.ASSIGN_SCREENER); %>
 			    		
 		<!-- Start the various sections per role -->
@@ -77,7 +78,7 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 	                        </html:link>
 			                <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.EDITOR_APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 		                            Approve
 				                </html:link>
 				            </td>
@@ -113,7 +114,7 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.EDITOR_APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
@@ -178,12 +179,12 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out escapeXml="false" value="${model.modelDescriptor}"/>
 				            </html:link>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.SCREENER_APPROVE %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Approve
 				                </html:link>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25">
-				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.REJECT %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
+				                <html:link action="<%="ChangeAnimalModelStatePopulateAction?" + Parameters.EVENT + "=" + Admin.Actions.SCREENER_REJECT %>" paramId="<%=Constants.Parameters.MODELID%>" paramName="model"  paramProperty="id">
 				                    Reject
 				                </html:link>
 				            </td>
@@ -250,13 +251,13 @@
 				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out escapeXml="false" value="${comments.cancerModel.modelDescriptor}"/>
 				            </a>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${approve}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${screener_approve}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Approve
 				                </a>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${reject}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${screener_reject}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Reject
 				                </a>
