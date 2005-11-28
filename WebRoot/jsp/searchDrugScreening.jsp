@@ -2,6 +2,7 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 
 <script language="JavaScript" src="scripts/EvsTree.js"></script>
+<DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
 <html:form action="DrugScreenSearchAction.do" focus="NSCNumber">
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
