@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/22 19:44:44  georgeda
+ * Defect #172.  Changed to 'Gross Description / Macroscopic Description'
+ *
  * Revision 1.12  2005/11/22 18:58:52  georgeda
  * Defect #171, move location of Disease to match submission page
  *
@@ -8,7 +11,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.13 2005-11-22 19:44:44 georgeda Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.14 2005-11-28 20:43:57 georgeda Exp $
  *
  */   
 %>
@@ -82,7 +85,7 @@
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 			<camod:cshelp mapId="associated_metastasis_help" key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
-			<a href="javascript:showDiagnosisTree('associatedMetastasisForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showDiagnosisTree('associatedMetastasisForm', 'descendants=true;onlyLeaf=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>	
 		</td>
