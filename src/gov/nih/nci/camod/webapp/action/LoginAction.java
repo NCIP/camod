@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.6 2005-09-22 15:18:13 georgeda Exp $
+ * $Id: LoginAction.java,v 1.7 2005-11-28 18:33:35 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/09/22 15:18:13  georgeda
+ * More changes
+ *
  * Revision 1.5  2005/09/16 15:52:55  georgeda
  * Changes due to manager re-write
  * 
@@ -42,7 +45,6 @@ public final class LoginAction extends BaseAction {
         // check login credentials using Authentication Mangager
         boolean loginOK = UserManagerSingleton.instance().login(loginForm.getUsername(), loginForm.getPassword(), request);
 
-        System.out.println("Login: " + loginOK);
         String forward = "login";
 
         if (loginOK) {

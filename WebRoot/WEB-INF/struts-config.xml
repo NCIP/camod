@@ -1500,6 +1500,7 @@
 	        input="/login">    
     <forward
             name="success"
+            redirect="true"
             path="/ReturnUserModels.do?method=returnUserModels"></forward>                              
     </action>
     
