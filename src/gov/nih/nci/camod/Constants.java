@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.76 2005-11-28 13:41:35 georgeda Exp $
+ * $Id: Constants.java,v 1.77 2005-11-28 18:02:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.76  2005/11/28 13:41:35  georgeda
+ * Defect #192, handle back arrow for curation changes
+ *
  * Revision 1.75  2005/11/18 21:04:54  georgeda
  * Defect #130, added superuser
  *
@@ -190,7 +193,11 @@ public class Constants {
     public static final String CONFIG = "appConfig";
 
     public static final String UPT_CONTEXT_NAME = "camod";
-
+    
+    public static final String CONDITIONAL = "Conditional";
+    
+    public static final String NOT_CONDITIONAL = "Not Conditional";
+    
     /**
      * Used to store list of models currently logged on user has previous
      * entered

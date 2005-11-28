@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.7 2005-11-16 15:31:05 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.8 2005-11-28 18:02:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/16 15:31:05  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.6  2005/11/15 19:10:23  schroedn
  * Defect #49
  *
@@ -29,7 +32,7 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.service.impl.AnimalModelManagerSingleton;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Used as wrapper around animal model for speedy display during paganation.
@@ -37,19 +40,11 @@ import java.util.List;
 public class AnimalModelSearchResult implements Comparable {
 
     private String myAnimalModelId;
-
     private String myTumorSites = null;
-
-    private String myMetastasisSites = null;
-
     private String mySpecies = null;
-
     private String myModelDescriptor = null;
-
     private String mySubmitterName = null;
-
     private String mySubmittedDate = null;
-
     private AnimalModel myAnimalModel = null;
 
     /**
@@ -109,42 +104,62 @@ public class AnimalModelSearchResult implements Comparable {
      */
     public String getTumorSites() throws Exception {
 
+        Set theOrgans = new TreeSet();
+        Hashtable theMetas = new Hashtable();
+
         if (myTumorSites == null) {
             fetchAnimalModel();
 
             myTumorSites = "";
-            List theOrgans = myAnimalModel.getDistinctOrgansFromHistopathologyCollection();
+            List theHistopathologyList = myAnimalModel.getHistopathologyCollectionSorted();
 
-            for (int i = 0, j = theOrgans.size(); i < j; i++) {
-                String theOrgan = (String) theOrgans.get(i);
-                myTumorSites += "<b>" + theOrgan + "</b><br>";
+            for (int i = 0, j = theHistopathologyList.size(); i < j; i++) {
+
+                Histopathology theHistopathology = (Histopathology) theHistopathologyList.get(i);
+
+                String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
+
+                if (!theOrgans.contains(theOrgan)) {
+                    theOrgans.add(theOrgan);
+                    theMetas.put(theOrgan, new TreeSet());
+                }
+
+                TreeSet theMetaSet = (TreeSet) theMetas.get(theOrgan);
+                List theMetastasisList = theHistopathology.getMetastatisCollectionSorted();
+
+                for (int k = 0, l = theMetastasisList.size(); k < l; k++) {
+
+                    Histopathology theMetastasis = (Histopathology) theMetastasisList.get(k);
+                    String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
+
+                    if (!theMetaSet.contains(theMetaOrgan)) {
+                        theMetaSet.add(theMetaOrgan);
+                    }
+                }
             }
+        }
+
+        Iterator theOrganIterator = theOrgans.iterator();
+
+        while (theOrganIterator.hasNext()) {
+
+            String theOrgan = (String) theOrganIterator.next();
+
+            myTumorSites += "<b>" + theOrgan + "</b><br/>";
+
+            TreeSet theMetaSet = (TreeSet) theMetas.get(theOrgan);
+
+            Iterator theMetaIterator = theMetaSet.iterator();
+
+            while (theMetaIterator.hasNext()) {
+                String theMetaOrgan = (String) theMetaIterator.next();
+
+                myTumorSites += theMetaOrgan + " (Metastasis)<br>";
+            }
+
         }
 
         return myTumorSites;
-    }
-
-    /**
-     * Return the list of metastatis sites. It will fetch the animal model from
-     * the DB if it hasn't already happened.
-     * 
-     * @return the list of metastatis sites for the associated model
-     * @throws Exception
-     */
-    public String getMetastatisSites() throws Exception {
-
-        if (myMetastasisSites == null) {
-            fetchAnimalModel();
-
-            myMetastasisSites = "";
-            List theOrgans = myAnimalModel.getDistinctMetastatisOrgansFromHistopathologyCollection();
-
-            for (int i = 0, j = theOrgans.size(); i < j; i++) {
-                String theOrgan = (String) theOrgans.get(i);
-                myMetastasisSites += theOrgan + " (Metastasis)<br>";
-            }
-        }
-        return myMetastasisSites;
     }
 
     /**

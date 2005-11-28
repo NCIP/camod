@@ -1,10 +1,13 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/11/18 15:20:21  georgeda
+ * Defect #120, gracefully handle the deletion of models.
+ *
  * Revision 1.14  2005/11/14 14:16:51  georgeda
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.15 2005-11-18 15:20:21 georgeda Exp $
+ * $Id: AnimalModel.java,v 1.16 2005-11-28 18:02:10 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -126,51 +129,6 @@ public class AnimalModel extends AbstractCancerModel {
         if (histopathologyCollection != null)
             return new ArrayList(new TreeSet(histopathologyCollection));
         return null;
-    }
-
-    /**
-     * @return Returns the histopathologyCollection.
-     */
-    public List getDistinctOrgansFromHistopathologyCollection() {
-
-        List theList = new ArrayList();
-        for (int i = 0, j = histopathologyCollection.size(); i < j; i++) {
-            Histopathology theHistopathology = (Histopathology) histopathologyCollection.get(i);
-
-            if (!theList.contains(theHistopathology.getOrgan().getEVSPreferredDescription())) {
-                theList.add(theHistopathology.getOrgan().getEVSPreferredDescription());
-            }
-        }
-
-        Collections.sort(theList);
-
-        return theList;
-    }
-
-    /**
-     * @return Returns the unique organs.
-     */
-    public List getDistinctMetastatisOrgansFromHistopathologyCollection() {
-
-        List theList = new ArrayList();
-        for (int i = 0, j = histopathologyCollection.size(); i < j; i++) {
-            Histopathology theHistopathology = (Histopathology) histopathologyCollection.get(i);
-
-            List theMetastatisCollection = theHistopathology.getMetastatisCollection();
-
-            for (int k = 0, l = theMetastatisCollection.size(); k < l; k++) {
-                Histopathology theMetastatis = (Histopathology) theMetastatisCollection.get(k);
-
-                String theMetastatisOrgan = theMetastatis.getOrgan().getEVSPreferredDescription();
-                if (!theList.contains(theMetastatisOrgan)) {
-                    theList.add(theMetastatisOrgan);
-                }
-            }
-        }
-
-        Collections.sort(theList);
-
-        return theList;
     }
 
     /**
