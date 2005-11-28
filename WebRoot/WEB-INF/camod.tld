@@ -154,6 +154,14 @@
          <name>styleClass</name>
          <required>false</required>
       </attribute>
-      
+   </tag>
+   
+   <tag> 
+       <name>shorten</name> 
+       <tag-class>gov.nih.nci.camod.webapp.taglib.ShortenTextTag</tag-class>
+       <attribute>
+         <name>length</name>
+         <required>false</required>
+      </attribute>
    </tag>
 </taglib>
