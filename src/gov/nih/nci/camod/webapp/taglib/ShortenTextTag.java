@@ -1,7 +1,10 @@
 /**
- * $Id: ShortenTextTag.java,v 1.1 2005-11-28 13:52:03 georgeda Exp $
+ * $Id: ShortenTextTag.java,v 1.2 2005-11-28 17:56:39 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/11/28 13:52:03  georgeda
+ * Defect #193.  Initial revision
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.taglib;
@@ -26,7 +29,7 @@ public class ShortenTextTag implements BodyTag, Serializable {
 
 	private BodyContent myBodyContent;
 	private Tag myParent = null;
-	private int myLength = 30;
+	private int myLength = 25;
 
 	public void setPageContext(PageContext inPageContext) {
 	}
