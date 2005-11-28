@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.35 2005-11-28 19:06:08 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.36 2005-11-28 22:59:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2005/11/28 19:06:08  georgeda
+ * Defect #76, added a "Top" link to bring them to the top of the page
+ *
  * Revision 1.34  2005/11/28 18:31:57  georgeda
  * Defect #64, fix for newly submitted models
  *
@@ -247,8 +250,14 @@
 					<tr>
 						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
 						<td class="WhiteBoxRightEnd" width="65%">
-							<c:out value="${rem.taxon.scientificName}"/>&nbsp;
-							<c:out value="${rem.taxon.ethnicityStrain}"/>&nbsp;
+							<c:choose>
+								<c:when test="${not empty rem.taxon.scientificName}">
+									<c:out value="${rem.taxon.scientificName}"/>&nbsp;
+								</c:when>
+								<c:otherwise>
+						            <c:out value="${rem.taxon.commonName}"/>&nbsp;
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 				</c:forEach>

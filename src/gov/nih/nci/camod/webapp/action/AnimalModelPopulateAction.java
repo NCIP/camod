@@ -45,7 +45,11 @@ public class AnimalModelPopulateAction extends BaseAction {
 
         modelChar.setModelDescriptor(am.getModelDescriptor());
 
-        modelChar.setPrincipalInvestigator(am.getPrincipalInvestigator().getUsername());
+        if (am.getPrincipalInvestigator() != null) {
+            modelChar.setPrincipalInvestigator(am.getPrincipalInvestigator().getUsername());
+        } else {
+            modelChar.setPrincipalInvestigator(null);
+        }
 
         if (am.getIsToolMouse().booleanValue()) {
             modelChar.setIsToolMouse("yes");
@@ -57,7 +61,7 @@ public class AnimalModelPopulateAction extends BaseAction {
         modelChar.setEthinicityStrain(am.getSpecies().getEthnicityStrain());
 
         if (am.getSpecies().getEthnicityStrainUnctrlVocab() != null) {
-        	modelChar.setEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
+            modelChar.setEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
             modelChar.setEthnicityStrainUnctrlVocab(am.getSpecies().getEthnicityStrainUnctrlVocab());
         }
 
