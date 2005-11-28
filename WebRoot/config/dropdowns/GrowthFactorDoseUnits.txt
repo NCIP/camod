@@ -1,6 +1,6 @@
 
-µg
-µg/mouse/d
+micrograms
+micrograms/mouse/day
 mg/kg
 
 
