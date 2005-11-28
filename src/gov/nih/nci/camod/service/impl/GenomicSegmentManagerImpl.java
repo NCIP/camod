@@ -103,6 +103,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         theSegmentType.setName(inGenomicSegmentData.getSegmentName());
 
         if (inGenomicSegmentData.getOtherSegmentName() != null) {
+        	theSegmentType.setName(null);
             theSegmentType.setNameUnctrlVocab(inGenomicSegmentData.getOtherSegmentName());
 
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");

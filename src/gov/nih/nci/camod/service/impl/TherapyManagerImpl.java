@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.17 2005-11-18 22:50:02 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.18 2005-11-28 13:46:53 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/11/18 22:50:02  georgeda
+ * Defect #184.  Cleanup editing of old models
+ *
  * Revision 1.16  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -569,7 +572,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         if (inAdministrationData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION)) {
             log.info("admin route equals other");
 
-            theTherapy.getTreatment().setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+            theTherapy.getTreatment().setAdministrativeRoute(null);
             theTherapy.getTreatment().setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
 
             log.trace("Sending Notification eMail - new Administrative Route added");
@@ -688,7 +691,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
                 e.printStackTrace();
             }
 
-            theAgent.setName(Constants.Dropdowns.OTHER_OPTION);
+            theAgent.setName(null);
             theAgent.setNameUnctrlVocab(inNameData.getOtherName());
         }
         // anytime name is not other, set uncontrolled vocab to null (covers

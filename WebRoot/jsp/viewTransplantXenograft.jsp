@@ -93,7 +93,16 @@
 	
 		<tr>		
 			<td class="GreyBox"><b>Host Strain</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.hostSpecies.ethnicityStrain}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd">
+				<c:choose>
+					<c:when test="${empty xt.hostSpecies.ethnicityStrain}">
+						<c:out value="${xt.hostSpecies.ethnicityStrainUnctrlVocab}"/>
+					</c:when>
+					<c:otherwise>
+						<c:out value="${xt.hostSpecies.ethnicityStrain}"/>
+					</c:otherwise>
+				</c:choose>&nbsp;
+            </td>
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>

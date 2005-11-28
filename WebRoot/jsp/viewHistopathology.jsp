@@ -1,11 +1,14 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/11/22 18:58:52  georgeda
+ * Defect #171, move location of Disease to match submission page
+ *
  * Revision 1.20  2005/11/21 22:04:26  georgeda
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.21 2005-11-22 18:58:52 georgeda Exp $
+ * $Id: viewHistopathology.jsp,v 1.22 2005-11-28 13:54:10 georgeda Exp $
  *
  */   
 %>
@@ -44,8 +47,8 @@
 			    <tr>
 			  	    <td class="resultsBoxWhiteNoBottom" align="left">
 						<a href="<c:out value="#histo_${histstat.count}"/>">
-							<c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
-						</a>
+							<c:out value="${h.organ.EVSPreferredDescription}"/>
+						</a>&nbsp;
 						<bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
 						<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
 							<br>&nbsp;&nbsp;-&nbsp;
@@ -54,22 +57,6 @@
 							</a>(Metastasis)
 						</c:forEach>
 	                    <br>
-						<bean:define id="cmColl" name="h" property="clinicalMarkerCollectionSorted"/>
-						<c:if test="${not empty cmColl}">
-						    <br>
-							<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="50%">
-							    <tr>
-								    <td class="formTitle" width="65%"><b>Clinical Marker Name</b></td>
-								    <td class="formTitle" width="35%"><b>Value</b></td>
-							    </tr>
-							    <c:forEach var="c" items="${cmColl}">
-								    <tr>
-						                <td class="WhiteBox"><c:out value="${c.name}"/>&nbsp;</td>
-						                <td class="WhiteBoxRightEnd"><c:out value="${c.value}"/>&nbsp;</td>
-								    </tr>
-							    </c:forEach>
-						    </table>
-						</c:if>
 				    </td>			
 			    </tr>
 			</c:forEach>
@@ -163,20 +150,10 @@
 					<c:out value="${h.microscopicDescription}" escapeXml="false"/>&nbsp;
 				</td>
 			</tr>
-		
-			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
-				    <bean:define id="dc" name="h" property="diseaseCollection"/>
-				    <c:forEach var="d" items="${dc}">
-					    <c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
-					</c:forEach>
-				</td>
-			</tr>
 	
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxWhite" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>&nbsp;
 					<c:if test="${not empty h.geneticAlteration.methodOfObservation}">&nbsp;<br/>
 						Method - &nbsp;
@@ -186,19 +163,40 @@
 			</tr>
 				
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Comparative Data from other Species</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxGrey" width="25%"><b>Comparative Data from other Species</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<c:out value="${h.comparativeData}" escapeXml="false" />&nbsp;
 				</td>
 			</tr>	
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.comments}" escapeXml="false" />&nbsp;
 				</td>
 			</tr>
+			
+			<bean:define id="cmColl" name="h" property="clinicalMarkerCollectionSorted"/>
+			<c:if test="${not empty cmColl}">
+				<tr>
+					<td class="resultsBoxGrey" width="25%"><b>Clinical Markers</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
+						<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="90%">
+						    <tr>
+							    <td class="formTitle" width="65%"><b>Clinical Marker Name</b></td>
+							    <td class="formTitle" width="35%"><b>Value</b></td>
+						    </tr>
+						    <c:forEach var="c" items="${cmColl}">
+							    <tr>
+					                <td class="WhiteBox"><c:out value="${c.name}"/>&nbsp;</td>
+					                <td class="WhiteBoxRightEnd"><c:out value="${c.value}"/>&nbsp;</td>
+							    </tr>
+						    </c:forEach>
+					    </table>
+					</td>
+				</tr>
+			</c:if>	
 	        <tr>
-	            <td></td>
+	            <td><a href="#">Top</a></td>
 	        </tr>
         </TABLE>
 	    <bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
@@ -227,10 +225,10 @@
 					</td>
 				</tr>	
 				<tr>
-						<td class="resultsBoxGrey" width="25%"><b>Age at Onset of Metastasis</b></td>
-						<td class="resultsBoxGreyEnd" width="75%">
-							<c:out value="${m.ageOfOnset}"/>&nbsp;
-					    </td>
+					<td class="resultsBoxGrey" width="25%"><b>Age at Onset of Metastasis</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
+						<c:out value="${m.ageOfOnset}"/>&nbsp;
+				    </td>
 				</tr>			
 	
 				<tr>
@@ -299,12 +297,11 @@
 					</td>
 				</tr>
 				<tr>
-				    <td></td>
+				    <td><a href="#">Top</a></td>
 				</tr>
 			</TABLE>
 		</c:forEach>
 	</c:forEach>
-			
 	</TABLE>
 </TABLE>
 

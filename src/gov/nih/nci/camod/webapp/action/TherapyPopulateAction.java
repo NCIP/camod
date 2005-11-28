@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.13 2005-11-18 22:50:02 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.14 2005-11-28 13:50:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/18 22:50:02  georgeda
+ * Defect #184.  Cleanup editing of old models
+ *
  * Revision 1.12  2005/11/16 19:29:13  pandyas
  * modified typo in comments
  *
@@ -76,22 +79,25 @@ public class TherapyPopulateAction extends BaseAction {
 		} else {
 			request.setAttribute("aTherapyID", aTherapyID);
 
-            if (ty.getTreatment() != null) {
-			if (ty.getTreatment().getSexDistribution() != null) {
-				therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
-			}
-			if (ty.getTreatment().getAgeAtTreatment() != null) {
-				therapyForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
+			if (ty.getTreatment() != null) {
+				if (ty.getTreatment().getSexDistribution() != null) {
+					therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
+				}
+				if (ty.getTreatment().getAgeAtTreatment() != null) {
+					therapyForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
+				}
+
+				therapyForm.setDosage(ty.getTreatment().getDosage());
+				therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+
+				if (ty.getTreatment().getAdminRouteUnctrlVocab() != null) {
+					therapyForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+					therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
+				}
 			}
 
-			therapyForm.setDosage(ty.getTreatment().getDosage());
-            therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
-            therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
-
-            }
-            
 			therapyForm.setName(ty.getAgent().getName());
-			
+
 			if (ty.getAgent().getCasNumber() != null) {
 				therapyForm.setCASNumber(ty.getAgent().getCasNumber());
 			}

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.31 2005-11-22 18:14:01 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.32 2005-11-28 13:53:42 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2005/11/22 18:14:01  georgeda
+ * Defect #133, Cleaned up Gene ID
+ *
  * Revision 1.30  2005/11/21 19:42:52  georgeda
  * Defect #139, do not add the segment type everytime; only when null.
  *
@@ -501,20 +504,18 @@
         </tr>
                  
         <tr>
-            <td class="WhiteBox" width="35%"><b>Modification Type</b></td>
+            <td class="WhiteBox" width="35%"><b>Modification Types</b></td>
             <td class="WhiteBoxRightEnd" width="65%">
 				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
 				    <li>
-						<c:choose>
-							<c:when test="${empty modType.name}">
-								<c:out value="${modType.modTypeUnctrlVocab}"/>&nbsp;
-							</c:when>
-							<c:otherwise>
-								<c:out value="${modType.name}"/>&nbsp;
-							</c:otherwise>
-						</c:choose>
+						<c:out value="${modType.name}"/>&nbsp;
 					</li>	
 				</c:forEach>
+				<c:if test="${not empty tm.modTypeUnctrlVocab}">
+				    <li>
+						<c:out value="${tm.modTypeUnctrlVocab}"/>&nbsp;
+					</li>	
+				</c:if>
             </td>
         </tr>
        <tr>

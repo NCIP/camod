@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.11 2005-11-16 15:31:05 georgeda Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.12 2005-11-28 13:45:05 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/16 15:31:05  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.10  2005/11/14 14:18:33  georgeda
  * Cleanup
  *
@@ -149,7 +152,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
                 e.printStackTrace();
             }            
 
-            inGeneDelivery.setViralVector(Constants.Dropdowns.OTHER_OPTION);
+            inGeneDelivery.setViralVector(null);
             inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData.getOtherViralVector());
         }        
         // anytime viral vector is not other set uncontrolled vocab to null (covers editing)

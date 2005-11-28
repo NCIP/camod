@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.18 2005-11-16 15:31:05 georgeda Exp $
+ * $Id: XenograftManagerImpl.java,v 1.19 2005-11-28 13:46:53 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/11/16 15:31:05  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.17  2005/11/14 14:19:37  georgeda
  * Cleanup
  *
@@ -14,14 +17,13 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.XenograftManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.XenograftData;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -93,7 +95,6 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         /* Set other adminstrative site or selected adminstrative site */
         // save directly in administrativeSite column of table
         if (inXenograftData.getAdministrativeSite().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            System.out.println("admin site equals other");
             inXenograft.setAdministrativeSite(inXenograftData.getOtherAdministrativeSite());
             // Send e-mail for other administrativeSite
 
@@ -188,29 +189,9 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         inXenograft.setHostSpecies(theTaxon);
         inXenograft.setOriginSpecies(inAnimalModel.getSpecies());
 
-        // Convert String into a Date
-        if (inXenograftData.getHarvestDate() != null) {
-            if (!inXenograftData.getHarvestDate().equals("")) {
-                try {
-
-                    String inputFormatString = "dd/MM/yyyy";
-
-                    // parse the input - turn it into a date object
-                    DateFormat inputFormat = new SimpleDateFormat(inputFormatString);
-                    Date dateTimeValue = inputFormat.parse(inXenograftData.getHarvestDate());
-                    inXenograft.setHarvestDate(dateTimeValue);
-
-                } catch (Exception e) {
-                    // TODO: Possibly setup validator here to catch incorrect
-                    // formatting of date field
-                    System.out.println("Error: Incorrect format! " + e);
-                }
-            }
-        }
-
         // anytime the graft type is "other"
         if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION)) {
-          
+
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
             // Iterate through all the reciepts in the config file
@@ -242,13 +223,12 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                 e.printStackTrace();
             }
 
-            inXenograft.setGraftType(Constants.Dropdowns.OTHER_OPTION);
+            inXenograft.setGraftType(null);
             inXenograft.setGraftTypeUnctrlVocab(inXenograftData.getOtherGraftType());
         }
         // anytime graft type is not other set uncontrolled vocab to null
         // (covers editing)
         else {
-            System.out.println("graft type not other");
             inXenograft.setGraftType(inXenograftData.getGraftType());
             inXenograft.setGraftTypeUnctrlVocab(null);
         }

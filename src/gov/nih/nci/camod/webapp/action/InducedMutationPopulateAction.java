@@ -38,8 +38,10 @@ public class InducedMutationPopulateAction extends BaseAction {
             EnvironmentalFactor environFactor = theInducedMutation.getEnvironmentalFactor();
 
             inducedMutationForm.setType(environFactor.getType());
-            if (environFactor.getTypeUnctrlVocab() != null)
+            if (environFactor.getTypeUnctrlVocab() != null) {
                 inducedMutationForm.setOtherType(environFactor.getTypeUnctrlVocab());
+                inducedMutationForm.setType(Constants.Dropdowns.OTHER_OPTION);
+            }
 
             inducedMutationForm.setCASNumber(environFactor.getCasNumber());
             inducedMutationForm.setGeneId(theInducedMutation.getGeneId());

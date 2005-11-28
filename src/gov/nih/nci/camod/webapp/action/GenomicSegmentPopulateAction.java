@@ -45,8 +45,10 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             SegmentType inSegmentType = (SegmentType) theGenomicSegment.getSegmentTypeCollection().get(0);
             genomicSegmentForm.setSegmentName(inSegmentType.getName());
 
-            if (inSegmentType.getNameUnctrlVocab() != null)
+            if (inSegmentType.getNameUnctrlVocab() != null) {
+            	genomicSegmentForm.setSegmentName(Constants.Dropdowns.OTHER_OPTION);
                 genomicSegmentForm.setOtherSegmentName(inSegmentType.getNameUnctrlVocab());
+            }
 
             genomicSegmentForm.setSegmentSize(theGenomicSegment.getSegmentSize());
             genomicSegmentForm.setCloneDesignator(theGenomicSegment.getCloneDesignator());

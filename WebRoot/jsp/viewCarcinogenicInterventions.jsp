@@ -396,9 +396,10 @@
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/></td>
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>
+					<c:out value="${cd.treatment.regimen}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
@@ -508,9 +509,10 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.dosage}"/></td>
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.regimen}"/>
+					<c:out value="${cd.treatment.regimen}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;

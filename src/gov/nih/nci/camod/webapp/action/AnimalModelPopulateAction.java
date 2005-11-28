@@ -57,6 +57,7 @@ public class AnimalModelPopulateAction extends BaseAction {
         modelChar.setEthinicityStrain(am.getSpecies().getEthnicityStrain());
 
         if (am.getSpecies().getEthnicityStrainUnctrlVocab() != null) {
+        	modelChar.setEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
             modelChar.setEthnicityStrainUnctrlVocab(am.getSpecies().getEthnicityStrainUnctrlVocab());
         }
 

@@ -1,8 +1,11 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/17 21:15:10  georgeda
+ * Defect #86.  Removed unneeded field.
  *
- * $Id: includePreclinicalTrials.jsp,v 1.7 2005-11-17 21:15:10 georgeda Exp $
+ *
+ * $Id: includePreclinicalTrials.jsp,v 1.8 2005-11-28 13:52:48 georgeda Exp $
  */
 %>
 <tr>
@@ -48,23 +51,24 @@
 </tr>
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Administration Route</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">
+		<c:choose>
+			<c:when test="${empty t.treatment.administrativeRoute}">
+				<c:out value="${t.treatment.adminRouteUnctrlVocab}"/>
+			</c:when>
+			<c:otherwise>
+				<c:out value="${t.treatment.administrativeRoute}"/>
+			</c:otherwise>
+		</c:choose>&nbsp;
+	</td>
+</tr>	
+<tr>
+	<td class="resultsBoxGrey" width="25%"><b>Biomarker</b></td>
+	<td class="resultsBoxGreyEnd" width="75%"><c:out value="${t.biomarker}"/>&nbsp;</td>
+</tr>
+<tr>
+	<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-	<c:out value="${t.treatment.administrativeRoute}"/>
-	</td>
-</tr>
-<tr>
-	<td class="resultsBoxGrey" width="25%"><b>Other Administration Route</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-	<c:out value="${t.treatment.adminRouteUnctrlVocab}"/>
-	</td>
-</tr>			
-<tr>
-	<td class="resultsBoxWhite" width="25%"><b>Biomarker</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%"><c:out value="${t.biomarker}"/>&nbsp;</td>
-</tr>
-<tr>
-	<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.comments}"/>
 	</td>
 </tr>

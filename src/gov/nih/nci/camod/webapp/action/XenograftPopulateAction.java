@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.17 2005-11-18 22:50:02 georgeda Exp $
+ * $Id: XenograftPopulateAction.java,v 1.18 2005-11-28 13:51:20 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/11/18 22:50:02  georgeda
+ * Defect #184.  Cleanup editing of old models
+ *
  * Revision 1.16  2005/11/14 14:22:37  georgeda
  * Cleanup
  *
@@ -15,21 +18,23 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.impl.XenograftManagerSingleton;
 import gov.nih.nci.camod.webapp.form.XenograftForm;
 import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public class XenograftPopulateAction extends BaseAction {
 
@@ -65,13 +70,11 @@ public class XenograftPopulateAction extends BaseAction {
 
             // If AdministrativeSite is from list set the value
             if (xenoAdminSiteDropList.contains(xeno.getAdministrativeSite())) {
-                System.out.println("\t otherAdministrativeSite Matched the list");
                 xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
             } else if (xeno.getAdministrativeSite() != null) {
 
                 // If AdministrativeSite is not from list set the "other" and
                 // enable the text field
-                System.out.println("\t otherAdministrativeSite Didn't Match the list");
                 xenograftForm.setAdministrativeSite(Constants.Dropdowns.OTHER_OPTION);
                 xenograftForm.setOtherAdministrativeSite(xeno.getAdministrativeSite());
             }
@@ -84,23 +87,13 @@ public class XenograftPopulateAction extends BaseAction {
 
             Taxon tax = xeno.getHostSpecies();
             if (tax != null) {
-            xenograftForm.setHostScientificName(tax.getScientificName());
+                xenograftForm.setHostScientificName(tax.getScientificName());
 
-            if (tax.getEthnicityStrainUnctrlVocab() != null) {
-                xenograftForm.setHostEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
-                xenograftForm.setOtherHostEthinicityStrain(tax.getEthnicityStrainUnctrlVocab());
-            } else {
-                xenograftForm.setHostEthinicityStrain(tax.getEthnicityStrain());
-            }
-            }
-            String outputFormatString = "MM/dd/yyyy";
-
-            if (xeno.getHarvestDate() != null) {
-                if (!xeno.getHarvestDate().equals("")) {
-                    // Format the date object into the new format
-                    DateFormat sdf = new SimpleDateFormat(outputFormatString);
-                    String formattedDate = sdf.format(xeno.getHarvestDate());
-                    xenograftForm.setHarvestDate(formattedDate);
+                if (tax.getEthnicityStrainUnctrlVocab() != null) {
+                    xenograftForm.setHostEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
+                    xenograftForm.setOtherHostEthinicityStrain(tax.getEthnicityStrainUnctrlVocab());
+                } else {
+                    xenograftForm.setHostEthinicityStrain(tax.getEthnicityStrain());
                 }
             }
 
@@ -135,12 +128,12 @@ public class XenograftPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<XenograftPopulateAction dropdown> Entering dropdown() ");
+        log.info("<XenograftPopulateAction dropdown> Entering dropdown() ");
 
         // setup dropdown menus
         this.dropdown(request, response, (XenograftForm) form);
 
-        System.out.println("<XenograftPopulateAction dropdown> before return submitTransplantXenograft ");
+        log.info("<XenograftPopulateAction dropdown> before return submitTransplantXenograft ");
 
         return mapping.findForward("submitTransplantXenograft");
 
@@ -156,7 +149,7 @@ public class XenograftPopulateAction extends BaseAction {
     private void dropdown(HttpServletRequest request, HttpServletResponse response, XenograftForm form)
             throws Exception {
 
-        System.out.println("<XenograftPopulateAction dropdown> Entering void dropdown()");
+        log.info("<XenograftPopulateAction dropdown> Entering void dropdown()");
 
         // Retrieve the AnimalModel current Species and Strain set in
         // ModelCharacteristics
@@ -168,7 +161,13 @@ public class XenograftPopulateAction extends BaseAction {
 
         Taxon theTaxon = animalModel.getSpecies();
         request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theTaxon.getScientificName());
-        request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrain());
+
+        if (theTaxon.getEthnicityStrain() != null) {
+            request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrain());
+        } else {
+            request.getSession()
+                    .setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrainUnctrlVocab());
+        }
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
@@ -192,7 +191,7 @@ public class XenograftPopulateAction extends BaseAction {
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP,
                 Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
-        System.out.println("<XenograftPopulateAction dropdown> Exiting void dropdown()");
+        log.info("<XenograftPopulateAction dropdown> Exiting void dropdown()");
     }
 
     /**

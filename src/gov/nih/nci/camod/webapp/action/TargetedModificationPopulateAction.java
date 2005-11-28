@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.9 2005-11-21 16:54:36 georgeda Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.10 2005-11-28 13:50:32 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/21 16:54:36  georgeda
+ * Defect #105, added MGI number for targeted modification and added hyperlink to search pages
+ *
  * Revision 1.8  2005/11/16 19:27:47  pandyas
  * Modified Targeted Modification Types dropdown to allow multiple selections, allow the user to select "other" by itself, and allow users to select "other" along with one or more selection
  *
@@ -54,24 +57,30 @@ public class TargetedModificationPopulateAction extends BaseAction {
                 targetedModificationForm.setNumberMGI(theMutationIdentifier.getNumberMGI().toString());
             }
             
+            // Get the size of the list of modifications
+            List theTargetedModificationList = theTargetedModification.getModificationTypeCollection();
+            int theListSize = theTargetedModificationList.size();
+            
+            // We have an uncontrolled vocab, so we need to add "Other" to the list
+            if (theTargetedModification.getModTypeUnctrlVocab() != null) {
+                theListSize++;
+                targetedModificationForm.setOtherModificationType(theTargetedModification.getModTypeUnctrlVocab());
+            }
+            
 			// Get the collection of Targeted Modifications
-			List theTargetedModificationList = theTargetedModification.getModificationTypeCollection();
-			String[] theTargetedMod = new String[theTargetedModificationList.size()];
+			String[] theTargetedMod = new String[theListSize];
 			for (int i = 0; i < theTargetedModificationList.size(); i++) {
 				ModificationType theModificationType = (ModificationType) theTargetedModificationList.get(i);				
 				theTargetedMod[i] = theModificationType.getName();
-				log.error("theTargetedMod[i]: " +theTargetedMod[i] );
-				//if the selection is "other"
-				if ( theTargetedMod[i].equalsIgnoreCase("Other")) {
-					//log.error("Other Modification Type Selected. " +theTargetedMod[i] );
-					targetedModificationForm.setModificationType(theTargetedMod);
-					targetedModificationForm.setOtherModificationType(theTargetedModification.getModTypeUnctrlVocab());
-				} else {
-					//log.error("Another non-other Modification Type Selected. " +theTargetedMod[i] );
-					targetedModificationForm.setModificationType(theTargetedMod);
-				}			
 			}
-            
+			
+			// Add other as the last item in the list
+			if (theTargetedModification.getModTypeUnctrlVocab() != null) {
+				theTargetedMod[theListSize - 1] = Constants.Dropdowns.OTHER_OPTION;
+			}
+			// Set the modification types
+			targetedModificationForm.setModificationType(theTargetedMod);
+			
             targetedModificationForm.setBlastocystName(theTargetedModification.getBlastocystName());
             targetedModificationForm.setComments(theTargetedModification.getComments());
             targetedModificationForm.setGeneId(theTargetedModification.getGeneId());

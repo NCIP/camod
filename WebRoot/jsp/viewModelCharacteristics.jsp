@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.22 2005-11-21 20:25:22 georgeda Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.23 2005-11-28 13:54:23 georgeda Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.22  2005/11/21 20:25:22  georgeda
+  *   Defect #155, open URL in another window
+  *
   *   Revision 1.21  2005/11/18 20:12:52  pandyas
   *   Defect #56:
   *   The stock number is linked if available.  If not available, the distributor is linked to the main web page for that distributor.  The PI (stored in stock number) for Investigator will be displayed in the column for distributor with the stock number left blank.  IMSR doesn't link to stock number at this timel, but the main page is linked to the distributor.
@@ -87,7 +90,13 @@
 		<tr>
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				<c:out value="${mdl.species.ethnicityStrain}"/>&nbsp;
+			    <c:if test="${not empty mdl.species.ethnicityStrain}">
+				    <c:out value="${mdl.species.ethnicityStrain}"/>
+				</c:if>
+				<c:if test="${not empty mdl.species.ethnicityStrainUnctrlVocab}">
+				    <c:out value="${mdl.species.ethnicityStrainUnctrlVocab}"/>
+				</c:if>
+				&nbsp;
 			</td>
 		</tr>		
 		

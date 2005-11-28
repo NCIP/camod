@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.19 2005-11-16 19:47:13 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.20 2005-11-28 13:46:53 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/11/16 19:47:13  pandyas
+ * Modified Targeted Modification Types dropdown to allow multiple selections, allow the user to select "other" by itself, and allow users to select "other" along with one or more selection
+ *
  * Revision 1.18  2005/11/16 19:32:59  pandyas
  * Modified Targeted Modification Types dropdown to allow multiple selections, allow the user to select "other" by itself, and allow users to select "other" along with one or more selection
  *
@@ -91,20 +94,19 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
 
         //if other is one of the (multiple) selections
         if (Arrays.asList(theModificationTypes).contains(Constants.Dropdowns.OTHER_OPTION)) {
-        	log.error("the Modification Type selection(s) includes other ");
+        	log.info("the Modification Type selection(s) includes other ");
             for (int i = 0; i < theModificationTypes.length; i++)   {
             	ModificationType modificationType = ModificationTypeManagerSingleton.instance().getByName(
                 		theModificationTypes[i]);
-            	log.error("theModificationTypes[i] (containing other): " + theModificationTypes[i]);
+            	log.info("theModificationTypes[i] (containing other): " + theModificationTypes[i]);
                 
             	//Add an other selection and send e-mail
                 if (theModificationTypes[i].equals(Constants.Dropdowns.OTHER_OPTION)) {
-                	//log.error("other theModificationTypes[i]: " + theModificationTypes[i]);                	
-            		//add ModTypeUnctrlVocab to Engineered Transgene Table column
+                	
             		theTargetedModification.setModTypeUnctrlVocab(inTargetedModificationData.getOtherModificationType());
             		
                 	// Add selections if not already in DB (No duplicates - during editing phase)
-                	if (!theTargetedModification.getModificationTypeCollection().contains(Constants.Dropdowns.OTHER_OPTION)) {
+                	if (!theTargetedModification.getModificationTypeCollection().contains(modificationType)) {
                     	//add id for other into the bridge table  
                 		theCurrentModificationTypeList.add(modificationType);
                 		

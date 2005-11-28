@@ -93,13 +93,15 @@ public class TaxonManagerImpl extends BaseManager implements TaxonManager {
     private void populate(Taxon inTaxon, String inScientificName, String inStrain, String inOtherStrain) {
         inTaxon.setScientificName(inScientificName);
         inTaxon.setCommonName(getCommonNameFromScientificName(inScientificName));
-        inTaxon.setEthnicityStrain(inStrain);
+        
 
         // Other is not selected, null out the uncontrolled vocab
         if (!inStrain.equals(Constants.Dropdowns.OTHER_OPTION)) {
+        	inTaxon.setEthnicityStrain(inStrain);
             inTaxon.setEthnicityStrainUnctrlVocab(null);
         } else {
             inTaxon.setEthnicityStrainUnctrlVocab(inOtherStrain);
+            inTaxon.setEthnicityStrain(null);
         }
     }
 
