@@ -55,7 +55,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Upload Construct Map<br>(Image of type .jpg , .jpeg, .gif, .sid or .tif)</label></td>
+			<td class="formRequiredLabel"><label for="field1">Upload Image<br>(Image of type .jpg , .jpeg, .gif, .sid or .tif)</label></td>
 			<td class="formField">
 			
 			<html:form action="<%= actionName %>" focus="fileLocation" enctype="multipart/form-data">	
@@ -76,7 +76,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Title of Construct<br>(Enter info only when uploading image)</label></td>
+			<td class="formRequiredLabel"><label for="field1">Title of Image<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="title" rows="4" cols="40"/>
 			</td>
@@ -84,7 +84,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Description of Construct<br>(Enter info only when uploading image)</label></td>
+			<td class="formLabel"><label for="field2">Description of Image<br>(Enter info only when uploading image)</label></td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="40" />	
 		</tr>
@@ -92,7 +92,7 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 
-			<td class="formLabel"><label for="field3">Staining Type</label></td>
+			<td class="formLabel"><label for="field3">Staining Method</label></td>
 			<td class="formField">
 			<html:select styleClass="formFieldSized" size="1" property="staining" onchange="chkStaining();" >
 				<html:options name="<%= Dropdowns.STAININGDROP %>" />										
@@ -104,7 +104,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Staining Type</label></td>
+			<td class="formLabel"><label for="field1">Other Staining Method</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="otherStaining" disabled="true" size="10" />
 			</td>
