@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/11/28 13:54:10  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.21  2005/11/22 18:58:52  georgeda
  * Defect #171, move location of Disease to match submission page
  *
@@ -8,7 +11,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.22 2005-11-28 13:54:10 georgeda Exp $
+ * $Id: viewHistopathology.jsp,v 1.23 2005-11-28 16:22:17 pandyas Exp $
  *
  */   
 %>
@@ -169,7 +172,7 @@
 				</td>
 			</tr>	
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
+				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.comments}" escapeXml="false" />&nbsp;
 				</td>

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.32 2005-11-28 13:53:42 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.33 2005-11-28 16:21:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2005/11/28 13:53:42  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.31  2005/11/22 18:14:01  georgeda
  * Defect #133, Cleaned up Gene ID
  *
@@ -334,7 +337,7 @@
 			</td>			
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Comments</b></td>
+			<td class="WhiteBox" width="35%"><b>Comment</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
