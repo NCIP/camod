@@ -1,3 +1,11 @@
+<%
+ /*
+  * $Id: subSubmitMenu.jsp,v 1.44 2005-11-28 20:00:07 georgeda Exp $
+  *
+  * $Log: not supported by cvs2svn $
+  *
+  */
+%>
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>
 <%@ page import="gov.nih.nci.camod.domain.Publication" %>
@@ -151,7 +159,7 @@
 
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="GeneDeliveryPopulateAction.do?method=dropdown">Enter Gene Delivery</html:link><br>
 			  <logic:iterate id="aTherapy" name="genedelivery_list" type="GeneDelivery">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="geneInVirus" filter="true"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 			  
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factor</html:link><br>		
