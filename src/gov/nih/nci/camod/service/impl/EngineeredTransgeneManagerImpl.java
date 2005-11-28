@@ -187,7 +187,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         if (inEngineeredTransgene.getTaxonCollection().size() > 0)
             inEngineeredTransgene.getTaxonCollection().removeAll(inEngineeredTransgene.getTaxonCollection());
 
-        if (inEngineeredTransgeneData.getScientificName().equals("Other")) {
+        if (inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
             tax.setScientificName(inEngineeredTransgeneData.getOtherScientificName());
             inEngineeredTransgene.addTaxon(tax);
             

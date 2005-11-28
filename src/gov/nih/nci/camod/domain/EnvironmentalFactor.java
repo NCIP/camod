@@ -6,7 +6,6 @@
  */
 package gov.nih.nci.camod.domain;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
@@ -48,9 +47,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      */
     public String getDisplayName() {
         String theDisplayName = name;
-        if (Constants.Dropdowns.OTHER_OPTION.equals(name)) {
-            theDisplayName += " - " + nameUnctrlVocab;
-        } else if (theDisplayName == null && nameUnctrlVocab != null) {
+        if (theDisplayName == null && nameUnctrlVocab != null) {
             theDisplayName = "Other - " + nameUnctrlVocab;
         }
 

@@ -6,11 +6,10 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.io.Serializable;
-
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+
+import java.io.Serializable;
 
 /**
  * @author rajputs
@@ -20,137 +19,139 @@ import gov.nih.nci.camod.util.HashCodeUtil;
  */
 public class GeneDelivery extends BaseObject implements Comparable, Serializable, Duplicatable {
 
-    private static final long serialVersionUID = 3259385453799404851L;
-    
-    private String viralVector;
-    private String viralVectorUnctrlVocab;
-    private String geneInVirus;
-    private Organ organ;
-    private Treatment treatment;
+	private static final long serialVersionUID = 3259385453799404851L;
 
-    /**
-     * @return Returns the display name.
-     */
-    public String getDisplayName() {
-        String theDisplayName = "";
-        if (viralVector != null) {
-            theDisplayName = viralVector;
+	private String viralVector;
+
+	private String viralVectorUnctrlVocab;
+
+	private String geneInVirus;
+
+	private Organ organ;
+
+	private Treatment treatment;
+
+	/**
+	 * @return Returns the display name.
+	 */
+	public String getDisplayName() {
+		String theDisplayName = viralVector;
+        if (theDisplayName == null && viralVectorUnctrlVocab != null) {
+            theDisplayName = "Other - " + viralVectorUnctrlVocab;
         }
-        
-  
-        if (viralVector.equals(Constants.Dropdowns.OTHER_OPTION))
-        {
-            theDisplayName += " - " + viralVectorUnctrlVocab;
-        }
-        return theDisplayName;
-    }
-    
-    /**
-     * @return Returns the treatment.
-     */
-    public Treatment getTreatment() {
-        return treatment;
-    }
+		return theDisplayName;
+	}
 
-    /**
-     * @param treatment
-     *            The treatment to set.
-     */
-    public void setTreatment(Treatment treatment) {
-        this.treatment = treatment;
-    }
+	/**
+	 * @return Returns the treatment.
+	 */
+	public Treatment getTreatment() {
+		return treatment;
+	}
 
-    /**
-     * @return Returns the organ.
-     */
-    public Organ getOrgan() {
-        return organ;
-    }
+	/**
+	 * @param treatment
+	 *            The treatment to set.
+	 */
+	public void setTreatment(Treatment treatment) {
+		this.treatment = treatment;
+	}
 
-    /**
-     * @param organ
-     *            The organ to set.
-     */
-    public void setOrgan(Organ organ) {
-        this.organ = organ;
-    }
+	/**
+	 * @return Returns the organ.
+	 */
+	public Organ getOrgan() {
+		return organ;
+	}
 
-    /**
-     * @return Returns the geneInVirus.
-     */
-    public String getGeneInVirus() {
-        return geneInVirus;
-    }
+	/**
+	 * @param organ
+	 *            The organ to set.
+	 */
+	public void setOrgan(Organ organ) {
+		this.organ = organ;
+	}
 
-    /**
-     * @param geneInVirus
-     *            The geneInVirus to set.
-     */
-    public void setGeneInVirus(String geneInVirus) {
-        this.geneInVirus = geneInVirus;
-    }
+	/**
+	 * @return Returns the geneInVirus.
+	 */
+	public String getGeneInVirus() {
+		return geneInVirus;
+	}
 
-    /**
-     * @return Returns the viralVector.
-     */
-    public String getViralVector() {
-        return viralVector;
-    }
+	/**
+	 * @param geneInVirus
+	 *            The geneInVirus to set.
+	 */
+	public void setGeneInVirus(String geneInVirus) {
+		this.geneInVirus = geneInVirus;
+	}
 
-    /**
-     * @param viralVector
-     *            The viralVector to set.
-     */
-    public void setViralVector(String viralVector) {
-        this.viralVector = viralVector;
-    }
+	/**
+	 * @return Returns the viralVector.
+	 */
+	public String getViralVector() {
+		return viralVector;
+	}
 
-    /**
-     * @return Returns the viralVectorUnctrlVocab.
-     */
-    public String getViralVectorUnctrlVocab() {
-        return viralVectorUnctrlVocab;
-    }
+	/**
+	 * @param viralVector
+	 *            The viralVector to set.
+	 */
+	public void setViralVector(String viralVector) {
+		this.viralVector = viralVector;
+	}
 
-    /**
-     * @param viralVectorUnctrlVocab
-     *            The viralVectorUnctrlVocab to set.
-     */
-    public void setViralVectorUnctrlVocab(String viralVectorUnctrlVocab) {
-        this.viralVectorUnctrlVocab = viralVectorUnctrlVocab;
-    }
+	/**
+	 * @return Returns the viralVectorUnctrlVocab.
+	 */
+	public String getViralVectorUnctrlVocab() {
+		return viralVectorUnctrlVocab;
+	}
 
-  
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getViralVector() + " - " + this.getViralVectorUnctrlVocab() + " - " + this.getGeneInVirus();
-       return result;
-     }    
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final GeneDelivery obj = (GeneDelivery) o;
-      if (HashCodeUtil.notEqual(this.getOrgan(), obj.getOrgan())) return false;
-      return true;
-    }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getOrgan());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof GeneDelivery) && (this.getOrgan() != null) && (((GeneDelivery)o).getOrgan() != null)) {   
-        int result = this.getOrgan().compareTo( ((GeneDelivery)o).getOrgan() );
-        if (result != 0) { return result; }               
-      }
+	/**
+	 * @param viralVectorUnctrlVocab
+	 *            The viralVectorUnctrlVocab to set.
+	 */
+	public void setViralVectorUnctrlVocab(String viralVectorUnctrlVocab) {
+		this.viralVectorUnctrlVocab = viralVectorUnctrlVocab;
+	}
 
-      return super.compareTo(o);
-    }      
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		String result = super.toString() + " - ";
+		result += this.getViralVector() + " - " + this.getViralVectorUnctrlVocab() + " - " + this.getGeneInVirus();
+		return result;
+	}
+
+	public boolean equals(Object o) {
+		if (!super.equals(o))
+			return false;
+		if (!(this.getClass().isInstance(o)))
+			return false;
+		final GeneDelivery obj = (GeneDelivery) o;
+		if (HashCodeUtil.notEqual(this.getOrgan(), obj.getOrgan()))
+			return false;
+		return true;
+	}
+
+	public int hashCode() {
+		int result = HashCodeUtil.SEED;
+		result = HashCodeUtil.hash(result, this.getOrgan());
+		return result + super.hashCode();
+	}
+
+	public int compareTo(Object o) {
+		if ((o instanceof GeneDelivery) && (this.getOrgan() != null) && (((GeneDelivery) o).getOrgan() != null)) {
+			int result = this.getOrgan().compareTo(((GeneDelivery) o).getOrgan());
+			if (result != 0) {
+				return result;
+			}
+		}
+
+		return super.compareTo(o);
+	}
 
 }
