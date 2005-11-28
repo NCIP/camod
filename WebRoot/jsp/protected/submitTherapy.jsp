@@ -275,21 +275,7 @@ function chkOtherAdminRoute() {
 			</html:select>
 		</td>
 	</tr>	
-	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor Progression:</label>
-		<camod:cshelp mapId="therapy_help" key="THERAPY.TUMOR_RESPONSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
-		<td class="formField">		
-			<label for="field3">Time to preneoplastic lesion malignancy metastais</label>
-			<br>
-			<html:text styleClass="formFieldUnSized" property="tumorResponse"  size="15" />
-			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="tumorAgeUnit" >												
-				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
-			</html:select>
-		</td>			
-	</tr>	
+	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Biomarker:</label>
