@@ -1,11 +1,14 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/28 13:52:48  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.7  2005/11/17 21:15:10  georgeda
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.8 2005-11-28 13:52:48 georgeda Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.9 2005-11-28 16:31:48 pandyas Exp $
  */
 %>
 <tr>
@@ -18,35 +21,11 @@
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.experiment}"/>
 	</td>
-</tr>			
-<tr>
-	<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-	<c:out value="${t.results}"/>
-	</td>
 </tr>
-<tr>
-	<td class="resultsBoxWhite" width="25%"><b>Toxicity Grade</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-	<c:out value="${t.toxicityGrade}"/>
-	</td>
-</tr>			
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Dose</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 	<c:out value="${t.treatment.dosage}"/>
-	</td>
-</tr>
-<tr>
-	<td class="resultsBoxWhite" width="25%"><b>Age at Treatment</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-	<c:out value="${t.treatment.ageAtTreatment}"/>
-	</td>
-</tr>			
-<tr>
-	<td class="resultsBoxGrey" width="25%"><b>Gender</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-	<c:out value="${t.treatment.sexDistribution.type}"/>
 	</td>
 </tr>
 <tr>
@@ -61,13 +40,37 @@
 			</c:otherwise>
 		</c:choose>&nbsp;
 	</td>
-</tr>	
+</tr>
+<tr>
+	<td class="resultsBoxGrey" width="25%"><b>Gender</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<c:out value="${t.treatment.sexDistribution.type}"/>
+	</td>
+</tr>
+<tr>
+	<td class="resultsBoxWhite" width="25%"><b>Age at Treatment</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<c:out value="${t.treatment.ageAtTreatment}"/>
+	</td>
+</tr>
+<tr>
+	<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<c:out value="${t.results}"/>
+	</td>
+</tr>
+<tr>
+	<td class="resultsBoxWhite" width="25%"><b>Toxicity Grade</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<c:out value="${t.toxicityGrade}"/>
+	</td>
+</tr>			
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Biomarker</b></td>
 	<td class="resultsBoxGreyEnd" width="75%"><c:out value="${t.biomarker}"/>&nbsp;</td>
 </tr>
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Comments</b></td>
+	<td class="resultsBoxWhite" width="25%"><b>Comment </b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.comments}"/>
 	</td>
