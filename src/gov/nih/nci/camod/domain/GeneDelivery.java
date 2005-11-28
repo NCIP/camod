@@ -1,8 +1,9 @@
-/*
- * Created on May 5, 2005
+/**
+ * 
+ * $Id: GeneDelivery.java,v 1.10 2005-11-28 20:20:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
+ * 
  */
 package gov.nih.nci.camod.domain;
 
