@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.18 2005-11-28 13:51:20 georgeda Exp $
+ * $Id: XenograftPopulateAction.java,v 1.19 2005-11-28 22:52:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/11/28 13:51:20  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.17  2005/11/18 22:50:02  georgeda
  * Defect #184.  Cleanup editing of old models
  *
@@ -95,6 +98,16 @@ public class XenograftPopulateAction extends BaseAction {
                 } else {
                     xenograftForm.setHostEthinicityStrain(tax.getEthnicityStrain());
                 }
+            }
+            
+            // since we are always querying from concept code (save and edit),
+            // simply display EVSPreferredDescription
+            if (xeno.getOrgan() != null) {            
+            xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+            System.out.println("setOrgan= " + xeno.getOrgan().getEVSPreferredDescription());
+
+            xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
+            System.out.println("OrganTissueCode= " + xeno.getOrgan().getConceptCode());
             }
 
             // Set the other flag or the normal graft type

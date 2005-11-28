@@ -10,6 +10,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
 
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
@@ -112,6 +114,22 @@
 		<td class="formLabel"><label for="field1">if other Strain:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" disabled="true" property="otherHostEthinicityStrain" size="30" />	
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+			<camod:cshelp mapId="histopathology_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+
+			<a href="javascript:showTissueTree('xenograftForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+				<IMG src="images\selectUP.gif" align=middle border=0>
+			</a>
+		</td>
+		<td class="formField">
+			<html:hidden property="organTissueCode"/>
+			<input type="hidden" name="organTissueName" />				
+			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 		</td>
 	</tr>
 

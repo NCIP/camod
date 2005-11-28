@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftForm.java,v 1.10 2005-11-11 16:28:36 pandyas Exp $
+ * $Id: XenograftForm.java,v 1.11 2005-11-28 22:49:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/11 16:28:36  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -45,6 +48,10 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     protected String hostScientificName;
     protected String hostEthinicityStrain;
     protected String otherHostEthinicityStrain;
+    
+	protected String organ;
+	protected String organTissueName;
+	protected String organTissueCode;    
 
     /**
      * @return Returns the name.
@@ -254,6 +261,43 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     public void setOtherGraftType(String otherGraftType) {
         this.otherGraftType = otherGraftType;
     }
+    
+	/**
+	 * @return Returns the organ.
+	 */	
+	public String getOrgan() {
+		return organ;
+	}
+	/**
+	 * @param organ The organ to set.
+	 */	
+	public void setOrgan( String organ ) {
+		this.organ = organ;
+	}
+	/**
+	 * @return Returns the organTissueName.
+	 */	
+	public String getOrganTissueName() {
+		return organTissueName;
+	}
+	/**
+	 * @param organTissueName The organTissueName to set.
+	 */	
+	public void setOrganTissueName( String organTissueName ) {
+		this.organTissueName = organTissueName;
+	}
+	/**
+	 * @return Returns the organTissueCode (concept code).
+	 */	
+	public String getOrganTissueCode() {
+		return organTissueCode;
+	}
+	/**
+	 * @param organTissueCode The organTissueCode (concept code) to set .
+	 */	
+	public void setOrganTissueCode( String organTissueCode ) {
+		this.organTissueCode = organTissueCode;
+	}	    
 
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         name = null;

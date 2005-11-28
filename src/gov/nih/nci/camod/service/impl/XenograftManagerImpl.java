@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.19 2005-11-28 13:46:53 georgeda Exp $
+ * $Id: XenograftManagerImpl.java,v 1.20 2005-11-28 22:54:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/11/28 13:46:53  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.18  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -18,9 +21,11 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.domain.Taxon;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.XenograftManager;
+import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.XenograftData;
 
@@ -185,6 +190,59 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
             }
         }
 
+        /*
+         * Add a Organ to AnimalModel with correct IDs, conceptCode, only if organ is selected by user
+         */        
+        if (inXenograftData.getOrganTissueCode() !=null && inXenograftData.getOrganTissueCode().length() >0){
+        	log.info("newConceptCode is not null: ");
+        	
+        	String newConceptCode = inXenograftData.getOrganTissueCode();
+        	log.info("newConceptCode: " + newConceptCode);
+        		
+            	// Organ will be null for new submissions 
+            	if (inXenograft.getOrgan() == null) {
+        			log.info("Organ is new so create new object and retrieve attributes");            		
+
+            		inXenograft.setOrgan(new Organ());
+        		
+            		/*
+            		 * Always get/store organ name through the concept code - never deal
+            		 * with converting name back and forth
+            		 */
+            		String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inXenograftData.getOrganTissueCode());
+
+            		log.info("preferedOrganName: " + preferedOrganName);
+            		inXenograft.getOrgan().setName(preferedOrganName);
+
+            		log.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: "
+    	        		+ inXenograftData.getOrganTissueCode());
+            		inXenograft.getOrgan().setConceptCode(inXenograftData.getOrganTissueCode());
+        	
+            	} else {
+            		//  edited screen - submit organ only if changed
+           			log.info("Organ is modified so compare concept code in DB");
+           			
+            		String oldConceptCode = inXenograft.getOrgan().getConceptCode();
+            		log.info("oldConceptCode: " + oldConceptCode);
+
+            		if (!newConceptCode.equals(oldConceptCode)) {
+            			log.info("oldConceptCode != newConceptCode: "  );
+            			/*
+            			 * Always get/store organ name through the concept code - never deal
+            			 * with converting name back and forth
+            			 */
+            			String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inXenograftData.getOrganTissueCode());
+            		
+            			log.info("preferedOrganName: " + preferedOrganName);
+            			inXenograft.getOrgan().setName(preferedOrganName);
+
+            			log.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: "
+            					+ inXenograftData.getOrganTissueCode());
+            			inXenograft.getOrgan().setConceptCode(inXenograftData.getOrganTissueCode());
+            		}
+            	}
+        } 
+        
         // Taxon
         inXenograft.setHostSpecies(theTaxon);
         inXenograft.setOriginSpecies(inAnimalModel.getSpecies());

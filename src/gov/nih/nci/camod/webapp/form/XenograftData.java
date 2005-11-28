@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.3 2005-11-08 17:47:08 pandyas Exp $
+ * $Id: XenograftData.java,v 1.4 2005-11-28 22:49:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/11/08 17:47:08  pandyas
+ * modified Xenograft dropdown
+ *
  * Revision 1.2  2005/09/29 18:31:59  georgeda
  * Removed mice age
  *
@@ -19,59 +22,71 @@ package gov.nih.nci.camod.webapp.form;
  */
 public interface XenograftData {
 
-    public String getHostScientificName();
+	public String getHostScientificName();
 
-    public void setHostScientificName(String name);
+	public void setHostScientificName(String name);
 
-    public String getHostEthinicityStrain();
+	public String getHostEthinicityStrain();
 
-    public void setHostEthinicityStrain(String name);
+	public void setHostEthinicityStrain(String name);
 
-    public String getOtherHostEthinicityStrain();
+	public String getOtherHostEthinicityStrain();
 
-    public void setOtherHostEthinicityStrain(String name);
+	public void setOtherHostEthinicityStrain(String name);
 
-    public String getName();
+	public String getName();
 
-    public void setName(String name);
+	public void setName(String name);
 
-    public String getATCCNumber();
+	public String getATCCNumber();
 
-    public void setATCCNumber(String ATCCNumber);
+	public void setATCCNumber(String ATCCNumber);
 
-    public String getParentalCellLineName();
+	public String getParentalCellLineName();
 
-    public void setParentalCellLineName(String parentalCellLineName);
+	public void setParentalCellLineName(String parentalCellLineName);
 
-    public String getCellAmount();
+	public String getCellAmount();
 
-    public void setCellAmount(String cellAmount);
+	public void setCellAmount(String cellAmount);
 
-    public String getHarvestDate();
+	public String getHarvestDate();
 
-    public void setHarvestDate(String harvestDate);
+	public void setHarvestDate(String harvestDate);
 
-    public String getModificationDescription();
+	public String getModificationDescription();
 
-    public void setModificationDescription(String modificationDescription);
+	public void setModificationDescription(String modificationDescription);
 
-    public String getGeneticManipulation();
+	public String getGeneticManipulation();
 
-    public void setGeneticManipulation(String geneticManipulation);
+	public void setGeneticManipulation(String geneticManipulation);
 
-    public String getAdministrativeSite();
+	public String getAdministrativeSite();
 
-    public void setAdministrativeSite(String administrativeSite);
-    
-    public String getOtherAdministrativeSite(); 
+	public void setAdministrativeSite(String administrativeSite);
 
-    public void setOtherAdministrativeSite(String otherAdministrativeSite);    
+	public String getOtherAdministrativeSite();
 
-    public String getGraftType();
+	public void setOtherAdministrativeSite(String otherAdministrativeSite);
 
-    public void setGraftType(String graftType);
+	public String getGraftType();
 
-    public String getOtherGraftType();
+	public void setGraftType(String graftType);
 
-    public void setOtherGraftType(String otherGraftType);
+	public String getOtherGraftType();
+
+	public void setOtherGraftType(String otherGraftType);
+
+	public String getOrgan();
+
+	public void setOrgan(String organ);
+
+	public String getOrganTissueName();
+
+	public void setOrganTissueName(String organTissueName);
+
+	public String getOrganTissueCode();
+
+	public void setOrganTissueCode(String organTissueCode);
 }

@@ -23,6 +23,13 @@
 
 	<c:forEach var="xt" items="${mdl.xenograftCollection}" 
 			       varStatus="stat">
+
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="2">
+				<c:out value="${xt.name}"/>
+				</td>
+			</tr>
+			       
 		<tr>
 			<td class="GreyBox"><b>Cell Line/Transplant:</b></td>
 			<td class="GreyBoxRightEnd"><c:out value="${xt.name}"/>&nbsp;</td>
@@ -49,11 +56,12 @@
             </td>
 		</tr>
 		<tr>
-			<td class="WhiteBox"><b>Organ of the Graft/Transplant</b></td>
+			<td class="WhiteBox"><b>Organ/Tissue</b></td>
 			<td class="WhiteBoxRightEnd">
-				<c:out value="${xt.organ.EVSPreferredDescription}"/>&nbsp;
+					<c:out value="${xt.organ.EVSPreferredDescription}"/>
 			</td>
-		</tr>				
+		</tr>
+						
 		<tr>
 			<td class="GreyBox"><b>Graft Type</b></td>
 			<td class="GreyBoxRightEnd">
@@ -99,7 +107,7 @@
 			<td class="WhiteBox"><b>Host Species and Strain</b></td>
 			<td class="WhiteBoxRightEnd">
 				<c:out value="${xt.originSpecies.scientificName}"/>&nbsp;
-				<c:if test="${not empty xt.originSpecies.abbreviation}">(<c:out value="${xt.originSpecies.abbreviation}"/>)</c:if>
+				<c:if test="${not empty xt.originSpecies.abbreviation}">(<c:out value="${xt.originSpecies.abbreviation}"/>)</c:if>&nbsp;
 				<c:out value="${xt.originSpecies.ethnicityStrain}"/>
 			</td>
 		</tr>
