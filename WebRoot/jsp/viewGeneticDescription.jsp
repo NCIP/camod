@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.33 2005-11-28 16:21:40 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.34 2005-11-28 18:31:57 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2005/11/28 16:21:40  pandyas
+ * Defect #187:  Changed Comments to Comment
+ *
  * Revision 1.32  2005/11/28 13:53:42  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -265,10 +268,10 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Conditional Type</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-				<c:if test="${tg.conditionality.conditionedBy == 1}">
+				<c:if test="${tg.conditionality.conditionedBy == '1'}">
 				    Conditional
 				</c:if>
-				<c:if test="${tg.conditionality.conditionedBy == 0}">
+				<c:if test="${tg.conditionality.conditionedBy == '0'}">
 				    Not Conditional
 				</c:if>&nbsp;
 			</td>
@@ -548,10 +551,10 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Conditional Type</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			    <c:if test="${tm.conditionality.conditionedBy == 1}">
+			    <c:if test="${tm.conditionality.conditionedBy == '1'}">
 				    Conditional
 				</c:if>
-				<c:if test="${tm.conditionality.conditionedBy == 0}">
+				<c:if test="${tm.conditionality.conditionedBy == '0'}">
 				    Not Conditional
 				</c:if>&nbsp;
 			</td>

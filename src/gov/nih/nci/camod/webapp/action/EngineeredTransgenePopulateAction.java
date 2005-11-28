@@ -167,9 +167,16 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
             engineeredTransgeneForm.setGeneFunctions(geneFunction);
 
             // Conditionality
-            Conditionality inConditionality = theEngineeredTransgene.getConditionality();
-            engineeredTransgeneForm.setConditionedBy(inConditionality.getConditionedBy());
-            engineeredTransgeneForm.setDescription(inConditionality.getDescription());
+            Conditionality theConditionality = theEngineeredTransgene.getConditionality();
+            if (theConditionality != null) {
+                if ("1".equals(theConditionality.getConditionedBy())) {
+                    engineeredTransgeneForm.setConditionedBy(Constants.CONDITIONAL);
+                } else {
+                    engineeredTransgeneForm.setConditionedBy(Constants.NOT_CONDITIONAL);
+                }
+
+                engineeredTransgeneForm.setDescription(theConditionality.getDescription());
+            }
 
             // Additional Features / Comments
             engineeredTransgeneForm.setComments(theEngineeredTransgene.getComments());

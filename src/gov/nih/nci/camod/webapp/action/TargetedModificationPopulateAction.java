@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.10 2005-11-28 13:50:32 georgeda Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.11 2005-11-28 18:31:57 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/28 13:50:32  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.9  2005/11/21 16:54:36  georgeda
  * Defect #105, added MGI number for targeted modification and added hyperlink to search pages
  *
@@ -86,9 +89,18 @@ public class TargetedModificationPopulateAction extends BaseAction {
             targetedModificationForm.setGeneId(theTargetedModification.getGeneId());
             targetedModificationForm.setEsCellLineName(theTargetedModification.getEsCellLineName());
 
-            Conditionality cond = theTargetedModification.getConditionality();
-            targetedModificationForm.setConditionedBy(cond.getConditionedBy());
-            targetedModificationForm.setDescription(cond.getDescription());
+            // Conditionality
+            Conditionality theConditionality = theTargetedModification.getConditionality();
+            if (theConditionality != null) {
+                if ("1".equals(theConditionality.getConditionedBy())) {
+                    targetedModificationForm.setConditionedBy(Constants.CONDITIONAL);
+                } else {
+                    targetedModificationForm.setConditionedBy(Constants.NOT_CONDITIONAL);
+                }
+
+                targetedModificationForm.setDescription(theConditionality.getDescription());
+                targetedModificationForm.setDescription(theConditionality.getDescription());
+            }
 
             Image image = theTargetedModification.getImage();
             if (image != null) {

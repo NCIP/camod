@@ -151,13 +151,16 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             Transgene inEngineeredTransgene, HttpServletRequest request) throws Exception {
 
         log.trace("Entering populateEngineeredTransgene");
-        
+
         // Grab the current modelID from the session
-        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);            
-		AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(theModelId); 
-		
-		/* Get the e-mail resource once for this method - used many times to send e-mails */
-        ResourceBundle theBundle = ResourceBundle.getBundle("camod");            
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(theModelId);
+
+        /*
+         * Get the e-mail resource once for this method - used many times to
+         * send e-mails
+         */
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
         // Iterate through all the reciepts in the config file
         String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
@@ -167,8 +170,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             inRecipients[i] = st.nextToken();
         }
 
-        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);        
-       
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+
         String inFrom = theAnimalModel.getSubmitter().getEmailAddress();
         /* Get the e-mail resource ended */
 
@@ -190,10 +193,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         if (inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
             tax.setScientificName(inEngineeredTransgeneData.getOtherScientificName());
             inEngineeredTransgene.addTaxon(tax);
-            
-            log.trace("Sending Notification eMail - new ScientificName added");
-            
 
+            log.trace("Sending Notification eMail - new ScientificName added");
 
             // gather message keys and variable values to build the e-mail
             // content with
@@ -211,8 +212,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             } catch (Exception e) {
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
-            } 
-            
+            }
+
         } else {
             tax.setScientificName(inEngineeredTransgeneData.getScientificName());
             inEngineeredTransgene.addTaxon(tax);
@@ -236,7 +237,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             tax1.setScientificName(inEngineeredTransgeneData.getTranscriptional1_otherSpecies());
             regElement.setTaxon(tax1);
             inEngineeredTransgene.addRegulatoryElement(regElement);
-            
+
             // gather message keys and variable values to build the e-mail
             // content with
             String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
@@ -253,9 +254,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             } catch (Exception e) {
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
-            }            
-            
-            
+            }
+
         } else {
             tax1.setScientificName(inEngineeredTransgeneData.getTranscriptional1_species());
             regElement.setTaxon(tax1);
@@ -277,7 +277,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     regElement2.setTaxon(tax2);
                     inEngineeredTransgene.addRegulatoryElement(regElement2);
 
-                    // gather message keys and variable values to build the e-mail
+                    // gather message keys and variable values to build the
+                    // e-mail
                     // content with
                     String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
                     Map values = new TreeMap();
@@ -293,9 +294,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     } catch (Exception e) {
                         log.error("Caught exception sending mail: ", e);
                         e.printStackTrace();
-                    }                    
-                    
-                    
+                    }
+
                 } else {
                     tax2.setScientificName(inEngineeredTransgeneData.getTranscriptional2_species());
                     regElement2.setTaxon(tax2);
@@ -318,8 +318,9 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     tax3.setScientificName(inEngineeredTransgeneData.getTranscriptional3_otherSpecies());
                     regElement3.setTaxon(tax3);
                     inEngineeredTransgene.addRegulatoryElement(regElement3);
-                    
-                    // gather message keys and variable values to build the e-mail
+
+                    // gather message keys and variable values to build the
+                    // e-mail
                     // content with
                     String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
                     Map values = new TreeMap();
@@ -335,8 +336,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     } catch (Exception e) {
                         log.error("Caught exception sending mail: ", e);
                         e.printStackTrace();
-                    }                    
-                    
+                    }
+
                 } else {
                     tax3.setScientificName(inEngineeredTransgeneData.getTranscriptional3_species());
                     regElement3.setTaxon(tax3);
@@ -359,8 +360,9 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     taxPolyASignal.setScientificName(inEngineeredTransgeneData.getPolyASignal_otherSpecies());
                     regElementPolyASignal.setTaxon(taxPolyASignal);
                     inEngineeredTransgene.addRegulatoryElement(regElementPolyASignal);
-                    
-                    // gather message keys and variable values to build the e-mail
+
+                    // gather message keys and variable values to build the
+                    // e-mail
                     // content with
                     String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
                     Map values = new TreeMap();
@@ -376,8 +378,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     } catch (Exception e) {
                         log.error("Caught exception sending mail: ", e);
                         e.printStackTrace();
-                    }                    
-                    
+                    }
+
                 } else {
                     taxPolyASignal.setScientificName(inEngineeredTransgeneData.getPolyASignal_species());
                     regElementPolyASignal.setTaxon(taxPolyASignal);
@@ -400,8 +402,9 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     taxSpliceSites.setScientificName(inEngineeredTransgeneData.getSpliceSites_otherSpecies());
                     regElementSpliceSites.setTaxon(taxSpliceSites);
                     inEngineeredTransgene.addRegulatoryElement(regElementSpliceSites);
-                    
-                    // gather message keys and variable values to build the e-mail
+
+                    // gather message keys and variable values to build the
+                    // e-mail
                     // content with
                     String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
                     Map values = new TreeMap();
@@ -417,8 +420,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                     } catch (Exception e) {
                         log.error("Caught exception sending mail: ", e);
                         e.printStackTrace();
-                    }                    
-                    
+                    }
+
                 } else {
                     taxSpliceSites.setScientificName(inEngineeredTransgeneData.getSpliceSites_species());
                     regElementSpliceSites.setTaxon(taxSpliceSites);
@@ -467,16 +470,26 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         }
         inEngineeredTransgene.setGeneFunctionCollection(geneList);
 
-        // Conditional, Conditional Description
-        Conditionality inConditionality = null;
-        if (inEngineeredTransgene.getConditionality() != null)
-            inConditionality = inEngineeredTransgene.getConditionality();
-        else
-            inConditionality = new Conditionality();
+        if (inEngineeredTransgeneData.getConditionedBy() != null) {
+            // Conditional, Conditional Description
+            Conditionality theConditionality = null;
+            if (inEngineeredTransgene.getConditionality() != null) {
+                theConditionality = inEngineeredTransgene.getConditionality();
+            } else {
+                theConditionality = new Conditionality();
+            }
 
-        inConditionality.setConditionedBy(inEngineeredTransgeneData.getConditionedBy());
-        inConditionality.setDescription(inEngineeredTransgeneData.getDescription());
-        inEngineeredTransgene.setConditionality(inConditionality);
+            if (inEngineeredTransgeneData.getConditionedBy().equals(Constants.CONDITIONAL)) {
+                theConditionality.setConditionedBy("1");
+            } else {
+                theConditionality.setConditionedBy("0");
+            }
+
+            theConditionality.setDescription(inEngineeredTransgeneData.getDescription());
+            inEngineeredTransgene.setConditionality(theConditionality);
+        } else {
+            inEngineeredTransgene.setConditionality(null);
+        }
 
         // Additional Features (i.e. Comments)
         inEngineeredTransgene.setComments(inEngineeredTransgeneData.getComments());
