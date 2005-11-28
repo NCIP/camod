@@ -49,8 +49,7 @@
 				         <c:out value="${row.species}"/>
 				     </display:column>     
 				     <display:column title="Tumor Sites">
-				         <c:out escapeXml="false" value="${row.tumorSites}"/>
-				         <c:out escapeXml="false" value="${row.metastatisSites}"/>&nbsp;
+				         <c:out escapeXml="false" value="${row.tumorSites}"/>&nbsp;
 				     </display:column>	                   
 	          </display:table>	
 	          
