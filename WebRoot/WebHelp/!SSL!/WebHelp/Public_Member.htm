@@ -15,9 +15,23 @@ if (navigator.appName !="Netscape")
 <style type="text/css">
 <!--
 ul.whs1 { list-style:disc; }
-p.whs2 { margin-left:80px; }
+p.whs2 { margin-left:0px; font-weight:bold; font-size:11pt; }
+p.whs3 { margin-left:40px; font-size:11pt; }
+p.whs4 { font-size:11pt; }
+p.whs5 { margin-left:80px; font-size:11pt; }
 -->
-</style><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+</style><script type="text/javascript" language="JavaScript">
+<!--
+if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
+{
+  var strNSS = "<style type='text/css'>";
+  strNSS += "p.whs2 {margin-left:1pt; }";
+  strNSS +="</style>";
+  document.write(strNSS);
+}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
 <!--
 function reDo() {
   if (innerWidth != origWidth || innerHeight != origHeight)
@@ -47,8 +61,7 @@ if (window.gbWhTopic)
 {
 	if (window.addTocInfo)
 	{
-	addTocInfo("caMOD Admin\nPublic Member");
-addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+	addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 
 	}
 	if (window.writeBtnStyle)
@@ -60,6 +73,7 @@ addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 	if (window.setRelStartPage)
 	{
 	setRelStartPage("caMOD_2.htm");
+addSearchFormHref("javascript:document.ehelpform.submit()");
 
 		autoSync(1);
 		sendSyncInfo();
@@ -75,36 +89,68 @@ else
 
 <p>&nbsp;</p>
 
-<p>Any interested person can become a public member of caMOD.</p>
-
-<p>&nbsp;</p>
-
-<p>To become a member, you must enter personal information such as name 
- and email address before you can submit a record to the database. Once 
- you submit a record, you automatically a &quot;public member&quot; of 
- caMOD.</p>
+<p>Users of caMOD can fall into one of two categories:</p>
 
 <p>&nbsp;</p>
 
 <ul type="disc" class="whs1">
 	
-	<li class=kadov-p><p><a HREF="Submitting_Models.htm">Submitting to 
- the database</a>:</p></li>
+	<li class=kadov-p><p class="whs2">Guest User</p></li>
 </ul>
 
-<p class="whs2">Public members have the right to submit records, 
- and to edit their own records.</p>
+<p class="whs3">The guest User is any user 
+ without a valid system username and password. Guest users can search the 
+ cancer models database for public data. See <a href="caMOD_Database_Search_Overview.htm">caMOD 
+ Database Search Overview</a> for more information. </p>
 
-<p>&nbsp;</p>
+<p class="whs3">&nbsp;</p>
 
 <ul type="disc" class="whs1">
 	
-	<li class=kadov-p><p><a HREF="caMOD_Database_Search_Overview.htm">Querying 
- the database</a>:</p></li>
+	<li class=kadov-p><p class="whs2">Registered User</p></li>
 </ul>
 
-<p class="whs2">When a public member queries the database 
- the database will return records that the submitter defined as &quot;public&quot;.</p>
+<p class="whs3">The Registered User is any 
+ user with a valid system username and password. This user is also called 
+ a <span style="font-weight: bold;"><B>Public Member</B></span>: a registered 
+ user with no administrative functions.</p>
+
+<p class="whs4">&nbsp;</p>
+
+<p class="whs4">Any interested person can become a public member 
+ of caMOD, which is a Registered User.</p>
+
+<p class="whs4">&nbsp;</p>
+
+<p class="whs4">To become a public member, you must enter personal 
+ information such as name and email address before you can submit a record 
+ to the database or a caMOD Coordinator must register you as a new user. 
+ See <a HREF="Creating_a_New_User_Account.htm">Creating a New User Account</a> 
+ and <a HREF="Adding_a_New_User.htm">Adding a New User</a>. Once you submit 
+ a record to caMOD, you automatically a &quot;public member&quot; of caMOD.</p>
+
+<p class="whs4">&nbsp;</p>
+
+<ul type="disc" class="whs1">
+	
+	<li class=kadov-p><p class="whs4"><a HREF="Submitting_Models.htm"><span 
+ style="font-size: 11pt;"><font size=3 style="font-size:11pt;">Submitting to the database</a>:</font></span></p></li>
+</ul>
+
+<p class="whs5">Public members have the 
+ right to submit records, and to edit their own records.</p>
+
+<p class="whs4">&nbsp;</p>
+
+<ul type="disc" class="whs1">
+	
+	<li class=kadov-p><p class="whs4"><a HREF="caMOD_Database_Search_Overview.htm"><span 
+ style="font-size: 11pt;"><font size=3 style="font-size:11pt;">Querying the database</a>:</font></span></p></li>
+</ul>
+
+<p class="whs5">When a public member queries 
+ the database the database will return records that the submitter defined 
+ as &quot;public&quot;.</p>
 
 <script type="text/javascript" language="javascript1.2">
 <!--
@@ -112,5 +158,8 @@ if (window.writeIntopicBar)
 	writeIntopicBar(0);
 //-->
 </script>
+<form method="POST" action="http://www.helpcommunity.com/ehelpapi.asp?cmd=WebSave" name="ehelpform" target="_top" style="display:'none';">
+<input type="hidden" name="data" value="2A0C020D0000005075626C6963204D656D6265720D020D0000005075626C6963204D656D62657211020000000012020000000013020700000063614D4F44203215020B00000063614D4F445F322E68746D1703980100003C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C21444F43545950452053595354454D20226568656C706F70742E647464223E0D0A3C46494C452D4F5054494F4E532046494C452D56455253494F4E3D2233222047454E455241544F523D22526F626F48656C702048544D4C2031332031332E31302E383031222046494C452D4B45593D2236353335333433305F363030365F343332395F313337305F353533313533313830343130223E0D0A3C2F46494C452D4F5054494F4E533E0D0A3C4548454C502D4F5054494F4E5320464F524D41542D56455253494F4E3D22312E30223E0D0A203C4F5054494F4E532046495253542D504147453D224E4F542D5345542220454E41424C45443D225945532220454D4245444445443D2259455322204D41494E2D57494E444F572D4F4E4C593D224E4F2220434F4D4D554E4954592D4E4F544946593D224E4F223E0D0A203C2F4F5054494F4E533E0D0A203C425554544F4E2D4C4142454C3E5765625365617263683C2F425554544F4E2D4C4142454C3E0D0A3C2F4548454C502D4F5054494F4E533E18010400000002000000702A">
+</form>
 </body>
 </html>

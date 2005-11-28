@@ -18,22 +18,22 @@ body {margin:0;}
 <script language="javascript1.2" src="whtbar.js"></script>
 
 
-<body marginheight="0"  marginwidth="0"  bgcolor="#99ccff"     scroll="no">
+<body marginheight="0"  marginwidth="0"  bgcolor="#384158"    background="chr_back.gif"  scroll="no">
 <script language="javascript1.2">
 <!--
 if (window.gbWhTBar)
 {
-	setButtonFont("toc","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("toc","Tahoma","8pt","White","Normal","Normal","none", true);
-setButtonFont("idx","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("idx","Tahoma","8pt","White","Normal","Normal","none", true);
-setButtonFont("fts","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("fts","Tahoma","8pt","White","Normal","Normal","none", true);
-setButtonFont("glo","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("glo","Tahoma","8pt","White","Normal","Normal","none", true);
-setButtonFont("websearch","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("websearch","Tahoma","8pt","White","Normal","Normal","none", true);
-setButtonFont("searchform","Tahoma","8pt","Black","Normal","Normal","none");
+	setButtonFont("toc","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("toc","Arial","8pt","#4e5a78","Normal","Normal","none", true);
+setButtonFont("idx","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("idx","Arial","8pt","#4e5a78","Normal","Normal","none", true);
+setButtonFont("fts","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("fts","Arial","8pt","#4e5a78","Normal","Normal","none", true);
+setButtonFont("glo","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("glo","Arial","8pt","#4e5a78","Normal","Normal","none", true);
+setButtonFont("websearch","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("websearch","Arial","8pt","#4e5a78","Normal","Normal","none", true);
+setButtonFont("searchform","Arial","8pt","#4e5a78","Normal","Normal","none");
 setButtonFont("searchform","","","","","","", true);
 setButtonFont("banner","","","","","","");
 setButtonFont("banner","","","","","","", true);
@@ -50,10 +50,10 @@ setButtonFont("banner","","","","","","", true);
 	gsIWebSearchD = "wht_ws_g.gif";
 	gsIBanner = "wht_logo1.gif";
 	gsIGo = "wht_go.gif";
-	setBackgroundcolor("#99ccff");
-	
+	setBackgroundcolor("#384158");
+	setBackground("chr_back.gif");
 	setAlignment("left");
-	
+	setGoImage("chr_search.gif");
 	
 	if (!gsBgImage)
 	{
@@ -65,26 +65,27 @@ setButtonFont("banner","","","","","","", true);
 	setButtonBgColor("idx", gsTBSelectedBgColor, true);
 	setButtonBgColor("fts", gsTBSelectedBgColor, true);
 	setButtonBgColor("glo", gsTBSelectedBgColor, true);
-	setButtonBgColor("toc","#99ccff");
-setButtonBgColor("idx","#99ccff");
-setButtonBgColor("fts","#99ccff");
-setButtonBgColor("glo","#99ccff");
-setButtonBgColor("websearch","#99ccff");
+	setButtonBgColor("toc","#384158");
+setButtonBgColor("idx","#384158");
+setButtonBgColor("fts","#384158");
+setButtonBgColor("glo","#384158");
+setButtonBgColor("websearch","#384158");
 setButtonBgColor("searchform","");
 setButtonBgColor("banner","");
 
 	}
-	setButtonBgColor("toc","#639ace", true);
-setButtonBgColor("idx","#639ace", true);
-setButtonBgColor("fts","#639ace", true);
-setButtonBgColor("glo","#639ace", true);
-setButtonBgColor("websearch","#639ace", true);
+	setButtonBgColor("toc","#4e5a78", true);
+setButtonBgColor("idx","#4e5a78", true);
+setButtonBgColor("fts","#4e5a78", true);
+setButtonBgColor("glo","#4e5a78", true);
+setButtonBgColor("websearch","#4e5a78", true);
 setButtonBgColor("searchform","", true);
 setButtonBgColor("banner","", true);
 
-	addButton("toc",BTN_TEXT|BTN_IMG,"Contents","","","","",0,0,"","","","","","");
-addButton("idx",BTN_TEXT|BTN_IMG,"Index","","","","",0,0,"","","","","","");
-addButton("fts",BTN_TEXT|BTN_IMG,"Search","","","","",0,0,"","","","","","");
+	addButton("toc",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_con_out.gif","chr_con_on.gif","","chr_con_on.gif","","");
+addButton("idx",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_ind_out.gif","chr_ind_on.gif","","chr_ind_on.gif","","");
+addButton("fts",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_sea_out.gif","chr_sea_on.gif","","chr_sea_on.gif","","");
+addButton("websearch",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_web_out.gif","chr_web_on.gif","","chr_web_on.gif","","");
 addButton("searchform",BTN_TEXT,"","","","","",0,0,"","","","","","");
 addButton("banner",BTN_IMG,"","","","","",0,0,"","","","","","");
 

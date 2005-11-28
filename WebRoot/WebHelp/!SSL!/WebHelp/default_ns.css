@@ -3,11 +3,11 @@ BODY {
       background-color:#ffffff;  }
 H1 { 
     font-weight:bold; 
-    font-size:24.0pt; 
+    font-size:18pt; 
     font-family:Arial;  }
 LI.kadov-H1 { 
              font-weight:bold; 
-             font-size:24.0pt;  }
+             font-size:18pt;  }
 H2 { 
     font-weight:bold; 
     font-size:18.0pt; 
@@ -49,14 +49,15 @@ P {
    margin-bottom:1pt; 
    font-family:Arial;  }
 LI.kadov-P { 
-            font-size:12.0pt; 
-            margin-top:0pt; 
-            margin-bottom:0pt;  }
+            font-size:12.0pt;  }
 A.expandspot { 
               color:#008000; 
               cursor:hand; 
               font-style:italic; 
-              text-decoration:none;  }
+              x-text-underline:off; 
+              x-text-overline:off; 
+              x-text-line-through:off; 
+              text-decoration:none none none;  }
 SPAN.expandtext { 
                  font-style:italic; 
                  font-weight:normal; 
@@ -65,12 +66,18 @@ A.dropspot {
             cursor:hand; 
             color:#008000; 
             font-style:italic; 
-            text-decoration:none;  }
+            x-text-underline:off; 
+            x-text-overline:off; 
+            x-text-line-through:off; 
+            text-decoration:none none none;  }
 A.glossterm { 
              color:#800000; 
              cursor:hand; 
              font-style:italic; 
-             text-decoration:none;  }
+             x-text-underline:off; 
+             x-text-overline:off; 
+             x-text-line-through:off; 
+             text-decoration:none none none;  }
 SPAN.glosstext { 
                 font-style:italic; 
                 font-weight:normal; 

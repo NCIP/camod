@@ -12,14 +12,29 @@ if (navigator.appName !="Netscape")
 {   document.write("<link rel='stylesheet' href='default.css'>");}
 //-->
 </script>
- <style type="text/css">
+<style type="text/css">
 <!--
-ol.whs1 { list-style:decimal; }
-img_whs2 { border:none; width:25px; height:28px; float:none; border-style:none; }
-p.whs3 { color:#ff0000; }
-p.whs4 { color:#ff0000; margin-left:40px; }
+p.whs1 { font-size:11pt; }
+ol.whs2 { list-style:decimal; }
+p.whs3 { font-size:11pt; margin-left:40px; }
+img_whs4 { border:none; width:25px; height:28px; float:none; border-style:none; }
+p.whs5 { margin-left:40px; font-size:11pt; }
+p.whs6 { font-size:11pt; margin-left:0px; }
+img_whs7 { border:none; width:25px; height:24px; float:none; }
+p.whs8 { font-weight:bold; }
 -->
-</style><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+</style><script type="text/javascript" language="JavaScript">
+<!--
+if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
+{
+  var strNSS = "<style type='text/css'>";
+  strNSS += "p.whs6 {margin-left:1pt; }";
+  strNSS +="</style>";
+  document.write(strNSS);
+}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
 <!--
 function reDo() {
   if (innerWidth != origWidth || innerHeight != origHeight)
@@ -50,6 +65,7 @@ if (window.gbWhTopic)
 	if (window.addTocInfo)
 	{
 	addTocInfo("Getting Started in caMOD\nSubmit and Edit Models Page");
+addAvenueInfo("Getting Started in caMOD","What_s_New_in_caMOD.htm","Navigation_in_caMOD.htm");
 addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 
 	}
@@ -62,6 +78,7 @@ addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 	if (window.setRelStartPage)
 	{
 	setRelStartPage("caMOD_2.htm");
+addSearchFormHref("javascript:document.ehelpform.submit()");
 
 		autoSync(1);
 		sendSyncInfo();
@@ -77,96 +94,108 @@ else
 
 <p>&nbsp;</p>
 
-<p>After you have logged into caMOD, the application directs you automatically 
- to the Submit and Edit Models Page. The page lists no models before you 
- have entered models or when you are not named as a PI of any models. It 
- does, however, display the hypertext link in red text: <span style="font-weight: bold; color: #ff0000;"><font color=red ><B>Add 
- New Model</B></font></span>. </p>
+<p class="whs1">After you have logged into caMOD, the application 
+ directs you automatically to the Submit and Edit Models Page. The page 
+ lists no models before you have entered models or when you are not named 
+ as a PI of any models. It does, however, display the hypertext link in 
+ red text: <span style="font-weight: bold; color: #ff0000;"><font color=red ><B>Add New Model</B></font></span>. 
+ </p>
 
-<p>&nbsp;</p>
+<p class="whs1">&nbsp;</p>
 
-<ol type="1" class="whs1">
+<ol type="1" class="whs2">
 	
-	<li class=kadov-p><p>Click on the <span style="font-weight: bold;"><B>Add 
- New Model</B></span> link; this opens the <a HREF="Model_Characteristics.htm">Model 
+	<li style="/*begin!kadov{{*/ font-size: 11pt; /*}}end!kadov*/ "
+		class=kadov-p><p class="whs1">Click on the <span style="font-weight: bold;"><B>Add 
+ New Model</B></span> link; this opens the <a HREF="Model_Characteristics.htm"
+											style="font-size: 11pt;">Model 
  Characteristics page</a> where you can add new information for your model.</p></li>
 </ol>
 
-<p>&nbsp;</p>
+<p class="whs1">&nbsp;</p>
 
-<p>After you have submitted models, all models to which you have access 
- display on this page. The name of each is a link to the <a HREF="Model_Characteristics.htm">Model 
- Characteristics</a> form which displays general information about the 
- model you have submitted.</p>
+<p class="whs3">After you have submitted 
+ models, all models to which you have access, including those which you 
+ have submitted, display on this page. The name of each is a link to its 
+ <a HREF="Model_Characteristics.htm"
+	style="font-size: 11pt;">Model Characteristics</a> form which displays 
+ general information about the model.</p>
 
-<p>&nbsp;</p>
+<p class="whs1">&nbsp;</p>
 
-<ol start="2" type="1" class="whs1">
+<ol start="2" type="1" class="whs2">
 	
-	<li class=kadov-p><p>To duplicate a model, click on the appropriate 
- <span style="font-weight: bold;"><B>Duplicate Record</B></span> icon (<img src="caMODimages/copy_icon.gif" x-maintain-ratio="TRUE" width="25px" height="28px" border="0" class="img_whs2">) that displays to the left of each model. Once duplicated, 
+	<li style="/*begin!kadov{{*/ font-size: 11pt; /*}}end!kadov*/ "
+		class=kadov-p><p class="whs1">To duplicate a model, 
+ click on the appropriate <span style="font-weight: bold;"><B>Duplicate Record</B></span> 
+ icon (<img src="caMODimages/copy_icon.gif" x-maintain-ratio="TRUE" width="25px" height="28px" border="0" class="img_whs4">) that displays to the left of each model. Once duplicated, 
  the copy is added to the model list on the same page.</p></li>
 </ol>
 
-<p>&nbsp;</p>
+<p class="whs1">&nbsp;</p>
 
-<p>Duplicating a model might be appropriate when you want to modify an 
- original model, such as creating an allele, leaving an intact original 
- model in the database. You also might want to create a duplicate when 
- a heterozygous version and a homozygous version of the same model show 
- different phenotypes. Since the way the models were generated is similar, 
- it will save a lot of work if the model is duplicated and changes are 
- applied to the appropriate fields, such as the Phenotype field, instead 
- of entering all the information again.</p>
-
-<p>&nbsp;</p>
-
-<p><span style="font-weight: bold;"><B>Note:</B></span> Only the person who submitted 
- the model or the PI for that model can duplicate and/or modify a model. 
- Permissions for a model are defined when the model is submitted, and only 
- two people--the submitter (model owner) and the PI--have &quot;modify&quot; 
- authorization for a model.</p>
-
-<p>&nbsp;</p>
-
-<p>You, as the owner of a record, can also delete any of your records. 
- For more information, see <a HREF="Editing_Data.htm">Editing Data</a>.</p>
-
-<p>&nbsp;</p>
-
-<p class="whs3"><span style="color: #ff0000;"><font color=red >After log in...??</font></span></p>
+<p class="whs5">Duplicating a model might 
+ be appropriate when you want to modify a model, such as for creating an 
+ allele, leaving an intact original model in the database. You also might 
+ want to create a duplicate when a heterozygous version and a homozygous 
+ version of the same model show different phenotypes. Since the way the 
+ models were generated is similar, it will speed up the submission process 
+ if the model is duplicated and changes are applied to the appropriate 
+ fields, such as the Phenotype field, instead of entering all the information 
+ again.</p>
 
 <p class="whs3">&nbsp;</p>
 
-<p class="whs4">display all models you have 
- submitted previously</p>
+<ol start="3" type="1" class="whs2">
+	
+	<li style="font-size: 11pt; /*begin!kadov{{*/ font-size: 11pt; /*}}end!kadov*/ "
+		class=kadov-p><p class="whs6">To 
+ delete a model, click the <span style="font-weight: bold;"><B>Remove</B></span> 
+ icon (<img src="caMODimages/remove_icon.gif" x-maintain-ratio="TRUE" width="25px" height="24px" border="0" class="img_whs7"> ) corresponding to the model (in the right-hand column).</p></li>
+</ol>
 
-<p class="whs4">&nbsp;</p>
+<p class="whs1">&nbsp;</p>
 
-<p class="whs4">duplicate a record. speeds 
- up submission of models that are related or have a similar phenotype</p>
-
-<p class="whs4">&nbsp;</p>
-
-<p class="whs4">delete a complete record</p>
-
-<p class="whs4">&nbsp;</p>
-
-<p class="whs4">add a new model</p>
-
-<p class="whs4">&nbsp;</p>
-
-<p class="whs4">welcome back?</p>
+<p class="whs1"><span style="font-weight: bold;"><B>Note:</B></span> 
+ Only the person who submitted the model or the PI for that model can duplicate 
+ and/or modify a model. Permissions for a model are defined when the model 
+ is submitted, and only two people--the submitter (model owner) and the 
+ PI--have &quot;modify/delete&quot; authorization for a model. <span style="font-size: 11pt;"><font size=3 style="font-size:11pt;">For 
+ more information, see <a HREF="Editing_Data.htm"
+							style="font-size: 11pt;">Editing Data</a>.</font></span></p>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<script type="text/javascript" language="javascript1.2">
+<p class="whs8">
+
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Editing Data','Editing_Data.htm','Model Characteristics','Model_Characteristics.htm','Structure of the Submission Process','Structure_of_the_Submission_Process.htm','Submitting Models','Submitting_Models.htm');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=20 width=96 alt="Related Topics"></a>
+
+
+ </p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
 <!--
 if (window.writeIntopicBar)
 	writeIntopicBar(0);
 //-->
 </script>
+<form method="POST" action="http://www.helpcommunity.com/ehelpapi.asp?cmd=WebSave" name="ehelpform" target="_top" style="display:'none';">
+<input type="hidden" name="data" value="2A0B020F0000005375626D697420616E6420456469740C02100000004D6F64656C0A5375626D697474696E670D021B0000005375626D697420616E642045646974204D6F64656C73205061676511021800000047657474696E67205374617274656420696E2063614D4F4412021B0000005375626D697420616E642045646974204D6F64656C73205061676513020700000063614D4F44203215020B00000063614D4F445F322E68746D1703980100003C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C21444F43545950452053595354454D20226568656C706F70742E647464223E0D0A3C46494C452D4F5054494F4E532046494C452D56455253494F4E3D2233222047454E455241544F523D22526F626F48656C702048544D4C2031332031332E31302E383031222046494C452D4B45593D2236353335333433305F363030365F343332395F313337305F353533313533313830343130223E0D0A3C2F46494C452D4F5054494F4E533E0D0A3C4548454C502D4F5054494F4E5320464F524D41542D56455253494F4E3D22312E30223E0D0A203C4F5054494F4E532046495253542D504147453D224E4F542D5345542220454E41424C45443D225945532220454D4245444445443D2259455322204D41494E2D57494E444F572D4F4E4C593D224E4F2220434F4D4D554E4954592D4E4F544946593D224E4F223E0D0A203C2F4F5054494F4E533E0D0A203C425554544F4E2D4C4142454C3E5765625365617263683C2F425554544F4E2D4C4142454C3E0D0A3C2F4548454C502D4F5054494F4E533E18010400000002000000702A">
+</form>
 </body>
 </html>

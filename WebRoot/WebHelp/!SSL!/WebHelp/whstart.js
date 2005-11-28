@@ -31,8 +31,8 @@ function delayReload()
 	}
 }
 
-var gsToolbarOrder = "toc|idx|fts|custom1|custom2|custom3|blankblock|searchform|banner";
-var gsMinibarOrder = "avprev|avnext|blankblock|hide2|";
+var gsToolbarOrder = "toc|idx|fts|websearch|blankblock|searchform|banner";
+var gsMinibarOrder = "blankblock|hide2|";
 
 var gsTopic = "Introduction_to_caMOD.htm";
 var PANE_OPT_SEARCH = 1;

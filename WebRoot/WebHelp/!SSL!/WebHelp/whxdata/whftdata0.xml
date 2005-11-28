@@ -2,19 +2,17 @@
 <ftstdata>
 <topic name="Adding a New User" url="Adding_a_New_User.htm" />
 <topic name="Admin Functions Overview" url="Admin_Functions_Overview.htm" />
-<topic name="Administration Basics" url="Administration_Basics.htm" />
 <topic name="Administration Roles" url="Administration_Roles.htm" />
 <topic name="Advanced Search Mode" url="Advanced_Search_Mode.htm" />
 <topic name="Application Support" url="Application_Support.htm" />
 <topic name="Assigning a Screener" url="Assigning_a_Screener.htm" />
-<topic name="Associated Expression/Targeted Modification" url="Associated_Expression_Targeted_Modification.htm" />
-<topic name="Associated Expression/Transgene or Genomic Segment" url="Associated_Expression_Transgene_or_Genomic_Segment.htm" />
+<topic name="Assigning an Editor" url="Assigning_an_Editor.htm" />
+<topic name="Associated Expression" url="Associated_Expression.htm" />
 <topic name="caMOD Database Search Overview" url="caMOD_Database_Search_Overview.htm" />
-<topic name="caMOD Login Page" url="caMOD_Login_Page.htm" />
-<topic name="caMOD Overview" url="caMOD_Overview.htm" />
 <topic name="caMOD Permissions" url="caMOD_Permissions.htm" />
 <topic name="caMOD Search Results" url="caMOD_Search_Results.htm" />
 <topic name="caMOD Table of Contents" url="caMOD_Table_of_Contents.htm" />
+<topic name="caMOD Welcome and Login Page" url="caMOD_Welcome_and_Login_Page.htm" />
 <topic name="Cell Lines" url="Cell_Lines.htm" />
 <topic name="Chemical/Drug" url="Chemical_Drug.htm" />
 <topic name="Clinical Marker" url="Clinical_Marker.htm" />
@@ -22,20 +20,21 @@
 <topic name="Coordinating_the_Review_Process" url="Coordinating_the_Review_Process.htm" />
 <topic name="Creating a New User Account" url="Creating_a_New_User_Account.htm" />
 <topic name="Drug Screening" url="Drug_Screening.htm" />
+<topic name="Drug Screening Search Results" url="Drug_Screening_Search_Results.htm" />
 <topic name="Editing a Model" url="Editing_a_Model.htm" />
 <topic name="Editing Data" url="Editing_Data.htm" />
+<topic name="Editor Responsibilities" url="Editor_Responsibilities.htm" />
 <topic name="Engineered Transgene" url="Engineered_Transgene,htm.htm" />
-<topic name="Environmental Factors" url="Environmental_Factors.htm" />
+<topic name="Environmental Factor" url="Environmental_Factors.htm" />
 <topic name="Exiting caMOD" url="Exiting_caMOD.htm" />
 <topic name="Functions of the Coordinator" url="Functions_of_the_Coordinator.htm" />
 <topic name="Gene Delivery" url="Gene_Delivery.htm" />
 <topic name="Genomic Segment" url="Genomic_Segment.htm" />
 <topic name="Growth Factor" url="Growth_Factor.htm" />
-<topic name="Help Features" url="Help_Features.htm" />
-<topic name="help_tree2" url="help_tree2.html" />
 <topic name="Histopathology" url="Histopathology.htm" />
 <topic name="Hormone" url="Hormone.htm" />
 <topic name="Images" url="Images.htm" />
+<topic name="In-Vivo Drug Screening Search Results" url="In-Vivo_Drug_Screening_Search_Results.htm" />
 <topic name="Induced Mutation" url="Induced_Mutation.htm" />
 <topic name="Introduction to caMOD" url="Introduction_to_caMOD.htm" />
 <topic name="Metastasis" url="Metastasis.htm" />
@@ -47,13 +46,14 @@
 <topic name="Models Assignment" url="Models_Assignment.htm" />
 <topic name="Navigating a Data Tree" url="Navigating_a_Data_Tree.htm" />
 <topic name="Navigation in caMOD" url="Navigation_in_caMOD.htm" />
-<topic name="help_tree1" url="New_Topic.htm" />
 <topic name="Nutritional Factor" url="Nutritional_Factor.htm" />
+<topic name="Pre-Clinical/Clinical Trials Drug Screening Results" url="Pre-Clinical_Clinical_Trials_Drug_Screening_Results.htm" />
 <topic name="Public Member" url="Public_Member.htm" />
 <topic name="Publications" url="Publications.htm" />
 <topic name="Radiation" url="Radiation.htm" />
 <topic name="Roles Assignment" url="Roles_Assignment.htm" />
 <topic name="Roles Management" url="Roles_Management.htm" />
+<topic name="Screener Responsibilities" url="Screener_Responsibilities.htm" />
 <topic name="Screening a Model" url="Screening_a_Model.htm" />
 <topic name="Simple Search Mode" url="Simple_Search_Mode.htm" />
 <topic name="Spontaneous Mutation" url="Spontaneous_Mutation.htm" />
@@ -69,5 +69,6 @@
 <topic name="Viewing MrSID Images" url="Viewing_MrSID_Images.htm" />
 <topic name="Viral Treatment" url="Viral_Treatment.htm" />
 <topic name="What's New in caMOD" url="What_s_New_in_caMOD.htm" />
+<topic name="Yeast Screening Search Results" url="Yeast_Screening_Search_Results.htm" />
 
 </ftstdata>  

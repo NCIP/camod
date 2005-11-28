@@ -16,15 +16,15 @@ body {margin:0;}
 <script language="javascript1.2" src="whproxy.js"></script>
 <script language="javascript1.2" src="whmozemu.js"></script>
 <script language="javascript1.2" src="whtbar.js"></script>
-<body marginheight="0"  marginwidth="0"  bgcolor="#99ccff"     scroll="no">
+<body marginheight="0"  marginwidth="0"  bgcolor="#384158"    background="chr_back.gif"  scroll="no">
 <script language="javascript1.2">
 <!--
 if (window.gbWhTBar)
 {
-	setButtonFont("avprev","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("avnext","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("synctoc","Tahoma","8pt","Black","Normal","Normal","none");
-setButtonFont("hide2","Tahoma","8pt","Black","Normal","Normal","none");
+	setButtonFont("avprev","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("avnext","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("synctoc","Arial","8pt","#4e5a78","Normal","Normal","none");
+setButtonFont("hide2","Arial","8pt","#4e5a78","Normal","Normal","none");
 
 	gsIPrev = "wht_prev.gif";
 	gsIPrevD = "wht_prev_g.gif";
@@ -32,13 +32,13 @@ setButtonFont("hide2","Tahoma","8pt","Black","Normal","Normal","none");
 	gsINextD = "wht_next_g.gif";
 	gsISync = "wht_sync.gif";
 	gsIHide = "wht_hide.gif";
-	setBackgroundcolor("#99ccff");
+	setBackgroundcolor("#384158");
+	setBackground("chr_back.gif");
 	
-	
-	addButton("avprev",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
-addButton("avnext",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
-addButton("synctoc",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
-addButton("hide2",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
+	addButton("avprev",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_arrow_le_on.gif","","","chr_arrow_le_out.gif","","");
+addButton("avnext",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_arrow_ri_on.gif","","","chr_arrow_ri_out.gif","","");
+addButton("synctoc",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_sync.gif","","","","","");
+addButton("hide2",BTN_TEXT|BTN_IMG,"","","","","",0,0,"chr_hide.gif","","","","","");
 
 	addButton("blankblock");
 	writeStyle(true);
