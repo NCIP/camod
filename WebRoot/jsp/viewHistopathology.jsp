@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2005/11/28 16:22:17  pandyas
+ * Defect #187:  Changed Comments to Comment
+ *
  * Revision 1.22  2005/11/28 13:54:10  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -11,7 +14,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.23 2005-11-28 16:22:17 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.24 2005-11-29 13:27:47 georgeda Exp $
  *
  */   
 %>
@@ -199,7 +202,7 @@
 				</tr>
 			</c:if>	
 	        <tr>
-	            <td><a href="#">Top</a></td>
+	            <td colspan="2" align="right"><a href="#">Top</a></td>
 	        </tr>
         </TABLE>
 	    <bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
@@ -300,7 +303,7 @@
 					</td>
 				</tr>
 				<tr>
-				    <td><a href="#">Top</a></td>
+				    <td colspan="2" align="right"><a href="#">Top</a></td>
 				</tr>
 			</TABLE>
 		</c:forEach>

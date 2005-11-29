@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.36 2005-11-28 22:59:17 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.37 2005-11-29 13:27:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2005/11/28 22:59:17  georgeda
+ * Defect #82, print the common name if the scientific name is not available
+ *
  * Revision 1.35  2005/11/28 19:06:08  georgeda
  * Defect #76, added a "Top" link to bring them to the top of the page
  *
@@ -359,7 +362,7 @@
 	
 </td></tr>
 <tr>
-    <td><a href="#">Top</a></td>
+    <td colspan="2" align="right"><a href="#">Top</a></td>
 </tr>
 </TABLE>
 </c:forEach>
@@ -501,7 +504,7 @@
 	</TABLE>
 </td></tr>
 <tr>
-    <td><a href="#">Top</a></td>
+    <td colspan="2" align="right"><a href="#">Top</a></td>
 </tr>
 </TABLE>
 </c:forEach>
@@ -722,7 +725,7 @@
 	</TABLE>
 </td></tr>
 <tr>
-    <td><a href="#">Top</a></td>
+    <td colspan="2" align="right"><a href="#">Top</a></td>
 </tr>
 </TABLE>
 </c:forEach>
@@ -839,7 +842,7 @@
 	</TABLE>
 </td></tr>
 <tr>
-    <td><a href="#">Top</a></td>
+    <td colspan="2" align="right"><a href="#">Top</a></td>
 </tr>
 </TABLE>
 </c:forEach>
@@ -899,7 +902,7 @@
 	</TABLE>
 </td></tr>
 <tr>
-    <td><a href="#">Top</a></td>
+    <td colspan="2" align="right"><a href="#">Top</a></td>
 </tr>
 </TABLE>
 </c:forEach>
