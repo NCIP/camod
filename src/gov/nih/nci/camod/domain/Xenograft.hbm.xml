@@ -90,6 +90,7 @@
         <many-to-one
         	name="originSpecies"
         	column="origin_species_id"
+        	cascade="all-delete-orphan"
         	class="Taxon"/>
         	
         <!-- hostSpecies (many-to-one unidirectional) -->

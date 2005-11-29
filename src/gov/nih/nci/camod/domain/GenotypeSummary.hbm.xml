@@ -38,6 +38,7 @@
         <many-to-one
         	name="nomenclature"
         	column="nomenclature_id"
+        	cascade="all-delete-orphan"
         	class="Nomenclature"/>
 	</class>
 </hibernate-mapping>

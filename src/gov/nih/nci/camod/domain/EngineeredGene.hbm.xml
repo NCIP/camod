@@ -55,6 +55,7 @@
         <many-to-one
         	name="genotypeSummary"
         	column="genotype_summary_id"
+        	cascade="all-delete-orphan"
         	class="GenotypeSummary"/>
         
         <!-- image (many-to-one unidirectional) -->
