@@ -129,7 +129,6 @@ public class DuplicateUtil {
 
               // do no copy property if it is in the excluded list
               if (!(excludedProperties != null && excludedProperties.contains(pathName))) {                        
-                Class propertyType = PropertyUtils.getPropertyType(duplicate, propName); 
 
                 log.debug("** processing copy of property: "+pathName);  
 

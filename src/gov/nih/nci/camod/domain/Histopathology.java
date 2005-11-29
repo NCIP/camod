@@ -36,7 +36,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     private List diseaseCollection = new ArrayList();
     private GeneticAlteration geneticAlteration;
     private Organ organ;
-    private List metastatisCollection;
+    private List metastatisCollection = new ArrayList();
 
     /**
      * @return Returns the metastatisCollection.
