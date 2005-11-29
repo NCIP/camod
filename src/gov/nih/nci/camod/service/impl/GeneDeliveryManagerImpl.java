@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.12 2005-11-28 13:45:05 georgeda Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.13 2005-11-29 16:32:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/28 13:45:05  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.11  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -166,33 +169,57 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
 
         /*
-         * Add a Organ to AnimalModel with correct IDs, conceptCode 
-         */
-        
-        //new submission - organ will be null
-        if (inGeneDelivery.getOrgan() == null) {
-        	System.out.println("Creating new Organ object");        	
-        	inGeneDelivery.setOrgan(new Organ());
-        }
-
-        String newConceptCode = inGeneDeliveryData.getOrganTissueCode();
-    	System.out.println("newConceptCode: " + newConceptCode);
-    	
-        String oldConceptCode = inGeneDelivery.getOrgan().getConceptCode();
-    	System.out.println("oldConceptCode: " + oldConceptCode); 
-    	
-        if( !newConceptCode.equals(oldConceptCode) ) 
-        {
-       	System.out.println("Organ is new or was modified so retrieve attributes");
-        //always get/store organ name through the concept code - never deal with converting name back and forth
-        String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inGeneDeliveryData.getOrganTissueCode());
+         * Add a Organ to AnimalModel with correct IDs, conceptCode, only if organ is selected by user
+         */        
+        if (inGeneDeliveryData.getOrganTissueCode() !=null && inGeneDeliveryData.getOrganTissueCode().length() >0){
+        	log.info("newConceptCode is not null: ");
         	
-        System.out.println("preferedOrganName: " + preferedOrganName);
-        inGeneDelivery.getOrgan().setName(preferedOrganName); 
-            
-        System.out.println("populateGeneDelivery - getOrgan().setConceptCode - OrganTissueCode: " +inGeneDeliveryData.getOrganTissueCode());
-        inGeneDelivery.getOrgan().setConceptCode(inGeneDeliveryData.getOrganTissueCode());            
-        }
+        	String newConceptCode = inGeneDeliveryData.getOrganTissueCode();
+        	log.info("newConceptCode: " + newConceptCode);
+        		
+            	// Organ will be null for new submissions 
+            	if (inGeneDelivery.getOrgan() == null) {
+        			log.info("Organ is new so create new object and retrieve attributes");            		
+
+        			inGeneDelivery.setOrgan(new Organ());
+        		
+            		/*
+            		 * Always get/store organ name through the concept code - never deal
+            		 * with converting name back and forth
+            		 */
+            		String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inGeneDeliveryData.getOrganTissueCode());
+
+            		log.info("preferedOrganName: " + preferedOrganName);
+            		inGeneDelivery.getOrgan().setName(preferedOrganName);
+
+            		log.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: "
+    	        		+ inGeneDeliveryData.getOrganTissueCode());
+            		inGeneDelivery.getOrgan().setConceptCode(inGeneDeliveryData.getOrganTissueCode());
+        	
+            	} else {
+            		//  edited screen - submit organ only if changed
+           			log.info("Organ is modified so compare concept code in DB");
+           			
+            		String oldConceptCode = inGeneDelivery.getOrgan().getConceptCode();
+            		log.info("oldConceptCode: " + oldConceptCode);
+
+            		if (!newConceptCode.equals(oldConceptCode)) {
+            			log.info("oldConceptCode != newConceptCode: "  );
+            			/*
+            			 * Always get/store organ name through the concept code - never deal
+            			 * with converting name back and forth
+            			 */
+            			String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inGeneDeliveryData.getOrganTissueCode());
+            		
+            			log.info("preferedOrganName: " + preferedOrganName);
+            			inGeneDelivery.getOrgan().setName(preferedOrganName);
+
+            			log.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: "
+            					+ inGeneDeliveryData.getOrganTissueCode());
+            			inGeneDelivery.getOrgan().setConceptCode(inGeneDeliveryData.getOrganTissueCode());
+            		}
+            	}
+        } 
 
         log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
     }

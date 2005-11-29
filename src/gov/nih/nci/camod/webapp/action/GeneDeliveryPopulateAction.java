@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.14 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.15 2005-11-29 16:31:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.13  2005/11/02 20:29:09  pandyas
  * modified GeneDelivery dropdown source
  *
@@ -47,7 +50,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<GeneDeliveryPopulateAction populate> Entering populate() ");
+		log.info("<GeneDeliveryPopulateAction populate> Entering populate() ");
 
 		// Create a form to edit
 		GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
@@ -83,15 +86,17 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			geneDeliveryForm.setAgeAtTreatment(gene.getTreatment().getAgeAtTreatment());
 
 			/* set Organ attributes */
-			System.out.println("<GeneDeliveryPopulateAction populate> get the Organ attributes");
+			log.info("<GeneDeliveryPopulateAction populate> get the Organ attributes");
 
 			// since we are always querying from concept code (save and edit),
 			// simply display VSPreferredDescription
+			if (gene.getOrgan() != null) {
 			geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
-			System.out.println("setOrgan= " + gene.getOrgan().getEVSPreferredDescription());
+			log.info("setOrgan= " + gene.getOrgan().getEVSPreferredDescription());
 
 			geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
-			System.out.println("OrganTissueCode= " + gene.getOrgan().getConceptCode());
+			log.info("OrganTissueCode= " + gene.getOrgan().getConceptCode());
+			}
 		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the
@@ -115,12 +120,12 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<GeneDeliveryPopulateAction dropdown> Entering dropdown() ");
+		log.info("<GeneDeliveryPopulateAction dropdown> Entering dropdown() ");
 
 		// setup dropdown menus
 		this.dropdown(request, response);
 
-		System.out.println("<GeneDeliveryPopulateAction dropdown> before return submitRadiation ");
+		log.info("<GeneDeliveryPopulateAction dropdown> before return submitRadiation ");
 
 		return mapping.findForward("submitGeneDelivery");
 
@@ -135,7 +140,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 	 */
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("<GeneDeliveryPopulateAction dropdown> Entering void dropdown()");
+		log.info("<GeneDeliveryPopulateAction dropdown> Entering void dropdown()");
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
@@ -144,7 +149,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 				Constants.Dropdowns.ADD_BLANK);
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
 
-		System.out.println("<GeneDeliveryPopulateAction dropdown> Exiting void dropdown()");
+		log.info("<GeneDeliveryPopulateAction dropdown> Exiting void dropdown()");
 
 	}
 
