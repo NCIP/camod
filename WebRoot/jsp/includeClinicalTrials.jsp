@@ -4,10 +4,11 @@
 <c:if test="${not empty cp && foundClinicalData == 0}">
 	<c:set var="foundClinicalData" value="1"/>
 	<tr>
-	    <td class="formTitleBlue" height="20" colspan="2" align="center">
-	        <b>Current Clinical Trials</b>
-	    </td>
-    </tr>	
+		<td class="formTitleBlue" height="20" colspan="2">
+			Current Clinical Trials for <c:out value="${agt.name}"/>
+		</td>
+	</tr>	
+	
 	<c:forEach var="cpitem" items="${cp}" varStatus="stat2">
 		<tr>
 			<c:choose>
