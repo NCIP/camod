@@ -6,9 +6,12 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.io.Serializable;
-
 import gov.nih.nci.camod.util.Duplicatable;
+
+import java.io.Serializable;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  * @author rajputs
  * 
@@ -26,6 +29,10 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable 
     private String ageAtTreatment;
     private SexDistribution sexDistribution;
 
+    private String route;
+    private String vehicle;
+    private String schedule;
+   
     /**
      * @return Returns the sexDistribution.
      */
@@ -90,7 +97,31 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable 
      * @return Returns the dosage.
      */
     public String getDosage() {
-        return dosage;
+    	
+    	String tmpDosage = dosage;
+    	
+    	//Trim leading Zeros
+        if (tmpDosage == null) {
+            return null;
+        }
+        
+        char[] chars = tmpDosage.toCharArray();
+        int index = 0;
+        for (; index < tmpDosage.length(); index++) {
+            if (chars[index] != '0') {
+                break;
+            }
+        }
+        tmpDosage = (index == 0) ? tmpDosage : tmpDosage.substring(index);
+    	
+    	//if mg/kg is contained in string, replace it with mg/kg/injections
+		// Compile regular expression
+        Pattern pattern = Pattern.compile("mg/kg");
+
+        // Replace all occurrences of pattern in input
+        Matcher matcher = pattern.matcher(tmpDosage);
+        tmpDosage = matcher.replaceAll("mg/kg/injections");
+        return tmpDosage;
     }
 
     /**
@@ -101,7 +132,6 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable 
         this.dosage = dosage;
     }
 
- 
     /**
      * @return Returns the regimen.
      */
@@ -116,8 +146,73 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable 
     public void setRegimen(String regimen) {
         this.regimen = regimen;
     }
+    
+	public String getRoute() {	    	  		
+		
+		StringTokenizer parser = new StringTokenizer(this.regimen, ",");		
+		route = parser.nextToken();
+		
+		while (parser.hasMoreTokens() && ! route.startsWith("Drug given-")) {	    	
+	        route = parser.nextToken();
+	    }	    
+		// Compile regular expression
+        Pattern pattern = Pattern.compile("Drug given-");
 
-    /**
+        // Replace all occurrences of pattern in input
+        Matcher matcher = pattern.matcher(route);
+        route = matcher.replaceAll("");
+        
+        return route;		
+	}
+
+	public void setRoute(String route) {
+		this.route = route;
+	}
+
+	public String getSchedule() {
+		
+		StringTokenizer parser = new StringTokenizer(this.regimen, ",");		
+		route = parser.nextToken();
+	    while (parser.hasMoreTokens() && ! route.startsWith("Schedule-")) {	    	
+	        route = parser.nextToken();
+	    }	    
+		// Compile regular expression
+        Pattern pattern = Pattern.compile("Schedule-");
+
+        // Replace all occurrences of pattern in input
+        Matcher matcher = pattern.matcher(route);
+        route = matcher.replaceAll("");
+        
+		return route;
+	}
+
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
+	}
+
+	public String getVehicle() {
+		
+		StringTokenizer parser = new StringTokenizer(this.regimen, ",");		
+		route = "";
+	    while (parser.hasMoreTokens() && ! route.startsWith(" Vehicle-")) {	    	
+	        route = parser.nextToken();
+	        
+	    }	    
+		// Compile regular expression
+        Pattern pattern = Pattern.compile(" Vehicle-");
+
+        // Replace all occurrences of pattern in input
+        Matcher matcher = pattern.matcher(route);
+        route = matcher.replaceAll("");
+        
+		return route;
+	}
+
+	public void setVehicle(String vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	/**
      * @see java.lang.Object#toString()
      */
      public String toString() {
