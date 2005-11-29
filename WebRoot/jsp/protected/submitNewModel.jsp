@@ -77,7 +77,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Model Descriptor </label> 
+			<td class="formRequiredLabel"><label for="field1">Model Descriptor:</label> 
 				<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
@@ -88,7 +88,7 @@ var cal1 = new CalendarPopup();
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Principal Investigator</label></td>
+			<td class="formRequiredLabel"><label for="field1">Principal Investigator:</label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="principalInvestigator">
 					<html:optionsCollection name="<%= Dropdowns.PRINCIPALINVESTIGATORDROP %>" />	
@@ -109,7 +109,7 @@ var cal1 = new CalendarPopup();
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field3"><b>Species</b></label></td>
+			<td class="formLabel"><label for="field3"><b>Species:</b></label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
 					<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
@@ -119,7 +119,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><label for="field3"><b>Strain</b></label></td>
+			<td class="formLabel"><label for="field3"><b>Strain:</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOtherStrain();">
 					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
@@ -129,7 +129,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">if other Strain</label></td>
+			<td class="formLabel"><label for="field1">if other Strain:</label></td>
 			<td class="formField">					
 				<html:text styleClass="formFieldSized" property="ethnicityStrainUnctrlVocab" disabled="true" size="30"/>			
 			</td>
@@ -137,7 +137,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">Experimental Design</label>
+			<td class="formLabel"><label for="field2">Experimental Design:</label>
 				<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.EXPERIMENT_DESIGN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
@@ -147,7 +147,9 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field2">Phenotype</label></td>
+			<td class="formRequiredLabel"><label for="field2">Phenotype:</label>
+			    <camod:cshelp mapId="model_characteristics_help" key="PHENOTYPE.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			</td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="description" cols="32" rows="4"/>			
 			</td>
@@ -155,7 +157,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Gender</label></td>
+			<td class="formLabel"><label for="field3">Gender:</label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="type">												
 					<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
@@ -165,15 +167,15 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Breeding Notes</label></td>
+			<td class="formLabel"><label for="field1">Breeding Notes: <camod:cshelp mapId="model_characteristics_help" key="PHENOTYPE.BREEDING_NOTES" image="images/iconHelp.gif" text="Tool Tip Test 1" />	</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="breedingNotes" size="30"/>			
+				<html:text styleClass="formFieldSized" property="breedingNotes" size="30"/>
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" widh="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Website for add. info</label>
+			<td class="formLabel"><label for="field1">Website for add. info:</label>
 				<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.URL" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
@@ -183,7 +185,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formLabel"><b>Record Release Date</b></td>
+			<td class="formLabel"><b>Record Release Date:</b></td>
 			<td class="formField">
 				<html:radio property="releaseDate" value="immediately" onclick="return immediateRelease();" /> Release record immediately <br> 
 				<html:radio property="releaseDate" value="after" onclick="return selectFromCalendar();" /> Release Record After:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Select date from pop up calender) 

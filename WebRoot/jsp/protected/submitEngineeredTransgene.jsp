@@ -224,7 +224,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Poly A Signal:</label>
-		<camod:cshelp key="REGULATORY_ELEMENT.NAME_PolyA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp mapId="engineered_transgene_help" key="REGULATORY_ELEMENT.NAME_PolyA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
