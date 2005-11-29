@@ -1,8 +1,11 @@
 <%
  /*
-  * $Id: subSubmitMenu.jsp,v 1.44 2005-11-28 20:00:07 georgeda Exp $
+  * $Id: subSubmitMenu.jsp,v 1.45 2005-11-29 16:28:19 georgeda Exp $
   *
   * $Log: not supported by cvs2svn $
+  * Revision 1.44  2005/11/28 20:00:07  georgeda
+  * Defect #214 - user the gene name instead of the viral vector
+  *
   *
   */
 %>
@@ -345,7 +348,7 @@
 	<span class="submasterdiv" id="sub11">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="XenograftPopulateAction.do?method=dropdown">Enter Transplant/Xenograft</html:link><br>
 			 <logic:iterate id="aXenograft" name="xenograft_list" type="Xenograft">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="XenograftPopulateAction.do?method=populate" paramId="aXenograftID" paramName="aXenograft" paramProperty="id"><bean:write name="aXenograft" property="name" filter="true"/></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="XenograftPopulateAction.do?method=populate" paramId="aXenograftID" paramName="aXenograft" paramProperty="id"><camod:shorten><bean:write name="aXenograft" property="name" filter="true"/></camod:shorten></html:link><br>
 			 </logic:iterate>
 		<br>	
 	</span>	
