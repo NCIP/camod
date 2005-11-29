@@ -155,7 +155,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
             // Check the file type
             if (fileType != null) {
                 if (fileType.toLowerCase().equals("jpg") || fileType.toLowerCase().equals("jpeg") || fileType.toLowerCase().equals("gif")
-                        || fileType.toLowerCase().equals("sid") || fileType.toLowerCase().equals("tif")) {
+                        || fileType.toLowerCase().equals("sid") || fileType.toLowerCase().equals("png")) {
 
                     System.out.println("<ImageDataManagerImpl> Valid file type " + fileType);
                     System.out.println("<ImageDataManagerImpl> FileName is: " + f.getFileName() + " Type is: " + f.getContentType());
