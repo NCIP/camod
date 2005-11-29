@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.38 2005-11-16 21:36:40 georgeda Exp $
+ * $Id: NewDropdownUtil.java,v 1.39 2005-11-29 20:47:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2005/11/16 21:36:40  georgeda
+ * Defect #47, Clean up EF querying
+ *
  * Revision 1.37  2005/11/16 19:26:30  pandyas
  * added javadocs
  *
@@ -82,10 +85,6 @@ public class NewDropdownUtil {
         if (theList == null) {
             throw new IllegalArgumentException("Unknown dropdown list key: " + inDropdownKey);
         }
-
-        System.out.println("<NewDropdownUtil populateDropdown> inDropdownKey: " + inDropdownKey);
-        System.out.println("<NewDropdownUtil populateDropdown> inFilter: " + inFilter);
-        System.out.println("<NewDropdownUtil populateDropdown> List: " + theList);
 
         inRequest.getSession().setAttribute(inDropdownKey, theList);
 
