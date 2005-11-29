@@ -33,13 +33,13 @@
 				</c:choose>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${p.name}"/>
+				<c:out value="${p.name}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Name of Cell Line</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<c:out value="${p.name}"/>
+					<c:out value="${p.name}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -51,13 +51,13 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<c:out value="${p.experiment}"/>
+					<c:out value="${p.experiment}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
 				<td class="resultsBoxGreyEnd">
-					<c:out value="${p.results}"/>
+					<c:out value="${p.results}"/>&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -103,19 +103,19 @@
 							<c:out value="${pub.publicationStatus.name}"/>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
-							<c:out value="${pub.authors}"/>
+							<c:out value="${pub.authors}"/>&nbsp;
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="30%">
-							<c:out value="${pub.title}"/>
+							<c:out value="${pub.title}"/>&nbsp;
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<c:out value="${pub.journal}"/>
+							<c:out value="${pub.journal}"/>&nbsp;
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="5%">
-							<c:out value="${pub.year}"/>
+							<c:out value="${pub.year}"/>&nbsp;
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<c:out value="${pub.volume}"/>
+							<c:out value="${pub.volume}"/>&nbsp;
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
 							<c:out value="${pub.startPage}"/> - 

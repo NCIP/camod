@@ -89,6 +89,9 @@
 			data from PubMed and populate the fields<br>
 			automatically. Click "Submit"<br>
 			to submit the publication to the database.
+			<br/>
+			<br/>
+			Note: Either the PMID or the Title of Publication must be entered.
 		</td>
 		
 		<td class="formField">
@@ -103,8 +106,9 @@
 	</tr>
 
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Title of Publication:</label></td>
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel"><label for="field1">Title of Publication:<br/><br/>
+			Note: Either the PMID or the Title of Publication must be entered.</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" size="50" property="title" />
 		</td>

@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.10 2005-11-14 14:18:58 georgeda Exp $
+ * $Id: PublicationManagerImpl.java,v 1.11 2005-11-29 22:12:29 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/14 14:18:58  georgeda
+ * Handle delete of child publications
+ *
  * Revision 1.9  2005/11/09 00:17:16  georgeda
  * Fixed delete w/ constraints
  *
@@ -46,7 +49,7 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
     }
 
     public void removeCellLinePublication(String id, CellLine inCellLine) throws Exception {
-    	
+
         inCellLine.getPublicationCollection().remove(get(id));
         super.save(inCellLine);
     }
@@ -77,18 +80,35 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
         inPublication.setJournal(inPublicationData.getJournal());
         inPublication.setVolume(inPublicationData.getVolume());
 
-        String strPub = inPublicationData.getPmid().trim();
-        inPublication.setPmid(Long.valueOf(strPub));
+        String strPub = inPublicationData.getPmid();
+
+        if (strPub != null && strPub.trim().length() > 0) {
+            inPublication.setPmid(Long.valueOf(strPub.trim()));
+        } else {
+            inPublication.setPmid(null);
+        }
 
         strPub = inPublicationData.getStartPage().trim();
-        inPublication.setStartPage(Long.valueOf(strPub));
+        if (strPub.length() > 0) {
+            inPublication.setStartPage(Long.valueOf(strPub));
+        } else {
+            inPublication.setStartPage(null);
+        }
 
         strPub = inPublicationData.getEndPage().trim();
-        inPublication.setEndPage(Long.valueOf(strPub));
+        if (strPub.length() > 0) {
+            inPublication.setEndPage(Long.valueOf(strPub));
+        } else {
+            inPublication.setEndPage(null);
+        }
 
         strPub = inPublicationData.getYear().trim();
-        inPublication.setYear(Long.valueOf(strPub));
-
+        if (strPub.length() > 0) {
+            inPublication.setYear(Long.valueOf(strPub));
+        } else {
+            inPublication.setYear(null);
+        }
+        
         if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes")) {
             inPublication.setFirstTimeReported(new Boolean(true));
         } else {
