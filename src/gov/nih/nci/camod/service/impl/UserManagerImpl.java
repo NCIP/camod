@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.12 2005-11-18 21:05:37 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.13 2005-11-29 16:13:04 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/18 21:05:37  georgeda
+ * Defect #130, added superuser
+ *
  * Revision 1.11  2005/11/08 22:32:44  georgeda
  * LDAP changes
  *
@@ -116,7 +119,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
                     StringTokenizer theTokenizer = new StringTokenizer(theSuperusers, ",");
 
                     while (theTokenizer.hasMoreTokens()) {
-                        
+
                         if (theTokenizer.nextToken().equals(inUsername)) {
                             theRoles.add(Constants.Admin.Roles.SUPER_USER);
                             break;
@@ -316,8 +319,13 @@ public class UserManagerImpl extends BaseManager implements UserManager {
         boolean loginOk = false;
         try {
 
-            loginOk = theAuthenticationMgr.login(inUsername, inPassword);
-
+            // Work around bug in CSM.  Empty passwords pass
+            if (inPassword.trim().length() == 0) {
+                loginOk = false;
+            } else {
+                loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+            }
+            
             // Does the user exist? Must also be in our database to login
             List theRoles = getRolesForUser(inUsername);
             inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
