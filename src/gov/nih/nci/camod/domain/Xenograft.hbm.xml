@@ -90,14 +90,14 @@
         <many-to-one
         	name="originSpecies"
         	column="origin_species_id"
-        	cascade="all-delete-orphan"
+        	cascade="save-update"
         	class="Taxon"/>
         	
         <!-- hostSpecies (many-to-one unidirectional) -->
         <many-to-one
         	name="hostSpecies"
         	column="host_species_id"
-        	cascade="all-delete-orphan"
+        	cascade="save-update"
         	class="Taxon"/>    
         	
         <!-- organ: this is really a one-to-one relationship with unique=true -->
