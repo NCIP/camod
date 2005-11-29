@@ -83,13 +83,14 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Type of Modification:</label>
 		<camod:cshelp mapId="targeted_modification_help" key="MODIFICATION_TYPE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		</td>
 		<td class="formField">
 			<html:select styleClass="formFieldSized" multiple="true" size="5" property="modificationType" onchange="chkTypeMod( this );" >
 				<html:options name="<%= Dropdowns.TARGETEDMODIFICATIONDROP %>" />										
 			</html:select>
+			<br><br>
+			-If the category you are looking for is not listed, <br>select "Other" and enter the category in the text field below.
 			<br>
-			-if category you are looking for is not listed, <br>select "Other" and enter the category in the text field below:
+			-To select multiple modification types using a PC, <br>hold down the 'Control Key' while clicking the option with <br>the mouse.  Use the 'Shift Key' if you are using a Macintosh.
 		</td>
 	</tr>
 
