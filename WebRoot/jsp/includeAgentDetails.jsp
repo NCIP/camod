@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: includeAgentDetails.jsp,v 1.4 2005-11-10 16:09:11 schroedn Exp $
+ * $Id: includeAgentDetails.jsp,v 1.5 2005-11-29 20:26:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/10 16:09:11  schroedn
+ *  Defect #17 fix schroedln (11/9/05)
+ * Added link for chemical structure
+ *
  *
  */
 
@@ -26,7 +30,10 @@
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>CAS Number</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">
-	<c:out value="${agt.casNumber}"/>&nbsp;
+	<c:out value="${agt.casNumber}"/>
+	<c:if test="${not empty agt.casNumber}">
+	(<a href="#" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&searchlist=<c:out value='${agt.casNumber}'/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">Chemical Structure</a>)
+	</c:if>	
 	</td>
 <tr>				
 <tr>
