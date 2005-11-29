@@ -16,45 +16,64 @@
 	<tr><td valign="top" colspan="2">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 			<tr>
 				<td class="formTitle" height="20" colspan="2">
 				Images - Model:
 				<c:out value="${mdl.modelDescriptor}" escapeXml="false" /></td>				
-			</tr>			
+			</tr>
+			<tr><td>&nbsp;</td></tr>			
 
 			<c:forEach var="p" items="${mdl.imageCollectionSorted}" 
 				       varStatus="stat">
 			<tr>
 				<c:choose>
 					<c:when test = "${stat.count % 2 == 0}">
-						<c:set var="tdClass" value="resultsBoxWhite"/>
+						<c:set var="tdClass" value="resultsBoxWhiteAllSides" />
 					</c:when>
 					<c:otherwise>
-						<c:set var="tdClass" value="resultsBoxGrey"/>
+						<c:set var="tdClass" value="resultsBoxGreyAllSides"/>
 					</c:otherwise>
 				</c:choose>
 			
-				<td class="<c:out value="${tdClass}"/>End" colspan="2">
+				<td class="<c:out value="${tdClass}"/>" colspan="2">
 					<a href='<c:out value="${p.imageUrl}"/>'>
 					<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">
 					( Click to View )</a>
-					<br>
-						<b>Title:</b> <c:out value="${p.title}"/>
-					<br/>
-					<b>Staining:</b> <c:out value="${p.staining}"/> <br/>
-					<b>Description:</b> <c:out value="${p.description}"/>
-					<br/>
+					<br><br/>
+					<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+					<tr>
+						<td class="resultsBoxWhiteAllSides" width="15%"><b>Title</b></td>
+						<td class="resultsBoxWhiteAllSides" width="85%">
+						<c:out value="${p.title}"/>
+						</td>
+					<tr>
+					<tr>
+						<td class="resultsBoxGrey" width="15%"><b>Staining</b></td>
+						<td class="resultsBoxGreyEnd" width="85%">
+						<c:out value="${p.staining}"/>
+						</td>
+					<tr>				
+					<tr>
+						<td class="resultsBoxWhite" width="15%"><b>Description</b></td>
+						<td class="resultsBoxWhiteEnd" width="85%">
+						<c:out value="${p.description}"/>
+						</td>
+					<tr>
+					</TABLE>					
+					<br><br/>
 				</td>
 			</tr>
+            <tr><td>&nbsp;</td></tr>			
 			</c:forEach>
 
-            <tr><td></td></tr>
+
             <% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.IMAGES); %>
             <%@ include file="/jsp/includeComments.jsp" %>
   
 			
 			</TABLE>
+			<tr><td></td></tr>
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </tr></td></TABLE>
