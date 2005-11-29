@@ -63,7 +63,7 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<c:out value="${p.comments}"/>
+					<c:out value="${p.comments}"/>&nbsp;
 				</td>
 			</tr>
 			<tr><td></td></tr>
