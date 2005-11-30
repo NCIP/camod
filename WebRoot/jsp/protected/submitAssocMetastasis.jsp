@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/28 20:43:57  georgeda
+ * Defect #216 - Added onlyLeaf to diagnosis tree
+ *
  * Revision 1.13  2005/11/22 19:44:44  georgeda
  * Defect #172.  Changed to 'Gross Description / Macroscopic Description'
  *
@@ -11,7 +14,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.14 2005-11-28 20:43:57 georgeda Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.15 2005-11-30 17:32:44 pandyas Exp $
  *
  */   
 %>
@@ -128,7 +131,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Metastasis Tumor Frequency over lifetime (%)<br>(Enter numbers only):</label>
+		<td class="formLabel"><label for="field1">Metastasis Incidence over Lifetime (%)<br>(Enter numbers only):</label>
 		<camod:cshelp mapId="associated_metastasis_help" key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
