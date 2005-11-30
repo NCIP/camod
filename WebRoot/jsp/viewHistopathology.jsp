@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/11/29 13:27:47  georgeda
+ * Defect #76, move top link to right
+ *
  * Revision 1.23  2005/11/28 16:22:17  pandyas
  * Defect #187:  Changed Comments to Comment
  *
@@ -14,7 +17,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.24 2005-11-29 13:27:47 georgeda Exp $
+ * $Id: viewHistopathology.jsp,v 1.25 2005-11-30 17:36:11 pandyas Exp $
  *
  */   
 %>
@@ -129,7 +132,7 @@
 			</tr>			
 
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Tumor Frequency (%)</b></td>
+				<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence over Lifetime (%)</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
 					<c:out value="${h.relationalOperation}"/>&nbsp;
 					<c:out value="${h.tumorIncidenceRate}"/>&nbsp;
@@ -253,7 +256,7 @@
 			    </tr>			
 	
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Frequency of Metastasis(%)</b></td>
+					<td class="resultsBoxWhite" width="25%"><b>Metastasis Incidence over Lifetime (%)</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 						<c:out value="${m.relationalOperation}"/>&nbsp;
 						<c:out value="${m.tumorIncidenceRate}"/>&nbsp;

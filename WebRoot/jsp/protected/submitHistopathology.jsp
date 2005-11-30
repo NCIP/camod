@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/22 19:44:44  georgeda
+ * Defect #172.  Changed to 'Gross Description / Macroscopic Description'
+ *
  * Revision 1.13  2005/11/22 16:09:03  georgeda
  * One change fixes defects # 91, 107, 173.  Changed the EVS tree to correctly use the onlyLeaf setting.
  *
@@ -8,7 +11,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.14 2005-11-22 19:44:44 georgeda Exp $
+ * $Id: submitHistopathology.jsp,v 1.15 2005-11-30 17:33:22 pandyas Exp $
  *
  */   
 %>
@@ -125,7 +128,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Tumor Frequency (%)<br>(Enter numbers only):</label>
+		<td class="formLabel"><label for="field1">Tumor Incidence over Lifetime (%)<br>(Enter numbers only):</label>
 		<camod:cshelp mapId="histopathology_help" key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
