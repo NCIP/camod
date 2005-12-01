@@ -53,30 +53,17 @@ TD.subMenuFooter {
 	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 0.8em; FONT-WEIGHT: bold; FONT-SIZE: 0.6em; COLOR: #ffffff; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #5c5c5c
 }
 
-A:link {
-	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
-}
-A:visited {
-	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
-}
-A:active {
-	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
-}
-A:hover {
-	COLOR: #a90101
-}
-
 A.blueLink:link {
 	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
 }
 A.blueLink:visited {
 	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
 }
-A.blueLink:active {
-	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
-}
 A.blueLink:hover {
 	COLOR: #ffffff; BACKGROUND-COLOR: #344C7A
+}
+A.blueLink:active {
+	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
 }
 
 A.subMenuPrimary:link {
@@ -85,11 +72,11 @@ A.subMenuPrimary:link {
 A.subMenuPrimary:visited {
 	COLOR: #5c5c5c; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
 }
-A.subMenuPrimary:active {
-	COLOR: #5c5c5c; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
-}
 A.subMenuPrimary:hover {
 	COLOR: #ffffff; BACKGROUND-COLOR: #475B82
+}
+A.subMenuPrimary:active {
+	COLOR: #5c5c5c; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
 }
 
 A.subMenuSecondary:link {
@@ -98,11 +85,11 @@ A.subMenuSecondary:link {
 A.subMenuSecondary:visited {
 	COLOR: #ffffff; WHITE-SPACE: nowrap; TEXT-DECORATION: none
 }
-A.subMenuSecondary:active {
-	COLOR: #ffffff; WHITE-SPACE: nowrap; TEXT-DECORATION: none
-}
 A.subMenuSecondary:hover {
 	COLOR: #ffffff
+}
+A.subMenuSecondary:active {
+	COLOR: #ffffff; WHITE-SPACE: nowrap; TEXT-DECORATION: none
 }
 
 A.mainMenuLink:link {
@@ -157,7 +144,7 @@ A.subMenuBlue:hover {
 	COLOR: #ffffff; BACKGROUND-COLOR: #0000CC
 }
 
-A:subMenuMedRed:link {
+A.subMenuMedRed:link {
 	COLOR: #ff6666; WHITE-SPACE: nowrap; TEXT-DECORATION: none
 }
 A.subMenuMedRed:visited {
@@ -168,6 +155,19 @@ A.subMenuMedRed:active {
 }
 A.subMenuMedRed:hover {
 	COLOR: #ffffff; BACKGROUND-COLOR: #ff6666
+}
+
+A:link {
+	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
+}
+A:visited {
+	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
+}
+A:hover {
+	COLOR: #a90101
+}
+A:active {
+	COLOR: #000000; WHITE-SPACE: nowrap; TEXT-DECORATION: underline
 }
 
 .masterTitle {
