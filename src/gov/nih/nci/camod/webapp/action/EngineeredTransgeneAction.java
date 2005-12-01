@@ -21,210 +21,228 @@ import org.apache.struts.action.ActionMessages;
  */
 public final class EngineeredTransgeneAction extends BaseAction {
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		log.trace("Entering edit");
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        log.trace("Entering edit");
 
-		// Create a form to edit
-		EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
+        // Create a form to edit
+        EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
 
-		// Grab the current modelID from the session
-		String aEngineeredTransgeneID = engineeredTransgeneForm.getTransgeneId();
+        // Grab the current modelID from the session
+        String aEngineeredTransgeneID = engineeredTransgeneForm.getTransgeneId();
 
-		log.info("<EngineeredTransgeneAction save> following Characteristics:"
+        log.info("<EngineeredTransgeneAction save> following Characteristics:"
 
-		+ "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
-				+ "\n\t getOtherLocationOfIntegration: " + engineeredTransgeneForm.getOtherLocationOfIntegration()
+        + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
+                + "\n\t getOtherLocationOfIntegration: " + engineeredTransgeneForm.getOtherLocationOfIntegration()
 
-				+ "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
-				+ engineeredTransgeneForm.getScientificName() + "\n\t getOtherScientificName: "
-				+ engineeredTransgeneForm.getOtherScientificName()
+                + "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
+                + engineeredTransgeneForm.getScientificName() + "\n\t getOtherScientificName: "
+                + engineeredTransgeneForm.getOtherScientificName()
 
-				+ "\n\t getTranscriptional1_name: " + engineeredTransgeneForm.getTranscriptional1_name()
-				+ "\n\t getTranscriptional1_species: " + engineeredTransgeneForm.getTranscriptional1_species()
-				+ "\n\t getTranscriptional1_otherSpecies: "
-				+ engineeredTransgeneForm.getTranscriptional1_otherSpecies()
+                + "\n\t getTranscriptional1_name: " + engineeredTransgeneForm.getTranscriptional1_name()
+                + "\n\t getTranscriptional1_species: " + engineeredTransgeneForm.getTranscriptional1_species()
+                + "\n\t getTranscriptional1_otherSpecies: "
+                + engineeredTransgeneForm.getTranscriptional1_otherSpecies()
 
-				+ "\n\t getTranscriptional2_name: " + engineeredTransgeneForm.getTranscriptional2_name()
-				+ "\n\t getTranscriptional2_species: " + engineeredTransgeneForm.getTranscriptional2_species()
-				+ "\n\t getTranscriptional2_otherSpecies: "
-				+ engineeredTransgeneForm.getTranscriptional2_otherSpecies()
+                + "\n\t getTranscriptional2_name: " + engineeredTransgeneForm.getTranscriptional2_name()
+                + "\n\t getTranscriptional2_species: " + engineeredTransgeneForm.getTranscriptional2_species()
+                + "\n\t getTranscriptional2_otherSpecies: "
+                + engineeredTransgeneForm.getTranscriptional2_otherSpecies()
 
-				+ "\n\t getTranscriptional3_name: " + engineeredTransgeneForm.getTranscriptional3_name()
-				+ "\n\t getTranscriptional3_species: " + engineeredTransgeneForm.getTranscriptional3_species()
-				+ "\n\t getTranscriptional3_otherSpecies: "
-				+ engineeredTransgeneForm.getTranscriptional3_otherSpecies()
+                + "\n\t getTranscriptional3_name: " + engineeredTransgeneForm.getTranscriptional3_name()
+                + "\n\t getTranscriptional3_species: " + engineeredTransgeneForm.getTranscriptional3_species()
+                + "\n\t getTranscriptional3_otherSpecies: "
+                + engineeredTransgeneForm.getTranscriptional3_otherSpecies()
 
-				+ "\n\t getPolyASignal_name: " + engineeredTransgeneForm.getPolyASignal_name()
-				+ "\n\t getPolyASignal_species: " + engineeredTransgeneForm.getPolyASignal_species()
-				+ "\n\t getPolyASignal_otherSpecies: " + engineeredTransgeneForm.getPolyASignal_otherSpecies()
+                + "\n\t getPolyASignal_name: " + engineeredTransgeneForm.getPolyASignal_name()
+                + "\n\t getPolyASignal_species: " + engineeredTransgeneForm.getPolyASignal_species()
+                + "\n\t getPolyASignal_otherSpecies: " + engineeredTransgeneForm.getPolyASignal_otherSpecies()
 
-				+ "\n\t getSpliceSites_name: " + engineeredTransgeneForm.getSpliceSites_name()
-				+ "\n\t getSpliceSites_species: " + engineeredTransgeneForm.getSpliceSites_species()
-				+ "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
+                + "\n\t getSpliceSites_name: " + engineeredTransgeneForm.getSpliceSites_name()
+                + "\n\t getSpliceSites_species: " + engineeredTransgeneForm.getSpliceSites_species()
+                + "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
 
-				+ "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getNumberMGI: "
-				+ engineeredTransgeneForm.getNumberMGI() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
-				+ "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
-				+ engineeredTransgeneForm.getDescription() + "\n\t getComments: "
-				+ engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "
-				+ engineeredTransgeneForm.getFileServerLocation() + "\n\t getTitle: "
-				+ engineeredTransgeneForm.getTitle() + "\n\t getDescription: "
-				+ engineeredTransgeneForm.getDescription()
+                + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getNumberMGI: "
+                + engineeredTransgeneForm.getNumberMGI() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
+                + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
+                + engineeredTransgeneForm.getDescription() + "\n\t getComments: "
+                + engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "
+                + engineeredTransgeneForm.getFileServerLocation() + "\n\t getTitle: "
+                + engineeredTransgeneForm.getTitle() + "\n\t getDescription: "
+                + engineeredTransgeneForm.getDescription()
 
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		String theForward = "AnimalModelTreePopulateAction";
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        String theForward = "AnimalModelTreePopulateAction";
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		try {
+        try {
 
-			EngineeredTransgeneManager engineeredTransgeneManager = (EngineeredTransgeneManager) getBean("engineeredTransgeneManager");
+            EngineeredTransgeneManager engineeredTransgeneManager = (EngineeredTransgeneManager) getBean("engineeredTransgeneManager");
 
             if ("Delete".equals(theAction)) {
-                
+
                 // Grab the current modelID from the session
                 String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
                 AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
                 AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-                
-				engineeredTransgeneManager.remove(aEngineeredTransgeneID, theAnimalModel);
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("engineeredtransgene.delete.successful"));
-				saveErrors(request, msg);
+                engineeredTransgeneManager.remove(aEngineeredTransgeneID, theAnimalModel);
 
-			} else {
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("engineeredtransgene.delete.successful"));
+                saveErrors(request, msg);
 
-				log.info("EngineeredTransgene edit");
-				// retrieve model and update w/ new values
+            } else {
 
-				Transgene theEngineeredTransgene = engineeredTransgeneManager.get(aEngineeredTransgeneID);
+                log.info("EngineeredTransgene edit");
+                // retrieve model and update w/ new values
 
-				engineeredTransgeneManager.update(engineeredTransgeneForm, theEngineeredTransgene, request);
+                Transgene theEngineeredTransgene = engineeredTransgeneManager.get(aEngineeredTransgeneID);
 
-				// Add a message to be displayed in submitOverview.jsp saying
-				// you've
-				// created a new model successfully
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("engineeredtransgene.edit.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
-			log.error("Exception ocurred creating EngineeredTransgene", e);
+                engineeredTransgeneManager.update(engineeredTransgeneForm, theEngineeredTransgene, request);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+                // Add a message to be displayed in submitOverview.jsp saying
+                // you've
+                // created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("engineeredtransgene.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (IllegalArgumentException e) {
+            log.error("Exception ocurred editing an EngineeredTransgene", e);
 
-		log.trace("Exiting edit");
-		return mapping.findForward(theForward);
-	}
+            theForward = "input";
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.image.unsupportedfiletype"));
+            saveErrors(request, msg);
+        } catch (Exception e) {
+            log.error("Exception ocurred editing EngineeredTransgene", e);
 
-		log.trace("Entering save");
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-		// Create a form to edit
-		EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
+        log.trace("Exiting edit");
+        return mapping.findForward(theForward);
+    }
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		log.info("<EngineeredTransgeneAction save> following Characteristics:"
+        log.trace("Entering save");
 
-		+ "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
-				+ "\n\t getOtherLocationOfIntegration: " + engineeredTransgeneForm.getOtherLocationOfIntegration()
+        // Create a form to edit
+        EngineeredTransgeneForm engineeredTransgeneForm = (EngineeredTransgeneForm) form;
 
-				+ "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
-				+ engineeredTransgeneForm.getScientificName() + "\n\t getOtherScientificName: "
-				+ engineeredTransgeneForm.getOtherScientificName()
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-				+ "\n\t getTranscriptional1_name: " + engineeredTransgeneForm.getTranscriptional1_name()
-				+ "\n\t getTranscriptional1_species: " + engineeredTransgeneForm.getTranscriptional1_species()
-				+ "\n\t getTranscriptional1_otherSpecies: "
-				+ engineeredTransgeneForm.getTranscriptional1_otherSpecies()
+        log.info("<EngineeredTransgeneAction save> following Characteristics:"
 
-				+ "\n\t getTranscriptional2_name: " + engineeredTransgeneForm.getTranscriptional2_name()
-				+ "\n\t getTranscriptional2_species: " + engineeredTransgeneForm.getTranscriptional2_species()
-				+ "\n\t getTranscriptional2_otherSpecies: "
-				+ engineeredTransgeneForm.getTranscriptional2_otherSpecies()
+        + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
+                + "\n\t getOtherLocationOfIntegration: " + engineeredTransgeneForm.getOtherLocationOfIntegration()
 
-				+ "\n\t getTranscriptional3_name: " + engineeredTransgeneForm.getTranscriptional3_name()
-				+ "\n\t getTranscriptional3_species: " + engineeredTransgeneForm.getTranscriptional3_species()
-				+ "\n\t getTranscriptional3_otherSpecies: "
-				+ engineeredTransgeneForm.getTranscriptional3_otherSpecies()
+                + "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
+                + engineeredTransgeneForm.getScientificName() + "\n\t getOtherScientificName: "
+                + engineeredTransgeneForm.getOtherScientificName()
 
-				+ "\n\t getPolyASignal_name: " + engineeredTransgeneForm.getPolyASignal_name()
-				+ "\n\t getPolyASignal_species: " + engineeredTransgeneForm.getPolyASignal_species()
-				+ "\n\t getPolyASignal_otherSpecies: " + engineeredTransgeneForm.getPolyASignal_otherSpecies()
+                + "\n\t getTranscriptional1_name: " + engineeredTransgeneForm.getTranscriptional1_name()
+                + "\n\t getTranscriptional1_species: " + engineeredTransgeneForm.getTranscriptional1_species()
+                + "\n\t getTranscriptional1_otherSpecies: "
+                + engineeredTransgeneForm.getTranscriptional1_otherSpecies()
 
-				+ "\n\t getSpliceSites_name: " + engineeredTransgeneForm.getSpliceSites_name()
-				+ "\n\t getSpliceSites_species: " + engineeredTransgeneForm.getSpliceSites_species()
-				+ "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
+                + "\n\t getTranscriptional2_name: " + engineeredTransgeneForm.getTranscriptional2_name()
+                + "\n\t getTranscriptional2_species: " + engineeredTransgeneForm.getTranscriptional2_species()
+                + "\n\t getTranscriptional2_otherSpecies: "
+                + engineeredTransgeneForm.getTranscriptional2_otherSpecies()
 
-				+ "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getNumberMGI: "
-				+ engineeredTransgeneForm.getNumberMGI() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
-				+ "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
-				+ engineeredTransgeneForm.getDescription() + "\n\t getComments: "
-				+ engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "
-				+ engineeredTransgeneForm.getFileServerLocation() + "\n\t getTitle: "
-				+ engineeredTransgeneForm.getTitle() + "\n\t getDescription: "
-				+ engineeredTransgeneForm.getDescription()
+                + "\n\t getTranscriptional3_name: " + engineeredTransgeneForm.getTranscriptional3_name()
+                + "\n\t getTranscriptional3_species: " + engineeredTransgeneForm.getTranscriptional3_species()
+                + "\n\t getTranscriptional3_otherSpecies: "
+                + engineeredTransgeneForm.getTranscriptional3_otherSpecies()
 
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+                + "\n\t getPolyASignal_name: " + engineeredTransgeneForm.getPolyASignal_name()
+                + "\n\t getPolyASignal_species: " + engineeredTransgeneForm.getPolyASignal_species()
+                + "\n\t getPolyASignal_otherSpecies: " + engineeredTransgeneForm.getPolyASignal_otherSpecies()
 
-		String theForward = "AnimalModelTreePopulateAction";
+                + "\n\t getSpliceSites_name: " + engineeredTransgeneForm.getSpliceSites_name()
+                + "\n\t getSpliceSites_species: " + engineeredTransgeneForm.getSpliceSites_species()
+                + "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
 
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+                + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getNumberMGI: "
+                + engineeredTransgeneForm.getNumberMGI() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
+                + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
+                + engineeredTransgeneForm.getDescription() + "\n\t getComments: "
+                + engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "
+                + engineeredTransgeneForm.getFileServerLocation() + "\n\t getTitle: "
+                + engineeredTransgeneForm.getTitle() + "\n\t getDescription: "
+                + engineeredTransgeneForm.getDescription()
 
-			theAnimalModelManager.addGeneticDescription(theAnimalModel, engineeredTransgeneForm, request);
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-			log.info("New EngineeredTransgene created");
+        String theForward = "AnimalModelTreePopulateAction";
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("engineeredtransgene.creation.successful"));
-			saveErrors(request, msg);
+        try {
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-		} catch (Exception e) {
-			log.error("Exception ocurred creating EngineeredTransgene", e);
+            theAnimalModelManager.addGeneticDescription(theAnimalModel, engineeredTransgeneForm, request);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            log.info("New EngineeredTransgene created");
 
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("engineeredtransgene.creation.successful"));
+            saveErrors(request, msg);
+
+        } catch (IllegalArgumentException e) {
+            log.error("Exception ocurred saving an EngineeredTransgene", e);
+
+            theForward = "input";
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.image.unsupportedfiletype"));
+            saveErrors(request, msg);
+        } catch (Exception e) {
+            log.error("Exception ocurred creating EngineeredTransgene", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+
+        log.trace("Exiting save");
+        return mapping.findForward(theForward);
+    }
 }

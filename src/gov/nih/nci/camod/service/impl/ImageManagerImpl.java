@@ -47,7 +47,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
     public void remove(String id, AnimalModel inAnimalModel) throws Exception {
         log.trace("In ImageManagerImpl.remove");
-        
+
         inAnimalModel.getImageCollection().remove(get(id));
         super.save(inAnimalModel);
     }
@@ -134,7 +134,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         // Construct
         // Check for exisiting Image for this Image
         if (inImageData.getFileLocation() != null) {
-            System.out.println("<ImageDataManagerImpl> Uploading a file");
+
+            log.info("<ImageManagerImpl> Uploading a file");
 
             // If this is a new Image, upload it to the server
             FormFile f = inImageData.getFileLocation();
@@ -148,17 +149,19 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 System.out.println("Token=" + fileType);
             }
 
-            System.out.println("<ImageDataManagerImpl> fileType is: " + fileType + " FileName is: " + f.getFileName()
-                    + " Type is: " + f.getContentType());
+            log.info("<ImageManagerImpl> fileType is: " + fileType + " FileName is: " + f.getFileName() + " Type is: "
+                    + f.getContentType());
 
-            
             // Check the file type
             if (fileType != null) {
-                if (fileType.toLowerCase().equals("jpg") || fileType.toLowerCase().equals("jpeg") || fileType.toLowerCase().equals("gif")
-                        || fileType.toLowerCase().equals("sid") || fileType.toLowerCase().equals("png")) {
-
-                    System.out.println("<ImageDataManagerImpl> Valid file type " + fileType);
-                    System.out.println("<ImageDataManagerImpl> FileName is: " + f.getFileName() + " Type is: " + f.getContentType());
+                
+                // Supported file types.  Sid is only supported for the normal image upload
+                if (fileType.toLowerCase().equals("jpg") || 
+                    fileType.toLowerCase().equals("jpeg")|| 
+                    fileType.toLowerCase().equals("gif") || 
+                    (fileType.toLowerCase().equals("sid") && !inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) || 
+                    fileType.toLowerCase().equals("png")) 
+                {
 
                     InputStream in = null;
                     OutputStream out = null;
@@ -215,6 +218,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                     ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName,
                             uploadFile);
 
+                    log.error("File upload successful.  File name: " + uniqueFileName);
+                    
                     inImage.setTitle(inImageData.getTitle());
 
                     inImage.setDescription(inImageData.getDescriptionOfConstruct());
@@ -228,18 +233,18 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                         } else {
                             theType = theBundle.getString(Constants.CaImage.CAIMAGEMODEL);
                         }
-                        
+
                         String sidThumbView = theBundle.getString(Constants.CaImage.CAIMAGESIDTHUMBVIEW);
-                        String theThumbUrl =  sidThumbView + theType + uniqueFileName;
+                        String theThumbUrl = sidThumbView + theType + uniqueFileName;
                         String theViewUrl = Constants.CaImage.LEGACYJSP + theType + uniqueFileName;
                         inImage.setFileServerLocation(theThumbUrl + Constants.CaImage.FILESEP + theViewUrl);
-                        
+
                     } else {
                         inImage.setFileServerLocation(serverViewUrl + uniqueFileName);
                     }
 
                 } else {
-
+                    log.error("Unsupported file type: " + fileType);
                     throw new IllegalArgumentException("Unknown file type: " + fileType);
                 }
             }
@@ -247,5 +252,4 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
         log.trace("Exiting populateImage");
     }
-
 }

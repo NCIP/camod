@@ -173,10 +173,6 @@
 			path="/jsp/error.jsp"></forward>
 		
 		<forward
-			name="evsTreeImage"
-			path="/jsp/evsTreeImage.jsp"></forward>
-		
-		<forward
 			name="footer"
 			path="/jsp/footer.jsp"></forward>
 		
@@ -821,11 +817,6 @@
 			path="/error"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/error.jsp" />
-		
-		<action
-			path="/evsTreeImage"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/evsTreeImage.jsp" />
 		
 		<action
 			path="/footer"

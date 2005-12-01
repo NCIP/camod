@@ -94,7 +94,18 @@ public final class ImageAction extends BaseAction {
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.edit.successful"));
                 saveErrors(request, msg);
             }
-        } catch (Exception e) {
+        } 
+        catch (IllegalArgumentException e) {
+            
+            theForward = "input";
+            log.error("Exception ocurred creating Image", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+        catch (Exception e) {
             log.error("Exception ocurred creating Image", e);
 
             // Encountered an error saving the model.
@@ -152,7 +163,18 @@ public final class ImageAction extends BaseAction {
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("image.creation.successful"));
             saveErrors(request, msg);
 
-        } catch (Exception e) {
+        }
+        catch (IllegalArgumentException e) {
+            log.error("Exception ocurred creating Image", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.image.unsupportedfiletype"));
+            saveErrors(request, msg);
+            
+            theForward = "input";
+        }
+        catch (Exception e) {
             log.error("Exception ocurred creating Image", e);
 
             // Encountered an error saving the model.

@@ -31,7 +31,7 @@ public final class TargetedModificationAction extends BaseAction {
             HttpServletResponse response) throws Exception {
 
         log.trace("Entering edit");
-        
+
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
@@ -60,22 +60,24 @@ public final class TargetedModificationAction extends BaseAction {
         TargetedModificationManager targetedModificationManager = (TargetedModificationManager) getBean("targetedModificationManager");
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
+        String theForward = "AnimalModelTreePopulateAction";
         try {
-	        // retrieve animal model by it's id	        
-	        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);        	
+            // retrieve animal model by it's id
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);
 
             if ("Delete".equals(theAction)) {
-             
+
                 targetedModificationManager.remove(aTargetedModificationID, theAnimalModel);
-                
+
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("targetedmodification.delete.successful"));
                 saveErrors(request, msg);
-                
+
             } else {
                 TargetedModification theTargetedModification = targetedModificationManager.get(aTargetedModificationID);
-                targetedModificationManager.update(theAnimalModel, targetedModificationForm, theTargetedModification, request);
+                targetedModificationManager.update(theAnimalModel, targetedModificationForm, theTargetedModification,
+                        request);
 
                 log.info("TargetedModification edited");
 
@@ -83,6 +85,16 @@ public final class TargetedModificationAction extends BaseAction {
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("targetedmodification.edit.successful"));
                 saveErrors(request, msg);
             }
+        } catch (IllegalArgumentException e) {
+            log.error("Exception ocurred editing a TargetedModification", e);
+
+            theForward = "input";
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.image.unsupportedfiletype"));
+            saveErrors(request, msg);
+
         } catch (Exception e) {
             log.error("Exception ocurred creating SpontaneousMutation", e);
 
@@ -93,7 +105,8 @@ public final class TargetedModificationAction extends BaseAction {
         }
 
         log.trace("Exiting edit");
-        return mapping.findForward("AnimalModelTreePopulateAction");
+
+        return mapping.findForward(theForward);
     }
 
     /**
@@ -133,6 +146,8 @@ public final class TargetedModificationAction extends BaseAction {
                 + targetedModificationForm.getDescriptionOfConstruct()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
+        String theForward = "AnimalModelTreePopulateAction";
+
         try {
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -148,6 +163,16 @@ public final class TargetedModificationAction extends BaseAction {
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("targetedmodification.creation.successful"));
             saveErrors(request, msg);
 
+        } catch (IllegalArgumentException e) {
+            log.error("Exception ocurred saving a TargetedModification", e);
+
+            theForward = "input";
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.image.unsupportedfiletype"));
+            saveErrors(request, msg);
+
         } catch (Exception e) {
             log.error("Exception ocurred creating TargetedModification", e);
 
@@ -158,6 +183,6 @@ public final class TargetedModificationAction extends BaseAction {
         }
 
         log.trace("Exiting save");
-        return mapping.findForward("AnimalModelTreePopulateAction");
+        return mapping.findForward(theForward);
     }
 }

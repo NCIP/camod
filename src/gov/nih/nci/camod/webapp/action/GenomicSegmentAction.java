@@ -21,160 +21,177 @@ import org.apache.struts.action.ActionMessages;
  */
 public final class GenomicSegmentAction extends BaseAction {
 
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        log.trace("Entering edit");
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		log.trace("Entering edit");
+        // Create a form to edit
+        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
 
-		// Create a form to edit
-		GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
-
-		// Grab the current modelID from the session
-		String aGenomicSegmentID = genomicSegmentForm.getSegmentId();
-		
         // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);	
+        String aGenomicSegmentID = genomicSegmentForm.getSegmentId();
 
-		log.info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
-				+ genomicSegmentForm.getLocationOfIntegration() + "\n\t getOtherLocationOfIntegration: "
-				+ genomicSegmentForm.getOtherLocationOfIntegration() + "\n\t getSegmentName: "
-				+ genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
-				+ genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: " + genomicSegmentForm.getComments()
-				+ "\n\t getCloneDesignator: " + genomicSegmentForm.getCloneDesignator() + "\n\t getNumberMGI: "
-				+ genomicSegmentForm.getNumberMGI() + "\n\t getDescription: " + genomicSegmentForm.getDescription()
-				+ "\n\t getFileServerLocation: " + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
-				+ genomicSegmentForm.getTitle() + "\n\t"
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        // Grab the current modelID from the session
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		String theForward = "AnimalModelTreePopulateAction";
+        log.info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
+                + genomicSegmentForm.getLocationOfIntegration() + "\n\t getOtherLocationOfIntegration: "
+                + genomicSegmentForm.getOtherLocationOfIntegration() + "\n\t getSegmentName: "
+                + genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
+                + genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: " + genomicSegmentForm.getComments()
+                + "\n\t getCloneDesignator: " + genomicSegmentForm.getCloneDesignator() + "\n\t getNumberMGI: "
+                + genomicSegmentForm.getNumberMGI() + "\n\t getDescription: " + genomicSegmentForm.getDescription()
+                + "\n\t getFileServerLocation: " + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
+                + genomicSegmentForm.getTitle() + "\n\t"
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        String theForward = "AnimalModelTreePopulateAction";
 
-		try {
-			
-			GenomicSegmentManager genomicSegmentManager = (GenomicSegmentManager) getBean("genomicSegmentManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+
+        try {
+
+            GenomicSegmentManager genomicSegmentManager = (GenomicSegmentManager) getBean("genomicSegmentManager");
 
             if ("Delete".equals(theAction)) {
-				
-				log.info("GenomicSegment delete");
-				
+
+                log.info("GenomicSegment delete");
+
                 // Grab the current modelID from the session
                 String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
                 AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
                 AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-                
-				genomicSegmentManager.remove(aGenomicSegmentID, theAnimalModel);
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.delete.successful"));
-				saveErrors(request, msg);
+                genomicSegmentManager.remove(aGenomicSegmentID, theAnimalModel);
 
-			} else {
-				log.info("GenomicSegment edit");				
-				
-		        // retrieve animal model by it's id	        
-		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.delete.successful"));
+                saveErrors(request, msg);
 
-				// retrieve model and update w/ new values
+            } else {
+                log.info("GenomicSegment edit");
 
-				GenomicSegment theGenomicSegment = genomicSegmentManager.get(aGenomicSegmentID);
+                // retrieve animal model by it's id
+                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+                AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);
 
-				genomicSegmentManager.update(theAnimalModel, genomicSegmentForm, theGenomicSegment, request);
+                // retrieve model and update w/ new values
 
-				// Add a message to be displayed in submitOverview.jsp saying
-				// you've
-				// created a new model successfully
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.edit.successful"));
-				saveErrors(request, msg);
-			}
-		} catch (Exception e) {
-			log.error("Exception ocurred creating GenomicSegment", e);
+                GenomicSegment theGenomicSegment = genomicSegmentManager.get(aGenomicSegmentID);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+                genomicSegmentManager.update(theAnimalModel, genomicSegmentForm, theGenomicSegment, request);
 
-		log.trace("Exiting edit");
-		return mapping.findForward(theForward);
-	}
+                // Add a message to be displayed in submitOverview.jsp saying
+                // you've
+                // created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.edit.successful"));
+                saveErrors(request, msg);
+            }
+        } catch (IllegalArgumentException e) {
+            log.error("Exception ocurred editing GenomicSegment", e);
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+            theForward = "input";
 
-		log.trace("Entering save");
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.image.unsupportedfiletype"));
+            saveErrors(request, msg);
+        } catch (Exception e) {
+            log.error("Exception ocurred editing GenomicSegment", e);
 
-		// Create a form to edit
-		GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        log.trace("Exiting edit");
+        return mapping.findForward(theForward);
+    }
 
-		log
-				.info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
-						+ genomicSegmentForm.getLocationOfIntegration() + "\n\t getSegmentName: "
-						+ genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
-						+ genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: "
-						+ genomicSegmentForm.getComments() + "\n\t getCloneDesignator: "
-						+ genomicSegmentForm.getCloneDesignator() + "\n\t getNumberMGI: "
-						+ genomicSegmentForm.getNumberMGI() + "\n\t getDescription: "
-						+ genomicSegmentForm.getDescription() + "\n\t getFileServerLocation: "
-						+ genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
-						+ genomicSegmentForm.getTitle()
-						+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		String theForward = "AnimalModelTreePopulateAction";
+        log.trace("Entering save");
 
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+        // Create a form to edit
+        GenomicSegmentForm genomicSegmentForm = (GenomicSegmentForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, genomicSegmentForm);
 
-			theAnimalModelManager.addGeneticDescription(theAnimalModel, genomicSegmentForm, request);
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-			log.info("New GenomicSegment created");
+        log
+                .info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
+                        + genomicSegmentForm.getLocationOfIntegration() + "\n\t getSegmentName: "
+                        + genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
+                        + genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: "
+                        + genomicSegmentForm.getComments() + "\n\t getCloneDesignator: "
+                        + genomicSegmentForm.getCloneDesignator() + "\n\t getNumberMGI: "
+                        + genomicSegmentForm.getNumberMGI() + "\n\t getDescription: "
+                        + genomicSegmentForm.getDescription() + "\n\t getFileServerLocation: "
+                        + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
+                        + genomicSegmentForm.getTitle()
+                        + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.creation.successful"));
-			saveErrors(request, msg);
+        String theForward = "AnimalModelTreePopulateAction";
 
-		} catch (Exception e) {
-			log.error("Exception ocurred creating GenomicSegment", e);
+        try {
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+            theAnimalModelManager.addGeneticDescription(theAnimalModel, genomicSegmentForm, request);
 
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}
+            log.info("New GenomicSegment created");
+
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genomicsegment.creation.successful"));
+            saveErrors(request, msg);
+
+        } catch (IllegalArgumentException e) {
+            log.error("Exception ocurred creating GenomicSegment", e);
+
+            theForward = "input";
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.image.unsupportedfiletype"));
+            saveErrors(request, msg);
+        } catch (Exception e) {
+            log.error("Exception ocurred creating GenomicSegment", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+
+        log.trace("Exiting save");
+        return mapping.findForward(theForward);
+    }
 }
