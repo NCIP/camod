@@ -166,25 +166,27 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         // Transgene (coding sequence only)
         inEngineeredTransgene.setName(inEngineeredTransgeneData.getName());
 
-        // Create/reuse the taxon
-        Taxon theTaxon = null;
-        if (inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            theTaxon = TaxonManagerSingleton.instance().getOrCreate(inEngineeredTransgeneData.getScientificName(), null, null);
-        } else {
-            theTaxon = TaxonManagerSingleton.instance()
-                    .getOrCreate(inEngineeredTransgeneData.getOtherScientificName(), null, null);
-        }
+        // Did we add a taxon?
+        inEngineeredTransgene.getTaxonCollection().clear();
+        if (inEngineeredTransgeneData.getScientificName() != null && inEngineeredTransgeneData.getScientificName().length() > 0) {
+            // Create/reuse the taxon
+            Taxon theTaxon = null;
+            if (!inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
+                theTaxon = TaxonManagerSingleton.instance().getOrCreate(inEngineeredTransgeneData.getScientificName(),
+                        null, null);
+            } else {
+                theTaxon = TaxonManagerSingleton.instance().getOrCreate(
+                        inEngineeredTransgeneData.getOtherScientificName(), null, null);
+            }
 
-        // Only add if there is no Taxon already
-        if (inEngineeredTransgene.getTaxonCollection().size() > 0) {
-            inEngineeredTransgene.getTaxonCollection().clear();
-        }
-        inEngineeredTransgene.addTaxon(theTaxon);
+            inEngineeredTransgene.addTaxon(theTaxon);
 
-        if (theTaxon.getEthnicityStrainUnctrlVocab() != null) {
+            if (theTaxon.getEthnicityStrainUnctrlVocab() != null) {
 
-            log.info("Sending Notification eMail - new ScientificName added");
-            sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene ScientificName");
+                log.info("Sending Notification eMail - new ScientificName added");
+                sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(),
+                        "Transgene ScientificName");
+            }
         }
 
         inEngineeredTransgene.getRegulatoryElementCollection().clear();
