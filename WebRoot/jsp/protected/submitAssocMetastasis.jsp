@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/11/30 17:32:44  pandyas
+ * Defect #230: Modified field labels according to instructions
+ *
  * Revision 1.14  2005/11/28 20:43:57  georgeda
  * Defect #216 - Added onlyLeaf to diagnosis tree
  *
@@ -14,7 +17,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.15 2005-11-30 17:32:44 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.16 2005-12-01 20:03:42 schroedn Exp $
  *
  */   
 %>
@@ -29,7 +32,7 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
 	String aHistopathologyID = request.getParameter( "aHistopathologyID" );
@@ -47,6 +50,21 @@
 	    aAssociatedMetastasisID = "";
 	}
 %>
+<SCRIPT LANGUAGE="JavaScript">
+		
+	function chkObservation() {
+	
+	    observation = document.forms[0].observation;
+	
+		if( observation.value != null && observation.value != "" ) {
+			enableField(document.forms[0].methodOfObservation);
+		}
+		else {
+			disableField(document.forms[0].methodOfObservation);
+		}	
+	}
+	 
+</SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -175,7 +193,7 @@
 		<camod:cshelp mapId="associated_metastasis_help" key="GENETIC_ALTERATION.OBSERVATION_HISTO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="observation" size="30" />
+			<html:textarea styleClass="formFieldSized" property="observation" cols="32" rows="4" onkeypress="chkObservation();" />
 		</td>
 	</tr>
 	
@@ -185,7 +203,7 @@
 		<camod:cshelp mapId="associated_metastasis_help" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="methodOfObservation" size="30" />
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" cols="32" rows="4" disabled="true" />
 		</td>
 	</tr>	
 	
@@ -243,5 +261,9 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+
+<SCRIPT>
+	chkObservation();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
