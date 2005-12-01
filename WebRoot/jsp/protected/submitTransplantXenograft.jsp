@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: submitTransplantXenograft.jsp,v 1.32 2005-12-01 20:04:07 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -54,7 +66,19 @@
 		var otherSite = document.forms[0].otherAdministrativeSite;
 	
     	chkOther(site, otherSite);  	
-}		
+	}
+	
+	function chkObservation() {
+	
+	    geneticManipulation = document.forms[0].geneticManipulation;
+	
+		if( geneticManipulation.value != null && geneticManipulation.value != "" ) {
+			enableField(document.forms[0].modificationDescription);
+		}
+		else {
+			disableField(document.forms[0].modificationDescription);
+		}	
+	}		
 </SCRIPT>
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -181,7 +205,7 @@
 		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.GENETIC_MANIPULATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="geneticManipulation"  size="30" />
+			<html:textarea styleClass="formFieldSized" property="geneticManipulation" cols="32" rows="4" onkeypress="chkObservation();" />
 		</td>
 	</tr>	
 	
@@ -191,7 +215,7 @@
 		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.MODIFICATION_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="modificationDescription"  size="30" />
+			<html:textarea styleClass="formFieldSized" property="modificationDescription" cols="32" rows="4" disabled="true" />
 		</td>
 	</tr>
 
@@ -267,9 +291,10 @@
 </tr></td></TABLE>
 
 <SCRIPT LANGUAGE="JavaScript">
-chkOtherGraft();
-chkOtherStrain();
-chkOtherAdminSite();
+	chkOtherGraft();
+	chkOtherStrain();
+	chkOtherAdminSite();
+	chkObservation();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
