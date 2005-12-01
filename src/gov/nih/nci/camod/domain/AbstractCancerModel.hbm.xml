@@ -68,7 +68,7 @@
         <many-to-one
         	name="species"
         	column="taxon_id"
-        	cascade="all"
+        	cascade="save-update"
         	class="Taxon"/>
         	
 		<!-- submitter (many-to-one unidirectional) -->

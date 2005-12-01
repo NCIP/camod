@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.60 2005-11-16 15:31:05 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.61 2005-12-01 13:43:36 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.60  2005/11/16 15:31:05  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.59  2005/11/14 14:17:57  georgeda
  * Cleanup
  *
@@ -485,62 +488,50 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.setModelDescriptor(inModelCharacteristics.getModelDescriptor());
         inAnimalModel.setExperimentDesign(inModelCharacteristics.getExperimentDesign());
 
+        Taxon theOldTaxon = inAnimalModel.getSpecies();
+
         // Create/reuse the taxon
-        Taxon theTaxon = inAnimalModel.getSpecies();
+        Taxon theTaxon = TaxonManagerSingleton.instance().getOrCreate(inModelCharacteristics.getScientificName(),
+                inModelCharacteristics.getEthinicityStrain(), inModelCharacteristics.getEthnicityStrainUnctrlVocab());
 
-        String theOldVocab = "";
+        // Other option
+        if (theTaxon.getEthnicityStrainUnctrlVocab() != null) {
 
-        if (theTaxon == null) {
-            theTaxon = TaxonManagerSingleton.instance().create(inModelCharacteristics.getScientificName(),
-                    inModelCharacteristics.getEthinicityStrain(),
-                    inModelCharacteristics.getEthnicityStrainUnctrlVocab());
-        } else {
-            theOldVocab = theTaxon.getEthnicityStrainUnctrlVocab();
-            TaxonManagerSingleton.instance().update(inModelCharacteristics.getScientificName(),
-                    inModelCharacteristics.getEthinicityStrain(),
-                    inModelCharacteristics.getEthnicityStrainUnctrlVocab(), theTaxon);
-        }
+            // It doesn't match the old one
+            if (!theTaxon.getEthnicityStrainUnctrlVocab().equals(theOldTaxon.getEthnicityStrainUnctrlVocab())) {
+                log.trace("Sending Notification eMail - new EthinicityStrain added");
 
-        // Other option different than the one set
-        if (Constants.Dropdowns.OTHER_OPTION.equals(theTaxon.getEthnicityStrain())
-                && !inModelCharacteristics.getEthnicityStrainUnctrlVocab().equals(theOldVocab)) {
+                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
-            log.trace("Sending Notification eMail - new EthinicityStrain added");
+                // Iterate through all the reciepts in the config file
+                String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+                StringTokenizer st = new StringTokenizer(recipients, ",");
+                String inRecipients[] = new String[st.countTokens()];
+                for (int i = 0; i < inRecipients.length; i++) {
+                    inRecipients[i] = st.nextToken();
+                }
 
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+                String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+                String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++) {
-                inRecipients[i] = st.nextToken();
+                // gather message keys and variable values to build the e-mail
+                // content with
+                String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+                Map values = new TreeMap();
+                values.put("type", "EthinicityStrain");
+                values.put("value", inModelCharacteristics.getEthnicityStrainUnctrlVocab());
+                values.put("submitter", inAnimalModel.getSubmitter());
+                values.put("model", inAnimalModel.getModelDescriptor());
+                values.put("modelstate", inAnimalModel.getState());
+
+                // Send the email
+                try {
+                    MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+                } catch (Exception e) {
+                    log.error("Caught exception sending mail: ", e);
+                    e.printStackTrace();
+                }
             }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map values = new TreeMap();
-            values.put("type", "EthinicityStrain");
-            values.put("value", inModelCharacteristics.getEthnicityStrainUnctrlVocab());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            } catch (Exception e) {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
-
-            // 2. Set flag, this Strain will need to be approved before
-            // being added the list
-            theTaxon.setEthnicityStrainUnctrlVocab(inModelCharacteristics.getEthnicityStrainUnctrlVocab());
         }
 
         Phenotype thePhenotype = inAnimalModel.getPhenotype();
@@ -880,7 +871,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Entering addImage (Image)");
 
-        Image theImage = ImageManagerSingleton.instance().create(inAnimalModel, inImageData, inPath, Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
+        Image theImage = ImageManagerSingleton.instance().create(inAnimalModel, inImageData, inPath,
+                Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
         inAnimalModel.addImage(theImage);
         save(inAnimalModel);
 
@@ -979,38 +971,41 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
-    
-    public void addHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData) throws Exception{
+
+    public void addHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData) throws Exception {
 
         log.info("Entering AnimalModelManagerImpl.addHistopathology_1");
-        
-        Histopathology theHistopathology = HistopathologyManagerSingleton.instance().createHistopathology(inHistopathologyData);
+
+        Histopathology theHistopathology = HistopathologyManagerSingleton.instance().createHistopathology(
+                inHistopathologyData);
         inAnimalModel.addHistopathology(theHistopathology);
-       
+
         save(inAnimalModel);
-        
-        log.info("Exiting AnimalModelManagerImpl.addHistopathology");    	
-    } 
-    
-    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception{
+
+        log.info("Exiting AnimalModelManagerImpl.addHistopathology");
+    }
+
+    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology,
+            AssociatedMetastasisData inAssociatedMetastasisData) throws Exception {
 
         log.info("Entering AnimalModelManagerImpl.addAssociatedMetastasis_1");
-        
-        HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData, inHistopathology);
+
+        HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData,
+                inHistopathology);
         save(inAnimalModel);
-        
-        log.info("Exiting AnimalModelManagerImpl.addHistopathology");    	
-    }    
-    
-    public void addClinicalMarker(AnimalModel inAnimalModel, Histopathology inHistopathology, ClinicalMarkerData inClinicalMarkerData) throws Exception{
-    	
+
+        log.info("Exiting AnimalModelManagerImpl.addHistopathology");
+    }
+
+    public void addClinicalMarker(AnimalModel inAnimalModel, Histopathology inHistopathology,
+            ClinicalMarkerData inClinicalMarkerData) throws Exception {
 
         log.info("Entering AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
-        
+
         ClinicalMarkerManagerSingleton.instance().create(inClinicalMarkerData, inHistopathology);
         save(inAnimalModel);
-        
-        log.info("Exiting AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");    	
-    }    
+
+        log.info("Exiting AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
+    }
 
 }

@@ -6,10 +6,9 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.io.Serializable;
-
-import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
+
+import java.io.Serializable;
 
 /**
  * @author rajputs
@@ -17,7 +16,7 @@ import gov.nih.nci.camod.util.HashCodeUtil;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Taxon extends BaseObject implements Serializable, Duplicatable, Comparable {
+public class Taxon extends BaseObject implements Serializable, Comparable {
 
 	private static final long serialVersionUID = 3258545453799404851L;
 

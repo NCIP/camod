@@ -40,6 +40,6 @@
         	name="taxon"
         	column="taxon_id"
         	class="Taxon"
-        	cascade="all-delete-orphan"/>
+        	cascade="save-update"/>
 	</class>
 </hibernate-mapping>

@@ -1,8 +1,7 @@
 /*
- * Created on Aug 1, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ *  $Id: TaxonManagerImpl.java,v 1.8 2005-12-01 13:43:36 georgeda Exp $
+ * 
+ *  $Log: not supported by cvs2svn $  
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -13,24 +12,39 @@ import gov.nih.nci.common.persistence.Search;
 
 import java.util.*;
 
-/**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class TaxonManagerImpl extends BaseManager implements TaxonManager {
 
-    public Taxon create(String inScientificName, String inStrain, String inOtherStrain) {
+    public Taxon getOrCreate(String inScientificName, String inStrain, String inOtherStrain) {
 
-        Taxon theTaxon = new Taxon();
-        populate(theTaxon, inScientificName, inStrain, inOtherStrain);
+        Taxon theQBETaxon = new Taxon();
+        theQBETaxon.setScientificName(inScientificName);
+
+        // Other is not selected, null out the uncontrolled vocab
+        if (inStrain != null && !inStrain.equals(Constants.Dropdowns.OTHER_OPTION)) {
+            theQBETaxon.setEthnicityStrain(inStrain);
+        } else {
+            theQBETaxon.setEthnicityStrainUnctrlVocab(inOtherStrain);
+        }
+
+        Taxon theTaxon = null;
+        try {
+            List theList = Search.query(theQBETaxon);
+            
+            // Doesn't exist. Use the QBE taxon since it has the same data
+            if (theList != null && theList.size() > 0) {
+                theTaxon = (Taxon) theList.get(0);
+            }
+            else {
+                theTaxon = theQBETaxon;
+                theTaxon.setCommonName(getCommonNameFromScientificName(inScientificName));
+            }
+        } catch (Exception e) {
+            log.error("Error querying for matching taxon object.  Creating new one.", e);
+            theTaxon = theQBETaxon;
+            theTaxon.setCommonName(getCommonNameFromScientificName(inScientificName));
+        }
 
         return theTaxon;
-    }
-
-    public void update(String inScientificName, String inStrain, String inOtherStrain, Taxon inTaxon) {
-        populate(inTaxon, inScientificName, inStrain, inOtherStrain);
     }
 
     public List getAll() throws Exception {
@@ -88,21 +102,6 @@ public class TaxonManagerImpl extends BaseManager implements TaxonManager {
         }
 
         return strains;
-    }
-
-    private void populate(Taxon inTaxon, String inScientificName, String inStrain, String inOtherStrain) {
-        inTaxon.setScientificName(inScientificName);
-        inTaxon.setCommonName(getCommonNameFromScientificName(inScientificName));
-        
-
-        // Other is not selected, null out the uncontrolled vocab
-        if (!inStrain.equals(Constants.Dropdowns.OTHER_OPTION)) {
-        	inTaxon.setEthnicityStrain(inStrain);
-            inTaxon.setEthnicityStrainUnctrlVocab(null);
-        } else {
-            inTaxon.setEthnicityStrainUnctrlVocab(inOtherStrain);
-            inTaxon.setEthnicityStrain(null);
-        }
     }
 
     private String getCommonNameFromScientificName(String inScientificName) {

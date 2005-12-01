@@ -18,9 +18,7 @@ import java.util.List;
  */
 public interface TaxonManager {
 
-    public Taxon create(String inScientificName, String inStrain, String inOtherStrain);
-    
-    public void update(String inScientificName, String inStrain, String inOtherStrain, Taxon inTaxon);
+    public Taxon getOrCreate(String inScientificName, String inStrain, String inOtherStrain);
     
     public List getAll() throws Exception;
 

@@ -27,7 +27,7 @@
         	table="transgene_taxon"
         	inverse="false" 
         	lazy="true" 
-        	cascade="all-delete-orphan">
+        	cascade="save-update">
         	
         	<key column="engineered_gene_id"/>
         	<many-to-many column="taxon_id"

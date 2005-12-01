@@ -156,279 +156,63 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(theModelId);
 
-        /*
-         * Get the e-mail resource once for this method - used many times to
-         * send e-mails
-         */
-        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-        // Iterate through all the reciepts in the config file
-        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-        StringTokenizer st = new StringTokenizer(recipients, ",");
-        String inRecipients[] = new String[st.countTokens()];
-        for (int i = 0; i < inRecipients.length; i++) {
-            inRecipients[i] = st.nextToken();
-        }
-
-        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-
-        String inFrom = theAnimalModel.getSubmitter().getEmailAddress();
-        /* Get the e-mail resource ended */
-
         // Transgene Integration
-        if (inEngineeredTransgeneData.getLocationOfIntegration().equals("Targeted"))
+        if (inEngineeredTransgeneData.getLocationOfIntegration().equals("Targeted")) {
             inEngineeredTransgene.setLocationOfIntegration(inEngineeredTransgeneData.getOtherLocationOfIntegration());
-        else
+        } else {
             inEngineeredTransgene.setLocationOfIntegration(inEngineeredTransgeneData.getLocationOfIntegration());
+        }
 
         // Transgene (coding sequence only)
         inEngineeredTransgene.setName(inEngineeredTransgeneData.getName());
 
-        Taxon tax = new Taxon();
+        // Create/reuse the taxon
+        Taxon theTaxon = null;
+        if (inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
+            theTaxon = TaxonManagerSingleton.instance().getOrCreate(inEngineeredTransgeneData.getScientificName(), null, null);
+        } else {
+            theTaxon = TaxonManagerSingleton.instance()
+                    .getOrCreate(inEngineeredTransgeneData.getOtherScientificName(), null, null);
+        }
 
         // Only add if there is no Taxon already
-        if (inEngineeredTransgene.getTaxonCollection().size() > 0)
-            inEngineeredTransgene.getTaxonCollection().removeAll(inEngineeredTransgene.getTaxonCollection());
+        if (inEngineeredTransgene.getTaxonCollection().size() > 0) {
+            inEngineeredTransgene.getTaxonCollection().clear();
+        }
+        inEngineeredTransgene.addTaxon(theTaxon);
 
-        if (inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
-            tax.setScientificName(inEngineeredTransgeneData.getOtherScientificName());
-            inEngineeredTransgene.addTaxon(tax);
+        if (theTaxon.getEthnicityStrainUnctrlVocab() != null) {
 
-            log.trace("Sending Notification eMail - new ScientificName added");
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map values = new TreeMap();
-            values.put("type", "Transgene ScientificName");
-            values.put("value", inEngineeredTransgeneData.getOtherScientificName());
-            values.put("submitter", theAnimalModel.getSubmitter());
-            values.put("model", theAnimalModel.getModelDescriptor());
-            values.put("modelstate", theAnimalModel.getState());
-
-            // Send the email
-            try {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            } catch (Exception e) {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
-
-        } else {
-            tax.setScientificName(inEngineeredTransgeneData.getScientificName());
-            inEngineeredTransgene.addTaxon(tax);
+            log.info("Sending Notification eMail - new ScientificName added");
+            sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene ScientificName");
         }
 
-        // Transcriptional (Promoter)
-        if (inEngineeredTransgene.getRegulatoryElementCollection().size() > 0)
-            inEngineeredTransgene.getRegulatoryElementCollection().removeAll(
-                    inEngineeredTransgene.getRegulatoryElementCollection());
+        inEngineeredTransgene.getRegulatoryElementCollection().clear();
 
         // Transcriptional 1
-        Taxon tax1 = new Taxon();
-        RegulatoryElement regElement = new RegulatoryElement();
-        RegulatoryElementType regElementType = RegulatoryElementTypeManagerSingleton.instance().getByType(
-                "Transcriptional 1");
-
-        regElement.setRegulatoryElementType(regElementType);
-        regElement.setName(inEngineeredTransgeneData.getTranscriptional1_name());
-
-        if (inEngineeredTransgeneData.getTranscriptional1_species().equals("Other")) {
-            tax1.setScientificName(inEngineeredTransgeneData.getTranscriptional1_otherSpecies());
-            regElement.setTaxon(tax1);
-            inEngineeredTransgene.addRegulatoryElement(regElement);
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map values = new TreeMap();
-            values.put("type", "Transcriptional1 ScientificName");
-            values.put("value", inEngineeredTransgeneData.getTranscriptional1_otherSpecies());
-            values.put("submitter", theAnimalModel.getSubmitter());
-            values.put("model", theAnimalModel.getModelDescriptor());
-            values.put("modelstate", theAnimalModel.getState());
-
-            // Send the email
-            try {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            } catch (Exception e) {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
-
-        } else {
-            tax1.setScientificName(inEngineeredTransgeneData.getTranscriptional1_species());
-            regElement.setTaxon(tax1);
-            inEngineeredTransgene.addRegulatoryElement(regElement);
-        }
+        addRegulatoryElement(inEngineeredTransgeneData.getTranscriptional1_name(), "Transcriptional 1",
+                inEngineeredTransgene, inEngineeredTransgeneData.getTranscriptional1_species(),
+                inEngineeredTransgeneData.getTranscriptional1_otherSpecies(), theAnimalModel);
 
         // Transcriptional 2
-        if (inEngineeredTransgeneData.getTranscriptional2_name() != null) {
-            if (!inEngineeredTransgeneData.getTranscriptional2_name().equals("")) {
-                Taxon tax2 = new Taxon();
-                RegulatoryElement regElement2 = new RegulatoryElement();
-                RegulatoryElementType regElementType2 = RegulatoryElementTypeManagerSingleton.instance().getByType(
-                        "Transcriptional 2");
-                regElement2.setRegulatoryElementType(regElementType2);
-                regElement2.setName(inEngineeredTransgeneData.getTranscriptional2_name());
-
-                if (inEngineeredTransgeneData.getTranscriptional2_species().equals("Other")) {
-                    tax2.setScientificName(inEngineeredTransgeneData.getTranscriptional2_otherSpecies());
-                    regElement2.setTaxon(tax2);
-                    inEngineeredTransgene.addRegulatoryElement(regElement2);
-
-                    // gather message keys and variable values to build the
-                    // e-mail
-                    // content with
-                    String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                    Map values = new TreeMap();
-                    values.put("type", "Transcriptional2 ScientificName");
-                    values.put("value", inEngineeredTransgeneData.getTranscriptional2_otherSpecies());
-                    values.put("submitter", theAnimalModel.getSubmitter());
-                    values.put("model", theAnimalModel.getModelDescriptor());
-                    values.put("modelstate", theAnimalModel.getState());
-
-                    // Send the email
-                    try {
-                        MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                    } catch (Exception e) {
-                        log.error("Caught exception sending mail: ", e);
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    tax2.setScientificName(inEngineeredTransgeneData.getTranscriptional2_species());
-                    regElement2.setTaxon(tax2);
-                    inEngineeredTransgene.addRegulatoryElement(regElement2);
-                }
-            }
-        }
+        addRegulatoryElement(inEngineeredTransgeneData.getTranscriptional2_name(), "Transcriptional 2",
+                inEngineeredTransgene, inEngineeredTransgeneData.getTranscriptional2_species(),
+                inEngineeredTransgeneData.getTranscriptional2_otherSpecies(), theAnimalModel);
 
         // Transcriptional 3
-        if (inEngineeredTransgeneData.getTranscriptional3_name() != null) {
-            if (!inEngineeredTransgeneData.getTranscriptional3_name().equals("")) {
-                Taxon tax3 = new Taxon();
-                RegulatoryElement regElement3 = new RegulatoryElement();
-                RegulatoryElementType regElementType3 = RegulatoryElementTypeManagerSingleton.instance().getByType(
-                        "Transcriptional 3");
-                regElement3.setRegulatoryElementType(regElementType3);
-                regElement3.setName(inEngineeredTransgeneData.getTranscriptional3_name());
+        addRegulatoryElement(inEngineeredTransgeneData.getTranscriptional3_name(), "Transcriptional 3",
+                inEngineeredTransgene, inEngineeredTransgeneData.getTranscriptional3_species(),
+                inEngineeredTransgeneData.getTranscriptional3_otherSpecies(), theAnimalModel);
 
-                if (inEngineeredTransgeneData.getTranscriptional3_species().equals("Other")) {
-                    tax3.setScientificName(inEngineeredTransgeneData.getTranscriptional3_otherSpecies());
-                    regElement3.setTaxon(tax3);
-                    inEngineeredTransgene.addRegulatoryElement(regElement3);
+        // Poly A Signal
+        addRegulatoryElement(inEngineeredTransgeneData.getPolyASignal_name(), "Poly A Signal", inEngineeredTransgene,
+                inEngineeredTransgeneData.getPolyASignal_species(), inEngineeredTransgeneData
+                        .getPolyASignal_otherSpecies(), theAnimalModel);
 
-                    // gather message keys and variable values to build the
-                    // e-mail
-                    // content with
-                    String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                    Map values = new TreeMap();
-                    values.put("type", "Transcriptional3 ScientificName");
-                    values.put("value", inEngineeredTransgeneData.getTranscriptional3_otherSpecies());
-                    values.put("submitter", theAnimalModel.getSubmitter());
-                    values.put("model", theAnimalModel.getModelDescriptor());
-                    values.put("modelstate", theAnimalModel.getState());
-
-                    // Send the email
-                    try {
-                        MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                    } catch (Exception e) {
-                        log.error("Caught exception sending mail: ", e);
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    tax3.setScientificName(inEngineeredTransgeneData.getTranscriptional3_species());
-                    regElement3.setTaxon(tax3);
-                    inEngineeredTransgene.addRegulatoryElement(regElement3);
-                }
-            }
-        }
-
-        // PolyASignal
-        if (inEngineeredTransgeneData.getPolyASignal_name() != null) {
-            if (!inEngineeredTransgeneData.getPolyASignal_name().equals("")) {
-                Taxon taxPolyASignal = new Taxon();
-                RegulatoryElement regElementPolyASignal = new RegulatoryElement();
-                RegulatoryElementType regElementTypePolyASignal = RegulatoryElementTypeManagerSingleton.instance()
-                        .getByType("Poly A Signal");
-                regElementPolyASignal.setRegulatoryElementType(regElementTypePolyASignal);
-                regElementPolyASignal.setName(inEngineeredTransgeneData.getPolyASignal_name());
-
-                if (inEngineeredTransgeneData.getPolyASignal_species().equals("Other")) {
-                    taxPolyASignal.setScientificName(inEngineeredTransgeneData.getPolyASignal_otherSpecies());
-                    regElementPolyASignal.setTaxon(taxPolyASignal);
-                    inEngineeredTransgene.addRegulatoryElement(regElementPolyASignal);
-
-                    // gather message keys and variable values to build the
-                    // e-mail
-                    // content with
-                    String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                    Map values = new TreeMap();
-                    values.put("type", "PolyASignal ScientificName");
-                    values.put("value", inEngineeredTransgeneData.getPolyASignal_otherSpecies());
-                    values.put("submitter", theAnimalModel.getSubmitter());
-                    values.put("model", theAnimalModel.getModelDescriptor());
-                    values.put("modelstate", theAnimalModel.getState());
-
-                    // Send the email
-                    try {
-                        MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                    } catch (Exception e) {
-                        log.error("Caught exception sending mail: ", e);
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    taxPolyASignal.setScientificName(inEngineeredTransgeneData.getPolyASignal_species());
-                    regElementPolyASignal.setTaxon(taxPolyASignal);
-                    inEngineeredTransgene.addRegulatoryElement(regElementPolyASignal);
-                }
-            }
-        }
-
-        // SpliceSites
-        if (inEngineeredTransgeneData.getSpliceSites_name() != null) {
-            if (!inEngineeredTransgeneData.getSpliceSites_name().equals("")) {
-                Taxon taxSpliceSites = new Taxon();
-                RegulatoryElement regElementSpliceSites = new RegulatoryElement();
-                RegulatoryElementType regElementTypeSpliceSites = RegulatoryElementTypeManagerSingleton.instance()
-                        .getByType("Splice Site");
-                regElementSpliceSites.setRegulatoryElementType(regElementTypeSpliceSites);
-                regElementSpliceSites.setName(inEngineeredTransgeneData.getSpliceSites_name());
-
-                if (inEngineeredTransgeneData.getSpliceSites_species().equals("Other")) {
-                    taxSpliceSites.setScientificName(inEngineeredTransgeneData.getSpliceSites_otherSpecies());
-                    regElementSpliceSites.setTaxon(taxSpliceSites);
-                    inEngineeredTransgene.addRegulatoryElement(regElementSpliceSites);
-
-                    // gather message keys and variable values to build the
-                    // e-mail
-                    // content with
-                    String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                    Map values = new TreeMap();
-                    values.put("type", "SpliceSites ScientificName");
-                    values.put("value", inEngineeredTransgeneData.getSpliceSites_otherSpecies());
-                    values.put("submitter", theAnimalModel.getSubmitter());
-                    values.put("model", theAnimalModel.getModelDescriptor());
-                    values.put("modelstate", theAnimalModel.getState());
-
-                    // Send the email
-                    try {
-                        MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                    } catch (Exception e) {
-                        log.error("Caught exception sending mail: ", e);
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    taxSpliceSites.setScientificName(inEngineeredTransgeneData.getSpliceSites_species());
-                    regElementSpliceSites.setTaxon(taxSpliceSites);
-                    inEngineeredTransgene.addRegulatoryElement(regElementSpliceSites);
-                }
-            }
-        }
+        // Splice Site
+        addRegulatoryElement(inEngineeredTransgeneData.getSpliceSites_name(), "Splice Site", inEngineeredTransgene,
+                inEngineeredTransgeneData.getSpliceSites_species(), inEngineeredTransgeneData
+                        .getSpliceSites_otherSpecies(), theAnimalModel);
 
         // MGI Number
         // Check for exisiting MutationIdentifier
@@ -523,5 +307,75 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         }
 
         log.trace("Exiting populateEngineeredTransgene");
+    }
+
+    private void addRegulatoryElement(String inName, String inType, Transgene inEngineeredTransgene, String theSpecies,
+            String theOtherSpecies, AnimalModel inAnimalModel) throws Exception {
+
+        if (inName != null && inName.length() > 0) {
+
+            RegulatoryElement theRegElement = new RegulatoryElement();
+            RegulatoryElementType theRegType = RegulatoryElementTypeManagerSingleton.instance().getByType(inType);
+            theRegElement.setRegulatoryElementType(theRegType);
+            theRegElement.setName(inName);
+            inEngineeredTransgene.addRegulatoryElement(theRegElement);
+
+            // We need to create a taxon
+            if (theSpecies != null && theSpecies.length() > 0) {
+
+                Taxon theTaxon = null;
+                if (theSpecies.equals(Constants.Dropdowns.OTHER_OPTION)) {
+                    theTaxon = TaxonManagerSingleton.instance().getOrCreate(theOtherSpecies, null, null);
+                } else {
+                    theTaxon = TaxonManagerSingleton.instance().getOrCreate(theSpecies, null, null);
+                }
+
+                theRegElement.setTaxon(theTaxon);
+
+                if (theTaxon.getEthnicityStrainUnctrlVocab() != null) {
+
+                    log.info("Sending Notification eMail - new " + inType + " ScientificName added");
+                    sendEmail(inAnimalModel, theOtherSpecies, inType + " ScientificName");
+                }
+            }
+        }
+    }
+
+    private void sendEmail(AnimalModel inAnimalModel, String theUncontrolledVocab, String inType) {
+
+        /*
+         * Get the e-mail resource
+         */
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++) {
+            inRecipients[i] = st.nextToken();
+        }
+
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+        // gather message keys and variable values to build the e-mail
+        // content with
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map values = new TreeMap();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        } catch (Exception e) {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
+        }
     }
 }
