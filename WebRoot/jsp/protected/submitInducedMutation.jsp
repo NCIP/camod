@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: submitInducedMutation.jsp,v 1.24 2005-12-01 20:05:13 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
