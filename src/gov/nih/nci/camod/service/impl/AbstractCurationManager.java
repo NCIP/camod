@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AbstractCurationManager.java,v 1.9 2005-11-28 13:43:26 georgeda Exp $
+ * $Id: AbstractCurationManager.java,v 1.10 2005-12-02 14:36:50 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/28 13:43:26  georgeda
+ * Defect #192, handle back arrow for curation changes
+ *
  * Revision 1.8  2005/11/14 14:17:47  georgeda
  * Cleanup
  *
@@ -81,7 +84,7 @@ public abstract class AbstractCurationManager implements CurationManager {
     // behavior
     protected CurateableActionFactory myActionFactory = new CurateableActionFactoryImpl();
 
-    protected Map myStates = new HashMap();
+    protected Map myStates = new LinkedHashMap();
 
     private String myDefaultState = null;
 
