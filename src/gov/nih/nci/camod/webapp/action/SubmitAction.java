@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.12 2005-10-24 13:28:17 georgeda Exp $
+ *  $Id: SubmitAction.java,v 1.13 2005-12-02 16:17:09 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.12  2005/10/24 13:28:17  georgeda
+ *  Cleanup changes
+ *
  *  Revision 1.11  2005/09/22 18:56:37  georgeda
  *  Get coordinator from user in properties file
  *
@@ -60,7 +63,7 @@ public class SubmitAction extends BaseAction {
             ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
             String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
             theForm.setAssignedTo(theCoordinator);
-            request.setAttribute(Constants.FORMDATA, theForm);
+            request.getSession().setAttribute(Constants.FORMDATA, theForm);
 
         } catch (Exception e) {
             log.error("Exception occurred in setModelConstants", e);
