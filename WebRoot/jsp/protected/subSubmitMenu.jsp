@@ -1,8 +1,11 @@
 <%
  /*
-  * $Id: subSubmitMenu.jsp,v 1.45 2005-11-29 16:28:19 georgeda Exp $
+  * $Id: subSubmitMenu.jsp,v 1.46 2005-12-02 14:18:21 georgeda Exp $
   *
   * $Log: not supported by cvs2svn $
+  * Revision 1.45  2005/11/29 16:28:19  georgeda
+  * Defect #193, missed xenograft
+  *
   * Revision 1.44  2005/11/28 20:00:07  georgeda
   * Defect #214 - user the gene name instead of the viral vector
   *
@@ -50,7 +53,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="EngineeredTransgenePopulateAction.do?method=populate" paramId="aEngineeredTransgeneID" paramName="aEngineeredTransgene" paramProperty="id">
-			      		<camod:shorten><bean:write name="aEngineeredTransgene" property="name" filter="true"/></camod:shorten>
+			      		<camod:shorten><bean:write name="aEngineeredTransgene" property="name" filter="false"/></camod:shorten>
 			      </html:link><br>
 			      
 			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -66,7 +69,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aEngineeredTransgeneID }' />">
-						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="true"/></camod:shorten>
+						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
 					</a><br>
 					
 				</logic:iterate>					
@@ -78,7 +81,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="GenomicSegmentPopulateAction.do?method=populate" paramId="aGenomicSegmentID" paramName="aGenomicSegment" paramProperty="id">
-			      		<camod:shorten><bean:write name="aGenomicSegment" property="cloneDesignator" filter="true"/></camod:shorten>
+			      		<camod:shorten><bean:write name="aGenomicSegment" property="cloneDesignator" filter="false"/></camod:shorten>
 			      </html:link><br>
 			      
 			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -94,7 +97,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aGenomicSegmentID=<c:out value='${ aGenomicSegmentID }' />">
-						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="true"/></camod:shorten>
+						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
 					</a><br>
 					
 				</logic:iterate>	
@@ -106,7 +109,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="TargetedModificationPopulateAction.do?method=populate" paramId="aTargetedModificationID" paramName="aTargetedModification" paramProperty="id">
-			      		<camod:shorten><bean:write name="aTargetedModification" property="name" filter="true"/></camod:shorten>
+			      		<camod:shorten><bean:write name="aTargetedModification" property="name" filter="false"/></camod:shorten>
 			      </html:link><br>
 			      
 			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -122,7 +125,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aTargetedModificationID=<c:out value='${ aTargetedModificationID }' />">
-						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="true"/></camod:shorten>
+						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
 					</a><br>
 					
 				</logic:iterate>	
@@ -133,7 +136,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="InducedMutationPopulateAction.do?method=populate" paramId="aInducedMutationID" paramName="aInducedMutation" paramProperty="id">
-			      		<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.name" filter="true"/></camod:shorten>
+			      		<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.name" filter="false"/></camod:shorten>
 			      </html:link><br>
 		</logic:iterate>
 		
@@ -142,7 +145,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="SpontaneousMutationPopulateAction.do?method=populate" paramId="aSpontaneousMutationID" paramName="aSpontaneousMutation" paramProperty="id">
-				      	<camod:shorten><bean:write name="aSpontaneousMutation" property="name" filter="true"/></camod:shorten>
+				      	<camod:shorten><bean:write name="aSpontaneousMutation" property="name" filter="false"/></camod:shorten>
 			      </html:link><br>
 		</logic:iterate>
 		<br>
@@ -152,47 +155,47 @@
 	<span class="submasterdiv" class="submenu"  id="sub3">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="ChemicalDrugPopulateAction.do?method=dropdown">Enter Chemical/Drug</html:link><br>
 			  <logic:iterate id="aTherapy" name="chemicaldrug_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ChemicalDrugPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ChemicalDrugPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="EnvironmentalFactorPopulateAction.do?method=dropdown">Enter Environmental Factor</html:link><br>
 			  <logic:iterate id="aTherapy" name="environmentalfactor_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="EnvironmentalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="EnvironmentalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="GeneDeliveryPopulateAction.do?method=dropdown">Enter Gene Delivery</html:link><br>
 			  <logic:iterate id="aTherapy" name="genedelivery_list" type="GeneDelivery">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="geneInVirus" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GeneDeliveryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="geneInVirus" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 			  
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="GrowthFactorPopulateAction.do?method=dropdown">Enter Growth Factor</html:link><br>		
 			  <logic:iterate id="aTherapy" name="growthfactors_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GrowthFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="GrowthFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 			  
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="HormonePopulateAction.do?method=dropdown">Enter Hormone</html:link><br>
 			  <logic:iterate id="aTherapy" name="hormone_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="HormonePopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="HormonePopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 		
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="NutritionalFactorPopulateAction.do?method=dropdown">Enter Nutritional Factor</html:link><br>
 			  <logic:iterate id="aTherapy" name="nutritionalfactors_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="NutritionalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="NutritionalFactorPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>		
 		
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="RadiationPopulateAction.do?method=dropdown">Enter Radiation</html:link><br>
 			  <logic:iterate id="aTherapy" name="radiation_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="RadiationPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="RadiationPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>		
 
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="SurgeryPopulateAction.do?method=dropdown">Enter Surgery/Other</html:link><br>				  
 			  <logic:iterate id="aTherapy" name="surgeryother_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="SurgeryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="SurgeryPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 		  
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="ViralTreatmentPopulateAction.do?method=dropdown">Enter Viral Treatment</html:link><br>
 			  <logic:iterate id="aTherapy" name="viraltreatment_list" type="Therapy">
-			  	&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ViralTreatmentPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="true"/></camod:shorten></html:link><br>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ViralTreatmentPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 		<br>
 	</span>	
@@ -201,7 +204,7 @@
 	<span class="submasterdiv" id="sub4">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="PublicationPopulateAction.do?method=dropdown">Enter Publications</html:link><br>
 			  <logic:iterate id="aPub" name="publication_list" type="Publication">
-			 	 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="PublicationPopulateAction.do?method=populate" paramId="aPubID" paramName="aPub" paramProperty="id"><camod:shorten><bean:write name="aPub" property="authors" filter="true"/></camod:shorten></html:link><br>
+			 	 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="PublicationPopulateAction.do?method=populate" paramId="aPubID" paramName="aPub" paramProperty="id"><camod:shorten><bean:write name="aPub" property="authors" filter="false"/></camod:shorten></html:link><br>
 			  </logic:iterate>
 		<br>
 	</span>
@@ -213,7 +216,7 @@
 		<logic:iterate id="aHistopathology" name="histopathology_list" type="Histopathology">
 			  &nbsp;&nbsp;&nbsp; <img src="images/aquadot.jpg" border="0"> 
 			  <html:link styleClass="subMenuBlue" action="HistopathologyPopulateAction.do?method=populate" paramId="aHistopathologyID" paramName="aHistopathology" paramProperty="id">
-			      <camod:shorten><bean:write name="aHistopathology" property="organ.name" filter="true"/></camod:shorten>
+			      <camod:shorten><bean:write name="aHistopathology" property="organ.name" filter="false"/></camod:shorten>
 			  </html:link><br>
 
 				  <!-- Begin Associated Metastasis Loop -->			      
@@ -228,7 +231,7 @@
 					
 				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot_red.jpg" border="0"> 
 				  <a class="subMenuMedRed" href="AssociatedMetastasisPopulateAction.do?method=populate&aAssociatedMetastasisID=<c:out value='${ aAssociatedMetastasisID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
-					<camod:shorten><bean:write name="aAssociatedMetastasis" property="organ.name" filter="true"/></camod:shorten>
+					<camod:shorten><bean:write name="aAssociatedMetastasis" property="organ.name" filter="false"/></camod:shorten>
 				  </a><br>					
 				</logic:iterate>
 				<!-- End Associated Metastasis Loop -->
@@ -245,7 +248,7 @@
 				  
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="ClinicalMarkerPopulateAction.do?method=populate&aClinicalMarkerID=<c:out value='${ aClinicalMarkerID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
-				  		<camod:shorten><bean:write name="aClinicalMarker" property="name" filter="true"/></camod:shorten>
+				  		<camod:shorten><bean:write name="aClinicalMarker" property="name" filter="false"/></camod:shorten>
 				  	</a><br>
 				</logic:iterate>				  
 
@@ -257,7 +260,7 @@
 	<span class="submasterdiv" id="sub6">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="TherapyPopulateAction.do?method=dropdown">Enter Therapy</html:link><br>
 			  <logic:iterate id="aTherapy" name="therapy_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="TherapyPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="true"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="TherapyPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="false"/></html:link><br>
 			 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img src="images/right_arrow.gif" border="0"> 
@@ -286,7 +289,7 @@
 				 &nbsp;&nbsp;&nbsp;&nbsp;
 				 <img src="images/aquadot.jpg" border="0"> 
 				 <html:link styleClass="subMenuBlue" action="CellLinePopulateAction.do?method=populate" paramId="aCellID" paramName="aCell" paramProperty="id">
-				 		<camod:shorten><bean:write name="aCell" property="name" filter="true"/></camod:shorten>
+				 		<camod:shorten><bean:write name="aCell" property="name" filter="false"/></camod:shorten>
 				 </html:link><br>		
 				 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -302,7 +305,7 @@
 				
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aCellID=<c:out value='${aCellID }'/>"><camod:shorten><bean:write name="aPublication" property="authors" filter="true"/></camod:shorten></a><br>
+					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aCellID=<c:out value='${aCellID }'/>"><camod:shorten><bean:write name="aPublication" property="authors" filter="false"/></camod:shorten></a><br>
 				
 				</logic:iterate>				 
 			 </logic:iterate>		    
@@ -313,7 +316,7 @@
 	<span class="submasterdiv" id="sub8">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="ImagePopulateAction.do?method=dropdown">Enter Images</html:link><br>
 			 <logic:iterate id="aImage" name="image_list" type="Image">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ImagePopulateAction.do?method=populate" paramId="aImageID" paramName="aImage" paramProperty="id"><camod:shorten><bean:write name="aImage" property="title" filter="true"/></camod:shorten></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="ImagePopulateAction.do?method=populate" paramId="aImageID" paramName="aImage" paramProperty="id"><camod:shorten><bean:write name="aImage" property="title" filter="false"/></camod:shorten></html:link><br>
 			 </logic:iterate>
 		<br>		
 	</span>
@@ -327,19 +330,19 @@
 	<span class="submasterdiv" id="sub10">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="JacksonLabPopulateAction.do?method=dropdown&lab=Jackson Laboratory">Available from Jackson Lab.</html:link><br>
 			 <logic:iterate id="aAvailability" name="jacksonlab_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="JacksonLabPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="true"/></camod:shorten></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="JacksonLabPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="false"/></camod:shorten></html:link><br>
 			 </logic:iterate>		
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="MMHCCRepoPopulateAction.do?method=dropdown&lab=MMHCC Repository">Available from MMHCC Repo.</html:link><br>
 			 <logic:iterate id="aAvailability" name="mmhcc_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="MMHCCRepoPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="true"/></camod:shorten></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="MMHCCRepoPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="false"/></camod:shorten></html:link><br>
 			 </logic:iterate>
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="InvestigatorPopulateAction.do?method=dropdown&lab=Investigator">Available from Investigator</html:link><br>
 			 <logic:iterate id="aAvailability" name="investigator_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="InvestigatorPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="true"/></camod:shorten></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="InvestigatorPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="false"/></camod:shorten></html:link><br>
 			 </logic:iterate>			 		
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="IMSRPopulateAction.do?method=dropdown&lab=IMSR">Available from IMSR</html:link><br>
 			 <logic:iterate id="aAvailability" name="imsr_list" type="AnimalAvailability">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="IMSRPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="true"/></camod:shorten></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="IMSRPopulateAction.do?method=populate" paramId="aAvailabilityID" paramName="aAvailability" paramProperty="id"><camod:shorten><bean:write name="aAvailability" property="displayName" filter="false"/></camod:shorten></html:link><br>
 			 </logic:iterate>
 			 <br>
 	</span>
@@ -348,7 +351,7 @@
 	<span class="submasterdiv" id="sub11">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="XenograftPopulateAction.do?method=dropdown">Enter Transplant/Xenograft</html:link><br>
 			 <logic:iterate id="aXenograft" name="xenograft_list" type="Xenograft">
-			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="XenograftPopulateAction.do?method=populate" paramId="aXenograftID" paramName="aXenograft" paramProperty="id"><camod:shorten><bean:write name="aXenograft" property="name" filter="true"/></camod:shorten></html:link><br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="XenograftPopulateAction.do?method=populate" paramId="aXenograftID" paramName="aXenograft" paramProperty="id"><camod:shorten><bean:write name="aXenograft" property="name" filter="false"/></camod:shorten></html:link><br>
 			 </logic:iterate>
 		<br>	
 	</span>	

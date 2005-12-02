@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.24 2005-11-16 21:33:24 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.25 2005-12-02 14:17:30 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/11/16 21:33:24  georgeda
+ * Defect #40.  Changed reset button to clear.
+ *
  * Revision 1.23  2005/11/16 19:43:30  georgeda
  * Added clear to search forms
  *
@@ -202,7 +205,7 @@
 		</tr>
 
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Carcinogenic Agents:</td>
+			<td class="formTitleBlue" height="10" colspan="3">Carcinogenic Interventions:</td>
 		</tr>
 
 		<tr>	

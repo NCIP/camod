@@ -91,7 +91,7 @@
 	       	        </center>
 	             </td>
 	             <td class="resultsBoxGrey" width="40%">
-					<html:link action="SubmitAction.do?method=setModelConstants" paramId="aModelID" paramName="aModel" paramProperty="id"><bean:write name="aModel" property="modelDescriptor" filter="true"/> (<bean:write name="aModel" property="state" filter="true"/>)</html:link>	             
+					<html:link action="SubmitAction.do?method=setModelConstants" paramId="aModelID" paramName="aModel" paramProperty="id"><c:out value="${aModel.modelDescriptor}" escapeXml="false"/> (<bean:write name="aModel" property="state" filter="true"/>)</html:link>	             
 	             </td>
 	             <td class="resultsBoxGrey" width="20%">
 	                <bean:write name="aModel" property="availability.enteredDate" filter="true"/>
