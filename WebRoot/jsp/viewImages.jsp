@@ -43,7 +43,7 @@
 					<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 					<tr>
 						<td class="resultsBoxWhiteAllSides" width="15%"><b>Title</b></td>
-						<td class="resultsBoxWhiteAllSides" width="85%">
+						<td class="resultsBoxWhiteAllSidesNoLeft" width="85%">
 						<c:out value="${p.title}"/>&nbsp;
 						</td>
 					<tr>
