@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/11/30 17:36:11  pandyas
+ * Defect #233: Modified field labels according to instructions
+ *
  * Revision 1.24  2005/11/29 13:27:47  georgeda
  * Defect #76, move top link to right
  *
@@ -17,7 +20,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.25 2005-11-30 17:36:11 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.26 2005-12-05 17:48:31 schroedn Exp $
  *
  */   
 %>
@@ -300,7 +303,7 @@
 					<c:out value="${m.comparativeData}" escapeXml="false" />&nbsp;
 				</td>
 				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Comments</b></td>
+					<td class="resultsBoxGrey" width="25%"><b>Comment</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
 					<c:out value="${m.comments}"/>&nbsp;
 					</td>
