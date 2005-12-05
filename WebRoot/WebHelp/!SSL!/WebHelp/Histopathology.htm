@@ -18,7 +18,7 @@ p.whs1 { font-size:11pt; }
 ol.whs2 { list-style:decimal; }
 p.whs3 { margin-left:40px; font-size:11pt; }
 ul.whs4 { list-style:disc; }
-img_whs5 { border:none; width:187px; height:139px; float:none; border-style:none; }
+p.whs5 { font-size:11pt; margin-left:40px; }
 table.whs6 { width:100%; float:alignleft; border-left-style:Outset; border-left-width:1px; border-top-style:Outset; border-top-width:1px; border-right-style:Outset; border-right-width:1px; border-bottom-style:Outset; border-bottom-width:1px; border-left-color:#c0c0c0; border-right-color:#c0c0c0; border-top-color:#c0c0c0; border-bottom-color:#c0c0c0; }
 col.whs7 { width:23.763%; }
 col.whs8 { width:76.237%; }
@@ -140,20 +140,29 @@ else
  </p></li>
 	
 	<li class=kadov-p><p class="whs3">Brown 
- text = places where you can enter metastases.</p></li>
+ text = places where you can enter metastases or clinical markers.</p></li>
 </ul>
 
 <p class="whs3">&nbsp;</p>
 
-<p class="whs3">&nbsp;<img src="caMODimages/histopathology_subheadings.gif" x-maintain-ratio="TRUE" width="187px" height="139px" border="0" class="img_whs5"></p>
+<p class="whs3">&nbsp;</p>
 
 <p class="whs3"><span style="font-style: italic;"><I>Example:</I></span> 
  &nbsp;This model 
- has a tumor in the mammary gland, already entered in the database. It 
- also has a tumor in the liver. The liver cancer has metastasized to the 
- heart (sub-topic to liver), data which has also been entered into the 
- database. To add associated metastases, click on the brown text in either 
- location.</p>
+ has a tumor in the prostate gland, already entered in the database. &nbsp;The 
+ prostate cancer has metastasized to the lymph nodes and to bone (sub-topics 
+ to prostate gland), data which has also been entered into the database. 
+ </p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs5">To add associated <a HREF="Metastasis.htm">metastases</a>, 
+ click on the brown hypertext link. To enter information about a <a HREF="Clinical_Marker.htm">Clinical 
+ Marker</a>, click the associated brown hypertext link. &nbsp;</p>
+
+<p class="whs3"><span style="font-weight: bold;"><B>Note:</B></span> 
+ These two options become available only after you have entered a primary 
+ tumor. &nbsp;</p>
 
 <p class="whs3">&nbsp;</p>
 
@@ -205,8 +214,18 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <p class="whs12">Age of Tumor Onset</td>
 <td width="76.237%" class="whs11">
 <p class="whs1">Age of the animal when the lesion / tumor is 
- first detectable. Enter age information in the text box and from the drop-down 
- list.</td></tr>
+ first detectable. Enter age information in the text box or from the drop-down 
+ list.</p>
+<p class="whs1">&nbsp;</p>
+<p class="whs1"><span style="font-weight: bold;"><B>Note:</B></span> 
+ If the time unit you are looking for is not available in the drop down 
+ list, manually enter the time unit together with the number in the text 
+ field. When you return to the page, your time unit entry that you selected 
+ or entered manually will be displayed in the text input field. Should 
+ you decide to update the unit information, you must delete the current 
+ time unit entry from the text field before selecting or entering the new 
+ information. Should you fail to delete first, the new time unit entry 
+ will be added to the old entry.</td></tr>
 
 <tr>
 <td width="23.763%" class="whs9">
@@ -224,10 +243,18 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 
 <tr>
 <td width="23.763%" class="whs9">
-<p class="whs12">Tumor Frequency (%)</td>
+<p class="whs12">Tumor Incidence over Lifetime 
+ (%)</td>
 <td width="76.237%" class="whs11">
-<p class="whs1">Percentage of the population of animals that 
- develops a specific type of lesion/ tumor. (Numbers only)</td></tr>
+<p class="whs1">Incidence is the number of new cases of a condition, 
+ symptom, death, or injury that arise during a specific period of time, 
+ such as a year. It is often expressed as a percentage of a population 
+ (e.g. 25% of American residents were diagnosed with the flu in 2002.) 
+ Incidence conveys the likelihood that an individual in that population 
+ will be affected by the condition. </p>
+<p class="whs1">&nbsp;</p>
+<p class="whs1">Enter percentage of the population of animals 
+ that develops a specific type of lesion/ tumor. (Numbers only)</td></tr>
 
 <tr>
 <td width="23.763%" class="whs9">

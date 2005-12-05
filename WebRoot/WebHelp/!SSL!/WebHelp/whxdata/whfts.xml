@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='windows-1252' ?>
 <fts>
-<chunkinfo url="whfwdata0.xml" first="0" last="clas"/>
-<chunkinfo url="whfwdata1.xml" first="clear" last="execut"/>
-<chunkinfo url="whfwdata2.xml" first="exist" last="lin"/>
-<chunkinfo url="whfwdata3.xml" first="link" last="protocol"/>
-<chunkinfo url="whfwdata4.xml" first="provid" last="therapeutical"/>
-<chunkinfo url="whfwdata5.xml" first="therapy" last="zoom"/>
+<chunkinfo url="whfwdata0.xml" first="0" last="checkbox"/>
+<chunkinfo url="whfwdata1.xml" first="chemical" last="error"/>
+<chunkinfo url="whfwdata2.xml" first="es" last="known"/>
+<chunkinfo url="whfwdata3.xml" first="l1210" last="permission"/>
+<chunkinfo url="whfwdata4.xml" first="person" last="stra"/>
+<chunkinfo url="whfwdata5.xml" first="strain" last="zoom"/>
 
 <tchunkinfo first="0" last="69" url="whftdata0.xml" />
 

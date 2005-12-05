@@ -25,10 +25,12 @@ td.whs8 { width:77.724%; border-left-width:1px; border-left-style:Inset; border-
 p.whs9 { font-weight:bold; font-size:11pt; }
 p.whs10 { color:#000000; font-size:11pt; }
 ul.whs11 { list-style:disc; }
-p.whs12 { margin-left:40px; }
+p.whs12 { font-size:11pt; margin-top:2pt; margin-bottom:2pt; }
 p.whs13 { margin-left:40px; font-size:11pt; }
-p.whs14 { font-style:italic; margin-left:40px; font-size:11pt; }
-p.whs15 { margin-left:0px; }
+p.whs14 { margin-left:40px; }
+p.whs15 { font-size:11pt; font-weight:bold; margin-left:0px; }
+p.whs16 { font-style:italic; margin-left:40px; font-size:11pt; }
+p.whs17 { margin-left:0px; }
 -->
 </style><script type="text/javascript" language="JavaScript">
 <!--
@@ -36,6 +38,7 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
 {
   var strNSS = "<style type='text/css'>";
   strNSS += "p.whs15 {margin-left:1pt; }";
+  strNSS += "p.whs17 {margin-left:1pt; }";
   strNSS +="</style>";
   document.write(strNSS);
 }
@@ -161,15 +164,17 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <td colspan="1" rowspan="1" width="22.276%" class="whs6">
 <p class="whs9">Model Name/Model Descriptor</td>
 <td colspan="1" rowspan="1" width="77.724%" class="whs8">
-<p class="whs1">Enter the name of the model.</td></tr>
+<p class="whs1">Enter the name or parts of the model name. 
+ The search will return all models that contain the word or letter combination 
+ you entered. </td></tr>
 
 <tr>
 <td colspan="1" rowspan="1" width="22.276%" class="whs6">
 <p class="whs9">Principal Investigator's 
  (PI) Name</td>
 <td colspan="1" rowspan="1" width="77.724%" class="whs8">
-<p class="whs1">Select from the checkbox the name of the project 
- PI. </td></tr>
+<p class="whs1">Select from the drop-down list the name of 
+ the Principal Investigator for the model</td></tr>
 
 <tr>
 <td colspan="1" rowspan="1" width="22.276%" class="whs6">
@@ -194,9 +199,10 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <td colspan="1" rowspan="1" width="22.276%" class="whs6">
 <p class="whs9">Phenotype</td>
 <td colspan="1" rowspan="1" width="77.724%" class="whs8">
-<p class="whs10">The field <span style="font-weight: bold;"><B>Phenotype</B></span> 
- asks for a general description of the phenotype, which is the manifestation 
- of a genetic trait.</p>
+<p class="whs10">Enter a brief description or 
+ portion thereof for the <span style="font-weight: bold;"><B>Phenotype</B></span>. 
+ The search will return all models that contain the word or letter combination 
+ you entered. </p>
 <p class="whs10">&nbsp;</p>
 <p class="whs10"><span style="font-style: italic;"><I>Example:</I></span> 
  Expression of the SV40 early region in the mammary and prostate epithelium 
@@ -224,12 +230,13 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  Agent for Induced Mutation</p></li>
 </ul></td>
 <td colspan="1" rowspan="1" width="77.724%" class="whs8">
-<p class="whs1">Enter the <span style="font-weight: bold;"><B>Gene 
- Name</B></span> and specify if the gene was used as the targeted transgene, 
- &nbsp;the transgene 
- or was knocked out (targeted mutation). You can select all three methods 
- of genome manipulation, but you can also leave all boxes unchecked and 
- retrieve all models with manipulations of this gene.</p>
+<p class="whs1">Check <span style="font-weight: bold;"><B>Engineered 
+ Transgene</B></span> (gene was used as the transgene) or <span style="font-weight: bold;"><B>Targeted 
+ Modification </B></span>(gene<span style="font-weight: bold;"> <B></B></span>was 
+ knocked out) before you can enter the <span style="font-weight: bold;"><B>Gene 
+ Name </B></span>in its corresponding text box. You can select both methods 
+ of genome manipulation, but you can also both boxes unchecked and retrieve 
+ all models with manipulations of this gene.</p>
 <p class="whs1">&nbsp;</p>
 <p class="whs1">Enter the <span style="font-weight: bold;"><B>Genomic 
  Segment Designator</B></span> (also called the Clone Designator) which is 
@@ -243,11 +250,15 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <p class="whs1"><b style="font-weight: bold;">Carcinogenic 
  Agents:</b></p>
 <p class="whs9">&nbsp;</p>
+<p class="whs9">&nbsp;</p>
 <ul type="disc" class="whs11">
 	
 	<li style="margin-left: -20px;"
 		class=kadov-p><p class="whs9"><b 
- style="font-weight: bold;">Chemical/Drug</b></p></li>
+ style="font-weight: bold;">Carcinogenic Interventions</b></p></li>
+	
+	<li style="margin-left: -20px;"
+		class=kadov-p><p class="whs9"><b>Chemical/Drug</b></p></li>
 	
 	<li style="margin-left: -20px;"
 		class=kadov-p><p class="whs9"><b 
@@ -277,30 +288,36 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <ul type="disc" class="whs11">
 	
 	<li style="margin-left: -20px;"
-		class=kadov-p><p class="whs1">Select a listed chemical 
+		class=kadov-p><p class="whs12">Check the checkbox 
+ to search for models with Carcinogenic Interventions data. <span style="font-weight: bold;"><B>Note:</B></span> 
+ You must check this box to make drop-down lists in the section available. 
+ &nbsp;</p></li>
+	
+	<li style="margin-left: -20px;"
+		class=kadov-p><p class="whs12">Select a listed chemical 
  or drug. This retrieves models that were exposed to this chemical or drug. 
  </p></li>
 	
 	<li style="margin-left: -20px;"
-		class=kadov-p><p class="whs1">Select a listed growth 
+		class=kadov-p><p class="whs12">Select a listed growth 
  factor. This retrieves models that were treated with the growth factor.</p></li>
 	
 	<li style="margin-left: -20px;"
-		class=kadov-p><p class="whs1">Select a listed hormone. 
+		class=kadov-p><p class="whs12">Select a listed hormone. 
  This retrieves models that were exposed to this hormone. </p></li>
 	
 	<li style="margin-left: -20px;"
-		class=kadov-p><p class="whs1">Select a listed type 
+		class=kadov-p><p class="whs12">Select a listed type 
  of radiation. This retrieves models that were exposed to this type of 
  radiation. </p></li>
 	
 	<li style="margin-left: -20px;"
-		class=kadov-p><p class="whs1">Select a listed surgery 
+		class=kadov-p><p class="whs12">Select a listed surgery 
  or other treatment. This retrieves models treated with selected surgery 
  or other treatments.</p></li>
 	
 	<li style="margin-left: -20px;"
-		class=kadov-p><p class="whs1">Select a listed virus. 
+		class=kadov-p><p class="whs12">Select a listed virus. 
  This retrieves models that were exposed to this virus.</p></li>
 </ul></td></tr>
 
@@ -320,7 +337,9 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <td colspan="1" rowspan="1" width="77.724%" class="whs8">
 <p class="whs1">Check to search for models with specified therapeutic 
  approaches. At that point, the Compound/Drug text box becomes enabled 
- where you can add an appropriate name.</td></tr>
+ where you can add an appropriate name or part of a name. When you select 
+ the compound name, all models with therapeutic approaches data will be 
+ returned.</td></tr>
 
 <tr>
 <td colspan="1" rowspan="1" width="22.276%" class="whs6">
@@ -353,10 +372,24 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 
 &nbsp; 
 
-<p class="whs12"><span style="font-size: 11pt;"><font size=3 style="font-size:11pt;">Results display 
- in the </font></span><span style="font-weight: bold;"><B><a HREF="caMOD_Search_Results.htm"
-													style="font-size: 11pt;">Search 
- Results</a></B></span><span style="font-size: 11pt;"><font size=3 style="font-size:11pt;"> viewer. </font></span></p>
+<p class="whs13">Results display in the <span 
+ style="font-weight: bold;"><B><a HREF="caMOD_Search_Results.htm"
+								style="font-size: 11pt;">Search Results</a></B></span> 
+ viewer. </p>
+
+<p class="whs14">&nbsp;</p>
+
+<p class="whs15">Notes about Advanced Search:</p>
+
+<p class="whs13">&nbsp;</p>
+
+<p class="whs13">All items in all drop-down 
+ lists should return results as terms that have been used in the description 
+ of models in the &quot;edited-approved&quot; state.</p>
+
+<p class="whs13">&nbsp;</p>
+
+<p class="whs13">&nbsp;</p>
 
 <span style="font-size: 11pt;"><font size=3 style="font-size:11pt;">&nbsp; </font></span>
 
@@ -371,7 +404,7 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 
 <p class="whs13">&nbsp;</p>
 
-<p class="whs14">Example:</p>
+<p class="whs16">Example:</p>
 
 <p class="whs13">&nbsp;</p>
 
@@ -388,12 +421,14 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  criteria need to be fulfilled in order to get matching records. This is 
  an easy way to narrow the number of retrieved records.</p>
 
-<p class="whs12">&nbsp;</p>
+<p class="whs14">&nbsp;</p>
 
-<p class="whs12">&nbsp;</p>
+<p class="whs14">&nbsp;</p>
 
-<p class="whs15">
+<p class="whs17">
+
 <a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','caMOD Database Search Overview','caMOD_Database_Search_Overview.htm','caMOD Search Results','caMOD_Search_Results.htm','caMOD Table of Contents','caMOD_Table_of_Contents.htm','Simple Search Mode','Simple_Search_Mode.htm');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=20 width=96 alt="Related Topics"></a>
+
 
  </p>
 
