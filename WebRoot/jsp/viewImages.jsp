@@ -38,26 +38,25 @@
 			
 				<td class="<c:out value="${tdClass}"/>" colspan="2">
 					<a href='<c:out value="${p.imageUrl}"/>'>
-					<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">
-					( Click to View )</a>
+					<img src="<c:out value="${p.thumbUrl}"/>" height="40" width="40" alt="Click on the image to open in a new Browser window" target="_blank">( Click to View )</a>
 					<br><br/>
 					<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 					<tr>
 						<td class="resultsBoxWhiteAllSides" width="15%"><b>Title</b></td>
 						<td class="resultsBoxWhiteAllSides" width="85%">
-						<c:out value="${p.title}"/>
+						<c:out value="${p.title}"/>&nbsp;
 						</td>
 					<tr>
 					<tr>
 						<td class="resultsBoxGrey" width="15%"><b>Staining</b></td>
 						<td class="resultsBoxGreyEnd" width="85%">
-						<c:out value="${p.staining}"/>
+						<c:out value="${p.staining}"/>&nbsp;
 						</td>
 					<tr>				
 					<tr>
 						<td class="resultsBoxWhite" width="15%"><b>Description</b></td>
 						<td class="resultsBoxWhiteEnd" width="85%">
-						<c:out value="${p.description}"/>
+						<c:out value="${p.description}"/>&nbsp;
 						</td>
 					<tr>
 					</TABLE>					
