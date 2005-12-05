@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.37 2005-11-29 13:27:47 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.38 2005-12-05 22:17:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2005/11/29 13:27:47  georgeda
+ * Defect #76, move top link to right
+ *
  * Revision 1.36  2005/11/28 22:59:17  georgeda
  * Defect #82, print the common name if the scientific name is not available
  *
@@ -538,7 +541,7 @@
 						<c:out value="${modType.name}"/>&nbsp;
 					</li>	
 				</c:forEach>
-				<c:if test="${not empty tm.modTypeUnctrlVocab}">
+				<c:if test="${not empty tm.modTypeUnctrlVocab}">&nbsp;
 				    <li>
 						<c:out value="${tm.modTypeUnctrlVocab}"/>&nbsp;
 					</li>	
@@ -710,16 +713,6 @@
 						</c:forEach>
 					</ul>
 	            </td>
-	        </tr>
-	        <tr>
-	            <td valign="top" class="WhiteBox" width="35%"><b>Libraries and Tissues (from EST data)</b></td>
-	            <td valign="top" class="WhiteBoxRightEnd" width="65%">&nbsp;
-	            </td>
-	        </tr>
-	        <tr>
-	            <td valign="top" class="GreyBox" width="35%"><b>Protein Similarities (from UniGene)</b></td>
-	            <td valign="top" class="GreyBoxRightEnd" width="65%">&nbsp;
-	           	</td>
 	        </tr>
 		</c:if>
 	</TABLE>
