@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.13 2005-11-29 16:13:04 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.14 2005-12-05 19:35:17 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/29 16:13:04  georgeda
+ * Check for null password in login
+ *
  * Revision 1.12  2005/11/18 21:05:37  georgeda
  * Defect #130, added superuser
  *
@@ -318,12 +321,14 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
         boolean loginOk = false;
         try {
-
+        	
             // Work around bug in CSM.  Empty passwords pass
             if (inPassword.trim().length() == 0) {
                 loginOk = false;
             } else {
-                loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+            	
+            	//Convert username to all lowercase (Defect #253)            	
+                loginOk = theAuthenticationMgr.login(inUsername.toLowerCase(), inPassword);
             }
             
             // Does the user exist? Must also be in our database to login
