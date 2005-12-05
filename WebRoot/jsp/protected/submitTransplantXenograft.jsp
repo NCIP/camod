@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.32 2005-12-01 20:04:07 schroedn Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.33 2005-12-05 21:29:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2005/12/01 20:04:07  schroedn
+ * Defect #243
+ *
+ * Changed the way the method of observation and observation fields interact. when observation is blank 'method of observation' is greyed out and when the user types in obsercation, the other is editable
+ *
  *
  */
 
@@ -124,12 +129,12 @@
 		<td class="formLabel"><label for="field3">Donor Strain:</label></td>
 		<td class="formField">
 		<br>
+		<label for="field3">- if strain is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>
 			<html:select styleClass="formFieldSized" size="1" property="hostEthinicityStrain" onchange="chkOtherStrain()">
 				<html:options name="<%= Dropdowns.STRAINDROP %>" />
 			</html:select>
-		<br>
-		<br>
-		- if strain is not listed then please select "Other" from the above Strain<br>selection list and then specify it below
 		</td>
 	</tr>
 
@@ -161,12 +166,13 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Graft Type:</label></td>
 		<td class="formField">
+		<br>				
+		<label for="field3">- if graft type is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>		
 			<html:select styleClass="formFieldSized" size="1" property="graftType" onclick="chkOtherGraft();">
 				<html:options name="<%= Dropdowns.GRAFTTYPEDROP %>" />	
 			</html:select>
-		<br>
-		<br>
-		- if graft type is not listed then please select "Other" from the above <br>selection list and then specify it below						
 		</td>
 	</tr>	
 
@@ -236,7 +242,7 @@
 		</td>
 		<td class="formField">
 		<br>
-		<label for="field3">- if Administration Site is not listed, <br>then please select "Other" and then specify it below:</label>
+		<label for="field3">- if administration site is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
 			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminSite();">												
