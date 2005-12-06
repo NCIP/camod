@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: CustomRequestProcessor.java,v 1.8 2005-12-06 19:51:32 georgeda Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
 package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.Constants;
@@ -20,10 +28,10 @@ import org.apache.struts.config.ForwardConfig;
  * @author schroedlni
  * 
  */
-public class CustomRequestProcessor extends RequestProcessor {
+public class CustomRequestProcessor extends SecureRequestProcessor {
 
     protected final Log log = LogFactory.getLog(getClass());
-    
+
     public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         log.trace("Entering process");
@@ -44,7 +52,7 @@ public class CustomRequestProcessor extends RequestProcessor {
 
             if (user == null) {
                 log.info("User not authorized.  Sending to login page");
-                request.getSession().setAttribute(Constants.LOGINFAILED, "true");
+                request.getSession().setAttribute(Constants.NOTLOGGEDIN, "true");
                 return mapping.findForward("login");
             }
         }
@@ -53,15 +61,12 @@ public class CustomRequestProcessor extends RequestProcessor {
         String thePath = mapping.getPath();
 
         // Controlled access; check roles
-        if (thePath.indexOf("AdminUserManagementPopulateAction") != -1 
-                || thePath.indexOf("AdminRolesAssignment") != -1
-                || thePath.indexOf("adminEditUserRoles") != -1 
-                || thePath.indexOf("adminEditUser") != -1
+        if (thePath.indexOf("AdminUserManagementPopulateAction") != -1 || thePath.indexOf("AdminRolesAssignment") != -1
+                || thePath.indexOf("adminEditUserRoles") != -1 || thePath.indexOf("adminEditUser") != -1
                 || thePath.indexOf("adminUserManagement") != -1
                 || thePath.indexOf("AdminEditUserRolesPopulateAction") != -1
                 || thePath.indexOf("AdminEditUserRolesAction") != -1
-                || thePath.indexOf("AdminEditUserPopulateAction") != -1 
-                || thePath.indexOf("AdminEditUserAction") != -1) {
+                || thePath.indexOf("AdminEditUserPopulateAction") != -1 || thePath.indexOf("AdminEditUserAction") != -1) {
 
             List theRoles = (List) request.getSession().getAttribute(Constants.CURRENTUSERROLES);
 

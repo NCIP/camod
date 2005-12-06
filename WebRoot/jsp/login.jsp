@@ -72,19 +72,22 @@
 								                                          </font></b>
 				                                                      </tr>
 				                                              </logic:messagesPresent>
-                                                            <%
-					                                      		if( session.getAttribute( Constants.LOGINFAILED ) == "true" ) {
-					                                      			session.setAttribute( Constants.LOGINFAILED , null );
-					                                      			%>
-					                                      				<tr><td colspan="3">					                                      				
-						                                      				<span id="errorsHeader">
-						                                      					<bean:message key="error.login.required"/>
-					                                      					</span>
-				                                      				   </td></tr>
-				                                      				<%
-					                                      		}		                                      		
-					                                      	%>  
-					                                      	
+				                                              <c:if test="${notloggedin == 'true'}">
+				                                                  <c:set var="notloggedin" value="false" scope="session"/>
+				                                      			  <tr><td colspan="3">					                                      				
+					                                      		      <span id="errorsHeader">
+					                                      			      <bean:message key="error.login.required"/>
+				                                      				  </span>
+			                                      				  </td></tr>
+				                                      		  </c:if>
+				                                      		  <c:if test="${loginfailed == 'true'}">
+					                                      	      <c:set var="loginfailed" value="false" scope="session"/>
+				                                      		      <tr><td colspan="3">					                                      				
+					                                      		      <span id="errorsHeader">
+					                                      		          <bean:message key="errors.validation.header"/>
+				                                      			      </span>
+			                                      				  </td></tr>
+					                                      	  </c:if> 
                                                               <tr>                                      
                                                                   <html:form action="LoginAction.do" focus="username">                                      
                                                                   <td class="sidebarLogin" align="right"><label for="loginID">Login ID</label></td>

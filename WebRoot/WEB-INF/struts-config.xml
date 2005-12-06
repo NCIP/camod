@@ -233,7 +233,7 @@
 			path="/jsp/loggedOut.jsp"></forward>
 		
 		<forward
-			name="login"
+			name="login" 
 			path="/jsp/login.jsp"></forward>
 		
 		<forward
@@ -549,10 +549,9 @@
                 
       </global-forwards>
 
-  <!-- ========== Action Mapping Definitions =================================== -->
-  
-   <action-mappings>
-
+  <!-- ========== Action Mapping Definitions =================================== -->  
+	<action-mappings type="org.apache.struts.config.SecureActionConfig">
+	
 		<action
 			path="/adminUserSettings"
 			type="org.apache.struts.actions.ForwardAction"
@@ -772,7 +771,7 @@
 			path="/submitOverview"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitOverview.jsp" />
-			
+		
 		<action
 			path="/submitPublications"
 			type="org.apache.struts.actions.ForwardAction"
@@ -921,7 +920,8 @@
 		<action
 			path="/login"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/login.jsp" />
+			parameter="/jsp/login.jsp">
+		</action>
 		
 		<action
 			path="/loginMenu"
@@ -1488,11 +1488,17 @@
 	        parameter="unprotected_method" 
 	        unknown="false"
 	        validate="false"
-	        input="/login">    
-    <forward
-            name="success"
-            redirect="true"
-            path="/ReturnUserModels.do?method=returnUserModels"></forward>                              
+	        input="login">
+	       <set-property property="secure" value="true" />
+          <forward
+	            name="success"
+	            redirect="true"
+	            path="/ReturnUserModels.do?method=returnUserModels"></forward>
+          <forward 
+	            name="failure"  
+	            redirect="true"
+	            path="/login.do">
+	      </forward> 	                                        
     </action>
     
     <action path="/LogoutAction"
@@ -1502,6 +1508,7 @@
 	        unknown="false"
 	        validate="false"
 	        input="login">
+            <set-property property="secure" value="false" />    
     </action>
     
     <!-- MicroArrayDataForm -->
@@ -1513,7 +1520,7 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input">  
+	        input="input">   
 	    <forward
             name="failure"
             path="/ReturnUserModels.do?method=returnUserModels">
@@ -1572,12 +1579,12 @@
             path="/AnimalModelPopulateAction.do?method=populate">
         </forward>  
     </action>
-        
+    
     <action path="/ReturnUserModels"
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
-            scope="request"
-            parameter="method"         
-            validate="false" >                           
+            scope="request" 
+            parameter="method"
+            validate="false" >                          
     </action>  
       
     <action path="/DeleteAnimalModelAction"
@@ -2288,7 +2295,7 @@
             name="next"
             path="/searchAdvanced.do">
         </forward>	
-    </action>       
+    </action>               
     
   </action-mappings>
 
@@ -2302,6 +2309,13 @@
                       value="/WEB-INF/validator-rules.xml,
                              /WEB-INF/validator-rules-custom.xml,
                              /WEB-INF/validation.xml"/>
-    </plug-in>
-
+  </plug-in>
+  
+  <plug-in className="org.apache.struts.action.SecurePlugIn">
+	    <set-property property="httpPort" value="@http.port@"/>
+	    <set-property property="httpsPort" value="@https.port@"/>  	
+	    <set-property property="enable" value="true"/>  	
+	    <set-property property="addSession" value="true"/>  	
+  </plug-in>
+  
 </struts-config>

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.77 2005-11-28 18:02:10 georgeda Exp $
+ * $Id: Constants.java,v 1.78 2005-12-06 19:51:25 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.77  2005/11/28 18:02:10  georgeda
+ * Defect #182.  Get unique set of organs and only display metas. next to the originating organ
+ *
  * Revision 1.76  2005/11/28 13:41:35  georgeda
  * Defect #192, handle back arrow for curation changes
  *
@@ -513,6 +516,8 @@ public class Constants {
     public static final String CURRENTUSERROLES = "camod.loggedon.userroles";
 
     public static final String LOGINFAILED = "loginfailed";
+    
+    public static final String NOTLOGGEDIN = "notloggedin";
 
     /**
      * Used for search results

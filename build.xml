@@ -12,6 +12,8 @@
     <filter token="db.password" value="${db.password}"/>
     <filter token="db.dbname" value="${db.dbname}"/>
 
+	<echo>Building for stage: ${tier}</echo>
+	
     <!-- DEFAULT BUILD, does everything -->    
     <target name="clean-build-compile" depends="build_war" /> 
     
@@ -66,10 +68,20 @@
         </copy>
     	<move todir="${source.dir}">
             <fileset dir="${build.classes.dir}">                                
-                 <include name="hibernate.cfg.xml" />
-                 <include name="camod.properties" />
-             </fileset>
+                <include name="hibernate.cfg.xml" />
+                <include name="camod.properties" />
+            </fileset>
     	</move>
+        <copy todir="${source.dir}" filtering="true" >
+            <fileset dir="${webinf.dir}">                                
+            	<include name="struts-config.xml" />
+            </fileset>
+        </copy>
+       	<move todir="${webinf.dir}">
+            <fileset dir="${source.dir}">                                
+            	<include name="struts-config.xml" />
+            </fileset>
+        </move>
     </target>
     <!--
         TARGET: build_war

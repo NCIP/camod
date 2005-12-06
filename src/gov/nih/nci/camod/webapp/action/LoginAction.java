@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.8 2005-12-06 14:50:45 georgeda Exp $
+ * $Id: LoginAction.java,v 1.9 2005-12-06 19:51:39 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/12/06 14:50:45  georgeda
+ * Defect #253, change the lowecase to the login action so that roles match
+ *
  * Revision 1.7  2005/11/28 18:33:35  georgeda
  * Defect #104.  Clicking on a model and then using the backarrow works after login
  *
@@ -50,17 +53,15 @@ public final class LoginAction extends BaseAction {
         // check login credentials using Authentication Mangager
         boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
 
-        String forward = "login";
+        String forward = "failure";
 
         if (loginOK) {
             log.debug("Successful login");
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
-
         } else {
-            ActionMessages errors = new ActionMessages();
-            errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.validation.header"));
-            saveErrors(request, errors);
+            log.debug("Login failed");
+            request.getSession().setAttribute(Constants.LOGINFAILED, "true");
         }
 
         // Forward control to the specified success URI
