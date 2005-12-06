@@ -1,8 +1,11 @@
 <%
  /*
-  * $Id: subSubmitMenu.jsp,v 1.46 2005-12-02 14:18:21 georgeda Exp $
+  * $Id: subSubmitMenu.jsp,v 1.47 2005-12-06 18:49:58 georgeda Exp $
   *
   * $Log: not supported by cvs2svn $
+  * Revision 1.46  2005/12/02 14:18:21  georgeda
+  * Defect #241, handle truncated HTML tags
+  *
   * Revision 1.45  2005/11/29 16:28:19  georgeda
   * Defect #193, missed xenograft
   *
@@ -34,7 +37,7 @@
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
 <TR><TD class=subMenuPrimaryTitle height=22>SUBMIT & EDIT MODELS</TD></TR>
-<TR><TD class=subMenuPrimaryGreyTitle height=27>Editing Model:<b><%= request.getSession().getAttribute( Constants.MODELDESCRIPTOR ) %> ( <%= request.getSession().getAttribute( Constants.MODELID ) %> )<br><html:link styleClass="subMenuRed" action="submitOverview"><b>View Model Status ( <%= request.getSession().getAttribute( Constants.MODELSTATUS ) %> )</b></html:link></TD></TR>
+<TR><TD class=subMenuPrimaryGreyTitle height=27>Editing Model:<b><%= request.getSession().getAttribute( Constants.MODELDESCRIPTOR ) %> ( <%= request.getSession().getAttribute( Constants.MODELID ) %> )<br><html:link styleClass="subMenuRed" action="SubmitOverviewPopulateAction"><b>View Model Status ( <%= request.getSession().getAttribute( Constants.MODELSTATUS ) %> )</b></html:link></TD></TR>
 <TR><TD class=subMenuPrimaryItems>
 
 <DIV id="masterdiv">

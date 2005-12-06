@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.37 2005-11-14 14:19:51 georgeda Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.38 2005-12-06 18:49:10 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.37  2005/11/14 14:19:51  georgeda
+ *  Cleanup
+ *
  *  Revision 1.36  2005/11/07 17:43:55  pandyas
  *  cleaned up item from problem tab
  *
@@ -80,37 +83,16 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.domain.AnimalAvailability;
-import gov.nih.nci.camod.domain.AnimalDistributor;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.EngineeredGene;
-import gov.nih.nci.camod.domain.GeneDelivery;
-import gov.nih.nci.camod.domain.GenomicSegment;
-import gov.nih.nci.camod.domain.Histopathology;
-import gov.nih.nci.camod.domain.InducedMutation;
-import gov.nih.nci.camod.domain.Publication;
-import gov.nih.nci.camod.domain.SpontaneousMutation;
-import gov.nih.nci.camod.domain.TargetedModification;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.domain.Transgene;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 
 /**
  * 
@@ -434,26 +416,6 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 	        request.getSession().setAttribute(Constants.Submit.ASSOCMETASTSIS_LIST, associatedMetatasisList); 
 	        request.getSession().setAttribute(Constants.Submit.CLINICALMARKER_LIST, clinicalMarkerList);			
 
-			// System.out.println( "TargedModList: " + targetedList);
-
-			// UserManager theUserManager = (UserManager)
-			// getBean("userManager");
-			// Set up the form. Should be only one coordinator
-			// Get the coordinator
-			ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-			String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
-
-			AnimalModelStateForm theForm = new AnimalModelStateForm();
-
-			// Set the fields
-			theForm.setModelId(modelID);
-			theForm.setModelDescriptor(animalModel.getModelDescriptor());
-			theForm.setNote("Model has been moved to complete");
-			theForm.setAssignedTo(theCoordinator);
-			theForm.setEvent(Constants.Admin.Actions.COMPLETE);
-
-			request.setAttribute(Constants.FORMDATA, theForm);
-
 		} catch (Exception e) {
 			log.error("Caught an exception populating the data: ", e);
 
@@ -463,6 +425,6 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			saveErrors(request, theMsg);
 		}
 
-		return mapping.findForward("submitOverview");
+		return mapping.findForward("next");
 	}
 }

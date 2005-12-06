@@ -772,7 +772,7 @@
 			path="/submitOverview"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitOverview.jsp" />
-		
+			
 		<action
 			path="/submitPublications"
 			type="org.apache.struts.actions.ForwardAction"
@@ -1549,6 +1549,10 @@
 			type="gov.nih.nci.camod.webapp.action.AnimalModelTreePopulateAction"
 			parameter="method"
 			validate="false">
+		<forward
+            name="next"
+            path="/SubmitOverviewPopulateAction.do">
+        </forward>
 	</action>
 	
     <!-- changed input so the page returns to correct jsp on failed validation -->
@@ -2107,7 +2111,15 @@
     		path="/AdminRolesPopulateAction.do">
     	 </forward>	
      </action>
-     
+
+	<!--  search forms -->
+    <action path="/SubmitOverviewPopulateAction"
+	        type="gov.nih.nci.camod.webapp.action.SubmitOverviewPopulateAction"
+	        parameter="protected" 
+	        unknown="false"
+	        validate="false">
+    </action>
+         
      <action 
          path="/ChangeAnimalModelStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
