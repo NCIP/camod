@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.14 2005-12-05 19:35:17 schroedn Exp $
+ * $Id: UserManagerImpl.java,v 1.15 2005-12-06 14:50:45 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/12/05 19:35:17  schroedn
+ * Defect #253 - Covert username to all lowercase before validating
+ *
  * Revision 1.13  2005/11/29 16:13:04  georgeda
  * Check for null password in login
  *
@@ -326,9 +329,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
             if (inPassword.trim().length() == 0) {
                 loginOk = false;
             } else {
-            	
-            	//Convert username to all lowercase (Defect #253)            	
-                loginOk = theAuthenticationMgr.login(inUsername.toLowerCase(), inPassword);
+                loginOk = theAuthenticationMgr.login(inUsername, inPassword);
             }
             
             // Does the user exist? Must also be in our database to login

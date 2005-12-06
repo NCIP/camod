@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.7 2005-11-28 18:33:35 georgeda Exp $
+ * $Id: LoginAction.java,v 1.8 2005-12-06 14:50:45 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/28 18:33:35  georgeda
+ * Defect #104.  Clicking on a model and then using the backarrow works after login
+ *
  * Revision 1.6  2005/09/22 15:18:13  georgeda
  * More changes
  *
@@ -42,15 +45,17 @@ public final class LoginAction extends BaseAction {
         log.debug("Logon Username: " + loginForm.getUsername());
         log.debug("System Config file is: " + System.getProperty("gov.nih.nci.security.configFile"));
 
+        String theUsername = loginForm.getUsername().toLowerCase();
+        
         // check login credentials using Authentication Mangager
-        boolean loginOK = UserManagerSingleton.instance().login(loginForm.getUsername(), loginForm.getPassword(), request);
+        boolean loginOK = UserManagerSingleton.instance().login(theUsername, loginForm.getPassword(), request);
 
         String forward = "login";
 
         if (loginOK) {
             log.debug("Successful login");
             forward = "success";
-            request.getSession().setAttribute(Constants.CURRENTUSER, loginForm.getUsername());
+            request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
 
         } else {
             ActionMessages errors = new ActionMessages();
