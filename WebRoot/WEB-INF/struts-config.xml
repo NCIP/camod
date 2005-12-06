@@ -2312,8 +2312,8 @@
   </plug-in>
   
   <plug-in className="org.apache.struts.action.SecurePlugIn">
-	    <set-property property="httpPort" value="@http.port@"/>
-	    <set-property property="httpsPort" value="@https.port@"/>  	
+	    <set-property property="httpPort" value="80"/>
+	    <set-property property="httpsPort" value="443"/>  	
 	    <set-property property="enable" value="true"/>  	
 	    <set-property property="addSession" value="true"/>  	
   </plug-in>
