@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.15 2005-12-06 14:50:45 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.16 2005-12-06 22:00:04 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/12/06 14:50:45  georgeda
+ * Defect #253, change the lowecase to the login action so that roles match
+ *
  * Revision 1.14  2005/12/05 19:35:17  schroedn
  * Defect #253 - Covert username to all lowercase before validating
  *
@@ -324,17 +327,15 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
         boolean loginOk = false;
         try {
-        	
-            // Work around bug in CSM.  Empty passwords pass
-            if (inPassword.trim().length() == 0) {
-                loginOk = false;
-            } else {
+
+            // Work around bug in CSM. Empty passwords pass
+            if (inPassword.trim().length() != 0) {
                 loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+
+                // Does the user exist? Must also be in our database to login
+                List theRoles = getRolesForUser(inUsername);
+                inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
             }
-            
-            // Does the user exist? Must also be in our database to login
-            List theRoles = getRolesForUser(inUsername);
-            inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
 
         } catch (Exception e) {
             log.error("Error logging in user: ", e);
