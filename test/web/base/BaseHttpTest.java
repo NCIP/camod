@@ -1,6 +1,9 @@
 package web.base;
 
 import gov.nih.nci.camod.Constants;
+
+import java.util.ResourceBundle;
+
 import junit.framework.TestCase;
 
 import com.meterware.httpunit.*;
@@ -26,8 +29,13 @@ public class BaseHttpTest extends TestCase {
 
     protected void navigateToLoginPage() throws Exception {
 
+        ResourceBundle theBundle = ResourceBundle.getBundle("test");
+
+        String theHost = theBundle.getString("testhost");
+
         // Obtain the main page on the meterware web site
-        WebRequest theRequest = new GetMethodWebRequest("http://localhost:8080/camod");
+        WebRequest theRequest = new GetMethodWebRequest(theHost);
+
         WebResponse theResponse = myWebConversation.getResponse(theRequest);
 
         if (theResponse.getText().indexOf("Currently logged in as") != -1) {
@@ -54,8 +62,7 @@ public class BaseHttpTest extends TestCase {
         theLink.click();
 
         // We may or may not have to hit the agreement link
-        theLink = myWebConversation.getCurrentPage()
-                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, inModel);
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, inModel);
 
         assertNotNull("Couldn't find link to edit model", theLink);
 
@@ -64,11 +71,14 @@ public class BaseHttpTest extends TestCase {
 
     }
 
-    
     protected void logoutOfApplication() throws Exception {
 
-        // Obtain the main page on the meterware web site
-        WebRequest theRequest = new GetMethodWebRequest("http://localhost:8080/camod");
+        ResourceBundle theBundle = ResourceBundle.getBundle("test");
+
+        String theHost = theBundle.getString("testhost");
+
+        // Obtain the main page
+        WebRequest theRequest = new GetMethodWebRequest(theHost);
         WebResponse theResponse = myWebConversation.getResponse(theRequest);
 
         WebLink theLink = theResponse.getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Log out");
@@ -87,7 +97,7 @@ public class BaseHttpTest extends TestCase {
         theForm.setParameter("username", inUsername);
         theForm.setParameter("password", inPassword);
         theForm.submit();
-        
+
         // Make sure we logged in
         assertCurrentPageContains("Currently logged in as");
     }
