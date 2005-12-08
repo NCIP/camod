@@ -99,6 +99,7 @@
 			gov.nih.nci.camod.webapp.listener.StartupListener
 		</listener-class>
 	</listener>
+
 	<!-- Standard Action Servlet Configuration -->
 	<servlet>
 		<servlet-name>action</servlet-name>
@@ -119,31 +120,26 @@
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>RedirectOldRequestsServlet</servlet-name>
+		<servlet-class>
+			gov.nih.nci.camod.webapp.servlet.RedirectOldRequestsServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
 	<!-- Front Controller Servlet Mapping -->
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	<session-config>
-		<session-timeout>60</session-timeout>
-	</session-config>
-
-<!--  replace the following lines with a new script that will cache NCI Thesaurus
-      terms provided by caBIO EVS Tree package -->
-<!-- 
-	<servlet>
-		<servlet-name>EvsServlet</servlet-name>
-		<servlet-class>
-			gov.nih.nci.ncicb.servlet.EvsServlet
-		</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>EvsServlet</servlet-name>
-		<url-pattern>/treeLoader</url-pattern>
-	</servlet-mapping>>
--->
+		<servlet-name>RedirectOldRequestsServlet</servlet-name>
+		<url-pattern>/mmhcc/*</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 
 	<!--
 		To specify mime mappings, create a file named mime-mappings.xml, put it in your project's mergedir.
