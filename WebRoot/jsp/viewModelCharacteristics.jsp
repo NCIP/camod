@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.23 2005-11-28 13:54:23 georgeda Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.24 2005-12-08 21:45:18 georgeda Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.23  2005/11/28 13:54:23  georgeda
+  *   Defect #207, handle nulls for pages w/ uncontrolled vocab
+  *
   *   Revision 1.22  2005/11/21 20:25:22  georgeda
   *   Defect #155, open URL in another window
   *
@@ -195,14 +198,29 @@
 					<c:set var="dist" value="${av.animalDistributorCollection[0]}"/>
 					<c:choose>
 						<c:when test = "${dist.id == 1}">
-						    <!-- Investigator: Populate the PI name in distributor column -->
-							<c:if test="${not empty av.principalInvestigator.emailAddress}">
-							    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
-							</c:if>
-							<c:out value="${av.principalInvestigator.displayName}"/>
-							<c:if test="${av.principalInvestigator.emailAddress}">
-							    </a>
-							</c:if>	
+						    <c:choose>
+								<c:when test="${av.stockNumber == '-1'}">
+						            <!-- Investigator from 2-tier. -->
+									<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
+									    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
+									</c:if>
+									<c:out value="${mdl.principalInvestigator.displayName}"/>
+									<c:if test="${mdl.principalInvestigator.emailAddress}">
+									    </a>
+									</c:if>	
+								</c:when>
+								<c:otherwise>
+						    
+								    <!-- Investigator: Populate the PI name in distributor column -->
+									<c:if test="${not empty av.principalInvestigator.emailAddress}">
+									    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
+									</c:if>
+									<c:out value="${av.principalInvestigator.displayName}"/>
+									<c:if test="${av.principalInvestigator.emailAddress}">
+									    </a>
+									</c:if>	
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:when test = "${dist.id == 2}">
 						<!-- Jackson Lab: If stock# not empty link to stock#, else link to main distributor page -->

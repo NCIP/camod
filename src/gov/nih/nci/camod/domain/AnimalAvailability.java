@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/18 22:50:02  georgeda
+ * Defect #184.  Cleanup editing of old models
+ *
  * Revision 1.8  2005/11/17 18:36:47  georgeda
  * Defect #57, add a mailto link for Investigator availabilty
  *
@@ -7,7 +10,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.9 2005-11-18 22:50:02 georgeda Exp $
+ * $Id: AnimalAvailability.java,v 1.10 2005-12-08 21:44:23 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -104,7 +107,10 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
 
     public Person getPrincipalInvestigator() {
         Person thePerson = null;
-        if (stockNumber != null) {
+        
+        // Hack to work around old ca-mod data. -1 indicates that this comes
+        // from the 2-tier.
+        if (stockNumber != null && !"-1".equals(stockNumber)) {
 
             try {
                 thePerson = PersonManagerSingleton.instance().get(stockNumber);
