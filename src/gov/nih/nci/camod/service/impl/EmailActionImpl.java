@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.17 2005-11-28 13:44:04 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.18 2005-12-08 19:06:10 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/11/28 13:44:04  georgeda
+ * Defect #192, handle back arrow for curation changes
+ *
  * Revision 1.16  2005/11/21 16:09:49  georgeda
  * Defects #98 and #99, make sure to send e-mail to coordinator
  *
@@ -128,32 +131,32 @@ public class EmailActionImpl extends BaseCurateableAction {
 					theMailStandardText = new String[] { Constants.Admin.Actions.ASSIGN_SCREENER };
 				} else if (theData.getEvent().equals(Constants.Admin.Actions.ASSIGN_EDITOR)) {
 					theMailSubject = "You have been assigned editor for the following model: "
-							+ theData.getModelDescriptor();
+							+ theAnimalModel.getModelDescriptor();
 					theRecipients = theAssignee;
 					theMailStandardText = new String[] { Constants.Admin.Actions.ASSIGN_EDITOR };
 				} else if (theData.getEvent().equals(Constants.Admin.Actions.NEED_MORE_INFO)) {
 					theMailSubject = "The editor is requesting more information for the following model: "
-							+ theData.getModelDescriptor();
+							+ theAnimalModel.getModelDescriptor();
 					theRecipients = theCoordinator;
 					theMailStandardText = new String[] { Constants.Admin.Actions.NEED_MORE_INFO };
 				} else if (theData.getEvent().equals(Constants.Admin.Actions.SCREENER_REJECT)) {
-					theMailSubject = "The following model has been rejected: " + theData.getModelDescriptor();
+					theMailSubject = "The following model has been rejected: " + theAnimalModel.getModelDescriptor();
 					theRecipients = theCoordinator;
 					theMailStandardText = new String[] { Constants.Admin.Actions.SCREENER_REJECT };
 				} else if (theData.getEvent().equals(Constants.Admin.Actions.SCREENER_APPROVE)) {
 					theRecipients = theCoordinator;
-					theMailSubject = "The following model has been approved: " + theData.getModelDescriptor();
+					theMailSubject = "The following model has been approved: " + theAnimalModel.getModelDescriptor();
 					theMailStandardText = new String[] { Constants.Admin.Actions.SCREENER_APPROVE };
 				} else if (theData.getEvent().equals(Constants.Admin.Actions.EDITOR_APPROVE)) {
 					theRecipients = theCoordinator;
-					theMailSubject = "The following model has been approved: " + theData.getModelDescriptor();
+					theMailSubject = "The following model has been approved: " + theAnimalModel.getModelDescriptor();
 					theMailStandardText = new String[] { Constants.Admin.Actions.EDITOR_APPROVE };
 				} else if (theData.getEvent().equals(Constants.Admin.Actions.COMPLETE)) {
 					theRecipients = theCoordinator;
-					theMailSubject = "The following model has been completed: " + theData.getModelDescriptor();
+					theMailSubject = "The following model has been completed: " + theAnimalModel.getModelDescriptor();
 					theMailStandardText = new String[] { Constants.Admin.Actions.COMPLETE };
 				} else {
-					theMailSubject = "The following model has changed: " + theData.getModelDescriptor();
+					theMailSubject = "The following model has changed: " + theAnimalModel.getModelDescriptor();
 					theMailStandardText = new String[] {};
 				}
 

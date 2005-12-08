@@ -42,6 +42,9 @@
 	
 	<state default="false">
 	 	<name>Screened-approved</name>
+	    <actions>
+		    <action>emailAssignee</action>
+		</actions>
 		<next-valid-states>
 		    <next-valid-state>
 		        <name>Editor-assigned</name>
