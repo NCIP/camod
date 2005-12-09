@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityAction.java,v 1.6 2005-11-09 00:17:25 georgeda Exp $
+ * $Id: AvailabilityAction.java,v 1.7 2005-12-09 16:28:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/09 00:17:25  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.5  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -101,7 +104,7 @@ public class AvailabilityAction extends BaseAction {
 				// you've
 				// created a new model successfully
 				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.creation.successful"));
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("availability.edit.successful"));
 				saveErrors(request, msg);
 			}
 		} catch (Exception e) {
