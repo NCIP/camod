@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.24 2005-12-01 20:05:13 schroedn Exp $
+ * $Id: submitInducedMutation.jsp,v 1.25 2005-12-12 17:54:56 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2005/12/01 20:05:13  schroedn
+ * Added CVS log statement to top of file
+ *
  *
  */
 
@@ -195,7 +198,7 @@
   				  </html:reset>
 				
 				  <c:if test="${not empty aInducedMutationID}">
-	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>

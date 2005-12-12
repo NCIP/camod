@@ -81,7 +81,7 @@
 	  				  
 						<c:if test="${not empty aAvailabilityID}">
 							<html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton"
-								onclick="confirm('Are you sure you want to delete?');">
+								onclick="return confirm('Are you sure you want to delete?');">
 								<bean:message key="button.delete" />
 							</html:submit>
 						</c:if>

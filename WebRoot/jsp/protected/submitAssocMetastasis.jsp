@@ -1,6 +1,11 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/12/01 20:03:42  schroedn
+ * Defect #239
+ *
+ * Changed the way the method of observation and observation fields interact. when observation is blank 'method of observation' is greyed out and when the user types in obsercation, the other is editable
+ *
  * Revision 1.15  2005/11/30 17:32:44  pandyas
  * Defect #230: Modified field labels according to instructions
  *
@@ -17,7 +22,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.16 2005-12-01 20:03:42 schroedn Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.17 2005-12-12 17:54:56 georgeda Exp $
  *
  */   
 %>
@@ -241,7 +246,7 @@
   				  </html:reset>
 	  				  
 	  		      <c:if test="${not empty aAssociatedMetastasisID}">
-	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>
