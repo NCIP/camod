@@ -133,6 +133,9 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
             inAvailability.setStockNumber(thePI.getId().toString());
 
         }
+        else {
+            inAvailability.setStockNumber("-1");
+        }
 
         /* get distributor object */
         AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(
@@ -168,7 +171,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
             inAvailability.setStockNumber(thePI.getId().toString());
 
         } else {
-            inAvailability.setStockNumber(null);
+            inAvailability.setStockNumber("-1");
         }
 
         log.info("Exiting AvailabilityManagerImpl.editInvestigatorAvailability");
