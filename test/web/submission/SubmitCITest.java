@@ -37,7 +37,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
 
     public void testAddChemicalDrug() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -72,7 +72,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddEnvironmentalFactor() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -107,7 +107,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddGeneDelivery() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -143,7 +143,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddGrowthFactor() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -178,7 +178,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddHormone() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -213,7 +213,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddNutritionalFactor() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -248,7 +248,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddRadiation() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -283,7 +283,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddSurgeryOther() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link
@@ -318,7 +318,7 @@ public class SubmitCITest extends BaseModelNeededTest {
     }
     
     public void testAddViralTreatment() throws Exception {
-        navigateToModel(myModelName);
+        navigateToModelForEditing(myModelName);
         
         //Adding
         // We may or may not have to hit the agreement link

@@ -6,7 +6,12 @@ import java.util.ResourceBundle;
 
 import junit.framework.TestCase;
 
-import com.meterware.httpunit.*;
+import com.meterware.httpunit.GetMethodWebRequest;
+import com.meterware.httpunit.WebConversation;
+import com.meterware.httpunit.WebForm;
+import com.meterware.httpunit.WebLink;
+import com.meterware.httpunit.WebRequest;
+import com.meterware.httpunit.WebResponse;
 
 /** This is a simple example of using HttpUnit to read and understand web pages. * */
 public class BaseHttpTest extends TestCase {
@@ -51,7 +56,7 @@ public class BaseHttpTest extends TestCase {
         }
     }
 
-    protected void navigateToModel(String inModel) throws Exception {
+    protected void navigateToModelForEditing(String inModel) throws Exception {
 
         // Assume we are logged in. Click the SUBMIT button
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
@@ -69,6 +74,48 @@ public class BaseHttpTest extends TestCase {
         theLink.click();
         assertCurrentPageContains("Editing Model:<b>" + inModel);
 
+    }
+
+    protected void navigateToModelForSearching(String inModelName) throws Exception {
+
+        // Assume we are logged in. Click the SUBMIT button
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                "SEARCH MODELS");
+
+        assertNotNull("Couldn't find link to search page", theLink);
+
+        theLink.click();
+
+        // Fill in the info for the search
+        WebForm theForm = myWebConversation.getCurrentPage().getFormWithName("searchForm");
+
+        assertNotNull("Unable to find form for search", theForm);
+
+        theForm.setParameter("modelDescriptor", inModelName);
+        theForm.submit();
+
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, inModelName);
+
+        assertNotNull("Couldn't find link to search for model", theLink);
+
+        theLink.click();
+
+        assertCurrentPageContains("Viewing Model:");
+        assertCurrentPageContains(inModelName);
+
+    }
+
+    protected void navigateToSpecificSearchPage(String inModelName, String inLinkText) throws Exception {
+
+        navigateToModelForSearching(inModelName);
+
+        // Assume we are logged in. Click the SUBMIT button
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                inLinkText);
+
+        assertNotNull("Couldn't find link to specific search page: " + inLinkText, theLink);
+
+        theLink.click();
     }
 
     protected void logoutOfApplication() throws Exception {
@@ -133,4 +180,23 @@ public class BaseHttpTest extends TestCase {
 
         return theModelId;
     }
+
+    protected void verifyValuesOnPage(WebForm inForm) throws Exception {
+
+        String[] theParameters = inForm.getParameterNames();
+
+        for (int i = 0; i < theParameters.length; i++) {
+
+            String theParameterName = theParameters[i];
+
+            if (!theParameterName.equals("method") && !theParameterName.equals("unprotected_method")) {
+                String theParameterValue = inForm.getParameterValue(theParameterName);
+
+                if (!theParameterValue.equals(Constants.Dropdowns.OTHER_OPTION)) {
+                    assertCurrentPageContains(theParameterValue);
+                }
+            }
+        }
+    }
+
 }
