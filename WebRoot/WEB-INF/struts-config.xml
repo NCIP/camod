@@ -886,7 +886,12 @@
 			path="/infoWhatsNew"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/infoWhatsNew.jsp" />
-			
+
+		<action
+			path="/infoReleaseNotes"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/infoReleaseNotes.jsp" />
+					
 		<action
 			path="/expDesignStage0"
 			type="org.apache.struts.actions.ForwardAction"

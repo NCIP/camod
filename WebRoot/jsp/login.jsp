@@ -149,7 +149,7 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">The initial phase of UAT starts November 9th.</td>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.0 was release to production on Dec 21st. <html:link action="infoReleaseNotes.do">Release Notes.</html:link></td>
 
                                                   </tr>
                                               </table>
