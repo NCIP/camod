@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteXenograftTest.java,v 1.1 2005-12-12 15:47:56 pandyas Exp $
+ * $Id: SubmitEditDeleteXenograftTest.java,v 1.2 2005-12-12 16:01:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/12 15:47:56  pandyas
+ * JUnit test case for Xenograft/Transplant
+ *
  * 
  */
 package web.submission;
@@ -42,7 +45,7 @@ public class SubmitEditDeleteXenograftTest extends BaseModelNeededTest {
     }
     
     public void testXenograft() throws Exception {
-        navigateToModel(myModelName);
+    	navigateToModelForEditing(myModelName);
         
         /* Find Transplant/Xenograft link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
