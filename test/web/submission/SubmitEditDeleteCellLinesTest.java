@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteCellLinesTest.java,v 1.1 2005-12-12 15:49:22 pandyas Exp $
+ * $Id: SubmitEditDeleteCellLinesTest.java,v 1.2 2005-12-12 15:52:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/12 15:49:22  pandyas
+ * JUnit test case for Cell Lines - initial version
+ *
  * 
  */
 package web.submission;
@@ -41,7 +44,7 @@ public class SubmitEditDeleteCellLinesTest extends BaseModelNeededTest {
     }
     
     public void testCellLines() throws Exception {
-        navigateToModel(myModelName);
+    	navigateToModelForEditing(myModelName);
         
         // Find Cell Lines link to Submit
         WebLink theLink = myWebConversation.getCurrentPage()

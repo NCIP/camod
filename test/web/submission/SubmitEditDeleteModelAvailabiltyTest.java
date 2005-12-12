@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteModelAvailabiltyTest.java,v 1.1 2005-12-12 15:46:37 pandyas Exp $
+ * $Id: SubmitEditDeleteModelAvailabiltyTest.java,v 1.2 2005-12-12 15:53:12 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/12 15:46:37  pandyas
+ * JUnit test case for Model Availability
+ *
  * 
  */
 package web.submission;
@@ -43,7 +46,7 @@ public class SubmitEditDeleteModelAvailabiltyTest extends BaseModelNeededTest {
     }
     
     public void testJacksonLab() throws Exception {
-        navigateToModel(myModelName);
+    	navigateToModelForEditing(myModelName);
         
         /* Find Model Availablity link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
