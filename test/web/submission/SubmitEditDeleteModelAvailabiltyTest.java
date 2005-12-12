@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteModelAvailabiltyTest.java,v 1.2 2005-12-12 15:53:12 pandyas Exp $
+ * $Id: SubmitEditDeleteModelAvailabiltyTest.java,v 1.3 2005-12-12 15:53:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/12 15:53:12  pandyas
+ * modified: navigateToModelForEditing(myModelName);
+ *
  * Revision 1.1  2005/12/12 15:46:37  pandyas
  * JUnit test case for Model Availability
  *
@@ -80,7 +83,7 @@ public class SubmitEditDeleteModelAvailabiltyTest extends BaseModelNeededTest {
     } 
     
     public void testMMHCCRepo() throws Exception {
-        navigateToModel(myModelName);
+    	navigateToModelForEditing(myModelName);
         
         /* Find Model Availablity link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
@@ -114,7 +117,7 @@ public class SubmitEditDeleteModelAvailabiltyTest extends BaseModelNeededTest {
     } 
     
     public void testInvestigator() throws Exception {
-        navigateToModel(myModelName);
+    	navigateToModelForEditing(myModelName);
         
         /* Find Model Availablity link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
@@ -147,7 +150,7 @@ public class SubmitEditDeleteModelAvailabiltyTest extends BaseModelNeededTest {
     }
     
     public void testIMSR() throws Exception {
-        navigateToModel(myModelName);
+    	navigateToModelForEditing(myModelName);
         
         /* Find Model Availablity link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
