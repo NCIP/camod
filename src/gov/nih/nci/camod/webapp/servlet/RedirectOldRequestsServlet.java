@@ -14,7 +14,7 @@ public class RedirectOldRequestsServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String theRedirectUrl = request.getContextPath() + "/searchSimple.do";
+        String theRedirectUrl = request.getContextPath() + "/SimpleSearchPopulateAction.do?unprotected_method=populate";
 
         // Get the modelId attribute. If it's not null, we will map it to
         // the new ID and
