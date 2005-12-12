@@ -162,6 +162,20 @@
 	<query_group>
         <description>Mouse models with tumors in the following sites</description>
 	    <queries>
+		    <query>
+			 	<description>Head or Neck Tumor</description>
+			 	<key>Head_or_Neck_Query</key>
+			 	<parameters>
+				    <parameter>
+				        <name>organTissueCode</name>
+				        <value>C26401,C23045,C23046,C23061,C23062,C23053,C23055,C23054,C23063,C23064,C23065,C23066,C23067,C23056,C23057,C23058,C23059,C23060,C23047,C23048,C23052,C23049,C23125,C23126,C23127,C23137,C23136,C23128,C23130,C23140,C23146,C23141,C23145,C23144,C23143,C23142,C23148,C23149,C23150,C23151,C23147,C23068,C23079,C23080,C23069,C23071,C23073,C23072,C23070,C23074,C23075,C23076,C23083,C23084,C23085,C23086,C23087,C23077,C23078,C23081,C23082,C23109,C23121,C23122,C23118,C23119,C23120,C23123,C23124,C23110,C23111,C23112,C23117,C23116,C23113,C23115,C23088,C23107,C23108,C23097,C23098,C23095,C23096,C23099,C23100,C23101,C23103,C23104,C23089,C23090,C23091,C23092,C23094,C23105,C23106</value>
+				    </parameter>
+			        <parameter>
+				        <name>species</name>
+				        <value>Mus musculus</value>
+			        </parameter>
+				</parameters>
+			</query>
 			<query>
 			 	<description>Prostate Lesion</description>
 			 	<key>Prostate_Lesion_Query</key>
