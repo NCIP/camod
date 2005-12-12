@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.21 2005-12-01 13:43:36 georgeda Exp $
+ * $Id: XenograftManagerImpl.java,v 1.22 2005-12-12 17:33:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/12/01 13:43:36  georgeda
+ * Defect #226, reuse Taxon objects and do not delete them from Database
+ *
  * Revision 1.20  2005/11/28 22:54:11  pandyas
  * Defect #186: Added organ/tissue to Xenograft page, modified search page to display multiple Xenografts with headers, modified XenograftManagerImpl so it does not create or save an organ object if not organ is selected
  *
@@ -241,9 +244,9 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         }
 
         // Taxon
-        inXenograft.setHostSpecies(theTaxon);
-        inXenograft.setOriginSpecies(inAnimalModel.getSpecies());
-
+        inXenograft.setHostSpecies(inAnimalModel.getSpecies());
+        inXenograft.setOriginSpecies(theTaxon);
+        
         // anytime the graft type is "other"
         if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION)) {
 

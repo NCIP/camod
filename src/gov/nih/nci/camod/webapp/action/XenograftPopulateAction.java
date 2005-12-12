@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.19 2005-11-28 22:52:05 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.20 2005-12-12 17:33:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/11/28 22:52:05  pandyas
+ * Defect #186: Added organ/tissue to Xenograft page, modified search page to display multiple Xenografts with headers, modified XenograftManagerImpl so it does not create or save an organ object if not organ is selected
+ *
  * Revision 1.18  2005/11/28 13:51:20  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -88,7 +91,7 @@ public class XenograftPopulateAction extends BaseAction {
             xenograftForm.setATCCNumber(xeno.getAtccNumber());
             xenograftForm.setCellAmount(xeno.getCellAmount());
 
-            Taxon tax = xeno.getHostSpecies();
+            Taxon tax = xeno.getOriginSpecies();
             if (tax != null) {
                 xenograftForm.setHostScientificName(tax.getScientificName());
 
@@ -99,15 +102,12 @@ public class XenograftPopulateAction extends BaseAction {
                     xenograftForm.setHostEthinicityStrain(tax.getEthnicityStrain());
                 }
             }
-            
+
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
-            if (xeno.getOrgan() != null) {            
-            xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
-            System.out.println("setOrgan= " + xeno.getOrgan().getEVSPreferredDescription());
-
-            xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
-            System.out.println("OrganTissueCode= " + xeno.getOrgan().getConceptCode());
+            if (xeno.getOrgan() != null) {
+                xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
             }
 
             // Set the other flag or the normal graft type

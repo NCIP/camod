@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.33 2005-12-05 21:29:32 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.34 2005-12-12 17:33:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2005/12/05 21:29:32  pandyas
+ * Follow up for defect#191:  moved text above drop down boxes on page to be consistent.
+ *
  * Revision 1.32  2005/12/01 20:04:07  schroedn
  * Defect #243
  *
@@ -279,7 +282,7 @@
   				  </html:reset>
 
 			      <c:if test="${not empty aXenograftID}">
-	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="confirm('Are you sure you want to delete?');">
+	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 				  </c:if>

@@ -37,8 +37,8 @@
 		<tr>		
 			<td class="WhiteBox"><b>Donor Species</b></td>
 			<td class="WhiteBoxRightEnd">
-			    <c:if test="${not empty xt.hostSpecies.scientificName}"><c:out value="${xt.hostSpecies.scientificName}"/></c:if>
-				<c:if test="${not empty xt.hostSpecies.abbreviation}}">(<c:out value="${xt.hostSpecies.abbreviation}"/>)</c:if>&nbsp;
+			    <c:if test="${not empty xt.originSpecies.scientificName}"><c:out value="${xt.originSpecies.scientificName}"/></c:if>
+				<c:if test="${not empty xt.originSpecies.abbreviation}}">(<c:out value="${xt.originSpecies.abbreviation}"/>)</c:if>&nbsp;
 			</td>
 		</tr>
 	
@@ -46,11 +46,11 @@
 			<td class="GreyBox"><b>Donor Strain</b></td>
 			<td class="GreyBoxRightEnd">
 				<c:choose>
-					<c:when test="${empty xt.hostSpecies.ethnicityStrain}">
-						<c:out value="${xt.hostSpecies.ethnicityStrainUnctrlVocab}"/>
+					<c:when test="${empty xt.originSpecies.ethnicityStrain}">
+						<c:out value="${xt.originSpecies.ethnicityStrainUnctrlVocab}"/>
 					</c:when>
 					<c:otherwise>
-						<c:out value="${xt.hostSpecies.ethnicityStrain}"/>
+						<c:out value="${xt.originSpecies.ethnicityStrain}"/>
 					</c:otherwise>
 				</c:choose>&nbsp;
             </td>
@@ -106,9 +106,9 @@
 		<tr>		
 			<td class="WhiteBox"><b>Host Species and Strain</b></td>
 			<td class="WhiteBoxRightEnd">
-				<c:out value="${xt.originSpecies.scientificName}"/>&nbsp;
-				<c:if test="${not empty xt.originSpecies.abbreviation}">(<c:out value="${xt.originSpecies.abbreviation}"/>)</c:if>&nbsp;
-				<c:out value="${xt.originSpecies.ethnicityStrain}"/>
+				<c:out value="${mdl.species.scientificName}"/>&nbsp;
+				<c:if test="${not empty mdl.species.abbreviation}">(<c:out value="${mdl.species.abbreviation}"/>)</c:if>&nbsp;/&nbsp;
+				<c:out value="${mdl.species.ethnicityStrain}"/>
 			</td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
