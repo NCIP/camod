@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.21 2005-11-28 18:31:57 georgeda Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.22 2005-12-13 16:27:27 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2005/11/28 18:31:57  georgeda
+ * Defect #64, fix for newly submitted models
+ *
  * Revision 1.20  2005/11/28 13:46:53  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -223,6 +226,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this GenomicSegment
+        if( inTargetedModificationData.getFileLocation() != null )
         if (inTargetedModificationData.getFileLocation().getFileName() != null
                 && !inTargetedModificationData.getFileLocation().getFileName().equals("")) {
 

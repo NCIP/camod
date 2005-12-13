@@ -290,23 +290,24 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this GenomicSegment
-        if (inEngineeredTransgeneData.getFileLocation().getFileName() != null
-                && !inEngineeredTransgeneData.getFileLocation().getFileName().equals("")) {
-
-            ImageForm inImageData = new ImageForm();
-
-            String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
-
-            inImageData.setDescriptionOfConstruct(inEngineeredTransgeneData.getDescriptionOfConstruct());
-            inImageData.setTitle(inEngineeredTransgeneData.getTitle());
-            inImageData.setFileServerLocation(inEngineeredTransgeneData.getFileServerLocation());
-            inImageData.setFileLocation(inEngineeredTransgeneData.getFileLocation());
-
-            Image image = ImageManagerSingleton.instance().create(new AnimalModel(), inImageData, inPath,
-                    Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
-
-            inEngineeredTransgene.setImage(image);
-        }
+        if ( inEngineeredTransgeneData.getFileLocation() != null )
+        	if (inEngineeredTransgeneData.getFileLocation().getFileName() != null
+	                && !inEngineeredTransgeneData.getFileLocation().getFileName().equals("")) {
+	
+	            ImageForm inImageData = new ImageForm();
+	
+	            String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+	
+	            inImageData.setDescriptionOfConstruct(inEngineeredTransgeneData.getDescriptionOfConstruct());
+	            inImageData.setTitle(inEngineeredTransgeneData.getTitle());
+	            inImageData.setFileServerLocation(inEngineeredTransgeneData.getFileServerLocation());
+	            inImageData.setFileLocation(inEngineeredTransgeneData.getFileLocation());
+	
+	            Image image = ImageManagerSingleton.instance().create(new AnimalModel(), inImageData, inPath,
+	                    Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
+	
+	            inEngineeredTransgene.setImage(image);
+	        }
 
         log.trace("Exiting populateEngineeredTransgene");
     }

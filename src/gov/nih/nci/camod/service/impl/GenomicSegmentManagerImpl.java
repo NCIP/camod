@@ -149,6 +149,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this GenomicSegment
+        if ( inGenomicSegmentData.getFileLocation() != null )
         if (inGenomicSegmentData.getFileLocation().getFileName() != null
                 && !inGenomicSegmentData.getFileLocation().getFileName().equals("")) {
 
