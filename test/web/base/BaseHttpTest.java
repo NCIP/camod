@@ -1,7 +1,16 @@
+/**
+ * 
+ * $Id: BaseHttpTest.java,v 1.4 2005-12-13 19:17:38 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package web.base;
 
 import gov.nih.nci.camod.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import junit.framework.TestCase;
@@ -180,23 +189,66 @@ public class BaseHttpTest extends TestCase {
 
         return theModelId;
     }
+    
+    protected String findPubIdOnPage(String inStartText, String inEndText) throws Exception {
 
-    protected void verifyValuesOnPage(WebForm inForm) throws Exception {
+        String thePubId = "";
+
+        String thePageText = myWebConversation.getCurrentPage().getText();
+
+        int theFirstIndex = thePageText.indexOf(inStartText);
+        int theLastIndex = thePageText.indexOf(inEndText);
+
+        if (theFirstIndex < theLastIndex) {
+            thePageText = thePageText.substring(theFirstIndex, theLastIndex);
+
+            // Parse out the PubId
+            int thePubIdIndex = thePageText.indexOf(Constants.Parameters.PUBID);
+            if (thePubIdIndex != -1) {
+
+                thePageText = thePageText.substring(thePubIdIndex);
+                int theEndingQuoteIndex = thePageText.indexOf("\"");
+
+                thePubId = thePageText.substring(0, theEndingQuoteIndex);
+            } else {
+                throw new Exception("Cannot find text " + Constants.Parameters.PUBID
+                        + " between starting and ending strings: " + inStartText + " , " + inEndText);
+            }
+        } else {
+            throw new Exception("Unable to locate text with starting and ending strings: " + inStartText + " , "
+                    + inEndText);
+        }
+
+        return thePubId;
+    }    
+
+    protected void verifyValuesOnPage(WebForm inForm, List inIgnoreList) throws Exception {
 
         String[] theParameters = inForm.getParameterNames();
 
         for (int i = 0; i < theParameters.length; i++) {
+        	
 
             String theParameterName = theParameters[i];
+            System.out.println("The theParameterName" + theParameterName);
+            
+            if(!inIgnoreList.contains(theParameterName)){
 
-            if (!theParameterName.equals("method") && !theParameterName.equals("unprotected_method")) {
-                String theParameterValue = inForm.getParameterValue(theParameterName);
+            	if (!theParameterName.equals("method") && !theParameterName.equals("unprotected_method")) {
+            		String theParameterValue = inForm.getParameterValue(theParameterName);
 
-                if (!theParameterValue.equals(Constants.Dropdowns.OTHER_OPTION)) {
-                    assertCurrentPageContains(theParameterValue);
-                }
+            		if (!Constants.Dropdowns.OTHER_OPTION.equals(theParameterValue) && theParameterValue !=null) {
+            			assertCurrentPageContains(theParameterValue);
+            		}
+            	}
             }
         }
     }
 
+    
+    protected void verifyValuesOnPage(WebForm inForm) throws Exception {
+    	verifyValuesOnPage(inForm, new ArrayList());    	
+    }
+    
+    
 }
