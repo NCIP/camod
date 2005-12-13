@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: SearchGeneticDescriptionTest.java,v 1.2 2005-12-13 22:01:50 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package web.search;
 
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm;
