@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteCellLinesTest.java,v 1.3 2005-12-12 16:28:32 pandyas Exp $
+ * $Id: SubmitEditDeleteCellLinesTest.java,v 1.4 2005-12-13 20:24:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/12 16:28:32  pandyas
+ * added testPublication to Cell Lines test class
+ *
  * Revision 1.2  2005/12/12 15:52:47  pandyas
  * modified: navigateToModelForEditing(myModelName);
  *
@@ -56,9 +59,7 @@ public class SubmitEditDeleteCellLinesTest extends BaseModelNeededTest {
         assertCurrentPageContains("Experiment:");
         WebForm theForm = theCurrentPage.getFormWithName("cellLineForm");
         theForm.setParameter("cellLineName", "ABCDEFG");
-        theForm.getScriptableObject().setParameterValue( "organ", "Heart_MMHCC" );
         theForm.getScriptableObject().setParameterValue( "organTissueCode", "C22498" );
-        theForm.getScriptableObject().setParameterValue( "organTissueName", "Heart" );        
         theCurrentPage = theForm.submit();
         assertCurrentPageContains("You have successfully added a Cell Line to this model!");
         
@@ -69,9 +70,7 @@ public class SubmitEditDeleteCellLinesTest extends BaseModelNeededTest {
         assertCurrentPageContains("Experiment:");
         theForm = theCurrentPage.getFormWithName("cellLineForm");
         theForm.setParameter("cellLineName", "ABCDEFG");        
-        theForm.getScriptableObject().setParameterValue( "organ", "Heart_MMHCC" );
         theForm.getScriptableObject().setParameterValue( "organTissueCode", "C22498" );
-        theForm.getScriptableObject().setParameterValue( "organTissueName", "Heart" );
         theForm.setParameter("experiment", "Experiment Test");          
         theCurrentPage = theForm.submit();
         assertCurrentPageContains("You have successfully edited a Cell Line.");      
