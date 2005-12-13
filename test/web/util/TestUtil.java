@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: TestUtil.java,v 1.3 2005-12-13 20:28:16 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package web.util;
 
 import gov.nih.nci.camod.Constants;
@@ -8,6 +16,7 @@ import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.security.junk.RandomIntGenerator;
 
 import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -96,6 +105,13 @@ public class TestUtil {
             }
         }
     }
+    
+    public static void setRandomValues(Object inDataObject, WebForm inForm, boolean setOtherValues) 
+    	throws Exception  {
+    	
+        setRandomValues(inDataObject, inForm, setOtherValues, new ArrayList());
+    	
+    }
 
     public static void setValuesOnForm(Object inDataObject, WebForm inForm) throws Exception {
 
@@ -114,7 +130,8 @@ public class TestUtil {
                 if (thePropertyValue != null && inForm.hasParameterNamed(thePropertyName)) {
 
                     System.out.println("Setting value: " + thePropertyName + " to " + thePropertyValue.toString());
-                    inForm.setParameter(thePropertyName, thePropertyValue.toString());
+                    //inForm.setParameter(thePropertyName, thePropertyValue.toString());
+                    inForm.getScriptableObject().setParameterValue(thePropertyName, thePropertyValue.toString());
                 }
             }
         }
