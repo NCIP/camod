@@ -172,7 +172,6 @@ public class SubmitGDTest extends BaseModelNeededTest {
     	navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Targeted Modification");        
         assertNotNull("Unable to find link to enter a Targeted Modification", theLink);        
         WebResponse theCurrentPage = theLink.click();        

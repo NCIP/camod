@@ -75,7 +75,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Environmental Factor");        
         assertNotNull("Unable to find link to add a Environmental Factor", theLink);        
         WebResponse theCurrentPage = theLink.click();        
@@ -110,7 +109,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Gene Delivery");        
         assertNotNull("Unable to find link to add a Gene Delivery", theLink);        
         WebResponse theCurrentPage = theLink.click();        
@@ -146,7 +144,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Growth Factor");        
         assertNotNull("Unable to find link to add a Growth Factor", theLink);        
         WebResponse theCurrentPage = theLink.click();        
@@ -181,7 +178,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Hormone");        
         assertNotNull("Unable to find link to add a Hormone", theLink);        
         WebResponse theCurrentPage = theLink.click();        
@@ -216,7 +212,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Nutritional Factor");        
         assertNotNull("Unable to find link to add a Nutritional Factor", theLink);        
         WebResponse theCurrentPage = theLink.click();        
@@ -251,7 +246,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Radiation");        
         assertNotNull("Unable to find link to add a Radiation", theLink);        
         WebResponse theCurrentPage = theLink.click();        
@@ -286,7 +280,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Surgery/Other");        
         assertNotNull("Unable to find link to add a Surgery/Other", theLink);        
         WebResponse theCurrentPage = theLink.click();        
@@ -321,7 +314,6 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        // We may or may not have to hit the agreement link
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Viral Treatment");        
         assertNotNull("Unable to find link to add a Viral Treatment", theLink);        
         WebResponse theCurrentPage = theLink.click();        
