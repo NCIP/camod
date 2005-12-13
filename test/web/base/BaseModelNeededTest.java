@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: BaseModelNeededTest.java,v 1.2 2005-12-13 19:17:51 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package web.base;
 
 import gov.nih.nci.camod.util.GUIDGenerator;
@@ -8,6 +16,7 @@ import com.meterware.httpunit.*;
 public class BaseModelNeededTest extends BaseHttpTest {
 
     protected static String myModelName = null;
+   
 
     public BaseModelNeededTest(String testName) {
         super(testName);
