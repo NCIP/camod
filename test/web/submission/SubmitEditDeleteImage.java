@@ -1,3 +1,10 @@
+/**
+ * 
+ * $Id: SubmitEditDeleteImage.java,v 1.2 2005-12-14 20:14:55 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package web.submission;
 
 import java.io.File;

@@ -1,3 +1,10 @@
+/**
+ * 
+ * $Id: SubmitCITest.java,v 1.5 2005-12-14 20:14:35 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package web.submission;
 
 import java.util.ResourceBundle;
@@ -109,7 +116,8 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Gene Delivery");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+        		"Enter Gene Delivery");        
         assertNotNull("Unable to find link to add a Gene Delivery", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Viral Vector is not listed, then please");
@@ -246,7 +254,8 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Radiation");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Enter Radiation");        
         assertNotNull("Unable to find link to add a Radiation", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Radiation is not listed, then please");
@@ -280,7 +289,8 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Surgery/Other");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+        		"Enter Surgery/Other");        
         assertNotNull("Unable to find link to add a Surgery/Other", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Surgery is not listed, then please");
@@ -314,7 +324,8 @@ public class SubmitCITest extends BaseModelNeededTest {
         navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Viral Treatment");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+        		"Enter Viral Treatment");        
         assertNotNull("Unable to find link to add a Viral Treatment", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Virus is not listed, then please");

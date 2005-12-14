@@ -1,3 +1,10 @@
+/**
+ * 
+ * $Id: SubmitGDTest.java,v 1.3 2005-12-14 20:15:14 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package web.submission;
 
 import java.util.ResourceBundle;

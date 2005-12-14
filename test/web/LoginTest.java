@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: LoginTest.java,v 1.2 2005-12-14 20:15:42 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package web;
 
 import junit.framework.Test;

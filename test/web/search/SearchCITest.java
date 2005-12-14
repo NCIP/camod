@@ -1,3 +1,10 @@
+/**
+ * 
+ * $Id: SearchCITest.java,v 1.3 2005-12-14 20:14:03 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
 package web.search;
 
 import gov.nih.nci.camod.webapp.form.ChemicalDrugForm;
