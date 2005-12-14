@@ -2,8 +2,16 @@ package web.search;
 
 import gov.nih.nci.camod.webapp.form.ChemicalDrugForm;
 import gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm;
+import gov.nih.nci.camod.webapp.form.GeneDeliveryForm;
+import gov.nih.nci.camod.webapp.form.GrowthFactorForm;
+import gov.nih.nci.camod.webapp.form.HormoneForm;
+import gov.nih.nci.camod.webapp.form.NutritionalFactorForm;
+import gov.nih.nci.camod.webapp.form.RadiationForm;
+import gov.nih.nci.camod.webapp.form.SurgeryForm;
+import gov.nih.nci.camod.webapp.form.ViralTreatmentForm;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import junit.framework.Test;
@@ -125,7 +133,7 @@ public class SearchCITest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm);
 	}
-	
+/*	
 	public void testSearchForEnvironmentalFactorWithOthers() throws Exception {
 
 		navigateToModelForEditing(myModelName);
@@ -152,5 +160,205 @@ public class SearchCITest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm);
 	}
+*/
+
+/*	Error:  Couldn't find link to specific search page: CARCINOGENIC INTERVENTIONS
+	public void testSearchForGeneDelivery() throws Exception {
+
+		navigateToModelForEditing(myModelName);
+
+		// Adding
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Enter Gene Delivery");
+		assertNotNull("Unable to find link to enter a Gene Delivery", theLink);
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("(if Viral Vector is not listed, then please");
+		WebForm theWebForm = theCurrentPage.getFormWithName("geneDeliveryForm");
+
+		GeneDeliveryForm theForm = new GeneDeliveryForm();
+		theForm.setViralVector("Lentivirus");
+		theForm.setOrgan("Heart");
+		theForm.setOrganTissueName("Heart");		
+		theForm.setOrganTissueCode("C22498");
+		
+		// Add parameters found on submit screen but not displayed on search screen  
+		List theParamsToSkip = new ArrayList();		
+		theParamsToSkip.add("organTissueCode");
+		theParamsToSkip.add("organTissueName");		
+		
+		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		assertCurrentPageContains("You have successfully added a Gene Delivery to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"CARCINOGENIC INTERVENTIONS");
+		
+		verifyValuesOnPage(theWebForm, theParamsToSkip);
+	}	
+*/	
+	public void testSearchForGrowthFactor() throws Exception {
+
+		navigateToModelForEditing(myModelName);
+
+		// Adding
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Enter Growth Factor");
+		assertNotNull("Unable to find link to enter a Growth Factor", theLink);
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("(if Growth Factor is not listed, then please");
+		WebForm theWebForm = theCurrentPage.getFormWithName("growthFactorForm");
+
+		GrowthFactorForm theForm = new GrowthFactorForm();
+		
+		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		assertCurrentPageContains("You have successfully added a Growth Factor to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"CARCINOGENIC INTERVENTIONS");
+		
+		verifyValuesOnPage(theWebForm);
+	}
+	
+	public void testSearchForHormone() throws Exception {
+
+		navigateToModelForEditing(myModelName);
+
+		// Adding
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Enter Hormone");
+		assertNotNull("Unable to find link to enter a Hormone", theLink);
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("(if Hormone is not listed, then please");
+		WebForm theWebForm = theCurrentPage.getFormWithName("hormoneForm");
+
+		HormoneForm theForm = new HormoneForm();
+		
+		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		assertCurrentPageContains("You have successfully added a Hormone to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"CARCINOGENIC INTERVENTIONS");
+		
+		verifyValuesOnPage(theWebForm);
+	}
+	
+	public void testSearchForNutritionalFactor() throws Exception {
+
+		navigateToModelForEditing(myModelName);
+
+		// Adding
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Enter Nutritional Factor");
+		assertNotNull("Unable to find link to enter a Nutritional Factor", theLink);
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("(if Nutritional Factor is not listed, then please");
+		WebForm theWebForm = theCurrentPage.getFormWithName("nutritionalFactorForm");
+
+		NutritionalFactorForm theForm = new NutritionalFactorForm();
+		
+		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		assertCurrentPageContains("You have successfully added a Nutritional Factor to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"CARCINOGENIC INTERVENTIONS");
+		
+		verifyValuesOnPage(theWebForm);
+	}
+	
+	public void testSearchForRadiation() throws Exception {
+
+		navigateToModelForEditing(myModelName);
+
+		// Adding
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Enter Radiation");
+		assertNotNull("Unable to find link to enter a Radiation", theLink);
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("(if Radiation is not listed, then please");
+		WebForm theWebForm = theCurrentPage.getFormWithName("radiationForm");
+
+		RadiationForm theForm = new RadiationForm();
+		
+		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		assertCurrentPageContains("You have successfully added a Radiation to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"CARCINOGENIC INTERVENTIONS");
+		
+		verifyValuesOnPage(theWebForm);
+	}	
+	
+	public void testSearchForSurgeryOther() throws Exception {
+
+		navigateToModelForEditing(myModelName);
+
+		// Adding
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Enter Surgery/Other");
+		assertNotNull("Unable to find link to enter a Surgery/Other", theLink);
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("(if Surgery is not listed, then please");
+		WebForm theWebForm = theCurrentPage.getFormWithName("surgeryForm");
+
+		SurgeryForm theForm = new SurgeryForm();
+		
+		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		assertCurrentPageContains("You have successfully added a Surgery / Other to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"CARCINOGENIC INTERVENTIONS");
+		
+		verifyValuesOnPage(theWebForm);
+	}	
+
+	public void testSearchForViralTreatment() throws Exception {
+
+		navigateToModelForEditing(myModelName);
+
+		// Adding
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Enter Viral Treatment");
+		assertNotNull("Unable to find link to enter a Viral Treatment", theLink);
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("(if Virus is not listed, then please");
+		WebForm theWebForm = theCurrentPage.getFormWithName("viralTreatmentForm");
+
+		ViralTreatmentForm theForm = new ViralTreatmentForm();
+		
+		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		assertCurrentPageContains("You have successfully added a Viral Treatment to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"CARCINOGENIC INTERVENTIONS");
+		
+		verifyValuesOnPage(theWebForm);
+	}		
 	
 }
