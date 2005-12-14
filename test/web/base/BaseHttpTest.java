@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.4 2005-12-13 19:17:38 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.5 2005-12-14 15:23:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/12/13 19:17:38  pandyas
+ * Modified to ignore values on submit page but not on display page
+ *
  * 
  */
 package web.base;
@@ -190,37 +193,7 @@ public class BaseHttpTest extends TestCase {
         return theModelId;
     }
     
-    protected String findPubIdOnPage(String inStartText, String inEndText) throws Exception {
-
-        String thePubId = "";
-
-        String thePageText = myWebConversation.getCurrentPage().getText();
-
-        int theFirstIndex = thePageText.indexOf(inStartText);
-        int theLastIndex = thePageText.indexOf(inEndText);
-
-        if (theFirstIndex < theLastIndex) {
-            thePageText = thePageText.substring(theFirstIndex, theLastIndex);
-
-            // Parse out the PubId
-            int thePubIdIndex = thePageText.indexOf(Constants.Parameters.PUBID);
-            if (thePubIdIndex != -1) {
-
-                thePageText = thePageText.substring(thePubIdIndex);
-                int theEndingQuoteIndex = thePageText.indexOf("\"");
-
-                thePubId = thePageText.substring(0, theEndingQuoteIndex);
-            } else {
-                throw new Exception("Cannot find text " + Constants.Parameters.PUBID
-                        + " between starting and ending strings: " + inStartText + " , " + inEndText);
-            }
-        } else {
-            throw new Exception("Unable to locate text with starting and ending strings: " + inStartText + " , "
-                    + inEndText);
-        }
-
-        return thePubId;
-    }    
+    
 
     protected void verifyValuesOnPage(WebForm inForm, List inIgnoreList) throws Exception {
 
