@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchCITest.java,v 1.3 2005-12-14 20:14:03 pandyas Exp $
+ * $Id: SearchCITest.java,v 1.4 2005-12-16 17:28:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/14 20:14:03  pandyas
+ * Added JavaDocs
+ *
  * 
  */
 package web.search;
@@ -169,7 +172,7 @@ public class SearchCITest extends BaseModelNeededTest {
 	}
 */
 
-/*	Error:  Couldn't find link to specific search page: CARCINOGENIC INTERVENTIONS
+/*  TODO:  fix bug in TestTrack so this test will run correctly
 	public void testSearchForGeneDelivery() throws Exception {
 
 		navigateToModelForEditing(myModelName);
