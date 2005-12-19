@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.32 2005-11-21 18:38:31 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.33 2005-12-19 13:48:29 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2005/11/21 18:38:31  georgeda
+ * Defect #35.  Trim whitespace from items that are freeform text
+ *
  * Revision 1.31  2005/11/17 22:31:02  georgeda
  * Defect #131, upper case the modelDescriptor when doing a keyword search
  *
@@ -1047,7 +1050,7 @@ public class QueryManagerImpl extends BaseManager {
 
 		String theSQLTheraputicApproach = "%";
 		if (inTherapeuticApproach != null && inTherapeuticApproach.trim().length() > 0) {
-			theSQLTheraputicApproach = "%" + inTherapeuticApproach + "%";
+			theSQLTheraputicApproach = "%" + inTherapeuticApproach.trim().toUpperCase() + "%";
 		}
 
 		Object[] theParams = new Object[1];
