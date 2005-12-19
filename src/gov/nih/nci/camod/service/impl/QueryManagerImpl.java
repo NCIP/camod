@@ -1,9 +1,15 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.32 2005-11-21 18:38:31 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.34 2005-12-19 14:01:33 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2005/12/19 13:48:29  georgeda
+ * Defect #271 - Search issues
+ *
+ * Revision 1.32  2005/11/21 18:38:31  georgeda
+ * Defect #35.  Trim whitespace from items that are freeform text
+ *
  * Revision 1.31  2005/11/17 22:31:02  georgeda
  * Defect #131, upper case the modelDescriptor when doing a keyword search
  *
@@ -1047,7 +1053,7 @@ public class QueryManagerImpl extends BaseManager {
 
 		String theSQLTheraputicApproach = "%";
 		if (inTherapeuticApproach != null && inTherapeuticApproach.trim().length() > 0) {
-			theSQLTheraputicApproach = "%" + inTherapeuticApproach + "%";
+			theSQLTheraputicApproach = "%" + inTherapeuticApproach.trim().toUpperCase() + "%";
 		}
 
 		Object[] theParams = new Object[1];
@@ -1489,8 +1495,9 @@ public class QueryManagerImpl extends BaseManager {
             }
 		}
 
-		// Only call if some of the data is set
-		if ((inSearchData.getGeneName() != null && inSearchData.getGeneName().trim().length() > 0)
+		// Only call if some of the data is set : TODO: clean this up
+		if ((inSearchData.getGeneName() != null && inSearchData.getGeneName().trim().length() > 0 && 
+                (inSearchData.isEngineeredTransgene() || inSearchData.isTargetedModification()))
 				|| (inSearchData.getGenomicSegDesignator() != null && inSearchData.getGenomicSegDesignator().trim().length() > 0)
 				|| (inSearchData.getInducedMutationAgent() != null && inSearchData.getInducedMutationAgent().trim().length() > 0)) {
 
@@ -1520,17 +1527,17 @@ public class QueryManagerImpl extends BaseManager {
 					+ getModelIdsForTherapeuticApproach(inSearchData.getTherapeuticApproach().trim()) + ")";
 		}
 
-		// Search for therapeutic approaches
+		// Search for metastasis
 		if (inSearchData.isSearchHistoMetastasis()) {
 			theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistoMetastasis() + ")";
 		}
 
-		// Search for therapeutic approaches
+		// Search for microarray data
 		if (inSearchData.isSearchMicroArrayData()) {
 			theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForMicroArrayData() + ")";
 		}
 
-		// Search for therapeutic approaches
+		// Search for xenograft
 		if (inSearchData.isSearchXenograft()) {
 			theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForXenograft() + ")";
 		}
