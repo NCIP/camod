@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.25 2005-12-02 14:17:30 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.26 2005-12-19 14:05:33 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/12/02 14:17:30  georgeda
+ * Defect #241, handle truncated HTML tags
+ *
  * Revision 1.24  2005/11/16 21:33:24  georgeda
  * Defect #40.  Changed reset button to clear.
  *
@@ -44,7 +47,7 @@
 	function checkFields() {
 	
 	    // Do the CI fields
-		theCIFlag = document.searchForm.searchCarcinogenicInterventions;
+		theCIFlag = document.searchForm.searchCarcinogenicInterventions[0];
 		toggleField(theCIFlag, document.searchForm.chemicalDrug);
 		toggleField(theCIFlag, document.searchForm.growthFactor);
 		toggleField(theCIFlag, document.searchForm.hormone);
@@ -52,8 +55,8 @@
 		toggleField(theCIFlag, document.searchForm.viral);
 		toggleField(theCIFlag, document.searchForm.surgery);
 		
-		theTargModFlag = document.searchForm.targetedModification;
-		theEndTransGeneFlag = document.searchForm.engineeredTransgene;
+		theTargModFlag = document.searchForm.targetedModification[0];
+		theEndTransGeneFlag = document.searchForm.engineeredTransgene[0];
 		
 		if (theTargModFlag.checked == true || theEndTransGeneFlag.checked == true) {
 		    enableField(document.searchForm.geneName);
@@ -62,7 +65,7 @@
 		    disableField(document.searchForm.geneName);
 		}
 		
-		toggleField(document.searchForm.searchTherapeuticApproaches, document.searchForm.therapeuticApproach);
+		toggleField(document.searchForm.searchTherapeuticApproaches[0], document.searchForm.therapeuticApproach);
 	}
 		
 </SCRIPT>
@@ -175,10 +178,13 @@
 				<label for="field1">&nbsp;</label>
 			</td>
 			<td class="formField">
-                <html:checkbox property="engineeredTransgene" onclick="checkFields()" />	
+                <html:checkbox property="engineeredTransgene" onclick="checkFields()" />
+                <!-- NOTE: Needed to workaround struts bug -->
+                <input type="hidden" name="engineeredTransgene" value="false">
 			    <label for="box1">Engineered Transgene</label>			
 			    </br>
-                <html:checkbox property="targetedModification" onclick="checkFields()" />	
+                <html:checkbox property="targetedModification" onclick="checkFields()" />
+                <input type="hidden" name="targetedModification" value="false">
 			    <label for="box1">Targeted Modification</label>			
 			</td>
 		</tr>
@@ -215,7 +221,9 @@
 			</td>
 
 			<td class="formField">
-                <html:checkbox property="searchCarcinogenicInterventions" onclick="checkFields()" />	
+                <html:checkbox property="searchCarcinogenicInterventions" onclick="checkFields()" />
+                <!-- NOTE: Needed to work around struts bug -->
+                <input type="hidden" name="searchCarcinogenicInterventions" value="false">
 			    <label for="box1">Check here to search for models with <br>Carcinogenic interventions data</label>			
 			</td>
 		</tr>
@@ -298,7 +306,9 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Therapeutic Approaches</td>
 			<td class="formField">
-			    <html:checkbox property="searchTherapeuticApproaches" onclick="checkFields()" />	
+			    <html:checkbox property="searchTherapeuticApproaches" onclick="checkFields()" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchTherapeuticApproaches" value="false">	
 				<label for="box1">Check here to search for models with <br>therapeutic approaches data</label>
 			</td>
 		</tr>
@@ -317,7 +327,9 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Metastasis</td>
 			<td class="formField">
-			    <html:checkbox property="searchHistoMetastasis" />	
+			    <html:checkbox property="searchHistoMetastasis" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchHistoMetastasis" value="false">
 				<label for="box1">Check here to search for models with Metastasis</label>
 			</td>
 		</tr>
@@ -330,7 +342,9 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Microarray Data</td>
 			<td class="formField">
-			    <html:checkbox property="searchMicroArrayData" />	
+			    <html:checkbox property="searchMicroArrayData" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchMicroArrayData" value="false">
 				<label for="box1">Check here to search for models with microarray data</label>
 			</td>
 		</tr>
