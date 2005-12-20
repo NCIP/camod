@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchCITest.java,v 1.4 2005-12-16 17:28:37 pandyas Exp $
+ * $Id: SearchCITest.java,v 1.5 2005-12-20 15:53:06 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/12/16 17:28:37  pandyas
+ * Added TODO for bug found in application while creating this script
+ *
  * Revision 1.3  2005/12/14 20:14:03  pandyas
  * Added JavaDocs
  *
@@ -108,6 +111,8 @@ public class SearchCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		
 		assertCurrentPageContains("You have successfully added a Chemical / Drug to this model!");
 
 		TestUtil.moveModelToEditedApproved(myModelName);
@@ -143,7 +148,7 @@ public class SearchCITest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm);
 	}
-/*	
+	
 	public void testSearchForEnvironmentalFactorWithOthers() throws Exception {
 
 		navigateToModelForEditing(myModelName);
@@ -162,6 +167,9 @@ public class SearchCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
+		//added for debugging purpose only - remove when done 
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		
 		assertCurrentPageContains("You have successfully added an Environmental Factor to this model!");
 
 		TestUtil.moveModelToEditedApproved(myModelName);
@@ -170,9 +178,8 @@ public class SearchCITest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm);
 	}
-*/
 
-/*  TODO:  fix bug in TestTrack so this test will run correctly
+
 	public void testSearchForGeneDelivery() throws Exception {
 
 		navigateToModelForEditing(myModelName);
@@ -208,7 +215,7 @@ public class SearchCITest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 	}	
-*/	
+	
 	public void testSearchForGrowthFactor() throws Exception {
 
 		navigateToModelForEditing(myModelName);
