@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TestUtil.java,v 1.3 2005-12-13 20:28:16 pandyas Exp $
+ * $Id: TestUtil.java,v 1.4 2005-12-20 15:54:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/13 20:28:16  pandyas
+ * Modified inForm.setParameterValue() to use inForm.getScriptableObject().setParameterValue() instead
+ *
  * 
  */
 
@@ -25,9 +28,13 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
+import com.meterware.httpunit.WebConversation;
 import com.meterware.httpunit.WebForm;
+import com.meterware.httpunit.WebResponse;
 
 public class TestUtil {
+	
+    static protected WebConversation myWebConversation = new WebConversation();    
 
     static private RandomIntGenerator ourRandomIntGenerator = new RandomIntGenerator(10, 20);
 
@@ -53,6 +60,8 @@ public class TestUtil {
 
     public static void setRandomValues(Object inDataObject, WebForm inForm, boolean setOtherValues,
             List inParamsToIgnore) throws Exception {
+    	
+    	System.out.println("<TestUtil> Entered setRandomValues");    	
 
         Map theBeanProps = PropertyUtils.describe(inDataObject);
         Iterator theProperties = theBeanProps.entrySet().iterator();
@@ -65,31 +74,36 @@ public class TestUtil {
             if (theEntry.getKey() != null) {
 
                 String thePropertyName = theEntry.getKey().toString();
+
                 PropertyDescriptor thePropertyDescriptor = PropertyUtils.getPropertyDescriptor(inDataObject,
                         thePropertyName);
 
-                System.out.println("Property name: " + thePropertyName);
-
                 Object thePropertyValue = theEntry.getValue();
 
-                // Only override non-set values
+                // Only override non-set values  (theForm.set...)
                 if (thePropertyValue == null && !inParamsToIgnore.contains(thePropertyName)) {
-                    // check if property is a collection
+                    
+                	
+                    // check if property is a string
                     if (thePropertyDescriptor.getPropertyType().getName().equals("java.lang.String")) {
 
                         String[] theOptions = inForm.getOptionValues(thePropertyName);
 
                         if (theOptions.length > 0) {
+                        	System.out.println("This property is a collection: " + thePropertyName);
                             if (Arrays.asList(theOptions).contains(Constants.Dropdowns.OTHER_OPTION)
                                     && setOtherValues == true) {
                                 BeanUtils.setProperty(inDataObject, thePropertyName, Constants.Dropdowns.OTHER_OPTION);
+                                System.out.println("This property is assigned the value other: " + thePropertyName);
                             } else {
                                 BeanUtils.setProperty(inDataObject, thePropertyName, theOptions[theOptions.length - 1]);
+                                System.out.println("setting random value to " + thePropertyName);
                             }
                         } else {
 
                             // If we're not setting the other option, skip these
                             if (thePropertyName.indexOf("other") == -1 || setOtherValues == true) {
+                            	System.out.println("This property is not a collection and randomly set: " + thePropertyName);
                                 BeanUtils.setProperty(inDataObject, thePropertyName, GUIDGenerator.getInstance()
                                         .genNewGuid());
                             }
@@ -104,16 +118,20 @@ public class TestUtil {
                 }
             }
         }
+    	System.out.println("<TestUtil> Exiting setRandomValues");
     }
     
     public static void setRandomValues(Object inDataObject, WebForm inForm, boolean setOtherValues) 
     	throws Exception  {
     	
         setRandomValues(inDataObject, inForm, setOtherValues, new ArrayList());
+
     	
     }
 
     public static void setValuesOnForm(Object inDataObject, WebForm inForm) throws Exception {
+    	
+    	System.out.println("<TestUtil> Entered setValuesOnForm");
 
         Map theBeanProps = PropertyUtils.describe(inDataObject);
         Iterator theProperties = theBeanProps.entrySet().iterator();
@@ -135,5 +153,30 @@ public class TestUtil {
                 }
             }
         }
+        
+    	System.out.println("<TestUtil> Exited setValuesOnForm");        
     }
+    /*
+     * This simple method is used to capture text on a page.
+     * Validation text is captured for debugging purposes.
+     */
+    public static void getTextOnPage(WebResponse theCurrentPage, String inStartText, String inEndText) throws Exception {
+    	
+    	System.out.println("<TestUtil> entered getTextOnPage method");
+
+            String thePageText = theCurrentPage.getText();
+
+            int theFirstIndex = thePageText.indexOf(inStartText);
+            int theLastIndex = thePageText.indexOf(inEndText);
+
+            if (theFirstIndex < theLastIndex && thePageText !=null) {
+                thePageText = thePageText.substring(theFirstIndex, theLastIndex);
+                System.out.println("\nThe Text: " +thePageText);                
+    		} else {
+    			System.out.println("\nThere is no Text on the current page: ");
+    		}
+    	
+    	System.out.println("<TestUtil> exited getTextOnPage method");    	
+		
+	}
 }
