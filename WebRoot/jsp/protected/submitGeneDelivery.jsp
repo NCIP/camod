@@ -27,6 +27,8 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="name" >
+
 
 <!-- using chkOtherName and name for viralVector would conflict with the organ name variable -->
 
@@ -65,9 +67,7 @@
             <td class="formField">
             <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
             <br>		
-			<br>
-			<html:form action="<%= actionName %>" focus="name" >	
-			
+			<br>		
 			<html:select styleClass="formFieldSized" size="1" property="viralVector" onclick="chkOtherViralVector();">
 				<html:options name="<%= Dropdowns.VIRALVECTORDROP %>"/>					
 			</html:select>
@@ -79,7 +79,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Viral Vector:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" disabled="true" property="otherViralVector"/>			
+			<html:text styleClass="formFieldSized" size="30" property="otherViralVector"/>			
 		</td>
 	</tr>        
         
@@ -111,10 +111,9 @@
 				</a>
 				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>
-
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"/>
+				<html:text styleClass="formFieldSized" property="organ" size="30"/>
 			</td>
 	</tr>
 		

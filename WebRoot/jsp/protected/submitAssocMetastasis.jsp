@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/12/12 17:54:56  georgeda
+ * Defect #268, added a return in front of all the confirms.
+ *
  * Revision 1.16  2005/12/01 20:03:42  schroedn
  * Defect #239
  *
@@ -22,7 +25,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.17 2005-12-12 17:54:56 georgeda Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.18 2005-12-21 17:44:33 pandyas Exp $
  *
  */   
 %>
@@ -78,7 +81,7 @@
 <!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
-	
+	<html:form action="<%= actionName %>" focus="organ">
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
@@ -98,8 +101,6 @@
 			</a>
 		</td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="organ">
-
 			<html:hidden property="organTissueCode"/>
 			<input type="hidden" name="organTissueName" />				
 			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />

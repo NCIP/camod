@@ -27,6 +27,7 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="cellLineName">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -49,8 +50,6 @@
 		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="cellLineName">
-								
 			<html:text styleClass="formFieldSized" size="30" property="cellLineName" />			
 		</td>
 	</tr>
@@ -63,7 +62,6 @@
 				</a>
 				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>
-
 			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30" />
