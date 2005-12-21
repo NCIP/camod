@@ -1,8 +1,11 @@
 <%
  /*
-  * $Id: subSubmitMenu.jsp,v 1.47 2005-12-06 18:49:58 georgeda Exp $
+  * $Id: subSubmitMenu.jsp,v 1.48 2005-12-21 16:12:30 pandyas Exp $
   *
   * $Log: not supported by cvs2svn $
+  * Revision 1.47  2005/12/06 18:49:58  georgeda
+  * Defect #247 - real fix this time for the problem
+  *
   * Revision 1.46  2005/12/02 14:18:21  georgeda
   * Defect #241, handle truncated HTML tags
   *
@@ -267,7 +270,7 @@
 			 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img src="images/right_arrow.gif" border="0"> 
-				<html:link styleClass="subMenuDarkRed" action="PublicationPopulateAction.do?method=dropdown" paramId="aTherapyID" paramName="aTherapy" paramProperty="id">Enter Publication</html:link>
+				<html:link styleClass="subMenuDarkRed" action="PublicationPopulateAction.do?method=dropdown" paramId="aTherapyID" paramName="aTherapy" paramProperty="id">Enter Publication for Therapy</html:link>
 				<br>
 			    
 				<bean:define id="publicationList" name="aTherapy" property="publicationCollection" />
@@ -297,7 +300,7 @@
 				 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    <img src="images/right_arrow.gif" border="0"> 
-			    <html:link styleClass="subMenuDarkRed" action="PublicationPopulateAction.do?method=dropdown" paramId="aCellID" paramName="aCell" paramProperty="id">Enter Publication</html:link>
+			    <html:link styleClass="subMenuDarkRed" action="PublicationPopulateAction.do?method=dropdown" paramId="aCellID" paramName="aCell" paramProperty="id">Enter Publication for Cell Line</html:link>
 			    <br>
 			    
 				<bean:define id="publicationList" name="aCell" property="publicationCollection" />
