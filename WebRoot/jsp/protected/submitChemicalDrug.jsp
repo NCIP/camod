@@ -5,11 +5,6 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.ChemicalDrugForm" %>	
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.*" %>
-<%@ page import="gov.nih.nci.camod.Constants.Dropdowns" %>
-<%@ page import="gov.nih.nci.camod.Constants.Parameters" %>
-
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
@@ -30,6 +25,8 @@
 	    aTherapyID = "";
 	}
 %>
+
+<html:form action="<%= actionName %>" focus="name" >
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -58,7 +55,7 @@
 			<label for="field3">(if Chemical/Drug is not listed, then please<br>select "Other" from the list and specify it below)</label>
 			<br>
 			<br>
-			<html:form action="<%= actionName %>" focus="name" >			 
+	 
 			
 			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName();">										
 				<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>					
@@ -192,8 +189,7 @@
 			      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="aTherapyID" value="<%= aTherapyID %>">
-				  	
-			  </html:form>			
+			
 			</TABLE>
 		</td>
 	</tr>
@@ -202,6 +198,7 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+</html:form>
 
 <SCRIPT>
 chkOtherName();
