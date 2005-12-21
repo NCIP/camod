@@ -46,22 +46,22 @@
 					</c:otherwise>
 				</c:choose>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<c:out value="${p.publicationStatus.name}"/>
+					<c:out value="${p.publicationStatus.name}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">
-					<c:out value="${p.authors}"/>
+					<c:out value="${p.authors}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<c:out value="${p.title}" escapeXml="false" />
+					<c:out value="${p.title}" escapeXml="false" />&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<c:out value="${p.journal}"/>
+					<c:out value="${p.journal}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="5%">
-					<c:out value="${p.year}"/>
+					<c:out value="${p.year}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<c:out value="${p.volume}"/>
+					<c:out value="${p.volume}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
 					<c:out value="${p.startPage}"/> - 
