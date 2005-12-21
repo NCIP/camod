@@ -2,16 +2,19 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.34 2005-12-12 17:33:37 georgeda Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.35 2005-12-21 18:00:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2005/12/12 17:33:37  georgeda
+ * Defect #265, store host/origin species in correct places
+ *
  * Revision 1.33  2005/12/05 21:29:32  pandyas
  * Follow up for defect#191:  moved text above drop down boxes on page to be consistent.
  *
  * Revision 1.32  2005/12/01 20:04:07  schroedn
  * Defect #243
  *
- * Changed the way the method of observation and observation fields interact. when observation is blank 'method of observation' is greyed out and when the user types in obsercation, the other is editable
+ * Changed the way the method of observation and observation fields interact. when observation is blank 'method of observation' is greyed out and when the user types in obsevation, the other is editable
  *
  *
  */
@@ -60,20 +63,8 @@
 		form.submit();
 	}
 	
-	function chkOtherGraft() {		
-		chkOther(document.forms[0].graftType, document.forms[0].otherGraftType);
-	}
-	
 	function chkOtherStrain() {
 		chkOther(document.forms[0].hostEthinicityStrain, document.forms[0].otherHostEthinicityStrain);
-	}
-	
-	function chkOtherAdminSite() {
-
-		var site = document.forms[0].administrativeSite;
-		var otherSite = document.forms[0].otherAdministrativeSite;
-	
-    	chkOther(site, otherSite);  	
 	}
 	
 	function chkObservation() {
@@ -86,8 +77,10 @@
 		else {
 			disableField(document.forms[0].modificationDescription);
 		}	
-	}		
+	}
 </SCRIPT>
+
+<html:form action="<%= actionName %>" focus="name">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -111,8 +104,6 @@
 		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-				<html:form action="<%= actionName %>" focus="name">			 
-				
 				<html:text styleClass="formFieldSized" property="name"  size="30" />
 		</td>
 	</tr>
@@ -145,7 +136,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">if other Strain:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" disabled="true" property="otherHostEthinicityStrain" size="30" />	
+			<html:text styleClass="formFieldSized"  property="otherHostEthinicityStrain" size="30" />	
 		</td>
 	</tr>
 
@@ -183,7 +174,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">If other Graft Type:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" disabled="true" property="otherGraftType"  size="30" />	
+			<html:text styleClass="formFieldSized" property="otherGraftType"  size="30" />	
 		</td>
 	</tr>	
 
@@ -258,7 +249,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Site of Administration:</label></td>
 		<td class="formField">					
-			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeSite" disabled="true"/>			
+			<html:text styleClass="formFieldSized" size="30" property="otherAdministrativeSite" />			
 		</td>
 	</tr>	
 	<tr>
@@ -289,8 +280,7 @@
 				  				
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="aXenograftID" value="<%= aXenograftID %>">
-				  	
-				</html:form>			
+							
 			</TABLE>
 		</td>
 	</tr>
@@ -298,6 +288,7 @@
 	
 	</td></tr></TABLE>
 </tr></td></TABLE>
+</html:form>
 
 <SCRIPT LANGUAGE="JavaScript">
 	chkOtherGraft();
