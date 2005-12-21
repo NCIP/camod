@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.61 2005-12-01 13:43:36 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.62 2005-12-21 15:40:29 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.61  2005/12/01 13:43:36  georgeda
+ * Defect #226, reuse Taxon objects and do not delete them from Database
+ *
  * Revision 1.60  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -498,7 +501,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         if (theTaxon.getEthnicityStrainUnctrlVocab() != null) {
 
             // It doesn't match the old one
-            if (!theTaxon.getEthnicityStrainUnctrlVocab().equals(theOldTaxon.getEthnicityStrainUnctrlVocab())) {
+            if (theOldTaxon == null || !theTaxon.getEthnicityStrainUnctrlVocab().equals(theOldTaxon.getEthnicityStrainUnctrlVocab())) {
                 log.trace("Sending Notification eMail - new EthinicityStrain added");
 
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");

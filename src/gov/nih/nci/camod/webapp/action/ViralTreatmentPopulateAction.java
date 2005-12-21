@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentPopulateAction.java,v 1.10 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: ViralTreatmentPopulateAction.java,v 1.11 2005-12-21 15:44:15 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.9  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -75,6 +78,10 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 			viralTreatmentForm.setRegimen(therapy.getTreatment().getRegimen());
 			viralTreatmentForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
 
+            if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+                viralTreatmentForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+                viralTreatmentForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+            }
 		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the
