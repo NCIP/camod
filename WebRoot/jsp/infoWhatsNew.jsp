@@ -129,7 +129,7 @@
 																														<TD class="resultsBoxWhite" width="20%">Submission - Xenograft
 																														</TD>
 																														<TD class="resultsBoxWhiteEnd" width="80%">	Xenograft
-	Xenograft models can now be entered in a specifically designed part of the application. The Xenograft page was extended by the following fields: ATCC number, Cell amount, harvest date, graft type. 
+	Xenograft models can now be entered in a specifically designed part of the application. The Xenograft page was extended by the following fields: ATCC number, Cell amount, graft type. 
 																														</TD>
 																													</TR>
 																													<TR>

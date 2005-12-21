@@ -188,7 +188,7 @@ are listed.
 - Xenograft
 
 	Xenograft page was extended by the following fields: ATCC number, Cell amount, 
-	harvest date, graft type
+	graft type
 
 
 - Model Availability
