@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationPopulateAction.java,v 1.11 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: RadiationPopulateAction.java,v 1.12 2005-12-21 15:45:33 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.10  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -85,6 +88,12 @@ public class RadiationPopulateAction extends BaseAction {
 			radiationForm.setDosage(therapy.getTreatment().getDosage());
 			radiationForm.setRegimen(therapy.getTreatment().getRegimen());
 			radiationForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+            
+            if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+                radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+                radiationForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+            }
+            
 			radiationForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
 
 		}
