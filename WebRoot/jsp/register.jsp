@@ -21,14 +21,14 @@
 			document.forms[0].piLastName.className = "formFieldSizedDisabled";
 			document.forms[0].piUsername.disabled = true;
 			document.forms[0].piUsername.value= '';
-			document.forms[0].piUsername.className = "formFieldSizedDisabled";
+			document.forms[0].piUsername.className = "formFieldDisabled";
 			document.forms[0].piEmail.disabled = true;
 			document.forms[0].piEmail.value= '';
 			document.forms[0].piEmail.className = "formFieldSizedDisabled";
 		}
 		else {
 		    document.forms[0].piUsername.disabled = false;
-		    document.forms[0].piUsername.className = "formFieldSizedEnabled";
+		    document.forms[0].piUsername.className = "formFieldEnabled";
 		    
 		    ideControl = document.forms[0].piUsername;
 			

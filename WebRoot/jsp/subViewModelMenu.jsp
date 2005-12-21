@@ -44,13 +44,13 @@
 				}
 			}
 			if (!found) {
-			    cc = (l!=null)?l.size():0;
-			    if (cc > 0) {
-			        found = true;
-			    }
+				if (am.getGeneDeliveryCollection() != null && am.getGeneDeliveryCollection().size() > 0) {
+				    found = true;
+				}
 			}
 			if (found) {
 		%>
+
 		<a href="ViewModelAction.do?unprotected_method=populateCarcinogenicInterventions&aModelID=<%=mdl%>" styleClass="subMenuPrimary">CARCINOGENIC INTERVENTIONS</a>
 	    <%} else { %>
 		CARCINOGENIC INTERVENTIONS
