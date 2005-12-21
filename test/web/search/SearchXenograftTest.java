@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchXenograftTest.java,v 1.2 2005-12-21 18:00:31 pandyas Exp $
+ * $Id: SearchXenograftTest.java,v 1.3 2005-12-21 21:35:23 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/21 18:00:31  pandyas
+ * Added test for "Other" dropdown options
+ *
  * Revision 1.1  2005/12/12 19:04:21  pandyas
  * first version of JUnit test case
  *
@@ -63,38 +66,34 @@ public class SearchXenograftTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("xenograftForm");
 
 		XenograftForm theForm = new XenograftForm();
-		theForm.setAdministrativeSite("ear");
-        theForm.setName("ABCDEFG");
-        theForm.setHostScientificName("Mus musculus");         
-        theForm.setGraftType("Cell Line");
-        theForm.setParentalCellLineName("Parent Cell Line");
-        theForm.setHostScientificName("Mus musculus");
+		theForm.setOrgan("Heart");
+		theForm.setOrganTissueName("Heart");		
+		theForm.setOrganTissueCode("C22498");		
         theForm.setATCCNumber("2");
         theForm.setCellAmount("10");
-        theForm.setGeneticManipulation("Test Genetic Manipulation");
         
 		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("harvestDate");
-		theParamsToIgnore.add("organ");
-		theParamsToIgnore.add("organTissueCode");
-		theParamsToIgnore.add("organTissueName");
-		theParamsToIgnore.add("otherAdministrativeSite");
-		theParamsToIgnore.add("otherGraftType");
-		theParamsToIgnore.add("hostEthinicityStrain");		
-		theParamsToIgnore.add("otherHostEthinicityStrain");
-		theParamsToIgnore.add("modificationDescription");		
+		//textarea fails - investigate if needed
+		theParamsToIgnore.add("modificationDescription");
+		
+		// Add parameters found on submit screen but not displayed on search screen  */
+		List theParamsToSkip = new ArrayList();		
+		theParamsToSkip.add("organTissueCode");
+		theParamsToSkip.add("organTissueName");		
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		
 		assertCurrentPageContains("You have successfully added a Xenograft to this model!");
 
 		TestUtil.moveModelToEditedApproved(myModelName);
 
 		navigateToSpecificSearchPage(myModelName,"TRANSPLANT/XENOGRAFT");
 		
-		verifyValuesOnPage(theWebForm);
+		verifyValuesOnPage(theWebForm, theParamsToSkip);
 	}  
 
 	public void testSearchForXenograftWithOthers() throws Exception {
@@ -110,38 +109,36 @@ public class SearchXenograftTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("xenograftForm");
 
 		XenograftForm theForm = new XenograftForm();
-		theForm.setAdministrativeSite("ear");
-        theForm.setName("ABCDEFG");
-        theForm.setHostScientificName("Mus musculus");         
-        theForm.setGraftType("Cell Line");
-        theForm.setParentalCellLineName("Parent Cell Line");
-        theForm.setHostScientificName("Mus musculus");
+		theForm.setOrgan("Heart");
+		theForm.setOrganTissueName("Heart");		
+		theForm.setOrganTissueCode("C22498");		
         theForm.setATCCNumber("2");
         theForm.setCellAmount("10");
-        theForm.setGeneticManipulation("Test Genetic Manipulation");
         
 		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("harvestDate");
-		theParamsToIgnore.add("organ");
-		theParamsToIgnore.add("organTissueCode");
-		theParamsToIgnore.add("organTissueName");
-		theParamsToIgnore.add("otherAdministrativeSite");
-		theParamsToIgnore.add("otherGraftType");
-		theParamsToIgnore.add("hostEthinicityStrain");		
-		theParamsToIgnore.add("otherHostEthinicityStrain");
-		theParamsToIgnore.add("modificationDescription");		
+		//textarea fails - investigate if needed
+		theParamsToIgnore.add("modificationDescription");
+		
+		// Add parameters found on submit screen but not displayed on search screen  */
+		List theParamsToSkip = new ArrayList();		
+		theParamsToSkip.add("organTissueCode");
+		theParamsToSkip.add("organTissueName");
+		//not set in original model so must be skipped
+		theParamsToSkip.add("otherHostEthinicityStrain");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		
 		assertCurrentPageContains("You have successfully added a Xenograft to this model!");
 
 		TestUtil.moveModelToEditedApproved(myModelName);
 
 		navigateToSpecificSearchPage(myModelName,"TRANSPLANT/XENOGRAFT");
 		
-		verifyValuesOnPage(theWebForm);
-	} 	
+		verifyValuesOnPage(theWebForm, theParamsToSkip);
+	}  	
 	
 }
