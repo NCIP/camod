@@ -26,6 +26,8 @@
 	<c:set var="actionName" value="PublicationAction.do?method=addTherapyPublication&aTherapyID=${publicationForm.ATherapyID}" />
 </c:if>
 
+<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -46,7 +48,6 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel">
 			<label for="field1">First Author:</label>						
-			<html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">	
 		</td>
 		
 		<td class="formField">
