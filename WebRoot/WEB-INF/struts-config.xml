@@ -1103,6 +1103,10 @@
     		name="Genetic Description Page"
     		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
         </forward>
+        <forward 
+    		name="Xenograft Page"
+    		path="/ViewModelAction.do?unprotected_method=populateTransplantXenograft">
+        </forward>
     </action>
      
      <!-- AssociatedExpressionForm -->
