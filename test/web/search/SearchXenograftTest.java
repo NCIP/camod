@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchXenograftTest.java,v 1.3 2005-12-21 21:35:23 pandyas Exp $
+ * $Id: SearchXenograftTest.java,v 1.4 2005-12-21 22:04:14 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/21 21:35:23  pandyas
+ * Added test for "Other" dropdown options
+ *
  * Revision 1.2  2005/12/21 18:00:31  pandyas
  * Added test for "Other" dropdown options
  *
@@ -85,7 +88,8 @@ public class SearchXenograftTest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		//for debugging validation failures
+		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		
 		assertCurrentPageContains("You have successfully added a Xenograft to this model!");
 
