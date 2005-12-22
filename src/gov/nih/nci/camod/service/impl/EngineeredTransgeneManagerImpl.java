@@ -156,7 +156,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(theModelId);
 
-        // Transgene Integration
+        // Transgene Integration - adds term 'Random' if random and the text entered by the user if 'Targeted'
         if (inEngineeredTransgeneData.getLocationOfIntegration().equals("Targeted")) {
             inEngineeredTransgene.setLocationOfIntegration(inEngineeredTransgeneData.getOtherLocationOfIntegration());
         } else {
