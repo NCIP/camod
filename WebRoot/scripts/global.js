@@ -199,3 +199,29 @@ function removeSelected(selectedGroup, group)
         }
     }
 }
+
+
+
+	function chkName() {
+	     chkOther(document.forms[0].scientificName,document.forms[0].otherScientificName);
+	}
+	
+	function chkOther_t1() {
+	     chkOther(document.forms[0].transcriptional1_species, document.forms[0].transcriptional1_otherSpecies);
+	}
+		
+	function chkOther_t2() {
+	     chkOther(document.forms[0].transcriptional2_species, document.forms[0].transcriptional2_otherSpecies);
+	}
+
+	function chkOther_t3() {
+	     chkOther(document.forms[0].transcriptional3_species, document.forms[0].transcriptional3_otherSpecies);
+	}
+	
+	function chkOther_PS() {
+	    chkOther(document.forms[0].polyASignal_species, document.forms[0].polyASignal_otherSpecies);
+	}
+	
+	function chkOther_SS() {
+		chkOther(document.forms[0].spliceSites_species, document.forms[0].spliceSites_otherSpecies);
+	}
