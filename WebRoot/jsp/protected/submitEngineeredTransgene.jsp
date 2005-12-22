@@ -42,36 +42,11 @@
 			
 		if( document.forms[0].locationOfIntegration[1].checked == true ) {
 			enableField(document.forms[0].otherLocationOfIntegration);
+		} else {
+			disableField(document.forms[0].otherLocationOfIntegration);
 		}
-		else {
-		    disableField(document.forms[0].otherLocationOfIntegration);
-		}
-	}
-	
-	function chkName() {
-	     chkOther(document.forms[0].scientificName,document.forms[0].otherScientificName);
-	}
-	
-	function chkOther_t1() {
-	     chkOther(document.forms[0].transcriptional1_species, document.forms[0].transcriptional1_otherSpecies);
-	}
-		
-	function chkOther_t2() {
-	     chkOther(document.forms[0].transcriptional2_species, document.forms[0].transcriptional2_otherSpecies);
 	}
 
-	function chkOther_t3() {
-	     chkOther(document.forms[0].transcriptional3_species, document.forms[0].transcriptional3_otherSpecies);
-	}
-	
-	function chkOther_PS() {
-	    chkOther(document.forms[0].polyASignal_species, document.forms[0].polyASignal_otherSpecies);
-	}
-	
-	function chkOther_SS() {
-		chkOther(document.forms[0].spliceSites_species, document.forms[0].spliceSites_otherSpecies);
-	}
-							
 	function chkConditional() {
 	
 		if( document.forms[0].conditionedBy[0].checked == true ) {
@@ -80,9 +55,10 @@
 		else {
 		    disableFieldUnsized(document.forms[0].description);
 		}
-	}
-	
+	}	
 </SCRIPT>
+
+<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -104,8 +80,6 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Transgene Integration:</label></td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">	
-
 			<html:radio property="locationOfIntegration" value="Random" onclick="chkIntegration(this);" /> Random 
 			<html:radio property="locationOfIntegration" value="Targeted" onclick="chkIntegration(this);" /> Targeted
 		</td>
@@ -117,7 +91,7 @@
 		<camod:cshelp mapId="engineered_transgene_help" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" />
+			<html:text styleClass="formFieldSized" property="otherLocationOfIntegration"  size="10" />
 		</td>
 	</tr>
 
@@ -142,7 +116,7 @@
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
-						<html:text styleClass="formFieldSized" size="20" property="otherScientificName" disabled="true"  />
+						<html:text styleClass="formFieldSized" size="20" property="otherScientificName"   />
 					</td>
 				</tr>
 			</TABLE>	
@@ -170,7 +144,7 @@
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldSized" property="transcriptional1_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="transcriptional1_otherSpecies"  size="20" />
 					</td>
 				</tr>
 			</TABLE>		
@@ -192,7 +166,7 @@
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldSized" property="transcriptional2_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="transcriptional2_otherSpecies"  size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -214,7 +188,7 @@
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
-						<html:text styleClass="formFieldSized" property="transcriptional3_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="transcriptional3_otherSpecies"  size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -238,7 +212,7 @@
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldSized" property="polyASignal_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="polyASignal_otherSpecies"  size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -260,7 +234,7 @@
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
-						<html:text styleClass="formFieldSized" property="spliceSites_otherSpecies" disabled="true" size="20" />
+						<html:text styleClass="formFieldSized" property="spliceSites_otherSpecies"  size="20" />
 					</td>
 				</tr>
 			</TABLE>	
@@ -292,7 +266,7 @@
 			<camod:cshelp mapId="engineered_transgene_help" key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="32" />		
+			<html:textarea styleClass="formFieldSized" property="description" rows="4" cols="32" />		
 		</td>
 	</tr>
 	<tr>

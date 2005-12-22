@@ -32,15 +32,19 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
             request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
 
-            // Tansgene Integration
-            if (theEngineeredTransgene.getLocationOfIntegration() == null
-                    || theEngineeredTransgene.getLocationOfIntegration().equals("Random")) {
+            // Tansgene Integration - set radio button to 'Random' if 'Random' or  null are found in the DB
+            if (theEngineeredTransgene.getLocationOfIntegration() == null || theEngineeredTransgene.getLocationOfIntegration().equals("Random")){
+                System.out.println("Setting ETG to Random");
                 engineeredTransgeneForm.setLocationOfIntegration("Random");
-            } else {
+        	} else {
+            	// Set radio button to 'Targeted' if any other text is found in the DB        		
+                System.out.println("Setting ETG to Targeted");            	
                 engineeredTransgeneForm.setLocationOfIntegration("Targeted");
                 engineeredTransgeneForm
                         .setOtherLocationOfIntegration(theEngineeredTransgene.getLocationOfIntegration());
+                System.out.println("Setting OtherLocationOfIntegration to: " + theEngineeredTransgene.getLocationOfIntegration());                 
             }
+            
             engineeredTransgeneForm.setName(theEngineeredTransgene.getName());
 
             // Transgene (coding sequence only)
@@ -154,7 +158,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
 
             // Gene Function
             Object[] geneList = theEngineeredTransgene.getGeneFunctionCollection().toArray();
-            System.out.println("\t collection.size=" + theEngineeredTransgene.getGeneFunctionCollection().size());
+            //System.out.println("\t collection.size=" + theEngineeredTransgene.getGeneFunctionCollection().size());
             String geneFunction = "";
 
             for (int i = 0; i < geneList.length; i++) {
@@ -162,7 +166,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
                 geneFunction += inGeneFunction.getFunction();
                 if (i != geneList.length - 1)
                     geneFunction += ", ";
-                System.out.println("inGeneFunction.getFunction()" + inGeneFunction.getFunction());
+                //System.out.println("inGeneFunction.getFunction()" + inGeneFunction.getFunction());
             }
             engineeredTransgeneForm.setGeneFunctions(geneFunction);
 
@@ -170,13 +174,15 @@ public class EngineeredTransgenePopulateAction extends BaseAction {
             Conditionality theConditionality = theEngineeredTransgene.getConditionality();
             if (theConditionality != null) {
                 if ("1".equals(theConditionality.getConditionedBy())) {
+                    //System.out.println("Setting conditionality in ETG");
+                	
                     engineeredTransgeneForm.setConditionedBy(Constants.CONDITIONAL);
+                    engineeredTransgeneForm.setDescription(theConditionality.getDescription());
+                    //System.out.println("Setting condition description to: " + theConditionality.getDescription());
                 } else {
                     engineeredTransgeneForm.setConditionedBy(Constants.NOT_CONDITIONAL);
                 }
-
-                engineeredTransgeneForm.setDescription(theConditionality.getDescription());
-            }
+           }
 
             // Additional Features / Comments
             engineeredTransgeneForm.setComments(theEngineeredTransgene.getComments());
