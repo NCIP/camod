@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchCellLinesTest.java,v 1.2 2005-12-16 17:27:34 pandyas Exp $
+ * $Id: SearchCellLinesTest.java,v 1.3 2005-12-22 19:57:13 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/16 17:27:34  pandyas
+ * Added a cell line publication to script - there are two issues that need resolved - there is additional source code to upload for this to run
+ *
  * Revision 1.1  2005/12/13 19:55:49  pandyas
  * JUnit test case for Search Cell Line
  *
@@ -81,6 +84,7 @@ public class SearchCellLinesTest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
 		assertCurrentPageContains("You have successfully added a Cell Line to this model!");
 
@@ -100,6 +104,8 @@ public class SearchCellLinesTest extends BaseModelNeededTest {
 		theCurrentPage = theLink.click();		
 		assertCurrentPageContains("For publications with a PubMed record");
 		theWebForm = theCurrentPage.getFormWithName("publicationForm");
+		// set explicitly so validation works
+		theWebForm.setParameter("firstTimeReported", "yes");
 
 		PublicationForm thePubForm = new PublicationForm();
 		thePubForm.setFirstTimeReported("yes");
@@ -134,7 +140,7 @@ public class SearchCellLinesTest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(thePubForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		
 		assertCurrentPageContains("You have successfully added a Publication to this model! ");
 
