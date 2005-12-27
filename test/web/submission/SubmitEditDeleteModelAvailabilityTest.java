@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteModelAvailabiltyTest.java,v 1.3 2005-12-12 15:53:48 pandyas Exp $
+ * $Id: SubmitEditDeleteModelAvailabilityTest.java,v 1.1 2005-12-27 15:04:09 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/12 15:53:48  pandyas
+ * modified: navigateToModelForEditing(myModelName);
+ *
  * Revision 1.2  2005/12/12 15:53:12  pandyas
  * modified: navigateToModelForEditing(myModelName);
  *
@@ -22,9 +25,9 @@ import web.base.BaseModelNeededTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class SubmitEditDeleteModelAvailabiltyTest extends BaseModelNeededTest {
+public class SubmitEditDeleteModelAvailabilityTest extends BaseModelNeededTest {
 
-	public SubmitEditDeleteModelAvailabiltyTest(String arg0) {
+	public SubmitEditDeleteModelAvailabilityTest(String arg0) {
 		super(arg0);
 	}
 
@@ -44,7 +47,7 @@ public class SubmitEditDeleteModelAvailabiltyTest extends BaseModelNeededTest {
 	}
 	
     public static Test suite() {
-        TestSuite suite = new TestSuite(SubmitEditDeleteModelAvailabiltyTest.class);
+        TestSuite suite = new TestSuite(SubmitEditDeleteModelAvailabilityTest.class);
         return suite;
     }
     

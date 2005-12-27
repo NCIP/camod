@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeletePublication.java,v 1.1 2005-12-12 16:23:59 pandyas Exp $
+ * $Id: SubmitEditDeletePublicationTest.java,v 1.1 2005-12-27 15:04:09 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/12 16:23:59  pandyas
+ * JUnit test case for Publication
+ *
  * 
  */
 package web.submission;
@@ -16,9 +19,9 @@ import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
 
-public class SubmitEditDeletePublication extends BaseModelNeededTest {
+public class SubmitEditDeletePublicationTest extends BaseModelNeededTest {
 
-	public SubmitEditDeletePublication(String arg0) {
+	public SubmitEditDeletePublicationTest(String arg0) {
 		super(arg0);
 	}
 
@@ -39,7 +42,7 @@ public class SubmitEditDeletePublication extends BaseModelNeededTest {
     }
 
     public static Test suite() {
-        TestSuite suite = new TestSuite(SubmitEditDeletePublication.class);
+        TestSuite suite = new TestSuite(SubmitEditDeletePublicationTest.class);
         return suite;
     }
 	

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitEditDeleteImage.java,v 1.2 2005-12-14 20:14:55 pandyas Exp $
+ * $Id: SubmitEditDeleteImageTest.java,v 1.1 2005-12-27 15:04:09 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/14 20:14:55  pandyas
+ * Added JavaDocs
+ *
  * 
  */
 package web.submission;
@@ -19,9 +22,9 @@ import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
 
 /** This is a simple example of using HttpUnit to read and understand web pages. * */
-public class SubmitEditDeleteImage extends BaseModelNeededTest {
+public class SubmitEditDeleteImageTest extends BaseModelNeededTest {
 
-    public SubmitEditDeleteImage(String testName) {
+    public SubmitEditDeleteImageTest(String testName) {
         super(testName);
     }
 
@@ -42,7 +45,7 @@ public class SubmitEditDeleteImage extends BaseModelNeededTest {
     }
 
     public static Test suite() {
-        TestSuite suite = new TestSuite(SubmitEditDeleteImage.class);
+        TestSuite suite = new TestSuite(SubmitEditDeleteImageTest.class);
         return suite;
     }
 
