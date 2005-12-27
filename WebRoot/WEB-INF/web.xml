@@ -99,7 +99,9 @@
 			gov.nih.nci.camod.webapp.listener.StartupListener
 		</listener-class>
 	</listener>
-
+    
+    @test.web.servlet@
+    
 	<!-- Standard Action Servlet Configuration -->
 	<servlet>
 		<servlet-name>action</servlet-name>
@@ -137,6 +139,9 @@
 		<servlet-name>RedirectOldRequestsServlet</servlet-name>
 		<url-pattern>/mmhcc/*</url-pattern>
 	</servlet-mapping>
+	
+    @test.web.servlet-mapping@
+    
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>

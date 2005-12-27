@@ -53,8 +53,7 @@
     </target>
 
     <!-- =================================================================== -->
-    <!-- The "db-prepare" target generates the database schema and creates   --> 
-    <!-- tables based on the mapping files                                   -->
+    <!-- The "process-files" target substitues config values into files      -->
     <!-- =================================================================== -->
     <target name="process-files" description="processes parameter substiution for files">        
         
@@ -72,14 +71,14 @@
                 <include name="camod.properties" />
             </fileset>
     	</move>
-        <copy todir="${source.dir}" filtering="true" >
+       	<copy todir="${source.dir}">
             <fileset dir="${webinf.dir}">                                
-            	<include name="struts-config.xml" />
+            	<include name="web.xml" />
             </fileset>
         </copy>
-       	<move todir="${webinf.dir}">
+       	<move todir="${webinf.dir}" filtering="true">
             <fileset dir="${source.dir}">                                
-            	<include name="struts-config.xml" />
+            	<include name="web.xml" />
             </fileset>
         </move>
     </target>
