@@ -225,3 +225,19 @@ function removeSelected(selectedGroup, group)
 	function chkOther_SS() {
 		chkOther(document.forms[0].spliceSites_species, document.forms[0].spliceSites_otherSpecies);
 	}
+	
+	function chkSegmentName() {
+	    chkOther(document.forms[0].segmentName, document.forms[0].otherSegmentName);
+	}
+	
+	function chkObservation() {
+	
+	    observation = document.forms[0].observation;
+	
+		if( observation.value != null && observation.value != "" ) {
+			enableField(document.forms[0].methodOfObservation);
+		}
+		else {
+			disableField(document.forms[0].methodOfObservation);
+		}	
+	}		
