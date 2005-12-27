@@ -33,6 +33,9 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="name" enctype="multipart/form-data">	
+
+
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkTypeMod() {
@@ -72,9 +75,7 @@
 		<td class="formRequiredLabel"><label for="field1">Targeted Gene/Locus:</label>
 		<camod:cshelp mapId="targeted_modification_help" key="ENGINEERED_GENE.NAME_TARGETEDMODIFICATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
-		<td class="formField">
-			<html:form action="<%= actionName %>" focus="name" enctype="multipart/form-data">	
-			
+		<td class="formField">			
 			<html:text styleClass="formFieldSized" property="name" size="10" />		
 		</td>
 	</tr>
@@ -98,7 +99,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other modification type:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherModificationType" disabled="true" size="10" />	
+			<html:text styleClass="formFieldSized" property="otherModificationType"  size="10" />	
 		</td>
 	</tr>
 
@@ -144,7 +145,7 @@
 			<camod:cshelp mapId="targeted_modification_help" key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="description" disabled="true" rows="4" cols="32" />		
+			<html:textarea styleClass="formFieldSized" property="description"  rows="4" cols="32" />		
 		</td>
 	</tr>
 
