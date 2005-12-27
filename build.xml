@@ -53,7 +53,8 @@
     </target>
 
     <!-- =================================================================== -->
-    <!-- The "process-files" target substitues config values into files      -->
+    <!-- The "db-prepare" target generates the database schema and creates   --> 
+    <!-- tables based on the mapping files                                   -->
     <!-- =================================================================== -->
     <target name="process-files" description="processes parameter substiution for files">        
         
@@ -71,14 +72,14 @@
                 <include name="camod.properties" />
             </fileset>
     	</move>
-       	<copy todir="${source.dir}">
+        <copy todir="${source.dir}" filtering="true" >
             <fileset dir="${webinf.dir}">                                
-            	<include name="web.xml" />
+            	<include name="struts-config.xml" />
             </fileset>
         </copy>
-       	<move todir="${webinf.dir}" filtering="true">
+       	<move todir="${webinf.dir}">
             <fileset dir="${source.dir}">                                
-            	<include name="web.xml" />
+            	<include name="struts-config.xml" />
             </fileset>
         </move>
     </target>
@@ -86,7 +87,7 @@
         TARGET: build_war
         This will build the war file
     -->
-    <target name="build_war" depends="copy_resource_directory,process-files">
+    <target name="build_war" depends="copy_resource_directory">
         <mkdir dir="${build.dir}/build"/>
         <delete file="${build.dir}/build/${app.war.name}.war" />
         <war destfile="${build.dir}/build/${app.war.name}.war" 

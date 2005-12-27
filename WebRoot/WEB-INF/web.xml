@@ -100,7 +100,12 @@
 		</listener-class>
 	</listener>
     
-    @test.web.servlet@
+    <!--
+    <servlet>
+        <servlet-name>ServletRedirector</servlet-name>
+        <servlet-class>org.apache.cactus.server.ServletTestRedirector</servlet-class>
+    </servlet>
+    -->
     
 	<!-- Standard Action Servlet Configuration -->
 	<servlet>
@@ -140,7 +145,12 @@
 		<url-pattern>/mmhcc/*</url-pattern>
 	</servlet-mapping>
 	
-    @test.web.servlet-mapping@
+	<!--
+    <servlet-mapping>
+        <servlet-name>ServletRedirector</servlet-name>
+        <url-pattern>/ServletRedirector</url-pattern>
+    </servlet-mapping>
+    -->
     
 	<session-config>
 		<session-timeout>30</session-timeout>
