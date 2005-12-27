@@ -46,6 +46,8 @@
 	    aAssociatedExpressionID = "";
 	}
 %>
+	
+<html:form action="<%= actionName %>" focus="name">	
 
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
@@ -74,16 +76,11 @@
 		<a href="javascript:showTissueTree('associatedExpressionForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>
-
 		</td>
 		<td class="formField">
-			
-			<html:form action="<%= actionName %>" focus="name">	
-
 			<html:hidden property="organTissueCode" name="formdata" />
-			<html:hidden property="organTissueName" name="formdata" />
-			
-			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30" name="formdata"/>
+			<html:hidden property="organTissueName" name="formdata" />			
+			<html:text styleClass="formFieldSized"  property="organ" size="30" name="formdata"/>
 			
 		</td>
 	</tr>
