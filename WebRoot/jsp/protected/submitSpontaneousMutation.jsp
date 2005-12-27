@@ -26,19 +26,12 @@
 	    aSpontaneousMutationID = "";
 	}
 %>
+
+<html:form action="<%= actionName %>" focus="name">	
+
 <SCRIPT LANGUAGE="JavaScript">
 		
-	function chkObservation() {
-	
-	    observation = document.forms[0].observation;
-	
-		if( observation.value != null && observation.value != "" ) {
-			enableField(document.forms[0].methodOfObservation);
-		}
-		else {
-			disableField(document.forms[0].methodOfObservation);
-		}	
-	}
+
 	 
 </SCRIPT>
 
@@ -63,8 +56,6 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Gene Name:</label></td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="name">	
-			
 			<html:text styleClass="formFieldSized" property="name"  size="30" />
 		</td>
 	</tr>
