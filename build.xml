@@ -86,7 +86,7 @@
         TARGET: build_war
         This will build the war file
     -->
-    <target name="build_war" depends="copy_resource_directory">
+    <target name="build_war" depends="copy_resource_directory,process-files">
         <mkdir dir="${build.dir}/build"/>
         <delete file="${build.dir}/build/${app.war.name}.war" />
         <war destfile="${build.dir}/build/${app.war.name}.war" 
