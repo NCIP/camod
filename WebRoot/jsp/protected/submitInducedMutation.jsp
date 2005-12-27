@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.25 2005-12-12 17:54:56 georgeda Exp $
+ * $Id: submitInducedMutation.jsp,v 1.26 2005-12-27 20:12:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2005/12/12 17:54:56  georgeda
+ * Defect #268, added a return in front of all the confirms.
+ *
  * Revision 1.24  2005/12/01 20:05:13  schroedn
  * Added CVS log statement to top of file
  *
@@ -45,23 +48,15 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="name">	
+
 <SCRIPT LANGUAGE="JavaScript">
 		
 	function chkInducingAgent() {
 	    chkOther(document.forms[0].type, document.forms[0].otherType);
 	}
 	
-	function chkObservation() {
-	
-	    observation = document.forms[0].observation;
-	
-		if( observation.value != null && observation.value != "" ) {
-			enableField(document.forms[0].methodOfObservation);
-		}
-		else {
-			disableField(document.forms[0].methodOfObservation);
-		}	
-	}
+
 	 
 </SCRIPT>
 
@@ -86,8 +81,6 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Name of Inducing Agent:</label></td>
 		<td class="formField">					
-			<html:form action="<%= actionName %>" focus="name">	
-				
 			<html:text styleClass="formFieldSized" property="name" size="10" />		
 		</td>
 	</tr>
@@ -108,7 +101,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Other Category:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherType" disabled="true" size="30" />		
+			<html:text styleClass="formFieldSized" property="otherType"  size="30" />		
 		</td>
 	</tr>
 
@@ -162,7 +155,7 @@
 		<camod:cshelp mapId="induced_mutation_help" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true" />		
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"  />		
 		</td>
 	</tr>
 		

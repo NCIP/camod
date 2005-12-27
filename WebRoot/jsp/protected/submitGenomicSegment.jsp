@@ -29,12 +29,11 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">
+
 <SCRIPT LANGUAGE="JavaScript">
 	
-	function chkSegmentName() {
-	    chkOther(document.forms[0].segmentName, document.forms[0].otherSegmentName);
-	}
-	
+
 	function chkIntegration(control) {
 	
 	    if (document.forms[0].locationOfIntegration[1].checked == true) {
@@ -65,8 +64,6 @@
 			<td class="formRequiredLabel"><label for="field3">Integration:</label>
 			</td>
 			<td class="formField">
-				<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">	
-		
 				<html:radio property="locationOfIntegration" value="Random" onclick="chkIntegration(this);" /> Random 
 				<html:radio property="locationOfIntegration" value="Targeted" onclick="chkIntegration(this);" /> Targeted
 			</td>
@@ -102,7 +99,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Other Segment Type:</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="otherSegmentName" disabled="true" size="10" />
+				<html:text styleClass="formFieldSized" property="otherSegmentName"  size="10" />
 			</td>
 		</tr>
 
