@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitGDTest.java,v 1.3 2005-12-14 20:15:14 pandyas Exp $
+ * $Id: SubmitGDTest.java,v 1.4 2005-12-27 19:10:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/14 20:15:14  pandyas
+ * Added JavaDocs
+ *
  * 
  */
 package web.submission;
@@ -12,6 +15,7 @@ import java.util.ResourceBundle;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import web.base.BaseModelNeededTest;
+import web.util.TestUtil;
 
 import com.meterware.httpunit.*;
 
@@ -47,7 +51,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
     	navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Engineered Transgene");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Enter Engineered Transgene");        
         assertNotNull("Unable to find link to enter a Engineered Transgene", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("Poly A Signal:");
@@ -62,7 +67,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added an Engineered Transgene to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Testing123");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Testing123");        
         assertNotNull("Unable to find link to edit a Engineered Transgene", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Poly A Signal:");
@@ -76,7 +82,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited an Engineered Transgene.");
         
         //Adding Assoc Expression
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Assoc Expression");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Enter Assoc Expression");        
         assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Organ / Tissue:");
@@ -89,7 +96,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
         
         //Editing Assoc Expression
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Esophagus");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Esophagus");        
         assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Organ / Tissue:");
@@ -102,7 +110,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited an Associated Expression.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Testing123");
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Testing123");
         assertNotNull("Unable to find link to delete a Engineered Transgene", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Poly A Signal:");
@@ -115,7 +124,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
     	navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Genomic Segment");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Enter Genomic Segment");        
         assertNotNull("Unable to find link to enter a Genomic Segment", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("Segment Type:");
@@ -140,7 +150,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited a Genomic Segment.");
         
         //Adding Assoc Expression
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Assoc Expression");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Enter Assoc Expression");        
         assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Expression Level:");
@@ -153,7 +164,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
         
         //Editing Assoc Expression
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Esophagus");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Esophagus");        
         assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Expression Level:");
@@ -179,7 +191,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
     	navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Targeted Modification");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+        		"Enter Targeted Modification");        
         assertNotNull("Unable to find link to enter a Targeted Modification", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("Targeted Gene/Locus:");
@@ -190,7 +203,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added a Targeted Modification to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "test targeted");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"test targeted");        
         assertNotNull("Unable to find link to edit a Targeted Modification", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Targeted Gene/Locus:");
@@ -201,7 +215,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited a Targeted Modification.");
         
         //Adding Assoc Expression
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Assoc Expression");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Enter Assoc Expression");        
         assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Expression Level:");
@@ -214,7 +229,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
         
         //Editing Assoc Expression
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Esophagus");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Esophagus");        
         assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Expression Level:");
@@ -227,7 +243,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited an Associated Expression.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "test targeted");
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"test targeted");
         assertNotNull("Unable to find link to delete a Targeted Modification", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Targeted Gene/Locus:");
@@ -240,7 +257,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
     	navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Induced Mutation");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+        		"Enter Induced Mutation");        
         assertNotNull("Unable to find link to enter a Induced Mutation", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("Inducing Agent Category:");
@@ -248,10 +266,13 @@ public class SubmitGDTest extends BaseModelNeededTest {
         theForm.setParameter("name", "test agent");
         theForm.setParameter("type", "Radiation");
         theCurrentPage = theForm.submit();
+		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        
         assertCurrentPageContains("You have successfully added an Induced Mutation to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "test agent");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"test agent");        
         assertNotNull("Unable to find link to edit a Induced Mutation", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Inducing Agent Category:");
@@ -262,7 +283,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited an Induced Mutation.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "test agent");
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"test agent");
         assertNotNull("Unable to find link to delete a Induced Mutation", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Inducing Agent Category:");
@@ -275,7 +297,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
     	navigateToModelForEditing(myModelName);
         
         //Adding
-        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Spontaneous Mutation");        
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"Enter Spontaneous Mutation");        
         assertNotNull("Unable to find link to enter a Spontaneous Mutation", theLink);        
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("Gene Name:");
@@ -285,7 +308,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added a Spontaneous Mutation to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "test mutation");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"test mutation");        
         assertNotNull("Unable to find link to edit a Spontaneous Mutation", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Gene Name:");
@@ -296,7 +320,8 @@ public class SubmitGDTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited a Spontaneous Mutation.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "test mutation");
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+        		"test mutation");
         assertNotNull("Unable to find link to delete a Spontaneous Mutation", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("Gene Name:");
