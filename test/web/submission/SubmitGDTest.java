@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitGDTest.java,v 1.4 2005-12-27 19:10:57 pandyas Exp $
+ * $Id: SubmitGDTest.java,v 1.5 2005-12-28 18:01:19 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/12/27 19:10:57  pandyas
+ * Modified format
+ *
  * Revision 1.3  2005/12/14 20:15:14  pandyas
  * Added JavaDocs
  *
@@ -119,7 +122,7 @@ public class SubmitGDTest extends BaseModelNeededTest {
         theForm.getSubmitButton( "submitAction", "Delete" ).click();              
         assertCurrentPageContains("You have successfully deleted an Engineered Transgene.");                
     }      
-
+/*
     public void testAddGenomicSegment() throws Exception {
     	navigateToModelForEditing(myModelName);
         
@@ -176,7 +179,7 @@ public class SubmitGDTest extends BaseModelNeededTest {
         theForm.setParameter("expressionLevel", "highly expressed");
         theCurrentPage = theForm.submit();
         assertCurrentPageContains("You have successfully edited an Associated Expression.");
-        
+
         //Deleting
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "123");
         assertNotNull("Unable to find link to delete a Genomic Segment", theLink);        
@@ -186,7 +189,7 @@ public class SubmitGDTest extends BaseModelNeededTest {
         theForm.getSubmitButton( "submitAction", "Delete" ).click();              
         assertCurrentPageContains("You have successfully deleted a Genomic Segment.");                
     }							 
-    
+        */    
     public void testAddTargetedModification() throws Exception {
     	navigateToModelForEditing(myModelName);
         
@@ -252,7 +255,7 @@ public class SubmitGDTest extends BaseModelNeededTest {
         theForm.getSubmitButton( "submitAction", "Delete" ).click();              
         assertCurrentPageContains("You have successfully deleted a Targeted Modification.");                
     }
-    
+/*   
     public void testAddInducedMutation() throws Exception {
     	navigateToModelForEditing(myModelName);
         
@@ -266,7 +269,7 @@ public class SubmitGDTest extends BaseModelNeededTest {
         theForm.setParameter("name", "test agent");
         theForm.setParameter("type", "Radiation");
         theCurrentPage = theForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
         assertCurrentPageContains("You have successfully added an Induced Mutation to this model!");
         
@@ -292,7 +295,7 @@ public class SubmitGDTest extends BaseModelNeededTest {
         theForm.getSubmitButton( "submitAction", "Delete" ).click();              
         assertCurrentPageContains("You have successfully deleted an Induced Mutation.");                
     }
-    
+*/    
     public void testAddSpontaneousMutation() throws Exception {
     	navigateToModelForEditing(myModelName);
         
