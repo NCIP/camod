@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.4 2005-11-28 22:49:58 pandyas Exp $
+ * $Id: XenograftData.java,v 1.5 2005-12-28 16:43:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/28 22:49:58  pandyas
+ * Defect #186: Added organ/tissue to Xenograft page, modified search page to display multiple Xenografts with headers, modified XenograftManagerImpl so it does not create or save an organ object if not organ is selected
+ *
  * Revision 1.3  2005/11/08 17:47:08  pandyas
  * modified Xenograft dropdown
  *
@@ -49,10 +52,6 @@ public interface XenograftData {
 	public String getCellAmount();
 
 	public void setCellAmount(String cellAmount);
-
-	public String getHarvestDate();
-
-	public void setHarvestDate(String harvestDate);
 
 	public String getModificationDescription();
 

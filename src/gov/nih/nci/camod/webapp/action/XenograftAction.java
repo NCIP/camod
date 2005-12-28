@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftAction.java,v 1.14 2005-11-28 22:51:19 pandyas Exp $
+ * $Id: XenograftAction.java,v 1.15 2005-12-28 16:44:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/28 22:51:19  pandyas
+ * Defect #186: Added organ/tissue to Xenograft page so I modified printout to include organCode (minor change for debugging)
+ *
  * Revision 1.13  2005/11/11 16:28:03  pandyas
  * added javadocs
  *
@@ -54,7 +57,7 @@ public final class XenograftAction extends BaseAction {
         log.info("<XenograftAction edit> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
                 + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
                 + xenograftForm.getParentalCellLineName() + "\n\t getCellAmount: " + xenograftForm.getCellAmount()
-                + "\n\t getHarvestDate: " + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
+                + "\n\t getModificationDescription: "
                 + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
                 + xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
                 + xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()
@@ -132,7 +135,7 @@ public final class XenograftAction extends BaseAction {
         log.info("<XenograftAction save> following Characteristics:" + "\n\t name: " + xenograftForm.getName()
                 + "\n\t ATTCNumber: " + xenograftForm.getATCCNumber() + "\n\t ParentalCellLineName: "
                 + xenograftForm.getParentalCellLineName() + "\n\t getCellAmount: " + xenograftForm.getCellAmount()
-                + "\n\t getHarvestDate: " + xenograftForm.getHarvestDate() + "\n\t getModificationDescription: "
+                + "\n\t getModificationDescription: "
                 + xenograftForm.getModificationDescription() + "\n\t getGeneticManipulation: "
                 + xenograftForm.getGeneticManipulation() + "\n\t getAdministrativeSite: "
                 + xenograftForm.getAdministrativeSite() + "\n\t getGraftType: " + xenograftForm.getGraftType()

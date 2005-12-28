@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftForm.java,v 1.11 2005-11-28 22:49:58 pandyas Exp $
+ * $Id: XenograftForm.java,v 1.12 2005-12-28 16:43:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/28 22:49:58  pandyas
+ * Defect #186: Added organ/tissue to Xenograft page, modified search page to display multiple Xenografts with headers, modified XenograftManagerImpl so it does not create or save an organ object if not organ is selected
+ *
  * Revision 1.10  2005/11/11 16:28:36  pandyas
  * added javadocs
  *
@@ -37,7 +40,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     protected String ATCCNumber;
     protected String parentalCellLineName;
     protected String cellAmount;
-    protected String harvestDate;
     protected String modificationDescription;
     protected String geneticManipulation;
     protected String administrativeSite;
@@ -156,21 +158,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
      */
     public void setCellAmount(String cellAmount) {
         this.cellAmount = cellAmount;
-    }
-
-    /**
-     * @return Returns the harvestDate.
-     */
-    public String getHarvestDate() {
-        return harvestDate;
-    }
-
-    /**
-     * @param harvestDate
-     *            The harvestDate to set.
-     */
-    public void setHarvestDate(String harvestDate) {
-        this.harvestDate = harvestDate;
     }
 
     /**
@@ -304,7 +291,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
         ATCCNumber = null;
         parentalCellLineName = null;
         cellAmount = null;
-        harvestDate = null;
         modificationDescription = null;
         geneticManipulation = null;
         administrativeSite = null;
