@@ -42,15 +42,19 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: AllTests.java,v 1.1 2005-12-27 15:04:33 georgeda Exp $
+ * $Id: AllTests.java,v 1.2 2005-12-28 16:41:57 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/27 15:04:33  georgeda
+ * Test cleanup
+ *
  */
 package alltests;
 
 /**
  * @author georgeda
  */
+import gov.nih.nci.camod.webapp.action.StrutsActionTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
@@ -64,6 +68,7 @@ public class AllTests
         TestSuite suite = new TestSuite();
 
         suite.addTest(HttpTests.suite());
+        suite.addTest(StrutsActionTests.suite());
 
         return suite;
     }

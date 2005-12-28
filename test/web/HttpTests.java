@@ -42,9 +42,12 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: HttpTests.java,v 1.1 2005-12-27 15:04:33 georgeda Exp $
+ * $Id: HttpTests.java,v 1.2 2005-12-28 16:42:19 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/27 15:04:33  georgeda
+ * Test cleanup
+ *
  */
 package web;
 
@@ -77,6 +80,8 @@ public class HttpTests
     {
         TestSuite suite = new TestSuite();
 
+        // Please keep them ordered
+        
         // Search tests
         suite.addTest(SearchCellLinesTest.suite());
         suite.addTest(SearchCITest.suite());
