@@ -288,7 +288,7 @@ Search
     --  http://ncicb.nci.nih.gov/
     
     NCICB Application Support
-    --  http://ncicbsupport.nci.nih.gov/sw/
+    --  http://ncicb.nci.nih.gov/NCICB/support
 
 
     NCICB Download Center
