@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPublicationTest.java,v 1.1 2005-12-13 19:17:00 pandyas Exp $
+ * $Id: SearchPublicationTest.java,v 1.2 2005-12-29 18:17:35 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/13 19:17:00  pandyas
+ * JUnit test case for Search Publication
+ *
  * 
  */
 
@@ -59,6 +62,8 @@ public class SearchPublicationTest extends BaseModelNeededTest {
 		WebResponse theCurrentPage = theLink.click();
 		assertCurrentPageContains("For publications with a PubMed record");
 		WebForm theWebForm = theCurrentPage.getFormWithName("publicationForm");
+		// set explicitly so validation works
+		theWebForm.setParameter("firstTimeReported", "yes");		
 
 		PublicationForm theForm = new PublicationForm();
 		theForm.setFirstTimeReported("yes");
