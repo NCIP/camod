@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<query_groups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost:8080/camod/config/TOCQueryConfig.xsd" >
+<query_groups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost/camod/config/TOCQueryConfig.xsd" >
     <query_group>
         <description>Mouse models with primary tumors in the following organ systems</description>
 	    <queries>
