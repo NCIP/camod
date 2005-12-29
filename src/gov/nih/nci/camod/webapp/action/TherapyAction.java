@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.12 2005-11-09 00:17:25 georgeda Exp $
+ * $Id: TherapyAction.java,v 1.13 2005-12-29 18:28:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/09 00:17:25  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.11  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -72,8 +75,8 @@ public final class TherapyAction extends BaseAction {
 				+ "\n\t targets: " + therapyForm.getSelectedTargets() + "\n\t dosage: "
 				+ therapyForm.getAdministrativeRoute() + "\n\t type: " + therapyForm.getType() + "\n\t age: "
 				+ therapyForm.getAgeAtTreatment() + "\n\t administrativeRoute: " + therapyForm.getAdministrativeRoute()
-				+ "\n\t biomarker: " + therapyForm.getBiomarker() + "\n\t tumorResponse: "
-				+ therapyForm.getTumorResponse() + "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: "
+				+ "\n\t biomarker: " + therapyForm.getBiomarker() 
+				+ "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: "
 				+ therapyForm.getResults() + "\n\t comments: " + therapyForm.getComments() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
@@ -146,7 +149,7 @@ public final class TherapyAction extends BaseAction {
 				+ "\n\t targetName: " + therapyForm.getType() + "\n\t dosage: " + therapyForm.getAdministrativeRoute()
 				+ "\n\t type: " + therapyForm.getType() + "\n\t age: " + therapyForm.getAgeAtTreatment()
 				+ "\n\t administrativeRoute: " + therapyForm.getAdministrativeRoute() + "\n\t biomarker: "
-				+ therapyForm.getBiomarker() + "\n\t tumorResponse: " + therapyForm.getTumorResponse()
+				+ therapyForm.getBiomarker() 
 				+ "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: " + therapyForm.getResults()
 				+ "\n\t comments: " + therapyForm.getComments() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
