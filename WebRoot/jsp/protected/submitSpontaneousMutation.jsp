@@ -72,7 +72,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Observation:</label></td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32" disabled="true"  />
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"   />
 		</td>
 	</tr>
 	

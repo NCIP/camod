@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchGeneticDescriptionTest.java,v 1.6 2005-12-29 19:44:55 pandyas Exp $
+ * $Id: SearchGeneticDescriptionTest.java,v 1.7 2005-12-29 20:13:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/12/29 19:44:55  pandyas
+ * Fixed Defect# 325:  Spontaneous Mutation does not show up in search under Genetic Description unless other GD is entered and modified unit test.
+ *
  * Revision 1.4  2005/12/27 19:04:19  pandyas
  * Added code setparameter for string array for modification type.  Added the rest of the testing for other fields.
  *
@@ -489,10 +492,6 @@ public class SearchGeneticDescriptionTest extends BaseModelNeededTest {
 		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
 		theForm.setNumberMGI("19191919");
 		
-		// TODO:  find out why methodOfObservation fails  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("methodOfObservation");		
-		
 		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
@@ -505,7 +504,7 @@ public class SearchGeneticDescriptionTest extends BaseModelNeededTest {
 
 		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
 		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
+		verifyValuesOnPage(theWebForm);
 	}
 	
 }
