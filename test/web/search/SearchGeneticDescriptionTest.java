@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchGeneticDescriptionTest.java,v 1.4 2005-12-27 19:04:19 pandyas Exp $
+ * $Id: SearchGeneticDescriptionTest.java,v 1.5 2005-12-29 18:18:03 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/12/27 19:04:19  pandyas
+ * Added code setparameter for string array for modification type.  Added the rest of the testing for other fields.
+ *
  * Revision 1.3  2005/12/22 19:16:43  pandyas
  * Modified test for EngineeredTransgene and added one for other fields.  Many of the files were modified to get the disabled='true' out of the jsp
  *
@@ -14,11 +17,9 @@
 
 package web.search;
 
-import gov.nih.nci.camod.webapp.form.AssociatedExpressionForm;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentForm;
 import gov.nih.nci.camod.webapp.form.InducedMutationForm;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
 
 import java.util.ArrayList;
@@ -27,513 +28,522 @@ import java.util.ResourceBundle;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import web.util.TestUtil;
 import web.base.BaseModelNeededTest;
+import web.util.TestUtil;
 
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
 
 /** This is a simple example of using HttpUnit to read and understand web pages. * */
-public class SearchGeneticDescriptionTest extends BaseModelNeededTest {
+public class SearchGeneticDescriptionTest extends BaseModelNeededTest
+{
 
-	public SearchGeneticDescriptionTest(String testName) {
-		super(testName);
-	}
+    public SearchGeneticDescriptionTest(String testName)
+    {
+        super(testName);
+    }
 
-	protected void setUp() throws Exception {
+    protected void setUp() throws Exception
+    {
 
-		ResourceBundle theBundle = ResourceBundle.getBundle("test");
+        ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
-		String theUsername = theBundle.getString("username");
-		String thePassword = theBundle.getString("password");
+        String theUsername = theBundle.getString("username");
+        String thePassword = theBundle.getString("password");
 
-		loginToApplication(theUsername, thePassword);
-		createModel();
-	}
+        loginToApplication(theUsername, thePassword);
+        createModel();
+    }
 
-	protected void tearDown() throws Exception {
-		deleteModel();
-		logoutOfApplication();
-	}
+    protected void tearDown() throws Exception
+    {
+        deleteModel();
+        logoutOfApplication();
+    }
 
-	public static Test suite() {
-		TestSuite suite = new TestSuite(SearchGeneticDescriptionTest.class);
-		return suite;
-	}
+    public static Test suite()
+    {
+        TestSuite suite = new TestSuite(SearchGeneticDescriptionTest.class);
+        return suite;
+    }
 
-	public void testSearchForEngineeredTransgene() throws Exception {
+    public void testSearchForEngineeredTransgene() throws Exception
+    {
 
-		/* Search for Engineered Transgene  */
-		navigateToModelForEditing(myModelName);
+        /* Search for Engineered Transgene  */
+        navigateToModelForEditing(myModelName);
 
-		// Adding Engineered Transgene
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Engineered Transgene");
-		assertNotNull("Unable to find link to enter an Engineered Transgene", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Transgene (coding sequence only):");
-		WebForm theWebForm = theCurrentPage.getFormWithName("engineeredTransgeneForm");
-		//had to be set explicitly so it didn't fail validation
-		theWebForm.setParameter("locationOfIntegration", "Random");
+        // Adding Engineered Transgene
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Enter Engineered Transgene");
+        assertNotNull("Unable to find link to enter an Engineered Transgene", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Transgene (coding sequence only):");
+        WebForm theWebForm = theCurrentPage.getFormWithName("engineeredTransgeneForm");
+        //had to be set explicitly so it didn't fail validation
+        theWebForm.setParameter("locationOfIntegration", "Random");
 
-		EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setLocationOfIntegration("Random");
-		//set conditionedBy here and skipped description below
-		theForm.setConditionedBy("Not Conditional");		
-		
-		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("transgeneId");
-		theParamsToIgnore.add("fileLocation");
-		theParamsToIgnore.add("fileServerLocation");
-		theParamsToIgnore.add("title");
-		theParamsToIgnore.add("descriptionOfConstruct");
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("description");
-		
-		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added an Engineered Transgene to this model!");
+        EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
+        theForm.setNumberMGI("19191919");
+        theForm.setLocationOfIntegration("Random");
+        //set conditionedBy here and skipped description below
+        theForm.setConditionedBy("Not Conditional");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        List theParamsToIgnore = new ArrayList();
+        theParamsToIgnore.add("transgeneId");
+        theParamsToIgnore.add("fileLocation");
+        theParamsToIgnore.add("fileServerLocation");
+        theParamsToIgnore.add("title");
+        theParamsToIgnore.add("descriptionOfConstruct");
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-		
-		
-		/* Adding Associated Expression to Engineered Transgene  
-		navigateToModelForEditing(myModelName);
+        // Add parameters found on submit screen but not displayed on search screen  
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("description");
 
-		// Adding Engineered Transgene
-		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Assoc Expression");
-		assertNotNull("Unable to find link to enter an Assoc Expression", theLink);
-		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Organ / Tissue:");
-		theWebForm = theCurrentPage.getFormWithName("associatedExpressionForm");
+        TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		AssociatedExpressionForm theAEForm = new AssociatedExpressionForm();
-		theAEForm.setOrganTissueCode("C22498");
-		theAEForm.setOrgan("Heart");
-		theAEForm.setOrganTissueName("Heart");		
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-		// Add parameters found on submit screen but not displayed on search screen  
-		theParamsToSkip = new ArrayList();
-		
-		theParamsToSkip.add("organTissueCode");
-		theParamsToSkip.add("organTissueName");
-		
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
+        assertCurrentPageContains("You have successfully added an Engineered Transgene to this model!");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        TestUtil.moveModelToEditedApproved(myModelName);
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);		
-		*/
-		
-	}
-	
-	public void testSearchForEngineeredTransgeneWithOthers() throws Exception {
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
 
-		navigateToModelForEditing(myModelName);
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
 
-		// Adding
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Engineered Transgene");
-		assertNotNull("Unable to find link to enter an Engineered Transgene", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Transgene (coding sequence only):");
-		WebForm theWebForm = theCurrentPage.getFormWithName("engineeredTransgeneForm");
-		//had to be set explicitly so it didn't fail validation
-		theWebForm.setParameter("locationOfIntegration", "Random");
 
-		EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setLocationOfIntegration("Random");
-		//set conditionedBy here and skipped description below
-		theForm.setConditionedBy("Not Conditional");		
-		
-		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("transgeneId");
-		theParamsToIgnore.add("fileLocation");
-		theParamsToIgnore.add("fileServerLocation");
-		theParamsToIgnore.add("title");
-		theParamsToIgnore.add("descriptionOfConstruct");
-		
-		// Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("description");
-		//Parameter not on form
-		theParamsToSkip.add("otherLocationOfIntegration");
-		
-		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added an Engineered Transgene to this model!");
+        /* Adding Associated Expression to Engineered Transgene  
+         navigateToModelForEditing(myModelName);
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+         // Adding Engineered Transgene
+         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+         "Enter Assoc Expression");
+         assertNotNull("Unable to find link to enter an Assoc Expression", theLink);
+         theCurrentPage = theLink.click();
+         assertCurrentPageContains("Organ / Tissue:");
+         theWebForm = theCurrentPage.getFormWithName("associatedExpressionForm");
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}	
-	
-	public void testSearchForGenomicSegment() throws Exception {
+         AssociatedExpressionForm theAEForm = new AssociatedExpressionForm();
+         theAEForm.setOrganTissueCode("C22498");
+         theAEForm.setOrgan("Heart");
+         theAEForm.setOrganTissueName("Heart");		
 
-		navigateToModelForEditing(myModelName);
+         // Add parameters found on submit screen but not displayed on search screen  
+         theParamsToSkip = new ArrayList();
+         
+         theParamsToSkip.add("organTissueCode");
+         theParamsToSkip.add("organTissueName");
+         
+         TestUtil.setRandomValues(theForm, theWebForm, false);
+         TestUtil.setValuesOnForm(theForm, theWebForm);
+         
+         theCurrentPage = theWebForm.submit();
+         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+         
+         assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
 
-		// Adding
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Genomic Segment");
-		assertNotNull("Unable to find link to enter an Genomic Segment", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("-if category you are looking for is not listed");
-		WebForm theWebForm = theCurrentPage.getFormWithName("genomicSegmentForm");
-		//had to be set explicitly so it didn't fail validation
-		theWebForm.setParameter("locationOfIntegration", "Random");
-		
-		GenomicSegmentForm theForm = new GenomicSegmentForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setLocationOfIntegration("Random");
-		
-		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("transgeneId");
-		theParamsToIgnore.add("fileLocation");
-		theParamsToIgnore.add("fileServerLocation");
-		theParamsToIgnore.add("title");
-		theParamsToIgnore.add("descriptionOfConstruct");
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("description");
-		theParamsToSkip.add("segmentId");
-		theParamsToSkip.add("segmentName");		
-		
-		
-		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added a Genomic Segment to this model! ");
+         TestUtil.moveModelToEditedApproved(myModelName);
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+         navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
+         
+         verifyValuesOnPage(theWebForm, theParamsToSkip);		
+         */
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}
+    }
 
-	public void testSearchForGenomicSegmentWithOthers() throws Exception {
+    public void testSearchForEngineeredTransgeneWithOthers() throws Exception
+    {
 
-		navigateToModelForEditing(myModelName);
+        navigateToModelForEditing(myModelName);
 
-		// Adding
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Genomic Segment");
-		assertNotNull("Unable to find link to enter an Genomic Segment", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("-if category you are looking for is not listed");
-		WebForm theWebForm = theCurrentPage.getFormWithName("genomicSegmentForm");
-		//had to be set explicitly so it didn't fail validation
-		theWebForm.setParameter("locationOfIntegration", "Random");
-		
-		GenomicSegmentForm theForm = new GenomicSegmentForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setLocationOfIntegration("Random");
-		
-		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("transgeneId");
-		theParamsToIgnore.add("fileLocation");
-		theParamsToIgnore.add("fileServerLocation");
-		theParamsToIgnore.add("title");
-		theParamsToIgnore.add("descriptionOfConstruct");
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("description");
-		theParamsToSkip.add("segmentId");
-		theParamsToSkip.add("segmentName");			
-		//Parameter not on form
-		theParamsToSkip.add("otherLocationOfIntegration");		
-		
-		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added a Genomic Segment to this model! ");
+        // Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Enter Engineered Transgene");
+        assertNotNull("Unable to find link to enter an Engineered Transgene", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Transgene (coding sequence only):");
+        WebForm theWebForm = theCurrentPage.getFormWithName("engineeredTransgeneForm");
+        //had to be set explicitly so it didn't fail validation
+        theWebForm.setParameter("locationOfIntegration", "Random");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
+        theForm.setNumberMGI("19191919");
+        theForm.setLocationOfIntegration("Random");
+        //set conditionedBy here and skipped description below
+        theForm.setConditionedBy("Not Conditional");
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}
-	
-	public void testSearchForTargetedMutation() throws Exception {
+        List theParamsToIgnore = new ArrayList();
+        theParamsToIgnore.add("transgeneId");
+        theParamsToIgnore.add("fileLocation");
+        theParamsToIgnore.add("fileServerLocation");
+        theParamsToIgnore.add("title");
+        theParamsToIgnore.add("descriptionOfConstruct");
 
-		navigateToModelForEditing(myModelName);
+        // Add parameters found on submit screen but not displayed on search screen  */
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("description");
+        //Parameter not on form
+        theParamsToSkip.add("otherLocationOfIntegration");
 
-		// Adding Engineered Transgene
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Targeted Modification");
-		assertNotNull("Unable to find link to enter a Targeted Modification", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Targeted Gene/Locus:");
+        TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		WebForm theWebForm = theCurrentPage.getFormWithName("targetedModificationForm");
-		
-		//create string array for modification type
-		String[] testArray = theWebForm.getOptionValues("modificationType");
-		//set the second and third option from dropdown (other is first)
-		theWebForm.setParameter("modificationType" ,new String[]{testArray[1],testArray[2]});
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-		TargetedModificationForm theForm = new TargetedModificationForm();
-		theForm.setNumberMGI("19191919");
-		//set conditionedBy here and skip description below
-		theForm.setConditionedBy("Not Conditional");	
-		
-		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("transgeneId");
-		theParamsToIgnore.add("fileLocation");
-		theParamsToIgnore.add("fileServerLocation");
-		theParamsToIgnore.add("title");
-		theParamsToIgnore.add("descriptionOfConstruct");
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("description");
-		theParamsToSkip.add("modificationId");		
-		
-		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added a Targeted Modification to this model!");
+        assertCurrentPageContains("You have successfully added an Engineered Transgene to this model!");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        TestUtil.moveModelToEditedApproved(myModelName);
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
 
-	public void testSearchForTargetedMutationWithOthers() throws Exception {
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
 
-		navigateToModelForEditing(myModelName);
+    public void testSearchForGenomicSegment() throws Exception
+    {
 
-		// Adding Engineered Transgene
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Targeted Modification");
-		assertNotNull("Unable to find link to enter a Targeted Modification", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Targeted Gene/Locus:");
+        navigateToModelForEditing(myModelName);
 
-		WebForm theWebForm = theCurrentPage.getFormWithName("targetedModificationForm");
-		
-		//create string array for modification type
-		String[] testArray = theWebForm.getOptionValues("modificationType");
-		//set the other and second option from dropdown 
-		theWebForm.setParameter("modificationType" ,new String[]{testArray[0],testArray[1]});
-		theWebForm.setParameter("otherModificationType", "Testing otherModificationType");
+        // Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Genomic Segment");
+        assertNotNull("Unable to find link to enter an Genomic Segment", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("-if category you are looking for is not listed");
+        WebForm theWebForm = theCurrentPage.getFormWithName("genomicSegmentForm");
+        //had to be set explicitly so it didn't fail validation
+        theWebForm.setParameter("locationOfIntegration", "Random");
 
-		TargetedModificationForm theForm = new TargetedModificationForm();
-		theForm.setNumberMGI("19191919");
-		//set conditionedBy here and skip description below
-		theForm.setConditionedBy("Not Conditional");	
-		
-		List theParamsToIgnore = new ArrayList();
-		theParamsToIgnore.add("transgeneId");
-		theParamsToIgnore.add("fileLocation");
-		theParamsToIgnore.add("fileServerLocation");
-		theParamsToIgnore.add("title");
-		theParamsToIgnore.add("descriptionOfConstruct");
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("description");
-		theParamsToSkip.add("modificationId");		
-		
-		//other value set above so send in false here
-		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added a Targeted Modification to this model!");
+        GenomicSegmentForm theForm = new GenomicSegmentForm();
+        theForm.setNumberMGI("19191919");
+        theForm.setLocationOfIntegration("Random");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        List theParamsToIgnore = new ArrayList();
+        theParamsToIgnore.add("transgeneId");
+        theParamsToIgnore.add("fileLocation");
+        theParamsToIgnore.add("fileServerLocation");
+        theParamsToIgnore.add("title");
+        theParamsToIgnore.add("descriptionOfConstruct");
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}
-	
-	public void testSearchForInducedMutation() throws Exception {
+        // Add parameters found on submit screen but not displayed on search screen  
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("description");
+        theParamsToSkip.add("segmentId");
+        theParamsToSkip.add("segmentName");
 
-		navigateToModelForEditing(myModelName);
 
-		// Adding
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Induced Mutation");
-		assertNotNull("Unable to find link to enter an Induced Mutation", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Inducing Agent Category:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
-		
-		InducedMutationForm theForm = new InducedMutationForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setObservation("Test Observation");
-		theForm.setMethodOfObservation("Test Method of Observation");
-		// unless set Chemical, CAS# is not displayed on search screen
-		theForm.setType("Radiation");		
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("type");
-		theParamsToSkip.add("CASNumber");
-		
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added an Induced Mutation to this model!");
+        TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}
-	
-	public void testSearchForInducedMutationWithOthers() throws Exception {
+        assertCurrentPageContains("You have successfully added a Genomic Segment to this model! ");
 
-		navigateToModelForEditing(myModelName);
+        TestUtil.moveModelToEditedApproved(myModelName);
 
-		// Adding
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Induced Mutation");
-		assertNotNull("Unable to find link to enter an Induced Mutation", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Inducing Agent Category:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
-		
-		InducedMutationForm theForm = new InducedMutationForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setObservation("Test Observation");
-		theForm.setMethodOfObservation("Test Method of Observation");
-		// unless set Chemical, CAS# is not displayed on search screen
-		theForm.setType("Radiation");		
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("type");
-		theParamsToSkip.add("CASNumber");
-		
-		TestUtil.setRandomValues(theForm, theWebForm, true);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added an Induced Mutation to this model!");
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}	
+    public void testSearchForGenomicSegmentWithOthers() throws Exception
+    {
 
-/*  Bug 325 needs resolved for this to work	
-	public void testSearchForSpontaneousMutation() throws Exception {
+        navigateToModelForEditing(myModelName);
 
-		navigateToModelForEditing(myModelName);
+        // Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Genomic Segment");
+        assertNotNull("Unable to find link to enter an Genomic Segment", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("-if category you are looking for is not listed");
+        WebForm theWebForm = theCurrentPage.getFormWithName("genomicSegmentForm");
+        //had to be set explicitly so it didn't fail validation
+        theWebForm.setParameter("locationOfIntegration", "Random");
 
-		// Adding
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Spontaneous Mutation");
-		assertNotNull("Unable to find link to enter a Spontaneous Mutation", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Gene Name:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
-		
-		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setObservation("Test Observation");
-		theForm.setMethodOfObservation("Test Method of Observation");
-		
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added a Spontaneous Mutation to this model!");
+        GenomicSegmentForm theForm = new GenomicSegmentForm();
+        theForm.setNumberMGI("19191919");
+        theForm.setLocationOfIntegration("Random");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        List theParamsToIgnore = new ArrayList();
+        theParamsToIgnore.add("transgeneId");
+        theParamsToIgnore.add("fileLocation");
+        theParamsToIgnore.add("fileServerLocation");
+        theParamsToIgnore.add("title");
+        theParamsToIgnore.add("descriptionOfConstruct");
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm);
-	}
-	
-	public void testSearchForSpontaneousMutationWithOthers() throws Exception {
+        // Add parameters found on submit screen but not displayed on search screen  
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("description");
+        theParamsToSkip.add("segmentId");
+        theParamsToSkip.add("segmentName");
+        //Parameter not on form
+        theParamsToSkip.add("otherLocationOfIntegration");
 
-		navigateToModelForEditing(myModelName);
+        TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		// Adding
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Enter Spontaneous Mutation");
-		assertNotNull("Unable to find link to enter a Spontaneous Mutation", theLink);
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Gene Name:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
-		
-		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
-		theForm.setNumberMGI("19191919");
-		theForm.setObservation("Test Observation");
-		theForm.setMethodOfObservation("Test Method of Observation");
-		
-		TestUtil.setRandomValues(theForm, theWebForm, true);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
-		
-		assertCurrentPageContains("You have successfully added a Spontaneous Mutation to this model!");
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        assertCurrentPageContains("You have successfully added a Genomic Segment to this model! ");
 
-		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
-		
-		verifyValuesOnPage(theWebForm);
-	}			
-*/	
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
+
+    public void testSearchForTargetedMutation() throws Exception
+    {
+
+        navigateToModelForEditing(myModelName);
+
+        // Adding Engineered Transgene
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Enter Targeted Modification");
+        assertNotNull("Unable to find link to enter a Targeted Modification", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Targeted Gene/Locus:");
+
+        WebForm theWebForm = theCurrentPage.getFormWithName("targetedModificationForm");
+
+        //create string array for modification type
+        String[] testArray = theWebForm.getOptionValues("modificationType");
+        //set the second and third option from dropdown (other is first)
+        theWebForm.setParameter("modificationType", new String[] { testArray[1], testArray[2] });
+
+        TargetedModificationForm theForm = new TargetedModificationForm();
+        theForm.setNumberMGI("19191919");
+        //set conditionedBy here and skip description below
+        theForm.setConditionedBy("Not Conditional");
+
+        List theParamsToIgnore = new ArrayList();
+        theParamsToIgnore.add("transgeneId");
+        theParamsToIgnore.add("fileLocation");
+        theParamsToIgnore.add("fileServerLocation");
+        theParamsToIgnore.add("title");
+        theParamsToIgnore.add("descriptionOfConstruct");
+
+        // Add parameters found on submit screen but not displayed on search screen  
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("description");
+        theParamsToSkip.add("modificationId");
+
+        TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added a Targeted Modification to this model!");
+
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
+
+    public void testSearchForTargetedMutationWithOthers() throws Exception
+    {
+
+        navigateToModelForEditing(myModelName);
+
+        // Adding Engineered Transgene
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Enter Targeted Modification");
+        assertNotNull("Unable to find link to enter a Targeted Modification", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Targeted Gene/Locus:");
+
+        WebForm theWebForm = theCurrentPage.getFormWithName("targetedModificationForm");
+
+        //create string array for modification type
+        String[] testArray = theWebForm.getOptionValues("modificationType");
+        //set the other and second option from dropdown 
+        theWebForm.setParameter("modificationType", new String[] { testArray[0], testArray[1] });
+        theWebForm.setParameter("otherModificationType", "Testing otherModificationType");
+
+        TargetedModificationForm theForm = new TargetedModificationForm();
+        theForm.setNumberMGI("19191919");
+        //set conditionedBy here and skip description below
+        theForm.setConditionedBy("Not Conditional");
+
+        List theParamsToIgnore = new ArrayList();
+        theParamsToIgnore.add("transgeneId");
+        theParamsToIgnore.add("fileLocation");
+        theParamsToIgnore.add("fileServerLocation");
+        theParamsToIgnore.add("title");
+        theParamsToIgnore.add("descriptionOfConstruct");
+
+        // Add parameters found on submit screen but not displayed on search screen  
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("description");
+        theParamsToSkip.add("modificationId");
+
+        //other value set above so send in false here
+        TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added a Targeted Modification to this model!");
+
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
+
+    public void testSearchForInducedMutation() throws Exception
+    {
+
+        navigateToModelForEditing(myModelName);
+
+        // Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Induced Mutation");
+        assertNotNull("Unable to find link to enter an Induced Mutation", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Inducing Agent Category:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
+
+        InducedMutationForm theForm = new InducedMutationForm();
+        theForm.setNumberMGI("19191919");
+        theForm.setObservation("Test Observation");
+        theForm.setMethodOfObservation("Test Method of Observation");
+        // unless set Chemical, CAS# is not displayed on search screen
+        theForm.setType("Radiation");
+
+        // Add parameters found on submit screen but not displayed on search screen  
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("type");
+        theParamsToSkip.add("CASNumber");
+
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added an Induced Mutation to this model!");
+
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
+
+    public void testSearchForInducedMutationWithOthers() throws Exception
+    {
+
+        navigateToModelForEditing(myModelName);
+
+        // Adding
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Induced Mutation");
+        assertNotNull("Unable to find link to enter an Induced Mutation", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Inducing Agent Category:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
+
+        InducedMutationForm theForm = new InducedMutationForm();
+        theForm.setNumberMGI("19191919");
+        theForm.setObservation("Test Observation");
+        theForm.setMethodOfObservation("Test Method of Observation");
+        // unless set Chemical, CAS# is not displayed on search screen
+        theForm.setType("Radiation");
+
+        // Add parameters found on submit screen but not displayed on search screen  
+        List theParamsToSkip = new ArrayList();
+        theParamsToSkip.add("type");
+        theParamsToSkip.add("CASNumber");
+
+        TestUtil.setRandomValues(theForm, theWebForm, true);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added an Induced Mutation to this model!");
+
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "GENETIC DESCRIPTION");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
+
+    /*  Bug 325 needs resolved for this to work	
+     public void testSearchForSpontaneousMutation() throws Exception {
+
+     navigateToModelForEditing(myModelName);
+
+     // Adding
+     WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+     "Enter Spontaneous Mutation");
+     assertNotNull("Unable to find link to enter a Spontaneous Mutation", theLink);
+     WebResponse theCurrentPage = theLink.click();
+     assertCurrentPageContains("Gene Name:");
+     WebForm theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
+     
+     SpontaneousMutationForm theForm = new SpontaneousMutationForm();
+     theForm.setNumberMGI("19191919");
+     theForm.setObservation("Test Observation");
+     theForm.setMethodOfObservation("Test Method of Observation");
+     
+     TestUtil.setRandomValues(theForm, theWebForm, false);
+     TestUtil.setValuesOnForm(theForm, theWebForm);
+     
+     theCurrentPage = theWebForm.submit();
+     TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+     
+     assertCurrentPageContains("You have successfully added a Spontaneous Mutation to this model!");
+
+     TestUtil.moveModelToEditedApproved(myModelName);
+
+     navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
+     
+     verifyValuesOnPage(theWebForm);
+     }
+     
+     public void testSearchForSpontaneousMutationWithOthers() throws Exception {
+
+     navigateToModelForEditing(myModelName);
+
+     // Adding
+     WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+     "Enter Spontaneous Mutation");
+     assertNotNull("Unable to find link to enter a Spontaneous Mutation", theLink);
+     WebResponse theCurrentPage = theLink.click();
+     assertCurrentPageContains("Gene Name:");
+     WebForm theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
+     
+     SpontaneousMutationForm theForm = new SpontaneousMutationForm();
+     theForm.setNumberMGI("19191919");
+     theForm.setObservation("Test Observation");
+     theForm.setMethodOfObservation("Test Method of Observation");
+     
+     TestUtil.setRandomValues(theForm, theWebForm, true);
+     TestUtil.setValuesOnForm(theForm, theWebForm);
+     
+     theCurrentPage = theWebForm.submit();
+     TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+     
+     assertCurrentPageContains("You have successfully added a Spontaneous Mutation to this model!");
+
+     TestUtil.moveModelToEditedApproved(myModelName);
+
+     navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
+     
+     verifyValuesOnPage(theWebForm);
+     }			
+     */
 }
