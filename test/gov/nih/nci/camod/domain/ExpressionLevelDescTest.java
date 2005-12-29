@@ -7,8 +7,9 @@
 
 package gov.nih.nci.camod.domain;
 
-import junit.framework.*;
-import java.io.Serializable;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

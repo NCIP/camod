@@ -7,13 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.SpontaneousMutationManager;
-import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

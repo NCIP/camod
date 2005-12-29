@@ -30,8 +30,6 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable 
     private SexDistribution sexDistribution;
 
     private String route;
-    private String vehicle;
-    private String schedule;
    
     /**
      * @return Returns the sexDistribution.
@@ -186,10 +184,6 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable 
 		return route;
 	}
 
-	public void setSchedule(String schedule) {
-		this.schedule = schedule;
-	}
-
 	public String getVehicle() {
 		
 		StringTokenizer parser = new StringTokenizer(this.regimen, ",");		
@@ -206,10 +200,6 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable 
         route = matcher.replaceAll("");
         
 		return route;
-	}
-
-	public void setVehicle(String vehicle) {
-		this.vehicle = vehicle;
 	}
 
 	/**

@@ -7,9 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.Treatment;
-import gov.nih.nci.camod.service.TreatmentManager;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

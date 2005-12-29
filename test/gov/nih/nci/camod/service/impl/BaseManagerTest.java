@@ -7,15 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.service.Manager;
-import gov.nih.nci.common.persistence.Persist;
-import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
-import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

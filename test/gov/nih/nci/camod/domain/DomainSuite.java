@@ -40,7 +40,6 @@ public class DomainSuite extends TestCase {
     suite.addTest(gov.nih.nci.camod.domain.AvailabilityTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.BaseObjectTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.BiologicalProcessTest.suite());
-    suite.addTest(gov.nih.nci.camod.domain.CancerModelTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.CellLineTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.ChemicalClassTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.ClinicalMarkerTest.suite());
@@ -48,7 +47,6 @@ public class DomainSuite extends TestCase {
     suite.addTest(gov.nih.nci.camod.domain.CommentsSearchResultTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.ConditionalityTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.ContactInfoTest.suite());
-    suite.addTest(gov.nih.nci.camod.domain.CurateableTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.DiseaseTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.EndpointCodeTest.suite());
     suite.addTest(gov.nih.nci.camod.domain.EngineeredGeneTest.suite());

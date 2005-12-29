@@ -7,11 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

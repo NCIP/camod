@@ -7,17 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.UserManager;
-import gov.nih.nci.camod.util.LDAPUtil;
-import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.security.AuthenticationManager;
-import gov.nih.nci.security.SecurityServiceProvider;
-import gov.nih.nci.security.exceptions.CSException;
-import java.util.*;
-import javax.servlet.http.HttpServletRequest;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

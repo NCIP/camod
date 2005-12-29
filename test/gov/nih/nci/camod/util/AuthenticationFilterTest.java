@@ -7,11 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import java.io.IOException;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

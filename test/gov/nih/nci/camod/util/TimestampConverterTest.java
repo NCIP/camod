@@ -7,12 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.lang.StringUtils;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

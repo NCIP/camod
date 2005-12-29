@@ -7,18 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.cabio.domain.impl.AgentImpl;
-import gov.nih.nci.camod.domain.Agent;
-import gov.nih.nci.camod.service.AgentManager;
-import gov.nih.nci.camod.util.DrugScreenResult;
-import gov.nih.nci.camod.util.EvsTreeUtil;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.system.applicationservice.ApplicationService;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

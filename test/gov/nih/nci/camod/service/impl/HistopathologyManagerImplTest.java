@@ -7,12 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.HistopathologyManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
-import gov.nih.nci.camod.webapp.form.*;
-import java.util.List;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

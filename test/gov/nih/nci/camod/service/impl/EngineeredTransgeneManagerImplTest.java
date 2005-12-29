@@ -7,37 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Conditionality;
-import gov.nih.nci.camod.domain.EngineeredGene;
-import gov.nih.nci.camod.domain.ExpressionFeature;
-import gov.nih.nci.camod.domain.ExpressionLevelDesc;
-import gov.nih.nci.camod.domain.GeneFunction;
-import gov.nih.nci.camod.domain.Image;
-import gov.nih.nci.camod.domain.MutationIdentifier;
-import gov.nih.nci.camod.domain.Organ;
-import gov.nih.nci.camod.domain.RegulatoryElement;
-import gov.nih.nci.camod.domain.RegulatoryElementType;
-import gov.nih.nci.camod.domain.Taxon;
-import gov.nih.nci.camod.domain.Transgene;
-import gov.nih.nci.camod.service.EngineeredTransgeneManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
-import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
-import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
-import gov.nih.nci.camod.webapp.form.ImageForm;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

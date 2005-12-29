@@ -7,11 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.ClinicalMarker;
-import gov.nih.nci.camod.domain.Histopathology;
-import gov.nih.nci.camod.service.ClinicalMarkerManager;
-import gov.nih.nci.camod.webapp.form.ClinicalMarkerData;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

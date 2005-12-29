@@ -7,12 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import java.util.*;
-import javax.naming.Context;
-import javax.naming.NamingEnumeration;
-import javax.naming.directory.*;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

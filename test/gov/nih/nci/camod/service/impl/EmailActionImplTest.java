@@ -7,17 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Curateable;
-import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.domain.Person;
-import gov.nih.nci.camod.service.CurateableAction;
-import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.AnimalModelStateData;
-import java.util.Map;
-import java.util.TreeMap;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

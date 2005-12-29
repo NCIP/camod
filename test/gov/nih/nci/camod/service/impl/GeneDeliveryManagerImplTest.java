@@ -7,18 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.GeneDeliveryManager;
-import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
-import gov.nih.nci.camod.util.EvsTreeUtil;
-import gov.nih.nci.camod.util.MailUtil;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

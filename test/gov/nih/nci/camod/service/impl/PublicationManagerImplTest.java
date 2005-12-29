@@ -7,16 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.domain.CellLine;
-import gov.nih.nci.camod.domain.Publication;
-import gov.nih.nci.camod.domain.PublicationStatus;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.PublicationManager;
-import gov.nih.nci.camod.webapp.form.PublicationData;
-import gov.nih.nci.common.persistence.Search;
-import java.util.List;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

@@ -7,13 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

@@ -7,10 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.service.CurateableAction;
-import gov.nih.nci.camod.service.CurateableActionFactory;
-import java.util.HashMap;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

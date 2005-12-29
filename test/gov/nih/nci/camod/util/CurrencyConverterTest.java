@@ -7,14 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

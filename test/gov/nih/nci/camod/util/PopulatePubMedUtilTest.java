@@ -7,11 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.Publication;
-import java.io.*;
-import java.net.URL;
-import java.util.StringTokenizer;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

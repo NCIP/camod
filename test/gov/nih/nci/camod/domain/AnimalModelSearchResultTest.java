@@ -7,9 +7,9 @@
 
 package gov.nih.nci.camod.domain;
 
-import junit.framework.*;
-import gov.nih.nci.camod.service.impl.AnimalModelManagerSingleton;
-import java.util.List;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

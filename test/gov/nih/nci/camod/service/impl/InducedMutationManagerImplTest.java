@@ -7,15 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.InducedMutationManager;
-import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.InducedMutationData;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

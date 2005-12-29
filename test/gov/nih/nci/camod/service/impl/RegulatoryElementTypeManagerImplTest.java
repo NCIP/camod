@@ -7,11 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.RegulatoryElementType;
-import gov.nih.nci.camod.service.RegulatoryElementTypeManager;
-import gov.nih.nci.common.persistence.Search;
-import java.util.List;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

@@ -41,7 +41,6 @@ public class UtilSuite extends TestCase {
     suite.addTest(gov.nih.nci.camod.util.DateConverterTest.suite());
     suite.addTest(gov.nih.nci.camod.util.DateUtilTest.suite());
     suite.addTest(gov.nih.nci.camod.util.DrugScreenResultTest.suite());
-    suite.addTest(gov.nih.nci.camod.util.DuplicatableTest.suite());
     suite.addTest(gov.nih.nci.camod.util.DuplicateUtilTest.suite());
     suite.addTest(gov.nih.nci.camod.util.EvsTreeUtilTest.suite());
     suite.addTest(gov.nih.nci.camod.util.FtpUtilTest.suite());

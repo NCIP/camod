@@ -7,11 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.AvailabilityManager;
-import gov.nih.nci.camod.webapp.form.AvailabilityData;
-import java.util.List;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

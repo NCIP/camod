@@ -7,14 +7,9 @@
 
 package gov.nih.nci.camod.util;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.evs.query.EVSQuery;
-import gov.nih.nci.evs.query.EVSQueryImpl;
-import gov.nih.nci.system.applicationservice.ApplicationService;
-import java.util.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

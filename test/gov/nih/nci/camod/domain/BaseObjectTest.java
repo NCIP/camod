@@ -7,10 +7,9 @@
 
 package gov.nih.nci.camod.domain;
 
-import junit.framework.*;
-import java.io.Serializable;
-import gov.nih.nci.camod.util.HashCodeUtil;
-import gov.nih.nci.camod.util.GUIDGenerator;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *
@@ -82,19 +81,5 @@ public class BaseObjectTest extends TestCase {
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
-  }
-
-  /**
-   * Generated implementation of abstract class gov.nih.nci.camod.domain.BaseObject. Please fill dummy bodies of generated methods.
-   */
-  private class BaseObjectImpl extends BaseObject {
-
-    public int compareTo(java.lang.Object p0) {
-      // TODO fill the body in order to provide useful implementation
-      
-      return 0;
-    }
-  }
-
-  
+  }  
 }

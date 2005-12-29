@@ -7,19 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.util.DrugScreenResult;
-import gov.nih.nci.camod.webapp.form.SearchData;
-import gov.nih.nci.common.persistence.Search;
-import gov.nih.nci.common.persistence.exception.PersistenceException;
-import gov.nih.nci.common.persistence.hibernate.HQLParameter;
-import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
-import java.sql.ResultSet;
-import java.util.*;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

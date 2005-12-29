@@ -7,17 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.TargetedModificationManager;
-import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.ImageForm;
-import gov.nih.nci.camod.webapp.form.TargetedModificationData;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *

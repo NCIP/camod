@@ -7,12 +7,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import junit.framework.*;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.AssociatedExpressionManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
-import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
-import java.util.List;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *
