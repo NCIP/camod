@@ -35,35 +35,35 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-	  	href="http://www.cancer.gov">NCI HOME</A></TD></TR>
+	  	href="http://www.cancer.gov" target="_blank">NCI HOME</A></TD></TR>
     <TR>
 	<TD class=subMenuSecondaryTitle
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-	  	href="http://ncicb.nci.nih.gov">NCICB HOME</A></TD></TR>
+	  	href="http://ncicb.nci.nih.gov" target="_blank">NCICB HOME</A></TD></TR>
   	<TR>
 	<TD class=subMenuSecondaryTitle
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		href="http://emice.nci.nih.gov">EMICE WEBSITE</A></TD></TR>
+		href="http://emice.nci.nih.gov" target="_blank">EMICE WEBSITE</A></TD></TR>
     <TR>
 	<TD class=subMenuSecondaryTitle
 		  onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
 		  onclick="document.location.href='#'"
 		  onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		  height=20><A class=subMenuSecondary
-		  href="http://cancerimages.nci.nih.gov/caIMAGE/index.jsp">CANCER IMAGES DATABASE</A></TD></TR>	    
+		  href="http://cancerimages.nci.nih.gov/caIMAGE/index.jsp" target="_blank">CANCER IMAGES DATABASE</A></TD></TR>	    
     <TR>
 	<TD class=subMenuSecondaryTitle
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		href="http://ncicbsupport.nci.nih.gov/sw">NCICB SUPPORT</A></TD></TR>
+		href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">NCICB SUPPORT</A></TD></TR>
       <TR>
 	<TD class=subMenuSecondaryTitle
 		onmouseover="changeMenuStyle(this,'subMenuSecondaryTitleOver'),showCursor()"
