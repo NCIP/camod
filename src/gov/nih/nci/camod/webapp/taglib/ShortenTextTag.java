@@ -1,7 +1,10 @@
 /**
- * $Id: ShortenTextTag.java,v 1.3 2005-12-02 14:17:30 georgeda Exp $
+ * $Id: ShortenTextTag.java,v 1.4 2005-12-29 19:42:45 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/02 14:17:30  georgeda
+ * Defect #241, handle truncated HTML tags
+ *
  * Revision 1.2  2005/11/28 17:56:39  georgeda
  * Defect #193. 30 chars too big as default
  *
@@ -29,7 +32,7 @@ public class ShortenTextTag implements BodyTag, Serializable {
 
     private BodyContent myBodyContent;
     private Tag myParent = null;
-    private int myLength = 25;
+    private int myLength = 28;
 
     private final int NOT_STARTED = 99999999;
 

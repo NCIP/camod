@@ -1,8 +1,11 @@
 <%
  /*
-  * $Id: subSubmitMenu.jsp,v 1.48 2005-12-21 16:12:30 pandyas Exp $
+  * $Id: subSubmitMenu.jsp,v 1.49 2005-12-29 19:42:01 georgeda Exp $
   *
   * $Log: not supported by cvs2svn $
+  * Revision 1.48  2005/12/21 16:12:30  pandyas
+  * Modified name of publication link for cell line and therapy so test script can find links
+  *
   * Revision 1.47  2005/12/06 18:49:58  georgeda
   * Defect #247 - real fix this time for the problem
   *
@@ -75,7 +78,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aEngineeredTransgeneID=<c:out value='${ aEngineeredTransgeneID }' />">
-						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
+						<camod:shorten length="21"><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
 					</a><br>
 					
 				</logic:iterate>					
@@ -103,7 +106,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aGenomicSegmentID=<c:out value='${ aGenomicSegmentID }' />">
-						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
+						<camod:shorten length="21"><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
 					</a><br>
 					
 				</logic:iterate>	
@@ -131,7 +134,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="AssociatedExpressionPopulateAction.do?method=populate&aAssociatedExpressionID=<c:out value='${ aAssociatedExpressionID }' />&aTargetedModificationID=<c:out value='${ aTargetedModificationID }' />">
-						<camod:shorten><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
+						<camod:shorten length="21"><bean:write name="aExpressionFeature" property="organ.name" filter="false"/></camod:shorten>
 					</a><br>
 					
 				</logic:iterate>	
@@ -237,7 +240,7 @@
 					
 				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot_red.jpg" border="0"> 
 				  <a class="subMenuMedRed" href="AssociatedMetastasisPopulateAction.do?method=populate&aAssociatedMetastasisID=<c:out value='${ aAssociatedMetastasisID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
-					<camod:shorten><bean:write name="aAssociatedMetastasis" property="organ.name" filter="false"/></camod:shorten>
+					<camod:shorten length="21"><bean:write name="aAssociatedMetastasis" property="organ.name" filter="false"/></camod:shorten>
 				  </a><br>					
 				</logic:iterate>
 				<!-- End Associated Metastasis Loop -->
@@ -254,7 +257,7 @@
 				  
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot_red.jpg" border="0"> 
 					<a class="subMenuMedRed" href="ClinicalMarkerPopulateAction.do?method=populate&aClinicalMarkerID=<c:out value='${ aClinicalMarkerID }' />&aHistopathologyID=<c:out value='${ aHistopathologyID }' /> ">
-				  		<camod:shorten><bean:write name="aClinicalMarker" property="name" filter="false"/></camod:shorten>
+				  		<camod:shorten length="21"><bean:write name="aClinicalMarker" property="name" filter="false"/></camod:shorten>
 				  	</a><br>
 				</logic:iterate>				  
 
@@ -266,7 +269,7 @@
 	<span class="submasterdiv" id="sub6">
 		<img src="images/right_arrow.gif" border="0"> <html:link styleClass="subMenuRed" action="TherapyPopulateAction.do?method=dropdown">Enter Therapy</html:link><br>
 			  <logic:iterate id="aTherapy" name="therapy_list" type="Therapy">
-				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="TherapyPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><bean:write name="aTherapy" property="agent.displayName" filter="false"/></html:link><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0"> <html:link styleClass="subMenuBlue" action="TherapyPopulateAction.do?method=populate" paramId="aTherapyID" paramName="aTherapy" paramProperty="id"><camod:shorten><bean:write name="aTherapy" property="agent.displayName" filter="false"/></camod:shorten></html:link><br>
 			 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img src="images/right_arrow.gif" border="0"> 
@@ -281,7 +284,7 @@
 				
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aTherapyID=<c:out value='${aTherapyID}'/>"><camod:shorten><c:out value="${aPublication.authors}"/></camod:shorten></a><br>
+					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aTherapyID=<c:out value='${aTherapyID}'/>"><camod:shorten length="21"><c:out value="${aPublication.authors}"/></camod:shorten></a><br>
 				
 				</logic:iterate>				 
 			  </logic:iterate>
@@ -311,7 +314,7 @@
 				
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/aquadot_red.jpg" border="0"> 
-					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aCellID=<c:out value='${aCellID }'/>"><camod:shorten><bean:write name="aPublication" property="authors" filter="false"/></camod:shorten></a><br>
+					<a class="subMenuMedRed" href="PublicationPopulateAction.do?method=populate&aPubID=<c:out value='${ aPublicationID }' />&aCellID=<c:out value='${aCellID }'/>"><camod:shorten length="21"><bean:write name="aPublication" property="authors" filter="false"/></camod:shorten></a><br>
 				
 				</logic:iterate>				 
 			 </logic:iterate>		    
