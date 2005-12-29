@@ -23,7 +23,17 @@
 			AnimalModel am = (AnimalModel)request.getSession().getAttribute(Constants.ANIMALMODEL);
 			List l = am.getEngineeredGeneCollection();
 			int cc = (l!=null)?l.size():0;
-			if ( cc > 0 ) { %>
+			boolean found = false;
+				if ( cc > 0 ) {
+				found = true;
+				}
+				if (!found) {
+					if (am.getSpontaneousMutationCollection() != null && am.getSpontaneousMutationCollection().size() > 0) {
+				    	found = true;
+					}
+				}
+			if (found) {
+		%>
 		<a href="ViewModelAction.do?unprotected_method=populateEngineeredGene&aModelID=<%=mdl%>" styleClass="subMenuPrimary">GENETIC DESCRIPTION</a>	
 	    <%} else { %>
 		GENETIC DESCRIPTION
@@ -33,7 +43,7 @@
 		<% 
 			l = am.getTherapyCollection();
 			cc = (l!=null)?l.size():0;
-			boolean found = false;
+			found = false;
 			if ( cc > 0 ) {
 				for (int i=0; i<cc; i++) {
 					Therapy t = (Therapy)l.get(i);
@@ -51,7 +61,6 @@
 			}
 			if (found) {
 		%>
-
 		<a href="ViewModelAction.do?unprotected_method=populateCarcinogenicInterventions&aModelID=<%=mdl%>" styleClass="subMenuPrimary">CARCINOGENIC INTERVENTIONS</a>
 	    <%} else { %>
 		CARCINOGENIC INTERVENTIONS
