@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchCellLinesTest.java,v 1.3 2005-12-22 19:57:13 pandyas Exp $
+ * $Id: SearchCellLinesTest.java,v 1.4 2005-12-29 18:43:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/12/22 19:57:13  pandyas
+ * Add explicit setParameters for firstTimeReported radioButton
+ *
  * Revision 1.2  2005/12/16 17:27:34  pandyas
  * Added a cell line publication to script - there are two issues that need resolved - there is additional source code to upload for this to run
  *
@@ -133,7 +136,7 @@ public class SearchCellLinesTest extends BaseModelNeededTest {
 		theParamsToSkip.add("APubID");
 		theParamsToSkip.add("volume");
 		theParamsToSkip.add("title");
-		theParamsToSkip.add("ATherapyID");		
+		//theParamsToSkip.add("ATherapyID");		
 		
 
 		TestUtil.setRandomValues(thePubForm, theWebForm, false,	theParamsToIgnore);
@@ -151,12 +154,10 @@ public class SearchCellLinesTest extends BaseModelNeededTest {
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 		
 		/* check if publication is on publication search page
-		* TODO:  This is a bug in the application, the pub only shows up
-		* if a general publication exists for the model in addition
-		* to the cell line publication
+		*  Fixed Defect #286 */
 		navigateToSpecificSearchPage(myModelName, "PUBLICATIONS");
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
-		*/
+		
 	}  
 
 }
