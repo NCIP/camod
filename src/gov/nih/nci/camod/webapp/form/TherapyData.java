@@ -1,9 +1,12 @@
 /**
  *  @author pandyas
  *  
- *  $Id: TherapyData.java,v 1.3 2005-10-26 14:10:49 georgeda Exp $
+ *  $Id: TherapyData.java,v 1.4 2005-12-29 18:29:49 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.3  2005/10/26 14:10:49  georgeda
+ *  Added other administrative route to therapy
+ *
  *  Revision 1.2  2005/10/25 19:42:15  georgeda
  *  Finished Therapy page
  *
@@ -69,14 +72,6 @@ public interface TherapyData extends DoseData, AgeGenderData, AdministrationData
     public String getBiomarker();
 
     public void setBiomarker(String biomarker);
-
-    public String getTumorResponse();
-
-    public void setTumorResponse(String tumorResponse);
-
-    public String getTumorAgeUnit();
-
-    public void setTumorAgeUnit(String tumorAgeUnit);
 
     public String getExperiment();
 

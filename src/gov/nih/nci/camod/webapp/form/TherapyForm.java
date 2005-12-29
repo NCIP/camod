@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: TherapyForm.java,v 1.7 2005-10-26 14:10:49 georgeda Exp $
+ * $Id: TherapyForm.java,v 1.8 2005-12-29 18:29:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/26 14:10:49  georgeda
+ * Added other administrative route to therapy
+ *
  * Revision 1.6  2005/10/25 19:42:15  georgeda
  * Finished Therapy page
  *
@@ -43,8 +46,6 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     protected String administrativeRoute;
     protected String otherAdministrativeRoute;
     protected String biomarker;
-    protected String tumorResponse;
-    protected String tumorAgeUnit;
     protected String experiment;
     protected String results;
     protected String comments;
@@ -305,36 +306,6 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     }
 
     /**
-     * @return Returns the tumorResponse.
-     */
-    public String getTumorResponse() {
-        return tumorResponse;
-    }
-
-    /**
-     * @param tumorResponse
-     *            The tumorResponse to set.
-     */
-    public void setTumorResponse(String tumorResponse) {
-        this.tumorResponse = tumorResponse;
-    }
-
-    /**
-     * @return Returns the tumorAgeUnit.
-     */
-    public String getTumorAgeUnit() {
-        return tumorAgeUnit;
-    }
-
-    /**
-     * @param tumorAgeUnit
-     *            The tumorAgeUnit to set.
-     */
-    public void setTumorAgeUnit(String tumorAgeUnit) {
-        this.tumorAgeUnit = tumorAgeUnit;
-    }
-
-    /**
      * @return Returns the experiment.
      */
     public String getExperiment() {
@@ -412,8 +383,6 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
         ageUnit = null;
         administrativeRoute = null;
         biomarker = null;
-        tumorResponse = null;
-        tumorAgeUnit = null;
         experiment = null;
         results = null;
         comments = null;
