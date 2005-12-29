@@ -1,7 +1,8 @@
 <%@ include file="/common/taglibs.jsp"%>
 
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
-<%@ page import="gov.nih.nci.camod.domain.Therapy" %>	
+<%@ page import="gov.nih.nci.camod.domain.Therapy" %>
+<%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
 
@@ -60,7 +61,37 @@
 		<% 
 			l = am.getPublicationCollection();
 			cc = (l!=null)?l.size():0;
-			if ( cc > 0 ) { 
+			found = false;
+				if ( cc >0 ) {
+					found = true;
+				}
+			if (!found) {
+				l = am.getCellLineCollection();
+				cc = (l!=null)?l.size():0;
+					if ( cc > 0 ) {
+						for (int i=0; i<cc; i++) {					
+						CellLine c = (CellLine)l.get(i);
+						if( c.getPublicationCollection() !=null) {
+							found = true;
+							break;
+						}
+					}
+				}
+			}
+			if (!found) {
+				l = am.getTherapyCollection();
+				cc = (l!=null)?l.size():0;
+					if ( cc > 0 ) {
+						for (int i=0; i<cc; i++) {					
+						Therapy t = (Therapy)l.get(i);
+						if( t.getPublicationCollection() !=null) {
+							found = true;
+							break;
+						}
+					}
+				}
+			}
+			if (found) {			
 		%>
 		<a href="ViewModelAction.do?unprotected_method=populatePublications&aModelID=<%=mdl%>" styleClass="subMenuPrimary">PUBLICATIONS</a>	
 	    <%} else { %>
