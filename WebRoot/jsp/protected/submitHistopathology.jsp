@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/12/20 18:46:31  pandyas
+ * Moved <html:form action..> above first table - caused errors when identifying fields on page
+ *
  * Revision 1.17  2005/12/12 17:54:56  georgeda
  * Defect #268, added a return in front of all the confirms.
  *
@@ -22,7 +25,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.18 2005-12-20 18:46:31 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.19 2005-12-29 22:20:36 pandyas Exp $
  *
  */   
 %>
@@ -212,7 +215,7 @@
 		<camod:cshelp mapId="histopathology_help" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:textarea styleClass="formFieldSized" property="methodOfObservation" cols="32" rows="4" disabled="true" />
+			<html:textarea styleClass="formFieldSized" property="methodOfObservation" cols="32" rows="4"  />
 		</td>
 	</tr>	
 	

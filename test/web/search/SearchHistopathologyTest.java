@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchHistopathologyTest.java,v 1.2 2005-12-16 18:13:21 pandyas Exp $
+ * $Id: SearchHistopathologyTest.java,v 1.3 2005-12-29 22:20:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/16 18:13:21  pandyas
+ * Added an Assoc Met and Clinical Marker to script - there is one more convenience TODO that would be nice to have
+ *
  * Revision 1.1  2005/12/14 17:17:42  pandyas
  * JUnit test case for Search Histopathology - depends on other changes in main tree that will NOT be uploaded until we go to production
  *
@@ -72,10 +75,8 @@ public class SearchHistopathologyTest extends BaseModelNeededTest {
 		theForm.setTumorClassification("Lymphoid_Hyperplasia_of_the_Mouse_Intestinal_Tract");
 		theForm.setDiagnosisName("Lymphoid_Hyperplasia_of_the_Mouse_Intestinal_Tract");
 		theForm.setDiagnosisCode("C22100");	
-		//theForm.setAgeOfOnset("1");
 		theForm.setVolumeOfTumor("2");
 		theForm.setWeightOfTumor("30");
-		theForm.setComments("Test Comments");
 		theForm.setTumorIncidenceRate("20");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
@@ -85,8 +86,6 @@ public class SearchHistopathologyTest extends BaseModelNeededTest {
 		theParamsToSkip.add("tumorClassification");
 		theParamsToSkip.add("diagnosisCode");
 		theParamsToSkip.add("diagnosisName");
-		theParamsToSkip.add("methodOfObservation");  
-		
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
