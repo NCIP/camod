@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.14 2005-11-28 13:50:47 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.15 2005-12-29 18:29:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/28 13:50:47  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.13  2005/11/18 22:50:02  georgeda
  * Defect #184.  Cleanup editing of old models
  *
@@ -109,7 +112,6 @@ public class TherapyPopulateAction extends BaseAction {
 			// Therapy object attributes
 			therapyForm.setToxicityGrade(ty.getToxicityGrade());
 			therapyForm.setBiomarker(ty.getBiomarker());
-			therapyForm.setTumorResponse(ty.getTumorResponse());
 			therapyForm.setExperiment(ty.getExperiment());
 			therapyForm.setResults(ty.getResults());
 			therapyForm.setComments(ty.getComments());

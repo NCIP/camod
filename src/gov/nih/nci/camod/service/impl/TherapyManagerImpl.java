@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.18 2005-11-28 13:46:53 georgeda Exp $
+ * $Id: TherapyManagerImpl.java,v 1.19 2005-12-29 18:28:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/11/28 13:46:53  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.17  2005/11/18 22:50:02  georgeda
  * Defect #184.  Cleanup editing of old models
  *
@@ -782,7 +785,6 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
         // Therapy object attributes
         theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());
         theTherapy.setBiomarker(inTherapyData.getBiomarker());
-        theTherapy.setTumorResponse(inTherapyData.getTumorResponse() + " " + inTherapyData.getTumorAgeUnit());
         theTherapy.setExperiment(inTherapyData.getExperiment());
         theTherapy.setResults(inTherapyData.getResults());
         theTherapy.setComments(inTherapyData.getComments());
