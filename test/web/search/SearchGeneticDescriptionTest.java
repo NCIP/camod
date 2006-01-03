@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchGeneticDescriptionTest.java,v 1.7 2005-12-29 20:13:20 pandyas Exp $
+ * $Id: SearchGeneticDescriptionTest.java,v 1.8 2006-01-03 17:36:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/12/29 20:13:20  pandyas
+ * Removed disabled="true" for methodOfObservation, disable done in javascript
+ *
  * Revision 1.6  2005/12/29 19:44:55  pandyas
  * Fixed Defect# 325:  Spontaneous Mutation does not show up in search under Genetic Description unless other GD is entered and modified unit test.
  *
@@ -20,7 +23,7 @@
 
 package web.search;
 
-//import gov.nih.nci.camod.webapp.form.AssociatedExpressionForm;
+import gov.nih.nci.camod.webapp.form.AssociatedExpressionForm;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm;
 import gov.nih.nci.camod.webapp.form.GenomicSegmentForm;
 import gov.nih.nci.camod.webapp.form.InducedMutationForm;
@@ -115,33 +118,33 @@ public class SearchGeneticDescriptionTest extends BaseModelNeededTest {
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 		
 		
-		/* Adding Associated Expression to Engineered Transgene  
+		/* Adding Associated Expression to Engineered Transgene  		*/
 		navigateToModelForEditing(myModelName);
 
-		// Adding Engineered Transgene
+		// Adding Assoc Expression
 		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
 				"Enter Assoc Expression");
 		assertNotNull("Unable to find link to enter an Assoc Expression", theLink);
 		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Organ / Tissue:");
+		assertCurrentPageContains("Expression Level:");
 		theWebForm = theCurrentPage.getFormWithName("associatedExpressionForm");
 
 		AssociatedExpressionForm theAEForm = new AssociatedExpressionForm();
-		theAEForm.setOrganTissueCode("C22498");
 		theAEForm.setOrgan("Heart");
 		theAEForm.setOrganTissueName("Heart");		
+		theAEForm.setOrganTissueCode("C22498");
 
-		// Add parameters found on submit screen but not displayed on search screen  
-		theParamsToSkip = new ArrayList();
-		
+		/* Add parameters found on submit screen but not displayed on search screen  */
+		theParamsToSkip = new ArrayList();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
+		theParamsToSkip.add("aEngineeredTransgeneID");
 		
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
+		TestUtil.setRandomValues(theAEForm, theWebForm, false);
+		TestUtil.setValuesOnForm(theAEForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		
 		assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
 
@@ -150,7 +153,7 @@ public class SearchGeneticDescriptionTest extends BaseModelNeededTest {
 		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
 		
 		verifyValuesOnPage(theWebForm, theParamsToSkip);		
-		*/
+
 		
 	}
 	

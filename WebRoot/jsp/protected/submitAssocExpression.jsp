@@ -80,7 +80,7 @@
 		<td class="formField">
 			<html:hidden property="organTissueCode" name="formdata" />
 			<html:hidden property="organTissueName" name="formdata" />			
-			<html:text styleClass="formFieldSized"  disabled="true" property="organ" size="30" name="formdata"/>
+			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30" name="formdata"/>
 			
 		</td>
 	</tr>
