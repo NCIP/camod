@@ -57,7 +57,7 @@
 	
         <tr>
             <td class="formRequiredNotice" width="5">&nbsp;</td>
-            <td class="formLabel">Stock#:
+            <td class="formLabel">Stock Number:
             <camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
             </td>
 			<td class="formField">
