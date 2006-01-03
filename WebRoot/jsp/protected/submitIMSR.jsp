@@ -25,6 +25,8 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="name">
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -47,8 +49,7 @@
 			<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
 			<camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
-			<td class="formField">
-			<html:form action="<%= actionName %>" focus="name">
+			<td class="formField">			
 			<html:hidden property="source" />		
 				<html:text styleClass="formFieldUnSized" size="40" property="name" />
 			</td>

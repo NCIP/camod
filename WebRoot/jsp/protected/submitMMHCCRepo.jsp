@@ -25,6 +25,8 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="name">
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -39,8 +41,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Available from  MMHCC Repository </td>
-			<html:form action="<%= actionName %>" focus="name">		
+		<td class="formTitle" height="20" colspan="3">Available from  MMHCC Repository </td>					
 	</tr>
 	
 	<tr>
