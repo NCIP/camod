@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchXenograftTest.java,v 1.4 2005-12-21 22:04:14 pandyas Exp $
+ * $Id: SearchXenograftTest.java,v 1.5 2006-01-03 20:56:58 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/12/21 22:04:14  pandyas
+ * commented out debug line
+ *
  * Revision 1.3  2005/12/21 21:35:23  pandyas
  * Added test for "Other" dropdown options
  *
@@ -76,7 +79,7 @@ public class SearchXenograftTest extends BaseModelNeededTest {
         theForm.setCellAmount("10");
         
 		List theParamsToIgnore = new ArrayList();
-		//textarea fails - investigate if needed
+		//TODO - remove disabled=true but keep disabled until geneticManipulation is entered
 		theParamsToIgnore.add("modificationDescription");
 		
 		// Add parameters found on submit screen but not displayed on search screen  */
