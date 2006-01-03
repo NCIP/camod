@@ -35,9 +35,8 @@ public class SearchModelCharacteristicsTest extends BaseModelNeededTest {
 	}
 
 	protected void tearDown() throws Exception {
-		//Can not delete model section
-        //deleteModel();
-        //logoutOfApplication();
+        deleteModel();
+        logoutOfApplication();
 	}
 	
     public static Test suite() {
@@ -45,7 +44,11 @@ public class SearchModelCharacteristicsTest extends BaseModelNeededTest {
         return suite;
     }
     
-	public void testEditModelCharacteristics() throws Exception {
+    /* This includes the test for Model Characteristics and Jackson Lab
+     * Animal Availability
+     */ 
+    
+	public void testSearchForModelCharacteristics() throws Exception {
 
 		// Adding Jackson Lab Animal Availability
 		navigateToModelForEditing(myModelName);
@@ -53,22 +56,19 @@ public class SearchModelCharacteristicsTest extends BaseModelNeededTest {
 		// Adding a Animal Availability
 		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
 				"Available from Jackson Lab.");
-		assertNotNull("Unable to find link to enter a Jackson Lab", theLink);		
+		assertNotNull("Unable to find link to enter a Jackson Lab Availability", theLink);		
 		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Stock#:");
+		assertCurrentPageContains("Stock Number:");
 		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
 		AvailabilityForm theForm = new AvailabilityForm();
 		theForm.setSource("Jackson Laboratory");
 		
-		List theParamsToIgnore = new ArrayList();		
-		theParamsToIgnore.add("source");		
-		
 		/* Add parameters found on submit screen but not displayed on search screen  */
 		List theParamsToSkip = new ArrayList();		
 		theParamsToSkip.add("source");		
 
-		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
+		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
@@ -105,6 +105,112 @@ public class SearchModelCharacteristicsTest extends BaseModelNeededTest {
 		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
 		
 		verifyValuesOnPage(theWebForm, theParamsToSkip);			
-	}  
+	} 
+	
+	public void testSearchForMMHCC() throws Exception {
+
+		// Adding MMHCC Animal Availability
+		navigateToModelForEditing(myModelName);
+		
+		// Adding a Animal Availability
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Available from MMHCC Repo.");
+		assertNotNull("Unable to find link to enter a MMHCC Availability", theLink);		
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("Strain Number:");
+		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+		AvailabilityForm theForm = new AvailabilityForm();
+		theForm.setSource("MMHCC Repository");
+		
+		/* Add parameters found on submit screen but not displayed on search screen  */
+		List theParamsToSkip = new ArrayList();		
+		theParamsToSkip.add("source");		
+
+		TestUtil.setRandomValues(theForm, theWebForm, false);
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+		assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
+		
+		verifyValuesOnPage(theWebForm, theParamsToSkip);
+	}
+	
+	public void testSearchForInvestigator() throws Exception {
+
+		// Adding Investigator Animal Availability
+		navigateToModelForEditing(myModelName);
+		
+		// Adding a Animal Availability
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Available from Investigator");
+		assertNotNull("Unable to find link to enter an Investigator Availability", theLink);		
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("Principal Investigator:");
+		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+		AvailabilityForm theForm = new AvailabilityForm();
+		theForm.setSource("Investigator");
+		
+		/* Add parameters found on submit screen but not displayed on search screen  */
+		List theParamsToSkip = new ArrayList();		
+		theParamsToSkip.add("source");
+		theParamsToSkip.add("stockNumber");		
+
+		TestUtil.setRandomValues(theForm, theWebForm, false);
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+		assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
+		
+		verifyValuesOnPage(theWebForm, theParamsToSkip);
+	}
+	
+	public void testSearchForIMSR() throws Exception {
+
+		// Adding IMSR Animal Availability
+		navigateToModelForEditing(myModelName);
+		
+		// Adding a Animal Availability
+		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+				"Available from IMSR");
+		assertNotNull("Unable to find link to enter a IMSR Availability", theLink);		
+		WebResponse theCurrentPage = theLink.click();
+		assertCurrentPageContains("Stock Number:");
+		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+		AvailabilityForm theForm = new AvailabilityForm();
+		theForm.setSource("IMSR");
+		
+		/* Add parameters found on submit screen but not displayed on search screen  */
+		List theParamsToSkip = new ArrayList();		
+		theParamsToSkip.add("source");		
+
+		TestUtil.setRandomValues(theForm, theWebForm, false);
+		TestUtil.setValuesOnForm(theForm, theWebForm);
+		
+		theCurrentPage = theWebForm.submit();
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+		assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+		TestUtil.moveModelToEditedApproved(myModelName);
+
+		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
+		
+		verifyValuesOnPage(theWebForm, theParamsToSkip);
+	}	
 
 }
