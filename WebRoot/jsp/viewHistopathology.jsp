@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2005/12/05 17:48:31  schroedn
+ * Defect #251 - Changed 'Comments' to 'Comment' throughout entire page
+ *
  * Revision 1.25  2005/11/30 17:36:11  pandyas
  * Defect #233: Modified field labels according to instructions
  *
@@ -20,7 +23,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.26 2005-12-05 17:48:31 schroedn Exp $
+ * $Id: viewHistopathology.jsp,v 1.27 2006-01-04 21:30:54 georgeda Exp $
  *
  */   
 %>
@@ -41,10 +44,10 @@
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
-			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<TABLE summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<td class="formTitle" height="20" >
+				<td class="formTitle" height="20" width="100%">
 				Histopathology - Model:
 				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 				</td>				
@@ -55,23 +58,64 @@
 	System.out.println("Histopathology rowCount==>" + cc);
 %>
 		<% if ( cc > 0 ) { %>
-		    <c:forEach var="h" items="${hpColl}" varStatus="histstat">
-			    <tr>
-			  	    <td class="resultsBoxWhiteNoBottom" align="left">
-						<a href="<c:out value="#histo_${histstat.count}"/>">
-							<c:out value="${h.organ.EVSPreferredDescription}"/>
-						</a>&nbsp;
-						<bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
-						<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
-							<br>&nbsp;&nbsp;-&nbsp;
-							<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
-								<c:out value="${m.organ.EVSPreferredDescription}"/>
-							</a>(Metastasis)
-						</c:forEach>
-	                    <br>
-				    </td>			
-			    </tr>
-			</c:forEach>
+		    <tr>
+		        <td>
+				    <table summary="" cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+					    <tr>
+						    <td class="formTitleBlue" height="20" width="50%">
+								Organ / Tissue
+							</td>	
+							<td class="formTitleBlue" height="20" width="50%">
+								Diagnosis
+							</td>	
+						</tr>
+					</table>
+				</td>
+		    </tr>
+		    <tr>
+			  	<td class="resultsBoxWhiteNoBottom" width="100%" align="left">
+                    <table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
+			            <c:forEach var="h" items="${hpColl}" varStatus="histstat">
+				  	        <tr>
+					  	        <td width="50%">
+									<a href="<c:out value="#histo_${histstat.count}"/>">
+										<c:out value="${h.organ.EVSPreferredDescription}"/>
+									</a>
+								</td>
+								<td width="50%">
+									<c:if test="${not empty h.diseaseCollection}">
+									    
+									    <c:forEach var="disease" items="${h.diseaseCollection}">
+										    <c:out value="${disease.EVSPreferredDescription}"/>
+										</c:forEach>
+									</c:if>
+							    </td>
+						    </tr>
+						    
+							<bean:define id="mtsColl" name="h" property="metastatisCollectionSorted"/>
+							
+							<c:forEach var="m" items="${mtsColl}" varStatus="metastat">
+							    <tr>
+								    <td width="50%">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
+										<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
+											<c:out value="${m.organ.EVSPreferredDescription}"/>
+										</a>(Metastasis)
+									</td>
+									<td width="50%">
+									    <c:if test="${not empty m.diseaseCollection}">
+										    <c:forEach var="disease" items="${m.diseaseCollection}">
+											    <c:out value="${disease.EVSPreferredDescription}"/>
+											</c:forEach>
+										</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+				        </c:forEach>
+			        </table>
+				</td>
+			</tr>
+			
 			<tr><td class="resultsBoxWhiteOnlyTop">&nbsp;</td></tr>
 			<br>
 		</TABLE>	
