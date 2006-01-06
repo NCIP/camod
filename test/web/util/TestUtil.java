@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TestUtil.java,v 1.4 2005-12-20 15:54:30 pandyas Exp $
+ * $Id: TestUtil.java,v 1.5 2006-01-06 16:11:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/12/20 15:54:30  pandyas
+ * Added method getTextOnPage:  To capture failed validation text during  debugging
+ *
  * Revision 1.3  2005/12/13 20:28:16  pandyas
  * Modified inForm.setParameterValue() to use inForm.getScriptableObject().setParameterValue() instead
  *
@@ -21,6 +24,7 @@ import gov.nih.nci.security.junk.RandomIntGenerator;
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +41,13 @@ public class TestUtil {
     static protected WebConversation myWebConversation = new WebConversation();    
 
     static private RandomIntGenerator ourRandomIntGenerator = new RandomIntGenerator(10, 20);
+    
+    static protected Map pairList = new HashMap();
+    
+    public static Map getMap(){
+    	
+    	return pairList;
+    }
 
     public static void moveModelToEditedApproved(String inModelName) throws Exception {
         AnimalModel theQBEAnimalModel = new AnimalModel();
@@ -61,7 +72,7 @@ public class TestUtil {
     public static void setRandomValues(Object inDataObject, WebForm inForm, boolean setOtherValues,
             List inParamsToIgnore) throws Exception {
     	
-    	System.out.println("<TestUtil> Entered setRandomValues");    	
+    	System.out.println("\n<TestUtil> Entered setRandomValues");    	
 
         Map theBeanProps = PropertyUtils.describe(inDataObject);
         Iterator theProperties = theBeanProps.entrySet().iterator();
@@ -90,22 +101,24 @@ public class TestUtil {
                         String[] theOptions = inForm.getOptionValues(thePropertyName);
 
                         if (theOptions.length > 0) {
-                        	System.out.println("This property is a collection: " + thePropertyName);
+                        	//System.out.println("This property is a collection: " + thePropertyName);
                             if (Arrays.asList(theOptions).contains(Constants.Dropdowns.OTHER_OPTION)
                                     && setOtherValues == true) {
                                 BeanUtils.setProperty(inDataObject, thePropertyName, Constants.Dropdowns.OTHER_OPTION);
-                                System.out.println("This property is assigned the value other: " + thePropertyName);
+                                System.out.println("PropertyName: " + thePropertyName + "PropertyValue:" + Constants.Dropdowns.OTHER_OPTION);
                             } else {
-                                BeanUtils.setProperty(inDataObject, thePropertyName, theOptions[theOptions.length - 1]);
-                                System.out.println("setting random value to " + thePropertyName);
+                            	String newOption = theOptions[theOptions.length - 1];
+                                BeanUtils.setProperty(inDataObject, thePropertyName, newOption);
+                                System.out.println("PropertyName: " + thePropertyName + "PropertyValue:" + newOption);
                             }
                         } else {
 
                             // If we're not setting the other option, skip these
                             if (thePropertyName.indexOf("other") == -1 || setOtherValues == true) {
-                            	System.out.println("This property is not a collection and randomly set: " + thePropertyName);
-                                BeanUtils.setProperty(inDataObject, thePropertyName, GUIDGenerator.getInstance()
-                                        .genNewGuid());
+                            	String newRandomValue = GUIDGenerator.getInstance().genNewGuid();                            	
+                                BeanUtils.setProperty(inDataObject, thePropertyName, newRandomValue);
+                                System.out.println("The PropertyName: " + thePropertyName + "\t The PropertyValue: "
+                                		+ newRandomValue);
                             }
                         }
                     } else if (thePropertyDescriptor.getPropertyType().getName().equals("java.lang.Long")) {
@@ -118,7 +131,7 @@ public class TestUtil {
                 }
             }
         }
-    	System.out.println("<TestUtil> Exiting setRandomValues");
+    	System.out.println("<TestUtil> Exiting setRandomValues\n");
     }
     
     public static void setRandomValues(Object inDataObject, WebForm inForm, boolean setOtherValues) 
@@ -146,15 +159,22 @@ public class TestUtil {
                 Object thePropertyValue = theEntry.getValue();
 
                 if (thePropertyValue != null && inForm.hasParameterNamed(thePropertyName)) {
-
                     System.out.println("Setting value: " + thePropertyName + " to " + thePropertyValue.toString());
-                    //inForm.setParameter(thePropertyName, thePropertyValue.toString());
                     inForm.getScriptableObject().setParameterValue(thePropertyName, thePropertyValue.toString());
+                    //WebForm savedForm = new WebForm;
+                    savePropertyNameValue(thePropertyName, thePropertyValue.toString());
                 }
             }
         }
-        
+        //Save ParameterName and ParameterValue to copare during populate testing
+
     	System.out.println("<TestUtil> Exited setValuesOnForm");        
+    }
+    
+    public static void savePropertyNameValue(String inPropertyName, String inPropertyValue){
+    	pairList.put(inPropertyName, inPropertyValue);
+    	System.out.println("Added Property:" + inPropertyName + " and Value: "+  inPropertyValue + " to map");
+    	System.out.println("pairList.size():" + pairList.size());
     }
     /*
      * This simple method is used to capture text on a page.

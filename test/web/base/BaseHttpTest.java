@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.5 2005-12-14 15:23:28 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.6 2006-01-06 16:11:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/12/14 15:23:28  pandyas
+ * took out search for pubID - not callled anywhere
+ *
  * Revision 1.4  2005/12/13 19:17:38  pandyas
  * Modified to ignore values on submit page but not on display page
  *
@@ -11,13 +14,11 @@
 package web.base;
 
 import gov.nih.nci.camod.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import web.util.TestUtil;
 import junit.framework.TestCase;
-
 import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
 import com.meterware.httpunit.WebForm;
@@ -182,11 +183,10 @@ public class BaseHttpTest extends TestCase {
 
                 theModelId = thePageText.substring(0, theEndingQuoteIndex);
             } else {
-                throw new Exception("Cannot find text " + Constants.Parameters.MODELID
-                        + " between starting and ending strings: " + inStartText + " , " + inEndText);
+                throw new Exception("Cannot find ModelID between starting string: " + inStartText + "and endingstring: " + inEndText);
             }
         } else {
-            throw new Exception("Unable to locate text with starting and ending strings: " + inStartText + " , "
+            throw new Exception("Unable to locate text with starting string: " + inStartText + " and ending string: "
                     + inEndText);
         }
 
@@ -196,26 +196,30 @@ public class BaseHttpTest extends TestCase {
     
 
     protected void verifyValuesOnPage(WebForm inForm, List inIgnoreList) throws Exception {
+    	
+    	System.out.println("\nEntered verifyValuesOnPage(): ");
 
         String[] theParameters = inForm.getParameterNames();
-
-        for (int i = 0; i < theParameters.length; i++) {
-        	
+        System.out.println("The number of parameters from the form: " + theParameters.length);
+        
+        for (int i = 0; i < theParameters.length; i++) {       	
 
             String theParameterName = theParameters[i];
-            System.out.println("The theParameterName" + theParameterName);
             
             if(!inIgnoreList.contains(theParameterName)){
 
             	if (!theParameterName.equals("method") && !theParameterName.equals("unprotected_method")) {
             		String theParameterValue = inForm.getParameterValue(theParameterName);
-
+            		System.out.println("ParameterName: " + theParameterName + "\t ParameterValue: " + theParameterValue);
+            		
             		if (!Constants.Dropdowns.OTHER_OPTION.equals(theParameterValue) && theParameterValue !=null) {
+                		System.out.println("ParameterName: " + theParameterName + "\t ParameterValue: " + theParameterValue);            			
             			assertCurrentPageContains(theParameterValue);
             		}
             	}
             }
         }
+    	System.out.println("Exited verifyValuesOnPage(): \n");        
     }
 
     
@@ -223,5 +227,38 @@ public class BaseHttpTest extends TestCase {
     	verifyValuesOnPage(inForm, new ArrayList());    	
     }
     
+    protected void verifyValuesOnPopulatePage(WebForm inForm) throws Exception {
+    	verifyValuesOnPopulatePage(inForm, new ArrayList());    	
+    }    
     
+    protected void verifyValuesOnPopulatePage(WebForm inForm, List inIgnoreList) throws Exception {
+    	
+    	System.out.println("\nEntered verifyValuesOnPopulatePage: ");
+    	
+        String[] theParameters = inForm.getParameterNames();
+       
+        for (int i = 0; i < theParameters.length; i++) {       	
+
+            String theParameterName = theParameters[i];
+            
+            System.out.println("ParameterName(Form): " + theParameterName + "\t ParameterValue: " + inForm.getParameterValue(theParameterName));               
+            
+            if(!inIgnoreList.contains(theParameterName) ){
+            	
+            	if (!theParameterName.equals("method") && !theParameterName.equals("unprotected_method")) {
+            		
+            		String theParameterValue = TestUtil.getMap().get(theParameterName).toString();
+
+            		System.out.println("ParameterName(Map): " + theParameterName + "\t ParameterValue: " + theParameterValue);
+            		
+            		if (!Constants.Dropdowns.OTHER_OPTION.equals(theParameterValue) && theParameterValue !=null) {
+                		         			
+            			assertCurrentPageContains(theParameterValue);
+      		
+            		}
+            	}
+            }
+        }
+    	System.out.println("Exited verifyValuesOnPopulatePage: \n");        
+    }
 }
