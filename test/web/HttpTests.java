@@ -42,9 +42,12 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: HttpTests.java,v 1.4 2006-01-06 17:18:52 pandyas Exp $
+ * $Id: HttpTests.java,v 1.5 2006-01-06 17:20:50 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/01/06 17:18:52  pandyas
+ * Modified names for Search tests to include "Populate"
+ *
  * Revision 1.3  2006/01/06 16:09:32  pandyas
  * Modified names for Search tests to include "Populate"
  *
@@ -92,9 +95,9 @@ public class HttpTests
         // Search tests
         suite.addTest(SearchPopulateCellLinesTest.suite());
         suite.addTest(SearchPopulateCITest.suite());
-        suite.addTest(SearchPopulateModelCharacteristicsTest.suite());        
         suite.addTest(SearchGeneticDescriptionTest.suite());
         suite.addTest(SearchHistopathologyTest.suite());
+        suite.addTest(SearchPopulateModelCharacteristicsTest.suite());        
         suite.addTest(SearchPopulatePublicationTest.suite());
         suite.addTest(SearchPopulateTherapyTest.suite());
         suite.addTest(SearchPopulateXenograftTest.suite());
