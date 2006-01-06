@@ -42,9 +42,12 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: HttpTests.java,v 1.2 2005-12-28 16:42:19 georgeda Exp $
+ * $Id: HttpTests.java,v 1.3 2006-01-06 16:09:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/28 16:42:19  georgeda
+ * Changes for testing
+ *
  * Revision 1.1  2005/12/27 15:04:33  georgeda
  * Test cleanup
  *
@@ -53,13 +56,13 @@ package web;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import web.search.SearchCITest;
-import web.search.SearchCellLinesTest;
+import web.search.SearchPopulateCITest;
+import web.search.SearchPopulateCellLinesTest;
 import web.search.SearchGeneticDescriptionTest;
 import web.search.SearchHistopathologyTest;
-import web.search.SearchPublicationTest;
-import web.search.SearchTherapyTest;
-import web.search.SearchXenograftTest;
+import web.search.SearchPopulatePublicationTest;
+import web.search.SearchPopulateTherapyTest;
+import web.search.SearchPopulateXenograftTest;
 import web.submission.EditModelCharacteristicsTest;
 import web.submission.SubmitCITest;
 import web.submission.SubmitEditDeleteCellLinesTest;
@@ -83,13 +86,13 @@ public class HttpTests
         // Please keep them ordered
         
         // Search tests
-        suite.addTest(SearchCellLinesTest.suite());
-        suite.addTest(SearchCITest.suite());
+        suite.addTest(SearchPopulateCellLinesTest.suite());
+        suite.addTest(SearchPopulateCITest.suite());
         suite.addTest(SearchGeneticDescriptionTest.suite());
         suite.addTest(SearchHistopathologyTest.suite());
-        suite.addTest(SearchPublicationTest.suite());
-        suite.addTest(SearchTherapyTest.suite());
-        suite.addTest(SearchXenograftTest.suite());
+        suite.addTest(SearchPopulatePublicationTest.suite());
+        suite.addTest(SearchPopulateTherapyTest.suite());
+        suite.addTest(SearchPopulateXenograftTest.suite());
         
         // Submission tests
         suite.addTest(EditModelCharacteristicsTest.suite());
