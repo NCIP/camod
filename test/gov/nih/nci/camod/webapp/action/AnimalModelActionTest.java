@@ -8,16 +8,6 @@
 package gov.nih.nci.camod.webapp.action;
 
 import junit.framework.*;
-import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.CurationManager;
-import gov.nih.nci.camod.service.impl.CurationManagerImpl;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
-import java.util.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.*;
 import servletunit.struts.*;
 
 /**
