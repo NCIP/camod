@@ -26,6 +26,8 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="name">
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -50,8 +52,6 @@
 		<br>
 		<label for="field3">(if Virus is not listed, then please<br>select "Other" from the list and specify it below)</label>
 		<br><br>
-			<html:form action="<%= actionName %>" focus="name">			 
-			
 			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName( this );">												
 				<html:options name="<%= Dropdowns.VIRUSDROP %>"/>					
 			</html:select>	
