@@ -42,9 +42,12 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: HttpTests.java,v 1.5 2006-01-06 17:20:50 pandyas Exp $
+ * $Id: HttpTests.java,v 1.6 2006-01-09 16:36:24 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/01/06 17:20:50  pandyas
+ * reordered search test list
+ *
  * Revision 1.4  2006/01/06 17:18:52  pandyas
  * Modified names for Search tests to include "Populate"
  *
@@ -62,24 +65,9 @@ package web;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import web.search.SearchPopulateCITest;
-import web.search.SearchPopulateCellLinesTest;
-import web.search.SearchGeneticDescriptionTest;
-import web.search.SearchHistopathologyTest;
-import web.search.SearchPopulateModelCharacteristicsTest;
-import web.search.SearchPopulatePublicationTest;
-import web.search.SearchPopulateTherapyTest;
-import web.search.SearchPopulateXenograftTest;
-import web.submission.EditModelCharacteristicsTest;
-import web.submission.SubmitCITest;
-import web.submission.SubmitEditDeleteCellLinesTest;
-import web.submission.SubmitEditDeleteHistopathologyTest;
-import web.submission.SubmitEditDeleteImageTest;
-import web.submission.SubmitEditDeleteModelAvailabilityTest;
-import web.submission.SubmitEditDeletePublicationTest;
-import web.submission.SubmitEditDeleteTherapyTest;
-import web.submission.SubmitGDTest;
-import web.submission.SubmitPageTest;
+import web.search.*;
+import web.submission.*;
+
 
 /**
  * @author georgeda
@@ -95,8 +83,8 @@ public class HttpTests
         // Search tests
         suite.addTest(SearchPopulateCellLinesTest.suite());
         suite.addTest(SearchPopulateCITest.suite());
-        suite.addTest(SearchGeneticDescriptionTest.suite());
-        suite.addTest(SearchHistopathologyTest.suite());
+        suite.addTest(SearchPopulateGeneticDescriptionTest.suite());
+        suite.addTest(SearchPopulateHistopathologyTest.suite());
         suite.addTest(SearchPopulateModelCharacteristicsTest.suite());        
         suite.addTest(SearchPopulatePublicationTest.suite());
         suite.addTest(SearchPopulateTherapyTest.suite());
