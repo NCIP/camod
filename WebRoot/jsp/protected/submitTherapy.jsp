@@ -32,11 +32,6 @@ function unselectAll()
     unselect(document.forms[0].selectedTargets);
 }
 
-function chkOtherAdminRoute() {
-    chkOther(document.forms[0].administrativeRoute, 
-             document.forms[0].otherAdministrativeRoute);
-}
-
 </SCRIPT>
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
@@ -54,6 +49,8 @@ function chkOtherAdminRoute() {
 	    aTherapyID = "";
 	}
 %>
+
+<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">
 
 <script language="JavaScript" src="scripts/initIt.js"></script>
 
@@ -82,8 +79,6 @@ function chkOtherAdminRoute() {
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Drug / Compound Name:</label></td>
 		<td class="formField">
-			<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">			 
-			
 			<html:text styleClass="formFieldSized" size="30" property="name" />	
 		</td>
 	</tr>
