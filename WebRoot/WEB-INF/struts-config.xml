@@ -1736,7 +1736,8 @@
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
             scope="request" 
             parameter="method"
-            validate="false" >            
+            validate="false" >
+        <set-property property="secure" value="false" />     
     </action>  
       
     <action path="/DeleteAnimalModelAction"
