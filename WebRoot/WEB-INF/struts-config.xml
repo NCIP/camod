@@ -234,7 +234,7 @@
 		
 		<forward
 			name="login" 
-			path="/jsp/login.jsp"></forward>
+			path="/login.do"></forward>
 		
 		<forward
 			name="viewLicense"
@@ -555,465 +555,566 @@
 		<action
 			path="/adminUserSettings"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminUserSettings.jsp" />
-
+			parameter="/jsp/protected/adminUserSettings.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/adminUserSettingsSent"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminUserSettingsSent.jsp" />
-			
+			parameter="/jsp/protected/adminUserSettingsSent.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/adminRoles"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminRoles.jsp" />
-
+			parameter="/jsp/protected/adminRoles.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/adminCommentsAssignment"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminCommentsAssignment.jsp" />
-
+			parameter="/jsp/protected/adminCommentsAssignment.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/adminEditModels"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminEditModels.jsp" />
-			
+			parameter="/jsp/protected/adminEditModels.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/adminModelsAssignment"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminModelsAssignment.jsp" />
-
+			parameter="/jsp/protected/adminModelsAssignment.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/adminRolesAssignment"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminRolesAssignment.jsp" />
-
+			parameter="/jsp/protected/adminRolesAssignment.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/adminEditUserRoles"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminEditUserRoles.jsp" />
-
+			parameter="/jsp/protected/adminEditUserRoles.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/adminEditUser"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminEditUser.jsp" />
-						
+			parameter="/jsp/protected/adminEditUser.jsp">
+			<set-property property="secure" value="false"/>
+		</action>				
 		<action
 			path="/adminUserManagement"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/adminUserManagement.jsp" />
-			
+			parameter="/jsp/protected/adminUserManagement.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/viewLizardImage"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/viewLizardImage.jsp" />
-			
+			parameter="/jsp/viewLizardImage.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/searchAdvanced"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchAdvanced.jsp" />
-			
+			parameter="/jsp/searchAdvanced.jsp">
+			<set-property property="secure" value="false"/>
+		</action>	
 		<action
 			path="/searchSimple"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchSimple.jsp" />
-			
+			parameter="/jsp/searchSimple.jsp">
+			<set-property property="secure" value="false"/>
+		</action>	
 		<action
 			path="/subAdminMenu"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/subAdminMenu.jsp" />
-		
+			parameter="/jsp/protected/subAdminMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/subSubmitMenu"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/subSubmitMenu.jsp" />
-		
+			parameter="/jsp/protected/subSubmitMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitAssocExpression"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitAssocExpression.jsp" />
-		
+			parameter="/jsp/protected/submitAssocExpression.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitAssocMetastasis"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitAssocMetastasis.jsp" />
-		
+			parameter="/jsp/protected/submitAssocMetastasis.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitCellLines"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitCellLines.jsp" />
-		
+			parameter="/jsp/protected/submitCellLines.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitChangeCommentState"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitChangeCommentState.jsp" />
-
+			parameter="/jsp/protected/submitChangeCommentState.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/submitChangeAnimalModelState"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitChangeAnimalModelState.jsp" />
-						
+			parameter="/jsp/protected/submitChangeAnimalModelState.jsp">
+			<set-property property="secure" value="false"/>
+		</action>				
 		<action
 			path="/submitComment"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitComment.jsp" />
-			
+			parameter="/jsp/protected/submitComment.jsp">
+			<set-property property="secure" value="false"/>
+		</action>	
 		<action
 			path="/submitChemicalDrug"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitChemicalDrug.jsp" />
-		
+			parameter="/jsp/protected/submitChemicalDrug.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitClinicalMarkers"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitClinicalMarkers.jsp" />
-		
+			parameter="/jsp/protected/submitClinicalMarkers.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitEngineeredTransgene"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitEngineeredTransgene.jsp" />
-		
+			parameter="/jsp/protected/submitEngineeredTransgene.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitEnvironmentalFactors"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitEnvironmentalFactors.jsp" />
-		
+			parameter="/jsp/protected/submitEnvironmentalFactors.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitGeneDelivery"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitGeneDelivery.jsp" />
-		
+			parameter="/jsp/protected/submitGeneDelivery.jsp">
+			<set-property property="secure" value="false"/>
+		</action>	
+		<action
+			path="/loginRedirect"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/loginRedirect.jsp">
+			<set-property property="secure" value="true"/>
+		</action>
+			
 		<action
 			path="/submitGenomicSegment"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitGenomicSegment.jsp" />
-		
+			parameter="/jsp/protected/submitGenomicSegment.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitGrowthFactors"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitGrowthFactors.jsp" />
-		
+			parameter="/jsp/protected/submitGrowthFactors.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitHistopathology"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitHistopathology.jsp" />
-		
+			parameter="/jsp/protected/submitHistopathology.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitHormone"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitHormone.jsp" />
-			
+			parameter="/jsp/protected/submitHormone.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitImages"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitImages.jsp" />
-		
+			parameter="/jsp/protected/submitImages.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitInducedMutation"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitInducedMutation.jsp" />
-			
+			parameter="/jsp/protected/submitInducedMutation.jsp">
+			<set-property property="secure" value="false"/>
+		</action>	
 		<action
 			path="/submitInvestigator"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitInvestigator.jsp" />
-		
+			parameter="/jsp/protected/submitInvestigator.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitJacksonLab"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitJacksonLab.jsp" />
-		
+			parameter="/jsp/protected/submitJacksonLab.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitMMHCCRepo"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitMMHCCRepo.jsp" />
-			
+			parameter="/jsp/protected/submitMMHCCRepo.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitIMSR"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitIMSR.jsp" />
-
+			parameter="/jsp/protected/submitIMSR.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/submitMenu"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitMenu.jsp" />
-		
+			parameter="/jsp/protected/submitMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitMicroarrayData"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitMicroarrayData.jsp" />
-		
+			parameter="/jsp/protected/submitMicroarrayData.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitModelCharacteristics"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitModelCharacteristics.jsp" />
-		
+			parameter="/jsp/protected/submitModelCharacteristics.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitModels"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitModels.jsp" />
-		
+			parameter="/jsp/protected/submitModels.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitNewModel"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitNewModel.jsp" />
-		
+			parameter="/jsp/protected/submitNewModel.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitNutritionalFactors"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitNutritionalFactors.jsp" />
-		
+			parameter="/jsp/protected/submitNutritionalFactors.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitOtherPublications"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitOtherPublications.jsp" />
-		
+			parameter="/jsp/protected/submitOtherPublications.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitOverview"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitOverview.jsp" />
-		
+			parameter="/jsp/protected/submitOverview.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitPublications"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitPublications.jsp" />
-		
+			parameter="/jsp/protected/submitPublications.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitRadiation"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitRadiation.jsp" />
-		
+			parameter="/jsp/protected/submitRadiation.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitSpontaneousMutation"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitSpontaneousMutation.jsp" />
-		
+			parameter="/jsp/protected/submitSpontaneousMutation.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitSurgeryOther"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitSurgeryOther.jsp" />
-		
+			parameter="/jsp/protected/submitSurgeryOther.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitTargetedModification"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitTargetedModification.jsp" />
-		
+			parameter="/jsp/protected/submitTargetedModification.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitTherapy"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitTherapy.jsp" />
-		
+			parameter="/jsp/protected/submitTherapy.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitTransplantXenograft"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitTransplantXenograft.jsp" />
-		
+			parameter="/jsp/protected/submitTransplantXenograft.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/submitViralTreatment"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitViralTreatment.jsp" />
-		
+			parameter="/jsp/protected/submitViralTreatment.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/error"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/error.jsp" />
-		
+			parameter="/jsp/error.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/footer"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/footer.jsp" />
-		
+			parameter="/jsp/footer.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/header"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/header.jsp" />
-		
+			parameter="/jsp/header.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/help"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/help.jsp" />
-		
+			parameter="/jsp/help.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/helpAdmin"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/helpAdmin.jsp" />
-		
+			parameter="/jsp/helpAdmin.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/helpDesk"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/helpDesk.jsp" />
-		
+			parameter="/jsp/helpDesk.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/helpSearching"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/helpSearching.jsp" />
-		
+			parameter="/jsp/helpSearching.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/helpSubmission"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/helpSubmission.jsp" />
-		
+			parameter="/jsp/helpSubmission.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/index"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/index.jsp" />
-		
+			parameter="/jsp/index.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/infoAccessibility"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/infoAccessibility.jsp" />
-		
+			parameter="/jsp/infoAccessibility.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/infoApplicationSupport"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/infoApplicationSupport.jsp" />
-		
+			parameter="/jsp/infoApplicationSupport.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/infoContactUs"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/infoContactUs.jsp" />
-		
+			parameter="/jsp/infoContactUs.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/infoDisclaimer"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/infoDisclaimer.jsp" />
-		
+			parameter="/jsp/infoDisclaimer.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/infoPrivacyNotice"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/infoPrivacyNotice.jsp" />
-		
+			parameter="/jsp/infoPrivacyNotice.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/infoWhatsNew"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/infoWhatsNew.jsp" />
-
+			parameter="/jsp/infoWhatsNew.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/infoReleaseNotes"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/infoReleaseNotes.jsp" />
-					
+			parameter="/jsp/infoReleaseNotes.jsp">
+			<set-property property="secure" value="false"/>
+		</action>			
 		<action
 			path="/expDesignStage0"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/expDesignStage0.jsp" />
-			
+			parameter="/jsp/expDesignStage0.jsp">
+			<set-property property="secure" value="false"/>
+		</action>	
 		<action
 			path="/expDesignStage1"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/expDesignStage1.jsp" />			
-			
+			parameter="/jsp/expDesignStage1.jsp">
+			<set-property property="secure" value="false"/>		
+		</action>	
 		<action
 			path="/expDesignStage2"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/expDesignStage2.jsp" />
-			
+			parameter="/jsp/expDesignStage2.jsp">
+			<set-property property="secure" value="false"/>
+		</action>	
 		<action
 			path="/yeastStrainsStage01"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/yeastStrainsStage01.jsp" />						
-			
+			parameter="/jsp/yeastStrainsStage01.jsp">
+			<set-property property="secure" value="false"/>						
+		</action>	
 		<action
 			path="/yeastStrainsStage2"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/yeastStrainsStage2.jsp" />			
+			parameter="/jsp/yeastStrainsStage2.jsp">
+			<set-property property="secure" value="false"/>
+		</action>		
 		
 		<action
 			path="/loggedOut"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/loggedOut.jsp" />
-		
+			parameter="/jsp/loggedOut.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/login"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/login.jsp">
+			<set-property property="secure" value="true"/>
 		</action>
 		
 		<action
 			path="/loginMenu"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/loginMenu.jsp" />
-		
+			parameter="/jsp/loginMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/loginSuccess"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/loginSuccess.jsp" />
-		
+			parameter="/jsp/loginSuccess.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/protected"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected" />
-		
+			parameter="/jsp/protected">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/register"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/register.jsp" />
-		
+			parameter="/jsp/register.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/registerSuccess"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/registerSuccess.jsp" />
-		
+			parameter="/jsp/registerSuccess.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/registerUserPass"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/registerUserPass.jsp" />
-		
+			parameter="/jsp/registerUserPass.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/searchAdvanced"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchAdvanced.jsp" />
-		
+			parameter="/jsp/searchAdvanced.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/searchMenu"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchMenu.jsp" />
-		
+			parameter="/jsp/searchMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/searchResults"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchResults.jsp" />
-		
+			parameter="/jsp/searchResults.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/searchDrugScreening"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchDrugScreening.jsp" />
-
+			parameter="/jsp/searchDrugScreening.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
 		<action
 			path="/searchTableOfContents"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchTableOfContents.jsp" />
-		
+			parameter="/jsp/searchTableOfContents.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/sidebar"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/sidebar.jsp" />
-		
+			parameter="/jsp/sidebar.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/subSearchMenu"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/subSearchMenu.jsp" />
-		
+			parameter="/jsp/subSearchMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/subViewModelMenu"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/subViewModelMenu.jsp" />
-		
+			parameter="/jsp/subViewModelMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
 		<action
 			path="/zoomifyImage"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/zoomifyImage.jsp" />
-
+			parameter="/jsp/zoomifyImage.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
     	<action
 			path="/reload"
 			type="gov.nih.nci.camod.webapp.action.ReloadAction"
 			roles="admin"
 			unknown="false"
-			validate="false" />			
-			
+			validate="false">
+			<set-property property="secure" value="false"/>			
+		</action>	
 		<action
 			path="/searchResultsDrugScreen"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchResultsDrugScreen.jsp" />			
+			parameter="/jsp/searchResultsDrugScreen.jsp">
+			<set-property property="secure" value="false"/>
+		</action>			
 
 	<!--  search forms -->
     <action path="/SearchAdvancedAction"
@@ -1022,7 +1123,8 @@
 	        scope="session"
 	        parameter="unprotected_method" 
 	        unknown="false"
-	        validate="false">    
+	        validate="false">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="next"
             path="/searchResults.do"
@@ -1040,7 +1142,8 @@
 	        scope="session"
 	        parameter="unprotected_method" 
 	        unknown="false"
-	        validate="false">    
+	        validate="false">
+	    <set-property property="secure" value="false" />  
 	    <forward
             name="next"
             path="/searchResults.do"
@@ -1058,6 +1161,7 @@
 	        parameter="unprotected_method"
    	        unknown="false"
 	        validate="false" >
+	    <set-property property="secure" value="false" />
     </action>
     
     <!-- Note, the forwards are the same as the names in the model section table in the database --> 
@@ -1067,6 +1171,7 @@
 	        parameter="unprotected_method"
    	        unknown="false"
 	        validate="false" >
+	    <set-property property="secure" value="false" />
 	    <forward 
     		name="General Information Page"
     		path="/ViewModelAction.do?unprotected_method=populateModelCharacteristics">
@@ -1116,7 +1221,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input">  
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/AssociatedExpressionPopulateAction.do?method=dropdown">
@@ -1128,7 +1234,8 @@
     		name="associatedExpressionForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action> 
     
      <!-- AvailabilityForms -->
@@ -1139,6 +1246,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitJacksonLab.do">
@@ -1151,6 +1259,7 @@
             scope="request"
             parameter="method"            
 			validate="false">
+		 <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/submitJacksonLab.do">
@@ -1164,6 +1273,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitMMHCCRepo.do">
@@ -1176,6 +1286,7 @@
             scope="request"
             parameter="method"            
 			validate="false">
+		 <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/submitMMHCCRepo.do">
@@ -1189,6 +1300,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitInvestigator.do">
@@ -1200,7 +1312,8 @@
     		name="availabilityForm"    		
             scope="request"
             parameter="method"            
-			validate="false">	
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
     
      <action path="/IMSRAction"
@@ -1210,6 +1323,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitIMSR.do">
@@ -1222,6 +1336,7 @@
             scope="request"
             parameter="method"            
 			validate="false">
+		 <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/submitIMSR.do">
@@ -1237,6 +1352,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitCellLines.do">
@@ -1248,7 +1364,8 @@
     		name="cellLineForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>      
          
      <!-- ChemicalDrugForm -->
@@ -1258,7 +1375,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input">   	
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitChemicalDrug.do">
@@ -1270,7 +1388,8 @@
     		name="chemicalDrugForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
     
    	 <!-- ClinicalMarkerForm -->    
@@ -1280,7 +1399,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input"> 
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitClinicalMarkers.do">
@@ -1292,7 +1412,8 @@
     		name="clinicalMarkerForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />	
     </action>    
          
     <!-- EngineeredTransgeneForm -->
@@ -1303,6 +1424,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitEngineeredTransgene.do">
@@ -1314,7 +1436,8 @@
     		name="engineeredTransgeneForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action> 
     
      <!-- EnvironmentalFactorForm -->
@@ -1325,6 +1448,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitEnvironmentalFactors.do">
@@ -1336,7 +1460,8 @@
     		name="environmentalFactorForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action> 
     
      <!-- GeneDeliveryForm -->
@@ -1347,6 +1472,7 @@
 	        parameter="method"
 	        input="input"
 	        validate="true">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitGeneDelivery.do">
@@ -1358,7 +1484,8 @@
     		name="geneDeliveryForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>     
      
      <!-- GenomicSegmentForm -->
@@ -1368,8 +1495,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input"
-	        >
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitGenomicSegment.do">
@@ -1381,7 +1508,8 @@
     		name="genomicSegmentForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
      
      <!-- GrowthFactorForm -->
@@ -1392,6 +1520,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitGrowthFactors.do">
@@ -1403,7 +1532,8 @@
     		name="growthFactorForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
     
 
@@ -1415,6 +1545,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitHistopathology.do">
@@ -1427,6 +1558,7 @@
             scope="request"
             parameter="method"
 			validate="false">
+		<set-property property="secure" value="false" />
     </action>  
     
      <action path="/AssociatedMetastasisAction"
@@ -1435,7 +1567,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input"> 
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitAssocMetastasis.do">
@@ -1448,6 +1581,7 @@
             scope="request"
             parameter="method"
 			validate="false">
+		<set-property property="secure" value="false" />
     </action> 
      
    	 <!-- HormoneForm -->
@@ -1458,6 +1592,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitHormone.do">
@@ -1473,6 +1608,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitHormone.do">
@@ -1484,7 +1620,8 @@
     		name="hormoneForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
     
      <!-- ImageForm -->
@@ -1502,7 +1639,8 @@
           <forward
 	            name="success"
 	            redirect="true"
-	            path="/ReturnUserModels.do?method=returnUserModels"></forward>
+	            path="/loginRedirect.do">
+	      </forward>
           <forward 
 	            name="failure"  
 	            redirect="true"
@@ -1529,7 +1667,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input">   
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="failure"
             path="/ReturnUserModels.do?method=returnUserModels">
@@ -1545,7 +1684,8 @@
     		name="modelCharacteristicsForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
 
     <!--  Generate the list of items on the submission subMenu -->
@@ -1553,6 +1693,7 @@
 			type="gov.nih.nci.camod.webapp.action.AnimalModelTreePopulateActionSetup"
 			parameter="method"
 			validate="false">
+		<set-property property="secure" value="false" />
 		<forward
 		    redirect="true"
             name="next"
@@ -1565,6 +1706,7 @@
 			type="gov.nih.nci.camod.webapp.action.AnimalModelTreePopulateAction"
 			parameter="method"
 			validate="false">
+		<set-property property="secure" value="false" />
 		<forward
             name="next"
             path="/SubmitOverviewPopulateAction.do">
@@ -1579,6 +1721,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitModelCharacteristics.do">
@@ -1593,14 +1736,15 @@
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
             scope="request" 
             parameter="method"
-            validate="false" >                          
+            validate="false" >            
     </action>  
       
     <action path="/DeleteAnimalModelAction"
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
             scope="request"
             parameter="method"         
-            validate="false" >  
+            validate="false" >
+        <set-property property="secure" value="false" />
         <forward 
             redirect="true"
     		name="modeldeleted"
@@ -1616,7 +1760,8 @@
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
             scope="request"
             parameter="method"         
-            validate="false" >  
+            validate="false" >
+        <set-property property="secure" value="false" />
         <forward 
             redirect="true"
     		name="duplicatesuccessful"
@@ -1636,7 +1781,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input">  
+	        input="input">
+	     <set-property property="secure" value="false" />
 	     <forward
             name="input"
             path="/submitNutritionalFactors.do">
@@ -1649,6 +1795,7 @@
             scope="request"
             parameter="method"
 			validate="false">		
+        <set-property property="secure" value="false" />
     </action>
          
      <!-- PublicationForm -->
@@ -1659,6 +1806,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input"> 
+	    <set-property property="secure" value="false" />
         <forward
             name="input"
             path="/submitPublications.do">
@@ -1670,7 +1818,8 @@
     		name="publicationForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />	
     </action>
          	
      <!-- RadiationForm -->
@@ -1681,6 +1830,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitRadiation.do">
@@ -1692,7 +1842,8 @@
     		name="radiationForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+	    <set-property property="secure" value="false" />	
     </action>
      
      <!-- SpontaneousMutationForm -->
@@ -1703,6 +1854,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
         <forward
             name="input"
             path="/submitSpontaneousMutation.do">
@@ -1714,7 +1866,8 @@
 	        name="spontaneousMutationForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"> 	
+	        validate="false">
+	    <set-property property="secure" value="false" />
     </action>  
     
      <!-- InducedMutationForm -->
@@ -1725,6 +1878,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitInducedMutation.do">
@@ -1736,7 +1890,8 @@
 	        name="inducedMutationForm"
 	        scope="request"
 	        parameter="method" 	     
-	        validate="false"> 	
+	        validate="false">
+	    <set-property property="secure" value="false" />
     </action>  
 
      <!-- imageForm -->
@@ -1746,7 +1901,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input"> 
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitImages.do">
@@ -1758,7 +1914,8 @@
     		name="imageForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
       
      <!-- SurgeryForm -->
@@ -1769,6 +1926,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitSurgeryOther.do">
@@ -1780,7 +1938,8 @@
     		name="surgeryForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />	
     </action>
     
      <!-- TargetedModificationForm -->
@@ -1791,6 +1950,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitTargetedModification.do">
@@ -1802,7 +1962,8 @@
     		name="targetedModificationForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
     
      <!-- TherapyForm -->
@@ -1812,7 +1973,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input">	
+	        input="input">
+	     <set-property property="secure" value="false" />
          <forward 
     		name="input"
     		path="/submitTherapy.do">
@@ -1824,7 +1986,8 @@
     		name="therapyForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
          
      <!-- ViralTreatmentForm -->
@@ -1835,6 +1998,7 @@
 	        parameter="method" 	     
 	        validate="true"
 	        input="input">
+	     <set-property property="secure" value="false" />
 	     <forward 
     		name="input"
     		path="/submitViralTreatment.do">
@@ -1846,7 +2010,8 @@
     		name="viralTreatmentForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />		
     </action>
     
      <!-- XenograftForm -->
@@ -1857,7 +2022,8 @@
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
-	        input="input"> 
+	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/submitTransplantXenograft.do">
@@ -1870,7 +2036,8 @@
     		name="xenograftForm"    		
             scope="request"
             parameter="method"
-			validate="false">		
+			validate="false">
+		<set-property property="secure" value="false" />
     </action>
 
      <!-- Admin functionality action -->	
@@ -1878,7 +2045,8 @@
      <action 
          path="/AdminRolesPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminRolesPopulateAction"
-         parameter="protected">	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/adminRoles.do">
@@ -1889,7 +2057,8 @@
          path="/AdminModelsAssignmentPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminModelsAssignmentPopulateAction"
          name="curationAssignmentForm"
-         parameter="protected">	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward
             redirect="true"
 			name="next"
@@ -1901,7 +2070,8 @@
          path="/AdminEditModelsPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminModelsAssignmentPopulateAction"
          name="curationAssignmentForm"
-         parameter="protected">	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward
             redirect="true"
 			name="next"
@@ -1913,7 +2083,8 @@
          path="/AdminCommentsAssignmentPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminCommentsAssignmentPopulateAction"
          name="curationAssignmentForm"
-         parameter="protected">	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward
             redirect="true"
 			name="next"
@@ -1925,7 +2096,8 @@
          path="/AdminRolesAssignmentPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminRolesAssignmentPopulateAction"
          name="rolesAssignmentForm"
-         parameter="protected">	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward
             redirect="true"
 			name="next"
@@ -1937,7 +2109,8 @@
          path="/AdminEditUserRolesPopulateAction"  
          type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesPopulateAction" 
          name="rolesAssignmentForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/adminEditUserRoles.do">
@@ -1953,7 +2126,8 @@
          path="/AdminEditUserRolesAction"  
          type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesAction" 
          name="rolesAssignmentForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/AdminRolesAssignmentPopulateAction.do">
@@ -1965,7 +2139,8 @@
          type="gov.nih.nci.camod.webapp.action.AdminUserManagementPopulateAction" 
          name="editUserForm"
          validate="false"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/adminUserManagement.do">
@@ -1980,7 +2155,8 @@
          path="/AdminEditUserRolesAction"  
          type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesAction" 
          name="rolesAssignmentForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />	
          <forward 
     		name="next"
     		path="/AdminRolesAssignmentPopulateAction.do">
@@ -1992,7 +2168,8 @@
          type="gov.nih.nci.camod.webapp.action.AdminEditUserPopulateAction" 
          name="editUserForm"
          validate="false"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/adminEditUser.do">
@@ -2008,7 +2185,8 @@
          name="editUserForm"
          validate="true"
          input="input"
-         parameter="protected">	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="input"
     		path="/adminEditUser.do">
@@ -2029,7 +2207,8 @@
          type="gov.nih.nci.camod.webapp.action.AdminUserSettingsPopulateAction"
          name="userSettingsForm"
          parameter="protected"
-         validate="false">	
+         validate="false">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/adminUserSettings.do">
@@ -2042,7 +2221,8 @@
          name="userSettingsForm"
          parameter="protected"
          validate="true"
-         input="input">	
+         input="input">
+         <set-property property="secure" value="false" />
          <forward 
     		name="input"
     		path="/adminUserSettings.do">
@@ -2070,6 +2250,7 @@
          input="input"
          validate="false"
          parameter="unprotected_method">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/register.do">
@@ -2083,6 +2264,7 @@
          input="input"
          validate="true"
          parameter="unprotected_method">
+         <set-property property="secure" value="false" />
          <forward 
     		name="input"
     		path="/RegisterUserPopulateAction.do">
@@ -2105,7 +2287,8 @@
          path="/ChangeAnimalModelToCompleteAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
          name="animalModelStateForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/ReturnUserModels.do?method=returnUserModels"
@@ -2117,7 +2300,8 @@
          path="/ChangeAnimalModelStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
          name="animalModelStateForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/submitChangeAnimalModelState.do">
@@ -2134,13 +2318,15 @@
 	        parameter="protected" 
 	        unknown="false"
 	        validate="false">
+	    <set-property property="secure" value="false" />
     </action>
          
      <action 
          path="/ChangeAnimalModelStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
          name="animalModelStateForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/AdminRolesPopulateAction.do">
@@ -2151,15 +2337,16 @@
          path="/AddCommentsAction"  
          type="gov.nih.nci.camod.webapp.action.AddCommentsAction"
          name="commentsForm"
-         parameter="unprotected_method">   	
+         parameter="unprotected_method">
+         <set-property property="secure" value="false" />	
      </action>
      
      <action 
          path="/AddCommentsPopulateAction"  
          type="gov.nih.nci.camod.webapp.action.AddCommentsPopulateAction"
          name="commentsForm"
-         parameter="unprotected_method"
-         >
+         parameter="unprotected_method">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/submitComment.do">
@@ -2170,7 +2357,8 @@
          path="/ChangeCommentsStateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStateAction"
          name="commentsStateForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/AdminRolesPopulateAction.do"
@@ -2182,7 +2370,8 @@
          path="/ChangeCommentsStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeCommentsStatePopulateAction" 
          name="commentsStateForm"
-         parameter="protected">   	
+         parameter="protected">
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/submitChangeCommentState.do">
@@ -2202,6 +2391,7 @@
    	        unknown="false"
 	        input="/login.jsp" 	     
 	        validate="false" >
+	    <set-property property="secure" value="false" />
     </action>
     
     <!-- SubmitAction -->
@@ -2211,7 +2401,8 @@
 	        parameter="method"
    	        unknown="false"
 	        input="/submitModels"
-	        validate="false" >   
+	        validate="false" >
+	    <set-property property="secure" value="false" />
 	    <forward
             name="failure"
             path="/ReturnUserModels.do?method=returnUserModels">
@@ -2226,6 +2417,7 @@
    	        unknown="false"
 	        input="/submitModels"
 	        validate="false" >
+	    <set-property property="secure" value="false" />
     </action>        
 
     <action path="/PubMedPopulateAction"
@@ -2236,6 +2428,7 @@
    	        unknown="true"
 	        input="/submitPublications"
 	        validate="false" >
+	    <set-property property="secure" value="false" />
     </action>
     
     <!-- Search actions -->
@@ -2244,7 +2437,8 @@
     		name="searchForm"    		
             scope="session"
             parameter="unprotected_method"
-			validate="false">	
+			validate="false">
+		<set-property property="secure" value="false" />
 	    <forward
             name="next"
             path="/searchSimple.do">
@@ -2254,7 +2448,8 @@
     <action path="/SearchTableOfContentsPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.SearchTableOfContentsPopulateAction"
             parameter="unprotected_method"
-			validate="false">	
+			validate="false">
+		<set-property property="secure" value="false" />
 	    <forward
             name="next"
             path="/searchTableOfContents.do">
@@ -2264,7 +2459,8 @@
     <action path="/ViewTOCSearchResultsAction"
     		type="gov.nih.nci.camod.webapp.action.ViewTOCSearchResultsAction"
             parameter="unprotected_method"
-			validate="false">	
+			validate="false">
+		<set-property property="secure" value="false" />
 	    <forward
             name="next"
             path="/searchResults.do">
@@ -2283,6 +2479,7 @@
 	        validate="true"
 	        unknown="false"
 	        input="input">
+	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
             path="/searchDrugScreening.do">
@@ -2299,7 +2496,8 @@
     		name="searchForm"    		
             scope="session"
             parameter="unprotected_method"
-			validate="false">	
+			validate="false">
+		<set-property property="secure" value="false" />
 	    <forward
             name="next"
             path="/searchAdvanced.do">
