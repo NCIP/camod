@@ -9,14 +9,15 @@ import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
 import java.util.List;
 
-public class ExpressionLevelDescManagerImpl extends BaseManager implements ExpressionLevelDescManager {
-   
-	public List getAll() throws Exception {
-		log.trace("In ExpressionLevelDescManagerImpl.getAll");
-		return super.getAll(ExpressionLevelDesc.class);
-	}
-	
-	/**
+public class ExpressionLevelDescManagerImpl extends BaseManager implements ExpressionLevelDescManager
+{
+    public List getAll() throws Exception
+    {
+        log.trace("In ExpressionLevelDescManagerImpl.getAll");
+        return super.getAll(ExpressionLevelDesc.class);
+    }
+
+    /**
      * Get the ExpressionLevelDesc by it's name
      * 
      * @param inName
@@ -24,35 +25,40 @@ public class ExpressionLevelDescManagerImpl extends BaseManager implements Expre
      * 
      * @return the ExpressionLevelDesc that matches the name
      */
-    public ExpressionLevelDesc getByName(String inName) throws Exception {
+    public ExpressionLevelDesc getByName(String inName) throws Exception
+    {
+        ExpressionLevelDesc theExpressionLevelDesc = null;
 
-    	ExpressionLevelDesc theExpressionLevelDesc = null;
+        if (inName != null && inName.length() > 0)
+        {
+            try
+            {
+                // The following two objects are needed for eQBE.
+                ExpressionLevelDesc theQueryObj = new ExpressionLevelDesc();
+                theQueryObj.setExpressionLevel(inName);
 
-        if (inName != null && inName.length() > 0) {     	
-        	try {
+                // Apply evaluators to object properties
+                Evaluation theEvaluation = new Evaluation();
+                theEvaluation.addEvaluator("ExpressionLevelDesc.ExpressionLevelDescName", Evaluator.EQUAL);
 
-        		// The following two objects are needed for eQBE.
-        		ExpressionLevelDesc theQueryObj = new ExpressionLevelDesc();
-        		theQueryObj.setExpressionLevel(inName);
+                List theList = Search.query(theQueryObj, theEvaluation);
 
-        		// Apply evaluators to object properties
-        		Evaluation theEvaluation = new Evaluation();
-        		theEvaluation.addEvaluator("ExpressionLevelDesc.ExpressionLevelDescName", Evaluator.EQUAL);
-
-        		List theList = Search.query(theQueryObj, theEvaluation);
-
-        		if (theList != null && theList.size() > 0) {
-        			theExpressionLevelDesc = (ExpressionLevelDesc) theList.get(0);
-        		}
-
-            } catch (PersistenceException pe) {
+                if (theList != null && theList.size() > 0)
+                {
+                    theExpressionLevelDesc = (ExpressionLevelDesc) theList.get(0);
+                }
+            }
+            catch (PersistenceException pe)
+            {
                 log.error("PersistenceException in getByName", pe);
                 throw pe;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.error("Exception in getByName", e);
                 throw e;
             }
         }
         return theExpressionLevelDesc;
-    }		
+    }
 }

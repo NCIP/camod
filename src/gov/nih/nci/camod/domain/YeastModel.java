@@ -17,72 +17,86 @@ import java.util.TreeSet;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class YeastModel extends AbstractCancerModel {
-
+public class YeastModel extends AbstractCancerModel
+{
     private static final long serialVersionUID = 3257425453799404851L;
 
-    private List screeningResultCollection = new ArrayList();
-    private List targetedModificationCollection = new ArrayList();
+    private List<ScreeningResult> screeningResultCollection = new ArrayList<ScreeningResult>();
+    private List<TargetedModification> targetedModificationCollection = new ArrayList<TargetedModification>();
 
     /**
      * @return Returns the targetedModificationCollection.
      */
-    public List getTargetedModificationCollection() {
+    public List<TargetedModification> getTargetedModificationCollection()
+    {
         return targetedModificationCollection;
     }
-    
-    public List getTargetedModificationCollectionSorted() {      
-      if (targetedModificationCollection != null) return new ArrayList(new TreeSet(targetedModificationCollection));
-      return null;
-    }    
+
+    public List<TargetedModification> getTargetedModificationCollectionSorted()
+    {
+        if (targetedModificationCollection != null)
+            return new ArrayList<TargetedModification>(new TreeSet<TargetedModification>(targetedModificationCollection));
+        return null;
+    }
 
     /**
      * @param targetedModificationCollection
      *            The targetedModificationCollection to set.
      */
-    public void setTargetedModificationCollection(List targetedModificationCollection) {
+    public void setTargetedModificationCollection(List<TargetedModification> targetedModificationCollection)
+    {
         this.targetedModificationCollection = targetedModificationCollection;
     }
 
-    public void addTargetedModification(TargetedModification targetedModification) {
+    public void addTargetedModification(TargetedModification targetedModification)
+    {
         targetedModificationCollection.add(targetedModification);
     }
 
     /**
      * @return Returns the screeningResultCollection.
      */
-    public List getScreeningResultCollection() {
+    public List<ScreeningResult> getScreeningResultCollection()
+    {
         return screeningResultCollection;
     }
-    
-    public List getScreeningResultCollectionSorted() {      
-      if (screeningResultCollection != null) return new ArrayList(new TreeSet(screeningResultCollection));
-      return null;
-    }    
+
+    public List getScreeningResultCollectionSorted()
+    {
+        if (screeningResultCollection != null)
+            return new ArrayList<ScreeningResult>(new TreeSet<ScreeningResult>(screeningResultCollection));
+        return null;
+    }
 
     /**
      * @param screeningResultCollection
      *            The screeningResultCollection to set.
      */
-    public void setScreeningResultCollection(List screeningResultCollection) {
+    public void setScreeningResultCollection(List<ScreeningResult> screeningResultCollection)
+    {
         this.screeningResultCollection = screeningResultCollection;
     }
 
-    public void addScreeningResult(ScreeningResult screeningResult) {
+    public void addScreeningResult(ScreeningResult screeningResult)
+    {
         screeningResultCollection.add(screeningResult);
     }
 
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString();             
-       return result;
-     }  
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }

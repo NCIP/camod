@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: BaseManager.java,v 1.4 2005-10-26 20:54:51 georgeda Exp $
+ * $Id: BaseManager.java,v 1.5 2006-01-18 14:24:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/26 20:54:51  georgeda
+ * Put transaction around remove
+ *
  * Revision 1.3  2005/09/29 18:31:14  georgeda
  * Changed visibility of base functions to protected
  *
@@ -28,8 +31,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Base class for managers. Provides the generic Object based calls.
  */
-public class BaseManager implements Manager {
-
+public class BaseManager implements Manager
+{
     protected final Log log = LogFactory.getLog(getClass());
 
     /**
@@ -40,15 +43,18 @@ public class BaseManager implements Manager {
      * @exception throws
      *                an Exception if an error occurred
      */
-    protected List getAll(Class inClass) throws Exception {
-
+    protected List getAll(Class inClass) throws Exception
+    {
         log.trace("Entering BaseManager.getAll");
 
         List theObjects = null;
 
-        try {
+        try
+        {
             theObjects = Search.query(inClass);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Exception occurred in BaseManager.getAll", e);
             throw e;
         }
@@ -70,19 +76,25 @@ public class BaseManager implements Manager {
      * @exception Exception
      *                if an error occurred
      */
-    protected Object get(String inId, Class inClass) throws Exception {
-
+    protected Object get(String inId,
+                         Class inClass) throws Exception
+    {
         log.trace("Entering BaseManager.get");
 
         Object theObject = null;
 
-        try {
+        try
+        {
             log.debug("Querying for id: " + inId);
             theObject = Search.queryById(inClass, new Long(inId));
-        } catch (PersistenceException pe) {
+        }
+        catch (PersistenceException pe)
+        {
             log.error("Exception occurred in BaseManager.get", pe);
             throw pe;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Exception occurred in BaseManager.get", e);
             throw e;
         }
@@ -100,11 +112,12 @@ public class BaseManager implements Manager {
      * @exception Exception
      *                if an error occurred
      */
-    protected void save(Object inObject) throws Exception {
-
+    protected void save(Object inObject) throws Exception
+    {
         log.trace("Entering BaseManager.save");
 
-        try {
+        try
+        {
             // Begin an transaction
             HibernateUtil.beginTransaction();
 
@@ -115,11 +128,15 @@ public class BaseManager implements Manager {
             // Commit all changes or none
             HibernateUtil.commitTransaction();
 
-        } catch (PersistenceException pe) {
+        }
+        catch (PersistenceException pe)
+        {
             HibernateUtil.rollbackTransaction();
             log.error("PersistenceException in BaseManager.save", pe);
             throw pe;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             HibernateUtil.rollbackTransaction();
             log.error("Exception in BaseManager.save", e);
             throw e;
@@ -136,11 +153,13 @@ public class BaseManager implements Manager {
      * @throws Exception
      *             An error occurred when attempting to delete the object
      */
-    protected void remove(String inId, Class inClass) throws Exception {
-
+    protected void remove(String inId,
+                          Class inClass) throws Exception
+    {
         log.trace("Entering BaseManager.remove");
 
-        try {
+        try
+        {
             // Begin an transaction
             HibernateUtil.beginTransaction();
 
@@ -149,12 +168,15 @@ public class BaseManager implements Manager {
 
             // Commit all changes or none
             HibernateUtil.commitTransaction();
-
-        } catch (PersistenceException pe) {
+        }
+        catch (PersistenceException pe)
+        {
             HibernateUtil.rollbackTransaction();
             log.error("Unable to delete object: ", pe);
             throw pe;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             HibernateUtil.rollbackTransaction();
             log.error("Unable to delete object: ", e);
             throw e;

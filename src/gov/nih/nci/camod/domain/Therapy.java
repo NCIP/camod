@@ -10,7 +10,9 @@ import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
 /**
  * @author rajputs
@@ -18,10 +20,10 @@ import java.util.*;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Therapy extends BaseObject implements Comparable, Serializable, Duplicatable {
-
+public class Therapy extends BaseObject implements Comparable, Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3258525453799404851L;
-    
+
     private String experiment;
     private String comments;
     private String results;
@@ -29,14 +31,15 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     private String biomarker;
     private String tumorResponse;
     private Treatment treatment;
-    private List publicationCollection = new ArrayList();
+    private List<Publication> publicationCollection = new ArrayList<Publication>();
     private Agent agent;
     private Boolean therapeuticExperiment;
 
     /**
      * @return Returns the therapeuticExperiment.
      */
-    public Boolean getTherapeuticExperiment() {
+    public Boolean getTherapeuticExperiment()
+    {
         return therapeuticExperiment;
     }
 
@@ -44,14 +47,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param therapeuticExperiment
      *            The therapeuticExperiment to set.
      */
-    public void setTherapeuticExperiment(Boolean therapeuticExperiment) {
+    public void setTherapeuticExperiment(Boolean therapeuticExperiment)
+    {
         this.therapeuticExperiment = therapeuticExperiment;
     }
 
     /**
      * @return Returns the agent.
      */
-    public Agent getAgent() {
+    public Agent getAgent()
+    {
         return agent;
     }
 
@@ -59,14 +64,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param agent
      *            The agent to set.
      */
-    public void setAgent(Agent agent) {
+    public void setAgent(Agent agent)
+    {
         this.agent = agent;
     }
 
     /**
      * @return Returns the biomarker.
      */
-    public String getBiomarker() {
+    public String getBiomarker()
+    {
         return biomarker;
     }
 
@@ -74,14 +81,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param biomarker
      *            The biomarker to set.
      */
-    public void setBiomarker(String biomarker) {
+    public void setBiomarker(String biomarker)
+    {
         this.biomarker = biomarker;
     }
 
     /**
      * @return Returns the toxicityGrade.
      */
-    public String getToxicityGrade() {
+    public String getToxicityGrade()
+    {
         return toxicityGrade;
     }
 
@@ -89,14 +98,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param toxicityGrade
      *            The toxicityGrade to set.
      */
-    public void setToxicityGrade(String toxicityGrade) {
+    public void setToxicityGrade(String toxicityGrade)
+    {
         this.toxicityGrade = toxicityGrade;
     }
 
     /**
      * @return Returns the tumorResponse.
      */
-    public String getTumorResponse() {
+    public String getTumorResponse()
+    {
         return tumorResponse;
     }
 
@@ -104,27 +115,32 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param tumorResponse
      *            The tumorResponse to set.
      */
-    public void setTumorResponse(String tumorResponse) {
+    public void setTumorResponse(String tumorResponse)
+    {
         this.tumorResponse = tumorResponse;
     }
 
     /**
      * @return Returns the publicationCollection.
      */
-    public List getPublicationCollection() {        
-        return publicationCollection;                 
+    public List<Publication> getPublicationCollection()
+    {
+        return publicationCollection;
     }
-    
-     public List getPublicationCollectionSorted() {      
-      if (publicationCollection != null) return new ArrayList(new TreeSet(publicationCollection));
-      return null;
-    }   
+
+    public List<Publication> getPublicationCollectionSorted()
+    {
+        if (publicationCollection != null)
+            return new ArrayList<Publication>(new TreeSet<Publication>(publicationCollection));
+        return null;
+    }
 
     /**
      * @param publicationCollection
      *            The publicationCollection to set.
      */
-    public void setPublicationCollection(List publicationCollection) {
+    public void setPublicationCollection(List<Publication> publicationCollection)
+    {
         this.publicationCollection = publicationCollection;
     }
 
@@ -132,14 +148,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param publication
      *            The publication to add.
      */
-    public void addPublication(Publication publication) {
+    public void addPublication(Publication publication)
+    {
         publicationCollection.add(publication);
     }
 
     /**
      * @return Returns the comments.
      */
-    public String getComments() {
+    public String getComments()
+    {
         return comments;
     }
 
@@ -147,14 +165,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param comments
      *            The comments to set.
      */
-    public void setComments(String comments) {
+    public void setComments(String comments)
+    {
         this.comments = comments;
     }
 
     /**
      * @return Returns the experiment.
      */
-    public String getExperiment() {
+    public String getExperiment()
+    {
         return experiment;
     }
 
@@ -162,15 +182,17 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param experiment
      *            The experiment to set.
      */
-    public void setExperiment(String experiment) {
+    public void setExperiment(String experiment)
+    {
         this.experiment = experiment;
     }
- 
+
 
     /**
      * @return Returns the results.
      */
-    public String getResults() {
+    public String getResults()
+    {
         return results;
     }
 
@@ -178,14 +200,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param results
      *            The results to set.
      */
-    public void setResults(String results) {
+    public void setResults(String results)
+    {
         this.results = results;
     }
 
     /**
      * @return Returns the treatment.
      */
-    public Treatment getTreatment() {
+    public Treatment getTreatment()
+    {
         return treatment;
     }
 
@@ -193,39 +217,51 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param treatment
      *            The treatment to set.
      */
-    public void setTreatment(Treatment treatment) {
+    public void setTreatment(Treatment treatment)
+    {
         this.treatment = treatment;
     }
 
-     /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getExperiment();
-       return result;
-     }          
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final Therapy obj = (Therapy) o;
-      if (HashCodeUtil.notEqual(this.getAgent(), obj.getAgent())) return false;
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getExperiment();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getAgent());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof Therapy) && (this.getAgent() != null) && (((Therapy)o).getAgent() != null)) {   
-        int result = this.getAgent().compareTo( ((Therapy)o).getAgent() );
-        if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }    
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final Therapy obj = (Therapy) o;
+        if (HashCodeUtil.notEqual(this.getAgent(), obj.getAgent()))
+            return false;
+        return true;
+    }
+
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getAgent());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        if ((o instanceof Therapy) && (this.getAgent() != null) && (((Therapy) o).getAgent() != null))
+        {
+            int result = this.getAgent().compareTo(((Therapy) o).getAgent());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 }

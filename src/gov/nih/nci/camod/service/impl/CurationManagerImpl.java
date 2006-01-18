@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: CurationManagerImpl.java,v 1.5 2005-09-19 13:09:00 georgeda Exp $
+ *  $Id: CurationManagerImpl.java,v 1.6 2006-01-18 14:24:24 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.5  2005/09/19 13:09:00  georgeda
+ *  Slight change to interface
+ *
  *  
  */
 package gov.nih.nci.camod.service.impl;
@@ -14,30 +17,32 @@ import gov.nih.nci.camod.service.CurationManager;
 /**
  * CurationManager implementation.
  */
-public class CurationManagerImpl extends AbstractCurationManager {
-
+public class CurationManagerImpl extends AbstractCurationManager
+{
     /**
      * Constructor. Takes in a curation XML
      * 
      * @param inWorkflowFile
      *            the XML file defining the curation flow
      */
-    public CurationManagerImpl(String inWorkflowFile) {
+    public CurationManagerImpl(String inWorkflowFile)
+    {
         super.init(inWorkflowFile);
         init();
     }
 
     // Register any events associated w/ the curation flow
-    private void init() {
+    private void init()
+    {
         myActionFactory.registerAction("emailAssignee", new EmailActionImpl());
     }
 
     /**
      * Test main
      */
-    public static void main(java.lang.String[] args) {
-        CurationManager theCurationManager = new CurationManagerImpl(
-                "C:/dev/workspace/camod_dev/WebRoot/config/CurationConfig.xml");
+    public static void main(java.lang.String[] args)
+    {
+        CurationManager theCurationManager = new CurationManagerImpl("C:/dev/workspace/camod_dev/WebRoot/config/CurationConfig.xml");
 
         AnimalModel theAnimalModel = new AnimalModel();
 

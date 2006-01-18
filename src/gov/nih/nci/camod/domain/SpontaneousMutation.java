@@ -20,19 +20,20 @@ import gov.nih.nci.camod.util.HashCodeUtil;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class SpontaneousMutation extends BaseObject implements Comparable, Serializable, Duplicatable {
-
+public class SpontaneousMutation extends BaseObject implements Comparable, Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3258605453799404851L;
-    
+
     private String name;
     private String comments;
-    private List geneticAlterationCollection = new ArrayList();
+    private List<GeneticAlteration> geneticAlterationCollection = new ArrayList<GeneticAlteration>();
     private MutationIdentifier mutationIdentifier;
 
     /**
      * @return Returns the comments.
      */
-    public String getComments() {
+    public String getComments()
+    {
         return comments;
     }
 
@@ -40,27 +41,32 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
      * @param comments
      *            The comments to set.
      */
-    public void setComments(String comments) {
+    public void setComments(String comments)
+    {
         this.comments = comments;
     }
 
     /**
      * @return Returns the geneticAlterationCollection.
      */
-    public List getGeneticAlterationCollection() {
+    public List getGeneticAlterationCollection()
+    {
         return geneticAlterationCollection;
     }
-    
-    public List getGeneticAlterationCollectionSorted() {      
-      if (geneticAlterationCollection != null) return new ArrayList(new TreeSet(geneticAlterationCollection));
-      return null;
-    }    
-    
+
+    public List getGeneticAlterationCollectionSorted()
+    {
+        if (geneticAlterationCollection != null)
+            return new ArrayList<GeneticAlteration>(new TreeSet<GeneticAlteration>(geneticAlterationCollection));
+        return null;
+    }
+
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.
      */
-    public void setGeneticAlterationCollection(List geneticAlterationCollection) {
+    public void setGeneticAlterationCollection(List<GeneticAlteration> geneticAlterationCollection)
+    {
         this.geneticAlterationCollection = geneticAlterationCollection;
     }
 
@@ -68,14 +74,16 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
      * @param geneticAlteration
      *            The geneticAlteration to add.
      */
-    public void addGeneticAlteration(GeneticAlteration geneticAlteration) {
+    public void addGeneticAlteration(GeneticAlteration geneticAlteration)
+    {
         geneticAlterationCollection.add(geneticAlteration);
     }
 
     /**
      * @return Returns the mutationIdentifier.
      */
-    public MutationIdentifier getMutationIdentifier() {
+    public MutationIdentifier getMutationIdentifier()
+    {
         return mutationIdentifier;
     }
 
@@ -83,15 +91,16 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
      * @param mutationIdentifier
      *            The mutationIdentifier to set.
      */
-    public void setMutationIdentifier(MutationIdentifier mutationIdentifier) {
+    public void setMutationIdentifier(MutationIdentifier mutationIdentifier)
+    {
         this.mutationIdentifier = mutationIdentifier;
     }
 
- 
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -99,40 +108,51 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-     /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getName();
-       return result;
-     }  
-      
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final SpontaneousMutation obj = (SpontaneousMutation) o;
-      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getName();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getName());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof SpontaneousMutation) && (this.getName() != null) && (((SpontaneousMutation)o).getName() != null)) {   
-        int result = this.getName().compareTo( ((SpontaneousMutation)o).getName() );
-        if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }    
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final SpontaneousMutation obj = (SpontaneousMutation) o;
+        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
+            return false;
+        return true;
+    }
+
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getName());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        if ((o instanceof SpontaneousMutation) && (this.getName() != null) && (((SpontaneousMutation) o).getName() != null))
+        {
+            int result = this.getName().compareTo(((SpontaneousMutation) o).getName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 }

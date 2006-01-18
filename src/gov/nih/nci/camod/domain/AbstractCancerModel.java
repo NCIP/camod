@@ -1,7 +1,10 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/14 14:16:51  georgeda
+ * Cleanup
+ *
  * 
- * $Id: AbstractCancerModel.java,v 1.11 2005-11-14 14:16:51 georgeda Exp $
+ * $Id: AbstractCancerModel.java,v 1.12 2006-01-18 14:23:31 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -18,7 +21,7 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
     private String experimentDesign;
     private String modelDescriptor;
     private String state;
-    private List publicationCollection = new ArrayList();
+    private List<Publication> publicationCollection = new ArrayList<Publication>();
     private Availability availability;
     private Taxon species;
     private Person submitter;
@@ -102,12 +105,12 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
     /**
      * @return Returns the publicationCollection.
      */
-    public List getPublicationCollection() {            
+    public List<Publication> getPublicationCollection() {            
       return publicationCollection;          
     }
       
-    public List getPublicationCollectionSorted() {      
-      if (publicationCollection != null) return new ArrayList(new TreeSet(publicationCollection));
+    public List<Publication> getPublicationCollectionSorted() {      
+      if (publicationCollection != null) return new ArrayList<Publication>(new TreeSet<Publication>(publicationCollection));
       return null;
     }    
 
@@ -115,7 +118,7 @@ public class AbstractCancerModel extends BaseObject implements Serializable, Can
      * @param publicationCollection
      *            The publicationCollection to set.
      */
-    public void setPublicationCollection(List publicationCollection) {
+    public void setPublicationCollection(List<Publication> publicationCollection) {
         this.publicationCollection = publicationCollection;
     }
 

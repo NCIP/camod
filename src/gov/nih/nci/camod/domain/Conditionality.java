@@ -16,17 +16,18 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Conditionality extends BaseObject implements Serializable, Duplicatable {
-
+public class Conditionality extends BaseObject implements Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259575453799404851L;
-    
+
     private String conditionedBy;
     private String description;
 
     /**
      * @return Returns the conditionedBy.
      */
-    public String getConditionedBy() {
+    public String getConditionedBy()
+    {
         return conditionedBy;
     }
 
@@ -34,14 +35,16 @@ public class Conditionality extends BaseObject implements Serializable, Duplicat
      * @param conditionedBy
      *            The conditionedBy to set.
      */
-    public void setConditionedBy(String conditionedBy) {
+    public void setConditionedBy(String conditionedBy)
+    {
         this.conditionedBy = conditionedBy;
     }
 
     /**
      * @return Returns the description.
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -49,20 +52,24 @@ public class Conditionality extends BaseObject implements Serializable, Duplicat
      * @param description
      *            The description to set.
      */
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
-    } 
-
-    public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getDescription();     
-       return result;
-     }    
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
     }
-    
+
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getDescription();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
+    }
 }

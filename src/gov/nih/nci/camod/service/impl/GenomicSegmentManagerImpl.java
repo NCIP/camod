@@ -27,31 +27,39 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSegmentManager {
+public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSegmentManager
+{
 
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In GenomicSegmentManagerImpl.getAll");
         return super.getAll(GenomicSegment.class);
     }
 
-    public GenomicSegment get(String id) throws Exception {
+    public GenomicSegment get(String id) throws Exception
+    {
         log.trace("In GenomicSegmentManagerImpl.get");
         return (GenomicSegment) super.get(id, GenomicSegment.class);
     }
 
-    public void save(GenomicSegment GenomicSegment) throws Exception {
+    public void save(GenomicSegment GenomicSegment) throws Exception
+    {
         log.trace("In GenomicSegmentManagerImpl.save");
         super.save(GenomicSegment);
     }
 
-    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+    public void remove(String id,
+                       AnimalModel inAnimalModel) throws Exception
+    {
         log.trace("In GenomicSegmentManagerImpl.remove");
         inAnimalModel.getEngineeredGeneCollection().remove(get(id));
         super.save(inAnimalModel);
     }
 
-    public GenomicSegment create(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
-            HttpServletRequest request) throws Exception {
+    public GenomicSegment create(AnimalModel inAnimalModel,
+                                 GenomicSegmentData inGenomicSegmentData,
+                                 HttpServletRequest request) throws Exception
+    {
 
         log.trace("Entering GenomicSegmentManagerImpl.create");
 
@@ -63,8 +71,11 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         return inGenomicSegment;
     }
 
-    public void update(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
-            GenomicSegment inGenomicSegment, HttpServletRequest request) throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       GenomicSegmentData inGenomicSegmentData,
+                       GenomicSegment inGenomicSegment,
+                       HttpServletRequest request) throws Exception
+    {
 
         log.trace("Entering GenomicSegmentManagerImpl.update");
         log.debug("Updating GenomicSegmentForm: " + inGenomicSegment.getId());
@@ -76,9 +87,11 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         log.trace("Exiting GenomicSegmentManagerImpl.update");
     }
 
-    private void populateGenomicSegment(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
-            GenomicSegment inGenomicSegment, HttpServletRequest request) throws Exception {
-
+    private void populateGenomicSegment(AnimalModel inAnimalModel,
+                                        GenomicSegmentData inGenomicSegmentData,
+                                        GenomicSegment inGenomicSegment,
+                                        HttpServletRequest request) throws Exception
+    {
         log.trace("Entering populateGenomicSegment");
 
         if (inGenomicSegmentData.getLocationOfIntegration().equals("Targeted"))
@@ -92,18 +105,21 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
 
         // SegmentType.  Reuse if it's aready there, update otherwise.
         SegmentType theSegmentType = null;
-        if (inGenomicSegment.getSegmentTypeCollection().size() > 0) {
+        if (inGenomicSegment.getSegmentTypeCollection().size() > 0)
+        {
             theSegmentType = (SegmentType) inGenomicSegment.getSegmentTypeCollection().get(0);
         }
-        else {
+        else
+        {
             theSegmentType = new SegmentType();
             inGenomicSegment.addSegmentType(theSegmentType);
         }
 
         theSegmentType.setName(inGenomicSegmentData.getSegmentName());
 
-        if (inGenomicSegmentData.getOtherSegmentName() != null) {
-        	theSegmentType.setName(null);
+        if (inGenomicSegmentData.getOtherSegmentName() != null)
+        {
+            theSegmentType.setName(null);
             theSegmentType.setNameUnctrlVocab(inGenomicSegmentData.getOtherSegmentName());
 
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
@@ -112,7 +128,8 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
             String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
             StringTokenizer st = new StringTokenizer(recipients, ",");
             String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++) {
+            for (int i = 0; i < inRecipients.length; i++)
+            {
                 inRecipients[i] = st.nextToken();
             }
 
@@ -122,7 +139,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
             // gather message keys and variable values to build the e-mail
             // content with
             String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map values = new TreeMap();
+            Map<String,Object> values = new TreeMap<String,Object>();
             values.put("type", "SegmentName");
             values.put("value", inGenomicSegmentData.getOtherSegmentName());
             values.put("submitter", inAnimalModel.getSubmitter());
@@ -130,15 +147,19 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
             values.put("modelstate", inAnimalModel.getState());
 
             // Send the email
-            try {
+            try
+            {
                 MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
             }
         }
 
-        if (inGenomicSegment.getImage() != null) {
+        if (inGenomicSegment.getImage() != null)
+        {
             Image image = inGenomicSegment.getImage();
             image.setTitle(inGenomicSegmentData.getTitle());
             // image.setFileServerLocation( );
@@ -149,26 +170,26 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this GenomicSegment
-        if ( inGenomicSegmentData.getFileLocation() != null )
-        if (inGenomicSegmentData.getFileLocation().getFileName() != null
-                && !inGenomicSegmentData.getFileLocation().getFileName().equals("")) {
+        if (inGenomicSegmentData.getFileLocation() != null)
+            if (inGenomicSegmentData.getFileLocation().getFileName() != null && !inGenomicSegmentData.getFileLocation().getFileName().equals(
+                                                                                                                                             ""))
+            {
 
-            ImageForm inImageData = new ImageForm();
+                ImageForm inImageData = new ImageForm();
 
-            String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+                String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
 
-            inImageData.setDescriptionOfConstruct(inGenomicSegmentData.getDescriptionOfConstruct());
-            inImageData.setTitle(inGenomicSegmentData.getTitle());
-            inImageData.setFileServerLocation(inGenomicSegmentData.getFileServerLocation());
-            inImageData.setFileLocation(inGenomicSegmentData.getFileLocation());
+                inImageData.setDescriptionOfConstruct(inGenomicSegmentData.getDescriptionOfConstruct());
+                inImageData.setTitle(inGenomicSegmentData.getTitle());
+                inImageData.setFileServerLocation(inGenomicSegmentData.getFileServerLocation());
+                inImageData.setFileLocation(inGenomicSegmentData.getFileLocation());
 
-            Image image = ImageManagerSingleton.instance().create(new AnimalModel(), inImageData, inPath,
-                    Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
+                Image image = ImageManagerSingleton.instance().create(new AnimalModel(), inImageData, inPath,
+                                                                      Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
 
-            System.out.println("Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle()
-                    + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId());
-            inGenomicSegment.setImage(image);
-        }
+                System.out.println("Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle() + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId());
+                inGenomicSegment.setImage(image);
+            }
 
         // MGI Number
         // Check for exisiting MutationIdentifier
@@ -178,13 +199,17 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         else
             inMutationIdentifier = new MutationIdentifier();
 
-        if (inGenomicSegmentData.getNumberMGI() == null || inGenomicSegmentData.getNumberMGI().equals("")) {
+        if (inGenomicSegmentData.getNumberMGI() == null || inGenomicSegmentData.getNumberMGI().equals(""))
+        {
             inGenomicSegment.setMutationIdentifier(null);
-        } else {
+        }
+        else
+        {
             String strNumberMGI = inGenomicSegmentData.getNumberMGI().trim();
             Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
             Matcher m = p.matcher(strNumberMGI);
-            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals(""))
+            {
                 inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
                 inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
             }

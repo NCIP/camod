@@ -17,10 +17,10 @@ import gov.nih.nci.camod.util.HashCodeUtil;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class MicroArrayData extends BaseObject implements Comparable, Serializable, Duplicatable {
-
+public class MicroArrayData extends BaseObject implements Comparable, Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259195453799404851L;
-    
+
     private String experimentName;
     private Long experimentId;
     private String otherLocationURL;
@@ -29,7 +29,8 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the otherLocationURL.
      */
-    public String getOtherLocationURL() {
+    public String getOtherLocationURL()
+    {
         return otherLocationURL;
     }
 
@@ -37,14 +38,16 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
      * @param otherLocationURL
      *            The otherLocationURL to set.
      */
-    public void setOtherLocationURL(String otherLocationURL) {
+    public void setOtherLocationURL(String otherLocationURL)
+    {
         this.otherLocationURL = otherLocationURL;
     }
 
     /**
      * @return Returns the availability.
      */
-    public Availability getAvailability() {
+    public Availability getAvailability()
+    {
         return availability;
     }
 
@@ -52,14 +55,16 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
      * @param availability
      *            The availability to set.
      */
-    public void setAvailability(Availability availability) {
+    public void setAvailability(Availability availability)
+    {
         this.availability = availability;
     }
 
     /**
      * @return Returns the experimentId.
      */
-    public Long getExperimentId() {
+    public Long getExperimentId()
+    {
         return experimentId;
     }
 
@@ -67,14 +72,16 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
      * @param experimentId
      *            The experimentId to set.
      */
-    public void setExperimentId(Long experimentId) {
+    public void setExperimentId(Long experimentId)
+    {
         this.experimentId = experimentId;
     }
 
     /**
      * @return Returns the experimentName.
      */
-    public String getExperimentName() {
+    public String getExperimentName()
+    {
         return experimentName;
     }
 
@@ -82,40 +89,51 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
      * @param experimentName
      *            The experimentName to set.
      */
-    public void setExperimentName(String experimentName) {
+    public void setExperimentName(String experimentName)
+    {
         this.experimentName = experimentName;
     }
-   
+
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getExperimentName();
-       return result;
-     }      
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final MicroArrayData obj = (MicroArrayData) o;
-      if (HashCodeUtil.notEqual(this.getExperimentName(), obj.getExperimentName())) return false;
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getExperimentName();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getExperimentName());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof MicroArrayData) && (this.getExperimentName() != null) && (((MicroArrayData)o).getExperimentName() != null)) {   
-        int result = this.getExperimentName().compareTo( ((MicroArrayData)o).getExperimentName() );
-        if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }    
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final MicroArrayData obj = (MicroArrayData) o;
+        if (HashCodeUtil.notEqual(this.getExperimentName(), obj.getExperimentName()))
+            return false;
+        return true;
+    }
 
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getExperimentName());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        if ((o instanceof MicroArrayData) && (this.getExperimentName() != null) && (((MicroArrayData) o).getExperimentName() != null))
+        {
+            int result = this.getExperimentName().compareTo(((MicroArrayData) o).getExperimentName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 }

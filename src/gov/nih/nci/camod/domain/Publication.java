@@ -16,10 +16,10 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Publication extends BaseObject implements Serializable, Duplicatable {
-
+public class Publication extends BaseObject implements Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3258755453799404851L;
-    
+
     private String volume;
     private Long endPage;
     private Long year;
@@ -34,7 +34,8 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     /**
      * @return Returns the firstTimeReported.
      */
-    public Boolean isFirstTimeReported() {
+    public Boolean isFirstTimeReported()
+    {
         return firstTimeReported;
     }
 
@@ -42,14 +43,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param firstTimeReported
      *            The firstTimeReported to set.
      */
-    public void setFirstTimeReported(Boolean firstTimeReported) {
+    public void setFirstTimeReported(Boolean firstTimeReported)
+    {
         this.firstTimeReported = firstTimeReported;
     }
 
     /**
      * @return Returns the authors.
      */
-    public String getAuthors() {
+    public String getAuthors()
+    {
         return authors;
     }
 
@@ -57,14 +60,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param authors
      *            The authors to set.
      */
-    public void setAuthors(String authors) {
+    public void setAuthors(String authors)
+    {
         this.authors = authors;
     }
 
     /**
      * @return Returns the endPage.
      */
-    public Long getEndPage() {
+    public Long getEndPage()
+    {
         return endPage;
     }
 
@@ -72,15 +77,17 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param endPage
      *            The endPage to set.
      */
-    public void setEndPage(Long endPage) {
+    public void setEndPage(Long endPage)
+    {
         this.endPage = endPage;
     }
-  
+
 
     /**
      * @return Returns the journal.
      */
-    public String getJournal() {
+    public String getJournal()
+    {
         return journal;
     }
 
@@ -88,14 +95,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param journal
      *            The journal to set.
      */
-    public void setJournal(String journal) {
+    public void setJournal(String journal)
+    {
         this.journal = journal;
     }
 
     /**
      * @return Returns the pmid.
      */
-    public Long getPmid() {
+    public Long getPmid()
+    {
         return pmid;
     }
 
@@ -103,14 +112,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param pmid
      *            The pmid to set.
      */
-    public void setPmid(Long pmid) {
+    public void setPmid(Long pmid)
+    {
         this.pmid = pmid;
     }
 
     /**
      * @return Returns the publicationStatus.
      */
-    public PublicationStatus getPublicationStatus() {
+    public PublicationStatus getPublicationStatus()
+    {
         return publicationStatus;
     }
 
@@ -118,14 +129,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param publicationStatus
      *            The publicationStatus to set.
      */
-    public void setPublicationStatus(PublicationStatus publicationStatus) {
+    public void setPublicationStatus(PublicationStatus publicationStatus)
+    {
         this.publicationStatus = publicationStatus;
     }
 
     /**
      * @return Returns the startPage.
      */
-    public Long getStartPage() {
+    public Long getStartPage()
+    {
         return startPage;
     }
 
@@ -133,14 +146,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param startPage
      *            The startPage to set.
      */
-    public void setStartPage(Long startPage) {
+    public void setStartPage(Long startPage)
+    {
         this.startPage = startPage;
     }
 
     /**
      * @return Returns the title.
      */
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
@@ -148,14 +163,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param title
      *            The title to set.
      */
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
     /**
      * @return Returns the volume.
      */
-    public String getVolume() {
+    public String getVolume()
+    {
         return volume;
     }
 
@@ -163,14 +180,16 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param volume
      *            The volume to set.
      */
-    public void setVolume(String volume) {
+    public void setVolume(String volume)
+    {
         this.volume = volume;
     }
 
     /**
      * @return Returns the year.
      */
-    public Long getYear() {
+    public Long getYear()
+    {
         return year;
     }
 
@@ -178,22 +197,27 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
      * @param year
      *            The year to set.
      */
-    public void setYear(Long year) {
+    public void setYear(Long year)
+    {
         this.year = year;
     }
 
-     /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getTitle();
-       return result;
-     }  
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getTitle();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }

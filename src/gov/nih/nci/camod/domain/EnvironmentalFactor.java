@@ -17,8 +17,8 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactor extends BaseObject implements Comparable, Serializable, Duplicatable {
-
+public class EnvironmentalFactor extends BaseObject implements Comparable, Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259445453799404851L;
 
     private String type;
@@ -30,7 +30,8 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     /**
      * @return Returns the casNumber.
      */
-    public String getCasNumber() {
+    public String getCasNumber()
+    {
         return casNumber;
     }
 
@@ -38,16 +39,19 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      * @param casNumber
      *            The casNumber to set.
      */
-    public void setCasNumber(String casNumber) {
+    public void setCasNumber(String casNumber)
+    {
         this.casNumber = casNumber;
     }
 
     /**
      * @return Returns the display name.
      */
-    public String getDisplayName() {
+    public String getDisplayName()
+    {
         String theDisplayName = name;
-        if (theDisplayName == null && nameUnctrlVocab != null) {
+        if (theDisplayName == null && nameUnctrlVocab != null)
+        {
             theDisplayName = "Other - " + nameUnctrlVocab;
         }
 
@@ -57,7 +61,8 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -65,14 +70,16 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
     /**
      * @return Returns the nameUnctrlVocab.
      */
-    public String getNameUnctrlVocab() {
+    public String getNameUnctrlVocab()
+    {
         return nameUnctrlVocab;
     }
 
@@ -80,14 +87,16 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      * @param nameUnctrlVocab
      *            The nameUnctrlVocab to set.
      */
-    public void setNameUnctrlVocab(String nameUnctrlVocab) {
+    public void setNameUnctrlVocab(String nameUnctrlVocab)
+    {
         this.nameUnctrlVocab = nameUnctrlVocab;
     }
 
     /**
      * @return Returns the type.
      */
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
@@ -95,14 +104,16 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      * @param type
      *            The type to set.
      */
-    public void setType(String type) {
+    public void setType(String type)
+    {
         this.type = type;
     }
 
     /**
      * @return Returns the typeUnctrlVocab.
      */
-    public String getTypeUnctrlVocab() {
+    public String getTypeUnctrlVocab()
+    {
         return typeUnctrlVocab;
     }
 
@@ -110,17 +121,20 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      * @param typeUnctrlVocab
      *            The typeUnctrlVocab to set.
      */
-    public void setTypeUnctrlVocab(String typeUnctrlVocab) {
+    public void setTypeUnctrlVocab(String typeUnctrlVocab)
+    {
         this.typeUnctrlVocab = typeUnctrlVocab;
     }
 
-    public String toString() {
+    public String toString()
+    {
         String result = super.toString() + " - ";
         result += this.getName();
         return result;
     }
 
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (!super.equals(o))
             return false;
         if (!(this.getClass().isInstance(o)))
@@ -131,17 +145,20 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
         return true;
     }
 
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = HashCodeUtil.SEED;
         result = HashCodeUtil.hash(result, this.getName());
         return result + super.hashCode();
     }
 
-    public int compareTo(Object o) {
-        if ((o instanceof EnvironmentalFactor) && (this.getName() != null)
-                && (((EnvironmentalFactor) o).getName() != null)) {
+    public int compareTo(Object o)
+    {
+        if ((o instanceof EnvironmentalFactor) && (this.getName() != null) && (((EnvironmentalFactor) o).getName() != null))
+        {
             int result = this.getName().compareTo(((EnvironmentalFactor) o).getName());
-            if (result != 0) {
+            if (result != 0)
+            {
                 return result;
             }
         }

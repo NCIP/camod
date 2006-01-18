@@ -8,33 +8,36 @@ package gov.nih.nci.camod.domain;
 
 import java.util.*;
 
-public class InducedMutation extends EngineeredGene {
-
+public class InducedMutation extends EngineeredGene
+{
     private static final long serialVersionUID = 3259235453799404851L;
 
     private String geneId;
     private String description;
-    //private EnvironmentalFactor environmentalFactor;
-    private List geneticAlterationCollection = new ArrayList();
-    private List environmentalFactorCollection = new ArrayList();
+    private List<GeneticAlteration> geneticAlterationCollection = new ArrayList<GeneticAlteration>();
+    private List<EnvironmentalFactor> environmentalFactorCollection = new ArrayList<EnvironmentalFactor>();
 
     /**
      * @return Returns the geneticAlterationCollection.
      */
-    public List getGeneticAlterationCollection() {
+    public List<GeneticAlteration> getGeneticAlterationCollection()
+    {
         return geneticAlterationCollection;
     }
-   
-    public List getGeneticAlterationCollectionSorted() {      
-      if (geneticAlterationCollection != null) return new ArrayList(new TreeSet(geneticAlterationCollection));
-      return null;
-    }   
-    
+
+    public List<GeneticAlteration> getGeneticAlterationCollectionSorted()
+    {
+        if (geneticAlterationCollection != null)
+            return new ArrayList<GeneticAlteration>(new TreeSet<GeneticAlteration>(geneticAlterationCollection));
+        return null;
+    }
+
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.
      */
-    public void setGeneticAlterationCollection(List geneticAlterationCollection) {
+    public void setGeneticAlterationCollection(List<GeneticAlteration> geneticAlterationCollection)
+    {
         this.geneticAlterationCollection = geneticAlterationCollection;
     }
 
@@ -42,50 +45,58 @@ public class InducedMutation extends EngineeredGene {
      * @param geneticAlteration
      *            The geneticAlteration to add.
      */
-    public void addGeneticAlteration(GeneticAlteration geneticAlteration) {
+    public void addGeneticAlteration(GeneticAlteration geneticAlteration)
+    {
         geneticAlterationCollection.add(geneticAlteration);
     }
 
     /**
      * @return Returns the geneticAlterationCollection.
      */
-    public List getEnvironmentalFactorCollection() {        
-        return environmentalFactorCollection;         
+    public List<EnvironmentalFactor> getEnvironmentalFactorCollection()
+    {
+        return environmentalFactorCollection;
     }
 
-    public List getEnvironmentalFactorCollectionSorted() {      
-      if (environmentalFactorCollection != null) return new ArrayList(new TreeSet(environmentalFactorCollection));
-      return null;
-    }   
-    
+    public List<EnvironmentalFactor> getEnvironmentalFactorCollectionSorted()
+    {
+        if (environmentalFactorCollection != null)
+            return new ArrayList<EnvironmentalFactor>(new TreeSet<EnvironmentalFactor>(environmentalFactorCollection));
+        return null;
+    }
+
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.
      */
-    public void setEnvironmentalFactorCollection(List environmentalFactorCollection) {
+    public void setEnvironmentalFactorCollection(List<EnvironmentalFactor> environmentalFactorCollection)
+    {
         this.environmentalFactorCollection = environmentalFactorCollection;
     }
-    
+
     //TODO: this is not how we should do this and we should clean this up later
-    public EnvironmentalFactor getEnvironmentalFactor () {
-    	if ( environmentalFactorCollection.size() > 0 )
-    		return (EnvironmentalFactor) environmentalFactorCollection.get(0);
-    	else
-    		return null;
+    public EnvironmentalFactor getEnvironmentalFactor()
+    {
+        if (environmentalFactorCollection.size() > 0)
+            return (EnvironmentalFactor) environmentalFactorCollection.get(0);
+        else
+            return null;
     }
-    
+
     /**
      * @param geneticAlteration
      *            The geneticAlteration to add.
      */
-    public void addEnvironmentalFactor(EnvironmentalFactor environmentalFactor) {
+    public void addEnvironmentalFactor(EnvironmentalFactor environmentalFactor)
+    {
         environmentalFactorCollection.add(environmentalFactor);
     }
 
     /**
      * @return Returns the description.
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -93,14 +104,16 @@ public class InducedMutation extends EngineeredGene {
      * @param description
      *            The description to set.
      */
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
     /**
      * @return Returns the geneId.
      */
-    public String getGeneId() {
+    public String getGeneId()
+    {
         return geneId;
     }
 
@@ -108,40 +121,28 @@ public class InducedMutation extends EngineeredGene {
      * @param geneId
      *            The geneId to set.
      */
-    public void setGeneId(String geneId) {
+    public void setGeneId(String geneId)
+    {
         this.geneId = geneId;
     }
 
     /**
-     * @return Returns the environmentalFactor.
-     *
-    public EnvironmentalFactor getEnvironmentalFactor() {
-        return environmentalFactor;
-    }
-
-    **
-     * @param environmentalFactor
-     *            The environmentalFactor to set.
-     *
-    public void setEnvironmentalFactor(EnvironmentalFactor environmentalFactor) {
-        this.environmentalFactor = environmentalFactor;
-    }
-    */
-
-
-    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getGeneId() + " - " + this.getDescription();
-       return result;
-     }  
-     
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getGeneId() + " - " + this.getDescription();
+        return result;
     }
-     
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
+    }
+
 }

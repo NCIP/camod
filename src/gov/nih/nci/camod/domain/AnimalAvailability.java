@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/12/08 21:44:23  georgeda
+ * Defect #259; handle PI availability for 2-tier data
+ *
  * Revision 1.9  2005/11/18 22:50:02  georgeda
  * Defect #184.  Cleanup editing of old models
  *
@@ -10,7 +13,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.10 2005-12-08 21:44:23 georgeda Exp $
+ * $Id: AnimalAvailability.java,v 1.11 2006-01-18 14:23:31 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -24,25 +27,28 @@ import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class AnimalAvailability extends BaseObject implements Comparable, Serializable, Duplicatable {
+public class AnimalAvailability extends BaseObject implements Comparable, Serializable, Duplicatable
+{
 
     private static final long serialVersionUID = 4259705453799404851L;
     protected transient final Log log = LogFactory.getLog(AnimalAvailability.class);
 
     private String name;
     private String stockNumber;
-    private List animalDistributorCollection = new ArrayList();
+    private List<AnimalDistributor> animalDistributorCollection = new ArrayList<AnimalDistributor>();
 
     /**
      * @return Returns the animalDistributorCollection.
      */
-    public List getAnimalDistributorCollection() {
+    public List<AnimalDistributor> getAnimalDistributorCollection()
+    {
         return animalDistributorCollection;
     }
 
-    public List getAnimalDistributorCollectionSorted() {
+    public List<AnimalDistributor> getAnimalDistributorCollectionSorted()
+    {
         if (animalDistributorCollection != null)
-            return new ArrayList(new TreeSet(animalDistributorCollection));
+            return new ArrayList<AnimalDistributor>(new TreeSet<AnimalDistributor>(animalDistributorCollection));
         return null;
     }
 
@@ -50,7 +56,8 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
      * @param animalDistributorCollection
      *            The animalDistributorCollection to set.
      */
-    public void setAnimalDistributorCollection(List animalDistributorCollection) {
+    public void setAnimalDistributorCollection(List<AnimalDistributor> animalDistributorCollection)
+    {
         this.animalDistributorCollection = animalDistributorCollection;
     }
 
@@ -58,7 +65,8 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
      * @param animalDistributor
      *            The animalDistributor to add.
      */
-    public void addAnimalDistributor(AnimalDistributor animalDistributor) {
+    public void addAnimalDistributor(AnimalDistributor animalDistributor)
+    {
         animalDistributor.getAnimalAvailabilityCollection().add(this);
         animalDistributorCollection.add(animalDistributor);
     }
@@ -66,19 +74,22 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
     /**
      * @return Returns the display name.
      */
-    public String getDisplayName() {
-        
+    public String getDisplayName()
+    {
+
         String theDisplayName = name;
-        if (theDisplayName == null) {
+        if (theDisplayName == null)
+        {
             theDisplayName = "Strain";
         }
         return theDisplayName;
     }
-    
+
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -86,14 +97,16 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
     /**
      * @return Returns the stockNumber.
      */
-    public String getStockNumber() {
+    public String getStockNumber()
+    {
         return stockNumber;
     }
 
@@ -101,20 +114,26 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
      * @param stockNumber
      *            The stockNumber to set.
      */
-    public void setStockNumber(String stockNumber) {
+    public void setStockNumber(String stockNumber)
+    {
         this.stockNumber = stockNumber;
     }
 
-    public Person getPrincipalInvestigator() {
+    public Person getPrincipalInvestigator()
+    {
         Person thePerson = null;
-        
+
         // Hack to work around old ca-mod data. -1 indicates that this comes
         // from the 2-tier.
-        if (stockNumber != null && !"-1".equals(stockNumber)) {
+        if (stockNumber != null && !"-1".equals(stockNumber))
+        {
 
-            try {
+            try
+            {
                 thePerson = PersonManagerSingleton.instance().get(stockNumber);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.debug("Unable to get Person for stock number");
             }
         }
@@ -125,13 +144,15 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
+    public String toString()
+    {
         String result = super.toString() + " - ";
         result += this.getName();
         return result;
     }
 
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (!super.equals(o))
             return false;
         if (!(this.getClass().isInstance(o)))
@@ -142,17 +163,20 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
         return true;
     }
 
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = HashCodeUtil.SEED;
         result = HashCodeUtil.hash(result, this.getName());
         return result + super.hashCode();
     }
 
-    public int compareTo(Object o) {
-        if ((o instanceof AnimalAvailability) && (this.getName() != null)
-                && (((AnimalAvailability) o).getName() != null)) {
+    public int compareTo(Object o)
+    {
+        if ((o instanceof AnimalAvailability) && (this.getName() != null) && (((AnimalAvailability) o).getName() != null))
+        {
             int result = this.getName().compareTo(((AnimalAvailability) o).getName());
-            if (result != 0) {
+            if (result != 0)
+            {
                 return result;
             }
         }

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: PersonManagerImpl.java,v 1.7 2005-10-17 13:14:11 georgeda Exp $
+ * $Id: PersonManagerImpl.java,v 1.8 2006-01-18 14:24:24 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/17 13:14:11  georgeda
+ * Added method and refactored to use new mgr func.
+ *
  * Revision 1.6  2005/10/11 18:13:36  georgeda
  * Return a null pointer if the username is null
  *
@@ -27,8 +30,8 @@ import java.util.List;
 /**
  * Class that handles saving/fetching Person objects
  */
-public class PersonManagerImpl extends BaseManager implements PersonManager {
-
+public class PersonManagerImpl extends BaseManager implements PersonManager
+{
     /**
      * Get all people in the system
      * 
@@ -37,9 +40,10 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      * @exception Exception
      *                If an error occurrs fetching the users
      */
-    public List getAll() throws Exception {
-    	log.trace("In PersonManagerImpl.getAll");
-    	return super.getAll(Person.class);
+    public List getAll() throws Exception
+    {
+        log.trace("In PersonManagerImpl.getAll");
+        return super.getAll(Person.class);
     }
 
     /**
@@ -53,9 +57,10 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      * @exception Exception
      *                If an error occurrs fetching the user
      */
-    public Person get(String id) throws Exception {
-    	log.trace("In PersonManagerImpl.get");
-    	return (Person) super.get(id, Person.class);
+    public Person get(String id) throws Exception
+    {
+        log.trace("In PersonManagerImpl.get");
+        return (Person) super.get(id, Person.class);
     }
 
     /**
@@ -69,13 +74,14 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      * @exception Exception
      *                If an error occurrs fetching the user
      */
-    public Person getByUsername(String inUsername) throws Exception {
-
+    public Person getByUsername(String inUsername) throws Exception
+    {
         Person person = null;
 
-        if (inUsername != null && inUsername.length() > 0) {
-            try {
-
+        if (inUsername != null && inUsername.length() > 0)
+        {
+            try
+            {
                 // The following two objects are needed for eQBE.
                 Person thePerson = new Person();
                 thePerson.setUsername(inUsername);
@@ -86,14 +92,18 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
 
                 List thePersonList = Search.query(thePerson, theEvaluation);
 
-                if (thePersonList != null && thePersonList.size() > 0) {
+                if (thePersonList != null && thePersonList.size() > 0)
+                {
                     person = (Person) thePersonList.get(0);
                 }
-
-            } catch (PersistenceException pe) {
+            }
+            catch (PersistenceException pe)
+            {
                 log.error("PersistenceException in getByUsername", pe);
                 throw pe;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.error("Exception in getByUsername", e);
                 throw e;
             }
@@ -112,25 +122,30 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      * @exception Exception
      *                If an error occurrs fetching the user
      */
-    public List getByRole(String inRole) throws Exception {
-
+    public List getByRole(String inRole) throws Exception
+    {
         List thePeople = new ArrayList();
 
-        if (inRole != null && inRole.length() > 0) {
-            try {
+        if (inRole != null && inRole.length() > 0)
+        {
+            try
+            {
                 thePeople = QueryManagerSingleton.instance().getPeopleByRole(inRole);
-               
-            } catch (PersistenceException pe) {
+            }
+            catch (PersistenceException pe)
+            {
                 log.error("PersistenceException in getByRole", pe);
                 throw pe;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.error("Exception in getByRole", e);
                 throw e;
             }
         }
         return thePeople;
     }
-    
+
     /**
      * Save the person object
      * 
@@ -140,9 +155,10 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      * @exception Exception
      *                If we're unable to save the person
      */
-    public void save(Person person) throws Exception {
-    	log.trace("In PersonManagerImpl.save");
-    	super.save(person);
+    public void save(Person person) throws Exception
+    {
+        log.trace("In PersonManagerImpl.save");
+        super.save(person);
     }
 
     /**
@@ -154,8 +170,9 @@ public class PersonManagerImpl extends BaseManager implements PersonManager {
      * @exception Exception
      *                If it was unable to remove the person
      */
-    public void remove(String id) throws Exception {
-    	log.trace("In PersonManagerImpl.remove");
+    public void remove(String id) throws Exception
+    {
+        log.trace("In PersonManagerImpl.remove");
         super.remove(id, Person.class);
     }
 }

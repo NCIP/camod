@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.8 2005-11-28 18:02:10 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.9 2006-01-18 14:23:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/28 18:02:10  georgeda
+ * Defect #182.  Get unique set of organs and only display metas. next to the originating organ
+ *
  * Revision 1.7  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -37,7 +40,8 @@ import java.util.*;
 /**
  * Used as wrapper around animal model for speedy display during paganation.
  */
-public class AnimalModelSearchResult implements Comparable {
+public class AnimalModelSearchResult implements Comparable
+{
 
     private String myAnimalModelId;
     private String myTumorSites = null;
@@ -53,7 +57,8 @@ public class AnimalModelSearchResult implements Comparable {
      * @param inAnimalModel
      *            the animal model we will be wrapping. Saves only the id.
      */
-    public AnimalModelSearchResult(AnimalModel inAnimalModel) {
+    public AnimalModelSearchResult(AnimalModel inAnimalModel)
+    {
         myAnimalModelId = inAnimalModel.getId().toString();
         myModelDescriptor = inAnimalModel.getModelDescriptor();
     }
@@ -63,7 +68,8 @@ public class AnimalModelSearchResult implements Comparable {
      * 
      * @return the id for the model
      */
-    public String getId() {
+    public String getId()
+    {
 
         return myAnimalModelId;
     }
@@ -76,7 +82,8 @@ public class AnimalModelSearchResult implements Comparable {
      * 
      * @throws Exception
      */
-    public String getModelDescriptor() throws Exception {
+    public String getModelDescriptor() throws Exception
+    {
         return myModelDescriptor;
     }
 
@@ -87,8 +94,10 @@ public class AnimalModelSearchResult implements Comparable {
      * @return the species for the associated model
      * @throws Exception
      */
-    public String getSpecies() throws Exception {
-        if (mySpecies == null) {
+    public String getSpecies() throws Exception
+    {
+        if (mySpecies == null)
+        {
             fetchAnimalModel();
             mySpecies = myAnimalModel.getSpecies().getScientificName();
         }
@@ -102,37 +111,43 @@ public class AnimalModelSearchResult implements Comparable {
      * @return the list of tumor sites for the associated model
      * @throws Exception
      */
-    public String getTumorSites() throws Exception {
+    public String getTumorSites() throws Exception
+    {
 
-        Set theOrgans = new TreeSet();
-        Hashtable theMetas = new Hashtable();
+        Set<String> theOrgans = new TreeSet<String>();
+        Hashtable<String, TreeSet<String>> theMetas = new Hashtable<String, TreeSet<String>>();
 
-        if (myTumorSites == null) {
+        if (myTumorSites == null)
+        {
             fetchAnimalModel();
 
             myTumorSites = "";
-            List theHistopathologyList = myAnimalModel.getHistopathologyCollectionSorted();
+            List<Histopathology> theHistopathologyList = myAnimalModel.getHistopathologyCollectionSorted();
 
-            for (int i = 0, j = theHistopathologyList.size(); i < j; i++) {
+            for (int i = 0, j = theHistopathologyList.size(); i < j; i++)
+            {
 
                 Histopathology theHistopathology = (Histopathology) theHistopathologyList.get(i);
 
                 String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
 
-                if (!theOrgans.contains(theOrgan)) {
+                if (!theOrgans.contains(theOrgan))
+                {
                     theOrgans.add(theOrgan);
-                    theMetas.put(theOrgan, new TreeSet());
+                    theMetas.put(theOrgan, new TreeSet<String>());
                 }
 
-                TreeSet theMetaSet = (TreeSet) theMetas.get(theOrgan);
+                TreeSet<String> theMetaSet = theMetas.get(theOrgan);
                 List theMetastasisList = theHistopathology.getMetastatisCollectionSorted();
 
-                for (int k = 0, l = theMetastasisList.size(); k < l; k++) {
+                for (int k = 0, l = theMetastasisList.size(); k < l; k++)
+                {
 
                     Histopathology theMetastasis = (Histopathology) theMetastasisList.get(k);
                     String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
 
-                    if (!theMetaSet.contains(theMetaOrgan)) {
+                    if (!theMetaSet.contains(theMetaOrgan))
+                    {
                         theMetaSet.add(theMetaOrgan);
                     }
                 }
@@ -141,7 +156,8 @@ public class AnimalModelSearchResult implements Comparable {
 
         Iterator theOrganIterator = theOrgans.iterator();
 
-        while (theOrganIterator.hasNext()) {
+        while (theOrganIterator.hasNext())
+        {
 
             String theOrgan = (String) theOrganIterator.next();
 
@@ -151,7 +167,8 @@ public class AnimalModelSearchResult implements Comparable {
 
             Iterator theMetaIterator = theMetaSet.iterator();
 
-            while (theMetaIterator.hasNext()) {
+            while (theMetaIterator.hasNext())
+            {
                 String theMetaOrgan = (String) theMetaIterator.next();
 
                 myTumorSites += theMetaOrgan + " (Metastasis)<br>";
@@ -168,17 +185,21 @@ public class AnimalModelSearchResult implements Comparable {
      * @return the display name of the submitter
      * @throws Exception
      */
-    public String getSubmitterName() throws Exception {
+    public String getSubmitterName() throws Exception
+    {
 
-        if (mySubmitterName == null) {
+        if (mySubmitterName == null)
+        {
             fetchAnimalModel();
 
             String theEmailAddress = myAnimalModel.getSubmitter().getEmailAddress();
 
-            if (theEmailAddress.length() > 0) {
-                mySubmitterName = "<a href=\"mailto:" + theEmailAddress + "\"/>"
-                        + myAnimalModel.getSubmitter().getDisplayName();
-            } else {
+            if (theEmailAddress.length() > 0)
+            {
+                mySubmitterName = "<a href=\"mailto:" + theEmailAddress + "\"/>" + myAnimalModel.getSubmitter().getDisplayName();
+            }
+            else
+            {
                 mySubmitterName = myAnimalModel.getSubmitter().getDisplayName();
             }
         }
@@ -191,9 +212,11 @@ public class AnimalModelSearchResult implements Comparable {
      * @return the date the model was submitted
      * @throws Exception
      */
-    public String getSubmittedDate() throws Exception {
+    public String getSubmittedDate() throws Exception
+    {
 
-        if (mySubmittedDate == null) {
+        if (mySubmittedDate == null)
+        {
             fetchAnimalModel();
 
             mySubmittedDate = myAnimalModel.getAvailability().getEnteredDate().toString();
@@ -201,7 +224,8 @@ public class AnimalModelSearchResult implements Comparable {
         return mySubmittedDate;
     }
 
-    public int compareTo(Object inObject) {
+    public int compareTo(Object inObject)
+    {
 
         AnimalModelSearchResult theResult = (AnimalModelSearchResult) inObject;
 
@@ -209,8 +233,10 @@ public class AnimalModelSearchResult implements Comparable {
     }
 
     // Fetch the animal model from the DB
-    private void fetchAnimalModel() throws Exception {
-        if (myAnimalModel == null) {
+    private void fetchAnimalModel() throws Exception
+    {
+        if (myAnimalModel == null)
+        {
             myAnimalModel = AnimalModelManagerSingleton.instance().get(myAnimalModelId);
         }
     }

@@ -16,17 +16,18 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class EndpointCode extends BaseObject implements Serializable, Duplicatable {
-
+public class EndpointCode extends BaseObject implements Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259495453799404851L;
-    
+
     private String code;
     private String description;
 
     /**
      * @return Returns the code.
      */
-    public String getCode() {
+    public String getCode()
+    {
         return code;
     }
 
@@ -34,14 +35,16 @@ public class EndpointCode extends BaseObject implements Serializable, Duplicatab
      * @param code
      *            The code to set.
      */
-    public void setCode(String code) {
+    public void setCode(String code)
+    {
         this.code = code;
     }
 
     /**
      * @return Returns the description.
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -49,18 +52,20 @@ public class EndpointCode extends BaseObject implements Serializable, Duplicatab
      * @param description
      *            The description to set.
      */
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
-    }   
+    }
 
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getCode()+" - "+this.getDescription();           
-       return result;
-     }    
-     
-     
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getCode() + " - " + this.getDescription();
+        return result;
+    }
+
+
 }

@@ -1,37 +1,46 @@
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalAvailability;
+import gov.nih.nci.camod.domain.AnimalDistributor;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.AvailabilityManager;
 import gov.nih.nci.camod.webapp.form.AvailabilityData;
 
 import java.util.List;
 
-public class AvailabilityManagerImpl extends BaseManager implements AvailabilityManager {
+public class AvailabilityManagerImpl extends BaseManager implements AvailabilityManager
+{
 
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In AvailabilityManagerImpl.getAll");
         return super.getAll(AnimalAvailability.class);
     }
 
-    public AnimalAvailability get(String id) throws Exception {
+    public AnimalAvailability get(String id) throws Exception
+    {
         log.trace("In AvailabilityManagerImpl.get");
         return (AnimalAvailability) super.get(id, AnimalAvailability.class);
     }
 
-    public void save(AnimalAvailability availability) throws Exception {
+    public void save(AnimalAvailability availability) throws Exception
+    {
         log.trace("In AvailabilityManagerImpl.save");
         super.save(availability);
     }
 
-    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+    public void remove(String id,
+                       AnimalModel inAnimalModel) throws Exception
+    {
         log.trace("In AvailabilityManagerImpl.remove");
 
         inAnimalModel.getAnimalAvailabilityCollection().remove(get(id));
         super.save(inAnimalModel);
     }
 
-    public AnimalAvailability create(AvailabilityData inAvailabilityData) throws Exception {
-
+    public AnimalAvailability create(AvailabilityData inAvailabilityData) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.create");
 
         AnimalAvailability theAvailability = new AnimalAvailability();
@@ -42,8 +51,8 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         return theAvailability;
     }
 
-    public AnimalAvailability createInvestigator(AvailabilityData inAvailabilityData) throws Exception {
-
+    public AnimalAvailability createInvestigator(AvailabilityData inAvailabilityData) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.createInvestigator");
 
         AnimalAvailability theAvailability = new AnimalAvailability();
@@ -54,8 +63,9 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         return theAvailability;
     }
 
-    public void update(AvailabilityData inAvailabilityData, AnimalAvailability inAvailability) throws Exception {
-
+    public void update(AvailabilityData inAvailabilityData,
+                       AnimalAvailability inAvailability) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.update");
         log.info("Updating AvailabilityData (ID): " + inAvailability.getId());
 
@@ -66,9 +76,9 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         log.info("Exiting AvailabilityManagerImpl.update");
     }
 
-    public void updateInvestigatorAvailability(AvailabilityData inAvailabilityData, AnimalAvailability inAvailability)
-            throws Exception {
-
+    public void updateInvestigatorAvailability(AvailabilityData inAvailabilityData,
+                                               AnimalAvailability inAvailability) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.updateInvestigatorAvailability");
         log.info("Updating AvailabilityData: " + inAvailability.getId());
 
@@ -79,17 +89,16 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         log.info("Exiting AvailabilityManagerImpl.updateInvestigatorAvailability");
     }
 
-    private void populateAvailability(AvailabilityData inAvailabilityData, AnimalAvailability inAvailability)
-            throws Exception {
-
+    private void populateAvailability(AvailabilityData inAvailabilityData,
+                                      AnimalAvailability inAvailability) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.populateAvailability");
 
         inAvailability.setName(inAvailabilityData.getName());
         inAvailability.setStockNumber(inAvailabilityData.getStockNumber());
 
         /* get distributor object */
-        AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(
-                inAvailabilityData.getSource());
+        AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
         log.info("theDistributor: " + theDistributor);
 
         // Explicitly add AnimalDistributor since it is a many-to-many
@@ -102,9 +111,9 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
     }
 
-    private void editAvailability(AvailabilityData inAvailabilityData, AnimalAvailability inAvailability)
-            throws Exception {
-
+    private void editAvailability(AvailabilityData inAvailabilityData,
+                                  AnimalAvailability inAvailability) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.editAvailability");
 
         inAvailability.setName(inAvailabilityData.getName());
@@ -114,16 +123,17 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
     }
 
-    private void populateInvestigatorAvailability(AvailabilityData inAvailabilityData, AnimalAvailability inAvailability)
-            throws Exception {
-
+    private void populateInvestigatorAvailability(AvailabilityData inAvailabilityData,
+                                                  AnimalAvailability inAvailability) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.populateInvestigatorAvailability");
 
         // set Availability name
         inAvailability.setName(inAvailabilityData.getName());
         log.info("setName: " + inAvailabilityData.getName());
 
-        if (inAvailabilityData.getStockNumber() != null && inAvailabilityData.getStockNumber().length() > 0) {
+        if (inAvailabilityData.getStockNumber() != null && inAvailabilityData.getStockNumber().length() > 0)
+        {
             /* Convert the PI name from dropdown to PI_id stored in DB */
             Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getStockNumber());
 
@@ -131,18 +141,18 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
             log.info("thePI.getId().toString(): " + thePI.getId().toString());
             inAvailability.setStockNumber(thePI.getId().toString());
-
         }
-        else {
+        else
+        {
             inAvailability.setStockNumber("-1");
         }
 
         /* get distributor object */
-        AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(
-                inAvailabilityData.getSource());
+        AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
         log.info("theDistributor): " + theDistributor);
 
-        if (!inAvailability.getAnimalDistributorCollection().contains(theDistributor)) {
+        if (!inAvailability.getAnimalDistributorCollection().contains(theDistributor))
+        {
             // Explicitly add AnimalDistributor since it is a many-to-many
             // relationship in camod phase 1
             inAvailability.addAnimalDistributor(theDistributor);
@@ -152,16 +162,17 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         log.info("Exiting AvailabilityManagerImpl.populateInvestigatorAvailability");
     }
 
-    private void editInvestigatorAvailability(AvailabilityData inAvailabilityData, AnimalAvailability inAvailability)
-            throws Exception {
-
+    private void editInvestigatorAvailability(AvailabilityData inAvailabilityData,
+                                              AnimalAvailability inAvailability) throws Exception
+    {
         log.info("Entering AvailabilityManagerImpl.editInvestigatorAvailability");
 
         // set Availability name
         inAvailability.setName(inAvailabilityData.getName());
         log.info("setName: " + inAvailabilityData.getName());
 
-        if (inAvailabilityData.getStockNumber() != null && inAvailabilityData.getStockNumber().length() > 0) {
+        if (inAvailabilityData.getStockNumber() != null && inAvailabilityData.getStockNumber().length() > 0)
+        {
             /* Convert the PI name from dropdown to PI_id stored in DB */
             Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getStockNumber());
 
@@ -169,12 +180,12 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
             log.info("thePI.getId().toString(): " + thePI.getId().toString());
             inAvailability.setStockNumber(thePI.getId().toString());
-
-        } else {
+        }
+        else
+        {
             inAvailability.setStockNumber("-1");
         }
 
         log.info("Exiting AvailabilityManagerImpl.editInvestigatorAvailability");
     }
-
 }

@@ -28,32 +28,41 @@ import java.util.TreeMap;
 
 import org.apache.struts.upload.FormFile;
 
-public class ImageManagerImpl extends BaseManager implements ImageManager {
+public class ImageManagerImpl extends BaseManager implements ImageManager
+{
 
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In ImageManagerImpl.getAll");
         return super.getAll(Image.class);
     }
 
-    public Image get(String id) throws Exception {
+    public Image get(String id) throws Exception
+    {
         log.trace("In ImageManagerImpl.get");
         return (Image) super.get(id, Image.class);
     }
 
-    public void save(Image Image) throws Exception {
+    public void save(Image Image) throws Exception
+    {
         log.trace("In ImageManagerImpl.save");
         super.save(Image);
     }
 
-    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+    public void remove(String id,
+                       AnimalModel inAnimalModel) throws Exception
+    {
         log.trace("In ImageManagerImpl.remove");
 
         inAnimalModel.getImageCollection().remove(get(id));
         super.save(inAnimalModel);
     }
 
-    public Image create(AnimalModel inAnimalModel, ImageData inImageData, String inPath, String inStorageDirKey)
-            throws Exception {
+    public Image create(AnimalModel inAnimalModel,
+                        ImageData inImageData,
+                        String inPath,
+                        String inStorageDirKey) throws Exception
+    {
 
         log.trace("Entering ImageManagerImpl.create");
 
@@ -65,8 +74,12 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         return inImage;
     }
 
-    public void update(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath,
-            String inStorageDirKey) throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       ImageData inImageData,
+                       Image inImage,
+                       String inPath,
+                       String inStorageDirKey) throws Exception
+    {
 
         log.trace("Entering ImageManagerImpl.update");
         log.debug("Updating ImageForm: " + inImage.getId());
@@ -78,15 +91,21 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         log.trace("Exiting ImageManagerImpl.update");
     }
 
-    private void populateImage(AnimalModel inAnimalModel, ImageData inImageData, Image inImage, String inPath,
-            String inStorageDirKey) throws Exception {
+    private void populateImage(AnimalModel inAnimalModel,
+                               ImageData inImageData,
+                               Image inImage,
+                               String inPath,
+                               String inStorageDirKey) throws Exception
+    {
 
         log.trace("Entering populateImage");
 
-        if (inImageData.getStaining() != null && !inImageData.getStaining().equals("")) {
+        if (inImageData.getStaining() != null && !inImageData.getStaining().equals(""))
+        {
             inImage.setStaining(inImageData.getStaining());
 
-            if (inImageData.getStaining().equals("Other")) {
+            if (inImageData.getStaining().equals("Other"))
+            {
                 inImage.setStainingUnctrlVocab(inImageData.getOtherStaining());
 
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");
@@ -95,7 +114,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
                 StringTokenizer st = new StringTokenizer(recipients, ",");
                 String inRecipients[] = new String[st.countTokens()];
-                for (int i = 0; i < inRecipients.length; i++) {
+                for (int i = 0; i < inRecipients.length; i++)
+                {
                     inRecipients[i] = st.nextToken();
                 }
 
@@ -105,7 +125,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 // gather message keys and variable values to build the e-mail
                 // content with
                 String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                Map values = new TreeMap();
+                Map<String,Object> values = new TreeMap<String,Object>();
                 values.put("type", "SegmentName");
                 values.put("value", inImageData.getOtherStaining());
                 values.put("submitter", inAnimalModel.getSubmitter());
@@ -113,19 +133,25 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                 values.put("modelstate", inAnimalModel.getState());
 
                 // Send the email
-                try {
+                try
+                {
                     MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     log.error("Caught exception sending mail: ", e);
                     e.printStackTrace();
                 }
             }
-        } else {
+        }
+        else
+        {
             inImage.setStaining(null);
             inImage.setStainingUnctrlVocab(null);
         }
 
-        if (inImage != null) {
+        if (inImage != null)
+        {
             inImage.setTitle(inImageData.getTitle());
             inImage.setDescription(inImageData.getDescriptionOfConstruct());
         }
@@ -133,7 +159,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
         // Upload Construct File location, Title of Construct, Description of
         // Construct
         // Check for exisiting Image for this Image
-        if (inImageData.getFileLocation() != null) {
+        if (inImageData.getFileLocation() != null)
+        {
 
             log.info("<ImageManagerImpl> Uploading a file");
 
@@ -144,29 +171,27 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
             String fileType = null;
             StringTokenizer strToken = new StringTokenizer(f.getFileName(), ".");
 
-            while (strToken.hasMoreTokens()) {
+            while (strToken.hasMoreTokens())
+            {
                 fileType = strToken.nextToken();
                 System.out.println("Token=" + fileType);
             }
 
-            log.info("<ImageManagerImpl> fileType is: " + fileType + " FileName is: " + f.getFileName() + " Type is: "
-                    + f.getContentType());
+            log.info("<ImageManagerImpl> fileType is: " + fileType + " FileName is: " + f.getFileName() + " Type is: " + f.getContentType());
 
             // Check the file type
-            if (fileType != null) {
-                
+            if (fileType != null)
+            {
                 // Supported file types.  Sid is only supported for the normal image upload
-                if (fileType.toLowerCase().equals("jpg") || 
-                    fileType.toLowerCase().equals("jpeg")|| 
-                    fileType.toLowerCase().equals("gif") || 
-                    (fileType.toLowerCase().equals("sid") && !inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) || 
-                    fileType.toLowerCase().equals("png")) 
+                if (fileType.toLowerCase().equals("jpg") || fileType.toLowerCase().equals("jpeg") || fileType.toLowerCase().equals("gif") || (fileType.toLowerCase().equals(
+                                                                                                                                                                            "sid") && !inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) || fileType.toLowerCase().equals(
+                                                                                                                                                                                                                                                                                             "png"))
                 {
-
                     InputStream in = null;
                     OutputStream out = null;
 
-                    try {
+                    try
+                    {
                         // Get an input stream on the form file
                         in = f.getInputStream();
 
@@ -176,10 +201,13 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                         out = new BufferedOutputStream(new FileOutputStream(inPath));
 
                         byte[] buffer = new byte[512];
-                        while (in.read(buffer) != -1) {
+                        while (in.read(buffer) != -1)
+                        {
                             out.write(buffer);
                         }
-                    } finally {
+                    }
+                    finally
+                    {
                         if (out != null)
                             out.close();
                         if (in != null)
@@ -207,30 +235,35 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
                     // Determine which path to do the view in
                     String serverViewUrl = "";
-                    if (inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) {
+                    if (inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY))
+                    {
                         serverViewUrl = theBundle.getString(Constants.CaImage.CAIMAGEGENCONSERVERVIEW);
-                    } else {
+                    }
+                    else
+                    {
                         serverViewUrl = theBundle.getString(Constants.CaImage.CAIMAGEMODELSERVERVIEW);
                     }
 
                     // Upload the file to caIMAGE
                     FtpUtil ftpUtil = new FtpUtil();
-                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName,
-                            uploadFile);
+                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile);
 
                     log.error("File upload successful.  File name: " + uniqueFileName);
-                    
+
                     inImage.setTitle(inImageData.getTitle());
 
                     inImage.setDescription(inImageData.getDescriptionOfConstruct());
 
                     // Do something fancy for the sid images
-                    if (fileType.equals("sid")) {
-
+                    if (fileType.equals("sid"))
+                    {
                         String theType = "";
-                        if (inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) {
+                        if (inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY))
+                        {
                             theType = theBundle.getString(Constants.CaImage.CAIMAGEGENCON);
-                        } else {
+                        }
+                        else
+                        {
                             theType = theBundle.getString(Constants.CaImage.CAIMAGEMODEL);
                         }
 
@@ -238,12 +271,14 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
                         String theThumbUrl = sidThumbView + theType + uniqueFileName;
                         String theViewUrl = Constants.CaImage.LEGACYJSP + theType + uniqueFileName;
                         inImage.setFileServerLocation(theThumbUrl + Constants.CaImage.FILESEP + theViewUrl);
-
-                    } else {
+                    }
+                    else
+                    {
                         inImage.setFileServerLocation(serverViewUrl + uniqueFileName);
                     }
-
-                } else {
+                }
+                else
+                {
                     log.error("Unsupported file type: " + fileType);
                     throw new IllegalArgumentException("Unknown file type: " + fileType);
                 }

@@ -1,7 +1,10 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/14 14:16:51  georgeda
+ * Cleanup
+ *
  * 
- * $Id: ChemicalClass.java,v 1.6 2005-11-14 14:16:51 georgeda Exp $
+ * $Id: ChemicalClass.java,v 1.7 2006-01-18 14:23:31 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -16,17 +19,17 @@ public class ChemicalClass extends BaseObject implements Serializable, Comparabl
     private static final long serialVersionUID = 3259635453799404851L;
 
     private String chemicalClassName;
-    private List agentCollection = new ArrayList();
+    private List<Agent> agentCollection = new ArrayList<Agent>();
 
     /**
      * @return Returns the agentCollection.
      */
-    public List getAgentCollection() {
+    public List<Agent> getAgentCollection() {
         return agentCollection;
     }
     
-    public List getAgentCollectionSorted() {      
-      if (agentCollection != null) return new ArrayList(new TreeSet(agentCollection));
+    public List<Agent> getAgentCollectionSorted() {      
+      if (agentCollection != null) return new ArrayList<Agent>(new TreeSet<Agent>(agentCollection));
       return null;
     }    
 
@@ -35,7 +38,7 @@ public class ChemicalClass extends BaseObject implements Serializable, Comparabl
      * @param agentCollection
      *            The agentCollection to set.
      */
-    public void setAgentCollection(List agentCollection) {
+    public void setAgentCollection(List<Agent> agentCollection) {
         this.agentCollection = agentCollection;
     }
 

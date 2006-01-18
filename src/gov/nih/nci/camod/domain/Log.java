@@ -16,10 +16,10 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Log extends BaseObject implements Serializable, Duplicatable {
-
+public class Log extends BaseObject implements Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259215453799404851L;
-    
+
     private String notes;
     private String type;
     private String subsystem;
@@ -27,12 +27,12 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
     private AbstractCancerModel cancerModel;
     private Comments comment;
     private Person submitter;
- 
 
     /**
      * @return Returns the notes.
      */
-    public String getNotes() {
+    public String getNotes()
+    {
         return notes;
     }
 
@@ -40,14 +40,16 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
      * @param notes
      *            The notes to set.
      */
-    public void setNotes(String notes) {
+    public void setNotes(String notes)
+    {
         this.notes = notes;
     }
 
     /**
      * @return Returns the type.
      */
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
@@ -55,14 +57,16 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
      * @param type
      *            The type to set.
      */
-    public void setType(String type) {
+    public void setType(String type)
+    {
         this.type = type;
     }
 
     /**
      * @return Returns the subsystem.
      */
-    public String getSubsystem() {
+    public String getSubsystem()
+    {
         return subsystem;
     }
 
@@ -70,14 +74,16 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
      * @param subsystem
      *            The subsystem to set.
      */
-    public void setSubsystem(String subsystem) {
+    public void setSubsystem(String subsystem)
+    {
         this.subsystem = subsystem;
     }
 
     /**
      * @return Returns the timestamp.
      */
-    public String getTimestamp() {
+    public String getTimestamp()
+    {
         return timestamp;
     }
 
@@ -85,14 +91,16 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
      * @param timestamp
      *            The timestamp to set.
      */
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(String timestamp)
+    {
         this.timestamp = timestamp;
     }
 
     /**
      * @return Returns the cancerModel.
      */
-    public AbstractCancerModel getCancerModel() {
+    public AbstractCancerModel getCancerModel()
+    {
         return cancerModel;
     }
 
@@ -100,14 +108,16 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
      * @param cancerModel
      *            The cancerModel to set.
      */
-    public void setCancerModel(AbstractCancerModel cancerModel) {
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
         this.cancerModel = cancerModel;
     }
 
     /**
      * @return Returns the comment.
      */
-    public Comments getComment() {
+    public Comments getComment()
+    {
         return comment;
     }
 
@@ -115,14 +125,16 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
      * @param comment
      *            The comment to set.
      */
-    public void setComment(Comments comment) {
+    public void setComment(Comments comment)
+    {
         this.comment = comment;
     }
 
     /**
      * @return Returns the submitter.
      */
-    public Person getSubmitter() {
+    public Person getSubmitter()
+    {
         return submitter;
     }
 
@@ -130,25 +142,28 @@ public class Log extends BaseObject implements Serializable, Duplicatable {
      * @param submitter
      *            The submitter to set.
      */
-    public void setSubmitter(Person submitter) {
+    public void setSubmitter(Person submitter)
+    {
         this.submitter = submitter;
     }
 
-  
+
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getTimestamp() + " - " + this.getNotes();
-       return result;
-     }  
-     
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getTimestamp() + " - " + this.getNotes();
+        return result;
     }
-     
-  
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
+    }
 }

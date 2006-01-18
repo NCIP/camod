@@ -7,20 +7,24 @@ import gov.nih.nci.camod.service.LogManager;
  * 
  * Singleton class for the LogManager
  */
-public class LogManagerSingleton {
-
+public class LogManagerSingleton
+{
     private static LogManager ourManager = new LogManagerImpl();
 
     /**
      * @return the global instance of the LogManager
      */
-    public static synchronized LogManager instance() {
+    public static synchronized LogManager instance()
+    {
         return ourManager;
     }
 }
 
 /*
- * $Log: not supported by cvs2svn $ Revision 1.1 2005/09/08 17:37:10
+ * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/09/12 18:22:10  georgeda
+ * Curation changes and addition of e-mail
+ * Revision 1.1 2005/09/08 17:37:10
  * georgeda Initial revision
  * 
  */

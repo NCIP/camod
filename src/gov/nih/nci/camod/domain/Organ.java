@@ -22,31 +22,35 @@ import gov.nih.nci.camod.util.HashCodeUtil;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Organ extends BaseObject implements Comparable, Serializable, Duplicatable {
-
+public class Organ extends BaseObject implements Comparable, Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259095453799404851L;
-    
+
     private String name;
     private String conceptCode;
-    private List histopathologyCollection = new ArrayList();
+    private List<Histopathology> histopathologyCollection = new ArrayList<Histopathology>();
 
     /**
      * @return Returns the histopathologyCollection.
      */
-    public List getHistopathologyCollection() {
+    public List<Histopathology> getHistopathologyCollection()
+    {
         return histopathologyCollection;
     }
-    
-    public List getHistopathologyCollectionSorted() {      
-      if (histopathologyCollection != null) return new ArrayList(new TreeSet(histopathologyCollection));
-      return null;
-    }       
+
+    public List<Histopathology> getHistopathologyCollectionSorted()
+    {
+        if (histopathologyCollection != null)
+            return new ArrayList<Histopathology>(new TreeSet<Histopathology>(histopathologyCollection));
+        return null;
+    }
 
     /**
      * @param histopathologyCollection
      *            The histopathologyCollection to set.
      */
-    public void setHistopathologyCollection(List histopathologyCollection) {
+    public void setHistopathologyCollection(List<Histopathology> histopathologyCollection)
+    {
         this.histopathologyCollection = histopathologyCollection;
     }
 
@@ -54,7 +58,8 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
      * @param histopatholgy
      *            The histopathology to add.
      */
-    public void addHistopathology(Histopathology histopathology) {
+    public void addHistopathology(Histopathology histopathology)
+    {
         histopathology.setOrgan(this);
         histopathologyCollection.add(histopathology);
     }
@@ -62,14 +67,16 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
     /**
      * @return Returns the conceptCode.
      */
-    public String getConceptCode() {
+    public String getConceptCode()
+    {
         return conceptCode;
     }
 
     /**
      * @return Returns the EVS Preferred displayName
      */
-    public String getEVSPreferredDescription() {
+    public String getEVSPreferredDescription()
+    {
         return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
     }
 
@@ -77,15 +84,17 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
      * @param conceptCode
      *            The conceptCode to set.
      */
-    public void setConceptCode(String conceptCode) {
+    public void setConceptCode(String conceptCode)
+    {
         this.conceptCode = conceptCode;
     }
-   
+
 
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -93,43 +102,60 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-      /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getName();
-       return result;
-     }  
-           
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final Organ obj = (Organ) o;
-      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getName();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getName());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      // compare by evs description name if possible, otherwise organ name
-      if ((o instanceof Organ) && (this.getEVSPreferredDescription() != null) && (((Organ)o).getEVSPreferredDescription() != null)) {   
-        int result = this.getEVSPreferredDescription().compareTo( ((Organ)o).getEVSPreferredDescription() );
-        if (result != 0) { return result; }               
-      } else if ((o instanceof Organ) && (this.getName() != null) && (((Organ)o).getName() != null)) { 
-         int result = this.getName().compareTo( ((Organ)o).getName() );
-         if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }    
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final Organ obj = (Organ) o;
+        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
+            return false;
+        return true;
+    }
+
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getName());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        // compare by evs description name if possible, otherwise organ name
+        if ((o instanceof Organ) && (this.getEVSPreferredDescription() != null) && (((Organ) o).getEVSPreferredDescription() != null))
+        {
+            int result = this.getEVSPreferredDescription().compareTo(((Organ) o).getEVSPreferredDescription());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+        else if ((o instanceof Organ) && (this.getName() != null) && (((Organ) o).getName() != null))
+        {
+            int result = this.getName().compareTo(((Organ) o).getName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 }

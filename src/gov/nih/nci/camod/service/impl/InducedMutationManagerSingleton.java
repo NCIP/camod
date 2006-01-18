@@ -7,14 +7,15 @@ import gov.nih.nci.camod.service.InducedMutationManager;
  * 
  * Singleton class for the SexDistributionManager
  */
-public class InducedMutationManagerSingleton {
-
+public class InducedMutationManagerSingleton
+{
     private static InducedMutationManager ourManager = new InducedMutationManagerImpl();
 
     /**
      * @return the global instance of the InducedMutationManager
      */
-    public static synchronized InducedMutationManager instance() {
+    public static synchronized InducedMutationManager instance()
+    {
         return ourManager;
     }
 }

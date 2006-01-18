@@ -15,18 +15,17 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class SexDistribution extends BaseObject implements Serializable {
-
+public class SexDistribution extends BaseObject implements Serializable
+{
     private static final long serialVersionUID = 3258635453799404851L;
-    
-    private String type;
 
-  
+    private String type;
 
     /**
      * @return Returns the type.
      */
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
@@ -34,22 +33,27 @@ public class SexDistribution extends BaseObject implements Serializable {
      * @param type
      *            The type to set.
      */
-    public void setType(String type) {
+    public void setType(String type)
+    {
         this.type = type;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getType();
-       return result;
-     }  
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getType();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }

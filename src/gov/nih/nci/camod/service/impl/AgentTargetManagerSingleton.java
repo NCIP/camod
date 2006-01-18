@@ -7,14 +7,15 @@ import gov.nih.nci.camod.service.AgentTargetManager;
  * 
  * Singleton class for the AgentTargetManager
  */
-public class AgentTargetManagerSingleton {
-
+public class AgentTargetManagerSingleton
+{
     private static AgentTargetManager ourManager = new AgentTargetManagerImpl();
 
     /**
      * @return the global instance of the AgentTargetManager
      */
-    public static synchronized AgentTargetManager instance() {
+    public static synchronized AgentTargetManager instance()
+    {
         return ourManager;
-    }	
+    }
 }

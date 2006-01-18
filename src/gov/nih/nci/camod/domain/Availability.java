@@ -1,7 +1,10 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/14 14:16:51  georgeda
+ * Cleanup
+ *
  * 
- * $Id: Availability.java,v 1.5 2005-11-14 14:16:51 georgeda Exp $
+ * $Id: Availability.java,v 1.6 2006-01-18 14:23:31 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -9,10 +12,10 @@ import java.io.Serializable;
 import java.util.Date;
 import gov.nih.nci.camod.util.Duplicatable;
 
-public class Availability extends BaseObject implements Serializable, Duplicatable {
-
+public class Availability extends BaseObject implements Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259655453799404851L;
-    
+
     private Date enteredDate;
     private String visibleTo;
     private Date modifiedDate;
@@ -21,7 +24,8 @@ public class Availability extends BaseObject implements Serializable, Duplicatab
     /**
      * @return Returns the enteredDate.
      */
-    public Date getEnteredDate() {
+    public Date getEnteredDate()
+    {
         return enteredDate;
     }
 
@@ -29,14 +33,16 @@ public class Availability extends BaseObject implements Serializable, Duplicatab
      * @param enteredDate
      *            The enteredDate to set.
      */
-    public void setEnteredDate(Date enteredDate) {
+    public void setEnteredDate(Date enteredDate)
+    {
         this.enteredDate = enteredDate;
     }
-   
+
     /**
      * @return Returns the modifiedDate.
      */
-    public Date getModifiedDate() {
+    public Date getModifiedDate()
+    {
         return modifiedDate;
     }
 
@@ -44,14 +50,16 @@ public class Availability extends BaseObject implements Serializable, Duplicatab
      * @param modifiedDate
      *            The modifiedDate to set.
      */
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(Date modifiedDate)
+    {
         this.modifiedDate = modifiedDate;
     }
 
     /**
      * @return Returns the releaseDate.
      */
-    public Date getReleaseDate() {
+    public Date getReleaseDate()
+    {
         return releaseDate;
     }
 
@@ -59,14 +67,16 @@ public class Availability extends BaseObject implements Serializable, Duplicatab
      * @param releaseDate
      *            The releaseDate to set.
      */
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(Date releaseDate)
+    {
         this.releaseDate = releaseDate;
     }
 
     /**
      * @return Returns the visibleTo.
      */
-    public String getVisibleTo() {
+    public String getVisibleTo()
+    {
         return visibleTo;
     }
 
@@ -74,23 +84,28 @@ public class Availability extends BaseObject implements Serializable, Duplicatab
      * @param visibleTo
      *            The visibleTo to set.
      */
-    public void setVisibleTo(String visibleTo) {
+    public void setVisibleTo(String visibleTo)
+    {
         this.visibleTo = visibleTo;
-    }  
+    }
 
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-      String result = super.toString() + " - ";      
-      result += this.getEnteredDate()+" - "+this.getModifiedDate()+" - "+this.getReleaseDate();                
-      return result;
-    }     
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getEnteredDate() + " - " + this.getModifiedDate() + " - " + this.getReleaseDate();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 
 }

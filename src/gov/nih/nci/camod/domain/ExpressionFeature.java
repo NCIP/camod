@@ -17,17 +17,18 @@ import gov.nih.nci.camod.util.HashCodeUtil;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class ExpressionFeature extends BaseObject implements Comparable, Serializable, Duplicatable {
-
+public class ExpressionFeature extends BaseObject implements Comparable, Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259435453799404851L;
-    
+
     private Organ organ;
     private ExpressionLevelDesc expressionLevelDesc;
 
     /**
      * @return Returns the expressionLevelDesc.
      */
-    public ExpressionLevelDesc getExpressionLevelDesc() {
+    public ExpressionLevelDesc getExpressionLevelDesc()
+    {
         return expressionLevelDesc;
     }
 
@@ -35,14 +36,16 @@ public class ExpressionFeature extends BaseObject implements Comparable, Seriali
      * @param expressionLevelDesc
      *            The expressionLevelDesc to set.
      */
-    public void setExpressionLevelDesc(ExpressionLevelDesc expressionLevelDesc) {
+    public void setExpressionLevelDesc(ExpressionLevelDesc expressionLevelDesc)
+    {
         this.expressionLevelDesc = expressionLevelDesc;
     }
 
     /**
      * @return Returns the organ.
      */
-    public Organ getOrgan() {
+    public Organ getOrgan()
+    {
         return organ;
     }
 
@@ -50,41 +53,52 @@ public class ExpressionFeature extends BaseObject implements Comparable, Seriali
      * @param organ
      *            The organ to set.
      */
-    public void setOrgan(Organ organ) {
+    public void setOrgan(Organ organ)
+    {
         this.organ = organ;
     }
-
 
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getOrgan();   
-       return result;
-     }           
-   
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final ExpressionFeature obj = (ExpressionFeature) o;
-      if (HashCodeUtil.notEqual(this.getOrgan(), obj.getOrgan())) return false;
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getOrgan();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getOrgan());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof ExpressionFeature) && (this.getOrgan() != null) && (((ExpressionFeature)o).getOrgan() != null)) {   
-        int result = this.getOrgan().compareTo( ((ExpressionFeature)o).getOrgan() );
-        if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }      
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final ExpressionFeature obj = (ExpressionFeature) o;
+        if (HashCodeUtil.notEqual(this.getOrgan(), obj.getOrgan()))
+            return false;
+        return true;
+    }
+
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getOrgan());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        if ((o instanceof ExpressionFeature) && (this.getOrgan() != null) && (((ExpressionFeature) o).getOrgan() != null))
+        {
+            int result = this.getOrgan().compareTo(((ExpressionFeature) o).getOrgan());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 
 }

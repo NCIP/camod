@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CommentsManagerImpl.java,v 1.4 2005-10-27 19:42:05 georgeda Exp $
+ * $Id: CommentsManagerImpl.java,v 1.5 2006-01-18 14:24:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/27 19:42:05  georgeda
+ * Cleanup
+ *
  * Revision 1.3  2005/10/17 13:26:50  georgeda
  * Updates for curation
  *
@@ -33,7 +36,8 @@ import java.util.List;
 /**
  * Manages fetching/saving/updating of comments
  */
-public class CommentsManagerImpl extends BaseManager implements CommentsManager {
+public class CommentsManagerImpl extends BaseManager implements CommentsManager
+{
 
     /**
      * Get all of the comments in the DB
@@ -43,13 +47,15 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager 
      * @exception throws
      *                an Exception if an error occurred
      */
-    public Comments create(CommentsData inCommentsData) throws Exception {
+    public Comments create(CommentsData inCommentsData) throws Exception
+    {
         log.trace("In CommentsManagerImpl.create");
 
         Comments theComments = new Comments();
 
         String theSafeRemark = inCommentsData.getRemark();
-        if (theSafeRemark.length() > 2000) {
+        if (theSafeRemark.length() > 2000)
+        {
             theSafeRemark.substring(0, 1999);
         }
         theComments.setRemark(theSafeRemark);
@@ -60,16 +66,20 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager 
 
         List theList = Search.query(theQBEModelSection);
 
-        if (theList.size() > 0) {
+        if (theList.size() > 0)
+        {
             ModelSection theModelSection = (ModelSection) theList.get(0);
             theComments.setModelSection(theModelSection);
-        } else {
+        }
+        else
+        {
             throw new IllegalArgumentException("Unknown model section name: " + inCommentsData.getSectionName());
         }
 
         // Add the submitter
         Person theSubmitter = PersonManagerSingleton.instance().getByUsername(inCommentsData.getSubmitter());
-        if (theSubmitter == null) {
+        if (theSubmitter == null)
+        {
             throw new IllegalArgumentException("Invalid submitter: " + inCommentsData.getSubmitter());
         }
         theComments.setSubmitter(theSubmitter);
@@ -77,7 +87,8 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager 
         // Set the cancer model
         AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(inCommentsData.getModelId());
 
-        if (theAnimalModel == null) {
+        if (theAnimalModel == null)
+        {
             throw new IllegalArgumentException("Invalid model id: " + inCommentsData.getModelId());
         }
         theComments.setCancerModel(theAnimalModel);
@@ -103,7 +114,8 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager 
      * @exception throws
      *                an Exception if an error occurred
      */
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In CommentsManagerImpl.getAll");
         return super.getAll(AnimalModel.class);
     }
@@ -119,10 +131,10 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager 
      * @exception Exception
      *                if an error occurred
      */
-    public List getAllByStateForPerson(String inState, Person inPerson) throws Exception {
-
+    public List getAllByStateForPerson(String inState,
+                                       Person inPerson) throws Exception
+    {
         log.trace("In CommentsManagerImpl.getAllByStateForPerson");
-
         return QueryManagerSingleton.instance().getCommentsByStateForPerson(inState, inPerson);
     }
 
@@ -140,10 +152,11 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager 
      * @exception Exception
      *                if an error occurred
      */
-    public List getAllBySection(String inState, Person inPerson, AnimalModel inModel) throws Exception {
-
+    public List getAllBySection(String inState,
+                                Person inPerson,
+                                AnimalModel inModel) throws Exception
+    {
         log.trace("In CommentsManagerImpl.getAllBySectionForPerson");
-
         return QueryManagerSingleton.instance().getCommentsBySection(inState, inPerson, inModel);
     }
 
@@ -159,7 +172,8 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager 
      * @exception Exception
      *                if an error occurred
      */
-    public Comments get(String id) throws Exception {
+    public Comments get(String id) throws Exception
+    {
         log.trace("In CommentsManagerImpl.get");
         return (Comments) super.get(id, Comments.class);
     }

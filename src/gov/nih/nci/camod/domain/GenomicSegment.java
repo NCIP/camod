@@ -10,39 +10,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-
 /**
  * @author rajputs
  * 
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class GenomicSegment extends EngineeredGene {
+public class GenomicSegment extends EngineeredGene
+{
 
     private static final long serialVersionUID = 3259315453799404851L;
 
     private String locationOfIntegration;
     private String segmentSize;
     private String cloneDesignator;
-    private List segmentTypeCollection = new ArrayList();
+    private List<SegmentType> segmentTypeCollection = new ArrayList<SegmentType>();
 
     /**
      * @return Returns the segmentTypeCollection.
      */
-    public List getSegmentTypeCollection() {
+    public List<SegmentType> getSegmentTypeCollection()
+    {
         return segmentTypeCollection;
     }
-    
-    public List getSegmentTypeCollectionSorted() {      
-      if (segmentTypeCollection != null) return new ArrayList(new TreeSet(segmentTypeCollection));
-      return null;
-    }   
+
+    public List<SegmentType> getSegmentTypeCollectionSorted()
+    {
+        if (segmentTypeCollection != null)
+            return new ArrayList<SegmentType>(new TreeSet<SegmentType>(segmentTypeCollection));
+        return null;
+    }
 
     /**
      * @param segmentTypeCollection
      *            The segmentTypeCollection to set.
      */
-    public void setSegmentTypeCollection(List segmentTypeCollection) {
+    public void setSegmentTypeCollection(List<SegmentType> segmentTypeCollection)
+    {
         this.segmentTypeCollection = segmentTypeCollection;
     }
 
@@ -50,14 +54,16 @@ public class GenomicSegment extends EngineeredGene {
      * @param segmentType
      *            The segmentType to add.
      */
-    public void addSegmentType(SegmentType segmentType) {
+    public void addSegmentType(SegmentType segmentType)
+    {
         segmentTypeCollection.add(segmentType);
     }
 
     /**
      * @return Returns the cloneDesignator.
      */
-    public String getCloneDesignator() {
+    public String getCloneDesignator()
+    {
         return cloneDesignator;
     }
 
@@ -65,14 +71,16 @@ public class GenomicSegment extends EngineeredGene {
      * @param cloneDesignator
      *            The cloneDesignator to set.
      */
-    public void setCloneDesignator(String cloneDesignator) {
+    public void setCloneDesignator(String cloneDesignator)
+    {
         this.cloneDesignator = cloneDesignator;
     }
 
     /**
      * @return Returns the locationOfIntegration.
      */
-    public String getLocationOfIntegration() {
+    public String getLocationOfIntegration()
+    {
         return locationOfIntegration;
     }
 
@@ -80,14 +88,16 @@ public class GenomicSegment extends EngineeredGene {
      * @param locationOfIntegration
      *            The locationOfIntegration to set.
      */
-    public void setLocationOfIntegration(String locationOfIntegration) {
+    public void setLocationOfIntegration(String locationOfIntegration)
+    {
         this.locationOfIntegration = locationOfIntegration;
     }
 
     /**
      * @return Returns the segmentSize.
      */
-    public String getSegmentSize() {
+    public String getSegmentSize()
+    {
         return segmentSize;
     }
 
@@ -95,23 +105,28 @@ public class GenomicSegment extends EngineeredGene {
      * @param segmentSize
      *            The segmentSize to set.
      */
-    public void setSegmentSize(String segmentSize) {
+    public void setSegmentSize(String segmentSize)
+    {
         this.segmentSize = segmentSize;
     }
- 
+
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getLocationOfIntegration()+" - "+this.getCloneDesignator()+" - "+this.getSegmentSize();
-       return result;
-     }  
-     
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getLocationOfIntegration() + " - " + this.getCloneDesignator() + " - " + this.getSegmentSize();
+        return result;
     }
-     
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
+    }
+
 }

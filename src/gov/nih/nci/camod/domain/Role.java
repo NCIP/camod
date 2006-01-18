@@ -20,38 +20,42 @@ import gov.nih.nci.camod.util.HashCodeUtil;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Role extends BaseObject implements Serializable, Comparable {
-
+public class Role extends BaseObject implements Serializable, Comparable
+{
     private static final long serialVersionUID = 3258695453799404851L;
-    
+
     private String name;
-    private List partyCollection = new ArrayList();
+    private List<Party> partyCollection = new ArrayList<Party>();
 
     /**
      * @return Returns the partyCollection.
      */
-    public List getPartyCollection() {
+    public List<Party> getPartyCollection()
+    {
         return partyCollection;
     }
 
-    public List getPartyCollectionSorted() {      
-      if (partyCollection != null) return new ArrayList(new TreeSet(partyCollection));
-      return null;
-    }    
-    
+    public List<Party> getPartyCollectionSorted()
+    {
+        if (partyCollection != null)
+            return new ArrayList<Party>(new TreeSet<Party>(partyCollection));
+        return null;
+    }
+
     /**
      * @param partyCollection
      *            The partyCollection to set.
      */
-    public void setPartyCollection(List partyCollection) {
+    public void setPartyCollection(List<Party> partyCollection)
+    {
         this.partyCollection = partyCollection;
     }
 
-   
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -59,40 +63,51 @@ public class Role extends BaseObject implements Serializable, Comparable {
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-      /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getName();
-       return result;
-     }  
-    
-     public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final Role obj = (Role) o;
-      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getName();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getName());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof Role) && (this.getName() != null) && (((Role)o).getName() != null)) {   
-        int result = this.getName().compareTo( ((Role)o).getName() );
-        if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }      
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final Role obj = (Role) o;
+        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
+            return false;
+        return true;
+    }
 
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getName());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        if ((o instanceof Role) && (this.getName() != null) && (((Role) o).getName() != null))
+        {
+            int result = this.getName().compareTo(((Role) o).getName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 }

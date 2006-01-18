@@ -13,16 +13,20 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author georgeda
  */
-public abstract class BaseCurateableAction implements CurateableAction {
-
+public abstract class BaseCurateableAction implements CurateableAction
+{
     protected final Log log = LogFactory.getLog(BaseCurateableAction.class);
 
     public abstract CurateableAction create();
 
-    public abstract void execute(Map inArgs, Curateable inObject);
+    public abstract void execute(Map inArgs,
+                                 Curateable inObject);
 }
 
 /*
- * $Log: not supported by cvs2svn $ Revision 1.1 2005/09/12 18:22:04 georgeda
+ * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/09/13 20:44:54  georgeda
+ * More changes
+ * Revision 1.1 2005/09/12 18:22:04 georgeda
  * Curation changes and addition of e-mail
  */

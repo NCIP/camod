@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.17 2005-11-28 13:46:53 georgeda Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.18 2006-01-18 14:24:24 georgeda Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/11/28 13:46:53  georgeda
+ * Defect #207, handle nulls for pages w/ uncontrolled vocab
+ *
  * Revision 1.16  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -45,41 +48,54 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.EnvironmentalFactor;
+import gov.nih.nci.camod.domain.GeneticAlteration;
+import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager {
-
-    public List getAll() throws Exception {
+public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager
+{
+    public List getAll() throws Exception
+    {
         log.trace("In InducedMutationManagerImpl.getAll");
         return super.getAll(InducedMutation.class);
     }
 
-    public InducedMutation get(String id) throws Exception {
+    public InducedMutation get(String id) throws Exception
+    {
         log.trace("In InducedMutationManagerImpl.get");
         return (InducedMutation) super.get(id, InducedMutation.class);
     }
 
-    public void save(InducedMutation InducedMutation) throws Exception {
+    public void save(InducedMutation InducedMutation) throws Exception
+    {
         log.trace("In InducedMutationManagerImpl.save");
         super.save(InducedMutation);
     }
 
-    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+    public void remove(String id,
+                       AnimalModel inAnimalModel) throws Exception
+    {
         log.trace("In InducedMutationManagerImpl.remove");
         inAnimalModel.getEngineeredGeneCollection().remove(get(id));
         super.save(inAnimalModel);
     }
 
-    public InducedMutation create(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData)
-            throws Exception {
-
+    public InducedMutation create(AnimalModel inAnimalModel,
+                                  InducedMutationData inInducedMutationData) throws Exception
+    {
         log.trace("Entering InducedMutationManagerImpl.create");
 
         InducedMutation theInducedMutation = new InducedMutation();
@@ -91,9 +107,10 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         return theInducedMutation;
     }
 
-    public void update(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData,
-            InducedMutation inInducedMutation) throws Exception {
-
+    public void update(AnimalModel inAnimalModel,
+                       InducedMutationData inInducedMutationData,
+                       InducedMutation inInducedMutation) throws Exception
+    {
         log.trace("Entering InducedMutationManagerImpl.update");
         log.debug("Updating InducedMutationForm: " + inInducedMutation.getId());
 
@@ -104,9 +121,12 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         log.trace("Exiting InducedMutationManagerImpl.update");
     }
 
-    private void populateInducedMutation(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData,
-            InducedMutation inInducedMutation) throws Exception {
-
+    private void populateInducedMutation(
+        AnimalModel inAnimalModel,
+        InducedMutationData inInducedMutationData,
+        InducedMutation inInducedMutation) 
+      throws Exception
+    {
         log.trace("Entering populateInducedMutation");
 
         EnvironmentalFactor inEnvironFactor = null;
@@ -122,8 +142,8 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         inEnvironFactor.setType(inInducedMutationData.getType());
 
         // Other type
-        if (inInducedMutationData.getOtherType() != null) {
-
+        if (inInducedMutationData.getOtherType() != null)
+        {
             log.trace("Sending Notification eMail - new InducedMutation Agent added");
             ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
@@ -131,7 +151,8 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
             StringTokenizer st = new StringTokenizer(recipients, ",");
             String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++) {
+            for (int i = 0; i < inRecipients.length; i++)
+            {
                 inRecipients[i] = st.nextToken();
             }
 
@@ -141,7 +162,7 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             // gather message keys and variable values to build the e-mail
             // content with
             String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map values = new TreeMap();
+            Map<String,Object> values = new TreeMap<String,Object>();
             values.put("type", "OtherInducedMutation");
             values.put("value", inInducedMutationData.getOtherType());
             values.put("submitter", inAnimalModel.getSubmitter());
@@ -149,9 +170,12 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             values.put("modelstate", inAnimalModel.getState());
 
             // Send the email
-            try {
+            try
+            {
                 MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.error("Caught exception sending mail: ", e);
                 e.printStackTrace();
             }
@@ -184,17 +208,25 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         // Observation and Method of Observation
         List geneticList = inInducedMutation.getGeneticAlterationCollection();
 
-        if (geneticList.size() > 0) {
-            if (inInducedMutationData.getObservation() != null && !inInducedMutationData.getObservation().equals("")) {
+        if (geneticList.size() > 0)
+        {
+            if (inInducedMutationData.getObservation() != null && !inInducedMutationData.getObservation().equals(""))
+            {
                 GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
                 inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
                 inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
-            } else {
+            }
+            else
+            {
                 geneticList.remove(0);
             }
-        } else {
-            if (inInducedMutationData.getObservation() != null) {
-                if (!inInducedMutationData.getObservation().equals("")) {
+        }
+        else
+        {
+            if (inInducedMutationData.getObservation() != null)
+            {
+                if (!inInducedMutationData.getObservation().equals(""))
+                {
                     GeneticAlteration inGeneticAlteration = new GeneticAlteration();
                     inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
                     inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
@@ -206,18 +238,24 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         // MGI Number
         // Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;
-        if (inInducedMutation.getMutationIdentifier() != null) {
+        if (inInducedMutation.getMutationIdentifier() != null)
+        {
             inMutationIdentifier = inInducedMutation.getMutationIdentifier();
-        } else
+        }
+        else
             inMutationIdentifier = new MutationIdentifier();
 
-        if (inInducedMutationData.getNumberMGI() == null || inInducedMutationData.getNumberMGI().equals("")) {
+        if (inInducedMutationData.getNumberMGI() == null || inInducedMutationData.getNumberMGI().equals(""))
+        {
             inInducedMutation.setMutationIdentifier(null);
-        } else {
+        }
+        else
+        {
             String strNumberMGI = inInducedMutationData.getNumberMGI().trim();
             Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
             Matcher m = p.matcher(strNumberMGI);
-            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
+            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals(""))
+            {
                 inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
                 inInducedMutation.setMutationIdentifier(inMutationIdentifier);
             }

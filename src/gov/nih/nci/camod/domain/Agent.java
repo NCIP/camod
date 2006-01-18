@@ -1,7 +1,10 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/14 14:16:51  georgeda
+ * Cleanup
+ *
  * 
- * $Id: Agent.java,v 1.10 2005-11-14 14:16:51 georgeda Exp $
+ * $Id: Agent.java,v 1.11 2006-01-18 14:23:31 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -16,9 +19,9 @@ public class Agent extends EnvironmentalFactor {
     private String evsId;
     private String comments;
     private String source;
-    private List biologicalProcessCollection = new ArrayList();
-    private List chemicalClassCollection = new ArrayList();
-    private List agentTargetCollection = new ArrayList();
+    private List<BiologicalProcess> biologicalProcessCollection = new ArrayList<BiologicalProcess>();
+    private List<ChemicalClass> chemicalClassCollection = new ArrayList<ChemicalClass>();
+    private List<AgentTarget> agentTargetCollection = new ArrayList<AgentTarget>();
 
     /**
      * @return Returns the agentTargetCollection.
@@ -27,8 +30,8 @@ public class Agent extends EnvironmentalFactor {
       return agentTargetCollection;                    
     }
 
-    public List getAgentTargetCollectionSorted() {      
-      if (agentTargetCollection != null) return new ArrayList(new TreeSet(agentTargetCollection));
+    public List<AgentTarget> getAgentTargetCollectionSorted() {      
+      if (agentTargetCollection != null) return new ArrayList<AgentTarget>(new TreeSet<AgentTarget>(agentTargetCollection));
       return null;
     }    
 
@@ -36,7 +39,7 @@ public class Agent extends EnvironmentalFactor {
      * @param agentTargetCollection
      *            The agentTargetCollection to set.
      */
-    public void setAgentTargetCollection(List agentTargetCollection) {
+    public void setAgentTargetCollection(List<AgentTarget> agentTargetCollection) {
         this.agentTargetCollection = agentTargetCollection; 
     }
 
@@ -56,8 +59,8 @@ public class Agent extends EnvironmentalFactor {
       return chemicalClassCollection;        
     }
 
-    public List getChemicalClassCollectionSorted() {      
-      if (chemicalClassCollection != null) return new ArrayList(new TreeSet(chemicalClassCollection));
+    public List<ChemicalClass> getChemicalClassCollectionSorted() {      
+      if (chemicalClassCollection != null) return new ArrayList<ChemicalClass>(new TreeSet<ChemicalClass>(chemicalClassCollection));
       return null;
     }    
     
@@ -65,7 +68,7 @@ public class Agent extends EnvironmentalFactor {
      * @param chemicalClassCollection
      *            The chemicalClassCollection to set.
      */
-    public void setChemicalClassCollection(List chemicalClassCollection) {
+    public void setChemicalClassCollection(List<ChemicalClass> chemicalClassCollection) {
         this.chemicalClassCollection = chemicalClassCollection;
     }
 
@@ -86,7 +89,8 @@ public class Agent extends EnvironmentalFactor {
     }
 
     public List getBiologicalProcessCollectionSorted() {      
-      if (biologicalProcessCollection != null) return new ArrayList(new TreeSet(biologicalProcessCollection));
+      if (biologicalProcessCollection != null)
+            return new ArrayList<BiologicalProcess>(new TreeSet<BiologicalProcess>(biologicalProcessCollection));
       return null;
     }    
     
@@ -95,7 +99,7 @@ public class Agent extends EnvironmentalFactor {
      * @param biologicalProcessCollection
      *            The biologicalProcessCollection to set.
      */
-    public void setBiologicalProcessCollection(List biologicalProcessCollection) {
+    public void setBiologicalProcessCollection(List<BiologicalProcess> biologicalProcessCollection) {
         this.biologicalProcessCollection = biologicalProcessCollection;
     }
 

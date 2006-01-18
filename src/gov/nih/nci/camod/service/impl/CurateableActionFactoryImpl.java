@@ -18,22 +18,26 @@ import gov.nih.nci.camod.service.CurateableActionFactory;
 
 import java.util.HashMap;
 
-public class CurateableActionFactoryImpl implements CurateableActionFactory {
+public class CurateableActionFactoryImpl implements CurateableActionFactory
+{
 
-    private HashMap myActions = new HashMap();
+    private HashMap<String, CurateableAction> myActions = new HashMap<String, CurateableAction>();
 
-    CurateableActionFactoryImpl() {
- 
-    }
+    CurateableActionFactoryImpl()
+    {}
 
-    public void registerAction(String inActionName, CurateableAction inAction) {
+    public void registerAction(String inActionName,
+                               CurateableAction inAction)
+    {
         // All supported actions
         myActions.put(inActionName, inAction);
     }
-    
-    public CurateableAction getAction(String inActionName) {
+
+    public CurateableAction getAction(String inActionName)
+    {
         CurateableAction theAction = null;
-        if (myActions.containsKey(inActionName)) {
+        if (myActions.containsKey(inActionName))
+        {
             CurateableAction theTemplateAction = (CurateableAction) myActions.get(inActionName);
             theAction = theTemplateAction.create();
         }

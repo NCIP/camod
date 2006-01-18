@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CommentsSearchResult.java,v 1.2 2005-11-16 15:31:05 georgeda Exp $
+ * $Id: CommentsSearchResult.java,v 1.3 2006-01-18 14:23:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/11/16 15:31:05  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.1  2005/10/17 13:25:52  georgeda
  * Initial revision
  *
@@ -24,135 +27,144 @@ import gov.nih.nci.camod.service.impl.CommentsManagerSingleton;
 /**
  * Used as wrapper around comments for speedy display during paganation.
  */
-public class CommentsSearchResult {
+public class CommentsSearchResult
+{
+    private String myCommentsId;
+    private String myModelId;
+    private String myModelDescriptor = null;
+    private String myModelSection = null;
+    private String mySubmitterName = null;
+    private String mySubmittedDate = null;
+    private Comments myComments = null;
 
-	private String myCommentsId;
+    /**
+     * Create the wraper object
+     * 
+     * @param inAnimalModel
+     *            the animal model we will be wrapping. Saves only the id.
+     */
+    public CommentsSearchResult(Comments inComments)
+    {
+        myCommentsId = inComments.getId().toString();
+    }
 
-	private String myModelId;
+    /**
+     * Return the id for the associated comments
+     * 
+     * @return the id for the model
+     */
+    public String getId()
+    {
+        return myCommentsId;
+    }
 
-	private String myModelDescriptor = null;
+    /**
+     * Return the model descriptor. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the model descriptor for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getModelDescriptor() throws Exception
+    {
 
-	private String myModelSection = null;
+        if (myModelDescriptor == null)
+        {
+            fetchComments();
+            myModelDescriptor = myComments.getCancerModel().getModelDescriptor();
+        }
+        return myModelDescriptor;
+    }
 
-	private String mySubmitterName = null;
+    /**
+     * Return the model descriptor. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the model descriptor for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getModelId() throws Exception
+    {
 
-	private String mySubmittedDate = null;
+        if (myModelId == null)
+        {
+            fetchComments();
+            myModelId = myComments.getCancerModel().getId().toString();
+        }
+        return myModelId;
+    }
 
-	private Comments myComments = null;
+    /**
+     * Return the model descriptor. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the model descriptor for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getModelSection() throws Exception
+    {
 
-	/**
-	 * Create the wraper object
-	 * 
-	 * @param inAnimalModel
-	 *            the animal model we will be wrapping. Saves only the id.
-	 */
-	public CommentsSearchResult(Comments inComments) {
-		myCommentsId = inComments.getId().toString();
-	}
+        if (myModelSection == null)
+        {
+            fetchComments();
+            myModelSection = myComments.getModelSection().getName();
+        }
+        return myModelSection;
+    }
 
-	/**
-	 * Return the id for the associated comments
-	 * 
-	 * @return the id for the model
-	 */
-	public String getId() {
-		return myCommentsId;
-	}
+    /**
+     * Gets the display name of the submitter in an html linked format
+     * 
+     * @return the display name of the submitter
+     * @throws Exception
+     */
+    public String getSubmitterName() throws Exception
+    {
 
-	/**
-	 * Return the model descriptor. It will fetch the animal model from the DB
-	 * if it hasn't already happened.
-	 * 
-	 * @return the model descriptor for the associated model
-	 * 
-	 * @throws Exception
-	 */
-	public String getModelDescriptor() throws Exception {
+        if (mySubmitterName == null)
+        {
+            fetchComments();
 
-		if (myModelDescriptor == null) {
-			fetchComments();
-			myModelDescriptor = myComments.getCancerModel().getModelDescriptor();
-		}
-		return myModelDescriptor;
-	}
+            String theEmailAddress = myComments.getSubmitter().getEmailAddress();
 
-	/**
-	 * Return the model descriptor. It will fetch the animal model from the DB
-	 * if it hasn't already happened.
-	 * 
-	 * @return the model descriptor for the associated model
-	 * 
-	 * @throws Exception
-	 */
-	public String getModelId() throws Exception {
+            if (theEmailAddress.length() > 0)
+            {
+                mySubmitterName = "<a href=\"mailto:" + theEmailAddress + "\"/>" + myComments.getSubmitter().getDisplayName();
+            }
+            else
+            {
+                mySubmitterName = myComments.getSubmitter().getDisplayName();
+            }
+        }
+        return mySubmitterName;
+    }
 
-		if (myModelId == null) {
-			fetchComments();
-			myModelId = myComments.getCancerModel().getId().toString();
-		}
-		return myModelId;
-	}
+    /**
+     * Gets the date for which the model was submitted
+     * 
+     * @return the date the model was submitted
+     * @throws Exception
+     */
+    public String getSubmittedDate() throws Exception
+    {
 
-	/**
-	 * Return the model descriptor. It will fetch the animal model from the DB
-	 * if it hasn't already happened.
-	 * 
-	 * @return the model descriptor for the associated model
-	 * 
-	 * @throws Exception
-	 */
-	public String getModelSection() throws Exception {
+        if (mySubmittedDate == null)
+        {
+            fetchComments();
+            mySubmittedDate = myComments.getAvailability().getEnteredDate().toString();
+        }
+        return mySubmittedDate;
+    }
 
-		if (myModelSection == null) {
-			fetchComments();
-			myModelSection = myComments.getModelSection().getName();
-		}
-		return myModelSection;
-	}
-
-	/**
-	 * Gets the display name of the submitter in an html linked format
-	 * 
-	 * @return the display name of the submitter
-	 * @throws Exception
-	 */
-	public String getSubmitterName() throws Exception {
-
-		if (mySubmitterName == null) {
-			fetchComments();
-
-			String theEmailAddress = myComments.getSubmitter().getEmailAddress();
-
-			if (theEmailAddress.length() > 0) {
-				mySubmitterName = "<a href=\"mailto:" + theEmailAddress + "\"/>"
-						+ myComments.getSubmitter().getDisplayName();
-			} else {
-				mySubmitterName = myComments.getSubmitter().getDisplayName();
-			}
-		}
-		return mySubmitterName;
-	}
-
-	/**
-	 * Gets the date for which the model was submitted
-	 * 
-	 * @return the date the model was submitted
-	 * @throws Exception
-	 */
-	public String getSubmittedDate() throws Exception {
-
-		if (mySubmittedDate == null) {
-			fetchComments();
-
-			mySubmittedDate = myComments.getAvailability().getEnteredDate().toString();
-		}
-		return mySubmittedDate;
-	}
-
-	// Fetch the animal model from the DB
-	private void fetchComments() throws Exception {
-		if (myComments == null) {
-			myComments = CommentsManagerSingleton.instance().get(myCommentsId);
-		}
-	}
+    // Fetch the animal model from the DB
+    private void fetchComments() throws Exception
+    {
+        if (myComments == null)
+        {
+            myComments = CommentsManagerSingleton.instance().get(myCommentsId);
+        }
+    }
 }

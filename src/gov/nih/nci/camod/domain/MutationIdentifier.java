@@ -16,17 +16,17 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class MutationIdentifier extends BaseObject implements Serializable, Duplicatable {
-
+public class MutationIdentifier extends BaseObject implements Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3259135453799404851L;
-    
+
     private Long numberMGI;
 
-  
     /**
      * @return Returns the numberMGI.
      */
-    public Long getNumberMGI() {
+    public Long getNumberMGI()
+    {
         return numberMGI;
     }
 
@@ -34,22 +34,28 @@ public class MutationIdentifier extends BaseObject implements Serializable, Dupl
      * @param numberMGI
      *            The numberMGI to set.
      */
-    public void setNumberMGI(Long numberMGI) {
+    public void setNumberMGI(Long numberMGI)
+    {
         this.numberMGI = numberMGI;
     }
 
-     /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       if (this.getNumberMGI() != null) result += this.getNumberMGI();
-       return result;
-     }  
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        if (this.getNumberMGI() != null)
+            result += this.getNumberMGI();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }

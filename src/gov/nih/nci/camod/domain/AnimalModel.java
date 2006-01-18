@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/11/28 18:02:10  georgeda
+ * Defect #182.  Get unique set of organs and only display metas. next to the originating organ
+ *
  * Revision 1.15  2005/11/18 15:20:21  georgeda
  * Defect #120, gracefully handle the deletion of models.
  *
@@ -7,7 +10,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.16 2005-11-28 18:02:10 georgeda Exp $
+ * $Id: AnimalModel.java,v 1.17 2006-01-18 14:23:31 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -21,25 +24,25 @@ public class AnimalModel extends AbstractCancerModel {
 
     private String url;
     private Boolean isToolMouse;
-    private List cellLineCollection = new ArrayList();
-    private List spontaneousMutationCollection = new ArrayList();
-    private Set logCollection = new HashSet();
-    private List imageCollection = new ArrayList();
-    private List microArrayDataCollection = new ArrayList();
-    private List xenograftCollection = new ArrayList();
-    private List therapyCollection = new ArrayList();
-    private List geneDeliveryCollection = new ArrayList();
-    private List animalAvailabilityCollection = new ArrayList();
-    private List environmentalFactorCollection = new ArrayList();
-    private List histopathologyCollection = new ArrayList();
-    private List engineeredGeneCollection = new ArrayList();
+    private List<CellLine> cellLineCollection = new ArrayList<CellLine>();
+    private List<SpontaneousMutation> spontaneousMutationCollection = new ArrayList<SpontaneousMutation>();
+    private Set<Log> logCollection = new HashSet<Log>();
+    private List<Image> imageCollection = new ArrayList<Image>();
+    private List<MicroArrayData> microArrayDataCollection = new ArrayList<MicroArrayData>();
+    private List<Xenograft> xenograftCollection = new ArrayList<Xenograft>();
+    private List<Therapy> therapyCollection = new ArrayList<Therapy>();
+    private List<GeneDelivery> geneDeliveryCollection = new ArrayList<GeneDelivery>();
+    private List<AnimalAvailability> animalAvailabilityCollection = new ArrayList<AnimalAvailability>();
+    private List<EnvironmentalFactor> environmentalFactorCollection = new ArrayList<EnvironmentalFactor>();
+    private List<Histopathology> histopathologyCollection = new ArrayList<Histopathology>();
+    private List<EngineeredGene> engineeredGeneCollection = new ArrayList<EngineeredGene>();
     private RepositoryInfo repositoryInfo;
     private Phenotype phenotype;
 
     /**
      * @return Returns the logCollection.
      */
-    public Set getLogCollection() {
+    public Set<Log> getLogCollection() {
         return logCollection;
     }
         
@@ -47,7 +50,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param logCollection
      *            The logCollection to set.
      */
-    public void setLogCollection(Set logCollection) {
+    public void setLogCollection(Set<Log> logCollection) {
         this.logCollection = logCollection;
     }
 
@@ -63,13 +66,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the engineeredGeneCollection.
      */
-    public List getEngineeredGeneCollection() {
+    public List<EngineeredGene> getEngineeredGeneCollection() {
         return engineeredGeneCollection;
     }
 
     public List getEngineeredGeneCollectionSorted() {
         if (engineeredGeneCollection != null)
-            return new ArrayList(new TreeSet(engineeredGeneCollection));
+            return new ArrayList<EngineeredGene>(new TreeSet<EngineeredGene>(engineeredGeneCollection));
         return null;
     }
 
@@ -77,7 +80,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param engineeredGeneCollection
      *            The engineeredGeneCollection to set.
      */
-    public void setEngineeredGeneCollection(List engineeredGeneCollection) {
+    public void setEngineeredGeneCollection(List<EngineeredGene> engineeredGeneCollection) {
         this.engineeredGeneCollection = engineeredGeneCollection;
     }
 
@@ -92,13 +95,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the spontaneousMutationCollection.
      */
-    public List getSpontaneousMutationCollection() {
+    public List<SpontaneousMutation> getSpontaneousMutationCollection() {
         return spontaneousMutationCollection;
     }
 
-    public List getSpontaneousMutationCollectionSorted() {
+    public List<SpontaneousMutation> getSpontaneousMutationCollectionSorted() {
         if (spontaneousMutationCollection != null)
-            return new ArrayList(new TreeSet(spontaneousMutationCollection));
+            return new ArrayList<SpontaneousMutation>(new TreeSet<SpontaneousMutation>(spontaneousMutationCollection));
         return null;
     }
 
@@ -106,7 +109,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param spontaneousMutationCollection
      *            The spontaneousMutationCollection to set.
      */
-    public void setSpontaneousMutationCollection(List spontaneousMutationCollection) {
+    public void setSpontaneousMutationCollection(List<SpontaneousMutation> spontaneousMutationCollection) {
         this.spontaneousMutationCollection = spontaneousMutationCollection;
     }
 
@@ -121,22 +124,22 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the histopathologyCollection.
      */
-    public List getHistopathologyCollection() {
+    public List<Histopathology> getHistopathologyCollection() {
         return histopathologyCollection;
     }
 
-    public List getHistopathologyCollectionSorted() {
+    public List<Histopathology> getHistopathologyCollectionSorted() {
         if (histopathologyCollection != null)
-            return new ArrayList(new TreeSet(histopathologyCollection));
+            return new ArrayList<Histopathology>(new TreeSet<Histopathology>(histopathologyCollection));
         return null;
     }
 
     /**
      * @return Returns the histopathologyCollection.
      */
-    public List getDistinctNomenclatureFromEngineeredGeneCollection() {
+    public List<String> getDistinctNomenclatureFromEngineeredGeneCollection() {
 
-        List theList = new ArrayList();
+        List<String> theList = new ArrayList<String>();
         for (int i = 0, j = engineeredGeneCollection.size(); i < j; i++) {
             EngineeredGene theEngineeredGene = (EngineeredGene) engineeredGeneCollection.get(i);
 
@@ -161,9 +164,9 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the histopathologyCollection.
      */
-    public List getDistinctGenotypeFromEngineeredGeneCollection() {
+    public List<String> getDistinctGenotypeFromEngineeredGeneCollection() {
 
-        List theList = new ArrayList();
+        List<String> theList = new ArrayList<String>();
         for (int i = 0, j = engineeredGeneCollection.size(); i < j; i++) {
             EngineeredGene theEngineeredGene = (EngineeredGene) engineeredGeneCollection.get(i);
 
@@ -189,7 +192,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param histopathologyCollection
      *            The histopathologyCollection to set.
      */
-    public void setHistopathologyCollection(List histopathologyCollection) {
+    public void setHistopathologyCollection(List<Histopathology> histopathologyCollection) {
         this.histopathologyCollection = histopathologyCollection;
     }
 
@@ -204,13 +207,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the environmentalFactorCollection.
      */
-    public List getEnvironmentalFactorCollection() {
+    public List<EnvironmentalFactor> getEnvironmentalFactorCollection() {
         return environmentalFactorCollection;
     }
 
-    public List getEnvironmentalFactorCollectionSorted() {
+    public List<EnvironmentalFactor> getEnvironmentalFactorCollectionSorted() {
         if (environmentalFactorCollection != null)
-            return new ArrayList(new TreeSet(environmentalFactorCollection));
+            return new ArrayList<EnvironmentalFactor>(new TreeSet<EnvironmentalFactor>(environmentalFactorCollection));
         return null;
     }
 
@@ -218,7 +221,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param environmentalFactorCollection
      *            The environmentalFactorCollection to set.
      */
-    public void setEnvironmentalFactorCollection(List environmentalFactorCollection) {
+    public void setEnvironmentalFactorCollection(List<EnvironmentalFactor> environmentalFactorCollection) {
         this.environmentalFactorCollection = environmentalFactorCollection;
     }
 
@@ -233,13 +236,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the animalAvailabilityCollection.
      */
-    public List getAnimalAvailabilityCollection() {
+    public List<AnimalAvailability> getAnimalAvailabilityCollection() {
         return animalAvailabilityCollection;
     }
 
-    public List getAnimalAvailabilityCollectionSorted() {
+    public List<AnimalAvailability> getAnimalAvailabilityCollectionSorted() {
         if (animalAvailabilityCollection != null)
-            return new ArrayList(new TreeSet(animalAvailabilityCollection));
+            return new ArrayList<AnimalAvailability>(new TreeSet<AnimalAvailability>(animalAvailabilityCollection));
         return null;
     }
 
@@ -247,7 +250,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param animalAvailabilityCollection
      *            The animalAvailabilityCollection to set.
      */
-    public void setAnimalAvailabilityCollection(List animalAvailabilityCollection) {
+    public void setAnimalAvailabilityCollection(List<AnimalAvailability> animalAvailabilityCollection) {
         this.animalAvailabilityCollection = animalAvailabilityCollection;
     }
 
@@ -262,13 +265,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the geneDeliveryCollection.
      */
-    public List getGeneDeliveryCollection() {
+    public List<GeneDelivery> getGeneDeliveryCollection() {
         return geneDeliveryCollection;
     }
 
-    public List getGeneDeliveryCollectionSorted() {
+    public List<GeneDelivery> getGeneDeliveryCollectionSorted() {
         if (geneDeliveryCollection != null)
-            return new ArrayList(new TreeSet(geneDeliveryCollection));
+            return new ArrayList<GeneDelivery>(new TreeSet<GeneDelivery>(geneDeliveryCollection));
         return null;
     }
 
@@ -276,7 +279,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param geneDeliveryCollection
      *            The geneDeliveryCollection to set.
      */
-    public void setGeneDeliveryCollection(List geneDeliveryCollection) {
+    public void setGeneDeliveryCollection(List<GeneDelivery> geneDeliveryCollection) {
         this.geneDeliveryCollection = geneDeliveryCollection;
     }
 
@@ -336,13 +339,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the therapyCollection.
      */
-    public List getTherapyCollection() {
+    public List<Therapy> getTherapyCollection() {
         return therapyCollection;
     }
 
-    public List getTherapyCollectionSorted() {
+    public List<Therapy> getTherapyCollectionSorted() {
         if (therapyCollection != null)
-            return new ArrayList(new TreeSet(therapyCollection));
+            return new ArrayList<Therapy>(new TreeSet<Therapy>(therapyCollection));
         return null;
     }
 
@@ -350,7 +353,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param therapyCollection
      *            The therapyCollection to set.
      */
-    public void setTherapyCollection(List therapyCollection) {
+    public void setTherapyCollection(List<Therapy> therapyCollection) {
         this.therapyCollection = therapyCollection;
     }
 
@@ -365,13 +368,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the xenograftCollection.
      */
-    public List getXenograftCollection() {
+    public List<Xenograft> getXenograftCollection() {
         return xenograftCollection;
     }
 
-    public List getXenograftCollectionSorted() {
+    public List<Xenograft> getXenograftCollectionSorted() {
         if (xenograftCollection != null)
-            return new ArrayList(new TreeSet(xenograftCollection));
+            return new ArrayList<Xenograft>(new TreeSet<Xenograft>(xenograftCollection));
         return null;
     }
 
@@ -379,7 +382,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param xenograftCollection
      *            The xenograftCollection to set.
      */
-    public void setXenograftCollection(List xenograftCollection) {
+    public void setXenograftCollection(List<Xenograft> xenograftCollection) {
         this.xenograftCollection = xenograftCollection;
     }
 
@@ -390,13 +393,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the microArrayDataCollection.
      */
-    public List getMicroArrayDataCollection() {
+    public List<MicroArrayData> getMicroArrayDataCollection() {
         return microArrayDataCollection;
     }
 
-    public List getMicroArrayDataCollectionSorted() {
+    public List<MicroArrayData> getMicroArrayDataCollectionSorted() {
         if (microArrayDataCollection != null)
-            return new ArrayList(new TreeSet(microArrayDataCollection));
+            return new ArrayList<MicroArrayData>(new TreeSet<MicroArrayData>(microArrayDataCollection));
         return null;
     }
 
@@ -404,7 +407,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param microArrayDataCollection
      *            The microArrayDataCollection to set.
      */
-    public void setMicroArrayDataCollection(List microArrayDataCollection) {
+    public void setMicroArrayDataCollection(List<MicroArrayData> microArrayDataCollection) {
         this.microArrayDataCollection = microArrayDataCollection;
     }
 
@@ -419,13 +422,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the imageCollection.
      */
-    public List getImageCollection() {
+    public List<Image> getImageCollection() {
         return imageCollection;
     }
 
-    public List getImageCollectionSorted() {
+    public List<Image> getImageCollectionSorted() {
         if (imageCollection != null)
-            return new ArrayList(new TreeSet(imageCollection));
+            return new ArrayList<Image>(new TreeSet<Image>(imageCollection));
         return null;
     }
 
@@ -433,7 +436,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param imageCollection
      *            The imageCollection to set.
      */
-    public void setImageCollection(List imageCollection) {
+    public void setImageCollection(List<Image> imageCollection) {
         this.imageCollection = imageCollection;
     }
 
@@ -448,13 +451,13 @@ public class AnimalModel extends AbstractCancerModel {
     /**
      * @return Returns the cellLineCollection.
      */
-    public List getCellLineCollection() {
+    public List<CellLine> getCellLineCollection() {
         return cellLineCollection;
     }
 
-    public List getCellLineCollectionSorted() {
+    public List<CellLine> getCellLineCollectionSorted() {
         if (cellLineCollection != null)
-            return new ArrayList(new TreeSet(cellLineCollection));
+            return new ArrayList<CellLine>(new TreeSet<CellLine>(cellLineCollection));
         return null;
     }
 
@@ -462,7 +465,7 @@ public class AnimalModel extends AbstractCancerModel {
      * @param cellLineCollection
      *            The cellLineCollection to set.
      */
-    public void setCellLineCollection(List cellLineCollection) {
+    public void setCellLineCollection(List<CellLine> cellLineCollection) {
         this.cellLineCollection = cellLineCollection;
     }
 

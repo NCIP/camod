@@ -7,14 +7,15 @@ import gov.nih.nci.camod.service.ImageManager;
  * 
  * Singleton class for the ImageManager
  */
-public class ImageManagerSingleton {
-
+public class ImageManagerSingleton
+{
     private static ImageManager ourManager = new ImageManagerImpl();
 
     /**
      * @return the global instance of the ImageManager
      */
-    public static synchronized ImageManager instance() {
+    public static synchronized ImageManager instance()
+    {
         return ourManager;
-    }   
+    }
 }

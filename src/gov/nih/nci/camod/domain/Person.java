@@ -16,12 +16,11 @@ import gov.nih.nci.camod.util.HashCodeUtil;
 /**
  * @author rajputs
  */
-public class Person extends Party implements Comparable {
-
+public class Person extends Party implements Comparable
+{
     private static final long serialVersionUID = 3258795453799404851L;
 
     private final Log log = LogFactory.getLog(Person.class);
-
     private String firstName;
     private String middleName;
     private String lastName;
@@ -35,10 +34,12 @@ public class Person extends Party implements Comparable {
     /**
      * @return Returns the display name
      */
-    public String getDisplayName() {
+    public String getDisplayName()
+    {
 
         String theDisplayName = "";
-        if (lastName != null && firstName != null) {
+        if (lastName != null && firstName != null)
+        {
             theDisplayName = lastName.trim() + ", " + firstName.trim();
         }
         return theDisplayName;
@@ -47,13 +48,16 @@ public class Person extends Party implements Comparable {
     /**
      * @return Returns the e-mail address
      */
-    public String getEmailAddress() {
-
+    public String getEmailAddress()
+    {
         String theEmailAddress = "";
 
-        try {
+        try
+        {
             theEmailAddress = UserManagerSingleton.instance().getEmailForUser(username);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get email address for user: " + username);
         }
 
@@ -63,7 +67,8 @@ public class Person extends Party implements Comparable {
     /**
      * @return Returns the username.
      */
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
@@ -71,14 +76,16 @@ public class Person extends Party implements Comparable {
      * @param username
      *            The username to set.
      */
-    public void setUsername(String username) {
+    public void setUsername(String username)
+    {
         this.username = username;
     }
 
     /**
      * @return Returns the middleName.
      */
-    public String getMiddleName() {
+    public String getMiddleName()
+    {
         return middleName;
     }
 
@@ -86,14 +93,16 @@ public class Person extends Party implements Comparable {
      * @param middleName
      *            The middleName to set.
      */
-    public void setMiddleName(String middleName) {
+    public void setMiddleName(String middleName)
+    {
         this.middleName = middleName;
     }
 
     /**
      * @return Returns the firstName.
      */
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
 
@@ -101,14 +110,16 @@ public class Person extends Party implements Comparable {
      * @param firstName
      *            The firstName to set.
      */
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
         this.firstName = firstName;
     }
 
     /**
      * @return Returns the lastName.
      */
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
@@ -116,14 +127,16 @@ public class Person extends Party implements Comparable {
      * @param lastName
      *            The lastName to set.
      */
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
     }
 
     /**
      * @return Returns the isPrincipleInvestigator flag.
      */
-    public Boolean getIsPrincipalInvestigator() {
+    public Boolean getIsPrincipalInvestigator()
+    {
         return isPrincipalInvestigtor;
     }
 
@@ -131,39 +144,51 @@ public class Person extends Party implements Comparable {
      * @param inIsPrincipleInvestigtor
      *            Set's whether or not this user is a PI
      */
-    public void setIsPrincipalInvestigator(Boolean inIsPrincipalInvestigtor) {
+    public void setIsPrincipalInvestigator(Boolean inIsPrincipalInvestigtor)
+    {
         this.isPrincipalInvestigtor = inIsPrincipalInvestigtor;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
+    public String toString()
+    {
         String result = super.toString() + " - ";
         result += this.getUsername();
         return result;
     }
 
-     public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final Person obj = (Person) o;
-      if (HashCodeUtil.notEqual(this.getLastName(), obj.getLastName())) return false;
-      return true;
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final Person obj = (Person) o;
+        if (HashCodeUtil.notEqual(this.getLastName(), obj.getLastName()))
+            return false;
+        return true;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getLastName());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof Person) && (this.getLastName() != null) && (((Person)o).getLastName() != null)) {   
-        int result = this.getLastName().compareTo( ((Person)o).getLastName() );
-        if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }  
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getLastName());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        if ((o instanceof Person) && (this.getLastName() != null) && (((Person) o).getLastName() != null))
+        {
+            int result = this.getLastName().compareTo(((Person) o).getLastName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
 }

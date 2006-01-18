@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.11 2005-11-29 22:12:29 georgeda Exp $
+ * $Id: PublicationManagerImpl.java,v 1.12 2006-01-18 14:24:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/29 22:12:29  georgeda
+ * Defect #163, either PMID or Title must be entered
+ *
  * Revision 1.10  2005/11/14 14:18:58  georgeda
  * Handle delete of child publications
  *
@@ -18,7 +21,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.PublicationStatus;
@@ -32,49 +35,57 @@ import java.util.List;
 /**
  * Manager for Publication objects
  */
-public class PublicationManagerImpl extends BaseManager implements PublicationManager {
+public class PublicationManagerImpl extends BaseManager implements PublicationManager
+{
 
-    public Publication create(PublicationData inPublicationData) throws Exception {
-
+    public Publication create(PublicationData inPublicationData) throws Exception
+    {
         Publication thePublication = new Publication();
         populate(inPublicationData, thePublication);
 
         return thePublication;
     }
 
-    public void update(PublicationData inPublicationData, Publication inPublication) throws Exception {
-
+    public void update(PublicationData inPublicationData,
+                       Publication inPublication) throws Exception
+    {
         populate(inPublicationData, inPublication);
         super.save(inPublication);
     }
 
-    public void removeCellLinePublication(String id, CellLine inCellLine) throws Exception {
-
+    public void removeCellLinePublication(String id,
+                                          CellLine inCellLine) throws Exception
+    {
         inCellLine.getPublicationCollection().remove(get(id));
         super.save(inCellLine);
     }
 
-    public void removeTherapyPublication(String id, Therapy inTherapy) throws Exception {
+    public void removeTherapyPublication(String id,
+                                         Therapy inTherapy) throws Exception
+    {
         inTherapy.getPublicationCollection().remove(get(id));
         super.save(inTherapy);
     }
 
-    public void addCellLinePublication(PublicationData inPublicationData, CellLine inCellLine) throws Exception {
-
+    public void addCellLinePublication(PublicationData inPublicationData,
+                                       CellLine inCellLine) throws Exception
+    {
         Publication inPublication = create(inPublicationData);
         inCellLine.addPublication(inPublication);
         super.save(inCellLine);
     }
 
-    public void addTherapyPublication(PublicationData inPublicationData, Therapy inTherapy) throws Exception {
-
+    public void addTherapyPublication(PublicationData inPublicationData,
+                                      Therapy inTherapy) throws Exception
+    {
         Publication inPublication = create(inPublicationData);
         inTherapy.addPublication(inPublication);
         super.save(inTherapy);
     }
 
-    private void populate(PublicationData inPublicationData, Publication inPublication) throws Exception {
-
+    private void populate(PublicationData inPublicationData,
+                          Publication inPublication) throws Exception
+    {
         inPublication.setAuthors(inPublicationData.getAuthors());
         inPublication.setTitle(inPublicationData.getTitle());
         inPublication.setJournal(inPublicationData.getJournal());
@@ -82,63 +93,78 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
 
         String strPub = inPublicationData.getPmid();
 
-        if (strPub != null && strPub.trim().length() > 0) {
+        if (strPub != null && strPub.trim().length() > 0)
+        {
             inPublication.setPmid(Long.valueOf(strPub.trim()));
-        } else {
+        }
+        else
+        {
             inPublication.setPmid(null);
         }
 
         strPub = inPublicationData.getStartPage().trim();
-        if (strPub.length() > 0) {
+        if (strPub.length() > 0)
+        {
             inPublication.setStartPage(Long.valueOf(strPub));
-        } else {
+        }
+        else
+        {
             inPublication.setStartPage(null);
         }
 
         strPub = inPublicationData.getEndPage().trim();
-        if (strPub.length() > 0) {
+        if (strPub.length() > 0)
+        {
             inPublication.setEndPage(Long.valueOf(strPub));
-        } else {
+        }
+        else
+        {
             inPublication.setEndPage(null);
         }
 
         strPub = inPublicationData.getYear().trim();
-        if (strPub.length() > 0) {
+        if (strPub.length() > 0)
+        {
             inPublication.setYear(Long.valueOf(strPub));
-        } else {
+        }
+        else
+        {
             inPublication.setYear(null);
         }
-        
-        if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes")) {
+
+        if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes"))
+        {
             inPublication.setFirstTimeReported(new Boolean(true));
-        } else {
+        }
+        else
+        {
             inPublication.setFirstTimeReported(new Boolean(false));
         }
 
-        PublicationStatus pubStatus = PublicationManagerSingleton.instance().getPublicationStatusByName(
-                inPublicationData.getName());
+        PublicationStatus pubStatus = PublicationManagerSingleton.instance().getPublicationStatusByName(inPublicationData.getName());
         inPublication.setPublicationStatus(pubStatus);
     }
 
-    public List getAll() throws Exception {
-
+    public List getAll() throws Exception
+    {
         log.trace("In PublicationManagerImpl.getAll");
-
         return super.getAll(Publication.class);
     }
 
-    public Publication get(String id) throws Exception {
+    public Publication get(String id) throws Exception
+    {
         log.trace("In PublicationManagerImpl.get");
         return (Publication) super.get(id, Publication.class);
     }
 
-    public void save(Publication publication) throws Exception {
+    public void save(Publication publication) throws Exception
+    {
         log.trace("In PublicationManagerImpl.save");
         super.save(publication);
     }
 
-    public PublicationStatus getPublicationStatusByName(String inName) throws Exception {
-
+    public PublicationStatus getPublicationStatusByName(String inName) throws Exception
+    {
         log.trace("In PublicationManagerImpl.getPublicationStatusByName");
 
         PublicationStatus pubStatus = null;
@@ -149,14 +175,17 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
 
         List theList = Search.query(thePubStatus);
 
-        if (theList != null && theList.size() > 0) {
+        if (theList != null && theList.size() > 0)
+        {
             pubStatus = (PublicationStatus) theList.get(0);
         }
 
         return pubStatus;
     }
 
-    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+    public void remove(String id,
+                       AnimalModel inAnimalModel) throws Exception
+    {
         log.trace("In PublicationManagerImpl.remove");
         inAnimalModel.getPublicationCollection().remove(get(id));
         super.save(inAnimalModel);

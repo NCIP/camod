@@ -16,10 +16,10 @@ import gov.nih.nci.camod.util.Duplicatable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Phenotype extends BaseObject implements Serializable, Duplicatable {
-
+public class Phenotype extends BaseObject implements Serializable, Duplicatable
+{
     private static final long serialVersionUID = 3258775453799404851L;
-    
+
     private String breedingNotes;
     private String description;
     private SexDistribution sexDistribution;
@@ -27,7 +27,8 @@ public class Phenotype extends BaseObject implements Serializable, Duplicatable 
     /**
      * @return Returns the sexDistribution.
      */
-    public SexDistribution getSexDistribution() {
+    public SexDistribution getSexDistribution()
+    {
         return sexDistribution;
     }
 
@@ -35,14 +36,16 @@ public class Phenotype extends BaseObject implements Serializable, Duplicatable 
      * @param sexDistribution
      *            The sexDistribution to set.
      */
-    public void setSexDistribution(SexDistribution sexDistribution) {
+    public void setSexDistribution(SexDistribution sexDistribution)
+    {
         this.sexDistribution = sexDistribution;
     }
 
     /**
      * @return Returns the breedingNotes.
      */
-    public String getBreedingNotes() {
+    public String getBreedingNotes()
+    {
         return breedingNotes;
     }
 
@@ -50,14 +53,16 @@ public class Phenotype extends BaseObject implements Serializable, Duplicatable 
      * @param breedingNotes
      *            The breedingNotes to set.
      */
-    public void setBreedingNotes(String breedingNotes) {
+    public void setBreedingNotes(String breedingNotes)
+    {
         this.breedingNotes = breedingNotes;
     }
 
     /**
      * @return Returns the description.
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -65,22 +70,27 @@ public class Phenotype extends BaseObject implements Serializable, Duplicatable 
      * @param description
      *            The description to set.
      */
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-      /**
+    /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getDescription();
-       return result;
-     }  
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getDescription();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AbstractCurationManager.java,v 1.10 2005-12-02 14:36:50 georgeda Exp $
+ * $Id: AbstractCurationManager.java,v 1.11 2006-01-18 14:24:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/12/02 14:36:50  georgeda
+ * Defect #246, use a linked has map to preserve insertion order when getting keys
+ *
  * Revision 1.9  2005/11/28 13:43:26  georgeda
  * Defect #192, handle back arrow for curation changes
  *
@@ -17,65 +20,86 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Curateable;
-import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.service.CurateableAction;
+import gov.nih.nci.camod.service.CurateableActionFactory;
+import gov.nih.nci.camod.service.CurationManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * AbstractCurationManager: Abstract implementation of the CurationManager.
  */
-public abstract class AbstractCurationManager implements CurationManager {
+public abstract class AbstractCurationManager implements CurationManager
+{
 
     protected final Log log = LogFactory.getLog(AbstractCurationManager.class);
 
     private static final String ACTION_TOKENS = ":,=";
 
     // Inner class used for mainting the state configuration from the xml file
-    private class State {
-
+    private class State
+    {
         private String myName = null;
-        private List myActions = new ArrayList();
-        private Map myNextValidStates = new HashMap();
+        private List<String> myActions = new ArrayList<String>();
+        private Map<String, String> myNextValidStates = new HashMap<String, String>();
 
-        public State(String inName) {
+        public State(String inName)
+        {
             myName = inName;
         }
 
-        public String getName() {
+        public String getName()
+        {
             return myName;
         }
 
-        public String getNextState(String inEvent) {
+        public String getNextState(String inEvent)
+        {
 
             String theNextState = "";
-            if (myNextValidStates.containsKey(inEvent)) {
-                theNextState = (String) myNextValidStates.get(inEvent);
+            if (myNextValidStates.containsKey(inEvent))
+            {
+                theNextState = myNextValidStates.get(inEvent);
             }
 
             // Invalid event. 
-            if (theNextState.equals("")) {
+            if (theNextState.equals(""))
+            {
                 throw new IllegalArgumentException("No matching state for event:" + inEvent);
             }
 
             return theNextState;
         }
 
-        public List getActions() {
+        public List<String> getActions()
+        {
             return myActions;
         }
 
-        public void addAction(String inAction) {
+        public void addAction(String inAction)
+        {
             myActions.add(inAction);
         }
 
-        public void addNextValidState(String inState, String inMatchEvent) {
+        public void addNextValidState(String inState,
+                                      String inMatchEvent)
+        {
             myNextValidStates.put(inMatchEvent, inState);
         }
     }
@@ -84,19 +108,21 @@ public abstract class AbstractCurationManager implements CurationManager {
     // behavior
     protected CurateableActionFactory myActionFactory = new CurateableActionFactoryImpl();
 
-    protected Map myStates = new LinkedHashMap();
+    protected Map<String, State> myStates = new LinkedHashMap<String, State>();
 
     private String myDefaultState = null;
 
     // Initialize the curation model
-    protected void init(String inWorkflowFile) {
+    protected void init(String inWorkflowFile)
+    {
 
         Document theCurationConfig = null;
 
         // ///////////////////////////////////////////////////
         // Read in Curation Configuration file.
         // ///////////////////////////////////////////////////
-        try {
+        try
+        {
 
             // Create an instance of the DocumentBuilderFactory
             DocumentBuilderFactory theDocumentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -118,14 +144,15 @@ public abstract class AbstractCurationManager implements CurationManager {
             Element theCurationStates = theCurationConfig.getDocumentElement();
             NodeList theStateList = theCurationStates.getElementsByTagName("state");
 
-            for (int i = 0; i < theStateList.getLength(); i++) {
+            for (int i = 0; i < theStateList.getLength(); i++)
+            {
                 Element theStateElement = (Element) theStateList.item(i);
 
                 // Note, these will always be there
-                String theName = (String) theStateElement.getElementsByTagName("name").item(0).getFirstChild()
-                        .getNodeValue();
+                String theName = (String) theStateElement.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
 
-                if ("true".equals(theStateElement.getAttribute("default"))) {
+                if ("true".equals(theStateElement.getAttribute("default")))
+                {
                     myDefaultState = theName;
                 }
 
@@ -134,12 +161,15 @@ public abstract class AbstractCurationManager implements CurationManager {
                 NodeList theActionsList = theStateElement.getElementsByTagName("actions");
 
                 // Should only be one
-                if (theActionsList.getLength() == 1) {
+                if (theActionsList.getLength() == 1)
+                {
                     NodeList theActionNodes = theActionsList.item(0).getChildNodes();
 
-                    for (int j = 0; j < theActionNodes.getLength(); j++) {
+                    for (int j = 0; j < theActionNodes.getLength(); j++)
+                    {
 
-                        if ("action".equals(theActionNodes.item(j).getNodeName())) {
+                        if ("action".equals(theActionNodes.item(j).getNodeName()))
+                        {
                             theState.addAction(theActionNodes.item(j).getFirstChild().getNodeValue());
                         }
                     }
@@ -148,10 +178,12 @@ public abstract class AbstractCurationManager implements CurationManager {
                 NodeList theNextValidStatesList = theStateElement.getElementsByTagName("next-valid-states");
 
                 // Should only be one
-                if (theNextValidStatesList.getLength() == 1) {
+                if (theNextValidStatesList.getLength() == 1)
+                {
                     NodeList theValidStateNodes = theNextValidStatesList.item(0).getChildNodes();
 
-                    for (int j = 0; j < theValidStateNodes.getLength(); j++) {
+                    for (int j = 0; j < theValidStateNodes.getLength(); j++)
+                    {
 
                         Node theValidStateNode = theValidStateNodes.item(j);
 
@@ -160,18 +192,23 @@ public abstract class AbstractCurationManager implements CurationManager {
                         String theEvent = "all";
                         String theStateName = null;
 
-                        for (int k = 0; k < theChildNodes.getLength(); k++) {
+                        for (int k = 0; k < theChildNodes.getLength(); k++)
+                        {
 
                             Node theChildNode = theChildNodes.item(k);
 
-                            if ("name".equals(theChildNode.getNodeName())) {
+                            if ("name".equals(theChildNode.getNodeName()))
+                            {
                                 theStateName = theChildNode.getFirstChild().getNodeValue();
-                            } else if ("match-event".equals(theChildNode.getNodeName())) {
+                            }
+                            else if ("match-event".equals(theChildNode.getNodeName()))
+                            {
                                 theEvent = theChildNode.getFirstChild().getNodeValue();
                             }
                         }
 
-                        if (theStateName != null) {
+                        if (theStateName != null)
+                        {
                             theState.addNextValidState(theStateName, theEvent);
                         }
                     }
@@ -179,7 +216,9 @@ public abstract class AbstractCurationManager implements CurationManager {
 
                 myStates.put(theName, theState);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
@@ -190,15 +229,17 @@ public abstract class AbstractCurationManager implements CurationManager {
      * 
      * @returns a list containing the names of all the states
      */
-    public List getAllStateNames() {
+    public List getAllStateNames()
+    {
 
         log.trace("Entering getAllStateNames");
 
-        List theStateList = new ArrayList();
+        List<String> theStateList = new ArrayList<String>();
 
         Iterator theKeys = myStates.keySet().iterator();
 
-        while (theKeys.hasNext()) {
+        while (theKeys.hasNext())
+        {
             String theKey = (String) theKeys.next();
             State theState = (State) myStates.get(theKey);
             theStateList.add(theState.getName());
@@ -216,7 +257,8 @@ public abstract class AbstractCurationManager implements CurationManager {
      * 
      * @returns a list containing the names of all the states
      */
-    public String getDefaultState() {
+    public String getDefaultState()
+    {
         log.trace("In getDefaultState");
         return myDefaultState;
     }
@@ -230,7 +272,9 @@ public abstract class AbstractCurationManager implements CurationManager {
      * @param inEvent
      *            the event being applied to the object
      */
-    public void changeState(Curateable inCurateableObj, String inEvent) {
+    public void changeState(Curateable inCurateableObj,
+                            String inEvent)
+    {
 
         log.trace("Entering changeState");
 
@@ -238,21 +282,29 @@ public abstract class AbstractCurationManager implements CurationManager {
 
         log.debug("Current state: (" + theCurrentStateName + ")");
 
-        if (myStates.containsKey(theCurrentStateName)) {
+        if (myStates.containsKey(theCurrentStateName))
+        {
 
             State theCurrentState = (State) myStates.get(theCurrentStateName);
 
             String theNextStateName = theCurrentState.getNextState(inEvent);
 
-            if (theNextStateName.equals("")) {
+            if (theNextStateName.equals(""))
+            {
                 log.debug("Cannot leave current state: " + theCurrentStateName);
-            } else if (myStates.containsKey(theNextStateName)) {
+            }
+            else if (myStates.containsKey(theNextStateName))
+            {
                 log.debug("Setting to state: " + theNextStateName);
                 inCurateableObj.setState(theNextStateName);
-            } else {
+            }
+            else
+            {
                 throw new IllegalArgumentException("Unknown next state: " + theNextStateName);
             }
-        } else {
+        }
+        else
+        {
             throw new IllegalArgumentException("Unknown current state: " + theCurrentStateName);
         }
 
@@ -265,7 +317,9 @@ public abstract class AbstractCurationManager implements CurationManager {
      * @param inCurateableObj
      *            is the curatable object to apply actions for
      */
-    public void applyActionsForState(Curateable inCurateableObj, Map inArgs) {
+    public void applyActionsForState(Curateable inCurateableObj,
+                                     Map<String, String> inArgs)
+    {
 
         log.trace("Entering applyActionsForState");
 
@@ -273,7 +327,8 @@ public abstract class AbstractCurationManager implements CurationManager {
 
         log.debug("Current state: (" + theCurrentStateName + ")");
 
-        if (myStates.containsKey(theCurrentStateName)) {
+        if (myStates.containsKey(theCurrentStateName))
+        {
 
             State theCurrentState = (State) myStates.get(theCurrentStateName);
 
@@ -281,7 +336,8 @@ public abstract class AbstractCurationManager implements CurationManager {
 
             Iterator theIterator = theActions.iterator();
 
-            while (theIterator.hasNext()) {
+            while (theIterator.hasNext())
+            {
 
                 String theActionEntry = (String) theIterator.next();
 
@@ -290,7 +346,8 @@ public abstract class AbstractCurationManager implements CurationManager {
                 String theActionName = theTokenizer.nextToken();
 
                 // Get the default arguments for the action
-                while (theTokenizer.hasMoreTokens()) {
+                while (theTokenizer.hasMoreTokens())
+                {
 
                     String theArg = theTokenizer.nextToken();
 
@@ -301,7 +358,8 @@ public abstract class AbstractCurationManager implements CurationManager {
                     String theTag = theArgTokenizer.nextToken();
                     String theValue = "";
 
-                    if (theArgTokenizer.hasMoreTokens()) {
+                    if (theArgTokenizer.hasMoreTokens())
+                    {
                         theValue = theArgTokenizer.nextToken();
                     }
 
@@ -312,21 +370,27 @@ public abstract class AbstractCurationManager implements CurationManager {
                 CurateableAction theAction = myActionFactory.getAction(theActionName);
 
                 // Execute the action
-                if (theAction != null) {
+                if (theAction != null)
+                {
 
                     log.debug("Applying action: " + theActionEntry);
 
                     // Actions by default are not show stoppers if they
                     // don't work
-                    try {
+                    try
+                    {
                         theAction.execute(inArgs, inCurateableObj);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e)
+                    {
                         log.warn("Unable to process action", e);
                     }
                 }
             }
 
-        } else {
+        }
+        else
+        {
             throw new IllegalArgumentException("Unknown current state: " + theCurrentStateName);
         }
 

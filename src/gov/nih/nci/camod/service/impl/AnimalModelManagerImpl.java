@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.62 2005-12-21 15:40:29 georgeda Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.63 2006-01-18 14:24:23 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.62  2005/12/21 15:40:29  georgeda
+ * Defect #288 - error when submitting an other strain
+ *
  * Revision 1.61  2005/12/01 13:43:36  georgeda
  * Defect #226, reuse Taxon objects and do not delete them from Database
  *
@@ -167,11 +170,57 @@
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
+import gov.nih.nci.camod.domain.AnimalAvailability;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.AnimalModelSearchResult;
+import gov.nih.nci.camod.domain.Availability;
+import gov.nih.nci.camod.domain.CellLine;
+import gov.nih.nci.camod.domain.EngineeredGene;
+import gov.nih.nci.camod.domain.GeneDelivery;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.Histopathology;
+import gov.nih.nci.camod.domain.Image;
+import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.Phenotype;
+import gov.nih.nci.camod.domain.Publication;
+import gov.nih.nci.camod.domain.SexDistribution;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
+import gov.nih.nci.camod.domain.TargetedModification;
+import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.*;
+import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
+import gov.nih.nci.camod.webapp.form.AssociatedMetastasisData;
+import gov.nih.nci.camod.webapp.form.AvailabilityData;
+import gov.nih.nci.camod.webapp.form.CellLineData;
+import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
+import gov.nih.nci.camod.webapp.form.ClinicalMarkerData;
+import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
+import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
+import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
+import gov.nih.nci.camod.webapp.form.GenomicSegmentData;
+import gov.nih.nci.camod.webapp.form.GrowthFactorData;
+import gov.nih.nci.camod.webapp.form.HistopathologyData;
+import gov.nih.nci.camod.webapp.form.HormoneData;
+import gov.nih.nci.camod.webapp.form.ImageData;
+import gov.nih.nci.camod.webapp.form.InducedMutationData;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
+import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
+import gov.nih.nci.camod.webapp.form.PublicationData;
+import gov.nih.nci.camod.webapp.form.RadiationData;
+import gov.nih.nci.camod.webapp.form.SearchData;
+import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
+import gov.nih.nci.camod.webapp.form.SurgeryData;
+import gov.nih.nci.camod.webapp.form.TargetedModificationData;
+import gov.nih.nci.camod.webapp.form.TherapyData;
+import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
+import gov.nih.nci.camod.webapp.form.XenograftData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -192,7 +241,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Manages fetching/saving/updating of animal models
  */
-public class AnimalModelManagerImpl extends BaseManager implements AnimalModelManager {
+public class AnimalModelManagerImpl extends BaseManager implements AnimalModelManager
+{
 
     /**
      * Get all of the animal models in the DB
@@ -202,7 +252,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception throws
      *                an Exception if an error occurred
      */
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In AnimalModelManagerImpl.getAll");
         return super.getAll(AnimalModel.class);
     }
@@ -218,7 +269,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception throws
      *                an Exception if an error occurred
      */
-    public List getAllByUser(String inUsername) throws Exception {
+    public List getAllByUser(String inUsername) throws Exception
+    {
 
         log.trace("In AnimalModelManagerImpl.getAllByUser");
 
@@ -236,7 +288,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception Exception
      *                if an error occurred
      */
-    public List getAllByState(String inState) throws Exception {
+    public List getAllByState(String inState) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.getAllByState");
 
@@ -247,9 +300,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         AnimalModel theAnimalModel = new AnimalModel();
         theAnimalModel.setState(inState);
 
-        try {
+        try
+        {
             theAnimalModels = Search.query(theAnimalModel);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Exception occurred in getAllByState", e);
             throw e;
         }
@@ -270,7 +326,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception Exception
      *                if an error occurred
      */
-    public List getAllByStateForPerson(String inState, Person inPerson) throws Exception {
+    public List getAllByStateForPerson(String inState,
+                                       Person inPerson) throws Exception
+    {
 
         log.trace("In CommentsManagerImpl.getAllByStateForPerson");
 
@@ -289,7 +347,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception Exception
      *                if an error occurred
      */
-    public AnimalModel get(String id) throws Exception {
+    public AnimalModel get(String id) throws Exception
+    {
         log.trace("In AnimalModelManagerImpl.get");
 
         AnimalModel theAnimalModel = (AnimalModel) super.get(id, AnimalModel.class);
@@ -309,7 +368,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception Exception
      *                if an error occurred
      */
-    public void save(AnimalModel inAnimalModel) throws Exception {
+    public void save(AnimalModel inAnimalModel) throws Exception
+    {
         log.trace("In AnimalModelManagerImpl.save");
         super.save(inAnimalModel);
     }
@@ -322,7 +382,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception throws
      *                an Exception if an error occurred
      */
-    public AnimalModel duplicate(AnimalModel inAnimalModel) throws Exception {
+    public AnimalModel duplicate(AnimalModel inAnimalModel) throws Exception
+    {
         log.trace("In AnimalModelManagerImpl.duplicate");
 
         AnimalModel theDuplicatedModel = (AnimalModel) DuplicateUtil.duplicateBean(inAnimalModel);
@@ -348,11 +409,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @exception Exception
      *                if an error occurred
      */
-    public void updateAndAddLog(AnimalModel inAnimalModel, Log inLog) throws Exception {
+    public void updateAndAddLog(AnimalModel inAnimalModel,
+                                Log inLog) throws Exception
+    {
 
         log.trace("Entering updateAndAddLog");
 
-        try {
+        try
+        {
 
             // Make sure they get saved together
             HibernateUtil.beginTransaction();
@@ -360,11 +424,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             Persist.save(inLog);
             HibernateUtil.commitTransaction();
 
-        } catch (PersistenceException pe) {
+        }
+        catch (PersistenceException pe)
+        {
             HibernateUtil.rollbackTransaction();
             log.error("PersistenceException in save", pe);
             throw pe;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             HibernateUtil.rollbackTransaction();
             log.error("Exception in save", e);
             throw e;
@@ -385,7 +453,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @return the created and unsaved AnimalModel
      * @throws Exception
      */
-    public AnimalModel create(ModelCharacteristicsData inModelCharacteristicsData, String inUsername) throws Exception {
+    public AnimalModel create(ModelCharacteristicsData inModelCharacteristicsData,
+                              String inUsername) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.create");
 
@@ -404,7 +474,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @param inAnimalModel
      *            The animal model to update
      */
-    public void update(ModelCharacteristicsData inModelCharacteristicsData, AnimalModel inAnimalModel) throws Exception {
+    public void update(ModelCharacteristicsData inModelCharacteristicsData,
+                       AnimalModel inAnimalModel) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.update");
         log.debug("Updating animal model: " + inAnimalModel.getId());
@@ -426,7 +498,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @throws Exception
      *             An error occurred when attempting to delete the model
      */
-    public void remove(String id) throws Exception {
+    public void remove(String id) throws Exception
+    {
         log.trace("In AnimalModelManagerImpl.remove");
         super.remove(id, AnimalModel.class);
     }
@@ -441,15 +514,17 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * 
      * @throws Exception
      */
-    public List search(SearchData inSearchData) throws Exception {
+    public List<AnimalModelSearchResult> search(SearchData inSearchData) throws Exception
+    {
 
         log.trace("In search");
         List theAnimalModels = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
 
-        List theDisplayList = new ArrayList();
+        List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
 
         // Add AnimalModel DTO's so that the paganation works quickly
-        for (int i = 0, j = theAnimalModels.size(); i < j; i++) {
+        for (int i = 0, j = theAnimalModels.size(); i < j; i++)
+        {
             AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
             theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
         }
@@ -460,25 +535,29 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     // Populate the model based on the model characteristics form passed in. It
     // will update associated
     // object if they exist, create them if they don't.
-    private AnimalModel populateAnimalModel(ModelCharacteristicsData inModelCharacteristics, String inUsername,
-            AnimalModel inAnimalModel) throws Exception {
+    private AnimalModel populateAnimalModel(ModelCharacteristicsData inModelCharacteristics,
+                                            String inUsername,
+                                            AnimalModel inAnimalModel) throws Exception
+    {
 
         log.trace("Entering populateAnimalModel");
 
         // Handle the person information
-        if (inUsername != null) {
+        if (inUsername != null)
+        {
             Person theSubmitter = PersonManagerSingleton.instance().getByUsername(inUsername);
-            if (theSubmitter == null) {
+            if (theSubmitter == null)
+            {
 
                 throw new IllegalArgumentException("Unknown user: " + inUsername);
             }
             inAnimalModel.setSubmitter(theSubmitter);
         }
 
-        Person thePI = PersonManagerSingleton.instance().getByUsername(
-                inModelCharacteristics.getPrincipalInvestigator());
+        Person thePI = PersonManagerSingleton.instance().getByUsername(inModelCharacteristics.getPrincipalInvestigator());
 
-        if (thePI == null) {
+        if (thePI == null)
+        {
             throw new IllegalArgumentException("Unknown principal investigator: " + inUsername);
         }
 
@@ -495,13 +574,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         // Create/reuse the taxon
         Taxon theTaxon = TaxonManagerSingleton.instance().getOrCreate(inModelCharacteristics.getScientificName(),
-                inModelCharacteristics.getEthinicityStrain(), inModelCharacteristics.getEthnicityStrainUnctrlVocab());
+                                                                      inModelCharacteristics.getEthinicityStrain(),
+                                                                      inModelCharacteristics.getEthnicityStrainUnctrlVocab());
 
         // Other option
-        if (theTaxon.getEthnicityStrainUnctrlVocab() != null) {
-
+        if (theTaxon.getEthnicityStrainUnctrlVocab() != null)
+        {
             // It doesn't match the old one
-            if (theOldTaxon == null || !theTaxon.getEthnicityStrainUnctrlVocab().equals(theOldTaxon.getEthnicityStrainUnctrlVocab())) {
+            if (theOldTaxon == null || !theTaxon.getEthnicityStrainUnctrlVocab().equals(theOldTaxon.getEthnicityStrainUnctrlVocab()))
+            {
                 log.trace("Sending Notification eMail - new EthinicityStrain added");
 
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");
@@ -510,7 +591,8 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
                 StringTokenizer st = new StringTokenizer(recipients, ",");
                 String inRecipients[] = new String[st.countTokens()];
-                for (int i = 0; i < inRecipients.length; i++) {
+                for (int i = 0; i < inRecipients.length; i++)
+                {
                     inRecipients[i] = st.nextToken();
                 }
 
@@ -520,7 +602,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 // gather message keys and variable values to build the e-mail
                 // content with
                 String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                Map values = new TreeMap();
+                Map<String, Object> values = new TreeMap<String, Object>();
                 values.put("type", "EthinicityStrain");
                 values.put("value", inModelCharacteristics.getEthnicityStrainUnctrlVocab());
                 values.put("submitter", inAnimalModel.getSubmitter());
@@ -528,9 +610,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                 values.put("modelstate", inAnimalModel.getState());
 
                 // Send the email
-                try {
+                try
+                {
                     MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     log.error("Caught exception sending mail: ", e);
                     e.printStackTrace();
                 }
@@ -538,14 +623,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         }
 
         Phenotype thePhenotype = inAnimalModel.getPhenotype();
-        if (thePhenotype == null) {
+        if (thePhenotype == null)
+        {
             thePhenotype = new Phenotype();
         }
 
         // Get/create the sex distribution
-        if (inModelCharacteristics.getType() != null) {
-            SexDistribution theSexDistribution = SexDistributionManagerSingleton.instance().getByType(
-                    inModelCharacteristics.getType());
+        if (inModelCharacteristics.getType() != null)
+        {
+            SexDistribution theSexDistribution = SexDistributionManagerSingleton.instance().getByType(inModelCharacteristics.getType());
             thePhenotype.setSexDistribution(theSexDistribution);
         }
 
@@ -557,23 +643,30 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         Availability theAvailability = inAnimalModel.getAvailability();
 
         // When the model was created
-        if (theAvailability == null) {
+        if (theAvailability == null)
+        {
             theAvailability = new Availability();
-        } else {
+        }
+        else
+        {
             theAvailability.setModifiedDate(new Date());
         }
         theAvailability.setEnteredDate(new Date());
 
         // Convert the date
         Date theDate = new Date();
-        if (!inModelCharacteristics.getReleaseDate().equals("immediately")) {
+        if (!inModelCharacteristics.getReleaseDate().equals("immediately"))
+        {
 
             // Convert the string to a date. Default to "now" if there are any
             // errors
             DateFormat theDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            try {
+            try
+            {
                 theDate = theDateFormat.parse(inModelCharacteristics.getCalendarReleaseDate());
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.error("Error parsing release date, defaulting to now", e);
             }
         }
@@ -589,7 +682,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         return inAnimalModel;
     }
 
-    public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception {
+    public void addXenograft(AnimalModel inAnimalModel,
+                             XenograftData inXenograftData) throws Exception
+    {
 
         System.out.println("<AnimalModelManagerImpl populate> Entering addXenograft() ");
 
@@ -614,12 +709,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the gene delivery
      * @throws Exception
      */
-    public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception {
+    public void addGeneDelivery(AnimalModel inAnimalModel,
+                                GeneDeliveryData inGeneDeliveryData) throws Exception
+    {
 
         log.info("<AnimalModelManagerImpl> Entering addGeneDelivery");
 
-        GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance()
-                .create(inAnimalModel, inGeneDeliveryData);
+        GeneDelivery theGeneDelivery = GeneDeliveryManagerSingleton.instance().create(inAnimalModel, inGeneDeliveryData);
         inAnimalModel.addGeneDelivery(theGeneDelivery);
         save(inAnimalModel);
 
@@ -635,7 +731,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new chemical drug data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           ChemicalDrugData inChemicalDrugData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inChemicalDrugData);
@@ -653,8 +751,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the ef data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData)
-            throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           EnvironmentalFactorData inEnvironmentalFactorData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inEnvironmentalFactorData);
@@ -672,7 +771,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new radiation data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, RadiationData inRadiationData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           RadiationData inRadiationData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inRadiationData);
@@ -690,7 +791,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new viral treatment data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           ViralTreatmentData inViralTreatmentData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inViralTreatmentData);
@@ -708,7 +811,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new growth factor data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           GrowthFactorData inGrowthFactorData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inGrowthFactorData);
@@ -726,7 +831,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new growth factor data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, HormoneData inHormoneData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           HormoneData inHormoneData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inHormoneData);
@@ -744,7 +851,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new nutrional factor data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           NutritionalFactorData inNutritionalFactorData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inNutritionalFactorData);
@@ -762,7 +871,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new surgery data
      * @throws Exception
      */
-    public void addTherapy(AnimalModel inAnimalModel, SurgeryData inSurgeryData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           SurgeryData inSurgeryData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addTherapy");
         Therapy theTherapy = TherapyManagerSingleton.instance().create(inAnimalModel, inSurgeryData);
@@ -780,7 +891,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new cell line data
      * @throws Exception
      */
-    public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception {
+    public void addCellLine(AnimalModel inAnimalModel,
+                            CellLineData inCellLineData) throws Exception
+    {
 
         log.debug("<AnimalModelManagerImpl> Entering saveCellLine");
         CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData);
@@ -793,12 +906,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a SpontaneousMutation
      */
-    public void addGeneticDescription(AnimalModel inAnimalModel, SpontaneousMutationData inSpontaneousMutationData)
-            throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel,
+                                      SpontaneousMutationData inSpontaneousMutationData) throws Exception
+    {
 
         log.trace("Entering addGeneticDescription (spontaneousMutation)");
-        SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create(
-                inSpontaneousMutationData);
+        SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create(inSpontaneousMutationData);
         // System.out.println(theSpontaneousMutation.getName());
         inAnimalModel.addSpontaneousMutation(theSpontaneousMutation);
         save(inAnimalModel);
@@ -809,13 +922,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a InducedMutation
      */
-    public void addGeneticDescription(AnimalModel inAnimalModel, InducedMutationData inInducedMutationData)
-            throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel,
+                                      InducedMutationData inInducedMutationData) throws Exception
+    {
 
         log.trace("Entering addGeneticDescription (inducedMutation)");
 
-        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create(inAnimalModel,
-                inInducedMutationData);
+        InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().create(inAnimalModel, inInducedMutationData);
         inAnimalModel.addEngineeredGene(theInducedMutation);
         save(inAnimalModel);
 
@@ -825,13 +938,16 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     /**
      * Add a TargetedModification
      */
-    public void addGeneticDescription(AnimalModel inAnimalModel, TargetedModificationData inTargetedModificationData,
-            HttpServletRequest request) throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel,
+                                      TargetedModificationData inTargetedModificationData,
+                                      HttpServletRequest request) throws Exception
+    {
 
         log.trace("Entering addGeneticDescription (TargetedModification)");
 
-        TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(
-                inAnimalModel, inTargetedModificationData, request);
+        TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().create(inAnimalModel,
+                                                                                                              inTargetedModificationData,
+                                                                                                              request);
         // System.out.println(theGene.getName() );
 
         inAnimalModel.addEngineeredGene(theTargetedModification);
@@ -840,13 +956,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting addGeneticDescription (TargetedModification)");
     }
 
-    public void addGeneticDescription(AnimalModel inAnimalModel, GenomicSegmentData inGenomicSegmentData,
-            HttpServletRequest request) throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel,
+                                      GenomicSegmentData inGenomicSegmentData,
+                                      HttpServletRequest request) throws Exception
+    {
 
         log.trace("Entering addGeneticDescription (GenomicSegment)");
 
-        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inAnimalModel,
-                inGenomicSegmentData, request);
+        GenomicSegment theGenomicSegment = GenomicSegmentManagerSingleton.instance().create(inAnimalModel, inGenomicSegmentData, request);
         // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theGenomicSegment);
@@ -855,13 +972,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting addGeneticDescription (GenomicSegment)");
     }
 
-    public void addGeneticDescription(AnimalModel inAnimalModel, EngineeredTransgeneData inEngineeredTransgeneData,
-            HttpServletRequest request) throws Exception {
+    public void addGeneticDescription(AnimalModel inAnimalModel,
+                                      EngineeredTransgeneData inEngineeredTransgeneData,
+                                      HttpServletRequest request) throws Exception
+    {
 
         log.trace("Entering addGeneticDescription (EngineeredTransgene)");
 
-        Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().create(
-                inEngineeredTransgeneData, request);
+        Transgene theEngineeredTransgene = EngineeredTransgeneManagerSingleton.instance().create(inEngineeredTransgeneData, request);
         // System.out.println(theGenomicSegment.getName() );
 
         inAnimalModel.addEngineeredGene(theEngineeredTransgene);
@@ -870,12 +988,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting addGeneticDescription (EngineeredTransgene)");
     }
 
-    public void addImage(AnimalModel inAnimalModel, ImageData inImageData, String inPath) throws Exception {
+    public void addImage(AnimalModel inAnimalModel,
+                         ImageData inImageData,
+                         String inPath) throws Exception
+    {
 
         log.trace("Entering addImage (Image)");
 
         Image theImage = ImageManagerSingleton.instance().create(inAnimalModel, inImageData, inPath,
-                Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
+                                                                 Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
         inAnimalModel.addImage(theImage);
         save(inAnimalModel);
 
@@ -892,7 +1013,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @throws Exception
      */
 
-    public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception {
+    public void addTherapy(AnimalModel inAnimalModel,
+                           TherapyData inTherapyData) throws Exception
+    {
 
         System.out.println("<AnimalModelManagerImpl addTherapy>");
 
@@ -914,7 +1037,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      *            the new therapy data
      * @throws Exception
      */
-    public void addAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData) throws Exception {
+    public void addAvailability(AnimalModel inAnimalModel,
+                                AvailabilityData inAvailabilityData) throws Exception
+    {
 
         System.out.println("<AnimalModelManagerImpl addAvailability>");
 
@@ -935,34 +1060,37 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * @throws Exception
      */
 
-    public void addInvestigatorAvailability(AnimalModel inAnimalModel, AvailabilityData inAvailabilityData)
-            throws Exception {
+    public void addInvestigatorAvailability(AnimalModel inAnimalModel,
+                                            AvailabilityData inAvailabilityData) throws Exception
+    {
 
         System.out.println("<AnimalModelManagerImpl addInvestigatorAvailability>");
 
         log.info("Entering AnimalModelManagerImpl.addInvestigatorAvailability");
-        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().createInvestigator(
-                inAvailabilityData);
+        AnimalAvailability theAvailability = AvailabilityManagerSingleton.instance().createInvestigator(inAvailabilityData);
         inAnimalModel.addAnimalAvailability(theAvailability);
         save(inAnimalModel);
         log.info("Exiting AnimalModelManagerImpl.addInvestigatorAvailability");
     }
 
-    public void addAssociatedExpression(AnimalModel inAnimalModel, EngineeredGene inEngineeredGene,
-            AssociatedExpressionData inAssociatedExpressionData) throws Exception {
+    public void addAssociatedExpression(AnimalModel inAnimalModel,
+                                        EngineeredGene inEngineeredGene,
+                                        AssociatedExpressionData inAssociatedExpressionData) throws Exception
+    {
 
         System.out.println("<AnimalModelManagerImpl addAssociatedExpression>");
         log.trace("Entering AnimalModelManagerImpl.addAssociatedExpression");
 
         // addAssociatedExpression (ExpressionFeature)
-        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData,
-                inEngineeredGene);
+        EngineeredTransgeneManagerSingleton.instance().createAssocExpression(inAssociatedExpressionData, inEngineeredGene);
         save(inAnimalModel);
 
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
 
-    public void addPublication(AnimalModel inAnimalModel, PublicationData inPublicationData) throws Exception {
+    public void addPublication(AnimalModel inAnimalModel,
+                               PublicationData inPublicationData) throws Exception
+    {
 
         log.trace("Entering AnimalModelManagerImpl.addPublication");
 
@@ -975,12 +1103,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.trace("Exiting AnimalModelManagerImpl.addAssociatedExpression");
     }
 
-    public void addHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData) throws Exception {
+    public void addHistopathology(AnimalModel inAnimalModel,
+                                  HistopathologyData inHistopathologyData) throws Exception
+    {
 
         log.info("Entering AnimalModelManagerImpl.addHistopathology_1");
 
-        Histopathology theHistopathology = HistopathologyManagerSingleton.instance().createHistopathology(
-                inHistopathologyData);
+        Histopathology theHistopathology = HistopathologyManagerSingleton.instance().createHistopathology(inHistopathologyData);
         inAnimalModel.addHistopathology(theHistopathology);
 
         save(inAnimalModel);
@@ -988,20 +1117,23 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("Exiting AnimalModelManagerImpl.addHistopathology");
     }
 
-    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology,
-            AssociatedMetastasisData inAssociatedMetastasisData) throws Exception {
+    public void addAssociatedMetastasis(AnimalModel inAnimalModel,
+                                        Histopathology inHistopathology,
+                                        AssociatedMetastasisData inAssociatedMetastasisData) throws Exception
+    {
 
         log.info("Entering AnimalModelManagerImpl.addAssociatedMetastasis_1");
 
-        HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData,
-                inHistopathology);
+        HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData, inHistopathology);
         save(inAnimalModel);
 
         log.info("Exiting AnimalModelManagerImpl.addHistopathology");
     }
 
-    public void addClinicalMarker(AnimalModel inAnimalModel, Histopathology inHistopathology,
-            ClinicalMarkerData inClinicalMarkerData) throws Exception {
+    public void addClinicalMarker(AnimalModel inAnimalModel,
+                                  Histopathology inHistopathology,
+                                  ClinicalMarkerData inClinicalMarkerData) throws Exception
+    {
 
         log.info("Entering AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
 

@@ -7,14 +7,15 @@ import gov.nih.nci.camod.service.PublicationManager;
  * 
  * Singleton class for the PublicationManager
  */
-public class PublicationManagerSingleton {
-
+public class PublicationManagerSingleton
+{
     private static PublicationManager ourManager = new PublicationManagerImpl();
 
     /**
      * @return the global instance of the SexDistributionManager
      */
-    public static synchronized PublicationManager instance() {
+    public static synchronized PublicationManager instance()
+    {
         return ourManager;
     }
 }

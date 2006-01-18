@@ -14,8 +14,8 @@ import java.io.Serializable;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class Species implements Serializable {
-
+public class Species implements Serializable
+{
     private static final long serialVersionUID = 3258615453799404851L;
 
     private String name;
@@ -23,7 +23,8 @@ public class Species implements Serializable {
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -31,7 +32,8 @@ public class Species implements Serializable {
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 }

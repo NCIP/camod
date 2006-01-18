@@ -6,7 +6,9 @@
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
 /**
  * @author rajputs
@@ -14,41 +16,47 @@ import java.util.*;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class TargetedModification extends EngineeredGene {
+public class TargetedModification extends EngineeredGene
+{
 
     private static final long serialVersionUID = 3258565453799404851L;
 
     private String esCellLineName;
     private String blastocystName;
     private String geneId;
-    private List modificationTypeCollection = new ArrayList();
+    private List<ModificationType> modificationTypeCollection = new ArrayList<ModificationType>();
     private String modTypeUnctrlVocab;
 
     /**
      * @return Returns the modificationTypeCollection.
      */
-    public List getModificationTypeCollection() {        
-        return modificationTypeCollection;           
+    public List<ModificationType> getModificationTypeCollection()
+    {
+        return modificationTypeCollection;
     }
 
-    public List getModificationTypeCollectionSorted() {      
-      if (modificationTypeCollection != null) return new ArrayList(new TreeSet(modificationTypeCollection));
-      return null;
-    }   
-    
+    public List<ModificationType> getModificationTypeCollectionSorted()
+    {
+        if (modificationTypeCollection != null)
+            return new ArrayList<ModificationType>(new TreeSet<ModificationType>(modificationTypeCollection));
+        return null;
+    }
+
     /**
      * @param modificationTypeCollection
      *            The modificationTypeCollection to set.
      */
-    public void setModificationTypeCollection(List modificationTypeCollection) {
+    public void setModificationTypeCollection(List<ModificationType> modificationTypeCollection)
+    {
         this.modificationTypeCollection = modificationTypeCollection;
     }
-    
+
     /**
      * @param modificationType
      *            The modificationType to add.
      */
-    public void addModificationType(ModificationType modificationType) {
+    public void addModificationType(ModificationType modificationType)
+    {
         modificationType.getTargetedModificationCollection().add(this);
         modificationTypeCollection.add(modificationType);
     }
@@ -56,7 +64,8 @@ public class TargetedModification extends EngineeredGene {
     /**
      * @return Returns the modTypeUnctrlVocab.
      */
-    public String getModTypeUnctrlVocab() {
+    public String getModTypeUnctrlVocab()
+    {
         return modTypeUnctrlVocab;
     }
 
@@ -64,14 +73,16 @@ public class TargetedModification extends EngineeredGene {
      * @param modTypeUnctrlVocab
      *            The modTypeUnctrlVocab to set.
      */
-    public void setModTypeUnctrlVocab(String modTypeUnctrlVocab) {
+    public void setModTypeUnctrlVocab(String modTypeUnctrlVocab)
+    {
         this.modTypeUnctrlVocab = modTypeUnctrlVocab;
     }
 
     /**
      * @return Returns the geneId.
      */
-    public String getGeneId() {
+    public String getGeneId()
+    {
         return geneId;
     }
 
@@ -79,14 +90,16 @@ public class TargetedModification extends EngineeredGene {
      * @param geneId
      *            The geneId to set.
      */
-    public void setGeneId(String geneId) {
+    public void setGeneId(String geneId)
+    {
         this.geneId = geneId;
     }
 
     /**
      * @return Returns the blastocystName.
      */
-    public String getBlastocystName() {
+    public String getBlastocystName()
+    {
         return blastocystName;
     }
 
@@ -94,14 +107,16 @@ public class TargetedModification extends EngineeredGene {
      * @param blastocystName
      *            The blastocystName to set.
      */
-    public void setBlastocystName(String blastocystName) {
+    public void setBlastocystName(String blastocystName)
+    {
         this.blastocystName = blastocystName;
     }
 
     /**
      * @return Returns the esCellLineName.
      */
-    public String getEsCellLineName() {
+    public String getEsCellLineName()
+    {
         return esCellLineName;
     }
 
@@ -109,22 +124,27 @@ public class TargetedModification extends EngineeredGene {
      * @param esCellLineName
      *            The esCellLineName to set.
      */
-    public void setEsCellLineName(String esCellLineName) {
+    public void setEsCellLineName(String esCellLineName)
+    {
         this.esCellLineName = esCellLineName;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
-     public String toString() {
-       String result = super.toString() + " - ";      
-       result += this.getGeneId();
-       return result;
-     }  
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getGeneId();
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }

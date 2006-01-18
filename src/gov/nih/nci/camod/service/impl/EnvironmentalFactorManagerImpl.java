@@ -8,6 +8,7 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.EnvironmentalFactor;
 import gov.nih.nci.camod.service.EnvironmentalFactorManager;
+
 import java.util.List;
 
 /**
@@ -16,8 +17,8 @@ import java.util.List;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class EnvironmentalFactorManagerImpl extends BaseManager implements EnvironmentalFactorManager {
-	
+public class EnvironmentalFactorManagerImpl extends BaseManager implements EnvironmentalFactorManager
+{
     /**
      * Get all EnvironmentalFactor by id
      * 
@@ -27,11 +28,12 @@ public class EnvironmentalFactorManagerImpl extends BaseManager implements Envir
      * @exception Exception
      *                when anything goes wrong.
      */
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In EnvironmentalFactorManagerImpl.getAll");
         return super.getAll(EnvironmentalFactor.class);
     }
-	
+
     /**
      * Get a specific EnvironmentalFactor by id
      * 
@@ -43,7 +45,8 @@ public class EnvironmentalFactorManagerImpl extends BaseManager implements Envir
      * @exception Exception
      *                when anything goes wrong.
      */
-    public EnvironmentalFactor get(String id) throws Exception {
+    public EnvironmentalFactor get(String id) throws Exception
+    {
         log.trace("In EnvironmentalFactorManagerImpl.get");
         return (EnvironmentalFactor) super.get(id, EnvironmentalFactor.class);
     }
@@ -57,7 +60,8 @@ public class EnvironmentalFactorManagerImpl extends BaseManager implements Envir
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void save(EnvironmentalFactor environmentalFactor) throws Exception {
+    public void save(EnvironmentalFactor environmentalFactor) throws Exception
+    {
         log.debug("In EnvironmentalFactorManagerImpl.save");
         super.save(environmentalFactor);
     }
@@ -71,7 +75,8 @@ public class EnvironmentalFactorManagerImpl extends BaseManager implements Envir
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void remove(String id) throws Exception {
+    public void remove(String id) throws Exception
+    {
         log.debug("In EnvironmentalFactorManagerImpl.save");
         super.remove(id, EnvironmentalFactor.class);
     }

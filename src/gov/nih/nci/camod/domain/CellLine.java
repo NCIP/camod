@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.12 2005-11-03 16:54:55 piparom Exp $
+ * $Id: CellLine.java,v 1.13 2006-01-18 14:23:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/03 16:54:55  piparom
+ * implemented "getXXXColectionSorted" method for every getCollection method.
+ *
  * Revision 1.11  2005/11/02 19:10:52  georgeda
  * Removed warnings
  *
@@ -28,21 +31,23 @@ import gov.nih.nci.camod.util.HashCodeUtil;
 import java.io.Serializable;
 import java.util.*;
 
-public class CellLine extends BaseObject implements Comparable, Serializable, Duplicatable {
+public class CellLine extends BaseObject implements Comparable, Serializable, Duplicatable
+{
 
     private static final long serialVersionUID = 3259655453799404851L;
-    
+
     private String comments;
     private String experiment;
     private String name;
     private String results;
-    private List publicationCollection = new ArrayList();
+    private List<Publication> publicationCollection = new ArrayList<Publication>();
     private Organ organ;
 
     /**
      * @return Returns the organ.
      */
-    public Organ getOrgan() {
+    public Organ getOrgan()
+    {
         return organ;
     }
 
@@ -50,14 +55,16 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      * @param organ
      *            The organ to set.
      */
-    public void setOrgan(Organ organ) {
+    public void setOrgan(Organ organ)
+    {
         this.organ = organ;
     }
 
     /**
      * @return Returns the comments.
      */
-    public String getComments() {
+    public String getComments()
+    {
         return comments;
     }
 
@@ -65,14 +72,16 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      * @param comments
      *            The comments to set.
      */
-    public void setComments(String comments) {
+    public void setComments(String comments)
+    {
         this.comments = comments;
     }
 
     /**
      * @return Returns the experiment.
      */
-    public String getExperiment() {
+    public String getExperiment()
+    {
         return experiment;
     }
 
@@ -80,14 +89,16 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      * @param experiment
      *            The experiment to set.
      */
-    public void setExperiment(String experiment) {
+    public void setExperiment(String experiment)
+    {
         this.experiment = experiment;
     }
 
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -95,27 +106,32 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
     /**
      * @return Returns the publicationCollection.
      */
-    public List getPublicationCollection() {        
-      return publicationCollection;       
+    public List<Publication> getPublicationCollection()
+    {
+        return publicationCollection;
     }
 
-    public List getPublicationCollectionSorted() {      
-      if (publicationCollection != null) return new ArrayList(new TreeSet(publicationCollection));
-      return null;
-    }   
-    
+    public List<Publication> getPublicationCollectionSorted()
+    {
+        if (publicationCollection != null)
+            return new ArrayList<Publication>(new TreeSet<Publication>(publicationCollection));
+        return null;
+    }
+
     /**
      * @param publicationCollection
      *            The publicationCollection to set.
      */
-    public void setPublicationCollection(List publicationCollection) {
+    public void setPublicationCollection(List<Publication> publicationCollection)
+    {
         this.publicationCollection = publicationCollection;
     }
 
@@ -123,14 +139,16 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      * @param publication
      *            The publication to add.
      */
-    public void addPublication(Publication publication) {
+    public void addPublication(Publication publication)
+    {
         publicationCollection.add(publication);
     }
 
     /**
      * @return Returns the results.
      */
-    public String getResults() {
+    public String getResults()
+    {
         return results;
     }
 
@@ -138,43 +156,55 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
      * @param results
      *            The results to set.
      */
-    public void setResults(String results) {
+    public void setResults(String results)
+    {
         this.results = results;
     }
 
- 
+
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-      String result = super.toString() + " - ";      
-      result += this.getName();          
-      return result;
-    }     
-    
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false; 
-      final CellLine obj = (CellLine) o;
-      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getName();
+        return result;
     }
-     
-    public int hashCode() {
-      int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getName());    
-      return result + super.hashCode();    
-    }  
-    
-    public int compareTo(Object o) {
-      if ((o instanceof CellLine) && (this.getName() != null) && (((CellLine)o).getName() != null)) {   
-        int result = this.getName().compareTo( ((CellLine)o).getName() );
-        if (result != 0) { return result; }               
-      }
 
-      return super.compareTo(o);
-    }      
 
-    
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        final CellLine obj = (CellLine) o;
+        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
+            return false;
+        return true;
+    }
+
+    public int hashCode()
+    {
+        int result = HashCodeUtil.SEED;
+        result = HashCodeUtil.hash(result, this.getName());
+        return result + super.hashCode();
+    }
+
+    public int compareTo(Object o)
+    {
+        if ((o instanceof CellLine) && (this.getName() != null) && (((CellLine) o).getName() != null))
+        {
+            int result = this.getName().compareTo(((CellLine) o).getName());
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        return super.compareTo(o);
+    }
+
+
 }
