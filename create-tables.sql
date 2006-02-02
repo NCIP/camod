@@ -19,7 +19,6 @@ drop table conditionality cascade constraints;
 drop table contact_info cascade constraints;
 drop table disease cascade constraints;
 drop table endpoint_code cascade constraints;
-drop table eng_gene_exp_feature cascade constraints;
 drop table engineered_gene cascade constraints;
 drop table env_fac_ind_mutation cascade constraints;
 drop table environmental_factor cascade constraints;
@@ -29,7 +28,6 @@ drop table gene_delivery cascade constraints;
 drop table gene_function cascade constraints;
 drop table genetic_alteration cascade constraints;
 drop table genotype_summary cascade constraints;
-drop table his_clinical_marker cascade constraints;
 drop table histopathology cascade constraints;
 drop table image cascade constraints;
 drop table ind_mut_gen_alteration cascade constraints;
@@ -231,10 +229,6 @@ create table endpoint_code (
    description varchar2(255),
    primary key (endpoint_code_id)
 );
-create table eng_gene_exp_feature (
-   engineered_gene_id number(19,0) not null,
-   expression_feature_id number(19,0) not null unique
-);
 create table engineered_gene (
    engineered_gene_id number(19,0) not null,
    engineered_gene_type varchar2(255) not null,
@@ -312,10 +306,6 @@ create table genotype_summary (
    genotype varchar2(255),
    nomenclature_id number(19,0),
    primary key (genotype_summary_id)
-);
-create table his_clinical_marker (
-   histopathology_id number(19,0) not null,
-   clinical_marker_id number(19,0) not null unique
 );
 create table histopathology (
    histopathology_id number(19,0) not null,
@@ -628,8 +618,6 @@ alter table comments add constraint FKDC17DDF495BE676C foreign key (model_sectio
 alter table comments add constraint FKDC17DDF42EB4E88E foreign key (party_id) references party;
 alter table comments add constraint FKDC17DDF4496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table comments add constraint FKDC17DDF4290CE83F foreign key (availability_id) references availability;
-alter table eng_gene_exp_feature add constraint FK6FC0F1EBBEC26304 foreign key (expression_feature_id) references expression_feature;
-alter table eng_gene_exp_feature add constraint FK6FC0F1EBD749BD3C foreign key (engineered_gene_id) references engineered_gene;
 alter table engineered_gene add constraint FK4ADB496687D074B5 foreign key (species_id) references species;
 alter table engineered_gene add constraint FK4ADB496653A0BB3C foreign key (segment_type_id) references segment_type;
 alter table engineered_gene add constraint FK4ADB4966BB186F15 foreign key (image_id) references image;
@@ -640,6 +628,7 @@ alter table engineered_gene add constraint FK4ADB496666D7EBDF foreign key (condi
 alter table env_fac_ind_mutation add constraint FKDBCCD3F22C7402E4 foreign key (engineered_gene_id) references engineered_gene;
 alter table env_fac_ind_mutation add constraint FKDBCCD3F219EF4CF2 foreign key (environmental_factor_id) references environmental_factor;
 alter table expression_feature add constraint FKCC1D9C4F3D222B55 foreign key (organ_id) references organ;
+alter table expression_feature add constraint FKCC1D9C4FB9C7E46B foreign key (engineered_gene_id) references histopathology;
 alter table expression_feature add constraint FKCC1D9C4FD749BD3C foreign key (engineered_gene_id) references engineered_gene;
 alter table expression_feature add constraint FKCC1D9C4FA17421A4 foreign key (exp_level_desc_id) references exp_level_desc;
 alter table gene_delivery add constraint FK918699DE3D222B55 foreign key (organ_id) references organ;
@@ -647,8 +636,6 @@ alter table gene_delivery add constraint FK918699DE496C4E05 foreign key (abs_can
 alter table gene_delivery add constraint FK918699DE46872875 foreign key (treatment_id) references treatment;
 alter table gene_function add constraint FKB2C0F1C2D749BD3C foreign key (engineered_gene_id) references engineered_gene;
 alter table genotype_summary add constraint FK6ECA840B35AE2BF foreign key (nomenclature_id) references nomenclature;
-alter table his_clinical_marker add constraint FK361904394E07A166 foreign key (clinical_marker_id) references clinical_marker;
-alter table his_clinical_marker add constraint FK36190439D45FCF9F foreign key (histopathology_id) references histopathology;
 alter table histopathology add constraint FK587A4AB2102F8CB5 foreign key (disease_id) references disease;
 alter table histopathology add constraint FK587A4AB23FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
 alter table histopathology add constraint FK587A4AB2BCA0AB4A foreign key (parent_histopathology_id) references histopathology;
