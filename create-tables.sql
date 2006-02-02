@@ -110,6 +110,7 @@ create table agent (
    cas_number varchar2(255),
    is_cmap_agent number(1,0),
    comments varchar2(255),
+   source varchar2(255),
    primary key (agent_id)
 );
 create table agent_agent_target (
