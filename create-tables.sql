@@ -30,7 +30,6 @@ drop table genetic_alteration cascade constraints;
 drop table genotype_summary cascade constraints;
 drop table histopathology cascade constraints;
 drop table image cascade constraints;
-drop table ind_mut_gen_alteration cascade constraints;
 drop table invivo_result cascade constraints;
 drop table log cascade constraints;
 drop table micro_array_data cascade constraints;
@@ -53,12 +52,10 @@ drop table screening_result cascade constraints;
 drop table segment_type cascade constraints;
 drop table sex_distribution cascade constraints;
 drop table species cascade constraints;
-drop table spon_mut_gen_alteration cascade constraints;
 drop table spontaneous_mutation cascade constraints;
 drop table staining_method cascade constraints;
 drop table strain cascade constraints;
 drop table tar_mod_modification_type cascade constraints;
-drop table taxon cascade constraints;
 drop table therapy cascade constraints;
 drop table therapy_publication cascade constraints;
 drop table transgene_reg_element cascade constraints;
@@ -100,6 +97,7 @@ create table abs_cancer_model (
    tumor_code_id number(19,0),
    donor_species_id number(19,0),
    organ_id number(19,0) unique,
+   par_abs_can_model_id number(19,0),
    primary key (abs_cancer_model_id)
 );
 create table agent (
@@ -251,6 +249,7 @@ create table engineered_gene (
    es_cell_line_name varchar2(255),
    blastocyst_name varchar2(255),
    species_id number(19,0) unique,
+   genetic_alteration_id number(19,0),
    primary key (engineered_gene_id)
 );
 create table env_fac_ind_mutation (
@@ -334,10 +333,6 @@ create table image (
    file_server_location varchar2(255),
    staining_method_id number(19,0),
    primary key (image_id)
-);
-create table ind_mut_gen_alteration (
-   engineered_gene_id number(19,0) not null,
-   genetic_alteration_id number(19,0) not null unique
 );
 create table invivo_result (
    invivo_result_id number(19,0) not null,
@@ -495,10 +490,6 @@ create table species (
    concept_code varchar2(255),
    primary key (species_id)
 );
-create table spon_mut_gen_alteration (
-   spontaneous_mutation_id number(19,0) not null,
-   genetic_alteration_id number(19,0) not null unique
-);
 create table spontaneous_mutation (
    spontaneous_mutation_id number(19,0) not null,
    name varchar2(255),
@@ -506,6 +497,7 @@ create table spontaneous_mutation (
    comments varchar2(255),
    mutation_identifier_id number(19,0),
    abs_cancer_model_id number(19,0),
+   genetic_alteration_id number(19,0),
    primary key (spontaneous_mutation_id)
 );
 create table staining_method (
@@ -528,15 +520,6 @@ create table strain (
 create table tar_mod_modification_type (
    engineered_gene_id number(19,0) not null,
    modification_type_id number(19,0) not null
-);
-create table taxon (
-   taxon_id number(19,0) not null,
-   scientific_name varchar2(255),
-   ethnicity_strain varchar2(255),
-   ethnicity_strain_unctrl_vocab varchar2(255),
-   abbreviation varchar2(255),
-   common_name varchar2(255),
-   primary key (taxon_id)
 );
 create table therapy (
    therapy_id number(19,0) not null,
@@ -598,6 +581,7 @@ alter table abs_cancer_model add constraint FKBC9267572D8B96DA foreign key (prin
 alter table abs_cancer_model add constraint FKBC9267572175CA75 foreign key (phenotype_id) references phenotype;
 alter table abs_cancer_model add constraint FKBC9267573D222B55 foreign key (organ_id) references organ;
 alter table abs_cancer_model add constraint FKBC9267576DC9C38B foreign key (submitter_id) references party;
+alter table abs_cancer_model add constraint FKBC9267579BE9D993 foreign key (par_abs_can_model_id) references abs_cancer_model;
 alter table abs_cancer_model add constraint FKBC92675765C8F094 foreign key (repository_info_id) references repository_info;
 alter table abs_cancer_model add constraint FKBC926757290CE83F foreign key (availability_id) references availability;
 alter table agent_agent_target add constraint FKCD3DA3053C5575C0 foreign key (agent_target_id) references agent_target;
@@ -606,11 +590,13 @@ alter table agent_biological_process add constraint FK5FEB6DAB42FAD9D2 foreign k
 alter table agent_biological_process add constraint FK5FEB6DAB457316D5 foreign key (agent_id) references agent;
 alter table agent_chemical_class add constraint FKD3317785BD096390 foreign key (chemical_class_id) references chemical_class;
 alter table agent_chemical_class add constraint FKD3317785457316D5 foreign key (agent_id) references agent;
+alter table animal_availability add constraint FKD4698ABE71A987C4 foreign key (animal_availability_id) references abs_cancer_model;
 alter table animal_availability add constraint FKD4698ABEFB3FC01C foreign key (animal_distributor_id) references animal_distributor;
 alter table animal_availability add constraint FKD4698ABE496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table carcinogen_exposure add constraint FKDF2E871119EF4CF2 foreign key (environmental_factor_id) references environmental_factor;
 alter table carcinogen_exposure add constraint FKDF2E871146872875 foreign key (treatment_id) references treatment;
 alter table cell_line add constraint FK61276CB13D222B55 foreign key (organ_id) references organ;
+alter table cell_line add constraint FK61276CB1B6827CF1 foreign key (cell_line_id) references abs_cancer_model;
 alter table cell_line add constraint FK61276CB1496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table cell_line_publication add constraint FKA8A4EB9E8258D935 foreign key (publication_id) references publication;
 alter table cell_line_publication add constraint FKA8A4EB9ED2525AC4 foreign key (cell_line_id) references cell_line;
@@ -623,7 +609,9 @@ alter table engineered_gene add constraint FK4ADB496687D074B5 foreign key (speci
 alter table engineered_gene add constraint FK4ADB496653A0BB3C foreign key (segment_type_id) references segment_type;
 alter table engineered_gene add constraint FK4ADB4966BB186F15 foreign key (image_id) references image;
 alter table engineered_gene add constraint FK4ADB4966F9575982 foreign key (genotype_summary_id) references genotype_summary;
+alter table engineered_gene add constraint FK4ADB496697B9D0A5 foreign key (genetic_alteration_id) references engineered_gene;
 alter table engineered_gene add constraint FK4ADB496672CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
+alter table engineered_gene add constraint FK4ADB4966F043681C foreign key (engineered_gene_id) references abs_cancer_model;
 alter table engineered_gene add constraint FK4ADB4966496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table engineered_gene add constraint FK4ADB496666D7EBDF foreign key (conditionality_id) references conditionality;
 alter table env_fac_ind_mutation add constraint FKDBCCD3F22C7402E4 foreign key (engineered_gene_id) references engineered_gene;
@@ -634,22 +622,25 @@ alter table expression_feature add constraint FKCC1D9C4FD749BD3C foreign key (en
 alter table expression_feature add constraint FKCC1D9C4FA17421A4 foreign key (exp_level_desc_id) references exp_level_desc;
 alter table gene_delivery add constraint FK918699DE3D222B55 foreign key (organ_id) references organ;
 alter table gene_delivery add constraint FK918699DE496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
+alter table gene_delivery add constraint FK918699DECA4CA4A4 foreign key (gene_delivery_id) references abs_cancer_model;
 alter table gene_delivery add constraint FK918699DE46872875 foreign key (treatment_id) references treatment;
 alter table gene_function add constraint FKB2C0F1C2D749BD3C foreign key (engineered_gene_id) references engineered_gene;
 alter table genotype_summary add constraint FK6ECA840B35AE2BF foreign key (nomenclature_id) references nomenclature;
 alter table histopathology add constraint FK587A4AB2102F8CB5 foreign key (disease_id) references disease;
+alter table histopathology add constraint FK587A4AB2ADB5350 foreign key (histopathology_id) references abs_cancer_model;
 alter table histopathology add constraint FK587A4AB23FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
 alter table histopathology add constraint FK587A4AB2BCA0AB4A foreign key (parent_histopathology_id) references histopathology;
 alter table histopathology add constraint FK587A4AB23D222B55 foreign key (organ_id) references organ;
+alter table image add constraint FK5FAA95B98630807 foreign key (image_id) references abs_cancer_model;
 alter table image add constraint FK5FAA95BB86E2EDA foreign key (staining_method_id) references staining_method;
-alter table ind_mut_gen_alteration add constraint FKE110EE213FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
-alter table ind_mut_gen_alteration add constraint FKE110EE212C7402E4 foreign key (engineered_gene_id) references engineered_gene;
 alter table invivo_result add constraint FKC187E8CB887C658A foreign key (endpoint_code_id) references endpoint_code;
 alter table invivo_result add constraint FKC187E8CB46872875 foreign key (treatment_id) references treatment;
 alter table invivo_result add constraint FKC187E8CB457316D5 foreign key (agent_id) references agent;
 alter table log add constraint FK1A34477AB701F foreign key (comments_id) references comments;
+alter table log add constraint FK1A3441CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table log add constraint FK1A344496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table log add constraint FK1A3442EB4E88E foreign key (party_id) references party;
+alter table micro_array_data add constraint FKC3D0BA2BA718537 foreign key (micro_array_data_id) references abs_cancer_model;
 alter table party_contact_info add constraint FK4B2B4226534EE516 foreign key (contact_info_id) references contact_info;
 alter table party_contact_info add constraint FK4B2B42263595FF35 foreign key (party_id) references party;
 alter table party_role add constraint FK1C92FE2FAC5A835F foreign key (role_id) references role;
@@ -660,14 +651,15 @@ alter table regulatory_element add constraint FKEA51B05587D074B5 foreign key (sp
 alter table regulatory_element add constraint FKEA51B055229D942B foreign key (reg_element_type_id) references reg_element_type;
 alter table screening_result add constraint FKE30F148646872875 foreign key (treatment_id) references treatment;
 alter table screening_result add constraint FKE30F1486457316D5 foreign key (agent_id) references agent;
-alter table spon_mut_gen_alteration add constraint FKFBEC35E43FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
-alter table spon_mut_gen_alteration add constraint FKFBEC35E4130E71D0 foreign key (spontaneous_mutation_id) references spontaneous_mutation;
+alter table spontaneous_mutation add constraint FKAE3E7B3BA9F03D86 foreign key (genetic_alteration_id) references spontaneous_mutation;
+alter table spontaneous_mutation add constraint FKAE3E7B3BC4A76A27 foreign key (spontaneous_mutation_id) references abs_cancer_model;
 alter table spontaneous_mutation add constraint FKAE3E7B3B72CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table spontaneous_mutation add constraint FKAE3E7B3B496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table strain add constraint FKCAD5417587D074B5 foreign key (species_id) references species;
 alter table strain add constraint FKCAD5417572CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table tar_mod_modification_type add constraint FK211C32E6C1E42178 foreign key (modification_type_id) references modification_type;
 alter table tar_mod_modification_type add constraint FK211C32E6DE1A05A5 foreign key (engineered_gene_id) references engineered_gene;
+alter table therapy add constraint FKAF8F6C69EEF9C239 foreign key (therapy_id) references abs_cancer_model;
 alter table therapy add constraint FKAF8F6C69496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table therapy add constraint FKAF8F6C6946872875 foreign key (treatment_id) references treatment;
 alter table therapy add constraint FKAF8F6C69457316D5 foreign key (agent_id) references agent;
