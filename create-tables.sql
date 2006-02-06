@@ -164,7 +164,7 @@ create table cell_line (
    cell_line_id number(19,0) not null,
    name varchar2(255),
    experiment varchar2(2000),
-   results varchar2(255),
+   results varchar2(2000),
    comments varchar2(2000),
    abs_cancer_model_id number(19,0),
    organ_id number(19,0),
@@ -189,7 +189,7 @@ create table clinical_marker (
 );
 create table comments (
    comments_id number(19,0) not null,
-   remark varchar2(255),
+   remark varchar2(2000),
    state varchar2(255),
    abs_cancer_model_id number(19,0),
    availability_id number(19,0) unique,
@@ -225,7 +225,7 @@ create table disease (
 create table endpoint_code (
    endpoint_code_id number(19,0) not null,
    code varchar2(255),
-   description varchar2(255),
+   description varchar2(2000),
    primary key (endpoint_code_id)
 );
 create table engineered_gene (
@@ -310,7 +310,7 @@ create table genotype_summary (
 create table histopathology (
    histopathology_id number(19,0) not null,
    comments clob,
-   gross_description varchar2(255),
+   gross_description varchar2(2000),
    relational_operation varchar2(255),
    tumor_incidence_rate float,
    survival_info varchar2(255),
@@ -347,7 +347,7 @@ create table invivo_result (
 );
 create table log (
    log_id number(19,0) not null,
-   notes varchar2(255),
+   notes varchar2(2000),
    type varchar2(255),
    sub_system varchar2(255),
    timestamp varchar2(255),
@@ -412,7 +412,7 @@ create table party_role (
 create table phenotype (
    phenotype_id number(19,0) not null,
    breeding_notes varchar2(255),
-   description varchar2(255),
+   description varchar2(4000),
    sex_distribution_id number(19,0),
    primary key (phenotype_id)
 );
@@ -421,7 +421,7 @@ create table publication (
    volume varchar2(255),
    end_page number(19,0),
    year number(19,0),
-   title varchar2(255),
+   title varchar2(2000),
    pmid number(19,0),
    start_page number(19,0),
    journal varchar2(255),
@@ -638,7 +638,6 @@ alter table invivo_result add constraint FKC187E8CB46872875 foreign key (treatme
 alter table invivo_result add constraint FKC187E8CB457316D5 foreign key (agent_id) references agent;
 alter table log add constraint FK1A34477AB701F foreign key (comments_id) references comments;
 alter table log add constraint FK1A3441CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
-alter table log add constraint FK1A344496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table log add constraint FK1A3442EB4E88E foreign key (party_id) references party;
 alter table micro_array_data add constraint FKC3D0BA2BA718537 foreign key (micro_array_data_id) references abs_cancer_model;
 alter table party_contact_info add constraint FK4B2B4226534EE516 foreign key (contact_info_id) references contact_info;
