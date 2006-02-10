@@ -638,6 +638,7 @@ alter table invivo_result add constraint FKC187E8CB46872875 foreign key (treatme
 alter table invivo_result add constraint FKC187E8CB457316D5 foreign key (agent_id) references agent;
 alter table log add constraint FK1A34477AB701F foreign key (comments_id) references comments;
 alter table log add constraint FK1A3441CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
+alter table log add constraint FK1A344496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table log add constraint FK1A3442EB4E88E foreign key (party_id) references party;
 alter table micro_array_data add constraint FKC3D0BA2BA718537 foreign key (micro_array_data_id) references abs_cancer_model;
 alter table party_contact_info add constraint FK4B2B4226534EE516 foreign key (contact_info_id) references contact_info;
@@ -655,6 +656,7 @@ alter table spontaneous_mutation add constraint FKAE3E7B3BC4A76A27 foreign key (
 alter table spontaneous_mutation add constraint FKAE3E7B3B72CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table spontaneous_mutation add constraint FKAE3E7B3B496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table strain add constraint FKCAD5417587D074B5 foreign key (species_id) references species;
+alter table strain add constraint FKCAD54175A9DE5DDC foreign key (strain_id) references species;
 alter table strain add constraint FKCAD5417572CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table tar_mod_modification_type add constraint FK211C32E6C1E42178 foreign key (modification_type_id) references modification_type;
 alter table tar_mod_modification_type add constraint FK211C32E6DE1A05A5 foreign key (engineered_gene_id) references engineered_gene;
