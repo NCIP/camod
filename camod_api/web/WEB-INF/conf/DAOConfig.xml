@@ -1,0 +1,17 @@
+<DAOConfiguration>	  
+ 	<domainObjects name="gov.nih.nci.camod.domain.AbstractCancerModel,gov.nih.nci.camod.domain.Agent,gov.nih.nci.camod.domain.AgentTarget,gov.nih.nci.camod.domain.AnimalAvailability,gov.nih.nci.camod.domain.AnimalDistributor,gov.nih.nci.camod.domain.AnimalModel,gov.nih.nci.camod.domain.Availability,gov.nih.nci.camod.domain.BiologicalProcess,gov.nih.nci.camod.domain.CellLine,gov.nih.nci.camod.domain.ChemicalClass,gov.nih.nci.camod.domain.ClinicalMarker,gov.nih.nci.camod.domain.Comment,gov.nih.nci.camod.domain.Conditionality,gov.nih.nci.camod.domain.ContactInfo,gov.nih.nci.camod.domain.Disease,gov.nih.nci.camod.domain.EndpointCode,gov.nih.nci.camod.domain.EngineeredGene,gov.nih.nci.camod.domain.EnvironmentalFactor,gov.nih.nci.camod.domain.ExpressionFeature,gov.nih.nci.camod.domain.ExpressionLevelDesc,gov.nih.nci.camod.domain.GeneDelivery,gov.nih.nci.camod.domain.GeneFunction,gov.nih.nci.camod.domain.GeneticAlteration,gov.nih.nci.camod.domain.GenomicSegment,gov.nih.nci.camod.domain.GenotypeSummary,gov.nih.nci.camod.domain.Histopathology,gov.nih.nci.camod.domain.Image,gov.nih.nci.camod.domain.InducedMutation,gov.nih.nci.camod.domain.InvivoResult,gov.nih.nci.camod.domain.Log,gov.nih.nci.camod.domain.MicroArrayData,gov.nih.nci.camod.domain.ModelSection,gov.nih.nci.camod.domain.ModificationType,gov.nih.nci.camod.domain.MutationIdentifier,gov.nih.nci.camod.domain.Nomenclature,gov.nih.nci.camod.domain.Organ,gov.nih.nci.camod.domain.Organization,gov.nih.nci.camod.domain.Party,gov.nih.nci.camod.domain.Person,gov.nih.nci.camod.domain.Phenotype,gov.nih.nci.camod.domain.Publication,gov.nih.nci.camod.domain.PublicationStatus,gov.nih.nci.camod.domain.RegulatoryElement,gov.nih.nci.camod.domain.RegulatoryElementType,gov.nih.nci.camod.domain.RepositoryInfo,gov.nih.nci.camod.domain.Role,gov.nih.nci.camod.domain.ScreeningResult,gov.nih.nci.camod.domain.SegmentType,gov.nih.nci.camod.domain.SexDistribution,gov.nih.nci.camod.domain.SpontaneousMutation,gov.nih.nci.camod.domain.TargetedModification,gov.nih.nci.camod.domain.Taxon,gov.nih.nci.camod.domain.Therapy,g,v.nih.nci.camod.domain.Transgene,gov.nih.nci.camod.domain.Treatment,gov.nih.nci.camod.domain.TumorCode,gov.nih.nci.camod.domain.Xenograft,gov.nih.nci.camod.domain.YeastModel">  
+  <DataSource>ORM1</DataSource>
+    <tool>hibernate</tool>
+    <database>oracle</database>
+  </domainObjects> 
+  <domainObjects name="gov.nih.nci.evs.query.EVSQueryImpl">
+      <DataSource>EVS</DataSource>
+      <dtsrpcServer>ncievs-test.nci.nih.gov</dtsrpcServer>
+      <port>6500</port>
+      <metaphraseServer>ncievs3.nci.nih.gov</metaphraseServer>
+      <database>NCI</database>
+      <username>Guest</username>
+      <password>NCI-EVS</password>
+  </domainObjects>
+</DAOConfiguration>
+

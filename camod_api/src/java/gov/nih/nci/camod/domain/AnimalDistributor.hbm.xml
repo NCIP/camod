@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : AnimalDistributor.hbm.xml
+    Created on : July 19, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for AnimalDistributor
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="AnimalDistributor" 
+    	table="animal_distributor"
+        lazy="true" mutable="false">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="animal_distributor_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!-- animalAvailabilityCollection (many-to-many bidirectional) -->
+        <!-- Note: this collection will NOT be used to synchronize state with the database. -->
+        <!-- Changes made to animalDistributorCollection in AnimalAvailability will be synchronized with the database. -->
+        <bag name="animalAvailabilityCollection"
+        	table="ani_ava_ani_distributor"
+        	inverse="true" 
+        	lazy="true">
+        	
+        	<key column="animal_distributor_id"/>
+        	<many-to-many class="AnimalAvailability" 
+        		column="animal_availability_id"/>
+        </bag> 
+	</class>
+</hibernate-mapping>

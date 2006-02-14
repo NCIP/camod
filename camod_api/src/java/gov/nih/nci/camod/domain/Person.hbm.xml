@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Person.hbm.xml
+    Created on : May 4, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for Person
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<subclass name="Person" 
+    	extends="Party"
+    	discriminator-value="PE"
+        lazy="true">
+	    
+	    <!-- firstName -->
+        <property name="firstName" 
+        	column="first_name" 
+        	type="string"/>	
+        	
+        <!-- middleName -->
+        <property name="middleName" 
+        	column="middle_name" 
+        	type="string"/>	
+        
+        <!-- lastName -->
+        <property name="lastName" 
+        	column="last_name" 
+        	type="string"/>
+        	
+        <!-- username -->
+        <property name="username" 
+        	column="username" 
+        	type="string"/>
+        	
+        <!-- username -->
+        <property name="isPrincipalInvestigator" 
+        	column="is_principal_investigator" 
+        	type="boolean"/>
+        	
+	</subclass>
+</hibernate-mapping>

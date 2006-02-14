@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : EnvironmentalFactor.hbm.xml
+    Created on : May 6, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for EnvironmentalFactor
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="EnvironmentalFactor"
+		table="env_factor"
+		discriminator-value="EF"
+        lazy="true">
+	    
+	    <!-- id -->
+	    <id name="id" 
+	    	column="env_factor_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	
+	    
+	    <!-- discriminator -->
+	    <discriminator column="env_factor_type"
+	    	type="string"/>
+	    
+        <!-- type -->
+        <property name="type" 
+        	column="type" 
+        	type="string"/>
+        
+        <!-- typeUnctrlVocab -->
+         <property name="typeUnctrlVocab" 
+        	column="type_unctrl_vocab" 
+        	type="string"/>       
+        
+        <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!-- nameUnctrlVocab -->
+        <property name="nameUnctrlVocab" 
+        	column="name_unctrl_vocab" 
+        	type="string"/>        
+        	
+        <!-- CASNumber -->
+        <!--<property name="casNumber" 
+        	column="cas_number" 
+        	type="string"/> -->
+        	
+	</class>
+</hibernate-mapping>
