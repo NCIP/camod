@@ -75,7 +75,7 @@ create table abs_cancer_model (
    experiment_design clob,
    model_descriptor varchar2(255),
    state varchar2(255),
-   availability_id number(19,0) unique,
+   availability_id number(19,0),
    strain_id number(19,0),
    submitter_id number(19,0),
    principal_investigator_id number(19,0),
@@ -96,7 +96,7 @@ create table abs_cancer_model (
    graft_type_unctrl_vocab varchar2(255),
    tumor_code_id number(19,0),
    donor_species_id number(19,0),
-   organ_id number(19,0) unique,
+   organ_id number(19,0),
    par_abs_can_model_id number(19,0),
    primary key (abs_cancer_model_id)
 );
