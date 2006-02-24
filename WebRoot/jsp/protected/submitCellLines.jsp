@@ -58,7 +58,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>
-		  	    <a href="javascript:showTissueTree('cellLineForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
+		  	    <a href="javascript:showTissueTree('cellLineForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 				<html:hidden property="organTissueCode" />

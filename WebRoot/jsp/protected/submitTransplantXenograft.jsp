@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.34 2005-12-12 17:33:37 georgeda Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.34.4.1 2006-02-24 17:23:11 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2005/12/12 17:33:37  georgeda
+ * Defect #265, store host/origin species in correct places
+ *
  * Revision 1.33  2005/12/05 21:29:32  pandyas
  * Follow up for defect#191:  moved text above drop down boxes on page to be consistent.
  *
@@ -154,7 +157,7 @@
 		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 			<camod:cshelp mapId="histopathology_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
-			<a href="javascript:showTissueTree('xenograftForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showTissueTree('xenograftForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>
 		</td>
