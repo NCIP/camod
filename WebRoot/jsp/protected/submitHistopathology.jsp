@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.17.4.1  2006/02/24 17:23:11  georgeda
+ * EvsTree Fix
+ *
  * Revision 1.17  2005/12/12 17:54:56  georgeda
  * Defect #268, added a return in front of all the confirms.
  *
@@ -22,7 +25,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.17.4.1 2006-02-24 17:23:11 georgeda Exp $
+ * $Id: submitHistopathology.jsp,v 1.17.4.2 2006-02-24 18:43:46 georgeda Exp $
  *
  */   
 %>
@@ -111,7 +114,7 @@
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 			<camod:cshelp mapId="histopathology_help" key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
-			<a href="javascript:showDiagnosisTree('histopathologyForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showDiagnosisTree('histopathologyForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>	
 		</td>
