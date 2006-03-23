@@ -20,7 +20,6 @@ drop table contact_info cascade constraints;
 drop table disease cascade constraints;
 drop table endpoint_code cascade constraints;
 drop table engineered_gene cascade constraints;
-drop table env_fac_ind_mutation cascade constraints;
 drop table environmental_factor cascade constraints;
 drop table exp_level_desc cascade constraints;
 drop table expression_feature cascade constraints;
@@ -67,7 +66,8 @@ drop table yst_mdl_trgtd_mod cascade constraints;
 drop sequence hibernate_sequence;
 create table abs_can_mod_publication (
    abs_cancer_model_id number(19,0) not null,
-   publication_id number(19,0) not null unique
+   publication_id number(19,0) not null unique,
+   primary key (abs_cancer_model_id, publication_id)
 );
 create table abs_cancer_model (
    abs_cancer_model_id number(19,0) not null,
@@ -75,7 +75,7 @@ create table abs_cancer_model (
    experiment_design clob,
    model_descriptor varchar2(255),
    state varchar2(255),
-   availability_id number(19,0),
+   availability_id number(19,0) unique,
    strain_id number(19,0),
    submitter_id number(19,0),
    principal_investigator_id number(19,0),
@@ -113,15 +113,18 @@ create table agent (
 );
 create table agent_agent_target (
    agent_id number(19,0) not null,
-   agent_target_id number(19,0) not null
+   agent_target_id number(19,0) not null,
+   primary key (agent_id, agent_target_id)
 );
 create table agent_biological_process (
    agent_id number(19,0) not null,
-   biological_process_id number(19,0) not null
+   biological_process_id number(19,0) not null,
+   primary key (agent_id, biological_process_id)
 );
 create table agent_chemical_class (
    agent_id number(19,0) not null,
-   chemical_class_id number(19,0) not null
+   chemical_class_id number(19,0) not null,
+   primary key (agent_id, chemical_class_id)
 );
 create table agent_target (
    agent_target_id number(19,0) not null,
@@ -133,7 +136,7 @@ create table animal_availability (
    name varchar2(255),
    stock_number varchar2(255),
    animal_distributor_id number(19,0),
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    primary key (animal_availability_id)
 );
 create table animal_distributor (
@@ -158,7 +161,7 @@ create table carcinogen_exposure (
    carcinogen_exposure_id number(19,0) not null,
    environmental_factor_id number(19,0),
    treatment_id number(19,0) unique,
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    primary key (carcinogen_exposure_id)
 );
 create table cell_line (
@@ -168,12 +171,13 @@ create table cell_line (
    results varchar2(2000),
    comments varchar2(2000),
    organ_id number(19,0),
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    primary key (cell_line_id)
 );
 create table cell_line_publication (
    cell_line_id number(19,0) not null,
-   publication_id number(19,0) not null unique
+   publication_id number(19,0) not null unique,
+   primary key (cell_line_id, publication_id)
 );
 create table chemical_class (
    chemical_class_id number(19,0) not null,
@@ -185,7 +189,7 @@ create table clinical_marker (
    name varchar2(255),
    name_unctrl_vocab varchar2(255),
    value varchar2(255),
-   histopathology_id number(19,0),
+   histopathology_id number(19,0) not null,
    primary key (clinical_marker_id)
 );
 create table comments (
@@ -246,16 +250,13 @@ create table engineered_gene (
    segment_type_id number(19,0),
    gene_id varchar2(255),
    description varchar2(255),
+   environmental_factor_id number(19,0),
    es_cell_line_name varchar2(255),
    blastocyst_name varchar2(255),
    species_id number(19,0) unique,
-   abs_cancer_model_id number(19,0),
-   genetic_alteration_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
+   genetic_alteration_id number(19,0) not null,
    primary key (engineered_gene_id)
-);
-create table env_fac_ind_mutation (
-   engineered_gene_id number(19,0) not null,
-   environmental_factor_id number(19,0) not null unique
 );
 create table environmental_factor (
    environmental_factor_id number(19,0) not null,
@@ -276,7 +277,7 @@ create table expression_feature (
    expression_feature_id number(19,0) not null,
    organ_id number(19,0),
    exp_level_desc_id number(19,0),
-   engineered_gene_id number(19,0),
+   engineered_gene_id number(19,0) not null,
    primary key (expression_feature_id)
 );
 create table gene_delivery (
@@ -286,7 +287,7 @@ create table gene_delivery (
    gene_in_virus varchar2(255),
    organ_id number(19,0) unique,
    treatment_id number(19,0) unique,
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    primary key (gene_delivery_id)
 );
 create table gene_function (
@@ -324,7 +325,7 @@ create table histopathology (
    disease_id number(19,0),
    organ_id number(19,0),
    genetic_alteration_id number(19,0) unique,
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    parent_histopathology_id number(19,0),
    primary key (histopathology_id)
 );
@@ -334,7 +335,7 @@ create table image (
    description varchar2(4000),
    file_server_location varchar2(255),
    staining_method_id number(19,0),
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    primary key (image_id)
 );
 create table invivo_result (
@@ -364,7 +365,7 @@ create table micro_array_data (
    experiment_name varchar2(255),
    experiment_id number(19,0),
    other_location_url varchar2(255),
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    primary key (micro_array_data_id)
 );
 create table model_section (
@@ -407,7 +408,8 @@ create table party (
 );
 create table party_contact_info (
    contact_info_id number(19,0) not null,
-   party_id number(19,0) not null
+   party_id number(19,0) not null,
+   primary key (party_id, contact_info_id)
 );
 create table party_role (
    party_id number(19,0) not null,
@@ -500,8 +502,8 @@ create table spontaneous_mutation (
    gene_id varchar2(255),
    comments varchar2(255),
    mutation_identifier_id number(19,0),
-   abs_cancer_model_id number(19,0),
-   genetic_alteration_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
+   genetic_alteration_id number(19,0) not null,
    primary key (spontaneous_mutation_id)
 );
 create table staining_method (
@@ -518,12 +520,13 @@ create table strain (
    abbreviation varchar2(255),
    concept_code varchar2(255),
    mutation_identifier_id number(19,0) unique,
-   species_id number(19,0),
+   species_id number(19,0) not null,
    primary key (strain_id)
 );
 create table tar_mod_modification_type (
    engineered_gene_id number(19,0) not null,
-   modification_type_id number(19,0) not null
+   modification_type_id number(19,0) not null,
+   primary key (engineered_gene_id, modification_type_id)
 );
 create table therapy (
    therapy_id number(19,0) not null,
@@ -535,16 +538,18 @@ create table therapy (
    comments varchar2(255),
    agent_id number(19,0),
    treatment_id number(19,0) unique,
-   abs_cancer_model_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
    primary key (therapy_id)
 );
 create table therapy_publication (
    therapy_id number(19,0) not null,
-   publication_id number(19,0) not null unique
+   publication_id number(19,0) not null unique,
+   primary key (therapy_id, publication_id)
 );
 create table transgene_reg_element (
    engineered_gene_id number(19,0) not null,
-   regulatory_element_id number(19,0) not null unique
+   regulatory_element_id number(19,0) not null unique,
+   primary key (engineered_gene_id, regulatory_element_id)
 );
 create table treatment (
    treatment_id number(19,0) not null,
@@ -566,15 +571,18 @@ create table tumor_code (
 );
 create table xenograft_invivo_result (
    abs_cancer_model_id number(19,0) not null,
-   invivo_result_id number(19,0) not null unique
+   invivo_result_id number(19,0) not null unique,
+   primary key (abs_cancer_model_id, invivo_result_id)
 );
 create table yst_mdl_scrning_result (
    abs_cancer_model_id number(19,0) not null,
-   screening_result_id number(19,0) not null unique
+   screening_result_id number(19,0) not null unique,
+   primary key (abs_cancer_model_id, screening_result_id)
 );
 create table yst_mdl_trgtd_mod (
    abs_cancer_model_id number(19,0) not null,
-   tar_modification_id number(19,0) not null unique
+   tar_modification_id number(19,0) not null unique,
+   primary key (abs_cancer_model_id, tar_modification_id)
 );
 alter table abs_can_mod_publication add constraint FK9377C2B38258D935 foreign key (publication_id) references publication;
 alter table abs_can_mod_publication add constraint FK9377C2B3496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
@@ -614,10 +622,9 @@ alter table engineered_gene add constraint FK4ADB4966BB186F15 foreign key (image
 alter table engineered_gene add constraint FK4ADB4966F9575982 foreign key (genotype_summary_id) references genotype_summary;
 alter table engineered_gene add constraint FK4ADB496697B9D0A5 foreign key (genetic_alteration_id) references engineered_gene;
 alter table engineered_gene add constraint FK4ADB496672CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
+alter table engineered_gene add constraint FK4ADB496619EF4CF2 foreign key (environmental_factor_id) references environmental_factor;
 alter table engineered_gene add constraint FK4ADB49661CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table engineered_gene add constraint FK4ADB496666D7EBDF foreign key (conditionality_id) references conditionality;
-alter table env_fac_ind_mutation add constraint FKDBCCD3F22C7402E4 foreign key (engineered_gene_id) references engineered_gene;
-alter table env_fac_ind_mutation add constraint FKDBCCD3F219EF4CF2 foreign key (environmental_factor_id) references environmental_factor;
 alter table expression_feature add constraint FKCC1D9C4F3D222B55 foreign key (organ_id) references organ;
 alter table expression_feature add constraint FKCC1D9C4FD749BD3C foreign key (engineered_gene_id) references engineered_gene;
 alter table expression_feature add constraint FKCC1D9C4FA17421A4 foreign key (exp_level_desc_id) references exp_level_desc;
