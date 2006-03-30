@@ -25,12 +25,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 				return "subSearchMenu.jsp";
 			} 
 			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 
-						jspName.equals("viewSpontaneousMutation.jsp") || 
 						jspName.equals("viewTransplantXenograft.jsp") || 
-						jspName.equals("viewGenomicSegment.jsp") || 
-						jspName.equals("viewTargetedModification.jsp") || 
-						jspName.equals("viewInducedMutation.jsp") || 
-						jspName.equals("viewEngineeredTransgene.jsp") || 
 						jspName.equals("viewGeneticDescription.jsp") || 
                         jspName.equals("viewInvivoDetails.jsp") ||
 						jspName.equals("viewPublications.jsp") ||

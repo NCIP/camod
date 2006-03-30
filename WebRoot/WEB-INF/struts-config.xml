@@ -169,10 +169,6 @@
       <global-forwards>
 
 		<forward
-			name="error"
-			path="/jsp/error.jsp"></forward>
-		
-		<forward
 			name="footer"
 			path="/jsp/footer.jsp"></forward>
 		
@@ -297,16 +293,8 @@
 			path="/jsp/viewCellLines.jsp"></forward>
 		
 		<forward
-			name="viewEngineeredTransgene"
-			path="/jsp/viewEngineeredTransgene.jsp"></forward>
-		
-		<forward
 			name="viewGeneticDescription"
 			path="/jsp/viewGeneticDescription.jsp"></forward>
-		
-		<forward
-			name="viewGenomicSegment"
-			path="/jsp/viewGenomicSegment.jsp"></forward>
 		
 		<forward
 			name="viewHistopathology"
@@ -315,10 +303,6 @@
 		<forward
 			name="viewImages"
 			path="/jsp/viewImages.jsp"></forward>
-		
-		<forward
-			name="viewInducedMutation"
-			path="/jsp/viewInducedMutation.jsp"></forward>
 		
 		<forward
 			name="viewMicroarrays"
@@ -335,14 +319,6 @@
 		<forward
 			name="viewPublications"
 			path="/jsp/viewPublications.jsp"></forward>
-		
-		<forward
-			name="viewSpontaneousMutation"
-			path="/jsp/viewSpontaneousMutation.jsp"></forward>
-		
-		<forward
-			name="viewTargetedModification"
-			path="/jsp/viewTargetedModification.jsp"></forward>
 		
 		<forward
 			name="viewTherapeuticApproaches"
@@ -869,12 +845,6 @@
 			path="/submitViralTreatment"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitViralTreatment.jsp">
-			<set-property property="secure" value="false"/>
-		</action>
-		<action
-			path="/error"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/error.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
