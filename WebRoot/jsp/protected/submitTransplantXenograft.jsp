@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.36 2006-01-17 19:12:57 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.37 2006-03-31 13:47:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2006/01/17 19:12:57  pandyas
+ * Defect# 378: ToolTip to Organ/Tissue links to histopathology_help instead of xenograft_transplant_help
+ *
  * Revision 1.35  2005/12/21 18:00:02  pandyas
  * Modified jsp to add test for other fields - and cleaned up the javascript
  *
@@ -148,7 +151,7 @@
 		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 			<camod:cshelp mapId="xenograft_transplant_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
-			<a href="javascript:showTissueTree('xenograftForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showTissueTree('xenograftForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>
 		</td>

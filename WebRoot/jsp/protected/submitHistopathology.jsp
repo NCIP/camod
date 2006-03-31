@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2005/12/29 22:20:36  pandyas
+ * removed disabled="true" on methodOfObservation field
+ *
  * Revision 1.18  2005/12/20 18:46:31  pandyas
  * Moved <html:form action..> above first table - caused errors when identifying fields on page
  *
@@ -25,7 +28,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.19 2005-12-29 22:20:36 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.20 2006-03-31 13:47:17 georgeda Exp $
  *
  */   
 %>
@@ -102,7 +105,7 @@
 		<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 			<camod:cshelp mapId="histopathology_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
-			<a href="javascript:showTissueTree('histopathologyForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showTissueTree('histopathologyForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>
 		</td>						
@@ -118,7 +121,7 @@
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 			<camod:cshelp mapId="histopathology_help" key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
-			<a href="javascript:showDiagnosisTree('histopathologyForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showDiagnosisTree('histopathologyForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>	
 		</td>

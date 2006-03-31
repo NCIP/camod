@@ -106,7 +106,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Injection Site:</label>
-		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=false;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
+		  	    <a href="javascript:showTissueTree('geneDeliveryForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of', 3)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 				<html:hidden property="organTissueCode" />

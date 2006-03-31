@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.26 2005-12-19 14:05:33 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.27 2006-03-31 13:47:36 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2005/12/19 14:05:33  georgeda
+ * Defect #271 - Search issues
+ *
  * Revision 1.25  2005/12/02 14:17:30  georgeda
  * Defect #241, handle truncated HTML tags
  *
@@ -114,7 +117,7 @@
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
 				<camod:cshelp mapId="advanced_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 				<INPUT name="organTissueName" type="hidden"/>
@@ -128,7 +131,7 @@
 			<td class="formLabel">
 				<label for="field2">Diagnosis</label>
 				&nbsp;
-		  	    <a href="javascript:showDiagnosisTree('searchForm', 'descendants=true;isaFlag=false;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showDiagnosisTree('searchForm', 'descendants=true;isaFlag=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>
 				<input type="hidden" name="diagnosisName"/>
