@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Species.hbm.xml
+    Created on : January 30, 2006
+    Author     : pandyas
+    Description: Hibernate mapping file for Species
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="Species" 
+    	table="species"
+    	mutable="false"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="species_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- scientificName -->
+        <property name="scientificName" 
+        	column="scientific_name" 
+        	type="string"/>
+        	
+        <!--  scientificNameUnctrlVocab -->
+        <property name="scientificNameUnctrlVocab" 
+        	column="scientific_name_unctrl_vocab" 
+        	type="string"/> 
+        	
+        <!-- commonName -->
+        <property name="commonName" 
+        	column="common_name" 
+        	type="string"/>	
+        	
+        <!-- commonNameUnctrlVocab -->
+        <property name="commonNameUnctrlVocab" 
+        	column="common_name_unctrl_vocab" 
+        	type="string"/>	        	        	       
+        	
+        <!-- abbreviation -->
+        <property name="abbreviation" 
+        	column="abbreviation" 
+        	type="string"/>
+        	
+        <!-- conceptCode -->
+        <property name="conceptCode" 
+        	column="concept_code" 
+        	type="string"/> 
+        	
+        <!-- strainCollection (many-to-one bidirectional) -->
+        <set name="strainCollection" inverse="true"
+	         cascade="save-update">
+            <key column="species_id"
+            not-null="true"/>
+            <one-to-many class="Strain"/>
+        </set> 
+        	        		        	
+
+	</class>
+</hibernate-mapping>

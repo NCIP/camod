@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : MutationIdentifier.hbm.xml
+    Created on : July 19, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for MutationIdentifier
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="MutationIdentifier" 
+    	table="mutation_identifier"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="mutation_identifier_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- mgiNumber -->
+        <property name="mgiNumber" 
+        	column="mgi_number" 
+        	type="string"/>
+	</class>
+</hibernate-mapping>
