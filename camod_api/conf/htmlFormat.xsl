@@ -8,7 +8,7 @@
 	
 	<html>
 		<head>  
-		   <link rel="stylesheet" type="text/css" href="/camod/styleSheet.css"/>		  
+		   <link rel="stylesheet" type="text/css" href="/camod-api/styleSheet.css"/>		  
 		</head>  
 
 		<body>
@@ -17,10 +17,10 @@
       <table width="100%" border="0" cellspacing="0" cellpadding="0" class="hdrBG">
         <tr>
           <td width="283" height="37" align="left">
-          <a href="http://www.cancer.gov"><img alt="National Cancer Institute" src="/camod/images/logotype.gif" width="283" height="37" border="0"/></a>
+          <a href="http://www.cancer.gov"><img alt="National Cancer Institute" src="/camod-api/images/logotype.gif" width="283" height="37" border="0"/></a>
           </td>          
           <td width="295" height="37" align="right">
-          <a href="http://www.cancer.gov"><img alt="U.S. National Institutes of Health | www.cancer.gov" src="/camod/images/tagline.gif" width="295" height="37" border="0"/></a>
+          <a href="http://www.cancer.gov"><img alt="U.S. National Institutes of Health | www.cancer.gov" src="/camod-api/images/tagline.gif" width="295" height="37" border="0"/></a>
           </td>
         </tr>
       </table>
@@ -33,10 +33,10 @@
   		<td><font color="white" size="5"><b><h4>caCORE - HTTP INTERFACE</h4></b></font></td>
   		<td height="50" align="right">
   		<a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview">
-  		<img src="/camod/images/cabio58.gif" alt="Application Logo" height="35" hspace="10" border="0"/></a>
-  		<img src="/camod/images/cadsr.gif" alt="Application Logo" height="35" hspace="10" border="0"/>			
-		<img src="/camod/images/evs.gif" alt="Application Logo" height="35" hspace="10" border="0"/>
-		<img src="/camod/images/csm.gif" alt="Application Logo" height="35" hspace="10" border="0"/>
+  		<img src="/camod-api/images/cabio58.gif" alt="Application Logo" height="35" hspace="10" border="0"/></a>
+  		<img src="/camod-api/images/cadsr.gif" alt="Application Logo" height="35" hspace="10" border="0"/>			
+		<img src="/camod-api/images/evs.gif" alt="Application Logo" height="35" hspace="10" border="0"/>
+		<img src="/camod-api/images/csm.gif" alt="Application Logo" height="35" hspace="10" border="0"/>
 		</td>  		
 
   		</tr>
@@ -68,10 +68,10 @@
         <tr>
           <td valign="top">
             <div align="center">
-              <a href="http://www.cancer.gov/"><img src="/camod/images/footer_nci.gif" width="63" height="31" alt="National Cancer Institute" border="0"/></a>
-              <a href="http://www.dhhs.gov/"><img src="/camod/images/footer_hhs.gif" width="39" height="31" alt="Department of Health and Human Services" border="0"/></a>
-              <a href="http://www.nih.gov/"><img src="/camod/images/footer_nih.gif" width="46" height="31" alt="National Institutes of Health" border="0"/></a>
-              <a href="http://www.firstgov.gov/"><img src="/camod/images/footer_firstgov.gif" width="91" height="31" alt="FirstGov.gov" border="0"/></a>
+              <a href="http://www.cancer.gov/"><img src="/camod-api/images/footer_nci.gif" width="63" height="31" alt="National Cancer Institute" border="0"/></a>
+              <a href="http://www.dhhs.gov/"><img src="/camod-api/images/footer_hhs.gif" width="39" height="31" alt="Department of Health and Human Services" border="0"/></a>
+              <a href="http://www.nih.gov/"><img src="/camod-api/images/footer_nih.gif" width="46" height="31" alt="National Institutes of Health" border="0"/></a>
+              <a href="http://www.firstgov.gov/"><img src="/camod-api/images/footer_firstgov.gif" width="91" height="31" alt="FirstGov.gov" border="0"/></a>
             </div>
           </td>
         </tr>

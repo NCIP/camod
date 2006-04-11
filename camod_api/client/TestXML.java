@@ -92,13 +92,13 @@ try {
 			System.out.println("   Title: "+ returnedGene.getTitle() + "\n");
 			System.out.println("   Symbol: "+ returnedGene.getSymbol() + "\n");
 			System.out.println("   LocusLinkId: "+ returnedGene.getLocusLinkId() + "\n\n\n");
-			File myFile = new File("C:/work/projects/cacoretoolkit/output/camod/package/client/test.xml");
+			File myFile = new File("C:/work/projects/cacoretoolkit/output/camod-api/package/client/test.xml");
 			FileWriter myWriter = new FileWriter(myFile);
 			myUtil.toXML(returnedGene,myWriter);
 			DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 	        Document document = parser.parse(myFile);
 			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Source schemaFile = new StreamSource(new File("C:/work/projects/cacoretoolkit/output/camod/schemas/gov.nih.nci.cabio.domain.xsd"));
+			Source schemaFile = new StreamSource(new File("C:/work/projects/cacoretoolkit/output/camod-api/schemas/gov.nih.nci.cabio.domain.xsd"));
 			Schema schema = factory.newSchema(schemaFile);
 			Validator validator = schema.newValidator();
 			System.out.println("Validating gene against the schema......\n\n");

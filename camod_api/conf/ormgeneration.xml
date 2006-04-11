@@ -25,7 +25,7 @@
 	      </transformer>
 	</transformer-chain>
 	<artifact-handler className="gov.nih.nci.codegen.core.handler.ResourceFileHandler">
-		<param name="outputDir" value="output/camod/orm/hibernate/"/>
+		<param name="outputDir" value="output/camod-api/orm/hibernate/"/>
 		<param name="basePackage" value="Logical View.Logical Model"/>
 		<param name="fileSuffix" value="hbm.xml"/>
 		<param name="interfaceFlag" value="yes"/>

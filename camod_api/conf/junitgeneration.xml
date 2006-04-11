@@ -21,7 +21,7 @@
 		</transformer>
 	</transformer-chain>
 	<artifact-handler className="gov.nih.nci.codegen.core.handler.ResourceFileHandler">
-		<param name="outputDir" value="output/camod/java"/>
+		<param name="outputDir" value="output/camod-api/java"/>
 		<param name="basePackage" value="Logical View.Logical Model"/>
 		<param name="classSuffix" value="Test"/>
 		<param name="packageSuffix" value=".test"/>

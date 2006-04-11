@@ -30,7 +30,7 @@
 	<artifact-handler
 		className="gov.nih.nci.codegen.core.handler.SimpleFileHandler">
 
-		<param name="outputDir" value="output/camod/conf"/>
+		<param name="outputDir" value="output/camod-api/conf"/>
 		<param name="fileName" value="ehcache.xml"/>
 
 	</artifact-handler>

@@ -45,7 +45,7 @@ import gov.nih.nci.codegen.framework.Transformer;
 
 /**
  * @author <A HREF="mailto:joshua.a.phillips@saic.com">Joshua Phillips </A>
- * @version $Id: UML13HBMTransformer.java,v 1.1 2006-04-07 20:29:23 piparom Exp $
+ * @version $Id: UML13HBMTransformer.java,v 1.2 2006-04-11 17:15:23 piparom Exp $
  *
  */
 public class UML13HBMTransformer implements Transformer, XMLConfigurable {

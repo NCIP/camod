@@ -51,7 +51,7 @@ public class TestClient {
 
 		try{
 
-			//ApplicationService appService = ApplicationService.getRemoteInstance("http://localhost:8080/camod/server/HTTPServer");
+			//ApplicationService appService = ApplicationService.getRemoteInstance("http://localhost:8080/camod-api/server/HTTPServer");
 			ApplicationService appService = ApplicationServiceProvider.getApplicationService();
 
 			try {

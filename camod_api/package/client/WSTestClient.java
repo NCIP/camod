@@ -28,7 +28,7 @@ public class WSTestClient
 
 		/****************************************************************************************************************/
 
-		String url = "http://localhost:8080/camod/ws/camodService";
+		String url = "http://localhost:8080/camod-api/ws/camodService";
 
 		call.setTargetEndpointAddress(new java.net.URL(url));
 		call.setOperationName(new QName("camodService", "queryObject"));

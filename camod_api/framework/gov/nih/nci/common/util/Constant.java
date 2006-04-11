@@ -59,7 +59,7 @@ public class Constant {
 	public static final String CSM_SECURITY_LEVEL = ".CSM.Security.Level";
 	public static final String CSM_SECURITY_SESSION_TIMEOUT = "CSM.Security.Session.Timeout";
 	
-	public static final String APPLICATION_NAME = "camod";
+	public static final String APPLICATION_NAME = "camod-api";
 	public static final int DEFAULT_SECURITY_LEVEL = Integer.parseInt("0");
 	public static final long DEFAULT_SESSION_TIMEOUT = Long.parseLong("600000");
 	
