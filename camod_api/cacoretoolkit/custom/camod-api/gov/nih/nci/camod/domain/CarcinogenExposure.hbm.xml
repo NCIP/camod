@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : CarcinogenExposure.hbm.xml
+    Created on : January 30, 2006
+    Author     : pandyas
+    Description: Hibernate mapping file for CarcinogenExposure
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="CarcinogenExposure" 
+    	table="carcinogen_exposure"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="carcinogen_exposure_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id> 
+	    
+        <!-- environmentalFactor (many-to-one unidirectional) -->
+        <many-to-one
+        	name="environmentalFactor"
+        	column="environmental_factor_id"
+        	cascade="save-update"
+        	class="EnvironmentalFactor"/>
+        	
+        <!-- treatment: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
+        <many-to-one name="treatment"
+			column="treatment_id"
+        	class="Treatment"        	
+        	cascade="all"
+        	unique="true"/>
+        	
+	</class>
+</hibernate-mapping>

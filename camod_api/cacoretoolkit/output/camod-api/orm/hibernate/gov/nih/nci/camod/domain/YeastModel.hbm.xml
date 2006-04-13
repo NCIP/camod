@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : YeastModel.hbm.xml
+    Created on : May 3, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for YeastModel
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<subclass name="YeastModel" 
+    	extends="AbstractCancerModel"
+    	discriminator-value="YM"
+        lazy="true">
+	    
+	    <!-- screeningResultCollection (one-to-many unidirectional) -->
+        <set name="screeningResultCollection"
+        	table="yst_mdl_scrning_result"
+        	inverse="false" 
+        	lazy="true" 
+        	cascade="all-delete-orphan"
+		sort="natural">
+        	
+        	<key column="abs_cancer_model_id"/>
+        	<many-to-many column="screening_result_id"
+            	unique="true"
+            	class="ScreeningResult"/>  
+        </set>
+        
+        <!-- targetedModificationCollection (one-to-many unidirectional) -->
+        <set name="targetedModificationCollection" 
+        	table="yst_mdl_trgtd_mod"
+        	inverse="false"
+        	lazy="true" 
+        	cascade="all-delete-orphan"
+		sort="natural">
+        	
+        	<key column="abs_cancer_model_id"/>
+        	<many-to-many column="tar_modification_id"
+            	unique="true"
+            	class="TargetedModification"/>        		
+        </set>
+	</subclass>
+</hibernate-mapping>

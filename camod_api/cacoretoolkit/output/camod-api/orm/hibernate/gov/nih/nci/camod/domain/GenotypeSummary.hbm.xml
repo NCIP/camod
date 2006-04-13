@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : GenotypeSummary.hbm.xml
+    Created on : May 5, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for GenotypeSummary
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="GenotypeSummary"
+		table="genotype_summary"
+        lazy="true">
+	    
+	    <!-- id -->
+	    <id name="id" 
+	    	column="genotype_summary_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	
+	    
+	    <!-- summary -->
+        <property name="summary" 
+        	column="summary" 
+        	type="string"/>
+        	
+        <!-- genotype -->
+        <property name="genotype" 
+        	column="genotype" 
+        	type="string"/>	
+        	
+        <!-- nomenclature (many-to-one unidirectional) -->
+        <many-to-one
+        	name="nomenclature"
+        	column="nomenclature_id"
+        	cascade="all-delete-orphan"
+        	class="Nomenclature"/>
+	</class>
+</hibernate-mapping>

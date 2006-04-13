@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : GenomicSegment.hbm.xml
+    Created on : May 6, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for GenomicSegment
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<subclass name="GenomicSegment" 
+    	extends="EngineeredGene"
+    	discriminator-value="GS"
+        lazy="true">
+	    
+	    <!-- locationOfIntegration -->
+        <property name="locationOfIntegration" 
+        	column="location_of_integration" 
+        	type="string"/>
+        	
+        <!-- isRandom -->
+        <property name="isRandom" 
+        	column="is_random" 
+        	type="boolean"/>        	
+        	
+        <!-- segmentSize -->
+        <property name="segmentSize" 
+        	column="segment_size" 
+        	type="string"/>	
+        	
+        <!-- cloneDesignator -->
+        <property name="cloneDesignator" 
+        	column="clone_designator" 
+        	type="string"/> 
+        	
+        <!-- constructSequence -->
+        <property name="constructSequence" 
+        	column="construct_sequence" 
+        	type="text"/>         	   	
+        
+        <!-- segmentType (many-to-one unidirectional) -->
+        <many-to-one
+        	name="segmentType"
+        	column="segment_type_id"
+        	cascade="save-update"
+        	class="SegmentType"/>
+        
+	</subclass>
+</hibernate-mapping>

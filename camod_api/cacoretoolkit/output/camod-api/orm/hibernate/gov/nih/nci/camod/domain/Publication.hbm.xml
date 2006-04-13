@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Publication.hbm.xml
+    Created on : May 4, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for Publication
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="Publication"
+		table="publication"
+        lazy="true">
+	    
+	    <!-- id -->
+	    <id name="id" 
+	    	column="publication_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	
+	    
+	    <!-- volume -->
+        <property name="volume" 
+        	column="volume" 
+        	type="string"/>
+	    
+	    <!-- endPage -->
+        <property name="endPage" 
+        	column="end_page" 
+        	type="long"/>
+	    
+	    <!-- year -->
+        <property name="year" 
+        	column="year" 
+        	type="long"/>
+	    
+	    <!-- title -->
+        <property name="title" 
+        	column="title" 
+        	type="string"
+        	length="2000"/>
+	    
+	    <!-- pmid -->
+        <property name="pmid" 
+        	column="pmid" 
+        	type="long"/>
+	    
+	    <!-- startPage -->
+        <property name="startPage" 
+        	column="start_page" 
+        	type="long"/>
+	    
+	    <!-- journal -->
+        <property name="journal" 
+        	column="journal" 
+        	type="string"/>
+        	
+        <!-- authors -->
+        <property name="authors" 
+        	column="authors" 
+        	type="string"/>
+        	
+        <!-- firstTimeReported -->
+        <property name="firstTimeReported" 
+        	column="first_time_reported" 
+        	type="boolean"/>
+        	
+	    <!-- jaxJNumber -->
+        <property name="jaxJNumber" 
+        	column="j_number" 
+        	type="string"/>        	
+        	
+        <!-- publicationStatus (many-to-one unidirectional) -->
+        <many-to-one
+        	name="publicationStatus"
+        	column="publication_status_id"
+        	class="PublicationStatus"/>
+        	        	
+	</class>
+</hibernate-mapping>

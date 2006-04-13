@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ScreeningResult.hbm.xml
+    Created on : May 4, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for ScreeningResult
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="ScreeningResult"
+		table="screening_result"
+        lazy="true">
+	    
+	    <!-- id -->
+	    <id name="id" 
+	    	column="screening_result_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	
+	    
+        <!-- stage -->
+        <property name="stage" 
+        	column="stage" 
+        	type="string"/>
+        	
+        <!-- diffinh -->
+        <property name="diffinh" 
+        	column="diffinh" 
+        	type="float"/>	
+        	
+        <!-- aveinh -->
+        <property name="aveinh" 
+        	column="aveinh" 
+        	type="float"/>
+        	
+        <!-- treatment (many-to-one unidirectional) -->
+        <many-to-one
+        	name="treatment"
+        	column="treatment_id"
+        	class="Treatment"/>
+        	
+        <!-- agent (many-to-one unidirectional) -->
+        <many-to-one
+        	name="agent"
+        	column="agent_id"
+        	class="Agent"/>
+	</class>
+</hibernate-mapping>

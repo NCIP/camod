@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : BiologicalProcess.hbm.xml
+    Created on : July 19, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for BiologicalProcess
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="BiologicalProcess" 
+    	table="biological_process"
+        lazy="true" mutable="false">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="biological_process_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!-- agentCollection (many-to-many bidirectional) -->
+        <!-- Note: this collection will NOT be used to synchronize state with the database. -->
+        <!-- Changes made to biologicalProcessCollection in Agent will be synchronized with the database. -->
+        <set name="agentCollection"
+        	table="agent_biological_process"
+        	inverse="true" 
+        	lazy="true"
+        	cascade="all-delete-orphan"
+		sort="natural">
+        	
+        	<key column="biological_process_id"/>
+        	<many-to-many class="Agent" 
+        		column="agent_id"/>
+        </set> 
+	</class>
+</hibernate-mapping>
