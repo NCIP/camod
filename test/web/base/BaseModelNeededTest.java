@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseModelNeededTest.java,v 1.2 2005-12-13 19:17:51 pandyas Exp $
+ * $Id: BaseModelNeededTest.java,v 1.3 2006-04-17 19:37:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/13 19:17:51  pandyas
+ * added JavaDocs
+ *
  * 
  */
 
@@ -54,7 +57,7 @@ public class BaseModelNeededTest extends BaseHttpTest {
 
         // Set the ethnicity strain and submit again
         theForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");
-        theForm.setParameter("ethinicityStrain", "120/C57Bl/FVB");
+        theForm.setParameter("ethinicityStrain", "129");
         theCurrentPage = theForm.submit();
 
         assertCurrentPageContains("You have successfully created a new model!");

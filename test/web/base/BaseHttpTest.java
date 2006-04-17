@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.6 2006-01-06 16:11:48 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.7 2006-04-17 19:37:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/01/06 16:11:48  pandyas
+ * Modified to include methods to test if the populate method returns complete and correct data - initial modifications
+ *
  * Revision 1.5  2005/12/14 15:23:28  pandyas
  * took out search for pubID - not callled anywhere
  *
@@ -26,6 +29,7 @@ import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
+
 /** This is a simple example of using HttpUnit to read and understand web pages. * */
 public class BaseHttpTest extends TestCase {
 
@@ -43,6 +47,7 @@ public class BaseHttpTest extends TestCase {
     protected void assertCurrentPageDoesNotContain(String inTextToFind) throws Exception {
         String theCurrentPage = myWebConversation.getCurrentPage().getText();
         assertTrue("Page incorrectly contains text: " + inTextToFind, theCurrentPage.indexOf(inTextToFind) == -1);
+        
     }
 
     protected void navigateToLoginPage() throws Exception {
@@ -156,10 +161,19 @@ public class BaseHttpTest extends TestCase {
 
         theForm.setParameter("username", inUsername);
         theForm.setParameter("password", inPassword);
-        theForm.submit();
+        
+        //Handling re-direct in HttpUnit
+        WebResponse response = theForm.submit();
+        WebRequest refreshReq;
+        refreshReq =  response.getRefreshRequest();
+        System.out.println("refresh request: " + refreshReq.getURL());
+        
+        // get new response using refreshReq URL
+        response = myWebConversation.getResponse(refreshReq.getURL().toString());
+        assertNotNull("Response from Refresh Request: ", response);
 
         // Make sure we logged in
-        assertCurrentPageContains("Currently logged in as");
+        //assertCurrentPageContains("Currently logged in as");
     }
 
     protected String findModelIdOnPage(String inStartText, String inEndText) throws Exception {

@@ -112,7 +112,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		// Add parameters found on submit screen but not displayed on search screen  
 		theParamsToSkip = new ArrayList();
 		// TODO: Fix ones you can		
-    	theParamsToSkip.add("ethnicityStrainUnctrlVocab");
+    	theParamsToSkip.add("otherEthnicityStrain");
 		theParamsToSkip.add("principalInvestigator");		
 		theParamsToSkip.add("ethinicityStrain");
 		theParamsToSkip.add("calendarReleaseDate");		

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateCITest.java,v 1.1 2006-01-06 16:08:22 pandyas Exp $
+ * $Id: SearchPopulateCITest.java,v 1.2 2006-04-17 19:37:34 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/01/06 16:08:22  pandyas
+ * Added testing for populate methods
+ *
  * Revision 1.6  2005/12/21 17:42:13  pandyas
  * Added test for "Other" dropdown options - GeneDelivery still can't find otherViralVector and is commented out.  I moved all the jsp's action statement to outside the tables
  *
@@ -85,7 +88,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 
 		ChemicalDrugForm theForm = new ChemicalDrugForm();
 		theForm.setName("Other");
-		theForm.setNSCNumber("19191919");
+		theForm.setNscNumber("19191919");
 
 		TestUtil.setRandomValues(theForm, theWebForm, true, new ArrayList());
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -125,7 +128,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("chemicalDrugForm");
 
 		ChemicalDrugForm theForm = new ChemicalDrugForm();
-		theForm.setNSCNumber("19191919");
+		theForm.setNscNumber("19191919");
 
 		TestUtil.setRandomValues(theForm, theWebForm, false, new ArrayList());
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -154,7 +157,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("chemicalDrugForm");
 
 		ChemicalDrugForm theForm = new ChemicalDrugForm();
-		theForm.setNSCNumber("19191919");
+		theForm.setNscNumber("19191919");
 
 		TestUtil.setRandomValues(theForm, theWebForm, true, new ArrayList());
 		TestUtil.setValuesOnForm(theForm, theWebForm);

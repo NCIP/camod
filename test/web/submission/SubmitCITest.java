@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitCITest.java,v 1.5 2005-12-14 20:14:35 pandyas Exp $
+ * $Id: SubmitCITest.java,v 1.6 2006-04-17 19:37:34 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/12/14 20:14:35  pandyas
+ * Added JavaDocs
+ *
  * 
  */
 package web.submission;
@@ -64,7 +67,7 @@ public class SubmitCITest extends BaseModelNeededTest {
         assertCurrentPageContains("(if Chemical/Drug is not listed, then please");
         theForm = theCurrentPage.getFormWithName("chemicalDrugForm");
         theForm.setParameter("name", "1,3-butadiene");
-        theForm.setParameter("NSCNumber", "123");        
+        theForm.setParameter("nscNumber", "123");        
         theCurrentPage = theForm.submit();
         assertCurrentPageContains("You have successfully edited a Chemical / Drug.");
         

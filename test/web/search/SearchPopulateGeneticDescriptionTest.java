@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.1 2006-01-09 16:36:42 pandyas Exp $
+ * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.2 2006-04-17 19:37:34 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/01/09 16:36:42  pandyas
+ * Modified to include methods to test if the populate method returns complete and correct data - initial modifications
+ *
  * Revision 1.8  2006/01/03 17:36:05  pandyas
  * Added Test for Assoc Expression
  *
@@ -90,7 +93,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 
 		EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
 		theForm.setName("TESTENGINEEREDGENE");
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setLocationOfIntegration("Random");
 		//set conditionedBy here and skipped description below
 		theForm.setConditionedBy("Not Conditional");		
@@ -155,7 +158,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("locationOfIntegration", "Random");
 
 		EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setLocationOfIntegration("Random");
 		//set conditionedBy here and skipped description below
 		theForm.setConditionedBy("Not Conditional");		
@@ -240,7 +243,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("locationOfIntegration", "Random");
 
 		EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setLocationOfIntegration("Random");
 		//set conditionedBy here and skipped description below
 		theForm.setConditionedBy("Not Conditional");		
@@ -289,7 +292,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		GenomicSegmentForm theForm = new GenomicSegmentForm();
 		theForm.setCloneDesignator("TESTCLONEDESIGNATOR");
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setLocationOfIntegration("Random");
 		
 		List theParamsToIgnore = new ArrayList();
@@ -355,7 +358,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("locationOfIntegration", "Random");
 		
 		GenomicSegmentForm theForm = new GenomicSegmentForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setLocationOfIntegration("Random");
 		
 		List theParamsToIgnore = new ArrayList();
@@ -402,7 +405,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("locationOfIntegration", "Random");
 		
 		GenomicSegmentForm theForm = new GenomicSegmentForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setLocationOfIntegration("Random");
 		
 		List theParamsToIgnore = new ArrayList();
@@ -456,7 +459,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 
 		TargetedModificationForm theForm = new TargetedModificationForm();
 		theForm.setName("TESTTARGETEDMODIFICATION");
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		//set conditionedBy here and skip description below
 		theForm.setConditionedBy("Not Conditional");	
 		
@@ -527,7 +530,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("otherModificationType", "Testing otherModificationType");
 
 		TargetedModificationForm theForm = new TargetedModificationForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		//set conditionedBy here and skip description below
 		theForm.setConditionedBy("Not Conditional");	
 		
@@ -578,7 +581,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("modificationType" ,new String[]{testArray[1],testArray[2]});
 
 		TargetedModificationForm theForm = new TargetedModificationForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		//set conditionedBy here and skip description below
 		theForm.setConditionedBy("Not Conditional");	
 		
@@ -623,7 +626,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		InducedMutationForm theForm = new InducedMutationForm();
 		theForm.setName("TESTINDUCEDMUTATION");
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setObservation("Test Observation");
 		theForm.setMethodOfObservation("Test Method of Observation");
 		// unless set Chemical, CAS# is not displayed on search screen
@@ -632,7 +635,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		// Add parameters found on submit screen but not displayed on search screen  
 		List theParamsToSkip = new ArrayList();		
 		theParamsToSkip.add("type");
-		theParamsToSkip.add("CASNumber");
+		theParamsToSkip.add("casNumber");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -673,7 +676,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
 		
 		InducedMutationForm theForm = new InducedMutationForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setObservation("Test Observation");
 		theForm.setMethodOfObservation("Test Method of Observation");
 		// unless set Chemical, CAS# is not displayed on search screen
@@ -682,7 +685,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		// Add parameters found on submit screen but not displayed on search screen  
 		List theParamsToSkip = new ArrayList();		
 		theParamsToSkip.add("type");
-		theParamsToSkip.add("CASNumber");
+		theParamsToSkip.add("casNumber");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -712,7 +715,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
 		
 		InducedMutationForm theForm = new InducedMutationForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		theForm.setObservation("Test Observation");
 		theForm.setMethodOfObservation("Test Method of Observation");
 		// unless set Chemical, CAS# is not displayed on search screen
@@ -721,7 +724,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		// Add parameters found on submit screen but not displayed on search screen  
 		List theParamsToSkip = new ArrayList();		
 		theParamsToSkip.add("type");
-		theParamsToSkip.add("CASNumber");
+		theParamsToSkip.add("casNumber");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -752,7 +755,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
 		theForm.setName("TESTSPONTANEOUSMUTATION");
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -793,7 +796,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
 		
 		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
-		theForm.setNumberMGI("19191919");
+		theForm.setMgiNumber("19191919");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);

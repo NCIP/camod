@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateXenograftTest.java,v 1.1 2006-01-06 16:08:22 pandyas Exp $
+ * $Id: SearchPopulateXenograftTest.java,v 1.2 2006-04-17 19:37:34 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/01/06 16:08:22  pandyas
+ * Added testing for populate methods
+ *
  * Revision 1.5  2006/01/03 20:56:58  pandyas
  * added TODO note
  *
@@ -75,19 +78,19 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("xenograftForm");
 
 		XenograftForm theForm = new XenograftForm();
-		theForm.setName("TESTXENOGRAFT");
+		theForm.setXenograftName("TESTXENOGRAFT");
 		theForm.setOrgan("Heart");
 		theForm.setOrganTissueName("Heart");		
 		theForm.setOrganTissueCode("C22498");		
-        theForm.setATCCNumber("2");
+        theForm.setAtccNumber("2");
         theForm.setCellAmount("10");
         
-		List theParamsToIgnore = new ArrayList();
+		List<String> theParamsToIgnore = new ArrayList<String>();
 		//TODO - remove disabled=true but keep disabled until geneticManipulation is entered
 		theParamsToIgnore.add("modificationDescription");
 		
 		// Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");		
 		
@@ -111,7 +114,7 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("xenograftForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aXenograftID");		
 		theParamsToSkip.add("submitAction");
 		theParamsToSkip.add("otherHostEthinicityStrain");		
@@ -136,15 +139,15 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest {
 		theForm.setOrgan("Heart");
 		theForm.setOrganTissueName("Heart");		
 		theForm.setOrganTissueCode("C22498");		
-        theForm.setATCCNumber("2");
+        theForm.setAtccNumber("2");
         theForm.setCellAmount("10");
         
-		List theParamsToIgnore = new ArrayList();
+		List<String> theParamsToIgnore = new ArrayList<String>();
 		//TODO - remove disabled=true but keep disabled until geneticManipulation is entered
 		theParamsToIgnore.add("modificationDescription");
 		
 		// Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");		
 		
@@ -180,15 +183,15 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest {
 		theForm.setOrgan("Heart");
 		theForm.setOrganTissueName("Heart");		
 		theForm.setOrganTissueCode("C22498");		
-        theForm.setATCCNumber("2");
+        theForm.setAtccNumber("2");
         theForm.setCellAmount("10");
         
-		List theParamsToIgnore = new ArrayList();
+		List<String> theParamsToIgnore = new ArrayList<String>();
 		//textarea fails - investigate if needed
 		theParamsToIgnore.add("modificationDescription");
 		
 		// Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 		//not set in original model so must be skipped
