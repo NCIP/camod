@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: LDAPUtil.java,v 1.3 2006-04-17 19:10:50 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.Constants;

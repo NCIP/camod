@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: DrugScreenResult.java,v 1.2 2006-04-17 19:10:50 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.util;
 
 import java.util.ArrayList;
@@ -7,8 +16,8 @@ import java.util.Map;
 
 public class DrugScreenResult {
 	public int strainCount = 0;
-	public List strains = new ArrayList();
-	public List dosages = new ArrayList();
+	public List<String> strains = new ArrayList<String>();
+	public List<String> dosages = new ArrayList<String>();
 	public static class Entry {
 		public String strain;
 		public String dosage;

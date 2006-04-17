@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: DateUtil.java,v 1.4 2006-04-17 19:10:50 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.util;
 
 import gov.nih.nci.camod.Constants;
@@ -22,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  *  Modified by <a href="mailto:dan@getrolling.com">Dan Kibler </a> 
  *   to correct time pattern. Minutes should be mm not MM
  * 	(MM is month). 
- * @version $Revision: 1.3 $ $Date: 2005-09-19 18:14:24 $
+ * @version $Revision: 1.4 $ $Date: 2006-04-17 19:10:50 $
  */
 public class DateUtil {
     //~ Static fields/initializers =============================================

@@ -2,6 +2,10 @@
  * HashCodeUtil.java
  *
  * Created on April 12, 2005, 11:16 PM
+ *
+ * $Id: HashCodeUtil.java,v 1.2 2006-04-17 19:10:50 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
  */
 
 package gov.nih.nci.camod.util;

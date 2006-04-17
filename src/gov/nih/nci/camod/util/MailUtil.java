@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: MailUtil.java,v 1.9 2006-04-17 19:10:50 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.util;
 
 import java.io.StringWriter;
@@ -281,7 +290,7 @@ public class MailUtil {
 
         String[] theMessageKeys = {"approve","assign_editor","assign_screener", "need_more_info", "reject","complete"};
         String[] macrosUsed = {"defaultbody","alternative1","alternative2"};
-        TreeMap valuesForVariables = new TreeMap();
+        TreeMap<String, String> valuesForVariables = new TreeMap<String, String>();
         valuesForVariables.put("name","Fibber McGhee");
         valuesForVariables.put("submitter","Fibber McGhee");
         valuesForVariables.put("profession","bustin gut");
