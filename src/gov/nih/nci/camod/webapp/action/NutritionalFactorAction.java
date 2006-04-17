@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorAction.java,v 1.11 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: NutritionalFactorAction.java,v 1.12 2006-04-17 19:09:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.10  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -25,9 +28,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,22 +60,22 @@ public class NutritionalFactorAction extends BaseAction {
 			log.debug("Entering 'edit' method");
 		}
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+        // Grab the current CarcinogenExposure we are working with related to this animalModel
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 		
 		// Create a form to edit
 		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
 
 		System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
-				+ nutritForm.getDosage() + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
+				+ nutritForm.getDosage()  + "\n\t dosageUnit: " + nutritForm.getDosageUnit()
+                + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
+                + nutritForm.getAgeAtTreatmentUnit()
 				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
 
@@ -83,16 +86,16 @@ public class NutritionalFactorAction extends BaseAction {
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.delete.successful"));
 				saveErrors(request, msg);
 
 			} else {
-
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, nutritForm, theTherapy);
+               
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, nutritForm, theCarcinogenExposure);                
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.edit.successful"));
@@ -129,7 +132,8 @@ public class NutritionalFactorAction extends BaseAction {
 
 		System.out.println("<NutritionalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ nutritForm.getName() + "\n\t otherName: " + nutritForm.getOtherName() + "\n\t dosage: "
-				+ nutritForm.getDosage() + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
+				+ nutritForm.getDosage()  + "\n\t dosageUnit: " + nutritForm.getDosageUnit()
+                + "\n\t regimen: " + nutritForm.getRegimen() + "\n\t ageAtTreatment: "
 				+ nutritForm.getAgeAtTreatment() + "\n\t type: " + nutritForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
@@ -143,7 +147,7 @@ public class NutritionalFactorAction extends BaseAction {
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-			animalModelManager.addTherapy(animalModel, nutritForm);
+			animalModelManager.addCarcinogenExposure(animalModel, nutritForm);
 
 			ActionMessages msg = new ActionMessages();
 			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("nutritionalfactor.creation.successful"));

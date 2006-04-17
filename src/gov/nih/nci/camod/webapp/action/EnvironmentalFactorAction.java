@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorAction.java,v 1.17 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: EnvironmentalFactorAction.java,v 1.18 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.16  2005/11/02 21:48:17  georgeda
  * Fixed validate
  *
@@ -53,9 +56,10 @@ public final class EnvironmentalFactorAction extends BaseAction {
 
 		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ envForm.getName() + "\n\t otherName: " + envForm.getOtherName() + "\n\t dosage: "
-				+ envForm.getDosage() + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
+				+ envForm.getDosage() + "\n\t envForm.getDosageUnit()" + envForm.getDosageUnit() + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
 				+ "\n\t regimen: " + envForm.getRegimen() + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
-				+ "\n\t type: " + envForm.getType() + "\n\t user: "
+				+ envForm.getAgeAtTreatmentUnit()
+                + "\n\t type: " + envForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		/* Grab the current modelID from the session */
@@ -66,7 +70,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-			animalModelManager.addTherapy(animalModel, envForm);
+			animalModelManager.addCarcinogenExposure(animalModel, envForm);
 
 			ActionMessages msg = new ActionMessages();
 			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("environmentalfactor.creation.successful"));
@@ -99,9 +103,9 @@ public final class EnvironmentalFactorAction extends BaseAction {
 
 		log.debug("Entering 'edit' method");
 
-		// Grab the current Therapy we are working with related to this
+		// Grab the current CarcinogenExposure we are working with related to this
 		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+		String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -111,12 +115,14 @@ public final class EnvironmentalFactorAction extends BaseAction {
 
 		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ envForm.getName() + "\n\t otherName: " + envForm.getOtherName() + "\n\t dosage: "
-				+ envForm.getDosage() + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
+				+ envForm.getDosage()  + "\n\t envForm.getDosageUnit()" + envForm.getDosageUnit() 
+                + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
 				+ "\n\t regimen: " + envForm.getRegimen() + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
-				+ "\n\t type: " + envForm.getType() + "\n\t user: "
+				+ envForm.getAgeAtTreatmentUnit()
+                + "\n\t type: " + envForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
@@ -128,7 +134,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
                 AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
                 AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
                 
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("environmentalfactor.delete.successful"));
@@ -139,9 +145,9 @@ public final class EnvironmentalFactorAction extends BaseAction {
 		        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);				
 
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, envForm, theTherapy);
-
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, envForm, theCarcinogenExposure);
+                
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("environmentalfactor.edit.successful"));
 				saveErrors(request, msg);

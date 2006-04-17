@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftForm.java,v 1.12 2005-12-28 16:43:48 pandyas Exp $
+ * $Id: XenograftForm.java,v 1.13 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/12/28 16:43:48  pandyas
+ * removed harvest date - unused
+ *
  * Revision 1.11  2005/11/28 22:49:58  pandyas
  * Defect #186: Added organ/tissue to Xenograft page, modified search page to display multiple Xenografts with headers, modified XenograftManagerImpl so it does not create or save an organ object if not organ is selected
  *
@@ -27,107 +30,105 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
      * Default empty constructor
      * 
      * @author rajputs
-     * 
-     * TODO To change the template for this generated type comment go to Window -
-     * Preferences - Java - Code Style - Code Templates
      */
     public XenograftForm() {
     }
 
     // This form does not include properties from the parent class of Xenograft,
     // AbstractCancerModel
-    protected String name;
-    protected String ATCCNumber;
-    protected String parentalCellLineName;
-    protected String cellAmount;
-    protected String modificationDescription;
+    protected String xenograftName;
     protected String geneticManipulation;
-    protected String administrativeSite;
-    protected String otherAdministrativeSite;    
+    protected String modificationDescription;    
+    protected String parentalCellLineName;    
+    protected String atccNumber;
+    protected String cellAmount;
+    protected String growthPeriod;
     protected String graftType;
     protected String otherGraftType;
-
-    protected String hostScientificName;
-    protected String hostEthinicityStrain;
-    protected String otherHostEthinicityStrain;
+    protected String administrativeSite;
+    protected String otherAdministrativeSite;
+    
+    protected String donorScientificName;
+    protected String donorEthinicityStrain;
+    protected String otherDonorEthinicityStrain;
     
 	protected String organ;
 	protected String organTissueName;
 	protected String organTissueCode;    
 
     /**
-     * @return Returns the name.
+     * @return Returns the donorScientificName.
      */
-    public String getHostScientificName() {
-        return hostScientificName;
+    public String getDonorScientificName() {
+        return donorScientificName;
     }
 
     /**
-     * @param name
-     *            The name to set.
+     * @param donorScientificName
+     *            The donorScientificName to set.
      */
-    public void setHostScientificName(String name) {
-        this.hostScientificName = name;
+    public void setDonorScientificName(String donorScientificName) {
+        this.donorScientificName = donorScientificName;
     }
 
     /**
-     * @return Returns the name.
+     * @return Returns the donorEthinicityStrain.
      */
-    public String getHostEthinicityStrain() {
-        return hostEthinicityStrain;
+    public String getDonorEthinicityStrain() {
+        return donorEthinicityStrain;
     }
 
     /**
-     * @param name
-     *            The name to set.
+     * @param donorEthinicityStrain
+     *            The donorEthinicityStrain to set.
      */
-    public void setHostEthinicityStrain(String name) {
-        this.hostEthinicityStrain = name;
+    public void setDonorEthinicityStrain(String donorEthinicityStrain) {
+        this.donorEthinicityStrain = donorEthinicityStrain;
     }
 
     /**
-     * @return Returns the name.
+     * @return Returns the otherDonorEthinicityStrain.
      */
-    public String getOtherHostEthinicityStrain() {
-        return otherHostEthinicityStrain;
+    public String getOtherDonorEthinicityStrain() {
+        return otherDonorEthinicityStrain;
     }
 
     /**
-     * @param name
-     *            The name to set.
+     * @param otherDonorEthinicityStrain
+     *            The otherDonorEthinicityStrain to set.
      */
-    public void setOtherHostEthinicityStrain(String name) {
-        this.otherHostEthinicityStrain = name;
+    public void setOtherDonorEthinicityStrain(String otherDonorEthinicityStrain) {
+        this.otherDonorEthinicityStrain = otherDonorEthinicityStrain;
     }
 
     /**
-     * @return Returns the name.
+     * @return Returns the xenograftName.
      */
-    public String getName() {
-        return name;
+    public String getXenograftName() {
+        return xenograftName;
     }
 
     /**
-     * @param name
-     *            The name to set.
+     * @param xenograftName
+     *            The xenograftName to set.
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setXenograftName(String xenograftName) {
+        this.xenograftName = xenograftName;
     }
 
     /**
-     * @return Returns the ATCCNumber.
+     * @return Returns the atccNumber.
      */
-    public String getATCCNumber() {
-        return ATCCNumber;
+    public String getAtccNumber() {
+        return atccNumber;
     }
 
     /**
-     * @param ATCCNumber
-     *            The ATCCNumber to set.
+     * @param atccNumber
+     *            The atccNumber to set.
      */
-    public void setATCCNumber(String ATCCNumber) {
-        this.ATCCNumber = ATCCNumber;
+    public void setAtccNumber(String atccNumber) {
+        this.atccNumber = atccNumber;
     }
 
     /**
@@ -248,7 +249,20 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     public void setOtherGraftType(String otherGraftType) {
         this.otherGraftType = otherGraftType;
     }
-    
+    /**
+     * @return Returns the growthPeriod.
+     */
+    public String getGrowthPeriod() {
+        return growthPeriod;
+    }
+
+    /**
+     * @param growthPeriod
+     *            The growthPeriod to set.
+     */
+    public void setGrowthPeriod(String growthPeriod) {
+        this.growthPeriod = growthPeriod;
+    }    
 	/**
 	 * @return Returns the organ.
 	 */	
@@ -287,8 +301,8 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
 	}	    
 
     public void reset(ActionMapping mapping, HttpServletRequest request) {
-        name = null;
-        ATCCNumber = null;
+        xenograftName = null;
+        atccNumber = null;
         parentalCellLineName = null;
         cellAmount = null;
         modificationDescription = null;
@@ -296,9 +310,13 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
         administrativeSite = null;
         graftType = null;
         otherGraftType = null;
-        hostScientificName = null;
-        hostEthinicityStrain = null;
-        otherHostEthinicityStrain = null;
+        donorScientificName = null;
+        donorEthinicityStrain = null;
+        otherDonorEthinicityStrain = null;
     }
+    
+    public void resetOrgan() {
+        organ = null;
+    }    
 
 }

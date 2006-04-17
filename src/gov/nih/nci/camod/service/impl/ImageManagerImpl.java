@@ -1,14 +1,14 @@
 /*
- * Created on Jun 17, 2005
+ * $Id: ImageManagerImpl.java,v 1.17 2006-04-17 19:11:05 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Image;
+import gov.nih.nci.camod.domain.StainingMethod;
 import gov.nih.nci.camod.service.ImageManager;
 import gov.nih.nci.camod.util.FtpUtil;
 import gov.nih.nci.camod.util.MailUtil;
@@ -100,13 +100,22 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
 
         log.trace("Entering populateImage");
 
-        if (inImageData.getStaining() != null && !inImageData.getStaining().equals(""))
+        if (inImageData.getStainingMethod() != null && !inImageData.getStainingMethod().equals(""))
         {
-            inImage.setStaining(inImageData.getStaining());
+            
+            //.setStaining(inImageData.getStaining());
+            
+            // Set the StainingMethod
+            StainingMethod stainingMethod = StainingMethodManagerSingleton.instance().getByName(inImageData.getStainingMethod());
 
-            if (inImageData.getStaining().equals("Other"))
+            // save the treatment
+            inImage.setStainingMethod(stainingMethod);
+            
+
+            if (stainingMethod.getName().equals("Other"))
             {
-                inImage.setStainingUnctrlVocab(inImageData.getOtherStaining());
+                //StainingMethod staingmethod =
+                stainingMethod.setNameUnctrlVocab(inImageData.getOtherStainingMethod());
 
                 ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
@@ -127,7 +136,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
                 String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
                 Map<String,Object> values = new TreeMap<String,Object>();
                 values.put("type", "SegmentName");
-                values.put("value", inImageData.getOtherStaining());
+                values.put("value", stainingMethod.getNameUnctrlVocab());
                 values.put("submitter", inAnimalModel.getSubmitter());
                 values.put("model", inAnimalModel.getModelDescriptor());
                 values.put("modelstate", inAnimalModel.getState());
@@ -146,8 +155,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
         }
         else
         {
-            inImage.setStaining(null);
-            inImage.setStainingUnctrlVocab(null);
+            inImage.setStainingMethod(null);
+            //inImage.setStainingUnctrlVocab(null);
         }
 
         if (inImage != null)

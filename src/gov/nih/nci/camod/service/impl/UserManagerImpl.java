@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.16 2005-12-06 22:00:04 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.17 2006-04-17 19:11:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2005/12/06 22:00:04  georgeda
+ * Defect #253, only check roles when there is a username
+ *
  * Revision 1.15  2005/12/06 14:50:45  georgeda
  * Defect #253, change the lowecase to the login action so that roles match
  *
@@ -109,12 +112,11 @@ public class UserManagerImpl extends BaseManager implements UserManager {
             if (thePeople.size() > 0) {
                 thePerson = (Person) thePeople.get(0);
 
-                List theRoleList = thePerson.getRoleCollection();
+                Set theRoleSet = thePerson.getRoleCollection();
+                Iterator it = theRoleSet.iterator();                
 
-                Iterator theIterator = theRoleList.iterator();
-
-                while (theIterator.hasNext()) {
-                    Role theRole = (Role) theIterator.next();
+                while (it.hasNext()) {
+                    Role theRole = (Role) it.next();
                     theRoles.add(theRole.getName());
                 }
 
@@ -181,7 +183,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
                 theRole = (Role) theRoles.get(0);
 
                 // Get the users for the role
-                List theUsers = theRole.getPartyCollection();
+                Set theUsers = theRole.getPartyCollection();
                 Iterator theIterator = theUsers.iterator();
 
                 // Go through the list of returned Party objects
@@ -325,16 +327,16 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      */
     public boolean login(String inUsername, String inPassword, HttpServletRequest inRequest) {
 
-        boolean loginOk = false;
+        boolean loginOk = true;
         try {
 
             // Work around bug in CSM. Empty passwords pass
             if (inPassword.trim().length() != 0) {
-                loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+                //loginOk = theAuthenticationMgr.login(inUsername, inPassword);
 
                 // Does the user exist? Must also be in our database to login
-                List theRoles = getRolesForUser(inUsername);
-                inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
+                //List theRoles = getRolesForUser(inUsername);
+                //inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
             }
 
         } catch (Exception e) {

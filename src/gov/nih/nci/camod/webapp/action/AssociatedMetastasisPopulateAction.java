@@ -1,6 +1,14 @@
+/**
+ * 
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Disease;
 import gov.nih.nci.camod.domain.Histopathology;
@@ -46,6 +54,8 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
 
             /* Set Histopathology attributes */
             assocMetastasisForm.setAgeOfOnset(associatedMetastasis.getAgeOfOnset());
+            assocMetastasisForm.setAgeOfOnsetUnit(associatedMetastasis.getAgeOfOnsetUnit());
+            
             if (associatedMetastasis.getWeightOfTumor() != null) {
                 assocMetastasisForm.setWeightOfTumor(associatedMetastasis.getWeightOfTumor().toString());
             }
@@ -75,9 +85,8 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             System.out.println("OrganTissueCode= " + organ.getConceptCode());
 
             /* Set Disease object attributes */
-            List diseaseList = associatedMetastasis.getDiseaseCollection();
+            Disease disease = associatedMetastasis.getDisease();
 
-            Disease disease = (Disease) diseaseList.get(0);
             assocMetastasisForm.setDiagnosisName(disease.getName());
             assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
             assocMetastasisForm.setTumorClassification(disease.getName());

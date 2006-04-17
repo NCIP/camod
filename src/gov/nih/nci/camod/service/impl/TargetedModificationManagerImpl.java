@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.22 2005-12-13 16:27:27 schroedn Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.23 2006-04-17 19:11:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2005/12/13 16:27:27  schroedn
+ * Added Check for Image upload, only used for Unit testing
+ *
  * Revision 1.21  2005/11/28 18:31:57  georgeda
  * Defect #64, fix for newly submitted models
  *
@@ -90,12 +93,13 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         log.info("Entering populateTargetedModification");
 
         // set Targeted Gene/Locus
-        inTargetedModification.setName(inTargetedModificationData.getName());
+        inTargetedModification.setName(inTargetedModificationData.getName());       
+        
 
         // Get Modification Types
         String[] theModificationTypes = inTargetedModificationData.getModificationType();
-
-        List theCurrentModificationTypeList = inTargetedModification.getModificationTypeCollection();
+        //Sima TODO - added new ArrayList instead of converting code
+        List<ModificationType> theCurrentModificationTypeList = new ArrayList(inTargetedModification.getModificationTypeCollection());
         theCurrentModificationTypeList.clear();
 
         // if other is one of the (multiple) selections
@@ -108,9 +112,9 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
 
                 // Add an other selection and send e-mail
                 if (theModificationTypes[i].equals(Constants.Dropdowns.OTHER_OPTION)) {
-
-                    inTargetedModification
-                            .setModTypeUnctrlVocab(inTargetedModificationData.getOtherModificationType());
+                    
+                    // Sima TODO
+                    //inTargetedModification.setModTypeUnctrlVocab(inTargetedModificationData.getOtherModificationType());
 
                     // Add selections if not already in DB (No duplicates -
                     // during editing phase)
@@ -138,7 +142,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
                         // e-mail
                         // content with
                         String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                        Map values = new TreeMap();
+                        Map<String, Object> values = new TreeMap<String, Object>();
                         values.put("type", "TargetedModification");
                         values.put("value", inTargetedModificationData.getOtherModificationType());
                         values.put("submitter", inAnimalModel.getSubmitter());
@@ -167,7 +171,8 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         } else {
             log.error("the Modification Type selection(s) does not include other ");
             // clear out the uncontrolledVocab if editing model
-            inTargetedModification.setModTypeUnctrlVocab("");
+            //Sima TODO - do we need this
+            //inTargetedModification.setModTypeUnctrlVocab("");
             // Get the selection
             for (int i = 0; i < theModificationTypes.length; i++) {
                 ModificationType modificationType = ModificationTypeManagerSingleton.instance().getByName(
@@ -255,14 +260,14 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         else
             inMutationIdentifier = new MutationIdentifier();
 
-        if (inTargetedModificationData.getNumberMGI() == null || inTargetedModificationData.getNumberMGI().equals("")) {
+        if (inTargetedModificationData.getMgiNumber() == null || inTargetedModificationData.getMgiNumber().equals("")) {
             inTargetedModification.setMutationIdentifier(null);
         } else {
-            String strNumberMGI = inTargetedModificationData.getNumberMGI().trim();
-            Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-            Matcher m = p.matcher(strNumberMGI);
-            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
-                inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+            String strMGINumber = inTargetedModificationData.getMgiNumber().trim();
+            Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
+            Matcher m = p.matcher(strMGINumber);
+            if (m.matches() && strMGINumber != null && !strMGINumber.equals("")) {
+                inMutationIdentifier.setMgiNumber(strMGINumber);
                 inTargetedModification.setMutationIdentifier(inMutationIdentifier);
             }
         }

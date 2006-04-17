@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.18 2005-11-18 15:20:21 georgeda Exp $
+ * $Id: AnimalModelAction.java,v 1.19 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2005/11/18 15:20:21  georgeda
+ * Defect #120, gracefully handle the deletion of models.
+ *
  * Revision 1.17  2005/11/10 18:41:53  pandyas
  * minor change to comments
  *
@@ -28,12 +31,9 @@ import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CurationManager;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
-
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.*;
 
 /**
@@ -67,8 +67,8 @@ public final class AnimalModelAction extends BaseAction {
                 + theModelChar.getIsToolMouse() + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor()
                 + "\n\t name: " + theModelChar.getName() + "\n\t releaseDate: " + theModelChar.getReleaseDate()
                 + "\n\t scientificName: " + theModelChar.getScientificName() + "\n\t ethinicityStrain: "
-                + theModelChar.getEthinicityStrain() + "\n\t ethnicityStrainUnctrlVocab: "
-                + theModelChar.getEthnicityStrainUnctrlVocab() + "\n\t summary: " + theModelChar.getSummary()
+                + theModelChar.getEthinicityStrain() + "\n\t otherEthnicityStrain: "
+                + theModelChar.getOtherEthnicityStrain() + "\n\t summary: " + theModelChar.getSummary()
                 + "\n\t type: " + theModelChar.getType() + "\n\t url: " + theModelChar.getUrl()
                 + "\n\t calendarReleaseDate: " + theModelChar.getCalendarReleaseDate() + "\n\t currentUser: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -154,7 +154,7 @@ public final class AnimalModelAction extends BaseAction {
                 + "\n\t modelDescriptor: " + theModelChar.getModelDescriptor() + "\n\t name: " + theModelChar.getName()
                 + "\n\t releaseDate: " + theModelChar.getReleaseDate() + "\n\t scientificName: "
                 + theModelChar.getScientificName() + "\n\t ethinicityStrain: " + theModelChar.getEthinicityStrain()
-                + "\n\t ethnicityStrainUnctrlVocab: " + theModelChar.getEthnicityStrainUnctrlVocab() + "\n\t summary: "
+                + "\n\t ethnicityStrainUnctrlVocab: " + theModelChar.getOtherEthnicityStrain() + "\n\t summary: "
                 + theModelChar.getSummary() + "\n\t type: " + theModelChar.getType() + "\n\t url: "
                 + theModelChar.getUrl() + "\n\t calendarReleaseDate: " + theModelChar.getCalendarReleaseDate()
                 + "\n\t currentUser: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -295,19 +295,19 @@ public final class AnimalModelAction extends BaseAction {
      */
     public ActionForward returnUserModels(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        log.info("<UserAction ReturnUserModels> Entering... ");
+        log.info("<AnimalModelAction returnUserModels> Entering... ");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
         try {
-
+          
             List amList = animalModelManager.getAllByUser((String) request.getSession().getAttribute(
                     Constants.CURRENTUSER));
 
             // sort list by modelDescriptor, ignoring case
             Collections.sort(amList, new _sortAnimalModels());
             request.getSession().setAttribute(Constants.USERMODELLIST, amList);
-
+         
         } catch (Exception e) {
 
             log.error("Unable to fetch models for user: ", e);
@@ -338,5 +338,5 @@ class _sortAnimalModels implements java.util.Comparator {
             return -1;
         else
             return 0;
-    }
+    } 
 }

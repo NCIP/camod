@@ -23,16 +23,16 @@ var cal1 = new CalendarPopup();
 	function chkOtherStrain() {
 	
 	    var strain = document.forms[0].ethinicityStrain;
-	    var otherStrain = document.forms[0].ethnicityStrainUnctrlVocab;
+	    var otherStrain = document.forms[0].otherEthnicityStrain;
 	
 	    chkOther(strain, otherStrain);  	
 	}
-	
+
 	function getOptions( control ) {
 		form = control.form;
 		form.action = "AnimalModelPopulateAction.do?method=setStrainDropdown&page=modelChar";
 		form.submit();
-	}	
+	}
 	
 	function immediateRelease()
 	{
@@ -75,7 +75,7 @@ var cal1 = new CalendarPopup();
 		</tr>
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Model Characteristics</a>
+			<td class="formTitle" height="20" colspan="3"><a>Model Characteristics</a>
 			</td>
 		</tr>
 
@@ -115,18 +115,18 @@ var cal1 = new CalendarPopup();
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Species:</b></label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
-					<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" filter="false"/>										
+				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);">
+					<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" filter="false"/>												
 				</html:select>				
 			</td>
 		</tr>
-
+		
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Strain:</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOtherStrain();">
-					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
+					<html:options name="<%= Dropdowns.STRAINDROP %>"/>		
 				</html:select>
 			</td>
 		</tr>	
@@ -135,7 +135,7 @@ var cal1 = new CalendarPopup();
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">if other Strain:</label></td>
 			<td class="formField">					
-					<html:text styleClass="formFieldSized" property="ethnicityStrainUnctrlVocab" size="30"/>			
+					<html:text styleClass="formFieldSized" property="otherEthnicityStrain" size="30"/>			
 			</td>
 		</tr>
 

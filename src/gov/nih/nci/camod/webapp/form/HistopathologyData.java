@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyData.java,v 1.2 2005-11-03 21:48:16 georgeda Exp $
+ * $Id: HistopathologyData.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/11/03 21:48:16  georgeda
+ * Cleanup
+ *
  * Revision 1.1  2005/11/03 18:52:44  pandyas
  * Modified for histopathology screens
  *
@@ -31,8 +34,8 @@ public interface HistopathologyData  {
     
 	public String getAgeOfOnset();
 	public void setAgeOfOnset(String ageOfOnset);
-    public String getAgeUnit();
-    public void setAgeUnit(String ageUnit);	
+    public String getAgeOfOnsetUnit();
+    public void setAgeOfOnsetUnit(String ageOfOnsetUnit);	
 	public String getWeightOfTumor();
 	public void setWeightOfTumor(String weightOfTumor);
 	public String getVolumeOfTumor();

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.7 2005-11-22 15:17:16 georgeda Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.8 2006-04-17 19:09:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/22 15:17:16  georgeda
+ * Defect #21, use nsc number for clinical trials
+ *
  * Revision 1.6  2005/11/17 20:57:17  georgeda
  * Defect #117, handle back arrow gracefully
  *
@@ -81,10 +84,10 @@ public final class DrugScreenSearchAction extends BaseAction {
             request.getSession().setAttribute(Constants.DRUG_SCREEN_SEARCH_RESULTS, agents);
 			final int agtCount = (agents!=null)?agents.size():0;
 			AgentManager myAgentManager = (AgentManager)getBean("agentManager");
-			final HashMap clinProtocols = new HashMap();
-			final HashMap yeastResults = new HashMap();
-			final HashMap invivoResults = new HashMap();
-			final HashMap preClinicalResults = new HashMap();
+			final HashMap<Long, Collection> clinProtocols = new HashMap<Long, Collection>();
+			final HashMap<Long, Collection> yeastResults = new HashMap<Long, Collection>();
+			final HashMap<Long, Collection> invivoResults = new HashMap<Long, Collection>();
+			final HashMap<Long, Collection> preClinicalResults = new HashMap<Long, Collection>();
             String theAgentName = null;
             String theCasNumber = null;
             
@@ -94,7 +97,7 @@ public final class DrugScreenSearchAction extends BaseAction {
 				Agent a = (Agent)agents.get(i);
 				if (a != null) {
                     theNscNumber = a.getNscNumber();
-                    
+                   
                     // Get the name
                     if (theAgentName == null) {
                         theAgentName = a.getName();

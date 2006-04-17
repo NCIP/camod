@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: SpontaneousMutationPopulateAction.java,v 1.7 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -6,12 +15,9 @@ import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.service.impl.SpontaneousMutationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
-
-import java.util.List;
-
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -35,8 +41,10 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
             request.setAttribute("aSpontaneousMutationID", aSpontaneousMutationID);
             spontaneousMutationForm.setName(theSpontaneousMutation.getName());
             spontaneousMutationForm.setComments(theSpontaneousMutation.getComments());
+            spontaneousMutationForm.setGeneId(theSpontaneousMutation.getGeneId());
 
-            List geneticList = theSpontaneousMutation.getGeneticAlterationCollection();
+            // Sima TODO - added new ArrayList instead of type safe generic              
+            List geneticList = new ArrayList(theSpontaneousMutation.getGeneticAlterationCollection());
             if (geneticList.size() > 0) {
                 GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);
                 spontaneousMutationForm.setObservation(theGeneticAlteration.getObservation());
@@ -45,7 +53,7 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
 
             MutationIdentifier inMutationIdentifier = theSpontaneousMutation.getMutationIdentifier();
             if (inMutationIdentifier != null)
-                spontaneousMutationForm.setNumberMGI(inMutationIdentifier.getNumberMGI().toString());
+                spontaneousMutationForm.setMgiNumber(inMutationIdentifier.getMgiNumber());
 
         }
 

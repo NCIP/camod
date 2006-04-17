@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: SpontaneousMutationAction.java,v 1.8 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -63,10 +72,11 @@ public class SpontaneousMutationAction extends BaseAction {
             } else {
 
                 log.info("<SpontaneousMutationAction edit> following Characteristics:" + "\n\t name: "
-                        + spontaneousMutationForm.getName() + "\n\t getNumberMGI: "
-                        + spontaneousMutationForm.getNumberMGI() + "\n\t getObservation: "
+                        + spontaneousMutationForm.getName() + "\n\t getMgiNumber: "
+                        + spontaneousMutationForm.getMgiNumber() + "\n\t getObservation: "
                         + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
-                        + spontaneousMutationForm.getMethodOfObservation() + "\n\t getComments: "
+                        + spontaneousMutationForm.getMethodOfObservation() +  "\n\t getGeneId: "                       
+                        + spontaneousMutationForm.getGeneId() +  "\n\t getComments: "
                         + spontaneousMutationForm.getComments()
                         + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
@@ -118,10 +128,11 @@ public class SpontaneousMutationAction extends BaseAction {
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<SpontaneousMutationAction save> following Characteristics:" + "\n\t name: "
-                + spontaneousMutationForm.getName() + "\n\t getNumberMGI: " + spontaneousMutationForm.getNumberMGI()
+                + spontaneousMutationForm.getName() + "\n\t getMgiNumber: " + spontaneousMutationForm.getMgiNumber()
                 + "\n\t getObservation: " + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
                 + spontaneousMutationForm.getMethodOfObservation() + "\n\t getComments: "
-                + spontaneousMutationForm.getComments()
+                + spontaneousMutationForm.getComments()+  "\n\t getGeneId: "                       
+                + spontaneousMutationForm.getGeneId() 
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {

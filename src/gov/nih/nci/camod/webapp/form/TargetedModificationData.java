@@ -1,8 +1,18 @@
+/**
+ * 
+ * $Id: TargetedModificationData.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
 import org.apache.struts.upload.FormFile;
 
-public interface TargetedModificationData {
+public interface TargetedModificationData extends TransgeneData {
+    
 	public String getName();
 	
 	public void setName(String name);
@@ -39,9 +49,9 @@ public interface TargetedModificationData {
 	
 	public void setComments(String comments);
 	
-	public String getNumberMGI();
+	public String getMgiNumber();
 	
-	public void setNumberMGI(String numberMGI);
+	public void setMgiNumber(String mgiNumber);
 	
 	public String getFileServerLocation();
 	

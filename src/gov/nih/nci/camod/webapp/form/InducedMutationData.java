@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: InducedMutationData.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
 public interface InducedMutationData {
@@ -10,9 +19,9 @@ public interface InducedMutationData {
 	
 	public void setOtherType(String otherType);
 	
-	public String getCASNumber();
+	public String getCasNumber();
 	
-	public void setCASNumber(String CASNumber);
+	public void setCasNumber(String casNumber);
 	
 	public String getGeneId();
 	
@@ -34,9 +43,9 @@ public interface InducedMutationData {
 	
 	public void setMethodOfObservation(String methodOfObservation);
 	
-	public String getNumberMGI();
+	public String getMgiNumber();
 	
-	public void setNumberMGI(String numberMGI);
+	public void setMgiNumber(String mgiNumber);
 
     public String getComments();
     

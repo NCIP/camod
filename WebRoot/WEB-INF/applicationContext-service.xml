@@ -31,6 +31,9 @@
     <!-- chemicalClassManager   -->    
     <bean id="chemicalClassManager" class="gov.nih.nci.camod.service.impl.ChemicalClassManagerImpl"/>
 
+    <!-- carcinogenExposureManager -->
+    <bean id="carcinogenExposureManager" class="gov.nih.nci.camod.service.impl.CarcinogenExposureManagerImpl"/>
+
     <!-- clinicalMarkerManager -->
     <bean id="clinicalMarkerManager" class="gov.nih.nci.camod.service.impl.ClinicalMarkerManagerImpl"/>
            
@@ -85,14 +88,18 @@
     <!-- transgeneManager -->
     <bean id="transgeneManager" class="gov.nih.nci.camod.service.impl.TransgeneManagerImpl"/>
     
-    <!-- taxonManager -->
-    <bean id="taxonManager" class="gov.nih.nci.camod.service.impl.TaxonManagerImpl"/>
+    <!-- speciesManager -->
+    <bean id="speciesManager" class="gov.nih.nci.camod.service.impl.SpeciesManagerImpl"/>
     
     <!-- sexDistributionManager -->
     <bean id="sexDistributionManager" class="gov.nih.nci.camod.service.impl.SexDistributionManagerImpl"/>    
 
     <!--  spontaneousMutation -->
     <bean id="spontaneousMutationManager" class="gov.nih.nci.camod.service.impl.SpontaneousMutationManagerImpl"/>
+
+    <!-- strainManager -->
+    <bean id="strainManager" class="gov.nih.nci.camod.service.impl.StrainManagerImpl"/>
+
     
     <!-- treatmentManager -->
     <bean id="treatmentManager" class="gov.nih.nci.camod.service.impl.TreatmentManagerImpl"/>    

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminModelsAssignmentPopulateAction.java,v 1.5 2005-10-24 13:28:17 georgeda Exp $
+ * $Id: AdminModelsAssignmentPopulateAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/24 13:28:17  georgeda
+ * Cleanup changes
+ *
  * Revision 1.4  2005/10/17 18:20:08  georgeda
  * Sort models
  *
@@ -72,7 +75,7 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 				List theModels = Search.query(theQBEModel);
 
 				// Create a display list
-				List theDisplayList = new ArrayList();
+				List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
 
 				// Add AnimalModel DTO's so that the paganation works quickly
 				for (int i = 0, j = theModels.size(); i < j; i++) {

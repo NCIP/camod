@@ -1,11 +1,11 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
-<%@ include file="/common/taglibs.jsp"%>
+<%@ include file="/common/taglibs.jsp" %>
 
 <%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
-<%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>	
-<%@ page import='gov.nih.nci.camod.Constants.*' %>
+<%@ page import="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm" %>
+<%@ page import='gov.nih.nci.camod.Constants.Dropdowns' %>
 <%@ page import="java.util.List" %>
 
 <!-- needed for tooltips -->
@@ -24,16 +24,16 @@ var cal1 = new CalendarPopup();
 	function chkOtherStrain() {
 	
 	    var strain = document.forms[0].ethinicityStrain;
-	    var otherStrain = document.forms[0].ethnicityStrainUnctrlVocab;
+	    var otherStrain = document.forms[0].otherEthnicityStrain;
 	
 	    chkOther(strain, otherStrain);  	
 	}
-	
+
 	function getOptions( control ) {
 		form = control.form;
 		form.action = "AnimalModelPopulateAction.do?method=setStrainDropdown&page=newModel";
 		form.submit();
-	}	
+	}
 	
 	function immediateRelease()
 	{
@@ -58,6 +58,9 @@ var cal1 = new CalendarPopup();
 	
 </SCRIPT>
 
+
+<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor" onsubmit="transferFields()">
+
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
@@ -81,7 +84,6 @@ var cal1 = new CalendarPopup();
 				<camod:cshelp mapId="model_characteristics_help" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
-				<html:form action="AnimalModelAction.do?method=save" focus="modelDescriptor" onsubmit="transferFields()">
 				<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
 			</td>
 		</tr>
@@ -106,13 +108,13 @@ var cal1 = new CalendarPopup();
 				<html:radio property="isToolMouse" value="no" /> No  
 			</td>
 		</tr>
-		
+
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formLabel"><label for="field3"><b>Species:</b></label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);" >
-					<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+				<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="getOptions(this);">
+					<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 				</html:select>			
 			</td>
 		</tr>
@@ -122,16 +124,16 @@ var cal1 = new CalendarPopup();
 			<td class="formLabel"><label for="field3"><b>Strain:</b></label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="ethinicityStrain" onclick="chkOtherStrain();">
-					<html:options name="<%= Dropdowns.STRAINDROP %>" />	
-				</html:select>
-			</td>
+					<html:options name="<%= Dropdowns.STRAINDROP %>" />
+			    </html:select>
+			</td>			
 		</tr>	
-
+		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">if other Strain:</label></td>
 			<td class="formField">					
-				<html:text styleClass="formFieldSized" property="ethnicityStrainUnctrlVocab" disabled="true" size="30"/>			
+				<html:text styleClass="formFieldSized" property="otherEthnicityStrain" disabled="true" size="30"/>			
 			</td>
 		</tr>
 

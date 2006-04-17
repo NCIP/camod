@@ -160,7 +160,7 @@
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 			<label for="field1">&nbsp;&nbsp;</label>
-			<html:text styleClass="formFieldUnSized" property="numberMGI" size="15" />
+			<html:text styleClass="formFieldUnSized" property="mgiNumber" size="15" />
 		</td>
 	</tr>
 	
@@ -210,6 +210,15 @@
 			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="30"  />
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Construct Sequence:<br>(Enter info only when uploading image)</label>
+		</td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="constructSequence" rows="4" cols="32"  />	
+		</td>
+	</tr>	
 
 	<tr>
 		<td align="right" colspan="3">

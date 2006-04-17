@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.37 2006-03-31 13:47:17 georgeda Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.38 2006-04-17 19:17:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2006/03/31 13:47:17  georgeda
+ * Changed the EVSTree call to work w/ new servers
+ *
  * Revision 1.36  2006/01/17 19:12:57  pandyas
  * Defect# 378: ToolTip to Organ/Tissue links to histopathology_help instead of xenograft_transplant_help
  *
@@ -70,7 +73,7 @@
 	}
 	
 	function chkOtherStrain() {
-		chkOther(document.forms[0].hostEthinicityStrain, document.forms[0].otherHostEthinicityStrain);
+		chkOther(document.forms[0].donorEthinicityStrain, document.forms[0].otherDonorEthinicityStrain);
 	}
 	
 	function chkObservation() {
@@ -86,7 +89,7 @@
 	}
 </SCRIPT>
 
-<html:form action="<%= actionName %>" focus="name">
+<html:form action="<%= actionName %>" focus="xenograftName">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -110,7 +113,7 @@
 		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-				<html:text styleClass="formFieldSized" property="name"  size="30" />
+				<html:text styleClass="formFieldSized" property="xenograftName"  size="30" />
 		</td>
 	</tr>
 
@@ -118,21 +121,21 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Donor Species:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="hostScientificName" onchange="getOptions(this);" >
-				<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+			<html:select styleClass="formFieldSized" size="1" property="donorScientificName" onchange="getOptions(this);" >
+				<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 			</html:select>
 		</td>
 	</tr>
 
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Donor Strain:</label></td>
+		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formRequiredLabel"><label for="field3">Donor Strain:</label></td>
 		<td class="formField">
 		<br>
 		<label for="field3">- if strain is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="hostEthinicityStrain" onchange="chkOtherStrain()">
+			<html:select styleClass="formFieldSized" size="1" property="donorEthinicityStrain" onchange="chkOtherStrain()">
 				<html:options name="<%= Dropdowns.STRAINDROP %>" />
 			</html:select>
 		</td>
@@ -142,7 +145,7 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">if other Strain:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="otherHostEthinicityStrain" size="30" />	
+			<html:text styleClass="formFieldSized"  property="otherDonorEthinicityStrain" size="30" />	
 		</td>
 	</tr>
 
@@ -158,7 +161,11 @@
 		<td class="formField">
 			<html:hidden property="organTissueCode"/>
 			<input type="hidden" name="organTissueName" />				
-			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+
+			 <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
+				<bean:message key="button.clearOrgan"/>
+	  		</html:submit>			
 		</td>
 	</tr>
 
@@ -201,7 +208,7 @@
 			<td class="formField">		
 				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-				<html:text styleClass="formFieldUnSized" size="15" property="ATCCNumber"  />
+				<html:text styleClass="formFieldUnSized" size="15" property="atccNumber"  />
 			</td>
 	</tr>		
 
@@ -235,6 +242,17 @@
 			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="15" />
 		</td>
 	</tr>
+	
+    <tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Growth Period:</label>
+			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.GROWTH_PERIOD" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">		
+			<html:text styleClass="formFieldUnSized" property="growthPeriod"  size="15" />
+		</td>
+	</tr>
+		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Site of Administration:</label>
@@ -262,7 +280,14 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Host Species / Strain:</label></td>
 		<td class="formField">
-				<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
+			<c:choose>
+				<c:when test="${empty modelstrain}">
+					<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>						
+				</c:when>
+				<c:otherwise>
+					<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
+				</c:otherwise>
+			</c:choose>		
 		</td>
 	</tr>		
 	

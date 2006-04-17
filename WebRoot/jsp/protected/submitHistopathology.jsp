@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/03/31 13:47:17  georgeda
+ * Changed the EVSTree call to work w/ new servers
+ *
  * Revision 1.19  2005/12/29 22:20:36  pandyas
  * removed disabled="true" on methodOfObservation field
  *
@@ -28,7 +31,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.20 2006-03-31 13:47:17 georgeda Exp $
+ * $Id: submitHistopathology.jsp,v 1.21 2006-04-17 19:17:23 pandyas Exp $
  *
  */   
 %>
@@ -140,7 +143,7 @@
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageOfOnset"  size="10" />
 			
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageOfOnsetUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>

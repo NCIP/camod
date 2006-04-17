@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManager.java,v 1.8 2005-11-09 00:17:06 georgeda Exp $
+ * $Id: TherapyManager.java,v 1.9 2006-04-17 19:13:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/09 00:17:06  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.7  2005/11/02 19:03:25  pandyas
  * Added e-mail functionality
  *
@@ -31,41 +34,6 @@ public interface TherapyManager {
 
     public void remove(String id, AnimalModel inAnimalModel) throws Exception;
 
-    /////////////////////////////////////////////////
-    // The interface specific create/updates
-    /////////////////////////////////////////////////
-    public Therapy create(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData);
-
-    public void update(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData, Therapy inTherapy) throws Exception;
-
-    public Therapy create(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData);
-
-    public void update(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData, Therapy inTherapy) throws Exception;
-
-    public Therapy create(AnimalModel inAnimalModel, RadiationData inRadiationData);
-
-    public void update(AnimalModel inAnimalModel, RadiationData inRadiationData, Therapy inTherapy) throws Exception;
-
-    public Therapy create(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData);
-
-    public void update(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData, Therapy inTherapy) throws Exception;
-
-    public Therapy create(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData);
-
-    public void update(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData, Therapy inTherapy) throws Exception;
-
-    public Therapy create(AnimalModel inAnimalModel, HormoneData inHormoneData);
-
-    public void update(AnimalModel inAnimalModel, HormoneData inHormoneData, Therapy inTherapy) throws Exception;
-
-    public Therapy create(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData);
-
-    public void update(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData, Therapy inTherapy) throws Exception;
-
-    public Therapy create(AnimalModel inAnimalModel, SurgeryData inSurgeryData);
-
-    public void update(AnimalModel inAnimalModel, SurgeryData inSurgeryData, Therapy inTherapy) throws Exception;
-    
     public Therapy create(AnimalModel inAnimalModel, TherapyData inTherapyData) throws Exception;
     
     public void update(AnimalModel inAnimalModel, TherapyData inTherapyData, Therapy inTherapy) throws Exception;    

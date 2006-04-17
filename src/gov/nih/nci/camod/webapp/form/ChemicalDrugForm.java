@@ -1,8 +1,11 @@
 /**
  *
- * $Id: ChemicalDrugForm.java,v 1.5 2005-10-20 20:32:12 pandyas Exp $
+ * $Id: ChemicalDrugForm.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/20 20:32:12  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -18,9 +21,6 @@ public class ChemicalDrugForm extends BaseForm implements Serializable, Chemical
      * Default empty constructor
      * 
      * @author pandyas
-     * 
-     * TODO To change the template for this generated type comment go to Window -
-     * Preferences - Java - Code Style - Code Templates
      */
     public ChemicalDrugForm() {
     }
@@ -28,30 +28,30 @@ public class ChemicalDrugForm extends BaseForm implements Serializable, Chemical
     protected String name;
     protected String otherName;
     protected String dosage;
-    protected String NSCNumber;
-    protected String CASNumber;
+    protected String dosageUnit;    
+    protected String nscNumber;
+    protected String casNumber;
     protected String administrativeRoute;
     protected String otherAdministrativeRoute;
     protected String regimen;
     protected String ageAtTreatment;
+    protected String ageAtTreatmentUnit;    
     protected String type;
-    protected String doseUnit;
-    protected String ageUnit;
 
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatment;
     }
 
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeAtTreatmentUnit(String ageAtTreatment) {
+        this.ageAtTreatment = ageAtTreatment;
     }
 
-    public String getDoseUnit() {
-        return doseUnit;
+    public String getDosageUnit() {
+        return dosageUnit;
     }
 
-    public void setDoseUnit(String d) {
-        this.doseUnit = d;
+    public void setDosageUnit(String dosageUnit) {
+        this.dosageUnit = dosageUnit;
     }
 
     /**
@@ -100,33 +100,33 @@ public class ChemicalDrugForm extends BaseForm implements Serializable, Chemical
     }
 
     /**
-     * @return Returns the NSCNumber.
+     * @return Returns the nscNumber.
      */
-    public String getNSCNumber() {
-        return NSCNumber;
+    public String getNscNumber() {
+        return nscNumber;
     }
 
     /**
-     * @param NSCNumber
-     *            The NSCNumber to set.
+     * @param nscNumber
+     *            The nscNumber to set.
      */
-    public void setNSCNumber(String NSCNumber) {
-        this.NSCNumber = NSCNumber;
+    public void setNscNumber(String nscNumber) {
+        this.nscNumber = nscNumber;
     }
 
     /**
-     * @return Returns the CASNumber.
+     * @return Returns the casNumber.
      */
-    public String getCASNumber() {
-        return CASNumber;
+    public String getCasNumber() {
+        return casNumber;
     }
 
     /**
-     * @param CASNumber
-     *            The CASNumber to set.
+     * @param casNumber
+     *            The casNumber to set.
      */
-    public void setCASNumber(String CASNumber) {
-        this.CASNumber = CASNumber;
+    public void setCasNumber(String casNumber) {
+        this.casNumber = casNumber;
     }
 
     /**

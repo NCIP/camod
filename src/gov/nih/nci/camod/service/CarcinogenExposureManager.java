@@ -1,0 +1,70 @@
+/**
+ * 
+ * $Id: CarcinogenExposureManager.java,v 1.1 2006-04-17 19:13:16 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
+package gov.nih.nci.camod.service;
+
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
+import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
+import gov.nih.nci.camod.webapp.form.GrowthFactorData;
+import gov.nih.nci.camod.webapp.form.HormoneData;
+import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
+import gov.nih.nci.camod.webapp.form.RadiationData;
+import gov.nih.nci.camod.webapp.form.SurgeryData;
+import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
+
+/**
+ * Interface for managing the Carcinogen Exposure objects
+ */
+public interface CarcinogenExposureManager
+{
+    public CarcinogenExposure get(String id) throws Exception;
+
+    public void save(CarcinogenExposure carcinogenExposure) throws Exception;
+
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception;
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, HormoneData inHormoneData);
+
+    public void update(AnimalModel inAnimalModel, HormoneData inHormoneData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData);
+
+    public void update(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+    
+    public CarcinogenExposure create(AnimalModel inAnimalModel, RadiationData inRadiationData);
+
+    public void update(AnimalModel inAnimalModel, RadiationData inRadiationData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+
+    public CarcinogenExposure create(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData);
+
+    public void update(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+
+    public CarcinogenExposure create(AnimalModel inAnimalModel, SurgeryData inSurgeryData);
+
+    public void update(AnimalModel inAnimalModel, SurgeryData inSurgeryData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+    
+    
+    /////////////////////////////////////////////////
+    // The interface specific create/updates
+    /////////////////////////////////////////////////
+    public CarcinogenExposure create(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData);
+    
+    public void update(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData, CarcinogenExposure inCarcinogenExposure) throws Exception;    
+
+    public CarcinogenExposure create(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData);
+
+    public void update(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+
+    public CarcinogenExposure create(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData);
+
+    public void update(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData, CarcinogenExposure inCarcinogenExposure) throws Exception;
+    
+}

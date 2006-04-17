@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationAction.java,v 1.13 2005-11-14 14:21:06 georgeda Exp $
+ * $Id: PublicationAction.java,v 1.14 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/14 14:21:06  georgeda
+ * Handle delete of child publications
+ *
  * Revision 1.12  2005/11/09 00:17:25  georgeda
  * Fixed delete w/ constraints
  *
@@ -76,7 +79,8 @@ public final class PublicationAction extends BaseAction {
 
 		log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
 				+ "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
-				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
+				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid()
+                + "\n\t J Number: " + pubForm.getJaxJNumber()+ "\n\t Start Page: "
 				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
 				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t ACellID: "
 				+ pubForm.getACellID() + "\n\t ATherapyID: " + pubForm.getATherapyID() + "\n\t APubID: "
@@ -137,7 +141,8 @@ public final class PublicationAction extends BaseAction {
 		log.debug("<PublicationAction save> following Characteristics:" + "\n\t name: " + pubForm.getName()
 				+ "\n\t Aurthur: " + pubForm.getAuthors() + "\n\t Year: " + pubForm.getYear() + "\n\t Volume: "
 				+ pubForm.getVolume() + "\n\t PMID: " + pubForm.getPmid() + "\n\t Start Page: "
-				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() + "\n\t Title: "
+				+ pubForm.getStartPage() + "\n\t End Page: " + pubForm.getEndPage() 
+                + "\n\t J Number: " + pubForm.getJaxJNumber() + "\n\t Title: "
 				+ pubForm.getTitle() + "\n\t journal: " + pubForm.getJournal() + "\n\t ACellID: "
 				+ pubForm.getACellID() + "\n\t ATherapyID: " + pubForm.getATherapyID() + "\n\t APubID: "
 				+ pubForm.getAPubID() + "\n\t FirstTimeReported: " + pubForm.getFirstTimeReported() + "\n\t user: "

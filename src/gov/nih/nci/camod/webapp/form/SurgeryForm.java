@@ -1,8 +1,7 @@
 /*
- * Created on Aug 19, 2005
+ * $Id: SurgeryForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -11,8 +10,10 @@ import java.io.Serializable;
 /**
  * @author pandyas
  * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
+ * $Id: SurgeryForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
  */
 public class SurgeryForm extends BaseForm implements Serializable, SurgeryData {
 
@@ -20,11 +21,6 @@ public class SurgeryForm extends BaseForm implements Serializable, SurgeryData {
 
     /**
      * Default empty constructor
-     * 
-     * @author pandyas
-     * 
-     * TODO To change the template for this generated type comment go to Window -
-     * Preferences - Java - Code Style - Code Templates
      */
     public SurgeryForm() {
     }
@@ -33,15 +29,16 @@ public class SurgeryForm extends BaseForm implements Serializable, SurgeryData {
     protected String otherName;
     protected String regimen;
     protected String ageAtTreatment;
+    protected String ageAtTreatmentUnit;    
     protected String type;
-    protected String ageUnit;
 
-    public String getAgeUnit() {
-        return ageUnit;
+
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatmentUnit;
     }
 
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit) {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
     }
 
     /**

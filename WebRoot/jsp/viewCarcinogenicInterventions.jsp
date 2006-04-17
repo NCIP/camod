@@ -24,8 +24,8 @@
 			<br>
 			
 			<!--   Start Chemical / Drug Section -->
-			<c:set var="agentType" value="Chemical / Drug"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Chemical / Drug"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">
 
@@ -54,28 +54,28 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>
-					<c:if test="${not empty cd.agent.nscNumber}">
+					<c:if test="${not empty cd.environmentalFactor.nscNumber}">
 						<br>NSC: 
 						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.agent.nscNumber}"/>">
-						    <c:out value="${cd.agent.nscNumber}"/>
+						    <c:out value="${cd.environmentalFactor.nscNumber}"/>
 						</a>
 					</c:if>
-					<c:if test="${not empty cd.agent.casNumber}">
+					<c:if test="${not empty cd.environmentalFactor.casNumber}">
 						<br>CAS: 
 						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.agent.casNumber}"/>">
-						    <c:out value="${cd.agent.casNumber}"/>
+						    <c:out value="${cd.environmentalFactor.casNumber}"/>
 						</a>    
 					</c:if>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
@@ -91,7 +91,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -103,8 +103,8 @@
 			</c:if>
 
 			<!--   Start Environmental Factor Section -->
-			<c:set var="agentType" value="Environment"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Environment"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -132,16 +132,16 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
@@ -157,7 +157,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -213,7 +213,7 @@
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -225,8 +225,8 @@
 			</c:if>
 
 			<!--   Start Growth Factor Section -->
-			<c:set var="agentType" value="Growth Factor"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Growth Factor"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -253,11 +253,11 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -278,7 +278,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -291,8 +291,8 @@
 
 
 			<!--   Start Hormone Section -->
-			<c:set var="agentType" value="Hormone"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Hormone"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -318,16 +318,16 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
@@ -343,7 +343,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -355,8 +355,8 @@
 			</c:if>
 
 			<!--   Start Nutritional Factor Section -->
-			<c:set var="agentType" value="Nutrition"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Nutrition"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -382,11 +382,11 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
@@ -397,7 +397,7 @@
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="20%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -410,8 +410,8 @@
 
 
 			<!--   Start Radiation Section -->
-			<c:set var="agentType" value="Radiation"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Radiation"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -437,16 +437,16 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
@@ -462,7 +462,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -474,8 +474,8 @@
 			</c:if>
 			
 			<!--   Start Surgery / Other Section -->
-			<c:set var="agentType" value="Other"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Other"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -501,11 +501,11 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
@@ -513,7 +513,7 @@
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="20%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
@@ -525,8 +525,8 @@
 			</c:if>
 
      		<!--   Start Viral Treatment Section -->
-			<c:set var="agentType" value="Viral"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[agentType]}"/>
+			<c:set var="environmentalFactorType" value="Viral"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -554,16 +554,16 @@
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
-						<c:when test="${empty cd.agent.name}">
-							<c:out value="${cd.agent.nameUnctrlVocab}"/>
+						<c:when test="${empty cd.environmentalFactor.name}">
+							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.agent.name}"/>
+							<c:out value="${cd.environmentalFactor.name}"/>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
@@ -579,7 +579,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;
+					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;

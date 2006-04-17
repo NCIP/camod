@@ -1,11 +1,23 @@
+/**
+ * 
+ * $Id: AvailabilityForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
 /**
  * @author pandyas
  * 
- * $Id: AvailabilityForm.java,v 1.2 2005-10-26 20:14:25 pandyas Exp $
+ * $Id: AvailabilityForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/26 20:14:25  pandyas
+ * implemented model availability
+ *
  * Revision 1.1  2005/10/21 16:06:33  pandyas
  * implementation of animal availability
  *

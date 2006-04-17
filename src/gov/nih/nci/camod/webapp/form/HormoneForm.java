@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: HormoneForm.java,v 1.6 2005-10-20 20:34:30 pandyas Exp $
+ * $Id: HormoneForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/20 20:34:30  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -16,32 +19,26 @@ public class HormoneForm extends BaseForm implements Serializable, HormoneData {
     
     private static final long serialVersionUID = 3257215453799404851L;
     
-	/**
-	 * Default empty constructor
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
-	 */
-	
+
 	public HormoneForm() {}
 	
 	protected String name;
 	protected String otherName;
 	protected String dosage;
-	protected String doseUnit;
+	protected String dosageUnit;
 	protected String regimen;
     protected String administrativeRoute;
     protected String otherAdministrativeRoute;
     protected String ageAtTreatment;
-    protected String ageUnit;
+    protected String ageAtTreatmentUnit;
     protected String type;	
 	
-	public String getDoseUnit() {
-		return doseUnit;
+	public String getDosageUnit() {
+		return dosageUnit;
 	}
 	
-	public void setDoseUnit(String d ) {
-		this.doseUnit = d;		
+	public void setDosageUnit(String dosageUnit ) {
+		this.dosageUnit = dosageUnit;		
 	}
 	
 	/**
@@ -136,18 +133,18 @@ public class HormoneForm extends BaseForm implements Serializable, HormoneData {
         this.ageAtTreatment = ageAtTreatment;
     }
     /**
-     * @return Returns the ageUnit.
+     * @return Returns the ageAtTreatmentUnit.
      */
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatmentUnit;
     }
 
     /**
-     * @param ageUnit
-     *            The ageUnit to set.
+     * @param ageAtTreatmentUnit
+     *            The ageAtTreatmentUnit to set.
      */
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit) {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
     }
     /**
      * @return Returns the type.

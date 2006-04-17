@@ -71,7 +71,8 @@
 					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.treatment.schedule}"/>&nbsp;</td>
 					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.treatment.route}"/>&nbsp;</td>
 					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.treatment.vehicle}"/>&nbsp;</td>
-					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.treatment.dosage}"/>&nbsp;</td>
+					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosageUnit}"/></td>
 			
 					<td class="<c:out value="${tdClass}"/>">												
 						<c:choose>

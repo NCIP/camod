@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: DiseaseManagerImpl.java,v 1.3 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: DiseaseManagerImpl.java,v 1.4 2006-04-17 19:11:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.2  2005/11/07 20:43:07  pandyas
  * modified getAll(), save(), rmove() and/or getByName (if applicable) to the current signature that throws exceptions and calls the super
  *
@@ -22,7 +25,6 @@ import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
-
 import java.util.List;
 
 public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
@@ -77,4 +79,40 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
         }
         return theDisease;
     }
+    
+    public Disease getOrCreate(String inDiagnosisCode, String inDiseaseName) throws Exception {
+
+        log.info("<DiseaseManagerImpl> Entering getOrCreate");
+
+        Disease theQBEDisease = new Disease();
+ 
+        // Covers hack for text input of diseases, but reuses text match if found
+        if (inDiagnosisCode != null && !inDiagnosisCode.equals("000000")) {
+            theQBEDisease.setConceptCode(inDiagnosisCode);
+        
+        } else {
+            theQBEDisease.setConceptCode("000000"); 
+            theQBEDisease.setName(inDiseaseName);
+        }
+
+        Disease theDisease = null;
+        try {
+            List theList = Search.query(theQBEDisease);
+            
+            // Doesn't exist. Use the QBE disease since it has the same data
+            if (theList != null && theList.size() > 0) {
+                theDisease = (Disease) theList.get(0);
+            }
+            else {
+               log.info("<DiseaseManagerImpl> No matching strains. Create new one");
+               theDisease = theQBEDisease;
+               theDisease.setConceptCode(inDiagnosisCode);
+            }
+        } catch (Exception e) {
+            log.error("Error querying for matching strain object.  Creating new one.", e);
+            theDisease = theQBEDisease;
+        }
+
+        return theDisease;
+    }          
 }

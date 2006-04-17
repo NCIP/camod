@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: EnvironmentalFactorForm.java,v 1.8 2005-10-20 20:33:24 pandyas Exp $
+ * $Id: EnvironmentalFactorForm.java,v 1.9 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/10/20 20:33:24  pandyas
+ * javadocs
+ *
  * Revision 1.7  2005/09/27 19:17:10  georgeda
  * Refactor of CI managers
  *
@@ -26,12 +29,12 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable, E
     protected String name;
     protected String otherName;
     protected String dosage;
-    protected String doseUnit;
+    protected String dosageUnit;
     protected String administrativeRoute;
     protected String otherAdministrativeRoute;
     protected String regimen;
     protected String ageAtTreatment;
-    protected String ageUnit;
+    protected String ageAtTreatmentUnit;
     protected String type;
 
     /**
@@ -82,16 +85,16 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable, E
     /**
      * @return Returns the doseUnit.
      */
-    public String getDoseUnit() {
-        return doseUnit;
+    public String getDosageUnit() {
+        return dosageUnit;
     }
 
     /**
-     * @param doseUnit
+     * @param dosageUnit
      *            The dosageUnit to set.
      */
-    public void setDoseUnit(String doseUnit) {
-        this.doseUnit = doseUnit;
+    public void setDosageUnit(String dosageUnit) {
+        this.dosageUnit = dosageUnit;
     }
 
     /**
@@ -155,18 +158,18 @@ public class EnvironmentalFactorForm extends BaseForm implements Serializable, E
     }
 
     /**
-     * @return Returns the ageUnit.
+     * @return Returns the ageAtTreatmentUnit.
      */
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatmentUnit;
     }
 
     /**
-     * @param ageUnit
-     *            The ageUnit to set.
+     * @param ageAtTreatmentUnit
+     *            The ageAtTreatmentUnit to set.
      */
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit) {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
     }
 
     /**

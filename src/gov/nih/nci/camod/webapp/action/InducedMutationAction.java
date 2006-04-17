@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: InducedMutationAction.java,v 1.10 2006-04-17 19:09:41 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -117,12 +126,12 @@ public final class InducedMutationAction extends BaseAction {
 
         log.info("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "
                 + inducedMutationForm.getType() + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
-                + "\n\t getCASNumber: " + inducedMutationForm.getCASNumber() + "\n\t getGeneId: "
+                + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() + "\n\t getGeneId: "
                 + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
                 + "\n\t getDescription: " + inducedMutationForm.getDescription() + "\n\t getObservation: "
                 + inducedMutationForm.getObservation() + "\n\t getMethodObservation: "
-                + inducedMutationForm.getMethodOfObservation() + "\n\t getNumberMGI: "
-                + inducedMutationForm.getNumberMGI()
+                + inducedMutationForm.getMethodOfObservation() + "\n\t getMgiNumber: "
+                + inducedMutationForm.getMgiNumber()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {

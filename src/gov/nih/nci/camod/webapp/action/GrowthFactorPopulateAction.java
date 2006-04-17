@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GrowthFactorPopulateAction.java,v 1.10 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: GrowthFactorPopulateAction.java,v 1.11 2006-04-17 19:09:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.9  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -21,14 +24,12 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.GrowthFactorForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -46,41 +47,44 @@ public class GrowthFactorPopulateAction extends BaseAction {
 
 		GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 
-		String aTherapyID = request.getParameter("aTherapyID");
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-		Therapy therapy = therapyManager.get(aTherapyID);
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
+        
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        CarcinogenExposure ce = carcinogenExposureManager.get(aCarcinogenExposureID);
 
 		// Handle back-arrow on the delete
-		if (therapy == null) {
+		if (ce == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aTherapyID", aTherapyID);
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 			
 			// Set the otherName and/or the selected name attribute
-			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
 				growthFactorForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				growthFactorForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+				growthFactorForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
 			} else {
-				growthFactorForm.setName(therapy.getAgent().getName());
+				growthFactorForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
 			// Set the other administrative route and/or the selected
 			// administrative
 			// route
-			if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+			if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
 				growthFactorForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				growthFactorForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+				growthFactorForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
 			} else {
-				growthFactorForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+				growthFactorForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
 			}
 
-			if (therapy.getTreatment().getSexDistribution() != null) {
-				growthFactorForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			if (ce.getTreatment().getSexDistribution() != null) {
+				growthFactorForm.setType(ce.getTreatment().getSexDistribution().getType());
 			}
-			growthFactorForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-			growthFactorForm.setDosage(therapy.getTreatment().getDosage());
-			growthFactorForm.setRegimen(therapy.getTreatment().getRegimen());
+			growthFactorForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+            growthFactorForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
+			growthFactorForm.setDosage(ce.getTreatment().getDosage());
+            growthFactorForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+			growthFactorForm.setRegimen(ce.getTreatment().getRegimen());
 		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the

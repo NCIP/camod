@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.78 2005-12-06 19:51:25 georgeda Exp $
+ * $Id: Constants.java,v 1.79 2006-04-17 19:15:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.78  2005/12/06 19:51:25  georgeda
+ * Defect #255 - add SSL
+ *
  * Revision 1.77  2005/11/28 18:02:10  georgeda
  * Defect #182.  Get unique set of organs and only display metas. next to the originating organ
  *
@@ -206,6 +209,12 @@ public class Constants {
      * entered
      */
     public static final String USERMODELLIST = "usermodellist";
+    
+    /**
+     * Used to store the species for the animal model 
+     * used to disable the Organ/Disease tree for non-mouse models.
+     */ 
+    public static final String AMMODELSPECIES = "animalmodelspecies";    
 
     public interface BundleKeys {
 
@@ -273,12 +282,25 @@ public class Constants {
         public static final String ADD_BLANK_AND_OTHER_OPTION = "ADD_BLANK_AND_OTHER_OPTION";
 
         public static final String OTHER_OPTION = "Other";
+        
+        public static final String NOT_SPECIFIED_OPTION = "Not specified";
+        
+        /* 3 species from config */
+        public static final String NEWSPECIESDROP = "ModelSpecies.txt";        
 
+        /* 3 species from db for seach screens -  */
         public static final String SPECIESDROP = "speciesdrop.db";
+        
+        // All species from config
+        public static final String HOSTSPECIESDROP = "HostSpecies.txt";        
 
-        public static final String NEWSPECIESDROP = "ModelSpecies.txt";
-
-        public static final String STRAINDROP = "straindrop.db";
+        /* Various Screens - all species from DB */
+        public static final String SPECIESQUERYDROP = "speciesquerydrop.db";        
+        
+        public static final String STRAINTEXTDROP = "StrainText.txt";
+        
+        /*Various Screens - all strains for a species from DB */
+        public static final String STRAINDROP = "straindrop.db";  
 
         public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
 
@@ -294,7 +316,7 @@ public class Constants {
 
         public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
 
-        public static final String HOSTSPECIESDROP = "HostSpecies.txt";
+
 
         // Various Dose Units
         public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
@@ -324,6 +346,8 @@ public class Constants {
         public static final String STAININGDROP = "Staining.txt";
 
         // Specific to a single screen
+        public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
+        
         public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
 
         public static final String ENVIRONFACTORDROP = "envfactordrop.db";
@@ -346,13 +370,13 @@ public class Constants {
 
         public static final String XENOGRAFTADMINSITESDROP = "XenograftAdministrativeSites.txt";
 
-        public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
-
         public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
         public static final String EXPRESSIONLEVEL = "expressionlevel.db";
 
         // Query dropdowns
+        public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
+        
         public static final String CHEMICALDRUGQUERYDROP = "chemdrugquerydrop.db";
 
         public static final String GROWTHFACTORQUERYDROP = "growfactorquerydrop.db";
@@ -364,10 +388,6 @@ public class Constants {
         public static final String VIRUSQUERYDROP = "virusquerydrop.db";
 
         public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
-
-        public static final String SPECIESQUERYDROP = "speciesquerydrop.db";
-
-        public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
 
         public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
 
@@ -446,6 +466,10 @@ public class Constants {
         public static final String ACTION = "submitAction";
 
         public static final String MODELID = "aModelID";
+        
+        public static final String PUBID = "APubID";        
+        
+        public static final String CELLID = "ACellID";         
 
         public static final String PERSONID = "aPersonID";
 
@@ -560,6 +584,7 @@ public class Constants {
     public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
     public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
     public static final String NSC_NUMBER = "nsc";
+    
 
     // /////////////////////////////////////////////////////////////
     // Submission specific constants

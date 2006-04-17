@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: GenomicSegmentAction.java,v 1.16 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -45,12 +54,12 @@ public final class GenomicSegmentAction extends BaseAction {
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
-                + genomicSegmentForm.getLocationOfIntegration() + "\n\t getOtherLocationOfIntegration: "
-                + genomicSegmentForm.getOtherLocationOfIntegration() + "\n\t getSegmentName: "
+                + genomicSegmentForm.getLocationOfIntegration() + "\n\t getIsRandom() "
+                + genomicSegmentForm.getIsRandom() + "\n\t getSegmentName: "
                 + genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
                 + genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: " + genomicSegmentForm.getComments()
-                + "\n\t getCloneDesignator: " + genomicSegmentForm.getCloneDesignator() + "\n\t getNumberMGI: "
-                + genomicSegmentForm.getNumberMGI() + "\n\t getDescription: " + genomicSegmentForm.getDescription()
+                + "\n\t getCloneDesignator: " + genomicSegmentForm.getCloneDesignator() + "\n\t getMgiNumber: "
+                + genomicSegmentForm.getMgiNumber() + "\n\t getDescription: " + genomicSegmentForm.getDescription()
                 + "\n\t getFileServerLocation: " + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
                 + genomicSegmentForm.getTitle() + "\n\t"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
@@ -149,8 +158,8 @@ public final class GenomicSegmentAction extends BaseAction {
                         + genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
                         + genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: "
                         + genomicSegmentForm.getComments() + "\n\t getCloneDesignator: "
-                        + genomicSegmentForm.getCloneDesignator() + "\n\t getNumberMGI: "
-                        + genomicSegmentForm.getNumberMGI() + "\n\t getDescription: "
+                        + genomicSegmentForm.getCloneDesignator() + "\n\t getMgiNumber: "
+                        + genomicSegmentForm.getMgiNumber() + "\n\t getDescription: "
                         + genomicSegmentForm.getDescription() + "\n\t getFileServerLocation: "
                         + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
                         + genomicSegmentForm.getTitle()

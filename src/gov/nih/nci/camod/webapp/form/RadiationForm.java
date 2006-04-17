@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: RadiationForm.java,v 1.5 2005-10-20 20:35:27 pandyas Exp $
+ * $Id: RadiationForm.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/20 20:35:27  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -17,9 +20,6 @@ public class RadiationForm extends BaseForm implements Serializable, RadiationDa
 
     /**
      * Default empty constructor
-     * 
-     * TODO To change the template for this generated type comment go to Window -
-     * Preferences - Java - Code Style - Code Templates
      */
     public RadiationForm() {
     }
@@ -27,12 +27,12 @@ public class RadiationForm extends BaseForm implements Serializable, RadiationDa
     protected String name;
     protected String otherName;
     protected String dosage;
-    protected String doseUnit;
+    protected String dosageUnit;
     protected String administrativeRoute;
     protected String otherAdministrativeRoute;
     protected String regimen;
     protected String ageAtTreatment;
-    protected String ageUnit;
+    protected String ageAtTreatmentUnit;
     protected String type;
 
     /**
@@ -81,18 +81,18 @@ public class RadiationForm extends BaseForm implements Serializable, RadiationDa
     }
 
     /**
-     * @return Returns the doseUnit.
+     * @return Returns the dosageUnit.
      */
-    public String getDoseUnit() {
-        return doseUnit;
+    public String getDosageUnit() {
+        return dosageUnit;
     }
 
     /**
-     * @param doseUnit
+     * @param dosageUnit
      *            The dosageUnit to set.
      */
-    public void setDoseUnit(String doseUnit) {
-        this.doseUnit = doseUnit;
+    public void setDosageUnit(String dosageUnit) {
+        this.dosageUnit = dosageUnit;
     }
 
     /**
@@ -156,18 +156,18 @@ public class RadiationForm extends BaseForm implements Serializable, RadiationDa
     }
 
     /**
-     * @return Returns the ageUnit.
+     * @return Returns the ageAtTreatmentUnit.
      */
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatmentUnit;
     }
 
     /**
-     * @param ageUnit
-     *            The ageUnit to set.
+     * @param ageAtTreatmentUnit
+     *            The ageAtTreatmentUnit to set.
      */
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit) {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
     }
 
     /**

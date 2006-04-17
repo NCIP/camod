@@ -6,7 +6,7 @@
 
 <%@ page buffer="32kb"%>
 
-<% pageContext.getSession().setAttribute("READDISCLAIMER", "true"); %>
+<% pageContext.getSession().setAttribute("READDISCLAIMER", "true");  %>
 
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	

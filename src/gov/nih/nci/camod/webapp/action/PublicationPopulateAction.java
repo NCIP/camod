@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: PublicationPopulateAction.java,v 1.14 2006-04-17 19:09:41 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -62,6 +71,9 @@ public class PublicationPopulateAction extends BaseAction {
 			if (thePublication.getEndPage() != null) {
 				pubForm.setEndPage(thePublication.getEndPage().toString());
 			}
+            if (thePublication.getJaxJNumber() != null) {
+                pubForm.setJaxJNumber(thePublication.getJaxJNumber());
+            }            
 			if (thePublication.getPmid() != null) {
 				pubForm.setPmid(thePublication.getPmid().toString());
 			}

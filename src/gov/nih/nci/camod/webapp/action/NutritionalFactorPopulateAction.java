@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorPopulateAction.java,v 1.10 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: NutritionalFactorPopulateAction.java,v 1.11 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.9  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -21,8 +24,8 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -47,34 +50,34 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 		// Create a form to edit
 		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-		Therapy therapy = therapyManager.get(aTherapyID);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        CarcinogenExposure ce = carcinogenExposureManager.get(aCarcinogenExposureID); 
 
 		// Handle back-arrow on the delete
-		if (therapy == null) {
+		if (ce == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aTherapyID", aTherapyID);
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
 			// Set the otherName and/or the selected name attribute
-			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
 				nutritForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				nutritForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+				nutritForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
 			} else {
-				nutritForm.setName(therapy.getAgent().getName());
+				nutritForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
-			if (therapy.getTreatment().getSexDistribution() != null) {
-				nutritForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			if (ce.getTreatment().getSexDistribution() != null) {
+				nutritForm.setType(ce.getTreatment().getSexDistribution().getType());
 			}
-			nutritForm.setDosage(therapy.getTreatment().getDosage());
-			nutritForm.setRegimen(therapy.getTreatment().getRegimen());
-			nutritForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
+			nutritForm.setDosage(ce.getTreatment().getDosage());
+            nutritForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+			nutritForm.setRegimen(ce.getTreatment().getRegimen());
+			nutritForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+            nutritForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
 
 		}
 

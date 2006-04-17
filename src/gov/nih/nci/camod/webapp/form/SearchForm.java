@@ -1,7 +1,10 @@
 /**
- * $Id: SearchForm.java,v 1.7 2005-11-16 19:43:30 georgeda Exp $
+ * $Id: SearchForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/16 19:43:30  georgeda
+ * Added clear to search forms
+ *
  * Revision 1.6  2005/11/07 16:54:51  georgeda
  * Fixed problem w/ advanced search options being used in simple search
  *
@@ -26,6 +29,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     protected String organ;
     protected String species;
     protected String chemicalDrug;
+    protected String comment;
     protected String hormone;
     protected String growthFactor;
     protected String radiation;
@@ -65,6 +69,14 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     public void setChemicalDrug(String chemicalDrug) {
         this.chemicalDrug = chemicalDrug;
     }
+    
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }    
 
     public String getKeyword() {
         return keyword;

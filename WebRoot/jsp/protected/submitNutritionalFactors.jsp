@@ -10,19 +10,19 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aTherapyID = request.getParameter( "aTherapyID" );
+	String aCarcinogenExposureID = request.getParameter( "aCarcinogenExposureID" );
 	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
-	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
+	//if aCarcinogenExposureID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "NutritionalFactorAction.do?method=save";
 	
-	if ( aTherapyID != null && aTherapyID.length() > 0 && isDeleted == null) {
+	if ( aCarcinogenExposureID != null && aCarcinogenExposureID.length() > 0 && isDeleted == null) {
 		actionName = "NutritionalFactorAction.do?method=edit";
     }
     else {
-	    aTherapyID = "";
+	    aCarcinogenExposureID = "";
 	}
 %>
 
@@ -76,7 +76,7 @@
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage" size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="dosageUnit" >												
 				<html:options name="<%= Dropdowns.NUTFACTORUNITSDROP %>"/>					
 			</html:select>	
 		</td>
@@ -98,7 +98,7 @@
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageAtTreatmentUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -127,14 +127,14 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
   				  
-  				  <c:if test="${not empty aTherapyID}">
+  				  <c:if test="${not empty aCarcinogenExposureID}">
 	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>				
 			      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aTherapyID" value="<%= aTherapyID %>">
+				  <input type="hidden" name="aCarcinogenExposureID" value="<%= aCarcinogenExposureID %>">
 				  	
 			  </html:form>			
 			</TABLE>

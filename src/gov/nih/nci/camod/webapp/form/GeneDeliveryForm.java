@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryForm.java,v 1.11 2005-10-20 20:22:54 pandyas Exp $
+ * $Id: GeneDeliveryForm.java,v 1.12 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/10/20 20:22:54  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -16,9 +19,6 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
 	/**
 	 * Default empty constructor
 	 * @author rajputs
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public GeneDeliveryForm() {}
 	
@@ -28,7 +28,7 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
 	protected String regimen;
     protected String type;
     protected String ageAtTreatment;    
-    protected String ageUnit;	
+    protected String ageAtTreatmentUnit;	
 
 	protected String organ;
 	protected String organTissueName;
@@ -112,17 +112,17 @@ public class GeneDeliveryForm extends BaseForm implements Serializable, GeneDeli
         this.ageAtTreatment = ageAtTreatment;
     }    
     /**
-     * @return Returns the ageUnit.
+     * @return Returns the ageAtTreatmentUnit.
      */    
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatmentUnit;
     }
     /**
-     * @param ageUnit
-     *            The ageUnit to set.
+     * @param ageAtTreatmentUnit
+     *            The ageAtTreatmentUnit to set.
      */
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit) {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
     }    
 	
 	public String getOrgan() {

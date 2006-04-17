@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationData.java,v 1.2 2005-11-01 18:14:28 schroedn Exp $
+ * $Id: PublicationData.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/11/01 18:14:28  schroedn
+ * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
+ *
  * Revision 1.1  2005/10/27 12:53:09  georgeda
  * Refactor of publication manager
  *
@@ -15,57 +18,62 @@ package gov.nih.nci.camod.webapp.form;
  * Interface for publication data
  * 
  */
-public interface PublicationData {
+public interface PublicationData
+{
 
-	public String getFirstTimeReported();
+    public String getAuthors();
 
-	public void setFirstTimeReported(String firstTimeReported);
+    public void setAuthors(String authors);
 
-	public String getAuthors();
+    public String getName();
 
-	public void setAuthors(String authors);
+    public void setName(String name);
 
-	public String getName();
+    public String getPmid();
 
-	public void setName(String name);
+    public void setPmid(String pmid);
 
-	public String getPmid();
+    public String getTitle();
 
-	public void setPmid(String pmid);
+    public void setTitle(String title);
 
-	public String getTitle();
+    public String getYear();
 
-	public void setTitle(String title);
+    public void setYear(String year);
 
-	public String getYear();
+    public String getJournal();
 
-	public void setYear(String year);
+    public void setJournal(String journal);
 
-	public String getJournal();
+    public String getVolume();
 
-	public void setJournal(String journal);
+    public void setVolume(String volume);
 
-	public String getVolume();
+    public String getStartPage();
 
-	public void setVolume(String volume);
+    public void setStartPage(String startPage);
 
-	public String getStartPage();
+    public String getEndPage();
 
-	public void setStartPage(String startPage);
+    public void setEndPage(String endPage);
 
-	public String getEndPage();
+    public String getFirstTimeReported();
 
-	public void setEndPage(String endPage);
-	
-	public String getACellID();
-	
-	public void setACellID(String aCellID);
-	
-	public String getAPubID();
-	
-	public void setAPubID(String aPubID);
-	
-	public String getATherapyID();
-	
-	public void setATherapyID(String aTherapyID);
+    public void setFirstTimeReported(String firstTimeReported);
+
+    public String getJaxJNumber();
+
+    public void setJaxJNumber(String jaxJNumber);
+
+    public String getACellID();
+
+    public void setACellID(String aCellID);
+
+    public String getAPubID();
+
+    public void setAPubID(String aPubID);
+
+    public String getATherapyID();
+
+    public void setATherapyID(String aTherapyID);
 }

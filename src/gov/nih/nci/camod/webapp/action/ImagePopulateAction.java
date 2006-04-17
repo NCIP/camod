@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: ImagePopulateAction.java,v 1.13 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -23,6 +32,8 @@ public class ImagePopulateAction extends BaseAction {
 		String aImageID = request.getParameter("aImageID");
 
 		Image inImage = ImageManagerSingleton.instance().get(aImageID);
+        
+        
 
 		// Handle back arrow
 		if (inImage == null) {
@@ -38,8 +49,8 @@ public class ImagePopulateAction extends BaseAction {
 				imageForm.setFileServerLocation(inImage.getFileServerLocation());
 				imageForm.setDescriptionOfConstruct(inImage.getDescription());
 				
-				imageForm.setStaining( inImage.getStaining() );
-				imageForm.setOtherStaining( inImage.getStainingUnctrlVocab() );
+				imageForm.setStainingMethod( inImage.getStainingMethod().getName() );
+				imageForm.setOtherStainingMethod( inImage.getStainingMethod().getNameUnctrlVocab() );
 				
                 imageForm.setThumbUrl(inImage.getThumbUrl());
                 imageForm.setImageUrl(inImage.getImageUrl());

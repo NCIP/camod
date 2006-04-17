@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: includeAgentDetails.jsp,v 1.6 2005-11-29 21:47:41 pandyas Exp $
+ * $Id: includeAgentDetails.jsp,v 1.7 2006-04-17 19:08:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/29 21:47:41  pandyas
+ * Defect #100: Modified formatting of clinical trials and agent tables
+ *
  * Revision 1.5  2005/11/29 20:26:40  pandyas
  * Defect #138: Added hyperlink to CAS field on Therapy search screen.  The two others mentioned in this defect were already linked.
  *
@@ -44,7 +47,7 @@
 	<td class="resultsBoxWhiteEnd" width="75%">
 	<ul>
 		<c:forEach var="item" items="${agt.chemicalClassCollection}" varStatus="stat">
-		<li> <c:out value="${item.chemicalClassName}"/> </li>
+		<li> <c:out value="${item.name}"/> </li>
 		</c:forEach>
 	</ul>&nbsp;
 	</td>
@@ -54,7 +57,7 @@
 	<td class="resultsBoxGreyEnd" width="75%">
 	<ul>
 		<c:forEach var="item" items="${agt.biologicalProcessCollection}" varStatus="stat">
-		<li> <c:out value="${item.processName}"/> </li>
+		<li> <c:out value="${item.name}"/> </li>
 		</c:forEach>
 	</ul>&nbsp;
 	</td>
@@ -64,7 +67,7 @@
 	<td class="resultsBoxWhiteEnd" width="75%">
 	<ul>
 		<c:forEach var="item" items="${agt.agentTargetCollection}" varStatus="stat">
-		<li> <c:out value="${item.targetName}"/> </li>
+		<li> <c:out value="${item.name}"/> </li>
 		</c:forEach>
 	</ul>&nbsp;
 	</td>

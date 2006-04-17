@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: BaseForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
@@ -25,7 +34,7 @@ import org.apache.struts.validator.ValidatorForm;
  * </p>
  * 
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
- * @version $Revision: 1.4 $ $Date: 2005-09-20 14:12:10 $
+ * @version $Revision: 1.5 $ $Date: 2006-04-17 19:09:19 $
  */
 public class BaseForm extends ValidatorForm implements Serializable {
 

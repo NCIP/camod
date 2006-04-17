@@ -1,7 +1,10 @@
 /**
- * $Id: GrowthFactorAction.java,v 1.11 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: GrowthFactorAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.10  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -25,9 +28,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.GrowthFactorForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,21 +66,19 @@ public class GrowthFactorAction extends BaseAction {
 
 		System.out.println("<GrowthFactorAction edit> Entering... ");
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+        // Grab the current CarcinogenExposure we are working with related to this animalModel
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 		
 		GrowthFactorForm growthFactorForm = (GrowthFactorForm) form;
 
 		System.out.println("<GrowthFactorAction editing> editing... " + "\n\t name: " + growthFactorForm.getName()
 				+ "\n\t otherName: " + growthFactorForm.getOtherName() + "\n\t type: " + growthFactorForm.getType()
 				+ "\n\t regimen: " + growthFactorForm.getRegimen() + "\n\t dosage: " + growthFactorForm.getDosage()
-				+ "\n\t doseUnit: " + growthFactorForm.getDoseUnit() + "\n\t ageAtTreatment: "
-				+ growthFactorForm.getAgeAtTreatment() + "\n\t ageUnit: " + growthFactorForm.getAgeUnit());
+				+ "\n\t dosageUnit: " + growthFactorForm.getDosageUnit() + "\n\t ageAtTreatment: "
+				+ growthFactorForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + growthFactorForm.getAgeAtTreatmentUnit());
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
 
@@ -89,7 +90,7 @@ public class GrowthFactorAction extends BaseAction {
             
             if ("Delete".equals(theAction)) {
                 
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("growthFactor.delete.successful"));
@@ -97,8 +98,9 @@ public class GrowthFactorAction extends BaseAction {
 
 			} else {
 
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, growthFactorForm, theTherapy);
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, growthFactorForm, theCarcinogenExposure);
+
 
 				// Add a message to be displayed in submitOverview.jsp saying
 				// you've
@@ -145,16 +147,16 @@ public class GrowthFactorAction extends BaseAction {
 		System.out.println("<GrowthFactorAction save> Adding... " + "\n\t name: " + growthFactorForm.getName()
 				+ "\n\t otherName: " + growthFactorForm.getOtherName() + "\n\t type: " + growthFactorForm.getType()
 				+ "\n\t regimen: " + growthFactorForm.getRegimen() + "\n\t dosage: " + growthFactorForm.getDosage()
-				+ "\n\t doseUnit: " + growthFactorForm.getDoseUnit() + "\n\t administrativeRoute: "
+				+ "\n\t dosageUnit: " + growthFactorForm.getDosageUnit() + "\n\t administrativeRoute: "
 				+ growthFactorForm.getAdministrativeRoute() + "\n\t ageAtTreatment: "
-				+ growthFactorForm.getAgeAtTreatment() + "\n\t ageUnit: " + growthFactorForm.getAgeUnit()
+				+ growthFactorForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + growthFactorForm.getAgeAtTreatmentUnit()
 				+ "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-			animalModelManager.addTherapy(animalModel, growthFactorForm);
+			animalModelManager.addCarcinogenExposure(animalModel, growthFactorForm);
 
 			ActionMessages msg = new ActionMessages();
 			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("growthFactor.creation.successful"));

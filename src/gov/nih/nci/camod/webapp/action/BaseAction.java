@@ -1,9 +1,3 @@
-/**
- * $Log: not supported by cvs2svn $
- * 
- * $Id: BaseAction.java,v 1.2 2006-03-30 21:16:00 georgeda Exp $
- * 
- */
 package gov.nih.nci.camod.webapp.action;
 
 import java.util.HashMap;
@@ -56,9 +50,9 @@ public class BaseAction extends MappingDispatchAction
      *
      * @return Resource key / method name map
      */
-    public Map getKeyMethodMap()
+    public Map<Integer, String> getKeyMethodMap()
     {
-        return new HashMap();
+        return new HashMap<Integer, String>();
     }
 
     /**

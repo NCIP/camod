@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: AgentTargetManagerSingleton.java,v 1.3 2006-04-17 19:11:05 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.service.AgentTargetManager;

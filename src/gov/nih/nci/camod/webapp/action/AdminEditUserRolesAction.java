@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AdminEditUserRolesAction.java,v 1.4 2005-11-16 15:31:16 georgeda Exp $
+ *  $Id: AdminEditUserRolesAction.java,v 1.5 2006-04-17 19:09:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.4  2005/11/16 15:31:16  georgeda
+ *  Defect #41. Clean up of email functionality
+ *
  *  Revision 1.3  2005/11/07 13:53:18  georgeda
  *  Dynamically update roles
  *
@@ -30,13 +33,9 @@ import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.webapp.form.RolesAssignmentForm;
 import gov.nih.nci.common.persistence.Search;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -67,7 +66,7 @@ public class AdminEditUserRolesAction extends BaseAction {
 
 					log.debug("Changing the roles for user: " + thePerson.getDisplayName());
 
-					List theRolesList = new ArrayList();
+					Set theRolesList = new HashSet();
 
 					if (theForm.isCoordinator() == true) {
 						Role theQBERole = new Role();

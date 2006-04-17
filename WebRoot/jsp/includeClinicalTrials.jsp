@@ -27,6 +27,7 @@
 				PI:<c:out value="${cpitem.PIName}"/><br/>
 				Phase: <c:out value="${cpitem.phase}"/><br/>
 				Status of Trial: <c:out value="${cpitem.currentStatus}"/><br/>
+
 			</td>
 		</tr>
 	</c:forEach>

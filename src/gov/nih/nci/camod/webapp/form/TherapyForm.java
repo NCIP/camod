@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: TherapyForm.java,v 1.8 2005-12-29 18:29:59 pandyas Exp $
+ * $Id: TherapyForm.java,v 1.9 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/12/29 18:29:59  pandyas
+ * Clean up - removed code for TumorResponse and TumorAgeUnit
+ *
  * Revision 1.7  2005/10/26 14:10:49  georgeda
  * Added other administrative route to therapy
  *
@@ -29,8 +32,8 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     private static final long serialVersionUID = 3257095453799404851L;
 
     protected String name;
-    protected String NSCNumber;
-    protected String CASNumber;
+    protected String nscNumber;
+    protected String casNumber;
     protected String toxicityGrade;
     protected String[] chemicalClasses;
     protected String[] selectedChemicalClasses;
@@ -39,16 +42,17 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     protected String[] targets;
     protected String[] selectedTargets;
     protected String dosage;
-    protected String doseUnit;
+    protected String dosageUnit;
     protected String type;
     protected String ageAtTreatment;
-    protected String ageUnit;
+    protected String ageAtTreatmentUnit;
     protected String administrativeRoute;
     protected String otherAdministrativeRoute;
     protected String biomarker;
     protected String experiment;
     protected String results;
     protected String comments;
+    protected String tumorResponse;
 
     /**
      * @return Returns the name.
@@ -68,31 +72,31 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     /**
      * @return Returns the NSCNumber.
      */
-    public String getNSCNumber() {
-        return NSCNumber;
+    public String getNscNumber() {
+        return nscNumber;
     }
 
     /**
      * @param NSCNumber
      *            The NSCNumber to set.
      */
-    public void setNSCNumber(String NSCNumber) {
-        this.NSCNumber = NSCNumber;
+    public void setNscNumber(String nscNumber) {
+        this.nscNumber = nscNumber;
     }
 
     /**
-     * @return Returns the CASNumber.
+     * @return Returns the casNumber.
      */
-    public String getCASNumber() {
-        return CASNumber;
+    public String getCasNumber() {
+        return casNumber;
     }
 
     /**
-     * @param CASNumber
-     *            The CASNumber to set.
+     * @param casNumber
+     *            The casNumber to set.
      */
-    public void setCASNumber(String CASNumber) {
-        this.CASNumber = CASNumber;
+    public void setCasNumber(String casNumber) {
+        this.casNumber = casNumber;
     }
 
     /**
@@ -216,18 +220,18 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     }
 
     /**
-     * @return Returns the doseUnit.
+     * @return Returns the dosageUnit.
      */
-    public String getDoseUnit() {
-        return doseUnit;
+    public String getDosageUnit() {
+        return dosageUnit;
     }
 
     /**
-     * @param doseUnit
+     * @param dosageUnit
      *            The dosageUnit to set.
      */
-    public void setDoseUnit(String doseUnit) {
-        this.doseUnit = doseUnit;
+    public void setDosageUnit(String dosageUnit) {
+        this.dosageUnit = dosageUnit;
     }
 
     /**
@@ -261,18 +265,18 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     }
 
     /**
-     * @return Returns the ageUnit.
+     * @return Returns the ageAtTreatmentUnit.
      */
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatmentUnit;
     }
 
     /**
-     * @param ageUnit
-     *            The ageUnit to set.
+     * @param ageAtTreatmentUnit
+     *            The ageAtTreatmentUnit to set.
      */
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit) {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
     }
 
     /**
@@ -349,6 +353,21 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     public void setComments(String comments) {
         this.comments = comments;
     }
+    /**
+     * @return Returns the tumorResponse.
+     */
+    public String getTumorResponse() {
+        return tumorResponse;
+    }
+
+    /**
+     * @param tumorResponse
+     *            The tumorResponse to set.
+     */
+    public void setTumorResponse(String tumorResponse) {
+        this.tumorResponse = tumorResponse;
+    }    
+    
     
     /**
      * @return Returns the other administrative route
@@ -367,8 +386,8 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         name = null;
-        NSCNumber = null;
-        CASNumber = null;
+        nscNumber = null;
+        casNumber = null;
         toxicityGrade = null;
         chemicalClasses = new String[0];
         selectedChemicalClasses = new String[0];
@@ -377,10 +396,10 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
         targets = new String[0];
         selectedTargets = new String[0];
         dosage = null;
-        doseUnit = null;
+        dosageUnit = null;
         type = null;
         ageAtTreatment = null;
-        ageUnit = null;
+        ageAtTreatmentUnit = null;
         administrativeRoute = null;
         biomarker = null;
         experiment = null;

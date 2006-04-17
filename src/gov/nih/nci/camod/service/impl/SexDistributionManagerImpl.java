@@ -1,9 +1,12 @@
 /**
  * @author
  * 
- * $Id: SexDistributionManagerImpl.java,v 1.6 2005-10-21 17:55:58 pandyas Exp $
+ * $Id: SexDistributionManagerImpl.java,v 1.7 2006-04-17 19:11:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/10/21 17:55:58  pandyas
+ * fixed exception message
+ *
  * Revision 1.5  2005/09/23 14:55:16  georgeda
  * Made SexDistribution a reference table
  *
@@ -26,13 +29,13 @@ import java.util.List;
 public class SexDistributionManagerImpl extends BaseManager implements SexDistributionManager {
 
     /**
-     * Get the SexDistribution by it's type
+     * Get the SexDistribution by it's type (name)
      * 
      * @param inType the type of the sex-distribution
      * 
      * @return the sex distribution that matches the type
      */
-    public SexDistribution getByType(String inType) {
+    public SexDistribution getByType(String inType)  {
 
         SexDistribution sexDistribution = null;
 
@@ -62,4 +65,13 @@ public class SexDistributionManagerImpl extends BaseManager implements SexDistri
 
         return sexDistribution;
     }
+    
+ 
+
+    public List getAll() throws Exception {
+        log.trace("In SexDistributionManagerImpl.getAll");
+        return super.getAll(SexDistribution.class);
+    }
+    
+    
 }

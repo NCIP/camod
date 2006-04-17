@@ -1,8 +1,9 @@
 /*
- * Created on Jun 24, 2005
+ * @author pandyas
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Id: EngineeredTransgeneForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -10,12 +11,6 @@ import java.io.Serializable;
 
 import org.apache.struts.upload.FormFile;
 
-/**
- * @author pandyas
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public class EngineeredTransgeneForm extends BaseForm implements Serializable, EngineeredTransgeneData {
     
     private static final long serialVersionUID = 3257305453799404851L;
@@ -23,18 +18,16 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	/**
 	 * Default empty constructor
 	 * @author pandyas
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public EngineeredTransgeneForm() {}
-	
-	protected String locationOfIntegration;
-	protected String otherLocationOfIntegration;
+
+    protected String constructSequence;    
+    protected String isRandom;
+    protected String locationOfIntegration;
 	protected String name;
 	protected String scientificName;
 	protected String otherScientificName;
-	protected String numberMGI;
+	protected String mgiNumber;
 	protected String function;
 	protected String conditionedBy;
 	protected String description;
@@ -62,7 +55,22 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
     protected String transgeneId;
     protected String imageUrl;
     protected String thumbUrl;
-	
+
+    /**
+     * @return Returns the constructSequence.
+     */
+    public String getConstructSequence()
+    {
+        return constructSequence;
+    }
+
+    /**
+     * @param constructSequence The constructSequence to set.
+     */
+    public void setConstructSequence(String constructSequence)
+    {
+        this.constructSequence = constructSequence;
+    }    
 	/**
 	 * @return Returns the locationOfIntegration.
 	 */
@@ -100,16 +108,16 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 		this.scientificName = scientificName;
 	}	
 	/**
-	 * @return Returns the numberMGI.
+	 * @return Returns the mgiNumber.
 	 */
-	public String getNumberMGI() {
-		return numberMGI;
+	public String getMgiNumber() {
+		return mgiNumber;
 	}
 	/**
-	 * @param numberMGI The numberMGI to set.
+	 * @param mgiNumber The mgiNumber to set.
 	 */
-	public void setNumberMGI(String numberMGI) {
-		this.numberMGI = numberMGI;
+	public void setMgiNumber(String mgiNumber) {
+		this.mgiNumber = mgiNumber;
 	}
 	/**
 	 * @return Returns the function.
@@ -171,11 +179,11 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getOtherLocationOfIntegration() {
-		return otherLocationOfIntegration;
+	public String getIsRandom() {
+		return isRandom;
 	}
-	public void setOtherLocationOfIntegration(String otherLocationOfIntegration) {
-		this.otherLocationOfIntegration = otherLocationOfIntegration;
+	public void setIsRandom(String isRandom) {
+		this.isRandom = isRandom;
 	}
 	public String getOtherScientificName() {
 		return otherScientificName;

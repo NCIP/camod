@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.14 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: ChemicalDrugAction.java,v 1.15 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.13  2005/11/02 21:47:01  georgeda
  * Fixed validate
  *
@@ -25,9 +28,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.ChemicalDrugForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,8 +61,8 @@ public class ChemicalDrugAction extends BaseAction {
 
 		System.out.println("<ChemicalDrugAction edit> Entering... ");
 
-		// Grab the current Therapy we are working with related to this animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+		// Grab the current CarcinogenExposure we are working with related to this animalModel
+		String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -69,11 +72,11 @@ public class ChemicalDrugAction extends BaseAction {
 		System.out.println("<ChemicalDrugAction editing> editing... " + "\n\t name: " + chemicalDrugForm.getName()
 				+ "\n\t otherName: " + chemicalDrugForm.getOtherName() + "\n\t type: " + chemicalDrugForm.getType()
 				+ "\n\t regimen: " + chemicalDrugForm.getRegimen() + "\n\t dosage: " + chemicalDrugForm.getDosage()
-				+ "\n\t doseUnit: " + chemicalDrugForm.getDoseUnit() + "\n\t ageAtTreatment: "
-				+ chemicalDrugForm.getAgeAtTreatment() + "\n\t ageUnit: " + chemicalDrugForm.getAgeUnit()
+				+ "\n\t dosageUnit: " + chemicalDrugForm.getDosageUnit() + "\n\t ageAtTreatment: "
+				+ chemicalDrugForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + chemicalDrugForm.getAgeAtTreatmentUnit()
 				+ "\n\t administrativeRoute: " + chemicalDrugForm.getAdministrativeRoute());
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
 		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {	    
@@ -83,7 +86,7 @@ public class ChemicalDrugAction extends BaseAction {
             
             if ("Delete".equals(theAction)) {
                 
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("chemicaldrug.delete.successful"));
@@ -91,8 +94,8 @@ public class ChemicalDrugAction extends BaseAction {
 
 			} else {
 
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, chemicalDrugForm, theTherapy);
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, chemicalDrugForm, theCarcinogenExposure);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("chemicaldrug.edit.successful"));
@@ -136,9 +139,9 @@ public class ChemicalDrugAction extends BaseAction {
 		System.out.println("<ChemicalDrugAction save> Adding... " + "\n\t name: " + chemicalDrugForm.getName()
 				+ "\n\t otherName: " + chemicalDrugForm.getOtherName() + "\n\t type: " + chemicalDrugForm.getType()
 				+ "\n\t regimen: " + chemicalDrugForm.getRegimen() + "\n\t dosage: " + chemicalDrugForm.getDosage()
-				+ "\n\t doseUnit: " + chemicalDrugForm.getDoseUnit() + "\n\t ageAtTreatment: "
-				+ chemicalDrugForm.getAgeAtTreatment() + "\n\t NSC: " + chemicalDrugForm.getNSCNumber() + "\n\t CAS: "
-				+ chemicalDrugForm.getCASNumber() + "\n\t ageUnit: " + chemicalDrugForm.getAgeUnit());
+				+ "\n\t dosageUnit: " + chemicalDrugForm.getDosageUnit() + "\n\t ageAtTreatment: "
+				+ chemicalDrugForm.getAgeAtTreatment() + "\n\t nscNumber: " + chemicalDrugForm.getNscNumber() + "\n\t CasNumber: "
+				+ chemicalDrugForm.getCasNumber() + "\n\t getAgeAtTreatmentUnit: " + chemicalDrugForm.getAgeAtTreatmentUnit());
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
@@ -146,7 +149,7 @@ public class ChemicalDrugAction extends BaseAction {
 
 		try {
 
-			animalModelManager.addTherapy(animalModel, chemicalDrugForm);
+			animalModelManager.addCarcinogenExposure(animalModel, chemicalDrugForm);
 
 			// Add a message to be displayed in submitOverview.jsp saying you've
 			// created a new model successfully

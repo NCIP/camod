@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.19 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: EmailActionImpl.java,v 1.20 2006-04-17 19:11:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.18  2005/12/08 19:06:10  georgeda
  * Defect #99, send e-mail to the coordinator
  *
@@ -185,7 +188,7 @@ public class EmailActionImpl extends BaseCurateableAction
                     valuesForVariables.put("name", theAnimalModel.getSubmitter().getDisplayName());
                     valuesForVariables.put("submitter", theAnimalModel.getSubmitter().getDisplayName());
                     valuesForVariables.put("modelstate", theAnimalModel.getState());
-                    valuesForVariables.put("species", theAnimalModel.getSpecies());
+                    valuesForVariables.put("species", theAnimalModel.getStrain().getSpecies());
                     valuesForVariables.put("piname", theAnimalModel.getPrincipalInvestigator().getDisplayName());
 
                     // launch the email

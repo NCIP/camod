@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: ImageData.java,v 1.4 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
 import org.apache.struts.upload.FormFile;
@@ -20,13 +29,13 @@ public interface ImageData {
 	
 	public void setFileServerLocation(String fileServerLocation);
 	
-	public String getOtherStaining();
+	public String getOtherStainingMethod();
 	
-	public void setOtherStaining(String otherStaining);
+	public void setOtherStainingMethod(String otherStaining);
 	
-	public String getStaining();
+	public String getStainingMethod();
 	
-	public void setStaining(String staining);
+	public void setStainingMethod(String staining);
 	
 	public String getTitle();
 	

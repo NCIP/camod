@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLineForm.java,v 1.9 2005-10-20 20:27:27 pandyas Exp $
+ * $Id: CellLineForm.java,v 1.10 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/10/20 20:27:27  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -18,9 +21,6 @@ public class CellLineForm extends BaseForm implements Serializable, CellLineData
 	/**
 	 * Default empty constructor
 	 * @author rajputs
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public CellLineForm() {}
 

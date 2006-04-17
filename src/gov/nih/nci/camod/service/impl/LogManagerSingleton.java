@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: LogManagerSingleton.java,v 1.3 2006-04-17 19:11:06 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.service.LogManager;
@@ -22,6 +31,9 @@ public class LogManagerSingleton
 
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/01/18 14:24:24  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.1  2005/09/12 18:22:10  georgeda
  * Curation changes and addition of e-mail
  * Revision 1.1 2005/09/08 17:37:10

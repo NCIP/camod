@@ -75,7 +75,10 @@
 		<tr>
 			<td class="resultsBoxWhite" width="5%">&nbsp;</td>
 			<td class="resultsBoxWhite" width="40%"><html:link action="AnimalModelPopulateAction?method=dropdown"><font color=red><b>Add New Model</font></b></html:link></td>
-			<td class="resultsBoxWhite" width="20%"><%= new java.util.Date() %></td>
+			<td class="resultsBoxWhite" width="20%">
+				<jsp:useBean id="now" class="java.util.Date" />
+				<fmt:formatDate value="${now}" type="date" pattern="yyyy-MM-dd" />
+			</td>
 			<td class="resultsBoxWhite" width="20%">&nbsp;</td>
 			<td class="resultsBoxWhiteEnd" width="5%">&nbsp;</td>
 		</tr>

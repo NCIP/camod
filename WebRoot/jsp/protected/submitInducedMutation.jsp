@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.26 2005-12-27 20:12:00 pandyas Exp $
+ * $Id: submitInducedMutation.jsp,v 1.27 2006-04-17 19:07:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2005/12/27 20:12:00  pandyas
+ * Moved html:form action, cleaned up script, removed disabled=true
+ *
  * Revision 1.25  2005/12/12 17:54:56  georgeda
  * Defect #268, added a return in front of all the confirms.
  *
@@ -114,7 +117,7 @@
 			<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
 			<label for="field1">&nbsp;&nbsp;</label>
-			<html:text styleClass="formFieldUnSized" property="CASNumber" size="15" />		
+			<html:text styleClass="formFieldUnSized" property="casNumber" size="15" />		
 		</td>
 	</tr>
 	
@@ -165,7 +168,7 @@
 		<td class="formField">
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="numberMGI" size="20" />		
+			<html:text styleClass="formFieldUnSized" property="mgiNumber" size="20" />		
 		</td>
 	</tr>
 	<tr>

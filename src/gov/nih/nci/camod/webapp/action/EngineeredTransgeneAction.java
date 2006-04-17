@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: EngineeredTransgeneAction.java,v 1.11 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -6,7 +15,6 @@ import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.EngineeredTransgeneManager;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneForm;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,10 +51,9 @@ public final class EngineeredTransgeneAction extends BaseAction {
 
         log.info("<EngineeredTransgeneAction save> following Characteristics:"
 
-        + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
-                + "\n\t getOtherLocationOfIntegration: " + engineeredTransgeneForm.getOtherLocationOfIntegration()
-
-                + "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
+                 + "\n\t getIsRandom: " + engineeredTransgeneForm.getIsRandom()
+                 + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
+                 + "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
                 + engineeredTransgeneForm.getScientificName() + "\n\t getOtherScientificName: "
                 + engineeredTransgeneForm.getOtherScientificName()
 
@@ -73,8 +80,8 @@ public final class EngineeredTransgeneAction extends BaseAction {
                 + "\n\t getSpliceSites_species: " + engineeredTransgeneForm.getSpliceSites_species()
                 + "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
 
-                + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getNumberMGI: "
-                + engineeredTransgeneForm.getNumberMGI() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
+                + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getMgiNumber: "
+                + engineeredTransgeneForm.getMgiNumber() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
                 + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription() + "\n\t getComments: "
                 + engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "
@@ -165,10 +172,8 @@ public final class EngineeredTransgeneAction extends BaseAction {
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<EngineeredTransgeneAction save> following Characteristics:"
-
-        + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
-                + "\n\t getOtherLocationOfIntegration: " + engineeredTransgeneForm.getOtherLocationOfIntegration()
-
+                + "\n\t getIsRandom: " + engineeredTransgeneForm.getIsRandom()
+                + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
                 + "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
                 + engineeredTransgeneForm.getScientificName() + "\n\t getOtherScientificName: "
                 + engineeredTransgeneForm.getOtherScientificName()
@@ -196,8 +201,8 @@ public final class EngineeredTransgeneAction extends BaseAction {
                 + "\n\t getSpliceSites_species: " + engineeredTransgeneForm.getSpliceSites_species()
                 + "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
 
-                + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getNumberMGI: "
-                + engineeredTransgeneForm.getNumberMGI() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
+                + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() + "\n\t getMgiNumber: "
+                + engineeredTransgeneForm.getMgiNumber() + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
                 + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription() + "\n\t getComments: "
                 + engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "

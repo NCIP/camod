@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: ClinicalMarkerAction.java,v 1.5 2005-11-09 00:17:25 georgeda Exp $
+ * $Id: ClinicalMarkerAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/09 00:17:25  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.4  2005/11/07 19:14:14  pandyas
  * modified for clinical marker screen
  *
@@ -58,7 +61,9 @@ public class ClinicalMarkerAction extends BaseAction {
 
 		log.debug("<HistopathologyAction saveClinicalMarker> following Characteristics:" 
 				+ "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() + "\n\t ClinicalMarkerID: " + aClinicalMarkerID
-				+ "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: "
+				+ "\n\t Name: " + clinicalMarkerForm.getName() 
+                + "\n\t otherName: " + clinicalMarkerForm.getOtherName()
+                + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean("clinicalMarkerManager");
@@ -129,6 +134,7 @@ public class ClinicalMarkerAction extends BaseAction {
 		System.out.println("<ClinicalMarkerAction save> following Characteristics:"
 				+ "\n\t ParentHistopathID: " + aHistopathologyID 
 				+ "\n\t Name: " + clinicalMarkerForm.getName()
+                + "\n\t otherName: " + clinicalMarkerForm.getOtherName()
 				+ "\n\t Value: " + clinicalMarkerForm.getValue() 
 				+ "\n\t user: "	+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 		

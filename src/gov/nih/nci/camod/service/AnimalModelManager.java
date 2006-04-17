@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.33 2005-11-14 14:17:17 georgeda Exp $
+ * $Id: AnimalModelManager.java,v 1.34 2006-04-17 19:13:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2005/11/14 14:17:17  georgeda
+ * Cleanup
+ *
  * Revision 1.32  2005/11/07 19:15:33  pandyas
  * modified for clinical marker screen
  *
@@ -75,6 +78,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2005/11/14 14:17:17  georgeda
+ * Cleanup
+ *
  * Revision 1.32  2005/11/07 19:15:33  pandyas
  * modified for clinical marker screen
  *
@@ -197,22 +203,22 @@ public interface AnimalModelManager {
 
     public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData) throws Exception;
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, ChemicalDrugData inChemicalDrugData) throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData)
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData)
             throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, RadiationData inRadiationData) throws Exception;
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, RadiationData inRadiationData) throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData) throws Exception;
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData) throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData) throws Exception;
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData) throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, HormoneData inHormoneData) throws Exception;
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, HormoneData inHormoneData) throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) throws Exception;
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) throws Exception;
 
-    public void addTherapy(AnimalModel inAnimalModel, SurgeryData inSurgeryData) throws Exception;
+    public void addCarcinogenExposure(AnimalModel inAnimalModel, SurgeryData inSurgeryData) throws Exception;
     
     public void addCellLine(AnimalModel inAnimalModel, CellLineData inCellLineData) throws Exception;    
 

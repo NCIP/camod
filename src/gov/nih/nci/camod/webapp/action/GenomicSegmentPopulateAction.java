@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: GenomicSegmentPopulateAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -35,14 +44,15 @@ public class GenomicSegmentPopulateAction extends BaseAction {
         } else {
             genomicSegmentForm.setSegmentId(aGenomicSegmentID);
 
-            if (theGenomicSegment.getLocationOfIntegration().equals("Random")) {
+            if (theGenomicSegment.getIsRandom().equals("Random")) {
+                genomicSegmentForm.setIsRandom("true");
                 genomicSegmentForm.setLocationOfIntegration(theGenomicSegment.getLocationOfIntegration());
             } else {
-                genomicSegmentForm.setLocationOfIntegration("Targeted");
-                genomicSegmentForm.setOtherLocationOfIntegration(theGenomicSegment.getLocationOfIntegration());
+                genomicSegmentForm.setIsRandom("false");
+                genomicSegmentForm.setLocationOfIntegration(theGenomicSegment.getLocationOfIntegration());
             }
 
-            SegmentType inSegmentType = (SegmentType) theGenomicSegment.getSegmentTypeCollection().get(0);
+            SegmentType inSegmentType = (SegmentType) theGenomicSegment.getSegmentType();
             genomicSegmentForm.setSegmentName(inSegmentType.getName());
 
             if (inSegmentType.getNameUnctrlVocab() != null) {
@@ -57,13 +67,16 @@ public class GenomicSegmentPopulateAction extends BaseAction {
 
             // Marker(s)
 
-            // Commentes
+            // Comments
             genomicSegmentForm.setComments(theGenomicSegment.getComments());
+            
+            // Construct Sequence
+            genomicSegmentForm.setConstructSequence(theGenomicSegment.getConstructSequence());            
 
             // MGI Number
             MutationIdentifier inMutationIdentifier = theGenomicSegment.getMutationIdentifier();
             if (inMutationIdentifier != null)
-                genomicSegmentForm.setNumberMGI(inMutationIdentifier.getNumberMGI().toString());
+                genomicSegmentForm.setMgiNumber(inMutationIdentifier.getMgiNumber());
 
             // Image
             Image inImage = theGenomicSegment.getImage();

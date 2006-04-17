@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyForm.java,v 1.6 2005-11-03 21:48:16 georgeda Exp $
+ * $Id: HistopathologyForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/03 21:48:16  georgeda
+ * Cleanup
+ *
  * Revision 1.5  2005/11/03 18:52:44  pandyas
  * Modified for histopathology screens
  *
@@ -14,10 +17,11 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 /**
- * @author pandyas
+ * 
+ * $Id: HistopathologyForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
+ * 
  */
 public class HistopathologyForm extends BaseForm implements Serializable, HistopathologyData  {
     
@@ -26,9 +30,6 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 	/**
 	 * Default empty constructor
 	 * @author pandyas
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public HistopathologyForm() {}
 	
@@ -41,7 +42,7 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
     protected String tumorClassification;
     
 	protected String ageOfOnset;
-    protected String ageUnit;
+    protected String ageOfOnsetUnit;
 	protected String weightOfTumor;
 	protected String volumeOfTumor;
 	protected String tumorIncidenceRate;
@@ -118,18 +119,18 @@ public class HistopathologyForm extends BaseForm implements Serializable, Histop
 		this.ageOfOnset = ageOfOnset;
 	}
     /**
-     * @return Returns the ageUnit.
+     * @return Returns the ageOfOnsetUnit.
      */
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeOfOnsetUnit() {
+        return ageOfOnsetUnit;
     }
 
     /**
-     * @param ageUnit
-     *            The ageUnit to set.
+     * @param ageOfOnsetUnit
+     *            The ageOfOnsetUnit to set.
      */
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeOfOnsetUnit(String ageOfOnsetUnit) {
+        this.ageOfOnsetUnit = ageOfOnsetUnit;
     }	
 	/**
 	 * @return Returns the weightOfTumor.

@@ -10,19 +10,19 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aTherapyID = request.getParameter( "aTherapyID" );
+	String aCarcinogenExposureID = request.getParameter( "aCarcinogenExposureID" );
     String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
     
-	//if aTherapyID is passed in, then we are dealing with a previously entered model and are editing it
+	//if aCarcinogenExposureID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
 	String actionName = "ChemicalDrugAction.do?method=save";
 	
-	if ( aTherapyID != null && aTherapyID.length() > 0 && isDeleted == null) {
+	if ( aCarcinogenExposureID != null && aCarcinogenExposureID.length() > 0 && isDeleted == null) {
 		actionName = "ChemicalDrugAction.do?method=edit";
 	}
 	else {
-	    aTherapyID = "";
+	    aCarcinogenExposureID = "";
 	}
 %>
 
@@ -55,10 +55,8 @@
 			<label for="field3">(if Chemical/Drug is not listed, then please<br>select "Other" from the list and specify it below)</label>
 			<br>
 			<br>
-	 
-			
 			<html:select styleClass="formFieldSized" size="1" property="name"  onclick="chkOtherName();">										
-				<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>					
+			<html:options name="<%= Dropdowns.CHEMICALDRUGDROP %>"/>						
 			</html:select>	
 		</td>
 	</tr>
@@ -79,7 +77,7 @@
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage"  size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="dosageUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>					
 			</html:select>	
 		</td>
@@ -94,7 +92,7 @@
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="15" property="NSCNumber"  />
+				<html:text styleClass="formFieldUnSized" size="15" property="nscNumber"  />
 			</td>
 	</tr>
 	<!-- changed link to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
@@ -107,7 +105,7 @@
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="15" property="CASNumber"  />
+				<html:text styleClass="formFieldUnSized" size="15" property="casNumber"  />
 			</td>
 	</tr>	
 	
@@ -151,7 +149,7 @@
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15" />
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageAtTreatmentUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -181,14 +179,14 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
   				  
-  				  <c:if test="${not empty aTherapyID}">
+  				  <c:if test="${not empty aCarcinogenExposureID}">
 	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>
 			      
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aTherapyID" value="<%= aTherapyID %>">
+				  <input type="hidden" name="aCarcinogenExposureID" value="<%= aCarcinogenExposureID %>">
 			
 			</TABLE>
 		</td>

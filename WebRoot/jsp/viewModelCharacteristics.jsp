@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.24 2005-12-08 21:45:18 georgeda Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.25 2006-04-17 19:08:19 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.24  2005/12/08 21:45:18  georgeda
+  *   Defect #259; handle PI availability for 2-tier data
+  *
   *   Revision 1.23  2005/11/28 13:54:23  georgeda
   *   Defect #207, handle nulls for pages w/ uncontrolled vocab
   *
@@ -86,26 +89,40 @@
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Species</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<c:out value="${mdl.species.scientificName}"/>
+				<c:out value="${mdl.strain.species.scientificName}"/>
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-			    <c:if test="${not empty mdl.species.ethnicityStrain}">
-				    <c:out value="${mdl.species.ethnicityStrain}"/>
+			    <c:if test="${not empty mdl.strain.name}">
+				    <c:out value="${mdl.strain.name}"/>
 				</c:if>
-				<c:if test="${not empty mdl.species.ethnicityStrainUnctrlVocab}">
-				    <c:out value="${mdl.species.ethnicityStrainUnctrlVocab}"/>
+				<c:if test="${not empty mdl.strain.nameUnctrlVocab}">
+				    <c:out value="${mdl.strain.nameUnctrlVocab}"/>
 				</c:if>
 				&nbsp;
 			</td>
-		</tr>		
+		</tr>
 		
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Experimental Design</b></td>
+			<td class="WhiteBox" width="20%"><b>Is This a Tool Mouse?</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
+						<c:choose>
+							<c:when test = "${mdl.isToolMouse == true}">
+								<c:out value="Yes"/>
+							</c:when>
+							<c:otherwise>
+								<c:out value="No"/>
+							</c:otherwise>
+						</c:choose>	
+			</td>
+		</tr>				
+		
+		<tr>
+			<td class="GreyBox" width="20%"><b>Experimental Design</b></td>
+			<td class="GreyBoxRightEnd" width="80%">
 				<P>
 				    <c:out value="${mdl.experimentDesign}" escapeXml="false" />&nbsp;
 				</P>			
@@ -113,24 +130,24 @@
 		</tr>		               
 
 		<tr>
-			<td class="GreyBox" width="20%"><b>Phenotype</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="WhiteBox" width="20%"><b>Phenotype</b></td>
+			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
 				<c:out value="${mdl.phenotype.description}" escapeXml="false"/>
 				</P>		
 			</td>
 		</tr>		
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Website for add. info</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="GreyBox" width="20%"><b>Website for add. info</b></td>
+			<td class="GreyBoxRightEnd" width="80%">
 				<P>
 				<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;
 				</P>
 			</td>
 		</tr>		
 		<tr>
-			<td class="GreyBox" width="20%"><b>Breeding Notes</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="WhiteBox" width="20%"><b>Breeding Notes</b></td>
+			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
 				<c:out value="${mdl.phenotype.breedingNotes}"/>&nbsp;
 				</P>		
@@ -138,15 +155,15 @@
 		</tr>		
 
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="GreyBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
+			<td class="GreyBoxRightEnd" width="80%">
 				<c:out value="${mdl.phenotype.sexDistribution.type}"/>&nbsp;
 			</td>
 		</tr>		               
         
 		<tr>
-			<td class="GreyBox" width="20%"><b>Submitted by</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="WhiteBox" width="20%"><b>Submitted by</b></td>
+			<td class="WhiteBoxRightEnd" width="80%">
 			    <c:if test="${not empty mdl.submitter.emailAddress}">
 				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>">
 				</c:if>
@@ -158,8 +175,8 @@
 		</tr>
                   
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Principal Investigator / Lab</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="GreyBox" width="20%"><b>Principal Investigator / Lab</b></td>
+			<td class="GreyBoxRightEnd" width="80%">
 				<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
 				    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
 				</c:if>
@@ -195,7 +212,7 @@
 				<c:out value="${av.name}"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="45%">
-					<c:set var="dist" value="${av.animalDistributorCollection[0]}"/>
+					<c:set var="dist" value="${av.animalDistributor}"/>
 					<c:choose>
 						<c:when test = "${dist.id == 1}">
 						    <c:choose>

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.39 2005-11-29 20:47:21 georgeda Exp $
+ * $Id: NewDropdownUtil.java,v 1.40 2006-04-17 19:08:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2005/11/29 20:47:21  georgeda
+ * Removed system.out
+ *
  * Revision 1.38  2005/11/16 21:36:40  georgeda
  * Defect #47, Clean up EF querying
  *
@@ -20,6 +23,7 @@ import gov.nih.nci.camod.service.*;
 import gov.nih.nci.camod.service.impl.CurationManagerImpl;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.common.persistence.Search;
+import gov.nih.nci.camod.service.SpeciesManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,60 +33,74 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class NewDropdownUtil {
+public class NewDropdownUtil
+{
 
     private static final Log log = LogFactory.getLog(NewDropdownUtil.class);
 
     private static Map ourFileBasedLists = new HashMap();
 
-    public static void populateDropdown(HttpServletRequest inRequest, String inDropdownKey, String inFilter)
-            throws Exception {
+    public static void populateDropdown(HttpServletRequest inRequest,
+                                        String inDropdownKey,
+                                        String inFilter) throws Exception
+    {
 
         log.trace("Entering NewDropdownUtil.populateDropdown");
 
         log.debug("Generating a dropdown for the following key: " + inDropdownKey);
 
         List theList = null;
-        if (inDropdownKey.indexOf(".txt") != -1) {
+        if (inDropdownKey.indexOf(".txt") != -1)
+        {
             theList = getTextFileDropdown(inRequest, inDropdownKey);
-        } else if (inDropdownKey.indexOf(".db") != -1) {
+        }
+        else if (inDropdownKey.indexOf(".db") != -1)
+        {
             theList = getDatabaseDropdown(inRequest, inDropdownKey, inFilter);
         }
 
         // Add a blank as the first line
-        if (Constants.Dropdowns.ADD_BLANK.equals(inFilter)) {
+        if (Constants.Dropdowns.ADD_BLANK.equals(inFilter))
+        {
             addBlank(theList);
         }
 
         // Add a blank as the first line
-        else if (Constants.Dropdowns.ADD_BLANK_OPTION.equals(inFilter)) {
+        else if (Constants.Dropdowns.ADD_BLANK_OPTION.equals(inFilter))
+        {
             addBlankOption(theList);
         }
 
         // Add a blank as the first line
-        else if (Constants.Dropdowns.ADD_OTHER.equals(inFilter)) {
+        else if (Constants.Dropdowns.ADD_OTHER.equals(inFilter))
+        {
             addOther(theList);
         }
 
         // Add a blank as the first line
-        else if (Constants.Dropdowns.ADD_OTHER_OPTION.equals(inFilter)) {
+        else if (Constants.Dropdowns.ADD_OTHER_OPTION.equals(inFilter))
+        {
             addOtherOption(theList);
         }
 
-        else if (Constants.Dropdowns.ADD_BLANK_AND_OTHER.equals(inFilter)) {
+        else if (Constants.Dropdowns.ADD_BLANK_AND_OTHER.equals(inFilter))
+        {
             addOther(theList);
             addBlank(theList);
         }
 
-        else if (Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION.equals(inFilter)) {
+        else if (Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION.equals(inFilter))
+        {
             addOtherOption(theList);
             addBlankOption(theList);
         }
 
-        if (theList == null) {
+        if (theList == null)
+        {
             throw new IllegalArgumentException("Unknown dropdown list key: " + inDropdownKey);
         }
 
@@ -91,162 +109,191 @@ public class NewDropdownUtil {
         log.trace("Exiting NewDropdownUtil.populateDropdown");
     }
 
-    private static List getDatabaseDropdown(HttpServletRequest inRequest, String inDropdownKey, String inFilter)
-            throws Exception {
+    private static List getDatabaseDropdown(HttpServletRequest inRequest,
+                                            String inDropdownKey,
+                                            String inFilter) throws Exception
+    {
 
-        log.trace("Entering NewDropdownUtil.getDatabaseDropdown");
+        log.info("Entering NewDropdownUtil.getDatabaseDropdown");
 
         List theReturnList = null;
 
         // Grab them for the first time
-        if (inDropdownKey.equals(Constants.Dropdowns.SPECIESDROP)) {
+        if (inDropdownKey.equals(Constants.Dropdowns.SPECIESDROP))
+        {
             theReturnList = getSpeciesList(inRequest, inFilter);
         }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP)) {
+        //modified for species from DB
+        else if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
+        {
             theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP)) {
-            theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
-        }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.STRAINDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.STRAINDROP))
+        {
             theReturnList = getStrainsList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.VIRALVECTORDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.VIRALVECTORDROP))
+        {
             theReturnList = getViralVectorList(inRequest);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVEL)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVEL))
+        {
             theReturnList = getExpressionLevelList(inRequest);
         }
 
         // Environmental Factors - Carciogenic Interventions
-        else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Other");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYQUERYDROP))
+        {
             theReturnList = getQueryOnlyEnvironmentalFactorList("Other");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Hormone");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEQUERYDROP))
+        {
             theReturnList = getQueryOnlyEnvironmentalFactorList("Hormone");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Growth Factor");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORQUERYDROP))
+        {
             theReturnList = getQueryOnlyEnvironmentalFactorList("Growth Factor");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Chemical / Drug");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGQUERYDROP))
+        {
             theReturnList = getQueryOnlyEnvironmentalFactorList("Chemical / Drug");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Viral");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSQUERYDROP))
+        {
             theReturnList = getQueryOnlyEnvironmentalFactorList("Viral");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Radiation");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONQUERYDROP))
+        {
             theReturnList = getQueryOnlyEnvironmentalFactorList("Radiation");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.NUTRITIONFACTORDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.NUTRITIONFACTORDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Nutrition");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Environment");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP))
+        {
             theReturnList = getEnvironmentalFactorList("Environment");
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORDROP))
+        {
             theReturnList = getPrincipalInvestigatorList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP))
+        {
             theReturnList = getQueryOnlyPrincipalInvestigatorList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP))
+        {
             theReturnList = getQueryOnlyInducedMutationAgentList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.USERSDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.USERSDROP))
+        {
             theReturnList = getUsersList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.CURATIONSTATESDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.CURATIONSTATESDROP))
+        {
             theReturnList = getCurationStatesList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.USERSFORROLEDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.USERSFORROLEDROP))
+        {
             theReturnList = getUsersForRoleList(inRequest, inFilter);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.ROLESDROP)) {
+        else if (inDropdownKey.equals(Constants.Dropdowns.ROLESDROP))
+        {
             theReturnList = getRolesList(inRequest);
         }
 
-        else {
+        else
+        {
             log.error("No matching dropdown for key: " + inDropdownKey);
             theReturnList = new ArrayList();
         }
 
-        log.trace("Exiting NewDropdownUtil.getDatabaseDropdown");
+        log.info("Exiting NewDropdownUtil.getDatabaseDropdown");
         return theReturnList;
     }
 
     // Get the context so we can get to our managers
-    private static WebApplicationContext getContext(HttpServletRequest inRequest) {
+    private static WebApplicationContext getContext(HttpServletRequest inRequest)
+    {
         return WebApplicationContextUtils.getRequiredWebApplicationContext(inRequest.getSession().getServletContext());
     }
 
     // Get a text file dropdown
-    private static synchronized List getTextFileDropdown(HttpServletRequest inRequest, String inDropdownKey)
-            throws Exception {
-
+    private static synchronized List getTextFileDropdown(HttpServletRequest inRequest,
+                                                         String inDropdownKey) throws Exception
+    {
         log.trace("Entering NewDropdownUtil.getTextFileDropdown");
 
         List theReturnList = new ArrayList();
 
-        if (ourFileBasedLists.containsKey(inDropdownKey)) {
+        if (ourFileBasedLists.containsKey(inDropdownKey))
+        {
             log.debug("Dropdown already cached");
             List theCachedList = (List) ourFileBasedLists.get(inDropdownKey);
             theReturnList.addAll(theCachedList);
-        } else {
-
-            String theFilename = inRequest.getSession().getServletContext().getRealPath("/config/dropdowns") + "/"
-                    + inDropdownKey;
+        }
+        else
+        {
+            String theFilename = inRequest.getSession().getServletContext().getRealPath("/config/dropdowns") + "/" + inDropdownKey;
 
             List theList = readListFromFile(theFilename);
 
             // Built a list. Add to static hash
-            if (theList.size() != 0) {
+            if (theList.size() != 0)
+            {
                 log.debug("Caching new dropdown: " + theList);
                 ourFileBasedLists.put(inDropdownKey, theList);
                 theReturnList.addAll(theList);
@@ -258,7 +305,8 @@ public class NewDropdownUtil {
     }
 
     // Read from a file
-    static private List readListFromFile(String inFilename) throws Exception {
+    static private List readListFromFile(String inFilename) throws Exception
+    {
         List theReturnList = new ArrayList();
 
         log.debug("Filename to read dropdown from: " + inFilename);
@@ -268,20 +316,26 @@ public class NewDropdownUtil {
         boolean isDropdownOption = false;
 
         String str;
-        while ((str = in.readLine()) != null) {
-            log.info("Reading value from file: " + str);
+        while ((str = in.readLine()) != null)
+        {
+            log.info("readListFromFile method: Reading value from file: " + str);
 
             // It's a DropdownOption file
-            if (str.indexOf("DROPDOWN_OPTION") > 0) {
+            if (str.indexOf("DROPDOWN_OPTION") > 0)
+            {
                 isDropdownOption = true;
-            } else if (isDropdownOption == true) {
+            }
+            else if (isDropdownOption == true)
+            {
                 StringTokenizer theTokenizer = new StringTokenizer(str);
                 String theLabel = theTokenizer.nextToken(",");
                 String theValue = theTokenizer.nextToken(",");
 
                 DropdownOption theDropdownOption = new DropdownOption(theLabel, theValue);
                 theReturnList.add(theDropdownOption);
-            } else {
+            }
+            else
+            {
                 theReturnList.add(str);
             }
         }
@@ -291,51 +345,79 @@ public class NewDropdownUtil {
     }
 
     /**
-     * Returns a list of all Species and Strains
+     * Returns a list of Species and Strains that are edited-approved (3 currently)
+     * Used for search screens
      * 
      * @return speciesNames
      * @throws Exception
      */
-    private static List getSpeciesList(HttpServletRequest inRequest, String inAddBlank) throws Exception {
-
-        // Get values for dropdown lists for Species, Strains
-        // First get a list of all taxons
-        // for each taxon, get it's scientificName (it's species name)
-        // for each unique species name retrieve all (if any) strain names
-        TaxonManager taxonManager = (TaxonManager) getContext(inRequest).getBean("taxonManager");
-
-        List taxonList = taxonManager.getAll();
-        List speciesNames = new ArrayList();
-        Taxon tmp;
-
-        if (taxonList != null) {
-            for (int i = 0; i < taxonList.size(); i++) {
-                tmp = (Taxon) taxonList.get(i);
-
-                if (tmp.getScientificName() != null) {
-                    // if the speciesName is not already in the List, add it
-                    // (only get unique names)
-                    if (!speciesNames.contains(tmp.getScientificName()))
-                        speciesNames.add(tmp.getScientificName());
+    protected static List getSpeciesList(HttpServletRequest inRequest,
+                                         String inAddBlank) throws Exception
+    { 
+        log.trace("Entering NewDropdownUtil.getSpeciesList");
+        
+        // Get values for dropdown lists for Species
+        // for each Species, get it's commonName (scientificName)
+        List theSpeciesList = QueryManagerSingleton.instance().getApprovedSpecies(inRequest);
+        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();         
+        
+        if (theSpeciesList != null)
+        {
+            for (int i = 0; i < theSpeciesList.size(); i++)
+            {
+                Species theSpecies = (Species) theSpeciesList.get(i);
+                if (theSpecies.getScientificName() != null)
+                {
+                    String theDisplayName = theSpecies.getDisplayName();
+                    if (theDisplayName.length() > 0)
+                    {
+                        DropdownOption theOption = new DropdownOption(theDisplayName, theSpecies.getScientificName());
+                        theReturnList.add(theOption);
+                    }
                 }
-            }
-        }
-
-        Collections.sort(speciesNames);
-        addOther(speciesNames);
-
-        return speciesNames;
+            } 
+        } 
+        log.trace("Exiting NewDropdownUtil.getQueryOnlySpeciesList");
+        return theReturnList; 
     }
 
     /**
-     * Returns a list of all Species and Strains
+     * Returns a list of all Species and Strains 
+     * Used for search screens
      * 
      * @return speciesNames
      * @throws Exception
      */
-    private static List getQueryOnlySpeciesList(HttpServletRequest inRequest, String inAddBlank) throws Exception {
-        return QueryManagerSingleton.instance().getQueryOnlySpecies();
+    private static List getQueryOnlySpeciesList(HttpServletRequest inRequest,
+                                                String inAddBlank) throws Exception
+    {
+        log.trace("Entering NewDropdownUtil.getQueryOnlySpeciesList");
+      
+        // Get values for dropdown lists for Species
+        // for each Species, get it's commonName (scientificName)
+        List theSpeciesList = QueryManagerSingleton.instance().getQueryOnlySpecies(inRequest);
+        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();         
+        
+        if (theSpeciesList != null)
+        {
+            for (int i = 0; i < theSpeciesList.size(); i++)
+            {
+                Species theSpecies = (Species) theSpeciesList.get(i);
+                if (theSpecies.getScientificName() != null)
+                {
+                    String theDisplayName = theSpecies.getDisplayName();
+                    if (theDisplayName.length() > 0)
+                    {
+                        DropdownOption theOption = new DropdownOption(theDisplayName, theSpecies.getScientificName());
+                        theReturnList.add(theOption);
+                    }
+                }
+            } 
+        } 
+        log.trace("Exiting NewDropdownUtil.getQueryOnlySpeciesList");
+        return theReturnList; 
     }
+    
 
     /**
      * Based on a species name retrieve a list of all Strains
@@ -344,47 +426,51 @@ public class NewDropdownUtil {
      * @return strainNames
      * @throws Exception
      */
-    private static List getStrainsList(HttpServletRequest inRequest, String speciesName) throws Exception {
+    private static List getStrainsList(HttpServletRequest inRequest,
+                                       String speciesName) throws Exception
+    {
+        log.info("Entering NewDropdownUtil.getStrainsList");
 
-        TaxonManager taxonManager = (TaxonManager) getContext(inRequest).getBean("taxonManager");
+        //Set constant for the Animal Model species here 
+        inRequest.getSession().setAttribute(Constants.AMMODELSPECIES, speciesName);
 
-        Species species = new Species();
-        species.setName(speciesName);
+        SpeciesManager speciesManager = (SpeciesManager) getContext(inRequest).getBean("speciesManager");
+        Species species = null;
+        
+        List<Strain> strainList = new ArrayList<Strain>();
+        List<String> strainNames = new ArrayList<String>();        
 
-        List strainList = new ArrayList();
-        List strainNames = new ArrayList();
+      if (speciesName != null && speciesName.length() > 0) {
+            species =  speciesManager.getByName(speciesName);
+            strainList = new ArrayList<Strain>(species.getStrainCollection());
+            
+         if (strainList.size() > 0)
+         {
+                //print out strain names                  
+                for (int i = 0; i < strainList.size(); i++)
+                {
+                    Strain strain = (Strain) strainList.get(i);
 
-        if (speciesName != null && speciesName.length() > 0) {
-            strainList = taxonManager.getStrains(species);
-
-            if (strainList != null) {
-                // print out strainNames
-                for (int j = 0; j < strainList.size(); j++) {
-                    Strain strain = (Strain) strainList.get(j);
-
-                    // strainNames.add(strain);
-
-                    if (strain.getName() != null) {
-
-                        if (!strainNames.contains(strain.getName())) {
+                    if (strain.getName() != null && !strainNames.contains(strain.getName()))
+                    {
+                            System.out.println("strain.getName(): " + strain.getName());                            
                             strainNames.add(strain.getName());
-                        }
                     }
                 }
-            }
-
             // Sort the list in 'abc' order
-            if (strainNames.size() > 0)
-                Collections.sort(strainNames);
-
+            Collections.sort(strainNames);
             addOther(strainNames);
             addBlank(strainNames);
-        } else {
-            addBlank(strainNames);
-        }
 
+        }  else
+            {
+                addBlank(strainNames);
+                addOther(strainNames);                
+            }
+        }        
         return strainNames;
     }
+
 
     /**
      * Returns a list of all Administrative Routes
@@ -392,24 +478,27 @@ public class NewDropdownUtil {
      * @return adminList
      * @throws Exception
      */
-    private static List getViralVectorList(HttpServletRequest inRequest) throws Exception {
+    private static List getViralVectorList(HttpServletRequest inRequest) throws Exception
+    {
 
         // Get values for dropdown lists for Species, Strains
-        GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getContext(inRequest).getBean(
-                "geneDeliveryManager");
+        GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getContext(inRequest).getBean("geneDeliveryManager");
 
-        List geneDeliveryList = null;
+        List<GeneDelivery> geneDeliveryList = null;
 
         geneDeliveryList = geneDeliveryManager.getAll();
 
-        List viralVectorList = new ArrayList();
+        List<String> viralVectorList = new ArrayList<String>();
         GeneDelivery tmp;
 
-        if (geneDeliveryList != null) {
-            for (int i = 0; i < geneDeliveryList.size(); i++) {
+        if (geneDeliveryList != null)
+        {
+            for (int i = 0; i < geneDeliveryList.size(); i++)
+            {
                 tmp = (GeneDelivery) geneDeliveryList.get(i);
 
-                if (tmp.getViralVector() != null) {
+                if (tmp.getViralVector() != null)
+                {
                     // if the name is not already in the List, add it
                     // (only get unique names)
                     if (!viralVectorList.contains(tmp.getViralVector()))
@@ -425,11 +514,12 @@ public class NewDropdownUtil {
     }
 
     /**
-     * Returns a list for a type of environmental Factore
+     * Returns a list for a type of environmental Factors
      * 
      * @return envList
      */
-    private static List getEnvironmentalFactorList(String type) throws Exception {
+    private static List getEnvironmentalFactorList(String type) throws Exception
+    {
         List theEnvFactorList = QueryManagerSingleton.instance().getEnvironmentalFactors(type);
 
         addOther(theEnvFactorList);
@@ -441,7 +531,8 @@ public class NewDropdownUtil {
      * 
      * @return envList
      */
-    private static List getQueryOnlyEnvironmentalFactorList(String type) throws Exception {
+    private static List getQueryOnlyEnvironmentalFactorList(String type) throws Exception
+    {
         List theEnvFactorList = QueryManagerSingleton.instance().getQueryOnlyEnvironmentalFactors(type);
         return theEnvFactorList;
     }
@@ -452,21 +543,25 @@ public class NewDropdownUtil {
      * @return list of PI's
      * @throws Exception
      */
-    private static List getPrincipalInvestigatorList(HttpServletRequest inRequest, String inAddBlank) throws Exception {
-
+    private static List getPrincipalInvestigatorList(HttpServletRequest inRequest,
+                                                     String inAddBlank) throws Exception
+    {
         log.trace("Entering NewDropdownUtil.getPrincipalInvestigatorList");
 
         List thePIList = QueryManagerSingleton.instance().getPrincipalInvestigators();
 
-        List theReturnList = new ArrayList();
+        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();
 
-        if (thePIList != null) {
-            for (int i = 0; i < thePIList.size(); i++) {
+        if (thePIList != null)
+        {
+            for (int i = 0; i < thePIList.size(); i++)
+            {
                 Person thePerson = (Person) thePIList.get(i);
-                if (thePerson.getIsPrincipalInvestigator() != null) {
-
+                if (thePerson.getIsPrincipalInvestigator() != null)
+                {
                     String theDisplayName = thePerson.getDisplayName();
-                    if (theDisplayName.length() > 0) {
+                    if (theDisplayName.length() > 0)
+                    {
                         DropdownOption theOption = new DropdownOption(theDisplayName, thePerson.getUsername());
                         theReturnList.add(theOption);
                     }
@@ -485,10 +580,11 @@ public class NewDropdownUtil {
      * @return list of PI's
      * @throws Exception
      */
-    private static List getQueryOnlyPrincipalInvestigatorList(HttpServletRequest inRequest, String inAddBlank)
-            throws Exception {
+    private static List getQueryOnlyPrincipalInvestigatorList(HttpServletRequest inRequest,
+                                                              String inAddBlank) throws Exception
+    {
 
-        log.trace("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
+        log.info("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
 
         return QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators();
     }
@@ -499,8 +595,9 @@ public class NewDropdownUtil {
      * @return list of agent names
      * @throws Exception
      */
-    private static List getQueryOnlyInducedMutationAgentList(HttpServletRequest inRequest, String inAddBlank)
-            throws Exception {
+    private static List getQueryOnlyInducedMutationAgentList(HttpServletRequest inRequest,
+                                                             String inAddBlank) throws Exception
+    {
 
         log.trace("Entering NewDropdownUtil.getQueryOnlyInducedMutationAgentList");
 
@@ -515,17 +612,21 @@ public class NewDropdownUtil {
      * @return list of users
      * @throws Exception
      */
-    private static List getUsersList(HttpServletRequest inRequest, String inAddBlank) throws Exception {
+    private static List getUsersList(HttpServletRequest inRequest,
+                                     String inAddBlank) throws Exception
+    {
 
         log.trace("Entering NewDropdownUtil.getUsersList");
 
         List thePersonList = Search.query(Person.class);
 
-        List theReturnList = new ArrayList();
+        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();
 
         // Add all of the display names
-        if (thePersonList != null) {
-            for (int i = 0; i < thePersonList.size(); i++) {
+        if (thePersonList != null)
+        {
+            for (int i = 0; i < thePersonList.size(); i++)
+            {
                 Person thePerson = (Person) thePersonList.get(i);
 
                 DropdownOption theOption = new DropdownOption(thePerson.getDisplayName(), thePerson.getId().toString());
@@ -545,23 +646,27 @@ public class NewDropdownUtil {
      * @return list of users
      * @throws Exception
      */
-    private static List getExpressionLevelList(HttpServletRequest inRequest) throws Exception {
-        // Get values for dropdown lists for Species, Strains
-        ExpressionLevelDescManager expressionLevelDescManager = (ExpressionLevelDescManager) getContext(inRequest)
-                .getBean("expressionLevelDescManager");
+    private static List getExpressionLevelList(HttpServletRequest inRequest) throws Exception
+    {
+        // Get values for dropdown lists for Expression Level
+        ExpressionLevelDescManager expressionLevelDescManager = (ExpressionLevelDescManager) getContext(inRequest).getBean(
+                                                                                                                           "expressionLevelDescManager");
 
         List expList = null;
 
         expList = expressionLevelDescManager.getAll();
 
-        List expressionLevelList = new ArrayList();
+        List<String> expressionLevelList = new ArrayList<String>();
         ExpressionLevelDesc tmp;
 
-        if (expList != null) {
-            for (int i = 0; i < expList.size(); i++) {
+        if (expList != null)
+        {
+            for (int i = 0; i < expList.size(); i++)
+            {
                 tmp = (ExpressionLevelDesc) expList.get(i);
 
-                if (tmp.getExpressionLevel() != null) {
+                if (tmp.getExpressionLevel() != null)
+                {
                     // if the speciesName is not already in the List, add it
                     // (only get unique names)
                     if (!expressionLevelList.contains(tmp.getExpressionLevel()))
@@ -581,14 +686,14 @@ public class NewDropdownUtil {
      * 
      * @throws Exception
      */
-    private static List getCurationStatesList(HttpServletRequest inRequest, String inWorkflow) throws Exception {
+    private static List getCurationStatesList(HttpServletRequest inRequest,
+                                              String inWorkflow) throws Exception
+    {
 
         log.trace("Entering NewDropdownUtil.getCurationStatesList");
 
         // Get the curation manager workflow XML
-        CurationManager theCurationManager = new CurationManagerImpl(inRequest.getSession().getServletContext()
-                .getRealPath("/")
-                + inWorkflow);
+        CurationManager theCurationManager = new CurationManagerImpl(inRequest.getSession().getServletContext().getRealPath("/") + inWorkflow);
 
         return theCurationManager.getAllStateNames();
     }
@@ -600,7 +705,9 @@ public class NewDropdownUtil {
      * 
      * @throws Exception
      */
-    private static List getUsersForRoleList(HttpServletRequest inRequest, String inRoleName) throws Exception {
+    private static List getUsersForRoleList(HttpServletRequest inRequest,
+                                            String inRoleName) throws Exception
+    {
 
         log.trace("Entering NewDropdownUtil.getUsersForRoleList");
 
@@ -609,32 +716,40 @@ public class NewDropdownUtil {
         Role theRole = new Role();
         theRole.setName(inRoleName);
 
-        try {
+        try
+        {
 
             List theRoles = Search.query(theRole);
 
-            if (theRoles.size() > 0) {
+            if (theRoles.size() > 0)
+            {
                 theRole = (Role) theRoles.get(0);
 
                 // Get the users for the role
-                List theUsers = theRole.getPartyCollection();
+                Set<Party> theUsers = theRole.getPartyCollection();
                 Iterator theIterator = theUsers.iterator();
 
                 // Go through the list of returned Party objects
-                while (theIterator.hasNext()) {
+                while (theIterator.hasNext())
+                {
                     Object theObject = theIterator.next();
 
                     // Only add when it's actually a person
-                    if (theObject instanceof Person) {
+                    if (theObject instanceof Person)
+                    {
                         Person thePerson = (Person) theObject;
                         theUserList.add(new DropdownOption(thePerson.getDisplayName(), thePerson.getUsername()));
                     }
                 }
 
-            } else {
+            }
+            else
+            {
                 log.warn("Role not found in database: " + inRoleName);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get roles for user: ", e);
             throw e;
         }
@@ -647,10 +762,11 @@ public class NewDropdownUtil {
      * 
      * @return list of roles
      */
-    private static List getRolesList(HttpServletRequest inRequest) {
+    private static List getRolesList(HttpServletRequest inRequest)
+    {
 
         // Generate the roles list
-        List theRoles = new ArrayList();
+        List<String> theRoles = new ArrayList<String>();
         theRoles.add(Constants.Admin.Roles.ALL);
         theRoles.add(Constants.Admin.Roles.COORDINATOR);
         theRoles.add(Constants.Admin.Roles.EDITOR);
@@ -663,11 +779,15 @@ public class NewDropdownUtil {
      * Add Other to the list in the first spot if it's not already there.
      * Removes it and put's it in the first spot if it is.
      */
-    private static void addOther(List inList) {
+    private static void addOther(List inList)
+    {
 
-        if (!inList.contains(Constants.Dropdowns.OTHER_OPTION)) {
+        if (!inList.contains(Constants.Dropdowns.OTHER_OPTION))
+        {
             inList.add(0, Constants.Dropdowns.OTHER_OPTION);
-        } else {
+        }
+        else
+        {
             inList.remove(Constants.Dropdowns.OTHER_OPTION);
             inList.add(0, Constants.Dropdowns.OTHER_OPTION);
         }
@@ -677,14 +797,17 @@ public class NewDropdownUtil {
      * Add Other to the list in the first spot if it's not already there.
      * Removes it and put's it in the first spot if it is.
      */
-    private static void addOtherOption(List inList) {
+    private static void addOtherOption(List inList)
+    {
 
-        DropdownOption theDropdownOption = new DropdownOption(Constants.Dropdowns.OTHER_OPTION,
-                Constants.Dropdowns.OTHER_OPTION);
+        DropdownOption theDropdownOption = new DropdownOption(Constants.Dropdowns.OTHER_OPTION, Constants.Dropdowns.OTHER_OPTION);
 
-        if (!inList.contains(theDropdownOption)) {
+        if (!inList.contains(theDropdownOption))
+        {
             inList.add(0, theDropdownOption);
-        } else {
+        }
+        else
+        {
             inList.remove(theDropdownOption);
             inList.add(0, theDropdownOption);
         }
@@ -694,11 +817,15 @@ public class NewDropdownUtil {
      * Add "" to the list in the first spot if it's not already there. Removes
      * it and put's it in the first spot if it is.
      */
-    private static void addBlank(List inList) {
+    private static void addBlank(List inList)
+    {
 
-        if (!inList.contains("")) {
+        if (!inList.contains(""))
+        {
             inList.add(0, "");
-        } else {
+        }
+        else
+        {
             inList.remove("");
             inList.add(0, "");
         }
@@ -708,13 +835,17 @@ public class NewDropdownUtil {
      * Add "" to the list in the first spot if it's not already there. Removes
      * it and put's it in the first spot if it is.
      */
-    private static void addBlankOption(List inList) {
+    private static void addBlankOption(List inList)
+    {
 
         DropdownOption theDropdownOption = new DropdownOption("", "");
 
-        if (!inList.contains(theDropdownOption)) {
+        if (!inList.contains(theDropdownOption))
+        {
             inList.add(0, theDropdownOption);
-        } else {
+        }
+        else
+        {
             inList.remove(theDropdownOption);
             inList.add(0, theDropdownOption);
         }

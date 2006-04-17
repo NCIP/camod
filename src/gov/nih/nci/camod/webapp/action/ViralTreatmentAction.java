@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.12 2005-11-09 00:17:25 georgeda Exp $
+ * $Id: ViralTreatmentAction.java,v 1.13 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/09 00:17:25  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.11  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -25,9 +28,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,21 +65,20 @@ public class ViralTreatmentAction extends BaseAction {
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+        // Grab the current CarcinogenExposure we are working with related to this animalModel
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
 		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
 		System.out.println("<ViralTreatmentAction editing> editing... " + "\n\t name: " + viralTreatmentForm.getName()
 				+ "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
 				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
-				+ "\n\t doseUnit: " + viralTreatmentForm.getDoseUnit() + "\n\t ageAtTreatment: "
-				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageUnit: " + viralTreatmentForm.getAgeUnit());
+                + "\n\t dosageUnit: " + viralTreatmentForm.getDosageUnit()
+				+ "\n\t doseUnit: " + viralTreatmentForm.getDosageUnit() + "\n\t ageAtTreatment: "
+				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + viralTreatmentForm.getAgeAtTreatmentUnit());
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
 	        // retrieve animal model by it's id	        
@@ -84,7 +86,7 @@ public class ViralTreatmentAction extends BaseAction {
 	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID); 			
 			
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("viralTreatment.delete.successful"));
@@ -92,8 +94,8 @@ public class ViralTreatmentAction extends BaseAction {
 
 			} else {
 
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, viralTreatmentForm, theTherapy);
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, viralTreatmentForm, theCarcinogenExposure);
 
 				// Add a message to be displayed in submitOverview.jsp saying
 				// you've
@@ -140,14 +142,15 @@ public class ViralTreatmentAction extends BaseAction {
 		System.out.println("<GrowthFactorAction save> Adding... " + "\n\t name: " + viralTreatmentForm.getName()
 				+ "\n\t otherName: " + viralTreatmentForm.getOtherName() + "\n\t type: " + viralTreatmentForm.getType()
 				+ "\n\t regimen: " + viralTreatmentForm.getRegimen() + "\n\t dosage: " + viralTreatmentForm.getDosage()
-				+ "\n\t doseUnit: " + viralTreatmentForm.getDoseUnit() + "\n\t ageAtTreatment: "
-				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageUnit: " + viralTreatmentForm.getAgeUnit());
+				+ "\n\t dosageUnit: " + viralTreatmentForm.getDosageUnit()
+                + "\n\t doseUnit: " + viralTreatmentForm.getDosageUnit() + "\n\t ageAtTreatment: "
+				+ viralTreatmentForm.getAgeAtTreatment() + "\n\t ageAtTreatmentUnit: " + viralTreatmentForm.getAgeAtTreatmentUnit());
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-			animalModelManager.addTherapy(animalModel, viralTreatmentForm);
+			animalModelManager.addCarcinogenExposure(animalModel, viralTreatmentForm);
 
 			// Add a message to be displayed in submitOverview.jsp saying you've
 			// created a new model successfully

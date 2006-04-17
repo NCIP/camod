@@ -1,10 +1,13 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.3  2005/11/14 14:18:13  georgeda
  * Cleanup
  *
  * 
- * $Id: BiologicalProcessManagerImpl.java,v 1.4 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: BiologicalProcessManagerImpl.java,v 1.5 2006-04-17 19:11:05 pandyas Exp $
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -37,7 +40,7 @@ public class BiologicalProcessManagerImpl extends BaseManager implements Biologi
             {
                 // The following two objects are needed for eQBE.
                 BiologicalProcess theQueryObj = new BiologicalProcess();
-                theQueryObj.setProcessName(inName);
+                theQueryObj.setName(inName);
 
                 // Apply evaluators to object properties
                 Evaluation theEvaluation = new Evaluation();
@@ -104,10 +107,11 @@ public class BiologicalProcessManagerImpl extends BaseManager implements Biologi
      * 
      * @exception Exception
      *                when anything goes wrong.
-     */
+
     public void save(BiologicalProcess biologicalProcess) throws Exception
     {
         log.debug("In BiologicalProcessManagerImpl.save");
         super.save(biologicalProcess);
     }
+    */
 }

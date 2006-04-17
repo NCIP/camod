@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: AssociatedExpressionForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
@@ -10,8 +19,6 @@ public class AssociatedExpressionForm extends BaseForm implements Serializable, 
 	 * Default empty constructor
 	 * @author pandyas
 	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public AssociatedExpressionForm() {}
 	

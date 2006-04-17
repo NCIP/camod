@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: TargetedModificationAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -50,11 +59,12 @@ public final class TargetedModificationAction extends BaseAction {
                 + targetedModificationForm.getBlastocystName() + "\n\t getConditionedBy: "
                 + targetedModificationForm.getConditionedBy() + "\n\t getDescription: "
                 + targetedModificationForm.getDescription() + "\n\t getComments: "
-                + targetedModificationForm.getComments() + "\n\t getNumberMGI: "
-                + targetedModificationForm.getNumberMGI() + "\n\t getFileServerLocation: "
+                + targetedModificationForm.getComments() + "\n\t getMgiNumber: "
+                + targetedModificationForm.getMgiNumber() + "\n\t getFileServerLocation: "
                 + targetedModificationForm.getFileServerLocation() + "\n\t getTitle: "
                 + targetedModificationForm.getTitle() + "\n\t getDescriptionOfConstruct: "
-                + targetedModificationForm.getDescriptionOfConstruct()
+                + targetedModificationForm.getDescriptionOfConstruct() + "\n\t getConstructSequence(): "
+                + targetedModificationForm.getConstructSequence()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         TargetedModificationManager targetedModificationManager = (TargetedModificationManager) getBean("targetedModificationManager");
@@ -139,11 +149,12 @@ public final class TargetedModificationAction extends BaseAction {
                 + targetedModificationForm.getBlastocystName() + "\n\t getConditionedBy: "
                 + targetedModificationForm.getConditionedBy() + "\n\t getDescription: "
                 + targetedModificationForm.getDescription() + "\n\t getComments: "
-                + targetedModificationForm.getComments() + "\n\t getNumberMGI: "
-                + targetedModificationForm.getNumberMGI() + "\n\t getFileServerLocation: "
+                + targetedModificationForm.getComments() + "\n\t getMgiNumber: "
+                + targetedModificationForm.getMgiNumber() + "\n\t getFileServerLocation: "
                 + targetedModificationForm.getFileServerLocation() + "\n\t getTitle: "
                 + targetedModificationForm.getTitle() + "\n\t getDescriptionOfConstruct: "
-                + targetedModificationForm.getDescriptionOfConstruct()
+                + targetedModificationForm.getDescriptionOfConstruct() + "\n\t getConstructSequence(): "
+                + targetedModificationForm.getConstructSequence()
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLineManagerImpl.java,v 1.11 2006-01-18 14:24:24 georgeda Exp $
+ * $Id: CellLineManagerImpl.java,v 1.12 2006-04-17 19:11:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/01/18 14:24:24  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.10  2005/11/09 00:17:16  georgeda
  * Fixed delete w/ constraints
  *
@@ -100,9 +103,9 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager
         inCellLine.setComments(inCellLineData.getComments());
 
         /*
-         * Add a Organ to AnimalModel with correct IDs, conceptCode 
+         * Add a Organ to CellLine with correct IDs, conceptCode 
          */
-
+        Organ theOrgan = null;
         //new submission - organ will be null
         if (inCellLine.getOrgan() == null)
         {

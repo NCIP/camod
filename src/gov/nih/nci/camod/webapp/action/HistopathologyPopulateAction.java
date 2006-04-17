@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.5 2005-11-04 14:44:25 georgeda Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.6 2006-04-17 19:09:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/04 14:44:25  georgeda
+ * Cleaned up histopathology/assoc metastasis
+ *
  * Revision 1.4  2005/11/03 22:29:12  georgeda
  * Added validation/delete capabilities to histo screens
  *
@@ -25,9 +28,6 @@ import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.service.impl.HistopathologyManagerSingleton;
 import gov.nih.nci.camod.webapp.form.HistopathologyForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -73,15 +73,16 @@ public class HistopathologyPopulateAction extends BaseAction {
             System.out.println("OrganTissueCode= " + theHistopathology.getOrgan().getConceptCode());
 
             /* Set Disease object attributes */
-            List diseaseList = theHistopathology.getDiseaseCollection();
+            Disease disease = theHistopathology.getDisease();
 
-            Disease disease = (Disease) diseaseList.get(0);
             histopathologyForm.setDiagnosisName(disease.getName());
             histopathologyForm.setDiagnosisCode(disease.getConceptCode());
             histopathologyForm.setTumorClassification(disease.getName());
 
             /* Set Histopathology attributes */
             histopathologyForm.setAgeOfOnset(theHistopathology.getAgeOfOnset());
+            histopathologyForm.setAgeOfOnsetUnit(theHistopathology.getAgeOfOnsetUnit());
+            
             if (theHistopathology.getWeightOfTumor() != null) {
                 histopathologyForm.setWeightOfTumor(theHistopathology.getWeightOfTumor().toString());
             }

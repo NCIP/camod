@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.18 2006-01-18 14:24:24 georgeda Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.19 2006-04-17 19:11:06 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/01/18 14:24:24  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.17  2005/11/28 13:46:53  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -57,11 +60,7 @@ import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -128,16 +127,20 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
       throws Exception
     {
         log.trace("Entering populateInducedMutation");
-
+        
         EnvironmentalFactor inEnvironFactor = null;
+        
+        // old code from * to * relationship in domain
+        //List indMutSet = new ArrayList(inInducedMutation.getEnvironmentalFactorCollection());
 
         // Check to see if a Environmental Factor already exists,
         // if it does edit it else create a new EnvironmentalFactor
-        if (inInducedMutation.getEnvironmentalFactorCollection().size() > 0)
-            inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactorCollection().get(0);
-        else
+        if (inInducedMutation.getEnvironmentalFactor() !=null) {
+            inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactor();
+        } else {
             inEnvironFactor = new EnvironmentalFactor();
-
+        }
+        
         // Inducing Agent Category type
         inEnvironFactor.setType(inInducedMutationData.getType());
 
@@ -187,15 +190,20 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         }
 
         // CAS Number
-        inEnvironFactor.setCasNumber(inInducedMutationData.getCASNumber());
+        inEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
 
         // Name of Inducing Agent
         inEnvironFactor.setName(inInducedMutationData.getName());
 
-        // inEnvironFactor.setNameUnctrlVocab( );
+        // Sima TODO - is this where we get this value?
+        inEnvironFactor.setNameUnctrlVocab(inEnvironFactor.getName());
+        
+        /*  old code 
+        inEnvironFactor.setNameUnctrlVocab( );
+        
         if (inInducedMutation.getEnvironmentalFactorCollection().size() < 1)
             inInducedMutation.addEnvironmentalFactor(inEnvironFactor);
-
+        */
         // GeneID
         inInducedMutation.setGeneId(inInducedMutationData.getGeneId());
 
@@ -206,7 +214,7 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         inInducedMutation.setComments(inInducedMutationData.getComments());
 
         // Observation and Method of Observation
-        List geneticList = inInducedMutation.getGeneticAlterationCollection();
+        List<GeneticAlteration> geneticList = new ArrayList<GeneticAlteration>(inInducedMutation.getGeneticAlterationCollection());
 
         if (geneticList.size() > 0)
         {
@@ -245,18 +253,18 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         else
             inMutationIdentifier = new MutationIdentifier();
 
-        if (inInducedMutationData.getNumberMGI() == null || inInducedMutationData.getNumberMGI().equals(""))
+        if (inInducedMutationData.getMgiNumber() == null || inInducedMutationData.getMgiNumber().equals(""))
         {
             inInducedMutation.setMutationIdentifier(null);
         }
         else
         {
-            String strNumberMGI = inInducedMutationData.getNumberMGI().trim();
-            Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-            Matcher m = p.matcher(strNumberMGI);
-            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals(""))
+            String strMGINumber = inInducedMutationData.getMgiNumber().trim();
+            Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
+            Matcher m = p.matcher(strMGINumber);
+            if (m.matches() && strMGINumber != null && !strMGINumber.equals(""))
             {
-                inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+                inMutationIdentifier.setMgiNumber((strMGINumber));
                 inInducedMutation.setMutationIdentifier(inMutationIdentifier);
             }
         }

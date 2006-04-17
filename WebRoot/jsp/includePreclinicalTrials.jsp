@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/28 16:31:48  pandyas
+ * Defect #187:  Reordered fields on therapy search page to match submission page
+ *
  * Revision 1.8  2005/11/28 13:52:48  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -8,7 +11,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.9 2005-11-28 16:31:48 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.10 2006-04-17 19:08:19 pandyas Exp $
  */
 %>
 <tr>
@@ -25,7 +28,7 @@
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Dose</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-	<c:out value="${t.treatment.dosage}"/>
+	<c:out value="${t.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 	</td>
 </tr>
 <tr>
@@ -50,7 +53,7 @@
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Age at Treatment</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-	<c:out value="${t.treatment.ageAtTreatment}"/>
+	<c:out value="${t.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${t.treatment.ageAtTreatmentUnit}"/>
 	</td>
 </tr>
 <tr>

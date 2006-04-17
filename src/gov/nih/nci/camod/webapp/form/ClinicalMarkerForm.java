@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerForm.java,v 1.6 2005-11-07 19:13:54 pandyas Exp $
+ * $Id: ClinicalMarkerForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/07 19:13:54  pandyas
+ * modified for clinical marker screen
+ *
  * Revision 1.5  2005/11/03 18:52:44  pandyas
  * Modified for histopathology screens
  *
@@ -19,7 +22,8 @@ import java.io.Serializable;
  * @author pandyas
  * 
  */
-public class ClinicalMarkerForm extends BaseForm implements Serializable, ClinicalMarkerData {
+public class ClinicalMarkerForm extends BaseForm implements Serializable, ClinicalMarkerData
+{
 
     private static final long serialVersionUID = 3257325453799404851L;
 
@@ -27,35 +31,38 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
      * Default empty constructor
      * 
      * @author pandyas
-     * 
-     * TODO To change the template for this generated type comment go to Window -
-     * Preferences - Java - Code Style - Code Templates
      */
-    public ClinicalMarkerForm() {
-    }
-    
-	protected String histopathologyID;
+    public ClinicalMarkerForm()
+    {}
+
+    protected String histopathologyID;
 
     protected String name;
+    protected String otherName;
     protected String value;
 
-    
-	/**
-	 * @return Returns the parent histopathologyID.
-	 */	
-	public String getHistopathologyID() {
-		return histopathologyID;
-	}
-	/**
-	 * @param parent histopathologyID The histopathologyID to set.
-	 */	
-	public void setHistopathologyID( String histopathologyID ) {
-		this.histopathologyID = histopathologyID;
-	} 
+
+    /**
+     * @return Returns the parent histopathologyID.
+     */
+    public String getHistopathologyID()
+    {
+        return histopathologyID;
+    }
+
+    /**
+     * @param parent histopathologyID The histopathologyID to set.
+     */
+    public void setHistopathologyID(String histopathologyID)
+    {
+        this.histopathologyID = histopathologyID;
+    }
+
     /**
      * @return Returns the name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -63,14 +70,32 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
      * @param name
      *            The name to set.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
+    /**
+     * @return Returns the otherName.
+     */
+    public String getOtherName()
+    {
+        return otherName;
+    }
+
+    /**
+     * @param otherName
+     *            The otherName to set.
+     */
+    public void setOtherName(String otherName)
+    {
+        this.otherName = otherName;
+    }    
 
     /**
      * @return Returns the value.
      */
-    public String getValue() {
+    public String getValue()
+    {
         return value;
     }
 
@@ -78,7 +103,8 @@ public class ClinicalMarkerForm extends BaseForm implements Serializable, Clinic
      * @param value
      *            The value to set.
      */
-    public void setValue(String value) {
+    public void setValue(String value)
+    {
         this.value = value;
     }
 }

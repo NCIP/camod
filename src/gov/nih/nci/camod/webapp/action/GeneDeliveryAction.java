@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.15 2005-11-09 00:17:25 georgeda Exp $
+ * $Id: GeneDeliveryAction.java,v 1.16 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/11/09 00:17:25  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.14  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -57,8 +60,8 @@ public final class GeneDeliveryAction extends BaseAction {
         // Create a form to edit
         GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
 
-        // Grab the current therapy
-        String aTherapyID = request.getParameter("aTherapyID");
+        // Grab the current aCarcinogenExposureID
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -81,7 +84,7 @@ public final class GeneDeliveryAction extends BaseAction {
             GeneDeliveryManager theGeneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
             if ("Delete".equals(theAction)) {
 
-                theGeneDeliveryManager.remove(aTherapyID, theAnimalModel);
+                theGeneDeliveryManager.remove(aCarcinogenExposureID, theAnimalModel);
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("genedelivery.delete.successful"));
@@ -89,7 +92,7 @@ public final class GeneDeliveryAction extends BaseAction {
 
             } else {
 
-                GeneDelivery theGeneDelivery = theGeneDeliveryManager.get(aTherapyID);
+                GeneDelivery theGeneDelivery = theGeneDeliveryManager.get(aCarcinogenExposureID);
                 theGeneDeliveryManager.update(theAnimalModel, geneDeliveryForm, theGeneDelivery);
 
                 // Add a message to be displayed in submitOverview.jsp saying

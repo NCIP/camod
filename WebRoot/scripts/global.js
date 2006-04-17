@@ -240,4 +240,23 @@ function removeSelected(selectedGroup, group)
 		else {
 			disableField(document.forms[0].methodOfObservation);
 		}	
-	}		
+	}
+
+/****************************
+ * Method to disable 
+ * locationOfIntegration based 
+ * on selection of isRandom
+ ****************************/	
+function chkIntegration() {
+	    disableField(document.forms[0].isRandom, document.forms[0].locationOfIntegration);
+	}
+
+function disableField(vocab, otherVocab) {
+	
+	if( vocab.value == 'No' ) {
+		enableField(otherVocab);
+	}
+	else {
+	    disableField(otherVocab);
+	}
+}			

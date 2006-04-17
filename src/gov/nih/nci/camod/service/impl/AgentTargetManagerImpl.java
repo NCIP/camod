@@ -1,13 +1,24 @@
+/**
+ * 
+ * $Id: AgentTargetManagerImpl.java,v 1.4 2006-04-17 19:11:06 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.service.impl;
 
 /*
- * Created on Jun 17, 2005
+ * Jun 17, 2005
  *
  * @author pandyas
  *
- * $Id: AgentTargetManagerImpl.java,v 1.3 2006-01-18 14:24:24 georgeda Exp $
+ * $Id: AgentTargetManagerImpl.java,v 1.4 2006-04-17 19:11:06 pandyas Exp $
  *
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.3  2006/01/18 14:24:24  georgeda
+ *  TT# 376 - Updated to use new Java 1.5 features
+ *
  *  Revision 1.2  2005/11/07 20:43:07  pandyas
  *  modified getAll(), save(), rmove() and/or getByName (if applicable) to the current signature that throws exceptions and calls the super
  *
@@ -43,7 +54,7 @@ public class AgentTargetManagerImpl extends BaseManager implements AgentTargetMa
             {
                 // The following two objects are needed for eQBE.
                 AgentTarget theQueryObj = new AgentTarget();
-                theQueryObj.setTargetName(inName);
+                theQueryObj.setName(inName);
 
                 // Apply evaluators to object properties
                 Evaluation theEvaluation = new Evaluation();

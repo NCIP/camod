@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RegisterUserAction.java,v 1.5 2005-11-16 15:31:16 georgeda Exp $
+ * $Id: RegisterUserAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/11/16 15:31:16  georgeda
+ * Defect #41. Clean up of email functionality
+ *
  * Revision 1.4  2005/11/03 20:04:06  georgeda
  * Added PI email
  *
@@ -65,7 +68,7 @@ public class RegisterUserAction extends BaseAction {
 
                 StringTokenizer theTokenizer = new StringTokenizer(theUsersToNotify, ",");
 
-                List theNotifyList = new ArrayList();
+                List<String> theNotifyList = new ArrayList<String>();
                 while (theTokenizer.hasMoreElements()) {
                     theNotifyList.add(theTokenizer.nextToken());
                 }
@@ -82,7 +85,7 @@ public class RegisterUserAction extends BaseAction {
                 if (theRecipients.length > 0) {
 
                     // gather variable values to build the e-mail content with
-                    Map valuesForVariables = new TreeMap();
+                    Map<String, String> valuesForVariables = new TreeMap<String, String>();
                     valuesForVariables.put("firstName", theForm.getFirstName());
                     valuesForVariables.put("lastName", theForm.getLastName());
                     valuesForVariables.put("email", theForm.getEmail());

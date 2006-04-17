@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.14 2006-01-18 14:24:24 georgeda Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.15 2006-04-17 19:11:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/01/18 14:24:24  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.13  2005/11/29 16:32:27  pandyas
  * Defect #223: Fixed code so Organ object is not created when no Organ is selected. Added code to check for null Organ in the populateAction.
  *
@@ -135,8 +138,8 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         // save the treatment
         theTreatment.setSexDistribution(sexDistribution);
 
-        // Append the ageunit onto the age at treatment variable
-        theTreatment.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment() + " " + inGeneDeliveryData.getAgeUnit());
+        theTreatment.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment());
+        theTreatment.setAgeAtTreatmentUnit(inGeneDeliveryData.getAgeAtTreatmentUnit());
 
         //anytime the viral vector is "other"
         if (inGeneDeliveryData.getViralVector().equals(Constants.Dropdowns.OTHER_OPTION))

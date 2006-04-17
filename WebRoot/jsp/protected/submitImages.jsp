@@ -32,7 +32,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkStaining() {
-	    chkOther(document.forms[0].staining, document.forms[0].otherStaining);
+	    chkOther(document.forms[0].stainingMethod, document.forms[0].otherStainingMethod);
 	}
 	
 </SCRIPT>
@@ -94,7 +94,7 @@
 
 			<td class="formLabel"><label for="field3">Staining Method</label></td>
 			<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="staining" onchange="chkStaining();" >
+			<html:select styleClass="formFieldSized" size="1" property="stainingMethod" onchange="chkStaining();" >
 				<html:options name="<%= Dropdowns.STAININGDROP %>" />										
 			</html:select>
 			<br>
@@ -106,7 +106,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Other Staining Method</label></td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized" property="otherStaining" disabled="true" size="10" />
+				<html:text styleClass="formFieldSized" property="otherStainingMethod" disabled="true" size="10" />
 			</td>
 		</tr>
 				

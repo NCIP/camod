@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationAction.java,v 1.12 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: RadiationAction.java,v 1.13 2006-04-17 19:09:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.11  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -24,9 +27,9 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.RadiationForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,23 +59,25 @@ public class RadiationAction extends BaseAction {
 			log.debug("Entering 'edit' method");
 		}
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+        // Grab the current CarcinogenExposure we are working with related to this animalModel
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
 		// Create a form to edit
 		RadiationForm radiationForm = (RadiationForm) form;
 
 		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ radiationForm.getName() + "\n\t otherName: " + radiationForm.getOtherName() + "\n\t dosage: "
-				+ radiationForm.getDosage() + "\n\t administrativeRoute: " + radiationForm.getAdministrativeRoute()
-				+ "\n\t regimen: " + radiationForm.getRegimen() + "\n\t ageAtTreatment: "
-				+ radiationForm.getAgeAtTreatment() + "\n\t type: " + radiationForm.getType() + "\n\t user: "
+				+ radiationForm.getDosage() 
+                 + "\n\t dosageUnit: " + radiationForm.getDosageUnit()
+                + "\n\t administrativeRoute: " + radiationForm.getAdministrativeRoute()
+				+ "\n\t regimen: " + radiationForm.getRegimen() + "\n\t ageAtTreatment: " 
+				+ radiationForm.getAgeAtTreatment() 
+                + radiationForm.getAgeAtTreatmentUnit()
+                + "\n\t type: " + radiationForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
             // Grab the current modelID from the session
@@ -82,7 +87,7 @@ public class RadiationAction extends BaseAction {
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("radiation.delete.successful"));
@@ -90,8 +95,8 @@ public class RadiationAction extends BaseAction {
 
 			} else {
 		        				
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, radiationForm, theTherapy);
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, radiationForm, theCarcinogenExposure);
 
 				// Add a message to be displayed in submitOverview.jsp saying
 				// you've
@@ -131,9 +136,12 @@ public class RadiationAction extends BaseAction {
 
 		System.out.println("<EnvironmentalFactorAction save> following Characteristics:" + "\n\t name: "
 				+ radiationForm.getName() + "\n\t otherName: " + radiationForm.getOtherName() + "\n\t dosage: "
-				+ radiationForm.getDosage() + "\n\t administrativeRoute: " + radiationForm.getAdministrativeRoute()
+				+ radiationForm.getDosage() 
+                 + "\n\t dosageUnit: " + radiationForm.getDosageUnit()
+                + "\n\t administrativeRoute: " + radiationForm.getAdministrativeRoute()
 				+ "\n\t regimen: " + radiationForm.getRegimen() + "\n\t ageAtTreatment: "
-				+ radiationForm.getAgeAtTreatment() + "\n\t type: " + radiationForm.getType() + "\n\t user: "
+				+ radiationForm.getAgeAtTreatment() + radiationForm.getAgeAtTreatmentUnit()
+                + "\n\t type: " + radiationForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		/* Grab the current modelID from the session */
@@ -146,7 +154,7 @@ public class RadiationAction extends BaseAction {
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-			animalModelManager.addTherapy(animalModel, radiationForm);
+			animalModelManager.addCarcinogenExposure(animalModel, radiationForm);
 
 			// Add a message to be displayed in submitOverview.jsp saying you've
 			// created a new model successfully

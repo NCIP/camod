@@ -1,16 +1,25 @@
+/**
+ * 
+ * $Id: GenomicSegmentData.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
 import org.apache.struts.upload.FormFile;
 
-public interface GenomicSegmentData {
+public interface GenomicSegmentData extends TransgeneData {
 	
 	public String getLocationOfIntegration();
 	
 	public void setLocationOfIntegration(String locationOfIntegration);
 	
-	public String getOtherLocationOfIntegration();
+    public String getIsRandom();
 	
-	public void setOtherLocationOfIntegration(String otherLocationOfIntegration);
+    public void setIsRandom(String isRandom);
 	
 	public String getSegmentName();
 	
@@ -32,9 +41,9 @@ public interface GenomicSegmentData {
 	
 	public void setComments(String comments);
 	
-	public String getNumberMGI();
+	public String getMgiNumber();
 	
-	public void setNumberMGI(String numberMGI);
+	public void setMgiNumber(String mgiNumber);
 	
 	public FormFile getFileLocation();
 	

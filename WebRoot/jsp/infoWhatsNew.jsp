@@ -6,7 +6,7 @@
 												<TBODY>
 													<TR>
 														<TD valign="top">
-															<TABLE class="contentBegins" height="100%" cellspacing="0" cellpadding="10" width="100%" border="0">
+															<TABLE class="contentBegins" height="100%" cellspacing="0" cellpadding="10" width="100%" border="0" >
 																<TBODY>
 																	<TR>
 																		<TD>

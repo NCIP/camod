@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.20 2005-12-12 17:33:37 georgeda Exp $
+ * $Id: XenograftPopulateAction.java,v 1.21 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2005/12/12 17:33:37  georgeda
+ * Defect #265, store host/origin species in correct places
+ *
  * Revision 1.19  2005/11/28 22:52:05  pandyas
  * Defect #186: Added organ/tissue to Xenograft page, modified search page to display multiple Xenografts with headers, modified XenograftManagerImpl so it does not create or save an organ object if not organ is selected
  *
@@ -25,96 +28,103 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Taxon;
+import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.impl.XenograftManagerSingleton;
 import gov.nih.nci.camod.webapp.form.XenograftForm;
 import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class XenograftPopulateAction extends BaseAction {
+public class XenograftPopulateAction extends BaseAction
+{
 
     /**
      * Pre-populate all field values in the form <FormName> Used by <jspName>
      * 
      */
-    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populate(ActionMapping mapping,
+                                  ActionForm form,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) throws Exception
+    {
 
         // Create a form to edit
         XenograftForm xenograftForm = (XenograftForm) form;
 
-        // Grab the current Xenograft we are working with related to this
-        // animalModel
+        // Grab the current Xenograft we are working with related to this AM
         String aXenograftID = request.getParameter("aXenograftID");
 
         Xenograft xeno = XenograftManagerSingleton.instance().get(aXenograftID);
 
-        if (xeno == null) {
+        if (xeno == null)
+        {
             request.setAttribute(Constants.Parameters.DELETED, "true");
-        } else {
+        }
+        else
+        {
             request.setAttribute("aXenograftID", aXenograftID);
-            xenograftForm.setName(xeno.getName());
+            xenograftForm.setXenograftName(xeno.getXenograftName());
 
-            // Set the other administrative site and/or the selected admin site
-            // We need to comapre the stored value with the config file because
-            // we are
-            // storing 'Other' AdministrativeSite directly into the database
-            NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, "");
-            List xenoAdminSiteDropList = (List) request.getSession().getAttribute(
-                    Constants.Dropdowns.XENOGRAFTADMINSITESDROP);
-
-            // If AdministrativeSite is from list set the value
-            if (xenoAdminSiteDropList.contains(xeno.getAdministrativeSite())) {
-                xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
-            } else if (xeno.getAdministrativeSite() != null) {
-
-                // If AdministrativeSite is not from list set the "other" and
-                // enable the text field
+            // Set the other flag or the selected administrative site from the DB
+            if (xeno.getAdminSiteUnctrlVocab() != null)
+            {
                 xenograftForm.setAdministrativeSite(Constants.Dropdowns.OTHER_OPTION);
-                xenograftForm.setOtherAdministrativeSite(xeno.getAdministrativeSite());
+                xenograftForm.setOtherAdministrativeSite(xeno.getAdminSiteUnctrlVocab());
+            }
+            else
+            {
+                xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
             }
 
             xenograftForm.setGeneticManipulation(xeno.getGeneticManipulation());
             xenograftForm.setModificationDescription(xeno.getModificationDescription());
             xenograftForm.setParentalCellLineName(xeno.getParentalCellLineName());
-            xenograftForm.setATCCNumber(xeno.getAtccNumber());
+            xenograftForm.setAtccNumber(xeno.getAtccNumber());
             xenograftForm.setCellAmount(xeno.getCellAmount());
+            xenograftForm.setGrowthPeriod(xeno.getGrowthPeriod());
 
-            Taxon tax = xeno.getOriginSpecies();
-            if (tax != null) {
-                xenograftForm.setHostScientificName(tax.getScientificName());
+            if (xeno.getDonorSpecies() != null)
+            {
+                log.info("Species: " + xeno.getDonorSpecies().getScientificName());
+                xenograftForm.setDonorScientificName(xeno.getDonorSpecies().getScientificName());
+            }
+            else
+            {
+                xenograftForm.setDonorScientificName(null);
+            }
 
-                if (tax.getEthnicityStrainUnctrlVocab() != null) {
-                    xenograftForm.setHostEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
-                    xenograftForm.setOtherHostEthinicityStrain(tax.getEthnicityStrainUnctrlVocab());
-                } else {
-                    xenograftForm.setHostEthinicityStrain(tax.getEthnicityStrain());
-                }
+            // strain is required as of caMod 2.1, not before
+            if (xeno.getStrain() != null)
+            {
+                xenograftForm.setOtherDonorEthinicityStrain(xeno.getStrain().getNameUnctrlVocab());
+                xenograftForm.setDonorEthinicityStrain(xeno.getStrain().getName());
             }
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
-            if (xeno.getOrgan() != null) {
-                xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+            if (xeno.getOrgan() != null)
+            {
+                //SIMA TODO: get display name to work again
+                //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                xenograftForm.setOrgan(xeno.getOrgan().getName());
                 xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
             }
 
             // Set the other flag or the normal graft type
-            if (xeno.getGraftTypeUnctrlVocab() != null) {
+            if (xeno.getGraftTypeUnctrlVocab() != null)
+            {
                 xenograftForm.setGraftType(Constants.Dropdowns.OTHER_OPTION);
                 xenograftForm.setOtherGraftType(xeno.getGraftTypeUnctrlVocab());
-            } else {
+            }
+            else
+            {
                 xenograftForm.setGraftType(xeno.getGraftType());
             }
 
@@ -138,13 +148,18 @@ public class XenograftPopulateAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward dropdown(ActionMapping mapping,
+                                  ActionForm form,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) throws Exception
+    {
 
         log.info("<XenograftPopulateAction dropdown> Entering dropdown() ");
 
+        XenograftForm theForm = (XenograftForm) form;
+
         // setup dropdown menus
-        this.dropdown(request, response, (XenograftForm) form);
+        this.dropdown(request, response, theForm);
 
         log.info("<XenograftPopulateAction dropdown> before return submitTransplantXenograft ");
 
@@ -159,50 +174,48 @@ public class XenograftPopulateAction extends BaseAction {
      * @param response
      * @throws Exception
      */
-    private void dropdown(HttpServletRequest request, HttpServletResponse response, XenograftForm form)
-            throws Exception {
+    private void dropdown(HttpServletRequest request,
+                          HttpServletResponse response,
+                          XenograftForm inForm) throws Exception
+    {
 
         log.info("<XenograftPopulateAction dropdown> Entering void dropdown()");
 
-        // Retrieve the AnimalModel current Species and Strain set in
-        // ModelCharacteristics
-        // This is displayed on the JSP page right above the HOST STRAIN /
-        // SPECIES
+        // Retrieve the AnimalModel current Species and Strain set in ModelCharacteristics
+        // This is displayed on the JSP page right above the HOST STRAIN / SPECIES
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel animalModel = animalModelManager.get(modelID);
 
-        Taxon theTaxon = animalModel.getSpecies();
-        request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theTaxon.getScientificName());
+        Species theAMSpecies = animalModel.getStrain().getSpecies();
+        request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theAMSpecies.getScientificName());
 
-        if (theTaxon.getEthnicityStrain() != null) {
-            request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrain());
-        } else {
-            request.getSession()
-                    .setAttribute(Constants.Dropdowns.MODELSTRAIN, theTaxon.getEthnicityStrainUnctrlVocab());
+        if (animalModel.getStrain() != null)
+        {
+            request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getName());
+        }
+        else
+        {
+            request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getNameUnctrlVocab());
         }
 
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HOSTSPECIESDROP,
-                Constants.Dropdowns.ADD_BLANK_OPTION);
+        // Set the Speceis drop drop for the Xenograft
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_OPTION);
 
-        String theSpecies = form.getHostScientificName();
-        if (theSpecies == null) {
-            List speciesList = (List) request.getSession().getAttribute(Constants.Dropdowns.HOSTSPECIESDROP);
+        // theSpecies will be null the first time (submitXenograft screen) - default to full list of strains
+        // but this is needed to populate the strain on the submitXenograft screen
+        String theSpecies = inForm.getDonorScientificName();
+        if (theSpecies == null)
+        {
+            List speciesList = (List) request.getSession().getAttribute(Constants.Dropdowns.SPECIESQUERYDROP);
             DropdownOption theOption = (DropdownOption) speciesList.get(0);
             theSpecies = theOption.getValue();
         }
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, theSpecies);
-
-        // Prepopulate all dropdown fields, set the global Constants to the
-        // following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP,
-                Constants.Dropdowns.ADD_BLANK_AND_OTHER);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP,
-                Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
         log.info("<XenograftPopulateAction dropdown> Exiting void dropdown()");
     }
@@ -217,14 +230,20 @@ public class XenograftPopulateAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward setStrainDropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward setStrainDropdown(ActionMapping mapping,
+                                           ActionForm form,
+                                           HttpServletRequest request,
+                                           HttpServletResponse response) throws Exception
+    {
 
         XenograftForm xenograftForm = (XenograftForm) form;
 
-        request.setAttribute("aXenograftID", request.getParameter("aXenograftID"));
-        NewDropdownUtil
-                .populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getHostScientificName());
+        //request.setAttribute("aXenograftID", request.getParameter("aXenograftID"));
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getDonorScientificName());
+        // Must Reset both fields when new species is chosen
+        xenograftForm.setDonorEthinicityStrain("");
+        xenograftForm.setOtherDonorEthinicityStrain("");
 
         return mapping.findForward("submitTransplantXenograft");
     }

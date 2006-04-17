@@ -1,16 +1,14 @@
 /*
- * Created on Jun 17, 2005
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.9 2006-04-17 19:11:05 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.SpontaneousMutationManager;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
-
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,14 +64,42 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
             SpontaneousMutation inSpontaneousMutation) throws Exception {
 
         log.trace("Entering populateSpontaneousMutation");
-
+        //Name
         inSpontaneousMutation.setName(inSpontaneousMutationData.getName());
+        
+        //Comment
         inSpontaneousMutation.setComments(inSpontaneousMutationData.getComments());
+        
+        // GeneID
+        inSpontaneousMutation.setGeneId(inSpontaneousMutationData.getGeneId());
 
-        List geneticList = inSpontaneousMutation.getGeneticAlterationCollection();
-
+        Set geneticSet = inSpontaneousMutation.getGeneticAlterationCollection();
+        Iterator it = geneticSet.iterator();
         System.out.println( "Testing");
         
+        while(it.hasNext()){
+          if( inSpontaneousMutationData.getObservation() != null && ! inSpontaneousMutationData.getObservation().equals( "" ) ) 
+          {
+                GeneticAlteration inGeneticAlteration = (GeneticAlteration) it.next();
+                inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
+                inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
+           } else {
+                geneticSet.remove(0);
+           }                   
+ 
+        
+        if (inSpontaneousMutationData.getObservation() != null) {
+                if (!inSpontaneousMutationData.getObservation().equals("")) {
+                    GeneticAlteration inGeneticAlteration = new GeneticAlteration();
+                    inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
+                    inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
+                    inSpontaneousMutation.addGeneticAlteration(inGeneticAlteration);
+                }
+            }
+        }
+       
+        
+        /* old code
         if (geneticList.size() > 0) {
         	if( inSpontaneousMutationData.getObservation() != null && ! inSpontaneousMutationData.getObservation().equals( "" ) ) {
 		        GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
@@ -90,8 +116,11 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
                     inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
                     inSpontaneousMutation.addGeneticAlteration(inGeneticAlteration);
                 }
-            }
-        }
+            } 
+            
+          }  */
+
+        
 
 		// MGI Number
 		// Check for exisiting MutationIdentifier
@@ -101,14 +130,14 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 		else
 			inMutationIdentifier = new MutationIdentifier();
 
-		if ( inSpontaneousMutationData.getNumberMGI() == null || inSpontaneousMutationData.getNumberMGI().equals( "" ))	{
+		if ( inSpontaneousMutationData.getMgiNumber() == null || inSpontaneousMutationData.getMgiNumber().equals( "" ))	{
 			inSpontaneousMutation.setMutationIdentifier( null );
 		} else {
-			String strNumberMGI = inSpontaneousMutationData.getNumberMGI().trim();
-			Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-			Matcher m = p.matcher(strNumberMGI);
-			if (m.matches() && strNumberMGI != null && !strNumberMGI.equals("")) {
-				inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+			String strMGINumber = inSpontaneousMutationData.getMgiNumber().trim();
+			Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
+			Matcher m = p.matcher(strMGINumber);
+			if (m.matches() && strMGINumber != null && !strMGINumber.equals("")) {
+				inMutationIdentifier.setMgiNumber(strMGINumber);
 				inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 			}
 		}

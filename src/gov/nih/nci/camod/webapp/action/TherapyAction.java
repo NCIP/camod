@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.13 2005-12-29 18:28:54 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.14 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/12/29 18:28:54  pandyas
+ * Clean up - remove Biomarker code
+ *
  * Revision 1.12  2005/11/09 00:17:25  georgeda
  * Fixed delete w/ constraints
  *
@@ -57,7 +60,7 @@ public final class TherapyAction extends BaseAction {
 	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		log.trace("Entering edit");
+		log.info("<TherapyAction> Entering edit");
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -69,16 +72,18 @@ public final class TherapyAction extends BaseAction {
 		String aTherapyID = request.getParameter("aTherapyID");
 
 		System.out.println("<TherapyAction save> following Characteristics:" + "\n\t name: " + therapyForm.getName()
-				+ "\n\t NSCNumber: " + therapyForm.getNSCNumber() + "\n\t CASNumber: " + therapyForm.getCASNumber()
+				+ "\n\t nscNumber: " + therapyForm.getNscNumber() + "\n\t casNumber: " + therapyForm.getCasNumber()
 				+ "\n\t toxicityGrade: " + therapyForm.getToxicityGrade() + "\n\t chemicalClasses: "
 				+ therapyForm.getSelectedChemicalClasses() + "\n\t processes: " + therapyForm.getSelectedProcesses()
 				+ "\n\t targets: " + therapyForm.getSelectedTargets() + "\n\t dosage: "
-				+ therapyForm.getAdministrativeRoute() + "\n\t type: " + therapyForm.getType() + "\n\t age: "
+                 + therapyForm.getDosage() + "\n\t dosageUnit: " + therapyForm.getDosageUnit()
+                + therapyForm.getAdministrativeRoute() + "\n\t type: " + therapyForm.getType() + "\n\t age: "
 				+ therapyForm.getAgeAtTreatment() + "\n\t administrativeRoute: " + therapyForm.getAdministrativeRoute()
 				+ "\n\t biomarker: " + therapyForm.getBiomarker() 
 				+ "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: "
-				+ therapyForm.getResults() + "\n\t comments: " + therapyForm.getComments() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+				+ therapyForm.getResults() + "\n\t comments: " + therapyForm.getComments() 
+                + "\n\t TumorResponse: " + therapyForm.getTumorResponse() 
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
 
@@ -133,8 +138,7 @@ public final class TherapyAction extends BaseAction {
 	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		log.trace("Entering save");
-		System.out.println("<TherapyAction save> entering");
+		log.info("<TherapyAction> Entering save");
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -143,22 +147,26 @@ public final class TherapyAction extends BaseAction {
 		TherapyForm therapyForm = (TherapyForm) form;
 
 		System.out.println("<TherapyAction save> following Characteristics:" + "\n\t name: " + therapyForm.getName()
-				+ "\n\t NSCNumber: " + therapyForm.getNSCNumber() + "\n\t CASNumber: " + therapyForm.getCASNumber()
+				+ "\n\t NscNumber: " + therapyForm.getNscNumber() + "\n\t casNumber: " + therapyForm.getCasNumber()
 				+ "\n\t toxicityGrade: " + therapyForm.getToxicityGrade() + "\n\t chemicalClasses: "
 				+ therapyForm.getChemicalClasses() + "\n\t processName: " + therapyForm.getProcesses()
-				+ "\n\t targetName: " + therapyForm.getType() + "\n\t dosage: " + therapyForm.getAdministrativeRoute()
+				+ "\n\t targetName: " + therapyForm.getType() + "\n\t dosage: " 
+                + therapyForm.getDosage() + "\n\t dosageUnit: " + therapyForm.getDosageUnit()
+                + therapyForm.getAdministrativeRoute()
 				+ "\n\t type: " + therapyForm.getType() + "\n\t age: " + therapyForm.getAgeAtTreatment()
 				+ "\n\t administrativeRoute: " + therapyForm.getAdministrativeRoute() + "\n\t biomarker: "
 				+ therapyForm.getBiomarker() 
 				+ "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: " + therapyForm.getResults()
-				+ "\n\t comments: " + therapyForm.getComments() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+				+ "\n\t comments: " + therapyForm.getComments() 
+                + "\n\t TumorResponse: " + therapyForm.getTumorResponse()
+                + "\n\t user: "	+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
+            log.info("<TherapyAction> Entering try block");            
 			animalModelManager.addTherapy(animalModel, therapyForm);
 
 			// Add a message to be displayed in submitOverview.jsp saying you've

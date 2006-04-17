@@ -1,7 +1,10 @@
 /**
- * $Id: HormoneAction.java,v 1.9 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: HormoneAction.java,v 1.10 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.8  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -22,14 +25,12 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.HormoneForm;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.*;
 
 /**
@@ -56,19 +57,17 @@ public class HormoneAction extends BaseAction {
 
 		System.out.println("<HormoneAction edit> Entering... ");
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
-
+        // Grab the current CarcinogenExposure we are working with related to this animalModel
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
+        
 		HormoneForm hormoneForm = (HormoneForm) form;
 
 		System.out.println("<HormoneAction editing> editing... " + "\n\t name: " + hormoneForm.getName()
 				+ "\n\t otherName: " + hormoneForm.getOtherName() + "\n\t regimen: " + hormoneForm.getRegimen()
-				+ "\n\t dosage: " + hormoneForm.getDosage() + "\n\t doseUnit: " + hormoneForm.getDoseUnit());
+				+ "\n\t dosage: " + hormoneForm.getDosage() + "\n\t dosageUnit: " + hormoneForm.getDosageUnit());
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
 
@@ -79,15 +78,15 @@ public class HormoneAction extends BaseAction {
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
             
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("hormone.delete.successful"));
 				saveErrors(request, msg);
 
 			} else {				
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, hormoneForm, theTherapy);
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, hormoneForm, theCarcinogenExposure);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("hormone.edit.successful"));
@@ -129,14 +128,15 @@ public class HormoneAction extends BaseAction {
 		HormoneForm hormoneForm = (HormoneForm) form;
 
 		System.out.println("<HormoneAction save> Adding... " + "\n\t name: " + hormoneForm.getName()
-				+ "\n\t otherName: " + hormoneForm.getOtherName() + "\n\t regimen: " + hormoneForm.getRegimen()
-				+ "\n\t ageUnit: " + hormoneForm.getDosage());
+                        + "\n\t otherName: " + hormoneForm.getOtherName() + "\n\t regimen: " + hormoneForm.getRegimen()
+                        + "\n\t dosage: " + hormoneForm.getDosage() + "\n\t dosageUnit: " + hormoneForm.getDosageUnit());
+
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-			animalModelManager.addTherapy(animalModel, hormoneForm);
+			animalModelManager.addCarcinogenExposure(animalModel, hormoneForm);
 
 			ActionMessages msg = new ActionMessages();
 			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("hormone.creation.successful"));

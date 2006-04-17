@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerPopulateAction.java,v 1.3 2005-11-07 19:14:14 pandyas Exp $
+ * $Id: ClinicalMarkerPopulateAction.java,v 1.4 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/11/07 19:14:14  pandyas
+ * modified for clinical marker screen
+ *
  * Revision 1.2  2005/11/03 18:54:10  pandyas
  * Modified for histopathology screens
  *
@@ -55,8 +58,15 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
             request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
             request.setAttribute("aClinicalMarkerID", aClinicalMarkerID);
+            
+            // Set the other name and/or selected name from database
+            if (theClinicalMarker.getNameUnctrlVocab() != null) {
+                clinicalMarkerForm.setName(Constants.Dropdowns.OTHER_OPTION);
+                clinicalMarkerForm.setOtherName(theClinicalMarker.getNameUnctrlVocab());
+            } else {
+                clinicalMarkerForm.setName(theClinicalMarker.getName());
+            }            
         		
-        		clinicalMarkerForm.setName(theClinicalMarker.getName());
             if (theClinicalMarker.getValue() != null) {        		
         		clinicalMarkerForm.setValue(theClinicalMarker.getValue());
             }   	

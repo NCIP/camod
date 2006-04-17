@@ -24,7 +24,7 @@
 			</tr>
 			<tr><td>&nbsp;</td></tr>			
 
-			<c:forEach var="p" items="${mdl.imageCollectionSorted}" 
+			<c:forEach var="p" items="${mdl.imageCollection}" 
 				       varStatus="stat">
 			<tr>
 				<c:choose>
@@ -50,7 +50,7 @@
 					<tr>
 						<td class="resultsBoxGrey" width="15%"><b>Staining</b></td>
 						<td class="resultsBoxGreyEnd" width="85%">
-						<c:out value="${p.staining}"/>&nbsp;
+						<c:out value="${p.stainingMethod}"/>&nbsp;
 						</td>
 					<tr>				
 					<tr>

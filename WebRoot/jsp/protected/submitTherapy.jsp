@@ -5,6 +5,7 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.TherapyForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
@@ -92,7 +93,7 @@ function unselectAll()
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="10" property="NSCNumber" />
+				<html:text styleClass="formFieldUnSized" size="10" property="nscNumber" />
 			</td>
 	</tr>
 	<!-- changed linkd to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
@@ -105,7 +106,7 @@ function unselectAll()
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="10" property="CASNumber" />
+				<html:text styleClass="formFieldUnSized" size="10" property="casNumber" />
 			</td>
 	</tr>	
 	<tr>
@@ -203,7 +204,7 @@ function unselectAll()
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized"  property="dosage" size="15"  />
 			<label for="field1">&nbsp;Units&nbsp;</label>			
-			<html:select styleClass="formFieldUnSized" size="1" property="doseUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="dosageUnit" >												
 				<html:options name="<%= Dropdowns.CHEMTHERAPYDOSEUNITSDROP %>"/>				
 			</html:select>
 		</td>
@@ -245,7 +246,7 @@ function unselectAll()
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageAtTreatment"  size="15"/>
 			<label for="field1">&nbsp;Units&nbsp;</label>
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageAtTreatmentUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
@@ -279,7 +280,17 @@ function unselectAll()
 			<td class="formField">
 				<html:text styleClass="formFieldSized" size="30" property="biomarker" />			
 			</td>
-	</tr>	
+	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Tumor Response:</label>
+		<camod:cshelp mapId="therapy_help" key="THERAPY.TUMORRESPONSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" size="30" property="tumorResponse" />			
+			</td>
+	</tr>		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comment:</label>

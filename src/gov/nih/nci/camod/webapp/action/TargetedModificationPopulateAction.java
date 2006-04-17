@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.11 2005-11-28 18:31:57 georgeda Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/28 18:31:57  georgeda
+ * Defect #64, fix for newly submitted models
+ *
  * Revision 1.10  2005/11/28 13:50:32  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -26,12 +29,9 @@ import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.service.impl.TargetedModificationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
-import java.util.List;
-
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -57,30 +57,34 @@ public class TargetedModificationPopulateAction extends BaseAction {
             targetedModificationForm.setName(theTargetedModification.getName());
             MutationIdentifier theMutationIdentifier = theTargetedModification.getMutationIdentifier();
             if (theMutationIdentifier != null) {
-                targetedModificationForm.setNumberMGI(theMutationIdentifier.getNumberMGI().toString());
+                targetedModificationForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
             }
             
             // Get the size of the list of modifications
-            List theTargetedModificationList = theTargetedModification.getModificationTypeCollection();
+            // Sima TODO - added new ArrayList instead of type safe generic              
+            List<ModificationType> theTargetedModificationList = new ArrayList<ModificationType>(theTargetedModification.getModificationTypeCollection());
             int theListSize = theTargetedModificationList.size();
             
+            
+            /* Sima TODO
             // We have an uncontrolled vocab, so we need to add "Other" to the list
             if (theTargetedModification.getModTypeUnctrlVocab() != null) {
                 theListSize++;
                 targetedModificationForm.setOtherModificationType(theTargetedModification.getModTypeUnctrlVocab());
             }
-            
+            */
 			// Get the collection of Targeted Modifications
 			String[] theTargetedMod = new String[theListSize];
 			for (int i = 0; i < theTargetedModificationList.size(); i++) {
 				ModificationType theModificationType = (ModificationType) theTargetedModificationList.get(i);				
 				theTargetedMod[i] = theModificationType.getName();
 			}
-			
+			/*  Sima TODO
 			// Add other as the last item in the list
 			if (theTargetedModification.getModTypeUnctrlVocab() != null) {
 				theTargetedMod[theListSize - 1] = Constants.Dropdowns.OTHER_OPTION;
 			}
+            */
 			// Set the modification types
 			targetedModificationForm.setModificationType(theTargetedMod);
 			
@@ -88,6 +92,9 @@ public class TargetedModificationPopulateAction extends BaseAction {
             targetedModificationForm.setComments(theTargetedModification.getComments());
             targetedModificationForm.setGeneId(theTargetedModification.getGeneId());
             targetedModificationForm.setEsCellLineName(theTargetedModification.getEsCellLineName());
+            
+            // Construct Sequence
+            targetedModificationForm.setConstructSequence(theTargetedModification.getConstructSequence());            
 
             // Conditionality
             Conditionality theConditionality = theTargetedModification.getConditionality();

@@ -1,14 +1,16 @@
 /*
- * Created on Jun 24, 2005
+ * $Id: ImageForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.webapp.form;
 /**
- * $Id: ImageForm.java,v 1.7 2005-11-07 21:57:34 georgeda Exp $
+ * $Id: ImageForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/11/07 21:57:34  georgeda
+ * Changes for images
+ *
  */
 
 import java.io.Serializable;
@@ -24,8 +26,8 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected String description;
     protected String descriptionOfConstruct;
     protected FormFile fileLocation;
-    protected String staining;
-    protected String otherStaining;
+    protected String stainingMethod;
+    protected String otherStainingMethod;
     protected String imageId;
     protected String imageUrl;
     protected String thumbUrl;
@@ -66,20 +68,20 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
         this.fileServerLocation = fileServerLocation;
     }
 
-    public String getOtherStaining() {
-        return otherStaining;
+    public String getOtherStainingMethod() {
+        return otherStainingMethod;
     }
 
-    public void setOtherStaining(String otherStaining) {
-        this.otherStaining = otherStaining;
+    public void setOtherStainingMethod(String otherStainingMethod) {
+        this.otherStainingMethod = otherStainingMethod;
     }
 
-    public String getStaining() {
-        return staining;
+    public String getStainingMethod() {
+        return stainingMethod;
     }
 
-    public void setStaining(String staining) {
-        this.staining = staining;
+    public void setStainingMethod(String stainingMethod) {
+        this.stainingMethod = stainingMethod;
     }
 
     public String getTitle() {

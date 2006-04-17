@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: HormonePopulateAction.java,v 1.11 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: HormonePopulateAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.10  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -21,8 +24,8 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.HormoneForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -42,49 +45,49 @@ public class HormonePopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<HormonePopulateAction populate> ... ");
+		System.out.println("<HormonePopulateAction populate> Entered ");
 
 		HormoneForm hormoneForm = (HormoneForm) form;
 
-		String aTherapyID = request.getParameter("aTherapyID");
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 		
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-		Therapy therapy = therapyManager.get(aTherapyID);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        CarcinogenExposure ce = carcinogenExposureManager.get(aCarcinogenExposureID);      
 
 		// Handle back-arrow on the delete
-		if (therapy == null) {
+		if (ce == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aTherapyID", aTherapyID);
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
 			// Set the otherName and/or the selected name attribute
-			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
 				hormoneForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				hormoneForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+				hormoneForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
 			} else {
-				hormoneForm.setName(therapy.getAgent().getName());
+				hormoneForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
 			// Set the other administrative route and/or the selected
-			// administrative
-			// route
-			if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+			// administrative route
+			if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
 				hormoneForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				hormoneForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+				hormoneForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
 			} else {
-				hormoneForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+				hormoneForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
 			}
 
-			if (therapy.getTreatment().getSexDistribution() != null) {
-				hormoneForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			if (ce.getTreatment().getSexDistribution() != null) {
+				hormoneForm.setType(ce.getTreatment().getSexDistribution().getType());
 			}
-			hormoneForm.setDosage(therapy.getTreatment().getDosage());
-			hormoneForm.setRegimen(therapy.getTreatment().getRegimen());
-			hormoneForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-
+			hormoneForm.setDosage(ce.getTreatment().getDosage());
+            hormoneForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+			hormoneForm.setRegimen(ce.getTreatment().getRegimen());
+			hormoneForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+            hormoneForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
 		}
-
+        System.out.println("<HormonePopulateAction populate> Got fields ");
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
@@ -130,8 +133,7 @@ public class HormonePopulateAction extends BaseAction {
 
 		System.out.println("<HormonePopulateAction dropdown> Entering... ");
 
-		// Prepopulate all dropdown fields, set the global Constants to the
-		// following
+		// Prepopulate all dropdown fields, set the global Constants to the following
 
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HORMONEDROP, Constants.Dropdowns.ADD_BLANK);
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HORMONEUNITSDROP, "");

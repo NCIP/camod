@@ -1,19 +1,12 @@
 /*
- * Created on Jun 24, 2005
+ * $Id: InducedMutationForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-/**
- * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public class InducedMutationForm extends BaseForm implements Serializable, InducedMutationData {
     
     private static final long serialVersionUID = 3257175453799404851L;
@@ -21,22 +14,19 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
 	/**
 	 * Default empty constructor
 	 * @author rajputs
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public InducedMutationForm() {}
 	
 	protected String type;
 	protected String otherType;
-	protected String CASNumber;
+	protected String casNumber;
 	protected String geneId;
 	protected String name;
 	protected String description;
 	protected String observation;
 	protected String methodOfObservation;
     protected String comments;
-	protected String numberMGI;
+	protected String mgiNumber;
 	
 	/**
 	 * @return Returns the type.
@@ -63,16 +53,16 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
 		this.otherType = otherType;
 	}	
 	/**
-	 * @return Returns the CASNumber.
+	 * @return Returns the casNumber.
 	 */
-	public String getCASNumber() {
-		return CASNumber;
+	public String getCasNumber() {
+		return casNumber;
 	}
 	/**
-	 * @param CASNumber The CASNumber to set.
+	 * @param casNumber The casNumber to set.
 	 */	
-	public void setCASNumber(String CASNumber) {
-		this.CASNumber = CASNumber;
+	public void setCasNumber(String casNumber) {
+		this.casNumber = casNumber;
 	}	
 	/**
 	 * @return Returns the geneId.
@@ -149,15 +139,15 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
     }
     
 	/**
-	 * @return Returns the numberMGI.
+	 * @return Returns the mgiNumber.
 	 */
-	public String getNumberMGI() {
-		return numberMGI;
+	public String getMgiNumber() {
+		return mgiNumber;
 	}
 	/**
-	 * @param numberMGI The numberMGI to set.
+	 * @param mgiNumber The mgiNumber to set.
 	 */
-	public void setNumberMGI(String numberMGI) {
-		this.numberMGI = numberMGI;
+	public void setMgiNumber(String mgiNumber) {
+		this.mgiNumber = mgiNumber;
 	}	
 }

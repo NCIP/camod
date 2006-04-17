@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModelCharacteristicsForm.java,v 1.7 2005-10-24 13:28:30 georgeda Exp $
+ * $Id: ModelCharacteristicsForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/10/24 13:28:30  georgeda
+ * Cleanup changes
+ *
  * Revision 1.6  2005/10/13 20:48:00  georgeda
  * Correctly handle the PI
  *
@@ -36,7 +39,9 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String principalInvestigator;
     protected String isToolMouse = "no";
     protected String scientificName;
+    protected String otherScientificName;    
     protected String ethinicityStrain;
+    protected String otherEthnicityStrain;    
     protected String experimentDesign;
     protected String description;
     protected String type;
@@ -44,7 +49,7 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String url;
     protected String releaseDate = "immediately";
     protected String calendarReleaseDate;
-    protected String ethnicityStrainUnctrlVocab;
+
 
     public ModelCharacteristicsForm() {
     }
@@ -53,119 +58,127 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
         return modelDescriptor;
     }
 
-    public void setModelDescriptor(String a) {
-        this.modelDescriptor = a;
+    public void setModelDescriptor(String modelDescriptor) {
+        this.modelDescriptor = modelDescriptor;
     }
 
-    public String getEthnicityStrainUnctrlVocab() {
-        return ethnicityStrainUnctrlVocab;
+    public String getOtherEthnicityStrain() {
+        return otherEthnicityStrain;
     }
 
-    public void setEthnicityStrainUnctrlVocab(String a) {
-        this.ethnicityStrainUnctrlVocab = a;
+    public void setOtherEthnicityStrain(String otherEthnicityStrain) {
+        this.otherEthnicityStrain = otherEthnicityStrain;
     }
 
     public String getCalendarReleaseDate() {
         return calendarReleaseDate;
     }
 
-    public void setCalendarReleaseDate(String a) {
-        this.calendarReleaseDate = a;
+    public void setCalendarReleaseDate(String calendarReleaseDate) {
+        this.calendarReleaseDate = calendarReleaseDate;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String a) {
-        this.name = a;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSummary() {
         return summary;
     }
 
-    public void setSummary(String a) {
-        this.summary = a;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getPrincipalInvestigator() {
         return principalInvestigator;
     }
 
-    public void setPrincipalInvestigator(String a) {
-        this.principalInvestigator = a;
+    public void setPrincipalInvestigator(String principalInvestigator) {
+        this.principalInvestigator = principalInvestigator;
     }
 
     public String getIsToolMouse() {
         return isToolMouse;
     }
 
-    public void setIsToolMouse(String a) {
-        this.isToolMouse = a;
+    public void setIsToolMouse(String isToolMouse) {
+        this.isToolMouse = isToolMouse;
     }
 
     public String getScientificName() {
         return scientificName;
     }
 
-    public void setScientificName(String a) {
-        this.scientificName = a;
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
     }
+    
+    public String getOtherScientificName() {
+        return otherScientificName;
+    }
+
+    public void setOtherScientificName(String otherScientificName) {
+        this.otherScientificName = otherScientificName;
+    }    
 
     public String getEthinicityStrain() {
         return ethinicityStrain;
     }
 
-    public void setEthinicityStrain(String a) {
-        this.ethinicityStrain = a;
+    public void setEthinicityStrain(String ethinicityStrain) {
+        this.ethinicityStrain = ethinicityStrain;
     }
 
     public String getExperimentDesign() {
         return experimentDesign;
     }
 
-    public void setExperimentDesign(String a) {
-        this.experimentDesign = a;
+    public void setExperimentDesign(String experimentDesign) {
+        this.experimentDesign = experimentDesign;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String a) {
-        this.description = a;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String a) {
-        this.type = a;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getBreedingNotes() {
         return breedingNotes;
     }
 
-    public void setBreedingNotes(String a) {
-        this.breedingNotes = a;
+    public void setBreedingNotes(String breedingNotes) {
+        this.breedingNotes = breedingNotes;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String a) {
-        this.url = a;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String a) {
-        this.releaseDate = a;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 }

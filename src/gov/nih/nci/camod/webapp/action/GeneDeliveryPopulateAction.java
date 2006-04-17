@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.15 2005-11-29 16:31:52 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.16 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/11/29 16:31:52  pandyas
+ * Defect #223: Fixed code so Organ object is not created when no Organ is selected. Added code to check for null Organ in the populateAction.
+ *
  * Revision 1.14  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -55,18 +58,18 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 		// Create a form to edit
 		GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
 
-		// Grab the current Therapy we are working with related to this
+		// Grab the current aCarcinogenExposureID we are working with related to this
 		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+		String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 		GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
-		GeneDelivery gene = geneDeliveryManager.get(aTherapyID);
+		GeneDelivery gene = geneDeliveryManager.get(aCarcinogenExposureID);
 
 		// Handle back-arrow on the delete
 		if (gene == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aTherapyID", aTherapyID);
+			request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
 			// Set the otherViralVector and/or the selected viral vector
 			// attribute
@@ -84,7 +87,8 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 				geneDeliveryForm.setType(gene.getTreatment().getSexDistribution().getType());
 			}
 			geneDeliveryForm.setAgeAtTreatment(gene.getTreatment().getAgeAtTreatment());
-
+            geneDeliveryForm.setAgeAtTreatmentUnit(gene.getTreatment().getAgeAtTreatmentUnit());
+            
 			/* set Organ attributes */
 			log.info("<GeneDeliveryPopulateAction populate> get the Organ attributes");
 

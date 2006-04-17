@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationPopulateAction.java,v 1.12 2005-12-21 15:45:33 georgeda Exp $
+ * $Id: RadiationPopulateAction.java,v 1.13 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2005/12/21 15:45:33  georgeda
+ * Defect #283 - fixed population of other admin route
+ *
  * Revision 1.11  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -24,8 +27,8 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.RadiationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -50,51 +53,51 @@ public class RadiationPopulateAction extends BaseAction {
 		// Create a form to edit
 		RadiationForm radiationForm = (RadiationForm) form;
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-		Therapy therapy = therapyManager.get(aTherapyID);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        CarcinogenExposure ce = carcinogenExposureManager.get(aCarcinogenExposureID);      
 
 		// Handle back-arrow on the delete
-		if (therapy == null) {
+		if (ce == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aTherapyID", aTherapyID);
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);            
 
 			// Set the otherName and/or the selected name attribute
-			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
 				radiationForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				radiationForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+				radiationForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
 			} else {
-				radiationForm.setName(therapy.getAgent().getName());
+				radiationForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
 			// Set the other administrative route and/or the selected
 			// administrative
 			// route
-			if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+			if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
 				radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				radiationForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+				radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
 			} else {
-				radiationForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+				radiationForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
 			}
 
-			if (therapy.getTreatment().getSexDistribution() != null) {
-				radiationForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			if (ce.getTreatment().getSexDistribution() != null) {
+				radiationForm.setType(ce.getTreatment().getSexDistribution().getType());
 			}
-			radiationForm.setDosage(therapy.getTreatment().getDosage());
-			radiationForm.setRegimen(therapy.getTreatment().getRegimen());
-			radiationForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+			radiationForm.setDosage(ce.getTreatment().getDosage());
+            radiationForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+			radiationForm.setRegimen(ce.getTreatment().getRegimen());
+			radiationForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
             
-            if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+            if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
                 radiationForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                radiationForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+                radiationForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
             }
             
-			radiationForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
+			radiationForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+            radiationForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
 
 		}
 

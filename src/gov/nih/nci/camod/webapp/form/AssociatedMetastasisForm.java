@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: AssociatedMetastasisForm.java,v 1.2 2005-11-03 21:48:16 georgeda Exp $
+ * $Id: AssociatedMetastasisForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/11/03 21:48:16  georgeda
+ * Cleanup
+ *
  * Revision 1.1  2005/11/03 18:52:44  pandyas
  * Modified for histopathology screens
  *
@@ -22,13 +25,11 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
 	/**
 	 * Default empty constructor
 	 * @author pandyas
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public AssociatedMetastasisForm() {}
 	
 	protected String histopathologyID;
+    protected String absCancerModelID;    
 	
 	protected String organ;
 	protected String organTissueName;
@@ -39,7 +40,7 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
     protected String tumorClassification;
     
 	protected String ageOfOnset;
-    protected String ageUnit;
+    protected String ageOfOnsetUnit;
 	protected String weightOfTumor;
 	protected String volumeOfTumor;
 	protected String tumorIncidenceRate;
@@ -62,7 +63,20 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
 	 */	
 	public void setHistopathologyID( String histopathologyID ) {
 		this.histopathologyID = histopathologyID;
-	}	
+	}
+    
+    /**
+     * @return Returns the parent absCancerModelID.
+     */ 
+    public String getAbsCancerModelID() {
+        return absCancerModelID;
+    }
+    /**
+     * @param parent AbsCancerModelID The AbsCancerModelID to set.
+     */ 
+    public void setAbsCancerModelID( String absCancerModelID ) {
+        this.absCancerModelID = absCancerModelID;
+    }    
 	
 	/**
 	 * @return Returns the organ.
@@ -129,18 +143,18 @@ public class AssociatedMetastasisForm extends BaseForm implements Serializable, 
 		this.ageOfOnset = ageOfOnset;
 	}
     /**
-     * @return Returns the ageUnit.
+     * @return Returns the ageOfOnsetUnit.
      */
-    public String getAgeUnit() {
-        return ageUnit;
+    public String getAgeOfOnsetUnit() {
+        return ageOfOnsetUnit;
     }
 
     /**
-     * @param ageUnit
-     *            The ageUnit to set.
+     * @param ageOfOnsetUnit
+     *            The ageOfOnsetUnit to set.
      */
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
+    public void setAgeOfOnsetUnit(String ageOfOnsetUnit) {
+        this.ageOfOnsetUnit = ageOfOnsetUnit;
     }	
 	/**
 	 * @return Returns the weightOfTumor.

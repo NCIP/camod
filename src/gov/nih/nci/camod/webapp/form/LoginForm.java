@@ -1,9 +1,7 @@
 /*
- * LogonForm.java
- * Created on Jun 24, 2005
+ * $Id: LoginForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -18,9 +16,6 @@ public class LoginForm extends BaseForm implements Serializable {
 	/**
 	 * Default empty constructor
 	 * @author nschroedl
-	 *
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public LoginForm() {}
 	

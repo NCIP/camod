@@ -1,8 +1,7 @@
 /*
- * Created on Jun 17, 2005
+ * $Id: GenomicSegmentManagerImpl.java,v 1.21 2006-04-17 19:11:06 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -94,25 +93,26 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
     {
         log.trace("Entering populateGenomicSegment");
 
-        if (inGenomicSegmentData.getLocationOfIntegration().equals("Targeted"))
-            inGenomicSegment.setLocationOfIntegration(inGenomicSegmentData.getOtherLocationOfIntegration());
-        else
+        if (inGenomicSegmentData.getIsRandom().equals("Targeted")) {
+            
             inGenomicSegment.setLocationOfIntegration(inGenomicSegmentData.getLocationOfIntegration());
-
-        inGenomicSegment.setComments(inGenomicSegmentData.getComments());
+        } else {
+            inGenomicSegment.setIsRandom(true);
+        }
+        //inGenomicSegment.setComments(inGenomicSegmentData.getComments());
         inGenomicSegment.setSegmentSize(inGenomicSegmentData.getSegmentSize());
         inGenomicSegment.setCloneDesignator(inGenomicSegmentData.getCloneDesignator());
 
         // SegmentType.  Reuse if it's aready there, update otherwise.
         SegmentType theSegmentType = null;
-        if (inGenomicSegment.getSegmentTypeCollection().size() > 0)
+        if (inGenomicSegment.getSegmentType() != null)
         {
-            theSegmentType = (SegmentType) inGenomicSegment.getSegmentTypeCollection().get(0);
+            theSegmentType = (SegmentType) inGenomicSegment.getSegmentType();
         }
         else
         {
             theSegmentType = new SegmentType();
-            inGenomicSegment.addSegmentType(theSegmentType);
+            inGenomicSegment.setSegmentType(theSegmentType);
         }
 
         theSegmentType.setName(inGenomicSegmentData.getSegmentName());
@@ -199,18 +199,18 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
         else
             inMutationIdentifier = new MutationIdentifier();
 
-        if (inGenomicSegmentData.getNumberMGI() == null || inGenomicSegmentData.getNumberMGI().equals(""))
+        if (inGenomicSegmentData.getMgiNumber() == null || inGenomicSegmentData.getMgiNumber().equals(""))
         {
             inGenomicSegment.setMutationIdentifier(null);
         }
         else
         {
-            String strNumberMGI = inGenomicSegmentData.getNumberMGI().trim();
-            Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-            Matcher m = p.matcher(strNumberMGI);
-            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals(""))
+            String strMGINumber = inGenomicSegmentData.getMgiNumber().trim();
+            Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
+            Matcher m = p.matcher(strMGINumber);
+            if (m.matches() && strMGINumber != null && !strMGINumber.equals(""))
             {
-                inMutationIdentifier.setNumberMGI(Long.valueOf(strNumberMGI));
+                inMutationIdentifier.setMgiNumber(strMGINumber);
                 inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
             }
         }

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.38 2005-12-05 22:17:01 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.39 2006-04-17 19:08:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2005/12/05 22:17:01  pandyas
+ * Defect #61 and #62:  Removed Libraries and Tissues and Protein Similarities   until we must decide if we are going to display this data in the next release.
+ *
  * Revision 1.37  2005/11/29 13:27:47  georgeda
  * Defect #76, move top link to right
  *
@@ -101,7 +104,7 @@
 		</tr>
 
 		<tr>
-			<td class="GreyBox" width="20%"><b>Engineered Transgene</b></td>
+			<td class="GreyBox" width="20%"><b>Transgene</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
@@ -238,7 +241,7 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			<c:out value="${tg.taxonCollection[0].scientificName}"/>&nbsp;
+			<c:out value="${tg.speciesCollection[0].scientificName}"/>&nbsp;
 			</td>
 		</tr>
 
@@ -257,11 +260,11 @@
 						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
 						<td class="WhiteBoxRightEnd" width="65%">
 							<c:choose>
-								<c:when test="${not empty rem.taxon.scientificName}">
-									<c:out value="${rem.taxon.scientificName}"/>&nbsp;
+								<c:when test="${not empty rem.species.scientificName}">
+									<c:out value="${rem.species.scientificName}"/>&nbsp;
 								</c:when>
 								<c:otherwise>
-						            <c:out value="${rem.taxon.commonName}"/>&nbsp;
+						            <c:out value="${rem.species.commonName}"/>&nbsp;
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -350,9 +353,9 @@
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<c:if test="${not empty tg.mutationIdentifier.numberMGI}">
-				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tg.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
-				    <c:out value="${tg.mutationIdentifier.numberMGI}"/>
+			<c:if test="${not empty tg.mutationIdentifier.mgiNumber}">
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tg.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
+				    <c:out value="${tg.mutationIdentifier.mgiNumber}"/>
 				</a>
 			</c:if>&nbsp;
 			</td>			
@@ -492,9 +495,9 @@
         <tr>
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			    <c:if test="${not empty gs.mutationIdentifier.numberMGI}">
-					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${gs.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
-					    <c:out value="${gs.mutationIdentifier.numberMGI}"/>
+			    <c:if test="${not empty gs.mutationIdentifier.mgiNumber}">
+					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${gs.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${gs.mutationIdentifier.mgiNumber}"/>
 					</a>
 			    </c:if>&nbsp;
 			</td>
@@ -646,9 +649,9 @@
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-				<c:if test="${not empty tm.mutationIdentifier.numberMGI}">
-					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tm.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
-					    <c:out value="${tm.mutationIdentifier.numberMGI}"/>
+				<c:if test="${not empty tm.mutationIdentifier.mgiNumber}">
+					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tm.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${tm.mutationIdentifier.mgiNumber}"/>
 					</a>
 			    </c:if>&nbsp;
 			</td>
@@ -819,9 +822,9 @@
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-				<c:if test="${not empty im.mutationIdentifier.numberMGI}">
-					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${im.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
-					    <c:out value="${im.mutationIdentifier.numberMGI}"/>
+				<c:if test="${not empty im.mutationIdentifier.mgiNumber}">
+					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${im.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${im.mutationIdentifier.mgiNumber}"/>
 					</a>
 			    </c:if>&nbsp;
 			</td>
@@ -881,9 +884,9 @@
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-				<c:if test="${not empty sm.mutationIdentifier.numberMGI}">
-					<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${sm.mutationIdentifier.numberMGI}"/>&selectedQuery=Genes+and+Markers">
-					    <c:out value="${sm.mutationIdentifier.numberMGI}"/>
+				<c:if test="${not empty sm.mutationIdentifier.mgiNumber}">
+					<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${sm.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
+					    <c:out value="${sm.mutationIdentifier.mgiNumber}"/>
 					</a>
 			    </c:if>&nbsp;
 			</td>

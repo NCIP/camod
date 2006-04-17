@@ -1,8 +1,17 @@
+/**
+ * 
+ * $Id: SurgeryPopulateAction.java,v 1.9 2006-04-17 19:09:40 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.SurgeryForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -26,31 +35,34 @@ public class SurgeryPopulateAction extends BaseAction {
 
 		SurgeryForm surgeryForm = (SurgeryForm) form;
 
-		String aTherapyID = request.getParameter("aTherapyID");
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-		Therapy therapy = therapyManager.get(aTherapyID);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        CarcinogenExposure ce = carcinogenExposureManager.get(aCarcinogenExposureID);      
+
 
 		// Handle back-arrow on the delete
-		if (therapy == null) {
+		if (ce == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aTherapyID", aTherapyID);
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
+
 
 			// Set the otherName and/or the selected name attribute
-			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
 				surgeryForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				surgeryForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+				surgeryForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
 			} else {
-				surgeryForm.setName(therapy.getAgent().getName());
+				surgeryForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
-			if (therapy.getTreatment().getSexDistribution() != null) {
-				surgeryForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			if (ce.getTreatment().getSexDistribution() != null) {
+				surgeryForm.setType(ce.getTreatment().getSexDistribution().getType());
 			}
-			surgeryForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-			surgeryForm.setRegimen(therapy.getTreatment().getRegimen());
+			surgeryForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+            surgeryForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
+			surgeryForm.setRegimen(ce.getTreatment().getRegimen());
 
 		}
 

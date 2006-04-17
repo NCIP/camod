@@ -38,15 +38,6 @@
 
 <SCRIPT LANGUAGE="JavaScript">
 
-	function chkIntegration() {
-			
-		if( document.forms[0].locationOfIntegration[1].checked == true ) {
-			enableField(document.forms[0].otherLocationOfIntegration);
-		} else {
-			disableField(document.forms[0].otherLocationOfIntegration);
-		}
-	}
-
 	function chkConditional() {
 	
 		if( document.forms[0].conditionedBy[0].checked == true ) {
@@ -58,7 +49,7 @@
 	}	
 </SCRIPT>
 
-<html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">
+<html:form action="<%= actionName %>" focus="isRandom" enctype="multipart/form-data">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -73,16 +64,16 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Engineered Transgene </td>
+		<td class="formTitle" height="20" colspan="3">Transgene </td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Transgene Integration:</label></td>
-		<td class="formField">
-			<html:radio property="locationOfIntegration" value="Random" onclick="chkIntegration(this);" /> Random 
-			<html:radio property="locationOfIntegration" value="Targeted" onclick="chkIntegration(this);" /> Targeted
-		</td>
+		<td class="formRequiredLabel"><label for="field3">Integration:</label></td>
+			<td class="formField">
+				<html:radio property="isRandom" value="yes" onclick="chkIntegration(this);" /> Random 
+				<html:radio property="isRandom" value="no" onclick="chkIntegration(this);" /> Targeted  
+			</td>		
 	</tr>
 
 	<tr>
@@ -91,7 +82,7 @@
 		<camod:cshelp mapId="engineered_transgene_help" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherLocationOfIntegration"  size="10" />
+			<html:text styleClass="formFieldSized" disabled="true" property="locationOfIntegration"  size="10" />
 		</td>
 	</tr>
 
@@ -112,7 +103,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldSized" size="1" property="scientificName" onchange="chkName();" >
-							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+							<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -140,7 +131,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldSized" size="1" property="transcriptional1_species" onchange="chkOther_t1();" >
-							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+							<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
@@ -162,7 +153,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldSized" size="1" property="transcriptional2_species" onchange="chkOther_t2();" >
-							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+							<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
@@ -184,7 +175,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldSized" size="1" property="transcriptional3_species" onchange="chkOther_t3();" >
-							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+							<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species<br>
@@ -208,7 +199,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldSized" size="1" property="polyASignal_species" onchange="chkOther_PS();" >
-							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+							<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
@@ -230,7 +221,7 @@
 					</td>
 					<td class="standardText" width="33%">Species of Origin:<br>
 						<html:select styleClass="formFieldSized" size="1" property="spliceSites_species" onchange="chkOther_SS();" >
-							<html:optionsCollection name="<%= Dropdowns.HOSTSPECIESDROP %>" />										
+							<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 						</html:select>					
 					</td>
 					<td class="standardText" width="33%">Other Species:<br>
@@ -278,7 +269,7 @@
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 			<label for="field1">&nbsp;&nbsp;</label>
-			<html:text styleClass="formFieldUnSized" size="15" property="numberMGI"  />
+			<html:text styleClass="formFieldUnSized" size="15" property="mgiNumber"  />
 		</td>
 	</tr>	
 	<tr>
@@ -329,6 +320,17 @@
 			<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct" rows="4" cols="32"  />	
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Construct Sequence:<br>(Enter info only when uploading image)</label>
+		</td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="constructSequence" rows="4" cols="32"  />	
+		</td>
+	</tr>	
+
+
 	
 	<tr>
 		<td align="right" colspan="3">

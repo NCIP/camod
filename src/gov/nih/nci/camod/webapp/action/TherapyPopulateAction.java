@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.15 2005-12-29 18:29:14 pandyas Exp $
+ * $Id: TherapyPopulateAction.java,v 1.16 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2005/12/29 18:29:14  pandyas
+ * Clean up - removed code for TumorResponse
+ *
  * Revision 1.14  2005/11/28 13:50:47  georgeda
  * Defect #207, handle nulls for pages w/ uncontrolled vocab
  *
@@ -47,7 +50,7 @@ import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.TherapyForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,71 +78,82 @@ public class TherapyPopulateAction extends BaseAction {
 		String aTherapyID = request.getParameter("aTherapyID");
 
 		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-		Therapy ty = therapyManager.get(aTherapyID);
+		Therapy therapy = therapyManager.get(aTherapyID);
 
-		if (ty == null) {
+		if (therapy == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			request.setAttribute("aTherapyID", aTherapyID);
 
-			if (ty.getTreatment() != null) {
-				if (ty.getTreatment().getSexDistribution() != null) {
-					therapyForm.setType(ty.getTreatment().getSexDistribution().getType());
+			if (therapy.getTreatment() != null) {
+				if (therapy.getTreatment().getSexDistribution() != null) {
+					therapyForm.setType(therapy.getTreatment().getSexDistribution().getType());
 				}
-				if (ty.getTreatment().getAgeAtTreatment() != null) {
-					therapyForm.setAgeAtTreatment(ty.getTreatment().getAgeAtTreatment());
+				if (therapy.getTreatment().getAgeAtTreatment() != null) {
+					therapyForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
+                    therapyForm.setAgeAtTreatmentUnit(therapy.getTreatment().getAgeAtTreatmentUnit());                    
 				}
 
-				therapyForm.setDosage(ty.getTreatment().getDosage());
-				therapyForm.setAdministrativeRoute(ty.getTreatment().getAdministrativeRoute());
+				therapyForm.setDosage(therapy.getTreatment().getDosage());
+                therapyForm.setDosageUnit(therapy.getTreatment().getDosageUnit());
 
-				if (ty.getTreatment().getAdminRouteUnctrlVocab() != null) {
+				if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
 					therapyForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-					therapyForm.setOtherAdministrativeRoute(ty.getTreatment().getAdminRouteUnctrlVocab());
+					therapyForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+				}
+				else {
+					therapyForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
 				}
 			}
-
-			therapyForm.setName(ty.getAgent().getName());
-
-			if (ty.getAgent().getCasNumber() != null) {
-				therapyForm.setCASNumber(ty.getAgent().getCasNumber());
+			
+            //therapy.agent attribute
+			therapyForm.setName(therapy.getAgent().getName());
+			
+            //agent attributes
+			if (therapy.getAgent().getCasNumber() != null) {
+				therapyForm.setCasNumber(therapy.getAgent().getCasNumber());
 			}
 
-			if (ty.getAgent().getNscNumber() != null) {
-				therapyForm.setNSCNumber(ty.getAgent().getNscNumber().toString());
+			if (therapy.getAgent().getNscNumber() != null) {
+				therapyForm.setNscNumber(therapy.getAgent().getNscNumber().toString());
 			}
 
 			// Therapy object attributes
-			therapyForm.setToxicityGrade(ty.getToxicityGrade());
-			therapyForm.setBiomarker(ty.getBiomarker());
-			therapyForm.setExperiment(ty.getExperiment());
-			therapyForm.setResults(ty.getResults());
-			therapyForm.setComments(ty.getComments());
+			therapyForm.setToxicityGrade(therapy.getToxicityGrade());
+			therapyForm.setBiomarker(therapy.getBiomarker());
+			therapyForm.setExperiment(therapy.getExperiment());
+			therapyForm.setResults(therapy.getResults());
+            therapyForm.setTumorResponse(therapy.getTumorResponse());
+			therapyForm.setComments(therapy.getComments());
 
-			// Get the collection of agent targets
-			List theAgentTargetsList = ty.getAgent().getAgentTargetCollection();
-			String[] theTargets = new String[theAgentTargetsList.size()];
-			for (int i = 0; i < theAgentTargetsList.size(); i++) {
-				AgentTarget theAgentTarget = (AgentTarget) theAgentTargetsList.get(i);
-				theTargets[i] = theAgentTarget.getTargetName();
-			}
-			therapyForm.setSelectedTargets(theTargets);
+			// Get the collection/Set of agent targets
+			List<AgentTarget> theAgentTargetsList = new ArrayList<AgentTarget>(therapy.getAgent().getAgentTargetCollection());
+            //Iterator it = theAgentTargetsSet.iterator();
+            List<AgentTarget> theTargetsList = new ArrayList<AgentTarget>();
+            
+            String[] theTargets =  new String[theTargetsList.size()];
+            for (int i = 0; i < theAgentTargetsList.size(); i++) {
+                AgentTarget theAgentTarget = (AgentTarget) theAgentTargetsList.get(i);
+                theTargets[i] = theAgentTarget.getName();
+            }
+            therapyForm.setSelectedTargets(theTargets);
 
-			// Get the collection of biological processes
-			List theProcessesList = ty.getAgent().getBiologicalProcessCollection();
+            
+			// Get the collection/Set  of biological processes
+			List theProcessesList = new ArrayList(therapy.getAgent().getBiologicalProcessCollection());
 			String[] theProcesses = new String[theProcessesList.size()];
 			for (int i = 0; i < theProcessesList.size(); i++) {
 				BiologicalProcess theBiologicalProcess = (BiologicalProcess) theProcessesList.get(i);
-				theProcesses[i] = theBiologicalProcess.getProcessName();
+				theProcesses[i] = theBiologicalProcess.getName();
 			}
 			therapyForm.setSelectedProcesses(theProcesses);
 
-			// Get the collection of Chemical Classes
-			List theChemicalClassesList = ty.getAgent().getChemicalClassCollection();
+			// Get the collection/Set of Chemical Classes
+			List theChemicalClassesList = new ArrayList(therapy.getAgent().getChemicalClassCollection());
 			String[] theChemicalClasses = new String[theChemicalClassesList.size()];
 			for (int i = 0; i < theChemicalClassesList.size(); i++) {
 				ChemicalClass theChemicalClass = (ChemicalClass) theChemicalClassesList.get(i);
-				theChemicalClasses[i] = theChemicalClass.getChemicalClassName();
+				theChemicalClasses[i] = theChemicalClass.getName();
 			}
 			therapyForm.setSelectedChemicalClasses(theChemicalClasses);
 		}

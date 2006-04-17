@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminUserSettingsAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
+ * $Id: AdminUserSettingsAction.java,v 1.3 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/24 13:28:17  georgeda
+ * Cleanup changes
+ *
  * Revision 1.1  2005/10/21 20:47:04  georgeda
  * Initial revision
  *
@@ -53,7 +56,7 @@ public class AdminUserSettingsAction extends BaseAction {
 
                 StringTokenizer theTokenizer = new StringTokenizer(theUsersToNotify, ",");
 
-                List theNotifyList = new ArrayList();
+                List<String> theNotifyList = new ArrayList<String>();
                 while (theTokenizer.hasMoreElements()) {
                     theNotifyList.add(theTokenizer.nextToken());
                 }
@@ -70,7 +73,7 @@ public class AdminUserSettingsAction extends BaseAction {
                 if (theRecipients.length > 0) {
 
                     // gather variable values to build the e-mail content with
-                    Map valuesForVariables = new TreeMap();
+                    Map<String, String> valuesForVariables = new TreeMap<String, String>();
                     valuesForVariables.put("firstName", theForm.getFirstName());
                     valuesForVariables.put("lastName", theForm.getLastName());
                     valuesForVariables.put("email", theForm.getEmail());

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorPopulateAction.java,v 1.14 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: EnvironmentalFactorPopulateAction.java,v 1.15 2006-04-17 19:09:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.13  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -24,14 +27,12 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.EnvironmentalFactorForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.*;
 
 public class EnvironmentalFactorPopulateAction extends BaseAction {
@@ -51,42 +52,44 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
 
         // Grab the current Therapy we are working with related to this
         // animalModel
-        String aTherapyID = request.getParameter("aTherapyID");
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
-        TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-        Therapy therapy = therapyManager.get(aTherapyID);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        CarcinogenExposure ce = carcinogenExposureManager.get(aCarcinogenExposureID);
 
         // Handle back-arrow on the delete
-        if (therapy == null) {
+        if (ce == null) {
             request.setAttribute(Constants.Parameters.DELETED, "true");
         } else {
 
-            request.setAttribute("aTherapyID", aTherapyID);
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
             // Set the otherName and/or the selected name attribute
-            if (therapy.getAgent().getNameUnctrlVocab() != null) {
+            if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
                 envForm.setName(Constants.Dropdowns.OTHER_OPTION);
-                envForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+                envForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
             } else {
-                envForm.setName(therapy.getAgent().getName());
+                envForm.setName(ce.getEnvironmentalFactor().getName());
             }
 
             // Set the other administrative route and/or the selected
             // administrative
             // route
-            if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+            if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
                 envForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                envForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+                envForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
             } else {
-                envForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+                envForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
             }
 
-            if (therapy.getTreatment().getSexDistribution() != null) {
-                envForm.setType(therapy.getTreatment().getSexDistribution().getType());
+            if (ce.getTreatment().getSexDistribution() != null) {
+                envForm.setType(ce.getTreatment().getSexDistribution().getType());
             }
-            envForm.setDosage(therapy.getTreatment().getDosage());
-            envForm.setRegimen(therapy.getTreatment().getRegimen());
-            envForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
+            envForm.setDosage(ce.getTreatment().getDosage());
+            envForm.setDosageUnit(ce.getTreatment().getDosageUnit());
+            envForm.setRegimen(ce.getTreatment().getRegimen());
+            envForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+            envForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
 
         }
 

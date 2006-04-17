@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.9 2005-11-09 00:17:25 georgeda Exp $
+ * $Id: SurgeryAction.java,v 1.10 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/11/09 00:17:25  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.8  2005/11/02 21:48:09  georgeda
  * Fixed validate
  *
@@ -57,19 +60,17 @@ public class SurgeryAction extends BaseAction {
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-		// Grab the current Therapy we are working with related to this
-		// animalModel
-		String aTherapyID = request.getParameter("aTherapyID");
+        // Grab the current CarcinogenExposure we are working with related to this animalModel
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
 		SurgeryForm surgeryForm = (SurgeryForm) form;
 
 		System.out.println("<SurgeryAction editing> editing... " + "\n\t name: " + surgeryForm.getName()
 				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
-				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageUnit: " + surgeryForm.getAgeUnit());
+				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
 		try {
 	        // retrieve animal model by it's id	        
@@ -77,7 +78,7 @@ public class SurgeryAction extends BaseAction {
 	        AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);			
 
             if ("Delete".equals(theAction)) {
-				therapyManager.remove(aTherapyID, theAnimalModel);
+                carcinogenExposureManager.remove(aCarcinogenExposureID, theAnimalModel);
 
 				ActionMessages msg = new ActionMessages();
 				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.delete.successful"));
@@ -85,8 +86,8 @@ public class SurgeryAction extends BaseAction {
 
 			} else {
 
-				Therapy theTherapy = therapyManager.get(aTherapyID);
-				therapyManager.update(theAnimalModel, surgeryForm, theTherapy);
+                CarcinogenExposure theCarcinogenExposure = carcinogenExposureManager.get(aCarcinogenExposureID);
+                carcinogenExposureManager.update(theAnimalModel, surgeryForm, theCarcinogenExposure);
 
 				// Add a message to be displayed in submitOverview.jsp saying
 				// you've
@@ -132,14 +133,14 @@ public class SurgeryAction extends BaseAction {
 
 		System.out.println("<SurgeryAction save> Adding... " + "\n\t name: " + surgeryForm.getName()
 				+ "\n\t otherName: " + surgeryForm.getOtherName() + "\n\t type: " + surgeryForm.getType()
-				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageUnit: " + surgeryForm.getAgeUnit());
+				+ "\n\t regimen: " + surgeryForm.getRegimen() + "\n\t ageAtTreatmentUnit: " + surgeryForm.getAgeAtTreatmentUnit());
 
 		/* Create all the manager objects needed for Screen */
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-			animalModelManager.addTherapy(animalModel, surgeryForm);
+			animalModelManager.addCarcinogenExposure(animalModel, surgeryForm);
 
 			ActionMessages msg = new ActionMessages();
 			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("surgeryother.creation.successful"));

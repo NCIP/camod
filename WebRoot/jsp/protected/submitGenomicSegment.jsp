@@ -64,23 +64,20 @@
 			<td class="formRequiredLabel"><label for="field3">Integration:</label>
 			</td>
 			<td class="formField">
-				<html:radio property="locationOfIntegration" value="Random" onclick="chkIntegration(this);" /> Random 
-				<html:radio property="locationOfIntegration" value="Targeted" onclick="chkIntegration(this);" /> Targeted
+				<html:radio property="isRandom" value="yes" onclick="chkIntegration(this);" /> Random 
+				<html:radio property="isRandom" value="no" onclick="chkIntegration(this);" /> Targeted  
 			</td>
 		</tr>		
 		
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Location of Integration:<br>
-													  (Required field when "Targeted"<br>
-													  is selected for the "Transgene <br>
-													  Integration" field) </label>
-			<camod:cshelp mapId="genomic_segment_help" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-			</td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" property="otherLocationOfIntegration" disabled="true" size="10" />
-			</td>
-		</tr>
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Location of Integration: *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)
+		<camod:cshelp mapId="engineered_transgene_help" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		</td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" disabled="true" property="locationOfIntegration"  size="10" />
+		</td>
+	</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
@@ -130,7 +127,7 @@
 				<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>           
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" property="numberMGI" size="15" />
+				<html:text styleClass="formFieldUnSized" property="mgiNumber" size="15" />
 			</td>
         </tr>	
         
@@ -182,6 +179,15 @@
 				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="32"  />	
 			</td>
 		</tr>
+		
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Construct Sequence:<br>(Enter info only when uploading image)</label>
+		</td>
+		<td class="formField">
+			<html:textarea styleClass="formFieldSized" property="constructSequence" rows="4" cols="32"  />	
+		</td>
+	</tr>		
 
 		<tr>
 			<td align="right" colspan="3">

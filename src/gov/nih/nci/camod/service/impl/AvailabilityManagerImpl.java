@@ -1,3 +1,11 @@
+/**
+ * 
+ * $Id: AvailabilityManagerImpl.java,v 1.9 2006-04-17 19:11:06 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
 package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.AnimalAvailability;
@@ -6,7 +14,6 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.AvailabilityManager;
 import gov.nih.nci.camod.webapp.form.AvailabilityData;
-
 import java.util.List;
 
 public class AvailabilityManagerImpl extends BaseManager implements AvailabilityManager
@@ -100,10 +107,9 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         /* get distributor object */
         AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
         log.info("theDistributor: " + theDistributor);
-
-        // Explicitly add AnimalDistributor since it is a many-to-many
-        // relationship in camod phase 1
-        inAvailability.addAnimalDistributor(theDistributor);
+        
+        // set distributor in 2.1
+        inAvailability.setAnimalDistributor(theDistributor);
 
         log.info("Added AnimalDistributor");
 
@@ -151,14 +157,12 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
         log.info("theDistributor): " + theDistributor);
 
-        if (!inAvailability.getAnimalDistributorCollection().contains(theDistributor))
+        if (!inAvailability.getAnimalDistributor().equals(theDistributor))
         {
-            // Explicitly add AnimalDistributor since it is a many-to-many
-            // relationship in camod phase 1
-            inAvailability.addAnimalDistributor(theDistributor);
 
             log.info("Added AnimalDistributor");
         }
+        inAvailability.setAnimalDistributor(theDistributor);
         log.info("Exiting AvailabilityManagerImpl.populateInvestigatorAvailability");
     }
 

@@ -21,7 +21,7 @@
 				    Cell Lines - Model: <c:out value="${mdl.modelDescriptor}" escapeXml="false" />
 				</td>				
 			</tr>
-			<c:forEach var="p" items="${mdl.cellLineCollectionSorted}" 
+			<c:forEach var="p" items="${mdl.cellLineCollection}" 
 				       varStatus="stat">
 				<c:choose>
 					<c:when test = "${stat.count % 2 == 0}">

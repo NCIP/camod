@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentPopulateAction.java,v 1.11 2005-12-21 15:44:15 georgeda Exp $
+ * $Id: ViralTreatmentPopulateAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/12/21 15:44:15  georgeda
+ * Defect #283 - fixed population of other admin route
+ *
  * Revision 1.10  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -24,14 +27,12 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Therapy;
-import gov.nih.nci.camod.service.TherapyManager;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.service.CarcinogenExposureManager;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -49,38 +50,40 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 
 		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
-		String aTherapyID = request.getParameter("aTherapyID");
+        String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
 
-		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
-		Therapy therapy = therapyManager.get(aTherapyID);
+        CarcinogenExposureManager carcinogenExposureManager = (CarcinogenExposureManager) getBean("carcinogenExposureManager");
+        CarcinogenExposure ce = carcinogenExposureManager.get(aCarcinogenExposureID);      
 
 		// Handle back-arrow on the delete
-		if (therapy == null) {
+		if (ce == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aTherapyID", aTherapyID);
+            request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
 			// Set the otherName and/or the selected name attribute
-			if (therapy.getAgent().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
 				viralTreatmentForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				viralTreatmentForm.setOtherName(therapy.getAgent().getNameUnctrlVocab());
+				viralTreatmentForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
 			} else {
-				viralTreatmentForm.setName(therapy.getAgent().getName());
+				viralTreatmentForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
-			if (therapy.getTreatment().getSexDistribution() != null) {
-				viralTreatmentForm.setType(therapy.getTreatment().getSexDistribution().getType());
+			if (ce.getTreatment().getSexDistribution() != null) {
+				viralTreatmentForm.setType(ce.getTreatment().getSexDistribution().getType());
 			}
-			viralTreatmentForm.setAgeAtTreatment(therapy.getTreatment().getAgeAtTreatment());
-			viralTreatmentForm.setDosage(therapy.getTreatment().getDosage());
+			viralTreatmentForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
+            viralTreatmentForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
+			viralTreatmentForm.setDosage(ce.getTreatment().getDosage());
+            viralTreatmentForm.setDosageUnit(ce.getTreatment().getDosageUnit());
 
-			viralTreatmentForm.setRegimen(therapy.getTreatment().getRegimen());
-			viralTreatmentForm.setAdministrativeRoute(therapy.getTreatment().getAdministrativeRoute());
+			viralTreatmentForm.setRegimen(ce.getTreatment().getRegimen());
+			viralTreatmentForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
 
-            if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null) {
+            if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
                 viralTreatmentForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                viralTreatmentForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+                viralTreatmentForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
             }
 		}
 

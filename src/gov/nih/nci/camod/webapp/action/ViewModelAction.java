@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.25 2005-11-21 18:38:31 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.26 2006-04-17 19:09:41 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.25  2005/11/21 18:38:31  georgeda
+ *  Defect #35.  Trim whitespace from items that are freeform text
+ *
  *  Revision 1.24  2005/11/15 22:13:46  georgeda
  *  Cleanup of drug screening
  *
@@ -125,7 +128,7 @@ public class ViewModelAction extends BaseAction {
         CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
 
         System.out.println("Comments id: " + theCommentsId);
-        List theCommentsList = new ArrayList();
+        List<Comments> theCommentsList = new ArrayList<Comments>();
         if (theCommentsId != null && theCommentsId.length() > 0) {
             Comments theComments = theCommentsManager.get(theCommentsId);
             if (theComments != null) {
@@ -174,20 +177,22 @@ public class ViewModelAction extends BaseAction {
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = animalModelManager.get(modelID);
 
-        final List egc = am.getEngineeredGeneCollectionSorted();
+        final Set egc = am.getEngineeredGeneCollection();
         final int egcCnt = (egc != null) ? egc.size() : 0;
-        final List tgc = new ArrayList();
+        final List<EngineeredGene> tgc = new ArrayList<EngineeredGene>();
         int tgCnt = 0;// Transgene
-        final List gsc = new ArrayList();
+        final List<EngineeredGene> gsc = new ArrayList<EngineeredGene>();
         int gsCnt = 0;// GenomicSegment
-        final List tmc = new ArrayList();
+        final List<EngineeredGene> tmc = new ArrayList<EngineeredGene>();
         int tmCnt = 0;// TargetedModification
         final Map tmGeneMap = new HashMap();
-        final List imc = new ArrayList();
-        final List smc = am.getSpontaneousMutationCollectionSorted();
+        final List<EngineeredGene> imc = new ArrayList<EngineeredGene>();
+        final Set smc = am.getSpontaneousMutationCollection();
+        Iterator it = smc.iterator();
         int imCnt = 0;// InducedMutation
-        for (int i = 0; i < egcCnt; i++) {
-            EngineeredGene eg = (EngineeredGene) egc.get(i);
+        while (it.hasNext())
+        {
+            EngineeredGene eg = (EngineeredGene) it.next();
             if (eg instanceof Transgene) {
                 tgc.add(eg);
                 tgCnt++;
@@ -215,7 +220,7 @@ public class ViewModelAction extends BaseAction {
                         if (resultCount > 0) {
                             dcr = (DatabaseCrossReference) resultList.get(0);
                             Gene myGene = new GeneImpl();
-                            List cfcoll = new ArrayList();
+                            List<DatabaseCrossReference> cfcoll = new ArrayList<DatabaseCrossReference>();
                             cfcoll.add(dcr);
                             myGene.setDatabaseCrossReferenceCollection(cfcoll);
                             resultList = appService.search(Gene.class, myGene);
@@ -235,7 +240,8 @@ public class ViewModelAction extends BaseAction {
                 imc.add(eg);
                 imCnt++;
             }
-        }
+        }        
+
         System.out.println("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc="
                 + tmCnt + "imc=" + imCnt);
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
@@ -269,22 +275,25 @@ public class ViewModelAction extends BaseAction {
      */
     public ActionForward populateCarcinogenicInterventions(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
+        
         setCancerModel(request);
         String modelID = request.getParameter(Constants.Parameters.MODELID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = animalModelManager.get(modelID);
 
-        final List therapyColl = am.getTherapyCollectionSorted();
-        final Map interventionTypeMap = new HashMap();
-        final int cc = (therapyColl != null) ? therapyColl.size() : 0;
-        for (int i = 0; i < cc; i++) {
-            Therapy t = (Therapy) therapyColl.get(i);
-            Boolean isTE = t.getTherapeuticExperiment();
-            if (isTE != null && !isTE.booleanValue()) {
-                log.info("Checking agent:" + t.getAgent().getNscNumber());
-                String myType = t.getAgent().getType();
+        final Set ceColl = am.getCarcinogenExposureCollection();
+        Iterator it = ceColl.iterator();        
+        final Map<String, List> interventionTypeMap = new HashMap<String, List>();
+        final int cc = (ceColl != null) ? ceColl.size() : 0;
+
+        while (it.hasNext())
+        {
+            CarcinogenExposure ce = (CarcinogenExposure) it.next();
+            if (ce != null ) {
+                log.info("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
+                String myType = ce.getEnvironmentalFactor().getType();
                 if (myType == null || myType.length() == 0) {
-                    myType = t.getAgent().getTypeUnctrlVocab();
+                    myType = ce.getEnvironmentalFactor().getTypeUnctrlVocab();
                     if (myType == null || myType.length() == 0) {
                         myType = "Not specified";
                     }
@@ -294,9 +303,10 @@ public class ViewModelAction extends BaseAction {
                     myTypeColl = new ArrayList();
                     interventionTypeMap.put(myType, myTypeColl);
                 }
-                myTypeColl.add(t);
+                myTypeColl.add(ce);
             }
-        }
+        }        
+
         request.getSession().setAttribute(Constants.CARCINOGENIC_INTERVENTIONS_COLL, interventionTypeMap);
 
         setComments(request, Constants.Pages.CARCINOGENIC_INTERVENTION);
@@ -304,6 +314,7 @@ public class ViewModelAction extends BaseAction {
         return mapping.findForward("viewCarcinogenicInterventions");
     }
 
+    
     /**
      * Populate the session and/or request with the objects necessary to display
      * the page.
@@ -381,23 +392,24 @@ public class ViewModelAction extends BaseAction {
         // query caBIO and load clinical protocols information
         // store clinicalProtocol info in a hashmap keyed by NSC#
         //
-        final HashMap clinProtocols = new HashMap();
-        final HashMap yeastResults = new HashMap();
-        final HashMap invivoResults = new HashMap();
-        final List therapeuticApprochesColl = new ArrayList();
+        final HashMap<Long, Collection> clinProtocols = new HashMap<Long, Collection>();
+        final HashMap<Long, Collection> yeastResults = new HashMap<Long, Collection>();
+        final HashMap<Long, Collection> invivoResults = new HashMap<Long, Collection>();
+        final List<Therapy> therapeuticApprochesColl = new ArrayList<Therapy>();
 
         String modelID = request.getParameter(Constants.Parameters.MODELID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = animalModelManager.get(modelID);
-        final List therapyColl = am.getTherapyCollectionSorted();
+        final Set therapyColl = am.getTherapyCollection();
+        Iterator it = therapyColl.iterator();        
+        
         final int cc = (therapyColl != null) ? therapyColl.size() : 0;
         log.info("Looking up clinical protocols for " + cc + " agents...");
 
-        for (int i = 0; i < cc; i++) {
-            Therapy t = (Therapy) therapyColl.get(i);
-            final boolean isTherapy = (t.getTherapeuticExperiment() != null) ? t.getTherapeuticExperiment()
-                    .booleanValue() : false;
-            if (isTherapy) {
+        while (it.hasNext())
+        {
+            Therapy t = (Therapy) it.next();
+            if (t != null) {
                 therapeuticApprochesColl.add(t);
             }
             Agent a = t.getAgent();
@@ -407,6 +419,17 @@ public class ViewModelAction extends BaseAction {
                 if (nscNumber != null) {
                     Collection protocols = myAgentManager.getClinicalProtocols(a);
                     clinProtocols.put(nscNumber, protocols);
+                    log.info("\n Number of clinical protocols from caBio " + protocols.size());
+                    log.info("\n Print each protocol (for debugging) :");                    
+                    for (int j = 0; j < protocols.size(); j++) {
+                        log.info("\n" + protocols.toString());                      
+                    }
+                    
+                    log.info("\n<ViewModelAction>  populateTherapeuticApproaches");
+                    log.info("\n Remove the following printout - for debugging only");                    
+                    for (int k = 0; k < clinProtocols.size(); k++) {
+                        log.info("Print what is in clinProtolos collection: " + clinProtocols.toString());                    
+                    }
                     // get the yeast data
                     List yeastStages = myAgentManager.getYeastResults(a, true);
                     if (yeastStages.size() > 0) {
@@ -418,6 +441,7 @@ public class ViewModelAction extends BaseAction {
                 }
             }
         }
+
         request.getSession().setAttribute(Constants.THERAPEUTIC_APPROACHES_COLL, therapeuticApprochesColl);
         request.getSession().setAttribute(Constants.CLINICAL_PROTOCOLS, clinProtocols);
         request.getSession().setAttribute(Constants.YEAST_DATA, yeastResults);

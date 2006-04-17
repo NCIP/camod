@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: ViralTreatmentForm.java,v 1.5 2005-10-20 20:36:15 pandyas Exp $
+ * $Id: ViralTreatmentForm.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/20 20:36:15  pandyas
+ * added javadocs
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
@@ -17,36 +20,35 @@ public class ViralTreatmentForm extends BaseForm implements Serializable, ViralT
     
 	/**
 	 * Default empty constructor
-	 * TODO To change the template for this generated type comment go to
-	 * Window - Preferences - Java - Code Style - Code Templates
 	 */
 	public ViralTreatmentForm() {}
 	
 	protected String name;
 	protected String otherName;	
 	protected String dosage;
+    protected String dosageUnit;     
 	protected String administrativeRoute;
 	protected String otherAdministrativeRoute;	
 	protected String regimen;
 	protected String ageAtTreatment;
+    protected String ageAtTreatmentUnit;    
 	protected String type;
-	protected String doseUnit;
-	protected String ageUnit;
+
 	
-	public String getAgeUnit() {
-		return ageUnit;
+	public String getAgeAtTreatmentUnit() {
+		return ageAtTreatmentUnit;
 	}
 	
-	public void setAgeUnit( String ageUnit) {
-		this.ageUnit = ageUnit;
+	public void setAgeAtTreatmentUnit( String ageAtTreatmentUnit) {
+		this.ageAtTreatmentUnit = ageAtTreatmentUnit;
 	}
 	
-	public String getDoseUnit() {
-		return doseUnit;
+	public String getDosageUnit() {
+		return dosageUnit;
 	}
 	
-	public void setDoseUnit(String d ) {
-		this.doseUnit = d;		
+	public void setDosageUnit(String dosageUnit ) {
+		this.dosageUnit = dosageUnit;		
 	}
 	
 	/**

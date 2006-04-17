@@ -21,6 +21,9 @@
         aClinicalMarkerID = "";
     }
 %>
+
+<html:form action="<%= actionName %>" focus="name">
+
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -42,13 +45,24 @@
         <TR align="LEFT" valign="TOP">
                 <td class="formRequiredNotice" width="5">*</td>        
                 <TD class="formRequiredLabel">Select Clinical Marker:</TD>
-			<td class="formField">			
-					<html:form action="<%= actionName %>" focus="name">
-					<html:select styleClass="formFieldSized" size="1" property="name" onchange="getOptions(this);" >
-					<html:options name="<%= Dropdowns.CLINICALMARKERSDROP %>" />										
-				</html:select>
+			<td class="formField">
+			<br>
+			<label for="field3">(if Clinical Marker is not listed, then please<br>select "Other" from the list and specify it below)</label>
+			<br>
+			<br>						
+			<html:select styleClass="formFieldSized" size="1" property="name" onchange="getOptions(this);" >
+				<html:options name="<%= Dropdowns.CLINICALMARKERSDROP %>" />										
+			</html:select>
 			</td>
 	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Other Clinical Marker:</label></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized" property="otherName"  size="40" />
+		</td>
+	</tr>	
 
         <TR align="LEFT" valign="TOP">
             <td class="formRequiredNotice" width="5">&nbsp;</td>                    

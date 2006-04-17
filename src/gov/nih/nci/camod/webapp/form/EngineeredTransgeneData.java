@@ -1,8 +1,19 @@
+/**
+ * 
+ * $Id: EngineeredTransgeneData.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.form;
 
+import gov.nih.nci.camod.webapp.form.TransgeneData;
 import org.apache.struts.upload.FormFile;
 
-public interface EngineeredTransgeneData {
+public interface EngineeredTransgeneData extends TransgeneData {
+    
 
 	public String getLocationOfIntegration();
 
@@ -16,9 +27,9 @@ public interface EngineeredTransgeneData {
 	
 	public void setScientificName(String scientificName);
 	
-	public String getNumberMGI();
+	public String getMgiNumber();
 	
-	public void setNumberMGI(String numberMGI);
+	public void setMgiNumber(String mgiNumber);
 	
 	public String getFunction();
 	
@@ -48,9 +59,9 @@ public interface EngineeredTransgeneData {
 	
 	public void setTitle(String title);
 	
-	public String getOtherLocationOfIntegration();
+    public String getIsRandom();
 	
-	public void setOtherLocationOfIntegration(String otherLocationOfIntegration);
+	public void setIsRandom(String isRandom);
 	
 	public String getOtherScientificName();
 	

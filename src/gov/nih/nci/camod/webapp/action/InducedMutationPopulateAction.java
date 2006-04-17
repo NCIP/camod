@@ -1,3 +1,12 @@
+/**
+ * 
+ * $Id: InducedMutationPopulateAction.java,v 1.12 2006-04-17 19:09:41 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
+ */
+
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
@@ -8,12 +17,9 @@ import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.service.impl.InducedMutationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.InducedMutationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-
-import java.util.List;
-
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -43,16 +49,17 @@ public class InducedMutationPopulateAction extends BaseAction {
                 inducedMutationForm.setType(Constants.Dropdowns.OTHER_OPTION);
             }
 
-            inducedMutationForm.setCASNumber(environFactor.getCasNumber());
+            inducedMutationForm.setCasNumber(environFactor.getCasNumber());
             inducedMutationForm.setGeneId(theInducedMutation.getGeneId());
             inducedMutationForm.setName(environFactor.getName());
             inducedMutationForm.setDescription(theInducedMutation.getDescription());
             
             MutationIdentifier identifier = theInducedMutation.getMutationIdentifier();
             if (identifier != null)
-                inducedMutationForm.setNumberMGI(identifier.getNumberMGI().toString());
+                inducedMutationForm.setMgiNumber(identifier.getMgiNumber());
 
-            List geneticList = theInducedMutation.getGeneticAlterationCollection();
+            // Sima TODO - added new ArrayList instead of type safe generic            
+            List geneticList = new ArrayList(theInducedMutation.getGeneticAlterationCollection());
             if (geneticList.size() > 0) {
                 GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);
                 inducedMutationForm.setObservation(theGeneticAlteration.getObservation());

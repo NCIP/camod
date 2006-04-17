@@ -3,8 +3,10 @@
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.domain.Therapy" %>
 <%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
+<%@ page import="gov.nih.nci.camod.domain.CarcinogenExposure" %>
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 
 <bean:define id="mdl" name="animalmodel"/>
 <TR><TD class=subMenuPrimaryTitle height=22>MODEL DETAILS</TD></TR>
@@ -21,7 +23,7 @@
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
 			AnimalModel am = (AnimalModel)request.getSession().getAttribute(Constants.ANIMALMODEL);
-			List l = am.getEngineeredGeneCollection();
+			List l = new ArrayList(am.getEngineeredGeneCollection());
 			int cc = (l!=null)?l.size():0;
 			boolean found = false;
 				if ( cc > 0 ) {
@@ -41,17 +43,16 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getTherapyCollection();
+			l = new ArrayList(am.getCarcinogenExposureCollection());
 			cc = (l!=null)?l.size():0;
 			found = false;
 			if ( cc > 0 ) {
 				for (int i=0; i<cc; i++) {
-					Therapy t = (Therapy)l.get(i);
-					Boolean isTE = t.getTherapeuticExperiment();
-					if (isTE != null && !isTE.booleanValue()) {
-						found = true;
-						break;
-					}
+					CarcinogenExposure ce = (CarcinogenExposure)l.get(i);
+						if( ce.getEnvironmentalFactor() !=null) {
+							found = true;
+							break;
+						}					
 				}
 			}
 			if (!found) {
@@ -68,14 +69,14 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getPublicationCollection();
+			l = new ArrayList(am.getPublicationCollection());
 			cc = (l!=null)?l.size():0;
 			found = false;
 				if ( cc >0 ) {
 					found = true;
 				}
 			if (!found) {
-				l = am.getCellLineCollection();
+				l = new ArrayList(am.getCellLineCollection());
 				cc = (l!=null)?l.size():0;
 					if ( cc > 0 ) {
 						for (int i=0; i<cc; i++) {					
@@ -88,7 +89,7 @@
 				}
 			}
 			if (!found) {
-				l = am.getTherapyCollection();
+				l = new ArrayList(am.getTherapyCollection());
 				cc = (l!=null)?l.size():0;
 					if ( cc > 0 ) {
 						for (int i=0; i<cc; i++) {					
@@ -109,7 +110,7 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getHistopathologyCollection();
+			l = new ArrayList(am.getHistopathologyCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) { 
 		%>
@@ -120,17 +121,16 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getTherapyCollection();
+			l = new ArrayList(am.getTherapyCollection());
 			cc = (l!=null)?l.size():0;
 			found = false;
 			if ( cc > 0 ) {
 				for (int i=0; i<cc; i++) {
 					Therapy t = (Therapy)l.get(i);
-					Boolean isTE = t.getTherapeuticExperiment();
-					if (isTE != null && isTE.booleanValue()) {
-						found = true;
-						break;
-					}
+						if( t.getAgent() !=null) {
+							found = true;
+							break;
+						}					
 				}
 			}
 			if (found) {
@@ -142,7 +142,7 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getCellLineCollection();
+			l = new ArrayList(am.getCellLineCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) { 
 		%>
@@ -153,7 +153,7 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getImageCollection();
+			l = new ArrayList(am.getImageCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) { 
 		%>
@@ -164,7 +164,7 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getMicroArrayDataCollection();
+			l = new ArrayList(am.getMicroArrayDataCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) { 
 		%>
@@ -175,7 +175,7 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = am.getXenograftCollection();
+			l = new ArrayList(am.getXenograftCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) {
 		%>

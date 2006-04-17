@@ -1,9 +1,12 @@
 /**
  * @author
  * 
- * $Id: ChemicalClassManagerImpl.java,v 1.4 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: ChemicalClassManagerImpl.java,v 1.5 2006-04-17 19:11:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.3  2005/11/07 20:43:07  pandyas
  * modified getAll(), save(), rmove() and/or getByName (if applicable) to the current signature that throws exceptions and calls the super
  *
@@ -49,7 +52,7 @@ public class ChemicalClassManagerImpl extends BaseManager implements ChemicalCla
             {
                 // The following two objects are needed for eQBE.
                 ChemicalClass theQueryObj = new ChemicalClass();
-                theQueryObj.setChemicalClassName(inName);
+                theQueryObj.setName(inName);
 
                 // Apply evaluators to object properties
                 Evaluation theEvaluation = new Evaluation();

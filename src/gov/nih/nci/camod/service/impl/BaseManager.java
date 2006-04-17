@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: BaseManager.java,v 1.5 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: BaseManager.java,v 1.6 2006-04-17 19:11:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.4  2005/10/26 20:54:51  georgeda
  * Put transaction around remove
  *
@@ -47,7 +50,7 @@ public class BaseManager implements Manager
     {
         log.trace("Entering BaseManager.getAll");
 
-        List theObjects = null;
+        List<Object> theObjects = null;
 
         try
         {
