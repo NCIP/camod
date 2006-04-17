@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpeciesManagerImpl.java,v 1.1 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: SpeciesManagerImpl.java,v 1.2 2006-04-17 19:47:59 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -83,24 +86,24 @@ public class SpeciesManagerImpl extends BaseManager implements SpeciesManager
     public Species getOrCreate(String inScientificName) throws Exception {
         log.info("<SpeciesManagerImpl> Entering getOrCreate");
         
-        Species theQBETaxon = new Species();
-        theQBETaxon.setScientificName(inScientificName);
+        Species theQBESpecies = new Species();
+        theQBESpecies.setScientificName(inScientificName);
 
         Species theSpecies = null;
         try {
-            List theList = Search.query(theQBETaxon);
+            List theList = Search.query(theQBESpecies);
             
             // Doesn't exist. Use the QBE taxon since it has the same data
             if (theList != null && theList.size() > 0) {
                 theSpecies = (Species) theList.get(0);
             }
             else {
-                theSpecies = theQBETaxon;
+                theSpecies = theQBESpecies;
                 theSpecies.setCommonName(getCommonNameFromScientificName(inScientificName));
             }
         } catch (Exception e) {
             log.error("Error querying for matching taxon object.  Creating new one.", e);
-            theSpecies = theQBETaxon;
+            theSpecies = theQBESpecies;
             theSpecies.setCommonName(getCommonNameFromScientificName(inScientificName));
         }
 
