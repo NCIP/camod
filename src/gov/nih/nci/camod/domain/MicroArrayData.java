@@ -1,8 +1,7 @@
 /*
- * Created on May 4, 2005
+ * $Id: MicroArrayData.java,v 1.7 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -21,10 +20,11 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
 {
     private static final long serialVersionUID = 3259195453799404851L;
 
-    private String experimentName;
-    private Long experimentId;
     private String otherLocationURL;
-    private Availability availability;
+    private Long experimentId;
+    private String experimentName;
+    private AbstractCancerModel cancerModel;
+
 
     /**
      * @return Returns the otherLocationURL.
@@ -41,23 +41,6 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
     public void setOtherLocationURL(String otherLocationURL)
     {
         this.otherLocationURL = otherLocationURL;
-    }
-
-    /**
-     * @return Returns the availability.
-     */
-    public Availability getAvailability()
-    {
-        return availability;
-    }
-
-    /**
-     * @param availability
-     *            The availability to set.
-     */
-    public void setAvailability(Availability availability)
-    {
-        this.availability = availability;
     }
 
     /**
@@ -92,6 +75,23 @@ public class MicroArrayData extends BaseObject implements Comparable, Serializab
     public void setExperimentName(String experimentName)
     {
         this.experimentName = experimentName;
+    }
+
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
+
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
     }
 
     /**

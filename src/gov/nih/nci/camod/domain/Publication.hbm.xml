@@ -42,7 +42,8 @@
 	    <!-- title -->
         <property name="title" 
         	column="title" 
-        	type="string"/>
+        	type="string"
+        	length="2000"/>
 	    
 	    <!-- pmid -->
         <property name="pmid" 
@@ -69,10 +70,16 @@
         	column="first_time_reported" 
         	type="boolean"/>
         	
+	    <!-- jaxJNumber -->
+        <property name="jaxJNumber" 
+        	column="j_number" 
+        	type="string"/>        	
+        	
         <!-- publicationStatus (many-to-one unidirectional) -->
         <many-to-one
         	name="publicationStatus"
         	column="publication_status_id"
         	class="PublicationStatus"/>
+        	        	
 	</class>
 </hibernate-mapping>

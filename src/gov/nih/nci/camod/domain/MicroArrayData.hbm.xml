@@ -31,7 +31,7 @@
         	
         <!-- experimentId -->
         <property name="experimentId" 
-        	column="experiment_id" 
+        	column="experiment_id"
         	type="long"/>
         	
         <!-- otherLocationURL -->
@@ -39,10 +39,6 @@
         	column="other_location_url" 
         	type="string"/>
         	
-        <!-- availability (many-to-one unidirectional) -->
-        <many-to-one
-        	name="availability"
-        	column="availability_id"
-        	class="Availability"/>
+
 	</class>
 </hibernate-mapping>

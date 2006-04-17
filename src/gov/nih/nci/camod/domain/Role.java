@@ -1,36 +1,33 @@
 /*
- * Created on May 4, 2005
+ * $Id: Role.java,v 1.6 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
+import java.util.*;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 
 /**
- * @author rajputs
  * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
+ * $Id: Role.java,v 1.6 2006-04-17 19:13:46 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
  */
 public class Role extends BaseObject implements Serializable, Comparable
 {
     private static final long serialVersionUID = 3258695453799404851L;
 
     private String name;
-    private List<Party> partyCollection = new ArrayList<Party>();
+    private Set<Party> partyCollection = new TreeSet<Party>();
 
     /**
      * @return Returns the partyCollection.
      */
-    public List<Party> getPartyCollection()
+    public Set<Party> getPartyCollection()
     {
         return partyCollection;
     }
@@ -46,7 +43,7 @@ public class Role extends BaseObject implements Serializable, Comparable
      * @param partyCollection
      *            The partyCollection to set.
      */
-    public void setPartyCollection(List<Party> partyCollection)
+    public void setPartyCollection(Set<Party> partyCollection)
     {
         this.partyCollection = partyCollection;
     }

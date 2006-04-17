@@ -1,14 +1,9 @@
 /*
- * Created on May 6, 2005
+ * $Id: GenomicSegment.java,v 1.9 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
 
 /**
  * @author rajputs
@@ -16,117 +11,128 @@ import java.util.TreeSet;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Style - Code Templates
  */
-public class GenomicSegment extends EngineeredGene
-{
+public class GenomicSegment extends EngineeredGene {
 
-    private static final long serialVersionUID = 3259315453799404851L;
+	private static final long serialVersionUID = 3259315453799404851L;
 
-    private String locationOfIntegration;
-    private String segmentSize;
-    private String cloneDesignator;
-    private List<SegmentType> segmentTypeCollection = new ArrayList<SegmentType>();
+	private String locationOfIntegration;
 
-    /**
-     * @return Returns the segmentTypeCollection.
-     */
-    public List<SegmentType> getSegmentTypeCollection()
-    {
-        return segmentTypeCollection;
-    }
+	private String segmentSize;
 
-    public List<SegmentType> getSegmentTypeCollectionSorted()
-    {
-        if (segmentTypeCollection != null)
-            return new ArrayList<SegmentType>(new TreeSet<SegmentType>(segmentTypeCollection));
-        return null;
-    }
+	private String cloneDesignator;
 
-    /**
-     * @param segmentTypeCollection
-     *            The segmentTypeCollection to set.
-     */
-    public void setSegmentTypeCollection(List<SegmentType> segmentTypeCollection)
-    {
-        this.segmentTypeCollection = segmentTypeCollection;
-    }
+	private Boolean isRandom;
 
-    /**
-     * @param segmentType
-     *            The segmentType to add.
-     */
-    public void addSegmentType(SegmentType segmentType)
-    {
-        segmentTypeCollection.add(segmentType);
-    }
+	private String constructSequence;
 
-    /**
-     * @return Returns the cloneDesignator.
-     */
-    public String getCloneDesignator()
-    {
-        return cloneDesignator;
-    }
+	private SegmentType segmentType;
 
-    /**
-     * @param cloneDesignator
-     *            The cloneDesignator to set.
-     */
-    public void setCloneDesignator(String cloneDesignator)
-    {
-        this.cloneDesignator = cloneDesignator;
-    }
+	/**
+	 * @return Returns the locationOfIntegration.
+	 */
+	public String getLocationOfIntegration() {
+		return locationOfIntegration;
+	}
 
-    /**
-     * @return Returns the locationOfIntegration.
-     */
-    public String getLocationOfIntegration()
-    {
-        return locationOfIntegration;
-    }
+	/**
+	 * @param locationOfIntegration
+	 *            The locationOfIntegration to set.
+	 */
+	public void setLocationOfIntegration(String locationOfIntegration) {
+		this.locationOfIntegration = locationOfIntegration;
+	}
 
-    /**
-     * @param locationOfIntegration
-     *            The locationOfIntegration to set.
-     */
-    public void setLocationOfIntegration(String locationOfIntegration)
-    {
-        this.locationOfIntegration = locationOfIntegration;
-    }
+	/**
+	 * @return Returns the segmentSize.
+	 */
+	public String getSegmentSize() {
+		return segmentSize;
+	}
 
-    /**
-     * @return Returns the segmentSize.
-     */
-    public String getSegmentSize()
-    {
-        return segmentSize;
-    }
+	/**
+	 * @param segmentSize
+	 *            The segmentSize to set.
+	 */
+	public void setSegmentSize(String segmentSize) {
+		this.segmentSize = segmentSize;
+	}
 
-    /**
-     * @param segmentSize
-     *            The segmentSize to set.
-     */
-    public void setSegmentSize(String segmentSize)
-    {
-        this.segmentSize = segmentSize;
-    }
+	/**
+	 * @return Returns the cloneDesignator.
+	 */
+	public String getCloneDesignator() {
+		return cloneDesignator;
+	}
 
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString()
-    {
-        String result = super.toString() + " - ";
-        result += this.getLocationOfIntegration() + " - " + this.getCloneDesignator() + " - " + this.getSegmentSize();
-        return result;
-    }
+	/**
+	 * @param cloneDesignator
+	 *            The cloneDesignator to set.
+	 */
+	public void setCloneDesignator(String cloneDesignator) {
+		this.cloneDesignator = cloneDesignator;
+	}
 
-    public boolean equals(Object o)
-    {
-        if (!super.equals(o))
-            return false;
-        if (!(this.getClass().isInstance(o)))
-            return false;
-        return true;
-    }
+	/**
+	 * @return Returns the isRandom.
+	 */
+	public Boolean getIsRandom() {
+		return isRandom;
+	}
+
+	/**
+	 * @param isRandom
+	 *            The isRandom to set.
+	 */
+	public void setIsRandom(Boolean isRandom) {
+		this.isRandom = isRandom;
+	}
+
+	/**
+	 * @return Returns the segmentType.
+	 */
+	public SegmentType getSegmentType() {
+		return segmentType;
+	}
+
+	/**
+	 * @param segmentType
+	 *            The segmentType to set.
+	 */
+	public void setSegmentType(SegmentType segmentType) {
+		this.segmentType = segmentType;
+	}
+
+	/**
+	 * @return Returns the constructSequence.
+	 */
+	public String getConstructSequence() {
+		return constructSequence;
+	}
+
+	/**
+	 * @param constructSequence
+	 *            The constructSequence to set.
+	 */
+	public void setConstructSequence(String constructSequence) {
+		this.constructSequence = constructSequence;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		String result = super.toString() + " - ";
+		result += this.getLocationOfIntegration() + " - "
+				+ this.getCloneDesignator() + " - " + this.getSegmentSize();
+		return result;
+	}
+
+	public boolean equals(Object o) {
+		if (!super.equals(o))
+			return false;
+		if (!(this.getClass().isInstance(o)))
+			return false;
+		return true;
+	}
 
 }

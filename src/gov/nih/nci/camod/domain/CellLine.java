@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLine.java,v 1.13 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: CellLine.java,v 1.14 2006-04-17 19:13:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.12  2005/11/03 16:54:55  piparom
  * implemented "getXXXColectionSorted" method for every getCollection method.
  *
@@ -27,7 +30,6 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -36,45 +38,30 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
 
     private static final long serialVersionUID = 3259655453799404851L;
 
-    private String comments;
-    private String experiment;
     private String name;
+    private String experiment;
     private String results;
-    private List<Publication> publicationCollection = new ArrayList<Publication>();
+    private String comments;
+    private Set<Publication> publicationCollection = new TreeSet<Publication>();
     private Organ organ;
+    private AbstractCancerModel cancerModel;
+
 
     /**
-     * @return Returns the organ.
+     * @return Returns the name.
      */
-    public Organ getOrgan()
+    public String getName()
     {
-        return organ;
+        return name;
     }
 
     /**
-     * @param organ
-     *            The organ to set.
+     * @param name
+     *            The name to set.
      */
-    public void setOrgan(Organ organ)
+    public void setName(String name)
     {
-        this.organ = organ;
-    }
-
-    /**
-     * @return Returns the comments.
-     */
-    public String getComments()
-    {
-        return comments;
-    }
-
-    /**
-     * @param comments
-     *            The comments to set.
-     */
-    public void setComments(String comments)
-    {
-        this.comments = comments;
+        this.name = name;
     }
 
     /**
@@ -95,56 +82,6 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
     }
 
     /**
-     * @return Returns the name.
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            The name to set.
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    /**
-     * @return Returns the publicationCollection.
-     */
-    public List<Publication> getPublicationCollection()
-    {
-        return publicationCollection;
-    }
-
-    public List<Publication> getPublicationCollectionSorted()
-    {
-        if (publicationCollection != null)
-            return new ArrayList<Publication>(new TreeSet<Publication>(publicationCollection));
-        return null;
-    }
-
-    /**
-     * @param publicationCollection
-     *            The publicationCollection to set.
-     */
-    public void setPublicationCollection(List<Publication> publicationCollection)
-    {
-        this.publicationCollection = publicationCollection;
-    }
-
-    /**
-     * @param publication
-     *            The publication to add.
-     */
-    public void addPublication(Publication publication)
-    {
-        publicationCollection.add(publication);
-    }
-
-    /**
      * @return Returns the results.
      */
     public String getResults()
@@ -161,6 +98,84 @@ public class CellLine extends BaseObject implements Comparable, Serializable, Du
         this.results = results;
     }
 
+    /**
+     * @return Returns the comments.  Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments()
+    {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments)
+    {
+        this.comments = comments;
+    }
+
+
+    /**
+     * @return Returns the organ.
+     */
+    public Organ getOrgan()
+    {
+        return organ;
+    }
+
+    /**
+     * @param organ
+     *            The organ to set.
+     */
+    public void setOrgan(Organ organ)
+    {
+        this.organ = organ;
+    }
+
+    /**
+     * @return Returns the publicationCollection.
+     */
+    public Set getPublicationCollection()
+    {
+        return publicationCollection;
+    }
+
+    /**
+     * @param publicationCollection
+     *            The publicationCollection to set.
+     */
+    public void setPublicationCollection(Set<Publication> publicationCollection)
+    {
+        this.publicationCollection = publicationCollection;
+    }
+
+    /**
+     * @param publication
+     *            The publication to add.
+     */
+    public void addPublication(Publication publication)
+    {
+        publicationCollection.add(publication);
+    }
+
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
+
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
+    }
 
     /**
      * @see java.lang.Object#toString()

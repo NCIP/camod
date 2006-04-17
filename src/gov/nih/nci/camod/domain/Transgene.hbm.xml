@@ -20,32 +20,41 @@
         <!-- locationOfIntegration -->
         <property name="locationOfIntegration" 
         	column="location_of_integration" 
-        	type="string"/>        	
-        
-        <!-- taxonCollection (one-to-many unidirectional) -->
-        <bag name="taxonCollection" 
-        	table="transgene_taxon"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="save-update">
+        	type="string"/> 
         	
-        	<key column="engineered_gene_id"/>
-        	<many-to-many column="taxon_id"
-            	unique="true"
-            	class="Taxon"/>
-        </bag>
+        <!-- isRandom -->
+        <property name="isRandom" 
+        	column="is_random" 
+        	type="boolean"/> 
+        	
+        <!-- constructSequence -->
+        <property name="constructSequence" 
+        	column="construct_sequence" 
+        	type="text"/>         	       	       	
+        
+        <!-- species: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one) -->
+        <many-to-one
+        	name="species"
+        	column="species_id"
+        	class="Species"
+        	cascade="save-update"
+        	unique="true"/>
         
         <!-- regulatoryElementCollection (one-to-many unidirectional) -->
-        <bag name="regulatoryElementCollection" 
+        <set name="regulatoryElementCollection" 
         	table="transgene_reg_element"
         	inverse="false" 
         	lazy="true" 
-        	cascade="all-delete-orphan">
+        	cascade="all-delete-orphan"
+		sort="natural">
         	
         	<key column="engineered_gene_id"/>
         	<many-to-many column="regulatory_element_id"
             	unique="true"
             	class="RegulatoryElement"/>
-        </bag>
+        </set>
+       
+        
 	</subclass>
 </hibernate-mapping>

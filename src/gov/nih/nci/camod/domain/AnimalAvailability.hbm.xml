@@ -33,17 +33,13 @@
         <property name="stockNumber" 
         	column="stock_number" 
         	type="string"/>
-        	
-        <!-- animalDistributorCollection (many-to-many bidirectional ) -->
-	    <!-- Note: this collection will be used to synchronize state with the database. -->
-        <bag name="animalDistributorCollection" 
-        	table="ani_ava_ani_distributor"
-        	inverse="false"
-        	lazy="true" >
-        	
-        	<key column="animal_availability_id"/>
-        	<many-to-many class="AnimalDistributor" 
-        		column="animal_distributor_id"/>
-        </bag>
+
+        <!-- animalDistributor (many-to-one unidirectional) -->
+        <many-to-one
+        	name="animalDistributor"
+        	column="animal_distributor_id"
+        	cascade="save-update"
+        	class="AnimalDistributor"/>        
+        
 	</class>
 </hibernate-mapping>

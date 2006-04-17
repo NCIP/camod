@@ -32,21 +32,23 @@
         	column="gene_id" 
         	type="string"/>
         	
-	<!-- modTypeUnctrlVocab -->
-        <property name="modTypeUnctrlVocab" 
-        	column="mod_type_unctrl_vocab" 
-        	type="string"/>	
+        <!-- constructSequence -->
+        <property name="constructSequence" 
+        	column="construct_sequence" 
+        	type="text"/>        	
+        	
         	
         <!-- modificationTypeCollection (many-to-many bidirectional) -->
         <!-- Note: this collection will be used to synchronize state with the database. -->
-        <bag name="modificationTypeCollection" 
+        <set name="modificationTypeCollection" 
         	table="tar_mod_modification_type"
         	inverse="false" 
-        	lazy="true">
+        	lazy="true"
+		sort="natural">
         	
         	<key column="engineered_gene_id"/>
         	<many-to-many column="modification_type_id"
             	class="ModificationType"/>
-        </bag>
+        </set>
 	</subclass>
 </hibernate-mapping>

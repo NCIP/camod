@@ -1,16 +1,11 @@
 /*
- * Created on August 9, 2005
+ * $Id: ModificationType.java,v 1.8 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.List;
-
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
@@ -25,31 +20,8 @@ public class ModificationType extends BaseObject implements Comparable, Serializ
     private static final long serialVersionUID = 3259155453799404851L;
 
     private String name;
-    private List<TargetedModification> targetedModificationCollection = new ArrayList<TargetedModification>();
+    private String nameUnctrlVocab;
 
-    /**
-     * @return Returns the targetedModificationCollection.
-     */
-    public List<TargetedModification> getTargetedModificationCollection()
-    {
-        return targetedModificationCollection;
-    }
-
-    public List<TargetedModification> getTargetedModificationCollectionSorted()
-    {
-        if (targetedModificationCollection != null)
-            return new ArrayList<TargetedModification>(new TreeSet<TargetedModification>(targetedModificationCollection));
-        return null;
-    }
-
-    /**
-     * @param targetedModificationCollection
-     *            The targetedModificationCollection to set.
-     */
-    public void setTargetedModificationCollection(List<TargetedModification> targetedModificationCollection)
-    {
-        this.targetedModificationCollection = targetedModificationCollection;
-    }
 
     /**
      * @return Returns the name.
@@ -66,8 +38,23 @@ public class ModificationType extends BaseObject implements Comparable, Serializ
     public void setName(String name)
     {
         this.name = name;
+    }    
+    /**
+     * @return Returns the nameUnctrlVocab.
+     */
+    public String getNameUnctrlVocab()
+    {
+        return nameUnctrlVocab;
     }
 
+    /**
+     * @param nameUnctrlVocab
+     *            The nameUnctrlVocab to set.
+     */
+    public void setNameUnctrlVocab(String nameUnctrlVocab)
+    {
+        this.nameUnctrlVocab = nameUnctrlVocab;
+    }    
     /**
      * @see java.lang.Object#toString()
      */

@@ -1,8 +1,7 @@
 /*
- * Created on May 4, 2005
+ * $Id: Treatment.java,v 1.9 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -16,9 +15,6 @@ import java.util.regex.Pattern;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class Treatment extends BaseObject implements Serializable, Duplicatable
 {
@@ -27,9 +23,11 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
 
     private String regimen;
     private String dosage;
+    private String dosageUnit;    
     private String administrativeRoute;
     private String adminRouteUnctrlVocab;
     private String ageAtTreatment;
+    private String ageAtTreatmentUnit;    
     private SexDistribution sexDistribution;
 
     private String route;
@@ -101,13 +99,35 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
     {
         this.ageAtTreatment = ageAtTreatment;
     }
+    /**
+     * @return Returns the ageAtTreatmentUnit.
+     */
+    public String getAgeAtTreatmentUnit()
+    {
+        return ageAtTreatmentUnit;
+    }
 
+    /**
+     * @param ageAtTreatmentUnit
+     *            The ageAtTreatmentUnit to set.
+     */
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit)
+    {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
+    }    
     /**
      * @return Returns the dosage.
      */
     public String getDosage()
     {
-        String tmpDosage = dosage;
+    	return dosage;
+    }
+    /**
+     * @return Returns the dosageUnit.
+     */
+    public String getDosageUnit()
+    {
+        String tmpDosage = dosageUnit;
 
         //Trim leading Zeros
         if (tmpDosage == null)
@@ -144,6 +164,14 @@ public class Treatment extends BaseObject implements Serializable, Duplicatable
     {
         this.dosage = dosage;
     }
+    /**
+     * @param dosageUnit
+     *            The dosageUnit to set.
+     */
+    public void setDosageUnit(String dosageUnit)
+    {
+        this.dosageUnit = dosageUnit;
+    }    
 
     /**
      * @return Returns the regimen.

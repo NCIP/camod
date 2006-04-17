@@ -1,8 +1,7 @@
 /*
- * Created on May 5, 2005
+ * $Id: ExpressionFeature.java,v 1.7 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -57,7 +56,7 @@ public class ExpressionFeature extends BaseObject implements Comparable, Seriali
     {
         this.organ = organ;
     }
-
+  
     /**
      * @see java.lang.Object#toString()
      */

@@ -29,11 +29,6 @@
         	column="experiment" 
         	type="string"/>
         	
-        <!-- comments -->
-        <property name="comments" 
-        	column="comments" 
-        	type="string"/>	
-        	
         <!-- results -->
         <property name="results" 
         	column="results" 
@@ -42,7 +37,7 @@
         <!-- toxicityGrade -->
         <property name="toxicityGrade" 
         	column="toxicity_grade" 
-        	type="string"/>	
+        	type="string"/>	        	
         
         <!-- biomarker -->
         <property name="biomarker" 
@@ -52,10 +47,21 @@
         <!-- tumorResponse -->
         <property name="tumorResponse" 
         	column="tumor_response" 
-        	type="string"/>        	
+        	type="string"/>
+        	        	
+        <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"/>
+        	
+        <!-- Agent (many-to-one) -->
+        <many-to-one name="agent"
+        	class="Agent"
+        	column="agent_id"
+        	cascade="save-update"/> 
         	
         <!-- Treatment: this is really a one-to-one relationship with unique=true -->
-        <!-- (one-to-one) -->
+        <!-- (one-to-one unidirectional) -->
         <many-to-one
         	name="treatment"
         	column="treatment_id"
@@ -63,31 +69,17 @@
         	cascade="all"
         	unique="true"/>
         
-         <!-- Agent: this is really a one-to-one relationship with unique=true -->
-        <!-- (one-to-one) -->
-        <many-to-one
-        	name="agent"
-        	column="env_factor_id"
-        	class="Agent"
-        	cascade="all"
-        	unique="true"/>
-        
-        <!-- publicationCollection (one-to-many unidirectional) -->
-        <bag name="publicationCollection" 
+        <!-- publicationCollection (one-to-many unidirectional with join table) -->
+        <set name="publicationCollection" 
         	table="therapy_publication"
-        	inverse="false" 
         	lazy="true" 
-        	cascade="all">
+        	cascade="all"
+		sort="natural">
         	
         	<key column="therapy_id"/>
         	<many-to-many column="publication_id"
             	unique="true"
             	class="Publication"/>
-        </bag>
-        
-        <!-- therapeuticExperiment -->
-        <property name="therapeuticExperiment" 
-        	column="therapeutic_experiment" 
-        	type="boolean"/>
+        </set>
 	</class>
 </hibernate-mapping>

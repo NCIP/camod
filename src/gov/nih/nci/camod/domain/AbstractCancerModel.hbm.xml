@@ -27,35 +27,22 @@
 	    <!-- discriminator -->
 	    <discriminator column="abs_cancer_model_type"
 	    	type="string"/>	       
-	    
+      		    
 	    <!-- experimentDesign -->
         <property name="experimentDesign" 
         	column="experiment_design" 
-        	type="text"/>	
-        
+        	type="text"/>
+
         <!-- modelDescriptor -->
         <property name="modelDescriptor" 
         	column="model_descriptor" 
-        	type="string"/>  
+        	type="string"/> 
         	
         <!-- state -->
         <property name="state" 
         	column="state" 
-        	type="string"/>  	      	
-        	
-        <!-- publicationCollection (one-to-many unidirectional) -->
-        <bag name="publicationCollection" 
-        	table="abs_can_mod_publication"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="publication_id"
-            	unique="true"
-            	class="Publication"/>
-        </bag>        
-        
+        	type="string"/> 
+       
         <!-- availability: this is really a one-to-one relationship with unique=true -->
         <!-- (one-to-one unidirectional) -->
         <many-to-one name="availability"
@@ -64,12 +51,12 @@
         	cascade="all"
         	unique="true"/>
         	
-        <!-- species (many-to-one unidirectional) -->
+        <!-- strain (many-to-one unidirectional) -->
         <many-to-one
-        	name="species"
-        	column="taxon_id"
+        	name="strain"
+        	column="strain_id"
         	cascade="save-update"
-        	class="Taxon"/>
+        	class="Strain"/>
         	
 		<!-- submitter (many-to-one unidirectional) -->
         <many-to-one
@@ -84,5 +71,19 @@
         	column="principal_investigator_id"
         	cascade="save-update"
         	class="Person"/>
+        	
+        <!-- publicationCollection (one-to-many unidirectional with join table) -->
+        <set name="publicationCollection" 
+        	table="abs_can_mod_publication"
+        	lazy="true"	 
+     		cascade="all-delete-orphan"
+		sort="natural">
+        	
+        	<key column="abs_cancer_model_id"/>
+        	<many-to-many column="publication_id"
+            	unique="true"
+            	class="Publication"/>
+        </set> 
+                	
 	</class>
 </hibernate-mapping>

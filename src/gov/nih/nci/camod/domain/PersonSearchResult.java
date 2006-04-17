@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: PersonSearchResult.java,v 1.3 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: PersonSearchResult.java,v 1.4 2006-04-17 19:13:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.2  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -24,7 +27,6 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
-
 import java.util.List;
 
 /**

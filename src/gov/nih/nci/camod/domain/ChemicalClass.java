@@ -1,60 +1,54 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.6  2005/11/14 14:16:51  georgeda
  * Cleanup
  *
  * 
- * $Id: ChemicalClass.java,v 1.7 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: ChemicalClass.java,v 1.8 2006-04-17 19:13:46 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 public class ChemicalClass extends BaseObject implements Serializable, Comparable {
 
     private static final long serialVersionUID = 3259635453799404851L;
 
-    private String chemicalClassName;
-    private List<Agent> agentCollection = new ArrayList<Agent>();
+    private String name;
+    private Set<Agent> agentCollection = new TreeSet<Agent>();
 
     /**
      * @return Returns the agentCollection.
      */
-    public List<Agent> getAgentCollection() {
+    public Set<Agent> getAgentCollection() {
         return agentCollection;
     }
-    
-    public List<Agent> getAgentCollectionSorted() {      
-      if (agentCollection != null) return new ArrayList<Agent>(new TreeSet<Agent>(agentCollection));
-      return null;
-    }    
-
-
     /**
      * @param agentCollection
      *            The agentCollection to set.
      */
-    public void setAgentCollection(List<Agent> agentCollection) {
+    public void setAgentCollection(Set<Agent> agentCollection) {
         this.agentCollection = agentCollection;
     }
 
     /**
-     * @return Returns the chemicalClassName.
+     * @return Returns the name.
      */
-    public String getChemicalClassName() {
-        return chemicalClassName;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param chemicalClassName
-     *            The chemicalClassName to set.
+     * @param name
+     *            The name to set.
      */
-    public void setChemicalClassName(String chemicalClassName) {
-        this.chemicalClassName = chemicalClassName;
+    public void setName(String name) {
+        this.name = name;
     }
  
   
@@ -63,7 +57,7 @@ public class ChemicalClass extends BaseObject implements Serializable, Comparabl
      */
      public String toString() {
        String result = super.toString() + " - ";      
-       result += this.getChemicalClassName();           
+       result += this.getName();           
        return result;
      }     
     
@@ -71,19 +65,19 @@ public class ChemicalClass extends BaseObject implements Serializable, Comparabl
       if (!super.equals(o)) return false;            
       if (!(this.getClass().isInstance(o))) return false; 
       final ChemicalClass obj = (ChemicalClass) o;
-      if (HashCodeUtil.notEqual(this.getChemicalClassName(), obj.getChemicalClassName())) return false;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
      
     public int hashCode() {
       int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getChemicalClassName());    
+      result = HashCodeUtil.hash(result, this.getName());    
       return result + super.hashCode();    
     }  
     
     public int compareTo(Object o) {
-      if ((o instanceof ChemicalClass) && (this.getChemicalClassName() != null) && (((ChemicalClass)o).getChemicalClassName() != null)) {   
-        int result = this.getChemicalClassName().compareTo( ((ChemicalClass)o).getChemicalClassName() );
+      if ((o instanceof ChemicalClass) && (this.getName() != null) && (((ChemicalClass)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((ChemicalClass)o).getName() );
         if (result != 0) { return result; }               
       }
 

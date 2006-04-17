@@ -12,22 +12,18 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="gov.nih.nci.camod.domain">
-	<class name="EnvironmentalFactor"
-		table="env_factor"
-		discriminator-value="EF"
-        lazy="true">
+	<class name="EnvironmentalFactor" 
+    	table="environmental_factor"
+        lazy="true">        
 	    
 	    <!-- id -->
 	    <id name="id" 
-	    	column="env_factor_id"
+	    	column="environmental_factor_id"
 	    	type="long"    	
 	    	unsaved-value="null">	    	
 	        <generator class="native"/>
 	    </id>	
 	    
-	    <!-- discriminator -->
-	    <discriminator column="env_factor_type"
-	    	type="string"/>
 	    
         <!-- type -->
         <property name="type" 
@@ -49,10 +45,15 @@
         	column="name_unctrl_vocab" 
         	type="string"/>        
         	
-        <!-- CASNumber -->
+        <!-- casNumber -->
         <property name="casNumber" 
         	column="cas_number" 
         	type="string"/>
+        	
+	    <!-- nscNumber -->
+        <property name="nscNumber" 
+        	column="nsc_number" 
+        	type="long"/>        	
         	
 	</class>
 </hibernate-mapping>

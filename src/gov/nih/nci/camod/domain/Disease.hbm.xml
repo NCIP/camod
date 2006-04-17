@@ -14,7 +14,8 @@
 <hibernate-mapping package="gov.nih.nci.camod.domain">
 	<class name="Disease" 
     	table="disease"
-        lazy="true">
+        lazy="true"
+        mutable="false">
 
 	    <!-- id -->
 	    <id name="id" 
@@ -33,19 +34,6 @@
         <property name="conceptCode" 
         	column="concept_code" 
         	type="string"/>
-        	
-        <!-- histopathologyCollection (many-to-many bidirectional) -->
-        <!-- Note: this collection will NOT be used to synchronize state with the database. -->
-        <!-- Changes made to diseaseCollection in Histopathology will be synchronized with the database. -->
-        <bag name="histopathologyCollection"
-        	table="histopathology_disease"
-        	inverse="true" 
-        	lazy="true"
-        	cascade="all-delete-orphan">
-        	
-        	<key column="disease_id"/>
-        	<many-to-many class="Histopathology" 
-        		column="histopathology_id"/>
-        </bag> 
+         
 	</class>
 </hibernate-mapping>

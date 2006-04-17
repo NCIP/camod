@@ -36,5 +36,7 @@
         	name="expressionLevelDesc"
         	column="exp_level_desc_id"
         	class="ExpressionLevelDesc"/>
+        	
+      	
 	</class>
 </hibernate-mapping>

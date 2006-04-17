@@ -1,8 +1,7 @@
 /*
- * Created on May 4, 2005
+ * $Id: RegulatoryElement.java,v 1.7 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -23,23 +22,23 @@ public class RegulatoryElement extends BaseObject implements Comparable, Seriali
 
     private String name;
     private RegulatoryElementType regulatoryElementType;
-    private Taxon taxon;
+    private Species species;
 
     /**
-     * @return Returns the taxon.
+     * @return Returns the species.
      */
-    public Taxon getTaxon()
+    public Species getSpecies()
     {
-        return taxon;
+        return species;
     }
 
     /**
-     * @param taxon
-     *            The taxon to set.
+     * @param species
+     *            The species to set.
      */
-    public void setTaxon(Taxon taxon)
+    public void setSpecies(Species species)
     {
-        this.taxon = taxon;
+        this.species = species;
     }
 
 

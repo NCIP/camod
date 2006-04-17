@@ -12,70 +12,90 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="gov.nih.nci.camod.domain">
-	<subclass name="Agent" 
-    	extends="EnvironmentalFactor"
-    	discriminator-value="AG"
-        lazy="true">
-	    
+	<class name="Agent" 
+    	table="agent"
+        lazy="true">  
+        
+	    <!-- id -->
+	    <id name="id" 
+	    	column="agent_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>              
+
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>
+        	
+        <!-- conceptCode -->
+        <property name="conceptCode" 
+        	column="concept_code" 
+        	type="string"/>
+        	
 	    <!-- nscNumber -->
         <property name="nscNumber" 
         	column="nsc_number" 
         	type="long"/>
         	
+        <!-- casNumber -->
+        <property name="casNumber" 
+        	column="cas_number" 
+        	type="string"/>        	
+        	
         <!-- isCMAPAgent -->
         <property name="isCMAPAgent" 
         	column="is_cmap_agent" 
-        	type="boolean"/>	
-        	
-        <!-- evsId -->
-        <property name="evsId" 
-        	column="evs_id" 
-        	type="string"/>	
+        	type="boolean"/>
         	
         <!-- comments -->
         <property name="comments" 
         	column="comments" 
-        	type="string"/>		
+        	type="string"/>	
         	
         <!-- source -->
         <property name="source" 
         	column="source" 
-        	type="string"/>
+        	type="string"/>	        	    	        	 
         	
         <!-- biologicalProcessCollection (many-to-many bidirectional ) -->
 	    <!-- Note: this collection will be used to synchronize state with the database. -->
-        <bag name="biologicalProcessCollection" 
+        <set name="biologicalProcessCollection" 
         	table="agent_biological_process"
         	inverse="false"
-        	lazy="true">
+        	lazy="true"
+		sort="natural">
         	
-        	<key column="env_factor_id"/>
+        	<key column="agent_id"/>
         	<many-to-many class="BiologicalProcess" 
         		column="biological_process_id"/>
-        </bag>
+        </set>
         
         <!-- chemicalClassCollection (many-to-many bidirectional ) -->
 	    <!-- Note: this collection will be used to synchronize state with the database. -->
-        <bag name="chemicalClassCollection" 
+        <set name="chemicalClassCollection" 
         	table="agent_chemical_class"
         	inverse="false"
-        	lazy="true">
+        	lazy="true"
+		sort="natural">
         	
-        	<key column="env_factor_id"/>
+        	<key column="agent_id"/>
         	<many-to-many class="ChemicalClass" 
         		column="chemical_class_id"/>
-        </bag>
+        </set>
         
         <!-- agentTargetCollection (many-to-many bidirectional ) -->
 	    <!-- Note: this collection will be used to synchronize state with the database. -->
-        <bag name="agentTargetCollection" 
+        <set name="agentTargetCollection" 
         	table="agent_agent_target"
         	inverse="false"
-        	lazy="true">
+        	lazy="true"
+		sort="natural">
         	
-        	<key column="env_factor_id"/>
+        	<key column="agent_id"/>
         	<many-to-many class="AgentTarget" 
         		column="agent_target_id"/>
-        </bag>
-	</subclass>
+        </set>
+	</class>
 </hibernate-mapping>

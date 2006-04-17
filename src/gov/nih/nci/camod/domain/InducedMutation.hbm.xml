@@ -27,32 +27,21 @@
         	column="description" 
         	type="string"/>
         	
-        <!-- geneticAlterationCollection (one-to-many unidirectional) -->
-        <bag name="geneticAlterationCollection" 
-        	table="ind_mut_gen_alteration"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="engineered_gene_id"/>
-        	<many-to-many column="genetic_alteration_id"
-            	unique="true"
-            	class="GeneticAlteration"/>
-        </bag>
-    	
-    	<!-- environmentalFactorCollection (one-to-many unidirectional) -->
-        <bag name="environmentalFactorCollection" 
-        	table="env_fac_ind_mutation"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="engineered_gene_id"/>
-        	<many-to-many column="env_factor_id"
-            	unique="true"
-            	class="EnvironmentalFactor"/>
-        </bag>
-        
+        <!-- geneticAlterationCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="geneticAlterationCollection"
+	         cascade="all-delete-orphan"
+		sort="natural">
+            <key column="genetic_alteration_id"/>
+            <one-to-many class="InducedMutation"/>
+        </set>         
+       
+        <!-- environmentalFactor (many-to-one unidirectional) -->
+        <many-to-one
+        	name="environmentalFactor"
+        	column="environmental_factor_id"
+        	cascade="save-update"
+        	class="EnvironmentalFactor"/>        
         	
 	</subclass>
 </hibernate-mapping>

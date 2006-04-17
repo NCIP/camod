@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.9 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: Image.java,v 1.10 2006-04-17 19:13:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.8  2005/11/08 16:47:49  georgeda
  * Changes for images
  *
@@ -27,11 +30,99 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
     private static final long serialVersionUID = 3259255453799404851L;
 
     private String title;
+
     private String description;
-    private String staining;
-    private String stainingUnctrlVocab;
+
     private String fileServerLocation;
-    private Availability availability;
+
+    private StainingMethod stainingMethod;
+
+    private AbstractCancerModel cancerModel;
+
+    /**
+     * @return Returns the title.
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * @param title
+     *            The title to set.
+     */
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    /**
+     * @return Returns the description.
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     * @param description
+     *            The description to set.
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    /**
+     * @return fileServerLocation The fileServerLocation to set.
+     */
+    public String getFileServerLocation()
+    {
+        return fileServerLocation;
+    }
+
+    /**
+     * @param fileServerLocation
+     *            The fileServerLocation to set.
+     */
+    public void setFileServerLocation(String fileServerLocation)
+    {
+        this.fileServerLocation = fileServerLocation;
+    }
+
+    /**
+     * @return Returns the stainingMethod.
+     */
+    public StainingMethod getStainingMethod()
+    {
+        return stainingMethod;
+    }
+
+    /**
+     * @param stainingMethod
+     *            The stainingMethod to set.
+     */
+    public void setStainingMethod(StainingMethod stainingMethod)
+    {
+        this.stainingMethod = stainingMethod;
+    }
+
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
+
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
+    }
 
     public String getThumbUrl()
     {
@@ -51,7 +142,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
     }
 
     /**
-     * @return Returns the fileServerLocation.
+     * @return Returns the ImageUrl.
      */
     public String getImageUrl()
     {
@@ -114,108 +205,6 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
             System.out.println("Exception getting url");
         }
         return theUrl;
-    }
-
-    /**
-     * @return fileServerLocation The fileServerLocation to set.
-     */
-    public String getFileServerLocation()
-    {
-        return fileServerLocation;
-    }
-
-    /**
-     * @param fileServerLocation
-     *            The fileServerLocation to set.
-     */
-    public void setFileServerLocation(String fileServerLocation)
-    {
-        this.fileServerLocation = fileServerLocation;
-    }
-
-    /**
-     * @return Returns the availability.
-     */
-    public Availability getAvailability()
-    {
-        return availability;
-    }
-
-    /**
-     * @param availability
-     *            The availability to set.
-     */
-    public void setAvailability(Availability availability)
-    {
-        this.availability = availability;
-    }
-
-    /**
-     * @return Returns the description.
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            The description to set.
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
-     * @return Returns the staining.
-     */
-    public String getStaining()
-    {
-        return staining;
-    }
-
-    /**
-     * @param staining
-     *            The staining to set.
-     */
-    public void setStaining(String staining)
-    {
-        this.staining = staining;
-    }
-
-    /**
-     * @return Returns the stainingUnctrlVocab.
-     */
-    public String getStainingUnctrlVocab()
-    {
-        return stainingUnctrlVocab;
-    }
-
-    /**
-     * @param stainingUnctrlVocab
-     *            The stainingUnctrlVocab to set.
-     */
-    public void setStainingUnctrlVocab(String stainingUnctrlVocab)
-    {
-        this.stainingUnctrlVocab = stainingUnctrlVocab;
-    }
-
-    /**
-     * @return Returns the title.
-     */
-    public String getTitle()
-    {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            The title to set.
-     */
-    public void setTitle(String title)
-    {
-        this.title = title;
     }
 
     /**

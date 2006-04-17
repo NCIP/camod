@@ -1,45 +1,166 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.10  2005/11/14 14:16:51  georgeda
  * Cleanup
  *
  * 
- * $Id: Agent.java,v 1.11 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: Agent.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
+import gov.nih.nci.camod.util.Duplicatable;
+import gov.nih.nci.camod.util.EvsTreeUtil;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class Agent extends EnvironmentalFactor {
+public class Agent extends BaseObject implements Serializable, Duplicatable {
 
     private static final long serialVersionUID = 4259745453799404851L;
 
+    private String name;
+    private String conceptCode;
     private Long nscNumber;
+    private String casNumber;    
     private Boolean isCMAPAgent;
-    private String evsId;
     private String comments;
     private String source;
-    private List<BiologicalProcess> biologicalProcessCollection = new ArrayList<BiologicalProcess>();
-    private List<ChemicalClass> chemicalClassCollection = new ArrayList<ChemicalClass>();
-    private List<AgentTarget> agentTargetCollection = new ArrayList<AgentTarget>();
+    private Set<BiologicalProcess> biologicalProcessCollection = new TreeSet<BiologicalProcess>();
+    private Set<ChemicalClass> chemicalClassCollection = new TreeSet<ChemicalClass>();
+    private Set<AgentTarget> agentTargetCollection = new TreeSet<AgentTarget>();
 
+    /**
+     * @return Returns the name.
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @param name
+     *            The name to set.
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    /**
+     * @return Returns the conceptCode.
+     */
+    public String getConceptCode()
+    {
+        return conceptCode;
+    }
+
+    /**
+     * @return Returns the EVS Preferred displayName
+     */
+    public String getEVSPreferredDescription()
+    {
+        return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+    }
+
+    /**
+     * @param conceptCode
+     *            The conceptCode to set.
+     */
+    public void setConceptCode(String conceptCode)
+    {
+        this.conceptCode = conceptCode;
+    } 
+    /**
+     * @return Returns the nscNumber.
+     */
+    public Long getNscNumber() {
+        return nscNumber;
+    }
+
+    /**
+     * @param nscNumber
+     *            The nscNumber to set.
+     */
+    public void setNscNumber(Long nscNumber) {
+        this.nscNumber = nscNumber;
+    }    
+    /**
+     * @return Returns the casNumber.
+     */
+    public String getCasNumber()
+    {
+        return casNumber;
+    }
+
+    /**
+     * @param casNumber
+     *            The casNumber to set.
+     */
+    public void setCasNumber(String casNumber)
+    {
+        this.casNumber = casNumber;
+    } 
+    /**
+     * @return Returns the isCMAPAgent.
+     */
+    public Boolean getIsCMAPAgent() {
+        return isCMAPAgent;
+    }
+
+    /**
+     * @param isCMAPAgent
+     *            The isCMAPAgent to set.
+     */
+    public void setIsCMAPAgent(Boolean isCMAPAgent) {
+        this.isCMAPAgent = isCMAPAgent;
+    }    
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments() {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+
+
+    /**
+     * @return Returns the source.
+     */
+    public String getSource() {
+        return source;
+    }
+
+    /**
+     * @param source
+     *            The source to set.
+     */
+    public void setSource(String source) {
+        this.source = source;
+    }    
+  
     /**
      * @return Returns the agentTargetCollection.
      */
-    public List getAgentTargetCollection() {            
+    public Set getAgentTargetCollection() {            
       return agentTargetCollection;                    
     }
-
-    public List<AgentTarget> getAgentTargetCollectionSorted() {      
-      if (agentTargetCollection != null) return new ArrayList<AgentTarget>(new TreeSet<AgentTarget>(agentTargetCollection));
-      return null;
-    }    
 
     /**
      * @param agentTargetCollection
      *            The agentTargetCollection to set.
      */
-    public void setAgentTargetCollection(List<AgentTarget> agentTargetCollection) {
+    public void setAgentTargetCollection(Set<AgentTarget> agentTargetCollection) {
         this.agentTargetCollection = agentTargetCollection; 
     }
 
@@ -55,20 +176,15 @@ public class Agent extends EnvironmentalFactor {
     /**
      * @return Returns the chemicalClassCollection.
      */
-    public List getChemicalClassCollection() {            
+    public Set getChemicalClassCollection() {            
       return chemicalClassCollection;        
     }
-
-    public List<ChemicalClass> getChemicalClassCollectionSorted() {      
-      if (chemicalClassCollection != null) return new ArrayList<ChemicalClass>(new TreeSet<ChemicalClass>(chemicalClassCollection));
-      return null;
-    }    
     
     /**
      * @param chemicalClassCollection
      *            The chemicalClassCollection to set.
      */
-    public void setChemicalClassCollection(List<ChemicalClass> chemicalClassCollection) {
+    public void setChemicalClassCollection(Set<ChemicalClass> chemicalClassCollection) {
         this.chemicalClassCollection = chemicalClassCollection;
     }
 
@@ -84,22 +200,15 @@ public class Agent extends EnvironmentalFactor {
     /**
      * @return Returns the biologicalProcessCollection.
      */
-    public List getBiologicalProcessCollection() {           
+    public Set getBiologicalProcessCollection() {           
       return biologicalProcessCollection;                       
     }
-
-    public List getBiologicalProcessCollectionSorted() {      
-      if (biologicalProcessCollection != null)
-            return new ArrayList<BiologicalProcess>(new TreeSet<BiologicalProcess>(biologicalProcessCollection));
-      return null;
-    }    
-    
-    
+   
     /**
      * @param biologicalProcessCollection
      *            The biologicalProcessCollection to set.
      */
-    public void setBiologicalProcessCollection(List<BiologicalProcess> biologicalProcessCollection) {
+    public void setBiologicalProcessCollection(Set<BiologicalProcess> biologicalProcessCollection) {
         this.biologicalProcessCollection = biologicalProcessCollection;
     }
 
@@ -113,89 +222,15 @@ public class Agent extends EnvironmentalFactor {
     }
 
     /**
-     * @return Returns the comments.
-     */
-    public String getComments() {
-        return comments;
-    }
-
-    /**
-     * @param comments
-     *            The comments to set.
-     */
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    /**
-     * @return Returns the evsId.
-     */
-    public String getEvsId() {
-        return evsId;
-    }
-
-    /**
-     * @param evsId
-     *            The evsId to set.
-     */
-    public void setEvsId(String evsId) {
-        this.evsId = evsId;
-    }
-
-    /**
-     * @return Returns the isCMAPAgent.
-     */
-    public Boolean getIsCMAPAgent() {
-        return isCMAPAgent;
-    }
-
-    /**
-     * @param isCMAPAgent
-     *            The isCMAPAgent to set.
-     */
-    public void setIsCMAPAgent(Boolean isCMAPAgent) {
-        this.isCMAPAgent = isCMAPAgent;
-    }
-
-    /**
-     * @return Returns the nscNumber.
-     */
-    public Long getNscNumber() {
-        return nscNumber;
-    }
-
-    /**
-     * @param nscNumber
-     *            The nscNumber to set.
-     */
-    public void setNscNumber(Long nscNumber) {
-        this.nscNumber = nscNumber;
-    }
-
-    /**
-     * @return Returns the source.
-     */
-    public String getSource() {
-        return source;
-    }
-
-    /**
-     * @param source
-     *            The source to set.
-     */
-    public void setSource(String source) {
-        this.source = source;
-    }
-  
-
-    /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
       String result = super.toString() + " - ";      
-      result += this.getEvsId();                
+      result += this.getNscNumber();                
       return result;
-    }       
+    } 
+    
+    
     
     public boolean equals(Object o) {
       if (!super.equals(o)) return false;            

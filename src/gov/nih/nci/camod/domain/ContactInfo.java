@@ -1,16 +1,12 @@
 /*
- * Created on May 4, 2005
+ * $Id: ContactInfo.java,v 1.7 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
+import java.util.*;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
@@ -33,7 +29,7 @@ public class ContactInfo extends BaseObject implements Serializable, Duplicatabl
     private String phone;
     private String email;
     private String institute;
-    private List<Party> partyCollection = new ArrayList<Party>();
+    private Set<Party> partyCollection = new TreeSet<Party>();
 
     /**
      * @return Returns the address.
@@ -140,24 +136,16 @@ public class ContactInfo extends BaseObject implements Serializable, Duplicatabl
     /**
      * @return Returns the partyCollection.
      */
-    public List<Party> getPartyCollection()
+    public Set<Party> getPartyCollection()
     {
         return partyCollection;
     }
-
-    public List<Party> getPartyCollectionSorted()
-    {
-        if (partyCollection != null)
-            return new ArrayList<Party>(new TreeSet<Party>(partyCollection));
-        return null;
-    }
-
 
     /**
      * @param partyCollection
      *            The partyCollection to set.
      */
-    public void setPartyCollection(List<Party> partyCollection)
+    public void setPartyCollection(Set<Party> partyCollection)
     {
         this.partyCollection = partyCollection;
     }

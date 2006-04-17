@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDelivery.java,v 1.11 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: GeneDelivery.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.10  2005/11/28 20:20:46  pandyas
  * added java docs
  *
@@ -24,13 +27,30 @@ import java.io.Serializable;
 public class GeneDelivery extends BaseObject implements Comparable, Serializable, Duplicatable
 {
     private static final long serialVersionUID = 3259385453799404851L;
-
-    private String viralVector;
-    private String viralVectorUnctrlVocab;
+    
+    private AbstractCancerModel cancerModel;
     private String geneInVirus;
+    private String viralVector;
+    private String viralVectorUnctrlVocab;    
     private Organ organ;
     private Treatment treatment;
 
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
+
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
+    }    
     /**
      * @return Returns the display name.
      */
@@ -42,40 +62,6 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
             theDisplayName = "Other - " + viralVectorUnctrlVocab;
         }
         return theDisplayName;
-    }
-
-    /**
-     * @return Returns the treatment.
-     */
-    public Treatment getTreatment()
-    {
-        return treatment;
-    }
-
-    /**
-     * @param treatment
-     *            The treatment to set.
-     */
-    public void setTreatment(Treatment treatment)
-    {
-        this.treatment = treatment;
-    }
-
-    /**
-     * @return Returns the organ.
-     */
-    public Organ getOrgan()
-    {
-        return organ;
-    }
-
-    /**
-     * @param organ
-     *            The organ to set.
-     */
-    public void setOrgan(Organ organ)
-    {
-        this.organ = organ;
     }
 
     /**
@@ -128,7 +114,38 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
     {
         this.viralVectorUnctrlVocab = viralVectorUnctrlVocab;
     }
+    /**
+     * @return Returns the organ.
+     */
+    public Organ getOrgan()
+    {
+        return organ;
+    }
 
+    /**
+     * @param organ
+     *            The organ to set.
+     */
+    public void setOrgan(Organ organ)
+    {
+        this.organ = organ;
+    }
+    /**
+     * @return Returns the treatment.
+     */
+    public Treatment getTreatment()
+    {
+        return treatment;
+    }
+
+    /**
+     * @param treatment
+     *            The treatment to set.
+     */
+    public void setTreatment(Treatment treatment)
+    {
+        this.treatment = treatment;
+    }    
     /**
      * @see java.lang.Object#toString()
      */

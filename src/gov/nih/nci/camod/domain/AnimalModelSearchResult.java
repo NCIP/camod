@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.9 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.10 2006-04-17 19:13:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.8  2005/11/28 18:02:10  georgeda
  * Defect #182.  Get unique set of organs and only display metas. next to the originating organ
  *
@@ -99,7 +102,7 @@ public class AnimalModelSearchResult implements Comparable
         if (mySpecies == null)
         {
             fetchAnimalModel();
-            mySpecies = myAnimalModel.getSpecies().getScientificName();
+            mySpecies = myAnimalModel.getStrain().getSpecies().getScientificName();
         }
         return mySpecies;
     }
@@ -122,13 +125,12 @@ public class AnimalModelSearchResult implements Comparable
             fetchAnimalModel();
 
             myTumorSites = "";
-            List<Histopathology> theHistopathologyList = myAnimalModel.getHistopathologyCollectionSorted();
+            Set<Histopathology> theHistopathologySet = myAnimalModel.getHistopathologyCollection();
+            Iterator it = theHistopathologySet.iterator();
 
-            for (int i = 0, j = theHistopathologyList.size(); i < j; i++)
+            while (it.hasNext())
             {
-
-                Histopathology theHistopathology = (Histopathology) theHistopathologyList.get(i);
-
+                Histopathology theHistopathology = (Histopathology) it.next();
                 String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
 
                 if (!theOrgans.contains(theOrgan))
@@ -138,21 +140,22 @@ public class AnimalModelSearchResult implements Comparable
                 }
 
                 TreeSet<String> theMetaSet = theMetas.get(theOrgan);
-                List theMetastasisList = theHistopathology.getMetastatisCollectionSorted();
+                Set theMetastasisSet = theHistopathology.getMetastasisCollection();
+                it = theMetastasisSet.iterator();
 
-                for (int k = 0, l = theMetastasisList.size(); k < l; k++)
-                {
-
-                    Histopathology theMetastasis = (Histopathology) theMetastasisList.get(k);
+                while(it.hasNext()){
+                    Histopathology theMetastasis = (Histopathology)it.next();
                     String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
-
                     if (!theMetaSet.contains(theMetaOrgan))
                     {
                         theMetaSet.add(theMetaOrgan);
                     }
-                }
+                }                
+
             }
+
         }
+
 
         Iterator theOrganIterator = theOrgans.iterator();
 

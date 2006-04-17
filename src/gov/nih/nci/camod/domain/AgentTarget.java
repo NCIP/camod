@@ -1,59 +1,55 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.6  2005/11/14 14:16:51  georgeda
  * Cleanup
  *
  * 
- * $Id: AgentTarget.java,v 1.7 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: AgentTarget.java,v 1.8 2006-04-17 19:13:46 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.List;
+import java.util.*;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 public class AgentTarget extends BaseObject implements Serializable, Comparable {
 
     private static final long serialVersionUID = 4259725453799404851L;
     
-    private String targetName;
-    private List<Agent> agentCollection = new ArrayList<Agent>();
+    private String name;
+    private Set<Agent> agentCollection = new TreeSet<Agent>();
 
     /**
      * @return Returns the agentCollection.
      */
-    public List<Agent> getAgentCollection() {
+    public Set<Agent> getAgentCollection() {
         return agentCollection;
     }
-    
-    public List getAgentCollectionSorted() {      
-      if (agentCollection != null) return new ArrayList<Agent>(new TreeSet<Agent>(agentCollection));
-      return null;
-    }    
 
     /**
      * @param agentCollection
      *            The agentCollection to set.
      */
-    public void setAgentCollection(List<Agent> agentCollection) {
+    public void setAgentCollection(Set<Agent> agentCollection) {
         this.agentCollection = agentCollection;
     }
 
     /**
-     * @return Returns the targetName.
+     * @return Returns the name.
      */
-    public String getTargetName() {
-        return targetName;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param targetName
-     *            The targetName to set.
+     * @param name
+     *            The name to set.
      */
-    public void setTargetName(String targetName) {
-        this.targetName = targetName;
+    public void setName(String name) {
+        this.name = name;
     }
   
     /**
@@ -61,7 +57,7 @@ public class AgentTarget extends BaseObject implements Serializable, Comparable 
      */
     public String toString() {
       String result = super.toString() + " - ";      
-      result += this.getTargetName();                
+      result += this.getName();                
       return result;
     }           
     
@@ -69,19 +65,19 @@ public class AgentTarget extends BaseObject implements Serializable, Comparable 
       if (!super.equals(o)) return false;            
       if (!(this.getClass().isInstance(o))) return false; 
       final AgentTarget obj = (AgentTarget) o;
-      if (HashCodeUtil.notEqual(this.getTargetName(), obj.getTargetName())) return false;
+      if (HashCodeUtil.notEqual(this.getName(), obj.getName())) return false;
       return true;
     }
      
     public int hashCode() {
       int result = HashCodeUtil.SEED;
-      result = HashCodeUtil.hash(result, this.getTargetName());    
+      result = HashCodeUtil.hash(result, this.getName());    
       return result + super.hashCode();    
     }  
     
     public int compareTo(Object o) {
-      if ((o instanceof AgentTarget) && (this.getTargetName() != null) && (((AgentTarget)o).getTargetName() != null)) {   
-        int result = this.getTargetName().compareTo( ((AgentTarget)o).getTargetName() );
+      if ((o instanceof AgentTarget) && (this.getName() != null) && (((AgentTarget)o).getName() != null)) {   
+        int result = this.getName().compareTo( ((AgentTarget)o).getName() );
         if (result != 0) { return result; }               
       }
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Xenograft.java,v 1.10 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: Xenograft.java,v 1.11 2006-04-17 19:13:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.9  2005/11/11 16:27:26  pandyas
  * added javadocs
  *
@@ -12,11 +15,7 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.HashCodeUtil;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author rajputs
@@ -28,22 +27,53 @@ public class Xenograft extends AbstractCancerModel implements Comparable
 {
     private static final long serialVersionUID = 3257445453799404851L;
 
-    private String administrativeSite;
+    private String xenograftName;    
     private String geneticManipulation;
     private String modificationDescription;
     private String parentalCellLineName;
-    private String name;
     private String atccNumber;
     private String cellAmount;
-    private Date harvestDate;
+    private String growthPeriod;
     private String graftType;
     private String graftTypeUnctrlVocab;
+    private String administrativeSite;
+    private String adminSiteUnctrlVocab;    
     private TumorCode tumorCode;
-    private List<InvivoResult> invivoResultCollection = new ArrayList<InvivoResult>();
-    private Taxon originSpecies;
-    private Taxon hostSpecies;
+    private Set<InvivoResult> invivoResultCollection = new TreeSet<InvivoResult>();
+    private Species donorSpecies;
     private Organ organ;
 
+    
+    /**
+     * @return Returns the administrativeSite.
+     */
+    public String getAdministrativeSite()
+    {
+        return administrativeSite;
+    }
+
+    /**
+     * @param administrativeSite The administrativeSite to set.
+     */
+    public void setAdministrativeSite(String administrativeSite)
+    {
+        this.administrativeSite = administrativeSite;
+    }
+    /**
+     * @return Returns the adminSiteUnctrlVocab.
+     */
+    public String getAdminSiteUnctrlVocab()
+    {
+        return adminSiteUnctrlVocab;
+    }
+
+    /**
+     * @param adminSiteUnctrlVocab The adminSiteUnctrlVocab to set.
+     */
+    public void setAdminSiteUnctrlVocab(String adminSiteUnctrlVocab)
+    {
+        this.adminSiteUnctrlVocab = adminSiteUnctrlVocab;
+    }    
     /**
      * @return Returns the invivoResultCollection.
      * @throws Exception 
@@ -70,35 +100,19 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     }
 
     /**
-     * @return Returns the hostSpecies.
+     * @return Returns the donorSpecies.
      */
-    public Taxon getHostSpecies()
+    public Species getDonorSpecies()
     {
-        return hostSpecies;
+        return donorSpecies;
     }
 
     /**
-     * @param hostSpecies The hostSpecies to set.
+     * @param donorSpecies The donorSpecies to set.
      */
-    public void setHostSpecies(Taxon hostSpecies)
+    public void setDonorSpecies(Species donorSpecies)
     {
-        this.hostSpecies = hostSpecies;
-    }
-
-    /**
-     * @return Returns the originSpecies.
-     */
-    public Taxon getOriginSpecies()
-    {
-        return originSpecies;
-    }
-
-    /**
-     * @param originSpecies The originSpecies to set.
-     */
-    public void setOriginSpecies(Taxon originSpecies)
-    {
-        this.originSpecies = originSpecies;
+        this.donorSpecies = donorSpecies;
     }
 
     /**
@@ -166,40 +180,33 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     }
 
     /**
-     * @return Returns the harvestDate.
+     * @return Returns the growthPeriod.
      */
-    public Date getHarvestDate()
+    public String getGrowthPeriod()
     {
-        return harvestDate;
+        return growthPeriod;
     }
 
     /**
-     * @param harvestDate The harvestDate to set.
+     * @param growthPeriod The growthPeriod to set.
      */
-    public void setHarvestDate(Date harvestDate)
+    public void setGrowthPeriod(String growthPeriod)
     {
-        this.harvestDate = harvestDate;
+        this.growthPeriod = growthPeriod;
     }
 
     /**
      * @return Returns the invivoResultCollection.
      */
-    public List getInvivoResultCollection()
+    public Set getInvivoResultCollection()
     {
         return invivoResultCollection;
-    }
-
-    public List getInvivoResultCollectionSorted()
-    {
-        if (invivoResultCollection != null)
-            return new ArrayList<InvivoResult>(new TreeSet<InvivoResult>(invivoResultCollection));
-        return null;
     }
 
     /**
      * @param invivoResultCollection The invivoResultCollection to set.
      */
-    public void setInvivoResultCollection(List<InvivoResult> invivoResultCollection)
+    public void setInvivoResultCollection(Set<InvivoResult> invivoResultCollection)
     {
         this.invivoResultCollection = invivoResultCollection;
     }
@@ -207,22 +214,6 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     public void addInvivoResult(InvivoResult invivoResult)
     {
         invivoResultCollection.add(invivoResult);
-    }
-
-    /**
-     * @return Returns the administrativeSite.
-     */
-    public String getAdministrativeSite()
-    {
-        return administrativeSite;
-    }
-
-    /**
-     * @param administrativeSite The administrativeSite to set.
-     */
-    public void setAdministrativeSite(String administrativeSite)
-    {
-        this.administrativeSite = administrativeSite;
     }
 
     /**
@@ -258,19 +249,19 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     }
 
     /**
-     * @return Returns the name.
+     * @return Returns the xenograftName.
      */
-    public String getName()
+    public String getXenograftName()
     {
-        return name;
+        return xenograftName;
     }
 
     /**
-     * @param name The name to set.
+     * @param xenograftName The xenograftName to set.
      */
-    public void setName(String name)
+    public void setXenograftName(String xenograftName)
     {
-        this.name = name;
+        this.xenograftName = xenograftName;
     }
 
     /**
@@ -311,7 +302,7 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getName();
+        result += this.getXenograftName();
         return result;
     }
 
@@ -322,7 +313,7 @@ public class Xenograft extends AbstractCancerModel implements Comparable
         if (!(this.getClass().isInstance(o)))
             return false;
         final Xenograft obj = (Xenograft) o;
-        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
+        if (HashCodeUtil.notEqual(this.getXenograftName(), obj.getXenograftName()))
             return false;
         return true;
     }
@@ -330,15 +321,15 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     public int hashCode()
     {
         int result = HashCodeUtil.SEED;
-        result = HashCodeUtil.hash(result, this.getName());
+        result = HashCodeUtil.hash(result, this.getXenograftName());
         return result + super.hashCode();
     }
 
     public int compareTo(Object o)
     {
-        if ((o instanceof Xenograft) && (this.getName() != null) && (((Xenograft) o).getName() != null))
+        if ((o instanceof Xenograft) && (this.getXenograftName() != null) && (((Xenograft) o).getXenograftName() != null))
         {
-            int result = this.getName().compareTo(((Xenograft) o).getName());
+            int result = this.getXenograftName().compareTo(((Xenograft) o).getXenograftName());
             if (result != 0)
             {
                 return result;

@@ -39,11 +39,6 @@
         	column="aveinh" 
         	type="float"/>
         	
-        <!-- inhibitionRate -->
-        <property name="inhibitionRate" 
-        	column="inhibition_rate" 
-        	type="float"/>
-        	
         <!-- treatment (many-to-one unidirectional) -->
         <many-to-one
         	name="treatment"

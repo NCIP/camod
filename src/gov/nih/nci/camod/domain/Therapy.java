@@ -1,18 +1,14 @@
 /*
- * Created on May 4, 2005
+ * $Id: Therapy.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author rajputs
@@ -24,33 +20,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
 {
     private static final long serialVersionUID = 3258525453799404851L;
 
+    private Agent agent;
     private String experiment;
-    private String comments;
     private String results;
     private String toxicityGrade;
     private String biomarker;
     private String tumorResponse;
+    private String comments;
     private Treatment treatment;
-    private List<Publication> publicationCollection = new ArrayList<Publication>();
-    private Agent agent;
-    private Boolean therapeuticExperiment;
-
-    /**
-     * @return Returns the therapeuticExperiment.
-     */
-    public Boolean getTherapeuticExperiment()
-    {
-        return therapeuticExperiment;
-    }
-
-    /**
-     * @param therapeuticExperiment
-     *            The therapeuticExperiment to set.
-     */
-    public void setTherapeuticExperiment(Boolean therapeuticExperiment)
-    {
-        this.therapeuticExperiment = therapeuticExperiment;
-    }
+    private Set<Publication> publicationCollection = new TreeSet<Publication>();
+    private AbstractCancerModel cancerModel;
 
     /**
      * @return Returns the agent.
@@ -67,6 +46,23 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     public void setAgent(Agent agent)
     {
         this.agent = agent;
+    }
+
+    /**
+     * @return Returns the experiment.
+     */
+    public String getExperiment()
+    {
+        return experiment;
+    }
+
+    /**
+     * @param experiment
+     *            The experiment to set.
+     */
+    public void setExperiment(String experiment)
+    {
+        this.experiment = experiment;
     }
 
     /**
@@ -123,23 +119,16 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     /**
      * @return Returns the publicationCollection.
      */
-    public List<Publication> getPublicationCollection()
+    public Set getPublicationCollection()
     {
         return publicationCollection;
-    }
-
-    public List<Publication> getPublicationCollectionSorted()
-    {
-        if (publicationCollection != null)
-            return new ArrayList<Publication>(new TreeSet<Publication>(publicationCollection));
-        return null;
     }
 
     /**
      * @param publicationCollection
      *            The publicationCollection to set.
      */
-    public void setPublicationCollection(List<Publication> publicationCollection)
+    public void setPublicationCollection(Set<Publication> publicationCollection)
     {
         this.publicationCollection = publicationCollection;
     }
@@ -154,7 +143,8 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     }
 
     /**
-     * @return Returns the comments.
+     * @return Returns the comments.  Comment is a reserved word so 
+     * we must use the plural form comments.
      */
     public String getComments()
     {
@@ -168,23 +158,6 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     public void setComments(String comments)
     {
         this.comments = comments;
-    }
-
-    /**
-     * @return Returns the experiment.
-     */
-    public String getExperiment()
-    {
-        return experiment;
-    }
-
-    /**
-     * @param experiment
-     *            The experiment to set.
-     */
-    public void setExperiment(String experiment)
-    {
-        this.experiment = experiment;
     }
 
 
@@ -220,6 +193,23 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     public void setTreatment(Treatment treatment)
     {
         this.treatment = treatment;
+    }
+
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
+
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
     }
 
     /**

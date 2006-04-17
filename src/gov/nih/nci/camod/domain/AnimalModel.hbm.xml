@@ -27,154 +27,109 @@
         	column="is_tool_mouse" 
         	type="boolean"/>
         	
+        <!-- animalAvailabilityCollection (one-to-many unidirectional without 
+        join table) -->
+		<!-- There may be a nullability constraint on the foreign key column. 
+		For most collections, this is implied. For unidirectional one to many associations, 
+		the foreign key column is nullable by default, so you might need to specify 
+		not-null="true". -->        
+        <set name="animalAvailabilityCollection" 
+        	cascade="all-delete-orphan"
+		sort="natural">        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="AnimalAvailability"/>
+        </set> 
+        
+        <!-- spontaneousMutationCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="spontaneousMutationCollection"
+        	cascade="all-delete-orphan"
+		sort="natural">        	        	
+        	<key column="abs_cancer_model_id"/>
+        	<one-to-many class="SpontaneousMutation"/>
+        </set>         
+        
+        <!-- cellLineCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="cellLineCollection"
+        cascade="all-delete-orphan">
+            <key column="abs_cancer_model_id"
+            not-null="true"/>
+            <one-to-many class="CellLine"/>
+        </set>
+        
+        <!-- therapyCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="therapyCollection"
+        cascade="all-delete-orphan">        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="Therapy"/>
+        </set>        
+        
+        <!-- imageCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="imageCollection" 
+        cascade="all-delete-orphan">        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="Image"/>
+        </set> 
+        
+        <!-- engineeredGeneCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="engineeredGeneCollection"
+        	cascade="all-delete-orphan"
+		sort="natural">        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="EngineeredGene"/>
+        </set>                 
+                               	
+        <!-- geneDeliveryCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="geneDeliveryCollection"
+        cascade="all-delete-orphan">        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="GeneDelivery"/>
+        </set>        	
+
+        <!-- histopathologyCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="histopathologyCollection"
+        	cascade="all-delete-orphan"
+		sort="natural">        	
+        	<key column="abs_cancer_model_id"/>
+        	<one-to-many class="Histopathology"/>
+        </set>
+             
+       
+        <!-- microArrayDataCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="microArrayDataCollection"
+        cascade="all-delete-orphan"> 
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="MicroArrayData"/>
+        </set>
+        	
+         <!-- carcinogenExposureCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="carcinogenExposureCollection"
+        cascade="all-delete-orphan">        	        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="CarcinogenExposure"/>
+        </set>
+        
         <!-- logCollection (one-to-many bidirectional) -->
         <set name="logCollection"
 	         cascade="all">
             <key column="abs_cancer_model_id"/>
             <one-to-many class="Log"/>
-        </set>
-        
-        <!-- cellLineCollection (one-to-many unidirectional) -->
-        <bag name="cellLineCollection" 
-        	table="ani_mod_cell_line"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="cell_line_id"
-            	unique="true"
-            	class="CellLine"/>
-        </bag>
-        
-        <!-- spontaneousMutationCollection (one-to-many unidirectional) -->
-        <bag name="spontaneousMutationCollection" 
-        	table="ani_mod_spon_mutation"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="spontaneous_mutation_id"
-            	unique="true"
-            	class="SpontaneousMutation"/>
-        </bag>        
-        
-        <!-- imageCollection (one-to-many unidirectional) -->
-        <bag name="imageCollection" 
-        	table="animal_model_image"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="image_id"
-            	unique="true"
-            	class="Image"/>
-        </bag>
-        
-        <!-- microArrayDataCollection (one-to-many unidirectional) -->
-        <bag name="microArrayDataCollection" 
-        	table="ani_mod_mic_array_data"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">        	
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="micro_array_data_id"
-            	unique="true"
-            	class="MicroArrayData"/>
-        </bag>
-        
-        <!-- xenograftCollection -->
-        <!-- Note: the relationship between AnimalModel and Xenograft is modeled taking
-             into effect the fact that both are children of the same parent, viz. AbstractCancerModel -->
-        <bag name="xenograftCollection" 
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="par_abs_can_model_id"/>
-        	<one-to-many class="Xenograft"/>
-        </bag>
-        
-        <!-- therapyCollection (one-to-many unidirectional) -->
-        <bag name="therapyCollection"
-        	table="animal_model_therapy" 
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="therapy_id"
-            	unique="true"
-            	class="Therapy"/>
-        </bag>              
-        	
-        <!-- geneDeliveryCollection (one-to-many unidirectional) -->
-        <bag name="geneDeliveryCollection" 
-        	table="ani_mod_gen_delivery"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="gene_delivery_id"
-            	unique="true"
-            	class="GeneDelivery"/>
-        </bag> 
-        
-        <!-- animalAvailabilityCollection (one-to-many unidirectional) -->
-        <bag name="animalAvailabilityCollection" 
-        	table="ani_mod_ani_availability"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="animal_availability_id"
-            	unique="true"
-            	class="AnimalAvailability"/>
-        </bag> 
-        
-        <!-- environmentalFactorCollection (one-to-many unidirectional) -->
-        <bag name="environmentalFactorCollection" 
-        	table="ani_mod_env_factor"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="env_factor_id"
-            	unique="true"
-            	class="EnvironmentalFactor"/>
-        </bag>
-        
-        <!-- histopathologyCollection (one-to-many unidirectional) -->
-        <bag name="histopathologyCollection" 
-        	table="ani_mod_histopathology"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="histopathology_id"
-            	unique="true"
-            	class="Histopathology"/>
-        </bag>
-        
-        <!-- engineeredGeneCollection (one-to-many unidirectional) -->
-        <bag name="engineeredGeneCollection" 
-        	table="ani_mod_engineered_gene"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="abs_cancer_model_id"/>
-        	<many-to-many column="engineered_gene_id"
-            	unique="true"
-            	class="EngineeredGene"/>
-        </bag>
+        </set>        
         
         <!-- repositoryInfo (many-to-one unidirectional)-->
         <many-to-one
@@ -188,6 +143,19 @@
         	name="phenotype"
         	column="phenotype_id"
         	cascade="save-update"
-        	class="Phenotype"/>   
+        	class="Phenotype"/> 
+        	
+        <!-- xenograftCollection -->
+        <!-- Note: the relationship between AnimalModel and Xenograft is modeled taking
+             into effect the fact that both are children of the same parent, viz. AbstractCancerModel -->
+        <set name="xenograftCollection" 
+        	inverse="false" 
+        	lazy="true" 
+        	cascade="all-delete-orphan">
+        	
+        	<key column="par_abs_can_model_id"/>
+        	<one-to-many class="Xenograft"/>
+        </set>  
+               	  
 	</subclass>
 </hibernate-mapping>

@@ -1,15 +1,12 @@
 /*
- * Created on May 5, 2005
+ * $Id: Disease.java,v 1.14 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.*;
-
 import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author rajputs TODO To change the template for this generated type comment
@@ -21,32 +18,24 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
 
     private String name;
     private String conceptCode;
-    private List<Histopathology> histopathologyCollection = new ArrayList<Histopathology>();
 
+    
     /**
-     * @return Returns the histopathologyCollection.
+     * @return Returns the name.
      */
-    public List<Histopathology> getHistopathologyCollection()
+    public String getName()
     {
-        return histopathologyCollection;
-    }
-
-    public List getHistopathologyCollectionSorted()
-    {
-        if (histopathologyCollection != null)
-            return new ArrayList<Histopathology>(new TreeSet<Histopathology>(histopathologyCollection));
-        return null;
+        return name;
     }
 
     /**
-     * @param histopathologyCollection
-     *            The histopathologyCollection to set.
+     * @param name
+     *            The name to set.
      */
-    public void setHistopathologyCollection(List<Histopathology> histopathologyCollection)
+    public void setName(String name)
     {
-        this.histopathologyCollection = histopathologyCollection;
-    }
-
+        this.name = name;
+    }    
     /**
      * @return Returns the conceptCode.
      */
@@ -82,22 +71,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
         this.conceptCode = conceptCode;
     }
 
-    /**
-     * @return Returns the name.
-     */
-    public String getName()
-    {
-        return name;
-    }
 
-    /**
-     * @param name
-     *            The name to set.
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
 
     /**
      * @see java.lang.Object#toString()

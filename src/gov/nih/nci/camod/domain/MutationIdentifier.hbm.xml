@@ -24,9 +24,9 @@
 	        <generator class="native"/>
 	    </id>
 	    
-	    <!-- numberMGI -->
-        <property name="numberMGI" 
-        	column="number_mgi" 
-        	type="long"/>
+	    <!-- mgiNumber -->
+        <property name="mgiNumber" 
+        	column="mgi_number" 
+        	type="string"/>
 	</class>
 </hibernate-mapping>

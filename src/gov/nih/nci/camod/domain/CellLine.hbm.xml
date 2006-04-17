@@ -21,41 +21,42 @@
 	    	unsaved-value="null">	    	
 	        <generator class="native"/>
 	    </id>	    
-	    
-	    <!-- comments -->
-        <property name="comments" 
-        	column="comments" 
-        	type="string"
-        	length="2000"/>
+
+	    <!-- name -->
+        <property name="name" 
+        	column="name" 
+        	type="string"/>        	
 	    
 	    <!-- experiment -->
         <property name="experiment" 
         	column="experiment" 
         	type="string"
         	length="2000"/>
-	    
-	    <!-- name -->
-        <property name="name" 
-        	column="name" 
-        	type="string"/>
         	
         <!-- results -->
         <property name="results" 
         	column="results" 
-        	type="string"/>
-        
-        <!-- publicationCollection (one-to-many unidirectional) -->
-        <bag name="publicationCollection"
-        	table="cell_line_publication" 
-        	inverse="false" 
+        	type="string"
+        	length="2000"/>
+	    
+	    <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"
+        	length="2000"/>
+       
+        <!-- publicationCollection (one-to-many unidirectional with join table) -->
+        <set name="publicationCollection"
+        	table="cell_line_publication"  
         	lazy="true" 
-        	cascade="all-delete-orphan">
+        	cascade="all-delete-orphan"
+		sort="natural">
         	
         	<key column="cell_line_id"/>
         	<many-to-many column="publication_id"
             	unique="true"
             	class="Publication"/>
-        </bag>
+        </set>
         
         <!-- organ (many-to-one unidirectional) -->
         <many-to-one
@@ -63,5 +64,8 @@
         	column="organ_id"
         	class="Organ"
         	cascade="all-delete-orphan"/>
+
+  	
+        	
 	</class>
 </hibernate-mapping>

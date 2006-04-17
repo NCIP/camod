@@ -14,7 +14,8 @@
 <hibernate-mapping package="gov.nih.nci.camod.domain">
 	<class name="Organ" 
     	table="organ"
-        lazy="true">
+        lazy="true"
+        mutable="false">
 
 	    <!-- id -->
 	    <id name="id" 
@@ -32,19 +33,7 @@
         <!-- conceptCode -->
         <property name="conceptCode" 
         	column="concept_code" 
-        	type="string"/>
-        	
-        <!-- histopathologyCollection (one-to-many bidirectional) -->
-        <bag name="histopathologyCollection" 
-        	table="organ_histopathology"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
-        	
-        	<key column="organ_id"/>
-        	<many-to-many column="histopathology_id"
-            	unique="true"
-            	class="Histopathology"/>
-        </bag>
+        	type="string"/>        	
+
 	</class>
 </hibernate-mapping>

@@ -34,6 +34,11 @@
         	column="dosage" 
         	type="string"/>
         	
+        <!-- dosageUnit -->
+        <property name="dosageUnit" 
+        	column="dosage_unit" 
+        	type="string"/>        	
+        	
         <!-- administrativeRoute -->
         <property name="administrativeRoute" 
         	column="administrative_route" 
@@ -47,12 +52,18 @@
         <!-- ageAtTreatment -->
         <property name="ageAtTreatment" 
         	column="age_at_treatment" 
-        	type="string"/>	
+        	type="string"/>
+        	
+        <!-- ageAtTreatmentUnit -->
+        <property name="ageAtTreatmentUnit" 
+        	column="age_at_treatment_unit" 
+        	type="string"/>	        		
         	
         <!-- sexDistribution (many-to-one unidirectional) -->
         <many-to-one 
         	name="sexDistribution"
         	column="sex_distribution_id"
-        	class="SexDistribution"/>
+        	class="SexDistribution"/>        	
+        	
 	</class>
 </hibernate-mapping>

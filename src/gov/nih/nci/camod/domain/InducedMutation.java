@@ -1,8 +1,7 @@
 /*
- * Created on May 6, 2005
+ * $Id: InducedMutation.java,v 1.13 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -14,29 +13,22 @@ public class InducedMutation extends EngineeredGene
 
     private String geneId;
     private String description;
-    private List<GeneticAlteration> geneticAlterationCollection = new ArrayList<GeneticAlteration>();
-    private List<EnvironmentalFactor> environmentalFactorCollection = new ArrayList<EnvironmentalFactor>();
+    private Set<GeneticAlteration> geneticAlterationCollection = new TreeSet<GeneticAlteration>();
+    private EnvironmentalFactor environmentalFactor;
 
     /**
      * @return Returns the geneticAlterationCollection.
      */
-    public List<GeneticAlteration> getGeneticAlterationCollection()
+    public Set<GeneticAlteration> getGeneticAlterationCollection()
     {
         return geneticAlterationCollection;
-    }
-
-    public List<GeneticAlteration> getGeneticAlterationCollectionSorted()
-    {
-        if (geneticAlterationCollection != null)
-            return new ArrayList<GeneticAlteration>(new TreeSet<GeneticAlteration>(geneticAlterationCollection));
-        return null;
     }
 
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.
      */
-    public void setGeneticAlterationCollection(List<GeneticAlteration> geneticAlterationCollection)
+    public void setGeneticAlterationCollection(Set<GeneticAlteration> geneticAlterationCollection)
     {
         this.geneticAlterationCollection = geneticAlterationCollection;
     }
@@ -51,30 +43,22 @@ public class InducedMutation extends EngineeredGene
     }
 
     /**
-     * @return Returns the geneticAlterationCollection.
+     * @return Returns the environmentalFactor.
      */
-    public List<EnvironmentalFactor> getEnvironmentalFactorCollection()
-    {
-        return environmentalFactorCollection;
-    }
-
-    public List<EnvironmentalFactor> getEnvironmentalFactorCollectionSorted()
-    {
-        if (environmentalFactorCollection != null)
-            return new ArrayList<EnvironmentalFactor>(new TreeSet<EnvironmentalFactor>(environmentalFactorCollection));
-        return null;
+    public EnvironmentalFactor getEnvironmentalFactor() {
+        return environmentalFactor;
     }
 
     /**
-     * @param geneticAlterationCollection
-     *            The geneticAlterationCollection to set.
+     * @param environmentalFactor
+     *            The environmentalFactor to set.
      */
-    public void setEnvironmentalFactorCollection(List<EnvironmentalFactor> environmentalFactorCollection)
-    {
-        this.environmentalFactorCollection = environmentalFactorCollection;
+    public void setEnvironmentalFactor(EnvironmentalFactor environmentalFactor) {
+        this.environmentalFactor = environmentalFactor;
     }
 
-    //TODO: this is not how we should do this and we should clean this up later
+    /* old code
+     * this is not how we should do this and we should clean this up later
     public EnvironmentalFactor getEnvironmentalFactor()
     {
         if (environmentalFactorCollection.size() > 0)
@@ -82,16 +66,18 @@ public class InducedMutation extends EngineeredGene
         else
             return null;
     }
-
-    /**
+    */
+    
+    /*
      * @param geneticAlteration
      *            The geneticAlteration to add.
-     */
+     
     public void addEnvironmentalFactor(EnvironmentalFactor environmentalFactor)
     {
         environmentalFactorCollection.add(environmentalFactor);
     }
-
+    */
+    
     /**
      * @return Returns the description.
      */

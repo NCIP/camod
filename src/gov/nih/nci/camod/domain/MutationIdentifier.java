@@ -1,8 +1,7 @@
 /*
- * Created on May 5, 2005
+ * $Id: MutationIdentifier.java,v 1.6 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -20,23 +19,23 @@ public class MutationIdentifier extends BaseObject implements Serializable, Dupl
 {
     private static final long serialVersionUID = 3259135453799404851L;
 
-    private Long numberMGI;
+    private String mgiNumber;
 
     /**
-     * @return Returns the numberMGI.
+     * @return Returns the mgiNumber.
      */
-    public Long getNumberMGI()
+    public String getMgiNumber()
     {
-        return numberMGI;
+        return mgiNumber;
     }
 
     /**
-     * @param numberMGI
-     *            The numberMGI to set.
+     * @param mgiNumber
+     *            The mgiNumber to set.
      */
-    public void setNumberMGI(Long numberMGI)
+    public void setMgiNumber(String mgiNumber)
     {
-        this.numberMGI = numberMGI;
+        this.mgiNumber = mgiNumber;
     }
 
     /**
@@ -45,8 +44,8 @@ public class MutationIdentifier extends BaseObject implements Serializable, Dupl
     public String toString()
     {
         String result = super.toString() + " - ";
-        if (this.getNumberMGI() != null)
-            result += this.getNumberMGI();
+        if (this.getMgiNumber() != null)
+            result += this.getMgiNumber();
         return result;
     }
 

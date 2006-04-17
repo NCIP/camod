@@ -1,130 +1,129 @@
 /*
- * Created on May 6, 2005
+ * $Id: Transgene.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
+import java.util.*;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
-public class Transgene extends EngineeredGene
-{
+public class Transgene extends EngineeredGene {
 
-    private static final long serialVersionUID = 3258505453799404851L;
+	private static final long serialVersionUID = 3258505453799404851L;
 
-    private String locationOfIntegration;
-    private List<RegulatoryElement> regulatoryElementCollection = new ArrayList<RegulatoryElement>();
-    private List<Taxon> taxonCollection = new ArrayList<Taxon>();
+	private String locationOfIntegration;
 
-    /**
-     * @return Returns the taxonCollection.
-     */
-    public List<Taxon> getTaxonCollection()
-    {
-        return taxonCollection;
-    }
+	private Boolean isRandom;
 
-    public List<Taxon> getTaxonCollectionSorted()
-    {
-        if (taxonCollection != null)
-            return new ArrayList<Taxon>(new TreeSet<Taxon>(taxonCollection));
-        return null;
-    }
+	private String constructSequence;
+	
+	private Species species;	
 
-    /**
-     * @param taxonCollection
-     *            The taxonCollection to set.
-     */
-    public void setTaxonCollection(List<Taxon> taxonCollection)
-    {
-        this.taxonCollection = taxonCollection;
-    }
+	private Set<RegulatoryElement> regulatoryElementCollection = new TreeSet<RegulatoryElement>();
 
-    /**
-     * @param taxon
-     *            The taxon to add.
-     */
-    public void addTaxon(Taxon taxon)
-    {
-        taxonCollection.add(taxon);
-    }
 
-    /**
-     * @return Returns the regulatoryElementCollection.
-     */
-    public List<RegulatoryElement> getRegulatoryElementCollection()
-    {
-        return regulatoryElementCollection;
-    }
 
-    public List<RegulatoryElement> getRegulatoryElementCollectionSorted()
-    {
-        if (regulatoryElementCollection != null)
-            return new ArrayList<RegulatoryElement>(new TreeSet<RegulatoryElement>(regulatoryElementCollection));
-        return null;
-    }
+	/**
+	 * @return Returns the locationOfIntegration.
+	 */
+	public String getLocationOfIntegration() {
+		return locationOfIntegration;
+	}
 
-    /**
-     * @param regulatoryElementCollection
-     *            The regulatoryElementCollection to set.
-     */
-    public void setRegulatoryElementCollection(List<RegulatoryElement> regulatoryElementCollection)
-    {
-        this.regulatoryElementCollection = regulatoryElementCollection;
-    }
+	/**
+	 * @param locationOfIntegration
+	 *            The locationOfIntegration to set.
+	 */
+	public void setLocationOfIntegration(String locationOfIntegration) {
+		this.locationOfIntegration = locationOfIntegration;
+	}
 
-    /**
-     * @param regulatoryElement
-     *            The regulatoryElement to add.
-     */
-    public void addRegulatoryElement(RegulatoryElement regulatoryElement)
-    {
-        regulatoryElementCollection.add(regulatoryElement);
-    }
+	/**
+	 * @return Returns the isRandom.
+	 */
+	public Boolean getIsRandom() {
+		return isRandom;
+	}
 
-    /**
-     * @return Returns the locationOfIntegration.
-     */
-    public String getLocationOfIntegration()
-    {
-        return locationOfIntegration;
-    }
+	/**
+	 * @param isRandom
+	 *            The isRandom to set.
+	 */
+	public void setIsRandom(Boolean isRandom) {
+		this.isRandom = isRandom;
+	}
 
-    /**
-     * @param locationOfIntegration
-     *            The locationOfIntegration to set.
-     */
-    public void setLocationOfIntegration(String locationOfIntegration)
-    {
-        this.locationOfIntegration = locationOfIntegration;
-    }
+	/**
+	 * @return Returns the constructSequence.
+	 */
+	public String getConstructSequence() {
+		return constructSequence;
+	}
 
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString()
-    {
-        String result = super.toString() + " - ";
-        result += this.getLocationOfIntegration();
-        return result;
-    }
+	/**
+	 * @param constructSequence
+	 *            The constructSequence to set.
+	 */
+	public void setConstructSequence(String constructSequence) {
+		this.constructSequence = constructSequence;
+	}
 
-    public boolean equals(Object o)
-    {
-        if (!super.equals(o))
-            return false;
-        if (!(this.getClass().isInstance(o)))
-            return false;
-        return true;
-    }
+	/**
+	 * @return Returns the species.
+	 */
+	public Species getSpecies() {
+		return species;
+	}
+
+	/**
+	 * @param species
+	 *            The species to set.
+	 */
+	public void setSpecies(Species species) {
+		this.species = species;
+	}
+
+	/**
+	 * @return Returns the regulatoryElementCollection.
+	 */
+	public Set<RegulatoryElement> getRegulatoryElementCollection() {
+		return regulatoryElementCollection;
+	}
+
+	/**
+	 * @param regulatoryElementCollection
+	 *            The regulatoryElementCollection to set.
+	 */
+	public void setRegulatoryElementCollection(
+			Set<RegulatoryElement> regulatoryElementCollection) {
+		this.regulatoryElementCollection = regulatoryElementCollection;
+	}
+
+	/**
+	 * @param regulatoryElement
+	 *            The regulatoryElement to add.
+	 */
+	public void addRegulatoryElement(RegulatoryElement regulatoryElement) {
+		regulatoryElementCollection.add(regulatoryElement);
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		String result = super.toString() + " - ";
+		result += this.getLocationOfIntegration();
+		return result;
+	}
+
+	public boolean equals(Object o) {
+		if (!super.equals(o))
+			return false;
+		if (!(this.getClass().isInstance(o)))
+			return false;
+		return true;
+	}
 }

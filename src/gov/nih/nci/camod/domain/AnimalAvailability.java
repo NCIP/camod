@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.10  2005/12/08 21:44:23  georgeda
  * Defect #259; handle PI availability for 2-tier data
  *
@@ -13,17 +16,14 @@
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.11 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: AnimalAvailability.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
-
 import java.io.Serializable;
-import java.util.*;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -35,41 +35,9 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
 
     private String name;
     private String stockNumber;
-    private List<AnimalDistributor> animalDistributorCollection = new ArrayList<AnimalDistributor>();
+    private AbstractCancerModel cancerModel;
+    private AnimalDistributor animalDistributor;
 
-    /**
-     * @return Returns the animalDistributorCollection.
-     */
-    public List<AnimalDistributor> getAnimalDistributorCollection()
-    {
-        return animalDistributorCollection;
-    }
-
-    public List<AnimalDistributor> getAnimalDistributorCollectionSorted()
-    {
-        if (animalDistributorCollection != null)
-            return new ArrayList<AnimalDistributor>(new TreeSet<AnimalDistributor>(animalDistributorCollection));
-        return null;
-    }
-
-    /**
-     * @param animalDistributorCollection
-     *            The animalDistributorCollection to set.
-     */
-    public void setAnimalDistributorCollection(List<AnimalDistributor> animalDistributorCollection)
-    {
-        this.animalDistributorCollection = animalDistributorCollection;
-    }
-
-    /**
-     * @param animalDistributor
-     *            The animalDistributor to add.
-     */
-    public void addAnimalDistributor(AnimalDistributor animalDistributor)
-    {
-        animalDistributor.getAnimalAvailabilityCollection().add(this);
-        animalDistributorCollection.add(animalDistributor);
-    }
 
     /**
      * @return Returns the display name.
@@ -139,6 +107,40 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
         }
 
         return thePerson;
+    }
+
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
+
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
+    }
+
+    /**
+     * @return Returns the animalDistributor.
+     */
+    public AnimalDistributor getAnimalDistributor()
+    {
+        return animalDistributor;
+    }
+
+    /**
+     * @param animalDistributor
+     *            The animalDistributor to set.
+     */
+    public void setAnimalDistributor(AnimalDistributor animalDistributor)
+    {
+        this.animalDistributor = animalDistributor;
     }
 
     /**

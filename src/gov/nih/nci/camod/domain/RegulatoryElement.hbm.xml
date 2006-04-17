@@ -35,11 +35,11 @@
         	column="reg_element_type_id"
         	class="RegulatoryElementType"/>
         	
-        <!-- taxon (many-to-one unidirectional) -->
+        <!-- species (many-to-one unidirectional) -->
         <many-to-one
-        	name="taxon"
-        	column="taxon_id"
-        	class="Taxon"
+        	name="species"
+        	column="species_id"
+        	class="Species"
         	cascade="save-update"/>
 	</class>
 </hibernate-mapping>

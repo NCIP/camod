@@ -22,6 +22,11 @@
         	column="location_of_integration" 
         	type="string"/>
         	
+        <!-- isRandom -->
+        <property name="isRandom" 
+        	column="is_random" 
+        	type="boolean"/>        	
+        	
         <!-- segmentSize -->
         <property name="segmentSize" 
         	column="segment_size" 
@@ -30,19 +35,19 @@
         <!-- cloneDesignator -->
         <property name="cloneDesignator" 
         	column="clone_designator" 
-        	type="string"/>    	
-        
-        <!-- segmentTypeCollection (one-to-many unidirectional) -->
-        <bag name="segmentTypeCollection" 
-        	table="gen_seg_segment_type"
-        	inverse="false" 
-        	lazy="true" 
-        	cascade="all-delete-orphan">
+        	type="string"/> 
         	
-        	<key column="engineered_gene_id"/>
-        	<many-to-many column="segment_type_id"
-            	unique="true"
-            	class="SegmentType"/>
-        </bag>
+        <!-- constructSequence -->
+        <property name="constructSequence" 
+        	column="construct_sequence" 
+        	type="text"/>         	   	
+        
+        <!-- segmentType (many-to-one unidirectional) -->
+        <many-to-one
+        	name="segmentType"
+        	column="segment_type_id"
+        	cascade="save-update"
+        	class="SegmentType"/>
+        
 	</subclass>
 </hibernate-mapping>

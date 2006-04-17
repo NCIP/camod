@@ -1,18 +1,18 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.6  2005/11/14 14:16:51  georgeda
  * Cleanup
  *
  * 
- * $Id: BiologicalProcess.java,v 1.7 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: BiologicalProcess.java,v 1.8 2006-04-17 19:13:46 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
+import java.util.*;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 public class BiologicalProcess extends BaseObject implements Serializable, Comparable
@@ -20,48 +20,38 @@ public class BiologicalProcess extends BaseObject implements Serializable, Compa
 
     private static final long serialVersionUID = 3259655453799404851L;
 
-    private String processName;
-    private List<Agent> agentCollection = new ArrayList<Agent>();
+    private String name;
+    private Set<Agent> agentCollection = new TreeSet<Agent>();
 
     /**
      * @return Returns the agentCollection.
      */
-    public List<Agent> getAgentCollection()
+    public Set<Agent> getAgentCollection()
     {
         return agentCollection;
     }
-
-    public List<Agent> getAgentCollectionSorted()
-    {
-        if (agentCollection != null)
-            return new ArrayList<Agent>(new TreeSet<Agent>(agentCollection));
-        return null;
-    }
-
     /**
      * @param agentCollection
      *            The agentCollection to set.
      */
-    public void setAgentCollection(List<Agent> agentCollection)
+    public void setAgentCollection(Set<Agent> agentCollection)
     {
         this.agentCollection = agentCollection;
     }
 
     /**
-     * @return Returns the processName.
+     * @return Returns the name.
      */
-    public String getProcessName()
-    {
-        return processName;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param processName
-     *            The processName to set.
+     * @param name
+     *            The name to set.
      */
-    public void setProcessName(String processName)
-    {
-        this.processName = processName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -70,7 +60,7 @@ public class BiologicalProcess extends BaseObject implements Serializable, Compa
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getProcessName();
+        result += this.getName();
         return result;
     }
 
@@ -82,7 +72,7 @@ public class BiologicalProcess extends BaseObject implements Serializable, Compa
         if (!(this.getClass().isInstance(o)))
             return false;
         final BiologicalProcess obj = (BiologicalProcess) o;
-        if (HashCodeUtil.notEqual(this.getProcessName(), obj.getProcessName()))
+        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
             return false;
         return true;
     }
@@ -90,15 +80,15 @@ public class BiologicalProcess extends BaseObject implements Serializable, Compa
     public int hashCode()
     {
         int result = HashCodeUtil.SEED;
-        result = HashCodeUtil.hash(result, this.getProcessName());
+        result = HashCodeUtil.hash(result, this.getName());
         return result + super.hashCode();
     }
 
     public int compareTo(Object o)
     {
-        if ((o instanceof BiologicalProcess) && (this.getProcessName() != null) && (((BiologicalProcess) o).getProcessName() != null))
+        if ((o instanceof BiologicalProcess) && (this.getName() != null) && (((BiologicalProcess) o).getName() != null))
         {
-            int result = this.getProcessName().compareTo(((BiologicalProcess) o).getProcessName());
+            int result = this.getName().compareTo(((BiologicalProcess) o).getName());
             if (result != 0)
             {
                 return result;

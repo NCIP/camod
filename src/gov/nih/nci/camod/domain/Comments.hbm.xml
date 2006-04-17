@@ -27,7 +27,8 @@
 	    <!-- remark -->
         <property name="remark" 
         	column="remark" 
-        	type="string"/>
+        	type="string"
+        	length="2000"/>
         	
         <!-- state -->
         <property name="state" 

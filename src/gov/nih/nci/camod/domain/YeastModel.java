@@ -1,15 +1,11 @@
 /*
- * Created on May 4, 2005
+ * $Id: YeastModel.java,v 1.6 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
+import java.util.*;
 
 /**
  * @author rajputs
@@ -21,29 +17,22 @@ public class YeastModel extends AbstractCancerModel
 {
     private static final long serialVersionUID = 3257425453799404851L;
 
-    private List<ScreeningResult> screeningResultCollection = new ArrayList<ScreeningResult>();
-    private List<TargetedModification> targetedModificationCollection = new ArrayList<TargetedModification>();
+    private Set<ScreeningResult> screeningResultCollection = new TreeSet<ScreeningResult>();
+    private Set<TargetedModification> targetedModificationCollection = new TreeSet<TargetedModification>();
 
     /**
      * @return Returns the targetedModificationCollection.
      */
-    public List<TargetedModification> getTargetedModificationCollection()
+    public Set<TargetedModification> getTargetedModificationCollection()
     {
         return targetedModificationCollection;
-    }
-
-    public List<TargetedModification> getTargetedModificationCollectionSorted()
-    {
-        if (targetedModificationCollection != null)
-            return new ArrayList<TargetedModification>(new TreeSet<TargetedModification>(targetedModificationCollection));
-        return null;
     }
 
     /**
      * @param targetedModificationCollection
      *            The targetedModificationCollection to set.
      */
-    public void setTargetedModificationCollection(List<TargetedModification> targetedModificationCollection)
+    public void setTargetedModificationCollection(Set<TargetedModification> targetedModificationCollection)
     {
         this.targetedModificationCollection = targetedModificationCollection;
     }
@@ -56,23 +45,16 @@ public class YeastModel extends AbstractCancerModel
     /**
      * @return Returns the screeningResultCollection.
      */
-    public List<ScreeningResult> getScreeningResultCollection()
+    public Set<ScreeningResult> getScreeningResultCollection()
     {
         return screeningResultCollection;
-    }
-
-    public List getScreeningResultCollectionSorted()
-    {
-        if (screeningResultCollection != null)
-            return new ArrayList<ScreeningResult>(new TreeSet<ScreeningResult>(screeningResultCollection));
-        return null;
     }
 
     /**
      * @param screeningResultCollection
      *            The screeningResultCollection to set.
      */
-    public void setScreeningResultCollection(List<ScreeningResult> screeningResultCollection)
+    public void setScreeningResultCollection(Set<ScreeningResult> screeningResultCollection)
     {
         this.screeningResultCollection = screeningResultCollection;
     }

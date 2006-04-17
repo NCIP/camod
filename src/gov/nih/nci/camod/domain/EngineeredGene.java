@@ -1,37 +1,32 @@
 /*
- * Created on May 5, 2005
+ * $Id: EngineeredGene.java,v 1.13 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
 import java.util.*;
-
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class EngineeredGene extends BaseObject implements Comparable, Serializable, Duplicatable
 {
 
     private static final long serialVersionUID = 3259475453799404851L;
 
-    private Long cabioId;
     private String name;
     private String comments;
     private GenotypeSummary genotypeSummary;
     private Image image;
     private Conditionality conditionality;
     private MutationIdentifier mutationIdentifier;
-    private List<ExpressionFeature> expressionFeatureCollection = new ArrayList<ExpressionFeature>();
-    private Set<GeneFunction> geneFunctionCollection = new HashSet<GeneFunction>();
+    private AbstractCancerModel cancerModel;    
+    private Set<ExpressionFeature> expressionFeatureCollection = new TreeSet<ExpressionFeature>();
+    private Set<GeneFunction> geneFunctionCollection = new TreeSet<GeneFunction>();
 
     /**
      * @return Returns the geneFunctionCollection.
@@ -69,23 +64,16 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the expressionFeatureCollection.
      */
-    public List<ExpressionFeature> getExpressionFeatureCollection()
+    public Set<ExpressionFeature> getExpressionFeatureCollection()
     {
         return expressionFeatureCollection;
-    }
-
-    public List<ExpressionFeature> getExpressionFeatureCollectionSorted()
-    {
-        if (expressionFeatureCollection != null)
-            return new ArrayList<ExpressionFeature>(new TreeSet<ExpressionFeature>(expressionFeatureCollection));
-        return null;
     }
 
     /**
      * @param expressionFeatureCollection
      *            The expressionFeatureCollection to set.
      */
-    public void setExpressionFeatureCollection(List<ExpressionFeature> expressionFeatureCollection)
+    public void setExpressionFeatureCollection(Set<ExpressionFeature> expressionFeatureCollection)
     {
         this.expressionFeatureCollection = expressionFeatureCollection;
     }
@@ -117,7 +105,8 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     }
 
     /**
-     * @return Returns the comments.
+     * @return Returns the comments.  Comment is a reserved word so 
+     * we must use the plural form comments.
      */
     public String getComments()
     {
@@ -185,23 +174,6 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     }
 
     /**
-     * @return Returns the cabioId.
-     */
-    public Long getCabioId()
-    {
-        return cabioId;
-    }
-
-    /**
-     * @param cabioId
-     *            The cabioId to set.
-     */
-    public void setCabioId(Long cabioId)
-    {
-        this.cabioId = cabioId;
-    }
-
-    /**
      * @return Returns the name.
      */
     public String getName()
@@ -218,7 +190,22 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
         this.name = name;
     }
 
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
 
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
+    }
     /**
      * @see java.lang.Object#toString()
      */

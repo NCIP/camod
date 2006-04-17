@@ -1,16 +1,12 @@
 /*
- * Created on May 5, 2005
+ * $Id: SpontaneousMutation.java,v 1.8 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
+import java.util.*;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
@@ -24,13 +20,65 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
 {
     private static final long serialVersionUID = 3258605453799404851L;
 
+    private AbstractCancerModel cancerModel;    
     private String name;
+    private String geneId;    
     private String comments;
-    private List<GeneticAlteration> geneticAlterationCollection = new ArrayList<GeneticAlteration>();
+    private Set<GeneticAlteration> geneticAlterationCollection = new TreeSet<GeneticAlteration>();
     private MutationIdentifier mutationIdentifier;
 
+
     /**
-     * @return Returns the comments.
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
+
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
+    }    
+    /**
+     * @return Returns the name.
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @param name
+     *            The name to set.
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }    
+    /**
+     * @return Returns the geneId.
+     */
+    public String getGeneId()
+    {
+        return geneId;
+    }
+
+    /**
+     * @param geneId
+     *            The geneId to set.
+     */
+    public void setGeneId(String geneId)
+    {
+        this.geneId = geneId;
+    }    
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
      */
     public String getComments()
     {
@@ -49,23 +97,16 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
     /**
      * @return Returns the geneticAlterationCollection.
      */
-    public List getGeneticAlterationCollection()
+    public Set getGeneticAlterationCollection()
     {
         return geneticAlterationCollection;
-    }
-
-    public List getGeneticAlterationCollectionSorted()
-    {
-        if (geneticAlterationCollection != null)
-            return new ArrayList<GeneticAlteration>(new TreeSet<GeneticAlteration>(geneticAlterationCollection));
-        return null;
     }
 
     /**
      * @param geneticAlterationCollection
      *            The geneticAlterationCollection to set.
      */
-    public void setGeneticAlterationCollection(List<GeneticAlteration> geneticAlterationCollection)
+    public void setGeneticAlterationCollection(Set<GeneticAlteration> geneticAlterationCollection)
     {
         this.geneticAlterationCollection = geneticAlterationCollection;
     }
@@ -94,23 +135,6 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
     public void setMutationIdentifier(MutationIdentifier mutationIdentifier)
     {
         this.mutationIdentifier = mutationIdentifier;
-    }
-
-    /**
-     * @return Returns the name.
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            The name to set.
-     */
-    public void setName(String name)
-    {
-        this.name = name;
     }
 
     /**

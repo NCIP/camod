@@ -35,25 +35,15 @@
         	type="string"
         	length="4000"/>	
         	
-        <!-- staining -->
-        <property name="staining" 
-        	column="staining" 
-        	type="string"/>
-        	
-        <!-- stainingUnctrlVocab -->
-          <property name="stainingUnctrlVocab" 
-        	column="staining_unctrl_vocab" 
-        	type="string"/>      
-        	
         <!-- fileServerLocation -->
         <property name="fileServerLocation" 
         	column="file_server_location" 
         	type="string"/>
         	
-        <!-- availability (many-to-one unidirectional) -->
+        <!-- stainingMethod (many-to-one unidirectional) -->
         <many-to-one
-        	name="availability"
-        	column="availability_id"
-        	class="Availability"/>
+        	name="stainingMethod"
+        	column="staining_method_id"
+        	class="StainingMethod"/>
 	</class>
 </hibernate-mapping>

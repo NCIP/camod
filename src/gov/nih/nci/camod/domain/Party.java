@@ -1,49 +1,40 @@
 /*
- * Created on May 4, 2005
+ * $Id: Party.java,v 1.7 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
- * @author rajputs
  * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
+ * $Id: Party.java,v 1.7 2006-04-17 19:13:46 pandyas Exp $
+ *
+ * $Log: not supported by cvs2svn $
+ * 
  */
 public class Party extends BaseObject implements Serializable
 {
     private static final long serialVersionUID = 3259045453799404851L;
 
-    private List<ContactInfo> contactInfoCollection = new ArrayList<ContactInfo>();
-    private List<Role> roleCollection = new ArrayList<Role>();
+    private Set<ContactInfo> contactInfoCollection = new TreeSet<ContactInfo>();
+    private Set<Role> roleCollection = new TreeSet<Role>();
 
     /**
      * @return Returns the roleCollection.
      */
-    public List<Role> getRoleCollection()
+    public Set<Role> getRoleCollection()
     {
         return roleCollection;
-    }
-
-    public List<Role> getRoleCollectionSorted()
-    {
-        if (roleCollection != null)
-            return new ArrayList<Role>(new TreeSet<Role>(roleCollection));
-        return null;
     }
 
     /**
      * @param roleCollection
      *            The roleCollection to set.
      */
-    public void setRoleCollection(List<Role> roleCollection)
+    public void setRoleCollection(Set<Role> roleCollection)
     {
         this.roleCollection = roleCollection;
     }
@@ -61,23 +52,16 @@ public class Party extends BaseObject implements Serializable
     /**
      * @return Returns the contactInfoCollection.
      */
-    public List getContactInfoCollection()
+    public Set getContactInfoCollection()
     {
         return contactInfoCollection;
-    }
-
-    public List getContactInfoCollectionSorted()
-    {
-        if (contactInfoCollection != null)
-            return new ArrayList<ContactInfo>(new TreeSet<ContactInfo>(contactInfoCollection));
-        return null;
     }
 
     /**
      * @param contactInfoCollection
      *            The contactInfoCollection to set.
      */
-    public void setContactInfoCollection(List<ContactInfo> contactInfoCollection)
+    public void setContactInfoCollection(Set<ContactInfo> contactInfoCollection)
     {
         this.contactInfoCollection = contactInfoCollection;
     }

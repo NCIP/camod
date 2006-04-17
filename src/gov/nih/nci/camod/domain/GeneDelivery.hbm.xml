@@ -54,5 +54,6 @@
         	column="treatment_id"
         	cascade="all"
         	unique="true"/>
+     	
 	</class>
 </hibernate-mapping>

@@ -30,28 +30,29 @@
 	    	
 	    <!-- contactInfoCollection (many-to-many bidirectional ) -->
 	    <!-- Note: this collection will be used to synchronize state with the database. -->
-        <bag name="contactInfoCollection" 
+        <set name="contactInfoCollection" 
         	table="party_contact_info"
         	inverse="false"
         	lazy="true" 
-        	cascade="all-delete-orphan">
+        	cascade="all-delete-orphan"
+		sort="natural">
         	
         	<key column="party_id"/>
         	<many-to-many class="ContactInfo" 
         		column="contact_info_id"/>
-        </bag>
+        </set>
         
         <!-- roleCollection (many-to-many bidirectional ) -->
 	    <!-- Note: this collection will be used to synchronize state with the database. -->
-        <bag name="roleCollection" 
-        	table="party_role"
-        	inverse="false"
-        	lazy="true" 
-        	>
-        	
+        <set name="roleCollection"
+		table="party_role"
+		inverse="false"
+		lazy="true"
+		sort="natural">		
+
         	<key column="party_id"/>
         	<many-to-many class="Role" 
         		column="role_id"/>
-        </bag>
+        </set>
 	</class>
 </hibernate-mapping>

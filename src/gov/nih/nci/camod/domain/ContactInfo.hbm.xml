@@ -72,15 +72,16 @@
         <!-- partyCollection (many-to-many bidirectional) -->
         <!-- Note: this collection will NOT be used to synchronize state with the database. -->
         <!-- Changes made to contactInfoCollection in Party will be synchronized with the database. -->
-        <bag name="partyCollection"
+        <set name="partyCollection"
         	table="party_contact_info"
         	inverse="true" 
         	lazy="true"
-        	cascade="all-delete-orphan">
+        	cascade="all-delete-orphan"
+		sort="natural">
         	
         	<key column="contact_info_id"/>
         	<many-to-many class="Party" 
         		column="party_id"/>
-        </bag>     
+        </set>     
 	</class>
 </hibernate-mapping>

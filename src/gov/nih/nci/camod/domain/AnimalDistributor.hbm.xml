@@ -29,17 +29,6 @@
         	column="name" 
         	type="string"/>
         	
-        <!-- animalAvailabilityCollection (many-to-many bidirectional) -->
-        <!-- Note: this collection will NOT be used to synchronize state with the database. -->
-        <!-- Changes made to animalDistributorCollection in AnimalAvailability will be synchronized with the database. -->
-        <bag name="animalAvailabilityCollection"
-        	table="ani_ava_ani_distributor"
-        	inverse="true" 
-        	lazy="true">
-        	
-        	<key column="animal_distributor_id"/>
-        	<many-to-many class="AnimalAvailability" 
-        		column="animal_availability_id"/>
-        </bag> 
+ 
 	</class>
 </hibernate-mapping>

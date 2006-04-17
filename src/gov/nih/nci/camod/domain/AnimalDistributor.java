@@ -1,7 +1,10 @@
 /**
- * $Id: AnimalDistributor.java,v 1.6 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: AnimalDistributor.java,v 1.7 2006-04-17 19:13:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.5  2005/11/07 17:46:07  pandyas
  * cleaned up item from problem tab, added javadocs
  *
@@ -10,10 +13,6 @@
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 
@@ -29,31 +28,7 @@ public class AnimalDistributor extends BaseObject implements Serializable, Compa
     private static final long serialVersionUID = 4259685453799404851L;
 
     private String name;
-    private List<AnimalAvailability> animalAvailabilityCollection = new ArrayList<AnimalAvailability>();
-
-    /**
-     * @return Returns the animalAvailabilityCollection.
-     */
-    public List<AnimalAvailability> getAnimalAvailabilityCollection()
-    {
-        return animalAvailabilityCollection;
-    }
-
-    public List<AnimalAvailability> getAnimalAvailabilityCollectionSorted()
-    {
-        if (animalAvailabilityCollection != null)
-            return new ArrayList<AnimalAvailability>(new TreeSet<AnimalAvailability>(animalAvailabilityCollection));
-        return null;
-    }
-
-    /**
-     * @param animalAvailabilityCollection
-     *            The animalAvailabilityCollection to set.
-     */
-    public void setAnimalAvailabilityCollection(List<AnimalAvailability> animalAvailabilityCollection)
-    {
-        this.animalAvailabilityCollection = animalAvailabilityCollection;
-    }
+    
 
     /**
      * @return Returns the name.

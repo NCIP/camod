@@ -1,8 +1,7 @@
 /*
- * Created on May 5, 2005
+ * $Id: Histopathology.java,v 1.11 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -12,12 +11,6 @@ import gov.nih.nci.camod.util.HashCodeUtil;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
 public class Histopathology extends BaseObject implements Comparable, Serializable, Duplicatable
 {
 
@@ -29,47 +22,43 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     private Float tumorIncidenceRate;
     private String survivalInfo;
     private String ageOfOnset;
+    private String ageOfOnsetUnit;    
     private String microscopicDescription;
-    private Float weightOfTumor;
-    private Float volumeOfTumor;
+    private String weightOfTumor;
+    private String volumeOfTumor;
     private String comparativeData;
-    private List<ClinicalMarker> clinicalMarkerCollection = new ArrayList<ClinicalMarker>();
-    private List<Disease> diseaseCollection = new ArrayList<Disease>();
+    private AbstractCancerModel cancerModel;    
+    private Disease disease;
     private GeneticAlteration geneticAlteration;
     private Organ organ;
-    private List<Histopathology> metastatisCollection = new ArrayList<Histopathology>();
+    private Set<ClinicalMarker> clinicalMarkerCollection = new TreeSet<ClinicalMarker>();    
+    private Set<Histopathology> metastasisCollection = new TreeSet<Histopathology>();
 
+
+    
     /**
-     * @return Returns the metastatisCollection.
+     * @return Returns the metastasisCollection.
      */
-    public List<Histopathology> getMetastatisCollection()
+    public Set<Histopathology> getMetastasisCollection()
     {
-        return metastatisCollection;
+        return metastasisCollection;
     }
-
-    public List<Histopathology> getMetastatisCollectionSorted()
-    {
-        if (metastatisCollection != null)
-            return new ArrayList<Histopathology>(new TreeSet<Histopathology>(metastatisCollection));
-        return null;
-    }
-
     /**
-     * @param metastatisCollection
-     *            The metastatisCollection to set.
+     * @param metastasisCollection
+     *            The metastasisCollection to set.
      */
-    public void setMetastatisCollection(List<Histopathology> metastatisCollection)
+    public void setMetastasisCollection(Set<Histopathology> metastasisCollection)
     {
-        this.metastatisCollection = metastatisCollection;
+        this.metastasisCollection = metastasisCollection;
     }
 
     /**
      * @param histopathology
      *            The histopathology to add.
      */
-    public void addHistopathology(Histopathology histopathology)
+    public void addMetastasis(Histopathology metastasis)
     {
-        metastatisCollection.add(histopathology);
+        metastasisCollection.add(metastasis);
     }
 
     /**
@@ -107,59 +96,31 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     }
 
     /**
-     * @return Returns the diseaseCollection.
+     * @return Returns the disease.
      */
-    public List<Disease> getDiseaseCollection()
+    public Disease getDisease()
     {
-        return diseaseCollection;
+        return disease;
     }
 
-    public List<Disease> getDiseaseCollectionSorted()
+    public void setDisease(Disease disease)
     {
-        if (diseaseCollection != null)
-            return new ArrayList<Disease>(new TreeSet<Disease>(diseaseCollection));
-        return null;
-    }
-
-    /**
-     * @param diseaseCollection
-     *            The diseaseCollection to set.
-     */
-    public void setDiseaseCollection(List<Disease> diseaseCollection)
-    {
-        this.diseaseCollection = diseaseCollection;
-    }
-
-    /**
-     * @param disease
-     *            The disease to add.
-     */
-    public void addDisease(Disease disease)
-    {
-        disease.getHistopathologyCollection().add(this);
-        diseaseCollection.add(disease);
+        this.disease = disease;
     }
 
     /**
      * @return Returns the clinicalMarkerCollection.
      */
-    public List<ClinicalMarker> getClinicalMarkerCollection()
+    public Set<ClinicalMarker> getClinicalMarkerCollection()
     {
         return clinicalMarkerCollection;
-    }
-
-    public List<ClinicalMarker> getClinicalMarkerCollectionSorted()
-    {
-        if (clinicalMarkerCollection != null)
-            return new ArrayList<ClinicalMarker>(new TreeSet<ClinicalMarker>(clinicalMarkerCollection));
-        return null;
     }
 
     /**
      * @param clinicalMarkerCollection
      *            The clinicalMarkerCollection to set.
      */
-    public void setClinicalMarkerCollection(List<ClinicalMarker> clinicalMarkerCollection)
+    public void setClinicalMarkerCollection(Set<ClinicalMarker> clinicalMarkerCollection)
     {
         this.clinicalMarkerCollection = clinicalMarkerCollection;
     }
@@ -189,9 +150,25 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     {
         this.ageOfOnset = ageOfOnset;
     }
+    /**
+     * @return Returns the ageOfOnsetUnit.
+     */
+    public String getAgeOfOnsetUnit()
+    {
+        return ageOfOnsetUnit;
+    }
 
     /**
-     * @return Returns the comments.
+     * @param ageOfOnsetUnit
+     *            The ageOfOnsetUnit to set.
+     */
+    public void setAgeOfOnsetUnit(String ageOfOnsetUnit)
+    {
+        this.ageOfOnsetUnit = ageOfOnsetUnit;
+    }
+    /**
+     * @return Returns the comments.  Comment is a reserved word so 
+     * we must use the plural form comments.
      */
     public String getComments()
     {
@@ -313,7 +290,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the volumeOfTumor.
      */
-    public Float getVolumeOfTumor()
+    public String getVolumeOfTumor()
     {
         return volumeOfTumor;
     }
@@ -322,7 +299,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      * @param volumeOfTumor
      *            The volumeOfTumor to set.
      */
-    public void setVolumeOfTumor(Float volumeOfTumor)
+    public void setVolumeOfTumor(String volumeOfTumor)
     {
         this.volumeOfTumor = volumeOfTumor;
     }
@@ -330,7 +307,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the weightOfTumor.
      */
-    public Float getWeightOfTumor()
+    public String getWeightOfTumor()
     {
         return weightOfTumor;
     }
@@ -339,12 +316,28 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      * @param weightOfTumor
      *            The weightOfTumor to set.
      */
-    public void setWeightOfTumor(Float weightOfTumor)
+    public void setWeightOfTumor(String weightOfTumor)
     {
         this.weightOfTumor = weightOfTumor;
     }
 
+    /**
+     * @return Returns the cancerModel.
+     */
+    public AbstractCancerModel getCancerModel()
+    {
+        return cancerModel;
+    }
 
+    /**
+     * @param cancerModel
+     *            The cancerModel to set.
+     */
+    public void setCancerModel(AbstractCancerModel cancerModel)
+    {
+        this.cancerModel = cancerModel;
+    }    
+    
     /**
      * @see java.lang.Object#toString()
      */

@@ -1,8 +1,7 @@
 /*
- * Created on May 6, 2005
+ * $Id: EnvironmentalFactor.java,v 1.13 2006-04-17 19:13:46 pandyas Exp $
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * $Log: not supported by cvs2svn $
  */
 package gov.nih.nci.camod.domain;
 
@@ -13,9 +12,6 @@ import java.io.Serializable;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class EnvironmentalFactor extends BaseObject implements Comparable, Serializable, Duplicatable
 {
@@ -26,24 +22,42 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     private String name;
     private String nameUnctrlVocab;
     private String casNumber;
+    private Long nscNumber;
+    
 
     /**
-     * @return Returns the casNumber.
+     * @return Returns the type.
      */
-    public String getCasNumber()
+    public String getType()
     {
-        return casNumber;
+        return type;
     }
 
     /**
-     * @param casNumber
-     *            The casNumber to set.
+     * @param type
+     *            The type to set.
      */
-    public void setCasNumber(String casNumber)
+    public void setType(String type)
     {
-        this.casNumber = casNumber;
+        this.type = type;
     }
 
+    /**
+     * @return Returns the typeUnctrlVocab.
+     */
+    public String getTypeUnctrlVocab()
+    {
+        return typeUnctrlVocab;
+    }
+
+    /**
+     * @param typeUnctrlVocab
+     *            The typeUnctrlVocab to set.
+     */
+    public void setTypeUnctrlVocab(String typeUnctrlVocab)
+    {
+        this.typeUnctrlVocab = typeUnctrlVocab;
+    }
     /**
      * @return Returns the display name.
      */
@@ -93,37 +107,34 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     }
 
     /**
-     * @return Returns the type.
+     * @return Returns the casNumber.
      */
-    public String getType()
+    public String getCasNumber()
     {
-        return type;
+        return casNumber;
     }
 
     /**
-     * @param type
-     *            The type to set.
+     * @param casNumber
+     *            The casNumber to set.
      */
-    public void setType(String type)
+    public void setCasNumber(String casNumber)
     {
-        this.type = type;
+        this.casNumber = casNumber;
+    }
+    /**
+     * @return Returns the nscNumber.
+     */
+    public Long getNscNumber() {
+        return nscNumber;
     }
 
     /**
-     * @return Returns the typeUnctrlVocab.
+     * @param nscNumber
+     *            The nscNumber to set.
      */
-    public String getTypeUnctrlVocab()
-    {
-        return typeUnctrlVocab;
-    }
-
-    /**
-     * @param typeUnctrlVocab
-     *            The typeUnctrlVocab to set.
-     */
-    public void setTypeUnctrlVocab(String typeUnctrlVocab)
-    {
-        this.typeUnctrlVocab = typeUnctrlVocab;
+    public void setNscNumber(Long nscNumber) {
+        this.nscNumber = nscNumber;
     }
 
     public String toString()
