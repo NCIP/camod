@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/03/31 13:47:17  georgeda
+ * Changed the EVSTree call to work w/ new servers
+ *
  * Revision 1.18  2005/12/21 17:44:33  pandyas
  * Moved <html:form action..> above first table and removed disabled=true because they caused errors when identifying fields on page
  *
@@ -28,7 +31,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.19 2006-03-31 13:47:17 georgeda Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.20 2006-04-17 19:18:44 pandyas Exp $
  *
  */   
 %>
@@ -134,7 +137,7 @@
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageOfOnset"  size="10" />
 			
-			<html:select styleClass="formFieldUnSized" size="1" property="ageUnit" >												
+			<html:select styleClass="formFieldUnSized" size="1" property="ageOfOnsetUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
 		</td>
