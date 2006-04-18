@@ -1,7 +1,10 @@
 /*
- * $Id: EngineeredGene.java,v 1.13 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: EngineeredGene.java,v 1.14 2006-04-18 16:26:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -34,13 +37,6 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     public Set<GeneFunction> getGeneFunctionCollection()
     {
         return geneFunctionCollection;
-    }
-
-    public List<GeneFunction> getGeneFunctionCollectionSorted()
-    {
-        if (geneFunctionCollection != null)
-            return new ArrayList<GeneFunction>(new TreeSet<GeneFunction>(geneFunctionCollection));
-        return null;
     }
 
     /**
