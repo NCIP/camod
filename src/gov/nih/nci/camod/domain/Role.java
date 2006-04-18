@@ -1,7 +1,10 @@
 /*
- * $Id: Role.java,v 1.6 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Role.java,v 1.7 2006-04-18 16:27:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -12,9 +15,12 @@ import gov.nih.nci.camod.util.HashCodeUtil;
 
 /**
  * 
- * $Id: Role.java,v 1.6 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Role.java,v 1.7 2006-04-18 16:27:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * 
  */
 public class Role extends BaseObject implements Serializable, Comparable
@@ -30,13 +36,6 @@ public class Role extends BaseObject implements Serializable, Comparable
     public Set<Party> getPartyCollection()
     {
         return partyCollection;
-    }
-
-    public List<Party> getPartyCollectionSorted()
-    {
-        if (partyCollection != null)
-            return new ArrayList<Party>(new TreeSet<Party>(partyCollection));
-        return null;
     }
 
     /**
