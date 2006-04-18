@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.20 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.21 2006-04-18 17:54:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.19  2005/12/29 18:28:05  pandyas
  * Clean up - removed code for TumorResponse
  *
@@ -142,11 +145,10 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
     }
 
 
-
     private void populateDose(TherapyData inTherapyData,
                               Therapy theTherapy)
     {
-        log.info("Entering populateDose");        
+        log.info("Entering populateDose");
 
         // Set the treatment
         Treatment theTreatment = theTherapy.getTreatment();
@@ -184,55 +186,16 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
         {
             log.info("admin route equals other");
 
-            theTherapy.getTreatment().setAdministrativeRoute(null);
+            theTherapy.getTreatment().setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
             theTherapy.getTreatment().setAdminRouteUnctrlVocab(inTherapyData.getOtherAdministrativeRoute());
 
             log.trace("Sending Notification eMail - new Administrative Route added");
+            sendEmail(inAnimalModel, inTherapyData.getOtherAdministrativeRoute(), " AdministrativeRoute");
 
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String, Object> values = new TreeMap<String, Object>();
-            values.put("type", "AdministrativeRoute");
-            values.put("value", inTherapyData.getOtherAdministrativeRoute());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
-
-            // anytime admin route is not other, set uncontrolled vocab to null
-            // (covers editing)
         }
         else if (inTherapyData.getAdministrativeRoute() != null)
         {
-            log.info("admin route not other or null");
-
             theTherapy.getTreatment().setAdministrativeRoute(inTherapyData.getAdministrativeRoute());
-            theTherapy.getTreatment().setAdminRouteUnctrlVocab(null);
         }
 
         Agent theAgent = theTherapy.getAgent();
@@ -242,7 +205,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
             theTherapy.setAgent(theAgent);
         }
     }
-    
+
 
     /**
      * Create a therapy object with the correct data filled in.
@@ -262,10 +225,10 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
 
         populateAgeGender(inTherapyData, theTherapy);
         populateDose(inTherapyData, theTherapy);
-        populateAdministration(inAnimaModel, inTherapyData, theTherapy);        
-        populateTherapy(inTherapyData, theTherapy);        
+        populateAdministration(inAnimaModel, inTherapyData, theTherapy);
+        populateTherapy(inTherapyData, theTherapy);
 
-        log.info("In TherapyManagerImpl.create Exiting");        
+        log.info("In TherapyManagerImpl.create Exiting");
         return theTherapy;
     }
 
@@ -278,9 +241,9 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
 
         populateAgeGender(inTherapyData, inTherapy);
         populateDose(inTherapyData, inTherapy);
-        populateAdministration(inAnimalModel, inTherapyData, inTherapy);         
+        populateAdministration(inAnimalModel, inTherapyData, inTherapy);
         populateTherapy(inTherapyData, inTherapy);
-       
+
         save(inTherapy);
 
     }
@@ -300,7 +263,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
             theTreatment = new Treatment();
             theTherapy.setTreatment(theTreatment);
         }
-        log.info("populateTherapy Set the treatment");        
+        log.info("populateTherapy Set the treatment");
 
         // Set the agent name
         Agent theAgent = theTherapy.getAgent();
@@ -310,9 +273,9 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
             theTherapy.setAgent(theAgent);
         }
         theAgent.setName(inTherapyData.getName());
-        log.info("populateTherapy setName");         
+        log.info("populateTherapy setName");
 
-        
+
         // Set NSC and CAS
         String theNscNumber = inTherapyData.getNscNumber().trim();
         if (theNscNumber != null && theNscNumber.length() > 0)
@@ -326,14 +289,14 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
                 log.error("Bad NSC number: " + theNscNumber);
             }
         }
-        log.info("populateTherapy setNscNumber"); 
-        
+        log.info("populateTherapy setNscNumber");
+
         String theCasNumber = inTherapyData.getCasNumber().trim();
         if (theCasNumber != null && theCasNumber.length() > 0)
         {
             theAgent.setCasNumber(theCasNumber);
         }
-        log.info("populateTherapy setCasNumber");         
+        log.info("populateTherapy setCasNumber");
 
         // Therapy object attributes
         theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());
@@ -342,21 +305,22 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
         theTherapy.setResults(inTherapyData.getResults());
         theTherapy.setTumorResponse(inTherapyData.getTumorResponse());
         theTherapy.setComments(inTherapyData.getComments());
-        log.info("populateTherapy set Therapy object attributes");          
+        log.info("populateTherapy set Therapy object attributes");
 
         // Get the ChemicalClass
         String[] theChemicalClasses = inTherapyData.getSelectedChemicalClasses();
-        Set theCurrentChemicalClassSet = theTherapy.getAgent().getChemicalClassCollection();
-        Iterator it = theCurrentChemicalClassSet.iterator();
+        log.info("theChemicalClasses.length: " + theChemicalClasses.length);
+        Set<ChemicalClass> theCurrentChemicalClassSet = theTherapy.getAgent().getChemicalClassCollection();
         theCurrentChemicalClassSet.clear();
+
         if (theChemicalClasses != null)
         {
-            while (it.hasNext())
+            for (int i = 0; i < theChemicalClasses.length; i++)
             {
-                ChemicalClass theChemicalClass = ChemicalClassManagerSingleton.instance().getByName(theChemicalClasses.toString());
+                ChemicalClass theChemicalClass = ChemicalClassManagerSingleton.instance().getByName(theChemicalClasses[i]);
                 if (theChemicalClass == null)
                 {
-                    log.error("Unknown chemical class name: " + theChemicalClasses.toString());
+                    log.error("Unknown chemical class name: " + theChemicalClasses[i]);
                 }
                 else
                 {
@@ -368,26 +332,11 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
 
         // Get the biological process
         String[] theProcesses = inTherapyData.getSelectedProcesses();
-        Set theCurrentProcessSet = theTherapy.getAgent().getBiologicalProcessCollection();
-        it = theCurrentProcessSet.iterator();
+        Set<BiologicalProcess> theCurrentProcessSet = theTherapy.getAgent().getBiologicalProcessCollection();
         theCurrentProcessSet.clear();
+
         if (theProcesses != null)
         {
-            while (it.hasNext())
-            {
-                BiologicalProcess theBiologicalProcess = BiologicalProcessManagerSingleton.instance().getByName(theProcesses.toString());
-                if (theBiologicalProcess == null)
-                {
-                    log.error("Unknown chemical class name: " + theBiologicalProcess.toString());
-                }
-                else
-                {
-                    theCurrentProcessSet.add(theBiologicalProcess);
-                }
-            }
-        }            
-            
-            /* old code
             for (int i = 0; i < theProcesses.length; i++)
             {
                 BiologicalProcess theBiologicalProcess = BiologicalProcessManagerSingleton.instance().getByName(theProcesses[i]);
@@ -397,32 +346,18 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
                 }
                 else
                 {
-                    theCurrentProcessList.add(theBiologicalProcess);
+                    theCurrentProcessSet.add(theBiologicalProcess);
                 }
             }
-        } */
+        }
 
         // Get the agent target
         String[] theTargets = inTherapyData.getSelectedTargets();
-        Set theCurrentAgentSet = theTherapy.getAgent().getAgentTargetCollection();
-        it = theCurrentAgentSet.iterator();
+        Set<AgentTarget> theCurrentAgentSet = theTherapy.getAgent().getAgentTargetCollection();
         theCurrentAgentSet.clear();
+
         if (theTargets != null)
         {
-            while (it.hasNext())
-            {
-                AgentTarget theAgentTarget = AgentTargetManagerSingleton.instance().getByName(theTargets.toString());
-                if (theAgentTarget == null)
-                {
-                    log.error("Unknown chemical class name: " + theAgentTarget.toString());
-                }
-                else
-                {
-                    theCurrentAgentSet.add(theAgentTarget);
-                }
-            }
-        }             
-            /*  old code
             for (int i = 0; i < theTargets.length; i++)
             {
                 AgentTarget theAgentTarget = AgentTargetManagerSingleton.instance().getByName(theTargets[i]);
@@ -432,10 +367,51 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
                 }
                 else
                 {
-                    theCurrentAgentList.add(theAgentTarget);
+                    theCurrentAgentSet.add(theAgentTarget);
                 }
             }
-        } */
+        }
+
         log.info("Exiting populateTherapy Exiting");
+    }
+
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
+
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+        // gather message keys and variable values to build the e-mail
+        // content with
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
+        }
     }
 }
