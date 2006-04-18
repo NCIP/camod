@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.19 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.20 2006-04-18 16:20:05 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.18  2006/01/18 14:24:24  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -64,30 +67,31 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager
 {
     public List getAll() throws Exception
     {
-        log.trace("In InducedMutationManagerImpl.getAll");
+        log.info("In InducedMutationManagerImpl.getAll");
         return super.getAll(InducedMutation.class);
     }
 
     public InducedMutation get(String id) throws Exception
     {
-        log.trace("In InducedMutationManagerImpl.get");
+        log.info("In InducedMutationManagerImpl.get");
         return (InducedMutation) super.get(id, InducedMutation.class);
     }
 
     public void save(InducedMutation InducedMutation) throws Exception
     {
-        log.trace("In InducedMutationManagerImpl.save");
+        log.info("In InducedMutationManagerImpl.save");
         super.save(InducedMutation);
     }
 
     public void remove(String id,
                        AnimalModel inAnimalModel) throws Exception
     {
-        log.trace("In InducedMutationManagerImpl.remove");
+        log.info("In InducedMutationManagerImpl.remove");
         inAnimalModel.getEngineeredGeneCollection().remove(get(id));
         super.save(inAnimalModel);
     }
@@ -95,13 +99,13 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
     public InducedMutation create(AnimalModel inAnimalModel,
                                   InducedMutationData inInducedMutationData) throws Exception
     {
-        log.trace("Entering InducedMutationManagerImpl.create");
+        log.info("Entering InducedMutationManagerImpl.create");
 
         InducedMutation theInducedMutation = new InducedMutation();
 
         populateInducedMutation(inAnimalModel, inInducedMutationData, theInducedMutation);
 
-        log.trace("Exiting InducedMutationManagerImpl.create");
+        log.info("Exiting InducedMutationManagerImpl.create");
 
         return theInducedMutation;
     }
@@ -110,108 +114,65 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
                        InducedMutationData inInducedMutationData,
                        InducedMutation inInducedMutation) throws Exception
     {
-        log.trace("Entering InducedMutationManagerImpl.update");
-        log.debug("Updating InducedMutationForm: " + inInducedMutation.getId());
+        log.info("Entering InducedMutationManagerImpl.update");
+        log.info("Updating InducedMutationForm: " + inInducedMutation.getId());
 
         // Populate w/ the new values and save
         populateInducedMutation(inAnimalModel, inInducedMutationData, inInducedMutation);
         save(inInducedMutation);
 
-        log.trace("Exiting InducedMutationManagerImpl.update");
+        log.info("Exiting InducedMutationManagerImpl.update");
     }
 
-    private void populateInducedMutation(
-        AnimalModel inAnimalModel,
-        InducedMutationData inInducedMutationData,
-        InducedMutation inInducedMutation) 
-      throws Exception
+    private void populateInducedMutation(AnimalModel inAnimalModel,
+                                         InducedMutationData inInducedMutationData,
+                                         InducedMutation inInducedMutation) throws Exception
     {
-        log.trace("Entering populateInducedMutation");
-        
+        log.info("Entering populateInducedMutation");
+
         EnvironmentalFactor inEnvironFactor = null;
-        
-        // old code from * to * relationship in domain
-        //List indMutSet = new ArrayList(inInducedMutation.getEnvironmentalFactorCollection());
 
         // Check to see if a Environmental Factor already exists,
         // if it does edit it else create a new EnvironmentalFactor
-        if (inInducedMutation.getEnvironmentalFactor() !=null) {
+        if (inInducedMutation.getEnvironmentalFactor() != null)
+        {
             inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactor();
-        } else {
+        }
+        else
+        {
             inEnvironFactor = new EnvironmentalFactor();
         }
-        
-        // Inducing Agent Category type
-        inEnvironFactor.setType(inInducedMutationData.getType());
+        log.info("In InducedMutationManagerImpl.save created EF");
 
-        // Other type
-        if (inInducedMutationData.getOtherType() != null)
+        // Name of Inducing Agent - Saved in uncontrolled vocab field since it is free text
+        inEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
+        log.info("In InducedMutationManagerImpl.save set name");        
+
+        // Inducing Agent Category type / Other type
+        if (inInducedMutationData.getOtherType().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            log.trace("Sending Notification eMail - new InducedMutation Agent added");
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String,Object> values = new TreeMap<String,Object>();
-            values.put("type", "OtherInducedMutation");
-            values.put("value", inInducedMutationData.getOtherType());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
+            log.info("Sending Notification eMail - new InducedMutation Agent added");
             // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
+            sendEmail(inAnimalModel, inInducedMutationData.getOtherType(), "OtherInducedMutation");
 
-            // 2. Set flag, this Strain will need to be approved before
-            // being added the list
             inEnvironFactor.setTypeUnctrlVocab(inInducedMutationData.getOtherType());
-            inEnvironFactor.setType(null);
+            inEnvironFactor.setType(Constants.Dropdowns.OTHER_OPTION);
         }
+        else
+        {
+            inEnvironFactor.setType(inInducedMutationData.getType());
+        }
+        log.info("In InducedMutationManagerImpl.save set type/otherType");
 
         // CAS Number
         inEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
 
-        // Name of Inducing Agent
-        inEnvironFactor.setName(inInducedMutationData.getName());
-
-        // Sima TODO - is this where we get this value?
-        inEnvironFactor.setNameUnctrlVocab(inEnvironFactor.getName());
-        
-        /*  old code 
-        inEnvironFactor.setNameUnctrlVocab( );
-        
-        if (inInducedMutation.getEnvironmentalFactorCollection().size() < 1)
-            inInducedMutation.addEnvironmentalFactor(inEnvironFactor);
-        */
         // GeneID
         inInducedMutation.setGeneId(inInducedMutationData.getGeneId());
 
         // Description
         inInducedMutation.setDescription(inInducedMutationData.getDescription());
-
-        // Comments
-        inInducedMutation.setComments(inInducedMutationData.getComments());
+        log.info("In InducedMutationManagerImpl.save set description");
 
         // Observation and Method of Observation
         List<GeneticAlteration> geneticList = new ArrayList<GeneticAlteration>(inInducedMutation.getGeneticAlterationCollection());
@@ -268,6 +229,50 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
                 inInducedMutation.setMutationIdentifier(inMutationIdentifier);
             }
         }
-        log.trace("Exiting populateInducedMutation");
+
+        // Comments
+        inInducedMutation.setComments(inInducedMutationData.getComments());
+
+        log.info("Exiting populateInducedMutation");
+    }
+
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        // Get the e-mail resource
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
+
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+        // gather message keys and variable values to build the e-mail
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
+        }
     }
 }
