@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationPopulateAction.java,v 1.12 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: InducedMutationPopulateAction.java,v 1.13 2006-04-18 16:21:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -51,7 +54,14 @@ public class InducedMutationPopulateAction extends BaseAction {
 
             inducedMutationForm.setCasNumber(environFactor.getCasNumber());
             inducedMutationForm.setGeneId(theInducedMutation.getGeneId());
+            
+            // Name of Inducing Agent - Saved in uncontrolled vocab in 2.1 (free text)
+            if (environFactor.getNameUnctrlVocab() != null) {
+                inducedMutationForm.setName(environFactor.getNameUnctrlVocab());
+            }  else {          
             inducedMutationForm.setName(environFactor.getName());
+            }
+            
             inducedMutationForm.setDescription(theInducedMutation.getDescription());
             
             MutationIdentifier identifier = theInducedMutation.getMutationIdentifier();
