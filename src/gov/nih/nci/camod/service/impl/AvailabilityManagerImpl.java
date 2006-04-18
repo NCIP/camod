@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.9 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.10 2006-04-18 16:58:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -21,26 +24,26 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
 
     public List getAll() throws Exception
     {
-        log.trace("In AvailabilityManagerImpl.getAll");
+        log.info("In AvailabilityManagerImpl.getAll");
         return super.getAll(AnimalAvailability.class);
     }
 
     public AnimalAvailability get(String id) throws Exception
     {
-        log.trace("In AvailabilityManagerImpl.get");
+        log.info("In AvailabilityManagerImpl.get");
         return (AnimalAvailability) super.get(id, AnimalAvailability.class);
     }
 
     public void save(AnimalAvailability availability) throws Exception
     {
-        log.trace("In AvailabilityManagerImpl.save");
+        log.info("In AvailabilityManagerImpl.save");
         super.save(availability);
     }
 
     public void remove(String id,
                        AnimalModel inAnimalModel) throws Exception
     {
-        log.trace("In AvailabilityManagerImpl.remove");
+        log.info("In AvailabilityManagerImpl.remove");
 
         inAnimalModel.getAnimalAvailabilityCollection().remove(get(id));
         super.save(inAnimalModel);
@@ -157,11 +160,6 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
         log.info("theDistributor): " + theDistributor);
 
-        if (!inAvailability.getAnimalDistributor().equals(theDistributor))
-        {
-
-            log.info("Added AnimalDistributor");
-        }
         inAvailability.setAnimalDistributor(theDistributor);
         log.info("Exiting AvailabilityManagerImpl.populateInvestigatorAvailability");
     }
