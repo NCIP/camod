@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Phenotype.hbm.xml
+    Created on : May 6, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for Phenotype
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="Phenotype"
+		table="phenotype"
+        lazy="true">
+	    
+	    <!-- id -->
+	    <id name="id" 
+	    	column="phenotype_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	
+	    
+	    <!-- breedingNotes -->
+        <property name="breedingNotes" 
+        	column="breeding_notes" 
+        	type="string"/>
+        	
+        <!-- description -->
+        <property name="description" 
+        	column="description" 
+        	type="string"
+        	length="4000"/>
+        	
+        <!-- sexDistribution (many-to-one unidirectional) -->
+        <many-to-one
+        	name="sexDistribution"
+        	column="sex_distribution_id"
+        	class="SexDistribution"/>
+	</class>
+</hibernate-mapping>

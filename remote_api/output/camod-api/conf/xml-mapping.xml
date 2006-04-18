@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN" "http://www.castor.org/mapping.dtd">
+
+<mapping>
+  <class name="gov.nih.nci.camod.domain.Xenograft" extends="gov.nih.nci.camod.domain.AbstractCancerModel">
+    <map-to xml="Xenograft" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="xenograftName" type="string">
+      <bind-xml name="xenograftName" node="attribute" />
+    </field>
+    <field name="geneticManipulation" type="string">
+      <bind-xml name="geneticManipulation" node="attribute" />
+    </field>
+    <field name="modificationDescription" type="string">
+      <bind-xml name="modificationDescription" node="attribute" />
+    </field>
+    <field name="parentalCellLineName" type="string">
+      <bind-xml name="parentalCellLineName" node="attribute" />
+    </field>
+    <field name="atccNumber" type="string">
+      <bind-xml name="atccNumber" node="attribute" />
+    </field>
+    <field name="cellAmount" type="string">
+      <bind-xml name="cellAmount" node="attribute" />
+    </field>
+    <field name="growthPeriod" type="string">
+      <bind-xml name="growthPeriod" node="attribute" />
+    </field>
+    <field name="graftType" type="string">
+      <bind-xml name="graftType" node="attribute" />
+    </field>
+    <field name="graftTypeUnctrlVocab" type="string">
+      <bind-xml name="graftTypeUnctrlVocab" node="attribute" />
+    </field>
+    <field name="administrativeSite" type="string">
+      <bind-xml name="administrativeSite" node="attribute" />
+    </field>
+    <field name="adminSiteUnctrlVocab" type="string">
+      <bind-xml name="adminSiteUnctrlVocab" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Treatment">
+    <map-to xml="Treatment" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="regimen" type="string">
+      <bind-xml name="regimen" node="attribute" />
+    </field>
+    <field name="dosage" type="string">
+      <bind-xml name="dosage" node="attribute" />
+    </field>
+    <field name="dosageUnit" type="string">
+      <bind-xml name="dosageUnit" node="attribute" />
+    </field>
+    <field name="administrativeRoute" type="string">
+      <bind-xml name="administrativeRoute" node="attribute" />
+    </field>
+    <field name="adminRouteUnctrlVocab" type="string">
+      <bind-xml name="adminRouteUnctrlVocab" node="attribute" />
+    </field>
+    <field name="ageAtTreatment" type="string">
+      <bind-xml name="ageAtTreatment" node="attribute" />
+    </field>
+    <field name="ageAtTreatmentUnit" type="string">
+      <bind-xml name="ageAtTreatmentUnit" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Transgene" extends="gov.nih.nci.camod.domain.EngineeredGene">
+    <map-to xml="Transgene" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="locationOfIntegration" type="string">
+      <bind-xml name="locationOfIntegration" node="attribute" />
+    </field>
+    <field name="isRandom" type="boolean">
+      <bind-xml name="isRandom" node="attribute" />
+    </field>
+    <field name="constructSequence" type="string">
+      <bind-xml name="constructSequence" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Therapy">
+    <map-to xml="Therapy" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="experiment" type="string">
+      <bind-xml name="experiment" node="attribute" />
+    </field>
+    <field name="results" type="string">
+      <bind-xml name="results" node="attribute" />
+    </field>
+    <field name="toxicityGrade" type="string">
+      <bind-xml name="toxicityGrade" node="attribute" />
+    </field>
+    <field name="biomarker" type="string">
+      <bind-xml name="biomarker" node="attribute" />
+    </field>
+    <field name="tumorResponse" type="string">
+      <bind-xml name="tumorResponse" node="attribute" />
+    </field>
+    <field name="comments" type="string">
+      <bind-xml name="comments" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.TargetedModification" extends="gov.nih.nci.camod.domain.EngineeredGene">
+    <map-to xml="TargetedModification" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="esCellLineName" type="string">
+      <bind-xml name="esCellLineName" node="attribute" />
+    </field>
+    <field name="blastocystName" type="string">
+      <bind-xml name="blastocystName" node="attribute" />
+    </field>
+    <field name="geneId" type="string">
+      <bind-xml name="geneId" node="attribute" />
+    </field>
+    <field name="constructSequence" type="string">
+      <bind-xml name="constructSequence" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.SexDistribution">
+    <map-to xml="SexDistribution" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="type" type="string">
+      <bind-xml name="type" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.RepositoryInfo">
+    <map-to xml="RepositoryInfo" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="inTheRepository" type="long">
+      <bind-xml name="inTheRepository" node="attribute" />
+    </field>
+    <field name="sentEmailContent" type="string">
+      <bind-xml name="sentEmailContent" node="attribute" />
+    </field>
+    <field name="suggestSubmission" type="long">
+      <bind-xml name="suggestSubmission" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.RegulatoryElementType">
+    <map-to xml="RegulatoryElementType" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.RegulatoryElement">
+    <map-to xml="RegulatoryElement" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.PublicationStatus">
+    <map-to xml="PublicationStatus" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Publication">
+    <map-to xml="Publication" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="volume" type="string">
+      <bind-xml name="volume" node="attribute" />
+    </field>
+    <field name="endPage" type="long">
+      <bind-xml name="endPage" node="attribute" />
+    </field>
+    <field name="year" type="long">
+      <bind-xml name="year" node="attribute" />
+    </field>
+    <field name="title" type="string">
+      <bind-xml name="title" node="attribute" />
+    </field>
+    <field name="pmid" type="long">
+      <bind-xml name="pmid" node="attribute" />
+    </field>
+    <field name="startPage" type="long">
+      <bind-xml name="startPage" node="attribute" />
+    </field>
+    <field name="journal" type="string">
+      <bind-xml name="journal" node="attribute" />
+    </field>
+    <field name="authors" type="string">
+      <bind-xml name="authors" node="attribute" />
+    </field>
+    <field name="firstTimeReported" type="boolean">
+      <bind-xml name="firstTimeReported" node="attribute" />
+    </field>
+    <field name="jaxJNumber" type="string">
+      <bind-xml name="jaxJNumber" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Phenotype">
+    <map-to xml="Phenotype" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="breedingNotes" type="string">
+      <bind-xml name="breedingNotes" node="attribute" />
+    </field>
+    <field name="description" type="string">
+      <bind-xml name="description" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Nomenclature">
+    <map-to xml="Nomenclature" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.MicroArrayData">
+    <map-to xml="MicroArrayData" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="experimentName" type="string">
+      <bind-xml name="experimentName" node="attribute" />
+    </field>
+    <field name="experimentId" type="long">
+      <bind-xml name="experimentId" node="attribute" />
+    </field>
+    <field name="otherLocationURL" type="string">
+      <bind-xml name="otherLocationURL" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.SegmentType">
+    <map-to xml="SegmentType" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="nameUnctrlVocab" type="string">
+      <bind-xml name="nameUnctrlVocab" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.InducedMutation" extends="gov.nih.nci.camod.domain.EngineeredGene">
+    <map-to xml="InducedMutation" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="geneId" type="string">
+      <bind-xml name="geneId" node="attribute" />
+    </field>
+    <field name="description" type="string">
+      <bind-xml name="description" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Image">
+    <map-to xml="Image" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="title" type="string">
+      <bind-xml name="title" node="attribute" />
+    </field>
+    <field name="description" type="string">
+      <bind-xml name="description" node="attribute" />
+    </field>
+    <field name="fileServerLocation" type="string">
+      <bind-xml name="fileServerLocation" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.GenotypeSummary">
+    <map-to xml="GenotypeSummary" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="summary" type="string">
+      <bind-xml name="summary" node="attribute" />
+    </field>
+    <field name="genotype" type="string">
+      <bind-xml name="genotype" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.GenomicSegment" extends="gov.nih.nci.camod.domain.EngineeredGene">
+    <map-to xml="GenomicSegment" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="locationOfIntegration" type="string">
+      <bind-xml name="locationOfIntegration" node="attribute" />
+    </field>
+    <field name="segmentSize" type="string">
+      <bind-xml name="segmentSize" node="attribute" />
+    </field>
+    <field name="cloneDesignator" type="string">
+      <bind-xml name="cloneDesignator" node="attribute" />
+    </field>
+    <field name="isRandom" type="boolean">
+      <bind-xml name="isRandom" node="attribute" />
+    </field>
+    <field name="constructSequence" type="string">
+      <bind-xml name="constructSequence" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.GeneticAlteration">
+    <map-to xml="GeneticAlteration" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="observation" type="string">
+      <bind-xml name="observation" node="attribute" />
+    </field>
+    <field name="methodOfObservation" type="string">
+      <bind-xml name="methodOfObservation" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.GeneFunction">
+    <map-to xml="GeneFunction" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="function" type="string">
+      <bind-xml name="function" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.GeneDelivery">
+    <map-to xml="GeneDelivery" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="viralVector" type="string">
+      <bind-xml name="viralVector" node="attribute" />
+    </field>
+    <field name="viralVectorUnctrlVocab" type="string">
+      <bind-xml name="viralVectorUnctrlVocab" node="attribute" />
+    </field>
+    <field name="geneInVirus" type="string">
+      <bind-xml name="geneInVirus" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.EnvironmentalFactor">
+    <map-to xml="EnvironmentalFactor" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="type" type="string">
+      <bind-xml name="type" node="attribute" />
+    </field>
+    <field name="typeUnctrlVocab" type="string">
+      <bind-xml name="typeUnctrlVocab" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="nameUnctrlVocab" type="string">
+      <bind-xml name="nameUnctrlVocab" node="attribute" />
+    </field>
+    <field name="casNumber" type="string">
+      <bind-xml name="casNumber" node="attribute" />
+    </field>
+    <field name="nscNumber" type="float">
+      <bind-xml name="nscNumber" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.EngineeredGene">
+    <map-to xml="EngineeredGene" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="comments" type="string">
+      <bind-xml name="comments" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Conditionality">
+    <map-to xml="Conditionality" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="conditionedBy" type="string">
+      <bind-xml name="conditionedBy" node="attribute" />
+    </field>
+    <field name="description" type="string">
+      <bind-xml name="description" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.CellLine">
+    <map-to xml="CellLine" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="experiment" type="string">
+      <bind-xml name="experiment" node="attribute" />
+    </field>
+    <field name="results" type="string">
+      <bind-xml name="results" node="attribute" />
+    </field>
+    <field name="comments" type="string">
+      <bind-xml name="comments" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Availability">
+    <map-to xml="Availability" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="enteredDate" type="date">
+      <bind-xml name="enteredDate" node="attribute" />
+    </field>
+    <field name="visibleTo" type="string">
+      <bind-xml name="visibleTo" node="attribute" />
+    </field>
+    <field name="modifiedDate" type="date">
+      <bind-xml name="modifiedDate" node="attribute" />
+    </field>
+    <field name="releaseDate" type="date">
+      <bind-xml name="releaseDate" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.AnimalModel" extends="gov.nih.nci.camod.domain.AbstractCancerModel">
+    <map-to xml="AnimalModel" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="url" type="string">
+      <bind-xml name="url" node="attribute" />
+    </field>
+    <field name="isToolMouse" type="boolean">
+      <bind-xml name="isToolMouse" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.EndpointCode">
+    <map-to xml="EndpointCode" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="code" type="string">
+      <bind-xml name="code" node="attribute" />
+    </field>
+    <field name="description" type="string">
+      <bind-xml name="description" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.AbstractCancerModel">
+    <map-to xml="AbstractCancerModel" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="modelDescriptor" type="string">
+      <bind-xml name="modelDescriptor" node="attribute" />
+    </field>
+    <field name="experimentDesign" type="string">
+      <bind-xml name="experimentDesign" node="attribute" />
+    </field>
+    <field name="state" type="string">
+      <bind-xml name="state" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.YeastModel" extends="gov.nih.nci.camod.domain.AbstractCancerModel">
+    <map-to xml="YeastModel" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+  </class>
+  <class name="gov.nih.nci.camod.domain.ScreeningResult">
+    <map-to xml="ScreeningResult" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="stage" type="string">
+      <bind-xml name="stage" node="attribute" />
+    </field>
+    <field name="diffinh" type="float">
+      <bind-xml name="diffinh" node="attribute" />
+    </field>
+    <field name="aveinh" type="float">
+      <bind-xml name="aveinh" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.TumorCode">
+    <map-to xml="TumorCode" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="code" type="string">
+      <bind-xml name="code" node="attribute" />
+    </field>
+    <field name="description" type="string">
+      <bind-xml name="description" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.InvivoResult">
+    <map-to xml="InvivoResult" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="evaluationDay" type="string">
+      <bind-xml name="evaluationDay" node="attribute" />
+    </field>
+    <field name="toxicitySurvivors" type="string">
+      <bind-xml name="toxicitySurvivors" node="attribute" />
+    </field>
+    <field name="toxicityEvalDay" type="string">
+      <bind-xml name="toxicityEvalDay" node="attribute" />
+    </field>
+    <field name="percentTreatedControl" type="float">
+      <bind-xml name="percentTreatedControl" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.ModificationType">
+    <map-to xml="ModificationType" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="nameUnctrlVocab" type="string">
+      <bind-xml name="nameUnctrlVocab" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.ExpressionFeature">
+    <map-to xml="ExpressionFeature" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Species">
+    <map-to xml="Species" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="scientificName" type="string">
+      <bind-xml name="scientificName" node="attribute" />
+    </field>
+    <field name="scientificNameUnctrlVocab" type="string">
+      <bind-xml name="scientificNameUnctrlVocab" node="attribute" />
+    </field>
+    <field name="commonName" type="string">
+      <bind-xml name="commonName" node="attribute" />
+    </field>
+    <field name="commonNameUnctrlVocab" type="string">
+      <bind-xml name="commonNameUnctrlVocab" node="attribute" />
+    </field>
+    <field name="abbreviation" type="string">
+      <bind-xml name="abbreviation" node="attribute" />
+    </field>
+    <field name="conceptCode" type="string">
+      <bind-xml name="conceptCode" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Organ">
+    <map-to xml="Organ" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="conceptCode" type="string">
+      <bind-xml name="conceptCode" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Histopathology">
+    <map-to xml="Histopathology" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="comments" type="string">
+      <bind-xml name="comments" node="attribute" />
+    </field>
+    <field name="grossDescription" type="string">
+      <bind-xml name="grossDescription" node="attribute" />
+    </field>
+    <field name="relationalOperation" type="string">
+      <bind-xml name="relationalOperation" node="attribute" />
+    </field>
+    <field name="tumorIncidenceRate" type="string">
+      <bind-xml name="tumorIncidenceRate" node="attribute" />
+    </field>
+    <field name="survivalInfo" type="string">
+      <bind-xml name="survivalInfo" node="attribute" />
+    </field>
+    <field name="ageOfOnset" type="string">
+      <bind-xml name="ageOfOnset" node="attribute" />
+    </field>
+    <field name="ageOfOnsetUnit" type="string">
+      <bind-xml name="ageOfOnsetUnit" node="attribute" />
+    </field>
+    <field name="microscopicDescription" type="string">
+      <bind-xml name="microscopicDescription" node="attribute" />
+    </field>
+    <field name="weightOfTumor" type="string">
+      <bind-xml name="weightOfTumor" node="attribute" />
+    </field>
+    <field name="volumeOfTumor" type="string">
+      <bind-xml name="volumeOfTumor" node="attribute" />
+    </field>
+    <field name="comparativeData" type="string">
+      <bind-xml name="comparativeData" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Disease">
+    <map-to xml="Disease" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="long">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="conceptCode" type="string">
+      <bind-xml name="conceptCode" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Agent">
+    <map-to xml="Agent" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="conceptCode" type="string">
+      <bind-xml name="conceptCode" node="attribute" />
+    </field>
+    <field name="nscNumber" type="long">
+      <bind-xml name="nscNumber" node="attribute" />
+    </field>
+    <field name="casNumber" type="string">
+      <bind-xml name="casNumber" node="attribute" />
+    </field>
+    <field name="isCMAPAgent" type="boolean">
+      <bind-xml name="isCMAPAgent" node="attribute" />
+    </field>
+    <field name="source" type="string">
+      <bind-xml name="source" node="attribute" />
+    </field>
+    <field name="comments" type="string">
+      <bind-xml name="comments" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.ExpressionLevelDesc">
+    <map-to xml="ExpressionLevelDesc" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="expressionLevel" type="string">
+      <bind-xml name="expressionLevel" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.MutationIdentifier">
+    <map-to xml="MutationIdentifier" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="mgiNumber" type="string">
+      <bind-xml name="mgiNumber" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.SpontaneousMutation">
+    <map-to xml="SpontaneousMutation" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="geneId" type="string">
+      <bind-xml name="geneId" node="attribute" />
+    </field>
+    <field name="comments" type="string">
+      <bind-xml name="comments" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.ClinicalMarker">
+    <map-to xml="ClinicalMarker" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="nameUnctrlVocab" type="string">
+      <bind-xml name="nameUnctrlVocab" node="attribute" />
+    </field>
+    <field name="value" type="string">
+      <bind-xml name="value" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.ChemicalClass">
+    <map-to xml="ChemicalClass" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.BiologicalProcess">
+    <map-to xml="BiologicalProcess" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.AgentTarget">
+    <map-to xml="AgentTarget" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.AnimalDistributor">
+    <map-to xml="AnimalDistributor" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.AnimalAvailability">
+    <map-to xml="AnimalAvailability" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="stockNumber" type="string">
+      <bind-xml name="stockNumber" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Party">
+    <map-to xml="Party" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Organization" extends="gov.nih.nci.camod.domain.Party">
+    <map-to xml="Organization" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Person" extends="gov.nih.nci.camod.domain.Party">
+    <map-to xml="Person" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="lastName" type="string">
+      <bind-xml name="lastName" node="attribute" />
+    </field>
+    <field name="firstName" type="string">
+      <bind-xml name="firstName" node="attribute" />
+    </field>
+    <field name="middleName" type="string">
+      <bind-xml name="middleName" node="attribute" />
+    </field>
+    <field name="username" type="string">
+      <bind-xml name="username" node="attribute" />
+    </field>
+    <field name="isPrincipalInvestigator" type="boolean">
+      <bind-xml name="isPrincipalInvestigator" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.ContactInfo">
+    <map-to xml="ContactInfo" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="city" type="string">
+      <bind-xml name="city" node="attribute" />
+    </field>
+    <field name="state" type="string">
+      <bind-xml name="state" node="attribute" />
+    </field>
+    <field name="address" type="string">
+      <bind-xml name="address" node="attribute" />
+    </field>
+    <field name="zip" type="string">
+      <bind-xml name="zip" node="attribute" />
+    </field>
+    <field name="fax" type="string">
+      <bind-xml name="fax" node="attribute" />
+    </field>
+    <field name="lab" type="string">
+      <bind-xml name="lab" node="attribute" />
+    </field>
+    <field name="phone" type="string">
+      <bind-xml name="phone" node="attribute" />
+    </field>
+    <field name="email" type="string">
+      <bind-xml name="email" node="attribute" />
+    </field>
+    <field name="institute" type="string">
+      <bind-xml name="institute" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Role">
+    <map-to xml="Role" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Log">
+    <map-to xml="Log" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="notes" type="string">
+      <bind-xml name="notes" node="attribute" />
+    </field>
+    <field name="type" type="string">
+      <bind-xml name="type" node="attribute" />
+    </field>
+    <field name="subsystem" type="string">
+      <bind-xml name="subsystem" node="attribute" />
+    </field>
+    <field name="timestamp" type="string">
+      <bind-xml name="timestamp" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Comments">
+    <map-to xml="Comments" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="remark" type="string">
+      <bind-xml name="remark" node="attribute" />
+    </field>
+    <field name="state" type="string">
+      <bind-xml name="state" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.ModelSection">
+    <map-to xml="ModelSection" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.Strain">
+    <map-to xml="Strain" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="nameUnctrlVocab" type="string">
+      <bind-xml name="nameUnctrlVocab" node="attribute" />
+    </field>
+    <field name="abbreviation" type="string">
+      <bind-xml name="abbreviation" node="attribute" />
+    </field>
+    <field name="conceptCode" type="string">
+      <bind-xml name="conceptCode" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.StainingMethod">
+    <map-to xml="StainingMethod" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+    <field name="name" type="string">
+      <bind-xml name="name" node="attribute" />
+    </field>
+    <field name="nameUnctrlVocab" type="string">
+      <bind-xml name="nameUnctrlVocab" node="attribute" />
+    </field>
+    <field name="conceptCode" type="string">
+      <bind-xml name="conceptCode" node="attribute" />
+    </field>
+  </class>
+  <class name="gov.nih.nci.camod.domain.CarcinogenExposure">
+    <map-to xml="CarcinogenExposure" ns-uri="gme://caCORE.cabig/3.0/gov.nih.nci.camod.domain" />
+    <field name="id" type="long">
+      <bind-xml name="id" node="attribute" />
+    </field>
+  </class>
+</mapping>
+

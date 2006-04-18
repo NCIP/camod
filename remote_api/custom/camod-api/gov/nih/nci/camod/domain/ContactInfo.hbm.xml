@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ContactInfo.hbm.xml
+    Created on : May 4, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for ContactInfo
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="ContactInfo" 
+    	table="contact_info"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id"
+	    	column="contact_info_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	    
+	    
+	    <!-- city -->
+        <property name="city" 
+        	column="city" 
+        	type="string"/>
+	    
+	    <!-- state -->
+        <property name="state" 
+        	column="state" 
+        	type="string"/>
+        	
+        <!-- address -->
+        <property name="address" 
+        	column="address" 
+        	type="string"/>
+        	
+        <!-- zip -->
+        <property name="zip" 
+        	column="zip" 
+        	type="string"/>        	
+	    
+	    <!-- fax -->
+        <property name="fax" 
+        	column="fax" 
+        	type="string"/> 
+        
+        <!-- lab -->
+        <property name="lab" 
+        	column="lab" 
+        	type="string"/>
+        	
+        <!-- phone -->
+        <property name="phone" 
+        	column="phone" 
+        	type="string"/>	
+        
+        <!-- email -->
+        <property name="email" 
+        	column="email" 
+        	type="string"/>
+        	
+        <!-- institute -->
+        <property name="institute" 
+        	column="institute" 
+        	type="string"/>
+        
+        <!-- partyCollection (many-to-many bidirectional) -->
+        <!-- Note: this collection will NOT be used to synchronize state with the database. -->
+        <!-- Changes made to contactInfoCollection in Party will be synchronized with the database. -->
+        <set name="partyCollection"
+        	table="party_contact_info"
+        	inverse="true" 
+        	lazy="true"
+        	cascade="all-delete-orphan"
+		sort="natural">
+        	
+        	<key column="contact_info_id"/>
+        	<many-to-many class="Party" 
+        		column="party_id"/>
+        </set>     
+	</class>
+</hibernate-mapping>

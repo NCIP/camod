@@ -1,0 +1,95 @@
+Exporting package to 'C:\work\projects\cacoretoolkit\models\xmi\caMOD.xmi'
+Retrieving data for export: packages
+Retrieving data for export: diagram elements
+Retrieving data for export: links
+Retrieving data for export: constraints
+Retrieving data for export: tagged values
+Completed data retrieval
+Pre-processing export tree...
+Completed pre-processing
+***** Processing package: Logical View *****
+***** Processing package: Logical Model *****
+***** Processing package: gov *****
+***** Processing package: nih *****
+***** Processing package: nci *****
+***** Processing package: camod *****
+***** Processing package: domain *****
+Element:0: Xenograft
+Element:1: Treatment
+Element:2: Transgene
+Element:3: Therapy
+Element:4: TargetedModification
+Element:5: SexDistribution
+Element:6: RepositoryInfo
+Element:7: RegulatoryElementType
+Element:8: RegulatoryElement
+Element:9: PublicationStatus
+Element:10: Publication
+Element:11: Phenotype
+Element:12: Nomenclature
+Element:13: MicroArrayData
+Element:14: SegmentType
+Element:15: InducedMutation
+Element:16: Image
+Element:17: GenotypeSummary
+Element:18: GenomicSegment
+Element:19: GeneticAlteration
+Element:20: GeneFunction
+Element:21: GeneDelivery
+Element:22: EnvironmentalFactor
+Element:23: EngineeredGene
+Element:24: Conditionality
+Element:25: CellLine
+Element:26: Availability
+Element:27: AnimalModel
+Element:28: EndpointCode
+Element:29: AbstractCancerModel
+Element:30: YeastModel
+Element:31: ScreeningResult
+Element:32: TumorCode
+Element:33: InvivoResult
+Element:34: ModificationType
+Element:35: ExpressionFeature
+Element:36: Species
+Element:37: Organ
+Element:38: Histopathology
+Element:39: Disease
+Element:40: Agent
+Element:41: ExpressionLevelDesc
+Element:42: MutationIdentifier
+Element:43: SpontaneousMutation
+Element:44: ClinicalMarker
+Element:45: ChemicalClass
+Element:46: BiologicalProcess
+Element:47: AgentTarget
+Element:48: AnimalDistributor
+Element:49: AnimalAvailability
+Element:50: Party
+Element:51: Organization
+Element:52: Person
+Element:53: ContactInfo
+Element:54: Role
+Element:55: Log
+Element:56: Comments
+Element:57: ModelSection
+Element:58: Strain
+Element:59: StainingMethod
+Element:60: CarcinogenExposure
+***** Processing package: java *****
+***** Processing package: lang *****
+Element:61: String
+Element:62: Long
+Element:63: Boolean
+Element:64: Float
+Element:65: Integer
+Element:66: Double
+***** Processing package: util *****
+Element:67: Date
+Element:68: Hashtable
+Element:69: Collection
+***** Processing package: sql *****
+Element:70: Clob
+***** Processing package: DIAGRAMS *****
+***** Processing package: CAMOD *****
+Formatting output XML...please wait
+XMI Document Export Complete!
