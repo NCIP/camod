@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.36 2006-04-19 12:47:33 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.37 2006-04-19 13:31:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2006/04/19 12:47:33  georgeda
+ * Fixed issue w/ advanced search page + cleaned up warnings
+ *
  * Revision 1.35  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -421,7 +424,7 @@ public class QueryManagerImpl extends BaseManager
 
         Object[] theParams = new Object[1];
         theParams[0] = inRole;
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -861,7 +864,7 @@ public class QueryManagerImpl extends BaseManager
         Object[] theParams = new Object[2];
         theParams[0] = inNSCNumber;
         theParams[1] = inModelId;
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1045,11 +1048,35 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
+     * Get the model id's for any model that has a strain associated w/ the species
+     * 
+     * @param inSpecies
+     *            the species to search for
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     */
+    private String getStrainIdsForSpecies(String inSpecies) throws PersistenceException
+    {
+        String theSQLString = "SELECT distinct strain.strain_id FROM strain WHERE strain.species_id IN (SELECT species.species_id FROM species WHERE species.scientific_name like ? or species.scientific_name_unctrl_vocab like ?) ";
+
+        System.out.println("SQL: " + theSQLString);
+        Object[] theParams = new Object[2];
+        theParams[0] = inSpecies;
+        theParams[1] = theParams[0];
+        
+        System.out.println("The params: " + theParams[0]);
+        return getIds(theSQLString, theParams);
+
+    }
+    
+    /**
      * Get the model id's for any model that has a histopathology associated
      * with a specific organ.
      * 
-     * @param inOrgan
-     *            the organ to search for
+     * @param inConceptCodes
+     *            the concept codes to search for
      * 
      * @return a list of matching model id
      * 
@@ -1057,7 +1084,6 @@ public class QueryManagerImpl extends BaseManager
      */
     private String getModelIdsForHistopathologyOrgan(String inConceptCodes) throws PersistenceException
     {
-
         String theConceptCodeList = "";
 
         StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
@@ -1076,7 +1102,7 @@ public class QueryManagerImpl extends BaseManager
         String theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist " + "WHERE hist.abs_cancer_model_id IS NOT null " + "AND hist.histopathology_id IN (SELECT h.histopathology_id " + "     FROM histopathology h, organ o " + "     WHERE h.organ_id = o.organ_id " + "         AND o.concept_code IN (" + theConceptCodeList + "))";
 
         Object[] theParams = new Object[0];
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1094,7 +1120,7 @@ public class QueryManagerImpl extends BaseManager
         String theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist " + "WHERE hist.abs_cancer_model_id IS NOT null " + "AND hist.histopathology_id IN (SELECT h.parent_histopathology_id FROM histopathology h " + "     WHERE h.parent_histopathology_id IS NOT NULL)";
 
         Object[] theParams = new Object[0];
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1112,7 +1138,7 @@ public class QueryManagerImpl extends BaseManager
         String theSQLString = "SELECT distinct par_abs_can_model_id FROM abs_cancer_model ";
 
         Object[] theParams = new Object[0];
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1129,7 +1155,7 @@ public class QueryManagerImpl extends BaseManager
         String theSQLString = "SELECT distinct abs_cancer_model_id FROM ani_mod_mic_array_data";
 
         Object[] theParams = new Object[0];
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1150,7 +1176,7 @@ public class QueryManagerImpl extends BaseManager
 
         Object[] theParams = new Object[1];
         theParams[0] = "%" + inCellLineName + "%";
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1178,7 +1204,7 @@ public class QueryManagerImpl extends BaseManager
 
         Object[] theParams = new Object[1];
         theParams[0] = theSQLTheraputicApproach;
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1214,7 +1240,7 @@ public class QueryManagerImpl extends BaseManager
         String theSQLString = "SELECT distinct hist.abs_cancer_model_id " + "FROM histopathology hist " + "WHERE hist.histopathology_id IS NOT null " + "AND hist.histopathology_id IN (SELECT h.histopathology_id " + "     FROM histopathology h, disease d " + "     WHERE h.disease_id = d.disease_id AND d.concept_code IN (" + theConceptCodeList + "))";
 
         Object[] theParams = new Object[0];
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
 
     }
 
@@ -1286,7 +1312,7 @@ public class QueryManagerImpl extends BaseManager
             theParams[i] = theList.get(i);
         }
 
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
     }
 
     /**
@@ -1317,7 +1343,7 @@ public class QueryManagerImpl extends BaseManager
         theParams[1] = inKeyword;
         theParams[2] = inKeyword;
 
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
     }
 
     /**
@@ -1333,7 +1359,7 @@ public class QueryManagerImpl extends BaseManager
         String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce ";
 
         Object[] theParams = new Object[0];
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
     }
 
     /**
@@ -1360,7 +1386,7 @@ public class QueryManagerImpl extends BaseManager
         theParams[0] = inName;
         theParams[1] = inName;
         theParams[2] = inType;
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
     }
 
     /**
@@ -1380,7 +1406,7 @@ public class QueryManagerImpl extends BaseManager
 
         Object[] theParams = new Object[1];
         theParams[0] = inKeyword;
-        return getModelIds(theSQLString, theParams);
+        return getIds(theSQLString, theParams);
     }
 
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
@@ -1475,7 +1501,6 @@ public class QueryManagerImpl extends BaseManager
     }
 
     // Build the where clause for the search and the count
-    //Sima TODO - Taxon build clause will not work
     private String buildKeywordSearchWhereClause(String inKeyword) throws Exception
     {
         String theKeyword = "%" + inKeyword.toUpperCase().trim() + "%";
@@ -1484,7 +1509,7 @@ public class QueryManagerImpl extends BaseManager
 
         theWhereClause += " AND (upper(am.modelDescriptor) like :keyword ";
 
-        theWhereClause += " OR am.species IN (from Taxon as t where upper(t.scientificName) like :keyword )";
+        theWhereClause += " OR am.strain IN (" + getStrainIdsForSpecies(inKeyword) + ")";
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(theKeyword) + ")";
 
@@ -1559,7 +1584,7 @@ public class QueryManagerImpl extends BaseManager
         if (inSearchData.getSpecies() != null && inSearchData.getSpecies().length() > 0)
         {
 
-            theWhereClause += "AND am.species IN (from Taxon as t where t.scientificName = '" + inSearchData.getSpecies() + "')";
+            theWhereClause += " AND am.strain IN (" + getStrainIdsForSpecies(inSearchData.getSpecies()) + ")";
         }
 
         // Search for organ
@@ -1720,22 +1745,22 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Extract the model ID's for an sql query.
+     * Extract the ID's for an sql query.
      * 
      * @param inSQLString
      *            the SQL string that returns a set of IDs
      * @param inParameters
      *            the parameters to bind in the query
      * 
-     * @return a list of matching model id
+     * @return a list of matching ids
      * 
      * @throws PersistenceException
      */
-    private String getModelIds(String inSQLString,
+    private String getIds(String inSQLString,
                                Object inParameters[]) throws PersistenceException
     {
 
-        log.info("In getModelIds");
+        log.info("In getIds");
 
         String theModelIds = "";
 
@@ -1743,7 +1768,7 @@ public class QueryManagerImpl extends BaseManager
         try
         {
 
-            log.info("getModelsIds - SQL: " + inSQLString);
+            log.info("getIds - SQL: " + inSQLString);
 
             theResultSet = Search.query(inSQLString, inParameters);
 
@@ -1760,8 +1785,8 @@ public class QueryManagerImpl extends BaseManager
         }
         catch (Exception e)
         {
-            log.error("Exception in getModelIds", e);
-            throw new PersistenceException("Exception in getModelIds: " + e);
+            log.error("Exception in getIds", e);
+            throw new PersistenceException("Exception in getIds: " + e);
         }
         finally
         {
