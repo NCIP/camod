@@ -169,7 +169,8 @@
 	        </c:if>
 
 			<!--   Start Gene Delivery Section -->
-			<c:set var="cdList" value="${mdl.geneDeliveryCollection}"/>
+		    <c:set var="environmentalFactorType" value="GeneDelivery"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>

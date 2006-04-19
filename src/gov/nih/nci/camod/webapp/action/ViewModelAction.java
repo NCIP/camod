@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.27 2006-04-19 18:50:01 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.28 2006-04-19 19:31:58 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.27  2006/04/19 18:50:01  georgeda
+ *  Fixed issue w/ engineered genes displaying
+ *
  *  Revision 1.26  2006/04/17 19:09:41  pandyas
  *  caMod 2.1 OM changes
  *
@@ -308,7 +311,12 @@ public class ViewModelAction extends BaseAction {
                 }
                 myTypeColl.add(ce);
             }
-        }        
+        }
+        
+        if (am.getGeneDeliveryCollection().size() > 0) {
+            List theGeneDeliveryCollection = new ArrayList(am.getGeneDeliveryCollection());
+            interventionTypeMap.put("GeneDelivery", theGeneDeliveryCollection);
+        }
 
         request.getSession().setAttribute(Constants.CARCINOGENIC_INTERVENTIONS_COLL, interventionTypeMap);
 
