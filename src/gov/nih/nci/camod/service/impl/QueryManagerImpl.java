@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.37 2006-04-19 13:31:47 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.38 2006-04-19 18:40:53 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2006/04/19 13:31:47  georgeda
+ * Fixed Taxon/TOC problem
+ *
  * Revision 1.36  2006/04/19 12:47:33  georgeda
  * Fixed issue w/ advanced search page + cleaned up warnings
  *
@@ -1333,7 +1336,7 @@ public class QueryManagerImpl extends BaseManager
 
         theSQLString += " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE upper(name) LIKE ?)";
 
-        theSQLString += " OR eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE engineered_gene_id IN (" + " SELECT distinct egg.engineered_gene_id FROM env_factor ef, engineered_gene egg " + " WHERE upper(ef.name) like ? " + " AND ef.environmental_factor_id = egg.environmental_factor_id) AND engineered_gene_type = 'IM')";
+        theSQLString += " OR eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE engineered_gene_id IN (" + " SELECT distinct egg.engineered_gene_id FROM environmental_factor ef, engineered_gene egg " + " WHERE upper(ef.name) like ? " + " AND ef.environmental_factor_id = egg.environmental_factor_id) AND engineered_gene_type = 'IM')";
 
         theSQLString += " OR eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE upper(clone_designator) LIKE ? AND engineered_gene_type = 'GS')";
 
