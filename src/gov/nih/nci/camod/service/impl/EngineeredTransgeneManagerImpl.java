@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.23 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.24 2006-04-19 17:40:12 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -213,6 +216,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             //Species is other, add 'other' to commonName field and send e-mail
             if (!inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION))
             {
+                // Sima TODO:  make sure this is consistent - do not add other, but put this in commonName field
                 theSpecies.setCommonName(Constants.Dropdowns.OTHER_OPTION);
                 inEngineeredTransgene.setSpecies(theSpecies);
                 sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene ScientificName");                

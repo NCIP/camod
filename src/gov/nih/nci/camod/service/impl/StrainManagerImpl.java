@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StrainManagerImpl.java,v 1.1 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: StrainManagerImpl.java,v 1.2 2006-04-19 17:38:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -93,7 +96,8 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
         Strain theQBEStrain = new Strain();
         theQBEStrain.setSpecies(selectedSpecies);
 
-        // Other is not selected, null out the uncontrolled vocab
+        // If Other is selected, look for a match to the uncontrolled vocab
+        // create new one either way if not found
         if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION)) {
             theQBEStrain.setName(inStrainName);
         } else {
@@ -104,10 +108,11 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
         try {
             List theList = Search.query(theQBEStrain);
             
-            // Doesn't exist. Use the QBE strain since it has the same data
+            // Does exist - get object
             if (theList != null && theList.size() > 0) {
                 theStrain = (Strain) theList.get(0);
             }
+            // Doesn't exist, create one.  Set name and otherName and return object
             else {
                log.info("<StrainManagerImpl> No matching strains. Create new one");
                theStrain = theQBEStrain;

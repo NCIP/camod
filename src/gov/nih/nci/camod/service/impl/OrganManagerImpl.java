@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: OrganManagerImpl.java,v 1.7 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: OrganManagerImpl.java,v 1.8 2006-04-19 17:38:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.6  2006/01/18 14:24:24  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -27,9 +30,6 @@ import java.util.List;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class OrganManagerImpl extends BaseManager implements OrganManager
 {

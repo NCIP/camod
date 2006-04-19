@@ -1,7 +1,10 @@
 /*
- * $Id: TargetedModification.java,v 1.14 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: TargetedModification.java,v 1.15 2006-04-19 17:37:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -9,9 +12,6 @@ import java.util.*;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class TargetedModification extends EngineeredGene
 {
@@ -75,16 +75,15 @@ public class TargetedModification extends EngineeredGene
         this.modificationTypeCollection = modificationTypeCollection;
     }
 
-    /**  Sima TODO - do we need this?
+    /**  
      * @param modificationType
      *            The modificationType to add.
-     
+     */
     public void addModificationType(ModificationType modificationType)
     {
-        modificationType.getTargetedModificationCollection().add(this);
         modificationTypeCollection.add(modificationType);
     }
-    */
+
     /**
      * @return Returns the geneId.
      */

@@ -1,16 +1,16 @@
 /*
- * $Id: Organization.java,v 1.5 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Organization.java,v 1.6 2006-04-19 17:37:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class Organization extends Party
 {

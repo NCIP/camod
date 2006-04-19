@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationPopulateAction.java,v 1.7 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: SpontaneousMutationPopulateAction.java,v 1.8 2006-04-19 17:38:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -43,7 +46,6 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
             spontaneousMutationForm.setComments(theSpontaneousMutation.getComments());
             spontaneousMutationForm.setGeneId(theSpontaneousMutation.getGeneId());
 
-            // Sima TODO - added new ArrayList instead of type safe generic              
             List geneticList = new ArrayList(theSpontaneousMutation.getGeneticAlterationCollection());
             if (geneticList.size() > 0) {
                 GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);

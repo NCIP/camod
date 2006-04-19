@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.21 2006-04-18 17:54:44 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.22 2006-04-19 17:38:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/04/18 17:54:44  pandyas
+ * Fixed Therapy multi-select collections and cleaned up e-mail code
+ *
  * Revision 1.20  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -185,8 +188,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager
         if (inTherapyData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION))
         {
             log.info("admin route equals other");
-
-            theTherapy.getTreatment().setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
+            //Do not save 'Other' in the database
             theTherapy.getTreatment().setAdminRouteUnctrlVocab(inTherapyData.getOtherAdministrativeRoute());
 
             log.trace("Sending Notification eMail - new Administrative Route added");

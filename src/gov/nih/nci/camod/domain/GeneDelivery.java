@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDelivery.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: GeneDelivery.java,v 1.13 2006-04-19 17:37:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * Revision 1.11  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -20,9 +23,6 @@ import java.io.Serializable;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class GeneDelivery extends BaseObject implements Comparable, Serializable, Duplicatable
 {

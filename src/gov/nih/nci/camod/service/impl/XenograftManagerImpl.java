@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.23 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.24 2006-04-19 17:38:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.22  2005/12/12 17:33:37  georgeda
  * Defect #265, store host/origin species in correct places
  *
@@ -46,9 +49,6 @@ import java.util.TreeMap;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class XenograftManagerImpl extends BaseManager implements XenograftManager
 {

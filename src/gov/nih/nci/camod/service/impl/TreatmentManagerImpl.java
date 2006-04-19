@@ -1,7 +1,10 @@
 /*
- * $Id: TreatmentManagerImpl.java,v 1.4 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: TreatmentManagerImpl.java,v 1.5 2006-04-19 17:38:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -10,9 +13,6 @@ import gov.nih.nci.camod.service.TreatmentManager;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class TreatmentManagerImpl extends BaseManager implements TreatmentManager {
 

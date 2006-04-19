@@ -1,7 +1,10 @@
 /*
- * $Id: TransgeneManager.java,v 1.4 2006-04-17 19:13:16 pandyas Exp $
+ * $Id: TransgeneManager.java,v 1.5 2006-04-19 17:37:51 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:13:16  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.service;
 
@@ -10,9 +13,6 @@ import java.util.List;
 
 /**
  * @author rajputs
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public interface TransgeneManager {
 	public List getAll() throws Exception;

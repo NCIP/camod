@@ -1,7 +1,10 @@
 /*
- * $Id: Publication.java,v 1.9 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Publication.java,v 1.10 2006-04-19 17:37:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -11,9 +14,6 @@ import gov.nih.nci.camod.util.Duplicatable;
 
 /**
  * @author rajputs
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public class Publication extends BaseObject implements Serializable, Duplicatable
 {

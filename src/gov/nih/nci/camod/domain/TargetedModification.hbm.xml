@@ -44,7 +44,7 @@
         	table="tar_mod_modification_type"
         	inverse="false" 
         	lazy="true"
-		sort="natural">
+			sort="natural">
         	
         	<key column="engineered_gene_id"/>
         	<many-to-many column="modification_type_id"
