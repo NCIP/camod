@@ -1,7 +1,10 @@
 /*
- * $Id: InducedMutation.java,v 1.13 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: InducedMutation.java,v 1.14 2006-04-19 15:05:46 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -56,27 +59,6 @@ public class InducedMutation extends EngineeredGene
     public void setEnvironmentalFactor(EnvironmentalFactor environmentalFactor) {
         this.environmentalFactor = environmentalFactor;
     }
-
-    /* old code
-     * this is not how we should do this and we should clean this up later
-    public EnvironmentalFactor getEnvironmentalFactor()
-    {
-        if (environmentalFactorCollection.size() > 0)
-            return (EnvironmentalFactor) environmentalFactorCollection.get(0);
-        else
-            return null;
-    }
-    */
-    
-    /*
-     * @param geneticAlteration
-     *            The geneticAlteration to add.
-     
-    public void addEnvironmentalFactor(EnvironmentalFactor environmentalFactor)
-    {
-        environmentalFactorCollection.add(environmentalFactor);
-    }
-    */
     
     /**
      * @return Returns the description.
