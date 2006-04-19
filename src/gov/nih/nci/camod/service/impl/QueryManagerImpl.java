@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.35 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.36 2006-04-19 12:47:33 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.34  2005/12/19 14:01:33  georgeda
  * Defect #271 - Search issues
  *
@@ -113,18 +116,17 @@ import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.HQLParameter;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
-import javax.servlet.http.HttpServletRequest;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.Session;
 
 /**
  * Implementation of a wrapper around the HQL/JDBC interface. Used for more
@@ -156,10 +158,6 @@ public class QueryManagerImpl extends BaseManager
 
         log.info("inType: " + inType);
 
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-
-        Session session = sessionFactory.openSession();
-
         String theHQLQuery = "select distinct ef.name from EnvironmentalFactor as ef where ef.type = :type and ef.name is not null order by ef.name asc ";
 
         List theList = Search.query(theHQLQuery, theParams);
@@ -189,7 +187,7 @@ public class QueryManagerImpl extends BaseManager
         try
         {
             // Format the query
-            String theSQLQuery = "SELECT distinct ef.name " + "FROM environmental_factor as ef " 
+            String theSQLQuery = "SELECT distinct ef.name " + "FROM environmental_factor ef " 
             + "WHERE ef.type = ? " + "  AND ef.name IS NOT null " 
             + "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id " 
             + "     FROM carcinogen_exposure ce, abs_cancer_model am " 
@@ -208,7 +206,7 @@ public class QueryManagerImpl extends BaseManager
           
             // Add any uncontrolled vocabs
             theSQLQuery = "SELECT distinct ef.name_unctrl_vocab " 
-            + "FROM environmental_factor as ef " 
+            + "FROM environmental_factor ef " 
             + "WHERE ef.type = ? " 
             + "  AND ef.name_unctrl_vocab IS NOT null " 
             + "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id " 
@@ -1251,7 +1249,7 @@ public class QueryManagerImpl extends BaseManager
                                                  String inInducedMutationAgent) throws PersistenceException
     {
 
-        List theList = new ArrayList();
+        List<Object> theList = new ArrayList<Object>();
 
         String theSQLString = "SELECT eg.abs_cancer_model_id " + "FROM engineered_gene eg WHERE ";
 
@@ -1790,7 +1788,7 @@ public class QueryManagerImpl extends BaseManager
     //no nscNumber in environmental_factor to test if this is correct
     public List getModelsForThisCompound(Long nscNumber) throws PersistenceException
     {
-        List models = new ArrayList();
+        List<String[]> models = new ArrayList<String[]>();
         int cc = 0;
         ResultSet theResultSet = null;
         try
@@ -1847,7 +1845,7 @@ public class QueryManagerImpl extends BaseManager
 
     public List getAllPublications(long absCancerModelId) throws PersistenceException
     {
-        List publications = new ArrayList();
+        List<Publication> publications = new ArrayList<Publication>();
         int cc = 0;
         ResultSet theResultSet = null;
         try
