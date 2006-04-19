@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.20 2006-04-18 16:20:05 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.21 2006-04-19 15:08:17 georgeda Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/04/18 16:20:05  pandyas
+ * Updated populate method to save IM correctly
+ *
  * Revision 1.19  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -63,9 +66,12 @@ import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 
 public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager
@@ -130,23 +136,24 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
     {
         log.info("Entering populateInducedMutation");
 
-        EnvironmentalFactor inEnvironFactor = null;
+        EnvironmentalFactor theEnvironFactor = null;
 
         // Check to see if a Environmental Factor already exists,
         // if it does edit it else create a new EnvironmentalFactor
         if (inInducedMutation.getEnvironmentalFactor() != null)
         {
-            inEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactor();
+            theEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactor();
         }
         else
         {
-            inEnvironFactor = new EnvironmentalFactor();
+            theEnvironFactor = new EnvironmentalFactor();
+            inInducedMutation.setEnvironmentalFactor(theEnvironFactor);
         }
         log.info("In InducedMutationManagerImpl.save created EF");
 
         // Name of Inducing Agent - Saved in uncontrolled vocab field since it is free text
-        inEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
-        log.info("In InducedMutationManagerImpl.save set name");        
+        theEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
+        log.info("In InducedMutationManagerImpl.save set name");
 
         // Inducing Agent Category type / Other type
         if (inInducedMutationData.getOtherType().equals(Constants.Dropdowns.OTHER_OPTION))
@@ -155,17 +162,17 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             // Send the email
             sendEmail(inAnimalModel, inInducedMutationData.getOtherType(), "OtherInducedMutation");
 
-            inEnvironFactor.setTypeUnctrlVocab(inInducedMutationData.getOtherType());
-            inEnvironFactor.setType(Constants.Dropdowns.OTHER_OPTION);
+            theEnvironFactor.setTypeUnctrlVocab(inInducedMutationData.getOtherType());
+            theEnvironFactor.setType(Constants.Dropdowns.OTHER_OPTION);
         }
         else
         {
-            inEnvironFactor.setType(inInducedMutationData.getType());
+            theEnvironFactor.setType(inInducedMutationData.getType());
         }
         log.info("In InducedMutationManagerImpl.save set type/otherType");
 
         // CAS Number
-        inEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
+        theEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
 
         // GeneID
         inInducedMutation.setGeneId(inInducedMutationData.getGeneId());
@@ -212,7 +219,9 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             inMutationIdentifier = inInducedMutation.getMutationIdentifier();
         }
         else
+        {
             inMutationIdentifier = new MutationIdentifier();
+        }
 
         if (inInducedMutationData.getMgiNumber() == null || inInducedMutationData.getMgiNumber().equals(""))
         {
@@ -220,14 +229,8 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
         }
         else
         {
-            String strMGINumber = inInducedMutationData.getMgiNumber().trim();
-            Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
-            Matcher m = p.matcher(strMGINumber);
-            if (m.matches() && strMGINumber != null && !strMGINumber.equals(""))
-            {
-                inMutationIdentifier.setMgiNumber((strMGINumber));
-                inInducedMutation.setMutationIdentifier(inMutationIdentifier);
-            }
+            inMutationIdentifier.setMgiNumber(inInducedMutationData.getMgiNumber());
+            inInducedMutation.setMutationIdentifier(inMutationIdentifier);
         }
 
         // Comments

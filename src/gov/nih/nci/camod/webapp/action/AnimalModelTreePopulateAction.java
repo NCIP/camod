@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.39 2006-04-17 19:09:40 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.40 2006-04-19 15:09:16 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.39  2006/04/17 19:09:40  pandyas
+ *  caMod 2.1 OM changes
+ *
  *  Revision 1.38  2005/12/06 18:49:10  georgeda
  *  Defect #247 - real fix this time for the problem
  *
@@ -260,9 +263,9 @@ public class AnimalModelTreePopulateAction extends BaseAction
 
             // Retrieve the list all EngineeredGenes assoc with this AnimalModel
             Set engineeredGeneSet = animalModel.getEngineeredGeneCollection();
-            System.out.println("<AnimalModelTreePopulateAction> Building engineeredGeneSet Tree ...");            
+            System.out.println("<AnimalModelTreePopulateAction> Building engineeredGeneSet Tree ...");
             it = engineeredGeneSet.iterator();
-            
+
             List<InducedMutation> inducedList = new ArrayList<InducedMutation>();
             List<TargetedModification> targetedList = new ArrayList<TargetedModification>();
             List<GenomicSegment> segmentList = new ArrayList<GenomicSegment>();
@@ -271,47 +274,33 @@ public class AnimalModelTreePopulateAction extends BaseAction
 
             while (it.hasNext())
             {
-                System.out.println("<AnimalModelTreePopulateAction> inside while EG loop ...");                
+                System.out.println("<AnimalModelTreePopulateAction> inside while EG loop ...");
                 EngineeredGene engineeredGene = (EngineeredGene) it.next();
                 if (engineeredGene instanceof InducedMutation)
                 {
-                    InducedMutation inInduced = (InducedMutation) engineeredGene;
-                    if (inInduced.getEnvironmentalFactor() != null)
-                    {
-                        System.out.println("Added InducedMutation to left menu ...");
-                        inducedList.add((InducedMutation) engineeredGene);
-                    }
-                }
-                /* old code
-                 for (int i = 0; i < engineeredGeneList.size(); i++) {
-                 EngineeredGene engineeredGene = (EngineeredGene) engineeredGeneList.get(i);
-
-                    if (engineeredGene instanceof InducedMutation) {
-                        InducedMutation inInduced = (InducedMutation) engineeredGeneList.get(i);
-                        if (inInduced.getEnvironmentalFactor() != null) {
-                            inducedList.add((InducedMutation) engineeredGeneList.get(i));
-                    }
+                    System.out.println("Added InducedMutation to left menu ...");
+                    inducedList.add((InducedMutation) engineeredGene);
                 }
 
-                 */
-
-                if (engineeredGene instanceof TargetedModification)
+                else if (engineeredGene instanceof TargetedModification)
                 {
-                  
                     System.out.println("Added TargetedModification to left menu ...");
                     targetedList.add((TargetedModification) engineeredGene);
                 }
 
-                if (engineeredGene instanceof GenomicSegment)
+                else if (engineeredGene instanceof GenomicSegment)
                 {
                     System.out.println("Added GenomicSegment to left menu ...");
                     segmentList.add((GenomicSegment) engineeredGene);
                 }
 
-                if (engineeredGene instanceof Transgene)
+                else if (engineeredGene instanceof Transgene)
                 {
                     System.out.println("Added Transgene to left menu ...");
                     engineeredList.add((Transgene) engineeredGene);
+                }
+                else {
+                    
                 }
             }
 

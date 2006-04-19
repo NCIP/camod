@@ -1,8 +1,11 @@
 <%
  /*
-  * $Id: subSubmitMenu.jsp,v 1.50 2006-04-17 19:07:33 pandyas Exp $
+  * $Id: subSubmitMenu.jsp,v 1.51 2006-04-19 15:12:47 georgeda Exp $
   *
   * $Log: not supported by cvs2svn $
+  * Revision 1.50  2006/04/17 19:07:33  pandyas
+  * caMod 2.1 OM changes
+  *
   * Revision 1.49  2005/12/29 19:42:01  georgeda
   * Defect #297, fixed therapeutic approaches shorten
   *
@@ -149,7 +152,7 @@
 			  &nbsp;&nbsp;&nbsp;&nbsp;
 			  <img src="images/aquadot.jpg" border="0"> 
 			      <html:link styleClass="subMenuBlue" action="InducedMutationPopulateAction.do?method=populate" paramId="aInducedMutationID" paramName="aInducedMutation" paramProperty="id">
-			      		<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.name" filter="false"/></camod:shorten>
+			      		<camod:shorten><bean:write name="aInducedMutation" property="environmentalFactor.displayName" filter="false"/></camod:shorten>
 			      </html:link><br>
 		</logic:iterate>
 		
