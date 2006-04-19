@@ -31,9 +31,9 @@
         join table) -->
         <set name="geneticAlterationCollection"
 	         cascade="all-delete-orphan"
-		sort="natural">
+		     sort="natural">
             <key column="genetic_alteration_id"/>
-            <one-to-many class="InducedMutation"/>
+            <one-to-many class="GeneticAlteration"/>
         </set>         
        
         <!-- environmentalFactor (many-to-one unidirectional) -->
