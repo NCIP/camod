@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.39 2006-04-17 19:08:19 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.40 2006-04-19 18:48:03 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2006/04/17 19:08:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.38  2005/12/05 22:17:01  pandyas
  * Defect #61 and #62:  Removed Libraries and Tissues and Protein Similarities   until we must decide if we are going to display this data in the next release.
  *
@@ -241,7 +244,7 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			<c:out value="${tg.speciesCollection[0].scientificName}"/>&nbsp;
+			<c:out value="${tg.species.scientificName}"/>&nbsp;
 			</td>
 		</tr>
 
