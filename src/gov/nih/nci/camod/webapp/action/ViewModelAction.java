@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.26 2006-04-17 19:09:41 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.27 2006-04-19 18:50:01 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.26  2006/04/17 19:09:41  pandyas
+ *  caMod 2.1 OM changes
+ *
  *  Revision 1.25  2005/11/21 18:38:31  georgeda
  *  Defect #35.  Trim whitespace from items that are freeform text
  *
@@ -187,8 +190,8 @@ public class ViewModelAction extends BaseAction {
         int tmCnt = 0;// TargetedModification
         final Map tmGeneMap = new HashMap();
         final List<EngineeredGene> imc = new ArrayList<EngineeredGene>();
-        final Set smc = am.getSpontaneousMutationCollection();
-        Iterator it = smc.iterator();
+        final List<SpontaneousMutation> smc = new ArrayList<SpontaneousMutation>(am.getSpontaneousMutationCollection());
+        Iterator it = egc.iterator();
         int imCnt = 0;// InducedMutation
         while (it.hasNext())
         {
