@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.65 2006-04-18 16:19:32 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.66 2006-04-19 17:39:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.65  2006/04/18 16:19:32  pandyas
+ * modified debug command from debug to info to display messages
+ *
  * Revision 1.64  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -584,49 +587,14 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         // other option selected
         if (inModelCharacteristicsData.getEthinicityStrain().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            // set the Name to 'Other' then save strain, send e-mail
-            theNewStrain.setName(Constants.Dropdowns.OTHER_OPTION);
+            // Do not set the Name to 'Other' in the DB, send e-mail
             inAnimalModel.setStrain(theNewStrain);
-            
-            log.info("Sending Notification eMail - new EthinicityStrain added");
-
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String, Object> values = new TreeMap<String, Object>();
-            values.put("type", "EthinicityStrain");
-            values.put("value", inModelCharacteristicsData.getOtherEthnicityStrain());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
-        } else {
-        //used to setSpecies in AnimalModel now used to setStrain in 2.1
-        inAnimalModel.setStrain(theNewStrain);
+            sendEmail(inAnimalModel, inModelCharacteristicsData.getOtherEthnicityStrain(), "EthinicityStrain");
+        }
+        else
+        {
+            //used to setSpecies in AnimalModel now used to setStrain in 2.1
+            inAnimalModel.setStrain(theNewStrain);
         }
 
         Phenotype thePhenotype = inAnimalModel.getPhenotype();
@@ -1150,6 +1118,46 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         save(inAnimalModel);
 
         log.info("Exiting AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
+    }
+
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        // Get the e-mail resource
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
+
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+        // gather message keys and variable values to build the e-mail
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
+        }
     }
 
 }
