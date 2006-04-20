@@ -38,10 +38,11 @@
         	type="text"/>        	
         	
         	
-        <!-- modificationTypeCollection (many-to-many bidirectional) -->
+        <!-- modificationTypeCollection (many-to-many unidirectional) -->
         <!-- Note: this collection will be used to synchronize state with the database. -->
         <set name="modificationTypeCollection" 
         	table="tar_mod_modification_type"
+        	cascade="save-update"
         	inverse="false" 
         	lazy="true"
 			sort="natural">

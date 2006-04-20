@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.13 2006-04-20 14:04:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.11  2005/11/28 18:31:57  georgeda
  * Defect #64, fix for newly submitted models
  *
@@ -30,78 +33,83 @@ import gov.nih.nci.camod.service.impl.TargetedModificationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class TargetedModificationPopulateAction extends BaseAction {
+public class TargetedModificationPopulateAction extends BaseAction
+{
 
-    public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populate(ActionMapping mapping,
+                                  ActionForm form,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) throws Exception
+    {
 
         System.out.println("<TargetedModificationPopulateAction populate> Entering populate() ");
 
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
 
         String aTargetedModificationID = request.getParameter("aTargetedModificationID");
-        TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().get(
-                aTargetedModificationID);
+        TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().get(aTargetedModificationID);
 
-        if (theTargetedModification == null) {
+        if (theTargetedModification == null)
+        {
             request.setAttribute("deleted", "true");
-        } else {
+        }
+        else
+        {
             targetedModificationForm.setModificationId(aTargetedModificationID);
 
             targetedModificationForm.setName(theTargetedModification.getName());
             MutationIdentifier theMutationIdentifier = theTargetedModification.getMutationIdentifier();
-            if (theMutationIdentifier != null) {
+            if (theMutationIdentifier != null)
+            {
                 targetedModificationForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
             }
-            
-            // Get the size of the list of modifications
-            // Sima TODO - added new ArrayList instead of type safe generic              
-            List<ModificationType> theTargetedModificationList = new ArrayList<ModificationType>(theTargetedModification.getModificationTypeCollection());
-            int theListSize = theTargetedModificationList.size();
-            
-            
-            /* Sima TODO
-            // We have an uncontrolled vocab, so we need to add "Other" to the list
-            if (theTargetedModification.getModTypeUnctrlVocab() != null) {
-                theListSize++;
-                targetedModificationForm.setOtherModificationType(theTargetedModification.getModTypeUnctrlVocab());
+
+            // Get the collection/Set of modification types
+            List<ModificationType> theModificationTypeList = new ArrayList(theTargetedModification.getModificationTypeCollection());
+            String[] theModTypes = new String[theModificationTypeList.size()];
+            String otherModType = null;
+            for (int i = 0; i < theModificationTypeList.size(); i++)
+            {
+                ModificationType theModificationType = (ModificationType) theModificationTypeList.get(i);
+                //If one of the selections was 'Other', populate other field correctly
+                if (theModificationType.getNameUnctrlVocab() != null)
+                {
+                    theModTypes[i] = Constants.Dropdowns.OTHER_OPTION;
+                    targetedModificationForm.setOtherModificationType(theModificationType.getNameUnctrlVocab());
+                }
+                else
+                {
+                    theModTypes[i] = theModificationType.getName();
+                }
             }
-            */
-			// Get the collection of Targeted Modifications
-			String[] theTargetedMod = new String[theListSize];
-			for (int i = 0; i < theTargetedModificationList.size(); i++) {
-				ModificationType theModificationType = (ModificationType) theTargetedModificationList.get(i);				
-				theTargetedMod[i] = theModificationType.getName();
-			}
-			/*  Sima TODO
-			// Add other as the last item in the list
-			if (theTargetedModification.getModTypeUnctrlVocab() != null) {
-				theTargetedMod[theListSize - 1] = Constants.Dropdowns.OTHER_OPTION;
-			}
-            */
-			// Set the modification types
-			targetedModificationForm.setModificationType(theTargetedMod);
-			
+            //set the modification types on the form, including 'Other' if selected
+            targetedModificationForm.setModificationType(theModTypes);
+
             targetedModificationForm.setBlastocystName(theTargetedModification.getBlastocystName());
             targetedModificationForm.setComments(theTargetedModification.getComments());
             targetedModificationForm.setGeneId(theTargetedModification.getGeneId());
             targetedModificationForm.setEsCellLineName(theTargetedModification.getEsCellLineName());
-            
+
             // Construct Sequence
-            targetedModificationForm.setConstructSequence(theTargetedModification.getConstructSequence());            
+            targetedModificationForm.setConstructSequence(theTargetedModification.getConstructSequence());
 
             // Conditionality
             Conditionality theConditionality = theTargetedModification.getConditionality();
-            if (theConditionality != null) {
-                if ("1".equals(theConditionality.getConditionedBy())) {
+            if (theConditionality != null)
+            {
+                if ("1".equals(theConditionality.getConditionedBy()))
+                {
                     targetedModificationForm.setConditionedBy(Constants.CONDITIONAL);
-                } else {
+                }
+                else
+                {
                     targetedModificationForm.setConditionedBy(Constants.NOT_CONDITIONAL);
                 }
 
@@ -110,7 +118,8 @@ public class TargetedModificationPopulateAction extends BaseAction {
             }
 
             Image image = theTargetedModification.getImage();
-            if (image != null) {
+            if (image != null)
+            {
                 targetedModificationForm.setFileServerLocation(image.getFileServerLocation());
                 targetedModificationForm.setTitle(image.getTitle());
                 targetedModificationForm.setDescriptionOfConstruct(image.getDescription());
@@ -127,8 +136,11 @@ public class TargetedModificationPopulateAction extends BaseAction {
         return mapping.findForward("submitTargetedModification");
     }
 
-    public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward dropdown(ActionMapping mapping,
+                                  ActionForm form,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) throws Exception
+    {
 
         System.out.println("<TargetedModificationPopulateAction dropdown> Entering dropdown()");
 
@@ -145,7 +157,9 @@ public class TargetedModificationPopulateAction extends BaseAction {
      * @param response
      * @throws Exception
      */
-    public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void dropdown(HttpServletRequest request,
+                         HttpServletResponse response) throws Exception
+    {
 
         System.out.println("<TargetedModificationPopulateAction dropdown> Entering void dropdown()");
 

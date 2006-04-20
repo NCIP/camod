@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: TargetedModificationAction.java,v 1.13 2006-04-20 14:04:50 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -39,7 +42,7 @@ public final class TargetedModificationAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering edit");
+        log.info("<TargetedModificationAction> Entering edit");
 
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -106,7 +109,7 @@ public final class TargetedModificationAction extends BaseAction {
             saveErrors(request, msg);
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating SpontaneousMutation", e);
+            log.error("Exception ocurred creating a TargetedModification", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -114,7 +117,7 @@ public final class TargetedModificationAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.trace("Exiting edit");
+        log.info("< TargetedModificationAction> Exiting edit");
 
         return mapping.findForward(theForward);
     }
@@ -132,7 +135,7 @@ public final class TargetedModificationAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering save");
+        log.info("<TargetedModificationAction> Entering save");
 
         // Create a form to edit
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
@@ -193,7 +196,7 @@ public final class TargetedModificationAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.trace("Exiting save");
+        log.info("<TargetedModificationAction> Exiting save");
         return mapping.findForward(theForward);
     }
 }
