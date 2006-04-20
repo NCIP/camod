@@ -45,7 +45,7 @@
 	      cascade="all-delete-orphan"
 		sort="natural">
             <key column="genetic_alteration_id"/>
-            <one-to-many class="SpontaneousMutation"/>
+            <one-to-many class="GeneticAlteration"/>
         </set>        
         
         <!-- mutationIdentifier (many-to-one unidirectional) -->

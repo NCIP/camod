@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.9 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.10 2006-04-20 18:12:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -12,29 +15,36 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SpontaneousMutationManagerImpl extends BaseManager implements SpontaneousMutationManager {
+public class SpontaneousMutationManagerImpl extends BaseManager implements SpontaneousMutationManager
+{
 
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In SpontaneousMutationManagerImpl.getAll");
         return super.getAll(SpontaneousMutation.class);
     }
 
-    public SpontaneousMutation get(String id) throws Exception {
+    public SpontaneousMutation get(String id) throws Exception
+    {
         log.trace("In SpontaneousMutationManagerImpl.get");
         return (SpontaneousMutation) super.get(id, SpontaneousMutation.class);
     }
 
-    public void save(SpontaneousMutation SpontaneousMutation) throws Exception {
+    public void save(SpontaneousMutation SpontaneousMutation) throws Exception
+    {
         log.trace("In SpontaneousMutationManagerImpl.save");
         super.save(SpontaneousMutation);
     }
 
-    public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+    public void remove(String id,
+                       AnimalModel inAnimalModel) throws Exception
+    {
         inAnimalModel.getSpontaneousMutationCollection().remove(get(id));
         super.save(inAnimalModel);
     }
 
-    public SpontaneousMutation create(SpontaneousMutationData inSpontaneousMutationData) throws Exception {
+    public SpontaneousMutation create(SpontaneousMutationData inSpontaneousMutationData) throws Exception
+    {
 
         log.trace("Entering SpontaneousMutationManagerImpl.create");
 
@@ -47,8 +57,9 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         return theSpontaneousMutation;
     }
 
-    public void update(SpontaneousMutationData inSpontaneousMutationData, SpontaneousMutation inSpontaneousMutation)
-            throws Exception {
+    public void update(SpontaneousMutationData inSpontaneousMutationData,
+                       SpontaneousMutation inSpontaneousMutation) throws Exception
+    {
 
         log.trace("Entering SpontaneousMutationManagerImpl.update");
         log.debug("Updating SpontaneousMutationForm: " + inSpontaneousMutation.getId());
@@ -61,35 +72,43 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
     }
 
     private void populateSpontaneousMutation(SpontaneousMutationData inSpontaneousMutationData,
-            SpontaneousMutation inSpontaneousMutation) throws Exception {
+                                             SpontaneousMutation inSpontaneousMutation) throws Exception
+    {
 
         log.trace("Entering populateSpontaneousMutation");
         //Name
         inSpontaneousMutation.setName(inSpontaneousMutationData.getName());
-        
+
         //Comment
         inSpontaneousMutation.setComments(inSpontaneousMutationData.getComments());
-        
+
         // GeneID
         inSpontaneousMutation.setGeneId(inSpontaneousMutationData.getGeneId());
 
-        Set geneticSet = inSpontaneousMutation.getGeneticAlterationCollection();
-        Iterator it = geneticSet.iterator();
-        System.out.println( "Testing");
-        
-        while(it.hasNext()){
-          if( inSpontaneousMutationData.getObservation() != null && ! inSpontaneousMutationData.getObservation().equals( "" ) ) 
-          {
-                GeneticAlteration inGeneticAlteration = (GeneticAlteration) it.next();
+        // GeneticAlteration (Observation and Method of Observation
+        List<GeneticAlteration> geneticList = new ArrayList<GeneticAlteration>(inSpontaneousMutation.getGeneticAlterationCollection());
+
+        System.out.println("Testing");
+
+        if (geneticList.size() > 0)
+        {
+            if (inSpontaneousMutationData.getObservation() != null && !inSpontaneousMutationData.getObservation().equals(""))
+            {
+                GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
                 inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
                 inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
-           } else {
-                geneticSet.remove(0);
-           }                   
- 
-        
-        if (inSpontaneousMutationData.getObservation() != null) {
-                if (!inSpontaneousMutationData.getObservation().equals("")) {
+            }
+            else
+            {
+                geneticList.remove(0);
+            }
+        }
+        else
+        {
+            if (inSpontaneousMutationData.getObservation() != null)
+            {
+                if (!inSpontaneousMutationData.getObservation().equals(""))
+                {
                     GeneticAlteration inGeneticAlteration = new GeneticAlteration();
                     inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
                     inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
@@ -97,51 +116,31 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
                 }
             }
         }
-       
-        
-        /* old code
-        if (geneticList.size() > 0) {
-        	if( inSpontaneousMutationData.getObservation() != null && ! inSpontaneousMutationData.getObservation().equals( "" ) ) {
-		        GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-		        inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
-		        inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
-    		} else {
-    			geneticList.remove(0);
-    		}        			
-        } else {
-            if (inSpontaneousMutationData.getObservation() != null) {
-                if (!inSpontaneousMutationData.getObservation().equals("")) {
-                    GeneticAlteration inGeneticAlteration = new GeneticAlteration();
-                    inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
-                    inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
-                    inSpontaneousMutation.addGeneticAlteration(inGeneticAlteration);
-                }
-            } 
-            
-          }  */
 
-        
+        // MGI Number
+        // Check for exisiting MutationIdentifier
+        MutationIdentifier inMutationIdentifier = null;
+        if (inSpontaneousMutation.getMutationIdentifier() != null)
+            inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
+        else
+            inMutationIdentifier = new MutationIdentifier();
 
-		// MGI Number
-		// Check for exisiting MutationIdentifier
-		MutationIdentifier inMutationIdentifier = null;
-		if (inSpontaneousMutation.getMutationIdentifier() != null)
-			inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
-		else
-			inMutationIdentifier = new MutationIdentifier();
+        if (inSpontaneousMutationData.getMgiNumber() == null || inSpontaneousMutationData.getMgiNumber().equals(""))
+        {
+            inSpontaneousMutation.setMutationIdentifier(null);
+        }
+        else
+        {
+            String strMGINumber = inSpontaneousMutationData.getMgiNumber().trim();
+            Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
+            Matcher m = p.matcher(strMGINumber);
+            if (m.matches() && strMGINumber != null && !strMGINumber.equals(""))
+            {
+                inMutationIdentifier.setMgiNumber(strMGINumber);
+                inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+            }
+        }
 
-		if ( inSpontaneousMutationData.getMgiNumber() == null || inSpontaneousMutationData.getMgiNumber().equals( "" ))	{
-			inSpontaneousMutation.setMutationIdentifier( null );
-		} else {
-			String strMGINumber = inSpontaneousMutationData.getMgiNumber().trim();
-			Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
-			Matcher m = p.matcher(strMGINumber);
-			if (m.matches() && strMGINumber != null && !strMGINumber.equals("")) {
-				inMutationIdentifier.setMgiNumber(strMGINumber);
-				inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
-			}
-		}
-		
         log.trace("Exiting populateSpontaneousMutation");
     }
 }
