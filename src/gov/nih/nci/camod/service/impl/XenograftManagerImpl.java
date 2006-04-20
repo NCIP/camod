@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.24 2006-04-19 17:38:26 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.25 2006-04-20 18:11:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/04/19 17:38:26  pandyas
+ * Removed TODO text
+ *
  * Revision 1.23  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -301,8 +304,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         // other option selected
         if (inXenograftData.getDonorEthinicityStrain().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            // set the Name to 'Other' then save strain and species, send e-mail
-            theNewStrain.setName(Constants.Dropdowns.OTHER_OPTION);
+            // Object is returned with uncontrolled vocab set, do not save 'Other' in DB, send e-mail
             inXenograft.setStrain(theNewStrain);
             inXenograft.setDonorSpecies(theNewStrain.getSpecies());           
             

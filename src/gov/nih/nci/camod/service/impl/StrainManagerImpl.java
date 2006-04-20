@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StrainManagerImpl.java,v 1.2 2006-04-19 17:38:26 pandyas Exp $
+ * $Id: StrainManagerImpl.java,v 1.3 2006-04-20 18:11:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/19 17:38:26  pandyas
+ * Removed TODO text
+ *
  * Revision 1.1  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -25,13 +28,15 @@ import java.util.*;
 public class StrainManagerImpl extends BaseManager implements StrainManager
 {
 
-    public List getAll() throws Exception {
+    public List getAll() throws Exception
+    {
         log.trace("In StrainManagerImpl.getAll");
         return super.getAll(Strain.class);
     }
-    
 
-    public Strain get(String id) throws Exception {
+
+    public Strain get(String id) throws Exception
+    {
         log.trace("In StrainManagerImpl.get");
         log.debug("Looking for Strain with id: " + id);
         return (Strain) super.get(id, Strain.class);
@@ -84,46 +89,62 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
         }
         return strain;
     }
-    
-    public Strain getOrCreate(String inStrainName, String inOtherStrainName, String inSpecies) 
-    throws Exception {
+
+    public Strain getOrCreate(String inStrainName,
+                              String inOtherStrainName,
+                              String inSpecies) throws Exception
+    {
 
         log.info("<StrainManagerImpl> Entering getOrCreate");
 
         // need species_id to get correct strain - works for 'Not specified'
         Species selectedSpecies = SpeciesManagerSingleton.instance().getByName(inSpecies);
-        
+
         Strain theQBEStrain = new Strain();
         theQBEStrain.setSpecies(selectedSpecies);
 
         // If Other is selected, look for a match to the uncontrolled vocab
         // create new one either way if not found
-        if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION)) {
+        if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION))
+        {
             theQBEStrain.setName(inStrainName);
-        } else {
+        }
+        else
+        {
             theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
         }
 
         Strain theStrain = null;
-        try {
+        try
+        {
             List theList = Search.query(theQBEStrain);
-            
+
             // Does exist - get object
-            if (theList != null && theList.size() > 0) {
+            if (theList != null && theList.size() > 0)
+            {
                 theStrain = (Strain) theList.get(0);
             }
-            // Doesn't exist, create one.  Set name and otherName and return object
-            else {
-               log.info("<StrainManagerImpl> No matching strains. Create new one");
-               theStrain = theQBEStrain;
-               theStrain.setName(inStrainName);
-               theStrain.setNameUnctrlVocab(inOtherStrainName);
+            // Doesn't exist. Create object with either name or otherName set, don't save the word 'Other'
+            else
+            {
+                log.info("<StrainManagerImpl> No matching strains. Create new one");
+                theStrain = theQBEStrain;
+                if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION))
+                {
+                    theQBEStrain.setName(inStrainName);
+                }
+                else
+                {
+                    theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
+                }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Error querying for matching strain object.  Creating new one.", e);
             theStrain = theQBEStrain;
         }
 
         return theStrain;
-    }    
+    }
 }

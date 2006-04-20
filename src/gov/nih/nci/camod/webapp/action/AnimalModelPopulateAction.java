@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.17 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.18 2006-04-20 18:11:16 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -75,6 +78,7 @@ public class AnimalModelPopulateAction extends BaseAction
             modelCharForm.setIsToolMouse("no");
         }
 
+        // Set to null as default to model the code for PI - follow same reason
         if (am.getStrain().getSpecies().getScientificName() != null)
         {
             log.info("<populate method> Species is: " + am.getStrain().getSpecies().getScientificName());
@@ -85,9 +89,18 @@ public class AnimalModelPopulateAction extends BaseAction
             modelCharForm.setScientificName(null);
         }
 
-        log.info("<populate method> Strain is: " + am.getStrain());
-        modelCharForm.setEthinicityStrain(am.getStrain().getName());
-        modelCharForm.setOtherEthnicityStrain(am.getStrain().getNameUnctrlVocab());
+        //If uncontrolledVocab is filled in 'Other' was selected, Set 'Other' explicitly
+        if (am.getStrain().getNameUnctrlVocab() != null)
+        {
+            modelCharForm.setEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
+            modelCharForm.setOtherEthnicityStrain(am.getStrain().getNameUnctrlVocab());
+             
+        }
+        // If uncontrolledVocab is empty, just get strain field
+        else
+        {
+            modelCharForm.setEthinicityStrain(am.getStrain().getName());
+        }
 
         modelCharForm.setExperimentDesign(am.getExperimentDesign());
         if (am.getPhenotype().getSexDistribution() != null)

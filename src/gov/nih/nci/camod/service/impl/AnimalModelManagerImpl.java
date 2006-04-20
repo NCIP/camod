@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.66 2006-04-19 17:39:57 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.67 2006-04-20 18:11:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.66  2006/04/19 17:39:57  pandyas
+ * Cleaned up e-mail - removed save of 'Other' to DB
+ *
  * Revision 1.65  2006/04/18 16:19:32  pandyas
  * modified debug command from debug to info to display messages
  *
@@ -584,10 +587,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                                                             inModelCharacteristicsData.getOtherEthnicityStrain(),
                                                                             inModelCharacteristicsData.getScientificName());
 
+        log.info("\n theNewStrain: " + theNewStrain.getName() + ": " + theNewStrain.getNameUnctrlVocab());
         // other option selected
         if (inModelCharacteristicsData.getEthinicityStrain().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            // Do not set the Name to 'Other' in the DB, send e-mail
+            // Object is returned with uncontrolled vocab set, do not save 'Other' in DB, send e-mail
             inAnimalModel.setStrain(theNewStrain);
             sendEmail(inAnimalModel, inModelCharacteristicsData.getOtherEthnicityStrain(), "EthinicityStrain");
         }

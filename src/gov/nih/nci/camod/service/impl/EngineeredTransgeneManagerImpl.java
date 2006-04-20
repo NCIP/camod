@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.24 2006-04-19 17:40:12 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.25 2006-04-20 18:11:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/04/19 17:40:12  pandyas
+ * Removed TODO text
+ *
  * Revision 1.23  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -211,13 +214,13 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         if (inEngineeredTransgeneData.getScientificName() != null && inEngineeredTransgeneData.getScientificName().length() > 0)
         {
             // Create/reuse or create the species object
-            Species theSpecies = SpeciesManagerSingleton.instance().getOrCreate(inEngineeredTransgeneData.getScientificName());
+            Species theSpecies = SpeciesManagerSingleton.instance().getOrCreate(inEngineeredTransgeneData.getScientificName(),
+                                                                                inEngineeredTransgeneData.getOtherScientificName());
 
             //Species is other, add 'other' to commonName field and send e-mail
             if (!inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION))
             {
-                // Sima TODO:  make sure this is consistent - do not add other, but put this in commonName field
-                theSpecies.setCommonName(Constants.Dropdowns.OTHER_OPTION);
+                // Object is returned with uncontrolled vocab set, do not save 'Other' in DB, e-mail
                 inEngineeredTransgene.setSpecies(theSpecies);
                 sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene ScientificName");                
             }
@@ -389,12 +392,12 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             if (theSpeciesName != null && theSpeciesName.length() > 0)
             {
 
-                Species theNewSpecies = SpeciesManagerSingleton.instance().getOrCreate(theSpeciesName);
+                Species theNewSpecies = SpeciesManagerSingleton.instance().getOrCreate(theSpeciesName, 
+                                                                                       theOtherSpeciesName);
                 if (theSpeciesName.equals(Constants.Dropdowns.OTHER_OPTION))
                 {
-                    //Species is other, set 'other' in commonName field and send e-mail
-                    theNewSpecies.setCommonName(Constants.Dropdowns.OTHER_OPTION);
-                    sendEmail(inAnimalModel, theOtherSpeciesName, inType + " ScientificName");
+                    //Object is returned with uncontrolled vocab set, do not save 'Other' in DB, e-mail
+                    sendEmail(inAnimalModel, theOtherSpeciesName, inType + "ScientificName");
                     theRegElement.setSpecies(theNewSpecies);
                 }
                 else

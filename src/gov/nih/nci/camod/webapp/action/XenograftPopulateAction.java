@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.21 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.22 2006-04-20 18:11:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.20  2005/12/12 17:33:37  georgeda
  * Defect #265, store host/origin species in correct places
  *
@@ -103,8 +106,18 @@ public class XenograftPopulateAction extends BaseAction
             // strain is required as of caMod 2.1, not before
             if (xeno.getStrain() != null)
             {
-                xenograftForm.setOtherDonorEthinicityStrain(xeno.getStrain().getNameUnctrlVocab());
-                xenograftForm.setDonorEthinicityStrain(xeno.getStrain().getName());
+                //If uncontrolledVocab is filled in 'Other' was selected, Set 'Other' explicitly
+                if (xeno.getStrain().getNameUnctrlVocab() != null)
+                {
+                    xenograftForm.setDonorEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
+                    xenograftForm.setOtherDonorEthinicityStrain(xeno.getStrain().getNameUnctrlVocab());
+
+                }
+                // If uncontrolledVocab is empty, just get strain field
+                else
+                {
+                    xenograftForm.setDonorEthinicityStrain(xeno.getStrain().getName());
+                }
             }
 
             // since we are always querying from concept code (save and edit),
@@ -241,7 +254,7 @@ public class XenograftPopulateAction extends BaseAction
         //request.setAttribute("aXenograftID", request.getParameter("aXenograftID"));
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getDonorScientificName());
-        // Must Reset both fields when new species is chosen
+        // Must Reset both fields when new species is chosen or edited
         xenograftForm.setDonorEthinicityStrain("");
         xenograftForm.setOtherDonorEthinicityStrain("");
 
