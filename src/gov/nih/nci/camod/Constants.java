@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.79 2006-04-17 19:15:36 pandyas Exp $
+ * $Id: Constants.java,v 1.80 2006-04-20 19:45:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.79  2006/04/17 19:15:36  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.78  2005/12/06 19:51:25  georgeda
  * Defect #255 - add SSL
  *
@@ -396,6 +399,8 @@ public class Constants {
         public static final String MODELSPECIES = "modelspecies";
 
         public static final String MODELSTRAIN = "modelstrain";
+        
+        public static final String OTHERMODELSTRAIN = "othermodelstrain";        
 
         public static final String CHEMICALCLASSESDROP = "ChemicalClasses.txt";
 
