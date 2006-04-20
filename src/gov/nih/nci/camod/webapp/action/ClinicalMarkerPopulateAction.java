@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerPopulateAction.java,v 1.4 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: ClinicalMarkerPopulateAction.java,v 1.5 2006-04-20 19:19:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.3  2005/11/07 19:14:14  pandyas
  * modified for clinical marker screen
  *
@@ -124,7 +127,7 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 			System.out.println( "<ClinicalMarkerPopulateAction dropdown> Entering void dropdown()" );
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
-			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CLINICALMARKERSDROP, "" );
+			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CLINICALMARKERSDROP, Constants.Dropdowns.ADD_BLANK );
 			
 			System.out.println( "<ClinicalMarkerPopulateAction dropdown> Exiting void dropdown()" );			
 	}	

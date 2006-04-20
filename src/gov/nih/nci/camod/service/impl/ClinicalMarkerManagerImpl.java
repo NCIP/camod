@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: ClinicalMarkerManagerImpl.java,v 1.5 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: ClinicalMarkerManagerImpl.java,v 1.6 2006-04-20 19:19:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.4  2005/11/09 00:17:16  georgeda
  * Fixed delete w/ constraints
  *
@@ -80,7 +83,15 @@ public class ClinicalMarkerManagerImpl extends BaseManager implements ClinicalMa
     {
         log.info("<ClinicalMarkerManagerImpl> Entering populateClinicalMarker");
 
-        inClinicalMarker.setName(inClinicalMarkerData.getName());
+        if (inClinicalMarkerData.getOtherName() != null)
+        {
+
+            inClinicalMarker.setNameUnctrlVocab(inClinicalMarkerData.getOtherName());
+        }
+        else
+        {
+            inClinicalMarker.setName(inClinicalMarkerData.getName());
+        }
 
         if (inClinicalMarkerData.getValue() != null && inClinicalMarkerData.getValue().length() > 0)
         {
