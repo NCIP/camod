@@ -248,15 +248,10 @@ function removeSelected(selectedGroup, group)
  * on selection of isRandom
  ****************************/	
 function chkIntegration() {
-	    disableField(document.forms[0].isRandom, document.forms[0].locationOfIntegration);
-	}
-
-function disableField(vocab, otherVocab) {
-	
-	if( vocab.value == 'No' ) {
-		enableField(otherVocab);
+	if( document.forms[0].isRandom[0].checked == false) {
+		enableField(document.forms[0].locationOfIntegration);
 	}
 	else {
-	    disableField(otherVocab);
+	    disableField(document.forms[0].locationOfIntegration);
 	}
-}			
+}

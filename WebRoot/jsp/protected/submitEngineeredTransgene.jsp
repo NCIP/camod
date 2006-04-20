@@ -360,7 +360,6 @@
 
 <SCRIPT>
 chkConditional();
-chkIntegration();
 chkName();
 chkOther_t1();
 chkOther_t2();

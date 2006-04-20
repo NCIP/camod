@@ -31,21 +31,6 @@
 
 <html:form action="<%= actionName %>" focus="locationOfIntegration" enctype="multipart/form-data">
 
-<SCRIPT LANGUAGE="JavaScript">
-	
-
-	function chkIntegration(control) {
-	
-	    if (document.forms[0].locationOfIntegration[1].checked == true) {
-	        enableField(document.forms[0].otherLocationOfIntegration);
-	    }
-        else {
-            disableField(document.forms[0].otherLocationOfIntegration);
-        }
-	}
-	
-</SCRIPT>
-
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">

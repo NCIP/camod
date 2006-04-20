@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.21 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.22 2006-04-20 14:58:51 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -93,8 +96,8 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
     {
         log.trace("Entering populateGenomicSegment");
 
-        if (inGenomicSegmentData.getIsRandom().equals("Targeted")) {
-            
+        if (inGenomicSegmentData.getIsRandom().equals("no")) {
+            inGenomicSegment.setIsRandom(false);
             inGenomicSegment.setLocationOfIntegration(inGenomicSegmentData.getLocationOfIntegration());
         } else {
             inGenomicSegment.setIsRandom(true);
