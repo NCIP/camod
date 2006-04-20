@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.9 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.10 2006-04-20 19:18:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.8  2006/01/18 14:24:24  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -210,12 +213,22 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
 
         Histopathology theAssociatedMetastasis = new Histopathology();
         populateHistopathology(inAssociatedMetastasisData, theAssociatedMetastasis);
-        //populateAssociatedMetastasis(inAssociatedMetastasisData, theAssociatedMetastasis);        
 
         inHistopathology.addMetastasis(theAssociatedMetastasis);
         save(inHistopathology);
         log.info("Exiting HistopathologyManagerImpl.createAssociatedMetastasis");
     }
+    
+    public void addAssociatedMetastasis(AnimalModel inAnimalModel,
+                                        Histopathology inHistopathology,
+                                        AssociatedMetastasisData inAssociatedMetastasisData) throws Exception
+    {
+
+        log.info("Entering HistopathologyManagerImpl.addAssociatedMetastasis");
+        HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData, inHistopathology);
+
+        log.info("Exiting HistopathologyManagerImpl.addHistopathology");
+    }    
 
     public void updateAssociatedMetastasis(AssociatedMetastasisData inAssociatedMetastasisData,
                                            Histopathology inAssociatedMetastasis) throws Exception

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.67 2006-04-20 18:11:31 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.68 2006-04-20 19:18:53 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.67  2006/04/20 18:11:31  pandyas
+ * Cleaned up Species or Strain save of Other in DB
+ *
  * Revision 1.66  2006/04/19 17:39:57  pandyas
  * Cleaned up e-mail - removed save of 'Other' to DB
  *
@@ -1094,19 +1097,6 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         inAnimalModel.addHistopathology(theHistopathology);
 
         save(inAnimalModel);
-
-        log.info("Exiting AnimalModelManagerImpl.addHistopathology");
-    }
-
-    public void addAssociatedMetastasis(AnimalModel inAnimalModel,
-                                        Histopathology inHistopathology,
-                                        AssociatedMetastasisData inAssociatedMetastasisData) throws Exception
-    {
-
-        log.info("Entering AnimalModelManagerImpl.addAssociatedMetastasis_1");
-
-        HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData, inHistopathology);
-        //save(inAnimalModel);
 
         log.info("Exiting AnimalModelManagerImpl.addHistopathology");
     }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.34 2006-04-17 19:13:16 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.35 2006-04-20 19:18:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2006/04/17 19:13:16  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.33  2005/11/14 14:17:17  georgeda
  * Cleanup
  *
@@ -78,6 +81,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2006/04/17 19:13:16  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.33  2005/11/14 14:17:17  georgeda
  * Cleanup
  *
@@ -245,8 +251,6 @@ public interface AnimalModelManager {
     public void addPublication( AnimalModel inAnimalModel, PublicationData inPublicationData) throws Exception;
     
     public void addHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData) throws Exception;
-    
-    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception;    
     
     public void addClinicalMarker(AnimalModel inAnimalModel, Histopathology inHistopathology, ClinicalMarkerData inClinicalMarkerData) throws Exception;   
    

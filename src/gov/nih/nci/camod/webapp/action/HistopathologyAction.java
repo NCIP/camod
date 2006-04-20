@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.10 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.11 2006-04-20 19:19:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.9  2005/11/09 00:17:26  georgeda
  * Fixed delete w/ constraints
  *
@@ -324,15 +327,15 @@ public class HistopathologyAction extends BaseAction {
 
         try {
 
-            HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
+            HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
 
             // retrieve model and update w/ new values
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
             AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-            Histopathology theParentHistopathology = histopathologyManager.get(aHistopathologyID);
+            Histopathology theParentHistopathology = theHistopathologyManager.get(aHistopathologyID);
 
-            theAnimalModelManager.addAssociatedMetastasis(theAnimalModel, theParentHistopathology, assocMetastasisForm);
+            theHistopathologyManager.addAssociatedMetastasis(theAnimalModel, theParentHistopathology, assocMetastasisForm);
 
             log.info("New metastasis created");
 

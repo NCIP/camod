@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManager.java,v 1.4 2005-11-09 00:17:06 georgeda Exp $
+ * $Id: HistopathologyManager.java,v 1.5 2006-04-20 19:18:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/11/09 00:17:06  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.3  2005/11/07 19:15:33  pandyas
  * modified for clinical marker screen
  *
@@ -40,7 +43,9 @@ public interface HistopathologyManager {
     
     public void updateAssociatedMetastasis(AssociatedMetastasisData inAssociatedMetastasisData, Histopathology inAssociatedMetastasis) throws Exception;    
 
-    public void remove(String id, AnimalModel inAnimalModel) throws Exception; 
+    public void remove(String id, AnimalModel inAnimalModel) throws Exception;
+    
+    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception;      
     
     public void removeAssociatedMetastasis(String id, Histopathology inHistopathology) throws Exception; 
     
