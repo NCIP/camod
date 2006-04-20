@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.38 2006-04-19 18:40:53 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.39 2006-04-20 14:59:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2006/04/19 18:40:53  georgeda
+ * Fixed the keyword search issue
+ *
  * Revision 1.37  2006/04/19 13:31:47  georgeda
  * Fixed Taxon/TOC problem
  *
@@ -193,7 +196,7 @@ public class QueryManagerImpl extends BaseManager
         try
         {
             // Format the query
-            String theSQLQuery = "SELECT distinct ef.name " + "FROM environmental_factor ef " 
+            String theSQLQuery = "SELECT ef.name, ef.name_unctrl_vocab " + "FROM environmental_factor ef " 
             + "WHERE ef.type = ? " + "  AND ef.name IS NOT null " 
             + "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id " 
             + "     FROM carcinogen_exposure ce, abs_cancer_model am " 
@@ -207,30 +210,17 @@ public class QueryManagerImpl extends BaseManager
 
             while (theResultSet.next())
             {
-                theEnvFactors.add(theResultSet.getString(1));
-            }
-          
-            // Add any uncontrolled vocabs
-            theSQLQuery = "SELECT distinct ef.name_unctrl_vocab " 
-            + "FROM environmental_factor ef " 
-            + "WHERE ef.type = ? " 
-            + "  AND ef.name_unctrl_vocab IS NOT null " 
-            + "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id " 
-            + "     FROM carcinogen_exposure ce, abs_cancer_model am " 
-            + "       WHERE ef.environmental_factor_id = ce.environmental_factor_id " 
-            + "       AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved') ORDER BY ef.name_unctrl_vocab asc ";
-
-            theResultSet = Search.query(theSQLQuery, theParams);
-
-            while (theResultSet.next())
-            {
-                String theEnvFactor = theResultSet.getString(1);
-                if (!theEnvFactors.contains(theEnvFactor))
-                {
-                    theEnvFactors.add(theResultSet.getString(1));
+                String theName = theResultSet.getString(1);
+                String theUncontrolledName = theResultSet.getString(2);
+                
+                if (theName != null && theName.length() > 0 && !theEnvFactors.contains(theName)) {
+                    theEnvFactors.add(theName);
+                }
+                else if (theUncontrolledName != null && theUncontrolledName.length() > 0 && !theEnvFactors.contains(theUncontrolledName)) {
+                    theEnvFactors.add(theName);
                 }
             }
-
+          
             Collections.sort(theEnvFactors);
 
             log.info("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
