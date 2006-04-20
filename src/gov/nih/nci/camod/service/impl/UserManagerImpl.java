@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.18 2006-04-19 15:08:44 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.19 2006-04-20 19:09:26 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/04/19 15:08:44  georgeda
+ * Uncomment login checking
+ *
  * Revision 1.17  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -330,7 +333,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      */
     public boolean login(String inUsername, String inPassword, HttpServletRequest inRequest) {
 
-        boolean loginOk = true;
+        boolean loginOk = false;
         try {
 
             // Work around bug in CSM. Empty passwords pass
