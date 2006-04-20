@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModificationTypeManagerImpl.java,v 1.4 2006-04-20 14:06:40 pandyas Exp $
+ * $Id: ModificationTypeManagerImpl.java,v 1.5 2006-04-20 18:11:51 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/20 14:06:40  pandyas
+ * changed Modification Type to getOrCreate
+ *
  * Revision 1.3  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -66,39 +69,56 @@ public class ModificationTypeManagerImpl extends BaseManager implements Modifica
      * @return the ModificationType that matches the name or create a new object
      * @throws Exception 
      * 
-     */    
-    public ModificationType getOrCreate(String inName, String inOtherName) throws Exception {
+     */
+    public ModificationType getOrCreate(String inName,
+                                        String inOtherName) throws Exception
+    {
         log.info("<ModificationTypeImpl> Entering getOrCreate");
-        
+
         ModificationType theQBEModType = new ModificationType();
-        
+
         // If Other is selected, look for a match to the uncontrolled vocab
         // create new one either way if not found
-        if (inName != null && !inName.equals(Constants.Dropdowns.OTHER_OPTION)) {
+        if (inName != null && !inName.equals(Constants.Dropdowns.OTHER_OPTION))
+        {
             theQBEModType.setName(inName);
-        } else {
+        }
+        else
+        {
             theQBEModType.setNameUnctrlVocab(inOtherName);
-        }        
+        }
 
         ModificationType theModificationType = null;
-        try {
+        try
+        {
             List theList = Search.query(theQBEModType);
-            
+
             // Does exist. 
-            if (theList != null && theList.size() > 0) {
+            if (theList != null && theList.size() > 0)
+            {
                 theModificationType = (ModificationType) theList.get(0);
             }
-            // Doesn't exist, create one.  Set name and otherName and return object
-            else {
+            // Doesn't exist. Create object with either name or otherName set, don't save the word 'Other'
+            else
+            {
                 theModificationType = theQBEModType;
-                theModificationType.setName(inName);
-                theModificationType.setNameUnctrlVocab(inOtherName);
+                if (inName != null && !inName.equals(Constants.Dropdowns.OTHER_OPTION))
+                {
+                    theQBEModType.setName(inName);
+                }
+                else
+                {
+                    theQBEModType.setNameUnctrlVocab(inOtherName);
+                }
+
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Error querying for matching ModificationType object.  Creating new one.", e);
             theModificationType = theQBEModType;
         }
 
         return theModificationType;
-    }     
+    }
 }
