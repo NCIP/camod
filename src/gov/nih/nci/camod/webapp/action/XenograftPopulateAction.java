@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.22 2006-04-20 18:11:16 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.23 2006-04-20 19:46:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/04/20 18:11:16  pandyas
+ * Cleaned up Species or Strain save of Other in DB
+ *
  * Revision 1.21  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -205,13 +208,16 @@ public class XenograftPopulateAction extends BaseAction
 
         if (animalModel.getStrain() != null)
         {
-            request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getName());
+            // If the animal model has an 'Other' strain selected, display the otherName on the Xenograft screen
+            if (animalModel.getStrain().getNameUnctrlVocab() != null)
+            {
+                request.getSession().setAttribute(Constants.Dropdowns.OTHERMODELSTRAIN, animalModel.getStrain().getNameUnctrlVocab());
+            }
+            else
+            {
+                request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getName());
+            }
         }
-        else
-        {
-            request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getNameUnctrlVocab());
-        }
-
         // Set the Speceis drop drop for the Xenograft
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_OPTION);
 

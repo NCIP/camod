@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.38 2006-04-17 19:17:03 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.39 2006-04-20 19:46:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2006/04/17 19:17:03  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.37  2006/03/31 13:47:17  georgeda
  * Changed the EVSTree call to work w/ new servers
  *
@@ -282,7 +285,7 @@
 		<td class="formField">
 			<c:choose>
 				<c:when test="${empty modelstrain}">
-					<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>						
+					<c:out value="${modelspecies}"/> / <c:out value="${othermodelstrain}"/>						
 				</c:when>
 				<c:otherwise>
 					<c:out value="${modelspecies}"/> / <c:out value="${modelstrain}"/>
