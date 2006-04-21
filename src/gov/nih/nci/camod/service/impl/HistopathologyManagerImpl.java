@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.10 2006-04-20 19:18:53 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.11 2006-04-21 13:40:03 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/20 19:18:53  pandyas
+ * Moved save Assoc Met from AnimalModel to the Histopathology
+ *
  * Revision 1.9  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -43,7 +46,6 @@ import gov.nih.nci.camod.domain.GeneticAlteration;
 import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.service.HistopathologyManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.webapp.form.AssociatedMetastasisData;
 import gov.nih.nci.camod.webapp.form.HistopathologyData;
 
@@ -113,7 +115,7 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
 
         // Populate w/ the new values and save
         populateHistopathology(inHistopathologyData, inHistopathology);
-        
+
         save(inHistopathology);
 
         log.info("Exiting HistopathologyManagerImpl.updateHistopathology");
@@ -125,32 +127,17 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         log.info("<HistopathologyManagerImpl> Entering populateHistopathology");
 
         log.info("inHistopathology.getOrgan()" + inHistopathology.getOrgan());
-
-        // every submission - lookup organ or create one new
-        Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(inHistopathologyData.getOrganTissueCode());
-
         log.info("inHistopathologyData.getOrganTissueCode():" + inHistopathologyData.getOrganTissueCode());
-
-        //theOrgan.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getOrganTissueCode()));
-        theNewOrgan.setName(inHistopathologyData.getOrganTissueName());
+        
+        // every submission - lookup organ or create one new
+        Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(inHistopathologyData.getOrganTissueCode(),
+                                                                         inHistopathologyData.getOrganTissueName());
         inHistopathology.setOrgan(theNewOrgan);
-
 
         // every submission - lookup disease or create one new
         Disease theNewDisease = DiseaseManagerSingleton.instance().getOrCreate(inHistopathologyData.getDiagnosisCode(),
                                                                                inHistopathologyData.getDiagnosisName());
-
-        // Hack to handle user entered tumor classifications
-        if (inHistopathologyData.getDiagnosisCode().indexOf("000000") != -1)
-        {
-            theNewDisease.setName(inHistopathologyData.getDiagnosisName());
-            inHistopathology.setDisease(theNewDisease);
-        }
-        else
-        {
-            theNewDisease.setName(EvsTreeUtil.getEVSPreferedDescription(inHistopathologyData.getDiagnosisCode()));
-            inHistopathology.setDisease(theNewDisease);
-        }
+        inHistopathology.setDisease(theNewDisease);
 
         log.info("Saving: Histopathology object attributes ");
         inHistopathology.setComments(inHistopathologyData.getComments());
@@ -218,7 +205,7 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         save(inHistopathology);
         log.info("Exiting HistopathologyManagerImpl.createAssociatedMetastasis");
     }
-    
+
     public void addAssociatedMetastasis(AnimalModel inAnimalModel,
                                         Histopathology inHistopathology,
                                         AssociatedMetastasisData inAssociatedMetastasisData) throws Exception
@@ -228,7 +215,7 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
         HistopathologyManagerSingleton.instance().createAssociatedMetastasis(inAssociatedMetastasisData, inHistopathology);
 
         log.info("Exiting HistopathologyManagerImpl.addHistopathology");
-    }    
+    }
 
     public void updateAssociatedMetastasis(AssociatedMetastasisData inAssociatedMetastasisData,
                                            Histopathology inAssociatedMetastasis) throws Exception
@@ -243,11 +230,4 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
 
         log.info("Exiting HistopathologyManagerImpl.updateAssociatedMetastasis");
     }
-/*   
-    private void populateAssociatedMetastasis(inAssociatedMetastasisData, 
-                                              theAssociatedMetastasis) throws Exception
-    {
-        
-    }
-*/
 }

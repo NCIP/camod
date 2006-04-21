@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: OrganManagerImpl.java,v 1.8 2006-04-19 17:38:26 pandyas Exp $
+ * $Id: OrganManagerImpl.java,v 1.9 2006-04-21 13:41:50 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/19 17:38:26  pandyas
+ * Removed TODO text
+ *
  * Revision 1.7  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -21,6 +24,7 @@ package gov.nih.nci.camod.service.impl;
 
 import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.service.OrganManager;
+import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
@@ -113,32 +117,52 @@ public class OrganManagerImpl extends BaseManager implements OrganManager
         return organ;
     }
 
-    public Organ getOrCreate(String inConceptCode) throws Exception {
+    /**
+     * Get or create a specific organ
+     * 
+     * @param inConceptCode
+     *            the concept code for an organ
+     * @param inOrganName
+     *            the name of the organ; used if we can't get the preferred desc. from EVS
+     * 
+     * @return the matching Organ, or create a new one if nothing matched
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public Organ getOrCreate(String inConceptCode,
+                             String inOrganName) throws Exception
+    {
         log.info("<OrganManagerImpl> Entering getOrCreate");
-        
+
         Organ theQBEOrgan = new Organ();
         theQBEOrgan.setConceptCode(inConceptCode);
 
         Organ theOrgan = null;
-        try {
-            List theList = Search.query(theQBEOrgan);
-            
-            // Doesn't exist. Use the QBE organ since it has the same data
-            if (theList != null && theList.size() > 0) {
-                theOrgan = (Organ) theList.get(0);
-            }
-            else {
-                theOrgan = theQBEOrgan;
-                //Sima TODO:  setName too
-                theOrgan.setConceptCode(inConceptCode);
-            }
-        } catch (Exception e) {
-            log.error("Error querying for matching organ object.", e);
+
+        List theList = Search.query(theQBEOrgan);
+
+        // Doesn't exist. Use the QBE organ since it has the same data
+        if (theList != null && theList.size() > 0)
+        {
+            theOrgan = (Organ) theList.get(0);
+        }
+        else
+        {
             theOrgan = theQBEOrgan;
+            String thePreferredDiscription = EvsTreeUtil.getEVSPreferedDescription(inConceptCode);
+
+            if (thePreferredDiscription != null && thePreferredDiscription.length() > 0)
+            {
+                theOrgan.setName(thePreferredDiscription);
+            }
+            else
+            {
+                theOrgan.setName(inOrganName);
+            }
             theOrgan.setConceptCode(inConceptCode);
         }
 
         return theOrgan;
-    }     
-
+    }
 }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: OrganManager.java,v 1.4 2006-04-17 19:13:16 pandyas Exp $
+ * $Id: OrganManager.java,v 1.5 2006-04-21 13:38:40 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:13:16  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.3  2005/11/07 20:43:29  pandyas
  * modified getAll(), save(), rmove() and/or getByName (if applicable) to the current signature that throws exceptions
  *
@@ -25,6 +28,6 @@ public interface OrganManager
 
     public Organ getByName(String inType) throws Exception;
     
-    public Organ getOrCreate(String inConceptCode) throws Exception;    
+    public Organ getOrCreate(String inConceptCode, String inOrganName) throws Exception;    
 
 }
