@@ -46,11 +46,11 @@
 			<td class="GreyBox"><b>Donor Strain</b></td>
 			<td class="GreyBoxRightEnd">
 				<c:choose>
-					<c:when test="${empty xt.strain.ethnicityStrain}">
-						<c:out value="${xt.strain.ethnicityStrainUnctrlVocab}"/>
+					<c:when test="${empty xt.strain.name}">
+						<c:out value="${xt.strain.nameUnctrlVocab}"/>
 					</c:when>
 					<c:otherwise>
-						<c:out value="${xt.strain.ethnicityStrain}"/>
+						<c:out value="${xt.strain.name}"/>
 					</c:otherwise>
 				</c:choose>&nbsp;
             </td>
@@ -125,7 +125,12 @@
 			<td class="WhiteBoxRightEnd">
 				<c:out value="${mdl.strain.species.scientificName}"/>&nbsp;
 				<c:if test="${not empty mdl.strain.species.abbreviation}">(<c:out value="${mdl.strain.species.abbreviation}"/>)</c:if>&nbsp;/&nbsp;
-				<c:out value="${mdl.strain.name}"/>
+				<c:if test="${not empty mdl.strain.name}">
+				    <c:out value="${mdl.strain.name}"/>
+				</c:if>
+				<c:if test="${not empty mdl.strain.nameUnctrlVocab}">
+				    <c:out value="${mdl.strain.nameUnctrlVocab}"/>
+				</c:if>
 			</td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
