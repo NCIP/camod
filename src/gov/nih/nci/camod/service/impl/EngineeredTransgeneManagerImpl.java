@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.25 2006-04-20 18:11:30 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.26 2006-04-21 18:27:21 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/04/20 18:11:30  pandyas
+ * Cleaned up Species or Strain save of Other in DB
+ *
  * Revision 1.24  2006/04/19 17:40:12  pandyas
  * Removed TODO text
  *
@@ -29,20 +32,25 @@ import gov.nih.nci.camod.domain.RegulatoryElementType;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.service.EngineeredTransgeneManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
 import gov.nih.nci.camod.webapp.form.ImageForm;
-import java.util.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 
 public class EngineeredTransgeneManagerImpl extends BaseManager implements EngineeredTransgeneManager
 {
-
     public List getAll() throws Exception
     {
         log.info("In EngineeredTransgeneManagerImpl.getAll");
@@ -72,7 +80,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
     public Transgene create(EngineeredTransgeneData inEngineeredTransgeneData,
                             HttpServletRequest request) throws Exception
     {
-
         log.info("Entering EngineeredTransgeneManagerImpl.create");
 
         Transgene inEngineeredTransgene = new Transgene();
@@ -87,7 +94,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                        Transgene inEngineeredTransgene,
                        HttpServletRequest request) throws Exception
     {
-
         log.info("Entering EngineeredTransgeneManagerImpl.update");
         log.debug("Updating EngineeredTransgeneForm: " + inEngineeredTransgene.getId());
 
@@ -101,7 +107,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
     public void createAssocExpression(AssociatedExpressionData inAssociatedExpressionData,
                                       EngineeredGene inEngineeredTransgene) throws Exception
     {
-
         log.info("Entering EngineeredTransgeneManagerImpl.createAssocExpression");
 
         populateAssocExpression(inAssociatedExpressionData, inEngineeredTransgene);
@@ -112,50 +117,24 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
     public void updateAssociatedExpression(AssociatedExpressionData inAssociatedExpressionData,
                                            EngineeredGene inEngineeredTransgene) throws Exception
     {
-
         log.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
 
-        Set expFeatureSet = inEngineeredTransgene.getExpressionFeatureCollection();
-        Iterator it = expFeatureSet.iterator();
+        Set<ExpressionFeature> theExpFeatures = inEngineeredTransgene.getExpressionFeatureCollection();
 
-        while(it.hasNext()){
-            ExpressionFeature expFeature = (ExpressionFeature)it.next();
-            if (expFeature.getId().toString().equals(inAssociatedExpressionData.getEngineeredGeneID()))
-            {
-
-                String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inAssociatedExpressionData.getOrganTissueCode());
-                Organ organ = expFeature.getOrgan();
-                organ.setName(preferedOrganName);
-                organ.setConceptCode(inAssociatedExpressionData.getOrganTissueCode());
-
-                ExpressionLevelDesc expLevelDesc = ExpressionLevelDescManagerSingleton.instance().getByName(
-                                                                                                            inAssociatedExpressionData.getExpressionLevel());
-
-                expFeature.setExpressionLevelDesc(expLevelDesc);
-                expFeature.setOrgan(organ);
-            }
-        }        
-        /*
-        for (int i = 0; i < expFeatureList.size(); i++)
+        for (ExpressionFeature theExpFeature : theExpFeatures)
         {
-            ExpressionFeature expFeature = (ExpressionFeature) expFeatureList.get(i);
-
-            if (expFeature.getId().toString().equals(inAssociatedExpressionData.getEngineeredGeneID()))
+            if (theExpFeature.getId().toString().equals(inAssociatedExpressionData.getEngineeredGeneID()))
             {
-
-                String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inAssociatedExpressionData.getOrganTissueCode());
-                Organ organ = expFeature.getOrgan();
-                organ.setName(preferedOrganName);
-                organ.setConceptCode(inAssociatedExpressionData.getOrganTissueCode());
+                Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inAssociatedExpressionData.getOrganTissueCode(),
+                                                                              inAssociatedExpressionData.getOrganTissueCode());
 
                 ExpressionLevelDesc expLevelDesc = ExpressionLevelDescManagerSingleton.instance().getByName(
                                                                                                             inAssociatedExpressionData.getExpressionLevel());
-
-                expFeature.setExpressionLevelDesc(expLevelDesc);
-                expFeature.setOrgan(organ);
+                theExpFeature.setExpressionLevelDesc(expLevelDesc);
+                theExpFeature.setOrgan(theOrgan);
             }
         }
-        */
+
         save(inEngineeredTransgene);
 
         log.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
@@ -164,21 +143,18 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
     private void populateAssocExpression(AssociatedExpressionData inAssociatedExpressionData,
                                          EngineeredGene inEngineeredTransgene) throws Exception
     {
-
         log.info("Entering populateAssocExpression");
 
-        ExpressionFeature expFeature = new ExpressionFeature();
+        ExpressionFeature theExpFeature = new ExpressionFeature();
 
-        String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inAssociatedExpressionData.getOrganTissueCode());
-        expFeature.setOrgan(new Organ());
-        expFeature.getOrgan().setName(preferedOrganName);
-        expFeature.getOrgan().setConceptCode(inAssociatedExpressionData.getOrganTissueCode());
+        Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inAssociatedExpressionData.getOrganTissueCode(),
+                                                                      inAssociatedExpressionData.getOrganTissueCode());
+        theExpFeature.setOrgan(theOrgan);
 
-        ExpressionLevelDesc expLevelDesc = ExpressionLevelDescManagerSingleton.instance().getByName(
-                                                                                                    inAssociatedExpressionData.getExpressionLevel());
-
-        expFeature.setExpressionLevelDesc(expLevelDesc);
-        inEngineeredTransgene.addExpressionFeature(expFeature);
+        ExpressionLevelDesc theExpLevelDesc = ExpressionLevelDescManagerSingleton.instance().getByName(
+                                                                                                       inAssociatedExpressionData.getExpressionLevel());
+        theExpFeature.setExpressionLevelDesc(theExpLevelDesc);
+        inEngineeredTransgene.addExpressionFeature(theExpFeature);
         log.info("Exiting populateAssocExpression");
     }
 
@@ -186,7 +162,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                                              Transgene inEngineeredTransgene,
                                              HttpServletRequest request) throws Exception
     {
-
         log.info("Entering populateEngineeredTransgene");
 
         // Grab the current modelID from the session
@@ -208,9 +183,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         inEngineeredTransgene.setName(inEngineeredTransgeneData.getName());
         inEngineeredTransgene.setConstructSequence(inEngineeredTransgeneData.getConstructSequence());
 
-        // Did we add a taxon?
-        //clears taxon (species)
-        //inEngineeredTransgene.getSpecies().equals(null);
         if (inEngineeredTransgeneData.getScientificName() != null && inEngineeredTransgeneData.getScientificName().length() > 0)
         {
             // Create/reuse or create the species object
@@ -222,13 +194,12 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             {
                 // Object is returned with uncontrolled vocab set, do not save 'Other' in DB, e-mail
                 inEngineeredTransgene.setSpecies(theSpecies);
-                sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene ScientificName");                
+                sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene ScientificName");
             }
             else
             {
                 inEngineeredTransgene.setSpecies(theSpecies);
-            }            
-            
+            }
         }
 
         inEngineeredTransgene.getRegulatoryElementCollection().clear();
@@ -262,9 +233,13 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         // Check for exisiting MutationIdentifier
         MutationIdentifier inMutationIdentifier = null;
         if (inEngineeredTransgene.getMutationIdentifier() != null)
+        {
             inMutationIdentifier = inEngineeredTransgene.getMutationIdentifier();
+        }
         else
+        {
             inMutationIdentifier = new MutationIdentifier();
+        }
 
         if (inEngineeredTransgeneData.getMgiNumber() == null || inEngineeredTransgeneData.getMgiNumber().equals(""))
         {
@@ -300,7 +275,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         {
             GeneFunction inGeneFunctions = new GeneFunction();
             inGeneFunctions.setFunction(st2.nextToken().trim());
-            System.out.println("\tAdding GeneFunction:" + inGeneFunctions.getFunction());
             geneList.add(inGeneFunctions);
         }
         inEngineeredTransgene.setGeneFunctionCollection(geneList);
@@ -352,7 +326,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             if (inEngineeredTransgeneData.getFileLocation().getFileName() != null && !inEngineeredTransgeneData.getFileLocation().getFileName().equals(
                                                                                                                                                        ""))
             {
-
                 ImageForm inImageData = new ImageForm();
 
                 String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
@@ -364,7 +337,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
 
                 Image image = ImageManagerSingleton.instance().create(new AnimalModel(), inImageData, inPath,
                                                                       Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
-
                 inEngineeredTransgene.setImage(image);
             }
 
@@ -378,23 +350,19 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                                       String theOtherSpeciesName,
                                       AnimalModel inAnimalModel) throws Exception
     {
-
         if (inName != null && inName.length() > 0)
         {
-
             RegulatoryElement theRegElement = new RegulatoryElement();
             RegulatoryElementType theRegType = RegulatoryElementTypeManagerSingleton.instance().getByType(inType);
             theRegElement.setRegulatoryElementType(theRegType);
             theRegElement.setName(inName);
             inEngineeredTransgene.addRegulatoryElement(theRegElement);
 
-            // We need to create a taxon
-            if (theSpeciesName != null && theSpeciesName.length() > 0)
+            // We need to create a species
+            if ((theSpeciesName != null && theSpeciesName.length() > 0) || (theOtherSpeciesName != null && theOtherSpeciesName.length() > 0))
             {
-
-                Species theNewSpecies = SpeciesManagerSingleton.instance().getOrCreate(theSpeciesName, 
-                                                                                       theOtherSpeciesName);
-                if (theSpeciesName.equals(Constants.Dropdowns.OTHER_OPTION))
+                Species theNewSpecies = SpeciesManagerSingleton.instance().getOrCreate(theSpeciesName, theOtherSpeciesName);
+                if (theOtherSpeciesName != null && theOtherSpeciesName.length() > 0)
                 {
                     //Object is returned with uncontrolled vocab set, do not save 'Other' in DB, e-mail
                     sendEmail(inAnimalModel, theOtherSpeciesName, inType + "ScientificName");
@@ -404,7 +372,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                 {
                     theRegElement.setSpecies(theNewSpecies);
                 }
-
             }
         }
     }
@@ -413,7 +380,6 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                            String theUncontrolledVocab,
                            String inType)
     {
-
         /*
          * Get the e-mail resource
          */
