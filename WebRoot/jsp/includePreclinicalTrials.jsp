@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/17 19:08:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.9  2005/11/28 16:31:48  pandyas
  * Defect #187:  Reordered fields on therapy search page to match submission page
  *
@@ -11,7 +14,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.10 2006-04-17 19:08:19 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.11 2006-04-27 15:09:01 pandyas Exp $
  */
 %>
 <tr>
@@ -73,6 +76,10 @@
 	<td class="resultsBoxGreyEnd" width="75%"><c:out value="${t.biomarker}"/>&nbsp;</td>
 </tr>
 <tr>
+	<td class="resultsBoxGrey" width="25%"><b>Tumor Response</b></td>
+	<td class="resultsBoxGreyEnd" width="75%"><c:out value="${t.tumorResponse}"/>&nbsp;</td>
+</tr>
+<tr>
 	<td class="resultsBoxWhite" width="25%"><b>Comment </b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 	<c:out value="${t.comments}"/>
@@ -94,6 +101,7 @@
 		<tr>
 			<td class="greySubTitleLeft" width="10%">Publication Status</td>
 			<td class="greySubTitleLeft" width="15%">First Author</td>
+			<td class="greySubTitleLeft" width="15%">JAX Number</td>			
 			<td class="greySubTitleLeft" width="30%">Title</td>
 			<td class="greySubTitleLeft" width="10%">Journal</td>
 			<td class="greySubTitleLeft" width="5%">Year</td>
@@ -117,6 +125,9 @@
 			<td class="<c:out value="${tdClass}"/>" width="15%">
 				<c:out value="${p.authors}"/>
 			</td>
+			<td class="<c:out value="${tdClass}"/>" width="15%">
+				<c:out value="${p.jaxJNumber}"/>&nbsp;
+			</td>			
 			<td class="<c:out value="${tdClass}"/>" width="30%">
 				<c:out value="${p.title}"/>
 			</td>

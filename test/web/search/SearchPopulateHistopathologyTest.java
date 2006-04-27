@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateHistopathologyTest.java,v 1.1 2006-01-09 16:59:53 pandyas Exp $
+ * $Id: SearchPopulateHistopathologyTest.java,v 1.2 2006-04-27 15:08:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/01/09 16:59:53  pandyas
+ * Modified to include methods to test if the populate method returns complete and correct data - initial modifications
+ *
  * Revision 1.3  2005/12/29 22:20:48  pandyas
  * removed disabled="true" on methodOfObservation field
  *
@@ -83,7 +86,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		theForm.setTumorIncidenceRate("20");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 		theParamsToSkip.add("tumorClassification");
@@ -106,7 +109,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("histopathologyForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aHistopathologyID");
 		theParamsToSkip.add("submitAction");
 		theParamsToSkip.add("tumorClassification");		
@@ -138,7 +141,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		
 		//TODO: add check for histopathologyID so we can remove from skip list
 		// Add parameters found on submit screen but not displayed on search screen  
-		theParamsToSkip = new ArrayList();		
+		theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 		theParamsToSkip.add("tumorClassification");
@@ -164,7 +167,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("associatedMetastasisForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aHistopathologyID");
 		theParamsToSkip.add("submitAction");
 		theParamsToSkip.add("methodOfObservation");
@@ -172,7 +175,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 		
-		/******* Adding Clinical Marker to Histopathology ************/		
+		/******* Adding Clinical Marker to Histopathology ***********		
 		navigateToModelForEditing(myModelName);
 
 		// Adding an Clinical Marker		
@@ -188,7 +191,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 
 		//TODO: add check for histopathologyID so we can remove from skip list
 		// Add parameters found on submit screen but not displayed on search screen  
-		theParamsToSkip = new ArrayList();		
+		theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("aHistopathologyID");
 
 		TestUtil.setRandomValues(theCMForm, theWebForm, false);
@@ -208,14 +211,14 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("clinicalMarkerForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aHistopathologyID");
 		theParamsToSkip.add("submitAction");
 		theParamsToSkip.add("aClinicalMarkerID");
 		//theParamsToSkip.add("submitAction");		
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);		
-		
+		*/
 	}  
 	
 	public void testSearchForHistopathology() throws Exception {
@@ -242,7 +245,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		theForm.setTumorIncidenceRate("20");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 		theParamsToSkip.add("tumorClassification");
@@ -286,7 +289,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		
 		//TODO: add check for histopathologyID so we can remove from skip list
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		theParamsToSkip = new ArrayList();		
+		theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 		theParamsToSkip.add("tumorClassification");
@@ -307,7 +310,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 		
-		/******* Adding Clinical Marker to Histopathology ***********/		
+		/******* Adding Clinical Marker to Histopathology **********		
 		navigateToModelForEditing(myModelName);
 
 		// Adding an Clinical Marker		
@@ -321,8 +324,8 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		ClinicalMarkerForm theCMForm = new ClinicalMarkerForm();
 
 		//TODO: add check for histopathologyID so we can remove from skip list
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		theParamsToSkip = new ArrayList();		
+		// Add parameters found on submit screen but not displayed on search screen  
+		theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("aHistopathologyID");
 
 		TestUtil.setRandomValues(theCMForm, theWebForm, false);
@@ -336,7 +339,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest {
 		navigateToSpecificSearchPage(myModelName,"HISTOPATHOLOGY");
 		
 		verifyValuesOnPage(theWebForm, theParamsToSkip);		
-		
+        */
 	}  	
 
 }

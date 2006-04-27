@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateCITest.java,v 1.2 2006-04-17 19:37:34 pandyas Exp $
+ * $Id: SearchPopulateCITest.java,v 1.3 2006-04-27 15:08:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/17 19:37:34  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.1  2006/01/06 16:08:22  pandyas
  * Added testing for populate methods
  *
@@ -88,28 +91,32 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 
 		ChemicalDrugForm theForm = new ChemicalDrugForm();
 		theForm.setName("Other");
+        theForm.setOtherName("Entered Drug Name");
 		theForm.setNscNumber("19191919");
 
 		TestUtil.setRandomValues(theForm, theWebForm, true, new ArrayList());
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        // added for debugging purpose only - comment out when done
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        
 		assertCurrentPageContains("You have successfully added a Chemical / Drug to this model!");
 
 		// Verify that populate method returns complete and correct data
 		navigateToModelForEditing(myModelName);
 
 		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Other");
+				"Other - Entered");
 		assertNotNull("Unable to find link to populate Chemical/Drug", theLink);		
 		theCurrentPage = theLink.click();
 		assertCurrentPageContains("(if Chemical/Drug is not listed, then please");
 		theWebForm = theCurrentPage.getFormWithName("chemicalDrugForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}
@@ -134,6 +141,9 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        // added for debugging purpose only - comment out when done
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        
 		assertCurrentPageContains("You have successfully added a Chemical / Drug to this model!");
 
 		TestUtil.moveModelToEditedApproved(myModelName);
@@ -163,6 +173,9 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        // added for debugging purpose only - comment out when done
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        
 		assertCurrentPageContains("You have successfully added a Chemical / Drug to this model!");
 
 		TestUtil.moveModelToEditedApproved(myModelName);
@@ -189,6 +202,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 
 		EnvironmentalFactorForm theForm = new EnvironmentalFactorForm();
 		theForm.setName("Other");
+        theForm.setOtherName("Entered EF Name");
 
 		TestUtil.setRandomValues(theForm, theWebForm, true, new ArrayList());
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -204,16 +218,16 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		navigateToModelForEditing(myModelName);
 
 		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Other");
+				"Other - Entered");
 		assertNotNull("Unable to find link to populate Enviromental Factor", theLink);		
 		theCurrentPage = theLink.click();
 		assertCurrentPageContains("(if Enviromental Factor is not listed");
 		theWebForm = theCurrentPage.getFormWithName("environmentalFactorForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}
@@ -269,9 +283,8 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
-		// added for debugging purpose only - remove when done
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data",
-				"* indicates a required field");
+		// added for debugging purpose only - comment out when done
+		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
 		assertCurrentPageContains("You have successfully added an Environmental Factor to this model!");
 
@@ -303,7 +316,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 
 		// Add parameters found on submit screen but not displayed on search
 		// screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 
@@ -341,7 +354,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 
 		// Add parameters found on submit screen but not displayed on search
 		// screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 
@@ -349,8 +362,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data",
-		"* indicates a required field");
+		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		
 		assertCurrentPageContains("You have successfully added a Gene Delivery to this model!");
 
@@ -381,6 +393,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		assertCurrentPageContains("You have successfully added a Growth Factor to this model!");
 
 		// Verify that populate method returns complete and correct data
@@ -394,9 +407,9 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("growthFactorForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}
@@ -476,6 +489,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		assertCurrentPageContains("You have successfully added a Hormone to this model!");
 
 		// Verify that populate method returns complete and correct data
@@ -489,9 +503,9 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("hormoneForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}	
@@ -568,27 +582,29 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 				.getFormWithName("nutritionalFactorForm");
 
 		NutritionalFactorForm theForm = new NutritionalFactorForm();
+        theForm.setOtherName("Entered Nutritional Name");
 
 		TestUtil.setRandomValues(theForm, theWebForm, true, new ArrayList());
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		assertCurrentPageContains("You have successfully added a Nutritional Factor to this model!");
 
 		// Verify that populate method returns complete and correct data
 		navigateToModelForEditing(myModelName);
 
 		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Other");
+				"Other - Entered");
 		assertNotNull("Unable to find link to populate a Nutritional Factor", theLink);		
 		theCurrentPage = theLink.click();
 		assertCurrentPageContains("(if Nutritional Factor is not listed");
 		theWebForm = theCurrentPage.getFormWithName("nutritionalFactorForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}
@@ -639,6 +655,7 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 				.getFormWithName("nutritionalFactorForm");
 
 		NutritionalFactorForm theForm = new NutritionalFactorForm();
+        theForm.setOtherName("Entered Nutritional Name");
 
 		TestUtil.setRandomValues(theForm, theWebForm, true, new ArrayList());
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -672,6 +689,8 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
 		assertCurrentPageContains("You have successfully added a Radiation to this model!");
 
 		// Verify that populate method returns complete and correct data
@@ -685,9 +704,9 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("radiationForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}	
@@ -767,6 +786,8 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 
 		theCurrentPage = theWebForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        
 		assertCurrentPageContains("You have successfully added a Surgery / Other to this model!");
 
 		// Verify that populate method returns complete and correct data
@@ -780,9 +801,9 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("surgeryForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		//TODO:  Fix
 		theParamsToSkip.add("ageAtTreatment");
 		theParamsToSkip.add("regimen");		
@@ -880,9 +901,9 @@ public class SearchPopulateCITest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("viralTreatmentForm");
 		
 		//Add parameters found behind but not populate screen
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");
-		theParamsToSkip.add("aTherapyID");
+		theParamsToSkip.add("aCarcinogenExposureID");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 		

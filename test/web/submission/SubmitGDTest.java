@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitGDTest.java,v 1.6 2005-12-29 14:05:33 georgeda Exp $
+ * $Id: SubmitGDTest.java,v 1.7 2006-04-27 15:08:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/12/29 14:05:33  georgeda
+ * Removed import error
+ *
  * Revision 1.5  2005/12/28 18:01:19  pandyas
  * commented out induced mutation and genomic segment to return to them later
  *
@@ -21,6 +24,7 @@ import java.util.ResourceBundle;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import web.base.BaseModelNeededTest;
+import web.util.TestUtil;
 
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
@@ -65,12 +69,12 @@ public class SubmitGDTest extends BaseModelNeededTest
 
         //Adding
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Engineered Transgene");
+                                                                                  "Enter Transgene");
         assertNotNull("Unable to find link to enter a Engineered Transgene", theLink);
         WebResponse theCurrentPage = theLink.click();
         assertCurrentPageContains("Poly A Signal:");
         WebForm theForm = theCurrentPage.getFormWithName("engineeredTransgeneForm");
-        theForm.setParameter("locationOfIntegration", "Random");
+        theForm.setParameter("isRandom", "yes");
         theForm.setParameter("name", "Testing123");
         theForm.setParameter("scientificName", "Mus musculus");
         theForm.setParameter("transcriptional1_name", "Testing123");
@@ -85,7 +89,7 @@ public class SubmitGDTest extends BaseModelNeededTest
         theCurrentPage = theLink.click();
         assertCurrentPageContains("Poly A Signal:");
         theForm = theCurrentPage.getFormWithName("engineeredTransgeneForm");
-        theForm.setParameter("locationOfIntegration", "Random");
+        theForm.setParameter("isRandom", "yes");
         theForm.setParameter("name", "Testing123");
         theForm.setParameter("scientificName", "Mus musculus");
         theForm.setParameter("transcriptional1_name", "Testing1234");
@@ -129,40 +133,57 @@ public class SubmitGDTest extends BaseModelNeededTest
         assertCurrentPageContains("You have successfully deleted an Engineered Transgene.");
     }
 
-    /*
+
      public void testAddGenomicSegment() throws Exception {
      navigateToModelForEditing(myModelName);
      
-     //Adding
+     //Adding Genomic Segment
      WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
      "Enter Genomic Segment");        
      assertNotNull("Unable to find link to enter a Genomic Segment", theLink);        
      WebResponse theCurrentPage = theLink.click();        
      assertCurrentPageContains("Segment Type:");
      WebForm theForm = theCurrentPage.getFormWithName("genomicSegmentForm");
-     theForm.setParameter("locationOfIntegration", "Random");
+     theForm.setParameter("isRandom", "yes");
      theForm.setParameter("segmentName", "BAC");
      theForm.setParameter("cloneDesignator", "123");
      theForm.setParameter("segmentId", "");  
      theCurrentPage = theForm.submit();
+     TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+     
      assertCurrentPageContains("You have successfully added a Genomic Segment to this model!");
      
-     //Editing
+     //Editing Genomic Segment
      theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "123");        
      assertNotNull("Unable to find link to edit a Genomic Segment", theLink);        
      theCurrentPage = theLink.click();        
      assertCurrentPageContains("Segment Type:");
      theForm = theCurrentPage.getFormWithName("genomicSegmentForm");
-     theForm.setParameter("locationOfIntegration", "Random");
+     theForm.setParameter("isRandom", "yes");
      theForm.setParameter("segmentName", "Cosmid");
      theForm.setParameter("cloneDesignator", "123");      
      theCurrentPage = theForm.submit();
+     
      assertCurrentPageContains("You have successfully edited a Genomic Segment.");
      
      //Adding Assoc Expression
      theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
      "Enter Assoc Expression");        
-     assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
+     assertNotNull("Unable to find link to enter an Assoc Expression", theLink);        
+     theCurrentPage = theLink.click();        
+     assertCurrentPageContains("Expression Level:");
+     theForm = theCurrentPage.getFormWithName("associatedExpressionForm");
+     theForm.getScriptableObject().setParameterValue( "organTissueCode", "C22509" );
+     theForm.getScriptableObject().setParameterValue( "organTissueName", "Esophagus" );
+     theForm.getScriptableObject().setParameterValue( "organ", "Esophagus_MMHCC" );
+     theCurrentPage = theForm.submit();
+     
+     assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
+     
+     //Editing Assoc Expression
+     theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
+     "Esophagus");        
+     assertNotNull("Unable to find link to enter an Assoc Expression", theLink);        
      theCurrentPage = theLink.click();        
      assertCurrentPageContains("Expression Level:");
      theForm = theCurrentPage.getFormWithName("associatedExpressionForm");
@@ -171,32 +192,28 @@ public class SubmitGDTest extends BaseModelNeededTest
      theForm.getScriptableObject().setParameterValue( "organ", "Esophagus_MMHCC" );
      theForm.setParameter("expressionLevel", "expressed");
      theCurrentPage = theForm.submit();
-     assertCurrentPageContains("You have successfully added an Associated Expression Transgene to this model!");
-     
-     //Editing Assoc Expression
-     theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
-     "Esophagus");        
-     assertNotNull("Unable to find link to enter a Assoc Expression", theLink);        
-     theCurrentPage = theLink.click();        
-     assertCurrentPageContains("Expression Level:");
-     theForm = theCurrentPage.getFormWithName("associatedExpressionForm");
-     theForm.getScriptableObject().setParameterValue( "organTissueCode", "C22509" );
-     theForm.getScriptableObject().setParameterValue( "organTissueName", "Esophagus" );
-     theForm.getScriptableObject().setParameterValue( "organ", "Esophagus_MMHCC" );
-     theForm.setParameter("expressionLevel", "highly expressed");
-     theCurrentPage = theForm.submit();
      assertCurrentPageContains("You have successfully edited an Associated Expression.");
 
-     //Deleting
+     //Deleting Assoc Expression 
+     theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Esophagus");
+     assertNotNull("Unable to find link to delete an Assoc Expression", theLink);        
+     theCurrentPage = theLink.click();        
+     assertCurrentPageContains("Expression Level:");
+     theForm = theCurrentPage.getFormWithName("associatedExpressionForm");               
+     theForm.getSubmitButton( "submitAction", "Delete" ).click();              
+     assertCurrentPageContains("You have successfully deleted an Associated Expression.");                
+     
+     /*Deleting Genomic Segment 
      theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "123");
      assertNotNull("Unable to find link to delete a Genomic Segment", theLink);        
      theCurrentPage = theLink.click();        
      assertCurrentPageContains("Segment Type:");
      theForm = theCurrentPage.getFormWithName("genomicSegmentForm");               
      theForm.getSubmitButton( "submitAction", "Delete" ).click();              
-     assertCurrentPageContains("You have successfully deleted a Genomic Segment.");                
+     assertCurrentPageContains("You have successfully deleted a Genomic Segment."); 
+     */               
      }							 
-     */
+     
     public void testAddTargetedModification() throws Exception
     {
         navigateToModelForEditing(myModelName);
@@ -260,7 +277,7 @@ public class SubmitGDTest extends BaseModelNeededTest
         assertCurrentPageContains("You have successfully deleted a Targeted Modification.");
     }
 
-    /*   
+  
      public void testAddInducedMutation() throws Exception {
      navigateToModelForEditing(myModelName);
      
@@ -299,8 +316,9 @@ public class SubmitGDTest extends BaseModelNeededTest
      theForm = theCurrentPage.getFormWithName("inducedMutationForm");               
      theForm.getSubmitButton( "submitAction", "Delete" ).click();              
      assertCurrentPageContains("You have successfully deleted an Induced Mutation.");                
+
      }
-     */
+
     public void testAddSpontaneousMutation() throws Exception
     {
         navigateToModelForEditing(myModelName);

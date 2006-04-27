@@ -2005,16 +2005,6 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-
-
-
-			<field property="donorEthinicityStrain"
-				depends="required">
-				<arg0 key="XenograftForm.donorEthinicityStrain" />
-			</field>
-
-
-
 			<field property="graftType" depends="required">
 				<arg0 key="XenograftForm.graftType" />
 			</field>

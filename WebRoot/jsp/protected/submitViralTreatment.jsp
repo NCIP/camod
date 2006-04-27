@@ -32,7 +32,6 @@
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-<!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 	<tr>
@@ -130,7 +129,6 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Gender:</label></td>
 		<td class="formField">
-
 			<html:select styleClass="formFieldUnSized" size="1" property="type" >												
 				<html:options name="<%= Dropdowns.SEXDISTRIBUTIONDROP %>"/>					
 			</html:select>
@@ -158,7 +156,7 @@
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
 				  <input type="hidden" name="aCarcinogenExposureID" value="<%= aCarcinogenExposureID %>">
 				  	
-			  </html:form>			
+			
 			</TABLE>
 		</td>
 	</tr>
@@ -167,7 +165,8 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
-
+</html:form>
+			  
 <SCRIPT>
 chkOtherName();
 chkOtherAdminRoute();

@@ -108,16 +108,16 @@
 
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
-			<td class="formLabel"><label for="field1">J number:</label>	
+			<td class="formLabel"><label for="field1">J number:</label>
 			<camod:cshelp mapId="publication_help" key="PUBLICATION.J_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find J #" onClick="myRef = window.open('http://www.informatics.jax.org/searches/reference_form.shtml','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="15" property="jaxJNumber"  />
+				<html:text styleClass="formFieldUnSized" size="10" property="jaxJNumber" />
 			</td>
-	</tr>
+	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>

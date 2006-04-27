@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseModelNeededTest.java,v 1.3 2006-04-17 19:37:32 pandyas Exp $
+ * $Id: BaseModelNeededTest.java,v 1.4 2006-04-27 15:08:33 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:37:32  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.2  2005/12/13 19:17:51  pandyas
  * added JavaDocs
  *
@@ -11,6 +14,7 @@
 
 package web.base;
 
+import web.util.TestUtil;
 import gov.nih.nci.camod.util.GUIDGenerator;
 
 import com.meterware.httpunit.*;
@@ -83,5 +87,6 @@ public class BaseModelNeededTest extends BaseHttpTest {
         theLink.click();
 
         assertCurrentPageDoesNotContain(myModelName);
+       
     }
 }

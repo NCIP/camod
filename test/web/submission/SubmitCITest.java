@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitCITest.java,v 1.6 2006-04-17 19:37:34 pandyas Exp $
+ * $Id: SubmitCITest.java,v 1.7 2006-04-27 15:08:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:37:34  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/12/14 20:14:35  pandyas
  * Added JavaDocs
  *
@@ -90,23 +93,23 @@ public class SubmitCITest extends BaseModelNeededTest {
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Enviromental Factor is not listed, then please");
         WebForm theForm = theCurrentPage.getFormWithName("environmentalFactorForm");
-        theForm.setParameter("name", "environmental cigarette smoke (ECS)");
+        theForm.setParameter("name", "mainstream cigarette smoke (MCS)");
         theCurrentPage = theForm.submit();
         assertCurrentPageContains("You have successfully added an Environmental Factor to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "environmental cig");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "mainstream cig");        
         assertNotNull("Unable to find link to edit a Environmental Factor", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Enviromental Factor is not listed, then please");
         theForm = theCurrentPage.getFormWithName("environmentalFactorForm");
-        theForm.setParameter("name", "environmental cigarette smoke (ECS)");
+        theForm.setParameter("name", "mainstream cigarette smoke (MCS)");
         theForm.setParameter("administrativeRoute", "intravenous");
         theCurrentPage = theForm.submit();
         assertCurrentPageContains("You have successfully edited an Environmental Factor.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "environmental cig");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "mainstream cigarette");        
         assertNotNull("Unable to find link to delete a Environmental Factor", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Enviromental Factor is not listed, then please");
@@ -194,23 +197,23 @@ public class SubmitCITest extends BaseModelNeededTest {
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Hormone is not listed, then please");
         WebForm theForm = theCurrentPage.getFormWithName("hormoneForm");
-        theForm.setParameter("name", "androsterone");        
+        theForm.setParameter("name", "estrone");        
         theCurrentPage = theForm.submit();        
         assertCurrentPageContains("You have successfully added a Hormone to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "androsterone");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "estrone");        
         assertNotNull("Unable to find link to edit a Hormone", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Hormone is not listed, then please");
         theForm = theCurrentPage.getFormWithName("hormoneForm");
-        theForm.setParameter("name", "androsterone");
+        theForm.setParameter("name", "estrone");
         theForm.setParameter("type", "Male Only");        
         theCurrentPage = theForm.submit();        
         assertCurrentPageContains("You have successfully edited a Hormone.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "androsterone");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "estrone");        
         assertNotNull("Unable to find link to delete a Hormone", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Hormone is not listed, then please");
@@ -263,23 +266,23 @@ public class SubmitCITest extends BaseModelNeededTest {
         WebResponse theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Radiation is not listed, then please");
         WebForm theForm = theCurrentPage.getFormWithName("radiationForm");
-        theForm.setParameter("name", "alpha-radiation");        
+        theForm.setParameter("name", "beta-radiation");        
         theCurrentPage = theForm.submit();        
         assertCurrentPageContains("You have successfully added a Radiation to this model!");
         
         //Editing
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "alpha-radiation");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "beta-rad");        
         assertNotNull("Unable to find link to edit a Radiation", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Radiation is not listed, then please");
         theForm = theCurrentPage.getFormWithName("radiationForm");
-        theForm.setParameter("name", "alpha-radiation");
+        theForm.setParameter("name", "beta-radiation");
         theForm.setParameter("type", "Male Only");        
         theCurrentPage = theForm.submit();        
         assertCurrentPageContains("You have successfully edited a Radiation.");
         
         //Deleting
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "alpha-radiation");        
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "beta-radi");        
         assertNotNull("Unable to find link to delete a Radiation", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("(if Radiation is not listed, then please");

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateTherapyTest.java,v 1.2 2006-04-17 19:37:34 pandyas Exp $
+ * $Id: SearchPopulateTherapyTest.java,v 1.3 2006-04-27 15:08:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/04/17 19:37:34  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.1  2006/01/06 16:08:22  pandyas
  * Added testing for populate methods
  *
@@ -85,13 +88,17 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToIgnore.add("selectedProcesses");
 		theParamsToIgnore.add("targets");
 		theParamsToIgnore.add("selectedTargets");
-		theParamsToIgnore.add("administrativeRoute");		
+		theParamsToIgnore.add("administrativeRoute");
+        theParamsToIgnore.add("jaxJNumber");
+
 	
 		/* Add parameters found on submit screen but not displayed on search screen  */
 		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("selectedChemicalClasses");
 		theParamsToSkip.add("selectedProcesses");
 		theParamsToSkip.add("selectedTargets");
+        theParamsToSkip.add("comments");
+        theParamsToSkip.add("jaxJNumber");
 		
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
@@ -121,16 +128,15 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToSkip.add("chemicalClasses");			
 		theParamsToSkip.add("selectedChemicalClasses");	
 		theParamsToSkip.add("aTherapyID");
-		//TODO:  Fix administrativeRoute and otherAdministrativeRoute
+		//TODO:  Fix these values so they are tested
 		theParamsToSkip.add("otherAdministrativeRoute");		
-		theParamsToSkip.add("administrativeRoute");		
-
-
-		//theParamsToSkip.add("otherAdministrativeRoute");
+		theParamsToSkip.add("administrativeRoute");
+        theParamsToSkip.add("dosageUnit"); 
+        theParamsToSkip.add("jaxJNumber");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 		
-		/******* Adding Publication to Therapy ***********/
+		/******* Adding Publication to Therapy *****************************/
 		navigateToModelForEditing(myModelName);
 
 		// Adding a Publication
@@ -152,6 +158,7 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		thePubForm.setEndPage("9999");		
 		thePubForm.setVolume("10");
 		thePubForm.setTitle("title");
+        thePubForm.setJaxJNumber("J:54533");
 
 		//TODO: clean up the use of aCellID and ACellID, ATherapyID vs aTherapyID and APubID vs aPubID
 		theParamsToIgnore = new ArrayList<String>();
@@ -161,7 +168,8 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToIgnore.add("ACellID");		
 		theParamsToIgnore.add("APubID");
 		theParamsToIgnore.add("ATherapyID");
-		theParamsToIgnore.add("aTherapyID");		
+		theParamsToIgnore.add("aTherapyID");
+        theParamsToIgnore.add("jaxJNumber");   
 
 		//Add parameters found on submit screen but not displayed on search
 		theParamsToSkip = new ArrayList<String>();
@@ -172,8 +180,8 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToSkip.add("volume");
 		theParamsToSkip.add("title");
 		theParamsToSkip.add("ATherapyID");
-		theParamsToSkip.add("aTherapyID");		
-		
+		theParamsToSkip.add("aTherapyID");
+        theParamsToSkip.add("jaxJNumber");
 
 		TestUtil.setRandomValues(thePubForm, theWebForm, false,	theParamsToIgnore);
 		TestUtil.setValuesOnForm(thePubForm, theWebForm);
@@ -198,7 +206,8 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToSkip.add("submitAction");		
 		theParamsToSkip.add("APubID");
 		theParamsToSkip.add("ATherapyID");		
-		theParamsToSkip.add("ACellID");		
+		theParamsToSkip.add("ACellID");
+        theParamsToSkip.add("jaxJNumber");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip); 		
 	}      
@@ -226,13 +235,15 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToIgnore.add("selectedProcesses");
 		theParamsToIgnore.add("targets");
 		theParamsToIgnore.add("selectedTargets");
-		theParamsToIgnore.add("administrativeRoute");		
+		theParamsToIgnore.add("administrativeRoute");
+        theParamsToIgnore.add("dosageUnit");
 	
 		/* Add parameters found on submit screen but not displayed on search screen  */
 		List<String> theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("selectedChemicalClasses");
 		theParamsToSkip.add("selectedProcesses");
 		theParamsToSkip.add("selectedTargets");
+        theParamsToSkip.add("dosageUnit");
 		
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
@@ -269,6 +280,7 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		thePubForm.setEndPage("9999");		
 		thePubForm.setVolume("10");
 		thePubForm.setTitle("title");
+        thePubForm.setJaxJNumber("J:54533");
 
 		//TODO: clean up the use of aCellID and ACellID, ATherapyID vs aTherapyID and APubID vs aPubID
 		theParamsToIgnore = new ArrayList<String>();
@@ -278,7 +290,9 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToIgnore.add("ACellID");		
 		theParamsToIgnore.add("APubID");
 		theParamsToIgnore.add("ATherapyID");
-		theParamsToIgnore.add("aTherapyID");		
+		theParamsToIgnore.add("aTherapyID");
+        theParamsToIgnore.add("jaxJNumber");
+        
 
 		//Add parameters found on submit screen but not displayed on search
 		theParamsToSkip = new ArrayList<String>();
@@ -289,8 +303,9 @@ public class SearchPopulateTherapyTest extends BaseModelNeededTest {
 		theParamsToSkip.add("volume");
 		theParamsToSkip.add("title");
 		theParamsToSkip.add("ATherapyID");
-		theParamsToSkip.add("aTherapyID");		
-		
+		theParamsToSkip.add("aTherapyID");
+        theParamsToSkip.add("jaxJNumber");
+	
 
 		TestUtil.setRandomValues(thePubForm, theWebForm, false,	theParamsToIgnore);
 		TestUtil.setValuesOnForm(thePubForm, theWebForm);

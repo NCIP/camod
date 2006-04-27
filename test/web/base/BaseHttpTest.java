@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.7 2006-04-17 19:37:32 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.8 2006-04-27 15:08:33 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/17 19:37:32  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.6  2006/01/06 16:11:48  pandyas
  * Modified to include methods to test if the populate method returns complete and correct data - initial modifications
  *
@@ -224,10 +227,9 @@ public class BaseHttpTest extends TestCase {
 
             	if (!theParameterName.equals("method") && !theParameterName.equals("unprotected_method")) {
             		String theParameterValue = inForm.getParameterValue(theParameterName);
-            		System.out.println("ParameterName: " + theParameterName + "\t ParameterValue: " + theParameterValue);
             		
             		if (!Constants.Dropdowns.OTHER_OPTION.equals(theParameterValue) && theParameterValue !=null) {
-                		System.out.println("ParameterName: " + theParameterName + "\t ParameterValue: " + theParameterValue);            			
+                		System.out.println("Set:  " + theParameterName + "  To: " + theParameterValue);            			
             			assertCurrentPageContains(theParameterValue);
             		}
             	}

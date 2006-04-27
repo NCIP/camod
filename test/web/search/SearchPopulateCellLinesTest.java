@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateCellLinesTest.java,v 1.1 2006-01-06 16:08:22 pandyas Exp $
+ * $Id: SearchPopulateCellLinesTest.java,v 1.2 2006-04-27 15:08:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/01/06 16:08:22  pandyas
+ * Added testing for populate methods
+ *
  * Revision 1.4  2005/12/29 18:43:30  pandyas
  * Fixed defect# 286: Link to Publications not showing up for just a cell line pub
  *
@@ -79,7 +82,7 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		theForm.setOrganTissueCode("C22498");
 
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 		
@@ -102,13 +105,13 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("cellLineForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aCellID");
 		theParamsToSkip.add("submitAction");		
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 		
-		/******* Adding Publication to cell line *********/
+		/******* Adding Publication to cell line **********************************/
 		navigateToModelForEditing(myModelName);
 
 		// Adding a Publication
@@ -122,32 +125,37 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		theWebForm.setParameter("firstTimeReported", "yes");
 
 		PublicationForm thePubForm = new PublicationForm();
+        thePubForm.setVolume("10");
+        thePubForm.setTitle("title");  
+        thePubForm.setStartPage("1111");        
 		thePubForm.setAuthors("AUTHORSABCDEFGH");
 		thePubForm.setFirstTimeReported("yes");
 		thePubForm.setPmid("16323327");
 		thePubForm.setYear("1999");
-		thePubForm.setStartPage("1111");
-		thePubForm.setEndPage("9999");		
-		thePubForm.setVolume("10");
-		thePubForm.setTitle("title");
+		thePubForm.setEndPage("9999");
+        thePubForm.setJaxJNumber("12345");        
 
 		//TODO: clean up the use of aCellID and ACellID, check ATherapyID and APubID also
-		List theParamsToIgnore = new ArrayList();
+		List<String> theParamsToIgnore = new ArrayList<String>();
 		theParamsToIgnore.add("volume");
 		theParamsToIgnore.add("title");		
 		theParamsToIgnore.add("aCellID");
 		theParamsToIgnore.add("ACellID");		
 		theParamsToIgnore.add("APubID");
-		theParamsToIgnore.add("ATherapyID");		
+		theParamsToIgnore.add("ATherapyID");
+        theParamsToIgnore.add("jaxJNumber");
 
 		//Add parameters found on submit screen but not displayed on search
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("firstTimeReported");
 		theParamsToSkip.add("aCellID");
 		theParamsToSkip.add("ACellID");		
 		theParamsToSkip.add("APubID");
-		theParamsToSkip.add("volume");
-		theParamsToSkip.add("title");
+        theParamsToSkip.add("startPage");
+        theParamsToSkip.add("endPage");
+        theParamsToSkip.add("jaxJNumber");
+		//theParamsToSkip.add("volume");
+		//theParamsToSkip.add("title");
 
 		TestUtil.setRandomValues(thePubForm, theWebForm, false,	theParamsToIgnore);
 		TestUtil.setValuesOnForm(thePubForm, theWebForm);
@@ -168,11 +176,12 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("publicationForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");		
 		theParamsToSkip.add("APubID");
 		theParamsToSkip.add("ATherapyID");		
-		theParamsToSkip.add("ACellID");		
+		theParamsToSkip.add("ACellID");
+        theParamsToSkip.add("jaxJNumber");
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 		
@@ -196,7 +205,7 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		theForm.setOrganTissueCode("C22498");
 
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("organTissueCode");
 		theParamsToSkip.add("organTissueName");
 		
@@ -235,25 +244,27 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		thePubForm.setEndPage("9999");		
 		thePubForm.setVolume("10");
 		thePubForm.setTitle("title");
+        thePubForm.setJaxJNumber("12345");
 
 		//TODO: clean up the use of aCellID and ACellID, check ATherapyID and APubID also
-		List theParamsToIgnore = new ArrayList();
+		List<String> theParamsToIgnore = new ArrayList<String>();
 		theParamsToIgnore.add("volume");
 		theParamsToIgnore.add("title");		
 		theParamsToIgnore.add("aCellID");
 		theParamsToIgnore.add("ACellID");		
 		theParamsToIgnore.add("APubID");
-		theParamsToIgnore.add("ATherapyID");		
+		theParamsToIgnore.add("ATherapyID");
+        theParamsToIgnore.add("jaxJNumber");
 
 		//Add parameters found on submit screen but not displayed on search
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("firstTimeReported");
 		theParamsToSkip.add("aCellID");
 		theParamsToSkip.add("ACellID");		
 		theParamsToSkip.add("APubID");
 		theParamsToSkip.add("volume");
 		theParamsToSkip.add("title");
-		//theParamsToSkip.add("ATherapyID");		
+		theParamsToSkip.add("jaxJNumber");		
 		
 
 		TestUtil.setRandomValues(thePubForm, theWebForm, false,	theParamsToIgnore);
@@ -270,8 +281,7 @@ public class SearchPopulateCellLinesTest extends BaseModelNeededTest {
 		navigateToSpecificSearchPage(myModelName, "CELL LINES");
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 		
-		/* check if publication is on publication search page
-		*  Fixed Defect #286 */
+		/* check if publication is on publication search page */
 		navigateToSpecificSearchPage(myModelName, "PUBLICATIONS");
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 		

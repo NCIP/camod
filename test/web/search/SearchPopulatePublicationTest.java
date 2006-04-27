@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulatePublicationTest.java,v 1.1 2006-01-06 16:08:22 pandyas Exp $
+ * $Id: SearchPopulatePublicationTest.java,v 1.2 2006-04-27 15:08:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/01/06 16:08:22  pandyas
+ * Added testing for populate methods
+ *
  * Revision 1.2  2005/12/29 18:17:35  pandyas
  * fixed firstTimeReported issue by setting it explicitly
  *
@@ -76,14 +79,17 @@ public class SearchPopulatePublicationTest extends BaseModelNeededTest {
 		theForm.setStartPage("1111");
 		theForm.setEndPage("9999");
         
-		List theParamsToIgnore = new ArrayList();
+		List<String> theParamsToIgnore = new ArrayList<String>();
 		theParamsToIgnore.add("ACellID");
 		theParamsToIgnore.add("ATherapyID");
 		theParamsToIgnore.add("APubID");
+        theParamsToIgnore.add("jaxJNumber");
+        
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();
-		theParamsToSkip.add("firstTimeReported");		
+		List<String> theParamsToSkip = new ArrayList<String>();
+		theParamsToSkip.add("firstTimeReported");
+        theParamsToSkip.add("jaxJNumber");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -103,12 +109,13 @@ public class SearchPopulatePublicationTest extends BaseModelNeededTest {
 		theWebForm = theCurrentPage.getFormWithName("publicationForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("submitAction");		
 		theParamsToSkip.add("APubID");
 		theParamsToSkip.add("ATherapyID");		
 		theParamsToSkip.add("ACellID");		
-		
+        theParamsToSkip.add("jaxJNumber");
+        
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);	
 
 	}      
@@ -134,14 +141,17 @@ public class SearchPopulatePublicationTest extends BaseModelNeededTest {
 		theForm.setStartPage("1111");
 		theForm.setEndPage("9999");
         
-		List theParamsToIgnore = new ArrayList();
+		List<String> theParamsToIgnore = new ArrayList<String>();
 		theParamsToIgnore.add("ACellID");
 		theParamsToIgnore.add("ATherapyID");
 		theParamsToIgnore.add("APubID");
+        theParamsToIgnore.add("jaxJNumber");
+        
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();
-		theParamsToSkip.add("firstTimeReported");		
+		List<String> theParamsToSkip = new ArrayList<String>();
+		theParamsToSkip.add("firstTimeReported");
+        theParamsToSkip.add("jaxJNumber");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);

@@ -62,7 +62,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theForm.setSource("Jackson Laboratory");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("source");		
 
 		TestUtil.setRandomValues(theForm, theWebForm, false);
@@ -84,7 +84,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aAvailabilityID");
 		theParamsToSkip.add("submitAction");		
 		
@@ -110,7 +110,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		TestUtil.setValuesOnForm(theMCForm, theWebForm);
 		
 		// Add parameters found on submit screen but not displayed on search screen  
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		// TODO: Fix ones you can		
     	theParamsToSkip.add("otherEthnicityStrain");
 		theParamsToSkip.add("principalInvestigator");		
@@ -149,7 +149,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theForm.setSource("Jackson Laboratory");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("source");		
 
 		TestUtil.setRandomValues(theForm, theWebForm, false);
@@ -181,7 +181,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		TestUtil.setValuesOnForm(theMCForm, theWebForm);
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		theParamsToSkip = new ArrayList();		
+		theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("principalInvestigator");
 		theParamsToSkip.add("calendarReleaseDate");	
 		theParamsToSkip.add("releaseDate");			
@@ -208,7 +208,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theForm.setSource("MMHCC Repository");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();
+		List<String> theParamsToSkip = new ArrayList<String>();
 		theForm.setName("TESTAVAILABILITY");		
 		theParamsToSkip.add("source");		
 
@@ -231,7 +231,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aAvailabilityID");
 		theParamsToSkip.add("submitAction");		
 		
@@ -255,7 +255,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theForm.setSource("MMHCC Repository");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("source");		
 
 		TestUtil.setRandomValues(theForm, theWebForm, false);
@@ -291,7 +291,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theForm.setSource("Investigator");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("source");
 		theParamsToSkip.add("stockNumber");		
 
@@ -314,7 +314,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aAvailabilityID");
 		theParamsToSkip.add("submitAction");		
 		
@@ -338,7 +338,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theForm.setSource("Investigator");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
+		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("source");
 		theParamsToSkip.add("stockNumber");		
 
@@ -375,7 +375,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theForm.setSource("IMSR");
 		
 		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();			
+		List<String> theParamsToSkip = new ArrayList<String>();			
 		theParamsToSkip.add("source");		
 
 		TestUtil.setRandomValues(theForm, theWebForm, false);
@@ -397,7 +397,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest 
 		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 		
 		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList();
+		theParamsToSkip = new ArrayList<String>();
 		theParamsToSkip.add("aAvailabilityID");
 		theParamsToSkip.add("submitAction");		
 		

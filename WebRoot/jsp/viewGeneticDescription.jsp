@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.40 2006-04-19 18:48:03 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.41 2006-04-27 15:09:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2006/04/19 18:48:03  georgeda
+ * Species no longer a collection.
+ *
  * Revision 1.39  2006/04/17 19:08:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -209,7 +212,7 @@
 		</tr>
 
 		<c:choose>
-			<c:when test="${tg.locationOfIntegration != 'Random'}">
+			<c:when test="${tg.isRandom != 'yes'}">
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
@@ -325,9 +328,12 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.image.description}"/>&nbsp;</td>
-		</tr>
+		</tr>		
 		</c:if>
-
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.constructSequence}"/>&nbsp;</td>
+		</tr>
 
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
@@ -394,7 +400,7 @@
 			</td>
 		</tr>
 		<c:choose>
-			<c:when test="${gs.locationOfIntegration != 'Random'}">
+			<c:when test="${gs.isRandom != 'yes'}">
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
@@ -419,22 +425,21 @@
 				</tr>
 			</c:otherwise>
 		</c:choose>
+		
 		<tr>
 			<td class="GreyBox" width="35%"><b>Segment Type</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 				<ul>
-					<c:forEach var="segtype" items="${gs.segmentTypeCollection}">
 					<li>
 						<c:choose>
-							<c:when test="${empty segtype.name}">
-								<c:out value="${segtype.nameUnctrlVocab}"/>&nbsp;
+							<c:when test="${empty gs.segmentType.name}">
+								<c:out value="${gs.segmentType.nameUnctrlVocab}"/>&nbsp;
 							</c:when>
 							<c:otherwise>
-								<c:out value="${segtype.name}"/>&nbsp;
+								<c:out value="${gs.segmentType.name}"/>&nbsp;
 							</c:otherwise>
 						</c:choose>
 					</li>
-					</c:forEach>
 				</ul>
 			</td>			
 		</tr>
@@ -492,9 +497,12 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.image.description}"/>&nbsp;</td>
-		</tr>
+		</tr>		
 		</c:if>
-
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.constructSequence}"/>&nbsp;</td>
+		</tr>
         <tr>
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
@@ -547,9 +555,9 @@
 						<c:out value="${modType.name}"/>&nbsp;
 					</li>	
 				</c:forEach>
-				<c:if test="${not empty tm.modTypeUnctrlVocab}">&nbsp;
+				<c:if test="${not empty modType.nameUnctrlVocab}">&nbsp;
 				    <li>
-						<c:out value="${tm.modTypeUnctrlVocab}"/>&nbsp;
+						<c:out value="${modType.nameUnctrlVocab}"/>&nbsp;
 					</li>	
 				</c:if>
             </td>
@@ -649,6 +657,10 @@
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
 		</tr>
 		</c:if>
+		<tr>
+			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.constructSequence}"/>&nbsp;</td>
+		</tr>		
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">

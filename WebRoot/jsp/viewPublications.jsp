@@ -26,8 +26,9 @@
 			
 			<tr>
 				<td class="greySubTitleLeft" width="10%">Publication Status</td>
-				<td class="greySubTitleLeft" width="15%">First Author</td>
-				<td class="greySubTitleLeft" width="30%">Title</td>
+				<td class="greySubTitleLeft" width="20%">First Author</td>
+				<td class="greySubTitleLeft" width="15%">JAX Number</td>
+				<td class="greySubTitleLeft" width="25%">Title</td>
 				<td class="greySubTitleLeft" width="10%">Journal</td>
 				<td class="greySubTitleLeft" width="5%">Year</td>
 				<td class="greySubTitleLeft" width="10%">Volume</td>
@@ -51,6 +52,9 @@
 				<td class="<c:out value="${tdClass}"/>" width="15%">
 					<c:out value="${p.authors}"/>&nbsp;
 				</td>
+				<td class="<c:out value="${tdClass}"/>" width="15%">
+					<c:out value="${p.jaxJNumber}"/>&nbsp;
+				</td>				
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:out value="${p.title}" escapeXml="false" />&nbsp;
 				</td>

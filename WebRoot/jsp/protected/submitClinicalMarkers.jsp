@@ -4,6 +4,7 @@
 
 <%@ page import="gov.nih.nci.camod.webapp.form.ClinicalMarkerForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
+<script language="JavaScript" src="scripts/global.js"></script>
 
 <%
 	String aHistopathologyID = request.getParameter( "aHistopathologyID" );
@@ -50,7 +51,7 @@
 			<label for="field3">(if Clinical Marker is not listed, then please<br>select "Other" from the list and specify it below)</label>
 			<br>
 			<br>						
-			<html:select styleClass="formFieldSized" size="1" property="name" onchange="getOptions(this);" >
+			<html:select styleClass="formFieldSized" size="1" property="name" onclick="chkOtherName( this );" >
 				<html:options name="<%= Dropdowns.CLINICALMARKERSDROP %>" />										
 			</html:select>
 			</td>
@@ -95,7 +96,7 @@
 				  <input type="hidden" name="aHistopathologyID" value="<%= aHistopathologyID %>">
 				  <input type="hidden" name="aClinicalMarkerID" value="<%= aClinicalMarkerID %>">
 				  
-				  </html:form>			
+				  			
 				</TABLE>
 			<!-- action buttons end -->
 		</td>
@@ -106,5 +107,10 @@
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+</html:form>
+
+<SCRIPT>
+chkOtherName();
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

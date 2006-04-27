@@ -63,13 +63,13 @@
 					</c:choose>
 					<c:if test="${not empty cd.environmentalFactor.nscNumber}">
 						<br>NSC: 
-						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.agent.nscNumber}"/>">
+						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=NSC&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.nscNumber}"/>">
 						    <c:out value="${cd.environmentalFactor.nscNumber}"/>
 						</a>
 					</c:if>
 					<c:if test="${not empty cd.environmentalFactor.casNumber}">
 						<br>CAS: 
-						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.agent.casNumber}"/>">
+						<a target="_blank" href="http://dtp.nci.nih.gov/dtpstandard/servlet/ChemData?queryHOLD=&searchtype=CAS&chemnameboolean=and&outputformat=html&Submit=Submit&searchlist=<c:out value="${cd.environmentalFactor.casNumber}"/>">
 						    <c:out value="${cd.environmentalFactor.casNumber}"/>
 						</a>    
 					</c:if>
@@ -263,7 +263,7 @@
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
@@ -392,7 +392,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;
+					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:out value="${cd.treatment.regimen}"/>&nbsp;
