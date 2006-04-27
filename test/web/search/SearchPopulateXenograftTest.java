@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateXenograftTest.java,v 1.3 2006-04-27 15:08:43 pandyas Exp $
+ * $Id: SearchPopulateXenograftTest.java,v 1.4 2006-04-27 15:33:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/27 15:08:43  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.2  2006/04/17 19:37:34  pandyas
  * caMod 2.1 OM changes
  *
@@ -63,7 +66,7 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest
 
     protected void tearDown() throws Exception
     {
-        //deleteModel();
+        deleteModel();
         logoutOfApplication();
     }
 
