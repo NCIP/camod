@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.23 2006-04-20 19:46:14 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.24 2006-04-27 15:06:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/04/20 19:46:14  pandyas
+ * Modified host species/  host strain / otherHostStrain text on Xenograft screen
+ *
  * Revision 1.22  2006/04/20 18:11:16  pandyas
  * Cleaned up Species or Strain save of Other in DB
  *
@@ -197,28 +200,7 @@ public class XenograftPopulateAction extends BaseAction
 
         log.info("<XenograftPopulateAction dropdown> Entering void dropdown()");
 
-        // Retrieve the AnimalModel current Species and Strain set in ModelCharacteristics
-        // This is displayed on the JSP page right above the HOST STRAIN / SPECIES
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-        AnimalModel animalModel = animalModelManager.get(modelID);
-
-        Species theAMSpecies = animalModel.getStrain().getSpecies();
-        request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theAMSpecies.getScientificName());
-
-        if (animalModel.getStrain() != null)
-        {
-            // If the animal model has an 'Other' strain selected, display the otherName on the Xenograft screen
-            if (animalModel.getStrain().getNameUnctrlVocab() != null)
-            {
-                request.getSession().setAttribute(Constants.Dropdowns.OTHERMODELSTRAIN, animalModel.getStrain().getNameUnctrlVocab());
-            }
-            else
-            {
-                request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getName());
-            }
-        }
-        // Set the Speceis drop drop for the Xenograft
+        // Set the Species drop drop for the Xenograft form
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_OPTION);
 
         // theSpecies will be null the first time (submitXenograft screen) - default to full list of strains
@@ -235,6 +217,31 @@ public class XenograftPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+
+        
+        
+        // Retrieve the Species and Strain set for the AnimalModel (via submitNewModel.jsp)
+        // This is displayed on the JSP page as the HOST SPECIES / STRAIN
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel animalModel = animalModelManager.get(modelID);
+
+        if (animalModel.getStrain() != null)
+        {
+            Species theAMSpecies = animalModel.getStrain().getSpecies();
+            request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theAMSpecies.getScientificName());            
+            
+            // If the animal model has an 'Other' strain selected, display the otherName on the Xenograft screen
+            if (animalModel.getStrain().getNameUnctrlVocab() != null)
+            {
+                request.getSession().setAttribute(Constants.Dropdowns.OTHERMODELSTRAIN, animalModel.getStrain().getNameUnctrlVocab());
+            }
+            else
+            {
+                request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getName());
+            }
+        }
+        
 
         log.info("<XenograftPopulateAction dropdown> Exiting void dropdown()");
     }
