@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.39 2006-04-20 14:59:17 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.40 2006-04-27 15:02:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2006/04/20 14:59:17  georgeda
+ * Optimized performance of CI query
+ *
  * Revision 1.38  2006/04/19 18:40:53  georgeda
  * Fixed the keyword search issue
  *
@@ -908,7 +911,7 @@ public class QueryManagerImpl extends BaseManager
             Long theParam;
             if (useNscNumber == true)
             {
-                theSQLString += "   and a.nsc_number = ?" + "\n";
+                theSQLString += "   and ag.nsc_number = ?" + "\n";
                 theParam = agent.getNscNumber();
             }
             else
