@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.11 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: CellLinePopulateAction.java,v 1.12 2006-04-27 18:32:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.10  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -83,7 +86,7 @@ public class CellLinePopulateAction extends BaseAction {
 	}
 
 	/**
-	 * Populate the dropdown menus for submitEnvironmentalFactors
+	 * Populate the dropdown menus for submitCellLines
 	 * 
 	 * @param mapping
 	 * @param form

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.17 2006-04-18 17:55:10 pandyas Exp $
+ * $Id: TherapyPopulateAction.java,v 1.18 2006-04-27 18:34:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/04/18 17:55:10  pandyas
+ * Fixed Therapy multi-select collections -  populate issue
+ *
  * Revision 1.16  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -184,7 +187,7 @@ public class TherapyPopulateAction extends BaseAction
     }
 
     /**
-     * Populate the dropdown menus for submitEnvironmentalFactors
+     * Populate the dropdown menus for submitTherapy
      * 
      * @param mapping
      * @param form
