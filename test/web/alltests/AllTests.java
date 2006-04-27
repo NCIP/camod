@@ -42,49 +42,42 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: HttpTests.java,v 1.7 2006-04-27 15:07:57 pandyas Exp $
+ * $Id: AllTests.java,v 1.1 2006-04-27 15:08:09 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
- * Revision 1.6  2006/01/09 16:36:24  pandyas
- * Modified names for Search tests to include "Populate"
- *
- * Revision 1.5  2006/01/06 17:20:50  pandyas
- * reordered search test list
- *
- * Revision 1.4  2006/01/06 17:18:52  pandyas
- * Modified names for Search tests to include "Populate"
- *
- * Revision 1.3  2006/01/06 16:09:32  pandyas
- * Modified names for Search tests to include "Populate"
- *
- * Revision 1.2  2005/12/28 16:42:19  georgeda
+ * Revision 1.2  2005/12/28 16:41:57  georgeda
  * Changes for testing
  *
  * Revision 1.1  2005/12/27 15:04:33  georgeda
  * Test cleanup
  *
  */
-package web;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import web.alltests.*;
+package web.alltests;
 
 /**
  * @author georgeda
  */
-public class HttpTests
+import gov.nih.nci.camod.webapp.action.StrutsActionTests;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
+import web.HttpTests;
+
+public class AllTests
 {
+
     public static Test suite()
     {
         TestSuite suite = new TestSuite();
 
-        // Search tests
-        suite.addTest(AllSearchTests.suite());
-        
-        // Submission tests
-        suite.addTest(AllSubmissionTests.suite());
-                
+        suite.addTest(HttpTests.suite());
+        suite.addTest(StrutsActionTests.suite());
+
         return suite;
+    }
+
+    public static void main(String args[])
+    {
+        TestRunner.run(suite());
     }
 }
