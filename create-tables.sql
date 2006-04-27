@@ -250,12 +250,12 @@ create table engineered_gene (
    segment_type_id number(19,0),
    gene_id varchar2(255),
    description varchar2(255),
+   genetic_alteration_id number(19,0) unique,
    environmental_factor_id number(19,0),
    es_cell_line_name varchar2(255),
    blastocyst_name varchar2(255),
    species_id number(19,0) unique,
    abs_cancer_model_id number(19,0) not null,
-   genetic_alteration_id number(19,0) not null,
    primary key (engineered_gene_id)
 );
 create table environmental_factor (
@@ -298,7 +298,7 @@ create table gene_function (
 );
 create table genetic_alteration (
    genetic_alteration_id number(19,0) not null,
-   observation varchar2(255) not null,
+   observation varchar2(255),
    method_of_observation varchar2(255),
    primary key (genetic_alteration_id)
 );
@@ -325,7 +325,7 @@ create table histopathology (
    disease_id number(19,0),
    organ_id number(19,0),
    genetic_alteration_id number(19,0) unique,
-   abs_cancer_model_id number(19,0) not null,
+   abs_cancer_model_id number(19,0),
    parent_histopathology_id number(19,0),
    primary key (histopathology_id)
 );
@@ -356,8 +356,8 @@ create table log (
    sub_system varchar2(255),
    timestamp varchar2(255),
    party_id number(19,0),
-   comments_id number(19,0) unique,
    abs_cancer_model_id number(19,0),
+   comments_id number(19,0) unique,
    primary key (log_id)
 );
 create table micro_array_data (
@@ -413,7 +413,8 @@ create table party_contact_info (
 );
 create table party_role (
    party_id number(19,0) not null,
-   role_id number(19,0) not null
+   role_id number(19,0) not null,
+   primary key (party_id, role_id)
 );
 create table phenotype (
    phenotype_id number(19,0) not null,
@@ -501,9 +502,9 @@ create table spontaneous_mutation (
    name varchar2(255),
    gene_id varchar2(255),
    comments varchar2(255),
+   genetic_alteration_id number(19,0) unique,
    mutation_identifier_id number(19,0),
-   abs_cancer_model_id number(19,0) not null,
-   genetic_alteration_id number(19,0) not null,
+   abs_cancer_model_id number(19,0),
    primary key (spontaneous_mutation_id)
 );
 create table staining_method (
@@ -519,8 +520,8 @@ create table strain (
    name_unctrl_vocab varchar2(255),
    abbreviation varchar2(255),
    concept_code varchar2(255),
-   mutation_identifier_id number(19,0) unique,
    species_id number(19,0) not null,
+   mutation_identifier_id number(19,0) unique,
    primary key (strain_id)
 );
 create table tar_mod_modification_type (
@@ -620,7 +621,7 @@ alter table engineered_gene add constraint FK4ADB496687D074B5 foreign key (speci
 alter table engineered_gene add constraint FK4ADB496653A0BB3C foreign key (segment_type_id) references segment_type;
 alter table engineered_gene add constraint FK4ADB4966BB186F15 foreign key (image_id) references image;
 alter table engineered_gene add constraint FK4ADB4966F9575982 foreign key (genotype_summary_id) references genotype_summary;
-alter table engineered_gene add constraint FK4ADB496697B9D0A5 foreign key (genetic_alteration_id) references engineered_gene;
+alter table engineered_gene add constraint FK4ADB49663FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
 alter table engineered_gene add constraint FK4ADB496672CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table engineered_gene add constraint FK4ADB496619EF4CF2 foreign key (environmental_factor_id) references environmental_factor;
 alter table engineered_gene add constraint FK4ADB49661CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
@@ -657,7 +658,7 @@ alter table regulatory_element add constraint FKEA51B05587D074B5 foreign key (sp
 alter table regulatory_element add constraint FKEA51B055229D942B foreign key (reg_element_type_id) references reg_element_type;
 alter table screening_result add constraint FKE30F148646872875 foreign key (treatment_id) references treatment;
 alter table screening_result add constraint FKE30F1486457316D5 foreign key (agent_id) references agent;
-alter table spontaneous_mutation add constraint FKAE3E7B3BA9F03D86 foreign key (genetic_alteration_id) references spontaneous_mutation;
+alter table spontaneous_mutation add constraint FKAE3E7B3B3FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
 alter table spontaneous_mutation add constraint FKAE3E7B3B72CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table spontaneous_mutation add constraint FKAE3E7B3B1CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table strain add constraint FKCAD5417587D074B5 foreign key (species_id) references species;
