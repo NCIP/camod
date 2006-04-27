@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: ClinicalMarkerAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: ClinicalMarkerAction.java,v 1.7 2006-04-27 15:05:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/11/09 00:17:25  georgeda
  * Fixed delete w/ constraints
  *
@@ -33,142 +36,149 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-public class ClinicalMarkerAction extends BaseAction {
+public class ClinicalMarkerAction extends BaseAction
+{
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping,
+                              ActionForm form,
+                              HttpServletRequest request,
+                              HttpServletResponse response) throws Exception
+    {
 
-		log.info("<ClinicalMarkerAction> Entering 'edit' method");
+        log.info("<ClinicalMarkerAction> Entering 'edit' method");
 
-		// Grab the current aAssocMetastasisID we are working with related to
-		// this animalModel
-		String aClinicalMarkerID = request.getParameter("aClinicalMarkerID");
+        // Grab the current aAssocMetastasisID for this animalModel
+        String aClinicalMarkerID = request.getParameter("aClinicalMarkerID");
         String aHistopathologyID = request.getParameter("aHistopathologyID");
-		log.debug("aClinicalMarkerID: " + aClinicalMarkerID);
+        log.info("aClinicalMarkerID: " + aClinicalMarkerID);
 
-		// Create a form to edit
-		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
+        // Create a form to edit
+        ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
 
-		log.debug("<HistopathologyAction saveClinicalMarker> following Characteristics:" 
-				+ "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() + "\n\t ClinicalMarkerID: " + aClinicalMarkerID
-				+ "\n\t Name: " + clinicalMarkerForm.getName() 
-                + "\n\t otherName: " + clinicalMarkerForm.getOtherName()
-                + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: "
-				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
+        log.info("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() + "\n\t ClinicalMarkerID: " + aClinicalMarkerID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: " + (String) request.getSession().getAttribute(
+                                                                                                                                                                                                                                                                                                                                                                                                                                      "camod.loggedon.username"));
 
-		ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean("clinicalMarkerManager");
-		
-		String theAction = (String) request.getParameter(Constants.Parameters.ACTION);		
+        ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean("clinicalMarkerManager");
 
-		try {
-			
-            if ("Delete".equals(theAction)) {
-                
-                HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");  
-                Histopathology theHistopathology = theHistopathologyManager.get(aHistopathologyID);         
-                
-            	theClinicalMarkerManager.remove(aClinicalMarkerID, theHistopathology);
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.delete.successful"));
-				saveErrors(request, msg);
+        try
+        {
 
-			} else {
-				
-				ClinicalMarker theClinicalMarker = ClinicalMarkerManagerSingleton.instance().get(aClinicalMarkerID);
-				theClinicalMarkerManager.update(clinicalMarkerForm, theClinicalMarker);				
+            if ("Delete".equals(theAction))
+            {
 
-			// Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.edit.successful"));
-			saveErrors(request, msg);
-			}
+                HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
+                Histopathology theHistopathology = theHistopathologyManager.get(aHistopathologyID);
 
-		} catch (Exception e) {
+                theClinicalMarkerManager.remove(aClinicalMarkerID, theHistopathology);
 
-			log.error("Unable to get a ClinicalMarker action: ", e);
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.delete.successful"));
+                saveErrors(request, msg);
 
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, theMsg);
-		}
+            }
+            else
+            {
 
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
-	
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+                ClinicalMarker theClinicalMarker = ClinicalMarkerManagerSingleton.instance().get(aClinicalMarkerID);
+                theClinicalMarkerManager.update(clinicalMarkerForm, theClinicalMarker);
 
-		log.info("<ClinicalMarkerAction> Entering 'save' method");
+                // Add a message to be displayed in submitOverview.jsp saying you've created a new model successfully
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.edit.successful"));
+                saveErrors(request, msg);
+            }
 
-		// Create a form to edit
-		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, clinicalMarkerForm);
+        }
+        catch (Exception e)
+        {
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+            log.error("Unable to get a ClinicalMarker action: ", e);
 
-		// Grab the current aHistopathID from the session
-		String aHistopathologyID = request.getParameter("aHistopathologyID");
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, theMsg);
+        }
 
-		System.out.println("<ClinicalMarkerAction save> following Characteristics:"
-				+ "\n\t ParentHistopathID: " + aHistopathologyID 
-				+ "\n\t Name: " + clinicalMarkerForm.getName()
-                + "\n\t otherName: " + clinicalMarkerForm.getOtherName()
-				+ "\n\t Value: " + clinicalMarkerForm.getValue() 
-				+ "\n\t user: "	+ (String) request.getSession().getAttribute("camod.loggedon.username"));
-		
-		String theForward = "AnimalModelTreePopulateAction";
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-			
-			HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");	
-			Histopathology theHistopathology = theHistopathologyManager.get(aHistopathologyID);			
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping,
+                              ActionForm form,
+                              HttpServletRequest request,
+                              HttpServletResponse response) throws Exception
+    {
 
-			theAnimalModelManager.addClinicalMarker(theAnimalModel, theHistopathology, clinicalMarkerForm);
+        log.info("<ClinicalMarkerAction> Entering 'save' method");
 
-			log.info("New clinical marker created");
+        // Create a form to edit
+        ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
+        request.getSession().setAttribute(Constants.FORMDATA, clinicalMarkerForm);
 
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.creation.successful"));
-			saveErrors(request, msg);
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-			log.info("<ClinicalMarkerAction> Exiting 'save' method");
+        // Grab the current aHistopathID from the session
+        String aHistopathologyID = request.getParameter("aHistopathologyID");
 
-		} catch (Exception e) {
-			log.error("Exception occurred creating a Clinical Marker", e);
+        System.out.println("<ClinicalMarkerAction save> following Characteristics:" + "\n\t ParentHistopathID: " + aHistopathologyID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: " + (String) request.getSession().getAttribute(
+                                                                                                                                                                                                                                                                                                                                                           "camod.loggedon.username"));
 
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(request, msg);
-		}
+        String theForward = "AnimalModelTreePopulateAction";
 
-		log.trace("Exiting save");
-		return mapping.findForward(theForward);
-	}	
-	
+        try
+        {
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+
+            HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
+            Histopathology theHistopathology = theHistopathologyManager.get(aHistopathologyID);
+
+            theAnimalModelManager.addClinicalMarker(theAnimalModel, theHistopathology, clinicalMarkerForm);
+
+            log.info("New clinical marker created");
+
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.creation.successful"));
+            saveErrors(request, msg);
+
+            log.info("<ClinicalMarkerAction> Exiting 'save' method");
+
+        }
+        catch (Exception e)
+        {
+            log.error("Exception occurred creating a Clinical Marker", e);
+
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+
+        log.trace("Exiting save");
+        return mapping.findForward(theForward);
+    }
+
 }
