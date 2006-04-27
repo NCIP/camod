@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * Revision 1.7  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -7,7 +10,7 @@
  * Cleanup
  *
  * 
- * $Id: ClinicalMarker.java,v 1.8 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: ClinicalMarker.java,v 1.9 2006-04-27 15:01:04 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -56,6 +59,20 @@ public class ClinicalMarker extends BaseObject implements Comparable, Serializab
     public void setNameUnctrlVocab(String nameUnctrlVocab)
     {
         this.nameUnctrlVocab = nameUnctrlVocab;
+    } 
+    
+    /**
+     * @return Returns the display name.
+     */
+    public String getDisplayName()
+    {
+        String theDisplayName = name;
+        if (theDisplayName == null && nameUnctrlVocab != null)
+        {
+            theDisplayName = "Other - " + nameUnctrlVocab;
+        }
+
+        return theDisplayName;
     }    
     /**
      * @return Returns the value.
