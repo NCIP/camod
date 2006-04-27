@@ -29,7 +29,7 @@
         	name="organ"
         	column="organ_id"
         	class="Organ"
-        	cascade="all-delete-orphan"/>
+        	cascade="save-update"/>
         	
         <!-- expressionLevelDesc (many-to-one unidirectional) -->
         <many-to-one

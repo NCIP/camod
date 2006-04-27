@@ -63,7 +63,7 @@
         	name="organ"
         	column="organ_id"
         	class="Organ"
-        	cascade="all-delete-orphan"/>
+        	cascade="save-update"/>
 
   	
         	
