@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactorManagerImpl.java,v 1.6 2006-04-19 17:38:26 pandyas Exp $
+ * $Id: EnvironmentalFactorManagerImpl.java,v 1.7 2006-04-27 15:02:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/19 17:38:26  pandyas
+ * Removed TODO text
+ *
  * Revision 1.5  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -76,7 +79,7 @@ public class EnvironmentalFactorManagerImpl extends BaseManager implements Envir
      */
     public void remove(String id) throws Exception
     {
-        log.debug("In EnvironmentalFactorManagerImpl.save");
+        log.debug("In EnvironmentalFactorManagerImpl.remove");
         super.remove(id, EnvironmentalFactor.class);
     }
 }
