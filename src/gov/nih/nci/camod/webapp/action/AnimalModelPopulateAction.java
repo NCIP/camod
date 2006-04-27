@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.18 2006-04-20 18:11:16 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.19 2006-04-27 15:04:38 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/04/20 18:11:16  pandyas
+ * Cleaned up Species or Strain save of Other in DB
+ *
  * Revision 1.17  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -215,12 +218,12 @@ public class AnimalModelPopulateAction extends BaseAction
                                            HttpServletResponse response) throws Exception
     {
 
-        ModelCharacteristicsForm modelChar = (ModelCharacteristicsForm) form;
+        ModelCharacteristicsForm modelCharForm = (ModelCharacteristicsForm) form;
 
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, modelChar.getScientificName());
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, modelCharForm.getScientificName());
         // Must Reset both fields when new species is chosen
-        modelChar.setEthinicityStrain("");
-        modelChar.setOtherEthnicityStrain("");
+        modelCharForm.setEthinicityStrain("");
+        modelCharForm.setOtherEthnicityStrain("");
         String page = request.getParameter("page");
 
         if (page.equals("modelChar"))
