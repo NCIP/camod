@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.68 2006-04-20 19:18:53 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.69 2006-04-27 15:03:54 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.68  2006/04/20 19:18:53  pandyas
+ * Moved save Assoc Met from AnimalModel to the Histopathology
+ *
  * Revision 1.67  2006/04/20 18:11:31  pandyas
  * Cleaned up Species or Strain save of Other in DB
  *
@@ -212,7 +215,6 @@ import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
-import gov.nih.nci.camod.webapp.form.AssociatedMetastasisData;
 import gov.nih.nci.camod.webapp.form.AvailabilityData;
 import gov.nih.nci.camod.webapp.form.CellLineData;
 import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
