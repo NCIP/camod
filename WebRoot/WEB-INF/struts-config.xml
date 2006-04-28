@@ -51,7 +51,11 @@
 		<form-bean
 			name="curationAssignmentForm"
 		    type="gov.nih.nci.camod.webapp.form.CurationAssignmentForm"/>
-
+		    
+		<form-bean
+			name="customizeSearchResultsForm"
+		    type="gov.nih.nci.camod.webapp.form.CustomizeSearchResultsForm"/>
+		    
 		<form-bean
 			name="rolesAssignmentForm"
 		    type="gov.nih.nci.camod.webapp.form.RolesAssignmentForm"/>
@@ -151,7 +155,11 @@
 		<form-bean
 			name="searchForm"
 		    type="gov.nih.nci.camod.webapp.form.SearchForm"/>
-		    
+
+		<form-bean
+			name="saveQueryForm"
+			type="gov.nih.nci.camod.webapp.form.SaveQueryForm"/>
+			    
 		<form-bean
 			name="drugScreenSearchForm"
 		    type="gov.nih.nci.camod.webapp.form.DrugScreenSearchForm"/>
@@ -283,6 +291,7 @@
 		<forward
 			name="subViewModelMenu"
 			path="/jsp/subViewModelMenu.jsp"></forward>
+
 		
 		<forward
 			name="viewCarcinogenicInterventions"
@@ -347,7 +356,11 @@
 		<forward
 			name="adminUserSettings"
 			path="/jsp/protected/adminUserSettings.jsp"></forward>
-				
+	
+		<forward
+			name="customizeSearchResults"
+			path="/jsp/protected/customizeSearchResults.jsp"></forward>
+							
 		<forward
 			name="subAdminMenu"
 			path="/jsp/protected/subAdminMenu.jsp"></forward>
@@ -491,7 +504,15 @@
 		<forward
 			name="submitViralTreatment"
 			path="/jsp/protected/submitViralTreatment.jsp"></forward>
-			
+
+		<forward
+			name="searchSavedQueries"
+			path="/jsp/protected/savedSearchQueries.jsp"></forward>
+		
+		<forward
+			name="searchQueryHistory"
+			path="/jsp/protected/searchQueryHistory.jsp"></forward>
+					
      	<forward
      		name="AnimalModelTreePopulateAction"
      		path="/AnimalModelTreePopulateAction.do">
@@ -534,6 +555,14 @@
 			parameter="/jsp/protected/adminUserSettings.jsp">
 			<set-property property="secure" value="false"/>
         </action>
+		
+		<action
+			path="/customizeSearchResults"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/customizeSearchResults.jsp">
+			<set-property property="secure" value="false"/>
+        </action>
+                
 		<action
 			path="/adminUserSettingsSent"
 			type="org.apache.struts.actions.ForwardAction"
@@ -688,7 +717,7 @@
 			path="/loginRedirect"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/loginRedirect.jsp">
-			<set-property property="secure" value="true"/>
+			<set-property property="secure" value="false"/>
 		</action>
 			
 		<action
@@ -757,6 +786,24 @@
 			parameter="/jsp/protected/submitMenu.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
+		<action
+			path="/searchSavedQueries"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/savedSearchQueries.jsp">
+			<set-property property="secure" value="false"/>
+		</action>
+		<action
+			path="/searchQueryHistory"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/searchQueryHistory.jsp">
+			<set-property property="secure" value="false"/>
+		</action>		
+		<action
+			path="/submitMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>				
 		<action
 			path="/submitMicroarrayData"
 			type="org.apache.struts.actions.ForwardAction"
@@ -978,7 +1025,7 @@
 			path="/login"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/login.jsp">
-			<set-property property="secure" value="true"/>
+			<set-property property="secure" value="false"/>
 		</action>
 		
 		<action
@@ -1337,7 +1384,26 @@
 			validate="false">
 		<set-property property="secure" value="false" />
     </action>      
-         
+    
+	 <!--  CustomizeSearchResultsAction  -->
+     <action path="/CustomizeSearchResultsAction"
+	        type="gov.nih.nci.camod.webapp.action.CustomizeSearchResultsAction"
+	        name="customizeSearchResultsForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="false"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="success"
+            path="/SimpleSearchPopulateAction.do?unprotected_method=populate">
+        </forward>  
+	    <forward
+            name="failed"
+            path="/CustomizeSearchResultsPopulateAction.do">
+        </forward> 
+     </action>	
+
      <!-- ChemicalDrugForm -->
      <action path="/ChemicalDrugAction"
 	        type="gov.nih.nci.camod.webapp.action.ChemicalDrugAction"
@@ -1605,7 +1671,7 @@
 	        unknown="false"
 	        validate="false"
 	        input="login">
-	       <set-property property="secure" value="true" />
+	       <set-property property="secure" value="false" />
           <forward
 	            name="success"
 	            redirect="true"
@@ -1709,7 +1775,23 @@
             validate="false" >
         <set-property property="secure" value="false" />     
     </action>  
-      
+
+    <action path="/ReturnUserQueries"
+            type="gov.nih.nci.camod.webapp.action.SaveQueryAction"
+            scope="request" 
+            parameter="method"
+            validate="false" >
+        <set-property property="secure" value="false" />     
+    </action>  
+ 
+     <action path="/ReturnUserSavedQueries"
+            type="gov.nih.nci.camod.webapp.action.SaveQueryAction"
+            scope="request" 
+            parameter="method"
+            validate="false" >
+        <set-property property="secure" value="false" />     
+    </action>         
+        
     <action path="/DeleteAnimalModelAction"
             type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
             scope="request"
@@ -2187,6 +2269,34 @@
      </action>
      
      <action 
+         path="/SavedQueriesPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.SavedQueriesPopulateAction"
+         name="customizeSearchResultsForm"         
+         parameter="protected"
+         validate="false">
+         <set-property property="secure" value="false" />
+         <forward 
+    		name="next"
+    		path="/savedSearchQueries.do">
+    	 </forward>
+     </action>
+     
+     <action 
+         path="/CustomizeSearchResultsPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.CustomizeSearchResultsPopulateAction"
+         name="customizeSearchResultsForm"
+         parameter="protected"
+         input="input" 
+         scope="request" 
+         validate="false">
+         <set-property property="secure" value="false" />
+         <forward 
+    		name="next"
+    		path="/customizeSearchResults.do">
+    	 </forward>
+     </action>
+          
+     <action 
          path="/AdminUserSettingsAction"
          type="gov.nih.nci.camod.webapp.action.AdminUserSettingsAction"
          name="userSettingsForm"
@@ -2390,6 +2500,32 @@
 	        validate="false" >
 	    <set-property property="secure" value="false" />
     </action>        
+    
+    <action path="/SaveQueryAction"
+	        type="gov.nih.nci.camod.webapp.action.SaveQueryAction"
+	        name="saveQueryForm"
+	        scope="request"
+	        parameter="method"
+   	        unknown="false"
+	        input="/searchResults"
+	        validate="false" >
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="next"
+            path="/searchResults.do"
+            redirect="true">
+        </forward>	
+	    <forward
+            name="noSaveOption"
+            path="/searchResults.do?noSaveOption=1"
+            redirect="true">
+        </forward>	        
+        <forward 
+            redirect="true"
+    		name="querydeleted"
+    		path="/SaveQueryAction.do?method=returnSavedUserQueries">
+        </forward>            
+    </action> 
 
     <action path="/PubMedPopulateAction"
 	        type="gov.nih.nci.camod.webapp.action.PubMedPopulateAction"
