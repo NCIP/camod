@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: viewCellLines.jsp,v 1.18 2006-04-28 19:49:11 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -33,37 +45,37 @@
 				</c:choose>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${p.name}"/>&nbsp;
+					<camod:highlight><c:out value="${p.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Name of Cell Line</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<c:out value="${p.name}"/>&nbsp;
+					<camod:highlight><c:out value="${p.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd">
-					<c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;
+					<camod:highlight><c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<c:out value="${p.experiment}"/>&nbsp;
+					<camod:highlight><c:out value="${p.experiment}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
 				<td class="resultsBoxGreyEnd">
-					<c:out value="${p.results}"/>&nbsp;
+					<camod:highlight><c:out value="${p.results}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<c:out value="${p.comments}"/>&nbsp;
+					<camod:highlight><c:out value="${p.comments}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr><td></td></tr>
@@ -101,29 +113,29 @@
 							</c:otherwise>
 						</c:choose>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<c:out value="${pub.publicationStatus.name}"/>
+							<camod:highlight><c:out value="${pub.publicationStatus.name}"/></camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
-							<c:out value="${pub.authors}"/>&nbsp;
+							<camod:highlight><c:out value="${pub.authors}"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
 							<c:out value="${pub.jaxJNumber}"/>&nbsp;
 						</td>							
 						<td class="<c:out value="${tdClass}"/>" width="30%">
-							<c:out value="${pub.title}"/>&nbsp;
+							<camod:highlight><c:out value="${pub.title}"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<c:out value="${pub.journal}"/>&nbsp;
+							<camod:highlight><c:out value="${pub.journal}"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="5%">
-							<c:out value="${pub.year}"/>&nbsp;
+							<camod:highlight><c:out value="${pub.year}"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<c:out value="${pub.volume}"/>&nbsp;
+							<camod:highlight><c:out value="${pub.volume}"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<c:out value="${pub.startPage}"/> - 
-							<c:out value="${pub.endPage}"/> 
+							<camod:highlight><c:out value="${pub.startPage}"/> - </camod:highlight>
+							<camod:highlight><c:out value="${pub.endPage}"/> </camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>End" width="10%">
 							<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${pub.pmid}"/>">

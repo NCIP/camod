@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2006/04/17 19:08:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.27  2006/01/04 21:30:54  georgeda
  * Enhancement #272 - Added diagnosis to summary of tumors at top of page
  *
@@ -26,7 +29,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.28 2006-04-17 19:08:19 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.29 2006-04-28 19:50:13 schroedn Exp $
  *
  */   
 %>
@@ -53,7 +56,7 @@
 			<tr>
 				<td class="formTitle" height="20" width="100%">
 				Histopathology - Model:
-				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+				<camod:highlight><c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>				
 			</tr>
 <%      
@@ -83,13 +86,13 @@
 				  	        <tr>
 					  	        <td width="50%">
 									<a href="<c:out value="#histo_${histstat.count}"/>">
-										<c:out value="${h.organ.EVSPreferredDescription}"/>
+										<camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/></camod:highlight>
 									</a>
 								</td>
 								<td width="50%">
 									<c:if test="${not empty h.disease}">
-										    <c:out value="${disease.EVSPreferredDescription}"/>
-									</c:if>
+										    <camod:highlight><c:out value="${disease.EVSPreferredDescription}"/></camod:highlight>
+									</c:if>	
 							    </td>
 						    </tr>
 						    
@@ -105,7 +108,7 @@
 									</td>
 									<td width="50%">
 									    <c:if test="${not empty m.disease}">
-											    <c:out value="${disease.EVSPreferredDescription}"/>
+											    <camod:highlight><c:out value="${disease.EVSPreferredDescription}"/></camod:highlight>
 										</c:if>
 									</td>
 								</tr>
@@ -133,14 +136,14 @@
 			<tr>
 			    <a name="<c:out value="histo_${histstat.count}"/>"/>&nbsp;
 				<td class="formTitleBlue" height="20" colspan="2">
-					Lesion / Tumor in <c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
+					Lesion / Tumor in <camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>				
 			
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;
+					<camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 
@@ -148,14 +151,14 @@
 				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
 				    <bean:define id="d" name="h" property="disease"/>
-					    <c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
+					     <camod:highlight><c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br></camod:highlight>
 				</td>
 			</tr>
 				
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Onset</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${h.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/>
+					<camod:highlight><c:out value="${h.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/></camod:highlight>
 				</td>
 			</tr>			
 	
@@ -164,53 +167,53 @@
 					<b>Average Weight of Tumor (mg)</b>
 				</td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${h.weightOfTumor}"/>&nbsp;
+					<camod:highlight><c:out value="${h.weightOfTumor}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					 <c:out value="${h.volumeOfTumor}"/>&nbsp;
+					 <camod:highlight><c:out value="${h.volumeOfTumor}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence over Lifetime (%)</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${h.relationalOperation}"/>&nbsp;
-					<c:out value="${h.tumorIncidenceRate}"/>&nbsp;
+					<camod:highlight><c:out value="${h.relationalOperation}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${h.tumorIncidenceRate}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${h.survivalInfo}" escapeXml="false"/>&nbsp;
+					<camod:highlight><c:out value="${h.survivalInfo}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			
 
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${h.grossDescription}" escapeXml="false"/>&nbsp;
+					<camod:highlight><c:out value="${h.grossDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 	
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${h.microscopicDescription}" escapeXml="false"/>&nbsp;
+					<camod:highlight><c:out value="${h.microscopicDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 	
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>&nbsp;
+					<camod:highlight><c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>&nbsp;</camod:highlight>
 					<c:if test="${not empty h.geneticAlteration.methodOfObservation}">&nbsp;<br/>
 						Method - &nbsp;
-						<c:out value="${h.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;
+						<camod:highlight><c:out value="${h.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</c:if>
 				</td>
 			</tr>
@@ -218,13 +221,13 @@
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Comparative Data from other Species</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${h.comparativeData}" escapeXml="false" />&nbsp;
+					<camod:highlight><c:out value="${h.comparativeData}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 			</tr>	
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${h.comments}" escapeXml="false" />&nbsp;
+					<camod:highlight><c:out value="${h.comments}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			
@@ -243,10 +246,10 @@
 					        		<td class="WhiteBox">
 											<c:choose>
 												<c:when test="${empty c.name}">
-													<c:out value="${c.nameUnctrlVocab}"/>
+													<camod:highlight><c:out value="${c.nameUnctrlVocab}"/></camod:highlight>
 												</c:when>
 												<c:otherwise>
-													<c:out value="${c.name}"/>
+													<camod:highlight><c:out value="${c.name}"/></camod:highlight>
 												</c:otherwise>
 											</c:choose>					                
 					                </td>
@@ -274,21 +277,21 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;
+						<camod:highlight><c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 						<bean:define id="d" name="m" property="disease"/>
-							<c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br>
+							<camod:highlight><c:out value="${d.EVSPreferredDescription}"/>&nbsp;</camod:highlight><br>
 						&nbsp;
 					</td>
 				</tr>	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Age at Onset of Metastasis</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<c:out value="${m.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/>
+						<camod:highlight><c:out value="${m.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/></camod:highlight>
 				    </td>
 				</tr>			
 	
@@ -296,65 +299,65 @@
 					<td class="resultsBoxWhite" width="25%">
 					<b>Average Weight of Tumor (mg)</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-					    <c:out value="${m.weightOfTumor}"/>&nbsp;
+					    <camod:highlight><c:out value="${m.weightOfTumor}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						 <c:out value="${m.volumeOfTumor}"/>&nbsp;
+						 <camod:highlight><c:out value="${m.volumeOfTumor}"/>&nbsp;</camod:highlight>
 				    </td>
 			    </tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Metastasis Incidence over Lifetime (%)</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-						<c:out value="${m.relationalOperation}"/>&nbsp;
-						<c:out value="${m.tumorIncidenceRate}"/>&nbsp;
+						<camod:highlight><c:out value="${m.relationalOperation}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.tumorIncidenceRate}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<c:out value="${m.survivalInfo}"/>&nbsp;
+						<camod:highlight><c:out value="${m.survivalInfo}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-						<c:out value="${m.grossDescription}"/>&nbsp;
+						<camod:highlight><c:out value="${m.grossDescription}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<c:out value="${m.microscopicDescription}"/>&nbsp;
+						<camod:highlight><c:out value="${m.microscopicDescription}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Metastasis</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<c:out value="${m.geneticAlteration.observation}"/>	&nbsp; 
+						<camod:highlight><c:out value="${m.geneticAlteration.observation}"/>&nbsp;</camod:highlight>
 						<c:if test="${not empty m.geneticAlteration.methodOfObservation}"><br/>
 							Method - &nbsp;
-							<c:out value="${m.geneticAlteration.methodOfObservation}"/>&nbsp;
+							<camod:highlight><c:out value="${m.geneticAlteration.methodOfObservation}"/>&nbsp;</camod:highlight>
 						</c:if>
 					</td>
 				</tr>
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Comparative Data from other Species</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-					<c:out value="${m.comparativeData}" escapeXml="false" />&nbsp;
+						<camod:highlight><c:out value="${m.comparativeData}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Comment</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-					<c:out value="${m.comments}"/>&nbsp;
+						<camod:highlight><c:out value="${m.comments}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 				<tr>

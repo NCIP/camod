@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: viewPublications.jsp,v 1.13 2006-04-28 19:52:10 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -20,7 +32,9 @@
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
 					Publications - Model:
-					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					<camod:highlight>
+						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					</camod:highlight>
 				</td>				
 			</tr>			
 			
@@ -47,29 +61,29 @@
 					</c:otherwise>
 				</c:choose>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<c:out value="${p.publicationStatus.name}"/>&nbsp;
+					<camod:highlight><c:out value="${p.publicationStatus.name}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">
-					<c:out value="${p.authors}"/>&nbsp;
+					<camod:highlight><c:out value="${p.authors}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">
 					<c:out value="${p.jaxJNumber}"/>&nbsp;
 				</td>				
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<c:out value="${p.title}" escapeXml="false" />&nbsp;
+					<camod:highlight><c:out value="${p.title}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<c:out value="${p.journal}"/>&nbsp;
+					<camod:highlight><c:out value="${p.journal}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="5%">
-					<c:out value="${p.year}"/>&nbsp;
+					<camod:highlight><c:out value="${p.year}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<c:out value="${p.volume}"/>&nbsp;
+					<camod:highlight><c:out value="${p.volume}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<c:out value="${p.startPage}"/> - 
-					<c:out value="${p.endPage}"/> 
+					<camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
+					<camod:highlight><c:out value="${p.endPage}"/> </camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="10%">
 					<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">

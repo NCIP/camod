@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: viewTherapeuticApproaches.jsp,v 1.19 2006-04-28 19:52:30 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -17,8 +29,11 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
 				<td class="formTitle" height="20" colspan="9">
-				Therapeutic Approaches - Model:
-				<c:out escapeXml="false" value="${mdl.modelDescriptor}"/></td>				
+					Therapeutic Approaches - Model:
+					<camod:highlight>
+						<c:out escapeXml="false" value="${mdl.modelDescriptor}"/>
+					</camod:highlight>
+				</td>				
 			</tr>
 			<tr>
 				<td class="resultsBoxWhiteEnd" height="20" colspan="9">

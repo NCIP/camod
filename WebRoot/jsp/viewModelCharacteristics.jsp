@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.25 2006-04-17 19:08:19 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.26 2006-04-28 19:51:50 schroedn Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.25  2006/04/17 19:08:19  pandyas
+  *   caMod 2.1 OM changes
+  *
   *   Revision 1.24  2005/12/08 21:45:18  georgeda
   *   Defect #259; handle PI availability for 2-tier data
   *
@@ -40,62 +43,73 @@
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">
+			<td class="formTitle" height="20" colspan="3">						
 				Model Characteristics - Model:
-				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				<camod:highlight>
+					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				</camod:highlight>
 			</td>
 		</tr>
 		<tr>
 			<td class="GreyBox" width="20%"><b>Model Descriptor</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-			    <c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				<camod:highlight>			
+				    <c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				</camod:highlight>
 			</td>			
 		</tr>
 		
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Official Nomenclature</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<c:set var="items" value="${mdl.distinctNomenclatureFromEngineeredGeneCollection}"/>
-				<logic:notEmpty name="items">
-				<ul>    
-					<c:forEach var="item" items="${items}" varStatus="stat">
-					<li> <c:out value="${item}" escapeXml="false"/> </li>
-					</c:forEach>
-				</ul>
-				</logic:notEmpty>
-				<logic:empty name="items">
-				    <br/>
-				</logic:empty>
+				<camod:highlight>
+					<c:set var="items" value="${mdl.distinctNomenclatureFromEngineeredGeneCollection}"/>
+					<logic:notEmpty name="items">
+					<ul>    
+						<c:forEach var="item" items="${items}" varStatus="stat">
+						<li> <c:out value="${item}" escapeXml="false"/> </li>
+						</c:forEach>
+					</ul>
+					</logic:notEmpty>
+					<logic:empty name="items">
+					    <br/>
+					</logic:empty>
+				</camod:highlight>
 			</td>
 		</tr>
 
 		<tr>
 			<td class="GreyBox" width="20%"><b>Genotype</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-			    <c:set var="items" value="${mdl.distinctGenotypeFromEngineeredGeneCollection}"/>
-			    <logic:notEmpty name="items">
-				<ul>    
-					<c:forEach var="item" items="${items}" varStatus="stat">
-					<li> <c:out value="${item}"/> </li>
-					</c:forEach>
-				</ul>
-				</logic:notEmpty>
-				<logic:empty name="items">
-				    <br/>
-				</logic:empty>
+				<camod:highlight>
+				    <c:set var="items" value="${mdl.distinctGenotypeFromEngineeredGeneCollection}"/>
+				    <logic:notEmpty name="items">
+					<ul>    
+						<c:forEach var="item" items="${items}" varStatus="stat">
+						<li> <c:out value="${item}"/> </li>
+						</c:forEach>
+					</ul>
+					</logic:notEmpty>
+					<logic:empty name="items">
+					    <br/>
+					</logic:empty>
+				</camod:highlight>					
 			</td>
 		</tr>
 
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Species</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
-				<c:out value="${mdl.strain.species.scientificName}"/>
+				<camod:highlight>
+					<c:out value="${mdl.strain.species.scientificName}"/>
+				</camod:highlight>					
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
+				<camod:highlight>
 			    <c:if test="${not empty mdl.strain.name}">
 				    <c:out value="${mdl.strain.name}"/>
 				</c:if>
@@ -103,6 +117,7 @@
 				    <c:out value="${mdl.strain.nameUnctrlVocab}"/>
 				</c:if>
 				&nbsp;
+				</camod:highlight>
 			</td>
 		</tr>
 		
@@ -124,7 +139,9 @@
 			<td class="GreyBox" width="20%"><b>Experimental Design</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<P>
-				    <c:out value="${mdl.experimentDesign}" escapeXml="false" />&nbsp;
+					<camod:highlight>
+					    <c:out value="${mdl.experimentDesign}" escapeXml="false" />&nbsp;
+					</camod:highlight>
 				</P>			
 			</td>
 		</tr>		               
@@ -133,7 +150,9 @@
 			<td class="WhiteBox" width="20%"><b>Phenotype</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
-				<c:out value="${mdl.phenotype.description}" escapeXml="false"/>
+					<camod:highlight>
+						<c:out value="${mdl.phenotype.description}" escapeXml="false"/>
+					</camod:highlight>						
 				</P>		
 			</td>
 		</tr>		
@@ -141,7 +160,7 @@
 			<td class="GreyBox" width="20%"><b>Website for add. info</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<P>
-				<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;
+					<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;					
 				</P>
 			</td>
 		</tr>		
@@ -149,17 +168,21 @@
 			<td class="WhiteBox" width="20%"><b>Breeding Notes</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<P>
-				<c:out value="${mdl.phenotype.breedingNotes}"/>&nbsp;
+					<camod:highlight>
+						<c:out value="${mdl.phenotype.breedingNotes}"/>&nbsp;
+					</camod:highlight>					
 				</P>		
 			</td>
-		</tr>		
+		</tr>		               
 
 		<tr>
 			<td class="GreyBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
-				<c:out value="${mdl.phenotype.sexDistribution.type}"/>&nbsp;
+				<camod:highlight>
+					<c:out value="${mdl.phenotype.sexDistribution.type}"/>&nbsp;
+				</camod:highlight>
 			</td>
-		</tr>		               
+		</tr>	
         
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Submitted by</b></td>
@@ -170,7 +193,7 @@
 				<c:out value="${mdl.submitter.displayName}"/>
 				<c:if test="${not empty mdl.submitter.emailAddress}">
 				    </a>
-				</c:if>
+				</c:if>			
 			</td>
 		</tr>
                   
@@ -183,7 +206,7 @@
 				<c:out value="${mdl.principalInvestigator.displayName}"/>
 				<c:if test="${mdl.principalInvestigator.emailAddress}">
 				    </a>
-				</c:if>
+				</c:if>					
 			</td>
 		</tr>		               
 
