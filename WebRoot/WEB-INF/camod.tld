@@ -61,4 +61,15 @@
          <required>false</required>
       </attribute>
    </tag>
+   
+   <tag> 
+       <name>highlight</name> 
+       <tag-class>gov.nih.nci.camod.webapp.taglib.HighlightTextTag</tag-class>
+       <attribute>
+         <name>keyword</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>         
+      </attribute>
+   </tag>   
+   
 </taglib>
