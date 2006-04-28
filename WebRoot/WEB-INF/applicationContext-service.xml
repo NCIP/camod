@@ -112,6 +112,11 @@
     
     <!-- XenograftManager -->
     <bean id="xenograftManager" class="gov.nih.nci.camod.service.impl.XenograftManagerImpl"/>
-    
+
+    <!-- QueryStorageManager -->
+    <bean id="queryStorageManager" class="gov.nih.nci.camod.service.impl.QueryStorageManagerImpl"/>    
            
+    <!-- ResultSettingsManager -->
+	<bean id="resultSettingsManager" class="gov.nih.nci.camod.service.impl.ResultSettingsManagerImpl"/>      
+	         
 </beans>
