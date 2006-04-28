@@ -179,7 +179,9 @@ A:active {
 	padding:2px;
 	text-align:left;
 	font-weight:bold;
-	border:1px solid #000000;
+	border-right:1px solid #000000;
+	border-left:1px solid #000000;
+	border-bottom:1px solid #000000;
 }
 .masterTitleOver {
 	cursor:pointer;
@@ -190,8 +192,32 @@ A:active {
 	padding:2px;
 	text-align:left;
 	font-weight:bold;
-	border:1px solid #000000;
+	border-right:1px solid #000000;
+	border-left:1px solid #000000;
+	border-bottom:1px solid #000000;
 }
+
+.criteriaTitle {
+	cursor:pointer;
+	margin-bottom: 5px;
+	background-color:#B1B1F7;
+	color:#000000;
+	width:95%;
+	padding:2px;
+	text-align:left;
+	font-weight:bold;
+}
+.criteriaTitleOver {
+	cursor:pointer;
+	margin-bottom: 5px;
+	background-color:#E3E3F5;
+	color:#000000;
+	width:95%;
+	padding:2px;
+	text-align:left;
+	font-weight:bold;
+}
+
 A.footerMenuLink:link {
 	COLOR: #ffffff; WHITE-SPACE: nowrap; TEXT-DECORATION: none
 }
@@ -238,8 +264,78 @@ A.dataPagingLink:hover {
 	BORDER-RIGHT: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 0.8em; FONT-WEIGHT: bold; FONT-SIZE: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; COLOR: #ffffff; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #475b82
 }
 
+.formSubTitleBlue {
+	BORDER: #5c5c5c 1px solid;
+	PADDING-RIGHT: 0.8em;
+	FONT-WEIGHT: bold;
+	HEIGHT: 20px;	
+	FONT-SIZE: 0.8em;
+	PADDING-LEFT: 0.8em;
+	COLOR: #ffffff;
+	TEXT-ALIGN: LEFT;
+	FONT-FAMILY: arial,helvetica,verdana,sans-serif;
+	BACKGROUND-COLOR: #475b82
+}
+
+.formSubTitleBlueOver {
+	BORDER: #5c5c5c 1px solid;
+	HEIGHT: 20px;
+	PADDING-RIGHT: 0.8em;	
+	FONT-WEIGHT: bold;	
+	FONT-SIZE: 0.8em;
+	TEXT-ALIGN: LEFT;
+	PADDING-LEFT: 0.8em;
+	COLOR: #ffffff;
+	FONT-FAMILY: arial,helvetica,verdana,sans-serif;
+	BACKGROUND-COLOR: #0099FF
+}
+
 TD.formField {
 	BORDER-RIGHT: #5c5c5c 1px solid; FONT-SIZE: 0.7em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+
+TD.formFieldNone {
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+
+TD.formFieldLeftOnly {
+	BORDER-LEFT: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+TD.formFieldRightOnly {
+	BORDER-RIGHT: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+TD.formFieldRightLeftOnly {
+	BORDER-LEFT: #5c5c5c 1px solid;
+	BORDER-RIGHT: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+TD.formFieldBottomOnly {
+	BORDER-BOTTOM: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+TD.formFieldTopOnly {
+	BORDER-TOP: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+TD.formFieldTopBottomOnly {
+	BORDER-TOP: #5c5c5c 1px solid;
+	BORDER-BOTTOM: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+TD.formFieldLeftRightBottomOnly {
+	BORDER-LEFT: #5c5c5c 1px solid;
+	BORDER-RIGHT: #5c5c5c 1px solid;
+	BORDER-BOTTOM: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
+}
+TD.formFieldAll {
+	BORDER-LEFT: #5c5c5c 1px solid;
+	BORDER-RIGHT: #5c5c5c 1px solid;
+	BORDER-TOP: #5c5c5c 1px solid;
+	BORDER-BOTTOM: #5c5c5c 1px solid;
+	FONT-SIZE: 0.7em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
 }
 TD.resultsBoxGrey {
 	PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #E3E3EB
@@ -540,4 +636,160 @@ IMG.img {
 
 TD.textFormat {
 	PADDING-LEFT: 0.8em; FONT-SIZE: 0.8em; COLOR: #000000;  FONT-FAMILY: arial,helvetica,verdana,sans-serif;
+}
+
+.keywordHighlight {
+	BACKGROUND-COLOR: #FFFF00;
+	COLOR: #000000;	                  
+}
+
+div.exportlinks {
+	margin: -5px 0px 10px 10px;
+	padding: 2px 4px 2px 0px;
+	width: 400px;
+}
+
+div.exportlinks a {
+	text-decoration: none;
+}
+
+div.exportlinks span {
+	background-repeat: no-repeat;
+}
+
+span.csv {
+	background-image: url(../images/ico_file_csv.png);
+}
+
+span.excel {
+	background-image: url(../images/ico_file_excel.png);
+}
+
+span.pdf {
+	background-image: url(../images/ico_file_pdf.png);
+}
+
+span.xml {
+	background-image: url(../images/ico_file_xml.png);
+}
+
+span.export {
+	cursor: pointer;
+	display: inline;
+	display: inline-block;
+	padding: 0 4px 1px 20px;
+}
+
+span.pagebanner {
+	display: block;
+	margin: 10px 0px 0px 10px;
+	padding: 2px 4px 2px 0px;
+	width: 79%;
+}
+
+span.pagelinks {
+	display: block;
+	font-size: .95em;
+	margin-bottom: 5px;
+	margin-top: -18px;
+	padding: 2px 0px 2px 0px;
+	text-align: right;
+	width: 80%;
+}
+
+table.list {
+	border: 1px solid #5c5c5c;
+	border-collapse: collapse;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+
+table.list th {
+	background: #C0C0C0;
+	color: #000000;
+	padding: 2px;
+	border-bottom: 1px solid #000000;
+	text-align: left;
+}
+
+table.list th a, table.list th a:visited {
+	background-color: transparent;
+	color: #000000;
+	text-decoration: none;
+}
+
+table.list th a:hover {
+	background-color: transparent;
+	color: #CC0000;
+	text-decoration: overline underline;
+}
+
+th.sorted a, th.sortable a {
+	background-position: right;
+	display: block;
+}
+
+table.list th.order1 a {
+	background-image: url(../images/arrow_down.png);
+}
+
+table.list th.order2 a {
+	background-image: url(../images/arrow_up.png);
+}
+
+table.list th.sortable a {
+	background-image: url(../images/arrow_off.png);
+}
+
+table.list th.sorted {
+	background-color: #ffd;
+	color: #000000;
+}
+
+table.list th.sorted a, table.list th.sortable a {
+	background-position: right;
+	background-repeat: no-repeat;
+	display: block;
+}
+
+table.list th.sortable:hover {
+	background: #FFFF40;
+	color: #008000;
+}
+
+table.list thead tr {
+	background-color: #FFCC00;
+}
+
+table.list tr.even {
+	background: #EEEEEE;
+	border-top: 1px solid #5c5c5c;
+	color: #000000;
+}
+
+table.list tr.odd {
+	background: #FFFFFF;
+	border-top: 1px solid #5c5c5c;
+	color: #000000;
+}
+
+/* highlight table row onmouseover */
+table.list tr.over {
+	background: #FFFF40;
+	border-bottom: 1px solid #5c5c5c;
+	border-top: 1px solid #5c5c5c;
+	color: #000000;
+	cursor: pointer;
+	cursor: hand; /* IE 5.5 non-compliant workaround */
+}
+
+/* override width for user list */
+table.userList {
+	width: 80% !important;
+}
+
+table.activeUserList, body#activeUsers span.pagelinks {
+    width: 450px !important;
 }
