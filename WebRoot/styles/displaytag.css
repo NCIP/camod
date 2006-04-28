@@ -80,7 +80,7 @@ table.list th a, table.list th a:visited {
 
 table.list th a:hover {
 	background-color: transparent;
-	color: #008000 !important;
+	color: #008000;
 	text-decoration: overline underline;
 }
 
@@ -90,11 +90,11 @@ th.sorted a, th.sortable a {
 }
 
 table.list th.order1 a {
-	background-image: url(../images/arrow_down.png) !important;
+	background-image: url(../images/arrow_down.png);
 }
 
 table.list th.order2 a {
-	background-image: url(../images/arrow_up.png) !important;
+	background-image: url(../images/arrow_up.png);
 }
 
 table.list th.sortable a {
