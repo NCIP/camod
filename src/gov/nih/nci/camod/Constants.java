@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.80 2006-04-20 19:45:31 pandyas Exp $
+ * $Id: Constants.java,v 1.81 2006-04-28 19:03:57 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.80  2006/04/20 19:45:31  pandyas
+ * Added constant for otherStrainName used on submitXenograftTransplant.jsp
+ *
  * Revision 1.79  2006/04/17 19:15:36  pandyas
  * caMod 2.1 OM changes
  *
@@ -207,6 +210,9 @@ public class Constants {
     
     public static final String NOT_CONDITIONAL = "Not Conditional";
     
+    public static final String SEARCHRESULTCOLUMNS = "SearchResultsColumns";        
+      
+    public static final String ITEMSPERPAGE = "ItemsPerPage";
     /**
      * Used to store list of models currently logged on user has previous
      * entered
@@ -377,6 +383,10 @@ public class Constants {
 
         public static final String EXPRESSIONLEVEL = "expressionlevel.db";
 
+        public static final String SEARCHRESULTCOLUMNS = "SearchResultsColumns.txt";        
+        
+        public static final String ITEMSPERPAGE = "ItemsPerPage.txt";
+        
         // Query dropdowns
         public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
         
@@ -419,37 +429,29 @@ public class Constants {
 
         // Used for role assignment
         public static final String ROLESDROP = "roles.db";
+        
+        public static final String SELECTEDSEARCHRESULTCOLUMNS = "selectedsearchresultcolumns";
+      
     }
 
     /**
      * Defines the global constants used as parameters for ftp requests
      */
     public interface CaImage {
-
         public static final String FTPSERVER = "caimage.ftp.server";
-
         public static final String FTPUSERNAME = "caimage.ftp.username";
-
         public static final String FTPPASSWORD = "caimage.ftp.password";
-
         public static final String FTPMODELSTORAGEDIRECTORY = "caimage.ftp.modelstoragedirectory";
-
         public static final String FTPGENCONSTORAGEDIRECTORY = "caimage.ftp.genconstoragedirectory";
-
         public static final String CAIMAGEMODELSERVERVIEW = "caimage.modelview.uri";
-
         public static final String CAIMAGEGENCONSERVERVIEW = "caimage.genconview.uri";
-
         public static final String CAIMAGESIDTHUMBVIEW = "caimage.sidthumbview.uri";
-
         public static final String CAIMAGESIDVIEWURISTART = "caimage.sidview.uri_start";
         public static final String CAIMAGESIDVIEWURIEND = "caimage.sidview.uri_end";
         public static final String CAIMAGEWINDOWSTART = "caimage.window.start";
         public static final String CAIMAGEWINDOWEND = "caimage.window.end";
-
         public static final String CAIMAGEMODEL = "caimage.model";
         public static final String CAIMAGEGENCON = "caimage.gencon";
-
         public static final String LEGACYJSP = "catalogviewtumors.jsp?";
         public static final String FILESEP = ";";
         public static final String IMGTAG = "img=";
@@ -551,7 +553,37 @@ public class Constants {
     /**
      * Used for search results
      */
+    public static final String KEYWORD_HIGHLIGHT = "keywordhighlight";
+    
+    public static final String SEARCH_QUERY = "searchquery";
+    
     public static final String SEARCH_RESULTS = "searchResults";
+    
+    public static final String DUP_NAME = "dupname";
+    
+    public static final String QUERY_NAME = "queryname";
+    
+    public static final String ERRORMESSAGE = "errormessage";
+    
+    public static final String SEARCH_FORM = "searchform";
+    
+    public static final String EXECUTE_TIME = "execute_time";
+    
+    public static final String ELAPSED_TIME = "elapsed_time";
+    
+    public static final String RERUN_QUERY = "rerunquery";
+    
+    public static final String USERSAVEDQUERYLIST = "usersavedquerylist";
+    
+    public static final String USERSQUERYLIST = "userquerylist";
+    
+    public static final String QUERYHISTORYID = "queryHistoryId"; 
+    
+    public static final String NUMBEROFSAVEDQUERIES = "numberofsavedqueries";    
+    
+    public static final String AQUERYID = "aqueryid";
+    
+    public static final String ASAVEDQUERYID = "asavedqueryid";
     
     public static final String DRUG_SCREEN_SEARCH_RESULTS = "drugScreenSearchResults";
 
