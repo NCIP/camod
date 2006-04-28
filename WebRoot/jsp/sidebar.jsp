@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: sidebar.jsp,v 1.13 2006-04-28 19:40:44 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 <TR><TD height="100%" class=subMenu valign=top width="210">
 	  
@@ -12,6 +24,9 @@
 	<%@ page import="gov.nih.nci.camod.Constants" %>
 	
 	<% 
+	    //Get number of saved queries for current logged on user
+	    String numSavedQueries = (String) request.getSession().getAttribute(Constants.NUMBEROFSAVEDQUERIES);
+	    
 		//Get the filename of the current jsp page and display the correct submenu
 		String jspName = new File(request.getRealPath(request.getServletPath())).getName();
 		
@@ -83,7 +98,11 @@
 			        &nbsp;&nbsp;&nbsp;&nbsp;<font color="#475b82"> - <c:out value="${role}" /><br>
 			    </logic:iterate>
 			 </logic:present>
-		     <a href="/camod/AdminUserSettingsPopulateAction.do">User Settings</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/camod/LogoutAction.do">Log out</a>
+		     <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/AdminUserSettingsPopulateAction.do">User Settings</a><br>
+		     <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/CustomizeSearchResultsPopulateAction.do">Customize Results</a><br>
+			 <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/ReturnUserSavedQueries.do?method=returnSavedUserQueries">View Saved Queries</a>&nbsp;( <b><%=numSavedQueries%></b> saved )<br>
+		     <img src="/camod/images/subMenuCircleFilled.gif" border="0">&nbsp;<a href="/camod/ReturnUserQueries.do?method=returnUserQueries">View Query History</a><br>
+		     <img src="/camod/images/subMenuArrow.gif" border="0">&nbsp;<a href="/camod/LogoutAction.do">Log out</a>
 		     <br>
 		</TD></TR></TABLE>
 		</TD></TR>
