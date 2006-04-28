@@ -1,7 +1,10 @@
 /**
- * $Id: SearchForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: SearchForm.java,v 1.9 2006-04-28 19:30:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.7  2005/11/16 19:43:30  georgeda
  * Added clear to search forms
  *
@@ -37,6 +40,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     protected String surgery;
     protected String phenotype;
     protected String disease;
+    protected String tumorClassification;
     protected String cellLine;
     protected String organTissueCode;
     protected String organTissueName;
@@ -315,6 +319,10 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
         cellLine = null;
         diagnosisCode = null;
         diagnosisName = null;
+        tumorClassification = null;
+        organ = null;
+        organTissueCode = null;
+        organTissueName = null;
         inducedMutationAgent = null;
         geneName = null;
         genomicSegDesignator = null;
@@ -338,7 +346,21 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
         modelDescriptor = null;
         organ = null;
         species = null;
+        tumorClassification = null;
+        organ = null;
+        organTissueCode = null;
+        organTissueName = null;
         
         simpleSearchReset();
+    }
+
+    public String getTumorClassification()
+    {
+        return tumorClassification;
+    }
+
+    public void setTumorClassification(String tumorClassification)
+    {
+        this.tumorClassification = tumorClassification;
     }
 }

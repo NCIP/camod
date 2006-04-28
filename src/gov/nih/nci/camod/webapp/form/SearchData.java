@@ -1,7 +1,10 @@
 /*
- * $Id: SearchData.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: SearchData.java,v 1.6 2006-04-28 19:30:51 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -124,4 +127,8 @@ public interface SearchData {
 
     public void setSearchXenograft(boolean b);
 	
+    public String getTumorClassification();
+
+    public void setTumorClassification(String tumorClassification);
+    
 }
