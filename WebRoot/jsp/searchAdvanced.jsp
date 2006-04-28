@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.27 2006-03-31 13:47:36 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.28 2006-04-28 19:38:15 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2006/03/31 13:47:36  georgeda
+ * Changed the EVSTree call to work w/ new servers
+ *
  * Revision 1.26  2005/12/19 14:05:33  georgeda
  * Defect #271 - Search issues
  *
@@ -33,7 +36,11 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
+
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
+<%@ page import="gov.nih.nci.camod.service.QueryStorageManager" %>
+<%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
+<%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
@@ -70,24 +77,46 @@
 		
 		toggleField(document.searchForm.searchTherapeuticApproaches[0], document.searchForm.therapeuticApproach);
 	}
-		
+	
+	function enableOrgan() {
+		document.searchForm.organ.disabled = false;
+		document.searchForm.tumorClassification.disabled = false;
+	}	
+	
 </SCRIPT>
 
+<%
+	//Display search criteria of executed search
+	String aSavedQueryId = (String) request.getSession().getAttribute( Constants.ASAVEDQUERYID );
+	String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );		
+%>
 
-
-<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="transferFields()">
+<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableOrgan()">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
-                <tr>
-                        <td class="formTitleBlue" height="20" colspan="3">Keyword Search:&nbsp;&nbsp;<html:text property="keyword" size="55"/>&nbsp;&nbsp;<input class="actionButton" type="submit" value="Search" /></td>
-                </tr>
-                
-                <tr><td>&nbsp;</td></tr>
-                
-                <tr>
+	    <tr>
+	        <td class="formTitleBlue" height="20" colspan="3">Keyword Search:&nbsp;&nbsp;<html:text property="keyword" size="55"/>&nbsp;&nbsp;<input class="actionButton" type="submit" value="Search" /></td>
+	    </tr>
+        
+        <tr>
+        	<td colspan="3">        
+		        <% if( aSavedQueryId != null ) { %>
+			        <br>
+					<TABLE border="0" class="contentPage" width="100%">
+						<TR>
+							<TD width="100%">
+								<font color="red">* Saved query <b>"<%= aQueryName %>"</b> is being edited. You will be prompted to save the changes after pressing Search.</font>
+				            </TD>
+				        </TR>
+			        </TABLE>				
+		        <%}%>
+        	</td>
+        </tr>
+        
+        <tr>
 			<td class="formTitleBlue" height="20" colspan="3">Advanced Search</td>		
 		</tr>
 		
@@ -120,10 +149,12 @@
 		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
-				<INPUT name="organTissueName" type="hidden"/>
-		 		<INPUT name="organTissueCode" type="hidden"/>
+		 		<html:hidden property="organTissueName"/>
+		 		<html:hidden property="organTissueCode"/>
 			</td>
-			<td class="formField"><input class="formFieldSizedDisabled" type="text" disabled="true" name="organ" id="organFieldId" size="25" /></td>
+			<td class="formField">				
+				<html:text styleClass="formFieldSizedDisabled" disabled="true" property="organ" size="25"/>	
+			</td>
 		</tr>
 		
 		<tr>
@@ -134,11 +165,11 @@
 		  	    <a href="javascript:showDiagnosisTree('searchForm', 'descendants=true;isaFlag=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>
-				<input type="hidden" name="diagnosisName"/>
-			    <input type="hidden" name="diagnosisCode"/>
+		 		<html:hidden property="diagnosisName"/>
+		 		<html:hidden property="diagnosisCode"/>			    
 			</td>
-			<td class="formField">
-				<input class="formFieldSizedDisabled" type="text" disabled="true" name="tumorClassification" id="field3" size="25" />
+			<td class="formField">				
+				<html:text styleClass="formFieldSizedDisabled" disabled="true" property="tumorClassification" size="25"/>	
 			</td>
 		</tr>
 		
