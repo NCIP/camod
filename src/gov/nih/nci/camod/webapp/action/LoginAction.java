@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.9 2005-12-06 19:51:39 georgeda Exp $
+ * $Id: LoginAction.java,v 1.10 2006-04-28 19:26:17 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2005/12/06 19:51:39  georgeda
+ * Defect #255 - add SSL
+ *
  * Revision 1.8  2005/12/06 14:50:45  georgeda
  * Defect #253, change the lowecase to the login action so that roles match
  *
@@ -16,19 +19,30 @@
  * Changes due to manager re-write
  * 
  */
+
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.ResultSettings;
+import gov.nih.nci.camod.domain.ResultSettingsColumns;
+import gov.nih.nci.camod.service.QueryStorageManager;
+import gov.nih.nci.camod.service.ResultSettingsManager;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.webapp.form.LoginForm;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public final class LoginAction extends BaseAction {
 
@@ -59,6 +73,44 @@ public final class LoginAction extends BaseAction {
             log.debug("Successful login");
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
+            
+		    //Used for sidebar, number of saved queries
+            QueryStorageManager queryStorageManager = (QueryStorageManager) getBean("queryStorageManager");   
+            
+            //Used to pre-load settings for search result columns
+            ResultSettingsManager resultSettingsManager = (ResultSettingsManager) getBean("resultSettingsManager");
+            
+            try {
+                List savedQueriesList = queryStorageManager.getSavedQueriesByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
+                request.getSession().setAttribute(Constants.NUMBEROFSAVEDQUERIES, String.valueOf(savedQueriesList.size()) );
+                
+                //Pre-load columns for search results
+                String[] columns = { "Model Descriptor", "Tumor Sites", "Species"  }; 
+                String itemsPerPage = "15";
+                ResultSettings rSettings = resultSettingsManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
+                List selectedList = new ArrayList();
+               
+                if ( rSettings != null ) {
+                    Set<ResultSettingsColumns> set = rSettings.getResultSettingsColumns();
+                    Iterator <ResultSettingsColumns> setIter = set.iterator();                  
+                    itemsPerPage = "" + rSettings.getItemsPerPage();
+                    
+                    while ( setIter.hasNext() )
+                    {
+                        ResultSettingsColumns it = (ResultSettingsColumns) setIter.next();
+                        selectedList.add( it.getColumnName() );
+                    }  
+                    
+                    request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
+                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, (String[])selectedList.toArray( new String[0] ) );
+
+                } else {                
+                    request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
+                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, columns );
+                }
+                
+            } catch (Exception e) {}
+            
         } else {
             log.debug("Login failed");
             request.getSession().setAttribute(Constants.LOGINFAILED, "true");
