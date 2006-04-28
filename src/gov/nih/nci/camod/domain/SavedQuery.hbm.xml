@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="gov.nih.nci.camod.domain.SavedQuery"
+		   table="SAVED_QUERY"
+           lazy="true">
+
+		<id name="id" 
+		    column="SAVED_QUERY_ID"
+	    	type="long" 		     
+		    unsaved-value="null">
+	        <generator class="native"/>
+		</id>	   	
+	    
+		<property name="queryName" 
+			  column="QUERY_NAME"
+			  type="string" />
+			  
+		<property name="elapsedTime" 
+				  type="long"
+				  column="QUERY_ELAPSED_TIME"/>
+
+		<property name="executeTime" 
+		          type="timestamp"
+			  	  column="QUERY_EXECUTE_TIMESTAMP" 
+			      not-null="false" 
+			      length="10" />
+
+		<property name="isSaved"
+				  type="long"
+				  column="IS_SAVED" />
+
+		<property name="numberResults"
+				  type="long"
+				  column="NUMBER_RESULTS" />
+				  
+		<!-- Associations -->
+		<many-to-one name="user" 
+		             class="gov.nih.nci.camod.domain.Person"
+			   		 not-null="true">
+			<column name="PARTY_ID" />
+		</many-to-one>
+
+		<set name="savedQueryAttributes" 
+		     cascade="all-delete-orphan" >
+			<key column="SAVED_QUERY_ID" />
+			<one-to-many class="gov.nih.nci.camod.domain.SavedQueryAttribute" />
+		</set>
+			
+	</class>	
+	
+</hibernate-mapping>

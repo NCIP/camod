@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="gov.nih.nci.camod.domain.ResultSettings"
+		   table="RESULT_SETTINGS"
+           lazy="true">
+
+		<id name="id" 
+		    column="RESULT_SETTINGS_ID"
+	    	type="long" 		     
+		    unsaved-value="null">
+	        <generator class="native"/>
+		</id>	   		   
+			  
+		<property name="itemsPerPage" 
+				  type="int"
+				  column="ITEMS_PER_PAGE"/>
+				  
+		<!-- Associations -->
+		<many-to-one name="user" 
+		             class="gov.nih.nci.camod.domain.Person"
+			   		 not-null="true">
+			<column name="PARTY_ID" />
+		</many-to-one>
+
+		<set name="resultSettingsColumns" 
+		     cascade="all-delete-orphan" >
+			<key column="RESULT_SETTINGS_ID" />
+			<one-to-many class="gov.nih.nci.camod.domain.ResultSettingsColumns" />
+		</set>	
+		
+	</class>	
+	
+</hibernate-mapping>

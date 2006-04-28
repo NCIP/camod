@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+
+	<class name="gov.nih.nci.camod.domain.QueryHistory"
+		table="QUERY_HISTORY">
+
+		<id name="id" column="QUERY_HISTORY_PK_ID" unsaved-value="0">
+	        <generator class="native"/>
+		</id>
+
+		<property name="elapsedTime" column="QUERY_ELAPSED_TIME"/>
+		<property name="executeTime" 
+		          type="timestamp"
+			  column="QUERY_EXECUTE_TIMESTAMP" 
+			  not-null="true" 
+			  length="10" />
+		<property name="userId" column="PARTY_ID" insert="false" update="false" />			
+
+		<!-- Associations -->
+
+		<many-to-one name="user" 
+		             class="gov.nih.nci.camod.domain.Party"
+			     	 not-null="true">
+			<column name="PARTY_ID" />
+		</many-to-one>
+		
+		<many-to-one name="savedQuery" 
+			     class="gov.nih.nci.camod.domain.SavedQuery"
+			     not-null="false" 
+			     cascade="save-update,persist" 
+			     lazy="true">
+			<column name="SAVED_QUERY_PK_ID" />
+		</many-to-one>
+
+		<set name="queryHistoryAttributes" 
+		     inverse="true"
+		     cascade="all-delete-orphan" 
+		     lazy="true" 
+		     outer-join="true" 
+		     fetch="join">
+			
+		     <key column="QUERY_HISTORY_PK_ID" />
+		     <one-to-many class="gov.nih.nci.camod.domain.QueryHistoryAttribute" />
+		</set>      
+        
+	</class>
+
+</hibernate-mapping>
