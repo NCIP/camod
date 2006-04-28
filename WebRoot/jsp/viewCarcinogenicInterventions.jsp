@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.23 2006-04-28 19:48:14 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
@@ -17,7 +29,9 @@
 			<tr>
 				<td class="formTitle" height="20" colspan="6">
 					Carcinogenic Agents - Model:
-					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					<camod:highlight>
+						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					</camod:highlight>
 				</td>				
 			</tr>			
 			</TABLE>			
@@ -55,10 +69,10 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 					<c:if test="${not empty cd.environmentalFactor.nscNumber}">
@@ -75,26 +89,26 @@
 					</c:if>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.treatment.administrativeRoute}"/>
+							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -133,34 +147,34 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.treatment.administrativeRoute}"/>
+							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -169,8 +183,7 @@
 	        </c:if>
 
 			<!--   Start Gene Delivery Section -->
-		    <c:set var="environmentalFactorType" value="GeneDelivery"/>
-			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:set var="cdList" value="${mdl.geneDeliveryCollection}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
@@ -197,27 +210,27 @@
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:choose>
 						<c:when test="${empty cd.viralVector}">
-							<c:out value="${cd.viralVectorUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.viralVectorUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.viralVector}"/>
+							<camod:highlight><c:out value="${cd.viralVector}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.geneInVirus}"/>
+					<camod:highlight><c:out value="${cd.geneInVirus}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<c:out value="${cd.organ.EVSPreferredDescription}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -255,34 +268,34 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.treatment.administrativeRoute}"/>
+							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -320,34 +333,34 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.treatment.administrativeRoute}"/>
+							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -384,24 +397,24 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="20%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -439,34 +452,34 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.treatment.administrativeRoute}"/>
+							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -503,21 +516,21 @@
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="20%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
@@ -556,34 +569,34 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.environmentalFactor.name}"/>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.regimen}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.treatment.administrativeRoute}">
-							<c:out value="${cd.treatment.adminRouteUnctrlVocab}"/>
+							<camod:highlight><c:out value="${cd.treatment.adminRouteUnctrlVocab}"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${cd.treatment.administrativeRoute}"/>
+							<camod:highlight><c:out value="${cd.treatment.administrativeRoute}"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
-					<c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;
+					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			</c:forEach>
