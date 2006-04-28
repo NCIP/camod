@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.40 2006-04-27 15:02:57 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.41 2006-04-28 19:19:46 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2006/04/27 15:02:57  pandyas
+ * Fixed SQLString as a result of failed testing
+ *
  * Revision 1.39  2006/04/20 14:59:17  georgeda
  * Optimized performance of CI query
  *
@@ -1906,6 +1909,65 @@ public class QueryManagerImpl extends BaseManager
         return publications;
     }
 
+
+    public List getSavedQueriesByParty(String inUsername) throws PersistenceException
+    {
+
+        log.trace("Entering QueryManagerImpl.getModelsByUser");
+
+        String theHQLQuery = "from SavedQuery as sq where " + " sq.user in (from Person where username = :username) " + " and sq.isSaved = :savedValue " + " order by query_name";
+
+        log.debug("The HQL query: " + theHQLQuery);
+
+        org.hibernate.Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+        theQuery.setParameter("username", inUsername);
+        theQuery.setParameter("savedValue", "1");
+
+        List theSavedQueries = theQuery.list();
+
+        if (theSavedQueries == null)
+        {
+            theSavedQueries = new ArrayList();
+        }
+        return theSavedQueries;
+    }
+
+    public List getQueriesByParty(String inUsername) throws PersistenceException
+    {
+
+        log.trace("Entering QueryManagerImpl.getModelsByUser");
+
+        String theHQLQuery = "from SavedQuery as sq where " + " sq.user in (from Person where username = :username) " + " and sq.isSaved = :savedValue " + " order by query_execute_timestamp DESC";
+
+        log.debug("The HQL query: " + theHQLQuery);
+
+        org.hibernate.Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+        theQuery.setParameter("username", inUsername);
+        theQuery.setParameter("savedValue", "0");
+
+        List theSavedQueries = theQuery.list();
+
+        if (theSavedQueries == null)
+        {
+            theSavedQueries = new ArrayList();
+        }
+        return theSavedQueries;
+    }
+
+    public List getResultSettingsByUsername(String inUsername ) throws PersistenceException
+    {
+        log.trace("Entering QueryManagerImpl.getResultSettingsByUsername");
+        
+        String theHQLQuery = "from ResultSettings as sq where sq.user in (from Person where username = :username) ";
+        
+        org.hibernate.Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+        theQuery.setParameter("username", inUsername);
+
+        List theResultSettings = theQuery.list();
+        
+        return theResultSettings;
+    }
+    
     public static void main(String[] inArgs)
     {
         try
