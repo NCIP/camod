@@ -20,7 +20,7 @@
 				</c:otherwise>
 			</c:choose>
 			<td class="<c:out value="${tdClass}"/>" width="25%">
-				<c:out value="${cpitem.leadOrganizationName}"/>
+				<camod:highlight><c:out value="${cpitem.leadOrganizationName}"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>End" width="75%">
 				<!-- TODO PU Name -->
