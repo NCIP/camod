@@ -34,6 +34,7 @@ drop table log cascade constraints;
 drop table micro_array_data cascade constraints;
 drop table model_section cascade constraints;
 drop table modification_type cascade constraints;
+drop table morpholino cascade constraints;
 drop table mutation_identifier cascade constraints;
 drop table nomenclature cascade constraints;
 drop table organ cascade constraints;
@@ -379,6 +380,22 @@ create table modification_type (
    name_unctrl_vocab varchar2(255),
    primary key (modification_type_id)
 );
+create table morpholino (
+   morpholino_id number(19,0) not null,
+   source varchar2(255),
+   source_unctr_vocab varchar2(255),
+   type varchar2(255),
+   sequence_direction varchar2(255),
+   targeted_region varchar2(255),
+   concentration varchar2(255),
+   concentration_unit varchar2(255),
+   delivery_method varchar2(255),
+   delivery_method_unctrl_vocab varchar2(255),
+   visual_ligands varchar2(255),
+   visual_ligands_unctrl_vocab varchar2(255),
+   abs_cancer_model_id number(19,0) not null,
+   primary key (morpholino_id)
+);
 create table mutation_identifier (
    mutation_identifier_id number(19,0) not null,
    mgi_number varchar2(255),
@@ -648,6 +665,7 @@ alter table log add constraint FK1A34477AB701F foreign key (comments_id) referen
 alter table log add constraint FK1A3441CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table log add constraint FK1A3442EB4E88E foreign key (party_id) references party;
 alter table micro_array_data add constraint FKC3D0BA2B1CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
+alter table morpholino add constraint FK6BB814E51CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table party_contact_info add constraint FK4B2B4226534EE516 foreign key (contact_info_id) references contact_info;
 alter table party_contact_info add constraint FK4B2B42263595FF35 foreign key (party_id) references party;
 alter table party_role add constraint FK1C92FE2FAC5A835F foreign key (role_id) references role;
