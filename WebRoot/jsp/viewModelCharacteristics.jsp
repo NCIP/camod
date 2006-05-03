@@ -1,8 +1,12 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.26 2006-04-28 19:51:50 schroedn Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.27 2006-05-03 20:07:14 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.26  2006/04/28 19:51:50  schroedn
+  *   Defect #55
+  *   Added Keyword Highlighting to this jsp
+  *
   *   Revision 1.25  2006/04/17 19:08:19  pandyas
   *   caMod 2.1 OM changes
   *
@@ -126,10 +130,10 @@
 			<td class="WhiteBoxRightEnd" width="80%">
 						<c:choose>
 							<c:when test = "${mdl.isToolMouse == true}">
-								<c:out value="Yes"/>
+								<c:out value="No"/>
 							</c:when>
 							<c:otherwise>
-								<c:out value="No"/>
+								<c:out value="Yes"/>
 							</c:otherwise>
 						</c:choose>	
 			</td>
