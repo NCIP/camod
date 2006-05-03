@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.22 2006-04-28 19:39:56 schroedn Exp $
+ * $Id: searchSimple.jsp,v 1.23 2006-05-03 19:05:39 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/04/28 19:39:56  schroedn
+ * Defect # 261
+ * Made changes so the organ and diagnosis save differently and can be retained for SaveQuery
+ *
  *
  */
 
@@ -135,14 +139,14 @@
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel">
+				<html:hidden property="organTissueName"/>
+		 		<html:hidden property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
 				<camod:cshelp mapId="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-		  	    <a href="javascript:showTissueTree('searchForm', 'descendants=true;isaFlag=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
-		 		<html:hidden property="organTissueName"/>
-		 		<html:hidden property="organTissueCode"/>
 			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSizedDisabled" disabled="true" property="organ" size="25"/>	

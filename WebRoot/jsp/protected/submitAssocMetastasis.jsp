@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/04/17 19:18:44  pandyas
+ * caMod 2.1 OM changes (attribute name change)
+ *
  * Revision 1.19  2006/03/31 13:47:17  georgeda
  * Changed the EVSTree call to work w/ new servers
  *
@@ -31,7 +34,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.20 2006-04-17 19:18:44 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.21 2006-05-03 19:05:50 georgeda Exp $
  *
  */   
 %>
@@ -101,8 +104,7 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 			<camod:cshelp mapId="associated_metastasis_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-
-			<a href="javascript:showTissueTree('associatedMetastasisForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showMouseTissueTree('associatedMetastasisForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>
 		</td>
@@ -117,8 +119,7 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 			<camod:cshelp mapId="associated_metastasis_help" key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-
-			<a href="javascript:showDiagnosisTree('associatedMetastasisForm', 'descendants=true;onlyLeaf=true;isaFlag=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showMouseDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>	
 		</td>

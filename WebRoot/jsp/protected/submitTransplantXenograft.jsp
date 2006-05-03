@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.39 2006-04-20 19:46:23 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.40 2006-05-03 19:05:50 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2006/04/20 19:46:23  pandyas
+ * Modified host species/  host strain / otherHostStrain text on Xenograft screen
+ *
  * Revision 1.38  2006/04/17 19:17:03  pandyas
  * caMod 2.1 OM changes
  *
@@ -157,7 +160,7 @@
 		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 			<camod:cshelp mapId="xenograft_transplant_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
-			<a href="javascript:showTissueTree('xenograftForm', 'descendants=true;isaFlag=true;onlyLeaf=true;preferredName=true;depthLevel=6;roleType=Anatomic_Structure_is_Physical_Part_of')">
+			<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>
 		</td>
