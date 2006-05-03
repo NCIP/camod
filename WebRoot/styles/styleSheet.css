@@ -179,9 +179,7 @@ A:active {
 	padding:2px;
 	text-align:left;
 	font-weight:bold;
-	border-right:1px solid #000000;
-	border-left:1px solid #000000;
-	border-bottom:1px solid #000000;
+	border:1px solid #000000;
 }
 .masterTitleOver {
 	cursor:pointer;
@@ -192,9 +190,7 @@ A:active {
 	padding:2px;
 	text-align:left;
 	font-weight:bold;
-	border-right:1px solid #000000;
-	border-left:1px solid #000000;
-	border-bottom:1px solid #000000;
+	border:1px solid #000000;
 }
 
 .criteriaTitle {
