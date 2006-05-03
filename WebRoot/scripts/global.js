@@ -50,6 +50,29 @@ function chkOtherGraft() {
     chkOther(site, otherSite);		
 }
 
+function chkOtherSource() {
+
+    var source = document.forms[0].source;
+    var otherSource = document.forms[0].otherSource;
+
+    chkOther(source, otherSource);  	
+}
+
+function chkOtherMethod() {
+
+    var deliveryMethod = document.forms[0].deliveryMethod;
+    var otherDeliveryMethod = document.forms[0].otherDeliveryMethod;
+
+    chkOther(deliveryMethod, otherDeliveryMethod);  	
+}
+
+function chkOtherLigand() {
+
+    var visualLigand = document.forms[0].visualLigand;
+    var otherVisualLigand = document.forms[0].otherVisualLigand;
+
+    chkOther(visualLigand, otherVisualLigand);  	
+}
 
 
 function disableFieldUnsized(field)

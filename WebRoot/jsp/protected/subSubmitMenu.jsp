@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.52 2006-04-27 15:09:10 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.53 2006-05-03 20:07:44 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.52  2006/04/27 15:09:10  pandyas
+		 * Modified while testing caMod 2.1
+		 *
 		 * Revision 1.51  2006/04/19 15:12:47  georgeda
 		 * Fixed issue w/ display of induced mutation
 		 *
@@ -50,6 +53,7 @@
 <%@ page import="gov.nih.nci.camod.domain.Histopathology"%>
 <%@ page import="gov.nih.nci.camod.domain.ClinicalMarker"%>
 <%@ page import="gov.nih.nci.camod.domain.CarcinogenExposure"%>
+<%@ page import="gov.nih.nci.camod.domain.Morpholino"%>
 <%@ page import="gov.nih.nci.camod.Constants"%>
 
 <TR>
@@ -245,7 +249,7 @@
 			paramProperty="id">
 			<camod:shorten>
 				<bean:write name="aInducedMutation"
-					property="environmentalFactor.displayName" filter="false" />
+					property="environmentalFactor.displayNameIM" filter="false" />
 			</camod:shorten>
 		</html:link>
 		<br>
@@ -424,6 +428,26 @@
 	<div id="menu4" class="masterTitle" onclick="SwitchMenu('sub4')"
 		onmouseover="ChangeClass('menu4','masterTitleOver')"
 		onmouseout="ChangeClass('menu4','masterTitle')"><IMG height=5 alt=""
+		src="images/subMenuArrow.gif" width=5>TRANSIENT INTERFERENCE</div>
+	<span class="submasterdiv" id="sub4"> <img src="images/right_arrow.gif"
+		border="0"> <html:link styleClass="subMenuRed"
+		action="MorpholinoPopulateAction.do?method=dropdown">Enter Morpholino</html:link><br>
+	<logic:iterate id="aMorpholino" name="morpholino_list" type="Morpholino">
+			 	 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
+		<html:link styleClass="subMenuBlue"
+			action="MorpholinoPopulateAction.do?method=populate"
+			paramId="aMorpholinoID" paramName="aMorpholino" paramProperty="id">
+			<camod:shorten>
+				<bean:write name="aMorpholino" property="targetedRegion" filter="false" />
+			</camod:shorten>
+		</html:link>
+		<br>
+	</logic:iterate> <br>
+	</span>
+
+	<div id="menu5" class="masterTitle" onclick="SwitchMenu('sub4')"
+		onmouseover="ChangeClass('menu4','masterTitleOver')"
+		onmouseout="ChangeClass('menu4','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> PUBLICATIONS</div>
 	<span class="submasterdiv" id="sub4"> <img src="images/right_arrow.gif"
 		border="0"> <html:link styleClass="subMenuRed"
@@ -441,7 +465,7 @@
 	</logic:iterate> <br>
 	</span>
 
-	<div id="menu5" class="masterTitle" onclick="SwitchMenu('sub5')"
+	<div id="menu6" class="masterTitle" onclick="SwitchMenu('sub5')"
 		onmouseover="ChangeClass('menu5','masterTitleOver')"
 		onmouseout="ChangeClass('menu5','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> HISTOPATHOLOGY</div>
@@ -527,7 +551,7 @@
 	</logic:iterate> <br>
 	</span>
 
-	<div id="menu6" class="masterTitle" onclick="SwitchMenu('sub6')"
+	<div id="menu7" class="masterTitle" onclick="SwitchMenu('sub6')"
 		onmouseover="ChangeClass('menu6','masterTitleOver')"
 		onmouseout="ChangeClass('menu6','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> THERAPEUTIC APPROACHES</div>
@@ -573,7 +597,7 @@
 	</logic:iterate> <br>
 	</span>
 
-	<div id="menu7" class="masterTitle" onclick="SwitchMenu('sub7')"
+	<div id="menu8" class="masterTitle" onclick="SwitchMenu('sub7')"
 		onmouseover="ChangeClass('menu7','masterTitleOver')"
 		onmouseout="ChangeClass('menu7','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> CELL LINES</div>
@@ -620,7 +644,7 @@
 	</logic:iterate> <br>
 	</span>
 
-	<div id="menu8" class="masterTitle" onclick="SwitchMenu('sub8')"
+	<div id="menu9" class="masterTitle" onclick="SwitchMenu('sub8')"
 		onmouseover="ChangeClass('menu8','masterTitleOver')"
 		onmouseout="ChangeClass('menu8','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> IMAGES</div>
@@ -640,7 +664,7 @@
 	</logic:iterate> <br>
 	</span>
 
-	<div id="menu9" class="masterTitle" onclick="SwitchMenu('sub9')"
+	<div id="menu10" class="masterTitle" onclick="SwitchMenu('sub9')"
 		onmouseover="ChangeClass('menu9','masterTitleOver')"
 		onmouseout="ChangeClass('menu9','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> MICROARRAYS</div>
@@ -650,7 +674,7 @@
 	<br>
 	</span>
 
-	<div id="menu10" class="masterTitle" onclick="SwitchMenu('sub10')"
+	<div id="menu11" class="masterTitle" onclick="SwitchMenu('sub10')"
 		onmouseover="ChangeClass('menu10','masterTitleOver')"
 		onmouseout="ChangeClass('menu10','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> MODEL AVAILABILITY</div>
@@ -722,7 +746,7 @@
 	</logic:iterate> <br>
 	</span>
 
-	<div id="menu11" class="masterTitle" onclick="SwitchMenu('sub11')"
+	<div id="menu12" class="masterTitle" onclick="SwitchMenu('sub11')"
 		onmouseover="ChangeClass('menu11','masterTitleOver')"
 		onmouseout="ChangeClass('menu11','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> XENOGRAFT</div>

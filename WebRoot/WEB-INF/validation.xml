@@ -2043,5 +2043,78 @@
 				</var>
 			</field>
 		</form>
+		
+		<form name="morpholinoForm">
+			<field property="targetedRegion" depends="required">
+				<arg0 key="MorpholinoForm.targetedRegion" />
+			</field>
+			
+			<field property="otherSource"
+				depends="validwhen, maxlength">
+				<arg0 key="MorpholinoForm.otherSource" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
+			<field property="otherDeliveryMethod"
+				depends="validwhen, maxlength">
+				<arg0 key="MorpholinoForm.otherDeliveryMethod" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
+			<field property="otherVisualLigands"
+				depends="validwhen, maxlength">
+				<arg0 key="MorpholinoForm.otherVisualLigands" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>						
+			<field property="type" depends="maxlength">
+				<arg0 key="MorpholinoForm.type" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="sequenceDirection" depends="maxlength">
+				<arg0 key="MorpholinoForm.sequenceDirection" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
+		</form>		
 	</formset>
 </form-validation>
