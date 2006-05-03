@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.40 2006-04-19 15:09:16 georgeda Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.41 2006-05-03 20:04:37 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.40  2006/04/19 15:09:16  georgeda
+ *  Fixed issue w/ display of induced mutation
+ *
  *  Revision 1.39  2006/04/17 19:09:40  pandyas
  *  caMod 2.1 OM changes
  *
@@ -181,6 +184,18 @@ public class AnimalModelTreePopulateAction extends BaseAction
                 cellList.add(cellLine);
             }
 
+            // Retrieve a list of all Morpholinos associated with this Animal
+            // model
+            Set morpholinoSet = animalModel.getMorpholinoCollection();
+            it = morpholinoSet.iterator();
+            List<Morpholino> morpholinoList = new ArrayList<Morpholino>();
+            
+            while (it.hasNext())
+            {
+                Morpholino morpholino = (Morpholino) it.next();
+                morpholinoList.add(morpholino);
+            }
+            
             // Retrieve a list of all availablty entries assoicated with this
             // Animal model
             Set availabilitySet = animalModel.getAnimalAvailabilityCollection();
@@ -446,6 +461,10 @@ public class AnimalModelTreePopulateAction extends BaseAction
             request.getSession().setAttribute(Constants.Submit.HISTOPATHOLOGY_LIST, histopathList);
             request.getSession().setAttribute(Constants.Submit.ASSOCMETASTSIS_LIST, associatedMetatasisList);
             request.getSession().setAttribute(Constants.Submit.CLINICALMARKER_LIST, clinicalMarkerList);
+
+		//morpholino_list
+	    request.getSession().setAttribute(Constants.Submit.MORPHOLINO_LIST, morpholinoList);
+	
 
         } //end of try
         catch (Exception e)

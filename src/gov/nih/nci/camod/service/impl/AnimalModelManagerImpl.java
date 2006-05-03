@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.69 2006-04-27 15:03:54 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.70 2006-05-03 20:04:21 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.69  2006/04/27 15:03:54  pandyas
+ * Removed unused import statement
+ *
  * Revision 1.68  2006/04/20 19:18:53  pandyas
  * Moved save Assoc Met from AnimalModel to the Histopathology
  *
@@ -201,6 +204,7 @@ import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Log;
+import gov.nih.nci.camod.domain.Morpholino;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.Phenotype;
 import gov.nih.nci.camod.domain.Publication;
@@ -229,6 +233,7 @@ import gov.nih.nci.camod.webapp.form.HormoneData;
 import gov.nih.nci.camod.webapp.form.ImageData;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
+import gov.nih.nci.camod.webapp.form.MorpholinoData;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
 import gov.nih.nci.camod.webapp.form.PublicationData;
 import gov.nih.nci.camod.webapp.form.RadiationData;
@@ -1115,6 +1120,26 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.info("Exiting AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
     }
+    
+    /**
+     * Add a Morpholino
+     * 
+     * @param inAnimalModel
+     *            the animal model that has the Morpholino
+     * @param inMorpholinoData
+     *            the new Morpholino data
+     * @throws Exception
+     */
+    public void addMorpholino(AnimalModel inAnimalModel,
+                              MorpholinoData inMorpholinoData) throws Exception
+    {
+
+        log.info("Entering AnimalModelManagerImpl.addMorpholino");
+        Morpholino theMorpholino = MorpholinoManagerSingleton.instance().create(inAnimalModel, inMorpholinoData);
+        inAnimalModel.addMorpholino(theMorpholino);
+        save(inAnimalModel);
+        log.info("Exiting AnimalModelManagerImpl.addMorpholino");
+    }    
 
     private void sendEmail(AnimalModel inAnimalModel,
                            String theUncontrolledVocab,

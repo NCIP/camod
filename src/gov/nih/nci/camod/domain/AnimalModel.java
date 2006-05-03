@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * Revision 1.17  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -13,7 +16,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.18 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.19 2006-05-03 20:02:29 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -38,7 +41,8 @@ public class AnimalModel extends AbstractCancerModel {
     private Set<SpontaneousMutation> spontaneousMutationCollection = new TreeSet<SpontaneousMutation>();
 	private Set<Histopathology> histopathologyCollection = new TreeSet<Histopathology>();
 	private Set<EngineeredGene> engineeredGeneCollection = new TreeSet<EngineeredGene>();
-	private Set<CarcinogenExposure> carcinogenExposureCollection = new HashSet<CarcinogenExposure>();    
+	private Set<CarcinogenExposure> carcinogenExposureCollection = new HashSet<CarcinogenExposure>();
+    private Set<Morpholino> morpholinoCollection = new HashSet<Morpholino>();    
     private Set<Log> logCollection = new HashSet<Log>(); 
 	private RepositoryInfo repositoryInfo;
 	private Phenotype phenotype;
@@ -90,6 +94,30 @@ public class AnimalModel extends AbstractCancerModel {
 		carcinogenExposureCollection.add(carcinogenExposure);
 	}
 
+    /**
+     * @return Returns the morpholinoCollection.
+     */
+    public Set<Morpholino> getMorpholinoCollection() {
+        return morpholinoCollection;
+    }
+
+    /**
+     * @param morpholinoCollection
+     *            The morpholinoCollection to set.
+     */
+    public void setMorpholinoCollection(
+            Set<Morpholino> morpholinoCollection) {
+        this.morpholinoCollection = morpholinoCollection;
+    }
+
+    /**
+     * @param morpholinoCollection
+     *            The morpholinoCollection to add.
+     */
+    public void addMorpholino(Morpholino morpholino) {
+        morpholinoCollection.add(morpholino);
+    }    
+    
 	/**
 	 * @return Returns the spontaneousMutationCollection.
 	 */
