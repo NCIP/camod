@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpeciesManagerImpl.java,v 1.3 2006-04-20 18:11:30 pandyas Exp $
+ * $Id: SpeciesManagerImpl.java,v 1.4 2006-05-03 20:03:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/20 18:11:30  pandyas
+ * Cleaned up Species or Strain save of Other in DB
+ *
  * Revision 1.2  2006/04/17 19:47:59  pandyas
  * caMod 2.1 OM changes
  *
@@ -153,47 +156,5 @@ public class SpeciesManagerImpl extends BaseManager implements SpeciesManager
         return theSpecies;
     }
 
-
-    private String getCommonNameFromScientificName(String inScientificName)
-    {
-
-        log.info("<SpeciesManagerImpl> Entering getCommonNameFromScientificName");
-        String theCommonName = "";
-
-        try
-        {
-            // List of species matching the scientificName in the species
-            List species = null;
-
-            // Species example to be used for searching
-            Species spec = new Species();
-            spec.setScientificName(inScientificName);
-
-            // Get the matching Species
-            species = Search.query(spec);
-
-            if (species != null)
-            {
-
-                for (int i = 0; i < species.size(); i++)
-                {
-                    Species theSpecies = (Species) species.get(i);
-
-                    if (theSpecies.getCommonName() != null && theSpecies.getCommonName().length() > 0)
-                    {
-                        theCommonName = theSpecies.getCommonName();
-                        break;
-                    }
-                }
-            }
-
-        }
-        catch (Exception e)
-        {
-            log.error("Exception when fetching common name for species: " + e);
-        }
-
-        return theCommonName;
-    }
 
 }
