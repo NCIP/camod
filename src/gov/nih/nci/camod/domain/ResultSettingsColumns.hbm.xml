@@ -3,21 +3,24 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="ResultSettingsColumns"
+		table="result_settings_columns"
+		lazy="true">
 
-	<class name="gov.nih.nci.camod.domain.ResultSettingsColumns"
-		table="RESULT_SETTINGS_COLUMNS">
-
+		<!-- id -->
 		<id name="id" 
-		    column="RESULT_SETTINGS_COLUMNS_ID" 
+		    column="result_settings_columns_id" 
 	    	type="long"    	
 	    	unsaved-value="null">
 	    	<generator class="native"/>
 		</id>
 
-		<property name="columnName" 
-			  column="COLUMN_NAME" />	
+		<!-- columnName -->
+		<property 
+			name="columnName" 
+			column="column_name" 
+			type="string"/>	
 		
 	</class>
-
 </hibernate-mapping>
