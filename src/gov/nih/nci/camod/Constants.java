@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: Constants.java,v 1.81 2006-04-28 19:03:57 schroedn Exp $
+ * $Id: Constants.java,v 1.82 2006-05-04 14:15:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.81  2006/04/28 19:03:57  schroedn
+ * Defect # 238, 261, 55
+ * Added Constants used Saving/Editing Queries, Keyword Highlighting and Configuring search result columns
+ *
  * Revision 1.80  2006/04/20 19:45:31  pandyas
  * Added constant for otherStrainName used on submitXenograftTransplant.jsp
  *
@@ -328,6 +332,8 @@ public class Constants {
 
 
         // Various Dose Units
+        public static final String CONCENTRATIONUNITSDROP = "ConcentrationUnits.txt";
+        
         public static final String CHEMTHERAPYDOSEUNITSDROP = "ChemTherapyDoseUnits.txt";
 
         public static final String ENVFACTORUNITSDROP = "EnvFactorUnits.txt";
@@ -382,6 +388,20 @@ public class Constants {
         public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
         public static final String EXPRESSIONLEVEL = "expressionlevel.db";
+        
+        // Morpholino screen dropdowns
+        public static final String MORPHOSOURCEDROP = "MorpholinoSources.txt";
+        
+        public static final String MORPHOTYPEDROP = "MorpholinoTypes.txt";
+        
+        public static final String SEQUENCEDIRECTIONSDROP = "SequenceDirections.txt";
+        
+        public static final String DELIVERYMETHODSOURCEDROP = "DeliveryMethods.txt";
+        
+        public static final String VISUALLIGANDSDROP = "VisualLigands.txt";
+        
+        
+        
 
         public static final String SEARCHRESULTCOLUMNS = "SearchResultsColumns.txt";        
         
@@ -632,7 +652,7 @@ public class Constants {
         /**
          * Used to store required lists for the cardiogentic intervention
          * section of the sidebar menu of the submission section
-         */
+         */    
         public static final String CHEMICALDRUG_LIST = "chemicaldrug_list";
 
         public static final String ENVIRONMENTALFACTOR_LIST = "environmentalfactor_list";
@@ -696,6 +716,11 @@ public class Constants {
         public static final String JACKSONLAB_LIST = "jacksonlab_list";
         public static final String MMHCC_LIST = "mmhcc_list";
         public static final String IMSR_LIST = "imsr_list";
+        /**
+         * Used to store animal model availability for the Morpholino 
+         * section of the sidebar menu of the submission section
+         */        
+        public static final String MORPHOLINO_LIST = "morpholino_list";
     }
 
     // /////////////////////////////////////////////////////////////
