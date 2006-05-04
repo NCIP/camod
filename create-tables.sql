@@ -47,7 +47,11 @@ drop table publication_status cascade constraints;
 drop table reg_element_type cascade constraints;
 drop table regulatory_element cascade constraints;
 drop table repository_info cascade constraints;
+drop table result_settings cascade constraints;
+drop table result_settings_columns cascade constraints;
 drop table role cascade constraints;
+drop table saved_query cascade constraints;
+drop table saved_query_attribute cascade constraints;
 drop table screening_result cascade constraints;
 drop table segment_type cascade constraints;
 drop table sex_distribution cascade constraints;
@@ -391,8 +395,8 @@ create table morpholino (
    concentration_unit varchar2(255),
    delivery_method varchar2(255),
    delivery_method_unctrl_vocab varchar2(255),
-   visual_ligands varchar2(255),
-   visual_ligands_unctrl_vocab varchar2(255),
+   visual_ligand varchar2(255),
+   visual_ligand_unctrl_vocab varchar2(255),
    abs_cancer_model_id number(19,0) not null,
    primary key (morpholino_id)
 );
@@ -479,10 +483,39 @@ create table repository_info (
    suggest_submission number(19,0),
    primary key (repository_info_id)
 );
+create table result_settings (
+   result_settings_id number(19,0) not null,
+   items_per_page number(10,0),
+   party_id number(19,0),
+   primary key (result_settings_id)
+);
+create table result_settings_columns (
+   result_settings_columns_id number(19,0) not null,
+   column_name varchar2(255),
+   result_settings_id number(19,0),
+   primary key (result_settings_columns_id)
+);
 create table role (
    role_id number(19,0) not null,
    name varchar2(255),
    primary key (role_id)
+);
+create table saved_query (
+   saved_query_id number(19,0) not null,
+   query_name varchar2(255),
+   query_elapsed_time number(19,0),
+   query_execute_timestamp timestamp,
+   is_saved number(19,0),
+   number_results number(19,0),
+   party_id number(19,0),
+   primary key (saved_query_id)
+);
+create table saved_query_attribute (
+   saved_query_attribute_id number(19,0) not null,
+   attribute_name varchar2(255),
+   attribute_value varchar2(255),
+   saved_query_id number(19,0),
+   primary key (saved_query_attribute_id)
 );
 create table screening_result (
    screening_result_id number(19,0) not null,
@@ -674,6 +707,10 @@ alter table phenotype add constraint FKB24800288E609262 foreign key (sex_distrib
 alter table publication add constraint FKBFBBA22C9B29662E foreign key (publication_status_id) references publication_status;
 alter table regulatory_element add constraint FKEA51B05587D074B5 foreign key (species_id) references species;
 alter table regulatory_element add constraint FKEA51B055229D942B foreign key (reg_element_type_id) references reg_element_type;
+alter table result_settings add constraint FKA5ECF6052EB4E88E foreign key (party_id) references party;
+alter table result_settings_columns add constraint FK67185FA3F638301A foreign key (result_settings_id) references result_settings;
+alter table saved_query add constraint FK186CA9102EB4E88E foreign key (party_id) references party;
+alter table saved_query_attribute add constraint FK71C13A2DCDAF32D0 foreign key (saved_query_id) references saved_query;
 alter table screening_result add constraint FKE30F148646872875 foreign key (treatment_id) references treatment;
 alter table screening_result add constraint FKE30F1486457316D5 foreign key (agent_id) references agent;
 alter table spontaneous_mutation add constraint FKAE3E7B3B3FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
