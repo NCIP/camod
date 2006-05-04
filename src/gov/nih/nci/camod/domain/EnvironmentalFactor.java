@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.13 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.14 2006-05-04 15:42:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -71,6 +74,17 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
 
         return theDisplayName;
     }
+    
+    /**
+     * @return Returns the display name for Induced Mutation.
+     * name is saved in uncontrolledVocab since it is free-text.
+     */
+    public String getDisplayNameIM()
+    {
+        String theDisplayName = nameUnctrlVocab;
+
+        return theDisplayName;
+    }    
 
     /**
      * @return Returns the name.
