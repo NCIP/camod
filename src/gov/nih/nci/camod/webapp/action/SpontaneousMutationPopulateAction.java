@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationPopulateAction.java,v 1.9 2006-04-20 18:12:11 pandyas Exp $
+ * $Id: SpontaneousMutationPopulateAction.java,v 1.10 2006-05-04 19:27:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/20 18:12:11  pandyas
+ * Modified save of Genetic Alteration
+ *
  * Revision 1.8  2006/04/19 17:38:57  pandyas
  * Removed TODO text
  *
@@ -16,12 +19,10 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.GeneticAlteration;
 import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.service.impl.SpontaneousMutationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.SpontaneousMutationForm;
-import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -49,11 +50,11 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
             spontaneousMutationForm.setComments(theSpontaneousMutation.getComments());
             spontaneousMutationForm.setGeneId(theSpontaneousMutation.getGeneId());
 
-            List<GeneticAlteration> geneticList = new ArrayList<GeneticAlteration>(theSpontaneousMutation.getGeneticAlterationCollection());
-            if (geneticList.size() > 0) {
-                GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-                spontaneousMutationForm.setObservation(theGeneticAlteration.getObservation());
-                spontaneousMutationForm.setMethodOfObservation(theGeneticAlteration.getMethodOfObservation());
+            // Set GeneticAlteration attributes 
+            if (theSpontaneousMutation.getGeneticAlteration() != null) {
+                spontaneousMutationForm.setObservation(theSpontaneousMutation.getGeneticAlteration().getObservation());
+                spontaneousMutationForm.setMethodOfObservation(theSpontaneousMutation.getGeneticAlteration()
+                        .getMethodOfObservation());
             }
 
             MutationIdentifier inMutationIdentifier = theSpontaneousMutation.getMutationIdentifier();

@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.10 2006-04-20 18:12:11 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.11 2006-05-04 19:27:45 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/20 18:12:11  pandyas
+ * Modified save of Genetic Alteration
+ *
  * Revision 1.9  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -85,35 +88,28 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         // GeneID
         inSpontaneousMutation.setGeneId(inSpontaneousMutationData.getGeneId());
 
-        // GeneticAlteration (Observation and Method of Observation
-        List<GeneticAlteration> geneticList = new ArrayList<GeneticAlteration>(inSpontaneousMutation.getGeneticAlterationCollection());
-
-        System.out.println("Testing");
-
-        if (geneticList.size() > 0)
+        // Observation and Method of Observation
+        // No genetic alteration in DB - data is entered from the GUI
+        if (inSpontaneousMutation.getGeneticAlteration() == null && inSpontaneousMutationData.getObservation() != null && inSpontaneousMutationData.getObservation().length() > 0)
         {
-            if (inSpontaneousMutationData.getObservation() != null && !inSpontaneousMutationData.getObservation().equals(""))
+            inSpontaneousMutation.setGeneticAlteration(new GeneticAlteration());
+            log.info("Saving: inSpontaneousMutation.getGeneticAlteration() attributes ");
+
+            inSpontaneousMutation.getGeneticAlteration().setObservation(inSpontaneousMutationData.getObservation());
+            inSpontaneousMutation.getGeneticAlteration().setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
+        }
+
+        // Already have a genetic alteration in DB. Either blank it out or update it
+        else
+        {
+            if (inSpontaneousMutationData.getObservation() != null && inSpontaneousMutationData.getObservation().length() > 0)
             {
-                GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-                inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
-                inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
+                inSpontaneousMutation.getGeneticAlteration().setObservation(inSpontaneousMutationData.getObservation());
+                inSpontaneousMutation.getGeneticAlteration().setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
             }
             else
             {
-                geneticList.remove(0);
-            }
-        }
-        else
-        {
-            if (inSpontaneousMutationData.getObservation() != null)
-            {
-                if (!inSpontaneousMutationData.getObservation().equals(""))
-                {
-                    GeneticAlteration inGeneticAlteration = new GeneticAlteration();
-                    inGeneticAlteration.setObservation(inSpontaneousMutationData.getObservation());
-                    inGeneticAlteration.setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());
-                    inSpontaneousMutation.addGeneticAlteration(inGeneticAlteration);
-                }
+                inSpontaneousMutation.setGeneticAlteration(null);
             }
         }
 

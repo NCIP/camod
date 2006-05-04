@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationPopulateAction.java,v 1.14 2006-04-19 17:38:57 pandyas Exp $
+ * $Id: InducedMutationPopulateAction.java,v 1.15 2006-05-04 19:27:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/19 17:38:57  pandyas
+ * Removed TODO text
+ *
  * Revision 1.13  2006/04/18 16:21:31  pandyas
  * modified populate to pull name from uncontrolled vocab - IM is now saving the free text into uncontrolled vocab in the Impl class
  *
@@ -17,13 +20,11 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.EnvironmentalFactor;
-import gov.nih.nci.camod.domain.GeneticAlteration;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.service.impl.InducedMutationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.InducedMutationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -71,11 +72,11 @@ public class InducedMutationPopulateAction extends BaseAction {
             if (identifier != null)
                 inducedMutationForm.setMgiNumber(identifier.getMgiNumber());
 
-            List geneticList = new ArrayList(theInducedMutation.getGeneticAlterationCollection());
-            if (geneticList.size() > 0) {
-                GeneticAlteration theGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-                inducedMutationForm.setObservation(theGeneticAlteration.getObservation());
-                inducedMutationForm.setMethodOfObservation(theGeneticAlteration.getMethodOfObservation());
+            // Set GeneticAlteration attributes 
+            if (theInducedMutation.getGeneticAlteration() != null) {
+                inducedMutationForm.setObservation(theInducedMutation.getGeneticAlteration().getObservation());
+                inducedMutationForm.setMethodOfObservation(theInducedMutation.getGeneticAlteration()
+                        .getMethodOfObservation());
             }
             
             if (theInducedMutation.getComments() != null) {

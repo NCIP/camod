@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutation.java,v 1.9 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: SpontaneousMutation.java,v 1.10 2006-05-04 19:28:24 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.8  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -9,7 +12,6 @@
 package gov.nih.nci.camod.domain;
 
 import java.io.Serializable;
-import java.util.*;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
@@ -24,7 +26,7 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
     private String name;
     private String geneId;    
     private String comments;
-    private Set<GeneticAlteration> geneticAlterationCollection = new TreeSet<GeneticAlteration>();
+    private GeneticAlteration geneticAlteration;
     private MutationIdentifier mutationIdentifier;
 
 
@@ -95,29 +97,18 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
     }
 
     /**
-     * @return Returns the geneticAlterationCollection.
+     * @return Returns the geneticAlteration.
      */
-    public Set getGeneticAlterationCollection()
-    {
-        return geneticAlterationCollection;
-    }
-
-    /**
-     * @param geneticAlterationCollection
-     *            The geneticAlterationCollection to set.
-     */
-    public void setGeneticAlterationCollection(Set<GeneticAlteration> geneticAlterationCollection)
-    {
-        this.geneticAlterationCollection = geneticAlterationCollection;
+    public GeneticAlteration getGeneticAlteration() {
+        return geneticAlteration;
     }
 
     /**
      * @param geneticAlteration
-     *            The geneticAlteration to add.
+     *            The geneticAlteration to set.
      */
-    public void addGeneticAlteration(GeneticAlteration geneticAlteration)
-    {
-        geneticAlterationCollection.add(geneticAlteration);
+    public void setGeneticAlteration(GeneticAlteration geneticAlteration) {
+        this.geneticAlteration = geneticAlteration;
     }
 
     /**

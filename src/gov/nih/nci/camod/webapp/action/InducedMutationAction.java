@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationAction.java,v 1.10 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: InducedMutationAction.java,v 1.11 2006-05-04 19:27:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -115,7 +118,7 @@ public final class InducedMutationAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering save");
+        log.info("<InducedMutationAction save> Entering save");
 
         // Create a form to edit
         InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
@@ -124,14 +127,14 @@ public final class InducedMutationAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "
-                + inducedMutationForm.getType() + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
-                + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() + "\n\t getGeneId: "
-                + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
-                + "\n\t getDescription: " + inducedMutationForm.getDescription() + "\n\t getObservation: "
-                + inducedMutationForm.getObservation() + "\n\t getMethodObservation: "
-                + inducedMutationForm.getMethodOfObservation() + "\n\t getMgiNumber: "
-                + inducedMutationForm.getMgiNumber()
+        log.info("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "  + inducedMutationForm.getType() 
+                + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
+                + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() 
+                + "\n\t getGeneId: " + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
+                + "\n\t getDescription: " + inducedMutationForm.getDescription() 
+                + "\n\t getObservation: " + inducedMutationForm.getObservation() 
+                + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 
+                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() + "\n\t"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {

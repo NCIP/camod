@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.21 2006-04-19 15:08:17 georgeda Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.22 2006-05-04 19:27:45 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/04/19 15:08:17  georgeda
+ * Fixed issue w/ display of induced mutation
+ *
  * Revision 1.20  2006/04/18 16:20:05  pandyas
  * Updated populate method to save IM correctly
  *
@@ -65,8 +68,6 @@ import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -149,27 +150,27 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
             theEnvironFactor = new EnvironmentalFactor();
             inInducedMutation.setEnvironmentalFactor(theEnvironFactor);
         }
-        log.info("In InducedMutationManagerImpl.save created EF");
+        log.info("In InducedMutationManagerImpl.populateInducedMutation created EF");
 
         // Name of Inducing Agent - Saved in uncontrolled vocab field since it is free text
         theEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
-        log.info("In InducedMutationManagerImpl.save set name");
+        log.info("In InducedMutationManagerImpl.save set name : " + inInducedMutationData.getName());
 
         // Inducing Agent Category type / Other type
-        if (inInducedMutationData.getOtherType().equals(Constants.Dropdowns.OTHER_OPTION))
+        if (inInducedMutationData.getOtherType() != null)
         {
             log.info("Sending Notification eMail - new InducedMutation Agent added");
             // Send the email
             sendEmail(inAnimalModel, inInducedMutationData.getOtherType(), "OtherInducedMutation");
-
+            // Do not save 'Other' in the database
             theEnvironFactor.setTypeUnctrlVocab(inInducedMutationData.getOtherType());
-            theEnvironFactor.setType(Constants.Dropdowns.OTHER_OPTION);
+            log.info("inInducedMutationData.getOtherType(): " + inInducedMutationData.getOtherType());
         }
         else
         {
             theEnvironFactor.setType(inInducedMutationData.getType());
+            log.info("inInducedMutationData.getType(): " + inInducedMutationData.getType());
         }
-        log.info("In InducedMutationManagerImpl.save set type/otherType");
 
         // CAS Number
         theEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
@@ -179,35 +180,30 @@ public class InducedMutationManagerImpl extends BaseManager implements InducedMu
 
         // Description
         inInducedMutation.setDescription(inInducedMutationData.getDescription());
-        log.info("In InducedMutationManagerImpl.save set description");
+        log.info("inInducedMutationData.getDescription(): " + inInducedMutationData.getDescription());
 
         // Observation and Method of Observation
-        List<GeneticAlteration> geneticList = new ArrayList<GeneticAlteration>(inInducedMutation.getGeneticAlterationCollection());
-
-        if (geneticList.size() > 0)
+        // No genetic alteration in DB - data is entered from the GUI
+        if (inInducedMutation.getGeneticAlteration() == null && inInducedMutationData.getObservation() != null && inInducedMutationData.getObservation().length() > 0)
         {
-            if (inInducedMutationData.getObservation() != null && !inInducedMutationData.getObservation().equals(""))
+            inInducedMutation.setGeneticAlteration(new GeneticAlteration());
+            log.info("Saving: inInducedMutation.getGeneticAlteration() attributes ");
+
+            inInducedMutation.getGeneticAlteration().setObservation(inInducedMutationData.getObservation());
+            inInducedMutation.getGeneticAlteration().setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
+        }
+
+        // Already have a genetic alteration in DB. Either blank it out or update it
+        else
+        {
+            if (inInducedMutationData.getObservation() != null && inInducedMutationData.getObservation().length() > 0)
             {
-                GeneticAlteration inGeneticAlteration = (GeneticAlteration) geneticList.get(0);
-                inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
-                inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
+                inInducedMutation.getGeneticAlteration().setObservation(inInducedMutationData.getObservation());
+                inInducedMutation.getGeneticAlteration().setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
             }
             else
             {
-                geneticList.remove(0);
-            }
-        }
-        else
-        {
-            if (inInducedMutationData.getObservation() != null)
-            {
-                if (!inInducedMutationData.getObservation().equals(""))
-                {
-                    GeneticAlteration inGeneticAlteration = new GeneticAlteration();
-                    inGeneticAlteration.setObservation(inInducedMutationData.getObservation());
-                    inGeneticAlteration.setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
-                    inInducedMutation.addGeneticAlteration(inGeneticAlteration);
-                }
+                inInducedMutation.setGeneticAlteration(null);
             }
         }
 

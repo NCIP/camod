@@ -1,14 +1,16 @@
 /*
- * $Id: InducedMutation.java,v 1.14 2006-04-19 15:05:46 georgeda Exp $
+ * $Id: InducedMutation.java,v 1.15 2006-05-04 19:28:24 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/19 15:05:46  georgeda
+ * remove old code
+ *
  * Revision 1.13  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
  */
 package gov.nih.nci.camod.domain;
 
-import java.util.*;
 
 public class InducedMutation extends EngineeredGene
 {
@@ -16,33 +18,22 @@ public class InducedMutation extends EngineeredGene
 
     private String geneId;
     private String description;
-    private Set<GeneticAlteration> geneticAlterationCollection = new TreeSet<GeneticAlteration>();
+    private GeneticAlteration geneticAlteration;
     private EnvironmentalFactor environmentalFactor;
 
     /**
-     * @return Returns the geneticAlterationCollection.
+     * @return Returns the geneticAlteration.
      */
-    public Set<GeneticAlteration> getGeneticAlterationCollection()
-    {
-        return geneticAlterationCollection;
-    }
-
-    /**
-     * @param geneticAlterationCollection
-     *            The geneticAlterationCollection to set.
-     */
-    public void setGeneticAlterationCollection(Set<GeneticAlteration> geneticAlterationCollection)
-    {
-        this.geneticAlterationCollection = geneticAlterationCollection;
+    public GeneticAlteration getGeneticAlteration() {
+        return geneticAlteration;
     }
 
     /**
      * @param geneticAlteration
-     *            The geneticAlteration to add.
+     *            The geneticAlteration to set.
      */
-    public void addGeneticAlteration(GeneticAlteration geneticAlteration)
-    {
-        geneticAlterationCollection.add(geneticAlteration);
+    public void setGeneticAlteration(GeneticAlteration geneticAlteration) {
+        this.geneticAlteration = geneticAlteration;
     }
 
     /**
