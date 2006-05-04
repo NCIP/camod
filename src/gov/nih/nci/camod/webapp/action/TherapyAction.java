@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.14 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.15 2006-05-04 14:28:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.13  2005/12/29 18:28:54  pandyas
  * Clean up - remove Biomarker code
  *
@@ -68,7 +71,7 @@ public final class TherapyAction extends BaseAction {
 		// Create a form to edit
 		TherapyForm therapyForm = (TherapyForm) form;
 
-		// Grab the current modelID from the session
+		// Grab the current aTherapyID from the session
 		String aTherapyID = request.getParameter("aTherapyID");
 
 		System.out.println("<TherapyAction save> following Characteristics:" + "\n\t name: " + therapyForm.getName()
