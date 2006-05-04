@@ -98,6 +98,7 @@
         <mapping resource="gov/nih/nci/camod/domain/SavedQueryAttribute.hbm.xml"/>        
         <mapping resource="gov/nih/nci/camod/domain/SavedQuery.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/ResultSettingsColumns.hbm.xml"/>                                                      
-        <mapping resource="gov/nih/nci/camod/domain/ResultSettings.hbm.xml"/>  
+        <mapping resource="gov/nih/nci/camod/domain/ResultSettings.hbm.xml"/>
+		<mapping resource="gov/nih/nci/camod/domain/Morpholino.hbm.xml"/>            
     </session-factory>
 </hibernate-configuration>
