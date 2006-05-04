@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.1 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.2 2006-05-04 14:27:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -140,7 +143,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         save(inCarcinogenExposure);
     }
 
-    
+
     /**
      * Create a CarcinogenExposure object with the correct data filled in.
      * 
@@ -149,7 +152,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * 
      * @returns a therapy
      */
-    public CarcinogenExposure create(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData) {
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+                                     EnvironmentalFactorData inEnvironmentalFactorData)
+    {
 
         log.info("In CarcinogenExposureManagerImpl.create");
 
@@ -176,8 +181,10 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, EnvironmentalFactorData inEnvironmentalFactorData, CarcinogenExposure inCarcinogenExposure)
-            throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       EnvironmentalFactorData inEnvironmentalFactorData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
 
         log.info("In CarcinogenExposureManagerImpl.update");
 
@@ -189,7 +196,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
         save(inCarcinogenExposure);
     }
-    
+
     /**
      * Create a CarcinogenExposure object with the correct data filled in.
      * 
@@ -198,7 +205,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * 
      * @returns a therapy
      */
-    public CarcinogenExposure create(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData) {
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+                                     GrowthFactorData inGrowthFactorData)
+    {
 
         log.info("In CarcinogenExposureManagerImpl.create");
 
@@ -224,8 +233,10 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, GrowthFactorData inGrowthFactorData, CarcinogenExposure inCarcinogenExposure)
-            throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       GrowthFactorData inGrowthFactorData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
 
         log.info("In CarcinogenExposureManagerImpl.update");
 
@@ -246,7 +257,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * 
      * @returns a therapy
      */
-    public CarcinogenExposure create(AnimalModel inAnimalModel, HormoneData inHormoneData) {
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+                                     HormoneData inHormoneData)
+    {
 
         log.info("In CarcinogenExposureManagerImpl.create");
 
@@ -272,7 +285,10 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, HormoneData inHormoneData, CarcinogenExposure inCarcinogenExposure) throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       HormoneData inHormoneData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
 
         log.info("In CarcinogenExposureManagerImpl.update");
 
@@ -293,7 +309,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * 
      * @returns a CarcinogenExposure
      */
-    public CarcinogenExposure create(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData) {
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+                                     NutritionalFactorData inNutritionalFactorData)
+    {
 
         log.info("In CarcinogenExposureManagerImpl.create");
 
@@ -318,8 +336,10 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, NutritionalFactorData inNutritionalFactorData, CarcinogenExposure inCarcinogenExposure)
-            throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       NutritionalFactorData inNutritionalFactorData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
 
         log.info("In CarcinogenExposureManagerImpl.update");
 
@@ -339,7 +359,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * 
      * @returns a therapy
      */
-    public CarcinogenExposure create(AnimalModel inAnimalModel, RadiationData inRadiationData) {
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+                                     RadiationData inRadiationData)
+    {
 
         log.info("In CarcinogenExposureManagerImpl.create");
 
@@ -366,7 +388,10 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, RadiationData inRadiationData, CarcinogenExposure inCarcinogenExposure) throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       RadiationData inRadiationData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
 
         log.info("In CarcinogenExposureManagerImpl.update");
 
@@ -387,7 +412,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * 
      * @returns a therapy
      */
-    public CarcinogenExposure create(AnimalModel inAnimalModel, SurgeryData inSurgeryData) {
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+                                     SurgeryData inSurgeryData)
+    {
 
         log.info("In CarcinogenExposureManagerImpl.create");
 
@@ -411,7 +438,10 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, SurgeryData inSurgeryData, CarcinogenExposure inCarcinogenExposure) throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       SurgeryData inSurgeryData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
 
         log.info("In CarcinogenExposureManagerImpl.update");
 
@@ -431,7 +461,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * 
      * @returns a therapy
      */
-    public CarcinogenExposure create(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData) {
+    public CarcinogenExposure create(AnimalModel inAnimalModel,
+                                     ViralTreatmentData inViralTreatmentData)
+    {
 
         log.info("In CarcinogenExposureManagerImpl.create");
 
@@ -457,8 +489,10 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
      * @exception Exception
      *                when anything goes wrong.
      */
-    public void update(AnimalModel inAnimalModel, ViralTreatmentData inViralTreatmentData, CarcinogenExposure inCarcinogenExposure)
-            throws Exception {
+    public void update(AnimalModel inAnimalModel,
+                       ViralTreatmentData inViralTreatmentData,
+                       CarcinogenExposure inCarcinogenExposure) throws Exception
+    {
 
         log.info("In CarcinogenExposureManagerImpl.update");
 
@@ -472,8 +506,6 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
     }
 
 
-    
-    
     // ///////////////////////////////////////////////////////
     // Populate methods for the specific interfaces that
     // each interface implements
@@ -643,42 +675,9 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
             theCarcinogenExposure.getTreatment().setAdministrativeRoute(null);
             theCarcinogenExposure.getTreatment().setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
 
-            log.trace("Sending Notification eMail - new Administrative Route added");
+            log.info("Sending Notification eMail - new Administrative Route added");
+            sendEmail(inAnimalModel, inAdministrationData.getOtherAdministrativeRoute(), "AdministrativeRoute");
 
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String, Object> values = new TreeMap<String, Object>();
-            values.put("type", "AdministrativeRoute");
-            values.put("value", inAdministrationData.getOtherAdministrativeRoute());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
 
             // anytime admin route is not other, set uncontrolled vocab to null
             // (covers editing)
@@ -724,6 +723,46 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         if (theCasNumber != null && theCasNumber.length() > 0)
         {
             theEF.setCasNumber(theCasNumber);
+        }
+    }
+
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        // Get the e-mail resource
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
+
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+        // gather message keys and variable values to build the e-mail
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
         }
     }
 
