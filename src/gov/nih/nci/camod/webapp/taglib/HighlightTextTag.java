@@ -1,7 +1,7 @@
 /**
- * $Id $ 
+ * $Id: HighlightTextTag.java,v 1.3 2006-05-04 17:30:41 schroedn Exp $ 
  * 
- * $Log $ 
+ * $Log: not supported by cvs2svn $ 
  *  
  */
 
