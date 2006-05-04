@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SavedQuery.java,v 1.2 2006-05-04 14:11:58 schroedn Exp $
+ * $Id: SavedQuery.java,v 1.3 2006-05-04 17:29:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/04 14:11:58  schroedn
+ * Changes from Code review
+ *
  * Revision 1.1  2006/04/28 19:12:44  schroedn
  * Defect #238, 261
  * Search Result Columns and Saving Queries domain objects and hibernate mapping files
@@ -225,5 +228,24 @@ public class SavedQuery extends BaseObject implements Serializable
     public void setNumberResults(long numberResults)
     {
         this.numberResults = numberResults;
-    }    
+    }
+    
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getQueryName() + " - " + this.numberResults;
+        return result;
+    }
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
+    }     
 }
