@@ -113,6 +113,10 @@
 		    type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
 		    
 		<form-bean
+			name="morpholinoForm"
+		    type="gov.nih.nci.camod.webapp.form.MorpholinoForm"/>		    
+		    
+		<form-bean
 			name="nutritionalFactorForm"
 		    type="gov.nih.nci.camod.webapp.form.NutritionalFactorForm"/>		    		    
 		
@@ -451,7 +455,11 @@
 		
 		<forward
 			name="submitModelCharacteristics"
-			path="/jsp/protected/submitModelCharacteristics.jsp"></forward>
+			path="/jsp/protected/submitModelCharacteristics.jsp"></forward>			
+			
+		<forward
+			name="submitMorpholino"
+			path="/jsp/protected/submitMorpholino.jsp"></forward>			
 		
 		<forward
 			name="submitModels"
@@ -822,6 +830,12 @@
 			parameter="/jsp/protected/submitModels.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
+		<action
+			path="/submitMorpholino"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitMorpholino.jsp">
+			<set-property property="secure" value="false"/>
+		</action>		
 		<action
 			path="/submitNewModel"
 			type="org.apache.struts.actions.ForwardAction"
@@ -1723,6 +1737,32 @@
 			validate="false">
 		<set-property property="secure" value="false" />
     </action>
+    
+    
+     <!-- MorpholinoForm -->
+     <action path="/MorpholinoAction"
+	        type="gov.nih.nci.camod.webapp.action.MorpholinoAction"
+	        name="morpholinoForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitMorpholino.do">
+        </forward>     	  	
+    </action>
+    
+    <action path="/MorpholinoPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.MorpholinoPopulateAction"
+    		name="morpholinoForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action>
+    
 
     <!--  Generate the list of items on the submission subMenu -->
 	<action path="/AnimalModelTreePopulateAction"
