@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.42 2006-05-05 16:57:02 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.43 2006-05-05 17:16:44 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2006/05/05 16:57:02  georgeda
+ * Fixed errors w/ SQL introduced during model change
+ *
  * Revision 1.41  2006/04/28 19:19:46  schroedn
  * Defect # 261
  * Added queries to get saved queries by a given username
@@ -1838,7 +1841,7 @@ public class QueryManagerImpl extends BaseManager
             + "       carcinogen_exposure ce," + "\n" 
             + "       environmental_factor ef," + "\n" 
             + "       species sp," + "\n" 
-            + "       strain st," + "\n" 
+            + "       strain st" + "\n" 
             + " where acm.abs_cancer_model_id = ce.abs_cancer_model_id" + "\n" 
             + "   and acm.abs_cancer_model_type = 'AM'" + "\n" 
             + "   and ce.environmental_factor_id = ef.environmental_factor_id" + "\n" 
