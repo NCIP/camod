@@ -52,8 +52,8 @@
 		</form>
 
 		<form name="drugScreenSearchForm">
-			<field property="nscNumber" depends="required,integer">
-				<arg0 key="DrugScreenSearchForm.nscNumber" />
+			<field property="NSCNumber" depends="required,integer">
+				<arg0 key="DrugScreenSearchForm.NSCNumber" />
 			</field>
 			<field property="doYeast" depends="validwhen">
 				<msg name="validwhen" key="DrugScreenSearchForm.select" />
