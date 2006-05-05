@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: QueryManagerImpl.java,v 1.41 2006-04-28 19:19:46 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.42 2006-05-05 16:57:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2006/04/28 19:19:46  schroedn
+ * Defect # 261
+ * Added queries to get saved queries by a given username
+ *
  * Revision 1.40  2006/04/27 15:02:57  pandyas
  * Fixed SQLString as a result of failed testing
  *
@@ -919,7 +923,7 @@ public class QueryManagerImpl extends BaseManager
             }
             else
             {
-                theSQLString += "   and a.agent_id = ?" + "\n";
+                theSQLString += "   and ag.agent_id = ?" + "\n";
                 theParam = agent.getId();
             }
 
@@ -991,7 +995,17 @@ public class QueryManagerImpl extends BaseManager
                 + "\n" + "       count(*)" 
                 + "\n" + "  from invivo_Result sr," 
                 + "\n" + "       agent a," 
-                + "\n" + "       XENOGRAFT_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "       strain st," + "\n" + "       species sp" + "\n" + " where sr.agent_id = a.agent_id" + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n" + "   and acm.strain_id = st.strain_id" + "\n" + "   and st.species_id = sp.species_id" + "\n";
+                + "\n" + "       XENOGRAFT_INVIVO_RESULT ymsr," 
+                + "\n" + "       abs_cancer_model acm," 
+                + "\n" + "       treatment t," 
+                + "\n" + "       strain st," 
+                + "\n" + "       species sp" 
+                + "\n" + " where sr.agent_id = a.agent_id" 
+                + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" 
+                + "\n" + "   and sr.treatment_id = t.treatment_id" 
+                + "\n" + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" 
+                + "\n" + "   and acm.strain_id = st.strain_id" 
+                + "\n" + "   and st.species_id = sp.species_id" + "\n";
 
             Long theParam;
             if (useNscNumber == true)
@@ -1823,7 +1837,8 @@ public class QueryManagerImpl extends BaseManager
             + "  from abs_cancer_model acm," + "\n" 
             + "       carcinogen_exposure ce," + "\n" 
             + "       environmental_factor ef," + "\n" 
-            + "       species s" + "\n" + "       strain s," + "\n" 
+            + "       species sp," + "\n" 
+            + "       strain st," + "\n" 
             + " where acm.abs_cancer_model_id = ce.abs_cancer_model_id" + "\n" 
             + "   and acm.abs_cancer_model_type = 'AM'" + "\n" 
             + "   and ce.environmental_factor_id = ef.environmental_factor_id" + "\n" 
