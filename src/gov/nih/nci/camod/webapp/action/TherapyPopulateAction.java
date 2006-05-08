@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.18 2006-04-27 18:34:53 pandyas Exp $
+ * $Id: TherapyPopulateAction.java,v 1.19 2006-05-08 13:43:00 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/04/27 18:34:53  pandyas
+ * Fixed incorrect header
+ *
  * Revision 1.17  2006/04/18 17:55:10  pandyas
  * Fixed Therapy multi-select collections -  populate issue
  *
@@ -56,7 +59,8 @@ import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.webapp.form.TherapyForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,7 +81,6 @@ public class TherapyPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-
         log.trace("Entering TherapyPopulateAction.populate");
 
         // Create a form to edit
@@ -113,7 +116,7 @@ public class TherapyPopulateAction extends BaseAction
                 therapyForm.setDosage(therapy.getTreatment().getDosage());
                 therapyForm.setDosageUnit(therapy.getTreatment().getDosageUnit());
 
-                if (therapy.getTreatment().getAdminRouteUnctrlVocab() !=null)
+                if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null)
                 {
                     therapyForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
                     therapyForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
@@ -147,7 +150,7 @@ public class TherapyPopulateAction extends BaseAction
             therapyForm.setComments(therapy.getComments());
 
             // Get the collection/Set of agent targets
-            List<AgentTarget> theAgentTargetsList = new ArrayList(therapy.getAgent().getAgentTargetCollection());
+            List<AgentTarget> theAgentTargetsList = new ArrayList<AgentTarget>(therapy.getAgent().getAgentTargetCollection());
             String[] theTargets = new String[theAgentTargetsList.size()];
             for (int i = 0; i < theAgentTargetsList.size(); i++)
             {
@@ -158,7 +161,7 @@ public class TherapyPopulateAction extends BaseAction
 
 
             // Get the collection/Set  of biological processes
-            List theProcessesList = new ArrayList(therapy.getAgent().getBiologicalProcessCollection());
+            List<BiologicalProcess> theProcessesList = new ArrayList<BiologicalProcess>(therapy.getAgent().getBiologicalProcessCollection());
             String[] theProcesses = new String[theProcessesList.size()];
             for (int i = 0; i < theProcessesList.size(); i++)
             {
@@ -168,7 +171,7 @@ public class TherapyPopulateAction extends BaseAction
             therapyForm.setSelectedProcesses(theProcesses);
 
             // Get the collection/Set of Chemical Classes
-            List theChemicalClassesList = new ArrayList(therapy.getAgent().getChemicalClassCollection());
+            List<ChemicalClass> theChemicalClassesList = new ArrayList<ChemicalClass>(therapy.getAgent().getChemicalClassCollection());
             String[] theChemicalClasses = new String[theChemicalClassesList.size()];
             for (int i = 0; i < theChemicalClassesList.size(); i++)
             {
@@ -201,13 +204,12 @@ public class TherapyPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-
-        System.out.println("<TherapyPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.debug("<TherapyPopulateAction dropdown> Entering ActionForward dropdown()");
 
         // setup dropdown menus
         this.dropdown(request, response);
 
-        System.out.println("<TherapyPopulateAction dropdown> Exiting ActionForward dropdown()");
+        log.debug("<TherapyPopulateAction dropdown> Exiting ActionForward dropdown()");
 
         return mapping.findForward("submitTherapy");
     }
@@ -223,7 +225,7 @@ public class TherapyPopulateAction extends BaseAction
                          HttpServletResponse response) throws Exception
     {
 
-        System.out.println("<TherapyPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<TherapyPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
@@ -237,7 +239,6 @@ public class TherapyPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TOXICITYGRADESDROP, Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, Constants.Dropdowns.ADD_BLANK);
 
-        System.out.println("<TherapyPopulateAction dropdown> Exiting void dropdown()");
-
+        log.debug("<TherapyPopulateAction dropdown> Exiting void dropdown()");
     }
 }

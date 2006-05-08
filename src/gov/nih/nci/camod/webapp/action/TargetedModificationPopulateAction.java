@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.13 2006-04-20 14:04:50 pandyas Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.14 2006-05-08 13:42:44 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/20 14:04:50  pandyas
+ * changed Modification Type to getOrCreate
+ *
  * Revision 1.12  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -24,18 +27,21 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.domain.Conditionality;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.ModificationType;
+import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.service.impl.TargetedModificationManagerSingleton;
 import gov.nih.nci.camod.webapp.form.TargetedModificationForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -48,8 +54,7 @@ public class TargetedModificationPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-
-        System.out.println("<TargetedModificationPopulateAction populate> Entering populate() ");
+        log.debug("<TargetedModificationPopulateAction populate> Entering populate() ");
 
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
 
@@ -72,9 +77,9 @@ public class TargetedModificationPopulateAction extends BaseAction
             }
 
             // Get the collection/Set of modification types
-            List<ModificationType> theModificationTypeList = new ArrayList(theTargetedModification.getModificationTypeCollection());
+            List<ModificationType> theModificationTypeList = new ArrayList<ModificationType>(theTargetedModification.getModificationTypeCollection());
             String[] theModTypes = new String[theModificationTypeList.size()];
-            String otherModType = null;
+
             for (int i = 0; i < theModificationTypeList.size(); i++)
             {
                 ModificationType theModificationType = (ModificationType) theModificationTypeList.get(i);
@@ -141,8 +146,7 @@ public class TargetedModificationPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-
-        System.out.println("<TargetedModificationPopulateAction dropdown> Entering dropdown()");
+        log.debug("<TargetedModificationPopulateAction dropdown> Entering dropdown()");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -161,10 +165,10 @@ public class TargetedModificationPopulateAction extends BaseAction
                          HttpServletResponse response) throws Exception
     {
 
-        System.out.println("<TargetedModificationPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<TargetedModificationPopulateAction dropdown> Entering void dropdown()");
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.TARGETEDMODIFICATIONDROP, "");
 
-        System.out.println("<TargetedModificationPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<TargetedModificationPopulateAction dropdown> Exiting void dropdown()");
     }
 }

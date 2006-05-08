@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.28 2006-04-19 19:31:58 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.29 2006-05-08 13:43:15 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.28  2006/04/19 19:31:58  georgeda
+ *  Fixed display issue w/ GeneDelivery
+ *
  *  Revision 1.27  2006/04/19 18:50:01  georgeda
  *  Fixed issue w/ engineered genes displaying
  *
@@ -83,22 +86,48 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.domain.impl.GeneImpl;
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.*;
-import gov.nih.nci.camod.service.*;
+import gov.nih.nci.camod.domain.Agent;
+import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.CarcinogenExposure;
+import gov.nih.nci.camod.domain.Comments;
+import gov.nih.nci.camod.domain.EngineeredGene;
+import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.InducedMutation;
+import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.domain.SpontaneousMutation;
+import gov.nih.nci.camod.domain.TargetedModification;
+import gov.nih.nci.camod.domain.Therapy;
+import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.service.AgentManager;
+import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.CommentsManager;
+import gov.nih.nci.camod.service.PersonManager;
+import gov.nih.nci.camod.service.XenograftManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
-public class ViewModelAction extends BaseAction {
+public class ViewModelAction extends BaseAction
+{
 
     /**
      * sets the cancer model object in the session
@@ -106,14 +135,18 @@ public class ViewModelAction extends BaseAction {
      * @param request
      *            the httpRequest
      */
-    private void setCancerModel(HttpServletRequest request) {
+    private void setCancerModel(HttpServletRequest request)
+    {
         String modelID = request.getParameter(Constants.Parameters.MODELID);
-        System.out.println("<setCancerModel> modelID" + modelID);
+        log.debug("<setCancerModel> modelID" + modelID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = null;
-        try {
+        try
+        {
             am = animalModelManager.get(modelID);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get cancer model in setCancerModel");
             e.printStackTrace();
         }
@@ -127,27 +160,31 @@ public class ViewModelAction extends BaseAction {
      *            the httpRequest
      * @throws Exception
      */
-    private void setComments(HttpServletRequest request, String inSection) throws Exception {
+    private void setComments(HttpServletRequest request,
+                             String inSection) throws Exception
+    {
 
         String theCommentsId = request.getParameter(Constants.Parameters.COMMENTSID);
 
         CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
 
-        System.out.println("Comments id: " + theCommentsId);
+        log.debug("Comments id: " + theCommentsId);
         List<Comments> theCommentsList = new ArrayList<Comments>();
-        if (theCommentsId != null && theCommentsId.length() > 0) {
+        if (theCommentsId != null && theCommentsId.length() > 0)
+        {
             Comments theComments = theCommentsManager.get(theCommentsId);
-            if (theComments != null) {
+            if (theComments != null)
+            {
                 System.out.println("Found a comment: " + theComments.getRemark());
                 theCommentsList.add(theComments);
             }
         }
 
         // Get all comments that are either approved or owned by this user
-        else {
+        else
+        {
             PersonManager thePersonManager = (PersonManager) getBean("personManager");
-            Person theCurrentUser = thePersonManager.getByUsername((String) request.getSession().getAttribute(
-                    Constants.CURRENTUSER));
+            Person theCurrentUser = thePersonManager.getByUsername((String) request.getSession().getAttribute(Constants.CURRENTUSER));
 
             AnimalModel theAnimalModel = (AnimalModel) request.getSession().getAttribute(Constants.ANIMALMODEL);
 
@@ -165,8 +202,11 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateModelCharacteristics(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward populateModelCharacteristics(ActionMapping mapping,
+                                                      ActionForm form,
+                                                      HttpServletRequest request,
+                                                      HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
         setComments(request, Constants.Pages.MODEL_CHARACTERISTICS);
         return mapping.findForward("viewModelCharacteristics");
@@ -175,9 +215,12 @@ public class ViewModelAction extends BaseAction {
     /**
      * 
      */
-    public ActionForward populateEngineeredGene(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        System.out.println("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
+    public ActionForward populateEngineeredGene(ActionMapping mapping,
+                                                ActionForm form,
+                                                HttpServletRequest request,
+                                                HttpServletResponse response) throws Exception
+    {
+        log.debug("<populateEngineeredGene> modelID" + request.getParameter("aModelID"));
         String modelID = request.getParameter("aModelID");
 
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -191,7 +234,7 @@ public class ViewModelAction extends BaseAction {
         int gsCnt = 0;// GenomicSegment
         final List<EngineeredGene> tmc = new ArrayList<EngineeredGene>();
         int tmCnt = 0;// TargetedModification
-        final Map tmGeneMap = new HashMap();
+        final Map<Long, Gene> tmGeneMap = new HashMap<Long, Gene>();
         final List<EngineeredGene> imc = new ArrayList<EngineeredGene>();
         final List<SpontaneousMutation> smc = new ArrayList<SpontaneousMutation>(am.getSpontaneousMutationCollection());
         Iterator it = egc.iterator();
@@ -199,22 +242,29 @@ public class ViewModelAction extends BaseAction {
         while (it.hasNext())
         {
             EngineeredGene eg = (EngineeredGene) it.next();
-            if (eg instanceof Transgene) {
+            if (eg instanceof Transgene)
+            {
                 tgc.add(eg);
                 tgCnt++;
-            } else if (eg instanceof GenomicSegment) {
+            }
+            else if (eg instanceof GenomicSegment)
+            {
                 gsc.add(eg);
                 gsCnt++;
-            } else if (eg instanceof TargetedModification) {
+            }
+            else if (eg instanceof TargetedModification)
+            {
                 tmc.add(eg);
                 tmCnt++;
                 // now go to caBIO and query the gene object....
                 TargetedModification tm = (TargetedModification) eg;
                 String geneId = tm.getGeneId();
-                if (geneId != null) {
+                if (geneId != null)
+                {
                     log.info("Connecting to caBIO to look up gene " + geneId);
                     // the geneId is available
-                    try {
+                    try
+                    {
                         ApplicationService appService = EvsTreeUtil.getApplicationService();
                         DatabaseCrossReference dcr = new DatabaseCrossReferenceImpl();
                         dcr.setCrossReferenceId(geneId);
@@ -223,7 +273,8 @@ public class ViewModelAction extends BaseAction {
                         List resultList = appService.search(DatabaseCrossReference.class, dcr);
                         final int resultCount = (resultList != null) ? resultList.size() : 0;
                         log.info("Got " + resultCount + " dataCrossReferences....");
-                        if (resultCount > 0) {
+                        if (resultCount > 0)
+                        {
                             dcr = (DatabaseCrossReference) resultList.get(0);
                             Gene myGene = new GeneImpl();
                             List<DatabaseCrossReference> cfcoll = new ArrayList<DatabaseCrossReference>();
@@ -232,24 +283,28 @@ public class ViewModelAction extends BaseAction {
                             resultList = appService.search(Gene.class, myGene);
                             final int geneCount = (resultList != null) ? resultList.size() : 0;
                             log.info("Got " + geneCount + " Gene Objects");
-                            if (geneCount > 0) {
+                            if (geneCount > 0)
+                            {
                                 myGene = (Gene) resultList.get(0);
                                 log.info("Gene:" + geneId + " ==>" + myGene);
                                 tmGeneMap.put(tm.getId(), myGene);
                             }
                         }
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e)
+                    {
                         log.error("Unable to get information from caBIO", e);
                     }
                 }
-            } else if (eg instanceof InducedMutation) {
+            }
+            else if (eg instanceof InducedMutation)
+            {
                 imc.add(eg);
                 imCnt++;
             }
-        }        
+        }
 
-        System.out.println("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc="
-                + tmCnt + "imc=" + imCnt);
+        log.debug("<populateEngineeredGene> " + "egcCnt=" + egcCnt + "tgc=" + tgCnt + "gsc=" + gsCnt + "tmc=" + tmCnt + "imc=" + imCnt);
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
         request.getSession().setAttribute(Constants.TRANSGENE_COLL, tgc);
         request.getSession().setAttribute(Constants.GENOMIC_SEG_COLL, gsc);
@@ -279,42 +334,48 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateCarcinogenicInterventions(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+    public ActionForward populateCarcinogenicInterventions(ActionMapping mapping,
+                                                           ActionForm form,
+                                                           HttpServletRequest request,
+                                                           HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
         String modelID = request.getParameter(Constants.Parameters.MODELID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = animalModelManager.get(modelID);
 
         final Set ceColl = am.getCarcinogenExposureCollection();
-        Iterator it = ceColl.iterator();        
-        final Map<String, List> interventionTypeMap = new HashMap<String, List>();
-        final int cc = (ceColl != null) ? ceColl.size() : 0;
+        Iterator it = ceColl.iterator();
+        final Map<String, List<Object>> interventionTypeMap = new HashMap<String, List<Object>>();
 
         while (it.hasNext())
         {
             CarcinogenExposure ce = (CarcinogenExposure) it.next();
-            if (ce != null ) {
+            if (ce != null)
+            {
                 log.info("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
-                String myType = ce.getEnvironmentalFactor().getType();
-                if (myType == null || myType.length() == 0) {
-                    myType = ce.getEnvironmentalFactor().getTypeUnctrlVocab();
-                    if (myType == null || myType.length() == 0) {
-                        myType = "Not specified";
+                String theType = ce.getEnvironmentalFactor().getType();
+                if (theType == null || theType.length() == 0)
+                {
+                    theType = ce.getEnvironmentalFactor().getTypeUnctrlVocab();
+                    if (theType == null || theType.length() == 0)
+                    {
+                        theType = "Not specified";
                     }
                 }
-                List myTypeColl = (List) interventionTypeMap.get(myType);
-                if (myTypeColl == null) {
-                    myTypeColl = new ArrayList();
-                    interventionTypeMap.put(myType, myTypeColl);
+                List<Object> theTypeColl = interventionTypeMap.get(theType);
+                if (theTypeColl == null)
+                {
+                    theTypeColl = new ArrayList<Object>();
+                    interventionTypeMap.put(theType, theTypeColl);
                 }
-                myTypeColl.add(ce);
+                theTypeColl.add(ce);
             }
         }
-        
-        if (am.getGeneDeliveryCollection().size() > 0) {
-            List theGeneDeliveryCollection = new ArrayList(am.getGeneDeliveryCollection());
+
+        if (am.getGeneDeliveryCollection().size() > 0)
+        {
+            List<Object> theGeneDeliveryCollection = new ArrayList<Object>(am.getGeneDeliveryCollection());
             interventionTypeMap.put("GeneDelivery", theGeneDeliveryCollection);
         }
 
@@ -325,7 +386,7 @@ public class ViewModelAction extends BaseAction {
         return mapping.findForward("viewCarcinogenicInterventions");
     }
 
-    
+
     /**
      * Populate the session and/or request with the objects necessary to display
      * the page.
@@ -341,14 +402,20 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populatePublications(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populatePublications(ActionMapping mapping,
+                                              ActionForm form,
+                                              HttpServletRequest request,
+                                              HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
         String modelID = request.getParameter("aModelID");
         List pubs = null;
-        try {
+        try
+        {
             pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get publications");
             e.printStackTrace();
         }
@@ -372,10 +439,12 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populateHistopathology(ActionMapping mapping,
+                                                ActionForm form,
+                                                HttpServletRequest request,
+                                                HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
-
         setComments(request, Constants.Pages.HISTOPATHOLOGY);
 
         return mapping.findForward("viewHistopathology");
@@ -396,8 +465,11 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateTherapeuticApproaches(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward populateTherapeuticApproaches(ActionMapping mapping,
+                                                       ActionForm form,
+                                                       HttpServletRequest request,
+                                                       HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
         //
         // query caBIO and load clinical protocols information
@@ -412,38 +484,44 @@ public class ViewModelAction extends BaseAction {
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = animalModelManager.get(modelID);
         final Set therapyColl = am.getTherapyCollection();
-        Iterator it = therapyColl.iterator();        
-        
+        Iterator it = therapyColl.iterator();
+
         final int cc = (therapyColl != null) ? therapyColl.size() : 0;
         log.info("Looking up clinical protocols for " + cc + " agents...");
 
         while (it.hasNext())
         {
             Therapy t = (Therapy) it.next();
-            if (t != null) {
+            if (t != null)
+            {
                 therapeuticApprochesColl.add(t);
             }
             Agent a = t.getAgent();
             AgentManager myAgentManager = (AgentManager) getBean("agentManager");
-            if (a != null) {
+            if (a != null)
+            {
                 Long nscNumber = a.getNscNumber();
-                if (nscNumber != null) {
+                if (nscNumber != null)
+                {
                     Collection protocols = myAgentManager.getClinicalProtocols(a);
                     clinProtocols.put(nscNumber, protocols);
                     log.info("\n Number of clinical protocols from caBio " + protocols.size());
-                    log.info("\n Print each protocol (for debugging) :");                    
-                    for (int j = 0; j < protocols.size(); j++) {
-                        log.info("\n" + protocols.toString());                      
+                    log.info("\n Print each protocol (for debugging) :");
+                    for (int j = 0; j < protocols.size(); j++)
+                    {
+                        log.info("\n" + protocols.toString());
                     }
-                    
+
                     log.info("\n<ViewModelAction>  populateTherapeuticApproaches");
-                    log.info("\n Remove the following printout - for debugging only");                    
-                    for (int k = 0; k < clinProtocols.size(); k++) {
-                        log.info("Print what is in clinProtolos collection: " + clinProtocols.toString());                    
+                    log.info("\n Remove the following printout - for debugging only");
+                    for (int k = 0; k < clinProtocols.size(); k++)
+                    {
+                        log.info("Print what is in clinProtolos collection: " + clinProtocols.toString());
                     }
                     // get the yeast data
                     List yeastStages = myAgentManager.getYeastResults(a, true);
-                    if (yeastStages.size() > 0) {
+                    if (yeastStages.size() > 0)
+                    {
                         yeastResults.put(a.getId(), yeastStages);
                     }
                     // now get invivo/Xenograft data
@@ -478,10 +556,12 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateCellLines(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populateCellLines(ActionMapping mapping,
+                                           ActionForm form,
+                                           HttpServletRequest request,
+                                           HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
-
         setComments(request, Constants.Pages.CELL_LINES);
 
         return mapping.findForward("viewCellLines");
@@ -502,10 +582,12 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateImages(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populateImages(ActionMapping mapping,
+                                        ActionForm form,
+                                        HttpServletRequest request,
+                                        HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
-
         setComments(request, Constants.Pages.IMAGES);
 
         return mapping.findForward("viewImages");
@@ -526,10 +608,12 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateMicroarrays(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populateMicroarrays(ActionMapping mapping,
+                                             ActionForm form,
+                                             HttpServletRequest request,
+                                             HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
-
         ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
 
         request.setAttribute("uri_start", theBundle.getString(Constants.CaArray.URI_START));
@@ -555,10 +639,12 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateTransplantXenograft(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward populateTransplantXenograft(ActionMapping mapping,
+                                                     ActionForm form,
+                                                     HttpServletRequest request,
+                                                     HttpServletResponse response) throws Exception
+    {
         setCancerModel(request);
-
         setComments(request, Constants.Pages.XENOGRAFT);
 
         return mapping.findForward("viewTransplantXenograft");
@@ -579,8 +665,11 @@ public class ViewModelAction extends BaseAction {
      * @return
      * @throws Exception
      */
-    public ActionForward populateXenograftDetails(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward populateXenograftDetails(ActionMapping mapping,
+                                                  ActionForm form,
+                                                  HttpServletRequest request,
+                                                  HttpServletResponse response) throws Exception
+    {
         String modelID = request.getParameter("xModelID");
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
