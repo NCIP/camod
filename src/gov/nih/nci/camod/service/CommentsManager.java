@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CommentsManager.java,v 1.2 2005-10-11 18:12:29 georgeda Exp $
+ * $Id: CommentsManager.java,v 1.3 2006-05-08 13:31:29 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/11 18:12:29  georgeda
+ * More comment changes
+ *
  * Revision 1.1  2005/10/10 14:06:56  georgeda
  * Initial revision
  *
@@ -25,7 +28,7 @@ public interface CommentsManager {
 
 	public List getAllByStateForPerson(String inState, Person inPerson) throws Exception;
 	
-	public List getAllBySection(String inSection, Person inPerson, AnimalModel inModel) throws Exception;
+	public List<Comments> getAllBySection(String inSection, Person inPerson, AnimalModel inModel) throws Exception;
 
 	public Comments get(String id) throws Exception;
 }

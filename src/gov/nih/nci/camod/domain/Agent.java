@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * Revision 1.11  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -7,7 +10,7 @@
  * Cleanup
  *
  * 
- * $Id: Agent.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Agent.java,v 1.13 2006-05-08 13:30:26 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -152,7 +155,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
     /**
      * @return Returns the agentTargetCollection.
      */
-    public Set getAgentTargetCollection() {            
+    public Set<AgentTarget> getAgentTargetCollection() {            
       return agentTargetCollection;                    
     }
 
@@ -176,7 +179,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
     /**
      * @return Returns the chemicalClassCollection.
      */
-    public Set getChemicalClassCollection() {            
+    public Set<ChemicalClass> getChemicalClassCollection() {            
       return chemicalClassCollection;        
     }
     
@@ -200,7 +203,7 @@ public class Agent extends BaseObject implements Serializable, Duplicatable {
     /**
      * @return Returns the biologicalProcessCollection.
      */
-    public Set getBiologicalProcessCollection() {           
+    public Set<BiologicalProcess> getBiologicalProcessCollection() {           
       return biologicalProcessCollection;                       
     }
    

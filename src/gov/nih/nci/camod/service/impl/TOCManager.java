@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: TOCManager.java,v 1.1 2005-10-20 19:28:58 georgeda Exp $
+ *  $Id: TOCManager.java,v 1.2 2006-05-08 13:33:54 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/10/20 19:28:58  georgeda
+ *  Added TOC functionality
+ *
  *  Revision 1.5  2005/09/19 13:09:00  georgeda
  *  Slight change to interface
  *
@@ -45,7 +48,7 @@ public class TOCManager {
 
     public List process() {
 
-        List theQueryGroups = new ArrayList();
+        List<TOCQueryGroup> theQueryGroups = new ArrayList<TOCQueryGroup>();
 
         Document theQueryConfig = null;
 

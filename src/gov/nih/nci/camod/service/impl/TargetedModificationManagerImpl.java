@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.24 2006-04-20 14:06:40 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.25 2006-05-08 13:33:40 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/04/20 14:06:40  pandyas
+ * changed Modification Type to getOrCreate
+ *
  * Revision 1.23  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -115,7 +118,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         String[] theModificationTypes = inTargetedModificationData.getModificationType();
         
         //associates the current list with the Object, so it is reused to save them back into the database
-        Set theCurrentModificationTypeSet = inTargetedModification.getModificationTypeCollection();
+        Set<ModificationType> theCurrentModificationTypeSet = inTargetedModification.getModificationTypeCollection();
         
         // Clears list, but list remains associated with TM object (no explicit save needed for hibernate)
         theCurrentModificationTypeSet.clear();

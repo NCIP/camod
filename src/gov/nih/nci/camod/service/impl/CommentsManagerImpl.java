@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CommentsManagerImpl.java,v 1.5 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: CommentsManagerImpl.java,v 1.6 2006-05-08 13:32:52 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.4  2005/10/27 19:42:05  georgeda
  * Cleanup
  *
@@ -114,7 +117,7 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager
      * @exception throws
      *                an Exception if an error occurred
      */
-    public List getAll() throws Exception
+    public List<Comments> getAll() throws Exception
     {
         log.trace("In CommentsManagerImpl.getAll");
         return super.getAll(AnimalModel.class);
@@ -131,8 +134,8 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager
      * @exception Exception
      *                if an error occurred
      */
-    public List getAllByStateForPerson(String inState,
-                                       Person inPerson) throws Exception
+    public List<Comments> getAllByStateForPerson(String inState,
+                                                 Person inPerson) throws Exception
     {
         log.trace("In CommentsManagerImpl.getAllByStateForPerson");
         return QueryManagerSingleton.instance().getCommentsByStateForPerson(inState, inPerson);
@@ -152,9 +155,9 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager
      * @exception Exception
      *                if an error occurred
      */
-    public List getAllBySection(String inState,
-                                Person inPerson,
-                                AnimalModel inModel) throws Exception
+    public List<Comments> getAllBySection(String inState,
+                                          Person inPerson,
+                                          AnimalModel inModel) throws Exception
     {
         log.trace("In CommentsManagerImpl.getAllBySectionForPerson");
         return QueryManagerSingleton.instance().getCommentsBySection(inState, inPerson, inModel);
