@@ -17,426 +17,429 @@ import com.meterware.httpunit.WebResponse;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest {
-	
-	public SearchPopulateModelCharacteristicsTest(String arg0) {
-		super(arg0);
-	}
+public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest
+{
 
-	protected void setUp() throws Exception {
+    public SearchPopulateModelCharacteristicsTest(String arg0)
+    {
+        super(arg0);
+    }
+
+    protected void setUp() throws Exception
+    {
 
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
         String theUsername = theBundle.getString("username");
         String thePassword = theBundle.getString("password");
-        
-        loginToApplication(theUsername, thePassword);
-        createModel();		
-	}
 
-	protected void tearDown() throws Exception {
+        loginToApplication(theUsername, thePassword);
+        createModel();
+    }
+
+    protected void tearDown() throws Exception
+    {
         deleteModel();
         logoutOfApplication();
-	}
-	
-    public static Test suite() {
+    }
+
+    public static Test suite()
+    {
         TestSuite suite = new TestSuite(SearchPopulateModelCharacteristicsTest.class);
         return suite;
     }
 
-	public void testPopulateJacksonLab() throws Exception {
+    public void testPopulateJacksonLab() throws Exception
+    {
 
-		// Adding Jackson Lab Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from Jackson Lab.");
-		assertNotNull("Unable to find link to enter a Jackson Lab Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Stock Number:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+        // Adding Jackson Lab Animal Availability
+        navigateToModelForEditing(myModelName);
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setName("TESTAVAILABILITY");
-		theForm.setSource("Jackson Laboratory");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List<String> theParamsToSkip = new ArrayList<String>();		
-		theParamsToSkip.add("source");		
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Available from Jackson Lab.");
+        assertNotNull("Unable to find link to enter a Jackson Lab Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Stock Number:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setName("TESTAVAILABILITY");
+        theForm.setSource("Jackson Laboratory");
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("source");
 
-		// Verify that populate method returns complete and correct data
-		navigateToModelForEditing(myModelName);
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"TESTAVAILABILITY");
-		assertNotNull("Unable to find link to populate the Jackson Availability", theLink);		
-		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Stock Number:");
-		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
-		
-		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList<String>();
-		theParamsToSkip.add("aAvailabilityID");
-		theParamsToSkip.add("submitAction");		
-		
-		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
-		
-		/* Verify Model Characteristics Data on return page 
-		 *  TODO:  probably have to do this another way to 
-		 *  verify the populate method for model char - 
-		 *  too many variables skipped 
-		 */
-		/*
-		navigateToModelForEditing(myModelName);
-		
-        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_URL_STRING,
-		"AnimalModelPopulateAction.do?method=populate");		
-		assertNotNull("Unable to find link to curent Model Characteristics", theLink);		
-		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Is this model a toolmouse?");		
-		theWebForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");		
-		
-		ModelCharacteristicsForm theMCForm = new ModelCharacteristicsForm();
-		//value set when model was created so method not needed
-		TestUtil.setValuesOnForm(theMCForm, theWebForm);
-		
-		// Add parameters found on submit screen but not displayed on search screen  
-		theParamsToSkip = new ArrayList<String>();
-		// TODO: Fix ones you can		
-    	theParamsToSkip.add("otherEthnicityStrain");
-		theParamsToSkip.add("principalInvestigator");		
-		theParamsToSkip.add("ethinicityStrain");
-		theParamsToSkip.add("calendarReleaseDate");		
-		theParamsToSkip.add("type");
-		theParamsToSkip.add("breedingNotes");
-		theParamsToSkip.add("scientificName");
-		theParamsToSkip.add("experimentDesign");		
-		theParamsToSkip.add("description");
-		theParamsToSkip.add("url");
-		theParamsToSkip.add("modelDescriptor");		
-		
-		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
-		*/
-	}     
-    
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+        // Verify that populate method returns complete and correct data
+        navigateToModelForEditing(myModelName);
+
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTAVAILABILITY");
+        assertNotNull("Unable to find link to populate the Jackson Availability", theLink);
+        theCurrentPage = theLink.click();
+        assertCurrentPageContains("Stock Number:");
+        theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+        //Add parameters found behind but not populate screen
+        theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("aAvailabilityID");
+        theParamsToSkip.add("submitAction");
+
+        verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
+
+        /* Verify Model Characteristics Data on return page 
+         *  TODO:  probably have to do this another way to 
+         *  verify the populate method for model char - 
+         *  too many variables skipped 
+         */
+        /*
+         navigateToModelForEditing(myModelName);
+         
+         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_URL_STRING,
+         "AnimalModelPopulateAction.do?method=populate");		
+         assertNotNull("Unable to find link to curent Model Characteristics", theLink);		
+         theCurrentPage = theLink.click();
+         assertCurrentPageContains("Is this model a toolmouse?");		
+         theWebForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");		
+         
+         ModelCharacteristicsForm theMCForm = new ModelCharacteristicsForm();
+         //value set when model was created so method not needed
+         TestUtil.setValuesOnForm(theMCForm, theWebForm);
+         
+         // Add parameters found on submit screen but not displayed on search screen  
+         theParamsToSkip = new ArrayList<String>();
+         // TODO: Fix ones you can		
+         theParamsToSkip.add("otherEthnicityStrain");
+         theParamsToSkip.add("principalInvestigator");		
+         theParamsToSkip.add("ethinicityStrain");
+         theParamsToSkip.add("calendarReleaseDate");		
+         theParamsToSkip.add("type");
+         theParamsToSkip.add("breedingNotes");
+         theParamsToSkip.add("scientificName");
+         theParamsToSkip.add("experimentDesign");		
+         theParamsToSkip.add("description");
+         theParamsToSkip.add("url");
+         theParamsToSkip.add("modelDescriptor");		
+         
+         verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
+         */
+    }
+
     /* This includes the test for Model Characteristics and Jackson Lab
      * Animal Availability
-     */ 
-    
-	public void testSearchForModelCharacteristics() throws Exception {
+     */
 
-		// Adding Jackson Lab Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from Jackson Lab.");
-		assertNotNull("Unable to find link to enter a Jackson Lab Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Stock Number:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+    public void testSearchForModelCharacteristics() throws Exception
+    {
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setSource("Jackson Laboratory");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List<String> theParamsToSkip = new ArrayList<String>();		
-		theParamsToSkip.add("source");		
+        // Adding Jackson Lab Animal Availability
+        navigateToModelForEditing(myModelName);
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Available from Jackson Lab.");
+        assertNotNull("Unable to find link to enter a Jackson Lab Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Stock Number:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setSource("Jackson Laboratory");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("source");
 
-		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-		
-		/* Verify Model Characteristics Data on search page */
-		navigateToModelForEditing(myModelName);
-		
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "MODEL CHARACTERISTICS");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+
+        /* Verify Model Characteristics Data on search page */
+        navigateToModelForEditing(myModelName);
+
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_URL_STRING,
-		"AnimalModelPopulateAction.do?method=populate");		
-		assertNotNull("Unable to find link to curent Model Characteristics", theLink);		
-		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Is this model a toolmouse?");		
-		theWebForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");		
-		
-		ModelCharacteristicsForm theMCForm = new ModelCharacteristicsForm();
-		//value set when model was created so method not needed
-		TestUtil.setValuesOnForm(theMCForm, theWebForm);
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		theParamsToSkip = new ArrayList<String>();		
-		theParamsToSkip.add("principalInvestigator");
-		theParamsToSkip.add("calendarReleaseDate");	
-		theParamsToSkip.add("releaseDate");			
-		
-		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);			
-	} 
-	
-	public void testPopulateMMHCC() throws Exception {
+                                                                          "AnimalModelPopulateAction.do?method=populate");
+        assertNotNull("Unable to find link to curent Model Characteristics", theLink);
+        theCurrentPage = theLink.click();
+        assertCurrentPageContains("Is this model a toolmouse?");
+        theWebForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");
 
-		// Adding MMHCC Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from MMHCC Repo.");
-		assertNotNull("Unable to find link to enter a MMHCC Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Strain Number:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+        ModelCharacteristicsForm theMCForm = new ModelCharacteristicsForm();
+        //value set when model was created so method not needed
+        TestUtil.setValuesOnForm(theMCForm, theWebForm);
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setSource("MMHCC Repository");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List<String> theParamsToSkip = new ArrayList<String>();
-		theForm.setName("TESTAVAILABILITY");		
-		theParamsToSkip.add("source");		
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("principalInvestigator");
+        theParamsToSkip.add("calendarReleaseDate");
+        theParamsToSkip.add("releaseDate");
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        navigateToSpecificSearchPage(myModelName, "MODEL CHARACTERISTICS");
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
 
-		// Verify that populate method returns complete and correct data
-		navigateToModelForEditing(myModelName);
+    public void testPopulateMMHCC() throws Exception
+    {
 
-		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"TESTAVAILABILITY");
-		assertNotNull("Unable to find link to populate the Availability", theLink);		
-		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Strain Number:");
-		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
-		
-		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList<String>();
-		theParamsToSkip.add("aAvailabilityID");
-		theParamsToSkip.add("submitAction");		
-		
-		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
-	}
-	
-	public void testSearchForMMHCC() throws Exception {
+        // Adding MMHCC Animal Availability
+        navigateToModelForEditing(myModelName);
 
-		// Adding MMHCC Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from MMHCC Repo.");
-		assertNotNull("Unable to find link to enter a MMHCC Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Strain Number:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Available from MMHCC Repo.");
+        assertNotNull("Unable to find link to enter a MMHCC Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Strain Number:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setSource("MMHCC Repository");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList<String>();		
-		theParamsToSkip.add("source");		
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setSource("MMHCC Repository");
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theForm.setName("TESTAVAILABILITY");
+        theParamsToSkip.add("source");
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
 
-	public void testPopulateInvestigator() throws Exception {
+        // Verify that populate method returns complete and correct data
+        navigateToModelForEditing(myModelName);
 
-		// Adding Investigator Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from Investigator");
-		assertNotNull("Unable to find link to enter an Investigator Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Principal Investigator:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTAVAILABILITY");
+        assertNotNull("Unable to find link to populate the Availability", theLink);
+        theCurrentPage = theLink.click();
+        assertCurrentPageContains("Strain Number:");
+        theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setName("TESTAVAILABILITY");		
-		theForm.setSource("Investigator");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List<String> theParamsToSkip = new ArrayList<String>();		
-		theParamsToSkip.add("source");
-		theParamsToSkip.add("stockNumber");		
+        //Add parameters found behind but not populate screen
+        theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("aAvailabilityID");
+        theParamsToSkip.add("submitAction");
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
+    }
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+    public void testSearchForMMHCC() throws Exception
+    {
 
-		// Verify that populate method returns complete and correct data
-		navigateToModelForEditing(myModelName);
+        // Adding MMHCC Animal Availability
+        navigateToModelForEditing(myModelName);
 
-		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"TESTAVAILABILITY");
-		assertNotNull("Unable to find link to populate the Availability", theLink);		
-		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Principal Investigator:");
-		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
-		
-		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList<String>();
-		theParamsToSkip.add("aAvailabilityID");
-		theParamsToSkip.add("submitAction");		
-		
-		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
-	}
-	
-	public void testSearchForInvestigator() throws Exception {
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Available from MMHCC Repo.");
+        assertNotNull("Unable to find link to enter a MMHCC Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Strain Number:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
-		// Adding Investigator Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from Investigator");
-		assertNotNull("Unable to find link to enter an Investigator Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Principal Investigator:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setSource("MMHCC Repository");
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setSource("Investigator");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List<String> theParamsToSkip = new ArrayList<String>();		
-		theParamsToSkip.add("source");
-		theParamsToSkip.add("stockNumber");		
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("source");
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
 
-		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}
-	
-	public void testPopulateIMSR() throws Exception {
+        TestUtil.moveModelToEditedApproved(myModelName);
 
-		// Adding IMSR Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from IMSR");
-		assertNotNull("Unable to find link to enter a IMSR Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Stock Number:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+        navigateToSpecificSearchPage(myModelName, "MODEL CHARACTERISTICS");
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setName("TESTAVAILABILITY");		
-		theForm.setSource("IMSR");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List<String> theParamsToSkip = new ArrayList<String>();			
-		theParamsToSkip.add("source");		
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+    public void testPopulateInvestigator() throws Exception
+    {
+        // Adding Investigator Animal Availability
+        navigateToModelForEditing(myModelName);
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Available from Investigator");
+        assertNotNull("Unable to find link to enter an Investigator Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Principal Investigator:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
-		// Verify that populate method returns complete and correct data
-		navigateToModelForEditing(myModelName);
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setName("TESTAVAILABILITY");
+        theForm.setSource("Investigator");
 
-		theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"TESTAVAILABILITY");
-		assertNotNull("Unable to find link to populate the Availability", theLink);		
-		theCurrentPage = theLink.click();
-		assertCurrentPageContains("Stock Number:");
-		theWebForm = theCurrentPage.getFormWithName("availabilityForm");
-		
-		//Add parameters found behind but not populate screen
-		theParamsToSkip = new ArrayList<String>();
-		theParamsToSkip.add("aAvailabilityID");
-		theParamsToSkip.add("submitAction");		
-		
-		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
-	}	
-	
-	public void testSearchForIMSR() throws Exception {
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("source");
+        theParamsToSkip.add("stockNumber");
 
-		// Adding IMSR Animal Availability
-		navigateToModelForEditing(myModelName);
-		
-		// Adding a Animal Availability
-		WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-				"Available from IMSR");
-		assertNotNull("Unable to find link to enter a IMSR Availability", theLink);		
-		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Stock Number:");
-		WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
 
-		AvailabilityForm theForm = new AvailabilityForm();
-		theForm.setSource("IMSR");
-		
-		/* Add parameters found on submit screen but not displayed on search screen  */
-		List theParamsToSkip = new ArrayList();		
-		theParamsToSkip.add("source");		
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-		TestUtil.setRandomValues(theForm, theWebForm, false);
-		TestUtil.setValuesOnForm(theForm, theWebForm);
-		
-		theCurrentPage = theWebForm.submit();
-		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
 
-		assertCurrentPageContains("You have successfully added an Availability to this model!");
+        // Verify that populate method returns complete and correct data
+        navigateToModelForEditing(myModelName);
 
-		TestUtil.moveModelToEditedApproved(myModelName);
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTAVAILABILITY");
+        assertNotNull("Unable to find link to populate the Availability", theLink);
+        theCurrentPage = theLink.click();
+        assertCurrentPageContains("Principal Investigator:");
+        theWebForm = theCurrentPage.getFormWithName("availabilityForm");
 
-		navigateToSpecificSearchPage(myModelName,"MODEL CHARACTERISTICS");
-		
-		verifyValuesOnPage(theWebForm, theParamsToSkip);
-	}	
+        //Add parameters found behind but not populate screen
+        theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("aAvailabilityID");
+        theParamsToSkip.add("submitAction");
+
+        verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
+    }
+
+    public void testSearchForInvestigator() throws Exception
+    {
+        // Adding Investigator Animal Availability
+        navigateToModelForEditing(myModelName);
+
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                                                                                  "Available from Investigator");
+        assertNotNull("Unable to find link to enter an Investigator Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Principal Investigator:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setSource("Investigator");
+
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("source");
+        theParamsToSkip.add("stockNumber");
+
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "MODEL CHARACTERISTICS");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
+
+    public void testPopulateIMSR() throws Exception
+    {
+        // Adding IMSR Animal Availability
+        navigateToModelForEditing(myModelName);
+
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Available from IMSR");
+        assertNotNull("Unable to find link to enter a IMSR Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Stock Number:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setName("TESTAVAILABILITY");
+        theForm.setSource("IMSR");
+
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("source");
+
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+        // Verify that populate method returns complete and correct data
+        navigateToModelForEditing(myModelName);
+
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTAVAILABILITY");
+        assertNotNull("Unable to find link to populate the Availability", theLink);
+        theCurrentPage = theLink.click();
+        assertCurrentPageContains("Stock Number:");
+        theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+        //Add parameters found behind but not populate screen
+        theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("aAvailabilityID");
+        theParamsToSkip.add("submitAction");
+
+        verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
+    }
+
+    public void testSearchForIMSR() throws Exception
+    {
+        // Adding IMSR Animal Availability
+        navigateToModelForEditing(myModelName);
+
+        // Adding a Animal Availability
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Available from IMSR");
+        assertNotNull("Unable to find link to enter a IMSR Availability", theLink);
+        WebResponse theCurrentPage = theLink.click();
+        assertCurrentPageContains("Stock Number:");
+        WebForm theWebForm = theCurrentPage.getFormWithName("availabilityForm");
+
+        AvailabilityForm theForm = new AvailabilityForm();
+        theForm.setSource("IMSR");
+
+        /* Add parameters found on submit screen but not displayed on search screen  */
+        List<String> theParamsToSkip = new ArrayList<String>();
+        theParamsToSkip.add("source");
+
+        TestUtil.setRandomValues(theForm, theWebForm, false);
+        TestUtil.setValuesOnForm(theForm, theWebForm);
+
+        theCurrentPage = theWebForm.submit();
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+
+        assertCurrentPageContains("You have successfully added an Availability to this model!");
+
+        TestUtil.moveModelToEditedApproved(myModelName);
+
+        navigateToSpecificSearchPage(myModelName, "MODEL CHARACTERISTICS");
+
+        verifyValuesOnPage(theWebForm, theParamsToSkip);
+    }
 
 }

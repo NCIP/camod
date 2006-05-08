@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TestUtil.java,v 1.5 2006-01-06 16:11:07 pandyas Exp $
+ * $Id: TestUtil.java,v 1.6 2006-05-08 14:23:35 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/01/06 16:11:07  pandyas
+ * Modified to include methods to test if the populate method returns complete and correct data - initial modifications
+ *
  * Revision 1.4  2005/12/20 15:54:30  pandyas
  * Added method getTextOnPage:  To capture failed validation text during  debugging
  *
@@ -42,11 +45,10 @@ public class TestUtil {
 
     static private RandomIntGenerator ourRandomIntGenerator = new RandomIntGenerator(10, 20);
     
-    static protected Map pairList = new HashMap();
+    static protected Map<String, String> ourPairList = new HashMap<String, String>();
     
     public static Map getMap(){
-    	
-    	return pairList;
+    	return ourPairList;
     }
 
     public static void moveModelToEditedApproved(String inModelName) throws Exception {
@@ -172,9 +174,9 @@ public class TestUtil {
     }
     
     public static void savePropertyNameValue(String inPropertyName, String inPropertyValue){
-    	pairList.put(inPropertyName, inPropertyValue);
+    	ourPairList.put(inPropertyName, inPropertyValue);
     	System.out.println("Added Property:" + inPropertyName + " and Value: "+  inPropertyValue + " to map");
-    	System.out.println("pairList.size():" + pairList.size());
+    	System.out.println("pairList.size():" + ourPairList.size());
     }
     /*
      * This simple method is used to capture text on a page.
