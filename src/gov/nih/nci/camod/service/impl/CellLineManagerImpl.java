@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: CellLineManagerImpl.java,v 1.14 2006-05-08 13:32:34 georgeda Exp $
+ * $Id: CellLineManagerImpl.java,v 1.15 2006-05-08 13:41:31 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/08 13:32:34  georgeda
+ * Clean up warnings
+ *
  * Revision 1.13  2006/04/19 17:38:26  pandyas
  * Removed TODO text
  *
@@ -204,8 +207,8 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager
         /*
          * Add a Organ to CellLine with correct IDs, conceptCode 
          */
-        Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inCellLine.getOrgan().getConceptCode(),
-                                                                      inCellLineData.getOrganTissueCode());
+        Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inCellLineData.getOrganTissueCode(),
+                                                                      inCellLineData.getOrganTissueName());
         inCellLine.setOrgan(theOrgan);
 
         log.debug("Exiting populateCellLine");
