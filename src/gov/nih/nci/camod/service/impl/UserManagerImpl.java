@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.19 2006-04-20 19:09:26 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.20 2006-05-08 13:34:27 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/04/20 19:09:26  georgeda
+ * Backed out another change
+ *
  * Revision 1.18  2006/04/19 15:08:44  georgeda
  * Uncomment login checking
  *
@@ -72,22 +75,27 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Implementation of class used to wrap the CSM implementation
  */
-public class UserManagerImpl extends BaseManager implements UserManager {
-
+public class UserManagerImpl extends BaseManager implements UserManager
+{
     private AuthenticationManager theAuthenticationMgr = null;
 
     /**
      * Constructor gets reference to authorization manager
      */
-    UserManagerImpl() {
-
+    UserManagerImpl()
+    {
         log.trace("Entering UserManagerImpl");
 
-        try {
+        try
+        {
             theAuthenticationMgr = SecurityServiceProvider.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
-        } catch (CSException ex) {
+        }
+        catch (CSException ex)
+        {
             log.error("Error getting authentication managers", ex);
-        } catch (Throwable e) {
+        }
+        catch (Throwable e)
+        {
             log.error("Error getting authentication managers", e);
         }
 
@@ -103,61 +111,67 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * @return the list of roles associated with the user
      * @throws Exception
      */
-    public List getRolesForUser(String inUsername) throws Exception {
-
+    public List getRolesForUser(String inUsername) throws Exception
+    {
         log.trace("Entering getRolesForUser");
 
-        List theRoles = new ArrayList();
+        List<String> theRoles = new ArrayList<String>();
 
-        try {
+        try
+        {
             Person thePerson = new Person();
             thePerson.setUsername(inUsername);
 
             List thePeople = Search.query(thePerson);
 
-            if (thePeople.size() > 0) {
+            if (thePeople.size() > 0)
+            {
                 thePerson = (Person) thePeople.get(0);
 
                 Set theRoleSet = thePerson.getRoleCollection();
-                Iterator it = theRoleSet.iterator();                
+                Iterator it = theRoleSet.iterator();
 
-                while (it.hasNext()) {
+                while (it.hasNext())
+                {
                     Role theRole = (Role) it.next();
                     theRoles.add(theRole.getName());
                 }
 
                 // Check for superuser priv
-                try {
-
+                try
+                {
                     // Get from default bundle
                     ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
                     String theSuperusers = theBundle.getString(Constants.BundleKeys.SUPERUSER_USERNAMES_KEY);
 
                     StringTokenizer theTokenizer = new StringTokenizer(theSuperusers, ",");
 
-                    while (theTokenizer.hasMoreTokens()) {
-
-                        if (theTokenizer.nextToken().equals(inUsername)) {
+                    while (theTokenizer.hasMoreTokens())
+                    {
+                        if (theTokenizer.nextToken().equals(inUsername))
+                        {
                             theRoles.add(Constants.Admin.Roles.SUPER_USER);
                             break;
                         }
                     }
-
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     log.error("Cannot get superuser information from bundle", e);
                 }
-
-            } else {
+            }
+            else
+            {
                 throw new IllegalArgumentException("User: " + inUsername + " not in caMOD database");
             }
-
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get roles for user (" + inUsername + ": ", e);
             throw e;
         }
 
         log.info("User: " + inUsername + " and roles: " + theRoles);
-
         log.trace("Exiting getRolesForUser");
 
         return theRoles;
@@ -172,20 +186,21 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * @return the list of users associated with the role
      * @throws Exception
      */
-    public List getUsersForRole(String inRoleName) throws Exception {
-
+    public List<String> getUsersForRole(String inRoleName) throws Exception
+    {
         log.trace("Entering getUsersForRole");
 
-        List theUsersForRole = new ArrayList();
+        List<String> theUsersForRole = new ArrayList<String>();
 
         Role theRole = new Role();
         theRole.setName(inRoleName);
 
-        try {
-
+        try
+        {
             List theRoles = Search.query(theRole);
 
-            if (theRoles.size() > 0) {
+            if (theRoles.size() > 0)
+            {
                 theRole = (Role) theRoles.get(0);
 
                 // Get the users for the role
@@ -193,27 +208,30 @@ public class UserManagerImpl extends BaseManager implements UserManager {
                 Iterator theIterator = theUsers.iterator();
 
                 // Go through the list of returned Party objects
-                while (theIterator.hasNext()) {
+                while (theIterator.hasNext())
+                {
                     Object theObject = theIterator.next();
 
                     // Only add when it's actually a person
-                    if (theObject instanceof Person) {
+                    if (theObject instanceof Person)
+                    {
                         Person thePerson = (Person) theObject;
                         theUsersForRole.add(thePerson.getUsername());
                     }
                 }
-
-            } else {
+            }
+            else
+            {
                 log.warn("Role not found in database: " + inRoleName);
             }
-
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get roles for user: ", e);
             throw e;
         }
 
         log.info("Role: " + inRoleName + " and users: " + theUsersForRole);
-
         log.trace("Exiting getUsersForRole");
 
         return theUsersForRole;
@@ -227,35 +245,40 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * 
      * @return the list of users associated with the role
      */
-    public String getEmailForUser(String inUsername) {
-
+    public String getEmailForUser(String inUsername)
+    {
         log.trace("Entering getEmailForUser");
-
         log.debug("Username: " + inUsername);
 
         String theEmail = "";
 
-        try {
+        try
+        {
             theEmail = LDAPUtil.getEmailAddressForUser(inUsername);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.warn("Could not fetch user from LDAP", e);
         }
 
         log.trace("Exiting getEmailForUser");
 
         return theEmail;
-
     }
 
     /**
      * Update the roles for the current user
      */
-    public void updateCurrentUserRoles(HttpServletRequest inRequest) {
+    public void updateCurrentUserRoles(HttpServletRequest inRequest)
+    {
         String theCurrentUser = (String) inRequest.getSession().getAttribute(Constants.CURRENTUSER);
-        try {
+        try
+        {
             List theRoles = getRolesForUser(theCurrentUser);
             inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.info("Unable to update user roles for " + theCurrentUser, e);
         }
     }
@@ -268,27 +291,28 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * 
      * @return the list of users associated with the role
      */
-    public ContactInfo getContactInformationForUser(String inUsername) {
-
+    public ContactInfo getContactInformationForUser(String inUsername)
+    {
         log.trace("Entering getContactInformationForUser");
-
         log.debug("Username: " + inUsername);
 
         ContactInfo theContactInfo = new ContactInfo();
 
-        try {
+        try
+        {
             theContactInfo.setInstitute("");
             theContactInfo.setEmail(LDAPUtil.getEmailAddressForUser(inUsername));
             theContactInfo.setPhone("");
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.warn("Could not fetch user from LDAP", e);
         }
 
         log.trace("Exiting getEmailForUser");
 
         return theContactInfo;
-
     }
 
     /**
@@ -296,21 +320,22 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * 
      * @return the list of users associated with the role
      */
-    public String getEmailForCoordinator() {
-
+    public String getEmailForCoordinator()
+    {
         log.trace("Entering getEmailForCoordinator");
 
         String theEmail = "";
 
-        try {
-
+        try
+        {
             // Get from default bundle
             ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
             String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
 
             theEmail = getEmailForUser(theCoordinator);
-
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.warn("Unable to get coordinator email: ", e);
         }
 
@@ -331,21 +356,25 @@ public class UserManagerImpl extends BaseManager implements UserManager {
      * 
      * @return the list of users associated with the role
      */
-    public boolean login(String inUsername, String inPassword, HttpServletRequest inRequest) {
-
+    public boolean login(String inUsername,
+                         String inPassword,
+                         HttpServletRequest inRequest)
+    {
         boolean loginOk = false;
-        try {
-
+        try
+        {
             // Work around bug in CSM. Empty passwords pass
-            if (inPassword.trim().length() != 0) {
+            if (inPassword.trim().length() != 0)
+            {
                 loginOk = theAuthenticationMgr.login(inUsername, inPassword);
 
                 // Does the user exist? Must also be in our database to login
                 List theRoles = getRolesForUser(inUsername);
                 inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
             }
-
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.error("Error logging in user: ", e);
             loginOk = false;
         }
