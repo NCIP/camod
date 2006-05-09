@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.82 2006-05-04 14:15:33 pandyas Exp $
+ * $Id: Constants.java,v 1.83 2006-05-09 18:45:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.82  2006/05/04 14:15:33  pandyas
+ * Modified/Added to support Morpholino object data in the application
+ *
  * Revision 1.81  2006/04/28 19:03:57  schroedn
  * Defect # 238, 261, 55
  * Added Constants used Saving/Editing Queries, Keyword Highlighting and Configuring search result columns
@@ -536,6 +539,8 @@ public class Constants {
         public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
 
         public static final String XENOGRAFT = "Xenograft Page";
+        
+        public static final String TRANSIENT_INTERFERENCE = "Transient Interference Page";
     }
 
     /**
