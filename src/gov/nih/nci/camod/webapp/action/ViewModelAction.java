@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.29 2006-05-08 13:43:15 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.30 2006-05-09 18:57:54 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.29  2006/05/08 13:43:15  georgeda
+ *  Reformat and clean up warnings
+ *
  *  Revision 1.28  2006/04/19 19:31:58  georgeda
  *  Fixed display issue w/ GeneDelivery
  *
@@ -470,6 +473,8 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletRequest request,
                                                        HttpServletResponse response) throws Exception
     {
+        log.info("<ViewModelAction>  populateTherapeuticApproaches");
+        
         setCancerModel(request);
         //
         // query caBIO and load clinical protocols information
@@ -505,19 +510,7 @@ public class ViewModelAction extends BaseAction
                 {
                     Collection protocols = myAgentManager.getClinicalProtocols(a);
                     clinProtocols.put(nscNumber, protocols);
-                    log.info("\n Number of clinical protocols from caBio " + protocols.size());
-                    log.info("\n Print each protocol (for debugging) :");
-                    for (int j = 0; j < protocols.size(); j++)
-                    {
-                        log.info("\n" + protocols.toString());
-                    }
-
-                    log.info("\n<ViewModelAction>  populateTherapeuticApproaches");
-                    log.info("\n Remove the following printout - for debugging only");
-                    for (int k = 0; k < clinProtocols.size(); k++)
-                    {
-                        log.info("Print what is in clinProtolos collection: " + clinProtocols.toString());
-                    }
+                    
                     // get the yeast data
                     List yeastStages = myAgentManager.getYeastResults(a, true);
                     if (yeastStages.size() > 0)
@@ -566,6 +559,33 @@ public class ViewModelAction extends BaseAction
 
         return mapping.findForward("viewCellLines");
     }
+
+    /**
+     * Populate the session and/or request with the objects necessary to display
+     * the page.
+     * 
+     * @param mapping
+     *            the struts action mapping
+     * @param form
+     *            the web form
+     * @param request
+     *            HTTPRequest
+     * @param response
+     *            HTTPResponse
+     * @return
+     * @throws Exception
+     */
+    public ActionForward populateTransientInterference(ActionMapping mapping,
+                                                       ActionForm form,
+                                                       HttpServletRequest request,
+                                                       HttpServletResponse response) throws Exception
+    {
+        setCancerModel(request);
+        setComments(request, Constants.Pages.TRANSIENT_INTERFERENCE);
+
+        return mapping.findForward("viewTransientInterference");
+    }
+
 
     /**
      * Populate the session and/or request with the objects necessary to display

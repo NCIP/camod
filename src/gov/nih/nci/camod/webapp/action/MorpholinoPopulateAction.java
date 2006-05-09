@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoPopulateAction.java,v 1.1 2006-05-03 20:05:11 pandyas Exp $
+ * $Id: MorpholinoPopulateAction.java,v 1.2 2006-05-09 18:56:58 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/03 20:05:11  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * 
  */
 
@@ -34,8 +37,7 @@ public class MorpholinoPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-
-        System.out.println("<MorpholinoPopulateAction populate> Entered");
+        log.debug("<MorpholinoPopulateAction populate> Entered");
 
         // Create a form to edit		
         MorpholinoForm morpholinoForm = (MorpholinoForm) form;
@@ -92,15 +94,12 @@ public class MorpholinoPopulateAction extends BaseAction
             {
                 morpholinoForm.setVisualLigand(morpholino.getVisualLigand());
             }
-
         }
-
 
         // Prepopulate all dropdown fields, set the global Constants to the following
         this.dropdown(request, response);
 
         return mapping.findForward("submitMorpholino");
-
     }
 
     /**
@@ -118,8 +117,7 @@ public class MorpholinoPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-
-        System.out.println("<ClinicalMarkerPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.debug("<ClinicalMarkerPopulateAction dropdown> Entering ActionForward dropdown()");
 
         //blank out the FORMDATA Constant field
         MorpholinoForm morpholinoForm = (MorpholinoForm) form;
@@ -129,7 +127,7 @@ public class MorpholinoPopulateAction extends BaseAction
         //setup dropdown menus
         this.dropdown(request, response);
 
-        System.out.println("<MorpholinoPopulateAction dropdown> Exiting ActionForward dropdown()");
+        log.debug("<MorpholinoPopulateAction dropdown> Exiting ActionForward dropdown()");
 
         return mapping.findForward("submitMorpholino");
     }
@@ -144,8 +142,7 @@ public class MorpholinoPopulateAction extends BaseAction
     public void dropdown(HttpServletRequest request,
                          HttpServletResponse response) throws Exception
     {
-
-        System.out.println("<MorpholinoPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<MorpholinoPopulateAction dropdown> Entering void dropdown()");
 
         //Prepopulate all dropdown fields, set the global Constants to the following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOSOURCEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
@@ -155,7 +152,6 @@ public class MorpholinoPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DELIVERYMETHODSOURCEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VISUALLIGANDSDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
-        System.out.println("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
     }
-
 }

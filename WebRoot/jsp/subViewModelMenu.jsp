@@ -4,6 +4,7 @@
 <%@ page import="gov.nih.nci.camod.domain.Therapy" %>
 <%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
 <%@ page import="gov.nih.nci.camod.domain.CarcinogenExposure" %>
+<%@ page import="gov.nih.nci.camod.domain.Morpholino" %>
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -65,6 +66,21 @@
 		<a href="ViewModelAction.do?unprotected_method=populateCarcinogenicInterventions&aModelID=<%=mdl%>" styleClass="subMenuPrimary">CARCINOGENIC INTERVENTIONS</a>
 	    <%} else { %>
 		CARCINOGENIC INTERVENTIONS
+		<%}%>
+	<BR>
+	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
+		<% 
+			l = new ArrayList(am.getMorpholinoCollection());
+			cc = (l!=null)?l.size():0;
+			found = false;
+			if ( cc > 0 ) {
+                found = true;
+			}					
+			if (found) {
+		%>
+		<a href="ViewModelAction.do?unprotected_method=populateTransientInterference&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSIENT INTERFERENCE</a>
+	    <%} else { %>
+		TRANSIENT INTERFERENCE
 		<%}%>
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;

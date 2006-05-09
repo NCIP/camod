@@ -1,21 +1,24 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/03 20:02:53  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * 
- * $Id: Morpholino.java,v 1.1 2006-05-03 20:02:53 pandyas Exp $
+ * $Id: Morpholino.java,v 1.2 2006-05-09 18:56:19 georgeda Exp $
  */
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.util.Duplicatable;
 import java.io.Serializable;
 
-public class Morpholino extends BaseObject implements Serializable, Duplicatable {
+public class Morpholino extends BaseObject implements Serializable, Duplicatable
+{
 
     private static final long serialVersionUID = 4259745453799404851L;
 
-    private AbstractCancerModel cancerModel;
     private String source;
     private String sourceUnctrVocab;
-    private String type;    
+    private String type;
     private String sequenceDirection;
     private String targetedRegion;
     private String concentration;
@@ -26,21 +29,20 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
     private String visualLigandUnctrlVocab;
 
     /**
-     * @return Returns the cancerModel.
+     * @return Returns the display name for the source
      */
-    public AbstractCancerModel getCancerModel()
+    public String getSourceDisplayName()
     {
-        return cancerModel;
+        if (source != null && source.length() > 0)
+        {
+            return source;
+        }
+        else
+        {
+            return sourceUnctrVocab;
+        }
     }
 
-    /**
-     * @param cancerModel
-     *            The cancerModel to set.
-     */
-    public void setCancerModel(AbstractCancerModel cancerModel)
-    {
-        this.cancerModel = cancerModel;
-    }
     /**
      * @return Returns the source
      */
@@ -91,7 +93,7 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
     {
         this.type = type;
     }
-  
+
 
     /**
      * @return Returns the sequenceDirection.
@@ -108,13 +110,14 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
     public void setSequenceDirection(String sequenceDirection)
     {
         this.sequenceDirection = sequenceDirection;
-    } 
+    }
 
-   
+
     /**
      * @return Returns the targetedRegion. 
      */
-    public String getTargetedRegion() {
+    public String getTargetedRegion()
+    {
         return targetedRegion;
     }
 
@@ -122,7 +125,8 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
      * @param targetedRegion
      *            The targetedRegion to set.
      */
-    public void setTargetedRegion(String targetedRegion) {
+    public void setTargetedRegion(String targetedRegion)
+    {
         this.targetedRegion = targetedRegion;
     }
 
@@ -130,7 +134,8 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
     /**
      * @return Returns the concentration.
      */
-    public String getConcentration() {
+    public String getConcentration()
+    {
         return concentration;
     }
 
@@ -138,16 +143,16 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
      * @param concentration
      *            The concentration to set.
      */
-    public void setConcentration(String concentration) {
+    public void setConcentration(String concentration)
+    {
         this.concentration = concentration;
     }
-
-
 
     /**
      * @return Returns the concentrationUnit.
      */
-    public String getConcentrationUnit() {
+    public String getConcentrationUnit()
+    {
         return concentrationUnit;
     }
 
@@ -155,23 +160,41 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
      * @param concentrationUnit
      *            The concentrationUnit to set.
      */
-    public void setConcentrationUnit(String concentrationUnit) {
+    public void setConcentrationUnit(String concentrationUnit)
+    {
         this.concentrationUnit = concentrationUnit;
     }
 
-    
+
     /**
      * @return Returns the deliveryMethod.
      */
-    public String getDeliveryMethod() {
+    public String getDeliveryMethod()
+    {
         return deliveryMethod;
     }
 
     /**
+     * @return Returns the display name for the delivery method
+     */
+    public String getDeliveryMethodDisplayName()
+    {
+        if (deliveryMethod != null && deliveryMethod.length() > 0)
+        {
+            return deliveryMethod;
+        }
+        else
+        {
+            return deliveryMethodUnctrlVocab;
+        }
+    }
+    
+    /**
      * @param deliveryMethod
      *            The deliveryMethod to set.
      */
-    public void setDeliveryMethod(String deliveryMethod) {
+    public void setDeliveryMethod(String deliveryMethod)
+    {
         this.deliveryMethod = deliveryMethod;
     }
 
@@ -179,7 +202,8 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
     /**
      * @return Returns the deliveryMethodUnctrlVocab.
      */
-    public String getDeliveryMethodUnctrlVocab() {
+    public String getDeliveryMethodUnctrlVocab()
+    {
         return deliveryMethodUnctrlVocab;
     }
 
@@ -187,15 +211,31 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
      * @param deliveryMethodUnctrlVocab
      *            The deliveryMethodUnctrlVocab to set.
      */
-    public void setDeliveryMethodUnctrlVocab(String deliveryMethodUnctrlVocab) {
+    public void setDeliveryMethodUnctrlVocab(String deliveryMethodUnctrlVocab)
+    {
         this.deliveryMethodUnctrlVocab = deliveryMethodUnctrlVocab;
     }
 
-
+    /**
+     * @return Returns the display name for the visual ligand
+     */
+    public String getVisualLigandDisplayName()
+    {
+        if (visualLigand != null && visualLigand.length() > 0)
+        {
+            return visualLigand;
+        }
+        else
+        {
+            return visualLigandUnctrlVocab;
+        }
+    }
+    
     /**
      * @return Returns the visualLigand.
      */
-    public String getVisualLigand() {
+    public String getVisualLigand()
+    {
         return visualLigand;
     }
 
@@ -203,14 +243,16 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
      * @param visualLigand
      *            The visualLigand to set.
      */
-    public void setVisualLigand(String visualLigand) {
+    public void setVisualLigand(String visualLigand)
+    {
         this.visualLigand = visualLigand;
     }
 
     /**
      * @return Returns the visualLigandUnctrlVocab.
      */
-    public String getVisualLigandUnctrlVocab() {
+    public String getVisualLigandUnctrlVocab()
+    {
         return visualLigandUnctrlVocab;
     }
 
@@ -218,24 +260,28 @@ public class Morpholino extends BaseObject implements Serializable, Duplicatable
      * @param visualLigandUnctrlVocab
      *            The visualLigandUncrtlVocab to set.
      */
-    public void setVisualLigandUnctrlVocab(String visualLigandUnctrlVocab) {
+    public void setVisualLigandUnctrlVocab(String visualLigandUnctrlVocab)
+    {
         this.visualLigandUnctrlVocab = visualLigandUnctrlVocab;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-      String result = super.toString() + " - ";      
-      result += this.getSource();                
-      return result;
-    } 
-    
-    
-    
-    public boolean equals(Object o) {
-      if (!super.equals(o)) return false;            
-      if (!(this.getClass().isInstance(o))) return false;           
-      return true;
+    public String toString()
+    {
+        String result = super.toString() + " - ";
+        result += this.getSource();
+        return result;
+    }
+
+
+    public boolean equals(Object o)
+    {
+        if (!super.equals(o))
+            return false;
+        if (!(this.getClass().isInstance(o)))
+            return false;
+        return true;
     }
 }
