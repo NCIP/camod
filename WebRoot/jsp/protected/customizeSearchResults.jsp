@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: customizeSearchResults.jsp,v 1.2 2006-05-10 14:23:35 schroedn Exp $
+ * $Id: customizeSearchResults.jsp,v 1.3 2006-05-10 17:10:26 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/10 14:23:35  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.1  2006/04/28 19:41:32  schroedn
  * Defect # 261, 238
  * Pages to edit user options, saved queries or query history
@@ -228,7 +231,7 @@
 						
 				<tr>
 			    	<td class="formFieldLeftOnly">
-					    <html:select styleClass="formFieldUnSized" size="8" multiple="true" style="width: 225px"  property="columnsToDisplay">												
+					    <html:select styleClass="formFieldUnSized" size="8" style="width: 225px"  property="columnsToDisplay">												
 					   		 <html:options name="<%= Dropdowns.SEARCHRESULTCOLUMNSDROP %>"/>					
 					    </html:select>
 					    <br>&nbsp;
