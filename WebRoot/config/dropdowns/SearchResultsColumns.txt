@@ -20,9 +20,6 @@ Viral Vector
 Gene
 Growth Factor
 Publications
-Year of Publication
-Journal
-PMID number
 Site of Lesion / Tumor
 Diagnosis
 Age of Onset
