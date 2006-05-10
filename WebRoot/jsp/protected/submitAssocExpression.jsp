@@ -90,7 +90,7 @@
 		<td class="formLabel"><label for="field1">Expression Level:</label></td>
 		<td class="formField">				
 			<html:select styleClass="formFieldSized" size="1" property="expressionLevel" name="formdata" >
-				<html:options name="<%= Dropdowns.EXPRESSIONLEVEL %>" />										
+				<html:options name="<%= Dropdowns.EXPRESSIONLEVELDROP %>" />										
 			</html:select>
 		</td>
 	</tr>

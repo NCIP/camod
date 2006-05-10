@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.7 2006-04-28 19:28:50 schroedn Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.8 2006-05-10 14:15:39 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/28 19:28:50  schroedn
+ * Defect # 261
+ * Prepopulates form with SaveQuery the user is editing
+ *
  * Revision 1.6  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -14,7 +18,7 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
-import gov.nih.nci.camod.service.QueryStorageManager;
+import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
@@ -55,16 +59,16 @@ public class SimpleSearchPopulateAction extends BaseAction {
             //This will be used to determine if we are editing a query 
             request.getSession().setAttribute( Constants.ASAVEDQUERYID, aQueryId );
                         
-            QueryStorageManager queryStorageManager = (QueryStorageManager) getBean("queryStorageManager");
+            SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
             
             try {                
-                SavedQuery sq = queryStorageManager.get( aQueryId );
+                SavedQuery sq = savedQueryManager.get( aQueryId );
                 
                 request.getSession().setAttribute( Constants.QUERY_NAME, sq.getQueryName() );
                 
                 // Retrieve the saved criteria and populate the fields in the SearchForm
                 Set<SavedQueryAttribute> sqaList = sq.getSavedQueryAttributes();                                
-                theSearchForm = queryStorageManager.buildSearchData( sqaList, theSearchForm );                
+                savedQueryManager.buildSearchData( sqaList, theSearchForm );                
                 
             } catch ( Exception e) {
                 // Set the error message

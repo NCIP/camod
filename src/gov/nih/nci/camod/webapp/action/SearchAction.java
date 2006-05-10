@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.4 2006-04-28 19:28:10 schroedn Exp $
+ * $Id: SearchAction.java,v 1.5 2006-05-10 14:15:39 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/28 19:28:10  schroedn
+ * Defect # 261
+ * Added QueryHistory save on performing any search if a user is logged in
+ *
  * Revision 1.3  2005/11/16 19:43:30  georgeda
  * Added clear to search forms
  *
@@ -25,7 +29,8 @@ import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.PersonManager;
-import gov.nih.nci.camod.service.QueryStorageManager;
+import gov.nih.nci.camod.service.SavedQueryManager;
+import gov.nih.nci.camod.util.CriteriaTableUtil;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 
 import java.io.IOException;
@@ -57,31 +62,32 @@ public final class SearchAction extends BaseAction {
         SearchForm theForm = new SearchForm();
         SavedQuery resubmittedSavedQuery = null;
         
-        QueryStorageManager queryStorageManager = (QueryStorageManager) getBean("queryStorageManager");
+        SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
         
-        String aQueryId = request.getParameter( "aQueryId" );       
+        String aQueryId = request.getParameter( Constants.Parameters.QUERYID );       
         String aSavedQueryId = (String) request.getSession().getAttribute( Constants.ASAVEDQUERYID );
-        
+                        
         //Retrieve the query to resubmit
         if ( aSavedQueryId != null || aQueryId != null )
         {            
             try {      
                 
-                if ( aQueryId != null ) {                    
+                if ( aQueryId != null ) 
+                {                    
                     //Used for re-running query
-                    resubmittedSavedQuery = queryStorageManager.get( aQueryId );
+                    resubmittedSavedQuery = savedQueryManager.get( aQueryId );
                     
                     // From the saved criteria populate the fields in the simpleSearchForm
                     Set<SavedQueryAttribute> sqaList = resubmittedSavedQuery.getSavedQueryAttributes();
                     
                     // Retrieve the saved criteria and populate the fields in the SearchForm
-                    theForm = queryStorageManager.buildSearchData( sqaList, theForm );       
+                    savedQueryManager.buildSearchData( sqaList, theForm );       
                     
-                    request.getSession().setAttribute( Constants.RERUN_QUERY, "yes" );
+                    request.getSession().setAttribute( Constants.RERUN_QUERY, "true" );
                     
                 } else {                    
                     //Used for editing query
-                    resubmittedSavedQuery = queryStorageManager.get( aSavedQueryId );
+                    resubmittedSavedQuery = savedQueryManager.get( aSavedQueryId );
                     theForm = (SearchForm) form;
                     
                     request.getSession().setAttribute( Constants.RERUN_QUERY, null );
@@ -93,7 +99,9 @@ public final class SearchAction extends BaseAction {
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
                 saveErrors(request, msg);
             }
-        } else {
+        } 
+        else 
+        {
             //Normal Search
             theForm = (SearchForm) form;
             
@@ -112,11 +120,11 @@ public final class SearchAction extends BaseAction {
         String theForward = "next";
 
         // Clear the form
-        if ("Clear".equals(theAction)) {
+        if ("Clear".equals(theAction)) 
+        {
             theForm.allFieldsReset();
             theForward = "back";
         }
-
         // Do the search
         else {
             
@@ -143,7 +151,8 @@ public final class SearchAction extends BaseAction {
                 savedQuery.setNumberResults( results.size() );                
                 savedQuery.setQueryName( "No Name Provided" );  
 
-                if ( aSavedQueryId != null || aQueryId != null ) {
+                if ( resubmittedSavedQuery != null ) 
+                {
                     savedQuery.setQueryName( resubmittedSavedQuery.getQueryName() );
                     
                     // Set Global Constants for use later
@@ -164,11 +173,11 @@ public final class SearchAction extends BaseAction {
                     savedQuery.setUser( personManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) ) ); 
                     
                     // Add criteria to be saved. Create a List of SavedQueryAttributes from inQuery.getSearchData()
-                    Set <SavedQueryAttribute>criteriaList = queryStorageManager.buildCriteriaList( theForm );
+                    Set <SavedQueryAttribute>criteriaList = savedQueryManager.buildCriteriaList( theForm );
                     savedQuery.setSavedQueryAttributes( criteriaList );                                    
                     
                     //Save search to query history 
-                    queryStorageManager.saveQuery( savedQuery );
+                    savedQueryManager.save( savedQuery );
                                 
                 }
                                 
@@ -184,6 +193,18 @@ public final class SearchAction extends BaseAction {
             }
         }
 
+        // Create the Criteria HTML table to be display on the search result page
+        try {   
+            request.getSession().setAttribute(Constants.CRITERIATABLE, CriteriaTableUtil.buildCriteriaDisplayTable( theForm ) );
+            request.getSession().setAttribute(Constants.DUP_NAME, "false" );
+            request.getSession().setAttribute( Constants.NOSAVEOPTION, "false" );
+        } catch ( Exception e ) {
+            // Set the error message
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
+        
         return mapping.findForward(theForward);
     }
 }

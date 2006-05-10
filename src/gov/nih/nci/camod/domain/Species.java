@@ -1,7 +1,10 @@
 /*
- * $Id: Species.java,v 1.4 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Species.java,v 1.5 2006-05-10 14:13:51 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -33,6 +36,10 @@ public class Species extends BaseObject implements Serializable
         if (scientificName != null && commonName != null)
         {
             theDisplayName = commonName.trim() + " (" + scientificName.trim() + ")";
+        } 
+        else if (scientificNameUnctrlVocab != null && commonNameUnctrlVocab != null )
+        {
+            theDisplayName = commonNameUnctrlVocab.trim() + " (" + scientificNameUnctrlVocab.trim() + ")";            
         }
         return theDisplayName;
     }    

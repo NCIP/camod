@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.22 2006-04-19 17:38:26 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.23 2006-05-10 14:14:33 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/04/19 17:38:26  pandyas
+ * Removed TODO text
+ *
  * Revision 1.21  2006/04/18 17:54:44  pandyas
  * Fixed Therapy multi-select collections and cleaned up e-mail code
  *
@@ -68,8 +71,6 @@ import java.util.*;
  */
 public class TherapyManagerImpl extends BaseManager implements TherapyManager
 {
-
-
     /**
      * Get a specific Therapy by id
      * 

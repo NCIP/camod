@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: CustomizeSearchResultsAction.java,v 1.1 2006-04-28 19:25:17 schroedn Exp $
+ * $Id: CustomizeSearchResultsAction.java,v 1.2 2006-05-10 14:15:39 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/04/28 19:25:17  schroedn
+ * Defect # 238
+ * Saves / Updates user settings for search result columns
+ *
  *
  */
 
@@ -25,87 +29,100 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * 
+ * @author schroedn
+ *
+ */
 public class CustomizeSearchResultsAction extends BaseAction
 {
-    public ActionForward execute(ActionMapping mapping, ActionForm form, 
-                                 HttpServletRequest request, HttpServletResponse response) 
-    throws Exception {
+    /**
+     * Saves or updates user Search Result settings
+     * 
+     */
+    public ActionForward execute(ActionMapping mapping,
+                                 ActionForm form,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response) throws Exception
+    {
 
-        log.trace("Entering CustomizeSearchResultsAction.execute");
-        
+        log.debug("Entering CustomizeSearchResultsAction.execute");
+
         // Create a form to edit
         CustomizeSearchResultsForm customResultsForm = (CustomizeSearchResultsForm) form;
-        
+
         // Update your Settings        
         ResultSettingsManager resultSettingsManager = (ResultSettingsManager) getBean("resultSettingsManager");
-                
+
         // Get ResultSettings by username
-        ResultSettings rSettings = resultSettingsManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
-        
-        Set <ResultSettingsColumns>columnList = new HashSet <ResultSettingsColumns>();        
+        ResultSettings rSettings = resultSettingsManager.getByUsername((String) request.getSession().getAttribute(Constants.CURRENTUSER));
+
+        Set<ResultSettingsColumns> columnList = new HashSet<ResultSettingsColumns>();
         boolean containsModelDescriptor = false;
-        
+
         String[] columns = customResultsForm.getSelectedColumnsToDisplay();
-        for ( int i=0; i < columns.length; i++ ) {
+        for (int i = 0; i < columns.length; i++)
+        {
             ResultSettingsColumns resultColumn = new ResultSettingsColumns();
-            resultColumn.setColumnName( columns[i] );
-            if ( columns[i].equals( "Model Descriptor"))
+            resultColumn.setColumnName(columns[i]);
+            if (columns[i].equals("Model Descriptor"))
                 containsModelDescriptor = true;
-            
-            columnList.add( resultColumn );
+
+            columnList.add(resultColumn);
         }
-        
+
         // Check Max Number of Columns
-        if( columnList.size() > 5 ){
-            request.getSession().setAttribute( Constants.ERRORMESSAGE, "* Too many columns selected (5 max)" );
-            //System.out.println( "Too big!");
-            return mapping.findForward( "failed" );
+        if (columnList.size() > 5)
+        {
+            request.getSession().setAttribute(Constants.ERRORMESSAGE, "* Too many columns selected (5 max)");
+            return mapping.findForward("failed");
         }
-        
+
         // Check Model Descriptor (required)
-        if( ! containsModelDescriptor ) {
-            request.getSession().setAttribute( Constants.ERRORMESSAGE, "* Model Descriptor is a required column" );
-            //System.out.println( "No Model Descriptor!" );
-            return mapping.findForward( "failed" );
+        if (!containsModelDescriptor)
+        {
+            request.getSession().setAttribute(Constants.ERRORMESSAGE, "* Model Descriptor is a required column");
+            return mapping.findForward("failed");
         }
-        
+
         // Save to database
-        if ( rSettings == null )
+        if (rSettings == null)
         {
             // Save new if no settings are found
             rSettings = new ResultSettings();
 
             //rSettings.setColumnsToDisplay( strColumns );
-            rSettings.setItemsPerPage( Integer.parseInt(customResultsForm.getItemsPerPage().trim()) );
-            rSettings.setResultSettingsColumns( columnList );
-            
+            rSettings.setItemsPerPage(Integer.parseInt(customResultsForm.getItemsPerPage().trim()));
+            rSettings.setResultSettingsColumns(columnList);
+
             // Set the current user
-            PersonManager personManager = (PersonManager) getBean("personManager");                
-            rSettings.setUser( personManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) ) );
-            
-            resultSettingsManager.save( rSettings );
-            
-        } else {            
-            //rSettings.setColumnsToDisplay( strColumns );
-            
-            // Update settings
-            Set <ResultSettingsColumns> resultColumnList = rSettings.getResultSettingsColumns();
-            resultColumnList.clear();
-            resultColumnList.addAll( columnList );
-            rSettings.setItemsPerPage( Integer.parseInt(customResultsForm.getItemsPerPage().trim()) );            
-            
-            resultSettingsManager.update( rSettings );           
+            PersonManager personManager = (PersonManager) getBean("personManager");
+            rSettings.setUser(personManager.getByUsername((String) request.getSession().getAttribute(Constants.CURRENTUSER)));
+
+            resultSettingsManager.save(rSettings);
+
         }
-        
+        else
+        {
+            // Update settings
+            Set<ResultSettingsColumns> resultColumnList = rSettings.getResultSettingsColumns();            
+            resultColumnList.clear();
+            resultColumnList.addAll(columnList);
+            
+            rSettings.setItemsPerPage(Integer.parseInt(customResultsForm.getItemsPerPage().trim()));
+            
+            resultSettingsManager.update(rSettings);
+        }
+
         // Print out what is being saved
-        request.getSession().setAttribute( Constants.ITEMSPERPAGE, customResultsForm.getItemsPerPage() );        
-        request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, customResultsForm.getSelectedColumnsToDisplay() );
-                
+        request.getSession().setAttribute(Constants.ITEMSPERPAGE, customResultsForm.getItemsPerPage());
+        request.getSession().setAttribute(Constants.SEARCHRESULTCOLUMNS, customResultsForm.getSelectedColumnsToDisplay());
+
         // Get the attributes from the request
         String theForward = "success";
 
         log.debug("Forwarding to model section: " + theForward);
-        log.trace("Exiting CustomizeSearchResultsAction.execute");
+        log.debug("Exiting CustomizeSearchResultsAction.execute");
 
         return mapping.findForward(theForward);
     }

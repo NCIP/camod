@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionPopulateAction.java,v 1.5 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: AssociatedExpressionPopulateAction.java,v 1.6 2006-05-10 14:15:39 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -100,7 +103,7 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
 
         System.out.println("<AssociatedExpressionPopulateAction dropdown> Entering void dropdown()");
 
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.EXPRESSIONLEVEL, Constants.Dropdowns.ADD_BLANK);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.EXPRESSIONLEVELDROP, Constants.Dropdowns.ADD_BLANK);
 
         System.out.println("<AssociatedExpressionPopulateAction dropdown> Exiting void dropdown()");
     }

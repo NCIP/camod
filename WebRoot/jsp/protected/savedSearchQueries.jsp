@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: savedSearchQueries.jsp,v 1.1 2006-04-28 19:41:32 schroedn Exp $
+ * $Id: savedSearchQueries.jsp,v 1.2 2006-05-10 14:23:35 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/04/28 19:41:32  schroedn
+ * Defect # 261, 238
+ * Pages to edit user options, saved queries or query history
+ *
  *
  */
 
@@ -13,14 +17,18 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
-<%@ page import="gov.nih.nci.camod.service.QueryStorageManager" %>
+<%@ page import="gov.nih.nci.camod.service.SavedQueryManager" %>
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
 <%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
 
 <%  
 	List userQueryList = (List) request.getSession().getAttribute( Constants.USERSAVEDQUERYLIST );
-	int size = userQueryList.size();
-	System.out.println( "SIZE: " + size );	
+	
+	int size = 0;
+	if( userQueryList != null)
+	{
+		size = userQueryList.size();	
+	}
 	
 	int menuNumber = 1;
 %>
@@ -79,7 +87,7 @@
 									    
 									    <td width="50%">
 										    <font class="standardText">
-											    <bean:write name="aCriteria" property="attributeValue" filter="true"/>
+											    <camod:shorten><bean:write name="aCriteria" property="attributeValue" filter="true"/></camod:shorten>
 										    </font>
 									    </td>							    
 								    </tr>

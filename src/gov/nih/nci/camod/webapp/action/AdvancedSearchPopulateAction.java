@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.7 2006-04-28 19:23:34 schroedn Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.8 2006-05-10 14:15:39 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/28 19:23:34  schroedn
+ * Defect # 261
+ * Prepopulates the advanced search page with the saved query data to edit
+ *
  * Revision 1.6  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -15,7 +19,7 @@ import java.util.Set;
 
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
-import gov.nih.nci.camod.service.QueryStorageManager;
+import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import gov.nih.nci.camod.Constants;
@@ -38,31 +42,32 @@ public class AdvancedSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("In AdvancedSearchPopulateAction.populate");		       
+        log.debug("In AdvancedSearchPopulateAction.populate");		       
 
         // Reset the non-simple-search options
         SearchForm theSearchForm = (SearchForm) form;
-        theSearchForm.allFieldsReset();
-        
-        String aQueryId = request.getParameter("aQueryId"); 
+                
+        String aQueryId = request.getParameter( Constants.Parameters.QUERYID ); 
       
         //Populate form field with savedQuery criteria
         if ( aQueryId != null )
         {
+            theSearchForm.allFieldsReset();
+            
             //Set Constant aQueryId
             //This will be used to determine if we are editing a query 
             request.getSession().setAttribute( Constants.ASAVEDQUERYID, aQueryId );
                         
-            QueryStorageManager queryStorageManager = (QueryStorageManager) getBean("queryStorageManager");
+            SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
             
             try {                
-                SavedQuery sq = queryStorageManager.get( aQueryId );
+                SavedQuery inSavedQuery = savedQueryManager.get( aQueryId );
                 
-                request.getSession().setAttribute( Constants.QUERY_NAME, sq.getQueryName() );
+                request.getSession().setAttribute( Constants.QUERY_NAME, inSavedQuery.getQueryName() );
                 
                 // Retrieve the saved criteria and populate the fields in the SearchForm
-                Set<SavedQueryAttribute> sqaList = sq.getSavedQueryAttributes();                                
-                theSearchForm = queryStorageManager.buildSearchData( sqaList, theSearchForm );                
+                Set<SavedQueryAttribute> inSavedQueryAttributeList = inSavedQuery.getSavedQueryAttributes();                                
+                savedQueryManager.buildSearchData( inSavedQueryAttributeList, theSearchForm );                
                 
             } catch ( Exception e) {
                 // Set the error message

@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: customizeSearchResults.jsp,v 1.1 2006-04-28 19:41:32 schroedn Exp $
+ * $Id: customizeSearchResults.jsp,v 1.2 2006-05-10 14:23:35 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/04/28 19:41:32  schroedn
+ * Defect # 261, 238
+ * Pages to edit user options, saved queries or query history
+ *
  *
  */
 
@@ -24,11 +28,11 @@
 <script language="JavaScript" src="scripts/initIt.js"></script>
 
 <%
-//Check for error messages
-String errorMessage = (String) request.getSession().getAttribute( Constants.ERRORMESSAGE );
-//reset
-request.getSession().setAttribute( Constants.ERRORMESSAGE, null );
-
+	//Check for error messages
+	String errorMessage = (String) request.getSession().getAttribute( Constants.ERRORMESSAGE );
+	
+	//reset
+	request.getSession().setAttribute( Constants.ERRORMESSAGE, null );
 %>
 
 <SCRIPT>
@@ -40,7 +44,107 @@ request.getSession().setAttribute( Constants.ERRORMESSAGE, null );
 	function sortSelect(obj){var o = new Array();if(obj.options==null){return;}for(var i=0;i<obj.options.length;i++){o[o.length] = new Option( obj.options[i].text, obj.options[i].value, obj.options[i].defaultSelected, obj.options[i].selected) ;}if(o.length==0){return;}o = o.sort(
 	function(a,b){if((a.text+"") <(b.text+"")){return -1;}if((a.text+"") >(b.text+"")){return 1;}return 0;});for(var i=0;i<o.length;i++){obj.options[i] = new Option(o[i].text, o[i].value, o[i].defaultSelected, o[i].selected);}}
 	function selectAllOptions(obj){for(var i=0;i<obj.options.length;i++){obj.options[i].selected = true;}}
-	function moveSelectedOptions(from,to){if(arguments.length>3){var regex = arguments[3];if(regex != ""){unSelectMatchingOptions(from,regex);}}for(var i=0;i<from.options.length;i++){var o = from.options[i];if(o.selected){to.options[to.options.length] = new Option( o.text, o.value, false, false);}}for(var i=(from.options.length-1);i>=0;i--){var o = from.options[i];if(o.selected){from.options[i] = null;}}if((arguments.length<3) ||(arguments[2]==true)){}from.selectedIndex = -1;to.selectedIndex = -1;}
+	
+	function moveSelectedOptionsLeft(from,to)
+	{
+		if (document.forms[0].selectedColumnsToDisplay.options.length > 5)
+		{
+			document.images['rightarrow'].src = '/camod/images/blank.gif';
+		} else {
+			document.images['rightarrow'].src = '/camod/images/rightarrow.gif';
+		}
+		
+		if(arguments.length>3)
+		{
+			var regex = arguments[3];
+			if(regex != "")
+			{
+				unSelectMatchingOptions(from,regex);
+			}			
+		}
+		
+		for(var i=0;i<from.options.length;i++)
+		{
+			var o = from.options[i];
+			if(o.selected)
+			{
+				to.options[to.options.length] = new Option( o.text, o.value, false, false);
+			}
+		}
+		
+		for(var i=(from.options.length-1);i>=0;i--)
+		{
+			var o = from.options[i];
+			if(o.selected)
+			{
+				from.options[i] = null;
+			}
+		}
+		
+		if((arguments.length<3) ||(arguments[2]==true))
+		{}
+		
+		from.selectedIndex = -1;
+		to.selectedIndex = -1;
+	
+		if (document.forms[0].selectedColumnsToDisplay.options.length > 4)
+		{
+			document.images['rightarrow'].src = '/camod/images/blank.gif';
+			
+		}		
+	}
+
+	function moveSelectedOptionsRight(from,to)
+	{
+		if (document.forms[0].selectedColumnsToDisplay.options.length > 4)
+		{
+			document.images['rightarrow'].src = '/camod/images/blank.gif';
+		} 
+		else 
+		{
+			document.images['rightarrow'].src = '/camod/images/rightarrow.gif';
+			
+			if(arguments.length>3)
+			{
+				var regex = arguments[3];
+				if(regex != "")
+				{
+					unSelectMatchingOptions(from,regex);
+				}			
+			}
+			
+			for(var i=0;i<from.options.length;i++)
+			{
+				var o = from.options[i];
+				if(o.selected)
+				{
+					to.options[to.options.length] = new Option( o.text, o.value, false, false);
+				}
+			}
+			
+			for(var i=(from.options.length-1);i>=0;i--)
+			{
+				var o = from.options[i];
+				if(o.selected)
+				{
+					from.options[i] = null;
+				}
+			}
+			
+			if((arguments.length<3) ||(arguments[2]==true))
+			{}
+			
+			from.selectedIndex = -1;
+			to.selectedIndex = -1;
+			
+			if (document.forms[0].selectedColumnsToDisplay.options.length == 5)
+			{
+				document.images['rightarrow'].src = '/camod/images/blank.gif';				
+			}
+		}
+	}
+
+	
 	function copySelectedOptions(from,to){var options = new Object();for(var i=0;i<to.options.length;i++){options[to.options[i].text] = true;}for(var i=0;i<from.options.length;i++){var o = from.options[i];if(o.selected){if(options[o.text] == null || options[o.text] == "undefined"){to.options[to.options.length] = new Option( o.text, o.value, false, false);}}}if((arguments.length<3) ||(arguments[2]==true)){}from.selectedIndex = -1;to.selectedIndex = -1;}
 	function moveAllOptions(from,to){selectAllOptions(from);if(arguments.length==2){moveSelectedOptions(from,to);}else if(arguments.length==3){moveSelectedOptions(from,to,arguments[2]);}else if(arguments.length==4){moveSelectedOptions(from,to,arguments[2],arguments[3]);}}
 	function copyAllOptions(from,to){selectAllOptions(from);if(arguments.length==2){copySelectedOptions(from,to);}else if(arguments.length==3){copySelectedOptions(from,to,arguments[2]);}}
@@ -70,11 +174,21 @@ request.getSession().setAttribute( Constants.ERRORMESSAGE, null );
 	        group.options[i].selected = true;    
 	    }
 	}
+	
+	function chkSizeOfList() {
+		if (document.forms[0].selectedColumnsToDisplay.options.length > 4)
+		{
+			document.images['rightarrow'].src = '/camod/images/blank.gif';
+			// stop displaying > arrow
+		} else {
+			document.images['rightarrow'].src = '/camod/images/rightarrow.gif';
+			// display > arrow
+		}
+	}
+	
 </SCRIPT>
 
 <html:form action="CustomizeSearchResultsAction.do" focus="columnsToDisplay" onsubmit="selectAll()">
-
-
 										
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	
@@ -115,20 +229,20 @@ request.getSession().setAttribute( Constants.ERRORMESSAGE, null );
 				<tr>
 			    	<td class="formFieldLeftOnly">
 					    <html:select styleClass="formFieldUnSized" size="8" multiple="true" style="width: 225px"  property="columnsToDisplay">												
-					   		 <html:options name="<%= Dropdowns.SEARCHRESULTCOLUMNS %>"/>					
+					   		 <html:options name="<%= Dropdowns.SEARCHRESULTCOLUMNSDROP %>"/>					
 					    </html:select>
 					    <br>&nbsp;
 				    </td>
 		
 					<td class="formFieldNone">						
-					    <a href="javascript: moveSelectedOptions(document.forms[0].columnsToDisplay, document.forms[0].selectedColumnsToDisplay);"><img border="0" src="/camod/images/rightarrow.gif"></a>
+					    <a href="javascript: moveSelectedOptionsRight(document.forms[0].columnsToDisplay, document.forms[0].selectedColumnsToDisplay);"><img border="0" src="/camod/images/rightarrow.gif"  NAME="rightarrow"></a>
 					    <br>
-					    <a href="javascript: moveSelectedOptions(document.forms[0].selectedColumnsToDisplay, document.forms[0].columnsToDisplay);"><img border="0" src="/camod/images/leftarrow.gif"></a>						
+					    <a href="javascript: moveSelectedOptionsLeft(document.forms[0].selectedColumnsToDisplay, document.forms[0].columnsToDisplay);"><img border="0" src="/camod/images/leftarrow.gif"></a>						
 					</td>	
 		
 		            <td class="formFieldNone">		         
 					    <html:select styleClass="formFieldUnSized" size="8" multiple="true" style="width: 225px" property="selectedColumnsToDisplay">												
-					        <html:options name="<%= Dropdowns.SELECTEDSEARCHRESULTCOLUMNS %>"/>
+					        <html:options property="selectedColumnsToDisplay"/>
 					    </html:select><br>
 				       	* Model Descriptor <I>(required)</I><br>
 					    <br>
@@ -144,7 +258,7 @@ request.getSession().setAttribute( Constants.ERRORMESSAGE, null );
 				<tr>
 					<td class="formFieldRightLeftOnly" height="20" colspan="4">																		
 					    <html:select styleClass="formFieldUnSized" size="1" property="itemsPerPage">												
-					        <html:options name="<%= Dropdowns.ITEMSPERPAGE %>"/>
+					        <html:options name="<%= Dropdowns.ITEMSPERPAGEDROP %>"/>
 					    </html:select>&nbsp;Items per page						
 						<br>
 					</td>
@@ -164,6 +278,6 @@ request.getSession().setAttribute( Constants.ERRORMESSAGE, null );
 
 <SCRIPT>
     removeAllSelected();
+	chkSizeOfList();
 </SCRIPT>
-
 <%@ include file="/jsp/footer.jsp" %>

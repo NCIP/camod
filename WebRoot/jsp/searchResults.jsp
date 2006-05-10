@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.15 2006-04-28 19:39:21 schroedn Exp $
+ * $Id: searchResults.jsp,v 1.16 2006-05-10 14:22:10 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/04/28 19:39:21  schroedn
+ * Defect # 261, 238
+ * Many changes, displays any search result column user has setup, options to save/update Query
+ *
  *
  */
 
@@ -18,57 +22,85 @@
 <%@ page import="gov.nih.nci.camod.domain.Histopathology" %>
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
 <%@ page import="gov.nih.nci.camod.Constants" %>
-<%@ page import="gov.nih.nci.camod.util.BuildCriteriaTable" %>
+<%@ page import="gov.nih.nci.camod.util.CriteriaTableUtil" %>
 <%@ page import="gov.nih.nci.camod.webapp.form.SearchForm" %>
 <%@ page import="gov.nih.nci.camod.webapp.form.SaveQueryForm" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%      
-	List results = (List) request.getSession().getAttribute( Constants.SEARCH_RESULTS );
-	
-	if (results == null) {
+	List results = ( List ) request.getSession().getAttribute( Constants.SEARCH_RESULTS );	
+	if ( results == null ) 
+	{
 	    results = new ArrayList();
-	    request.getSession().setAttribute(Constants.SEARCH_RESULTS, results );
+	    request.getSession().setAttribute( Constants.SEARCH_RESULTS, results );
 	}
 	
 	int size = results.size();
-	System.out.println( "SIZE: " + size );
 	
-	String pageSize = (String) request.getSession().getAttribute( Constants.ITEMSPERPAGE );
-		if (pageSize == null) pageSize = "15";
+	String pageSize = ( String ) request.getSession().getAttribute( Constants.ITEMSPERPAGE );	
+	if ( pageSize == null ) 
+	{
+		pageSize = "15";
+	}
 		
-	String[] resultColumns = (String[]) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
-   	    if ( resultColumns == null ) resultColumns = new String[] { "Model Descriptor", "Tumor Sites", "Species" };   //default        
-  	  
-	String noSaveOption = request.getParameter("noSaveOption");  	  	 
+	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
+   	if ( resultColumns == null ) 
+   	{
+   		resultColumns = new String[] { "Model Descriptor", "Tumor Sites", "Species" };   //default        
+  	}  
+  	
+	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 
 %>
 
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
+
+	<logic:present name="<%=Constants.NOSAVEOPTION%>">
+		<bean:define id="noSaveOption" name="<%=Constants.NOSAVEOPTION%>" />	
+	</logic:present>
+
+	<logic:present name="<%=Constants.CRITERIATABLE%>">
+		<bean:define id="criteriaTable" name="<%=Constants.CRITERIATABLE%>" />	
+	</logic:present>
 	
-	<%					
-		//Display search criteria of executed search
-		BuildCriteriaTable newTable = new BuildCriteriaTable();
-		String criteriaTable = newTable.buildCriteriaDisplayTable( (SearchForm) request.getSession().getAttribute( Constants.SEARCH_FORM ) );
-				
+	<logic:present name="<%=Constants.DUP_NAME%>">
+		<bean:define id="dupName" name="<%=Constants.DUP_NAME%>" />
+	</logic:present>	
+	
+	<logic:present name="<%=Constants.QUERY_NAME%>">
+		<bean:define id="aQueryName" name="<%=Constants.QUERY_NAME%>" />
+	</logic:present>
+	
+	<logic:present name="<%=Constants.RERUN_QUERY%>">
+		<bean:define id="reRunQuery" name="<%=Constants.RERUN_QUERY%>" />	
+	</logic:present>
+
+	<logic:present name="<%=Constants.ASAVEDQUERYID%>">
+		<bean:define id="aSavedQueryId" name="<%=Constants.ASAVEDQUERYID%>" />	
+	</logic:present>
+	
+	<logic:present name="<%=Constants.CURRENTUSER%>">
+		<bean:define id="currentUser" name="<%=Constants.CURRENTUSER%>" />	
+	</logic:present>
+	
+	<%							
 		//Check If this was a edited and resubmitted query
-		String aSavedQueryId = (String) request.getSession().getAttribute( Constants.ASAVEDQUERYID );
-		String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );
-		String reRunQuery = (String) request.getSession().getAttribute( Constants.RERUN_QUERY );
-		String dupName = (String) request.getSession().getAttribute( Constants.DUP_NAME );
-		//reset
-	 	request.getSession().setAttribute( Constants.DUP_NAME, null );
-				
+		//String aSavedQueryId = (String) request.getSession().getAttribute( Constants.ASAVEDQUERYID );
+		//String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );
+		//String reRunQuery = (String) request.getSession().getAttribute( Constants.RERUN_QUERY );
+		//String dupName = (String) request.getSession().getAttribute( Constants.DUP_NAME );
+		
 		//Check to see if a user is logged in, if not do not allow saving of queries
-		String currentUser = (String) request.getSession().getAttribute( Constants.CURRENTUSER );
+		//String currentUser = (String) request.getSession().getAttribute( Constants.CURRENTUSER );
+		
+		request.getSession().setAttribute( Constants.DUP_NAME, "false" );
+		//request.getSession().setAttribute( Constants.NOSAVEOPTION, "false" );
 		
 		// Get elapsed time in seconds
-		float elapsedTime = ((Long) request.getSession().getAttribute( Constants.ELAPSED_TIME )).floatValue();
+		float elapsedTime = ( (Long) request.getSession().getAttribute( Constants.ELAPSED_TIME )).floatValue();
 	    float elapsedTimeSec = elapsedTime/1000;
-
 	%>
 
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -81,70 +113,85 @@
 						<TD class="formTitle" height="20">Search Criteria ( <font color="red"><%= elapsedTimeSec %></font> seconds )</TD>
 					</TR>
 					<TR>
-						<TD class="formFieldAll"><%= criteriaTable %></TD>
+						<TD class="formFieldAll"><c:out value="${criteriaTable}" escapeXml="false"/></TD>
 					</TR>
 				</TABLE>								
-			
-				<% if ( dupName != null && dupName.equals("true") ) { %>
-						<TABLE border="0" class="contentPage" width="100%">
+				
+				
+			    <c:if test="${ dupName == 'true' }">
+					<TABLE border="0" class="contentPage" width="100%">
 						<TR>
 							<TD align="left" colspan="2" width="100%">
-								<font color="red">*The name "<%= aQueryName %>" is already being used, please choose a different name.</font><br>
-					            </TD>
-					        </TR>
-				        </TABLE>								
-				<%} %>
+								<font color="red">*The name "<c:out value="${aQueryName}" escapeXml="false"/>" is already being used, please choose a different name.</font><br>
+						    </TD>
+						</TR>
+					</TABLE>	
+			    </c:if>
 				
-				<% if ( noSaveOption != null ) { %>
+				<c:choose>
+								    
+				    <c:when test="${ noSaveOption == 'true' }">
 						<TABLE border="0" class="contentPage" width="100%">
 							<TR>
 								<TD width="40%">&nbsp;</TD>
 								<TD align="right" width="60%">
-									<font color="red">Query saved as "<%= aQueryName %>".</font><br>
+									<font color="red">Query saved as "<c:out value="${aQueryName}" escapeXml="false"/>".</font><br>
 					            </TD>
 					        </TR>
 				        </TABLE>		
 				        <BR>
-				<% } else if ( reRunQuery != null ) { %>
+				    </c:when>
+	
+				    <c:when test="${ !empty reRunQuery }">
 						<TABLE border="0" class="contentPage" width="100%">
 							<TR>
 								<TD width="40%">&nbsp;</TD>
 								<TD align="right" width="60%">
-									<font color="red">Query "<%= aQueryName %>" ran successfully.</font><br>
+									<font color="red">Query "<c:out value="${aQueryName}" escapeXml="false"/>" ran successfully.</font><br>
 					            </TD>
 					        </TR>
 				        </TABLE>		
-				        <BR>					        							
-				<% } else if ( aSavedQueryId != null ) { %>
-					<html:form action="SaveQueryAction.do?method=save" focus="queryName">
-						<TABLE border="0" class="contentPage" width="100%">
-							<TR>
-								<TD width="20%">&nbsp;</TD>
-								<TD align="left" width="80%">				
-						 				<html:radio property="saveAsNew" value="no" />Update saved query "<%= aQueryName %>" with the new criteria. 
-						 				<br>
-										<html:radio property="saveAsNew" value="yes" />Save this criteria as a new saved query called <html:text styleClass="formFieldUnSized" value="<%= aQueryName %>" property="queryName" size="20"/>.             						           
-										<br>
-					                <input type="submit" value="Save Query" src="images/savequery.gif" />
-					            </TD>
-					        </TR>
-				        </TABLE>
-					</html:form>										
-				<% } else if ( currentUser != null ) { %>				        				
-					<html:form action="SaveQueryAction.do?method=save" focus="queryName">
-						<TABLE border="0" class="contentPage" width="100%">
-							<TR>
-								<TD width="40%">&nbsp;</TD>
-								<TD align="right" width="60%">
-						            <html:text styleClass="formFieldUnSized" value="My Saved Query" property="queryName" size="20"/>
-		            				<INPUT name="saveAsNew" value="yes" type="hidden"/>
-					                <input type="submit" value="Save Query" src="images/savequery.gif" />
-					            </TD>
-					        </TR>
-				        </TABLE>
-					</html:form>
-				<%} else { %><br><% } %>
-						
+				        <BR>
+				    </c:when>
+	
+					<c:when test="${ !empty aSavedQueryId }">
+						<html:form action="SaveQueryAction.do?method=save" focus="queryName">
+							<TABLE border="0" class="contentPage" width="100%">
+								<TR>
+									<TD width="20%">&nbsp;</TD>
+									<TD align="left" width="80%">				
+							 				<html:radio property="saveAsNew" value="no" />Update saved query "<c:out value="${aQueryName}" escapeXml="false"/>" with the new criteria. 
+							 				<br>
+											<html:radio property="saveAsNew" value="yes" />Save this criteria as a new saved query called <html:text styleClass="formFieldUnSized" value="My Saved Query" property="queryName" size="20"/>.             						           
+											<br>
+						                <input type="submit" value="Save Query" src="images/savequery.gif" />
+						            </TD>
+						        </TR>
+					        </TABLE>
+						</html:form>	
+				 	</c:when>
+	
+				    <c:when test="${ !empty currentUser }">
+						<html:form action="SaveQueryAction.do?method=save" focus="queryName">
+							<TABLE border="0" class="contentPage" width="100%">
+								<TR>
+									<TD width="40%">&nbsp;</TD>
+									<TD align="right" width="60%">
+							            <html:text styleClass="formFieldUnSized" value="My Saved Query" property="queryName" size="20"/>
+			            				<INPUT name="saveAsNew" value="yes" type="hidden"/>
+						                <input type="submit" value="Save Query" src="images/savequery.gif" />
+						            </TD>
+						        </TR>
+					        </TABLE>
+						</html:form>
+				    </c:when>
+				    
+				    <c:otherwise>
+					   <br>
+				    </c:otherwise>
+				    		    			    				
+			</c:choose>
+			
 			</td>
 		</tr>
 		
@@ -157,7 +204,7 @@
 			</TABLE>
 			
             <display:table id="row" name="${sessionScope.searchResults}"              		
-	          		 pagesize="<%=pageSize%>"
+	          		 pagesize="<%= pageSize %>"
 	          		 cellpadding="5" 
 	          		 cellspacing="0" 
 	          		 border="1"
@@ -209,7 +256,7 @@
 							<% }
 							else if( resultColumns[i].equals("Principal Investigator") ) { %>
 							     <display:column title="Principal Investigator" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.principalInvestigator}"/></camod:highlight>
+							         <camod:highlight><c:out escapeXml="false" value="${row.principalInvestigatorName}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
 							else if( resultColumns[i].equals("Gender") ) { %>
@@ -400,9 +447,7 @@
 							else {}  							
 						}
 					%>
-
-    	    </display:table>	
-	          
+    	    </display:table>		          
 		</td></tr></TABLE>
 	</td></tr></TABLE>
 </td></tr></TABLE>

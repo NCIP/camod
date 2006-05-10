@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.10 2006-04-28 19:26:17 schroedn Exp $
+ * $Id: LoginAction.java,v 1.11 2006-05-10 14:15:39 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/28 19:26:17  schroedn
+ * Defect # 238
+ * On login sets the user's search result column settings
+ *
  * Revision 1.9  2005/12/06 19:51:39  georgeda
  * Defect #255 - add SSL
  *
@@ -25,7 +29,7 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.ResultSettings;
 import gov.nih.nci.camod.domain.ResultSettingsColumns;
-import gov.nih.nci.camod.service.QueryStorageManager;
+import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.service.ResultSettingsManager;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.webapp.form.LoginForm;
@@ -71,34 +75,36 @@ public final class LoginAction extends BaseAction {
 
         if (loginOK) {
             log.debug("Successful login");
+            
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
             
 		    //Used for sidebar, number of saved queries
-            QueryStorageManager queryStorageManager = (QueryStorageManager) getBean("queryStorageManager");   
+            SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");   
             
             //Used to pre-load settings for search result columns
             ResultSettingsManager resultSettingsManager = (ResultSettingsManager) getBean("resultSettingsManager");
             
             try {
-                List savedQueriesList = queryStorageManager.getSavedQueriesByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
+                List savedQueriesList = savedQueryManager.getSavedQueriesByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
                 request.getSession().setAttribute(Constants.NUMBEROFSAVEDQUERIES, String.valueOf(savedQueriesList.size()) );
                 
                 //Pre-load columns for search results
-                String[] columns = { "Model Descriptor", "Tumor Sites", "Species"  }; 
-                String itemsPerPage = "15";
-                ResultSettings rSettings = resultSettingsManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
+                String[] columns = Constants.SEARCHRESULTCOLUMNSDEFAULT;
+                String itemsPerPage = "" + Constants.ITEMSPERPAGEDEFAULT;
+                
+                ResultSettings inResultSettings = resultSettingsManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
                 List selectedList = new ArrayList();
                
-                if ( rSettings != null ) {
-                    Set<ResultSettingsColumns> set = rSettings.getResultSettingsColumns();
+                if ( inResultSettings != null ) {
+                    Set<ResultSettingsColumns> set = inResultSettings.getResultSettingsColumns();
                     Iterator <ResultSettingsColumns> setIter = set.iterator();                  
-                    itemsPerPage = "" + rSettings.getItemsPerPage();
+                    itemsPerPage = "" + inResultSettings.getItemsPerPage();
                     
                     while ( setIter.hasNext() )
                     {
-                        ResultSettingsColumns it = (ResultSettingsColumns) setIter.next();
-                        selectedList.add( it.getColumnName() );
+                        ResultSettingsColumns inResultSettingsColumns = (ResultSettingsColumns) setIter.next();
+                        selectedList.add( inResultSettingsColumns.getColumnName() );
                     }  
                     
                     request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
@@ -109,7 +115,9 @@ public final class LoginAction extends BaseAction {
                     request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, columns );
                 }
                 
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                log.error( "User search result settings load failed" );
+            }
             
         } else {
             log.debug("Login failed");

@@ -1,19 +1,23 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
-<%@ page import="gov.nih.nci.camod.service.QueryStorageManager" %>
+<%@ page import="gov.nih.nci.camod.service.SavedQueryManager" %>
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
 <%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
 
 <%  
 	List userQueryList = (List) request.getSession().getAttribute( Constants.USERSQUERYLIST );
-	int size = userQueryList.size();
 	
-	// Truncate the list to 25 items
-	if ( size > 25 )
-		userQueryList.subList( 25, size ).clear();
+	int size = 0;
 	
-	System.out.println( "SIZE: " + size );	
+	if ( userQueryList != null )
+	{
+		size = userQueryList.size();
+	
+		// Truncate the list to 25 items
+		if ( size > 20 )
+			userQueryList.subList( 20, size ).clear();		
+	}
 	
 	int menuNumber = 1;	
 %>
@@ -59,7 +63,7 @@
 									    
 									    <td width="50%">
 										    <font class="standardText">
-											    <bean:write name="aCriteria" property="attributeValue" filter="true"/>
+											    <camod:shorten><bean:write name="aCriteria" property="attributeValue" filter="true"/></camod:shorten>
 										    </font>
 									    </td>							    
 								    </tr>

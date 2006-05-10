@@ -116,8 +116,8 @@
     <!-- XenograftManager -->
     <bean id="xenograftManager" class="gov.nih.nci.camod.service.impl.XenograftManagerImpl"/>
 
-    <!-- QueryStorageManager -->
-    <bean id="queryStorageManager" class="gov.nih.nci.camod.service.impl.QueryStorageManagerImpl"/>    
+    <!-- SavedQueryManager -->
+    <bean id="savedQueryManager" class="gov.nih.nci.camod.service.impl.SavedQueryManagerImpl"/>    
            
     <!-- ResultSettingsManager -->
 	<bean id="resultSettingsManager" class="gov.nih.nci.camod.service.impl.ResultSettingsManagerImpl"/>      

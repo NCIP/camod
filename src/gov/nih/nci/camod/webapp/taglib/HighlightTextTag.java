@@ -1,7 +1,10 @@
 /**
- * $Id: HighlightTextTag.java,v 1.3 2006-05-04 17:30:41 schroedn Exp $ 
+ * $Id: HighlightTextTag.java,v 1.4 2006-05-10 14:15:52 schroedn Exp $ 
  * 
- * $Log: not supported by cvs2svn $ 
+ * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/04 17:30:41  schroedn
+ * Edit
+ * 
  *  
  */
 
@@ -36,16 +39,28 @@ public class HighlightTextTag implements Tag, BodyTag, Serializable
     private Tag myParent = null;
     private String myKeyword;
 
+    /**
+     * @param inPageContext
+     *            The inPageContext to set.
+     */
     public void setPageContext(PageContext inPageContext)
     {
         myPageContext = inPageContext;
     }
 
+    /**
+     * @param inParent
+     *            The inParent to set.
+     */
     public void setParent(Tag inParent)
     {
         myParent = inParent;
     }
 
+    /**
+     * @return myParent
+     *            Returns the myParent Tag.
+     */
     public Tag getParent()
     {
         return myParent;

@@ -1,11 +1,13 @@
 /**
  * 
- * $Id: LogoutAction.java,v 1.4 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: LogoutAction.java,v 1.5 2006-05-10 14:15:39 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
-
 
 package gov.nih.nci.camod.webapp.action;
 

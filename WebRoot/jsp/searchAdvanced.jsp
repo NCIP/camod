@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.30 2006-05-10 12:02:47 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.31 2006-05-10 14:21:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2006/05/10 12:02:47  georgeda
+ * Changes for searching on transient interfaces
+ *
  * Revision 1.29  2006/05/03 19:05:29  georgeda
  * Move to new EVSTree
  *
@@ -44,8 +47,8 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
-<%@ page import='gov.nih.nci.camod.Constants.*' %>
-<%@ page import="gov.nih.nci.camod.service.QueryStorageManager" %>
+<%@ page import="gov.nih.nci.camod.Constants.*" %>
+<%@ page import="gov.nih.nci.camod.service.SavedQueryManager" %>
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
 <%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
 
@@ -85,7 +88,7 @@
 		toggleField(document.searchForm.searchTherapeuticApproaches[0], document.searchForm.therapeuticApproach);
 	}
 	
-	function enableOrgan() {
+	function enableFields() {
 		document.searchForm.organ.disabled = false;
 		document.searchForm.tumorClassification.disabled = false;
 	}	
@@ -98,7 +101,7 @@
 	String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );		
 %>
 
-<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableOrgan()">
+<html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableFields()">
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
@@ -364,6 +367,7 @@
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Histopathology</td>
 		</tr>		
+		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Models with Metastasis</td>

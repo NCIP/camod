@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.11 2006-05-10 13:39:56 schroedn Exp $
+ * $Id: SearchForm.java,v 1.12 2006-05-10 14:25:10 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/05/10 13:39:56  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.10  2006/05/10 12:02:12  georgeda
  * Changes for searching on transient interfaces
  *
@@ -169,15 +172,15 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         this.organ = organ;
     }
 
-    public String getTumorClassification()
-    {
-        return tumorClassification;
-    }
-
-    public void setTumorClassification(String tumorClassification)
-    {
-        this.tumorClassification = tumorClassification;
-    }
+//    public String getTumorClassification()
+//    {
+//        return tumorClassification;
+//    }
+//
+//    public void setTumorClassification(String tumorClassification)
+//    {
+//        this.tumorClassification = tumorClassification;
+//    }
     
     public String getPiName() {
         return piName;

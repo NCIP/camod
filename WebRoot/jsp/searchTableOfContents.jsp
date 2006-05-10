@@ -1,3 +1,15 @@
+<%
+
+/**
+ * 
+ * $Id: searchTableOfContents.jsp,v 1.6 2006-05-10 14:23:14 schroedn Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ *
+ */
+
+%>
+
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>

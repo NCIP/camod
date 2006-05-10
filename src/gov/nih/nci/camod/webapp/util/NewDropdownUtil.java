@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.40 2006-04-17 19:08:38 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.41 2006-05-10 14:16:14 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2006/04/17 19:08:38  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.39  2005/11/29 20:47:21  georgeda
  * Removed system.out
  *
@@ -139,7 +142,7 @@ public class NewDropdownUtil
             theReturnList = getViralVectorList(inRequest);
         }
 
-        else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVEL))
+        else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVELDROP))
         {
             theReturnList = getExpressionLevelList(inRequest);
         }

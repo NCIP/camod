@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ResultSettings.java,v 1.2 2006-05-04 17:29:22 pandyas Exp $
+ * $Id: ResultSettings.java,v 1.3 2006-05-10 14:13:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/04 17:29:22  pandyas
+ * Added toString() and equals() to domain class  - encouraged by Hibernate
+ *
  * Revision 1.1  2006/04/28 19:12:44  schroedn
  * Defect #238, 261
  * Search Result Columns and Saving Queries domain objects and hibernate mapping files
@@ -16,6 +19,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author schroedn
+ */
 public class ResultSettings extends BaseObject implements Serializable 
 {
     private static final long serialVersionUID = 5804789721118396480L;
@@ -24,39 +30,69 @@ public class ResultSettings extends BaseObject implements Serializable
     private Person user;
     private Set<ResultSettingsColumns> resultSettingsColumns = new HashSet<ResultSettingsColumns>();
     
-
+    /**
+     * @return Returns the set of resultSettingsColumns.
+     */
     public Set<ResultSettingsColumns> getResultSettingsColumns()
     {
         return resultSettingsColumns;
     }
-
-    public void setResultSettingsColumns(Set<ResultSettingsColumns> sqa)
+    
+    /**
+     * @param inResultSettingsColumns
+     *      Sets the resultSettingsColumns.
+     */
+    public void setResultSettingsColumns(Set<ResultSettingsColumns> inResultSettingsColumns)
     {
-        this.resultSettingsColumns = sqa;
+        this.resultSettingsColumns = inResultSettingsColumns;
     }
     
+    /**
+     * @return Returns the columns to display.
+     */
     public String getColumnsToDisplay()
     {
         return columnsToDisplay;
     }
-    public void setColumnsToDisplay(String columnsToDisplay)
+    
+    /**
+     * @param inColumnsToDisplay
+     *      Sets the columns to display.
+     */
+    public void setColumnsToDisplay(String inColumnsToDisplay)
     {
-        this.columnsToDisplay = columnsToDisplay;
+        this.columnsToDisplay = inColumnsToDisplay;
     }
     
+    /**
+     * @return Returns the items per page to display.
+     */
     public int getItemsPerPage()
     {
         return itemsPerPage;
     }
-    public void setItemsPerPage(int itemsPerPage)
+    
+    /**
+     * @param inItemsPerPage
+     *      sets the itmes per page to display.
+     */
+    public void setItemsPerPage(int inItemsPerPage)
     {
-        this.itemsPerPage = itemsPerPage;
+        this.itemsPerPage = inItemsPerPage;
     }
     
+    /**
+     * @return Returns the user.
+     */
     public Person getUser()
     {
         return user;
     }
+    
+    /**
+     * @param user
+     *      Sets the user.
+     */
     public void setUser(Person user)
     {
         this.user = user;

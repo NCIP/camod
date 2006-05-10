@@ -1,7 +1,10 @@
 /*
- * $Id: Person.java,v 1.11 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Person.java,v 1.12 2006-05-10 14:13:51 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -26,10 +29,6 @@ public class Person extends Party implements Comparable
     private String username;
     private Boolean isPrincipalInvestigtor;
 
-    /**
-     * NOTE: the following two methods do NOT user the getXXX naming because it
-     * causes problems with the common persistence package
-     */
     /**
      * @return Returns the display name
      */

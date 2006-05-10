@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.11 2006-04-28 19:05:47 schroedn Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.12 2006-05-10 14:13:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/04/28 19:05:47  schroedn
+ * Defect # 238
+ * Added methods to display data on search result pages for configurable search result columns
+ *
  * Revision 1.10  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -40,7 +44,7 @@
 package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.service.impl.AnimalModelManagerSingleton;
-
+import gov.nih.nci.camod.Constants;
 import java.util.*;
 
 /**
@@ -56,10 +60,9 @@ public class AnimalModelSearchResult implements Comparable
     private String mySubmitterName = null;
     private String mySubmittedDate = null;
     private AnimalModel myAnimalModel = null;
-    private String myStrain = null;    
+    private String myStrain = null;
     private String myModelId = null;
-    
-    private String myPrincipalInvestigator = null;
+    private String myPrincipalInvestigatorName = null;
     private String myGender = null;
     private String myTransgene = null;
     private String myTranscriptional1 = null;
@@ -70,19 +73,8 @@ public class AnimalModelSearchResult implements Comparable
     private String myNameOfInducingAgent = null;
     private String myGeneName = null;
     private String myCarcinogen = null;
-    
-    private String myChemical = null;
-    private String myEnvironmentalFactor = null;
     private String myViralVector = null;
-    
     private String myGene = null;
-    private String myGrowthFactor = null;
-    
-    private String myHormone = null;
-    private String myNutritionalFactor = null;
-    private String myRadiation = null;
-    private String myVirus = null;
-    
     private String myMicroarray = null;
     private String myYearOfPublication = null;
     private String myJournal = null;
@@ -101,6 +93,7 @@ public class AnimalModelSearchResult implements Comparable
     private String myCellLine = null;
     private String myDonorSpecies = null;
     private String myGraftType = null;
+
     /**
      * Create the wraper object
      * 
@@ -137,6 +130,14 @@ public class AnimalModelSearchResult implements Comparable
         return myModelDescriptor;
     }
 
+    /**
+     * Return the model id. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the model id for the associated model
+     * 
+     * @throws Exception
+     */
     public String getModelId() throws Exception
     {
         if (myModelId == null)
@@ -144,92 +145,132 @@ public class AnimalModelSearchResult implements Comparable
             fetchAnimalModel();
             myModelId = myAnimalModel.getId().toString();
         }
-        return myModelId;        
+        return myModelId;
     }
-    
-    public String getPrincipalInvestigator() throws Exception
+
+    /**
+     * Return the Principal Investigator as a mailto: link. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the principal Investigator as a http mail link
+     * 
+     * @throws Exception
+     */
+    public String getPrincipalInvestigatorName() throws Exception
     {
-        if ( myPrincipalInvestigator == null )
+        if (myPrincipalInvestigatorName == null)
         {
             fetchAnimalModel();
-            
-            String theEmailAddress = "";
-            
-            if ( myAnimalModel.getPrincipalInvestigator() != null )
+
+            String theEmailAddress = myAnimalModel.getPrincipalInvestigator().getEmailAddress();
+
+            if (theEmailAddress.length() > 0)
             {
-                Set contactInfoList = myAnimalModel.getPrincipalInvestigator().getContactInfoCollection();          
-                Iterator contactInfoIter = contactInfoList.iterator();                                  
-                
-                while ( contactInfoIter.hasNext() ) {
-                    ContactInfo contact = (ContactInfo) contactInfoIter.next();                        
-                    theEmailAddress = contact.getEmail();
-                }
-                        
-                if ( theEmailAddress.length() > 0 ) {
-                    myPrincipalInvestigator = "<a href=\"mailto:" + theEmailAddress + "\"/>" + myAnimalModel.getPrincipalInvestigator().getDisplayName();
-                }            
+                myPrincipalInvestigatorName = "<a href=\"mailto:" + theEmailAddress + "\"/>" + myAnimalModel.getPrincipalInvestigator().getDisplayName();
+            }
+            else
+            {
+                myPrincipalInvestigatorName = myAnimalModel.getPrincipalInvestigator().getDisplayName();
             }
         }
-        return myPrincipalInvestigator;
+        return myPrincipalInvestigatorName;
     }
-    
-    public String getGender() throws Exception 
+
+    /**
+     * Return the Gender. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the gender for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getGender() throws Exception
     {
-        if ( myGender == null )
+        if (myGender == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getPhenotype().getSexDistribution() != null )
+            if (myAnimalModel.getPhenotype().getSexDistribution() != null)
+            {
                 myGender = myAnimalModel.getPhenotype().getSexDistribution().getType();
+            }
+            else
+            {
+                myGender = "";
+            }
         }
         return myGender;
     }
-    
-    public String getTransgene() throws Exception 
+
+    /**
+     * Return the Transgenes. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Trangenese for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getTransgene() throws Exception
     {
-        if ( myTransgene == null )
+        if (myTransgene == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getPhenotype().getSexDistribution() != null ) {
-                Set <EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
+            if (myAnimalModel.getEngineeredGeneCollection() != null)
+            {
+                Set<EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
                 Iterator<EngineeredGene> engineeredListIter = engineeredList.iterator();
                 myTransgene = "";
-                
-                while ( engineeredListIter.hasNext() ){
+
+                while (engineeredListIter.hasNext())
+                {
                     EngineeredGene eg = (EngineeredGene) engineeredListIter.next();
-                    if( eg instanceof Transgene){
+                    if (eg instanceof Transgene)
+                    {
                         Transgene t = (Transgene) eg;
-                        myTransgene += t.getName() + "<br>";  
+                        myTransgene += t.getName() + "<br>";
                     }
                 }
             }
         }
         return myTransgene;
     }
-    
-    public String getTranscriptional1() throws Exception 
+
+    /**
+     * Return the Transcriptional 1 name. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Transcriptional 1 name for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getTranscriptional1() throws Exception
     {
-        if ( myTranscriptional1 == null )
+        if (myTranscriptional1 == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getEngineeredGeneCollection() != null ) {
-                Set <EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
+            if (myAnimalModel.getEngineeredGeneCollection() != null)
+            {
+                Set<EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
                 Iterator<EngineeredGene> engineeredListIter = engineeredList.iterator();
                 myTranscriptional1 = "";
-                
-                while ( engineeredListIter.hasNext() ){
-                    EngineeredGene eg = (EngineeredGene) engineeredListIter.next();    
-                    if( eg instanceof Transgene){
+
+                while (engineeredListIter.hasNext())
+                {
+                    EngineeredGene eg = (EngineeredGene) engineeredListIter.next();
+                    if (eg instanceof Transgene)
+                    {
                         Transgene t = (Transgene) eg;
 
                         Set<RegulatoryElement> regElementList = t.getRegulatoryElementCollection();
-                        Iterator<RegulatoryElement> regListIter =  regElementList.iterator();                    
-                        
-                        while ( regListIter.hasNext() ){
+                        Iterator<RegulatoryElement> regListIter = regElementList.iterator();
+
+                        while (regListIter.hasNext())
+                        {
                             RegulatoryElement re = (RegulatoryElement) regListIter.next();
-                            if ( re.getRegulatoryElementType().getName().equals("Transcriptional 1") ) {
+                            if (re.getRegulatoryElementType().getName().equals( Constants.ENVFactors.TRANSCRIPTIONAL1 ))
+                            {
                                 myTranscriptional1 += re.getName() + "<br>";
                             }
-                        }                    
+                        }
                     }
 
                 }
@@ -237,49 +278,74 @@ public class AnimalModelSearchResult implements Comparable
         }
         return myTranscriptional1;
     }
-    
-    public String getSegmentType() throws Exception 
+
+    /**
+     * Return the Segment Types. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Segment types for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getSegmentType() throws Exception
     {
-        if ( mySegmentType == null )
+        if (mySegmentType == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getEngineeredGeneCollection() != null ) {
-                Set <EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
+            if (myAnimalModel.getEngineeredGeneCollection() != null)
+            {
+                Set<EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
                 Iterator<EngineeredGene> engineeredListIter = engineeredList.iterator();
                 mySegmentType = "";
-                
-                while ( engineeredListIter.hasNext() ){
+
+                while (engineeredListIter.hasNext())
+                {
                     EngineeredGene eg = (EngineeredGene) engineeredListIter.next();
-                    if( eg instanceof GenomicSegment){
-                        GenomicSegment g = (GenomicSegment) eg;
-                         
-                            if( g.getSegmentType().getNameUnctrlVocab() == null || g.getSegmentType().getNameUnctrlVocab().equals( "" ) ) {
-                                mySegmentType += g.getSegmentType().getName() + "<br>";
-                            } else {
-                                mySegmentType += g.getSegmentType().getNameUnctrlVocab() + "<br>";                                        
-                            }
+                    if (eg instanceof GenomicSegment)
+                    {
+                        GenomicSegment theGenomicSegment = (GenomicSegment) eg;
+
+                        if (theGenomicSegment.getSegmentType().getNameUnctrlVocab() == null || theGenomicSegment.getSegmentType().getNameUnctrlVocab().equals(""))
+                        {
+                            mySegmentType += theGenomicSegment.getSegmentType().getName() + "<br>";
+                        }
+                        else
+                        {
+                            mySegmentType += theGenomicSegment.getSegmentType().getNameUnctrlVocab() + "<br>";
+                        }
                     }
                 }
             }
         }
         return mySegmentType;
     }
-    
-    public String getDesignator() throws Exception 
+
+    /**
+     * Return the Designator for the genomic segment. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Designator for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getDesignator() throws Exception
     {
-        if ( myDesignator == null )
+        if (myDesignator == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getEngineeredGeneCollection() != null ) {
-                Set <EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
+            if (myAnimalModel.getEngineeredGeneCollection() != null)
+            {
+                Set<EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
                 Iterator<EngineeredGene> engineeredListIter = engineeredList.iterator();
                 myDesignator = "";
-                
-                while ( engineeredListIter.hasNext() ){
+
+                while (engineeredListIter.hasNext())
+                {
                     EngineeredGene eg = (EngineeredGene) engineeredListIter.next();
-                    if( eg instanceof GenomicSegment){
-                        GenomicSegment g = (GenomicSegment) eg;
-                        myDesignator += g.getCloneDesignator() + "<br>";   
+                    if (eg instanceof GenomicSegment)
+                    {
+                        GenomicSegment theGenomicSegment = (GenomicSegment) eg;
+                        myDesignator += theGenomicSegment.getCloneDesignator() + "<br>";
                     }
                 }
             }
@@ -287,83 +353,122 @@ public class AnimalModelSearchResult implements Comparable
         return myDesignator;
     }
 
-    public String getTargetedGeneLocus() throws Exception 
+    /**
+     * Return the Targeted Gene Locus. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Targeted Gene Locus for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getTargetedGeneLocus() throws Exception
     {
-        if ( myTargetedGeneLocus == null )
+        if (myTargetedGeneLocus == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getEngineeredGeneCollection() != null ) {
-                Set <EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
+            if (myAnimalModel.getEngineeredGeneCollection() != null)
+            {
+                Set<EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
                 Iterator<EngineeredGene> engineeredListIter = engineeredList.iterator();
                 myTargetedGeneLocus = "";
-                
-                while ( engineeredListIter.hasNext() ){
+
+                while (engineeredListIter.hasNext())
+                {
                     EngineeredGene eg = (EngineeredGene) engineeredListIter.next();
-                    if( eg instanceof TargetedModification){
+                    if (eg instanceof TargetedModification)
+                    {
                         TargetedModification tm = (TargetedModification) eg;
-                        myTargetedGeneLocus += tm.getName() + "<br>";   
+                        myTargetedGeneLocus += tm.getName() + "<br>";
                     }
                 }
             }
         }
         return myTargetedGeneLocus;
     }
-    
-    public String getTypeOfModification() throws Exception 
+
+    /**
+     * Return the Type of Modification. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Type of Modification for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getTypeOfModification() throws Exception
     {
-        if ( myTypeOfModification == null )
+        if (myTypeOfModification == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getEngineeredGeneCollection() != null ) {
-                Set <EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
+            if (myAnimalModel.getEngineeredGeneCollection() != null)
+            {
+                Set<EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
                 Iterator<EngineeredGene> engineeredListIter = engineeredList.iterator();
                 myTypeOfModification = "";
-                
-                while ( engineeredListIter.hasNext() ){
+
+                while (engineeredListIter.hasNext())
+                {
                     EngineeredGene eg = (EngineeredGene) engineeredListIter.next();
-                    if( eg instanceof TargetedModification){
+                    if (eg instanceof TargetedModification)
+                    {
                         TargetedModification tm = (TargetedModification) eg;
-                        myTypeOfModification += tm.getModificationTypeCollection() + "<br>";   
-                        
+                        myTypeOfModification += tm.getModificationTypeCollection() + "<br>";
+
                         Set<ModificationType> modTypeList = tm.getModificationTypeCollection();
-                        Iterator<ModificationType> modIter =  modTypeList.iterator();                    
-                        
-                        while ( modIter.hasNext() ){
+                        Iterator<ModificationType> modIter = modTypeList.iterator();
+
+                        while (modIter.hasNext())
+                        {
                             ModificationType mt = (ModificationType) modIter.next();
-                            
-                            if ( mt.getNameUnctrlVocab() == null || mt.getNameUnctrlVocab().equals( "" )) {
+
+                            if (mt.getNameUnctrlVocab() == null || mt.getNameUnctrlVocab().equals(""))
+                            {
                                 myTypeOfModification += mt.getName() + "<br>";
-                            } else {
-                                myTypeOfModification += mt.getNameUnctrlVocab() + "<br>";                                     
-                            }                                
-                        }         
+                            }
+                            else
+                            {
+                                myTypeOfModification += mt.getNameUnctrlVocab() + "<br>";
+                            }
+                        }
                     }
                 }
             }
         }
         return myTypeOfModification;
-    } 
-    
-    public String getNameOfInducingAgent() throws Exception 
+    }
+
+    /**
+     * Return the Name of the Inducing Agent. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Name of the Inducing Agent for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getNameOfInducingAgent() throws Exception
     {
-        if ( myNameOfInducingAgent == null )
+        if (myNameOfInducingAgent == null)
         {
             fetchAnimalModel();
-            if ( myAnimalModel.getEngineeredGeneCollection() != null ) {
-                Set <EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
+            if (myAnimalModel.getEngineeredGeneCollection() != null)
+            {
+                Set<EngineeredGene> engineeredList = myAnimalModel.getEngineeredGeneCollection();
                 Iterator<EngineeredGene> engineeredListIter = engineeredList.iterator();
                 myNameOfInducingAgent = "";
-                
-                while ( engineeredListIter.hasNext() ){
+
+                while (engineeredListIter.hasNext())
+                {
                     EngineeredGene eg = (EngineeredGene) engineeredListIter.next();
-                    if( eg instanceof InducedMutation){
+                    if (eg instanceof InducedMutation)
+                    {
                         InducedMutation im = (InducedMutation) eg;
-                        if( im.getEnvironmentalFactor().getName() != null )
+                        if (im.getEnvironmentalFactor().getName() != null)
                         {
                             myNameOfInducingAgent += im.getEnvironmentalFactor().getName() + "<br>";
-                        } else {
+                        }
+                        else
+                        {
                             myNameOfInducingAgent += im.getEnvironmentalFactor().getNameUnctrlVocab() + "<br>";
-                        }                            
+                        }
                     }
                 }
             }
@@ -371,639 +476,757 @@ public class AnimalModelSearchResult implements Comparable
         return myNameOfInducingAgent;
     }
 
-    public String getGeneName() throws Exception 
+    /**
+     * Return the Gene Name. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Gene Name for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getGeneName() throws Exception
     {
-        if ( myGeneName == null )
+        if (myGeneName == null)
         {
             fetchAnimalModel();
-            
-            Set <SpontaneousMutation> smSet = myAnimalModel.getSpontaneousMutationCollection();
+
+            Set<SpontaneousMutation> smSet = myAnimalModel.getSpontaneousMutationCollection();
             Iterator<SpontaneousMutation> smIter = smSet.iterator();
             myGeneName = "";
-            
-            while (smIter.hasNext()) {
-                SpontaneousMutation sm = (SpontaneousMutation) smIter.next();                
+
+            while (smIter.hasNext())
+            {
+                SpontaneousMutation sm = (SpontaneousMutation) smIter.next();
                 myGeneName += sm.getName() + "<br>";
             }
         }
         return myGeneName;
     }
-    
-    public String getChemical() throws Exception 
-    {
-        if ( myChemical == null )
-        {
-            fetchAnimalModel();
-            
-            Set <CarcinogenExposure> ceSet = myAnimalModel.getCarcinogenExposureCollection();
-            Iterator<CarcinogenExposure> ceIter = ceSet.iterator();
-            myChemical = "";
-            
-            while (ceIter.hasNext()) {
-                CarcinogenExposure ce = (CarcinogenExposure) ceIter.next();
-                EnvironmentalFactor ef = ce.getEnvironmentalFactor();
-                
-                if( ef != null )
-                {
-                    if (ef.getType().equals("Chemical / Drug"))
-                    {
-                        if( ef.getName() != null )
-                            myChemical += ef.getName() + " (Chemical/Drug)<br>";
-                        else
-                            myChemical += ef.getNameUnctrlVocab() + " (Chemical/Drug)<br>";
-                    }
-                    if (ef.getType().equals("Hormone"))
-                    {
-                        if( ef.getName() != null )
-                            myChemical += ef.getName() + " (Hormone)<br>";
-                        else
-                            myChemical += ef.getNameUnctrlVocab() + " (Hormone)<br>";
-                    }
-                    if (ef.getType().equals("Growth Factor"))
-                    {
-                        if( ef.getName() != null )
-                            myChemical += ef.getName() + " (Growth Factor)<br>";
-                        else
-                            myChemical += ef.getNameUnctrlVocab() + " (Growth Factor)<br>";
-                    }
-                    if (ef.getType().equals("Viral"))
-                    {
-                        if( ef.getName() != null )
-                            myChemical += ef.getName() + " (Viral)<br>";
-                        else
-                            myChemical += ef.getNameUnctrlVocab() + " (Viral)<br>";
-                    }
-                    if (ef.getType().equals("Environment"))
-                    {
-                        if( ef.getName() != null )
-                            myChemical += ef.getName() + " (Environment)<br>";
-                        else
-                            myChemical += ef.getNameUnctrlVocab() + " (Environment)<br>";
-                    }
-                    if (ef.getType().equals("Nutrition"))
-                    {
-                        if( ef.getName() != null )
-                            myChemical += ef.getName() + " (Nutrition)<br>";
-                        else
-                            myChemical += ef.getNameUnctrlVocab() + " (Nutrition)<br>";
-                    }
-                    if (ef.getType().equals("Other"))
-                    {
-                        if( ef.getName() != null )
-                            myChemical += ef.getName() + " (Other)<br>";
-                        else
-                            myChemical += ef.getNameUnctrlVocab() + " (Other)<br>";
-                    }
-                }
-            }
-        }
-        return myChemical;
-    }
-    
+
+    /**
+     * Return the Carcinogenetic Interventions. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Carcinogenetic Interventions for the associated model
+     * 
+     * @throws Exception
+     */
     public String getCarcinogen() throws Exception
     {
-        if ( myCarcinogen == null )
+        if (myCarcinogen == null)
         {
             fetchAnimalModel();
-            
-            Set <CarcinogenExposure> ceSet = myAnimalModel.getCarcinogenExposureCollection();
+
+            Set<CarcinogenExposure> ceSet = myAnimalModel.getCarcinogenExposureCollection();
             Iterator<CarcinogenExposure> ceIter = ceSet.iterator();
             myCarcinogen = "";
-            
-            while (ceIter.hasNext()) {
+
+            while (ceIter.hasNext())
+            {
                 CarcinogenExposure ce = (CarcinogenExposure) ceIter.next();
                 EnvironmentalFactor ef = ce.getEnvironmentalFactor();
-                
-                if( ef != null )
+
+                if (ef != null)
                 {
-                    if (ef.getType().equals("Chemical / Drug"))
+                    if (ef.getType().equals( Constants.ENVFactors.CHEMICAL_DRUG ))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Chemical/Drug)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.CHEMICAL_DRUG + ") <br>";
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Chemical/Drug)<br>";
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.CHEMICAL_DRUG + ") <br>";
+                        }
                     }
-                    if (ef.getType().equals("Hormone"))
+                    if (ef.getType().equals(Constants.ENVFactors.HORMONE))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Hormone)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.HORMONE + ") <br>";
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Hormone)<br>";
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.HORMONE + ") <br>";
+                        }
                     }
-                    if (ef.getType().equals("Growth Factor"))
+                    if (ef.getType().equals( Constants.ENVFactors.GROWTH_FACTOR ))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Growth Factor)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName()+ " (" + Constants.ENVFactors.GROWTH_FACTOR + ") <br>";
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Growth Factor)<br>";
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.GROWTH_FACTOR + ") <br>";
+                        }
                     }
-                    if (ef.getType().equals("Viral"))
+                    if (ef.getType().equals( Constants.ENVFactors.VIRAL ))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Viral)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.VIRAL + ") <br>";;
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Viral)<br>";
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.VIRAL + ") <br>";
+                        }
                     }
-                    if (ef.getType().equals("Environment"))
+                    if (ef.getType().equals( Constants.ENVFactors.ENVIRONMOENT ))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Environment)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.ENVIRONMOENT + ") <br>";
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Environment)<br>";
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.ENVIRONMOENT + ") <br>";
+                        }
+
                     }
-                    if (ef.getType().equals("Nutrition"))
+                    if (ef.getType().equals( Constants.ENVFactors.NUTRITION ))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Nutrition)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.NUTRITION + ") <br>";
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Nutrition)<br>";
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.NUTRITION + ") <br>";
+                        }
                     }
-                    if (ef.getType().equals("Virus"))
+                    if (ef.getType().equals( Constants.ENVFactors.VIRUS ))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Virus)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.VIRUS + ") <br>";
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Virus)<br>";
-                    }                    
-                    if (ef.getType().equals("Other"))
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.VIRUS + ") <br>";
+                        }
+                    }
+                    if (ef.getType().equals( Constants.ENVFactors.OTHER ))
                     {
-                        if( ef.getName() != null )
-                            myCarcinogen += ef.getName() + " (Other)<br>";
+                        if (ef.getName() != null)
+                        {
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.OTHER + ") <br>";
+                        }
                         else
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (Other)<br>";
+                        {
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.OTHER + ")<br>";
+                        }
                     }
                 }
             }
         }
         return myCarcinogen;
     }
-    
-    public String getEnvironmentalFactor() throws Exception 
+
+    /**
+     * Return the Viral Vector. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Viral Vector for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getViralVector() throws Exception
     {
-        if ( myEnvironmentalFactor == null )
+        if (myViralVector == null)
         {
             fetchAnimalModel();
-        }
-        return myEnvironmentalFactor;
-    }
-    
-    public String getViralVector() throws Exception 
-    {
-        if ( myViralVector == null )
-        {
-            fetchAnimalModel();
-            // Print the list of GeneDelivery viralVectors for the Gene Delivery
-            // (Cardiogenic Intervention) Section
-            Set <GeneDelivery>geneDeliverySet = myAnimalModel.getGeneDeliveryCollection();
-            Iterator <GeneDelivery> geneDeliveryIter = geneDeliverySet.iterator();
+            Set<GeneDelivery> geneDeliverySet = myAnimalModel.getGeneDeliveryCollection();
+            Iterator<GeneDelivery> geneDeliveryIter = geneDeliverySet.iterator();
             myViralVector = "";
-            
+
             while (geneDeliveryIter.hasNext())
             {
                 GeneDelivery geneDelivery = (GeneDelivery) geneDeliveryIter.next();
-                
-                if ( geneDelivery.getViralVector() != null )
+
+                if (geneDelivery.getViralVector() != null)
+                {
                     myViralVector += geneDelivery.getViralVector() + "<br>";
+                }
                 else
+                {
                     myViralVector += geneDelivery.getViralVectorUnctrlVocab() + "<br>";
+                }
             }
 
         }
         return myViralVector;
     }
-    
-    public String getGene() throws Exception 
+
+    /**
+     * Return the Gene. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Gene for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getGene() throws Exception
     {
-        if ( myGene == null )
+        if (myGene == null)
         {
             fetchAnimalModel();
 
-            Set <GeneDelivery>geneDeliverySet = myAnimalModel.getGeneDeliveryCollection();
-            Iterator <GeneDelivery> geneDeliveryIter = geneDeliverySet.iterator();
+            Set<GeneDelivery> geneDeliverySet = myAnimalModel.getGeneDeliveryCollection();
+            Iterator<GeneDelivery> geneDeliveryIter = geneDeliverySet.iterator();
             myGene = "";
-            
+
             while (geneDeliveryIter.hasNext())
             {
                 GeneDelivery geneDelivery = (GeneDelivery) geneDeliveryIter.next();
                 myGene += geneDelivery.getDisplayName() + "<br>";
-                
+
             }
         }
         return myGene;
     }
-    
-    public String getGrowthFactor() throws Exception 
+
+    /**
+     * Return the Years of Publication for all publications. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Years of Publication for all publications for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getYearOfPublication() throws Exception
     {
-        if ( myGrowthFactor == null )
+        if (myYearOfPublication == null)
         {
             fetchAnimalModel();
-        }
-        return myGrowthFactor;
-    }
-    
-    public String getHormone() throws Exception 
-    {
-        if ( myHormone == null )
-        {
-            fetchAnimalModel();
-        }
-        return myHormone;
-    }
-    
-    public String getNutritionalFactor() throws Exception 
-    {
-        if ( myNutritionalFactor == null )
-        {
-            fetchAnimalModel();
-        }
-        return myNutritionalFactor;
-    }
-    
-    public String getRadiation() throws Exception 
-    {
-        if ( myRadiation == null )
-        {
-            fetchAnimalModel();
-        }
-        return myRadiation;
-    }
-    
-    public String getVirus() throws Exception 
-    {
-        if ( myVirus == null )
-        {
-            fetchAnimalModel();
-        }
-        return myVirus;
-    }
-    
-    public String getYearOfPublication() throws Exception 
-    {
-        if ( myYearOfPublication == null )
-        {
-            fetchAnimalModel();
-            
+
             Set pubSet = myAnimalModel.getPublicationCollection();
             Iterator pubSetIter = pubSet.iterator();
             myYearOfPublication = "";
-            
+
             while (pubSetIter.hasNext())
             {
                 Publication pub = (Publication) pubSetIter.next();
-                myYearOfPublication += pub.getYear() + "<br>";                
-            }            
+                myYearOfPublication += pub.getYear() + "<br>";
+            }
         }
         return myYearOfPublication;
     }
-    
-    public String getJournal() throws Exception 
+
+    /**
+     * Return the Journal names of Publication for all publications. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Journal names of Publication for all publications for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getJournal() throws Exception
     {
-        if ( myJournal == null )
+        if (myJournal == null)
         {
             fetchAnimalModel();
-            
+
             Set pubSet = myAnimalModel.getPublicationCollection();
             Iterator pubSetIter = pubSet.iterator();
             myJournal = "";
-            
+
             while (pubSetIter.hasNext())
             {
                 Publication pub = (Publication) pubSetIter.next();
-                myJournal += pub.getJournal() + "<br>";                
-            }  
+                myJournal += pub.getJournal() + "<br>";
+            }
         }
         return myJournal;
     }
-    
-    public String getPMIDNumber() throws Exception 
+
+    /**
+     * Return the links to the PMID Numbers of Publication for all publications. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the links to the PMID Numbers of Publication for all publications for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getPMIDNumber() throws Exception
     {
-        if ( myPMIDNumber == null )
+        if (myPMIDNumber == null)
         {
             fetchAnimalModel();
-            
+
             Set pubSet = myAnimalModel.getPublicationCollection();
             Iterator pubSetIter = pubSet.iterator();
             myPMIDNumber = "";
-            
+
             while (pubSetIter.hasNext())
             {
                 Publication pub = (Publication) pubSetIter.next();
-                myPMIDNumber += "<a target=\"_pubmed\" href=\" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=" + pub.getPmid() + "\">" + pub.getPmid() + "</a><br>";                
-            }  
+                myPMIDNumber += "<a target=\"_pubmed\" href=\" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=" + pub.getPmid() + "\">" + pub.getPmid() + "</a><br>";
+            }
         }
         return myPMIDNumber;
     }
 
-    public String getPublications() throws Exception 
+    /**
+     * Return the All details for all publications. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the All details for all publications for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getPublications() throws Exception
     {
-        if ( myPublications == null )
+        if (myPublications == null)
         {
             fetchAnimalModel();
-            
+
             Set pubSet = myAnimalModel.getPublicationCollection();
             Iterator pubSetIter = pubSet.iterator();
             myPublications = "";
-            
+
             while (pubSetIter.hasNext())
             {
                 Publication pub = (Publication) pubSetIter.next();
-                myPublications += pub.getJournal() + "(" + pub.getYear() +") " + "<a target=\"_pubmed\" href=\" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=" + pub.getPmid() + "\">" + pub.getPmid() + "</a><br>";                
-            }  
+                myPublications += pub.getJournal() + "(" + pub.getYear() + ") " + "<a target=\"_pubmed\" href=\" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=" + pub.getPmid() + "\">" + pub.getPmid() + "</a><br>";
+            }
         }
         return myPublications;
     }
-    
-    public String getSiteOfLesionTumor() throws Exception 
+
+    /**
+     * Return the Site of Lesion Tumor. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Site of Lesion Tumor for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getSiteOfLesionTumor() throws Exception
     {
-        if ( mySiteOfLesionTumor == null )
+        if (mySiteOfLesionTumor == null)
         {
             fetchAnimalModel();
-                        
-            Set <Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
-            Iterator <Histopathology> hisSetIter = hisSet.iterator();
+
+            Set<Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
+            Iterator<Histopathology> hisSetIter = hisSet.iterator();
             mySiteOfLesionTumor = "";
-            
-            while ( hisSetIter.hasNext() )
+
+            while (hisSetIter.hasNext())
             {
                 Histopathology his = (Histopathology) hisSetIter.next();
-                mySiteOfLesionTumor += his.getOrgan().getName() + "<br>";                
-            }              
+                mySiteOfLesionTumor += his.getOrgan().getName() + "<br>";
+            }
         }
         return mySiteOfLesionTumor;
     }
-    
-    public String getDiagnosis() throws Exception 
+
+    /**
+     * Return the Diagnosis. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Diagnosis for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getDiagnosis() throws Exception
     {
-        if ( myDiagnosis == null )
+        if (myDiagnosis == null)
         {
             fetchAnimalModel();
-            
-            Set <Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
-            Iterator <Histopathology> hisSetIter = hisSet.iterator();
+
+            Set<Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
+            Iterator<Histopathology> hisSetIter = hisSet.iterator();
             myDiagnosis = "";
-            
-            while ( hisSetIter.hasNext() )
+
+            while (hisSetIter.hasNext())
             {
                 Histopathology his = (Histopathology) hisSetIter.next();
-                myDiagnosis += his.getDisease().getName() + "<br>";                
-            }              
+                myDiagnosis += his.getDisease().getName() + "<br>";
+            }
         }
         return myDiagnosis;
     }
-    
-    public String getAgeOfOnset() throws Exception 
+
+    /**
+     * Return the Age of Onset. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Age of Onset for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getAgeOfOnset() throws Exception
     {
-        if ( myAgeOfOnset == null )
+        if (myAgeOfOnset == null)
         {
             fetchAnimalModel();
-            Set <Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
-            Iterator <Histopathology> hisSetIter = hisSet.iterator();
+            Set<Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
+            Iterator<Histopathology> hisSetIter = hisSet.iterator();
             myAgeOfOnset = "";
-            
-            while ( hisSetIter.hasNext() )
+
+            while (hisSetIter.hasNext())
             {
                 Histopathology his = (Histopathology) hisSetIter.next();
-                if (  his.getAgeOfOnset() != null )
+                if (his.getAgeOfOnset() != null)
+                {
                     myAgeOfOnset += his.getAgeOfOnset();
-                if( his.getAgeOfOnsetUnit() != null )
+                }
+                if (his.getAgeOfOnsetUnit() != null)
+                {
                     myAgeOfOnset += " " + his.getAgeOfOnsetUnit();
-                
+                }
+
                 myAgeOfOnset += "<br>";
-            }             
+            }
         }
         return myAgeOfOnset;
     }
-    
-    public String getTumorIncidenceOverLifetime() throws Exception 
+
+    /**
+     * Return the Tumor Incidence Over Lifetime. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Tumor Incidence over lifetime for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getTumorIncidenceOverLifetime() throws Exception
     {
-        if ( myTumorIncidenceOverLifetime == null )
+        if (myTumorIncidenceOverLifetime == null)
         {
             fetchAnimalModel();
-            Set <Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
-            Iterator <Histopathology> hisSetIter = hisSet.iterator();
+            Set<Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
+            Iterator<Histopathology> hisSetIter = hisSet.iterator();
             myTumorIncidenceOverLifetime = "";
-            
-            while ( hisSetIter.hasNext() )
+
+            while (hisSetIter.hasNext())
             {
                 Histopathology his = (Histopathology) hisSetIter.next();
-                if (  his.getTumorIncidenceRate() != null )
-                    myTumorIncidenceOverLifetime += his.getTumorIncidenceRate() + "<br>";                
-            }               
+                if (his.getTumorIncidenceRate() != null)
+                {
+                    myTumorIncidenceOverLifetime += his.getTumorIncidenceRate() + "<br>";
+                }
+            }
         }
         return myTumorIncidenceOverLifetime;
     }
-    
-    public String getSiteAndDiagnosisOfMetastasis() throws Exception 
+
+    /**
+     * Return the Site and diagnosis of metastasis. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Site and diagnosis of metastasis for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getSiteAndDiagnosisOfMetastasis() throws Exception
     {
-        if ( mySiteAndDiagnosisOfMetastasis == null )
+        if (mySiteAndDiagnosisOfMetastasis == null)
         {
             fetchAnimalModel();
-            Set <Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
-            Iterator <Histopathology> hisSetIter = hisSet.iterator();
+            Set<Histopathology> hisSet = myAnimalModel.getHistopathologyCollection();
+            Iterator<Histopathology> hisSetIter = hisSet.iterator();
             mySiteAndDiagnosisOfMetastasis = "";
-            
-            while ( hisSetIter.hasNext() )
+
+            while (hisSetIter.hasNext())
             {
                 Histopathology his = (Histopathology) hisSetIter.next();
                 Set<Histopathology> metSet = his.getMetastasisCollection();
-                Iterator<Histopathology> metSetIter =  metSet.iterator();                    
-                
-                while ( metSetIter.hasNext() ){
+                Iterator<Histopathology> metSetIter = metSet.iterator();
+
+                while (metSetIter.hasNext())
+                {
                     Histopathology met = (Histopathology) metSetIter.next();
                     mySiteAndDiagnosisOfMetastasis += met.getDisease().getName() + " (" + met.getOrgan().getName() + ")" + "<br>";
                 }
-            }             
+            }
         }
         return mySiteAndDiagnosisOfMetastasis;
     }
-    
-    public String getDrugCompoundName() throws Exception 
+
+    /**
+     * Return the drug compound name. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the drug compund name for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getDrugCompoundName() throws Exception
     {
-        if ( myDrugCompoundName == null )
+        if (myDrugCompoundName == null)
         {
             fetchAnimalModel();
-            Set <Therapy> set = myAnimalModel.getTherapyCollection();
-            Iterator <Therapy> setIter = set.iterator();
+            Set<Therapy> set = myAnimalModel.getTherapyCollection();
+            Iterator<Therapy> setIter = set.iterator();
             myDrugCompoundName = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
                 Therapy it = (Therapy) setIter.next();
-                if (  it.getTreatment() != null ) {
-                     if ( it.getTreatment().getAdministrativeRoute() != null )   
+                if (it.getTreatment() != null)
+                {
+                    if (it.getTreatment().getAdministrativeRoute() != null)
+                    {
                         myDrugCompoundName += it.getTreatment().getAdministrativeRoute() + "<br>";
-                     else
+                    }
+                    else
+                    {
                         myDrugCompoundName += it.getTreatment().getAdminRouteUnctrlVocab() + "<br>";
+                    }
                 }
-            }   
+            }
         }
         return myDrugCompoundName;
     }
-    
-    public String getNameOfCellLine() throws Exception 
+
+    /**
+     * Return the Name of cell line. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Name of cell line for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getNameOfCellLine() throws Exception
     {
-        if ( myNameOfCellLine == null )
+        if (myNameOfCellLine == null)
         {
             fetchAnimalModel();
-            Set <CellLine> set = myAnimalModel.getCellLineCollection();
-            Iterator <CellLine> setIter = set.iterator();
+            Set<CellLine> set = myAnimalModel.getCellLineCollection();
+            Iterator<CellLine> setIter = set.iterator();
             myNameOfCellLine = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
                 CellLine it = (CellLine) setIter.next();
-                if (  it.getName() != null )
+                if (it.getName() != null)
+                {
                     myNameOfCellLine += it.getName() + "<br>";
-            }   
+                }
+            }
         }
         return myNameOfCellLine;
-    }    
-    
-    public String getOrganTissue() throws Exception 
+    }
+
+    /**
+     * Return the Organ Tissue. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Organ Tissue for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getOrganTissue() throws Exception
     {
-        if ( myOrganTissue == null )
+        if (myOrganTissue == null)
         {
             fetchAnimalModel();
-            Set <CellLine> set = myAnimalModel.getCellLineCollection();
-            Iterator <CellLine> setIter = set.iterator();
+            Set<CellLine> set = myAnimalModel.getCellLineCollection();
+            Iterator<CellLine> setIter = set.iterator();
             myOrganTissue = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
                 CellLine it = (CellLine) setIter.next();
-                if (  it.getOrgan() != null )
+                if (it.getOrgan() != null)
+                {
                     myOrganTissue += it.getOrgan().getName() + "<br>";
-            }   
+                }
+            }
         }
         return myOrganTissue;
-    }    
-    
-    public String getImageTitle() throws Exception 
+    }
+
+    /**
+     * Return the Image Titles. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the image titles for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getImageTitle() throws Exception
     {
-        if ( myImageTitle == null )
+        if (myImageTitle == null)
         {
             fetchAnimalModel();
-            Set <Image> set = myAnimalModel.getImageCollection();
-            Iterator <Image> setIter = set.iterator();
+            Set<Image> set = myAnimalModel.getImageCollection();
+            Iterator<Image> setIter = set.iterator();
             myImageTitle = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
                 Image it = (Image) setIter.next();
-                
+
                 myImageTitle += "<IMG src=\"/camod/images/image.gif\"> ";
-                if (  it.getTitle() != null )
+                if (it.getTitle() != null)
+                {
                     myImageTitle += it.getTitle();
-                
+                }
+
                 myImageTitle += "<br>";
-            }              
+            }
         }
         return myImageTitle;
-    }    
-    
-    public String getDistributor() throws Exception 
+    }
+
+    /**
+     * Return the distributors. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the distributors for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getDistributor() throws Exception
     {
-        if ( myDistributor == null )
+        if (myDistributor == null)
         {
             fetchAnimalModel();
-            Set <AnimalAvailability> set = myAnimalModel.getAnimalAvailabilityCollection();
-            Iterator <AnimalAvailability> setIter = set.iterator();
+            Set<AnimalAvailability> set = myAnimalModel.getAnimalAvailabilityCollection();
+            Iterator<AnimalAvailability> setIter = set.iterator();
             myDistributor = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
-                AnimalAvailability it = (AnimalAvailability) setIter.next();                
-                if (  it.getAnimalDistributor() != null )
-                    myDistributor += it.getAnimalDistributor().getName() + "<br>";                
-            }                  
+                AnimalAvailability it = (AnimalAvailability) setIter.next();
+                if (it.getAnimalDistributor() != null)
+                {
+                    myDistributor += it.getAnimalDistributor().getName() + "<br>";
+                }
+            }
         }
         return myDistributor;
-    }    
-    
-    public String getCellLine() throws Exception 
+    }
+
+    /**
+     * Return the Cell Lines. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Cell lines for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getCellLine() throws Exception
     {
-        if ( myCellLine == null )
+        if (myCellLine == null)
         {
             fetchAnimalModel();
-            Set <Xenograft> set = myAnimalModel.getXenograftCollection();
-            Iterator <Xenograft> setIter = set.iterator();
+            Set<Xenograft> set = myAnimalModel.getXenograftCollection();
+            Iterator<Xenograft> setIter = set.iterator();
             myCellLine = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
-                Xenograft it = (Xenograft) setIter.next();                
-                if (  it.getParentalCellLineName() != null )
-                    myCellLine += it.getParentalCellLineName() + "<br>";                
-            }                 
+                Xenograft it = (Xenograft) setIter.next();
+                if (it.getParentalCellLineName() != null)
+                {
+                    myCellLine += it.getParentalCellLineName() + "<br>";
+                }
+            }
         }
         return myCellLine;
-    }    
-    
-    public String getDonorSpecies() throws Exception 
+    }
+
+    /**
+     * Return the Donor species. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Donor Species for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getDonorSpecies() throws Exception
     {
-        if ( myDonorSpecies == null )
+        if (myDonorSpecies == null)
         {
             fetchAnimalModel();
-            Set <Xenograft> set = myAnimalModel.getXenograftCollection();
-            Iterator <Xenograft> setIter = set.iterator();
+            Set<Xenograft> set = myAnimalModel.getXenograftCollection();
+            Iterator<Xenograft> setIter = set.iterator();
             myDonorSpecies = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
-                Xenograft it = (Xenograft) setIter.next();                
-                if (  it.getDonorSpecies() != null )
-                    if ( it.getDonorSpecies().getCommonName() != null )
-                        myDonorSpecies += it.getDonorSpecies().getCommonName() + "<br>";
-                    else
-                        myDonorSpecies += it.getDonorSpecies().getCommonNameUnctrlVocab() + "<br>";
-            }               
+                Xenograft it = (Xenograft) setIter.next();
+                if (it.getDonorSpecies() != null)
+                {
+                    if (it.getDonorSpecies().getDisplayName() != null)
+                    {
+                        myDonorSpecies += it.getDonorSpecies().getDisplayName() + "<br>";
+                    }
+                }
+            }
         }
         return myDonorSpecies;
-    }   
-    
-    public String getGraftType() throws Exception 
+    }
+
+    /**
+     * Return the Graft Types. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Graft Types for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getGraftType() throws Exception
     {
-        if ( myGraftType == null )
+        if (myGraftType == null)
         {
             fetchAnimalModel();
-            Set <Xenograft> set = myAnimalModel.getXenograftCollection();
-            Iterator <Xenograft> setIter = set.iterator();
+            Set<Xenograft> set = myAnimalModel.getXenograftCollection();
+            Iterator<Xenograft> setIter = set.iterator();
             myGraftType = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
-                Xenograft it = (Xenograft) setIter.next();                
-                if (  it.getGraftType() != null )
+                Xenograft it = (Xenograft) setIter.next();
+                if (it.getGraftType() != null)
+                {
                     myGraftType += it.getGraftType() + "<br>";
-                
-                if ( it.getGraftTypeUnctrlVocab() != null )
+                }
+
+                if (it.getGraftTypeUnctrlVocab() != null)
+                {
                     myGraftType += it.getGraftTypeUnctrlVocab() + "<br>";
-            }               
+                }
+            }
         }
         return myGraftType;
-    }    
-    
-    public String getMicroarray() throws Exception 
+    }
+
+    /**
+     * Return the Microarray details. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the Microarray details for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getMicroarray() throws Exception
     {
-        if ( myMicroarray == null )
+        if (myMicroarray == null)
         {
             fetchAnimalModel();
-            Set <MicroArrayData> set = myAnimalModel.getMicroArrayDataCollection();
-            Iterator <MicroArrayData> setIter = set.iterator();
+            Set<MicroArrayData> set = myAnimalModel.getMicroArrayDataCollection();
+            Iterator<MicroArrayData> setIter = set.iterator();
             myMicroarray = "";
-            
-            while ( setIter.hasNext() )
+
+            while (setIter.hasNext())
             {
-                MicroArrayData it = (MicroArrayData) setIter.next(); 
+                MicroArrayData it = (MicroArrayData) setIter.next();
                 myMicroarray += "<IMG src=\"/camod/images/table_multiple.png\"> ";
-                if (  it.getExperimentName() != null )
+                if (it.getExperimentName() != null)
+                {
                     myMicroarray += it.getExperimentName() + "<br>";
-                
-            }               
+                }
+
+            }
         }
         return myMicroarray;
-    }    
-    
+    }
+
     /**
      * Return the species. It will fetch the animal model from the DB if it
      * hasn't already happened.
@@ -1012,11 +1235,11 @@ public class AnimalModelSearchResult implements Comparable
      * @throws Exception
      */
     public String getSpecies() throws Exception
-    {        
+    {
         if (mySpecies == null)
         {
             fetchAnimalModel();
-            mySpecies = myAnimalModel.getStrain().getSpecies().getScientificName();
+            mySpecies = myAnimalModel.getStrain().getSpecies().getDisplayName();
         }
         return mySpecies;
     }
@@ -1029,7 +1252,7 @@ public class AnimalModelSearchResult implements Comparable
      * @throws Exception
      */
     public String getStrain() throws Exception
-    {        
+    {
         if (myStrain == null)
         {
             fetchAnimalModel();
@@ -1037,7 +1260,7 @@ public class AnimalModelSearchResult implements Comparable
         }
         return myStrain;
     }
-    
+
     /**
      * Return the list of tumor sites. It will fetch the animal model from the
      * DB if it hasn't already happened.
@@ -1074,14 +1297,15 @@ public class AnimalModelSearchResult implements Comparable
                 Set theMetastasisSet = theHistopathology.getMetastasisCollection();
                 it = theMetastasisSet.iterator();
 
-                while(it.hasNext()){
-                    Histopathology theMetastasis = (Histopathology)it.next();
+                while (it.hasNext())
+                {
+                    Histopathology theMetastasis = (Histopathology) it.next();
                     String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
                     if (!theMetaSet.contains(theMetaOrgan))
                     {
                         theMetaSet.add(theMetaOrgan);
                     }
-                }                
+                }
 
             }
 
@@ -1126,19 +1350,8 @@ public class AnimalModelSearchResult implements Comparable
         {
             fetchAnimalModel();
 
-            String theEmailAddress = null;
-            
-            if (myAnimalModel.getSubmitter() != null ) 
-            {
-                Set contactInfoList = myAnimalModel.getSubmitter().getContactInfoCollection();          
-                Iterator contactInfoIter = contactInfoList.iterator();                       
-                
-                while ( contactInfoIter.hasNext() ){
-                    ContactInfo contact = (ContactInfo) contactInfoIter.next();                        
-                    theEmailAddress = contact.getEmail();
-                }            
-            }
-            
+            String theEmailAddress = myAnimalModel.getSubmitter().getEmailAddress();
+
             if (theEmailAddress.length() > 0)
             {
                 mySubmitterName = "<a href=\"mailto:" + theEmailAddress + "\"/>" + myAnimalModel.getSubmitter().getDisplayName();

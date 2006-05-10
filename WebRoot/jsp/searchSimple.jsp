@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.23 2006-05-03 19:05:39 georgeda Exp $
+ * $Id: searchSimple.jsp,v 1.24 2006-05-10 14:22:59 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/05/03 19:05:39  georgeda
+ * Move to new EVSTree
+ *
  * Revision 1.22  2006/04/28 19:39:56  schroedn
  * Defect # 261
  * Made changes so the organ and diagnosis save differently and can be retained for SaveQuery
@@ -18,7 +21,7 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
-<%@ page import="gov.nih.nci.camod.service.QueryStorageManager" %>
+<%@ page import="gov.nih.nci.camod.service.SavedQueryManager" %>
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
 <%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
 
@@ -30,41 +33,11 @@
 <SCRIPT language="JavaScript" src="scripts/global.js"></script>
 <SCRIPT language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
-<SCRIPT>
-    function blankKeyword() {
-        document.searchForm.keyword.value = '';
-    }
-</SCRIPT>
-
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function blankKeyword() {
         document.searchForm.keyword.value = '';
     }
-	
-	function checkFields() {
-	
-	    // Do the CI fields
-		theCIFlag = document.searchForm.searchCarcinogenicInterventions[0];
-		toggleField(theCIFlag, document.searchForm.chemicalDrug);
-		toggleField(theCIFlag, document.searchForm.growthFactor);
-		toggleField(theCIFlag, document.searchForm.hormone);
-		toggleField(theCIFlag, document.searchForm.radiation);
-		toggleField(theCIFlag, document.searchForm.viral);
-		toggleField(theCIFlag, document.searchForm.surgery);
-		
-		theTargModFlag = document.searchForm.targetedModification[0];
-		theEndTransGeneFlag = document.searchForm.engineeredTransgene[0];
-		
-		if (theTargModFlag.checked == true || theEndTransGeneFlag.checked == true) {
-		    enableField(document.searchForm.geneName);
-		}
-		else {
-		    disableField(document.searchForm.geneName);
-		}
-		
-		toggleField(document.searchForm.searchTherapeuticApproaches[0], document.searchForm.therapeuticApproach);
-	}
 	
 	function enableOrgan() {
 		document.searchForm.organ.disabled = false;
@@ -73,8 +46,7 @@
 </SCRIPT>
 
 <%
-	//Display search criteria of executed search
-	//SavedQuery inQuery = (SavedQuery) request.getSession().getAttribute( Constants.SEARCH_QUERY );		
+	//Display search criteria of executed search		
 	String aSavedQueryId = (String) request.getSession().getAttribute( Constants.ASAVEDQUERYID );		
 	String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );		
 %>
@@ -188,9 +160,5 @@
 				
 </td></tr>
 </TABLE>
-
-<SCRIPT LANGUAGE="JavaScript">
-    checkFields();
-</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
