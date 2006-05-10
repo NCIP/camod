@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.17 2006-05-10 15:37:23 schroedn Exp $
+ * $Id: searchResults.jsp,v 1.18 2006-05-10 18:03:00 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/05/10 15:37:23  schroedn
+ * Fixed Dup_Name bug
+ *
  * Revision 1.16  2006/05/10 14:22:10  schroedn
  * New Features - Changes from code review
  *
@@ -29,6 +32,7 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.SearchForm" %>
 <%@ page import="gov.nih.nci.camod.webapp.form.SaveQueryForm" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.lang.Float" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%      
@@ -94,10 +98,13 @@
 	
 	<%							
 		request.getSession().setAttribute( Constants.DUP_NAME, "false" );
-				
-		// Get elapsed time in seconds
-		float elapsedTime = ( (Long) request.getSession().getAttribute( Constants.ELAPSED_TIME )).floatValue();
-	    float elapsedTimeSec = elapsedTime/1000;
+			
+		// Get elapsed time in seconds	
+		float elapsedTimeSec = 0;
+		if ( (Long) request.getSession().getAttribute( Constants.ELAPSED_TIME ) != null )
+		{		
+			elapsedTimeSec = ( (Long) request.getSession().getAttribute( Constants.ELAPSED_TIME )).floatValue()/1000;
+		} 				
 	%>
 
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -112,8 +119,7 @@
 					<TR>
 						<TD class="formFieldAll"><c:out value="${criteriaTable}" escapeXml="false"/></TD>
 					</TR>
-				</TABLE>								
-				
+				</TABLE>												
 				
 			    <c:if test="${ dupName == 'true' }">
 					<TABLE border="0" class="contentPage" width="100%">
