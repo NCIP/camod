@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.84 2006-05-10 13:28:51 schroedn Exp $
+ * $Id: Constants.java,v 1.85 2006-05-10 15:37:36 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.84  2006/05/10 13:28:51  schroedn
+ * New Features - Code Review changes
+ *
  * Revision 1.83  2006/05/09 18:45:47  georgeda
  * Changes for searching on transient interfaces
  *
@@ -625,6 +628,8 @@ public class Constants {
     public static final String SEARCH_RESULTS = "searchResults";
     
     public static final String DUP_NAME = "dupname";
+    
+    public static final String DUP_NAME_VALUE =  "dupnamevalue";
     
     public static final String QUERY_NAME = "queryname";
     

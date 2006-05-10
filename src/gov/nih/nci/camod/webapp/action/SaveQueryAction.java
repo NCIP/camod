@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SaveQueryAction.java,v 1.2 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: SaveQueryAction.java,v 1.3 2006-05-10 15:37:11 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.1  2006/04/28 19:26:58  schroedn
  * Defect # 261
  * Saves / Updates / Deletes SaveQuery items
@@ -112,7 +115,8 @@ public class SaveQueryAction extends BaseAction
                         
                         duplicateName = true;
                         request.getSession().setAttribute(Constants.DUP_NAME, "true");
-                        request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");                       
+                        request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");
+                        request.getSession().setAttribute(Constants.DUP_NAME_VALUE, theForm.getQueryName() );
                         theForward = "next";
                     }
                 }

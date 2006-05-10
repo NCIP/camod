@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.16 2006-05-10 14:22:10 schroedn Exp $
+ * $Id: searchResults.jsp,v 1.17 2006-05-10 15:37:23 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/05/10 14:22:10  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.15  2006/04/28 19:39:21  schroedn
  * Defect # 261, 238
  * Many changes, displays any search result column user has setup, options to save/update Query
@@ -68,7 +71,11 @@
 	<logic:present name="<%=Constants.DUP_NAME%>">
 		<bean:define id="dupName" name="<%=Constants.DUP_NAME%>" />
 	</logic:present>	
-	
+
+	<logic:present name="<%=Constants.DUP_NAME_VALUE%>">
+		<bean:define id="dupNameValue" name="<%=Constants.DUP_NAME_VALUE%>" />
+	</logic:present>	
+			
 	<logic:present name="<%=Constants.QUERY_NAME%>">
 		<bean:define id="aQueryName" name="<%=Constants.QUERY_NAME%>" />
 	</logic:present>
@@ -86,18 +93,8 @@
 	</logic:present>
 	
 	<%							
-		//Check If this was a edited and resubmitted query
-		//String aSavedQueryId = (String) request.getSession().getAttribute( Constants.ASAVEDQUERYID );
-		//String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );
-		//String reRunQuery = (String) request.getSession().getAttribute( Constants.RERUN_QUERY );
-		//String dupName = (String) request.getSession().getAttribute( Constants.DUP_NAME );
-		
-		//Check to see if a user is logged in, if not do not allow saving of queries
-		//String currentUser = (String) request.getSession().getAttribute( Constants.CURRENTUSER );
-		
 		request.getSession().setAttribute( Constants.DUP_NAME, "false" );
-		//request.getSession().setAttribute( Constants.NOSAVEOPTION, "false" );
-		
+				
 		// Get elapsed time in seconds
 		float elapsedTime = ( (Long) request.getSession().getAttribute( Constants.ELAPSED_TIME )).floatValue();
 	    float elapsedTimeSec = elapsedTime/1000;
@@ -122,7 +119,7 @@
 					<TABLE border="0" class="contentPage" width="100%">
 						<TR>
 							<TD align="left" colspan="2" width="100%">
-								<font color="red">*The name "<c:out value="${aQueryName}" escapeXml="false"/>" is already being used, please choose a different name.</font><br>
+								<font color="red">*The name "<c:out value="${dupNameValue}" escapeXml="false"/>" is already being used, please choose a different name.</font><br>
 						    </TD>
 						</TR>
 					</TABLE>	
