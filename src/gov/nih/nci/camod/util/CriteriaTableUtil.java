@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.1 2006-05-10 14:15:06 schroedn Exp $
+ * $Id: CriteriaTableUtil.java,v 1.2 2006-05-10 16:38:33 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/10 14:15:06  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.1  2006/04/28 19:22:31  schroedn
  * Defect # 261
  * Builds a HTML table the list of criteria to display on the search results jsp page
@@ -205,7 +208,7 @@ public class CriteriaTableUtil
         // Search for therapeutic approaches
         if (sData.isSearchTherapeuticApproaches())
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTherapeuticApproaches") + "</td><td class=\"formFieldNone\">" + "checked" + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTherapeuticApproaches") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
 
         // Search for therapeutic approach
@@ -220,19 +223,25 @@ public class CriteriaTableUtil
         // Search for metastasis
         if (sData.isSearchHistoMetastasis())
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchHistoMetastasis") + "</td><td class=\"formFieldNone\">" + "checked" + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchHistoMetastasis") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
 
         // Search for microarray data
         if (sData.isSearchMicroArrayData())
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchMicroArrayData") + "</td><td class=\"formFieldNone\">" + "checked" + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchMicroArrayData") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
-
+        
+        // Search for Transient Interface data
+        if (sData.isSearchTransientInterference())
+        {
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTransientInterference") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
+        }
+        
         // Search for xenograft
         if (sData.isSearchXenograft())
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchXenograft") + "</td><td class=\"formFieldNone\">" + "checked" + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchXenograft") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
 
         theDisplayTable += "</TABLE>";

@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.1 2006-05-10 14:14:33 schroedn Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.2 2006-05-10 16:38:42 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/10 14:14:33  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.1  2006/04/28 19:20:14  schroedn
  * Defect #238, 261
  * Search Result Columns and Saving Queries manager Impl
@@ -223,7 +226,15 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
                     inSearchForm.setSearchMicroArrayData(true);
                 }
             }
-
+            
+            if (theSavedQueryAttribute.getAttributeName().equals(theBundle.getString("criteria.isSearchTransientInterference")))
+            {
+                if (theSavedQueryAttribute.getAttributeValue().equals("true"))
+                {
+                    inSearchForm.setSearchTransientInterference(true);
+                }
+            }
+            
             if (theSavedQueryAttribute.getAttributeName().equals(theBundle.getString("criteria.isSearchXenograft")))
             {
                 if (theSavedQueryAttribute.getAttributeValue().equals("true"))
@@ -490,7 +501,16 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             sqa.setAttributeValue("true");
             criteriaList.add(sqa);
         }
-
+        
+        // Is it a Transient Interface
+        if (inSearchData.isSearchTransientInterference() == true)
+        {
+            SavedQueryAttribute sqa = new SavedQueryAttribute();
+            sqa.setAttributeName(theBundle.getString("criteria.isSearchTransientInterference"));
+            sqa.setAttributeValue("true");
+            criteriaList.add(sqa);
+        }
+        
         // Is it a microarray data
         if (inSearchData.isSearchMicroArrayData() == true)
         {
@@ -499,7 +519,7 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             sqa.setAttributeValue("true");
             criteriaList.add(sqa);
         }
-
+        
         // Is it a xenograft
         if (inSearchData.isSearchXenograft() == true)
         {
