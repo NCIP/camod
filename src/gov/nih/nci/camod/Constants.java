@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.83 2006-05-09 18:45:47 georgeda Exp $
+ * $Id: Constants.java,v 1.84 2006-05-10 13:28:51 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.83  2006/05/09 18:45:47  georgeda
+ * Changes for searching on transient interfaces
+ *
  * Revision 1.82  2006/05/04 14:15:33  pandyas
  * Modified/Added to support Morpholino object data in the application
  *
@@ -220,6 +223,18 @@ public class Constants {
     public static final String SEARCHRESULTCOLUMNS = "SearchResultsColumns";        
       
     public static final String ITEMSPERPAGE = "ItemsPerPage";
+    
+    public static final int ITEMSPERPAGEDEFAULT = 15;
+    
+    public static final String[] SEARCHRESULTCOLUMNSDEFAULT = { "Model Descriptor", "Tumor Sites", "Species"  }; 
+    
+    public static final String SELECTEDSEARCHRESULTCOLUMNS = "selectedsearchresultcolumns";
+    
+    public static final String CRITERIATABLE = "criteriatable";
+    
+    public static final String NOSAVEOPTION = "nosaveoption";
+        
+    
     /**
      * Used to store list of models currently logged on user has previous
      * entered
@@ -278,8 +293,36 @@ public class Constants {
         public static final String TOC_QUERY_FILE = "config/TOCQueryConfig.xml";
 
         public static final String TOC_QUERY_RESULTS = "TOC_QUERY_RESULTS";
+
     }
 
+    /**
+     * 
+     * Used in AnimalModelSearchResult
+     *
+     */
+    public interface ENVFactors {
+        
+        public static final String TRANSCRIPTIONAL1 = "Transcriptional 1"; 
+        
+        public static final String CHEMICAL_DRUG = "Chemical / Drug";
+        
+        public static final String HORMONE = "Hormone";
+        
+        public static final String GROWTH_FACTOR = "Growth Factor";
+        
+        public static final String VIRAL = "Viral";
+        
+        public static final String ENVIRONMOENT = "Environment";
+        
+        public static final String NUTRITION = "Nutrition";
+        
+        public static final String VIRUS = "Virus";
+        
+        public static final String OTHER = "Other";
+        
+    }
+    
     /**
      * Used to store lists for drop down menus
      */
@@ -390,8 +433,8 @@ public class Constants {
 
         public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
-        public static final String EXPRESSIONLEVEL = "expressionlevel.db";
-        
+        public static final String EXPRESSIONLEVELDROP = "expressionlevel.db";
+
         // Morpholino screen dropdowns
         public static final String MORPHOSOURCEDROP = "MorpholinoSources.txt";
         
@@ -402,13 +445,10 @@ public class Constants {
         public static final String DELIVERYMETHODSOURCEDROP = "DeliveryMethods.txt";
         
         public static final String VISUALLIGANDSDROP = "VisualLigands.txt";
+                
+        public static final String SEARCHRESULTCOLUMNSDROP = "SearchResultsColumns.txt";        
         
-        
-        
-
-        public static final String SEARCHRESULTCOLUMNS = "SearchResultsColumns.txt";        
-        
-        public static final String ITEMSPERPAGE = "ItemsPerPage.txt";
+        public static final String ITEMSPERPAGEDROP = "ItemsPerPage.txt";
         
         // Query dropdowns
         public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
@@ -451,9 +491,7 @@ public class Constants {
         public static final String USERSFORROLEDROP = "usersforrole.db";
 
         // Used for role assignment
-        public static final String ROLESDROP = "roles.db";
-        
-        public static final String SELECTEDSEARCHRESULTCOLUMNS = "selectedsearchresultcolumns";
+        public static final String ROLESDROP = "roles.db";        
       
     }
 
@@ -503,6 +541,8 @@ public class Constants {
 
         public static final String PERSONID = "aPersonID";
 
+        public static final String QUERYID = "aQueryId";
+        
         public static final String MODELSECTIONNAME = "aModelSectionName";
 
         public static final String MODELSECTIONVALUE = "modelSectionValue";
@@ -637,14 +677,23 @@ public class Constants {
     public static final String TARGETED_MOD_CNT = "targetedModCnt";
 
     public static final String INDUCED_MUT_CNT = "inducedMutCnt";
+    
     public static final String THERAPEUTIC_APPROACHES_COLL = "therapeuticApproachesColl";
+    
     public static final String CLINICAL_PROTOCOLS = "clinProtocols";
+    
     public static final String YEAST_DATA = "yeastData";
+    
     public static final String INVIVO_DATA = "invivoData";
+    
     public static final String PRECLINICAL_MODELS = "preClinicalModels";
+    
     public static final String PUBLICATIONS = "publications";
+    
     public static final String CARCINOGENIC_INTERVENTIONS_COLL = "carcinogenicInterventionColl";
+    
     public static final String DRUG_SCREEN_OPTIONS = "drugScreenSearchOptions";
+    
     public static final String NSC_NUMBER = "nsc";
     
 
