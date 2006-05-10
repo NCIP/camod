@@ -1422,7 +1422,7 @@
         </forward>  
 	    <forward
             name="failed"
-            path="/CustomizeSearchResultsPopulateAction.do">
+            path="/customizeSearchResults.do">
         </forward> 
      </action>	
 
