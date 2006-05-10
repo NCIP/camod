@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.10 2006-05-10 12:02:12 georgeda Exp $
+ * $Id: SearchForm.java,v 1.11 2006-05-10 13:39:56 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/05/10 12:02:12  georgeda
+ * Changes for searching on transient interfaces
+ *
  * Revision 1.9  2006/04/28 19:30:51  schroedn
  * Defect # 261
  * Added Tumor Classification, so to save the organ properly
@@ -166,8 +169,17 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         this.organ = organ;
     }
 
-    public String getPiName()
+    public String getTumorClassification()
     {
+        return tumorClassification;
+    }
+
+    public void setTumorClassification(String tumorClassification)
+    {
+        this.tumorClassification = tumorClassification;
+    }
+    
+    public String getPiName() {
         return piName;
     }
 
@@ -481,13 +493,8 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         keyword = null;
         piName = null;
         modelDescriptor = null;
-        organ = null;
         species = null;
-        tumorClassification = null;
-        organ = null;
-        organTissueCode = null;
-        organTissueName = null;
-
+        
         simpleSearchReset();
     }
 }
