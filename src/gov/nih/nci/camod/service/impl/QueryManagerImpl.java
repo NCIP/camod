@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.44 2006-05-10 12:00:39 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.45 2006-05-10 19:29:01 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2006/05/10 12:00:39  georgeda
+ * Changes for searching on transient interfaces, and fixed a bug from 2.1 OM change
+ *
  * Revision 1.43  2006/05/05 17:16:44  georgeda
  * Fixed one more error w/ SQL introduced during model change
  *
@@ -1300,7 +1303,7 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference(String inTransientInterference) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct m.abs_cancer_model_id " + "FROM morpholino m WHERE upper(m.targeted_region) like ?)";
+        String theSQLString = "SELECT distinct m.abs_cancer_model_id " + "FROM morpholino m WHERE upper(m.targeted_region) like ?";
 
         String theSQLTheraputicApproach = "%";
         if (inTransientInterference != null && inTransientInterference.trim().length() > 0)
