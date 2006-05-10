@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.12 2006-05-10 14:13:51 schroedn Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.13 2006-05-10 17:35:51 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/05/10 14:13:51  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.11  2006/04/28 19:05:47  schroedn
  * Defect # 238
  * Added methods to display data on search result pages for configurable search result columns
@@ -162,15 +165,19 @@ public class AnimalModelSearchResult implements Comparable
         {
             fetchAnimalModel();
 
-            String theEmailAddress = myAnimalModel.getPrincipalInvestigator().getEmailAddress();
+            // Shouldn't happen, but older models seem to have a missing PI sometimes
+            if (myAnimalModel.getPrincipalInvestigator() != null)
+            {
+                String theEmailAddress = myAnimalModel.getPrincipalInvestigator().getEmailAddress();
 
-            if (theEmailAddress.length() > 0)
-            {
-                myPrincipalInvestigatorName = "<a href=\"mailto:" + theEmailAddress + "\"/>" + myAnimalModel.getPrincipalInvestigator().getDisplayName();
-            }
-            else
-            {
-                myPrincipalInvestigatorName = myAnimalModel.getPrincipalInvestigator().getDisplayName();
+                if (theEmailAddress.length() > 0)
+                {
+                    myPrincipalInvestigatorName = "<a href=\"mailto:" + theEmailAddress + "\"/>" + myAnimalModel.getPrincipalInvestigator().getDisplayName();
+                }
+                else
+                {
+                    myPrincipalInvestigatorName = myAnimalModel.getPrincipalInvestigator().getDisplayName();
+                }
             }
         }
         return myPrincipalInvestigatorName;
@@ -266,7 +273,7 @@ public class AnimalModelSearchResult implements Comparable
                         while (regListIter.hasNext())
                         {
                             RegulatoryElement re = (RegulatoryElement) regListIter.next();
-                            if (re.getRegulatoryElementType().getName().equals( Constants.ENVFactors.TRANSCRIPTIONAL1 ))
+                            if (re.getRegulatoryElementType().getName().equals(Constants.ENVFactors.TRANSCRIPTIONAL1))
                             {
                                 myTranscriptional1 += re.getName() + "<br>";
                             }
@@ -305,7 +312,8 @@ public class AnimalModelSearchResult implements Comparable
                     {
                         GenomicSegment theGenomicSegment = (GenomicSegment) eg;
 
-                        if (theGenomicSegment.getSegmentType().getNameUnctrlVocab() == null || theGenomicSegment.getSegmentType().getNameUnctrlVocab().equals(""))
+                        if (theGenomicSegment.getSegmentType().getNameUnctrlVocab() == null || theGenomicSegment.getSegmentType().getNameUnctrlVocab().equals(
+                                                                                                                                                              ""))
                         {
                             mySegmentType += theGenomicSegment.getSegmentType().getName() + "<br>";
                         }
@@ -528,7 +536,7 @@ public class AnimalModelSearchResult implements Comparable
 
                 if (ef != null)
                 {
-                    if (ef.getType().equals( Constants.ENVFactors.CHEMICAL_DRUG ))
+                    if (ef.getType().equals(Constants.ENVFactors.CHEMICAL_DRUG))
                     {
                         if (ef.getName() != null)
                         {
@@ -550,29 +558,30 @@ public class AnimalModelSearchResult implements Comparable
                             myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.HORMONE + ") <br>";
                         }
                     }
-                    if (ef.getType().equals( Constants.ENVFactors.GROWTH_FACTOR ))
+                    if (ef.getType().equals(Constants.ENVFactors.GROWTH_FACTOR))
                     {
                         if (ef.getName() != null)
                         {
-                            myCarcinogen += ef.getName()+ " (" + Constants.ENVFactors.GROWTH_FACTOR + ") <br>";
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.GROWTH_FACTOR + ") <br>";
                         }
                         else
                         {
                             myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.GROWTH_FACTOR + ") <br>";
                         }
                     }
-                    if (ef.getType().equals( Constants.ENVFactors.VIRAL ))
+                    if (ef.getType().equals(Constants.ENVFactors.VIRAL))
                     {
                         if (ef.getName() != null)
                         {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.VIRAL + ") <br>";;
+                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.VIRAL + ") <br>";
+                            ;
                         }
                         else
                         {
                             myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.VIRAL + ") <br>";
                         }
                     }
-                    if (ef.getType().equals( Constants.ENVFactors.ENVIRONMOENT ))
+                    if (ef.getType().equals(Constants.ENVFactors.ENVIRONMOENT))
                     {
                         if (ef.getName() != null)
                         {
@@ -584,7 +593,7 @@ public class AnimalModelSearchResult implements Comparable
                         }
 
                     }
-                    if (ef.getType().equals( Constants.ENVFactors.NUTRITION ))
+                    if (ef.getType().equals(Constants.ENVFactors.NUTRITION))
                     {
                         if (ef.getName() != null)
                         {
@@ -595,7 +604,7 @@ public class AnimalModelSearchResult implements Comparable
                             myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.NUTRITION + ") <br>";
                         }
                     }
-                    if (ef.getType().equals( Constants.ENVFactors.VIRUS ))
+                    if (ef.getType().equals(Constants.ENVFactors.VIRUS))
                     {
                         if (ef.getName() != null)
                         {
@@ -606,7 +615,7 @@ public class AnimalModelSearchResult implements Comparable
                             myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.VIRUS + ") <br>";
                         }
                     }
-                    if (ef.getType().equals( Constants.ENVFactors.OTHER ))
+                    if (ef.getType().equals(Constants.ENVFactors.OTHER))
                     {
                         if (ef.getName() != null)
                         {
