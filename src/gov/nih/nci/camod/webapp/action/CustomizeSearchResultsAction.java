@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CustomizeSearchResultsAction.java,v 1.2 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: CustomizeSearchResultsAction.java,v 1.3 2006-05-10 17:09:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.1  2006/04/28 19:25:17  schroedn
  * Defect # 238
  * Saves / Updates user settings for search result columns
@@ -100,7 +103,6 @@ public class CustomizeSearchResultsAction extends BaseAction
             rSettings.setUser(personManager.getByUsername((String) request.getSession().getAttribute(Constants.CURRENTUSER)));
 
             resultSettingsManager.save(rSettings);
-
         }
         else
         {
@@ -117,7 +119,10 @@ public class CustomizeSearchResultsAction extends BaseAction
         // Print out what is being saved
         request.getSession().setAttribute(Constants.ITEMSPERPAGE, customResultsForm.getItemsPerPage());
         request.getSession().setAttribute(Constants.SEARCHRESULTCOLUMNS, customResultsForm.getSelectedColumnsToDisplay());
-
+        
+        // If the columns have changed, then we will require a new search
+        request.getSession().setAttribute( Constants.SEARCH_RESULTS, null );
+        
         // Get the attributes from the request
         String theForward = "success";
 
