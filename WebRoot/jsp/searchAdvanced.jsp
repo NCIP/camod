@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.29 2006-05-03 19:05:29 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.30 2006-05-10 12:02:47 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/05/03 19:05:29  georgeda
+ * Move to new EVSTree
+ *
  * Revision 1.28  2006/04/28 19:38:15  schroedn
  * Defect # 261
  * Made changes so the organ and diagnosis save differently and can be retained for SaveQuery
@@ -373,9 +376,21 @@
 		</tr>
 		
 		<tr>
+			<td class="formTitleBlue" height="10" colspan="3">Transient Interface</td>
+		</tr>
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel">Transient Interface</td>
+			<td class="formField">
+			    <html:checkbox property="searchTransientInterference" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchTransientInterference" value="false">
+				<label for="box1">Check here to search for models with transient interference data</label>
+			</td>
+		</tr>
+		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Microarray Data</td>
 		</tr>
-
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">Microarray Data</td>

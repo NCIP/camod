@@ -1,7 +1,54 @@
 /**
- * $Id: SearchForm.java,v 1.9 2006-04-28 19:30:51 schroedn Exp $
+ *   The caMOD Software License, Version 1.0
+ *
+ *   Copyright 2005-2006 SAIC. This software was developed in conjunction with the National Cancer
+ *   Institute, and so to the extent government employees are co-authors, any rights in such works
+ *   shall be subject to Title 17 of the United States Code, section 105.
+ *
+ *   Redistribution and use in source and binary forms, with or without modification, are permitted
+ *   provided that the following conditions are met:
+ *
+ *   1. Redistributions of source code must retain the above copyright notice, this list of conditions
+ *   and the disclaimer of Article 3, below.  Redistributions in binary form must reproduce the above
+ *   copyright notice, this list of conditions and the following disclaimer in the documentation and/or
+ *   other materials provided with the distribution.
+ *
+ *   2.  The end-user documentation included with the redistribution, if any, must include the
+ *   following acknowledgment:
+ *
+ *   "This product includes software developed by the SAIC and the National Cancer
+ *   Institute."
+ *
+ *   If no such end-user documentation is to be included, this acknowledgment shall appear in the
+ *   software itself, wherever such third-party acknowledgments normally appear.
+ *
+ *   3. The names "The National Cancer Institute", "NCI" and "SAIC" must not be used to endorse or
+ *   promote products derived from this software.
+ *
+ *   4. This license does not authorize the incorporation of this software into any third party proprietary
+ *   programs.  This license does not authorize the recipient to use any trademarks owned by either
+ *   NCI or SAIC.
+ *
+ *
+ *   5. THIS SOFTWARE IS PROVIDED "AS IS," AND ANY EXPRESSED OR IMPLIED
+ *   WARRANTIES, (INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ *   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE) ARE
+ *   DISCLAIMED.  IN NO EVENT SHALL THE NATIONAL CANCER INSTITUTE, SAIC, OR
+ *   THEIR AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ *   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ *   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+ *   OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *   
+ * $Id: SearchForm.java,v 1.10 2006-05-10 12:02:12 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/28 19:30:51  schroedn
+ * Defect # 261
+ * Added Tumor Classification, so to save the organ properly
+ *
  * Revision 1.8  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -22,8 +69,8 @@ package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-public class SearchForm extends BaseForm implements Serializable, SearchData {
-
+public class SearchForm extends BaseForm implements Serializable, SearchData
+{
     private static final long serialVersionUID = 3257045453799404851L;
 
     protected String keyword;
@@ -57,247 +104,334 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
     protected boolean searchXenograft = false;
+    protected boolean searchTransientInterference = false;
 
-    public void setHormone(String hormone) {
+    public void setHormone(String hormone)
+    {
         this.hormone = hormone;
     }
 
-    public void setGrowthFactor(String growthFactor) {
+    public void setGrowthFactor(String growthFactor)
+    {
         this.growthFactor = growthFactor;
     }
 
-    public String getChemicalDrug() {
+    public String getChemicalDrug()
+    {
         return chemicalDrug;
     }
 
-    public void setChemicalDrug(String chemicalDrug) {
+    public void setChemicalDrug(String chemicalDrug)
+    {
         this.chemicalDrug = chemicalDrug;
     }
-    
-    public String getComment() {
+
+    public String getComment()
+    {
         return comment;
     }
 
-    public void setComment(String comment) {
+    public void setComment(String comment)
+    {
         this.comment = comment;
-    }    
+    }
 
-    public String getKeyword() {
+    public String getKeyword()
+    {
         return keyword;
     }
 
-    public void setKeyword(String keyword) {
+    public void setKeyword(String keyword)
+    {
         this.keyword = keyword;
     }
 
-    public String getModelDescriptor() {
+    public String getModelDescriptor()
+    {
         return modelDescriptor;
     }
 
-    public void setModelDescriptor(String modelDescriptor) {
+    public void setModelDescriptor(String modelDescriptor)
+    {
         this.modelDescriptor = modelDescriptor;
     }
 
-    public String getOrgan() {
+    public String getOrgan()
+    {
         return organ;
     }
 
-    public void setOrgan(String organ) {
+    public void setOrgan(String organ)
+    {
         this.organ = organ;
     }
 
-    public String getPiName() {
+    public String getPiName()
+    {
         return piName;
     }
 
-    public void setPiName(String piName) {
+    public void setPiName(String piName)
+    {
         this.piName = piName;
     }
 
-    public String getSpecies() {
+    public String getSpecies()
+    {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(String species)
+    {
         this.species = species;
     }
 
-    public String getGrowthFactor() {
+    public String getGrowthFactor()
+    {
         return growthFactor;
     }
 
-    public String getHormone() {
+    public String getHormone()
+    {
         return hormone;
     }
 
-    public String getRadiation() {
+    public String getRadiation()
+    {
         return radiation;
     }
 
-    public void setRadiation(String radiation) {
+    public void setRadiation(String radiation)
+    {
         this.radiation = radiation;
     }
 
-    public String getSurgery() {
+    public String getSurgery()
+    {
         return surgery;
     }
 
-    public void setSurgery(String surgery) {
+    public void setSurgery(String surgery)
+    {
         this.surgery = surgery;
     }
 
-    public String getViral() {
+    public String getViral()
+    {
         return viral;
     }
 
-    public void setViral(String viral) {
+    public void setViral(String viral)
+    {
         this.viral = viral;
     }
 
-    public String getPhenotype() {
+    public String getPhenotype()
+    {
         return phenotype;
     }
 
-    public void setPhenotype(String phenotype) {
+    public void setPhenotype(String phenotype)
+    {
         this.phenotype = phenotype;
     }
 
-    public String getDisease() {
+    public String getDisease()
+    {
         return disease;
     }
 
-    public void setDisease(String disease) {
+    public void setDisease(String disease)
+    {
         this.disease = disease;
     }
 
-    public String getCellLine() {
+    public String getCellLine()
+    {
         return cellLine;
     }
 
-    public void setCellLine(String cellLine) {
+    public void setCellLine(String cellLine)
+    {
         this.cellLine = cellLine;
     }
 
-    public String getOrganTissueCode() {
+    public String getOrganTissueCode()
+    {
         return organTissueCode;
     }
 
-    public void setOrganTissueCode(String organTissueCode) {
+    public void setOrganTissueCode(String organTissueCode)
+    {
         this.organTissueCode = organTissueCode;
     }
 
-    public String getOrganTissueName() {
+    public String getOrganTissueName()
+    {
         return organTissueName;
     }
 
-    public void setOrganTissueName(String organTissueName) {
+    public void setOrganTissueName(String organTissueName)
+    {
         this.organTissueName = organTissueName;
     }
 
-    public String getDiagnosisCode() {
+    public String getDiagnosisCode()
+    {
         return diagnosisCode;
     }
 
-    public void setDiagnosisCode(String diagnosisCode) {
+    public void setDiagnosisCode(String diagnosisCode)
+    {
         this.diagnosisCode = diagnosisCode;
     }
 
-    public String getDiagnosisName() {
+    public String getDiagnosisName()
+    {
         return diagnosisName;
     }
 
-    public void setDiagnosisName(String diagnosisName) {
+    public void setDiagnosisName(String diagnosisName)
+    {
         this.diagnosisName = diagnosisName;
     }
 
-    public boolean isSearchCarcinogenicInterventions() {
+    public boolean isSearchCarcinogenicInterventions()
+    {
         return searchCarcinogenicInterventions;
     }
 
-    public void setSearchCarcinogenicInterventions(boolean searchCarcinogenicInterventions) {
+    public void setSearchCarcinogenicInterventions(boolean searchCarcinogenicInterventions)
+    {
         this.searchCarcinogenicInterventions = searchCarcinogenicInterventions;
     }
 
-    public String getInducedMutationAgent() {
+    public String getInducedMutationAgent()
+    {
         return inducedMutationAgent;
     }
 
-    public void setInducedMutationAgent(String inducedMutationAgent) {
+    public void setInducedMutationAgent(String inducedMutationAgent)
+    {
         this.inducedMutationAgent = inducedMutationAgent;
     }
 
-    public boolean isEngineeredTransgene() {
+    public boolean isEngineeredTransgene()
+    {
         return engineeredTransgene;
     }
 
-    public void setEngineeredTransgene(boolean engineeredTransgene) {
+    public void setEngineeredTransgene(boolean engineeredTransgene)
+    {
         this.engineeredTransgene = engineeredTransgene;
     }
 
-    public boolean isTargetedModification() {
+    public boolean isTargetedModification()
+    {
         return targetedModification;
     }
 
-    public void setTargetedModification(boolean targetedModification) {
+    public void setTargetedModification(boolean targetedModification)
+    {
         this.targetedModification = targetedModification;
     }
 
-    public String getGeneName() {
+    public String getGeneName()
+    {
         return geneName;
     }
 
-    public void setGeneName(String geneName) {
+    public void setGeneName(String geneName)
+    {
         this.geneName = geneName;
     }
 
-    public String getGenomicSegDesignator() {
+    public String getGenomicSegDesignator()
+    {
         return genomicSegDesignator;
     }
 
-    public void setGenomicSegDesignator(String genomicSegDesignator) {
+    public void setGenomicSegDesignator(String genomicSegDesignator)
+    {
         this.genomicSegDesignator = genomicSegDesignator;
     }
 
-    public boolean isSearchTherapeuticApproaches() {
+    public boolean isSearchTherapeuticApproaches()
+    {
         return searchTherapeuticApproaches;
     }
 
-    public void setSearchTherapeuticApproaches(boolean searchTherapeuticApproaches) {
+    public void setSearchTherapeuticApproaches(boolean searchTherapeuticApproaches)
+    {
         this.searchTherapeuticApproaches = searchTherapeuticApproaches;
     }
 
-    public String getTherapeuticApproach() {
+    public String getTherapeuticApproach()
+    {
         return therapeuticApproach;
     }
 
-    public void setTherapeuticApproach(String therapeuticApproach) {
+    public void setTherapeuticApproach(String therapeuticApproach)
+    {
         this.therapeuticApproach = therapeuticApproach;
     }
 
-    public boolean isSearchHistoMetastasis() {
+    public boolean isSearchHistoMetastasis()
+    {
         return searchHistoMetastasis;
     }
 
-    public void setSearchHistoMetastasis(boolean searchHistoMetastasis) {
+    public void setSearchHistoMetastasis(boolean searchHistoMetastasis)
+    {
         this.searchHistoMetastasis = searchHistoMetastasis;
     }
 
-    public boolean isSearchMicroArrayData() {
+    public boolean isSearchMicroArrayData()
+    {
         return searchMicroArrayData;
     }
 
-    public void setSearchMicroArrayData(boolean searchMicroArrayData) {
+    public void setSearchMicroArrayData(boolean searchMicroArrayData)
+    {
         this.searchMicroArrayData = searchMicroArrayData;
     }
 
-    public boolean isSearchXenograft() {
+    public boolean isSearchXenograft()
+    {
         return searchXenograft;
     }
 
-    public void setSearchXenograft(boolean searchXenograft) {
+    public void setSearchXenograft(boolean searchXenograft)
+    {
         this.searchXenograft = searchXenograft;
     }
 
+    /**
+     * @return Returns the searchTransientInterference.
+     */
+    public boolean isSearchTransientInterference()
+    {
+        return searchTransientInterference;
+    }
+
+    /**
+     * @param searchTransientInterference The searchTransientInterference to set.
+     */
+    public void setSearchTransientInterference(boolean searchTransientInterference)
+    {
+        this.searchTransientInterference = searchTransientInterference;
+    }
+    
+    public String getTumorClassification()
+    {
+        return tumorClassification;
+    }
+
+    public void setTumorClassification(String tumorClassification)
+    {
+        this.tumorClassification = tumorClassification;
+    }
+    
     /**
      * Reset all fields that are not used in the simple search. Since the form
      * is used for both the simple and advanced search and is stored in the
@@ -306,7 +440,8 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
      * search page the options from the advanced search page are reset.
      * 
      */
-    public void simpleSearchReset() {
+    public void simpleSearchReset()
+    {
 
         chemicalDrug = null;
         hormone = null;
@@ -329,17 +464,19 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
         therapeuticApproach = null;
         searchCarcinogenicInterventions = false;
         searchTherapeuticApproaches = false;
+        searchTransientInterference = false;
         engineeredTransgene = false;
         targetedModification = false;
         searchHistoMetastasis = false;
         searchMicroArrayData = false;
         searchXenograft = false;
     }
-    
+
     /**
      * Reset all fields.
      */
-    public void allFieldsReset() {
+    public void allFieldsReset()
+    {
 
         keyword = null;
         piName = null;
@@ -350,17 +487,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData {
         organ = null;
         organTissueCode = null;
         organTissueName = null;
-        
+
         simpleSearchReset();
-    }
-
-    public String getTumorClassification()
-    {
-        return tumorClassification;
-    }
-
-    public void setTumorClassification(String tumorClassification)
-    {
-        this.tumorClassification = tumorClassification;
     }
 }
