@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.5 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: SearchAction.java,v 1.6 2006-05-11 15:43:05 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.4  2006/04/28 19:28:10  schroedn
  * Defect # 261
  * Added QueryHistory save on performing any search if a user is logged in
@@ -155,11 +158,18 @@ public final class SearchAction extends BaseAction {
                 {
                     savedQuery.setQueryName( resubmittedSavedQuery.getQueryName() );
                     
+                    // Update the number of results and last executed time
+                    resubmittedSavedQuery.setElapsedTime( savedQuery.getElapsedTime() );
+                    resubmittedSavedQuery.setExecuteTime( savedQuery.getExecuteTime() );
+                    resubmittedSavedQuery.setNumberResults( results.size() );
+                    savedQueryManager.update( resubmittedSavedQuery );
+                    
                     // Set Global Constants for use later
                     request.getSession().setAttribute( Constants.QUERY_NAME, resubmittedSavedQuery.getQueryName() );
                     request.getSession().setAttribute( Constants.ASAVEDQUERYID, resubmittedSavedQuery.getId().toString() );                    
                 }
                 
+                // Get elapsed time in seconds                
                 request.getSession().setAttribute( Constants.ELAPSED_TIME, savedQuery.getElapsedTime() );
                 request.getSession().setAttribute( Constants.EXECUTE_TIME, savedQuery.getExecuteTime() );
                 
@@ -198,6 +208,7 @@ public final class SearchAction extends BaseAction {
             request.getSession().setAttribute(Constants.CRITERIATABLE, CriteriaTableUtil.buildCriteriaDisplayTable( theForm ) );
             request.getSession().setAttribute(Constants.DUP_NAME, "false" );
             request.getSession().setAttribute( Constants.NOSAVEOPTION, "false" );
+     
         } catch ( Exception e ) {
             // Set the error message
             ActionMessages msg = new ActionMessages();
