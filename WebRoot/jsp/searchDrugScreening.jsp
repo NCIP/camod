@@ -2,13 +2,11 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 
 <script language="JavaScript" src="scripts/EvsTree.js"></script>
-<script type="text/javascript" src="/camod/js/prototype-1.4.0.js"></script>
+
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
-<script type="text/javascript" src="js/overlibmws.js"></script>
-<script type="text/javascript" src="js/camodajax.js"></script>
-<script type="text/javascript" src="/camod/js/ajaxtags-1.2-beta2.js"></script>
+<script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
 <link rel="stylesheet" type="text/css" href="css/ajaxtags.css" />
-<link rel="stylesheet" type="text/css" href="css/displaytag.css" />
 
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
@@ -42,10 +40,10 @@
 	        	<LABEL for=field1>NSC Number:</LABEL>
 	        </TD>
 	        <TD class=formField>
-	         <input id="NSCNumber" name="NSCNumber" type="text" onMouseOver="selection('NSCNumber', 'NSCNumber' );"
-     size="30" />
-     <span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>	
-	
+	        	<input id="NSCNumber" name="NSCNumber" type="text"  size="30" />
+				<span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>
+      			<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="NSCNumber" target="NSCNumber"
+  				parameters="NSCNumber={NSCNumber}" className="autocomplete" minimumCharacters="1" />	
 		        <br>
 		        <a href="http://dtp.nci.nih.gov/dtpstandard/ChemData/index.jsp" target="blank">Search for NSC numbers</a>
 	        </TD>
