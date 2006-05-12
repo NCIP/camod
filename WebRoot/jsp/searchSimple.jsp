@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.25 2006-05-12 17:11:22 guptaa Exp $
+ * $Id: searchSimple.jsp,v 1.26 2006-05-12 19:25:37 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/05/12 17:11:22  guptaa
+ * ajax additions
+ *
  * Revision 1.24  2006/05/10 14:22:59  schroedn
  * New Features - Changes from code review
  *
@@ -35,13 +38,12 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 <SCRIPT language="JavaScript" src="scripts/global.js"></script>
 <SCRIPT language="JavaScript" src="scripts/EVSTreeScript.js"></script>
-<script type="text/javascript" src="/camod/js/prototype-1.4.0.js"></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
-<script type="text/javascript" src="js/overlibmws.js"></script>
-<script type="text/javascript" src="js/camodajax.js"></script>
-<script type="text/javascript" src="/camod/js/ajaxtags-1.2-beta2.js"></script>
+
+<script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
 <link rel="stylesheet" type="text/css" href="css/ajaxtags.css" />
-<link rel="stylesheet" type="text/css" href="css/displaytag.css" />
+
 
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -105,12 +107,12 @@
 				</label>
 			</td>
 			<td class="formField">			
-					 <input id="modelDescriptor" name="modelDescriptor" type="text" onMouseOver="selection('modelDescriptor', 'modelDescriptor' );"
-     size="30" />
-     <span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>	
+				<input id="modelDescriptor" name="modelDescriptor" type="text"  size="30" />
+				<span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>
+      			<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
+  				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
 			</td>
-			  
-			
+
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
