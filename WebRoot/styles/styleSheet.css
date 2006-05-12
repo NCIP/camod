@@ -817,9 +817,3 @@ table.activeUserList, body#activeUsers span.pagelinks {
   padding-right: 5px;
   border: 1px solid #fff;
 }
-
-.autocomplete li.selected {
-  background-color: #cef;
-  border-top: 1px solid #9bc;
-  border-bottom: 1px solid #9bc;
-}
