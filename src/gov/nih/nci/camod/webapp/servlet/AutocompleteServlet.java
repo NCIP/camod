@@ -46,6 +46,9 @@
  * $Id$
  *
  * $Log$
+ * Revision 1.1  2006/05/12 17:01:55  guptaa
+ * Ajax servlet file
+ *
  * Revision 1.1  2006/05/12 12:49:49  guptaa
  * Initial revision
  *
@@ -196,7 +199,7 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 		
 		List list = new ArrayList();
 		
-		SortedSet<String> theNSCNumberMatchingName = AutocompleteUtil.getMatchingGeneNames(NSCnumber, inNumToReturn);
+		SortedSet<String> theNSCNumberMatchingName = AutocompleteUtil.getMatchingNSCNumbers(NSCnumber, inNumToReturn);
 		
 		List theNSCNumberList = new ArrayList();
 		for (String theNSCNumberName : theNSCNumberMatchingName) {
