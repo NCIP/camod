@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.24 2006-05-10 14:22:59 schroedn Exp $
+ * $Id: searchSimple.jsp,v 1.25 2006-05-12 17:11:22 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/05/10 14:22:59  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.23  2006/05/03 19:05:39  georgeda
  * Move to new EVSTree
  *
@@ -32,6 +35,14 @@
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 <SCRIPT language="JavaScript" src="scripts/global.js"></script>
 <SCRIPT language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+<script type="text/javascript" src="/camod/js/prototype-1.4.0.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js"></script>
+<script type="text/javascript" src="js/overlibmws.js"></script>
+<script type="text/javascript" src="js/camodajax.js"></script>
+<script type="text/javascript" src="/camod/js/ajaxtags-1.2-beta2.js"></script>
+<link rel="stylesheet" type="text/css" href="css/ajaxtags.css" />
+<link rel="stylesheet" type="text/css" href="css/displaytag.css" />
+
 
 <SCRIPT LANGUAGE="JavaScript">
 	
@@ -94,8 +105,12 @@
 				</label>
 			</td>
 			<td class="formField">			
-					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
+					 <input id="modelDescriptor" name="modelDescriptor" type="text" onMouseOver="selection('modelDescriptor', 'modelDescriptor' );"
+     size="30" />
+     <span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>	
 			</td>
+			  
+			
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>

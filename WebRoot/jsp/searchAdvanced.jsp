@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.31 2006-05-10 14:21:51 schroedn Exp $
+ * $Id: searchAdvanced.jsp,v 1.32 2006-05-12 17:11:38 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2006/05/10 14:21:51  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.30  2006/05/10 12:02:47  georgeda
  * Changes for searching on transient interfaces
  *
@@ -57,6 +60,13 @@
 <SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 <script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 <script language="JavaScript" src="scripts/global.js"></script>
+<script type="text/javascript" src="/camod/js/prototype-1.4.0.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js"></script>
+<script type="text/javascript" src="js/overlibmws.js"></script>
+<script type="text/javascript" src="js/camodajax.js"></script>
+<script type="text/javascript" src="/camod/js/ajaxtags-1.2-beta2.js"></script>
+<link rel="stylesheet" type="text/css" href="css/ajaxtags.css" />
+<link rel="stylesheet" type="text/css" href="css/displaytag.css" />
 
 <SCRIPT LANGUAGE="JavaScript">
 	
@@ -136,9 +146,11 @@
 				<camod:cshelp mapId="advanced_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
-					<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
+					<input id="modelDescriptor" name="modelDescriptor" type="text" onMouseOver="selection('modelDescriptor', 'modelDescriptor' );"
+     size="30" />
+     <span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>	
 			</td>
-		</tr>
+			  </tr>
 		
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
@@ -212,8 +224,11 @@
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field3">Gene Name:</label></td>
-			<td class="formField">			
-					<html:text styleClass="formFieldSized" property="geneName" size="30"/>
+			<td class="formField">	
+			<input id="geneName" name="geneName" type="text" onMouseOver="selection('geneName', 'geneName' );"
+     size="30" />	
+        <span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>		
+			
 			</td>
 		</tr>
 		<tr>
