@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.33 2006-05-12 19:41:42 guptaa Exp $
+ * $Id: searchAdvanced.jsp,v 1.34 2006-05-12 20:30:28 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2006/05/12 19:41:42  guptaa
+ * uses tag
+ *
  * Revision 1.32  2006/05/12 17:11:38  guptaa
  * ajax additions
  *
@@ -147,8 +150,7 @@
 			</td>
 			<td class="formField">			
 				<input id="modelDescriptor" name="modelDescriptor" type="text"  size="30" />
-				<span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>
-      			<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
+				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
   				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
 			</td>
 		</tr>
@@ -227,8 +229,7 @@
 			<td class="formLabel"><label for="field3">Gene Name:</label></td>
 			<td class="formField">
 			<input id="geneName" name="geneName" type="text"  size="30" />
-				<span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>
-      			<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="geneName" target="geneName"
+				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="geneName" target="geneName"
   				parameters="geneName={geneName}" className="autocomplete" minimumCharacters="1" />	
 			</td>
 		</tr>

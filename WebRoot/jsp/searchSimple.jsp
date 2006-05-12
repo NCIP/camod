@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.26 2006-05-12 19:25:37 guptaa Exp $
+ * $Id: searchSimple.jsp,v 1.27 2006-05-12 20:29:00 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2006/05/12 19:25:37  guptaa
+ * uses tag library
+ *
  * Revision 1.25  2006/05/12 17:11:22  guptaa
  * ajax additions
  *
@@ -40,7 +43,6 @@
 <SCRIPT language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
-
 <script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
 <link rel="stylesheet" type="text/css" href="css/ajaxtags.css" />
 
@@ -108,8 +110,7 @@
 			</td>
 			<td class="formField">			
 				<input id="modelDescriptor" name="modelDescriptor" type="text"  size="30" />
-				<span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>
-      			<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
+				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
   				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
 			</td>
 

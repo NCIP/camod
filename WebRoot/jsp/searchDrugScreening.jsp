@@ -41,8 +41,7 @@
 	        </TD>
 	        <TD class=formField>
 	        	<input id="NSCNumber" name="NSCNumber" type="text"  size="30" />
-				<span id="indicator" style="display:none;"><img src="images/indicator.gif" /></span>
-      			<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="NSCNumber" target="NSCNumber"
+				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="NSCNumber" target="NSCNumber"
   				parameters="NSCNumber={NSCNumber}" className="autocomplete" minimumCharacters="1" />	
 		        <br>
 		        <a href="http://dtp.nci.nih.gov/dtpstandard/ChemData/index.jsp" target="blank">Search for NSC numbers</a>
