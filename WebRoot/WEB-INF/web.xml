@@ -149,6 +149,18 @@
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<display-name>AjaxTags</display-name>
+
+  <servlet>
+    <servlet-name>autocomplete</servlet-name>
+    <servlet-class>gov.nih.nci.camod.webapp.servlet.AutocompleteServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>autocomplete</servlet-name>
+    <url-pattern>/autocomplete.view</url-pattern>
+  </servlet-mapping>
 	
 	<!-- Front Controller Servlet Mapping -->
 	<servlet-mapping>
