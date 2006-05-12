@@ -6,7 +6,7 @@
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
 <script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
-<link rel="stylesheet" type="text/css" href="css/ajaxtags.css" />
+
 
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.34 2006-05-12 20:30:28 guptaa Exp $
+ * $Id: searchAdvanced.jsp,v 1.35 2006-05-12 20:42:41 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2006/05/12 20:30:28  guptaa
+ * indicator out
+ *
  * Revision 1.33  2006/05/12 19:41:42  guptaa
  * uses tag
  *
@@ -69,7 +72,7 @@
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
 <script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
-<link rel="stylesheet" type="text/css" href="css/ajaxtags.css" />
+
 
 <SCRIPT LANGUAGE="JavaScript">
 	
