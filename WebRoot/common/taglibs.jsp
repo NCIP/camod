@@ -12,6 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/sql" prefix="sql" %>
 <%@ taglib uri="/oscache" prefix="cache" %>
 <%@ taglib uri="/WEB-INF/camod.tld" prefix="camod" %>
+<%@ taglib uri="http://ajaxtags.org/tags/ajax" prefix="ajax" %>
 
 <%-- Set all pages that include this page (particularly tiles) to use XHTML --%>
 <html:xhtml />
