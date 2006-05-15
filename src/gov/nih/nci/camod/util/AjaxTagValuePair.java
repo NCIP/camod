@@ -46,8 +46,9 @@
  * $Id$
  *
  * $Log$
- * Revision 1.1  2006/05/12 12:49:49  guptaa
- * Initial revision
+ * 
+ * Revision 1.1  2006/05/12 17:00:28  guptaa
+ * New Ajax tag value pair file
  *
  * 
  */
@@ -57,60 +58,63 @@ import java.io.Serializable;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class AjaxTagValuePair implements Serializable {
+/**
+ * 
+ * Class which implements tag/value pairs for Ajax calls
+ *
+ */
+public class AjaxTagValuePair implements Serializable
+{
+    private static final long serialVersionUID = 5258525453779404751L;
+    private String target;
+    private String source;
 
-  private String target;
-  private String source;
+    /**
+     * Constructor for AjaxTagValuePair.
+     */
+    public AjaxTagValuePair()
+    {
+        super();
+    }
 
-  /**
-   * Constructor for AjaxTagValuePair.
-   */
-  public AjaxTagValuePair() {
-    super();
-  }
+    /**
+     * @return Returns the target.
+     */
+    public String getTarget()
+    {
+        return this.target;
+    }
 
-  /**
-   * Constructor for AjaxTagValuePair .
-   */
-  public AjaxTagValuePair(String target, String source) {
-    super();
-    this.target = target;
-    this.source = source;
-  }
+    /**
+     * @param source The source to set.
+     */
+    public void setSource(String source)
+    {
+        this.source = source;
+    }
 
-  /**
-   * @return Returns the target.
-   */
-  public String getTarget() {
-    return this.target;
-  }
+    /**
+     * @return Returns the source.
+     */
+    public String getSource()
+    {
+        return this.source;
+    }
 
-  /**
-   * @param source The source to set.
-   */
-  public void setSource(String source) {
-    this.source = source;
-  }
+    /**
+     * @param target The target to set.
+     */
+    public void setTarget(String target)
+    {
+        this.target = target;
+    }
 
-  /**
-   * @return Returns the source.
-   */
-  public String getSource() {
-    return this.source;
-  }
-
-  /**
-   * @param target The target to set.
-   */
-  public void setTarget(String target) {
-    this.target = target;
-  }
-
-  /**
-   * @see java.lang.Object#toString()
-   */
-  public String toString() {
-    return new ToStringBuilder(this).append("target", target).append("source", source).toString();
-  }
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString()
+    {
+        return new ToStringBuilder(this).append("target", target).append("source", source).toString();
+    }
 
 }

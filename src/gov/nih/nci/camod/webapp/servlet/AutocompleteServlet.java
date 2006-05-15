@@ -46,19 +46,20 @@
  * $Id$
  *
  * $Log$
+ * 
+ * Revision 1.3  2006/05/12 21:03:14  guptaa
+ * formatted and added the  serial version id
+ *
  * Revision 1.2  2006/05/12 17:49:54  guptaa
  * fixed nsc number
  *
  * Revision 1.1  2006/05/12 17:01:55  guptaa
  * Ajax servlet file
- *
- * Revision 1.1  2006/05/12 12:49:49  guptaa
- * Initial revision
- *
  * 
  */
 package gov.nih.nci.camod.webapp.servlet;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.AjaxTagValuePair;
 import gov.nih.nci.camod.util.AutocompleteUtil;
 
@@ -73,201 +74,225 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ajaxtags.helpers.AjaxXmlBuilder;
 import org.ajaxtags.servlets.BaseAjaxServlet;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-public class AutocompleteServlet extends BaseAjaxServlet {
+/**
+ * 
+ * Servlet used to handle Ajay autocompletion requests from the GUI
+ *
+ */
+public class AutocompleteServlet extends BaseAjaxServlet
+{
+    private static int ourNumMatchesToReturn;
 
-	private static int ajaxIntNumber;
+    private static final long serialVersionUID = 3257296453788404152L;
 
-	private static final long serialVersionUID = 3257296453788404152L;
+    protected transient final Log log = LogFactory.getLog(AutocompleteServlet.class);
 
-	static {
-		InputStream in = null;
-		Properties sysProps = new Properties();
-		try {
-			in = Thread.currentThread().getContextClassLoader()
-					.getResourceAsStream("camod.properties");
-			sysProps.load(in);
-			String ajaxNumber = sysProps.getProperty("ajax.number");
-			ajaxIntNumber = Integer.parseInt(ajaxNumber);
-		} catch (Exception e) {
-			System.err.println("Error loading system.properties file");
-			e.printStackTrace();
-		}
-	}
+    static
+    {
+        InputStream theInputStream = null;
+        Properties theSysProps = new Properties();
+        try
+        {
+            theInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(Constants.CAMOD_BUNDLE + ".properties");
+            theSysProps.load(theInputStream);
+            String ajaxNumber = theSysProps.getProperty("ajax.num_matches_to_return");
+            ourNumMatchesToReturn = Integer.parseInt(ajaxNumber);
+        }
 
-	public String getXmlContent(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+        // Default to 100 on an exception
+        catch (Exception e)
+        {
+            System.err.println("Error loading system.properties file");
+            e.printStackTrace();
+            ourNumMatchesToReturn = 100;
+        }
+    }
 
-		String model = request.getParameter("modelDescriptor");
-		String geneName = request.getParameter("geneName");
-		String therapeuticApproach = request
-				.getParameter("therapeuticApproach");
-		String NSCNumber = request.getParameter("NSCNumber");
-		String organ = request.getParameter("organ");
-		String tumorClassification = request
-				.getParameter("tumorClassification");
+    /**
+     *  Get the XML autocomplete content based on parameters passed in
+     */
+    public String getXmlContent(HttpServletRequest inRequest,
+                                HttpServletResponse inResponse) throws Exception
+    {
+        log.debug("Entering getXmlContent");
 
-		List theGenericDescriptorList = null;
+        String theModelDescriptor = inRequest.getParameter("modelDescriptor");
+        String theGeneName = inRequest.getParameter("geneName");
+        String theTherapeuticApproach = inRequest.getParameter("therapeuticApproach");
+        String theNSCNumber = inRequest.getParameter("NSCNumber");
+        String theOrgan = inRequest.getParameter("organ");
+        String theTumorClassification = inRequest.getParameter("tumorClassification");
 
-		if (model != null && model.trim().length() > 0) {
-			model = model.trim().toLowerCase();
-			theGenericDescriptorList = getMatchingModelDescriptor(model,
-					ajaxIntNumber);
-		} else if (geneName != null && geneName.trim().length() > 0) {
-			geneName = geneName.trim().toLowerCase();
-			theGenericDescriptorList = getGeneName(geneName, ajaxIntNumber);
-		} else if (therapeuticApproach != null
-				&& therapeuticApproach.trim().length() > 0) {
-			therapeuticApproach = therapeuticApproach.trim().toLowerCase();
-			theGenericDescriptorList = getTherapeuticApproach(
-					therapeuticApproach, ajaxIntNumber);
-		} else if (NSCNumber != null && NSCNumber.trim().length() > 0) {
-			NSCNumber = NSCNumber.trim().toLowerCase();
-			theGenericDescriptorList = getNSCNumber(NSCNumber, ajaxIntNumber);
-		} else if (organ != null && organ.trim().length() > 0) {
-			organ = organ.trim().toLowerCase();
-			theGenericDescriptorList = getOrgan(organ, ajaxIntNumber);
-		} else if (tumorClassification != null
-				&& tumorClassification.trim().length() > 0) {
-			tumorClassification = tumorClassification.trim().toLowerCase();
-			theGenericDescriptorList = getTumorClassification(
-					tumorClassification, ajaxIntNumber);
-		}
+        List theGenericDescriptorList = null;
 
-		String theXmlResponse = new AjaxXmlBuilder().addItems(
-				theGenericDescriptorList, "source", "target").toString();
+        if (theModelDescriptor != null && theModelDescriptor.trim().length() > 0)
+        {
+            log.info("Searching for model descriptors matching: " + theModelDescriptor);
+            theModelDescriptor = theModelDescriptor.trim().toLowerCase();
+            theGenericDescriptorList = getMatchingModelDescriptors(theModelDescriptor, ourNumMatchesToReturn);
+        }
+        else if (theGeneName != null && theGeneName.trim().length() > 0)
+        {
+            log.info("Searching for gene name matching: " + theGeneName);
+            theGeneName = theGeneName.trim().toLowerCase();
+            theGenericDescriptorList = getMatchingGeneNames(theGeneName, ourNumMatchesToReturn);
+        }
+        else if (theTherapeuticApproach != null && theTherapeuticApproach.trim().length() > 0)
+        {
+            log.info("Searching for therapeutic approach matching: " + theTherapeuticApproach);
+            theTherapeuticApproach = theTherapeuticApproach.trim().toLowerCase();
+            theGenericDescriptorList = getMatchineTherapeuticApproachs(theTherapeuticApproach, ourNumMatchesToReturn);
+        }
+        else if (theNSCNumber != null && theNSCNumber.trim().length() > 0)
+        {
+            log.info("Searching for nsc number matching: " + theNSCNumber);
+            theNSCNumber = theNSCNumber.trim().toLowerCase();
+            theGenericDescriptorList = getMatchingNSCNumbers(theNSCNumber, ourNumMatchesToReturn);
+        }
+        else if (theOrgan != null && theOrgan.trim().length() > 0)
+        {
+            log.info("Searching for organ matching: " + theOrgan);
+            theOrgan = theOrgan.trim().toLowerCase();
+            theGenericDescriptorList = getMatchingOrganNames(theOrgan, ourNumMatchesToReturn);
+        }
+        else if (theTumorClassification != null && theTumorClassification.trim().length() > 0)
+        {
+            log.info("Searching for tumor classification matching: " + theTumorClassification);
+            theTumorClassification = theTumorClassification.trim().toLowerCase();
+            theGenericDescriptorList = getMatchineTumorClassifications(theTumorClassification, ourNumMatchesToReturn);
+        }
+        else
+        {
+            log.error("No known parameter passed in for autocompletion");
+        }
 
-		return theXmlResponse;
-	}
+        String theXmlResponse = new AjaxXmlBuilder().addItems(theGenericDescriptorList, "source", "target").toString();
 
-	// for model descriptor
-	public List getMatchingModelDescriptor(String model, int inNumToReturn)
-			throws Exception {
+        log.info("Number matched: " + theGenericDescriptorList.size());
+        log.debug("Exiting getXmlContent");
 
-		List list = new ArrayList();
+        return theXmlResponse;
+    }
 
-		SortedSet<String> theModelMatchingName = AutocompleteUtil
-				.getMatchingAnimalModelNames(model, inNumToReturn);
+    /**
+     * Return a list of matching model descriptors
+     * 
+     * @param inModelDescriptor the model descriptor to match
+     * @param inNumToReturn the maximum number of values to return
+     * @return a list of AjaxTagValue pairs
+     * @throws Exception when an error occurs
+     */
+    private List<AjaxTagValuePair> getMatchingModelDescriptors(String inModelDescriptor,
+                                                               int inNumToReturn) throws Exception
+    {
+        SortedSet<String> theModelMatchingName = AutocompleteUtil.getMatchingAnimalModelNames(inModelDescriptor, inNumToReturn);
 
-		List theModelNameList = new ArrayList();
-		for (String theModelName : theModelMatchingName) {
+        List<AjaxTagValuePair> theModelNameList = new ArrayList<AjaxTagValuePair>();
+        for (String theModelName : theModelMatchingName)
+        {
+            AjaxTagValuePair theTagValue = new AjaxTagValuePair();
+            theTagValue.setTarget(theModelName);
+            theTagValue.setSource(theModelName);
+            theModelNameList.add(theTagValue);
+        }
+        return theModelNameList;
+    }
 
-			AjaxTagValuePair atvp = new AjaxTagValuePair();
-			atvp.setTarget(theModelName);
-			atvp.setSource(theModelName);
-			theModelNameList.add(atvp);
+    /**
+     * Return a list of matching gene names
+     * 
+     * @param inGeneName the gene name to match
+     * @param inNumToReturn the maximum number of values to return
+     * @return a list of AjaxTagValue pairs
+     * @throws Exception when an error occurs
+     */
+    private List<AjaxTagValuePair> getMatchingGeneNames(String inGeneName,
+                                                        int inNumToReturn) throws Exception
+    {
+        SortedSet<String> theMatchingGeneNames = AutocompleteUtil.getMatchingGeneNames(inGeneName, inNumToReturn);
 
-		}
-		return theModelNameList;
+        List<AjaxTagValuePair> theGeneNameList = new ArrayList<AjaxTagValuePair>();
+        for (String theGeneName : theMatchingGeneNames)
+        {
+            AjaxTagValuePair theTagValue = new AjaxTagValuePair();
+            theTagValue.setTarget(theGeneName);
+            theTagValue.setSource(theGeneName);
+            theGeneNameList.add(theTagValue);
+        }
+        return theGeneNameList;
 
-	}
+    }
 
-	// for gene name
-	public List getGeneName(String geneName, int inNumToReturn)
-			throws Exception {
+    /**
+     * Return a list of matching therapeutic approach names
+     * 
+     * @param inTherapeuticApproach the name to match
+     * @param inNumToReturn the maximum number of values to return
+     * @return a list of AjaxTagValue pairs
+     * @throws Exception when an error occurs
+     */
+    private List<AjaxTagValuePair> getMatchineTherapeuticApproachs(String inTherapeuticApproach,
+                                                                   int inNumToReturn) throws Exception
+    {
+        List<AjaxTagValuePair> theTherapeuticApproachList = new ArrayList<AjaxTagValuePair>();
+        return theTherapeuticApproachList;
+    }
 
-		List list = new ArrayList();
+    /**
+     * Return a list of matching nsc numbers
+     * 
+     * @param inNSCNumber the name to match
+     * @param inNumToReturn the maximum number of values to return
+     * @return a list of AjaxTagValue pairs
+     * @throws Exception when an error occurs
+     */
+    private List<AjaxTagValuePair> getMatchingNSCNumbers(String inNSCNumber,
+                                                         int inNumToReturn) throws Exception
+    {
+        SortedSet<String> theMatchingNSCNumbers = AutocompleteUtil.getMatchingNSCNumbers(inNSCNumber, inNumToReturn);
 
-		SortedSet<String> theGeneMatchingName = AutocompleteUtil
-				.getMatchingGeneNames(geneName, inNumToReturn);
+        List<AjaxTagValuePair> theNSCNumberList = new ArrayList<AjaxTagValuePair>();
+        for (String theNSCNumberName : theMatchingNSCNumbers)
+        {
+            AjaxTagValuePair theTagValue = new AjaxTagValuePair();
+            theTagValue.setTarget(theNSCNumberName);
+            theTagValue.setSource(theNSCNumberName);
+            theNSCNumberList.add(theTagValue);
+        }
 
-		List theGeneNameList = new ArrayList();
-		for (String theGeneName : theGeneMatchingName) {
+        return theNSCNumberList;
+    }
 
-			AjaxTagValuePair atvp = new AjaxTagValuePair();
-			atvp.setTarget(theGeneName);
-			atvp.setSource(theGeneName);
-			theGeneNameList.add(atvp);
+    /**
+     * Return a list of matching organ names
+     * 
+     * @param inNSCNumber the name to match
+     * @param inNumToReturn the maximum number of values to return
+     * @return a list of AjaxTagValue pairs
+     * @throws Exception when an error occurs
+     */
+    private List getMatchingOrganNames(String inOrgan,
+                                       int inNumToReturn) throws Exception
+    {
+        List<AjaxTagValuePair> theOrganList = new ArrayList<AjaxTagValuePair>();
+        return theOrganList;
+    }
 
-		}
-		return theGeneNameList;
-
-	}
-
-	// for therapeutic approach
-	public List getTherapeuticApproach(String therapeuticApproach,
-			int inNumToReturn) throws Exception {
-
-		List list = new ArrayList();
-
-		SortedSet<String> theTherapeuticApproachMatchingName = AutocompleteUtil
-				.getMatchingGeneNames(therapeuticApproach, inNumToReturn);
-
-		List theTherapeuticApproachList = new ArrayList();
-		for (String theTherapeuticApproachName : theTherapeuticApproachMatchingName) {
-
-			AjaxTagValuePair atvp = new AjaxTagValuePair();
-			atvp.setTarget(theTherapeuticApproachName);
-			atvp.setSource(theTherapeuticApproachName);
-			theTherapeuticApproachList.add(atvp);
-
-		}
-		return theTherapeuticApproachList;
-	}
-
-	// for NSCNumber
-	public List getNSCNumber(String NSCnumber, int inNumToReturn)
-			throws Exception {
-
-		List list = new ArrayList();
-
-		SortedSet<String> theNSCNumberMatchingName = AutocompleteUtil
-				.getMatchingNSCNumbers(NSCnumber, inNumToReturn);
-
-		List theNSCNumberList = new ArrayList();
-		for (String theNSCNumberName : theNSCNumberMatchingName) {
-
-			AjaxTagValuePair atvp = new AjaxTagValuePair();
-			atvp.setTarget(theNSCNumberName);
-			atvp.setSource(theNSCNumberName);
-			theNSCNumberList.add(atvp);
-
-		}
-
-		return theNSCNumberList;
-
-	}
-
-	public List getOrgan(String Organ, int inNumToReturn) throws Exception {
-
-		List list = new ArrayList();
-
-		SortedSet<String> theNSCNumberMatchingName = AutocompleteUtil
-				.getMatchingGeneNames(Organ, inNumToReturn);
-
-		List theOrganList = new ArrayList();
-		for (String theNSCNumberName : theNSCNumberMatchingName) {
-
-			AjaxTagValuePair atvp = new AjaxTagValuePair();
-			atvp.setTarget(theNSCNumberName);
-			atvp.setSource(theNSCNumberName);
-			theOrganList.add(atvp);
-
-		}
-
-		return theOrganList;
-
-	}
-
-	public List getTumorClassification(String tumorClassification,
-			int inNumToReturn) throws Exception {
-
-		List list = new ArrayList();
-
-		SortedSet<String> theNSCNumberMatchingName = AutocompleteUtil
-				.getMatchingGeneNames(tumorClassification, inNumToReturn);
-
-		List theTumorClassificationList = new ArrayList();
-		for (String theNSCNumberName : theNSCNumberMatchingName) {
-
-			AjaxTagValuePair atvp = new AjaxTagValuePair();
-			atvp.setTarget(theNSCNumberName);
-			atvp.setSource(theNSCNumberName);
-			theTumorClassificationList.add(atvp);
-
-		}
-
-		return theTumorClassificationList;
-
-	}
+    /**
+     * Return a list of matching tumor names
+     * 
+     * @param inTumorClassification the name to match
+     * @param inNumToReturn the maximum number of values to return
+     * @return a list of AjaxTagValue pairs
+     * @throws Exception when an error occurs
+     */
+    private List getMatchineTumorClassifications(String inTumorClassification,
+                                        int inNumToReturn) throws Exception
+    {
+        List<AjaxTagValuePair> theTumorList = new ArrayList<AjaxTagValuePair>();
+        return theTumorList;
+    }
 }
