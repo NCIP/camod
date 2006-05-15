@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.28 2006-05-12 20:42:06 guptaa Exp $
+ * $Id: searchSimple.jsp,v 1.29 2006-05-15 19:52:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2006/05/12 20:42:06  guptaa
+ * deleted css
+ *
  * Revision 1.27  2006/05/12 20:29:00  guptaa
  * indicator out
  *
@@ -112,7 +115,7 @@
 				</label>
 			</td>
 			<td class="formField">			
-				<input id="modelDescriptor" name="modelDescriptor" type="text"  size="30" />
+				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
   				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
 			</td>

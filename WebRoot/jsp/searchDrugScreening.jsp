@@ -40,7 +40,7 @@
 	        	<LABEL for=field1>NSC Number:</LABEL>
 	        </TD>
 	        <TD class=formField>
-	        	<input id="NSCNumber" name="NSCNumber" type="text"  size="30" />
+	            <html:text styleClass="formFieldSized" styleId="NSCNumber" property="NSCNumber" size="30"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="NSCNumber" target="NSCNumber"
   				parameters="NSCNumber={NSCNumber}" className="autocomplete" minimumCharacters="1" />	
 		        <br>

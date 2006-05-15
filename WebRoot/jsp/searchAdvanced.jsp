@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.35 2006-05-12 20:42:41 guptaa Exp $
+ * $Id: searchAdvanced.jsp,v 1.36 2006-05-15 19:52:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2006/05/12 20:42:41  guptaa
+ * deleted css
+ *
  * Revision 1.34  2006/05/12 20:30:28  guptaa
  * indicator out
  *
@@ -151,8 +154,8 @@
 			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> 
 				<camod:cshelp mapId="advanced_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
-			<td class="formField">			
-				<input id="modelDescriptor" name="modelDescriptor" type="text"  size="30" />
+			<td class="formField">
+				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
   				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
 			</td>
@@ -231,7 +234,7 @@
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field3">Gene Name:</label></td>
 			<td class="formField">
-			<input id="geneName" name="geneName" type="text"  size="30" />
+			    <html:text styleClass="formFieldSized" styleId="geneName" property="geneName" size="30"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="geneName" target="geneName"
   				parameters="geneName={geneName}" className="autocomplete" minimumCharacters="1" />	
 			</td>
