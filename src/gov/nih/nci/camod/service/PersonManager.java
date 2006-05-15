@@ -1,11 +1,14 @@
 /*
- * $Id: PersonManager.java,v 1.6 2006-04-17 19:13:16 pandyas Exp $
+ * Created on Jun 17, 2005
  *
- * $Log: not supported by cvs2svn $
+ * TODO To change the template for this generated file go to
+ * Window - Preferences - Java - Code Style - Code Templates
  */
 package gov.nih.nci.camod.service;
 
 import gov.nih.nci.camod.domain.Person;
+import gov.nih.nci.camod.webapp.form.EditUserData;
+
 import java.util.List;
 
 /**
@@ -22,6 +25,8 @@ public interface PersonManager {
     public Person getByUsername(String inUsername) throws Exception;
     
     public List getByRole(String inRole) throws Exception;
+    
+    public void addContactInfo(Person inPerson, EditUserData inData) throws Exception;
 
     public void remove(String id) throws Exception;
 

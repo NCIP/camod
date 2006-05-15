@@ -1,12 +1,18 @@
 /*
- * $Id: Person.java,v 1.12 2006-05-10 14:13:51 schroedn Exp $
+ * $Id: Person.java,v 1.13 2006-05-15 13:33:55 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/05/10 14:13:51  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.11  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
  */
 package gov.nih.nci.camod.domain;
+
+import java.util.Iterator;
+import java.util.Set;
 
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 
@@ -43,6 +49,27 @@ public class Person extends Party implements Comparable
         return theDisplayName;
     }
 
+    /**
+     * @return Returns the display name with the organization (if any)
+     */
+    public String getDisplayNameWithOrg()
+    {
+        String theDisplayName = getDisplayName();
+        
+        Set theContactInfos = getContactInfoCollection();
+
+        if (theContactInfos != null && theContactInfos.size() > 0) {
+            Iterator theIterator = theContactInfos.iterator();
+            ContactInfo theContactInfo = (ContactInfo) theIterator.next();
+            String theInstitute = theContactInfo.getInstitute();
+            
+            if (theInstitute != null && theInstitute.trim().length() > 0) {
+                theDisplayName += " (" + theInstitute.trim() + ")";
+            }
+        } 
+        return theDisplayName;
+    }
+    
     /**
      * @return Returns the e-mail address
      */

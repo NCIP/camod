@@ -1,12 +1,9 @@
 /**
  * @author dgeorge
  * 
- * $Id: PersonSearchResult.java,v 1.4 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: PersonSearchResult.java,v 1.5 2006-05-15 13:33:55 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.3  2006/01/18 14:23:31  georgeda
- * TT# 376 - Updated to use new Java 1.5 features
- *
  * Revision 1.2  2005/11/16 15:31:05  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -27,103 +24,107 @@ package gov.nih.nci.camod.domain;
 
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Used as wrapper around comments for speedy display during paganation.
  */
-public class PersonSearchResult
-{
-    private String myPersonId;
-    private String myDisplayName = null;
-    private Person myPerson = null;
-    private List myRoles = null;
-    private ContactInfo myContactInfo = null;
+public class PersonSearchResult {
 
-    /**
-     * Create the wraper object
-     * 
-     * @param inAnimalModel
-     *            the animal model we will be wrapping. Saves only the id.
-     */
-    public PersonSearchResult(Person inPerson)
-    {
-        myPersonId = inPerson.getId().toString();
-    }
+	private String myPersonId;
+	private String myDisplayName = null;
+	private Person myPerson = null;
+	private List myRoles = null;
+	private ContactInfo myContactInfo = null;
 
-    /**
-     * Return the id for the associated comments
-     * 
-     * @return the id for the model
-     */
-    public String getId()
-    {
-        return myPersonId;
-    }
+	/**
+	 * Create the wraper object
+	 * 
+	 * @param inAnimalModel
+	 *            the animal model we will be wrapping. Saves only the id.
+	 */
+	public PersonSearchResult(Person inPerson) {
+		myPersonId = inPerson.getId().toString();
+	}
 
-    /**
-     * Return the model descriptor. It will fetch the animal model from the DB
-     * if it hasn't already happened.
-     * 
-     * @return the model descriptor for the associated model
-     * 
-     * @throws Exception
-     */
-    public String getDisplayName() throws Exception
-    {
+	/**
+	 * Return the id for the associated comments
+	 * 
+	 * @return the id for the model
+	 */
+	public String getId() {
+		return myPersonId;
+	}
 
-        if (myDisplayName == null)
-        {
-            fetchPerson();
-            myDisplayName = myPerson.getDisplayName();
-        }
-        return myDisplayName;
-    }
+	/**
+	 * Return the model descriptor. It will fetch the animal model from the DB
+	 * if it hasn't already happened.
+	 * 
+	 * @return the model descriptor for the associated model
+	 * 
+	 * @throws Exception
+	 */
+	public String getDisplayName() throws Exception {
 
-    /**
-     * Return the contact information for the user
-     * 
-     * @return the contact information for the user
-     * 
-     * @throws Exception
-     */
-    public ContactInfo getContactInfo() throws Exception
-    {
+		if (myDisplayName == null) {
+			fetchPerson();
+			myDisplayName = myPerson.getDisplayName();
+		}
+		return myDisplayName;
+	}
 
-        if (myContactInfo == null)
-        {
+	/**
+	 * Return the contact information for the user
+	 * 
+	 * @return the contact information for the user
+	 * 
+	 * @throws Exception
+	 */
+	public ContactInfo getContactInfo() throws Exception {
 
-            fetchPerson();
-            myContactInfo = UserManagerSingleton.instance().getContactInformationForUser(myPerson.getUsername());
-        }
-        return myContactInfo;
-    }
+		if (myContactInfo == null) {
 
-    /**
-     * Return the model descriptor. It will fetch the animal model from the DB
-     * if it hasn't already happened.
-     * 
-     * @return the roles for the user
-     * 
-     * @throws Exception
-     */
-    public List getRoles() throws Exception
-    {
+			fetchPerson();
+			myContactInfo = new ContactInfo();
+			myContactInfo.setEmail(UserManagerSingleton.instance().getEmailForUser(myPerson.getUsername()));
+			
+			Set theContactInfos = myPerson.getContactInfoCollection();
+			
+			// Fill in the temp information
+			if (theContactInfos != null && theContactInfos.size() > 0) {
+                Iterator theIterator = theContactInfos.iterator();
+				ContactInfo theContactInfo = (ContactInfo)theIterator.next();
+				myContactInfo.setInstitute(theContactInfo.getInstitute());
+				myContactInfo.setPhone(theContactInfo.getPhone());
+			}
+		}
+		return myContactInfo;
+	}
 
-        if (myRoles == null)
-        {
-            fetchPerson();
-            myRoles = UserManagerSingleton.instance().getRolesForUser(myPerson.getUsername());
-        }
-        return myRoles;
-    }
+	/**
+	 * Return the model descriptor. It will fetch the animal model from the DB
+	 * if it hasn't already happened.
+	 * 
+	 * @return the roles for the user
+	 * 
+	 * @throws Exception
+	 */
+	public List getRoles() throws Exception {
 
-    // Fetch the animal model from the DB
-    private void fetchPerson() throws Exception
-    {
-        if (myPerson == null)
-        {
-            myPerson = PersonManagerSingleton.instance().get(myPersonId);
-        }
-    }
+		if (myRoles == null) {
+			fetchPerson();
+			myRoles = UserManagerSingleton.instance().getRolesForUser(myPerson.getUsername());
+		}
+		return myRoles;
+	}
+
+	// Fetch the animal model from the DB
+	private void fetchPerson() throws Exception {
+		if (myPerson == null) {
+			myPerson = PersonManagerSingleton.instance().get(myPersonId);
+		}
+	}
 }

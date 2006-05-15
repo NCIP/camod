@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminCommentsAssignmentPopulateAction.java,v 1.2 2005-10-24 13:28:17 georgeda Exp $
+ * $Id: AdminCommentsAssignmentPopulateAction.java,v 1.3 2006-05-15 13:40:50 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/24 13:28:17  georgeda
+ * Cleanup changes
+ *
  * Revision 1.1  2005/10/17 13:28:45  georgeda
  * Initial revision
  *
@@ -42,53 +45,58 @@ import org.apache.struts.action.ActionMessages;
  * roles
  * 
  */
-public class AdminCommentsAssignmentPopulateAction extends BaseAction {
+public class AdminCommentsAssignmentPopulateAction extends BaseAction
+{
 
-	/**
-	 * Action used to populate the various admin lists for the curation process
-	 */
-	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
-			HttpServletResponse inResponse) throws Exception {
+    /**
+     * Action used to populate the various admin lists for the curation process
+     */
+    public ActionForward execute(ActionMapping inMapping,
+                                 ActionForm inForm,
+                                 HttpServletRequest inRequest,
+                                 HttpServletResponse inResponse) throws Exception
+    {
+        log.trace("Entering execute");
 
-		log.trace("Entering execute");
+        CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
 
-		CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
+        try
+        {
+            NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.CURATIONSTATESDROP, Constants.Admin.COMMENT_CURATION_WORKFLOW);
 
-		try {
-			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.CURATIONSTATESDROP,
-					Constants.Admin.COMMENT_CURATION_WORKFLOW);
+            if (theForm.getCurrentState() != null)
+            {
+                Comments theQBEComments = new Comments();
+                theQBEComments.setState(theForm.getCurrentState());
 
-			if (theForm.getCurrentState() != null) {
+                // Get the models
+                List theCommentsList = Search.query(theQBEComments);
 
-				Comments theQBEComments = new Comments();
-				theQBEComments.setState(theForm.getCurrentState());
+                // Create a display list
+                List<CommentsSearchResult> theDisplayList = new ArrayList<CommentsSearchResult>();
 
-				// Get the models
-				List theCommentsList = Search.query(theQBEComments);
+                // Add Comment DTO's so that the paganation works quickly
+                for (int i = 0, j = theCommentsList.size(); i < j; i++)
+                {
+                    Comments theComments = (Comments) theCommentsList.get(i);
+                    theDisplayList.add(new CommentsSearchResult(theComments));
+                }
 
-				// Create a display list
-				List theDisplayList = new ArrayList();
+                inRequest.getSession().setAttribute(Constants.ADMIN_COMMENTS_SEARCH_RESULTS, theDisplayList);
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("Unable to get comments for state: " + theForm.getCurrentState());
 
-				// Add AnimalModel DTO's so that the paganation works quickly
-				for (int i = 0, j = theCommentsList.size(); i < j; i++) {
-					Comments theComments = (Comments) theCommentsList.get(i);
-					theDisplayList.add(new CommentsSearchResult(theComments));
-				}
+            // Encountered an error
+            ActionMessages theMsg = new ActionMessages();
+            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(inRequest, theMsg);
+        }
 
-				inRequest.getSession().setAttribute(Constants.ADMIN_COMMENTS_SEARCH_RESULTS, theDisplayList);
-			}
-		} catch (Exception e) {
-			
-			log.error("Unable to get comments for state: " + theForm.getCurrentState());
+        log.trace("Exiting execute");
 
-			// Encountered an error
-			ActionMessages theMsg = new ActionMessages();
-			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-			saveErrors(inRequest, theMsg);
-		}
-
-		log.trace("Exiting execute");
-
-		return inMapping.findForward("next");
-	}
+        return inMapping.findForward("next");
+    }
 }

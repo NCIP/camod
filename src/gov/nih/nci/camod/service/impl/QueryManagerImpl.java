@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.46 2006-05-12 12:49:33 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.47 2006-05-15 13:35:16 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.46  2006/05/12 12:49:33  georgeda
+ * Changes for autocomplete
+ *
  * Revision 1.45  2006/05/10 19:29:01  georgeda
  * Fixed error w/ Morphilino search
  *
@@ -2095,6 +2098,7 @@ public class QueryManagerImpl extends BaseManager
         try
         {
             List theList = QueryManagerSingleton.instance().getMatchingGeneNames("p");
+            System.out.println("Number matched: " + theList.size());
         }
         catch (Exception e)
         {

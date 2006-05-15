@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.20 2006-05-08 13:34:27 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.21 2006-05-15 13:39:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/05/08 13:34:27  georgeda
+ * Reformat and clean up warnings
+ *
  * Revision 1.19  2006/04/20 19:09:26  georgeda
  * Backed out another change
  *
@@ -204,7 +207,7 @@ public class UserManagerImpl extends BaseManager implements UserManager
                 theRole = (Role) theRoles.get(0);
 
                 // Get the users for the role
-                Set theUsers = theRole.getPartyCollection();
+                Set<Party> theUsers = theRole.getPartyCollection();
                 Iterator theIterator = theUsers.iterator();
 
                 // Go through the list of returned Party objects
@@ -281,38 +284,6 @@ public class UserManagerImpl extends BaseManager implements UserManager
         {
             log.info("Unable to update user roles for " + theCurrentUser, e);
         }
-    }
-
-    /**
-     * Get an e-mail address for a user
-     * 
-     * @param inUsername
-     *            is the login name of the user
-     * 
-     * @return the list of users associated with the role
-     */
-    public ContactInfo getContactInformationForUser(String inUsername)
-    {
-        log.trace("Entering getContactInformationForUser");
-        log.debug("Username: " + inUsername);
-
-        ContactInfo theContactInfo = new ContactInfo();
-
-        try
-        {
-            theContactInfo.setInstitute("");
-            theContactInfo.setEmail(LDAPUtil.getEmailAddressForUser(inUsername));
-            theContactInfo.setPhone("");
-
-        }
-        catch (Exception e)
-        {
-            log.warn("Could not fetch user from LDAP", e);
-        }
-
-        log.trace("Exiting getEmailForUser");
-
-        return theContactInfo;
     }
 
     /**

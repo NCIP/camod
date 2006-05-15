@@ -1,7 +1,7 @@
 /**
  * @author dgeorge
  * 
- * $Id: PersonManagerImpl.java,v 1.8 2006-01-18 14:24:24 georgeda Exp $
+ * $Id: PersonManagerImpl.java,v 1.9 2006-05-15 13:35:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.7  2005/10/17 13:14:11  georgeda
@@ -17,162 +17,181 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.PersonManager;
+import gov.nih.nci.camod.webapp.form.EditUserData;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluation;
 import gov.nih.nci.common.persistence.hibernate.eqbe.Evaluator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class that handles saving/fetching Person objects
  */
-public class PersonManagerImpl extends BaseManager implements PersonManager
-{
-    /**
-     * Get all people in the system
-     * 
-     * @returns a list of all people in the system
-     * 
-     * @exception Exception
-     *                If an error occurrs fetching the users
-     */
-    public List getAll() throws Exception
-    {
-        log.trace("In PersonManagerImpl.getAll");
-        return super.getAll(Person.class);
-    }
+public class PersonManagerImpl extends BaseManager implements PersonManager {
 
-    /**
-     * Get a person object by unique id
-     * 
-     * @param id
-     *            The username of the person to be fetched
-     * 
-     * @returns the Person object corresponding to the id
-     * 
-     * @exception Exception
-     *                If an error occurrs fetching the user
-     */
-    public Person get(String id) throws Exception
-    {
-        log.trace("In PersonManagerImpl.get");
-        return (Person) super.get(id, Person.class);
-    }
+	/**
+	 * Get all people in the system
+	 * 
+	 * @returns a list of all people in the system
+	 * 
+	 * @exception Exception
+	 *                If an error occurrs fetching the users
+	 */
+	public List getAll() throws Exception {
+		log.trace("In PersonManagerImpl.getAll");
+		return super.getAll(Person.class);
+	}
 
-    /**
-     * Get a person object by username
-     * 
-     * @param inUsername
-     *            The username of the person to be fetched
-     * 
-     * @returns the Person object corresponding to the username
-     * 
-     * @exception Exception
-     *                If an error occurrs fetching the user
-     */
-    public Person getByUsername(String inUsername) throws Exception
-    {
-        Person person = null;
+	/**
+	 * Get a person object by unique id
+	 * 
+	 * @param id
+	 *            The username of the person to be fetched
+	 * 
+	 * @returns the Person object corresponding to the id
+	 * 
+	 * @exception Exception
+	 *                If an error occurrs fetching the user
+	 */
+	public Person get(String id) throws Exception {
+		log.trace("In PersonManagerImpl.get");
+		return (Person) super.get(id, Person.class);
+	}
 
-        if (inUsername != null && inUsername.length() > 0)
-        {
-            try
-            {
-                // The following two objects are needed for eQBE.
-                Person thePerson = new Person();
-                thePerson.setUsername(inUsername);
+	/**
+	 * Get a person object by username
+	 * 
+	 * @param inUsername
+	 *            The username of the person to be fetched
+	 * 
+	 * @returns the Person object corresponding to the username
+	 * 
+	 * @exception Exception
+	 *                If an error occurrs fetching the user
+	 */
+	public Person getByUsername(String inUsername) throws Exception {
 
-                // Apply evaluators to object properties
-                Evaluation theEvaluation = new Evaluation();
-                theEvaluation.addEvaluator("person.username", Evaluator.EQUAL);
+		Person person = null;
 
-                List thePersonList = Search.query(thePerson, theEvaluation);
+		if (inUsername != null && inUsername.length() > 0) {
+			try {
 
-                if (thePersonList != null && thePersonList.size() > 0)
-                {
-                    person = (Person) thePersonList.get(0);
-                }
-            }
-            catch (PersistenceException pe)
-            {
-                log.error("PersistenceException in getByUsername", pe);
-                throw pe;
-            }
-            catch (Exception e)
-            {
-                log.error("Exception in getByUsername", e);
-                throw e;
-            }
-        }
-        return person;
-    }
+				// The following two objects are needed for eQBE.
+				Person thePerson = new Person();
+				thePerson.setUsername(inUsername);
 
-    /**
-     * Get all people assigned to a certain role.
-     * 
-     * @param inRole
-     *            The role 
-     * 
-     * @returns a list of Person objects corresponding to the role
-     * 
-     * @exception Exception
-     *                If an error occurrs fetching the user
-     */
-    public List getByRole(String inRole) throws Exception
-    {
-        List thePeople = new ArrayList();
+				// Apply evaluators to object properties
+				Evaluation theEvaluation = new Evaluation();
+				theEvaluation.addEvaluator("person.username", Evaluator.EQUAL);
 
-        if (inRole != null && inRole.length() > 0)
-        {
-            try
-            {
-                thePeople = QueryManagerSingleton.instance().getPeopleByRole(inRole);
-            }
-            catch (PersistenceException pe)
-            {
-                log.error("PersistenceException in getByRole", pe);
-                throw pe;
-            }
-            catch (Exception e)
-            {
-                log.error("Exception in getByRole", e);
-                throw e;
-            }
-        }
-        return thePeople;
-    }
+				List thePersonList = Search.query(thePerson, theEvaluation);
 
-    /**
-     * Save the person object
-     * 
-     * @param person
-     *            The person to be saved
-     * 
-     * @exception Exception
-     *                If we're unable to save the person
-     */
-    public void save(Person person) throws Exception
-    {
-        log.trace("In PersonManagerImpl.save");
-        super.save(person);
-    }
+				if (thePersonList != null && thePersonList.size() > 0) {
+					person = (Person) thePersonList.get(0);
+				}
 
-    /**
-     * Remove the person based on the id
-     * 
-     * @param id
-     *            The unique id for the Person
-     * 
-     * @exception Exception
-     *                If it was unable to remove the person
-     */
-    public void remove(String id) throws Exception
-    {
-        log.trace("In PersonManagerImpl.remove");
-        super.remove(id, Person.class);
-    }
+			} catch (PersistenceException pe) {
+				log.error("PersistenceException in getByUsername", pe);
+				throw pe;
+			} catch (Exception e) {
+				log.error("Exception in getByUsername", e);
+				throw e;
+			}
+		}
+		return person;
+	}
+
+	/**
+	 * Add contact information to a user
+	 * 
+	 * @param inPerson
+	 *            The person to add the contact info to
+	 * 
+	 * @param inData
+	 *            The data to use to construct the ContactInfo
+	 * 
+	 * @exception Exception
+	 *                If an error occurs
+	 */
+	public void addContactInfo(Person inPerson, EditUserData inData) throws Exception {
+
+		Set theContactInfos = inPerson.getContactInfoCollection();
+
+		if (theContactInfos != null && theContactInfos.size() > 0) {
+            Iterator theIterator = theContactInfos.iterator();
+			ContactInfo theContactInfo = (ContactInfo) theIterator.next();
+			theContactInfo.setInstitute(inData.getAffiliation());
+			theContactInfo.setPhone(inData.getPhone());
+		} else {
+			ContactInfo theContactInfo = new ContactInfo();
+			theContactInfo.setInstitute(inData.getAffiliation());
+			theContactInfo.setPhone(inData.getPhone());
+			inPerson.addContactInfo(theContactInfo);
+		}
+	}
+
+	/**
+	 * Get all people assigned to a certain role.
+	 * 
+	 * @param inRole
+	 *            The role
+	 * 
+	 * @returns a list of Person objects corresponding to the role
+	 * 
+	 * @exception Exception
+	 *                If an error occurrs fetching the user
+	 */
+	public List getByRole(String inRole) throws Exception {
+
+		List thePeople = new ArrayList();
+
+		if (inRole != null && inRole.length() > 0) {
+			try {
+				thePeople = QueryManagerSingleton.instance().getPeopleByRole(inRole);
+
+			} catch (PersistenceException pe) {
+				log.error("PersistenceException in getByRole", pe);
+				throw pe;
+			} catch (Exception e) {
+				log.error("Exception in getByRole", e);
+				throw e;
+			}
+		}
+		return thePeople;
+	}
+
+	/**
+	 * Save the person object
+	 * 
+	 * @param person
+	 *            The person to be saved
+	 * 
+	 * @exception Exception
+	 *                If we're unable to save the person
+	 */
+	public void save(Person person) throws Exception {
+		log.trace("In PersonManagerImpl.save");
+		super.save(person);
+	}
+
+	/**
+	 * Remove the person based on the id
+	 * 
+	 * @param id
+	 *            The unique id for the Person
+	 * 
+	 * @exception Exception
+	 *                If it was unable to remove the person
+	 */
+	public void remove(String id) throws Exception {
+		log.trace("In PersonManagerImpl.remove");
+		super.remove(id, Person.class);
+	}
 }
