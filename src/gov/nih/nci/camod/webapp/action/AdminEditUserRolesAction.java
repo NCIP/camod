@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AdminEditUserRolesAction.java,v 1.5 2006-04-17 19:09:40 pandyas Exp $
+ *  $Id: AdminEditUserRolesAction.java,v 1.6 2006-05-15 15:42:49 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.5  2006/04/17 19:09:40  pandyas
+ *  caMod 2.1 OM changes
+ *
  *  Revision 1.4  2005/11/16 15:31:16  georgeda
  *  Defect #41. Clean up of email functionality
  *
@@ -33,88 +36,103 @@ import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.webapp.form.RolesAssignmentForm;
 import gov.nih.nci.common.persistence.Search;
-import java.util.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-public class AdminEditUserRolesAction extends BaseAction {
+public class AdminEditUserRolesAction extends BaseAction
+{
 
-	/**
-	 * Change the state for the animal model
-	 */
-	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
-			HttpServletResponse inResponse) throws Exception {
+    /**
+     * Change the state for the animal model
+     */
+    public ActionForward execute(ActionMapping inMapping,
+                                 ActionForm inForm,
+                                 HttpServletRequest inRequest,
+                                 HttpServletResponse inResponse) throws Exception
+    {
+        log.trace("Entering AdminEditUserRolesAction.execute");
 
-		log.trace("Entering AdminEditUserRolesAction.execute");
+        // The user didn't press the cancel button
+        if (!isCancelled(inRequest))
+        {
+            try
+            {
+                // Get the animal model
+                RolesAssignmentForm theForm = (RolesAssignmentForm) inForm;
 
-		// The user didn't press the cancel button
-		if (!isCancelled(inRequest)) {
+                Person thePerson = PersonManagerSingleton.instance().get(theForm.getPersonId());
 
-			try {
-				// Get the animal model
-				RolesAssignmentForm theForm = (RolesAssignmentForm) inForm;
+                // Did the id match?
+                if (thePerson != null)
+                {
+                    log.debug("Changing the roles for user: " + thePerson.getDisplayName());
 
-				Person thePerson = PersonManagerSingleton.instance().get(theForm.getPersonId());
+                    Set<Role> theRoles = new HashSet<Role>();
 
-				// Did the id match?
-				if (thePerson != null) {
+                    if (theForm.isCoordinator() == true)
+                    {
+                        Role theQBERole = new Role();
+                        theQBERole.setName(Constants.Admin.Roles.COORDINATOR);
+                        List theQBEList = Search.query(theQBERole);
 
-					log.debug("Changing the roles for user: " + thePerson.getDisplayName());
+                        if (theQBEList.size() > 0)
+                        {
+                            theRoles.add((Role) theQBEList.get(0));
+                        }
+                    }
+                    if (theForm.isEditor() == true)
+                    {
+                        Role theQBERole = new Role();
+                        theQBERole.setName(Constants.Admin.Roles.EDITOR);
+                        List theQBEList = Search.query(theQBERole);
 
-					Set theRolesList = new HashSet();
+                        if (theQBEList.size() > 0)
+                        {
+                            theRoles.add((Role)theQBEList.get(0));
+                        }
+                    }
+                    if (theForm.isScreener() == true)
+                    {
+                        Role theQBERole = new Role();
+                        theQBERole.setName(Constants.Admin.Roles.SCREENER);
+                        List theQBEList = Search.query(theQBERole);
 
-					if (theForm.isCoordinator() == true) {
-						Role theQBERole = new Role();
-						theQBERole.setName(Constants.Admin.Roles.COORDINATOR);
-						List theQBEList = Search.query(theQBERole);
+                        if (theQBEList.size() > 0)
+                        {
+                            theRoles.add((Role)theQBEList.get(0));
+                        }
+                    }
 
-						if (theQBEList.size() > 0) {
-							theRolesList.add(theQBEList.get(0));
-						}
-					}
-					if (theForm.isEditor() == true) {
-						Role theQBERole = new Role();
-						theQBERole.setName(Constants.Admin.Roles.EDITOR);
-						List theQBEList = Search.query(theQBERole);
+                    thePerson.setRoleCollection(theRoles);
+                    PersonManagerSingleton.instance().save(thePerson);
 
-						if (theQBEList.size() > 0) {
-							theRolesList.add(theQBEList.get(0));
-						}
-					}
-					if (theForm.isScreener() == true) {
-						Role theQBERole = new Role();
-						theQBERole.setName(Constants.Admin.Roles.SCREENER);
-						List theQBEList = Search.query(theQBERole);
+                    UserManagerSingleton.instance().updateCurrentUserRoles(inRequest);
+                }
+            }
+            catch (Exception e)
+            {
+                log.error("Caught an setting the user roles: ", e);
 
-						if (theQBEList.size() > 0) {
-							theRolesList.add(theQBEList.get(0));
-						}
-					}
+                // Encountered an error saving the model.
+                ActionMessages theMsg = new ActionMessages();
+                theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+                saveErrors(inRequest, theMsg);
+            }
+        }
 
-					thePerson.setRoleCollection(theRolesList);
-					PersonManagerSingleton.instance().save(thePerson);
+        log.trace("Exiting AdminEditUserRolesAction.execute");
 
-					UserManagerSingleton.instance().updateCurrentUserRoles(inRequest);
-
-				}
-			} catch (Exception e) {
-
-				log.error("Caught an setting the user roles: ", e);
-
-				// Encountered an error saving the model.
-				ActionMessages theMsg = new ActionMessages();
-				theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-				saveErrors(inRequest, theMsg);
-			}
-		}
-
-		log.trace("Exiting AdminEditUserRolesAction.execute");
-
-		return inMapping.findForward("next");
-	}
+        return inMapping.findForward("next");
+    }
 }

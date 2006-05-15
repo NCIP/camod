@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesAssignmentPopulateAction.java,v 1.3 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: AdminRolesAssignmentPopulateAction.java,v 1.4 2006-05-15 15:43:42 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.2  2005/10/24 13:28:17  georgeda
  * Cleanup changes
  *
@@ -72,7 +75,7 @@ public class AdminRolesAssignmentPopulateAction extends BaseAction {
 				// Create a display list
 				List<PersonSearchResult> theDisplayList = new ArrayList<PersonSearchResult>();
 
-				// Add AnimalModel DTO's so that the paganation works quickly
+				// Add PersonSearchResult DTO's so that the paganation works quickly
 				for (int i = 0, j = theUsers.size(); i < j; i++) {
 					Person thePerson = (Person) theUsers.get(i);
 					theDisplayList.add(new PersonSearchResult(thePerson));

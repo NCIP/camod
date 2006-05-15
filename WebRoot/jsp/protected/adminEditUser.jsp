@@ -38,12 +38,18 @@
 			</c:if>
 			</td>
 		</tr>
-
+		<tr>
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>
+			<html:form method="get" action="AdminEditUserAction.do">
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="affiliation" size="30"/>
+			</td>
+		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field2">First Name</label></td>
 			<td class="formField">
-			    <html:form method="get" action="AdminEditUserAction.do">
 				<html:text styleClass="formFieldSized" property="firstName" size="30"/>
 			</td>
 		</tr>
@@ -63,7 +69,13 @@
 				<html:text styleClass="formFieldSized" property="username" size="30"/>
 			</td>
 		</tr>
-		
+		<tr>
+			<td class="formRequiredNotice" width="0">*</td>
+			<td class="formRequiredLabel"><label for="field1">Phone</label></td>
+			<td class="formField">
+				<html:text styleClass="formFieldSized" property="phone" size="30"/>
+			</td>
+		</tr>				
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp</td>
 			<td class="formLabel"><label for="field1">Principal Investigator</label></td>

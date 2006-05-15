@@ -41,8 +41,8 @@
 			</td>
 		</tr>		
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp</td>
-			<td class="formLabel"><label for="field2">Institute / Organization</label></td>
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formRequiredLabel"><label for="field2">Institute / Organization</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="affiliation" size="30"/>
 			</td>

@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStateAction.java,v 1.9 2005-11-28 13:48:18 georgeda Exp $
+ *  $Id: ChangeAnimalModelStateAction.java,v 1.10 2006-05-15 15:44:27 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.9  2005/11/28 13:48:18  georgeda
+ *  Defect #192, handle back arrow for curation changes
+ *
  *  Revision 1.8  2005/10/10 14:12:01  georgeda
  *  Changes for comment curation
  *
@@ -70,9 +73,8 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 					theAnimalModelManager.updateAndAddLog(theAnimalModel, theLog);
 
 					// Do any association actions since we've sucessfully
-					// changed
-					// state
-					HashMap theMap = new HashMap();
+					// changed state
+					HashMap<String, Object> theMap = new HashMap<String, Object>();
 					theMap.put(Constants.FORMDATA, theForm);
 					theCurationManager.applyActionsForState(theAnimalModel, theMap);
 				}

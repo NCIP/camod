@@ -1610,9 +1610,14 @@
 		</form>
 
 		<form name="userSettingsForm">
-			<field property="affiliation" depends="required">
-				<arg0 key="UserSettingsForm.affiliation" />
-			</field>
+	        <field property="affiliation" depends="required, maxlength">
+	            <arg0 key="UserSettingsForm.affiliation"/>
+	            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+	            <var>
+	                <var-name>maxlength</var-name>
+	                <var-value>255</var-value>
+	            </var>
+	        </field>
 			<field property="firstName" depends="required, maxlength">
 				<arg0 key="UserSettingsForm.firstName" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1701,6 +1706,14 @@
 		</form>
 
 		<form name="editUserForm">
+			<field property="affiliation" depends="required, maxlength">
+	            <arg0 key="EditUserForm.affiliation"/>
+	            <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+	            <var>
+	                <var-name>maxlength</var-name>
+	                <var-value>255</var-value>
+	            </var>
+	        </field>
 			<field property="firstName" depends="required, maxlength">
 				<arg0 key="EditUserForm.firstName" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1722,6 +1735,15 @@
 			<field property="username" depends="maxlength">
 				<arg0 key="EditUserForm.username" />
 				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="phone" depends="required">
+				<arg0 key="EditUserForm.phone" />
+		    	<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
 					<var-name>maxlength</var-name>

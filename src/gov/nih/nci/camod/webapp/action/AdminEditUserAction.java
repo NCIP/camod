@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserAction.java,v 1.4 2005-10-24 13:28:17 georgeda Exp $
+ * $Id: AdminEditUserAction.java,v 1.5 2006-05-15 15:42:14 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2005/10/24 13:28:17  georgeda
+ * Cleanup changes
+ *
  * Revision 1.3  2005/10/17 16:30:24  georgeda
  * Cleanup
  *
@@ -17,6 +20,9 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
+import java.util.List;
+
+import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.webapp.form.EditUserForm;
@@ -31,55 +37,65 @@ import org.apache.struts.action.*;
  * Used to populate the form used to assign roles to a user.
  * 
  */
-public class AdminEditUserAction extends BaseAction {
+public class AdminEditUserAction extends BaseAction
+{
 
     /**
      * Action used to populate the various admin lists for the curation process
      */
-    public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
-            HttpServletResponse inResponse) throws Exception {
-
+    public ActionForward execute(ActionMapping inMapping,
+                                 ActionForm inForm,
+                                 HttpServletRequest inRequest,
+                                 HttpServletResponse inResponse) throws Exception
+    {
         log.trace("Entering execute");
 
         String theForward = "next";
 
         // The user didn't press the cancel button
-        if (!isCancelled(inRequest)) {
-
+        if (!isCancelled(inRequest))
+        {
             EditUserForm theForm = (EditUserForm) inForm;
 
-            if (theForm.getId() == null || theForm.getId().length() == 0) {
+            if (theForm.getId() == null || theForm.getId().length() == 0)
+            {
                 theForward = processAdd(theForm, inRequest);
-            } else {
+            }
+            else
+            {
                 theForward = processEdit(theForm, inRequest);
             }
         }
         return inMapping.findForward(theForward);
     }
 
-    String processEdit(EditUserForm inForm, HttpServletRequest inRequest) {
+    String processEdit(EditUserForm inForm,
+                       HttpServletRequest inRequest)
+    {
         String theForward = "next";
 
-        try {
-
+        try
+        {
             Person thePerson = PersonManagerSingleton.instance().get(inForm.getId());
 
-            if (thePerson == null) {
+            if (thePerson == null)
+            {
                 ActionMessages theMsg = new ActionMessages();
                 theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
                 saveErrors(inRequest, theMsg);
                 throw new IllegalArgumentException("Unknown userid: " + inForm.getId());
             }
 
-            if (inForm.getUsername() != null) {
+            if (inForm.getUsername() != null)
+            {
                 Person theExistingPerson = PersonManagerSingleton.instance().getByUsername(inForm.getUsername());
-                if (theExistingPerson != null && !theExistingPerson.equals(thePerson)) {
+                if (theExistingPerson != null && !theExistingPerson.equals(thePerson))
+                {
                     ActionMessages theMsg = new ActionMessages();
                     theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("admin.user.usernameexists"));
                     saveErrors(inRequest, theMsg);
 
-                    throw new IllegalArgumentException("User with username: " + inForm.getUsername()
-                            + " already exists");
+                    throw new IllegalArgumentException("User with username: " + inForm.getUsername() + " already exists");
                 }
             }
 
@@ -88,13 +104,18 @@ public class AdminEditUserAction extends BaseAction {
             thePerson.setUsername(inForm.getUsername());
             thePerson.setIsPrincipalInvestigator(new Boolean(inForm.isPrincipalInvestigator()));
 
+
+            PersonManagerSingleton.instance().addContactInfo(thePerson, inForm);
             PersonManagerSingleton.instance().save(thePerson);
 
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             theForward = "baddata";
             log.error("Bad user data: ", e);
-        } catch (Exception e) {
-
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get user: ", e);
 
             // Encountered an error saving the model.
@@ -109,34 +130,41 @@ public class AdminEditUserAction extends BaseAction {
         return theForward;
     }
 
-    String processAdd(EditUserForm inForm, HttpServletRequest inRequest) {
+    String processAdd(EditUserForm inForm,
+                      HttpServletRequest inRequest)
+    {
         String theForward = "next";
-        try {
-
-            if (inForm.getUsername() != null) {
-                Person theExistingPerson = PersonManagerSingleton.instance().getByUsername(inForm.getUsername());
-                if (theExistingPerson != null) {
+        try
+        {
+            if (inForm.getUsername() != null)
+            {
+                Person theExistingPerson = PersonManagerSingleton.instance().getByUsername(inForm.getUsername().toLowerCase());
+                if (theExistingPerson != null)
+                {
                     ActionMessages theMsg = new ActionMessages();
                     theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("admin.user.usernameexists"));
                     saveErrors(inRequest, theMsg);
 
-                    throw new IllegalArgumentException("User with username: " + inForm.getUsername()
-                            + " already exists");
+                    throw new IllegalArgumentException("User with username: " + inForm.getUsername() + " already exists");
                 }
             }
 
             Person thePerson = new Person();
             thePerson.setLastName(inForm.getLastName());
             thePerson.setFirstName(inForm.getFirstName());
-            thePerson.setUsername(inForm.getUsername());
+            thePerson.setUsername(inForm.getUsername().toLowerCase());
             thePerson.setIsPrincipalInvestigator(new Boolean(inForm.isPrincipalInvestigator()));
 
+            PersonManagerSingleton.instance().addContactInfo(thePerson, inForm);
             PersonManagerSingleton.instance().save(thePerson);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e)
+        {
             theForward = "baddata";
             log.error("Bad user data: ", e);
-        } catch (Exception e) {
-
+        }
+        catch (Exception e)
+        {
             log.error("Unable to get user: ", e);
 
             // Encountered an error saving the model.

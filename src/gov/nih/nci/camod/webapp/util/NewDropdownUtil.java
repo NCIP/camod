@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.41 2006-05-10 14:16:14 schroedn Exp $
+ * $Id: NewDropdownUtil.java,v 1.42 2006-05-15 15:45:40 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2006/05/10 14:16:14  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.40  2006/04/17 19:08:38  pandyas
  * caMod 2.1 OM changes
  *
@@ -618,7 +621,6 @@ public class NewDropdownUtil
     private static List getUsersList(HttpServletRequest inRequest,
                                      String inAddBlank) throws Exception
     {
-
         log.trace("Entering NewDropdownUtil.getUsersList");
 
         List thePersonList = Search.query(Person.class);
@@ -632,7 +634,7 @@ public class NewDropdownUtil
             {
                 Person thePerson = (Person) thePersonList.get(i);
 
-                DropdownOption theOption = new DropdownOption(thePerson.getDisplayName(), thePerson.getId().toString());
+                DropdownOption theOption = new DropdownOption(thePerson.getDisplayNameWithOrg(), thePerson.getId().toString());
                 theReturnList.add(theOption);
             }
         }
