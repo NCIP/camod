@@ -119,8 +119,17 @@ Autocompleter.Base.prototype = {
       switch(event.keyCode) {
        case Event.KEY_TAB:
        case Event.KEY_RETURN:
+       //added to make selection inactive in case of no selection
+         if (this.index < 0) {
+         this.hide();
+         this.active = false;
+         Event.stop(event);
+         return;
+         }
+         else {
          this.selectEntry();
          Event.stop(event);
+         }
        case Event.KEY_ESC:
          this.hide();
          this.active = false;
@@ -141,8 +150,9 @@ Autocompleter.Base.prototype = {
          return;
       }
      else 
-      if(event.keyCode==Event.KEY_TAB || event.keyCode==Event.KEY_RETURN) 
+      if(event.keyCode==Event.KEY_TAB || event.keyCode==Event.KEY_RETURN) {
         return;
+      }
 
     this.changed = true;
     this.hasFocus = true;
@@ -269,8 +279,8 @@ Autocompleter.Base.prototype = {
       }
 
       this.stopIndicator();
-
-      this.index = 0;
+//added -1 instead of 0 to make the selection not choose the default values
+      this.index = -1;
       this.render();
     }
   },
