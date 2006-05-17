@@ -43,13 +43,17 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: AutocompleteUtil.java,v 1.1 2006-05-12 12:49:49 georgeda Exp $
+ * $Id: AutocompleteUtil.java,v 1.2 2006-05-17 21:17:03 guptaa Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/12 12:49:49  georgeda
+ * Initial revision
+ *
  * 
  */
 
 package gov.nih.nci.camod.util;
+
 
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 
@@ -66,197 +70,224 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 
  * Utility class used for the autocomplete servlet
- *
+ * 
  */
-public class AutocompleteUtil
-{
-    private static Log ourLog = null;
+public class AutocompleteUtil {
+	private static Log ourLog = null;
 
-    private static SortedSet<String> ourNSCNumbers = null;
-    private static long ourNSCReloadTime;
+	private static SortedSet<String> ourNSCNumbers = null;
 
-    static
-    {
-        ourLog = LogFactory.getLog(AutocompleteUtil.class);
+	private static long ourNSCReloadTime;
 
-        try
-        {
-            initializeNSCNumbers();
-        }
-        // Nothing we can do.
-        catch (Exception ignore)
-        {}
-    }
+	static {
+		ourLog = LogFactory.getLog(AutocompleteUtil.class);
 
-    // Common method used to initialize the NSC numbers.  The query takes
-    // a long time, but the data doesn't change often making it a good
-    // candidate for caching.
-    private static synchronized void initializeNSCNumbers() throws Exception
-    {
-        ourLog.debug("Entering initializeNSCNumbers");
+		try {
+			initializeNSCNumbers();
+		}
+		// Nothing we can do.
+		catch (Exception ignore) {
+		}
+	}
 
-        if (ourNSCNumbers == null || System.currentTimeMillis() > ourNSCReloadTime)
-        {
-            ourLog.debug("NSC numbers need to be loaded");
+	// Common method used to initialize the NSC numbers. The query takes
+	// a long time, but the data doesn't change often making it a good
+	// candidate for caching.
+	private static synchronized void initializeNSCNumbers() throws Exception {
+		ourLog.debug("Entering initializeNSCNumbers");
 
-            ourNSCNumbers = new TreeSet<String>();
+		if (ourNSCNumbers == null
+				|| System.currentTimeMillis() > ourNSCReloadTime) {
+			ourLog.debug("NSC numbers need to be loaded");
 
-            List theNSCNumbers = QueryManagerSingleton.instance().getNSCNumbers();
+			ourNSCNumbers = new TreeSet<String>();
 
-            // Convert them to strings and grab a current timestamp
-            for (Object theObject : theNSCNumbers)
-            {
-                ourNSCNumbers.add(theObject.toString());
-            }
-            ourNSCReloadTime = System.currentTimeMillis() + 24 * 60 * 60 * 1000;
-        }
+			List theNSCNumbers = QueryManagerSingleton.instance()
+					.getNSCNumbers();
 
-        ourLog.debug("Exiting initializeNSCNumbers");
-    }
+			// Convert them to strings and grab a current timestamp
+			for (Object theObject : theNSCNumbers) {
+				ourNSCNumbers.add(theObject.toString());
+			}
+			ourNSCReloadTime = System.currentTimeMillis() + 24 * 60 * 60 * 1000;
+		}
 
-    /**
-     * Get all NSC numbers that match the passed in prefix.  The numbers are
-     * treated as strings for this comparison.
-     * 
-     * @param inPrefix the prefix to match
-     * @param inNumToReturn the maximum number of results to return
-     * 
-     * @return a sorted set of matching NSC numbers
-     * 
-     * @throws Exception 
-     */
-    public static synchronized SortedSet<String> getMatchingNSCNumbers(String inPrefix,
-                                                                       int inNumToReturn) throws Exception
-    {
-        ourLog.debug("Entering getMatchingNSCNumbers");
-        ourLog.info("Prefix: (" + inPrefix + " ) - Num to return (" + inNumToReturn + ")");
+		ourLog.debug("Exiting initializeNSCNumbers");
+	}
 
-        SortedSet<String> theReturnSet = null;
+	/**
+	 * Get all NSC numbers that match the passed in prefix. The numbers are
+	 * treated as strings for this comparison.
+	 * 
+	 * @param inPrefix
+	 *            the prefix to match
+	 * @param inNumToReturn
+	 *            the maximum number of results to return
+	 * 
+	 * @return a sorted set of matching NSC numbers
+	 * 
+	 * @throws Exception
+	 */
+	public static synchronized SortedSet<String> getMatchingNSCNumbers(
+			String inPrefix, int inNumToReturn) throws Exception {
+		ourLog.debug("Entering getMatchingNSCNumbers");
+		ourLog.info("Prefix: (" + inPrefix + " ) - Num to return ("
+				+ inNumToReturn + ")");
 
-        initializeNSCNumbers();
+		SortedSet<String> theReturnSet = null;
 
-        Pattern thePattern = Pattern.compile("^" + inPrefix + "[0-9]*");
+		initializeNSCNumbers();
 
-        SortedSet<String> theMatchingSet = ourNSCNumbers.tailSet(inPrefix);
+		Pattern thePattern = Pattern.compile("^" + inPrefix + "[0-9]*");
 
-        // Grab all of the items after the prefix
-        if (theMatchingSet.size() > 0)
-        {
-            String theStartItem = theMatchingSet.first();
-            String theEndItem = null;
+		SortedSet<String> theMatchingSet = ourNSCNumbers.tailSet(inPrefix);
 
-            int theCount = 0;
+		// Grab all of the items after the prefix
+		if (theMatchingSet.size() > 0) {
+			String theStartItem = theMatchingSet.first();
+			String theEndItem = null;
 
-            // Loop through until the item doesn't match the regex, or
-            // the limit of number of objects to return has been reached
-            for (String theItem : theMatchingSet)
-            {
-                Matcher theMatcher = thePattern.matcher(theItem);
+			int theCount = 0;
 
-                if (!theMatcher.matches() || theCount++ >= inNumToReturn)
-                {
-                    theEndItem = theItem;
-                    break;
-                }
-            }
+			// Loop through until the item doesn't match the regex, or
+			// the limit of number of objects to return has been reached
+			for (String theItem : theMatchingSet) {
+				Matcher theMatcher = thePattern.matcher(theItem);
 
-            if (theEndItem != null)
-            {
-                theReturnSet = ourNSCNumbers.subSet(theStartItem, theEndItem);
-            }
-            else
-            {
-                theReturnSet = theMatchingSet;
-            }
-        }
-        ourLog.info("Number returned: " + theReturnSet.size());
-        ourLog.debug("Exiting getMatchingNSCNumbers");
+				if (!theMatcher.matches() || theCount++ >= inNumToReturn) {
+					theEndItem = theItem;
+					break;
+				}
+			}
 
-        return theReturnSet;
-    }
+			if (theEndItem != null) {
+				theReturnSet = ourNSCNumbers.subSet(theStartItem, theEndItem);
+			} else {
+				theReturnSet = theMatchingSet;
+			}
+		}
+		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Exiting getMatchingNSCNumbers");
 
-    /**
-     * Get all modelDescriptors that match the passed in prefix. 
-     *  
-     * @param inPrefix the prefix to match
-     * @param inNumToReturn the maximum number of results to return
-     * 
-     * @return a sorted set of matching animal model names
-     * 
-     * @throws Exception 
-     */
-    public static synchronized SortedSet<String> getMatchingAnimalModelNames(String inPrefix,
-                                                                             int inNumToReturn) throws Exception
-    {
-        ourLog.debug("Entering getMatchingAnimalModelNames");
+		return theReturnSet;
+	}
 
-        SortedSet<String> theReturnSet = null;
+	/**
+	 * Get all modelDescriptors that match the passed in prefix.
+	 * 
+	 * @param inPrefix
+	 *            the prefix to match
+	 * @param inNumToReturn
+	 *            the maximum number of results to return
+	 * 
+	 * @return a sorted set of matching animal model names
+	 * 
+	 * @throws Exception
+	 */
+	public static synchronized SortedSet<String> getMatchingAnimalModelNames(
+			String inPrefix, int inNumToReturn) throws Exception {
+		ourLog.debug("Entering getMatchingAnimalModelNames");
 
-        List theMatchingAnimalModelNames = QueryManagerSingleton.instance().getMatchingAnimalModelNames(inPrefix);
+		SortedSet<String> theReturnSet = null;
 
-        // Only return the number requested
-        if (theMatchingAnimalModelNames.size() > inNumToReturn)
-        {
-            theMatchingAnimalModelNames = theMatchingAnimalModelNames.subList(0, inNumToReturn);
-        }
-        theReturnSet = new TreeSet<String>(theMatchingAnimalModelNames);
+		List theMatchingAnimalModelNames = QueryManagerSingleton.instance()
+				.getMatchingAnimalModelNames(inPrefix);
 
-        ourLog.info("Number returned: " + theReturnSet.size());
-        ourLog.debug("Exiting getMatchingAnimalModelNames");
+		// Only return the number requested
+		if (theMatchingAnimalModelNames.size() > inNumToReturn) {
+			theMatchingAnimalModelNames = theMatchingAnimalModelNames.subList(
+					0, inNumToReturn);
+		}
+		theReturnSet = new TreeSet<String>(theMatchingAnimalModelNames);
 
-        return theReturnSet;
-    }
+		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Exiting getMatchingAnimalModelNames");
 
-    /**
-     * Get all gene names that match the passed in prefix.
-     *  
-     * @param inPrefix the prefix to match
-     * @param inNumToReturn the maximum number of results to return
-     * 
-     * @return a sorted set of matching gene names
-     * 
-     * @throws Exception 
-     */
-    public static synchronized SortedSet<String> getMatchingGeneNames(String inPrefix,
-                                                                      int inNumToReturn) throws Exception
-    {
-        ourLog.debug("Entering getMatchingGeneNames");
+		return theReturnSet;
+	}
 
-        SortedSet<String> theReturnSet = null;
+	/**
+	 * Get all gene names that match the passed in prefix.
+	 * 
+	 * @param inPrefix
+	 *            the prefix to match
+	 * @param inNumToReturn
+	 *            the maximum number of results to return
+	 * 
+	 * @return a sorted set of matching gene names
+	 * 
+	 * @throws Exception
+	 */
+	public static synchronized SortedSet<String> getMatchingGeneNames(
+			String inPrefix, int inNumToReturn) throws Exception {
+		ourLog.debug("Entering getMatchingGeneNames");
 
-        List theMatchingGeneNames = QueryManagerSingleton.instance().getMatchingGeneNames(inPrefix);
+		SortedSet<String> theReturnSet = null;
 
-        // Only return the number requested
-        if (theMatchingGeneNames.size() > inNumToReturn)
-        {
-            theMatchingGeneNames = theMatchingGeneNames.subList(0, inNumToReturn);
-        }
-        theReturnSet = new TreeSet<String>(theMatchingGeneNames);
+		List theMatchingGeneNames = QueryManagerSingleton.instance()
+				.getMatchingGeneNames(inPrefix);
 
-        ourLog.info("Number returned: " + theReturnSet.size());
-        ourLog.debug("Exiting getMatchingGeneNames");
+		// Only return the number requested
+		if (theMatchingGeneNames.size() > inNumToReturn) {
+			theMatchingGeneNames = theMatchingGeneNames.subList(0,
+					inNumToReturn);
+		}
+		theReturnSet = new TreeSet<String>(theMatchingGeneNames);
 
-        return theReturnSet;
-    }
+		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Exiting getMatchingGeneNames");
 
-    public static void main(String[] inArgs)
-    {
-        try
-        {
-            SortedSet<String> theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("p", 10);
-            System.out.println(new Date() + " - Number matched for p: " + theMatchingNSCNumbers.size());
-            theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("p53", 10);
-            System.out.println(new Date() + " - Number matched for p53: " + theMatchingNSCNumbers.size());
-            theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("d", 10);
-            System.out.println(new Date() + " - Number matched for d: " + theMatchingNSCNumbers.size());
-            theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("55", 10000);
-            System.out.println(new Date() + " - Number matched for 55: " + theMatchingNSCNumbers.size());
-            theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("y", 10000);
-            System.out.println(new Date() + " - Number matched for y: " + theMatchingNSCNumbers.size());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+		return theReturnSet;
+	}
+
+	public static synchronized SortedSet<Object> getMatchingOrganNames(
+			String inPrefix, int inNumToReturn) throws Exception {
+		ourLog.debug("Entering getMatchingOrganNames");
+
+		SortedSet<Object> theReturnSet = null;
+				 
+		List theMatchingOrganNames = QueryManagerSingleton.instance().getMatchingOrganNames(inPrefix);
+				
+		// Only return the number requested
+		if (theMatchingOrganNames.size() > inNumToReturn) {
+			theMatchingOrganNames = theMatchingOrganNames.subList(0,
+					inNumToReturn);
+		}
+		theReturnSet = new TreeSet<Object>(theMatchingOrganNames);
+
+		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Exiting getMatchingOrganNames");
+		ourLog.info("list values"+theReturnSet);
+
+		return theReturnSet;
+	}
+
+	public static void main(String[] inArgs) {
+		try {
+			SortedSet<Object> theMatchingNSCNumbers = AutocompleteUtil
+					.getMatchingOrganNames("a", 10);
+			System.out.println(new Date() + " - Number matched for p: "
+					+ theMatchingNSCNumbers.size());
+			/*
+			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames(
+					"p53", 10);
+			System.out.println(new Date() + " - Number matched for p53: "
+					+ theMatchingNSCNumbers.size());
+			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("d",
+					10);
+			System.out.println(new Date() + " - Number matched for d: "
+					+ theMatchingNSCNumbers.size());
+			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("55",
+					10000);
+			System.out.println(new Date() + " - Number matched for 55: "
+					+ theMatchingNSCNumbers.size());
+			theMatchingNSCNumbers = AutocompleteUtil.getMatchingGeneNames("y",
+					10000);
+			System.out.println(new Date() + " - Number matched for y: "
+					+ theMatchingNSCNumbers.size());
+			*/
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

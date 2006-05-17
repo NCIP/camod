@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.29 2006-05-15 19:52:23 georgeda Exp $
+ * $Id: searchSimple.jsp,v 1.30 2006-05-17 21:15:29 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/05/15 19:52:23  georgeda
+ * Fixed bugs introduced putting in Ajax
+ *
  * Revision 1.28  2006/05/12 20:42:06  guptaa
  * deleted css
  *
@@ -145,7 +148,10 @@
 				</a>
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSizedDisabled" disabled="true" property="organ" size="25"/>	
+				<html:text styleClass="formFieldSized" styleId="organ" property="organ" size="25"/>
+				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
+  				parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />	
+			
 			</td>
 		</tr>
 

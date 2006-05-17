@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.47 2006-05-15 13:35:16 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.48 2006-05-17 21:16:08 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2006/05/15 13:35:16  georgeda
+ * Cleaned up contact info management
+ *
  * Revision 1.46  2006/05/12 12:49:33  georgeda
  * Changes for autocomplete
  *
@@ -267,6 +270,41 @@ public class QueryManagerImpl extends BaseManager
         return theList;
     }
 
+    /**
+     * Return the list of organ names that start with the pattern passed in
+     * 
+     * @param inPrefix
+     *            the starting characters of the name
+     * 
+     * @return a sorted list of unique gene names
+     * 
+     * @throws PersistenceException
+     */
+    public List getMatchingOrganNames(String inPrefix) throws PersistenceException
+    {
+        log.debug("Entering QueryManagerImpl.getMatchingOrganNames");
+
+        // Format the query
+        HQLParameter[] theParams = new HQLParameter[1];
+        theParams[0] = new HQLParameter();
+        theParams[0].setName("name");
+        theParams[0].setValue(inPrefix.toUpperCase() + "%");
+        theParams[0].setType(Hibernate.STRING);
+        //HQLParameter[] theParams = new HQLParameter[0];
+       
+        log.info("inPrefix: " + inPrefix);
+
+        String theHQLQuery = "select distinct histo.organ from AnimalModel as am left outer join am.histopathologyCollection as histo where am.state = 'Edited-approved' and upper(histo.organ.name) like :name";
+
+        List theList = Search.query(theHQLQuery, theParams);
+
+        log.info("Found matching items: " + theList.size());
+        log.debug("Exiting QueryManagerImpl.getMatchingOrganNames");
+
+        return theList;
+    }
+
+    
     /**
      * Return the list of gene names that start with the pattern passed in
      * 
@@ -2097,8 +2135,9 @@ public class QueryManagerImpl extends BaseManager
     {
         try
         {
-            List theList = QueryManagerSingleton.instance().getMatchingGeneNames("p");
+            List theList = QueryManagerSingleton.instance().getMatchingOrganNames("a");
             System.out.println("Number matched: " + theList.size());
+            System.out.println(theList.get(0));
         }
         catch (Exception e)
         {
