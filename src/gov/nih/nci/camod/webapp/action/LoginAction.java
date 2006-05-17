@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.11 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: LoginAction.java,v 1.12 2006-05-17 14:16:52 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.10  2006/04/28 19:26:17  schroedn
  * Defect # 238
  * On login sets the user's search result column settings
@@ -94,21 +97,22 @@ public final class LoginAction extends BaseAction {
                 String itemsPerPage = "" + Constants.ITEMSPERPAGEDEFAULT;
                 
                 ResultSettings inResultSettings = resultSettingsManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) );
-                List selectedList = new ArrayList();
-               
-                if ( inResultSettings != null ) {
-                    Set<ResultSettingsColumns> set = inResultSettings.getResultSettingsColumns();
-                    Iterator <ResultSettingsColumns> setIter = set.iterator();                  
+        
+                if ( inResultSettings != null ) 
+                {
+                    Set<ResultSettingsColumns> resultSettingsColumnsList = inResultSettings.getResultSettingsColumns();
+                    Iterator <ResultSettingsColumns> setIter = resultSettingsColumnsList.iterator();                  
                     itemsPerPage = "" + inResultSettings.getItemsPerPage();
+                    String[] theColumns = new String[resultSettingsColumnsList.size()];
                     
                     while ( setIter.hasNext() )
-                    {
-                        ResultSettingsColumns inResultSettingsColumns = (ResultSettingsColumns) setIter.next();
-                        selectedList.add( inResultSettingsColumns.getColumnName() );
+                    {                       
+                        ResultSettingsColumns theResultSettingsColumns = (ResultSettingsColumns) setIter.next();
+                        theColumns[theResultSettingsColumns.getColumnOrder()] = theResultSettingsColumns.getColumnName();
                     }  
                     
                     request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        
-                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, (String[])selectedList.toArray( new String[0] ) );
+                    request.getSession().setAttribute( Constants.SEARCHRESULTCOLUMNS, theColumns );
 
                 } else {                
                     request.getSession().setAttribute( Constants.ITEMSPERPAGE, itemsPerPage );        

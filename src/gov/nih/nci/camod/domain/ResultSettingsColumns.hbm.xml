@@ -22,5 +22,11 @@
 			column="column_name" 
 			type="string"/>	
 		
+		<!-- columnOrder -->
+		<property
+			name="columnOrder"
+			column="column_order"
+			type="int" />
+			
 	</class>
 </hibernate-mapping>

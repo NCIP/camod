@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CustomizeSearchResultsAction.java,v 1.3 2006-05-10 17:09:16 georgeda Exp $
+ * $Id: CustomizeSearchResultsAction.java,v 1.4 2006-05-17 14:16:15 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/10 17:09:16  georgeda
+ * Fix possible error if user changes the configuration and then goes back to search results page
+ *
  * Revision 1.2  2006/05/10 14:15:39  schroedn
  * New Features - Changes from code review
  *
@@ -59,35 +62,43 @@ public class CustomizeSearchResultsAction extends BaseAction
 
         // Get ResultSettings by username
         ResultSettings rSettings = resultSettingsManager.getByUsername((String) request.getSession().getAttribute(Constants.CURRENTUSER));
-
         Set<ResultSettingsColumns> columnList = new HashSet<ResultSettingsColumns>();
         boolean containsModelDescriptor = false;
 
         String[] columns = customResultsForm.getSelectedColumnsToDisplay();
         for (int i = 0; i < columns.length; i++)
         {
-            ResultSettingsColumns resultColumn = new ResultSettingsColumns();
-            resultColumn.setColumnName(columns[i]);
+            ResultSettingsColumns rSettingsColumn = new ResultSettingsColumns();
+            rSettingsColumn.setColumnName(columns[i]);
+            rSettingsColumn.setColumnOrder(i);
+            
             if (columns[i].equals("Model Descriptor"))
                 containsModelDescriptor = true;
 
-            columnList.add(resultColumn);
+            columnList.add(rSettingsColumn);
         }
 
         // Check Max Number of Columns
         if (columnList.size() > 5)
         {
-            request.getSession().setAttribute(Constants.ERRORMESSAGE, "* Too many columns selected (5 max)");
+            request.getSession().setAttribute(Constants.ERRORMESSAGE, "* Too many columns selected (5 max).");
             return mapping.findForward("failed");
         }
 
         // Check Model Descriptor (required)
         if (!containsModelDescriptor)
         {
-            request.getSession().setAttribute(Constants.ERRORMESSAGE, "* Model Descriptor is a required column");
+            request.getSession().setAttribute(Constants.ERRORMESSAGE, "* Model Descriptor is a required column.");
             return mapping.findForward("failed");
         }
 
+        // Check Min Number of Columns
+        if (columnList.size() == 0)
+        {
+            request.getSession().setAttribute(Constants.ERRORMESSAGE, "* Need at least one column selected.");
+            return mapping.findForward("failed");
+        }
+        
         // Save to database
         if (rSettings == null)
         {
@@ -95,7 +106,7 @@ public class CustomizeSearchResultsAction extends BaseAction
             rSettings = new ResultSettings();
 
             //rSettings.setColumnsToDisplay( strColumns );
-            rSettings.setItemsPerPage(Integer.parseInt(customResultsForm.getItemsPerPage().trim()));
+            rSettings.setItemsPerPage(Integer.parseInt(customResultsForm.getItemsPerPage().trim()));                       
             rSettings.setResultSettingsColumns(columnList);
 
             // Set the current user

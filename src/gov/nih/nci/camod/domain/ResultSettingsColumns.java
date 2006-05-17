@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ResultSettingsColumns.java,v 1.3 2006-05-10 13:35:21 schroedn Exp $
+ * $Id: ResultSettingsColumns.java,v 1.4 2006-05-17 14:15:43 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/10 13:35:21  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.2  2006/05/04 17:29:22  pandyas
  * Added toString() and equals() to domain class  - encouraged by Hibernate
  *
@@ -23,11 +26,29 @@ import java.io.Serializable;
 public class ResultSettingsColumns  extends BaseObject implements Serializable
 {
     private static final long serialVersionUID = 5804789721118396480L;
-
+    
     // Pointer to this object's parent  
     private ResultSettings parentResultSettings;
     private String columnName;
+    private int columnOrder;
     
+    /**
+     * @return Returns column order.
+     */    
+    public int getColumnOrder()
+    {
+        return columnOrder;
+    }
+
+    /**
+     * @param columnOrder
+     *         Sets the column order.
+     */
+    public void setColumnOrder(int columnOrder)
+    {
+        this.columnOrder = columnOrder;
+    }
+
     /**
      * @return Returns column Name.
      */    

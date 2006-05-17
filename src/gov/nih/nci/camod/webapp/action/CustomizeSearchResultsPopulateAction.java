@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CustomizeSearchResultsPopulateAction.java,v 1.2 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: CustomizeSearchResultsPopulateAction.java,v 1.3 2006-05-17 14:16:26 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.1  2006/04/28 19:25:29  schroedn
  * Defect # 238
  * Saves / Updates user settings for search result columns
@@ -72,16 +75,14 @@ public class CustomizeSearchResultsPopulateAction extends BaseAction
             pageItems = rSettings.getItemsPerPage();
 
             // Grab saved preferences
-            Set<ResultSettingsColumns> theResultSettingsColumnsList = rSettings.getResultSettingsColumns();
+            Set<ResultSettingsColumns> theResultSettingsColumnsList = rSettings.getResultSettingsColumns();          
             Iterator<ResultSettingsColumns> rscIter = theResultSettingsColumnsList.iterator();
             String[] theColumns = new String[theResultSettingsColumnsList.size()];
 
-            int i = 0;
             while (rscIter.hasNext())
             {
                 ResultSettingsColumns theResultSettingsColumns = (ResultSettingsColumns) rscIter.next();
-                theColumns[i] = theResultSettingsColumns.getColumnName();
-                i++;
+                theColumns[theResultSettingsColumns.getColumnOrder()] = theResultSettingsColumns.getColumnName();
             }
             theForm.setSelectedColumnsToDisplay(theColumns);
 
