@@ -2560,8 +2560,7 @@
 	    <set-property property="secure" value="false" />
 	    <forward
             name="next"
-            path="/searchResults.do"
-            redirect="true">
+            path="/searchResults.do">
         </forward>	
 	    <forward
             name="noSaveOption"
