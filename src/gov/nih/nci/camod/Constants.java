@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.85 2006-05-10 15:37:36 schroedn Exp $
+ * $Id: Constants.java,v 1.86 2006-05-17 16:12:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.85  2006/05/10 15:37:36  schroedn
+ * Fixed Dup_Name bug
+ *
  * Revision 1.84  2006/05/10 13:28:51  schroedn
  * New Features - Code Review changes
  *
@@ -347,21 +350,21 @@ public class Constants {
         
         public static final String NOT_SPECIFIED_OPTION = "Not specified";
         
-        /* 3 species from config */
+        /* 3 species from config - still used */
         public static final String NEWSPECIESDROP = "ModelSpecies.txt";        
 
-        /* 3 species from db for seach screens -  */
+        /* 3 species from db for search screens - not implemented yet */
         public static final String SPECIESDROP = "speciesdrop.db";
         
-        // All species from config
+        // All species from config - may not be used anymore
         public static final String HOSTSPECIESDROP = "HostSpecies.txt";        
 
-        /* Various Screens - all species from DB */
+        /* all species from DB -  used for various Screens */
         public static final String SPECIESQUERYDROP = "speciesquerydrop.db";        
         
         public static final String STRAINTEXTDROP = "StrainText.txt";
         
-        /*Various Screens - all strains for a species from DB */
+        /* all strains for a species from DB -  used for various Screens */
         public static final String STRAINDROP = "straindrop.db";  
 
         public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
