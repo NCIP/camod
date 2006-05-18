@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.38 2006-05-18 13:05:48 guptaa Exp $
+ * $Id: searchAdvanced.jsp,v 1.39 2006-05-18 14:26:40 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2006/05/18 13:05:48  guptaa
+ * added disease
+ *
  * Revision 1.37  2006/05/17 21:24:49  guptaa
  * organ work with the autocomplete
  *
@@ -182,8 +185,8 @@
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel">
 				<label for="field2">Site of Lesion/Tumor</label>
-		 		<html:hidden property="organTissueName"/>
-		 		<html:hidden property="organTissueCode"/>
+		 		<html:hidden styleId="organTissueName" property="organTissueName"/>
+		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<camod:cshelp mapId="advanced_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
@@ -199,8 +202,8 @@
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel">
-		 		<html:hidden property="diagnosisCode"/>
-		 		<html:hidden property="diagnosisName"/>
+		 		<html:hidden styleId="diagnosisCode" property="diagnosisCode"/>
+		 		<html:hidden styleId="diagnosisName" property="diagnosisName"/>
 				<label for="field2">Diagnosis</label>
 				&nbsp;
 		  	    <a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">

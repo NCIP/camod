@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.30 2006-05-17 21:15:29 guptaa Exp $
+ * $Id: searchSimple.jsp,v 1.31 2006-05-18 14:26:55 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2006/05/17 21:15:29  guptaa
+ * organ tree changes
+ *
  * Revision 1.29  2006/05/15 19:52:23  georgeda
  * Fixed bugs introduced putting in Ajax
  *
@@ -138,8 +141,8 @@
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel">
-				<html:hidden property="organTissueName"/>
-		 		<html:hidden property="organTissueCode"/>
+				<html:hidden styleId="organTissueName" property="organTissueName"/>
+		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
 				<camod:cshelp mapId="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
