@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.13 2006-05-10 17:35:51 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.14 2006-05-18 15:39:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/05/10 17:35:51  georgeda
+ * Work around old model data inconsistency
+ *
  * Revision 1.12  2006/05/10 14:13:51  schroedn
  * New Features - Changes from code review
  *
@@ -1289,11 +1292,9 @@ public class AnimalModelSearchResult implements Comparable
 
             myTumorSites = "";
             Set<Histopathology> theHistopathologySet = myAnimalModel.getHistopathologyCollection();
-            Iterator it = theHistopathologySet.iterator();
 
-            while (it.hasNext())
+            for (Histopathology theHistopathology : theHistopathologySet)
             {
-                Histopathology theHistopathology = (Histopathology) it.next();
                 String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
 
                 if (!theOrgans.contains(theOrgan))
@@ -1303,44 +1304,29 @@ public class AnimalModelSearchResult implements Comparable
                 }
 
                 TreeSet<String> theMetaSet = theMetas.get(theOrgan);
-                Set theMetastasisSet = theHistopathology.getMetastasisCollection();
-                it = theMetastasisSet.iterator();
+                Set<Histopathology> theMetastasisSet = theHistopathology.getMetastasisCollection();
 
-                while (it.hasNext())
+                for (Histopathology theMetastasis : theMetastasisSet)
                 {
-                    Histopathology theMetastasis = (Histopathology) it.next();
                     String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
                     if (!theMetaSet.contains(theMetaOrgan))
                     {
                         theMetaSet.add(theMetaOrgan);
                     }
                 }
-
             }
-
         }
 
-
-        Iterator theOrganIterator = theOrgans.iterator();
-
-        while (theOrganIterator.hasNext())
+        for (String theOrgan : theOrgans)
         {
-
-            String theOrgan = (String) theOrganIterator.next();
-
             myTumorSites += "<b>" + theOrgan + "</b><br/>";
 
-            TreeSet theMetaSet = (TreeSet) theMetas.get(theOrgan);
+            TreeSet<String> theMetaSet = theMetas.get(theOrgan);
 
-            Iterator theMetaIterator = theMetaSet.iterator();
-
-            while (theMetaIterator.hasNext())
+            for (String theMetaOrgan : theMetaSet)
             {
-                String theMetaOrgan = (String) theMetaIterator.next();
-
                 myTumorSites += theMetaOrgan + " (Metastasis)<br>";
             }
-
         }
 
         return myTumorSites;
