@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: AutocompleteUtil.java,v 1.2 2006-05-17 21:17:03 guptaa Exp $
+ * $Id: AutocompleteUtil.java,v 1.3 2006-05-18 13:06:43 guptaa Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/17 21:17:03  guptaa
+ * organ tree changes
+ *
  * Revision 1.1  2006/05/12 12:49:49  georgeda
  * Initial revision
  *
@@ -240,13 +243,13 @@ public class AutocompleteUtil {
 		return theReturnSet;
 	}
 
-	public static synchronized SortedSet<Object> getMatchingOrganNames(
+	public static synchronized SortedSet<Object> getMatchingOrgans(
 			String inPrefix, int inNumToReturn) throws Exception {
 		ourLog.debug("Entering getMatchingOrganNames");
 
 		SortedSet<Object> theReturnSet = null;
 				 
-		List theMatchingOrganNames = QueryManagerSingleton.instance().getMatchingOrganNames(inPrefix);
+		List theMatchingOrganNames = QueryManagerSingleton.instance().getMatchingOrgans(inPrefix);
 				
 		// Only return the number requested
 		if (theMatchingOrganNames.size() > inNumToReturn) {
@@ -261,11 +264,33 @@ public class AutocompleteUtil {
 
 		return theReturnSet;
 	}
+	
+	public static synchronized SortedSet<Object> getMatchingTumorClassifications(
+			String inPrefix, int inNumToReturn) throws Exception {
+		ourLog.debug("Entering getMatchingOrganNames");
+
+		SortedSet<Object> theReturnSet = null;
+				 
+		List theMatchingTumorClassificationsNames = QueryManagerSingleton.instance().getMatchingTumorClassifications(inPrefix);
+				
+		// Only return the number requested
+		if (theMatchingTumorClassificationsNames.size() > inNumToReturn) {
+			theMatchingTumorClassificationsNames = theMatchingTumorClassificationsNames.subList(0,
+					inNumToReturn);
+		}
+		theReturnSet = new TreeSet<Object>(theMatchingTumorClassificationsNames);
+
+		ourLog.info("Number returned: " + theReturnSet.size());
+		ourLog.debug("Exiting getMatchingOrganNames");
+		ourLog.info("list values"+theReturnSet);
+
+		return theReturnSet;
+	}
 
 	public static void main(String[] inArgs) {
 		try {
 			SortedSet<Object> theMatchingNSCNumbers = AutocompleteUtil
-					.getMatchingOrganNames("a", 10);
+					.getMatchingTumorClassifications("a", 10);
 			System.out.println(new Date() + " - Number matched for p: "
 					+ theMatchingNSCNumbers.size());
 			/*

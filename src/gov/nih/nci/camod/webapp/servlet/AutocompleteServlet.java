@@ -46,6 +46,9 @@
  * $Id$
  *
  * $Log$
+ * Revision 1.5  2006/05/17 21:17:31  guptaa
+ * organ tree changes
+ *
  * Revision 1.4  2006/05/15 19:00:43  georgeda
  * Code review changes
  *
@@ -63,6 +66,7 @@
 package gov.nih.nci.camod.webapp.servlet;
 
 import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.domain.Disease;
 import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.util.AjaxTagValuePair;
 import gov.nih.nci.camod.util.AutocompleteUtil;
@@ -296,12 +300,12 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 	 */
 	private List getMatchingOrganNames(String inOrgan, int inNumToReturn)
 			throws Exception {
-		SortedSet<Object> theMatchingOrganNames = AutocompleteUtil
-				.getMatchingOrganNames(inOrgan, inNumToReturn);
+		SortedSet<Object> theMatchingOrgans = AutocompleteUtil
+				.getMatchingOrgans(inOrgan, inNumToReturn);
 
 		List<AjaxTagValuePair> theOrganList = new ArrayList<AjaxTagValuePair>();
-		System.out.println("the matching list" + theMatchingOrganNames);
-		Iterator iterate = theMatchingOrganNames.iterator();
+		System.out.println("the matching list" + theMatchingOrgans);
+		Iterator iterate = theMatchingOrgans.iterator();
 		while (iterate.hasNext()) {
 			Organ organ = (Organ) iterate.next();
 			AjaxTagValuePair theTagValue = new AjaxTagValuePair();
@@ -326,7 +330,19 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 	 */
 	private List getMatchingTumorClassifications(String inTumorClassification,
 			int inNumToReturn) throws Exception {
+		SortedSet<Object> theMatchingTumorClassifications = AutocompleteUtil
+		.getMatchingTumorClassifications(inTumorClassification, inNumToReturn);
+		
 		List<AjaxTagValuePair> theTumorList = new ArrayList<AjaxTagValuePair>();
+		System.out.println("the matching list" + theMatchingTumorClassifications);
+		Iterator iterate = theMatchingTumorClassifications.iterator();
+		while (iterate.hasNext()) {
+			Disease disease = (Disease) iterate.next();
+			AjaxTagValuePair theTagValue = new AjaxTagValuePair();
+			theTagValue.setTarget(disease.getConceptCode());
+			theTagValue.setSource(disease.getName());
+			theTumorList.add(theTagValue);
+		}
 		return theTumorList;
 	}
 }

@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.48 2006-05-17 21:16:08 guptaa Exp $
+ * $Id: QueryManagerImpl.java,v 1.49 2006-05-18 13:05:20 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2006/05/17 21:16:08  guptaa
+ * organ tree changes
+ *
  * Revision 1.47  2006/05/15 13:35:16  georgeda
  * Cleaned up contact info management
  *
@@ -271,16 +274,16 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Return the list of organ names that start with the pattern passed in
+     * Return the list of organ object that start with the pattern passed in
      * 
      * @param inPrefix
      *            the starting characters of the name
      * 
-     * @return a sorted list of unique gene names
+     * @return a sorted list of unique organ object
      * 
      * @throws PersistenceException
      */
-    public List getMatchingOrganNames(String inPrefix) throws PersistenceException
+    public List getMatchingOrgans(String inPrefix) throws PersistenceException
     {
         log.debug("Entering QueryManagerImpl.getMatchingOrganNames");
 
@@ -300,6 +303,39 @@ public class QueryManagerImpl extends BaseManager
 
         log.info("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getMatchingOrganNames");
+
+        return theList;
+    }
+    /**
+     * Return the list of tumor classification object that start with the pattern passed in
+     * 
+     * @param inPrefix
+     *            the starting characters of the name
+     * 
+     * @return a sorted list of unique tumor classification object
+     * 
+     * @throws PersistenceException
+     */
+    public List getMatchingTumorClassifications(String inPrefix) throws PersistenceException
+    {
+        log.debug("Entering QueryManagerImpl.getMatchingTumorClassificationNames");
+
+        // Format the query
+        HQLParameter[] theParams = new HQLParameter[1];
+        theParams[0] = new HQLParameter();
+        theParams[0].setName("name");
+        theParams[0].setValue(inPrefix.toUpperCase() + "%");
+        theParams[0].setType(Hibernate.STRING);
+        //HQLParameter[] theParams = new HQLParameter[0];
+       
+        log.info("inPrefix: " + inPrefix);
+
+        String theHQLQuery = "select distinct histo.disease from AnimalModel as am left outer join am.histopathologyCollection as histo where am.state = 'Edited-approved' and upper(histo.disease.name) like :name";
+
+        List theList = Search.query(theHQLQuery, theParams);
+
+        log.info("Found matching items: " + theList.size());
+        log.debug("Exiting QueryManagerImpl.getMatchingTumorClassificationNames");
 
         return theList;
     }
@@ -2135,7 +2171,7 @@ public class QueryManagerImpl extends BaseManager
     {
         try
         {
-            List theList = QueryManagerSingleton.instance().getMatchingOrganNames("a");
+            List theList = QueryManagerSingleton.instance().getMatchingTumorClassifications("a");
             System.out.println("Number matched: " + theList.size());
             System.out.println(theList.get(0));
         }

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.37 2006-05-17 21:24:49 guptaa Exp $
+ * $Id: searchAdvanced.jsp,v 1.38 2006-05-18 13:05:48 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2006/05/17 21:24:49  guptaa
+ * organ work with the autocomplete
+ *
  * Revision 1.36  2006/05/15 19:52:23  georgeda
  * Fixed bugs introduced putting in Ajax
  *
@@ -204,8 +207,10 @@
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>			    
 			</td>
-			<td class="formField">				
-				<html:text styleClass="formFieldSizedDisabled" disabled="true" property="tumorClassification" size="25"/>	
+			<td class="formField">
+				<html:text styleClass="formFieldSized" styleId="tumorClassification" property="tumorClassification" size="25"/>
+				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="tumorClassification" target="diagnosisCode"
+  				parameters="diagnosisCode={diagnosisCode}" className="autocomplete" minimumCharacters="1" />				
 			</td>
 		</tr>
 		
