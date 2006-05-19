@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftAction.java,v 1.17 2006-05-19 16:40:32 pandyas Exp $
+ * $Id: XenograftAction.java,v 1.18 2006-05-19 18:48:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/05/19 16:40:32  pandyas
+ * Defect #249 - add other to species on the Xenograft screen, simply added new variable to list to print out
+ *
  * Revision 1.16  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -59,12 +62,6 @@ public final class XenograftAction extends BaseAction {
 
 		String theForward = "next";		
 		
-		// Clear the organ on the form
-		if ("Clear".equals(theAction)) {
-			log.info("Clear Organ");
-			xenograftForm.resetOrgan();
-			theForward = "back";
-		} else {
 
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(
@@ -102,8 +99,12 @@ public final class XenograftAction extends BaseAction {
 				+ xenograftForm.getDonorEthinicityStrain()              
 				+ "\n\t getOtherDonorEthinicityStrain: "
 				+ xenograftForm.getOtherDonorEthinicityStrain()
-				+ "\n\t organTissueCode: "
+				+ "\n\t getOrganTissueName(): "
 				+ xenograftForm.getOrganTissueName()
+                + "\n\t organTissueCode: "
+                + xenograftForm.getOrganTissueCode()
+                + "\n\t organ(): "
+                + xenograftForm.getOrgan()                
 				+ "\n\t user: "
 				+ (String) request.getSession().getAttribute(
 						"camod.loggedon.username"));
@@ -153,7 +154,7 @@ public final class XenograftAction extends BaseAction {
 						"errors.admin.message"));
 				saveErrors(request, msg);
 			}
-		}
+		
 		log.debug("<XenograftAction> Exiting edit");
 		return mapping.findForward(theForward);
 	}
@@ -212,8 +213,13 @@ public final class XenograftAction extends BaseAction {
 				+ xenograftForm.getDonorEthinicityStrain()
 				+ "\n\t getOtherDonorEthinicityStrain: "
 				+ xenograftForm.getOtherDonorEthinicityStrain()
-				+ "\n\t organTissueCode: "
-				+ xenograftForm.getOrganTissueName()
+                + xenograftForm.getOtherDonorEthinicityStrain()
+                + "\n\t getOrganTissueName(): "
+                + xenograftForm.getOrganTissueName()
+                + "\n\t organTissueCode: "
+                + xenograftForm.getOrganTissueCode()
+                + "\n\t organ(): "
+                + xenograftForm.getOrgan() 
 				+ "\n\t user: "
 				+ (String) request.getSession().getAttribute(
 						"camod.loggedon.username"));
@@ -247,22 +253,5 @@ public final class XenograftAction extends BaseAction {
 		log.trace("<XenograftAction> Exiting save");
 		return mapping.findForward("AnimalModelTreePopulateAction");
 	}
-/*
-	public ActionForward SetStrainDropdown(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
 
-		String speciesName = request.getParameter("speciesName");
-
-		System.out.println("<SetStrainDropdown execute> speciesName: "
-				+ speciesName);
-
-		NewDropdownUtil.populateDropdown(request,
-				Constants.Dropdowns.STRAINDROP, speciesName);
-
-		XenograftForm xenograftForm = (XenograftForm) form;
-		request.getSession().setAttribute(Constants.FORMDATA, xenograftForm);
-		return mapping.findForward("submitTransplantXenograft");
-	}
-    */
 }
