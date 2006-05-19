@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.40 2006-05-03 19:05:50 georgeda Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.41 2006-05-19 16:45:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2006/05/03 19:05:50  georgeda
+ * Move to new EVSTree
+ *
  * Revision 1.39  2006/04/20 19:46:23  pandyas
  * Modified host species/  host strain / otherHostStrain text on Xenograft screen
  *
@@ -72,16 +75,22 @@
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
+
+	function getBothResults(control) {
+	getOptions( control );	
+	chkOtherSpecies();
+	}
 	function getOptions( control ) {
 		form = control.form;
 		form.action  = "XenograftPopulateAction.do?method=setStrainDropdown";
-		form.submit();
+		form.submit();		
 	}
-	
+	function chkOtherSpecies() {	
+			chkOther(document.forms[0].donorScientificName, document.forms[0].otherDonorScientificName);
+	}
 	function chkOtherStrain() {
 		chkOther(document.forms[0].donorEthinicityStrain, document.forms[0].otherDonorEthinicityStrain);
 	}
-	
 	function chkObservation() {
 	
 	    geneticManipulation = document.forms[0].geneticManipulation;
@@ -127,11 +136,22 @@
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field3">Donor Species:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="donorScientificName" onchange="getOptions(this);" >
+		<br>
+		<label for="field3">- if species is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>		
+			<html:select styleClass="formFieldSized" size="1" property="donorScientificName" onchange="getBothResults(this);" >
 				<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 			</html:select>
 		</td>
 	</tr>
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field1">if other Species:</label></td>
+			<td class="formField">					
+					<html:text styleClass="formFieldSized" property="otherDonorScientificName" size="30"/>			
+			</td>
+		</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
@@ -332,6 +352,7 @@
 	chkOtherStrain();
 	chkOtherAdminSite();
 	chkObservation();
+	chkOtherSpecies();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
