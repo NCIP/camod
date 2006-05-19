@@ -37,8 +37,17 @@
 		<tr>		
 			<td class="WhiteBox"><b>Donor Species</b></td>
 			<td class="WhiteBoxRightEnd">
-			    <c:if test="${not empty xt.donorSpecies.scientificName}"><c:out value="${xt.donorSpecies.scientificName}"/></c:if>
-				<c:if test="${not empty xt.donorSpecies.abbreviation}}">(<c:out value="${xt.donorSpecies.abbreviation}"/>)</c:if>&nbsp;
+				<c:choose>
+					<c:when test="${not empty xt.donorSpecies}">			
+			    		<c:if test="${not empty xt.donorSpecies.scientificName}"><c:out value="${xt.donorSpecies.scientificName}"/></c:if>
+						<c:if test="${not empty xt.donorSpecies.abbreviation}}">(<c:out value="${xt.donorSpecies.abbreviation}"/>)</c:if>&nbsp;
+					</c:when>
+				<c:otherwise>
+					<c:when test="${not empty xt.strain}">
+			    		<c:if test="${not empty xt.strain.species.scientificName}"><c:out value="${xt.strain.species.scientificName}"/></c:if>
+						<c:if test="${not empty xt.strain.species.abbreviation}}">(<c:out value="${xt.strain.species.abbreviation}"/>)</c:if>&nbsp;
+					</c:when>
+				</c:choose>&nbsp;					
 			</td>
 		</tr>
 	
