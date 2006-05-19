@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.52 2006-05-19 15:01:00 guptaa Exp $
+ * $Id: QueryManagerImpl.java,v 1.53 2006-05-19 17:11:31 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2006/05/19 15:01:00  guptaa
+ * Fixed broken searching
+ *
  * Revision 1.50  2006/05/19 12:33:34  guptaa
  * added organs
  *
@@ -1443,39 +1446,64 @@ public class QueryManagerImpl extends BaseManager
 
     /**
      * Get the model id's for any model that has a histopathology associated
-     * with a specific organ.
+     * with a specific disease.
      * 
      * @param inDisease
-     *            the disease to search for
+     *            the concept code and disease name to search for
      * 
      * @return a list of matching model id
      * 
      * @throws PersistenceException
      */
-    private String getModelIdsForHistopathologyDisease(String inConceptCodes) throws PersistenceException
-    {
+    private String getModelIdsForHistopathologyDisease(String inConceptCodes, String inDiseaseName) throws PersistenceException {
 
-        String theConceptCodeList = "";
+		String theConceptCodeList = "";
 
-        StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
+		 // Format the query
+        Object[] theParams = null;
+        		
+		String theSQLString = 
+			"SELECT distinct hist.abs_cancer_model_id " 
+			+ "FROM histopathology hist " 
+			+ "WHERE hist.histopathology_id IS NOT null " 
+			+ "AND hist.histopathology_id IN (SELECT h.histopathology_id " 
+			+ "     FROM histopathology h, disease d " 
+			+ "     WHERE h.disease_id = d.disease_id ";
+		
+		StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
 
-        while (theTokenizer.hasMoreElements())
-        {
-            theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
+		if (inDiseaseName.length() > 0 && inConceptCodes.length() <= 0) {
+		
+			theParams = new Object[1];
+	        theParams[0] = "%"+inDiseaseName.toUpperCase()+ "%";
+	        theSQLString += " AND upper(d.name) like ? )";
 
-            // Only tack on a , if it's not the last element
-            if (theTokenizer.hasMoreElements())
-            {
-                theConceptCodeList += ",";
-            }
-        }
+		} else if (inConceptCodes.equalsIgnoreCase("000000")&& inConceptCodes.length() > 0) {
+		
+			theParams = new Object[1];
+	        theParams[0] = "%"+inDiseaseName.toUpperCase()+ "%";
+	        theSQLString += " AND upper(d.name) like ? )";
+			
+		} else if (inConceptCodes.length() > 0) {
+		
+			theParams = new Object[0];
+			while (theTokenizer.hasMoreElements()) {
+				theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
 
-        String theSQLString = "SELECT distinct hist.abs_cancer_model_id " + "FROM histopathology hist " + "WHERE hist.histopathology_id IS NOT null " + "AND hist.histopathology_id IN (SELECT h.histopathology_id " + "     FROM histopathology h, disease d " + "     WHERE h.disease_id = d.disease_id AND d.concept_code IN (" + theConceptCodeList + "))";
+				// Only tack on a , if it's not the last element
+				if (theTokenizer.hasMoreElements()) {
+					theConceptCodeList += ",";
+				}
+			}
+	        theSQLString += " AND d.concept_code IN (" + theConceptCodeList + "))";
+			
+		}  
 
-        Object[] theParams = new Object[0];
-        return getIds(theSQLString, theParams);
+		return getIds(theSQLString, theParams);
 
-    }
+	}
+
+   
 
     /**
      * Get the models with the associated engineered gene
@@ -1739,7 +1767,7 @@ public class QueryManagerImpl extends BaseManager
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(theKeyword, "") + ")";
 
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease(theKeyword) + ")";
+        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease(theKeyword, "") + ")";
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForAnyEnvironmentalFactor(inKeyword) + ")";
 
@@ -1822,9 +1850,9 @@ public class QueryManagerImpl extends BaseManager
         }
 
         // Search for disease
-        if (inSearchData.getDiagnosisCode() != null && inSearchData.getDiagnosisCode().trim().length() > 0)
+        if (inSearchData.getDiagnosisCode() != null && inSearchData.getDiagnosisCode().trim().length() > 0 || inSearchData.getTumorClassification()!= null && inSearchData.getTumorClassification().length() > 0 )
         {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease(inSearchData.getDiagnosisCode()) + ")";
+         	theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease(inSearchData.getDiagnosisCode(),inSearchData.getTumorClassification() ) + ")";
         }
 
         // ///////////////////////////////////////
