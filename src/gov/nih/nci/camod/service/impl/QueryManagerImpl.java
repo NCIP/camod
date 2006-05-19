@@ -43,7 +43,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.51 2006-05-19 13:01:44 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.52 2006-05-19 15:01:00 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.50  2006/05/19 12:33:34  guptaa
@@ -300,7 +300,7 @@ public class QueryManagerImpl extends BaseManager
         theParams[0].setValue(inPrefix.toUpperCase() + "%");
         theParams[0].setType(Hibernate.STRING);
         //HQLParameter[] theParams = new HQLParameter[0];
-
+       
         log.info("inPrefix: " + inPrefix);
 
         String theHQLQuery = "select distinct histo.organ from AnimalModel as am left outer join am.histopathologyCollection as histo where am.state = 'Edited-approved' and upper(histo.organ.name) like :name";
@@ -312,7 +312,6 @@ public class QueryManagerImpl extends BaseManager
 
         return theList;
     }
-
     /**
      * Return the list of tumor classification object that start with the pattern passed in
      * 
@@ -334,7 +333,7 @@ public class QueryManagerImpl extends BaseManager
         theParams[0].setValue(inPrefix.toUpperCase() + "%");
         theParams[0].setType(Hibernate.STRING);
         //HQLParameter[] theParams = new HQLParameter[0];
-
+       
         log.info("inPrefix: " + inPrefix);
 
         String theHQLQuery = "select distinct histo.disease from AnimalModel as am left outer join am.histopathologyCollection as histo where am.state = 'Edited-approved' and upper(histo.disease.name) like :name";
@@ -347,7 +346,7 @@ public class QueryManagerImpl extends BaseManager
         return theList;
     }
 
-
+    
     /**
      * Return the list of gene names that start with the pattern passed in
      * 
@@ -1155,6 +1154,7 @@ public class QueryManagerImpl extends BaseManager
      *         of records
      * @throws PersistenceException
      */
+    //Sima TODO: optimize the extra join for strain_id/species_id
     public List getInvivoResults(Agent agent,
                                  boolean useNscNumber) throws PersistenceException
     {
@@ -1248,49 +1248,50 @@ public class QueryManagerImpl extends BaseManager
      * with a specific organ.
      * 
      * @param inConceptCodes
-     *            the concept codes to search for
+     *            the concept codes  and organ tissue name to search for
      * 
      * @return a list of matching model id
      * 
      * @throws PersistenceException
      */
-    private String getModelIdsForHistopathologyOrgan(String inConceptCodes,
-                                                     String organTissueName) throws PersistenceException
-    {
+    private String getModelIdsForHistopathologyOrgan(String inConceptCodes, String inOrganTissueName) throws PersistenceException {
 
-        String theConceptCodeList = "";
+		String theConceptCodeList = "";
 
-        String theSQLString = "";
+		 // Format the query
+        Object[] theParams = null;
+        		
+		String theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist "
+			+ "WHERE hist.abs_cancer_model_id IS NOT null "
+			+ "AND hist.histopathology_id IN (SELECT h.histopathology_id "
+			+ "     FROM histopathology h, organ o "
+			+ "     WHERE h.organ_id = o.organ_id ";
+		
+		StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
 
-        StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
+		if (inOrganTissueName.length() > 0 && inConceptCodes.length() <= 0) {
 
-        if (organTissueName.length() > 0 && inConceptCodes.length() <= 0)
-        {
+			theParams = new Object[1];
+	        theParams[0] = "%"+inOrganTissueName.toUpperCase()+ "%";
+	        theSQLString += " AND upper(o.name) like ? )";
 
-            theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist " + "WHERE hist.abs_cancer_model_id IS NOT null " + "AND hist.histopathology_id IN (SELECT h.histopathology_id " + "     FROM histopathology h, organ o " + "     WHERE h.organ_id = o.organ_id " + "         AND o.name like ('" + organTissueName.toUpperCase() + "%'))";
+		} else if (inConceptCodes.length() > 0) {
+			theParams = new Object[0];
+			while (theTokenizer.hasMoreElements()) {
+				theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
 
-        }
-        else
-        {
+				// Only tack on a , if it's not the last element
+				if (theTokenizer.hasMoreElements()) {
+					theConceptCodeList += ",";
+				}
+			}
+	        theSQLString += " AND o.concept_code IN (" + theConceptCodeList + "))";
+			
+		}
 
-            while (theTokenizer.hasMoreElements())
-            {
-                theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
+		return getIds(theSQLString, theParams);
 
-                // Only tack on a , if it's not the last element
-                if (theTokenizer.hasMoreElements())
-                {
-                    theConceptCodeList += ",";
-                }
-            }
-
-            theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist " + "WHERE hist.abs_cancer_model_id IS NOT null " + "AND hist.histopathology_id IN (SELECT h.histopathology_id " + "     FROM histopathology h, organ o " + "     WHERE h.organ_id = o.organ_id " + "         AND o.concept_code IN (" + theConceptCodeList + "))";
-        }
-
-        Object[] theParams = new Object[0];
-        return getIds(theSQLString, theParams);
-
-    }
+	}
 
 
     /**
@@ -1499,6 +1500,7 @@ public class QueryManagerImpl extends BaseManager
      * @throws PersistenceException
      * 
      */
+    //Sima TODO: could not test IM since original query returned 0 results in camoddev
     private String getModelIdsForEngineeredGenes(String inGeneName,
                                                  boolean isEngineeredTransgene,
                                                  boolean isTargetedModification,
@@ -1814,10 +1816,9 @@ public class QueryManagerImpl extends BaseManager
         }
 
         // Search for organ
-        if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0 || inSearchData.getOrgan() != null)
+        if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0 || inSearchData.getOrgan()!= null && inSearchData.getOrgan().length() > 0)
         {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode(),
-                                                                                                  inSearchData.getOrgan()) + ")";
+            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode(),inSearchData.getOrgan() ) + ")";
         }
 
         // Search for disease
@@ -2039,6 +2040,7 @@ public class QueryManagerImpl extends BaseManager
     }
 
 
+    // Sima TODO: optimize query - added extra join for species/strain
     //no nscNumber in environmental_factor to test if this is correct
     public List getModelsForThisCompound(Long nscNumber) throws PersistenceException
     {
