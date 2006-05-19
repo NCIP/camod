@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.25 2006-04-20 18:11:30 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.26 2006-05-19 16:39:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/04/20 18:11:30  pandyas
+ * Cleaned up Species or Strain save of Other in DB
+ *
  * Revision 1.24  2006/04/19 17:38:26  pandyas
  * Removed TODO text
  *
@@ -43,7 +46,6 @@ import gov.nih.nci.camod.service.XenograftManager;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.XenograftData;
-
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -58,26 +60,26 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
     public List getAll() throws Exception
     {
-        log.info("In XenograftManagerImpl.getAll");
+        log.trace("In XenograftManagerImpl.getAll");
         return super.getAll(Xenograft.class);
     }
 
     public Xenograft get(String id) throws Exception
     {
-        log.info("In XenograftManagerImpl.get");
+        log.trace("In XenograftManagerImpl.get");
         return (Xenograft) super.get(id, Xenograft.class);
     }
 
     public void save(Xenograft xenograft) throws Exception
     {
-        log.info("In XenograftManagerImpl.save");
+        log.trace("In XenograftManagerImpl.save");
         super.save(xenograft);
     }
 
     public void remove(String id,
                        AnimalModel inAnimalModel) throws Exception
     {
-        log.info("In XenograftManagerImpl.remove");
+        log.trace("In XenograftManagerImpl.remove");
 
         inAnimalModel.getXenograftCollection().remove(get(id));
         super.save(inAnimalModel);
@@ -87,7 +89,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                             AnimalModel inAnimalModel) throws Exception
     {
 
-        log.info("<XenograftManagerImpl> Entering XenograftManagerImpl.create");
+        log.trace("<XenograftManagerImpl> Entering XenograftManagerImpl.create");
 
         Xenograft theXenograft = new Xenograft();
         populateSpeciesStrain(inXenograftData, theXenograft, inAnimalModel);
@@ -129,43 +131,9 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         if (inXenograftData.getAdministrativeSite().equals(Constants.Dropdowns.OTHER_OPTION))
         {
             inXenograft.setAdministrativeSite(inXenograftData.getOtherAdministrativeSite());
+
             // Send e-mail for other administrativeSite
-
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String, Object> values = new TreeMap<String, Object>();
-            values.put("type", "Xenograft AdministrativeSite");
-            values.put("value", inXenograftData.getOtherAdministrativeSite());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
-
+            sendEmail(inAnimalModel, inXenograftData.getOtherAdministrativeSite(), "AdministrativeSite");
         }
         else
         {
@@ -238,44 +206,13 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         // anytime the graft type is "other"
         if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String, Object> values = new TreeMap<String, Object>();
-            values.put("type", "GraftType");
-            values.put("value", inXenograftData.getOtherGraftType());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
-
+            // Set Graft type
             inXenograft.setGraftType(null);
             inXenograft.setGraftTypeUnctrlVocab(inXenograftData.getOtherGraftType());
+
+            // Send e-mail for other Graft Type
+            sendEmail(inAnimalModel, inXenograftData.getOtherGraftType(), "GraftType");
+
         }
         // anytime graft type is not other set uncontrolled vocab to null
         // (covers editing)
@@ -293,62 +230,67 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                                        AnimalModel inAnimalModel) throws Exception
     {
 
-        // Create/reuse the strain object - This method does not set strain when 'other' is selected (lookup)
-        Strain theNewStrain = StrainManagerSingleton.instance().getOrCreate(inXenograftData.getDonorEthinicityStrain(),
-                                                                            inXenograftData.getOtherDonorEthinicityStrain(),
-                                                                            inXenograftData.getDonorScientificName());
-  
+        // Use Species to create strain
+        Strain theStrain = StrainManagerSingleton.instance().getOrCreate(inXenograftData.getDonorEthinicityStrain(),
+                                                                         inXenograftData.getOtherDonorEthinicityStrain(),
+                                                                         inXenograftData.getDonorScientificName(),
+                                                                         inXenograftData.getOtherDonorScientificName());
 
-        log.info("theNewStrain for Xenograft: " + theNewStrain.toString());
-
-        // other option selected
+        // other option selected for species - send e-mail
+        if (inXenograftData.getDonorScientificName().equals(Constants.Dropdowns.OTHER_OPTION))
+        {
+            // Send e-mail for other donor species
+            sendEmail(inAnimalModel, inXenograftData.getOtherDonorScientificName(), "Donor Species");
+        }
+        // other option selected for strain - send e-mail
         if (inXenograftData.getDonorEthinicityStrain().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            // Object is returned with uncontrolled vocab set, do not save 'Other' in DB, send e-mail
-            inXenograft.setStrain(theNewStrain);
-            inXenograft.setDonorSpecies(theNewStrain.getSpecies());           
-            
-            log.info("Sending Notification eMail - new EthinicityStrain added");
+            // Send e-mail for other donor species
+            sendEmail(inAnimalModel, inXenograftData.getOtherDonorEthinicityStrain(), "Donor Strain");
+        }
 
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+        log.info("\n <populateSpeciesStrain> theSpecies is NOT other: ");
+        inXenograft.setStrain(theStrain);
 
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
+    }
 
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        // Get the e-mail resource
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
 
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String, Object> values = new TreeMap<String, Object>();
-            values.put("type", "EthinicityStrain");
-            values.put("value", inXenograftData.getOtherDonorEthinicityStrain());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
 
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
-        } else {
-        //used to setSpecies in AnimalModel(2.0) now used to setStrain and species in Xenograft(2.1)
-        inXenograft.setStrain(theNewStrain);
-        inXenograft.setDonorSpecies(theNewStrain.getSpecies());
+        // gather message keys and variable values to build the e-mail
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
         }
     }
 }

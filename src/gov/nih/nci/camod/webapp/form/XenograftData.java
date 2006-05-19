@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: XenograftData.java,v 1.7 2006-05-19 16:40:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/12/28 16:43:56  pandyas
  * removed harvest date - unused
  *
@@ -32,6 +35,10 @@ public interface XenograftData
     public String getDonorScientificName();
 
     public void setDonorScientificName(String donorScientificName);
+
+    public String getOtherDonorScientificName();
+
+    public void setOtherDonorScientificName(String otherDonorScientificName);
 
     public String getDonorEthinicityStrain();
 

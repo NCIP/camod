@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.24 2006-04-27 15:06:29 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.25 2006-05-19 16:40:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/04/27 15:06:29  pandyas
+ * cleaned up as a result of testing
+ *
  * Revision 1.23  2006/04/20 19:46:14  pandyas
  * Modified host species/  host strain / otherHostStrain text on Xenograft screen
  *
@@ -99,30 +102,45 @@ public class XenograftPopulateAction extends BaseAction
             xenograftForm.setCellAmount(xeno.getCellAmount());
             xenograftForm.setGrowthPeriod(xeno.getGrowthPeriod());
 
+            // Species was required in previous versions of caMod and is stored in donorSpecies column
+            // The species and strain are required for 2.1 and strain_id is stored for all future versions
+            // Therefore, we must search in both to populate correctly
             if (xeno.getDonorSpecies() != null)
             {
-                log.info("Species: " + xeno.getDonorSpecies().getScientificName());
-                xenograftForm.setDonorScientificName(xeno.getDonorSpecies().getScientificName());
+                // Populate species if uncontrolled vocab - old models
+                if (xeno.getDonorSpecies().getScientificNameUnctrlVocab() != null)
+                {
+                    xenograftForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
+                    xenograftForm.setOtherDonorScientificName(xeno.getDonorSpecies().getScientificNameUnctrlVocab());
+                }
+                else
+                {
+                    xenograftForm.setDonorScientificName(xeno.getDonorSpecies().getScientificName());
+                }
             }
-            else
+            else if (xeno.getStrain() != null)
             {
-                xenograftForm.setDonorScientificName(null);
-            }
-
-            // strain is required as of caMod 2.1, not before
-            if (xeno.getStrain() != null)
-            {
-                //If uncontrolledVocab is filled in 'Other' was selected, Set 'Other' explicitly
+                //Populate strain for all new models - check for uncontrolled vocab
                 if (xeno.getStrain().getNameUnctrlVocab() != null)
                 {
                     xenograftForm.setDonorEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
                     xenograftForm.setOtherDonorEthinicityStrain(xeno.getStrain().getNameUnctrlVocab());
 
                 }
-                // If uncontrolledVocab is empty, just get strain field
                 else
                 {
                     xenograftForm.setDonorEthinicityStrain(xeno.getStrain().getName());
+                }
+                // Populate species if strain_id is used -  models submitted after 2.0 
+                // check for uncontrolled vocab
+                if (xeno.getStrain().getSpecies().getScientificNameUnctrlVocab() != null)
+                {
+                    xenograftForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
+                    xenograftForm.setOtherDonorScientificName(xeno.getStrain().getSpecies().getScientificNameUnctrlVocab());
+                }
+                else
+                {
+                    xenograftForm.setDonorScientificName(xeno.getStrain().getSpecies().getScientificName());
                 }
             }
 
@@ -130,9 +148,8 @@ public class XenograftPopulateAction extends BaseAction
             // simply display EVSPreferredDescription
             if (xeno.getOrgan() != null)
             {
-                //SIMA TODO: get display name to work again
-                //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
-                xenograftForm.setOrgan(xeno.getOrgan().getName());
+                xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                //xenograftForm.setOrgan(xeno.getOrgan().getName());
                 xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
             }
 
@@ -218,8 +235,7 @@ public class XenograftPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
-        
-        
+
         // Retrieve the Species and Strain set for the AnimalModel (via submitNewModel.jsp)
         // This is displayed on the JSP page as the HOST SPECIES / STRAIN
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -229,8 +245,8 @@ public class XenograftPopulateAction extends BaseAction
         if (animalModel.getStrain() != null)
         {
             Species theAMSpecies = animalModel.getStrain().getSpecies();
-            request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theAMSpecies.getScientificName());            
-            
+            request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theAMSpecies.getScientificName());
+
             // If the animal model has an 'Other' strain selected, display the otherName on the Xenograft screen
             if (animalModel.getStrain().getNameUnctrlVocab() != null)
             {
@@ -241,7 +257,7 @@ public class XenograftPopulateAction extends BaseAction
                 request.getSession().setAttribute(Constants.Dropdowns.MODELSTRAIN, animalModel.getStrain().getName());
             }
         }
-        
+
 
         log.info("<XenograftPopulateAction dropdown> Exiting void dropdown()");
     }

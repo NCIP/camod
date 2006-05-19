@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StrainManagerImpl.java,v 1.3 2006-04-20 18:11:30 pandyas Exp $
+ * $Id: StrainManagerImpl.java,v 1.4 2006-05-19 16:39:33 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/20 18:11:30  pandyas
+ * Cleaned up Species or Strain save of Other in DB
+ *
  * Revision 1.2  2006/04/19 17:38:26  pandyas
  * Removed TODO text
  *
@@ -90,15 +93,30 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
         return strain;
     }
 
+    /**
+     * Get or create a specific Strain by matching attributes
+     * 
+     * @param inStrainName
+     *            the unique name for a Strain
+     * @param inOtherStrainName
+     *            the unique name for a Strain
+     * @param inSpeciesName
+     *            the unique scientific name for a Species
+     * 
+     * @return the matching Strain, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
     public Strain getOrCreate(String inStrainName,
                               String inOtherStrainName,
-                              String inSpecies) throws Exception
+                              String inSpeciesName) throws Exception
     {
 
-        log.info("<StrainManagerImpl> Entering getOrCreate");
+        log.info("<StrainManagerImpl> Entering getOrCreate(String, String, String)");
 
         // need species_id to get correct strain - works for 'Not specified'
-        Species selectedSpecies = SpeciesManagerSingleton.instance().getByName(inSpecies);
+        Species selectedSpecies = SpeciesManagerSingleton.instance().getByName(inSpeciesName);
 
         Strain theQBEStrain = new Strain();
         theQBEStrain.setSpecies(selectedSpecies);
@@ -147,4 +165,87 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
 
         return theStrain;
     }
+
+
+    /**
+     * Create a specific Strain by matching attributes
+     * 
+     * @param inStrainName
+     *            the unique name for a Strain
+     * @param inOtherStrainName
+     *            the unctrl vocab for a Strain
+     * @param inSpeciesName
+     *            the unique name for a Species
+     * @param inOtherSpeciesName
+     *            the unctrl vocab for a Species
+     *                  
+     * @return the matching Strain, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     *                
+     * This method is used to send in the newly created Species
+     * when the user specifies other for species and Not Specified
+     * for strain in the XenograftManagerImpl.  Reuse object if other text
+     * is exactly the same (rare occurrance).               
+     */
+    public Strain getOrCreate(String inStrainName,
+                              String inOtherStrainName,
+                              String inSpeciesName,
+                              String inOtherSpeciesName) throws Exception
+    {
+
+        log.info("<StrainManagerImpl> Entering getOrCreate(String, String, String)");
+
+        // need species_id to get correct strain - works for 'Not specified'
+        Species species = SpeciesManagerSingleton.instance().getOrCreate(inSpeciesName, inOtherSpeciesName);
+
+        Strain theQBEStrain = new Strain();
+        theQBEStrain.setSpecies(species);
+
+        // If Other is selected, look for a match to the uncontrolled vocab
+        // create new one either way if not found
+        if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION))
+        {
+            theQBEStrain.setName(inStrainName);
+        }
+        else
+        {
+            theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
+        }
+
+        Strain theStrain = null;
+        try
+        {
+            List theList = Search.query(theQBEStrain);
+
+            // Does exist - get object
+            if (theList != null && theList.size() > 0)
+            {
+                theStrain = (Strain) theList.get(0);
+            }
+            // Doesn't exist. Create object with either name or otherName set, don't save the word 'Other'
+            else
+            {
+                log.info("<StrainManagerImpl> No matching strains. Create new one");
+                theStrain = theQBEStrain;
+                if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION))
+                {
+                    theQBEStrain.setName(inStrainName);
+                }
+                else
+                {
+                    theQBEStrain.setNameUnctrlVocab(inOtherStrainName);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("Error querying for matching strain object.  Creating new one.", e);
+            theStrain = theQBEStrain;
+        }
+
+        return theStrain;
+    }
+
 }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftForm.java,v 1.13 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: XenograftForm.java,v 1.14 2006-05-19 16:41:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.12  2005/12/28 16:43:48  pandyas
  * removed harvest date - unused
  *
@@ -49,6 +52,7 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     protected String otherAdministrativeSite;
     
     protected String donorScientificName;
+    protected String otherDonorScientificName;
     protected String donorEthinicityStrain;
     protected String otherDonorEthinicityStrain;
     
@@ -70,6 +74,21 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     public void setDonorScientificName(String donorScientificName) {
         this.donorScientificName = donorScientificName;
     }
+    
+    /**
+     * @return Returns the otherDonorScientificName.
+     */
+    public String getOtherDonorScientificName() {
+        return otherDonorScientificName;
+    }
+
+    /**
+     * @param otherDonorScientificName
+     *            The otherDonorScientificName to set.
+     */
+    public void setOtherDonorScientificName(String otherDonorScientificName) {
+        this.otherDonorScientificName = otherDonorScientificName;
+    }    
 
     /**
      * @return Returns the donorEthinicityStrain.

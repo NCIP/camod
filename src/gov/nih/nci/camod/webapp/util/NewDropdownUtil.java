@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.42 2006-05-15 15:45:40 georgeda Exp $
+ * $Id: NewDropdownUtil.java,v 1.43 2006-05-19 16:41:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2006/05/15 15:45:40  georgeda
+ * Cleaned up contact info management
+ *
  * Revision 1.41  2006/05/10 14:16:14  schroedn
  * New Features - Changes from code review
  *
@@ -359,14 +362,14 @@ public class NewDropdownUtil
      */
     protected static List getSpeciesList(HttpServletRequest inRequest,
                                          String inAddBlank) throws Exception
-    { 
+    {
         log.trace("Entering NewDropdownUtil.getSpeciesList");
-        
+
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
         List theSpeciesList = QueryManagerSingleton.instance().getApprovedSpecies(inRequest);
-        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();         
-        
+        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();
+
         if (theSpeciesList != null)
         {
             for (int i = 0; i < theSpeciesList.size(); i++)
@@ -381,10 +384,11 @@ public class NewDropdownUtil
                         theReturnList.add(theOption);
                     }
                 }
-            } 
-        } 
+            }
+        }
+
         log.trace("Exiting NewDropdownUtil.getQueryOnlySpeciesList");
-        return theReturnList; 
+        return theReturnList;
     }
 
     /**
@@ -398,12 +402,12 @@ public class NewDropdownUtil
                                                 String inAddBlank) throws Exception
     {
         log.trace("Entering NewDropdownUtil.getQueryOnlySpeciesList");
-      
+
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
         List theSpeciesList = QueryManagerSingleton.instance().getQueryOnlySpecies(inRequest);
-        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();         
-        
+        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();
+
         if (theSpeciesList != null)
         {
             for (int i = 0; i < theSpeciesList.size(); i++)
@@ -418,12 +422,12 @@ public class NewDropdownUtil
                         theReturnList.add(theOption);
                     }
                 }
-            } 
-        } 
-        log.trace("Exiting NewDropdownUtil.getQueryOnlySpeciesList");
-        return theReturnList; 
+            }
+            addOtherOption(theReturnList);
+        }
+        return theReturnList;
     }
-    
+
 
     /**
      * Based on a species name retrieve a list of all Strains
@@ -442,38 +446,49 @@ public class NewDropdownUtil
 
         SpeciesManager speciesManager = (SpeciesManager) getContext(inRequest).getBean("speciesManager");
         Species species = null;
-        
+
         List<Strain> strainList = new ArrayList<Strain>();
-        List<String> strainNames = new ArrayList<String>();        
+        List<String> strainNames = new ArrayList<String>();
 
-      if (speciesName != null && speciesName.length() > 0) {
-            species =  speciesManager.getByName(speciesName);
-            strainList = new ArrayList<Strain>(species.getStrainCollection());
-            
-         if (strainList.size() > 0)
-         {
-                //print out strain names                  
-                for (int i = 0; i < strainList.size(); i++)
-                {
-                    Strain strain = (Strain) strainList.get(i);
-
-                    if (strain.getName() != null && !strainNames.contains(strain.getName()))
-                    {
-                            System.out.println("strain.getName(): " + strain.getName());                            
-                            strainNames.add(strain.getName());
-                    }
-                }
-            // Sort the list in 'abc' order
-            Collections.sort(strainNames);
-            addOther(strainNames);
-            addBlank(strainNames);
-
-        }  else
+        if (speciesName != null && speciesName.length() > 0)
+        {
+            // Add blank, other, and Not Specified to strain if user selects other for species 
+            if (speciesName.equals(Constants.Dropdowns.OTHER_OPTION))
             {
+                addNotSpecified(strainNames);
+                addOther(strainNames);
                 addBlank(strainNames);
-                addOther(strainNames);                
             }
-        }        
+            else
+            {
+                species = speciesManager.getByName(speciesName);
+                strainList = new ArrayList<Strain>(species.getStrainCollection());
+
+                if (strainList.size() > 0)
+                {
+                    //print out strain names                  
+                    for (int i = 0; i < strainList.size(); i++)
+                    {
+                        Strain strain = (Strain) strainList.get(i);
+
+                        if (strain.getName() != null && !strainNames.contains(strain.getName()))
+                        {
+                            System.out.println("strain.getName(): " + strain.getName());
+                            strainNames.add(strain.getName());
+                        }
+                    }
+                    // Sort the list in 'abc' order
+                    Collections.sort(strainNames);
+                    addOther(strainNames);
+                    addBlank(strainNames);
+                }
+                else
+                {
+                    addOther(strainNames);
+                    addBlank(strainNames);
+                }
+            }
+        }
         return strainNames;
     }
 
@@ -795,6 +810,24 @@ public class NewDropdownUtil
         {
             inList.remove(Constants.Dropdowns.OTHER_OPTION);
             inList.add(0, Constants.Dropdowns.OTHER_OPTION);
+        }
+    }
+
+    /**
+     * Add Not Specified to the list in the first spot if it's not already there.
+     * Removes it and put's it in the second spot if it is.
+     */
+    private static void addNotSpecified(List inList)
+    {
+
+        if (!inList.contains(Constants.Dropdowns.NOT_SPECIFIED_OPTION))
+        {
+            inList.add(0, Constants.Dropdowns.NOT_SPECIFIED_OPTION);
+        }
+        else
+        {
+            inList.remove(Constants.Dropdowns.NOT_SPECIFIED_OPTION);
+            inList.add(0, Constants.Dropdowns.NOT_SPECIFIED_OPTION);
         }
     }
 
