@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.49 2006-05-18 13:05:20 guptaa Exp $
+ * $Id: QueryManagerImpl.java,v 1.50 2006-05-19 12:33:34 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2006/05/18 13:05:20  guptaa
+ * added disease
+ *
  * Revision 1.48  2006/05/17 21:16:08  guptaa
  * organ tree changes
  *
@@ -1249,29 +1252,50 @@ public class QueryManagerImpl extends BaseManager
      * 
      * @throws PersistenceException
      */
-    private String getModelIdsForHistopathologyOrgan(String inConceptCodes) throws PersistenceException
-    {
-        String theConceptCodeList = "";
+    private String getModelIdsForHistopathologyOrgan(String inConceptCodes, String organTissueName) throws PersistenceException {
 
-        StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
+		String theConceptCodeList = "";
 
-        while (theTokenizer.hasMoreElements())
-        {
-            theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
+		String theSQLString = "";
+		
+		StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
 
-            // Only tack on a , if it's not the last element
-            if (theTokenizer.hasMoreElements())
-            {
-                theConceptCodeList += ",";
-            }
-        }
+		if (organTissueName.length() > 0 && inConceptCodes.length() <= 0) {
 
-        String theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist " + "WHERE hist.abs_cancer_model_id IS NOT null " + "AND hist.histopathology_id IN (SELECT h.histopathology_id " + "     FROM histopathology h, organ o " + "     WHERE h.organ_id = o.organ_id " + "         AND o.concept_code IN (" + theConceptCodeList + "))";
+			theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist "
+					+ "WHERE hist.abs_cancer_model_id IS NOT null "
+					+ "AND hist.histopathology_id IN (SELECT h.histopathology_id "
+					+ "     FROM histopathology h, organ o "
+					+ "     WHERE h.organ_id = o.organ_id "
+					+ "         AND o.name like ('"
+					+ organTissueName.toUpperCase() + "%'))";
 
-        Object[] theParams = new Object[0];
-        return getIds(theSQLString, theParams);
+		} else {
 
-    }
+			while (theTokenizer.hasMoreElements()) {
+				theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
+
+				// Only tack on a , if it's not the last element
+				if (theTokenizer.hasMoreElements()) {
+					theConceptCodeList += ",";
+				}
+			}
+
+			theSQLString = "SELECT distinct hist.abs_cancer_model_id FROM histopathology hist "
+					+ "WHERE hist.abs_cancer_model_id IS NOT null "
+					+ "AND hist.histopathology_id IN (SELECT h.histopathology_id "
+					+ "     FROM histopathology h, organ o "
+					+ "     WHERE h.organ_id = o.organ_id "
+					+ "         AND o.concept_code IN ("
+					+ theConceptCodeList
+					+ "))";
+		}
+
+		Object[] theParams = new Object[0];
+		return getIds(theSQLString, theParams);
+
+	}
+
 
     /**
      * Get the model id's for any model that has a histopathology with a parent
@@ -1716,7 +1740,7 @@ public class QueryManagerImpl extends BaseManager
 
         theWhereClause += " OR am.strain IN (" + getStrainIdsForSpecies(inKeyword) + ")";
 
-        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(theKeyword) + ")";
+        theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(theKeyword, "") + ")";
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease(theKeyword) + ")";
 
@@ -1795,9 +1819,9 @@ public class QueryManagerImpl extends BaseManager
         }
 
         // Search for organ
-        if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0)
+        if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0 || inSearchData.getOrgan()!= null)
         {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode()) + ")";
+            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode(),inSearchData.getOrgan() ) + ")";
         }
 
         // Search for disease
