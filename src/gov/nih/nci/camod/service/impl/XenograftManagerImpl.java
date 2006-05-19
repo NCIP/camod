@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.26 2006-05-19 16:39:43 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.27 2006-05-19 18:50:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2006/05/19 16:39:43  pandyas
+ * Defect #249 - add other to species on the Xenograft screen
+ *
  * Revision 1.25  2006/04/20 18:11:30  pandyas
  * Cleaned up Species or Strain save of Other in DB
  *
@@ -201,6 +204,12 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                     inXenograft.getOrgan().setConceptCode(inXenograftData.getOrganTissueCode());
                 }
             }
+        }
+        //blank out organ, clear button functionality during editing
+        else
+        {
+            log.info("Setting object to null - clear organ: ");
+            inXenograft.setOrgan(null);
         }
 
         // anytime the graft type is "other"

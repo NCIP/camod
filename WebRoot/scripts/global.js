@@ -278,3 +278,13 @@ function chkIntegration() {
 	    disableField(document.forms[0].locationOfIntegration);
 	}
 }
+
+/**********************************
+Script to clearOrgan field
+Blanks out organ field
+Clears hidden value for organTissueCode
+**********************************/
+ function clearOrgan(field, var1) {
+     field.value = '';
+     var1.value = '';   
+ }

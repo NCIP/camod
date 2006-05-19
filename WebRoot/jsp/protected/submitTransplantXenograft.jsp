@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.41 2006-05-19 16:45:00 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.42 2006-05-19 18:50:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2006/05/19 16:45:00  pandyas
+ * Defect #249 - add other to species on the Xenograft screen, needed to add javascript code and field
+ *
  * Revision 1.40  2006/05/03 19:05:50  georgeda
  * Move to new EVSTree
  *
@@ -75,10 +78,9 @@
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
-
 	function getBothResults(control) {
-	getOptions( control );	
-	chkOtherSpecies();
+		getOptions( control );	
+		chkOtherSpecies();
 	}
 	function getOptions( control ) {
 		form = control.form;
@@ -86,7 +88,7 @@
 		form.submit();		
 	}
 	function chkOtherSpecies() {	
-			chkOther(document.forms[0].donorScientificName, document.forms[0].otherDonorScientificName);
+		chkOther(document.forms[0].donorScientificName, document.forms[0].otherDonorScientificName);
 	}
 	function chkOtherStrain() {
 		chkOther(document.forms[0].donorEthinicityStrain, document.forms[0].otherDonorEthinicityStrain);
@@ -187,11 +189,8 @@
 		<td class="formField">
 			<html:hidden property="organTissueCode"/>
 			<input type="hidden" name="organTissueName" />				
-			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
-
-			 <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
-				<bean:message key="button.clearOrgan"/>
-	  		</html:submit>			
+			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="15" />
+			    <a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" src="/camod/images/clear.gif"></a>
 		</td>
 	</tr>
 
