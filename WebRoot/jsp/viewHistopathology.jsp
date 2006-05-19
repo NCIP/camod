@@ -1,6 +1,10 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/04/28 19:50:13  schroedn
+ * Defect #55
+ * Added Keyword Highlighting to this jsp
+ *
  * Revision 1.28  2006/04/17 19:08:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -29,7 +33,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.29 2006-04-28 19:50:13 schroedn Exp $
+ * $Id: viewHistopathology.jsp,v 1.30 2006-05-19 17:35:40 georgeda Exp $
  *
  */   
 %>
@@ -91,7 +95,7 @@
 								</td>
 								<td width="50%">
 									<c:if test="${not empty h.disease}">
-										    <camod:highlight><c:out value="${disease.EVSPreferredDescription}"/></camod:highlight>
+										    <camod:highlight><c:out value="${h.disease.EVSPreferredDescription}"/></camod:highlight>
 									</c:if>	
 							    </td>
 						    </tr>
