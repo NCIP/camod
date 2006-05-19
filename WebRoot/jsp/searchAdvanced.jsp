@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.39 2006-05-18 14:26:40 guptaa Exp $
+ * $Id: searchAdvanced.jsp,v 1.40 2006-05-19 17:12:11 guptaa Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2006/05/18 14:26:40  guptaa
+ * fix style id
+ *
  * Revision 1.38  2006/05/18 13:05:48  guptaa
  * added disease
  *
@@ -184,18 +187,19 @@
 		<tr>
 			<td class="formRequiredNotice" width="0">&nbsp;</td>
 			<td class="formLabel">
-				<label for="field2">Site of Lesion/Tumor</label>
-		 		<html:hidden styleId="organTissueName" property="organTissueName"/>
+				<html:hidden styleId="organTissueName" property="organTissueName"/>
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
-				<camod:cshelp mapId="advanced_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<label for="field2">Site of Lesion/Tumor</label>
+				&nbsp;
+				<camod:cshelp mapId="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 			</td>
-			<td class="formField">				
+			<td class="formField">
 				<html:text styleClass="formFieldSized" styleId="organ" property="organ" size="25"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
-  				parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />
+  				parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />	
 			</td>
 		</tr>
 		
