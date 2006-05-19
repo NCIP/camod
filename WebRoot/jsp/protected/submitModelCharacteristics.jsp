@@ -21,11 +21,7 @@ var cal1 = new CalendarPopup();
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkOtherStrain() {
-	
-	    var strain = document.forms[0].ethinicityStrain;
-	    var otherStrain = document.forms[0].otherEthnicityStrain;
-	
-	    chkOther(strain, otherStrain);  	
+		chkOther(document.forms[0].ethinicityStrain, document.forms[0].otherEthinicityStrain);
 	}
 
 	function getOptions( control ) {
