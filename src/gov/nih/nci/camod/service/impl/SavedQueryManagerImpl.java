@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.2 2006-05-10 16:38:42 schroedn Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.3 2006-05-22 20:10:18 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/10 16:38:42  schroedn
+ * Added save for Transient Instance
+ *
  * Revision 1.1  2006/05/10 14:14:33  schroedn
  * New Features - Changes from code review
  *
@@ -74,6 +77,11 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             SavedQueryAttribute theSavedQueryAttribute = sqaIter.next();
             // System.out.println( theSavedQueryAttribute.getAttributeName() + " = " + theSavedQueryAttribute.getAttributeValue() );
 
+            if (theSavedQueryAttribute.getAttributeName().equals(theBundle.getString("criteria.Keyword")))
+            {
+                inSearchForm.setKeyword(theSavedQueryAttribute.getAttributeValue());
+            }
+            
             if (theSavedQueryAttribute.getAttributeName().equals(theBundle.getString("criteria.PIName")))
             {
                 inSearchForm.setPiName(theSavedQueryAttribute.getAttributeValue());
@@ -262,6 +270,15 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
         Set<SavedQueryAttribute> criteriaList = new HashSet<SavedQueryAttribute>();
         log.debug("Entering QueryStorageManagerImpl.addQueryToHistory");
 
+        // Keyword search         
+        if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
+        {
+            SavedQueryAttribute sqa = new SavedQueryAttribute();
+            sqa.setAttributeName(theBundle.getString("criteria.Keyword"));
+            sqa.setAttributeValue(inSearchData.getKeyword());
+            criteriaList.add(sqa);
+        }
+        
         // PI criteria         
         if (inSearchData.getPiName() != null && inSearchData.getPiName().length() > 0)
         {
@@ -307,15 +324,6 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             criteriaList.add(sqa);
         }
 
-        // Organ (Tissue Code)
-        if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0)
-        {
-            SavedQueryAttribute sqa = new SavedQueryAttribute();
-            sqa.setAttributeName(theBundle.getString("criteria.OrganTissueCode"));
-            sqa.setAttributeValue(inSearchData.getOrganTissueCode());
-            criteriaList.add(sqa);
-        }
-
         // Organ (Tissue Name)
         if (inSearchData.getOrganTissueName() != null && inSearchData.getOrganTissueName().length() > 0)
         {
@@ -323,6 +331,15 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             sqa.setAttributeName(theBundle.getString("criteria.OrganTissueName"));
             sqa.setAttributeValue(inSearchData.getOrganTissueName());
             criteriaList.add(sqa);
+           
+            // Organ (Tissue Code)
+            if (inSearchData.getOrganTissueCode() != null && inSearchData.getOrganTissueCode().length() > 0)
+            {
+                sqa = new SavedQueryAttribute();
+                sqa.setAttributeName(theBundle.getString("criteria.OrganTissueCode"));
+                sqa.setAttributeValue(inSearchData.getOrganTissueCode());
+                criteriaList.add(sqa);
+            }
         }
 
         // Organ
@@ -334,15 +351,6 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             criteriaList.add(sqa);
         }
 
-        // Diagnosis (Code)
-        if (inSearchData.getDiagnosisCode() != null && inSearchData.getDiagnosisCode().length() > 0)
-        {
-            SavedQueryAttribute sqa = new SavedQueryAttribute();
-            sqa.setAttributeName(theBundle.getString("criteria.DiagnosisCode"));
-            sqa.setAttributeValue(inSearchData.getDiagnosisCode());
-            criteriaList.add(sqa);
-        }
-
         // Diagnosis (Name)
         if (inSearchData.getDiagnosisName() != null && inSearchData.getDiagnosisName().length() > 0)
         {
@@ -350,9 +358,16 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             sqa.setAttributeName(theBundle.getString("criteria.DiagnosisName"));
             sqa.setAttributeValue(inSearchData.getDiagnosisName());
             criteriaList.add(sqa);
+            
+            // Diagnosis (Code)
+            if (inSearchData.getDiagnosisCode() != null && inSearchData.getDiagnosisCode().length() > 0)
+            {
+                sqa = new SavedQueryAttribute();
+                sqa.setAttributeName(theBundle.getString("criteria.DiagnosisCode"));
+                sqa.setAttributeValue(inSearchData.getDiagnosisCode());
+                criteriaList.add(sqa);
+            }
         }
-
-        // Diagnosis
 
         if (inSearchData.getTumorClassification() != null && inSearchData.getTumorClassification().length() > 0)
         {
@@ -361,6 +376,7 @@ public class SavedQueryManagerImpl extends BaseManager implements SavedQueryMana
             sqa.setAttributeValue(inSearchData.getTumorClassification());
             criteriaList.add(sqa);
         }
+        
         // ///////////////////////////////////////
         // Carcinogenic interventions
         // ///////////////////////////////////////

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.3 2006-05-22 19:39:25 schroedn Exp $
+ * $Id: CriteriaTableUtil.java,v 1.4 2006-05-22 20:10:40 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/22 19:39:25  schroedn
+ * Display criteria for AJAX search fields correctly
+ *
  * Revision 1.2  2006/05/10 16:38:33  schroedn
  * Added save for Transient Instance
  *
@@ -44,7 +47,16 @@ public class CriteriaTableUtil
         ResourceBundle theBundle = ResourceBundle.getBundle("ApplicationResources_en");
 
         String theDisplayTable = "<TABLE width=\"100%\" cellspacing=\"3\" cellpadding=\"0\">";
-
+        
+        // Keyword Search
+        if (sData.getKeyword() != null)
+        {
+            if (sData.getKeyword().trim().length() > 0)
+            {
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Keyword") + "</td><td class=\"formFieldNone\">" + sData.getKeyword() + "</td></tr>";
+            }
+        }
+        
         // PI criteria
         if (sData.getPiName() != null)
         {
