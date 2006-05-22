@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.27 2006-05-19 18:50:37 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.28 2006-05-22 15:02:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2006/05/19 18:50:37  pandyas
+ * defect #225 - Add clearOrgan functionality to Xenograft screen
+ *
  * Revision 1.26  2006/05/19 16:39:43  pandyas
  * Defect #249 - add other to species on the Xenograft screen
  *
@@ -46,7 +49,6 @@ import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.domain.Strain;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.XenograftManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.XenograftData;
 import java.util.List;
@@ -61,12 +63,32 @@ import java.util.TreeMap;
 public class XenograftManagerImpl extends BaseManager implements XenograftManager
 {
 
+    /**
+     * Get all Xenograft objects
+     * 
+     * 
+     * @return the matching Xenograft objects, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */    
     public List getAll() throws Exception
     {
         log.trace("In XenograftManagerImpl.getAll");
         return super.getAll(Xenograft.class);
     }
 
+    /**
+     * Get a specific Xenograft by id
+     * 
+     * @param id
+     *            the unique id for a Xenograft
+     * 
+     * @return the matching Xenograft object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */    
     public Xenograft get(String id) throws Exception
     {
         log.trace("In XenograftManagerImpl.get");
@@ -96,6 +118,7 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
         Xenograft theXenograft = new Xenograft();
         populateSpeciesStrain(inXenograftData, theXenograft, inAnimalModel);
+        populateOrgan(inXenograftData, theXenograft);
         populateXenograft(inXenograftData, theXenograft, inAnimalModel);
 
         log.info("<XenograftManagerImpl> Exiting XenograftManagerImpl.create");
@@ -107,12 +130,11 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
                        Xenograft inXenograft,
                        AnimalModel inAnimalModel) throws Exception
     {
-
-        log.info("Entering XenograftManagerImpl.update");
-        log.info("Updating XenograftData: " + inXenograft.getId());
+        log.info("Entering XenograftManagerImpl.update XenograftId: " + inXenograft.getId());
 
         // Populate w/ the new values and save
         populateSpeciesStrain(inXenograftData, inXenograft, inAnimalModel);
+        populateOrgan(inXenograftData, inXenograft);
         populateXenograft(inXenograftData, inXenograft, inAnimalModel);
         save(inXenograft);
 
@@ -149,68 +171,6 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         inXenograft.setCellAmount(inXenograftData.getCellAmount());
         inXenograft.setGrowthPeriod(inXenograftData.getGrowthPeriod());
 
-        /*
-         * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
-         * organ is selected by user
-         */
-        if (inXenograftData.getOrganTissueCode() != null && inXenograftData.getOrganTissueCode().length() > 0)
-        {
-            log.info("newConceptCode is not null: ");
-
-            String newConceptCode = inXenograftData.getOrganTissueCode();
-            log.info("newConceptCode: " + newConceptCode);
-
-            // Organ will be null for new submissions
-            if (inXenograft.getOrgan() == null)
-            {
-                log.info("Organ is new so create new object and retrieve attributes");
-
-                inXenograft.setOrgan(new Organ());
-
-                /*
-                 * Always get/store organ name through the concept code - never
-                 * deal with converting name back and forth
-                 */
-                String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inXenograftData.getOrganTissueCode());
-
-                log.info("preferedOrganName: " + preferedOrganName);
-                inXenograft.getOrgan().setName(preferedOrganName);
-
-                log.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: " + inXenograftData.getOrganTissueCode());
-                inXenograft.getOrgan().setConceptCode(inXenograftData.getOrganTissueCode());
-
-            }
-            else
-            {
-                // edited screen - submit organ only if changed
-                log.info("Organ is modified so compare concept code in DB");
-
-                String oldConceptCode = inXenograft.getOrgan().getConceptCode();
-                log.info("oldConceptCode: " + oldConceptCode);
-
-                if (!newConceptCode.equals(oldConceptCode))
-                {
-                    log.info("oldConceptCode != newConceptCode: ");
-                    /*
-                     * Always get/store organ name through the concept code -
-                     * never deal with converting name back and forth
-                     */
-                    String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inXenograftData.getOrganTissueCode());
-
-                    log.info("preferedOrganName: " + preferedOrganName);
-                    inXenograft.getOrgan().setName(preferedOrganName);
-
-                    log.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: " + inXenograftData.getOrganTissueCode());
-                    inXenograft.getOrgan().setConceptCode(inXenograftData.getOrganTissueCode());
-                }
-            }
-        }
-        //blank out organ, clear button functionality during editing
-        else
-        {
-            log.info("Setting object to null - clear organ: ");
-            inXenograft.setOrgan(null);
-        }
 
         // anytime the graft type is "other"
         if (inXenograftData.getGraftType().equals(Constants.Dropdowns.OTHER_OPTION))
@@ -260,6 +220,31 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
 
         log.info("\n <populateSpeciesStrain> theSpecies is NOT other: ");
         inXenograft.setStrain(theStrain);
+
+    }
+
+    private void populateOrgan(XenograftData inXenograftData,
+                               Xenograft inXenograft) throws Exception
+    {
+
+        // reuse/create Organ by matching concept code
+        Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inXenograftData.getOrganTissueCode(),
+                                                                      inXenograftData.getOrganTissueName());
+
+        /*
+         * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
+         * organ is selected by user - no need to check for existing organ in 2.1
+         */
+        if (inXenograftData.getOrganTissueCode() != null && inXenograftData.getOrganTissueCode().length() > 0)
+        {
+            inXenograft.setOrgan(theOrgan);
+        }
+        //blank out organ, clear button functionality during editing
+        else
+        {
+            log.info("Setting object to null - clear organ: ");
+            inXenograft.setOrgan(null);
+        }
 
     }
 
