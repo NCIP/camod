@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.23 2006-05-22 16:52:47 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.24 2006-05-22 17:21:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/05/22 16:52:47  pandyas
+ * modified/fixed isRandom to make consistent between transgene and genomic segment
+ *
  * Revision 1.22  2006/04/20 14:58:51  georgeda
  * Fixed targeted/random
  *
@@ -99,9 +102,12 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
     {
         log.trace("Entering populateGenomicSegment");
 
+        
         if (inGenomicSegmentData.getIsRandom().equals("yes"))
         {
             inGenomicSegment.setIsRandom(true);
+            // Set locationOfIntegration to null during editing
+            inGenomicSegment.setLocationOfIntegration(null);
         }
         else
         {

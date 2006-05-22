@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.27 2006-05-22 16:52:47 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.28 2006-05-22 17:21:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2006/05/22 16:52:47  pandyas
+ * modified/fixed isRandom to make consistent between transgene and genomic segment
+ *
  * Revision 1.26  2006/04/21 18:27:21  georgeda
  * Cleanup
  *
@@ -175,6 +178,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         if (inEngineeredTransgeneData.getIsRandom().equals("yes"))
         {
             inEngineeredTransgene.setIsRandom(true);
+            // Set locationOfIntegration to null during editing
+            inEngineeredTransgene.setLocationOfIntegration(null);
         }
         else
         {
