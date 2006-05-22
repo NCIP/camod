@@ -1,6 +1,10 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/28 19:36:19  schroedn
+ * Defect #55
+ * Added Keyword Highlighting to this jsp
+ *
  * Revision 1.11  2006/04/27 15:09:01  pandyas
  * Modified while testing caMod 2.1
  *
@@ -17,7 +21,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.12 2006-04-28 19:36:19 schroedn Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.13 2006-05-22 17:38:09 pandyas Exp $
  */
 %>
 <tr>
@@ -81,8 +85,14 @@
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Comment </b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhite" width="25%"><b>Tumor Response</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">
+		<camod:highlight><c:out value="${t.tumorResponse}"/>&nbsp;</camod:highlight>
+	</td>
+</tr>
+<tr>
+	<td class="resultsBoxGrey" width="25%"><b>Comment </b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 		<camod:highlight><c:out value="${t.comments}"/></camod:highlight>
 	</td>
 </tr>
