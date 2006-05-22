@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.30 2006-05-22 17:47:02 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.31 2006-05-22 18:40:01 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2006/05/22 17:47:02  pandyas
+ * Modified so we e-mail when otherScientificName is chosen - was reversed
+ *
  * Revision 1.29  2006/05/22 17:27:03  pandyas
  * OrganManagerSingleton.instance().getOrCreate sends in OrganCode and OrganName - typo
  *
@@ -48,7 +51,6 @@ import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.AssociatedExpressionData;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
 import gov.nih.nci.camod.webapp.form.ImageForm;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -56,8 +58,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -261,14 +262,9 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         }
         else
         {
-            String strNumberMGI = inEngineeredTransgeneData.getMgiNumber().trim();
-            Pattern p = Pattern.compile("[0-9]{" + strNumberMGI.length() + "}");
-            Matcher m = p.matcher(strNumberMGI);
-            if (m.matches() && strNumberMGI != null && !strNumberMGI.equals(""))
-            {
-                inMutationIdentifier.setMgiNumber(strNumberMGI);
-                inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
-            }
+            inMutationIdentifier.setMgiNumber(inEngineeredTransgeneData.getMgiNumber());
+            inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
+
         }
 
         // Gene Functions
