@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.29 2006-05-22 17:27:03 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.30 2006-05-22 17:47:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/05/22 17:27:03  pandyas
+ * OrganManagerSingleton.instance().getOrCreate sends in OrganCode and OrganName - typo
+ *
  * Revision 1.28  2006/05/22 17:21:02  pandyas
  * Must set locationOfIntegration to null during editing from targeted back to random
  *
@@ -201,11 +204,11 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                                                                                 inEngineeredTransgeneData.getOtherScientificName());
 
             //Species is other, add 'other' to commonName field and send e-mail
-            if (!inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION))
+            if (inEngineeredTransgeneData.getScientificName().equals(Constants.Dropdowns.OTHER_OPTION))
             {
                 // Object is returned with uncontrolled vocab set, do not save 'Other' in DB, e-mail
                 inEngineeredTransgene.setSpecies(theSpecies);
-                sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene ScientificName");
+                sendEmail(theAnimalModel, inEngineeredTransgeneData.getOtherScientificName(), "Transgene other ScientificName");
             }
             else
             {
