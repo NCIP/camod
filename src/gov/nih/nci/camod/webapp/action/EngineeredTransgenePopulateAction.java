@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.20 2006-05-22 16:52:28 pandyas Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.21 2006-05-22 18:39:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/05/22 16:52:28  pandyas
+ * modified isRandom to make consistent between transgene and genomic segment
+ *
  * Revision 1.19  2006/04/21 18:28:02  georgeda
  * Fixed issue w/ engineered genes displaying
  *
@@ -53,11 +56,14 @@ public class EngineeredTransgenePopulateAction extends BaseAction
         else
         {
             // populate isRandom
-            if (theEngineeredTransgene.getIsRandom() == true) {
+            if (theEngineeredTransgene.getIsRandom() == true)
+            {
                 theEngineeredTransgeneForm.setIsRandom("yes");
-            } else {
+            }
+            else
+            {
                 theEngineeredTransgeneForm.setIsRandom("no");
-                theEngineeredTransgeneForm.setLocationOfIntegration(theEngineeredTransgene.getLocationOfIntegration());                
+                theEngineeredTransgeneForm.setLocationOfIntegration(theEngineeredTransgene.getLocationOfIntegration());
             }
             // populate Name
             theEngineeredTransgeneForm.setName(theEngineeredTransgene.getName());
@@ -178,8 +184,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
                 // MGI Number
                 MutationIdentifier inMutationIdentifier = theEngineeredTransgene.getMutationIdentifier();
                 if (inMutationIdentifier != null)
+                {
                     theEngineeredTransgeneForm.setMgiNumber(inMutationIdentifier.getMgiNumber());
-
+                }
+                
                 // Gene Function
                 Set<GeneFunction> theGeneFunctions = theEngineeredTransgene.getGeneFunctionCollection();
 
