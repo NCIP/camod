@@ -359,6 +359,7 @@
 </TABLE>
 
 <SCRIPT>
+chkIntegration();
 chkConditional();
 chkName();
 chkOther_t1();
