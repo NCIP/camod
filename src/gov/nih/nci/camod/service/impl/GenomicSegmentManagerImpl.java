@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.22 2006-04-20 14:58:51 georgeda Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.23 2006-05-22 16:52:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/04/20 14:58:51  georgeda
+ * Fixed targeted/random
+ *
  * Revision 1.21  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -96,11 +99,14 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
     {
         log.trace("Entering populateGenomicSegment");
 
-        if (inGenomicSegmentData.getIsRandom().equals("no")) {
+        if (inGenomicSegmentData.getIsRandom().equals("yes"))
+        {
+            inGenomicSegment.setIsRandom(true);
+        }
+        else
+        {
             inGenomicSegment.setIsRandom(false);
             inGenomicSegment.setLocationOfIntegration(inGenomicSegmentData.getLocationOfIntegration());
-        } else {
-            inGenomicSegment.setIsRandom(true);
         }
         //inGenomicSegment.setComments(inGenomicSegmentData.getComments());
         inGenomicSegment.setSegmentSize(inGenomicSegmentData.getSegmentSize());
@@ -142,7 +148,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements GenomicSeg
             // gather message keys and variable values to build the e-mail
             // content with
             String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String,Object> values = new TreeMap<String,Object>();
+            Map<String, Object> values = new TreeMap<String, Object>();
             values.put("type", "SegmentName");
             values.put("value", inGenomicSegmentData.getOtherSegmentName());
             values.put("submitter", inAnimalModel.getSubmitter());

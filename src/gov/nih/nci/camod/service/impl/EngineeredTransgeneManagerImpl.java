@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.26 2006-04-21 18:27:21 georgeda Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.27 2006-05-22 16:52:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2006/04/21 18:27:21  georgeda
+ * Cleanup
+ *
  * Revision 1.25  2006/04/20 18:11:30  pandyas
  * Cleaned up Species or Strain save of Other in DB
  *
@@ -168,15 +171,15 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(theModelId);
 
-        // Transgene Integration - adds term 'Random' if random and the text entered by the user if 'Targeted'
-        if (inEngineeredTransgeneData.getIsRandom().equals("Targeted"))
+        // Transgene Integration - adds 1 or 0 if random or targeted - text entered by the user if 'Targeted'
+        if (inEngineeredTransgeneData.getIsRandom().equals("yes"))
         {
-            inEngineeredTransgene.setIsRandom(false);
-            inEngineeredTransgene.setLocationOfIntegration(inEngineeredTransgeneData.getLocationOfIntegration());
+            inEngineeredTransgene.setIsRandom(true);
         }
         else
         {
-            inEngineeredTransgene.setIsRandom(true);
+            inEngineeredTransgene.setIsRandom(false);
+            inEngineeredTransgene.setLocationOfIntegration(inEngineeredTransgeneData.getLocationOfIntegration());
         }
 
         // Transgene (coding sequence only)
