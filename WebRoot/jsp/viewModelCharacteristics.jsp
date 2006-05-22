@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.27 2006-05-03 20:07:14 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.28 2006-05-22 15:57:36 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.27  2006/05/03 20:07:14  pandyas
+  *   Reversed diplay of isToolMouse - it was backwards
+  *
   *   Revision 1.26  2006/04/28 19:51:50  schroedn
   *   Defect #55
   *   Added Keyword Highlighting to this jsp
@@ -126,17 +129,21 @@
 		</tr>
 		
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Is This a Tool Mouse?</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
-						<c:choose>
+			<c:choose>
+				<c:when test="${mdl.strain.species.scientificName == 'Mus musculus'}">		
+					<td class="WhiteBox" width="20%"><b>Is This a Tool Mouse?</b></td>
+					<td class="WhiteBoxRightEnd" width="80%">
+						<c:choose>						
 							<c:when test = "${mdl.isToolMouse == true}">
 								<c:out value="No"/>
 							</c:when>
 							<c:otherwise>
 								<c:out value="Yes"/>
 							</c:otherwise>
-						</c:choose>	
-			</td>
+						</c:choose>
+					</td>						
+				</c:when>
+			</c:choose>	
 		</tr>				
 		
 		<tr>
