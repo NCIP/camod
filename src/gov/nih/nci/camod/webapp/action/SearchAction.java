@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.6 2006-05-11 15:43:05 schroedn Exp $
+ * $Id: SearchAction.java,v 1.7 2006-05-22 19:40:12 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/05/11 15:43:05  schroedn
+ * Updates number of results and excute time of SavedQueries on re-run or edit
+ *
  * Revision 1.5  2006/05/10 14:15:39  schroedn
  * New Features - Changes from code review
  *
@@ -128,6 +131,7 @@ public final class SearchAction extends BaseAction {
             theForm.allFieldsReset();
             theForward = "back";
         }
+        
         // Do the search
         else {
             
@@ -195,7 +199,9 @@ public final class SearchAction extends BaseAction {
                 request.getSession().setAttribute(Constants.SEARCH_FORM, theForm);
                 
             } catch (Exception e) {
-
+                
+                log.trace( e );
+                
                 // Set the error message
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
