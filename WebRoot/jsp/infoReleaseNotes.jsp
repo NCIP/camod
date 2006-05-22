@@ -22,8 +22,8 @@
                           Release Notes
     
                              caMOD
-                          Version 2.0
-                         December 21, 2005
+                          Version 2.1
+                         May 30th, 2006
 
        National Cancer Institute Center for Bioinformatics
 
@@ -43,11 +43,11 @@
 
 
 ================================================================
-    1.0 - caMOD Version 1.0 Introduction and History
+    1.0 - caMOD Version 2.1 Introduction and History
 ================================================================
  
 
-    caMOD 2.0, the Cancer Models Database, is a open source data management 
+    caMOD 2.1, the Cancer Models Database, is a open source data management 
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata 
     repository (caDSR) and enterprise vocabulary services (EVS) from the National 
@@ -67,6 +67,9 @@
     2.0 Release History
 ================================================================
 
+    caMOD Version 2.1
+    --	May 30th 2006    
+    
     caMOD Version 2.0
     --	December 21 2005    
 
@@ -77,168 +80,52 @@
     3.0 New Features and Updates
 ================================================================
 
-caMOD 2.0 is a caBIG Silver level compliant application. 
-For caBIG compatibility information see 
-http://https://cabig.nci.nih.gov/guidelines_documentation
-
-The caMOD Common Data Elements (CDEs) are available via caDSR 
+The caMOD 2.1 Common Data Elements (CDEs) are available via caDSR 
 (cancer Data Standard Repository) http://ncicb.nci.nih.gov/core/caDSR
 
 
-General
-- Utilization of NCI Thesaurus
-- Utilization of the Common Security Module (CSM) for user authentication
-
 Submission
 
-After the user logs in the submission his/her previously entered models 
-and models records in which he/she is listed a Principal Investigator 
-are listed.
-
-- Model Characteristics: 
-
-	The scope of the cancer models database was expanded to include tool mice. 
-	Tool mice or tool animals are strains that can be used to generate cancer 
-	models and do normally not develop tumors. Tool mice are commonly used to 
-	generate conditional knock out animals. 
-	
-	Examples for tool strains are Cre-expressing strains or strains that carry 
-	one or more floxed genes. 
-
-
-- Genetic Description 
-
-	A field was added to all pages in this part of the application to 
-	allow the submitter to enter the MGI (Mouse Genome Informatics) identifier
-	which will enable the retrieval of additional information from 
-	the informatics resources at the Jackson Laboratory.
-
-	The Targeted Modification page and the induced mutation page allow 
-	the user to enter the Gene Entrez ID for the affected gene. This 
-	will enable us to provide users with additional information about the gene(s).
-
-	Induced mutation contains a field for Gene Entrez ID for the affected gene. 
-	If a chemical triggered the mutation the user has the option to enter the 
-	CAS number for the chemical that was used.
-
-	A submission page for Spontaneous Mutation was added.
-
-	The submission pages for induced and spontaneous mutation contain fields to 
-	gather information about the genetic changes that occurred in the models as 
-	well as the methods of observation with which these changes were detected.
-
-
-- Carcinogenic Intervention
-
-	A page for entering information on Gene Delivery was added to this part 
-	of the application. Gene deliveries are done by viruses that carry a gene. 
-	
-	All pages of the carcinogenic interventions part were updated to include 
-	fields for gender, age at treatment, and administrative route (if applicable). 
-	The Chemical / Drug page allows the user to enter the NSC and/or CAS number 
-	of the chemical used in this experiment. 
-
-
-- Publication
-
-	The user is asked to indicate if a particular publication the existence of the 
-	animal model was reported for the first time. Eventually this feature will be 
-	used to link to records in the Mouse Tumor Biology Database at the Jackson Laboratory. 
-
-
-- Histopathology
-
-	Users can submit information about clinical markers and their values that were
-	found in or are associated with specific tumor types.
-	
-	A field for describing the methods of observation / detection of genetic changes 
-	in the tumors was added. 
-	
-	Users can enter data found in other species in particular humans in the 
-	?Comparative Data? field.
-
-
-- Cell lines
-
-
-- Therapeutic Approaches
-
-	To better identify the drug, users can enter the NSC and the CAS number 
-	for the compound.
-
-	More detailed information about the therapy is gathered. The following 
-	fields have been added: age at treatment, gender, dosage, administrative route.
-
-	The results of the experiment can be described in the biomarker and tumor 
-	response fields. 
-
-
-- Microarray
-
-	Micrroarray data are stored in MAGE-compliant caArray application instead of 
-	the Gene Expression Data Portal (GEDP).
-
-
-- Images
-
-	The text field for entering the staining method was replaced by a 
-	controlled vocabulary. 
-
-
-- Xenograft
-
-	Xenograft page was extended by the following fields: ATCC number, Cell amount, 
-	graft type
-
-
-- Model Availability
-
-	Users can now enter information about the availability of the animal model
-	from more sources as in caMOD 1.0. They can also indicate if the tool strains 
-	that were used to generate the model are available from one or more sources. 
-	The users can make multiple entries per model.
-	
-
-Administration
-
-Users who have been assigned the roles of coordinator, screener, and editor 
-will be presented with a to-do list of tasks when the access 
-the Admin part after logging in.
-
+- Added Transient Interference section to support Zebrafish models.
 
 Search
 
+- Keyword search
+
+  The keyword searched for is now hilighted in yellow on the search results pages.
+
 - Simple Search
 
-	The simple search was extended by a keyword search option.
+  The simple search now prompts the user with appropriate model descriptor/organ information based on the available models. 
 
 - Advanced Search
 
-	The advanced search includes now a query option for drugs or compounds 
-	used in therapeutic experiments, an option to query for models that develop 
-	metastases, and a keyword search.
+  The advanced search now prompts the user with appropriate model descriptor/organ/disease information based on the available models. 
 
 - Drug Screening 
 
-	The user can query for results of drug tested in yeast strains, 
-	xenograft and allograft mouse models (titled for this purpose as in-vivo models),
-	pre-clinical models, and humans. The tests in yeast and in-vivo models 
-	were performed by the Developmental Therapeutics Program of the National 
-	Cancer Institute. Information about pre-clinical models is retrieved from the 
-	models part of caMOD, and human data are retrieved via caBIO from clinical trials. 
+  The drug screening search now prompts the user with appropriate NSC numbers based on the available data.
 		
+- Search results configurability
 
-- Search detail pages
-	The therapeutic approaches pages includes information about drug screens in yeast 
-	and in-vivo, as well as clinical trials.
+  A logged in user can customize the search results by selecting the number of results per page, and the information displayed on the search results screen.  
+    
+- Saving queries and query history
 
+  A logged in user can view his/her query history as well as save particularly interesting queries for later use.
     
 ================================================================
     4.0 Defects Fixed Since Last Release
 ================================================================
 	
-
-	None
+    TestTrack items
+    
+	#225 - Allow user to clear Organ name on screens where it is not required.
+	#289 - information if a mouse is a tool mouse doesn't show up on model characteristics search page.
+	#296 - Wrong display of targeted vs random integration of transgene and genomic segment
+	#297 - Missed camod:shorten tag for therapeutic approaches
+	#345 - Users are only in https during login.  Eliminates IE nag messages when viewing images.
+	#371 - Force/validate lowercase usernames on entry
 
 
 ================================================================

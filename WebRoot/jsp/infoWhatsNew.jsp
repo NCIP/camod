@@ -30,6 +30,50 @@
 																											<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
 																												<TBODY>
 																													<TR>
+																														<TD class="formTitleBlue" colspan="2" height="20">	Release of caMOD 2.1 - May 30th, 2006
+																														</TD>
+																													</TR>
+																													<TR>
+																													<TR>
+																														<TD style="BORDER-LEFT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 1em; FONT-SIZE: 0.7em; FONT-FAMILY: verdana, arial, helvetica, sans-serif; BACKGROUND-COLOR: #cccccc" width="20%">	Added 
+	                                Features
+																														</TD>
+																														<TD style="BORDER-LEFT: #5c5c5c 1px solid; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 1em; FONT-SIZE: 0.7em; FONT-FAMILY: verdana, arial, helvetica, sans-serif; BACKGROUND-COLOR: #cccccc" width="80%">	How to use 
+	                                the new feature?
+																														</TD>
+																													</TR>
+																													<TR>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">Keyword search hilighting
+																														</TD>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="80%">	When using the keyword search, the keyword is hi-lighted in yellow in the search results pages
+																														</TD>
+																													</TR>
+																													<TR>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">Configurable search results
+																														</TD>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="80%">	A logged in user can customize their search results.  They can configure which columns to display and how results are displayed on each screen.
+																														</TD>
+																													</TR>
+																													<TR>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">Saving search queries for reuse
+																														</TD>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="80%">	A logged in user gets a listing of their previously run search queries as well as the ability to save particularly interesting queries for later reuse.
+																														</TD>
+																													</TR>
+																													<TR>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">Auto completion of search fields
+																														</TD>
+																														<TD style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="80%">	During searching, a user can type in text in the model characteristics, organ, diagnosis and NSC number fields and the application will prompt the user with appropriate entries.
+																														</TD>
+																													</TR>
+	
+
+
+																												</TBODY>
+																											</TABLE><BR/>
+																											<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
+																												<TBODY>
+																													<TR>
 																														<TD class="formTitleBlue" colspan="2" height="20">	Release of caMOD 2.0 - December 21, 2005
 																														</TD>
 																													</TR>
