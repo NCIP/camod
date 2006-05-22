@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.29 2006-05-22 18:14:36 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.30 2006-05-22 18:19:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/05/22 18:14:36  pandyas
+ * Fixed otherAdminSite so text is not saved in correct column
+ *
  * Revision 1.28  2006/05/22 15:02:27  pandyas
  * Fixed Xenograft so organ is reused/created each time
  *
@@ -160,13 +163,16 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         {
             // Do not save other in the DB
             inXenograft.setAdminSiteUnctrlVocab(inXenograftData.getOtherAdministrativeSite());
-
+           
             // Send e-mail for other administrativeSite
             sendEmail(inAnimalModel, inXenograftData.getOtherAdministrativeSite(), "AdministrativeSite");
         }
         else
         {
             inXenograft.setAdministrativeSite(inXenograftData.getAdministrativeSite());
+            
+            // Null out during editing from 'other' to selected
+            inXenograft.setAdminSiteUnctrlVocab(null);
         }
         inXenograft.setGeneticManipulation(inXenograftData.getGeneticManipulation());
         inXenograft.setModificationDescription(inXenograftData.getModificationDescription());
