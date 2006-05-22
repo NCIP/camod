@@ -112,10 +112,6 @@
 			<td class="WhiteBox"><b>Growth Period<b></td>
 			<td class="WhiteBoxRightEnd"><c:out value="${xt.growthPeriod}"/>&nbsp;</td>
 		</tr>			
-		<tr>		
-			<td class="GreyBox"><b>Site of Administration:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.administrativeSite}"/>&nbsp;</td>
-		</tr>
 		<tr>
 			<td class="GreyBox"><b>Site of Administration:</b></td>
 			<td class="GreyBoxRightEnd">
