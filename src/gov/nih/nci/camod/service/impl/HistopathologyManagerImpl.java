@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.11 2006-04-21 13:40:03 georgeda Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.12 2006-05-22 15:01:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/04/21 13:40:03  georgeda
+ * Cleanup
+ *
  * Revision 1.10  2006/04/20 19:18:53  pandyas
  * Moved save Assoc Met from AnimalModel to the Histopathology
  *
@@ -128,7 +131,7 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
 
         log.info("inHistopathology.getOrgan()" + inHistopathology.getOrgan());
         log.info("inHistopathologyData.getOrganTissueCode():" + inHistopathologyData.getOrganTissueCode());
-        
+
         // every submission - lookup organ or create one new
         Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(inHistopathologyData.getOrganTissueCode(),
                                                                          inHistopathologyData.getOrganTissueName());
@@ -225,7 +228,6 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
 
         // Populate w/ the new values and save
         populateHistopathology(inAssociatedMetastasisData, inAssociatedMetastasis);
-        //populateAssociatedMetastasis(inAssociatedMetastasisData, theAssociatedMetastasis);         
         save(inAssociatedMetastasis);
 
         log.info("Exiting HistopathologyManagerImpl.updateAssociatedMetastasis");
