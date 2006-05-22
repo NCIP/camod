@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.19 2006-04-21 18:28:02 georgeda Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.20 2006-05-22 16:52:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/04/21 18:28:02  georgeda
+ * Fixed issue w/ engineered genes displaying
+ *
  * Revision 1.18  2006/04/20 18:11:16  pandyas
  * Cleaned up Species or Strain save of Other in DB
  *
@@ -49,16 +52,14 @@ public class EngineeredTransgenePopulateAction extends BaseAction
         }
         else
         {
-            if (theEngineeredTransgene.getIsRandom().booleanValue())
-            {
+            // populate isRandom
+            if (theEngineeredTransgene.getIsRandom() == true) {
                 theEngineeredTransgeneForm.setIsRandom("yes");
-                theEngineeredTransgeneForm.setLocationOfIntegration(theEngineeredTransgene.getLocationOfIntegration());
-            }
-            else
-            {
+            } else {
                 theEngineeredTransgeneForm.setIsRandom("no");
+                theEngineeredTransgeneForm.setLocationOfIntegration(theEngineeredTransgene.getLocationOfIntegration());                
             }
-
+            // populate Name
             theEngineeredTransgeneForm.setName(theEngineeredTransgene.getName());
 
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, "");

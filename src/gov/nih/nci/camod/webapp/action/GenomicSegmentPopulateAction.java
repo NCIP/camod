@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentPopulateAction.java,v 1.13 2006-04-20 15:00:11 georgeda Exp $
+ * $Id: GenomicSegmentPopulateAction.java,v 1.14 2006-05-22 16:52:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/20 15:00:11  georgeda
+ * Fixed targeted/random
+ *
  * Revision 1.12  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -47,13 +50,13 @@ public class GenomicSegmentPopulateAction extends BaseAction {
         } else {
             genomicSegmentForm.setSegmentId(aGenomicSegmentID);
 
+            // populate isRandom
             if (theGenomicSegment.getIsRandom() == true) {
                 genomicSegmentForm.setIsRandom("yes");
             } else {
                 genomicSegmentForm.setIsRandom("no");
                 genomicSegmentForm.setLocationOfIntegration(theGenomicSegment.getLocationOfIntegration());                
-            }            
-            
+            }
 
             SegmentType inSegmentType = (SegmentType) theGenomicSegment.getSegmentType();
             genomicSegmentForm.setSegmentName(inSegmentType.getName());
