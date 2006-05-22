@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.28 2006-05-22 15:02:27 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.29 2006-05-22 18:14:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2006/05/22 15:02:27  pandyas
+ * Fixed Xenograft so organ is reused/created each time
+ *
  * Revision 1.27  2006/05/19 18:50:37  pandyas
  * defect #225 - Add clearOrgan functionality to Xenograft screen
  *
@@ -155,7 +158,8 @@ public class XenograftManagerImpl extends BaseManager implements XenograftManage
         // save directly in administrativeSite column of table
         if (inXenograftData.getAdministrativeSite().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            inXenograft.setAdministrativeSite(inXenograftData.getOtherAdministrativeSite());
+            // Do not save other in the DB
+            inXenograft.setAdminSiteUnctrlVocab(inXenograftData.getOtherAdministrativeSite());
 
             // Send e-mail for other administrativeSite
             sendEmail(inAnimalModel, inXenograftData.getOtherAdministrativeSite(), "AdministrativeSite");
