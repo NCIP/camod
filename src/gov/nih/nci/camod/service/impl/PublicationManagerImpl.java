@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.12 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: PublicationManagerImpl.java,v 1.13 2006-05-22 17:08:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.11  2005/11/29 22:12:29  georgeda
  * Defect #163, either PMID or Title must be entered
  *
@@ -130,6 +133,10 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
         else
         {
             inPublication.setYear(null);
+        }
+        
+        if(inPublicationData.getJaxJNumber() != null) {
+            inPublication.setJaxJNumber(inPublicationData.getJaxJNumber());
         }
 
         if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes"))
