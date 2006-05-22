@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.53 2006-05-19 17:11:31 guptaa Exp $
+ * $Id: QueryManagerImpl.java,v 1.54 2006-05-22 19:39:39 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2006/05/19 17:11:31  guptaa
+ * added advance autocomplete search
+ *
  * Revision 1.52  2006/05/19 15:01:00  guptaa
  * Fixed broken searching
  *
@@ -1269,16 +1272,17 @@ public class QueryManagerImpl extends BaseManager
 			+ "AND hist.histopathology_id IN (SELECT h.histopathology_id "
 			+ "     FROM histopathology h, organ o "
 			+ "     WHERE h.organ_id = o.organ_id ";
-		
-		StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
-
-		if (inOrganTissueName.length() > 0 && inConceptCodes.length() <= 0) {
+			
+		if (inOrganTissueName != null && inOrganTissueName.length() > 0 && inConceptCodes == null || inConceptCodes.trim().length() == 0) {
 
 			theParams = new Object[1];
 	        theParams[0] = "%"+inOrganTissueName.toUpperCase()+ "%";
 	        theSQLString += " AND upper(o.name) like ? )";
 
-		} else if (inConceptCodes.length() > 0) {
+		} else if (inConceptCodes.trim().length() > 0) {
+            
+            StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
+
 			theParams = new Object[0];
 			while (theTokenizer.hasMoreElements()) {
 				theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
@@ -1289,11 +1293,9 @@ public class QueryManagerImpl extends BaseManager
 				}
 			}
 	        theSQLString += " AND o.concept_code IN (" + theConceptCodeList + "))";
-			
 		}
 
 		return getIds(theSQLString, theParams);
-
 	}
 
 
@@ -1469,23 +1471,17 @@ public class QueryManagerImpl extends BaseManager
 			+ "AND hist.histopathology_id IN (SELECT h.histopathology_id " 
 			+ "     FROM histopathology h, disease d " 
 			+ "     WHERE h.disease_id = d.disease_id ";
-		
-		StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
 
-		if (inDiseaseName.length() > 0 && inConceptCodes.length() <= 0) {
-		
+		if (inDiseaseName != null && inDiseaseName.trim().length() > 0 && inConceptCodes == null || inConceptCodes.trim().length() == 0 || inConceptCodes.equalsIgnoreCase("000000") && inConceptCodes.trim().length() > 0) 
+        {		
 			theParams = new Object[1];
 	        theParams[0] = "%"+inDiseaseName.toUpperCase()+ "%";
 	        theSQLString += " AND upper(d.name) like ? )";
-
-		} else if (inConceptCodes.equalsIgnoreCase("000000")&& inConceptCodes.length() > 0) {
-		
-			theParams = new Object[1];
-	        theParams[0] = "%"+inDiseaseName.toUpperCase()+ "%";
-	        theSQLString += " AND upper(d.name) like ? )";
-			
-		} else if (inConceptCodes.length() > 0) {
-		
+		} 
+        else if (inConceptCodes.trim().length() > 0) 
+        {		
+            StringTokenizer theTokenizer = new StringTokenizer(inConceptCodes, ",");
+            
 			theParams = new Object[0];
 			while (theTokenizer.hasMoreElements()) {
 				theConceptCodeList += "'" + theTokenizer.nextToken() + "'";
@@ -1495,15 +1491,11 @@ public class QueryManagerImpl extends BaseManager
 					theConceptCodeList += ",";
 				}
 			}
-	        theSQLString += " AND d.concept_code IN (" + theConceptCodeList + "))";
-			
+	        theSQLString += " AND d.concept_code IN (" + theConceptCodeList + "))";			
 		}  
-
+        
 		return getIds(theSQLString, theParams);
-
 	}
-
-   
 
     /**
      * Get the models with the associated engineered gene

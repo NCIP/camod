@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.2 2006-05-10 16:38:33 schroedn Exp $
+ * $Id: CriteriaTableUtil.java,v 1.3 2006-05-22 19:39:25 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/10 16:38:33  schroedn
+ * Added save for Transient Instance
+ *
  * Revision 1.1  2006/05/10 14:15:06  schroedn
  * New Features - Changes from code review
  *
@@ -17,6 +20,7 @@ package gov.nih.nci.camod.util;
 
 import java.util.ResourceBundle;
 
+import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.webapp.form.SearchData;
 
 /**
@@ -69,24 +73,44 @@ public class CriteriaTableUtil
         }
 
         // Search for organ
-        if (sData.getOrganTissueCode() != null)
+        if (sData.getOrganTissueName() != null)
         {
-            if (sData.getOrganTissueCode().length() > 0)
+            if (sData.getOrganTissueName().length() > 0)
             {
                 theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.OrganTissueName") + "</td><td class=\"formFieldNone\"><camod:shorten>" + sData.getOrganTissueName() + "</camod:shorten></td></tr>";
 
             }
         }
 
-        // Search for disease
-        if (sData.getDiagnosisCode() != null)
+        // Search for organ
+        if (sData.getOrgan() != null)
         {
-            if (sData.getDiagnosisCode().trim().length() > 0)
+            if (sData.getOrgan().length() > 0)
+            {
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Organ") + "</td><td class=\"formFieldNone\"><camod:shorten>" + sData.getOrgan() + "</camod:shorten></td></tr>";
+
+            }
+        }
+        
+        // Search for disease
+        if (sData.getDiagnosisName() != null)
+        {
+            if (sData.getDiagnosisName().trim().length() > 0)
             {
                 theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.DiagnosisName") + "</td><td class=\"formFieldNone\"><camod:shorten>" + sData.getDiagnosisName() + "</camod:shorten></td></tr>";
             }
         }
 
+        // Search for disease
+        if (sData.getTumorClassification() != null)
+        {
+            if (sData.getTumorClassification().length() > 0)
+            {
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.TumorClassification") + "</td><td class=\"formFieldNone\"><camod:shorten>" + sData.getTumorClassification() + "</camod:shorten></td></tr>";
+
+            }
+        }
+        
         // ///////////////////////////////////////
         // Carcinogenic interventions
         // ///////////////////////////////////////
