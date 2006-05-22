@@ -1980,8 +1980,14 @@
 			<field property="cellAmount" depends="integer">
 				<arg0 key="XenograftForm.cellAmount" />
 			</field>
-			<field property="growthPeriod" depends="integer">
+			<field property="growthPeriod" depends="maxlength">
 				<arg0 key="XenograftForm.growthPeriod" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
 			</field>
 			<field property="modificationDescription"
 				depends="maxlength">
