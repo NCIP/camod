@@ -63,8 +63,8 @@
 		</tr>
 	
 		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp</td>
-			<td class="formLabel"><label for="field2">Username</label></td>
+			<td class="formRequiredNotice" width="5">*</td>
+			<td class="formRequiredLabel"><label for="field2">Username</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="username" size="30"/>
 			</td>

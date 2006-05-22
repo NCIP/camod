@@ -1732,7 +1732,7 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="username" depends="maxlength">
+			<field property="username" depends="required, maxlength">
 				<arg0 key="EditUserForm.username" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
