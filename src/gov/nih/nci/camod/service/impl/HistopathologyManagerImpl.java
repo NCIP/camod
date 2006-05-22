@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.12 2006-05-22 15:01:47 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.13 2006-05-22 20:11:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/05/22 15:01:47  pandyas
+ * Removed commented out line of code
+ *
  * Revision 1.11  2006/04/21 13:40:03  georgeda
  * Cleanup
  *
@@ -128,9 +131,6 @@ public class HistopathologyManagerImpl extends BaseManager implements Histopatho
                                         Histopathology inHistopathology) throws Exception
     {
         log.info("<HistopathologyManagerImpl> Entering populateHistopathology");
-
-        log.info("inHistopathology.getOrgan()" + inHistopathology.getOrgan());
-        log.info("inHistopathologyData.getOrganTissueCode():" + inHistopathologyData.getOrganTissueCode());
 
         // every submission - lookup organ or create one new
         Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(inHistopathologyData.getOrganTissueCode(),
