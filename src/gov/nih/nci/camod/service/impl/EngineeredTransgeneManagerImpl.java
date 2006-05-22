@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.28 2006-05-22 17:21:02 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.29 2006-05-22 17:27:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2006/05/22 17:21:02  pandyas
+ * Must set locationOfIntegration to null during editing from targeted back to random
+ *
  * Revision 1.27  2006/05/22 16:52:47  pandyas
  * modified/fixed isRandom to make consistent between transgene and genomic segment
  *
@@ -154,7 +157,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
         ExpressionFeature theExpFeature = new ExpressionFeature();
 
         Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inAssociatedExpressionData.getOrganTissueCode(),
-                                                                      inAssociatedExpressionData.getOrganTissueCode());
+                                                                      inAssociatedExpressionData.getOrganTissueName());
         theExpFeature.setOrgan(theOrgan);
 
         ExpressionLevelDesc theExpLevelDesc = ExpressionLevelDescManagerSingleton.instance().getByName(
