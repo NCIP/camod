@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.42 2006-05-23 18:17:09 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.43 2006-05-23 19:42:42 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2006/05/23 18:17:09  georgeda
+ * Cleaned up
+ *
  * Revision 1.41  2006/04/27 15:09:01  pandyas
  * Modified while testing caMod 2.1
  *
@@ -325,13 +328,12 @@
 			<tr>
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 				<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.image.description}"/>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.constructSequence}"/>&nbsp;</td>
 			</tr>		
 		</c:if>
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.constructSequence}"/>&nbsp;</td>
-		</tr>
-
 		<tr>
 			<td class="GreyBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
@@ -495,11 +497,11 @@
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 				<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.image.description}"/>&nbsp;</td>
 			</tr>		
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.constructSequence}"/>&nbsp;</td>
+			</tr>
 		</c:if>
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.constructSequence}"/>&nbsp;</td>
-		</tr>
         <tr>
 			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
@@ -624,8 +626,8 @@
 
 		<c:if test="${not empty tm.image.id}">
 			<tr>
-				<td class="WhiteBox" width="35%"><b>Construct Map ( Image )</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">
+				<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
+				<td class="GreyBoxRightEnd" width="65%">
 				<a href='<c:out value="${tm.image.imageUrl}"/>'>
 				<img src="<c:out value="${tm.image.thumbUrl}"/>" 
 					height="40" width="40" border=0
@@ -638,17 +640,17 @@
 				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
 			</tr>
 			<tr>
-				<td class="WhiteBox" width="35%"><b>Description of the Construct</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
+				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
+				<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
 			</tr>
-		</c:if>
-		<tr>
-			<td class="GreyBox" width="35%"><b>Construct Sequence</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.constructSequence}"/>&nbsp;</td>
-		</tr>		
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
+				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.constructSequence}"/>&nbsp;</td>
+			</tr>	
+		</c:if>	
         <tr>
-			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
+			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
 				<c:if test="${not empty tm.mutationIdentifier.mgiNumber}">
 					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tm.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
 					    <c:out value="${tm.mutationIdentifier.mgiNumber}"/>
@@ -657,8 +659,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="GreyBox" width="35%"><b>Comments</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
+			<td class="WhiteBox" width="35%"><b>Comments</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
 		</tr>
 
 		<c:set var="tmId" value="${tm.id}"/>
