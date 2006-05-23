@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.41 2006-04-27 15:09:01 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.42 2006-05-23 18:17:09 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2006/04/27 15:09:01  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.40  2006/04/19 18:48:03  georgeda
  * Species no longer a collection.
  *
@@ -212,7 +215,17 @@
 		</tr>
 
 		<c:choose>
-			<c:when test="${tg.isRandom != 'yes'}">
+			<c:when test="${tg.isRandom == 'true'}">
+				<tr>
+					<td class="WhiteBox" width="35%">
+					<b>Transgene Integration</b></td>
+					<td class="WhiteBoxRightEnd" width="65%">
+					Random
+					</td>
+				</tr>
+
+			</c:when>
+			<c:otherwise>
 				<tr>
 					<td class="GreyBox" width="35%">
 					<b>Transgene Integration</b></td>
@@ -224,15 +237,6 @@
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 					<td class="WhiteBoxRightEnd" width="65%">
 					<c:out value="${tg.locationOfIntegration}"/>&nbsp;
-					</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<td class="GreyBox" width="35%">
-					<b>Transgene Integration</b></td>
-					<td class="GreyBoxRightEnd" width="65%">
-					Random
 					</td>
 				</tr>
 			</c:otherwise>
@@ -247,7 +251,7 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			<c:out value="${tg.species.scientificName}"/>&nbsp;
+			<c:out value="${tg.species.displayName}"/>&nbsp;
 			</td>
 		</tr>
 
@@ -265,14 +269,7 @@
 					<tr>
 						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
 						<td class="WhiteBoxRightEnd" width="65%">
-							<c:choose>
-								<c:when test="${not empty rem.species.scientificName}">
-									<c:out value="${rem.species.scientificName}"/>&nbsp;
-								</c:when>
-								<c:otherwise>
-						            <c:out value="${rem.species.commonName}"/>&nbsp;
-								</c:otherwise>
-							</c:choose>
+						    <c:out value="${rem.species.displayName}"/>&nbsp;
 						</td>
 					</tr>
 				</c:forEach>
@@ -309,26 +306,26 @@
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.conditionality.description}"/>&nbsp;</td>
 		</tr>
 
-		<c:if test="${not empty tg.image.id}">
-		<tr>
-			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
-			<a href='<c:out value="${tg.image.imageUrl}"/>'>
-			<img src="<c:out value="${tg.image.thumbUrl}"/>" 
-				height="40" width="40" border=0
-				alt="Click on the image to open in a new Browser window"></a>
-			<br/>( Click to View )
-			</td>
-		</tr>
-
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.image.title}"/>&nbsp;</td>
-		</tr>
-		<tr>
-			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.image.description}"/>&nbsp;</td>
-		</tr>		
+		<c:if test="${not empty tg.image}">
+			<tr>
+				<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
+				<td class="GreyBoxRightEnd" width="65%">
+				<a href='<c:out value="${tg.image.imageUrl}"/>'>
+				<img src="<c:out value="${tg.image.thumbUrl}"/>" 
+					height="40" width="40" border=0
+					alt="Click on the image to open in a new Browser window"></a>
+				<br/>( Click to View )
+				</td>
+			</tr>
+	
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
+				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.image.title}"/>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
+				<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.image.description}"/>&nbsp;</td>
+			</tr>		
 		</c:if>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
@@ -336,8 +333,8 @@
 		</tr>
 
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
+			<td class="GreyBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
 				<c:if test="${not empty tg.expressionFeatureCollection}">
 					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
@@ -360,8 +357,8 @@
 		</tr>	
 		
         <tr>
-			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 			<c:if test="${not empty tg.mutationIdentifier.mgiNumber}">
 				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tg.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
 				    <c:out value="${tg.mutationIdentifier.mgiNumber}"/>
@@ -370,8 +367,8 @@
 			</td>			
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Comment</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.comments}"/>&nbsp;</td>
+			<td class="GreyBox" width="35%"><b>Comment</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
 	
@@ -417,9 +414,9 @@
 			</c:when>
 			<c:otherwise>
 				<tr>
-					<td class="GreyBox" width="35%">
+					<td class="WhiteBox" width="35%">
 					<b>Transgene Integration</b></td>
-					<td class="GreyBoxRightEnd" width="65%">
+					<td class="WhiteBoxRightEnd" width="65%">
 					Random&nbsp;
 					</td>
 				</tr>
@@ -478,34 +475,34 @@
 			</td>
 		</tr>
 	
-		<c:if test="${not empty gs.image.id}">
-		<tr>
-			<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
-			<a href='<c:out value="${gs.image.imageUrl}"/>'>&nbsp;
-			<img src="<c:out value="${gs.image.thumbUrl}"/>" 
-				height="40" width="40" border=0
-				alt="Click on the image to open in a new Browser window"></a>
-			<br/>( Click to View )
-			</td>
-		</tr>
-
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.image.title}"/>&nbsp;</td>
-		</tr>
-		<tr>
-			<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.image.description}"/>&nbsp;</td>
-		</tr>		
+		<c:if test="${not empty gs.image}">
+			<tr>
+				<td class="GreyBox" width="35%"><b>Construct Map ( Image )</b></td>
+				<td class="GreyBoxRightEnd" width="65%">
+				<a href='<c:out value="${gs.image.imageUrl}"/>'>&nbsp;
+				<img src="<c:out value="${gs.image.thumbUrl}"/>" 
+					height="40" width="40" border=0
+					alt="Click on the image to open in a new Browser window"></a>
+				<br/>( Click to View )
+				</td>
+			</tr>
+	
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
+				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.image.title}"/>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
+				<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.image.description}"/>&nbsp;</td>
+			</tr>		
 		</c:if>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
 			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.constructSequence}"/>&nbsp;</td>
 		</tr>
         <tr>
-			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
+			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
+			<td class="GreyBoxRightEnd" width="65%">
 			    <c:if test="${not empty gs.mutationIdentifier.mgiNumber}">
 					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${gs.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
 					    <c:out value="${gs.mutationIdentifier.mgiNumber}"/>
@@ -513,10 +510,9 @@
 			    </c:if>&nbsp;
 			</td>
 		</tr>
-
 		<tr>
-			<td class="GreyBox" width="35%"><b>Comments</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.comments}"/>&nbsp;</td>
+			<td class="WhiteBox" width="35%"><b>Comments</b></td>
+			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
 </td></tr>
@@ -603,17 +599,6 @@
 		</tr>
 
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Function(s) of Targeted Gene</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
-			<ul>
-			<c:forEach var="gf" items="${tm.geneFunctionCollection}">
-				<li><c:out value="${gf.function}"/></li>&nbsp;
-			</c:forEach>
-			</ul>&nbsp;
-			</td>
-		</tr>
-
-		<tr>
 			<td class="WhiteBox" width="35%"><b>Organ / Tissue Gene is Expressed in and Expression Level</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty tm.expressionFeatureCollection}">
@@ -638,32 +623,32 @@
 		</tr>
 
 		<c:if test="${not empty tm.image.id}">
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Construct Map ( Image )</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
-			<a href='<c:out value="${tm.image.imageUrl}"/>'>
-			<img src="<c:out value="${tm.image.thumbUrl}"/>" 
-				height="40" width="40" border=0
-				alt="Click on the image to open in a new Browser window"></a>
-			<br/>( Click to View )
-			</td>
-		</tr>
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
-		</tr>
-		<tr>
-			<td class="WhiteBox" width="35%"><b>Description of the Construct</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
-		</tr>
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Construct Map ( Image )</b></td>
+				<td class="WhiteBoxRightEnd" width="65%">
+				<a href='<c:out value="${tm.image.imageUrl}"/>'>
+				<img src="<c:out value="${tm.image.thumbUrl}"/>" 
+					height="40" width="40" border=0
+					alt="Click on the image to open in a new Browser window"></a>
+				<br/>( Click to View )
+				</td>
+			</tr>
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
+				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="WhiteBox" width="35%"><b>Description of the Construct</b></td>
+				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
+			</tr>
 		</c:if>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.constructSequence}"/>&nbsp;</td>
+			<td class="GreyBox" width="35%"><b>Construct Sequence</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.constructSequence}"/>&nbsp;</td>
 		</tr>		
         <tr>
-			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty tm.mutationIdentifier.mgiNumber}">
 					<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tm.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
 					    <c:out value="${tm.mutationIdentifier.mgiNumber}"/>
@@ -672,16 +657,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Comments</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
+			<td class="GreyBox" width="35%"><b>Comments</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
 		</tr>
 
 		<c:set var="tmId" value="${tm.id}"/>
 		<c:set var="gene" value="${targetedModGeneMap[tmId]}"/>
 		<c:if test="${not empty gene}">
 	        <tr>
-	            <td class="GreyBox" width="35%"><b>Gene Info</b></td>
-	            <td class="GreyBoxRightEnd" width="65%">
+	            <td class="WhiteBox" width="35%"><b>Gene Info</b></td>
+	            <td class="WhiteBoxRightEnd" width="65%">
 	            <c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
 	            <c:out value="${gene.symbol}"/>.&nbsp; 
 	            <c:out value="${gene.fullName}"/>&nbsp;
@@ -694,16 +679,16 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td class="GreyBox" width="35%"><b>Database Links</b></td>
-	            <td class="GreyBoxRightEnd" width="65%">&nbsp;
+	            <td class="WhiteBox" width="35%"><b>Database Links</b></td>
+	            <td class="WhiteBoxRightEnd" width="65%">&nbsp;
 					<A target="_blank" href="http://www.ncbi.nlm.nih.gov/UniGene/clust.cgi?ORG=<c:out value="${gene.taxon.abbreviation}"/>&amp;CID=<c:out value="${gene.clusterId}"/>">UniGene</A>
 						&nbsp;|&nbsp;
 			        <A target="_blank" href="http://cgap.nci.nih.gov/Genes/GeneInfo?ORG=Mm&CID=<c:out value="${gene.clusterId}"/>">CGAP</A>
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="WhiteBox" width="35%"><b>Gene Ontology</b></td>
-	            <td valign="top" class="WhiteBoxRightEnd" width="65%"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
+	            <td valign="top" class="GreyBox" width="35%"><b>Gene Ontology</b></td>
+	            <td valign="top" class="GreyBoxRightEnd" width="65%"><font size="-2" color="#666699">Gene classification by the European Bioinformatics Institute, as recorded in GOA (GO Annotation@EBI)</font>
 					<ul>
 						<c:forEach var="ont" items="${gene.geneOntologyCollection}">
 							<li>
@@ -717,8 +702,8 @@
 	           	</td>
 	        </tr>
 	        <tr>
-	            <td valign="top" class="GreyBox" width="35%"><b>BioCarta Pathways</b></td>
-	            <td valign="top" class="GreyBoxRightEnd" width="65%">
+	            <td valign="top" class="WhiteBox" width="35%"><b>BioCarta Pathways</b></td>
+	            <td valign="top" class="WhiteBoxRightEnd" width="65%">
 		        <font size="-2" color="#666699">Pathway information courtesy of <A target="_blank" href="http://www.biocarta.com">BioCarta</a></font>
 		        <br>
 					<ul>
@@ -817,18 +802,16 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-				<c:if test="${not empty im.geneticAlterationCollection}">
+				<c:if test="${not empty im.geneticAlteration}">
 					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
 							<td class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></td>
 							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
 						</tr>
-						<c:forEach var="gene" items="${im.geneticAlterationCollection}">
-							<tr>
-					            <td class="WhiteBox"><c:out value="${gene.observation}"/>&nbsp;</td>
-					            <td class="WhiteBoxRightEnd"><c:out value="${gene.methodOfObservation}"/>&nbsp;</td>
-							</tr>
-						</c:forEach>
+						<tr>
+				            <td class="WhiteBox"><c:out value="${im.geneticAlteration.observation}"/>&nbsp;</td>
+				            <td class="WhiteBoxRightEnd"><c:out value="${im.geneticAlteration.methodOfObservation}"/>&nbsp;</td>
+						</tr>
 					</table>
 				</c:if>&nbsp;
 			</td>
@@ -880,25 +863,36 @@
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-				<c:if test="${not empty sm.geneticAlterationCollection}">
+				<c:if test="${not empty sm.geneticAlteration}">
 					<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 						<tr>
 							<td class="formTitle" width="65%"><b>Mutated Locus/Gene (Observation)</b></td>
 							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
 						</tr>
-						<c:forEach var="gene" items="${sm.geneticAlterationCollection}">
-							<tr>
-					            <td class="WhiteBox"><c:out value="${gene.observation}"/>&nbsp;</td>
-					            <td class="WhiteBoxRightEnd"><c:out value="${gene.methodOfObservation}"/>&nbsp;</td>
-							</tr>
-						</c:forEach>
+						<tr>
+				            <td class="WhiteBox"><c:out value="${sm.geneticAlteration.observation}"/>&nbsp;</td>
+				            <td class="WhiteBoxRightEnd"><c:out value="${sm.geneticAlteration.methodOfObservation}"/>&nbsp;</td>
+						</tr>
 					</table>
 				</c:if>&nbsp;
 			</td>
 		</tr>
         <tr>
-			<td class="GreyBox" width="35%"><b>MGI Number</b></td>
-			<td class="GreyBoxRightEnd" width="65%">
+            <td class="GreyBox"><b>Gene ID</b></td>
+            <td class="GreyBoxRightEnd">
+            	<c:choose>
+					<c:when test="${empty sm.geneId}">
+						&nbsp;
+					</c:when>
+					<c:otherwise>
+			            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=gene&term=<c:out value="${sm.geneId}"/>" target="blank"><c:out value="${sm.geneId}"/></a>
+					</c:otherwise>
+				</c:choose>            	
+            </td>
+        </tr>
+        <tr>
+			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
+			<td class="WhiteBoxRightEnd" width="65%">
 				<c:if test="${not empty sm.mutationIdentifier.mgiNumber}">
 					<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${sm.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
 					    <c:out value="${sm.mutationIdentifier.mgiNumber}"/>
@@ -907,8 +901,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="WhiteBox" width="35%"><b>Comments</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${sm.comments}"/>&nbsp;</td>
+			<td class="GreyBox" width="35%"><b>Comments</b></td>
+			<td class="GreyBoxRightEnd" width="65%"><c:out value="${sm.comments}"/>&nbsp;</td>
 		</tr>
 	</TABLE>
 </td></tr>
