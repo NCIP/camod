@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.28 2006-05-22 15:57:36 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.29 2006-05-23 18:16:55 georgeda Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.28  2006/05/22 15:57:36  pandyas
+  *   Added code to display isToolMouse only when species is Mus musculus
+  *
   *   Revision 1.27  2006/05/03 20:07:14  pandyas
   *   Reversed diplay of isToolMouse - it was backwards
   *
@@ -108,7 +111,7 @@
 			<td class="WhiteBox" width="20%"><b>Species</b></td>
 			<td class="WhiteBoxRightEnd" width="80%">
 				<camod:highlight>
-					<c:out value="${mdl.strain.species.scientificName}"/>
+					<c:out value="${mdl.strain.species.displayName}"/>
 				</camod:highlight>					
 			</td>
 		</tr>
@@ -117,13 +120,7 @@
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
 			<td class="GreyBoxRightEnd" width="80%">
 				<camod:highlight>
-			    <c:if test="${not empty mdl.strain.name}">
-				    <c:out value="${mdl.strain.name}"/>
-				</c:if>
-				<c:if test="${not empty mdl.strain.nameUnctrlVocab}">
-				    <c:out value="${mdl.strain.nameUnctrlVocab}"/>
-				</c:if>
-				&nbsp;
+				    <c:out value="${mdl.strain.displayName}"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>
@@ -135,10 +132,10 @@
 					<td class="WhiteBoxRightEnd" width="80%">
 						<c:choose>						
 							<c:when test = "${mdl.isToolMouse == true}">
-								<c:out value="No"/>
+								<c:out value="Yes"/>
 							</c:when>
 							<c:otherwise>
-								<c:out value="Yes"/>
+								<c:out value="No"/>
 							</c:otherwise>
 						</c:choose>
 					</td>						
