@@ -54,12 +54,14 @@
         	cascade="all-delete-orphan"
         	class="GenotypeSummary"/>
         
-        <!-- image (many-to-one unidirectional) -->
+        <!-- image : this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
         <many-to-one
         	name="image"
         	column="image_id"
         	class="Image"
-        	cascade="all-delete-orphan"/> 
+        	cascade="all"
+        	unique="true"/> 
         	
         <!-- mutationIdentifier: this is really a one-to-one relationship with unique=true -->
         <!-- (one-to-one unidirectional) -->
