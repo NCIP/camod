@@ -1,8 +1,11 @@
 /**
  *
- * $Id: ChemicalDrugForm.java,v 1.6 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: ChemicalDrugForm.java,v 1.7 2006-05-23 16:58:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/10/20 20:32:12  pandyas
  * added javadocs
  *
@@ -38,12 +41,34 @@ public class ChemicalDrugForm extends BaseForm implements Serializable, Chemical
     protected String ageAtTreatmentUnit;    
     protected String type;
 
-    public String getAgeAtTreatmentUnit() {
+    
+    /**
+     * @return Returns the ageAtTreatment.
+     */
+    public String getAgeAtTreatment() {
         return ageAtTreatment;
     }
 
-    public void setAgeAtTreatmentUnit(String ageAtTreatment) {
+    /**
+     * @param ageAtTreatment
+     *            The ageAtTreatment to set.
+     */
+    public void setAgeAtTreatment(String ageAtTreatment) {
         this.ageAtTreatment = ageAtTreatment;
+    }    
+    /**
+     * @return Returns the ageAtTreatmentUnit.
+     */
+    public String getAgeAtTreatmentUnit() {
+        return ageAtTreatmentUnit;
+    }
+
+    /**
+     * @param ageAtTreatmentUnit
+     *            The ageAtTreatmentUnit to set.
+     */
+    public void setAgeAtTreatmentUnit(String ageAtTreatmentUnit) {
+        this.ageAtTreatmentUnit = ageAtTreatmentUnit;
     }
 
     public String getDosageUnit() {
@@ -172,21 +197,6 @@ public class ChemicalDrugForm extends BaseForm implements Serializable, Chemical
      */
     public void setRegimen(String regimen) {
         this.regimen = regimen;
-    }
-
-    /**
-     * @return Returns the ageAtTreatment.
-     */
-    public String getAgeAtTreatment() {
-        return ageAtTreatment;
-    }
-
-    /**
-     * @param ageAtTreatment
-     *            The ageAtTreatment to set.
-     */
-    public void setAgeAtTreatment(String ageAtTreatment) {
-        this.ageAtTreatment = ageAtTreatment;
     }
 
     /**

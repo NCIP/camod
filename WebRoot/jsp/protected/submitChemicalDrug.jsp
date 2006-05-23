@@ -15,7 +15,6 @@
     
 	//if aCarcinogenExposureID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
-	
 	String actionName = "ChemicalDrugAction.do?method=save";
 	
 	if ( aCarcinogenExposureID != null && aCarcinogenExposureID.length() > 0 && isDeleted == null) {
@@ -152,8 +151,6 @@
 			<html:select styleClass="formFieldUnSized" size="1" property="ageAtTreatmentUnit" >												
 				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
 			</html:select>
-		</td>
-		
 		</td>
 	</tr>
 
