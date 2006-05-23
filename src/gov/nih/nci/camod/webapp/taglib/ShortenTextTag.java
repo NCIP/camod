@@ -1,7 +1,10 @@
 /**
- * $Id: ShortenTextTag.java,v 1.5 2006-05-08 13:46:23 georgeda Exp $
+ * $Id: ShortenTextTag.java,v 1.6 2006-05-23 17:44:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/05/08 13:46:23  georgeda
+ * Reformat and clean up warnings
+ *
  * Revision 1.4  2005/12/29 19:42:45  georgeda
  * Defect #297, fixed therapeutic approaches shorten
  *
@@ -36,7 +39,7 @@ public class ShortenTextTag implements BodyTag, Serializable
     
     private BodyContent myBodyContent;
     private Tag myParent = null;
-    private int myLength = 28;
+    private int myLength = 26;
 
     private final int NOT_STARTED = 99999999;
 
