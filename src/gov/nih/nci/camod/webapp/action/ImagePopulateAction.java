@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.13 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.14 2006-05-23 18:33:38 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -32,30 +35,30 @@ public class ImagePopulateAction extends BaseAction {
 		String aImageID = request.getParameter("aImageID");
 
 		Image inImage = ImageManagerSingleton.instance().get(aImageID);
-        
-        
-
+       
 		// Handle back arrow
 		if (inImage == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			imageForm.setImageId(aImageID);
 
-			//System.out.println("FILESERVERLOCATION=" + inImage.getFileServerLocation());
-			// Image
-			// Image inImage = theImage.getImage();
 			if (inImage != null) {
 				imageForm.setTitle(inImage.getTitle());
 				imageForm.setFileServerLocation(inImage.getFileServerLocation());
-				imageForm.setDescriptionOfConstruct(inImage.getDescription());
-				
-				imageForm.setStainingMethod( inImage.getStainingMethod().getName() );
-				imageForm.setOtherStainingMethod( inImage.getStainingMethod().getNameUnctrlVocab() );
-				
+                
+                if( inImage.getDescription() != null )
+                {
+                    imageForm.setDescriptionOfConstruct(inImage.getDescription());
+                }
+                
+				if( inImage.getStainingMethod() != null )
+                {
+                        imageForm.setStainingMethod( inImage.getStainingMethod().getName() );				
+                        imageForm.setOtherStainingMethod( inImage.getStainingMethod().getNameUnctrlVocab() );
+                }
+                
                 imageForm.setThumbUrl(inImage.getThumbUrl());
                 imageForm.setImageUrl(inImage.getImageUrl());
-				// TODO: Display a message on the current image, uploading
-				// another image will replace current image
 			}
 		}
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, "");
