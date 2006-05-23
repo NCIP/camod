@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.70 2006-05-03 20:04:21 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.71 2006-05-23 17:00:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.70  2006/05/03 20:04:21  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * Revision 1.69  2006/04/27 15:03:54  pandyas
  * Removed unused import statement
  *
@@ -715,7 +718,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      * Add a chemical/drug therapy
      * 
      * @param inAnimalModel
-     *            the animal model that has the therapy
+     *            the animal model that has the addCarcinogenExposure
      * @param inChemicalDrugData
      *            the new chemical drug data
      * @throws Exception
@@ -724,11 +727,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       ChemicalDrugData inChemicalDrugData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addTherapy");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (chemical/drug)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inChemicalDrugData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addTherapy");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (chemical/drug)");
     }
 
     /**
@@ -744,16 +747,16 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       EnvironmentalFactorData inEnvironmentalFactorData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addTherapy");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (EF)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel,
                                                                                                         inEnvironmentalFactorData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addTherapy");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (EF)");
     }
 
     /**
-     * Add an environmental factor CarcinogenExposure
+     * Add an Radiation
      * 
      * @param inAnimalModel
      *            the animal model that has the CarcinogenExposure
@@ -765,15 +768,15 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       RadiationData inRadiationData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addTherapy");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (Radiation)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inRadiationData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (Radiation)");
     }
 
     /**
-     * Add an environmental factor CarcinogenExposure
+     * Add an ViralTreatment
      * 
      * @param inAnimalModel
      *            the animal model that has the CarcinogenExposure
@@ -785,11 +788,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       ViralTreatmentData inViralTreatmentData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addTherapy");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (ViralTreatment)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inViralTreatmentData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (ViralTreatment)");
     }
 
     /**
@@ -805,18 +808,18 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       GrowthFactorData inGrowthFactorData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addTherapy");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (growth factor)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inGrowthFactorData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (growth factor)");
     }
 
     /**
      * Add a hormone
      * 
      * @param inAnimalModel
-     *            the animal model that has the therapy
+     *            the animal model that has the addCarcinogenExposure
      * @param inHormoneData
      *            the new growth factor data
      * @throws Exception
@@ -825,11 +828,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       HormoneData inHormoneData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addTherapy");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (hormone)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inHormoneData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (hormone) ");
     }
 
     /**
@@ -845,12 +848,12 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       NutritionalFactorData inNutritionalFactorData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addTherapy");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (nutritional)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel,
                                                                                                         inNutritionalFactorData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (nutritional)");
     }
 
     /**
@@ -866,11 +869,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       SurgeryData inSurgeryData) throws Exception
     {
 
-        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure");
+        log.info("Entering AnimalModelManagerImpl.addCarcinogenExposure (surgery/other)");
         CarcinogenExposure theCarcinogenExposure = CarcinogenExposureManagerSingleton.instance().create(inAnimalModel, inSurgeryData);
         inAnimalModel.addCarcinogenExposure(theCarcinogenExposure);
         save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure");
+        log.info("Exiting AnimalModelManagerImpl.addCarcinogenExposure (surgery/other)");
     }
 
     /**
@@ -886,7 +889,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                             CellLineData inCellLineData) throws Exception
     {
 
-        log.debug("<AnimalModelManagerImpl> Entering saveCellLine");
+        log.debug("<AnimalModelManagerImpl> Entering addCellLine");
         CellLine theCellLine = CellLineManagerSingleton.instance().create(inCellLineData);
         inAnimalModel.addCellLine(theCellLine);
         save(inAnimalModel);
@@ -901,13 +904,13 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                       SpontaneousMutationData inSpontaneousMutationData) throws Exception
     {
 
-        log.info("Entering addGeneticDescription (spontaneousMutation)");
+        log.info("<AnimalModelManagerImpl> Entering addGeneticDescription (spontaneousMutation)");
         SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton.instance().create(inSpontaneousMutationData);
         // System.out.println(theSpontaneousMutation.getName());
         inAnimalModel.addSpontaneousMutation(theSpontaneousMutation);
         save(inAnimalModel);
 
-        log.info("Exiting addGeneticDescription (spontaneousMutation)");
+        log.info("<AnimalModelManagerImpl> Exiting addGeneticDescription (spontaneousMutation)");
     }
 
     /**
