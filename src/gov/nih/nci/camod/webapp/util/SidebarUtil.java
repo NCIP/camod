@@ -32,6 +32,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("viewCarcinogenicInterventions.jsp")  || 
 						jspName.equals("viewHistopathology.jsp")  || 
 						jspName.equals("viewTherapeuticApproaches.jsp") || 
+                        jspName.equals("viewTransientInterference.jsp") || 
 						jspName.equals("viewCellLines.jsp") || 
 						jspName.equals("viewImages.jsp") || 
 						jspName.equals("viewMicroarrays.jsp") ){
