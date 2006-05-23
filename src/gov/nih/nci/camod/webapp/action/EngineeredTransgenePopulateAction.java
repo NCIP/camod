@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.22 2006-05-23 14:15:35 schroedn Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.23 2006-05-23 16:01:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/05/23 14:15:35  schroedn
+ * Fixed bug that did not corretly repopulate gene functions
+ *
  * Revision 1.21  2006/05/22 18:39:02  pandyas
  * Added brackets to if statement - good java practice
  *
@@ -73,17 +76,18 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, "");
 
-            log.info("<populate method> Species is: " + theEngineeredTransgene.getSpecies());
-            if (theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab() != null && theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab().length() > 0)
+            if (theEngineeredTransgene.getSpecies() != null)
             {
-                theEngineeredTransgeneForm.setScientificName(Constants.Dropdowns.OTHER_OPTION);
-                theEngineeredTransgeneForm.setOtherScientificName(theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab());
+                if (theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab() != null && theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab().length() > 0)
+                {
+                    theEngineeredTransgeneForm.setScientificName(Constants.Dropdowns.OTHER_OPTION);
+                    theEngineeredTransgeneForm.setOtherScientificName(theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab());
+                }
+                else
+                {
+                    theEngineeredTransgeneForm.setScientificName(theEngineeredTransgene.getSpecies().getScientificName());
+                }
             }
-            else
-            {
-                theEngineeredTransgeneForm.setScientificName(theEngineeredTransgene.getSpecies().getScientificName());
-            }
-
             // Transcriptional (Promoter) 1
             Set<RegulatoryElement> theRegElementList = theEngineeredTransgene.getRegulatoryElementCollection();
 
@@ -190,15 +194,15 @@ public class EngineeredTransgenePopulateAction extends BaseAction
                 {
                     theEngineeredTransgeneForm.setMgiNumber(inMutationIdentifier.getMgiNumber());
                 }
-                
+
                 // Gene Function
                 Set<GeneFunction> theGeneFunctions = theEngineeredTransgene.getGeneFunctionCollection();
 
                 String theGeneFunctionString = "";
-               
+
                 for (GeneFunction theGeneFunction : theGeneFunctions)
                 {
-                    if( theGeneFunctionString.trim().length() > 0 )
+                    if (theGeneFunctionString.trim().length() > 0)
                     {
                         theGeneFunctionString += ", ";
                     }
