@@ -100,6 +100,7 @@
             <zipfileset dir="${webapp.dir}/config" prefix="config" />
             <zipfileset dir="${webapp.dir}/WebHelp" prefix="WebHelp" />
             <zipfileset dir="${webapp.dir}/jsp" prefix="jsp" />
+        	<zipfileset dir="${webapp.dir}/js" prefix="js" />
             <webinf dir="${webapp.dir}/WEB-INF"/>
             <classes dir="${build.classes.dir}" />
         </war>
