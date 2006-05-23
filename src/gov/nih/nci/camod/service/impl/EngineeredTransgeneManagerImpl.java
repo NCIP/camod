@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.31 2006-05-22 18:40:01 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.32 2006-05-23 15:54:18 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2006/05/22 18:40:01  pandyas
+ * Modifed mgiNumber due to change from number to varchar
+ *
  * Revision 1.30  2006/05/22 17:47:02  pandyas
  * Modified so we e-mail when otherScientificName is chosen - was reversed
  *
@@ -216,6 +219,11 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
                 inEngineeredTransgene.setSpecies(theSpecies);
             }
         }
+        else
+        {
+            // null out for editing from selected species to blank
+            inEngineeredTransgene.setSpecies(null);
+        }
 
         inEngineeredTransgene.getRegulatoryElementCollection().clear();
 
@@ -372,6 +380,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements Engin
             if ((theSpeciesName != null && theSpeciesName.length() > 0) || (theOtherSpeciesName != null && theOtherSpeciesName.length() > 0))
             {
                 Species theNewSpecies = SpeciesManagerSingleton.instance().getOrCreate(theSpeciesName, theOtherSpeciesName);
+
                 if (theOtherSpeciesName != null && theOtherSpeciesName.length() > 0)
                 {
                     //Object is returned with uncontrolled vocab set, do not save 'Other' in DB, e-mail
