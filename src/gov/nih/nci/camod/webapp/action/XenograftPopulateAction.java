@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.25 2006-05-19 16:40:44 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.26 2006-05-23 18:16:20 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/05/19 16:40:44  pandyas
+ * Defect #249 - add other to species on the Xenograft screen
+ *
  * Revision 1.24  2006/04/27 15:06:29  pandyas
  * cleaned up as a result of testing
  *
@@ -218,7 +221,7 @@ public class XenograftPopulateAction extends BaseAction
         log.info("<XenograftPopulateAction dropdown> Entering void dropdown()");
 
         // Set the Species drop drop for the Xenograft form
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_OPTION);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
 
         // theSpecies will be null the first time (submitXenograft screen) - default to full list of strains
         // but this is needed to populate the strain on the submitXenograft screen
