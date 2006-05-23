@@ -21,7 +21,7 @@ var cal1 = new CalendarPopup();
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkOtherStrain() {
-		chkOther(document.forms[0].ethinicityStrain, document.forms[0].otherEthinicityStrain);
+		chkOther(document.forms[0].ethinicityStrain, document.forms[0].otherEthnicityStrain);
 	}
 
 	function getOptions( control ) {
