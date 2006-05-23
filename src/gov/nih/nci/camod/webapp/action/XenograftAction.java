@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftAction.java,v 1.18 2006-05-19 18:48:26 pandyas Exp $
+ * $Id: XenograftAction.java,v 1.19 2006-05-23 20:43:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/05/19 18:48:26  pandyas
+ * Added printout values for fields not listed
+ *
  * Revision 1.17  2006/05/19 16:40:32  pandyas
  * Defect #249 - add other to species on the Xenograft screen, simply added new variable to list to print out
  *
@@ -36,222 +39,190 @@ import org.apache.struts.action.*;
 /**
  * XenograftAction Class
  */
-public final class XenograftAction extends BaseAction {
+public final class XenograftAction extends BaseAction
+{
 
-	/**
-	 * Edit
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward edit(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+    /**
+     * Edit
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward edit(ActionMapping mapping,
+                              ActionForm form,
+                              HttpServletRequest request,
+                              HttpServletResponse response) throws Exception
+    {
+        log.info("<XenograftAction> Entering edit");
 
-		log.info("<XenograftAction> Entering edit");
-		
-		// Create a form to edit
-		XenograftForm xenograftForm = (XenograftForm) form;		
-		
-		String theAction = (String) request
-		.getParameter(Constants.Parameters.ACTION);
+        // Create a form to edit
+        XenograftForm xenograftForm = (XenograftForm) form;
 
-		String theForward = "next";		
-		
+        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(
-				Constants.MODELID);
-		String aXenograftID = request.getParameter("aXenograftID");
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
+        String aXenograftID = request.getParameter("aXenograftID");
 
-		log.info("<XenograftAction edit> following Characteristics:"
-				+ "\n\t name: "
-				+ xenograftForm.getXenograftName()
-				+ "\n\t atccNumber: "
-				+ xenograftForm.getAtccNumber()
-				+ "\n\t ParentalCellLineName: "
-				+ xenograftForm.getParentalCellLineName()
-				+ "\n\t getCellAmount: "
-				+ xenograftForm.getCellAmount()
-                + "\n\t getGrowthPeriod: "
-                + xenograftForm.getGrowthPeriod()                
-				+ "\n\t getModificationDescription: "
-				+ xenograftForm.getModificationDescription()
-				+ "\n\t getGeneticManipulation: "
-				+ xenograftForm.getGeneticManipulation()
-				+ "\n\t getAdministrativeSite: "
-				+ xenograftForm.getAdministrativeSite()
-                + "\n\t getOtherAdministrativeSite: "
-                + xenograftForm.getOtherAdministrativeSite()                
-				+ "\n\t getGraftType: "
-				+ xenograftForm.getGraftType()
-				+ "\n\t getOtherGraftType: "
-				+ xenograftForm.getOtherGraftType()
-				+ "\n\t getDonorScientificName: "
-				+ xenograftForm.getDonorScientificName()
-                + "\n\t getOtherDonorScientificName: "
-                + xenograftForm.getOtherDonorScientificName()                  
-				+ "\n\t getDonorEthinicityStrain: "
-				+ xenograftForm.getDonorEthinicityStrain()              
-				+ "\n\t getOtherDonorEthinicityStrain: "
-				+ xenograftForm.getOtherDonorEthinicityStrain()
-				+ "\n\t getOrganTissueName(): "
-				+ xenograftForm.getOrganTissueName()
-                + "\n\t organTissueCode: "
-                + xenograftForm.getOrganTissueCode()
-                + "\n\t organ(): "
-                + xenograftForm.getOrgan()                
-				+ "\n\t user: "
-				+ (String) request.getSession().getAttribute(
-						"camod.loggedon.username"));
+        log.info("<XenograftAction edit> following Characteristics:"
+                    + "\n\t name: "
+                    + xenograftForm.getXenograftName()
+                    + "\n\t atccNumber: "
+                    + xenograftForm.getAtccNumber()
+                    + "\n\t ParentalCellLineName: "
+                    + xenograftForm.getParentalCellLineName()
+                    + "\n\t getCellAmount: "
+                    + xenograftForm.getCellAmount()
+                    + "\n\t getGrowthPeriod: "
+                    + xenograftForm.getGrowthPeriod()                
+                    + "\n\t getModificationDescription: "
+                    + xenograftForm.getModificationDescription()
+                    + "\n\t getGeneticManipulation: "
+                    + xenograftForm.getGeneticManipulation()
+                    + "\n\t getAdministrativeSite: "
+                    + xenograftForm.getAdministrativeSite()
+                    + "\n\t getOtherAdministrativeSite: "
+                    + xenograftForm.getOtherAdministrativeSite()                
+                    + "\n\t getGraftType: "
+                    + xenograftForm.getGraftType()
+                    + "\n\t getOtherGraftType: "
+                    + xenograftForm.getOtherGraftType()
+                    + "\n\t getDonorScientificName: "
+                    + xenograftForm.getDonorScientificName()
+                    + "\n\t getOtherDonorScientificName: "
+                    + xenograftForm.getOtherDonorScientificName()                  
+                    + "\n\t getDonorEthinicityStrain: "
+                    + xenograftForm.getDonorEthinicityStrain()              
+                    + "\n\t getOtherDonorEthinicityStrain: "
+                    + xenograftForm.getOtherDonorEthinicityStrain()
+                    + "\n\t getOrganTissueName(): "
+                    + xenograftForm.getOrganTissueName()
+                    + "\n\t organTissueCode: "
+                    + xenograftForm.getOrganTissueCode()
+                    + "\n\t organ(): "
+                    + xenograftForm.getOrgan()                
+                    + "\n\t user: "
+                    + (String) request.getSession().getAttribute(
+                            "camod.loggedon.username"));
+        
+        try
+        {
+            XenograftManager xenograftManager = (XenograftManager) getBean("xenograftManager");
 
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
+            if ("Delete".equals(theAction))
+            {
+                xenograftManager.remove(aXenograftID, theAnimalModel);
 
-			try {
-				XenograftManager xenograftManager = (XenograftManager) getBean("xenograftManager");
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.delete.successful"));
+                saveErrors(request, msg);
+            }
+            else
+            {
+                Xenograft theXenograft = xenograftManager.get(aXenograftID);
 
-				// retrieve model and update w/ new values
-				AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-				AnimalModel theAnimalModel = theAnimalModelManager
-						.get(theModelId);
+                xenograftManager.update(xenograftForm, theXenograft, theAnimalModel);
 
-				if ("Delete".equals(theAction)) {
-					xenograftManager.remove(aXenograftID, theAnimalModel);
+                // Add a message to be displayed in submitOverview.jsp
+                ActionMessages msg = new ActionMessages();
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.edit.successful"));
+                saveErrors(request, msg);
+            }
 
-					ActionMessages msg = new ActionMessages();
-					msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-							"xenograft.delete.successful"));
-					saveErrors(request, msg);
+        }
+        catch (Exception e)
+        {
+            log.error("Exception ocurred creating Xenograft", e);
 
-				} else {
+            // Encountered an error saving the xenograft.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-					Xenograft theXenograft = xenograftManager.get(aXenograftID);
+        log.debug("<XenograftAction> Exiting edit");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 
-					xenograftManager.update(xenograftForm, theXenograft,
-							theAnimalModel);
-					theForward = "AnimalModelTreePopulateAction";
+    /**
+     * Save
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward save(ActionMapping mapping,
+                              ActionForm form,
+                              HttpServletRequest request,
+                              HttpServletResponse response) throws Exception
+    {
+        log.trace("<XenograftAction> Entering save");
 
-					// Add a message to be displayed in submitOverview.jsp
-					// saying
-					// you've
-					// created a new model successfully
-					ActionMessages msg = new ActionMessages();
-					msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-							"xenograft.edit.successful"));
-					saveErrors(request, msg);
-				}
-				
-			} catch (Exception e) {
-				log.error("Exception ocurred creating Xenograft", e);
+        // Create a form to edit
+        XenograftForm xenograftForm = (XenograftForm) form;
 
-				// Encountered an error saving the model.
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-						"errors.admin.message"));
-				saveErrors(request, msg);
-			}
-		
-		log.debug("<XenograftAction> Exiting edit");
-		return mapping.findForward(theForward);
-	}
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-	/**
-	 * Save
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward save(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+        log.info("<XenograftAction save> following Characteristics:" + "\n\t name: " 
+                 + xenograftForm.getXenograftName() 
+                 + "\n\t atccNumber: " + xenograftForm.getAtccNumber() 
+                 + "\n\t ParentalCellLineName: " + xenograftForm.getParentalCellLineName() 
+                 + "\n\t getCellAmount: " + xenograftForm.getCellAmount() + "\n\t getGrowthPeriod: " + xenograftForm.getGrowthPeriod() 
+                 + "\n\t getModificationDescription: " + xenograftForm.getModificationDescription() 
+                 + "\n\t getGeneticManipulation: " + xenograftForm.getGeneticManipulation() 
+                 + "\n\t getAdministrativeSite: " + xenograftForm.getAdministrativeSite() 
+                 + "\n\t getOtherAdministrativeSite: " + xenograftForm.getOtherAdministrativeSite() 
+                 + "\n\t getGraftType: " + xenograftForm.getGraftType() 
+                 + "\n\t getOtherGraftType: " + xenograftForm.getOtherGraftType() 
+                 + "\n\t getDonorScientificName: " + xenograftForm.getDonorScientificName() 
+                 + "\n\t getOtherDonorScientificName: " + xenograftForm.getOtherDonorScientificName() 
+                 + "\n\t getDonorEthinicityStrain: " + xenograftForm.getDonorEthinicityStrain() 
+                 + "\n\t getOtherDonorEthinicityStrain: " + xenograftForm.getOtherDonorEthinicityStrain() + xenograftForm.getOtherDonorEthinicityStrain() 
+                 + "\n\t getOrganTissueName(): " + xenograftForm.getOrganTissueName() 
+                 + "\n\t organTissueCode: " + xenograftForm.getOrganTissueCode() 
+                 + "\n\t organ(): " + xenograftForm.getOrgan() 
+                 + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
+        
+        try
+        {
+            // retrieve model and update w/ new values
+            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
-		log.trace("<XenograftAction> Entering save");
+            theAnimalModelManager.addXenograft(theAnimalModel, xenograftForm);
 
-		// Create a form to edit
-		XenograftForm xenograftForm = (XenograftForm) form;
+            log.info("New Xenograft created");
 
-		// Grab the current modelID from the session
-		String theModelId = (String) request.getSession().getAttribute(
-				Constants.MODELID);
+            // Add a message to be displayed in submitOverview.jsp saying you've
+            // created a new model successfully
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("xenograft.creation.successful"));
+            saveErrors(request, msg);
 
-		log.info("<XenograftAction save> following Characteristics:"
-				+ "\n\t name: "
-				+ xenograftForm.getXenograftName()
-				+ "\n\t atccNumber: "
-				+ xenograftForm.getAtccNumber()
-				+ "\n\t ParentalCellLineName: "
-				+ xenograftForm.getParentalCellLineName()
-				+ "\n\t getCellAmount: "
-				+ xenograftForm.getCellAmount()
-                + "\n\t getGrowthPeriod: "
-                + xenograftForm.getGrowthPeriod()                 
-				+ "\n\t getModificationDescription: "
-				+ xenograftForm.getModificationDescription()
-				+ "\n\t getGeneticManipulation: "
-				+ xenograftForm.getGeneticManipulation()
-				+ "\n\t getAdministrativeSite: "
-				+ xenograftForm.getAdministrativeSite()
-                + "\n\t getOtherAdministrativeSite: "
-                + xenograftForm.getOtherAdministrativeSite()                 
-				+ "\n\t getGraftType: "
-				+ xenograftForm.getGraftType()
-				+ "\n\t getOtherGraftType: "
-				+ xenograftForm.getOtherGraftType()
-				+ "\n\t getDonorScientificName: "
-				+ xenograftForm.getDonorScientificName()
-                + "\n\t getOtherDonorScientificName: "
-                + xenograftForm.getOtherDonorScientificName()                
-				+ "\n\t getDonorEthinicityStrain: "
-				+ xenograftForm.getDonorEthinicityStrain()
-				+ "\n\t getOtherDonorEthinicityStrain: "
-				+ xenograftForm.getOtherDonorEthinicityStrain()
-                + xenograftForm.getOtherDonorEthinicityStrain()
-                + "\n\t getOrganTissueName(): "
-                + xenograftForm.getOrganTissueName()
-                + "\n\t organTissueCode: "
-                + xenograftForm.getOrganTissueCode()
-                + "\n\t organ(): "
-                + xenograftForm.getOrgan() 
-				+ "\n\t user: "
-				+ (String) request.getSession().getAttribute(
-						"camod.loggedon.username"));
+        }
+        catch (Exception e)
+        {
+            log.error("Exception ocurred creating Xenograft", e);
 
-		try {
-			// retrieve model and update w/ new values
-			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+            // Encountered an error saving the model.
+            ActionMessages msg = new ActionMessages();
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
+            saveErrors(request, msg);
+        }
 
-			theAnimalModelManager.addXenograft(theAnimalModel, xenograftForm);
-
-			log.info("New Xenograft created");
-
-			// Add a message to be displayed in submitOverview.jsp saying you've
-			// created a new model successfully
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-					"xenograft.creation.successful"));
-			saveErrors(request, msg);
-
-		} catch (Exception e) {
-			log.error("Exception ocurred creating Xenograft", e);
-
-			// Encountered an error saving the model.
-			ActionMessages msg = new ActionMessages();
-			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-					"errors.admin.message"));
-			saveErrors(request, msg);
-		}
-
-		log.trace("<XenograftAction> Exiting save");
-		return mapping.findForward("AnimalModelTreePopulateAction");
-	}
-
+        log.trace("<XenograftAction> Exiting save");
+        return mapping.findForward("AnimalModelTreePopulateAction");
+    }
 }
