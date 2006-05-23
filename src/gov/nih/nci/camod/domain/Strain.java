@@ -1,7 +1,10 @@
 /*
- * $Id: Strain.java,v 1.5 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: Strain.java,v 1.6 2006-05-23 18:15:58 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.4  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -25,6 +28,24 @@ public class Strain extends BaseObject implements Serializable
     private MutationIdentifier mutationIdentifier;
     private Species species;
 
+
+    /**
+     * method to return the display name
+     * @return Returns the display name
+     */
+    public String getDisplayName()
+    {
+        String theDisplayName = "";
+        if (name != null)
+        {
+            theDisplayName = name.trim();
+        }
+        else if (nameUnctrlVocab != null)
+        {
+            theDisplayName = nameUnctrlVocab.trim();
+        }
+        return theDisplayName;
+    }
 
     /**
      * @return Returns the species.
@@ -105,11 +126,11 @@ public class Strain extends BaseObject implements Serializable
     /**
      * @return Returns the EVS Preferred displayName
 
-    public String getEVSPreferredDescription()
-    {
-        return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
-    }
-     */    
+     public String getEVSPreferredDescription()
+     {
+     return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+     }
+     */
 
     /**
      * @param conceptCode
@@ -162,29 +183,29 @@ public class Strain extends BaseObject implements Serializable
         result = HashCodeUtil.hash(result, this.getName());
         return result + super.hashCode();
     }
-/*    
-    public int compareTo(Object o)
-    {
-        // compare by evs description name if possible, otherwise organ name
-        if ((o instanceof Strain) && (this.getEVSPreferredDescription() != null) && (((Strain) o).getEVSPreferredDescription() != null))
-        {
-            int result = this.getEVSPreferredDescription().compareTo(((Organ) o).getEVSPreferredDescription());
-            if (result != 0)
-            {
-                return result;
-            }
-        }
-        else if ((o instanceof Strain) && (this.getName() != null) && (((Strain) o).getName() != null))
-        {
-            int result = this.getName().compareTo(((Strain) o).getName());
-            if (result != 0)
-            {
-                return result;
-            }
-        }
+    /*    
+     public int compareTo(Object o)
+     {
+     // compare by evs description name if possible, otherwise organ name
+     if ((o instanceof Strain) && (this.getEVSPreferredDescription() != null) && (((Strain) o).getEVSPreferredDescription() != null))
+     {
+     int result = this.getEVSPreferredDescription().compareTo(((Organ) o).getEVSPreferredDescription());
+     if (result != 0)
+     {
+     return result;
+     }
+     }
+     else if ((o instanceof Strain) && (this.getName() != null) && (((Strain) o).getName() != null))
+     {
+     int result = this.getName().compareTo(((Strain) o).getName());
+     if (result != 0)
+     {
+     return result;
+     }
+     }
 
-        return super.compareTo(o);
-    }    
-*/
+     return super.compareTo(o);
+     }    
+     */
 
 }

@@ -1,7 +1,10 @@
 /*
- * $Id: Species.java,v 1.5 2006-05-10 14:13:51 schroedn Exp $
+ * $Id: Species.java,v 1.6 2006-05-23 18:15:58 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/05/10 14:13:51  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.4  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -24,25 +27,43 @@ public class Species extends BaseObject implements Serializable
     private String conceptCode;
     private Set<Strain> strainCollection = new HashSet<Strain>();
 
-    
+
     /**
      * method to return the display name used in dropdown lists
      * @return Returns the display name
      */
     public String getDisplayName()
     {
-
         String theDisplayName = "";
-        if (scientificName != null && commonName != null)
+        if (scientificName != null || commonName != null)
         {
-            theDisplayName = commonName.trim() + " (" + scientificName.trim() + ")";
-        } 
-        else if (scientificNameUnctrlVocab != null && commonNameUnctrlVocab != null )
+            if (scientificName != null && commonName != null)
+            {
+                theDisplayName = commonName.trim() + " (" + scientificName.trim() + ")";
+            }
+            else if (scientificName != null)
+            {
+                theDisplayName = scientificName.trim();
+            }
+            else
+            {
+                theDisplayName = commonName.trim();
+            }
+        }
+        else if (scientificNameUnctrlVocab != null || commonNameUnctrlVocab != null)
         {
-            theDisplayName = commonNameUnctrlVocab.trim() + " (" + scientificNameUnctrlVocab.trim() + ")";            
+            if (scientificNameUnctrlVocab != null)
+            {
+                theDisplayName = scientificNameUnctrlVocab.trim();
+            }
+            else
+            {
+                theDisplayName = commonNameUnctrlVocab.trim();
+            }
         }
         return theDisplayName;
-    }    
+    }
+
     /**
      * @return Returns the scientificName.
      */
@@ -139,10 +160,10 @@ public class Species extends BaseObject implements Serializable
     /**
      * @return Returns the EVS Preferred displayName
 
-    public String getEVSPreferredDescription()
-    {
-        return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
-    }
+     public String getEVSPreferredDescription()
+     {
+     return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+     }
      */
     /**
      * @param conceptCode
@@ -203,28 +224,28 @@ public class Species extends BaseObject implements Serializable
         result = HashCodeUtil.hash(result, this.getScientificName());
         return result + super.hashCode();
     }
-/*    
-    public int compareTo(Object o)
-    {
-        // compare by evs description name if possible, otherwise organ name
-        if ((o instanceof Species) && (this.getEVSPreferredDescription() != null) && (((Species) o).getEVSPreferredDescription() != null))
-        {
-            int result = this.getEVSPreferredDescription().compareTo(((Species) o).getEVSPreferredDescription());
-            if (result != 0)
-            {
-                return result;
-            }
-        }
-        else if ((o instanceof Species) && (this.getScientificName() != null) && (((Species) o).getScientificName() != null))
-        {
-            int result = this.getScientificName().compareTo(((Species) o).getScientificName());
-            if (result != 0)
-            {
-                return result;
-            }
-        }
+    /*    
+     public int compareTo(Object o)
+     {
+     // compare by evs description name if possible, otherwise organ name
+     if ((o instanceof Species) && (this.getEVSPreferredDescription() != null) && (((Species) o).getEVSPreferredDescription() != null))
+     {
+     int result = this.getEVSPreferredDescription().compareTo(((Species) o).getEVSPreferredDescription());
+     if (result != 0)
+     {
+     return result;
+     }
+     }
+     else if ((o instanceof Species) && (this.getScientificName() != null) && (((Species) o).getScientificName() != null))
+     {
+     int result = this.getScientificName().compareTo(((Species) o).getScientificName());
+     if (result != 0)
+     {
+     return result;
+     }
+     }
 
-        return super.compareTo(o);
-    }
-    */    
+     return super.compareTo(o);
+     }
+     */
 }
