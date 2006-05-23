@@ -39,15 +39,14 @@
 			<td class="WhiteBoxRightEnd">
 				<c:choose>
 					<c:when test="${not empty xt.donorSpecies}">			
-			    		<c:if test="${not empty xt.donorSpecies.scientificName}"><c:out value="${xt.donorSpecies.scientificName}"/></c:if>
-						<c:if test="${not empty xt.donorSpecies.abbreviation}}">(<c:out value="${xt.donorSpecies.abbreviation}"/>)</c:if>&nbsp;
+					    <c:out value="${xt.donorSpecies.displayName}"/>&nbsp;
 					</c:when>
-				<c:otherwise>
-					<c:when test="${not empty xt.strain}">
-			    		<c:if test="${not empty xt.strain.species.scientificName}"><c:out value="${xt.strain.species.scientificName}"/></c:if>
-						<c:if test="${not empty xt.strain.species.abbreviation}}">(<c:out value="${xt.strain.species.abbreviation}"/>)</c:if>&nbsp;
-					</c:when>
-				</c:choose>&nbsp;					
+				    <c:otherwise>
+				        <c:if test="${not empty xt.strain}">
+				        	<c:out value="${xt.strain.species.displayName}"/>&nbsp;
+				        </c:if>
+					</c:otherwise>
+				</c:choose>&nbsp;		
 			</td>
 		</tr>
 	
@@ -103,18 +102,17 @@
 			<td class="GreyBox"><b>Method of Modification:</b></td>
 			<td class="GreyBoxRightEnd"><c:out value="${xt.modificationDescription}"/>&nbsp;</td>
 		</tr>						
-			
         <tr>
 			<td class="WhiteBox"><b>Amount of Cells<b></td>
 			<td class="WhiteBoxRightEnd"><c:out value="${xt.cellAmount}"/>&nbsp;</td>
 		</tr>
         <tr>
-			<td class="WhiteBox"><b>Growth Period<b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.growthPeriod}"/>&nbsp;</td>
+			<td class="GreyBox"><b>Growth Period<b></td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.growthPeriod}"/>&nbsp;</td>
 		</tr>			
 		<tr>
-			<td class="GreyBox"><b>Site of Administration:</b></td>
-			<td class="GreyBoxRightEnd">
+			<td class="WhiteBox"><b>Site of Administration:</b></td>
+			<td class="WhiteBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.administrativeSite}">
 					<c:out value="${xt.adminSiteUnctrlVocab}"/>&nbsp;
@@ -126,16 +124,11 @@
 			</td>
 		</tr>		
 		<tr>		
-			<td class="WhiteBox"><b>Host Species and Strain</b></td>
-			<td class="WhiteBoxRightEnd">
-				<c:out value="${mdl.strain.species.scientificName}"/>&nbsp;
-				<c:if test="${not empty mdl.strain.species.abbreviation}">(<c:out value="${mdl.strain.species.abbreviation}"/>)</c:if>&nbsp;/&nbsp;
-				<c:if test="${not empty mdl.strain.name}">
-				    <c:out value="${mdl.strain.name}"/>
-				</c:if>
-				<c:if test="${not empty mdl.strain.nameUnctrlVocab}">
-				    <c:out value="${mdl.strain.nameUnctrlVocab}"/>
-				</c:if>
+			<td class="GreyBox"><b>Host Species and Strain</b></td>
+			<td class="GreyBoxRightEnd">
+				<c:out value="${mdl.strain.species.displayName}"/>&nbsp;
+                &nbsp;/&nbsp;
+				<c:out value="${mdl.strain.displayName}"/>&nbsp;
 			</td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
