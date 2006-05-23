@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.43 2006-05-19 16:41:54 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.44 2006-05-23 18:16:38 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.43  2006/05/19 16:41:54  pandyas
+ * Defect #249 - add other to species on the Xenograft screen
+ *
  * Revision 1.42  2006/05/15 15:45:40  georgeda
  * Cleaned up contact info management
  *
@@ -423,7 +426,6 @@ public class NewDropdownUtil
                     }
                 }
             }
-            addOtherOption(theReturnList);
         }
         return theReturnList;
     }
