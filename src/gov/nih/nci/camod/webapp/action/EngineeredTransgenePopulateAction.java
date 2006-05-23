@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.21 2006-05-22 18:39:02 pandyas Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.22 2006-05-23 14:15:35 schroedn Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/05/22 18:39:02  pandyas
+ * Added brackets to if statement - good java practice
+ *
  * Revision 1.20  2006/05/22 16:52:28  pandyas
  * modified isRandom to make consistent between transgene and genomic segment
  *
@@ -192,16 +195,13 @@ public class EngineeredTransgenePopulateAction extends BaseAction
                 Set<GeneFunction> theGeneFunctions = theEngineeredTransgene.getGeneFunctionCollection();
 
                 String theGeneFunctionString = "";
-
-                int count = 0;
+               
                 for (GeneFunction theGeneFunction : theGeneFunctions)
                 {
-                    // Add a comma if it's not the first
-                    if (count++ != 1)
+                    if( theGeneFunctionString.trim().length() > 0 )
                     {
                         theGeneFunctionString += ", ";
                     }
-
                     theGeneFunctionString += theGeneFunction.getFunction();
                 }
                 theEngineeredTransgeneForm.setGeneFunctions(theGeneFunctionString);
