@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.15 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: ChemicalDrugAction.java,v 1.16 2006-05-23 17:01:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.14  2005/11/09 00:17:26  georgeda
  * Fixed delete w/ constraints
  *
@@ -130,25 +133,28 @@ public class ChemicalDrugAction extends BaseAction {
 		}
 
 		System.out.println("<ChemicalDrugAction save> Entering... ");
-
-		// Grab the current modelID from the session
-		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-
-		ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
+        
+        ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;        
 
 		System.out.println("<ChemicalDrugAction save> Adding... " + "\n\t name: " + chemicalDrugForm.getName()
 				+ "\n\t otherName: " + chemicalDrugForm.getOtherName() + "\n\t type: " + chemicalDrugForm.getType()
-				+ "\n\t regimen: " + chemicalDrugForm.getRegimen() + "\n\t dosage: " + chemicalDrugForm.getDosage()
-				+ "\n\t dosageUnit: " + chemicalDrugForm.getDosageUnit() + "\n\t ageAtTreatment: "
-				+ chemicalDrugForm.getAgeAtTreatment() + "\n\t nscNumber: " + chemicalDrugForm.getNscNumber() + "\n\t CasNumber: "
-				+ chemicalDrugForm.getCasNumber() + "\n\t getAgeAtTreatmentUnit: " + chemicalDrugForm.getAgeAtTreatmentUnit());
+				+ "\n\t regimen: " + chemicalDrugForm.getRegimen() 
+                + "\n\t dosage: " + chemicalDrugForm.getDosage()
+				+ "\n\t dosageUnit: " + chemicalDrugForm.getDosageUnit() 
+				+ "\n\t ageAtTreatment: " + chemicalDrugForm.getAgeAtTreatment() 
+                + "\n\t getAgeAtTreatmentUnit: " + chemicalDrugForm.getAgeAtTreatmentUnit()
+                + "\n\t nscNumber: " + chemicalDrugForm.getNscNumber() + "\n\t CasNumber: "
+				+ chemicalDrugForm.getCasNumber());
 
-		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        /* Grab the current modelID from the session */
+        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);        
 
-		AnimalModel animalModel = animalModelManager.get(modelID);
+        /* Create all the manager objects needed for Screen */
+        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-
+            log.info("<ChemicalDrugAction> Entering try block"); 
 			animalModelManager.addCarcinogenExposure(animalModel, chemicalDrugForm);
 
 			// Add a message to be displayed in submitOverview.jsp saying you've

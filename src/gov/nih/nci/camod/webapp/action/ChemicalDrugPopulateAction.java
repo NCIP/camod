@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugPopulateAction.java,v 1.16 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: ChemicalDrugPopulateAction.java,v 1.17 2006-05-23 17:01:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.15  2005/11/02 21:47:33  georgeda
  * Fixed validate
  *
@@ -78,8 +81,11 @@ public class ChemicalDrugPopulateAction extends BaseAction
             if (ce.getTreatment().getAgeAtTreatment() != null)
             {
                 chemicalDrugForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-                chemicalDrugForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());                
             }
+            if (ce.getTreatment().getAgeAtTreatmentUnit() != null)
+            {
+                chemicalDrugForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());                
+            }            
 
             // Set the other name and/or selected name from database
             if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null)
