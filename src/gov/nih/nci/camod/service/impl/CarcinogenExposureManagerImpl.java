@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.2 2006-05-04 14:27:20 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.3 2006-05-23 15:11:27 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/04 14:27:20  pandyas
+ * Moved e-mail code into separate method
+ *
  * Revision 1.1  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -66,7 +69,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
 
         CarcinogenExposure theCarcinogenExposure = get(id);
 
-        inAnimalModel.getTherapyCollection().remove(theCarcinogenExposure);
+        inAnimalModel.getCarcinogenExposureCollection().remove(theCarcinogenExposure);
         super.save(inAnimalModel);
     }
 
@@ -208,7 +211,6 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
     public CarcinogenExposure create(AnimalModel inAnimalModel,
                                      GrowthFactorData inGrowthFactorData)
     {
-
         log.info("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
