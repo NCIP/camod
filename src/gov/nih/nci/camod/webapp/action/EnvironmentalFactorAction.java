@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorAction.java,v 1.18 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: EnvironmentalFactorAction.java,v 1.19 2006-05-23 16:59:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.17  2005/11/09 00:17:26  georgeda
  * Fixed delete w/ constraints
  *
@@ -58,7 +61,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 				+ envForm.getName() + "\n\t otherName: " + envForm.getOtherName() + "\n\t dosage: "
 				+ envForm.getDosage() + "\n\t envForm.getDosageUnit()" + envForm.getDosageUnit() + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
 				+ "\n\t regimen: " + envForm.getRegimen() + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
-				+ envForm.getAgeAtTreatmentUnit()
+				 + "\n\t getAgeAtTreatmentUnit(): " + envForm.getAgeAtTreatmentUnit()
                 + "\n\t type: " + envForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
@@ -118,7 +121,7 @@ public final class EnvironmentalFactorAction extends BaseAction {
 				+ envForm.getDosage()  + "\n\t envForm.getDosageUnit()" + envForm.getDosageUnit() 
                 + "\n\t administrativeRoute: " + envForm.getAdministrativeRoute()
 				+ "\n\t regimen: " + envForm.getRegimen() + "\n\t ageAtTreatment: " + envForm.getAgeAtTreatment()
-				+ envForm.getAgeAtTreatmentUnit()
+				+ "\n\t getAgeAtTreatmentUnit(): " + envForm.getAgeAtTreatmentUnit()
                 + "\n\t type: " + envForm.getType() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
