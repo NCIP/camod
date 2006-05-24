@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.18 2006-05-24 16:46:14 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.19 2006-05-24 19:01:24 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/05/24 16:46:14  pandyas
+ * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
+ *
  * Revision 1.17  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -167,9 +170,11 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
             if (fileType != null)
             {
                 // Supported file types.  Sid is only supported for the normal image upload
-                if (fileType.toLowerCase().equals("jpg") || fileType.toLowerCase().equals("jpeg") || fileType.toLowerCase().equals("gif") || (fileType.toLowerCase().equals(
-                                                                                                                                                                            "sid") && !inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) || fileType.toLowerCase().equals(
-                                                                                                                                                                                                                                                                                             "png"))
+                if (fileType.toLowerCase().equals("jpg") ||
+                    fileType.toLowerCase().equals("jpeg") || 
+                    fileType.toLowerCase().equals("gif") || (
+                    fileType.toLowerCase().equals("sid") && !inStorageDirKey.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) || 
+                    fileType.toLowerCase().equals("png"))
                 {
                     InputStream in = null;
                     OutputStream out = null;
@@ -230,7 +235,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
 
                     // Upload the file to caIMAGE
                     FtpUtil ftpUtil = new FtpUtil();
-                    //ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile);
+                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile);
 
                     log.error("File upload successful.  File name: " + uniqueFileName);
 
