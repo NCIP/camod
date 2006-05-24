@@ -113,7 +113,7 @@
 				<INPUT name="organTissueName" type="hidden"/>
 			</td>
 			<td class="formField">
-				<html:text styleClass="formFieldSized"  property="organ" size="30"/>
+				<html:text styleClass="formFieldSized"  disabled="true" property="organ" size="30"/>
 				<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" src="/camod/images/clear.gif"></a>
 			</td>
 	</tr>
