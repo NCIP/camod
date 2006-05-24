@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.43 2006-05-23 19:42:42 georgeda Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.44 2006-05-24 15:41:53 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.43  2006/05/23 19:42:42  georgeda
+ * Moved constuct sequence into image "if" block
+ *
  * Revision 1.42  2006/05/23 18:17:09  georgeda
  * Cleaned up
  *
@@ -111,7 +114,9 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 			Genetic Description - Model:
-			<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+			<camod:highlight>
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+			</camod:highlight>
 			</td>
 		</tr>
 
@@ -170,10 +175,14 @@
 						    <c:set var="count" value="${count + 1}"/>
 							<c:choose>
 								<c:when test="${empty eg.environmentalFactor.name}">
-									<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+									<camod:highlight>
+										<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+									</camod:highlight>
 								</c:when>
 								<c:otherwise>
-						            <c:out value="${eg.environmentalFactor.name}"/>
+									<camod:highlight>
+						            	<c:out value="${eg.environmentalFactor.name}"/>
+									</camod:highlight>						       
 								</c:otherwise>
 							</c:choose>
 						</a>
@@ -213,7 +222,9 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
 				Engineered Transgene - Model:
-				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+				<camod:highlight>
+					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+				</camod:highlight>
 			</td>
 		</tr>
 
@@ -239,7 +250,9 @@
 				<tr>
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 					<td class="WhiteBoxRightEnd" width="65%">
-					<c:out value="${tg.locationOfIntegration}"/>&nbsp;
+						<camod:highlight>
+							<c:out value="${tg.locationOfIntegration}"/>&nbsp;
+						</camod:highlight>
 					</td>
 				</tr>
 			</c:otherwise>
@@ -248,13 +261,17 @@
 		<tr>
 			<td class="GreyBox" width="35%"><b>Transgene</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
-			<c:out value="${tg.name}"/>&nbsp;
+				<camod:highlight>
+					<c:out value="${tg.name}"/>&nbsp;
+				</camod:highlight>
 			</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
-			<c:out value="${tg.species.displayName}"/>&nbsp;
+				<camod:highlight>
+					<c:out value="${tg.species.displayName}"/>&nbsp;
+				</camod:highlight>
 			</td>
 		</tr>
 
@@ -272,7 +289,9 @@
 					<tr>
 						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
 						<td class="WhiteBoxRightEnd" width="65%">
-						    <c:out value="${rem.species.displayName}"/>&nbsp;
+						    <camod:highlight>
+						    		<c:out value="${rem.species.displayName}"/>&nbsp;
+						    </camod:highlight>
 						</td>
 					</tr>
 				</c:forEach>
@@ -286,7 +305,11 @@
 			<td class="WhiteBoxRightEnd" width="65%">
 			<ul>
 			<c:forEach var="gf" items="${tg.geneFunctionCollection}">
-				<li><c:out value="${gf.function}"/></li>
+				<li>
+					<camod:highlight>
+						<c:out value="${gf.function}"/>
+					</camod:highlight>
+				</li>
 			</c:forEach>
 			</ul>&nbsp;
 			</td>
@@ -323,15 +346,27 @@
 	
 			<tr>
 				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.image.title}"/>&nbsp;</td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tg.image.title}"/>&nbsp;
+					</camod:highlight>	
+				</td>
 			</tr>
 			<tr>
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
-				<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.image.description}"/>&nbsp;</td>
+				<td class="GreyBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tg.image.description}"/>&nbsp;
+					</camod:highlight>		
+				</td>
 			</tr>
 			<tr>
 				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.constructSequence}"/>&nbsp;</td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tg.constructSequence}"/>&nbsp;
+					</camod:highlight>
+				</td>
 			</tr>		
 		</c:if>
 		<tr>
@@ -345,9 +380,16 @@
 						</tr>
 						<c:forEach var="el" items="${tg.expressionFeatureCollection}">
 							<tr>
-								<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+								<td class="WhiteBox">
+									<camod:highlight>
+										<c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;
+									</camod:highlight>		
+								</td>
 								<td class="WhiteBoxRightEnd">
-								<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+									<camod:highlight>
+										<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;
+									</camod:highlight>		
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -370,7 +412,11 @@
 		</tr>
 		<tr>
 			<td class="GreyBox" width="35%"><b>Comment</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tg.comments}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${tg.comments}"/>&nbsp;
+				</camod:highlight>
+			</td>
 		</tr>
 	</TABLE>
 	
@@ -395,7 +441,10 @@
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Genomic Segment - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+				Genomic Segment - Model:
+					<camod:highlight>
+						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+					</camod:highlight>
 			</td>
 		</tr>
 		<c:choose>
@@ -410,7 +459,9 @@
 				<tr>
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 					<td class="WhiteBoxRightEnd" width="65%">
-					<c:out value="${gs.locationOfIntegration}"/>&nbsp;
+						<camod:highlight>
+							<c:out value="${gs.locationOfIntegration}"/>&nbsp;
+						</camod:highlight>
 					</td>
 				</tr>
 			</c:when>
@@ -432,10 +483,14 @@
 					<li>
 						<c:choose>
 							<c:when test="${empty gs.segmentType.name}">
-								<c:out value="${gs.segmentType.nameUnctrlVocab}"/>&nbsp;
+								<camod:highlight>
+									<c:out value="${gs.segmentType.nameUnctrlVocab}"/>&nbsp;
+								</camod:highlight>
 							</c:when>
 							<c:otherwise>
-								<c:out value="${gs.segmentType.name}"/>&nbsp;
+								<camod:highlight>
+									<c:out value="${gs.segmentType.name}"/>&nbsp;
+								</camod:highlight>
 							</c:otherwise>
 						</c:choose>
 					</li>
@@ -445,12 +500,20 @@
 
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Designator</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.cloneDesignator}"/>&nbsp;</td>			
+			<td class="WhiteBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${gs.cloneDesignator}"/>&nbsp;
+				</camod:highlight>		
+			</td>			
 		</tr>		
 		
 		<tr>
 			<td class="GreyBox" width="35%"><b>Segment Size</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.segmentSize}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${gs.segmentSize}"/>&nbsp;
+				</camod:highlight>
+			</td>
 		</tr>
 
 		<tr>
@@ -464,9 +527,16 @@
 						</tr>
 						<c:forEach var="el" items="${gs.expressionFeatureCollection}">
 							<tr>
-								<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+								<td class="WhiteBox">
+									<camod:highlight>
+										<c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;
+									</camod:highlight>
+								</td>
 								<td class="WhiteBoxRightEnd">
-								<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+									<camod:highlight>
+										<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;
+									</camod:highlight>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -491,15 +561,27 @@
 	
 			<tr>
 				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.image.title}"/>&nbsp;</td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${gs.image.title}"/>&nbsp;
+					</camod:highlight>
+				</td>
 			</tr>
 			<tr>
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
-				<td class="GreyBoxRightEnd" width="65%"><c:out value="${gs.image.description}"/>&nbsp;</td>
+				<td class="GreyBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${gs.image.description}"/>&nbsp;
+					</camod:highlight>
+				</td>
 			</tr>		
 			<tr>
 				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.constructSequence}"/>&nbsp;</td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${gs.constructSequence}"/>&nbsp;
+					</camod:highlight>		
+				</td>
 			</tr>
 		</c:if>
         <tr>
@@ -514,7 +596,11 @@
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${gs.comments}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${gs.comments}"/>&nbsp;
+				</camod:highlight>		
+			</td>
 		</tr>
 	</TABLE>
 </td></tr>
@@ -537,12 +623,19 @@
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Targeted Modification - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+				Targeted Modification - Model:
+					<camod:highlight>
+						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+					</camod:highlight>
 			</td>
 		</tr>
         <tr>
             <td class="GreyBox" width="35%"><b>Gene</b></td>
-            <td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.name}"/>&nbsp;</td>
+            <td class="GreyBoxRightEnd" width="65%">
+            	<camod:highlight>
+            		<c:out value="${tm.name}"/>&nbsp;
+            	</camod:highlight>		
+            </td>
         </tr>
                  
         <tr>
@@ -550,12 +643,16 @@
             <td class="WhiteBoxRightEnd" width="65%">
 				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
 				    <li>
-						<c:out value="${modType.name}"/>&nbsp;
+						<camod:highlight>
+							<c:out value="${modType.name}"/>&nbsp;
+						</camod:highlight>
 					</li>	
 				</c:forEach>
 				<c:if test="${not empty modType.nameUnctrlVocab}">&nbsp;
 				    <li>
-						<c:out value="${modType.nameUnctrlVocab}"/>&nbsp;
+						<camod:highlight>
+							<c:out value="${modType.nameUnctrlVocab}"/>&nbsp;
+						</camod:highlight>
 					</li>	
 				</c:if>
             </td>
@@ -576,12 +673,18 @@
         <tr>
             <td class="WhiteBox" width="35%"><b>Genetic Background - Donor</b></td>
             <td class="WhiteBoxRightEnd" width="65%">
-            	<c:out value="${tm.esCellLineName}"/>&nbsp;
+            	<camod:highlight>
+            		<c:out value="${tm.esCellLineName}"/>&nbsp;
+            	</camod:highlight>
             </td>
         </tr>
         <tr>
             <td class="GreyBox" width="35%"><b>Genetic Background - Recipient</b></td>
-            <td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.blastocystName}"/>&nbsp;</td>
+            <td class="GreyBoxRightEnd" width="65%">
+            	<camod:highlight>
+            		<c:out value="${tm.blastocystName}"/>&nbsp;
+            	</camod:highlight>
+            </td>
         </tr>
 
 		<tr>
@@ -597,7 +700,11 @@
 		</tr>
 		<tr>
 			<td class="GreyBox" width="35%"><b>Conditional Description</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.conditionality.description}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${tm.conditionality.description}"/>&nbsp;
+				</camod:highlight>		
+			</td>
 		</tr>
 
 		<tr>
@@ -611,9 +718,16 @@
 						</tr>
 						<c:forEach var="el" items="${tm.expressionFeatureCollection}">
 							<tr>
-								<td class="WhiteBox"><c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;</td>
+								<td class="WhiteBox">
+									<camod:highlight>
+										<c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;
+									</camod:highlight>
+								</td>
 								<td class="WhiteBoxRightEnd">
-								<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;</td>
+									<camod:highlight>
+										<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;
+									</camod:highlight>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -637,15 +751,27 @@
 			</tr>
 			<tr>
 				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.image.title}"/>&nbsp;</td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tm.image.title}"/>&nbsp;
+					</camod:highlight>
+				</td>
 			</tr>
 			<tr>
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
-				<td class="GreyBoxRightEnd" width="65%"><c:out value="${tm.image.description}"/>&nbsp;</td>
+				<td class="GreyBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tm.image.description}"/>&nbsp;
+					</camod:highlight>
+				</td>
 			</tr>
 			<tr>
 				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
-				<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.constructSequence}"/>&nbsp;</td>
+				<td class="WhiteBoxRightEnd" width="65%">
+					<camod:highlight>
+						<c:out value="${tm.constructSequence}"/>&nbsp;
+					</camod:highlight>
+				</td>
 			</tr>	
 		</c:if>	
         <tr>
@@ -660,7 +786,11 @@
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tm.comments}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${tm.comments}"/>&nbsp;
+				</camod:highlight>		
+			</td>
 		</tr>
 
 		<c:set var="tmId" value="${tm.id}"/>
@@ -669,9 +799,11 @@
 	        <tr>
 	            <td class="WhiteBox" width="35%"><b>Gene Info</b></td>
 	            <td class="WhiteBoxRightEnd" width="65%">
-	            <c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
-	            <c:out value="${gene.symbol}"/>.&nbsp; 
-	            <c:out value="${gene.fullName}"/>&nbsp;
+	            	<camod:highlight>
+	            		<c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
+			            <c:out value="${gene.symbol}"/>.&nbsp; 
+		    	        <c:out value="${gene.fullName}"/>&nbsp;
+		    	    </camod:highlight>
 	            </td>
 	        </tr>
 	        <tr>
@@ -741,7 +873,10 @@
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Induced Mutation - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				Induced Mutation - Model:
+					<camod:highlight>
+						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					</camod:highlight>
 			</td>
 		</tr>
 		
@@ -750,10 +885,14 @@
             <td class="GreyBoxRightEnd">
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.name}">
-						<c:out value="${im.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+						<camod:highlight>
+							<c:out value="${im.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+						</camod:highlight>
 					</c:when>
 					<c:otherwise>
-			            <c:out value="${im.environmentalFactor.name}"/>&nbsp;
+			            <camod:highlight>
+			            	<c:out value="${im.environmentalFactor.name}"/>&nbsp;
+			            </camod:highlight>
 					</c:otherwise>
 				</c:choose>
             </td>
@@ -764,10 +903,14 @@
             <td class="WhiteBoxRightEnd">
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.type}">
-						<c:out value="${im.environmentalFactor.typeUnctrlVocab}"/>&nbsp;
+						<camod:highlight>
+							<c:out value="${im.environmentalFactor.typeUnctrlVocab}"/>&nbsp;
+						</camod:highlight>
 					</c:when>
 					<c:otherwise>
-			            <c:out value="${im.environmentalFactor.type}"/>&nbsp;
+			            <camod:highlight>
+			            	<c:out value="${im.environmentalFactor.type}"/>&nbsp;
+			            </camod:highlight>
 					</c:otherwise>
 				</c:choose>
             </td>
@@ -798,7 +941,11 @@
 				         
         <tr>
             <td class="GreyBox"><b>Description of the induced mutation</b></td>
-            <td class="GreyBoxRightEnd"><c:out value="${im.description}"/>&nbsp;</td>
+            <td class="GreyBoxRightEnd">
+            	<camod:highlight>
+            		<c:out value="${im.description}"/>&nbsp;
+				</camod:highlight>
+            </td>
         </tr>
 		
 		<tr>
@@ -811,8 +958,16 @@
 							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
 						</tr>
 						<tr>
-				            <td class="WhiteBox"><c:out value="${im.geneticAlteration.observation}"/>&nbsp;</td>
-				            <td class="WhiteBoxRightEnd"><c:out value="${im.geneticAlteration.methodOfObservation}"/>&nbsp;</td>
+				            <td class="WhiteBox">
+				            	<camod:highlight>
+				            		<c:out value="${im.geneticAlteration.observation}"/>&nbsp;
+				            	</camod:highlight>
+				            </td>
+				            <td class="WhiteBoxRightEnd">
+				            	<camod:highlight>
+				            		<c:out value="${im.geneticAlteration.methodOfObservation}"/>&nbsp;
+				            	</camod:highlight>
+				            </td>
 						</tr>
 					</table>
 				</c:if>&nbsp;
@@ -832,7 +987,11 @@
 		
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${im.comments}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${im.comments}"/>&nbsp;
+				</camod:highlight>
+			</td>
 		</tr>
 		
 	</TABLE>
@@ -855,12 +1014,19 @@
 	<TABLE summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="100%">
 		<tr>
 			<td class="formTitle" height="20" colspan="2">
-				Spontaneous Mutation - Model:<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+				Spontaneous Mutation - Model:
+					<camod:highlight>
+						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					</camod:highlight>
 			</td>
 		</tr>
         <tr>
             <td class="GreyBox" width="35%"><b>Gene</b></td>
-            <td class="GreyBoxRightEnd" width="65%"><c:out value="${sm.name}"/>&nbsp;</td>
+            <td class="GreyBoxRightEnd" width="65%">
+            	<camod:highlight>
+            		<c:out value="${sm.name}"/>&nbsp;
+            	</camod:highlight>
+            </td>
         </tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Mutated Locus/Gene (Observation)</b></td>
@@ -872,8 +1038,16 @@
 							<td class="formTitle" width="35%"><b>Method of Observation</b></td>
 						</tr>
 						<tr>
-				            <td class="WhiteBox"><c:out value="${sm.geneticAlteration.observation}"/>&nbsp;</td>
-				            <td class="WhiteBoxRightEnd"><c:out value="${sm.geneticAlteration.methodOfObservation}"/>&nbsp;</td>
+				            <td class="WhiteBox">
+				            	<camod:highlight>
+				            		<c:out value="${sm.geneticAlteration.observation}"/>&nbsp;
+				            	</camod:highlight>
+				            </td>
+				            <td class="WhiteBoxRightEnd">
+				            	<camod:highlight>
+				            		<c:out value="${sm.geneticAlteration.methodOfObservation}"/>&nbsp;
+				            	</camod:highlight>
+				            </td>
 						</tr>
 					</table>
 				</c:if>&nbsp;
@@ -904,7 +1078,11 @@
 		</tr>
 		<tr>
 			<td class="GreyBox" width="35%"><b>Comments</b></td>
-			<td class="GreyBoxRightEnd" width="65%"><c:out value="${sm.comments}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd" width="65%">
+				<camod:highlight>
+					<c:out value="${sm.comments}"/>&nbsp;
+				</camod:highlight>
+			</td>
 		</tr>
 	</TABLE>
 </td></tr>
