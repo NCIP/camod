@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.42 2006-05-19 18:50:28 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.43 2006-05-24 16:37:50 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2006/05/19 18:50:28  pandyas
+ * defect #225 - Add clearOrgan functionality to Xenograft screen
+ *
  * Revision 1.41  2006/05/19 16:45:00  pandyas
  * Defect #249 - add other to species on the Xenograft screen, needed to add javascript code and field
  *
@@ -181,16 +184,13 @@
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 			<camod:cshelp mapId="xenograft_transplant_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-
-			<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-				<IMG src="images\selectUP.gif" align=middle border=0>
-			</a>
+			<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 		</td>
 		<td class="formField">
 			<html:hidden property="organTissueCode"/>
 			<input type="hidden" name="organTissueName" />				
-			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="15" />
-			    <a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" src="/camod/images/clear.gif"></a>
+			<html:text styleClass="formFieldUnSized" disabled="true" property="organ" size="35" />
+			<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" src="/camod/images/clear.gif"></a>
 		</td>
 	</tr>
 
