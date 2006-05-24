@@ -120,6 +120,10 @@
     <bean id="savedQueryManager" class="gov.nih.nci.camod.service.impl.SavedQueryManagerImpl"/>    
            
     <!-- ResultSettingsManager -->
-	<bean id="resultSettingsManager" class="gov.nih.nci.camod.service.impl.ResultSettingsManagerImpl"/>      
+	<bean id="resultSettingsManager" class="gov.nih.nci.camod.service.impl.ResultSettingsManagerImpl"/>    
+	
+	<!-- StainingMethodManager -->
+	<bean id="stainingMethodManager" class="gov.nih.nci.camod.service.impl.StainingMethodManagerImpl"/>    
+	  
 	         
 </beans>
