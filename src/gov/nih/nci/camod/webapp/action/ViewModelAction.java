@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.30 2006-05-09 18:57:54 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.31 2006-05-24 18:37:27 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.30  2006/05/09 18:57:54  georgeda
+ *  Changes for searching on transient interfaces
+ *
  *  Revision 1.29  2006/05/08 13:43:15  georgeda
  *  Reformat and clean up warnings
  *
@@ -268,30 +271,27 @@ public class ViewModelAction extends BaseAction
                     // the geneId is available
                     try
                     {
-                        ApplicationService appService = EvsTreeUtil.getApplicationService();
-                        DatabaseCrossReference dcr = new DatabaseCrossReferenceImpl();
+                      ApplicationService appService = EvsTreeUtil.getApplicationService();
+                        DatabaseCrossReference dcr = new DatabaseCrossReferenceImpl(); 
                         dcr.setCrossReferenceId(geneId);
+
                         dcr.setType("gov.nih.nci.cabio.domain.Gene");
                         dcr.setDataSourceName("LOCUS_LINK_ID");
-                        List resultList = appService.search(DatabaseCrossReference.class, dcr);
-                        final int resultCount = (resultList != null) ? resultList.size() : 0;
-                        log.info("Got " + resultCount + " dataCrossReferences....");
-                        if (resultCount > 0)
+                        List<DatabaseCrossReference> cfcoll = new ArrayList<DatabaseCrossReference>();
+                        cfcoll.add(dcr);
+
+                        Gene myGene = new GeneImpl();
+                        myGene.setDatabaseCrossReferenceCollection(cfcoll);
+                        List resultList = appService.search(Gene.class, myGene);
+
+                        
+                        final int geneCount = (resultList != null) ? resultList.size() : 0;
+                        log.info("Got " + geneCount + " Gene Objects");
+                        if (geneCount > 0)
                         {
-                            dcr = (DatabaseCrossReference) resultList.get(0);
-                            Gene myGene = new GeneImpl();
-                            List<DatabaseCrossReference> cfcoll = new ArrayList<DatabaseCrossReference>();
-                            cfcoll.add(dcr);
-                            myGene.setDatabaseCrossReferenceCollection(cfcoll);
-                            resultList = appService.search(Gene.class, myGene);
-                            final int geneCount = (resultList != null) ? resultList.size() : 0;
-                            log.info("Got " + geneCount + " Gene Objects");
-                            if (geneCount > 0)
-                            {
-                                myGene = (Gene) resultList.get(0);
-                                log.info("Gene:" + geneId + " ==>" + myGene);
-                                tmGeneMap.put(tm.getId(), myGene);
-                            }
+                            myGene = (Gene) resultList.get(0);
+                            log.info("Gene:" + geneId + " ==>" + myGene);
+                            tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
                     catch (Exception e)
