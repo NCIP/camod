@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.86 2006-05-17 16:12:34 pandyas Exp $
+ * $Id: Constants.java,v 1.87 2006-05-24 16:45:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.86  2006/05/17 16:12:34  pandyas
+ * added better comments
+ *
  * Revision 1.85  2006/05/10 15:37:36  schroedn
  * Fixed Dup_Name bug
  *
@@ -410,7 +413,7 @@ public class Constants {
 
         public static final String GROWTHFACTORDOSEUNITSDROP = "GrowthFactorDoseUnits.txt";
 
-        public static final String STAININGDROP = "Staining.txt";
+        public static final String STAININGDROP = "Staining.db";
 
         // Specific to a single screen
         public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";

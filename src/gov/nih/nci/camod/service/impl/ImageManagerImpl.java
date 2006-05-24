@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.17 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.18 2006-05-24 16:46:14 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.service.impl;
 
@@ -14,7 +17,6 @@ import gov.nih.nci.camod.util.FtpUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.util.RandomGUID;
 import gov.nih.nci.camod.webapp.form.ImageData;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -98,65 +100,38 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
                                String inStorageDirKey) throws Exception
     {
 
-        log.trace("Entering populateImage");
+        log.info("Entering populateImage");
 
         if (inImageData.getStainingMethod() != null && !inImageData.getStainingMethod().equals(""))
         {
-            
-            //.setStaining(inImageData.getStaining());
-            
-            // Set the StainingMethod
-            StainingMethod stainingMethod = StainingMethodManagerSingleton.instance().getByName(inImageData.getStainingMethod());
 
-            // save the treatment
-            inImage.setStainingMethod(stainingMethod);
-            
+            // Get/Create the StainingMethod
+            StainingMethod stainingMethod = StainingMethodManagerSingleton.instance().getOrCreate(inImageData.getStainingMethod(),
+                                                                                                  inImageData.getOtherStainingMethod());
 
-            if (stainingMethod.getName().equals("Other"))
+            log.info("Entering populateImage stainingMethod:" + stainingMethod);
+
+            if (stainingMethod.getName().equals(Constants.Dropdowns.OTHER_OPTION))
             {
-                //StainingMethod staingmethod =
-                stainingMethod.setNameUnctrlVocab(inImageData.getOtherStainingMethod());
+                log.info("in other stainingMethod loop: " + stainingMethod);
+                //Set staining method
+                inImage.setStainingMethod(stainingMethod);
 
-                ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+                // Send e-mail for other donor staining method
+                sendEmail(inAnimalModel, stainingMethod.getNameUnctrlVocab(), "stainingMethod");
 
-                // Iterate through all the reciepts in the config file
-                String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-                StringTokenizer st = new StringTokenizer(recipients, ",");
-                String inRecipients[] = new String[st.countTokens()];
-                for (int i = 0; i < inRecipients.length; i++)
-                {
-                    inRecipients[i] = st.nextToken();
-                }
-
-                String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-                String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-                // gather message keys and variable values to build the e-mail
-                // content with
-                String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-                Map<String,Object> values = new TreeMap<String,Object>();
-                values.put("type", "SegmentName");
-                values.put("value", stainingMethod.getNameUnctrlVocab());
-                values.put("submitter", inAnimalModel.getSubmitter());
-                values.put("model", inAnimalModel.getModelDescriptor());
-                values.put("modelstate", inAnimalModel.getState());
-
-                // Send the email
-                try
-                {
-                    MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-                }
-                catch (Exception e)
-                {
-                    log.error("Caught exception sending mail: ", e);
-                    e.printStackTrace();
-                }
+            }
+            else
+            {
+                log.info("stainingMethod: " + stainingMethod);
+                //Set staining method
+                inImage.setStainingMethod(stainingMethod);
             }
         }
         else
         {
+            // null staining method - covers editing
             inImage.setStainingMethod(null);
-            //inImage.setStainingUnctrlVocab(null);
         }
 
         if (inImage != null)
@@ -255,7 +230,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
 
                     // Upload the file to caIMAGE
                     FtpUtil ftpUtil = new FtpUtil();
-                    ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile);
+                    //ftpUtil.upload(ftpServer, ftpUsername, ftpPassword, ftpStorageDirectory + uniqueFileName, uploadFile);
 
                     log.error("File upload successful.  File name: " + uniqueFileName);
 
@@ -295,5 +270,45 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
         }
 
         log.trace("Exiting populateImage");
+    }
+
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        // Get the e-mail resource
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
+
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+        // gather message keys and variable values to build the e-mail
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
+        }
     }
 }
