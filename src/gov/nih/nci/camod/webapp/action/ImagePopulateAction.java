@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.14 2006-05-23 18:33:38 schroedn Exp $
+ * $Id: ImagePopulateAction.java,v 1.15 2006-05-24 16:51:51 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/23 18:33:38  schroedn
+ * Fixed a null pointer problem on staining
+ *
  * Revision 1.13  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -61,7 +64,7 @@ public class ImagePopulateAction extends BaseAction {
                 imageForm.setImageUrl(inImage.getImageUrl());
 			}
 		}
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 		return mapping.findForward("submitImages");
 	}
 
@@ -70,7 +73,7 @@ public class ImagePopulateAction extends BaseAction {
 
 		System.out.println("<ImagePopulateAction dropdown> Entering dropdown()");
 		
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 		
 		return mapping.findForward("submitImages");
 	}
