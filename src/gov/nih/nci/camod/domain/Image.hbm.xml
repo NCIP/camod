@@ -44,6 +44,7 @@
         <many-to-one
         	name="stainingMethod"
         	column="staining_method_id"
-        	class="StainingMethod"/>
+        	class="StainingMethod"
+        	cascade="save-update"/>
 	</class>
 </hibernate-mapping>

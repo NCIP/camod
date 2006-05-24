@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.19 2006-05-24 19:01:24 georgeda Exp $
+ * $Id: ImageManagerImpl.java,v 1.20 2006-05-24 20:25:29 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/05/24 19:01:24  georgeda
+ * Cleaned up
+ *
  * Revision 1.18  2006/05/24 16:46:14  pandyas
  * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
  *
@@ -114,7 +117,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager
 
             log.info("Entering populateImage stainingMethod:" + stainingMethod);
 
-            if (stainingMethod.getName().equals(Constants.Dropdowns.OTHER_OPTION))
+            if (stainingMethod.getName() == null && stainingMethod.getNameUnctrlVocab() != null)
             {
                 log.info("in other stainingMethod loop: " + stainingMethod);
                 //Set staining method

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.15 2006-05-24 16:51:51 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.16 2006-05-24 20:25:53 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/05/24 16:51:51  pandyas
+ * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
+ *
  * Revision 1.14  2006/05/23 18:33:38  schroedn
  * Fixed a null pointer problem on staining
  *
@@ -56,8 +59,13 @@ public class ImagePopulateAction extends BaseAction {
                 
 				if( inImage.getStainingMethod() != null )
                 {
-                        imageForm.setStainingMethod( inImage.getStainingMethod().getName() );				
+                    if (inImage.getStainingMethod().getName() != null) {
+                        imageForm.setStainingMethod( inImage.getStainingMethod().getName() );
+                    }
+                    else {
+                        imageForm.setStainingMethod(Constants.Dropdowns.OTHER_OPTION);
                         imageForm.setOtherStainingMethod( inImage.getStainingMethod().getNameUnctrlVocab() );
+                    }
                 }
                 
                 imageForm.setThumbUrl(inImage.getThumbUrl());
