@@ -16,12 +16,18 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("searchDrugScreening.jsp") || 
 						jspName.equals("searchTableOfContents.jsp") || 
 						jspName.equals("searchResultsDrugScreen.jsp") || 
-						jspName.equals("searchResults.jsp")||
-						jspName.equals("expDesignStage0.jsp")||
-						jspName.equals("expDesignStage1.jsp")||
-						jspName.equals("expDesignStage2.jsp")||
-						jspName.equals("yeastStrainsStage01.jsp")||
-						jspName.equals("yeastStrainsStage2.jsp")) {
+						jspName.equals("searchResults.jsp") ||           
+                        
+                        jspName.equals("customizeSearchResults.jsp") || 
+                        jspName.equals("savedSearchQueries.jsp") || 
+                        jspName.equals("searchQueryHistory.jsp") || 						                        
+                        
+                        jspName.equals("expDesignStage0.jsp") ||
+						jspName.equals("expDesignStage1.jsp") ||
+						jspName.equals("expDesignStage2.jsp") ||
+						jspName.equals("yeastStrainsStage01.jsp") ||
+						jspName.equals("yeastStrainsStage2.jsp")) 
+            {
 				return "subSearchMenu.jsp";
 			} 
 			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 
@@ -35,7 +41,8 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
                         jspName.equals("viewTransientInterference.jsp") || 
 						jspName.equals("viewCellLines.jsp") || 
 						jspName.equals("viewImages.jsp") || 
-						jspName.equals("viewMicroarrays.jsp") ){
+						jspName.equals("viewMicroarrays.jsp") )
+            {
                 
                     String theSubMenu = "subViewModelMenu.jsp";
                     
@@ -55,7 +62,8 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
                         jspName.equals("adminEditUser.jsp") || 
                         jspName.equals("adminEditModels.jsp") || 
                         jspName.equals("adminUserManagement.jsp") ||  
-						jspName.equals("helpDesk.jsp") ) {	
+						jspName.equals("helpDesk.jsp") ) 
+            {	
 					return "subAdminMenu.jsp";
 			}
 			else if ( 	jspName.equals("submitOverview.jsp") ||
@@ -88,13 +96,17 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("submitMMHCCRepo.jsp") ||  
 						jspName.equals("submitInvestigator.jsp") || 
                         jspName.equals("submitMorpholino.jsp") || 
-						jspName.equals("submitIMSR.jsp") ) {
+						jspName.equals("submitIMSR.jsp") ) 
+                {
 					return "subSubmitMenu.jsp";
 				}
 			else if ( 	jspName.equals("submitModels.jsp") || 
-					    jspName.equals("submitNewModel.jsp") ) {				
+					    jspName.equals("submitNewModel.jsp") ) 
+            {				
 					return "subEmptyMenu.jsp";				
-			} else {
+			} 
+            else 
+            {
 				return "subEmptyMenu.jsp";
 			}			
 		}
