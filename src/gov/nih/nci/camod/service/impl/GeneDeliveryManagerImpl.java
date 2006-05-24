@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.15 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.16 2006-05-24 15:29:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.14  2006/01/18 14:24:24  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -55,7 +58,6 @@ import gov.nih.nci.camod.service.GeneDeliveryManager;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
-
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -96,7 +98,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         log.info("Entering GeneDeliveryManagerImpl.create");
 
         GeneDelivery theGeneDelivery = new GeneDelivery();
-
+        populateOrgan(inGeneDeliveryForm, theGeneDelivery);
         populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, theGeneDelivery);
 
         log.info("Exiting GeneDeliveryManagerImpl.create");
@@ -111,6 +113,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         log.info("Updating GeneDeliveryForm: " + inGeneDelivery.getId());
 
         // Populate w/ the new values and save
+        populateOrgan(inGeneDeliveryForm, inGeneDelivery);
         populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, inGeneDelivery);
 
         save(inGeneDelivery);
@@ -144,40 +147,8 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         //anytime the viral vector is "other"
         if (inGeneDeliveryData.getViralVector().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String,Object> values = new TreeMap<String,Object>();
-            values.put("type", "ViralVector");
-            values.put("value", inGeneDeliveryData.getOtherViralVector());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
+            // Send e-mail for OtherViralVector
+            sendEmail(inAnimalModel, inGeneDeliveryData.getOtherViralVector(), "ViralVector");
 
             inGeneDelivery.setViralVector(null);
             inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData.getOtherViralVector());
@@ -250,5 +221,70 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
         }
 
         log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
+    }
+
+    private void populateOrgan(GeneDeliveryData inGeneDeliveryData,
+                               GeneDelivery inGeneDelivery) throws Exception
+    {
+
+        // reuse/create Organ by matching concept code
+        Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inGeneDeliveryData.getOrganTissueCode(),
+                                                                      inGeneDeliveryData.getOrganTissueName());
+
+        /*
+         * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
+         * organ is selected by user - no need to check for existing organ in 2.1
+         */
+        if (inGeneDeliveryData.getOrganTissueCode() != null && inGeneDeliveryData.getOrganTissueCode().length() > 0)
+        {
+            inGeneDelivery.setOrgan(theOrgan);
+        }
+        //blank out organ, clear button functionality during editing
+        else
+        {
+            log.info("Setting object to null - clear organ: ");
+            inGeneDelivery.setOrgan(null);
+        }
+
+    }
+
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        // Get the e-mail resource
+        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+
+        // Iterate through all the reciepts in the config file
+        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
+
+        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+        // gather message keys and variable values to build the e-mail
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
+
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
+        }
     }
 }
