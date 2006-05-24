@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.45 2006-05-24 16:53:09 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.46 2006-05-24 18:54:37 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.45  2006/05/24 16:53:09  pandyas
+ * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
+ * All changes from earlier version were merged into this version manually
+ *
  * Revision 1.44  2006/05/23 18:16:38  georgeda
  * Removed hardcode of other into species dropdown
  *
@@ -274,7 +278,10 @@ public class NewDropdownUtil
         {
             theReturnList = getRolesList(inRequest);
         }
-
+        else if (inDropdownKey.equals(Constants.Dropdowns.STAININGDROP)) 
+        {
+            theReturnList = getStainingMethod(inRequest);
+        }
         else
         {
             log.error("No matching dropdown for key: " + inDropdownKey);
