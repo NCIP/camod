@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.23 2006-04-28 19:48:14 schroedn Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.24 2006-05-24 16:58:40 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/04/28 19:48:14  schroedn
+ * Defect #55
+ * Added HighlightTextTag
+ *
  *
  */
 
@@ -183,7 +187,8 @@
 	        </c:if>
 
 			<!--   Start Gene Delivery Section -->
-			<c:set var="cdList" value="${mdl.geneDeliveryCollection}"/>
+			<c:set var="environmentalFactorType" value="GeneDelivery"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 			<tr>
