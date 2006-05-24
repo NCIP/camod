@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.54 2006-05-22 19:39:39 schroedn Exp $
+ * $Id: QueryManagerImpl.java,v 1.55 2006-05-24 15:02:59 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.54  2006/05/22 19:39:39  schroedn
+ * Display criteria for AJAX search fields correctly
+ *
  * Revision 1.53  2006/05/19 17:11:31  guptaa
  * added advance autocomplete search
  *
@@ -1536,25 +1539,31 @@ public class QueryManagerImpl extends BaseManager
 
         if (isEngineeredTransgene == true && inGeneName.trim().length() > 0)
         {
-            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'T')";
+            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " 
+                         + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'T')";
             OR = " OR ";
             theList.add("%" + inGeneName.trim().toUpperCase() + "%");
         }
         if (isTargetedModification == true && inGeneName.trim().length() > 0)
         {
-            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'TM')";
+            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " 
+                         + " FROM engineered_gene WHERE upper(name) LIKE ? AND engineered_gene_type = 'TM')";
             OR = " OR ";
             theList.add("%" + inGeneName.trim().toUpperCase() + "%");
         }
         if (inInducedMutationAgent != null && inInducedMutationAgent.trim().length() > 0)
         {
-            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE engineered_gene_id IN (" + " SELECT distinct im.engineered_gene_id FROM environmental_factor ef, engineered_gene eg " + " WHERE ef.name = ? " + " AND ef.environmental_factor_id = eg.environmental_factor_id) AND engineered_gene_type = 'IM')";
+            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " 
+                         + " FROM engineered_gene WHERE engineered_gene_id IN (" 
+                         + " SELECT distinct eg.engineered_gene_id FROM environmental_factor ef, engineered_gene eg " 
+                         + " WHERE ef.name = ? " + " AND ef.environmental_factor_id = eg.environmental_factor_id) AND engineered_gene_type = 'IM')";
             OR = " OR ";
             theList.add(inInducedMutationAgent.trim());
         }
         if (inGenomicSegDesignator != null && inGenomicSegDesignator.trim().length() > 0)
         {
-            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " + " FROM engineered_gene WHERE upper(clone_designator) LIKE ? AND engineered_gene_type = 'GS')";
+            theSQLString += OR + " eg.engineered_gene_id IN (SELECT distinct engineered_gene_id " 
+                         + " FROM engineered_gene WHERE upper(clone_designator) LIKE ? AND engineered_gene_type = 'GS')";
             theList.add(inGenomicSegDesignator.trim().toUpperCase());
         }
 
