@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.3 2006-05-23 15:11:27 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.4 2006-05-24 15:26:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/23 15:11:27  pandyas
+ * fixed delete - still references Therapy instead of CE
+ *
  * Revision 1.2  2006/05/04 14:27:20  pandyas
  * Moved e-mail code into separate method
  *
@@ -541,46 +544,13 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         if (inNameData.getName().equals(Constants.Dropdowns.OTHER_OPTION))
         {
 
-            ResourceBundle theBundle = ResourceBundle.getBundle("camod");
-
-            // Iterate through all the reciepts in the config file
-            String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-            StringTokenizer st = new StringTokenizer(recipients, ",");
-            String inRecipients[] = new String[st.countTokens()];
-            for (int i = 0; i < inRecipients.length; i++)
-            {
-                inRecipients[i] = st.nextToken();
-            }
-
-            String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-            String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-            // gather message keys and variable values to build the e-mail
-            // content with
-            String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-            Map<String, Object> values = new TreeMap<String, Object>();
-            values.put("type", "CarcinogenExposureName");
-            values.put("value", inNameData.getOtherName());
-            values.put("submitter", inAnimalModel.getSubmitter());
-            values.put("model", inAnimalModel.getModelDescriptor());
-            values.put("modelstate", inAnimalModel.getState());
-
-            // Send the email
-            try
-            {
-                MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception sending mail: ", e);
-                e.printStackTrace();
-            }
+            log.info("Sending Notification eMail - new Name added");
+            sendEmail(inAnimalModel, inNameData.getOtherName(), "CarcinogenExposureName");
 
             theEF.setName(null);
             theEF.setNameUnctrlVocab(inNameData.getOtherName());
         }
-        // anytime name is not other, set uncontrolled vocab to null (covers
-        // editing)
+        // anytime name is not other, set uncontrolled vocab to null (covers editing)
         else
         {
             log.info("Name is not other");
