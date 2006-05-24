@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.44 2006-05-23 18:16:38 georgeda Exp $
+ * $Id: NewDropdownUtil.java,v 1.45 2006-05-24 16:53:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2006/05/23 18:16:38  georgeda
+ * Removed hardcode of other into species dropdown
+ *
  * Revision 1.43  2006/05/19 16:41:54  pandyas
  * Defect #249 - add other to species on the Xenograft screen
  *
@@ -136,6 +139,11 @@ public class NewDropdownUtil
             theReturnList = getSpeciesList(inRequest, inFilter);
         }
         //modified for species from DB
+        else if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
+        {
+            theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
+        }
+        
         else if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
         {
             theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
@@ -661,6 +669,46 @@ public class NewDropdownUtil
         Collections.sort(theReturnList);
         return theReturnList;
     }
+    
+    /**
+     * Returns a list of all Staining Method Names
+     * 
+     * @throws Exception
+     */
+    private static List getStainingMethod(HttpServletRequest inRequest) throws Exception
+    {
+        log.info("Entering NewDropdownUtil.getStainingMethod");
+        
+        // Get values for dropdown lists for StainingMethod
+        StainingMethodManager stainingMethodManager = (StainingMethodManager) getContext(inRequest).getBean("stainingMethodManager");
+
+        List stainingList = null;
+
+        stainingList = stainingMethodManager.getAll();
+
+        List<String> stainingMethodList = new ArrayList<String>();
+        StainingMethod tmp;
+
+        if (stainingList != null)
+        {
+            for (int i = 0; i < stainingList.size(); i++)
+            {
+                tmp = (StainingMethod) stainingList.get(i);
+
+                if (tmp.getName() != null)
+                {
+                    // if the StainingMethod is not already in the List, add it
+                    // (only get unique names)
+                    if (!stainingMethodList.contains(tmp.getName()))
+                        stainingMethodList.add(tmp.getName());
+                }
+            }
+        }
+        Collections.sort(stainingMethodList);
+        log.info("Exiting NewDropdownUtil.getStainingMethod");        
+        return stainingMethodList;
+
+    }    
 
     /**
      * Returns a list of all Expression Level Descriptions
@@ -689,7 +737,7 @@ public class NewDropdownUtil
 
                 if (tmp.getExpressionLevel() != null)
                 {
-                    // if the speciesName is not already in the List, add it
+                    // if the ExpressionLevel is not already in the List, add it
                     // (only get unique names)
                     if (!expressionLevelList.contains(tmp.getExpressionLevel()))
                         expressionLevelList.add(tmp.getExpressionLevel());
