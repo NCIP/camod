@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/25 15:16:54  pandyas
+ * added Jax column
+ *
  * Revision 1.13  2006/05/22 17:38:09  pandyas
  * Added tumorResponse to view screen - before comment
  *
@@ -24,7 +27,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.14 2006-05-25 15:16:54 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.15 2006-05-25 15:26:50 pandyas Exp $
  */
 %>
 <tr>
@@ -140,7 +143,11 @@
 				<camod:highlight><c:out value="${p.authors}"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="15%">
-				<c:out value="${p.jaxJNumber}"/>&nbsp;
+				<c:if test="${not empty p.jaxJNumber}">
+					<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">
+					<c:out value="${p.jaxJNumber}"/>&nbsp;
+					</a>
+				</c:if>&nbsp;
 			</td>			
 			<td class="<c:out value="${tdClass}"/>" width="30%">
 				<camod:highlight><c:out value="${p.title}"/></camod:highlight>
