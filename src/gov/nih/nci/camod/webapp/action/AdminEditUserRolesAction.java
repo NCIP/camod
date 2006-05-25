@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AdminEditUserRolesAction.java,v 1.6 2006-05-15 15:42:49 georgeda Exp $
+ *  $Id: AdminEditUserRolesAction.java,v 1.7 2006-05-25 16:43:50 georgeda Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.6  2006/05/15 15:42:49  georgeda
+ *  Cleaned up contact info management
+ *
  *  Revision 1.5  2006/04/17 19:09:40  pandyas
  *  caMod 2.1 OM changes
  *
@@ -77,9 +80,10 @@ public class AdminEditUserRolesAction extends BaseAction
                 if (thePerson != null)
                 {
                     log.debug("Changing the roles for user: " + thePerson.getDisplayName());
-
-                    Set<Role> theRoles = new HashSet<Role>();
-
+                    
+                    // Clear old roles
+                    thePerson.getRoleCollection().clear();
+                    
                     if (theForm.isCoordinator() == true)
                     {
                         Role theQBERole = new Role();
@@ -88,7 +92,7 @@ public class AdminEditUserRolesAction extends BaseAction
 
                         if (theQBEList.size() > 0)
                         {
-                            theRoles.add((Role) theQBEList.get(0));
+                            thePerson.addRole((Role)theQBEList.get(0));
                         }
                     }
                     if (theForm.isEditor() == true)
@@ -99,7 +103,7 @@ public class AdminEditUserRolesAction extends BaseAction
 
                         if (theQBEList.size() > 0)
                         {
-                            theRoles.add((Role)theQBEList.get(0));
+                            thePerson.addRole((Role)theQBEList.get(0));
                         }
                     }
                     if (theForm.isScreener() == true)
@@ -110,11 +114,10 @@ public class AdminEditUserRolesAction extends BaseAction
 
                         if (theQBEList.size() > 0)
                         {
-                            theRoles.add((Role)theQBEList.get(0));
+                            thePerson.addRole((Role)theQBEList.get(0));
                         }
                     }
 
-                    thePerson.setRoleCollection(theRoles);
                     PersonManagerSingleton.instance().save(thePerson);
 
                     UserManagerSingleton.instance().updateCurrentUserRoles(inRequest);
