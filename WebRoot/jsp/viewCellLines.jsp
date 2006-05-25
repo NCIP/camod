@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.20 2006-05-25 16:03:40 pandyas Exp $
+ * $Id: viewCellLines.jsp,v 1.21 2006-05-25 16:12:27 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/05/25 16:03:40  pandyas
+ * updated hyperlink for jax number in publications with MTB and MGI links
+ *
  * Revision 1.19  2006/05/25 15:57:55  pandyas
  * updated hyperlink for jax number in publications with MTB and MGI links
  *
@@ -127,11 +130,11 @@
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
 							<c:out value="${pub.jaxJNumber}"/>&nbsp;
-								<c:if test="${not empty p.jaxJNumber}">												
-									(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
+								<c:if test="${not empty pub.jaxJNumber}">												
+									(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${pub.jaxJNumber}"/>">MGI</a>)
 								</c:if>
-								<c:if test="${not empty p.jaxJNumber}">
-									(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
+								<c:if test="${not empty pub.jaxJNumber}">
+									(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${pub.jaxJNumber}"/>">MTB</a>)
 								</c:if>							
 						</td>							
 						<td class="<c:out value="${tdClass}"/>" width="30%">
