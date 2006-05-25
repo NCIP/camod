@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.15 2006-05-25 15:57:33 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.16 2006-05-25 16:04:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/05/25 15:57:33  pandyas
+ * updated hyperlink for jax number in publications with MTB and MGI links
+ *
  * Revision 1.14  2006/05/25 15:45:11  pandyas
  * adding hyperlink for jax number in publications with MTB and MGI links
  *
@@ -74,13 +77,13 @@
 					<camod:highlight><c:out value="${p.authors}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">				
-					<c:out value="${p.jaxJNumber}"/>
-					<c:if test="${not empty p.jaxJNumber}">												
-						(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MGI</a>)
-					</c:if>
-					<c:if test="${not empty p.jaxJNumber}">
-						(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MTB</a>)
-					</c:if>											
+					<c:out value="${pub.jaxJNumber}"/>&nbsp;
+						<c:if test="${not empty p.jaxJNumber}">												
+							(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
+						</c:if>
+							<c:if test="${not empty p.jaxJNumber}">
+							(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
+						</c:if>											
 				</td>				
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<camod:highlight><c:out value="${p.title}" escapeXml="false" />&nbsp;</camod:highlight>
