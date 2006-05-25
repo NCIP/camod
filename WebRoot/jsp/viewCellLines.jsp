@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.18 2006-04-28 19:49:11 schroedn Exp $
+ * $Id: viewCellLines.jsp,v 1.19 2006-05-25 15:57:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/04/28 19:49:11  schroedn
+ * Defect #55
+ * Added Keyword Highlighting to this jsp
+ *
  *
  */
 
@@ -120,6 +124,12 @@
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
 							<c:out value="${pub.jaxJNumber}"/>&nbsp;
+								<c:if test="${not empty p.jaxJNumber}">												
+									(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MGI</a>)
+								</c:if>
+									<c:if test="${not empty p.jaxJNumber}">
+								(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MTB</a>)
+								</c:if>							
 						</td>							
 						<td class="<c:out value="${tdClass}"/>" width="30%">
 							<camod:highlight><c:out value="${pub.title}"/>&nbsp;</camod:highlight>

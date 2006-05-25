@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.14 2006-05-25 15:45:11 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.15 2006-05-25 15:57:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/25 15:45:11  pandyas
+ * adding hyperlink for jax number in publications with MTB and MGI links
+ *
  * Revision 1.13  2006/04/28 19:52:10  schroedn
  * Defect #55
  * Added Keyword Highlighting to this jsp
@@ -71,12 +74,12 @@
 					<camod:highlight><c:out value="${p.authors}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">				
-					<camod:highlight><c:out value="${p.jaxJNumber}"/></camod:highlight>
-					<c:if test="${not empty p.jaxJNumber}">
-						(<a href="#" onClick="myRef = window.open('http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MGI</a>)
+					<c:out value="${p.jaxJNumber}"/>
+					<c:if test="${not empty p.jaxJNumber}">												
+						(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MGI</a>)
 					</c:if>
 					<c:if test="${not empty p.jaxJNumber}">
-						(<a href="#" onClick="myRef = window.open('http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId==<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MTB</a>)
+						(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>&Submit=Submit','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">MTB</a>)
 					</c:if>											
 				</td>				
 				<td class="<c:out value="${tdClass}"/>" width="30%">
