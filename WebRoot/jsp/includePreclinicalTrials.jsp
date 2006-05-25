@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/05/22 17:38:09  pandyas
+ * Added tumorResponse to view screen - before comment
+ *
  * Revision 1.12  2006/04/28 19:36:19  schroedn
  * Defect #55
  * Added Keyword Highlighting to this jsp
@@ -21,7 +24,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.13 2006-05-22 17:38:09 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.14 2006-05-25 15:16:54 pandyas Exp $
  */
 %>
 <tr>
@@ -111,8 +114,9 @@
 		<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 		<tr>
 			<td class="greySubTitleLeft" width="10%">Publication Status</td>
-			<td class="greySubTitleLeft" width="15%">First Author</td>
-			<td class="greySubTitleLeft" width="30%">Title</td>
+			<td class="greySubTitleLeft" width="20%">First Author</td>
+				<td class="greySubTitleLeft" width="15%">JAX Number</td>			
+			<td class="greySubTitleLeft" width="25%">Title</td>
 			<td class="greySubTitleLeft" width="10%">Journal</td>
 			<td class="greySubTitleLeft" width="5%">Year</td>
 			<td class="greySubTitleLeft" width="10%">Volume</td>
@@ -135,6 +139,9 @@
 			<td class="<c:out value="${tdClass}"/>" width="15%">
 				<camod:highlight><c:out value="${p.authors}"/></camod:highlight>
 			</td>
+			<td class="<c:out value="${tdClass}"/>" width="15%">
+				<c:out value="${p.jaxJNumber}"/>&nbsp;
+			</td>			
 			<td class="<c:out value="${tdClass}"/>" width="30%">
 				<camod:highlight><c:out value="${p.title}"/></camod:highlight>
 			</td>
