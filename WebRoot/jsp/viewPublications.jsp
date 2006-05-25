@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.18 2006-05-25 17:34:04 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.19 2006-05-25 18:33:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/05/25 17:34:04  pandyas
+ * added break after jax number
+ *
  * Revision 1.17  2006/05/25 16:10:58  pandyas
  * updated hyperlink for jax number in publications with MTB and MGI links
  *
@@ -86,7 +89,7 @@
 					<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>
 						<c:if test="${not empty p.jaxJNumber}">												
 							(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
-						</c:if>
+						</c:if><br/>
 							<c:if test="${not empty p.jaxJNumber}">
 							(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
 						</c:if>											

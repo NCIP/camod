@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.22 2006-05-25 17:36:52 pandyas Exp $
+ * $Id: viewCellLines.jsp,v 1.23 2006-05-25 18:35:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/05/25 17:36:52  pandyas
+ * added break after jax number
+ *
  * Revision 1.21  2006/05/25 16:12:27  georgeda
  * Fixed publication link
  *
@@ -135,7 +138,7 @@
 							<c:out value="${pub.jaxJNumber}"/>&nbsp;<br/>
 								<c:if test="${not empty pub.jaxJNumber}">												
 									(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${pub.jaxJNumber}"/>">MGI</a>)
-								</c:if>
+								</c:if><br/>
 								<c:if test="${not empty pub.jaxJNumber}">
 									(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${pub.jaxJNumber}"/>">MTB</a>)
 								</c:if>							
