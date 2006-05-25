@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.21 2006-05-25 16:12:27 georgeda Exp $
+ * $Id: viewCellLines.jsp,v 1.22 2006-05-25 17:36:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/05/25 16:12:27  georgeda
+ * Fixed publication link
+ *
  * Revision 1.20  2006/05/25 16:03:40  pandyas
  * updated hyperlink for jax number in publications with MTB and MGI links
  *
@@ -129,7 +132,7 @@
 							<camod:highlight><c:out value="${pub.authors}"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
-							<c:out value="${pub.jaxJNumber}"/>&nbsp;
+							<c:out value="${pub.jaxJNumber}"/>&nbsp;<br/>
 								<c:if test="${not empty pub.jaxJNumber}">												
 									(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${pub.jaxJNumber}"/>">MGI</a>)
 								</c:if>

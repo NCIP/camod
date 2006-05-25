@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/05/25 16:09:20  pandyas
+ * updated hyperlink for jax number in publications with MTB and MGI links
+ *
  * Revision 1.18  2006/05/25 16:02:59  pandyas
  * updated hyperlink for jax number in publications with MTB and MGI links
  *
@@ -39,7 +42,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.19 2006-05-25 16:09:20 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.20 2006-05-25 17:37:36 pandyas Exp $
  */
 %>
 <tr>
@@ -155,7 +158,7 @@
 				<camod:highlight><c:out value="${p.authors}"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="15%">
-			<c:out value="${p.jaxJNumber}"/>&nbsp;
+			<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>
 				<c:if test="${not empty p.jaxJNumber}">												
 					(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
 				</c:if>
