@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.16 2006-05-25 16:04:17 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.17 2006-05-25 16:10:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/05/25 16:04:17  pandyas
+ * updated hyperlink for jax number in publications with MTB and MGI links
+ *
  * Revision 1.15  2006/05/25 15:57:33  pandyas
  * updated hyperlink for jax number in publications with MTB and MGI links
  *
@@ -77,7 +80,7 @@
 					<camod:highlight><c:out value="${p.authors}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">				
-					<c:out value="${pub.jaxJNumber}"/>&nbsp;
+					<c:out value="${p.jaxJNumber}"/>&nbsp;
 						<c:if test="${not empty p.jaxJNumber}">												
 							(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
 						</c:if>
