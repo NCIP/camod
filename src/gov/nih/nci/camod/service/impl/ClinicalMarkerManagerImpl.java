@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: ClinicalMarkerManagerImpl.java,v 1.6 2006-04-20 19:19:25 pandyas Exp $
+ * $Id: ClinicalMarkerManagerImpl.java,v 1.7 2006-05-25 19:12:20 schroedn Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/20 19:19:25  pandyas
+ * Added 'Other' to field and fixed save for other clinical marker
+ *
  * Revision 1.5  2006/01/18 14:24:23  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -19,6 +22,7 @@
 
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.ClinicalMarker;
 import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.service.ClinicalMarkerManager;
@@ -83,14 +87,15 @@ public class ClinicalMarkerManagerImpl extends BaseManager implements ClinicalMa
     {
         log.info("<ClinicalMarkerManagerImpl> Entering populateClinicalMarker");
 
-        if (inClinicalMarkerData.getOtherName() != null)
+        if (inClinicalMarkerData.getOtherName() != null )
         {
-
-            inClinicalMarker.setNameUnctrlVocab(inClinicalMarkerData.getOtherName());
+            inClinicalMarker.setName( Constants.Dropdowns.OTHER_OPTION );
+            inClinicalMarker.setNameUnctrlVocab(inClinicalMarkerData.getOtherName());            
         }
         else
         {
             inClinicalMarker.setName(inClinicalMarkerData.getName());
+            inClinicalMarker.setNameUnctrlVocab( null );
         }
 
         if (inClinicalMarkerData.getValue() != null && inClinicalMarkerData.getValue().length() > 0)
