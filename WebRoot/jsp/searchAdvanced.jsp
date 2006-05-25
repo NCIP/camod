@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.40 2006-05-19 17:12:11 guptaa Exp $
+ * $Id: searchAdvanced.jsp,v 1.41 2006-05-25 12:02:51 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2006/05/19 17:12:11  guptaa
+ * added advance search
+ *
  * Revision 1.39  2006/05/18 14:26:40  guptaa
  * fix style id
  *
@@ -265,7 +268,7 @@
                 <html:checkbox property="engineeredTransgene" onclick="checkFields()" />
                 <!-- NOTE: Needed to workaround struts bug -->
                 <input type="hidden" name="engineeredTransgene" value="false">
-			    <label for="box1">Engineered Transgene</label>			
+			    <label for="box1">Transgene</label>			
 			    </br>
                 <html:checkbox property="targetedModification" onclick="checkFields()" />
                 <input type="hidden" name="targetedModification" value="false">
@@ -420,11 +423,11 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Transient Interface</td>
+			<td class="formTitleBlue" height="10" colspan="3">Transient Interference</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">Transient Interface</td>
+			<td class="formLabel">Transient Interference</td>
 			<td class="formField">
 			    <html:checkbox property="searchTransientInterference" />
 			    <!-- NOTE: Needed to work around struts bug -->

@@ -57,9 +57,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>
-		  	    <a href="javascript:showMouseTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-				<IMG src="images\selectUP.gif" align=middle border=0>
-				</a>
+		  	    &nbsp;<a href="javascript:showMouseTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>
 			</td>
@@ -90,7 +88,7 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Comments:</label>
+		<td class="formLabel"><label for="field1">Comment:</label>
 		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
