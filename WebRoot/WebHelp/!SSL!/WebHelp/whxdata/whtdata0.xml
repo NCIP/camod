@@ -19,7 +19,7 @@
     <item name="Model Characteristics" url="Model_Characteristics.htm" />
   </book>
   <book name="Genetic Description" >
-    <item name="Engineered Transgene" url="Engineered_Transgene,htm.htm" />
+    <item name="Transgene" url="Transgene.htm" />
     <item name="Associated Expression" url="Associated_Expression.htm" />
     <item name="Genomic Segment" url="Genomic_Segment.htm" />
     <item name="Targeted Modification" url="Targeted_Modification.htm" />
@@ -36,6 +36,9 @@
     <item name="Radiation" url="Radiation.htm" />
     <item name="Surgery" url="Surgery.htm" />
     <item name="Viral Treatment" url="Viral_Treatment.htm" />
+  </book>
+  <book name="Transient Interference" >
+    <item name="Morpholino" url="Morpholino.htm" />
   </book>
   <book name="Publications" >
     <item name="Publications" url="Publications.htm" />
@@ -70,6 +73,11 @@
   <item name="Simple Search Mode" url="Simple_Search_Mode.htm" />
   <item name="Advanced Search Mode" url="Advanced_Search_Mode.htm" />
   <item name="caMOD Search Results" url="caMOD_Search_Results.htm" />
+  <book name="Saving and Customizing Search Queries" >
+    <item name="Saving a Search Query" url="Saving_a_Search_Query.htm" />
+    <item name="Search Query History" url="Search_Query_History.htm" />
+    <item name="Customizing Search Results" url="Customizing_Search_Results.htm" />
+  </book>
   <book name="Drug Screening Search" >
     <item name="Drug Screening" url="Drug_Screening.htm" />
     <item name="Drug Screening Search Results" url="Drug_Screening_Search_Results.htm" />

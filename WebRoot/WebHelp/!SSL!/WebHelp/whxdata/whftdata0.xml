@@ -19,12 +19,12 @@
 <topic name="Comments Assignment" url="Comments_Assignment.htm" />
 <topic name="Coordinating the Review Process" url="Coordinating_the_Review_Process.htm" />
 <topic name="Creating a New User Account" url="Creating_a_New_User_Account.htm" />
+<topic name="Customizing Search Results" url="Customizing_Search_Results.htm" />
 <topic name="Drug Screening" url="Drug_Screening.htm" />
 <topic name="Drug Screening Search Results" url="Drug_Screening_Search_Results.htm" />
 <topic name="Editing a Model" url="Editing_a_Model.htm" />
 <topic name="Editing Data" url="Editing_Data.htm" />
 <topic name="Editor Responsibilities" url="Editor_Responsibilities.htm" />
-<topic name="Engineered Transgene" url="Engineered_Transgene,htm.htm" />
 <topic name="Environmental Factor" url="Environmental_Factors.htm" />
 <topic name="Exiting caMOD" url="Exiting_caMOD.htm" />
 <topic name="Functions of the Coordinator" url="Functions_of_the_Coordinator.htm" />
@@ -44,6 +44,7 @@
 <topic name="Model Construct" url="Model_Construct.htm" />
 <topic name="Model Status Page" url="Model_Status_Page.htm" />
 <topic name="Models Assignment" url="Models_Assignment.htm" />
+<topic name="Morpholino" url="Morpholino.htm" />
 <topic name="Navigating a Data Tree" url="Navigating_a_Data_Tree.htm" />
 <topic name="Navigation in caMOD" url="Navigation_in_caMOD.htm" />
 <topic name="Nutritional Factor" url="Nutritional_Factor.htm" />
@@ -53,8 +54,10 @@
 <topic name="Radiation" url="Radiation.htm" />
 <topic name="Roles Assignment" url="Roles_Assignment.htm" />
 <topic name="Roles Management" url="Roles_Management.htm" />
+<topic name="Saving a Search Query" url="Saving_a_Search_Query.htm" />
 <topic name="Screener Responsibilities" url="Screener_Responsibilities.htm" />
 <topic name="Screening a Model" url="Screening_a_Model.htm" />
+<topic name="Search Query History" url="Search_Query_History.htm" />
 <topic name="Simple Search Mode" url="Simple_Search_Mode.htm" />
 <topic name="Spontaneous Mutation" url="Spontaneous_Mutation.htm" />
 <topic name="Structure of the Submission Process" url="Structure_of_the_Submission_Process.htm" />
@@ -63,6 +66,7 @@
 <topic name="Surgery" url="Surgery.htm" />
 <topic name="Targeted Modification" url="Targeted_Modification.htm" />
 <topic name="Therapy" url="Therapy.htm" />
+<topic name="Transgene" url="Transgene.htm" />
 <topic name="Transplant/Xenograft" url="Transplant_Xenograft.htm" />
 <topic name="User Management" url="User_Management.htm" />
 <topic name="User Settings" url="User_Settings.htm" />

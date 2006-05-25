@@ -16,7 +16,7 @@ if (navigator.appName !="Netscape")
 <!--
 p.whs1 { font-size:11pt; }
 ol.whs2 { list-style:decimal; }
-table.whs3 { width:100%; float:alignleft; border-left-style:Outset; border-left-width:1px; border-top-style:Outset; border-top-width:1px; border-right-style:Outset; border-right-width:1px; border-bottom-style:Outset; border-bottom-width:1px; border-left-color:#c0c0c0; border-right-color:#c0c0c0; border-top-color:#c0c0c0; border-bottom-color:#c0c0c0; }
+table.whs3 { width:100%; float:alignleft; border-left-style:Outset; border-left-width:1px; border-top-style:Outset; border-top-width:1px; border-right-style:Outset; border-right-width:1px; border-bottom-style:Outset; border-bottom-width:1px; border-left-color:#c0c0c0; border-right-color:#c0c0c0; border-top-color:#c0c0c0; border-bottom-color:#c0c0c0; x-cell-content-align:Center; }
 col.whs4 { width:29.406%; }
 col.whs5 { width:70.594%; }
 td.whs6 { width:29.406%; border-left-width:1px; border-left-style:Inset; border-left-color:#808080; border-top-color:#808080; border-top-style:Inset; border-top-width:1px; border-right-width:1px; border-right-style:Inset; border-right-color:#808080; border-bottom-color:#808080; border-bottom-style:Inset; border-bottom-width:1px; padding-right:10px; padding-left:10px; }
@@ -151,20 +151,20 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <col class="whs4">
 <col class="whs5">
 
-<tr>
+<tr valign=middle>
 <td width="29.406%" class="whs6">
 <p class="whs7">Targeted Modification Text Fields</td>
 <td width="70.594%" class="whs8">
 <p class="whs7">Description</td></tr>
 
-<tr>
+<tr valign=middle>
 <td colspan="1" rowspan="1" width="29.406%" class="whs6">
 <p class="whs9">*Targeted Gene/Locus</td>
 <td colspan="1" rowspan="1" width="70.594%" class="whs8">
 <p class="whs1">Define the gene or region in the genome that 
  are altered by the substitution of a DNA construct.</td></tr>
 
-<tr>
+<tr valign=middle>
 <td width="29.406%" class="whs6">
 <p class="whs9">*Type of Modification</td>
 <td width="70.594%" class="whs8">
@@ -195,7 +195,7 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  style="font-weight: normal;"> in the text field under the list.</span> 
  </td></tr>
 
-<tr>
+<tr valign=middle>
 <td colspan="1" rowspan="1" width="29.406%" class="whs6">
 <p class="whs17">Other Modification Type</td>
 <td colspan="1" rowspan="1" width="70.594%" class="whs8">
@@ -204,7 +204,7 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  after you select <span style="font-weight: bold;"><B>Other</B></span> in the 
  previous field.</td></tr>
 
-<tr>
+<tr valign=middle>
 <td colspan="1" rowspan="1" width="29.406%" class="whs6">
 <p class="whs17">Gene ID (Entrez)</td>
 <td colspan="1" rowspan="1" width="70.594%" class="whs8">
@@ -212,7 +212,7 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  style="font-weight: bold;"><B>Find Gene ID</B></span> button for a link to Entrez 
  where you can locate the ID.</td></tr>
 
-<tr>
+<tr valign=middle>
 <td colspan="1" rowspan="1" width="29.406%" class="whs6">
 <p class="whs17">Genetic Background</td>
 <td colspan="1" rowspan="1" width="70.594%" class="whs8">
@@ -233,17 +233,21 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  ES cells were inserted.</p></li>
 </ul></td></tr>
 
-<tr>
+<tr valign=middle>
 <td colspan="1" rowspan="1" width="29.406%" class="whs6">
-<p class="whs17">Conditional</p>
+<p class="whs17">Conditional</td>
+<td colspan="1" rowspan="1" width="70.594%" class="whs8">
+<p class="whs11">Select the <span 
+ style="font-weight: bold;"><B>Conditional</B></span> or <span style="font-weight: bold;"><B>Not 
+ Conditional</B></span> radio button. </td></tr>
+
+<tr valign=middle>
+<td colspan="1" rowspan="1" width="29.406%" class="whs6">
+<p class="whs17">&nbsp;</p>
 <p class="whs17">&nbsp;</p>
 <p class="whs17">Conditional Description</p>
 <p class="whs1">&nbsp;</td>
 <td colspan="1" rowspan="1" width="70.594%" class="whs8">
-<p class="whs11">Select the <span 
- style="font-weight: bold;"><B>Conditional</B></span> or <span style="font-weight: bold;"><B>Not 
- Conditional</B></span> radio button. </p>
-<p class="whs11">&nbsp;</p>
 <p class="whs11">Where appropriate, 
  enter the description of the strategy to generate a conditional modification.</p>
 <p class="whs11">&nbsp;</p>
@@ -253,7 +257,7 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  is often associated with a phenotype, is dependent (or conditional) on 
  the presence of the Cre-expressing construct. </td></tr>
 
-<tr>
+<tr valign=middle>
 <td colspan="1" rowspan="1" width="29.406%" class="whs6">
 <p class="whs17"><span style="font-weight: bold; font-size: 11pt;"><font size=3 style="font-size:11pt;"><B>MGI 
  Number</B></font></span></p>
@@ -268,7 +272,7 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  MGI#</B></span> to open the MGI website where you can learn more about the 
  MGI, including the MGI# for your model. </td></tr>
 
-<tr>
+<tr valign=middle>
 <td colspan="1" rowspan="1" width="29.406%" class="whs6">
 <p class="whs9">Comment</td>
 <td colspan="1" rowspan="1" width="70.594%" class="whs8">
@@ -328,7 +332,7 @@ if (window.writeIntopicBar)
 //-->
 </script>
 <form method="POST" action="http://www.helpcommunity.com/ehelpapi.asp?cmd=WebSave" name="ehelpform" target="_top" style="display:'none';">
-<input type="hidden" name="data" value="2A0B021300000047656E65746963204465736372697074696F6E0C022900000047656E65746963204465736372697074696F6E0A5461726765746564204D6F64696669636174696F6E0D02150000005461726765746564204D6F64696669636174696F6E11021300000047656E65746963204465736372697074696F6E1202150000005461726765746564204D6F64696669636174696F6E13020700000063614D4F44203215020B00000063614D4F445F322E68746D1703980100003C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C21444F43545950452053595354454D20226568656C706F70742E647464223E0D0A3C46494C452D4F5054494F4E532046494C452D56455253494F4E3D2233222047454E455241544F523D22526F626F48656C702048544D4C2031332031332E31302E383031222046494C452D4B45593D2236353335333433305F363030365F343332395F313337305F353533313533313830343130223E0D0A3C2F46494C452D4F5054494F4E533E0D0A3C4548454C502D4F5054494F4E5320464F524D41542D56455253494F4E3D22312E30223E0D0A203C4F5054494F4E532046495253542D504147453D224E4F542D5345542220454E41424C45443D225945532220454D4245444445443D2259455322204D41494E2D57494E444F572D4F4E4C593D224E4F2220434F4D4D554E4954592D4E4F544946593D224E4F223E0D0A203C2F4F5054494F4E533E0D0A203C425554544F4E2D4C4142454C3E5765625365617263683C2F425554544F4E2D4C4142454C3E0D0A3C2F4548454C502D4F5054494F4E533E18010400000002000000702A">
+<input type="hidden" name="data" value="2A0B021300000047656E65746963204465736372697074696F6E0C022900000047656E65746963204465736372697074696F6E0A5461726765746564204D6F64696669636174696F6E0D02150000005461726765746564204D6F64696669636174696F6E11021300000047656E65746963204465736372697074696F6E1202150000005461726765746564204D6F64696669636174696F6E13020900000063614D4F4420322E3115020B00000063614D4F445F322E68746D1703980100003C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C21444F43545950452053595354454D20226568656C706F70742E647464223E0D0A3C46494C452D4F5054494F4E532046494C452D56455253494F4E3D2233222047454E455241544F523D22526F626F48656C702048544D4C2031332031332E31302E383031222046494C452D4B45593D2236353335333433305F363030365F343332395F313337305F353533313533313830343130223E0D0A3C2F46494C452D4F5054494F4E533E0D0A3C4548454C502D4F5054494F4E5320464F524D41542D56455253494F4E3D22312E30223E0D0A203C4F5054494F4E532046495253542D504147453D224E4F542D5345542220454E41424C45443D225945532220454D4245444445443D2259455322204D41494E2D57494E444F572D4F4E4C593D224E4F2220434F4D4D554E4954592D4E4F544946593D224E4F223E0D0A203C2F4F5054494F4E533E0D0A203C425554544F4E2D4C4142454C3E5765625365617263683C2F425554544F4E2D4C4142454C3E0D0A3C2F4548454C502D4F5054494F4E533E18010400000002000000702A">
 </form>
 </body>
 </html>

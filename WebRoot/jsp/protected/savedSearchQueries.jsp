@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: savedSearchQueries.jsp,v 1.2 2006-05-10 14:23:35 schroedn Exp $
+ * $Id: savedSearchQueries.jsp,v 1.3 2006-05-25 15:19:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/10 14:23:35  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.1  2006/04/28 19:41:32  schroedn
  * Defect # 261, 238
  * Pages to edit user options, saved queries or query history
@@ -50,7 +53,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="6">Saved Queries</td>				
+			<td class="formTitleBlue" height="20" colspan="6">Saved Queries&nbsp;<camod:cshelp mapId="view_saved_queries_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 		</tr>
 
 		<tr>

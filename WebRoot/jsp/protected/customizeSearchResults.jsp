@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: customizeSearchResults.jsp,v 1.3 2006-05-10 17:10:26 schroedn Exp $
+ * $Id: customizeSearchResults.jsp,v 1.4 2006-05-25 15:19:17 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/10 17:10:26  schroedn
+ * Do not allow multiple selections from left to right
+ *
  * Revision 1.2  2006/05/10 14:23:35  schroedn
  * New Features - Changes from code review
  *
@@ -207,7 +210,7 @@
 			<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left">
 				<tr>
 					<td class="formTitleBlue" height="20" colspan="4">
-						Customize Search Results
+						Customize Search Results&nbsp;<camod:cshelp mapId="customize_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 					</td>
 				</tr>
 				

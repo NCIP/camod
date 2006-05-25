@@ -28,7 +28,7 @@
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="4">Query History ( Last 20 searches )</td>				
+			<td class="formTitleBlue" height="20" colspan="4">Query History ( Last 20 searches ) &nbsp;<camod:cshelp mapId="search_query_history_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 		</tr>
 
 		<tr>

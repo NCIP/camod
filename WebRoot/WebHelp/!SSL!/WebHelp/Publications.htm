@@ -23,8 +23,11 @@ td.whs6 { width:34.752%; border-left-width:1px; border-left-style:Inset; border-
 p.whs7 { font-weight:bold; font-style:italic; font-size:11pt; }
 td.whs8 { width:65.248%; border-left-width:1px; border-left-style:Inset; border-left-color:#808080; border-top-color:#808080; border-top-style:Inset; border-top-width:1px; border-right-width:1px; border-right-style:Inset; border-right-color:#808080; border-bottom-color:#808080; border-bottom-style:Inset; border-bottom-width:1px; padding-right:10px; padding-left:10px; }
 p.whs9 { font-weight:bold; font-size:11pt; }
-ul.whs10 { list-style:disc; }
-p.whs11 { font-style:normal; font-size:11pt; }
+p.whs10 { font-size:11pt; font-weight:bold; }
+ul.whs11 { list-style:disc; }
+p.whs12 { font-style:normal; font-size:11pt; }
+p.whs13 { font-weight:bold; }
+img_whs14 { border:none; width:79px; height:33px; float:none; border-style:none; }
 -->
 </style><script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
 <!--
@@ -115,8 +118,8 @@ else
 	
 	<li style="/*begin!kadov{{*/ font-size: 11pt; /*}}end!kadov*/ "
 		class=kadov-p><p class="whs1">Enter or select the appropriate 
- information about your animal model in the text entry fields. Items with 
- an asterisk are required fields.</p></li>
+ information about your publications related to your animal model in the 
+ text entry fields. Items with an asterisk are required fields.</p></li>
 </ol>
 
 <p class="whs1">&nbsp;</p>
@@ -142,10 +145,18 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 <p class="whs1">Primary author for the publication</td></tr>
 
 <tr>
+<td colspan="1" rowspan="1" width="34.752%" class="whs6">
+<p class="whs9">JAX Number</td>
+<td colspan="1" rowspan="1" width="65.248%" class="whs8">
+<p>&nbsp;</td></tr>
+
+<tr>
 <td width="34.752%" class="whs6">
 <p class="whs9">*Publication Status</td>
-<td width="65.248%" class="whs8"><span style="font-size: 11pt;"><font size=3 style="font-size:11pt;">Select Published or Unpublished. 
- Unpublished can include work that is submitted or in preparation.</font></span></td></tr>
+<td width="65.248%" class="whs8">
+<p class="whs1">Select <span style="font-weight: bold;"><B>Published</B></span> 
+ or <span style="font-weight: bold;"><B>Unpublished</B></span>. Unpublished can 
+ include work that is submitted or in preparation.</td></tr>
 
 <tr>
 <td width="34.752%" class="whs6">
@@ -171,8 +182,19 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
  on this form.</td></tr>
 
 <tr>
-<td width="34.752%" class="whs6">
-<ul type="disc" class="whs10">
+<td colspan="1" rowspan="1" width="34.752%" class="whs6">
+<p class="whs10">J Number</td>
+<td colspan="1" rowspan="1" width="65.248%" class="whs8">
+<p class="whs1">If the model is available from the Jackson 
+ Laboratory, enter the stock number of the model in the appropriate text 
+ field. &nbsp;Click 
+ the <span style="font-weight: bold;"><B>Find J#</B></span> button to open the 
+ MGI Reference Query form where you can enter the identifying information 
+ to find the J stock number.</td></tr>
+
+<tr>
+<td colspan="1" rowspan="1" width="34.752%" class="whs6">
+<ul type="disc" class="whs11">
 	
 	<li style="margin-left: -20px;"
 		class=kadov-p><p class="whs9">**Title 
@@ -196,15 +218,25 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 		class=kadov-p><p class="whs9">End 
  Page</p></li>
 </ul></td>
-<td width="65.248%" class="whs8">
-<p class="whs1">These fields are populated automatically when 
- a publication is identified with the PubMed ID and the <span style="font-weight: bold;"><B>Fill 
- In Fields</B></span> button is clicked. <span style="font-style: italic;"><I>See 
- previous row in this table.</I></span></p>
+<td colspan="1" rowspan="1" width="65.248%" class="whs8">
+<p class="whs1"><span style="font-size: 11pt;"><font size=3 style="font-size:11pt;">These fields 
+ are populated automatically when a publication is identified with the 
+ PubMed ID and the <span style="font-weight: bold;"><B>Fill In Fields</B></span> 
+ button is clicked. <span style="font-style: italic;"><I>See previous row 
+ in this table.</I></span></font></span></p>
 <p class="whs1">&nbsp;</p>
-<p class="whs11">&nbsp;If 
+<p class="whs12">&nbsp;If 
  you cannot or do not locate the publication on PubMed, enter this information 
  manually.</td></tr>
+
+<tr>
+<td width="34.752%" class="whs6">
+<p class="whs13">Abstract in PubMed</td>
+<td width="65.248%" class="whs8">
+<p class="whs12">This field displays on 
+ the Publications form only after you have submitted a model with Publications 
+ information. Click the PubMed icon (<img src="caMODimages/pubmed.bmp" x-maintain-ratio="TRUE" width="79px" height="33px" border="0" class="img_whs14">) to look up the abstract 
+ in PubMed.</td></tr>
 <script language='JavaScript'><!--
 if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) document.write("</table></table><table>");
 //--></script>
@@ -221,8 +253,10 @@ if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) 
 
 <p class="whs1">&nbsp;</p>
 
-<p class="whs1">**Either the PMID or Title of Publication (not 
- both) is a required field.</p>
+<p class="whs1">**<span style="font-style: italic;"><I>Either</I></span> 
+ the <span style="font-weight: bold;"><B>PMID</B></span> or <span style="font-weight: bold;"><B>Title 
+ of Publication</B></span> (<span style="font-style: italic;"><I>not both</I></span>) 
+ is a required field.</p>
 
 <p class="whs1">&nbsp;</p>
 
@@ -251,7 +285,7 @@ if (window.writeIntopicBar)
 //-->
 </script>
 <form method="POST" action="http://www.helpcommunity.com/ehelpapi.asp?cmd=WebSave" name="ehelpform" target="_top" style="display:'none';">
-<input type="hidden" name="data" value="2A0C020C0000005075626C69636174696F6E730D020C0000005075626C69636174696F6E7311020C0000005075626C69636174696F6E7312020C0000005075626C69636174696F6E7313020700000063614D4F44203215020B00000063614D4F445F322E68746D1703980100003C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C21444F43545950452053595354454D20226568656C706F70742E647464223E0D0A3C46494C452D4F5054494F4E532046494C452D56455253494F4E3D2233222047454E455241544F523D22526F626F48656C702048544D4C2031332031332E31302E383031222046494C452D4B45593D2236353335333433305F363030365F343332395F313337305F353533313533313830343130223E0D0A3C2F46494C452D4F5054494F4E533E0D0A3C4548454C502D4F5054494F4E5320464F524D41542D56455253494F4E3D22312E30223E0D0A203C4F5054494F4E532046495253542D504147453D224E4F542D5345542220454E41424C45443D225945532220454D4245444445443D2259455322204D41494E2D57494E444F572D4F4E4C593D224E4F2220434F4D4D554E4954592D4E4F544946593D224E4F223E0D0A203C2F4F5054494F4E533E0D0A203C425554544F4E2D4C4142454C3E5765625365617263683C2F425554544F4E2D4C4142454C3E0D0A3C2F4548454C502D4F5054494F4E533E18010400000002000000702A">
+<input type="hidden" name="data" value="2A0C020C0000005075626C69636174696F6E730D020C0000005075626C69636174696F6E7311020C0000005075626C69636174696F6E7312020C0000005075626C69636174696F6E7313020900000063614D4F4420322E3115020B00000063614D4F445F322E68746D1703980100003C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C21444F43545950452053595354454D20226568656C706F70742E647464223E0D0A3C46494C452D4F5054494F4E532046494C452D56455253494F4E3D2233222047454E455241544F523D22526F626F48656C702048544D4C2031332031332E31302E383031222046494C452D4B45593D2236353335333433305F363030365F343332395F313337305F353533313533313830343130223E0D0A3C2F46494C452D4F5054494F4E533E0D0A3C4548454C502D4F5054494F4E5320464F524D41542D56455253494F4E3D22312E30223E0D0A203C4F5054494F4E532046495253542D504147453D224E4F542D5345542220454E41424C45443D225945532220454D4245444445443D2259455322204D41494E2D57494E444F572D4F4E4C593D224E4F2220434F4D4D554E4954592D4E4F544946593D224E4F223E0D0A203C2F4F5054494F4E533E0D0A203C425554544F4E2D4C4142454C3E5765625365617263683C2F425554544F4E2D4C4142454C3E0D0A3C2F4548454C502D4F5054494F4E533E18010400000002000000702A">
 </form>
 </body>
 </html>
