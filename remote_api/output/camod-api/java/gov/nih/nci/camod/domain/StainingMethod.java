@@ -11,7 +11,7 @@ import java.util.*;
  */
  
   /**
-
+   * The method used for staining an image
    */
 
 public  class StainingMethod 

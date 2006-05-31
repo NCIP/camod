@@ -8,7 +8,8 @@ import gov.nih.nci.camod.domain.*;
  */
 
   /**
-
+   * Extra information about a cancer model supplied by verified users viewing the model. 
+   * 
    */
 
 public class CommentsImpl extends Comments 

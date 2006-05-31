@@ -38,7 +38,7 @@
         	name="species"
         	column="species_id"
         	class="Species"
-        	cascade="all"
+        	cascade="save-update"
         	unique="true"/>
         
         <!-- regulatoryElementCollection (one-to-many unidirectional) -->

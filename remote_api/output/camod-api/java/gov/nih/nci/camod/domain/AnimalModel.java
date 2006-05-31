@@ -564,6 +564,49 @@ public  class AnimalModel
 	   
 	   
 	      
+			private java.util.Collection morpholinoCollection = new java.util.HashSet();
+			public java.util.Collection getMorpholinoCollection(){
+			try{
+			   if(morpholinoCollection.size() == 0) {}
+		           } catch(Exception e) {			     
+			      ApplicationService applicationService = ApplicationServiceProvider.getApplicationService();
+			      try {
+			      
+			      
+			         
+				 	gov.nih.nci.camod.domain.AnimalModel thisIdSet = new gov.nih.nci.camod.domain.AnimalModel();
+			         	thisIdSet.setId(this.getId());
+			         	java.util.Collection resultList = applicationService.search("gov.nih.nci.camod.domain.Morpholino", thisIdSet);				 
+				 	morpholinoCollection = resultList;  
+				 	return resultList;
+				 
+			      
+			      }catch(Exception ex) 
+			      {
+			      	System.out.println("AnimalModel:getMorpholinoCollection throws exception ... ...");
+			   		ex.printStackTrace(); 
+			      }
+			   }	
+	              return morpholinoCollection;
+	          }
+			   
+			   
+			   
+			   
+			   
+	      
+	               
+	   
+	   	public void setMorpholinoCollection(java.util.Collection morpholinoCollection){
+	   		this.morpholinoCollection = morpholinoCollection;
+	        }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
 			private java.util.Collection imageCollection = new java.util.HashSet();
 			public java.util.Collection getImageCollection(){
 			try{

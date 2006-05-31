@@ -8,7 +8,9 @@ import gov.nih.nci.camod.domain.*;
  */
 
   /**
-
+   * Treatment or procedure that the animal model was exposed to in order to initiate or support the development 
+   * of neoplastic lesions. 
+   * 
    */
 
 public class CarcinogenExposureImpl extends CarcinogenExposure 

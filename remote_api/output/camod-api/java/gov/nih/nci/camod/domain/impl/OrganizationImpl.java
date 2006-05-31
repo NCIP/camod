@@ -8,7 +8,7 @@ import gov.nih.nci.camod.domain.*;
  */
 
   /**
-
+   * Organizational unit like a laboratory, institute or consortium.
    */
 
 public class OrganizationImpl extends Organization 

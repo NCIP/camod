@@ -8,7 +8,7 @@ import gov.nih.nci.camod.domain.*;
  */
 
   /**
-
+   * Details the specific place in the application where a comment is made 
    */
 
 public class ModelSectionImpl extends ModelSection 

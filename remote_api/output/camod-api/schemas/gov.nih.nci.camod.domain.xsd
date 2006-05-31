@@ -169,8 +169,8 @@
     <xs:complexContent>
       <xs:extension base="EngineeredGene">
         <xs:sequence>
+          <xs:element name="geneticAlteration" type="GeneticAlteration" minOccurs="0" maxOccurs="1" />
           <xs:element name="environmentalFactor" type="EnvironmentalFactor" minOccurs="0" maxOccurs="1" />
-          <xs:element name="geneticAlterationCollection" type="GeneticAlteration" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="geneId" type="xs:string" />
         <xs:attribute name="description" type="xs:string" />
@@ -307,6 +307,7 @@
           <xs:element name="phenotype" type="Phenotype" minOccurs="0" maxOccurs="1" />
           <xs:element name="animalAvailabilityCollection" type="AnimalAvailability" minOccurs="0" maxOccurs="unbounded" />
           <xs:element name="histopathologyCollection" type="Histopathology" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="morpholinoCollection" type="Morpholino" minOccurs="0" maxOccurs="unbounded" />
           <xs:element name="imageCollection" type="Image" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="url" type="xs:string" />
@@ -473,8 +474,8 @@
   <xs:element name="SpontaneousMutation" type="SpontaneousMutation" />
   <xs:complexType name="SpontaneousMutation">
     <xs:sequence>
+      <xs:element name="geneticAlteration" type="GeneticAlteration" minOccurs="0" maxOccurs="1" />
       <xs:element name="mutationIdentifier" type="MutationIdentifier" minOccurs="0" maxOccurs="1" />
-      <xs:element name="geneticAlterationCollection" type="GeneticAlteration" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
     <xs:attribute name="id" type="xs:long" />
     <xs:attribute name="name" type="xs:string" />
@@ -640,6 +641,22 @@
       <xs:element name="treatment" type="Treatment" minOccurs="0" maxOccurs="1" />
     </xs:sequence>
     <xs:attribute name="id" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Morpholino" type="Morpholino" />
+  <xs:complexType name="Morpholino">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="type" type="xs:string" />
+    <xs:attribute name="source" type="xs:string" />
+    <xs:attribute name="sourceUnctrVocab" type="xs:string" />
+    <xs:attribute name="sequenceDirection" type="xs:string" />
+    <xs:attribute name="targetedRegion" type="xs:string" />
+    <xs:attribute name="concentration" type="xs:string" />
+    <xs:attribute name="concentrationUnit" type="xs:string" />
+    <xs:attribute name="deliveryMethod" type="xs:string" />
+    <xs:attribute name="deliveryMethodUnctrlVocab" type="xs:string" />
+    <xs:attribute name="visualLigand" type="xs:string" />
+    <xs:attribute name="visualLigandUnctrlVocab" type="xs:string" />
   </xs:complexType>
 </xs:schema>
 

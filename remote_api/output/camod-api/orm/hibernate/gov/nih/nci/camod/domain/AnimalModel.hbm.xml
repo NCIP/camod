@@ -46,8 +46,7 @@
         <set name="spontaneousMutationCollection"
         	cascade="all-delete-orphan"
 		sort="natural">        	        	
-        	<key column="abs_cancer_model_id"
-        	not-null="true"/>
+        	<key column="abs_cancer_model_id"/>
         	<one-to-many class="SpontaneousMutation"/>
         </set>         
         
@@ -102,8 +101,7 @@
         <set name="histopathologyCollection"
         	cascade="all-delete-orphan"
 		sort="natural">        	
-        	<key column="abs_cancer_model_id"
-        	not-null="true"/>
+        	<key column="abs_cancer_model_id"/>
         	<one-to-many class="Histopathology"/>
         </set>
              
@@ -125,6 +123,15 @@
         	not-null="true"/>
         	<one-to-many class="CarcinogenExposure"/>
         </set>
+        
+         <!-- morpholinoCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="morpholinoCollection"
+        cascade="all-delete-orphan">        	        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="Morpholino"/>
+        </set>        
         
         <!-- logCollection (one-to-many bidirectional) -->
         <set name="logCollection"

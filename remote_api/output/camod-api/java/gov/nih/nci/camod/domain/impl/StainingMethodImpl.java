@@ -8,7 +8,7 @@ import gov.nih.nci.camod.domain.*;
  */
 
   /**
-
+   * The method used for staining an image
    */
 
 public class StainingMethodImpl extends StainingMethod 

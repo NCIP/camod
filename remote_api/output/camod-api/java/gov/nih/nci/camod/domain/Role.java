@@ -11,7 +11,7 @@ import java.util.*;
  */
  
   /**
-
+   * The role of a party in the application.  Used to track user authorization.
    */
 
 public  class Role 

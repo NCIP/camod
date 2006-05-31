@@ -39,15 +39,13 @@
         	column="comments" 
         	type="string"/>	
         	
-        <!-- geneticAlterationCollection (one-to-many unidirectional without 
-        join table) -->
-        <set name="geneticAlterationCollection"
-	      cascade="all-delete-orphan"
-		sort="natural">
-            <key column="genetic_alteration_id"
-            not-null="true"/>
-            <one-to-many class="SpontaneousMutation"/>
-        </set>        
+        <!-- geneticAlteration: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
+        <many-to-one name="geneticAlteration"
+        	class="GeneticAlteration"
+        	column="genetic_alteration_id"
+        	cascade="all"
+        	unique="true"/>         
         
         <!-- mutationIdentifier (many-to-one unidirectional) -->
         <many-to-one

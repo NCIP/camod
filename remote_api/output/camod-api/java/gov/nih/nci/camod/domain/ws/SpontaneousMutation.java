@@ -62,6 +62,28 @@ public  class SpontaneousMutation
 	   
 	   
 	      
+			
+			
+			private gov.nih.nci.camod.domain.ws.GeneticAlteration geneticAlteration;
+			public gov.nih.nci.camod.domain.ws.GeneticAlteration getGeneticAlteration(){
+			  return geneticAlteration;			
+                        }
+                        
+	      
+	               
+	   
+	   
+	   
+	   public void setGeneticAlteration(gov.nih.nci.camod.domain.ws.GeneticAlteration geneticAlteration){
+		this.geneticAlteration = geneticAlteration;
+	   }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
 	   
 	
 	   
@@ -85,27 +107,6 @@ public  class SpontaneousMutation
 	   public void setMutationIdentifier(gov.nih.nci.camod.domain.ws.MutationIdentifier mutationIdentifier){
 		this.mutationIdentifier = mutationIdentifier;
 	   }	
-	   
-	   
-	
-	   
-	   
-	   
-	      
-			private java.util.Collection geneticAlterationCollection = new java.util.HashSet();
-			public java.util.Collection getGeneticAlterationCollection(){
-	              return geneticAlterationCollection;
-	          }
-			   
-			   
-			   
-			   			   
-	      
-	               
-	   
-	   	public void setGeneticAlterationCollection(java.util.Collection geneticAlterationCollection){
-	   		this.geneticAlterationCollection = geneticAlterationCollection;
-	        }	
 	   
 	   
 	

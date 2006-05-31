@@ -104,7 +104,7 @@
         <many-to-one name="organ"
         	class="Organ"
         	column="organ_id"
-        	cascade="all"/>
+        	cascade="save-update"/>
         	
 	</subclass>
 </hibernate-mapping>

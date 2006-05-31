@@ -8,7 +8,7 @@ import gov.nih.nci.camod.domain.*;
  */
 
   /**
-
+   * Contact information for a party of interest in the application.
    */
 
 public class ContactInfoImpl extends ContactInfo 

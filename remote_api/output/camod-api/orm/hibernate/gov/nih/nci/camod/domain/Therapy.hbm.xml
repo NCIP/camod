@@ -57,8 +57,8 @@
         <!-- Agent (many-to-one) -->
         <many-to-one name="agent"
         	class="Agent"
-        	column="agent_id"/> 
- 	       		
+        	column="agent_id"
+        	cascade="save-update"/> 
         	
         <!-- Treatment: this is really a one-to-one relationship with unique=true -->
         <!-- (one-to-one unidirectional) -->

@@ -11,7 +11,9 @@ import java.util.*;
  */
  
   /**
-
+   * A Person or group of persons (Organization) having a designated relationship (PartyRole) to parts 
+   * of the MMHCC data with explicit access permissions. 
+   * 
    */
 
 public  class Party 

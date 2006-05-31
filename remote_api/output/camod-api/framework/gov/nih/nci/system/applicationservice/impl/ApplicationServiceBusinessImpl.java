@@ -1081,6 +1081,9 @@ public class ApplicationServiceBusinessImpl
 }
 
 // $Log: not supported by cvs2svn $
+// Revision 1.1  2006/04/18 20:13:08  piparom
+// added remote_api folder
+//
 // Revision 1.4  2006/02/06 21:18:42  modik
 // Modified Code to
 // 1. Read the client side CORESystem.Properties File

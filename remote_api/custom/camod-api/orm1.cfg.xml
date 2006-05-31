@@ -96,6 +96,7 @@
         <mapping resource="gov/nih/nci/camod/domain/ModificationType.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/CarcinogenExposure.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Agent.hbm.xml"/> 
-        <mapping resource="gov/nih/nci/camod/domain/StainingMethod.hbm.xml"/>         
+        <mapping resource="gov/nih/nci/camod/domain/StainingMethod.hbm.xml"/>  
+	  <mapping resource="gov/nih/nci/camod/domain/Morpholino.hbm.xml"/>     
     </session-factory>
 </hibernate-configuration>

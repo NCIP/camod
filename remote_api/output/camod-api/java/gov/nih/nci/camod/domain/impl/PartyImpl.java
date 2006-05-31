@@ -8,7 +8,9 @@ import gov.nih.nci.camod.domain.*;
  */
 
   /**
-
+   * A Person or group of persons (Organization) having a designated relationship (PartyRole) to parts 
+   * of the MMHCC data with explicit access permissions. 
+   * 
    */
 
 public class PartyImpl extends Party 

@@ -301,6 +301,27 @@ public  class AnimalModel
 	   
 	   
 	      
+			private java.util.Collection morpholinoCollection = new java.util.HashSet();
+			public java.util.Collection getMorpholinoCollection(){
+	              return morpholinoCollection;
+	          }
+			   
+			   
+			   
+			   			   
+	      
+	               
+	   
+	   	public void setMorpholinoCollection(java.util.Collection morpholinoCollection){
+	   		this.morpholinoCollection = morpholinoCollection;
+	        }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
 			private java.util.Collection imageCollection = new java.util.HashSet();
 			public java.util.Collection getImageCollection(){
 	              return imageCollection;

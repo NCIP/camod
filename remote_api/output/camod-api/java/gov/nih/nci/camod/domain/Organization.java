@@ -11,7 +11,7 @@ import java.util.*;
  */
  
   /**
-
+   * Organizational unit like a laboratory, institute or consortium.
    */
 
 public  class Organization 

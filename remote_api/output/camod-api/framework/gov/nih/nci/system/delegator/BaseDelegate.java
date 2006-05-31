@@ -110,6 +110,9 @@ public class BaseDelegate implements InterfaceProxy
 }
 
 // $Log: not supported by cvs2svn $
+// Revision 1.1  2006/04/18 20:13:09  piparom
+// added remote_api folder
+//
 // Revision 1.11  2005/07/15 16:27:58  muhsins
 // logging information added
 //

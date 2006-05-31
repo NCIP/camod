@@ -64,6 +64,44 @@ public  class SpontaneousMutation
 	   
 	   
 	      
+			
+			
+			private gov.nih.nci.camod.domain.GeneticAlteration geneticAlteration;
+			public gov.nih.nci.camod.domain.GeneticAlteration getGeneticAlteration(){
+			
+              ApplicationService applicationService = ApplicationServiceProvider.getApplicationService();
+			  gov.nih.nci.camod.domain.SpontaneousMutation thisIdSet = new gov.nih.nci.camod.domain.SpontaneousMutation();
+			  thisIdSet.setId(this.getId());
+			  try {
+			  java.util.List resultList = applicationService.search("gov.nih.nci.camod.domain.GeneticAlteration", thisIdSet);				 
+			 
+			  if (resultList!=null && resultList.size()>0) {
+			     geneticAlteration = (gov.nih.nci.camod.domain.GeneticAlteration)resultList.get(0);
+			     }
+			  } catch(Exception ex) 
+			  { 
+			      	System.out.println("SpontaneousMutation:getGeneticAlteration throws exception ... ...");
+			   		ex.printStackTrace(); 
+			  }
+			  return geneticAlteration;			
+			 		
+              }
+                        
+	      
+	               
+	   
+	   
+	   
+	   public void setGeneticAlteration(gov.nih.nci.camod.domain.GeneticAlteration geneticAlteration){
+		this.geneticAlteration = geneticAlteration;
+	   }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
 	   
 	
 	   
@@ -107,49 +145,6 @@ public  class SpontaneousMutation
 	   public void setMutationIdentifier(gov.nih.nci.camod.domain.MutationIdentifier mutationIdentifier){
 		this.mutationIdentifier = mutationIdentifier;
 	   }	
-	   
-	   
-	
-	   
-	   
-	   
-	      
-			private java.util.Collection geneticAlterationCollection = new java.util.HashSet();
-			public java.util.Collection getGeneticAlterationCollection(){
-			try{
-			   if(geneticAlterationCollection.size() == 0) {}
-		           } catch(Exception e) {			     
-			      ApplicationService applicationService = ApplicationServiceProvider.getApplicationService();
-			      try {
-			      
-			      
-			         
-				 	gov.nih.nci.camod.domain.SpontaneousMutation thisIdSet = new gov.nih.nci.camod.domain.SpontaneousMutation();
-			         	thisIdSet.setId(this.getId());
-			         	java.util.Collection resultList = applicationService.search("gov.nih.nci.camod.domain.GeneticAlteration", thisIdSet);				 
-				 	geneticAlterationCollection = resultList;  
-				 	return resultList;
-				 
-			      
-			      }catch(Exception ex) 
-			      {
-			      	System.out.println("SpontaneousMutation:getGeneticAlterationCollection throws exception ... ...");
-			   		ex.printStackTrace(); 
-			      }
-			   }	
-	              return geneticAlterationCollection;
-	          }
-			   
-			   
-			   
-			   
-			   
-	      
-	               
-	   
-	   	public void setGeneticAlterationCollection(java.util.Collection geneticAlterationCollection){
-	   		this.geneticAlterationCollection = geneticAlterationCollection;
-	        }	
 	   
 	   
 	

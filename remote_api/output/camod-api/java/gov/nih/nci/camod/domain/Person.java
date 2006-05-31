@@ -11,7 +11,9 @@ import java.util.*;
  */
  
   /**
-
+   * Persons of interest to the application, either through being a submitter of cancer models, the principal 
+   * investigator for a cancer model or someone who administers the application. 
+   * 
    */
 
 public  class Person 

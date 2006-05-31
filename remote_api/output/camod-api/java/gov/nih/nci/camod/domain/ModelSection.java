@@ -11,7 +11,7 @@ import java.util.*;
  */
  
   /**
-
+   * Details the specific place in the application where a comment is made 
    */
 
 public  class ModelSection 

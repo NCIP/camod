@@ -11,7 +11,7 @@ import java.util.*;
  */
  
   /**
-
+   * Contact information for a party of interest in the application.
    */
 
 public  class ContactInfo 

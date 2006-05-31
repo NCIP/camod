@@ -1,4 +1,4 @@
-Exporting package to 'C:\work\projects\cacoretoolkit\models\xmi\caMOD.xmi'
+Exporting package to 'C:\work\projects\camod_dev\remote_api\models\xmi\caMOD.xmi'
 Retrieving data for export: packages
 Retrieving data for export: diagram elements
 Retrieving data for export: links
@@ -75,20 +75,21 @@ Element:57: ModelSection
 Element:58: Strain
 Element:59: StainingMethod
 Element:60: CarcinogenExposure
+Element:61: Morpholino
 ***** Processing package: java *****
 ***** Processing package: lang *****
-Element:61: String
-Element:62: Long
-Element:63: Boolean
-Element:64: Float
-Element:65: Integer
-Element:66: Double
+Element:62: String
+Element:63: Long
+Element:64: Boolean
+Element:65: Float
+Element:66: Integer
+Element:67: Double
 ***** Processing package: util *****
-Element:67: Date
-Element:68: Hashtable
-Element:69: Collection
+Element:68: Date
+Element:69: Hashtable
+Element:70: Collection
 ***** Processing package: sql *****
-Element:70: Clob
+Element:71: Clob
 ***** Processing package: DIAGRAMS *****
 ***** Processing package: CAMOD *****
 Formatting output XML...please wait
