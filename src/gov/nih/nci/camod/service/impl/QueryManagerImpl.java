@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.55 2006-05-24 15:02:59 georgeda Exp $
+ * $Id: QueryManagerImpl.java,v 1.56 2006-06-02 16:16:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.55  2006/05/24 15:02:59  georgeda
+ * Fixed error introduced in OM change
+ *
  * Revision 1.54  2006/05/22 19:39:39  schroedn
  * Display criteria for AJAX search fields correctly
  *
@@ -2078,9 +2081,22 @@ public class QueryManagerImpl extends BaseManager
         ResultSet theResultSet = null;
         try
         {
-            String theSQLString = "select acm.abs_cancer_model_id, " + "\n" + "       acm.model_descriptor," + "\n" + "       sp.abbreviation || ' ' || st.name" + "\n" + "  from abs_cancer_model acm," + "\n" + "       carcinogen_exposure ce," + "\n" + "       environmental_factor ef," + "\n" + "       species sp," + "\n" + "       strain st" + "\n" + " where acm.abs_cancer_model_id = ce.abs_cancer_model_id" + "\n" + "   and acm.abs_cancer_model_type = 'AM'" + "\n" + "   and ce.environmental_factor_id = ef.environmental_factor_id" + "\n" + "   and acm.strain_id = st.strain_id" + "\n" + "   and st.species_id = sp.species_id" + "\n" + "   and ef.nsc_number = ?";
+            String theSQLString = "select acm.abs_cancer_model_id, " + "\n" 
+            + "       acm.model_descriptor," + "\n"
+            + "       sp.abbreviation || ' ' || st.name" + "\n"            
+            + "  from abs_cancer_model acm," + "\n" 
+            + "       therapy t,"   + "\n" 
+            + "       strain st,"   + "\n" 
+            + "       species sp,"   + "\n"             
+            + "       agent a" + "\n" 
+            + " where acm.abs_cancer_model_id = t.abs_cancer_model_id" + "\n" 
+            + "   and acm.abs_cancer_model_type = 'AM'" + "\n" 
+            + "   and t.agent_id = a.agent_id" + "\n" 
+            + "   and acm.strain_id = st.strain_id" + "\n" 
+            + "   and st.species_id = sp.species_id" + "\n"             
+            + "   and a.nsc_number = ?";
 
-            log.info("getModelsForThisCompound - SQL: " + theSQLString);
+            log.info("\n getModelsForThisCompound - SQL: " + theSQLString);
 
             Object[] params = new Object[1];
             params[0] = nscNumber;
@@ -2090,7 +2106,7 @@ public class QueryManagerImpl extends BaseManager
                 String[] item = new String[3];
                 item[0] = theResultSet.getString(1); // the id
                 item[1] = theResultSet.getString(2); // model descriptor
-                item[2] = theResultSet.getString(3); // strain
+                item[2] = theResultSet.getString(3); // strain removed
                 models.add(item);
                 cc++;
             }
