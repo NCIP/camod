@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.56 2006-06-02 16:16:06 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.57 2006-06-08 15:07:18 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.56  2006/06/02 16:16:06  pandyas
+ * Defect #404 part 1 - Fixed query so Pre-clinical trials return the proper data.  Working on substituting the values in the 3rd column
+ *
  * Revision 1.55  2006/05/24 15:02:59  georgeda
  * Fixed error introduced in OM change
  *
@@ -2083,7 +2086,10 @@ public class QueryManagerImpl extends BaseManager
         {
             String theSQLString = "select acm.abs_cancer_model_id, " + "\n" 
             + "       acm.model_descriptor," + "\n"
-            + "       sp.abbreviation || ' ' || st.name" + "\n"            
+            + "       sp.common_name," + "\n"
+            + "       sp.common_name_unctrl_vocab," + "\n"
+            + "       st.name," + "\n"
+            + "       st.name_unctrl_vocab" + "\n"            
             + "  from abs_cancer_model acm," + "\n" 
             + "       therapy t,"   + "\n" 
             + "       strain st,"   + "\n" 
@@ -2101,12 +2107,37 @@ public class QueryManagerImpl extends BaseManager
             Object[] params = new Object[1];
             params[0] = nscNumber;
             theResultSet = Search.query(theSQLString, params);
+            String speciesName = "";
+            String stainName = "";
             while (theResultSet.next())
             {
                 String[] item = new String[3];
                 item[0] = theResultSet.getString(1); // the id
                 item[1] = theResultSet.getString(2); // model descriptor
-                item[2] = theResultSet.getString(3); // strain removed
+                
+                String theSpeciesName = theResultSet.getString(3);  // species common name
+                String theSpeciesUnctrlName = theResultSet.getString(4);
+                String theStrainName = theResultSet.getString(5);  // strain name
+                String theStrainUnctrlName = theResultSet.getString(6); 
+                
+                if (theSpeciesName != null && theSpeciesName.length() > 0 )
+                {
+                	speciesName = theResultSet.getString(3); // species common name
+                }
+                else if (theSpeciesUnctrlName != null && theSpeciesUnctrlName.length() > 0 )
+                {
+                	speciesName = theResultSet.getString(4); // species Unctrl common name
+                }                
+                if (theStrainName != null && theStrainName.length() > 0 )
+                {
+                	stainName = theResultSet.getString(5); // strain name
+                }
+                else if (theStrainUnctrlName != null && theStrainUnctrlName.length() > 0 )
+                {
+                	stainName = theResultSet.getString(6); // strain Unctrl name
+                }                
+                
+                item[2] = speciesName + " " + stainName; // result of column
                 models.add(item);
                 cc++;
             }
