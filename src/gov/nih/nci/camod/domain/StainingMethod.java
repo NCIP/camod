@@ -1,6 +1,5 @@
 package gov.nih.nci.camod.domain;
 
-import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 import java.io.Serializable;

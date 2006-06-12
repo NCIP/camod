@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.4 2006-05-22 20:10:40 schroedn Exp $
+ * $Id: CriteriaTableUtil.java,v 1.5 2006-06-12 18:38:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/05/22 20:10:40  schroedn
+ * Added ability to save keyword searches
+ *
  * Revision 1.3  2006/05/22 19:39:25  schroedn
  * Display criteria for AJAX search fields correctly
  *
@@ -22,8 +25,6 @@
 package gov.nih.nci.camod.util;
 
 import java.util.ResourceBundle;
-
-import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.webapp.form.SearchData;
 
 /**

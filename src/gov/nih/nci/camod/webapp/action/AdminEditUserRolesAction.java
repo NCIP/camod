@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AdminEditUserRolesAction.java,v 1.7 2006-05-25 16:43:50 georgeda Exp $
+ *  $Id: AdminEditUserRolesAction.java,v 1.8 2006-06-12 18:38:56 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.7  2006/05/25 16:43:50  georgeda
+ *  Fixed bug from OM change
+ *
  *  Revision 1.6  2006/05/15 15:42:49  georgeda
  *  Cleaned up contact info management
  *
@@ -39,14 +42,9 @@ import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.webapp.form.RolesAssignmentForm;
 import gov.nih.nci.common.persistence.Search;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;

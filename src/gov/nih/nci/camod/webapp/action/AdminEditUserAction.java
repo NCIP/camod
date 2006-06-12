@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminEditUserAction.java,v 1.5 2006-05-15 15:42:14 georgeda Exp $
+ * $Id: AdminEditUserAction.java,v 1.6 2006-06-12 18:38:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/05/15 15:42:14  georgeda
+ * Cleaned up contact info management
+ *
  * Revision 1.4  2005/10/24 13:28:17  georgeda
  * Cleanup changes
  *
@@ -20,9 +23,6 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
-
-import gov.nih.nci.camod.domain.ContactInfo;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
 import gov.nih.nci.camod.webapp.form.EditUserForm;
