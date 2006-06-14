@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.20 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: EmailActionImpl.java,v 1.21 2006-06-14 15:22:14 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.19  2006/01/18 14:24:23  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -103,9 +106,9 @@ public class EmailActionImpl extends BaseCurateableAction
     public void execute(Map inArgs,
                         Curateable inObject)
     {
-        log.trace("Entering execute");
+        log.info("<EmailActionImpl> Entering execute");
 
-        log.debug("Arguments: " + inArgs);
+        log.info("<EmailActionImpl> Arguments: " + inArgs);
 
         if (inArgs.containsKey(Constants.FORMDATA))
         {
@@ -151,6 +154,7 @@ public class EmailActionImpl extends BaseCurateableAction
                     theRecipients = theCoordinator;
                     theMailStandardText = new String[] { Constants.Admin.Actions.NEED_MORE_INFO };
                 }
+                // E-mail not sent if rejected - configured in CurationConfig.xml
                 else if (theData.getEvent().equals(Constants.Admin.Actions.SCREENER_REJECT))
                 {
                     theMailSubject = "The following model has been rejected: " + theAnimalModel.getModelDescriptor();
@@ -189,7 +193,9 @@ public class EmailActionImpl extends BaseCurateableAction
                     valuesForVariables.put("submitter", theAnimalModel.getSubmitter().getDisplayName());
                     valuesForVariables.put("modelstate", theAnimalModel.getState());
                     valuesForVariables.put("species", theAnimalModel.getStrain().getSpecies());
+                    valuesForVariables.put("model", theAnimalModel.getModelDescriptor());
                     valuesForVariables.put("piname", theAnimalModel.getPrincipalInvestigator().getDisplayName());
+                    valuesForVariables.put("modelid", theAnimalModel.getId());
 
                     // launch the email
                     MailUtil.sendMail(theRecipients, theMailSubject, theMailText, UserManagerSingleton.instance().getEmailForCoordinator(),
