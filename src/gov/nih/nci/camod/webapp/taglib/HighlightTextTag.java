@@ -1,7 +1,10 @@
 /**
- * $Id: HighlightTextTag.java,v 1.4 2006-05-10 14:15:52 schroedn Exp $ 
+ * $Id: HighlightTextTag.java,v 1.5 2006-07-26 14:50:51 pandyas Exp $ 
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/05/10 14:15:52  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.3  2006/05/04 17:30:41  schroedn
  * Edit
  * 
@@ -11,7 +14,6 @@
 package gov.nih.nci.camod.webapp.taglib;
 
 import gov.nih.nci.camod.Constants;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.regex.Matcher;
@@ -25,6 +27,9 @@ import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTag;
 import javax.servlet.jsp.tagext.Tag;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Custom tag for highlighting keyword searches
  * 
@@ -32,7 +37,8 @@ import javax.servlet.jsp.tagext.Tag;
  */
 public class HighlightTextTag implements Tag, BodyTag, Serializable
 {
-
+    static private final Log log = LogFactory.getLog(HighlightTextTag.class);
+    
     private static final long serialVersionUID = 5618297483211863400L;
     private PageContext myPageContext = null;
     private BodyContent myBodyContent;
@@ -113,7 +119,7 @@ public class HighlightTextTag implements Tag, BodyTag, Serializable
             try
             {
 
-                if (!myKeyword.equals("") && !myKeyword.equals(" ") && myKeyword != null)
+                if (myKeyword != null && !myKeyword.equals("") && !myKeyword.equals(" ") )
                 {
                     // Create a pattern to match cat
                     Pattern inPattern = Pattern.compile("(?i)(" + myKeyword + ")");
@@ -143,7 +149,7 @@ public class HighlightTextTag implements Tag, BodyTag, Serializable
             }
             catch (Exception e)
             {
-                out.println(theBody);
+                log.error("Error in HighlightTextTag.doAfterBody method", e);
             }
 
             out.println(theBody);
