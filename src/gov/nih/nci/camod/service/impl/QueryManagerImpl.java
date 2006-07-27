@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.57 2006-06-08 15:07:18 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.58 2006-07-27 14:53:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.57  2006/06/08 15:07:18  pandyas
+ * Defect #404 - part 2, replaced the species.abreviation || strain.name with either the species.commonName or species.commonNameUnctrlVocab || strain.name or strain.nameUnctrlVocab depending on which is available
+ *
  * Revision 1.56  2006/06/02 16:16:06  pandyas
  * Defect #404 part 1 - Fixed query so Pre-clinical trials return the proper data.  Working on substituting the values in the 3rd column
  *
@@ -440,7 +443,7 @@ public class QueryManagerImpl extends BaseManager
     public List getQueryOnlyEnvironmentalFactors(String inType) throws PersistenceException
     {
 
-        log.info("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
+        log.debug("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
         ResultSet theResultSet = null;
         List<String> theEnvFactors = new ArrayList<String>();
 
@@ -471,7 +474,7 @@ public class QueryManagerImpl extends BaseManager
 
             Collections.sort(theEnvFactors);
 
-            log.info("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
+            log.debug("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
         }
         catch (Exception e)
         {
@@ -1169,7 +1172,6 @@ public class QueryManagerImpl extends BaseManager
      *         of records
      * @throws PersistenceException
      */
-    //Sima TODO: optimize the extra join for strain_id/species_id
     public List getInvivoResults(Agent agent,
                                  boolean useNscNumber) throws PersistenceException
     {
@@ -1371,12 +1373,29 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference() throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct abs_cancer_model_id FROM morpholino";
+        String theSQLString = "SELECT distinct abs_cancer_model_id FROM transient_interference";
 
         Object[] theParams = new Object[0];
         return getIds(theSQLString, theParams);
 
     }
+    
+    /**
+     * Get the model id's for any model that is indicated as a tool strain
+     * 
+     * @return a list of matching model ids
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForToolStrain() throws PersistenceException
+    {
+
+        String theSQLString = "SELECT distinct abs_cancer_model_id FROM abs_cancer_model " + "WHERE is_tool_mouse = 1 " + " AND state = 'Edited-approved'";
+
+        Object[] theParams = new Object[0];
+        return getIds(theSQLString, theParams);
+
+    }    
 
     /**
      * Get the model id's for any model that has a cellline w/ a matching name
@@ -1426,6 +1445,29 @@ public class QueryManagerImpl extends BaseManager
         return getIds(theSQLString, theParams);
 
     }
+    
+    /**
+     * Get the model id's for any model that is from an external source
+     * 
+     * @param inExternalSource
+     *            the externalSource to search for
+     * 
+     * @return a list of matching model id
+     * 
+     * @throws PersistenceException
+     * )
+     */
+    private String getModelIdsExternalSource(String inExternalSource) throws PersistenceException
+    {
+    	log.info("Entering QueryManagerImpl.getModelIdsExternalSource Enter");
+        String theSQLString = "SELECT distinct abs_cancer_model_id FROM abs_cancer_model acm " + "WHERE acm.external_source IS NOT NULL "
+        + "     AND upper(acm.external_source) like ?)";
+
+        Object[] theParams = new Object[1];
+        theParams[0] = inExternalSource;
+        return getIds(theSQLString, theParams);
+
+    }    
 
     /**
      * Get the model id's for any model that has a transient interference associated
@@ -1441,7 +1483,7 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference(String inTransientInterference) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct m.abs_cancer_model_id " + "FROM morpholino m WHERE upper(m.targeted_region) like ?";
+        String theSQLString = "SELECT distinct t.abs_cancer_model_id " + "FROM transient_interference t WHERE upper(t.targeted_region) like ?";
 
         String theSQLTheraputicApproach = "%";
         if (inTransientInterference != null && inTransientInterference.trim().length() > 0)
@@ -1952,7 +1994,6 @@ public class QueryManagerImpl extends BaseManager
         // Search for therapeutic approaches
         if (inSearchData.isSearchTherapeuticApproaches())
         {
-
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForTherapeuticApproach(inSearchData.getTherapeuticApproach().trim()) + ")";
         }
 
@@ -1967,12 +2008,26 @@ public class QueryManagerImpl extends BaseManager
         {
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForMicroArrayData() + ")";
         }
-
-        // Search for microarray data
+ 
+        // Search for Transient Interference
         if (inSearchData.isSearchTransientInterference())
         {
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForTransientInterference() + ")";
         }
+
+        // Search for tool strains
+        if (inSearchData.isSearchToolStrain())
+        {
+            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForToolStrain() + ")";
+        }
+        
+        // Search for tool strains
+        if (inSearchData.getExternalSource() != null && inSearchData.getExternalSource().length() > 0)
+        {
+        	log.info("<QueryManagerImpl> Searching for External Source");
+            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsExternalSource(inSearchData.getExternalSource().trim()) + ")";
+        }        
+ 
 
         // Search for xenograft
         if (inSearchData.isSearchXenograft())
@@ -2137,7 +2192,7 @@ public class QueryManagerImpl extends BaseManager
                 	stainName = theResultSet.getString(6); // strain Unctrl name
                 }                
                 
-                item[2] = speciesName + " " + stainName; // result of column
+                item[2] = speciesName + "  -  " + stainName; // result of column
                 models.add(item);
                 cc++;
             }
