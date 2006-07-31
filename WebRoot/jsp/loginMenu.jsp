@@ -56,7 +56,7 @@
 		<% } %>
 
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,0)">HELP</html:link>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<html:link styleClass="footerMenuLink" href="javascript:openHelpWindow('WebHelp/!SSL!/index.html')">HELP</html:link>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
