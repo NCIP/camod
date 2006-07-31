@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.58 2006-07-27 14:53:33 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.59 2006-07-31 21:12:51 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.58  2006/07/27 14:53:33  pandyas
+ * Defect#404:  added dash to separate species and strain in thrid column of results list
+ *
  * Revision 1.57  2006/06/08 15:07:18  pandyas
  * Defect #404 - part 2, replaced the species.abreviation || strain.name with either the species.commonName or species.commonNameUnctrlVocab || strain.name or strain.nameUnctrlVocab depending on which is available
  *
@@ -1373,30 +1376,13 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference() throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct abs_cancer_model_id FROM transient_interference";
+        String theSQLString = "SELECT distinct abs_cancer_model_id FROM morpholino";
 
         Object[] theParams = new Object[0];
         return getIds(theSQLString, theParams);
 
     }
     
-    /**
-     * Get the model id's for any model that is indicated as a tool strain
-     * 
-     * @return a list of matching model ids
-     * 
-     * @throws PersistenceException
-     */
-    private String getModelIdsForToolStrain() throws PersistenceException
-    {
-
-        String theSQLString = "SELECT distinct abs_cancer_model_id FROM abs_cancer_model " + "WHERE is_tool_mouse = 1 " + " AND state = 'Edited-approved'";
-
-        Object[] theParams = new Object[0];
-        return getIds(theSQLString, theParams);
-
-    }    
-
     /**
      * Get the model id's for any model that has a cellline w/ a matching name
      * 
@@ -1445,29 +1431,6 @@ public class QueryManagerImpl extends BaseManager
         return getIds(theSQLString, theParams);
 
     }
-    
-    /**
-     * Get the model id's for any model that is from an external source
-     * 
-     * @param inExternalSource
-     *            the externalSource to search for
-     * 
-     * @return a list of matching model id
-     * 
-     * @throws PersistenceException
-     * )
-     */
-    private String getModelIdsExternalSource(String inExternalSource) throws PersistenceException
-    {
-    	log.info("Entering QueryManagerImpl.getModelIdsExternalSource Enter");
-        String theSQLString = "SELECT distinct abs_cancer_model_id FROM abs_cancer_model acm " + "WHERE acm.external_source IS NOT NULL "
-        + "     AND upper(acm.external_source) like ?)";
-
-        Object[] theParams = new Object[1];
-        theParams[0] = inExternalSource;
-        return getIds(theSQLString, theParams);
-
-    }    
 
     /**
      * Get the model id's for any model that has a transient interference associated
@@ -1483,7 +1446,7 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference(String inTransientInterference) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct t.abs_cancer_model_id " + "FROM transient_interference t WHERE upper(t.targeted_region) like ?";
+        String theSQLString = "SELECT distinct m.abs_cancer_model_id " + "FROM morpholino m WHERE upper(m.targeted_region) like ?";
 
         String theSQLTheraputicApproach = "%";
         if (inTransientInterference != null && inTransientInterference.trim().length() > 0)
@@ -2014,20 +1977,6 @@ public class QueryManagerImpl extends BaseManager
         {
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForTransientInterference() + ")";
         }
-
-        // Search for tool strains
-        if (inSearchData.isSearchToolStrain())
-        {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForToolStrain() + ")";
-        }
-        
-        // Search for tool strains
-        if (inSearchData.getExternalSource() != null && inSearchData.getExternalSource().length() > 0)
-        {
-        	log.info("<QueryManagerImpl> Searching for External Source");
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsExternalSource(inSearchData.getExternalSource().trim()) + ")";
-        }        
- 
 
         // Search for xenograft
         if (inSearchData.isSearchXenograft())
