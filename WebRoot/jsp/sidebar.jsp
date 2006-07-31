@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: sidebar.jsp,v 1.13 2006-04-28 19:40:44 schroedn Exp $
+ * $Id: sidebar.jsp,v 1.14 2006-07-31 20:08:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/28 19:40:44  schroedn
+ * Defect #261
+ * Added links to Saved Queries and Query History when user is logged in
+ *
  *
  */
 
@@ -12,6 +16,7 @@
 
 <SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 <TR><TD height="100%" class=subMenu valign=top width="210">
+<script language="JavaScript" src="scripts/global.js"></script>
 	  
 <!-- standard submenu begins -->
 	  
@@ -85,7 +90,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		 href="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,0)" >HELP</A></TD></TR>
+		 href="javascript:openHelpWindow('WebHelp/!SSL!/index.html')" >HELP</A></TD></TR>
 
 	<%
 	if( session.getAttribute("camod.loggedon.username") != null ) {
