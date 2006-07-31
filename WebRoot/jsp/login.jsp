@@ -8,6 +8,8 @@
 
 <% pageContext.getSession().setAttribute("READDISCLAIMER", "true");  %>
 
+<script language="JavaScript" src="scripts/global.js"></script>
+
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
@@ -110,7 +112,7 @@
                                                                   </td>
 				      
                                                                   <td>					    
-                                                                      <FORM name="input" action="javascript:RH_ShowHelp(0,'WebHelp/!SSL!/WebHelp/caMOD_2.htm>WithNavPane=true', HH_HELP_CONTEXT,1)" method="get">
+                                                                      <FORM name="input" action="javascript:openUserGuideWindow('WebHelp/!SSL!/UserGuide.pdf')" method="get">
                                                                           <input class="actionButton" type="submit" value="Help" />
                                                                       </FORM>					   
                                                                   </td> 
@@ -150,13 +152,15 @@
                                                   </tr>
                                                   <tr>
                                                       <td class="sidebarContent" valign="top">caMOD 2.1 was released to production on May 30th.<br/><br/><html:link action="infoReleaseNotes.do">Release Notes</html:link></td>
-
                                                   </tr>
+                                                  <tr>
+                                                  <td class="sidebarContent" valign="top"> <a href="javascript:openUserGuideWindow('WebHelp/!SSL!/UserGuide.pdf')">User Guide (PDF)</a></td>
+                                              	</tr>
                                               </table>
                                           </td>
                                       </tr>
                                       <!-- did you know? ends -->
-
+										
                                       <!-- spacer cell begins (keep for dynamic expanding) -->
                                       <tr><td valign="top" height="100%">
                                           <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" class="sidebarSection">
