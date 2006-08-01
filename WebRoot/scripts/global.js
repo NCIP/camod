@@ -288,3 +288,13 @@ Clears hidden value for organTissueCode
      field.value = '';
      var1.value = '';   
  }
+ 
+function openUserGuideWindow(pageURL) {
+    window.open (pageURL, "caMOD User Guide", "alwaysRaised,dependent,status,scrollbars,resizable,width=800,height=500"); 
+    
+} 
+
+function openHelpWindow(pageURL) {
+    window.open (pageURL,"Help", "alwaysRaised,dependent,status,scrollbars,resizable,width=800,height=500"); 
+    
+}
