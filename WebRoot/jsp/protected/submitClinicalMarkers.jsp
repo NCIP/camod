@@ -25,12 +25,13 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
+<!-- submitClinicalMarkers.jsp -->
+<!-- Main Content Begins -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
-<!-- -->
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 
@@ -40,7 +41,8 @@
 	</tr>
 
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Clinical Marker</td>
+		<td class="formTitle" height="20" colspan="3">Clinical Marker
+			<camod:cshelp topic="clinical_marker_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
         <TR align="LEFT" valign="TOP">

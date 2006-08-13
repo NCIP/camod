@@ -15,13 +15,17 @@
 	System.out.println( "SIZE: " + size );
 %>
 
+<!-- submitModels.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
 
 		<tr>
-			<td class="formTitle" height="20" colspan="4">Submit and Edit Models &nbsp;<camod:cshelp mapId="submit_edit_models_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
+			<td class="formTitle" height="20" colspan="4">Submit and Edit Models &nbsp;
+                <camod:cshelp topic="submit_edit_models_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></a> 			
+		</td>		
 		</tr>
 
 		<tr>

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: savedSearchQueries.jsp,v 1.3 2006-05-25 15:19:17 georgeda Exp $
+ * $Id: savedSearchQueries.jsp,v 1.4 2006-08-13 18:21:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/25 15:19:17  georgeda
+ * Added new context sensitive text topics
+ *
  * Revision 1.2  2006/05/10 14:23:35  schroedn
  * New Features - Changes from code review
  *
@@ -24,6 +27,7 @@
 <%@ page import="gov.nih.nci.camod.domain.SavedQuery" %>	
 <%@ page import="gov.nih.nci.camod.domain.SavedQueryAttribute" %>	
 
+
 <%  
 	List userQueryList = (List) request.getSession().getAttribute( Constants.USERSAVEDQUERYLIST );
 	
@@ -36,6 +40,9 @@
 	int menuNumber = 1;
 %>
 
+
+<!-- savedSearchQueries.jsp -->
+<!-- Main Content Begins -->
 <DIV id="masterdiv">
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -53,7 +60,7 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="6">Saved Queries&nbsp;<camod:cshelp mapId="view_saved_queries_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
+			<td class="formTitleBlue" height="20" colspan="6">Saved Queries&nbsp;<camod:cshelp topic="view_saved_queries_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 		</tr>
 
 		<tr>

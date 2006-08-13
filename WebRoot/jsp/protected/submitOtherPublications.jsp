@@ -13,7 +13,8 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Publications</td>
+			<td class="formTitle" height="20" colspan="3">Publications
+				<camod:cshelp topic="publication_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		</tr>
 
 		<tr>

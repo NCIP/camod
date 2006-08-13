@@ -1,9 +1,12 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/03 20:07:44  pandyas
+ * Modified/Added to support Morpholino object data in the application
  *
  *
- * $Id: submitMorpholino.jsp,v 1.1 2006-05-03 20:07:44 pandyas Exp $
+ *
+ * $Id: submitMorpholino.jsp,v 1.2 2006-08-13 18:37:02 pandyas Exp $
  *
  */   
 %>
@@ -37,6 +40,8 @@
 
 <html:form action="<%= actionName %>" focus="source">
 
+<!-- submitMorpholino.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -51,7 +56,8 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Morpholino:</td>
+		<td class="formTitle" height="20" colspan="3">Morpholino:
+			<camod:cshelp topic="transient_interference_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 
@@ -102,7 +108,8 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Targeted Region:</label></td>
+			<td class="formRequiredLabel"><label for="field1">Targeted Region:</label>
+				<camod:cshelp topic="transient_interference_help" key="TRANSIENT_INTERFERENCE.TARGETED_REGION" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
 			<td class="formField">					
 					<html:text styleClass="formFieldSized" size="30" property="targetedRegion" />			
 			</td>
@@ -115,7 +122,7 @@
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="concentration"  size="10" />
-			
+			<label for="field1">&nbsp;Units&nbsp;</label>
 			<html:select styleClass="formFieldUnSized" size="1" property="concentrationUnit" >												
 				<html:options name="<%= Dropdowns.CONCENTRATIONUNITSDROP %>"/>					
 			</html:select>

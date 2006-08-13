@@ -29,6 +29,8 @@
 
 <html:form action="<%= actionName %>" focus="cellLineName">
 
+<!-- submitCellLines.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -41,13 +43,14 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Cell Line</td>
+		<td class="formTitle" height="20" colspan="3">Cell Line
+		<camod:cshelp topic="cell_lines_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label>
-		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" size="30" property="cellLineName" />			
@@ -69,7 +72,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Experiment:</label>
-		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
@@ -79,7 +82,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Results:</label>
-		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
@@ -89,7 +92,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comment:</label>
-		<camod:cshelp mapId="cell_lines_help" key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			

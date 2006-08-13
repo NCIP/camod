@@ -42,6 +42,8 @@
 	
 </script>
 
+<!-- submitGeneDelivery.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -56,13 +58,14 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Gene Delivery</td>
+		<td class="formTitle" height="20" colspan="3">Gene Delivery
+			<camod:cshelp topic="gene_delivery_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
         <tr>
             <td class="formRequiredNotice" width="5">*</td>
             <td class="formRequiredLabel"><label for="field2">Viral Vector:</label>
-            <camod:cshelp mapId="gene_delivery_help" key="GENE_DELIVERY.VIRAL_VECTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+            <camod:cshelp topic="gene_delivery_help" key="GENE_DELIVERY.VIRAL_VECTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
             </td>
             <td class="formField">
             <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
@@ -86,7 +89,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Gene:</label>
-		<camod:cshelp mapId="gene_delivery_help" key="GENE_DELIVERY.GENE_IN_VIRUS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="gene_delivery_help" key="GENE_DELIVERY.GENE_IN_VIRUS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
 			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" />
@@ -96,7 +99,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Treatment Regimen:</label>
-		<camod:cshelp mapId="gene_delivery_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
+		<camod:cshelp topic="gene_delivery_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="30"/>

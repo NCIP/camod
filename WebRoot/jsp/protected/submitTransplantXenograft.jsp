@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.43 2006-05-24 16:37:50 georgeda Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.44 2006-08-13 18:29:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.43  2006/05/24 16:37:50  georgeda
+ * Slight cleanup of clear button
+ *
  * Revision 1.42  2006/05/19 18:50:28  pandyas
  * defect #225 - Add clearOrgan functionality to Xenograft screen
  *
@@ -111,6 +114,8 @@
 
 <html:form action="<%= actionName %>" focus="xenograftName">
 
+<!-- submitTranplantXenograft.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -124,13 +129,14 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Xenograft/Transplantation</td>
+		<td class="formTitle" height="20" colspan="3">Xenograft/Transplantation
+			<camod:cshelp topic="xenograft_transplant_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Cell Line/Transplant:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 				<html:text styleClass="formFieldSized" property="xenograftName"  size="30" />
@@ -183,7 +189,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
-			<camod:cshelp mapId="xenograft_transplant_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="xenograft_transplant_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 		</td>
 		<td class="formField">
@@ -219,7 +225,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Parental Cell line:</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.PARENTAL_CELL_LINE_NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="parentalCellLineName"  size="30" />	
@@ -228,7 +234,7 @@
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">ATTC number (if available):</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ATCC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.ATCC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find ATTC#" onClick="myRef = window.open('http://www.atcc.org/','mywin',
@@ -240,7 +246,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Genetic Alteration:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.GENETIC_MANIPULATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.GENETIC_MANIPULATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="geneticManipulation" cols="32" rows="4" onkeypress="chkObservation();" />
@@ -250,7 +256,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Modification:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.MODIFICATION_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.MODIFICATION_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="modificationDescription" cols="32" rows="4" disabled="true" />
@@ -261,7 +267,7 @@
     <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Amount of Cells:</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.CELL_AMOUNT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
 			<html:text styleClass="formFieldUnSized" property="cellAmount"  size="15" />
@@ -271,7 +277,7 @@
     <tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Growth Period:</label>
-			<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.GROWTH_PERIOD" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.GROWTH_PERIOD" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
 			<html:text styleClass="formFieldUnSized" property="growthPeriod"  size="15" />
@@ -281,7 +287,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Site of Administration:</label>
-		<camod:cshelp mapId="xenograft_transplant_help" key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="xenograft_transplant_help" key="ABS_CANCER_MODEL.ADMINISTRATIVE_SITE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 		<br>

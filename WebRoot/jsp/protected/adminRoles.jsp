@@ -7,7 +7,7 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
 <!-- adminRoles.jsp -->
-
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -15,7 +15,7 @@
 	
 		<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">	
 			<tr>
-				<td class="formTitle" height="20">Administration Roles &nbsp;<camod:cshelp mapId="administration_roles_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
+				<td class="formTitle" height="20">Administration Roles &nbsp;<camod:cshelp topic="administration_roles_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 			</tr>			
 			<tr>
 				<td class="resultsBoxGreyEnd">

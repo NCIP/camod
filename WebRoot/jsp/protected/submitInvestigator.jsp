@@ -28,6 +28,8 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
+<!-- submitInvestigator.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE  cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -42,13 +44,14 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Available from Investigator</td>
+		<td class="formTitle" height="20" colspan="3">Available from Investigator
+			<camod:cshelp topic="model_availability_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 	
         <tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
-		<camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">			
 				<html:hidden property="source" />
@@ -59,7 +62,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel">Principal Investigator:
-		<camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.PRINCIPAL_INVESTIGATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.PRINCIPAL_INVESTIGATOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="stockNumber">

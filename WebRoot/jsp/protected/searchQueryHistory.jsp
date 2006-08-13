@@ -22,13 +22,15 @@
 	int menuNumber = 1;	
 %>
 
+<!-- searchQueryHistory.jsp -->
+<!-- Main Content Begins -->
 <DIV id="masterdiv">
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="4">Query History ( Last 20 searches ) &nbsp;<camod:cshelp mapId="search_query_history_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
+			<td class="formTitleBlue" height="20" colspan="4">Query History ( Last 20 searches ) &nbsp;<camod:cshelp topic="search_query_history_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 		</tr>
 
 		<tr>

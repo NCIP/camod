@@ -37,6 +37,8 @@
 	
 </SCRIPT>
 
+<!-- submitImages.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -50,7 +52,7 @@
 		</tr>
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Images &nbsp;<camod:cshelp mapId="images_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<td class="formTitle" height="20" colspan="3">Images &nbsp;<camod:cshelp topic="images_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		</tr>
 
 		<tr>

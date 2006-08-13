@@ -28,6 +28,8 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
+<!-- submitJacksonLab.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins"
 	width="100%" height="100%">
 	<tr>
@@ -45,14 +47,14 @@
 					</tr>
 
 					<tr>
-						<td class="formTitle" height="20" colspan="3">Available from
-						Jackson Laboratory</td>
+						<td class="formTitle" height="20" colspan="3">Available from Jackson Laboratory
+							<camod:cshelp topic="model_availability_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 					</tr>
 
 					<tr>
 						<td class="formRequiredNotice" width="5">*</td>
 						<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
-						<camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
+						<camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
 						<td class="formField">
 							<html:hidden property="source" />
 							<html:text styleClass="formFieldUnSized" size="40" property="name" />
@@ -63,7 +65,7 @@
 					<tr>
 						<td class="formRequiredNotice" width="5">&nbsp;</td>
 						<td class="formLabel">Stock Number: 
-						     <camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
+						     <camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
 						<td class="formField">
 						    <input type=button value="Find Info" onClick="myRef = window.open('http://jaxmice.jax.org/index.html','mywin','left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 						    <html:text styleClass="formFieldSized" size="30" property="stockNumber" />

@@ -9,6 +9,8 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+
 <%
 	String aEngineeredTransgeneID = request.getParameter( "aEngineeredTransgeneID" );
 	String aGenomicSegmentID = request.getParameter( "aGenomicSegmentID" );
@@ -49,8 +51,9 @@
 	
 <html:form action="<%= actionName %>" focus="name">	
 
-<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
+<!-- submitAssocExpression.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -65,13 +68,14 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Expression</td>
+		<td class="formTitle" height="20" colspan="3">Expression
+			<camod:cshelp topic="associated_expression_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
-		<camod:cshelp mapId="associated_expression_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="associated_expression_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
 		<a href="javascript:showMouseTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>

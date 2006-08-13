@@ -6,6 +6,9 @@
 
 <FORM name="input" action="http://caarraydb.nci.nih.gov" method="get">
 
+
+<!-- submitMicroarrayData.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -15,7 +18,8 @@
 	<TABLE summary="" cellpadding="6" cellspacing="0" border="0" align="left">
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Microarray Data &nbsp;<camod:cshelp mapId="microarray_data_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+		<td class="formTitle" height="20" colspan="3">Microarray Data &nbsp;
+		<camod:cshelp topic="microarray_data_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>

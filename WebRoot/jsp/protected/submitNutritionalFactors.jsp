@@ -28,6 +28,8 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
+<!-- submitNutritionalFactors.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	
@@ -42,7 +44,8 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Nutritional Factor</td>
+		<td class="formTitle" height="20" colspan="3">Nutritional Factor
+			<camod:cshelp topic="nutritional_factor_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
@@ -71,7 +74,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label>
-		<camod:cshelp mapId="nutritional_factor_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="nutritional_factor_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage" size="15" />
@@ -85,7 +88,7 @@
 	<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Treatment Regimen:</label>
-			<camod:cshelp mapId="nutritional_factor_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
+			<camod:cshelp topic="nutritional_factor_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
 			</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="30" />

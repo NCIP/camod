@@ -28,6 +28,8 @@
 
 <html:form action="<%= actionName %>" focus="name" >
 
+<!-- submitGrowthFactors.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -47,7 +49,8 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Growth Factor:</label></td>
+		<td class="formRequiredLabel"><label for="field3">Growth Factor:</label>
+			<camod:cshelp topic="growth_factor_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		<td class="formField">
 			<br>
 			<label for="field3">(if Growth Factor is not listed, then please<br>select "Other" from the list and specify it below)</label>
@@ -70,7 +73,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label>
-		<camod:cshelp mapId="growth_factor_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="growth_factor_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage"  size="15" />
@@ -84,7 +87,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Administrative Route:</label>
-		<camod:cshelp mapId="environmental_factor_help" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="growth_factor_help" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 		<br>
@@ -108,7 +111,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Treatment Regimen:</label>
-		<camod:cshelp mapId="growth_factor_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
+		<camod:cshelp topic="growth_factor_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="30" />

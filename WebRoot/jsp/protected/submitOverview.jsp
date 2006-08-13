@@ -8,6 +8,8 @@
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page buffer="32kb"%>
 
+<!-- submitOverview.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 
@@ -18,7 +20,8 @@
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
-				<td class="formTitle" height="20" colspan=2>Model Status &nbsp;<camod:cshelp mapId="model_status_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
+				<td class="formTitle" height="20" colspan=2>Model Status &nbsp;
+				<camod:cshelp topic="model_status_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 			</tr>			
 
 			<tr>

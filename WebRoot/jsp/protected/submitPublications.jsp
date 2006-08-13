@@ -28,6 +28,8 @@
 
 <html:form action="<%= (String) pageContext.getAttribute("actionName") %>" focus="name">
 
+<!-- submitPublications.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -41,7 +43,8 @@
 	</tr>
 
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Publications &nbsp;<camod:cshelp mapId="publications_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+		<td class="formTitle" height="20" colspan="3">Publications &nbsp;
+			<camod:cshelp topic="publication_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
@@ -109,7 +112,7 @@
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">J number:</label>
-			<camod:cshelp mapId="publication_help" key="PUBLICATION.J_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="publication_help" key="PUBLICATION.J_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find J #" onClick="myRef = window.open('http://www.informatics.jax.org/searches/reference_form.shtml','mywin',

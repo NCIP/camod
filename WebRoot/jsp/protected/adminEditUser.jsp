@@ -8,6 +8,8 @@
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
+<!-- adminEditUser.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
@@ -31,10 +33,10 @@
 		<tr>
 			<td class="formTitle" height="20" colspan="3">
 			<c:if test="${empty editUserForm.id}">
-			    Add User &nbsp;<camod:cshelp mapId="add_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+			    Add User &nbsp;<camod:cshelp topic="add_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 			</c:if>
 			<c:if test="${not empty editUserForm.id}">
-			    Edit User&nbsp;<camod:cshelp mapId="edit_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+			    Edit User&nbsp;<camod:cshelp topic="edit_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 			</c:if>
 			</td>
 		</tr>

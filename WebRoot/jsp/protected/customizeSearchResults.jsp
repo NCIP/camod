@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: customizeSearchResults.jsp,v 1.4 2006-05-25 15:19:17 georgeda Exp $
+ * $Id: customizeSearchResults.jsp,v 1.5 2006-08-13 18:21:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/05/25 15:19:17  georgeda
+ * Added new context sensitive text topics
+ *
  * Revision 1.3  2006/05/10 17:10:26  schroedn
  * Do not allow multiple selections from left to right
  *
@@ -195,7 +198,9 @@
 </SCRIPT>
 
 <html:form action="CustomizeSearchResultsAction.do" focus="columnsToDisplay" onsubmit="selectAll()">
-										
+
+<!-- custimizeSearchResults.jsp -->
+<!-- Main Content Begins -->										
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	
 	<% if ( errorMessage != null ) { %>
@@ -210,7 +215,7 @@
 			<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left">
 				<tr>
 					<td class="formTitleBlue" height="20" colspan="4">
-						Customize Search Results&nbsp;<camod:cshelp mapId="customize_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+						Customize Search Results&nbsp;<camod:cshelp topic="customize_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 					</td>
 				</tr>
 				

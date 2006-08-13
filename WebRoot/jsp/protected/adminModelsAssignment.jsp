@@ -1,6 +1,8 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
+<!-- adminModelsAssignment.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
@@ -19,7 +21,7 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Models Assignment &nbsp;<camod:cshelp mapId="models_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
+		    <td class="formTitle" height="20" colspan="4">Models Assignment &nbsp;<camod:cshelp topic="models_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		<html:form action="AdminModelsAssignmentPopulateAction">
 		    

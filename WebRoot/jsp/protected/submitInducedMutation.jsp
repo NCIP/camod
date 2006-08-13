@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.27 2006-04-17 19:07:33 pandyas Exp $
+ * $Id: submitInducedMutation.jsp,v 1.28 2006-08-13 18:26:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2006/04/17 19:07:33  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.26  2005/12/27 20:12:00  pandyas
  * Moved html:form action, cleaned up script, removed disabled=true
  *
@@ -57,12 +60,12 @@
 		
 	function chkInducingAgent() {
 	    chkOther(document.forms[0].type, document.forms[0].otherType);
-	}
-	
-
-	 
+	}	 
 </SCRIPT>
 
+
+<!-- submitInducedMutation.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -77,7 +80,8 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Induced Mutation</td>
+		<td class="formTitle" height="20" colspan="3">Induced Mutation
+			<camod:cshelp topic="induced_mutation_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 	</tr>
 
 	<tr>
@@ -111,7 +115,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">CAS number:</label>
-		<camod:cshelp mapId="induced_mutation_help" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="induced_mutation_help" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
@@ -124,7 +128,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label>
-		<camod:cshelp mapId="induced_mutation_help" key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="induced_mutation_help" key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 		<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
@@ -145,7 +149,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Observation:</label>
-		<camod:cshelp mapId="induced_mutation_help" key="GENETIC_ALTERATION.OBSERVATION_INDUCED_MUTATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="induced_mutation_help" key="GENETIC_ALTERATION.OBSERVATION_INDUCED_MUTATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32" onkeypress="chkObservation();"/>		
@@ -155,7 +159,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Method of Observation:</label>
-		<camod:cshelp mapId="induced_mutation_help" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="induced_mutation_help" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"  />		
@@ -174,7 +178,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Comment:</label>
-			<camod:cshelp mapId="induced_mutation_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="induced_mutation_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  />	

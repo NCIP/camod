@@ -27,6 +27,8 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
+<!-- submitMMHCCRepo.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
@@ -41,13 +43,14 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Available from  MMHCC Repository </td>					
+		<td class="formTitle" height="20" colspan="3">Available from  MMHCC Repository 
+			<camod:cshelp topic="model_availability_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>					
 	</tr>
 	
 	<tr>
 			<td class="formRequiredNotice" width="3">*</td>
 			<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
-					<camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+					<camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 			<html:hidden property="source" />		
@@ -58,7 +61,7 @@
     <tr>
         <td class="formRequiredNotice" width="5">&nbsp;</td>
         <td class="formLabel">Strain Number:
-        <camod:cshelp mapId="model_availability_help" key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+        <camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
         </td>
 		<td class="formField">
             <input type=button value="Find Info" onClick="myRef = window.open('http://mouse.ncifcrf.gov','mywin',
