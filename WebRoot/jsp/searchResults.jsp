@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.18 2006-05-10 18:03:00 schroedn Exp $
+ * $Id: searchResults.jsp,v 1.19 2006-08-13 17:43:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/05/10 18:03:00  schroedn
+ * Fixed crash when loading page with no search results.
+ *
  * Revision 1.17  2006/05/10 15:37:23  schroedn
  * Fixed Dup_Name bug
  *
@@ -107,6 +110,9 @@
 		} 				
 	%>
 
+
+<!-- searchResults.jsp -->
+<!-- Main Content Begins -->
 	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
@@ -201,7 +207,8 @@
 		<tr><td>
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 				<tr>
-					<td class="formTitle" height="20" colspan="4">Search Results&nbsp;<camod:cshelp mapId="search_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+					<td class="formTitle" height="20" colspan="4">Search Results&nbsp;
+					<camod:cshelp topic="search_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 					</td>
 				</tr>
 			</TABLE>

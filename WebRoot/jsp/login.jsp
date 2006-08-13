@@ -8,11 +8,12 @@
 
 <% pageContext.getSession().setAttribute("READDISCLAIMER", "true");  %>
 
+<!-- needed for tooltips -->
 <script language="JavaScript" src="scripts/global.js"></script>
-
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>	
 
+<!-- login.jsp -->
 <!-- Main Content Begins -->  
 	  <table summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 
@@ -59,7 +60,8 @@
 
                                               <table summary="" cellpadding="2" cellspacing="0" border="0" width="100%" class="sidebarSection">
                                                   <tr>
-                                                      <td class="sidebarTitle" height="20">LOGIN TO caMOD &nbsp <camod:cshelp mapId="login_page_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+                                                      <td class="sidebarTitle" height="20">LOGIN TO caMOD &nbsp 
+                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
                                                   </tr>
                                                   <tr>
                                                       <td colspan="3">

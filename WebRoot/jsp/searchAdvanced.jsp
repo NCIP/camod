@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.41 2006-05-25 12:02:51 georgeda Exp $
+ * $Id: searchAdvanced.jsp,v 1.42 2006-08-13 17:45:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2006/05/25 12:02:51  georgeda
+ * Slight tweaks
+ *
  * Revision 1.40  2006/05/19 17:12:11  guptaa
  * added advance search
  *
@@ -137,6 +140,8 @@
 
 <html:form action="SearchAdvancedAction.do" focus="keyword" onsubmit="enableFields()">
 
+<!-- searchAdvanced.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
@@ -167,7 +172,7 @@
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> 
-				<camod:cshelp mapId="advanced_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="advanced_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
@@ -194,7 +199,7 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp mapId="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>

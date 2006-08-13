@@ -33,9 +33,9 @@
        </attribute>
        
        <attribute>
-           <name>mapId</name>
+           <name>topic</name>
            <required>false</required>
-       </attribute>
+       </attribute>       
        
        <attribute>
            <name>href</name>

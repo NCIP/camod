@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.31 2006-05-18 14:26:55 guptaa Exp $
+ * $Id: searchSimple.jsp,v 1.32 2006-08-13 17:43:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2006/05/18 14:26:55  guptaa
+ * fix style id
+ *
  * Revision 1.30  2006/05/17 21:15:29  guptaa
  * organ tree changes
  *
@@ -58,18 +61,14 @@
 <script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
 
 
-
-
-<SCRIPT LANGUAGE="JavaScript">
-	
+<SCRIPT LANGUAGE="JavaScript">	
 	function blankKeyword() {
         document.searchForm.keyword.value = '';
     }
 	
 	function enableOrgan() {
 		document.searchForm.organ.disabled = false;
-	}
-			
+	}			
 </SCRIPT>
 
 <%
@@ -80,6 +79,8 @@
 
 <html:form action="SearchSimpleAction.do" focus="keyword" onsubmit="transferFields()">
 
+<!-- searchSimple.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
@@ -117,7 +118,7 @@
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Model Name / Model Descriptor  
-				<camod:cshelp mapId="simple_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="simple_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 				</label>
 			</td>
 			<td class="formField">			
@@ -145,7 +146,7 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp mapId="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>

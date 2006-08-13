@@ -11,6 +11,9 @@
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
 <html:form action="DrugScreenSearchAction.do" focus="NSCNumber">
+
+<!-- searchDrugScreening.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
@@ -32,7 +35,8 @@
 		    <td class="formMessage" colspan="3">* indicates a required field</td>
 	    </tr>
         <tr>
-			<td class="formTitleBlue" height="20" colspan="3">Drug Screening Data <camod:cshelp mapId="drug_screening_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
+			<td class="formTitleBlue" height="20" colspan="3">Drug Screening Data 
+			<camod:cshelp topic="drug_screening_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
         <TR>
 	        <TD class=formRequiredNotice width=5>*</TD>
