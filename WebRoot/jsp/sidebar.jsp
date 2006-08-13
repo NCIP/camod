@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: sidebar.jsp,v 1.14 2006-07-31 20:08:12 pandyas Exp $
+ * $Id: sidebar.jsp,v 1.15 2006-08-13 18:17:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/07/31 20:08:12  pandyas
+ * Modified page link for Help file:
+ * Swapped the new online help generated from ePublisher with the current online help generated from RoboHelp.  From Jill Hadfield
+ *
  * Revision 1.13  2006/04/28 19:40:44  schroedn
  * Defect #261
  * Added links to Saved Queries and Query History when user is logged in
@@ -17,9 +21,9 @@
 <SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 <TR><TD height="100%" class=subMenu valign=top width="210">
 <script language="JavaScript" src="scripts/global.js"></script>
-	  
+  
 <!-- standard submenu begins -->
-	  
+<!-- sidebar.jsp -->	  
     <TABLE height="100%" cellSpacing=0 cellPadding=0 width="210" summary="" border=0>
       <TBODY>   
       
