@@ -24,7 +24,7 @@ if(P=="nutritional_factor_help")C="Submit and Edit Models.3.21.html";
 if(P=="radiation_help")C="Submit and Edit Models.3.22.html";
 if(P=="surgery_help")C="Submit and Edit Models.3.23.html";
 if(P=="viral_treatment_help")C="Submit and Edit Models.3.24.html";
-if(P=="morpholino_help")C="Submit and Edit Models.3.25.html";
+if(P=="transient_interference_help")C="Submit and Edit Models.3.25.html";
 if(P=="publication_help")C="Submit and Edit Models.3.26.html";
 if(P=="histopathology_help")C="Submit and Edit Models.3.27.html#1084666";
 if(P=="clinical_marker_help")C="Submit and Edit Models.3.28.html#1085296";
