@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.42 2006-08-13 17:45:53 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.43 2006-08-15 15:30:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2006/08/13 17:45:53  pandyas
+ * Updated online help - redefined camod tag by substituting mapId for topic (ePublisher changes)
+ *
  * Revision 1.41  2006/05/25 12:02:51  georgeda
  * Slight tweaks
  *
@@ -199,7 +202,7 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp topic="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="data_tree_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
@@ -453,7 +456,7 @@
 				<label for="box1">Check here to search for models with microarray data</label>
 			</td>
 		</tr>
-		<tr>
+		<tr>			
 			<td align="right" colspan="3">
 				<!-- action buttons begins -->
 				<TABLE cellpadding="4" cellspacing="0" border="0">

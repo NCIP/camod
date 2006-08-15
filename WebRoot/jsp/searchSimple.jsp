@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.32 2006-08-13 17:43:20 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.33 2006-08-15 15:28:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2006/08/13 17:43:20  pandyas
+ * Updated online help - redefined camod tag by substituting mapId for topic (ePublisher changes)
+ *
  * Revision 1.31  2006/05/18 14:26:55  guptaa
  * fix style id
  *
@@ -146,7 +149,7 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp topic="simple_search_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="data_tree_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
