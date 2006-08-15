@@ -30,7 +30,8 @@
 		</tr>
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">User Settings for <c:out value="${userSettingsForm.firstName}"/> <c:out value="${userSettingsForm.lastName}"/></td>
+			<td class="formTitle" height="20" colspan="3">User Settings for <c:out value="${userSettingsForm.firstName}"/> <c:out value="${userSettingsForm.lastName}"/>
+				<camod:cshelp topic="user_settings_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		</tr>
         <tr>
 			<td class="formRequiredNotice" width="5">&nbsp</td>
