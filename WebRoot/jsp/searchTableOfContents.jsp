@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchTableOfContents.jsp,v 1.6 2006-05-10 14:23:14 schroedn Exp $
+ * $Id: searchTableOfContents.jsp,v 1.7 2006-08-15 15:24:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/05/10 14:23:14  schroedn
+ * New Features - Changes from code review
+ *
  *
  */
 
@@ -38,7 +41,8 @@
 		</tr>
 				
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Table of Contents</td>		
+			<td class="formTitle" height="20" colspan="3">Table of Contents
+				<camod:cshelp topic="toc_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>	
 			<c:set var="groupList" value="${TOC_QUERY_RESULTS}"/>
 			<c:if test="${not empty groupList}">
