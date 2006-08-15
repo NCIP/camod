@@ -44,7 +44,8 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Growth Factor</td>
+		<td class="formTitle" height="20" colspan="3">Growth Factor
+			<camod:cshelp topic="growth_factor_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
