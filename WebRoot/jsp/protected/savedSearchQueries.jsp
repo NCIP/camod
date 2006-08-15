@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: savedSearchQueries.jsp,v 1.4 2006-08-13 18:21:23 pandyas Exp $
+ * $Id: savedSearchQueries.jsp,v 1.5 2006-08-15 14:52:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/08/13 18:21:23  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified links
+ *
  * Revision 1.3  2006/05/25 15:19:17  georgeda
  * Added new context sensitive text topics
  *
@@ -60,7 +63,8 @@
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">	
 
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="6">Saved Queries&nbsp;<camod:cshelp topic="view_saved_queries_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
+			<td class="formTitleBlue" height="20" colspan="6">Saved Queries&nbsp;
+				<camod:cshelp topic="saving_search_query_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>				
 		</tr>
 
 		<tr>

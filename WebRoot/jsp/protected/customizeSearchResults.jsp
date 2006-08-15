@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: customizeSearchResults.jsp,v 1.5 2006-08-13 18:21:05 pandyas Exp $
+ * $Id: customizeSearchResults.jsp,v 1.6 2006-08-15 14:50:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/08/13 18:21:05  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified links
+ *
  * Revision 1.4  2006/05/25 15:19:17  georgeda
  * Added new context sensitive text topics
  *
@@ -215,7 +218,7 @@
 			<TABLE summary="" cellpadding="5" cellspacing="0" border="0" align="left">
 				<tr>
 					<td class="formTitleBlue" height="20" colspan="4">
-						Customize Search Results&nbsp;<camod:cshelp topic="customize_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+						Customize Search Results&nbsp;<camod:cshelp topic="customizing_search_results_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 					</td>
 				</tr>
 				
