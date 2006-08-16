@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.33 2006-08-15 15:28:54 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.34 2006-08-16 13:54:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2006/08/15 15:28:54  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified link - new data tree link added
+ *
  * Revision 1.32  2006/08/13 17:43:20  pandyas
  * Updated online help - redefined camod tag by substituting mapId for topic (ePublisher changes)
  *
@@ -114,7 +117,8 @@
         
                 
 		<tr>
-			<td class="formTitleBlue" height="20" colspan="3">Simple Search</td>
+			<td class="formTitleBlue" height="20" colspan="3">Simple Search
+				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 			<!-- <td class="formMessage" align="left" FONT="9"><a href="advancedsearch.html">Advanced Search <a> </td> -->
 		</tr>
 		
