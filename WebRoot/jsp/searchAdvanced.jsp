@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.43 2006-08-15 15:30:29 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.44 2006-08-16 13:55:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.43  2006/08/15 15:30:29  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified link - new data tree link added
+ *
  * Revision 1.42  2006/08/13 17:45:53  pandyas
  * Updated online help - redefined camod tag by substituting mapId for topic (ePublisher changes)
  *
@@ -169,7 +172,8 @@
         </tr>
         
         <tr>
-			<td class="formTitleBlue" height="20" colspan="3">Advanced Search</td>		
+			<td class="formTitleBlue" height="20" colspan="3">Advanced Search
+				<camod:cshelp topic="advanced_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		
 		<tr>
