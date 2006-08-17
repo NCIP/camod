@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.4 2006-05-24 15:26:57 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.5 2006-08-17 17:48:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/05/24 15:26:57  pandyas
+ * Cleaned up sendEmail method
+ *
  * Revision 1.3  2006/05/23 15:11:27  pandyas
  * fixed delete - still references Therapy instead of CE
  *
@@ -18,8 +21,11 @@
 
 package gov.nih.nci.camod.service.impl;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 import gov.nih.nci.camod.Constants;
@@ -702,19 +708,40 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                            String theUncontrolledVocab,
                            String inType)
     {
+    	log.debug("In CarcinogenExposureManagerImpl.sendEmail Enter");
         // Get the e-mail resource
-        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
 
-        // Iterate through all the reciepts in the config file
-        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+		
+		try {			
+		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+		camodProperties.load(in);	
+		} 
+		catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();			
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();			
+		}
+		
+		String recipients = UserManagerSingleton.instance()
+		.getEmailForCoordinator();
+   	
         StringTokenizer st = new StringTokenizer(recipients, ",");
         String inRecipients[] = new String[st.countTokens()];
         for (int i = 0; i < inRecipients.length; i++)
         {
             inRecipients[i] = st.nextToken();
+        	log.info("Defining recipients from the properties file: " + inRecipients[i]);             
         }
 
-        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        //String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+        String inSubject = System.getProperty("model.new_unctrl_vocab_subject");
+    	String inSubject2 = camodProperties.getProperty("model.new_unctrl_vocab_subject");
+  	
         String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
         // gather message keys and variable values to build the e-mail
@@ -725,11 +752,12 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         values.put("submitter", inAnimalModel.getSubmitter());
         values.put("model", inAnimalModel.getModelDescriptor());
         values.put("modelstate", inAnimalModel.getState());
-
+        
+    	log.debug("In CarcinogenExposureManagerImpl.sendEmail Enter");
         // Send the email
         try
         {
-            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);            
         }
         catch (Exception e)
         {
