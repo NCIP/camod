@@ -30,8 +30,7 @@
 		</tr>
 		<tr>
 		    <td class="formTitle" height="20" colspan="4">Comments Assignment &nbsp;
-                <a href="javascript:openHelpWindow('WebHelp/!SSL!/index.html?single=true&amp;context=caMOD_2.1_OH&amp;topic=comments_assignment_help')" class="helpText">
-				<img src="WebHelp/!SSL!/iconHelp.gif" alt="" width="20" height="20" border="0"/></a> 
+		    	<camod:cshelp topic="comments_assignment_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/> 
 		    </td>		
 		</tr>
 		<html:form action="AdminCommentsAssignmentPopulateAction">
