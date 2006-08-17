@@ -1,17 +1,23 @@
 /**
  * @pandyas
  * 
- * $Id: MorpholinoManagerImpl.java,v 1.1 2006-05-03 20:04:04 pandyas Exp $
+ * $Id: MorpholinoManagerImpl.java,v 1.2 2006-08-17 18:24:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/03 20:04:04  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * 
  */
 
 package gov.nih.nci.camod.service.impl;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
@@ -198,11 +204,29 @@ public class MorpholinoManagerImpl extends BaseManager implements MorpholinoMana
                            String theUncontrolledVocab,
                            String inType)
     {
-        // Get the e-mail resource
-        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+		// Get the e-mail resource
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
+
+		camodPropertiesFileName = System
+				.getProperty("gov.nih.nci.camod.camodProperties");
+
+		try {
+
+			FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			camodProperties.load(in);
+
+		} catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		}
 
         // Iterate through all the reciepts in the config file
-        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
+		String recipients = UserManagerSingleton.instance()
+		.getEmailForCoordinator();
         StringTokenizer st = new StringTokenizer(recipients, ",");
         String inRecipients[] = new String[st.countTokens()];
         for (int i = 0; i < inRecipients.length; i++)
@@ -210,7 +234,8 @@ public class MorpholinoManagerImpl extends BaseManager implements MorpholinoMana
             inRecipients[i] = st.nextToken();
         }
 
-        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
+		String inSubject = camodProperties
+		.getProperty("model.new_unctrl_vocab_subject");
         String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
         // gather message keys and variable values to build the e-mail

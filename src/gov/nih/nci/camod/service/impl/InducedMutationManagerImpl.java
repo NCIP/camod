@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.22 2006-05-04 19:27:45 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.23 2006-08-17 18:25:42 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/05/04 19:27:45  pandyas
+ * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
+ *
  * Revision 1.21  2006/04/19 15:08:17  georgeda
  * Fixed issue w/ display of induced mutation
  *
@@ -68,210 +71,227 @@ import gov.nih.nci.camod.domain.MutationIdentifier;
 import gov.nih.nci.camod.service.InducedMutationManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
+public class InducedMutationManagerImpl extends BaseManager implements
+		InducedMutationManager {
+	public List getAll() throws Exception {
+		log.info("In InducedMutationManagerImpl.getAll");
+		return super.getAll(InducedMutation.class);
+	}
 
-public class InducedMutationManagerImpl extends BaseManager implements InducedMutationManager
-{
-    public List getAll() throws Exception
-    {
-        log.info("In InducedMutationManagerImpl.getAll");
-        return super.getAll(InducedMutation.class);
-    }
+	public InducedMutation get(String id) throws Exception {
+		log.info("In InducedMutationManagerImpl.get");
+		return (InducedMutation) super.get(id, InducedMutation.class);
+	}
 
-    public InducedMutation get(String id) throws Exception
-    {
-        log.info("In InducedMutationManagerImpl.get");
-        return (InducedMutation) super.get(id, InducedMutation.class);
-    }
+	public void save(InducedMutation InducedMutation) throws Exception {
+		log.info("In InducedMutationManagerImpl.save");
+		super.save(InducedMutation);
+	}
 
-    public void save(InducedMutation InducedMutation) throws Exception
-    {
-        log.info("In InducedMutationManagerImpl.save");
-        super.save(InducedMutation);
-    }
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+		log.info("In InducedMutationManagerImpl.remove");
+		inAnimalModel.getEngineeredGeneCollection().remove(get(id));
+		super.save(inAnimalModel);
+	}
 
-    public void remove(String id,
-                       AnimalModel inAnimalModel) throws Exception
-    {
-        log.info("In InducedMutationManagerImpl.remove");
-        inAnimalModel.getEngineeredGeneCollection().remove(get(id));
-        super.save(inAnimalModel);
-    }
+	public InducedMutation create(AnimalModel inAnimalModel,
+			InducedMutationData inInducedMutationData) throws Exception {
+		log.info("Entering InducedMutationManagerImpl.create");
 
-    public InducedMutation create(AnimalModel inAnimalModel,
-                                  InducedMutationData inInducedMutationData) throws Exception
-    {
-        log.info("Entering InducedMutationManagerImpl.create");
+		InducedMutation theInducedMutation = new InducedMutation();
 
-        InducedMutation theInducedMutation = new InducedMutation();
+		populateInducedMutation(inAnimalModel, inInducedMutationData,
+				theInducedMutation);
 
-        populateInducedMutation(inAnimalModel, inInducedMutationData, theInducedMutation);
+		log.info("Exiting InducedMutationManagerImpl.create");
 
-        log.info("Exiting InducedMutationManagerImpl.create");
+		return theInducedMutation;
+	}
 
-        return theInducedMutation;
-    }
+	public void update(AnimalModel inAnimalModel,
+			InducedMutationData inInducedMutationData,
+			InducedMutation inInducedMutation) throws Exception {
+		log.info("Entering InducedMutationManagerImpl.update");
+		log.info("Updating InducedMutationForm: " + inInducedMutation.getId());
 
-    public void update(AnimalModel inAnimalModel,
-                       InducedMutationData inInducedMutationData,
-                       InducedMutation inInducedMutation) throws Exception
-    {
-        log.info("Entering InducedMutationManagerImpl.update");
-        log.info("Updating InducedMutationForm: " + inInducedMutation.getId());
+		// Populate w/ the new values and save
+		populateInducedMutation(inAnimalModel, inInducedMutationData,
+				inInducedMutation);
+		save(inInducedMutation);
 
-        // Populate w/ the new values and save
-        populateInducedMutation(inAnimalModel, inInducedMutationData, inInducedMutation);
-        save(inInducedMutation);
+		log.info("Exiting InducedMutationManagerImpl.update");
+	}
 
-        log.info("Exiting InducedMutationManagerImpl.update");
-    }
+	private void populateInducedMutation(AnimalModel inAnimalModel,
+			InducedMutationData inInducedMutationData,
+			InducedMutation inInducedMutation) throws Exception {
+		log.info("Entering populateInducedMutation");
 
-    private void populateInducedMutation(AnimalModel inAnimalModel,
-                                         InducedMutationData inInducedMutationData,
-                                         InducedMutation inInducedMutation) throws Exception
-    {
-        log.info("Entering populateInducedMutation");
+		EnvironmentalFactor theEnvironFactor = null;
 
-        EnvironmentalFactor theEnvironFactor = null;
+		// Check to see if a Environmental Factor already exists,
+		// if it does edit it else create a new EnvironmentalFactor
+		if (inInducedMutation.getEnvironmentalFactor() != null) {
+			theEnvironFactor = (EnvironmentalFactor) inInducedMutation
+					.getEnvironmentalFactor();
+		} else {
+			theEnvironFactor = new EnvironmentalFactor();
+			inInducedMutation.setEnvironmentalFactor(theEnvironFactor);
+		}
+		log
+				.info("In InducedMutationManagerImpl.populateInducedMutation created EF");
 
-        // Check to see if a Environmental Factor already exists,
-        // if it does edit it else create a new EnvironmentalFactor
-        if (inInducedMutation.getEnvironmentalFactor() != null)
-        {
-            theEnvironFactor = (EnvironmentalFactor) inInducedMutation.getEnvironmentalFactor();
-        }
-        else
-        {
-            theEnvironFactor = new EnvironmentalFactor();
-            inInducedMutation.setEnvironmentalFactor(theEnvironFactor);
-        }
-        log.info("In InducedMutationManagerImpl.populateInducedMutation created EF");
+		// Name of Inducing Agent - Saved in uncontrolled vocab field since it
+		// is free text
+		theEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
+		log.info("In InducedMutationManagerImpl.save set name : "
+				+ inInducedMutationData.getName());
 
-        // Name of Inducing Agent - Saved in uncontrolled vocab field since it is free text
-        theEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
-        log.info("In InducedMutationManagerImpl.save set name : " + inInducedMutationData.getName());
+		// Inducing Agent Category type / Other type
+		if (inInducedMutationData.getOtherType() != null) {
+			log
+					.info("Sending Notification eMail - new InducedMutation Agent added");
+			// Send the email
+			sendEmail(inAnimalModel, inInducedMutationData.getOtherType(),
+					"OtherInducedMutation");
+			// Do not save 'Other' in the database
+			theEnvironFactor.setTypeUnctrlVocab(inInducedMutationData
+					.getOtherType());
+			log.info("inInducedMutationData.getOtherType(): "
+					+ inInducedMutationData.getOtherType());
+		} else {
+			theEnvironFactor.setType(inInducedMutationData.getType());
+			log.info("inInducedMutationData.getType(): "
+					+ inInducedMutationData.getType());
+		}
 
-        // Inducing Agent Category type / Other type
-        if (inInducedMutationData.getOtherType() != null)
-        {
-            log.info("Sending Notification eMail - new InducedMutation Agent added");
-            // Send the email
-            sendEmail(inAnimalModel, inInducedMutationData.getOtherType(), "OtherInducedMutation");
-            // Do not save 'Other' in the database
-            theEnvironFactor.setTypeUnctrlVocab(inInducedMutationData.getOtherType());
-            log.info("inInducedMutationData.getOtherType(): " + inInducedMutationData.getOtherType());
-        }
-        else
-        {
-            theEnvironFactor.setType(inInducedMutationData.getType());
-            log.info("inInducedMutationData.getType(): " + inInducedMutationData.getType());
-        }
+		// CAS Number
+		theEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
 
-        // CAS Number
-        theEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
+		// GeneID
+		inInducedMutation.setGeneId(inInducedMutationData.getGeneId());
 
-        // GeneID
-        inInducedMutation.setGeneId(inInducedMutationData.getGeneId());
+		// Description
+		inInducedMutation
+				.setDescription(inInducedMutationData.getDescription());
+		log.info("inInducedMutationData.getDescription(): "
+				+ inInducedMutationData.getDescription());
 
-        // Description
-        inInducedMutation.setDescription(inInducedMutationData.getDescription());
-        log.info("inInducedMutationData.getDescription(): " + inInducedMutationData.getDescription());
+		// Observation and Method of Observation
+		// No genetic alteration in DB - data is entered from the GUI
+		if (inInducedMutation.getGeneticAlteration() == null
+				&& inInducedMutationData.getObservation() != null
+				&& inInducedMutationData.getObservation().length() > 0) {
+			inInducedMutation.setGeneticAlteration(new GeneticAlteration());
+			log
+					.info("Saving: inInducedMutation.getGeneticAlteration() attributes ");
 
-        // Observation and Method of Observation
-        // No genetic alteration in DB - data is entered from the GUI
-        if (inInducedMutation.getGeneticAlteration() == null && inInducedMutationData.getObservation() != null && inInducedMutationData.getObservation().length() > 0)
-        {
-            inInducedMutation.setGeneticAlteration(new GeneticAlteration());
-            log.info("Saving: inInducedMutation.getGeneticAlteration() attributes ");
+			inInducedMutation.getGeneticAlteration().setObservation(
+					inInducedMutationData.getObservation());
+			inInducedMutation.getGeneticAlteration().setMethodOfObservation(
+					inInducedMutationData.getMethodOfObservation());
+		}
 
-            inInducedMutation.getGeneticAlteration().setObservation(inInducedMutationData.getObservation());
-            inInducedMutation.getGeneticAlteration().setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
-        }
+		// Already have a genetic alteration in DB. Either blank it out or
+		// update it
+		else {
+			if (inInducedMutationData.getObservation() != null
+					&& inInducedMutationData.getObservation().length() > 0) {
+				inInducedMutation.getGeneticAlteration().setObservation(
+						inInducedMutationData.getObservation());
+				inInducedMutation.getGeneticAlteration()
+						.setMethodOfObservation(
+								inInducedMutationData.getMethodOfObservation());
+			} else {
+				inInducedMutation.setGeneticAlteration(null);
+			}
+		}
 
-        // Already have a genetic alteration in DB. Either blank it out or update it
-        else
-        {
-            if (inInducedMutationData.getObservation() != null && inInducedMutationData.getObservation().length() > 0)
-            {
-                inInducedMutation.getGeneticAlteration().setObservation(inInducedMutationData.getObservation());
-                inInducedMutation.getGeneticAlteration().setMethodOfObservation(inInducedMutationData.getMethodOfObservation());
-            }
-            else
-            {
-                inInducedMutation.setGeneticAlteration(null);
-            }
-        }
+		// MGI Number
+		// Check for exisiting MutationIdentifier
+		MutationIdentifier inMutationIdentifier = null;
+		if (inInducedMutation.getMutationIdentifier() != null) {
+			inMutationIdentifier = inInducedMutation.getMutationIdentifier();
+		} else {
+			inMutationIdentifier = new MutationIdentifier();
+		}
 
-        // MGI Number
-        // Check for exisiting MutationIdentifier
-        MutationIdentifier inMutationIdentifier = null;
-        if (inInducedMutation.getMutationIdentifier() != null)
-        {
-            inMutationIdentifier = inInducedMutation.getMutationIdentifier();
-        }
-        else
-        {
-            inMutationIdentifier = new MutationIdentifier();
-        }
+		if (inInducedMutationData.getMgiNumber() == null
+				|| inInducedMutationData.getMgiNumber().equals("")) {
+			inInducedMutation.setMutationIdentifier(null);
+		} else {
+			inMutationIdentifier.setMgiNumber(inInducedMutationData
+					.getMgiNumber());
+			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+		}
 
-        if (inInducedMutationData.getMgiNumber() == null || inInducedMutationData.getMgiNumber().equals(""))
-        {
-            inInducedMutation.setMutationIdentifier(null);
-        }
-        else
-        {
-            inMutationIdentifier.setMgiNumber(inInducedMutationData.getMgiNumber());
-            inInducedMutation.setMutationIdentifier(inMutationIdentifier);
-        }
+		// Comments
+		inInducedMutation.setComments(inInducedMutationData.getComments());
 
-        // Comments
-        inInducedMutation.setComments(inInducedMutationData.getComments());
+		log.info("Exiting populateInducedMutation");
+	}
 
-        log.info("Exiting populateInducedMutation");
-    }
+	private void sendEmail(AnimalModel inAnimalModel,
+			String theUncontrolledVocab, String inType) {
+		// Get the e-mail resource
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
 
-    private void sendEmail(AnimalModel inAnimalModel,
-                           String theUncontrolledVocab,
-                           String inType)
-    {
-        // Get the e-mail resource
-        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+		camodPropertiesFileName = System
+				.getProperty("gov.nih.nci.camod.camodProperties");
 
-        // Iterate through all the reciepts in the config file
-        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-        StringTokenizer st = new StringTokenizer(recipients, ",");
-        String inRecipients[] = new String[st.countTokens()];
-        for (int i = 0; i < inRecipients.length; i++)
-        {
-            inRecipients[i] = st.nextToken();
-        }
+		try {
 
-        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+			FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			camodProperties.load(in);
 
-        // gather message keys and variable values to build the e-mail
-        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-        Map<String, Object> values = new TreeMap<String, Object>();
-        values.put("type", inType);
-        values.put("value", theUncontrolledVocab);
-        values.put("submitter", inAnimalModel.getSubmitter());
-        values.put("model", inAnimalModel.getModelDescriptor());
-        values.put("modelstate", inAnimalModel.getState());
+		} catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		}
 
-        // Send the email
-        try
-        {
-            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-        }
-        catch (Exception e)
-        {
-            log.error("Caught exception sending mail: ", e);
-            e.printStackTrace();
-        }
-    }
+		// Iterate through all the reciepts in the config file
+		String recipients = UserManagerSingleton.instance()
+				.getEmailForCoordinator();
+		StringTokenizer st = new StringTokenizer(recipients, ",");
+		String inRecipients[] = new String[st.countTokens()];
+		for (int i = 0; i < inRecipients.length; i++) {
+			inRecipients[i] = st.nextToken();
+		}
+
+		String inSubject = camodProperties
+				.getProperty("model.new_unctrl_vocab_subject");
+		String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+		// gather message keys and variable values to build the e-mail
+		String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+		Map<String, Object> values = new TreeMap<String, Object>();
+		values.put("type", inType);
+		values.put("value", theUncontrolledVocab);
+		values.put("submitter", inAnimalModel.getSubmitter());
+		values.put("model", inAnimalModel.getModelDescriptor());
+		values.put("modelstate", inAnimalModel.getState());
+
+		// Send the email
+		try {
+			MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys,
+					values);
+		} catch (Exception e) {
+			log.error("Caught exception sending mail: ", e);
+			e.printStackTrace();
+		}
+	}
 }
