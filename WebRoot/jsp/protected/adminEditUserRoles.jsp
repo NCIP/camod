@@ -8,13 +8,16 @@
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
+<!-- adminEditUserRoles.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
 
 		<tr>
-			<td class="formTitle" height="20" colspan="3">Edit User Roles for <c:out value="${rolesAssignmentForm.displayName}"/></td>
+			<td class="formTitle" height="20" colspan="3">Edit User Roles for <c:out value="${rolesAssignmentForm.displayName}"/>
+				<camod:cshelp topic="edit_user_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 		</tr>
 
 		<tr>
