@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.10 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Image.java,v 1.11 2006-08-17 18:36:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * Revision 1.9  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -15,18 +18,25 @@
  */
 package gov.nih.nci.camod.domain;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.Constants.CaImage;
 import gov.nih.nci.camod.util.Duplicatable;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.ResourceBundle;
+import java.util.Properties;
 import java.util.StringTokenizer;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class Image extends BaseObject implements Comparable, Serializable, Duplicatable
 {
 
+    static private final Log log = LogFactory.getLog(Image.class);
+    
     private static final long serialVersionUID = 3259255453799404851L;
 
     private String title;
@@ -150,10 +160,27 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
         try
         {
             // Retrieve ftp data from a resource bundle
-            ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
+    		Properties camodProperties = new Properties();
+    		String camodPropertiesFileName = null;
 
-            String windowStart = theBundle.getString(CaImage.CAIMAGEWINDOWSTART);
-            String windowEnd = theBundle.getString(CaImage.CAIMAGEWINDOWEND);
+    		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+    		
+    		try {
+			
+    		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+    		camodProperties.load(in);
+		
+    		} 
+    		catch (FileNotFoundException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		} catch (IOException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		}	        	
+
+            String windowStart = camodProperties.getProperty("caimage.window.start");
+            String windowEnd = camodProperties.getProperty("caimage.window.end");
 
             if (fileServerLocation != null)
             {
@@ -182,10 +209,10 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
                 }
 
                 // Setup the server location
-                String sidUrlStart = theBundle.getString(CaImage.CAIMAGESIDVIEWURISTART);
-                String sidUrlEnd = theBundle.getString(CaImage.CAIMAGESIDVIEWURIEND);
-                String gencon = theBundle.getString(Constants.CaImage.CAIMAGEGENCON);
-                String model = theBundle.getString(Constants.CaImage.CAIMAGEMODEL);
+                String sidUrlStart = camodProperties.getProperty("caimage.sidview.uri_start");
+                String sidUrlEnd = camodProperties.getProperty("caimage.sidview.uri_end");
+                String gencon = camodProperties.getProperty("caimage.gencon");
+                String model = camodProperties.getProperty("caimage.model");
                 String theType = "";
                 if (fileServerLocation.indexOf(gencon) == -1)
                 {
