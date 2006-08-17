@@ -57,11 +57,12 @@
     <Document title="Guest User" href="About caMOD.2.3.html" />
     <Document title="Registered User" href="About caMOD.2.4.html" />
     <Document title="Logging into caMOD" href="About caMOD.2.5.html" />
-    <Document title="Using Online Help" href="About caMOD.2.6.html" />
-    <Document title="What’s New in caMOD" href="About caMOD.2.7.html" />
-    <Document title="Submit and Edit Models Page" href="About caMOD.2.8.html" />
-    <Document title="Navigation in caMOD" href="About caMOD.2.9.html" />
-    <Document title="Application Support" href="About caMOD.2.10.html" />
+    <Document title="User Settings" href="About caMOD.2.6.html" />
+    <Document title="Using Online Help" href="About caMOD.2.7.html" />
+    <Document title="What’s New in caMOD" href="About caMOD.2.8.html" />
+    <Document title="Submit and Edit Models Page" href="About caMOD.2.9.html" />
+    <Document title="Navigation in caMOD" href="About caMOD.2.10.html" />
+    <Document title="Application Support" href="About caMOD.2.11.html" />
     <Document title="Submitting and Editing Models" href="Submit and Edit Models.3.1.html" />
     <Document title="Notes about Submitting Models" href="Submit and Edit Models.3.2.html" />
     <Document title="Generic steps for Submitting Models" href="Submit and Edit Models.3.3.html" />
@@ -139,19 +140,20 @@
     <Document title="Reviewing Models" href="caMOD admin.5.21.html" />
     <Document title="Assigning Models to Editors" href="caMOD admin.5.22.html" />
     <Document title="Review Follow-Up" href="caMOD admin.5.23.html" />
-    <Document title="Models Assignment" href="caMOD admin.5.24.html" />
-    <Document title="Screening a Model" href="caMOD admin.5.25.html" />
-    <Document title="Screening Work flow" href="caMOD admin.5.26.html" />
-    <Document title="Comments Assignment" href="caMOD admin.5.27.html" />
-    <Document title="Editing a Model" href="caMOD admin.5.28.html" />
-    <Document title="Editing Work flow" href="caMOD admin.5.29.html" />
+    <Document title="Requesting More Information" href="caMOD admin.5.24.html" />
+    <Document title="Models Assignment" href="caMOD admin.5.25.html" />
+    <Document title="Screening a Model" href="caMOD admin.5.26.html" />
+    <Document title="Screening Work flow" href="caMOD admin.5.27.html" />
+    <Document title="Comments Assignment" href="caMOD admin.5.28.html" />
+    <Document title="Editing a Model" href="caMOD admin.5.29.html" />
+    <Document title="Editing Work flow" href="caMOD admin.5.30.html" />
   </DocumentInfo>
   <TopicMap>
     <Topic name="register_user_help" href="About caMOD.2.4.html#1069005" />
     <Topic name="login_page_help" href="About caMOD.2.5.html" />
-    <Topic name="user_settings_help" href="About caMOD.2.5.html#1074656" />
-    <Topic name="whatsnew_help" href="About caMOD.2.7.html" />
-    <Topic name="submit_edit_models_help" href="About caMOD.2.8.html" />
+    <Topic name="user_settings_help" href="About caMOD.2.6.html#1074656" />
+    <Topic name="whatsnew_help" href="About caMOD.2.8.html" />
+    <Topic name="submit_edit_models_help" href="About caMOD.2.9.html" />
     <Topic name="model_status_help" href="Submit and Edit Models.3.5.html#1105598" />
     <Topic name="model_characteristics_help" href="Submit and Edit Models.3.7.html#1070098" />
     <Topic name="data_tree_help" href="Submit and Edit Models.3.8.html" />
@@ -191,12 +193,14 @@
     <Topic name="customizing_search_results_help" href="caMOD searches.4.10.html#1073802" />
     <Topic name="drug_screening_help" href="caMOD searches.4.11.html#1069560" />
     <Topic name="administration_roles_help" href="caMOD admin.5.5.html#1073499" />
-    <Topic name="user_management_help" href="caMOD admin.5.9.html" />
+    <Topic name="edit_user_help" href="caMOD admin.5.9.html" />
     <Topic name="add_user_help" href="caMOD admin.5.10.html#1073923" />
     <Topic name="assigning_screener_help" href="caMOD admin.5.11.html#1074083" />
     <Topic name="assigning_an_editor_help" href="caMOD admin.5.13.html#1072472" />
     <Topic name="roles_management_help" href="caMOD admin.5.17.html#1072713" />
-    <Topic name="models_assignment_help" href="caMOD admin.5.24.html" />
-    <Topic name="screening_model_help" href="caMOD admin.5.25.html#1072939" />
+    <Topic name="request_information_help" href="caMOD admin.5.24.html" />
+    <Topic name="models_assignment_help" href="caMOD admin.5.25.html" />
+    <Topic name="screening_model_help" href="caMOD admin.5.26.html#1072939" />
+    <Topic name="comments_assignment_help" href="caMOD admin.5.28.html#1073124" />
   </TopicMap>
 </WebWorksHelpBook>
