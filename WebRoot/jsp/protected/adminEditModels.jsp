@@ -1,14 +1,19 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.1 2005-11-18 21:07:44 georgeda Exp $
+ * $Id: adminEditModels.jsp,v 1.2 2006-08-17 15:38:09 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/11/18 21:07:44  georgeda
+ * Defect #130, added superuser
+ *
  *
  */
 %>
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
+<!-- adminEditModels.jsp -->
+<!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" width="100%">
@@ -27,7 +32,8 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Edit Models (SuperUser)</td>		
+		    <td class="formTitle" height="20" colspan="4">Edit Models (SuperUser)
+		    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		<html:form action="AdminEditModelsPopulateAction">
 		    
