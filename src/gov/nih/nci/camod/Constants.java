@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.87 2006-05-24 16:45:55 pandyas Exp $
+ * $Id: Constants.java,v 1.88 2006-08-17 17:45:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.87  2006/05/24 16:45:55  pandyas
+ * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
+ *
  * Revision 1.86  2006/05/17 16:12:34  pandyas
  * added better comments
  *
@@ -193,12 +196,7 @@ package gov.nih.nci.camod;
  * </p>
  */
 public class Constants {
-
-    // ~ Static fields/initializers
-    // =============================================
-
-    /** The name of the camod resource bundle used in this application */
-    public static final String CAMOD_BUNDLE = "camod";
+	
 
     /** The name of the ResourceBundle used in this application */
     public static final String BUNDLE_KEY = "ApplicationResources";
@@ -256,33 +254,6 @@ public class Constants {
      */ 
     public static final String AMMODELSPECIES = "animalmodelspecies";    
 
-    public interface BundleKeys {
-
-        /**
-         * The key for the coordinator username in the camod.properties file
-         */
-        public static final String COORDINATOR_USERNAME_KEY = "coordinator.username";
-
-        /**
-         * The key for the coordinator username in the camod.properties file
-         */
-        public static final String SUPERUSER_USERNAMES_KEY = "superuser.usernames";
-        
-        /**
-         * The key for the coordinator username in the camod.properties file
-         */
-        public static final String NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY = "model.new_unctrl_vocab_notify";
-
-        /**
-         * The key for the coordinator username in the camod.properties file
-         */
-        public static final String NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY = "model.new_unctrl_vocab_subject";
-
-        /**
-         * The key for the coordinator username in the camod.properties file
-         */
-        public static final String USER_UPDATE_NOTIFY_KEY = "user_settings.user_update_notify";
-    }
 
     /**
      * Used to store lists for drop down menus
@@ -444,17 +415,23 @@ public class Constants {
 
         public static final String EXPRESSIONLEVELDROP = "expressionlevel.db";
 
-        // Morpholino screen dropdowns
+        // Morpholino/siRNA screen dropdowns
         public static final String MORPHOSOURCEDROP = "MorpholinoSources.txt";
+        public static final String SIRNASOURCEDROP = "sirnaSources.txt";
         
         public static final String MORPHOTYPEDROP = "MorpholinoTypes.txt";
+        public static final String SIRNATYPEDROP = "sirnaTypes.txt";
         
         public static final String SEQUENCEDIRECTIONSDROP = "SequenceDirections.txt";
         
-        public static final String DELIVERYMETHODSOURCEDROP = "DeliveryMethods.txt";
+        public static final String DELIVERYMETHODDROP = "DeliveryMethods.txt";
+        public static final String SIRNADELIVMETHODDROP = "sirnaDeliveryMethods.txt";
         
         public static final String VISUALLIGANDSDROP = "VisualLigands.txt";
-                
+        public static final String SIRNAVISUALLIGANDSDROP = "sirnaVisualLigands.txt";
+        
+        
+        
         public static final String SEARCHRESULTCOLUMNSDROP = "SearchResultsColumns.txt";        
         
         public static final String ITEMSPERPAGEDROP = "ItemsPerPage.txt";
@@ -475,6 +452,8 @@ public class Constants {
         public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
 
         public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
+        
+        public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";        
 
         // These two are used to display the species and strain currently in the
         // AnimalModelCharacteristics
@@ -782,10 +761,11 @@ public class Constants {
         public static final String MMHCC_LIST = "mmhcc_list";
         public static final String IMSR_LIST = "imsr_list";
         /**
-         * Used to store animal model availability for the Morpholino 
+         * Used to store animal model availability for the Transient Interference 
          * section of the sidebar menu of the submission section
          */        
         public static final String MORPHOLINO_LIST = "morpholino_list";
+        public static final String SIRNA_LIST = "sirna_list";
     }
 
     // /////////////////////////////////////////////////////////////
