@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: SubmitOverviewPopulateAction.java,v 1.1 2005-12-06 18:49:10 georgeda Exp $
+ *  $Id: SubmitOverviewPopulateAction.java,v 1.2 2006-08-17 18:10:20 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/12/06 18:49:10  georgeda
+ *  Defect #247 - real fix this time for the problem
+ *
  *  Revision 1.1  2005/10/11 18:15:25  georgeda
  *  More comment changes
  *
@@ -26,7 +29,10 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
-import java.util.ResourceBundle;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,8 +55,25 @@ public class SubmitOverviewPopulateAction extends BaseAction {
 
             String theModelId = (String) inRequest.getSession().getAttribute(Constants.MODELID);
 
-            ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-            String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
+    		Properties camodProperties = new Properties();
+    		String camodPropertiesFileName = null;
+
+    		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+    		
+    		try {
+			
+    		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+    		camodProperties.load(in);
+	
+    		} 
+    		catch (FileNotFoundException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		} catch (IOException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		}
+            String theCoordinator = camodProperties.getProperty("coordinator.username");
 
             AnimalModelStateForm theForm = new AnimalModelStateForm();
 

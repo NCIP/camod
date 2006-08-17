@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RegisterUserAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: RegisterUserAction.java,v 1.7 2006-08-17 18:08:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/11/16 15:31:16  georgeda
  * Defect #41. Clean up of email functionality
  *
@@ -23,12 +26,15 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
+import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.UserSettingsForm;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,8 +69,26 @@ public class RegisterUserAction extends BaseAction {
             try {
 
                 // Get from default bundle
-                ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-                String theUsersToNotify = theBundle.getString(Constants.BundleKeys.USER_UPDATE_NOTIFY_KEY);
+        		Properties camodProperties = new Properties();
+        		String camodPropertiesFileName = null;
+
+        		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+        		
+        		try {
+			
+        		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+        		camodProperties.load(in);
+	
+        		} 
+        		catch (FileNotFoundException e) {
+        			log.error("Caught exception finding file for properties: ", e);
+        			e.printStackTrace();			
+        		} catch (IOException e) {
+        			log.error("Caught exception finding file for properties: ", e);
+        			e.printStackTrace();			
+        		}          	
+                String theUsersToNotify = UserManagerSingleton.instance()
+				.getEmailForCoordinator();
 
                 StringTokenizer theTokenizer = new StringTokenizer(theUsersToNotify, ",");
 

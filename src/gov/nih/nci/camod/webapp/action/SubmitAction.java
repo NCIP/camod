@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.13 2005-12-02 16:17:09 georgeda Exp $
+ *  $Id: SubmitAction.java,v 1.14 2006-08-17 18:10:05 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.13  2005/12/02 16:17:09  georgeda
+ *  Defect #247, set the formdata in the session
+ *
  *  Revision 1.12  2005/10/24 13:28:17  georgeda
  *  Cleanup changes
  *
@@ -24,7 +27,10 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
-import java.util.ResourceBundle;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,8 +66,26 @@ public class SubmitAction extends BaseAction {
             theForm.setModelId(am.getId().toString());
 
             // Get the coordinator
-            ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-            String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
+    		Properties camodProperties = new Properties();
+    		String camodPropertiesFileName = null;
+
+    		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+    		
+    		try {
+			
+    		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+    		camodProperties.load(in);
+	
+    		} 
+    		catch (FileNotFoundException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		} catch (IOException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		}
+            
+            String theCoordinator = camodProperties.getProperty("coordinator.username");
             theForm.setAssignedTo(theCoordinator);
             request.getSession().setAttribute(Constants.FORMDATA, theForm);
 

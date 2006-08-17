@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.31 2006-05-24 18:37:27 georgeda Exp $
+ *  $Id: ViewModelAction.java,v 1.32 2006-08-17 18:10:44 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.31  2006/05/24 18:37:27  georgeda
+ *  Workaround for bug in caBIO
+ *
  *  Revision 1.30  2006/05/09 18:57:54  georgeda
  *  Changes for searching on transient interfaces
  *
@@ -116,13 +119,16 @@ import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.domain.impl.DatabaseCrossReferenceImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -634,10 +640,28 @@ public class ViewModelAction extends BaseAction
                                              HttpServletResponse response) throws Exception
     {
         setCancerModel(request);
-        ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
+        //Get external properties file
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
 
-        request.setAttribute("uri_start", theBundle.getString(Constants.CaArray.URI_START));
-        request.setAttribute("uri_end", theBundle.getString(Constants.CaArray.URI_END));
+		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+		
+		try {
+		
+		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+		camodProperties.load(in);
+	
+		} 
+		catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();			
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();			
+		}
+
+        request.setAttribute("uri_start", camodProperties.getProperty("caarray.uri_start"));
+        request.setAttribute("uri_end", camodProperties.getProperty("caarray.uri_end"));
 
         setComments(request, Constants.Pages.MICROARRAY);
 

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminUserSettingsAction.java,v 1.3 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: AdminUserSettingsAction.java,v 1.4 2006-08-17 18:04:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.2  2005/10/24 13:28:17  georgeda
  * Cleanup changes
  *
@@ -14,10 +17,12 @@
  */
 package gov.nih.nci.camod.webapp.action;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.UserSettingsForm;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,9 +55,26 @@ public class AdminUserSettingsAction extends BaseAction {
 
             try {
 
-                // Get from default bundle
-                ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-                String theUsersToNotify = theBundle.getString(Constants.BundleKeys.USER_UPDATE_NOTIFY_KEY);
+        		// Get the e-mail resource
+        		Properties camodProperties = new Properties();
+        		String camodPropertiesFileName = null;
+
+        		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+        		
+        		try {
+			
+        		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+        		camodProperties.load(in);
+	
+        		} 
+        		catch (FileNotFoundException e) {
+        			log.error("Caught exception finding file for properties: ", e);
+        			e.printStackTrace();			
+        		} catch (IOException e) {
+        			log.error("Caught exception finding file for properties: ", e);
+        			e.printStackTrace();			
+        		}
+                String theUsersToNotify = camodProperties.getProperty("user_settings.user_update_notify");
 
                 StringTokenizer theTokenizer = new StringTokenizer(theUsersToNotify, ",");
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.25 2006-05-08 13:33:40 georgeda Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.26 2006-08-17 18:20:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/05/08 13:33:40  georgeda
+ * Clean up warnings
+ *
  * Revision 1.24  2006/04/20 14:06:40  pandyas
  * changed Modification Type to getOrCreate
  *
@@ -35,14 +38,17 @@ import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.ImageForm;
 import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class TargetedModificationManagerImpl extends BaseManager implements TargetedModificationManager
-{
+public class TargetedModificationManagerImpl extends BaseManager implements
+		TargetedModificationManager {
 
     public List getAll() throws Exception
     {
@@ -79,12 +85,13 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
 
         TargetedModification theTargetedModification = new TargetedModification();
 
-        populateTargetedModification(inAnimalModel, inTargetedModificationData, theTargetedModification, request);
+		populateTargetedModification(inAnimalModel, inTargetedModificationData,
+				theTargetedModification, request);
 
-        log.info("Exiting TargetedModificationManagerImpl.create");
+		log.info("Exiting TargetedModificationManagerImpl.create");
 
-        return theTargetedModification;
-    }
+		return theTargetedModification;
+	}
 
     public void update(AnimalModel inAnimalModel,
                        TargetedModificationData inTargetedModificationData,
@@ -114,183 +121,211 @@ public class TargetedModificationManagerImpl extends BaseManager implements Targ
         // set Targeted Gene/Locus
         inTargetedModification.setName(inTargetedModificationData.getName());
 
-        // Get Modification Types selected from the GUI
-        String[] theModificationTypes = inTargetedModificationData.getModificationType();
-        
-        //associates the current list with the Object, so it is reused to save them back into the database
-        Set<ModificationType> theCurrentModificationTypeSet = inTargetedModification.getModificationTypeCollection();
-        
-        // Clears list, but list remains associated with TM object (no explicit save needed for hibernate)
-        theCurrentModificationTypeSet.clear();
+		// Get Modification Types selected from the GUI
+		String[] theModificationTypes = inTargetedModificationData
+				.getModificationType();
 
-        for (int i = 0; i < theModificationTypes.length; i++)
-        {
-            log.info(" other theModificationType from GUI: " + inTargetedModificationData.getOtherModificationType());
-            
-            // Create/reuse the ModificationType object - Reuses other if uncontrolled value matches
-            ModificationType theModificationType = ModificationTypeManagerSingleton.instance().getOrCreate(
-                                                                 theModificationTypes[i],
-                                                                 inTargetedModificationData.getOtherModificationType());
+		// associates the current list with the Object, so it is reused to save
+		// them back into the database
+		Set<ModificationType> theCurrentModificationTypeSet = inTargetedModification
+				.getModificationTypeCollection();
 
-            if (theModificationTypes.equals(Constants.Dropdowns.OTHER_OPTION))
-            {
-                log.info(" other theModificationTyp: " + theModificationType.toString());
-                // Send e-mail and add modification type (already reused in getOrCreate)
-                log.info("Sending Notification eMail - new Targeted Modification added");
-                sendEmail(inAnimalModel, inTargetedModificationData.getOtherModificationType(), "OtherModificationType");
-                //theCurrentModificationTypeSet.add(theModificationType);
-            }             
-            // Add selection if not already in DB (No duplicates during editing phase)
-            if (!inTargetedModification.getModificationTypeCollection().contains(theModificationType))
-            {
-                log.info("\n new ModificationType: " + theModificationType.toString());
-                theCurrentModificationTypeSet.add(theModificationType);
-            }           
-            
+		// Clears list, but list remains associated with TM object (no explicit
+		// save needed for hibernate)
+		theCurrentModificationTypeSet.clear();
 
-        }
+		for (int i = 0; i < theModificationTypes.length; i++) {
+			log.info(" other theModificationType from GUI: "
+					+ inTargetedModificationData.getOtherModificationType());
 
-        // Gene Id
-        inTargetedModification.setGeneId(inTargetedModificationData.getGeneId());
+			// Create/reuse the ModificationType object - Reuses other if
+			// uncontrolled value matches
+			ModificationType theModificationType = ModificationTypeManagerSingleton
+					.instance().getOrCreate(
+							theModificationTypes[i],
+							inTargetedModificationData
+									.getOtherModificationType());
 
-        // Genetic Background - Donor
-        inTargetedModification.setEsCellLineName(inTargetedModificationData.getEsCellLineName());
+			if (theModificationTypes.equals(Constants.Dropdowns.OTHER_OPTION)) {
+				log.info(" other theModificationTyp: "
+						+ theModificationType.toString());
+				// Send e-mail and add modification type (already reused in
+				// getOrCreate)
+				log
+						.info("Sending Notification eMail - new Targeted Modification added");
+				sendEmail(inAnimalModel, inTargetedModificationData
+						.getOtherModificationType(), "OtherModificationType");
+				// theCurrentModificationTypeSet.add(theModificationType);
+			}
+			// Add selection if not already in DB (No duplicates during editing
+			// phase)
+			if (!inTargetedModification.getModificationTypeCollection()
+					.contains(theModificationType)) {
+				log.info("\n new ModificationType: "
+						+ theModificationType.toString());
+				theCurrentModificationTypeSet.add(theModificationType);
+			}
 
-        // Genetic Background - Recipient
-        inTargetedModification.setBlastocystName(inTargetedModificationData.getBlastocystName());
+		}
 
-        // Is it conditional?
-        if (inTargetedModificationData.getConditionedBy() != null)
-        {
+		// Gene Id
+		inTargetedModification
+				.setGeneId(inTargetedModificationData.getGeneId());
 
-            // Conditional, Conditional Description
-            Conditionality theConditionality = null;
-            if (inTargetedModification.getConditionality() != null)
-            {
-                theConditionality = inTargetedModification.getConditionality();
-            }
-            else
-            {
-                theConditionality = new Conditionality();
-            }
+		// Genetic Background - Donor
+		inTargetedModification.setEsCellLineName(inTargetedModificationData
+				.getEsCellLineName());
 
-            if (inTargetedModificationData.getConditionedBy().equals(Constants.CONDITIONAL))
-            {
-                theConditionality.setConditionedBy("1");
-            }
-            else
-            {
-                theConditionality.setConditionedBy("0");
-            }
+		// Genetic Background - Recipient
+		inTargetedModification.setBlastocystName(inTargetedModificationData
+				.getBlastocystName());
 
-            theConditionality.setDescription(inTargetedModificationData.getDescription());
-            inTargetedModification.setConditionality(theConditionality);
-        }
-        else
-        {
-            inTargetedModification.setConditionality(null);
-        }
+		// Is it conditional?
+		if (inTargetedModificationData.getConditionedBy() != null) {
 
-        // Upload Construct Map
-        // Check for exisiting Image for this TargetedModification
-        if (inTargetedModification.getImage() != null)
-        {
-            Image image = inTargetedModification.getImage();
-            image.setTitle(inTargetedModificationData.getTitle());
-            image.setDescription(inTargetedModificationData.getDescriptionOfConstruct());
-            inTargetedModification.setImage(image);
-        }
+			// Conditional, Conditional Description
+			Conditionality theConditionality = null;
+			if (inTargetedModification.getConditionality() != null) {
+				theConditionality = inTargetedModification.getConditionality();
+			} else {
+				theConditionality = new Conditionality();
+			}
 
-        // Upload Construct File location, Title of Construct, Description of
-        // Construct
-        // Check for exisiting Image for this GenomicSegment
-        if (inTargetedModificationData.getFileLocation() != null)
-            if (inTargetedModificationData.getFileLocation().getFileName() != null && !inTargetedModificationData.getFileLocation().getFileName().equals(
-                                                                                                                                                         ""))
-            {
+			if (inTargetedModificationData.getConditionedBy().equals(
+					Constants.CONDITIONAL)) {
+				theConditionality.setConditionedBy("1");
+			} else {
+				theConditionality.setConditionedBy("0");
+			}
 
-                ImageForm inImageData = new ImageForm();
+			theConditionality.setDescription(inTargetedModificationData
+					.getDescription());
+			inTargetedModification.setConditionality(theConditionality);
+		} else {
+			inTargetedModification.setConditionality(null);
+		}
 
-                String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
+		// Upload Construct Map
+		// Check for exisiting Image for this TargetedModification
+		if (inTargetedModification.getImage() != null) {
+			Image image = inTargetedModification.getImage();
+			image.setTitle(inTargetedModificationData.getTitle());
+			image.setDescription(inTargetedModificationData
+					.getDescriptionOfConstruct());
+			inTargetedModification.setImage(image);
+		}
 
-                inImageData.setDescriptionOfConstruct(inTargetedModificationData.getDescriptionOfConstruct());
-                inImageData.setTitle(inTargetedModificationData.getTitle());
-                inImageData.setFileServerLocation(inTargetedModificationData.getFileServerLocation());
-                inImageData.setFileLocation(inTargetedModificationData.getFileLocation());
+		// Upload Construct File location, Title of Construct, Description of
+		// Construct
+		// Check for exisiting Image for this GenomicSegment
+		if (inTargetedModificationData.getFileLocation() != null)
+			if (inTargetedModificationData.getFileLocation().getFileName() != null
+					&& !inTargetedModificationData.getFileLocation()
+							.getFileName().equals("")) {
 
-                Image image = ImageManagerSingleton.instance().create(new AnimalModel(), inImageData, inPath,
-                                                                      Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
+				ImageForm inImageData = new ImageForm();
 
-                System.out.println("Image info: \ndescription:" + image.getDescription() + " \ntitle:" + image.getTitle() + " \nname:" + image.getFileServerLocation() + " \nid:" + image.getId());
-                inTargetedModification.setImage(image);
-            }
+				String inPath = request.getSession().getServletContext()
+						.getRealPath("/config/temp.jpg");
 
-        // MGI Number
-        // Check for exisiting MutationIdentifier
-        MutationIdentifier inMutationIdentifier = null;
-        if (inTargetedModification.getMutationIdentifier() != null)
-            inMutationIdentifier = inTargetedModification.getMutationIdentifier();
-        else
-            inMutationIdentifier = new MutationIdentifier();
+				inImageData.setDescriptionOfConstruct(inTargetedModificationData.getDescriptionOfConstruct());
+				inImageData.setTitle(inTargetedModificationData.getTitle());
+				inImageData.setFileServerLocation(inTargetedModificationData.getFileServerLocation());
+				inImageData.setFileLocation(inTargetedModificationData.getFileLocation());
 
-        if (inTargetedModificationData.getMgiNumber() == null || inTargetedModificationData.getMgiNumber().equals(""))
-        {
-            inTargetedModification.setMutationIdentifier(null);
-        }
-        else
-        {
-            String strMGINumber = inTargetedModificationData.getMgiNumber().trim();
-            Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
-            Matcher m = p.matcher(strMGINumber);
-            if (m.matches() && strMGINumber != null && !strMGINumber.equals(""))
-            {
-                inMutationIdentifier.setMgiNumber(strMGINumber);
-                inTargetedModification.setMutationIdentifier(inMutationIdentifier);
-            }
-        }
+				Image image = ImageManagerSingleton.instance().create(
+						new AnimalModel(), inImageData, inPath,
+						Constants.CaImage.FTPGENCONSTORAGEDIRECTORY);
 
-        inTargetedModification.setComments(inTargetedModificationData.getComments());
+				System.out.println("Image info: \ndescription:"
+						+ image.getDescription() + " \ntitle:"
+						+ image.getTitle() + " \nname:"
+						+ image.getFileServerLocation() + " \nid:"
+						+ image.getId());
+				inTargetedModification.setImage(image);
+			}
 
-        log.info("Exiting populateTargetedModification");
-    }
+		// MGI Number
+		// Check for exisiting MutationIdentifier
+		MutationIdentifier inMutationIdentifier = null;
+		if (inTargetedModification.getMutationIdentifier() != null)
+			inMutationIdentifier = inTargetedModification
+					.getMutationIdentifier();
+		else
+			inMutationIdentifier = new MutationIdentifier();
 
-    private void sendEmail(AnimalModel inAnimalModel,
-                           String theUncontrolledVocab,
-                           String inType)
-    {
-        // Get the e-mail resource
-        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+		if (inTargetedModificationData.getMgiNumber() == null
+				|| inTargetedModificationData.getMgiNumber().equals("")) {
+			inTargetedModification.setMutationIdentifier(null);
+		} else {
+			String strMGINumber = inTargetedModificationData.getMgiNumber()
+					.trim();
+			Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
+			Matcher m = p.matcher(strMGINumber);
+			if (m.matches() && strMGINumber != null && !strMGINumber.equals("")) {
+				inMutationIdentifier.setMgiNumber(strMGINumber);
+				inTargetedModification
+						.setMutationIdentifier(inMutationIdentifier);
+			}
+		}
 
-        // Iterate through all the reciepts in the config file
-        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-        StringTokenizer st = new StringTokenizer(recipients, ",");
-        String inRecipients[] = new String[st.countTokens()];
-        for (int i = 0; i < inRecipients.length; i++)
-        {
-            inRecipients[i] = st.nextToken();
-        }
+		inTargetedModification.setComments(inTargetedModificationData
+				.getComments());
 
-        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+		log.info("Exiting populateTargetedModification");
+	}
 
-        // gather message keys and variable values to build the e-mail
-        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-        Map<String, Object> values = new TreeMap<String, Object>();
-        values.put("type", inType);
-        values.put("value", theUncontrolledVocab);
-        values.put("submitter", inAnimalModel.getSubmitter());
-        values.put("model", inAnimalModel.getModelDescriptor());
-        values.put("modelstate", inAnimalModel.getState());
+	private void sendEmail(AnimalModel inAnimalModel,
+			String theUncontrolledVocab, String inType) {
+		// Get the e-mail resource
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
 
-        // Send the email
-        try
-        {
-            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-        }
-        catch (Exception e)
-        {
-            log.error("Caught exception sending mail: ", e);
-            e.printStackTrace();
-        }
-    }
+		camodPropertiesFileName = System
+				.getProperty("gov.nih.nci.camod.camodProperties");
+
+		try {
+
+			FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			camodProperties.load(in);
+
+		} catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		}
+
+		// Iterate through all the reciepts in the config file
+		String recipients = UserManagerSingleton.instance()
+				.getEmailForCoordinator();
+		StringTokenizer st = new StringTokenizer(recipients, ",");
+		String inRecipients[] = new String[st.countTokens()];
+		for (int i = 0; i < inRecipients.length; i++) {
+			inRecipients[i] = st.nextToken();
+		}
+
+		String inSubject = camodProperties
+				.getProperty("model.new_unctrl_vocab_subject");
+		String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+		// gather message keys and variable values to build the e-mail
+		String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+		Map<String, Object> values = new TreeMap<String, Object>();
+		values.put("type", inType);
+		values.put("value", theUncontrolledVocab);
+		values.put("submitter", inAnimalModel.getSubmitter());
+		values.put("model", inAnimalModel.getModelDescriptor());
+		values.put("modelstate", inAnimalModel.getState());
+
+		// Send the email
+		try {
+			MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys,
+					values);
+		} catch (Exception e) {
+			log.error("Caught exception sending mail: ", e);
+			e.printStackTrace();
+		}
+	}
 }

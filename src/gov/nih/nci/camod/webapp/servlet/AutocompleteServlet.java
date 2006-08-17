@@ -46,6 +46,9 @@
  * $Id$
  *
  * $Log$
+ * Revision 1.6  2006/05/18 13:06:15  guptaa
+ * added disease
+ *
  * Revision 1.5  2006/05/17 21:17:31  guptaa
  * organ tree changes
  *
@@ -65,13 +68,14 @@
  */
 package gov.nih.nci.camod.webapp.servlet;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Disease;
 import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.util.AjaxTagValuePair;
 import gov.nih.nci.camod.util.AutocompleteUtil;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -95,20 +99,31 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 	private static int ourNumMatchesToReturn;
 
 	private static final long serialVersionUID = 3257296453788404152L;
-
-	protected transient final Log log = LogFactory
-			.getLog(AutocompleteServlet.class);
+	
+    static private final Log log = LogFactory.getLog(AutocompleteServlet.class);	
 
 	static {
-		InputStream theInputStream = null;
-		Properties theSysProps = new Properties();
+		Properties camodProperties = new Properties();
 		try {
-			theInputStream = Thread
-					.currentThread()
-					.getContextClassLoader()
-					.getResourceAsStream(Constants.CAMOD_BUNDLE + ".properties");
-			theSysProps.load(theInputStream);
-			String ajaxNumber = theSysProps
+
+			String camodPropertiesFileName = null;
+
+			camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+			
+			try {
+			
+			FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			camodProperties.load(in);
+	
+			} 
+			catch (FileNotFoundException e) {
+				log.error("Caught exception finding file for properties: ", e);
+				e.printStackTrace();			
+			} catch (IOException e) {
+				log.error("Caught exception finding file for properties: ", e);
+				e.printStackTrace();			
+			}
+			String ajaxNumber = camodProperties
 					.getProperty("ajax.num_matches_to_return");
 			ourNumMatchesToReturn = Integer.parseInt(ajaxNumber);
 		}

@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.4 2006-04-21 13:42:12 georgeda Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.5 2006-08-17 17:59:34 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.4  2006/04/21 13:42:12  georgeda
+ *  Cleanup
+ *
  *  Revision 1.3  2005/11/03 21:47:56  georgeda
  *  Changed EVS api
  *
@@ -22,6 +25,9 @@ import gov.nih.nci.evs.query.EVSQuery;
 import gov.nih.nci.evs.query.EVSQueryImpl;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import org.apache.commons.logging.Log;
@@ -108,7 +114,24 @@ public class EvsTreeUtil
     public static ApplicationService getApplicationService()
     {
         // Get the app service uri
-        ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-        return ApplicationService.getRemoteInstance(theBundle.getString(Constants.Evs.URI_KEY));
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
+
+		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+		
+		try {
+			
+		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+		camodProperties.load(in);
+	
+		} 
+		catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();			
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();			
+		}
+        return ApplicationService.getRemoteInstance(camodProperties.getProperty("evs.uri"));
     }
 }

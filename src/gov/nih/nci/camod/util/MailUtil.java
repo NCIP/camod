@@ -1,14 +1,20 @@
 /**
  * 
- * $Id: MailUtil.java,v 1.9 2006-04-17 19:10:50 pandyas Exp $
+ * $Id: MailUtil.java,v 1.10 2006-08-17 18:00:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:10:50  pandyas
+ * Added $Id: MailUtil.java,v 1.10 2006-08-17 18:00:52 pandyas Exp $ and $log:$
+ *
  * 
  */
 
 
 package gov.nih.nci.camod.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.*;
 
@@ -57,27 +63,35 @@ public class MailUtil {
         try {
 
             // Convert the bundle to a properties file.  Is there a better way to do this?
-            ResourceBundle theBundle = ResourceBundle.getBundle("mail");
-            Properties theProperties = new Properties();
+    		Properties camodProperties = new Properties();
+    		String camodPropertiesFileName = null;
 
-            Enumeration theKeys = theBundle.getKeys();
-
-            while (theKeys.hasMoreElements()) {
-                String theKey = (String) theKeys.nextElement();
-                theProperties.put(theKey, theBundle.getObject(theKey));
-            }
+    		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.mailProperties");
+   		
+    		try {
+    		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+    		camodProperties.load(in);
+    		} 
+    		catch (FileNotFoundException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		} catch (IOException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		}
+    		
 
             boolean theDebugFlag = false;
-            if (theProperties.getProperty("mail.debug") != null) {
+            if (camodProperties.getProperty("mail.debug") != null) {
                 try {
-                    theDebugFlag = Boolean.getBoolean(theProperties.getProperty("mail.debug"));
+                    theDebugFlag = Boolean.getBoolean(camodProperties.getProperty("mail.debug"));
                 } catch (Exception e) {
                     log.warn("Unable to set e-mail debug flag", e);
                 }
             }
 
             // create some properties and get the default Session
-            Session theSession = Session.getDefaultInstance(theProperties, null);
+            Session theSession = Session.getDefaultInstance(camodProperties, null);
             theSession.setDebug(theDebugFlag);
 
             // create a message
@@ -128,28 +142,35 @@ public class MailUtil {
 
         try {
 
-            // Convert the bundle to a properties file.  Is there a better way to do this?
-            ResourceBundle theBundle = ResourceBundle.getBundle("mail");
-            Properties theProperties = new Properties();
+            // Get properteis from external file.  
+    		Properties camodProperties = new Properties();
+    		String camodPropertiesFileName = null;
 
-            Enumeration theKeys = theBundle.getKeys();
-
-            while (theKeys.hasMoreElements()) {
-                String theKey = (String) theKeys.nextElement();
-                theProperties.put(theKey, theBundle.getObject(theKey));
-            }
+    		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.mailProperties");
+    		
+    		try {
+    		FileInputStream in = new FileInputStream(camodPropertiesFileName);
+    		camodProperties.load(in);
+    		} 
+    		catch (FileNotFoundException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		} catch (IOException e) {
+    			log.error("Caught exception finding file for properties: ", e);
+    			e.printStackTrace();			
+    		}
 
             boolean theDebugFlag = false;
-            if (theProperties.getProperty("mail.debug") != null) {
+            if (camodProperties.getProperty("mail.debug") != null) {
                 try {
-                    theDebugFlag = Boolean.getBoolean(theProperties.getProperty("mail.debug"));
+                    theDebugFlag = Boolean.getBoolean(camodProperties.getProperty("mail.debug"));
                 } catch (Exception e) {
                     log.warn("Unable to set e-mail debug flag", e);
                 }
             }
 
             // create some properties and get the default Session
-            Session theSession = Session.getDefaultInstance(theProperties, null);
+            Session theSession = Session.getDefaultInstance(camodProperties, null);
             theSession.setDebug(theDebugFlag);
 
             // create a message

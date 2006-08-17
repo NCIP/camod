@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.23 2006-05-10 14:14:33 schroedn Exp $
+ * $Id: TherapyManagerImpl.java,v 1.24 2006-08-17 18:17:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/05/10 14:14:33  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.22  2006/04/19 17:38:26  pandyas
  * Removed TODO text
  *
@@ -63,358 +66,344 @@ import gov.nih.nci.camod.domain.*;
 import gov.nih.nci.camod.service.TherapyManager;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * Implementation of the TherapyManager interface. Creates/saves/updates the
  * different types of therapies based on the specific interface passed in
  */
-public class TherapyManagerImpl extends BaseManager implements TherapyManager
-{
-    /**
-     * Get a specific Therapy by id
-     * 
-     * @param id
-     *            the unique id for a therapy
-     * 
-     * @return the matching Therapy object, or null if not found.
-     * 
-     * @exception Exception
-     *                when anything goes wrong.
-     */
-    public Therapy get(String id) throws Exception
-    {
-        log.info("In TherapyManagerImpl.get");
-        return (Therapy) super.get(id, Therapy.class);
-    }
+public class TherapyManagerImpl extends BaseManager implements TherapyManager {
+	/**
+	 * Get a specific Therapy by id
+	 * 
+	 * @param id
+	 *            the unique id for a therapy
+	 * 
+	 * @return the matching Therapy object, or null if not found.
+	 * 
+	 * @exception Exception
+	 *                when anything goes wrong.
+	 */
+	public Therapy get(String id) throws Exception {
+		log.info("In TherapyManagerImpl.get");
+		return (Therapy) super.get(id, Therapy.class);
+	}
 
-    /**
-     * Save Therapy
-     * 
-     * @param therapy
-     *            the therapy to save
-     * 
-     * @exception Exception
-     *                when anything goes wrong.
-     */
-    public void save(Therapy therapy) throws Exception
-    {
-        log.info("In TherapyManagerImpl.save");
-        super.save(therapy);
-    }
+	/**
+	 * Save Therapy
+	 * 
+	 * @param therapy
+	 *            the therapy to save
+	 * 
+	 * @exception Exception
+	 *                when anything goes wrong.
+	 */
+	public void save(Therapy therapy) throws Exception {
+		log.info("In TherapyManagerImpl.save");
+		super.save(therapy);
+	}
 
-    /**
-     * Remove a specific Therapy by id
-     * 
-     * @param id
-     *            the unique id for a therapy
-     * 
-     * @exception Exception
-     *                when anything goes wrong.
-     */
-    public void remove(String id,
-                       AnimalModel inAnimalModel) throws Exception
-    {
-        log.info("In TherapyManagerImpl.remove");
+	/**
+	 * Remove a specific Therapy by id
+	 * 
+	 * @param id
+	 *            the unique id for a therapy
+	 * 
+	 * @exception Exception
+	 *                when anything goes wrong.
+	 */
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+		log.info("In TherapyManagerImpl.remove");
 
-        Therapy theTherapy = get(id);
+		Therapy theTherapy = get(id);
 
-        inAnimalModel.getTherapyCollection().remove(theTherapy);
-        super.save(inAnimalModel);
-    }
+		inAnimalModel.getTherapyCollection().remove(theTherapy);
+		super.save(inAnimalModel);
+	}
 
+	private void populateAgeGender(TherapyData inTherapyData, Therapy theTherapy) {
 
-    private void populateAgeGender(TherapyData inTherapyData,
-                                   Therapy theTherapy)
-    {
+		log.info("In TherapyManagerImpl.populateAgeGender");
 
-        log.info("In TherapyManagerImpl.populateAgeGender");
+		// Set the treatment
+		Treatment theTreatment = theTherapy.getTreatment();
+		if (theTreatment == null) {
+			theTreatment = new Treatment();
+			theTherapy.setTreatment(theTreatment);
+		}
 
-        // Set the treatment
-        Treatment theTreatment = theTherapy.getTreatment();
-        if (theTreatment == null)
-        {
-            theTreatment = new Treatment();
-            theTherapy.setTreatment(theTreatment);
-        }
+		// Set the gender
+		SexDistribution sexDistribution = SexDistributionManagerSingleton
+				.instance().getByType(inTherapyData.getType());
 
-        // Set the gender
-        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(inTherapyData.getType());
+		// save the treatment
+		theTreatment.setSexDistribution(sexDistribution);
 
-        // save the treatment
-        theTreatment.setSexDistribution(sexDistribution);
+		theTreatment.setAgeAtTreatment(inTherapyData.getAgeAtTreatment());
+		theTreatment.setAgeAtTreatmentUnit(inTherapyData
+				.getAgeAtTreatmentUnit());
+	}
 
-        theTreatment.setAgeAtTreatment(inTherapyData.getAgeAtTreatment());
-        theTreatment.setAgeAtTreatmentUnit(inTherapyData.getAgeAtTreatmentUnit());
-    }
+	private void populateDose(TherapyData inTherapyData, Therapy theTherapy) {
+		log.info("Entering populateDose");
 
+		// Set the treatment
+		Treatment theTreatment = theTherapy.getTreatment();
+		if (theTreatment == null) {
+			theTreatment = new Treatment();
+			theTherapy.setTreatment(theTreatment);
+		}
 
-    private void populateDose(TherapyData inTherapyData,
-                              Therapy theTherapy)
-    {
-        log.info("Entering populateDose");
+		theTreatment.setDosage(inTherapyData.getDosage());
+		theTreatment.setDosageUnit(inTherapyData.getDosageUnit());
+	}
 
-        // Set the treatment
-        Treatment theTreatment = theTherapy.getTreatment();
-        if (theTreatment == null)
-        {
-            theTreatment = new Treatment();
-            theTherapy.setTreatment(theTreatment);
-        }
+	private void populateAdministration(AnimalModel inAnimalModel,
+			TherapyData inTherapyData, Therapy theTherapy) {
 
-        theTreatment.setDosage(inTherapyData.getDosage());
-        theTreatment.setDosageUnit(inTherapyData.getDosageUnit());
-    }
+		log.info("In CarcinogenExposureManagerImpl.populateAdministration");
 
-    private void populateAdministration(AnimalModel inAnimalModel,
-                                        TherapyData inTherapyData,
-                                        Therapy theTherapy)
-    {
+		if (inTherapyData.getAdministrativeRoute() != null
+				&& inTherapyData.getAdministrativeRoute().length() > 0) {
+			// Set the treatment
+			Treatment theTreatment = theTherapy.getTreatment();
+			if (theTreatment == null) {
+				theTreatment = new Treatment();
+				theTherapy.setTreatment(theTreatment);
+			}
+		}
 
-        log.info("In CarcinogenExposureManagerImpl.populateAdministration");
+		/* Set other adminstrative route or selected adminstrative route */
+		// anytime admin route is other
+		if (inTherapyData.getAdministrativeRoute().equals(
+				Constants.Dropdowns.OTHER_OPTION)) {
+			log.info("admin route equals other");
+			// Do not save 'Other' in the database
+			theTherapy.getTreatment().setAdminRouteUnctrlVocab(
+					inTherapyData.getOtherAdministrativeRoute());
 
-        if (inTherapyData.getAdministrativeRoute() != null && inTherapyData.getAdministrativeRoute().length() > 0)
-        {
-            // Set the treatment
-            Treatment theTreatment = theTherapy.getTreatment();
-            if (theTreatment == null)
-            {
-                theTreatment = new Treatment();
-                theTherapy.setTreatment(theTreatment);
-            }
-        }
+			log
+					.trace("Sending Notification eMail - new Administrative Route added");
+			sendEmail(inAnimalModel, inTherapyData
+					.getOtherAdministrativeRoute(), " AdministrativeRoute");
 
-        /* Set other adminstrative route or selected adminstrative route */
-        // anytime admin route is other
-        if (inTherapyData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION))
-        {
-            log.info("admin route equals other");
-            //Do not save 'Other' in the database
-            theTherapy.getTreatment().setAdminRouteUnctrlVocab(inTherapyData.getOtherAdministrativeRoute());
+		} else if (inTherapyData.getAdministrativeRoute() != null) {
+			theTherapy.getTreatment().setAdministrativeRoute(
+					inTherapyData.getAdministrativeRoute());
+		}
 
-            log.trace("Sending Notification eMail - new Administrative Route added");
-            sendEmail(inAnimalModel, inTherapyData.getOtherAdministrativeRoute(), " AdministrativeRoute");
+		Agent theAgent = theTherapy.getAgent();
+		if (theAgent == null) {
+			theAgent = new Agent();
+			theTherapy.setAgent(theAgent);
+		}
+	}
 
-        }
-        else if (inTherapyData.getAdministrativeRoute() != null)
-        {
-            theTherapy.getTreatment().setAdministrativeRoute(inTherapyData.getAdministrativeRoute());
-        }
+	/**
+	 * Create a therapy object with the correct data filled in.
+	 * 
+	 * @param inTherapyData
+	 *            the interface to create the therapy object from
+	 * 
+	 * @returns a therapy
+	 */
+	public Therapy create(AnimalModel inAnimaModel, TherapyData inTherapyData)
+			throws Exception {
 
-        Agent theAgent = theTherapy.getAgent();
-        if (theAgent == null)
-        {
-            theAgent = new Agent();
-            theTherapy.setAgent(theAgent);
-        }
-    }
+		log.info("In TherapyManagerImpl.create Entering");
 
+		Therapy theTherapy = new Therapy();
 
-    /**
-     * Create a therapy object with the correct data filled in.
-     * 
-     * @param inTherapyData
-     *            the interface to create the therapy object from
-     * 
-     * @returns a therapy
-     */
-    public Therapy create(AnimalModel inAnimaModel,
-                          TherapyData inTherapyData) throws Exception
-    {
+		populateAgeGender(inTherapyData, theTherapy);
+		populateDose(inTherapyData, theTherapy);
+		populateAdministration(inAnimaModel, inTherapyData, theTherapy);
+		populateTherapy(inTherapyData, theTherapy);
 
-        log.info("In TherapyManagerImpl.create Entering");
+		log.info("In TherapyManagerImpl.create Exiting");
+		return theTherapy;
+	}
 
-        Therapy theTherapy = new Therapy();
+	public void update(AnimalModel inAnimalModel, TherapyData inTherapyData,
+			Therapy inTherapy) throws Exception {
 
-        populateAgeGender(inTherapyData, theTherapy);
-        populateDose(inTherapyData, theTherapy);
-        populateAdministration(inAnimaModel, inTherapyData, theTherapy);
-        populateTherapy(inTherapyData, theTherapy);
+		log.debug("In TherapyManagerImpl.update");
 
-        log.info("In TherapyManagerImpl.create Exiting");
-        return theTherapy;
-    }
+		populateAgeGender(inTherapyData, inTherapy);
+		populateDose(inTherapyData, inTherapy);
+		populateAdministration(inAnimalModel, inTherapyData, inTherapy);
+		populateTherapy(inTherapyData, inTherapy);
 
-    public void update(AnimalModel inAnimalModel,
-                       TherapyData inTherapyData,
-                       Therapy inTherapy) throws Exception
-    {
+		save(inTherapy);
 
-        log.debug("In TherapyManagerImpl.update");
+	}
 
-        populateAgeGender(inTherapyData, inTherapy);
-        populateDose(inTherapyData, inTherapy);
-        populateAdministration(inAnimalModel, inTherapyData, inTherapy);
-        populateTherapy(inTherapyData, inTherapy);
+	private void populateTherapy(TherapyData inTherapyData, Therapy theTherapy)
+			throws Exception {
 
-        save(inTherapy);
+		log.info("Entering populateTherapy Entering");
 
-    }
+		/* populateName method without otherName */
 
-    private void populateTherapy(TherapyData inTherapyData,
-                                 Therapy theTherapy) throws Exception
-    {
+		// Set the treatment
+		Treatment theTreatment = theTherapy.getTreatment();
+		if (theTreatment == null) {
+			theTreatment = new Treatment();
+			theTherapy.setTreatment(theTreatment);
+		}
+		log.info("populateTherapy Set the treatment");
 
-        log.info("Entering populateTherapy Entering");
+		// Set the agent name
+		Agent theAgent = theTherapy.getAgent();
+		if (theAgent == null) {
+			theAgent = new Agent();
+			theTherapy.setAgent(theAgent);
+		}
+		theAgent.setName(inTherapyData.getName());
+		log.info("populateTherapy setName");
 
-        /* populateName method without otherName */
+		// Set NSC and CAS
+		String theNscNumber = inTherapyData.getNscNumber().trim();
+		if (theNscNumber != null && theNscNumber.length() > 0) {
+			try {
+				theAgent.setNscNumber(Long.valueOf(theNscNumber));
+			} catch (NumberFormatException e) {
+				log.error("Bad NSC number: " + theNscNumber);
+			}
+		}
+		log.info("populateTherapy setNscNumber");
 
-        // Set the treatment
-        Treatment theTreatment = theTherapy.getTreatment();
-        if (theTreatment == null)
-        {
-            theTreatment = new Treatment();
-            theTherapy.setTreatment(theTreatment);
-        }
-        log.info("populateTherapy Set the treatment");
+		String theCasNumber = inTherapyData.getCasNumber().trim();
+		if (theCasNumber != null && theCasNumber.length() > 0) {
+			theAgent.setCasNumber(theCasNumber);
+		}
+		log.info("populateTherapy setCasNumber");
 
-        // Set the agent name
-        Agent theAgent = theTherapy.getAgent();
-        if (theAgent == null)
-        {
-            theAgent = new Agent();
-            theTherapy.setAgent(theAgent);
-        }
-        theAgent.setName(inTherapyData.getName());
-        log.info("populateTherapy setName");
+		// Therapy object attributes
+		theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());
+		theTherapy.setBiomarker(inTherapyData.getBiomarker());
+		theTherapy.setExperiment(inTherapyData.getExperiment());
+		theTherapy.setResults(inTherapyData.getResults());
+		theTherapy.setTumorResponse(inTherapyData.getTumorResponse());
+		theTherapy.setComments(inTherapyData.getComments());
+		log.info("populateTherapy set Therapy object attributes");
 
+		// Get the ChemicalClass
+		String[] theChemicalClasses = inTherapyData
+				.getSelectedChemicalClasses();
+		log.info("theChemicalClasses.length: " + theChemicalClasses.length);
+		Set<ChemicalClass> theCurrentChemicalClassSet = theTherapy.getAgent()
+				.getChemicalClassCollection();
+		theCurrentChemicalClassSet.clear();
 
-        // Set NSC and CAS
-        String theNscNumber = inTherapyData.getNscNumber().trim();
-        if (theNscNumber != null && theNscNumber.length() > 0)
-        {
-            try
-            {
-                theAgent.setNscNumber(Long.valueOf(theNscNumber));
-            }
-            catch (NumberFormatException e)
-            {
-                log.error("Bad NSC number: " + theNscNumber);
-            }
-        }
-        log.info("populateTherapy setNscNumber");
+		if (theChemicalClasses != null) {
+			for (int i = 0; i < theChemicalClasses.length; i++) {
+				ChemicalClass theChemicalClass = ChemicalClassManagerSingleton
+						.instance().getByName(theChemicalClasses[i]);
+				if (theChemicalClass == null) {
+					log.error("Unknown chemical class name: "
+							+ theChemicalClasses[i]);
+				} else {
+					theCurrentChemicalClassSet.add(theChemicalClass);
+				}
+			}
+		}
 
-        String theCasNumber = inTherapyData.getCasNumber().trim();
-        if (theCasNumber != null && theCasNumber.length() > 0)
-        {
-            theAgent.setCasNumber(theCasNumber);
-        }
-        log.info("populateTherapy setCasNumber");
+		// Get the biological process
+		String[] theProcesses = inTherapyData.getSelectedProcesses();
+		Set<BiologicalProcess> theCurrentProcessSet = theTherapy.getAgent()
+				.getBiologicalProcessCollection();
+		theCurrentProcessSet.clear();
 
-        // Therapy object attributes
-        theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());
-        theTherapy.setBiomarker(inTherapyData.getBiomarker());
-        theTherapy.setExperiment(inTherapyData.getExperiment());
-        theTherapy.setResults(inTherapyData.getResults());
-        theTherapy.setTumorResponse(inTherapyData.getTumorResponse());
-        theTherapy.setComments(inTherapyData.getComments());
-        log.info("populateTherapy set Therapy object attributes");
+		if (theProcesses != null) {
+			for (int i = 0; i < theProcesses.length; i++) {
+				BiologicalProcess theBiologicalProcess = BiologicalProcessManagerSingleton
+						.instance().getByName(theProcesses[i]);
+				if (theBiologicalProcess == null) {
+					log.error("Unknown biological process name: "
+							+ theProcesses[i]);
+				} else {
+					theCurrentProcessSet.add(theBiologicalProcess);
+				}
+			}
+		}
 
-        // Get the ChemicalClass
-        String[] theChemicalClasses = inTherapyData.getSelectedChemicalClasses();
-        log.info("theChemicalClasses.length: " + theChemicalClasses.length);
-        Set<ChemicalClass> theCurrentChemicalClassSet = theTherapy.getAgent().getChemicalClassCollection();
-        theCurrentChemicalClassSet.clear();
+		// Get the agent target
+		String[] theTargets = inTherapyData.getSelectedTargets();
+		Set<AgentTarget> theCurrentAgentSet = theTherapy.getAgent()
+				.getAgentTargetCollection();
+		theCurrentAgentSet.clear();
 
-        if (theChemicalClasses != null)
-        {
-            for (int i = 0; i < theChemicalClasses.length; i++)
-            {
-                ChemicalClass theChemicalClass = ChemicalClassManagerSingleton.instance().getByName(theChemicalClasses[i]);
-                if (theChemicalClass == null)
-                {
-                    log.error("Unknown chemical class name: " + theChemicalClasses[i]);
-                }
-                else
-                {
-                    theCurrentChemicalClassSet.add(theChemicalClass);
-                }
-            }
-        }
+		if (theTargets != null) {
+			for (int i = 0; i < theTargets.length; i++) {
+				AgentTarget theAgentTarget = AgentTargetManagerSingleton
+						.instance().getByName(theTargets[i]);
+				if (theAgentTarget == null) {
+					log.error("Unknown agent target name: " + theTargets[i]);
+				} else {
+					theCurrentAgentSet.add(theAgentTarget);
+				}
+			}
+		}
 
+		log.info("Exiting populateTherapy Exiting");
+	}
 
-        // Get the biological process
-        String[] theProcesses = inTherapyData.getSelectedProcesses();
-        Set<BiologicalProcess> theCurrentProcessSet = theTherapy.getAgent().getBiologicalProcessCollection();
-        theCurrentProcessSet.clear();
+	private void sendEmail(AnimalModel inAnimalModel,
+			String theUncontrolledVocab, String inType) {
+		// Get the e-mail resource
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
 
-        if (theProcesses != null)
-        {
-            for (int i = 0; i < theProcesses.length; i++)
-            {
-                BiologicalProcess theBiologicalProcess = BiologicalProcessManagerSingleton.instance().getByName(theProcesses[i]);
-                if (theBiologicalProcess == null)
-                {
-                    log.error("Unknown biological process name: " + theProcesses[i]);
-                }
-                else
-                {
-                    theCurrentProcessSet.add(theBiologicalProcess);
-                }
-            }
-        }
+		camodPropertiesFileName = System
+				.getProperty("gov.nih.nci.camod.camodProperties");
 
-        // Get the agent target
-        String[] theTargets = inTherapyData.getSelectedTargets();
-        Set<AgentTarget> theCurrentAgentSet = theTherapy.getAgent().getAgentTargetCollection();
-        theCurrentAgentSet.clear();
+		try {
 
-        if (theTargets != null)
-        {
-            for (int i = 0; i < theTargets.length; i++)
-            {
-                AgentTarget theAgentTarget = AgentTargetManagerSingleton.instance().getByName(theTargets[i]);
-                if (theAgentTarget == null)
-                {
-                    log.error("Unknown agent target name: " + theTargets[i]);
-                }
-                else
-                {
-                    theCurrentAgentSet.add(theAgentTarget);
-                }
-            }
-        }
+			FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			camodProperties.load(in);
 
-        log.info("Exiting populateTherapy Exiting");
-    }
+		} catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		}
 
-    private void sendEmail(AnimalModel inAnimalModel,
-                           String theUncontrolledVocab,
-                           String inType)
-    {
-        ResourceBundle theBundle = ResourceBundle.getBundle("camod");
+		// Iterate through all the reciepts in the config file
+		String recipients = UserManagerSingleton.instance()
+				.getEmailForCoordinator();
+		StringTokenizer st = new StringTokenizer(recipients, ",");
+		String inRecipients[] = new String[st.countTokens()];
+		for (int i = 0; i < inRecipients.length; i++) {
+			inRecipients[i] = st.nextToken();
+		}
 
-        // Iterate through all the reciepts in the config file
-        String recipients = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_NOTIFY_KEY);
-        StringTokenizer st = new StringTokenizer(recipients, ",");
-        String inRecipients[] = new String[st.countTokens()];
-        for (int i = 0; i < inRecipients.length; i++)
-        {
-            inRecipients[i] = st.nextToken();
-        }
+		String inSubject = camodProperties
+				.getProperty("model.new_unctrl_vocab_subject");
+		String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
-        String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+		// gather message keys and variable values to build the e-mail
+		// content with
+		String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+		Map<String, Object> values = new TreeMap<String, Object>();
+		values.put("type", inType);
+		values.put("value", theUncontrolledVocab);
+		values.put("submitter", inAnimalModel.getSubmitter());
+		values.put("model", inAnimalModel.getModelDescriptor());
+		values.put("modelstate", inAnimalModel.getState());
 
-        // gather message keys and variable values to build the e-mail
-        // content with
-        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-        Map<String, Object> values = new TreeMap<String, Object>();
-        values.put("type", inType);
-        values.put("value", theUncontrolledVocab);
-        values.put("submitter", inAnimalModel.getSubmitter());
-        values.put("model", inAnimalModel.getModelDescriptor());
-        values.put("modelstate", inAnimalModel.getState());
-
-        // Send the email
-        try
-        {
-            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-        }
-        catch (Exception e)
-        {
-            log.error("Caught exception sending mail: ", e);
-            e.printStackTrace();
-        }
-    }
+		// Send the email
+		try {
+			MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys,
+					values);
+		} catch (Exception e) {
+			log.error("Caught exception sending mail: ", e);
+			e.printStackTrace();
+		}
+	}
 }

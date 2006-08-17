@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.10 2005-11-28 13:48:37 georgeda Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.11 2006-08-17 18:06:57 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.10  2005/11/28 13:48:37  georgeda
+ *  Defect #192, handle back arrow for curation changes
+ *
  *  Revision 1.9  2005/10/24 13:28:17  georgeda
  *  Cleanup changes
  *
@@ -31,8 +34,10 @@ import gov.nih.nci.camod.service.impl.LogManagerSingleton;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 
-import java.util.ResourceBundle;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -93,16 +98,51 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_REJECT)) {
 
 				// Assign to the coordinator
-				ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-				String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
+				Properties camodProperties = new Properties();
+				String camodPropertiesFileName = null;
+
+				camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+				
+				try {
+			
+				FileInputStream in = new FileInputStream(camodPropertiesFileName);
+				camodProperties.load(in);
+	
+				} 
+				catch (FileNotFoundException e) {
+					log.error("Caught exception finding file for properties: ", e);
+					e.printStackTrace();			
+				} catch (IOException e) {
+					log.error("Caught exception finding file for properties: ", e);
+					e.printStackTrace();			
+				}
+				String theCoordinator = camodProperties.getProperty("coordinator.username");
 				theForm.setAssignedTo(theCoordinator);
 
 				inRequest.setAttribute("action", "Rejecting ");
 			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_APPROVE) || theEvent.equals(Constants.Admin.Actions.EDITOR_APPROVE)) {
 
 				// Assign to the coordinator
-				ResourceBundle theBundle = ResourceBundle.getBundle(Constants.CAMOD_BUNDLE);
-				String theCoordinator = theBundle.getString(Constants.BundleKeys.COORDINATOR_USERNAME_KEY);
+				Properties camodProperties = new Properties();
+				String camodPropertiesFileName = null;
+
+				camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+				
+				try {
+			
+				FileInputStream in = new FileInputStream(camodPropertiesFileName);
+				camodProperties.load(in);
+	
+				} 
+				catch (FileNotFoundException e) {
+					log.error("Caught exception finding file for properties: ", e);
+					e.printStackTrace();			
+				} catch (IOException e) {
+					log.error("Caught exception finding file for properties: ", e);
+					e.printStackTrace();			
+				}
+				
+				String theCoordinator = camodProperties.getProperty("coordinator.username");
 				theForm.setAssignedTo(theCoordinator);
 				
 				inRequest.setAttribute("action", "Approving ");
