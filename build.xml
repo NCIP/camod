@@ -49,9 +49,9 @@
                 <include name="*.dtd" />
                 <include name="*.xsd" />
             </fileset>
-        	<fileset dir="${source.properties.dir}">
+        	<!--fileset dir="${source.properties.dir}">
                 <include name="**/*.properties" />        		
-            </fileset>        		
+            </fileset -->        		
         </copy>
     </target>
 
@@ -67,9 +67,9 @@
             <fileset dir="${source.dir}">                                
                 <include name="hibernate.cfg.xml" />
             </fileset>
-            <fileset dir="${source.properties.dir}">
+            <!-- fileset dir="${source.properties.dir}">
                 <include name="camod.properties" />
-            </fileset>
+            </fileset -->
         </copy>
     	<move todir="${source.dir}">
             <fileset dir="${build.classes.dir}">                                
