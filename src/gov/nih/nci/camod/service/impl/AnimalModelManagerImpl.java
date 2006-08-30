@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.72 2006-08-17 18:34:25 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.73 2006-08-30 16:46:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.72  2006/08/17 18:34:25  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.71  2006/05/23 17:00:31  pandyas
  * fixed comments - cut and paste from other section
  *
@@ -583,9 +586,9 @@ public class AnimalModelManagerImpl extends BaseManager implements
 		inAnimalModel.setPrincipalInvestigator(thePI);
 
 		// Set the animal model information
-		boolean isToolStrain = inModelCharacteristicsData.getIsToolStrain()
+		boolean isToolMouse = inModelCharacteristicsData.getIsToolMouse()
 				.equals("yes") ? true : false;
-		inAnimalModel.setIsToolStrain(new Boolean(isToolStrain));
+		inAnimalModel.setIsToolMouse(new Boolean(isToolMouse));
 		inAnimalModel.setUrl(inModelCharacteristicsData.getUrl());
 		inAnimalModel.setModelDescriptor(inModelCharacteristicsData
 				.getModelDescriptor());
