@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoPopulateAction.java,v 1.2 2006-05-09 18:56:58 georgeda Exp $
+ * $Id: MorpholinoPopulateAction.java,v 1.3 2006-08-30 16:53:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/09 18:56:58  georgeda
+ * Changes for searching on transient interfaces
+ *
  * Revision 1.1  2006/05/03 20:05:11  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -149,7 +152,7 @@ public class MorpholinoPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONCENTRATIONUNITSDROP, Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOTYPEDROP, Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEQUENCEDIRECTIONSDROP, Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DELIVERYMETHODSOURCEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DELIVERYMETHODDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VISUALLIGANDSDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
         log.debug("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
