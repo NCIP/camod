@@ -5,7 +5,7 @@
     <property file="build.properties" />
 
     <!-- stage specific attributes -->
-    <filter filtersfile="${tier}_camod.properties" />
+    <!--filter filtersfile="${tier}_camod.properties" /-->
     <filter token="db.host" value="${db.host}"/>
     <filter token="db.port" value="${db.port}"/>
     <filter token="db.username" value="${db.username}"/>
@@ -49,6 +49,9 @@
                 <include name="*.dtd" />
                 <include name="*.xsd" />
             </fileset>
+        	<fileset dir="${source.properties.dir}">
+                <include name="**/*.properties" />        		
+            </fileset>        		
         </copy>
     </target>
 
@@ -63,6 +66,8 @@
         <copy todir="${build.classes.dir}" filtering="true" >
             <fileset dir="${source.dir}">                                
                 <include name="hibernate.cfg.xml" />
+            </fileset>
+            <fileset dir="${source.properties.dir}">
                 <include name="camod.properties" />
             </fileset>
         </copy>
@@ -133,4 +138,7 @@
                      includes="**/*.hbm.xml"/>            
         </schemaexport>
     </target>
+	
+
+	
 </project>
