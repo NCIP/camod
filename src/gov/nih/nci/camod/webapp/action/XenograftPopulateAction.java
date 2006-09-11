@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.26 2006-05-23 18:16:20 georgeda Exp $
+ * $Id: XenograftPopulateAction.java,v 1.27 2006-09-11 16:55:23 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2006/05/23 18:16:20  georgeda
+ * Added other into species dropdown
+ *
  * Revision 1.25  2006/05/19 16:40:44  pandyas
  * Defect #249 - add other to species on the Xenograft screen
  *
@@ -149,9 +152,19 @@ public class XenograftPopulateAction extends BaseAction
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
+            // work around when getEVSPreferredDescription() does not work
             if (xeno.getOrgan() != null)
             {
-                xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                if (xeno.getOrgan().getEVSPreferredDescription() != null)
+                {
+                    xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                    //xenograftForm.setOrgan(xeno.getOrgan().getName());
+                    xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
+                }
+            }
+            else
+            {
+                xenograftForm.setOrgan(xeno.getOrgan().getName());
                 //xenograftForm.setOrgan(xeno.getOrgan().getName());
                 xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
             }
