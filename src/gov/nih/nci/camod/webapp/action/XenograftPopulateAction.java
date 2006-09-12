@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.28 2006-09-11 19:21:23 georgeda Exp $
+ * $Id: XenograftPopulateAction.java,v 1.29 2006-09-12 15:34:35 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2006/09/11 19:21:23  georgeda
+ * work around for getPreferredDescription bug
+ *
  * Revision 1.27  2006/09/11 16:55:23  georgeda
  * work around for getPreferredDescription bug
  *
@@ -155,23 +158,14 @@ public class XenograftPopulateAction extends BaseAction
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
-            // work around when getEVSPreferredDescription() does not work
             if (xeno.getOrgan() != null)
             {
-                String preferredOrganName = xeno.getOrgan().getEVSPreferredDescription();
-                if (preferredOrganName != null)
-                {
-                    xenograftForm.setOrgan(preferredOrganName);
-                    //xenograftForm.setOrgan(xeno.getOrgan().getName());
+                    xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                    log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getEVSPreferredDescription());
                     xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
-                }
+                    log.info("<XenograftPopulateAction> OrganTissueCode= " + xeno.getOrgan().getConceptCode());
             }
-            if (xeno.getOrgan().getName() != null)
-            {
-                xenograftForm.setOrgan(xeno.getOrgan().getName());
-                //xenograftForm.setOrgan(xeno.getOrgan().getName());
-                xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
-            }
+
 
             // Set the other flag or the normal graft type
             if (xeno.getGraftTypeUnctrlVocab() != null)
