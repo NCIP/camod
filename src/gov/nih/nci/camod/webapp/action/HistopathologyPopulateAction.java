@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.6 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.7 2006-09-12 15:01:10 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/11/04 14:44:25  georgeda
  * Cleaned up histopathology/assoc metastasis
  *
@@ -62,22 +65,22 @@ public class HistopathologyPopulateAction extends BaseAction {
             this.dropdown(request, response);
 
             /* set Organ attributes */
-            System.out.println("<HistopathologyPopulateAction populate> get the Organ attributes");
+            //System.out.println("<HistopathologyPopulateAction populate> get the Organ attributes");
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
             histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
-            System.out.println("setOrgan= " + theHistopathology.getOrgan().getEVSPreferredDescription());
+            //System.out.println("setOrgan= " + theHistopathology.getOrgan().getEVSPreferredDescription());
 
             histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-            System.out.println("OrganTissueCode= " + theHistopathology.getOrgan().getConceptCode());
+            //System.out.println("OrganTissueCode= " + theHistopathology.getOrgan().getConceptCode());
 
             /* Set Disease object attributes */
             Disease disease = theHistopathology.getDisease();
 
             histopathologyForm.setDiagnosisName(disease.getName());
             histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-            histopathologyForm.setTumorClassification(disease.getName());
+            histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
 
             /* Set Histopathology attributes */
             histopathologyForm.setAgeOfOnset(theHistopathology.getAgeOfOnset());
