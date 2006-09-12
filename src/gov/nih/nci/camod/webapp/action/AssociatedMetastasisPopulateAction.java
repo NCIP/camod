@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.7 2006-09-12 15:09:53 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -89,7 +92,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
 
             assocMetastasisForm.setDiagnosisName(disease.getName());
             assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
-            assocMetastasisForm.setTumorClassification(disease.getName());
+            assocMetastasisForm.setTumorClassification(disease.getEVSPreferredDescription());
 
             /* Set GeneticAlteration attributes */
             if (associatedMetastasis.getGeneticAlteration() != null) {
