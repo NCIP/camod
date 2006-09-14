@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.22 2006-08-17 18:15:37 pandyas Exp $
+ * $Id: UserManagerImpl.java,v 1.23 2006-09-14 16:54:02 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/08/17 18:15:37  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.21  2006/05/15 13:39:21  georgeda
  * Cleaned up contact info management
  *
@@ -84,276 +87,324 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Implementation of class used to wrap the CSM implementation
  */
-public class UserManagerImpl extends BaseManager implements UserManager {
-	private AuthenticationManager theAuthenticationMgr = null;
+public class UserManagerImpl extends BaseManager implements UserManager
+{
+    private AuthenticationManager theAuthenticationMgr = null;
 
-	/**
-	 * Constructor gets reference to authorization manager
-	 */
-	UserManagerImpl() {
-		log.trace("Entering UserManagerImpl");
+    /**
+     * Constructor gets reference to authorization manager
+     */
+    UserManagerImpl()
+    {
+        log.trace("Entering UserManagerImpl");
 
-		try {
-			theAuthenticationMgr = SecurityServiceProvider
-					.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
-		} catch (CSException ex) {
-			log.error("Error getting authentication managers", ex);
-		} catch (Throwable e) {
-			log.error("Error getting authentication managers", e);
-		}
+        try
+        {
+            theAuthenticationMgr = SecurityServiceProvider.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
+        }
+        catch (CSException ex)
+        {
+            log.error("Error getting authentication managers", ex);
+        }
+        catch (Throwable e)
+        {
+            log.error("Error getting authentication managers", e);
+        }
 
-		log.trace("Exiting UserManagerImpl");
-	}
+        log.trace("Exiting UserManagerImpl");
+    }
 
-	/**
-	 * Get a list of roles for a user
-	 * 
-	 * @param inUsername
-	 *            the login name of the user
-	 * 
-	 * @return the list of roles associated with the user
-	 * @throws Exception
-	 */
-	public List getRolesForUser(String inUsername) throws Exception {
-		log.trace("Entering getRolesForUser");
+    /**
+     * Get a list of roles for a user
+     * 
+     * @param inUsername
+     *            the login name of the user
+     * 
+     * @return the list of roles associated with the user
+     * @throws Exception
+     */
+    public List getRolesForUser(String inUsername) throws Exception
+    {
+        log.trace("Entering getRolesForUser");
 
-		List<String> theRoles = new ArrayList<String>();
+        List<String> theRoles = new ArrayList<String>();
+        String camodPropertiesFileName = null;
 
-		try {
-			Person thePerson = new Person();
-			thePerson.setUsername(inUsername);
+        try
+        {
+            Person thePerson = new Person();
+            thePerson.setUsername(inUsername);
 
-			List thePeople = Search.query(thePerson);
+            List thePeople = Search.query(thePerson);
 
-			if (thePeople.size() > 0) {
-				thePerson = (Person) thePeople.get(0);
+            if (thePeople.size() > 0)
+            {
+                thePerson = (Person) thePeople.get(0);
 
-				Set theRoleSet = thePerson.getRoleCollection();
-				Iterator it = theRoleSet.iterator();
+                Set theRoleSet = thePerson.getRoleCollection();
+                Iterator it = theRoleSet.iterator();
 
-				while (it.hasNext()) {
-					Role theRole = (Role) it.next();
-					theRoles.add(theRole.getName());
-				}
+                while (it.hasNext())
+                {
+                    Role theRole = (Role) it.next();
+                    theRoles.add(theRole.getName());
+                }
 
-				// Check for superuser priv
-				try {
-					// Get from default bundle
-					Properties camodProperties = new Properties();
-					String camodPropertiesFileName = null;
+                // Check for superuser priv
+                try
+                {
+                    // Get from default bundle
+                    Properties camodProperties = new Properties();
 
-					camodPropertiesFileName = System
-							.getProperty("gov.nih.nci.camod.camodProperties");
+                    camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
 
-					try {
+                    log.info("Attempting to load application system properties from file: " + camodPropertiesFileName);
 
-						FileInputStream in = new FileInputStream(
-								camodPropertiesFileName);
-						camodProperties.load(in);
+                    FileInputStream in = new FileInputStream(camodPropertiesFileName);
+                    camodProperties.load(in);
 
-					} catch (FileNotFoundException e) {
-						log.error("Caught exception finding file for properties: ",	e);
-						e.printStackTrace();
-					} catch (IOException e) {
-						log.error("Caught exception finding file for properties: ",	e);
-						e.printStackTrace();
-					}
-					String theSuperusers = camodProperties
-							.getProperty("superuser.usernames");
+                    if (camodProperties.isEmpty())
+                    {
+                        log.error("Error: no properties found when loading properties file: " + camodPropertiesFileName);
+                    }
 
-					StringTokenizer theTokenizer = new StringTokenizer(
-							theSuperusers, ",");
+                    String key = null;
+                    String val = null;
+                    for (Iterator i = camodProperties.keySet().iterator(); i.hasNext();)
+                    {
+                        key = (String) i.next();
+                        val = camodProperties.getProperty(key);
+                        System.setProperty(key, val);
 
-					while (theTokenizer.hasMoreTokens()) {
-						if (theTokenizer.nextToken().equals(inUsername)) {
-							theRoles.add(Constants.Admin.Roles.SUPER_USER);
-							break;
-						}
-					}
-				} catch (Exception e) {
-					log.error("Cannot get superuser information from bundle", e);
-				}
-			} else {
-				throw new IllegalArgumentException("User: " + inUsername
-						+ " not in caMOD database");
-			}
-		} catch (Exception e) {
-			log.error("Unable to get roles for user (" + inUsername + ": ", e);
-			throw e;
-		}
+                        String theSuperusers = System.getProperty("superuser.usernames");
+                        log.info("theSuperusers: " + theSuperusers);
 
-		log.info("User: " + inUsername + " and roles: " + theRoles);
-		log.trace("Exiting getRolesForUser");
+                        StringTokenizer theTokenizer = new StringTokenizer(theSuperusers, ",");
 
-		return theRoles;
-	}
+                        while (theTokenizer.hasMoreTokens())
+                        {
+                            if (theTokenizer.nextToken().equals(inUsername))
+                            {
+                                theRoles.add(Constants.Admin.Roles.SUPER_USER);
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    log.error("Cannot get superuser information from system", e);
+                }
+            }
+            else
+            {
+                throw new IllegalArgumentException("User: " + inUsername + " not in caMOD database");
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("Unable to get roles for user (" + inUsername + ": ", e);
+            throw e;
+        }
 
-	/**
-	 * Get a list of users for a particular role
-	 * 
-	 * @param inRoleName
-	 *            is the name of the role
-	 * 
-	 * @return the list of users associated with the role
-	 * @throws Exception
-	 */
-	public List<String> getUsersForRole(String inRoleName) throws Exception {
-		log.trace("Entering getUsersForRole");
+        log.info("User: " + inUsername + " and roles: " + theRoles);
+        log.trace("Exiting getRolesForUser");
 
-		List<String> theUsersForRole = new ArrayList<String>();
+        return theRoles;
+    }
 
-		Role theRole = new Role();
-		theRole.setName(inRoleName);
+    /**
+     * Get a list of users for a particular role
+     * 
+     * @param inRoleName
+     *            is the name of the role
+     * 
+     * @return the list of users associated with the role
+     * @throws Exception
+     */
+    public List<String> getUsersForRole(String inRoleName) throws Exception
+    {
+        log.trace("Entering getUsersForRole");
 
-		try {
-			List theRoles = Search.query(theRole);
+        List<String> theUsersForRole = new ArrayList<String>();
 
-			if (theRoles.size() > 0) {
-				theRole = (Role) theRoles.get(0);
+        Role theRole = new Role();
+        theRole.setName(inRoleName);
 
-				// Get the users for the role
-				Set<Party> theUsers = theRole.getPartyCollection();
-				Iterator theIterator = theUsers.iterator();
+        try
+        {
+            List theRoles = Search.query(theRole);
 
-				// Go through the list of returned Party objects
-				while (theIterator.hasNext()) {
-					Object theObject = theIterator.next();
+            if (theRoles.size() > 0)
+            {
+                theRole = (Role) theRoles.get(0);
 
-					// Only add when it's actually a person
-					if (theObject instanceof Person) {
-						Person thePerson = (Person) theObject;
-						theUsersForRole.add(thePerson.getUsername());
-					}
-				}
-			} else {
-				log.warn("Role not found in database: " + inRoleName);
-			}
-		} catch (Exception e) {
-			log.error("Unable to get roles for user: ", e);
-			throw e;
-		}
+                // Get the users for the role
+                Set<Party> theUsers = theRole.getPartyCollection();
+                Iterator theIterator = theUsers.iterator();
 
-		log.info("Role: " + inRoleName + " and users: " + theUsersForRole);
-		log.trace("Exiting getUsersForRole");
+                // Go through the list of returned Party objects
+                while (theIterator.hasNext())
+                {
+                    Object theObject = theIterator.next();
 
-		return theUsersForRole;
-	}
+                    // Only add when it's actually a person
+                    if (theObject instanceof Person)
+                    {
+                        Person thePerson = (Person) theObject;
+                        theUsersForRole.add(thePerson.getUsername());
+                    }
+                }
+            }
+            else
+            {
+                log.warn("Role not found in database: " + inRoleName);
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("Unable to get roles for user: ", e);
+            throw e;
+        }
 
-	/**
-	 * Get an e-mail address for a user
-	 * 
-	 * @param inUsername
-	 *            is the login name of the user
-	 * 
-	 * @return the list of users associated with the role
-	 */
-	public String getEmailForUser(String inUsername) {
-		log.trace("Entering getEmailForUser");
-		log.debug("Username: " + inUsername);
+        log.info("Role: " + inRoleName + " and users: " + theUsersForRole);
+        log.trace("Exiting getUsersForRole");
 
-		String theEmail = "";
+        return theUsersForRole;
+    }
 
-		try {
-			theEmail = LDAPUtil.getEmailAddressForUser(inUsername);
-		} catch (Exception e) {
-			log.warn("Could not fetch user from LDAP", e);
-		}
+    /**
+     * Get an e-mail address for a user
+     * 
+     * @param inUsername
+     *            is the login name of the user
+     * 
+     * @return the list of users associated with the role
+     */
+    public String getEmailForUser(String inUsername)
+    {
+        log.trace("Entering getEmailForUser");
+        log.debug("Username: " + inUsername);
 
-		log.trace("Exiting getEmailForUser");
+        String theEmail = "";
 
-		return theEmail;
-	}
+        try
+        {
+            theEmail = LDAPUtil.getEmailAddressForUser(inUsername);
+        }
+        catch (Exception e)
+        {
+            log.warn("Could not fetch user from LDAP", e);
+        }
 
-	/**
-	 * Update the roles for the current user
-	 */
-	public void updateCurrentUserRoles(HttpServletRequest inRequest) {
-		String theCurrentUser = (String) inRequest.getSession().getAttribute(
-				Constants.CURRENTUSER);
-		try {
-			List theRoles = getRolesForUser(theCurrentUser);
-			inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
-					theRoles);
-		} catch (Exception e) {
-			log.info("Unable to update user roles for " + theCurrentUser, e);
-		}
-	}
+        log.trace("Exiting getEmailForUser");
 
-	/**
-	 * Get an e-mail address for the coordinator
-	 * 
-	 * @return the list of users associated with the role
-	 */
-	public String getEmailForCoordinator() {
-		log.trace("Entering getEmailForCoordinator");
+        return theEmail;
+    }
 
-		String theEmail = "";
+    /**
+     * Update the roles for the current user
+     */
+    public void updateCurrentUserRoles(HttpServletRequest inRequest)
+    {
+        String theCurrentUser = (String) inRequest.getSession().getAttribute(Constants.CURRENTUSER);
+        try
+        {
+            List theRoles = getRolesForUser(theCurrentUser);
+            inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
+        }
+        catch (Exception e)
+        {
+            log.info("Unable to update user roles for " + theCurrentUser, e);
+        }
+    }
 
-		try {
-			// Get from default bundle
-			Properties camodProperties = new Properties();
-			String camodPropertiesFileName = null;
+    /**
+     * Get an e-mail address for the coordinator
+     * 
+     * @return the list of users associated with the role
+     */
+    public String getEmailForCoordinator()
+    {
+        log.trace("Entering getEmailForCoordinator");
 
-			camodPropertiesFileName = System
-					.getProperty("gov.nih.nci.camod.camodProperties");
+        String theEmail = "";
 
-			try {
+        try
+        {
+            // Get from default bundle
+            Properties camodProperties = new Properties();
+            String camodPropertiesFileName = null;
 
-				FileInputStream in = new FileInputStream(
-						camodPropertiesFileName);
-				camodProperties.load(in);
+            camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
 
-			} catch (FileNotFoundException e) {
-				log.error("Caught exception finding file for properties: ", e);
-				e.printStackTrace();
-			} catch (IOException e) {
-				log.error("Caught exception finding file for properties: ", e);
-				e.printStackTrace();
-			}
+            try
+            {
 
-			String theCoordinator = camodProperties
-					.getProperty("coordinator.username");
+                FileInputStream in = new FileInputStream(camodPropertiesFileName);
+                camodProperties.load(in);
 
-			theEmail = getEmailForUser(theCoordinator);
-		} catch (Exception e) {
-			log.warn("Unable to get coordinator email: ", e);
-		}
+            }
+            catch (FileNotFoundException e)
+            {
+                log.error("Caught exception finding file for properties: ", e);
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                log.error("Caught exception finding file for properties: ", e);
+                e.printStackTrace();
+            }
 
-		log.trace("Exiting getEmailForCoordinator");
+            String theCoordinator = camodProperties.getProperty("coordinator.username");
 
-		return theEmail;
-	}
+            theEmail = getEmailForUser(theCoordinator);
+        }
+        catch (Exception e)
+        {
+            log.warn("Unable to get coordinator email: ", e);
+        }
 
-	/**
-	 * Log in a user and get roles.
-	 * 
-	 * @param inUsername
-	 *            is the login name of the user
-	 * @param inPassword
-	 *            password
-	 * @param inRequest
-	 *            Used to store the roles
-	 * 
-	 * @return the list of users associated with the role
-	 */
-	public boolean login(String inUsername, String inPassword,
-			HttpServletRequest inRequest) {
-		boolean loginOk = true;
-		try {
-			// Work around bug in CSM. Empty passwords pass
-			if (inPassword.trim().length() != 0) {
-				// loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+        log.trace("Exiting getEmailForCoordinator");
 
-				// Does the user exist? Must also be in our database to login
-				List theRoles = getRolesForUser(inUsername);
-				inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
-						theRoles);
-			}
-		} catch (Exception e) {
-			log.error("Error logging in user: ", e);
-			loginOk = false;
-		}
+        return theEmail;
+    }
 
-		return loginOk;
-	}
+    /**
+     * Log in a user and get roles.
+     * 
+     * @param inUsername
+     *            is the login name of the user
+     * @param inPassword
+     *            password
+     * @param inRequest
+     *            Used to store the roles
+     * 
+     * @return the list of users associated with the role
+     */
+    public boolean login(String inUsername,
+                         String inPassword,
+                         HttpServletRequest inRequest)
+    {
+        boolean loginOk = true;
+        try
+        {
+            // Work around bug in CSM. Empty passwords pass
+            if (inPassword.trim().length() != 0)
+            {
+                // loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+
+                // Does the user exist? Must also be in our database to login
+                List theRoles = getRolesForUser(inUsername);
+                inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES, theRoles);
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("Error logging in user: ", e);
+            loginOk = false;
+        }
+
+        return loginOk;
+    }
 }
