@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.17 2006-08-17 18:27:14 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.18 2006-09-18 16:26:14 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/08/17 18:27:14  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.16  2006/05/24 15:29:32  pandyas
  * Added functionality to clear organ from screen on edit - not required
  *
@@ -71,246 +74,197 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-public class GeneDeliveryManagerImpl extends BaseManager implements
-		GeneDeliveryManager {
-	public List getAll() throws Exception {
-		log.debug("In GeneDeliveryManagerImpl.getAll");
-		return super.getAll(GeneDelivery.class);
-	}
+public class GeneDeliveryManagerImpl extends BaseManager implements GeneDeliveryManager
+{
+    public List getAll() throws Exception
+    {
+        log.debug("In GeneDeliveryManagerImpl.getAll");
+        return super.getAll(GeneDelivery.class);
+    }
 
-	public GeneDelivery get(String id) throws Exception {
-		log.debug("In GeneDeliveryManagerImpl.get");
-		return (GeneDelivery) super.get(id, GeneDelivery.class);
-	}
+    public GeneDelivery get(String id) throws Exception
+    {
+        log.debug("In GeneDeliveryManagerImpl.get");
+        return (GeneDelivery) super.get(id, GeneDelivery.class);
+    }
 
-	public void save(GeneDelivery geneDelivery) throws Exception {
-		log.debug("In GeneDeliveryManagerImpl.save");
-		super.save(geneDelivery);
-	}
+    public void save(GeneDelivery geneDelivery) throws Exception
+    {
+        log.debug("In GeneDeliveryManagerImpl.save");
+        super.save(geneDelivery);
+    }
 
-	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.debug("In GeneDeliveryManagerImpl.remove");
-		inAnimalModel.getGeneDeliveryCollection().remove(get(id));
-		super.save(inAnimalModel);
-	}
+    public void remove(String id,
+                       AnimalModel inAnimalModel) throws Exception
+    {
+        log.debug("In GeneDeliveryManagerImpl.remove");
+        inAnimalModel.getGeneDeliveryCollection().remove(get(id));
+        super.save(inAnimalModel);
+    }
 
-	public GeneDelivery create(AnimalModel inAnimalModel,
-			GeneDeliveryData inGeneDeliveryForm) throws Exception {
-		log.info("Entering GeneDeliveryManagerImpl.create");
+    public GeneDelivery create(AnimalModel inAnimalModel,
+                               GeneDeliveryData inGeneDeliveryForm) throws Exception
+    {
+        log.info("Entering GeneDeliveryManagerImpl.create");
 
-		GeneDelivery theGeneDelivery = new GeneDelivery();
-		populateOrgan(inGeneDeliveryForm, theGeneDelivery);
-		populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, theGeneDelivery);
+        GeneDelivery theGeneDelivery = new GeneDelivery();
+        populateOrgan(inGeneDeliveryForm, theGeneDelivery);
+        populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, theGeneDelivery);
 
-		log.info("Exiting GeneDeliveryManagerImpl.create");
-		return theGeneDelivery;
-	}
+        log.info("Exiting GeneDeliveryManagerImpl.create");
+        return theGeneDelivery;
+    }
 
-	public void update(AnimalModel inAnimalModel,
-			GeneDeliveryData inGeneDeliveryForm, GeneDelivery inGeneDelivery)
-			throws Exception {
-		log.info("Entering GeneDeliveryManagerImpl.update");
-		log.info("Updating GeneDeliveryForm: " + inGeneDelivery.getId());
+    public void update(AnimalModel inAnimalModel,
+                       GeneDeliveryData inGeneDeliveryForm,
+                       GeneDelivery inGeneDelivery) throws Exception
+    {
+        log.info("Entering GeneDeliveryManagerImpl.update");
+        log.info("Updating GeneDeliveryForm: " + inGeneDelivery.getId());
 
-		// Populate w/ the new values and save
-		populateOrgan(inGeneDeliveryForm, inGeneDelivery);
-		populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, inGeneDelivery);
+        // Populate w/ the new values and save
+        populateOrgan(inGeneDeliveryForm, inGeneDelivery);
+        populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, inGeneDelivery);
 
-		save(inGeneDelivery);
+        save(inGeneDelivery);
 
-		log.debug("Exiting GeneDeliveryManagerImpl.update");
-	}
+        log.debug("Exiting GeneDeliveryManagerImpl.update");
+    }
 
-	private void populateGeneDelivery(AnimalModel inAnimalModel,
-			GeneDeliveryData inGeneDeliveryData, GeneDelivery inGeneDelivery)
-			throws Exception {
-		log.info("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
+    private void populateGeneDelivery(AnimalModel inAnimalModel,
+                                      GeneDeliveryData inGeneDeliveryData,
+                                      GeneDelivery inGeneDelivery) throws Exception
+    {
+        log.info("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
 
-		// Set the treatment
-		Treatment theTreatment = inGeneDelivery.getTreatment();
-		if (theTreatment == null) {
-			theTreatment = new Treatment();
-			inGeneDelivery.setTreatment(theTreatment);
-		}
+        // Set the treatment
+        Treatment theTreatment = inGeneDelivery.getTreatment();
+        if (theTreatment == null)
+        {
+            theTreatment = new Treatment();
+            inGeneDelivery.setTreatment(theTreatment);
+        }
 
-		// Set the gender
-		SexDistribution sexDistribution = SexDistributionManagerSingleton
-				.instance().getByType(inGeneDeliveryData.getType());
+        // Set the gender
+        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(inGeneDeliveryData.getType());
 
-		// save the treatment
-		theTreatment.setSexDistribution(sexDistribution);
+        // save the treatment
+        theTreatment.setSexDistribution(sexDistribution);
 
-		theTreatment.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment());
-		theTreatment.setAgeAtTreatmentUnit(inGeneDeliveryData
-				.getAgeAtTreatmentUnit());
+        theTreatment.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment());
+        theTreatment.setAgeAtTreatmentUnit(inGeneDeliveryData.getAgeAtTreatmentUnit());
 
-		// anytime the viral vector is "other"
-		if (inGeneDeliveryData.getViralVector().equals(
-				Constants.Dropdowns.OTHER_OPTION)) {
-			// Send e-mail for OtherViralVector
-			sendEmail(inAnimalModel, inGeneDeliveryData.getOtherViralVector(),
-					"ViralVector");
+        // anytime the viral vector is "other"
+        if (inGeneDeliveryData.getViralVector().equals(Constants.Dropdowns.OTHER_OPTION))
+        {
+            // Send e-mail for OtherViralVector
+            sendEmail(inAnimalModel, inGeneDeliveryData.getOtherViralVector(), "ViralVector");
 
-			inGeneDelivery.setViralVector(null);
-			inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData
-					.getOtherViralVector());
-		}
-		// anytime viral vector is not other set uncontrolled vocab to null
-		// (covers editing)
-		else {
-			System.out.println("viral vector not other");
-			inGeneDelivery.setViralVector(inGeneDeliveryData.getViralVector());
-			inGeneDelivery.setViralVectorUnctrlVocab(null);
-		}
+            inGeneDelivery.setViralVector(null);
+            inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData.getOtherViralVector());
+        }
+        // anytime viral vector is not other set uncontrolled vocab to null
+        // (covers editing)
+        else
+        {
+            System.out.println("viral vector not other");
+            inGeneDelivery.setViralVector(inGeneDeliveryData.getViralVector());
+            inGeneDelivery.setViralVectorUnctrlVocab(null);
+        }
 
-		inGeneDelivery.getTreatment().setRegimen(
-				inGeneDeliveryData.getRegimen());
-		inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
+        inGeneDelivery.getTreatment().setRegimen(inGeneDeliveryData.getRegimen());
+        inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
 
-		/*
-		 * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
-		 * organ is selected by user
-		 */
-		if (inGeneDeliveryData.getOrganTissueCode() != null
-				&& inGeneDeliveryData.getOrganTissueCode().length() > 0) {
-			log.info("newConceptCode is not null: ");
+        log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
+    }
 
-			String newConceptCode = inGeneDeliveryData.getOrganTissueCode();
-			log.info("newConceptCode: " + newConceptCode);
+    private void populateOrgan(GeneDeliveryData inGeneDeliveryData,
+                               GeneDelivery inGeneDelivery) throws Exception
+    {
+        Organ theOrgan = null;
 
-			// Organ will be null for new submissions
-			if (inGeneDelivery.getOrgan() == null) {
-				log
-						.info("Organ is new so create new object and retrieve attributes");
+        // Check for organ, get and set organ
+        if (inGeneDeliveryData.getOrganTissueCode() != null && inGeneDeliveryData.getOrganTissueCode().length() > 0)
+        {
+            log.info("<populateOrgan> organ is selected: ");
+            // reuse/create Organ by matching concept code
+            theOrgan = OrganManagerSingleton.instance().getOrCreate(inGeneDeliveryData.getOrganTissueCode(),
+                                                                          inGeneDeliveryData.getOrganTissueName());
 
-				inGeneDelivery.setOrgan(new Organ());
+            /*
+             * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
+             * organ is selected by user - no need to check for existing organ in
+             * 2.1
+             */
+            inGeneDelivery.setOrgan(theOrgan);
+        }
+        // blank out organ, clear button functionality during editing
+        else
+        {
+            log.info("Setting object to null - clear organ: ");
+            inGeneDelivery.setOrgan(null);
+        }
 
-				/*
-				 * Always get/store organ name through the concept code - never
-				 * deal with converting name back and forth
-				 */
-				String preferedOrganName = EvsTreeUtil
-						.getEVSPreferedDescription(inGeneDeliveryData
-								.getOrganTissueCode());
+    }
 
-				log.info("preferedOrganName: " + preferedOrganName);
-				inGeneDelivery.getOrgan().setName(preferedOrganName);
+    private void sendEmail(AnimalModel inAnimalModel,
+                           String theUncontrolledVocab,
+                           String inType)
+    {
+        // Get the e-mail resource
+        Properties camodProperties = new Properties();
+        String camodPropertiesFileName = null;
 
-				log
-						.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: "
-								+ inGeneDeliveryData.getOrganTissueCode());
-				inGeneDelivery.getOrgan().setConceptCode(
-						inGeneDeliveryData.getOrganTissueCode());
+        camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
 
-			} else {
-				// edited screen - submit organ only if changed
-				log.info("Organ is modified so compare concept code in DB");
+        try
+        {
 
-				String oldConceptCode = inGeneDelivery.getOrgan()
-						.getConceptCode();
-				log.info("oldConceptCode: " + oldConceptCode);
+            FileInputStream in = new FileInputStream(camodPropertiesFileName);
+            camodProperties.load(in);
 
-				if (!newConceptCode.equals(oldConceptCode)) {
-					log.info("oldConceptCode != newConceptCode: ");
-					/*
-					 * Always get/store organ name through the concept code -
-					 * never deal with converting name back and forth
-					 */
-					String preferedOrganName = EvsTreeUtil
-							.getEVSPreferedDescription(inGeneDeliveryData
-									.getOrganTissueCode());
+        }
+        catch (FileNotFoundException e)
+        {
+            log.error("Caught exception finding file for properties: ", e);
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            log.error("Caught exception finding file for properties: ", e);
+            e.printStackTrace();
+        }
 
-					log.info("preferedOrganName: " + preferedOrganName);
-					inGeneDelivery.getOrgan().setName(preferedOrganName);
+        // Iterate through all the reciepts in the config file
+        String recipients = UserManagerSingleton.instance().getEmailForCoordinator();
+        StringTokenizer st = new StringTokenizer(recipients, ",");
+        String inRecipients[] = new String[st.countTokens()];
+        for (int i = 0; i < inRecipients.length; i++)
+        {
+            inRecipients[i] = st.nextToken();
+        }
 
-					log
-							.info("populateXenograft - getOrgan().setConceptCode - OrganTissueCode: "
-									+ inGeneDeliveryData.getOrganTissueCode());
-					inGeneDelivery.getOrgan().setConceptCode(
-							inGeneDeliveryData.getOrganTissueCode());
-				}
-			}
-		}
+        String inSubject = camodProperties.getProperty("model.new_unctrl_vocab_subject");
+        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
-		log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
-	}
+        // gather message keys and variable values to build the e-mail
+        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+        Map<String, Object> values = new TreeMap<String, Object>();
+        values.put("type", inType);
+        values.put("value", theUncontrolledVocab);
+        values.put("submitter", inAnimalModel.getSubmitter());
+        values.put("model", inAnimalModel.getModelDescriptor());
+        values.put("modelstate", inAnimalModel.getState());
 
-	private void populateOrgan(GeneDeliveryData inGeneDeliveryData,
-			GeneDelivery inGeneDelivery) throws Exception {
-
-		// reuse/create Organ by matching concept code
-		Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(
-				inGeneDeliveryData.getOrganTissueCode(),
-				inGeneDeliveryData.getOrganTissueName());
-
-		/*
-		 * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
-		 * organ is selected by user - no need to check for existing organ in
-		 * 2.1
-		 */
-		if (inGeneDeliveryData.getOrganTissueCode() != null
-				&& inGeneDeliveryData.getOrganTissueCode().length() > 0) {
-			inGeneDelivery.setOrgan(theOrgan);
-		}
-		// blank out organ, clear button functionality during editing
-		else {
-			log.info("Setting object to null - clear organ: ");
-			inGeneDelivery.setOrgan(null);
-		}
-
-	}
-
-	private void sendEmail(AnimalModel inAnimalModel,
-			String theUncontrolledVocab, String inType) {
-		// Get the e-mail resource
-		Properties camodProperties = new Properties();
-		String camodPropertiesFileName = null;
-
-		camodPropertiesFileName = System
-				.getProperty("gov.nih.nci.camod.camodProperties");
-
-		try {
-
-			FileInputStream in = new FileInputStream(camodPropertiesFileName);
-			camodProperties.load(in);
-
-		} catch (FileNotFoundException e) {
-			log.error("Caught exception finding file for properties: ", e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			log.error("Caught exception finding file for properties: ", e);
-			e.printStackTrace();
-		}
-
-		// Iterate through all the reciepts in the config file
-		String recipients = UserManagerSingleton.instance()
-				.getEmailForCoordinator();
-		StringTokenizer st = new StringTokenizer(recipients, ",");
-		String inRecipients[] = new String[st.countTokens()];
-		for (int i = 0; i < inRecipients.length; i++) {
-			inRecipients[i] = st.nextToken();
-		}
-
-		String inSubject = camodProperties
-				.getProperty("model.new_unctrl_vocab_subject");
-		String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-		// gather message keys and variable values to build the e-mail
-		String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-		Map<String, Object> values = new TreeMap<String, Object>();
-		values.put("type", inType);
-		values.put("value", theUncontrolledVocab);
-		values.put("submitter", inAnimalModel.getSubmitter());
-		values.put("model", inAnimalModel.getModelDescriptor());
-		values.put("modelstate", inAnimalModel.getState());
-
-		// Send the email
-		try {
-			MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys,
-					values);
-		} catch (Exception e) {
-			log.error("Caught exception sending mail: ", e);
-			e.printStackTrace();
-		}
-	}
+        // Send the email
+        try
+        {
+            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
+        }
+        catch (Exception e)
+        {
+            log.error("Caught exception sending mail: ", e);
+            e.printStackTrace();
+        }
+    }
 }
