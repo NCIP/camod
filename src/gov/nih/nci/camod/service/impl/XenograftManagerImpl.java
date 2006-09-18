@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.31 2006-08-17 18:12:20 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.32 2006-09-18 16:25:21 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2006/08/17 18:12:20  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.30  2006/05/22 18:19:26  pandyas
  * set adminSiteUnctrlVocab to null for editing from 'Other' to a selected value
  *
@@ -239,19 +242,27 @@ public class XenograftManagerImpl extends BaseManager implements
 
 	private void populateOrgan(XenograftData inXenograftData,
 			Xenograft inXenograft) throws Exception {
+        Organ theOrgan = null;
+        
+        log.info("<XenograftManagerImpl> populateOrgan: ");        
 
+        // Check for organ and then get and set organ
+        if (inXenograftData.getOrganTissueCode() != null
+                && inXenograftData.getOrganTissueCode().length() > 0) {
+            log.info("<populateOrgan> organ is selected: ");   
+            
 		// reuse/create Organ by matching concept code
-		Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(
+		theOrgan = OrganManagerSingleton.instance().getOrCreate(
 				inXenograftData.getOrganTissueCode(),
 				inXenograftData.getOrganTissueName());
-
+        
+        log.info("theOrgan: " + theOrgan.toString());        
 		/*
 		 * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
 		 * organ is selected by user - no need to check for existing organ in
 		 * 2.1
 		 */
-		if (inXenograftData.getOrganTissueCode() != null
-				&& inXenograftData.getOrganTissueCode().length() > 0) {
+
 			inXenograft.setOrgan(theOrgan);
 		}
 		// blank out organ, clear button functionality during editing
