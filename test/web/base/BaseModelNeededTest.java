@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseModelNeededTest.java,v 1.5 2006-05-08 14:23:11 georgeda Exp $
+ * $Id: BaseModelNeededTest.java,v 1.6 2006-09-20 18:29:52 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/05/08 14:23:11  georgeda
+ * Reformat and clean up warnings
+ *
  * Revision 1.4  2006/04/27 15:08:33  pandyas
  * Modified while testing caMod 2.1
  *
@@ -58,7 +61,7 @@ public class BaseModelNeededTest extends BaseHttpTest
 
         myModelName = "_" + GUIDGenerator.getInstance().genNewGuid();
         theForm.setParameter("modelDescriptor", myModelName);
-        theForm.setParameter("principalInvestigator", "shenc");
+        theForm.setParameter("principalInvestigator", "abrahamd");
         theForm.setParameter("scientificName", "Mus musculus");
         theForm.setParameter("description", "Test Phenotype");
         theCurrentPage = theForm.submit();
