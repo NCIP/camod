@@ -1,6 +1,6 @@
 /**
  * 
- * $Id: Constants.java,v 1.89 2006-09-20 15:32:13 georgeda Exp $
+ * $Id: Constants.java,v 1.90 2006-09-20 16:13:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.88  2006/08/17 17:45:03  pandyas
@@ -516,11 +516,6 @@ public class Constants {
         public static final String SECURITY_PROTOCOL_KEY = "ldap.security.protocol";
         public static final String CONTEXT_KEY = "ldap.context";
     }
-    
-    public interface camod {
-        public static final String COORDINATOR_USERNAME = "coordinator.username";
-        public static final String SUPERUSER_USERNAMES = "superuser.usernames";
-    }    
 
     /**
      * Defines the global constants used as parameters to requests
@@ -855,9 +850,19 @@ public class Constants {
             public static final String SCREENER_REJECT = "screener_reject";
 
             /**
-             * A constant that defines the text for the complete
+             * A constant that defines the text for the complete action
              */
             public static final String COMPLETE = "complete";
+            /**
+             * A constant that defines the text for the complete action
+             */
+            public static final String BACK_TO_COMPLETE = "back_to_complete";            
+            
+            
+            /**
+             * A constant that defines the text for the inactive action
+             */
+            public static final String INACTIVATE = "inactivate";            
         }
 
         /**
@@ -945,6 +950,12 @@ public class Constants {
          * the request
          */
         public static final String MODELS_NEEDING_SCREENER_ASSIGNMENT = "modelsNeedingScreenerAssignment";
+        /**
+         * Used to set/pull the objects inactivated out of
+         * the request
+         */
+        public static final String MODELS_INACTIVATED = "modelsInactivated";
+        
     }
 
     public interface EmailMessage {
