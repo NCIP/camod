@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.88 2006-08-17 17:45:03 pandyas Exp $
+ * $Id: Constants.java,v 1.89 2006-09-20 15:32:13 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.88  2006/08/17 17:45:03  pandyas
+ * Defect# 410: Deleted constants no longer used due to externalized property  files
+ *
  * Revision 1.87  2006/05/24 16:45:55  pandyas
  * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
  *
@@ -513,6 +516,11 @@ public class Constants {
         public static final String SECURITY_PROTOCOL_KEY = "ldap.security.protocol";
         public static final String CONTEXT_KEY = "ldap.context";
     }
+    
+    public interface camod {
+        public static final String COORDINATOR_USERNAME = "coordinator.username";
+        public static final String SUPERUSER_USERNAMES = "superuser.usernames";
+    }    
 
     /**
      * Defines the global constants used as parameters to requests
