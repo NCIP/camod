@@ -1,4 +1,0 @@
-TYPE=DROPDOWN_OPTION
-Mouse (Mus musculus),Mus musculus
-Rat (Rattus norvegicus),Rattus norvegicus
-Rat (Rattus rattus),Rattus rattus
