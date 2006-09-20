@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: EditModelCharacteristicsTest.java,v 1.1 2005-12-21 20:09:33 pandyas Exp $
+ * $Id: EditModelCharacteristicsTest.java,v 1.2 2006-09-20 19:10:55 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2005/12/21 20:09:33  pandyas
+ * Added test for editing a model characteristic
+ *
  * 
  */
 
@@ -29,7 +32,7 @@ public class EditModelCharacteristicsTest extends BaseModelNeededTest {
 
         String theUsername = theBundle.getString("username");
         String thePassword = theBundle.getString("password");
-        
+                
         loginToApplication(theUsername, thePassword);
         createModel();		
 	}
@@ -52,7 +55,7 @@ public class EditModelCharacteristicsTest extends BaseModelNeededTest {
         assertNotNull("Couldn't find link to model characteristics data", theLink);
         
 		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Is this model a toolmouse?");
+		assertCurrentPageContains("Is this model a tool Strain?");
 		WebForm theForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");		
     	
         theForm.setParameter("description", "Test Description");
