@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitEditDeleteImageTest.java,v 1.2 2005-12-27 19:19:34 georgeda Exp $
+ * $Id: SubmitEditDeleteImageTest.java,v 1.3 2006-09-20 19:16:24 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/12/27 19:19:34  georgeda
+ * Test cleanup
+ *
  * Revision 1.1  2005/12/27 15:04:09  georgeda
  * Test cleanup
  *
@@ -19,6 +22,7 @@ import java.util.ResourceBundle;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import web.base.BaseModelNeededTest;
+import web.util.TestUtil;
 
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
@@ -71,6 +75,8 @@ public class SubmitEditDeleteImageTest extends BaseModelNeededTest
         theForm.setParameter("fileLocation", new File(theBundle.getString("deploydir") + "/images/iconHelp.gif"));
         theForm.setParameter("title", "test image");
         theCurrentPage = theForm.submit();
+        //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        
         assertCurrentPageContains("You have successfully added an Image to this model!");
 
         // Editing
