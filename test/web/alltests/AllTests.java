@@ -42,9 +42,12 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: AllTests.java,v 1.1 2006-04-27 15:08:09 pandyas Exp $
+ * $Id: AllTests.java,v 1.2 2006-09-22 15:41:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/04/27 15:08:09  pandyas
+ * Reorganized so we can test allSubmission and allSearch separately
+ *
  * Revision 1.2  2005/12/28 16:41:57  georgeda
  * Changes for testing
  *
@@ -55,23 +58,29 @@
 package web.alltests;
 
 /**
- * @author georgeda
+ * @author pandyas
  */
 import gov.nih.nci.camod.webapp.action.StrutsActionTests;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 import web.HttpTests;
 
-public class AllTests
+public class AllTests extends TestCase
 {
 
+	public AllTests(String arg0) {
+		super(arg0);
+	}
+	
     public static Test suite()
     {
         TestSuite suite = new TestSuite();
 
-        suite.addTest(HttpTests.suite());
-        suite.addTest(StrutsActionTests.suite());
+        // Submission tests
+        suite.addTest(AllSubmissionTests.suite());
+        suite.addTest(AllSearchTests.suite());
 
         return suite;
     }
