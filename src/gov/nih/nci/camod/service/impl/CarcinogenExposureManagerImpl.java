@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.5 2006-08-17 17:48:47 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.6 2006-09-22 18:53:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/08/17 17:48:47  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.4  2006/05/24 15:26:57  pandyas
  * Cleaned up sendEmail method
  *
@@ -738,9 +741,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         	log.info("Defining recipients from the properties file: " + inRecipients[i]);             
         }
 
-        //String inSubject = theBundle.getString(Constants.BundleKeys.NEW_UNCONTROLLED_VOCAB_SUBJECT_KEY);
-        String inSubject = System.getProperty("model.new_unctrl_vocab_subject");
-    	String inSubject2 = camodProperties.getProperty("model.new_unctrl_vocab_subject");
+    	String inSubject = camodProperties.getProperty("model.new_unctrl_vocab_subject");
   	
         String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
 
