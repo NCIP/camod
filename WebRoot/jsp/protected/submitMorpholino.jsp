@@ -1,12 +1,15 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/08/13 18:37:02  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified links
+ *
  * Revision 1.1  2006/05/03 20:07:44  pandyas
  * Modified/Added to support Morpholino object data in the application
  *
  *
  *
- * $Id: submitMorpholino.jsp,v 1.2 2006-08-13 18:37:02 pandyas Exp $
+ * $Id: submitMorpholino.jsp,v 1.3 2006-10-04 14:51:00 pandyas Exp $
  *
  */   
 %>
@@ -138,7 +141,7 @@
 			<br>
 			<br>			
 			<html:select styleClass="formFieldSized" size="1" property="deliveryMethod"  onclick="chkOtherMethod();">												
-				<html:options name="<%= Dropdowns.DELIVERYMETHODSOURCEDROP %>"/>					
+				<html:options name="<%= Dropdowns.DELIVERYMETHODDROP %>"/>					
 			</html:select>			
 		</td>
 	</tr>
