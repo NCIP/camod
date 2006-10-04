@@ -100,7 +100,7 @@ var cal1 = new CalendarPopup();
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Is this model a tool Strain?</label>
+			<td class="formLabel"><label for="field1">Is this model a tool strain?</label>
 				<camod:cshelp topic="model_characteristics_help" key="ABS_CANCER_MODEL.IS_TOOL_MOUSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
 			</td>
 			<td class="formField">
