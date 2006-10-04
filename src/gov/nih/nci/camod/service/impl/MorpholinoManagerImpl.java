@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: MorpholinoManagerImpl.java,v 1.2 2006-08-17 18:24:43 pandyas Exp $
+ * $Id: MorpholinoManagerImpl.java,v 1.3 2006-10-04 14:52:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/08/17 18:24:43  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.1  2006/05/03 20:04:04  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -188,7 +191,7 @@ public class MorpholinoManagerImpl extends BaseManager implements MorpholinoMana
             inMorpholino.setVisualLigandUnctrlVocab(inMorpholinoData.getOtherVisualLigand());
 
             log.info("Sending Notification eMail - new VisualLigands added");
-            sendEmail(inAnimalModel, inMorpholinoData.getOtherVisualLigand(), "otherVisualLigands");
+            sendEmail(inAnimalModel, inMorpholinoData.getOtherVisualLigand(), "otherVisualLigand");
         }
         else if (inMorpholinoData.getVisualLigand() != null)
         {
