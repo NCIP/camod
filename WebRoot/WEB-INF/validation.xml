@@ -2083,7 +2083,7 @@
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((name != 'Other') or (*this* != null))
+						((source != 'Other') or (*this* != null))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2099,7 +2099,7 @@
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((name != 'Other') or (*this* != null))
+						((deliveryMethod != 'Other') or (*this* != null))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2109,13 +2109,13 @@
 					<var-value>255</var-value>
 				</var>
 			</field>			
-			<field property="otherVisualLigands"
+			<field property="otherVisualLigand"
 				depends="validwhen, maxlength">
-				<arg0 key="MorpholinoForm.otherVisualLigands" />
+				<arg0 key="MorpholinoForm.otherVisualLigand" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((name != 'Other') or (*this* != null))
+						((visualLigand != 'Other') or (*this* != null))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
