@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.24 2006-05-24 16:58:40 georgeda Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.25 2006-10-04 14:48:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/05/24 16:58:40  georgeda
+ * Fixed gene delivery display prob.
+ *
  * Revision 1.23  2006/04/28 19:48:14  schroedn
  * Defect #55
  * Added HighlightTextTag
@@ -281,7 +284,7 @@
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
@@ -410,7 +413,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
@@ -481,7 +484,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.sexDistribution.type}"/>&nbsp;</camod:highlight>
