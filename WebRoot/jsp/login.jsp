@@ -112,12 +112,6 @@
                                                                           <CENTER><input class="actionButton" type="submit" value="Register" /></CENTER>
                                                                       </FORM>			      		
                                                                   </td>
-				      
-                                                                  <td>					    
-                                                                      <FORM name="input" action="javascript:openUserGuideWindow('WebHelp/!SSL!/UserGuide.pdf')" method="get">
-                                                                          <input class="actionButton" type="submit" value="Help" />
-                                                                      </FORM>					   
-                                                                  </td> 
                                                               </tr>                                                             
                                                           </table>
                                                           
@@ -156,7 +150,14 @@
                                                       <td class="sidebarContent" valign="top">caMOD 2.1 was released to production on May 30th.<br/><br/><html:link action="infoReleaseNotes.do">Release Notes</html:link></td>
                                                   </tr>
                                                   <tr>
-                                                  <td class="sidebarContent" valign="top"> <a href="javascript:openUserGuideWindow('WebHelp/!SSL!/UserGuide.pdf')">User Guide (PDF)</a></td>
+													<td> &nbsp; 
+														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/!SSL!/UserGuide.pdf','mywin',
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
+														</input>&nbsp;
+														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/!SSL!/index.html','mywin',
+															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
+														</input>
+													</td>                                                                  
                                               	</tr>
                                               </table>
                                           </td>
