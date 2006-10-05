@@ -109,7 +109,7 @@
 				      
                                                                   <td>		      		
                                                                       <FORM name="input" action="/camod/RegisterUserPopulateAction.do" method="get">
-                                                                          <CENTER><input class="actionButton" type="submit" value="Register" /></CENTER>
+                                                                          <input class="actionButton" type="submit" value="Register" />
                                                                       </FORM>			      		
                                                                   </td>
                                                               </tr>                                                             
