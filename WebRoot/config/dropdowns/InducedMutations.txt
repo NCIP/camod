@@ -1,4 +1,0 @@
-TYPE=DROPDOWN_OPTION
-Other,Other
-chemical,Chemical / Drug
-radiation,Radiation
