@@ -1,4 +1,4 @@
-package web.alltests;
+package web.allwebtests;
 
 import web.search.*;
 import junit.framework.Test;

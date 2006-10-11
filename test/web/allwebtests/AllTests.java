@@ -42,9 +42,12 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: AllTests.java,v 1.1 2006-10-04 15:13:10 pandyas Exp $
+ * $Id: AllTests.java,v 1.2 2006-10-11 15:41:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/04 15:13:10  pandyas
+ * modfied name of folder
+ *
  * Revision 1.2  2006/09/22 15:41:28  pandyas
  * updated
  *
@@ -58,7 +61,7 @@
  * Test cleanup
  *
  */
-package web.alltests;
+package web.allwebtests;
 
 /**
  * @author pandyas
