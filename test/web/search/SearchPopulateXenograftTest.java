@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateXenograftTest.java,v 1.4 2006-04-27 15:33:43 pandyas Exp $
+ * $Id: SearchPopulateXenograftTest.java,v 1.5 2006-10-11 15:47:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/27 15:33:43  pandyas
+ * uncommented deleteModel statement
+ *
  * Revision 1.3  2006/04/27 15:08:43  pandyas
  * Modified while testing caMod 2.1
  *
@@ -166,6 +169,16 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest
         WebResponse theCurrentPage = theLink.click();
         assertCurrentPageContains("if graft type is not listed");
         WebForm theWebForm = theCurrentPage.getFormWithName("xenograftForm");
+        
+        // select from species list, then get strain list without violating validation
+        theWebForm.setParameter("xenograftName", "Test Xenograft");
+        theWebForm.setParameter("donorScientificName", "Mus musculus");
+        theWebForm.setParameter("graftType", "Cell Line");
+        
+        theCurrentPage = theWebForm.submit();
+        
+        TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+        //theWebForm.setParameter("donorEthinicityStrain", "129");        
 
         XenograftForm theForm = new XenograftForm();
         theForm.setOrgan("Heart");
@@ -173,8 +186,8 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest
         theForm.setOrganTissueCode("C22498");
         theForm.setAtccNumber("2");
         theForm.setCellAmount("10");
-        theForm.setDonorScientificName("Mus musculus");
-        theForm.setDonorEthinicityStrain("129");
+        //theForm.setDonorScientificName("Mus musculus");
+        theForm.setDonorEthinicityStrain("Not Specified");
 
         List<String> theParamsToIgnore = new ArrayList<String>();
         //TODO - remove disabled=true but keep disabled until geneticManipulation is entered
@@ -184,6 +197,7 @@ public class SearchPopulateXenograftTest extends BaseModelNeededTest
         List<String> theParamsToSkip = new ArrayList<String>();
         theParamsToSkip.add("organTissueCode");
         theParamsToSkip.add("organTissueName");
+        theParamsToSkip.add("donorEthinicityStrain");
 
         TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
         TestUtil.setValuesOnForm(theForm, theWebForm);

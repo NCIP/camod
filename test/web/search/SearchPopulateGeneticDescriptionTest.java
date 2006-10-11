@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.3 2006-04-27 15:08:43 pandyas Exp $
+ * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.4 2006-10-11 15:47:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/27 15:08:43  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.2  2006/04/17 19:37:34  pandyas
  * caMod 2.1 OM changes
  *
@@ -181,13 +184,16 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		List<String> theParamsToSkip = new ArrayList<String>();		
 		theParamsToSkip.add("description");       
         theParamsToSkip.add("isRandom");
-        theParamsToSkip.add("locationOfIntegration");	
+        theParamsToSkip.add("locationOfIntegration");
+        // does not show on view page
+        theParamsToSkip.add("constructSequence");
+        
         
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
-		//TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+		TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 		
 		assertCurrentPageContains("You have successfully added an Engineered Transgene to this model!");
 
@@ -274,6 +280,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("spliceSites_otherSpecies");
         theParamsToSkip.add("otherScientificName");
         theParamsToSkip.add("polyASignal_otherSpecies");
+        theParamsToSkip.add("constructSequence");
         
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);

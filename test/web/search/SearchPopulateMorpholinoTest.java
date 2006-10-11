@@ -47,12 +47,17 @@ public class SearchPopulateMorpholinoTest extends BaseModelNeededTest
     {
 
         navigateToModelForEditing(myModelName);
+        System.out.println("myModelName: " + myModelName);
 
         // Adding a Morpholino
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Morpholino");
+        System.out.println("theLink: " + theLink);
+        
         assertNotNull("Unable to find link to enter a Morpholino", theLink);
         WebResponse theCurrentPage = theLink.click();
         assertCurrentPageContains("if source is not listed");
+        System.out.println("here: " );
+        
         WebForm theWebForm = theCurrentPage.getFormWithName("morpholinoForm");
 
         MorpholinoForm theForm = new MorpholinoForm();
@@ -77,12 +82,19 @@ public class SearchPopulateMorpholinoTest extends BaseModelNeededTest
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "TESTINGTARGETEDREGION");
         assertNotNull("Unable to find link to verify Morpholino", theLink);
         theCurrentPage = theLink.click();
+        
         assertCurrentPageContains("if source is not listed");
         theWebForm = theCurrentPage.getFormWithName("morpholinoForm");
 
         //Add parameters found behind but not populate screen
         theParamsToSkip = new ArrayList<String>();
-
+        theParamsToSkip.add("aMorpholinoID");
+        theParamsToSkip.add("otherDeliveryMethod");
+        // shows up as a match but maybe font is not read
+        theParamsToSkip.add("sequenceDirection");
+        theParamsToSkip.add("otherSource");
+        theParamsToSkip.add("submitAction");
+        theParamsToSkip.add("otherVisualLigand");
 
         verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 

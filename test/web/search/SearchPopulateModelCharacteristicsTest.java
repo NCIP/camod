@@ -179,7 +179,7 @@ public class SearchPopulateModelCharacteristicsTest extends BaseModelNeededTest
                                                                           "AnimalModelPopulateAction.do?method=populate");
         assertNotNull("Unable to find link to curent Model Characteristics", theLink);
         theCurrentPage = theLink.click();
-        assertCurrentPageContains("Is this model a toolmouse?");
+        assertCurrentPageContains("Is this model a tool strain?");
         theWebForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");
 
         ModelCharacteristicsForm theMCForm = new ModelCharacteristicsForm();

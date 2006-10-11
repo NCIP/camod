@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitGDTest.java,v 1.7 2006-04-27 15:08:52 pandyas Exp $
+ * $Id: SubmitGDTest.java,v 1.8 2006-10-11 15:47:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/27 15:08:52  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.6  2005/12/29 14:05:33  georgeda
  * Removed import error
  *
@@ -307,15 +310,17 @@ public class SubmitGDTest extends BaseModelNeededTest
      theCurrentPage = theForm.submit();
      assertCurrentPageContains("You have successfully edited an Induced Mutation.");
      
-     //Deleting
+     /*Deleting
      theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, 
      "test agent");
      assertNotNull("Unable to find link to delete a Induced Mutation", theLink);        
      theCurrentPage = theLink.click();        
      assertCurrentPageContains("Inducing Agent Category:");
      theForm = theCurrentPage.getFormWithName("inducedMutationForm");               
-     theForm.getSubmitButton( "submitAction", "Delete" ).click();              
-     assertCurrentPageContains("You have successfully deleted an Induced Mutation.");                
+     theForm.getSubmitButton( "submitAction", "Delete" ).click(); 
+     TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
+     assertCurrentPageContains("You have successfully deleted an Induced Mutation."); 
+     */               
 
      }
 

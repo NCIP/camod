@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: EditModelCharacteristicsTest.java,v 1.2 2006-09-20 19:10:55 georgeda Exp $
+ * $Id: EditModelCharacteristicsTest.java,v 1.3 2006-10-11 15:47:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/09/20 19:10:55  georgeda
+ * toolMouse now tool strain
+ *
  * Revision 1.1  2005/12/21 20:09:33  pandyas
  * Added test for editing a model characteristic
  *
@@ -55,7 +58,7 @@ public class EditModelCharacteristicsTest extends BaseModelNeededTest {
         assertNotNull("Couldn't find link to model characteristics data", theLink);
         
 		WebResponse theCurrentPage = theLink.click();
-		assertCurrentPageContains("Is this model a tool Strain?");
+		assertCurrentPageContains("Is this model a tool strain?");
 		WebForm theForm = theCurrentPage.getFormWithName("modelCharacteristicsForm");		
     	
         theForm.setParameter("description", "Test Description");
