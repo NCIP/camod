@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.8 2006-04-27 15:08:33 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.9 2006-10-11 15:17:49 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/27 15:08:33  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.7  2006/04/17 19:37:32  pandyas
  * caMod 2.1 OM changes
  *
@@ -54,11 +57,14 @@ public class BaseHttpTest extends TestCase {
     }
 
     protected void navigateToLoginPage() throws Exception {
+        
+        System.out.println("<navigateToLoginPage> Enter" );
 
         ResourceBundle theBundle = ResourceBundle.getBundle("test");
 
         String theHost = theBundle.getString("testhost");
-
+        System.out.println("<navigateToLoginPage> theHost: " + theHost);
+        
         // Obtain the main page on the meterware web site
         WebRequest theRequest = new GetMethodWebRequest(theHost);
 
@@ -158,9 +164,11 @@ public class BaseHttpTest extends TestCase {
 
     protected void loginToApplication(String inUsername, String inPassword) throws Exception {
 
+        System.out.println("<loginToApplication> Enter" );
         navigateToLoginPage();
 
         WebForm theForm = myWebConversation.getCurrentPage().getFormWithName("loginForm");
+        System.out.println("<loginToApplication> theForm: " + theForm );
 
         theForm.setParameter("username", inUsername);
         theForm.setParameter("password", inPassword);
@@ -169,27 +177,34 @@ public class BaseHttpTest extends TestCase {
         WebResponse response = theForm.submit();
         WebRequest refreshReq;
         refreshReq =  response.getRefreshRequest();
-        System.out.println("refresh request: " + refreshReq.getURL());
+        //System.out.println("refresh request: " + refreshReq.getURL());
         
         // get new response using refreshReq URL
         response = myWebConversation.getResponse(refreshReq.getURL().toString());
         assertNotNull("Response from Refresh Request: ", response);
 
         // Make sure we logged in
-        //assertCurrentPageContains("Currently logged in as");
+        assertCurrentPageContains("Currently logged in as");
     }
 
     protected String findModelIdOnPage(String inStartText, String inEndText) throws Exception {
 
         String theModelId = "";
+        //System.out.println("<findModelIdOnPage> inStartText: " + inStartText);
+        //System.out.println("<findModelIdOnPage> inEndText: " + inEndText);
+        
 
         String thePageText = myWebConversation.getCurrentPage().getText();
+        //System.out.println("<findModelIdOnPage> thePageText: " + thePageText);
 
         int theFirstIndex = thePageText.indexOf(inStartText);
+        //System.out.println("<findModelIdOnPage> theFirstIndex: " + theFirstIndex);
         int theLastIndex = thePageText.indexOf(inEndText);
+        //System.out.println("<findModelIdOnPage> theLastIndex: " + theLastIndex);
 
         if (theFirstIndex < theLastIndex) {
             thePageText = thePageText.substring(theFirstIndex, theLastIndex);
+            //System.out.println("<findModelIdOnPage> thePageText: " + thePageText);
 
             // Parse out the modelId
             int theModelIdIndex = thePageText.indexOf(Constants.Parameters.MODELID);
@@ -209,7 +224,6 @@ public class BaseHttpTest extends TestCase {
 
         return theModelId;
     }
-    
     
 
     protected void verifyValuesOnPage(WebForm inForm, List inIgnoreList) throws Exception {
@@ -276,5 +290,6 @@ public class BaseHttpTest extends TestCase {
             }
         }
     	System.out.println("Exited verifyValuesOnPopulatePage: \n");        
-    }
+    }    
+   
 }
