@@ -9,7 +9,7 @@
  *
  *
  *
- * $Id: submitMorpholino.jsp,v 1.3 2006-10-04 14:51:00 pandyas Exp $
+ * $Id: submitMorpholino.jsp,v 1.4 2006-10-17 16:07:54 pandyas Exp $
  *
  */   
 %>
@@ -18,26 +18,28 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
-<%@ page import="gov.nih.nci.camod.webapp.form.MorpholinoForm" %>
+<%@ page import="gov.nih.nci.camod.webapp.form.TransientInterferenceForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
-<!-- needed for tooltips -->
+<!-- Needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<script language="JavaScript" src="scripts/global.js"></script>
+<SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
 
 <%
-	String aMorpholinoID = request.getParameter( "aMorpholinoID" );
+	String aConceptCode = (String) request.getParameter("aConceptCode");
+	
+	String aTransIntID = request.getParameter( "aTransIntID" );
 	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
 	
-	//if aMorpholinoID is passed in, then we are dealing with a previously entered model and are editing it
+	//if aTransIntID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	String actionName = "MorpholinoAction.do?method=save";
 	
-    if ( aMorpholinoID != null && aMorpholinoID.length() > 0 && isDeleted == null) {
+    if ( aTransIntID != null && aTransIntID.length() > 0 && isDeleted == null) {
 		actionName = "MorpholinoAction.do?method=edit";
 	}
 	else {
-	    aMorpholinoID = "";
+	    aTransIntID = "";
 	}
 %>
 
@@ -62,7 +64,6 @@
 		<td class="formTitle" height="20" colspan="3">Morpholino:
 			<camod:cshelp topic="transient_interference_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
-
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -117,7 +118,6 @@
 					<html:text styleClass="formFieldSized" size="30" property="targetedRegion" />			
 			</td>
 		</tr>
-
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -131,7 +131,7 @@
 			</html:select>
 		</td>
 	</tr>
-
+	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Delivery Method:</label></td>
@@ -174,6 +174,15 @@
 					<html:text styleClass="formFieldSized" size="30" property="otherVisualLigand" />			
 			</td>
 		</tr>
+		
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field2">Comment:</label>
+		</td>
+			<td class="formField">
+					<html:textarea styleClass="formFieldSized"  property="comments" cols="32" rows="4"/>			
+			</td>
+	</tr>		
 	
 	<tr>
 		<td align="right" colspan="3">
@@ -188,15 +197,16 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 	  				  
-	  			  <c:if test="${not empty aMorpholinoID}">
+	  			  <c:if test="${not empty aTransIntID}">
 	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 			      </c:if>
 			      
-				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aMorpholinoID" value="<%= aMorpholinoID %>">
-				  
+				   <!--  Done this way since html:hidden doesn't seem to work correctly -->
+					<input type="hidden" name="aTransIntID" value="<%= aTransIntID %>">
+				    <input type="hidden" name="aConceptCode" value="<%= aConceptCode %>">
+		  
 				  </html:form>
 			</TABLE>
 			<!-- action buttons end -->

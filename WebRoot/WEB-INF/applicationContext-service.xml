@@ -70,8 +70,11 @@
     <!-- microArrayDataManager -->
     <bean id="microArrayDataManager" class="gov.nih.nci.camod.service.impl.MicroArrayDataManagerImpl"/>
 
-    <!--  morpholinoManager -->
-    <bean id="morpholinoManager" class="gov.nih.nci.camod.service.impl.MorpholinoManagerImpl"/>    
+    <!--  transientInterferenceManager -->
+    <bean id="transientInterferenceManager" class="gov.nih.nci.camod.service.impl.TransientInterferenceManagerImpl"/>    
+
+    <!--  transientInterferenceMethodManager -->
+    <bean id="transInterferenceMethodManager" class="gov.nih.nci.camod.service.impl.TransInterferenceMethodManagerImpl"/>    
 
     <!--  organManager -->
     <bean id="organManager" class="gov.nih.nci.camod.service.impl.OrganManagerImpl"/>    
