@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+								"http://struts.apache.org/struts/dtds/struts-config_1_2.dtd">
 
 <struts-config>
 
@@ -113,10 +114,6 @@
 		    type="gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm"/>
 		    
 		<form-bean
-			name="morpholinoForm"
-		    type="gov.nih.nci.camod.webapp.form.MorpholinoForm"/>		    
-		    
-		<form-bean
 			name="nutritionalFactorForm"
 		    type="gov.nih.nci.camod.webapp.form.NutritionalFactorForm"/>		    		    
 		
@@ -143,6 +140,10 @@
 		<form-bean
 			name="therapyForm"
 		    type="gov.nih.nci.camod.webapp.form.TherapyForm"/>
+		    
+		<form-bean
+			name="transientInterferenceForm"
+		    type="gov.nih.nci.camod.webapp.form.TransientInterferenceForm"/>		    
 		
 		<form-bean
 			name="userSettingsForm"
@@ -492,6 +493,10 @@
 		<forward
 			name="submitRadiation"
 			path="/jsp/protected/submitRadiation.jsp"></forward>
+			
+		<forward
+			name="submitSirna"
+			path="/jsp/protected/submitSirna.jsp"></forward>			
 		
 		<forward
 			name="submitSpontaneousMutation"
@@ -877,6 +882,12 @@
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
+			path="/submitSirna"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/submitSirna.jsp">
+			<set-property property="secure" value="false"/>
+		</action>		
+		<action
 			path="/submitSpontaneousMutation"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitSpontaneousMutation.jsp">
@@ -1001,8 +1012,8 @@
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/infoReleaseNotes.jsp">
 			<set-property property="secure" value="false"/>
-		</action>			
-		<action
+		</action>
+  		<action
 			path="/expDesignStage0"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/expDesignStage0.jsp">
@@ -1744,13 +1755,12 @@
             parameter="method"
 			validate="false">
 		<set-property property="secure" value="false" />
-    </action>
+    </action>    
     
-    
-     <!-- MorpholinoForm -->
+     <!-- TransientInterference Form(s) -->
      <action path="/MorpholinoAction"
-	        type="gov.nih.nci.camod.webapp.action.MorpholinoAction"
-	        name="morpholinoForm"
+	        type="gov.nih.nci.camod.webapp.action.TransientInterferenceAction"
+	        name="transientInterferenceForm"
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
@@ -1764,14 +1774,36 @@
     
     <action path="/MorpholinoPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.MorpholinoPopulateAction"
-    		name="morpholinoForm"    		
+    		name="transientInterferenceForm"    		
+            scope="request"
+            parameter="method"
+			validate="false">
+		<set-property property="secure" value="false" />
+    </action>    
+   
+     <action path="/SirnaAction"
+	        type="gov.nih.nci.camod.webapp.action.TransientInterferenceAction"
+	        name="transientInterferenceForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitSirna.do">
+        </forward>     	  	
+    </action>
+    
+    <action path="/SirnaPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.SirnaPopulateAction"
+    		name="transientInterferenceForm"    		
             scope="request"
             parameter="method"
 			validate="false">
 		<set-property property="secure" value="false" />
     </action>
     
-
     <!--  Generate the list of items on the submission subMenu -->
 	<action path="/AnimalModelTreePopulateAction"
 			type="gov.nih.nci.camod.webapp.action.AnimalModelTreePopulateActionSetup"
@@ -1873,8 +1905,25 @@
     		path="/ReturnUserModels.do?method=returnUserModels">
         </forward>	                                      
    </action>
-   
-   
+
+    <!-- Duplicate AnimalModel from Admin and return to Admin -->
+    <action path="/DuplicateAdminAnimalModelAction"
+            type="gov.nih.nci.camod.webapp.action.AnimalModelAction"
+            scope="request"
+            parameter="method"         
+            validate="false" >
+        <set-property property="secure" value="false" />
+        <forward 
+    		name="duplicatesuccessful"
+    		path="/AdminEditModelsPopulateAction.do"
+    		redirect="true">
+        </forward>
+        <forward 
+    		name="failure"
+    		path="/AdminEditModelsPopulateAction.do">
+        </forward>	                                      
+   </action>   
+ 
      <!-- NutritionalFactorForm -->
    	 <action path="/NutritionalFactorAction"
 	        type="gov.nih.nci.camod.webapp.action.NutritionalFactorAction"
@@ -2181,6 +2230,20 @@
      </action>
      
      <action 
+         path="/AdminSubmitOverviewPopulateAction"
+         type="gov.nih.nci.camod.webapp.action.AdminModelsAssignmentPopulateAction"
+         name="curationAssignmentForm"
+         parameter="protected">
+         <set-property property="secure" value="false" />
+         <forward
+            redirect="true"
+			name="next"
+			path="/adminEditModels.do">
+		</forward>
+     </action>     
+     
+
+     <action 
          path="/AdminCommentsAssignmentPopulateAction"
          type="gov.nih.nci.camod.webapp.action.AdminCommentsAssignmentPopulateAction"
          name="curationAssignmentForm"
@@ -2424,6 +2487,45 @@
     		redirect="true">
     	 </forward>  	
      </action>
+     
+     <action 
+         path="/ChangeAnimalModelToInactiveAction"  
+         type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
+         name="animalModelStateForm"
+         parameter="protected">
+         <set-property property="secure" value="false" />
+         <forward 
+    		name="next"
+    		path="/AdminEditModelsPopulateAction.do"
+    		redirect="true">
+    	 </forward>  	
+     </action>
+     
+     <action 
+         path="/ChangeAnimalModelToCompleteNotScreenedAction"  
+         type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
+         name="animalModelStateForm"
+         parameter="protected">
+         <set-property property="secure" value="false" />
+         <forward 
+    		name="next"
+    		path="/AdminEditModelsPopulateAction.do"
+    		redirect="true">
+    	 </forward>  	
+     </action>
+     
+     <action 
+         path="/ChangeAnimalModelToScreenedApprovedAction"  
+         type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStateAction"
+         name="animalModelStateForm"
+         parameter="protected">
+         <set-property property="secure" value="false" />
+         <forward 
+    		name="next"
+    		path="/AdminEditModelsPopulateAction.do"
+    		redirect="true">
+    	 </forward>  	
+     </action>               
      
       <action 
          path="/ChangeAnimalModelStatePopulateAction"  
@@ -2678,5 +2780,6 @@
 	    <set-property property="enable" value="true"/>  	
 	    <set-property property="addSession" value="true"/>  	
   </plug-in>
+  
   
 </struts-config>
