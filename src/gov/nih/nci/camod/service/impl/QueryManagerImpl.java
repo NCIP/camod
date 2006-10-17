@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.59 2006-07-31 21:12:51 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.60 2006-10-17 16:50:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.59  2006/07/31 21:12:51  pandyas
+ * Returned to an earlier version of this class so it only included changes marked for the next bug fix.  Had to remove all changes that were slated for the 2.2 release.
+ *
  * Revision 1.58  2006/07/27 14:53:33  pandyas
  * Defect#404:  added dash to separate species and strain in thrid column of results list
  *
@@ -1861,11 +1864,26 @@ public class QueryManagerImpl extends BaseManager
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyOrgan(inSearchData.getOrganTissueCode(),inSearchData.getOrgan() ) + ")";
         }
 
-        // Search for disease
-        if (inSearchData.getDiagnosisCode() != null && inSearchData.getDiagnosisCode().trim().length() > 0 || inSearchData.getTumorClassification()!= null && inSearchData.getTumorClassification().length() > 0 )
-        {
-         	theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistopathologyDisease(inSearchData.getDiagnosisCode(),inSearchData.getTumorClassification() ) + ")";
-        }
+		// Search for disease
+		if (inSearchData.getDiagnosisCode() != null
+				&& inSearchData.getDiagnosisCode().trim().length() > 0
+				|| inSearchData.getTumorClassification() != null
+				&& inSearchData.getTumorClassification().length() > 0) {
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForHistopathologyDisease(inSearchData
+							.getDiagnosisCode(), inSearchData
+							.getTumorClassification()) + ")";
+		}
+		
+		// Search for external source
+		if (inSearchData.getExternalSource() != null
+				&& inSearchData.getExternalSource().length() > 0) {
+			log.debug("In Search inSearchData.getExternalSource: "
+					+ inSearchData.getExternalSource());
+			theWhereClause += " AND upper(am.externalSource) like '%"
+					+ inSearchData.getExternalSource().toUpperCase().trim()
+					+ "%'";
+		}		
 
         // ///////////////////////////////////////
         // Carcinogenic interventions
@@ -1978,11 +1996,29 @@ public class QueryManagerImpl extends BaseManager
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForTransientInterference() + ")";
         }
 
-        // Search for xenograft
-        if (inSearchData.isSearchXenograft())
-        {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForXenograft() + ")";
-        }
+		// Search for xenograft
+		if (inSearchData.isSearchXenograft()) {
+			log.debug("In Search inSearchData.isSearchXenograft(): "
+					+ inSearchData.isSearchXenograft());
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForXenograft() + ")";
+		}
+		
+		// Search for Transient Interference
+		if (inSearchData.isSearchTransientInterference()) {
+			log.info("In Search inSearchData.isSearchTransientInterference(): "
+					+ inSearchData.isSearchTransientInterference());
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForTransientInterference() + ")";
+		}
+
+		// Search for tool strains
+		if (inSearchData.isSearchToolStrain()) {
+			log.info("In Search inSearchData.isSearchToolStrain(): "
+					+ inSearchData.isSearchToolStrain());
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForToolStrain() + ")";
+		}		
 
         return theWhereClause;
 
@@ -2265,21 +2301,88 @@ public class QueryManagerImpl extends BaseManager
 
         List theResultSettings = theQuery.list();
 
-        return theResultSettings;
-    }
+		return theResultSettings;
+	}
+	
+	
+	/**
+	 * Return the list of External Source names
+	 * 
+	 * @return a sorted list of unique eExternal Sources
+	 * @throws PersistenceException
+	 */
+	public List getExternalSources() throws PersistenceException {
+		
+		log.debug("Entering QueryManagerImpl.getExternalSources");
 
-    public static void main(String[] inArgs)
-    {
-        try
-        {
-            List theList = QueryManagerSingleton.instance().getMatchingTumorClassifications("a");
-            System.out.println("Number matched: " + theList.size());
-            System.out.println(theList.get(0));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+		// Format the query
+		HQLParameter[] theParams = new HQLParameter[0];
 
-    }
+		String theHQLQuery = "select distinct(am.externalSource) FROM AnimalModel as am WHERE external_source is not null";
+
+		List theList = Search.query(theHQLQuery, theParams);
+
+		log.debug("Found matching items: " + theList.size());
+
+		log.debug("Exiting QueryManagerImpl.getExternalSources");
+		return theList;
+	}
+	
+	/**
+	 * Get the model id's for any model that is from an external source
+	 * 
+	 * @param inExternalSource
+	 *            the externalSource to search for
+	 * 
+	 * @return a list of matching model id
+	 * 
+	 * @throws PersistenceException )
+	 */
+	 private String getModelIdsForExternalSource(String inExternalSource)
+	 throws PersistenceException {
+	  
+	  log.debug("Entering QueryManagerImpl.getModelIdsExternalSource Enter");
+	  
+	  String theSQLString = "SELECT distinct abs_cancer_model_id FROM abs_cancer_model WHERE upper(acm.external_source) like ?";
+	  
+	  
+	  Object[] theParams = new Object[2]; theParams[0] = inExternalSource;
+	  theParams[1] = theParams[0];
+	  
+	  System.out.println("The params: " + theParams[0]); return
+	  getIds(theSQLString, theParams);
+	  
+	  }	
+	
+	/**
+	 * Get the model id's for any model that is indicated as a tool strain
+	 * 
+	 * @return a list of matching model ids
+	 * 
+	 * @throws PersistenceException
+	 */
+	private String getModelIdsForToolStrain() throws PersistenceException {
+
+		String theSQLString = "SELECT distinct abs_cancer_model_id FROM abs_cancer_model "
+				+ "WHERE is_tool_strain = 1 "
+				+ " AND state = 'Edited-approved'";
+
+		Object[] theParams = new Object[0];
+		return getIds(theSQLString, theParams);
+
+	}
+	
+	
+
+	public static void main(String[] inArgs) {
+		try {
+			List theList = QueryManagerSingleton.instance()
+					.getMatchingTumorClassifications("a");
+			System.out.println("Number matched: " + theList.size());
+			System.out.println(theList.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 }
