@@ -1,7 +1,8 @@
 Other
 ad lib in water
 applied on back
-dermal and gavage
+dermal
+gavage
 intramuscular
 intraperitoneal
 intravenous
