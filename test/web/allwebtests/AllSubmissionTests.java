@@ -28,7 +28,9 @@ public class AllSubmissionTests extends TestCase {
         suite.addTest(SubmitEditDeleteModelAvailabilityTest.suite());
         suite.addTest(SubmitEditDeletePublicationTest.suite());
         suite.addTest(SubmitEditDeleteTherapyTest.suite());
-        suite.addTest(SubmitGDTest.suite());
+        suite.addTest(SubmitEditDeleteTransIntTest.suite());
+        suite.addTest(SubmitEditDeleteXenograftTest.suite());        
+        suite.addTest(SubmitGDTest.suite());     
         suite.addTest(SubmitPageTest.suite());
 
         return suite;

@@ -25,7 +25,8 @@ public class AllSearchTests extends TestCase {
         suite.addTest(SearchPopulateHistopathologyTest.suite());
         suite.addTest(SearchPopulateModelCharacteristicsTest.suite());        
         suite.addTest(SearchPopulatePublicationTest.suite());
-        suite.addTest(SearchPopulateTherapyTest.suite());
+        suite.addTest(SearchPopulateTherapyTest.suite());        
+        suite.addTest(SearchPopulateTransIntTest.suite());
         suite.addTest(SearchPopulateXenograftTest.suite());
 
         return suite;
