@@ -56,6 +56,7 @@
 	   <% pageContext.setAttribute("screener_approve", Admin.Actions.SCREENER_APPROVE); %>
 	   <% pageContext.setAttribute("editor_approve", Admin.Actions.EDITOR_APPROVE); %>
 	   <% pageContext.setAttribute("assign_screener", Admin.Actions.ASSIGN_SCREENER); %>
+	   <% pageContext.setAttribute("inactivate", Admin.Actions.INACTIVATE); %>	   
 			    		
 		<!-- Start the various sections per role -->
 		 		

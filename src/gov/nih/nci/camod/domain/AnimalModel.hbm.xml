@@ -22,11 +22,21 @@
         	column="url" 
         	type="string"/>
         	
-        <!-- isToolMouse -->
-        <property name="isToolMouse" 
-        	column="is_tool_mouse" 
+        <!-- isToolStrain -->
+        <property name="isToolStrain" 
+        	column="is_tool_strain" 
         	type="boolean"/>
         	
+        <!-- externalSource -->
+        <property name="externalSource" 
+        	column="external_source" 
+        	type="string"/> 
+        	
+        <!-- externalSourceIdentifier -->
+        <property name="externalSourceIdentifier" 
+        	column="external_source_identifier" 
+        	type="string"/> 
+        	       	
         <!-- animalAvailabilityCollection (one-to-many unidirectional without 
         join table) -->
 		<!-- There may be a nullability constraint on the foreign key column. 
@@ -124,13 +134,13 @@
         	<one-to-many class="CarcinogenExposure"/>
         </set>
         
-         <!-- morpholinoCollection (one-to-many unidirectional without 
+         <!-- transientInterferenceCollection (one-to-many unidirectional without 
         join table) -->
-        <set name="morpholinoCollection"
+        <set name="transientInterferenceCollection"
         cascade="all-delete-orphan">        	        	
         	<key column="abs_cancer_model_id"
         	not-null="true"/>
-        	<one-to-many class="Morpholino"/>
+        	<one-to-many class="TransientInterference"/>
         </set>        
         
         <!-- logCollection (one-to-many bidirectional) -->
@@ -164,7 +174,17 @@
         	
         	<key column="par_abs_can_model_id"/>
         	<one-to-many class="Xenograft"/>
-        </set>  
+        </set> 
+        
+        <!-- genotypeCollection -->
+         <!-- genotypeCollection (one-to-many unidirectional without 
+        join table) -->
+        <set name="genotypeCollection"
+        cascade="all-delete-orphan">        	        	
+        	<key column="abs_cancer_model_id"
+        	not-null="true"/>
+        	<one-to-many class="Genotype"/>
+        </set>        
                	  
 	</subclass>
 </hibernate-mapping>

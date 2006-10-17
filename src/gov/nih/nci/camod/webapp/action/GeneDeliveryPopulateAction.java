@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.16 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.17 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.15  2005/11/29 16:31:52  pandyas
  * Defect #223: Fixed code so Organ object is not created when no Organ is selected. Added code to check for null Organ in the populateAction.
  *
@@ -50,17 +53,20 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 	 * Pre-populate all field values in the form <FormName> Used by <jspName>
 	 * 
 	 */
-	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ActionForward populate(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 
 		log.info("<GeneDeliveryPopulateAction populate> Entering populate() ");
 
 		// Create a form to edit
 		GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
 
-		// Grab the current aCarcinogenExposureID we are working with related to this
+		// Grab the current aCarcinogenExposureID we are working with related to
+		// this
 		// animalModel
-		String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
+		String aCarcinogenExposureID = request
+				.getParameter("aCarcinogenExposureID");
 		GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
 		GeneDelivery gene = geneDeliveryManager.get(aCarcinogenExposureID);
 
@@ -69,13 +75,17 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 
-			request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
+			request
+					.setAttribute("aCarcinogenExposureID",
+							aCarcinogenExposureID);
 
 			// Set the otherViralVector and/or the selected viral vector
 			// attribute
 			if (gene.getViralVectorUnctrlVocab() != null) {
-				geneDeliveryForm.setViralVector(Constants.Dropdowns.OTHER_OPTION);
-				geneDeliveryForm.setOtherViralVector(gene.getViralVectorUnctrlVocab());
+				geneDeliveryForm
+						.setViralVector(Constants.Dropdowns.OTHER_OPTION);
+				geneDeliveryForm.setOtherViralVector(gene
+						.getViralVectorUnctrlVocab());
 			} else {
 				geneDeliveryForm.setViralVector(gene.getViralVector());
 			}
@@ -84,23 +94,30 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			geneDeliveryForm.setRegimen(gene.getTreatment().getRegimen());
 
 			if (gene.getTreatment().getSexDistribution() != null) {
-				geneDeliveryForm.setType(gene.getTreatment().getSexDistribution().getType());
+				geneDeliveryForm.setType(gene.getTreatment()
+						.getSexDistribution().getType());
 			}
-			geneDeliveryForm.setAgeAtTreatment(gene.getTreatment().getAgeAtTreatment());
-            geneDeliveryForm.setAgeAtTreatmentUnit(gene.getTreatment().getAgeAtTreatmentUnit());
-            
+			geneDeliveryForm.setAgeAtTreatment(gene.getTreatment()
+					.getAgeAtTreatment());
+			geneDeliveryForm.setAgeAtTreatmentUnit(gene.getTreatment()
+					.getAgeAtTreatmentUnit());
+
 			/* set Organ attributes */
-			log.info("<GeneDeliveryPopulateAction populate> get the Organ attributes");
+			log
+					.info("<GeneDeliveryPopulateAction populate> get the Organ attributes");
 
 			// since we are always querying from concept code (save and edit),
 			// simply display VSPreferredDescription
 			if (gene.getOrgan() != null) {
-			geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
-			log.info("setOrgan= " + gene.getOrgan().getEVSPreferredDescription());
+				geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
+				log.info("OrganTissueCode= "+ gene.getOrgan().getConceptCode());
 
-			geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
-			log.info("OrganTissueCode= " + gene.getOrgan().getConceptCode());
+					geneDeliveryForm.setOrgan(gene.getOrgan()
+							.getEVSPreferredDescription());
+					log.info("setOrgan= "
+							+ gene.getOrgan().getEVSPreferredDescription());
 			}
+
 		}
 
 		// Prepopulate all dropdown fields, set the global Constants to the
@@ -121,15 +138,17 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ActionForward dropdown(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 
 		log.info("<GeneDeliveryPopulateAction dropdown> Entering dropdown() ");
 
 		// setup dropdown menus
 		this.dropdown(request, response);
 
-		log.info("<GeneDeliveryPopulateAction dropdown> before return submitRadiation ");
+		log
+				.info("<GeneDeliveryPopulateAction dropdown> before return submitRadiation ");
 
 		return mapping.findForward("submitGeneDelivery");
 
@@ -142,18 +161,24 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 	 * @param response
 	 * @throws Exception
 	 */
-	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void dropdown(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-		log.info("<GeneDeliveryPopulateAction dropdown> Entering void dropdown()");
+		log
+				.info("<GeneDeliveryPopulateAction dropdown> Entering void dropdown()");
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VIRALVECTORDROP, "");
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP,
+		NewDropdownUtil.populateDropdown(request,
+				Constants.Dropdowns.VIRALVECTORDROP, "");
+		NewDropdownUtil.populateDropdown(request,
+				Constants.Dropdowns.SEXDISTRIBUTIONDROP,
 				Constants.Dropdowns.ADD_BLANK);
-		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
+		NewDropdownUtil.populateDropdown(request,
+				Constants.Dropdowns.AGEUNITSDROP, "");
 
-		log.info("<GeneDeliveryPopulateAction dropdown> Exiting void dropdown()");
+		log
+				.info("<GeneDeliveryPopulateAction dropdown> Exiting void dropdown()");
 
 	}
 

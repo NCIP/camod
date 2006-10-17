@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: sidebar.jsp,v 1.15 2006-08-13 18:17:54 pandyas Exp $
+ * $Id: sidebar.jsp,v 1.16 2006-10-17 16:08:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/08/13 18:17:54  pandyas
+ * Minor change - added file name (eventually to all Jsps)
+ *
  * Revision 1.14  2006/07/31 20:08:12  pandyas
  * Modified page link for Help file:
  * Swapped the new online help generated from ePublisher with the current online help generated from RoboHelp.  From Jill Hadfield
@@ -18,7 +21,6 @@
 
 %>
 
-<SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
 <TR><TD height="100%" class=subMenu valign=top width="210">
 <script language="JavaScript" src="scripts/global.js"></script>
   
@@ -95,6 +97,7 @@
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
 		 href="javascript:openHelpWindow('WebHelp/!SSL!/index.html')" >HELP</A></TD></TR>
+		 
 
 	<%
 	if( session.getAttribute("camod.loggedon.username") != null ) {

@@ -103,11 +103,11 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Is this model a tool strain?</label>			
-				<camod:cshelp topic="model_characteristics_help" key="ABS_CANCER_MODEL.IS_TOOL_MOUSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="model_characteristics_help" key="ABS_CANCER_MODEL.IS_TOOL_STRAIN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
-				<html:radio property="isToolMouse" value="yes" /> Yes 
-				<html:radio property="isToolMouse" value="no" /> No  
+				<html:radio property="isToolStrain" value="yes" /> Yes 
+				<html:radio property="isToolStrain" value="no" /> No  
 			</td>
 		</tr>
 
@@ -136,6 +136,24 @@ var cal1 = new CalendarPopup();
 			<td class="formLabel"><label for="field1">if other Strain:</label></td>
 			<td class="formField">					
 				<html:text styleClass="formFieldSized" property="otherEthnicityStrain" disabled="true" size="30"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field1">Genotype:</label>				
+			</td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="genotype" size="30"/>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field1">Nomenclature:</label>				
+			</td>
+			<td class="formField">			
+					<html:text styleClass="formFieldSized" property="nomenclature" size="30"/>
 			</td>
 		</tr>
 

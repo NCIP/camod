@@ -1,10 +1,13 @@
 /**
  * 
- * $Id: MailUtil.java,v 1.10 2006-08-17 18:00:52 pandyas Exp $
+ * $Id: MailUtil.java,v 1.11 2006-10-17 16:11:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/08/17 18:00:52  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.9  2006/04/17 19:10:50  pandyas
- * Added $Id: MailUtil.java,v 1.10 2006-08-17 18:00:52 pandyas Exp $ and $log:$
+ * Added $Id: MailUtil.java,v 1.11 2006-10-17 16:11:52 pandyas Exp $ and $log:$
  *
  * 
  */
@@ -309,7 +312,7 @@ public class MailUtil {
         String[] theRecipients = new String[1];
         theRecipients[0] = new String("georgeda@mail.nih.gov");
 
-        String[] theMessageKeys = {"approve","assign_editor","assign_screener", "need_more_info", "reject","complete"};
+        String[] theMessageKeys = {"approve","assign_editor","assign_screener", "need_more_info", "reject","complete","inactivate"};
         String[] macrosUsed = {"defaultbody","alternative1","alternative2"};
         TreeMap<String, String> valuesForVariables = new TreeMap<String, String>();
         valuesForVariables.put("name","Fibber McGhee");

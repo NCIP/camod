@@ -2,16 +2,19 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoForm.java,v 1.1 2006-05-03 20:05:25 pandyas Exp $
+ * $Id: TransientInterferenceForm.java,v 1.1 2006-10-17 16:10:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/03 20:05:25  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
 
-public class MorpholinoForm extends BaseForm implements Serializable, MorpholinoData  {
+public class TransientInterferenceForm extends BaseForm implements Serializable, TransientInterferenceData  {
     
     private static final long serialVersionUID = 3257225453799404851L;
     
@@ -19,7 +22,7 @@ public class MorpholinoForm extends BaseForm implements Serializable, Morpholino
 	 * Default empty constructor
 	 * @author pandyas
 	 */
-	public MorpholinoForm() {}
+	public TransientInterferenceForm() {}
 
     protected String source;
     protected String otherSource;
@@ -32,7 +35,9 @@ public class MorpholinoForm extends BaseForm implements Serializable, Morpholino
     protected String otherDeliveryMethod;
     protected String visualLigand;
     protected String otherVisualLigand;
-
+    protected String aConceptCode;
+	protected String comments;
+	
     /**
      * @return Returns the source
      */
@@ -212,5 +217,31 @@ public class MorpholinoForm extends BaseForm implements Serializable, Morpholino
         this.otherVisualLigand = otherVisualLigand;
     }
 
-	
+    /*
+    * @return Returns the aConceptCode for transient interference method.
+    */
+   public String getAConceptCode() {
+       return aConceptCode;
+   }
+
+   /**
+    * @param aConceptCode
+    *            The aConceptCode to set.
+    */
+   public void setAConceptCode(String aConceptCode) {
+       this.aConceptCode = aConceptCode;
+   }
+   
+	/**
+	 * @return Returns the comments.
+	 */
+	public String getComments() {
+		return comments;
+	}
+	/**
+	 * @param comments The comments to set.
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}   
 }

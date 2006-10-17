@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  * Revision 1.11  2006/01/18 14:23:31  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -16,7 +19,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.12 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: AnimalAvailability.java,v 1.13 2006-10-17 16:14:36 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -98,6 +101,7 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
 
             try
             {
+            	log.info("Unable to get Person for thePerson.getUsername(): " + thePerson.getUsername());
                 thePerson = PersonManagerSingleton.instance().get(stockNumber);
             }
             catch (Exception e)

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : TransientInterference.hbm.xml
+    Created on : May 02, 2006
+    Author     : pandyas
+    Description: Hibernate mapping file for Agent
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="TransientInterference" 
+    	table="transient_interference"
+        lazy="true">  
+        
+	    <!-- id -->
+	    <id name="id" 
+	    	column="transient_interference_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>              
+
+	    <!-- source -->
+        <property name="source" 
+        	column="source" 
+        	type="string"/>
+        	
+        <!-- sourceUnctrVocab -->
+        <property name="sourceUnctrVocab" 
+        	column="source_unctr_vocab" 
+        	type="string"/>
+        	
+	    <!-- type -->
+        <property name="type" 
+        	column="type" 
+        	type="string"/>
+        	
+        <!-- sequenceDirection -->
+        <property name="sequenceDirection" 
+        	column="sequence_direction" 
+        	type="string"/>        	
+        	
+        <!-- targetedRegion -->
+        <property name="targetedRegion" 
+        	column="targeted_region" 
+        	type="string"/>	
+
+        <!-- concentration -->
+        <property name="concentration" 
+        	column="concentration" 
+        	type="string"/>
+
+        <!-- concentrationUnit -->
+        <property name="concentrationUnit" 
+        	column="concentration_unit" 
+        	type="string"/>
+
+        <!-- deliveryMethod -->
+        <property name="deliveryMethod" 
+        	column="delivery_method" 
+        	type="string"/>
+        	
+        <!-- deliveryMethodUnctrlVocab -->
+        <property name="deliveryMethodUnctrlVocab" 
+        	column="delivery_method_unctrl_vocab" 
+        	type="string"/>	        	    	        	 
+        	
+        <!-- visualLigand -->
+        <property name="visualLigand" 
+        	column="visual_ligand" 
+        	type="string"/>
+        	
+        <!-- visualLigandUnctrlVocab -->
+        <property name="visualLigandUnctrlVocab" 
+        	column="visual_ligand_unctrl_vocab" 
+        	type="string"/>
+        	
+	    <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="text"/>        	
+        	
+        <!-- transientInterferenceMethod: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
+        <many-to-one name="transientInterferenceMethod"
+        	class="TransientInterferenceMethod"
+        	column="trans_interference_method_id"
+        	cascade="save-update"
+        	unique="true"/>        	
+
+	</class>
+</hibernate-mapping>

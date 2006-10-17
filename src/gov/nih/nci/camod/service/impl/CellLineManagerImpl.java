@@ -43,14 +43,17 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: CellLineManagerImpl.java,v 1.15 2006-05-08 13:41:31 georgeda Exp $
+ * $Id: CellLineManagerImpl.java,v 1.16 2006-10-17 16:13:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/05/08 13:41:31  georgeda
+ * Use data for fetching organ, not object
+ *
  * Revision 1.14  2006/05/08 13:32:34  georgeda
  * Clean up warnings
  *
  * Revision 1.13  2006/04/19 17:38:26  pandyas
- * Removed TODO text
+ * Removed text
  *
  * Revision 1.12  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
@@ -85,132 +88,130 @@ import java.util.List;
 /**
  * Impementation of CellLineManager. Used to persist CellLine objects.
  */
-public class CellLineManagerImpl extends BaseManager implements CellLineManager
-{
-    /**
-     * Get all CellLine objects
-     * 
-     * @return the matching CellLine objects
-     * 
-     * @exception Exception
-     *                when anything goes wrong.
-     */
-    public List getAll() throws Exception
-    {
-        log.trace("In CellLineManagerImpl.getAll");
-        return super.getAll(CellLine.class);
-    }
+public class CellLineManagerImpl extends BaseManager implements CellLineManager {
+	/**
+	 * Get all CellLine objects
+	 * 
+	 * @return the matching CellLine objects
+	 * 
+	 * @exception Exception
+	 *                when anything goes wrong.
+	 */
+	public List getAll() throws Exception {
+		log.trace("In CellLineManagerImpl.getAll");
+		return super.getAll(CellLine.class);
+	}
 
-    /**
-     * Get a specific CellLine by id
-     * 
-     * @param id
-     *            the unique id for a CellLine
-     * 
-     * @return the matching CellLine object, or null if not found.
-     * 
-     * @exception Exception
-     *                when anything goes wrong.
-     */
-    public CellLine get(String id) throws Exception
-    {
-        log.trace("In CellLineManagerImpl.get");
-        return (CellLine) super.get(id, CellLine.class);
-    }
+	/**
+	 * Get a specific CellLine by id
+	 * 
+	 * @param id
+	 *            the unique id for a CellLine
+	 * 
+	 * @return the matching CellLine object, or null if not found.
+	 * 
+	 * @exception Exception
+	 *                when anything goes wrong.
+	 */
+	public CellLine get(String id) throws Exception {
+		log.trace("In CellLineManagerImpl.get");
+		return (CellLine) super.get(id, CellLine.class);
+	}
 
-    /**
-     * Save an CellLine object
-     * 
-     * @param inCellLine the CellLine object to save 
-     * 
-     * @exception Exception
-     *                if an error occurred
-     */
-    public void save(CellLine inCellLine) throws Exception
-    {
-        log.trace("In CellLineManagerImpl.save");
-        super.save(inCellLine);
-    }
+	/**
+	 * Save an CellLine object
+	 * 
+	 * @param inCellLine
+	 *            the CellLine object to save
+	 * 
+	 * @exception Exception
+	 *                if an error occurred
+	 */
+	public void save(CellLine inCellLine) throws Exception {
+		log.trace("In CellLineManagerImpl.save");
+		super.save(inCellLine);
+	}
 
-    /**
-     * Remove a CellLine object
-     * 
-     * @param inId the ID of the CellLine to remove
-     * @param inAnimalModel the AnimalModel the CellLine is being deleted from. 
-     * 
-     * @exception Exception
-     *                if an error occurred
-     */
-    public void remove(String inId,
-                       AnimalModel inAnimalModel) throws Exception
-    {
-        log.trace("In CellLineManagerImpl.remove");
+	/**
+	 * Remove a CellLine object
+	 * 
+	 * @param inId
+	 *            the ID of the CellLine to remove
+	 * @param inAnimalModel
+	 *            the AnimalModel the CellLine is being deleted from.
+	 * 
+	 * @exception Exception
+	 *                if an error occurred
+	 */
+	public void remove(String inId, AnimalModel inAnimalModel) throws Exception {
+		log.trace("In CellLineManagerImpl.remove");
 
-        inAnimalModel.getCellLineCollection().remove(get(inId));
-        super.save(inAnimalModel);
-    }
+		inAnimalModel.getCellLineCollection().remove(get(inId));
+		super.save(inAnimalModel);
+	}
 
-    /**
-     * Create a CellLine object from the data being passed in
-     * 
-     * @param inCellLineData the data used to ceate the CellLine 
-     * 
-     * @return the newly created CellLine object
-     * @exception Exception
-     *                if an error occurred
-     */
-    public CellLine create(CellLineData inCellLineData) throws Exception
-    {
-        log.debug("Entering CellLineManagerImpl.create");
+	/**
+	 * Create a CellLine object from the data being passed in
+	 * 
+	 * @param inCellLineData
+	 *            the data used to ceate the CellLine
+	 * 
+	 * @return the newly created CellLine object
+	 * @exception Exception
+	 *                if an error occurred
+	 */
+	public CellLine create(CellLineData inCellLineData) throws Exception {
+		log.debug("Entering CellLineManagerImpl.create");
 
-        CellLine theCellLine = new CellLine();
+		CellLine theCellLine = new CellLine();
 
-        populateCellLine(inCellLineData, theCellLine);
-        log.debug("Exiting CellLineManagerImpl.create");
+		populateCellLine(inCellLineData, theCellLine);
+		log.debug("Exiting CellLineManagerImpl.create");
 
-        return theCellLine;
-    }
+		return theCellLine;
+	}
 
-    /**
-     * Update a CellLine object with the data being passed in
-     * 
-     * @param inCellLineData the data used to ceate the CellLine 
-     * @param inCellLine the CellLine object to update
-     * 
-     * @exception Exception
-     *                if an error occurred
-     */
-    public void update(CellLineData inCellLineData,
-                       CellLine inCellLine) throws Exception
-    {
-        log.debug("Entering CellLineManagerImpl.update");
-        log.debug("Updating CellLineForm: " + inCellLine.getId());
+	/**
+	 * Update a CellLine object with the data being passed in
+	 * 
+	 * @param inCellLineData
+	 *            the data used to ceate the CellLine
+	 * @param inCellLine
+	 *            the CellLine object to update
+	 * 
+	 * @exception Exception
+	 *                if an error occurred
+	 */
+	public void update(CellLineData inCellLineData, CellLine inCellLine)
+			throws Exception {
+		log.debug("Entering CellLineManagerImpl.update");
+		log.debug("Updating CellLineForm: " + inCellLine.getId());
 
-        // Populate w/ the new values and save
-        populateCellLine(inCellLineData, inCellLine);
-        save(inCellLine);
+		// Populate w/ the new values and save
+		populateCellLine(inCellLineData, inCellLine);
+		save(inCellLine);
 
-        log.debug("Exiting CellLineManagerImpl.update");
-    }
+		log.debug("Exiting CellLineManagerImpl.update");
+	}
 
-    // Common method used to populate a CellLine object
-    private void populateCellLine(CellLineData inCellLineData,
-                                  CellLine inCellLine) throws Exception
-    {
-        log.debug("Entering populateCellLine");
+	// Common method used to populate a CellLine object
+	private void populateCellLine(CellLineData inCellLineData,
+			CellLine inCellLine) throws Exception {
+		log.debug("Entering populateCellLine");
 
-        inCellLine.setName(inCellLineData.getCellLineName());
-        inCellLine.setExperiment(inCellLineData.getExperiment());
-        inCellLine.setResults(inCellLineData.getResults());
-        inCellLine.setComments(inCellLineData.getComments());
+		inCellLine.setName(inCellLineData.getCellLineName());
+		inCellLine.setExperiment(inCellLineData.getExperiment());
+		inCellLine.setResults(inCellLineData.getResults());
+		inCellLine.setComments(inCellLineData.getComments());
 
-        /*
-         * Add a Organ to CellLine with correct IDs, conceptCode 
-         */
-        Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(inCellLineData.getOrganTissueCode(),
-                                                                      inCellLineData.getOrganTissueName());
-        inCellLine.setOrgan(theOrgan);
+		/*
+		 * Add a Organ to CellLine with correct IDs, conceptCode
+		 */
+		Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(
+				inCellLineData.getOrganTissueCode(),
+				inCellLineData.getOrganTissueName());
+		inCellLine.setOrgan(theOrgan);
 
-        log.debug("Exiting populateCellLine");
-    }
+		log.debug("Exiting populateCellLine");
+	}
 }

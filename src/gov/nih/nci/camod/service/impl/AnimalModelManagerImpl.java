@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.73 2006-08-30 16:46:57 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.74 2006-10-17 16:13:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.73  2006/08/30 16:46:57  pandyas
+ * needed to reverse back to original changes before toolMouse attribute name for dev server build
+ *
  * Revision 1.72  2006/08/17 18:34:25  pandyas
  * Defect# 410: Externalize properties files - Code Changes to send mail method
  *
@@ -209,11 +212,12 @@ import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GeneDelivery;
 import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.Genotype;
 import gov.nih.nci.camod.domain.Histopathology;
 import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Log;
-import gov.nih.nci.camod.domain.Morpholino;
+import gov.nih.nci.camod.domain.Nomenclature;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.Phenotype;
 import gov.nih.nci.camod.domain.Publication;
@@ -223,6 +227,7 @@ import gov.nih.nci.camod.domain.Strain;
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Transgene;
+import gov.nih.nci.camod.domain.TransientInterference;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
@@ -242,7 +247,6 @@ import gov.nih.nci.camod.webapp.form.HormoneData;
 import gov.nih.nci.camod.webapp.form.ImageData;
 import gov.nih.nci.camod.webapp.form.InducedMutationData;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsData;
-import gov.nih.nci.camod.webapp.form.MorpholinoData;
 import gov.nih.nci.camod.webapp.form.NutritionalFactorData;
 import gov.nih.nci.camod.webapp.form.PublicationData;
 import gov.nih.nci.camod.webapp.form.RadiationData;
@@ -251,6 +255,7 @@ import gov.nih.nci.camod.webapp.form.SpontaneousMutationData;
 import gov.nih.nci.camod.webapp.form.SurgeryData;
 import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 import gov.nih.nci.camod.webapp.form.TherapyData;
+import gov.nih.nci.camod.webapp.form.TransientInterferenceData;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
 import gov.nih.nci.camod.webapp.form.XenograftData;
 import gov.nih.nci.common.persistence.Persist;
@@ -586,9 +591,9 @@ public class AnimalModelManagerImpl extends BaseManager implements
 		inAnimalModel.setPrincipalInvestigator(thePI);
 
 		// Set the animal model information
-		boolean isToolMouse = inModelCharacteristicsData.getIsToolMouse()
+		boolean isToolStrain = inModelCharacteristicsData.getIsToolStrain()
 				.equals("yes") ? true : false;
-		inAnimalModel.setIsToolMouse(new Boolean(isToolMouse));
+		inAnimalModel.setIsToolStrain(new Boolean(isToolStrain));
 		inAnimalModel.setUrl(inModelCharacteristicsData.getUrl());
 		inAnimalModel.setModelDescriptor(inModelCharacteristicsData
 				.getModelDescriptor());
@@ -616,7 +621,23 @@ public class AnimalModelManagerImpl extends BaseManager implements
 			// used to setSpecies in AnimalModel now used to setStrain in 2.1
 			inAnimalModel.setStrain(theNewStrain);
 		}
-
+				
+		// every submission - lookup Genotype or create one new
+		Genotype theGenotype = GenotypeManagerSington.instance().getOrCreate(
+				inModelCharacteristicsData.getGenotype());
+		log.info("\n theNewGenotype: " + theGenotype);
+		
+		// every submission - lookup Nomenclature or create one new
+		Nomenclature theNomenclature = NomenclatureManagerSingleton.instance().getOrCreate(
+				inModelCharacteristicsData.getNomenclature());
+		log.info("\n theNomenclature: " + theNomenclature);
+		
+		theGenotype.setNomenclature(theNomenclature);
+		log.info("\n setNomenclature() ");
+		
+		inAnimalModel.addGenotype(theGenotype);
+		log.info("\n Added Genotype ");
+		
 		Phenotype thePhenotype = inAnimalModel.getPhenotype();
 		if (thePhenotype == null) {
 			thePhenotype = new Phenotype();
@@ -1140,25 +1161,26 @@ public class AnimalModelManagerImpl extends BaseManager implements
 				.info("Exiting AnimalModelManagerImpl.addHistopathology to inClinicalMarkerData");
 	}
 
-    /**
-     * Add a Morpholino
-     * 
-     * @param inAnimalModel
-     *            the animal model that has the Morpholino
-     * @param inMorpholinoData
-     *            the new Morpholino data
-     * @throws Exception
-     */
-    public void addMorpholino(AnimalModel inAnimalModel,
-                              MorpholinoData inMorpholinoData) throws Exception
-    {
+	/**
+	 * Add a TransientInterference
+	 * 
+	 * @param inAnimalModel
+	 *            the animal model that has the TransientInterference
+	 * @param inMorpholinoData
+	 *            the new Morpholino data
+	 * @throws Exception
+	 */
+	public void addTransientInterference(AnimalModel inAnimalModel,
+			TransientInterferenceData inTransientInterferenceData)
+			throws Exception {
 
-        log.info("Entering AnimalModelManagerImpl.addMorpholino");
-        Morpholino theMorpholino = MorpholinoManagerSingleton.instance().create(inAnimalModel, inMorpholinoData);
-        inAnimalModel.addMorpholino(theMorpholino);
-        save(inAnimalModel);
-        log.info("Exiting AnimalModelManagerImpl.addMorpholino");
-    }  
+		log.info("Entering AnimalModelManagerImpl.addTransientInterference");
+		TransientInterference theTransientInterference = TransientInterferenceManagerSingleton
+				.instance().create(inAnimalModel, inTransientInterferenceData);
+		inAnimalModel.addTransientInterference(theTransientInterference);
+		save(inAnimalModel);
+		log.info("Exiting AnimalModelManagerImpl.addTransientInterference");
+	}  
 
 	private void sendEmail(AnimalModel inAnimalModel,
 			String theUncontrolledVocab, String inType) {

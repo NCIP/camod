@@ -4,7 +4,7 @@
 <%@ page import="gov.nih.nci.camod.domain.Therapy" %>
 <%@ page import="gov.nih.nci.camod.domain.CellLine" %>	
 <%@ page import="gov.nih.nci.camod.domain.CarcinogenExposure" %>
-<%@ page import="gov.nih.nci.camod.domain.Morpholino" %>
+<%@ page import="gov.nih.nci.camod.domain.TransientInterference" %>
 <%@ page import="gov.nih.nci.camod.Constants" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -70,7 +70,7 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = new ArrayList(am.getMorpholinoCollection());
+			l = new ArrayList(am.getTransientInterferenceCollection());
 			cc = (l!=null)?l.size():0;
 			found = false;
 			if ( cc > 0 ) {

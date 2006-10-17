@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModelCharacteristicsForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: ModelCharacteristicsForm.java,v 1.9 2006-10-17 16:10:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.7  2005/10/24 13:28:30  georgeda
  * Cleanup changes
  *
@@ -37,7 +40,7 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String name;
     protected String summary;
     protected String principalInvestigator;
-    protected String isToolMouse = "no";
+    protected String isToolStrain = "no";
     protected String scientificName;
     protected String otherScientificName;    
     protected String ethinicityStrain;
@@ -49,6 +52,8 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String url;
     protected String releaseDate = "immediately";
     protected String calendarReleaseDate;
+    protected String genotype;
+    protected String nomenclature;    
 
 
     public ModelCharacteristicsForm() {
@@ -102,12 +107,12 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
         this.principalInvestigator = principalInvestigator;
     }
 
-    public String getIsToolMouse() {
-        return isToolMouse;
+    public String getIsToolStrain() {
+        return isToolStrain;
     }
 
-    public void setIsToolMouse(String isToolMouse) {
-        this.isToolMouse = isToolMouse;
+    public void setIsToolStrain(String isToolStrain) {
+        this.isToolStrain = isToolStrain;
     }
 
     public String getScientificName() {
@@ -181,4 +186,20 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+    
+    public String getGenotype() {
+        return genotype;
+    }
+
+    public void setGenotype(String genotype) {
+        this.genotype = genotype;
+    }   
+    
+    public String getNomenclature() {
+        return nomenclature;
+    }
+
+    public void setNomenclature(String nomenclature) {
+        this.nomenclature = nomenclature;
+    }     
 }

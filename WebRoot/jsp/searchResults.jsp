@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.19 2006-08-13 17:43:43 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.20 2006-10-17 16:08:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/08/13 17:43:43  pandyas
+ * Updated online help - redefined camod tag by substituting mapId for topic (ePublisher changes)
+ *
  * Revision 1.18  2006/05/10 18:03:00  schroedn
  * Fixed crash when loading page with no search results.
  *
@@ -230,9 +233,15 @@
 					    	//System.out.println( "selectedColumnsToDisplay[" + i + "] = " + resultColumns[i] );
 							
 							if( resultColumns[i].equals("Model Descriptor") ) { %>
+							
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
-					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>
-							     </display:column>															
+					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>					             
+					                 <c:if test="${not empty row.microArrayDataCollection }">
+					                 <IMG src="images/microarray_icon.jpg" border=0 cellpadding="0" width="20" height="20">
+					                 </c:if>
+
+							     </display:column>
+							     															
 							<% }						
 							else if( resultColumns[i].equals("Species") ) { %>
 							     <display:column title="Species" sortable="true">

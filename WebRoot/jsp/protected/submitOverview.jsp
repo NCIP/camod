@@ -1,11 +1,13 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
-<%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/common/taglibs.jsp"%>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 
-<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
+<%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>
+<%@ page import='java.util.List' %>
 <%@ page buffer="32kb"%>
 
 <!-- submitOverview.jsp -->
@@ -17,6 +19,7 @@
 	<tr><td valign="top">
 		<TABLE cellpadding="0" cellspacing="0" border="0" class="contentBegins" width="100%">
 		<tr><td>
+			
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 
 			<tr>
@@ -52,28 +55,75 @@
                             <html:hidden property="assignedTo" name="<%= Constants.FORMDATA %>" />
                             <html:hidden property="event" name="<%= Constants.FORMDATA %>" />
                             <html:hidden property="note" name="<%= Constants.FORMDATA %>" />
-                            <html:submit>Set model status to Complete</html:submit>  
+                            <html:submit>Set model status to Complete</html:submit> 
                         </html:form> 
                     </td>
-                </logic:equal>
-                		               		
-            </tr>				
-
-            <tr>
-                <td align="right" colspan="2">
-                        <!-- action buttons begins -->
-                        <table cellpadding="4" cellspacing="0" border="0">
-                                <tr>
-                                    <td></td>                                                      
-                                </tr>
-                        </table>
-                        <!-- action buttons end -->
-                </td>
+                </logic:equal>                		               		
             </tr>
+			<tr>
+				<td class="resultsBoxWhiteEnd" colspan=2>
+					<td> </td>			
+				</td> 
+			</tr>
 			</TABLE>
+			<br>			
+				
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="98%">
 			
+            	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Complete-not screened">
+            	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Incomplete">
+            
+					<tr>
+						<td class="formTitle" height="1" colspan="5">&nbsp;</td>				
+					</tr>            			
+				
+					<logic:present name="<%= Constants.CURRENTUSERROLES %>">
+					<logic:iterate name="<%= Constants.CURRENTUSERROLES %>" id="role" type="String">
+						<% 
+							if ( role.contains(Admin.Roles.SUPER_USER)) { 
+						%> 
+
+         					<td class="resultsBoxGreyNoEnd" align="left" colspan="1">
+            					Change the State To:
+         					</td>
+						<%
+	 	  					}
+						%>
+					</logic:iterate>
+					</logic:present> 
+		    		
+                    <td align="left" colspan="1" class="resultsBoxGreyNoEnd">
+                    	<html:form action="ChangeAnimalModelToCompleteNotScreenedAction">
+                    		<html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
+                    		<input type="hidden" name="aEvent" value="<%= Constants.Admin.Actions.BACK_TO_COMPLETE%>"/>      
+                    		<html:submit>Complete-not screened</html:submit>						        
+                       	</html:form>				                                
+                    </td>
+                    	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Screener-assigned">
+                    	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Screened-approved">
+                    	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Screened-rejected">
+                    	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Edited-need more info">
+                    	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Edited-approved">
+                    	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Inactive">
+                    	<td align="left" colspan="1" class="resultsBoxGreyEnd">
+                    		<html:form action="ChangeAnimalModelToScreenedApprovedAction">
+                    			<html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
+                    			<input type="hidden" name="aEvent" value="<%= Constants.Admin.Actions.BACK_TO_SCREENER_APPROVE%>"/>                    	
+                            	<html:submit>Screened - Approved</html:submit> 
+                       		</html:form>                    
+               			</td>    &nbsp;
+               			</logic:notEqual>
+               			</logic:notEqual>
+               			</logic:notEqual>
+               			</logic:notEqual>
+               			</logic:notEqual>
+               			</logic:notEqual>                     
+                  </logic:notEqual>
+                  </logic:notEqual>
+			</TABLE>
+				  
 		</td></tr></TABLE>
-	</td></tr></TABLE>
+	</td></tr></TABLE>	
 </tr></td></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.8 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.9 2006-10-17 16:11:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.7  2006/04/28 19:28:50  schroedn
  * Defect # 261
  * Prepopulates form with SaveQuery the user is editing
@@ -63,6 +66,9 @@ public class SimpleSearchPopulateAction extends BaseAction {
             
             try {                
                 SavedQuery sq = savedQueryManager.get( aQueryId );
+                
+                log.info("<SimpleSearchPopulateAction.populate> sq.getQueryName(): " + sq.getQueryName());
+
                 
                 request.getSession().setAttribute( Constants.QUERY_NAME, sq.getQueryName() );
                 

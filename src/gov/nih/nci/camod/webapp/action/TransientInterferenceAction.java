@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: MorpholinoAction.java,v 1.1 2006-05-03 20:04:55 pandyas Exp $
+ * $Id: TransientInterferenceAction.java,v 1.1 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/03 20:04:55  pandyas
+ * Modified to add Morpholino object data to application
+ *
  *
  */
 
@@ -11,10 +14,10 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.Morpholino;
+import gov.nih.nci.camod.domain.TransientInterference;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.MorpholinoManager;
-import gov.nih.nci.camod.webapp.form.MorpholinoForm;
+import gov.nih.nci.camod.service.TransientInterferenceManager;
+import gov.nih.nci.camod.webapp.form.TransientInterferenceForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -23,7 +26,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-public class MorpholinoAction extends BaseAction
+public class TransientInterferenceAction extends BaseAction
 {
 
     /**
@@ -41,36 +44,35 @@ public class MorpholinoAction extends BaseAction
                               HttpServletRequest request,
                               HttpServletResponse response) throws Exception
     {
-
-        log.info("<MorpholinoAction> Entering 'edit' method");
+        log.info("<TransientInterferenceAction> Entering edit method");
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
         // Create a form to edit
-        MorpholinoForm morpholinoForm = (MorpholinoForm) form;
+        TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
 
-        // Grab the current aMorpholinoID for this animalModel
-        String aMorpholinoID = request.getParameter("aMorpholinoID");
-        log.info("aMorpholinoID: " + aMorpholinoID);
-
+        // Grab the current aTransIntID for this animalModel
+        String aTransIntID = request.getParameter("aTransIntID");
+        
         System.out.println("<MorpholinoAction edit> following Characteristics:" 
-          + "\n\t Concentration: " + morpholinoForm.getConcentration() 
-          + "\n\t ConcentrationUnit: " + morpholinoForm.getConcentrationUnit() 
-          + "\n\t DeliveryMethod: " + morpholinoForm.getDeliveryMethod() 
-          + "\n\t OtherDeliveryMethod: " + morpholinoForm.getOtherDeliveryMethod() 
-          + "\n\t Source: " + morpholinoForm.getOtherSource() 
-          + "\n\t OtherSource: " + morpholinoForm.getOtherSource() 
-          + "\n\t VisualizationLigands: " + morpholinoForm.getVisualLigand()    
-          + "\n\t OtherVisualizationLigands: " + morpholinoForm.getOtherVisualLigand()
-          + "\n\t SequenceDirection: " + morpholinoForm.getSequenceDirection() 
-          + "\n\t TargetedRegion: " + morpholinoForm.getTargetedRegion() 
-          + "\n\t Type: " + morpholinoForm.getType()     
+          + "\n\t Concentration: " + transientInterferenceForm.getConcentration() 
+          + "\n\t ConcentrationUnit: " + transientInterferenceForm.getConcentrationUnit() 
+          + "\n\t DeliveryMethod: " + transientInterferenceForm.getDeliveryMethod() 
+          + "\n\t OtherDeliveryMethod: " + transientInterferenceForm.getOtherDeliveryMethod() 
+          + "\n\t Source: " + transientInterferenceForm.getSource() 
+          + "\n\t OtherSource: " + transientInterferenceForm.getOtherSource() 
+          + "\n\t VisualizationLigands: " + transientInterferenceForm.getVisualLigand()    
+          + "\n\t OtherVisualizationLigands: " + transientInterferenceForm.getOtherVisualLigand()
+          + "\n\t SequenceDirection: " + transientInterferenceForm.getSequenceDirection() 
+          + "\n\t TargetedRegion: " + transientInterferenceForm.getTargetedRegion() 
+          + "\n\t Type: " + transientInterferenceForm.getType()
+        + "\n\t Comment: " + transientInterferenceForm.getComments()           
           + "\n\t user: " + (String) request.getSession().getAttribute(                                                                                                                       
                  "camod.loggedon.username"));
         
   
-        MorpholinoManager morpholinoManager = (MorpholinoManager) getBean("morpholinoManager");
+        TransientInterferenceManager transientInterferenceManager = (TransientInterferenceManager) getBean("transientInterferenceManager");
 
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
@@ -78,18 +80,18 @@ public class MorpholinoAction extends BaseAction
         {
             // retrieve animal model by it's id         
             AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-            AnimalModel theAnimalModel = theAnimalModelManager.get(modelID);            
+            AnimalModel theAnimalModel = theAnimalModelManager.get(modelID); 
 
             if ("Delete".equals(theAction)) {
-                morpholinoManager.remove(aMorpholinoID, theAnimalModel);
+            	transientInterferenceManager.remove(aTransIntID, theAnimalModel);
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("morpholino.delete.successful"));
                 saveErrors(request, msg);
 
             } else {
-                Morpholino theMorpholino = morpholinoManager.get(aMorpholinoID);
-                morpholinoManager.update(theAnimalModel, morpholinoForm, theMorpholino);
+            	TransientInterference theTransientInterference = transientInterferenceManager.get(aTransIntID);
+                transientInterferenceManager.update(theAnimalModel, transientInterferenceForm, theTransientInterference);
 
                 // Add a message to be displayed in submitOverview.jsp saying
                 // you've
@@ -128,26 +130,31 @@ public class MorpholinoAction extends BaseAction
                               HttpServletResponse response) throws Exception
     {
 
-        log.info("<MorpholinoAction> Entering 'save' method");
+        log.info("<TransientInterferenceAction> Entering 'save' method");
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
-
-        // Create a form to edit
-        MorpholinoForm morpholinoForm = (MorpholinoForm) form;
         
-        System.out.println("<MorpholinoAction save> following Characteristics:" 
-	    + "\n\t Concentration: " + morpholinoForm.getConcentration() 
-	    + "\n\t ConcentrationUnit: " + morpholinoForm.getConcentrationUnit() 
-	    + "\n\t DeliveryMethod: " + morpholinoForm.getDeliveryMethod() 
-        + "\n\t OtherDeliveryMethod: " + morpholinoForm.getOtherDeliveryMethod() 
-        + "\n\t Source: " + morpholinoForm.getOtherSource() 
-        + "\n\t OtherSource: " + morpholinoForm.getOtherSource() 
-        + "\n\t VisualizationLigands: " + morpholinoForm.getVisualLigand()    
-        + "\n\t OtherVisualizationLigands: " + morpholinoForm.getOtherVisualLigand()
-        + "\n\t SequenceDirection: " + morpholinoForm.getSequenceDirection() 
-        + "\n\t TargetedRegion: " + morpholinoForm.getTargetedRegion() 
-        + "\n\t Type: " + morpholinoForm.getType()     
+        TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
+
+		String aConceptCode = request.getParameter("aConceptCode");
+
+		transientInterferenceForm.setAConceptCode(aConceptCode);        
+        log.info("transientInterferenceForm.getConceptCode(): " + transientInterferenceForm.getAConceptCode());
+        
+        System.out.println("<TransientInterferenceAction save> following Characteristics:" 
+	    + "\n\t Concentration: " + transientInterferenceForm.getConcentration() 
+	    + "\n\t ConcentrationUnit: " + transientInterferenceForm.getConcentrationUnit() 
+	    + "\n\t DeliveryMethod: " + transientInterferenceForm.getDeliveryMethod() 
+        + "\n\t OtherDeliveryMethod: " + transientInterferenceForm.getOtherDeliveryMethod() 
+        + "\n\t Source: " + transientInterferenceForm.getSource() 
+        + "\n\t OtherSource: " + transientInterferenceForm.getOtherSource() 
+        + "\n\t VisualizationLigands: " + transientInterferenceForm.getVisualLigand()    
+        + "\n\t OtherVisualizationLigands: " + transientInterferenceForm.getOtherVisualLigand()
+        + "\n\t SequenceDirection: " + transientInterferenceForm.getSequenceDirection() 
+        + "\n\t TargetedRegion: " + transientInterferenceForm.getTargetedRegion() 
+        + "\n\t Type: " + transientInterferenceForm.getType() 
+        + "\n\t Comment: " + transientInterferenceForm.getComments()         
     	+ "\n\t user: " + (String) request.getSession().getAttribute(                                                                                                                       
               "camod.loggedon.username"));
 
@@ -158,7 +165,9 @@ public class MorpholinoAction extends BaseAction
         try
         {
             log.info("<TherapyAction> Entering try block");            
-            animalModelManager.addMorpholino(animalModel, morpholinoForm);
+            animalModelManager.addTransientInterference(animalModel, transientInterferenceForm);
+            
+			log.info("New Transient Interference (Morpholino) created");            
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -178,5 +187,6 @@ public class MorpholinoAction extends BaseAction
         log.info("Exiting save");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
+    
 
 }

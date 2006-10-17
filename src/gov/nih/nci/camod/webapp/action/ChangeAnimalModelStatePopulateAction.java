@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.11 2006-08-17 18:06:57 pandyas Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.12 2006-10-17 16:11:00 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.11  2006/08/17 18:06:57  pandyas
+ *  Defect# 410: Externalize properties files - Code changes to get properties
+ *
  *  Revision 1.10  2005/11/28 13:48:37  georgeda
  *  Defect #192, handle back arrow for curation changes
  *
@@ -55,7 +58,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
 			HttpServletResponse inResponse) throws Exception {
 
-		log.trace("Entering ChangeAnimalModelStatePopulateAction.execute");
+		log.info("Entering ChangeAnimalModelStatePopulateAction.execute");
 
 		String theForward = "next";
 
@@ -77,7 +80,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 			// Null out the list in case it had been already set
 			inRequest.getSession().setAttribute(Constants.Dropdowns.USERSFORROLEDROP, null);
 
-			log.debug("The model id: " + theModelId + " and event: " + theEvent);
+			log.info("<ChangeAnimalModelStatePopulateAction> The model id: " + theModelId + " and event: " + theEvent);
 
 			// Setting the action. This is used to customize the jsp display
 			if (theEvent.equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
@@ -122,6 +125,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				inRequest.setAttribute("action", "Rejecting ");
 			} else if (theEvent.equals(Constants.Admin.Actions.SCREENER_APPROVE) || theEvent.equals(Constants.Admin.Actions.EDITOR_APPROVE)) {
 
+				
 				// Assign to the coordinator
 				Properties camodProperties = new Properties();
 				String camodPropertiesFileName = null;
@@ -146,7 +150,37 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				theForm.setAssignedTo(theCoordinator);
 				
 				inRequest.setAttribute("action", "Approving ");
-			} else {
+				
+			} else if (theEvent.equals(Constants.Admin.Actions.INACTIVATE)) {
+
+				log.info("<ChangeAnimalModelStatePopulateAction> Inside inactive loop - the event is: " + theEvent);				
+				// Assign to the coordinator
+				Properties camodProperties = new Properties();
+				String camodPropertiesFileName = null;
+
+				camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+				
+				try {
+			
+				FileInputStream in = new FileInputStream(camodPropertiesFileName);
+				camodProperties.load(in);
+	
+				} 
+				catch (FileNotFoundException e) {
+					log.error("Caught exception finding file for properties: ", e);
+					e.printStackTrace();			
+				} catch (IOException e) {
+					log.error("Caught exception finding file for properties: ", e);
+					e.printStackTrace();			
+				}
+				
+				String theCoordinator = camodProperties.getProperty("coordinator.username");
+				theForm.setAssignedTo(theCoordinator);
+				log.info("<ChangeAnimalModelStatePopulateAction> setting the coordinator to: " + theCoordinator);
+				
+				inRequest.setAttribute("action", "Inactivating ");
+			} 
+			else {
 				throw new IllegalArgumentException("Unknown event type: " + theEvent);
 			}
 		} catch (Exception e) {
@@ -160,7 +194,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 
 			theForward = "failure";
 		}
-		log.trace("Exiting ChangeAnimalModelStatePopulateAction.execute");
+		log.info("Exiting ChangeAnimalModelStatePopulateAction.execute");
 
 		return inMapping.findForward(theForward);
 	}

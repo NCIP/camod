@@ -46,22 +46,14 @@
         	column="conditionality_id"
         	cascade="all"
         	unique="true"/>        	
-        	
-        <!-- genotypeSummary (many-to-one unidirectional) -->
-        <many-to-one
-        	name="genotypeSummary"
-        	column="genotype_summary_id"
-        	cascade="all-delete-orphan"
-        	class="GenotypeSummary"/>
-        
+
         <!-- image : this is really a one-to-one relationship with unique=true -->
         <!-- (one-to-one unidirectional) -->
         <many-to-one
         	name="image"
         	column="image_id"
         	class="Image"
-        	cascade="all"
-        	unique="true"/> 
+        	cascade="all"/> 
         	
         <!-- mutationIdentifier: this is really a one-to-one relationship with unique=true -->
         <!-- (one-to-one unidirectional) -->

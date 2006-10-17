@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ModelCharacteristicsData.java,v 1.4 2006-04-17 19:09:19 pandyas Exp $
+ *  $Id: ModelCharacteristicsData.java,v 1.5 2006-10-17 16:10:47 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.4  2006/04/17 19:09:19  pandyas
+ *  caMod 2.1 OM changes
+ *
  *  Revision 1.3  2005/10/24 13:28:30  georgeda
  *  Cleanup changes
  *
@@ -54,9 +57,9 @@ public interface ModelCharacteristicsData {
 
     public void setPrincipalInvestigator(String principalInvestigator);
 
-    public String getIsToolMouse();
+    public String getIsToolStrain();
 
-    public void setIsToolMouse(String isToolMouse);
+    public void setIsToolStrain(String isToolStrain);
 
     public String getScientificName();
 
@@ -93,6 +96,13 @@ public interface ModelCharacteristicsData {
     public String getReleaseDate();
 
     public void setReleaseDate(String releaseDate);
+
+    public String getGenotype();
+
+    public void setGenotype(String genotype);
     
+    public String getNomenclature();
+
+    public void setNomenclature(String nomenclature);    
 
 }

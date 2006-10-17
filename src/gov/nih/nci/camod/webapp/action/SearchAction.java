@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.7 2006-05-22 19:40:12 schroedn Exp $
+ * $Id: SearchAction.java,v 1.8 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/05/22 19:40:12  schroedn
+ * Added log statement
+ *
  * Revision 1.6  2006/05/11 15:43:05  schroedn
  * Updates number of results and excute time of SavedQueries on re-run or edit
  *
@@ -61,167 +64,189 @@ import org.apache.struts.action.ActionMessages;
  */
 public final class SearchAction extends BaseAction {
 
-    public ActionForward execute(ActionMapping mapping, ActionForm form, 
-                                 HttpServletRequest request, HttpServletResponse response) 
-        throws IOException, ServletException {
-   
-        SearchForm theForm = new SearchForm();
-        SavedQuery resubmittedSavedQuery = null;
-        
-        SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
-        
-        String aQueryId = request.getParameter( Constants.Parameters.QUERYID );       
-        String aSavedQueryId = (String) request.getSession().getAttribute( Constants.ASAVEDQUERYID );
-                        
-        //Retrieve the query to resubmit
-        if ( aSavedQueryId != null || aQueryId != null )
-        {            
-            try {      
-                
-                if ( aQueryId != null ) 
-                {                    
-                    //Used for re-running query
-                    resubmittedSavedQuery = savedQueryManager.get( aQueryId );
-                    
-                    // From the saved criteria populate the fields in the simpleSearchForm
-                    Set<SavedQueryAttribute> sqaList = resubmittedSavedQuery.getSavedQueryAttributes();
-                    
-                    // Retrieve the saved criteria and populate the fields in the SearchForm
-                    savedQueryManager.buildSearchData( sqaList, theForm );       
-                    
-                    request.getSession().setAttribute( Constants.RERUN_QUERY, "true" );
-                    
-                } else {                    
-                    //Used for editing query
-                    resubmittedSavedQuery = savedQueryManager.get( aSavedQueryId );
-                    theForm = (SearchForm) form;
-                    
-                    request.getSession().setAttribute( Constants.RERUN_QUERY, null );
-                }
-                
-            } catch ( Exception e) {                
-                // Set the error message
-                ActionMessages msg = new ActionMessages();
-                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-                saveErrors(request, msg);
-            }
-        } 
-        else 
-        {
-            //Normal Search
-            theForm = (SearchForm) form;
-            
-            request.getSession().setAttribute( Constants.QUERY_NAME, null );
-            request.getSession().setAttribute( Constants.ASAVEDQUERYID, null );
-            request.getSession().setAttribute( Constants.RERUN_QUERY, null );
-        }
-        
-        if( theForm.getKeyword() != null )
-        {
-            log.debug("Keyword: " + theForm.getKeyword());       
-            request.getSession().setAttribute(Constants.KEYWORD_HIGHLIGHT, theForm.getKeyword() ); 
-        }
-        
-        String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
-        String theForward = "next";
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 
-        // Clear the form
-        if ("Clear".equals(theAction)) 
-        {
-            theForm.allFieldsReset();
-            theForward = "back";
-        }
-        
-        // Do the search
-        else {
-            
-            try {
-                AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-                
-                // Calculate the elasped time of search
-                long start = System.currentTimeMillis();     
-                
-                // Perform the search
-                List results = animalModelManager.search(theForm);                
-                
-                long elapsedTimeMillis = System.currentTimeMillis()-start;
-                
-                // Set search results constant
-                request.getSession().setAttribute( Constants.SEARCH_RESULTS, results );
-                                
-                // Create new QUERY HISTORY item
-                SavedQuery savedQuery = new SavedQuery();                
-                savedQuery.setSearchData( theForm );
-                savedQuery.setElapsedTime( elapsedTimeMillis );
-                savedQuery.setExecuteTime( new Date() );
-                savedQuery.setIsSaved( new Long(0) );                
-                savedQuery.setNumberResults( results.size() );                
-                savedQuery.setQueryName( "No Name Provided" );  
+		log.info("<SearchAction> entered ");
 
-                if ( resubmittedSavedQuery != null ) 
-                {
-                    savedQuery.setQueryName( resubmittedSavedQuery.getQueryName() );
-                    
-                    // Update the number of results and last executed time
-                    resubmittedSavedQuery.setElapsedTime( savedQuery.getElapsedTime() );
-                    resubmittedSavedQuery.setExecuteTime( savedQuery.getExecuteTime() );
-                    resubmittedSavedQuery.setNumberResults( results.size() );
-                    savedQueryManager.update( resubmittedSavedQuery );
-                    
-                    // Set Global Constants for use later
-                    request.getSession().setAttribute( Constants.QUERY_NAME, resubmittedSavedQuery.getQueryName() );
-                    request.getSession().setAttribute( Constants.ASAVEDQUERYID, resubmittedSavedQuery.getId().toString() );                    
-                }
-                
-                // Get elapsed time in seconds                
-                request.getSession().setAttribute( Constants.ELAPSED_TIME, savedQuery.getElapsedTime() );
-                request.getSession().setAttribute( Constants.EXECUTE_TIME, savedQuery.getExecuteTime() );
-                
-                // If a user is logged in, save the query to the history
-                String currentUser = (String) request.getSession().getAttribute(Constants.CURRENTUSER);
-                
-                if ( currentUser != null )
-                {
-                    //Set the user for this save
-                    PersonManager personManager = (PersonManager) getBean("personManager");                
-                    savedQuery.setUser( personManager.getByUsername( (String) request.getSession().getAttribute(Constants.CURRENTUSER) ) ); 
-                    
-                    // Add criteria to be saved. Create a List of SavedQueryAttributes from inQuery.getSearchData()
-                    Set <SavedQueryAttribute>criteriaList = savedQueryManager.buildCriteriaList( theForm );
-                    savedQuery.setSavedQueryAttributes( criteriaList );                                    
-                    
-                    //Save search to query history 
-                    savedQueryManager.save( savedQuery );
-                                
-                }
-                                
-                //Save the current form data into constants                
-                request.getSession().setAttribute(Constants.SEARCH_FORM, theForm);
-                
-            } catch (Exception e) {
-                
-                log.trace( e );
-                
-                // Set the error message
-                ActionMessages msg = new ActionMessages();
-                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-                saveErrors(request, msg);
-            }
-        }
+		SearchForm theForm = new SearchForm();
+		SavedQuery resubmittedSavedQuery = null;
 
-        // Create the Criteria HTML table to be display on the search result page
-        try {   
-            request.getSession().setAttribute(Constants.CRITERIATABLE, CriteriaTableUtil.buildCriteriaDisplayTable( theForm ) );
-            request.getSession().setAttribute(Constants.DUP_NAME, "false" );
-            request.getSession().setAttribute( Constants.NOSAVEOPTION, "false" );
-     
-        } catch ( Exception e ) {
-            // Set the error message
-            ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, msg);
-        }
-        
-        return mapping.findForward(theForward);
-    }
+		SavedQueryManager savedQueryManager = (SavedQueryManager) getBean("savedQueryManager");
+
+		String aQueryId = request.getParameter(Constants.Parameters.QUERYID);
+		String aSavedQueryId = (String) request.getSession().getAttribute(
+				Constants.ASAVEDQUERYID);
+
+		// Retrieve the query to resubmit
+		if (aSavedQueryId != null || aQueryId != null) {
+			try {
+
+				if (aQueryId != null) {
+					// Used for re-running query
+					resubmittedSavedQuery = savedQueryManager.get(aQueryId);
+
+					// From the saved criteria populate the fields in the
+					// simpleSearchForm
+					Set<SavedQueryAttribute> sqaList = resubmittedSavedQuery
+							.getSavedQueryAttributes();
+
+					// Retrieve the saved criteria and populate the fields in
+					// the SearchForm
+					savedQueryManager.buildSearchData(sqaList, theForm);
+
+					request.getSession().setAttribute(Constants.RERUN_QUERY,
+							"true");
+
+				} else {
+					// Used for editing query
+					resubmittedSavedQuery = savedQueryManager
+							.get(aSavedQueryId);
+					theForm = (SearchForm) form;
+
+					request.getSession().setAttribute(Constants.RERUN_QUERY,
+							null);
+				}
+
+			} catch (Exception e) {
+				// Set the error message
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+						"errors.admin.message"));
+				saveErrors(request, msg);
+			}
+		} else {
+			// Normal Search
+			theForm = (SearchForm) form;
+			request.getSession().setAttribute(Constants.QUERY_NAME, null);
+			request.getSession().setAttribute(Constants.ASAVEDQUERYID, null);
+			request.getSession().setAttribute(Constants.RERUN_QUERY, null);
+		}
+
+		if (theForm.getKeyword() != null) {
+			log.info("<SearchAction> Keyword: " + theForm.getKeyword());
+			request.getSession().setAttribute(Constants.KEYWORD_HIGHLIGHT,
+					theForm.getKeyword());
+		}
+
+		String theAction = (String) request
+				.getParameter(Constants.Parameters.ACTION);
+		String theForward = "next";
+
+		// Clear the form
+		if ("Clear".equals(theAction)) {
+			theForm.allFieldsReset();
+			theForward = "back";
+		}
+
+		// Do the search
+		else {
+
+			try {
+				log.debug("<SearchAction> In search loop: ");
+				AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+
+				// Calculate the elasped time of search
+				long start = System.currentTimeMillis();
+
+				// Perform the search
+				List results = animalModelManager.search(theForm);
+
+				long elapsedTimeMillis = System.currentTimeMillis() - start;
+
+				// Set search results constant
+				request.getSession().setAttribute(Constants.SEARCH_RESULTS,
+						results);
+
+				// Create new QUERY HISTORY item
+				SavedQuery savedQuery = new SavedQuery();
+				savedQuery.setSearchData(theForm);
+				savedQuery.setElapsedTime(elapsedTimeMillis);
+				savedQuery.setExecuteTime(new Date());
+				savedQuery.setIsSaved(new Long(0));
+				savedQuery.setNumberResults(results.size());
+
+				log
+						.info("<SearchAction>: savedQuery.setQueryName( No Name Provided )");
+				savedQuery.setQueryName("No Name Provided");
+
+				if (resubmittedSavedQuery != null) {
+					savedQuery.setQueryName(resubmittedSavedQuery
+							.getQueryName());
+
+					// Update the number of results and last executed time
+					resubmittedSavedQuery.setElapsedTime(savedQuery
+							.getElapsedTime());
+					resubmittedSavedQuery.setExecuteTime(savedQuery
+							.getExecuteTime());
+					resubmittedSavedQuery.setNumberResults(results.size());
+					savedQueryManager.update(resubmittedSavedQuery);
+
+					// Set Global Constants for use later
+					request.getSession().setAttribute(Constants.QUERY_NAME,
+							resubmittedSavedQuery.getQueryName());
+					request.getSession().setAttribute(Constants.ASAVEDQUERYID,
+							resubmittedSavedQuery.getId().toString());
+				}
+
+				// Get elapsed time in seconds
+				request.getSession().setAttribute(Constants.ELAPSED_TIME,
+						savedQuery.getElapsedTime());
+				request.getSession().setAttribute(Constants.EXECUTE_TIME,
+						savedQuery.getExecuteTime());
+
+				// If a user is logged in, save the query to the history
+				String currentUser = (String) request.getSession()
+						.getAttribute(Constants.CURRENTUSER);
+
+				if (currentUser != null) {
+					// Set the user for this save
+					PersonManager personManager = (PersonManager) getBean("personManager");
+					savedQuery.setUser(personManager
+							.getByUsername((String) request.getSession()
+									.getAttribute(Constants.CURRENTUSER)));
+					// Add criteria to be saved. Create a List of
+					// SavedQueryAttributes from inQuery.getSearchData()
+					Set<SavedQueryAttribute> criteriaList = savedQueryManager
+							.buildCriteriaList(theForm);
+					savedQuery.setSavedQueryAttributes(criteriaList);
+					// Save search to query history
+					savedQueryManager.save(savedQuery);
+				}
+
+				// Save the current form data into constants
+				request.getSession().setAttribute(Constants.SEARCH_FORM,
+						theForm);
+
+			} catch (Exception e) {
+				log.info(e);
+				// Set the error message
+				ActionMessages msg = new ActionMessages();
+				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+						"errors.admin.message"));
+				saveErrors(request, msg);
+			}
+		}
+
+		// Create the Criteria HTML table to be display on the search result
+		// page
+		try {
+			request.getSession().setAttribute(Constants.CRITERIATABLE,
+					CriteriaTableUtil.buildCriteriaDisplayTable(theForm));
+
+			request.getSession().setAttribute(Constants.DUP_NAME, "false");
+
+			request.getSession().setAttribute(Constants.NOSAVEOPTION, "false");
+
+		} catch (Exception e) {
+			// Set the error message
+			ActionMessages msg = new ActionMessages();
+			msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+					"errors.admin.message"));
+			saveErrors(request, msg);
+		}
+
+		return mapping.findForward(theForward);
+	}
 }

@@ -2,7 +2,7 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoPopulateAction.java,v 1.3 2006-08-30 16:53:02 pandyas Exp $
+ * $Id: MorpholinoPopulateAction.java,v 1.4 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.2  2006/05/09 18:56:58  georgeda
@@ -17,9 +17,9 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.Morpholino;
-import gov.nih.nci.camod.service.MorpholinoManager;
-import gov.nih.nci.camod.webapp.form.MorpholinoForm;
+import gov.nih.nci.camod.domain.TransientInterference;
+import gov.nih.nci.camod.service.impl.TransientInterferenceManagerSingleton;
+import gov.nih.nci.camod.webapp.form.TransientInterferenceForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,62 +40,63 @@ public class MorpholinoPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-        log.debug("<MorpholinoPopulateAction populate> Entered");
+        log.info("<MorpholinoPopulateAction populate> Entered");
 
         // Create a form to edit		
-        MorpholinoForm morpholinoForm = (MorpholinoForm) form;
+        TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
+        
+        // Grab the current TransientInterference we are working with related to this animalModel        
+        String aTransIntID = request.getParameter("aTransIntID");
+        log.info("aTransIntID: = " + aTransIntID);
 
-        // Grab the current Morpholino we are working with related to this animalModel        
-        String aMorpholinoID = request.getParameter("aMorpholinoID");
-        System.out.println("aMorpholinoID: = " + aMorpholinoID);
+        TransientInterference transientInterference = TransientInterferenceManagerSingleton.instance().get(aTransIntID);
 
-        MorpholinoManager morpholinoManager = (MorpholinoManager) getBean("morpholinoManager");
-        Morpholino morpholino = morpholinoManager.get(aMorpholinoID);
-
-        if (morpholino == null)
+		// Handle back arrow in browser        
+        if (transientInterference == null)
         {
             request.setAttribute(Constants.Parameters.DELETED, "true");
         }
         else
         {
-            request.setAttribute("aMorpholinoID", aMorpholinoID);
-
-            // Set the fields from database
-            if (morpholino.getSourceUnctrVocab() != null)
+            request.setAttribute("aTransIntID", aTransIntID);
+         
+            // Populate the fields from database
+            if (transientInterference.getSourceUnctrVocab() != null)
             {
-                morpholinoForm.setSource(Constants.Dropdowns.OTHER_OPTION);
-                morpholinoForm.setOtherSource(morpholino.getSourceUnctrVocab());
+            	transientInterferenceForm.setSource(Constants.Dropdowns.OTHER_OPTION);
+            	transientInterferenceForm.setOtherSource(transientInterference.getSourceUnctrVocab());
             }
             else
             {
-                morpholinoForm.setSource(morpholino.getSource());
+            	transientInterferenceForm.setSource(transientInterference.getSource());
             }
 
-            morpholinoForm.setType(morpholino.getType());
-            morpholinoForm.setSequenceDirection(morpholino.getSequenceDirection());
-            morpholinoForm.setTargetedRegion(morpholino.getTargetedRegion());
+            transientInterferenceForm.setType(transientInterference.getType());
+            transientInterferenceForm.setSequenceDirection(transientInterference.getSequenceDirection());
+            transientInterferenceForm.setTargetedRegion(transientInterference.getTargetedRegion());
 
-            morpholinoForm.setConcentration(morpholino.getConcentration());
-            morpholinoForm.setConcentrationUnit(morpholino.getConcentrationUnit());
-
-            if (morpholino.getDeliveryMethodUnctrlVocab() != null)
+            transientInterferenceForm.setConcentration(transientInterference.getConcentration());
+            transientInterferenceForm.setConcentrationUnit(transientInterference.getConcentrationUnit());
+            transientInterferenceForm.setComments(transientInterference.getComments());
+            
+            if (transientInterference.getDeliveryMethodUnctrlVocab() != null)
             {
-                morpholinoForm.setDeliveryMethod(Constants.Dropdowns.OTHER_OPTION);
-                morpholinoForm.setOtherDeliveryMethod(morpholino.getDeliveryMethodUnctrlVocab());
-            }
-            else
-            {
-                morpholinoForm.setDeliveryMethod(morpholino.getDeliveryMethod());
-            }
-
-            if (morpholino.getVisualLigandUnctrlVocab() != null)
-            {
-                morpholinoForm.setVisualLigand(Constants.Dropdowns.OTHER_OPTION);
-                morpholinoForm.setOtherVisualLigand(morpholino.getVisualLigandUnctrlVocab());
+            	transientInterferenceForm.setDeliveryMethod(Constants.Dropdowns.OTHER_OPTION);
+            	transientInterferenceForm.setOtherDeliveryMethod(transientInterference.getDeliveryMethodUnctrlVocab());
             }
             else
             {
-                morpholinoForm.setVisualLigand(morpholino.getVisualLigand());
+            	transientInterferenceForm.setDeliveryMethod(transientInterference.getDeliveryMethod());
+            }
+
+            if (transientInterference.getVisualLigandUnctrlVocab() != null)
+            {
+            	transientInterferenceForm.setVisualLigand(Constants.Dropdowns.OTHER_OPTION);
+            	transientInterferenceForm.setOtherVisualLigand(transientInterference.getVisualLigandUnctrlVocab());
+            }
+            else
+            {
+            	transientInterferenceForm.setVisualLigand(transientInterference.getVisualLigand());
             }
         }
 
@@ -120,17 +121,20 @@ public class MorpholinoPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-        log.debug("<ClinicalMarkerPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.info("<MorpholinoPopulateAction dropdown> Entering ActionForward dropdown()");
+        
+		String aConceptCode = request.getParameter("aConceptCode");
+		// Create a form to edit
+        TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
 
-        //blank out the FORMDATA Constant field
-        MorpholinoForm morpholinoForm = (MorpholinoForm) form;
-
-        request.getSession().setAttribute(Constants.FORMDATA, morpholinoForm);
+        
+		transientInterferenceForm.setAConceptCode(aConceptCode);
+		log.info("<MorpholinoPopulateAction> morpholinoForm.getAConceptCode: " + transientInterferenceForm.getAConceptCode());
 
         //setup dropdown menus
-        this.dropdown(request, response);
-
-        log.debug("<MorpholinoPopulateAction dropdown> Exiting ActionForward dropdown()");
+        this.dropdown(request, response);		
+        
+        log.info("<MorpholinoPopulateAction dropdown> Exiting ActionForward dropdown()");
 
         return mapping.findForward("submitMorpholino");
     }
@@ -145,16 +149,17 @@ public class MorpholinoPopulateAction extends BaseAction
     public void dropdown(HttpServletRequest request,
                          HttpServletResponse response) throws Exception
     {
-        log.debug("<MorpholinoPopulateAction dropdown> Entering void dropdown()");
+        log.info("<MorpholinoPopulateAction dropdown> Entering void dropdown()");
 
         //Prepopulate all dropdown fields, set the global Constants to the following
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOSOURCEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONCENTRATIONUNITSDROP, Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOTYPEDROP, Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEQUENCEDIRECTIONSDROP, Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DELIVERYMETHODDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VISUALLIGANDSDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+    	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOSOURCEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+    	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONCENTRATIONUNITSDROP, Constants.Dropdowns.ADD_BLANK);
+    	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+    	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEQUENCEDIRECTIONSDROP, Constants.Dropdowns.ADD_BLANK);
+    	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DELIVERYMETHODDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+    	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VISUALLIGANDSDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
-        log.debug("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
+        log.info("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
     }
+
 }

@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: SubmitOverviewPopulateAction.java,v 1.2 2006-08-17 18:10:20 pandyas Exp $
+ *  $Id: SubmitOverviewPopulateAction.java,v 1.3 2006-10-17 16:11:00 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2006/08/17 18:10:20  pandyas
+ *  Defect# 410: Externalize properties files - Code changes to get properties
+ *
  *  Revision 1.1  2005/12/06 18:49:10  georgeda
  *  Defect #247 - real fix this time for the problem
  *
@@ -28,7 +31,6 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -47,7 +49,7 @@ public class SubmitOverviewPopulateAction extends BaseAction {
     public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
             HttpServletResponse inResponse) throws Exception {
 
-        log.trace("Entering SubmitOverviewPopulateAction.execute");
+        log.info("Entering SubmitOverviewPopulateAction.execute");
 
         String theModelStatus = (String) inRequest.getSession().getAttribute(Constants.MODELSTATUS);
 
@@ -84,10 +86,13 @@ public class SubmitOverviewPopulateAction extends BaseAction {
             theForm.setEvent(Constants.Admin.Actions.COMPLETE);
 
             inRequest.setAttribute(Constants.FORMDATA, theForm);
+            
         }
 
         log.trace("Exiting AddCommentsPopulateAction.execute");
 
         return inMapping.findForward("submitOverview");
     }
+    
+
 }

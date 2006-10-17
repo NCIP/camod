@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.7 2006-05-10 12:02:12 georgeda Exp $
+ * $Id: SearchData.java,v 1.8 2006-10-17 16:10:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/05/10 12:02:12  georgeda
+ * Changes for searching on transient interfaces
+ *
  * Revision 1.6  2006/04/28 19:30:51  schroedn
  * Defect # 261
  * Added Tumor Classification, so to save the organ properly
@@ -157,28 +160,41 @@ public interface SearchData {
 	public boolean isSearchTherapeuticApproaches();
 
 	public void setSearchTherapeuticApproaches(boolean b);
-	
+
 	public void setTherapeuticApproach(String s);
 
 	public String getTherapeuticApproach();
-	
+
 	public boolean isSearchHistoMetastasis();
 
 	public void setSearchHistoMetastasis(boolean b);
-	
+
 	public boolean isSearchMicroArrayData();
 
 	public void setSearchMicroArrayData(boolean b);
-    
-    public boolean isSearchXenograft();
-
-    public void setSearchXenograft(boolean b);
 	
-    public String getTumorClassification();
+	public boolean isSearchImageData();
 
-    public void setTumorClassification(String tumorClassification);
-    
-    public boolean isSearchTransientInterference();
+	public void setSearchImageData(boolean b);	
 
-    public void setSearchTransientInterference(boolean searchTransientInterference);
+	public boolean isSearchToolStrain();
+
+	public void setSearchToolStrain(boolean searchToolStrain);
+
+	public String getExternalSource();
+
+	public void setExternalSource(String externalSource);
+
+	public boolean isSearchXenograft();
+
+	public void setSearchXenograft(boolean b);
+
+	public String getTumorClassification();
+
+	public void setTumorClassification(String tumorClassification);
+
+	public boolean isSearchTransientInterference();
+
+	public void setSearchTransientInterference(
+			boolean searchTransientInterference);
 }

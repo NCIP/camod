@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/05/03 20:02:29  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * Revision 1.18  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -16,43 +19,90 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.19 2006-05-03 20:02:29 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.20 2006-10-17 16:14:36 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-
 
 public class AnimalModel extends AbstractCancerModel {
 
 	private static final long serialVersionUID = 4259665453799404851L;
+
 	private String url;
-	private Boolean isToolMouse;
+
+	private Boolean isToolStrain;
+
+	private String externalSource;
+
+	private String externalSourceIdentifier;
+
 	private Set<CellLine> cellLineCollection = new HashSet<CellLine>();
+
 	private Set<Image> imageCollection = new HashSet<Image>();
+
 	private Set<MicroArrayData> microArrayDataCollection = new HashSet<MicroArrayData>();
+
 	private Set<Xenograft> xenograftCollection = new HashSet<Xenograft>();
+
 	private Set<Therapy> therapyCollection = new HashSet<Therapy>();
+
 	private Set<GeneDelivery> geneDeliveryCollection = new HashSet<GeneDelivery>();
-	private Set<AnimalAvailability> animalAvailabilityCollection = new TreeSet<AnimalAvailability>();    
-    private Set<SpontaneousMutation> spontaneousMutationCollection = new TreeSet<SpontaneousMutation>();
+
+	private Set<AnimalAvailability> animalAvailabilityCollection = new TreeSet<AnimalAvailability>();
+
+	private Set<SpontaneousMutation> spontaneousMutationCollection = new TreeSet<SpontaneousMutation>();
+
 	private Set<Histopathology> histopathologyCollection = new TreeSet<Histopathology>();
+
 	private Set<EngineeredGene> engineeredGeneCollection = new TreeSet<EngineeredGene>();
+
 	private Set<CarcinogenExposure> carcinogenExposureCollection = new HashSet<CarcinogenExposure>();
-    private Set<Morpholino> morpholinoCollection = new HashSet<Morpholino>();    
-    private Set<Log> logCollection = new HashSet<Log>(); 
+
+	private Set<TransientInterference> transientInterferenceCollection = new HashSet<TransientInterference>();
+	
+	private Set<Genotype> genotypeCollection = new HashSet<Genotype>();	
+
+	private Set<Log> logCollection = new HashSet<Log>();
+
 	private RepositoryInfo repositoryInfo;
+
 	private Phenotype phenotype;
-    
+	
+	/**
+	 * @return Returns the genotypeCollection.
+	 */
+	public Set<Genotype> getGenotypeCollection() {
+		return genotypeCollection;
+	}
+
+	/**
+	 * @param genotypeCollection
+	 *            The genotypeCollection to set.
+	 */
+	public void setGenotypeCollection(
+			Set<Genotype> genotypeCollection) {
+		this.genotypeCollection = genotypeCollection;
+	}
+
+	/**
+	 * @param genotypeCollection
+	 *            The genotypeCollection to add.
+	 */
+	public void addGenotype(
+			Genotype genotype) {
+		genotypeCollection.add(genotype);
+	}   
+
 	/**
 	 * @return Returns the engineeredGeneCollection.
 	 */
 	public Set<EngineeredGene> getEngineeredGeneCollection() {
 		return engineeredGeneCollection;
 	}
+
 	/**
 	 * @param engineeredGeneCollection
 	 *            The engineeredGeneCollection to set.
@@ -94,30 +144,31 @@ public class AnimalModel extends AbstractCancerModel {
 		carcinogenExposureCollection.add(carcinogenExposure);
 	}
 
-    /**
-     * @return Returns the morpholinoCollection.
-     */
-    public Set<Morpholino> getMorpholinoCollection() {
-        return morpholinoCollection;
-    }
+	/**
+	 * @return Returns the transientInterferenceCollection.
+	 */
+	public Set<TransientInterference> getTransientInterferenceCollection() {
+		return transientInterferenceCollection;
+	}
 
-    /**
-     * @param morpholinoCollection
-     *            The morpholinoCollection to set.
-     */
-    public void setMorpholinoCollection(
-            Set<Morpholino> morpholinoCollection) {
-        this.morpholinoCollection = morpholinoCollection;
-    }
+	/**
+	 * @param transientInterferenceCollection
+	 *            The transientInterferenceCollection to set.
+	 */
+	public void setTransientInterferenceCollection(
+			Set<TransientInterference> transientInterferenceCollection) {
+		this.transientInterferenceCollection = transientInterferenceCollection;
+	}
 
-    /**
-     * @param morpholinoCollection
-     *            The morpholinoCollection to add.
-     */
-    public void addMorpholino(Morpholino morpholino) {
-        morpholinoCollection.add(morpholino);
-    }    
-    
+	/**
+	 * @param transientInterferenceCollection
+	 *            The transientInterferenceCollection to add.
+	 */
+	public void addTransientInterference(
+			TransientInterference transientInterference) {
+		transientInterferenceCollection.add(transientInterference);
+	}
+
 	/**
 	 * @return Returns the spontaneousMutationCollection.
 	 */
@@ -149,79 +200,77 @@ public class AnimalModel extends AbstractCancerModel {
 		return histopathologyCollection;
 	}
 
-    /**
-     * @param histopathologyCollection
-     *            The histopathologyCollection to set.
-     */
-    public void setHistopathologyCollection(
-            Set<Histopathology> histopathologyCollection) {
-        this.histopathologyCollection = histopathologyCollection;
-    }
+	/**
+	 * @param histopathologyCollection
+	 *            The histopathologyCollection to set.
+	 */
+	public void setHistopathologyCollection(
+			Set<Histopathology> histopathologyCollection) {
+		this.histopathologyCollection = histopathologyCollection;
+	}
 
-    /**
-     * @param histopathology
-     *            The histopathology to add.
-     */
-    public void addHistopathology(Histopathology histopathology) {
-        histopathologyCollection.add(histopathology);
-    }
+	/**
+	 * @param histopathology
+	 *            The histopathology to add.
+	 */
+	public void addHistopathology(Histopathology histopathology) {
+		histopathologyCollection.add(histopathology);
+	}
 
 	/**
 	 * @return Returns the EngineeredGeneCollection.
-	 */
+
 	public Set<String> getDistinctNomenclatureFromEngineeredGeneCollection() {
 
 		Set<String> theSet = new HashSet<String>();
-        Iterator it = theSet.iterator();
-        while(it.hasNext()){
-            EngineeredGene theEngineeredGene = (EngineeredGene)it.next();
-            if (theEngineeredGene.getGenotypeSummary() != null) {
-                String theNomenclature = theEngineeredGene.getGenotypeSummary()
-                        .getNomenclature().getName();
+		Iterator it = theSet.iterator();
+		while (it.hasNext()) {
+			EngineeredGene theEngineeredGene = (EngineeredGene) it.next();
+			if (theEngineeredGene.getGenotype() != null) {
+				String theNomenclature = theEngineeredGene.getGenotype()
+						.getNomenclature().getName();
 
-                if (theNomenclature != null) {
-                    theNomenclature = theNomenclature.trim();
+				if (theNomenclature != null) {
+					theNomenclature = theNomenclature.trim();
 
-                    if (!theSet.contains(theNomenclature)
-                            && theNomenclature.length() > 0) {
-                        theSet.add(theNomenclature);
-                    }
-                }
-            }
-        }        
+					if (!theSet.contains(theNomenclature)
+							&& theNomenclature.length() > 0) {
+						theSet.add(theNomenclature);
+					}
+				}
+			}
+		}
 
 		return theSet;
 	}
-
+	 */
 	/**
 	 * @return Returns the EngineeredGeneCollection.
-	 */
+
 	public Set<String> getDistinctGenotypeFromEngineeredGeneCollection() {
 
 		Set<String> theSet = new HashSet<String>();
-        Iterator it = theSet.iterator();
-        while(it.hasNext()){
-            EngineeredGene theEngineeredGene = (EngineeredGene)it.next();
-            if (theEngineeredGene.getGenotypeSummary() != null) {
-                String theGenotype = theEngineeredGene.getGenotypeSummary()
-                        .getSummary();
+		Iterator it = theSet.iterator();
+		while (it.hasNext()) {
+			EngineeredGene theEngineeredGene = (EngineeredGene) it.next();
+			if (theEngineeredGene.getGenotype() != null) {
+				String theGenotype = theEngineeredGene.getGenotype()
+						.getName();
 
-                if (theGenotype != null) {
-                    theGenotype = theGenotype.trim();
+				if (theGenotype != null) {
+					theGenotype = theGenotype.trim();
 
-                    if (!theSet.contains(theGenotype)
-                            && theGenotype.length() > 0) {
-                        theSet.add(theGenotype);
-                    }
-                }
-            }
-        }        
+					if (!theSet.contains(theGenotype)
+							&& theGenotype.length() > 0) {
+						theSet.add(theGenotype);
+					}
+				}
+			}
+		}
 
 		return theSet;
 	}
-
-
-
+	 */
 	/**
 	 * @return Returns the animalAvailabilityCollection.
 	 */
@@ -271,18 +320,48 @@ public class AnimalModel extends AbstractCancerModel {
 	}
 
 	/**
-	 * @return Returns the isToolMouse.
+	 * @return Returns the isToolStrain.
 	 */
-	public Boolean getIsToolMouse() {
-		return isToolMouse;
+	public Boolean getIsToolStrain() {
+		return isToolStrain;
 	}
 
 	/**
-	 * @param isToolMouse
-	 *            The isToolMouse to set.
+	 * @param isToolStrain
+	 *            The isToolStrain to set.
 	 */
-	public void setIsToolMouse(Boolean isToolMouse) {
-		this.isToolMouse = isToolMouse;
+	public void setIsToolStrain(Boolean isToolStrain) {
+		this.isToolStrain = isToolStrain;
+	}
+
+	/**
+	 * @return Returns the externalSource.
+	 */
+	public String getExternalSource() {
+		return externalSource;
+	}
+
+	/**
+	 * @param externalSource
+	 *            The externalSource to set.
+	 */
+	public void setExternalSource(String externalSource) {
+		this.externalSource = externalSource;
+	}
+
+	/**
+	 * @return Returns the externalSourceIdentifier.
+	 */
+	public String getExternalSourceIdentifier() {
+		return externalSourceIdentifier;
+	}
+
+	/**
+	 * @param externalSourceIdentifier
+	 *            The externalSourceIdentifier to set.
+	 */
+	public void setExternalSourceIdentifier(String externalSourceIdentifier) {
+		this.externalSourceIdentifier = externalSourceIdentifier;
 	}
 
 	/**
@@ -441,29 +520,29 @@ public class AnimalModel extends AbstractCancerModel {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-    
-    /**
-     * @return Returns the logCollection.
-     */
-    public Set<Log> getLogCollection() {
-        return logCollection;
-    }
-        
-    /**
-     * @param logCollection
-     *            The logCollection to set.
-     */
-    public void setLogCollection(Set<Log> logCollection) {
-        this.logCollection = logCollection;
-    }
 
-    /**
-     * @param log
-     *            The log to add.
-     */
-    public void addLog(Log log) {
-        logCollection.add(log);
-    }    
+	/**
+	 * @return Returns the logCollection.
+	 */
+	public Set<Log> getLogCollection() {
+		return logCollection;
+	}
+
+	/**
+	 * @param logCollection
+	 *            The logCollection to set.
+	 */
+	public void setLogCollection(Set<Log> logCollection) {
+		this.logCollection = logCollection;
+	}
+
+	/**
+	 * @param log
+	 *            The log to add.
+	 */
+	public void addLog(Log log) {
+		logCollection.add(log);
+	}
 
 	/**
 	 * @see java.lang.Object#toString()

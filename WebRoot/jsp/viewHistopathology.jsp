@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2006/05/19 17:35:40  georgeda
+ * Fixed bug introduced in 2.1 OM change
+ *
  * Revision 1.29  2006/04/28 19:50:13  schroedn
  * Defect #55
  * Added Keyword Highlighting to this jsp
@@ -33,7 +36,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.30 2006-05-19 17:35:40 georgeda Exp $
+ * $Id: viewHistopathology.jsp,v 1.31 2006-10-17 16:08:28 pandyas Exp $
  *
  */   
 %>
@@ -164,7 +167,14 @@
 				<td class="resultsBoxGreyEnd" width="75%">
 					<camod:highlight><c:out value="${h.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/></camod:highlight>
 				</td>
-			</tr>			
+			</tr>
+			
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Detection</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
+					<camod:highlight><c:out value="${h.ageOfDetection}"/>&nbsp;<c:out value="${h.ageOfDetectionUnit}"/></camod:highlight>
+				</td>
+			</tr>						
 	
 			<tr>
 				<td class="resultsBoxWhite" width="25%">

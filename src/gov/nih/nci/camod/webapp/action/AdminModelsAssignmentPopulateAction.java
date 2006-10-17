@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminModelsAssignmentPopulateAction.java,v 1.6 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: AdminModelsAssignmentPopulateAction.java,v 1.7 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.5  2005/10/24 13:28:17  georgeda
  * Cleanup changes
  *
@@ -57,7 +60,7 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
 			HttpServletResponse inResponse) throws Exception {
 
-		log.trace("Entering execute");
+		log.info("<AdminModelsAssignmentPopulateAction> Entering execute");
 
 		CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
 		
@@ -67,13 +70,14 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 					Constants.Admin.MODEL_CURATION_WORKFLOW);
 
 			if (theForm.getCurrentState() != null) {
+				log.info("theForm.getCurrentState(): " + theForm.getCurrentState());
 
 				AnimalModel theQBEModel = new AnimalModel();
 				theQBEModel.setState(theForm.getCurrentState());
 
 				// Get the models
 				List theModels = Search.query(theQBEModel);
-
+				log.info("theModels.size(): " + theModels.size());
 				// Create a display list
 				List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
 

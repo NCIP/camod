@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityAction.java,v 1.7 2005-12-09 16:28:03 pandyas Exp $
+ * $Id: AvailabilityAction.java,v 1.8 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/12/09 16:28:03  pandyas
+ * Modified edit succesfull message during unit test writing - it used to display creation message
+ *
  * Revision 1.6  2005/11/09 00:17:25  georgeda
  * Fixed delete w/ constraints
  *
@@ -67,8 +70,9 @@ public class AvailabilityAction extends BaseAction {
 		// Grab the current aAvailabilityID from the session
 		String aAvailabilityID = request.getParameter("aAvailabilityID");
 
-		System.out.println("<AvailabilityAction edit> following Characteristics:" + "\n\t name: "
-				+ availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
+		System.out.println("<AvailabilityAction edit> following Characteristics:" 
+				+ "\n\t name: " + availabilityForm.getName() 
+				+ "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		/* Create all the manager objects needed for Screen */
@@ -136,14 +140,16 @@ public class AvailabilityAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 
 		log.info("<AvailabilityAction> Entering save");
-
+		
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
 		// Create a form to edit
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-		log.info("<AvailabilityAction edit> following Characteristics:" + "\n\t name: " + availabilityForm.getName()
+		log.info("<AvailabilityAction save> following Characteristics:" 
+				+ "\n\t lab source: " + availabilityForm.getSource()
+				+ "\n\t name: " + availabilityForm.getName()
 				+ "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
 				+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 

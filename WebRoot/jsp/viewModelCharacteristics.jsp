@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.29 2006-05-23 18:16:55 georgeda Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.30 2006-10-17 16:08:28 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.29  2006/05/23 18:16:55  georgeda
+  *   Cleaned up species/strain display
+  *
   *   Revision 1.28  2006/05/22 15:57:36  pandyas
   *   Added code to display isToolMouse only when species is Mus musculus
   *
@@ -35,6 +38,7 @@
   *   Revision 1.19  2005/11/16 15:31:35  georgeda
   *   Defect #41. Clean up of email functionality
   *
+  *
   */
 %>
 <%@ include file="/jsp/header.jsp" %>
@@ -62,43 +66,40 @@
 		</tr>
 		<tr>
 			<td class="GreyBox" width="20%"><b>Model Descriptor</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="GreyBoxRightEnd" width="70%">
 				<camod:highlight>			
 				    <c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 				</camod:highlight>
 			</td>			
 		</tr>
-		
-		<tr>
+
+		<tr>			
 			<td class="WhiteBox" width="20%"><b>Official Nomenclature</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="WhiteBoxRightEnd" width="70%">
 				<camod:highlight>
-					<c:set var="items" value="${mdl.distinctNomenclatureFromEngineeredGeneCollection}"/>
-					<logic:notEmpty name="items">
-					<ul>    
-						<c:forEach var="item" items="${items}" varStatus="stat">
-						<li> <c:out value="${item}" escapeXml="false"/> </li>
-						</c:forEach>
-					</ul>
-					</logic:notEmpty>
-					<logic:empty name="items">
-					    <br/>
-					</logic:empty>
+					<c:forEach var="gcol" items="${mdl.genotypeCollection}" varStatus="stat2">
+					<c:set var="item" value="${gcol.nomenclature}"/>
+						<logic:notEmpty name="item">
+							<li> <c:out value="${item.name}"/> </li>
+						</logic:notEmpty>
+						<logic:empty name="item">
+					    	<br/>
+						</logic:empty>
+					</c:forEach>											
 				</camod:highlight>
 			</td>
 		</tr>
 
+
 		<tr>
 			<td class="GreyBox" width="20%"><b>Genotype</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="GreyBoxRightEnd" width="70%">
 				<camod:highlight>
-				    <c:set var="items" value="${mdl.distinctGenotypeFromEngineeredGeneCollection}"/>
+				    <c:set var="items" value="${mdl.genotypeCollection}"/>
 				    <logic:notEmpty name="items">
-					<ul>    
 						<c:forEach var="item" items="${items}" varStatus="stat">
-						<li> <c:out value="${item}"/> </li>
+						<li> <c:out value="${item.name}"/> </li>
 						</c:forEach>
-					</ul>
 					</logic:notEmpty>
 					<logic:empty name="items">
 					    <br/>
@@ -109,7 +110,7 @@
 
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Species</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="WhiteBoxRightEnd" width="70%">
 				<camod:highlight>
 					<c:out value="${mdl.strain.species.displayName}"/>
 				</camod:highlight>					
@@ -118,7 +119,7 @@
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="GreyBoxRightEnd" width="70%">
 				<camod:highlight>
 				    <c:out value="${mdl.strain.displayName}"/>&nbsp;
 				</camod:highlight>
@@ -128,10 +129,10 @@
 		<tr>
 			<c:choose>
 				<c:when test="${mdl.strain.species.scientificName == 'Mus musculus'}">		
-					<td class="WhiteBox" width="20%"><b>Is This a Tool Mouse?</b></td>
-					<td class="WhiteBoxRightEnd" width="80%">
+					<td class="WhiteBox" width="30%"><b>Is This a Tool Strain?</b></td>
+					<td class="WhiteBoxRightEnd" width="70%">
 						<c:choose>						
-							<c:when test = "${mdl.isToolMouse == true}">
+							<c:when test = "${mdl.isToolStrain == true}">
 								<c:out value="Yes"/>
 							</c:when>
 							<c:otherwise>
@@ -145,7 +146,7 @@
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Experimental Design</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="GreyBoxRightEnd" width="70%">
 				<P>
 					<camod:highlight>
 					    <c:out value="${mdl.experimentDesign}" escapeXml="false" />&nbsp;
@@ -156,7 +157,7 @@
 
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Phenotype</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="WhiteBoxRightEnd" width="70%">
 				<P>
 					<camod:highlight>
 						<c:out value="${mdl.phenotype.description}" escapeXml="false"/>
@@ -166,7 +167,7 @@
 		</tr>		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Website for add. info</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="GreyBoxRightEnd" width="70%">
 				<P>
 					<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;					
 				</P>
@@ -174,7 +175,7 @@
 		</tr>		
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Breeding Notes</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="WhiteBoxRightEnd" width="70%">
 				<P>
 					<camod:highlight>
 						<c:out value="${mdl.phenotype.breedingNotes}"/>&nbsp;
@@ -185,7 +186,7 @@
 
 		<tr>
 			<td class="GreyBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="GreyBoxRightEnd" width="70%">
 				<camod:highlight>
 					<c:out value="${mdl.phenotype.sexDistribution.type}"/>&nbsp;
 				</camod:highlight>
@@ -194,20 +195,20 @@
         
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Submitted by</b></td>
-			<td class="WhiteBoxRightEnd" width="80%">
+			<td class="WhiteBoxRightEnd" width="70%">
 			    <c:if test="${not empty mdl.submitter.emailAddress}">
-				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>">
+				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>"></a>
 				</c:if>
 				<c:out value="${mdl.submitter.displayName}"/>
 				<c:if test="${not empty mdl.submitter.emailAddress}">
-				    </a>
+				    
 				</c:if>			
 			</td>
 		</tr>
                   
 		<tr>
 			<td class="GreyBox" width="20%"><b>Principal Investigator / Lab</b></td>
-			<td class="GreyBoxRightEnd" width="80%">
+			<td class="GreyBoxRightEnd" width="70%">
 				<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
 				    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
 				</c:if>
@@ -223,7 +224,8 @@
         <tr>
 			<td class="formTitle" height="20" colspan="2">Model Availability: This model is available from</td>
 		</tr>
-		<tr><td colspan="2"><table cellpadding="5" cellspacing="0" border="0" width="100%">
+		<tr><td colspan="2">
+			<table cellpadding="5" cellspacing="0" border="0" width="100%">
 		<tr>
 			<td class="formTitleBlue" width="30%">Strain</td>				
 			<td class="formTitleBlue" width="45%">Distributor</td>
@@ -311,9 +313,8 @@
 				</td>
 			</tr>
 		</c:forEach>
-		</table></td></tr>
-
 		</c:if>
+		</table></td></tr>
 		
 		<tr><td>&nbsp;</td></tr>
 		<% pageContext.setAttribute(Parameters.MODELSECTIONVALUE, Pages.MODEL_CHARACTERISTICS); %>

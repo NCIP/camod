@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AbstractCurationManager.java,v 1.12 2006-05-08 13:32:15 georgeda Exp $
+ * $Id: AbstractCurationManager.java,v 1.13 2006-10-17 16:13:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/05/08 13:32:15  georgeda
+ * Clean up warnings
+ *
  * Revision 1.11  2006/01/18 14:24:23  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -82,7 +85,7 @@ public abstract class AbstractCurationManager implements CurationManager
             // Invalid event. 
             if (theNextState.equals(""))
             {
-                throw new IllegalArgumentException("No matching state for event:" + inEvent);
+                throw new IllegalArgumentException("No matching state for event: " + inEvent);
             }
 
             return theNextState;
@@ -239,7 +242,7 @@ public abstract class AbstractCurationManager implements CurationManager
             theStateList.add(theState.getName());
         }
 
-        log.info("State list: " + theStateList);
+        log.debug("State list: " + theStateList);
 
         log.trace("Exiting getAllStateNames");
 
@@ -269,16 +272,20 @@ public abstract class AbstractCurationManager implements CurationManager
     public void changeState(Curateable inCurateableObj,
                             String inEvent)
     {
-        log.trace("Entering changeState");
-
+        log.info("Entering changeState");
+        log.info("inEvent: " + inEvent);
+        
         String theCurrentStateName = inCurateableObj.getState();
-
-        log.debug("Current state: (" + theCurrentStateName + ")");
+        log.info("Current state: (" + theCurrentStateName + ")");
 
         if (myStates.containsKey(theCurrentStateName))
         {
             State theCurrentState = (State) myStates.get(theCurrentStateName);
+            log.info("Current state: (" + theCurrentStateName + ")");
+            
             String theNextStateName = theCurrentState.getNextState(inEvent);
+            log.info("theNextStateName: (" + theNextStateName + ")");
+            
 
             if (theNextStateName.equals(""))
             {
@@ -286,7 +293,7 @@ public abstract class AbstractCurationManager implements CurationManager
             }
             else if (myStates.containsKey(theNextStateName))
             {
-                log.debug("Setting to state: " + theNextStateName);
+                log.info("Setting to state: " + theNextStateName);
                 inCurateableObj.setState(theNextStateName);
             }
             else
@@ -311,11 +318,11 @@ public abstract class AbstractCurationManager implements CurationManager
     public void applyActionsForState(Curateable inCurateableObj,
                                      Map<String, Object> inArgs)
     {
-        log.trace("Entering applyActionsForState");
+        log.info("Entering applyActionsForState");
 
         String theCurrentStateName = inCurateableObj.getState();
 
-        log.debug("Current state: (" + theCurrentStateName + ")");
+        log.info("Current state: (" + theCurrentStateName + ")");
 
         if (myStates.containsKey(theCurrentStateName))
         {
@@ -355,7 +362,7 @@ public abstract class AbstractCurationManager implements CurationManager
                 // Execute the action
                 if (theAction != null)
                 {
-                    log.debug("Applying action: " + theActionEntry);
+                    log.info("Applying action: " + theActionEntry);
 
                     // Actions by default are not show stoppers if they
                     // don't work
@@ -376,7 +383,7 @@ public abstract class AbstractCurationManager implements CurationManager
             throw new IllegalArgumentException("Unknown current state: " + theCurrentStateName);
         }
 
-        log.trace("Exiting applyActionsForState");
+        log.info("Exiting applyActionsForState");
 
         return;
     }

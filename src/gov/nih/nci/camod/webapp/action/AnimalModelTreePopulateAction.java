@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.41 2006-05-03 20:04:37 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.42 2006-10-17 16:11:00 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.41  2006/05/03 20:04:37  pandyas
+ *  Modified to add Morpholino object data to application
+ *
  *  Revision 1.40  2006/04/19 15:09:16  georgeda
  *  Fixed issue w/ display of induced mutation
  *
@@ -108,375 +111,395 @@ import org.apache.struts.action.*;
  * Populate the lists necessary to display an animal model.
  * 
  */
-public class AnimalModelTreePopulateAction extends BaseAction
-{
+public class AnimalModelTreePopulateAction extends BaseAction {
 
-    /**
-     * Create the links for the submission subMenu
-     * 
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    public ActionForward execute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) throws Exception
-    {
+	/**
+	 * Create the links for the submission subMenu
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 
-        System.out.println("<AnimalModelTreePopulateAction populate> Entering... ");
+		System.out
+				.println("<AnimalModelTreePopulateAction populate> Entering... ");
 
-        // Grab the current modelID from the session
-        String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
+		// Grab the current modelID from the session
+		String modelID = (String) request.getSession().getAttribute(
+				Constants.MODELID);
 
-        AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
-        // Transfer back to request scope
-        Object theErrors = request.getSession().getAttribute(org.apache.struts.Globals.ERROR_KEY);
-        request.getSession().setAttribute(org.apache.struts.Globals.ERROR_KEY, null);
+		// Transfer back to request scope
+		Object theErrors = request.getSession().getAttribute(
+				org.apache.struts.Globals.ERROR_KEY);
+		request.getSession().setAttribute(org.apache.struts.Globals.ERROR_KEY,
+				null);
 
-        if (theErrors != null)
-        {
-            request.setAttribute(org.apache.struts.Globals.ERROR_KEY, theErrors);
-        } //end of if
+		if (theErrors != null) {
+			request
+					.setAttribute(org.apache.struts.Globals.ERROR_KEY,
+							theErrors);
+		} // end of if
 
-        try
-        {
+		try {
 
-            AnimalModel animalModel = animalModelManager.get(modelID);
+			AnimalModel animalModel = animalModelManager.get(modelID);
 
-            // Retrieve a list of all publications assoicated with this Animal
-            // model
-            Set publicationSet = animalModel.getPublicationCollection();
-            Iterator it = publicationSet.iterator();
-            List<Publication> pubList = new ArrayList<Publication>();
+			// Retrieve a list of all publications assoicated with this Animal
+			// model
+			Set publicationSet = animalModel.getPublicationCollection();
+			Iterator it = publicationSet.iterator();
+			List<Publication> pubList = new ArrayList<Publication>();
 
-            while (it.hasNext())
-            {
-                Publication pub = (Publication) it.next();
-                pubList.add(pub);
-            }
+			while (it.hasNext()) {
+				Publication pub = (Publication) it.next();
+				pubList.add(pub);
+			}
 
-            // Print the list of GeneDelivery viralVectors for the Gene Delivery
-            // (Cardiogenic Intervention) Section
-            Set geneDeliverySet = animalModel.getGeneDeliveryCollection();
-            it = geneDeliverySet.iterator();
-            List<GeneDelivery> geneList = new ArrayList<GeneDelivery>();
+			// Print the list of GeneDelivery viralVectors for the Gene Delivery
+			// (Cardiogenic Intervention) Section
+			Set geneDeliverySet = animalModel.getGeneDeliveryCollection();
+			it = geneDeliverySet.iterator();
+			List<GeneDelivery> geneList = new ArrayList<GeneDelivery>();
 
-            while (it.hasNext())
-            {
-                GeneDelivery geneDelivery = (GeneDelivery) it.next();
-                geneList.add(geneDelivery);
-            }
+			while (it.hasNext()) {
+				GeneDelivery geneDelivery = (GeneDelivery) it.next();
+				geneList.add(geneDelivery);
+			}
 
-            // Retrieve a list of all cell lines assoicated with this Animal
-            // model
-            Set cellLineSet = animalModel.getCellLineCollection();
-            it = cellLineSet.iterator();
-            List<CellLine> cellList = new ArrayList<CellLine>();
+			// Retrieve a list of all cell lines assoicated with this Animal
+			// model
+			Set cellLineSet = animalModel.getCellLineCollection();
+			it = cellLineSet.iterator();
+			List<CellLine> cellList = new ArrayList<CellLine>();
 
-            while (it.hasNext())
-            {
-                CellLine cellLine = (CellLine) it.next();
-                cellList.add(cellLine);
-            }
+			while (it.hasNext()) {
+				CellLine cellLine = (CellLine) it.next();
+				cellList.add(cellLine);
+			}
 
-            // Retrieve a list of all Morpholinos associated with this Animal
-            // model
-            Set morpholinoSet = animalModel.getMorpholinoCollection();
-            it = morpholinoSet.iterator();
-            List<Morpholino> morpholinoList = new ArrayList<Morpholino>();
-            
-            while (it.hasNext())
-            {
-                Morpholino morpholino = (Morpholino) it.next();
-                morpholinoList.add(morpholino);
-            }
-            
-            // Retrieve a list of all availablty entries assoicated with this
-            // Animal model
-            Set availabilitySet = animalModel.getAnimalAvailabilityCollection();
-            it = availabilitySet.iterator();
-            List<AnimalAvailability> investigatorList = new ArrayList<AnimalAvailability>();
-            List<AnimalAvailability> jacksonLabList = new ArrayList<AnimalAvailability>();
-            List<AnimalAvailability> mmhccList = new ArrayList<AnimalAvailability>();
-            List<AnimalAvailability> imsrList = new ArrayList<AnimalAvailability>();
+			// Retrieve a list of all Morpholinos associated with this Animal
+			// model
+			Set transientInterferenceSet = animalModel
+					.getTransientInterferenceCollection();
+			it = transientInterferenceSet.iterator();
+			List<TransientInterference> morpholinoList = new ArrayList<TransientInterference>();
+			List<TransientInterference> sirnaList = new ArrayList<TransientInterference>();
 
-            while (it.hasNext())
-            {
-                AnimalAvailability availability = (AnimalAvailability) it.next();
-                if (availability.getAnimalDistributor() != null)
-                {
-                    if (availability.getAnimalDistributor().getName().equals("Jackson Laboratory"))
-                    {
+			while (it.hasNext()) {
+				TransientInterference transInt = (TransientInterference) it
+						.next();
+				if (transInt.getTransientInterferenceMethod() != null) {
+					if (transInt.getTransientInterferenceMethod()
+							.getConceptCode().equals("C60700")) {
+						morpholinoList.add(transInt);
+					} else if (transInt.getTransientInterferenceMethod()
+							.getConceptCode().equals("C2191")) {
+						sirnaList.add(transInt);
+					}
+				}
+			}
 
-                        System.out.println("\tAdded Jackson Laboratory Availability = " + availability);
-                        jacksonLabList.add(availability);
-                    }
-                    if (availability.getAnimalDistributor().getName().equals("Investigator"))
-                    {
+			// Retrieve a list of all availablty entries assoicated with this
+			// Animal model
+			Set availabilitySet = animalModel.getAnimalAvailabilityCollection();
+			it = availabilitySet.iterator();
+			List<AnimalAvailability> investigatorList = new ArrayList<AnimalAvailability>();
+			List<AnimalAvailability> jacksonLabList = new ArrayList<AnimalAvailability>();
+			List<AnimalAvailability> mmhccList = new ArrayList<AnimalAvailability>();
+			List<AnimalAvailability> imsrList = new ArrayList<AnimalAvailability>();
 
-                        System.out.println("\tAdded Investigator Availability = " + availability);
-                        investigatorList.add(availability);
-                    }
+			while (it.hasNext()) {
+				AnimalAvailability availability = (AnimalAvailability) it
+						.next();
+				if (availability.getAnimalDistributor() != null) {
+					if (availability.getAnimalDistributor().getName().equals(
+							"Jackson Laboratory")) {
 
-                    if (availability.getAnimalDistributor().getName().equals("MMHCC Repository"))
-                    {
+						System.out.println("\tAdded Jackson Laboratory Availability = "
+										+ availability);
+						jacksonLabList.add(availability);
+					}
+					if (availability.getAnimalDistributor().getName().equals(
+							"Investigator")) {
 
-                        System.out.println("\tAdded MMHCC Repository Availability = " + availability);
-                        mmhccList.add(availability);
-                    }
-                    if (availability.getAnimalDistributor().getName().equals("IMSR"))
-                    {
+						System.out.println("\tAdded Investigator Availability = "
+										+ availability);
+						investigatorList.add(availability);
+					}
 
-                        System.out.println("\tAdded IMSR Repository Availability = " + availability);
-                        imsrList.add(availability);
-                    }
-                }
-            }
+					if (availability.getAnimalDistributor().getName().equals(
+							"MMHCC Repository")) {
 
-            // Retrive the list of all Xenograft transplants assoicated with
-            // this Animal Model
-            Set xenograftSet = animalModel.getXenograftCollection();
-            it = xenograftSet.iterator();
-            List<Xenograft> xenoList = new ArrayList<Xenograft>();
+						System.out.println("\tAdded MMHCC Repository Availability = "
+										+ availability);
+						mmhccList.add(availability);
+					}
+					if (availability.getAnimalDistributor().getName().equals(
+							"IMSR")) {
 
-            while (it.hasNext())
-            {
-                Xenograft xenograft = (Xenograft) it.next();
-                xenoList.add(xenograft);
-            }
+						System.out.println("\tAdded IMSR Repository Availability = "
+										+ availability);
+						imsrList.add(availability);
+					}
+				}
+			}
 
-            // Retrieve a list of all Histopathology entries associated with this Animal model			
-            Set histopathologySet = animalModel.getHistopathologyCollection();
-            it = histopathologySet.iterator();
-            List<Histopathology> histopathList = new ArrayList<Histopathology>();
-            // The associatedMetatasisList and clinMarkerList are populated in subSubmit.jsp
-            List<Histopathology> associatedMetatasisList = new ArrayList<Histopathology>();
-            List<Histopathology> clinicalMarkerList = new ArrayList<Histopathology>();
+			// Retrive the list of all Xenograft transplants assoicated with
+			// this Animal Model
+			Set xenograftSet = animalModel.getXenograftCollection();
+			it = xenograftSet.iterator();
+			List<Xenograft> xenoList = new ArrayList<Xenograft>();
 
-            while (it.hasNext())
-            {
-                Histopathology histopathology = (Histopathology) it.next();
-                histopathList.add(histopathology);
-            }
+			while (it.hasNext()) {
+				Xenograft xenograft = (Xenograft) it.next();
+				xenoList.add(xenograft);
+			}
 
-            // Retrieve the list all SpontaneousMutations assoc with this
-            // AnimalModel
-            Set spontaneousMutationSet = animalModel.getSpontaneousMutationCollection();
-            it = spontaneousMutationSet.iterator();
-            List<SpontaneousMutation> mutationList = new ArrayList<SpontaneousMutation>();
+			// Retrieve a list of all Histopathology entries associated with
+			// this Animal model
+			Set histopathologySet = animalModel.getHistopathologyCollection();
+			it = histopathologySet.iterator();
+			List<Histopathology> histopathList = new ArrayList<Histopathology>();
+			// The associatedMetatasisList and clinMarkerList are populated in
+			// subSubmit.jsp
+			List<Histopathology> associatedMetatasisList = new ArrayList<Histopathology>();
+			List<Histopathology> clinicalMarkerList = new ArrayList<Histopathology>();
 
-            while (it.hasNext())
-            {
-                SpontaneousMutation spontaneousMutation = (SpontaneousMutation) it.next();
-                mutationList.add(spontaneousMutation);
-            }
+			while (it.hasNext()) {
+				Histopathology histopathology = (Histopathology) it.next();
+				histopathList.add(histopathology);
+			}
 
-            // Retrieve the list all EngineeredGenes assoc with this AnimalModel
-            Set engineeredGeneSet = animalModel.getEngineeredGeneCollection();
-            System.out.println("<AnimalModelTreePopulateAction> Building engineeredGeneSet Tree ...");
-            it = engineeredGeneSet.iterator();
+			// Retrieve the list all SpontaneousMutations assoc with this
+			// AnimalModel
+			Set spontaneousMutationSet = animalModel
+					.getSpontaneousMutationCollection();
+			it = spontaneousMutationSet.iterator();
+			List<SpontaneousMutation> mutationList = new ArrayList<SpontaneousMutation>();
 
-            List<InducedMutation> inducedList = new ArrayList<InducedMutation>();
-            List<TargetedModification> targetedList = new ArrayList<TargetedModification>();
-            List<GenomicSegment> segmentList = new ArrayList<GenomicSegment>();
-            List<Transgene> engineeredList = new ArrayList<Transgene>();
-            List associatedExpressionList = new ArrayList();
+			while (it.hasNext()) {
+				SpontaneousMutation spontaneousMutation = (SpontaneousMutation) it
+						.next();
+				mutationList.add(spontaneousMutation);
+			}
 
-            while (it.hasNext())
-            {
-                System.out.println("<AnimalModelTreePopulateAction> inside while EG loop ...");
-                EngineeredGene engineeredGene = (EngineeredGene) it.next();
-                if (engineeredGene instanceof InducedMutation)
-                {
-                    System.out.println("Added InducedMutation to left menu ...");
-                    inducedList.add((InducedMutation) engineeredGene);
-                }
+			// Retrieve the list all EngineeredGenes assoc with this AnimalModel
+			Set engineeredGeneSet = animalModel.getEngineeredGeneCollection();
+			System.out
+					.println("<AnimalModelTreePopulateAction> Building engineeredGeneSet Tree ...");
+			it = engineeredGeneSet.iterator();
 
-                else if (engineeredGene instanceof TargetedModification)
-                {
-                    System.out.println("Added TargetedModification to left menu ...");
-                    targetedList.add((TargetedModification) engineeredGene);
-                }
+			List<InducedMutation> inducedList = new ArrayList<InducedMutation>();
+			List<TargetedModification> targetedList = new ArrayList<TargetedModification>();
+			List<GenomicSegment> segmentList = new ArrayList<GenomicSegment>();
+			List<Transgene> engineeredList = new ArrayList<Transgene>();
+			List associatedExpressionList = new ArrayList();
 
-                else if (engineeredGene instanceof GenomicSegment)
-                {
-                    System.out.println("Added GenomicSegment to left menu ...");
-                    segmentList.add((GenomicSegment) engineeredGene);
-                }
+			while (it.hasNext()) {
+				System.out.println("<AnimalModelTreePopulateAction> inside while EG loop ...");
+				EngineeredGene engineeredGene = (EngineeredGene) it.next();
+				if (engineeredGene instanceof InducedMutation) {
+					System.out.println("Added InducedMutation to left menu ...");
+					inducedList.add((InducedMutation) engineeredGene);
+				}
 
-                else if (engineeredGene instanceof Transgene)
-                {
-                    System.out.println("Added Transgene to left menu ...");
-                    engineeredList.add((Transgene) engineeredGene);
-                }
-                else {
-                    
-                }
-            }
+				else if (engineeredGene instanceof TargetedModification) {
+					System.out.println("Added TargetedModification to left menu ...");
+					targetedList.add((TargetedModification) engineeredGene);
+				}
 
+				else if (engineeredGene instanceof GenomicSegment) {
+					System.out.println("Added GenomicSegment to left menu ...");
+					segmentList.add((GenomicSegment) engineeredGene);
+				}
 
-            // Retrieve List of Images in Images Category
-            Set imageCollection = animalModel.getImageCollection();
+				else if (engineeredGene instanceof Transgene) {
+					System.out.println("Added Transgene to left menu ...");
+					engineeredList.add((Transgene) engineeredGene);
+				} else {
 
-            // Print the list of Therapies for the Therapy 
-            // Interventions Section
-            Set tySet = animalModel.getTherapyCollection();
-            it = tySet.iterator();
-            List<Therapy> therapyList = new ArrayList<Therapy>();
+				}
+			}
 
-            System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
+			// Retrieve List of Images in Images Category
+			Set imageCollection = animalModel.getImageCollection();
 
-            if (tySet == null || tySet.size() == 0)
-            {
-                System.out.println("<AnimalModelTreePopulateAction populate> no Therapy to add!");
-            }
-            else
-            {
-                while (it.hasNext())
-                {
-                    Therapy ty = (Therapy) it.next();
-                    Agent agent = ty.getAgent();
-                    if (agent != null)
-                    {
-                        // System.out.println("\tAdded therapy to therapyList");
-                        therapyList.add(ty);
-                    }
-                }
+			// Print the list of Therapies for the Therapy
+			// Interventions Section
+			Set tySet = animalModel.getTherapyCollection();
+			it = tySet.iterator();
+			List<Therapy> therapyList = new ArrayList<Therapy>();
 
+			System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
 
-            } //end of else
+			if (tySet == null || tySet.size() == 0) {
+				System.out.println("<AnimalModelTreePopulateAction populate> no Therapy to add!");
+			} else {
+				while (it.hasNext()) {
+					Therapy ty = (Therapy) it.next();
+					Agent agent = ty.getAgent();
+					if (agent != null) {
+						// System.out.println("\tAdded therapy to therapyList");
+						therapyList.add(ty);
+					}
+				}
 
-            // Print the list of EnvironmentalFactors for the Cardiogenic
-            // Exposure Section
-            Set ceSet = animalModel.getCarcinogenExposureCollection();
-            it = ceSet.iterator();
+			} // end of else
 
-            List<CarcinogenExposure> surgeryList = new ArrayList<CarcinogenExposure>();
-            List<CarcinogenExposure> hormoneList = new ArrayList<CarcinogenExposure>();
-            List<CarcinogenExposure> growthFactorList = new ArrayList<CarcinogenExposure>();
-            List<CarcinogenExposure> viraltreatmentList = new ArrayList<CarcinogenExposure>();
-            List<CarcinogenExposure> chemicaldrugList = new ArrayList<CarcinogenExposure>();
-            List<CarcinogenExposure> environFactorList = new ArrayList<CarcinogenExposure>();
-            List<CarcinogenExposure> radiationList = new ArrayList<CarcinogenExposure>();
-            List<CarcinogenExposure> nutritionalFactorList = new ArrayList<CarcinogenExposure>();
+			// Print the list of EnvironmentalFactors for the Cardiogenic
+			// Exposure Section
+			Set ceSet = animalModel.getCarcinogenExposureCollection();
+			it = ceSet.iterator();
 
-            if (ceSet.size() == 0)
-            {
-                System.out.println("<AnimalModelTreePopulateAction populate> no CarcinogenExposure to add!");
-            }
-            else
-            {
-                while (it.hasNext())
-                {
-                    CarcinogenExposure ce = (CarcinogenExposure) it.next();
-                    EnvironmentalFactor ef = ce.getEnvironmentalFactor();
-                    if (ef != null)
-                    {
-                        if (ef.getType().equals("Other"))
-                        {
-                            System.out.println("\tAdded CarcinogenExposure to surgeryList");
-                            surgeryList.add(ce);
-                        }
-                        if (ef.getType().equals("Hormone"))
-                        {
-                            System.out.println(" CarcinogenExposure to hormoneList");
-                            hormoneList.add(ce);
-                        } //end of if
-                        if (ef.getType().equals("Growth Factor"))
-                        {
-                            System.out.println("\tAdded CarcinogenExposure to growthFactorList");
-                            growthFactorList.add(ce);
-                        } //end of if
-                        if (ef.getType().equals("Viral"))
-                        {
-                            System.out.println("\tAdded CarcinogenExposure to viraltreatmentList");
-                            viraltreatmentList.add(ce);
-                        } //end of if
-                        if (ef.getType().equals("Chemical / Drug"))
-                        {
-                            System.out.println("\tAdded CarcinogenExposure to chemicaldrugList");
-                            chemicaldrugList.add(ce);
-                        } //end of if
-                        if (ef.getType().equals("Environment"))
-                        {
-                            System.out.println("\tAdded CarcinogenExposure to environFactorList");
-                            environFactorList.add(ce);
-                        } //end of if
+			List<CarcinogenExposure> surgeryList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> hormoneList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> growthFactorList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> viraltreatmentList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> chemicaldrugList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> environFactorList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> radiationList = new ArrayList<CarcinogenExposure>();
+			List<CarcinogenExposure> nutritionalFactorList = new ArrayList<CarcinogenExposure>();
 
-                        if (ef.getType().equals("Nutrition"))
-                        {
-                            System.out.println("\tAdded CarcinogenExposure to nutritionalFactorList");
-                            nutritionalFactorList.add(ce);
-                        } //end of if
+			if (ceSet.size() == 0) {
+				System.out.println("<AnimalModelTreePopulateAction populate> no CarcinogenExposure to add!");
+			} else {
+				while (it.hasNext()) {
+					CarcinogenExposure ce = (CarcinogenExposure) it.next();
+					EnvironmentalFactor ef = ce.getEnvironmentalFactor();
+					if (ef != null) {
+						if (ef.getType().equals("Other")) {
+							System.out.println("\tAdded CarcinogenExposure to surgeryList");
+							surgeryList.add(ce);
+						}
+						if (ef.getType().equals("Hormone")) {
+							System.out.println(" CarcinogenExposure to hormoneList");
+							hormoneList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Growth Factor")) {
+							System.out.println("\tAdded CarcinogenExposure to growthFactorList");
+							growthFactorList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Viral")) {
+							System.out.println("\tAdded CarcinogenExposure to viraltreatmentList");
+							viraltreatmentList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Chemical / Drug")) {
+							System.out.println("\tAdded CarcinogenExposure to chemicaldrugList");
+							chemicaldrugList.add(ce);
+						} // end of if
+						if (ef.getType().equals("Environment")) {
+							System.out.println("\tAdded CarcinogenExposure to environFactorList");
+							environFactorList.add(ce);
+						} // end of if
 
-                        if (ef.getType().equals("Radiation"))
-                        {
-                            System.out.println("\tAdded CarcinogenExposure to radiationList");
-                            radiationList.add(ce);
-                        } //end of if
-                    }
-                }
+						if (ef.getType().equals("Nutrition")) {
+							System.out.println("\tAdded CarcinogenExposure to nutritionalFactorList");
+							nutritionalFactorList.add(ce);
+						} // end of if
 
-            } //end of else
+						if (ef.getType().equals("Radiation")) {
+							System.out.println("\tAdded CarcinogenExposure to radiationList");
+							radiationList.add(ce);
+						} // end of if
+					}
+				}
 
-            /* CarcinogenExposure Lists */
-            request.getSession().setAttribute(Constants.Submit.GROWTHFACTORS_LIST, growthFactorList);
-            request.getSession().setAttribute(Constants.Submit.HORMONE_LIST, hormoneList);
-            request.getSession().setAttribute(Constants.Submit.SURGERYOTHER_LIST, surgeryList);
-            request.getSession().setAttribute(Constants.Submit.VIRALTREATMENT_LIST, viraltreatmentList);
-            request.getSession().setAttribute(Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList);
-            request.getSession().setAttribute(Constants.Submit.ENVIRONMENTALFACTOR_LIST, environFactorList);
-            request.getSession().setAttribute(Constants.Submit.RADIATION_LIST, radiationList);
-            request.getSession().setAttribute(Constants.Submit.NUTRITIONALFACTORS_LIST, nutritionalFactorList);
-            request.getSession().setAttribute(Constants.Submit.GENEDELIVERY_LIST, geneList);
-            /* Publication List */
-            request.getSession().setAttribute(Constants.Submit.PUBLICATION_LIST, pubList);
+			} // end of else
 
-            request.getSession().setAttribute(Constants.Submit.XENOGRAFT_LIST, xenoList);
+			/* CarcinogenExposure Lists */
+			request.getSession().setAttribute(
+					Constants.Submit.GROWTHFACTORS_LIST, growthFactorList);
+			request.getSession().setAttribute(Constants.Submit.HORMONE_LIST,
+					hormoneList);
+			request.getSession().setAttribute(
+					Constants.Submit.SURGERYOTHER_LIST, surgeryList);
+			request.getSession().setAttribute(
+					Constants.Submit.VIRALTREATMENT_LIST, viraltreatmentList);
+			request.getSession().setAttribute(
+					Constants.Submit.CHEMICALDRUG_LIST, chemicaldrugList);
+			request.getSession().setAttribute(
+					Constants.Submit.ENVIRONMENTALFACTOR_LIST,
+					environFactorList);
+			request.getSession().setAttribute(Constants.Submit.RADIATION_LIST,
+					radiationList);
+			request.getSession().setAttribute(
+					Constants.Submit.NUTRITIONALFACTORS_LIST,
+					nutritionalFactorList);
+			request.getSession().setAttribute(
+					Constants.Submit.GENEDELIVERY_LIST, geneList);
+			/* Publication List */
+			request.getSession().setAttribute(
+					Constants.Submit.PUBLICATION_LIST, pubList);
 
-            /* GeneticDescription Lists */
-            request.getSession().setAttribute(Constants.Submit.SPONTANEOUSMUTATION_LIST, mutationList);
-            request.getSession().setAttribute(Constants.Submit.INDUCEDMUTATION_LIST, inducedList);
-            request.getSession().setAttribute(Constants.Submit.TARGETEDMODIFICATION_LIST, targetedList);
-            request.getSession().setAttribute(Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
-            request.getSession().setAttribute(Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
-            request.getSession().setAttribute(Constants.Submit.ASSOCIATEDEXPRESSION_LIST, associatedExpressionList);
+			request.getSession().setAttribute(Constants.Submit.XENOGRAFT_LIST,
+					xenoList);
 
-            request.getSession().setAttribute(Constants.Submit.CELLLINE_LIST, cellList);
-            request.getSession().setAttribute(Constants.Submit.THERAPY_LIST, therapyList);
-            request.getSession().setAttribute(Constants.Submit.IMAGE_LIST, imageCollection);
+			/* GeneticDescription Lists */
+			request.getSession().setAttribute(
+					Constants.Submit.SPONTANEOUSMUTATION_LIST, mutationList);
+			request.getSession().setAttribute(
+					Constants.Submit.INDUCEDMUTATION_LIST, inducedList);
+			request.getSession().setAttribute(
+					Constants.Submit.TARGETEDMODIFICATION_LIST, targetedList);
+			request.getSession().setAttribute(
+					Constants.Submit.GENOMICSEGMENT_LIST, segmentList);
+			request.getSession().setAttribute(
+					Constants.Submit.ENGINEEREDTRANSGENE_LIST, engineeredList);
+			request.getSession().setAttribute(
+					Constants.Submit.ASSOCIATEDEXPRESSION_LIST,
+					associatedExpressionList);
 
-            /* Animal Availability Lists */
-            request.getSession().setAttribute(Constants.Submit.INVESTIGATOR_LIST, investigatorList);
-            request.getSession().setAttribute(Constants.Submit.JACKSONLAB_LIST, jacksonLabList);
-            request.getSession().setAttribute(Constants.Submit.MMHCC_LIST, mmhccList);
-            request.getSession().setAttribute(Constants.Submit.IMSR_LIST, imsrList);
+			request.getSession().setAttribute(Constants.Submit.CELLLINE_LIST,
+					cellList);
+			request.getSession().setAttribute(Constants.Submit.THERAPY_LIST,
+					therapyList);
+			request.getSession().setAttribute(Constants.Submit.IMAGE_LIST,
+					imageCollection);
 
-            /* Histopathology Lists */
-            request.getSession().setAttribute(Constants.Submit.HISTOPATHOLOGY_LIST, histopathList);
-            request.getSession().setAttribute(Constants.Submit.ASSOCMETASTSIS_LIST, associatedMetatasisList);
-            request.getSession().setAttribute(Constants.Submit.CLINICALMARKER_LIST, clinicalMarkerList);
+			/* Animal Availability Lists */
+			request.getSession().setAttribute(
+					Constants.Submit.INVESTIGATOR_LIST, investigatorList);
+			request.getSession().setAttribute(Constants.Submit.JACKSONLAB_LIST,
+					jacksonLabList);
+			request.getSession().setAttribute(Constants.Submit.MMHCC_LIST,
+					mmhccList);
+			request.getSession().setAttribute(Constants.Submit.IMSR_LIST,
+					imsrList);
 
-		//morpholino_list
-	    request.getSession().setAttribute(Constants.Submit.MORPHOLINO_LIST, morpholinoList);
-	
+			/* Histopathology Lists */
+			request.getSession().setAttribute(
+					Constants.Submit.HISTOPATHOLOGY_LIST, histopathList);
+			request.getSession().setAttribute(
+					Constants.Submit.ASSOCMETASTSIS_LIST,
+					associatedMetatasisList);
+			request.getSession().setAttribute(
+					Constants.Submit.CLINICALMARKER_LIST, clinicalMarkerList);
 
-        } //end of try
-        catch (Exception e)
-        {
-            log.error("Caught an exception populating the data: ", e);
+			// Transient Interference Lists
+			request.getSession().setAttribute(Constants.Submit.MORPHOLINO_LIST,
+					morpholinoList);
+			request.getSession().setAttribute(Constants.Submit.SIRNA_LIST,
+					sirnaList);
 
-            // Encountered an error populating the data
-            ActionMessages theMsg = new ActionMessages();
-            theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-            saveErrors(request, theMsg);
-        } //end of catch
+		} // end of try
+		catch (Exception e) {
+			log.error("Caught an exception populating the data: ", e);
 
-        return mapping.findForward("next");
-    } //end of execute method
-}//end of class
+			// Encountered an error populating the data
+			ActionMessages theMsg = new ActionMessages();
+			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+					"errors.admin.message"));
+			saveErrors(request, theMsg);
+		} // end of catch
+
+		return mapping.findForward("next");
+	} // end of execute method
+}// end of class

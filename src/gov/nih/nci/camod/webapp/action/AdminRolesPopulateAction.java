@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminRolesPopulateAction.java,v 1.13 2005-11-14 16:53:11 georgeda Exp $
+ * $Id: AdminRolesPopulateAction.java,v 1.14 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2005/11/14 16:53:11  georgeda
+ * Fixed admin problem
+ *
  * Revision 1.12  2005/10/17 13:29:12  georgeda
  * Updates
  *
@@ -57,7 +60,7 @@ public class AdminRolesPopulateAction extends BaseAction {
 	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
 			HttpServletResponse inResponse) throws Exception {
 
-		log.trace("Entering AdminRolesPopulateAction.execute");
+		log.info("Entering AdminRolesPopulateAction.execute");
 
 		AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 		CommentsManager theCommentsManager = (CommentsManager) getBean("commentsManager");
@@ -90,6 +93,11 @@ public class AdminRolesPopulateAction extends BaseAction {
 
 			addCommentsToRequest(inRequest, theCommentsManager, null, "Complete-not screened",
 					Constants.Admin.COMMENTS_NEEDING_ASSIGNMENT);
+			
+			addModelsToRequest(inRequest, theAnimalModelManager, theUser, "Inactive",
+					Constants.Admin.MODELS_INACTIVATED);
+			
+			log.info("Added model to coordinator role");
 		}
 
 		// Screener specific curation states
@@ -103,8 +111,8 @@ public class AdminRolesPopulateAction extends BaseAction {
 			addCommentsToRequest(inRequest, theCommentsManager, theUser, "Screener-assigned",
 					Constants.Admin.COMMENTS_NEEDING_REVIEW);
 		}
-
-		log.trace("Exiting AdminRolesPopulateAction.execute");
+		
+		log.info("Exiting AdminRolesPopulateAction.execute");
 
 		return inMapping.findForward("next");
 	}
@@ -143,7 +151,7 @@ public class AdminRolesPopulateAction extends BaseAction {
 	private void addModelsToRequest(HttpServletRequest inRequest, AnimalModelManager inManager, Person inUser,
 			String inState, String inKey) {
 
-		log.trace("Entering AdminRolesPopulateAction.addModelsToRequest");
+		log.info("Entering AdminRolesPopulateAction.addModelsToRequest");
 
 		try {
 			// Add all the models by state for a user
@@ -163,6 +171,6 @@ public class AdminRolesPopulateAction extends BaseAction {
 			saveErrors(inRequest, theMsg);
 
 		}
-		log.trace("Exiting AdminRolesPopulateAction.addModelsToRequest");
+		log.info("Exiting AdminRolesPopulateAction.addModelsToRequest");
 	}
 }

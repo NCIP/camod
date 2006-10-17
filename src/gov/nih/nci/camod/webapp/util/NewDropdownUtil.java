@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.46 2006-05-24 18:54:37 georgeda Exp $
+ * $Id: NewDropdownUtil.java,v 1.47 2006-10-17 16:10:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.46  2006/05/24 18:54:37  georgeda
+ * Added staining method
+ *
  * Revision 1.45  2006/05/24 16:53:09  pandyas
  * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
  * All changes from earlier version were merged into this version manually
@@ -133,7 +136,7 @@ public class NewDropdownUtil
                                             String inFilter) throws Exception
     {
 
-        log.info("Entering NewDropdownUtil.getDatabaseDropdown");
+        log.debug("Entering NewDropdownUtil.getDatabaseDropdown");
 
         List theReturnList = null;
 
@@ -178,7 +181,7 @@ public class NewDropdownUtil
         {
             theReturnList = getQueryOnlyEnvironmentalFactorList("Other");
         }
-
+        
         else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEDROP))
         {
             theReturnList = getEnvironmentalFactorList("Hormone");
@@ -282,13 +285,19 @@ public class NewDropdownUtil
         {
             theReturnList = getStainingMethod(inRequest);
         }
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.EXTERNALSOURCEQUERYDROP))
+        {
+            theReturnList = getExternalSourceList(inRequest);
+        }
+        
         else
         {
             log.error("No matching dropdown for key: " + inDropdownKey);
             theReturnList = new ArrayList();
         }
 
-        log.info("Exiting NewDropdownUtil.getDatabaseDropdown");
+        log.debug("Exiting NewDropdownUtil.getDatabaseDropdown");
         return theReturnList;
     }
 
@@ -345,7 +354,7 @@ public class NewDropdownUtil
         String str;
         while ((str = in.readLine()) != null)
         {
-            log.info("readListFromFile method: Reading value from file: " + str);
+            log.debug("readListFromFile method: Reading value from file: " + str);
 
             // It's a DropdownOption file
             if (str.indexOf("DROPDOWN_OPTION") > 0)
@@ -456,7 +465,7 @@ public class NewDropdownUtil
     private static List getStrainsList(HttpServletRequest inRequest,
                                        String speciesName) throws Exception
     {
-        log.info("Entering NewDropdownUtil.getStrainsList");
+        log.debug("Entering NewDropdownUtil.getStrainsList");
 
         //Set constant for the Animal Model species here 
         inRequest.getSession().setAttribute(Constants.AMMODELSPECIES, speciesName);
@@ -552,6 +561,23 @@ public class NewDropdownUtil
     }
 
     /**
+     * Returns a list of all external sources from animalModel
+     * 
+     * @return adminList
+     * @throws Exception
+     */
+    private static List getExternalSourceList(HttpServletRequest inRequest) throws Exception
+    {
+       	log.debug("<NewDropdownUtil> In getExternalSourceList: ");
+       	
+       	List externalSourceList = QueryManagerSingleton.instance().getExternalSources();       	
+        
+        Collections.sort(externalSourceList);
+        
+        return externalSourceList;
+    }    
+    
+    /**
      * Returns a list for a type of environmental Factors
      * 
      * @return envList
@@ -622,7 +648,7 @@ public class NewDropdownUtil
                                                               String inAddBlank) throws Exception
     {
 
-        log.info("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
+        log.debug("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
 
         return QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators();
     }
@@ -637,10 +663,10 @@ public class NewDropdownUtil
                                                              String inAddBlank) throws Exception
     {
 
-        log.trace("Entering NewDropdownUtil.getQueryOnlyInducedMutationAgentList");
+        log.debug("Entering NewDropdownUtil.getQueryOnlyInducedMutationAgentList");
 
         List inducedMutationList = QueryManagerSingleton.instance().getQueryOnlyInducedMutationAgents();
-        addOther(inducedMutationList);
+        //addOther(inducedMutationList);
         return inducedMutationList;
     }
 
@@ -684,7 +710,7 @@ public class NewDropdownUtil
      */
     private static List getStainingMethod(HttpServletRequest inRequest) throws Exception
     {
-        log.info("Entering NewDropdownUtil.getStainingMethod");
+        log.debug("Entering NewDropdownUtil.getStainingMethod");
         
         // Get values for dropdown lists for StainingMethod
         StainingMethodManager stainingMethodManager = (StainingMethodManager) getContext(inRequest).getBean("stainingMethodManager");
@@ -712,11 +738,13 @@ public class NewDropdownUtil
             }
         }
         Collections.sort(stainingMethodList);
-        log.info("Exiting NewDropdownUtil.getStainingMethod");        
+        log.debug("Exiting NewDropdownUtil.getStainingMethod");        
         return stainingMethodList;
 
     }    
 
+
+    
     /**
      * Returns a list of all Expression Level Descriptions
      * 

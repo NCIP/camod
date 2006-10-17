@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/08/13 18:25:45  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified links
+ *
  * Revision 1.22  2006/05/03 19:05:50  georgeda
  * Move to new EVSTree
  *
@@ -37,7 +40,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.23 2006-08-13 18:25:45 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.24 2006-10-17 16:08:12 pandyas Exp $
  *
  */   
 %>
@@ -156,6 +159,19 @@
 			</html:select>
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Age of Tumor Detection:</label>		
+		</td>
+		<td class="formField">
+			<html:text styleClass="formFieldUnSized" property="ageOfDetection"  size="10" />
+			
+			<html:select styleClass="formFieldUnSized" size="1" property="ageOfDetectionUnit" >												
+				<html:options name="<%= Dropdowns.AGEUNITSDROP %>"/>					
+			</html:select>
+		</td>
+	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>

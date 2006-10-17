@@ -1,8 +1,11 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/05/09 18:59:29  georgeda
+ * Changes for searching on transient interfaces
  *
- * $Id: viewTransientInterference.jsp,v 1.1 2006-05-09 18:59:29 georgeda Exp $
+ *
+ * $Id: viewTransientInterference.jsp,v 1.2 2006-10-17 16:08:28 pandyas Exp $
  *
  */   
 %>
@@ -33,7 +36,19 @@
 		    <tr>
 				<td>&nbsp;</td>
 			</tr>
-			<c:forEach var="p" items="${mdl.morpholinoCollection}">
+			<c:forEach var="p" items="${mdl.transientInterferenceCollection}">
+			<c:set var="method" value="${p.transientInterferenceMethod}"/>
+					<c:choose>
+						<c:when test = "${method.id == 1}">
+							<td class="formTitle" height="20" colspan="2"> Method: Morpolino model: </td>				    		
+						</c:when>
+						<c:otherwise>
+						<c:when test = "${method.id == 2}">
+							<td class="formTitle" height="20" colspan="2"> Method: siRNA model: </td>
+						</c:when>				    								
+						</c:otherwise>
+					</c:choose>
+									
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
 					<camod:highlight><c:out value="${p.targetedRegion}"/>&nbsp;</camod:highlight>
@@ -81,6 +96,12 @@
 					<camod:highlight><c:out value="${p.visualLigandDisplayName}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
+			<tr>
+				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
+				<td class="resultsBoxWhiteEnd">
+					<camod:highlight><c:out value="${p.comments}"/>&nbsp;</camod:highlight>
+				</td>
+			</tr>			
 			<tr>
 				<td>&nbsp;</td>
 			</tr>

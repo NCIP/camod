@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.12 2006-05-10 14:25:10 schroedn Exp $
+ * $Id: SearchForm.java,v 1.13 2006-10-17 16:10:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/05/10 14:25:10  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.11  2006/05/10 13:39:56  schroedn
  * New Features - Changes from code review
  *
@@ -84,6 +87,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     protected String modelDescriptor;
     protected String organ;
     protected String species;
+    protected String externalSource;    
     protected String chemicalDrug;
     protected String comment;
     protected String hormone;
@@ -109,8 +113,10 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     protected boolean targetedModification = false;
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
+    protected boolean searchImageData = false;    
     protected boolean searchXenograft = false;
     protected boolean searchTransientInterference = false;
+    protected boolean searchToolStrain = false;    
 
     public void setHormone(String hormone)
     {
@@ -200,6 +206,16 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     {
         this.species = species;
     }
+    
+    public String getExternalSource()
+    {
+        return externalSource;
+    }
+
+    public void setExternalSource(String externalSource)
+    {
+        this.externalSource = externalSource;
+    }    
 
     public String getGrowthFactor()
     {
@@ -410,6 +426,16 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     {
         this.searchMicroArrayData = searchMicroArrayData;
     }
+    
+    public boolean isSearchImageData()
+    {
+        return searchImageData;
+    }
+
+    public void setSearchImageData(boolean searchImageData)
+    {
+        this.searchImageData = searchImageData;
+    }    
 
     public boolean isSearchXenograft()
     {
@@ -436,6 +462,22 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     {
         this.searchTransientInterference = searchTransientInterference;
     }
+    
+    /**
+     * @return Returns the searchToolStrain.
+     */
+    public boolean isSearchToolStrain()
+    {
+        return searchToolStrain;
+    }
+
+    /**
+     * @param searchToolStrain The searchToolStrain to set.
+     */
+    public void setSearchToolStrain(boolean searchToolStrain)
+    {
+        this.searchToolStrain = searchToolStrain;
+    }    
     
     public String getTumorClassification()
     {
@@ -485,6 +527,8 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         searchHistoMetastasis = false;
         searchMicroArrayData = false;
         searchXenograft = false;
+        searchToolStrain = false;
+        externalSource = null;
     }
 
     /**

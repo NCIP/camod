@@ -43,7 +43,7 @@
        	<!-- tumorIncidenceRate -->
         <property name="tumorIncidenceRate" 
         	column="tumor_incidence_rate" 
-        	type="float"/>	 	
+        	type="string"/>	 	
         	
        	<!-- survivalInfo -->
         <property name="survivalInfo" 
@@ -58,7 +58,17 @@
         <!-- ageOfOnsetUnit -->
         <property name="ageOfOnsetUnit" 
         	column="age_of_onset_unit" 
-        	type="string"/>        		 
+        	type="string"/> 
+        	
+        <!-- ageOfDetection -->
+        <property name="ageOfDetection" 
+        	column="age_of_detection" 
+        	type="string"/>
+        	
+        <!-- ageOfDetectionUnit -->
+        <property name="ageOfDetectionUnit" 
+        	column="age_of_detection_unit" 
+        	type="string"/>
         
         <!-- microscopicDescription -->
         <property name="microscopicDescription" 

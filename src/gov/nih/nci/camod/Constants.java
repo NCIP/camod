@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.90 2006-09-20 16:13:03 pandyas Exp $
+ * $Id: Constants.java,v 1.91 2006-10-17 16:14:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.90  2006/09/20 16:13:03  pandyas
+ * updated with a few caMOD 2.2 constants - will not hurt if unused on dev server
+ *
  * Revision 1.88  2006/08/17 17:45:03  pandyas
  * Defect# 410: Deleted constants no longer used due to externalized property  files
  *
@@ -817,7 +820,6 @@ public class Constants {
          * Defines the different roles in the system
          */
         public interface Actions {
-
             /**
              * A constant that defines the text for the generic approved action
              */
@@ -853,16 +855,32 @@ public class Constants {
              * A constant that defines the text for the complete action
              */
             public static final String COMPLETE = "complete";
+
             /**
-             * A constant that defines the text for the complete action
+             * A constant that defines the text for the complete action from submitOverview
              */
-            public static final String BACK_TO_COMPLETE = "back_to_complete";            
-            
-            
+            public static final String BACK_TO_COMPLETE = "back_to_complete";
+
+            /**
+             * A constant that defines the text for the screener_approve action from submitOverview
+             */            
+            public static final String BACK_TO_SCREENER_APPROVE = "back_to_screener_approve";
+
             /**
              * A constant that defines the text for the inactive action
              */
             public static final String INACTIVATE = "inactivate";            
+        }
+        
+        /**
+         * Defines the different states for a model
+         */
+        public interface ModelState {
+        	
+            /**
+             * A constant that defines the text for the inactive model state
+             */
+            public static final String INACTIVE = "Inactive";        	
         }
 
         /**

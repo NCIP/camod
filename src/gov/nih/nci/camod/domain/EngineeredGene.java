@@ -1,7 +1,10 @@
 /*
- * $Id: EngineeredGene.java,v 1.14 2006-04-18 16:26:52 pandyas Exp $
+ * $Id: EngineeredGene.java,v 1.15 2006-10-17 16:14:36 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/18 16:26:52  pandyas
+ * Removed getGeneFunctionCollectionSorted() method since it is taken care of in the mapping
+ *
  * Revision 1.13  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -23,7 +26,6 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
 
     private String name;
     private String comments;
-    private GenotypeSummary genotypeSummary;
     private Image image;
     private Conditionality conditionality;
     private MutationIdentifier mutationIdentifier;
@@ -150,23 +152,6 @@ public class EngineeredGene extends BaseObject implements Comparable, Serializab
     public void setImage(Image image)
     {
         this.image = image;
-    }
-
-    /**
-     * @return Returns the genotypeSummary.
-     */
-    public GenotypeSummary getGenotypeSummary()
-    {
-        return genotypeSummary;
-    }
-
-    /**
-     * @param genotypeSummary
-     *            The genotypeSummary to set.
-     */
-    public void setGenotypeSummary(GenotypeSummary genotypeSummary)
-    {
-        this.genotypeSummary = genotypeSummary;
     }
 
     /**

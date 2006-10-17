@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.2 2006-08-17 15:38:09 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.3 2006-10-17 16:08:12 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/08/17 15:38:09  pandyas
+ * updated on-line help from Robohelp to ePublisher - added link
+ *
  * Revision 1.1  2005/11/18 21:07:44  georgeda
  * Defect #130, added superuser
  *
@@ -11,6 +14,9 @@
 %>
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
+
+<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page buffer="32kb"%>
 
 <!-- adminEditModels.jsp -->
 <!-- Main Content Begins -->
@@ -53,7 +59,11 @@
 			</td>
 		</html:form>
 	 </TABLE>
-	<br>	
+	<br>
+	
+	<!-- setup some useful variables -->
+	<% pageContext.setAttribute("eventTag", Constants.Parameters.EVENT); %>
+    <% pageContext.setAttribute("modelIdTag", Constants.Parameters.MODELID); %>		
 
     <c:if test="${not empty adminModelSearchResults}">
 	<display:table id="row" name="${sessionScope.adminModelSearchResults}"
@@ -65,7 +75,14 @@
 
  	    <display:column title="No." >
  	        <c:out value="${row_rowNum}"/>
- 	    </display:column>      
+ 	    </display:column> 
+ 	    <display:column title="Duplicate" >
+	             <center>
+	             	<c:set var="dupLink" value="return confirm('Are you sure you want to duplicate this record (${row.modelDescriptor})?');"/>   
+	                <c:set var="uri" value="/camod/DuplicateAdminAnimalModelAction.do?method=duplicate&aModelID=${row.modelId}"/>
+	                <a href='<c:out value="${uri}"/>' onclick='<c:out value="${dupLink}"/>' ><IMG src="images/dupRecord.gif" border=0></a>  
+	       	     </center>     
+ 	    </display:column>
 		<display:column href="/camod/SubmitAction.do?method=setModelConstants&" paramId="aModelID" paramProperty="id" title="Model Descriptor" >
 			<c:out escapeXml="false" value="${row.modelDescriptor}"/>
 		</display:column>
@@ -74,10 +91,22 @@
 		</display:column>     
 		<display:column title="Entered on">
 			<c:out value="${row.submittedDate}"/>
-		</display:column>	                   
+		</display:column>
+		<c:choose>
+			<c:when test="${row.state == 'Inactive'}">
+			</c:when>
+		<c:otherwise>
+			<display:column title="Inactivate">
+	         	<center>
+	             	<c:set var="inactiveLink" value="return confirm('Are you sure you want to inactivate this record (${row.modelDescriptor})?');"/>	         	
+				    <c:set var="uri" value="ChangeAnimalModelToInactiveAction.do?&aEvent=inactivate&aModelID=${row.modelId}"/>
+				         <a href='<c:out value="${uri}"/>' onclick='<c:out value="${inactiveLink}"/>' ><IMG src="images/remove.gif" border=0></a>
+				 </center>
+	       	 	</display:column>
+			</c:otherwise>
+		</c:choose>            
 	</display:table>
 	</c:if>
-
     </td></tr>
    
 </TABLE>	

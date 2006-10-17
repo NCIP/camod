@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.21 2006-06-14 15:22:14 pandyas Exp $
+ * $Id: EmailActionImpl.java,v 1.22 2006-10-17 16:13:46 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/06/14 15:22:14  pandyas
+ * Added model descriptor and model id to e-mail for various curation states - modified e-mail content for most states
+ *
  * Revision 1.20  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -173,6 +176,12 @@ public class EmailActionImpl extends BaseCurateableAction
                     theMailSubject = "The following model has been approved: " + theAnimalModel.getModelDescriptor();
                     theMailStandardText = new String[] { Constants.Admin.Actions.EDITOR_APPROVE };
                 }
+                else if (theData.getEvent().equals(Constants.Admin.Actions.INACTIVATE))
+                {
+                    theRecipients = theCoordinator;
+                    theMailSubject = "The following model has been inactivated: " + theAnimalModel.getModelDescriptor();
+                    theMailStandardText = new String[] { Constants.Admin.Actions.INACTIVATE };
+                }                
                 else if (theData.getEvent().equals(Constants.Admin.Actions.COMPLETE))
                 {
                     theRecipients = theCoordinator;

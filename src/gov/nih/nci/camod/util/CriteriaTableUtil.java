@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.5 2006-06-12 18:38:02 pandyas Exp $
+ * $Id: CriteriaTableUtil.java,v 1.6 2006-10-17 16:11:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/06/12 18:38:02  pandyas
+ * removed unused import
+ *
  * Revision 1.4  2006/05/22 20:10:40  schroedn
  * Added ability to save keyword searches
  *
@@ -268,6 +271,18 @@ public class CriteriaTableUtil
         {
             theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchMicroArrayData") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
+        
+        // Search for image data
+        if (sData.isSearchImageData())
+        {
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchImageData") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
+        }        
+        
+        // Search for tool strain data
+        if (sData.isSearchToolStrain())
+        {
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchToolStrain") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
+        }        
         
         // Search for Transient Interface data
         if (sData.isSearchTransientInterference())

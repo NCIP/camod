@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.8 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.9 2006-10-17 16:11:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.7  2006/04/28 19:23:34  schroedn
  * Defect # 261
  * Prepopulates the advanced search page with the saved query data to edit
@@ -42,7 +45,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.debug("In AdvancedSearchPopulateAction.populate");		       
+        log.info("In AdvancedSearchPopulateAction.populate");		       
 
         // Reset the non-simple-search options
         SearchForm theSearchForm = (SearchForm) form;
@@ -62,6 +65,8 @@ public class AdvancedSearchPopulateAction extends BaseAction {
             
             try {                
                 SavedQuery inSavedQuery = savedQueryManager.get( aQueryId );
+                
+                log.info("<AdvancedSearchPopulateAction.populate> inSavedQuery.getQueryName(): " +inSavedQuery.getQueryName());
                 
                 request.getSession().setAttribute( Constants.QUERY_NAME, inSavedQuery.getQueryName() );
                 
@@ -99,7 +104,9 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SURGERYQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
+                Constants.Dropdowns.ADD_BLANK);        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.EXTERNALSOURCEQUERYDROP,
+                Constants.Dropdowns.ADD_BLANK);        
 
         return mapping.findForward("next");
     }

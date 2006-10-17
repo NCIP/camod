@@ -1,7 +1,10 @@
 /*
- * $Id: Histopathology.java,v 1.11 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Histopathology.java,v 1.12 2006-10-17 16:14:36 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -19,10 +22,12 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     private String comments;
     private String grossDescription;
     private String relationalOperation;
-    private Float tumorIncidenceRate;
+    private String tumorIncidenceRate;
     private String survivalInfo;
     private String ageOfOnset;
-    private String ageOfOnsetUnit;    
+    private String ageOfOnsetUnit;
+    private String ageOfDetection;
+    private String ageOfDetectionUnit;    
     private String microscopicDescription;
     private String weightOfTumor;
     private String volumeOfTumor;
@@ -166,6 +171,39 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     {
         this.ageOfOnsetUnit = ageOfOnsetUnit;
     }
+    
+    /**
+     * @return Returns the ageOfDetection.
+     */
+    public String getAgeOfDetection()
+    {
+        return ageOfDetection;
+    }
+
+    /**
+     * @param ageOfDetection
+     *            The ageOfDetection to set.
+     */
+    public void setAgeOfDetection(String ageOfDetection)
+    {
+        this.ageOfDetection = ageOfDetection;
+    }
+    /**
+     * @return Returns the ageOfDetectionUnit.
+     */
+    public String getAgeOfDetectionUnit()
+    {
+        return ageOfDetectionUnit;
+    }
+
+    /**
+     * @param ageOfDetectionUnit
+     *            The ageOfDetectionUnit to set.
+     */
+    public void setAgeOfDetectionUnit(String ageOfDetectionUnit)
+    {
+        this.ageOfDetectionUnit = ageOfDetectionUnit;
+    }   
     /**
      * @return Returns the comments.  Comment is a reserved word so 
      * we must use the plural form comments.
@@ -273,7 +311,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
     /**
      * @return Returns the tumorIncidenceRate.
      */
-    public Float getTumorIncidenceRate()
+    public String getTumorIncidenceRate()
     {
         return tumorIncidenceRate;
     }
@@ -282,7 +320,7 @@ public class Histopathology extends BaseObject implements Comparable, Serializab
      * @param tumorIncidenceRate
      *            The tumorIncidenceRate to set.
      */
-    public void setTumorIncidenceRate(Float tumorIncidenceRate)
+    public void setTumorIncidenceRate(String tumorIncidenceRate)
     {
         this.tumorIncidenceRate = tumorIncidenceRate;
     }

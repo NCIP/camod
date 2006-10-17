@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.44 2006-08-16 13:55:45 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.45 2006-10-17 16:08:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2006/08/16 13:55:45  pandyas
+ * updated on-line help from Robohelp to ePublisher - added new link for advanced search title
+ *
  * Revision 1.43  2006/08/15 15:30:29  pandyas
  * updated on-line help from Robohelp to ePublisher - modified link - new data tree link added
  *
@@ -447,6 +450,7 @@
 				<label for="box1">Check here to search for models with transient interference data</label>
 			</td>
 		</tr>
+		
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Microarray Data</td>
 		</tr>
@@ -460,6 +464,49 @@
 				<label for="box1">Check here to search for models with microarray data</label>
 			</td>
 		</tr>
+		
+		<tr>
+			<td class="formTitleBlue" height="10" colspan="3">Image Data</td>
+		</tr>
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel">Image Data</td>
+			<td class="formField">
+			    <html:checkbox property="searchImageData" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchImageData" value="false">
+				<label for="box1">Check here to search for models with images</label>
+			</td>
+		</tr>		
+		
+		<tr>
+			<td class="formTitleBlue" height="10" colspan="3">Tool Strain</td>
+		</tr>		
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel">Tool Strain</td>
+			<td class="formField">
+			    <html:checkbox property="searchToolStrain" />
+			    <!-- NOTE: Needed to work around struts bug -->
+			    <input type="hidden" name="searchToolStrain" value="false">
+				<label for="box1">Check here to search for tool strains <BR><BR>(A tool mouse strain is a strain that does not develop cancer, 
+				<BR>but can be used to create cancer-bearing models. Example: WAP-Cre strain)</label>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="formTitleBlue" height="10" colspan="3">External Source Data From Jackson Labs</td>
+		</tr>		
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">External Data Source:</label></td>
+			<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="externalSource" >
+					<html:options name="<%= Dropdowns.EXTERNALSOURCEQUERYDROP %>" />										
+				</html:select>				
+			</td>
+		</tr>
+			
 		<tr>			
 			<td align="right" colspan="3">
 				<!-- action buttons begins -->

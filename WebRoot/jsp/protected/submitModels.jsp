@@ -89,6 +89,10 @@
 						
 		<% if ( size > 0 ) { %>
 		<logic:iterate id="aModel" name="usermodellist" type="AnimalModel">
+		<c:choose>
+			<c:when test="${aModel.state == 'Inactive'}">
+			</c:when>
+		<c:otherwise>		
 	         <TR>
 	             <td class="resultsBoxGrey" width="5%">
 	             	<center>
@@ -114,6 +118,8 @@
 	                </center>
 	             </td>                     
 	         </TR>
+			</c:otherwise>
+		</c:choose>        
 		</logic:iterate>
 	    <%} else { %>
 		     <TR>

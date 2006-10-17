@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.12 2006-05-17 14:16:52 schroedn Exp $
+ * $Id: LoginAction.java,v 1.13 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/05/17 14:16:52  schroedn
+ * Added columnOrder to retain the column order on search results
+ *
  * Revision 1.11  2006/05/10 14:15:39  schroedn
  * New Features - Changes from code review
  *
@@ -38,7 +41,6 @@ import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.webapp.form.LoginForm;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;

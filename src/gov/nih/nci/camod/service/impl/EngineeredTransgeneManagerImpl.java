@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.33 2006-08-17 18:27:48 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.34 2006-10-17 16:13:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2006/08/17 18:27:48  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.32  2006/05/23 15:54:18  pandyas
  * Fixed code for species - not required and must be nulled out when editing
  *
@@ -125,21 +128,18 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 	public void createAssocExpression(
 			AssociatedExpressionData inAssociatedExpressionData,
 			EngineeredGene inEngineeredTransgene) throws Exception {
-		log
-				.info("Entering EngineeredTransgeneManagerImpl.createAssocExpression");
+		log.info("Entering EngineeredTransgeneManagerImpl.createAssocExpression");
 
 		populateAssocExpression(inAssociatedExpressionData,
 				inEngineeredTransgene);
 
-		log
-				.info("Exiting EngineeredTransgeneManagerImpl.createAssocExpression");
+		log.info("Exiting EngineeredTransgeneManagerImpl.createAssocExpression");
 	}
 
 	public void updateAssociatedExpression(
 			AssociatedExpressionData inAssociatedExpressionData,
 			EngineeredGene inEngineeredTransgene) throws Exception {
-		log
-				.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
+		log.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
 
 		Set<ExpressionFeature> theExpFeatures = inEngineeredTransgene
 				.getExpressionFeatureCollection();
@@ -162,8 +162,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 
 		save(inEngineeredTransgene);
 
-		log
-				.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
+		log.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
 	}
 
 	private void populateAssocExpression(

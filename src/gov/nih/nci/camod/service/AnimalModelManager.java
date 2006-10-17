@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.36 2006-05-03 20:03:10 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.37 2006-10-17 16:14:18 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2006/05/03 20:03:10  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * Revision 1.35  2006/04/20 19:18:05  pandyas
  * Moved save Assoc Met from AnimalModel to the Histopathology
  *
@@ -84,6 +87,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2006/05/03 20:03:10  pandyas
+ * Modified to add Morpholino object data to application
+ *
  * Revision 1.35  2006/04/20 19:18:05  pandyas
  * Moved save Assoc Met from AnimalModel to the Histopathology
  *
@@ -260,6 +266,6 @@ public interface AnimalModelManager {
     
     public void addClinicalMarker(AnimalModel inAnimalModel, Histopathology inHistopathology, ClinicalMarkerData inClinicalMarkerData) throws Exception;
     
-    public void addMorpholino(AnimalModel inAnimalModel, MorpholinoData inMorpholinoData) throws Exception;    
-   
+    public void addTransientInterference(AnimalModel inAnimalModel, TransientInterferenceData inTransientInterferenceData) throws Exception;    
+    
 }

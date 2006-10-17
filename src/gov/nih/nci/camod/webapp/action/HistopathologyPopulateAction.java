@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.7 2006-09-12 15:01:10 georgeda Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.8 2006-10-17 16:11:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/09/12 15:01:10  georgeda
+ * Modified setTumorClassification so it displayed the disease.getEVSPreferredDescription() results instead of disease.getName
+ *
  * Revision 1.6  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -85,6 +88,12 @@ public class HistopathologyPopulateAction extends BaseAction {
             /* Set Histopathology attributes */
             histopathologyForm.setAgeOfOnset(theHistopathology.getAgeOfOnset());
             histopathologyForm.setAgeOfOnsetUnit(theHistopathology.getAgeOfOnsetUnit());
+
+            histopathologyForm.setAgeOfDetection(theHistopathology.getAgeOfDetection());            
+            histopathologyForm.setAgeOfDetectionUnit(theHistopathology.getAgeOfDetectionUnit());
+            
+            histopathologyForm.setAgeOfDetection(theHistopathology.getAgeOfDetection());
+            histopathologyForm.setAgeOfDetectionUnit(theHistopathology.getAgeOfDetectionUnit());            
             
             if (theHistopathology.getWeightOfTumor() != null) {
                 histopathologyForm.setWeightOfTumor(theHistopathology.getWeightOfTumor().toString());

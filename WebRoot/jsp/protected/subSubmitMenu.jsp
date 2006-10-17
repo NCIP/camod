@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.54 2006-05-08 14:19:48 georgeda Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.55 2006-10-17 16:08:12 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.54  2006/05/08 14:19:48  georgeda
+		 * Fixed errors introduced w/ adding Zebrafish changes and reformatting.
+		 *
 		 * Revision 1.53  2006/05/03 20:07:44  pandyas
 		 * Modified/Added to support Morpholino object data in the application
 		 *
@@ -56,7 +59,7 @@
 <%@ page import="gov.nih.nci.camod.domain.Histopathology"%>
 <%@ page import="gov.nih.nci.camod.domain.ClinicalMarker"%>
 <%@ page import="gov.nih.nci.camod.domain.CarcinogenExposure"%>
-<%@ page import="gov.nih.nci.camod.domain.Morpholino"%>
+<%@ page import="gov.nih.nci.camod.domain.TransientInterference"%>
 <%@ page import="gov.nih.nci.camod.Constants"%>
 
 <TR>
@@ -380,20 +383,34 @@
 
 	<div id="menu4" class="masterTitle" onclick="SwitchMenu('sub4')"
 		onmouseover="ChangeClass('menu4','masterTitleOver')"
-		onmouseout="ChangeClass('menu4','masterTitle')"><IMG height=5 alt=""
-		src="images/subMenuArrow.gif" width=5>TRANSIENT INTERFERENCE</div>
-	<span class="submasterdiv" id="sub4"> <img src="images/right_arrow.gif"
-		border="0"> <html:link styleClass="subMenuRed"
-		action="MorpholinoPopulateAction.do?method=dropdown">Enter Morpholino</html:link><br>
-	<logic:iterate id="aMorpholino" name="morpholino_list" type="Morpholino">
+		onmouseout="ChangeClass('menu4','masterTitle')">
+		<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>TRANSIENT INTERFERENCE</div>
+		
+	<span class="submasterdiv" id="sub4">	
+	<img src="images/right_arrow.gif" border="0">	 
+		<html:link styleClass="subMenuRed" action="MorpholinoPopulateAction.do?method=dropdown&aConceptCode=C60700">Enter Morpholino</html:link><br>
+		
+		<logic:iterate id="aTransInt" name="morpholino_list" type="TransientInterference">
 			 	 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
 		<html:link styleClass="subMenuBlue"
 			action="MorpholinoPopulateAction.do?method=populate"
-			paramId="aMorpholinoID" paramName="aMorpholino" paramProperty="id">
-			<camod:shorten><bean:write name="aMorpholino" property="targetedRegion" filter="false" /></camod:shorten>
+			paramId="aTransIntID" paramName="aTransInt" paramProperty="id">
+			<camod:shorten><bean:write name="aTransInt" property="targetedRegion" filter="false" /></camod:shorten>
 		</html:link>
 		<br>
-	</logic:iterate> <br>
+	</logic:iterate>
+	 
+	<img src="images/right_arrow.gif" border="0">	
+		<html:link styleClass="subMenuRed" action="SirnaPopulateAction.do?method=dropdown&aConceptCode=C2191">Enter SiRNA</html:link><br>
+		<logic:iterate id="aTransInt" name="sirna_list" type="TransientInterference">
+			 	 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
+		<html:link styleClass="subMenuBlue"
+			action="SirnaPopulateAction.do?method=populate"
+			paramId="aTransIntID" paramName="aTransInt" paramProperty="id">
+			<camod:shorten><bean:write name="aTransInt" property="targetedRegion" filter="false" /></camod:shorten>
+		</html:link>
+		<br>
+	</logic:iterate> <br>	
 	</span>
 
 	<div id="menu5" class="masterTitle" onclick="SwitchMenu('sub5')"
@@ -434,8 +451,8 @@
 		<br>
 
 		<!-- Begin Associated Metastasis Loop -->			      
-			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
-			src="images/right_arrow.gif" border="0">
+			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/right_arrow.gif" border="0">
 		<html:link styleClass="subMenuDarkRed"
 			action="AssociatedMetastasisPopulateAction.do?method=dropdown"
 			paramId="aHistopathologyID" paramName="aHistopathology"
