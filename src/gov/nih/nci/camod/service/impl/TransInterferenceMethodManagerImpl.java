@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: TransInterferenceMethodManagerImpl.java,v 1.1 2006-10-17 16:14:05 pandyas Exp $
+ * $Id: TransInterferenceMethodManagerImpl.java,v 1.2 2006-10-18 18:10:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:14:05  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.6  2006/05/08 13:33:28  georgeda
  * 
  */
@@ -63,10 +66,6 @@ import java.util.List;
 public class TransInterferenceMethodManagerImpl extends BaseManager implements
 		TransInterferenceMethodManager {
 
-	public List getAll() throws Exception {
-		log.trace("In TransInterferenceMethodManagerImpl.getAll");
-		return super.getAll(TransientInterferenceMethod.class);
-	}
 
 	/**
 	 * Get the TransientInterferenceMethod by it's ConceptCode
@@ -78,12 +77,14 @@ public class TransInterferenceMethodManagerImpl extends BaseManager implements
 	 */
 	public TransientInterferenceMethod getByConceptCode(String inConceptCode)
 			throws Exception {
+        
 		TransientInterferenceMethod theTransIntMethod = null;
+        
+        log .info("<TransientInterferenceMethod> inConceptCode" + inConceptCode);
 
 		if (inConceptCode != null && inConceptCode.length() > 0) {
 			try {
-				log
-						.info("<TransientInterferenceMethod.getByConceptCode> inside try");
+				log	.info("<TransientInterferenceMethod> inside try");
 				// The following two objects are needed for eQBE.
 				TransientInterferenceMethod theQueryObj = new TransientInterferenceMethod();
 				theQueryObj.setConceptCode(inConceptCode);
@@ -91,7 +92,7 @@ public class TransInterferenceMethodManagerImpl extends BaseManager implements
 				// Apply evaluators to object properties
 				Evaluation theEvaluation = new Evaluation();
 				theEvaluation.addEvaluator(
-						"TransientInterferenceMethod.inConceptCode",
+						"transientInterferenceMethod.conceptCode",
 						Evaluator.EQUAL);
 
 				List theList = Search.query(theQueryObj, theEvaluation);
@@ -99,8 +100,8 @@ public class TransInterferenceMethodManagerImpl extends BaseManager implements
 				if (theList != null && theList.size() > 0) {
 					theTransIntMethod = (TransientInterferenceMethod) theList
 							.get(0);
-					log.info("theTransIntMethod: "
-							+ theTransIntMethod.toString());
+					log.info("theTransIntMethod.getId: "
+							+ theTransIntMethod.getId());
 				}
 			} catch (PersistenceException pe) {
 				log.error("PersistenceException in getByConceptCode", pe);
