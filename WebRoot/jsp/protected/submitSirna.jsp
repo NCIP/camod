@@ -1,8 +1,11 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:08:12  pandyas
+ * modified during development of caMOD 2.2 - various
  *
- * $Id: submitSirna.jsp,v 1.1 2006-10-17 16:08:12 pandyas Exp $
+ *
+ * $Id: submitSirna.jsp,v 1.2 2006-10-18 18:11:47 pandyas Exp $
  *
  */   
 %>
@@ -126,10 +129,10 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field3">Delivery Method:</label></td>
+		<td class="formLabel"><label for="field3">Transfection Method:</label></td>
 		<td class="formField">		
 			<br>
-			<label for="field3">(if delivery method is not listed, then please<br>select "Other" from the list and specify it below)</label>
+			<label for="field3">(if transfection method is not listed, then please<br>select "Other" from the list and specify it below)</label>
 			<br>
 			<br>			
 			<html:select styleClass="formFieldSized" size="1" property="deliveryMethod"  onclick="chkOtherMethod();">												
