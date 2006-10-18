@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AgentTargetManagerImpl.java,v 1.4 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: AgentTargetManagerImpl.java,v 1.5 2006-10-18 18:09:42 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:11:06  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -13,9 +16,12 @@ package gov.nih.nci.camod.service.impl;
  *
  * @author pandyas
  *
- * $Id: AgentTargetManagerImpl.java,v 1.4 2006-04-17 19:11:06 pandyas Exp $
+ * $Id: AgentTargetManagerImpl.java,v 1.5 2006-10-18 18:09:42 pandyas Exp $
  *
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.4  2006/04/17 19:11:06  pandyas
+ *  caMod 2.1 OM changes
+ *
  *  Revision 1.3  2006/01/18 14:24:24  georgeda
  *  TT# 376 - Updated to use new Java 1.5 features
  *
@@ -58,7 +64,7 @@ public class AgentTargetManagerImpl extends BaseManager implements AgentTargetMa
 
                 // Apply evaluators to object properties
                 Evaluation theEvaluation = new Evaluation();
-                theEvaluation.addEvaluator("chemicalClass.chemicalClassName", Evaluator.EQUAL);
+                theEvaluation.addEvaluator("agentTarget.name", Evaluator.EQUAL);
 
                 List theList = Search.query(theQueryObj, theEvaluation);
 

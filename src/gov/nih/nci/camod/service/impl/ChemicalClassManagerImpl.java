@@ -1,9 +1,12 @@
 /**
  * @author
  * 
- * $Id: ChemicalClassManagerImpl.java,v 1.5 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: ChemicalClassManagerImpl.java,v 1.6 2006-10-18 18:09:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.4  2006/01/18 14:24:23  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -56,7 +59,7 @@ public class ChemicalClassManagerImpl extends BaseManager implements ChemicalCla
 
                 // Apply evaluators to object properties
                 Evaluation theEvaluation = new Evaluation();
-                theEvaluation.addEvaluator("chemicalClass.chemicalClassName", Evaluator.EQUAL);
+                theEvaluation.addEvaluator("chemicalClass.name", Evaluator.EQUAL);
 
                 List theList = Search.query(theQueryObj, theEvaluation);
 

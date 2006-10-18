@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: TransientInterferenceAction.java,v 1.1 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: TransientInterferenceAction.java,v 1.2 2006-10-18 18:10:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.1  2006/05/03 20:04:55  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -164,7 +167,7 @@ public class TransientInterferenceAction extends BaseAction
 
         try
         {
-            log.info("<TherapyAction> Entering try block");            
+            log.info("<TransientInterferenceAction> Entering try block");            
             animalModelManager.addTransientInterference(animalModel, transientInterferenceForm);
             
 			log.info("New Transient Interference (Morpholino) created");            
