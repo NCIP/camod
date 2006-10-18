@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteTransIntTest.java,v 1.2 2006-10-17 17:23:00 pandyas Exp $
+ * $Id: SubmitEditDeleteTransIntTest.java,v 1.3 2006-10-18 18:11:06 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/10/17 17:23:00  pandyas
+ * changed name to match object
+ *
  * Revision 1.1  2006/10/16 14:49:56  pandyas
  * modified name of test to add SiRNA
  *
@@ -56,7 +59,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
                 .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Morpholino");
         WebResponse theCurrentPage = theLink.click(); 
         assertCurrentPageContains("if source is not listed");
-        WebForm theForm = theCurrentPage.getFormWithName("morpholinoForm");
+        WebForm theForm = theCurrentPage.getFormWithName("transientInterferenceForm");
         theForm.setParameter("targetedRegion", "ABCDEFG");
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
@@ -68,7 +71,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         assertNotNull("Unable to find link to edit the Morpholino", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if source is not listed");
-        theForm = theCurrentPage.getFormWithName("morpholinoForm");
+        theForm = theCurrentPage.getFormWithName("transientInterferenceForm");
         theForm.setParameter("targetedRegion", "ABCDEFGHI"); 
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
@@ -80,12 +83,12 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         assertNotNull("Unable to find link to delete the Morpholino", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if source is not listed");
-        theForm = theCurrentPage.getFormWithName("morpholinoForm");               
+        theForm = theCurrentPage.getFormWithName("transientInterferenceForm");               
         theForm.getSubmitButton( "submitAction", "Delete" ).click();  
       
         assertCurrentPageContains("You have successfully deleted a Morpholino."); 
     } 
-/*    
+    
     public void testSirna() throws Exception {
         navigateToModelForEditing(myModelName);
         
@@ -94,34 +97,34 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
                 .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter SiRNA");
         WebResponse theCurrentPage = theLink.click(); 
         assertCurrentPageContains("if source is not listed");
-        WebForm theForm = theCurrentPage.getFormWithName("morpholinoForm");
+        WebForm theForm = theCurrentPage.getFormWithName("transientInterferenceForm");
         theForm.setParameter("targetedRegion", "ABCDEFG");
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully added a Morpholino to this model!");
+        assertCurrentPageContains("You have successfully added a siRNA to this model!");
         
         // Find Morpholino link to Edit 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");        
-        assertNotNull("Unable to find link to edit the Morpholino", theLink);        
+        assertNotNull("Unable to find link to edit the SiRNA", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if source is not listed");
-        theForm = theCurrentPage.getFormWithName("morpholinoForm");
+        theForm = theCurrentPage.getFormWithName("transientInterferenceForm");
         theForm.setParameter("targetedRegion", "ABCDEFGHI"); 
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully edited a Morpholino.");      
+        assertCurrentPageContains("You have successfully edited a siRNA.");      
         
         // Find Morpholino link to Delete 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFGHI");
-        assertNotNull("Unable to find link to delete the Morpholino", theLink);        
+        assertNotNull("Unable to find link to delete the SiRNA", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if source is not listed");
-        theForm = theCurrentPage.getFormWithName("morpholinoForm");               
+        theForm = theCurrentPage.getFormWithName("transientInterferenceForm");               
         theForm.getSubmitButton( "submitAction", "Delete" ).click();  
       
-        assertCurrentPageContains("You have successfully deleted a Morpholino."); 
+        assertCurrentPageContains("You have successfully deleted a siRNA."); 
     }     
-*/
+
 }
