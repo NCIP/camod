@@ -1,7 +1,7 @@
 /**
  * @author pandyas
  * 
- * $Id: TransientInterferenceAction.java,v 1.2 2006-10-18 18:10:26 pandyas Exp $
+ * $Id: TransientInterferenceAction.java,v 1.3 2006-10-19 16:30:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.1  2006/10/17 16:11:00  pandyas
@@ -140,10 +140,10 @@ public class TransientInterferenceAction extends BaseAction
         
         TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
 
-		String aConceptCode = request.getParameter("aConceptCode");
+		String conceptCode = request.getParameter("aConceptCode");
 
-		transientInterferenceForm.setAConceptCode(aConceptCode);        
-        log.info("transientInterferenceForm.getConceptCode(): " + transientInterferenceForm.getAConceptCode());
+		transientInterferenceForm.setConceptCode(conceptCode);        
+        log.info("transientInterferenceForm.getConceptCode(): " + transientInterferenceForm.getConceptCode());
         
         System.out.println("<TransientInterferenceAction save> following Characteristics:" 
 	    + "\n\t Concentration: " + transientInterferenceForm.getConcentration() 
@@ -167,7 +167,7 @@ public class TransientInterferenceAction extends BaseAction
 
         try
         {
-            log.info("<TransientInterferenceAction> Entering try block");            
+            log.info("<TherapyAction> Entering try block");            
             animalModelManager.addTransientInterference(animalModel, transientInterferenceForm);
             
 			log.info("New Transient Interference (Morpholino) created");            
