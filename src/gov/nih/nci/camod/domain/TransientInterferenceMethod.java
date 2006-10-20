@@ -1,7 +1,10 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:14:36  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * 
- * $Id: TransientInterferenceMethod.java,v 1.1 2006-10-17 16:14:36 pandyas Exp $
+ * $Id: TransientInterferenceMethod.java,v 1.2 2006-10-20 15:18:26 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -75,7 +78,7 @@ public class TransientInterferenceMethod extends BaseObject implements
 		if ((o instanceof TransientInterferenceMethod)
 				&& (this.getName() != null)
 				&& (((TransientInterferenceMethod) o).getName() != null)) {
-			int result = this.getName().compareTo(((Disease) o).getName());
+			int result = this.getName().compareTo(((TransientInterferenceMethod) o).getName());
 			if (result != 0) {
 				return result;
 			}
