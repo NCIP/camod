@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2006/10/17 16:08:28  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.30  2006/05/19 17:35:40  georgeda
  * Fixed bug introduced in 2.1 OM change
  *
@@ -36,7 +39,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.31 2006-10-17 16:08:28 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.32 2006-10-23 16:50:04 pandyas Exp $
  *
  */   
 %>
@@ -307,7 +310,14 @@
 					<td class="resultsBoxGreyEnd" width="75%">
 						<camod:highlight><c:out value="${m.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/></camod:highlight>
 				    </td>
-				</tr>			
+				</tr>	
+				
+				<tr>
+					<td class="resultsBoxGrey" width="25%"><b>Age at Detection of Metastasis</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
+						<camod:highlight><c:out value="${m.ageOfDetection}"/>&nbsp;<c:out value="${h.ageOfDetectionUnit}"/></camod:highlight>
+				    </td>
+				</tr>						
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%">
