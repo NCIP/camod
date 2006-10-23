@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: TransientInterferenceForm.java,v 1.1 2006-10-17 16:10:47 pandyas Exp $
+ * $Id: TransientInterferenceForm.java,v 1.2 2006-10-23 14:17:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:10:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.1  2006/05/03 20:05:25  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -35,7 +38,7 @@ public class TransientInterferenceForm extends BaseForm implements Serializable,
     protected String otherDeliveryMethod;
     protected String visualLigand;
     protected String otherVisualLigand;
-    protected String aConceptCode;
+    protected String conceptCode;
 	protected String comments;
 	
     /**
@@ -218,18 +221,18 @@ public class TransientInterferenceForm extends BaseForm implements Serializable,
     }
 
     /*
-    * @return Returns the aConceptCode for transient interference method.
+    * @return Returns the conceptCode for transient interference method.
     */
-   public String getAConceptCode() {
-       return aConceptCode;
+   public String getConceptCode() {
+       return conceptCode;
    }
 
    /**
-    * @param aConceptCode
-    *            The aConceptCode to set.
+    * @param conceptCode
+    *            The conceptCode to set.
     */
-   public void setAConceptCode(String aConceptCode) {
-       this.aConceptCode = aConceptCode;
+   public void setConceptCode(String conceptCode) {
+       this.conceptCode = conceptCode;
    }
    
 	/**

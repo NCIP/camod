@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: TransientInterferenceData.java,v 1.1 2006-10-17 16:10:47 pandyas Exp $
+ * $Id: TransientInterferenceData.java,v 1.2 2006-10-23 14:17:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:10:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.1  2006/05/03 20:05:25  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -59,9 +62,9 @@ public interface TransientInterferenceData {
 
 	public void setOtherVisualLigand(String otherVisualLigand);
 
-	public String getAConceptCode();
+	public String getConceptCode();
 
-	public void setAConceptCode(String AConceptCode);
+	public void setConceptCode(String conceptCode);
 
 	public String getComments();
 

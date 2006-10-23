@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: SirnaPopulateAction.java,v 1.1 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: SirnaPopulateAction.java,v 1.2 2006-10-23 14:17:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * 
  */
 
@@ -117,11 +120,11 @@ public class SirnaPopulateAction extends BaseAction
     {
         log.info("<SirnaPopulateAction dropdown> Entering ActionForward dropdown()");
 
-		String aConceptCode = request.getParameter("aConceptCode");
+		String conceptCode = request.getParameter("aConceptCode");
 		// Create a form to edit
         TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
 
-		transientInterferenceForm.setAConceptCode(aConceptCode);
+		transientInterferenceForm.setConceptCode(conceptCode);
 
         //setup dropdown menus
         this.dropdown(request, response);

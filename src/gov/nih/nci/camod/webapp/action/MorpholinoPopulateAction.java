@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoPopulateAction.java,v 1.4 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: MorpholinoPopulateAction.java,v 1.5 2006-10-23 14:18:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.2  2006/05/09 18:56:58  georgeda
  * Changes for searching on transient interfaces
  *
@@ -128,8 +131,8 @@ public class MorpholinoPopulateAction extends BaseAction
         TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
 
         
-		transientInterferenceForm.setAConceptCode(aConceptCode);
-		log.info("<MorpholinoPopulateAction> morpholinoForm.getAConceptCode: " + transientInterferenceForm.getAConceptCode());
+		transientInterferenceForm.setConceptCode(aConceptCode);
+		log.info("<MorpholinoPopulateAction> morpholinoForm.getConceptCode: " + transientInterferenceForm.getConceptCode());
 
         //setup dropdown menus
         this.dropdown(request, response);		
