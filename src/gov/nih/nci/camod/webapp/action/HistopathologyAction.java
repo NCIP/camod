@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.12 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.13 2006-10-23 16:51:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.11  2006/04/20 19:19:43  pandyas
  * Moved save Assoc Met from AnimalModel to the Histopathology
  *
@@ -86,9 +89,11 @@ public class HistopathologyAction extends BaseAction {
                 + "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
                 + histopathologyForm.getOrganTissueCode() + "\n\t diseaseName: "
                 + histopathologyForm.getDiagnosisName() + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()
-                + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() + "\n\t ageOfOnset: "
-                + histopathologyForm.getAgeOfOnset() + "\n\t ageOfDetection: "
-                + histopathologyForm.getAgeOfDetection()
+                + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() 
+                + "\n\t ageOfOnset: " + histopathologyForm.getAgeOfOnset() 
+                + "\n\t ageOfOnsetUnit: " + histopathologyForm.getAgeOfOnsetUnit()
+                + "\n\t ageOfDetection: " + histopathologyForm.getAgeOfDetection()
+                + "\n\t ageOfDetectionUnit: " + histopathologyForm.getAgeOfDetectionUnit()
                 + "\n\t weightOfTumor: " + histopathologyForm.getWeightOfTumor()
                 + "\n\t volumeOfTumor: " + histopathologyForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
                 + histopathologyForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
@@ -248,9 +253,11 @@ public class HistopathologyAction extends BaseAction {
                 + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
                 + histopathologyForm.getOrganTissueCode() + "\n\t DiagnosisName: "
                 + histopathologyForm.getDiagnosisName() + "\n\t DiagnosisCode: " + histopathologyForm.getDiagnosisCode()
-                + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() + "\n\t ageOfOnset: "
-                + histopathologyForm.getAgeOfOnset() + "\n\t ageOfDetection: "
-                + histopathologyForm.getAgeOfDetection()
+                + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() 
+                + "\n\t ageOfOnset: " + histopathologyForm.getAgeOfOnset() 
+                + "\n\t ageOfOnsetUnit: " + histopathologyForm.getAgeOfOnsetUnit()
+                + "\n\t ageOfDetection: " + histopathologyForm.getAgeOfDetection()
+                + "\n\t ageOfDetectionUnit: " + histopathologyForm.getAgeOfDetectionUnit()
                 + "\n\t weightOfTumor: " + histopathologyForm.getWeightOfTumor()
                 + "\n\t volumeOfTumor: " + histopathologyForm.getVolumeOfTumor() + "\n\t tumorIncidenceRate: "
                 + histopathologyForm.getTumorIncidenceRate() + "\n\t survivalInfo: "
