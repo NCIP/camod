@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.14 2006-10-17 16:13:46 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.15 2006-10-23 16:52:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/10/17 16:13:46  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.13  2006/05/22 20:11:45  pandyas
  * removed debugging print statements
  *
@@ -171,12 +174,12 @@ public class HistopathologyManagerImpl extends BaseManager implements
 					.getVolumeOfTumor());
 		}
 
-		// Histopathology attributes that need units
+		// Histopathology attributes - AgeOfOnset
 		inHistopathology.setAgeOfOnset(inHistopathologyData.getAgeOfOnset());
 		inHistopathology.setAgeOfOnsetUnit(inHistopathologyData
 				.getAgeOfOnsetUnit());
 		
-		// Histopathology attributes that need units
+		// Histopathology attributes - AgeOfDetection
 		inHistopathology.setAgeOfDetection(inHistopathologyData.getAgeOfDetection());
 		inHistopathology.setAgeOfDetectionUnit(inHistopathologyData
 				.getAgeOfDetectionUnit());		
