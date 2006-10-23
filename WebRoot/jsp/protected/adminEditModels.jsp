@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.3 2006-10-17 16:08:12 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.4 2006-10-23 14:15:25 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/17 16:08:12  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.2  2006/08/17 15:38:09  pandyas
  * updated on-line help from Robohelp to ePublisher - added link
  *
@@ -61,10 +64,6 @@
 	 </TABLE>
 	<br>
 	
-	<!-- setup some useful variables -->
-	<% pageContext.setAttribute("eventTag", Constants.Parameters.EVENT); %>
-    <% pageContext.setAttribute("modelIdTag", Constants.Parameters.MODELID); %>		
-
     <c:if test="${not empty adminModelSearchResults}">
 	<display:table id="row" name="${sessionScope.adminModelSearchResults}"
       pagesize = "15"
