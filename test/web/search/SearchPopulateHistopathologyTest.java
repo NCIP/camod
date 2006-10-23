@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateHistopathologyTest.java,v 1.3 2006-05-08 14:23:23 georgeda Exp $
+ * $Id: SearchPopulateHistopathologyTest.java,v 1.4 2006-10-23 16:50:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/05/08 14:23:23  georgeda
+ * Reformat and clean up warnings
+ *
  * Revision 1.2  2006/04/27 15:08:43  pandyas
  * Modified while testing caMod 2.1
  *
@@ -293,7 +296,6 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest
         theAMForm.setComments("Test Comments");
         theAMForm.setTumorIncidenceRate("20");
 
-        //TODO: add check for histopathologyID so we can remove from skip list
         /* Add parameters found on submit screen but not displayed on search screen  */
         theParamsToSkip = new ArrayList<String>();
         theParamsToSkip.add("organTissueCode");
