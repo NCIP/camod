@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.18 2006-09-18 16:26:14 georgeda Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.19 2006-10-23 17:08:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2006/09/18 16:26:14  georgeda
+ * moved getOrgan code inside check for null - check first, get organ if selected by user.  Also took out duplicate getOrgan code - threw unique constraint error and should not be there.
+ *
  * Revision 1.17  2006/08/17 18:27:14  pandyas
  * Defect# 410: Externalize properties files - Code Changes to send mail method
  *
@@ -61,7 +64,6 @@ import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.domain.SexDistribution;
 import gov.nih.nci.camod.domain.Treatment;
 import gov.nih.nci.camod.service.GeneDeliveryManager;
-import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
 

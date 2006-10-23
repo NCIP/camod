@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SubmitEditDeleteImageTest.java,v 1.3 2006-09-20 19:16:24 georgeda Exp $
+ * $Id: SubmitEditDeleteImageTest.java,v 1.4 2006-10-23 17:08:38 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/09/20 19:16:24  georgeda
+ * added getTextOnPage method
+ *
  * Revision 1.2  2005/12/27 19:19:34  georgeda
  * Test cleanup
  *
@@ -22,8 +25,6 @@ import java.util.ResourceBundle;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import web.base.BaseModelNeededTest;
-import web.util.TestUtil;
-
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebLink;
 import com.meterware.httpunit.WebResponse;
