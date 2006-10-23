@@ -84,13 +84,11 @@
         	column="comments" 
         	type="text"/>        	
         	
-        <!-- transientInterferenceMethod: this is really a one-to-one relationship with unique=true -->
-        <!-- (one-to-one unidirectional) -->
-        <many-to-one name="transientInterferenceMethod"
+        <!-- transientInterferenceMethod (many-to-one unidirectional) -->
+        <many-to-one 
+        	name="transientInterferenceMethod"
         	class="TransientInterferenceMethod"
-        	column="trans_interference_method_id"
-        	cascade="save-update"
-        	unique="true"/>        	
+        	column="trans_interference_method_id"/>        	
 
 	</class>
 </hibernate-mapping>
