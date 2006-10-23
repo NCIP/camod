@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: TransientInterferenceManagerImpl.java,v 1.1 2006-10-17 16:14:05 pandyas Exp $
+ * $Id: TransientInterferenceManagerImpl.java,v 1.2 2006-10-23 14:21:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:14:05  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.1  2006/05/03 20:04:04  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -129,110 +132,110 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 	}
 
 	private void populateTransIntMethod(
-			TransientInterferenceData inTransientInterferenceData,
-			TransientInterference inTransientInterference,
+			TransientInterferenceData inTransIntData,
+			TransientInterference inTransInt,
 			AnimalModel inAnimalModel) throws Exception {
-		log
-				.info("<TransientInterferenceManagerImpl> Entering populateTransMethod");
+		
+		log.info("Entering populateTransMethod");
 
-		log.info("inTransientInterferenceData.getAConceptCode(): "
-				+ inTransientInterferenceData.getAConceptCode());
+		log.info("inTransientInterferenceData.getConceptCode(): "
+				+ inTransIntData.getConceptCode());
 
 		/* get TransientInterferenceMethod object */
 		TransientInterferenceMethod theMethod = TransIntMethodManagerSingleton
 				.instance().getByConceptCode(
-						inTransientInterferenceData.getAConceptCode());
-		log.info("theTransientInterferenceMethod: " + theMethod);
+						inTransIntData.getConceptCode());
+		log.info("In populateTransMethod TIMethod: " + theMethod);
 
 		// set TransientInterferenceMethod
-		inTransientInterference.setTransientInterferenceMethod(theMethod);
+		inTransInt.setTransientInterferenceMethod(theMethod);
 	}
 
 	private void populate(
-			TransientInterferenceData inTransientInterferenceData,
-			TransientInterference inTransientInterference,
+			TransientInterferenceData inTransIntData,
+			TransientInterference inTransInt,
 			AnimalModel inAnimalModel) throws Exception {
 		log.info("<TransientInterferenceManagerImpl> Entering populate");
 
 		// Save Source
-		if (inTransientInterferenceData.getSource().equals(
+		if (inTransIntData.getSource().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			log.info("source equals other");
-			inTransientInterference.setSource(null);
-			inTransientInterference
-					.setSourceUnctrVocab(inTransientInterferenceData
+			inTransInt.setSource(null);
+			inTransInt
+					.setSourceUnctrVocab(inTransIntData
 							.getOtherSource());
 
 			log.info("Sending Notification eMail - new Source added");
-			sendEmail(inAnimalModel, inTransientInterferenceData
+			sendEmail(inAnimalModel, inTransIntData
 					.getOtherSource(), "otherSource");
-		} else if (inTransientInterferenceData.getSource() != null) {
+		} else if (inTransIntData.getSource() != null) {
 			log.info("source not other or null");
-			inTransientInterference.setSource(inTransientInterferenceData
+			inTransInt.setSource(inTransIntData
 					.getSource());
-			inTransientInterference.setSourceUnctrVocab(null);
+			inTransInt.setSourceUnctrVocab(null);
 		}
 
 		// Save Type
-		inTransientInterference.setType(inTransientInterferenceData.getType());
+		inTransInt.setType(inTransIntData.getType());
 
 		// Save SequenceDirection
-		inTransientInterference
-				.setSequenceDirection(inTransientInterferenceData
+		inTransInt
+				.setSequenceDirection(inTransIntData
 						.getSequenceDirection());
 
 		// Save Targeted Region
-		inTransientInterference.setTargetedRegion(inTransientInterferenceData
+		inTransInt.setTargetedRegion(inTransIntData
 				.getTargetedRegion());
 
 		// Save Concentration
-		inTransientInterference.setConcentration(inTransientInterferenceData
+		inTransInt.setConcentration(inTransIntData
 				.getConcentration());
-		inTransientInterference
-				.setConcentrationUnit(inTransientInterferenceData
+		inTransInt
+				.setConcentrationUnit(inTransIntData
 						.getConcentrationUnit());
 
 		// Save Delivery Method
-		if (inTransientInterferenceData.getDeliveryMethod().equals(
+		if (inTransIntData.getDeliveryMethod().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			log.info("DeliveryMethod equals other");
-			inTransientInterference.setDeliveryMethod(null);
-			inTransientInterference
-					.setDeliveryMethodUnctrlVocab(inTransientInterferenceData
+			inTransInt.setDeliveryMethod(null);
+			inTransInt
+					.setDeliveryMethodUnctrlVocab(inTransIntData
 							.getOtherDeliveryMethod());
 
 			log.info("Sending Notification eMail - new DeliveryMethod added");
-			sendEmail(inAnimalModel, inTransientInterferenceData
+			sendEmail(inAnimalModel, inTransIntData
 					.getOtherDeliveryMethod(), "otherDeliveryMethod");
-		} else if (inTransientInterferenceData.getDeliveryMethod() != null) {
+		} else if (inTransIntData.getDeliveryMethod() != null) {
 			log.info("DeliveryMethod not other or null");
-			inTransientInterference
-					.setDeliveryMethod(inTransientInterferenceData
+			inTransInt
+					.setDeliveryMethod(inTransIntData
 							.getDeliveryMethod());
-			inTransientInterference.setDeliveryMethodUnctrlVocab(null);
+			inTransInt.setDeliveryMethodUnctrlVocab(null);
 		}
 
 		// Save visualizationLigands
-		if (inTransientInterferenceData.getVisualLigand().equals(
+		if (inTransIntData.getVisualLigand().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			log.info("visualizationLigands equals other");
-			inTransientInterference.setVisualLigand(null);
-			inTransientInterference
-					.setVisualLigandUnctrlVocab(inTransientInterferenceData
+			inTransInt.setVisualLigand(null);
+			inTransInt
+					.setVisualLigandUnctrlVocab(inTransIntData
 							.getOtherVisualLigand());
 
 			log.info("Sending Notification eMail - new VisualLigands added");
-			sendEmail(inAnimalModel, inTransientInterferenceData
+			sendEmail(inAnimalModel, inTransIntData
 					.getOtherVisualLigand(), "otherVisualLigands");
-		} else if (inTransientInterferenceData.getVisualLigand() != null) {
+		} else if (inTransIntData.getVisualLigand() != null) {
 			log.info("visualLigands not other or null");
-			inTransientInterference.setVisualLigand(inTransientInterferenceData
+			inTransInt.setVisualLigand(inTransIntData
 					.getVisualLigand());
-			inTransientInterference.setVisualLigandUnctrlVocab(null);
+			inTransInt.setVisualLigandUnctrlVocab(null);
 		}
 
 		// Save Comment
-		inTransientInterference.setComments(inTransientInterferenceData
+		inTransInt.setComments(inTransIntData
 				.getComments());
 
 		log.info("<TransientInterfaceManagerImpl> Exiting populate");
