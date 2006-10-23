@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TestUtil.java,v 1.6 2006-05-08 14:23:35 georgeda Exp $
+ * $Id: TestUtil.java,v 1.7 2006-10-23 16:50:25 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/05/08 14:23:35  georgeda
+ * Reformat and clean up warnings
+ *
  * Revision 1.5  2006/01/06 16:11:07  pandyas
  * Modified to include methods to test if the populate method returns complete and correct data - initial modifications
  *
@@ -103,15 +106,15 @@ public class TestUtil {
                         String[] theOptions = inForm.getOptionValues(thePropertyName);
 
                         if (theOptions.length > 0) {
-                        	//System.out.println("This property is a collection: " + thePropertyName);
+                        	System.out.println("This property is a collection: " + thePropertyName);
                             if (Arrays.asList(theOptions).contains(Constants.Dropdowns.OTHER_OPTION)
                                     && setOtherValues == true) {
                                 BeanUtils.setProperty(inDataObject, thePropertyName, Constants.Dropdowns.OTHER_OPTION);
-                                System.out.println("PropertyName: " + thePropertyName + "PropertyValue:" + Constants.Dropdowns.OTHER_OPTION);
+                                System.out.println("Collection PropertyName: " + thePropertyName + "PropertyValue:" + Constants.Dropdowns.OTHER_OPTION);
                             } else {
                             	String newOption = theOptions[theOptions.length - 1];
                                 BeanUtils.setProperty(inDataObject, thePropertyName, newOption);
-                                System.out.println("PropertyName: " + thePropertyName + "PropertyValue:" + newOption);
+                                System.out.println("Collection PropertyName: " + thePropertyName + "PropertyValue:" + newOption);
                             }
                         } else {
 
@@ -119,7 +122,7 @@ public class TestUtil {
                             if (thePropertyName.indexOf("other") == -1 || setOtherValues == true) {
                             	String newRandomValue = GUIDGenerator.getInstance().genNewGuid();                            	
                                 BeanUtils.setProperty(inDataObject, thePropertyName, newRandomValue);
-                                System.out.println("The PropertyName: " + thePropertyName + "\t The PropertyValue: "
+                                System.out.println("The PropertyName in other loop: " + thePropertyName + "\t The PropertyValue: "
                                 		+ newRandomValue);
                             }
                         }
@@ -140,9 +143,9 @@ public class TestUtil {
     	throws Exception  {
     	
         setRandomValues(inDataObject, inForm, setOtherValues, new ArrayList());
-
     	
     }
+    
 
     public static void setValuesOnForm(Object inDataObject, WebForm inForm) throws Exception {
     	
@@ -161,7 +164,7 @@ public class TestUtil {
                 Object thePropertyValue = theEntry.getValue();
 
                 if (thePropertyValue != null && inForm.hasParameterNamed(thePropertyName)) {
-                    System.out.println("Setting value: " + thePropertyName + " to " + thePropertyValue.toString());
+                    System.out.println("Setting value: " + thePropertyName + " to: " + thePropertyValue.toString());
                     inForm.getScriptableObject().setParameterValue(thePropertyName, thePropertyValue.toString());
                     //WebForm savedForm = new WebForm;
                     savePropertyNameValue(thePropertyName, thePropertyValue.toString());
@@ -175,8 +178,8 @@ public class TestUtil {
     
     public static void savePropertyNameValue(String inPropertyName, String inPropertyValue){
     	ourPairList.put(inPropertyName, inPropertyValue);
-    	System.out.println("Added Property:" + inPropertyName + " and Value: "+  inPropertyValue + " to map");
-    	System.out.println("pairList.size():" + ourPairList.size());
+    	System.out.println("Added Property and Value to map: " + "\t" + inPropertyName + "\t" +  inPropertyValue);
+
     }
     /*
      * This simple method is used to capture text on a page.
