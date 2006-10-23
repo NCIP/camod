@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.60 2006-10-17 16:50:25 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.61 2006-10-23 14:21:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.60  2006/10/17 16:50:25  pandyas
+ * modified during development of caMOD 2.2 - added methods for tool strain, external source, and images
+ *
  * Revision 1.59  2006/07/31 21:12:51  pandyas
  * Returned to an earlier version of this class so it only included changes marked for the next bug fix.  Had to remove all changes that were slated for the 2.2 release.
  *
@@ -1537,7 +1540,7 @@ public class QueryManagerImpl extends BaseManager
      * @throws PersistenceException
      * 
      */
-    //Sima TODO: could not test IM since original query returned 0 results in camoddev
+    
     private String getModelIdsForEngineeredGenes(String inGeneName,
                                                  boolean isEngineeredTransgene,
                                                  boolean isTargetedModification,
@@ -1989,6 +1992,13 @@ public class QueryManagerImpl extends BaseManager
         {
             theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForMicroArrayData() + ")";
         }
+        
+        // Search for image data
+        if (inSearchData.isSearchImageData())
+        {
+        	log.info("In theWhereClause for image data");
+            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForImageData() + ")";
+        }        
  
         // Search for Transient Interference
         if (inSearchData.isSearchTransientInterference())
@@ -2372,8 +2382,24 @@ public class QueryManagerImpl extends BaseManager
 
 	}
 	
-	
+    /**
+     * Get the model id's for any model that has associated image data
+     * 
+     * @return a list of matching model ids
+     * 
+     * @throws PersistenceException
+     */
+    private String getModelIdsForImageData() throws PersistenceException
+    {
+    	log.info("In getModelIdsForImageData");
+        String theSQLString = "SELECT distinct abs_cancer_model_id FROM image";             
 
+        Object[] theParams = new Object[0];
+        return getIds(theSQLString, theParams);
+
+    }	
+
+	
 	public static void main(String[] inArgs) {
 		try {
 			List theList = QueryManagerSingleton.instance()
