@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.15 2006-05-04 14:28:14 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.16 2006-10-27 16:33:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/05/04 14:28:14  pandyas
+ * Fixed comment
+ *
  * Revision 1.14  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -117,7 +120,7 @@ public final class TherapyAction extends BaseAction {
 			}
 		} catch (Exception e) {
 
-			log.error("Unable to get add a chemical drug action: ", e);
+			log.error("Unable to get add a therapy action: ", e);
 
 			ActionMessages theMsg = new ActionMessages();
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));

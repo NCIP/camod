@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.10 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: SurgeryAction.java,v 1.11 2006-10-27 16:34:15 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.9  2005/11/09 00:17:25  georgeda
  * Fixed delete w/ constraints
  *
@@ -98,7 +101,7 @@ public class SurgeryAction extends BaseAction {
 			}
 		} catch (Exception e) {
 
-			log.error("Unable to get add a chemical drug action: ", e);
+			log.error("Unable to get add a sugery action: ", e);
 
 			ActionMessages theMsg = new ActionMessages();
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));

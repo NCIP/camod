@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationAction.java,v 1.13 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: RadiationAction.java,v 1.14 2006-10-27 16:31:51 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.12  2005/11/09 00:17:26  georgeda
  * Fixed delete w/ constraints
  *
@@ -107,7 +110,7 @@ public class RadiationAction extends BaseAction {
 			}
 		} catch (Exception e) {
 
-			log.error("Unable to get add a chemical drug action: ", e);
+			log.error("Unable to get add a radiation action: ", e);
 
 			ActionMessages theMsg = new ActionMessages();
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
@@ -164,7 +167,7 @@ public class RadiationAction extends BaseAction {
 
 		} catch (Exception e) {
 
-			log.error("Unable to get add a chemical drug action: ", e);
+			log.error("Unable to get add a radiation action: ", e);
 
 			ActionMessages theMsg = new ActionMessages();
 			theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
