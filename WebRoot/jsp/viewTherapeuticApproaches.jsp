@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: viewTherapeuticApproaches.jsp,v 1.19 2006-04-28 19:52:30 schroedn Exp $
+ * $Id: viewTherapeuticApproaches.jsp,v 1.20 2006-10-27 18:31:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/04/28 19:52:30  schroedn
+ * Defect #55
+ * Added Keyword Highlighting to this jsp
+ *
  *
  */
 
@@ -31,7 +35,7 @@
 				<td class="formTitle" height="20" colspan="9">
 					Therapeutic Approaches - Model:
 					<camod:highlight>
-						<c:out escapeXml="false" value="${mdl.modelDescriptor}"/>
+						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
 					</camod:highlight>
 				</td>				
 			</tr>
@@ -39,7 +43,7 @@
 				<td class="resultsBoxWhiteEnd" height="20" colspan="9">
 					<c:forEach var="t" items="${ta}" varStatus="stat">
 					    <a href="<c:out value="#therap_${stat.count}"/>">
-							 <c:out value="${t.agent.name}"/><br/>
+							 <c:out value="${t.agent.name}" escapeXml="false"/><br/>
 						</a>  
 					</c:forEach>
 				</td>

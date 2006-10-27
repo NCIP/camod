@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2006/10/23 16:50:04  pandyas
+ * Added Age at Detection to view screen
+ *
  * Revision 1.31  2006/10/17 16:08:28  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -39,7 +42,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.32 2006-10-23 16:50:04 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.33 2006-10-27 18:31:16 pandyas Exp $
  *
  */   
 %>
@@ -263,14 +266,14 @@
 					        		<td class="WhiteBox">
 											<c:choose>
 												<c:when test="${empty c.name}">
-													<camod:highlight><c:out value="${c.nameUnctrlVocab}"/></camod:highlight>
+													<camod:highlight><c:out value="${c.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
 												</c:when>
 												<c:otherwise>
-													<camod:highlight><c:out value="${c.name}"/></camod:highlight>
+													<camod:highlight><c:out value="${c.name}" escapeXml="false"/></camod:highlight>
 												</c:otherwise>
 											</c:choose>					                
 					                </td>
-					                <td class="WhiteBoxRightEnd"><c:out value="${c.value}"/>&nbsp;</td>
+					                <td class="WhiteBoxRightEnd"><c:out value="${c.value}" escapeXml="false"/>&nbsp;</td>
 							    </tr>
 						    </c:forEach>
 					    </table>
@@ -345,31 +348,31 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.survivalInfo}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.survivalInfo}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>			
 	
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
-						<camod:highlight><c:out value="${m.grossDescription}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.grossDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.microscopicDescription}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.microscopicDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Metastasis</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.geneticAlteration.observation}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.geneticAlteration.observation}" escapeXml="false"/>&nbsp;</camod:highlight>
 						<c:if test="${not empty m.geneticAlteration.methodOfObservation}"><br/>
 							Method - &nbsp;
-							<camod:highlight><c:out value="${m.geneticAlteration.methodOfObservation}"/>&nbsp;</camod:highlight>
+							<camod:highlight><c:out value="${m.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;</camod:highlight>
 						</c:if>
 					</td>
 				</tr>
@@ -381,7 +384,7 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Comment</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.comments}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.comments}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 				<tr>

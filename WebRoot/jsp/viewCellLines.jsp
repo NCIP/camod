@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.23 2006-05-25 18:35:16 pandyas Exp $
+ * $Id: viewCellLines.jsp,v 1.24 2006-10-27 18:31:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/05/25 18:35:16  pandyas
+ * added break after MGI number
+ *
  * Revision 1.22  2006/05/25 17:36:52  pandyas
  * added break after jax number
  *
@@ -61,13 +64,13 @@
 				</c:choose>
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-					<camod:highlight><c:out value="${p.name}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.name}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Name of Cell Line</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.name}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.name}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
@@ -79,19 +82,19 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.experiment}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.experiment}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.results}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.results}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.comments}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.comments}"escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr><td></td></tr>
@@ -129,10 +132,10 @@
 							</c:otherwise>
 						</c:choose>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<camod:highlight><c:out value="${pub.publicationStatus.name}"/></camod:highlight>
+							<camod:highlight><c:out value="${pub.publicationStatus.name}" escapeXml="false"/></camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
-							<camod:highlight><c:out value="${pub.authors}"/>&nbsp;</camod:highlight>
+							<camod:highlight><c:out value="${pub.authors}" escapeXml="false"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="15%">
 							<c:out value="${pub.jaxJNumber}"/>&nbsp;<br/>
@@ -144,16 +147,16 @@
 								</c:if>							
 						</td>							
 						<td class="<c:out value="${tdClass}"/>" width="30%">
-							<camod:highlight><c:out value="${pub.title}"/>&nbsp;</camod:highlight>
+							<camod:highlight><c:out value="${pub.title}" escapeXml="false"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<camod:highlight><c:out value="${pub.journal}"/>&nbsp;</camod:highlight>
+							<camod:highlight><c:out value="${pub.journal}" escapeXml="false"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="5%">
-							<camod:highlight><c:out value="${pub.year}"/>&nbsp;</camod:highlight>
+							<camod:highlight><c:out value="${pub.year}" escapeXml="false"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
-							<camod:highlight><c:out value="${pub.volume}"/>&nbsp;</camod:highlight>
+							<camod:highlight><c:out value="${pub.volume}" escapeXml="false"/>&nbsp;</camod:highlight>
 						</td>
 						<td class="<c:out value="${tdClass}"/>" width="10%">
 							<camod:highlight><c:out value="${pub.startPage}"/> - </camod:highlight>

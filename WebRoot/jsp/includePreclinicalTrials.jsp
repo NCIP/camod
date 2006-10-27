@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/05/25 18:34:50  pandyas
+ * added break after MGI number
+ *
  * Revision 1.20  2006/05/25 17:37:36  pandyas
  * added break after jax number
  *
@@ -45,24 +48,24 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.21 2006-05-25 18:34:50 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.22 2006-10-27 18:31:16 pandyas Exp $
  */
 %>
 <tr>
 	<td class="formTitleBlue" height="20" colspan="2">
-		Summary of the pre-clinical study in <c:out value="${agt.name}"/>
+		Summary of the pre-clinical study in <c:out value="${agt.name} escapeXml="false""/>
 	</td>
 </tr>	
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Experiment</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-		<camod:highlight><c:out value="${t.experiment}"/></camod:highlight>
+		<camod:highlight><c:out value="${t.experiment}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Dose</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-		<camod:highlight><c:out value="${t.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
+		<camod:highlight><c:out value="${t.treatment.dosage}" escapeXml="false"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 	</td>
 </tr>
 <tr>
@@ -70,10 +73,10 @@
 	<td class="resultsBoxWhiteEnd" width="75%">
 		<c:choose>
 			<c:when test="${empty t.treatment.administrativeRoute}">
-				<camod:highlight><c:out value="${t.treatment.adminRouteUnctrlVocab}"/></camod:highlight>
+				<camod:highlight><c:out value="${t.treatment.adminRouteUnctrlVocab}" escapeXml="false"/></camod:highlight>
 			</c:when>
 			<c:otherwise>
-				<camod:highlight><c:out value="${t.treatment.administrativeRoute}"/></camod:highlight>
+				<camod:highlight><c:out value="${t.treatment.administrativeRoute}" escapeXml="false"/></camod:highlight>
 			</c:otherwise>
 		</c:choose>&nbsp;
 	</td>
@@ -87,37 +90,37 @@
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Age at Treatment</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-		<camod:highlight><c:out value="${t.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${t.treatment.ageAtTreatmentUnit}"/></camod:highlight>
+		<camod:highlight><c:out value="${t.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${t.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-		<camod:highlight><c:out value="${t.results}"/></camod:highlight>
+		<camod:highlight><c:out value="${t.results}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Toxicity Grade</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-		<camod:highlight><c:out value="${t.toxicityGrade}"/></camod:highlight>
+		<camod:highlight><c:out value="${t.toxicityGrade}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>			
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Biomarker</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">
-		<camod:highlight><c:out value="${t.biomarker}"/>&nbsp;</camod:highlight>
+		<camod:highlight><c:out value="${t.biomarker}" escapeXml="false"/>&nbsp;</camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Tumor Response</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">
-		<camod:highlight><c:out value="${t.tumorResponse}"/>&nbsp;</camod:highlight>
+		<camod:highlight><c:out value="${t.tumorResponse}" escapeXml="false"/>&nbsp;</camod:highlight>
 	</td>
 </tr>
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Comment </b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
-		<camod:highlight><c:out value="${t.comments}"/></camod:highlight>
+		<camod:highlight><c:out value="${t.comments}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>
 <tr><td></td></tr>
@@ -158,7 +161,7 @@
 				<camod:highlight><c:out value="${p.publicationStatus.name}"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="15%">
-				<camod:highlight><c:out value="${p.authors}"/></camod:highlight>
+				<camod:highlight><c:out value="${p.authors}" escapeXml="false"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="15%">
 			<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>
@@ -170,16 +173,16 @@
 				</c:if>
 			</td>			
 			<td class="<c:out value="${tdClass}"/>" width="30%">
-				<camod:highlight><c:out value="${p.title}"/></camod:highlight>
+				<camod:highlight><c:out value="${p.title}" escapeXml="false"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.journal}"/></camod:highlight>
+				<camod:highlight><c:out value="${p.journal}" escapeXml="false"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="5%">
 				<camod:highlight><c:out value="${p.year}"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.volume}"/></camod:highlight>
+				<camod:highlight><c:out value="${p.volume}" escapeXml="false"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="10%">
 				<camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>

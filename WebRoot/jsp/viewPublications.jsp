@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.19 2006-05-25 18:33:57 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.20 2006-10-27 18:31:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/05/25 18:33:57  pandyas
+ * added break after MGI number
+ *
  * Revision 1.18  2006/05/25 17:34:04  pandyas
  * added break after jax number
  *
@@ -83,7 +86,7 @@
 					<camod:highlight><c:out value="${p.publicationStatus.name}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">
-					<camod:highlight><c:out value="${p.authors}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="15%">				
 					<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>
@@ -98,7 +101,7 @@
 					<camod:highlight><c:out value="${p.title}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="10%">
-					<camod:highlight><c:out value="${p.journal}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.journal}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="5%">
 					<camod:highlight><c:out value="${p.year}"/>&nbsp;</camod:highlight>

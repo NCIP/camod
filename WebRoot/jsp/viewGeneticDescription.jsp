@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.44 2006-05-24 15:41:53 schroedn Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.45 2006-10-27 18:31:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.44  2006/05/24 15:41:53  schroedn
+ * Fixed keyword text highlighting
+ *
  * Revision 1.43  2006/05/23 19:42:42  georgeda
  * Moved constuct sequence into image "if" block
  *
@@ -126,7 +129,7 @@
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
 					<li>
-					    <a href="<c:out value="#eng_trans_${idx}"/>">
+					    <a href="<c:out value="#eng_trans_${idx}" escapeXml="false"/>">
 							<bean:write name="eg" property="name"/>
 						</a>
 					</logic:iterate>
@@ -140,7 +143,7 @@
 				<ul>
 					<logic:iterate id="eg" name="gsc" indexId="idx">
 					<li>
-						<a href="<c:out value="#gen_seg_${idx}"/>">
+						<a href="<c:out value="#gen_seg_${idx}" escapeXml="false"/>">
 							<bean:write name="eg" property="cloneDesignator"/>
 						</a>
 					</logic:iterate>
@@ -154,7 +157,7 @@
 				<ul>
 					<logic:iterate id="eg" name="tmc" indexId="idx">
 					<li>
-						<a href="<c:out value="#targ_mod_${idx}"/>">
+						<a href="<c:out value="#targ_mod_${idx}" escapeXml="false"/>">
 							<bean:write name="eg" property="name"/>
 						</a>
 					</logic:iterate>
@@ -176,12 +179,12 @@
 							<c:choose>
 								<c:when test="${empty eg.environmentalFactor.name}">
 									<camod:highlight>
-										<c:out value="${eg.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+										<c:out value="${eg.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</c:when>
 								<c:otherwise>
 									<camod:highlight>
-						            	<c:out value="${eg.environmentalFactor.name}"/>
+						            	<c:out value="${eg.environmentalFactor.name}" escapeXml="false"/>
 									</camod:highlight>						       
 								</c:otherwise>
 							</c:choose>
@@ -197,7 +200,7 @@
 				<ul>
 				    <logic:iterate id="sm" name="smc" indexId="idx">
 						<li>
-						<a href="<c:out value="#spon_mut_${idx}"/>">
+						<a href="<c:out value="#spon_mut_${idx}" escapeXml="false"/>">
 								<bean:write name="sm" property="name"/>
 						</a>
 					</logic:iterate>
@@ -251,7 +254,7 @@
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 					<td class="WhiteBoxRightEnd" width="65%">
 						<camod:highlight>
-							<c:out value="${tg.locationOfIntegration}"/>&nbsp;
+							<c:out value="${tg.locationOfIntegration}" />&nbsp;
 						</camod:highlight>
 					</td>
 				</tr>
@@ -262,7 +265,7 @@
 			<td class="GreyBox" width="35%"><b>Transgene</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${tg.name}"/>&nbsp;
+					<c:out value="${tg.name}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>
@@ -290,7 +293,7 @@
 						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
 						<td class="WhiteBoxRightEnd" width="65%">
 						    <camod:highlight>
-						    		<c:out value="${rem.species.displayName}"/>&nbsp;
+						    		<c:out value="${rem.species.displayName}" escapeXml="false"/>&nbsp;
 						    </camod:highlight>
 						</td>
 					</tr>
@@ -307,7 +310,7 @@
 			<c:forEach var="gf" items="${tg.geneFunctionCollection}">
 				<li>
 					<camod:highlight>
-						<c:out value="${gf.function}"/>
+						<c:out value="${gf.function}" escapeXml="false"/>
 					</camod:highlight>
 				</li>
 			</c:forEach>
@@ -329,7 +332,8 @@
 		</tr>
 		<tr>
 			<td class="WhiteBox" width="35%"><b>Conditional Description</b></td>
-			<td class="WhiteBoxRightEnd" width="65%"><c:out value="${tg.conditionality.description}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd" width="65%">
+				<c:out value="${tg.conditionality.description}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 
 		<c:if test="${not empty tg.image}">
@@ -348,7 +352,7 @@
 				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${tg.image.title}"/>&nbsp;
+						<c:out value="${tg.image.title}" escapeXml="false"/>&nbsp;
 					</camod:highlight>	
 				</td>
 			</tr>
@@ -356,7 +360,7 @@
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 				<td class="GreyBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${tg.image.description}"/>&nbsp;
+						<c:out value="${tg.image.description}" escapeXml="false"/>&nbsp;
 					</camod:highlight>		
 				</td>
 			</tr>
@@ -364,7 +368,7 @@
 				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${tg.constructSequence}"/>&nbsp;
+						<c:out value="${tg.constructSequence}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
 				</td>
 			</tr>		
@@ -414,7 +418,7 @@
 			<td class="GreyBox" width="35%"><b>Comment</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${tg.comments}"/>&nbsp;
+					<c:out value="${tg.comments}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>

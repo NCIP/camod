@@ -1,4 +1,4 @@
-<%@ include file="/jsp/header.jsp" %>
+ <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 
@@ -26,13 +26,13 @@
 
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${xt.xenograftName}"/>
+				<c:out value="${xt.xenograftName}" escapeXml="false"/>
 				</td>
 			</tr>
 			       
 		<tr>
 			<td class="GreyBox"><b>Cell Line/Transplant:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.xenograftName}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.xenograftName}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="WhiteBox"><b>Donor Species</b></td>
@@ -91,24 +91,24 @@
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
 			<td class="GreyBoxRightEnd">
 			<a target="_atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${xt.atccNumber}"/>">
-			<c:out value="${xt.atccNumber}"/>&nbsp;</td>   		
+			<c:out value="${xt.atccNumber}" escapeXml="false"/>&nbsp;</td>   		
 		</tr>
 
 		<tr>		
 			<td class="WhiteBox"><b>Genetic Alteration:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.geneticManipulation}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.geneticManipulation}" escapeXml="false"/>&nbsp;</td>
 		</tr>		
 		<tr>
 			<td class="GreyBox"><b>Method of Modification:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.modificationDescription}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.modificationDescription}" escapeXml="false"/>&nbsp;</td>
 		</tr>						
         <tr>
 			<td class="WhiteBox"><b>Amount of Cells<b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.cellAmount}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.cellAmount}" escapeXml="false"/>&nbsp;</td>
 		</tr>
         <tr>
 			<td class="GreyBox"><b>Growth Period<b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.growthPeriod}"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.growthPeriod}" escapeXml="false"/>&nbsp;</td>
 		</tr>			
 		<tr>
 			<td class="WhiteBox"><b>Site of Administration:</b></td>

@@ -1,11 +1,14 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/10/17 16:08:28  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.1  2006/05/09 18:59:29  georgeda
  * Changes for searching on transient interfaces
  *
  *
- * $Id: viewTransientInterference.jsp,v 1.2 2006-10-17 16:08:28 pandyas Exp $
+ * $Id: viewTransientInterference.jsp,v 1.3 2006-10-27 18:31:16 pandyas Exp $
  *
  */   
 %>
@@ -51,7 +54,7 @@
 									
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-					<camod:highlight><c:out value="${p.targetedRegion}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.targetedRegion}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
@@ -99,7 +102,7 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.comments}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.comments}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			
 			<tr>
