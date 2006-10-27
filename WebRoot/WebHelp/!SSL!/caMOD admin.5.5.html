@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
-    <title>Administration Roles</title>
+    <title>Editor</title>
     <link rel="StyleSheet" href="css/caMOD admin.css" type="text/css" media="all" />
     <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
     <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js">
@@ -31,59 +31,35 @@
   <body style="" onLoad="WWHUpdate();" onUnload="WWHUnload();" onKeyDown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onKeyPress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onKeyUp="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
     <br />
     <div class="WebWorks_Breadcrumbs" style="text-align: left;">
-      <a class="WebWorks_Breadcrumb_Link" href="caMOD admin.5.1.html#1073499">caMOD Administration</a> &gt; <a class="WebWorks_Breadcrumb_Link" href="caMOD admin.5.1.html#1073499">Administration Functions Overview</a> &gt; Administration Roles</div>
+      <a class="WebWorks_Breadcrumb_Link" href="caMOD admin.5.1.html#1072016">caMOD Administration</a> &gt; <a class="WebWorks_Breadcrumb_Link" href="caMOD admin.5.2.html#1072016">Administration Functions Overview</a> &gt; Editor</div>
     <hr align="left" />
     <blockquote>
-      <div class="Heading2"><a name="1073499">Administration Roles</a></div>
-      <div class="SideWords"><a name="1073505">Note: </a></div>
-      <div class="Body_Text"><a name="1075515">The Administration Roles page is accessible only if you have Coordinator/Editor/</a>Screener privileges.</div>
-      <div class="Body_Text"><a name="1073512">The Administration Roles viewer opens when you click on the </a><span style="font-weight: bold;">Admin</span> tab in the caMOD viewer . </div>
-      <div class="Body_Text"><a name="1081361">The Admin viewer lists tasks that need to be performed by you when you are assigned </a>an Admin Role.  The task list changes, depending on the roles the user must perform and the tasks the user must complete.  All available links for the Admin section display in the upper left sidebar of the viewer.</div>
-      <div class="Body_Text"><a name="1073522">Features that display on this page differ for each role the user may been assigned:</a></div>
+      <div class="Heading3"><a name="1072016">Editor</a></div>
+      <div class="Body_Text"><a name="1072019">The editor can perform the following tasks:</a></div>
       <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1082635">
-          <tr style="vertical-align: baseline;">
-            <td>
+        <table border="0" cellspacing="0" cellpadding="0" width="99%" id="SummaryNotRequired_np1077581">
+          <tr>
+            <td style="vertical-align: top">
               <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">
                 <span style="color: Black; font-size: 12pt; font-style: normal; font-variant: normal; font-weight: normal;">•</span>
               </div>
             </td>
             <td width="100%">
-              <div class="Bullet_inner">
-                <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('caMOD_2.1_OH', 'caMOD admin.5.6.html#1073814', '');" name="1082635">Coordinator</a></span>
-              </div>
+              <div class="Bullet_inner"><a name="1077581">Check the record for completeness and correctness. </a></div>
             </td>
           </tr>
         </table>
       </div>
       <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1082648">
-          <tr style="vertical-align: baseline;">
-            <td>
+        <table border="0" cellspacing="0" cellpadding="0" width="99%" id="SummaryNotRequired_np1077582">
+          <tr>
+            <td style="vertical-align: top">
               <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">
                 <span style="color: Black; font-size: 12pt; font-style: normal; font-variant: normal; font-weight: normal;">•</span>
               </div>
             </td>
             <td width="100%">
-              <div class="Bullet_inner">
-                <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('caMOD_2.1_OH', 'caMOD admin.5.7.html#1073820', '');" name="1082648">Screener</a></span>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1082656">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">
-                <span style="color: Black; font-size: 12pt; font-style: normal; font-variant: normal; font-weight: normal;">•</span>
-              </div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner">
-                <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('caMOD_2.1_OH', 'caMOD admin.5.8.html#1073826', '');" name="1082656">Editor</a></span>
-              </div>
+              <div class="Bullet_inner"><a name="1077582">Approve the record for display or asks the submitter for more information.</a></div>
             </td>
           </tr>
         </table>
@@ -93,6 +69,11 @@
           // Clear related topics
           //
           WWHClearRelatedTopics();
+
+          // Add related topics
+          //
+          WWHAddRelatedTopic("Coordinator", "caMOD_2_2_OH", "caMOD admin.5.3.html#1071972");
+          WWHAddRelatedTopic("Screener", "caMOD_2_2_OH", "caMOD admin.5.4.html#1072002");
 
           document.writeln(WWHRelatedTopicsInlineHTML());
         // -->

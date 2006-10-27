@@ -1093,30 +1093,23 @@ function  WWHHelp_ClickedPopup(ParamContext,
                                ParamLink,
                                ParamPopupLink)
 {
-  var  VarTargetLink;
-
   if ((WWHFrame.WWHBrowser.mbSupportsPopups) &&
       (WWHFrame.WWHBrowser.mbSupportsIFrames))
   {
     // Show popup target
     //
     this.fHidePopup();
-    VarTargetLink = ParamLink;
+    if (ParamLink.length > 0)
+    {
+      this.fDisplayFile(ParamContext, ParamLink);
+    }
   }
   else
   {
-    // Show popup, if defined
+    // Show popup
     //
-    VarTargetLink = ParamPopupLink;
-    if (VarTargetLink.length == 0)
-    {
-      VarTargetLink = ParamLink;
-    }
+    this.fDisplayFile(ParamContext, ParamPopupLink);
   }
-
-  // Display target link
-  //
-  this.fDisplayFile(ParamContext, VarTargetLink);
 }
 
 function  WWHHelp_DisplayFile(ParamContext,
@@ -1125,16 +1118,11 @@ function  WWHHelp_DisplayFile(ParamContext,
   var  Book;
   var  Link;
 
-  // Link defined?
-  //
-  if (ParamLink.length > 0)
+  Book = this.mBooks.fGetContextBook(ParamContext);
+  if (Book != null)
   {
-    Book = this.mBooks.fGetContextBook(ParamContext);
-    if (Book != null)
-    {
-      Link = WWHFrame.WWHBrowser.fNormalizeURL(ParamLink);
-      WWHFrame.WWHHelp.fSetDocumentHREF(this.mBaseURL + Book.mDirectory + Link, false);
-    }
+    Link = WWHFrame.WWHBrowser.fNormalizeURL(ParamLink);
+    WWHFrame.WWHHelp.fSetDocumentHREF(this.mBaseURL + Book.mDirectory + Link, false);
   }
 }
 

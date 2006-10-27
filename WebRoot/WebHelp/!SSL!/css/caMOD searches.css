@@ -1,7 +1,7 @@
 div.Appendix
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 15pt;
   font-style: normal;
   font-weight: bold;
@@ -25,7 +25,7 @@ div.Appendix
 .Appendix_inner
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 15pt;
   font-style: normal;
   font-weight: bold;
@@ -42,7 +42,7 @@ div.Appendix
   padding-bottom: 0pt;
 }
 
-div.Appendix_name
+div.Appendix__name
 {
   color: #000000;
   font-family: Arial;
@@ -59,14 +59,14 @@ div.Appendix_name
   vertical-align: baseline;
 }
 
-.Appendix_name_outer
+.Appendix__name_outer
 {
   margin-bottom: 13pt;
   margin-right: 0pt;
   margin-top: 0pt;
 }
 
-.Appendix_name_inner
+.Appendix__name_inner
 {
   color: #000000;
   font-family: Arial;
@@ -86,10 +86,56 @@ div.Appendix_name
   padding-bottom: 0pt;
 }
 
-div.Appendix_number
+div.Appendix__nameTOC
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 4pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Appendix__nameTOC_outer
+{
+  margin-bottom: 4pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+}
+
+.Appendix__nameTOC_inner
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Appendix__number
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 100pt;
   font-style: normal;
   font-variant: normal;
@@ -104,22 +150,114 @@ div.Appendix_number
   vertical-align: baseline;
 }
 
-.Appendix_number_outer
+.Appendix__number_outer
 {
   margin-bottom: 0pt;
   margin-right: 4.968pt;
   margin-top: 0pt;
 }
 
-.Appendix_number_inner
+.Appendix__number_inner
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 100pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
   text-align: right;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Appendix__numberTOC
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Appendix__numberTOC_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+}
+
+.Appendix__numberTOC_inner
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.AppendixNameTOC
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 4pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 6pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.AppendixNameTOC_outer
+{
+  margin-bottom: 4pt;
+  margin-right: 0pt;
+  margin-top: 6pt;
+}
+
+.AppendixNameTOC_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: left;
   text-transform: normal;
   vertical-align: baseline;
   margin-left: 0pt;
@@ -163,6 +301,52 @@ div.Blockquote
   font-family: Arial;
   font-size: 10pt;
   font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Body
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 4pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Body_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 4pt;
+}
+
+.Body_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10pt;
+  font-style: normal;
   font-variant: normal;
   font-weight: normal;
   text-align: left;
@@ -733,7 +917,7 @@ div.Callout
 div.Caption
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: italic;
   font-variant: normal;
@@ -758,7 +942,7 @@ div.Caption
 .Caption_inner
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: italic;
   font-variant: normal;
@@ -779,7 +963,7 @@ div.Caption
 div.Caption_Indent
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: italic;
   font-variant: normal;
@@ -804,7 +988,7 @@ div.Caption_Indent
 .Caption_Indent_inner
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: italic;
   font-variant: normal;
@@ -825,7 +1009,7 @@ div.Caption_Indent
 div.Chapter
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 18pt;
   font-style: normal;
   font-weight: bold;
@@ -849,7 +1033,7 @@ div.Chapter
 .Chapter_inner
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 18pt;
   font-style: normal;
   font-weight: bold;
@@ -869,7 +1053,7 @@ div.Chapter
 div.Chapter_Name
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 27pt;
   font-style: normal;
   font-weight: bold;
@@ -893,7 +1077,7 @@ div.Chapter_Name
 .Chapter_Name_inner
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 27pt;
   font-style: normal;
   font-weight: bold;
@@ -910,10 +1094,56 @@ div.Chapter_Name
   padding-bottom: 0pt;
 }
 
+div.Chapter_NameTOC
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 4pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Chapter_NameTOC_outer
+{
+  margin-bottom: 4pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+}
+
+.Chapter_NameTOC_inner
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Chapter_Number
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 72pt;
   font-style: normal;
   font-variant: normal;
@@ -938,7 +1168,7 @@ div.Chapter_Number
 .Chapter_Number_inner
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 72pt;
   font-style: normal;
   font-variant: normal;
@@ -956,10 +1186,56 @@ div.Chapter_Number
   padding-bottom: 0pt;
 }
 
+div.Chapter_NumberTOC
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Chapter_NumberTOC_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+}
+
+.Chapter_NumberTOC_inner
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Code
 {
   color: #000000;
-  font-family: "Courier New";
+  font-family: Courier New;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
@@ -984,7 +1260,7 @@ div.Code
 .Code_inner
 {
   color: #000000;
-  font-family: "Courier New";
+  font-family: Courier New;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
@@ -1005,7 +1281,7 @@ div.Code
 div.Code_Indent
 {
   color: #000000;
-  font-family: "Courier New";
+  font-family: Courier New;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
@@ -1030,12 +1306,56 @@ div.Code_Indent
 .Code_Indent_inner
 {
   color: #000000;
-  font-family: "Courier New";
+  font-family: Courier New;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
   text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Cover__title
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 36pt;
+  font-style: normal;
+  font-weight: bold;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+  text-align: right;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Cover__title_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 7pt;
+}
+
+.Cover__title_inner
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 36pt;
+  font-style: normal;
+  font-weight: bold;
+  text-align: right;
   text-transform: normal;
   vertical-align: baseline;
   margin-left: 0pt;
@@ -1140,6 +1460,52 @@ div.Footnote
   padding-bottom: 0pt;
 }
 
+div.GlossaryTOC
+{
+  color: #000000;
+  font-family: Times New Roman;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.GlossaryTOC_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+}
+
+.GlossaryTOC_inner
+{
+  color: #000000;
+  font-family: Times New Roman;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Header
 {
   color: #000000;
@@ -1189,7 +1555,7 @@ div.Header
 div.Heading1
 {
   color: Purple;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 16pt;
   font-style: normal;
   font-variant: normal;
@@ -1214,7 +1580,7 @@ div.Heading1
 .Heading1_inner
 {
   color: Purple;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 16pt;
   font-style: normal;
   font-variant: normal;
@@ -1281,7 +1647,7 @@ div.Heading1TOC
 div.Heading2
 {
   color: Black;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 14pt;
   font-style: normal;
   font-variant: normal;
@@ -1306,7 +1672,7 @@ div.Heading2
 .Heading2_inner
 {
   color: Black;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 14pt;
   font-style: normal;
   font-variant: normal;
@@ -1373,7 +1739,7 @@ div.Heading2TOC
 div.Heading3
 {
   color: Black;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 12pt;
   font-style: normal;
   font-variant: normal;
@@ -1398,7 +1764,7 @@ div.Heading3
 .Heading3_inner
 {
   color: Black;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 12pt;
   font-style: normal;
   font-variant: normal;
@@ -1465,7 +1831,7 @@ div.Heading3TOC
 div.Heading4
 {
   color: Black;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 12pt;
   font-style: italic;
   font-variant: normal;
@@ -1490,11 +1856,57 @@ div.Heading4
 .Heading4_inner
 {
   color: Black;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 12pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Index__TitleTOC
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Index__TitleTOC_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+}
+
+.Index__TitleTOC_inner
+{
+  color: #515186;
+  font-family: Palatino Linotype;
+  font-size: 14pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
   text-align: left;
   text-transform: normal;
   vertical-align: baseline;
@@ -1603,7 +2015,7 @@ div.Lettered_List_1
 div.Mapping_Table_Cell
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 12pt;
   font-style: normal;
   font-variant: normal;
@@ -1628,7 +2040,7 @@ div.Mapping_Table_Cell
 .Mapping_Table_Cell_inner
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 12pt;
   font-style: normal;
   font-variant: normal;
@@ -1649,7 +2061,7 @@ div.Mapping_Table_Cell
 div.Mapping_Table_Title
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 14pt;
   font-style: normal;
   font-variant: normal;
@@ -1674,7 +2086,7 @@ div.Mapping_Table_Title
 .Mapping_Table_Title_inner
 {
   color: #000000;
-  font-family: "Times New Roman";
+  font-family: Times New Roman;
   font-size: 14pt;
   font-style: normal;
   font-variant: normal;
@@ -1695,7 +2107,7 @@ div.Mapping_Table_Title
 div.Note
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
@@ -1720,7 +2132,7 @@ div.Note
 .Note_inner
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
@@ -1922,6 +2334,52 @@ div.Numbered_List_Indent
   padding-bottom: 0pt;
 }
 
+div.OverviewTOC
+{
+  color: #000000;
+  font-family: Times New Roman;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.OverviewTOC_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+}
+
+.OverviewTOC_inner
+{
+  color: #000000;
+  font-family: Times New Roman;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Related_Topic
 {
   color: #000000;
@@ -2064,7 +2522,7 @@ div.SideWords
 {
   background-position: left;
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
@@ -2090,7 +2548,7 @@ div.SideWords
 {
   background-position: left;
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
@@ -2111,7 +2569,7 @@ div.SideWords
 div.Subhead
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 12pt;
   font-style: normal;
   font-weight: normal;
@@ -2135,10 +2593,56 @@ div.Subhead
 .Subhead_inner
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 12pt;
   font-style: normal;
   font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Subtitle
+{
+  color: #bcbcff;
+  font-family: Palatino Linotype;
+  font-size: 24pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: bold;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 3pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Subtitle_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 3pt;
+}
+
+.Subtitle_inner
+{
+  color: #bcbcff;
+  font-family: Palatino Linotype;
+  font-size: 24pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: bold;
   text-align: left;
   text-transform: normal;
   vertical-align: baseline;
@@ -2290,6 +2794,98 @@ div.Table_Header
   padding-bottom: 0pt;
 }
 
+div.Table_Listnumber_1
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0pt;
+  margin-left: 18pt;
+  margin-right: 0pt;
+  margin-top: 6pt;
+  text-align: left;
+  text-indent: -18pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Table_Listnumber_1_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 6pt;
+}
+
+.Table_Listnumber_1_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Table_Listnumber_2
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0pt;
+  margin-left: 36pt;
+  margin-right: 0pt;
+  margin-top: 6pt;
+  text-align: left;
+  text-indent: -18pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Table_Listnumber_2_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 6pt;
+}
+
+.Table_Listnumber_2_inner
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 10pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.Table_Text
 {
   border-bottom-color: Gray;
@@ -2344,10 +2940,56 @@ div.Table_Text
   padding-bottom: 0pt;
 }
 
+div.Table_Title
+{
+  color: #000000;
+  font-family: Palatino Linotype;
+  font-size: 11pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 13pt;
+  margin-left: 18pt;
+  margin-right: 0pt;
+  margin-top: 4pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.Table_Title_outer
+{
+  margin-bottom: 13pt;
+  margin-right: 0pt;
+  margin-top: 4pt;
+}
+
+.Table_Title_inner
+{
+  color: #000000;
+  font-family: Palatino Linotype;
+  font-size: 11pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: left;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
 div.TableTitle
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: italic;
   font-variant: normal;
@@ -2382,7 +3024,7 @@ div.TableTitle
 .TableTitle_inner
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: italic;
   font-variant: normal;
@@ -2405,7 +3047,7 @@ div.TableTitle
 div.Title
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 27pt;
   font-style: normal;
   font-weight: bold;
@@ -2429,11 +3071,57 @@ div.Title
 .Title_inner
 {
   color: #515186;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 27pt;
   font-style: normal;
   font-weight: bold;
   text-align: right;
+  text-transform: normal;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.TitleTOC
+{
+  color: #000000;
+  font-family: Times New Roman;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  text-align: left;
+  text-indent: 0pt;
+  text-transform: normal;
+  vertical-align: baseline;
+}
+
+.TitleTOC_outer
+{
+  margin-bottom: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+}
+
+.TitleTOC_inner
+{
+  color: #000000;
+  font-family: Times New Roman;
+  font-size: 12pt;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-align: left;
   text-transform: normal;
   vertical-align: baseline;
   margin-left: 0pt;
@@ -2465,7 +3153,7 @@ span.Bold
 
 span.Code
 {
-  font-family: "Courier New";
+  font-family: Courier New;
 }
 
 span.Emphasis
@@ -2494,14 +3182,26 @@ span.HTTP
   vertical-align: baseline;
 }
 
+span.Keypress
+{
+  color: #000000;
+  font-family: Arial;
+  font-size: 11pt;
+  font-style: normal;
+  font-weight: normal;
+  vertical-align: baseline;
+}
+
 span.Note
 {
   color: #000000;
-  font-family: "Palatino Linotype";
+  font-family: Palatino Linotype;
   font-size: 11pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
+  left: -20px;
+  position: relative;
   text-transform: normal;
   vertical-align: baseline;
 }
@@ -2515,7 +3215,7 @@ span.Red
   vertical-align: baseline;
 }
 
-span.small_bullet
+span.small__bullet
 {
   color: #000000;
   font-family: Arial;

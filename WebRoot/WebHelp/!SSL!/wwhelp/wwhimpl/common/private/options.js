@@ -3,11 +3,11 @@
 
 function  WWHCommonSettings_Object()
 {
-  this.mTitle = "caMOD 2.1 OH";
+  this.mTitle = "caMOD 2.2 OH";
 
   this.mbCookies            = true;
   this.mCookiesDaysToExpire = 30;
-  this.mCookiesID           = "6948B68B4E1B989";
+  this.mCookiesID           = "101B9F8B9CCE5DC5";
 
   this.mAccessible = "false";
 
@@ -18,7 +18,6 @@ function  WWHCommonSettings_Object()
   this.mbEmailEnabled         = false;
   this.mbPrintEnabled         = true;
   this.mbBookmarkEnabled      = false;
-  this.mbPDFEnabled           = false;
 
   this.mEmailAddress = "";
 

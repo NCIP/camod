@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WebWorksHelpSettings version="5.0" xmlns="urn:WebWorks-Help-Settings-Schema">
   <Common>
-    <Cookies daystoexpire="30" enable="true" id="6948B68B4E1B989">
+    <Cookies daystoexpire="30" enable="true" id="101B9F8B9CCE5DC5">
     </Cookies>
     <Accessible value="false">
     </Accessible>
@@ -54,8 +54,6 @@
       </Print>
       <Bookmark enable="false">
       </Bookmark>
-      <PDF enable="false">
-      </PDF>
     </NavigationBar>
     <Tabs>
       <DefaultColors foreground="#666666">
