@@ -77,7 +77,7 @@
                
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label>
-		<camod:cshelp topic="spontaneous_mutation_help" key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
@@ -102,7 +102,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comment:</label>
-		<camod:cshelp topic="spontaneous_mutation_help" key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="SPONTANEOUS_MUTATION.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">			
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32" />

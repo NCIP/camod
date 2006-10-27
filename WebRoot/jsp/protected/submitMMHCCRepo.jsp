@@ -50,7 +50,7 @@
 	<tr>
 			<td class="formRequiredNotice" width="3">*</td>
 			<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
-					<camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+					<camod:cshelp topic="skip" key="ANIMAL_AVAILABILITY.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 			<html:hidden property="source" />		
@@ -61,7 +61,7 @@
     <tr>
         <td class="formRequiredNotice" width="5">&nbsp;</td>
         <td class="formLabel">Strain Number:
-        <camod:cshelp topic="model_availability_help" key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+        <camod:cshelp topic="skip" key="ANIMAL_AVAILABILITY.STOCK_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
         </td>
 		<td class="formField">
             <input type=button value="Find Info" onClick="myRef = window.open('http://mouse.ncifcrf.gov','mywin',

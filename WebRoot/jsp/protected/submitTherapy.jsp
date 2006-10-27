@@ -89,7 +89,7 @@ function unselectAll()
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">NSC number:</label>
-			<camod:cshelp topic="therapy_help" key="ENV_FACTOR.NSC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="ENV_FACTOR.NSC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
@@ -102,7 +102,7 @@ function unselectAll()
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">CAS number:</label>
-			<camod:cshelp topic="therapy_help" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
@@ -194,7 +194,7 @@ function unselectAll()
  	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Experiment:</label>
-		<camod:cshelp topic="therapy_help" key="THERAPY.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="THERAPY.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="experiment" cols="60" rows="3"/>			
@@ -214,7 +214,7 @@ function unselectAll()
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Administrative Route:</label>
-		<camod:cshelp topic="therapy_help" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 		<br>
@@ -256,7 +256,7 @@ function unselectAll()
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Results:</label>
-		<camod:cshelp topic="therapy_help" key="THERAPY.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="THERAPY.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="results" cols="60" rows="3"/>			
@@ -265,7 +265,7 @@ function unselectAll()
     <tr align="LEFT" valign="TOP">
         <td class="formRequiredNotice" width="5">&nbsp;</td>        
         <TD class="formLabel"><label for="field1">Toxicity Grade:</label>
-        <camod:cshelp topic="therapy_help" key="THERAPY.TOXICITY_GRADE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+        <camod:cshelp topic="skip" key="THERAPY.TOXICITY_GRADE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
         </TD>
 		<td class="formField" >
 			<html:select styleClass="formFieldUnSized" size="1" property="toxicityGrade" >												
@@ -277,7 +277,7 @@ function unselectAll()
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Biomarker:</label>
-		<camod:cshelp topic="therapy_help" key="THERAPY.BIOMARKER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="THERAPY.BIOMARKER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" size="30" property="biomarker" />			
@@ -287,7 +287,7 @@ function unselectAll()
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Tumor Response:</label>
-		<camod:cshelp topic="therapy_help" key="THERAPY.TUMORRESPONSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="THERAPY.TUMORRESPONSE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" size="30" property="tumorResponse" />			
@@ -296,7 +296,7 @@ function unselectAll()
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comment:</label>
-		<camod:cshelp topic="therapy_help" key="THERAPY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="THERAPY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="comments" cols="60" rows="3"/>			

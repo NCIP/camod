@@ -82,7 +82,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Location of Integration: *</label><br>(Required field when "Targeted" is selected<br>for the "Transgene Integration" field)
-		<camod:cshelp topic="transgene_help" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="ENGINEERED_GENE.LOCATION_OF_INTEGRATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" disabled="true" property="locationOfIntegration"  size="10" />
@@ -96,7 +96,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Transgene:</label>
-		<camod:cshelp topic="transgene_help" key="ENGINEERED_GENE.NAME_TRANSGENE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="ENGINEERED_GENE.NAME_TRANSGENE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
@@ -124,7 +124,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Transcriptional 1:</label>
-		<camod:cshelp topic="transgene_help" key="REGULATORY_ELEMENT.NAME_Transcriptional1" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="REGULATORY_ELEMENT.NAME_Transcriptional1" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
@@ -192,7 +192,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Poly A Signal:</label>
-		<camod:cshelp topic="transgene_help" key="REGULATORY_ELEMENT.NAME_PolyA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="REGULATORY_ELEMENT.NAME_PolyA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<TABLE cellpadding="0" cellspacing="5" border="0" width="100%">
@@ -238,7 +238,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Gene Functions:<br>(seperate each entry by a comma)</label>
-			<camod:cshelp topic="transgene_help" key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="GENE_FUNCTION.FUNCTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="geneFunctions"  rows="4" cols="32"  />		
@@ -257,7 +257,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Conditional Description:</label>
-			<camod:cshelp topic="transgene_help" key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="CONDITIONALITY.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="description" rows="4" cols="32" />		
@@ -266,7 +266,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">MGI number:</label>
-		<camod:cshelp topic="transgene_help" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="MUTATION_IDENTIFIER.NUMBER_MGI" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
@@ -278,7 +278,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Comment:</label>
-			<camod:cshelp topic="transgene_help" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  />	

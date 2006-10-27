@@ -50,7 +50,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label>
-		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" size="30" property="cellLineName" />			
@@ -72,7 +72,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Experiment:</label>
-		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
@@ -82,7 +82,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Results:</label>
-		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
@@ -92,7 +92,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comment:</label>
-		<camod:cshelp topic="cell_lines_help" key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			

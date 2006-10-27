@@ -65,7 +65,7 @@
         <tr>
             <td class="formRequiredNotice" width="5">*</td>
             <td class="formRequiredLabel"><label for="field2">Viral Vector:</label>
-            <camod:cshelp topic="gene_delivery_help" key="GENE_DELIVERY.VIRAL_VECTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+            <camod:cshelp topic="skip" key="GENE_DELIVERY.VIRAL_VECTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
             </td>
             <td class="formField">
             <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
@@ -89,7 +89,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Gene:</label>
-		<camod:cshelp topic="gene_delivery_help" key="GENE_DELIVERY.GENE_IN_VIRUS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="GENE_DELIVERY.GENE_IN_VIRUS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
 			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" />
@@ -99,7 +99,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Treatment Regimen:</label>
-		<camod:cshelp topic="gene_delivery_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
+		<camod:cshelp topic="skip" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="30"/>

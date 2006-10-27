@@ -73,7 +73,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label>
-		<camod:cshelp topic="chemical_drug_help" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage"  size="15" />
@@ -87,7 +87,7 @@
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">NSC number:</label>
-			<camod:cshelp topic="chemical_drug_help" key="ENV_FACTOR.NSC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="ENV_FACTOR.NSC_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find NSC #" onClick="myRef = window.open('http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=','mywin',
@@ -100,7 +100,7 @@
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">CAS number:</label>
-			<camod:cshelp topic="chemical_drug_help" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
@@ -113,7 +113,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Administrative Route:</label>
-		<camod:cshelp topic="chemical_drug_help" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
+		<camod:cshelp topic="skip" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
 		</td>
 		<td class="formField">
 		<br>
@@ -137,7 +137,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Treatment Regimen:</label>
-		<camod:cshelp topic="chemical_drug_help" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="skip" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="40" />

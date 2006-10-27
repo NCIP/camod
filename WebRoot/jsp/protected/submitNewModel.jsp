@@ -83,7 +83,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Model Descriptor:</label> 
-				<camod:cshelp topic="model_characteristics_help" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="skip" key="ABS_CANCER_MODEL.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">			
 				<html:text styleClass="formFieldSized" property="modelDescriptor" size="30"/>
@@ -103,7 +103,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Is this model a tool strain?</label>			
-				<camod:cshelp topic="model_characteristics_help" key="ABS_CANCER_MODEL.IS_TOOL_STRAIN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="skip" key="ABS_CANCER_MODEL.IS_TOOL_STRAIN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:radio property="isToolStrain" value="yes" /> Yes 
@@ -160,7 +160,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field2">Experimental Design:</label>
-				<camod:cshelp topic="model_characteristics_help" key="ABS_CANCER_MODEL.EXPERIMENT_DESIGN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="skip" key="ABS_CANCER_MODEL.EXPERIMENT_DESIGN" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="experimentDesign" cols="32" rows="4"/>
@@ -170,7 +170,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field2">Phenotype:</label>
-			    <camod:cshelp topic="model_characteristics_help" key="PHENOTYPE.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			    <camod:cshelp topic="skip" key="PHENOTYPE.DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="description" cols="32" rows="4"/>			
@@ -190,7 +190,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Breeding Notes: 
-				<camod:cshelp topic="model_characteristics_help" key="PHENOTYPE.BREEDING_NOTES" image="images/iconHelp.gif" text="Tool Tip Test 1" />	</label></td>
+				<camod:cshelp topic="skip" key="PHENOTYPE.BREEDING_NOTES" image="images/iconHelp.gif" text="Tool Tip Test 1" />	</label></td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="breedingNotes" size="30"/>
 			</td>
@@ -199,7 +199,7 @@ var cal1 = new CalendarPopup();
 		<tr>
 			<td class="formRequiredNotice" widh="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Website for add. info:</label>
-				<camod:cshelp topic="model_characteristics_help" key="ABS_CANCER_MODEL.URL" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="skip" key="ABS_CANCER_MODEL.URL" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" property="url" size="30"/>

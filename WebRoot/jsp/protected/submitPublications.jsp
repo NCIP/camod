@@ -112,7 +112,7 @@
 	<tr>
 			<td class="formRequiredNotice" width="3">&nbsp;</td>
 			<td class="formLabel"><label for="field1">J number:</label>
-			<camod:cshelp topic="publication_help" key="PUBLICATION.J_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="skip" key="PUBLICATION.J_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">		
 				<input type=button value="Find J #" onClick="myRef = window.open('http://www.informatics.jax.org/searches/reference_form.shtml','mywin',
