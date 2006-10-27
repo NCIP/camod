@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ContextSensitiveHelpTag.java,v 1.9 2006-08-13 17:40:51 pandyas Exp $
+ * $Id: ContextSensitiveHelpTag.java,v 1.10 2006-10-27 13:04:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/08/13 17:40:51  pandyas
+ * Updated online help - redefined camod tag by substituting mapId for topic (ePublisher changes)
+ *
  * Revision 1.8  2006/04/28 19:31:20  schroedn
  * Added cvs log to file
  *
@@ -10,6 +13,8 @@
  */
 
 package gov.nih.nci.camod.webapp.taglib;
+
+import gov.nih.nci.camod.Constants;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -45,67 +50,6 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	private String myStyleClass = "style_0";
 
 	private String myJavascriptKey = "help_javascript";
-
-	public int doStartTag() throws JspException {
-		//System.out.println("<ContextSensitiveHelpTag> Enter doStartTag()");
-		try {
-			String theHref = "";
-			try {
-				// Get the text
-				ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
-
-				// Process optional attributes
-
-				if (myTopic != null) {
-					//System.out.println("myTopic != null");
-
-					String theTopic;
-					try {
-						theTopic = theBundle.getString(myTopic);
-					} catch (Exception e) {
-						theTopic = myTopic;
-					}
-					// swap theMapId (RoboHelp) for the topic (ePublisher) here
-					String theJavascript = theBundle.getString(myJavascriptKey);
-					theHref = "href=\"" + theJavascript + theTopic + "')\"";
-				} else if (myHref != null) {
-					theHref = "href=\"" + myHref + "\"";
-				}
-
-				String theText = theBundle.getString(myKey);
-				String theStyleClass = theBundle.getString(myStyleClass);
-
-				if (myImage != null) {
-					myPageContext.getOut().write(
-							"<a " + theHref + " onMouseOver=\"stm(" + theText
-									+ "," + theStyleClass
-									+ ")\" onMouseOut=\"htm();\"><img src=\""
-									+ myImage + "\" border=\"0\"/>" + "</a>");
-
-				} else {
-					myPageContext.getOut().write(
-							"<a " + theHref + " onMouseOver=\"stm(" + theText
-									+ "," + theStyleClass
-									+ ")\" onMouseOut=\"htm();\">"
-									+ myLabelName + "</a>");
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-
-				// Can't get bundle. Ignore tooltip
-				myPageContext.getOut().write(
-						"<a " + theHref + " \">" + myLabelName + "</a>");
-			}
-
-		} catch (IOException e) {
-			throw new JspTagException("An IOException occurred.");
-		} catch (Exception e) {
-			throw new JspTagException("An unknown exception occurred.");
-		}
-
-		return SKIP_BODY;
-	}
 
 	public void setPageContext(PageContext inPageContext) {
 		myPageContext = inPageContext;
@@ -232,6 +176,77 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	 */
 	public void setStyleClass(String inStyleClass) {
 		myStyleClass = inStyleClass;
+	}
+
+	public int doStartTag() throws JspException {
+		System.out.println("<ContextSensitiveHelpTag> Enter doStartTag()");
+		try {
+			String theHref = "";
+			try {
+				// Get the text
+				ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
+				System.out.println("getBundle(myBundle)");
+
+				System.out.println("myTopic:  " + myTopic);
+
+				// Process optional attributes
+				if (myTopic != null) {
+					// if topic=tooltip makes this not an onclick - used for tool tips
+					if (!myTopic.equals(Constants.OnlineHelp.SKIP)) {
+						String theTopic;
+						try {
+							theTopic = theBundle.getString(myTopic);
+						} catch (Exception e) {
+							theTopic = myTopic;
+						}
+						// swap theMapId (RoboHelp) for the topic (ePublisher)
+						// here
+						String theJavascript = theBundle
+								.getString(myJavascriptKey);
+						theHref = "href=\"" + theJavascript + theTopic + "')\"";
+					}
+				} else if (myHref != null) {
+					 theHref = "href=\"" + myHref + "\"";
+					 System.out.println("href:  "+ theHref);
+				}
+
+				String theText = theBundle.getString(myKey);
+				String theStyleClass = theBundle.getString(myStyleClass);
+
+				if (myImage != null) {
+					myPageContext.getOut().write(
+							"<a " + theHref + " onMouseOver=\"stm(" + theText
+									+ "," + theStyleClass
+									+ ")\" onMouseOut=\"htm();\"><img src=\""
+									+ myImage + "\" border=\"0\"/>" + "</a>");
+
+					System.out.println("myPageContext with image:  ");
+
+				} else {
+					myPageContext.getOut().write(
+							"<a " + theHref + " onMouseOver=\"stm(" + theText
+									+ "," + theStyleClass
+									+ ")\" onMouseOut=\"htm();\">"
+									+ myLabelName + "</a>");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				System.out.println("Can't get bundle. Ignore tooltip");
+				// Can't get bundle. Ignore tooltip
+				myPageContext.getOut().write(
+						"<a " + theHref + " \">" + myLabelName + "</a>");
+			}
+
+		} catch (IOException e) {
+			throw new JspTagException("An IOException occurred.");
+		} catch (Exception e) {
+			throw new JspTagException("An unknown exception occurred.");
+		}
+
+		return SKIP_BODY;
+
 	}
 
 	public int doEndTag() throws JspException {
