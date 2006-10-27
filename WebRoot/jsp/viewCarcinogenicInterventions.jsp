@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.25 2006-10-04 14:48:26 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.26 2006-10-27 18:39:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/10/04 14:48:26  pandyas
+ * added dosage unit and age of treatment unit to view - missed
+ *
  * Revision 1.24  2006/05/24 16:58:40  georgeda
  * Fixed gene delivery display prob.
  *
@@ -76,10 +79,10 @@
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
 						</c:when>
 						<c:otherwise>
-							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.name}" escapeXml="false"/></camod:highlight>
 						</c:otherwise>
 					</c:choose>
 					<c:if test="${not empty cd.environmentalFactor.nscNumber}">
@@ -99,7 +102,7 @@
 					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
@@ -154,7 +157,7 @@
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<c:choose>
 						<c:when test="${empty cd.environmentalFactor.name}">
-							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}"/></camod:highlight>
+							<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" /></camod:highlight>
 						</c:when>
 						<c:otherwise>
 							<camod:highlight><c:out value="${cd.environmentalFactor.name}"/></camod:highlight>
@@ -165,7 +168,7 @@
 					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
@@ -226,13 +229,13 @@
 					</c:choose>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.geneInVirus}"/></camod:highlight>
+					<camod:highlight><c:out value="${cd.geneInVirus}" escapeXml="false"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<camod:highlight><c:out value="${cd.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
@@ -287,7 +290,7 @@
 					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
@@ -352,7 +355,7 @@
 					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
@@ -416,7 +419,7 @@
 					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
@@ -471,7 +474,7 @@
 					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
@@ -532,7 +535,7 @@
 					</c:choose>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.ageAtTreatment}"/>&nbsp;<c:out value="${cd.treatment.ageAtTreatmentUnit}"/></camod:highlight>
@@ -588,7 +591,7 @@
 					<camod:highlight><c:out value="${cd.treatment.dosage}"/>&nbsp;<c:out value="${cd.treatment.dosageUnit}"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
-					<camod:highlight><c:out value="${cd.treatment.regimen}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="17%">
 					<c:choose>
