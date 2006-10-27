@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.91 2006-10-17 16:14:49 pandyas Exp $
+ * $Id: Constants.java,v 1.92 2006-10-27 13:02:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.91  2006/10/17 16:14:49  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.90  2006/09/20 16:13:03  pandyas
  * updated with a few caMOD 2.2 constants - will not hurt if unused on dev server
  *
@@ -1011,5 +1014,18 @@ public class Constants {
          * The key for the URI in the camod.properties file
          */
         public static final String URI_KEY = "evs.uri";
+    }
+    
+    /**
+     * 
+     * Constants used for fetching EVS data
+     * 
+     */
+    public interface OnlineHelp {
+
+        /**
+         * The namespace to fetch the concepts from
+         */
+        public static final String SKIP = "skip";
     }
 }
