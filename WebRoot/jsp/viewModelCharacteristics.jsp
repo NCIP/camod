@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.30 2006-10-17 16:08:28 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.31 2006-10-27 18:19:54 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.30  2006/10/17 16:08:28  pandyas
+  *   modified during development of caMOD 2.2 - various
+  *
   *   Revision 1.29  2006/05/23 18:16:55  georgeda
   *   Cleaned up species/strain display
   *
@@ -80,7 +83,7 @@
 					<c:forEach var="gcol" items="${mdl.genotypeCollection}" varStatus="stat2">
 					<c:set var="item" value="${gcol.nomenclature}"/>
 						<logic:notEmpty name="item">
-							<li> <c:out value="${item.name}"/> </li>
+							<li> <c:out value="${item.name}" escapeXml="false"/> </li>
 						</logic:notEmpty>
 						<logic:empty name="item">
 					    	<br/>
@@ -98,7 +101,7 @@
 				    <c:set var="items" value="${mdl.genotypeCollection}"/>
 				    <logic:notEmpty name="items">
 						<c:forEach var="item" items="${items}" varStatus="stat">
-						<li> <c:out value="${item.name}"/> </li>
+						<li> <c:out value="${item.name}" escapeXml="false"/> </li>
 						</c:forEach>
 					</logic:notEmpty>
 					<logic:empty name="items">
@@ -112,7 +115,7 @@
 			<td class="WhiteBox" width="20%"><b>Species</b></td>
 			<td class="WhiteBoxRightEnd" width="70%">
 				<camod:highlight>
-					<c:out value="${mdl.strain.species.displayName}"/>
+					<c:out value="${mdl.strain.species.displayName}" escapeXml="false"/>
 				</camod:highlight>					
 			</td>
 		</tr>
@@ -121,7 +124,7 @@
 			<td class="GreyBox" width="20%"><b>Strain</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
 				<camod:highlight>
-				    <c:out value="${mdl.strain.displayName}"/>&nbsp;
+				    <c:out value="${mdl.strain.displayName}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>
@@ -169,7 +172,7 @@
 			<td class="GreyBox" width="20%"><b>Website for add. info</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
 				<P>
-					<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}"/></a>&nbsp;					
+					<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}" escapeXml="false"/></a>&nbsp;					
 				</P>
 			</td>
 		</tr>		
@@ -178,7 +181,7 @@
 			<td class="WhiteBoxRightEnd" width="70%">
 				<P>
 					<camod:highlight>
-						<c:out value="${mdl.phenotype.breedingNotes}"/>&nbsp;
+						<c:out value="${mdl.phenotype.breedingNotes}" escapeXml="false"/>&nbsp;
 					</camod:highlight>					
 				</P>		
 			</td>
@@ -188,7 +191,7 @@
 			<td class="GreyBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
 				<camod:highlight>
-					<c:out value="${mdl.phenotype.sexDistribution.type}"/>&nbsp;
+					<c:out value="${mdl.phenotype.sexDistribution.type}" />&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>	
