@@ -48,12 +48,12 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.22 2006-10-27 18:31:16 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.23 2006-10-31 17:22:08 pandyas Exp $
  */
 %>
 <tr>
 	<td class="formTitleBlue" height="20" colspan="2">
-		Summary of the pre-clinical study in <c:out value="${agt.name} escapeXml="false""/>
+		Summary of the pre-clinical study in <c:out value="${agt.name}"  escapeXml="false"/>
 	</td>
 </tr>	
 <tr>
@@ -158,7 +158,7 @@
 				</c:otherwise>
 			</c:choose>
 			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.publicationStatus.name}"/></camod:highlight>
+				<camod:highlight><c:out value="${p.publicationStatus.name}" escapeXml="false"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="15%">
 				<camod:highlight><c:out value="${p.authors}" escapeXml="false"/></camod:highlight>
@@ -179,10 +179,10 @@
 				<camod:highlight><c:out value="${p.journal}" escapeXml="false"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="5%">
-				<camod:highlight><c:out value="${p.year}"/></camod:highlight>
+				<camod:highlight><c:out value="${p.year}" escapeXml="false"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="10%">
-				<camod:highlight><c:out value="${p.volume}" escapeXml="false"/></camod:highlight>
+				<camod:highlight><c:out value="${p.volume}"/></camod:highlight>
 			</td>
 			<td class="<c:out value="${tdClass}"/>" width="10%">
 				<camod:highlight><c:out value="${p.startPage}"/> - </camod:highlight>
