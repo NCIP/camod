@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.45 2006-10-27 18:31:16 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.46 2006-10-31 16:15:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.45  2006/10/27 18:31:16  pandyas
+ * Fixed fields in display page to allow for html markup
+ *
  * Revision 1.44  2006/05/24 15:41:53  schroedn
  * Fixed keyword text highlighting
  *
@@ -129,8 +132,8 @@
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
 					<li>
-					    <a href="<c:out value="#eng_trans_${idx}" escapeXml="false"/>">
-							<bean:write name="eg" property="name"/>
+					    <a href="<c:out value="#eng_trans_${idx}"  escapeXml="false"/>">
+							<bean:write name="eg" property="name" />
 						</a>
 					</logic:iterate>
 				</ul>&nbsp;
@@ -254,7 +257,7 @@
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 					<td class="WhiteBoxRightEnd" width="65%">
 						<camod:highlight>
-							<c:out value="${tg.locationOfIntegration}" />&nbsp;
+							<c:out value="${tg.locationOfIntegration}"  escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</td>
 				</tr>
@@ -273,7 +276,7 @@
 			<td class="WhiteBox" width="35%"><b>Transgene Species of Origin</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${tg.species.displayName}"/>&nbsp;
+					<c:out value="${tg.species.displayName}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>
@@ -290,7 +293,7 @@
 				</tr>
 				<c:forEach var="rem" items="${remColl}">
 					<tr>
-						<td class="WhiteBox"><c:out value="${rem.name}"/>&nbsp;</td>
+						<td class="WhiteBox"><c:out value="${rem.name}" escapeXml="false"/>&nbsp;</td>
 						<td class="WhiteBoxRightEnd" width="65%">
 						    <camod:highlight>
 						    		<c:out value="${rem.species.displayName}" escapeXml="false"/>&nbsp;
@@ -386,12 +389,12 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;
+										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 									</camod:highlight>		
 								</td>
 								<td class="WhiteBoxRightEnd">
 									<camod:highlight>
-										<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;
+										<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>&nbsp;
 									</camod:highlight>		
 								</td>
 							</tr>
@@ -464,7 +467,7 @@
 					<td class="WhiteBox" width="35%"><b>Location of Integration</b></td>
 					<td class="WhiteBoxRightEnd" width="65%">
 						<camod:highlight>
-							<c:out value="${gs.locationOfIntegration}"/>&nbsp;
+							<c:out value="${gs.locationOfIntegration}" escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</td>
 				</tr>
@@ -488,12 +491,12 @@
 						<c:choose>
 							<c:when test="${empty gs.segmentType.name}">
 								<camod:highlight>
-									<c:out value="${gs.segmentType.nameUnctrlVocab}"/>&nbsp;
+									<c:out value="${gs.segmentType.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
 								</camod:highlight>
 							</c:when>
 							<c:otherwise>
 								<camod:highlight>
-									<c:out value="${gs.segmentType.name}"/>&nbsp;
+									<c:out value="${gs.segmentType.name}" escapeXml="false"/>&nbsp;
 								</camod:highlight>
 							</c:otherwise>
 						</c:choose>
@@ -506,7 +509,7 @@
 			<td class="WhiteBox" width="35%"><b>Designator</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${gs.cloneDesignator}"/>&nbsp;
+					<c:out value="${gs.cloneDesignator}" escapeXml="false"/>&nbsp;
 				</camod:highlight>		
 			</td>			
 		</tr>		
@@ -515,7 +518,7 @@
 			<td class="GreyBox" width="35%"><b>Segment Size</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${gs.segmentSize}"/>&nbsp;
+					<c:out value="${gs.segmentSize}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>
@@ -533,12 +536,12 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;
+										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</td>
 								<td class="WhiteBoxRightEnd">
 									<camod:highlight>
-										<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;
+										<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</td>
 							</tr>
@@ -567,7 +570,7 @@
 				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${gs.image.title}"/>&nbsp;
+						<c:out value="${gs.image.title}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
 				</td>
 			</tr>
@@ -575,7 +578,7 @@
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 				<td class="GreyBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${gs.image.description}"/>&nbsp;
+						<c:out value="${gs.image.description}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
 				</td>
 			</tr>		
@@ -583,7 +586,7 @@
 				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${gs.constructSequence}"/>&nbsp;
+						<c:out value="${gs.constructSequence}" escapeXml="false"/>&nbsp;
 					</camod:highlight>		
 				</td>
 			</tr>
@@ -602,7 +605,7 @@
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${gs.comments}"/>&nbsp;
+					<c:out value="${gs.comments}" escapeXml="false"/>&nbsp;
 				</camod:highlight>		
 			</td>
 		</tr>
@@ -637,7 +640,7 @@
             <td class="GreyBox" width="35%"><b>Gene</b></td>
             <td class="GreyBoxRightEnd" width="65%">
             	<camod:highlight>
-            		<c:out value="${tm.name}"/>&nbsp;
+            		<c:out value="${tm.name}" escapeXml="false"/>&nbsp;
             	</camod:highlight>		
             </td>
         </tr>
@@ -648,14 +651,14 @@
 				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
 				    <li>
 						<camod:highlight>
-							<c:out value="${modType.name}"/>&nbsp;
+							<c:out value="${modType.name}" escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</li>	
 				</c:forEach>
 				<c:if test="${not empty modType.nameUnctrlVocab}">&nbsp;
 				    <li>
 						<camod:highlight>
-							<c:out value="${modType.nameUnctrlVocab}"/>&nbsp;
+							<c:out value="${modType.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</li>	
 				</c:if>
@@ -678,7 +681,7 @@
             <td class="WhiteBox" width="35%"><b>Genetic Background - Donor</b></td>
             <td class="WhiteBoxRightEnd" width="65%">
             	<camod:highlight>
-            		<c:out value="${tm.esCellLineName}"/>&nbsp;
+            		<c:out value="${tm.esCellLineName}" escapeXml="false"/>&nbsp;
             	</camod:highlight>
             </td>
         </tr>
@@ -686,7 +689,7 @@
             <td class="GreyBox" width="35%"><b>Genetic Background - Recipient</b></td>
             <td class="GreyBoxRightEnd" width="65%">
             	<camod:highlight>
-            		<c:out value="${tm.blastocystName}"/>&nbsp;
+            		<c:out value="${tm.blastocystName}" escapeXml="false"/>&nbsp;
             	</camod:highlight>
             </td>
         </tr>
@@ -706,7 +709,7 @@
 			<td class="GreyBox" width="35%"><b>Conditional Description</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${tm.conditionality.description}"/>&nbsp;
+					<c:out value="${tm.conditionality.description}" escapeXml="false"/>&nbsp;
 				</camod:highlight>		
 			</td>
 		</tr>
@@ -724,12 +727,12 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}"/>&nbsp;
+										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</td>
 								<td class="WhiteBoxRightEnd">
 									<camod:highlight>
-										<c:out value="${el.expressionLevelDesc.expressionLevel}"/>&nbsp;
+										<c:out value="${el.expressionLevelDesc.expressionLevel}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</td>
 							</tr>
@@ -757,7 +760,7 @@
 				<td class="WhiteBox" width="35%"><b>Title of the Construct</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${tm.image.title}"/>&nbsp;
+						<c:out value="${tm.image.title}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
 				</td>
 			</tr>
@@ -765,7 +768,7 @@
 				<td class="GreyBox" width="35%"><b>Description of the Construct</b></td>
 				<td class="GreyBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${tm.image.description}"/>&nbsp;
+						<c:out value="${tm.image.description}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
 				</td>
 			</tr>
@@ -773,7 +776,7 @@
 				<td class="WhiteBox" width="35%"><b>Construct Sequence</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
 					<camod:highlight>
-						<c:out value="${tm.constructSequence}"/>&nbsp;
+						<c:out value="${tm.constructSequence}" escapeXml="false"/>&nbsp;
 					</camod:highlight>
 				</td>
 			</tr>	
@@ -792,7 +795,7 @@
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${tm.comments}"/>&nbsp;
+					<c:out value="${tm.comments}" escapeXml="false"/>&nbsp;
 				</camod:highlight>		
 			</td>
 		</tr>
@@ -804,9 +807,9 @@
 	            <td class="WhiteBox" width="35%"><b>Gene Info</b></td>
 	            <td class="WhiteBoxRightEnd" width="65%">
 	            	<camod:highlight>
-	            		<c:out value="${gene.taxon.abbreviation}"/>.&nbsp; 
-			            <c:out value="${gene.symbol}"/>.&nbsp; 
-		    	        <c:out value="${gene.fullName}"/>&nbsp;
+	            		<c:out value="${gene.taxon.abbreviation}" escapeXml="false"/>.&nbsp; 
+			            <c:out value="${gene.symbol}" escapeXml="false"/>.&nbsp; 
+		    	        <c:out value="${gene.fullName}" escapeXml="false"/>&nbsp;
 		    	    </camod:highlight>
 	            </td>
 	        </tr>
@@ -833,7 +836,7 @@
 							<c:set var="paddedNode"><fmt:formatNumber value="${ont.id}" minIntegerDigits="7" groupingUsed="false" /></c:set>
 							<a target="_blank" 
 				 				href="http://cgap.nci.nih.gov/Genes/GOBrowser?CMD=open&NODE=<c:out value="${paddedNode}"/>">
-				 				<c:out value="${ont.name}"/>
+				 				<c:out value="${ont.name}" escapeXml="false"/>
 					 		</a></li>
 						</c:forEach>
 					</ul>
@@ -848,8 +851,8 @@
 						<c:forEach var="item" items="${gene.pathwayCollection}">
 							<li>
 							<a target="_blank" 
-				 				href="http://cmap.nci.nih.gov/Pathways/BioCarta/<c:out value="${item.name}"/>">
-				 				<c:out value="${item.displayValue}"/>
+				 				href="http://cmap.nci.nih.gov/Pathways/BioCarta/<c:out value="${item.name}" escapeXml="false"/>">
+				 				<c:out value="${item.displayValue}" escapeXml="false"/>
 					 		</a></li>
 						</c:forEach>
 					</ul>
@@ -890,12 +893,12 @@
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.name}">
 						<camod:highlight>
-							<c:out value="${im.environmentalFactor.nameUnctrlVocab}"/>&nbsp;
+							<c:out value="${im.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</c:when>
 					<c:otherwise>
 			            <camod:highlight>
-			            	<c:out value="${im.environmentalFactor.name}"/>&nbsp;
+			            	<c:out value="${im.environmentalFactor.name}" escapeXml="false"/>&nbsp;
 			            </camod:highlight>
 					</c:otherwise>
 				</c:choose>
@@ -908,12 +911,12 @@
 				<c:choose>
 					<c:when test="${empty im.environmentalFactor.type}">
 						<camod:highlight>
-							<c:out value="${im.environmentalFactor.typeUnctrlVocab}"/>&nbsp;
+							<c:out value="${im.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/>&nbsp;
 						</camod:highlight>
 					</c:when>
 					<c:otherwise>
 			            <camod:highlight>
-			            	<c:out value="${im.environmentalFactor.type}"/>&nbsp;
+			            	<c:out value="${im.environmentalFactor.type}" escapeXml="false"/>&nbsp;
 			            </camod:highlight>
 					</c:otherwise>
 				</c:choose>
@@ -947,7 +950,7 @@
             <td class="GreyBox"><b>Description of the induced mutation</b></td>
             <td class="GreyBoxRightEnd">
             	<camod:highlight>
-            		<c:out value="${im.description}"/>&nbsp;
+            		<c:out value="${im.description}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
             </td>
         </tr>
@@ -964,12 +967,12 @@
 						<tr>
 				            <td class="WhiteBox">
 				            	<camod:highlight>
-				            		<c:out value="${im.geneticAlteration.observation}"/>&nbsp;
+				            		<c:out value="${im.geneticAlteration.observation}" escapeXml="false"/>&nbsp;
 				            	</camod:highlight>
 				            </td>
 				            <td class="WhiteBoxRightEnd">
 				            	<camod:highlight>
-				            		<c:out value="${im.geneticAlteration.methodOfObservation}"/>&nbsp;
+				            		<c:out value="${im.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;
 				            	</camod:highlight>
 				            </td>
 						</tr>
@@ -993,7 +996,7 @@
 			<td class="WhiteBox" width="35%"><b>Comments</b></td>
 			<td class="WhiteBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${im.comments}"/>&nbsp;
+					<c:out value="${im.comments}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>
@@ -1028,7 +1031,7 @@
             <td class="GreyBox" width="35%"><b>Gene</b></td>
             <td class="GreyBoxRightEnd" width="65%">
             	<camod:highlight>
-            		<c:out value="${sm.name}"/>&nbsp;
+            		<c:out value="${sm.name}" escapeXml="false"/>&nbsp;
             	</camod:highlight>
             </td>
         </tr>
@@ -1044,12 +1047,12 @@
 						<tr>
 				            <td class="WhiteBox">
 				            	<camod:highlight>
-				            		<c:out value="${sm.geneticAlteration.observation}"/>&nbsp;
+				            		<c:out value="${sm.geneticAlteration.observation}" escapeXml="false"/>&nbsp;
 				            	</camod:highlight>
 				            </td>
 				            <td class="WhiteBoxRightEnd">
 				            	<camod:highlight>
-				            		<c:out value="${sm.geneticAlteration.methodOfObservation}"/>&nbsp;
+				            		<c:out value="${sm.geneticAlteration.methodOfObservation}" escapeXml="false"/>&nbsp;
 				            	</camod:highlight>
 				            </td>
 						</tr>
@@ -1084,7 +1087,7 @@
 			<td class="GreyBox" width="35%"><b>Comments</b></td>
 			<td class="GreyBoxRightEnd" width="65%">
 				<camod:highlight>
-					<c:out value="${sm.comments}"/>&nbsp;
+					<c:out value="${sm.comments}" escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>
