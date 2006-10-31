@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.31 2006-10-27 18:19:54 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.32 2006-10-31 16:07:26 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.31  2006/10/27 18:19:54  pandyas
+  *   Fixed fields in display page to allow for html markup
+  *
   *   Revision 1.30  2006/10/17 16:08:28  pandyas
   *   modified during development of caMOD 2.2 - various
   *
@@ -191,7 +194,7 @@
 			<td class="GreyBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
 				<camod:highlight>
-					<c:out value="${mdl.phenotype.sexDistribution.type}" />&nbsp;
+					<c:out value="${mdl.phenotype.sexDistribution.type}"  escapeXml="false"/>&nbsp;
 				</camod:highlight>
 			</td>
 		</tr>	
@@ -202,7 +205,7 @@
 			    <c:if test="${not empty mdl.submitter.emailAddress}">
 				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>"></a>
 				</c:if>
-				<c:out value="${mdl.submitter.displayName}"/>
+				<c:out value="${mdl.submitter.displayName}"  escapeXml="false"/>
 				<c:if test="${not empty mdl.submitter.emailAddress}">
 				    
 				</c:if>			
@@ -215,7 +218,7 @@
 				<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
 				    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
 				</c:if>
-				<c:out value="${mdl.principalInvestigator.displayName}"/>
+				<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>
 				<c:if test="${mdl.principalInvestigator.emailAddress}">
 				    </a>
 				</c:if>					
@@ -245,7 +248,7 @@
 			</c:choose>
 			<tr>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-				<c:out value="${av.name}"/>&nbsp;
+				<c:out value="${av.name}" escapeXml="false"/>&nbsp;
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="45%">
 					<c:set var="dist" value="${av.animalDistributor}"/>
@@ -257,7 +260,7 @@
 									<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
 									    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
 									</c:if>
-									<c:out value="${mdl.principalInvestigator.displayName}"/>
+									<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>
 									<c:if test="${mdl.principalInvestigator.emailAddress}">
 									    </a>
 									</c:if>	
@@ -268,7 +271,7 @@
 									<c:if test="${not empty av.principalInvestigator.emailAddress}">
 									    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
 									</c:if>
-									<c:out value="${av.principalInvestigator.displayName}"/>
+									<c:out value="${av.principalInvestigator.displayName}" escapeXml="false"/>
 									<c:if test="${av.principalInvestigator.emailAddress}">
 									    </a>
 									</c:if>	
@@ -280,11 +283,11 @@
 							<c:choose>
 								<c:when test="${not empty av.stockNumber}">						    
 									<a target="_distributor" href="http://jaxmice.jax.org/jaxmice-cgi/jaxmicedb.cgi?objtype=pricedetail&stock=<c:out value="${av.stockNumber}"/>">
-									<c:out value="${dist.name}"/>
+									<c:out value="${dist.name}" escapeXml="false"/>
 								</c:when>							
 								<c:otherwise>
 									<a target="_distributor" href="http://jaxmice.jax.org/index.html"/>
-									<c:out value="${dist.name}"/></a>
+									<c:out value="${dist.name}" escapeXml="false"/></a>
 								</c:otherwise>							
 							</c:choose>
 						</c:when>
@@ -292,19 +295,19 @@
 						<!-- MMHC Repo -->
 						<c:choose>
 							<c:when test="${not empty av.stockNumber}">												
-								<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}"/>">
-								<c:out value="${dist.name}"/></a>
+								<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}" escapeXml="false"/>">
+								<c:out value="${dist.name}" escapeXml="false"/></a>
 							</c:when>							
 							<c:otherwise>								
 								<a target="_distributor" href="http://mouse.ncifcrf.gov">
-								<c:out value="${dist.name}"/></a>								
+								<c:out value="${dist.name}" escapeXml="false"/></a>								
 							</c:otherwise>							
 						</c:choose>
 						</c:when>
 						<c:when test = "${dist.id == 4}">
 						<!-- IMSR -->
 							<a target="_distributor" href="http://www.informatics.jax.org/imsr/index.jsp">						
-							<c:out value="${dist.name}"/>
+							<c:out value="${dist.name}" escapeXml="false"/>
 						</c:when>
 					</c:choose>
 				</td>
