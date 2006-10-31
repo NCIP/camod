@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: includeAgentDetails.jsp,v 1.8 2006-04-28 19:35:13 schroedn Exp $
+ * $Id: includeAgentDetails.jsp,v 1.9 2006-10-31 19:36:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/28 19:35:13  schroedn
+ * Defect #55
+ * Added Keyword Highlighting to this jsp
+ *
  * Revision 1.7  2006/04/17 19:08:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -25,7 +29,7 @@
 
 <tr>
 	<td class="formTitleBlue" height="20" colspan="2">
-		Compound / Drug - <c:out value="${agt.name}"/></td>				
+		Compound / Drug - <c:out value="${agt.name}" escapeXml="false"/></td>				
 </tr>
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>NSC Number</b></td>
