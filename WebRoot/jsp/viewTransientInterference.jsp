@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/27 18:31:16  pandyas
+ * Fixed fields in display page to allow for html markup
+ *
  * Revision 1.2  2006/10/17 16:08:28  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -8,7 +11,7 @@
  * Changes for searching on transient interfaces
  *
  *
- * $Id: viewTransientInterference.jsp,v 1.3 2006-10-27 18:31:16 pandyas Exp $
+ * $Id: viewTransientInterference.jsp,v 1.4 2006-10-31 17:05:17 pandyas Exp $
  *
  */   
 %>
@@ -41,17 +44,15 @@
 			</tr>
 			<c:forEach var="p" items="${mdl.transientInterferenceCollection}">
 			<c:set var="method" value="${p.transientInterferenceMethod}"/>
-					<c:choose>
-						<c:when test = "${method.id == 1}">
-							<td class="formTitle" height="20" colspan="2"> Method: Morpolino model: </td>				    		
-						</c:when>
-						<c:otherwise>
-						<c:when test = "${method.id == 2}">
-							<td class="formTitle" height="20" colspan="2"> Method: siRNA model: </td>
-						</c:when>				    								
-						</c:otherwise>
-					</c:choose>
-									
+						<c:choose>
+							<c:when test = "${method.id == 1}">
+								<td class="formTitle" height="20" colspan="2"> Method: Morpolino model: </td>
+							</c:when>
+							<c:otherwise>
+								<td class="formTitle" height="20" colspan="2"> Method: siRNA model: </td>
+							</c:otherwise>
+						</c:choose>			
+								
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
 					<camod:highlight><c:out value="${p.targetedRegion}" escapeXml="false"/>&nbsp;</camod:highlight>
@@ -60,43 +61,43 @@
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Source</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.sourceDisplayName}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.sourceDisplayName}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Type</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.type}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.type}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Sequence Direction</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.sequenceDirection}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.sequenceDirection}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Targeted Region</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.targetedRegion}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.targetedRegion}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Concentration</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.concentration}"/>&nbsp;<c:out value="${p.concentrationUnit}"/></camod:highlight>
+					<camod:highlight><c:out value="${p.concentration}" escapeXml="false"/>&nbsp;<c:out value="${p.concentrationUnit}"/></camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Delivery Method</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.deliveryMethodDisplayName}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.deliveryMethodDisplayName}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Visualization Ligands</b></td>
 				<td class="resultsBoxWhiteEnd">
-					<camod:highlight><c:out value="${p.visualLigandDisplayName}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.visualLigandDisplayName}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
