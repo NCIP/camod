@@ -1,7 +1,10 @@
 /*
- * $Id: Organ.java,v 1.16 2006-04-17 19:13:46 pandyas Exp $
+ * $Id: Organ.java,v 1.17 2006-10-31 17:55:24 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/04/17 19:13:46  pandyas
+ * caMod 2.1 OM changes and added log/id header
+ *
  */
 package gov.nih.nci.camod.domain;
 
@@ -53,13 +56,24 @@ public class Organ extends BaseObject implements Comparable, Serializable, Dupli
         this.conceptCode = conceptCode;
     }
 
+    
     /**
      * @return Returns the EVS Preferred displayName
+     *      if the conceptCode = 000000, then return the name
      */
     public String getEVSPreferredDescription()
     {
-        return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
-    }
+        String thePreferedDesc = null;
+        if ("000000".equals(conceptCode) || "C000000".equals(conceptCode))
+        {
+            thePreferedDesc = name;
+        }
+        else
+        {
+            thePreferedDesc = EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+        }
+        return thePreferedDesc;
+    }    
 
     /**
      * @see java.lang.Object#toString()
