@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.14 2006-05-18 15:39:21 georgeda Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.15 2006-10-31 20:14:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/18 15:39:21  georgeda
+ * Fixed bug introduced in 1.5 conversion
+ *
  * Revision 1.13  2006/05/10 17:35:51  georgeda
  * Work around old model data inconsistency
  *
@@ -99,6 +102,7 @@ public class AnimalModelSearchResult implements Comparable
     private String myCellLine = null;
     private String myDonorSpecies = null;
     private String myGraftType = null;
+    private String myState = null;
 
     /**
      * Create the wraper object
@@ -1207,6 +1211,24 @@ public class AnimalModelSearchResult implements Comparable
         }
         return myGraftType;
     }
+    
+    /**
+     * Return the State. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the State for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getState() throws Exception
+    {
+            if (myState == null)
+            {
+                fetchAnimalModel();
+                myState = myAnimalModel.getState();
+            }
+            return myState;
+    }    
 
     /**
      * Return the Microarray details. It will fetch the animal model from the DB
