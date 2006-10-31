@@ -39,11 +39,11 @@
 			<td class="WhiteBoxRightEnd">
 				<c:choose>
 					<c:when test="${not empty xt.donorSpecies}">			
-					    <c:out value="${xt.donorSpecies.displayName}"/>&nbsp;
+					    <c:out value="${xt.donorSpecies.displayName}" escapeXml="false"/>&nbsp;
 					</c:when>
 				    <c:otherwise>
 				        <c:if test="${not empty xt.strain}">
-				        	<c:out value="${xt.strain.species.displayName}"/>&nbsp;
+				        	<c:out value="${xt.strain.species.displayName}" escapeXml="false"/>&nbsp;
 				        </c:if>
 					</c:otherwise>
 				</c:choose>&nbsp;		
@@ -55,10 +55,10 @@
 			<td class="GreyBoxRightEnd">
 				<c:choose>
 					<c:when test="${empty xt.strain.name}">
-						<c:out value="${xt.strain.nameUnctrlVocab}"/>
+						<c:out value="${xt.strain.nameUnctrlVocab}" escapeXml="false"/>
 					</c:when>
 					<c:otherwise>
-						<c:out value="${xt.strain.name}"/>
+						<c:out value="${xt.strain.name}" escapeXml="false"/>
 					</c:otherwise>
 				</c:choose>&nbsp;
             </td>
@@ -66,7 +66,7 @@
 		<tr>
 			<td class="WhiteBox"><b>Organ/Tissue</b></td>
 			<td class="WhiteBoxRightEnd">
-					<c:out value="${xt.organ.EVSPreferredDescription}"/>&nbsp;
+					<c:out value="${xt.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 						
@@ -75,17 +75,17 @@
 			<td class="GreyBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.graftType}">
-					<c:out value="${xt.graftTypeUnctrlVocab}"/>&nbsp;
+					<c:out value="${xt.graftTypeUnctrlVocab}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.graftType}"/>&nbsp;
+					<c:out value="${xt.graftType}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
 		</tr>
 		<tr>
 			<td class="WhiteBox"><b>Parental Cell line:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.parentalCellLineName}"/>&nbsp;</td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.parentalCellLineName}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
@@ -115,10 +115,10 @@
 			<td class="WhiteBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.administrativeSite}">
-					<c:out value="${xt.adminSiteUnctrlVocab}"/>&nbsp;
+					<c:out value="${xt.adminSiteUnctrlVocab}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.administrativeSite}"/>&nbsp;
+					<c:out value="${xt.administrativeSite}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>
@@ -126,9 +126,9 @@
 		<tr>		
 			<td class="GreyBox"><b>Host Species and Strain</b></td>
 			<td class="GreyBoxRightEnd">
-				<c:out value="${mdl.strain.species.displayName}"/>&nbsp;
+				<c:out value="${mdl.strain.species.displayName}" escapeXml="false"/>&nbsp;
                 &nbsp;/&nbsp;
-				<c:out value="${mdl.strain.displayName}"/>&nbsp;
+				<c:out value="${mdl.strain.displayName}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
