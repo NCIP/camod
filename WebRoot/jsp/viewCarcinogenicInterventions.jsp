@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.28 2006-11-01 19:25:21 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.29 2006-11-01 19:50:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2006/11/01 19:25:21  pandyas
+ * modified to view CI for Jackson Lab data - Environmental_Factor.Type for JAX data needs to be unique from caMOD types already used.
+ *
  * Revision 1.27  2006/10/31 19:36:21  pandyas
  * added more code to allow for html markup in fields
  *
@@ -735,7 +738,7 @@
 			</c:if>
 			
      		<!--   Start Growth Factor Section for Jackson Lab data-->
-			<c:set var="environmentalFactorType" value="GrowthFactorType"/>
+			<c:set var="environmentalFactorType" value="Growth Factor Type"/>
 			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
@@ -772,7 +775,7 @@
 			</c:if>
 			
      		<!--   Start Hormone Section for Jackson Lab data-->
-			<c:set var="environmentalFactorType" value="HormoneType"/>
+			<c:set var="environmentalFactorType" value="Hormone Type"/>
 			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
@@ -809,7 +812,7 @@
 			</c:if>
 			
      		<!--   Start Other Section for Jackson Lab data-->
-			<c:set var="environmentalFactorType" value="OtherType"/>
+			<c:set var="environmentalFactorType" value="Other Type"/>
 			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
@@ -881,13 +884,11 @@
 			</c:forEach>
 			</TABLE>
 			<br>
-			</c:if>	
-			
-															
+			</c:if>											
 					
 					
      		<!--   Start Radiation Section for Jackson Lab data-->
-			<c:set var="environmentalFactorType" value="RadiationType"/>
+			<c:set var="environmentalFactorType" value="Radiation Type"/>
 			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
 			<c:if test="${not empty cdList}">
 			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
