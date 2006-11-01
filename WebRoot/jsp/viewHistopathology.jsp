@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2006/10/27 18:31:16  pandyas
+ * Fixed fields in display page to allow for html markup
+ *
  * Revision 1.32  2006/10/23 16:50:04  pandyas
  * Added Age at Detection to view screen
  *
@@ -42,7 +45,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.33 2006-10-27 18:31:16 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.34 2006-11-01 17:34:10 pandyas Exp $
  *
  */   
 %>
@@ -202,7 +205,16 @@
 				<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence over Lifetime (%)</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
 					<camod:highlight><c:out value="${h.relationalOperation}"/>&nbsp;</camod:highlight>
-					<camod:highlight><c:out value="${h.tumorIncidenceRate}"/>&nbsp;</camod:highlight>
+					<c:choose>
+						<c:when test = "${h.tumorIncidenceRate == '0'}">
+						<font color=red>
+							<camod:highlight><c:out value="${h.tumorIncidenceRate}"/>&nbsp;</camod:highlight>
+						</font>
+						</c:when>
+						<c:otherwise>
+							<camod:highlight><c:out value="${h.tumorIncidenceRate}"/>&nbsp;</camod:highlight>
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 
