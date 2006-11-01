@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.92 2006-10-27 13:02:24 pandyas Exp $
+ * $Id: Constants.java,v 1.93 2006-11-01 21:19:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.92  2006/10/27 13:02:24  pandyas
+ * added constant used for online help - removed the onclick for ToolTips
+ *
  * Revision 1.91  2006/10/17 16:14:49  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -883,7 +886,13 @@ public class Constants {
             /**
              * A constant that defines the text for the inactive model state
              */
-            public static final String INACTIVE = "Inactive";        	
+            public static final String INACTIVE = "Inactive";
+            
+            /**
+             * A constant that defines the text for the Incomplete model state
+             * used to set state after duplicating a model from adminEditModels and submitModels
+             */
+            public static final String INCOMPLETE = "Incomplete";            
         }
 
         /**
