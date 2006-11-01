@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.27 2006-10-31 19:36:21 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.28 2006-11-01 19:25:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2006/10/31 19:36:21  pandyas
+ * added more code to allow for html markup in fields
+ *
  * Revision 1.26  2006/10/27 18:39:24  pandyas
  * Fixed fields in display page to allow for html markup
  *
@@ -128,6 +131,7 @@
 			</TABLE>
 			<br>
 			</c:if>
+			
 
 			<!--   Start Environmental Factor Section -->
 			<c:set var="environmentalFactorType" value="Environment"/>
@@ -617,6 +621,383 @@
 			</TABLE>
 			<br>
 			</c:if>
+			
+     		<!--   Start Antibody Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="Antibody"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Antibody</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+			
+     		<!--   Start Bacteria Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="Bacteria"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Bacteria</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+
+
+     		<!--   Start Chemical/Drug Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="Chemical/Drug"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Chemical/Drug</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+			
+     		<!--   Start Growth Factor Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="GrowthFactorType"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Growth Factor</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+			
+     		<!--   Start Hormone Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="HormoneType"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Hormone</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+			
+     		<!--   Start Other Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="OtherType"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Other (<c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/>)</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>	
+			
+			
+     		<!--   Start Plasmid Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="Plasmid"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Plasmid</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>	
+			
+															
+					
+					
+     		<!--   Start Radiation Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="RadiationType"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Radiation</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>	
+			
+			
+     		<!--   Start Transposon Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="Transposon"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Transposon</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>														
+			
+     		<!--   Start Virus Section for Jackson Lab data-->
+			<c:set var="environmentalFactorType" value="Virus"/>
+			<c:set var="cdList" value="${carcinogenicInterventionColl[environmentalFactorType]}"/>
+			<c:if test="${not empty cdList}">
+			<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
+			<tr>
+				<td class="formTitleBlue" height="20" colspan="6">Viral Treatment</td>
+			</tr>
+			
+			<tr>
+				<td class="greySubTitleLeft" width="17%">Agent Type</td>
+				<td class="greySubTitleLeft" width="17%">Agent Name</td>				
+			</tr>
+			
+			<c:forEach var="cd" items="${cdList}" varStatus="stat">
+				<c:choose>
+					<c:when test = "${stat.count % 2 == 0}">
+						<c:set var="tdClass" value="resultsBoxWhite"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="tdClass" value="resultsBoxGrey"/>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+				<td class="<c:out value="${tdClass}"/>" width="17%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.typeUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+
+				<td class="<c:out value="${tdClass}"/>" width="20%">
+					<camod:highlight><c:out value="${cd.environmentalFactor.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+				</td>
+			</tr>
+			</c:forEach>
+			</TABLE>
+			<br>
+			</c:if>
+						
 
 
 		</td></tr></TABLE>
