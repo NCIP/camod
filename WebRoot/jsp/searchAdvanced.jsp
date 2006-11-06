@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.45 2006-10-17 16:08:28 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.46 2006-11-06 16:15:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.45  2006/10/17 16:08:28  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.44  2006/08/16 13:55:45  pandyas
  * updated on-line help from Robohelp to ePublisher - added new link for advanced search title
  *
@@ -182,7 +185,7 @@
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> 
-				<camod:cshelp topic="advanced_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="skip" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			</td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>

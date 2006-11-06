@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.34 2006-08-16 13:54:35 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.35 2006-11-06 16:15:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2006/08/16 13:54:35  pandyas
+ * updated on-line help from Robohelp to ePublisher - added new link for simple search title
+ *
  * Revision 1.33  2006/08/15 15:28:54  pandyas
  * updated on-line help from Robohelp to ePublisher - modified link - new data tree link added
  *
@@ -125,7 +128,7 @@
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Model Name / Model Descriptor  
-				<camod:cshelp topic="simple_search_help" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="skip" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 				</label>
 			</td>
 			<td class="formField">			
