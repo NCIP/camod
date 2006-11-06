@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.46 2006-10-31 16:15:46 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.47 2006-11-06 15:57:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.46  2006/10/31 16:15:46  pandyas
+ * added more code to allow for html markup in fields
+ *
  * Revision 1.45  2006/10/27 18:31:16  pandyas
  * Fixed fields in display page to allow for html markup
  *
@@ -132,8 +135,8 @@
 				<ul>
 					<logic:iterate id="eg" name="tgc" indexId="idx">
 					<li>
-					    <a href="<c:out value="#eng_trans_${idx}"  escapeXml="false"/>">
-							<bean:write name="eg" property="name" />
+					    <a href="<c:out value="#eng_trans_${idx}"  />">
+							<bean:write name="eg" property="name" filter="false"/>
 						</a>
 					</logic:iterate>
 				</ul>&nbsp;
@@ -146,8 +149,8 @@
 				<ul>
 					<logic:iterate id="eg" name="gsc" indexId="idx">
 					<li>
-						<a href="<c:out value="#gen_seg_${idx}" escapeXml="false"/>">
-							<bean:write name="eg" property="cloneDesignator"/>
+						<a href="<c:out value="#gen_seg_${idx}" />">
+							<bean:write name="eg" property="cloneDesignator" filter="false"/>
 						</a>
 					</logic:iterate>
 				</ul>&nbsp;
@@ -160,8 +163,8 @@
 				<ul>
 					<logic:iterate id="eg" name="tmc" indexId="idx">
 					<li>
-						<a href="<c:out value="#targ_mod_${idx}" escapeXml="false"/>">
-							<bean:write name="eg" property="name"/>
+						<a href="<c:out value="#targ_mod_${idx}" />">
+							<bean:write name="eg" property="name" filter="false"/>
 						</a>
 					</logic:iterate>
 				</ul>&nbsp;
@@ -204,7 +207,7 @@
 				    <logic:iterate id="sm" name="smc" indexId="idx">
 						<li>
 						<a href="<c:out value="#spon_mut_${idx}" escapeXml="false"/>">
-								<bean:write name="sm" property="name"/>
+								<bean:write name="sm" property="name" filter="false"/>
 						</a>
 					</logic:iterate>
 				</ul>&nbsp;
