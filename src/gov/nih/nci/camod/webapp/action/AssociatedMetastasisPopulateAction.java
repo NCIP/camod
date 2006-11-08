@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.8 2006-11-08 17:18:06 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.9 2006-11-08 18:05:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/11/08 17:18:06  pandyas
+ * fixed typo in error message
+ *
  * Revision 1.7  2006/09/12 15:09:53  georgeda
  * Modified setTumorClassification so it displayed the disease.getEVSPreferredDescription() results instead of disease.getName
  *
@@ -62,15 +65,13 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             assocMetastasisForm.setAgeOfOnset(associatedMetastasis.getAgeOfOnset());
             assocMetastasisForm.setAgeOfOnsetUnit(associatedMetastasis.getAgeOfOnsetUnit());
             
-            if (associatedMetastasis.getWeightOfTumor() != null) {
-                assocMetastasisForm.setWeightOfTumor(associatedMetastasis.getWeightOfTumor().toString());
-            }
-            if (associatedMetastasis.getVolumeOfTumor() != null) {
-                assocMetastasisForm.setVolumeOfTumor(associatedMetastasis.getVolumeOfTumor().toString());
-            }
-            if (associatedMetastasis.getTumorIncidenceRate() != null) {
-                assocMetastasisForm.setTumorIncidenceRate(associatedMetastasis.getTumorIncidenceRate().toString());
-            }
+            assocMetastasisForm.setAgeOfDetection(associatedMetastasis.getAgeOfDetection());
+            assocMetastasisForm.setAgeOfDetectionUnit(associatedMetastasis.getAgeOfDetectionUnit());            
+            
+            assocMetastasisForm.setWeightOfTumor(associatedMetastasis.getWeightOfTumor());
+            assocMetastasisForm.setVolumeOfTumor(associatedMetastasis.getVolumeOfTumor());
+            assocMetastasisForm.setTumorIncidenceRate(associatedMetastasis.getTumorIncidenceRate());
+
             assocMetastasisForm.setSurvivalInfo(associatedMetastasis.getSurvivalInfo());
             assocMetastasisForm.setGrossDescription(associatedMetastasis.getGrossDescription());
             assocMetastasisForm.setMicroscopicDescription(associatedMetastasis.getMicroscopicDescription());

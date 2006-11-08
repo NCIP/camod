@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.8 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.9 2006-11-08 18:05:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.7  2006/09/12 15:01:10  georgeda
  * Modified setTumorClassification so it displayed the disease.getEVSPreferredDescription() results instead of disease.getName
  *
@@ -93,17 +96,13 @@ public class HistopathologyPopulateAction extends BaseAction {
             histopathologyForm.setAgeOfDetectionUnit(theHistopathology.getAgeOfDetectionUnit());
             
             histopathologyForm.setAgeOfDetection(theHistopathology.getAgeOfDetection());
-            histopathologyForm.setAgeOfDetectionUnit(theHistopathology.getAgeOfDetectionUnit());            
-            
-            if (theHistopathology.getWeightOfTumor() != null) {
-                histopathologyForm.setWeightOfTumor(theHistopathology.getWeightOfTumor().toString());
-            }
-            if (theHistopathology.getVolumeOfTumor() != null) {
-                histopathologyForm.setVolumeOfTumor(theHistopathology.getVolumeOfTumor().toString());
-            }
-            if (theHistopathology.getTumorIncidenceRate() != null) {
-                histopathologyForm.setTumorIncidenceRate(theHistopathology.getTumorIncidenceRate().toString());
-            }
+            histopathologyForm.setAgeOfDetectionUnit(theHistopathology.getAgeOfDetectionUnit());  
+
+            histopathologyForm.setWeightOfTumor(theHistopathology.getWeightOfTumor());
+            histopathologyForm.setVolumeOfTumor(theHistopathology.getVolumeOfTumor());
+
+            histopathologyForm.setTumorIncidenceRate(theHistopathology.getTumorIncidenceRate());
+
             histopathologyForm.setSurvivalInfo(theHistopathology.getSurvivalInfo());
             histopathologyForm.setGrossDescription(theHistopathology.getGrossDescription());
             histopathologyForm.setMicroscopicDescription(theHistopathology.getMicroscopicDescription());

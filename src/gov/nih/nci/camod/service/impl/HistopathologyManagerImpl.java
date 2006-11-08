@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.15 2006-10-23 16:52:20 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.16 2006-11-08 18:05:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/10/23 16:52:20  pandyas
+ * minor comments change
+ *
  * Revision 1.14  2006/10/17 16:13:46  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -148,11 +151,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		inHistopathology.setGrossDescription(inHistopathologyData
 				.getGrossDescription());
 
-		if (inHistopathologyData.getTumorIncidenceRate() != null
-				&& inHistopathologyData.getTumorIncidenceRate().length() > 0) {
-			inHistopathology.setTumorIncidenceRate(inHistopathologyData
-					.getTumorIncidenceRate());
-		}
+		inHistopathology.setTumorIncidenceRate(inHistopathologyData.getTumorIncidenceRate());
 
 		inHistopathology
 				.setSurvivalInfo(inHistopathologyData.getSurvivalInfo());
@@ -163,18 +162,13 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		log.info("inHistopathologyData.getComparativeData():  "
 				+ inHistopathologyData.getComparativeData());
 
-		if (inHistopathologyData.getWeightOfTumor() != null
-				&& inHistopathologyData.getWeightOfTumor().length() > 0) {
-			inHistopathology.setWeightOfTumor(inHistopathologyData
+		inHistopathology.setWeightOfTumor(inHistopathologyData
 					.getWeightOfTumor());
-		}
-		if (inHistopathologyData.getVolumeOfTumor() != null
-				&& inHistopathologyData.getVolumeOfTumor().length() > 0) {
-			inHistopathology.setVolumeOfTumor(inHistopathologyData
-					.getVolumeOfTumor());
-		}
 
-		// Histopathology attributes - AgeOfOnset
+		inHistopathology.setVolumeOfTumor(inHistopathologyData
+					.getVolumeOfTumor());
+
+            // Histopathology attributes - AgeOfOnset
 		inHistopathology.setAgeOfOnset(inHistopathologyData.getAgeOfOnset());
 		inHistopathology.setAgeOfOnsetUnit(inHistopathologyData
 				.getAgeOfOnsetUnit());
