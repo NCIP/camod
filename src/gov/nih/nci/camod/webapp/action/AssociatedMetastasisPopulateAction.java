@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.7 2006-09-12 15:09:53 georgeda Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.8 2006-11-08 17:18:06 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/09/12 15:09:53  georgeda
+ * Modified setTumorClassification so it displayed the disease.getEVSPreferredDescription() results instead of disease.getName
+ *
  * Revision 1.6  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -77,7 +80,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
 
             /* set Organ attributes */
             Organ organ = associatedMetastasis.getOrgan();
-            System.out.println("<AssociatedMetastasisAction populate> get the Organ attributes");
+            System.out.println("<AssociatedMetastasisPopulateAction> get the Organ attributes");
 
             // since we are always querying from concept code (save and
             // edit), simply display EVSPreferredDescription
