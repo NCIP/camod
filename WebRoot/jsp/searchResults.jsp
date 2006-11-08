@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.22 2006-11-08 19:11:17 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.23 2006-11-08 20:13:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/11/08 19:11:17  pandyas
+ * added MTB logo onto view screens for Jackson Lab models
+ *
  * Revision 1.21  2006/10/18 18:44:07  pandyas
  * took out image and microarray icon code
  *
@@ -242,7 +245,7 @@
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
 					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>
 									<c:if test="${row.externalSource == 'Jax MTB'}">
-										<IMG src="images/mtb_logo.jpg" width="20" height="20">
+										<IMG src="images/mtb_logo.jpg">
 									</c:if>	
 									<c:if test="${not empty row.imageTitle}">
 										<IMG src="images/image_icon.jpg" width="20" height="20">
