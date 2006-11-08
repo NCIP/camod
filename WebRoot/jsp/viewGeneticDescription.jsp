@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.48 2006-11-08 19:11:13 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.49 2006-11-08 20:12:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2006/11/08 19:11:13  pandyas
+ * added MTB logo onto view screens for Jackson Lab models
+ *
  * Revision 1.47  2006/11/06 15:57:38  pandyas
  * Added html markup code for bean:write on GeneticDescription summary table
  *
@@ -127,10 +130,7 @@
 			<td class="formTitle" height="20" colspan="3">
 			Genetic Description - Model:
 			<camod:highlight>
-				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
-					<c:if test="${mdl.externalSource == 'Jax MTB'}">
-						<IMG src="images/mtb_logo.jpg" width="20" height="20">
-					</c:if>					
+				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;		
 			</camod:highlight>
 			</td>
 		</tr>
