@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2006/11/01 17:34:10  pandyas
+ * Added red color to tumor incidence rates of 0 (from JAX data)
+ *
  * Revision 1.33  2006/10/27 18:31:16  pandyas
  * Fixed fields in display page to allow for html markup
  *
@@ -45,7 +48,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.34 2006-11-01 17:34:10 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.35 2006-11-08 19:11:13 pandyas Exp $
  *
  */   
 %>
@@ -72,7 +75,12 @@
 			<tr>
 				<td class="formTitle" height="20" width="100%">
 				Histopathology - Model:
-				<camod:highlight><c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;</camod:highlight>
+				<camod:highlight>
+					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+					<c:if test="${mdl.externalSource == 'Jax MTB'}">
+						<IMG src="images/mtb_logo.jpg" width="20" height="20">
+					</c:if>						
+				</camod:highlight>
 				</td>				
 			</tr>
 <%      

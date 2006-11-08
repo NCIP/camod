@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.21 2006-10-18 18:44:07 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.22 2006-11-08 19:11:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/10/18 18:44:07  pandyas
+ * took out image and microarray icon code
+ *
  * Revision 1.20  2006/10/17 16:08:28  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -237,7 +240,16 @@
 							
 							if( resultColumns[i].equals("Model Descriptor") ) { %>
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
-					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>	
+					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>
+									<c:if test="${row.externalSource == 'Jax MTB'}">
+										<IMG src="images/mtb_logo.jpg" width="20" height="20">
+									</c:if>	
+									<c:if test="${not empty row.imageTitle}">
+										<IMG src="images/image_icon.jpg" width="20" height="20">
+									</c:if>	
+									<c:if test="${not empty row.microarray}">
+										<IMG src="images/microarray_icon.jpg" width="20" height="20">
+									</c:if>																								                 	
 							     </display:column>										
 							<% }						
 							else if( resultColumns[i].equals("Species") ) { %>

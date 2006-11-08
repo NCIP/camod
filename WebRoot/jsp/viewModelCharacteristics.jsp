@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.32 2006-10-31 16:07:26 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.33 2006-11-08 19:11:17 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.32  2006/10/31 16:07:26  pandyas
+  *   added more code to allow for html markup in fields
+  *
   *   Revision 1.31  2006/10/27 18:19:54  pandyas
   *   Fixed fields in display page to allow for html markup
   *
@@ -66,7 +69,10 @@
 			<td class="formTitle" height="20" colspan="3">						
 				Model Characteristics - Model:
 				<camod:highlight>
-					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+					<c:if test="${mdl.externalSource == 'Jax MTB'}">
+						<IMG src="images/mtb_logo.jpg" width="20" height="20">
+					</c:if>					
 				</camod:highlight>
 			</td>
 		</tr>

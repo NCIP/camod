@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.47 2006-11-06 15:57:38 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.48 2006-11-08 19:11:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2006/11/06 15:57:38  pandyas
+ * Added html markup code for bean:write on GeneticDescription summary table
+ *
  * Revision 1.46  2006/10/31 16:15:46  pandyas
  * added more code to allow for html markup in fields
  *
@@ -125,6 +128,9 @@
 			Genetic Description - Model:
 			<camod:highlight>
 				<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
+					<c:if test="${mdl.externalSource == 'Jax MTB'}">
+						<IMG src="images/mtb_logo.jpg" width="20" height="20">
+					</c:if>					
 			</camod:highlight>
 			</td>
 		</tr>
