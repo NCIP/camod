@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/10/27 13:01:26  pandyas
+ * topic="skip" allows us to remove the onclick for ToolTips while preserving it for the title of each page
+ *
  * Revision 1.23  2006/10/17 16:08:12  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -43,7 +46,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.24 2006-10-27 13:01:26 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.25 2006-11-08 20:13:53 pandyas Exp $
  *
  */   
 %>
@@ -108,7 +111,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Associated Metastasis:
-			<camod:cshelp topic="associated_metastasis_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
+			<camod:cshelp topic="histopathology_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 </td>
 	</tr>
 
