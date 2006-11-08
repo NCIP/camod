@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.15 2006-10-31 20:14:23 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.16 2006-11-08 19:10:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/10/31 20:14:23  pandyas
+ * Added variable for state to hide inactive button on adminEditModels.jsp when user searches for inactive models
+ *
  * Revision 1.14  2006/05/18 15:39:21  georgeda
  * Fixed bug introduced in 1.5 conversion
  *
@@ -103,6 +106,7 @@ public class AnimalModelSearchResult implements Comparable
     private String myDonorSpecies = null;
     private String myGraftType = null;
     private String myState = null;
+    private String myExternalSource = null;    
 
     /**
      * Create the wraper object
@@ -1213,6 +1217,24 @@ public class AnimalModelSearchResult implements Comparable
     }
     
     /**
+     * Return the ExternalSource. It will fetch the animal model from the DB
+     * if it hasn't already happened.
+     * 
+     * @return the ExternalSource for the associated model
+     * 
+     * @throws Exception
+     */
+    public String getExternalSource() throws Exception
+    {
+            if (myExternalSource == null)
+            {
+                fetchAnimalModel();
+                myExternalSource = myAnimalModel.getExternalSource();
+            }
+            return myExternalSource;
+    } 
+    
+    /**
      * Return the State. It will fetch the animal model from the DB
      * if it hasn't already happened.
      * 
@@ -1228,7 +1250,7 @@ public class AnimalModelSearchResult implements Comparable
                 myState = myAnimalModel.getState();
             }
             return myState;
-    }    
+    }     
 
     /**
      * Return the Microarray details. It will fetch the animal model from the DB
