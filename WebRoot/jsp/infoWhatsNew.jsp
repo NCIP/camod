@@ -27,6 +27,106 @@
 																		</TR>
 																	</TBODY>
 																</TABLE>
+																
+																<br>
+																
+																
+																<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
+																	<TBODY>
+																		<TR>
+																			<TD class="formTitleBlue" colspan="2" height="20">
+																				Release of caMOD 2.2 - November 30th, 2006
+																			</TD>
+																		</TR>
+																		<TR>
+																		<TR>
+																			<TD style="BORDER-LEFT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 1em; FONT-SIZE: 0.7em; FONT-FAMILY: verdana, arial, helvetica, sans-serif; BACKGROUND-COLOR: #cccccc" width="20%">
+																				Added Features
+																			</TD>
+																			<TD
+																				style="BORDER-LEFT: #5c5c5c 1px solid; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 1em; FONT-SIZE: 0.7em; FONT-FAMILY: verdana, arial, helvetica, sans-serif; BACKGROUND-COLOR: #cccccc"
+																				width="80%">
+																				How to use the new feature?
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Integration of MTB data
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				The complete Mouse Tumor Biology Data set (<a href="http://tumor.informatics.jax.org">http://tumor.informatics.jax.org</a>) has been inserted in caMOD. We would like to thank our colleguages at the Jackson Laboratory in Bar Harbor, Maine for their support with this effort.
+																			</TD>
+																		</TR>
+																		
+																		
+																		
+																		
+																		
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Improved Search functions
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				Users can now query for models with images, tool strains, or data from external sources such as the Mouse Tumor Biology database.
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Improved Search Results list
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				The listing of models in the search results list contains icons which indicate the source of the data e.g. from the Mouse Tumor Biology database or the availability of associated microarray and/or image data for a particular record.
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Nomenclature names and Genotype information
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				Users can now add information about the genotype of the model as well as the official strain designation.
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				siRNA experiments
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				caMOD supports the submission and retrieval of siRNA experiments.
+																			</TD>
+																		</TR>
+
+<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				EVS vocabulary tree
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				The performance of the EVS vocabulary trees for the retrieval of controlled vocabularies for anatomy and disease was improved by adding a caching mechanism.
+																			</TD>
+																		</TR><TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Online Help
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				A new version of online help including a downloadable user guide (PDF file) has been integrated. Help icons and tool tips have been modified to promote intra and inter-application consistency. 
+																			</TD>
+																		</TR>
+
+																	</TBODY>
+																</TABLE>
 																<BR>
 																<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
 																	<TBODY>
