@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: ClinicalMarkerAction.java,v 1.7 2006-04-27 15:05:46 pandyas Exp $
+ * $Id: ClinicalMarkerAction.java,v 1.8 2006-11-09 17:25:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/27 15:05:46  pandyas
+ * Modified as a result of testing
+ *
  * Revision 1.6  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -142,7 +145,10 @@ public class ClinicalMarkerAction extends BaseAction
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
 
-        System.out.println("<ClinicalMarkerAction save> following Characteristics:" + "\n\t ParentHistopathID: " + aHistopathologyID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: " + (String) request.getSession().getAttribute(
+        System.out.println("<ClinicalMarkerAction save> following Characteristics:" + "\n\t ParentHistopathID: " 
+                           + aHistopathologyID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " 
+                           + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() 
+                           + "\n\t user: " + (String) request.getSession().getAttribute(
                                                                                                                                                                                                                                                                                                                                                            "camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
