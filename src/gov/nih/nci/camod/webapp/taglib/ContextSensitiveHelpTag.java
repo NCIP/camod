@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ContextSensitiveHelpTag.java,v 1.10 2006-10-27 13:04:13 pandyas Exp $
+ * $Id: ContextSensitiveHelpTag.java,v 1.11 2006-11-09 18:44:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/10/27 13:04:13  pandyas
+ * Added Constants.OnlineHelp.SKIP to remove onclick from ToolTips
+ *
  * Revision 1.9  2006/08/13 17:40:51  pandyas
  * Updated online help - redefined camod tag by substituting mapId for topic (ePublisher changes)
  *
@@ -179,15 +182,15 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 	}
 
 	public int doStartTag() throws JspException {
-		System.out.println("<ContextSensitiveHelpTag> Enter doStartTag()");
+
 		try {
 			String theHref = "";
 			try {
 				// Get the text
 				ResourceBundle theBundle = ResourceBundle.getBundle(myBundle);
-				System.out.println("getBundle(myBundle)");
+				//System.out.println("getBundle(myBundle)");
 
-				System.out.println("myTopic:  " + myTopic);
+				//System.out.println("myTopic:  " + myTopic);
 
 				// Process optional attributes
 				if (myTopic != null) {
@@ -207,7 +210,7 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 					}
 				} else if (myHref != null) {
 					 theHref = "href=\"" + myHref + "\"";
-					 System.out.println("href:  "+ theHref);
+					 //System.out.println("href:  "+ theHref);
 				}
 
 				String theText = theBundle.getString(myKey);
@@ -220,7 +223,7 @@ public class ContextSensitiveHelpTag implements Tag, Serializable {
 									+ ")\" onMouseOut=\"htm();\"><img src=\""
 									+ myImage + "\" border=\"0\"/>" + "</a>");
 
-					System.out.println("myPageContext with image:  ");
+					//System.out.println("myPageContext with image:  ");
 
 				} else {
 					myPageContext.getOut().write(
