@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: TransientInterferenceAction.java,v 1.3 2006-10-19 16:30:22 pandyas Exp $
+ * $Id: TransientInterferenceAction.java,v 1.4 2006-11-09 17:10:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/19 16:30:22  pandyas
+ * modified aConceptCode to conceptCode to match all other code
+ *
  * Revision 1.1  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -58,7 +61,7 @@ public class TransientInterferenceAction extends BaseAction
         // Grab the current aTransIntID for this animalModel
         String aTransIntID = request.getParameter("aTransIntID");
         
-        System.out.println("<MorpholinoAction edit> following Characteristics:" 
+        System.out.println("<TransientInterferenceAction edit> following Characteristics:" 
           + "\n\t Concentration: " + transientInterferenceForm.getConcentration() 
           + "\n\t ConcentrationUnit: " + transientInterferenceForm.getConcentrationUnit() 
           + "\n\t DeliveryMethod: " + transientInterferenceForm.getDeliveryMethod() 
@@ -89,7 +92,7 @@ public class TransientInterferenceAction extends BaseAction
             	transientInterferenceManager.remove(aTransIntID, theAnimalModel);
 
                 ActionMessages msg = new ActionMessages();
-                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("morpholino.delete.successful"));
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transientinterference.delete.successful"));
                 saveErrors(request, msg);
 
             } else {
@@ -100,14 +103,14 @@ public class TransientInterferenceAction extends BaseAction
                 // you've
                 // created a new model successfully
                 ActionMessages msg = new ActionMessages();
-                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("morpholino.edit.successful"));
+                msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transientinterference.edit.successful"));
                 saveErrors(request, msg);
             }
 
         }  catch (Exception e)
         {
 
-            log.error("Unable to get a Morpholino action: ", e);
+            log.error("Unable to get a transient interference action: ", e);
 
             ActionMessages theMsg = new ActionMessages();
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
@@ -167,7 +170,7 @@ public class TransientInterferenceAction extends BaseAction
 
         try
         {
-            log.info("<TherapyAction> Entering try block");            
+            log.info("<TransientInterferenceAction> Entering try block");            
             animalModelManager.addTransientInterference(animalModel, transientInterferenceForm);
             
 			log.info("New Transient Interference (Morpholino) created");            
@@ -175,11 +178,11 @@ public class TransientInterferenceAction extends BaseAction
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
             ActionMessages msg = new ActionMessages();
-            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("morpholino.creation.successful"));
+            msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("transientinterference.creation.successful"));
             saveErrors(request, msg);
         } catch (Exception e)
         {
-            log.error("Exception occurred creating a Morpholino", e);
+            log.error("Exception occurred creating a transient interference", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
