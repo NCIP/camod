@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.47 2006-10-17 16:10:31 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.48 2006-11-09 17:15:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2006/10/17 16:10:31  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.46  2006/05/24 18:54:37  georgeda
  * Added staining method
  *
@@ -499,7 +502,7 @@ public class NewDropdownUtil
 
                         if (strain.getName() != null && !strainNames.contains(strain.getName()))
                         {
-                            System.out.println("strain.getName(): " + strain.getName());
+                            //System.out.println("strain.getName(): " + strain.getName());
                             strainNames.add(strain.getName());
                         }
                     }
