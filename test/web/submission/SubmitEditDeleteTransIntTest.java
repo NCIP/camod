@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteTransIntTest.java,v 1.3 2006-10-18 18:11:06 pandyas Exp $
+ * $Id: SubmitEditDeleteTransIntTest.java,v 1.4 2006-11-09 17:10:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/18 18:11:06  pandyas
+ * modified form name from morpholino to transientInterference
+ *
  * Revision 1.2  2006/10/17 17:23:00  pandyas
  * changed name to match object
  *
@@ -64,7 +67,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully added a Morpholino to this model!");
+        assertCurrentPageContains("You have successfully added a Transient Interference to this model!");
         
         /* Find Morpholino link to Edit */
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");        
@@ -76,7 +79,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully edited a Morpholino.");      
+        assertCurrentPageContains("You have successfully edited a Transient Interference.");      
         
         /* Find Morpholino link to Delete*/ 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFGHI");
@@ -86,7 +89,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         theForm = theCurrentPage.getFormWithName("transientInterferenceForm");               
         theForm.getSubmitButton( "submitAction", "Delete" ).click();  
       
-        assertCurrentPageContains("You have successfully deleted a Morpholino."); 
+        assertCurrentPageContains("You have successfully deleted a Transient Interference."); 
     } 
     
     public void testSirna() throws Exception {
@@ -102,7 +105,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully added a siRNA to this model!");
+        assertCurrentPageContains("You have successfully added a Transient Interference to this model!");
         
         // Find Morpholino link to Edit 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");        
@@ -114,7 +117,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully edited a siRNA.");      
+        assertCurrentPageContains("You have successfully edited a Transient Interference.");      
         
         // Find Morpholino link to Delete 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFGHI");
@@ -124,7 +127,7 @@ public class SubmitEditDeleteTransIntTest extends BaseModelNeededTest {
         theForm = theCurrentPage.getFormWithName("transientInterferenceForm");               
         theForm.getSubmitButton( "submitAction", "Delete" ).click();  
       
-        assertCurrentPageContains("You have successfully deleted a siRNA."); 
+        assertCurrentPageContains("You have successfully deleted a Transient Interference."); 
     }     
 
 }
