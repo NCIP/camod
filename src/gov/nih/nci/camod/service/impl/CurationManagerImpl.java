@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: CurationManagerImpl.java,v 1.6 2006-01-18 14:24:24 georgeda Exp $
+ *  $Id: CurationManagerImpl.java,v 1.7 2006-11-09 17:37:07 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.6  2006/01/18 14:24:24  georgeda
+ *  TT# 376 - Updated to use new Java 1.5 features
+ *
  *  Revision 1.5  2005/09/19 13:09:00  georgeda
  *  Slight change to interface
  *
@@ -48,18 +51,18 @@ public class CurationManagerImpl extends AbstractCurationManager
 
         theAnimalModel.setState(theCurationManager.getDefaultState());
 
-        System.out.println("1) Current state: " + theAnimalModel.getState());
+        //System.out.println("1) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
-        System.out.println("2) Current state: " + theAnimalModel.getState());
+        //System.out.println("2) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
-        System.out.println("3) Current state: " + theAnimalModel.getState());
+        //System.out.println("3) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "approve");
-        System.out.println("4) Current state: " + theAnimalModel.getState());
+        //System.out.println("4) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "");
-        System.out.println("5) Current state: " + theAnimalModel.getState());
+        //System.out.println("5) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "need_more_info");
-        System.out.println("6) Current state: " + theAnimalModel.getState());
+        //System.out.println("6) Current state: " + theAnimalModel.getState());
         theCurationManager.changeState(theAnimalModel, "approve");
-        System.out.println("7) Current state: " + theAnimalModel.getState());
+        //System.out.println("7) Current state: " + theAnimalModel.getState());
     }
 }

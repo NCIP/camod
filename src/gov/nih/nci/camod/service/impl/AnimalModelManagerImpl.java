@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.74 2006-10-17 16:13:47 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.75 2006-11-09 17:36:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.74  2006/10/17 16:13:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.73  2006/08/30 16:46:57  pandyas
  * needed to reverse back to original changes before toolMouse attribute name for dev server build
  *
@@ -428,8 +431,9 @@ public class AnimalModelManagerImpl extends BaseManager implements
 
 		theDuplicatedModel.getAvailability().setModifiedDate(null);
 		theDuplicatedModel.getAvailability().setEnteredDate(new Date());
+        log.info("In AnimalModelManagerImpl.duplicate state" + theDuplicatedModel.getState());         
 
-		save(theDuplicatedModel);
+		save(theDuplicatedModel);        
 
 		return theDuplicatedModel;
 	}
@@ -939,7 +943,7 @@ public class AnimalModelManagerImpl extends BaseManager implements
 				.info("<AnimalModelManagerImpl> Entering addGeneticDescription (spontaneousMutation)");
 		SpontaneousMutation theSpontaneousMutation = SpontaneousMutationManagerSingleton
 				.instance().create(inSpontaneousMutationData);
-		// System.out.println(theSpontaneousMutation.getName());
+        log.debug(theSpontaneousMutation.getName());
 		inAnimalModel.addSpontaneousMutation(theSpontaneousMutation);
 		save(inAnimalModel);
 
@@ -1043,7 +1047,7 @@ public class AnimalModelManagerImpl extends BaseManager implements
 	public void addTherapy(AnimalModel inAnimalModel, TherapyData inTherapyData)
 			throws Exception {
 
-		System.out.println("<AnimalModelManagerImpl addTherapy>");
+        log.debug("<AnimalModelManagerImpl addTherapy>");
 
 		log.info("Entering AnimalModelManagerImpl.addTherapy");
 
@@ -1067,7 +1071,7 @@ public class AnimalModelManagerImpl extends BaseManager implements
 	public void addAvailability(AnimalModel inAnimalModel,
 			AvailabilityData inAvailabilityData) throws Exception {
 
-		System.out.println("<AnimalModelManagerImpl addAvailability>");
+        log.debug("<AnimalModelManagerImpl addAvailability>");
 
 		log.info("Entering AnimalModelManagerImpl.addAvailability");
 		AnimalAvailability theAvailability = AvailabilityManagerSingleton
@@ -1106,7 +1110,7 @@ public class AnimalModelManagerImpl extends BaseManager implements
 			AssociatedExpressionData inAssociatedExpressionData)
 			throws Exception {
 
-		System.out.println("<AnimalModelManagerImpl addAssociatedExpression>");
+		log.debug("<AnimalModelManagerImpl addAssociatedExpression>");
 		log.info("Entering AnimalModelManagerImpl.addAssociatedExpression");
 
 		// addAssociatedExpression (ExpressionFeature)

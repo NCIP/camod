@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: HormonePopulateAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: HormonePopulateAction.java,v 1.13 2006-11-09 17:28:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.11  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -45,7 +48,7 @@ public class HormonePopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<HormonePopulateAction populate> Entered ");
+        log.debug("<HormonePopulateAction populate> Entered ");
 
 		HormoneForm hormoneForm = (HormoneForm) form;
 
@@ -87,7 +90,7 @@ public class HormonePopulateAction extends BaseAction {
 			hormoneForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
             hormoneForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
 		}
-        System.out.println("<HormonePopulateAction populate> Got fields ");
+        log.debug("<HormonePopulateAction populate> Got fields ");
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
 		this.dropdown(request, response);
@@ -108,7 +111,7 @@ public class HormonePopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<HormonePopulateAction dropdown> entering... ");
+        log.debug("<HormonePopulateAction dropdown> entering... ");
 
 		// blank out the FORMDATA Constant field
 		HormoneForm hormoneForm = (HormoneForm) form;
@@ -117,7 +120,7 @@ public class HormonePopulateAction extends BaseAction {
 		// setup dropdown menus
 		this.dropdown(request, response);
 
-		System.out.println("<HormonePopulateAction dropdown> exiting... ");
+        log.debug("<HormonePopulateAction dropdown> exiting... ");
 
 		return mapping.findForward("submitHormone");
 	}
@@ -131,7 +134,7 @@ public class HormonePopulateAction extends BaseAction {
 	 */
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("<HormonePopulateAction dropdown> Entering... ");
+        log.debug("<HormonePopulateAction dropdown> Entering... ");
 
 		// Prepopulate all dropdown fields, set the global Constants to the following
 

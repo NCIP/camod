@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.9 2006-11-08 18:05:56 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.10 2006-11-09 17:27:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/11/08 18:05:56  pandyas
+ * Modified TumorIncidenceRate float to String (weight of tumor and volume of tumor also needed modified to delete properly)
+ *
  * Revision 1.8  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -51,7 +54,7 @@ public class HistopathologyPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<HistopathologyPopulateAction populate> Entered");
+        log.debug("<HistopathologyPopulateAction populate> Entered");
 
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
@@ -71,15 +74,15 @@ public class HistopathologyPopulateAction extends BaseAction {
             this.dropdown(request, response);
 
             /* set Organ attributes */
-            //System.out.println("<HistopathologyPopulateAction populate> get the Organ attributes");
+            log.debug("<HistopathologyPopulateAction populate> get the Organ attributes");
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
             histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
-            //System.out.println("setOrgan= " + theHistopathology.getOrgan().getEVSPreferredDescription());
+            log.debug("setOrgan= " + theHistopathology.getOrgan().getEVSPreferredDescription());
 
             histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-            //System.out.println("OrganTissueCode= " + theHistopathology.getOrgan().getConceptCode());
+            log.debug("OrganTissueCode= " + theHistopathology.getOrgan().getConceptCode());
 
             /* Set Disease object attributes */
             Disease disease = theHistopathology.getDisease();
@@ -137,7 +140,7 @@ public class HistopathologyPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<HistopathologyPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.debug("<HistopathologyPopulateAction dropdown> Entering ActionForward dropdown()");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -154,7 +157,7 @@ public class HistopathologyPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following

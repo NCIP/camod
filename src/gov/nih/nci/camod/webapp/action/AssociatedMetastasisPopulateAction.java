@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.9 2006-11-08 18:05:56 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.10 2006-11-09 17:22:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/11/08 18:05:56  pandyas
+ * Modified TumorIncidenceRate float to String (weight of tumor and volume of tumor also needed modified to delete properly)
+ *
  * Revision 1.8  2006/11/08 17:18:06  pandyas
  * fixed typo in error message
  *
@@ -40,7 +43,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<AssociatedMetastasisPopulateAction populate> Entered");
+        //System.out.println("<AssociatedMetastasisPopulateAction populate> Entered");
 
         AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
 
@@ -81,15 +84,15 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
 
             /* set Organ attributes */
             Organ organ = associatedMetastasis.getOrgan();
-            System.out.println("<AssociatedMetastasisPopulateAction> get the Organ attributes");
+            //System.out.println("<AssociatedMetastasisPopulateAction> get the Organ attributes");
 
             // since we are always querying from concept code (save and
             // edit), simply display EVSPreferredDescription
             assocMetastasisForm.setOrgan(organ.getEVSPreferredDescription());
-            System.out.println("setOrgan= " + organ.getEVSPreferredDescription());
+            //System.out.println("setOrgan= " + organ.getEVSPreferredDescription());
 
             assocMetastasisForm.setOrganTissueCode(organ.getConceptCode());
-            System.out.println("OrganTissueCode= " + organ.getConceptCode());
+            //System.out.println("OrganTissueCode= " + organ.getConceptCode());
 
             /* Set Disease object attributes */
             Disease disease = associatedMetastasis.getDisease();
@@ -126,7 +129,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<AssociatedMetastasisPopulateAction dropdown> Entering ActionForward dropdown()");
+        //System.out.println("<AssociatedMetastasisPopulateAction dropdown> Entering ActionForward dropdown()");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -143,7 +146,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<AssociatedMetastasisPopulateAction dropdown> Entering void dropdown()");
+        //System.out.println("<AssociatedMetastasisPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following

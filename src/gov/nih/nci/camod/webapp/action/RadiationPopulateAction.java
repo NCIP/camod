@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: RadiationPopulateAction.java,v 1.13 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: RadiationPopulateAction.java,v 1.14 2006-11-09 17:31:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.12  2005/12/21 15:45:33  georgeda
  * Defect #283 - fixed population of other admin route
  *
@@ -48,7 +51,7 @@ public class RadiationPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<RadiationPopulateAction populate> Entering populate() ");
+        log.debug("<RadiationPopulateAction populate> Entering populate() ");
 
 		// Create a form to edit
 		RadiationForm radiationForm = (RadiationForm) form;
@@ -122,7 +125,7 @@ public class RadiationPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<RadiationPopulateAction dropdown> Entering dropdown() ");
+		log.debug("<RadiationPopulateAction dropdown> Entering dropdown() ");
 
 		// blank out the FORMDATA Constant field
 		RadiationForm radiationForm = (RadiationForm) form;
@@ -131,7 +134,7 @@ public class RadiationPopulateAction extends BaseAction {
 		// setup dropdown menus
 		this.dropdown(request, response);
 
-		System.out.println("<RadiationPopulateAction dropdown> before return submitRadiation ");
+		log.debug("<RadiationPopulateAction dropdown> before return submitRadiation ");
 
 		return mapping.findForward("submitRadiation");
 
@@ -146,7 +149,7 @@ public class RadiationPopulateAction extends BaseAction {
 	 */
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("<RadiationPopulateAction dropdown> Entering void dropdown()");
+		log.debug("<RadiationPopulateAction dropdown> Entering void dropdown()");
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
@@ -159,7 +162,7 @@ public class RadiationPopulateAction extends BaseAction {
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP,
 				Constants.Dropdowns.ADD_BLANK);
 
-		System.out.println("<RadiationPopulateAction dropdown> Exiting void dropdown()");
+		log.debug("<RadiationPopulateAction dropdown> Exiting void dropdown()");
 
 	}
 

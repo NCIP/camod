@@ -1,7 +1,10 @@
 /**
- * $Id: SurgeryAction.java,v 1.11 2006-10-27 16:34:15 pandyas Exp $
+ * $Id: SurgeryAction.java,v 1.12 2006-11-09 17:31:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/10/27 16:34:15  pandyas
+ * fixed printout on error - typo
+ *
  * Revision 1.10  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -58,7 +61,7 @@ public class SurgeryAction extends BaseAction {
 			log.debug("Entering 'edit' method");
 		}
 
-		System.out.println("<SurgeryAction edit> Entering... ");
+        log.debug("<SurgeryAction edit> Entering... ");
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -127,7 +130,7 @@ public class SurgeryAction extends BaseAction {
 			log.debug("Entering 'save' method");
 		}
 
-		System.out.println("<SurgeryAction save> Entering... ");
+		log.debug("<SurgeryAction save> Entering... ");
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);

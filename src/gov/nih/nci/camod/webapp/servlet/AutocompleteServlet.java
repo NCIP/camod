@@ -46,6 +46,9 @@
  * $Id$
  *
  * $Log$
+ * Revision 1.7  2006/08/17 17:58:26  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.6  2006/05/18 13:06:15  guptaa
  * added disease
  *
@@ -319,7 +322,7 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 				.getMatchingOrgans(inOrgan, inNumToReturn);
 
 		List<AjaxTagValuePair> theOrganList = new ArrayList<AjaxTagValuePair>();
-		System.out.println("the matching list" + theMatchingOrgans);
+		//System.out.println("the matching list" + theMatchingOrgans);
 		Iterator iterate = theMatchingOrgans.iterator();
 		while (iterate.hasNext()) {
 			Organ organ = (Organ) iterate.next();
@@ -349,7 +352,7 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 		.getMatchingTumorClassifications(inTumorClassification, inNumToReturn);
 		
 		List<AjaxTagValuePair> theTumorList = new ArrayList<AjaxTagValuePair>();
-		System.out.println("the matching list" + theMatchingTumorClassifications);
+		//System.out.println("the matching list" + theMatchingTumorClassifications);
 		Iterator iterate = theMatchingTumorClassifications.iterator();
 		while (iterate.hasNext()) {
 			Disease disease = (Disease) iterate.next();

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.12 2006-04-27 18:32:34 pandyas Exp $
+ * $Id: CellLinePopulateAction.java,v 1.13 2006-11-09 17:23:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/27 18:32:34  pandyas
+ * Fixed incorrect header
+ *
  * Revision 1.11  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -45,7 +48,7 @@ public class CellLinePopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<CellLinePopulateAction populate> Entered");
+		//System.out.println("<CellLinePopulateAction populate> Entered");
 
 		// Create a form to edit
 		CellLineForm cellLineForm = (CellLineForm) form;
@@ -68,19 +71,17 @@ public class CellLinePopulateAction extends BaseAction {
 			cellLineForm.setComments(cellLine.getComments());
 
 			/* set Organ attributes */
-			System.out.println("<CellLinePopulateAction populate> get the Organ attributes");
-
 			// since we are always querying from concept code (save and edit),
 			// simply display VSPreferredDescription
 			cellLineForm.setOrgan(cellLine.getOrgan().getEVSPreferredDescription());
-			System.out.println("setOrgan= " + cellLine.getOrgan().getEVSPreferredDescription());
+			//System.out.println("setOrgan= " + cellLine.getOrgan().getEVSPreferredDescription());
 
 			cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
-			System.out.println("OrganTissueCode= " + cellLine.getOrgan().getConceptCode());
+			//System.out.println("OrganTissueCode= " + cellLine.getOrgan().getConceptCode());
 
 		}
 
-		System.out.println("<CellLinePopulateAction populate> Exited");
+		//System.out.println("<CellLinePopulateAction populate> Exited");
 
 		return mapping.findForward("submitCellLines");
 	}

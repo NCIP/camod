@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentPopulateAction.java,v 1.14 2006-05-22 16:52:28 pandyas Exp $
+ * $Id: GenomicSegmentPopulateAction.java,v 1.15 2006-11-09 17:26:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/22 16:52:28  pandyas
+ * modified isRandom to make consistent between transgene and genomic segment
+ *
  * Revision 1.13  2006/04/20 15:00:11  georgeda
  * Fixed targeted/random
  *
@@ -36,7 +39,7 @@ public class GenomicSegmentPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<GenomicSegmentPopulateAction populate> Entering populate() ");
+        //System.out.println("<GenomicSegmentPopulateAction populate> Entering populate() ");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -102,7 +105,7 @@ public class GenomicSegmentPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<GenomicSegmentPopulateAction dropdown> Entering dropdown()");
+        //System.out.println("<GenomicSegmentPopulateAction dropdown> Entering dropdown()");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -119,10 +122,10 @@ public class GenomicSegmentPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<GenomicSegmentPopulateAction dropdown> Entering void dropdown()");
+        //System.out.println("<GenomicSegmentPopulateAction dropdown> Entering void dropdown()");
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GENOMICSEGMENTDROP, "");
 
-        System.out.println("<GenomicSegmentPopulateAction dropdown> Exiting void dropdown()");
+        //System.out.println("<GenomicSegmentPopulateAction dropdown> Exiting void dropdown()");
     }
 }

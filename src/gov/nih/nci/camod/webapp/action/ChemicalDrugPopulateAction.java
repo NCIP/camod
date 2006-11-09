@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugPopulateAction.java,v 1.17 2006-05-23 17:01:14 pandyas Exp $
+ * $Id: ChemicalDrugPopulateAction.java,v 1.18 2006-11-09 17:24:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/05/23 17:01:14  pandyas
+ * fixed save of ageOfTreatmentUntis - made code consistent
+ *
  * Revision 1.16  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -53,7 +56,7 @@ public class ChemicalDrugPopulateAction extends BaseAction
                                   HttpServletResponse response) throws Exception
     {
 
-        System.out.println("<ChemicalDrugPopulateAction populate> Entering ");
+        //System.out.println("<ChemicalDrugPopulateAction populate> Entering ");
 
         ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;
 
@@ -139,12 +142,12 @@ public class ChemicalDrugPopulateAction extends BaseAction
                                   HttpServletResponse response) throws Exception
     {
 
-        System.out.println("<ChemicalDrugPopulateAction dropdown> ... ");
+        //System.out.println("<ChemicalDrugPopulateAction dropdown> ... ");
 
         // setup dropdown menus
         this.dropdown(request, response);
 
-        System.out.println("<ChemicalDrugPopulateAction> exiting... ");
+        //System.out.println("<ChemicalDrugPopulateAction> exiting... ");
 
         return mapping.findForward("submitChemicalDrug");
     }
@@ -160,7 +163,7 @@ public class ChemicalDrugPopulateAction extends BaseAction
                          HttpServletResponse response) throws Exception
     {
 
-        System.out.println("<ChemicalDrugPopulateAction dropdown> Entering... ");
+        //System.out.println("<ChemicalDrugPopulateAction dropdown> Entering... ");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
@@ -171,7 +174,7 @@ public class ChemicalDrugPopulateAction extends BaseAction
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ADMINISTRATIVEROUTEDROP, Constants.Dropdowns.ADD_BLANK);
 
-        System.out.println("<ChemicalDrugPopulateAction> Finishing dropdown");
+        //System.out.println("<ChemicalDrugPopulateAction> Finishing dropdown");
     }
 
 }

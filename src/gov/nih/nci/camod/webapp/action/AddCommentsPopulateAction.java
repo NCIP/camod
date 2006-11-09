@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AddCommentsPopulateAction.java,v 1.1 2005-10-11 18:15:25 georgeda Exp $
+ *  $Id: AddCommentsPopulateAction.java,v 1.2 2006-11-09 17:20:38 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/10/11 18:15:25  georgeda
+ *  More comment changes
+ *
  *  Revision 1.8  2005/09/22 15:17:36  georgeda
  *  More changes
  *
@@ -48,7 +51,7 @@ public class AddCommentsPopulateAction extends BaseAction {
         theForm.setSectionName(theSectionName);
         inRequest.setAttribute(Constants.FORMDATA, theForm);
 
-        System.out.println("The model id: " + theModelId + " and section: " + theSectionName);
+        //System.out.println("The model id: " + theModelId + " and section: " + theSectionName);
 
         log.debug("The model id: " + theModelId + " and section: " + theSectionName);
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PubMedPopulateAction.java,v 1.9 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: PubMedPopulateAction.java,v 1.10 2006-11-09 17:30:36 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -30,12 +33,12 @@ public class PubMedPopulateAction extends BaseAction {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
 
-        System.out.println("<PubMedPopulateAction> Entering...");
+        log.debug("<PubMedPopulateAction> Entering...");
         
         PublicationForm pubForm = (PublicationForm) form;
         String pmid = pubForm.getPmid(); 
         
-        System.out.println( "pmid=" + pmid );
+        log.debug( "pmid=" + pmid );
         
         // Validate the input
         Pattern p = Pattern.compile("[0-9]{" + pmid.length() + "}");
@@ -54,7 +57,7 @@ public class PubMedPopulateAction extends BaseAction {
 
         } else {
 
-            System.out.println("<PubMedPopulateAction> Not a valid number!");
+            log.debug("<PubMedPopulateAction> Not a valid number!");
 
             pubForm.setJournal("");
             pubForm.setYear("");

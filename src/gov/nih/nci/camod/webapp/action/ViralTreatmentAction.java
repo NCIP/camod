@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentAction.java,v 1.14 2006-10-27 16:33:28 pandyas Exp $
+ * $Id: ViralTreatmentAction.java,v 1.15 2006-11-09 17:32:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/10/27 16:33:28  pandyas
+ * fixed printout on error - typo
+ *
  * Revision 1.13  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -63,7 +66,7 @@ public class ViralTreatmentAction extends BaseAction {
 			log.debug("Entering 'edit' method");
 		}
 
-		System.out.println("<ViralTreatmentAction edit> Entering... ");
+        log.debug("<ViralTreatmentAction edit> Entering... ");
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -135,7 +138,7 @@ public class ViralTreatmentAction extends BaseAction {
 			log.debug("Entering 'save' method");
 		}
 
-		System.out.println("<ViralTreatmentAction save> Entering... ");
+		log.debug("<ViralTreatmentAction save> Entering... ");
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);

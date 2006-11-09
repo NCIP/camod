@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationPopulateAction.java,v 1.15 2006-05-04 19:27:37 pandyas Exp $
+ * $Id: InducedMutationPopulateAction.java,v 1.16 2006-11-09 17:29:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/05/04 19:27:37  pandyas
+ * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
+ *
  * Revision 1.14  2006/04/19 17:38:57  pandyas
  * Removed TODO text
  *
@@ -36,7 +39,7 @@ public class InducedMutationPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<InducedMutationPopulateAction populate> Entering populate() ");
+        log.debug("<InducedMutationPopulateAction populate> Entering populate() ");
 
         String aInducedMutationID = request.getParameter("aInducedMutationID");
         InducedMutation theInducedMutation = InducedMutationManagerSingleton.instance().get(aInducedMutationID);
@@ -92,7 +95,7 @@ public class InducedMutationPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<InducedMutationPopulateAction dropdown> Entering dropdown() ");
+        log.debug("<InducedMutationPopulateAction dropdown> Entering dropdown() ");
 
         // setup dropdown menus
         this.dropdown(request, response);
@@ -109,12 +112,12 @@ public class InducedMutationPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<InducedMutationPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<InducedMutationPopulateAction dropdown> Entering void dropdown()");
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONDROP,
                 Constants.Dropdowns.ADD_BLANK_OPTION);
 
-        System.out.println("<InducedMutationPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<InducedMutationPopulateAction dropdown> Exiting void dropdown()");
     }
 
 }

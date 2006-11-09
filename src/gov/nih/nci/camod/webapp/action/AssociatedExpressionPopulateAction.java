@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionPopulateAction.java,v 1.6 2006-05-10 14:15:39 schroedn Exp $
+ * $Id: AssociatedExpressionPopulateAction.java,v 1.7 2006-11-09 17:21:25 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/05/10 14:15:39  schroedn
+ * New Features - Changes from code review
+ *
  * Revision 1.5  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -30,13 +33,13 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<AssociatedExpressionPopulateAction populate> Entering populate() ");
+        //System.out.println("<AssociatedExpressionPopulateAction populate> Entering populate() ");
 
         AssociatedExpressionForm associatedExpressionForm = (AssociatedExpressionForm) form;
         String aAssociatedExpressionID = request.getParameter("aAssociatedExpressionID");
 
         Enumeration theEnum = request.getParameterNames();
-        System.out.println("Enum: " + theEnum);
+        //System.out.println("Enum: " + theEnum);
         AssociatedExpressionManager theAssociatedExpressionManager = (AssociatedExpressionManager) getBean("associatedExpressionManager");
         ExpressionFeature theExpressionFeature = theAssociatedExpressionManager.get(aAssociatedExpressionID);
 
@@ -73,14 +76,14 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
         this.dropdown(request, response);
 
         request.getSession().setAttribute(Constants.FORMDATA, associatedExpressionForm);
-        System.out.println("<AssociatedExpressionPopulateAction populate> Exiting populate() ");
+        //System.out.println("<AssociatedExpressionPopulateAction populate> Exiting populate() ");
         return mapping.findForward("submitAssocExpression");
     }
 
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<AssociatedExpressionPopulateAction dropdown> Entering dropdown()");
+        //System.out.println("<AssociatedExpressionPopulateAction dropdown> Entering dropdown()");
 
         // blank out the FORMDATA Constant field
         AssociatedExpressionForm AssociatedExpressionForm = (AssociatedExpressionForm) form;
@@ -101,10 +104,10 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<AssociatedExpressionPopulateAction dropdown> Entering void dropdown()");
+        //System.out.println("<AssociatedExpressionPopulateAction dropdown> Entering void dropdown()");
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.EXPRESSIONLEVELDROP, Constants.Dropdowns.ADD_BLANK);
 
-        System.out.println("<AssociatedExpressionPopulateAction dropdown> Exiting void dropdown()");
+        //System.out.println("<AssociatedExpressionPopulateAction dropdown> Exiting void dropdown()");
     }
 }

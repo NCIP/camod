@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AuthenticationFilter.java,v 1.5 2006-04-17 19:10:50 pandyas Exp $
+ * $Id: AuthenticationFilter.java,v 1.6 2006-11-09 17:33:19 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:10:50  pandyas
+ * Added $Id: AuthenticationFilter.java,v 1.6 2006-11-09 17:33:19 pandyas Exp $ and $log:$
+ *
  * 
  */
 
@@ -29,7 +32,7 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
 
-        System.out.println("AuthenticationFileter doFilter> Entering... ");
+        //System.out.println("AuthenticationFileter doFilter> Entering... ");
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
@@ -46,14 +49,14 @@ public class AuthenticationFilter implements Filter {
 
         if (user == null) {
 
-            System.out.println("AuthenticationFileter doFilter> Authentication FAILURE ");
+            //System.out.println("AuthenticationFileter doFilter> Authentication FAILURE ");
 
             session.setAttribute(Constants.LOGINFAILED, "true");
 
             // redirect to the login page
             res.sendRedirect(req.getContextPath() + onFailure);
         } else {
-            System.out.println("AuthenticationFileter doFilter> Authentication SUCESS ");
+            //System.out.println("AuthenticationFileter doFilter> Authentication SUCESS ");
             chain.doFilter(request, response);
         }
     }

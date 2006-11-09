@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.42 2006-10-17 16:11:00 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.43 2006-11-09 17:20:25 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.42  2006/10/17 16:11:00  pandyas
+ *  modified during development of caMOD 2.2 - various
+ *
  *  Revision 1.41  2006/05/03 20:04:37  pandyas
  *  Modified to add Morpholino object data to application
  *
@@ -223,30 +226,26 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					if (availability.getAnimalDistributor().getName().equals(
 							"Jackson Laboratory")) {
 
-						System.out.println("\tAdded Jackson Laboratory Availability = "
-										+ availability);
+						//System.out.println("\tAdded Jackson Laboratory Availability = "+ availability);
 						jacksonLabList.add(availability);
 					}
 					if (availability.getAnimalDistributor().getName().equals(
 							"Investigator")) {
 
-						System.out.println("\tAdded Investigator Availability = "
-										+ availability);
+						//System.out.println("\tAdded Investigator Availability = "+ availability);
 						investigatorList.add(availability);
 					}
 
 					if (availability.getAnimalDistributor().getName().equals(
 							"MMHCC Repository")) {
 
-						System.out.println("\tAdded MMHCC Repository Availability = "
-										+ availability);
+						//System.out.println("\tAdded MMHCC Repository Availability = "+ availability);
 						mmhccList.add(availability);
 					}
 					if (availability.getAnimalDistributor().getName().equals(
 							"IMSR")) {
 
-						System.out.println("\tAdded IMSR Repository Availability = "
-										+ availability);
+						//System.out.println("\tAdded IMSR Repository Availability = "+ availability);
 						imsrList.add(availability);
 					}
 				}
@@ -304,25 +303,25 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			List associatedExpressionList = new ArrayList();
 
 			while (it.hasNext()) {
-				System.out.println("<AnimalModelTreePopulateAction> inside while EG loop ...");
+				//System.out.println("<AnimalModelTreePopulateAction> inside while EG loop ...");
 				EngineeredGene engineeredGene = (EngineeredGene) it.next();
 				if (engineeredGene instanceof InducedMutation) {
-					System.out.println("Added InducedMutation to left menu ...");
+					//System.out.println("Added InducedMutation to left menu ...");
 					inducedList.add((InducedMutation) engineeredGene);
 				}
 
 				else if (engineeredGene instanceof TargetedModification) {
-					System.out.println("Added TargetedModification to left menu ...");
+					//System.out.println("Added TargetedModification to left menu ...");
 					targetedList.add((TargetedModification) engineeredGene);
 				}
 
 				else if (engineeredGene instanceof GenomicSegment) {
-					System.out.println("Added GenomicSegment to left menu ...");
+					//System.out.println("Added GenomicSegment to left menu ...");
 					segmentList.add((GenomicSegment) engineeredGene);
 				}
 
 				else if (engineeredGene instanceof Transgene) {
-					System.out.println("Added Transgene to left menu ...");
+					//System.out.println("Added Transgene to left menu ...");
 					engineeredList.add((Transgene) engineeredGene);
 				} else {
 
@@ -338,10 +337,10 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			it = tySet.iterator();
 			List<Therapy> therapyList = new ArrayList<Therapy>();
 
-			System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
+			//System.out.println("<AnimalModelTreePopulateAction> Building Tree ...");
 
 			if (tySet == null || tySet.size() == 0) {
-				System.out.println("<AnimalModelTreePopulateAction populate> no Therapy to add!");
+				//System.out.println("<AnimalModelTreePopulateAction populate> no Therapy to add!");
 			} else {
 				while (it.hasNext()) {
 					Therapy ty = (Therapy) it.next();
@@ -369,44 +368,44 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			List<CarcinogenExposure> nutritionalFactorList = new ArrayList<CarcinogenExposure>();
 
 			if (ceSet.size() == 0) {
-				System.out.println("<AnimalModelTreePopulateAction populate> no CarcinogenExposure to add!");
+				//System.out.println("<AnimalModelTreePopulateAction populate> no CarcinogenExposure to add!");
 			} else {
 				while (it.hasNext()) {
 					CarcinogenExposure ce = (CarcinogenExposure) it.next();
 					EnvironmentalFactor ef = ce.getEnvironmentalFactor();
 					if (ef != null) {
 						if (ef.getType().equals("Other")) {
-							System.out.println("\tAdded CarcinogenExposure to surgeryList");
+							//System.out.println("\tAdded CarcinogenExposure to surgeryList");
 							surgeryList.add(ce);
 						}
 						if (ef.getType().equals("Hormone")) {
-							System.out.println(" CarcinogenExposure to hormoneList");
+							//System.out.println(" CarcinogenExposure to hormoneList");
 							hormoneList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Growth Factor")) {
-							System.out.println("\tAdded CarcinogenExposure to growthFactorList");
+							//System.out.println("\tAdded CarcinogenExposure to growthFactorList");
 							growthFactorList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Viral")) {
-							System.out.println("\tAdded CarcinogenExposure to viraltreatmentList");
+							//System.out.println("\tAdded CarcinogenExposure to viraltreatmentList");
 							viraltreatmentList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Chemical / Drug")) {
-							System.out.println("\tAdded CarcinogenExposure to chemicaldrugList");
+							//System.out.println("\tAdded CarcinogenExposure to chemicaldrugList");
 							chemicaldrugList.add(ce);
 						} // end of if
 						if (ef.getType().equals("Environment")) {
-							System.out.println("\tAdded CarcinogenExposure to environFactorList");
+							//System.out.println("\tAdded CarcinogenExposure to environFactorList");
 							environFactorList.add(ce);
 						} // end of if
 
 						if (ef.getType().equals("Nutrition")) {
-							System.out.println("\tAdded CarcinogenExposure to nutritionalFactorList");
+							//System.out.println("\tAdded CarcinogenExposure to nutritionalFactorList");
 							nutritionalFactorList.add(ce);
 						} // end of if
 
 						if (ef.getType().equals("Radiation")) {
-							System.out.println("\tAdded CarcinogenExposure to radiationList");
+							//System.out.println("\tAdded CarcinogenExposure to radiationList");
 							radiationList.add(ce);
 						} // end of if
 					}

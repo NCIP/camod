@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.16 2006-05-23 17:01:14 pandyas Exp $
+ * $Id: ChemicalDrugAction.java,v 1.17 2006-11-09 17:24:18 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/05/23 17:01:14  pandyas
+ * fixed save of ageOfTreatmentUntis - made code consistent
+ *
  * Revision 1.15  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -62,7 +65,7 @@ public class ChemicalDrugAction extends BaseAction {
 
 		log.debug("<ChemicalDrugAction> Entering 'edit' method");
 
-		System.out.println("<ChemicalDrugAction edit> Entering... ");
+		//System.out.println("<ChemicalDrugAction edit> Entering... ");
 
 		// Grab the current CarcinogenExposure we are working with related to this animalModel
 		String aCarcinogenExposureID = request.getParameter("aCarcinogenExposureID");
@@ -132,7 +135,7 @@ public class ChemicalDrugAction extends BaseAction {
 			log.debug("<ChemicalDrugAction> Entering 'save' method");
 		}
 
-		System.out.println("<ChemicalDrugAction save> Entering... ");
+		//System.out.println("<ChemicalDrugAction save> Entering... ");
         
         ChemicalDrugForm chemicalDrugForm = (ChemicalDrugForm) form;        
 

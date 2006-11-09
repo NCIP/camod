@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NutritionalFactorPopulateAction.java,v 1.11 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: NutritionalFactorPopulateAction.java,v 1.12 2006-11-09 17:30:15 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.10  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -45,7 +48,7 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<NutritionalFactorPopulateAction populate> Entering populate() ");
+        log.debug("<NutritionalFactorPopulateAction populate> Entering populate() ");
 
 		// Create a form to edit
 		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
@@ -101,7 +104,7 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<NutritionalFactorPopulateAction dropdown> Entering dropdown() ");
+        log.debug("<NutritionalFactorPopulateAction dropdown> Entering dropdown() ");
 
 		// blank out the FORMDATA Constant field
 		NutritionalFactorForm nutritForm = (NutritionalFactorForm) form;
@@ -110,7 +113,7 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 		// setup dropdown menus
 		this.dropdown(request, response);
 
-		System.out.println("<NutritionalFactorPopulateAction dropdown> before return submitRadiation ");
+		log.debug("<NutritionalFactorPopulateAction dropdown> before return submitRadiation ");
 
 		return mapping.findForward("submitNutritionalFactors");
 
@@ -125,7 +128,7 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 	 */
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("<NutritionalFactorPopulateAction dropdown> Entering void dropdown()");
+		log.debug("<NutritionalFactorPopulateAction dropdown> Entering void dropdown()");
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following
@@ -137,7 +140,7 @@ public class NutritionalFactorPopulateAction extends BaseAction {
 		NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEXDISTRIBUTIONDROP,
 				Constants.Dropdowns.ADD_BLANK);
 
-		System.out.println("<NutritionalFactorPopulateAction dropdown> Exiting void dropdown()");
+		log.debug("<NutritionalFactorPopulateAction dropdown> Exiting void dropdown()");
 
 	}
 }

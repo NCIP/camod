@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerPopulateAction.java,v 1.5 2006-04-20 19:19:36 pandyas Exp $
+ * $Id: ClinicalMarkerPopulateAction.java,v 1.6 2006-11-09 17:26:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/20 19:19:36  pandyas
+ * Added 'Other' to field and fixed save for other clinical marker
+ *
  * Revision 1.4  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -43,16 +46,16 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 						           HttpServletResponse response)
 	  throws Exception {
 		
-		System.out.println( "<ClinicalMarkerPopulateAction populate> Entered" );
+		//System.out.println( "<ClinicalMarkerPopulateAction populate> Entered" );
 		
 		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
 
        	// Grab the current aHistopathID from the session
        	String aHistopathologyID = request.getParameter("aHistopathologyID");
-       	System.out.println( "aHistopathologyID: " +aHistopathologyID );
+       	//System.out.println( "aHistopathologyID: " +aHistopathologyID );
     	
     	String aClinicalMarkerID = request.getParameter( "aClinicalMarkerID" );		
-    	System.out.println( "aClinicalMarkerID: = " +aClinicalMarkerID);  
+    	//System.out.println( "aClinicalMarkerID: = " +aClinicalMarkerID);  
     	
     	ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean( "clinicalMarkerManager" );
     	ClinicalMarker theClinicalMarker = theClinicalMarkerManager.get( aClinicalMarkerID ); 
@@ -98,7 +101,7 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 			   					   HttpServletResponse response )
 	  throws Exception {
 		
-		System.out.println( "<ClinicalMarkerPopulateAction dropdown> Entering ActionForward dropdown()" );
+		//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Entering ActionForward dropdown()" );
 		
 		//blank out the FORMDATA Constant field
 		ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
@@ -108,7 +111,7 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 		//setup dropdown menus
 		this.dropdown( request, response );
 		
-		System.out.println( "<ClinicalMarkerPopulateAction dropdown> Exiting ActionForward dropdown()" );		
+		//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Exiting ActionForward dropdown()" );		
 		
 		return mapping.findForward( "submitClinicalMarkers" );
 	}	
@@ -124,12 +127,12 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
 						  HttpServletResponse response )
 	  throws Exception {
 		
-			System.out.println( "<ClinicalMarkerPopulateAction dropdown> Entering void dropdown()" );
+			//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Entering void dropdown()" );
 		
 			//Prepopulate all dropdown fields, set the global Constants to the following
 			NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CLINICALMARKERSDROP, Constants.Dropdowns.ADD_BLANK );
 			
-			System.out.println( "<ClinicalMarkerPopulateAction dropdown> Exiting void dropdown()" );			
+			//System.out.println( "<ClinicalMarkerPopulateAction dropdown> Exiting void dropdown()" );			
 	}	
 
 }

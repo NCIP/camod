@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityPopulateAction.java,v 1.6 2005-11-03 13:59:10 georgeda Exp $
+ * $Id: AvailabilityPopulateAction.java,v 1.7 2006-11-09 17:23:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/03 13:59:10  georgeda
+ * Fixed delete functionality
+ *
  * Revision 1.5  2005/10/31 13:46:28  georgeda
  * Updates to handle back arrow
  *
@@ -43,7 +46,7 @@ public class AvailabilityPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<AvailabilityPopulateAction populate> Entering ");
+		//System.out.println("<AvailabilityPopulateAction populate> Entering ");
 
 		// Create a form to edit
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -66,7 +69,7 @@ public class AvailabilityPopulateAction extends BaseAction {
 			availabilityForm.setStockNumber(avilablity.getStockNumber());
 		}
 
-		System.out.println("<AvailabilityPopulateAction populate> Exiting ");
+		//System.out.println("<AvailabilityPopulateAction populate> Exiting ");
 
 		return mapping.findForward("next");
 	}
@@ -85,14 +88,14 @@ public class AvailabilityPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<AvailabilityPopulateAction ActionForward dropdown> Entering ");
+		//System.out.println("<AvailabilityPopulateAction ActionForward dropdown> Entering ");
 
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
 		String theSource = (String) request.getParameter("lab");
 		availabilityForm.setSource(theSource);
 
-		System.out.println("<AvailabilityPopulateAction ActionForward dropdown> Exiting ");
+		//System.out.println("<AvailabilityPopulateAction ActionForward dropdown> Exiting ");
 
 		return mapping.findForward("next");
 

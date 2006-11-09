@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PopulatePubMedUtil.java,v 1.5 2006-04-17 19:10:50 pandyas Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:10:50  pandyas
+ * Added $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $ and $log:$
+ *
  * 
  */
 
@@ -21,9 +24,12 @@ import java.util.StringTokenizer;
  * @author  Dana Zhang
  * @version 1.0
  * 
- * $Id: PopulatePubMedUtil.java,v 1.5 2006-04-17 19:10:50 pandyas Exp $
+ * $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:10:50  pandyas
+ * Added $Id: PopulatePubMedUtil.java,v 1.6 2006-11-09 17:34:56 pandyas Exp $ and $log:$
+ *
  */
 
 
@@ -49,12 +55,12 @@ public class PopulatePubMedUtil implements Runnable{
         // Instantiate the file transfer thread and run it.
         insertRecord = new Thread( new PopulatePubMedUtil() ); // run a separate thread
         pubMed_ID = pubMedID;
-        System.out.println( "<PopulatePubMed.java run> PubMed_ID=" + pubMed_ID + ", " + pubMedID );
+        //System.out.println( "<PopulatePubMed.java run> PubMed_ID=" + pubMed_ID + ", " + pubMedID );
         pub = publication;
         insertRecord.run();
     }
     public void run(){
-        System.out.println("<PopulatePubMed.java run> Entering..." );
+        //System.out.println("<PopulatePubMed.java run> Entering..." );
         String pubMedAbstractRecord = getPubmedAbstract(pubMed_ID);
         String pubMedAbstract = getAbstractString(pubMedAbstractRecord);
         String[] pageStringArray = getPubMedPages(pubMedAbstract);
@@ -70,10 +76,10 @@ public class PopulatePubMedUtil implements Runnable{
         String pubYear = getPublicationYear(pubMedAbstract);        
         String journal = getJournal(pubMedAbstract);
         
-        System.out.println("<PopulatePubMed.java> getPublicationTitle="+pubTitle);
-        System.out.println("<PopulatePubMed.java> pubVolume="+pubVolume);
-        System.out.println("<PopulatePubMed.java> pubYear="+pubYear);
-        System.out.println("<PopulatePubMed.java> journal="+journal);
+        //System.out.println("<PopulatePubMed.java> getPublicationTitle="+pubTitle);
+        //System.out.println("<PopulatePubMed.java> pubVolume="+pubVolume);
+        //System.out.println("<PopulatePubMed.java> pubYear="+pubYear);
+        //System.out.println("<PopulatePubMed.java> journal="+journal);
         
         try{
             pub.setTitle(pubTitle);
@@ -85,8 +91,8 @@ public class PopulatePubMedUtil implements Runnable{
             }
             
             if(pageStart != null && pageEnd != null){
-                System.out.println("<PopulatePubMed.java> pageStart="+pageStart);
-                System.out.println("<PopulatePubMed.java> pageEnd="+pageEnd);
+                //System.out.println("<PopulatePubMed.java> pageStart="+pageStart);
+                //System.out.println("<PopulatePubMed.java> pageEnd="+pageEnd);
                 StringBuffer pageNumber = new StringBuffer();
                 char[] pageStartChar = pageStart.toCharArray();
                 for(int i=0; i<pageStartChar.length;i++){

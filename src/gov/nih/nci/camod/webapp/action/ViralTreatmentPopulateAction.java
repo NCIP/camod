@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ViralTreatmentPopulateAction.java,v 1.12 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: ViralTreatmentPopulateAction.java,v 1.13 2006-11-09 17:32:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.11  2005/12/21 15:44:15  georgeda
  * Defect #283 - fixed population of other admin route
  *
@@ -46,7 +49,7 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 	public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<ViralTreatmentPopulateAction populate> ... ");
+        log.debug("<ViralTreatmentPopulateAction populate> ... ");
 
 		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
 
@@ -110,7 +113,7 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 	public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("<ViralTreatmentPopulateAction dropdown> ... ");
+		log.debug("<ViralTreatmentPopulateAction dropdown> ... ");
 
 		// blank out the FORMDATA Constant field
 		ViralTreatmentForm viralTreatmentForm = (ViralTreatmentForm) form;
@@ -119,7 +122,7 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 		// setup dropdown menus
 		this.dropdown(request, response);
 
-		System.out.println("<ViralTreatmentPopulateAction> exiting... ");
+		log.debug("<ViralTreatmentPopulateAction> exiting... ");
 
 		return mapping.findForward("submitViralTreatment");
 	}
@@ -133,7 +136,7 @@ public class ViralTreatmentPopulateAction extends BaseAction {
 	 */
 	public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("<ViralTreatmentPopulateAction dropdown> Entering... ");
+		log.debug("<ViralTreatmentPopulateAction dropdown> Entering... ");
 
 		// Prepopulate all dropdown fields, set the global Constants to the
 		// following

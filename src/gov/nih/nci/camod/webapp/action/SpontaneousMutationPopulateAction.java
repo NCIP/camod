@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationPopulateAction.java,v 1.10 2006-05-04 19:27:37 pandyas Exp $
+ * $Id: SpontaneousMutationPopulateAction.java,v 1.11 2006-11-09 17:31:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/05/04 19:27:37  pandyas
+ * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
+ *
  * Revision 1.9  2006/04/20 18:12:11  pandyas
  * Modified save of Genetic Alteration
  *
@@ -34,7 +37,7 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<SpontaneousMutationPopulateAction populate> Entering populate() ");
+        log.debug("<SpontaneousMutationPopulateAction populate> Entering populate() ");
         SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
 
         String aSpontaneousMutationID = request.getParameter("aSpontaneousMutationID");
@@ -69,7 +72,7 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<SpontaneousMutationPopulateAction dropdown> Entering dropdown() ");
+        log.debug("<SpontaneousMutationPopulateAction dropdown> Entering dropdown() ");
 
         return mapping.findForward("submitSpontaneousMutation");
     }
@@ -83,8 +86,8 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("<SpontaneousMutationPopulateAction dropdown> Entering void dropdown()");
-        System.out.println("<SpontaneousMutationPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<SpontaneousMutationPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<SpontaneousMutationPopulateAction dropdown> Exiting void dropdown()");
     }
 
 }
