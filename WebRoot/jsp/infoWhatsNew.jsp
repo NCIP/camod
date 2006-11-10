@@ -56,7 +56,7 @@
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				The complete Mouse Tumor Biology Data set (<a href="http://tumor.informatics.jax.org">http://tumor.informatics.jax.org</a>) has been inserted in caMOD. We would like to thank our colleguages at the Jackson Laboratory in Bar Harbor, Maine for their support with this effort.
+																				The complete Mouse Tumor Biology Data set (<a href="http://tumor.informatics.jax.org">http://tumor.informatics.jax.org</a>) has been inserted in caMOD. We would like to thank our colleagues at the Jackson Laboratory in Bar Harbor, Maine for their support with this effort.
 																			</TD>
 																		</TR>
 																		
@@ -148,7 +148,7 @@
 																		</TR>
 																		<TR>
 																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
-																				Keyword search hilighting
+																				Keyword search highlighting
 																			</TD>
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
@@ -220,7 +220,7 @@
 																				Utilization of CSM
 																			</TD>
 																			<TD class="resultsBoxWhiteEnd" width="80%">
-																				caMOD 2.0 utilizes the the Common Security Module (CSM) for user authentication.
+																				caMOD 2.0 utilizes the Common Security Module (CSM) for user authentication.
 																			</TD>
 																		</TR>
 																		<TR>
@@ -237,7 +237,7 @@
 																			</TD>
 																			<TD class="resultsBoxWhiteEnd" width="80%">
 																				The scope of the cancer models database was expanded to include tool mice. Tool mice or tool animals are strains that can be used to generate cancer models and do normally not develop tumors. Tool mice are commonly used to generate
-																				conditional knock out animals. Examples for tool strains are Cre-expressing strains or strains that carry one or more floxed allels.
+																				conditional knock out animals. Examples for tool strains are Cre-expressing strains or strains that carry one or more floxed alleles.
 																			</TD>
 																		</TR>
 																		<TR>
@@ -299,7 +299,7 @@
 																					<li>
 																						A field for describing the methods of observation / detection of genetic changes in the tumors was added.
 																					<li>
-																						Users can enter data found in other species in particular humans in the ?Comparative Data? field.
+																						Users can enter data found in other species in particular humans in the Comparative Data field.
 																				</ul>
 																			</TD>
 																		</TR>
@@ -323,7 +323,7 @@
 																				Submission - Microarray Data
 																			</TD>
 																			<TD class="resultsBoxWhiteEnd" width="80%">
-																				Micrroarray data are stored in MAGE-compliant caArray application instead of the Gene Expression Data Portal (GEDP).
+																				Microarray data are stored in MAGE-compliant caArray application instead of the Gene Expression Data Portal (GEDP).
 																			</TD>
 																		</TR>
 																		<TR>
@@ -340,7 +340,7 @@
 																				Submission - Xenograft
 																			</TD>
 																			<TD class="resultsBoxWhiteEnd" width="80%">
-																				Xenograft Xenograft models can now be entered in a specifically designed part of the application. The Xenograft page was extended by the following fields: ATCC number, Cell amount, graft type.
+																				Xenograft models can now be entered in a specifically designed part of the application. The Xenograft page was extended by the following fields: ATCC number, Cell amount, graft type.
 																			</TD>
 																		</TR>
 																		<TR>
@@ -381,7 +381,7 @@
 																				Search - Search Detail Pages
 																			</TD>
 																			<TD class="resultsBoxWhiteEnd" width="80%">
-																				The therapeutic approaches pages includes information about drug screens in yeast and in-vivo, as well as clinical trials.
+																				The therapeutic approaches page includes information about drug screens in yeast and in-vivo, as well as clinical trials.
 																			</TD>
 																		</TR>
 																		<TR>
@@ -429,7 +429,7 @@
 																			</TD>
 																			<TD class="resultsBoxWhiteEnd" width="80%">
 																				A table of contents provides the user with predefined searches and the number of records to be returned for each query. Researchers can display models for metastatic cancers, models with primary tumors in specific organs or organs
-																				systmes as well as species specific query results.
+																				systems as well as species specific query results.
 																			</TD>
 																		</TR>
 																		<TR>
