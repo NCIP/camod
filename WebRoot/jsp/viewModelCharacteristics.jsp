@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.33 2006-11-08 19:11:17 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.34 2006-11-10 21:20:36 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.33  2006/11/08 19:11:17  pandyas
+  *   added MTB logo onto view screens for Jackson Lab models
+  *
   *   Revision 1.32  2006/10/31 16:07:26  pandyas
   *   added more code to allow for html markup in fields
   *
@@ -92,7 +95,7 @@
 					<c:forEach var="gcol" items="${mdl.genotypeCollection}" varStatus="stat2">
 					<c:set var="item" value="${gcol.nomenclature}"/>
 						<logic:notEmpty name="item">
-							<li> <c:out value="${item.name}" escapeXml="false"/> </li>
+							<c:out value="${item.name}" escapeXml="false"/>
 						</logic:notEmpty>
 						<logic:empty name="item">
 					    	<br/>
@@ -110,7 +113,7 @@
 				    <c:set var="items" value="${mdl.genotypeCollection}"/>
 				    <logic:notEmpty name="items">
 						<c:forEach var="item" items="${items}" varStatus="stat">
-						<li> <c:out value="${item.name}" escapeXml="false"/> </li>
+						<c:out value="${item.name}" escapeXml="false"/> 
 						</c:forEach>
 					</logic:notEmpty>
 					<logic:empty name="items">
