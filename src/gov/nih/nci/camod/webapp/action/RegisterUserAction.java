@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RegisterUserAction.java,v 1.7 2006-08-17 18:08:49 pandyas Exp $
+ * $Id: RegisterUserAction.java,v 1.8 2006-11-10 20:21:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/08/17 18:08:49  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.6  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -28,7 +31,6 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.service.impl.PersonManagerSingleton;
-import gov.nih.nci.camod.service.impl.UserManagerSingleton;
 import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.webapp.form.UserSettingsForm;
 
@@ -50,111 +52,122 @@ import org.apache.struts.action.*;
  */
 public class RegisterUserAction extends BaseAction {
 
-    /**
-     * Action used to populate the various admin lists for the curation process
-     */
-    public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
-            HttpServletResponse inResponse) throws Exception {
+	/**
+	 * Action used to populate the various admin lists for the curation process
+	 */
+	public ActionForward execute(ActionMapping inMapping, ActionForm inForm,
+			HttpServletRequest inRequest, HttpServletResponse inResponse)
+			throws Exception {
 
-        log.trace("Entering execute");
+		log.info("<RegisterUserAction> Entering execute");
 
-        String theForward = "next";
+		String theForward = "next";
 
-        // The user didn't press the cancel button
-        if (isCancelled(inRequest)) {
-            theForward = "cancel";
-        } else {
-            UserSettingsForm theForm = (UserSettingsForm) inForm;
+		// The user didn't press the cancel button
+		if (isCancelled(inRequest)) {
+			theForward = "cancel";
+		} else {
+			UserSettingsForm theForm = (UserSettingsForm) inForm;
 
-            try {
+			try {
+				// Get from default bundle
+				Properties camodProperties = new Properties();
+				String camodPropertiesFileName = null;
 
-                // Get from default bundle
-        		Properties camodProperties = new Properties();
-        		String camodPropertiesFileName = null;
+				camodPropertiesFileName = System
+						.getProperty("gov.nih.nci.camod.camodProperties");
 
-        		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
-        		
-        		try {
-			
-        		FileInputStream in = new FileInputStream(camodPropertiesFileName);
-        		camodProperties.load(in);
-	
-        		} 
-        		catch (FileNotFoundException e) {
-        			log.error("Caught exception finding file for properties: ", e);
-        			e.printStackTrace();			
-        		} catch (IOException e) {
-        			log.error("Caught exception finding file for properties: ", e);
-        			e.printStackTrace();			
-        		}          	
-                String theUsersToNotify = UserManagerSingleton.instance()
-				.getEmailForCoordinator();
+				try {
+					FileInputStream in = new FileInputStream(
+							camodPropertiesFileName);
+					camodProperties.load(in);
 
-                StringTokenizer theTokenizer = new StringTokenizer(theUsersToNotify, ",");
+				} catch (FileNotFoundException e) {
+					log.error("Caught exception finding file for properties: ",
+							e);
+					e.printStackTrace();
+				} catch (IOException e) {
+					log.error("Caught exception finding file for properties: ",
+							e);
+					e.printStackTrace();
+				}
 
-                List<String> theNotifyList = new ArrayList<String>();
-                while (theTokenizer.hasMoreElements()) {
-                    theNotifyList.add(theTokenizer.nextToken());
-                }
-                String[] theRecipients = new String[theNotifyList.size()];
-                for (int i = 0; i < theNotifyList.size(); i++) {
-                    theRecipients[i] = (String) theNotifyList.get(i);
-                }
+				String theUsersToNotify = camodProperties
+						.getProperty("user_settings.user_update_notify");
 
-                // Build the message text
-                String theMailSubject = "caMOD: The following user is requesting a new account: "
-                        + theForm.getFirstName() + " " + theForm.getLastName();
-                String[] theMessageKeys = { "add_new_user" };
+				StringTokenizer theTokenizer = new StringTokenizer(
+						theUsersToNotify, ",");
 
-                if (theRecipients.length > 0) {
+				List<String> theNotifyList = new ArrayList<String>();
+				while (theTokenizer.hasMoreElements()) {
+					theNotifyList.add(theTokenizer.nextToken());
+				}
+				String[] theRecipients = new String[theNotifyList.size()];
+				for (int i = 0; i < theNotifyList.size(); i++) {
+					theRecipients[i] = (String) theNotifyList.get(i);
+				}
 
-                    // gather variable values to build the e-mail content with
-                    Map<String, String> valuesForVariables = new TreeMap<String, String>();
-                    valuesForVariables.put("firstName", theForm.getFirstName());
-                    valuesForVariables.put("lastName", theForm.getLastName());
-                    valuesForVariables.put("email", theForm.getEmail());
-                    valuesForVariables.put("phone", theForm.getPhone());
-                    valuesForVariables.put("affiliation", theForm.getAffiliation());
+				// Build the message text
+				String theMailSubject = "caMOD: The following user is requesting a new account: "
+						+ theForm.getFirstName() + " " + theForm.getLastName();
+				String[] theMessageKeys = { "add_new_user" };
 
-                    // PI data
-                    valuesForVariables.put("isPi", Boolean.toString(theForm.isPrincipalInvestigator()));
+				if (theRecipients.length > 0) {
+					// gather variable values to build the e-mail content with
+					Map<String, String> valuesForVariables = new TreeMap<String, String>();
+					valuesForVariables.put("firstName", theForm.getFirstName());
+					valuesForVariables.put("lastName", theForm.getLastName());
+					valuesForVariables.put("email", theForm.getEmail());
+					valuesForVariables.put("phone", theForm.getPhone());
+					valuesForVariables.put("affiliation", theForm
+							.getAffiliation());
 
-                    if (theForm.isPrincipalInvestigator() == false) {
-                        String thePiUsername = theForm.getPiUsername();
-                        if (thePiUsername != null && thePiUsername.length() > 0) {
-                            Person thePerson = PersonManagerSingleton.instance().getByUsername(thePiUsername);
-                            valuesForVariables.put("piName", thePerson.getDisplayName());
-                        } else {
-                            valuesForVariables.put("piName", "");
-                            valuesForVariables.put("newPiName", theForm.getPiLastName() + ", "
-                                    + theForm.getPiFirstName());
-                            valuesForVariables.put("piEmail", theForm.getPiEmail());
-                        }
-                    } else {
-                        valuesForVariables.put("piName", "");
-                        valuesForVariables.put("piName", "");
-                        valuesForVariables.put("newPiName", "");
-                    }
+					// PI data
+					valuesForVariables.put("isPi", Boolean.toString(theForm
+							.isPrincipalInvestigator()));
 
-                    // launch the email
-                    MailUtil.sendMail(theRecipients, theMailSubject, "", theForm.getEmail(), theMessageKeys,
-                            valuesForVariables);
-                } else {
-                    theForward = "failure";
-                    log.warn("No e-mail address for user updates");
-                }
-            } catch (Exception e) {
+					if (theForm.isPrincipalInvestigator() == false) {
+						String thePiUsername = theForm.getPiUsername();
+						if (thePiUsername != null && thePiUsername.length() > 0) {
+							Person thePerson = PersonManagerSingleton
+									.instance().getByUsername(thePiUsername);
+							valuesForVariables.put("piName", thePerson
+									.getDisplayName());
+						} else {
+							valuesForVariables.put("piName", "");
+							valuesForVariables.put("newPiName", theForm
+									.getPiLastName()
+									+ ", " + theForm.getPiFirstName());
+							valuesForVariables.put("piEmail", theForm
+									.getPiEmail());
+						}
+					} else {
+						valuesForVariables.put("piName", "");
+						valuesForVariables.put("piName", "");
+						valuesForVariables.put("newPiName", "");
+					}
 
-                theForward = "failure";
-                log.error("Unable to send e-mail for new user: ", e);
+					// launch the email
+					MailUtil.sendMail(theRecipients, theMailSubject, "",
+							theForm.getEmail(), theMessageKeys,
+							valuesForVariables);
+				} else {
+					theForward = "failure";
+					log.error("No e-mail address for user updates");
+				}
+			} catch (Exception e) {
 
-                ActionMessages theMsg = new ActionMessages();
-                theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
-                saveErrors(inRequest, theMsg);
-            }
-        }
-        log.trace("Exiting execute");
+				theForward = "failure";
+				log.error("Unable to send e-mail for new user: ", e);
 
-        return inMapping.findForward(theForward);
-    }
+				ActionMessages theMsg = new ActionMessages();
+				theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+						"errors.admin.message"));
+				saveErrors(inRequest, theMsg);
+			}
+		}
+		log.trace("Exiting execute");
+
+		return inMapping.findForward(theForward);
+	}
 }
