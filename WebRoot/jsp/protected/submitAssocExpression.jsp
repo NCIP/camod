@@ -68,14 +68,14 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Expression
+		<td class="formTitle" height="20" colspan="3">Expression&nbsp;
 			<camod:cshelp topic="associated_expression_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
-		<camod:cshelp topic="associated_expression_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 
 		<a href="javascript:showMouseTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>

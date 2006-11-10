@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/11/08 20:13:53  pandyas
+ * modifed help to be histopathology_help
+ *
  * Revision 1.24  2006/10/27 13:01:26  pandyas
  * topic="skip" allows us to remove the onclick for ToolTips while preserving it for the title of each page
  *
@@ -46,7 +49,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.25 2006-11-08 20:13:53 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.26 2006-11-10 22:01:34 pandyas Exp $
  *
  */   
 %>
@@ -110,7 +113,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Associated Metastasis:
+		<td class="formTitle" height="20" colspan="3">Associated Metastasis&nbsp;
 			<camod:cshelp topic="histopathology_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
 </td>
 	</tr>
@@ -118,7 +121,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
-			<camod:cshelp topic="skip" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
 			<a href="javascript:showMouseTissueTree('associatedMetastasisForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>
@@ -133,7 +136,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-			<camod:cshelp topic="skip" key="DISEASE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			<a href="javascript:showMouseDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>	
@@ -148,7 +151,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Age of Metastasis Onset:</label>
-		<camod:cshelp topic="skip" key="HISTOPATHOLOGY.AGE_OF_ONSET" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="ageOfOnset"  size="10" />
@@ -191,7 +193,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Metastasis Incidence over Lifetime (%)<br>(Enter numbers only):</label>
-		<camod:cshelp topic="skip" key="HISTOPATHOLOGY.TUMOR_INCIDENCE_RATE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="tumorIncidenceRate" size="30" />
@@ -201,7 +202,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Survival Information:</label>
-		<camod:cshelp topic="skip" key="HISTOPATHOLOGY.SURVIVAL_INFO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="survivalInfo" size="30" />
@@ -211,7 +211,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gross Description / Macroscopic Description:</label>
-		<camod:cshelp topic="skip" key="HISTOPATHOLOGY.GROSS_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="grossDescription" size="30" />
@@ -221,7 +220,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Microscopic Description (Field holds 2,000 characters):</label>
-		<camod:cshelp topic="skip" key="HISTOPATHOLOGY.MICROSCOPIC_DESCRIPTION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized"  property="microscopicDescription" cols="32" rows="4"/>			
@@ -231,7 +229,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Genetic Alterations found in the Tumor:</label>
-		<camod:cshelp topic="skip" key="GENETIC_ALTERATION.OBSERVATION_HISTO" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="observation" cols="32" rows="4" onkeypress="chkObservation();" />
@@ -241,7 +238,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Method of Observation:</label>
-		<camod:cshelp topic="skip" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="methodOfObservation" cols="32" rows="4" disabled="true" />
@@ -251,7 +247,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comparative Data from other Species:</label>
-		<camod:cshelp topic="skip" key="HISTOPATHOLOGY.COMPARATIVE_DATA" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="comparativeData" size="30" />
@@ -261,7 +256,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Comment:</label>
-		<camod:cshelp topic="skip" key="HISTOPATHOLOGY.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized"  property="comments" cols="32" rows="4"/>			

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.36 2006-11-10 20:18:00 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.37 2006-11-10 22:01:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2006/11/10 20:18:00  pandyas
+ * Took out redundant ToolTip
+ *
  * Revision 1.35  2006/11/06 16:15:16  pandyas
  * removed onclick from model description
  *
@@ -156,7 +159,7 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp topic="data_tree_help" key="SEARCH.SITE_OF_TUMOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>

@@ -44,14 +44,13 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Growth Factor
+		<td class="formTitle" height="20" colspan="3">Growth Factor&nbsp;
 			<camod:cshelp topic="growth_factor_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Growth Factor:</label>
-			<camod:cshelp topic="skip" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+		<td class="formRequiredLabel"><label for="field3">Growth Factor:</label></td>
 		<td class="formField">
 			<br>
 			<label for="field3">(if Growth Factor is not listed, then please<br>select "Other" from the list and specify it below)</label>
@@ -74,7 +73,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Dose:</label>
-		<camod:cshelp topic="skip" key="TREATMENT.DOSAGE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldUnSized" property="dosage"  size="15" />
@@ -88,7 +86,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field3">Administrative Route:</label>
-		<camod:cshelp topic="skip" key="TREATMENT.ADMINISTRATIVE_ROUTE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 		<br>
@@ -111,8 +108,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Treatment Regimen:</label>
-		<camod:cshelp topic="skip" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
+		<td class="formLabel"><label for="field1">Treatment Regimen:</label>		
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="30" />

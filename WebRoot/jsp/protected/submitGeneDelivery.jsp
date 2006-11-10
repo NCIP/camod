@@ -58,14 +58,13 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Gene Delivery
+		<td class="formTitle" height="20" colspan="3">Gene Delivery&nbsp;
 			<camod:cshelp topic="gene_delivery_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
         <tr>
             <td class="formRequiredNotice" width="5">*</td>
             <td class="formRequiredLabel"><label for="field2">Viral Vector:</label>
-            <camod:cshelp topic="skip" key="GENE_DELIVERY.VIRAL_VECTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
             </td>
             <td class="formField">
             <label for="field3">(if Viral Vector is not listed, then please <br>select "Other" from the list and specify it below)</label>
@@ -89,7 +88,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Gene:</label>
-		<camod:cshelp topic="skip" key="GENE_DELIVERY.GENE_IN_VIRUS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">		
 			<html:text styleClass="formFieldSized" size="30" property="geneInVirus" />
@@ -98,8 +96,7 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Treatment Regimen:</label>
-		<camod:cshelp topic="skip" key="TREATMENT.REGIMEN" image="images/iconHelp.gif" text="Tool Tip Test 1" />		
+		<td class="formLabel"><label for="field1">Treatment Regimen:</label>		
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" property="regimen" size="30"/>
@@ -108,7 +105,8 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="0">&nbsp;</td>
-		<td class="formLabel"><label for="field2">Injection Site:</label>
+		<td class="formLabel"><label for="field2">Injection Site:&nbsp;
+		<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			</label>
 		  	    <a href="javascript:showMouseTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>

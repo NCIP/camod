@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.29 2006-10-27 13:01:26 pandyas Exp $
+ * $Id: submitInducedMutation.jsp,v 1.30 2006-11-10 22:01:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/10/27 13:01:26  pandyas
+ * topic="skip" allows us to remove the onclick for ToolTips while preserving it for the title of each page
+ *
  * Revision 1.28  2006/08/13 18:26:47  pandyas
  * updated on-line help from Robohelp to ePublisher - modified links
  *
@@ -118,7 +121,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">CAS number:</label>
-		<camod:cshelp topic="skip" key="ENV_FACTOR.CAS_NUMBER" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<input type=button value="Find CAS #" onClick="myRef = window.open('http://chemfinder.cambridgesoft.com/','mywin',
@@ -131,7 +133,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Gene ID ( Entrez ):</label>
-		<camod:cshelp topic="skip" key="ENGINEERED_GENE.GENE_ID" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 		<input type=button value="Find Gene ID" onClick="myRef = window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene','mywin',
@@ -152,7 +153,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Observation:</label>
-		<camod:cshelp topic="skip" key="GENETIC_ALTERATION.OBSERVATION_INDUCED_MUTATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="observation" rows="4" cols="32" onkeypress="chkObservation();"/>		
@@ -162,7 +162,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Method of Observation:</label>
-		<camod:cshelp topic="skip" key="GENETIC_ALTERATION.METHOD_OF_OBSERVATION" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="methodOfObservation" rows="4" cols="32"  />		
@@ -181,7 +180,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Comment:</label>
-			<camod:cshelp topic="skip" key="ENGINEERED_GENE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:textarea styleClass="formFieldSized" property="comments"  rows="4" cols="32"  />	

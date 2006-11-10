@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/27 13:01:26  pandyas
+ * topic="skip" allows us to remove the onclick for ToolTips while preserving it for the title of each page
+ *
  * Revision 1.2  2006/10/18 18:11:47  pandyas
  * modified label for SiRNA screen
  *
@@ -8,7 +11,7 @@
  * modified during development of caMOD 2.2 - various
  *
  *
- * $Id: submitSirna.jsp,v 1.3 2006-10-27 13:01:26 pandyas Exp $
+ * $Id: submitSirna.jsp,v 1.4 2006-11-10 22:01:34 pandyas Exp $
  *
  */   
 %>
@@ -109,8 +112,7 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Targeted Region:</label>
-				<camod:cshelp topic="skip" key="TRANSIENT_INTERFERENCE.TARGETED_REGION" image="images/iconHelp.gif" text="Tool Tip Test 1" /></td>
+			<td class="formRequiredLabel"><label for="field1">Targeted Region:</label></td>
 			<td class="formField">					
 					<html:text styleClass="formFieldSized" size="30" property="targetedRegion" />			
 			</td>

@@ -41,7 +41,7 @@
 	</tr>
 
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Clinical Marker
+		<td class="formTitle" height="20" colspan="3">Clinical Marker&nbsp;
 			<camod:cshelp topic="clinical_marker_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 

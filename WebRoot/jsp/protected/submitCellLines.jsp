@@ -43,14 +43,13 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Cell Line
+		<td class="formTitle" height="20" colspan="3">Cell Line&nbsp;
 		<camod:cshelp topic="cell_lines_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field1">Name of Cell Line:</label>
-		<camod:cshelp topic="skip" key="CELL_LINE.NAME" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" size="30" property="cellLineName" />			
@@ -59,7 +58,8 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>
+		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:&nbsp;
+			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			</label>
 		  	    &nbsp;<a href="javascript:showMouseTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>
@@ -72,7 +72,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Experiment:</label>
-		<camod:cshelp topic="skip" key="CELL_LINE.EXPERIMENT" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="experiment" cols="32" rows="4"/>			
@@ -82,7 +81,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Results:</label>
-		<camod:cshelp topic="skip" key="CELL_LINE.RESULTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="results" cols="32" rows="4"/>			
@@ -92,7 +90,6 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Comment:</label>
-		<camod:cshelp topic="skip" key="CELL_LINE.COMMENTS" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		</td>
 			<td class="formField">
 					<html:textarea styleClass="formFieldSized" property="comments" cols="32" rows="4"/>			
