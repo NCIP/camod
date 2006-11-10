@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.46 2006-11-06 16:15:34 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.47 2006-11-10 20:18:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.46  2006/11/06 16:15:34  pandyas
+ * removed onclick from model description
+ *
  * Revision 1.45  2006/10/17 16:08:28  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -184,9 +187,7 @@
 		
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> 
-				<camod:cshelp topic="skip" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-			</td>
+			<td class="formLabel"><label for="field1">Model Name /Model Descriptor:</label> </td>
 			<td class="formField">
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
 				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"

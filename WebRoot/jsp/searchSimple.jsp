@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.35 2006-11-06 16:15:16 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.36 2006-11-10 20:18:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2006/11/06 16:15:16  pandyas
+ * removed onclick from model description
+ *
  * Revision 1.34  2006/08/16 13:54:35  pandyas
  * updated on-line help from Robohelp to ePublisher - added new link for simple search title
  *
@@ -122,14 +125,11 @@
 		<tr>
 			<td class="formTitleBlue" height="20" colspan="3">Simple Search
 				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
-			<!-- <td class="formMessage" align="left" FONT="9"><a href="advancedsearch.html">Advanced Search <a> </td> -->
 		</tr>
 		
 		<tr>
 		    <td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Model Name / Model Descriptor  
-				<camod:cshelp topic="skip" key="SEARCH.MODEL_DESCRIPTOR" image="images/iconHelp.gif" text="Tool Tip Test 1" />
-				</label>
+			<td class="formLabel"><label for="field1">Model Name / Model Descriptor </label>
 			</td>
 			<td class="formField">			
 				<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="30"/>
