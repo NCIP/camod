@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.4 2006-10-23 14:15:25 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.5 2006-11-10 22:02:27 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/23 14:15:25  pandyas
+ * removed variables not used in final version of jsp
+ *
  * Revision 1.3  2006/10/17 16:08:12  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -41,7 +44,7 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Edit Models (SuperUser)
+		    <td class="formTitle" height="20" colspan="4">Edit Models (SuperUser)&nbsp;
 		    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		<html:form action="AdminEditModelsPopulateAction">
