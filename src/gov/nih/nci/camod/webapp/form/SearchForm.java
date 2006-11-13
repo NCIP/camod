@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.13 2006-10-17 16:10:47 pandyas Exp $
+ * $Id: SearchForm.java,v 1.14 2006-11-13 16:51:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/10/17 16:10:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.12  2006/05/10 14:25:10  schroedn
  * New Features - Changes from code review
  *
@@ -529,6 +532,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         searchXenograft = false;
         searchToolStrain = false;
         externalSource = null;
+        searchImageData = false;
     }
 
     /**
