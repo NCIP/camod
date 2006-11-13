@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.35 2006-11-13 17:14:25 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.36 2006-11-13 18:18:58 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.35  2006/11/13 17:14:25  pandyas
+  *   #468 - remove width and height variable for mtb image icon on header of serach results and view pages with Jax data
+  *
   *   Revision 1.34  2006/11/10 21:20:36  pandyas
   *   COSMETIC – can you please remove the bullet points (<li>) in the genotype and nomenclature field on the model characteristics search page. The bullet points are obsolete since we are never going to have more than one entry for each of these fields.
   *
@@ -294,7 +297,7 @@
 						<!-- Jackson Lab: If stock# not empty link to stock#, else link to main distributor page -->
 							<c:choose>
 								<c:when test="${not empty av.stockNumber}">						    
-									<a target="_distributor" href="http://jaxmice.jax.org/jaxmice-cgi/jaxmicedb.cgi?objtype=pricedetail&stock=<c:out value="${av.stockNumber}"/>">
+									<a target="_distributor" href="http://jaxmice.jax.org/strain/00<c:out value="${av.stockNumber}.html"/>">
 									<c:out value="${dist.name}" escapeXml="false"/>
 								</c:when>							
 								<c:otherwise>
