@@ -1,8 +1,12 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.36 2006-11-13 18:18:58 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.37 2006-11-13 20:09:52 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.36  2006/11/13 18:18:58  pandyas
+  *   #440 - Modified the link to animal availability for jackson labs.
+  *   This will require more work in next version.  We had to hard-code two leading zeros for the link to work, but will clean up the stock numbers and remove the hard-coded zeros in this jsp.
+  *
   *   Revision 1.35  2006/11/13 17:14:25  pandyas
   *   #468 - remove width and height variable for mtb image icon on header of serach results and view pages with Jax data
   *
@@ -80,7 +84,7 @@
 				<camod:highlight>
 					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 					<c:if test="${mdl.externalSource == 'Jax MTB'}">
-						<IMG src="images/mtb_logo.jpg">
+						<IMG src="/camod/images/mtb_logo.jpg">
 					</c:if>					
 				</camod:highlight>
 			</td>
