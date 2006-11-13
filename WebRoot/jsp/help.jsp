@@ -32,7 +32,7 @@
 								</P>	
 							</td>		
 							<td align="right">
-								<img src="images/help.gif">
+								<img src="/camod/images/help.gif">
 							</td>
 						</tr>
 					</table>	

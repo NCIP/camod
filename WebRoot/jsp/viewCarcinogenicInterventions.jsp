@@ -2,9 +2,17 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.29 2006-11-01 19:50:08 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.30 2006-11-13 20:19:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/11/01 19:50:08  pandyas
+ * Changed the values for the TREATMENT_TYPES inserted in the environmental factor table as follows:
+ *
+ * Instead of inserting “Growth Factor” insert “Growth Factor Type”
+ * Instead of inserting “Hormone” insert “Hormone Type”
+ * Instead of inserting “Other” insert “Other Type”
+ * Instead of inserting “Radiation” insert “Radiation Type”
+ *
  * Revision 1.28  2006/11/01 19:25:21  pandyas
  * modified to view CI for Jackson Lab data - Environmental_Factor.Type for JAX data needs to be unique from caMOD types already used.
  *
@@ -50,6 +58,9 @@
 					Carcinogenic Agents - Model:
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>
+					<c:if test="${mdl.externalSource == 'Jax MTB'}">
+						<IMG src="/camod/images/mtb_logo.jpg">
+					</c:if>							
 					</camod:highlight>
 				</td>				
 			</tr>			

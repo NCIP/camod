@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.24 2006-10-27 18:31:16 pandyas Exp $
+ * $Id: viewCellLines.jsp,v 1.25 2006-11-13 20:23:18 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/10/27 18:31:16  pandyas
+ * Fixed fields in display page to allow for html markup
+ *
  * Revision 1.23  2006/05/25 18:35:16  pandyas
  * added break after MGI number
  *
@@ -164,7 +167,7 @@
 						</td>
 						<td class="<c:out value="${tdClass}"/>End" width="10%">
 							<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${pub.pmid}"/>">
-							<IMG src="images/pubmed_70.gif" align="middle">
+							<IMG src="/camod/images/pubmed_70.gif" align="middle">
 							</a>
 						</td>
 					</tr>

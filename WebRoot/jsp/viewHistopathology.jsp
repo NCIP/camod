@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2006/11/13 17:14:11  pandyas
+ * #468 - remove width and height variable for mtb image icon on header of serach results and view pages with Jax data
+ *
  * Revision 1.35  2006/11/08 19:11:13  pandyas
  * added MTB logo onto view screens for Jackson Lab models
  *
@@ -51,7 +54,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.36 2006-11-13 17:14:11 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.37 2006-11-13 20:20:29 pandyas Exp $
  *
  */   
 %>
@@ -81,7 +84,7 @@
 				<camod:highlight>
 					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 					<c:if test="${mdl.externalSource == 'Jax MTB'}">
-						<IMG src="images/mtb_logo.jpg">
+						<IMG src="/camod/images/mtb_logo.jpg">
 					</c:if>						
 				</camod:highlight>
 				</td>				
