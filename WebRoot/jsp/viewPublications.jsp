@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.23 2006-11-13 20:20:03 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.24 2006-11-13 20:23:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/11/13 20:20:03  pandyas
+ * Modified IMG SRC location to include complete location (added /camod/...)
+ *
  * Revision 1.22  2006/11/13 17:13:58  pandyas
  * #468 - remove width and height variable for mtb image icon on header of serach results and view pages with Jax data
  *
@@ -127,7 +130,7 @@
 				</td>
 				<td class="<c:out value="${tdClass}"/>End" width="10%">
 					<a target="_pubmed" href=" http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&dopt=abstract&list_uids=<c:out value="${p.pmid}"/>">
-					<IMG src="images/pubmed_70.gif" align="middle">
+					<IMG src="/camod/images/pubmed_70.gif" align="middle">
 					</a>
 				</td>					
 			</tr>
