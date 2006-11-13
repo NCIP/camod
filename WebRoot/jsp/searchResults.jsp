@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.23 2006-11-08 20:13:22 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.24 2006-11-13 19:59:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/11/08 20:13:22  pandyas
+ * Removed height and width for mtb_logo
+ *
  * Revision 1.22  2006/11/08 19:11:17  pandyas
  * added MTB logo onto view screens for Jackson Lab models
  *
@@ -245,13 +248,13 @@
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
 					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>
 									<c:if test="${row.externalSource == 'Jax MTB'}">
-										<IMG src="images/mtb_logo.jpg">
+										<IMG src="/camod/images/mtb_logo.jpg">
 									</c:if>	
 									<c:if test="${not empty row.imageTitle}">
-										<IMG src="images/image_icon.jpg" width="20" height="20">
+										<IMG src="/camod/images/image_icon.jpg" width="20" height="20">
 									</c:if>	
 									<c:if test="${not empty row.microarray}">
-										<IMG src="images/microarray_icon.jpg" width="20" height="20">
+										<IMG src="/camod/images/microarray_icon.jpg" width="20" height="20">
 									</c:if>																								                 	
 							     </display:column>										
 							<% }						
