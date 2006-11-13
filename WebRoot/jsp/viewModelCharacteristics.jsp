@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.34 2006-11-10 21:20:36 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.35 2006-11-13 17:14:25 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.34  2006/11/10 21:20:36  pandyas
+  *   COSMETIC – can you please remove the bullet points (<li>) in the genotype and nomenclature field on the model characteristics search page. The bullet points are obsolete since we are never going to have more than one entry for each of these fields.
+  *
   *   Revision 1.33  2006/11/08 19:11:17  pandyas
   *   added MTB logo onto view screens for Jackson Lab models
   *
@@ -74,7 +77,7 @@
 				<camod:highlight>
 					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 					<c:if test="${mdl.externalSource == 'Jax MTB'}">
-						<IMG src="images/mtb_logo.jpg" width="20" height="20">
+						<IMG src="images/mtb_logo.jpg">
 					</c:if>					
 				</camod:highlight>
 			</td>

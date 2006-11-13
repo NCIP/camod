@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.21 2006-11-08 19:11:17 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.22 2006-11-13 17:13:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/11/08 19:11:17  pandyas
+ * added MTB logo onto view screens for Jackson Lab models
+ *
  * Revision 1.20  2006/10/27 18:31:16  pandyas
  * Fixed fields in display page to allow for html markup
  *
@@ -60,7 +63,7 @@
 					<camod:highlight>
 						<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 						<c:if test="${mdl.externalSource == 'Jax MTB'}">
-							<IMG src="images/mtb_logo.jpg" width="20" height="20">
+							<IMG src="images/mtb_logo.jpg" >
 						</c:if>							
 					</camod:highlight>
 				</td>				

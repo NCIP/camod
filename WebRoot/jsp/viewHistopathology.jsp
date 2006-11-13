@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2006/11/08 19:11:13  pandyas
+ * added MTB logo onto view screens for Jackson Lab models
+ *
  * Revision 1.34  2006/11/01 17:34:10  pandyas
  * Added red color to tumor incidence rates of 0 (from JAX data)
  *
@@ -48,7 +51,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.35 2006-11-08 19:11:13 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.36 2006-11-13 17:14:11 pandyas Exp $
  *
  */   
 %>
@@ -78,7 +81,7 @@
 				<camod:highlight>
 					<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;
 					<c:if test="${mdl.externalSource == 'Jax MTB'}">
-						<IMG src="images/mtb_logo.jpg" width="20" height="20">
+						<IMG src="images/mtb_logo.jpg">
 					</c:if>						
 				</camod:highlight>
 				</td>				
