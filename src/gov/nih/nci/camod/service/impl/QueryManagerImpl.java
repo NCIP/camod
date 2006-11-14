@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.61 2006-10-23 14:21:59 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.62 2006-11-14 22:06:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.61  2006/10/23 14:21:59  pandyas
+ * cleaned up - added image code back in
+ *
  * Revision 1.60  2006/10/17 16:50:25  pandyas
  * modified during development of caMOD 2.2 - added methods for tool strain, external source, and images
  *
@@ -1382,7 +1385,7 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference() throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct abs_cancer_model_id FROM morpholino";
+        String theSQLString = "SELECT distinct abs_cancer_model_id FROM transient_interference";
 
         Object[] theParams = new Object[0];
         return getIds(theSQLString, theParams);
@@ -1452,7 +1455,7 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference(String inTransientInterference) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct m.abs_cancer_model_id " + "FROM morpholino m WHERE upper(m.targeted_region) like ?";
+        String theSQLString = "SELECT distinct m.abs_cancer_model_id " + "FROM transient_interference m WHERE upper(m.targeted_region) like ?";
 
         String theSQLTheraputicApproach = "%";
         if (inTransientInterference != null && inTransientInterference.trim().length() > 0)
