@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.48 2006-11-10 22:01:45 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.49 2006-11-14 21:47:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2006/11/10 22:01:45  pandyas
+ * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
+ *
  * Revision 1.47  2006/11/10 20:18:11  pandyas
  * Took out redundant ToolTip
  *
@@ -235,6 +238,7 @@
 		 		<html:hidden styleId="diagnosisName" property="diagnosisName"/>
 				<label for="field2">Diagnosis</label>
 				&nbsp;
+				<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>			    

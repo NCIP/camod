@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2006/11/10 22:01:34  pandyas
+ * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
+ *
  * Revision 1.25  2006/11/08 20:13:53  pandyas
  * modifed help to be histopathology_help
  *
@@ -49,7 +52,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.26 2006-11-10 22:01:34 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.27 2006-11-14 21:47:49 pandyas Exp $
  *
  */   
 %>
@@ -136,7 +139,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
 		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+			<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
 			<a href="javascript:showMouseDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 			</a>	
