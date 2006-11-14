@@ -88,7 +88,8 @@
         <many-to-one 
         	name="transientInterferenceMethod"
         	class="TransientInterferenceMethod"
-        	column="trans_interference_method_id"/>        	
+        	column="trans_interference_method_id"
+        	cascade="save-update"/>        	
 
 	</class>
 </hibernate-mapping>
