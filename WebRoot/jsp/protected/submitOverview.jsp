@@ -94,6 +94,7 @@
 		    		
                     <td align="left" colspan="1" class="resultsBoxGreyNoEnd">
                     	<html:form action="ChangeAnimalModelToCompleteNotScreenedAction">
+                    		<html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
                     		<input type="hidden" name="modelId" value="<%= Constants.Parameters.MODELID%>"/>
                     		<input type="hidden" name="aEvent" value="<%= Constants.Admin.Actions.BACK_TO_COMPLETE%>"/>      
                     		<html:submit>Complete-not screened</html:submit>						        
@@ -107,6 +108,7 @@
                     	<logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Inactive">
                     	<td align="left" colspan="1" class="resultsBoxGreyEnd">
                     		<html:form action="ChangeAnimalModelToScreenedApprovedAction">
+                    			<html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
                     			<input type="hidden" name="modelId" value="<%= Constants.Parameters.MODELID%>"/>
                     			<input type="hidden" name="aEvent" value="<%= Constants.Admin.Actions.BACK_TO_SCREENER_APPROVE%>"/>                    	
                             	<html:submit>Screened - Approved</html:submit> 
