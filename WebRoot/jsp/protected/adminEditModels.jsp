@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.5 2006-11-10 22:02:27 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.6 2006-11-16 13:04:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/11/10 22:02:27  pandyas
+ * Format change - addded &nbsp; before help icon
+ *
  * Revision 1.4  2006/10/23 14:15:25  pandyas
  * removed variables not used in final version of jsp
  *
@@ -82,7 +85,7 @@
 	             <center>
 	             	<c:set var="dupLink" value="return confirm('Are you sure you want to duplicate this record (${row.modelDescriptor})?');"/>   
 	                <c:set var="uri" value="/camod/DuplicateAdminAnimalModelAction.do?method=duplicate&aModelID=${row.modelId}"/>
-	                <a href='<c:out value="${uri}"/>' onclick='<c:out value="${dupLink}"/>' ><IMG src="images/dupRecord.gif" border=0></a>  
+	                <a href='<c:out value="${uri}"/>' onclick='<c:out value="${dupLink}"/>' ><IMG src="/camod/images/dupRecord.gif" border=0></a>  
 	       	     </center>     
  	    </display:column>
 		<display:column href="/camod/SubmitAction.do?method=setModelConstants&" paramId="aModelID" paramProperty="id" title="Model Descriptor" >
@@ -102,7 +105,7 @@
 	         	<center>
 	             	<c:set var="inactiveLink" value="return confirm('Are you sure you want to inactivate this record (${row.modelDescriptor})?');"/>	         	
 				    <c:set var="uri" value="ChangeAnimalModelToInactiveAction.do?&aEvent=inactivate&aModelID=${row.modelId}"/>
-				         <a href='<c:out value="${uri}"/>' onclick='<c:out value="${inactiveLink}"/>' ><IMG src="images/remove.gif" border=0></a>
+				         <a href='<c:out value="${uri}"/>' onclick='<c:out value="${inactiveLink}"/>' ><IMG src="/camod/images/remove.gif" border=0></a>
 				 </center>
 	       	 	</display:column>
 			</c:otherwise>
