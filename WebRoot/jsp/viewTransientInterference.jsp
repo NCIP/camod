@@ -1,6 +1,10 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/31 17:05:17  pandyas
+ * Fixed choose for method=1 (SiRNA title vs Morpholino title)
+ * Added more code to allow for html markup in fields
+ *
  * Revision 1.3  2006/10/27 18:31:16  pandyas
  * Fixed fields in display page to allow for html markup
  *
@@ -11,7 +15,7 @@
  * Changes for searching on transient interfaces
  *
  *
- * $Id: viewTransientInterference.jsp,v 1.4 2006-10-31 17:05:17 pandyas Exp $
+ * $Id: viewTransientInterference.jsp,v 1.5 2006-11-17 17:47:26 pandyas Exp $
  *
  */   
 %>
@@ -46,10 +50,10 @@
 			<c:set var="method" value="${p.transientInterferenceMethod}"/>
 						<c:choose>
 							<c:when test = "${method.id == 1}">
-								<td class="formTitle" height="20" colspan="2"> Method: Morpolino model: </td>
+								<td class="formTitle" height="20" colspan="2"> Method: Morpolino model </td>
 							</c:when>
 							<c:otherwise>
-								<td class="formTitle" height="20" colspan="2"> Method: siRNA model: </td>
+								<td class="formTitle" height="20" colspan="2"> Method: siRNA model </td>
 							</c:otherwise>
 						</c:choose>			
 								
