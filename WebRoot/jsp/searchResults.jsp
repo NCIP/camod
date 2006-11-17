@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.24 2006-11-13 19:59:44 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.25 2006-11-17 17:33:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/11/13 19:59:44  pandyas
+ * #463	images on image search page do not open
+ * Modified link to show complete img src location:
+ * <IMG SRC="/camod/images/...">
+ *
  * Revision 1.23  2006/11/08 20:13:22  pandyas
  * Removed height and width for mtb_logo
  *
@@ -246,10 +251,10 @@
 							
 							if( resultColumns[i].equals("Model Descriptor") ) { %>
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
-					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>
 									<c:if test="${row.externalSource == 'Jax MTB'}">
 										<IMG src="/camod/images/mtb_logo.jpg">
-									</c:if>	
+									</c:if>						             
+					                 <c:out escapeXml="false" value="${row.modelDescriptor}"/>
 									<c:if test="${not empty row.imageTitle}">
 										<IMG src="/camod/images/image_icon.jpg" width="20" height="20">
 									</c:if>	
