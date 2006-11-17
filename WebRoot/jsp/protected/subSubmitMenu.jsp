@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.55 2006-10-17 16:08:12 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.56 2006-11-17 17:46:20 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.55  2006/10/17 16:08:12  pandyas
+		 * modified during development of caMOD 2.2 - various
+		 *
 		 * Revision 1.54  2006/05/08 14:19:48  georgeda
 		 * Fixed errors introduced w/ adding Zebrafish changes and reformatting.
 		 *
@@ -401,7 +404,7 @@
 	</logic:iterate>
 	 
 	<img src="images/right_arrow.gif" border="0">	
-		<html:link styleClass="subMenuRed" action="SirnaPopulateAction.do?method=dropdown&aConceptCode=C2191">Enter SiRNA</html:link><br>
+		<html:link styleClass="subMenuRed" action="SirnaPopulateAction.do?method=dropdown&aConceptCode=C2191">Enter siRNA</html:link><br>
 		<logic:iterate id="aTransInt" name="sirna_list" type="TransientInterference">
 			 	 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
 		<html:link styleClass="subMenuBlue"
