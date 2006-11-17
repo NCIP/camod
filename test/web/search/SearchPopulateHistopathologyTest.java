@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateHistopathologyTest.java,v 1.4 2006-10-23 16:50:52 pandyas Exp $
+ * $Id: SearchPopulateHistopathologyTest.java,v 1.5 2006-11-17 18:23:23 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/23 16:50:52  pandyas
+ * removed todo
+ *
  * Revision 1.3  2006/05/08 14:23:23  georgeda
  * Reformat and clean up warnings
  *
@@ -173,7 +176,7 @@ public class SearchPopulateHistopathologyTest extends BaseModelNeededTest
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Mammary Gland");
         assertNotNull("Unable to find link to populate the Assoc Metastasis", theLink);
         theCurrentPage = theLink.click();
-        assertCurrentPageContains("Associated Metastasis:");
+        assertCurrentPageContains("Diagnosis:");
         theWebForm = theCurrentPage.getFormWithName("associatedMetastasisForm");
 
         //Add parameters found behind but not populate screen
