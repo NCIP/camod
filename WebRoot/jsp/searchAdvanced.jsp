@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.49 2006-11-14 21:47:32 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.50 2006-11-21 18:24:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2006/11/14 21:47:32  pandyas
+ * #465	delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
+ *
  * Revision 1.48  2006/11/10 22:01:45  pandyas
  * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *
@@ -506,7 +509,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">External Source Data From Jackson Labs</td>
+			<td class="formTitleBlue" height="10" colspan="3">Data from External Sources</td>
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
