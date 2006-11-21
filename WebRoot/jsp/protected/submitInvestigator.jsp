@@ -45,7 +45,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Available from Investigator
-			<camod:cshelp topic="model_availability_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+			<camod:cshelp topic="investigator_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 	
         <tr>
