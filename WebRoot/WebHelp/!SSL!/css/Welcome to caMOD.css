@@ -1,36 +1,36 @@
 div.Appendix
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 15pt;
+  font-family: "Times New Roman";
+  font-size: 15.0pt;
   font-style: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: right;
+  margin-top: 0.0pt;
+  text-align: Right;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Appendix_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Appendix_inner
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 15pt;
+  font-family: "Times New Roman";
+  font-size: 15.0pt;
   font-style: normal;
   font-weight: bold;
-  text-align: right;
-  text-transform: normal;
+  text-align: Right;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -42,39 +42,39 @@ div.Appendix
   padding-bottom: 0pt;
 }
 
-div.Appendix__name
+div.Appendix_name
 {
   color: #000000;
   font-family: Arial;
-  font-size: 27pt;
+  font-size: 27.0pt;
   font-style: normal;
   font-weight: bold;
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: right;
+  margin-top: 0.0pt;
+  text-align: Right;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
-.Appendix__name_outer
+.Appendix_name_outer
 {
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
-.Appendix__name_inner
+.Appendix_name_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 27pt;
+  font-size: 27.0pt;
   font-style: normal;
   font-weight: bold;
-  text-align: right;
-  text-transform: normal;
+  text-align: Right;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -86,41 +86,41 @@ div.Appendix__name
   padding-bottom: 0pt;
 }
 
-div.Appendix__number
+div.Appendix_number
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 100pt;
+  font-family: "Times New Roman";
+  font-size: 100.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 4.968pt;
-  margin-top: 0pt;
-  text-align: right;
+  margin-top: 0.0pt;
+  text-align: Right;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
-.Appendix__number_outer
+.Appendix_number_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 4.968pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
-.Appendix__number_inner
+.Appendix_number_inner
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 100pt;
+  font-family: "Times New Roman";
+  font-size: 100.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  text-align: right;
-  text-transform: normal;
+  text-align: Right;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -136,37 +136,37 @@ div.Blockquote
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: LeftRight;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Blockquote_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Blockquote_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: LeftRight;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -182,37 +182,37 @@ div.Body_Text
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
-  text-align: left;
+  margin-top: 2.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Body_Text_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
+  margin-top: 2.0pt;
 }
 
 .Body_Text_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -228,37 +228,37 @@ div.Body_Text_Indent
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 18pt;
   margin-right: 0pt;
-  margin-top: 3pt;
-  text-align: left;
+  margin-top: 3.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Body_Text_Indent_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
+  margin-top: 3.0pt;
 }
 
 .Body_Text_Indent_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -274,37 +274,37 @@ div.Body_Text_Indent_2
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 3pt;
-  text-align: left;
+  margin-top: 3.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Body_Text_Indent_2_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
+  margin-top: 3.0pt;
 }
 
 .Body_Text_Indent_2_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -320,37 +320,37 @@ div.Body_Text_Indent_3
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 54pt;
   margin-right: 0pt;
-  margin-top: 3pt;
-  text-align: left;
+  margin-top: 3.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Body_Text_Indent_3_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
+  margin-top: 3.0pt;
 }
 
 .Body_Text_Indent_3_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -366,37 +366,37 @@ div.Body_Text_Indent_4
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 72pt;
   margin-right: 0pt;
-  margin-top: 3pt;
-  text-align: left;
+  margin-top: 3.0pt;
+  text-align: LeftRight;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Body_Text_Indent_4_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
+  margin-top: 3.0pt;
 }
 
 .Body_Text_Indent_4_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: LeftRight;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -412,37 +412,37 @@ div.Body_Text_Indent_No_Space
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 18pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Body_Text_Indent_No_Space_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Body_Text_Indent_No_Space_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -458,37 +458,37 @@ div.Body_Text_No_Space
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Body_Text_No_Space_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Body_Text_No_Space_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -504,37 +504,37 @@ div.Bullet
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Bullet_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Bullet_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -550,37 +550,37 @@ div.Bullet_Indent
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 54pt;
   margin-right: 0pt;
-  margin-top: 4pt;
-  text-align: left;
+  margin-top: 4.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Bullet_Indent_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 4pt;
+  margin-top: 4.0pt;
 }
 
 .Bullet_Indent_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -596,37 +596,37 @@ div.Callout
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Callout_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Callout_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -641,38 +641,38 @@ div.Callout
 div.Caption
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-left: 18pt;
   margin-right: 0pt;
-  margin-top: 3pt;
-  text-align: left;
+  margin-top: 3.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Caption_outer
 {
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
+  margin-top: 3.0pt;
 }
 
 .Caption_inner
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -687,38 +687,38 @@ div.Caption
 div.Caption_Indent
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 3pt;
-  text-align: left;
+  margin-top: 3.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Caption_Indent_outer
 {
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
+  margin-top: 3.0pt;
 }
 
 .Caption_Indent_inner
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -733,36 +733,36 @@ div.Caption_Indent
 div.Chapter
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 18pt;
+  font-family: "Palatino Linotype";
+  font-size: 18.0pt;
   font-style: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: right;
+  margin-top: 0.0pt;
+  text-align: Right;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Chapter_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Chapter_inner
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 18pt;
+  font-family: "Palatino Linotype";
+  font-size: 18.0pt;
   font-style: normal;
   font-weight: bold;
-  text-align: right;
-  text-transform: normal;
+  text-align: Right;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -777,36 +777,36 @@ div.Chapter
 div.Chapter_Name
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 27pt;
+  font-family: "Palatino Linotype";
+  font-size: 27.0pt;
   font-style: normal;
   font-weight: bold;
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: right;
+  margin-top: 0.0pt;
+  text-align: Right;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Chapter_Name_outer
 {
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Chapter_Name_inner
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 27pt;
+  font-family: "Palatino Linotype";
+  font-size: 27.0pt;
   font-style: normal;
   font-weight: bold;
-  text-align: right;
-  text-transform: normal;
+  text-align: Right;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -821,38 +821,38 @@ div.Chapter_Name
 div.Chapter_Number
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 72pt;
+  font-family: "Palatino Linotype";
+  font-size: 72.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 4.968pt;
-  margin-top: 0pt;
-  text-align: right;
+  margin-top: 0.0pt;
+  text-align: Right;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Chapter_Number_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 4.968pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Chapter_Number_inner
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 72pt;
+  font-family: "Palatino Linotype";
+  font-size: 72.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  text-align: right;
-  text-transform: normal;
+  text-align: Right;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -867,38 +867,38 @@ div.Chapter_Number
 div.Code
 {
   color: #000000;
-  font-family: Courier New;
-  font-size: 11pt;
+  font-family: "Courier New";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 18pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Code_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Code_inner
 {
   color: #000000;
-  font-family: Courier New;
-  font-size: 11pt;
+  font-family: "Courier New";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -913,38 +913,38 @@ div.Code
 div.Code_Indent
 {
   color: #000000;
-  font-family: Courier New;
-  font-size: 11pt;
+  font-family: "Courier New";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Code_Indent_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Code_Indent_inner
 {
   color: #000000;
-  font-family: Courier New;
-  font-size: 11pt;
+  font-family: "Courier New";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -960,37 +960,37 @@ div.Footer
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Footer_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Footer_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1006,37 +1006,37 @@ div.Footnote
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 30.00024pt;
   margin-right: 18pt;
-  margin-top: 0pt;
-  text-align: left;
-  text-indent: -12.000240000000002pt;
-  text-transform: normal;
+  margin-top: 0.0pt;
+  text-align: Left;
+  text-indent: -12.000240000000001pt;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Footnote_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 18pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Footnote_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1052,37 +1052,37 @@ div.Header
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Header_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Header_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1096,39 +1096,39 @@ div.Header
 
 div.Heading1
 {
-  color: Purple;
-  font-family: Palatino Linotype;
-  font-size: 16pt;
+  color: #515186;
+  font-family: "Palatino Linotype";
+  font-size: 16.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 15pt;
-  text-align: left;
+  margin-top: 15.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading1_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 15pt;
+  margin-top: 15.0pt;
 }
 
 .Heading1_inner
 {
-  color: Purple;
-  font-family: Palatino Linotype;
-  font-size: 16pt;
+  color: #515186;
+  font-family: "Palatino Linotype";
+  font-size: 16.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1144,37 +1144,37 @@ div.Heading1TOC
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading1TOC_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Heading1TOC_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1189,38 +1189,38 @@ div.Heading1TOC
 div.Heading2
 {
   color: Black;
-  font-family: Palatino Linotype;
-  font-size: 14pt;
+  font-family: "Palatino Linotype";
+  font-size: 14.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 12pt;
-  text-align: left;
+  margin-top: 12.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading2_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 12pt;
+  margin-top: 12.0pt;
 }
 
 .Heading2_inner
 {
   color: Black;
-  font-family: Palatino Linotype;
-  font-size: 14pt;
+  font-family: "Palatino Linotype";
+  font-size: 14.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1236,37 +1236,37 @@ div.Heading2TOC
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading2TOC_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Heading2TOC_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1281,38 +1281,38 @@ div.Heading2TOC
 div.Heading3
 {
   color: Black;
-  font-family: Palatino Linotype;
-  font-size: 12pt;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 12pt;
-  text-align: left;
+  margin-top: 12.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading3_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 12pt;
+  margin-top: 12.0pt;
 }
 
 .Heading3_inner
 {
   color: Black;
-  font-family: Palatino Linotype;
-  font-size: 12pt;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1328,37 +1328,37 @@ div.Heading3TOC
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 36pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading3TOC_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Heading3TOC_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1373,38 +1373,38 @@ div.Heading3TOC
 div.Heading4
 {
   color: Black;
-  font-family: Palatino Linotype;
-  font-size: 12pt;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 12pt;
-  text-align: left;
+  margin-top: 12.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading4_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 12pt;
+  margin-top: 12.0pt;
 }
 
 .Heading4_inner
 {
   color: Black;
-  font-family: Palatino Linotype;
-  font-size: 12pt;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1420,37 +1420,37 @@ div.Lettered_List
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 72pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Lettered_List_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Lettered_List_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1466,37 +1466,37 @@ div.Lettered_List_1
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 72pt;
   margin-right: 0pt;
-  margin-top: 5pt;
-  text-align: left;
+  margin-top: 5.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Lettered_List_1_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 5pt;
+  margin-top: 5.0pt;
 }
 
 .Lettered_List_1_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1511,38 +1511,38 @@ div.Lettered_List_1
 div.Mapping_Table_Cell
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 12pt;
+  font-family: "Times New Roman";
+  font-size: 12.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 2pt;
+  margin-bottom: 2.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
-  text-align: left;
+  margin-top: 2.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Mapping_Table_Cell_outer
 {
-  margin-bottom: 2pt;
+  margin-bottom: 2.0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
+  margin-top: 2.0pt;
 }
 
 .Mapping_Table_Cell_inner
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 12pt;
+  font-family: "Times New Roman";
+  font-size: 12.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1557,38 +1557,38 @@ div.Mapping_Table_Cell
 div.Mapping_Table_Title
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 14pt;
+  font-family: "Times New Roman";
+  font-size: 14.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 2pt;
+  margin-bottom: 2.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
-  text-align: left;
+  margin-top: 2.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Mapping_Table_Title_outer
 {
-  margin-bottom: 2pt;
+  margin-bottom: 2.0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
+  margin-top: 2.0pt;
 }
 
 .Mapping_Table_Title_inner
 {
   color: #000000;
-  font-family: Times New Roman;
-  font-size: 14pt;
+  font-family: "Times New Roman";
+  font-size: 14.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1603,38 +1603,38 @@ div.Mapping_Table_Title
 div.Note
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 2pt;
+  margin-bottom: 2.0pt;
   margin-left: 68.4pt;
   margin-right: 0pt;
-  margin-top: 7pt;
-  text-align: left;
+  margin-top: 2pt;
+  text-align: Left;
   text-indent: -25px;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Note_outer
 {
-  margin-bottom: 2pt;
+  margin-bottom: 2.0pt;
   margin-right: 0pt;
-  margin-top: 7pt;
+  margin-top: 2pt;
 }
 
 .Note_inner
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1650,37 +1650,37 @@ div.Numbered_List
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Numbered_List_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Numbered_List_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1696,37 +1696,37 @@ div.Numbered_List_1
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Numbered_List_1_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Numbered_List_1_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1742,37 +1742,37 @@ div.Numbered_List_1_Indent
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 54pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Numbered_List_1_Indent_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Numbered_List_1_Indent_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1788,37 +1788,37 @@ div.Numbered_List_Indent
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 54pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Numbered_List_Indent_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Numbered_List_Indent_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1834,37 +1834,37 @@ div.Related_Topic
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
-  text-align: left;
+  margin-top: 2.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Related_Topic_outer
 {
-  margin-bottom: 6pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
-  margin-top: 2pt;
+  margin-top: 2.0pt;
 }
 
 .Related_Topic_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1880,37 +1880,37 @@ div.Run-In
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
-  text-align: left;
+  margin-top: 3.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Run-In_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 3pt;
+  margin-top: 3.0pt;
 }
 
 .Run-In_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1926,39 +1926,39 @@ div.SideWords
 {
   background-position: left;
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 13pt;
+  margin-top: 13.0pt;
   text-align: left;
   text-indent: -25px;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .SideWords_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 13pt;
+  margin-top: 13.0pt;
 }
 
 .SideWords_inner
 {
   background-position: left;
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
   text-align: left;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -1973,36 +1973,36 @@ div.SideWords
 div.Subhead
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 12pt;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
   font-style: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 14pt;
-  text-align: left;
+  margin-top: 14.0pt;
+  text-align: LeftRight;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Subhead_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 14pt;
+  margin-top: 14.0pt;
 }
 
 .Subhead_inner
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 12pt;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
   font-style: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: LeftRight;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2018,37 +2018,37 @@ div.Table_Bullet
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 18pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Table_Bullet_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Table_Bullet_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2064,37 +2064,37 @@ div.Table_Column_Header
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-top: 0.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Table_Column_Header_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Table_Column_Header_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2108,39 +2108,39 @@ div.Table_Column_Header
 
 div.Table_Header
 {
-  color: #000000;
+  color: Black;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: center;
+  margin-bottom: 3pt;
+  margin-left: 3pt;
+  margin-right: 3pt;
+  margin-top: 3pt;
+  text-align: Center;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Table_Header_outer
 {
-  margin-bottom: 0pt;
-  margin-right: 0pt;
-  margin-top: 0pt;
+  margin-bottom: 3pt;
+  margin-right: 3pt;
+  margin-top: 3pt;
 }
 
 .Table_Header_inner
 {
-  color: #000000;
+  color: Black;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
-  text-align: center;
-  text-transform: normal;
+  text-align: Center;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2156,37 +2156,37 @@ div.Table_Listnumber_1
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 18pt;
   margin-right: 0pt;
-  margin-top: 6pt;
-  text-align: left;
+  margin-top: 6.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Table_Listnumber_1_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 6pt;
+  margin-top: 6.0pt;
 }
 
 .Table_Listnumber_1_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2202,37 +2202,37 @@ div.Table_Listnumber_2
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-left: 36pt;
   margin-right: 0pt;
-  margin-top: 6pt;
-  text-align: left;
+  margin-top: 6.0pt;
+  text-align: Left;
   text-indent: -18pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Table_Listnumber_2_outer
 {
-  margin-bottom: 0pt;
+  margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 6pt;
+  margin-top: 6.0pt;
 }
 
 .Table_Listnumber_2_inner
 {
   color: #000000;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2250,43 +2250,43 @@ div.Table_Text
   border-left-color: Gray;
   border-right-color: Gray;
   border-top-color: Gray;
-  color: #000000;
+  color: Black;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 0px;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: left;
+  margin-bottom: 3pt;
+  margin-left: 3pt;
+  margin-right: 3pt;
+  margin-top: 3pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Table_Text_outer
 {
-  margin-bottom: 0px;
-  margin-right: 0pt;
-  margin-top: 0pt;
-}
-
-.Table_Text_inner
-{
   border-bottom-color: Gray;
   border-left-color: Gray;
   border-right-color: Gray;
   border-top-color: Gray;
-  color: #000000;
+  margin-bottom: 3pt;
+  margin-right: 3pt;
+  margin-top: 3pt;
+}
+
+.Table_Text_inner
+{
+  color: Black;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2301,39 +2301,51 @@ div.Table_Text
 div.Table_Title
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  margin-bottom: 13pt;
-  margin-left: 18pt;
-  margin-right: 0pt;
-  margin-top: 4pt;
-  text-align: left;
+  line-height: normal;
+  margin-bottom: 0pt;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  padding-bottom: 2pt;
+  padding-left: auto;
+  padding-right: auto;
+  padding-top: auto;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
+  white-space: normal;
 }
 
 .Table_Title_outer
 {
-  margin-bottom: 13pt;
-  margin-right: 0pt;
-  margin-top: 4pt;
+  margin-bottom: 0pt;
+  margin-right: auto;
+  margin-top: auto;
+  padding-bottom: 2pt;
+  padding-left: auto;
+  padding-right: auto;
+  padding-top: auto;
 }
 
 .Table_Title_inner
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
-  text-transform: normal;
+  line-height: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
+  white-space: normal;
   margin-left: 0pt;
   margin-right: 0pt;
   margin-top: 0pt;
@@ -2347,51 +2359,39 @@ div.Table_Title
 div.TableTitle
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
-  font-weight: bold;
-  line-height: normal;
-  margin-bottom: 0em;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 18pt;
-  padding-bottom: 0pt;
-  padding-left: auto;
-  padding-right: auto;
-  padding-top: auto;
-  text-align: center;
+  font-weight: normal;
+  margin-bottom: 13.0pt;
+  margin-left: 18pt;
+  margin-right: 0pt;
+  margin-top: 4.0pt;
+  text-align: Left;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
-  white-space: normal;
 }
 
 .TableTitle_outer
 {
-  margin-bottom: 0em;
-  margin-right: auto;
-  margin-top: 18pt;
-  padding-bottom: 0pt;
-  padding-left: auto;
-  padding-right: auto;
-  padding-top: auto;
+  margin-bottom: 13.0pt;
+  margin-right: 0pt;
+  margin-top: 4.0pt;
 }
 
 .TableTitle_inner
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: italic;
   font-variant: normal;
-  font-weight: bold;
-  line-height: normal;
-  text-align: center;
-  text-transform: normal;
+  font-weight: normal;
+  text-align: Left;
+  text-transform: none;
   vertical-align: baseline;
-  white-space: normal;
   margin-left: 0pt;
   margin-right: 0pt;
   margin-top: 0pt;
@@ -2405,36 +2405,36 @@ div.TableTitle
 div.Title
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 27pt;
+  font-family: "Palatino Linotype";
+  font-size: 27.0pt;
   font-style: normal;
   font-weight: bold;
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
-  text-align: right;
+  margin-top: 0.0pt;
+  text-align: Right;
   text-indent: 0pt;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
 .Title_outer
 {
-  margin-bottom: 13pt;
+  margin-bottom: 13.0pt;
   margin-right: 0pt;
-  margin-top: 0pt;
+  margin-top: 0.0pt;
 }
 
 .Title_inner
 {
   color: #515186;
-  font-family: Palatino Linotype;
-  font-size: 27pt;
+  font-family: "Palatino Linotype";
+  font-size: 27.0pt;
   font-style: normal;
   font-weight: bold;
-  text-align: right;
-  text-transform: normal;
+  text-align: Right;
+  text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -2459,12 +2459,12 @@ span.Bold
 span.Code
 {
   color: #000000;
-  font-family: Courier New;
-  font-size: 11pt;
+  font-family: "Courier New";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
@@ -2482,12 +2482,12 @@ span.HTTP
 {
   color: #0000ff;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
   text-decoration: underline;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
@@ -2495,7 +2495,7 @@ span.Keypress
 {
   color: #000000;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-weight: normal;
   vertical-align: baseline;
@@ -2504,14 +2504,15 @@ span.Keypress
 span.Note
 {
   color: #000000;
-  font-family: Palatino Linotype;
-  font-size: 11pt;
+  font-family: "Palatino Linotype";
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
   left: -20px;
   position: relative;
-  text-transform: normal;
+  text-transform: none;
+  top: 10px;
   vertical-align: baseline;
 }
 
@@ -2520,15 +2521,15 @@ span.Red
   color: #ff0000;
 }
 
-span.small__bullet
+span.small_bullet
 {
   color: #000000;
   font-family: Arial;
-  font-size: 9pt;
+  font-size: 9.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: super;
 }
 
@@ -2536,11 +2537,11 @@ span.Symbol
 {
   color: #000000;
   font-family: Wingdings;
-  font-size: 7pt;
+  font-size: 7.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
@@ -2548,12 +2549,12 @@ span.URL
 {
   color: #0000ff;
   font-family: Arial;
-  font-size: 11pt;
+  font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
   text-decoration: underline;
-  text-transform: normal;
+  text-transform: none;
   vertical-align: baseline;
 }
 
@@ -2567,10 +2568,6 @@ table.Table_-_Column_Header
   border-right-style: solid;
   border-top-color: White;
   border-top-style: solid;
-  margin-bottom: 12pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 12pt;
   padding-bottom: 4pt;
   padding-left: 6pt;
   padding-right: 4pt;
@@ -2580,10 +2577,6 @@ table.Table_-_Column_Header
 
 table.Mapping_Table
 {
-  margin-bottom: 6pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 6pt;
   padding-bottom: 2pt;
   padding-left: 2pt;
   padding-right: 2pt;
@@ -2593,10 +2586,6 @@ table.Mapping_Table
 
 table.Table_-_No_Border
 {
-  margin-bottom: 12pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 12pt;
   padding-bottom: 4pt;
   padding-left: 6pt;
   padding-right: 4pt;
@@ -2610,10 +2599,6 @@ table.Table_-_No_Header
   border-left-color: Black;
   border-right-color: Black;
   border-top-color: Black;
-  margin-bottom: 12pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 12pt;
   padding-bottom: 4pt;
   padding-left: 6pt;
   padding-right: 4pt;
@@ -2635,10 +2620,6 @@ table.Table_-_Header
   border-top-color: White;
   border-top-style: solid;
   border-top-width: thin;
-  margin-bottom: 12pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 12pt;
   padding-bottom: 4pt;
   padding-left: 6pt;
   padding-right: 4pt;
@@ -2648,10 +2629,6 @@ table.Table_-_Header
 
 table.Figure_Indent
 {
-  margin-bottom: 12pt;
-  margin-left: 36pt;
-  margin-right: 0pt;
-  margin-top: 12pt;
   padding-bottom: 4pt;
   padding-left: 0pt;
   padding-right: 4pt;
@@ -2661,10 +2638,6 @@ table.Figure_Indent
 
 table.Figure
 {
-  margin-bottom: 12pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 12pt;
   padding-bottom: 4pt;
   padding-left: 6pt;
   padding-right: 4pt;

@@ -283,7 +283,6 @@ function  WWHIndex_HeadHTML()
   var  MaxLevel;
   var  Level;
 
-
   // Generate style section
   //
   HTML.fAppend("<style type=\"text/css\">\n");
@@ -320,6 +319,7 @@ function  WWHIndex_HeadHTML()
   HTML.fAppend("    color: " + WWHFrame.WWHJavaScript.mSettings.mIndex.mDisabledColor + ";\n");
   HTML.fAppend("    " + WWHFrame.WWHJavaScript.mSettings.mIndex.mFontStyle + ";\n");
   HTML.fAppend("  }\n");
+
   for (MaxLevel = this.mMaxLevel + 1, Level = 0 ; Level <= MaxLevel ; Level++)
   {
     HTML.fAppend("  p.l" + Level + "\n");
@@ -534,7 +534,7 @@ function  WWHIndex_AdvanceHTMLSegment()
       EntrySuffix = "";
     }
 
-    this.mHTMLSegment.fAppend("<p class=l" + (this.mIterator.mPositionStack.length) + "><nobr>" + EntryPrefix + Entry.mText + EntrySuffix + "</nobr></p>\n");
+    this.mHTMLSegment.fAppend("<p class=l" + (this.mIterator.mPositionStack.length - 1) + "><nobr>" + EntryPrefix + Entry.mText + EntrySuffix + "</nobr></p>\n");
   }
 
   return (this.mHTMLSegment.fSize() > 0);
@@ -1424,6 +1424,7 @@ function  WWHIndexEntry_SortChildren(ParamEntry)
   var  SortedArray;
   var  VarKey;
   var  VarKeyUpperCase;
+  var  VarSortKey;
   var  MaxIndex;
   var  Index;
 
@@ -1434,12 +1435,10 @@ function  WWHIndexEntry_SortChildren(ParamEntry)
   for (VarKey in ParamEntry.mChildren)
   {
     VarKeyUpperCase = VarKey.toUpperCase();
+    VarSortKey = VarKeyUpperCase + ":" + VarKey;
 
-    UnsortedArray[UnsortedArray.length] = VarKeyUpperCase;
-    if (VarKeyUpperCase != VarKey)
-    {
-      KeyHash[VarKeyUpperCase] = VarKey;
-    }
+    UnsortedArray[UnsortedArray.length] = VarSortKey;
+    KeyHash[VarSortKey] = VarKey;
   }
 
   // Insure array exists
@@ -1454,13 +1453,13 @@ function  WWHIndexEntry_SortChildren(ParamEntry)
     //
     for (MaxIndex = SortedArray.length, Index = 0 ; Index < MaxIndex ; Index++)
     {
-      VarKey = SortedArray[Index];
-      if ((typeof(KeyHash[VarKey]) != "undefined") &&
-          (KeyHash[VarKey] != null))
+      VarSortKey = SortedArray[Index];
+      if ((typeof(KeyHash[VarSortKey]) != "undefined") &&
+          (KeyHash[VarSortKey] != null))
       {
-        VarKey = KeyHash[VarKey];
+        VarKey = KeyHash[VarSortKey];
+        SortedArray[Index] = ParamEntry.mChildren[VarKey];
       }
-      SortedArray[Index] = ParamEntry.mChildren[VarKey];
     }
   }
   else

@@ -7,7 +7,7 @@ function  WWHCommonSettings_Object()
 
   this.mbCookies            = true;
   this.mCookiesDaysToExpire = 30;
-  this.mCookiesID           = "101B9F8B9CCE5DC5";
+  this.mCookiesID           = "BE465CC56FF087D2";
 
   this.mAccessible = "false";
 
@@ -18,6 +18,7 @@ function  WWHCommonSettings_Object()
   this.mbEmailEnabled         = false;
   this.mbPrintEnabled         = true;
   this.mbBookmarkEnabled      = false;
+  this.mbPDFEnabled           = false;
 
   this.mEmailAddress = "";
 

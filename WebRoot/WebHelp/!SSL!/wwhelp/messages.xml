@@ -23,6 +23,7 @@
     <StaticString key="PrintIconLabel" value="Drucken" />
     <StaticString key="BookmarkIconLabel" value="Lesezeichen" />
     <StaticString key="BookmarkLinkMessage" value="Klicken Sie mit der rechten Maustaste auf die Verknüpfung, und fügen Sie sie Ihren Lesezeichen hinzu." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Titel" />
     <StaticString key="BookColumnLabel" value="Buch" />
     <StaticString key="RankColumnLabel" value="Rang" />
@@ -78,6 +79,7 @@
     <StaticString key="PrintIconLabel" value="Print" />
     <StaticString key="BookmarkIconLabel" value="Bookmark" />
     <StaticString key="BookmarkLinkMessage" value="Right-click link and add it to your bookmarks." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Title" />
     <StaticString key="BookColumnLabel" value="Book" />
     <StaticString key="RankColumnLabel" value="Rank" />
@@ -133,6 +135,7 @@
     <StaticString key="PrintIconLabel" value="Imprimir" />
     <StaticString key="BookmarkIconLabel" value="Marcador" />
     <StaticString key="BookmarkLinkMessage" value="Haga clic con el botón derecho del mouse en el vínculo para agregarlo a la lista de favoritos." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Título" />
     <StaticString key="BookColumnLabel" value="Libro" />
     <StaticString key="RankColumnLabel" value="Clase" />
@@ -188,6 +191,7 @@
     <StaticString key="PrintIconLabel" value="Imprimer" />
     <StaticString key="BookmarkIconLabel" value="Ajouter aux Favoris" />
     <StaticString key="BookmarkLinkMessage" value="Cliquez sur ce lien avec le bouton droit de la souris et ajoutez-le à vos Favoris." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Titre" />
     <StaticString key="BookColumnLabel" value="Livre" />
     <StaticString key="RankColumnLabel" value="Pertinence" />
@@ -243,6 +247,7 @@
     <StaticString key="PrintIconLabel" value="Stampa" />
     <StaticString key="BookmarkIconLabel" value="Segnalibro" />
     <StaticString key="BookmarkLinkMessage" value="Fare clic con il tasto destro del mouse per aggiungere ai Segnalibri." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Titolo" />
     <StaticString key="BookColumnLabel" value="Libro" />
     <StaticString key="RankColumnLabel" value="Classe" />
@@ -298,6 +303,7 @@
     <StaticString key="PrintIconLabel" value="印刷" />
     <StaticString key="BookmarkIconLabel" value="ブックマーク" />
     <StaticString key="BookmarkLinkMessage" value="リンクを右クリックして、ブックマークに追加します。" />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="タイトル" />
     <StaticString key="BookColumnLabel" value="ブック" />
     <StaticString key="RankColumnLabel" value="ランク" />
@@ -353,6 +359,7 @@
     <StaticString key="PrintIconLabel" value="인쇄" />
     <StaticString key="BookmarkIconLabel" value="북마크" />
     <StaticString key="BookmarkLinkMessage" value="링크를 마우스 오른쪽 단추로 클릭하여 북마크에 추가합니다." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="제목" />
     <StaticString key="BookColumnLabel" value="책" />
     <StaticString key="RankColumnLabel" value="등급" />
@@ -408,6 +415,7 @@
     <StaticString key="PrintIconLabel" value="Imprimir" />
     <StaticString key="BookmarkIconLabel" value="Favoritos" />
     <StaticString key="BookmarkLinkMessage" value="Clique com o botão direito no link para adicioná-lo aos seus Favoritos." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Título" />
     <StaticString key="BookColumnLabel" value="Livro" />
     <StaticString key="RankColumnLabel" value="Escopo" />
@@ -463,6 +471,7 @@
     <StaticString key="PrintIconLabel" value="Skriv ut" />
     <StaticString key="BookmarkIconLabel" value="Bokmärke" />
     <StaticString key="BookmarkLinkMessage" value="Högerklicka på länken om du vill lägga till den till dina bokmärken." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Rubrik" />
     <StaticString key="BookColumnLabel" value="Bok" />
     <StaticString key="RankColumnLabel" value="Relevans" />
@@ -518,6 +527,7 @@
     <StaticString key="PrintIconLabel" value="打印" />
     <StaticString key="BookmarkIconLabel" value="书签" />
     <StaticString key="BookmarkLinkMessage" value="右键单击链接，将其添加到书签中。" />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="标题" />
     <StaticString key="BookColumnLabel" value="书籍" />
     <StaticString key="RankColumnLabel" value="级别" />
@@ -573,6 +583,7 @@
     <StaticString key="PrintIconLabel" value="列印" />
     <StaticString key="BookmarkIconLabel" value="書籤" />
     <StaticString key="BookmarkLinkMessage" value="右鍵按一下連結，將它加入到書籤中。" />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="標題" />
     <StaticString key="BookColumnLabel" value="書名" />
     <StaticString key="RankColumnLabel" value="關聯性" />
@@ -628,6 +639,7 @@
     <StaticString key="PrintIconLabel" value="Печать" />
     <StaticString key="BookmarkIconLabel" value="Закладка" />
     <StaticString key="BookmarkLinkMessage" value="Щелкните на ссылке правой кнопкой мыши и добавьте ее к закладкам." />
+    <StaticString key="PDFIconLabel" value="PDF" />
     <StaticString key="TitleColumnLabel" value="Заголовок" />
     <StaticString key="BookColumnLabel" value="Том" />
     <StaticString key="RankColumnLabel" value="Ранг" />

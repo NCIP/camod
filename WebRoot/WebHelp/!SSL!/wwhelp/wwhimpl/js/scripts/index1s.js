@@ -3,5 +3,8 @@
 
 // Load book index
 //
-WWHFrame.WWHIndex.mMaxLevel = WWHBookData_MaxIndexLevel();
+if (WWHBookData_MaxIndexLevel() > WWHFrame.WWHIndex.mMaxLevel)
+{
+  WWHFrame.WWHIndex.mMaxLevel = WWHBookData_MaxIndexLevel();
+}
 WWHFrame.WWHIndex.fInitLoadBookIndex(WWHBookData_AddIndexEntries);

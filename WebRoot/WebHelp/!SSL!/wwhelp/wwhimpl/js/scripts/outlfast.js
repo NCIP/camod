@@ -63,8 +63,8 @@ function  WWHOutlineImagingFast_GenerateStyles()
   StyleBuffer.fAppend("    margin-top: 0pt;\n");
   StyleBuffer.fAppend("    margin-bottom: 0pt;\n");
   StyleBuffer.fAppend("    margin-left: 0pt;\n");
-  StyleBuffer.fAppend("    align: left;\n");
-  StyleBuffer.fAppend("    valign: middle;\n");
+  StyleBuffer.fAppend("    text-align: left;\n");
+  StyleBuffer.fAppend("    vertical-align: middle;\n");
   StyleBuffer.fAppend("    " + WWHFrame.WWHJavaScript.mSettings.mTOC.mFontStyle + ";\n");
   StyleBuffer.fAppend("  }\n");
   if (this.mbUseList)
@@ -93,7 +93,7 @@ function  WWHOutlineImagingFast_GenerateStyles()
     StyleBuffer.fAppend("    margin-left: 0pt;\n");
     StyleBuffer.fAppend("  }\n");
   }
-  StyleBuffer.fAppend(" // -->\n");
+  StyleBuffer.fAppend(" -->\n");
   StyleBuffer.fAppend("</style>\n");
 
   return StyleBuffer.fGetBuffer();

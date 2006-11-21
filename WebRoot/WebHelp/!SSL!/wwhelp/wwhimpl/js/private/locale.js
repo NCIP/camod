@@ -586,7 +586,7 @@ function  WWHJavaScriptMessages_Set_zh(ParamMessages)
   ParamMessages.mAccessibilityIndexSecondEntry    = "%s \u4e66\u7684 %s \u94fe\u63a5\u4e2d\u7684 %s \u4e3b\u9898";
 }
 
-function  WWHJavaScriptMessages_Set_zh_TW(ParamMessages)
+function  WWHJavaScriptMessages_Set_zh_tw(ParamMessages)
 {
   // Initialization Messages
   //

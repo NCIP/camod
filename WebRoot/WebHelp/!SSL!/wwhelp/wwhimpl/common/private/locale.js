@@ -49,6 +49,7 @@ function  WWHCommonMessages_Set_de(ParamMessages)
   ParamMessages.mPrintIconLabel          = "Drucken";
   ParamMessages.mBookmarkIconLabel       = "Lesezeichen";
   ParamMessages.mBookmarkLinkMessage     = "Klicken Sie mit der rechten Maustaste auf die Verkn\u00fcpfung, und f\u00fcgen Sie sie Ihren Lesezeichen hinzu.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -80,6 +81,7 @@ function  WWHCommonMessages_Set_en(ParamMessages)
   ParamMessages.mPrintIconLabel          = "Print";
   ParamMessages.mBookmarkIconLabel       = "Bookmark";
   ParamMessages.mBookmarkLinkMessage     = "Right-click link and add it to your bookmarks.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -111,6 +113,7 @@ function  WWHCommonMessages_Set_es(ParamMessages)
   ParamMessages.mPrintIconLabel          = "Imprimir";
   ParamMessages.mBookmarkIconLabel       = "Marcador";
   ParamMessages.mBookmarkLinkMessage     = "Haga clic con el bot\u00f3n derecho del mouse en el v\u00ednculo para agregarlo a la lista de favoritos.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -142,6 +145,7 @@ function  WWHCommonMessages_Set_fr(ParamMessages)
   ParamMessages.mPrintIconLabel          = "Imprimer";
   ParamMessages.mBookmarkIconLabel       = "Ajouter aux Favoris";
   ParamMessages.mBookmarkLinkMessage     = "Cliquez sur ce lien avec le bouton droit de la souris et ajoutez-le \u00e0 vos Favoris.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -173,6 +177,7 @@ function  WWHCommonMessages_Set_it(ParamMessages)
   ParamMessages.mPrintIconLabel          = "Stampa";
   ParamMessages.mBookmarkIconLabel       = "Segnalibro";
   ParamMessages.mBookmarkLinkMessage     = "Fare clic con il tasto destro del mouse per aggiungere ai Segnalibri.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -204,6 +209,7 @@ function  WWHCommonMessages_Set_ja(ParamMessages)
   ParamMessages.mPrintIconLabel          = "\u5370\u5237";
   ParamMessages.mBookmarkIconLabel       = "\u30d6\u30c3\u30af\u30de\u30fc\u30af";
   ParamMessages.mBookmarkLinkMessage     = "\u30ea\u30f3\u30af\u3092\u53f3\u30af\u30ea\u30c3\u30af\u3057\u3066\u3001\u30d6\u30c3\u30af\u30de\u30fc\u30af\u306b\u8ffd\u52a0\u3057\u307e\u3059\u3002";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -235,6 +241,7 @@ function  WWHCommonMessages_Set_ko(ParamMessages)
   ParamMessages.mPrintIconLabel          = "\uc778\uc1c4";
   ParamMessages.mBookmarkIconLabel       = "\ubd81\ub9c8\ud06c";
   ParamMessages.mBookmarkLinkMessage     = "\ub9c1\ud06c\ub97c \ub9c8\uc6b0\uc2a4 \uc624\ub978\ucabd \ub2e8\ucd94\ub85c \ud074\ub9ad\ud558\uc5ec \ubd81\ub9c8\ud06c\uc5d0 \ucd94\uac00\ud569\ub2c8\ub2e4.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -266,6 +273,7 @@ function  WWHCommonMessages_Set_pt(ParamMessages)
   ParamMessages.mPrintIconLabel          = "Imprimir";
   ParamMessages.mBookmarkIconLabel       = "Favoritos";
   ParamMessages.mBookmarkLinkMessage     = "Clique com o bot\u00e3o direito no link para adicion\u00e1-lo aos seus Favoritos.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -297,6 +305,7 @@ function  WWHCommonMessages_Set_sv(ParamMessages)
   ParamMessages.mPrintIconLabel          = "Skriv ut";
   ParamMessages.mBookmarkIconLabel       = "Bokm\u00e4rke";
   ParamMessages.mBookmarkLinkMessage     = "H\u00f6gerklicka p\u00e5 l\u00e4nken om du vill l\u00e4gga till den till dina bokm\u00e4rken.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -328,6 +337,7 @@ function  WWHCommonMessages_Set_zh(ParamMessages)
   ParamMessages.mPrintIconLabel          = "\u6253\u5370";
   ParamMessages.mBookmarkIconLabel       = "\u4e66\u7b7e";
   ParamMessages.mBookmarkLinkMessage     = "\u53f3\u952e\u5355\u51fb\u94fe\u63a5\uff0c\u5c06\u5176\u6dfb\u52a0\u5230\u4e66\u7b7e\u4e2d\u3002";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -346,7 +356,7 @@ function  WWHCommonMessages_Set_zh(ParamMessages)
   ParamMessages.mAccessibilityPopupClickThrough        = "\u5355\u51fb\u6b64\u5904\u8fdb\u5165\u6e90\u6587\u6863\u3002";
 }
 
-function  WWHCommonMessages_Set_zh_TW(ParamMessages)
+function  WWHCommonMessages_Set_zh_tw(ParamMessages)
 {
   // Icon Labels
   //
@@ -359,6 +369,7 @@ function  WWHCommonMessages_Set_zh_TW(ParamMessages)
   ParamMessages.mPrintIconLabel          = "\u5217\u5370";
   ParamMessages.mBookmarkIconLabel       = "\u66f8\u7c64";
   ParamMessages.mBookmarkLinkMessage     = "\u53f3\u9375\u6309\u4e00\u4e0b\u9023\u7d50\uff0c\u5c07\u5b83\u52a0\u5165\u5230\u66f8\u7c64\u4e2d\u3002";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //
@@ -390,6 +401,7 @@ function  WWHCommonMessages_Set_ru(ParamMessages)
   ParamMessages.mPrintIconLabel          = "\u041f\u0435\u0447\u0430\u0442\u044c";
   ParamMessages.mBookmarkIconLabel       = "\u0417\u0430\u043a\u043b\u0430\u0434\u043a\u0430";
   ParamMessages.mBookmarkLinkMessage     = "\u0429\u0435\u043b\u043a\u043d\u0438\u0442\u0435 \u043d\u0430 \u0441\u0441\u044b\u043b\u043a\u0435 \u043f\u0440\u0430\u0432\u043e\u0439 \u043a\u043d\u043e\u043f\u043a\u043e\u0439 \u043c\u044b\u0448\u0438 \u0438 \u0434\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u0435\u0435 \u043a \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0430\u043c.";
+  ParamMessages.mPDFIconLabel            = "PDF";
 
   // ALinks support
   //

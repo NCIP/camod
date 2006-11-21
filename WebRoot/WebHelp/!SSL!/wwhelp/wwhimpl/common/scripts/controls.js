@@ -159,10 +159,12 @@ function  WWHControls_Object()
   this.fRecordFocus           = WWHControls_RecordFocus;
   this.fRestoreFocus          = WWHControls_RestoreFocus;
   this.fSwitchToNavigation    = WWHControls_SwitchToNavigation;
+  this.fHasPDFLink            = WWHControls_HasPDFLink;
   this.fClickedShowNavigation = WWHControls_ClickedShowNavigation;
   this.fClickedSyncTOC        = WWHControls_ClickedSyncTOC;
   this.fClickedPrevious       = WWHControls_ClickedPrevious;
   this.fClickedNext           = WWHControls_ClickedNext;
+  this.fClickedPDF            = WWHControls_ClickedPDF;
   this.fClickedRelatedTopics  = WWHControls_ClickedRelatedTopics;
   this.fClickedEmail          = WWHControls_ClickedEmail;
   this.fClickedPrint          = WWHControls_ClickedPrint;
@@ -171,6 +173,7 @@ function  WWHControls_Object()
   this.fSyncTOC               = WWHControls_SyncTOC;
   this.fPrevious              = WWHControls_Previous;
   this.fNext                  = WWHControls_Next;
+  this.fPDF                   = WWHControls_PDF;
   this.fRelatedTopics         = WWHControls_RelatedTopics;
   this.fEmail                 = WWHControls_Email;
   this.fPrint                 = WWHControls_Print;
@@ -300,6 +303,9 @@ function  WWHControls_Initialize()
   this.fAddControl("WWHNextIcon", VarSettings.mbNextEnabled, false,
                    WWHFrame.WWHHelp.mMessages.mNextIconLabel,
                    "next.gif", "nextx.gif", "fClickedNext", "WWHControlsLeftFrame");
+  this.fAddControl("WWHPDFIcon", VarSettings.mbPDFEnabled, false,
+                   WWHFrame.WWHHelp.mMessages.mPDFIconLabel,
+                   "pdf.gif", "pdfx.gif", "fClickedPDF", "WWHControlsRightFrame");
   this.fAddControl("WWHRelatedTopicsIcon", VarSettings.mbRelatedTopicsEnabled, false,
                    WWHFrame.WWHHelp.mMessages.mRelatedTopicsIconLabel,
                    "related.gif", "relatedx.gif", "fClickedRelatedTopics", "WWHControlsRightFrame");
@@ -439,6 +445,11 @@ function  WWHControls_RightHTML()
     // Determine active controls
     //
     VarEnabledControls = new Array();
+    VarControl = this.fGetControl("WWHPDFIcon");
+    if (VarControl.mbEnabled)
+    {
+      VarEnabledControls[VarEnabledControls.length] = VarControl;
+    }
     VarControl = this.fGetControl("WWHRelatedTopicsIcon");
     if (VarControl.mbEnabled)
     {
@@ -535,6 +546,15 @@ function  WWHControls_RightFrameTitle()
   var  VarTitle = "";
 
 
+  if (this.fGetControl("WWHPDFIcon").fGetLabel().length > 0)
+  {
+    if (VarTitle.length > 0)
+    {
+      VarTitle += WWHFrame.WWHHelp.mMessages.mAccessibilityListSeparator + " ";
+    }
+    VarTitle += this.fGetControl("WWHPDFIcon").fGetLabel();
+  }
+
   if (this.fGetControl("WWHRelatedTopicsIcon").fGetLabel().length > 0)
   {
     if (VarTitle.length > 0)
@@ -586,6 +606,7 @@ function  WWHControls_UpdateHREF(ParamHREF)
   this.fGetControl("WWHSyncTOCIcon").fSetStatus(this.fCanSyncTOC());
   this.fGetControl("WWHPrevIcon").fSetStatus(this.mSyncPrevNext[1] != null);
   this.fGetControl("WWHNextIcon").fSetStatus(this.mSyncPrevNext[2] != null);
+  this.fGetControl("WWHPDFIcon").fSetStatus(this.fHasPDFLink());
   this.fGetControl("WWHRelatedTopicsIcon").fSetStatus(WWHFrame.WWHRelatedTopics.fHasRelatedTopics());
   this.fGetControl("WWHEmailIcon").fSetStatus(this.fCanSyncTOC());
   this.fGetControl("WWHPrintIcon").fSetStatus(this.fCanSyncTOC());
@@ -607,6 +628,7 @@ function  WWHControls_UpdateHREF(ParamHREF)
     this.fGetControl("WWHSyncTOCIcon").fUpdateIcon();
     this.fGetControl("WWHPrevIcon").fUpdateIcon();
     this.fGetControl("WWHNextIcon").fUpdateIcon();
+    this.fGetControl("WWHPDFIcon").fUpdateIcon();
     this.fGetControl("WWHRelatedTopicsIcon").fUpdateIcon();
     this.fGetControl("WWHEmailIcon").fUpdateIcon();
     this.fGetControl("WWHPrintIcon").fUpdateIcon();
@@ -662,6 +684,17 @@ function  WWHControls_SwitchToNavigation(ParamTabName)
   WWHFrame.WWHSwitch.fExec(false, VarSwitchURL);
 }
 
+function  WWHControls_HasPDFLink()
+{
+  var  VarHasPDFLink = false;
+  var  VarDocumentFrame;
+
+  VarDocumentFrame = eval(WWHFrame.WWHHelp.fGetFrameReference("WWHDocumentFrame"));
+  VarHasPDFLink = ((typeof VarDocumentFrame.WWHPDFLink) == "function");
+
+  return VarHasPDFLink;
+}
+
 function  WWHControls_ClickedShowNavigation()
 {
   this.fShowNavigation();
@@ -688,6 +721,11 @@ function  WWHControls_ClickedNext()
   this.fRecordFocus("WWHControlsLeftFrame", "WWHNextIcon");
 
   this.fNext();
+}
+
+function  WWHControls_ClickedPDF()
+{
+  this.fPDF();
 }
 
 function  WWHControls_ClickedRelatedTopics()
@@ -746,6 +784,26 @@ function  WWHControls_Next()
   if (this.mSyncPrevNext[2] != null)
   {
     WWHFrame.WWHHelp.fSetDocumentHREF(this.mSyncPrevNext[2], false);
+  }
+}
+
+function  WWHControls_PDF()
+{
+  var  VarDocumentFrame;
+  var  VarDocumentURL;
+  var  VarDocumentParentURL;
+  var  VarPDFLink;
+  var  VarPDFURL;
+
+  VarDocumentFrame = eval(WWHFrame.WWHHelp.fGetFrameReference("WWHDocumentFrame"));
+  if ((typeof VarDocumentFrame.WWHPDFLink) == "function")
+  {
+    VarIndex = VarDocumentFrame.location.href.lastIndexOf("/");
+    VarDocumentParentURL = VarDocumentFrame.location.href.substring(0, VarIndex);
+    VarPDFLink = VarDocumentFrame.WWHPDFLink();
+    VarPDFURL = VarDocumentParentURL + "/" + VarPDFLink;
+
+    WWHFrame.WWHHelp.fSetLocation("WWHDocumentFrame", VarPDFURL);
   }
 }
 

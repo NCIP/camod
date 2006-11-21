@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WebWorksHelpIX version="5.0" xmlns="urn:WebWorks-Help-Index-Schema">
-  <g t="Default" o="002" s=" ">
-    <i t="">
-      <j l="16#1104264" />
-      <j l="94#1072478" />
-      <j l="98#1074651" />
-    </i>
-  </g>
   <g t="A" o="002">
     <i t="Adding new user">
       <j l="90#1073924" />
@@ -27,6 +20,9 @@
     </i>
     <i t="Application Support, caMOD">
       <j l="111#1083452" />
+    </i>
+    <i t="Approving model">
+      <j l="110#1073310" />
     </i>
     <i t="Associated Expression form">
       <j l="25#1070618" />
@@ -137,7 +133,7 @@
         <j l="77" />
       </i>
       <i t="search">
-        <j l="66#1106066" />
+        <j l="66#1108981" />
       </i>
       <i t="yeast search results">
         <j l="73" />
@@ -149,12 +145,34 @@
   </g>
   <g t="E" o="002">
     <i t="Editing">
+      <i t="approving model">
+        <j l="110#1073310" />
+      </i>
       <i t="information for registered users">
         <j l="89#1073847" />
       </i>
       <i t="model">
         <j l="20#1069733" />
         <j l="95#1072556" />
+        <j l="109#1082920" />
+      </i>
+      <i t="model ready for">
+        <j l="95#1072571" />
+      </i>
+      <i t="model workflow">
+        <j l="109#1082920" />
+      </i>
+      <i t="rejecting model">
+        <j l="107#1073069" />
+      </i>
+      <i t="requesting more information">
+        <j l="110#1073310" />
+      </i>
+      <i t="roles">
+        <j l="100#1074555" />
+      </i>
+      <i t="user roles">
+        <j l="97#1075238" />
       </i>
     </i>
     <i t="Editor">
@@ -310,6 +328,12 @@
     <i t="Radiation form">
       <j l="36#1075586" />
     </i>
+    <i t="Rejecting model">
+      <j l="107#1073069" />
+    </i>
+    <i t="Removing roles">
+      <j l="100#1074555" />
+    </i>
     <i t="Requesting more information">
       <j l="104" />
     </i>
@@ -368,7 +392,7 @@
         <j l="59#1068971" />
       </i>
       <i t="drug screening">
-        <j l="66#1106066" />
+        <j l="66#1108981" />
       </i>
       <i t="EVS data tree">
         <j l="22#1101845" />
