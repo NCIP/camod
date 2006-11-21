@@ -2706,11 +2706,16 @@ table.Table_-_Column_Header
   border-right-style: solid;
   border-top-color: White;
   border-top-style: solid;
+  margin-bottom: 12.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 12.0pt;
   padding-bottom: 4pt;
   padding-left: 6pt;
   padding-right: 4pt;
   padding-top: 4pt;
   text-align: left;
+  width: 90%;
 }
 
 table.Mapping_Table

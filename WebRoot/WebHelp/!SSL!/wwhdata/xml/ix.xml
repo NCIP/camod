@@ -2,27 +2,27 @@
 <WebWorksHelpIX version="5.0" xmlns="urn:WebWorks-Help-Index-Schema">
   <g t="A" o="002">
     <i t="Adding new user">
-      <j l="90#1073924" />
+      <j l="94#1073924" />
     </i>
     <i t="Admin functions, overview">
-      <j l="81#1071928" />
+      <j l="85#1071928" />
     </i>
     <i t="Administration Roles page">
       <i t="access to">
-        <j l="85#1075515" />
+        <j l="89#1075515" />
       </i>
       <i t="description">
-        <j l="81#1071936" />
+        <j l="85#1071936" />
       </i>
       <i t="functions">
-        <j l="89#1073847" />
+        <j l="93#1073847" />
       </i>
     </i>
     <i t="Application Support, caMOD">
-      <j l="111#1083452" />
+      <j l="115#1083452" />
     </i>
     <i t="Approving model">
-      <j l="110#1073310" />
+      <j l="114#1073310" />
     </i>
     <i t="Associated Expression form">
       <j l="25#1070618" />
@@ -31,7 +31,7 @@
   <g t="C" o="002">
     <i t="caMOD">
       <i t="admin functions">
-        <j l="81#1071928" />
+        <j l="85#1071928" />
       </i>
       <i t="administration function">
         <j l="2#1068759" />
@@ -61,10 +61,10 @@
         <j l="13#1069361" />
       </i>
       <i t="permissions">
-        <j l="96#1072643" />
+        <j l="100#1072643" />
       </i>
       <i t="search feature overview">
-        <j l="55#1070382" />
+        <j l="59#1070382" />
       </i>
       <i t="Submit and Edit Models page">
         <j l="12#1073329" />
@@ -77,38 +77,38 @@
       <j l="30#1074527" />
     </i>
     <i t="Comments Assignment page">
-      <j l="108#1075186" />
+      <j l="112#1075186" />
     </i>
     <i t="Construct model fields">
       <j l="24#1100422" />
     </i>
     <i t="Coordinator">
       <i t="appointing editors">
-        <j l="98#1074651" />
+        <j l="102#1074651" />
       </i>
       <i t="appointing screeners">
-        <j l="98#1074651" />
+        <j l="102#1074651" />
       </i>
       <i t="assigning models to Screener">
-        <j l="92#1072358" />
+        <j l="96#1072358" />
       </i>
       <i t="display access">
-        <j l="86#1073528" />
+        <j l="90#1073528" />
       </i>
       <i t="editing roles">
-        <j l="98#1074651" />
+        <j l="102#1074651" />
       </i>
       <i t="functions of">
-        <j l="82" />
+        <j l="86" />
       </i>
       <i t="removing roles">
-        <j l="98#1074651" />
+        <j l="102#1074651" />
       </i>
       <i t="roles management">
-        <j l="97#1075238" />
+        <j l="101#1075238" />
       </i>
       <i t="tasks to perform">
-        <j l="86#1073528" />
+        <j l="90#1073528" />
       </i>
     </i>
     <i t="Creating user account">
@@ -127,16 +127,16 @@
     </i>
     <i t="Drug screening">
       <i t="in-vivo search results">
-        <j l="74" />
+        <j l="78" />
       </i>
       <i t="pre-clinical/clinical search results">
-        <j l="77" />
+        <j l="81" />
       </i>
       <i t="search">
-        <j l="66#1108981" />
+        <j l="70#1108981" />
       </i>
       <i t="yeast search results">
-        <j l="73" />
+        <j l="77" />
       </i>
     </i>
     <i t="Duplicating model">
@@ -146,53 +146,53 @@
   <g t="E" o="002">
     <i t="Editing">
       <i t="approving model">
-        <j l="110#1073310" />
+        <j l="114#1073310" />
       </i>
       <i t="information for registered users">
-        <j l="89#1073847" />
+        <j l="93#1073847" />
       </i>
       <i t="model">
         <j l="20#1069733" />
-        <j l="95#1072556" />
-        <j l="109#1082920" />
+        <j l="99#1072556" />
+        <j l="113#1082920" />
       </i>
       <i t="model ready for">
-        <j l="95#1072571" />
+        <j l="99#1072571" />
       </i>
       <i t="model workflow">
-        <j l="109#1082920" />
+        <j l="113#1082920" />
       </i>
       <i t="rejecting model">
-        <j l="107#1073069" />
+        <j l="111#1073069" />
       </i>
       <i t="requesting more information">
-        <j l="110#1073310" />
+        <j l="114#1073310" />
       </i>
       <i t="roles">
-        <j l="100#1074555" />
+        <j l="104#1074555" />
       </i>
       <i t="user roles">
-        <j l="97#1075238" />
+        <j l="101#1075238" />
       </i>
     </i>
     <i t="Editor">
       <i t="assigning an">
-        <j l="94#1072478" />
+        <j l="98#1072478" />
       </i>
       <i t="display access">
-        <j l="88#1073581" />
+        <j l="92#1073581" />
       </i>
       <i t="editing a model">
-        <j l="109#1082920" />
+        <j l="113#1082920" />
       </i>
       <i t="functions of">
-        <j l="84" />
+        <j l="88" />
       </i>
       <i t="responsibilities">
-        <j l="95#1072556" />
+        <j l="99#1072556" />
       </i>
       <i t="tasks to perform">
-        <j l="88#1073581" />
+        <j l="92#1073581" />
       </i>
     </i>
     <i t="Environmental Factor form">
@@ -260,7 +260,7 @@
       </i>
       <i t="editing">
         <j l="20#1069733" />
-        <j l="109#1082920" />
+        <j l="113#1082920" />
       </i>
       <i t="permissions">
         <j l="12#1079028" />
@@ -269,7 +269,7 @@
         <j l="19#1102985" />
       </i>
       <i t="screening">
-        <j l="106#1072945" />
+        <j l="110#1072945" />
       </i>
       <i t="submission process">
         <j l="18#1068965" />
@@ -295,14 +295,14 @@
     </i>
     <i t="Models">
       <i t="assigning to editors">
-        <j l="101#1074578" />
+        <j l="105#1074578" />
       </i>
       <i t="assigning to screeners">
-        <j l="101#1074578" />
+        <j l="105#1074578" />
       </i>
     </i>
     <i t="Models Assignment page">
-      <j l="105#1074929" />
+      <j l="109#1074929" />
     </i>
     <i t="Morpholino">
       <j l="40#1107162" />
@@ -313,7 +313,7 @@
   </g>
   <g t="N" o="002">
     <i t="NCICB Application Support">
-      <j l="111#1083452" />
+      <j l="115#1083452" />
     </i>
     <i t="Nutritional Factor form">
       <j l="35#1078137" />
@@ -329,97 +329,97 @@
       <j l="36#1075586" />
     </i>
     <i t="Rejecting model">
-      <j l="107#1073069" />
+      <j l="111#1073069" />
     </i>
     <i t="Removing roles">
-      <j l="100#1074555" />
+      <j l="104#1074555" />
     </i>
     <i t="Requesting more information">
-      <j l="104" />
+      <j l="108" />
     </i>
     <i t="Reviewing">
       <i t="follow-up">
-        <j l="101#1074578" />
+        <j l="105#1074578" />
       </i>
       <i t="models">
-        <j l="101#1074578" />
+        <j l="105#1074578" />
       </i>
     </i>
     <i t="Roles Management page">
-      <j l="97#1075238" />
+      <j l="101#1075238" />
     </i>
     <i t="Roles management, modifying user assignments">
-      <j l="97#1075238" />
+      <j l="101#1075238" />
     </i>
   </g>
   <g t="S" o="002">
     <i t="Screener">
       <i t="assigning models to">
-        <j l="92#1072351" />
+        <j l="96#1072351" />
       </i>
       <i t="contacting submitter">
-        <j l="107#1075173" />
+        <j l="111#1075173" />
       </i>
       <i t="display access">
-        <j l="87#1073553" />
+        <j l="91#1073553" />
       </i>
       <i t="functions of">
-        <j l="83" />
+        <j l="87" />
       </i>
       <i t="responsibilities">
-        <j l="93#1072414" />
+        <j l="97#1072414" />
       </i>
       <i t="screening a model">
-        <j l="106#1072945" />
+        <j l="110#1072945" />
       </i>
       <i t="tasks to perform">
-        <j l="87#1073553" />
+        <j l="91#1073553" />
       </i>
     </i>
     <i t="Screening">
       <i t="model">
-        <j l="106#1072945" />
+        <j l="110#1072945" />
       </i>
       <i t="model workflow">
-        <j l="106#1072945" />
+        <j l="110#1072945" />
       </i>
     </i>
     <i t="Search">
       <i t="advanced search mode">
-        <j l="60#1069040" />
+        <j l="64#1069040" />
       </i>
       <i t="combining criteria">
-        <j l="59#1068971" />
+        <j l="63#1068971" />
       </i>
       <i t="drug screening">
-        <j l="66#1108981" />
+        <j l="70#1108981" />
       </i>
       <i t="EVS data tree">
         <j l="22#1101845" />
       </i>
       <i t="in-vivo drug screening results">
-        <j l="74" />
+        <j l="78" />
       </i>
       <i t="overview">
-        <j l="55#1070382" />
+        <j l="59#1070382" />
       </i>
       <i t="pre-clinical/clinical trials drug screening results">
-        <j l="77" />
+        <j l="81" />
       </i>
       <i t="results">
-        <j l="62" />
+        <j l="66" />
       </i>
       <i t="reviewing results">
-        <j l="62#1103197" />
+        <j l="66#1103197" />
       </i>
       <i t="simple search mode">
-        <j l="58" />
+        <j l="62" />
       </i>
       <i t="starting with Table of Contents">
-        <j l="57#1079439" />
+        <j l="61#1079439" />
       </i>
       <i t="yeast screening results">
-        <j l="73" />
+        <j l="77" />
       </i>
     </i>
     <i t="siRNA">
@@ -445,7 +445,7 @@
   </g>
   <g t="T" o="002">
     <i t="Table of Contents search feature">
-      <j l="57#1079439" />
+      <j l="61#1079439" />
     </i>
     <i t="Targeted Modification form">
       <j l="27#1070869" />
@@ -460,20 +460,20 @@
   <g t="U" o="002">
     <i t="User">
       <i t="adding new">
-        <j l="90#1073924" />
+        <j l="94#1073924" />
       </i>
       <i t="creating account">
         <j l="5#1069121" />
       </i>
       <i t="editing information for">
-        <j l="89#1073847" />
+        <j l="93#1073847" />
       </i>
       <i t="modifying assignments">
-        <j l="97#1072737" />
+        <j l="101#1072737" />
       </i>
     </i>
     <i t="User Management page">
-      <j l="89#1077597" />
+      <j l="93#1077597" />
     </i>
     <i t="User settings">
       <j l="9" />
@@ -492,7 +492,7 @@
       <j l="11" />
     </i>
     <i t="Workflow screening a model">
-      <j l="106#1072945" />
+      <j l="110#1072945" />
     </i>
   </g>
 </WebWorksHelpIX>

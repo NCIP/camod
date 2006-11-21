@@ -67,87 +67,92 @@
       <i t="Viewing MrSID Images" l="50" />
     </i>
     <i t="Microarray Data" l="51" />
-    <i t="Model Availability" l="52" />
-    <i t="Transplant/Xenograft" l="53" />
+    <i t="Model Availability" l="52">
+      <i t="Jackson Lab" l="53" />
+      <i t="MMHCC Repository" l="54" />
+      <i t="Investigator" l="55" />
+      <i t="IMSR" l="56" />
+    </i>
+    <i t="Transplant/Xenograft" l="57" />
   </i>
-  <i t="Searching the caMOD Database" l="54">
-    <i t="caMOD Database Search Overview" l="55" />
-    <i t="Searching the caMOD Database" l="56">
-      <i t="caMOD Table of Contents" l="57" />
-      <i t="Simple Search Mode" l="58">
-        <i t="Combining Search Criteria" l="59" />
+  <i t="Searching the caMOD Database" l="58">
+    <i t="caMOD Database Search Overview" l="59" />
+    <i t="Types of caMOD Searches" l="60">
+      <i t="caMOD Table of Contents" l="61" />
+      <i t="Simple Search Mode" l="62">
+        <i t="Combining Search Criteria" l="63" />
       </i>
-      <i t="Advanced Search Mode" l="60">
-        <i t="Combining Search Criteria" l="61" />
+      <i t="Advanced Search Mode" l="64">
+        <i t="Combining Search Criteria" l="65" />
       </i>
-      <i t="caMOD Search Results" l="62">
-        <i t="Saving a Search Query" l="63" />
-        <i t="Search Query History" l="64" />
-        <i t="Customizing Search Results" l="65" />
+      <i t="caMOD Search Results" l="66">
+        <i t="Saving a Search Query" l="67" />
+        <i t="Search Query History" l="68" />
+        <i t="Customizing Search Results" l="69" />
       </i>
-      <i t="Drug Screening Search" l="66">
-        <i t="In-Vivo Anti-tumor Screening Data" l="67" />
-        <i t="Yeast Anticancer Drug Screen" l="68" />
-        <i t="Clinical Trials" l="69" />
-        <i t="Pre-Clinical Trials" l="70" />
-        <i t="Launching a Drug Screening Search" l="71" />
+      <i t="Drug Screening Search" l="70">
+        <i t="In-Vivo Anti-tumor Screening Data" l="71" />
+        <i t="Yeast Anticancer Drug Screen" l="72" />
+        <i t="Clinical Trials" l="73" />
+        <i t="Pre-Clinical Trials" l="74" />
+        <i t="Launching a Drug Screening Search" l="75" />
       </i>
-      <i t="Drug Screening Search Results" l="72">
-        <i t="Yeast Screening Search Results" l="73" />
-        <i t="In-Vivo Drug Screening Search Results" l="74">
-          <i t="Summary Page" l="75" />
-          <i t="Detail Page" l="76" />
+      <i t="Drug Screening Search Results" l="76">
+        <i t="Yeast Screening Search Results" l="77" />
+        <i t="In-Vivo Drug Screening Search Results" l="78">
+          <i t="Summary Page" l="79" />
+          <i t="Detail Page" l="80" />
         </i>
-        <i t="Pre-Clinical/Clinical Trials Drug Screening Results" l="77">
-          <i t="Pre-Clinical Trials Results Details" l="78" />
-          <i t="Clinical Trials Results Details" l="79" />
+        <i t="Pre-Clinical/Clinical Trials Drug Screening Results" l="81">
+          <i t="Pre-Clinical Trials Results Details" l="82" />
+          <i t="Clinical Trials Results Details" l="83" />
         </i>
       </i>
     </i>
   </i>
-  <i t="caMOD Administration" l="80">
-    <i t="Administration Functions Overview" l="81">
-      <i t="Coordinator" l="82" />
-      <i t="Screener" l="83" />
-      <i t="Editor" l="84" />
-    </i>
-    <i t="Administration Roles" l="85">
+  <i t="caMOD Administration" l="84">
+    <i t="Administration Functions Overview" l="85">
       <i t="Coordinator" l="86" />
       <i t="Screener" l="87" />
       <i t="Editor" l="88" />
     </i>
-    <i t="User Management" l="89">
-      <i t="Adding a New User" l="90" />
-      <i t="Roles Assignment" l="91" />
-      <i t="Assigning a Screener" l="92">
-        <i t="Screener Responsibilities" l="93" />
-        <i t="Assigning an Editor" l="94" />
-        <i t="Editor Responsibilities" l="95" />
+    <i t="Administration Roles" l="89">
+      <i t="Coordinator" l="90" />
+      <i t="Screener" l="91" />
+      <i t="Editor" l="92" />
+    </i>
+    <i t="User Management" l="93">
+      <i t="Adding a New User" l="94" />
+      <i t="Roles Assignment" l="95" />
+      <i t="Assigning a Screener" l="96">
+        <i t="Screener Responsibilities" l="97" />
+        <i t="Assigning an Editor" l="98" />
+        <i t="Editor Responsibilities" l="99" />
       </i>
     </i>
-    <i t="caMOD Permissions" l="96" />
-    <i t="Roles Management" l="97">
-      <i t="Coordinating the Review Process" l="98">
-        <i t="Assigning Functions/Grant Privileges for Screeners and Editors" l="99">
-          <i t="Appointing Screeners and Editors" l="99#1074529" />
-          <i t="Editing or Removing Roles" l="100" />
+    <i t="caMOD Permissions" l="100" />
+    <i t="Roles Management" l="101">
+      <i t="Coordinating the Review Process" l="102">
+        <i t="Assigning Functions/Grant Privileges for Screeners and Editors" l="103">
+          <i t="Appointing Screeners and Editors" l="103#1074529" />
+          <i t="Editing or Removing Roles" l="104" />
         </i>
-        <i t="Reviewing Models" l="101">
-          <i t="Assigning Models to Screeners" l="101#1074575" />
-          <i t="Assigning Models to Editors" l="102" />
+        <i t="Reviewing Models" l="105">
+          <i t="Assigning Models to Screeners" l="105#1074575" />
+          <i t="Assigning Models to Editors" l="106" />
         </i>
-        <i t="Review Follow-Up" l="103" />
-        <i t="Requesting More Information" l="104" />
+        <i t="Review Follow-Up" l="107" />
+        <i t="Requesting More Information" l="108" />
       </i>
-      <i t="Models Assignment" l="105" />
-      <i t="Screening a Model" l="106">
-        <i t="Screening Work flow" l="107" />
-        <i t="Comments Assignment" l="108" />
-        <i t="Editing a Model" l="109">
-          <i t="Editing Work flow" l="110" />
+      <i t="Models Assignment" l="109" />
+      <i t="Screening a Model" l="110">
+        <i t="Screening Work flow" l="111" />
+        <i t="Comments Assignment" l="112" />
+        <i t="Editing a Model" l="113">
+          <i t="Editing Work flow" l="114" />
         </i>
       </i>
     </i>
   </i>
-  <i t="Application Support" l="111" />
+  <i t="Application Support" l="115" />
 </WebWorksHelpTOC>

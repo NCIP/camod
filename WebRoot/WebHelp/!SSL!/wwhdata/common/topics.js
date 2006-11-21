@@ -35,7 +35,7 @@ if(P=="cell_lines_help")C="Submit%20and%20Edit%20Models.3.35.html#1087323";
 if(P=="images_help")C="Submit%20and%20Edit%20Models.3.36.html#1087837";
 if(P=="microarray_data_help")C="Submit%20and%20Edit%20Models.3.38.html#1088261";
 if(P=="model_availability_help")C="Submit%20and%20Edit%20Models.3.39.html#1088437";
-if(P=="xenograft_transplant_help")C="Submit%20and%20Edit%20Models.3.40.html#1088992";
+if(P=="xenograft_transplant_help")C="Submit%20and%20Edit%20Models.3.44.html#1088992";
 if(P=="help_searching_help")C="caMOD%20searches.4.2.html#1091395";
 if(P=="toc_help")C="caMOD%20searches.4.4.html#1102514";
 if(P=="simple_search_help")C="caMOD%20searches.4.5.html#1068866";
