@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: BaseManager.java,v 1.7 2006-10-17 16:13:46 pandyas Exp $
+ * $Id: BaseManager.java,v 1.8 2006-11-27 17:59:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/10/17 16:13:46  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.6  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -91,7 +94,7 @@ public class BaseManager implements Manager
 
         try
         {
-            log.info("<BaseManager> Querying for id: " + inId);
+            log.trace("<BaseManager> Querying for id: " + inId);
             theObject = Search.queryById(inClass, new Long(inId));
         }
         catch (PersistenceException pe)
