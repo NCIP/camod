@@ -15,7 +15,7 @@
 	<subclass name="Person" 
     	extends="Party"
     	discriminator-value="PE"
-        lazy="true">
+        lazy="false">
 	    
 	    <!-- firstName -->
         <property name="firstName" 
