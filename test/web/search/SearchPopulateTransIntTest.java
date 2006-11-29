@@ -74,7 +74,7 @@ public class SearchPopulateTransIntTest extends BaseModelNeededTest
 
         theCurrentPage = theWebForm.submit();
 
-        assertCurrentPageContains("You have successfully added a Morpholino to this model! ");
+        assertCurrentPageContains("You have successfully added a Transient Interference to this model!");
 
         // Verify that populate method returns complete and correct data
         navigateToModelForEditing(myModelName);
@@ -101,7 +101,7 @@ public class SearchPopulateTransIntTest extends BaseModelNeededTest
 
     }
 
-/*
+
     public void testPopulateSirna() throws Exception
     {
 
@@ -133,7 +133,7 @@ public class SearchPopulateTransIntTest extends BaseModelNeededTest
 
         theCurrentPage = theWebForm.submit();
 
-        assertCurrentPageContains("You have successfully added a siRNA to this model! ");
+        assertCurrentPageContains("You have successfully added a Transient Interference to this model! ");
 
         // Verify that populate method returns complete and correct data
         navigateToModelForEditing(myModelName);
@@ -158,6 +158,6 @@ public class SearchPopulateTransIntTest extends BaseModelNeededTest
 
         verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
     }
-    */
+    
 
 }
