@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.14 2006-11-13 16:51:59 pandyas Exp $
+ * $Id: SearchForm.java,v 1.15 2006-12-11 19:29:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/11/13 16:51:59  pandyas
+ * #467 - Clear button on advanced search page doesn't work
+ *
  * Revision 1.13  2006/10/17 16:10:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -90,7 +93,8 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     protected String modelDescriptor;
     protected String organ;
     protected String species;
-    protected String externalSource;    
+    protected String externalSource; 
+    protected String carcinogenicIntervention;
     protected String chemicalDrug;
     protected String comment;
     protected String hormone;
@@ -218,7 +222,17 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     public void setExternalSource(String externalSource)
     {
         this.externalSource = externalSource;
-    }    
+    }  
+    
+    public String getCarcinogenicIntervention()
+    {
+        return carcinogenicIntervention;
+    }
+
+    public void setCarcinogenicIntervention(String carcinogenicIntervention)
+    {
+        this.carcinogenicIntervention = carcinogenicIntervention;
+    }      
 
     public String getGrowthFactor()
     {
@@ -532,6 +546,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         searchXenograft = false;
         searchToolStrain = false;
         externalSource = null;
+        carcinogenicIntervention = null;
         searchImageData = false;
     }
 
