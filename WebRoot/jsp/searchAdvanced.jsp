@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.51 2006-12-11 13:22:34 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.52 2006-12-11 19:26:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2006/12/11 13:22:34  pandyas
+ * added for ajax select box for CI
+ *
  * Revision 1.50  2006/11/21 18:24:49  pandyas
  * changed “External Source Data From Jackson Labs” (blue bar) to “Data from External Sources”
  *
@@ -148,19 +151,6 @@
 		document.searchForm.organ.disabled = false;
 		document.searchForm.tumorClassification.disabled = false;
 	}
-	
-   function FillAgentName(oElem,oTarget) {
-   	var strValue = oElem.options[
-   			oElem.selectIndex].value;
-   	var url = "DoubleComboXML.aspx";
-	var strParams = "q=" + strValue +
-	  "&f=" + oTarget.form.name +
-	  "&e=" + oTarget.name;
-	 var loader1 = new
-	 	net.ContentLoader(url,FillDropDown,null,
-	 					"POST",strParams);
-
-   }		
 	
 </SCRIPT>
 
@@ -344,10 +334,9 @@
 			<td class="formField">				
 				<html:select property="carcinogenicIntervention" styleClass="formFieldSized"  size="1" >
 					<html:options name="<%= Dropdowns.CARCINOGENICINTERVENTIONDROP %>" />
-				</html:select>&nbsp;&nbsp;				
-				<ajax:select baseUrl="/camod/selectElement.view" source="carcinogenicIntervention" target="agentName"
-  					parameters="agentName={agentName}" >										
-				</ajax:select>
+				</html:select>&nbsp;&nbsp;	
+				<input type="hidden" name="carcinogenicIntervention">			
+				
 		</tr>				
 
 		<tr>
@@ -502,11 +491,15 @@
 </td></tr></TABLE>	
 
 <SCRIPT LANGUAGE="JavaScript">
-    checkFields();
-    
-	<ajax:select baseUrl="/camod/selectElement.view" source="carcinogenicIntervention" target="agentName"
-  					parameters="carcinogenicIntervention={SearchForm.carcinogenicIntervention},agentName={SearchForm.agentName}" postFunction="POST" />										
+    checkFields(); 
 				    
 </SCRIPT>
+
+<ajax:select 
+	baseUrl="/camod/selectElement.view" 
+	source="carcinogenicIntervention" 
+	target="agentName"
+  	parameters="carcinogenicIntervention={carcinogenicIntervention}"  />										
+	
 
 <%@ include file="/jsp/footer.jsp" %>
