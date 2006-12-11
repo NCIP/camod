@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.9 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.10 2006-12-11 19:28:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.8  2006/05/10 14:15:39  schroedn
  * New Features - Changes from code review
  *
@@ -106,7 +109,9 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);        
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.EXTERNALSOURCEQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);        
+                Constants.Dropdowns.ADD_BLANK);  
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CARCINOGENICINTERVENTIONDROP,
+                                         Constants.Dropdowns.ADD_BLANK);         
 
         return mapping.findForward("next");
     }
