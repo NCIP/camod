@@ -43,15 +43,18 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: SelectElementServlet.java,v 1.1 2006-12-11 13:21:12 pandyas Exp $
+ * $Id: SelectElementServlet.java,v 1.2 2006-12-11 19:29:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/12/11 13:21:12  pandyas
+ * demo files
+ *
  * 
  */
 package gov.nih.nci.camod.webapp.servlet;
 
-import gov.nih.nci.camod.util.AjaxTagValuePair;
-import gov.nih.nci.camod.util.AutocompleteUtil;
+import gov.nih.nci.camod.util.*;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -68,7 +71,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * 
- * Servlet used to handle Ajay autocompletion requests from the GUI
+ * Servlet used to handle select elememt dropdwon request for CI from the GUI
  * 
  */
 public class SelectElementServlet extends BaseAjaxServlet {
@@ -76,7 +79,7 @@ public class SelectElementServlet extends BaseAjaxServlet {
 
 	private static final long serialVersionUID = 3257296453788404152L;
 	
-    static private final Log log = LogFactory.getLog(AutocompleteServlet.class);	
+    static private final Log log = LogFactory.getLog(SelectElementServlet.class);	
 
 	static {
 		Properties camodProperties = new Properties();
@@ -118,20 +121,21 @@ public class SelectElementServlet extends BaseAjaxServlet {
 	public String getXmlContent(HttpServletRequest inRequest,
 			HttpServletResponse inResponse) throws Exception {
 		log.info("<SelectElementServlet> Entering getXmlContent");
+        
 
 		String theCarcinogenicIntervention = inRequest.getParameter("carcinogenicIntervention");
+        log.info("theCarcinogenicIntervention: " + theCarcinogenicIntervention);
 
 		List theAgentNameList = null;
 
 		if (theCarcinogenicIntervention != null
 				&& theCarcinogenicIntervention.trim().length() > 0) {
-			log.info("Searching for model descriptors matching: "
+			log.info("Searching for agent names matching: "
 					+ theCarcinogenicIntervention);
-			theCarcinogenicIntervention = theCarcinogenicIntervention.trim().toLowerCase();
 			theAgentNameList = getMatchingAgentNames(
 					theCarcinogenicIntervention, ourNumMatchesToReturn);
 		} else {
-			log.error("No known parameter passed in for autocompletion");
+			log.error("No known parameter passed in for agent type");
 		}
 
 		String theXmlResponse = new AjaxXmlBuilder().addItems(
@@ -157,16 +161,22 @@ public class SelectElementServlet extends BaseAjaxServlet {
 	private List<AjaxTagValuePair> getMatchingAgentNames(
 			String inAgentType, int inNumToReturn) throws Exception {
 		
-		log.debug("<SelectElementServlet> Entering getMatchingAgentNames");
-		SortedSet<String> theMatchingAgentNames = AutocompleteUtil
+		log.info("<SelectElementServlet> Entering getMatchingAgentNames");
+        log.info("inAgentType: " + inAgentType); 
+        log.info("inNumToReturn: " + inNumToReturn); 
+        
+		SortedSet<String> theMatchingAgentNames = SelectElementUtil
 				.getMatchingAgentNames(inAgentType, inNumToReturn);
 
 		List<AjaxTagValuePair> theModelNameList = new ArrayList<AjaxTagValuePair>();
+        log.info("Inital size of List: " + theModelNameList.size());
+        
 		for (String theModelName : theMatchingAgentNames) {
 			AjaxTagValuePair theTagValue = new AjaxTagValuePair();
 			theTagValue.setTarget(theModelName);
 			theTagValue.setSource(theModelName);
 			theModelNameList.add(theTagValue);
+            log.info("New size of List: " + theModelNameList.size());
 		}
 		log.info("<SelectElementServlet> Exiting getMatchingAgentNames");
 		return theModelNameList;
