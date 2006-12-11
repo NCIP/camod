@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.93 2006-11-01 21:19:14 pandyas Exp $
+ * $Id: Constants.java,v 1.94 2006-12-11 13:21:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.93  2006/11/01 21:19:14  pandyas
+ * added constant for state
+ *
  * Revision 1.92  2006/10/27 13:02:24  pandyas
  * added constant used for online help - removed the onclick for ToolTips
  *
@@ -353,6 +356,7 @@ public class Constants {
         /* all strains for a species from DB -  used for various Screens */
         public static final String STRAINDROP = "straindrop.db";  
 
+        /* Various text files used in the application - data located in WebRoot/config/dropdowns */
         public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
 
         public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
@@ -465,7 +469,12 @@ public class Constants {
 
         public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
         
-        public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";        
+        public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";    
+        
+        // CI on advanced search taken from config file to accomadate for Jax agent type variations
+        // EF.type for caMOD not reused when loading Jax data so the data can be deleted easily
+        public static final String CARCINOGENICINTERVENTIONDROP = "environmentalfactortypes.txt";   
+        
 
         // These two are used to display the species and strain currently in the
         // AnimalModelCharacteristics

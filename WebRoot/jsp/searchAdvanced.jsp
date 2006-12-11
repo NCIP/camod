@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.50 2006-11-21 18:24:49 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.51 2006-12-11 13:22:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.50  2006/11/21 18:24:49  pandyas
+ * changed “External Source Data From Jackson Labs” (blue bar) to “Data from External Sources”
+ *
  * Revision 1.49  2006/11/14 21:47:32  pandyas
  * #465	delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *
@@ -117,6 +120,7 @@
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
 <script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
+<script type="text/javascript" src="scripts/ajax.js"></script>
 
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -127,15 +131,6 @@
 	
 	function checkFields() {
 	
-	    // Do the CI fields
-		theCIFlag = document.searchForm.searchCarcinogenicInterventions[0];
-		toggleField(theCIFlag, document.searchForm.chemicalDrug);
-		toggleField(theCIFlag, document.searchForm.growthFactor);
-		toggleField(theCIFlag, document.searchForm.hormone);
-		toggleField(theCIFlag, document.searchForm.radiation);
-		toggleField(theCIFlag, document.searchForm.viral);
-		toggleField(theCIFlag, document.searchForm.surgery);
-		
 		theTargModFlag = document.searchForm.targetedModification[0];
 		theEndTransGeneFlag = document.searchForm.engineeredTransgene[0];
 		
@@ -152,7 +147,20 @@
 	function enableFields() {
 		document.searchForm.organ.disabled = false;
 		document.searchForm.tumorClassification.disabled = false;
-	}	
+	}
+	
+   function FillAgentName(oElem,oTarget) {
+   	var strValue = oElem.options[
+   			oElem.selectIndex].value;
+   	var url = "DoubleComboXML.aspx";
+	var strParams = "q=" + strValue +
+	  "&f=" + oTarget.form.name +
+	  "&e=" + oTarget.name;
+	 var loader1 = new
+	 	net.ContentLoader(url,FillDropDown,null,
+	 					"POST",strParams);
+
+   }		
 	
 </SCRIPT>
 
@@ -190,7 +198,7 @@
         </tr>
         
         <tr>
-			<td class="formTitleBlue" height="20" colspan="3">Advanced Search
+			<td class="formTitleBlue" height="20" colspan="3">Advanced Search: &nbsp;&nbsp;
 				<camod:cshelp topic="advanced_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
 		
@@ -330,81 +338,32 @@
 			<td class="formTitleBlue" height="10" colspan="3">Carcinogenic Interventions:</td>
 		</tr>
 
-		<tr>	
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field1">Models with Carcinogenic Interventions:</label>
-			</td>
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;	</td>		
+			<td class="formLabel"><label for="field3">Select Agent Type:</label></td>
+			<td class="formField">				
+				<html:select property="carcinogenicIntervention" styleClass="formFieldSized"  size="1" >
+					<html:options name="<%= Dropdowns.CARCINOGENICINTERVENTIONDROP %>" />
+				</html:select>&nbsp;&nbsp;				
+				<ajax:select baseUrl="/camod/selectElement.view" source="carcinogenicIntervention" target="agentName"
+  					parameters="agentName={agentName}" >										
+				</ajax:select>
+		</tr>				
 
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field3">Select Agent Name:</label></td>
 			<td class="formField">
-                <html:checkbox property="searchCarcinogenicInterventions" onclick="checkFields()" />
-                <!-- NOTE: Needed to work around struts bug -->
-                <input type="hidden" name="searchCarcinogenicInterventions" value="false">
-			    <label for="box1">Check here to search for models with <br>Carcinogenic interventions data</label>			
+				<select id="agentName" styleClass="formFieldSized" size="1" name="agentName" >
+				</select>
 			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Chemical/Drug:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="chemicalDrug" >
-					<html:options name="<%= Dropdowns.CHEMICALDRUGQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Growth Factor:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="growthFactor" >
-					<html:options name="<%= Dropdowns.GROWTHFACTORQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Hormone:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="hormone" >
-					<html:options name="<%= Dropdowns.HORMONEQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Radiation:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="radiation" >
-					<html:options name="<%= Dropdowns.RADIATIONQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Virus:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="viral" >
-					<html:options name="<%= Dropdowns.VIRUSQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
+		</tr>	
 		
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Surgery:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="surgery" >
-					<html:options name="<%= Dropdowns.SURGERYQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
+							
+	
 
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Cell Lines</td>
+			<td class="formTitleBlue" height="10" colspan="3">Cell Lines:</td>
 		</tr>
 
 		<tr>
@@ -416,7 +375,7 @@
 		</tr>
 
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Therapeutic Approaches</td>
+			<td class="formTitleBlue" height="10" colspan="3">Therapeutic Approaches:</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -437,7 +396,7 @@
 		</tr>
 
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Histopathology</td>
+			<td class="formTitleBlue" height="10" colspan="3">Histopathology:</td>
 		</tr>		
 		
 		<tr>
@@ -452,7 +411,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Transient Interference</td>
+			<td class="formTitleBlue" height="10" colspan="3">Transient Interference:</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -466,7 +425,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Microarray Data</td>
+			<td class="formTitleBlue" height="10" colspan="3">Microarray Data:</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -480,7 +439,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Image Data</td>
+			<td class="formTitleBlue" height="10" colspan="3">Image Data:</td>
 		</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -494,7 +453,7 @@
 		</tr>		
 		
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Tool Strain</td>
+			<td class="formTitleBlue" height="10" colspan="3">Tool Strain:</td>
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -509,7 +468,7 @@
 		</tr>
 		
 		<tr>
-			<td class="formTitleBlue" height="10" colspan="3">Data from External Sources</td>
+			<td class="formTitleBlue" height="10" colspan="3">Data from External Sources:</td>
 		</tr>		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -544,6 +503,10 @@
 
 <SCRIPT LANGUAGE="JavaScript">
     checkFields();
+    
+	<ajax:select baseUrl="/camod/selectElement.view" source="carcinogenicIntervention" target="agentName"
+  					parameters="carcinogenicIntervention={SearchForm.carcinogenicIntervention},agentName={SearchForm.agentName}" postFunction="POST" />										
+				    
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

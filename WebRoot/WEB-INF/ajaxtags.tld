@@ -16,7 +16,7 @@
     <description>
       Builds the JavaScript required to populate a select box based on some event
     </description>
-
+    
     <attribute>
       <name>baseUrl</name>
       <required>true</required>
@@ -45,7 +45,7 @@
 
     <attribute>
       <name>parameters</name>
-      <required>true</required>
+      <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <description>
         A comma-separated list of parameters to pass to the server-side action or servlet

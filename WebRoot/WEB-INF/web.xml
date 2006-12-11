@@ -145,6 +145,17 @@
     <servlet-name>autocomplete</servlet-name>
     <url-pattern>/autocomplete.view</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>selectElement</servlet-name>
+    <servlet-class>gov.nih.nci.camod.webapp.servlet.SelectElementServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>selectElement</servlet-name>
+    <url-pattern>/selectElement.view</url-pattern>
+  </servlet-mapping>  
 	
 	<!-- Front Controller Servlet Mapping -->
 	<servlet-mapping>
