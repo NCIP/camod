@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.24 2006-09-14 17:39:52 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.25 2006-12-22 17:03:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/09/14 17:39:52  georgeda
+ * solved file not found issue - jboss location was wrong
+ *
  * Revision 1.22  2006/08/17 18:15:37  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -341,11 +344,11 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 */
 	public boolean login(String inUsername, String inPassword,
 			HttpServletRequest inRequest) {
-		boolean loginOk = true;
+		boolean loginOk = false;
 		try {
 			// Work around bug in CSM. Empty passwords pass
 			if (inPassword.trim().length() != 0) {
-				// loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+				loginOk = theAuthenticationMgr.login(inUsername, inPassword);
 
 				// Does the user exist? Must also be in our database to login
 				List theRoles = getRolesForUser(inUsername);
