@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: subAdminMenu.jsp,v 1.12 2006-08-14 14:29:31 pandyas Exp $
+ * $Id: subAdminMenu.jsp,v 1.13 2006-12-28 18:27:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/08/14 14:29:31  pandyas
+ * updated on-line help from Robohelp to ePublisher - modified links
+ *
  * Revision 1.11  2006/08/13 18:19:34  pandyas
  * updated on-line help from Robohelp to ePublisher - modified links
  *
@@ -58,7 +61,7 @@
 	   }
 	%>	
 	<IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5>
-	&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:openHelpWindow('WebHelp/!SSL!/index.html')">HELP</html:link>	
+	&nbsp;<html:link styleClass="subMenuPrimary" href="javascript:openHelpWindow('WebHelp/caMOD/index.html')">HELP</html:link>	
 </DIV>
 
 <BR>

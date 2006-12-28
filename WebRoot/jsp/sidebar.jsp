@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: sidebar.jsp,v 1.16 2006-10-17 16:08:28 pandyas Exp $
+ * $Id: sidebar.jsp,v 1.17 2006-12-28 18:27:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/10/17 16:08:28  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.15  2006/08/13 18:17:54  pandyas
  * Minor change - added file name (eventually to all Jsps)
  *
@@ -96,7 +99,7 @@
 		onclick="document.location.href='#'"
 		onmouseout="changeMenuStyle(this,'subMenuSecondaryTitle'),hideCursor()"
 		height=20><A class=subMenuSecondary
-		 href="javascript:openHelpWindow('WebHelp/!SSL!/index.html')" >HELP</A></TD></TR>
+		 href="javascript:openHelpWindow('WebHelp/caMOD/index.html')" >HELP</A></TD></TR>
 		 
 
 	<%

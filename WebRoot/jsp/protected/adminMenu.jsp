@@ -46,7 +46,7 @@
 		</TD>		
 		
 		<TD height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
-		  &nbsp;&nbsp;<a class="footerMenuLink" href="javascript:openHelpWindow('WebHelp/!SSL!/index.html?single=true&amp;context=caMOD_2.2_OH&amp;topic=login_page_help')" class="helpText">HELP</a>&nbsp;&nbsp;
+		  &nbsp;&nbsp;<a class="footerMenuLink" href="javascript:openHelpWindow('WebHelp/caMOD/index.html?single=true&amp;context=caMOD_2.2_OH&amp;topic=login_page_help')" class="helpText">HELP</a>&nbsp;&nbsp;
 		</TD>
 		
 		<TD>
