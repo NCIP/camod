@@ -42,7 +42,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.9 2006-12-11 19:29:10 pandyas Exp $
+ * $Id: SearchData.java,v 1.10 2006-12-28 16:03:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
  * Revision 1.8  2006/10/17 16:10:47  pandyas
@@ -187,10 +187,6 @@ public interface SearchData {
 	public String getExternalSource();
 
 	public void setExternalSource(String externalSource);
-    
-    public String getCarcinogenicIntervention();
-
-    public void setCarcinogenicIntervention(String carcinogenicIntervention);   
 
 	public boolean isSearchXenograft();
 

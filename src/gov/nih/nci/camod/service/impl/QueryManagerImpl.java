@@ -43,7 +43,7 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.64 2006-12-11 19:27:51 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.65 2006-12-28 16:02:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
  * Revision 1.63  2006/11/27 19:09:24  pandyas
@@ -281,7 +281,7 @@ public class QueryManagerImpl extends BaseManager
 
         return theList;
     }
-    
+
     /**
      * Return the list of animal model names that start with the pattern passed in
      * 
@@ -415,77 +415,6 @@ public class QueryManagerImpl extends BaseManager
 
         return theList;
     }
-    
-    /**
-     * Return the list of environmental factor agent names that match the passed in agent type
-     * 
-     * @param inAgentTpe
-     *            the Agent Type for the cofiguration file (works for jax data)
-     * 
-     * @return a sorted list of unique agent names for models
-     * 
-     * @throws PersistenceException
-     */
-    public List getMatchingAgentNames(String inAgentTpe) throws PersistenceException
-    {
-        log.info("Entering QueryManagerImpl.getMatchingAgentNames");
-        
-        log.info("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
-        ResultSet theResultSet = null;
-        List<String> theEnvFactors = new ArrayList<String>();
-
-        try
-        {
-            // Format the query
-            String theSQLQuery = "SELECT ef.name, ef.name_unctrl_vocab " + "FROM environmental_factor ef " + "WHERE ef.type LIKE ? " + "  AND ef.name IS NOT null " 
-            + "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id " + "     FROM carcinogen_exposure ce, abs_cancer_model am " 
-            + "         WHERE ef.environmental_factor_id = ce.environmental_factor_id " 
-            + "         AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved') ORDER BY ef.name asc ";
-
-            Object[] theParams = new Object[1];
-            theParams[0] = inAgentTpe;
-            theResultSet = Search.query(theSQLQuery, theParams);
-
-            while (theResultSet.next())
-            {
-                String theName = theResultSet.getString(1);
-                String theUncontrolledName = theResultSet.getString(2);
-
-                if (theName != null && theName.length() > 0 && !theEnvFactors.contains(theName))
-                {
-                    theEnvFactors.add(theName);
-                }
-                else if (theUncontrolledName != null && theUncontrolledName.length() > 0 && !theEnvFactors.contains(theUncontrolledName))
-                {
-                    theEnvFactors.add(theName);
-                }
-            }
-
-            Collections.sort(theEnvFactors);
-
-            log.info("theEnvFactors.size(): " + theEnvFactors.size());            
-            log.info("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
-        }
-        catch (Exception e)
-        {
-            log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
-            throw new PersistenceException("Exception in getQueryOnlyEnvironmentalFactors: " + e);
-        }
-        finally
-        {
-            if (theResultSet != null)
-            {
-                try
-                {
-                    theResultSet.close();
-                }
-                catch (Exception e)
-                {}
-            }
-        }
-
-        return theEnvFactors;
-    }    
 
     /**
      * Return the list of environmental factor names
