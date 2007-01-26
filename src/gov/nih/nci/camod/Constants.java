@@ -1,11 +1,8 @@
 /**
  * 
- * $Id: Constants.java,v 1.95 2006-12-28 16:02:07 pandyas Exp $
+ * $Id: Constants.java,v 1.93 2006-11-01 21:19:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.93  2006/11/01 21:19:14  pandyas
- * added constant for state
- *
  * Revision 1.92  2006/10/27 13:02:24  pandyas
  * added constant used for online help - removed the onclick for ToolTips
  *

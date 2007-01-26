@@ -44,7 +44,7 @@
 	
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Available from  MMHCC Repository 
-			<camod:cshelp topic="MMHCC_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>					
+			<camod:cshelp topic="model_availability_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>					
 	</tr>
 	
 	<tr>

@@ -43,15 +43,9 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.65 2006-12-28 16:02:25 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.62 2006-11-14 22:06:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.63  2006/11/27 19:09:24  pandyas
- * #483	select of organ after search in tree causes crash, was an oracle max elemnts in list error - implemented quick fix and should optimize a fix for next release
- *
- * Revision 1.62  2006/11/14 22:06:31  pandyas
- * #476 - Transient interference advanced search does not return correct results
- *
  * Revision 1.61  2006/10/23 14:21:59  pandyas
  * cleaned up - added image code back in
  *
@@ -2097,14 +2091,14 @@ public class QueryManagerImpl extends BaseManager
 
             theResultSet = Search.query(inSQLString, inParameters);
 
-            if (theResultSet.next()) {
+            if (theResultSet.next())
+            {
                 theModelIds += theResultSet.getString(1);
             }
-            int elementCount = 0;
-            while (theResultSet.next() && elementCount < 999)
+
+            while (theResultSet.next())
             {
                 theModelIds += "," + theResultSet.getString(1);
-                elementCount++;
             }
 
         }

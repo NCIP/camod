@@ -38,7 +38,7 @@
 						      To edit one of your existing models click on the name of the model.<br>
 						      To add a new model select "<html:link action="AnimalModelPopulateAction.do?method=dropdown"><font color=red>Add New Model</font></html:link>".<br>
 							<br>
-						      If you are unfamiliar with the submission process please refer to <html:link href="javascript:openHelpWindow('WebHelp/caMOD/index.html')">HELP</html:link>.<br>
+						      If you are unfamiliar with the submission process please refer to <html:link href="javascript:openHelpWindow('WebHelp/!SSL!/index.html')">HELP</html:link>.<br>
 							<br>
 						      There are <%= size %> records returned.
 						     <br>						    

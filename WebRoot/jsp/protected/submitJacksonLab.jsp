@@ -48,7 +48,7 @@
 
 					<tr>
 						<td class="formTitle" height="20" colspan="3">Available from Jackson Laboratory
-							<camod:cshelp topic="Jackson_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
+							<camod:cshelp topic="model_availability_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 					</tr>
 
 					<tr>

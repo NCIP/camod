@@ -2,12 +2,9 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.53 2006-12-28 16:05:26 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.50 2006-11-21 18:24:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.50  2006/11/21 18:24:49  pandyas
- * changed “External Source Data From Jackson Labs” (blue bar) to “Data from External Sources”
- *
  * Revision 1.49  2006/11/14 21:47:32  pandyas
  * #465	delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *

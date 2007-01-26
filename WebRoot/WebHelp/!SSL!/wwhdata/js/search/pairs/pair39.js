@@ -1,0 +1,26 @@
+function FileData_Pairs(x)
+{
+x.t("knocking","down");
+x.t("categories","small");
+x.t("transient","interference");
+x.t("editing","models");
+x.t("down","gene");
+x.t("messenger","rna");
+x.t("includes","two");
+x.t("gene","function:");
+x.t("interfere","translation");
+x.t("small","oligonucleotides");
+x.t("morpholinos","sirna");
+x.t("function:","morpholinos");
+x.t("submitting","editing");
+x.t("thus","knocking");
+x.t("rna","thus");
+x.t("interference","transient");
+x.t("interference","includes");
+x.t("interference","submitting");
+x.t("oligonucleotides","used");
+x.t("models","transient");
+x.t("two","categories");
+x.t("used","interfere");
+x.t("translation","messenger");
+}

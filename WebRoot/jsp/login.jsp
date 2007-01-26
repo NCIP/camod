@@ -147,14 +147,14 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">caMOD 2.2 was released to production on Nov 30th.<br/><br/><html:link action="infoReleaseNotes.do">Release Notes</html:link></td>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.1.1 was released to production on Oct 17th.<br/><br/><html:link action="infoReleaseNotes.do">Release Notes</html:link></td>
                                                   </tr>
                                                   <tr>
 													<td> &nbsp; 
-														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/caMOD/UserGuide.pdf','mywin',
+														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/!SSL!/UserGuide.pdf','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
 														</input>&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/caMOD/index.html','mywin',
+														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/!SSL!/index.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
 														</input>
 													</td>                                                                  

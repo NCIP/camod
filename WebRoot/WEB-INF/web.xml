@@ -135,7 +135,6 @@
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
   <servlet>
     <servlet-name>autocomplete</servlet-name>
     <servlet-class>gov.nih.nci.camod.webapp.servlet.AutocompleteServlet</servlet-class>
