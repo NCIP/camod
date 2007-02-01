@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.75 2006-11-09 17:36:28 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.76 2007-02-01 19:05:50 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.75  2006/11/09 17:36:28  pandyas
+ * Commented out debug code
+ *
  * Revision 1.74  2006/10/17 16:13:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -271,13 +274,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
+import java.util.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -626,21 +623,49 @@ public class AnimalModelManagerImpl extends BaseManager implements
 			inAnimalModel.setStrain(theNewStrain);
 		}
 				
-		// every submission - lookup Genotype or create one new
-		Genotype theGenotype = GenotypeManagerSington.instance().getOrCreate(
-				inModelCharacteristicsData.getGenotype());
-		log.info("\n theNewGenotype: " + theGenotype);
-		
-		// every submission - lookup Nomenclature or create one new
-		Nomenclature theNomenclature = NomenclatureManagerSingleton.instance().getOrCreate(
-				inModelCharacteristicsData.getNomenclature());
-		log.info("\n theNomenclature: " + theNomenclature);
-		
-		theGenotype.setNomenclature(theNomenclature);
-		log.info("\n setNomenclature() ");
-		
-		inAnimalModel.addGenotype(theGenotype);
-		log.info("\n Added Genotype ");
+        // Check for existing Genotype - The user is able to add both a genotype and nomenclature name or just one or the other
+        Set<Genotype> theGenotypeSet = inAnimalModel.getGenotypeCollection();
+        theGenotypeSet.clear();
+        Genotype theGenotype = null;
+
+        //If user enters a Genotype
+        if (inModelCharacteristicsData.getGenotype() != null)
+        {
+            log.info("Added Genotype first: " );             
+            if (!theGenotypeSet.isEmpty())
+            {
+                theGenotypeSet.clear();
+            }
+            // Get or Create new Genotype
+            theGenotype = GenotypeManagerSington.instance().getOrCreate(inModelCharacteristicsData.getGenotype());
+
+            // If the user also enters a Nomenclature
+            if (inModelCharacteristicsData.getNomenclature() != null)
+            {
+                log.info("Added Nomenclature second: " );                  
+                Nomenclature theNomenclature = NomenclatureManagerSingleton.instance().getByName(
+                                         inModelCharacteristicsData.getNomenclature());
+                theGenotype.setNomenclature(theNomenclature);
+                log.info("Set Nomenclature: " );                 
+            }
+            inAnimalModel.addGenotype(theGenotype);
+            log.info("Added Genotype: " + theGenotype.toString());            
+        }
+        // If user enters a Nomenclature only (no Genotype)
+        else
+        {
+            log.info("Added Nomenclature ONLY: " );             
+            if (!theGenotypeSet.isEmpty())
+            {
+                theGenotypeSet.clear();
+            }
+            theGenotype = new Genotype();
+            Nomenclature theNomenclature = NomenclatureManagerSingleton.instance().getByName(
+                            inModelCharacteristicsData.getNomenclature());
+            theGenotype.setNomenclature(theNomenclature); 
+            log.info("Added Nomenclature: " + theNomenclature.toString());   
+            log.info("Added Genotype: " + theGenotype.toString());   
+        }
 		
 		Phenotype thePhenotype = inAnimalModel.getPhenotype();
 		if (thePhenotype == null) {

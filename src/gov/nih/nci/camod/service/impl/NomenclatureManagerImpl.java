@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NomenclatureManagerImpl.java,v 1.1 2006-10-17 16:13:46 pandyas Exp $
+ * $Id: NomenclatureManagerImpl.java,v 1.2 2007-02-01 19:07:06 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:13:46  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -78,17 +81,15 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
 			List theList = Search.query(theQBENomenclature);
 
 			// Does exist - get object
-			if (theList != null && theList.size() > 0) {
+			if (theList != null && theList.size() > 0) 
+            {
 				theNomenclature = (Nomenclature) theList.get(0);
 			}
-			// Doesn't exist. Create object with either name or otherName set,
-			// don't save the word 'Other'
-			else {
-				log.info("<StrainManagerImpl> No matching strains. Create new one");
+			else 
+            {
+				log.info("<StrainManagerImpl> No matching Nomenclature. Create new one");
 				theNomenclature = theQBENomenclature;
-				if (inName != null
-						&& !inName
-								.equals(Constants.Dropdowns.OTHER_OPTION)) {
+				if (inName != null) {
 					theQBENomenclature.setName(inName);
 				} else {
 					// theQBENomenclature.setNameUnctrlVocab(inOtherNomenclatureName);
@@ -97,7 +98,7 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
 		} catch (Exception e) {
 			log
 					.error(
-							"Error querying for matching strain object.  Creating new one.",
+							"Error querying for matching Nomenclature object.  Creating new one.",
 							e);
 			theNomenclature = theQBENomenclature;
 		}
