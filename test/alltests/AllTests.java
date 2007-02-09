@@ -42,9 +42,12 @@
  *	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: AllTests.java,v 1.3 2006-10-23 17:08:25 pandyas Exp $
+ * $Id: AllTests.java,v 1.4 2007-02-09 16:23:57 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/10/23 17:08:25  pandyas
+ * modified
+ *
  * Revision 1.2  2005/12/28 16:41:57  georgeda
  * Changes for testing
  *
@@ -70,8 +73,7 @@ public class AllTests
     {
         TestSuite suite = new TestSuite();
 
-        suite.addTest(HttpTests.suite());
-        suite.addTest(StrutsActionTests.suite());
+
 
         return suite;
     }
