@@ -43,12 +43,9 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.65 2006-12-28 16:02:25 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.63 2006-11-27 19:09:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.63  2006/11/27 19:09:24  pandyas
- * #483	select of organ after search in tree causes crash, was an oracle max elemnts in list error - implemented quick fix and should optimize a fix for next release
- *
  * Revision 1.62  2006/11/14 22:06:31  pandyas
  * #476 - Transient interference advanced search does not return correct results
  *

@@ -1,11 +1,8 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.21 2007-02-01 19:06:04 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.20 2006-10-17 16:11:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
- * Revision 1.20  2006/10/17 16:11:00  pandyas
- * modified during development of caMOD 2.2 - various
- *
  * Revision 1.19  2006/04/27 15:04:38  pandyas
  * Cleaned up form variable name for clarity
  *
@@ -104,17 +101,21 @@ public class AnimalModelPopulateAction extends BaseAction {
 			modelCharForm.setEthinicityStrain(am.getStrain().getName());
 		}
 		
-        // Genotype and Nomenclature - always one but Hibernate didn't like a one-to-one relationship
-        Set<Genotype> theGenotypeList = am.getGenotypeCollection();
-
-        for (Genotype genotype : theGenotypeList)
-        {
-            if (genotype.getNomenclature() != null)
-            { 
-                modelCharForm.setNomenclature(genotype.getNomenclature().getName());  
+		Set<Genotype> theGenotypeSet = am.getGenotypeCollection();
+		log.debug("theGenotypeSet.size()" + theGenotypeSet.size());
+		
+		for (Genotype genotype : theGenotypeSet) {
+            if (genotype.getName() !=null)
+            {
+				modelCharForm.setGenotype(genotype.getName());
+				log.debug("modelCharForm.getGenotype(): " + modelCharForm.getGenotype());
             }
-            modelCharForm.setGenotype(genotype.getName()) ;
-        }
+            if (genotype.getNomenclature().getName() !=null)
+            {
+				modelCharForm.setNomenclature(genotype.getNomenclature().getName());
+				log.debug("modelCharForm.getNomenclature(): " + modelCharForm.getNomenclature());
+            }            
+		}
 
 		modelCharForm.setExperimentDesign(am.getExperimentDesign());
 		if (am.getPhenotype().getSexDistribution() != null) {

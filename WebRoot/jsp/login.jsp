@@ -151,10 +151,10 @@
                                                   </tr>
                                                   <tr>
 													<td> &nbsp; 
-														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/caMOD/UserGuide.pdf','mywin',
+														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/!SSL!/UserGuide.pdf','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
 														</input>&nbsp;
-														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/caMOD/index.html','mywin',
+														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/!SSL!/index.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
 														</input>
 													</td>                                                                  

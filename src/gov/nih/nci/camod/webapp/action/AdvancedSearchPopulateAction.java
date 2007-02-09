@@ -1,11 +1,8 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.11 2006-12-28 16:03:06 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.9 2006-10-17 16:11:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
- * Revision 1.9  2006/10/17 16:11:00  pandyas
- * modified during development of caMOD 2.2 - various
- *
  * Revision 1.8  2006/05/10 14:15:39  schroedn
  * New Features - Changes from code review
  *

@@ -42,12 +42,9 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.10 2006-12-28 16:03:41 pandyas Exp $
+ * $Id: SearchData.java,v 1.8 2006-10-17 16:10:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
- * Revision 1.8  2006/10/17 16:10:47  pandyas
- * modified during development of caMOD 2.2 - various
- *
  * Revision 1.7  2006/05/10 12:02:12  georgeda
  * Changes for searching on transient interfaces
  *

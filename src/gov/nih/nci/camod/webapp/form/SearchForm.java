@@ -42,12 +42,9 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.16 2006-12-28 16:04:00 pandyas Exp $
+ * $Id: SearchForm.java,v 1.14 2006-11-13 16:51:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
- * Revision 1.14  2006/11/13 16:51:59  pandyas
- * #467 - Clear button on advanced search page doesn't work
- *
  * Revision 1.13  2006/10/17 16:10:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
