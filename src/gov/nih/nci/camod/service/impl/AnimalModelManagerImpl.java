@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.78 2007-02-21 00:56:26 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.79 2007-02-21 13:11:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.78  2007/02/21 00:56:26  pandyas
+ * Fixed Nomenclature save
+ *
  * Revision 1.77  2007/02/15 18:59:17  pandyas
  * Still working on nomenclature bug
  *
@@ -637,12 +640,18 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             inAnimalModel.setStrain(theNewStrain);
         }
 
-		// Check for existing Genotype - The user is able to add both a genotype
+		// Check for existing Genotype and nomenclature - The user is able to add both a genotype
 		// and nomenclature name or just one or the other
+        // Clear both the previous Genotype and nomeclature - add new each time
 		Set<Genotype> theGenotypeSet = inAnimalModel.getGenotypeCollection();
+		Iterator it = theGenotypeSet.iterator();
+		while (it.hasNext()) {
+			Genotype gen = (Genotype) it.next();
+			gen.setNomenclature(null);
+		}
 		theGenotypeSet.clear();
 		Genotype theGenotype = null;
-		Nomenclature theNomenclature = null;
+
 
 		String genotype = inModelCharacteristicsData.getGenotype();
 		log.info("genotype: " + genotype);
@@ -661,7 +670,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 				log.info("theGenotype.toString(): " + theGenotype.toString());
 
 				// Get or Create new Nomenclature
-				theNomenclature = new Nomenclature();
+				Nomenclature theNomenclature = new Nomenclature();
 				theNomenclature.setName(nomenclature);
 				log.info("theNomenclature.toString(): " + theNomenclature.toString());
 
@@ -689,7 +698,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 				log.info("Nomenclature only loop ");
 				
 				theGenotype = new Genotype();
-				theNomenclature = new Nomenclature();
+				Nomenclature theNomenclature = new Nomenclature();
 				theNomenclature.setName(nomenclature);
 									
 					//NomenclatureManagerSingleton.instance().getByName(inModelCharacteristicsData.getNomenclature());
@@ -697,7 +706,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 				
 				theGenotype.setNomenclature(theNomenclature);
 				inAnimalModel.addGenotype(theGenotype);
-			}
+			}  
 		}
 
 
