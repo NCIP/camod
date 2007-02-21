@@ -14,7 +14,8 @@
 <hibernate-mapping package="gov.nih.nci.camod.domain">
 	<class name="Genotype"
 		table="genotype"
-        lazy="true">
+        lazy="true"
+        mutable="false">
 	    
 	    <!-- id -->
 	    <id name="id" 
@@ -29,12 +30,13 @@
         	column="name" 
         	type="string"/>
       	
-        <!-- nomenclature (many-to-one unidirectional) this is really a one-to-one relationship with unique=true -->
+        <!-- nomenclature (many-to-one unidirectional) this is really a one-to-one relationship with unique=true--> 
         <many-to-one name="nomenclature"
         	class="Nomenclature"
         	column="nomenclature_id"
-        	cascade="all"
+        	cascade="save-update"
         	unique="true"/>          	
+
         	
 	</class>
 </hibernate-mapping>

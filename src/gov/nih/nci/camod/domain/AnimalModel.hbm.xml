@@ -180,7 +180,7 @@
          <!-- genotypeCollection (one-to-many unidirectional without 
         join table) -->
         <set name="genotypeCollection"
-        cascade="all-delete-orphan">        	        	
+        cascade="save-update">        	        	
         	<key column="abs_cancer_model_id"
         	not-null="true"/>
         	<one-to-many class="Genotype"/>
