@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NomenclatureManagerImpl.java,v 1.2 2007-02-01 19:07:06 pandyas Exp $
+ * $Id: NomenclatureManagerImpl.java,v 1.3 2007-02-21 00:55:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/02/01 19:07:06  pandyas
+ * Fixed Genotype bug - working on saving Nomenclature
+ *
  * Revision 1.1  2006/10/17 16:13:46  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -10,7 +13,6 @@
  */
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Nomenclature;
 import gov.nih.nci.camod.service.NomenclatureManager;
 import gov.nih.nci.common.persistence.Search;
@@ -71,40 +73,41 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
 	
 	public Nomenclature getOrCreate(String inName) throws Exception {
 
-		log.info("<NomenclatureManagerImpl> Entering getOrCreate(String, String, String)");
+		log.info("<NomenclatureManagerImpl> Entering getOrCreate(String)");
 
 		Nomenclature theQBENomenclature = new Nomenclature();
-		theQBENomenclature.setName(inName);
+        theQBENomenclature.setName(inName);
 
-		Nomenclature theNomenclature = null;
-		try {
-			List theList = Search.query(theQBENomenclature);
+        Nomenclature theNomenclature = null;
 
-			// Does exist - get object
-			if (theList != null && theList.size() > 0) 
+        try
+        {
+            List theList = Search.query(theQBENomenclature);
+
+            // Does exist - get object
+            if (theList != null && theList.size() > 0)
             {
-				theNomenclature = (Nomenclature) theList.get(0);
-			}
-			else 
+                theNomenclature = (Nomenclature) theList.get(0);
+            }
+            // Doesn't exist. Create object with name 
+            else
             {
-				log.info("<StrainManagerImpl> No matching Nomenclature. Create new one");
-				theNomenclature = theQBENomenclature;
-				if (inName != null) {
-					theQBENomenclature.setName(inName);
-				} else {
-					// theQBENomenclature.setNameUnctrlVocab(inOtherNomenclatureName);
-				}
-			}
-		} catch (Exception e) {
-			log
-					.error(
-							"Error querying for matching Nomenclature object.  Creating new one.",
-							e);
-			theNomenclature = theQBENomenclature;
-		}
-
-		return theNomenclature;
-	}
+                log.info("<NomenclatureManagerImpl> No matching genotype. Create new one");
+                theNomenclature = theQBENomenclature;
+                if (inName != null)
+                {
+                    theQBENomenclature.setName(inName);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("Error querying for matching Nomenclature object.  Creating new one.", e);
+            theNomenclature = theQBENomenclature;
+        }
+        log.info("<NomenclatureManagerImpl> theGenotype: " + theNomenclature.toString());
+        return theNomenclature;
+    }
 	
 	
 }

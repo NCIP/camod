@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.77 2007-02-15 18:59:17 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.78 2007-02-21 00:56:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.77  2007/02/15 18:59:17  pandyas
+ * Still working on nomenclature bug
+ *
  * Revision 1.76  2007/02/01 19:05:50  pandyas
  * Fixed Genotype bug - working on saving Nomenclature
  *
@@ -634,50 +637,69 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             inAnimalModel.setStrain(theNewStrain);
         }
 
-        // Check for existing Genotype - The user is able to add both a genotype and nomenclature name or just one or the other
-        Set<Genotype> theGenotypeSet = inAnimalModel.getGenotypeCollection();
-        theGenotypeSet.clear();
-        Set<Genotype> genotypeCollection = new HashSet<Genotype>();
-        Genotype theGenotype = null;
+		// Check for existing Genotype - The user is able to add both a genotype
+		// and nomenclature name or just one or the other
+		Set<Genotype> theGenotypeSet = inAnimalModel.getGenotypeCollection();
+		theGenotypeSet.clear();
+		Genotype theGenotype = null;
+		Nomenclature theNomenclature = null;
 
-        //If user enters a Genotype
-        if (inModelCharacteristicsData.getGenotype() != null)
-        {
-            log.info("inModelCharacteristicsData.getGenotype() != null loop");
-            // Get or Create new Genotype
-            theGenotype = GenotypeManagerSington.instance().getOrCreate(inModelCharacteristicsData.getGenotype());
-            log.info("theGenotype: " + theGenotype);
+		String genotype = inModelCharacteristicsData.getGenotype();
+		log.info("genotype: " + genotype);
+		String nomenclature = inModelCharacteristicsData.getNomenclature();
+		log.info("nomenclature: " + nomenclature);
 
-            // If the user also enters a Nomenclature - add to created Genotype
-            if (inModelCharacteristicsData.getNomenclature() != null)
-            {
-                log.info("Added Nomenclature second: ");
-                Nomenclature theNomenclature = NomenclatureManagerSingleton.instance().getByName(
-                                                                                                 inModelCharacteristicsData.getNomenclature());
-                theGenotype.setNomenclature(theNomenclature);
-                log.info("Set Nomenclature: " + theNomenclature);
-            }
-            if (theGenotype != null)
-            {
-                log.info("theGenotype != null " + theGenotype.toString());
-                genotypeCollection.add(theGenotype);
-                // Save Genotype to AnimalModel
-                inAnimalModel.setGenotypeCollection(genotypeCollection);
-                log.info("Added Genotype: " + theGenotype.toString());
-            }
-        }
-        // If user enters a Nomenclature only (no Genotype)
-        else if (inModelCharacteristicsData.getNomenclature() != null && inModelCharacteristicsData.getGenotype() == null)
-        {
-            log.info("user enters a Nomenclature only loop");
-            theGenotype = new Genotype();
-            Nomenclature theNomenclature = NomenclatureManagerSingleton.instance().getByName(inModelCharacteristicsData.getNomenclature());
-            theGenotype.setNomenclature(theNomenclature);
-            log.info("Added Nomenclature: " + theNomenclature.toString());
+		if (!genotype.equals(null) && genotype.length() > 0) {
+			log.info("Genotype is not null - Enter ");
+			
+			if (!nomenclature.equals(null) && nomenclature.length() > 0) {
+				log.info("Genotype and Nomenclature loop");
 
-            inAnimalModel.addGenotype(theGenotype);
-            log.info("Added Genotype: " + theGenotype.toString());
-        }
+				// Get or Create new Genotype
+				theGenotype = new Genotype();
+				theGenotype.setName(genotype);
+				log.info("theGenotype.toString(): " + theGenotype.toString());
+
+				// Get or Create new Nomenclature
+				theNomenclature = new Nomenclature();
+				theNomenclature.setName(nomenclature);
+				log.info("theNomenclature.toString(): " + theNomenclature.toString());
+
+				// Set Nomenclature
+				theGenotype.setNomenclature(theNomenclature);
+
+				inAnimalModel.addGenotype(theGenotype);
+				log.info("Added Genotype: " + theGenotype.toString());
+
+			} else {
+				log.info("Genotype only loop ");
+
+				// Get or Create new Genotype
+				theGenotype = GenotypeManagerSington.instance().getOrCreate(
+						inModelCharacteristicsData.getGenotype());
+				log.info("theGenotype: " + theGenotype);
+
+				inAnimalModel.addGenotype(theGenotype);
+				log.info("Added Genotype: " + theGenotype.toString());
+			}
+
+		} else {
+			log.info("Genotype is null - Enter ");
+			if (!nomenclature.equals(null) && nomenclature.length() > 0) {
+				log.info("Nomenclature only loop ");
+				
+				theGenotype = new Genotype();
+				theNomenclature = new Nomenclature();
+				theNomenclature.setName(nomenclature);
+									
+					//NomenclatureManagerSingleton.instance().getByName(inModelCharacteristicsData.getNomenclature());
+				log.info("theNomenclature.toString(): " + theNomenclature.toString());
+				
+				theGenotype.setNomenclature(theNomenclature);
+				inAnimalModel.addGenotype(theGenotype);
+			}
+		}
+
 
         Phenotype thePhenotype = inAnimalModel.getPhenotype();
         if (thePhenotype == null)
