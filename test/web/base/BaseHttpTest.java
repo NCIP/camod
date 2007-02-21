@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.9 2006-10-11 15:17:49 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.10 2007-02-21 17:08:09 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/10/11 15:17:49  pandyas
+ * added debug statements
+ *
  * Revision 1.8  2006/04/27 15:08:33  pandyas
  * Modified while testing caMod 2.1
  *
@@ -290,6 +293,26 @@ public class BaseHttpTest extends TestCase {
             }
         }
     	System.out.println("Exited verifyValuesOnPopulatePage: \n");        
+    }   
+    
+    protected void navigateToModelForAdmin(String inModel) throws Exception {
+
+        // Assume we are logged in. Click the SUBMIT button
+        WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
+                "ADMIN");
+
+        assertNotNull("Couldn't find link to admin page", theLink);
+
+        theLink.click();
+
+        // We may or may not have to hit the agreement link
+        theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, inModel);
+
+        assertNotNull("Couldn't find link to admin section", theLink);
+
+        theLink.click();
+        assertCurrentPageContains("Administration Roles");
+
     }    
    
 }
