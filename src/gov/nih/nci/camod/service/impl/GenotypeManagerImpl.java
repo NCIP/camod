@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenotypeManagerImpl.java,v 1.2 2007-02-01 19:07:06 pandyas Exp $
+ * $Id: GenotypeManagerImpl.java,v 1.3 2007-02-22 21:02:52 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/02/01 19:07:06  pandyas
+ * Fixed Genotype bug - working on saving Nomenclature
+ *
  * Revision 1.1  2006/10/17 16:13:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -26,6 +29,22 @@ import java.util.List;
 public class GenotypeManagerImpl extends BaseManager implements GenotypeManager
 {
 
+    /**
+     * Get a specific Genotype by id
+     * 
+     * @param id
+     *            the unique id for a Genotype
+     * 
+     * @return the matching Genotype object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public Genotype get(String id) throws Exception {
+        log.info("In GenotypeManagerImpl.get");
+        return (Genotype) super.get(id, Genotype.class);
+    }
+    
     public List getAll() throws Exception
     {
         log.trace("In GenotypeManagerImpl.getAll");

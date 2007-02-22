@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NomenclatureManagerImpl.java,v 1.3 2007-02-21 00:55:08 pandyas Exp $
+ * $Id: NomenclatureManagerImpl.java,v 1.4 2007-02-22 21:03:00 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/02/21 00:55:08  pandyas
+ * Fixed Nomenclature save
+ *
  * Revision 1.2  2007/02/01 19:07:06  pandyas
  * Fixed Genotype bug - working on saving Nomenclature
  *
@@ -28,6 +31,22 @@ import java.util.List;
  */
 public class NomenclatureManagerImpl extends BaseManager implements NomenclatureManager {
 
+    /**
+     * Get a specific Nomenclature by id
+     * 
+     * @param id
+     *            the unique id for a Nomenclature
+     * 
+     * @return the matching Nomenclature object, or null if not found.
+     * 
+     * @exception Exception
+     *                when anything goes wrong.
+     */
+    public Nomenclature get(String id) throws Exception {
+        log.info("In NomenclatureManagerImpl.get");
+        return (Nomenclature) super.get(id, Nomenclature.class);
+    }    
+    
 	public List getAll() throws Exception {
 		log.trace("In NomenclatureManagerImpl.getAll");
 		return super.getAll(Nomenclature.class);
