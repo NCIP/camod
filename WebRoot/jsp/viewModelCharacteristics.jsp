@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.37 2006-11-13 20:09:52 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.38 2007-02-23 21:54:05 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.37  2006/11/13 20:09:52  pandyas
+  *   #458 - Mark MTB records on search results list either with icon or text
+  *
   *   Revision 1.36  2006/11/13 18:18:58  pandyas
   *   #440 - Modified the link to animal availability for jackson labs.
   *   This will require more work in next version.  We had to hard-code two leading zeros for the link to work, but will clean up the stock numbers and remove the hard-coded zeros in this jsp.
@@ -102,16 +105,16 @@
 			<td class="WhiteBox" width="20%"><b>Official Nomenclature</b></td>
 			<td class="WhiteBoxRightEnd" width="70%">
 				<camod:highlight>
-					<c:forEach var="gcol" items="${mdl.genotypeCollection}" varStatus="stat2">
-					<c:set var="item" value="${gcol.nomenclature}"/>
-						<logic:notEmpty name="item">
-							<c:out value="${item.name}" escapeXml="false"/>
-						</logic:notEmpty>
-						<logic:empty name="item">
-					    	<br/>
-						</logic:empty>
-					</c:forEach>											
-				</camod:highlight>
+				    <c:set var="items" value="${mdl.nomenclatureCollection}"/>
+				    <logic:notEmpty name="items">
+						<c:forEach var="item" items="${items}" varStatus="stat">
+						<c:out value="${item.name}" escapeXml="false"/> 
+						</c:forEach>
+					</logic:notEmpty>
+					<logic:empty name="items">
+					    <br/>
+					</logic:empty>
+				</camod:highlight>	
 			</td>
 		</tr>
 
