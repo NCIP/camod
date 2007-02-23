@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.20 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.21 2007-02-23 21:20:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.19  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -90,6 +93,10 @@ public final class AnimalModelAction extends BaseAction {
 						+ theModelChar.getOtherEthnicityStrain()
 						+ "\n\t summary: "
 						+ theModelChar.getSummary()
+						+ "\n\t genotype: "
+						+ theModelChar.getGenotype()
+						+ "\n\t nomenclature: "
+						+ theModelChar.getNomenclature()						
 						+ "\n\t type: "
 						+ theModelChar.getType()
 						+ "\n\t url: "
@@ -213,6 +220,10 @@ public final class AnimalModelAction extends BaseAction {
 						+ theModelChar.getOtherEthnicityStrain()
 						+ "\n\t summary: "
 						+ theModelChar.getSummary()
+						+ "\n\t genotype: "
+						+ theModelChar.getGenotype()
+						+ "\n\t nomenclature: "
+						+ theModelChar.getNomenclature()						
 						+ "\n\t type: "
 						+ theModelChar.getType()
 						+ "\n\t url: "
