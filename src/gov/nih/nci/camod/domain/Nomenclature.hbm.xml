@@ -14,8 +14,7 @@
 <hibernate-mapping package="gov.nih.nci.camod.domain">
 	<class name="Nomenclature" 
     	table="nomenclature"
-        lazy="true"
-        mutable="false">
+        lazy="true">
 
 	    <!-- id -->
 	    <id name="id" 

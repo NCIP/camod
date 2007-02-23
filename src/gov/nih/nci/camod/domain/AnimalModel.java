@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2006/10/17 16:14:36  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.19  2006/05/03 20:02:29  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -19,7 +22,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.20 2006-10-17 16:14:36 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.21 2007-02-23 21:30:01 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -50,6 +53,8 @@ public class AnimalModel extends AbstractCancerModel {
 	private Set<Therapy> therapyCollection = new HashSet<Therapy>();
 
 	private Set<GeneDelivery> geneDeliveryCollection = new HashSet<GeneDelivery>();
+	
+	private Set<Nomenclature> nomenclatureCollection = new HashSet<Nomenclature>();	
 
 	private Set<AnimalAvailability> animalAvailabilityCollection = new TreeSet<AnimalAvailability>();
 
@@ -94,7 +99,32 @@ public class AnimalModel extends AbstractCancerModel {
 	public void addGenotype(
 			Genotype genotype) {
 		genotypeCollection.add(genotype);
-	}   
+	} 
+	
+	/**
+	 * @return Returns the nomenclatureCollection.
+	 */
+	public Set<Nomenclature> getNomenclatureCollection() {
+		return nomenclatureCollection;
+	}
+
+	/**
+	 * @param nomenclatureCollection
+	 *            The nomenclatureCollection to set.
+	 */
+	public void setNomenclatureCollection(
+			Set<Nomenclature> nomenclatureCollection) {
+		this.nomenclatureCollection = nomenclatureCollection;
+	}
+
+	/**
+	 * @param nomenclatureCollection
+	 *            The nomenclatureCollection to add.
+	 */
+	public void addNomenclature(
+			Nomenclature nomenclature) {
+		nomenclatureCollection.add(nomenclature);
+	}	
 
 	/**
 	 * @return Returns the engineeredGeneCollection.

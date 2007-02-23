@@ -1,7 +1,10 @@
 /*
- * $Id: Genotype.java,v 1.1 2006-10-17 16:14:36 pandyas Exp $
+ * $Id: Genotype.java,v 1.2 2007-02-23 21:30:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/10/17 16:14:36  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.7  2006/04/19 17:37:37  pandyas
  * Removed TODO text
  *
@@ -23,24 +26,7 @@ public class Genotype extends BaseObject implements Serializable, Duplicatable {
 
 	private String name;
 
-	private Nomenclature nomenclature;
-	
     private AbstractCancerModel cancerModel;	
-
-	/**
-	 * @return Returns the nomenclature.
-	 */
-	public Nomenclature getNomenclature() {
-		return nomenclature;
-	}
-
-	/**
-	 * @param nomenclature
-	 *            The nomenclature to set.
-	 */
-	public void setNomenclature(Nomenclature nomenclature) {
-		this.nomenclature = nomenclature;
-	}
 
 	/**
 	 * @return Returns the name.

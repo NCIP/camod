@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.21 2007-02-01 19:06:04 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.22 2007-02-23 21:35:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/02/01 19:06:04  pandyas
+ * Fixed Genotype bug - working on saving Nomenclature
+ *
  * Revision 1.20  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -23,6 +26,7 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Genotype;
+import gov.nih.nci.camod.domain.Nomenclature;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import gov.nih.nci.camod.webapp.util.DropdownOption;
@@ -104,17 +108,27 @@ public class AnimalModelPopulateAction extends BaseAction {
 			modelCharForm.setEthinicityStrain(am.getStrain().getName());
 		}
 		
-        // Genotype and Nomenclature - always one but Hibernate didn't like a one-to-one relationship
+        // Genotype - always one but Hibernate didn't like a one-to-one relationship
         Set<Genotype> theGenotypeList = am.getGenotypeCollection();
 
         for (Genotype genotype : theGenotypeList)
         {
-            if (genotype.getNomenclature() != null)
+            if (genotype.getName() != null)
             { 
-                modelCharForm.setNomenclature(genotype.getNomenclature().getName());  
-            }
-            modelCharForm.setGenotype(genotype.getName()) ;
+            	modelCharForm.setGenotype(genotype.getName()) ;  
+            }            
         }
+        
+        // Nomenclature - always one but Hibernate didn't like a one-to-one relationship
+        Set<Nomenclature> theNomenclatureList = am.getNomenclatureCollection();
+
+        for (Nomenclature nomenclature : theNomenclatureList)
+        {
+            if (nomenclature.getName() != null)
+            { 
+            	modelCharForm.setNomenclature(nomenclature.getName()) ;  
+            }            
+        }        
 
 		modelCharForm.setExperimentDesign(am.getExperimentDesign());
 		if (am.getPhenotype().getSexDistribution() != null) {
