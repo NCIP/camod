@@ -1,7 +1,10 @@
 /*
- * $Id: Therapy.java,v 1.13 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: Therapy.java,v 1.14 2007-03-19 18:56:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.12  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -27,6 +30,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     private String biomarker;
     private String tumorResponse;
     private String comments;
+    private String developmentalStage;      
     private Treatment treatment;
     private Set<Publication> publicationCollection = new TreeSet<Publication>();
     private AbstractCancerModel cancerModel;
@@ -160,7 +164,21 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
         this.comments = comments;
     }
 
+    /**
+     * @return Returns the developmentalStage.
+     */
+    public String getDevelopmentalStage() {
+        return developmentalStage;
+    }
 
+    /**
+     * @param developmentalStage
+     *            The developmentalStage to set.
+     */
+    public void setDevelopmentalStage(String developmentalStage) {
+        this.developmentalStage = developmentalStage;
+    } 
+    
     /**
      * @return Returns the results.
      */

@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/02/23 21:30:01  pandyas
+ * Fixed Genotype and Nomenclature - split objects and cleaned up database
+ *
  * Revision 1.20  2006/10/17 16:14:36  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -22,7 +25,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.21 2007-02-23 21:30:01 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.22 2007-03-19 18:56:11 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -41,6 +44,8 @@ public class AnimalModel extends AbstractCancerModel {
 	private String externalSource;
 
 	private String externalSourceIdentifier;
+    
+    private String developmentalStage;    
 
 	private Set<CellLine> cellLineCollection = new HashSet<CellLine>();
 
@@ -247,60 +252,7 @@ public class AnimalModel extends AbstractCancerModel {
 		histopathologyCollection.add(histopathology);
 	}
 
-	/**
-	 * @return Returns the EngineeredGeneCollection.
 
-	public Set<String> getDistinctNomenclatureFromEngineeredGeneCollection() {
-
-		Set<String> theSet = new HashSet<String>();
-		Iterator it = theSet.iterator();
-		while (it.hasNext()) {
-			EngineeredGene theEngineeredGene = (EngineeredGene) it.next();
-			if (theEngineeredGene.getGenotype() != null) {
-				String theNomenclature = theEngineeredGene.getGenotype()
-						.getNomenclature().getName();
-
-				if (theNomenclature != null) {
-					theNomenclature = theNomenclature.trim();
-
-					if (!theSet.contains(theNomenclature)
-							&& theNomenclature.length() > 0) {
-						theSet.add(theNomenclature);
-					}
-				}
-			}
-		}
-
-		return theSet;
-	}
-	 */
-	/**
-	 * @return Returns the EngineeredGeneCollection.
-
-	public Set<String> getDistinctGenotypeFromEngineeredGeneCollection() {
-
-		Set<String> theSet = new HashSet<String>();
-		Iterator it = theSet.iterator();
-		while (it.hasNext()) {
-			EngineeredGene theEngineeredGene = (EngineeredGene) it.next();
-			if (theEngineeredGene.getGenotype() != null) {
-				String theGenotype = theEngineeredGene.getGenotype()
-						.getName();
-
-				if (theGenotype != null) {
-					theGenotype = theGenotype.trim();
-
-					if (!theSet.contains(theGenotype)
-							&& theGenotype.length() > 0) {
-						theSet.add(theGenotype);
-					}
-				}
-			}
-		}
-
-		return theSet;
-	}
-	 */
 	/**
 	 * @return Returns the animalAvailabilityCollection.
 	 */
@@ -393,6 +345,21 @@ public class AnimalModel extends AbstractCancerModel {
 	public void setExternalSourceIdentifier(String externalSourceIdentifier) {
 		this.externalSourceIdentifier = externalSourceIdentifier;
 	}
+    
+    /**
+     * @return Returns the developmentalStage.
+     */
+    public String getDevelopmentalStage() {
+        return developmentalStage;
+    }
+
+    /**
+     * @param developmentalStage
+     *            The developmentalStage to set.
+     */
+    public void setDevelopmentalStage(String developmentalStage) {
+        this.developmentalStage = developmentalStage;
+    }    
 
 	/**
 	 * @return Returns the phenotype.

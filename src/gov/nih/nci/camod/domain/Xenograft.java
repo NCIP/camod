@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Xenograft.java,v 1.12 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: Xenograft.java,v 1.13 2007-03-19 18:56:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.11  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -37,7 +40,9 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     private String graftType;
     private String graftTypeUnctrlVocab;
     private String administrativeSite;
-    private String adminSiteUnctrlVocab;    
+    private String adminSiteUnctrlVocab;  
+    private String conditioningRegime;
+    private String condRegimeUnctrlVocab;      
     private TumorCode tumorCode;
     private Set<InvivoResult> invivoResultCollection = new TreeSet<InvivoResult>();
     private Species donorSpecies;
@@ -73,7 +78,9 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     public void setAdminSiteUnctrlVocab(String adminSiteUnctrlVocab)
     {
         this.adminSiteUnctrlVocab = adminSiteUnctrlVocab;
-    }    
+    }  
+    
+    
     /**
      * @return Returns the invivoResultCollection.
      * @throws Exception 
@@ -337,5 +344,37 @@ public class Xenograft extends AbstractCancerModel implements Comparable
         }
 
         return super.compareTo(o);
+    }
+
+    /**
+     * @return Returns the conditioningRegime.
+     */
+    public String getConditioningRegime()
+    {
+        return conditioningRegime;
+    }
+
+    /**
+     * @param conditioningRegime The conditioningRegime to set.
+     */
+    public void setConditioningRegime(String conditioningRegime)
+    {
+        this.conditioningRegime = conditioningRegime;
+    }
+
+    /**
+     * @return Returns the condRegimeUnctrlVocab.
+     */
+    public String getCondRegimeUnctrlVocab()
+    {
+        return condRegimeUnctrlVocab;
+    }
+
+    /**
+     * @param condRegimeUnctrlVocab The condRegimeUnctrlVocab to set.
+     */
+    public void setCondRegimeUnctrlVocab(String condRegimeUnctrlVocab)
+    {
+        this.condRegimeUnctrlVocab = condRegimeUnctrlVocab;
     }
 }

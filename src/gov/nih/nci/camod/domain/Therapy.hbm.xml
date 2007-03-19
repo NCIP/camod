@@ -54,6 +54,11 @@
         	column="comments" 
         	type="string"/>
         	
+        <!-- developmentalStage -->
+        <property name="developmentalStage" 
+        	column="developmental_stage" 
+        	type="string"/>         	
+        	
         <!-- Agent (many-to-one) -->
         <many-to-one name="agent"
         	class="Agent"

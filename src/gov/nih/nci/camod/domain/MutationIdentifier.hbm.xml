@@ -28,5 +28,15 @@
         <property name="mgiNumber" 
         	column="mgi_number" 
         	type="string"/>
+
+	    <!-- zfinNumber -->
+        <property name="zfinNumber" 
+        	column="zfin_number" 
+        	type="string"/>
+        	
+	    <!-- rgdNumber -->
+        <property name="rgdNumber" 
+        	column="rgd_number" 
+        	type="string"/>        	        	
 	</class>
 </hibernate-mapping>

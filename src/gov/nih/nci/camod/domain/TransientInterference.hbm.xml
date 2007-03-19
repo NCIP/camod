@@ -82,7 +82,12 @@
 	    <!-- comments -->
         <property name="comments" 
         	column="comments" 
-        	type="text"/>        	
+        	type="text"/>     
+        	
+	    <!-- site -->
+        <property name="site" 
+        	column="site" 
+        	type="string"/>          	   	
         	
         <!-- transientInterferenceMethod (many-to-one unidirectional) -->
         <many-to-one 

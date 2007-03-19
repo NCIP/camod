@@ -37,6 +37,11 @@
         	column="external_source_identifier" 
         	type="string"/> 
         	       	
+        <!-- developmentalStage -->
+        <property name="developmentalStage" 
+        	column="developmental_stage" 
+        	type="string"/>         	       	
+        	       	
         <!-- animalAvailabilityCollection (one-to-many unidirectional without 
         join table) -->
 		<!-- There may be a nullability constraint on the foreign key column. 
