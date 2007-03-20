@@ -1,9 +1,15 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.24 2006-09-14 17:39:52 georgeda Exp $
+ * $Id: UserManagerImpl.java,v 1.26 2007-03-20 14:11:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/12/22 17:03:32  pandyas
+ * Reversed commented out ocde for authentication
+ *
+ * Revision 1.24  2006/09/14 17:39:52  georgeda
+ * solved file not found issue - jboss location was wrong
+ *
  * Revision 1.22  2006/08/17 18:15:37  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -94,18 +100,20 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * Constructor gets reference to authorization manager
 	 */
 	UserManagerImpl() {
-		log.trace("Entering UserManagerImpl");
+		log.info("Entering UserManagerImpl");
 
 		try {
+            log.info("Entering main try");
 			theAuthenticationMgr = SecurityServiceProvider
 					.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
+            log.info("theAuthenticationMgrtoString(): " + theAuthenticationMgr.toString());
 		} catch (CSException ex) {
 			log.error("Error getting authentication managers", ex);
 		} catch (Throwable e) {
 			log.error("Error getting authentication managers", e);
 		}
 
-		log.trace("Exiting UserManagerImpl");
+		log.info("Exiting UserManagerImpl");
 	}
 
 	/**
@@ -118,7 +126,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @throws Exception
 	 */
 	public List getRolesForUser(String inUsername) throws Exception {
-		log.trace("Entering getRolesForUser");
+		log.info("Entering getRolesForUser");
 
 		List<String> theRoles = new ArrayList<String>();
 
@@ -186,7 +194,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		}
 
 		log.info("User: " + inUsername + " and roles: " + theRoles);
-		log.trace("Exiting getRolesForUser");
+		log.info("Exiting getRolesForUser");
 
 		return theRoles;
 	}
@@ -201,7 +209,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @throws Exception
 	 */
 	public List<String> getUsersForRole(String inRoleName) throws Exception {
-		log.trace("Entering getUsersForRole");
+		log.info("Entering getUsersForRole");
 
 		List<String> theUsersForRole = new ArrayList<String>();
 
@@ -237,7 +245,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		}
 
 		log.info("Role: " + inRoleName + " and users: " + theUsersForRole);
-		log.trace("Exiting getUsersForRole");
+		log.info("Exiting getUsersForRole");
 
 		return theUsersForRole;
 	}
@@ -251,7 +259,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @return the list of users associated with the role
 	 */
 	public String getEmailForUser(String inUsername) {
-		log.trace("Entering getEmailForUser");
+		log.info("Entering getEmailForUser");
 		log.debug("Username: " + inUsername);
 
 		String theEmail = "";
@@ -262,7 +270,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 			log.warn("Could not fetch user from LDAP", e);
 		}
 
-		log.trace("Exiting getEmailForUser");
+		log.info("Exiting getEmailForUser");
 
 		return theEmail;
 	}
@@ -288,7 +296,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @return the list of users associated with the role
 	 */
 	public String getEmailForCoordinator() {
-		log.trace("Entering getEmailForCoordinator");
+		log.info("Entering getEmailForCoordinator");
 
 		String theEmail = "";
 
@@ -322,7 +330,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 			log.warn("Unable to get coordinator email: ", e);
 		}
 
-		log.trace("Exiting getEmailForCoordinator");
+		log.info("Exiting getEmailForCoordinator");
 
 		return theEmail;
 	}
@@ -341,12 +349,14 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 */
 	public boolean login(String inUsername, String inPassword,
 			HttpServletRequest inRequest) {
-		boolean loginOk = true;
+		boolean loginOk = false;
 		try {
+            log.info("login method inside try");
 			// Work around bug in CSM. Empty passwords pass
 			if (inPassword.trim().length() != 0) {
-				// loginOk = theAuthenticationMgr.login(inUsername, inPassword);
-
+                log.info("inPassword != 0");
+				loginOk = theAuthenticationMgr.login(inUsername, inPassword);
+                log.info("loginOk");
 				// Does the user exist? Must also be in our database to login
 				List theRoles = getRolesForUser(inUsername);
 				inRequest.getSession().setAttribute(Constants.CURRENTUSERROLES,
