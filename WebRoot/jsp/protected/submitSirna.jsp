@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/11/17 17:45:53  pandyas
+ * Minor format change - siRNA (lower case ‘s’)
+ *
  * Revision 1.4  2006/11/10 22:01:34  pandyas
  * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *
@@ -14,7 +17,7 @@
  * modified during development of caMOD 2.2 - various
  *
  *
- * $Id: submitSirna.jsp,v 1.5 2006-11-17 17:45:53 pandyas Exp $
+ * $Id: submitSirna.jsp,v 1.6 2007-03-22 13:51:29 pandyas Exp $
  *
  */   
 %>
@@ -150,7 +153,7 @@
 	</tr>
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Delivery Method:</label></td>
+			<td class="formLabel"><label for="field1">Other Transfection Method:</label></td>
 			<td class="formField">					
 					<html:text styleClass="formFieldSized" size="30" property="otherDeliveryMethod" />			
 			</td>
