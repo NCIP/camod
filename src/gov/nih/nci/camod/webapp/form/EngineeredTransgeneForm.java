@@ -1,9 +1,12 @@
 /*
  * @author pandyas
  *
- * $Id: EngineeredTransgeneForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: EngineeredTransgeneForm.java,v 1.9 2007-03-26 12:03:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -28,6 +31,8 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	protected String scientificName;
 	protected String otherScientificName;
 	protected String mgiNumber;
+	protected String zfinNumber;
+	protected String rgdNumber;	
 	protected String function;
 	protected String conditionedBy;
 	protected String description;
@@ -332,4 +337,20 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
     public void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
     }
+
+	public String getRgdNumber() {
+		return rgdNumber;
+	}
+
+	public void setRgdNumber(String rgdNumber) {
+		this.rgdNumber = rgdNumber;
+	}
+
+	public String getZfinNumber() {
+		return zfinNumber;
+	}
+
+	public void setZfinNumber(String zfinNumber) {
+		this.zfinNumber = zfinNumber;
+	}
 }

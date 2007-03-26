@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationData.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: InducedMutationData.java,v 1.4 2007-03-26 12:03:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -50,5 +53,13 @@ public interface InducedMutationData {
     public String getComments();
     
     public void setComments(String comments);
+    
+	public String getRgdNumber();
+	
+	public void setRgdNumber(String rgdNumber);
+	
+	public String getZfinNumber();
+	
+	public void setZfinNumber(String zfinNumber);
     
 }

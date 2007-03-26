@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/11/10 22:01:34  pandyas
+ * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
+ *
  * Revision 1.5  2006/10/27 13:01:26  pandyas
  * topic="skip" allows us to remove the onclick for ToolTips while preserving it for the title of each page
  *
@@ -15,7 +18,7 @@
  *
  *
  *
- * $Id: submitMorpholino.jsp,v 1.6 2006-11-10 22:01:34 pandyas Exp $
+ * $Id: submitMorpholino.jsp,v 1.7 2007-03-26 12:07:56 pandyas Exp $
  *
  */   
 %>
@@ -156,7 +159,17 @@
 			<td class="formField">					
 					<html:text styleClass="formFieldSized" size="30" property="otherDeliveryMethod" />			
 			</td>
-		</tr>
+	</tr>
+	
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field1">Site:</label></td>
+		<td class="formField">
+			<html:select styleClass="formFieldUnSized" size="1" property="site" >												
+				<html:options name="<%= Dropdowns.SITEOFMORPHOLINO %>"/>					
+			</html:select>
+		</td>
+		</tr>	
 		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>

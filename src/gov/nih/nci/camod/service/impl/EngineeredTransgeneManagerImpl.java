@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.34 2006-10-17 16:13:47 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.35 2007-03-26 12:01:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2006/10/17 16:13:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.33  2006/08/17 18:27:48  pandyas
  * Defect# 410: Externalize properties files - Code Changes to send mail method
  *
@@ -185,6 +188,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		log.info("Exiting populateAssocExpression");
 	}
 
+	
+	
 	private void populateEngineeredTransgene(
 			EngineeredTransgeneData inEngineeredTransgeneData,
 			Transgene inEngineeredTransgene, HttpServletRequest request)
@@ -288,15 +293,23 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			inMutationIdentifier = new MutationIdentifier();
 		}
 
-		if (inEngineeredTransgeneData.getMgiNumber() == null
-				|| inEngineeredTransgeneData.getMgiNumber().equals("")) {
-			inEngineeredTransgene.setMutationIdentifier(null);
-		} else {
+		if (inEngineeredTransgeneData.getMgiNumber() != null) {
+
 			inMutationIdentifier.setMgiNumber(inEngineeredTransgeneData
 					.getMgiNumber());
 			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
-
 		}
+		if (inEngineeredTransgeneData.getZfinNumber() != null ) {
+			inMutationIdentifier.setZfinNumber(inEngineeredTransgeneData
+					.getZfinNumber());
+			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inEngineeredTransgeneData.getRgdNumber() != null) {
+
+			inMutationIdentifier.setRgdNumber(inEngineeredTransgeneData
+					.getRgdNumber());
+			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
+		}		
 
 		// Gene Functions
 		Set<GeneFunction> geneList = null;

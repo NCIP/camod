@@ -134,6 +134,17 @@ var cal1 = new CalendarPopup();
 					<html:text styleClass="formFieldSized" property="otherEthnicityStrain" size="30"/>			
 			</td>
 		</tr>
+
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field1">Developmental Stage:</label>				
+			</td>
+			<td class="formField">
+				<html:select styleClass="formFieldSized" size="1" property="developmentalStage" >
+					<html:options name="<%= Dropdowns.DEVELOPMENTALSTAGES %>"/>		
+				</html:select>
+			</td>
+		</tr>
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>

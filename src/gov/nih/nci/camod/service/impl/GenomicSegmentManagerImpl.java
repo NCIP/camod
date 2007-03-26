@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.26 2006-08-17 18:26:52 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.27 2007-03-26 12:01:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2006/08/17 18:26:52  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.25  2006/05/23 14:08:20  pandyas
  * uncommented the comment save code so it runs again
  *
@@ -187,23 +190,31 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 		// MGI Number
 		// Check for exisiting MutationIdentifier
 		MutationIdentifier inMutationIdentifier = null;
-		if (inGenomicSegment.getMutationIdentifier() != null)
+		if (inGenomicSegment.getMutationIdentifier() != null){
 			inMutationIdentifier = inGenomicSegment.getMutationIdentifier();
-		else
-			inMutationIdentifier = new MutationIdentifier();
-
-		if (inGenomicSegmentData.getMgiNumber() == null
-				|| inGenomicSegmentData.getMgiNumber().equals("")) {
-			inGenomicSegment.setMutationIdentifier(null);
 		} else {
-			String strMGINumber = inGenomicSegmentData.getMgiNumber().trim();
-			Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
-			Matcher m = p.matcher(strMGINumber);
-			if (m.matches() && strMGINumber != null && !strMGINumber.equals("")) {
-				inMutationIdentifier.setMgiNumber(strMGINumber);
-				inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
-			}
+			inMutationIdentifier = new MutationIdentifier();
 		}
+
+		if (inGenomicSegmentData.getMgiNumber() != null) {
+
+			inMutationIdentifier.setMgiNumber(inGenomicSegmentData
+					.getMgiNumber());
+			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inGenomicSegmentData.getZfinNumber() != null) {
+
+			inMutationIdentifier.setZfinNumber(inGenomicSegmentData
+					.getZfinNumber());
+			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inGenomicSegmentData.getRgdNumber() != null) {
+
+			inMutationIdentifier.setRgdNumber(inGenomicSegmentData
+					.getRgdNumber());
+			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
+		}		
+		
 
 		log.trace("Exiting populateGenomicSegment");
 	}

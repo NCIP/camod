@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitInducedMutation.jsp,v 1.30 2006-11-10 22:01:34 pandyas Exp $
+ * $Id: submitInducedMutation.jsp,v 1.31 2007-03-26 12:07:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2006/11/10 22:01:34  pandyas
+ * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
+ *
  * Revision 1.29  2006/10/27 13:01:26  pandyas
  * topic="skip" allows us to remove the onclick for ToolTips while preserving it for the title of each page
  *
@@ -169,14 +172,46 @@
 	</tr>
 		
 	<tr>
-		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field2">MGI number:</label></td>
-		<td class="formField">
-			<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
-			'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>		
-			<html:text styleClass="formFieldUnSized" property="mgiNumber" size="20" />		
-		</td>
+		<c:if test="${modelspeciescommonname == 'Mouse'}">			
+				<td class="formRequiredNotice" width="5">&nbsp;</td>
+				<td class="formLabel"><label for="field2">MGI number:</label>
+				</td>
+				<td class="formField">
+					<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+					<label for="field1">&nbsp;&nbsp;</label>
+					<html:text styleClass="formFieldUnSized" size="15" property="mgiNumber"  />
+				</td>
+		</c:if>				
+	</tr>	
+	<tr>
+		<c:if test="${modelspeciescommonname == 'Zebrafish'}">	
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field2">ZFIN number:</label>
+			</td>
+			<td class="formField">
+				<input type=button value="Find ZFIN #" onClick="myRef = window.open('http://zfin.org/','mywin',
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<label for="field1">&nbsp;&nbsp;</label>
+				<html:text styleClass="formFieldUnSized" size="15" property="zfinNumber"  />
+			</td>
+		</c:if>
+	</tr>	
+	
+	<tr>
+		<c:if test="${modelspeciescommonname == 'Rat'}">	
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
+			<td class="formLabel"><label for="field2">RGD number:</label>
+			</td>
+			<td class="formField">
+				<input type=button value="Find RGD #" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
+				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
+				<label for="field1">&nbsp;&nbsp;</label>
+				<html:text styleClass="formFieldUnSized" size="15" property="rgdNumber"  />
+			</td>
+		</c:if>
 	</tr>
+
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Comment:</label>

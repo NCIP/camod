@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneData.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: EngineeredTransgeneData.java,v 1.6 2007-03-26 12:03:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -26,10 +29,6 @@ public interface EngineeredTransgeneData extends TransgeneData {
 	public String getScientificName();
 	
 	public void setScientificName(String scientificName);
-	
-	public String getMgiNumber();
-	
-	public void setMgiNumber(String mgiNumber);
 	
 	public String getFunction();
 	

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.14 2006-05-08 13:42:44 georgeda Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.15 2007-03-26 12:02:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/08 13:42:44  georgeda
+ * Reformat and clean up warnings
+ *
  * Revision 1.13  2006/04/20 14:04:50  pandyas
  * changed Modification Type to getOrCreate
  *
@@ -56,7 +59,7 @@ public class TargetedModificationPopulateAction extends BaseAction
     {
         log.debug("<TargetedModificationPopulateAction populate> Entering populate() ");
 
-        TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
+        TargetedModificationForm theTargetedModificationForm = (TargetedModificationForm) form;
 
         String aTargetedModificationID = request.getParameter("aTargetedModificationID");
         TargetedModification theTargetedModification = TargetedModificationManagerSingleton.instance().get(aTargetedModificationID);
@@ -67,13 +70,21 @@ public class TargetedModificationPopulateAction extends BaseAction
         }
         else
         {
-            targetedModificationForm.setModificationId(aTargetedModificationID);
+        	theTargetedModificationForm.setModificationId(aTargetedModificationID);
 
-            targetedModificationForm.setName(theTargetedModification.getName());
+        	theTargetedModificationForm.setName(theTargetedModification.getName());
             MutationIdentifier theMutationIdentifier = theTargetedModification.getMutationIdentifier();
             if (theMutationIdentifier != null)
             {
-                targetedModificationForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
+            	if (theMutationIdentifier.getMgiNumber() != null && theMutationIdentifier.getMgiNumber().length() > 0) {
+            		theTargetedModificationForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
+            	}
+            	if (theMutationIdentifier.getZfinNumber() != null && theMutationIdentifier.getZfinNumber().length() > 0) {
+            		theTargetedModificationForm.setZfinNumber(theMutationIdentifier.getZfinNumber());
+                }
+            	if (theMutationIdentifier.getRgdNumber() != null && theMutationIdentifier.getRgdNumber().length() > 0) {
+            		theTargetedModificationForm.setRgdNumber(theMutationIdentifier.getRgdNumber());
+                }             	
             }
 
             // Get the collection/Set of modification types
@@ -87,7 +98,7 @@ public class TargetedModificationPopulateAction extends BaseAction
                 if (theModificationType.getNameUnctrlVocab() != null)
                 {
                     theModTypes[i] = Constants.Dropdowns.OTHER_OPTION;
-                    targetedModificationForm.setOtherModificationType(theModificationType.getNameUnctrlVocab());
+                    theTargetedModificationForm.setOtherModificationType(theModificationType.getNameUnctrlVocab());
                 }
                 else
                 {
@@ -95,15 +106,15 @@ public class TargetedModificationPopulateAction extends BaseAction
                 }
             }
             //set the modification types on the form, including 'Other' if selected
-            targetedModificationForm.setModificationType(theModTypes);
+            theTargetedModificationForm.setModificationType(theModTypes);
 
-            targetedModificationForm.setBlastocystName(theTargetedModification.getBlastocystName());
-            targetedModificationForm.setComments(theTargetedModification.getComments());
-            targetedModificationForm.setGeneId(theTargetedModification.getGeneId());
-            targetedModificationForm.setEsCellLineName(theTargetedModification.getEsCellLineName());
+            theTargetedModificationForm.setBlastocystName(theTargetedModification.getBlastocystName());
+            theTargetedModificationForm.setComments(theTargetedModification.getComments());
+            theTargetedModificationForm.setGeneId(theTargetedModification.getGeneId());
+            theTargetedModificationForm.setEsCellLineName(theTargetedModification.getEsCellLineName());
 
             // Construct Sequence
-            targetedModificationForm.setConstructSequence(theTargetedModification.getConstructSequence());
+            theTargetedModificationForm.setConstructSequence(theTargetedModification.getConstructSequence());
 
             // Conditionality
             Conditionality theConditionality = theTargetedModification.getConditionality();
@@ -111,26 +122,26 @@ public class TargetedModificationPopulateAction extends BaseAction
             {
                 if ("1".equals(theConditionality.getConditionedBy()))
                 {
-                    targetedModificationForm.setConditionedBy(Constants.CONDITIONAL);
+                	theTargetedModificationForm.setConditionedBy(Constants.CONDITIONAL);
                 }
                 else
                 {
-                    targetedModificationForm.setConditionedBy(Constants.NOT_CONDITIONAL);
+                	theTargetedModificationForm.setConditionedBy(Constants.NOT_CONDITIONAL);
                 }
 
-                targetedModificationForm.setDescription(theConditionality.getDescription());
-                targetedModificationForm.setDescription(theConditionality.getDescription());
+                theTargetedModificationForm.setDescription(theConditionality.getDescription());
+                theTargetedModificationForm.setDescription(theConditionality.getDescription());
             }
 
             Image image = theTargetedModification.getImage();
             if (image != null)
             {
-                targetedModificationForm.setFileServerLocation(image.getFileServerLocation());
-                targetedModificationForm.setTitle(image.getTitle());
-                targetedModificationForm.setDescriptionOfConstruct(image.getDescription());
-                targetedModificationForm.setDescriptionOfConstruct(image.getDescription());
-                targetedModificationForm.setThumbUrl(image.getThumbUrl());
-                targetedModificationForm.setImageUrl(image.getImageUrl());
+            	theTargetedModificationForm.setFileServerLocation(image.getFileServerLocation());
+            	theTargetedModificationForm.setTitle(image.getTitle());
+            	theTargetedModificationForm.setDescriptionOfConstruct(image.getDescription());
+            	theTargetedModificationForm.setDescriptionOfConstruct(image.getDescription());
+            	theTargetedModificationForm.setThumbUrl(image.getThumbUrl());
+            	theTargetedModificationForm.setImageUrl(image.getImageUrl());
             }
 
         }

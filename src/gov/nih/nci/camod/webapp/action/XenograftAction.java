@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftAction.java,v 1.19 2006-05-23 20:43:10 georgeda Exp $
+ * $Id: XenograftAction.java,v 1.20 2007-03-26 12:02:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/05/23 20:43:10  georgeda
+ * Fixed error introduced in OM change
+ *
  * Revision 1.18  2006/05/19 18:48:26  pandyas
  * Added printout values for fields not listed
  *
@@ -104,7 +107,11 @@ public final class XenograftAction extends BaseAction
                     + "\n\t organTissueCode: "
                     + xenograftForm.getOrganTissueCode()
                     + "\n\t organ(): "
-                    + xenograftForm.getOrgan()                
+                    + xenograftForm.getOrgan() 
+                    + "\n\t ConditioningRegime(): "
+                    + xenograftForm.getConditioningRegime() 
+                    + "\n\t OtherConditioningRegime: "
+                    + xenograftForm.getOtherConditioningRegime()
                     + "\n\t user: "
                     + (String) request.getSession().getAttribute(
                             "camod.loggedon.username"));
@@ -193,6 +200,8 @@ public final class XenograftAction extends BaseAction
                  + "\n\t getOrganTissueName(): " + xenograftForm.getOrganTissueName() 
                  + "\n\t organTissueCode: " + xenograftForm.getOrganTissueCode() 
                  + "\n\t organ(): " + xenograftForm.getOrgan() 
+                 + "\n\t ConditioningRegime(): " + xenograftForm.getConditioningRegime() 
+                 + "\n\t OtherConditioningRegime: " + xenograftForm.getOtherConditioningRegime()                 
                  + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
         
         try

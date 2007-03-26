@@ -1095,6 +1095,24 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="zfinNumber" depends="maxlength">
+				<arg0 key="TargetedModificationForm.zfinNumber" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="rgdNumber" depends="maxlength">
+				<arg0 key="TargetedModificationForm.rgdNumber" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>						
 			<field property="comments" depends="maxlength">
 				<arg0 key="EngineeredTransgeneForm.comments" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1223,6 +1241,24 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="zfinNumber" depends="maxlength">
+				<arg0 key="GenomicSegmentForm.zfinNumber" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="rgdNumber" depends="maxlength">
+				<arg0 key="GenomicSegmentForm.rgdNumber" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>						
 			<field property="comments" depends="maxlength">
 				<arg0 key="GenomicSegmentForm.comments" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1339,6 +1375,24 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="zfinNumber" depends="maxlength">
+				<arg0 key="TargetedModificationForm.zfinNumber" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="rgdNumber" depends="maxlength">
+				<arg0 key="TargetedModificationForm.rgdNumber" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>						
 			<field property="comments" depends="maxlength">
 				<arg0 key="TargetedModificationForm.comments" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2070,6 +2124,23 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="otherConditioningRegime"
+				depends="validwhen, maxlength">
+				<arg0 key="XenograftForm.otherConditioningRegime" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((conditioningRegime != 'Other') or (*this* !=
+						null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>		
 		</form>
 		
 		<form name="transientInterferenceForm">

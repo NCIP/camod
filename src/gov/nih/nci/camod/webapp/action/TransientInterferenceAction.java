@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: TransientInterferenceAction.java,v 1.4 2006-11-09 17:10:31 pandyas Exp $
+ * $Id: TransientInterferenceAction.java,v 1.5 2007-03-26 12:02:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/11/09 17:10:31  pandyas
+ * modified sucess, edit, and delete message key to be used for both SiRNA and Morpholino.  Modified code to use only one manager so both messages must be generic.
+ *
  * Revision 1.3  2006/10/19 16:30:22  pandyas
  * modified aConceptCode to conceptCode to match all other code
  *
@@ -73,6 +76,7 @@ public class TransientInterferenceAction extends BaseAction
           + "\n\t SequenceDirection: " + transientInterferenceForm.getSequenceDirection() 
           + "\n\t TargetedRegion: " + transientInterferenceForm.getTargetedRegion() 
           + "\n\t Type: " + transientInterferenceForm.getType()
+          + "\n\t site: " + transientInterferenceForm.getSite()
         + "\n\t Comment: " + transientInterferenceForm.getComments()           
           + "\n\t user: " + (String) request.getSession().getAttribute(                                                                                                                       
                  "camod.loggedon.username"));
@@ -160,6 +164,7 @@ public class TransientInterferenceAction extends BaseAction
         + "\n\t SequenceDirection: " + transientInterferenceForm.getSequenceDirection() 
         + "\n\t TargetedRegion: " + transientInterferenceForm.getTargetedRegion() 
         + "\n\t Type: " + transientInterferenceForm.getType() 
+        + "\n\t site: " + transientInterferenceForm.getSite()
         + "\n\t Comment: " + transientInterferenceForm.getComments()         
     	+ "\n\t user: " + (String) request.getSession().getAttribute(                                                                                                                       
               "camod.loggedon.username"));

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.23 2006-05-23 16:01:43 pandyas Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.24 2007-03-26 12:02:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/05/23 16:01:43  pandyas
+ * Fixed code for species - not required and must be nulled out when editing
+ *
  * Revision 1.22  2006/05/23 14:15:35  schroedn
  * Fixed bug that did not corretly repopulate gene functions
  *
@@ -189,10 +192,18 @@ public class EngineeredTransgenePopulateAction extends BaseAction
                 }
 
                 // MGI Number
-                MutationIdentifier inMutationIdentifier = theEngineeredTransgene.getMutationIdentifier();
-                if (inMutationIdentifier != null)
+                MutationIdentifier theMutationIdentifier = theEngineeredTransgene.getMutationIdentifier();
+                if (theMutationIdentifier != null)
                 {
-                    theEngineeredTransgeneForm.setMgiNumber(inMutationIdentifier.getMgiNumber());
+                	if (theMutationIdentifier.getMgiNumber() != null && theMutationIdentifier.getMgiNumber().length() > 0) {
+                		theEngineeredTransgeneForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
+                	}
+                	if (theMutationIdentifier.getZfinNumber() != null && theMutationIdentifier.getZfinNumber().length() > 0) {
+                        theEngineeredTransgeneForm.setZfinNumber(theMutationIdentifier.getZfinNumber());
+                    }
+                	if (theMutationIdentifier.getRgdNumber() != null && theMutationIdentifier.getRgdNumber().length() > 0) {
+                        theEngineeredTransgeneForm.setRgdNumber(theMutationIdentifier.getRgdNumber());
+                    }                	
                 }
 
                 // Gene Function

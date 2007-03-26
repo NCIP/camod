@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentForm.java,v 1.11 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: GenomicSegmentForm.java,v 1.12 2007-03-26 12:03:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -12,9 +15,12 @@ import org.apache.struts.upload.FormFile;
 
 /**
  * 
- * $Id: GenomicSegmentForm.java,v 1.11 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: GenomicSegmentForm.java,v 1.12 2007-03-26 12:03:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 public class GenomicSegmentForm extends BaseForm implements Serializable, GenomicSegmentData
@@ -37,6 +43,8 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
     protected String cloneDesignator;
     protected String comments;
     protected String mgiNumber;
+	protected String zfinNumber;
+	protected String rgdNumber;    
     protected String fileServerLocation;
     protected FormFile fileLocation;
     protected String title;
@@ -309,4 +317,20 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
     {
         this.constructSequence = constructSequence;
     }
+
+	public String getRgdNumber() {
+		return rgdNumber;
+	}
+
+	public void setRgdNumber(String rgdNumber) {
+		this.rgdNumber = rgdNumber;
+	}
+
+	public String getZfinNumber() {
+		return zfinNumber;
+	}
+
+	public void setZfinNumber(String zfinNumber) {
+		this.zfinNumber = zfinNumber;
+	}
 }

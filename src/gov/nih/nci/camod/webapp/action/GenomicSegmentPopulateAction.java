@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentPopulateAction.java,v 1.15 2006-11-09 17:26:40 pandyas Exp $
+ * $Id: GenomicSegmentPopulateAction.java,v 1.16 2007-03-26 12:02:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/11/09 17:26:40  pandyas
+ * Commented out debug code
+ *
  * Revision 1.14  2006/05/22 16:52:28  pandyas
  * modified isRandom to make consistent between transgene and genomic segment
  *
@@ -83,10 +86,19 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             genomicSegmentForm.setConstructSequence(theGenomicSegment.getConstructSequence());            
 
             // MGI Number
-            MutationIdentifier inMutationIdentifier = theGenomicSegment.getMutationIdentifier();
-            if (inMutationIdentifier != null)
-                genomicSegmentForm.setMgiNumber(inMutationIdentifier.getMgiNumber());
-
+            MutationIdentifier theMutationIdentifier = theGenomicSegment.getMutationIdentifier();
+            if (theMutationIdentifier != null){
+            	if (theMutationIdentifier.getMgiNumber() != null && theMutationIdentifier.getMgiNumber().length() > 0) {
+            		genomicSegmentForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
+            	}
+            	if (theMutationIdentifier.getZfinNumber() != null && theMutationIdentifier.getZfinNumber().length() > 0) {
+            		genomicSegmentForm.setZfinNumber(theMutationIdentifier.getZfinNumber());
+                }
+            	if (theMutationIdentifier.getRgdNumber() != null && theMutationIdentifier.getRgdNumber().length() > 0) {
+            		genomicSegmentForm.setRgdNumber(theMutationIdentifier.getRgdNumber());
+                }    
+            }
+            
             // Image
             Image inImage = theGenomicSegment.getImage();
             if (inImage != null) {

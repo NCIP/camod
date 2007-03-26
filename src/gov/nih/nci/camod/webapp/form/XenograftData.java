@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.7 2006-05-19 16:40:53 pandyas Exp $
+ * $Id: XenograftData.java,v 1.8 2007-03-26 12:03:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/05/19 16:40:53  pandyas
+ * Defect #249 - add other to species on the Xenograft screen
+ *
  * Revision 1.6  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -103,4 +106,12 @@ public interface XenograftData
     public String getOrganTissueCode();
 
     public void setOrganTissueCode(String organTissueCode);
+    
+	public String getConditioningRegime();
+
+	public void setConditioningRegime(String conditioningRegime);
+
+	public String getOtherConditioningRegime();
+
+	public void setOtherConditioningRegime(String otherConditioningRegime);
 }

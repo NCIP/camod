@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationPopulateAction.java,v 1.16 2006-11-09 17:29:47 pandyas Exp $
+ * $Id: InducedMutationPopulateAction.java,v 1.17 2007-03-26 12:02:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/11/09 17:29:47  pandyas
+ * Commented out debug code
+ *
  * Revision 1.15  2006/05/04 19:27:37  pandyas
  * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
  *
@@ -72,9 +75,17 @@ public class InducedMutationPopulateAction extends BaseAction {
             inducedMutationForm.setDescription(theInducedMutation.getDescription());
             
             MutationIdentifier identifier = theInducedMutation.getMutationIdentifier();
-            if (identifier != null)
-                inducedMutationForm.setMgiNumber(identifier.getMgiNumber());
-
+            if (identifier != null){
+            	if (identifier.getMgiNumber() != null && identifier.getMgiNumber().length() > 0) {
+            		inducedMutationForm.setMgiNumber(identifier.getMgiNumber());
+            	}
+            	if (identifier.getZfinNumber() != null && identifier.getZfinNumber().length() > 0) {
+            		inducedMutationForm.setZfinNumber(identifier.getZfinNumber());
+                }
+            	if (identifier.getRgdNumber() != null && identifier.getRgdNumber().length() > 0) {
+            		inducedMutationForm.setRgdNumber(identifier.getRgdNumber());
+                }             	
+            }
             // Set GeneticAlteration attributes 
             if (theInducedMutation.getGeneticAlteration() != null) {
                 inducedMutationForm.setObservation(theInducedMutation.getGeneticAlteration().getObservation());

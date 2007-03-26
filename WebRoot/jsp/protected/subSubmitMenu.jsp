@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.56 2006-11-17 17:46:20 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.57 2007-03-26 12:07:22 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.56  2006/11/17 17:46:20  pandyas
+		 * Minor format change - siRNA (lower case ‘s’)
+		 *
 		 * Revision 1.55  2006/10/17 16:08:12  pandyas
 		 * modified during development of caMOD 2.2 - various
 		 *
@@ -631,10 +634,10 @@
 		onmouseover="ChangeClass('menu11','masterTitleOver')"
 		onmouseout="ChangeClass('menu11','masterTitle')"><IMG height=5 alt=""
 		src="images/subMenuArrow.gif" width=5> MODEL AVAILABILITY</div>
-	<span class="submasterdiv" id="sub11"> <img
-		src="images/right_arrow.gif" border="0"> <html:link
-		styleClass="subMenuRed"
-		action="JacksonLabPopulateAction.do?method=dropdown&lab=Jackson Laboratory">Available from Jackson Lab.</html:link><br>
+	<span class="submasterdiv" id="sub11"> 
+	
+	<img src="images/right_arrow.gif" border="0"> 
+	<html:link styleClass="subMenuRed" action="JacksonLabPopulateAction.do?method=dropdown&lab=Jackson Laboratory">Available from Jackson Lab.</html:link><br>
 	<logic:iterate id="aAvailability" name="jacksonlab_list"
 		type="AnimalAvailability">
 			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
@@ -645,9 +648,10 @@
 			<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
 		</html:link>
 		<br>
-	</logic:iterate> <img src="images/right_arrow.gif" border="0"> <html:link
-		styleClass="subMenuRed"
-		action="MMHCCRepoPopulateAction.do?method=dropdown&lab=MMHCC Repository">Available from MMHCC Repo.</html:link><br>
+	</logic:iterate> 
+	
+	<img src="images/right_arrow.gif" border="0"> 
+	<html:link styleClass="subMenuRed" action="MMHCCRepoPopulateAction.do?method=dropdown&lab=MMHCC Repository">Available from MMHCC Repo.</html:link><br>
 	<logic:iterate id="aAvailability" name="mmhcc_list"
 		type="AnimalAvailability">
 			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
@@ -658,9 +662,10 @@
 			<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
 		</html:link>
 		<br>
-	</logic:iterate> <img src="images/right_arrow.gif" border="0"> <html:link
-		styleClass="subMenuRed"
-		action="InvestigatorPopulateAction.do?method=dropdown&lab=Investigator">Available from Investigator</html:link><br>
+	</logic:iterate> 
+	
+	<img src="images/right_arrow.gif" border="0"> 
+	<html:link 	styleClass="subMenuRed" action="InvestigatorPopulateAction.do?method=dropdown&lab=Investigator">Available from Investigator</html:link><br>
 	<logic:iterate id="aAvailability" name="investigator_list"
 		type="AnimalAvailability">
 			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
@@ -671,9 +676,10 @@
 			<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
 		</html:link>
 		<br>
-	</logic:iterate> <img src="images/right_arrow.gif" border="0"> <html:link
-		styleClass="subMenuRed"
-		action="IMSRPopulateAction.do?method=dropdown&lab=IMSR">Available from IMSR</html:link><br>
+	</logic:iterate> 
+	
+	<img src="images/right_arrow.gif" border="0"> 	
+	<html:link 	styleClass="subMenuRed" action="IMSRPopulateAction.do?method=dropdown&lab=IMSR">Available from IMSR</html:link><br>
 	<logic:iterate id="aAvailability" name="imsr_list"
 		type="AnimalAvailability">
 			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
@@ -684,7 +690,22 @@
 			<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
 		</html:link>
 		<br>
-	</logic:iterate> <br>
+	</logic:iterate> 
+	
+	<img src="images/right_arrow.gif" border="0"> 
+	<html:link styleClass="subMenuRed" action="ZFINPopulateAction.do?method=dropdown&lab=ZFIN">Available from ZFIN</html:link><br>
+	<logic:iterate id="aAvailability" name="zfin_list"
+		type="AnimalAvailability">
+			 &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/aquadot.jpg" border="0">
+		<html:link styleClass="subMenuBlue"
+			action="ZFINPopulateAction.do?method=populate"
+			paramId="aAvailabilityID" paramName="aAvailability"
+			paramProperty="id">
+			<camod:shorten><bean:write name="aAvailability" property="displayName" filter="false" /></camod:shorten>
+		</html:link>
+		<br>
+	</logic:iterate>
+	 <br>
 	</span>
 
 	<div id="menu12" class="masterTitle" onclick="SwitchMenu('sub12')"

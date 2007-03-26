@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.22 2007-02-23 21:35:28 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.23 2007-03-26 12:02:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/02/23 21:35:28  pandyas
+ * Fixed Genotype and Nomenclature - split objects and cleaned up database
+ *
  * Revision 1.21  2007/02/01 19:06:04  pandyas
  * Fixed Genotype bug - working on saving Nomenclature
  *
@@ -106,6 +109,11 @@ public class AnimalModelPopulateAction extends BaseAction {
 		// If uncontrolledVocab is empty, just get strain field
 		else {
 			modelCharForm.setEthinicityStrain(am.getStrain().getName());
+		}
+		
+		// Populate developmental stage if not null
+		if(am.getDevelopmentalStage() != null){
+			modelCharForm.setDevelopmentalStage(am.getDevelopmentalStage());
 		}
 		
         // Genotype - always one but Hibernate didn't like a one-to-one relationship
@@ -225,6 +233,10 @@ public class AnimalModelPopulateAction extends BaseAction {
 		NewDropdownUtil.populateDropdown(request,
 				Constants.Dropdowns.PRINCIPALINVESTIGATORDROP,
 				Constants.Dropdowns.ADD_BLANK_OPTION);
+		
+		NewDropdownUtil.populateDropdown(request,
+				Constants.Dropdowns.DEVELOPMENTALSTAGES,
+				Constants.Dropdowns.ADD_BLANK);		
 
 		log.debug("Exiting AnimalModelPopulateAction.dropdown");
 	}
@@ -248,6 +260,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 		NewDropdownUtil.populateDropdown(request,
 				Constants.Dropdowns.STRAINDROP, modelCharForm
 						.getScientificName());
+
 		// Must Reset both fields when new species is chosen
 		modelCharForm.setEthinicityStrain("");
 		modelCharForm.setOtherEthnicityStrain("");

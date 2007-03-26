@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationAction.java,v 1.11 2006-05-04 19:27:37 pandyas Exp $
+ * $Id: InducedMutationAction.java,v 1.12 2007-03-26 12:02:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/05/04 19:27:37  pandyas
+ * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
+ *
  * Revision 1.10  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -46,10 +49,27 @@ public final class InducedMutationAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.trace("Entering edit");
+        log.trace("Entering edit");        
+        
+        InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID); 
+        
+        log.info("<TargetedModificationAction edit> following Characteristics:" 
+        		+ "\n\t getType: "  + inducedMutationForm.getType() 
+                + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
+                + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() 
+                + "\n\t getGeneId: " + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
+                + "\n\t getDescription: " + inducedMutationForm.getDescription() 
+                + "\n\t getObservation: " + inducedMutationForm.getObservation() 
+                + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 
+                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
+                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
+                + "\n\t getZfinNumber: "  + inducedMutationForm.getZfinNumber() 
+                + "\n\t getRgdNumber: "  + inducedMutationForm.getRgdNumber()                 
+                + "\n\t"
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));        
 
         // Grab the current SpontaneousMutation we are working with related to
         // this
@@ -59,7 +79,7 @@ public final class InducedMutationAction extends BaseAction {
 
         try {
         	
-            InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
+
             InducedMutationManager inducedMutationManager = (InducedMutationManager) getBean("inducedMutationManager");
 
             if ("Delete".equals(theAction)) {
@@ -134,7 +154,11 @@ public final class InducedMutationAction extends BaseAction {
                 + "\n\t getDescription: " + inducedMutationForm.getDescription() 
                 + "\n\t getObservation: " + inducedMutationForm.getObservation() 
                 + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 
-                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() + "\n\t"
+                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
+                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
+                + "\n\t getZfinNumber: "  + inducedMutationForm.getZfinNumber() 
+                + "\n\t getRgdNumber: "  + inducedMutationForm.getRgdNumber()                 
+                + "\n\t"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         try {

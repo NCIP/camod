@@ -1,7 +1,10 @@
 /*
- * $Id: InducedMutationForm.java,v 1.7 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: InducedMutationForm.java,v 1.8 2007-03-26 12:03:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -27,6 +30,8 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
 	protected String methodOfObservation;
     protected String comments;
 	protected String mgiNumber;
+	protected String zfinNumber;
+	protected String rgdNumber;	
 	
 	/**
 	 * @return Returns the type.
@@ -149,5 +154,17 @@ public class InducedMutationForm extends BaseForm implements Serializable, Induc
 	 */
 	public void setMgiNumber(String mgiNumber) {
 		this.mgiNumber = mgiNumber;
+	}
+	public String getRgdNumber() {
+		return rgdNumber;
+	}
+	public void setRgdNumber(String rgdNumber) {
+		this.rgdNumber = rgdNumber;
+	}
+	public String getZfinNumber() {
+		return zfinNumber;
+	}
+	public void setZfinNumber(String zfinNumber) {
+		this.zfinNumber = zfinNumber;
 	}	
 }

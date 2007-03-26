@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.23 2006-08-17 18:25:42 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.24 2007-03-26 12:01:11 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/08/17 18:25:42  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.22  2006/05/04 19:27:45  pandyas
  * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
  *
@@ -234,6 +237,22 @@ public class InducedMutationManagerImpl extends BaseManager implements
 					.getMgiNumber());
 			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
 		}
+		if (inInducedMutationData.getZfinNumber() == null
+				|| inInducedMutationData.getZfinNumber().equals("")) {
+			inInducedMutation.setMutationIdentifier(null);
+		} else {
+			inMutationIdentifier.setZfinNumber(inInducedMutationData
+					.getZfinNumber());
+			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inInducedMutationData.getRgdNumber() == null
+				|| inInducedMutationData.getRgdNumber().equals("")) {
+			inInducedMutation.setMutationIdentifier(null);
+		} else {
+			inMutationIdentifier.setRgdNumber(inInducedMutationData
+					.getRgdNumber());
+			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
+		}		
 
 		// Comments
 		inInducedMutation.setComments(inInducedMutationData.getComments());

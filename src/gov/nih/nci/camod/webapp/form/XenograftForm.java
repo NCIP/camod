@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftForm.java,v 1.14 2006-05-19 16:41:08 pandyas Exp $
+ * $Id: XenograftForm.java,v 1.15 2007-03-26 12:03:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/19 16:41:08  pandyas
+ * Defect #249 - add other to species on the Xenograft screen
+ *
  * Revision 1.13  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -50,6 +53,8 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     protected String otherGraftType;
     protected String administrativeSite;
     protected String otherAdministrativeSite;
+    protected String conditioningRegime;
+    protected String otherConditioningRegime;
     
     protected String donorScientificName;
     protected String otherDonorScientificName;
@@ -336,6 +341,22 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     
     public void resetOrgan() {
         organ = null;
-    }    
+    }
+
+	public String getConditioningRegime() {
+		return conditioningRegime;
+	}
+
+	public void setConditioningRegime(String conditioningRegime) {
+		this.conditioningRegime = conditioningRegime;
+	}
+
+	public String getOtherConditioningRegime() {
+		return otherConditioningRegime;
+	}
+
+	public void setOtherConditioningRegime(String otherConditioningRegime) {
+		this.otherConditioningRegime = otherConditioningRegime;
+	}    
 
 }

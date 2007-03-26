@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/11/17 17:47:26  pandyas
+ * Minor format change on transient interference method display
+ *
  * Revision 1.4  2006/10/31 17:05:17  pandyas
  * Fixed choose for method=1 (SiRNA title vs Morpholino title)
  * Added more code to allow for html markup in fields
@@ -15,7 +18,7 @@
  * Changes for searching on transient interfaces
  *
  *
- * $Id: viewTransientInterference.jsp,v 1.5 2006-11-17 17:47:26 pandyas Exp $
+ * $Id: viewTransientInterference.jsp,v 1.6 2007-03-26 12:06:42 pandyas Exp $
  *
  */   
 %>
@@ -98,6 +101,16 @@
 					<camod:highlight><c:out value="${p.deliveryMethodDisplayName}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
+			
+			<c:if test="${method.id == 1}">			
+			<tr>
+				<td class="resultsBoxGrey" width="25%"><b>Site</b></td>
+				<td class="resultsBoxGreyEnd">
+					<camod:highlight><c:out value="${p.site}" escapeXml="false"/>&nbsp;</camod:highlight>
+				</td>
+			</tr>			
+			</c:if>
+			
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Visualization Ligands</b></td>
 				<td class="resultsBoxWhiteEnd">

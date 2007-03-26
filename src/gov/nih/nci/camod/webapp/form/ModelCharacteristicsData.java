@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ModelCharacteristicsData.java,v 1.5 2006-10-17 16:10:47 pandyas Exp $
+ *  $Id: ModelCharacteristicsData.java,v 1.6 2007-03-26 12:03:10 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.5  2006/10/17 16:10:47  pandyas
+ *  modified during development of caMOD 2.2 - various
+ *
  *  Revision 1.4  2006/04/17 19:09:19  pandyas
  *  caMod 2.1 OM changes
  *
@@ -104,5 +107,10 @@ public interface ModelCharacteristicsData {
     public String getNomenclature();
 
     public void setNomenclature(String nomenclature);    
+    
+	public String getDevelopmentalStage();
+	
+	public void setDevelopmentalStage(String developmentalStage);
+	    
 
 }

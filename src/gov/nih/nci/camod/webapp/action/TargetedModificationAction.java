@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationAction.java,v 1.13 2006-04-20 14:04:50 pandyas Exp $
+ * $Id: TargetedModificationAction.java,v 1.14 2007-03-26 12:02:29 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/20 14:04:50  pandyas
+ * changed Modification Type to getOrCreate
+ *
  * Revision 1.12  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -62,8 +65,11 @@ public final class TargetedModificationAction extends BaseAction {
                 + targetedModificationForm.getBlastocystName() + "\n\t getConditionedBy: "
                 + targetedModificationForm.getConditionedBy() + "\n\t getDescription: "
                 + targetedModificationForm.getDescription() + "\n\t getComments: "
-                + targetedModificationForm.getComments() + "\n\t getMgiNumber: "
-                + targetedModificationForm.getMgiNumber() + "\n\t getFileServerLocation: "
+                + targetedModificationForm.getComments() 
+                + "\n\t getMgiNumber: "  + targetedModificationForm.getMgiNumber() 
+                + "\n\t getZfinNumber: "  + targetedModificationForm.getZfinNumber() 
+                + "\n\t getRgdNumber: "  + targetedModificationForm.getRgdNumber()                 
+                + "\n\t getFileServerLocation: "
                 + targetedModificationForm.getFileServerLocation() + "\n\t getTitle: "
                 + targetedModificationForm.getTitle() + "\n\t getDescriptionOfConstruct: "
                 + targetedModificationForm.getDescriptionOfConstruct() + "\n\t getConstructSequence(): "
@@ -153,7 +159,10 @@ public final class TargetedModificationAction extends BaseAction {
                 + targetedModificationForm.getConditionedBy() + "\n\t getDescription: "
                 + targetedModificationForm.getDescription() + "\n\t getComments: "
                 + targetedModificationForm.getComments() + "\n\t getMgiNumber: "
-                + targetedModificationForm.getMgiNumber() + "\n\t getFileServerLocation: "
+                + targetedModificationForm.getMgiNumber() 
+                + "\n\t getZfinNumber: "  + targetedModificationForm.getZfinNumber() 
+                + "\n\t getRgdNumber: "  + targetedModificationForm.getRgdNumber()                   
+                + "\n\t getFileServerLocation: "
                 + targetedModificationForm.getFileServerLocation() + "\n\t getTitle: "
                 + targetedModificationForm.getTitle() + "\n\t getDescriptionOfConstruct: "
                 + targetedModificationForm.getDescriptionOfConstruct() + "\n\t getConstructSequence(): "

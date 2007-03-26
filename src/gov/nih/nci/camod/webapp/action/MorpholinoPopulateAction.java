@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoPopulateAction.java,v 1.5 2006-10-23 14:18:00 pandyas Exp $
+ * $Id: MorpholinoPopulateAction.java,v 1.6 2007-03-26 12:02:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/10/23 14:18:00  pandyas
+ * changed to conform to conceptCode format in all other classes
+ *
  * Revision 1.4  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -101,6 +104,10 @@ public class MorpholinoPopulateAction extends BaseAction
             {
             	transientInterferenceForm.setVisualLigand(transientInterference.getVisualLigand());
             }
+            // Populate Site - for Morpholino only - will be null for siRNA or if not entered for Morpholino
+            if (transientInterference.getSite() != null) {
+            	transientInterferenceForm.setSite(transientInterference.getSite());
+            }
         }
 
         // Prepopulate all dropdown fields, set the global Constants to the following
@@ -161,6 +168,7 @@ public class MorpholinoPopulateAction extends BaseAction
     	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SEQUENCEDIRECTIONSDROP, Constants.Dropdowns.ADD_BLANK);
     	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.DELIVERYMETHODDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
     	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VISUALLIGANDSDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+    	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SITEOFMORPHOLINO, Constants.Dropdowns.ADD_BLANK);
 
         log.info("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
     }

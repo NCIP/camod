@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.32 2006-09-18 16:25:21 georgeda Exp $
+ * $Id: XenograftManagerImpl.java,v 1.33 2007-03-26 12:01:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2006/09/18 16:25:21  georgeda
+ * moved getOrgan code inside check for null - check first, get organ if selected by user
+ *
  * Revision 1.31  2006/08/17 18:12:20  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -177,6 +180,29 @@ public class XenograftManagerImpl extends BaseManager implements
 			// Null out during editing from 'other' to selected
 			inXenograft.setAdminSiteUnctrlVocab(null);
 		}
+		
+		// save directly in ConditioningRegime column of table
+		if (inXenograftData.getConditioningRegime().equals(
+				Constants.Dropdowns.OTHER_OPTION)) {
+			inXenograft.setConditioningRegime(null);
+			log.info("ConditioningRegime = Other");
+			// Do not save "other" value in the DB
+			inXenograft.setCondRegimeUnctrlVocab(inXenograftData.getOtherConditioningRegime());
+			log.info("OtherConditioningRegime = " + inXenograftData.getOtherConditioningRegime());
+
+			// Send e-mail for other ConditioningRegime
+			sendEmail(inAnimalModel, inXenograftData
+					.getOtherConditioningRegime(), "ConditioningRegime");
+		} else {
+			inXenograft.setConditioningRegime(inXenograftData
+					.getConditioningRegime());
+			log.info("ConditioningRegime not other= " + inXenograftData
+					.getConditioningRegime());
+
+			// Null out during editing from 'other' to selected
+			inXenograft.setCondRegimeUnctrlVocab(null);
+		}
+		
 		inXenograft.setGeneticManipulation(inXenograftData
 				.getGeneticManipulation());
 		inXenograft.setModificationDescription(inXenograftData

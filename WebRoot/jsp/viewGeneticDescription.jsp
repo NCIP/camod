@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.49 2006-11-08 20:12:56 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.50 2007-03-26 12:06:44 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2006/11/08 20:12:56  pandyas
+ * No MTB data for Genetic Description - removed icon code
+ *
  * Revision 1.48  2006/11/08 19:11:13  pandyas
  * added MTB logo onto view screens for Jackson Lab models
  *
@@ -417,15 +420,34 @@
 		</tr>	
 		
         <tr>
+			<c:if test="${not empty tg.mutationIdentifier.mgiNumber}">        
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
-			<td class="WhiteBoxRightEnd" width="65%">
-			<c:if test="${not empty tg.mutationIdentifier.mgiNumber}">
-				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=MGI:<c:out value="${tg.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
+				<td class="WhiteBoxRightEnd" width="65%">
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tg.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
 				    <c:out value="${tg.mutationIdentifier.mgiNumber}"/>
 				</a>
+				</td>
 			</c:if>&nbsp;
-			</td>			
+			
+			<c:if test="${not empty tg.mutationIdentifier.zfinNumber}">        
+			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
+				<td class="WhiteBoxRightEnd" width="65%">  
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${tg.mutationIdentifier.zfinNumber}.html"/>">
+				    <c:out value="${tg.mutationIdentifier.zfinNumber}"/>
+				</a>
+				</td>
+			</c:if>&nbsp;
+			
+			<c:if test="${not empty tg.mutationIdentifier.rgdNumber}">        
+			<td class="WhiteBox" width="35%"><b>RGD Number</b></td>
+				<td class="WhiteBoxRightEnd" width="65%">
+				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tg.mutationIdentifier.rgdNumber}"/>">
+				    <c:out value="${tg.mutationIdentifier.rgdNumber}"/>
+				</a>
+				</td>
+			</c:if>&nbsp;			
 		</tr>
+		
 		<tr>
 			<td class="GreyBox" width="35%"><b>Comment</b></td>
 			<td class="GreyBoxRightEnd" width="65%">

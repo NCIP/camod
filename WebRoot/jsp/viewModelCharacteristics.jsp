@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.38 2007-02-23 21:54:05 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.39 2007-03-26 12:06:44 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.38  2007/02/23 21:54:05  pandyas
+  *   Fixed Genotype and Nomenclature - split objects and cleaned up database
+  *
   *   Revision 1.37  2006/11/13 20:09:52  pandyas
   *   #458 - Mark MTB records on search results list either with icon or text
   *
@@ -171,6 +174,17 @@
 				</c:when>
 			</c:choose>	
 		</tr>				
+
+		<tr>
+			<td class="GreyBox" width="20%"><b>Developmental Stage</b></td>
+			<td class="GreyBoxRightEnd" width="70%">
+				<P>
+					<camod:highlight>
+					    <c:out value="${mdl.developmentalStage}" escapeXml="false" />&nbsp;
+					</camod:highlight>
+				</P>			
+			</td>
+		</tr>
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Experimental Design</b></td>
@@ -269,68 +283,81 @@
 				</c:otherwise>
 			</c:choose>
 			<tr>
-				<td class="<c:out value="${tdClass}"/>" width="30%">
+			<td class="<c:out value="${tdClass}"/>" width="30%">
 				<c:out value="${av.name}" escapeXml="false"/>&nbsp;
-				</td>
+			</td>
 				<td class="<c:out value="${tdClass}"/>" width="45%">
 					<c:set var="dist" value="${av.animalDistributor}"/>
 					<c:choose>
-						<c:when test = "${dist.id == 1}">
-						    <c:choose>
-								<c:when test="${av.stockNumber == '-1'}">
-						            <!-- Investigator from 2-tier. -->
-									<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
-									    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
-									</c:if>
-									<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>
-									<c:if test="${mdl.principalInvestigator.emailAddress}">
-									    </a>
-									</c:if>	
-								</c:when>
-								<c:otherwise>
-						    
-								    <!-- Investigator: Populate the PI name in distributor column -->
-									<c:if test="${not empty av.principalInvestigator.emailAddress}">
-									    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
-									</c:if>
-									<c:out value="${av.principalInvestigator.displayName}" escapeXml="false"/>
-									<c:if test="${av.principalInvestigator.emailAddress}">
-									    </a>
-									</c:if>	
-								</c:otherwise>
-							</c:choose>
-						</c:when>
-						<c:when test = "${dist.id == 2}">
-						<!-- Jackson Lab: If stock# not empty link to stock#, else link to main distributor page -->
+							<c:when test = "${dist.id == 1}">
+							    <c:choose>
+									<c:when test="${av.stockNumber == '-1'}">
+							            <!-- Investigator from 2-tier. -->
+										<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
+										    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
+										</c:if>
+										<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>
+										<c:if test="${mdl.principalInvestigator.emailAddress}">
+										    </a>
+										</c:if>	
+									</c:when>
+									<c:otherwise>
+							    
+									    <!-- Investigator: Populate the PI name in distributor column -->
+										<c:if test="${not empty av.principalInvestigator.emailAddress}">
+										    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
+										</c:if>
+										<c:out value="${av.principalInvestigator.displayName}" escapeXml="false"/>
+										<c:if test="${av.principalInvestigator.emailAddress}">
+										    </a>
+										</c:if>	
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							<c:when test = "${dist.id == 2}">
+							<!-- Jackson Lab: If stock# not empty link to stock#, else link to main distributor page -->
+								<c:choose>
+									<c:when test="${not empty av.stockNumber}">						    
+										<a target="_distributor" href="http://jaxmice.jax.org/strain/<c:out value="${av.stockNumber}.html"/>">
+										<c:out value="${dist.name}" escapeXml="false"/>
+									</c:when>							
+									<c:otherwise>
+										<a target="_distributor" href="http://jaxmice.jax.org/index.html"/>
+										<c:out value="${dist.name}" escapeXml="false"/></a>
+									</c:otherwise>							
+								</c:choose>
+							</c:when>
+							<c:when test = "${dist.id == 3}">
+							<!-- MMHC Repo -->
 							<c:choose>
-								<c:when test="${not empty av.stockNumber}">						    
-									<a target="_distributor" href="http://jaxmice.jax.org/strain/00<c:out value="${av.stockNumber}.html"/>">
-									<c:out value="${dist.name}" escapeXml="false"/>
-								</c:when>							
-								<c:otherwise>
-									<a target="_distributor" href="http://jaxmice.jax.org/index.html"/>
+								<c:when test="${not empty av.stockNumber}">												
+									<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}" escapeXml="false"/>">
 									<c:out value="${dist.name}" escapeXml="false"/></a>
+								</c:when>							
+								<c:otherwise>								
+									<a target="_distributor" href="http://mouse.ncifcrf.gov">
+									<c:out value="${dist.name}" escapeXml="false"/></a>								
 								</c:otherwise>							
 							</c:choose>
-						</c:when>
-						<c:when test = "${dist.id == 3}">
-						<!-- MMHC Repo -->
-						<c:choose>
-							<c:when test="${not empty av.stockNumber}">												
-								<a target="_distributor" href="http://mouse.ncifcrf.gov/available_details.asp?ID=<c:out value="${av.stockNumber}" escapeXml="false"/>">
-								<c:out value="${dist.name}" escapeXml="false"/></a>
+							</c:when>						
+							<c:when test = "${dist.id == 4}">
+							<!-- IMSR -->
+								<a target="_distributor" href="http://www.informatics.jax.org/imsr/index.jsp">						
+								<c:out value="${dist.name}" escapeXml="false"/>
+							</c:when>
+							<c:when test = "${dist.id == 5}">
+							<!-- ZFIN Repo -->
+							<c:choose>
+								<c:when test="${not empty av.stockNumber}">	
+									<a target="_distributor" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${av.stockNumber}" escapeXml="false"/>">  
+									<c:out value="${dist.name}" escapeXml="false"/></a>
+								</c:when>							
+								<c:otherwise>								
+									<a target="_distributor" href="http://zfin.org/">
+									<c:out value="${dist.name}" escapeXml="false"/></a>								
+								</c:otherwise>							
+							</c:choose>
 							</c:when>							
-							<c:otherwise>								
-								<a target="_distributor" href="http://mouse.ncifcrf.gov">
-								<c:out value="${dist.name}" escapeXml="false"/></a>								
-							</c:otherwise>							
-						</c:choose>
-						</c:when>
-						<c:when test = "${dist.id == 4}">
-						<!-- IMSR -->
-							<a target="_distributor" href="http://www.informatics.jax.org/imsr/index.jsp">						
-							<c:out value="${dist.name}" escapeXml="false"/>
-						</c:when>
 					</c:choose>
 				</td>
 				<!-- Add stock number if not Investigator (already displayed under distributor)  -->

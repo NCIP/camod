@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.29 2006-09-12 15:34:35 georgeda Exp $
+ * $Id: XenograftPopulateAction.java,v 1.30 2007-03-26 12:02:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2006/09/12 15:34:35  georgeda
+ * Removed work around now that fix is working
+ *
  * Revision 1.28  2006/09/11 19:21:23  georgeda
  * work around for getPreferredDescription bug
  *
@@ -106,6 +109,17 @@ public class XenograftPopulateAction extends BaseAction
             {
                 xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
             }
+            
+            // Set the other flag or the selected ConditioningRegime from the DB
+            if (xeno.getCondRegimeUnctrlVocab() != null)
+            {
+                xenograftForm.setConditioningRegime(Constants.Dropdowns.OTHER_OPTION);
+                xenograftForm.setOtherConditioningRegime(xeno.getCondRegimeUnctrlVocab());
+            }
+            else
+            {
+                xenograftForm.setConditioningRegime(xeno.getConditioningRegime());
+            }            
 
             xenograftForm.setGeneticManipulation(xeno.getGeneticManipulation());
             xenograftForm.setModificationDescription(xeno.getModificationDescription());
@@ -248,6 +262,7 @@ public class XenograftPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONDITIONINGREGIME, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
 
         // Retrieve the Species and Strain set for the AnimalModel (via submitNewModel.jsp)

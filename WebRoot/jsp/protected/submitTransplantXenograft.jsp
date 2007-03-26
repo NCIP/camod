@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.46 2006-11-10 22:01:34 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.47 2007-03-26 12:08:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.46  2006/11/10 22:01:34  pandyas
+ * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
+ *
  * Revision 1.45  2006/10/27 13:01:26  pandyas
  * topic="skip" allows us to remove the onclick for ToolTips while preserving it for the title of each page
  *
@@ -116,6 +119,7 @@
 			disableField(document.forms[0].modificationDescription);
 		}	
 	}
+	
 </SCRIPT>
 
 <html:form action="<%= actionName %>" focus="xenograftName">
@@ -244,6 +248,28 @@
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<html:text styleClass="formFieldUnSized" size="15" property="atccNumber"  />
 			</td>
+	</tr>	
+	
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Conditioning Regime:</label></td>
+		<td class="formField">
+		<br>
+		<label for="field1">- if conditioning regime is not listed, <br>then please select "Other" and then specify it below:</label>
+		<br>
+		<br>
+			<html:select styleClass="formFieldSized" size="1" property="conditioningRegime" onchange="chkOtherCondRegime()">
+				<html:options name="<%= Dropdowns.CONDITIONINGREGIME %>" />
+			</html:select>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">if other Conditioning Regime:</label></td>
+		<td class="formField">
+			<html:text styleClass="formFieldSized"  property="otherConditioningRegime" size="30" />	
+		</td>
 	</tr>		
 
 	<tr>
@@ -356,6 +382,7 @@
 	chkOtherAdminSite();
 	chkObservation();
 	chkOtherSpecies();
+	chkOtherCondRegime();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

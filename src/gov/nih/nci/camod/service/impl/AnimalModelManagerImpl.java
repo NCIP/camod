@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.81 2007-02-23 21:26:07 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.82 2007-03-26 12:01:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.81  2007/02/23 21:26:07  pandyas
+ * Fixed Genotype and Nomenclature - split objects and cleaned up database
+ *
  * Revision 1.80  2007/02/21 18:53:58  pandyas
  * Still working on nomenclature bug - two entries are in Db, new one displays (better but not right yet)
  *
@@ -648,6 +651,11 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		} else {
 			// used to setSpecies in AnimalModel now used to setStrain in 2.1
 			inAnimalModel.setStrain(theNewStrain);
+		}
+		
+		// Set developmental stage
+		if (inModelCharacteristicsData.getDevelopmentalStage() != null && inModelCharacteristicsData.getDevelopmentalStage().length() > 0){
+			inAnimalModel.setDevelopmentalStage(inModelCharacteristicsData.getDevelopmentalStage());
 		}
 
 		// Genotype Clear previous entry - add new

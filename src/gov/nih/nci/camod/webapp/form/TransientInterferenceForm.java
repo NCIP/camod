@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: TransientInterferenceForm.java,v 1.2 2006-10-23 14:17:10 pandyas Exp $
+ * $Id: TransientInterferenceForm.java,v 1.3 2007-03-26 12:03:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/10/23 14:17:10  pandyas
+ * changed to conform to conceptCode format in all other classes
+ *
  * Revision 1.1  2006/10/17 16:10:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -40,6 +43,7 @@ public class TransientInterferenceForm extends BaseForm implements Serializable,
     protected String otherVisualLigand;
     protected String conceptCode;
 	protected String comments;
+	protected String site;	
 	
     /**
      * @return Returns the source
@@ -246,5 +250,13 @@ public class TransientInterferenceForm extends BaseForm implements Serializable,
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
 	}   
 }

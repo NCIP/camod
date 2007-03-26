@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.14 2006-08-17 18:10:05 pandyas Exp $
+ *  $Id: SubmitAction.java,v 1.15 2007-03-26 12:02:30 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.14  2006/08/17 18:10:05  pandyas
+ *  Defect# 410: Externalize properties files - Code changes to get properties
+ *
  *  Revision 1.13  2005/12/02 16:17:09  georgeda
  *  Defect #247, set the formdata in the session
  *
@@ -24,6 +27,7 @@ package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.webapp.form.AnimalModelStateForm;
 
@@ -57,9 +61,15 @@ public class SubmitAction extends BaseAction {
 
         try {
             AnimalModel am = animalModelManager.get(modelID);
+            String speciesName = am.getStrain().getSpecies().getCommonName();
+            log.info("setModelConstants inside try speciesName: " + speciesName);
+            
+            // Set animal model species up front for genetic description (mgi, zfin, or rgd id)
+            request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, speciesName);            
 
             request.getSession().setAttribute(Constants.MODELID, am.getId().toString());
             request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
+            log.info("Constants.MODELDESCRIPTOR: " + request.getSession().getAttribute(Constants.MODELDESCRIPTOR));
             request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
 
             AnimalModelStateForm theForm = new AnimalModelStateForm();

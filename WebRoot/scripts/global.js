@@ -42,6 +42,14 @@ function chkOtherAdminSite() {
     chkOther(site, otherSite);  	
 }
 
+function chkOtherCondRegime() {
+
+	var regime = document.forms[0].conditioningRegime;
+	var otherRegime = document.forms[0].otherConditioningRegime;
+	
+    chkOther(regime, otherRegime);  	
+}
+
 function chkOtherGraft() {
 
 	var site = document.forms[0].graftType;

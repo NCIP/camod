@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.21 2007-02-23 21:20:08 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.22 2007-03-26 12:02:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/02/23 21:20:08  pandyas
+ * Fixed Genotype and Nomenclature - split objects and cleaned up database
+ *
  * Revision 1.20  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -123,7 +126,7 @@ public final class AnimalModelAction extends BaseAction {
 			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 			AnimalModel theAnimalModel = theAnimalModelManager.create(
 					theModelChar, theUsername);
-
+			
 			// Set the animal model to the default state
 			if (theAnimalModel.getState() == null) {
 
@@ -147,6 +150,9 @@ public final class AnimalModelAction extends BaseAction {
 					theAnimalModel.getModelDescriptor());
 			request.getSession().setAttribute(Constants.MODELSTATUS,
 					theAnimalModel.getState());
+			// Reset the species common name to use on the Genetic Description submission screens (mgi, zfin, rgd id's)
+			request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, 
+					theAnimalModel.getStrain().getSpecies().getCommonName());
 
 			// Add a message to be displayed in submitOverview.jsp saying you've
 			// created a new model successfully

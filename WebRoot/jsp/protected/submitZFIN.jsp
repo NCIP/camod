@@ -15,27 +15,27 @@
 	//if aAvailabilityID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
-	String actionName = "MMHCCRepoAction.do?method=save";
+	String actionName = "ZFINAction.do?method=save";
 	
-	if ( aAvailabilityID != null && aAvailabilityID.length() > 0 && isDeleted == null) {
-		actionName = "MMHCCRepoAction.do?method=edit";
+    if ( aAvailabilityID != null && aAvailabilityID.length() > 0 && isDeleted == null) {
+		actionName = "ZFINAction.do?method=edit";
 	}
 	else {
-	    aAvailabilityID = "";
+		aAvailabilityID = "";
 	}
 %>
 
 <html:form action="<%= actionName %>" focus="name">
 
-<!-- submitMMHCCRepo.jsp -->
+<!-- submitZFIN.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
-	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<TABLE cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 <!-- -->
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	<TABLE  cellpadding="3" cellspacing="0" border="0" align="left">
 	
 	<tr>
 	    <html:errors/>
@@ -43,30 +43,30 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Available from  MMHCC Repository 
-			<camod:cshelp topic="MMHCC_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>					
+		<td class="formTitle" height="20" colspan="3">Available from ZFIN (Zebrafish Information Network) 
+			<camod:cshelp topic="ZFIN_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 	
 	<tr>
 			<td class="formRequiredNotice" width="3">*</td>
 			<td class="formRequiredLabel"><label for="field1">Strain Name:</label>
 			</td>
-			<td class="formField">
+			<td class="formField">			
 			<html:hidden property="source" />		
-				<html:text styleClass="formFieldUnSized" size="40" property="name"  />
+				<html:text styleClass="formFieldUnSized" size="40" property="name" />
 			</td>
-	</tr>
+	</tr>	
 	
-    <tr>
-        <td class="formRequiredNotice" width="5">&nbsp;</td>
-        <td class="formLabel">Strain Number:
-        </td>
-		<td class="formField">
-            <input type=button value="Find Info" onClick="myRef = window.open('http://mouse.ncifcrf.gov','mywin',
+        <tr>
+            <td class="formRequiredNotice" width="5">&nbsp;</td>
+            <td class="formLabel">ZFIN Identifier:
+            </td>
+			<td class="formField">
+				<input type=button value="Find Info" onClick="myRef = window.open('http://zebrafish.org/zirc/home/guide.php','mywin',
 				'left=20,top=20,width=800,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
-			<html:text styleClass="formFieldSized" size="30" property="stockNumber"  />			
-		</td>
-    </tr>
+				<html:text styleClass="formFieldSized" size="30" property="stockNumber"  />			
+			</td>
+        </tr>
         
 	<tr>
 		<td align="right" colspan="3">
@@ -81,12 +81,12 @@
 					  	  <bean:message key="button.reset"/>
 	  				  </html:reset>
 	  				  
-						<c:if test="${not empty aAvailabilityID}">
-							<html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton"
-								onclick="return confirm('Are you sure you want to delete?');">
-								<bean:message key="button.delete" />
-							</html:submit>
-						</c:if>
+					  <c:if test="${not empty aAvailabilityID}">
+						  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton"
+						  	onclick="return confirm('Are you sure you want to delete?');">
+						  	  <bean:message key="button.delete" />
+					  	  </html:submit>
+					  </c:if>
 	  				  
 					  <!--  Done this way since html:hidden doesn't seem to work correctly -->
   				  	  <input type="hidden" name="aAvailabilityID" value="<%= aAvailabilityID %>">	  				  
@@ -103,16 +103,3 @@
 </tr></td></TABLE>
 
 <%@ include file="/jsp/footer.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-

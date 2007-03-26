@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityPopulateAction.java,v 1.7 2006-11-09 17:23:01 pandyas Exp $
+ * $Id: AvailabilityPopulateAction.java,v 1.8 2007-03-26 12:02:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/11/09 17:23:01  pandyas
+ * Commented out debug code
+ *
  * Revision 1.6  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -75,7 +78,7 @@ public class AvailabilityPopulateAction extends BaseAction {
 	}
 
 	/**
-	 * Populate the dropdown menus for 4 submission screens for Animal
+	 * Populate the dropdown menus for all submission screens for Animal
 	 * Availability
 	 * 
 	 * @param mapping

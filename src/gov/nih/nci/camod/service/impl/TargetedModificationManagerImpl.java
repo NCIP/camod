@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.26 2006-08-17 18:20:33 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.27 2007-03-26 12:01:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2006/08/17 18:20:33  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.25  2006/05/08 13:33:40  georgeda
  * Clean up warnings
  *
@@ -248,26 +251,31 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		// MGI Number
 		// Check for exisiting MutationIdentifier
 		MutationIdentifier inMutationIdentifier = null;
-		if (inTargetedModification.getMutationIdentifier() != null)
+		if (inTargetedModification.getMutationIdentifier() != null) {
 			inMutationIdentifier = inTargetedModification
 					.getMutationIdentifier();
-		else
-			inMutationIdentifier = new MutationIdentifier();
-
-		if (inTargetedModificationData.getMgiNumber() == null
-				|| inTargetedModificationData.getMgiNumber().equals("")) {
-			inTargetedModification.setMutationIdentifier(null);
 		} else {
-			String strMGINumber = inTargetedModificationData.getMgiNumber()
-					.trim();
-			Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
-			Matcher m = p.matcher(strMGINumber);
-			if (m.matches() && strMGINumber != null && !strMGINumber.equals("")) {
-				inMutationIdentifier.setMgiNumber(strMGINumber);
-				inTargetedModification
-						.setMutationIdentifier(inMutationIdentifier);
-			}
+			inMutationIdentifier = new MutationIdentifier();
 		}
+
+		if (inTargetedModificationData.getMgiNumber() != null) {
+	
+			inMutationIdentifier.setMgiNumber(inTargetedModificationData
+					.getMgiNumber());
+			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inTargetedModificationData.getZfinNumber() != null) {
+	
+			inMutationIdentifier.setZfinNumber(inTargetedModificationData
+					.getZfinNumber());
+			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inTargetedModificationData.getRgdNumber() != null) {
+	
+			inMutationIdentifier.setRgdNumber(inTargetedModificationData
+					.getRgdNumber());
+			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
+		}	
 
 		inTargetedModification.setComments(inTargetedModificationData
 				.getComments());

@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.11 2006-05-04 19:27:45 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.12 2007-03-26 12:01:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/05/04 19:27:45  pandyas
+ * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
+ *
  * Revision 1.10  2006/04/20 18:12:11  pandyas
  * Modified save of Genetic Alteration
  *
@@ -120,22 +123,26 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
             inMutationIdentifier = inSpontaneousMutation.getMutationIdentifier();
         else
             inMutationIdentifier = new MutationIdentifier();
+        
+		if (inSpontaneousMutationData.getMgiNumber() != null) {
 
-        if (inSpontaneousMutationData.getMgiNumber() == null || inSpontaneousMutationData.getMgiNumber().equals(""))
-        {
-            inSpontaneousMutation.setMutationIdentifier(null);
-        }
-        else
-        {
-            String strMGINumber = inSpontaneousMutationData.getMgiNumber().trim();
-            Pattern p = Pattern.compile("[0-9]{" + strMGINumber.length() + "}");
-            Matcher m = p.matcher(strMGINumber);
-            if (m.matches() && strMGINumber != null && !strMGINumber.equals(""))
-            {
-                inMutationIdentifier.setMgiNumber(strMGINumber);
-                inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
-            }
-        }
+			inMutationIdentifier.setMgiNumber(inSpontaneousMutationData
+					.getMgiNumber());
+			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inSpontaneousMutationData.getZfinNumber() != null ) {
+			inMutationIdentifier.setZfinNumber(inSpontaneousMutationData
+					.getZfinNumber());
+			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+		}
+		if (inSpontaneousMutationData.getRgdNumber() != null) {
+
+			inMutationIdentifier.setRgdNumber(inSpontaneousMutationData
+					.getRgdNumber());
+			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
+		}
+
+
 
         log.trace("Exiting populateSpontaneousMutation");
     }

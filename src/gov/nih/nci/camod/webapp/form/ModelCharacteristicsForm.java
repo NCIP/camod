@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModelCharacteristicsForm.java,v 1.9 2006-10-17 16:10:47 pandyas Exp $
+ * $Id: ModelCharacteristicsForm.java,v 1.10 2007-03-26 12:03:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/10/17 16:10:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.8  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -53,7 +56,8 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
     protected String releaseDate = "immediately";
     protected String calendarReleaseDate;
     protected String genotype;
-    protected String nomenclature;    
+    protected String nomenclature;
+    protected String developmentalStage;
 
 
     public ModelCharacteristicsForm() {
@@ -201,5 +205,13 @@ public class ModelCharacteristicsForm extends BaseForm implements ModelCharacter
 
     public void setNomenclature(String nomenclature) {
         this.nomenclature = nomenclature;
-    }     
+    }
+
+	public String getDevelopmentalStage() {
+		return developmentalStage;
+	}
+
+	public void setDevelopmentalStage(String developmentalStage) {
+		this.developmentalStage = developmentalStage;
+	}     
 }

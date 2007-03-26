@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationForm.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: SpontaneousMutationForm.java,v 1.6 2007-03-26 12:03:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -24,7 +27,9 @@ public class SpontaneousMutationForm extends BaseForm implements Serializable, S
     {}
 
     protected String name;
-    protected String mgiNumber;
+	protected String mgiNumber;
+	protected String zfinNumber;
+	protected String rgdNumber;	
     protected String comments;
     protected String observation;
     protected String methodOfObservation;
@@ -125,4 +130,20 @@ public class SpontaneousMutationForm extends BaseForm implements Serializable, S
     {
         this.geneId = geneId;
     }
+
+	public String getRgdNumber() {
+		return rgdNumber;
+	}
+
+	public void setRgdNumber(String rgdNumber) {
+		this.rgdNumber = rgdNumber;
+	}
+
+	public String getZfinNumber() {
+		return zfinNumber;
+	}
+
+	public void setZfinNumber(String zfinNumber) {
+		this.zfinNumber = zfinNumber;
+	}
 }

@@ -94,6 +94,20 @@
 			<c:out value="${xt.atccNumber}" escapeXml="false"/>&nbsp;</td>   		
 		</tr>
 
+		<tr>
+			<td class="GreyBox"><b>Conditioning Regime</b></td>
+			<td class="GreyBoxRightEnd">
+			<c:choose>
+				<c:when test="${empty xt.conditioningRegime}">
+					<c:out value="${xt.condRegimeUnctrlVocab}" escapeXml="false"/>&nbsp;
+				</c:when>
+				<c:otherwise>
+					<c:out value="${xt.conditioningRegime}" escapeXml="false"/>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			</td>
+		</tr>		
+
 		<tr>		
 			<td class="WhiteBox"><b>Genetic Alteration:</b></td>
 			<td class="WhiteBoxRightEnd"><c:out value="${xt.geneticManipulation}" escapeXml="false"/>&nbsp;</td>

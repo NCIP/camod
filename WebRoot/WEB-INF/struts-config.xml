@@ -264,6 +264,10 @@
 		<forward
 			name="registerSuccess"
 			path="/jsp/registerSuccess.jsp"></forward>
+			
+		<forward
+			name="searchAdvanced"
+			path="/jsp/searchAdvanced.jsp"></forward>			
 		
 		<forward
 			name="searchMenu"
@@ -375,10 +379,6 @@
 			path="/jsp/protected/subAdminMenu.jsp"></forward>
 		
 		<forward
-			name="subSubmitMenu"
-			path="/jsp/protected/subSubmitMenu.jsp"></forward>
-		
-		<forward
 			name="submitAssocExpression"
 			path="/jsp/protected/submitAssocExpression.jsp"></forward>
 		
@@ -453,6 +453,10 @@
 		<forward
 			name="submitMenu"
 			path="/jsp/protected/submitMenu.jsp"></forward>
+			
+		<forward
+			name="subSubmitMenu"
+			path="/jsp/protected/subSubmitMenu.jsp"></forward>			
 		
 		<forward
 			name="submitMicroarrayData"
@@ -559,7 +563,11 @@
 			
 		<forward
 			name="yeastStrainsStage2"
-			path="/jsp/yeastStrainsStage2.jsp"></forward>										        		
+			path="/jsp/yeastStrainsStage2.jsp"></forward>	
+			
+		<forward
+			name="submitZFIN"
+			path="/jsp/protected/submitZFIN.jsp"></forward>												        		
                 
       </global-forwards>
 
@@ -641,12 +649,6 @@
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
-			path="/searchAdvanced"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/searchAdvanced.jsp">
-			<set-property property="secure" value="false"/>
-		</action>	
-		<action
 			path="/searchSimple"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/searchSimple.jsp">
@@ -656,12 +658,6 @@
 			path="/subAdminMenu"
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/subAdminMenu.jsp">
-			<set-property property="secure" value="false"/>
-		</action>
-		<action
-			path="/subSubmitMenu"
-			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/subSubmitMenu.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
@@ -798,11 +794,11 @@
 			<set-property property="secure" value="false"/>
         </action>
 		<action
-			path="/submitMenu"
+			path="/submitZFIN"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitMenu.jsp">
+			parameter="/jsp/protected/submitZFIN.jsp">
 			<set-property property="secure" value="false"/>
-		</action>
+        </action>        
 		<action
 			path="/searchSavedQueries"
 			type="org.apache.struts.actions.ForwardAction"
@@ -820,7 +816,13 @@
 			type="org.apache.struts.actions.ForwardAction"
 			parameter="/jsp/protected/submitMenu.jsp">
 			<set-property property="secure" value="false"/>
-		</action>				
+		</action>
+		<action
+			path="/subSubmitMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/jsp/protected/subSubmitMenu.jsp">
+			<set-property property="secure" value="false"/>
+		</action>						
 		<action
 			path="/submitMicroarrayData"
 			type="org.apache.struts.actions.ForwardAction"
@@ -1391,7 +1393,34 @@
     		name="next"
     		path="/submitIMSR.do">
     	 </forward>		
-     </action>     
+     </action> 
+     
+     <action path="/ZFINAction"
+	        type="gov.nih.nci.camod.webapp.action.AvailabilityAction"
+	        name="availabilityForm"
+	        scope="request"
+	        parameter="method" 	     
+	        validate="true"
+	        input="input">
+	    <set-property property="secure" value="false" />
+	    <forward
+            name="input"
+            path="/submitZFIN.do">
+        </forward>	
+     </action>    
+    
+   <action path="/ZFINPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.AvailabilityPopulateAction"
+    		name="availabilityForm"    		
+            scope="request"
+            parameter="method"            
+			validate="false">
+		 <set-property property="secure" value="false" />
+         <forward 
+    		name="next"
+    		path="/submitZFIN.do">
+    	 </forward>		
+     </action>         
 
       
      <!-- CellLineForm -->
@@ -1667,23 +1696,7 @@
             path="/submitHormone.do">
         </forward>     	  	
     </action>
-       
-     
-   	 <!-- HormoneForm -->
-   	 <action path="/HormoneAction"
-	        type="gov.nih.nci.camod.webapp.action.HormoneAction"
-	        name="hormoneForm"
-	        scope="request"
-	        parameter="method" 	     
-	        validate="true"
-	        input="input">
-	    <set-property property="secure" value="false" />
-	    <forward
-            name="input"
-            path="/submitHormone.do">
-        </forward>     	  	
-    </action>
-    
+
     <action path="/HormonePopulateAction"
     		type="gov.nih.nci.camod.webapp.action.HormonePopulateAction"
     		name="hormoneForm"    		
@@ -2286,17 +2299,7 @@
     	 </forward>	
      </action>
      
-     <action 
-         path="/AdminEditUserRolesAction"  
-         type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesAction" 
-         name="rolesAssignmentForm"
-         parameter="protected">
-         <set-property property="secure" value="false" />
-         <forward 
-    		name="next"
-    		path="/AdminRolesAssignmentPopulateAction.do">
-    	 </forward>  
-     </action>
+
      
      <action 
          path="/AdminUserManagementPopulateAction"  
@@ -2320,12 +2323,12 @@
          type="gov.nih.nci.camod.webapp.action.AdminEditUserRolesAction" 
          name="rolesAssignmentForm"
          parameter="protected">
-         <set-property property="secure" value="false" />	
+         <set-property property="secure" value="false" />
          <forward 
     		name="next"
     		path="/AdminRolesAssignmentPopulateAction.do">
     	 </forward>  
-     </action>
+     </action>     
  
      <action 
          path="/AdminEditUserPopulateAction"  
@@ -2747,6 +2750,7 @@
         </forward>             	
     </action>
 
+	<!-- Main forward used in saveSearchQueries, subSearchMenu to redirect the links -->
     <action path="/AdvancedSearchPopulateAction"
     		type="gov.nih.nci.camod.webapp.action.AdvancedSearchPopulateAction"
     		name="searchForm"    		
@@ -2758,7 +2762,9 @@
             name="next"
             path="/searchAdvanced.do">
         </forward>	
-    </action>               
+    </action> 
+
+ 
     
   </action-mappings>
 

@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.43 2006-11-09 17:20:25 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.44 2007-03-26 12:02:31 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.43  2006/11/09 17:20:25  pandyas
+ *  Commented out debug code
+ *
  *  Revision 1.42  2006/10/17 16:11:00  pandyas
  *  modified during development of caMOD 2.2 - various
  *
@@ -132,6 +135,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 
 		System.out
 				.println("<AnimalModelTreePopulateAction populate> Entering... ");
+		String speciesName = (String) request.getSession().getAttribute(Constants.AMMODELSPECIESCOMMONNAME);
+		log.info("speciesName: " + speciesName);
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(
@@ -218,6 +223,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			List<AnimalAvailability> jacksonLabList = new ArrayList<AnimalAvailability>();
 			List<AnimalAvailability> mmhccList = new ArrayList<AnimalAvailability>();
 			List<AnimalAvailability> imsrList = new ArrayList<AnimalAvailability>();
+			List<AnimalAvailability> zfinList = new ArrayList<AnimalAvailability>();			
 
 			while (it.hasNext()) {
 				AnimalAvailability availability = (AnimalAvailability) it
@@ -248,6 +254,13 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 						//System.out.println("\tAdded IMSR Repository Availability = "+ availability);
 						imsrList.add(availability);
 					}
+					if (availability.getAnimalDistributor().getName().equals(
+					"ZFIN")) {
+
+						//System.out.println("\tAdded IMSR Repository Availability = "+ availability);
+						zfinList.add(availability);
+					}					
+					
 				}
 			}
 
@@ -472,6 +485,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					mmhccList);
 			request.getSession().setAttribute(Constants.Submit.IMSR_LIST,
 					imsrList);
+			request.getSession().setAttribute(Constants.Submit.ZFIN_LIST,
+					zfinList);			
 
 			/* Histopathology Lists */
 			request.getSession().setAttribute(
