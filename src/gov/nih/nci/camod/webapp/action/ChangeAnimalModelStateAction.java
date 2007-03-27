@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStateAction.java,v 1.11 2006-10-17 16:11:00 pandyas Exp $
+ *  $Id: ChangeAnimalModelStateAction.java,v 1.12 2007-03-27 18:42:32 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.11  2006/10/17 16:11:00  pandyas
+ *  modified during development of caMOD 2.2 - various
+ *
  *  Revision 1.10  2006/05/15 15:44:27  georgeda
  *  Cleaned up contact info management
  *
@@ -66,17 +69,13 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 				// Get the animal model
 				AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
 				AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+				
+				// Model id set in SubmitAction.java for all models
+				theModelId = (String)inRequest.getSession().getAttribute(Constants.MODELID);
+				log.info("modelid as constant " + theModelId);				
 
-				// get model id from adminRoles.jsp and submitOverview.jsp
-				// (complete)
-				if (theForm.getModelId() == null) {
-					// get model id from submitOverview.jsp (back to complete or
-					// screened-approved), inactive
-					theModelId = inRequest.getParameter("aModelID");
-					log.info("get aModelId(): " + theModelId);
-					// set the form so value is in one place for all code
-					theForm.setModelId(theModelId);
-				}
+				// get model id from adminRoles.jsp and submitOverview.jsp (complete)
+				theForm.setModelId(theModelId);
 
 				// get the model id from the form in submitOverview options
 				AnimalModel theAnimalModel = theAnimalModelManager.get(theForm

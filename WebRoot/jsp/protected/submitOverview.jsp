@@ -10,9 +10,6 @@
 <%@ page import='java.util.List' %>
 <%@ page buffer="32kb"%>
 
-	<c:set var="speciesName" scope="session" value="modelspeciescommonname"/>
-	<%= session.getAttribute("modelspeciescommonname") %>
-
 <!-- submitOverview.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -53,7 +50,7 @@
                     </td>
                     <td align="right" class="resultsBoxGreyEnd2">
                         <html:form action="ChangeAnimalModelToCompleteAction">
-                            <html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
+                            <html:hidden property="modelId" value="<%= Constants.Parameters.MODELID%>" />
                             <html:hidden property="modelDescriptor" name="<%= Constants.FORMDATA %>" />
                             <html:hidden property="assignedTo" name="<%= Constants.FORMDATA %>" />
                             <html:hidden property="event" name="<%= Constants.FORMDATA %>" />
@@ -95,8 +92,7 @@
 	    			<!-- Do not show Complete-not screened functions if the model is Complete-not screened or Incomplete -->
 	                <td align="left" colspan="1" class="resultsBoxGreyNoEnd">
 	                	<html:form action="ChangeAnimalModelToCompleteNotScreenedAction">
-	                    	<html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
-	                    	<input type="hidden" name="modelId" value="<%= Constants.Parameters.MODELID%>"/>
+	                    	<input type="hidden" name="modelId" value="<%= Constants.MODELID%>"/>
 	                    	<input type="hidden" name="aEvent" value="<%= Constants.Admin.Actions.BACK_TO_COMPLETE%>"/>      
 	                    	<html:submit>Complete-not screened</html:submit>						        
 	                	</html:form>				                                
@@ -111,8 +107,7 @@
                     <logic:notEqual name="<%= Constants.MODELSTATUS %>" value="Inactive">
                     <td align="left" colspan="1" class="resultsBoxGreyEnd">
                     	<html:form action="ChangeAnimalModelToScreenedApprovedAction">
-                    		<html:hidden property="modelId" name="<%= Constants.FORMDATA %>" />
-                    		<input type="hidden" name="modelId" value="<%= Constants.Parameters.MODELID%>"/>
+                    		<input type="hidden" name="modelId" value="<%= Constants.MODELID%>"/>
                     		<input type="hidden" name="aEvent" value="<%= Constants.Admin.Actions.BACK_TO_SCREENER_APPROVE%>"/>                    	
                             <html:submit>Screened - Approved</html:submit> 
                        	</html:form>                    
