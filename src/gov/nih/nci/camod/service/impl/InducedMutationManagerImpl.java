@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.24 2007-03-26 12:01:11 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.25 2007-03-27 18:37:31 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/03/26 12:01:11  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.23  2006/08/17 18:25:42  pandyas
  * Defect# 410: Externalize properties files - Code Changes to send mail method
  *
@@ -229,28 +232,21 @@ public class InducedMutationManagerImpl extends BaseManager implements
 			inMutationIdentifier = new MutationIdentifier();
 		}
 
-		if (inInducedMutationData.getMgiNumber() == null
-				|| inInducedMutationData.getMgiNumber().equals("")) {
-			inInducedMutation.setMutationIdentifier(null);
-		} else {
+
+		if (inInducedMutationData.getMgiNumber() != null) {
 			inMutationIdentifier.setMgiNumber(inInducedMutationData
-					.getMgiNumber());
+					.getMgiNumber().trim());
 			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inInducedMutationData.getZfinNumber() == null
-				|| inInducedMutationData.getZfinNumber().equals("")) {
-			inInducedMutation.setMutationIdentifier(null);
-		} else {
+		if (inInducedMutationData.getZfinNumber() != null ) {
 			inMutationIdentifier.setZfinNumber(inInducedMutationData
-					.getZfinNumber());
+					.getZfinNumber().trim());
 			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inInducedMutationData.getRgdNumber() == null
-				|| inInducedMutationData.getRgdNumber().equals("")) {
-			inInducedMutation.setMutationIdentifier(null);
-		} else {
+		if (inInducedMutationData.getRgdNumber() != null) {
+
 			inMutationIdentifier.setRgdNumber(inInducedMutationData
-					.getRgdNumber());
+					.getRgdNumber().trim());
 			inInducedMutation.setMutationIdentifier(inMutationIdentifier);
 		}		
 

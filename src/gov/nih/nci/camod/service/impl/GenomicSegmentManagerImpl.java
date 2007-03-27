@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.27 2007-03-26 12:01:11 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.28 2007-03-27 18:37:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/03/26 12:01:11  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.26  2006/08/17 18:26:52  pandyas
  * Defect# 410: Externalize properties files - Code Changes to send mail method
  *
@@ -199,19 +202,19 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 		if (inGenomicSegmentData.getMgiNumber() != null) {
 
 			inMutationIdentifier.setMgiNumber(inGenomicSegmentData
-					.getMgiNumber());
+					.getMgiNumber().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inGenomicSegmentData.getZfinNumber() != null) {
 
 			inMutationIdentifier.setZfinNumber(inGenomicSegmentData
-					.getZfinNumber());
+					.getZfinNumber().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inGenomicSegmentData.getRgdNumber() != null) {
 
 			inMutationIdentifier.setRgdNumber(inGenomicSegmentData
-					.getRgdNumber());
+					.getRgdNumber().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
 		}		
 		

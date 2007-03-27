@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.27 2007-03-26 12:01:11 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.28 2007-03-27 18:38:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/03/26 12:01:11  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.26  2006/08/17 18:20:33  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -261,19 +264,19 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		if (inTargetedModificationData.getMgiNumber() != null) {
 	
 			inMutationIdentifier.setMgiNumber(inTargetedModificationData
-					.getMgiNumber());
+					.getMgiNumber().trim());
 			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inTargetedModificationData.getZfinNumber() != null) {
 	
 			inMutationIdentifier.setZfinNumber(inTargetedModificationData
-					.getZfinNumber());
+					.getZfinNumber().trim());
 			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inTargetedModificationData.getRgdNumber() != null) {
 	
 			inMutationIdentifier.setRgdNumber(inTargetedModificationData
-					.getRgdNumber());
+					.getRgdNumber().trim());
 			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
 		}	
 

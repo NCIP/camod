@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.35 2007-03-26 12:01:11 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.36 2007-03-27 18:37:23 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2007/03/26 12:01:11  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.34  2006/10/17 16:13:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -296,18 +299,18 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		if (inEngineeredTransgeneData.getMgiNumber() != null) {
 
 			inMutationIdentifier.setMgiNumber(inEngineeredTransgeneData
-					.getMgiNumber());
+					.getMgiNumber().trim());
 			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inEngineeredTransgeneData.getZfinNumber() != null ) {
 			inMutationIdentifier.setZfinNumber(inEngineeredTransgeneData
-					.getZfinNumber());
+					.getZfinNumber().trim());
 			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inEngineeredTransgeneData.getRgdNumber() != null) {
 
 			inMutationIdentifier.setRgdNumber(inEngineeredTransgeneData
-					.getRgdNumber());
+					.getRgdNumber().trim());
 			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
 		}		
 

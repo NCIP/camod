@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.12 2007-03-26 12:01:11 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.13 2007-03-27 18:38:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/03/26 12:01:11  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.11  2006/05/04 19:27:45  pandyas
  * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
  *
@@ -127,18 +130,18 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
 		if (inSpontaneousMutationData.getMgiNumber() != null) {
 
 			inMutationIdentifier.setMgiNumber(inSpontaneousMutationData
-					.getMgiNumber());
+					.getMgiNumber().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inSpontaneousMutationData.getZfinNumber() != null ) {
 			inMutationIdentifier.setZfinNumber(inSpontaneousMutationData
-					.getZfinNumber());
+					.getZfinNumber().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
 		if (inSpontaneousMutationData.getRgdNumber() != null) {
 
 			inMutationIdentifier.setRgdNumber(inSpontaneousMutationData
-					.getRgdNumber());
+					.getRgdNumber().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
 
