@@ -97,6 +97,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("submitInvestigator.jsp") || 
                         jspName.equals("submitMorpholino.jsp") ||
                         jspName.equals("submitSirna.jsp") ||
+                        jspName.equals("submitZFIN.jsp") ||                        
 						jspName.equals("submitIMSR.jsp") ) 
                 {
 					return "subSubmitMenu.jsp";
