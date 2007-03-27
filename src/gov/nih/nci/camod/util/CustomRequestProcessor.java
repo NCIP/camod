@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CustomRequestProcessor.java,v 1.8 2005-12-06 19:51:32 georgeda Exp $
+ * $Id: CustomRequestProcessor.java,v 1.9 2007-03-27 18:40:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/12/06 19:51:32  georgeda
+ * Defect #255 - add SSL
+ *
  *
  */
 
@@ -51,7 +54,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
             String user = (String) session.getAttribute(Constants.CURRENTUSER);
 
             if (user == null) {
-                log.info("User not authorized.  Sending to login page");
+                log.debug("User not authorized.  Sending to login page");
                 request.getSession().setAttribute(Constants.NOTLOGGEDIN, "true");
                 return mapping.findForward("login");
             }
@@ -99,7 +102,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
 
         ActionForward theForward = super.processException(request, response, exception, form, mapping);
 
-        log.info("ActionForward:" + theForward);
+        log.debug("ActionForward:" + theForward);
 
         log.trace("Exiting processException");
         return theForward;
@@ -111,7 +114,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
         log.trace("Entering processValidate");
 
         boolean validate = super.processValidate(request, response, form, mapping);
-        log.info("Validate result: " + validate);
+        log.debug("Validate result: " + validate);
 
         log.trace("Exiting validate");
 
@@ -124,7 +127,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
         log.trace("Entering processForward");
 
         boolean forward = super.processForward(request, response, mapping);
-        log.info("Forward result: " + forward);
+        log.debug("Forward result: " + forward);
 
         log.trace("Exiting processForward");
 
@@ -138,7 +141,7 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
 
         super.processForwardConfig(request, response, config);
 
-        log.info("The ForwardConfig: " + config);
+        log.debug("The ForwardConfig: " + config);
         log.trace("Exiting processForwardConfig");
     }
 }
