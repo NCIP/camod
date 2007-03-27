@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.95 2006-12-28 16:02:07 pandyas Exp $
+ * $Id: Constants.java,v 1.96 2007-03-27 18:57:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.95  2006/12/28 16:02:07  pandyas
+ * Reverted to previous version - changed CE on adv search page
+ *
  * Revision 1.93  2006/11/01 21:19:14  pandyas
  * added constant for state
  *
@@ -369,6 +372,13 @@ public class Constants {
         public static final String TOXICITYGRADESDROP = "ToxicityGrades.txt";
 
         public static final String CLINICALMARKERSDROP = "ClinicalMarkers.txt";
+        
+        public static final String DEVELOPMENTALSTAGES = "DevelopmentalStages.txt";
+        
+        public static final String CONDITIONINGREGIME = "ConditioningRegime.txt";
+        
+        // Site of Morpholino used for site attribute in TransientInterference object 
+        public static final String SITEOFMORPHOLINO = "SiteOfMorpholino.txt";
 
 
 
@@ -471,7 +481,7 @@ public class Constants {
         public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";        
 
         // These two are used to display the species and strain currently in the
-        // AnimalModelCharacteristics
+        // AnimalModelCharacteristics - Xenograft screen
         public static final String MODELSPECIES = "modelspecies";
 
         public static final String MODELSTRAIN = "modelstrain";
@@ -595,6 +605,10 @@ public class Constants {
     public static final String MODELDESCRIPTOR = "modeldescriptor";
 
     public static final String MODELSTATUS = "modelstatus";
+    
+    // This constants stores the animal model species common name for Genetic Description
+    // submission screens - must display mgi, or zfin, or rgd identifier - set in submitAction
+    public static final String AMMODELSPECIESCOMMONNAME = "modelspeciescommonname";    
 
     /**
      * Used to prepopulate forms
@@ -775,6 +789,8 @@ public class Constants {
         public static final String JACKSONLAB_LIST = "jacksonlab_list";
         public static final String MMHCC_LIST = "mmhcc_list";
         public static final String IMSR_LIST = "imsr_list";
+        public static final String ZFIN_LIST = "zfin_list";
+        
         /**
          * Used to store animal model availability for the Transient Interference 
          * section of the sidebar menu of the submission section
