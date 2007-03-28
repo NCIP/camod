@@ -1,6 +1,6 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.11 2006-12-28 16:03:06 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.12 2007-03-28 18:22:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
  * Revision 1.9  2006/10/17 16:11:00  pandyas
@@ -21,12 +21,15 @@
 
 package gov.nih.nci.camod.webapp.action;
 
+import java.util.List;
 import java.util.Set;
 
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.service.SavedQueryManager;
+import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import gov.nih.nci.camod.webapp.form.SearchForm;
+import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import gov.nih.nci.camod.Constants;
 
@@ -94,23 +97,53 @@ public class AdvancedSearchPopulateAction extends BaseAction {
                 Constants.Dropdowns.ADD_BLANK);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
                 Constants.Dropdowns.ADD_BLANK_OPTION);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CHEMICALDRUGQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GROWTHFACTORQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.HORMONEQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.RADIATIONQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VIRUSQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SURGERYQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);
+
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);        
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.EXTERNALSOURCEQUERYDROP,
-                Constants.Dropdowns.ADD_BLANK);        
+                Constants.Dropdowns.ADD_BLANK);   
 
+        // The dropdown will be empty initially - populates whole list
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CARCINOGENICAGENTSQUERYDROP, 
+        		Constants.Dropdowns.ADD_BLANK);
+    
+        // Added so customized search will find selected name to display and allow other queries without CE to run
+        if (theSearchForm.getCarcinogenicIntervention() != null){
+        	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, 
+        		theSearchForm.getCarcinogenicIntervention());        
+        } else {
+        	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, 
+        			Constants.Dropdowns.ADD_BLANK);   	
+        }
         return mapping.findForward("next");
     }
+    
+	/**
+	 * Repopulate the Agent Name dropdown matching the agent type selected
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward setAgentNameDropdown(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+        // Get the form used
+        SearchForm theSearchForm = (SearchForm) form;
+        
+        log.info("<setAgentNameDropdown> theSearchForm.getCarcinogenicIntervention(): " + theSearchForm.getCarcinogenicIntervention());
+        //Set constant for the Agent type here 
+        request.getSession().setAttribute(Constants.ENVFactors.AGENT_TYPE, theSearchForm.getCarcinogenicIntervention());        
+
+		NewDropdownUtil.populateDropdown(request,
+				Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, theSearchForm.getCarcinogenicIntervention());
+
+		return mapping.findForward("searchAdvanced");
+
+	}
+	
 }
