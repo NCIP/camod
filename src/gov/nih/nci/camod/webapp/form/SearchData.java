@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.10 2006-12-28 16:03:41 pandyas Exp $
+ * $Id: SearchData.java,v 1.11 2007-03-28 18:13:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/12/28 16:03:41  pandyas
+ * Reverted to previous version - changed CE on adv search page
+ *
  * Revision 1.8  2006/10/17 16:10:47  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -136,9 +139,14 @@ public interface SearchData {
 
 	public String getDiagnosisName();
 
-	public boolean isSearchCarcinogenicInterventions();
+	// Carciogenic interventions
+    public String getCarcinogenicIntervention();
 
-	public void setSearchCarcinogenicInterventions(boolean b);
+    public void setCarcinogenicIntervention(String carcinogenicIntervention);
+    
+    public String getAgentName();
+
+    public void setAgentName(String agentName); 
 
 	public void setInducedMutationAgent(String s);
 

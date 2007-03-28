@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.16 2006-12-28 16:04:00 pandyas Exp $
+ * $Id: SearchForm.java,v 1.17 2007-03-28 18:16:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/12/28 16:04:00  pandyas
+ * Reverted to previous version - changed CE on adv search page
+ *
  * Revision 1.14  2006/11/13 16:51:59  pandyas
  * #467 - Clear button on advanced search page doesn't work
  *
@@ -113,7 +116,8 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     protected String geneName;
     protected String genomicSegDesignator;
     protected String therapeuticApproach;
-    protected boolean searchCarcinogenicInterventions = false;
+    protected String carcinogenicIntervention;
+    protected String agentName;
     protected boolean searchTherapeuticApproaches = false;
     protected boolean engineeredTransgene = false;
     protected boolean targetedModification = false;
@@ -333,16 +337,6 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         this.diagnosisName = diagnosisName;
     }
 
-    public boolean isSearchCarcinogenicInterventions()
-    {
-        return searchCarcinogenicInterventions;
-    }
-
-    public void setSearchCarcinogenicInterventions(boolean searchCarcinogenicInterventions)
-    {
-        this.searchCarcinogenicInterventions = searchCarcinogenicInterventions;
-    }
-
     public String getInducedMutationAgent()
     {
         return inducedMutationAgent;
@@ -525,7 +519,8 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         geneName = null;
         genomicSegDesignator = null;
         therapeuticApproach = null;
-        searchCarcinogenicInterventions = false;
+        carcinogenicIntervention = null;
+        agentName = null;
         searchTherapeuticApproaches = false;
         searchTransientInterference = false;
         engineeredTransgene = false;
@@ -551,4 +546,20 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         
         simpleSearchReset();
     }
+
+	public String getAgentName() {
+		return agentName;
+	}
+
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
+
+	public String getCarcinogenicIntervention() {
+		return carcinogenicIntervention;
+	}
+
+	public void setCarcinogenicIntervention(String carcinogenicIntervention) {
+		this.carcinogenicIntervention = carcinogenicIntervention;
+	}
 }

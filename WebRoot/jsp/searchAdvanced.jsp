@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.53 2006-12-28 16:05:26 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.54 2007-03-28 18:11:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2006/12/28 16:05:26  pandyas
+ * Reverted to previous version - changed CE on adv search page
+ *
  * Revision 1.50  2006/11/21 18:24:49  pandyas
  * changed “External Source Data From Jackson Labs” (blue bar) to “Data from External Sources”
  *
@@ -155,7 +158,17 @@
 	function enableFields() {
 		document.searchForm.organ.disabled = false;
 		document.searchForm.tumorClassification.disabled = false;
-	}	
+	}
+	
+	function getOptions( control ) {
+		form = control.form;
+		form.action = "AdvancedSearchPopulateAction.do?unprotected_method=setAgentNameDropdown";
+		form.submit();
+	}
+	
+	function setAgentName() {
+		document.forms[0].agentName.value = document.searchForm.agentName;
+	}		
 	
 </SCRIPT>
 
@@ -338,71 +351,25 @@
 			<td class="formLabel">
 				<label for="field1">Models with Carcinogenic Interventions:</label>
 			</td>
-
+		</tr>
+			
+		<tr>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>		
+			<td class="formLabel"><label for="field3">Select Agent Type:</label></td>
 			<td class="formField">
-                <html:checkbox property="searchCarcinogenicInterventions" onclick="checkFields()" />
-                <!-- NOTE: Needed to work around struts bug -->
-                <input type="hidden" name="searchCarcinogenicInterventions" value="false">
-			    <label for="box1">Check here to search for models with <br>Carcinogenic interventions data</label>			
+				<html:select styleClass="formFieldSized" size="1" property="carcinogenicIntervention" onchange="getOptions(this);">
+					<html:options name="<%= Dropdowns.CARCINOGENICAGENTSQUERYDROP %>"/>												
+				</html:select>			
 			</td>
 		</tr>
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Chemical/Drug:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="chemicalDrug" >
-					<html:options name="<%= Dropdowns.CHEMICALDRUGQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Growth Factor:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="growthFactor" >
-					<html:options name="<%= Dropdowns.GROWTHFACTORQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Hormone:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="hormone" >
-					<html:options name="<%= Dropdowns.HORMONEQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Radiation:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="radiation" >
-					<html:options name="<%= Dropdowns.RADIATIONQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Virus:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="viral" >
-					<html:options name="<%= Dropdowns.VIRUSQUERYDROP %>" />										
-				</html:select>				
-			</td>
-		</tr>
-		
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Surgery:</label></td>
-			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="surgery" >
-					<html:options name="<%= Dropdowns.SURGERYQUERYDROP %>" />										
-				</html:select>				
+			<td class="formLabel"><label for="field3">Select Agent Name:</label></td>
+			<td class="formField">
+				<html:select styleClass="formFieldSized" size="1" property="agentName">
+					<html:options name="<%= Dropdowns.ENVIRONMENTALFACTORNAMESDROP %>"/>												
+				</html:select>
 			</td>
 		</tr>
 
@@ -547,6 +514,7 @@
 
 <SCRIPT LANGUAGE="JavaScript">
     checkFields();
+	setAgentName();    
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
