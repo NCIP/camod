@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationAction.java,v 1.8 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: SpontaneousMutationAction.java,v 1.9 2007-03-28 20:53:18 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -45,11 +48,27 @@ public class SpontaneousMutationAction extends BaseAction {
         // Grab the current SpontaneousMutation we are working with related to
         // this
         String aSpontaneousMutationID = request.getParameter("aSpontaneousMutationID");
+        
+        SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
+        
+        log.info("<SpontaneousMutationAction edit> following Characteristics:" + "\n\t name: "
+                + spontaneousMutationForm.getName() + "\n\t getMgiNumber: "
+                + spontaneousMutationForm.getMgiNumber() + "\n\t getRgdNumber: "
+                + spontaneousMutationForm.getRgdNumber()+ "\n\t getZfinNumber: "
+                + spontaneousMutationForm.getZfinNumber()         
+                + "\n\t getObservation: "
+                + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
+                + spontaneousMutationForm.getMethodOfObservation() +  "\n\t getGeneId: "                       
+                + spontaneousMutationForm.getGeneId() +  "\n\t getComments: "
+                + spontaneousMutationForm.getComments()
+                + (String) request.getSession().getAttribute("camod.loggedon.username"));      
+        
+        
 
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
         try {
-            SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
+
 
             SpontaneousMutationManager spontaneousMutationManager = (SpontaneousMutationManager) getBean("spontaneousMutationManager");
 
@@ -70,15 +89,6 @@ public class SpontaneousMutationAction extends BaseAction {
                 saveErrors(request, msg);
 
             } else {
-
-                log.info("<SpontaneousMutationAction edit> following Characteristics:" + "\n\t name: "
-                        + spontaneousMutationForm.getName() + "\n\t getMgiNumber: "
-                        + spontaneousMutationForm.getMgiNumber() + "\n\t getObservation: "
-                        + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
-                        + spontaneousMutationForm.getMethodOfObservation() +  "\n\t getGeneId: "                       
-                        + spontaneousMutationForm.getGeneId() +  "\n\t getComments: "
-                        + spontaneousMutationForm.getComments()
-                        + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
                 SpontaneousMutation theSpontaneousMutation = spontaneousMutationManager.get(aSpontaneousMutationID);
                 spontaneousMutationManager.update(spontaneousMutationForm, theSpontaneousMutation);
@@ -129,6 +139,9 @@ public class SpontaneousMutationAction extends BaseAction {
 
         log.info("<SpontaneousMutationAction save> following Characteristics:" + "\n\t name: "
                 + spontaneousMutationForm.getName() + "\n\t getMgiNumber: " + spontaneousMutationForm.getMgiNumber()
+                + "\n\t getRgdNumber: "
+                + spontaneousMutationForm.getRgdNumber()+ "\n\t getZfinNumber: "
+                + spontaneousMutationForm.getZfinNumber()  
                 + "\n\t getObservation: " + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
                 + spontaneousMutationForm.getMethodOfObservation() + "\n\t getComments: "
                 + spontaneousMutationForm.getComments()+  "\n\t getGeneId: "                       
