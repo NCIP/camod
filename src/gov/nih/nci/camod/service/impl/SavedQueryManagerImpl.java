@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.4 2006-10-17 16:14:05 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.5 2007-03-28 18:01:51 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/17 16:14:05  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.3  2006/05/22 20:10:18  schroedn
  * Added ability to save keyword searches
  *
@@ -88,35 +91,17 @@ public class SavedQueryManagerImpl extends BaseManager implements
 			}
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.PIName"))) {
-				inSearchForm.setPiName(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.ModelDescriptor"))) {
 				inSearchForm.setModelDescriptor(theSavedQueryAttribute
 						.getAttributeValue());
 			}
-
+			
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.Species"))) {
-				inSearchForm.setSpecies(theSavedQueryAttribute
+					theBundle.getString("criteria.PIName"))) {
+				inSearchForm.setPiName(theSavedQueryAttribute
 						.getAttributeValue());
 			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.Phenotype"))) {
-				inSearchForm.setPhenotype(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.CellLine"))) {
-				inSearchForm.setCellLine(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
+			
 			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.OrganTissueCode"))) {
 				inSearchForm.setOrganTissueCode(theSavedQueryAttribute
@@ -145,80 +130,24 @@ public class SavedQueryManagerImpl extends BaseManager implements
 					theBundle.getString("criteria.DiagnosisName"))) {
 				inSearchForm.setDiagnosisName(theSavedQueryAttribute
 						.getAttributeValue());
-			}
-
+			}	
+			
 			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.TumorClassification"))) {
 				inSearchForm.setTumorClassification(theSavedQueryAttribute
 						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute
-					.getAttributeName()
-					.equals(
-							theBundle
-									.getString("criteria.isSearchCarcinogenicInterventions"))) {
-				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setSearchCarcinogenicInterventions(true);
-				}
-			}
+			}			
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.Surgery"))) {
-				inSearchForm.setSurgery(theSavedQueryAttribute
+					theBundle.getString("criteria.Species"))) {
+				inSearchForm.setSpecies(theSavedQueryAttribute
 						.getAttributeValue());
 			}
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.ExternalSource"))) {
-				log
-						.info("<SavedQueryManagerImpl> adding criteria.ExternalSource to criteria list");
-				inSearchForm.setSurgery(theSavedQueryAttribute
+					theBundle.getString("criteria.Phenotype"))) {
+				inSearchForm.setPhenotype(theSavedQueryAttribute
 						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.ChemicalDrug"))) {
-				inSearchForm.setChemicalDrug(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.Hormone"))) {
-				inSearchForm.setHormone(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.Viral"))) {
-				inSearchForm.setViral(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.GrowthFactor"))) {
-				inSearchForm.setGrowthFactor(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.Radiation"))) {
-				inSearchForm.setRadiation(theSavedQueryAttribute
-						.getAttributeValue());
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.isEngineeredTransgene"))) {
-				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setEngineeredTransgene(true);
-				}
-			}
-
-			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.isTargetedModification"))) {
-				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setTargetedModification(true);
-				}
 			}
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
@@ -226,6 +155,20 @@ public class SavedQueryManagerImpl extends BaseManager implements
 				inSearchForm.setGeneName(theSavedQueryAttribute
 						.getAttributeValue());
 			}
+			
+			if (theSavedQueryAttribute.getAttributeName().equals(
+					theBundle.getString("criteria.isEngineeredTransgene"))) {
+				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
+					inSearchForm.setEngineeredTransgene(true);
+				}
+			}			
+			
+			if (theSavedQueryAttribute.getAttributeName().equals(
+					theBundle.getString("criteria.isTargetedModification"))) {
+				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
+					inSearchForm.setTargetedModification(true);
+				}
+			}			
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.GenomicSegDesignator"))) {
@@ -239,10 +182,27 @@ public class SavedQueryManagerImpl extends BaseManager implements
 						.getAttributeValue());
 			}
 
+			if (theSavedQueryAttribute.getAttributeName().equals(
+					theBundle.getString("criteria.CarcinogenicIntervention"))) {
+				inSearchForm.setCarcinogenicIntervention(theSavedQueryAttribute
+						.getAttributeValue());
+			}
+			
+			if (theSavedQueryAttribute.getAttributeName().equals(
+					theBundle.getString("criteria.AgentName"))) {
+				inSearchForm.setAgentName(theSavedQueryAttribute
+						.getAttributeValue());
+			}
+
+
+			if (theSavedQueryAttribute.getAttributeName().equals(
+					theBundle.getString("criteria.CellLine"))) {
+				inSearchForm.setCellLine(theSavedQueryAttribute
+						.getAttributeValue());
+			}
+			
 			if (theSavedQueryAttribute
-					.getAttributeName()
-					.equals(
-							theBundle
+					.getAttributeName().equals(theBundle
 									.getString("criteria.isSearchTherapeuticApproaches"))) {
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
 					inSearchForm.setSearchTherapeuticApproaches(true);
@@ -261,7 +221,15 @@ public class SavedQueryManagerImpl extends BaseManager implements
 					inSearchForm.setSearchHistoMetastasis(true);
 				}
 			}
-
+			
+			if (theSavedQueryAttribute
+					.getAttributeName().equals(theBundle
+									.getString("criteria.isSearchTransientInterference"))) {
+				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
+					inSearchForm.setSearchTransientInterference(true);
+				}						
+			}
+			
 			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.isSearchMicroArrayData"))) {
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
@@ -281,24 +249,21 @@ public class SavedQueryManagerImpl extends BaseManager implements
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
 					inSearchForm.setSearchToolStrain(true);
 				}
-			}
+			}			
 
-			if (theSavedQueryAttribute
-					.getAttributeName()
-					.equals(
-							theBundle
-									.getString("criteria.isSearchTransientInterference"))) {
-				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setSearchTransientInterference(true);
-				}
+			if (theSavedQueryAttribute.getAttributeName().equals(
+					theBundle.getString("criteria.ExternalSource"))) {
+				log.info("<SavedQueryManagerImpl> adding criteria.ExternalSource to criteria list");
+				inSearchForm.setSurgery(theSavedQueryAttribute
+						.getAttributeValue());
 			}
-
+			
 			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.isSearchXenograft"))) {
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
 					inSearchForm.setSearchXenograft(true);
 				}
-			}
+			}			
 		}
 	}
 
@@ -438,69 +403,25 @@ public class SavedQueryManagerImpl extends BaseManager implements
 		// Carcinogenic interventions
 		// ///////////////////////////////////////
 
-		if (inSearchData.isSearchCarcinogenicInterventions() == true) {
+		if (inSearchData.getCarcinogenicIntervention() != null 
+				&& inSearchData.getCarcinogenicIntervention().length() > 0) {
 			SavedQueryAttribute sqa = new SavedQueryAttribute();
 			sqa.setAttributeName(theBundle
-					.getString("criteria.isSearchCarcinogenicInterventions"));
-			sqa.setAttributeValue("true");
+					.getString("criteria.CarcinogenicIntervention"));
+			sqa.setAttributeValue(inSearchData.getCarcinogenicIntervention());
 			criteriaList.add(sqa);
 
-			// Surgery
-			if (inSearchData.getSurgery() != null
-					&& inSearchData.getSurgery().length() > 0) {
-				sqa = new SavedQueryAttribute();
-				sqa.setAttributeName(theBundle.getString("criteria.Surgery"));
-				sqa.setAttributeValue(inSearchData.getSurgery());
-				criteriaList.add(sqa);
-			}
-
-			// Chemical / Drug
-			if (inSearchData.getChemicalDrug() != null
-					&& inSearchData.getChemicalDrug().length() > 0) {
+			// Agent Name
+			if (inSearchData.getAgentName() != null
+					&& inSearchData.getAgentName().length() > 0) {
 				sqa = new SavedQueryAttribute();
 				sqa.setAttributeName(theBundle
-						.getString("criteria.ChemicalDrug"));
-				sqa.setAttributeValue(inSearchData.getChemicalDrug());
-				criteriaList.add(sqa);
-			}
-
-			// Hormone
-			if (inSearchData.getHormone() != null
-					&& inSearchData.getHormone().length() > 0) {
-				sqa = new SavedQueryAttribute();
-				sqa.setAttributeName(theBundle.getString("criteria.Hormone"));
-				sqa.setAttributeValue(inSearchData.getHormone());
-				criteriaList.add(sqa);
-			}
-
-			// Growth Factor
-			if (inSearchData.getGrowthFactor() != null
-					&& inSearchData.getGrowthFactor().length() > 0) {
-				sqa = new SavedQueryAttribute();
-				sqa.setAttributeName(theBundle
-						.getString("criteria.GrowthFactor"));
-				sqa.setAttributeValue(inSearchData.getGrowthFactor());
-				criteriaList.add(sqa);
-			}
-
-			// Radiation
-			if (inSearchData.getRadiation() != null
-					&& inSearchData.getRadiation().length() > 0) {
-				sqa = new SavedQueryAttribute();
-				sqa.setAttributeName(theBundle.getString("criteria.Radiation"));
-				sqa.setAttributeValue(inSearchData.getRadiation());
-				criteriaList.add(sqa);
-			}
-
-			// Viral
-			if (inSearchData.getViral() != null
-					&& inSearchData.getViral().length() > 0) {
-				sqa = new SavedQueryAttribute();
-				sqa.setAttributeName(theBundle.getString("criteria.Viral"));
-				sqa.setAttributeValue(inSearchData.getViral());
+						.getString("criteria.AgentName"));
+				sqa.setAttributeValue(inSearchData.getAgentName());
 				criteriaList.add(sqa);
 			}
 		}
+		
 		// ///////////////////////////////////////
 		// Genetic Description
 		// ///////////////////////////////////////

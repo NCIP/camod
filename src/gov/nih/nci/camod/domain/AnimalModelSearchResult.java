@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.16 2006-11-08 19:10:10 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.17 2007-03-28 18:00:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/11/08 19:10:10  pandyas
+ * Returns external source so it can be used to determine if the MTB icon is displayed
+ *
  * Revision 1.15  2006/10/31 20:14:23  pandyas
  * Added variable for state to hide inactive button on adminEditModels.jsp when user searches for inactive models
  *
@@ -547,94 +550,28 @@ public class AnimalModelSearchResult implements Comparable
 
                 if (ef != null)
                 {
-                    if (ef.getType().equals(Constants.ENVFactors.CHEMICAL_DRUG))
+                	// Check for ef.getType() else ef.getTypeUnctrlVocab()
+                    if (ef.getType() != null)
                     {
+                    	// Check for ef.getName() else ef.getNameUnctrlVocab()
                         if (ef.getName() != null)
                         {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.CHEMICAL_DRUG + ") <br>";
+                            myCarcinogen += ef.getName() + " (" + ef.getType() + ") <br>";
                         }
                         else
                         {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.CHEMICAL_DRUG + ") <br>";
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + ef.getType() + ") <br>";
                         }
                     }
-                    if (ef.getType().equals(Constants.ENVFactors.HORMONE))
+                    else 
                     {
                         if (ef.getName() != null)
                         {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.HORMONE + ") <br>";
+                            myCarcinogen += ef.getName() + " (" + ef.getTypeUnctrlVocab() + ") <br>";
                         }
                         else
                         {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.HORMONE + ") <br>";
-                        }
-                    }
-                    if (ef.getType().equals(Constants.ENVFactors.GROWTH_FACTOR))
-                    {
-                        if (ef.getName() != null)
-                        {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.GROWTH_FACTOR + ") <br>";
-                        }
-                        else
-                        {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.GROWTH_FACTOR + ") <br>";
-                        }
-                    }
-                    if (ef.getType().equals(Constants.ENVFactors.VIRAL))
-                    {
-                        if (ef.getName() != null)
-                        {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.VIRAL + ") <br>";
-                            ;
-                        }
-                        else
-                        {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.VIRAL + ") <br>";
-                        }
-                    }
-                    if (ef.getType().equals(Constants.ENVFactors.ENVIRONMOENT))
-                    {
-                        if (ef.getName() != null)
-                        {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.ENVIRONMOENT + ") <br>";
-                        }
-                        else
-                        {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.ENVIRONMOENT + ") <br>";
-                        }
-
-                    }
-                    if (ef.getType().equals(Constants.ENVFactors.NUTRITION))
-                    {
-                        if (ef.getName() != null)
-                        {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.NUTRITION + ") <br>";
-                        }
-                        else
-                        {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.NUTRITION + ") <br>";
-                        }
-                    }
-                    if (ef.getType().equals(Constants.ENVFactors.VIRUS))
-                    {
-                        if (ef.getName() != null)
-                        {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.VIRUS + ") <br>";
-                        }
-                        else
-                        {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.VIRUS + ") <br>";
-                        }
-                    }
-                    if (ef.getType().equals(Constants.ENVFactors.OTHER))
-                    {
-                        if (ef.getName() != null)
-                        {
-                            myCarcinogen += ef.getName() + " (" + Constants.ENVFactors.OTHER + ") <br>";
-                        }
-                        else
-                        {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + Constants.ENVFactors.OTHER + ")<br>";
+                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + ef.getTypeUnctrlVocab() + ") <br>";
                         }
                     }
                 }

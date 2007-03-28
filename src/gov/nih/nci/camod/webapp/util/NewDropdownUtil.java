@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.48 2006-11-09 17:15:56 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.49 2007-03-28 18:03:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2006/11/09 17:15:56  pandyas
+ * Commented out System.out.println
+ *
  * Revision 1.47  2006/10/17 16:10:31  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -153,11 +156,6 @@ public class NewDropdownUtil
         {
             theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
         }
-        
-        else if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
-        {
-            theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
-        }
 
         else if (inDropdownKey.equals(Constants.Dropdowns.STRAINDROP))
         {
@@ -172,84 +170,54 @@ public class NewDropdownUtil
         else if (inDropdownKey.equals(Constants.Dropdowns.EXPRESSIONLEVELDROP))
         {
             theReturnList = getExpressionLevelList(inRequest);
-        }
+        }   
 
-        // Environmental Factors - Carciogenic Interventions
+        // Dropdown lists for submission pages of Carciogenic Intervention section
         else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYDROP))
         {
             theReturnList = getEnvironmentalFactorList("Other");
         }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.SURGERYQUERYDROP))
-        {
-            theReturnList = getQueryOnlyEnvironmentalFactorList("Other");
-        }
-        
         else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEDROP))
         {
             theReturnList = getEnvironmentalFactorList("Hormone");
-        }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.HORMONEQUERYDROP))
-        {
-            theReturnList = getQueryOnlyEnvironmentalFactorList("Hormone");
-        }
-
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORDROP))
         {
             theReturnList = getEnvironmentalFactorList("Growth Factor");
         }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.GROWTHFACTORQUERYDROP))
-        {
-            theReturnList = getQueryOnlyEnvironmentalFactorList("Growth Factor");
-        }
-
         else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGDROP))
         {
             theReturnList = getEnvironmentalFactorList("Chemical / Drug");
-        }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.CHEMICALDRUGQUERYDROP))
-        {
-            theReturnList = getQueryOnlyEnvironmentalFactorList("Chemical / Drug");
-        }
-
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSDROP))
         {
             theReturnList = getEnvironmentalFactorList("Viral");
         }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.VIRUSQUERYDROP))
-        {
-            theReturnList = getQueryOnlyEnvironmentalFactorList("Viral");
-        }
-
         else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONDROP))
         {
             theReturnList = getEnvironmentalFactorList("Radiation");
         }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.RADIATIONQUERYDROP))
-        {
-            theReturnList = getQueryOnlyEnvironmentalFactorList("Radiation");
-        }
-
         else if (inDropdownKey.equals(Constants.Dropdowns.NUTRITIONFACTORDROP))
         {
             theReturnList = getEnvironmentalFactorList("Nutrition");
-        }
-
+        }        
         else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP))
         {
             theReturnList = getEnvironmentalFactorList("Environment");
         }
-
-        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONFACTORDROP))
+        
+        // Dropdown list for main advanced search CI section
+        else if (inDropdownKey.equals(Constants.Dropdowns.CARCINOGENICAGENTSQUERYDROP))
         {
-            theReturnList = getEnvironmentalFactorList("Environment");
+            theReturnList = getCarcinogenicAgentList(inRequest);
         }
-
+        // Dropdown list for Ef names after agent type is selected by user
+        else if (inDropdownKey.equals(Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP))
+        {
+            theReturnList = getQueryOnlyEnvironmentalFactorList(inRequest, inFilter);
+        }   
+        
+        
         else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORDROP))
         {
             theReturnList = getPrincipalInvestigatorList(inRequest, inFilter);
@@ -472,6 +440,7 @@ public class NewDropdownUtil
 
         //Set constant for the Animal Model species here 
         inRequest.getSession().setAttribute(Constants.AMMODELSPECIES, speciesName);
+        log.debug("In getStrainsList speciesName: " + speciesName);
 
         SpeciesManager speciesManager = (SpeciesManager) getContext(inRequest).getBean("speciesManager");
         Species species = null;
@@ -566,7 +535,7 @@ public class NewDropdownUtil
     /**
      * Returns a list of all external sources from animalModel
      * 
-     * @return adminList
+     * @return externalSourceList
      * @throws Exception
      */
     private static List getExternalSourceList(HttpServletRequest inRequest) throws Exception
@@ -578,29 +547,52 @@ public class NewDropdownUtil
         Collections.sort(externalSourceList);
         
         return externalSourceList;
-    }    
+    } 
+    
+    /**
+     * Returns a list of all carcinogenic agents (environmental factor types) from animalModel
+     * 
+     * @return carcinogenicAgentList
+     * @throws Exception
+     */
+    private static List getCarcinogenicAgentList(HttpServletRequest inRequest) throws Exception
+    {
+       	log.debug("<NewDropdownUtil> In getCarcinogenicAgentList: ");
+       	
+       	List carcinogenicAgentList = QueryManagerSingleton.instance().getEnvironmentalFactorAgentTypes();       	
+        
+        Collections.sort(carcinogenicAgentList);
+        
+        return carcinogenicAgentList;
+    }     
+    
     
     /**
      * Returns a list for a type of environmental Factors
      * 
      * @return envList
      */
-    private static List getEnvironmentalFactorList(String type) throws Exception
+    private static List getEnvironmentalFactorList(String inType) throws Exception
     {
-        List theEnvFactorList = QueryManagerSingleton.instance().getEnvironmentalFactors(type);
+        log.debug("<getEnvironmentalFactorList> inType: " + inType);
+        List theEnvFactorList = QueryManagerSingleton.instance().getEnvironmentalFactors(inType);
 
         addOther(theEnvFactorList);
         return theEnvFactorList;
     }
 
     /**
-     * Returns a list for a type of environmental Factore
+     * Returns a list for a type of environmental Factors
      * 
      * @return envList
      */
-    private static List getQueryOnlyEnvironmentalFactorList(String type) throws Exception
+    private static List getQueryOnlyEnvironmentalFactorList(HttpServletRequest inRequest,
+    												String inType) throws Exception
     {
-        List theEnvFactorList = QueryManagerSingleton.instance().getQueryOnlyEnvironmentalFactors(type);
+    	log.debug("<getQueryOnlyEnvironmentalFactorList> inType: " + inType);
+        
+        List theEnvFactorList = QueryManagerSingleton.instance().getQueryOnlyEnvironmentalFactors(inType);
+        addBlank(theEnvFactorList);
         return theEnvFactorList;
     }
 

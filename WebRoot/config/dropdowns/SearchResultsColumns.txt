@@ -11,6 +11,7 @@ Transgene
 Transcriptional 1
 Segment Type
 Designator
+Carcinogen
 Targeted Gene / Locus
 Type of Modification
 Name of inducing agent

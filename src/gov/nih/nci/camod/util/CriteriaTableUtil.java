@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.6 2006-10-17 16:11:52 pandyas Exp $
+ * $Id: CriteriaTableUtil.java,v 1.7 2007-03-28 18:02:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/10/17 16:11:52  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.5  2006/06/12 18:38:02  pandyas
  * removed unused import
  *
@@ -131,65 +134,22 @@ public class CriteriaTableUtil
         // Carcinogenic interventions
         // ///////////////////////////////////////
 
-        if (sData.isSearchCarcinogenicInterventions() == true)
+        if (sData.getCarcinogenicIntervention() != null)
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchCarcinogenicInterventions") + "</td><td class=\"formFieldNone\">Checked</td></tr>";
-
-            // Search for chemical/drug
-            if (sData.getChemicalDrug() != null)
-            {
-                if (sData.getChemicalDrug().trim().length() > 0)
-                {
-                    theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.ChemicalDrug") + "</td><td class=\"formFieldNone\">" + sData.getChemicalDrug() + "</td></tr>";
-                }
+            if (sData.getCarcinogenicIntervention().trim().length() > 0)
+            {        	
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.CarcinogenicIntervention") + "</td><td class=\"formFieldNone\">" + sData.getCarcinogenicIntervention() + "</td></tr>";
             }
-
-            // Search for Surgery/Other
-            if (sData.getSurgery() != null)
-            {
-                if (sData.getSurgery().length() > 0)
-                {
-                    theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Surgery") + "</td><td class=\"formFieldNone\">" + sData.getSurgery() + "</td></tr>";
-                }
-            }
-
-            // Search for Hormone
-            if (sData.getHormone() != null)
-            {
-                if (sData.getHormone().length() > 0)
-                {
-                    theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Hormone") + "</td><td class=\"formFieldNone\">" + sData.getHormone() + "</td></tr>";
-                }
-            }
-
-            // Search for Growth Factor
-            if (sData.getGrowthFactor() != null)
-            {
-                if (sData.getGrowthFactor().length() > 0)
-                {
-                    theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.GrowthFactor") + "</td><td class=\"formFieldNone\">" + sData.getGrowthFactor() + "</td></tr>";
-                }
-            }
-
-            // Search for Radiation
-            if (sData.getRadiation() != null)
-            {
-                if (sData.getRadiation().length() > 0)
-                {
-                    theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Radiation") + "</td><td class=\"formFieldNone\">" + sData.getRadiation() + "</td></tr>";
-                }
-            }
-
-            // Search for Viral
-            if (sData.getViral() != null)
-            {
-                if (sData.getViral().length() > 0)
-                {
-                    theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.Viral") + "</td><td class=\"formFieldNone\">" + sData.getViral() + "</td></tr>";
-                }
-            }
-
         }
+        
+        // Search for agent Name
+        if (sData.getAgentName() != null)
+        {
+            if (sData.getAgentName().trim().length() > 0)
+            {
+                theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.AgentName") + "</td><td class=\"formFieldNone\">" + sData.getAgentName() + "</td></tr>";
+            }
+        }        
 
         // Only call if some of the data is set : 
         if (sData.getGeneName() != null)

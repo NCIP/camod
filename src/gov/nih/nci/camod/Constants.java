@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.96 2007-03-27 18:57:45 pandyas Exp $
+ * $Id: Constants.java,v 1.97 2007-03-28 18:00:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.96  2007/03/27 18:57:45  pandyas
+ * Added constants for caMOD 2.3 build tasks
+ *
  * Revision 1.95  2006/12/28 16:02:07  pandyas
  * Reverted to previous version - changed CE on adv search page
  *
@@ -299,7 +302,13 @@ public class Constants {
      * Used in AnimalModelSearchResult
      *
      */
-    public interface ENVFactors {
+    public interface ENVFactors { 
+    	
+        public static final String AGENT_TYPE = "agentType"; 
+        
+        public static final String ANTIBODY = "Antibody"; 
+        
+        public static final String BACTERIA = "Bacteria";        
         
         public static final String TRANSCRIPTIONAL1 = "Transcriptional 1"; 
         
@@ -314,6 +323,14 @@ public class Constants {
         public static final String ENVIRONMOENT = "Environment";
         
         public static final String NUTRITION = "Nutrition";
+        
+		public static final String PLASMID = "Plasmid";
+		
+		public static final String SURGERY = "Surgery";
+		
+		public static final String TRANSPOSON = "Transposon";
+		
+		public static final String RADIATION = "Radiation";
         
         public static final String VIRUS = "Virus";
         
@@ -359,6 +376,7 @@ public class Constants {
         /* all strains for a species from DB -  used for various Screens */
         public static final String STRAINDROP = "straindrop.db";  
 
+        /* Various text files used in the application - data located in WebRoot/config/dropdowns */
         public static final String SEXDISTRIBUTIONDROP = "SexDistributions.txt";
 
         public static final String DOSAGEUNITSDROP = "DoseUnits.txt";
@@ -379,7 +397,6 @@ public class Constants {
         
         // Site of Morpholino used for site attribute in TransientInterference object 
         public static final String SITEOFMORPHOLINO = "SiteOfMorpholino.txt";
-
 
 
         // Various Dose Units
@@ -463,22 +480,17 @@ public class Constants {
         
         // Query dropdowns
         public static final String PRINCIPALINVESTIGATORQUERYDROP = "principalinvestigatorquerydrop.db";
-        
-        public static final String CHEMICALDRUGQUERYDROP = "chemdrugquerydrop.db";
-
-        public static final String GROWTHFACTORQUERYDROP = "growfactorquerydrop.db";
-
-        public static final String HORMONEQUERYDROP = "hormonequerydrop.db";
-
-        public static final String RADIATIONQUERYDROP = "radiationquerydrop.db";
-
-        public static final String VIRUSQUERYDROP = "virusquerydrop.db";
-
-        public static final String SURGERYQUERYDROP = "surgeryquerydrop.db";
 
         public static final String INDUCEDMUTATIONAGENTQUERYDROP = "inducedmutationagentquerydrop.db";
         
-        public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";        
+        public static final String EXTERNALSOURCEQUERYDROP = "externalsourcequerydrop.db";    
+        
+        // CI on advanced search taken from DB type and type_unctrl_vocab columns
+        public static final String CARCINOGENICAGENTSQUERYDROP = "carcinogenicagentsquerydrop.db"; 
+        
+        // Environmental Factor name field populated based on agent type slected in adv search
+        public static final String ENVIRONMENTALFACTORNAMESDROP = "environmentalfactornames.db";         
+        
 
         // These two are used to display the species and strain currently in the
         // AnimalModelCharacteristics - Xenograft screen
