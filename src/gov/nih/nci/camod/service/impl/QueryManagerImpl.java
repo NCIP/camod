@@ -43,9 +43,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.66 2007-03-28 18:43:37 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.67 2007-03-28 18:45:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.66  2007/03/28 18:43:37  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.65  2006/12/28 16:02:25  pandyas
  * Reverted to previous version - changed CE on adv search page
  *
@@ -280,7 +285,7 @@ public class QueryManagerImpl extends BaseManager
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getNSCNumbers");
 
         return theList;
@@ -307,13 +312,13 @@ public class QueryManagerImpl extends BaseManager
         theParams[0].setValue(inPrefix.toUpperCase() + "%");
         theParams[0].setType(Hibernate.STRING);
 
-        log.info("inPrefix: " + inPrefix);
+        log.debug("inPrefix: " + inPrefix);
 
         String theHQLQuery = "select distinct am.modelDescriptor from AnimalModel as am where upper(am.modelDescriptor) like :modelDescriptor AND am.state = 'Edited-approved' order by am.modelDescriptor asc ";
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getMatchingAnimalModelNames");
 
         return theList;
@@ -341,13 +346,13 @@ public class QueryManagerImpl extends BaseManager
         theParams[0].setType(Hibernate.STRING);
         //HQLParameter[] theParams = new HQLParameter[0];
        
-        log.info("inPrefix: " + inPrefix);
+        log.debug("inPrefix: " + inPrefix);
 
         String theHQLQuery = "select distinct histo.organ from AnimalModel as am left outer join am.histopathologyCollection as histo where am.state = 'Edited-approved' and upper(histo.organ.name) like :name";
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getMatchingOrganNames");
 
         return theList;
@@ -374,13 +379,13 @@ public class QueryManagerImpl extends BaseManager
         theParams[0].setType(Hibernate.STRING);
         //HQLParameter[] theParams = new HQLParameter[0];
        
-        log.info("inPrefix: " + inPrefix);
+        log.debug("inPrefix: " + inPrefix);
 
         String theHQLQuery = "select distinct histo.disease from AnimalModel as am left outer join am.histopathologyCollection as histo where am.state = 'Edited-approved' and upper(histo.disease.name) like :name";
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getMatchingTumorClassificationNames");
 
         return theList;
@@ -408,13 +413,13 @@ public class QueryManagerImpl extends BaseManager
         theParams[0].setValue(inPrefix.toUpperCase() + "%");
         theParams[0].setType(Hibernate.STRING);
 
-        log.info("inPrefix: " + inPrefix);
+        log.debug("inPrefix: " + inPrefix);
 
         String theHQLQuery = "select distinct genes.name from AnimalModel as am left outer join am.engineeredGeneCollection as genes where upper(genes.name) like :name AND am.state = 'Edited-approved' ";
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
         log.debug("Exiting QueryManagerImpl.getMatchingGeneNames");
 
         return theList;
@@ -658,7 +663,7 @@ public class QueryManagerImpl extends BaseManager
     public List getQueryOnlyInducedMutationAgents() throws PersistenceException
     {
 
-        log.info("Entering QueryManagerImpl.getQueryOnlyInducedMutationAgents");
+        log.debug("Entering QueryManagerImpl.getQueryOnlyInducedMutationAgents");
         ResultSet theResultSet = null;
         List<String> theAgents = new ArrayList<String>();
         try
@@ -675,7 +680,7 @@ public class QueryManagerImpl extends BaseManager
                 theAgents.add(theResultSet.getString(1));
             }
 
-            log.info("Exiting QueryManagerImpl.getQueryOnlyInducedMutationAgents");
+            log.debug("Exiting QueryManagerImpl.getQueryOnlyInducedMutationAgents");
         }
         catch (Exception e)
         {
@@ -706,7 +711,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryOnlySpecies(HttpServletRequest inRequest) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getQueryOnlySpecies");
+        log.debug("Entering QueryManagerImpl.getQueryOnlySpecies");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
@@ -714,16 +719,16 @@ public class QueryManagerImpl extends BaseManager
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
 
-        log.info("Exiting QueryManagerImpl.getQueryOnlySpecies");
+        log.debug("Exiting QueryManagerImpl.getQueryOnlySpecies");
         return theList;
     }
 
     public List getApprovedSpecies(HttpServletRequest inRequest) throws PersistenceException
     {
 
-        log.info("Entering QueryManagerImpl.getSpeciesObject");
+        log.debug("Entering QueryManagerImpl.getSpeciesObject");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
@@ -731,9 +736,9 @@ public class QueryManagerImpl extends BaseManager
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
 
-        log.info("Exiting QueryManagerImpl.getQueryOnlySpecies");
+        log.debug("Exiting QueryManagerImpl.getQueryOnlySpecies");
         return theList;
     }
 
@@ -747,7 +752,7 @@ public class QueryManagerImpl extends BaseManager
     public List getPrincipalInvestigators() throws PersistenceException
     {
 
-        log.info("Entering QueryManagerImpl.getPrincipalInvestigators");
+        log.debug("Entering QueryManagerImpl.getPrincipalInvestigators");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
@@ -755,9 +760,9 @@ public class QueryManagerImpl extends BaseManager
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
 
-        log.info("Exiting QueryManagerImpl.getPrincipalInvestigators");
+        log.debug("Exiting QueryManagerImpl.getPrincipalInvestigators");
         return theList;
     }
 
@@ -770,7 +775,7 @@ public class QueryManagerImpl extends BaseManager
     public List getPeopleByRole(String inRole) throws PersistenceException
     {
 
-        log.info("Entering QueryManagerImpl.getPeopleByRole");
+        log.debug("Entering QueryManagerImpl.getPeopleByRole");
 
         String theHQLQuery = "from Person where username is not null ";
 
@@ -785,9 +790,9 @@ public class QueryManagerImpl extends BaseManager
         HQLParameter[] theParams = new HQLParameter[0];
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.info("Found matching items: " + theList.size());
+        log.debug("Found matching items: " + theList.size());
 
-        log.info("Exiting QueryManagerImpl.getPeopleByRole");
+        log.debug("Exiting QueryManagerImpl.getPeopleByRole");
         return theList;
     }
 
@@ -819,7 +824,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryOnlyPrincipalInvestigators() throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
+        log.debug("Entering QueryManagerImpl.getQueryOnlyPrincipalInvestigators");
 
         // Format the query
         String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1 " + "  AND first_name IS NOT NULL " + "  AND last_name IS NOT NULL " + "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model WHERE state = 'Edited-approved')" + "ORDER BY last_name ASC";
@@ -830,7 +835,7 @@ public class QueryManagerImpl extends BaseManager
 
         try
         {
-            log.info("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
+            log.debug("getQueryOnlyPrincipalInvestigators - SQL: " + theSQLString);
 
             Object[] params = new Object[0];
             theResultSet = Search.query(theSQLString, params);
@@ -873,7 +878,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public Log getCurrentLog(AnimalModel inModel) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCurrentLog");
+        log.debug("Entering QueryManagerImpl.getCurrentLog");
 
         HQLParameter[] theParams = new HQLParameter[1];
         theParams[0] = new HQLParameter();
@@ -882,21 +887,21 @@ public class QueryManagerImpl extends BaseManager
         theParams[0].setType(Hibernate.LONG);
 
         String theHQLQuery = "from Log where abs_cancer_model_id = :abs_cancer_model_id order by timestamp desc";
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
         List theLogs = Search.query(theHQLQuery, theParams);
 
         Log theLog = null;
         if (theLogs != null && theLogs.size() > 0)
         {
             theLog = (Log) theLogs.get(0);
-            log.info("Found a matching object: " + theLog.getId());
+            log.debug("Found a matching object: " + theLog.getId());
         }
         else
         {
-            log.info("No object found.");
+            log.debug("No object found.");
         }
 
-        log.info("Exiting QueryManagerImpl.getCurrentLog");
+        log.debug("Exiting QueryManagerImpl.getCurrentLog");
 
         return theLog;
     }
@@ -915,7 +920,7 @@ public class QueryManagerImpl extends BaseManager
     public Log getCurrentLogForUser(AnimalModel inModel,
                                     Person inUser) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCurrentLogForUser");
+        log.debug("Entering QueryManagerImpl.getCurrentLogForUser");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[2];
@@ -929,21 +934,21 @@ public class QueryManagerImpl extends BaseManager
         theParams[1].setType(Hibernate.LONG);
 
         String theHQLQuery = "from Log where abs_cancer_model_id = :abs_cancer_model_id and party_id = :party_id " + "and comments_id is null order by timestamp desc";
-        log.info("the HQL Query: " + theHQLQuery);
+        log.debug("the HQL Query: " + theHQLQuery);
         List theLogs = Search.query(theHQLQuery, theParams);
 
         Log theLog = null;
         if (theLogs != null && theLogs.size() > 0)
         {
             theLog = (Log) theLogs.get(0);
-            log.info("Found a matching object: " + theLog.getId());
+            log.debug("Found a matching object: " + theLog.getId());
         }
         else
         {
-            log.info("No object found.");
+            log.debug("No object found.");
         }
 
-        log.info("Exiting QueryManagerImpl.getCurrentLogForUser");
+        log.debug("Exiting QueryManagerImpl.getCurrentLogForUser");
         return theLog;
     }
 
@@ -962,7 +967,7 @@ public class QueryManagerImpl extends BaseManager
     public Log getCurrentLogForUser(Comments inComments,
                                     Person inUser) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCurrentLogForUser");
+        log.debug("Entering QueryManagerImpl.getCurrentLogForUser");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[3];
@@ -980,21 +985,21 @@ public class QueryManagerImpl extends BaseManager
         theParams[2].setType(Hibernate.LONG);
 
         String theHQLQuery = "from Log where abs_cancer_model_id = :abs_cancer_model_id and party_id = :party_id " + "and comments_id = :comments_id order by timestamp desc";
-        log.info("the HQL Query: " + theHQLQuery);
+        log.debug("the HQL Query: " + theHQLQuery);
         List theLogs = Search.query(theHQLQuery, theParams);
 
         Log theLog = null;
         if (theLogs != null && theLogs.size() > 0)
         {
             theLog = (Log) theLogs.get(0);
-            log.info("Found a matching object: " + theLog.getId());
+            log.debug("Found a matching object: " + theLog.getId());
         }
         else
         {
-            log.info("No object found.");
+            log.debug("No object found.");
         }
 
-        log.info("Exiting QueryManagerImpl.getCurrentLogForUser");
+        log.debug("Exiting QueryManagerImpl.getCurrentLogForUser");
         return theLog;
     }
 
@@ -1016,7 +1021,7 @@ public class QueryManagerImpl extends BaseManager
                                      Person inPerson,
                                      AnimalModel inModel) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCommentsBySectionForPerson");
+        log.debug("Entering QueryManagerImpl.getCommentsBySectionForPerson");
 
         // If no person, only get approved items
         // TODO: make the states a constant
@@ -1031,7 +1036,7 @@ public class QueryManagerImpl extends BaseManager
         }
 
         String theHQLQuery = "from Comments as c where " + theStateHQL + " and c.cancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
 
         Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
         theQuery.setParameter("abs_cancer_model_id", inModel.getId());
@@ -1049,7 +1054,7 @@ public class QueryManagerImpl extends BaseManager
             theComments = new ArrayList();
         }
 
-        log.info("Exiting QueryManagerImpl.getCommentsByStateForPerson");
+        log.debug("Exiting QueryManagerImpl.getCommentsByStateForPerson");
 
         return theComments;
     }
@@ -1071,7 +1076,7 @@ public class QueryManagerImpl extends BaseManager
     public List getCommentsByStateForPerson(String inState,
                                             Person inPerson) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCommentsByStateForPerson");
+        log.debug("Entering QueryManagerImpl.getCommentsByStateForPerson");
 
         String theHQLQuery = "from Comments as c where c.state = :state and c.id in (";
         Query theQuery = null;
@@ -1089,7 +1094,7 @@ public class QueryManagerImpl extends BaseManager
             theQuery.setParameter("state", inState);
         }
 
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
 
         List theComments = theQuery.list();
 
@@ -1098,7 +1103,7 @@ public class QueryManagerImpl extends BaseManager
             theComments = new ArrayList();
         }
 
-        log.info("Exiting QueryManagerImpl.getCommentsByStateForPerson");
+        log.debug("Exiting QueryManagerImpl.getCommentsByStateForPerson");
 
         return theComments;
     }
@@ -1120,7 +1125,7 @@ public class QueryManagerImpl extends BaseManager
     public List getModelsByStateForPerson(String inState,
                                           Person inPerson) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getCurrentLog");
+        log.debug("Entering QueryManagerImpl.getCurrentLog");
 
         String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (";
         Query theQuery = null;
@@ -1139,7 +1144,7 @@ public class QueryManagerImpl extends BaseManager
             theQuery.setParameter("state", inState);
         }
 
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
 
         List theComments = theQuery.list();
 
@@ -1162,18 +1167,18 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getModelsByUser(String inUsername) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getModelsByUser");
+        log.debug("Entering QueryManagerImpl.getModelsByUser");
 
         String theHQLQuery = "from AnimalModel as am where " + " am.submitter in (from Person where username = :username) or" + " am.principalInvestigator in (from Person where username = :username) " + " order by model_descriptor";
 
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
 
         Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
 
 
         theQuery.setParameter("username", inUsername);
 
-        log.info("Entering QueryManagerImpl.getModelsByUser here");
+        log.debug("Entering QueryManagerImpl.getModelsByUser here");
         List theComments = new ArrayList();
 
         // breaks before this line
@@ -1199,10 +1204,10 @@ public class QueryManagerImpl extends BaseManager
     public List getInvivoResultCollectionByNSC(String inNSCNumber,
                                                String inModelId) throws PersistenceException
     {
-        log.info("Entering QueryManagerImpl.getInvivoResultCollectionByNSC");
+        log.debug("Entering QueryManagerImpl.getInvivoResultCollectionByNSC");
 
         String theHQLQuery = "from InvivoResult as ir where " + " ir.id in (" + getInvivoIdsForNSCNumberAndModel(inNSCNumber, inModelId) + ")";
-        log.info("The HQL query: " + theHQLQuery);
+        log.debug("The HQL query: " + theHQLQuery);
 
         Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
 
@@ -1275,7 +1280,7 @@ public class QueryManagerImpl extends BaseManager
 
             theSQLString += " order by st.name, to_number(t.dosage)";
 
-            log.info("getYeastScreenResults - SQL: " + theSQLString);
+            log.debug("getYeastScreenResults - SQL: " + theSQLString);
 
             Object[] params = new Object[2];
             params[0] = stage;
@@ -1289,7 +1294,7 @@ public class QueryManagerImpl extends BaseManager
                 final float diffinh = theResultSet.getFloat(4);
                 dsr.addEntry(strain, dosage, aveinh, diffinh);
             }
-            log.info("Got " + dsr.strainCount + " strains");
+            log.debug("Got " + dsr.strainCount + " strains");
         }
         catch (Exception e)
         {
@@ -1329,7 +1334,7 @@ public class QueryManagerImpl extends BaseManager
         List<String[]> results = new ArrayList<String[]>();
         int cc = 0;
         ResultSet theResultSet = null;
-        log.info("Env factor_id=" + agent.getId());
+        log.debug("Env factor_id=" + agent.getId());
         try
         {
 
@@ -1349,7 +1354,7 @@ public class QueryManagerImpl extends BaseManager
 
             theSQLString += " group by acm.abs_cancer_model_id, acm.model_descriptor, st.name, acm.administrative_site" + "\n" + " order by 3, 2";
 
-            log.info("getInvivoResults - SQL: " + theSQLString);
+            log.debug("getInvivoResults - SQL: " + theSQLString);
 
             Object[] params = new Object[1];
             params[0] = theParam;
@@ -1365,7 +1370,7 @@ public class QueryManagerImpl extends BaseManager
                 results.add(item);
                 cc++;
             }
-            log.info("Got " + cc + " xenograft models");
+            log.debug("Got " + cc + " xenograft models");
         }
         catch (Exception e)
         {
@@ -1858,7 +1863,7 @@ public class QueryManagerImpl extends BaseManager
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
 
-        log.info("Entering searchForAnimalModels");
+        log.debug("Entering searchForAnimalModels");
 
         List theAnimalModels = null;
 
@@ -1867,16 +1872,16 @@ public class QueryManagerImpl extends BaseManager
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
-            log.info("Doing a keyword search: " + inSearchData.getKeyword());
+            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
             theAnimalModels = keywordSearch(theFromClause, theOrderByClause, inSearchData.getKeyword());
         }
         else
         {
-            log.info("Doing a criteria search");
+            log.debug("Doing a criteria search");
             theAnimalModels = criteriaSearch(theFromClause, theOrderByClause, inSearchData);
         }
 
-        log.info("Exiting searchForAnimalModels");
+        log.debug("Exiting searchForAnimalModels");
 
         return theAnimalModels;
     }
@@ -1884,21 +1889,21 @@ public class QueryManagerImpl extends BaseManager
     public int countMatchingAnimalModels(SearchData inSearchData) throws Exception
     {
 
-        log.info("Entering countMatchingAnimalModels");
+        log.debug("Entering countMatchingAnimalModels");
 
         String theFromClause = "select count (am) from AnimalModel as am where am.state = 'Edited-approved' AND am.availability.releaseDate < sysdate ";
         List theCountResults = null;
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().trim().length() > 0)
         {
-            log.info("Doing a keyword search: " + inSearchData.getKeyword());
+            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
             String theWhereClause = buildKeywordSearchWhereClause(inSearchData.getKeyword());
 
             try
             {
                 String theHQLQuery = theFromClause + theWhereClause;
 
-                log.info("HQL Query: " + theHQLQuery);
+                log.debug("HQL Query: " + theHQLQuery);
 
                 String theKeyword = "%" + inSearchData.getKeyword().toUpperCase().trim() + "%";
                 Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
@@ -1915,14 +1920,14 @@ public class QueryManagerImpl extends BaseManager
         }
         else
         {
-            log.info("Doing a criteria search");
+            log.debug("Doing a criteria search");
             String theWhereClause = buildCriteriaSearchWhereClause(inSearchData);
 
             try
             {
                 String theHQLQuery = theFromClause + theWhereClause;
 
-                log.info("HQL Query: " + theHQLQuery);
+                log.debug("HQL Query: " + theHQLQuery);
 
                 Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
                 theCountResults = theQuery.list();
@@ -1941,7 +1946,7 @@ public class QueryManagerImpl extends BaseManager
             Integer theInt = (Integer) theCountResults.get(0);
             theCount = theInt.intValue();
         }
-        log.info("Exiting searchForAnimalModels");
+        log.debug("Exiting searchForAnimalModels");
 
         return theCount;
     }
@@ -1989,7 +1994,7 @@ public class QueryManagerImpl extends BaseManager
         {
             String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
 
-            log.info("HQL Query: " + theHQLQuery);
+            log.debug("HQL Query: " + theHQLQuery);
 
             String theKeyword = "%" + inKeyword.toUpperCase() + "%";
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
@@ -2160,7 +2165,7 @@ public class QueryManagerImpl extends BaseManager
 		
 		// Search for Transient Interference
 		if (inSearchData.isSearchTransientInterference()) {
-			log.info("In Search inSearchData.isSearchTransientInterference(): "
+			log.debug("In Search inSearchData.isSearchTransientInterference(): "
 					+ inSearchData.isSearchTransientInterference());
 			theWhereClause += " AND abs_cancer_model_id IN ("
 					+ getModelIdsForTransientInterference() + ")";
@@ -2168,7 +2173,7 @@ public class QueryManagerImpl extends BaseManager
 
 		// Search for tool strains
 		if (inSearchData.isSearchToolStrain()) {
-			log.info("In Search inSearchData.isSearchToolStrain(): "
+			log.debug("In Search inSearchData.isSearchToolStrain(): "
 					+ inSearchData.isSearchToolStrain());
 			theWhereClause += " AND abs_cancer_model_id IN ("
 					+ getModelIdsForToolStrain() + ")";
@@ -2190,7 +2195,7 @@ public class QueryManagerImpl extends BaseManager
         {
             String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
 
-            log.info("HQL Query: " + theHQLQuery);
+            log.debug("HQL Query: " + theHQLQuery);
 
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theAnimalModels = theQuery.list();
@@ -2220,7 +2225,7 @@ public class QueryManagerImpl extends BaseManager
                           Object inParameters[]) throws PersistenceException
     {
 
-        log.info("In getIds");
+        log.debug("In getIds");
 
         String theModelIds = "";
 
@@ -2228,7 +2233,7 @@ public class QueryManagerImpl extends BaseManager
         try
         {
 
-            log.info("getIds - SQL: " + inSQLString);
+            log.debug("getIds - SQL: " + inSQLString);
 
             theResultSet = Search.query(inSQLString, inParameters);
 
@@ -2296,7 +2301,7 @@ public class QueryManagerImpl extends BaseManager
             + "   and st.species_id = sp.species_id" + "\n"             
             + "   and a.nsc_number = ?";
 
-            log.info("\n getModelsForThisCompound - SQL: " + theSQLString);
+            log.debug("\n getModelsForThisCompound - SQL: " + theSQLString);
 
             Object[] params = new Object[1];
             params[0] = nscNumber;
@@ -2335,7 +2340,7 @@ public class QueryManagerImpl extends BaseManager
                 models.add(item);
                 cc++;
             }
-            log.info("Got " + cc + " animal models");
+            log.debug("Got " + cc + " animal models");
         }
         catch (Exception e)
         {
@@ -2366,7 +2371,7 @@ public class QueryManagerImpl extends BaseManager
         {
             String theSQLString = "select publication_id, year, authors" + "\n" + "  from publication" + "\n" + "  where publication_id in (" + "\n" + "	  select min(publication_id) publication_id" + "\n" + "	  from (" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from therapy th," + "\n" + "		       therapy_publication tp," + "\n" + "		       publication p" + "\n" + "		  where th.abs_cancer_model_id = ?" + "\n" + "		   and th.therapy_id = tp.therapy_id" + "\n" + "		   and tp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from cell_line cl," + "\n" + "		       cell_line_publication cp," + "\n" + "		       publication p" + "\n" + "		 where cl.abs_cancer_model_id = ?" + "\n" + "		   and cl.cell_line_id = cp.cell_line_id" + "\n" + "		   and cp.publication_id = p.publication_id" + "\n" + "		union" + "\n" + "		select p.pmid, p.publication_id" + "\n" + "		  from abs_can_mod_publication acmp," + "\n" + "		       publication p" + "\n" + "		 where acmp.abs_cancer_model_id = ?" + "\n" + "		   and acmp.publication_id = p.publication_id )" + "\n" + "	 group by pmid )" + "\n" + " order by year desc, authors" + "\n";
 
-            log.info("getAllPublications - SQL: " + theSQLString);
+            log.debug("getAllPublications - SQL: " + theSQLString);
             Object[] params = new Object[3];
             params[0] = params[1] = params[2] = String.valueOf(absCancerModelId);
             theResultSet = Search.query(theSQLString, params);
@@ -2377,7 +2382,7 @@ public class QueryManagerImpl extends BaseManager
                 publications.add(p);
                 cc++;
             }
-            log.info("Got " + cc + " publications");
+            log.debug("Got " + cc + " publications");
         }
         catch (Exception e)
         {
@@ -2535,7 +2540,7 @@ public class QueryManagerImpl extends BaseManager
      */
     private String getModelIdsForImageData() throws PersistenceException
     {
-    	log.info("In getModelIdsForImageData");
+    	log.debug("In getModelIdsForImageData");
         String theSQLString = "SELECT distinct abs_cancer_model_id FROM image";             
 
         Object[] theParams = new Object[0];
