@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.65 2006-12-28 16:02:25 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.66 2007-03-28 18:43:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.65  2006/12/28 16:02:25  pandyas
+ * Reverted to previous version - changed CE on adv search page
+ *
  * Revision 1.63  2006/11/27 19:09:24  pandyas
  * #483	select of organ after search in tree causes crash, was an oracle max elemnts in list error - implemented quick fix and should optimize a fix for next release
  *
@@ -243,6 +246,7 @@ import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -416,104 +420,233 @@ public class QueryManagerImpl extends BaseManager
         return theList;
     }
 
-    /**
-     * Return the list of environmental factor names
-     * 
-     * @param inType
-     *            the type of environmental factor
-     * 
-     * @return a sorted list of unique environmental factors
-     * @throws PersistenceException
-     */
-    public List getEnvironmentalFactors(String inType) throws PersistenceException
-    {
+	/**
+	 * Return the list of agent names that match the agent type passed in
+	 * 
+	 * @param inPrefix
+	 *            the starting characters of the name
+	 * 
+	 * @return a sorted list of unique modelDescriptors
+	 * 
+	 * @throws PersistenceException
+	 */
 
-        log.info("Entering QueryManagerImpl.getEnvironmentalFactors");
+	public List getMatchingAgents(String inAgentType)
+			throws PersistenceException {
+		log.debug("Entering QueryManagerImpl.getMatchingAgents");
+		ResultSet theResultSet = null;
+		List<String> theEnvFactors = new ArrayList<String>();
 
-        // Format the query
-        HQLParameter[] theParams = new HQLParameter[1];
-        theParams[0] = new HQLParameter();
-        theParams[0].setName("type");
-        theParams[0].setValue(inType);
-        theParams[0].setType(Hibernate.STRING);
+		try {
+			// Format the query
+			String theSQLQuery = "SELECT ef.name, ef.name_unctrl_vocab "
+					+ "FROM environmental_factor ef "
+					+ "WHERE ef.type LIKE ? "
+					+ "  AND ef.name IS NOT null "
+					+ "  UNION "
+					+ "SELECT ef.name_unctrl_vocab "
+					+ "FROM environmental_factor ef "
+					+ "WHERE ef.TYPE_UNCTRL_VOCAB LIKE ? "
+					+ "  AND ef.name_unctrl_vocab IS NOT null "
+					+ "AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved') ORDER BY ef.name asc ";
 
-        log.info("inType: " + inType);
+			Object[] theParams = new Object[1];
+			theParams[0] = inAgentType;
+			theResultSet = Search.query(theSQLQuery, theParams);
 
-        String theHQLQuery = "select distinct ef.name from EnvironmentalFactor as ef where ef.type = :type and ef.name is not null order by ef.name asc ";
+			while (theResultSet.next()) {
+				String theName = theResultSet.getString(1);
+				String theUncontrolledName = theResultSet.getString(2);
 
-        List theList = Search.query(theHQLQuery, theParams);
+				if (theName != null && theName.length() > 0
+						&& !theEnvFactors.contains(theName)) {
+					theEnvFactors.add(theName);
+				} else if (theUncontrolledName != null
+						&& theUncontrolledName.length() > 0
+						&& !theEnvFactors.contains(theUncontrolledName)) {
+					theEnvFactors.add(theName);
+				}
+			}
 
-        log.info("Found matching items: " + theList.size());
+			Collections.sort(theEnvFactors);
 
-        log.info("Exiting QueryManagerImpl.getAdministrativeRoutes");
-        return theList;
-    }
+			log.debug("Exiting QueryManagerImpl.getMatchingAgents");
+		} catch (Exception e) {
+			log.error("Exception in getMatchingAgents", e);
+			throw new PersistenceException("Exception in getMatchingAgents: "
+					+ e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+					theResultSet.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		return theEnvFactors;
+	}
 
-    /**
-     * Return the list of environmental factor names
-     * 
-     * @param inType
-     *            the type of environmental factor
-     * 
-     * @return a sorted list of unique environmental factors
-     * @throws PersistenceException
-     */
-    public List getQueryOnlyEnvironmentalFactors(String inType) throws PersistenceException
-    {
+	/**
+	 * Return the list of Carcinogenic Agent (environmental factor types) names
+	 * 
+	 * @return a sorted list of unique types
+	 * @throws PersistenceException
+	 */
+	public List getEnvironmentalFactorAgentTypes() throws PersistenceException {
 
-        log.debug("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
-        ResultSet theResultSet = null;
-        List<String> theEnvFactors = new ArrayList<String>();
+		log.debug("Entering QueryManagerImpl.getCarcinogenicAgents");
+		
+		ResultSet theResultSet = null;
+		List<String> theEFAgentTypesList = new ArrayList<String>();
 
-        try
-        {
-            // Format the query
-            String theSQLQuery = "SELECT ef.name, ef.name_unctrl_vocab " + "FROM environmental_factor ef " + "WHERE ef.type = ? " + "  AND ef.name IS NOT null " + "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id " + "     FROM carcinogen_exposure ce, abs_cancer_model am " + "			WHERE ef.environmental_factor_id = ce.environmental_factor_id " + "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved') ORDER BY ef.name asc ";
+		try {
+			// Format the query
+			String theSQLQuery = "SELECT ef.type, ef.type_unctrl_vocab "
+				+ "FROM environmental_factor ef ";			
+
+			// Format the query			
+			Object[] theParams = new Object[0];
+			theResultSet = Search.query(theSQLQuery, theParams);
+
+			while (theResultSet.next()) {
+				String theType = theResultSet.getString(1);
+				String theUncontrolledType = theResultSet.getString(2);
+
+				// Remove ADMIN and Not Specified in appropriate lists
+				if (theType != null && theType.length() > 0
+						&& !theEFAgentTypesList.contains(theType)) {
+					if (!theType.equals("ADMIN")) {
+					theEFAgentTypesList.add(theType);
+					}
+				} else if (theUncontrolledType != null
+						&& theUncontrolledType.length() > 0
+						&& !theEFAgentTypesList.contains(theUncontrolledType)) {
+					if (!theUncontrolledType.equals("Not Specified")) {
+					theEFAgentTypesList.add(theUncontrolledType);
+					}
+				}
+			}
+
+			Collections.sort(theEFAgentTypesList);
+
+			log.debug("Exiting QueryManagerImpl.getMatchingAgents");
+		} catch (Exception e) {
+			log.error("Exception in getMatchingAgents", e);
+			throw new PersistenceException("Exception in getMatchingAgents: "
+					+ e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+					theResultSet.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		return theEFAgentTypesList;
+	}	
+	
+	/**
+	 * Return the list of environmental factor names
+	 * 
+	 * @param inType
+	 *            the type of environmental factor
+	 * 
+	 * @return a sorted list of unique environmental factors
+	 * @throws PersistenceException
+	 */
+
+	public List getEnvironmentalFactors(String inType)
+			throws PersistenceException {
+
+		log.debug("Entering QueryManagerImpl.getEnvironmentalFactors");
+
+		// Format the query
+		HQLParameter[] theParams = new HQLParameter[1];
+		theParams[0] = new HQLParameter();
+		theParams[0].setName("type");
+		theParams[0].setValue(inType);
+		theParams[0].setType(Hibernate.STRING);
+
+		log.debug("inType: " + inType);
+
+		String theHQLQuery = "select distinct ef.name from EnvironmentalFactor as ef where ef.type = :type and ef.name is not null order by ef.name asc ";
+
+		List theList = Search.query(theHQLQuery, theParams);
+
+		log.debug("Found matching items: " + theList.size());
+
+		log.debug("Exiting QueryManagerImpl.getEnvironmentalFactors");
+		return theList;
+	}
 
 
-            Object[] theParams = new Object[1];
-            theParams[0] = inType;
-            theResultSet = Search.query(theSQLQuery, theParams);
+	/**
+	 * Return the list of environmental factor names
+	 * 
+	 * @param inType
+	 *            the type of environmental factor
+	 * 
+	 * @return a sorted list of unique environmental factors
+	 * @throws PersistenceException
+	 */
+	public List getQueryOnlyEnvironmentalFactors(String inType)
+			throws PersistenceException {
 
-            while (theResultSet.next())
-            {
-                String theName = theResultSet.getString(1);
-                String theUncontrolledName = theResultSet.getString(2);
+		log.debug("Entering QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
+		log.debug("<getQueryOnlyEnvironmentalFactors> inType: " + inType);
+		
+		ResultSet theResultSet = null;
+		List<String> theEFNameList = new ArrayList<String>();
 
-                if (theName != null && theName.length() > 0 && !theEnvFactors.contains(theName))
-                {
-                    theEnvFactors.add(theName);
-                }
-                else if (theUncontrolledName != null && theUncontrolledName.length() > 0 && !theEnvFactors.contains(theUncontrolledName))
-                {
-                    theEnvFactors.add(theName);
-                }
-            }
+		try {
+			// Format the query
+			String theSQLQuery = "SELECT ef.name, ef.name_unctrl_vocab "
+					+ "FROM environmental_factor ef "
+					+ "WHERE (ef.type = ? OR ef.type_unctrl_vocab = ?)"
+					+ "  AND ef.environmental_factor_id IN (SELECT ce.environmental_factor_id "
+					+ "     FROM carcinogen_exposure ce, abs_cancer_model am "
+					+ "			WHERE ef.environmental_factor_id = ce.environmental_factor_id "
+					+ "     	AND am.abs_cancer_model_id = ce.abs_cancer_model_id AND am.state = 'Edited-approved')";
 
-            Collections.sort(theEnvFactors);
+			Object[] theParams = new Object[2];
+			theParams[0] = inType;
+			theParams[1] = inType;			
+			theResultSet = Search.query(theSQLQuery, theParams);
+			
+			while (theResultSet.next()) {
+				String theName = theResultSet.getString(1);
+				String theUncontrolledName = theResultSet.getString(2);
+				log.debug("theName: " + theName + "\ttheUncontrolledName: " +theUncontrolledName);
 
-            log.debug("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
-        }
-        catch (Exception e)
-        {
-            log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
-            throw new PersistenceException("Exception in getQueryOnlyEnvironmentalFactors: " + e);
-        }
-        finally
-        {
-            if (theResultSet != null)
-            {
-                try
-                {
-                    theResultSet.close();
-                }
-                catch (Exception e)
-                {}
-            }
-        }
-        return theEnvFactors;
-    }
+				if (theName != null  && theName.length() > 0
+						&& !theEFNameList.contains(theName)) {
+					theEFNameList.add(theName);
+					log.debug("Added theName: " + theName + " Bringing total to: " +theEFNameList.size());
+				} else if (theUncontrolledName != null  
+						&& theUncontrolledName.length() > 0
+						&& !theEFNameList.contains(theUncontrolledName)) {
+					theEFNameList.add(theUncontrolledName);
+					log.debug("Added theUncontrolledName: " + theUncontrolledName + " Bringing total to: " +theEFNameList.size());
+				}
 
+			}
+
+			log.debug("Exiting QueryManagerImpl.getQueryOnlyEnvironmentalFactors");
+		} catch (Exception e) {
+			log.error("Exception in getQueryOnlyEnvironmentalFactors", e);
+			throw new PersistenceException(
+					"Exception in getQueryOnlyEnvironmentalFactors: " + e);
+		} finally {
+			if (theResultSet != null) {
+				try {
+					theResultSet.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+ 		Collections.sort(theEFNameList);
+		return theEFNameList;
+	}
 
     /**
      * Return the list of environmental factor names which were used to induce a
@@ -1646,49 +1779,81 @@ public class QueryManagerImpl extends BaseManager
         return getIds(theSQLString, theParams);
     }
 
-    /**
-     * Get the model id's that have a matching environmental factor
-     * 
-     * @param inType
-     *            the EF type
-     * @param inName
-     *            the name to look for
-     * 
-     * @return a list of matching model id
-     * 
-     * @throws PersistenceException
-     */
-    private String getModelIdsForEnvironmentalFactor(String inType,
-                                                     String inName) throws PersistenceException
-    {
-        String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce " + "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef" + "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND (ef.name = ? OR ef.name_unctrl_vocab = ?) AND ef.type = ?)";
+	/**
+	 * Get the model id's that have a matching environmental factor
+	 * 
+	 * @param inType
+	 *            the EF type
+	 * @param inName
+	 *            the name to look for
+	 * 
+	 * @return a list of matching model id
+	 * 
+	 * @throws PersistenceException
+	 */
+	private String getModelIdsForEnvironmentalFactor(String inType,
+			String inName) throws PersistenceException {
+		log.debug("<getModelIdsForEnvironmentalFactor> inType: " + inType);
+		log.debug("<getModelIdsForEnvironmentalFactor> inName: " + inName);		
+		
+		String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce "
+				+ "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef"
+				+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND (ef.name = ? OR ef.name_unctrl_vocab = ?)  " 
+				+ "AND (ef.type = ? OR ef.type_unctrl_vocab = ?) )";
 
-        Object[] theParams = new Object[3];
-        theParams[0] = inName;
-        theParams[1] = inName;
-        theParams[2] = inType;
-        return getIds(theSQLString, theParams);
-    }
+		Object[] theParams = new Object[4];
+		theParams[0] = inName;
+		theParams[1] = inName;
+		theParams[2] = inType;
+		theParams[3] = inType;		
+		return getIds(theSQLString, theParams);
+	}
 
-    /**
-     * Get the model id's for any model has a keyword match in the env factor
-     * 
-     * @param inKeyword
-     *            the name to look for
-     * 
-     * @return a list of matching model id
-     * 
-     * @throws PersistenceException
-     */
-    private String getModelIdsForAnyEnvironmentalFactor(String inKeyword) throws PersistenceException
-    {
+	/**
+	 * Get the model id's for any model that has a type of env factor
+	 * 
+	 * @param inType
+	 *            the type to look for
+	 * 
+	 * @return a list of matching model id
+	 * 
+	 * @throws PersistenceException
+	 */
+		private String getModelIdsForAnEnvironmentalFactorByType(String inType) throws PersistenceException {
+			
+			log.debug("In getModelIdsForAnEnvironmentalFactorByType");
+			String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce "
+					+ "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef"
+					+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND (ef.type = ? OR ef.type_unctrl_vocab = ?) )";
 
-        String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce " + "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef" + "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND upper(ef.name) like ?)";
+			Object[] theParams = new Object[2];
+			theParams[0] = inType;
+			theParams[1] = inType;			
+			return getIds(theSQLString, theParams);
+		}		
+		
+	
+	/**
+	 * Get the model id's for any model has a keyword match in the env factor
+	 * 
+	 * @param inKeyword
+	 *            the name to look for
+	 * 
+	 * @return a list of matching model id
+	 * 
+	 * @throws PersistenceException
+	 */
+	private String getModelIdsForAnyEnvironmentalFactor(String inKeyword)
+			throws PersistenceException {
 
-        Object[] theParams = new Object[1];
-        theParams[0] = inKeyword;
-        return getIds(theSQLString, theParams);
-    }
+		String theSQLString = "SELECT distinct ce.abs_cancer_model_id FROM carcinogen_exposure ce "
+				+ "WHERE ce.environmental_factor_id IN (SELECT ef.environmental_factor_id FROM carcinogen_exposure ce, environmental_factor ef"
+				+ "     WHERE ce.environmental_factor_id = ef.environmental_factor_id AND upper(ef.name) like ?)";
+
+		Object[] theParams = new Object[1];
+		theParams[0] = inKeyword;
+		return getIds(theSQLString, theParams);
+	}
 
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
@@ -1856,9 +2021,9 @@ public class QueryManagerImpl extends BaseManager
             theWhereClause += " AND am.principalInvestigator IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%')";
         }
 
-        // Model descriptor criteria
-        if (inSearchData.getModelDescriptor() != null && inSearchData.getModelDescriptor().trim().length() > 0)
-        {
+		// Model descriptor criteria
+		if (inSearchData.getModelDescriptor() != null
+				&& inSearchData.getModelDescriptor().trim().length() > 0) {
 
             theWhereClause += " AND upper(am.modelDescriptor) like '%" + inSearchData.getModelDescriptor().toUpperCase().trim() + "%'";
         }
@@ -1897,123 +2062,93 @@ public class QueryManagerImpl extends BaseManager
 					+ "%'";
 		}		
 
-        // ///////////////////////////////////////
-        // Carcinogenic interventions
-        // ///////////////////////////////////////
+		// ///////////////////////////////////////
+		// Carcinogenic interventions
+		// ///////////////////////////////////////
 
-        if (inSearchData.isSearchCarcinogenicInterventions() == true)
-        {
+		if (inSearchData.getCarcinogenicIntervention() != null
+				&& inSearchData.getCarcinogenicIntervention().trim().length() > 0) {
+			
+			if (inSearchData.getAgentName() != null
+					&& inSearchData.getAgentName().trim().length() > 0) {
+				log.debug("<QueryManagerImpl> Searching for Carcinogenic Interventions by agent type and name  - selected by user");
+			// Search for a CE by agent type
+				theWhereClause += " AND abs_cancer_model_id IN ("
+						+ getModelIdsForEnvironmentalFactor(inSearchData.getCarcinogenicIntervention(),
+								inSearchData.getAgentName().trim()) + ")";
+			} else {
+				log.debug("<QueryManagerImpl> Searching for Carcinogenic Interventions by agent type only - selected by user");
+				// Search for any model w/ an agent type 
+				theWhereClause += " AND abs_cancer_model_id IN ("
+						+ getModelIdsForAnEnvironmentalFactorByType(inSearchData.getCarcinogenicIntervention()) + ")";
+			}
+		}
 
-            log.info("Searching for Carcinogenic Interventions");
+		// Only call if some of the data is set : TODO: clean this up
+		if ((inSearchData.getGeneName() != null
+				&& inSearchData.getGeneName().trim().length() > 0 && (inSearchData
+				.isEngineeredTransgene() || inSearchData
+				.isTargetedModification()))
+				|| (inSearchData.getGenomicSegDesignator() != null && inSearchData
+						.getGenomicSegDesignator().trim().length() > 0)
+				|| (inSearchData.getInducedMutationAgent() != null && inSearchData
+						.getInducedMutationAgent().trim().length() > 0)) {
 
-            boolean searchForSpecificCI = false;
+			// Search for engineered genes
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForEngineeredGenes(inSearchData.getGeneName(),
+							inSearchData.isEngineeredTransgene(), inSearchData
+									.isTargetedModification(), inSearchData
+									.getGenomicSegDesignator(), inSearchData
+									.getInducedMutationAgent()) + ")";
+		}
 
-            // Search for chemical/drug
-            if (inSearchData.getChemicalDrug() != null && inSearchData.getChemicalDrug().trim().length() > 0)
-            {
-                theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForEnvironmentalFactor("Chemical / Drug",
-                                                                                                      inSearchData.getChemicalDrug().trim()) + ")";
-                searchForSpecificCI = true;
-            }
+		// Search for phenotype
+		if (inSearchData.getPhenotype() != null
+				&& inSearchData.getPhenotype().trim().length() > 0) {
+			theWhereClause += " AND am.phenotype IN (from Phenotype as p where upper(p.description) like '%"
+					+ inSearchData.getPhenotype().trim().toUpperCase() + "%')";
+		}
 
-            // Search for Surgery/Other
-            if (inSearchData.getSurgery() != null && inSearchData.getSurgery().length() > 0)
-            {
-                theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForEnvironmentalFactor("Other", inSearchData.getSurgery()) + ")";
-                searchForSpecificCI = true;
-            }
+		// Search for cellline
+		if (inSearchData.getCellLine() != null
+				&& inSearchData.getCellLine().trim().length() > 0) {
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForCellLine(inSearchData.getCellLine().trim())
+					+ ")";
+		}
 
-            // Search for Hormone
-            if (inSearchData.getHormone() != null && inSearchData.getHormone().length() > 0)
-            {
-                theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForEnvironmentalFactor("Hormone", inSearchData.getHormone()) + ")";
-                searchForSpecificCI = true;
-            }
+		// Search for therapeutic approaches
+		if (inSearchData.isSearchTherapeuticApproaches()) {
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForTherapeuticApproach(inSearchData
+							.getTherapeuticApproach().trim()) + ")";
+		}
 
-            // Search for Growth Factor
-            if (inSearchData.getGrowthFactor() != null && inSearchData.getGrowthFactor().length() > 0)
-            {
-                theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForEnvironmentalFactor("Growth Factor",
-                                                                                                      inSearchData.getGrowthFactor()) + ")";
-                searchForSpecificCI = true;
-            }
+		// Search for metastasis
+		if (inSearchData.isSearchHistoMetastasis()) {
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForHistoMetastasis() + ")";
+		}
 
-            // Search for Radiation
-            if (inSearchData.getRadiation() != null && inSearchData.getRadiation().length() > 0)
-            {
-                theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForEnvironmentalFactor("Radiation",
-                                                                                                      inSearchData.getRadiation()) + ")";
-                searchForSpecificCI = true;
-            }
+		// Search for microarray data
+		if (inSearchData.isSearchMicroArrayData()) {
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForMicroArrayData() + ")";
+		}
 
-            // Search for Viral
-            if (inSearchData.getViral() != null && inSearchData.getViral().length() > 0)
-            {
-                theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForEnvironmentalFactor("Viral", inSearchData.getViral()) + ")";
-                searchForSpecificCI = true;
-            }
+		// Search for image data
+		if (inSearchData.isSearchImageData()) {
+			log.debug("In theWhereClause for image data");
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForImageData() + ")";
+		}
 
-            // Search for any model w/ a CI
-            if (searchForSpecificCI == false)
-            {
-                theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForAnyEnvironmentalFactor() + ")";
-            }
-        }
-
-        // Only call if some of the data is set : TODO: clean this up
-        if ((inSearchData.getGeneName() != null && inSearchData.getGeneName().trim().length() > 0 && (inSearchData.isEngineeredTransgene() || inSearchData.isTargetedModification())) || (inSearchData.getGenomicSegDesignator() != null && inSearchData.getGenomicSegDesignator().trim().length() > 0) || (inSearchData.getInducedMutationAgent() != null && inSearchData.getInducedMutationAgent().trim().length() > 0))
-        {
-
-            // Search for engineered genes
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForEngineeredGenes(inSearchData.getGeneName(),
-                                                                                              inSearchData.isEngineeredTransgene(),
-                                                                                              inSearchData.isTargetedModification(),
-                                                                                              inSearchData.getGenomicSegDesignator(),
-                                                                                              inSearchData.getInducedMutationAgent()) + ")";
-        }
-
-        // Search for phenotype
-        if (inSearchData.getPhenotype() != null && inSearchData.getPhenotype().trim().length() > 0)
-        {
-            theWhereClause += " AND am.phenotype IN (from Phenotype as p where upper(p.description) like '%" + inSearchData.getPhenotype().trim().toUpperCase() + "%')";
-        }
-
-        // Search for cellline
-        if (inSearchData.getCellLine() != null && inSearchData.getCellLine().trim().length() > 0)
-        {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForCellLine(inSearchData.getCellLine().trim()) + ")";
-        }
-
-        // Search for therapeutic approaches
-        if (inSearchData.isSearchTherapeuticApproaches())
-        {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForTherapeuticApproach(inSearchData.getTherapeuticApproach().trim()) + ")";
-        }
-
-        // Search for metastasis
-        if (inSearchData.isSearchHistoMetastasis())
-        {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForHistoMetastasis() + ")";
-        }
-
-        // Search for microarray data
-        if (inSearchData.isSearchMicroArrayData())
-        {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForMicroArrayData() + ")";
-        }
-        
-        // Search for image data
-        if (inSearchData.isSearchImageData())
-        {
-        	log.info("In theWhereClause for image data");
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForImageData() + ")";
-        }        
- 
-        // Search for Transient Interference
-        if (inSearchData.isSearchTransientInterference())
-        {
-            theWhereClause += " AND abs_cancer_model_id IN (" + getModelIdsForTransientInterference() + ")";
-        }
+		// Search for Transient Interference
+		if (inSearchData.isSearchTransientInterference()) {
+			theWhereClause += " AND abs_cancer_model_id IN ("
+					+ getModelIdsForTransientInterference() + ")";
+		}
 
 		// Search for xenograft
 		if (inSearchData.isSearchXenograft()) {
@@ -2408,6 +2543,15 @@ public class QueryManagerImpl extends BaseManager
 
     }	
 
+	/**
+	 * Static method to copy an existing List to another List (collection type)
+	 * 
+	 */	
+	static <T> void fromArrayToCollection(T[] a, Collection<T> c) {
+	    for (T o : a) {
+	        c.add(o); // Correct
+	    }
+	}
 	
 	public static void main(String[] inArgs) {
 		try {
