@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationData.java,v 1.3 2007-03-26 12:03:10 pandyas Exp $
+ * $Id: SpontaneousMutationData.java,v 1.4 2007-04-04 13:23:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/03/26 12:03:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.2  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -19,9 +22,9 @@ public interface SpontaneousMutationData
 
     public void setName(String name);
 
-    public String getMgiNumber();
+    public String getMgiId();
 
-    public void setMgiNumber(String mgiNumber);
+    public void setMgiId(String mgiId);
 
     public String getComments();
 
@@ -39,12 +42,12 @@ public interface SpontaneousMutationData
 
     public void setGeneId(String geneId);
     
-	public String getRgdNumber();
+	public String getRgdId();
 
-	public void setRgdNumber(String rgdNumber);
+	public void setRgdId(String rgdId);
 
-	public String getZfinNumber();
+	public String getZfinId();
 
-	public void setZfinNumber(String zfinNumber);
+	public void setZfinId(String zfinId);
 
 }

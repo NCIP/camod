@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.15 2007-03-26 12:02:30 pandyas Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.16 2007-04-04 13:19:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/03/26 12:02:30  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.14  2006/05/08 13:42:44  georgeda
  * Reformat and clean up warnings
  *
@@ -76,14 +79,14 @@ public class TargetedModificationPopulateAction extends BaseAction
             MutationIdentifier theMutationIdentifier = theTargetedModification.getMutationIdentifier();
             if (theMutationIdentifier != null)
             {
-            	if (theMutationIdentifier.getMgiNumber() != null && theMutationIdentifier.getMgiNumber().length() > 0) {
-            		theTargetedModificationForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
+            	if (theMutationIdentifier.getMgiId() != null && theMutationIdentifier.getMgiId().length() > 0) {
+            		theTargetedModificationForm.setMgiId(theMutationIdentifier.getMgiId());
             	}
-            	if (theMutationIdentifier.getZfinNumber() != null && theMutationIdentifier.getZfinNumber().length() > 0) {
-            		theTargetedModificationForm.setZfinNumber(theMutationIdentifier.getZfinNumber());
+            	if (theMutationIdentifier.getZfinId() != null && theMutationIdentifier.getZfinId().length() > 0) {
+            		theTargetedModificationForm.setZfinId(theMutationIdentifier.getZfinId());
                 }
-            	if (theMutationIdentifier.getRgdNumber() != null && theMutationIdentifier.getRgdNumber().length() > 0) {
-            		theTargetedModificationForm.setRgdNumber(theMutationIdentifier.getRgdNumber());
+            	if (theMutationIdentifier.getRgdId() != null && theMutationIdentifier.getRgdId().length() > 0) {
+            		theTargetedModificationForm.setRgdId(theMutationIdentifier.getRgdId());
                 }             	
             }
 

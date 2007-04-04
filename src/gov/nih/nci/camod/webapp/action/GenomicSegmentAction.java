@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentAction.java,v 1.17 2007-03-26 12:02:31 pandyas Exp $
+ * $Id: GenomicSegmentAction.java,v 1.18 2007-04-04 13:19:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/03/26 12:02:31  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.16  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -62,9 +65,9 @@ public final class GenomicSegmentAction extends BaseAction {
                 + genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
                 + genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: " + genomicSegmentForm.getComments()
                 + "\n\t getCloneDesignator: " + genomicSegmentForm.getCloneDesignator() 
-                + "\n\t getMgiNumber: "  + genomicSegmentForm.getMgiNumber()
-                + "\n\t getZfinNumber: "  + genomicSegmentForm.getZfinNumber() 
-                + "\n\t getRgdNumber: "  + genomicSegmentForm.getRgdNumber()                 
+                + "\n\t getMgiId: "  + genomicSegmentForm.getMgiId()
+                + "\n\t getZfinId: "  + genomicSegmentForm.getZfinId() 
+                + "\n\t getRgdId: "  + genomicSegmentForm.getRgdId()                 
                 + "\n\t getDescription: " + genomicSegmentForm.getDescription()
                 + "\n\t getFileServerLocation: " + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
                 + genomicSegmentForm.getTitle() + "\n\t"
@@ -164,10 +167,10 @@ public final class GenomicSegmentAction extends BaseAction {
                         + genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
                         + genomicSegmentForm.getOtherSegmentName() + "\n\t getComments: "
                         + genomicSegmentForm.getComments() + "\n\t getCloneDesignator: "
-                        + genomicSegmentForm.getCloneDesignator() + "\n\t getMgiNumber: "
-                        + genomicSegmentForm.getMgiNumber() 
-                        + "\n\t getZfinNumber: "  + genomicSegmentForm.getZfinNumber() 
-                        + "\n\t getRgdNumber: "  + genomicSegmentForm.getRgdNumber()                        
+                        + genomicSegmentForm.getCloneDesignator() + "\n\t getMgiId: "
+                        + genomicSegmentForm.getMgiId() 
+                        + "\n\t getZfinId: "  + genomicSegmentForm.getZfinId() 
+                        + "\n\t getRgdId: "  + genomicSegmentForm.getRgdId()                        
                         + "\n\t getDescription: "
                         + genomicSegmentForm.getDescription() + "\n\t getFileServerLocation: "
                         + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.28 2007-03-27 18:38:26 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.29 2007-04-04 13:17:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/03/27 18:38:26  pandyas
+ * Modified code to trim identifiers - cleaner for display link
+ *
  * Revision 1.27  2007/03/26 12:01:11  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -261,22 +264,22 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 			inMutationIdentifier = new MutationIdentifier();
 		}
 
-		if (inTargetedModificationData.getMgiNumber() != null) {
+		if (inTargetedModificationData.getMgiId() != null) {
 	
-			inMutationIdentifier.setMgiNumber(inTargetedModificationData
-					.getMgiNumber().trim());
+			inMutationIdentifier.setMgiId(inTargetedModificationData
+					.getMgiId().trim());
 			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inTargetedModificationData.getZfinNumber() != null) {
+		if (inTargetedModificationData.getZfinId() != null) {
 	
-			inMutationIdentifier.setZfinNumber(inTargetedModificationData
-					.getZfinNumber().trim());
+			inMutationIdentifier.setZfinId(inTargetedModificationData
+					.getZfinId().trim());
 			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inTargetedModificationData.getRgdNumber() != null) {
+		if (inTargetedModificationData.getRgdId() != null) {
 	
-			inMutationIdentifier.setRgdNumber(inTargetedModificationData
-					.getRgdNumber().trim());
+			inMutationIdentifier.setRgdId(inTargetedModificationData
+					.getRgdId().trim());
 			inTargetedModification.setMutationIdentifier(inMutationIdentifier);
 		}	
 

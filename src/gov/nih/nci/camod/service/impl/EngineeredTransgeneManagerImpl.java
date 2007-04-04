@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.36 2007-03-27 18:37:23 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.37 2007-04-04 13:17:49 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2007/03/27 18:37:23  pandyas
+ * Modified code to trim identifiers - cleaner for display link
+ *
  * Revision 1.35  2007/03/26 12:01:11  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -296,21 +299,21 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			inMutationIdentifier = new MutationIdentifier();
 		}
 
-		if (inEngineeredTransgeneData.getMgiNumber() != null) {
+		if (inEngineeredTransgeneData.getMgiId() != null) {
 
-			inMutationIdentifier.setMgiNumber(inEngineeredTransgeneData
-					.getMgiNumber().trim());
+			inMutationIdentifier.setMgiId(inEngineeredTransgeneData
+					.getMgiId().trim());
 			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inEngineeredTransgeneData.getZfinNumber() != null ) {
-			inMutationIdentifier.setZfinNumber(inEngineeredTransgeneData
-					.getZfinNumber().trim());
+		if (inEngineeredTransgeneData.getZfinId() != null ) {
+			inMutationIdentifier.setZfinId(inEngineeredTransgeneData
+					.getZfinId().trim());
 			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inEngineeredTransgeneData.getRgdNumber() != null) {
+		if (inEngineeredTransgeneData.getRgdId() != null) {
 
-			inMutationIdentifier.setRgdNumber(inEngineeredTransgeneData
-					.getRgdNumber().trim());
+			inMutationIdentifier.setRgdId(inEngineeredTransgeneData
+					.getRgdId().trim());
 			inEngineeredTransgene.setMutationIdentifier(inMutationIdentifier);
 		}		
 

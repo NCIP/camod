@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationAction.java,v 1.9 2007-03-28 20:53:18 pandyas Exp $
+ * $Id: SpontaneousMutationAction.java,v 1.10 2007-04-04 13:19:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/03/28 20:53:18  pandyas
+ * Added print for rgd and zfin numbers in save and edit methods
+ *
  * Revision 1.8  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -52,10 +55,10 @@ public class SpontaneousMutationAction extends BaseAction {
         SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
         
         log.info("<SpontaneousMutationAction edit> following Characteristics:" + "\n\t name: "
-                + spontaneousMutationForm.getName() + "\n\t getMgiNumber: "
-                + spontaneousMutationForm.getMgiNumber() + "\n\t getRgdNumber: "
-                + spontaneousMutationForm.getRgdNumber()+ "\n\t getZfinNumber: "
-                + spontaneousMutationForm.getZfinNumber()         
+                + spontaneousMutationForm.getName() + "\n\t getMgiId: "
+                + spontaneousMutationForm.getMgiId() + "\n\t getRgdId: "
+                + spontaneousMutationForm.getRgdId()+ "\n\t getZfinId: "
+                + spontaneousMutationForm.getZfinId()         
                 + "\n\t getObservation: "
                 + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
                 + spontaneousMutationForm.getMethodOfObservation() +  "\n\t getGeneId: "                       
@@ -138,10 +141,10 @@ public class SpontaneousMutationAction extends BaseAction {
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
         log.info("<SpontaneousMutationAction save> following Characteristics:" + "\n\t name: "
-                + spontaneousMutationForm.getName() + "\n\t getMgiNumber: " + spontaneousMutationForm.getMgiNumber()
-                + "\n\t getRgdNumber: "
-                + spontaneousMutationForm.getRgdNumber()+ "\n\t getZfinNumber: "
-                + spontaneousMutationForm.getZfinNumber()  
+                + spontaneousMutationForm.getName() + "\n\t getMgiId: " + spontaneousMutationForm.getMgiId()
+                + "\n\t getRgdId: "
+                + spontaneousMutationForm.getRgdId()+ "\n\t getZfinId: "
+                + spontaneousMutationForm.getZfinId()  
                 + "\n\t getObservation: " + spontaneousMutationForm.getObservation() + "\n\t getMethodofObservation: "
                 + spontaneousMutationForm.getMethodOfObservation() + "\n\t getComments: "
                 + spontaneousMutationForm.getComments()+  "\n\t getGeneId: "                       

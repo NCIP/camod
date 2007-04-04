@@ -264,10 +264,10 @@
 				<td class="formLabel"><label for="field2">MGI number:</label>
 				</td>
 				<td class="formField">
-					<input type=button value="Find MGI #" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+					<input type=button value="Find MGI Id" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 					<label for="field1">&nbsp;&nbsp;</label>
-					<html:text styleClass="formFieldUnSized" size="15" property="mgiNumber"  />
+					<html:text styleClass="formFieldUnSized" size="15" property="mgiId"  />
 				</td>
 		</c:if>				
 	</tr>	
@@ -277,10 +277,10 @@
 			<td class="formLabel"><label for="field2">ZFIN number:</label>
 			</td>
 			<td class="formField">
-				<input type=button value="Find ZFIN #" onClick="myRef = window.open('http://zfin.org/','mywin',
+				<input type=button value="Find ZFIN Id" onClick="myRef = window.open('http://zfin.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="15" property="zfinNumber"  />
+				<html:text styleClass="formFieldUnSized" size="15" property="zfinId"  />
 			</td>
 		</c:if>
 	</tr>	
@@ -291,10 +291,10 @@
 			<td class="formLabel"><label for="field2">RGD number:</label>
 			</td>
 			<td class="formField">
-				<input type=button value="Find RGD #" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
+				<input type=button value="Find RGD Id" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="15" property="rgdNumber"  />
+				<html:text styleClass="formFieldUnSized" size="15" property="rgdId"  />
 			</td>
 		</c:if>
 	</tr>

@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.28 2007-03-27 18:37:40 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.29 2007-04-04 13:17:49 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/03/27 18:37:40  pandyas
+ * Modified code to trim identifiers - cleaner for display link
+ *
  * Revision 1.27  2007/03/26 12:01:11  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -199,22 +202,22 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 			inMutationIdentifier = new MutationIdentifier();
 		}
 
-		if (inGenomicSegmentData.getMgiNumber() != null) {
+		if (inGenomicSegmentData.getMgiId() != null) {
 
-			inMutationIdentifier.setMgiNumber(inGenomicSegmentData
-					.getMgiNumber().trim());
+			inMutationIdentifier.setMgiId(inGenomicSegmentData
+					.getMgiId().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inGenomicSegmentData.getZfinNumber() != null) {
+		if (inGenomicSegmentData.getZfinId() != null) {
 
-			inMutationIdentifier.setZfinNumber(inGenomicSegmentData
-					.getZfinNumber().trim());
+			inMutationIdentifier.setZfinId(inGenomicSegmentData
+					.getZfinId().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inGenomicSegmentData.getRgdNumber() != null) {
+		if (inGenomicSegmentData.getRgdId() != null) {
 
-			inMutationIdentifier.setRgdNumber(inGenomicSegmentData
-					.getRgdNumber().trim());
+			inMutationIdentifier.setRgdId(inGenomicSegmentData
+					.getRgdId().trim());
 			inGenomicSegment.setMutationIdentifier(inMutationIdentifier);
 		}		
 		

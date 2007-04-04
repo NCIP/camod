@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationPopulateAction.java,v 1.12 2007-03-26 12:02:31 pandyas Exp $
+ * $Id: SpontaneousMutationPopulateAction.java,v 1.13 2007-04-04 13:19:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/03/26 12:02:31  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.11  2006/11/09 17:31:28  pandyas
  * Commented out debug code
  *
@@ -65,14 +68,14 @@ public class SpontaneousMutationPopulateAction extends BaseAction {
 
             MutationIdentifier inMutationIdentifier = theSpontaneousMutation.getMutationIdentifier();
             if (inMutationIdentifier != null){
-            	if (inMutationIdentifier.getMgiNumber() != null && inMutationIdentifier.getMgiNumber().length() > 0) {
-            		spontaneousMutationForm.setMgiNumber(inMutationIdentifier.getMgiNumber());
+            	if (inMutationIdentifier.getMgiId() != null && inMutationIdentifier.getMgiId().length() > 0) {
+            		spontaneousMutationForm.setMgiId(inMutationIdentifier.getMgiId());
             	}
-            	if (inMutationIdentifier.getZfinNumber() != null && inMutationIdentifier.getZfinNumber().length() > 0) {
-            		spontaneousMutationForm.setZfinNumber(inMutationIdentifier.getZfinNumber());
+            	if (inMutationIdentifier.getZfinId() != null && inMutationIdentifier.getZfinId().length() > 0) {
+            		spontaneousMutationForm.setZfinId(inMutationIdentifier.getZfinId());
                 }
-            	if (inMutationIdentifier.getRgdNumber() != null && inMutationIdentifier.getRgdNumber().length() > 0) {
-            		spontaneousMutationForm.setRgdNumber(inMutationIdentifier.getRgdNumber());
+            	if (inMutationIdentifier.getRgdId() != null && inMutationIdentifier.getRgdId().length() > 0) {
+            		spontaneousMutationForm.setRgdId(inMutationIdentifier.getRgdId());
                 }              	
             }
             

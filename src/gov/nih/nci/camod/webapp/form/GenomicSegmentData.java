@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentData.java,v 1.7 2007-03-26 12:03:10 pandyas Exp $
+ * $Id: GenomicSegmentData.java,v 1.8 2007-04-04 13:23:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/03/26 12:03:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.6  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -43,10 +46,6 @@ public interface GenomicSegmentData extends TransgeneData {
 	public String getComments();
 	
 	public void setComments(String comments);
-	
-	//public String getMgiNumber();
-	
-	//public void setMgiNumber(String mgiNumber);
 	
 	public FormFile getFileLocation();
 	

@@ -7,15 +7,15 @@ public interface TransgeneData
 
     public void setConstructSequence(String constructSequence);
     
-	public String getMgiNumber();
+	public String getMgiId();
 	
-	public void setMgiNumber(String mgiNumber);
+	public void setMgiId(String mgiId);
 
-	public String getRgdNumber();
+	public String getRgdId();
 
-	public void setRgdNumber(String rgdNumber);
+	public void setRgdId(String rgdId);
 
-	public String getZfinNumber();
+	public String getZfinId();
 
-	public void setZfinNumber(String zfinNumber);    
+	public void setZfinId(String zfinId);    
 }

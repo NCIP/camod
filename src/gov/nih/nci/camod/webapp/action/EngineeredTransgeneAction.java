@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneAction.java,v 1.12 2007-03-26 12:02:31 pandyas Exp $
+ * $Id: EngineeredTransgeneAction.java,v 1.13 2007-04-04 13:19:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/03/26 12:02:31  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.11  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -84,9 +87,9 @@ public final class EngineeredTransgeneAction extends BaseAction {
                 + "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
 
                 + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() 
-                + "\n\t getMgiNumber: " + engineeredTransgeneForm.getMgiNumber()
-                + "\n\t getZfinNumber: " + engineeredTransgeneForm.getRgdNumber()
-                + "\n\t getRgdNumber: " + engineeredTransgeneForm.getMgiNumber()                
+                + "\n\t getMgiId: " + engineeredTransgeneForm.getMgiId()
+                + "\n\t getZfinId: " + engineeredTransgeneForm.getRgdId()
+                + "\n\t getRgdId: " + engineeredTransgeneForm.getMgiId()                
                 + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
                 + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription() + "\n\t getComments: "
@@ -208,8 +211,9 @@ public final class EngineeredTransgeneAction extends BaseAction {
                 + "\n\t getSpliceSites_otherSpecies: " + engineeredTransgeneForm.getSpliceSites_otherSpecies()
 
                 + "\n\t getGeneFunctions: " + engineeredTransgeneForm.getGeneFunctions() 
-                + "\n\t getMgiNumber: " + engineeredTransgeneForm.getMgiNumber()
-                + "\n\t getZfinNumber: " + engineeredTransgeneForm.getRgdNumber()                
+                + "\n\t getMgiId: " + engineeredTransgeneForm.getMgiId()
+                + "\n\t getZfinId: " + engineeredTransgeneForm.getZfinId() 
+                + "\n\t getRgdId: " + engineeredTransgeneForm.getRgdId() 
                 + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
                 + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription() + "\n\t getComments: "

@@ -1086,8 +1086,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="mgiNumber" depends="maxlength">
-				<arg0 key="TargetedModificationForm.mgiNumber" />
+			<field property="mgiId" depends="maxlength">
+				<arg0 key="TargetedModificationForm.mgiId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1095,8 +1095,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="zfinNumber" depends="maxlength">
-				<arg0 key="TargetedModificationForm.zfinNumber" />
+			<field property="zfinId" depends="maxlength">
+				<arg0 key="TargetedModificationForm.zfinId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1104,8 +1104,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="rgdNumber" depends="maxlength">
-				<arg0 key="TargetedModificationForm.rgdNumber" />
+			<field property="rgdId" depends="maxlength">
+				<arg0 key="TargetedModificationForm.rgdId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1232,8 +1232,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="mgiNumber" depends="maxlength">
-				<arg0 key="GenomicSegmentForm.mgiNumber" />
+			<field property="mgiId" depends="maxlength">
+				<arg0 key="GenomicSegmentForm.mgiId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1241,8 +1241,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="zfinNumber" depends="maxlength">
-				<arg0 key="GenomicSegmentForm.zfinNumber" />
+			<field property="zfinId" depends="maxlength">
+				<arg0 key="GenomicSegmentForm.zfinId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1250,8 +1250,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="rgdNumber" depends="maxlength">
-				<arg0 key="GenomicSegmentForm.rgdNumber" />
+			<field property="rgdId" depends="maxlength">
+				<arg0 key="GenomicSegmentForm.rgdId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1366,8 +1366,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="mgiNumber" depends="maxlength">
-				<arg0 key="TargetedModificationForm.mgiNumber" />
+			<field property="mgiId" depends="maxlength">
+				<arg0 key="TargetedModificationForm.mgiId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1375,8 +1375,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="zfinNumber" depends="maxlength">
-				<arg0 key="TargetedModificationForm.zfinNumber" />
+			<field property="zfinId" depends="maxlength">
+				<arg0 key="TargetedModificationForm.zfinId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1384,8 +1384,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="rgdNumber" depends="maxlength">
-				<arg0 key="TargetedModificationForm.rgdNumber" />
+			<field property="rgdId" depends="maxlength">
+				<arg0 key="TargetedModificationForm.rgdId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1499,8 +1499,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="mgiNumber" depends="maxlength">
-				<arg0 key="InducedMutationForm.mgiNumber" />
+			<field property="mgiId" depends="maxlength">
+				<arg0 key="InducedMutationForm.mgiId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1508,6 +1508,24 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="zfinId" depends="maxlength">
+				<arg0 key="InducedMutationForm.zfinId" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
+			<field property="rgdId" depends="maxlength">
+				<arg0 key="InducedMutationForm.rgdId" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
 			<field property="description" depends="maxlength">
 				<arg0 key="InducedMutationForm.description" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1565,8 +1583,8 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="mgiNumber" depends="maxlength">
-				<arg0 key="SpontaneousMutationForm.mgiNumber" />
+			<field property="mgiId" depends="maxlength">
+				<arg0 key="SpontaneousMutationForm.mgiId" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -1574,6 +1592,24 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
+			<field property="zfinId" depends="maxlength">
+				<arg0 key="SpontaneousMutationForm.zfinId" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>
+			<field property="rgdId" depends="maxlength">
+				<arg0 key="SpontaneousMutationForm.rgdId" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>									
 			<field property="comments" depends="maxlength">
 				<arg0 key="SpontaneousMutationForm.comments" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2124,13 +2160,13 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="otherConditioningRegime"
+			<field property="otherConditioningRegimen"
 				depends="validwhen, maxlength">
-				<arg0 key="XenograftForm.otherConditioningRegime" />
+				<arg0 key="XenograftForm.otherConditioningRegimen" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((conditioningRegime != 'Other') or (*this* !=
+						((conditioningRegimen != 'Other') or (*this* !=
 						null))
 					</var-value>
 				</var>

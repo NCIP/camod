@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.13 2007-03-27 18:38:15 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.14 2007-04-04 13:17:49 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/03/27 18:38:15  pandyas
+ * Modified code to trim identifiers - cleaner for display link
+ *
  * Revision 1.12  2007/03/26 12:01:11  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -127,21 +130,21 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         else
             inMutationIdentifier = new MutationIdentifier();
         
-		if (inSpontaneousMutationData.getMgiNumber() != null) {
+		if (inSpontaneousMutationData.getMgiId() != null) {
 
-			inMutationIdentifier.setMgiNumber(inSpontaneousMutationData
-					.getMgiNumber().trim());
+			inMutationIdentifier.setMgiId(inSpontaneousMutationData
+					.getMgiId().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inSpontaneousMutationData.getZfinNumber() != null ) {
-			inMutationIdentifier.setZfinNumber(inSpontaneousMutationData
-					.getZfinNumber().trim());
+		if (inSpontaneousMutationData.getZfinId() != null ) {
+			inMutationIdentifier.setZfinId(inSpontaneousMutationData
+					.getZfinId().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
-		if (inSpontaneousMutationData.getRgdNumber() != null) {
+		if (inSpontaneousMutationData.getRgdId() != null) {
 
-			inMutationIdentifier.setRgdNumber(inSpontaneousMutationData
-					.getRgdNumber().trim());
+			inMutationIdentifier.setRgdId(inSpontaneousMutationData
+					.getRgdId().trim());
 			inSpontaneousMutation.setMutationIdentifier(inMutationIdentifier);
 		}
 

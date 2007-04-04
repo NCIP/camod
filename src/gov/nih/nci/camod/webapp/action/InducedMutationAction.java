@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationAction.java,v 1.12 2007-03-26 12:02:31 pandyas Exp $
+ * $Id: InducedMutationAction.java,v 1.13 2007-04-04 13:19:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/03/26 12:02:31  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.11  2006/05/04 19:27:37  pandyas
  * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
  *
@@ -64,10 +67,9 @@ public final class InducedMutationAction extends BaseAction {
                 + "\n\t getDescription: " + inducedMutationForm.getDescription() 
                 + "\n\t getObservation: " + inducedMutationForm.getObservation() 
                 + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 
-                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
-                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
-                + "\n\t getZfinNumber: "  + inducedMutationForm.getZfinNumber() 
-                + "\n\t getRgdNumber: "  + inducedMutationForm.getRgdNumber()                 
+                 + "\n\t getMgiId: "  + inducedMutationForm.getMgiId() 
+                + "\n\t getZfinId: "  + inducedMutationForm.getZfinId() 
+                + "\n\t getRgdId: "  + inducedMutationForm.getRgdId()                 
                 + "\n\t"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));        
 
@@ -154,10 +156,9 @@ public final class InducedMutationAction extends BaseAction {
                 + "\n\t getDescription: " + inducedMutationForm.getDescription() 
                 + "\n\t getObservation: " + inducedMutationForm.getObservation() 
                 + "\n\t getMethodObservation: " + inducedMutationForm.getMethodOfObservation() 
-                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
-                + "\n\t getMgiNumber: "  + inducedMutationForm.getMgiNumber() 
-                + "\n\t getZfinNumber: "  + inducedMutationForm.getZfinNumber() 
-                + "\n\t getRgdNumber: "  + inducedMutationForm.getRgdNumber()                 
+                + "\n\t getMgiId: "  + inducedMutationForm.getMgiId() 
+                + "\n\t getZfinId: "  + inducedMutationForm.getZfinId() 
+                + "\n\t getRgdNumber: "  + inducedMutationForm.getRgdId()                 
                 + "\n\t"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 

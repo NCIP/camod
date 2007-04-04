@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationPopulateAction.java,v 1.17 2007-03-26 12:02:31 pandyas Exp $
+ * $Id: InducedMutationPopulateAction.java,v 1.18 2007-04-04 13:19:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/03/26 12:02:31  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.16  2006/11/09 17:29:47  pandyas
  * Commented out debug code
  *
@@ -76,14 +79,14 @@ public class InducedMutationPopulateAction extends BaseAction {
             
             MutationIdentifier identifier = theInducedMutation.getMutationIdentifier();
             if (identifier != null){
-            	if (identifier.getMgiNumber() != null && identifier.getMgiNumber().length() > 0) {
-            		inducedMutationForm.setMgiNumber(identifier.getMgiNumber());
+            	if (identifier.getMgiId() != null && identifier.getMgiId().length() > 0) {
+            		inducedMutationForm.setMgiId(identifier.getMgiId());
             	}
-            	if (identifier.getZfinNumber() != null && identifier.getZfinNumber().length() > 0) {
-            		inducedMutationForm.setZfinNumber(identifier.getZfinNumber());
+            	if (identifier.getZfinId() != null && identifier.getZfinId().length() > 0) {
+            		inducedMutationForm.setZfinId(identifier.getZfinId());
                 }
-            	if (identifier.getRgdNumber() != null && identifier.getRgdNumber().length() > 0) {
-            		inducedMutationForm.setRgdNumber(identifier.getRgdNumber());
+            	if (identifier.getRgdId() != null && identifier.getRgdId().length() > 0) {
+            		inducedMutationForm.setRgdId(identifier.getRgdId());
                 }             	
             }
             // Set GeneticAlteration attributes 

@@ -24,19 +24,19 @@
 	        <generator class="native"/>
 	    </id>
 	    
-	    <!-- mgiNumber -->
-        <property name="mgiNumber" 
-        	column="mgi_number" 
+	    <!-- mgiId -->
+        <property name="mgiId" 
+        	column="mgi_id" 
         	type="string"/>
 
-	    <!-- zfinNumber -->
-        <property name="zfinNumber" 
-        	column="zfin_number" 
+	    <!-- zfinId -->
+        <property name="zfinId" 
+        	column="zfin_id" 
         	type="string"/>
         	
-	    <!-- rgdNumber -->
-        <property name="rgdNumber" 
-        	column="rgd_number" 
+	    <!-- rgdId -->
+        <property name="rgdId" 
+        	column="rgd_id" 
         	type="string"/>        	        	
 	</class>
 </hibernate-mapping>

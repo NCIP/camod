@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentForm.java,v 1.12 2007-03-26 12:03:10 pandyas Exp $
+ * $Id: GenomicSegmentForm.java,v 1.13 2007-04-04 13:23:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/03/26 12:03:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.11  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -15,9 +18,12 @@ import org.apache.struts.upload.FormFile;
 
 /**
  * 
- * $Id: GenomicSegmentForm.java,v 1.12 2007-03-26 12:03:10 pandyas Exp $
+ * $Id: GenomicSegmentForm.java,v 1.13 2007-04-04 13:23:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/03/26 12:03:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.11  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -42,9 +48,9 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
     protected String segmentSize;
     protected String cloneDesignator;
     protected String comments;
-    protected String mgiNumber;
-	protected String zfinNumber;
-	protected String rgdNumber;    
+    protected String mgiId;
+	protected String zfinId;
+	protected String rgdId;    
     protected String fileServerLocation;
     protected FormFile fileLocation;
     protected String title;
@@ -169,22 +175,6 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
     public void setComments(String comments)
     {
         this.comments = comments;
-    }
-
-    /**
-     * @return Returns the mgiNumber.
-     */
-    public String getMgiNumber()
-    {
-        return mgiNumber;
-    }
-
-    /**
-     * @param mgiNumber The mgiNumber to set.
-     */
-    public void setMgiNumber(String mgiNumber)
-    {
-        this.mgiNumber = mgiNumber;
     }
 
     /**
@@ -318,19 +308,27 @@ public class GenomicSegmentForm extends BaseForm implements Serializable, Genomi
         this.constructSequence = constructSequence;
     }
 
-	public String getRgdNumber() {
-		return rgdNumber;
+	public String getMgiId() {
+		return mgiId;
 	}
 
-	public void setRgdNumber(String rgdNumber) {
-		this.rgdNumber = rgdNumber;
+	public void setMgiId(String mgiId) {
+		this.mgiId = mgiId;
 	}
 
-	public String getZfinNumber() {
-		return zfinNumber;
+	public String getRgdId() {
+		return rgdId;
 	}
 
-	public void setZfinNumber(String zfinNumber) {
-		this.zfinNumber = zfinNumber;
+	public void setRgdId(String rgdId) {
+		this.rgdId = rgdId;
+	}
+
+	public String getZfinId() {
+		return zfinId;
+	}
+
+	public void setZfinId(String zfinId) {
+		this.zfinId = zfinId;
 	}
 }

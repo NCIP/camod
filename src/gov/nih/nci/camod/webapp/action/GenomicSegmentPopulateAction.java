@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentPopulateAction.java,v 1.16 2007-03-26 12:02:30 pandyas Exp $
+ * $Id: GenomicSegmentPopulateAction.java,v 1.17 2007-04-04 13:19:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/03/26 12:02:30  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.15  2006/11/09 17:26:40  pandyas
  * Commented out debug code
  *
@@ -88,14 +91,14 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             // MGI Number
             MutationIdentifier theMutationIdentifier = theGenomicSegment.getMutationIdentifier();
             if (theMutationIdentifier != null){
-            	if (theMutationIdentifier.getMgiNumber() != null && theMutationIdentifier.getMgiNumber().length() > 0) {
-            		genomicSegmentForm.setMgiNumber(theMutationIdentifier.getMgiNumber());
+            	if (theMutationIdentifier.getMgiId() != null && theMutationIdentifier.getMgiId().length() > 0) {
+            		genomicSegmentForm.setMgiId(theMutationIdentifier.getMgiId());
             	}
-            	if (theMutationIdentifier.getZfinNumber() != null && theMutationIdentifier.getZfinNumber().length() > 0) {
-            		genomicSegmentForm.setZfinNumber(theMutationIdentifier.getZfinNumber());
+            	if (theMutationIdentifier.getZfinId() != null && theMutationIdentifier.getZfinId().length() > 0) {
+            		genomicSegmentForm.setZfinId(theMutationIdentifier.getZfinId());
                 }
-            	if (theMutationIdentifier.getRgdNumber() != null && theMutationIdentifier.getRgdNumber().length() > 0) {
-            		genomicSegmentForm.setRgdNumber(theMutationIdentifier.getRgdNumber());
+            	if (theMutationIdentifier.getRgdId() != null && theMutationIdentifier.getRgdId().length() > 0) {
+            		genomicSegmentForm.setRgdId(theMutationIdentifier.getRgdId());
                 }    
             }
             
