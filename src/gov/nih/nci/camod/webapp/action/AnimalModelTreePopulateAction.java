@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.44 2007-03-26 12:02:31 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.45 2007-04-04 13:20:09 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.44  2007/03/26 12:02:31  pandyas
+ *  caMOd 2.3 enhancements for Zebrafish support
+ *
  *  Revision 1.43  2006/11/09 17:20:25  pandyas
  *  Commented out debug code
  *
@@ -257,7 +260,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					if (availability.getAnimalDistributor().getName().equals(
 					"ZFIN")) {
 
-						//System.out.println("\tAdded IMSR Repository Availability = "+ availability);
+						//System.out.println("\tAdded ZFIN Repository Availability = "+ availability);
 						zfinList.add(availability);
 					}					
 					
