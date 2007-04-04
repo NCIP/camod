@@ -42,12 +42,12 @@ function chkOtherAdminSite() {
     chkOther(site, otherSite);  	
 }
 
-function chkOtherCondRegime() {
+function chkOtherCondRegimen() {
 
-	var regime = document.forms[0].conditioningRegime;
-	var otherRegime = document.forms[0].otherConditioningRegime;
+	var regimen = document.forms[0].conditioningRegimen;
+	var otherRegimen = document.forms[0].otherConditioningRegimen;
 	
-    chkOther(regime, otherRegime);  	
+    chkOther(regimen, otherRegimen);  	
 }
 
 function chkOtherGraft() {
