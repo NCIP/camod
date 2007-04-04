@@ -95,14 +95,14 @@
 		</tr>
 
 		<tr>
-			<td class="GreyBox"><b>Conditioning Regime</b></td>
+			<td class="GreyBox"><b>Conditioning Regimen</b></td>
 			<td class="GreyBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty xt.conditioningRegime}">
-					<c:out value="${xt.condRegimeUnctrlVocab}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty xt.conditioningRegimen}">
+					<c:out value="${xt.condRegimenUnctrlVocab}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.conditioningRegime}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.conditioningRegimen}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>

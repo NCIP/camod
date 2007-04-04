@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftForm.java,v 1.15 2007-03-26 12:03:10 pandyas Exp $
+ * $Id: XenograftForm.java,v 1.16 2007-04-04 13:23:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/03/26 12:03:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.14  2006/05/19 16:41:08  pandyas
  * Defect #249 - add other to species on the Xenograft screen
  *
@@ -53,8 +56,8 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     protected String otherGraftType;
     protected String administrativeSite;
     protected String otherAdministrativeSite;
-    protected String conditioningRegime;
-    protected String otherConditioningRegime;
+    protected String conditioningRegimen;
+    protected String otherConditioningRegimen;
     
     protected String donorScientificName;
     protected String otherDonorScientificName;
@@ -343,20 +346,20 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
         organ = null;
     }
 
-	public String getConditioningRegime() {
-		return conditioningRegime;
+	public String getConditioningRegimen() {
+		return conditioningRegimen;
 	}
 
-	public void setConditioningRegime(String conditioningRegime) {
-		this.conditioningRegime = conditioningRegime;
+	public void setConditioningRegimen(String conditioningRegimen) {
+		this.conditioningRegimen = conditioningRegimen;
 	}
 
-	public String getOtherConditioningRegime() {
-		return otherConditioningRegime;
+	public String getOtherConditioningRegimen() {
+		return otherConditioningRegimen;
 	}
 
-	public void setOtherConditioningRegime(String otherConditioningRegime) {
-		this.otherConditioningRegime = otherConditioningRegime;
+	public void setOtherConditioningRegimen(String otherConditioningRegimen) {
+		this.otherConditioningRegimen = otherConditioningRegimen;
 	}    
 
 }

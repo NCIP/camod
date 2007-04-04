@@ -27,14 +27,14 @@
         	column="admin_site_unctrl_vocab" 
         	type="string"/>  
         	
-	    <!-- conditioningRegime -->
-        <property name="conditioningRegime" 
-        	column="conditioning_regime" 
+	    <!-- conditioningRegimen -->
+        <property name="conditioningRegimen" 
+        	column="conditioning_regimen" 
         	type="string"/>
         	
-	    <!-- condRegimeUnctrlVocab -->
-        <property name="condRegimeUnctrlVocab" 
-        	column="cond_regime_unctrl_vocab" 
+	    <!-- condRegimenUnctrlVocab -->
+        <property name="condRegimenUnctrlVocab" 
+        	column="cond_regimen_unctrl_vocab" 
         	type="string"/>         	      		
         
         <!-- geneticManipulation -->

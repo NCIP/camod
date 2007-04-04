@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.47 2007-03-26 12:08:01 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.48 2007-04-04 13:25:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2007/03/26 12:08:01  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.46  2006/11/10 22:01:34  pandyas
  * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *
@@ -252,23 +255,23 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Conditioning Regime:</label></td>
+		<td class="formLabel"><label for="field1">Conditioning Regimen:</label></td>
 		<td class="formField">
 		<br>
 		<label for="field1">- if conditioning regime is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>
-			<html:select styleClass="formFieldSized" size="1" property="conditioningRegime" onchange="chkOtherCondRegime()">
-				<html:options name="<%= Dropdowns.CONDITIONINGREGIME %>" />
+			<html:select styleClass="formFieldSized" size="1" property="conditioningRegimen" onchange="chkOtherCondRegimen()">
+				<html:options name="<%= Dropdowns.CONDITIONINGREGIMEN %>" />
 			</html:select>
 		</td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">if other Conditioning Regime:</label></td>
+		<td class="formLabel"><label for="field1">if other Conditioning Regimen:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized"  property="otherConditioningRegime" size="30" />	
+			<html:text styleClass="formFieldSized"  property="otherConditioningRegimen" size="30" />	
 		</td>
 	</tr>		
 
@@ -382,7 +385,7 @@
 	chkOtherAdminSite();
 	chkObservation();
 	chkOtherSpecies();
-	chkOtherCondRegime();
+	chkOtherCondRegimen();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

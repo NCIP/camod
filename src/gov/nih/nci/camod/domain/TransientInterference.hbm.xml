@@ -84,9 +84,9 @@
         	column="comments" 
         	type="text"/>     
         	
-	    <!-- site -->
-        <property name="site" 
-        	column="site" 
+	    <!-- targetSite -->
+        <property name="targetSite" 
+        	column="target_site" 
         	type="string"/>          	   	
         	
         <!-- transientInterferenceMethod (many-to-one unidirectional) -->

@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: Constants.java,v 1.97 2007-03-28 18:00:00 pandyas Exp $
+ * $Id: Constants.java,v 1.98 2007-04-04 13:16:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.97  2007/03/28 18:00:00  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.96  2007/03/27 18:57:45  pandyas
  * Added constants for caMOD 2.3 build tasks
  *
@@ -393,10 +398,10 @@ public class Constants {
         
         public static final String DEVELOPMENTALSTAGES = "DevelopmentalStages.txt";
         
-        public static final String CONDITIONINGREGIME = "ConditioningRegime.txt";
+        public static final String CONDITIONINGREGIMEN = "ConditioningRegimen.txt";
         
-        // Site of Morpholino used for site attribute in TransientInterference object 
-        public static final String SITEOFMORPHOLINO = "SiteOfMorpholino.txt";
+        // target site for Morpholino in TransientInterference object 
+        public static final String MORPHOLINOTARGETSITE = "MorpholinoTargetSite.txt";
 
 
         // Various Dose Units

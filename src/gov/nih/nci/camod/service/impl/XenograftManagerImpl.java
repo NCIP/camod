@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.33 2007-03-26 12:01:10 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.34 2007-04-04 13:18:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2007/03/26 12:01:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.32  2006/09/18 16:25:21  georgeda
  * moved getOrgan code inside check for null - check first, get organ if selected by user
  *
@@ -181,26 +184,26 @@ public class XenograftManagerImpl extends BaseManager implements
 			inXenograft.setAdminSiteUnctrlVocab(null);
 		}
 		
-		// save directly in ConditioningRegime column of table
-		if (inXenograftData.getConditioningRegime().equals(
+		// save directly in ConditioningRegimen column of table
+		if (inXenograftData.getConditioningRegimen().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			inXenograft.setConditioningRegime(null);
-			log.info("ConditioningRegime = Other");
+			inXenograft.setConditioningRegimen(null);
+			log.info("ConditioningRegimen = Other");
 			// Do not save "other" value in the DB
-			inXenograft.setCondRegimeUnctrlVocab(inXenograftData.getOtherConditioningRegime());
-			log.info("OtherConditioningRegime = " + inXenograftData.getOtherConditioningRegime());
+			inXenograft.setCondRegimenUnctrlVocab(inXenograftData.getOtherConditioningRegimen());
+			log.info("OtherConditioningRegimen = " + inXenograftData.getOtherConditioningRegimen());
 
 			// Send e-mail for other ConditioningRegime
 			sendEmail(inAnimalModel, inXenograftData
-					.getOtherConditioningRegime(), "ConditioningRegime");
+					.getOtherConditioningRegimen(), "ConditioningRegimen");
 		} else {
-			inXenograft.setConditioningRegime(inXenograftData
-					.getConditioningRegime());
-			log.info("ConditioningRegime not other= " + inXenograftData
-					.getConditioningRegime());
+			inXenograft.setConditioningRegimen(inXenograftData
+					.getConditioningRegimen());
+			log.info("ConditioningRegimen not other= " + inXenograftData
+					.getConditioningRegimen());
 
 			// Null out during editing from 'other' to selected
-			inXenograft.setCondRegimeUnctrlVocab(null);
+			inXenograft.setCondRegimenUnctrlVocab(null);
 		}
 		
 		inXenograft.setGeneticManipulation(inXenograftData

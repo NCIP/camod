@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftAction.java,v 1.20 2007-03-26 12:02:30 pandyas Exp $
+ * $Id: XenograftAction.java,v 1.21 2007-04-04 13:19:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/03/26 12:02:30  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.19  2006/05/23 20:43:10  georgeda
  * Fixed error introduced in OM change
  *
@@ -108,10 +111,10 @@ public final class XenograftAction extends BaseAction
                     + xenograftForm.getOrganTissueCode()
                     + "\n\t organ(): "
                     + xenograftForm.getOrgan() 
-                    + "\n\t ConditioningRegime(): "
-                    + xenograftForm.getConditioningRegime() 
-                    + "\n\t OtherConditioningRegime: "
-                    + xenograftForm.getOtherConditioningRegime()
+                    + "\n\t ConditioningRegimen(): "
+                    + xenograftForm.getConditioningRegimen() 
+                    + "\n\t OtherConditioningRegimen: "
+                    + xenograftForm.getOtherConditioningRegimen()
                     + "\n\t user: "
                     + (String) request.getSession().getAttribute(
                             "camod.loggedon.username"));
@@ -200,8 +203,8 @@ public final class XenograftAction extends BaseAction
                  + "\n\t getOrganTissueName(): " + xenograftForm.getOrganTissueName() 
                  + "\n\t organTissueCode: " + xenograftForm.getOrganTissueCode() 
                  + "\n\t organ(): " + xenograftForm.getOrgan() 
-                 + "\n\t ConditioningRegime(): " + xenograftForm.getConditioningRegime() 
-                 + "\n\t OtherConditioningRegime: " + xenograftForm.getOtherConditioningRegime()                 
+                 + "\n\t ConditioningRegimen(): " + xenograftForm.getConditioningRegimen() 
+                 + "\n\t OtherConditioningRegimen: " + xenograftForm.getOtherConditioningRegimen()                 
                  + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
         
         try

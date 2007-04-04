@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: TransientInterferenceManagerImpl.java,v 1.3 2007-03-26 12:01:11 pandyas Exp $
+ * $Id: TransientInterferenceManagerImpl.java,v 1.4 2007-04-04 13:18:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/03/26 12:01:11  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.2  2006/10/23 14:21:27  pandyas
  * cleaned up code
  *
@@ -182,9 +185,9 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 		// Save Type
 		inTransInt.setType(inTransIntData.getType());
 		
-		// Save site - for morpholino only - will be null for siRNA submission
-		if (inTransIntData.getSite() != null && inTransIntData.getSite().length() >0 ) {
-			inTransInt.setSite(inTransIntData.getSite());
+		// Save  Target site - for morpholino only - will be null for siRNA submission
+		if (inTransIntData.getTargetSite() != null && inTransIntData.getTargetSite().length() >0 ) {
+			inTransInt.setTargetSite(inTransIntData.getTargetSite());
 		}
 		
 		// Save SequenceDirection

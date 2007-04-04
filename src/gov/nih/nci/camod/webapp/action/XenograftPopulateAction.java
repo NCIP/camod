@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.30 2007-03-26 12:02:31 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.31 2007-04-04 13:19:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2007/03/26 12:02:31  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.29  2006/09/12 15:34:35  georgeda
  * Removed work around now that fix is working
  *
@@ -110,15 +113,15 @@ public class XenograftPopulateAction extends BaseAction
                 xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
             }
             
-            // Set the other flag or the selected ConditioningRegime from the DB
-            if (xeno.getCondRegimeUnctrlVocab() != null)
+            // Set the other flag or the selected ConditioningRegimen from the DB
+            if (xeno.getCondRegimenUnctrlVocab() != null)
             {
-                xenograftForm.setConditioningRegime(Constants.Dropdowns.OTHER_OPTION);
-                xenograftForm.setOtherConditioningRegime(xeno.getCondRegimeUnctrlVocab());
+                xenograftForm.setConditioningRegimen(Constants.Dropdowns.OTHER_OPTION);
+                xenograftForm.setOtherConditioningRegimen(xeno.getCondRegimenUnctrlVocab());
             }
             else
             {
-                xenograftForm.setConditioningRegime(xeno.getConditioningRegime());
+                xenograftForm.setConditioningRegimen(xeno.getConditioningRegimen());
             }            
 
             xenograftForm.setGeneticManipulation(xeno.getGeneticManipulation());
@@ -262,7 +265,7 @@ public class XenograftPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONDITIONINGREGIME, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONDITIONINGREGIMEN, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
 
         // Retrieve the Species and Strain set for the AnimalModel (via submitNewModel.jsp)

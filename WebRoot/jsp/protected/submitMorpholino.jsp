@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/03/26 12:07:56  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.6  2006/11/10 22:01:34  pandyas
  * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *
@@ -18,7 +21,7 @@
  *
  *
  *
- * $Id: submitMorpholino.jsp,v 1.7 2007-03-26 12:07:56 pandyas Exp $
+ * $Id: submitMorpholino.jsp,v 1.8 2007-04-04 13:25:19 pandyas Exp $
  *
  */   
 %>
@@ -165,8 +168,8 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Site:</label></td>
 		<td class="formField">
-			<html:select styleClass="formFieldUnSized" size="1" property="site" >												
-				<html:options name="<%= Dropdowns.SITEOFMORPHOLINO %>"/>					
+			<html:select styleClass="formFieldUnSized" size="1" property="targetSite" >												
+				<html:options name="<%= Dropdowns.MORPHOLINOTARGETSITE %>"/>					
 			</html:select>
 		</td>
 		</tr>	

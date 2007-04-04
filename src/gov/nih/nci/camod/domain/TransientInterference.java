@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/03/19 18:56:11  pandyas
+ * Object Model changes for caMOD 2.3 - dee design doc for details
+ *
  * Revision 1.1  2006/10/17 16:14:36  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -10,7 +13,7 @@
  * Modified to add Morpholino object data to application
  *
  * 
- * $Id: TransientInterference.java,v 1.2 2007-03-19 18:56:11 pandyas Exp $
+ * $Id: TransientInterference.java,v 1.3 2007-04-04 13:17:05 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -34,7 +37,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
     private String visualLigand;
     private String visualLigandUnctrlVocab;
     private String comments;
-    private String site;    
+    private String targetSite;    
     private TransientInterferenceMethod transientInterferenceMethod;
 
     /**
@@ -308,22 +311,6 @@ public class TransientInterference extends BaseObject implements Serializable, D
     {
         this.transientInterferenceMethod = transientInterferenceMethod;
     } 
-    
-    /**
-     * @return Returns the site.
-     */
-    public String getSite()
-    {
-        return site;
-    }
-
-    /**
-     * @param site The site to set.
-     */
-    public void setSite(String site)
-    {
-        this.site = site;
-    }    
 
     /**
      * @see java.lang.Object#toString()
@@ -344,6 +331,14 @@ public class TransientInterference extends BaseObject implements Serializable, D
             return false;
         return true;
     }
+
+	public String getTargetSite() {
+		return targetSite;
+	}
+
+	public void setTargetSite(String targetSite) {
+		this.targetSite = targetSite;
+	}
 
 
 }

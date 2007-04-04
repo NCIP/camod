@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/03/26 12:06:42  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.5  2006/11/17 17:47:26  pandyas
  * Minor format change on transient interference method display
  *
@@ -18,7 +21,7 @@
  * Changes for searching on transient interfaces
  *
  *
- * $Id: viewTransientInterference.jsp,v 1.6 2007-03-26 12:06:42 pandyas Exp $
+ * $Id: viewTransientInterference.jsp,v 1.7 2007-04-04 13:26:46 pandyas Exp $
  *
  */   
 %>
@@ -104,9 +107,9 @@
 			
 			<c:if test="${method.id == 1}">			
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Site</b></td>
+				<td class="resultsBoxGrey" width="25%"><b>Target Site</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.site}" escapeXml="false"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.targetSite}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			
 			</c:if>

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Xenograft.java,v 1.13 2007-03-19 18:56:11 pandyas Exp $
+ * $Id: Xenograft.java,v 1.14 2007-04-04 13:17:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/03/19 18:56:11  pandyas
+ * Object Model changes for caMOD 2.3 - dee design doc for details
+ *
  * Revision 1.12  2006/04/19 17:37:37  pandyas
  * Removed TODO text
  *
@@ -41,8 +44,8 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     private String graftTypeUnctrlVocab;
     private String administrativeSite;
     private String adminSiteUnctrlVocab;  
-    private String conditioningRegime;
-    private String condRegimeUnctrlVocab;      
+    private String conditioningRegimen;
+    private String condRegimenUnctrlVocab;      
     private TumorCode tumorCode;
     private Set<InvivoResult> invivoResultCollection = new TreeSet<InvivoResult>();
     private Species donorSpecies;
@@ -347,34 +350,34 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     }
 
     /**
-     * @return Returns the conditioningRegime.
+     * @return Returns the conditioningRegimen.
      */
-    public String getConditioningRegime()
+    public String getConditioningRegimen()
     {
-        return conditioningRegime;
+        return conditioningRegimen;
     }
 
     /**
-     * @param conditioningRegime The conditioningRegime to set.
+     * @param conditioningRegimen The conditioningRegimen to set.
      */
-    public void setConditioningRegime(String conditioningRegime)
+    public void setConditioningRegimen(String conditioningRegimen)
     {
-        this.conditioningRegime = conditioningRegime;
+        this.conditioningRegimen = conditioningRegimen;
     }
 
     /**
-     * @return Returns the condRegimeUnctrlVocab.
+     * @return Returns the condRegimenUnctrlVocab.
      */
-    public String getCondRegimeUnctrlVocab()
+    public String getCondRegimenUnctrlVocab()
     {
-        return condRegimeUnctrlVocab;
+        return condRegimenUnctrlVocab;
     }
 
     /**
-     * @param condRegimeUnctrlVocab The condRegimeUnctrlVocab to set.
+     * @param condRegimenUnctrlVocab The condRegimenUnctrlVocab to set.
      */
-    public void setCondRegimeUnctrlVocab(String condRegimeUnctrlVocab)
+    public void setCondRegimenUnctrlVocab(String condRegimenUnctrlVocab)
     {
-        this.condRegimeUnctrlVocab = condRegimeUnctrlVocab;
+        this.condRegimenUnctrlVocab = condRegimenUnctrlVocab;
     }
 }

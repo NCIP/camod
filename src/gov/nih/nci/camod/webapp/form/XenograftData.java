@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.8 2007-03-26 12:03:10 pandyas Exp $
+ * $Id: XenograftData.java,v 1.9 2007-04-04 13:23:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/03/26 12:03:10  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.7  2006/05/19 16:40:53  pandyas
  * Defect #249 - add other to species on the Xenograft screen
  *
@@ -107,11 +110,11 @@ public interface XenograftData
 
     public void setOrganTissueCode(String organTissueCode);
     
-	public String getConditioningRegime();
+	public String getConditioningRegimen();
 
-	public void setConditioningRegime(String conditioningRegime);
+	public void setConditioningRegimen(String conditioningRegimen);
 
-	public String getOtherConditioningRegime();
+	public String getOtherConditioningRegimen();
 
-	public void setOtherConditioningRegime(String otherConditioningRegime);
+	public void setOtherConditioningRegimen(String otherConditioningRegimen);
 }
