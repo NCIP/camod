@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.22 2007-03-26 12:02:31 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.23 2007-04-04 13:21:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/03/26 12:02:31  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.21  2007/02/23 21:20:08  pandyas
  * Fixed Genotype and Nomenclature - split objects and cleaned up database
  *
@@ -150,7 +153,7 @@ public final class AnimalModelAction extends BaseAction {
 					theAnimalModel.getModelDescriptor());
 			request.getSession().setAttribute(Constants.MODELSTATUS,
 					theAnimalModel.getState());
-			// Reset the species common name to use on the Genetic Description submission screens (mgi, zfin, rgd id's)
+			// Set the species common name to use on the Genetic Description submission screens (mgi, zfin, rgd id's)
 			request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, 
 					theAnimalModel.getStrain().getSpecies().getCommonName());
 
@@ -261,6 +264,11 @@ public final class AnimalModelAction extends BaseAction {
 					theAnimalModel.getModelDescriptor());
 			request.getSession().setAttribute(Constants.MODELSTATUS,
 					theAnimalModel.getState());
+
+			// Reset the species common name to use on the Genetic Description submission screens (mgi, zfin, rgd id's)
+			// in case the species is modified after the model is created
+			request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, 
+					theAnimalModel.getStrain().getSpecies().getCommonName());
 
 			// Add a message to be displayed in submitOverview.jsp saying you've
 			// edited a model successfully
