@@ -92,7 +92,7 @@
 	    			<!-- Do not show Complete-not screened functions if the model is Complete-not screened or Incomplete -->
 	                <td align="left" colspan="1" class="resultsBoxGreyNoEnd">
 	                	<html:form action="ChangeAnimalModelToCompleteNotScreenedAction">
-	                    	<input type="hidden" name="modelId" value="<%= Constants.MODELID%>"/>
+	                    	<input type="hidden" name="aModelId" value="<%= Constants.Parameters.MODELID %>"/>
 	                    	<input type="hidden" name="aEvent" value="<%= Constants.Admin.Actions.BACK_TO_COMPLETE%>"/>      
 	                    	<html:submit>Complete-not screened</html:submit>						        
 	                	</html:form>				                                

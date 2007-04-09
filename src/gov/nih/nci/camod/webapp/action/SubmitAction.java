@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.15 2007-03-26 12:02:30 pandyas Exp $
+ *  $Id: SubmitAction.java,v 1.16 2007-04-09 12:37:09 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.15  2007/03/26 12:02:30  pandyas
+ *  caMOd 2.3 enhancements for Zebrafish support
+ *
  *  Revision 1.14  2006/08/17 18:10:05  pandyas
  *  Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -50,7 +53,7 @@ public class SubmitAction extends BaseAction {
     public ActionForward setModelConstants(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        System.out.println("<SubmitAction setModelConstants> modelID="
+        System.out.println("<SubmitAction setModelConstants> Constants.Parameters.MODELID="
                 + request.getParameter(Constants.Parameters.MODELID));
 
         String modelID = request.getParameter(Constants.Parameters.MODELID);
@@ -68,6 +71,8 @@ public class SubmitAction extends BaseAction {
             request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, speciesName);            
 
             request.getSession().setAttribute(Constants.MODELID, am.getId().toString());
+            // Used for submitOverview to set model back to previous states
+            request.getSession().setAttribute(Constants.Parameters.MODELID, am.getId().toString());
             request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
             log.info("Constants.MODELDESCRIPTOR: " + request.getSession().getAttribute(Constants.MODELDESCRIPTOR));
             request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());

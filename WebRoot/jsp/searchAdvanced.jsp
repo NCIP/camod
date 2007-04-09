@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.54 2007-03-28 18:11:35 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.55 2007-04-09 12:35:16 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.54  2007/03/28 18:11:35  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.53  2006/12/28 16:05:26  pandyas
  * Reverted to previous version - changed CE on adv search page
  *
@@ -132,15 +137,6 @@
     }
 	
 	function checkFields() {
-	
-	    // Do the CI fields
-		theCIFlag = document.searchForm.searchCarcinogenicInterventions[0];
-		toggleField(theCIFlag, document.searchForm.chemicalDrug);
-		toggleField(theCIFlag, document.searchForm.growthFactor);
-		toggleField(theCIFlag, document.searchForm.hormone);
-		toggleField(theCIFlag, document.searchForm.radiation);
-		toggleField(theCIFlag, document.searchForm.viral);
-		toggleField(theCIFlag, document.searchForm.surgery);
 		
 		theTargModFlag = document.searchForm.targetedModification[0];
 		theEndTransGeneFlag = document.searchForm.engineeredTransgene[0];
@@ -344,13 +340,6 @@
 
 		<tr>
 			<td class="formTitleBlue" height="10" colspan="3">Carcinogenic Interventions:</td>
-		</tr>
-
-		<tr>	
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-				<label for="field1">Models with Carcinogenic Interventions:</label>
-			</td>
 		</tr>
 			
 		<tr>

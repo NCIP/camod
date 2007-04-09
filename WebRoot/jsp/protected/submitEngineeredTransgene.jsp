@@ -261,26 +261,26 @@
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Mouse'}">			
 				<td class="formRequiredNotice" width="5">&nbsp;</td>
-				<td class="formLabel"><label for="field2">MGI number:</label>
+				<td class="formLabel"><label for="field2">MGI Identifier:</label>
 				</td>
 				<td class="formField">
-					<input type=button value="Find MGI Id" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
+					<input type=button value="Find MGI ID" onClick="myRef = window.open('http://www.informatics.jax.org/','mywin',
 								'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 					<label for="field1">&nbsp;&nbsp;</label>
-					<html:text styleClass="formFieldUnSized" size="15" property="mgiId"  />
+					<html:text styleClass="formFieldUnSized" size="25" property="mgiId"  />
 				</td>
 		</c:if>				
 	</tr>	
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Zebrafish'}">	
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">ZFIN number:</label>
+			<td class="formLabel"><label for="field2">ZFIN Identifier:</label>
 			</td>
 			<td class="formField">
-				<input type=button value="Find ZFIN Id" onClick="myRef = window.open('http://zfin.org/','mywin',
+				<input type=button value="Find ZFIN ID" onClick="myRef = window.open('http://zfin.org/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="15" property="zfinId"  />
+				<html:text styleClass="formFieldUnSized" size="25" property="zfinId"  />
 			</td>
 		</c:if>
 	</tr>	
@@ -288,13 +288,13 @@
 	<tr>
 		<c:if test="${modelspeciescommonname == 'Rat'}">	
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field2">RGD number:</label>
+			<td class="formLabel"><label for="field2">RGD Identifier:</label>
 			</td>
 			<td class="formField">
-				<input type=button value="Find RGD Id" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
+				<input type=button value="Find RGD ID" onClick="myRef = window.open('http://rgd.mcw.edu/strains/','mywin',
 				'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 				<label for="field1">&nbsp;&nbsp;</label>
-				<html:text styleClass="formFieldUnSized" size="15" property="rgdId"  />
+				<html:text styleClass="formFieldUnSized" size="25" property="rgdId"  />
 			</td>
 		</c:if>
 	</tr>

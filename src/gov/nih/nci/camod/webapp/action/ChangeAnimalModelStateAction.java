@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStateAction.java,v 1.12 2007-03-27 18:42:32 pandyas Exp $
+ *  $Id: ChangeAnimalModelStateAction.java,v 1.13 2007-04-09 12:37:09 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.12  2007/03/27 18:42:32  pandyas
+ *  Modified the code to use the Constants.MODELID for getting the animal model id and passing from submitOverview to change states of a model.  The constant is already set in SubmitAction.java for all models.
+ *
  *  Revision 1.11  2006/10/17 16:11:00  pandyas
  *  modified during development of caMOD 2.2 - various
  *
@@ -70,12 +73,23 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 				AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
 				AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 				
-				// Model id set in SubmitAction.java for all models
-				theModelId = (String)inRequest.getSession().getAttribute(Constants.MODELID);
-				log.info("modelid as constant " + theModelId);				
-
-				// get model id from adminRoles.jsp and submitOverview.jsp (complete)
-				theForm.setModelId(theModelId);
+				log.info("<ChangeAnimalModelStateAction> theForm.getModelId(): " + theForm.getModelId());
+				log.info("<ChangeAnimalModelStateAction> theForm.getEvent(): " + theForm.getEvent());				
+								
+				if (theForm.getModelId() == null){
+					// get model id from adminRoles.jsp and submitOverview.jsp (complete)
+					theModelId = (String)inRequest.getSession().getAttribute(Constants.Parameters.MODELID);
+					log.info("theModelId from Constants.Parameters.MODELID: " + theModelId);
+					
+					if (theModelId == null) {
+					theModelId = inRequest.getParameter("aModelId");	
+					log.info("theModelId from inRequest.getParameter: " + theModelId);
+					}
+					if(theModelId != null){
+						theForm.setModelId(theModelId);
+						log.info("theModelId set to the form-  theForm.getModelId(): " + theForm.getModelId());
+					}						
+				}				
 
 				// get the model id from the form in submitOverview options
 				AnimalModel theAnimalModel = theAnimalModelManager.get(theForm
@@ -119,8 +133,6 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 
 				// Did the id match?
 				if (theAnimalModel != null) {
-
-					log.info("theEvent: " + theEvent);
 
 					if (theForm.getEvent().equals(
 							Constants.Admin.Actions.INACTIVATE)) {

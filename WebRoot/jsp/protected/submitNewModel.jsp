@@ -137,7 +137,7 @@ var cal1 = new CalendarPopup();
 			</td>
 		</tr>
 
-		<c:if test="${modelspeciescommonname == 'Zebrafish'}">		
+	
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">Developmental Stage:</label>				
@@ -148,7 +148,6 @@ var cal1 = new CalendarPopup();
 				</html:select>
 			</td>
 		</tr>		
-		</c:if>
 		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
