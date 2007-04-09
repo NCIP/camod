@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.51 2007-03-28 18:19:57 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.52 2007-04-09 12:34:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2007/03/28 18:19:57  pandyas
+ * Modified for the following Test Track item:
+ * #446 - Add ZFIN and RGD identifier to Genetic Description pages
+ *
  * Revision 1.50  2007/03/26 12:06:44  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -423,29 +427,29 @@
 		</tr>	
 		
         <tr>
-			<c:if test="${not empty tg.mutationIdentifier.mgiNumber}">        
-			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
+			<c:if test="${not empty tg.mutationIdentifier.mgiId}">        
+			<td class="WhiteBox" width="35%"><b>MGI Identifier</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tg.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
-				    <c:out value="${tg.mutationIdentifier.mgiNumber}"/>
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tg.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
+				    <c:out value="${tg.mutationIdentifier.mgiId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty tg.mutationIdentifier.zfinNumber}">        
-			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
+			<c:if test="${not empty tg.mutationIdentifier.zfinId}">        
+			<td class="WhiteBox" width="35%"><b>ZFIN Identifier</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${tg.mutationIdentifier.zfinNumber}.html"/>">
-				    <c:out value="${tg.mutationIdentifier.zfinNumber}"/>
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${tg.mutationIdentifier.zfinId}.html"/>">
+				    <c:out value="${tg.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty tg.mutationIdentifier.rgdNumber}">        
-			<td class="WhiteBox" width="35%"><b>RGD Number</b></td>
+			<c:if test="${not empty tg.mutationIdentifier.rgdId}">        
+			<td class="WhiteBox" width="35%"><b>RGD Identifier</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tg.mutationIdentifier.rgdNumber}"/>">
-				    <c:out value="${tg.mutationIdentifier.rgdNumber}"/>
+				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tg.mutationIdentifier.rgdId}"/>">
+				    <c:out value="${tg.mutationIdentifier.rgdId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;			
@@ -627,29 +631,29 @@
 		</c:if>
 		<!-- Display MGI or ZFIN or RGD identifier -->
         <tr>
-			<c:if test="${not empty gs.mutationIdentifier.mgiNumber}">        
-			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
+			<c:if test="${not empty gs.mutationIdentifier.mgiId}">        
+			<td class="WhiteBox" width="35%"><b>MGI Identifier</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${gs.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
-				    <c:out value="${gs.mutationIdentifier.mgiNumber}"/>
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${gs.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
+				    <c:out value="${gs.mutationIdentifier.mgiId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty gs.mutationIdentifier.zfinNumber}">        
-			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
+			<c:if test="${not empty gs.mutationIdentifier.zfinId}">        
+			<td class="WhiteBox" width="35%"><b>ZFIN Identifier</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${gs.mutationIdentifier.zfinNumber}.html"/>">
-				    <c:out value="${gs.mutationIdentifier.zfinNumber}"/>
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${gs.mutationIdentifier.zfinId}.html"/>">
+				    <c:out value="${gs.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty gs.mutationIdentifier.rgdNumber}">        
-			<td class="WhiteBox" width="35%"><b>RGD Number</b></td>
+			<c:if test="${not empty gs.mutationIdentifier.rgdId}">        
+			<td class="WhiteBox" width="35%"><b>RGD Identifier</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${gs.mutationIdentifier.rgdNumber}"/>">
-				    <c:out value="${gs.mutationIdentifier.rgdNumber}"/>
+				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${gs.mutationIdentifier.rgdId}"/>">
+				    <c:out value="${gs.mutationIdentifier.rgdId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;			
@@ -837,29 +841,29 @@
 		
 		<!-- Display MGI or ZFIN or RGD identifier -->
         <tr>
-			<c:if test="${not empty tm.mutationIdentifier.mgiNumber}">        
+			<c:if test="${not empty tm.mutationIdentifier.mgiId}">        
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tm.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
-				    <c:out value="${tm.mutationIdentifier.mgiNumber}"/>
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${tm.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
+				    <c:out value="${tm.mutationIdentifier.mgiId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty tm.mutationIdentifier.zfinNumber}">        
+			<c:if test="${not empty tm.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${tm.mutationIdentifier.zfinNumber}.html"/>">
-				    <c:out value="${tm.mutationIdentifier.zfinNumber}"/>
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${tm.mutationIdentifier.zfinId}.html"/>">
+				    <c:out value="${tm.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty tm.mutationIdentifier.rgdNumber}">        
+			<c:if test="${not empty tm.mutationIdentifier.rgdId}">        
 			<td class="WhiteBox" width="35%"><b>RGD Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tm.mutationIdentifier.rgdNumber}"/>">
-				    <c:out value="${tm.mutationIdentifier.rgdNumber}"/>
+				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${tm.mutationIdentifier.rgdId}"/>">
+				    <c:out value="${tm.mutationIdentifier.rgdId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;			
@@ -1056,29 +1060,29 @@
 		
 		<!-- Display MGI or ZFIN or RGD identifier -->
         <tr>
-			<c:if test="${not empty im.mutationIdentifier.mgiNumber}">        
+			<c:if test="${not empty im.mutationIdentifier.mgiId}">        
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${im.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
-				    <c:out value="${im.mutationIdentifier.mgiNumber}"/>
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${im.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
+				    <c:out value="${im.mutationIdentifier.mgiId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty im.mutationIdentifier.zfinNumber}">        
+			<c:if test="${not empty im.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${im.mutationIdentifier.zfinNumber}.html"/>">
-				    <c:out value="${im.mutationIdentifier.zfinNumber}"/>
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${im.mutationIdentifier.zfinId}.html"/>">
+				    <c:out value="${im.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty im.mutationIdentifier.rgdNumber}">        
+			<c:if test="${not empty im.mutationIdentifier.rgdId}">        
 			<td class="WhiteBox" width="35%"><b>RGD Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${im.mutationIdentifier.rgdNumber}"/>">
-				    <c:out value="${im.mutationIdentifier.rgdNumber}"/>
+				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${im.mutationIdentifier.rgdId}"/>">
+				    <c:out value="${im.mutationIdentifier.rgdId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;			
@@ -1167,29 +1171,29 @@
 		
 		<!-- Display MGI or ZFIN or RGD identifier -->
         <tr>
-			<c:if test="${not empty sm.mutationIdentifier.mgiNumber}">        
+			<c:if test="${not empty sm.mutationIdentifier.mgiId}">        
 			<td class="WhiteBox" width="35%"><b>MGI Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${sm.mutationIdentifier.mgiNumber}"/>&selectedQuery=Genes+and+Markers">
-				    <c:out value="${sm.mutationIdentifier.mgiNumber}"/>
+				<a target="_blank" href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=searchTool&query=<c:out value="${sm.mutationIdentifier.mgiId}"/>&selectedQuery=Genes+and+Markers">
+				    <c:out value="${sm.mutationIdentifier.mgiId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty sm.mutationIdentifier.zfinNumber}">        
+			<c:if test="${not empty sm.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${sm.mutationIdentifier.zfinNumber}.html"/>">
-				    <c:out value="${sm.mutationIdentifier.zfinNumber}"/>
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${sm.mutationIdentifier.zfinId}.html"/>">
+				    <c:out value="${sm.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;
 			
-			<c:if test="${not empty sm.mutationIdentifier.rgdNumber}">        
+			<c:if test="${not empty sm.mutationIdentifier.rgdId}">        
 			<td class="WhiteBox" width="35%"><b>RGD Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">
-				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${sm.mutationIdentifier.rgdNumber}"/>">
-				    <c:out value="${sm.mutationIdentifier.rgdNumber}"/>
+				<a target="_blank" href="http://rgd.mcw.edu/tools/strains/strains_view.cgi?id=<c:out value="${sm.mutationIdentifier.rgdId}"/>">
+				    <c:out value="${sm.mutationIdentifier.rgdId}"/>
 				</a>
 				</td>
 			</c:if>&nbsp;			
