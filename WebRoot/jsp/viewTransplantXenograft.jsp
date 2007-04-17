@@ -90,13 +90,13 @@
 		<tr>		
 			<td class="GreyBox"><b>ATCC number of Cell Line:</b></td>
 			<td class="GreyBoxRightEnd">
-			<a target="_atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${xt.atccNumber}"/>">
-			<c:out value="${xt.atccNumber}" escapeXml="false"/>&nbsp;</td>   		
+			<a target="atcc" href="http://www.atcc.org/common/catalog/numSearch/numResults.cfm?atccNum=<c:out value="${xt.atccNumber}"/>">
+			<c:out value="${xt.atccNumber}" escapeXml="false"/>&nbsp;</td> 		
 		</tr>
 
 		<tr>
-			<td class="GreyBox"><b>Conditioning Regimen</b></td>
-			<td class="GreyBoxRightEnd">
+			<td class="WhiteBox"><b>Conditioning Regimen</b></td>
+			<td class="WhiteBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.conditioningRegimen}">
 					<c:out value="${xt.condRegimenUnctrlVocab}" escapeXml="false"/>&nbsp;
@@ -109,24 +109,24 @@
 		</tr>		
 
 		<tr>		
-			<td class="WhiteBox"><b>Genetic Alteration:</b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.geneticManipulation}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBox"><b>Genetic Alteration:</b></td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.geneticManipulation}" escapeXml="false"/>&nbsp;</td>
 		</tr>		
 		<tr>
-			<td class="GreyBox"><b>Method of Modification:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.modificationDescription}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBox"><b>Method of Modification:</b></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.modificationDescription}" escapeXml="false"/>&nbsp;</td>
 		</tr>						
         <tr>
-			<td class="WhiteBox"><b>Amount of Cells<b></td>
-			<td class="WhiteBoxRightEnd"><c:out value="${xt.cellAmount}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBox"><b>Amount of Cells<b></td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.cellAmount}" escapeXml="false"/>&nbsp;</td>
 		</tr>
         <tr>
-			<td class="GreyBox"><b>Growth Period<b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.growthPeriod}" escapeXml="false"/>&nbsp;</td>
+			<td class="WhiteBox"><b>Growth Period<b></td>
+			<td class="WhiteBoxRightEnd"><c:out value="${xt.growthPeriod}" escapeXml="false"/>&nbsp;</td>
 		</tr>			
 		<tr>
-			<td class="WhiteBox"><b>Site of Administration:</b></td>
-			<td class="WhiteBoxRightEnd">
+			<td class="GreyBox"><b>Site of Administration:</b></td>
+			<td class="GreyBoxRightEnd">
 			<c:choose>
 				<c:when test="${empty xt.administrativeSite}">
 					<c:out value="${xt.adminSiteUnctrlVocab}" escapeXml="false"/>&nbsp;
@@ -138,8 +138,8 @@
 			</td>
 		</tr>		
 		<tr>		
-			<td class="GreyBox"><b>Host Species and Strain</b></td>
-			<td class="GreyBoxRightEnd">
+			<td class="WhiteBox"><b>Host Species and Strain</b></td>
+			<td class="WhiteBoxRightEnd">
 				<c:out value="${mdl.strain.species.displayName}" escapeXml="false"/>&nbsp;
                 &nbsp;/&nbsp;
 				<c:out value="${mdl.strain.displayName}" escapeXml="false"/>&nbsp;
