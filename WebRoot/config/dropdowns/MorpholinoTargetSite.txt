@@ -1,2 +1,2 @@
-start site
-splice site
+Start Site
+Splice Site
