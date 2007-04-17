@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.27 2007-03-27 18:39:41 pandyas Exp $
+ * $Id: UserManagerImpl.java,v 1.28 2007-04-17 17:32:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/03/27 18:39:41  pandyas
+ * changed log.info to log.debug to clean up output - done testing changes
+ *
  * Revision 1.26  2007/03/20 14:11:11  pandyas
  * Added logging to debug QA tier
  *
@@ -106,10 +109,10 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		log.debug("Entering UserManagerImpl");
 
 		try {
-            log.debug("Entering main try");
+            log.info("Entering main try");
 			theAuthenticationMgr = SecurityServiceProvider
 					.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
-            log.debug("theAuthenticationMgrtoString(): " + theAuthenticationMgr.toString());
+            log.info("theAuthenticationMgrtoString(): " + theAuthenticationMgr.toString());
 		} catch (CSException ex) {
 			log.error("Error getting authentication managers", ex);
 		} catch (Throwable e) {
@@ -129,7 +132,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @throws Exception
 	 */
 	public List getRolesForUser(String inUsername) throws Exception {
-		log.debug("Entering getRolesForUser");
+		log.info("Entering getRolesForUser");
 
 		List<String> theRoles = new ArrayList<String>();
 
@@ -262,8 +265,8 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @return the list of users associated with the role
 	 */
 	public String getEmailForUser(String inUsername) {
-		log.debug("Entering getEmailForUser");
-		log.debug("Username: " + inUsername);
+		log.info("Entering getEmailForUser");
+		log.info("Username: " + inUsername);
 
 		String theEmail = "";
 
@@ -273,7 +276,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 			log.warn("Could not fetch user from LDAP", e);
 		}
 
-		log.debug("Exiting getEmailForUser");
+		log.info("Exiting getEmailForUser");
 
 		return theEmail;
 	}

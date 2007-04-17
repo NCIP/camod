@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LDAPUtil.java,v 1.9 2006-09-18 16:31:10 georgeda Exp $
+ * $Id: LDAPUtil.java,v 1.10 2007-04-17 17:32:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/09/18 16:31:10  georgeda
+ * Externalized properties - back to v 1.6
+ *
  * Revision 1.6  2006/08/17 18:00:02  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -10,7 +13,7 @@
  * Backed out static changes.
  *
  * Revision 1.3  2006/04/17 19:10:50  pandyas
- * Added $Id: LDAPUtil.java,v 1.9 2006-09-18 16:31:10 georgeda Exp $ and $log:$
+ * Added $Id: LDAPUtil.java,v 1.10 2007-04-17 17:32:15 pandyas Exp $ and $log:$
  *
  * 
  */
@@ -35,6 +38,7 @@ public class LDAPUtil {
 	
     static public String getEmailAddressForUser(String inUsername) {
         String theSearchFilter = "(" + "cn" + "=" + inUsername + "*)";
+        log.info("LDAPUtil.getEmailAddressForUser inUsername: " + inUsername);
 
         String theEmailAddress = "";
         
@@ -44,6 +48,7 @@ public class LDAPUtil {
     		String camodPropertiesFileName = null;
 
     		camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+
     		
     		try {
 			
@@ -91,6 +96,7 @@ public class LDAPUtil {
                     if (theAttribute.getID().equals("mail"))
                     {
                         theEmailAddress = theAttribute.get().toString();
+                        log.info("theEmailAddress as mail from LDAP: " + theEmailAddress);
                         break;
                     }
                 }
