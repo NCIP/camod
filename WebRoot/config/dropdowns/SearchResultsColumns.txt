@@ -1,36 +1,36 @@
-Model Id
+Age of Onset
+Carcinogen
+Cell line
+Designator
+Diagnosis
+Distributor
+Donor Species
+Drug / Compound Name
+Gender
+Gene
+Gene Name
+Graft Type
+Growth Factor
+Image Title
+Microarray
 Model Descriptor
+Model Id
+Name of Cell line
+Name of inducing agent
+Organ / Tissue
+Principal Investigator
+Publications
+Segment Type
+Site and Diagnosis of Metastasis
+Site of Lesion / Tumor
 Species
 Strain
-Tumor Sites
 Submitted by
 Submitted Date
-Principal Investigator
-Gender
-Transgene
-Transcriptional 1
-Segment Type
-Designator
-Carcinogen
 Targeted Gene / Locus
-Type of Modification
-Name of inducing agent
-Gene Name
-Viral Vector
-Gene
-Growth Factor
-Publications
-Site of Lesion / Tumor
-Diagnosis
-Age of Onset
+Transcriptional 1
+Transgene
 Tumor incidence over lifetime
-Site and Diagnosis of Metastasis
-Drug / Compound Name
-Name of Cell line
-Organ / Tissue
-Image Title
-Distributor
-Cell line
-Donor Species
-Graft Type
-Microarray
+Tumor Sites
+Type of Modification
+Viral Vector
