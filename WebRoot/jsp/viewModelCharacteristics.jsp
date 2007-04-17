@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.39 2007-03-26 12:06:44 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.40 2007-04-17 16:12:59 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.39  2007/03/26 12:06:44  pandyas
+  *   caMOd 2.3 enhancements for Zebrafish support
+  *
   *   Revision 1.38  2007/02/23 21:54:05  pandyas
   *   Fixed Genotype and Nomenclature - split objects and cleaned up database
   *
@@ -178,41 +181,33 @@
 		<tr>
 			<td class="GreyBox" width="20%"><b>Developmental Stage</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
-				<P>
 					<camod:highlight>
 					    <c:out value="${mdl.developmentalStage}" escapeXml="false" />&nbsp;
 					</camod:highlight>
-				</P>			
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Experimental Design</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
-				<P>
 					<camod:highlight>
 					    <c:out value="${mdl.experimentDesign}" escapeXml="false" />&nbsp;
 					</camod:highlight>
-				</P>			
 			</td>
 		</tr>		               
 
 		<tr>
 			<td class="WhiteBox" width="20%"><b>Phenotype</b></td>
 			<td class="WhiteBoxRightEnd" width="70%">
-				<P>
 					<camod:highlight>
 						<c:out value="${mdl.phenotype.description}" escapeXml="false"/>
 					</camod:highlight>						
-				</P>		
 			</td>
 		</tr>		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Website for add. info</b></td>
 			<td class="GreyBoxRightEnd" width="70%">
-				<P>
 					<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}" escapeXml="false"/></a>&nbsp;					
-				</P>
 			</td>
 		</tr>		
 		<tr>
