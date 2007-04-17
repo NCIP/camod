@@ -140,7 +140,7 @@ var cal1 = new CalendarPopup();
 	
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Developmental Stage:</label>				
+			<td class="formLabel"><label for="field1">Developmental Stage:</label><br>(if Zebrafish model)				
 			</td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="developmentalStage" >
