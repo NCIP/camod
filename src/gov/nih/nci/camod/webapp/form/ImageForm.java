@@ -1,13 +1,19 @@
 /*
- * $Id: ImageForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: ImageForm.java,v 1.9 2007-04-18 19:20:22 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 /**
- * $Id: ImageForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: ImageForm.java,v 1.9 2007-04-18 19:20:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.7  2005/11/07 21:57:34  georgeda
  * Changes for images
  *
@@ -27,6 +33,8 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected String descriptionOfConstruct;
     protected FormFile fileLocation;
     protected String stainingMethod;
+    protected String stainingMethodName;
+    protected String stainingMethodCode;    
     protected String otherStainingMethod;
     protected String imageId;
     protected String imageUrl;
@@ -120,5 +128,37 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     
     public void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
+    }
+
+    /**
+     * @return Returns the stainingMethodCode.
+     */
+    public String getStainingMethodCode()
+    {
+        return stainingMethodCode;
+    }
+
+    /**
+     * @param stainingMethodCode The stainingMethodCode to set.
+     */
+    public void setStainingMethodCode(String stainingMethodCode)
+    {
+        this.stainingMethodCode = stainingMethodCode;
+    }
+
+    /**
+     * @return Returns the stainingMethodName.
+     */
+    public String getStainingMethodName()
+    {
+        return stainingMethodName;
+    }
+
+    /**
+     * @param stainingMethodName The stainingMethodName to set.
+     */
+    public void setStainingMethodName(String stainingMethodName)
+    {
+        this.stainingMethodName = stainingMethodName;
     }
 }

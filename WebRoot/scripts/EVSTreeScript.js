@@ -5,6 +5,7 @@
     // show tissue tree with fieldToBlank parameter
     function showMouseTissueTree(form, inConceptCode, inConceptName, inDisplayName, onlyLeaf, fieldsToBlank)
     {
+   
       var paramsHT = {};
 
       paramsHT.treeNameKey = 'MouseTissue';
@@ -24,6 +25,7 @@
     // show diagnosis tree with rootConceptNode parameter
     function showMouseDiagnosisTree(form, inConceptCode, inConceptName, inDisplayName, onlyLeaf, fieldsToBlank)
     {
+       
       var paramsHT = {};
 
       paramsHT.treeNameKey = 'MouseDiagnosis';        
@@ -74,10 +76,30 @@
 
       showTree(paramsHT);
     }
+    
+    function showStainingMethodTree(form, inConceptCode, inConceptName, inDisplayName, onlyLeaf, fieldsToBlank)	
+    {  
+        
+      var paramsHT = {};
+     
+      paramsHT.treeNameKey = 'StainingMethod';
+      paramsHT.formName = form;
+      paramsHT.conceptCode = inConceptCode;
+      paramsHT.conceptName = inConceptName;
+      paramsHT.displayName = inDisplayName;        	
+      paramsHT.postMsg = false;
+      paramsHT.onlyLeaf = onlyLeaf;       
+      if (fieldsToBlank != undefined) paramsHT.fieldsToBlank = fieldsToBlank;
+
+      paramsHT.windowTitle = 'Staining Method Select';
+
+      showTree(paramsHT);
+    }    
 
     // new showTree function (dynamically builds name=value parameter string for url from hashtable)
     function showTree(paramsHT) 
     { 
+  
       var now = new Date();
       var glob = now.getHours()+now.getSeconds()+now.getMilliseconds();
       paramsHT.rand = glob;
@@ -97,6 +119,7 @@
     // pop-up window utilitiy function
     function windowOpen(url,w,h,title)
     {
+   
       window.name = 'root';
       remote = window.open(url,'popup','width= '+w+',height='+h+', resizable=yes,scrollbars=yes,status=no');
       //remote = window.open(url);

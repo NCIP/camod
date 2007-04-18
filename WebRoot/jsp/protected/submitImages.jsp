@@ -29,6 +29,8 @@
 	}
 %>
 
+<html:form action="<%= actionName %>" focus="fileLocation" enctype="multipart/form-data">
+
 <SCRIPT LANGUAGE="JavaScript">
 	
 	function chkStaining() {
@@ -37,6 +39,8 @@
 	
 </SCRIPT>
 
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+	
 <!-- submitImages.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
@@ -59,8 +63,6 @@
 			<td class="formRequiredNotice" width="5">*</td>
 			<td class="formRequiredLabel"><label for="field1">Upload Image<br>(Image of type .jpg, .jpeg, .gif, .sid or .png)</label></td>
 			<td class="formField">
-			
-			<html:form action="<%= actionName %>" focus="fileLocation" enctype="multipart/form-data">	
 			
 			<c:if test="${not empty imageForm.fileServerLocation}">
 				Current Image Thumbnail: <br>
@@ -90,27 +92,24 @@
 			<td class="formField">
 				<html:textarea styleClass="formFieldSized" property="descriptionOfConstruct"  rows="4" cols="40" />	
 		</tr>
+		
+	<tr>
 
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formRequiredNotice" width="5">&nbsp;</td>
+		<td class="formLabel"><label for="field1">Staining Method:</label>&nbsp;
 
-			<td class="formLabel"><label for="field3">Staining Method</label></td>
-			<td class="formField">
-			<html:select styleClass="formFieldSized" size="1" property="stainingMethod" onchange="chkStaining();" >
-				<html:options name="<%= Dropdowns.STAININGDROP %>" />										
-			</html:select>
-			<br>
-			-if category you are looking for is not listed, <br>select "Other" and enter the category in the text field below:
-			</td>
-		</tr>
+			<a href="javascript:showStainingMethodTree('imageForm', 'stainingMethodCode', 'stainingMethodName', 'stainingMethod', true)">
+				<IMG src="images\selectUP.gif" align=middle border=0>
+			</a>
+		</td>						
+		<td class="formField">		
+			<html:hidden property="stainingMethodCode"/>
+			<input type="hidden" name="stainingMethodName" />				
+			<html:text styleClass="formFieldSized" disabled="true" property="stainingMethod" size="30"  />
+		</td>
+	</tr>		
 
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Other Staining Method</label></td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" property="otherStainingMethod" disabled="true" size="10" />
-			</td>
-		</tr>
+
 				
 		<tr>
 			<td align="right" colspan="3">

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageData.java,v 1.4 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: ImageData.java,v 1.5 2007-04-18 19:20:23 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -52,5 +55,10 @@ public interface ImageData {
     public String getThumbUrl();
     
     public void setThumbUrl(String thumbUrl);
+    
+    public String getStainingMethodCode();
+    public void setStainingMethodCode(String stainingMethodCode);
+    public String getStainingMethodName();
+    public void setStainingMethodName(String stainingMethodName);    
     
 }

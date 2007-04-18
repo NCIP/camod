@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.16 2006-05-24 20:25:53 georgeda Exp $
+ * $Id: ImagePopulateAction.java,v 1.17 2007-04-18 19:20:29 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/05/24 20:25:53  georgeda
+ * Fixed staining methods
+ *
  * Revision 1.15  2006/05/24 16:51:51  pandyas
  * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
  *
@@ -81,7 +84,7 @@ public class ImagePopulateAction extends BaseAction {
 
 		System.out.println("<ImagePopulateAction dropdown> Entering dropdown()");
 		
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        //NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 		
 		return mapping.findForward("submitImages");
 	}
