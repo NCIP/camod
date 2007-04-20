@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageAction.java,v 1.13 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: ImageAction.java,v 1.14 2007-04-20 17:51:14 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -54,6 +57,8 @@ public final class ImageAction extends BaseAction {
         log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
                 + imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
+                + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                
+                + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()  + "\n" 
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
@@ -152,6 +157,8 @@ public final class ImageAction extends BaseAction {
         log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
                 + imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
+                + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                   
+                + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()     + "\n"            
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";

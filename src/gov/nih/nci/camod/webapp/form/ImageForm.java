@@ -1,16 +1,22 @@
 /*
- * $Id: ImageForm.java,v 1.9 2007-04-18 19:20:22 pandyas Exp $
+ * $Id: ImageForm.java,v 1.10 2007-04-20 17:51:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/04/18 19:20:22  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.8  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
  */
 package gov.nih.nci.camod.webapp.form;
 /**
- * $Id: ImageForm.java,v 1.9 2007-04-18 19:20:22 pandyas Exp $
+ * $Id: ImageForm.java,v 1.10 2007-04-20 17:51:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/04/18 19:20:22  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.8  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -32,10 +38,9 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     protected String description;
     protected String descriptionOfConstruct;
     protected FormFile fileLocation;
-    protected String stainingMethod;
+    protected String stainingMethod;    
     protected String stainingMethodName;
     protected String stainingMethodCode;    
-    protected String otherStainingMethod;
     protected String imageId;
     protected String imageUrl;
     protected String thumbUrl;
@@ -74,22 +79,6 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
 
     public void setFileServerLocation(String fileServerLocation) {
         this.fileServerLocation = fileServerLocation;
-    }
-
-    public String getOtherStainingMethod() {
-        return otherStainingMethod;
-    }
-
-    public void setOtherStainingMethod(String otherStainingMethod) {
-        this.otherStainingMethod = otherStainingMethod;
-    }
-
-    public String getStainingMethod() {
-        return stainingMethod;
-    }
-
-    public void setStainingMethod(String stainingMethod) {
-        this.stainingMethod = stainingMethod;
     }
 
     public String getTitle() {
@@ -160,5 +149,21 @@ public class ImageForm extends BaseForm implements Serializable, ImageData {
     public void setStainingMethodName(String stainingMethodName)
     {
         this.stainingMethodName = stainingMethodName;
+    }
+
+    /**
+     * @return Returns the stainingMethod.
+     */
+    public String getStainingMethod()
+    {
+        return stainingMethod;
+    }
+
+    /**
+     * @param stainingMethod The stainingMethod to set.
+     */
+    public void setStainingMethod(String stainingMethod)
+    {
+        this.stainingMethod = stainingMethod;
     }
 }

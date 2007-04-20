@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StainingMethodManagerImpl.java,v 1.2 2006-05-24 16:46:14 pandyas Exp $
+ * $Id: StainingMethodManagerImpl.java,v 1.3 2007-04-20 17:51:27 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/24 16:46:14  pandyas
+ * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
+ *
  * Revision 1.1  2006/04/17 19:11:06  pandyas
  * caMod 2.1 OM changes
  *
@@ -12,9 +15,9 @@
 
 package gov.nih.nci.camod.service.impl;
 
-import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.StainingMethod;
 import gov.nih.nci.camod.service.StainingMethodManager;
+import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.persistence.Search;
 import java.util.List;
 
@@ -46,54 +49,39 @@ public class StainingMethodManagerImpl extends BaseManager implements StainingMe
      *                when anything goes wrong.
      *  
      */
-    public StainingMethod getOrCreate(String inName,
-                                      String inOtherName) throws Exception
+    public StainingMethod getOrCreate(String inConceptCode,
+                                      String inStainingName) throws Exception
     {
         log.info("<StainingMethodManagerImpl> Entering getOrCreate");
-
+        
         StainingMethod theQBEStainingMethod = new StainingMethod();
+        theQBEStainingMethod.setConceptCode(inConceptCode);
 
-        // If Other is selected, look for a match to the uncontrolled vocab
-        // create new one either way if not found
-        if (inName != null && !inName.equals(Constants.Dropdowns.OTHER_OPTION))
+        StainingMethod theStainingMethod = null;
+
+        List theList = Search.query(theQBEStainingMethod);
+
+        // Doesn't exist. Use the QBE StainingMethod since it has the same data
+        if (theList != null && theList.size() > 0)
         {
-            theQBEStainingMethod.setName(inName);
+            theStainingMethod = (StainingMethod) theList.get(0);
         }
         else
         {
-            theQBEStainingMethod.setNameUnctrlVocab(inOtherName);
-        }
+            theStainingMethod = theQBEStainingMethod;
+            String thePreferredDiscription = EvsTreeUtil.getEVSPreferedDescription(inConceptCode);
 
-        StainingMethod theStainingMethod = null;
-        try
-        {
-            List theList = Search.query(theQBEStainingMethod);
-
-            // Does exist, return object. 
-            if (theList != null && theList.size() > 0)
+            if (thePreferredDiscription != null && thePreferredDiscription.length() > 0)
             {
-                theStainingMethod = (StainingMethod) theList.get(0);
+                theStainingMethod.setName(thePreferredDiscription);
             }
-            //  Doesn't exist. Create object with either name or otherName set, don't save the word 'Other'
             else
             {
-                theStainingMethod = theQBEStainingMethod;
-                if (inName != null && !inName.equals(Constants.Dropdowns.OTHER_OPTION))
-                {
-                    theQBEStainingMethod.setName(inName);
-                }
-                else
-                {
-                    theQBEStainingMethod.setNameUnctrlVocab(inOtherName);
-                }
+                theStainingMethod.setName(inStainingName);
             }
+            theStainingMethod.setConceptCode(inConceptCode);
         }
-        catch (Exception e)
-        {
-            log.error("Error querying for matching StainingMethod object.  Creating new one.", e);
-            theStainingMethod = theQBEStainingMethod;
-        }
-        log.info("<StainingMethodManagerImpl> theStainingMethod: " + theStainingMethod.toString());
+
         return theStainingMethod;
     }
 }

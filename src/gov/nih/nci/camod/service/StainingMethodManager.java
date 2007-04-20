@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StainingMethodManager.java,v 1.2 2006-05-24 16:46:03 pandyas Exp $
+ * $Id: StainingMethodManager.java,v 1.3 2007-04-20 17:51:35 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/05/24 16:46:03  pandyas
+ * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
+ *
  * Revision 1.1  2006/04/17 19:13:16  pandyas
  * caMod 2.1 OM changes
  *
@@ -22,7 +25,6 @@ public interface StainingMethodManager
 
     public StainingMethod get(String id) throws Exception;
 
-    public StainingMethod getOrCreate(String inStainingMethod,
-                                      String inOtherStainingMethod) throws Exception;
+    public StainingMethod getOrCreate(String inConceptCode, String inStainingName) throws Exception;
 
 }

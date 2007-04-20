@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.21 2006-08-17 18:26:17 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.22 2007-04-20 17:51:27 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2006/08/17 18:26:17  pandyas
+ * Defect# 410: Externalize properties files - Code Changes to send mail method
+ *
  * Revision 1.20  2006/05/24 20:25:29  georgeda
  * Fixed staining methods
  *
@@ -55,7 +58,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 	}
 
 	public void save(Image Image) throws Exception {
-		log.trace("In ImageManagerImpl.save");
+		log.info("In ImageManagerImpl.save");
 		super.save(Image);
 	}
 
@@ -69,13 +72,13 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 	public Image create(AnimalModel inAnimalModel, ImageData inImageData,
 			String inPath, String inStorageDirKey) throws Exception {
 
-		log.trace("Entering ImageManagerImpl.create");
+		log.info("Entering ImageManagerImpl.create");
 
 		Image inImage = new Image();
 		populateImage(inAnimalModel, inImageData, inImage, inPath,
 				inStorageDirKey);
 
-		log.trace("Exiting ImageManagerImpl.create");
+		log.info("Exiting ImageManagerImpl.create");
 
 		return inImage;
 	}
@@ -101,31 +104,17 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 
 		log.info("Entering populateImage");
 
-		if (inImageData.getStainingMethod() != null
-				&& !inImageData.getStainingMethod().equals("")) {
+		if (inImageData.getStainingMethodName() != null
+				&& !inImageData.getStainingMethodName().equals("")) {
 
-			// Get/Create the StainingMethod
+            // every submission - lookup the StainingMethod or create one new
 			StainingMethod stainingMethod = StainingMethodManagerSingleton
-					.instance().getOrCreate(inImageData.getStainingMethod(),
-							inImageData.getOtherStainingMethod());
+					.instance().getOrCreate(inImageData.getStainingMethodCode(),
+							inImageData.getStainingMethodName());
+            log.info("populateImage inImageData.getStainingMethodCode(): " +inImageData.getStainingMethodCode());
+            log.info("populateImage inImageData.getStainingMethodName(): " +inImageData.getStainingMethodName());            
+            inImage.setStainingMethod(stainingMethod);
 
-			log.info("Entering populateImage stainingMethod:" + stainingMethod);
-
-			if (stainingMethod.getName() == null
-					&& stainingMethod.getNameUnctrlVocab() != null) {
-				log.info("in other stainingMethod loop: " + stainingMethod);
-				// Set staining method
-				inImage.setStainingMethod(stainingMethod);
-
-				// Send e-mail for other donor staining method
-				sendEmail(inAnimalModel, stainingMethod.getNameUnctrlVocab(),
-						"stainingMethod");
-
-			} else {
-				log.info("stainingMethod: " + stainingMethod);
-				// Set staining method
-				inImage.setStainingMethod(stainingMethod);
-			}
 		} else {
 			// null staining method - covers editing
 			inImage.setStainingMethod(null);

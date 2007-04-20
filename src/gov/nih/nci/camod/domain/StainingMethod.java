@@ -1,5 +1,6 @@
 package gov.nih.nci.camod.domain;
 
+import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.camod.util.HashCodeUtil;
 
 import java.io.Serializable;
@@ -62,6 +63,24 @@ public class StainingMethod extends BaseObject implements Comparable, Serializab
     {
         this.conceptCode = conceptCode;
     }
+    
+    /**
+     * @return Returns the EVS Preferred displayName
+     *      if the conceptCode = 000000, then return the name
+     */
+    public String getEVSPreferredDescription()
+    {
+        String thePreferedDesc = null;
+        if ("000000".equals(conceptCode) || "C000000".equals(conceptCode))
+        {
+            thePreferedDesc = name;
+        }
+        else
+        {
+            thePreferedDesc = EvsTreeUtil.getEVSPreferedDescription(conceptCode);
+        }
+        return thePreferedDesc;
+    }     
 
     /**
      * @see java.lang.Object#toString()

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.17 2007-04-18 19:20:29 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.18 2007-04-20 17:51:14 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/04/18 19:20:29  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.16  2006/05/24 20:25:53  georgeda
  * Fixed staining methods
  *
@@ -43,36 +46,36 @@ public class ImagePopulateAction extends BaseAction {
 
 		String aImageID = request.getParameter("aImageID");
 
-		Image inImage = ImageManagerSingleton.instance().get(aImageID);
+		Image theImage = ImageManagerSingleton.instance().get(aImageID);
        
 		// Handle back arrow
-		if (inImage == null) {
+		if (theImage == null) {
 			request.setAttribute(Constants.Parameters.DELETED, "true");
 		} else {
 			imageForm.setImageId(aImageID);
 
-			if (inImage != null) {
-				imageForm.setTitle(inImage.getTitle());
-				imageForm.setFileServerLocation(inImage.getFileServerLocation());
+			if (theImage != null) {
+				imageForm.setTitle(theImage.getTitle());
+				imageForm.setFileServerLocation(theImage.getFileServerLocation());
                 
-                if( inImage.getDescription() != null )
+                if( theImage.getDescription() != null )
                 {
-                    imageForm.setDescriptionOfConstruct(inImage.getDescription());
+                    imageForm.setDescriptionOfConstruct(theImage.getDescription());
                 }
                 
-				if( inImage.getStainingMethod() != null )
+				if( theImage.getStainingMethod() != null )
                 {
-                    if (inImage.getStainingMethod().getName() != null) {
-                        imageForm.setStainingMethod( inImage.getStainingMethod().getName() );
-                    }
-                    else {
-                        imageForm.setStainingMethod(Constants.Dropdowns.OTHER_OPTION);
-                        imageForm.setOtherStainingMethod( inImage.getStainingMethod().getNameUnctrlVocab() );
-                    }
+                    // since we are always querying from concept code (save and edit),
+                    // simply display EVSPreferredDescription
+                    imageForm.setStainingMethod(theImage.getStainingMethod().getEVSPreferredDescription());
+                    log.info("setStainingMethod= " + theImage.getStainingMethod().getEVSPreferredDescription());
+
+                    imageForm.setStainingMethodCode(theImage.getStainingMethod().getConceptCode());
+                    log.info("setStainingMethodCode= " + theImage.getStainingMethod().getConceptCode());                    
                 }
                 
-                imageForm.setThumbUrl(inImage.getThumbUrl());
-                imageForm.setImageUrl(inImage.getImageUrl());
+                imageForm.setThumbUrl(theImage.getThumbUrl());
+                imageForm.setImageUrl(theImage.getImageUrl());
 			}
 		}
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STAININGDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
