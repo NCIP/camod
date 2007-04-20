@@ -63,7 +63,10 @@
                                                       <td class="sidebarTitle" height="20">LOGIN TO caMOD &nbsp; 
                                                       <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help-browser_orig_23.gif" text=""/>&nbsp;
                                                       <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/helpIcon_20.gif" text=""/>&nbsp;
-                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/questionmark23.gif" text=""/></td>
+                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/questionmark23.gif" text=""/>
+                 									  <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help.gif" text=""/>				
+                                                      
+                                                      </td>
                                                    </tr>
                                                   <tr>
                                                       <td colspan="3">
