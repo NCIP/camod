@@ -297,6 +297,16 @@ Clears hidden value for organTissueCode
      var1.value = '';   
  }
  
+/**********************************
+Script to clearStainingMethod field
+Blanks out organ field
+Clears hidden value for stainingMethodCode
+**********************************/
+ function clearStainingMethod(field, var1) {
+     field.value = '';
+     var1.value = '';   
+ } 
+ 
 function openUserGuideWindow(pageURL) {
     window.open (pageURL, "caMOD User Guide", "alwaysRaised,dependent,status,scrollbars,resizable,width=800,height=500"); 
     
