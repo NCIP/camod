@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.38 2007-04-20 14:36:14 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.39 2007-04-20 15:30:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2007/04/20 14:36:14  pandyas
+ * Modified image choices for dev tier comparison
+ *
  * Revision 1.37  2006/11/10 22:01:45  pandyas
  * TestTrack #465 - delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *
@@ -130,7 +133,10 @@
                 
 		<tr>
 			<td class="formTitleBlue" height="20" colspan="3">Simple Search
-				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/helpIcon_20.gif" text=""/></td>
+				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/help-browser_orig_23.gif" text=""/>
+				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/helpIcon_20.gif" text=""/>
+				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/questionmark23.gif" text=""/>								
+				</td>
 		</tr>
 		
 		<tr>
@@ -162,7 +168,9 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/questionmark23.gif" text="Tool Tip Test 1" />
+                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/help-browser_orig_23.gif" text="Tool Tip Test 1"/>&nbsp;
+                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpIcon_20.gif" text="Tool Tip Test 1"/>&nbsp;
+                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/questionmark23.gif" text="Tool Tip Test 1"/>				
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
