@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/04/04 13:25:19  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.7  2007/03/26 12:07:56  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -21,7 +24,7 @@
  *
  *
  *
- * $Id: submitMorpholino.jsp,v 1.8 2007-04-04 13:25:19 pandyas Exp $
+ * $Id: submitMorpholino.jsp,v 1.9 2007-04-23 16:18:17 pandyas Exp $
  *
  */   
 %>
@@ -166,7 +169,7 @@
 	
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Site:</label></td>
+			<td class="formLabel"><label for="field1">Target Site:</label></td>
 		<td class="formField">
 			<html:select styleClass="formFieldUnSized" size="1" property="targetSite" >												
 				<html:options name="<%= Dropdowns.MORPHOLINOTARGETSITE %>"/>					
