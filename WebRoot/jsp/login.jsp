@@ -61,12 +61,7 @@
                                               <table summary="" cellpadding="2" cellspacing="0" border="0" width="100%" class="sidebarSection">
                                                   <tr>
                                                       <td class="sidebarTitle" height="20">LOGIN TO caMOD &nbsp; 
-                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help-browser_orig_23.gif" text=""/>&nbsp;
-                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/helpIcon_20.gif" text=""/>&nbsp;
-                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/questionmark23.gif" text=""/>
-                 									  <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help.gif" text=""/>
-                 									  <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help-browser_orig_28.gif" text=""/>                 									  				
-                                                      
+                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>&nbsp;
                                                       </td>
                                                    </tr>
                                                   <tr>
@@ -116,12 +111,7 @@
                                                                   <td>		      		
                                                                       <FORM name="input" action="/camod/RegisterUserPopulateAction.do" method="get">
                                                                           <input class="actionButton" type="submit" value="Register" />
-                                                                      </FORM>
-                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help-browser_orig_23.gif" text=""/>&nbsp;
-                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/helpIcon_20.gif" text=""/>&nbsp;
-                                                      <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/questionmark23.gif" text=""/>
-                 									  <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help.gif" text=""/>
-                 									  <camod:cshelp topic="login_page_help" key="ignore" image="/camod/images/help-browser_orig_28.gif" text=""/>                                                                        			      		
+                                                                      </FORM>                                                                      			      		
                                                                   </td>
                                                               </tr>                                                             
                                                           </table>

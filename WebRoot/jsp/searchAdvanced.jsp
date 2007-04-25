@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.55 2007-04-09 12:35:16 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.56 2007-04-25 15:04:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.55  2007/04/09 12:35:16  pandyas
+ * modified after caMOD 2.3 unit testing
+ *
  * Revision 1.54  2007/03/28 18:11:35  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -234,7 +237,7 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
@@ -253,7 +256,7 @@
 		 		<html:hidden styleId="diagnosisName" property="diagnosisName"/>
 				<label for="field2">Diagnosis</label>
 				&nbsp;
-				<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+				<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />
 		  	    <a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
 				<IMG src="images\selectUP.gif" align=middle  border=0>
 				</a>			    

@@ -75,7 +75,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
-		<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+		<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
 
 		<a href="javascript:showMouseTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 				<IMG src="images\selectUP.gif" align=middle border=0>

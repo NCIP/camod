@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.41 2007-04-20 17:50:29 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.42 2007-04-25 15:04:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.41  2007/04/20 17:50:29  pandyas
+ * Modified image choices for dev tier comparison
+ *
  * Revision 1.40  2007/04/20 15:37:45  pandyas
  * Modified image choices for dev tier comparison
  *
@@ -139,12 +142,8 @@
                 
 		<tr>
 			<td class="formTitleBlue"  colspan="3">Simple Search
-				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/help-browser_orig_23.gif" text=""/>
-				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/helpIcon_20.gif" text=""/>
-				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/questionmark23.gif" text=""/>
-                <camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/help.gif" text=""/>				
-                <camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/help-browser_orig_28.gif" text=""/>												
-				</td>
+				<camod:cshelp topic="simple_search_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>											
+			</td>
 		</tr>
 		
 		<tr>
@@ -176,12 +175,8 @@
 		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
 				<label for="field2">Site of Lesion/Tumor</label>
 				&nbsp;
-                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/help-browser_orig_23.gif" text="Tool Tip Test 1"/>&nbsp;
-                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpIcon_20.gif" text="Tool Tip Test 1"/>&nbsp;
-                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/questionmark23.gif" text="Tool Tip Test 1"/>
-                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/help.gif" text="Tool Tip Test 1"/>				
-                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/help-browser_orig_28.gif" text="Tool Tip Test 1"/>				                 				
-		  	    <a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
+                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1"/>&nbsp;				                 				
+		  	    	<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 				<IMG src="images\selectUP.gif" align=middle border=0>
 				</a>
 			</td>

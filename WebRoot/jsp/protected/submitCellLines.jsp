@@ -59,7 +59,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">*</td>
 		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:&nbsp;
-			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			</label>
+			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />			</label>
 		  	    &nbsp;<a href="javascript:showMouseTissueTree('cellLineForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>

@@ -106,7 +106,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="0">&nbsp;</td>
 		<td class="formLabel"><label for="field2">Injection Site:&nbsp;
-		<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			</label>
+		<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />			</label>
 		  	    <a href="javascript:showMouseTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 				<html:hidden property="organTissueCode" />
 				<INPUT name="organTissueName" type="hidden"/>

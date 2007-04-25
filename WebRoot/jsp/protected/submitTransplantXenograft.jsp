@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.48 2007-04-04 13:25:19 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.49 2007-04-25 15:05:51 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2007/04/04 13:25:19  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.47  2007/03/26 12:08:01  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -201,7 +204,7 @@
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
-			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />			
+			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />			
 			<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
 		</td>
 		<td class="formField">
