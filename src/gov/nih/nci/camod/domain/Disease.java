@@ -1,7 +1,10 @@
 /*
- * $Id: Disease.java,v 1.16 2006-10-17 16:14:36 pandyas Exp $
+ * $Id: Disease.java,v 1.17 2007-04-30 20:06:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/10/17 16:14:36  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.15  2006/04/19 17:37:37  pandyas
  * Removed text
  *
@@ -22,6 +25,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
     private static final long serialVersionUID = 3259515453799404851L;
 
     private String name;
+    private String nameUnctrlVocab;    
     private String conceptCode;
 
     
@@ -121,5 +125,13 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
 
         return super.compareTo(o);
     }
+
+	public String getNameUnctrlVocab() {
+		return nameUnctrlVocab;
+	}
+
+	public void setNameUnctrlVocab(String nameUnctrlVocab) {
+		this.nameUnctrlVocab = nameUnctrlVocab;
+	}
 
 }
