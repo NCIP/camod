@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyForm.java,v 1.8 2006-10-17 16:10:47 pandyas Exp $
+ * $Id: HistopathologyForm.java,v 1.9 2007-04-30 20:11:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/10/17 16:10:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.7  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -22,9 +25,12 @@ import java.io.Serializable;
 
 /**
  * 
- * $Id: HistopathologyForm.java,v 1.8 2006-10-17 16:10:47 pandyas Exp $
+ * $Id: HistopathologyForm.java,v 1.9 2007-04-30 20:11:06 pandyas Exp $
  * 
- * $Log: not supported by cvs2svn $ Revision 1.7 2006/04/17 19:09:19 pandyas
+ * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/10/17 16:10:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ * Revision 1.7 2006/04/17 19:09:19 pandyas
  * caMod 2.1 OM changes
  * 
  * 
@@ -49,10 +55,12 @@ public class HistopathologyForm extends BaseForm implements Serializable,
 	protected String organTissueCode;
 
 	protected String diagnosisName;
-
+	
 	protected String diagnosisCode;
 
 	protected String tumorClassification;
+	
+	protected String otherTumorClassification;	
 
 	protected String ageOfOnset;
 
@@ -359,5 +367,13 @@ public class HistopathologyForm extends BaseForm implements Serializable,
 
 	public void setTumorClassification(String tumorClassification) {
 		this.tumorClassification = tumorClassification;
+	}
+
+	public String getOtherTumorClassification() {
+		return otherTumorClassification;
+	}
+
+	public void setOtherTumorClassification(String otherTumorClassification) {
+		this.otherTumorClassification = otherTumorClassification;
 	}
 }
