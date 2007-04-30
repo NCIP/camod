@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManager.java,v 1.5 2006-04-20 19:18:24 pandyas Exp $
+ * $Id: HistopathologyManager.java,v 1.6 2007-04-30 20:07:51 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/20 19:18:24  pandyas
+ * Moved save Assoc Met from AnimalModel to the Histopathology
+ *
  * Revision 1.4  2005/11/09 00:17:06  georgeda
  * Fixed delete w/ constraints
  *
@@ -35,17 +38,17 @@ public interface HistopathologyManager {
     
     public Histopathology get(String id) throws Exception;
     
-    public Histopathology createHistopathology(HistopathologyData inHistopathologyData)throws Exception;
+    public Histopathology createHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData)throws Exception;
     
-    public void createAssociatedMetastasis(AssociatedMetastasisData inAssociatedMetastasisData, Histopathology inHistopathology)throws Exception;
+    public void createAssociatedMetastasis(AnimalModel inAnimalModel, AssociatedMetastasisData inAssociatedMetastasisData, Histopathology inHistopathology)throws Exception;
     
-    public void updateHistopathology(HistopathologyData inHistopathologyData, Histopathology theHistopathology) throws Exception;
+    public void updateHistopathology(AnimalModel inAnimalModel, HistopathologyData inHistopathologyData, Histopathology theHistopathology) throws Exception;
     
-    public void updateAssociatedMetastasis(AssociatedMetastasisData inAssociatedMetastasisData, Histopathology inAssociatedMetastasis) throws Exception;    
+    public void updateAssociatedMetastasis(AnimalModel inAnimalModel, AssociatedMetastasisData inAssociatedMetastasisData, Histopathology inAssociatedMetastasis) throws Exception;    
 
     public void remove(String id, AnimalModel inAnimalModel) throws Exception;
     
-    public void addAssociatedMetastasis(AnimalModel inAnimalModel, Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception;      
+    public void addAssociatedMetastasis(AnimalModel inAnimalModel,Histopathology inHistopathology, AssociatedMetastasisData inAssociatedMetastasisData) throws Exception;      
     
     public void removeAssociatedMetastasis(String id, Histopathology inHistopathology) throws Exception; 
     

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.82 2007-03-26 12:01:11 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.83 2007-04-30 20:09:13 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.82  2007/03/26 12:01:11  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.81  2007/02/23 21:26:07  pandyas
  * Fixed Genotype and Nomenclature - split objects and cleaned up database
  *
@@ -316,7 +319,22 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.debug("In AnimalModelManagerImpl.getAll");
         return super.getAll(AnimalModel.class);
     }
+    
+    /**
+     * Get all of the animal models in the DB in batches of size = pageSize
+     * 
+     * @return the list of all animal models
+     * 
+     * @exception throws
+     *                an Exception if an error occurred
+     
+    public List getAll(String inKey, int pageSize) throws Exception
+    {
+        log.info("In AnimalModelManagerImpl.getAll(key, pageSize");
 
+        return QueryManagerSingleton.instance().getModelsBetweenRange(inKey, pageSize);        
+    }    
+	*/
     /**
      * Get all of the animal models submitted by a username
      * 
@@ -577,7 +595,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List<AnimalModelSearchResult> search(SearchData inSearchData) throws Exception
     {
 
-        log.debug("In search");
+        log.info("In search");
         List theAnimalModels = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
 
         List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
@@ -588,7 +606,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
             theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
         }
-
+        log.info("In search - theDisplayList.size(): " + theDisplayList.size());
         return theDisplayList;
     }
 
@@ -1163,7 +1181,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 
         log.debug("Entering AnimalModelManagerImpl.addHistopathology_1");
 
-        Histopathology theHistopathology = HistopathologyManagerSingleton.instance().createHistopathology(inHistopathologyData);
+        Histopathology theHistopathology = HistopathologyManagerSingleton.instance().createHistopathology(inAnimalModel, inHistopathologyData);
         inAnimalModel.addHistopathology(theHistopathology);
 
         save(inAnimalModel);
