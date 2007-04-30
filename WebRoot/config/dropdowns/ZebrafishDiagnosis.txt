@@ -1,0 +1,10 @@
+TYPE=DROPDOWN_OPTION
+Carcinoma,Carcinoma
+- Hepatocellular carcinoma,Hepatocellular carcinoma
+- Cholangiocarcinoma,Cholangiocarcinoma
+Sarcoma,Sarcoma
+- Leiomyosarcoma,Leiomyosarcoma
+- Osteosarcoma,Osteosarcoma
+Benign neoplasm,Benign neoplasm
+- Papilloma,Papilloma
+- Schwannoma,Schwannoma
