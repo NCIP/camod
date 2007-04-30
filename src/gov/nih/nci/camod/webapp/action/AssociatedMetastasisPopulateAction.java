@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.10 2006-11-09 17:22:17 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.11 2007-04-30 20:10:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/11/09 17:22:17  pandyas
+ * Commented out debug code
+ *
  * Revision 1.9  2006/11/08 18:05:56  pandyas
  * Modified TumorIncidenceRate float to String (weight of tumor and volume of tumor also needed modified to delete properly)
  *
@@ -151,6 +154,7 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);        
 
     }
 

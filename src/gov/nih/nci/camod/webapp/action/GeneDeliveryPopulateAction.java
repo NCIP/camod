@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.17 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.18 2007-04-30 20:10:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.16  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -63,8 +66,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 		GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
 
 		// Grab the current aCarcinogenExposureID we are working with related to
-		// this
-		// animalModel
+		// this animalModel
 		String aCarcinogenExposureID = request
 				.getParameter("aCarcinogenExposureID");
 		GeneDeliveryManager geneDeliveryManager = (GeneDeliveryManager) getBean("geneDeliveryManager");
@@ -103,12 +105,12 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 					.getAgeAtTreatmentUnit());
 
 			/* set Organ attributes */
-			log
-					.info("<GeneDeliveryPopulateAction populate> get the Organ attributes");
+			log.info("<GeneDeliveryPopulateAction> get the Organ attributes");
 
 			// since we are always querying from concept code (save and edit),
 			// simply display VSPreferredDescription
 			if (gene.getOrgan() != null) {
+				log.info("gene.getOrgan(): " + gene.getOrgan().toString());
 				geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
 				log.info("OrganTissueCode= "+ gene.getOrgan().getConceptCode());
 

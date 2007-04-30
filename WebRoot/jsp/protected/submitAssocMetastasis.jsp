@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/04/25 15:05:51  pandyas
+ * Agreed on one help icon for all title bars and one icon for light grey tool tip - removed all others
+ *
  * Revision 1.27  2006/11/14 21:47:49  pandyas
  * #465	delete tooltops, keep tooltips for vocabulary trees and link them to vocab tree help pages
  *
@@ -55,7 +58,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.28 2007-04-25 15:05:51 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.29 2007-04-30 20:13:06 pandyas Exp $
  *
  */   
 %>
@@ -121,38 +124,112 @@
 	<tr>
 		<td class="formTitle" height="20" colspan="3">Associated Metastasis&nbsp;
 			<camod:cshelp topic="histopathology_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/>
-</td>
+		</td>
+
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
-			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />			
-			<a href="javascript:showMouseTissueTree('associatedMetastasisForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-				<IMG src="images\selectUP.gif" align=middle border=0>
-			</a>
-		</td>
-		<td class="formField">
-			<html:hidden property="organTissueCode"/>
-			<input type="hidden" name="organTissueName" />				
-			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
-		</td>
+			<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+ 			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
+ 			<c:choose>
+				<c:when test="${modelspeciescommonname == 'Mouse'}">			
+					<a href="javascript:showMouseTissueTree('associatedMetastasisForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>				
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">					
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+					</td>				
+				</c:when>
+				<c:when test="${modelspeciescommonname == 'Rat'}">	
+					<a href="javascript:showRatTissueTree('associatedMetastasisForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+					</td>
+				</c:when>	
+				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
+				<!-- Fix when you get Zebrafsih tree to work -->
+				</td>
+					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueName"/>
+					<td class="formField">
+						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+					</td>
+				</c:when>
+				<c:otherwise>
+				</td>
+					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueName"/>
+					<td class="formField">
+						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+					</td>				
+				</c:otherwise>				
+    		</c:choose>
 	</tr>
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-			<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />
-			<a href="javascript:showMouseDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
-				<IMG src="images\selectUP.gif" align=middle border=0>
-			</a>	
-		</td>
-		<html:hidden property="diagnosisName"/>
-		<html:hidden property="diagnosisCode"/>
-		<td class="formField">
-			<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="25" />
-		</td>
-	</tr>
+				<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+				<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />
+ 				<!-- Display disease tree based on animal model species or allow for text entry if no specific tree exists -->
+	 			<c:choose>			
+					<c:when test="${modelspeciescommonname == 'Mouse'}">
+						<a href="javascript:showMouseDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>	
+				</td>
+						<html:hidden property="diagnosisCode"/>		
+						<html:hidden property="diagnosisName"/>
+						<td class="formField">
+							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+						</td>									
+					</c:when>
+					<c:when test="${modelspeciescommonname == 'Rat'}">
+						<a href="javascript:showRatDiagnosisTree('associatedMetastasisForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>	
+				</td>
+						<html:hidden property="diagnosisCode"/>		
+						<html:hidden property="diagnosisName"/>
+						<td class="formField">
+							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+						</td>												
+					</c:when>
+					<c:when test="${modelspeciescommonname == 'Zebrafish'}">
+				</td>	
+						<td class="formField">
+								<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>						
+							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
+								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
+							</html:select>					
+							<br>
+							-if Diagnosis is not listed, then please<br>select "Other" from the list and specify it below:
+						</td>
+					</tr>			
+						<tr>
+							<td class="formRequiredNotice" width="5">&nbsp;</td>
+							<td class="formLabel"><label for="field1">Other Diagnosis:</label></td>
+							<td class="formField">
+								<html:text styleClass="formFieldSized" property="otherTumorClassification"  size="30" />
+							</td>
+						</tr>						
+					</c:when>							
+					<c:otherwise>
+				</td>
+						<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+						<html:hidden property="diagnosisName"/>
+						<td class="formField">
+							<html:text styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />
+						</td>				
+					</c:otherwise>
+	    		</c:choose>
+	</tr>	
+	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -305,6 +382,7 @@
 
 <SCRIPT>
 	chkObservation();
+	chkOtherDiagnosis();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

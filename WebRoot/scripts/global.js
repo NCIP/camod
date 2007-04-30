@@ -82,6 +82,14 @@ function chkOtherLigand() {
     chkOther(visualLigand, otherVisualLigand);  	
 }
 
+function chkOtherDiagnosis() {
+
+    var tumorClassification = document.forms[0].tumorClassification;
+    var otherTumorClassification = document.forms[0].otherTumorClassification;
+
+    chkOther(tumorClassification, otherTumorClassification);  	
+}
+
 
 function disableFieldUnsized(field)
 {

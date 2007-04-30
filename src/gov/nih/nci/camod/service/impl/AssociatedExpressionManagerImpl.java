@@ -1,13 +1,17 @@
 /**
  * 
- * $Id: AssociatedExpressionManagerImpl.java,v 1.5 2006-04-17 19:11:05 pandyas Exp $
+ * $Id: AssociatedExpressionManagerImpl.java,v 1.6 2007-04-30 20:09:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:11:05  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.ExpressionFeature;
 import gov.nih.nci.camod.domain.ExpressionLevelDesc;
@@ -63,10 +67,24 @@ public class AssociatedExpressionManagerImpl extends BaseManager implements Asso
     private void populate(AssociatedExpressionData inAssociatedExpressionData,
                           ExpressionFeature inExpressionFeature) throws Exception
     {
-        String preferedOrganName = EvsTreeUtil.getEVSPreferedDescription(inAssociatedExpressionData.getOrganTissueCode());
-        inExpressionFeature.setOrgan(new Organ());
-        inExpressionFeature.getOrgan().setName(preferedOrganName);
-        inExpressionFeature.getOrgan().setConceptCode(inAssociatedExpressionData.getOrganTissueCode());
+		// every submission - lookup organ or create one new
+		if (inAssociatedExpressionData.getOrganTissueCode().equals(
+				Constants.Dropdowns.CONCEPTCODEZEROS)) {
+			log.info("inAssociatedExpressionData.getOrganTissueCode(): "
+					+ inAssociatedExpressionData.getOrganTissueCode());
+			// Create new organ with conceptCode = 000000, use name field
+			inExpressionFeature.setOrgan(new Organ());
+			inExpressionFeature.getOrgan().setConceptCode(
+					Constants.Dropdowns.CONCEPTCODEZEROS);
+			inExpressionFeature.getOrgan()
+					.setName(inAssociatedExpressionData.getOrgan());
+		} else if (inAssociatedExpressionData.getOrganTissueCode() != null){
+			log.info("getOrCreate method used");
+			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
+					inAssociatedExpressionData.getOrganTissueCode(),
+					inAssociatedExpressionData.getOrganTissueName());
+			inExpressionFeature.setOrgan(theNewOrgan);
+		}
 
         ExpressionLevelDesc expLevelDesc = ExpressionLevelDescManagerSingleton.instance().getByName(
                                                                                                     inAssociatedExpressionData.getExpressionLevel());

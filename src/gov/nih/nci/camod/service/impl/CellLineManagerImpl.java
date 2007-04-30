@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: CellLineManagerImpl.java,v 1.16 2006-10-17 16:13:46 pandyas Exp $
+ * $Id: CellLineManagerImpl.java,v 1.17 2007-04-30 20:09:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/10/17 16:13:46  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.15  2006/05/08 13:41:31  georgeda
  * Use data for fetching organ, not object
  *
@@ -77,6 +80,7 @@
  */
 package gov.nih.nci.camod.service.impl;
 
+import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.CellLine;
 import gov.nih.nci.camod.domain.Organ;
@@ -204,13 +208,25 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
 		inCellLine.setResults(inCellLineData.getResults());
 		inCellLine.setComments(inCellLineData.getComments());
 
-		/*
-		 * Add a Organ to CellLine with correct IDs, conceptCode
-		 */
-		Organ theOrgan = OrganManagerSingleton.instance().getOrCreate(
-				inCellLineData.getOrganTissueCode(),
-				inCellLineData.getOrganTissueName());
-		inCellLine.setOrgan(theOrgan);
+
+		// every submission - lookup organ or create one new
+		if (inCellLineData.getOrganTissueCode().equals(
+				Constants.Dropdowns.CONCEPTCODEZEROS)) {
+			log.info("inCellLineData.getOrganTissueCode(): "
+					+ inCellLineData.getOrganTissueCode());
+			// Create new organ with conceptCode = 000000, use name field
+			inCellLine.setOrgan(new Organ());
+			inCellLine.getOrgan().setConceptCode(
+					Constants.Dropdowns.CONCEPTCODEZEROS);
+			inCellLine.getOrgan()
+					.setName(inCellLineData.getOrgan());
+		} else if (inCellLineData.getOrganTissueCode() != null){
+			log.info("getOrCreate method used");
+			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
+					inCellLineData.getOrganTissueCode(),
+					inCellLineData.getOrganTissueName());
+			inCellLine.setOrgan(theNewOrgan);
+		}		
 
 		log.debug("Exiting populateCellLine");
 	}

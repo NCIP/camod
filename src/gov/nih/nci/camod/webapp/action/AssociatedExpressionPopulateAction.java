@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionPopulateAction.java,v 1.7 2006-11-09 17:21:25 pandyas Exp $
+ * $Id: AssociatedExpressionPopulateAction.java,v 1.8 2007-04-30 20:10:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/11/09 17:21:25  pandyas
+ * Commented out debug code
+ *
  * Revision 1.6  2006/05/10 14:15:39  schroedn
  * New Features - Changes from code review
  *
@@ -69,7 +72,7 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
 
             associatedExpressionForm.setEngineeredGeneID(aAssociatedExpressionID);
             associatedExpressionForm.setOrganTissueCode(organ.getConceptCode());
-            associatedExpressionForm.setOrganTissueName(organ.getName());
+            associatedExpressionForm.setOrganTissueName(organ.getEVSPreferredDescription());
         }
 
         // setup dropdown menus

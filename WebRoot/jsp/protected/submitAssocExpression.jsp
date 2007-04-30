@@ -72,22 +72,53 @@
 			<camod:cshelp topic="associated_expression_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
-	<tr>
-		<td class="formRequiredNotice" width="0">*</td>
-		<td class="formRequiredLabel"><label for="field2">Organ / Tissue:</label>&nbsp;
-		<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
 
-		<a href="javascript:showMouseTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-				<IMG src="images\selectUP.gif" align=middle border=0>
-			</a>
-		</td>
-		<td class="formField">
-			<html:hidden property="organTissueCode" name="formdata" />
-			<html:hidden property="organTissueName" name="formdata" />			
-			<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30" name="formdata"/>
-			
-		</td>
+	<tr>
+		<td class="formRequiredNotice" width="5">*</td>
+			<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
+ 			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
+ 			<c:choose>
+				<c:when test="${modelspeciescommonname == 'Mouse'}">			
+					<a href="javascript:showMouseTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>				
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">					
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+					</td>				
+				</c:when>
+				<c:when test="${modelspeciescommonname == 'Rat'}">	
+					<a href="javascript:showRatTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+					</td>
+				</c:when>	
+				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
+				<!-- Fix when you get Zebrafsih tree to work -->
+				</td>
+					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueName"/>
+					<td class="formField">
+						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+					</td>
+				</c:when>
+				<c:otherwise>
+				</td>
+					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueName"/>
+					<td class="formField">
+						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+					</td>				
+				</c:otherwise>				
+    		</c:choose>
 	</tr>
+	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>

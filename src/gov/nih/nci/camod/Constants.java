@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.98 2007-04-04 13:16:34 pandyas Exp $
+ * $Id: Constants.java,v 1.99 2007-04-30 20:06:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.98  2007/04/04 13:16:34  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.97  2007/03/28 18:00:00  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -363,6 +366,9 @@ public class Constants {
         public static final String OTHER_OPTION = "Other";
         
         public static final String NOT_SPECIFIED_OPTION = "Not specified";
+
+        // Six zeros is entered for all organ and disease entries without conceptCodes - text entry, ect.
+        public static final String CONCEPTCODEZEROS = "000000";        
         
         /* 3 species from config - still used */
         public static final String NEWSPECIESDROP = "ModelSpecies.txt";        
@@ -403,7 +409,9 @@ public class Constants {
         // target site for Morpholino in TransientInterference object 
         public static final String MORPHOLINOTARGETSITE = "MorpholinoTargetSite.txt";
 
-
+        // Diagnosis list for Zebrafish - for Histopathology screen 
+        public static final String ZEBRAFISHDIAGNOSISDROP = "ZebrafishDiagnosis.txt";
+        
         // Various Dose Units
         public static final String CONCENTRATIONUNITSDROP = "ConcentrationUnits.txt";
         

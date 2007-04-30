@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.19 2006-10-23 17:08:13 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.20 2007-04-30 20:09:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/10/23 17:08:13  pandyas
+ * removed unused import
+ *
  * Revision 1.18  2006/09/18 16:26:14  georgeda
  * moved getOrgan code inside check for null - check first, get organ if selected by user.  Also took out duplicate getOrgan code - threw unique constraint error and should not be there.
  *
@@ -183,23 +186,24 @@ public class GeneDeliveryManagerImpl extends BaseManager implements GeneDelivery
     private void populateOrgan(GeneDeliveryData inGeneDeliveryData,
                                GeneDelivery inGeneDelivery) throws Exception
     {
-        Organ theOrgan = null;
-
-        // Check for organ, get and set organ
-        if (inGeneDeliveryData.getOrganTissueCode() != null && inGeneDeliveryData.getOrganTissueCode().length() > 0)
-        {
-            log.info("<populateOrgan> organ is selected: ");
-            // reuse/create Organ by matching concept code
-            theOrgan = OrganManagerSingleton.instance().getOrCreate(inGeneDeliveryData.getOrganTissueCode(),
-                                                                          inGeneDeliveryData.getOrganTissueName());
-
-            /*
-             * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
-             * organ is selected by user - no need to check for existing organ in
-             * 2.1
-             */
-            inGeneDelivery.setOrgan(theOrgan);
-        }
+		// every submission - lookup organ or create one new
+		if (inGeneDeliveryData.getOrganTissueCode().equals(
+				Constants.Dropdowns.CONCEPTCODEZEROS)) {
+			log.info("inGeneDeliveryData.getOrganTissueCode(): "
+					+ inGeneDeliveryData.getOrganTissueCode());
+			// Create new organ with conceptCode = 000000, use name field
+			inGeneDelivery.setOrgan(new Organ());
+			inGeneDelivery.getOrgan().setConceptCode(
+					Constants.Dropdowns.CONCEPTCODEZEROS);
+			inGeneDelivery.getOrgan()
+					.setName(inGeneDeliveryData.getOrgan());
+		} else if (inGeneDeliveryData.getOrganTissueCode() != null){
+			log.info("getOrCreate method used");
+			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
+					inGeneDeliveryData.getOrganTissueCode(),
+					inGeneDeliveryData.getOrganTissueName());
+			inGeneDelivery.setOrgan(theNewOrgan);
+		}
         // blank out organ, clear button functionality during editing
         else
         {

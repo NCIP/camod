@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.10 2006-11-09 17:27:36 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.11 2007-04-30 20:10:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/11/09 17:27:36  pandyas
+ * Commented out debug code
+ *
  * Revision 1.9  2006/11/08 18:05:56  pandyas
  * Modified TumorIncidenceRate float to String (weight of tumor and volume of tumor also needed modified to delete properly)
  *
@@ -84,13 +87,19 @@ public class HistopathologyPopulateAction extends BaseAction {
             histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
             log.debug("OrganTissueCode= " + theHistopathology.getOrgan().getConceptCode());
 
-            /* Set Disease object attributes */
+            /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = theHistopathology.getDisease();
-
-            histopathologyForm.setDiagnosisName(disease.getName());
-            histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-            histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
-
+            if(disease.getNameUnctrlVocab() != null) {
+            	log.info("disease is other in DB");
+            	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
+            	histopathologyForm.setOtherTumorClassification(disease.getNameUnctrlVocab());
+            	
+            } else {
+            	histopathologyForm.setDiagnosisName(disease.getName());
+            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
+            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
+            }
+            
             /* Set Histopathology attributes */
             histopathologyForm.setAgeOfOnset(theHistopathology.getAgeOfOnset());
             histopathologyForm.setAgeOfOnsetUnit(theHistopathology.getAgeOfOnsetUnit());
@@ -157,11 +166,12 @@ public class HistopathologyPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.debug("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
+        log.info("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
 
     }
 }

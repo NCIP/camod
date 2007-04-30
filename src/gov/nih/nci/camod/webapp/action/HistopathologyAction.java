@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.13 2006-10-23 16:51:56 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.14 2007-04-30 20:10:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/10/23 16:51:56  pandyas
+ * added printout of units for debug
+ *
  * Revision 1.12  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -86,7 +89,8 @@ public class HistopathologyAction extends BaseAction {
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
         log.info("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
-                + "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
+        		+ "\n\t organ: " + histopathologyForm.getOrgan() 
+        		+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
                 + histopathologyForm.getOrganTissueCode() + "\n\t diseaseName: "
                 + histopathologyForm.getDiagnosisName() + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()
                 + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() 
@@ -110,14 +114,12 @@ public class HistopathologyAction extends BaseAction {
         HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
+        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);        
+        
         try {
 
             if ("Delete".equals(theAction)) {
-
-
-
-                AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-                AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
 
                 histopathologyManager.remove(aHistopathologyID, theAnimalModel);
 
@@ -128,7 +130,7 @@ public class HistopathologyAction extends BaseAction {
             } else {
 
                 Histopathology theHistopathology = histopathologyManager.get(aHistopathologyID);
-                histopathologyManager.updateHistopathology(histopathologyForm, theHistopathology);
+                histopathologyManager.updateHistopathology(theAnimalModel, histopathologyForm, theHistopathology);
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.edit.successful"));
@@ -163,6 +165,9 @@ public class HistopathologyAction extends BaseAction {
 
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
+        
+        // Grab the current modelID from the session
+        String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);         
 
         // Grab the current aAssocMetastasisID we are working with related to
         // this animalModel
@@ -174,6 +179,7 @@ public class HistopathologyAction extends BaseAction {
 
         log.info("<HistopathologyAction editMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
                 + aHistopathologyID + "\n\t aAssociatedMetastasisID: " + aAssociatedMetastasisID
+        		+ "\n\t organ: " + assocMetastasisForm.getOrgan() 
                 + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName() + "\n\t organTissueCode: "
                 + assocMetastasisForm.getOrganTissueCode() + "\n\t diseaseName: "
                 + assocMetastasisForm.getDiagnosisName() + "\n\t diseaseCode: "
@@ -193,6 +199,9 @@ public class HistopathologyAction extends BaseAction {
 
         HistopathologyManager histopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
+        
+        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);        
 
         try {
 
@@ -210,7 +219,7 @@ public class HistopathologyAction extends BaseAction {
                 Histopathology theAssociatedMetastasis = histopathologyManager.get(aAssociatedMetastasisID);
                 // Pass in the histopathology_id (aAssociatedMetastasisID) of
                 // the current metastatsis also
-                histopathologyManager.updateAssociatedMetastasis(assocMetastasisForm, theAssociatedMetastasis);
+                histopathologyManager.updateAssociatedMetastasis(theAnimalModel, assocMetastasisForm, theAssociatedMetastasis);
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.edit.successful"));
@@ -249,9 +258,10 @@ public class HistopathologyAction extends BaseAction {
         // Create a form to edit
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
-        log.info("<HistopathologyAction save> following Characteristics:" + "\n\t organTissueName: "
-                + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
-                + histopathologyForm.getOrganTissueCode() + "\n\t DiagnosisName: "
+        log.info("<HistopathologyAction save> following Characteristics:" 
+        		+ "\n\t organ: " + histopathologyForm.getOrgan() 
+        		+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() 
+        		+ "\n\t organTissueCode: " + histopathologyForm.getOrganTissueCode() + "\n\t DiagnosisName: "
                 + histopathologyForm.getDiagnosisName() + "\n\t DiagnosisCode: " + histopathologyForm.getDiagnosisCode()
                 + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() 
                 + "\n\t ageOfOnset: " + histopathologyForm.getAgeOfOnset() 
@@ -322,7 +332,8 @@ public class HistopathologyAction extends BaseAction {
         String aHistopathologyID = request.getParameter("aHistopathologyID");
 
         log.info("<HistopathologyAction saveMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
-                + aHistopathologyID + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
+                + aHistopathologyID  + "\n\t organ: " + assocMetastasisForm.getOrgan() 
+                + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
                 + "\n\t organTissueCode: " + assocMetastasisForm.getOrganTissueCode() + "\n\t DiagnosisName: "
                 + assocMetastasisForm.getDiagnosisName() + "\n\t DiagnosisCode: "
                 + assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
@@ -340,16 +351,15 @@ public class HistopathologyAction extends BaseAction {
                 + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
+        
+        HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
+        Histopathology theParentHistopathology = theHistopathologyManager.get(aHistopathologyID);
+
+        // retrieve model and update w/ new values
+        AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
+        AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);        
 
         try {
-
-            HistopathologyManager theHistopathologyManager = (HistopathologyManager) getBean("histopathologyManager");
-
-            // retrieve model and update w/ new values
-            AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-            AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
-
-            Histopathology theParentHistopathology = theHistopathologyManager.get(aHistopathologyID);
 
             theHistopathologyManager.addAssociatedMetastasis(theAnimalModel, theParentHistopathology, assocMetastasisForm);
 

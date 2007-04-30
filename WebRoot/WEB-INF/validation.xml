@@ -1871,6 +1871,25 @@
 			<field property="diagnosisCode" depends="required">
 				<arg0 key="HistopathologyForm.diagnosisCode" />
 			</field>
+			<!--field property="tumorClassification" depends="required">
+				<arg0 key="HistopathologyForm.tumorClassification" />
+			</field>
+			<field property="otherTumorClassification"
+				depends="validwhen, maxlength">
+				<arg0 key="HistopathologyForm.otherTumorClassification" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field -->	
 			<field property="ageOfOnset" depends="maxlength">
 				<arg0 key="HistopathologyForm.ageOfOnset" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1879,15 +1898,21 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>
+			</field>					
 			<field property="weightOfTumor" depends="float">
 				<arg0 key="HistopathologyForm.weightOfTumor" />
 			</field>
 			<field property="volumeOfTumor" depends="float">
 				<arg0 key="HistopathologyForm.volumeOfTumor" />
 			</field>
-			<field property="tumorIncidenceRate" depends="float">
+			<field property="tumorIncidenceRate" depends="maxlength">
 				<arg0 key="HistopathologyForm.tumorIncidenceRate" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
 			</field>
 			<field property="survivalInfo" depends="maxlength">
 				<arg0 key="HistopathologyForm.survivalInfo" />
@@ -1953,6 +1978,25 @@
 			<field property="diagnosisCode" depends="required">
 				<arg0 key="HistopathologyForm.diagnosisCode" />
 			</field>
+			<!--field property="tumorClassification" depends="required">
+				<arg0 key="HistopathologyForm.tumorClassification" />
+			</field>
+			<field property="otherTumorClassification"
+				depends="validwhen, maxlength">
+				<arg0 key="HistopathologyForm.otherTumorClassification" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((name != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field -->			
 			<field property="ageOfOnset" depends="maxlength">
 				<arg0 key="AssociatedMetastasisForm.ageOfOnset" />
 				<arg1 name="maxlength" key="${var:maxlength}"
