@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.24 2006-11-13 20:23:34 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.25 2007-05-07 16:49:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/11/13 20:23:34  pandyas
+ * Modified IMG SRC location to include complete location (added /camod/...)
+ *
  * Revision 1.23  2006/11/13 20:20:03  pandyas
  * Modified IMG SRC location to include complete location (added /camod/...)
  *
@@ -103,15 +106,20 @@
 				<td class="<c:out value="${tdClass}"/>" width="15%">
 					<camod:highlight><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
-				<td class="<c:out value="${tdClass}"/>" width="15%">				
-					<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>
-						<c:if test="${not empty p.jaxJNumber}">												
+				
+				<td class="<c:out value="${tdClass}"/>" width="15%">
+					<c:if test="${not empty p.jaxJNumber}">				
+						<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
 							(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
-						</c:if><br/>
-							<c:if test="${not empty p.jaxJNumber}">
+							<br/>
 							(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
-						</c:if>											
-				</td>				
+					</c:if>
+					<c:if test="${not empty p.zfinPubId}">
+							(<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>)
+							<br/>
+					</c:if>
+				</td>	
+							
 				<td class="<c:out value="${tdClass}"/>" width="30%">
 					<camod:highlight><c:out value="${p.title}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
