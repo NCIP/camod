@@ -1,7 +1,10 @@
 /*
- * $Id: Publication.java,v 1.10 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: Publication.java,v 1.11 2007-05-07 16:51:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.9  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -28,7 +31,8 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
     private String journal;
     private String authors;
     private Boolean firstTimeReported;
-    private String jaxJNumber;    
+    private String jaxJNumber;
+    private String zfinPubId;    
     private PublicationStatus publicationStatus;
 
     
@@ -237,4 +241,12 @@ public class Publication extends BaseObject implements Serializable, Duplicatabl
             return false;
         return true;
     }
+
+	public String getZfinPubId() {
+		return zfinPubId;
+	}
+
+	public void setZfinPubId(String zfinPubId) {
+		this.zfinPubId = zfinPubId;
+	}
 }

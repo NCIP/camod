@@ -73,8 +73,13 @@
 	    <!-- jaxJNumber -->
         <property name="jaxJNumber" 
         	column="j_number" 
-        	type="string"/>        	
+        	type="string"/>   
         	
+	    <!-- zfinPubId -->
+        <property name="zfinPubId" 
+        	column="zfin_pub_id" 
+        	type="string"/> 
+        	        	
         <!-- publicationStatus (many-to-one unidirectional) -->
         <many-to-one
         	name="publicationStatus"
