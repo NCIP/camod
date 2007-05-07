@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationData.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: PublicationData.java,v 1.4 2007-05-07 16:52:08 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.2  2005/11/01 18:14:28  schroedn
  * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
  *
@@ -76,4 +79,8 @@ public interface PublicationData
     public String getATherapyID();
 
     public void setATherapyID(String aTherapyID);
+    
+	public String getZfinPubId(); 
+
+	public void setZfinPubId(String zfinPubId);    
 }

@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: PublicationForm.java,v 1.9 2007-05-07 16:52:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  */
 package gov.nih.nci.camod.webapp.form;
 
@@ -13,9 +16,12 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * 
- * $Id: PublicationForm.java,v 1.8 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: PublicationForm.java,v 1.9 2007-05-07 16:52:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 public class PublicationForm extends BaseForm implements PublicationData, Serializable
@@ -41,6 +47,7 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
     protected String endPage;
     protected String firstTimeReported;
     protected String jaxJNumber;
+    protected String zfinPubId;    
     protected String aPubID;
     protected String aCellID;
     protected String aTherapyID;
@@ -267,4 +274,12 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
         endPage = null;
         firstTimeReported = null;
     }
+
+	public String getZfinPubId() {
+		return zfinPubId;
+	}
+
+	public void setZfinPubId(String zfinPubId) {
+		this.zfinPubId = zfinPubId;
+	}
 }

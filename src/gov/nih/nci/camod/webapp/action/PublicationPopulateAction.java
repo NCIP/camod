@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: PublicationPopulateAction.java,v 1.14 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: PublicationPopulateAction.java,v 1.15 2007-05-07 16:52:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -71,9 +74,13 @@ public class PublicationPopulateAction extends BaseAction {
 			if (thePublication.getEndPage() != null) {
 				pubForm.setEndPage(thePublication.getEndPage().toString());
 			}
+			// Populate either the JNumber or zfin id - only one is inserted during submission
             if (thePublication.getJaxJNumber() != null) {
                 pubForm.setJaxJNumber(thePublication.getJaxJNumber());
-            }            
+            } else if(thePublication.getZfinPubId() != null) {
+            	pubForm.setZfinPubId(thePublication.getZfinPubId());            	
+            }
+            
 			if (thePublication.getPmid() != null) {
 				pubForm.setPmid(thePublication.getPmid().toString());
 			}

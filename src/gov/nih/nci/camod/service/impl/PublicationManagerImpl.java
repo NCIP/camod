@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationManagerImpl.java,v 1.13 2006-05-22 17:08:13 pandyas Exp $
+ * $Id: PublicationManagerImpl.java,v 1.14 2007-05-07 16:52:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/05/22 17:08:13  pandyas
+ * Modified jNumber save due to testing
+ *
  * Revision 1.12  2006/01/18 14:24:23  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -135,9 +138,13 @@ public class PublicationManagerImpl extends BaseManager implements PublicationMa
             inPublication.setYear(null);
         }
         
+        // Either save the JNumber or ZFIN publication id - only one submitted
         if(inPublicationData.getJaxJNumber() != null) {
             inPublication.setJaxJNumber(inPublicationData.getJaxJNumber());
+        } else if(inPublicationData.getZfinPubId() != null){
+        	inPublication.setZfinPubId(inPublicationData.getZfinPubId());
         }
+        
 
         if (inPublicationData.getFirstTimeReported() != null && inPublicationData.getFirstTimeReported().equals("yes"))
         {
