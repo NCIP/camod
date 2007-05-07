@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.52 2007-04-09 12:34:38 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.53 2007-05-07 16:47:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2007/04/09 12:34:38  pandyas
+ * modified for caMOD 2.3 testing
+ *
  * Revision 1.51  2007/03/28 18:19:57  pandyas
  * Modified for the following Test Track item:
  * #446 - Add ZFIN and RGD identifier to Genetic Description pages
@@ -439,7 +442,7 @@
 			<c:if test="${not empty tg.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Identifier</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${tg.mutationIdentifier.zfinId}.html"/>">
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${tg.mutationIdentifier.zfinId}"/>">
 				    <c:out value="${tg.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
@@ -642,8 +645,8 @@
 			
 			<c:if test="${not empty gs.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Identifier</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${gs.mutationIdentifier.zfinId}.html"/>">
+				<td class="WhiteBoxRightEnd" width="65%"> 
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${gs.mutationIdentifier.zfinId}"/>">				 
 				    <c:out value="${gs.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
@@ -852,8 +855,8 @@
 			
 			<c:if test="${not empty tm.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
-				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${tm.mutationIdentifier.zfinId}.html"/>">
+				<td class="WhiteBoxRightEnd" width="65%"> 
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${tm.mutationIdentifier.zfinId}"/>">				 
 				    <c:out value="${tm.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
@@ -1072,7 +1075,7 @@
 			<c:if test="${not empty im.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${im.mutationIdentifier.zfinId}.html"/>">
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${im.mutationIdentifier.zfinId}"/>">				
 				    <c:out value="${im.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
@@ -1183,7 +1186,7 @@
 			<c:if test="${not empty sm.mutationIdentifier.zfinId}">        
 			<td class="WhiteBox" width="35%"><b>ZFIN Number</b></td>
 				<td class="WhiteBoxRightEnd" width="65%">  
-				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID="${sm.mutationIdentifier.zfinId}.html"/>">
+				<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-genotypeview.apg&OID=<c:out value="${sm.mutationIdentifier.zfinId}"/>">				
 				    <c:out value="${sm.mutationIdentifier.zfinId}"/>
 				</a>
 				</td>
