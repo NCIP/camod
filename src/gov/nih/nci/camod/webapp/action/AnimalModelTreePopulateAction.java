@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.46 2007-05-08 17:12:57 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.47 2007-05-10 16:06:58 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.46  2007/05/08 17:12:57  pandyas
+ *  need to debug error on dev server - not on local instance
+ *
  *  Revision 1.45  2007/04/04 13:20:09  pandyas
  *  Fixed typo in print statement
  *
@@ -163,7 +166,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 		} // end of if
 
 		try {
-		    
+            log.info("Inside try: " );		    
 			AnimalModel animalModel = animalModelManager.get(modelID);
 
 			// Retrieve a list of all publications assoicated with this Animal
