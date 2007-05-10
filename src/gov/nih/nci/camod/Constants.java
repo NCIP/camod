@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.99 2007-04-30 20:06:13 pandyas Exp $
+ * $Id: Constants.java,v 1.100 2007-05-10 02:20:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.99  2007/04/30 20:06:13  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.98  2007/04/04 13:16:34  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -631,9 +634,14 @@ public class Constants {
 
     public static final String MODELSTATUS = "modelstatus";
     
-    // This constants stores the animal model species common name for Genetic Description
-    // submission screens - must display mgi, or zfin, or rgd identifier - set in submitAction
-    public static final String AMMODELSPECIESCOMMONNAME = "modelspeciescommonname";    
+    // This constants stores the animal model species common name for all 
+    // submission screens that have organ and diagnosis AND screens 
+    // that display mgi, zfin, or rgd identifier - set in submitAction
+    public static final String AMMODELSPECIESCOMMONNAME = "modelspeciescommonname";
+    
+    // This constants stores the donor species common name for the Xenograft screens 
+    // set in XenograftPopulateAction
+    public static final String DONORSPECIESCOMMONNAME = "donorspeciescommonname";
 
     /**
      * Used to prepopulate forms
