@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.49 2007-04-25 15:05:51 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.50 2007-05-10 02:19:32 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2007/04/25 15:05:51  pandyas
+ * Agreed on one help icon for all title bars and one icon for light grey tool tip - removed all others
+ *
  * Revision 1.48  2007/04/04 13:25:19  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -200,20 +203,75 @@
 			<html:text styleClass="formFieldSized"  property="otherDonorEthinicityStrain" size="30" />	
 		</td>
 	</tr>
-
+	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
-			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />			
-			<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)"><IMG src="images\selectUP.gif" align=middle border=0></a>&nbsp;&nbsp;
-		</td>
-		<td class="formField">
-			<html:hidden property="organTissueCode"/>
-			<input type="hidden" name="organTissueName" />				
-			<html:text styleClass="formFieldUnSized" disabled="true" property="organ" size="35" />
-			<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" src="/camod/images/clear.gif"></a>
-		</td>
-	</tr>
+ 			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
+ 			<c:choose>
+				<c:when test="${donorspeciescommonname == 'Mouse'}">
+				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
+					<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>				
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">					
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+					</td>
+				</c:when>
+				<c:when test="${donorspeciescommonname == 'Rat'}">	
+				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
+					<a href="javascript:showRatTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+					</td>
+				</c:when>	
+				<c:when test="${donorspeciescommonname == 'Zebrafish'}">
+				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
+					<a href="javascript:showRatTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+					</td>
+				</c:when>
+				<c:when test="${donorspeciescommonname == 'Human'}">
+				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
+					<a href="javascript:showHumanTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+				</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+					</td>
+				</c:when>				
+				<c:otherwise>
+					<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+					</td>
+					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueName"/>
+					<td class="formField">
+						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+					</td>				
+				</c:otherwise>				
+    		</c:choose>
+	</tr>	
+
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>

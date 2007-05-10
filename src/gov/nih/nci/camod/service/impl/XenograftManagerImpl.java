@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.34 2007-04-04 13:18:06 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.35 2007-05-10 02:20:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2007/04/04 13:18:06  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.33  2007/03/26 12:01:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -278,22 +281,29 @@ public class XenograftManagerImpl extends BaseManager implements
         // Check for organ and then get and set organ
         if (inXenograftData.getOrganTissueCode() != null
                 && inXenograftData.getOrganTissueCode().length() > 0) {
+        	
+			// if organ concept code = 000000 create one new
+			if (inXenograftData.getOrganTissueCode().equals(
+					Constants.Dropdowns.CONCEPTCODEZEROS)) {
+				log.info("inXenograftData.getOrganTissueCode(): "
+						+ inXenograftData.getOrganTissueCode());
+				// Create new organ with conceptCode = 000000, use name field
+				inXenograft.setOrgan(new Organ());
+				inXenograft.getOrgan().setConceptCode(
+						Constants.Dropdowns.CONCEPTCODEZEROS);
+				inXenograft.getOrgan()
+						.setName(inXenograftData.getOrgan());
+			} else {
+				log.info("Use getOrCreate method for organ object");
+				Organ theNewOrgan = OrganManagerSingleton.instance()
+						.getOrCreate(inXenograftData.getOrganTissueCode(),
+								inXenograftData.getOrganTissueName());
+				inXenograft.setOrgan(theNewOrgan);
+				// blank out organ, clear button functionality during editing
+			}        	
             log.info("<populateOrgan> organ is selected: ");   
             
-		// reuse/create Organ by matching concept code
-		theOrgan = OrganManagerSingleton.instance().getOrCreate(
-				inXenograftData.getOrganTissueCode(),
-				inXenograftData.getOrganTissueName());
-        
-        log.info("theOrgan: " + theOrgan.toString());        
-		/*
-		 * Add a Organ to AnimalModel with correct IDs, conceptCode, only if
-		 * organ is selected by user - no need to check for existing organ in
-		 * 2.1
-		 */
-
-			inXenograft.setOrgan(theOrgan);
-		}
+        }
 		// blank out organ, clear button functionality during editing
 		else {
 			log.info("Setting object to null - clear organ: ");

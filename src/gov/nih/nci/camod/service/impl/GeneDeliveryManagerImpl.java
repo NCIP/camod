@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.20 2007-04-30 20:09:43 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.21 2007-05-10 02:20:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/04/30 20:09:43  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.19  2006/10/23 17:08:13  pandyas
  * removed unused import
  *
@@ -79,198 +82,185 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-public class GeneDeliveryManagerImpl extends BaseManager implements GeneDeliveryManager
-{
-    public List getAll() throws Exception
-    {
-        log.debug("In GeneDeliveryManagerImpl.getAll");
-        return super.getAll(GeneDelivery.class);
-    }
+public class GeneDeliveryManagerImpl extends BaseManager implements
+		GeneDeliveryManager {
+	public List getAll() throws Exception {
+		log.debug("In GeneDeliveryManagerImpl.getAll");
+		return super.getAll(GeneDelivery.class);
+	}
 
-    public GeneDelivery get(String id) throws Exception
-    {
-        log.debug("In GeneDeliveryManagerImpl.get");
-        return (GeneDelivery) super.get(id, GeneDelivery.class);
-    }
+	public GeneDelivery get(String id) throws Exception {
+		log.debug("In GeneDeliveryManagerImpl.get");
+		return (GeneDelivery) super.get(id, GeneDelivery.class);
+	}
 
-    public void save(GeneDelivery geneDelivery) throws Exception
-    {
-        log.debug("In GeneDeliveryManagerImpl.save");
-        super.save(geneDelivery);
-    }
+	public void save(GeneDelivery geneDelivery) throws Exception {
+		log.debug("In GeneDeliveryManagerImpl.save");
+		super.save(geneDelivery);
+	}
 
-    public void remove(String id,
-                       AnimalModel inAnimalModel) throws Exception
-    {
-        log.debug("In GeneDeliveryManagerImpl.remove");
-        inAnimalModel.getGeneDeliveryCollection().remove(get(id));
-        super.save(inAnimalModel);
-    }
+	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
+		log.debug("In GeneDeliveryManagerImpl.remove");
+		inAnimalModel.getGeneDeliveryCollection().remove(get(id));
+		super.save(inAnimalModel);
+	}
 
-    public GeneDelivery create(AnimalModel inAnimalModel,
-                               GeneDeliveryData inGeneDeliveryForm) throws Exception
-    {
-        log.info("Entering GeneDeliveryManagerImpl.create");
+	public GeneDelivery create(AnimalModel inAnimalModel,
+			GeneDeliveryData inGeneDeliveryForm) throws Exception {
+		log.info("Entering GeneDeliveryManagerImpl.create");
 
-        GeneDelivery theGeneDelivery = new GeneDelivery();
-        populateOrgan(inGeneDeliveryForm, theGeneDelivery);
-        populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, theGeneDelivery);
+		GeneDelivery theGeneDelivery = new GeneDelivery();
+		populateOrgan(inGeneDeliveryForm, theGeneDelivery);
+		populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, theGeneDelivery);
 
-        log.info("Exiting GeneDeliveryManagerImpl.create");
-        return theGeneDelivery;
-    }
+		log.info("Exiting GeneDeliveryManagerImpl.create");
+		return theGeneDelivery;
+	}
 
-    public void update(AnimalModel inAnimalModel,
-                       GeneDeliveryData inGeneDeliveryForm,
-                       GeneDelivery inGeneDelivery) throws Exception
-    {
-        log.info("Entering GeneDeliveryManagerImpl.update");
-        log.info("Updating GeneDeliveryForm: " + inGeneDelivery.getId());
+	public void update(AnimalModel inAnimalModel,
+			GeneDeliveryData inGeneDeliveryForm, GeneDelivery inGeneDelivery)
+			throws Exception {
+		log.info("Entering GeneDeliveryManagerImpl.update");
+		// Populate w/ the new values and save
+		populateOrgan(inGeneDeliveryForm, inGeneDelivery);
+		populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, inGeneDelivery);
 
-        // Populate w/ the new values and save
-        populateOrgan(inGeneDeliveryForm, inGeneDelivery);
-        populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, inGeneDelivery);
+		save(inGeneDelivery);
 
-        save(inGeneDelivery);
+		log.debug("Exiting GeneDeliveryManagerImpl.update");
+	}
 
-        log.debug("Exiting GeneDeliveryManagerImpl.update");
-    }
+	private void populateGeneDelivery(AnimalModel inAnimalModel,
+			GeneDeliveryData inGeneDeliveryData, GeneDelivery inGeneDelivery)
+			throws Exception {
+		log.info("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
 
-    private void populateGeneDelivery(AnimalModel inAnimalModel,
-                                      GeneDeliveryData inGeneDeliveryData,
-                                      GeneDelivery inGeneDelivery) throws Exception
-    {
-        log.info("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
-
-        // Set the treatment
-        Treatment theTreatment = inGeneDelivery.getTreatment();
-        if (theTreatment == null)
-        {
-            theTreatment = new Treatment();
-            inGeneDelivery.setTreatment(theTreatment);
-        }
-
-        // Set the gender
-        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(inGeneDeliveryData.getType());
-
-        // save the treatment
-        theTreatment.setSexDistribution(sexDistribution);
-
-        theTreatment.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment());
-        theTreatment.setAgeAtTreatmentUnit(inGeneDeliveryData.getAgeAtTreatmentUnit());
-
-        // anytime the viral vector is "other"
-        if (inGeneDeliveryData.getViralVector().equals(Constants.Dropdowns.OTHER_OPTION))
-        {
-            // Send e-mail for OtherViralVector
-            sendEmail(inAnimalModel, inGeneDeliveryData.getOtherViralVector(), "ViralVector");
-
-            inGeneDelivery.setViralVector(null);
-            inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData.getOtherViralVector());
-        }
-        // anytime viral vector is not other set uncontrolled vocab to null
-        // (covers editing)
-        else
-        {
-            System.out.println("viral vector not other");
-            inGeneDelivery.setViralVector(inGeneDeliveryData.getViralVector());
-            inGeneDelivery.setViralVectorUnctrlVocab(null);
-        }
-
-        inGeneDelivery.getTreatment().setRegimen(inGeneDeliveryData.getRegimen());
-        inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
-
-        log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
-    }
-
-    private void populateOrgan(GeneDeliveryData inGeneDeliveryData,
-                               GeneDelivery inGeneDelivery) throws Exception
-    {
-		// every submission - lookup organ or create one new
-		if (inGeneDeliveryData.getOrganTissueCode().equals(
-				Constants.Dropdowns.CONCEPTCODEZEROS)) {
-			log.info("inGeneDeliveryData.getOrganTissueCode(): "
-					+ inGeneDeliveryData.getOrganTissueCode());
-			// Create new organ with conceptCode = 000000, use name field
-			inGeneDelivery.setOrgan(new Organ());
-			inGeneDelivery.getOrgan().setConceptCode(
-					Constants.Dropdowns.CONCEPTCODEZEROS);
-			inGeneDelivery.getOrgan()
-					.setName(inGeneDeliveryData.getOrgan());
-		} else if (inGeneDeliveryData.getOrganTissueCode() != null){
-			log.info("getOrCreate method used");
-			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
-					inGeneDeliveryData.getOrganTissueCode(),
-					inGeneDeliveryData.getOrganTissueName());
-			inGeneDelivery.setOrgan(theNewOrgan);
+		// Set the treatment
+		Treatment theTreatment = inGeneDelivery.getTreatment();
+		if (theTreatment == null) {
+			theTreatment = new Treatment();
+			inGeneDelivery.setTreatment(theTreatment);
 		}
-        // blank out organ, clear button functionality during editing
-        else
-        {
-            log.info("Setting object to null - clear organ: ");
-            inGeneDelivery.setOrgan(null);
-        }
 
-    }
+		// Set the gender
+		SexDistribution sexDistribution = SexDistributionManagerSingleton
+				.instance().getByType(inGeneDeliveryData.getType());
 
-    private void sendEmail(AnimalModel inAnimalModel,
-                           String theUncontrolledVocab,
-                           String inType)
-    {
-        // Get the e-mail resource
-        Properties camodProperties = new Properties();
-        String camodPropertiesFileName = null;
+		// save the treatment
+		theTreatment.setSexDistribution(sexDistribution);
 
-        camodPropertiesFileName = System.getProperty("gov.nih.nci.camod.camodProperties");
+		theTreatment.setAgeAtTreatment(inGeneDeliveryData.getAgeAtTreatment());
+		theTreatment.setAgeAtTreatmentUnit(inGeneDeliveryData
+				.getAgeAtTreatmentUnit());
 
-        try
-        {
+		// anytime the viral vector is "other"
+		if (inGeneDeliveryData.getViralVector().equals(
+				Constants.Dropdowns.OTHER_OPTION)) {
+			// Send e-mail for OtherViralVector
+			sendEmail(inAnimalModel, inGeneDeliveryData.getOtherViralVector(),
+					"ViralVector");
 
-            FileInputStream in = new FileInputStream(camodPropertiesFileName);
-            camodProperties.load(in);
+			inGeneDelivery.setViralVector(null);
+			inGeneDelivery.setViralVectorUnctrlVocab(inGeneDeliveryData
+					.getOtherViralVector());
+		}
+		// anytime viral vector is not other set uncontrolled vocab to null
+		// (covers editing)
+		else {
+			System.out.println("viral vector not other");
+			inGeneDelivery.setViralVector(inGeneDeliveryData.getViralVector());
+			inGeneDelivery.setViralVectorUnctrlVocab(null);
+		}
 
-        }
-        catch (FileNotFoundException e)
-        {
-            log.error("Caught exception finding file for properties: ", e);
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            log.error("Caught exception finding file for properties: ", e);
-            e.printStackTrace();
-        }
+		inGeneDelivery.getTreatment().setRegimen(
+				inGeneDeliveryData.getRegimen());
+		inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
 
-        // Iterate through all the reciepts in the config file
-        String recipients = UserManagerSingleton.instance().getEmailForCoordinator();
-        StringTokenizer st = new StringTokenizer(recipients, ",");
-        String inRecipients[] = new String[st.countTokens()];
-        for (int i = 0; i < inRecipients.length; i++)
-        {
-            inRecipients[i] = st.nextToken();
-        }
+		log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
+	}
 
-        String inSubject = camodProperties.getProperty("model.new_unctrl_vocab_subject");
-        String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+	private void populateOrgan(GeneDeliveryData inGeneDeliveryData,
+			GeneDelivery inGeneDelivery) throws Exception {
+		
+		if (inGeneDeliveryData.getOrganTissueCode() != null &&
+				inGeneDeliveryData.getOrganTissueCode().length() > 0) {
+			// if organ concept code = 000000 create one new
+			if (inGeneDeliveryData.getOrganTissueCode().equals(
+					Constants.Dropdowns.CONCEPTCODEZEROS)) {
+				log.info("inGeneDeliveryData.getOrganTissueCode(): "
+						+ inGeneDeliveryData.getOrganTissueCode());
+				// Create new organ with conceptCode = 000000, use name field
+				inGeneDelivery.setOrgan(new Organ());
+				inGeneDelivery.getOrgan().setConceptCode(
+						Constants.Dropdowns.CONCEPTCODEZEROS);
+				inGeneDelivery.getOrgan()
+						.setName(inGeneDeliveryData.getOrgan());
+			} else {
+				log.info("Use getOrCreate method for organ object");
+				Organ theNewOrgan = OrganManagerSingleton.instance()
+						.getOrCreate(inGeneDeliveryData.getOrganTissueCode(),
+								inGeneDeliveryData.getOrganTissueName());
+				inGeneDelivery.setOrgan(theNewOrgan);
+				// blank out organ, clear button functionality during editing
+			}
+		} else {
+			log.info("Setting object to null - no organ selected or cleared organ: ");
+			inGeneDelivery.setOrgan(null);
+		}
 
-        // gather message keys and variable values to build the e-mail
-        String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-        Map<String, Object> values = new TreeMap<String, Object>();
-        values.put("type", inType);
-        values.put("value", theUncontrolledVocab);
-        values.put("submitter", inAnimalModel.getSubmitter());
-        values.put("model", inAnimalModel.getModelDescriptor());
-        values.put("modelstate", inAnimalModel.getState());
+	}
 
-        // Send the email
-        try
-        {
-            MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys, values);
-        }
-        catch (Exception e)
-        {
-            log.error("Caught exception sending mail: ", e);
-            e.printStackTrace();
-        }
-    }
+	private void sendEmail(AnimalModel inAnimalModel,
+			String theUncontrolledVocab, String inType) {
+		// Get the e-mail resource
+		Properties camodProperties = new Properties();
+		String camodPropertiesFileName = null;
+
+		camodPropertiesFileName = System
+				.getProperty("gov.nih.nci.camod.camodProperties");
+
+		try {
+
+			FileInputStream in = new FileInputStream(camodPropertiesFileName);
+			camodProperties.load(in);
+
+		} catch (FileNotFoundException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Caught exception finding file for properties: ", e);
+			e.printStackTrace();
+		}
+
+		// Iterate through all the reciepts in the config file
+		String recipients = UserManagerSingleton.instance()
+				.getEmailForCoordinator();
+		StringTokenizer st = new StringTokenizer(recipients, ",");
+		String inRecipients[] = new String[st.countTokens()];
+		for (int i = 0; i < inRecipients.length; i++) {
+			inRecipients[i] = st.nextToken();
+		}
+
+		String inSubject = camodProperties
+				.getProperty("model.new_unctrl_vocab_subject");
+		String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
+
+		// gather message keys and variable values to build the e-mail
+		String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
+		Map<String, Object> values = new TreeMap<String, Object>();
+		values.put("type", inType);
+		values.put("value", theUncontrolledVocab);
+		values.put("submitter", inAnimalModel.getSubmitter());
+		values.put("model", inAnimalModel.getModelDescriptor());
+		values.put("modelstate", inAnimalModel.getState());
+
+		// Send the email
+		try {
+			MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys,
+					values);
+		} catch (Exception e) {
+			log.error("Caught exception sending mail: ", e);
+			e.printStackTrace();
+		}
+	}
 }

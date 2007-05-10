@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.31 2007-04-04 13:19:27 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.32 2007-05-10 02:20:48 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2007/04/04 13:19:27  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.30  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -61,6 +64,8 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.SpeciesManager;
+import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
 import gov.nih.nci.camod.service.impl.XenograftManagerSingleton;
 import gov.nih.nci.camod.webapp.form.XenograftForm;
 import gov.nih.nci.camod.webapp.util.DropdownOption;
@@ -315,6 +320,14 @@ public class XenograftPopulateAction extends BaseAction
         //request.setAttribute("aXenograftID", request.getParameter("aXenograftID"));
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getDonorScientificName());
+        
+        // Set Donor species to a constant to determine which organ tree displays 
+        // using common name because Rat has two species
+        Species species = SpeciesManagerSingleton.instance().getByName(xenograftForm.getDonorScientificName());
+        String theDonorSpecies = species.getCommonName();
+        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
+        request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, theDonorSpecies);
+        
         // Must Reset both fields when new species is chosen or edited
         xenograftForm.setDonorEthinicityStrain("");
         xenograftForm.setOtherDonorEthinicityStrain("");

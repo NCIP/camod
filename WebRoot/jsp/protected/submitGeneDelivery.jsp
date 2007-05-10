@@ -105,11 +105,11 @@
 	
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
-			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
  			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
  			<c:choose>
-				<c:when test="${modelspeciescommonname == 'Mouse'}">			
+				<c:when test="${modelspeciescommonname == 'Mouse'}">
+				<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>				
@@ -121,6 +121,8 @@
 					</td>
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Rat'}">	
+				<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
 					<a href="javascript:showRatTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
@@ -132,20 +134,25 @@
 					</td>
 				</c:when>	
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-				<!-- Fix when you get Zebrafsih tree to work -->
+				<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
+					<a href="javascript:showRatTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
-					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
-					<html:hidden property="organTissueName"/>
-					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="20" />
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:otherwise>
-				</td>
+					<td class="formLabel"><label for="field1">Injection Site:</label>&nbsp;
+					</td>
 					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="20" />
+						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
 					</td>				
 				</c:otherwise>				
     		</c:choose>

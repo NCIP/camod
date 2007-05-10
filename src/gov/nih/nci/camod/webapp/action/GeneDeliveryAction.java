@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.16 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: GeneDeliveryAction.java,v 1.17 2007-05-10 02:20:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.15  2005/11/09 00:17:25  georgeda
  * Fixed delete w/ constraints
  *
@@ -140,9 +143,10 @@ public final class GeneDeliveryAction extends BaseAction {
         log.info("<GeneDeliveryAction save> following Characteristics:" + "\n\t ViralVector: "
                 + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
                 + geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
-                + "\n\t Regimen: " + geneDeliveryForm.getRegimen() + "\n\t organTissueCode: "
-                + geneDeliveryForm.getOrganTissueCode() + "\n\t organTissueName: "
-                + geneDeliveryForm.getOrganTissueName() + "\n\t user: "
+                + "\n\t Regimen: " + geneDeliveryForm.getRegimen() 
+                + "\n\t organ: " + geneDeliveryForm.getOrgan()                
+                + "\n\t organTissueCode: " + geneDeliveryForm.getOrganTissueCode() 
+                + "\n\t organTissueName: " + geneDeliveryForm.getOrganTissueName() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";

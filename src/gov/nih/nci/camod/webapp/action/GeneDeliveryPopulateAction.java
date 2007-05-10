@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.18 2007-04-30 20:10:17 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.19 2007-05-10 02:20:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/04/30 20:10:17  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.17  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -108,7 +111,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			log.info("<GeneDeliveryPopulateAction> get the Organ attributes");
 
 			// since we are always querying from concept code (save and edit),
-			// simply display VSPreferredDescription
+			// simply display EVSPreferredDescription
 			if (gene.getOrgan() != null) {
 				log.info("gene.getOrgan(): " + gene.getOrgan().toString());
 				geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
