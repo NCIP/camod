@@ -2,9 +2,14 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.31 2007-03-28 18:04:32 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.32 2007-05-16 16:42:18 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2007/03/28 18:04:32  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.30  2006/11/13 20:19:50  pandyas
  * Modified IMG SRC location to include complete location (added /camod/...)
  *
@@ -476,7 +481,6 @@
 			<!--   End of if externalSource is empty (caMOD data) -->
 			</c:if>			
 			</TABLE>
-			<br>
 			</c:if>
 			
 			<!--   Start Surgery / Other Section ------------------------------------------------>
@@ -789,7 +793,6 @@
 			</tr>
 			</c:forEach>
 			</TABLE>
-			<br>
 			</c:if>
 
 
