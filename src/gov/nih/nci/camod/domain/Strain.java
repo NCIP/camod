@@ -1,7 +1,10 @@
 /*
- * $Id: Strain.java,v 1.6 2006-05-23 18:15:58 georgeda Exp $
+ * $Id: Strain.java,v 1.7 2007-05-16 12:31:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/05/23 18:15:58  georgeda
+ * Added/cleaned up display name
+ *
  * Revision 1.5  2006/04/19 17:37:37  pandyas
  * Removed TODO text
  *
@@ -123,14 +126,6 @@ public class Strain extends BaseObject implements Serializable
         return conceptCode;
     }
 
-    /**
-     * @return Returns the EVS Preferred displayName
-
-     public String getEVSPreferredDescription()
-     {
-     return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
-     }
-     */
 
     /**
      * @param conceptCode

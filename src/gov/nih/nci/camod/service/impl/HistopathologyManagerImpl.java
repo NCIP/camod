@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.17 2007-04-30 20:09:43 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.18 2007-05-16 12:31:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/04/30 20:09:43  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.16  2006/11/08 18:05:13  pandyas
  * Modified TumorIncidenceRate float to String (weight of tumor and volume of tumor also needed modified to delete properly)
  *
@@ -151,12 +154,6 @@ public class HistopathologyManagerImpl extends BaseManager implements
 			Histopathology inHistopathology) throws Exception {
 		
 		log.info("<HistopathologyManagerImpl> Entering populateOrganDisease");
-		log.info("inHistopathologyData.getOrganTissueCode(): "
-				+ inHistopathologyData.getOrganTissueCode());	
-		log.info("inHistopathologyData.getTumorClassification(): "
-				+ inHistopathologyData.getTumorClassification());
-		log.info("inHistopathologyData.getDiagnosisCode(): "
-				+ inHistopathologyData.getDiagnosisCode());		
 
 		// every submission - lookup organ or create one new
 		if (inHistopathologyData.getOrganTissueCode().equals(

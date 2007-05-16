@@ -1,7 +1,10 @@
 /*
- * $Id: Species.java,v 1.6 2006-05-23 18:15:58 georgeda Exp $
+ * $Id: Species.java,v 1.7 2007-05-16 12:31:30 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/05/23 18:15:58  georgeda
+ * Added/cleaned up display name
+ *
  * Revision 1.5  2006/05/10 14:13:51  schroedn
  * New Features - Changes from code review
  *
@@ -157,14 +160,7 @@ public class Species extends BaseObject implements Serializable
         return conceptCode;
     }
 
-    /**
-     * @return Returns the EVS Preferred displayName
-
-     public String getEVSPreferredDescription()
-     {
-     return EvsTreeUtil.getEVSPreferedDescription(conceptCode);
-     }
-     */
+    
     /**
      * @param conceptCode
      *            The conceptCode to set.
