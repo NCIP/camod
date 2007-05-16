@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.42 2007-04-25 15:04:02 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.43 2007-05-16 12:30:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2007/04/25 15:04:02  pandyas
+ * Agreed on one help icon for all title bars and one icon for light grey tool tip - removed all others
+ *
  * Revision 1.41  2007/04/20 17:50:29  pandyas
  * Modified image choices for dev tier comparison
  *
@@ -98,7 +101,13 @@
 	
 	function enableOrgan() {
 		document.searchForm.organ.disabled = false;
-	}			
+	}
+	
+	function getOrganTree( control ) {
+		form = control.form;
+		form.action = "SimpleSearchPopulateAction.do?unprotected_method=setSpeciesForOrganTree";
+		form.submit();
+	}				
 </SCRIPT>
 
 <%
@@ -167,36 +176,82 @@
 				</html:select>
 			</td>
 		</tr>
-
-		<tr>
-			<td class="formRequiredNotice" width="0">&nbsp;</td>
-			<td class="formLabel">
-				<html:hidden styleId="organTissueName" property="organTissueName"/>
-		 		<html:hidden styleId="organTissueCode" property="organTissueCode"/>
-				<label for="field2">Site of Lesion/Tumor</label>
-				&nbsp;
-                 <camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1"/>&nbsp;				                 				
-		  	    	<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
-				<IMG src="images\selectUP.gif" align=middle border=0>
-				</a>
-			</td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" styleId="organ" property="organ" size="25"/>
-				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
-  				parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />	
-			
-			</td>
-		</tr>
-
+		
+		
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field3">Species</label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="species" >
+				<html:select styleClass="formFieldSized" size="1" property="species" onchange="getOrganTree(this);">
 					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
 				</html:select>			
 			</td>
+		</tr>		
+
+		<tr>
+			<td class="formRequiredNotice" width="0">&nbsp;</td>
+ 			<!-- Display anatomy tree based on species selected or default to mouse tree if no species selected (new screen) -->			
+			<c:choose>
+				<c:when test="${searchspeciescommonname == 'Mouse'}">
+					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
+					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+					</td>				
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">					
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
+	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />					
+					</td>				
+				</c:when>
+				<c:when test="${searchspeciescommonname == 'Rat'}">	
+					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
+					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+					</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
+	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />						
+					</td>
+				</c:when>
+				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
+					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
+					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+					</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
+	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />						
+					</td>
+				</c:when>
+				<c:otherwise>
+					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
+						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
+					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+					</td>				
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">					
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
+	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />					
+					</td>				
+				</c:otherwise>				
+    		</c:choose>										
 		</tr>
+
+
 		
 		<tr>
 			<td colspan="3" align="right">	

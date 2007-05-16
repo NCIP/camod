@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: Constants.java,v 1.100 2007-05-10 02:20:11 pandyas Exp $
+ * $Id: Constants.java,v 1.101 2007-05-16 12:27:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.100  2007/05/10 02:20:11  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ * Added constant for donor species common name
+ *
  * Revision 1.99  2007/04/30 20:06:13  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -642,6 +646,10 @@ public class Constants {
     // This constants stores the donor species common name for the Xenograft screens 
     // set in XenograftPopulateAction
     public static final String DONORSPECIESCOMMONNAME = "donorspeciescommonname";
+    
+    // This constants stores the species common name from the simple and advanced search screens 
+    // set in XenograftPopulateAction
+    public static final String SEARCHSPECIESCOMMONNAME = "searchspeciescommonname";    
 
     /**
      * Used to prepopulate forms

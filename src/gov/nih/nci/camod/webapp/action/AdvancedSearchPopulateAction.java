@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.12 2007-03-28 18:22:28 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.13 2007-05-16 12:29:35 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/03/28 18:22:28  pandyas
+ * Modified for the following Test Track item:
+ * #494 - Advanced search for Carcinogens for Jackson Lab data - removed code to populate drop downs now removed
+ *
  * Revision 1.9  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -26,7 +30,9 @@ import java.util.Set;
 
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
+import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.service.SavedQueryManager;
+import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
 import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import gov.nih.nci.camod.webapp.form.SearchForm;
 import gov.nih.nci.camod.webapp.util.DropdownOption;
@@ -145,5 +151,21 @@ public class AdvancedSearchPopulateAction extends BaseAction {
 		return mapping.findForward("searchAdvanced");
 
 	}
+	
+    public ActionForward setSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+    	
+        SearchForm theSearchForm = (SearchForm) form;
+        log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+        
+        // Set selected species to a constant to determine which organ tree displays 
+        // using common name because Rat has two species
+        Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
+        String theSearchSpecies = species.getCommonName();
+        log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);
+        request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
+
+        return mapping.findForward("searchAdvanced");    	
+    }	
 	
 }
