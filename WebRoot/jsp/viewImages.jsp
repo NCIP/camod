@@ -50,7 +50,7 @@
 					<tr>
 						<td class="resultsBoxGrey" width="15%"><b>Staining</b></td>
 						<td class="resultsBoxGreyEnd" width="85%">
-						<c:out value="${p.stainingMethod}"/>&nbsp;
+						<c:out value="${p.stainingMethod.name}"/>&nbsp;
 						</td>
 					<tr>				
 					<tr>
