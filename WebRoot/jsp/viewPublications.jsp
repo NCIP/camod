@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.26 2007-05-16 17:48:57 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.27 2007-05-16 18:20:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/05/16 17:48:57  pandyas
+ * Fixed ZFIN Pub link on viewPublicaiton screen
+ *
  * Revision 1.25  2007/05/07 16:49:04  pandyas
  * Added code to display publication from zfin.org for Zebrafish models
  *
@@ -84,7 +87,7 @@
 			<tr>
 				<td class="greySubTitleLeft" width="10%">Publication Status</td>
 				<td class="greySubTitleLeft" width="20%">First Author</td>
-				<td class="greySubTitleLeft" width="15%">JAX Number</td>
+				<td class="greySubTitleLeft" width="15%">References</td>
 				<td class="greySubTitleLeft" width="25%">Title</td>
 				<td class="greySubTitleLeft" width="10%">Journal</td>
 				<td class="greySubTitleLeft" width="5%">Year</td>
@@ -110,17 +113,17 @@
 					<camod:highlight><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				
-				<td class="<c:out value="${tdClass}"/>" width="15%">
+				<td class="<c:out value="${tdClass}"/>" width="15%" align="center">
 					<c:choose>
 						<c:when test="${not empty p.zfinPubId}">
-								(<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>)
+								<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
 								<br/>
 						</c:when>				
 						<c:otherwise>				
 							<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
-								(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
+								<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>
 								<br/>
-								(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
+								<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
 						</c:otherwise>
 					</c:choose>
 				</td>	
