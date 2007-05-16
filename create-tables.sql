@@ -17,6 +17,7 @@ drop table clinical_marker cascade constraints;
 drop table comments cascade constraints;
 drop table conditionality cascade constraints;
 drop table contact_info cascade constraints;
+drop table developmental_stage cascade constraints;
 drop table disease cascade constraints;
 drop table endpoint_code cascade constraints;
 drop table engineered_gene cascade constraints;
@@ -26,6 +27,7 @@ drop table expression_feature cascade constraints;
 drop table gene_delivery cascade constraints;
 drop table gene_function cascade constraints;
 drop table genetic_alteration cascade constraints;
+drop table genotype cascade constraints;
 drop table genotype_summary cascade constraints;
 drop table histopathology cascade constraints;
 drop table image cascade constraints;
@@ -34,7 +36,6 @@ drop table log cascade constraints;
 drop table micro_array_data cascade constraints;
 drop table model_section cascade constraints;
 drop table modification_type cascade constraints;
-drop table morpholino cascade constraints;
 drop table mutation_identifier cascade constraints;
 drop table nomenclature cascade constraints;
 drop table organ cascade constraints;
@@ -63,6 +64,8 @@ drop table tar_mod_modification_type cascade constraints;
 drop table therapy cascade constraints;
 drop table therapy_publication cascade constraints;
 drop table transgene_reg_element cascade constraints;
+drop table transient_interference cascade constraints;
+drop table transient_interference_method cascade constraints;
 drop table treatment cascade constraints;
 drop table tumor_code cascade constraints;
 drop table xenograft_invivo_result cascade constraints;
@@ -85,11 +88,16 @@ create table abs_cancer_model (
    submitter_id number(19,0),
    principal_investigator_id number(19,0),
    url varchar2(255),
-   is_tool_mouse number(1,0),
+   is_tool_strain number(1,0),
+   external_source varchar2(255),
+   external_source_identifier varchar2(255),
+   developmental_stage varchar2(255),
    repository_info_id number(19,0),
    phenotype_id number(19,0),
    administrative_site varchar2(255),
    admin_site_unctrl_vocab varchar2(255),
+   conditioning_regimen varchar2(255),
+   cond_regimen_unctrl_vocab varchar2(255),
    genetic_manipulation varchar2(255),
    modification_description varchar2(255),
    parental_cell_line_name varchar2(255),
@@ -226,9 +234,16 @@ create table contact_info (
    institute varchar2(255),
    primary key (contact_info_id)
 );
+create table developmental_stage (
+   developmental_stage_id number(19,0) not null,
+   name varchar2(255),
+   concept_code varchar2(255),
+   primary key (developmental_stage_id)
+);
 create table disease (
    disease_id number(19,0) not null,
    name varchar2(255),
+   name_unctrl_vocab varchar2(255),
    concept_code varchar2(255),
    primary key (disease_id)
 );
@@ -244,7 +259,6 @@ create table engineered_gene (
    name varchar2(255),
    comments varchar2(2000),
    conditionality_id number(19,0) unique,
-   genotype_summary_id number(19,0),
    image_id number(19,0),
    mutation_identifier_id number(19,0) unique,
    location_of_integration varchar2(255),
@@ -307,6 +321,12 @@ create table genetic_alteration (
    method_of_observation varchar2(255),
    primary key (genetic_alteration_id)
 );
+create table genotype (
+   genotype_id number(19,0) not null,
+   name varchar2(255),
+   abs_cancer_model_id number(19,0) not null,
+   primary key (genotype_id)
+);
 create table genotype_summary (
    genotype_summary_id number(19,0) not null,
    summary varchar2(255),
@@ -319,10 +339,12 @@ create table histopathology (
    comments clob,
    gross_description varchar2(2000),
    relational_operation varchar2(255),
-   tumor_incidence_rate float,
+   tumor_incidence_rate varchar2(255),
    survival_info varchar2(255),
    age_of_onset varchar2(255),
    age_of_onset_unit varchar2(255),
+   age_of_detection varchar2(255),
+   age_of_detection_unit varchar2(255),
    microscopic_description varchar2(2000),
    weight_of_tumor varchar2(255),
    volume_of_tumor varchar2(255),
@@ -340,7 +362,7 @@ create table image (
    description varchar2(4000),
    file_server_location varchar2(255),
    staining_method_id number(19,0),
-   abs_cancer_model_id number(19,0) not null,
+   abs_cancer_model_id number(19,0),
    primary key (image_id)
 );
 create table invivo_result (
@@ -384,30 +406,17 @@ create table modification_type (
    name_unctrl_vocab varchar2(255),
    primary key (modification_type_id)
 );
-create table morpholino (
-   morpholino_id number(19,0) not null,
-   source varchar2(255),
-   source_unctr_vocab varchar2(255),
-   type varchar2(255),
-   sequence_direction varchar2(255),
-   targeted_region varchar2(255),
-   concentration varchar2(255),
-   concentration_unit varchar2(255),
-   delivery_method varchar2(255),
-   delivery_method_unctrl_vocab varchar2(255),
-   visual_ligand varchar2(255),
-   visual_ligand_unctrl_vocab varchar2(255),
-   abs_cancer_model_id number(19,0) not null,
-   primary key (morpholino_id)
-);
 create table mutation_identifier (
    mutation_identifier_id number(19,0) not null,
-   mgi_number varchar2(255),
+   mgi_id varchar2(255),
+   zfin_id varchar2(255),
+   rgd_id varchar2(255),
    primary key (mutation_identifier_id)
 );
 create table nomenclature (
    nomenclature_id number(19,0) not null,
    name varchar2(255),
+   abs_cancer_model_id number(19,0) not null,
    primary key (nomenclature_id)
 );
 create table organ (
@@ -456,6 +465,7 @@ create table publication (
    authors varchar2(255),
    first_time_reported number(1,0),
    j_number varchar2(255),
+   zfin_pub_id varchar2(255),
    publication_status_id number(19,0),
    primary key (publication_id)
 );
@@ -492,6 +502,7 @@ create table result_settings (
 create table result_settings_columns (
    result_settings_columns_id number(19,0) not null,
    column_name varchar2(255),
+   column_order number(10,0),
    result_settings_id number(19,0),
    primary key (result_settings_columns_id)
 );
@@ -588,6 +599,7 @@ create table therapy (
    tumor_response varchar2(255),
    comments varchar2(255),
    agent_id number(19,0),
+   developmental_stage_id number(19,0),
    treatment_id number(19,0) unique,
    abs_cancer_model_id number(19,0) not null,
    primary key (therapy_id)
@@ -601,6 +613,31 @@ create table transgene_reg_element (
    engineered_gene_id number(19,0) not null,
    regulatory_element_id number(19,0) not null unique,
    primary key (engineered_gene_id, regulatory_element_id)
+);
+create table transient_interference (
+   transient_interference_id number(19,0) not null,
+   source varchar2(255),
+   source_unctr_vocab varchar2(255),
+   type varchar2(255),
+   sequence_direction varchar2(255),
+   targeted_region varchar2(255),
+   concentration varchar2(255),
+   concentration_unit varchar2(255),
+   delivery_method varchar2(255),
+   delivery_method_unctrl_vocab varchar2(255),
+   visual_ligand varchar2(255),
+   visual_ligand_unctrl_vocab varchar2(255),
+   comments clob,
+   target_site varchar2(255),
+   trans_interference_method_id number(19,0),
+   abs_cancer_model_id number(19,0) not null,
+   primary key (transient_interference_id)
+);
+create table transient_interference_method (
+   trans_interference_method_id number(19,0) not null,
+   name varchar2(255),
+   concept_code varchar2(255),
+   primary key (trans_interference_method_id)
 );
 create table treatment (
    treatment_id number(19,0) not null,
@@ -670,7 +707,6 @@ alter table comments add constraint FKDC17DDF4290CE83F foreign key (availability
 alter table engineered_gene add constraint FK4ADB496687D074B5 foreign key (species_id) references species;
 alter table engineered_gene add constraint FK4ADB496653A0BB3C foreign key (segment_type_id) references segment_type;
 alter table engineered_gene add constraint FK4ADB4966BB186F15 foreign key (image_id) references image;
-alter table engineered_gene add constraint FK4ADB4966F9575982 foreign key (genotype_summary_id) references genotype_summary;
 alter table engineered_gene add constraint FK4ADB49663FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
 alter table engineered_gene add constraint FK4ADB496672CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table engineered_gene add constraint FK4ADB496619EF4CF2 foreign key (environmental_factor_id) references environmental_factor;
@@ -683,6 +719,7 @@ alter table gene_delivery add constraint FK918699DE3D222B55 foreign key (organ_i
 alter table gene_delivery add constraint FK918699DE1CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table gene_delivery add constraint FK918699DE46872875 foreign key (treatment_id) references treatment;
 alter table gene_function add constraint FKB2C0F1C2D749BD3C foreign key (engineered_gene_id) references engineered_gene;
+alter table genotype add constraint FK6C7642D91CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table genotype_summary add constraint FK6ECA840B35AE2BF foreign key (nomenclature_id) references nomenclature;
 alter table histopathology add constraint FK587A4AB2102F8CB5 foreign key (disease_id) references disease;
 alter table histopathology add constraint FK587A4AB23FE1DDE8 foreign key (genetic_alteration_id) references genetic_alteration;
@@ -696,9 +733,10 @@ alter table invivo_result add constraint FKC187E8CB46872875 foreign key (treatme
 alter table invivo_result add constraint FKC187E8CB457316D5 foreign key (agent_id) references agent;
 alter table log add constraint FK1A34477AB701F foreign key (comments_id) references comments;
 alter table log add constraint FK1A3441CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
+alter table log add constraint FK1A344496C4E05 foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table log add constraint FK1A3442EB4E88E foreign key (party_id) references party;
 alter table micro_array_data add constraint FKC3D0BA2B1CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
-alter table morpholino add constraint FK6BB814E51CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
+alter table nomenclature add constraint FK356683771CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table party_contact_info add constraint FK4B2B4226534EE516 foreign key (contact_info_id) references contact_info;
 alter table party_contact_info add constraint FK4B2B42263595FF35 foreign key (party_id) references party;
 alter table party_role add constraint FK1C92FE2FAC5A835F foreign key (role_id) references role;
@@ -720,6 +758,7 @@ alter table strain add constraint FKCAD5417587D074B5 foreign key (species_id) re
 alter table strain add constraint FKCAD5417572CE5632 foreign key (mutation_identifier_id) references mutation_identifier;
 alter table tar_mod_modification_type add constraint FK211C32E6C1E42178 foreign key (modification_type_id) references modification_type;
 alter table tar_mod_modification_type add constraint FK211C32E6DE1A05A5 foreign key (engineered_gene_id) references engineered_gene;
+alter table therapy add constraint FKAF8F6C6936A94812 foreign key (developmental_stage_id) references developmental_stage;
 alter table therapy add constraint FKAF8F6C691CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
 alter table therapy add constraint FKAF8F6C6946872875 foreign key (treatment_id) references treatment;
 alter table therapy add constraint FKAF8F6C69457316D5 foreign key (agent_id) references agent;
@@ -727,6 +766,8 @@ alter table therapy_publication add constraint FK863317568258D935 foreign key (p
 alter table therapy_publication add constraint FK86331756DB10995 foreign key (therapy_id) references therapy;
 alter table transgene_reg_element add constraint FK32E60ECFB947BD44 foreign key (regulatory_element_id) references regulatory_element;
 alter table transgene_reg_element add constraint FK32E60ECF9C4CA0C foreign key (engineered_gene_id) references engineered_gene;
+alter table transient_interference add constraint FKE89F80171CC8B88B foreign key (abs_cancer_model_id) references abs_cancer_model;
+alter table transient_interference add constraint FKE89F801778685E5B foreign key (trans_interference_method_id) references transient_interference_method;
 alter table treatment add constraint FKFC3978788E609262 foreign key (sex_distribution_id) references sex_distribution;
 alter table xenograft_invivo_result add constraint FKB62953C28FA16C42 foreign key (invivo_result_id) references invivo_result;
 alter table xenograft_invivo_result add constraint FKB62953C2F1AE4034 foreign key (abs_cancer_model_id) references abs_cancer_model;
