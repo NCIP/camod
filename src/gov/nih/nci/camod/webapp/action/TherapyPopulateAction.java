@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.19 2006-05-08 13:43:00 georgeda Exp $
+ * $Id: TherapyPopulateAction.java,v 1.20 2007-05-16 12:29:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2006/05/08 13:43:00  georgeda
+ * Reformat and clean up warnings
+ *
  * Revision 1.18  2006/04/27 18:34:53  pandyas
  * Fixed incorrect header
  *
@@ -141,6 +144,16 @@ public class TherapyPopulateAction extends BaseAction
                 therapyForm.setNscNumber(therapy.getAgent().getNscNumber().toString());
             }
 
+            if(therapy.getDevelopmentalStage() !=null){
+                // since we are always querying from concept code (save and edit),
+                // simply display EVSPreferredDescription
+            	therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getEVSPreferredDescription());
+                log.info("setDevelopmentalStage= " + therapy.getDevelopmentalStage().getEVSPreferredDescription());
+
+                therapyForm.setDevelopmentalStageCode(therapy.getDevelopmentalStage().getConceptCode());
+                log.info("setDevelopmentalStageCode= " + therapy.getDevelopmentalStage().getConceptCode());
+            }            
+            
             // Therapy object attributes
             therapyForm.setToxicityGrade(therapy.getToxicityGrade());
             therapyForm.setBiomarker(therapy.getBiomarker());
@@ -179,6 +192,9 @@ public class TherapyPopulateAction extends BaseAction
                 theChemicalClasses[i] = theChemicalClass.getName();
             }
             therapyForm.setSelectedChemicalClasses(theChemicalClasses);
+            
+            
+            
         }
 
         // Prepopulate all dropdown fields, set the global Constants to the

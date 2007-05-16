@@ -38,7 +38,10 @@
     <bean id="clinicalMarkerManager" class="gov.nih.nci.camod.service.impl.ClinicalMarkerManagerImpl"/>
            
     <!-- commentsManager -->
-    <bean id="commentsManager" class="gov.nih.nci.camod.service.impl.CommentsManagerImpl"/>    
+    <bean id="commentsManager" class="gov.nih.nci.camod.service.impl.CommentsManagerImpl"/> 
+    
+    <!-- developmentalStage -->
+    <bean id="developmentalStage" class="gov.nih.nci.camod.service.impl.DevelopmentalStageManagerImpl"/>       
 
     <!--  engineeredTransgene -->
     <bean id="engineeredTransgeneManager" class="gov.nih.nci.camod.service.impl.EngineeredTransgeneManagerImpl"/>

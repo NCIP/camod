@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.16 2006-10-27 16:33:49 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.17 2007-05-16 12:29:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2006/10/27 16:33:49  pandyas
+ * fixed printout on error - typo
+ *
  * Revision 1.15  2006/05/04 14:28:14  pandyas
  * Fixed comment
  *
@@ -89,6 +92,9 @@ public final class TherapyAction extends BaseAction {
 				+ "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: "
 				+ therapyForm.getResults() + "\n\t comments: " + therapyForm.getComments() 
                 + "\n\t TumorResponse: " + therapyForm.getTumorResponse() 
+        		+ "\n\t DevelopmentalStage: " + therapyForm.getDevelopmentalStage() 
+        		+ "\n\t DevelopmentalStageCode: " + therapyForm.getDevelopmentalStageCode() 
+        		+ "\n\t DevelopmentalStageName: " + therapyForm.getDevelopmentalStageName()                 
                 + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		TherapyManager therapyManager = (TherapyManager) getBean("therapyManager");
@@ -152,7 +158,8 @@ public final class TherapyAction extends BaseAction {
 		// Create a form to edit
 		TherapyForm therapyForm = (TherapyForm) form;
 
-		System.out.println("<TherapyAction save> following Characteristics:" + "\n\t name: " + therapyForm.getName()
+		System.out.println("<TherapyAction save> following Characteristics:" 
+				+ "\n\t name: " + therapyForm.getName()
 				+ "\n\t NscNumber: " + therapyForm.getNscNumber() + "\n\t casNumber: " + therapyForm.getCasNumber()
 				+ "\n\t toxicityGrade: " + therapyForm.getToxicityGrade() + "\n\t chemicalClasses: "
 				+ therapyForm.getChemicalClasses() + "\n\t processName: " + therapyForm.getProcesses()
@@ -165,6 +172,9 @@ public final class TherapyAction extends BaseAction {
 				+ "\n\t experiment: " + therapyForm.getExperiment() + "\n\t results: " + therapyForm.getResults()
 				+ "\n\t comments: " + therapyForm.getComments() 
                 + "\n\t TumorResponse: " + therapyForm.getTumorResponse()
+        		+ "\n\t DevelopmentalStage: " + therapyForm.getDevelopmentalStage() 
+        		+ "\n\t DevelopmentalStageCode: " + therapyForm.getDevelopmentalStageCode() 
+        		+ "\n\t DevelopmentalStageName: " + therapyForm.getDevelopmentalStageName()                 
                 + "\n\t user: "	+ (String) request.getSession().getAttribute("camod.loggedon.username"));
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");

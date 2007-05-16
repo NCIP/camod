@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2006/10/31 17:22:08  pandyas
+ * fixed code to allow for html markup in fields - there was a bug in this jsp
+ *
  * Revision 1.21  2006/05/25 18:34:50  pandyas
  * added break after MGI number
  *
@@ -48,7 +51,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.23 2006-10-31 17:22:08 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.24 2007-05-16 12:30:49 pandyas Exp $
  */
 %>
 <tr>
@@ -87,12 +90,24 @@
 		<camod:highlight><c:out value="${t.treatment.sexDistribution.type}"/></camod:highlight>
 	</td>
 </tr>
+
+
 <tr>
 	<td class="resultsBoxWhite" width="25%"><b>Age at Treatment</b></td>
 	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 		<camod:highlight><c:out value="${t.treatment.ageAtTreatment}" escapeXml="false"/>&nbsp;<c:out value="${t.treatment.ageAtTreatmentUnit}"/></camod:highlight>
 	</td>
 </tr>
+
+<c:if test="${modelspeciescommonname == 'Zebrafish'}">
+	<tr>
+		<td class="resultsBoxWhite" width="25%"><b>Developmental Stage</b></td>
+		<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+			<c:out value="${t.developmentalStage.EVSPreferredDescription}" escapeXml="false"/>
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
 	<td class="resultsBoxGreyEnd" width="75%">&nbsp;

@@ -1,9 +1,12 @@
 /**
  *  @author pandyas
  *  
- *  $Id: TherapyData.java,v 1.5 2006-04-17 19:09:19 pandyas Exp $
+ *  $Id: TherapyData.java,v 1.6 2007-05-16 12:29:43 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.5  2006/04/17 19:09:19  pandyas
+ *  caMod 2.1 OM changes
+ *
  *  Revision 1.4  2005/12/29 18:29:49  pandyas
  *  Clean up - removed code for TumorResponse and TumorAgeUnit
  *
@@ -74,5 +77,11 @@ public interface TherapyData  {
     public void setTumorResponse(String tumorResponse);
     public String getOtherAdministrativeRoute();
     public void setOtherAdministrativeRoute(String otherAdministrativeRoute);
+	public String getDevelopmentalStage();
+	public void setDevelopmentalStage(String developmentalStage);
+	public String getDevelopmentalStageCode(); 
+	public void setDevelopmentalStageCode(String developmentalStageCode);
+	public String getDevelopmentalStageName(); 
+	public void setDevelopmentalStageName(String developmentalStageName);    
 
 }

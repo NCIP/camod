@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: TherapyForm.java,v 1.9 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: TherapyForm.java,v 1.10 2007-05-16 12:29:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.8  2005/12/29 18:29:59  pandyas
  * Clean up - removed code for TumorResponse and TumorAgeUnit
  *
@@ -53,6 +56,10 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
     protected String results;
     protected String comments;
     protected String tumorResponse;
+    
+	protected String developmentalStage;
+	protected String developmentalStageName;
+	protected String developmentalStageCode;    
 
     /**
      * @return Returns the name.
@@ -406,4 +413,28 @@ public class TherapyForm extends BaseForm implements Serializable, TherapyData {
         results = null;
         comments = null;
     }
+
+	public String getDevelopmentalStage() {
+		return developmentalStage;
+	}
+
+	public void setDevelopmentalStage(String developmentalStage) {
+		this.developmentalStage = developmentalStage;
+	}
+
+	public String getDevelopmentalStageCode() {
+		return developmentalStageCode;
+	}
+
+	public void setDevelopmentalStageCode(String developmentalStageCode) {
+		this.developmentalStageCode = developmentalStageCode;
+	}
+
+	public String getDevelopmentalStageName() {
+		return developmentalStageName;
+	}
+
+	public void setDevelopmentalStageName(String developmentalStageName) {
+		this.developmentalStageName = developmentalStageName;
+	}
 }

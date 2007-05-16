@@ -1,7 +1,10 @@
 /*
- * $Id: Therapy.java,v 1.14 2007-03-19 18:56:11 pandyas Exp $
+ * $Id: Therapy.java,v 1.15 2007-05-16 12:28:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/03/19 18:56:11  pandyas
+ * Object Model changes for caMOD 2.3 - dee design doc for details
+ *
  * Revision 1.13  2006/04/19 17:37:37  pandyas
  * Removed TODO text
  *
@@ -30,7 +33,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     private String biomarker;
     private String tumorResponse;
     private String comments;
-    private String developmentalStage;      
+    private DevelopmentalStage developmentalStage;      
     private Treatment treatment;
     private Set<Publication> publicationCollection = new TreeSet<Publication>();
     private AbstractCancerModel cancerModel;
@@ -167,7 +170,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
     /**
      * @return Returns the developmentalStage.
      */
-    public String getDevelopmentalStage() {
+    public DevelopmentalStage getDevelopmentalStage() {
         return developmentalStage;
     }
 
@@ -175,7 +178,7 @@ public class Therapy extends BaseObject implements Comparable, Serializable, Dup
      * @param developmentalStage
      *            The developmentalStage to set.
      */
-    public void setDevelopmentalStage(String developmentalStage) {
+    public void setDevelopmentalStage(DevelopmentalStage developmentalStage) {
         this.developmentalStage = developmentalStage;
     } 
     

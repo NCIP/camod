@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.24 2006-08-17 18:17:35 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.25 2007-05-16 12:29:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2006/08/17 18:17:35  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.23  2006/05/10 14:14:33  schroedn
  * New Features - Changes from code review
  *
@@ -161,6 +164,25 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 		theTreatment.setDosage(inTherapyData.getDosage());
 		theTreatment.setDosageUnit(inTherapyData.getDosageUnit());
 	}
+	
+	private void populateDevelopmentalStage(TherapyData inTherapyData, Therapy theTherapy) 
+							throws Exception {
+		log.info("Entering populateDevelopmentalStage");
+
+		if (inTherapyData.getDevelopmentalStageCode() != null && inTherapyData.getDevelopmentalStageCode().length() > 0) {
+			log.info("inTherapyData.getDevelopmentalStageCode(): "
+					+ inTherapyData.getDevelopmentalStageCode());
+			// Get or create DevelopmentalStage object each time
+			log.info("getOrCreate method used");
+			DevelopmentalStage theDevelopmentalStage = DevelopmentalStageManagerSingleton.instance().getOrCreate(
+					inTherapyData.getDevelopmentalStageCode(),
+					inTherapyData.getDevelopmentalStageName());
+			theTherapy.setDevelopmentalStage(theDevelopmentalStage);
+		} else {
+			// Null out - not required field
+			theTherapy.setDevelopmentalStage(null);
+		}
+	}	
 
 	private void populateAdministration(AnimalModel inAnimalModel,
 			TherapyData inTherapyData, Therapy theTherapy) {
@@ -221,6 +243,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 		populateAgeGender(inTherapyData, theTherapy);
 		populateDose(inTherapyData, theTherapy);
 		populateAdministration(inAnimaModel, inTherapyData, theTherapy);
+		populateDevelopmentalStage(inTherapyData, theTherapy);		
 		populateTherapy(inTherapyData, theTherapy);
 
 		log.info("In TherapyManagerImpl.create Exiting");
@@ -235,6 +258,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 		populateAgeGender(inTherapyData, inTherapy);
 		populateDose(inTherapyData, inTherapy);
 		populateAdministration(inAnimalModel, inTherapyData, inTherapy);
+		populateDevelopmentalStage(inTherapyData, inTherapy);		
 		populateTherapy(inTherapyData, inTherapy);
 
 		save(inTherapy);
