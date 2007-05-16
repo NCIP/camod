@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.25 2007-05-07 16:49:04 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.26 2007-05-16 17:48:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/05/07 16:49:04  pandyas
+ * Added code to display publication from zfin.org for Zebrafish models
+ *
  * Revision 1.24  2006/11/13 20:23:34  pandyas
  * Modified IMG SRC location to include complete location (added /camod/...)
  *
@@ -108,16 +111,18 @@
 				</td>
 				
 				<td class="<c:out value="${tdClass}"/>" width="15%">
-					<c:if test="${not empty p.jaxJNumber}">				
-						<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
-							(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
-							<br/>
-							(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
-					</c:if>
-					<c:if test="${not empty p.zfinPubId}">
-							(<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>)
-							<br/>
-					</c:if>
+					<c:choose>
+						<c:when test="${not empty p.zfinPubId}">
+								(<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>)
+								<br/>
+						</c:when>				
+						<c:otherwise>				
+							<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
+								(<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>)
+								<br/>
+								(<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>)
+						</c:otherwise>
+					</c:choose>
 				</td>	
 							
 				<td class="<c:out value="${tdClass}"/>" width="30%">
