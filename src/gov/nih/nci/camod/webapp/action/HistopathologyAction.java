@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.14 2007-04-30 20:10:17 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.15 2007-05-17 18:43:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/04/30 20:10:17  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.13  2006/10/23 16:51:56  pandyas
  * added printout of units for debug
  *
@@ -90,7 +93,10 @@ public class HistopathologyAction extends BaseAction {
 
         log.info("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
         		+ "\n\t organ: " + histopathologyForm.getOrgan() 
-        		+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() + "\n\t organTissueCode: "
+        		+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() 
+                + "\n\t TumorClassification: " + histopathologyForm.getTumorClassification()
+                + "\n\t OtherTumorClassification: " + histopathologyForm.getOtherTumorClassification()                  
+                + "\n\t organTissueCode: "
                 + histopathologyForm.getOrganTissueCode() + "\n\t diseaseName: "
                 + histopathologyForm.getDiagnosisName() + "\n\t diseaseCode: " + histopathologyForm.getDiagnosisCode()
                 + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() 
@@ -180,7 +186,10 @@ public class HistopathologyAction extends BaseAction {
         log.info("<HistopathologyAction editMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
                 + aHistopathologyID + "\n\t aAssociatedMetastasisID: " + aAssociatedMetastasisID
         		+ "\n\t organ: " + assocMetastasisForm.getOrgan() 
-                + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName() + "\n\t organTissueCode: "
+                + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName() 
+                + "\n\t TumorClassification: " + assocMetastasisForm.getTumorClassification() 
+                + "\n\t OtherTumorClassification: " + assocMetastasisForm.getOtherTumorClassification()                  
+                + "\n\t organTissueCode: "
                 + assocMetastasisForm.getOrganTissueCode() + "\n\t diseaseName: "
                 + assocMetastasisForm.getDiagnosisName() + "\n\t diseaseCode: "
                 + assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
@@ -261,7 +270,10 @@ public class HistopathologyAction extends BaseAction {
         log.info("<HistopathologyAction save> following Characteristics:" 
         		+ "\n\t organ: " + histopathologyForm.getOrgan() 
         		+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() 
-        		+ "\n\t organTissueCode: " + histopathologyForm.getOrganTissueCode() + "\n\t DiagnosisName: "
+        		+ "\n\t organTissueCode: " + histopathologyForm.getOrganTissueCode() 
+                + "\n\t TumorClassification: " + histopathologyForm.getTumorClassification()
+                + "\n\t OtherTumorClassification: " + histopathologyForm.getOtherTumorClassification()  
+                + "\n\t DiagnosisName: "
                 + histopathologyForm.getDiagnosisName() + "\n\t DiagnosisCode: " + histopathologyForm.getDiagnosisCode()
                 + "\n\t diagnosisName: " + histopathologyForm.getDiagnosisName() 
                 + "\n\t ageOfOnset: " + histopathologyForm.getAgeOfOnset() 
@@ -332,10 +344,13 @@ public class HistopathologyAction extends BaseAction {
         String aHistopathologyID = request.getParameter("aHistopathologyID");
 
         log.info("<HistopathologyAction saveMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
-                + aHistopathologyID  + "\n\t organ: " + assocMetastasisForm.getOrgan() 
+                + aHistopathologyID  
+                + "\n\t organ: " + assocMetastasisForm.getOrgan() 
                 + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
-                + "\n\t organTissueCode: " + assocMetastasisForm.getOrganTissueCode() + "\n\t DiagnosisName: "
-                + assocMetastasisForm.getDiagnosisName() + "\n\t DiagnosisCode: "
+                + "\n\t organTissueCode: " + assocMetastasisForm.getOrganTissueCode() 
+                + "\n\t TumorClassification: " + assocMetastasisForm.getTumorClassification()
+                + "\n\t OtherTumorClassification: " + assocMetastasisForm.getOtherTumorClassification()                
+                + "\n\t DiagnosisName: " + assocMetastasisForm.getDiagnosisName() + "\n\t DiagnosisCode: "
                 + assocMetastasisForm.getDiagnosisCode() + "\n\t diagnosisName: "
                 + assocMetastasisForm.getDiagnosisName() + "\n\t ageOfOnset: " + assocMetastasisForm.getAgeOfOnset()
                 + "\n\t ageOfDetection: " + assocMetastasisForm.getAgeOfDetection()
