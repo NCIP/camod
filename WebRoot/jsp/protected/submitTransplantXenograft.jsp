@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.51 2007-05-17 12:24:17 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.52 2007-05-17 17:58:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2007/05/17 12:24:17  pandyas
+ * Modified screen to display EVSTree vacabulary
+ *
  * Revision 1.50  2007/05/10 02:19:32  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -228,8 +231,8 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
-						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20" />
+						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:when test="${donorspeciescommonname == 'Rat'}">	
@@ -241,8 +244,8 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
-						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"/>
+						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>	
 				<c:when test="${donorspeciescommonname == 'Zebrafish'}">
@@ -254,8 +257,8 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
-						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20" />
+						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:when test="${donorspeciescommonname == 'Human'}">
@@ -267,8 +270,8 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
-						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>				
 				<c:otherwise>
@@ -277,7 +280,7 @@
 					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" onload="getOrganTree(this);"/>
+						<html:text styleClass="formFieldSized" disabled="false" property="organ" size="25"/>
 					</td>				
 				</c:otherwise>				
     		</c:choose>

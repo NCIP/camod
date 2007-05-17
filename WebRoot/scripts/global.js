@@ -296,24 +296,17 @@ function chkIntegration() {
 }
 
 /**********************************
-Script to clearOrgan field
-Blanks out organ field
-Clears hidden value for organTissueCode
+Script to clearField for vaocab trees
+Blanks out organ, staining method, and 
+developmental stage fields
+Clears hidden value for each conceptCode
+by specified name defined on each form
 **********************************/
- function clearOrgan(field, var1) {
+ function clearField(field, var1) {
      field.value = '';
      var1.value = '';   
  }
- 
-/**********************************
-Script to clearStainingMethod field
-Blanks out organ field
-Clears hidden value for stainingMethodCode
-**********************************/
- function clearStainingMethod(field, var1) {
-     field.value = '';
-     var1.value = '';   
- } 
+
  
 function openUserGuideWindow(pageURL) {
     window.open (pageURL, "caMOD User Guide", "alwaysRaised,dependent,status,scrollbars,resizable,width=800,height=500"); 

@@ -117,7 +117,7 @@
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
 						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
-						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Rat'}">	
@@ -130,7 +130,7 @@
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
 						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
-						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>	
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
@@ -143,7 +143,7 @@
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
 						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
-						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						<a href="javascript: clearField(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
 				<c:otherwise>
