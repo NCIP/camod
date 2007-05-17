@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: OrganManager.java,v 1.5 2006-04-21 13:38:40 georgeda Exp $
+ * $Id: OrganManager.java,v 1.6 2007-05-17 12:25:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/21 13:38:40  georgeda
+ * Cleanup
+ *
  * Revision 1.4  2006/04/17 19:13:16  pandyas
  * caMod 2.1 OM changes
  *
@@ -26,8 +29,8 @@ public interface OrganManager
 
     public Organ get(String id) throws Exception;
 
-    public Organ getByName(String inType) throws Exception;
+    public Organ getByName(String inName) throws Exception;
     
-    public Organ getOrCreate(String inConceptCode, String inOrganName) throws Exception;    
+    public Organ getOrCreate(String inConceptCode, String inName) throws Exception;    
 
 }
