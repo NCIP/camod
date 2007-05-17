@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.11 2007-04-30 20:10:17 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.12 2007-05-17 18:42:25 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/04/30 20:10:17  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.10  2006/11/09 17:22:17  pandyas
  * Commented out debug code
  *
@@ -97,12 +100,18 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             assocMetastasisForm.setOrganTissueCode(organ.getConceptCode());
             //System.out.println("OrganTissueCode= " + organ.getConceptCode());
 
-            /* Set Disease object attributes */
+            /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = associatedMetastasis.getDisease();
-
-            assocMetastasisForm.setDiagnosisName(disease.getName());
-            assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
-            assocMetastasisForm.setTumorClassification(disease.getEVSPreferredDescription());
+            if(disease.getNameUnctrlVocab() != null) {
+                log.info("disease is other in DB");
+                assocMetastasisForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
+                assocMetastasisForm.setOtherTumorClassification(disease.getNameUnctrlVocab());
+                
+            } else {
+                assocMetastasisForm.setDiagnosisName(disease.getName());
+                assocMetastasisForm.setDiagnosisCode(disease.getConceptCode());
+                assocMetastasisForm.setTumorClassification(disease.getEVSPreferredDescription());
+            }
 
             /* Set GeneticAlteration attributes */
             if (associatedMetastasis.getGeneticAlteration() != null) {
