@@ -75,11 +75,11 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-			<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
-			<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
  			<!-- Display anatomy tree based on animal model species or allow for text entry if no specific tree exists -->
  			<c:choose>
-				<c:when test="${modelspeciescommonname == 'Mouse'}">			
+				<c:when test="${modelspeciescommonname == 'Mouse'}">
+				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>				
@@ -89,7 +89,10 @@
 						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 					</td>				
 				</c:when>
-				<c:when test="${modelspeciescommonname == 'Rat'}">	
+				
+				<c:when test="${modelspeciescommonname == 'Rat'}">
+				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 					<a href="javascript:showRatTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
@@ -98,17 +101,22 @@
 					<td class="formField">										
 						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 					</td>
-				</c:when>	
+				</c:when>
+					
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-				<!-- Fix when you get Zebrafsih tree to work -->
+				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
+				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
+					<a href="javascript:showRatTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
-					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
-					<html:hidden property="organTissueName"/>
-					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 					</td>
 				</c:when>
 				<c:otherwise>
+				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;				
 				</td>
 					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
 					<html:hidden property="organTissueName"/>

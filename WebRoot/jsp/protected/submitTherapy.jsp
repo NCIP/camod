@@ -54,6 +54,7 @@ function unselectAll()
 <html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">
 
 <script language="JavaScript" src="scripts/initIt.js"></script>
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 
 <!-- submitTherapy.jsp -->
 <!-- Main Content Begins -->
@@ -80,14 +81,14 @@ function unselectAll()
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Drug / Compound Name:</label></td>
+		<td class="formRequiredLabel" ><label for="field3">Drug / Compound Name:</label></td>
 		<td class="formField">
 			<html:text styleClass="formFieldSized" size="30" property="name" />	
 		</td>
 	</tr>
 	
 	<tr>
-			<td class="formRequiredNotice" width="3">&nbsp;</td>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">NSC number:</label>
 			</td>
 			<td class="formField">		
@@ -97,9 +98,9 @@ function unselectAll()
 				<html:text styleClass="formFieldUnSized" size="10" property="nscNumber" />
 			</td>
 	</tr>
-	<!-- changed linkd to CAS# but NSC link can get both CAS and NSC - ask Ulli?? http://dtp.nci.nih.gov/dtpstandard/chemname/index.jsp?field1=   -->
+
 	<tr>
-			<td class="formRequiredNotice" width="3">&nbsp;</td>
+			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field1">CAS number:</label>
 			</td>
 			<td class="formField">		
@@ -189,6 +190,10 @@ function unselectAll()
 			</center>
 		</td>
  	</tr>
+ 	
+				
+				
+				 	
  	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Experiment:</label>
@@ -249,6 +254,26 @@ function unselectAll()
 			</html:select>
 		</td>
 	</tr>
+
+ 	<!-- Display anatomy tree if animal model species is Zebrafish or hide if not Zebrafish -->
+	<c:if test="${modelspeciescommonname == 'Zebrafish'}">	
+		<tr>
+			<td class="formRequiredNotice" width="10">&nbsp;</td>
+	
+					<td class="formLabel"><label for="field1">Developmental Stage:</label>&nbsp;
+						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
+					<br>							
+					<a href="javascript:showMouseTissueTree('therapyForm', 'developmentalStageCode', 'developmentalStageName', 'developmentalStage', true)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>
+					</td>				
+					<html:hidden property="developmentalStageCode"/>
+					<input type="hidden" name="developmentalStageName" />
+					<td class="formField">					
+						<html:text styleClass="formFieldSized" disabled="true" property="developmentalStage" size="30"  />
+					</td>
+		</tr>
+	</c:if>	
+		
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
 		<td class="formLabel"><label for="field1">Results:</label>

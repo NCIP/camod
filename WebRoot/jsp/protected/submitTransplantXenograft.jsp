@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.50 2007-05-10 02:19:32 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.51 2007-05-17 12:24:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.50  2007/05/10 02:19:32  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.49  2007/04/25 15:05:51  pandyas
  * Agreed on one help icon for all title bars and one icon for light grey tool tip - removed all others
  *
@@ -102,8 +105,9 @@
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
-	function getBothResults(control) {
-		getOptions( control );	
+	function getResults(control) {
+		getOptions( control );
+		getOrganTree( control );	
 		chkOtherSpecies();
 	}
 	function getOptions( control ) {
@@ -111,6 +115,13 @@
 		form.action  = "XenograftPopulateAction.do?method=setStrainDropdown";
 		form.submit();		
 	}
+	
+	function getOrganTree( control ) {
+		form = control.form;
+		form.action  = "XenograftPopulateAction.do?method=setOrganTree";
+		form.submit();		
+	}
+		
 	function chkOtherSpecies() {	
 		chkOther(document.forms[0].donorScientificName, document.forms[0].otherDonorScientificName);
 	}
@@ -169,7 +180,7 @@
 		<label for="field3">- if species is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>		
-			<html:select styleClass="formFieldSized" size="1" property="donorScientificName" onchange="getBothResults(this);" >
+			<html:select styleClass="formFieldSized" size="1" property="donorScientificName" onchange="getResults(this);" >
 				<html:optionsCollection name="<%= Dropdowns.SPECIESQUERYDROP %>" />										
 			</html:select>
 		</td>
@@ -217,7 +228,7 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
 						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
@@ -230,7 +241,7 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
 						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>	
@@ -243,7 +254,7 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
 						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>
@@ -256,7 +267,7 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  onload="getOrganTree(this);"/>
 						<a href="javascript: clearOrgan(document.forms[0].organ, document.forms[0].organTissueCode);"><img border="0" align=middle src="/camod/images/clear.gif"></a>						
 					</td>
 				</c:when>				
@@ -266,7 +277,7 @@
 					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
+						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" onload="getOrganTree(this);"/>
 					</td>				
 				</c:otherwise>				
     		</c:choose>
@@ -447,6 +458,7 @@
 	chkObservation();
 	chkOtherSpecies();
 	chkOtherCondRegimen();
+	getOrganTree();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

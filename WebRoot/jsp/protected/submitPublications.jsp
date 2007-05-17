@@ -116,7 +116,7 @@
 					<td class="formLabel"><label for="field1">ZFIN number:</label>
 					</td>
 					<td class="formField">		
-						<input type=button value="Find ZFIN #" onClick="myRef = window.open('http://zfin.org/cgi-bin/webdriver?MIval=aa-pubselect2.apg&select_from=PUBLICATION','mywin',
+						<input type=button value="Find ZFIN Id" onClick="myRef = window.open('http://zfin.org/cgi-bin/webdriver?MIval=aa-pubselect2.apg&select_from=PUBLICATION','mywin',
 						'left=20,top=20,width=700,height=700,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()"></input>
 						<label for="field1">&nbsp;&nbsp;</label>
 						<html:text styleClass="formFieldUnSized" size="20" property="zfinPubId" />
