@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.32 2007-05-10 02:20:48 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.33 2007-05-17 19:11:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2007/05/10 02:20:48  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.31  2007/04/04 13:19:27  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -300,7 +303,7 @@ public class XenograftPopulateAction extends BaseAction
     }
 
     /**
-     * Repopulate the Strain dropdown with it's matching species
+     * Repopulate the dropdown with it's matching species
      * 
      * @param mapping
      * @param form
@@ -309,7 +312,7 @@ public class XenograftPopulateAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward setStrainDropdown(ActionMapping mapping,
+    public ActionForward setStrainOrganDropdowns(ActionMapping mapping,
                                            ActionForm form,
                                            HttpServletRequest request,
                                            HttpServletResponse response) throws Exception
@@ -327,6 +330,10 @@ public class XenograftPopulateAction extends BaseAction
         String theDonorSpecies = species.getCommonName();
         log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
         request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, theDonorSpecies);
+        
+        // Must Reset both fields when new species is chosen or edited
+        xenograftForm.setOrganTissueCode(null);
+        xenograftForm.setOrgan(null);
         
         // Must Reset both fields when new species is chosen or edited
         xenograftForm.setDonorEthinicityStrain("");
