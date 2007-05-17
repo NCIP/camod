@@ -270,6 +270,9 @@ function unselectAll()
 					<input type="hidden" name="developmentalStageName" />
 					<td class="formField">					
 						<html:text styleClass="formFieldSized" disabled="true" property="developmentalStage" size="30"  />
+						<a href="javascript: clearField(document.forms[0].developmentalStage, document.forms[0].developmentalStageCode);">
+						<img border="0" align=middle src="/camod/images/clear.gif"></a>						
+						
 					</td>
 		</tr>
 	</c:if>	
