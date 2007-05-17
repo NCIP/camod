@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.52 2007-05-17 17:58:50 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.53 2007-05-17 19:10:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2007/05/17 17:58:50  pandyas
+ * Consolidated all the clear field scripts to reuse generically on all vocab tree screens where tree value in not a required field
+ *
  * Revision 1.51  2007/05/17 12:24:17  pandyas
  * Modified screen to display EVSTree vacabulary
  *
@@ -110,20 +113,14 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function getResults(control) {
 		getOptions( control );
-		getOrganTree( control );	
 		chkOtherSpecies();
 	}
 	function getOptions( control ) {
 		form = control.form;
-		form.action  = "XenograftPopulateAction.do?method=setStrainDropdown";
+		form.action  = "XenograftPopulateAction.do?method=setStrainOrganDropdowns";
 		form.submit();		
 	}
 	
-	function getOrganTree( control ) {
-		form = control.form;
-		form.action  = "XenograftPopulateAction.do?method=setOrganTree";
-		form.submit();		
-	}
 		
 	function chkOtherSpecies() {	
 		chkOther(document.forms[0].donorScientificName, document.forms[0].otherDonorScientificName);
@@ -461,7 +458,7 @@
 	chkObservation();
 	chkOtherSpecies();
 	chkOtherCondRegimen();
-	getOrganTree();
+	getResults();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
