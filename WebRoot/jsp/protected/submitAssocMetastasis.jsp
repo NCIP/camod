@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2007/05/17 12:24:17  pandyas
+ * Modified screen to display EVSTree vacabulary
+ *
  * Revision 1.29  2007/04/30 20:13:06  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -61,7 +64,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.30 2007-05-17 12:24:17 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.31 2007-05-17 18:43:57 pandyas Exp $
  *
  */   
 %>
@@ -212,25 +215,24 @@
 						</td>												
 					</c:when>
 					<c:when test="${modelspeciescommonname == 'Zebrafish'}">
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-					<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />					
-				</td>	
-						<td class="formField">
-								<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>						
-							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
-								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
-							</html:select>					
-							<br>
-							-if Diagnosis is not listed, then please<br>select "Other" from the list and specify it below:
-						</td>
-					</tr>			
-						<tr>
-							<td class="formRequiredNotice" width="5">&nbsp;</td>
-							<td class="formLabel"><label for="field1">Other Diagnosis:</label></td>
+						<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+						</td>	
 							<td class="formField">
-								<html:text styleClass="formFieldSized" property="otherTumorClassification"  size="30" />
+									<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>						
+								<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
+									<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
+								</html:select>					
+								<br>
+								-if Diagnosis is not listed, then please<br>select "Other" from the list and specify it below:
 							</td>
-						</tr>						
+						</tr>			
+							<tr>
+								<td class="formRequiredNotice" width="5">&nbsp;</td>
+								<td class="formLabel"><label for="field1">Other Diagnosis:</label></td>
+								<td class="formField">
+									<html:text styleClass="formFieldSized" property="otherTumorClassification"  size="30" />
+								</td>
+							</tr>						
 					</c:when>							
 					<c:otherwise>
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
