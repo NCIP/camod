@@ -1,7 +1,10 @@
 /*
- * $Id: PublicationForm.java,v 1.9 2007-05-07 16:52:07 pandyas Exp $
+ * $Id: PublicationForm.java,v 1.10 2007-05-17 17:58:04 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/05/07 16:52:07  pandyas
+ * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
+ *
  * Revision 1.8  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -16,9 +19,12 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * 
- * $Id: PublicationForm.java,v 1.9 2007-05-07 16:52:07 pandyas Exp $
+ * $Id: PublicationForm.java,v 1.10 2007-05-17 17:58:04 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/05/07 16:52:07  pandyas
+ * Added code to save, edit and populate zfinPubId from Publication object for pulications from zfin.org
+ *
  * Revision 1.8  2006/04/17 19:09:19  pandyas
  * caMod 2.1 OM changes
  *
@@ -273,6 +279,8 @@ public class PublicationForm extends BaseForm implements PublicationData, Serial
         startPage = null;
         endPage = null;
         firstTimeReported = null;
+        jaxJNumber = null;
+        zfinPubId = null;        
     }
 
 	public String getZfinPubId() {
