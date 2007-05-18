@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.58 2007-05-18 14:41:13 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.59 2007-05-18 15:35:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.58  2007/05/18 14:41:13  pandyas
+ * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
+ *
  * Revision 1.57  2007/05/16 12:30:36  pandyas
  * Modified adv and simple search vocab tree section to populate depending on species selected
  *
@@ -401,7 +404,7 @@
 			
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>		
-			<td class="formLabel"><label for="field3">Select Agent Type:</label></td>
+			<td class="formLabel"><label for="field3">Select Carcinogenic Agent Type:</label></td>
 			<td class="formField">
 				<html:select styleClass="formFieldSized" size="1" property="carcinogenicIntervention" onchange="getOptions(this);">
 					<html:options name="<%= Dropdowns.CARCINOGENICAGENTSQUERYDROP %>"/>												
@@ -411,10 +414,10 @@
 
 		<tr>
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel"><label for="field3">Select Agent Name:</label></td>
+			<td class="formLabel"><label for="field3">Select Carcinogenic Agent Name:</label></td>
 			<td class="formField">
-				<html:select styleClass="formFieldSized" size="1" property="agentName">
-					<html:options name="<%= Dropdowns.ENVIRONMENTALFACTORNAMESDROP %>"/>												
+				<html:select styleClass="formFieldSized" size="1" property="agentName" >
+					<html:options name="<%= Dropdowns.ENVIRONMENTALFACTORNAMESDROP %>" />												
 				</html:select>
 			</td>
 		</tr>
