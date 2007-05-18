@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.10 2007-05-16 12:29:35 pandyas Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.11 2007-05-18 14:40:49 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/05/16 12:29:35  pandyas
+ * Modified adv and simple search vocab tree section to populate depending on species selected
+ *
  * Revision 1.9  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -102,14 +105,20 @@ public class SimpleSearchPopulateAction extends BaseAction {
     public ActionForward setSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	
+    	String theSearchSpecies = null;    	
         SearchForm theSearchForm = (SearchForm) form;
-        log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
         
-        // Set selected species to a constant to determine which organ tree displays 
-        // using common name because Rat has two species
-        Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
-        String theSearchSpecies = species.getCommonName();
-        log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);
+        // Check if null - if user goes from species to empty this correctly redirects to screen        
+        if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){
+            log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+            
+            // Set selected species to a constant to determine which organ tree displays 
+            // using common name because Rat has two species
+            Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
+            theSearchSpecies = species.getCommonName();
+            log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);        	
+        }
+
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
 
         return mapping.findForward("next");    	

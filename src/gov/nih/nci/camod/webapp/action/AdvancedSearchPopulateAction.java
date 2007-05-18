@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.13 2007-05-16 12:29:35 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.14 2007-05-18 14:40:49 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/05/16 12:29:35  pandyas
+ * Modified adv and simple search vocab tree section to populate depending on species selected
+ *
  * Revision 1.12  2007/03/28 18:22:28  pandyas
  * Modified for the following Test Track item:
  * #494 - Advanced search for Carcinogens for Jackson Lab data - removed code to populate drop downs now removed
@@ -155,14 +158,20 @@ public class AdvancedSearchPopulateAction extends BaseAction {
     public ActionForward setSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	
+    	String theSearchSpecies = null;    	
         SearchForm theSearchForm = (SearchForm) form;
-        log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
         
-        // Set selected species to a constant to determine which organ tree displays 
-        // using common name because Rat has two species
-        Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
-        String theSearchSpecies = species.getCommonName();
-        log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);
+        // Check if null - if user goes from species to empty this correctly redirects to screen
+        if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){        
+	        log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+	        
+	        // Set selected species to a constant to determine which organ tree displays 
+	        // using common name because Rat has two species
+	        Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
+	        theSearchSpecies = species.getCommonName();
+	        log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);
+        } 
+        
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
 
         return mapping.findForward("searchAdvanced");    	

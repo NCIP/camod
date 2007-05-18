@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.57 2007-05-16 12:30:36 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.58 2007-05-18 14:41:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.57  2007/05/16 12:30:36  pandyas
+ * Modified adv and simple search vocab tree section to populate depending on species selected
+ *
  * Revision 1.56  2007/04/25 15:04:02  pandyas
  * Agreed on one help icon for all title bars and one icon for light grey tool tip - removed all others
  *
@@ -256,7 +259,7 @@
 				<c:when test="${searchspeciescommonname == 'Mouse'}">
 					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
-					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>				
 					<html:hidden property="organTissueCode"/>
@@ -270,7 +273,7 @@
 				<c:when test="${searchspeciescommonname == 'Rat'}">	
 					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
@@ -284,7 +287,7 @@
 				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
 					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
@@ -297,18 +300,15 @@
 				</c:when>	
 				<c:otherwise>
 					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
-						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
-					<a href="javascript:showMouseTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', true)">
-						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>				
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
 						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
-	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1" />					
+	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1"/>					
 					</td>				
-				</c:otherwise>				
+				</c:otherwise>					
     		</c:choose>							
 		</tr>
 		
