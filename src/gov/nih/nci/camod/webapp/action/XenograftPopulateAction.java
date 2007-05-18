@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.33 2007-05-17 19:11:33 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.34 2007-05-18 15:33:49 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2007/05/17 19:11:33  pandyas
+ * Modified method name and code to cover strain and organ tree populate functions based on the species selected by the user
+ *
  * Revision 1.32  2007/05/10 02:20:48  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -67,7 +70,6 @@ import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.domain.Xenograft;
 import gov.nih.nci.camod.service.AnimalModelManager;
-import gov.nih.nci.camod.service.SpeciesManager;
 import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
 import gov.nih.nci.camod.service.impl.XenograftManagerSingleton;
 import gov.nih.nci.camod.webapp.form.XenograftForm;
@@ -303,7 +305,7 @@ public class XenograftPopulateAction extends BaseAction
     }
 
     /**
-     * Repopulate the dropdown with it's matching species
+     * Repopulate the strain dropdown and organ tree with it's matching species
      * 
      * @param mapping
      * @param form
@@ -312,23 +314,25 @@ public class XenograftPopulateAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward setStrainOrganDropdowns(ActionMapping mapping,
+    public ActionForward setStrainOrganValues(ActionMapping mapping,
                                            ActionForm form,
                                            HttpServletRequest request,
                                            HttpServletResponse response) throws Exception
     {
 
         XenograftForm xenograftForm = (XenograftForm) form;
-
-        //request.setAttribute("aXenograftID", request.getParameter("aXenograftID"));
-
+        String theDonorSpecies =null;
+        
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getDonorScientificName());
         
-        // Set Donor species to a constant to determine which organ tree displays 
-        // using common name because Rat has two species
-        Species species = SpeciesManagerSingleton.instance().getByName(xenograftForm.getDonorScientificName());
-        String theDonorSpecies = species.getCommonName();
-        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
+        // Check if null - if user goes from species to empty this correctly redirects to screen   
+        if(xenograftForm.getDonorScientificName() != null && xenograftForm.getDonorScientificName().length() > 0){
+	        // Set Donor species to a constant to determine which organ tree displays 
+	        // using common name because Rat has two species
+	        Species species = SpeciesManagerSingleton.instance().getByName(xenograftForm.getDonorScientificName());
+	        theDonorSpecies = species.getCommonName();
+	        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
+        }
         request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, theDonorSpecies);
         
         // Must Reset both fields when new species is chosen or edited

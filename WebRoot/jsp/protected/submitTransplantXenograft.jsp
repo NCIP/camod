@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.53 2007-05-17 19:10:45 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.54 2007-05-18 15:35:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2007/05/17 19:10:45  pandyas
+ * Modified for organ tree code - needs to populate select button correctly still
+ *
  * Revision 1.52  2007/05/17 17:58:50  pandyas
  * Consolidated all the clear field scripts to reuse generically on all vocab tree screens where tree value in not a required field
  *
@@ -117,10 +120,9 @@
 	}
 	function getOptions( control ) {
 		form = control.form;
-		form.action  = "XenograftPopulateAction.do?method=setStrainOrganDropdowns";
+		form.action  = "XenograftPopulateAction.do?method=setStrainOrganValues";
 		form.submit();		
-	}
-	
+	}	
 		
 	function chkOtherSpecies() {	
 		chkOther(document.forms[0].donorScientificName, document.forms[0].otherDonorScientificName);
@@ -272,12 +274,12 @@
 					</td>
 				</c:when>				
 				<c:otherwise>
-					<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
-					</td>
-					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
-					<html:hidden property="organTissueName"/>
-					<td class="formField">
-						<html:text styleClass="formFieldSized" disabled="false" property="organ" size="25"/>
+				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
+				</td>
+					<html:hidden property="organTissueCode"/>
+					<input type="hidden" name="organTissueName" />
+					<td class="formField">										
+						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
 					</td>				
 				</c:otherwise>				
     		</c:choose>
