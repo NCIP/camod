@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.47 2007-05-10 16:06:58 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.48 2007-05-21 17:37:35 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.47  2007/05/10 16:06:58  pandyas
+ *  Added log statement to debug publicationCollection on dev server
+ *
  *  Revision 1.46  2007/05/08 17:12:57  pandyas
  *  need to debug error on dev server - not on local instance
  *
@@ -145,7 +148,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 		System.out
 				.println("<AnimalModelTreePopulateAction populate> Entering... ");
 		String speciesName = (String) request.getSession().getAttribute(Constants.AMMODELSPECIESCOMMONNAME);
-		log.info("speciesName: " + speciesName);
+		log.debug("speciesName: " + speciesName);
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(
@@ -166,13 +169,13 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 		} // end of if
 
 		try {
-            log.info("Inside try: " );		    
+            log.debug("Inside try: " );		    
 			AnimalModel animalModel = animalModelManager.get(modelID);
 
 			// Retrieve a list of all publications assoicated with this Animal
 			// model
 			Set publicationSet = animalModel.getPublicationCollection();
-            log.info("publicationSet: " + publicationSet.size());
+            log.debug("publicationSet: " + publicationSet.size());
 			Iterator it = publicationSet.iterator();
 			List<Publication> pubList = new ArrayList<Publication>();
 
@@ -184,7 +187,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// Print the list of GeneDelivery viralVectors for the Gene Delivery
 			// (Cardiogenic Intervention) Section
 			Set geneDeliverySet = animalModel.getGeneDeliveryCollection();
-            log.info("geneDeliverySet: " + geneDeliverySet.size());
+            log.debug("geneDeliverySet: " + geneDeliverySet.size());
 			it = geneDeliverySet.iterator();
 			List<GeneDelivery> geneList = new ArrayList<GeneDelivery>();
 
@@ -196,7 +199,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// Retrieve a list of all cell lines assoicated with this Animal
 			// model
 			Set cellLineSet = animalModel.getCellLineCollection();
-            log.info("cellLineSet: " + cellLineSet.size());
+            log.debug("cellLineSet: " + cellLineSet.size());
 			it = cellLineSet.iterator();
 			List<CellLine> cellList = new ArrayList<CellLine>();
 
@@ -209,7 +212,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// model
 			Set transientInterferenceSet = animalModel
 					.getTransientInterferenceCollection();
-            log.info("transientInterferenceSet: " + transientInterferenceSet.size());
+            log.debug("transientInterferenceSet: " + transientInterferenceSet.size());
 			it = transientInterferenceSet.iterator();
 			List<TransientInterference> morpholinoList = new ArrayList<TransientInterference>();
 			List<TransientInterference> sirnaList = new ArrayList<TransientInterference>();
@@ -231,7 +234,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// Retrieve a list of all availablty entries assoicated with this
 			// Animal model
 			Set availabilitySet = animalModel.getAnimalAvailabilityCollection();
-            log.info("availabilitySet: " + availabilitySet.size());
+            log.debug("availabilitySet: " + availabilitySet.size());
 			it = availabilitySet.iterator();
 			List<AnimalAvailability> investigatorList = new ArrayList<AnimalAvailability>();
 			List<AnimalAvailability> jacksonLabList = new ArrayList<AnimalAvailability>();
@@ -281,7 +284,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// Retrive the list of all Xenograft transplants assoicated with
 			// this Animal Model
 			Set xenograftSet = animalModel.getXenograftCollection();
-            log.info("xenograftSet: " + xenograftSet.size());
+            log.debug("xenograftSet: " + xenograftSet.size());
 			it = xenograftSet.iterator();
 			List<Xenograft> xenoList = new ArrayList<Xenograft>();
 
@@ -293,7 +296,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// Retrieve a list of all Histopathology entries associated with
 			// this Animal model
 			Set histopathologySet = animalModel.getHistopathologyCollection();
-            log.info("histopathologySet: " + histopathologySet.size());
+            log.debug("histopathologySet: " + histopathologySet.size());
 			it = histopathologySet.iterator();
 			List<Histopathology> histopathList = new ArrayList<Histopathology>();
 			// The associatedMetatasisList and clinMarkerList are populated in
@@ -310,7 +313,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// AnimalModel
 			Set spontaneousMutationSet = animalModel
 					.getSpontaneousMutationCollection();
-            log.info("spontaneousMutationSet: " + spontaneousMutationSet.size());
+            log.debug("spontaneousMutationSet: " + spontaneousMutationSet.size());
 			it = spontaneousMutationSet.iterator();
 			List<SpontaneousMutation> mutationList = new ArrayList<SpontaneousMutation>();
 
@@ -322,7 +325,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 
 			// Retrieve the list all EngineeredGenes assoc with this AnimalModel
 			Set engineeredGeneSet = animalModel.getEngineeredGeneCollection();
-            log.info("engineeredGeneSet: " + engineeredGeneSet.size());
+            log.debug("engineeredGeneSet: " + engineeredGeneSet.size());
 			it = engineeredGeneSet.iterator();
 
 			List<InducedMutation> inducedList = new ArrayList<InducedMutation>();
@@ -359,12 +362,12 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 
 			// Retrieve List of Images in Images Category
 			Set imageCollection = animalModel.getImageCollection();
-            log.info("imageCollection: " + imageCollection.size());
+            log.debug("imageCollection: " + imageCollection.size());
 
 			// Print the list of Therapies for the Therapy
 			// Interventions Section
 			Set tySet = animalModel.getTherapyCollection();
-            log.info("tySet: " + tySet.size());
+            log.debug("tySet: " + tySet.size());
 			it = tySet.iterator();
 			List<Therapy> therapyList = new ArrayList<Therapy>();
 
@@ -387,7 +390,7 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			// Print the list of EnvironmentalFactors for the Cardiogenic
 			// Exposure Section
 			Set ceSet = animalModel.getCarcinogenExposureCollection();
-            log.info("ceSet: " + ceSet.size());
+            log.debug("ceSet: " + ceSet.size());
 			it = ceSet.iterator();
 
 			List<CarcinogenExposure> surgeryList = new ArrayList<CarcinogenExposure>();
