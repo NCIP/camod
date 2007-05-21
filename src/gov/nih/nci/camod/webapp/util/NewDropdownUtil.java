@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.49 2007-03-28 18:03:09 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.50 2007-05-21 17:37:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2007/03/28 18:03:09  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.48  2006/11/09 17:15:56  pandyas
  * Commented out System.out.println
  *
@@ -146,13 +151,8 @@ public class NewDropdownUtil
 
         List theReturnList = null;
 
-        // Grab them for the first time
-        if (inDropdownKey.equals(Constants.Dropdowns.SPECIESDROP))
-        {
-            theReturnList = getSpeciesList(inRequest, inFilter);
-        }
         //modified for species from DB
-        else if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
+        if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
         {
             theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
         }
@@ -222,6 +222,11 @@ public class NewDropdownUtil
         {
             theReturnList = getPrincipalInvestigatorList(inRequest, inFilter);
         }
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.APPROVEDSPECIESDROP))
+        {
+            theReturnList = getApprovedSpeciesList(inRequest, inFilter);
+        }        
 
         else if (inDropdownKey.equals(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP))
         {
@@ -352,20 +357,20 @@ public class NewDropdownUtil
     }
 
     /**
-     * Returns a list of Species and Strains that are edited-approved (3 currently)
+     * Returns a list of Species that are edited-approved (4 currently)
      * Used for search screens
      * 
      * @return speciesNames
      * @throws Exception
      */
-    protected static List getSpeciesList(HttpServletRequest inRequest,
+    protected static List getApprovedSpeciesList(HttpServletRequest inRequest,
                                          String inAddBlank) throws Exception
     {
-        log.trace("Entering NewDropdownUtil.getSpeciesList");
+        log.info("Entering NewDropdownUtil.getApprovedSpeciesList");
 
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
-        List theSpeciesList = QueryManagerSingleton.instance().getApprovedSpecies(inRequest);
+        List theSpeciesList = QueryManagerSingleton.instance().getApprovedSpecies();
         List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();
 
         if (theSpeciesList != null)
@@ -384,8 +389,10 @@ public class NewDropdownUtil
                 }
             }
         }
+        // Sort the list in 'abc' order
+        Collections.sort(theReturnList);
 
-        log.trace("Exiting NewDropdownUtil.getQueryOnlySpeciesList");
+        log.info("Exiting NewDropdownUtil.getApprovedSpeciesList");
         return theReturnList;
     }
 

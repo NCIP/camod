@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.59 2007-05-18 15:35:59 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.60 2007-05-21 17:36:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.59  2007/05/18 15:35:59  pandyas
+ * Modifed label for Agent Type and Agent Name as per Ulli
+ *
  * Revision 1.58  2007/05/18 14:41:13  pandyas
  * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
  *
@@ -250,7 +253,7 @@
 			<td class="formLabel"><label for="field3">Species:</label></td>
 			<td class="formField">				
 				<html:select styleClass="formFieldSized" size="1" property="species" onchange="getOrganTree(this);">
-					<html:optionsCollection name="<%= Dropdowns.NEWSPECIESDROP %>" />										
+					<html:optionsCollection name="<%= Dropdowns.APPROVEDSPECIESDROP %>" />										
 				</html:select>				
 			</td>
 		</tr>

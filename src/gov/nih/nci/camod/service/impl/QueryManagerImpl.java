@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.67 2007-03-28 18:45:47 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.68 2007-05-21 17:33:01 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.67  2007/03/28 18:45:47  pandyas
+ * Modifed debug statements - no longer need to see them all print to the output
+ *
  * Revision 1.66  2007/03/28 18:43:37  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -242,6 +245,7 @@ import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.Publication;
+import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.util.DrugScreenResult;
 import gov.nih.nci.camod.webapp.form.SearchData;
 import gov.nih.nci.common.persistence.Search;
@@ -725,21 +729,51 @@ public class QueryManagerImpl extends BaseManager
         return theList;
     }
 
-    public List getApprovedSpecies(HttpServletRequest inRequest) throws PersistenceException
+    public List getApprovedSpecies() throws PersistenceException
     {
 
-        log.debug("Entering QueryManagerImpl.getSpeciesObject");
+        log.info("Entering QueryManagerImpl.getApprovedSpecies");
+        ResultSet theResultSet = null;
+        List<Species> theSpeciesList = new ArrayList<Species>();
+        try
+        {
+            // Format the query - SQL allows more complex query
+			String theSQLQuery = "SELECT distinct sp.scientific_name "
+				+ "FROM species sp, abs_cancer_model am, strain st "
+				+ "WHERE am.strain_id = st.strain_id "
+				+ "  AND st.species_id = sp.species_id "
+				+ " AND am.state = 'Edited-approved' ORDER BY sp.scientific_name asc ";
+			
+            Object[] theParams = new Object[0];
+            theResultSet = Search.query(theSQLQuery, theParams);
 
-        // Format the query
-        HQLParameter[] theParams = new HQLParameter[0];
-        String theHQLQuery = "from Species where scientificName is not null order by scientificName asc";
+            while (theResultSet.next())
+            {
+            	// Need to return the species object instead of the names for DROPDOWN_OPTION code
+            	Species theSpecies = SpeciesManagerSingleton.instance().getByName(theResultSet.getString(1));
+            	theSpeciesList.add(theSpecies);
+            }
 
-        List theList = Search.query(theHQLQuery, theParams);
-
-        log.debug("Found matching items: " + theList.size());
-
-        log.debug("Exiting QueryManagerImpl.getQueryOnlySpecies");
-        return theList;
+            log.info("Exiting QueryManagerImpl.getApprovedSpecies");
+        }
+        catch (Exception e)
+        {
+            log.error("Exception in getApprovedSpecies", e);
+            throw new PersistenceException("Exception in getApprovedSpecies: " + e);
+        }
+        finally
+        {
+            if (theResultSet != null)
+            {
+                try
+                {
+                    theResultSet.close();
+                }
+                catch (Exception e)
+                {}
+            }
+        }
+        return theSpeciesList;
     }
 
 
@@ -816,9 +850,9 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Return the list of species associated with animal models
+     * Return the list of PIs associated with animal models
      * 
-     * @return a sorted list of unique species
+     * @return a sorted list of unique PIs
      * 
      * @throws PersistenceException
      */

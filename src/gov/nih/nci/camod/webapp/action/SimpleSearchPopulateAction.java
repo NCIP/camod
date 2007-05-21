@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.11 2007-05-18 14:40:49 pandyas Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.12 2007-05-21 17:33:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/05/18 14:40:49  pandyas
+ * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
+ *
  * Revision 1.10  2007/05/16 12:29:35  pandyas
  * Modified adv and simple search vocab tree section to populate depending on species selected
  *
@@ -97,8 +100,9 @@ public class SimpleSearchPopulateAction extends BaseAction {
             request.getSession().setAttribute( Constants.ASAVEDQUERYID, null );
         }  
         
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.APPROVEDSPECIESDROP,
                 Constants.Dropdowns.ADD_BLANK_OPTION);
+    
 
         return mapping.findForward("next");
     }

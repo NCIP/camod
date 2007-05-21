@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.14 2007-05-18 14:40:49 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.15 2007-05-21 17:33:45 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/05/18 14:40:49  pandyas
+ * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
+ *
  * Revision 1.13  2007/05/16 12:29:35  pandyas
  * Modified adv and simple search vocab tree section to populate depending on species selected
  *
@@ -28,17 +31,13 @@
 
 package gov.nih.nci.camod.webapp.action;
 
-import java.util.List;
 import java.util.Set;
-
 import gov.nih.nci.camod.domain.SavedQuery;
 import gov.nih.nci.camod.domain.SavedQueryAttribute;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.service.SavedQueryManager;
 import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
-import gov.nih.nci.camod.webapp.form.ModelCharacteristicsForm;
 import gov.nih.nci.camod.webapp.form.SearchForm;
-import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import gov.nih.nci.camod.Constants;
 
@@ -104,7 +103,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
                 Constants.Dropdowns.ADD_BLANK);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.NEWSPECIESDROP,
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.APPROVEDSPECIESDROP,
                 Constants.Dropdowns.ADD_BLANK_OPTION);
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.INDUCEDMUTATIONAGENTQUERYDROP,

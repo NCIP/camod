@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.101 2007-05-16 12:27:40 pandyas Exp $
+ * $Id: Constants.java,v 1.102 2007-05-21 17:32:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.101  2007/05/16 12:27:40  pandyas
+ * Modified adv and simple search vocab tree section to populate depending on species selected
+ *
  * Revision 1.100  2007/05/10 02:20:11  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  * Added constant for donor species common name
@@ -377,12 +380,6 @@ public class Constants {
         // Six zeros is entered for all organ and disease entries without conceptCodes - text entry, ect.
         public static final String CONCEPTCODEZEROS = "000000";        
         
-        /* 3 species from config - still used */
-        public static final String NEWSPECIESDROP = "ModelSpecies.txt";        
-
-        /* 3 species from db for search screens - not implemented yet */
-        public static final String SPECIESDROP = "speciesdrop.db";
-        
         // All species from config - may not be used anymore
         public static final String HOSTSPECIESDROP = "HostSpecies.txt";        
 
@@ -450,6 +447,8 @@ public class Constants {
 
         // Specific to a single screen
         public static final String PRINCIPALINVESTIGATORDROP = "principalinvestigatordrop.db";
+        
+        public static final String APPROVEDSPECIESDROP = "approvedspeciesdrop.db";        
         
         public static final String CHEMICALDRUGDROP = "chemdrugdrop.db";
 
