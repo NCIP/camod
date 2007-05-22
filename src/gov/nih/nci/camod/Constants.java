@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.102 2007-05-21 17:32:06 pandyas Exp $
+ * $Id: Constants.java,v 1.103 2007-05-22 12:51:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.102  2007/05/21 17:32:06  pandyas
+ * Modified simple and adv search species drop down to pull from DB (approved model species only)
+ *
  * Revision 1.101  2007/05/16 12:27:40  pandyas
  * Modified adv and simple search vocab tree section to populate depending on species selected
  *
@@ -380,9 +383,6 @@ public class Constants {
         // Six zeros is entered for all organ and disease entries without conceptCodes - text entry, ect.
         public static final String CONCEPTCODEZEROS = "000000";        
         
-        // All species from config - may not be used anymore
-        public static final String HOSTSPECIESDROP = "HostSpecies.txt";        
-
         /* all species from DB -  used for various Screens */
         public static final String SPECIESQUERYDROP = "speciesquerydrop.db";        
         
@@ -535,7 +535,11 @@ public class Constants {
         public static final String USERSFORROLEDROP = "usersforrole.db";
 
         // Used for role assignment
-        public static final String ROLESDROP = "roles.db";        
+        public static final String ROLESDROP = "roles.db"; 
+        
+        public static final String 	ZEBRAFISHORGANLISTSDROP = "ZebrafishOrganList.txt";
+
+        public static final String DEVELOPMENTALSTAGETHERAPYDROP = "DevelopmentalStageTherapy.txt";
       
     }
 
