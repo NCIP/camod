@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.18 2007-04-20 17:51:14 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.19 2007-05-23 16:57:34 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/04/20 17:51:14  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.17  2007/04/18 19:20:29  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -65,13 +68,18 @@ public class ImagePopulateAction extends BaseAction {
                 
 				if( theImage.getStainingMethod() != null )
                 {
-                    // since we are always querying from concept code (save and edit),
-                    // simply display EVSPreferredDescription
-                    imageForm.setStainingMethod(theImage.getStainingMethod().getEVSPreferredDescription());
-                    log.info("setStainingMethod= " + theImage.getStainingMethod().getEVSPreferredDescription());
-
-                    imageForm.setStainingMethodCode(theImage.getStainingMethod().getConceptCode());
-                    log.info("setStainingMethodCode= " + theImage.getStainingMethod().getConceptCode());                    
+					// Older models have uncontrolled vocab with concept code = null
+					if(theImage.getStainingMethod().getNameUnctrlVocab() != null){
+	                    imageForm.setStainingMethod(theImage.getStainingMethod().getNameUnctrlVocab());                    
+					} else {
+	                    // since we are always querying from concept code (save and edit),
+	                    // simply display EVSPreferredDescription
+	                    imageForm.setStainingMethod(theImage.getStainingMethod().getEVSPreferredDescription());
+	                    log.info("setStainingMethod= " + theImage.getStainingMethod().getEVSPreferredDescription());
+	
+	                    imageForm.setStainingMethodCode(theImage.getStainingMethod().getConceptCode());
+	                    log.info("setStainingMethodCode= " + theImage.getStainingMethod().getConceptCode()); 
+					}
                 }
                 
                 imageForm.setThumbUrl(theImage.getThumbUrl());
