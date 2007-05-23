@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2007/05/17 12:24:17  pandyas
+ * Modified screen to display EVSTree vacabulary
+ *
  * Revision 1.30  2007/04/30 20:22:05  pandyas
  * Moved title bar inside c:when to eliminate tree help icon for text entry only situation
  *
@@ -61,7 +64,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.31 2007-05-17 12:24:17 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.32 2007-05-23 16:58:02 pandyas Exp $
  *
  */   
 %>
@@ -193,7 +196,7 @@
 	 		<c:choose>			
 				<c:when test="${modelspeciescommonname == 'Mouse'}">
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />					
+							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showMouseDiagnosisTree('histopathologyForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
 					</td>
@@ -205,7 +208,7 @@
 				</c:when>
 				<c:when test="${modelspeciescommonname == 'Rat'}">
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
-						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />					
+						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showRatDiagnosisTree('histopathologyForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
 					</td>
