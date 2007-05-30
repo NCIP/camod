@@ -1,6 +1,7 @@
 function FileData_Pairs(x)
 {
 x.t("camod.","camod");
+x.t("from:","http://ncicb.nci.nih.gov/download/downloadcaarray.jsp");
 x.t("camod","user");
 x.t("camod","viewers.");
 x.t("camod","viewing");
@@ -43,7 +44,7 @@ x.t("x.x","user's");
 x.t("x.x","online");
 x.t("clicked","(model)");
 x.t("provides","instructions");
-x.t("downloadable","http://ncicb.nci.nih.gov/download/downloadcaarray.jsp");
+x.t("downloadable","from:");
 x.t("to:","http://caarray.nci.nih.gov/");
 x.t("array","list.");
 x.t("steps:","click");

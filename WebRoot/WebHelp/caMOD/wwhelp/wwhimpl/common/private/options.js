@@ -3,11 +3,11 @@
 
 function  WWHCommonSettings_Object()
 {
-  this.mTitle = "caMOD 2.2 OH";
+  this.mTitle = "caMOD Online Help";
 
   this.mbCookies            = true;
   this.mCookiesDaysToExpire = 30;
-  this.mCookiesID           = "BE465CC56FF087D2";
+  this.mCookiesID           = "9078803CAC2E409";
 
   this.mAccessible = "false";
 

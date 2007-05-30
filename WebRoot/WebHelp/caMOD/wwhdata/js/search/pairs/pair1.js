@@ -5,8 +5,8 @@ x.t("camod","getting");
 x.t("camod","viewing");
 x.t("camod","section");
 x.t("camod","submit");
-x.t("camod","2.2");
 x.t("camod","using");
+x.t("camod","2.3");
 x.t("user","account");
 x.t("interface","navigation");
 x.t("introduction","camod");
@@ -35,7 +35,7 @@ x.t("topics","section");
 x.t("navigation","camod");
 x.t("navigation","global");
 x.t("used","camod");
-x.t("2.2","creating");
 x.t("using","online");
+x.t("2.3","creating");
 x.t("operations","used");
 }
