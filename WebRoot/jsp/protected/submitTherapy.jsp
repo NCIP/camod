@@ -261,7 +261,7 @@ function unselectAll()
 			<td class="formRequiredNotice" width="10">&nbsp;</td>
 	
 					<td class="formLabel"><label for="field1">Developmental Stage:</label>&nbsp;
-						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
+						<camod:cshelp topic="data_tree_help" key="DEVELOPMENTALSTAGE.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />
 					<br>							
 					<a href="javascript:showMouseTissueTree('therapyForm', 'developmentalStageCode', 'developmentalStageName', 'developmentalStage', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
