@@ -37,10 +37,11 @@
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="center">
-		<tr>
-			<html:errors/>
-			<td class="formMessage" colspan="3">* indicates a required field</td>
-		</tr>
+	<tr>
+		<html:errors/>
+		<td class="formMessage" colspan="3">* indicates a required field</td>
+
+	</tr>
 		
 		<tr>
 			<td class="formTitle" height="20" colspan="3">Radiation

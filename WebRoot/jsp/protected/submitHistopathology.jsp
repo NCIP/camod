@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2007/05/23 16:58:02  pandyas
+ * Fixed ToolTip image to match correct one
+ *
  * Revision 1.31  2007/05/17 12:24:17  pandyas
  * Modified screen to display EVSTree vacabulary
  *
@@ -64,7 +67,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.32 2007-05-23 16:58:02 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.33 2007-06-04 11:59:53 pandyas Exp $
  *
  */   
 %>
@@ -146,7 +149,8 @@
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
 					<a href="javascript:showMouseTissueTree('histopathologyForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
-					</td>				
+					</td>
+								
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
@@ -159,6 +163,7 @@
 					<a href="javascript:showRatTissueTree('histopathologyForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>
+		
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
@@ -168,7 +173,7 @@
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
 					<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('histopathologyForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishAnatomyTree('histopathologyForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
@@ -212,6 +217,7 @@
 						<a href="javascript:showRatDiagnosisTree('histopathologyForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
 					</td>
+				
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">

@@ -67,12 +67,9 @@ var cal1 = new CalendarPopup();
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
 		<tr>
-		
-			<html:errors/>		
-			
-			<td class="formMessage" colspan="3">
-				* indicates a required field
-			</td>
+			<html:errors/>
+			<td class="formMessage" colspan="3">* indicates a required field</td>
+	
 		</tr>
 
 		<tr>
