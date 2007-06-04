@@ -1631,12 +1631,12 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="firstTimeReported" depends="required">
-				<arg0 key="PublicationForm.firstTimeReported" />
-			</field>
 			<field property="name" depends="required">
 				<arg0 key="PublicationForm.name" />
 			</field>
+			<field property="firstTimeReported" depends="required">
+				<arg0 key="PublicationForm.firstTimeReported" />
+			</field>			
 			<field property="pmid" depends="validwhen, integer">
 				<arg0 key="PublicationForm.pmid" />
 				<var>
@@ -1868,22 +1868,64 @@
 			<field property="organTissueCode" depends="required">
 				<arg0 key="HistopathologyForm.organTissueCode" />
 			</field>
-			<field property="organ" depends="required">
+			<field property="organ"
+				depends="validwhen,maxlength">
 				<arg0 key="HistopathologyForm.organ" />
-			</field>			
+		        <var>
+		          <var-name>test</var-name>
+					<var-value>
+						((organTissueCode == null) and (organ == null))
+					</var-value>		          
+					<!-- var-value>
+						((organTissueCode != null) or ((organTissueCode ==
+						null) and (*this* != null)))
+					</var-value -->
+		        </var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>		
 			<field property="diagnosisCode" depends="required">
 				<arg0 key="HistopathologyForm.diagnosisCode" />
 			</field>
-			<field property="tumorClassification" depends="required">
+			<field property="tumorClassification"
+				depends="validwhen,maxlength">
 				<arg0 key="HistopathologyForm.tumorClassification" />
-			</field>
+		        <var>
+		          <var-name>test</var-name>
+		          <var-value>((diagnosisCode == null) or (tumorClassification == null))</var-value>
+					<!-- var-value>
+						((diagnosisCode != null) or ((diagnosisCode ==
+						null) and (*this* != null)))
+					</var-value -->		          
+		        </var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>								
+			<!--  field property="tumorClassification" depends="required,maxlength">
+				<arg0 key="HistopathologyForm.tumorClassification" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>				
+			</field -->
 			<field property="otherTumorClassification"
 				depends="validwhen, maxlength">
 				<arg0 key="HistopathologyForm.otherTumorClassification" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((tumorClassification != 'Other') or (*this* != null))
+						((tumorClassification != 'Other') or 
+						(*this* != null))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -1978,13 +2020,10 @@
 			<field property="organTissueCode" depends="required">
 				<arg0 key="HistopathologyForm.organTissueCode" />
 			</field>
-			<field property="organ" depends="required">
-				<arg0 key="HistopathologyForm.organ" />
-			</field>			
 			<field property="diagnosisCode" depends="required">
 				<arg0 key="HistopathologyForm.diagnosisCode" />
 			</field>
-			<field property="tumorClassification" depends="required">
+			<!--field property="tumorClassification" depends="required">
 				<arg0 key="HistopathologyForm.tumorClassification" />
 			</field>
 			<field property="otherTumorClassification"
@@ -1993,7 +2032,7 @@
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((tumorClassification != 'Other') or (*this* != null))
+						((name != 'Other') or (*this* != null))
 					</var-value>
 				</var>
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -2002,7 +2041,7 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>			
+			</field -->			
 			<field property="ageOfOnset" depends="maxlength">
 				<arg0 key="AssociatedMetastasisForm.ageOfOnset" />
 				<arg1 name="maxlength" key="${var:maxlength}"
