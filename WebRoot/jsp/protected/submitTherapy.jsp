@@ -64,14 +64,10 @@ function unselectAll()
 	<tr><td valign="top">
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%" height="100%">
-	
-    <tr>
-	    <td colspan="3">
-	        <html:errors/>
-	    </td>
-	</tr>
 	<tr>
+		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
+
 	</tr>
 
 	<tr>
