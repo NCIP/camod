@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2007/05/17 18:43:57  pandyas
+ * Made to copy histo submission code for Zebrafish
+ *
  * Revision 1.30  2007/05/17 12:24:17  pandyas
  * Modified screen to display EVSTree vacabulary
  *
@@ -64,7 +67,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.31 2007-05-17 18:43:57 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.32 2007-06-04 15:32:49 pandyas Exp $
  *
  */   
 %>
@@ -165,7 +168,7 @@
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
 				<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/iconHelp.gif" text="Tool Tip Test 1" />								
-					<a href="javascript:showRatTissueTree('associatedMetastasisForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishAnatomyTree('associatedMetastasisForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>

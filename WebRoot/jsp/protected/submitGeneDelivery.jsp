@@ -136,7 +136,7 @@
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
 				<td class="formLabel"><label for="field1">Injection Site: </label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishAnatomyTree('geneDeliveryForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
