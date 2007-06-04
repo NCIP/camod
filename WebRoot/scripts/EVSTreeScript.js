@@ -130,7 +130,62 @@
       paramsHT.windowTitle = 'Rat Diagnosis Select';
 
       showTree(paramsHT);
-    }             
+    }  
+    
+    function showZebrafishTissueTree(form, inConceptCode, inConceptName, inDisplayName, onlyLeaf, fieldsToBlank)	
+    {      
+      var paramsHT = {};
+     
+      paramsHT.treeNameKey = 'ZebrafishTissue';
+      paramsHT.formName = form;
+      paramsHT.conceptCode = inConceptCode;
+      paramsHT.conceptName = inConceptName;
+      paramsHT.displayName = inDisplayName;        	
+      paramsHT.postMsg = false;
+      paramsHT.onlyLeaf = onlyLeaf;        
+      if (fieldsToBlank != undefined) paramsHT.fieldsToBlank = fieldsToBlank;
+
+      paramsHT.windowTitle = 'Zebrafish Tissue Select';
+
+      showTree(paramsHT);
+    }    
+    
+    function showZebrafishAnatomyTree(form, inConceptCode, inConceptName, inDisplayName, onlyLeaf, fieldsToBlank)	
+    {      
+      var paramsHT = {};
+     
+      paramsHT.treeNameKey = 'ZebrafishAnatomy';
+      paramsHT.formName = form;
+      paramsHT.conceptCode = inConceptCode;
+      paramsHT.conceptName = inConceptName;
+      paramsHT.displayName = inDisplayName;        	
+      paramsHT.postMsg = false;
+      paramsHT.onlyLeaf = onlyLeaf;        
+      if (fieldsToBlank != undefined) paramsHT.fieldsToBlank = fieldsToBlank;
+
+      paramsHT.windowTitle = 'Zebrafish Anatomy Select';
+
+      showTree(paramsHT);
+    }  
+    
+    function showZebrafishStageTree(form, inConceptCode, inConceptName, inDisplayName, onlyLeaf, fieldsToBlank)	
+    {      
+      var paramsHT = {};
+     
+      paramsHT.treeNameKey = 'ZebrafishStages';
+      paramsHT.formName = form;
+      paramsHT.conceptCode = inConceptCode;
+      paramsHT.conceptName = inConceptName;
+      paramsHT.displayName = inDisplayName;        	
+      paramsHT.postMsg = false;
+      paramsHT.onlyLeaf = onlyLeaf;        
+      if (fieldsToBlank != undefined) paramsHT.fieldsToBlank = fieldsToBlank;
+
+      paramsHT.windowTitle = 'Zebrafish Stage Select';
+
+      showTree(paramsHT);
+    } 
+                      
 
     // new showTree function (dynamically builds name=value parameter string for url from hashtable)
     function showTree(paramsHT) 
