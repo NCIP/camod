@@ -1875,16 +1875,16 @@
 					</var-value>		          
 		        </var>	
 			</field>
-			<field property="organ"
+			<!-- field property="organ"
 				depends="validwhen">
 				<arg0 key="HistopathologyForm.organ" />
 		        <var>
 		          <var-name>test</var-name>
 					<var-value>
-						((organTissueCode != null) or (organ != null))
+						((organTissueCode == null) or (organ == null))
 					</var-value>		          
 		        </var>	
-			</field>			
+			</field -->			
 			<field property="diagnosisCode"
 				depends="validwhen">
 				<arg0 key="HistopathologyForm.diagnosisCode" />
@@ -1898,7 +1898,7 @@
 				<arg0 key="HistopathologyForm.tumorClassification" />
 		        <var>
 		          <var-name>test</var-name>
-		          <var-value>((diagnosisCode != null) or (tumorClassification != null))</var-value>
+		          <var-value>((diagnosisCode == null) and (tumorClassification != null))</var-value>
 		        </var>
 			</field>	
 			<field property="otherTumorClassification"
