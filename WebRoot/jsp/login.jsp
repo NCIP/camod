@@ -153,7 +153,7 @@
                                                   <tr>
 													<td> &nbsp; 
 														<input type="submit" value="User Guide" onClick="myRef = window.open('WebHelp/caMOD/UserGuide.pdf','mywin',
-															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
+															'left=20,top=20,width=900,height=700,status=1,scrollbars=1,toolbar=1,resizable=1');myRef.focus()">
 														</input>&nbsp;
 														<input type="submit" value="Help" onClick="myRef = window.open('WebHelp/caMOD/index.html','mywin',
 															'left=20,top=20,width=700,height=500,status=1,scrollbars=1,toolbar=1,resizable=0');myRef.focus()">
