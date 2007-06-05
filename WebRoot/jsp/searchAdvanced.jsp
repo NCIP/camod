@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.60 2007-05-21 17:36:13 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.61 2007-06-05 19:26:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.60  2007/05/21 17:36:13  pandyas
+ * Modified simple and adv search species drop down to pull from DB (approved model species only)
+ *
  * Revision 1.59  2007/05/18 15:35:59  pandyas
  * Modifed label for Agent Type and Agent Name as per Ulli
  *
@@ -293,7 +296,7 @@
 				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
 					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
+					<a href="javascript:showZebrafishTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>

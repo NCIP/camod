@@ -106,7 +106,7 @@
 				<c:when test="${modelspeciescommonname == 'Zebrafish'}">
 				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
-					<a href="javascript:showZebrafishAnatomyTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishTissueTree('associatedExpressionForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>

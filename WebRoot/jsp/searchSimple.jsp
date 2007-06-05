@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.45 2007-05-21 17:36:14 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.46 2007-06-05 19:26:34 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.45  2007/05/21 17:36:14  pandyas
+ * Modified simple and adv search species drop down to pull from DB (approved model species only)
+ *
  * Revision 1.44  2007/05/18 14:41:13  pandyas
  * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
  *
@@ -229,7 +232,7 @@
 				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
 					<td class="formLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 						<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
+					<a href="javascript:showZebrafishTissueTree('searchForm', 'organTissueCode', 'organTissueName', 'organ', false)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 					</td>
 					<html:hidden property="organTissueCode"/>
