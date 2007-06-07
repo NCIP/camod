@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.4 2006-10-11 15:47:55 pandyas Exp $
+ * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.5 2007-06-07 18:33:16 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/11 15:47:55  pandyas
+ * changes while testing 2.1.1
+ *
  * Revision 1.3  2006/04/27 15:08:43  pandyas
  * Modified while testing caMod 2.1
  *
@@ -99,7 +102,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 
         EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
         theForm.setName("TESTENGINEEREDGENE");
-        theForm.setMgiNumber("19191919");
         //set conditionedBy here and skipped description below
         theForm.setConditionedBy("Not Conditional");		
 		
@@ -112,6 +114,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToIgnore.add("locationOfIntegration");
         //Not on EngineeredTransgeneForm
         theParamsToIgnore.add("constructSequence");
+        theParamsToIgnore.add("mgiId");    
+        theParamsToIgnore.add("zfinId");    
+        theParamsToIgnore.add("rgdId");            
 		
         // Add parameters found on submit screen but not displayed on search screen  */
         List<String> theParamsToSkip = new ArrayList<String>();     
@@ -120,6 +125,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("constructSequence");
         theParamsToSkip.add("transgeneId");
         theParamsToSkip.add("title"); 
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");          
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -169,7 +177,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theWebForm.setParameter("isRandom", "yes");
 
         EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
-        theForm.setMgiNumber("19191919");
         //set conditionedBy here and skipped description below
         theForm.setConditionedBy("Not Conditional");        
         
@@ -187,6 +194,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("locationOfIntegration");
         // does not show on view page
         theParamsToSkip.add("constructSequence");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
         
         
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
@@ -258,7 +268,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theWebForm.setParameter("isRandom", "yes");
 
         EngineeredTransgeneForm theForm = new EngineeredTransgeneForm();
-        theForm.setMgiNumber("19191919");
         //set conditionedBy here and skipped description below
         theForm.setConditionedBy("Not Conditional");        
         
@@ -281,6 +290,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("otherScientificName");
         theParamsToSkip.add("polyASignal_otherSpecies");
         theParamsToSkip.add("constructSequence");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
         
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -313,7 +325,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
         GenomicSegmentForm theForm = new GenomicSegmentForm();
         theForm.setCloneDesignator("TESTCLONEDESIGNATOR");
-        theForm.setMgiNumber("19191919");
         theForm.setIsRandom("yes");
         
         List<String> theParamsToIgnore = new ArrayList<String>();
@@ -322,13 +333,19 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToIgnore.add("fileServerLocation");
         theParamsToIgnore.add("title");
         theParamsToIgnore.add("descriptionOfConstruct");
+        theParamsToIgnore.add("mgiId");    
+        theParamsToIgnore.add("zfinId");    
+        theParamsToIgnore.add("rgdId");         
         
         // Add parameters found on submit screen but not displayed on search screen  
         List<String> theParamsToSkip = new ArrayList<String>();     
         theParamsToSkip.add("description");
         theParamsToSkip.add("segmentId");
         theParamsToSkip.add("segmentName");         
-        theParamsToSkip.add("locationOfIntegration");		
+        theParamsToSkip.add("locationOfIntegration");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");          
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -380,7 +397,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theWebForm.setParameter("isRandom", "yes");
 		
         GenomicSegmentForm theForm = new GenomicSegmentForm();
-        theForm.setMgiNumber("19191919");
         theForm.setLocationOfIntegration("Random");
         
         List<String> theParamsToIgnore = new ArrayList<String>();
@@ -398,6 +414,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("segmentName");
         theParamsToSkip.add("comments");
         theParamsToSkip.add("constructSequence");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -429,7 +448,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theWebForm.setParameter("isRandom", "yes");
 		
         GenomicSegmentForm theForm = new GenomicSegmentForm();
-        theForm.setMgiNumber("19191919");
         theForm.setIsRandom("yes");
         
         List<String> theParamsToIgnore = new ArrayList<String>();
@@ -450,6 +468,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("comments");
         //model must have an image to test properly
         theParamsToSkip.add("constructSequence");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -487,7 +508,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 
 		TargetedModificationForm theForm = new TargetedModificationForm();
 		theForm.setName("TESTTARGETEDMODIFICATION");
-		theForm.setMgiNumber("19191919");
 		//set conditionedBy here and skip description below
 		theForm.setConditionedBy("Not Conditional");	
 		
@@ -497,12 +517,18 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToIgnore.add("fileServerLocation");
         theParamsToIgnore.add("title");
         theParamsToIgnore.add("descriptionOfConstruct");
+        theParamsToIgnore.add("mgiId");    
+        theParamsToIgnore.add("zfinId");    
+        theParamsToIgnore.add("rgdId");         
 		
 		// Add parameters found on submit screen but not displayed on search screen  
         List<String> theParamsToSkip = new ArrayList<String>(); 	
 		theParamsToSkip.add("description");
 		theParamsToSkip.add("modificationId");
         theParamsToSkip.add("constructSequence");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");          
 		
 		//other value set above so send in false here
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
@@ -558,7 +584,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("otherModificationType", "Testing otherModificationType");
 
 		TargetedModificationForm theForm = new TargetedModificationForm();
-		theForm.setMgiNumber("19191919");
 		//set conditionedBy here and skip description below
 		theForm.setConditionedBy("Not Conditional");	
 		
@@ -576,6 +601,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         // Fix as many of these fields to be tested
         theParamsToSkip.add("constructSequence");
         theParamsToSkip.add("otherModificationType");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
         
 		//other value set above so send in false here
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
@@ -612,7 +640,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theWebForm.setParameter("modificationType" ,new String[]{testArray[1],testArray[2]});
 
 		TargetedModificationForm theForm = new TargetedModificationForm();
-		theForm.setMgiNumber("19191919");
 		//set conditionedBy here and skip description below
 		theForm.setConditionedBy("Not Conditional");	
 		
@@ -629,6 +656,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theParamsToSkip.add("modificationId");
         // Fix so field is tested
         theParamsToSkip.add("constructSequence");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -659,18 +689,25 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		InducedMutationForm theForm = new InducedMutationForm();
 		theForm.setName("TESTINDUCEDMUTATION");
-		theForm.setMgiNumber("19191919");
 		theForm.setObservation("Test Observation");
 		theForm.setMethodOfObservation("Test Method of Observation");
 		// unless set Chemical, CAS# is not displayed on search screen
-		theForm.setType("Radiation");		
+		theForm.setType("Radiation");	
+        
+        List<String> theParamsToIgnore = new ArrayList<String>();
+        theParamsToIgnore.add("mgiId");    
+        theParamsToIgnore.add("zfinId");    
+        theParamsToIgnore.add("rgdId");           
 		
 		// Add parameters found on submit screen but not displayed on search screen  
         List<String> theParamsToSkip = new ArrayList<String>(); 		
 		theParamsToSkip.add("type");
 		theParamsToSkip.add("casNumber");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");          
 		
-		TestUtil.setRandomValues(theForm, theWebForm, true);
+		TestUtil.setRandomValues(theForm, theWebForm, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
@@ -709,7 +746,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
 		
 		InducedMutationForm theForm = new InducedMutationForm();
-		theForm.setMgiNumber("19191919");
 		theForm.setObservation("Test Observation");
 		theForm.setMethodOfObservation("Test Method of Observation");
 		// unless set Chemical, CAS# is not displayed on search screen
@@ -719,6 +755,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         List<String> theParamsToSkip = new ArrayList<String>(); 		
 		theParamsToSkip.add("type");
 		theParamsToSkip.add("casNumber");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -748,7 +787,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("inducedMutationForm");
 		
 		InducedMutationForm theForm = new InducedMutationForm();
-		theForm.setMgiNumber("19191919");
 		theForm.setObservation("Test Observation");
 		theForm.setMethodOfObservation("Test Method of Observation");
 		// unless set Chemical, CAS# is not displayed on search screen
@@ -758,6 +796,9 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         List<String> theParamsToSkip = new ArrayList<String>(); 		
 		theParamsToSkip.add("type");
 		theParamsToSkip.add("casNumber");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");           
 		
 		TestUtil.setRandomValues(theForm, theWebForm, true);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -788,7 +829,6 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
 		theForm.setName("TESTSPONTANEOUSMUTATION");
-		theForm.setMgiNumber("19191919");
 		
 		TestUtil.setRandomValues(theForm, theWebForm, false);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
@@ -807,11 +847,19 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		theCurrentPage = theLink.click();
 		assertCurrentPageContains("Gene Name:");
 		theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
-		
+
+        List<String> theParamsToIgnore = new ArrayList<String>();
+        theParamsToIgnore.add("mgiId");    
+        theParamsToIgnore.add("zfinId");    
+        theParamsToIgnore.add("rgdId");          
+        
 		//Add parameters found behind scene but not on screen
         List<String> theParamsToSkip = new ArrayList<String>(); 
 		theParamsToSkip.add("aSpontaneousMutationID");
 		theParamsToSkip.add("submitAction");
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");          
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}	
@@ -829,9 +877,14 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
 		
 		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
-		theForm.setMgiNumber("19191919");
+        
+        // Add parameters found on submit screen but not displayed on search screen  
+        List<String> theParamsToSkip = new ArrayList<String>();         
+        theParamsToSkip.add("mgiId");     
+        theParamsToSkip.add("zfinId");
+        theParamsToSkip.add("rgdId");          
 		
-		TestUtil.setRandomValues(theForm, theWebForm, false);
+		TestUtil.setRandomValues(theForm, theWebForm, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
@@ -843,7 +896,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 
 		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
 		
-		verifyValuesOnPage(theWebForm);
+		verifyValuesOnPage(theWebForm, , theParamsToSkip);
 	}
 	
 }
