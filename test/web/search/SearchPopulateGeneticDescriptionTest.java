@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.6 2007-06-11 14:18:08 pandyas Exp $
+ * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.7 2007-06-11 18:06:54 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/06/11 14:18:08  pandyas
+ * Fixed typo (, , ) added to array list
+ *
  * Revision 1.5  2007/06/07 18:33:16  pandyas
  * Modified script - hide mgi testing since the jsp now determines species first and displays mgi, or zfin, or rgd
  *
@@ -710,7 +713,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("zfinId");
         theParamsToSkip.add("rgdId");          
 		
-		TestUtil.setRandomValues(theForm, theWebForm, theParamsToIgnore);
+		TestUtil.setRandomValues(theForm, theWebForm, true, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
@@ -887,7 +890,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
         theParamsToSkip.add("zfinId");
         theParamsToSkip.add("rgdId");          
 		
-		TestUtil.setRandomValues(theForm, theWebForm, theParamsToIgnore);
+		TestUtil.setRandomValues(theForm, theWebForm, false, theParamsToIgnore);
 		TestUtil.setValuesOnForm(theForm, theWebForm);
 		
 		theCurrentPage = theWebForm.submit();
