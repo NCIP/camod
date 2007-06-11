@@ -1865,7 +1865,7 @@
 		</form>
 
 		<form name="histopathologyForm">
-			<field property="organTissueCode"
+			<!--field property="organTissueCode"
 				depends="validwhen">
 				<arg0 key="HistopathologyForm.organTissueCode" />
 		        <var>
@@ -1874,40 +1874,40 @@
 						((organTissueCode != null) or (organ != null))
 					</var-value>		          
 		        </var>	
-			</field>
-			<!-- field property="organ"
+			</field-->
+			<field property="organ"
 				depends="validwhen">
 				<arg0 key="HistopathologyForm.organ" />
 		        <var>
 		          <var-name>test</var-name>
 					<var-value>
-						((organTissueCode == null) or (organ == null))
+						((organTissueCode != null) or (organ != null))
 					</var-value>		          
 		        </var>	
-			</field -->			
-			<field property="diagnosisCode"
+			</field>			
+			<!--field property="diagnosisCode"
 				depends="validwhen">
 				<arg0 key="HistopathologyForm.diagnosisCode" />
 		        <var>
 		          <var-name>test</var-name>
 		          <var-value>((diagnosisCode != null) or (tumorClassification != null))</var-value>
 		        </var>
-			</field>
-			<!-- field property="tumorClassification"
+			</field-->
+			<field property="tumorClassification"
 				depends="validwhen">
 				<arg0 key="HistopathologyForm.tumorClassification" />
 		        <var>
 		          <var-name>test</var-name>
 		          <var-value>((diagnosisCode != null) or (tumorClassification != null))</var-value>
 		        </var>
-			</field -->	
-			<field property="otherTumorClassification"
+			</field>	
+			<!--field property="otherTumorClassification"
 				depends="validwhen, maxlength">
 				<arg0 key="HistopathologyForm.otherTumorClassification" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((tumorClassification != 'Other') or 
+						((diagnosisCode == null) and (tumorClassification != 'Other') or 
 						(*this* != null))
 					</var-value>
 				</var>
@@ -1917,7 +1917,7 @@
 					<var-name>maxlength</var-name>
 					<var-value>255</var-value>
 				</var>
-			</field>					
+			</field-->					
 	
 			<field property="ageOfOnset" depends="maxlength">
 				<arg0 key="HistopathologyForm.ageOfOnset" />
