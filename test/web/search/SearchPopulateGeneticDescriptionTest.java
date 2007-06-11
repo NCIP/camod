@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.5 2007-06-07 18:33:16 pandyas Exp $
+ * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.6 2007-06-11 14:18:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/06/07 18:33:16  pandyas
+ * Modified script - hide mgi testing since the jsp now determines species first and displays mgi, or zfin, or rgd
+ *
  * Revision 1.4  2006/10/11 15:47:55  pandyas
  * changes while testing 2.1.1
  *
@@ -896,7 +899,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 
 		navigateToSpecificSearchPage(myModelName,"GENETIC DESCRIPTION");
 		
-		verifyValuesOnPage(theWebForm, , theParamsToSkip);
+		verifyValuesOnPage(theWebForm, theParamsToSkip);
 	}
 	
 }
