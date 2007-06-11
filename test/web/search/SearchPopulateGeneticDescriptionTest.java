@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.7 2007-06-11 18:06:54 pandyas Exp $
+ * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.8 2007-06-11 18:44:37 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/06/11 18:06:54  pandyas
+ * Fixed TestUtil.setRandomValues method - needs true/false parameter if theParamsToIgnore is not null
+ *
  * Revision 1.6  2007/06/11 14:18:08  pandyas
  * Fixed typo (, , ) added to array list
  *
@@ -883,6 +886,8 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		WebForm theWebForm = theCurrentPage.getFormWithName("spontaneousMutationForm");
 		
 		SpontaneousMutationForm theForm = new SpontaneousMutationForm();
+        
+        List<String> theParamsToIgnore = new ArrayList<String>();
         
         // Add parameters found on submit screen but not displayed on search screen  
         List<String> theParamsToSkip = new ArrayList<String>();         
