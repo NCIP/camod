@@ -65,7 +65,7 @@
 	  <junit fork="yes" haltonfailure="yes">
 	    <test name="${test.class.name}" />
 	  	<formatter type="xml"/>
-	  	<classpath refid="test.classpath" />
+	  	<classpath refid="test.run.classpath" />
 	  </junit>
 	</target>
 
