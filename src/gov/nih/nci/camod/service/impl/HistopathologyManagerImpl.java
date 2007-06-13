@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.20 2007-06-13 17:01:29 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.21 2007-06-13 17:10:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/06/13 17:01:29  pandyas
+ * Modified save for organTissueName
+ *
  * Revision 1.19  2007/06/13 12:09:51  pandyas
  * Modified for save of organ/diagnosis for each tree options
  *
@@ -169,13 +172,15 @@ public class HistopathologyManagerImpl extends BaseManager implements
 			inHistopathology.setOrgan(new Organ());
 			inHistopathology.getOrgan().setConceptCode(
 					Constants.Dropdowns.CONCEPTCODEZEROS);
+            // when not using tree, organ populates the organ name entry
 			inHistopathology.getOrgan()
-					.setName(inHistopathologyData.getOrganTissueName());
+					.setName(inHistopathologyData.getOrgan());
 		} else if (inHistopathologyData.getOrganTissueCode() != null){
 			log.info("OrganTissueCode() != null - getOrCreate method used");
+            // when using tree, organTissueName populates the organ name entry
 			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
 					inHistopathologyData.getOrganTissueCode(),
-					inHistopathologyData.getOrgan());
+					inHistopathologyData.getOrganTissueName());
 			inHistopathology.setOrgan(theNewOrgan);
 		} 
 		
@@ -211,9 +216,10 @@ public class HistopathologyManagerImpl extends BaseManager implements
 			// Diagnosis tree displayed and EVS returns a conceptCode
 			log.info("inHistopathologyData.getDiagnosisCode(): "
 					+ inHistopathologyData.getDiagnosisCode());
+            // when using tree, DiagnosisName populates the disease name entry
 			Disease theNewDisease = DiseaseManagerSingleton.instance()
 					.getOrCreate(inHistopathologyData.getDiagnosisCode(),
-							inHistopathologyData.getTumorClassification());
+							inHistopathologyData.getDiagnosisName());
 			inHistopathology.setDisease(theNewDisease);
 		}
 
