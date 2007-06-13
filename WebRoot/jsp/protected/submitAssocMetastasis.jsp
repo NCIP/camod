@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2007/06/05 19:26:44  pandyas
+ * Added final method name for Zebrafish tissue tree
+ *
  * Revision 1.32  2007/06/04 15:32:49  pandyas
  * Updated to Zebrafish method name
  *
@@ -70,7 +73,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.33 2007-06-05 19:26:44 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.34 2007-06-13 20:20:34 pandyas Exp $
  *
  */   
 %>
@@ -183,7 +186,7 @@
 				<c:otherwise>
 				<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 				</td>
-					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueCode"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
 						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
@@ -243,7 +246,7 @@
 					<c:otherwise>
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>
-						<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+						<html:hidden property="diagnosisCode"/>			
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
 							<html:text styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />

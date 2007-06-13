@@ -720,16 +720,6 @@
 			</field>
 		</form>
 
-		<form name="cellLineForm">
-			<field property="cellLineName" depends="required">
-				<arg0 key="CellLine.cellLineName" />
-			</field>
-
-			<field property="organName" depends="required">
-				<arg0 key="CellLine.organName" />
-			</field>
-		</form>
-
 		<form name="therapyForm">
 			<field property="name" depends="required,maxlength">
 				<arg0 key="TherapyForm.name" />
@@ -845,9 +835,16 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="organTissueCode" depends="required">
-				<arg0 key="CellLineForm.organTissueCode" />
-			</field>
+			<field property="organ"
+				depends="validwhen">
+				<arg0 key="CellLineForm.organ" />
+		        <var>
+		          <var-name>test</var-name>
+					<var-value>
+						((organTissueCode != null) or (organ != null))
+					</var-value>		          
+		        </var>	
+			</field>	
 			<field property="comments" depends="maxlength">
 				<arg0 key="CellLineForm.comments" />
 				<arg1 name="maxlength" key="${var:maxlength}"
@@ -878,9 +875,16 @@
 		</form>
 
 		<form name="associatedExpressionForm">
-			<field property="organTissueCode" depends="required">
-				<arg0 key="AssociatedExpressionForm.organTissueCode" />
-			</field>
+			<field property="organ"
+				depends="validwhen">
+				<arg0 key="AssociatedExpressionForm.organ" />
+		        <var>
+		          <var-name>test</var-name>
+					<var-value>
+						((organTissueCode != null) or (organ != null))
+					</var-value>		          
+		        </var>	
+			</field>			
 		</form>
 
 		<form name="engineeredTransgeneForm">

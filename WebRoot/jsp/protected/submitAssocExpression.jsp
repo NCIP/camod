@@ -118,7 +118,7 @@
 				<c:otherwise>
 				<td class="formRequiredLabel"><label for="field1">Organ / Tissue:</label>&nbsp;				
 				</td>
-					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueCode"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
 						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
