@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.21 2007-06-13 17:10:17 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.22 2007-06-13 19:39:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/06/13 17:10:17  pandyas
+ * Modified save for Zebrafish vocab
+ *
  * Revision 1.20  2007/06/13 17:01:29  pandyas
  * Modified save for organTissueName
  *
@@ -165,64 +168,71 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		log.info("<HistopathologyManagerImpl> Entering populateOrganDisease");
 
 		// every submission - lookup organ or create one new
-		if (inHistopathologyData.getOrganTissueCode().equals(null)) {
-			log.info("inHistopathologyData.getOrganTissueCode() is null: "
-					+ inHistopathologyData.getOrganTissueCode());
-			// Create new organ with conceptCode = 000000, use name field
-			inHistopathology.setOrgan(new Organ());
-			inHistopathology.getOrgan().setConceptCode(
-					Constants.Dropdowns.CONCEPTCODEZEROS);
-            // when not using tree, organ populates the organ name entry
-			inHistopathology.getOrgan()
-					.setName(inHistopathologyData.getOrgan());
-		} else if (inHistopathologyData.getOrganTissueCode() != null){
-			log.info("OrganTissueCode() != null - getOrCreate method used");
+        // Note:  When using two trees, use organTissueName, organTissueCode, DiagnosisName, DiagnosisCode
+        // When entering text, use organ, TumorClassification
+        // Zebrafish (half tree, half dropdown), use organTissueName, organTissueCode, TumorClassification 
+        
+        // Using trees loop 
+		if (inHistopathologyData.getOrganTissueCode() != null && inHistopathologyData.getOrganTissueCode().length() > 0) {
+            log.info("OrganTissueCode: " + inHistopathologyData.getOrganTissueCode());
+            log.info("OrganTissueName: " + inHistopathologyData.getOrganTissueName()); 
+            
+            log.info("OrganTissueCode() != null - getOrCreate method used");
             // when using tree, organTissueName populates the organ name entry
-			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
-					inHistopathologyData.getOrganTissueCode(),
-					inHistopathologyData.getOrganTissueName());
-			inHistopathology.setOrgan(theNewOrgan);
+            Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
+                    inHistopathologyData.getOrganTissueCode(),
+                    inHistopathologyData.getOrganTissueName());
+            inHistopathology.setOrgan(theNewOrgan); 
+		} else {
+            log.info("Organ: " + inHistopathologyData.getOrgan());            
+            
+            // Create new organ with conceptCode = 000000, use name field
+            inHistopathology.setOrgan(new Organ());
+            inHistopathology.getOrgan().setName(inHistopathologyData.getOrgan());                
+            inHistopathology.getOrgan().setConceptCode(
+                    Constants.Dropdowns.CONCEPTCODEZEROS);
 		} 
 		
 		
 		// every submission - lookup disease or create one new
-		if (inHistopathologyData.getDiagnosisCode().equals(null)) {
-			log.info("inHistopathologyData.getDiagnosisCode() is null: "
-					+ inHistopathologyData.getDiagnosisCode());
-			// Zebrafish dropdown with other option displayed
-			if (inHistopathologyData.getTumorClassification().equals(
-					Constants.Dropdowns.OTHER_OPTION)) {
-				log.info("Sending Notification eMail - new Zebrafish Diagnosis added");
-				sendEmail(inAnimalModel, inHistopathologyData
-						.getDiagnosisName(), "otherDiagnosisName");
-				inHistopathology.setDisease(new Disease());
-				log.info("Concept code set to 000000");
-				inHistopathology.getDisease().setConceptCode(
-						Constants.Dropdowns.CONCEPTCODEZEROS);				
-				inHistopathology.getDisease().setNameUnctrlVocab(
-						inHistopathologyData.getOtherTumorClassification());
-				inHistopathology.getDisease().setName(null);
-			} else {
-				// No Diagnosis tree for the specified species - text entry field displayed
-				// Create new Disease with conceptCode = 000000, use name field
-				inHistopathology.setDisease(new Disease());
-				log.info("Concept code set to 000000");
-				inHistopathology.getDisease().setConceptCode(
-						Constants.Dropdowns.CONCEPTCODEZEROS);
-				inHistopathology.getDisease().setName(
-						inHistopathologyData.getTumorClassification());
-			}
+		if (inHistopathologyData.getDiagnosisCode() != null && inHistopathologyData.getDiagnosisCode().length() > 0 ) {
+            
+            if (inHistopathologyData.getOtherTumorClassification() != null && 
+                    inHistopathologyData.getOtherTumorClassification().length() > 0) {
+                log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
+                log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+                
+                log.info("Sending Notification eMail - new Zebrafish Diagnosis added");
+                sendEmail(inAnimalModel, inHistopathologyData
+                         .getDiagnosisName(), "otherDiagnosisName");
+                inHistopathology.setDisease(new Disease());
+                log.info("Concept code set to 000000");
+                inHistopathology.getDisease().setConceptCode(
+                         Constants.Dropdowns.CONCEPTCODEZEROS);              
+                inHistopathology.getDisease().setNameUnctrlVocab(
+                         inHistopathologyData.getOtherTumorClassification());
+                inHistopathology.getDisease().setName(null);
+           } else {           
+                log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
+                log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName());             
+                
+                Disease theNewDisease = DiseaseManagerSingleton.instance()
+                        .getOrCreate(inHistopathologyData.getDiagnosisCode(),
+                                inHistopathologyData.getDiagnosisName());
+                inHistopathology.setDisease(theNewDisease); 
+            }
 		} else {
-			// Diagnosis tree displayed and EVS returns a conceptCode
-			log.info("inHistopathologyData.getDiagnosisCode(): "
-					+ inHistopathologyData.getDiagnosisCode());
-            // when using tree, DiagnosisName populates the disease name entry
-			Disease theNewDisease = DiseaseManagerSingleton.instance()
-					.getOrCreate(inHistopathologyData.getDiagnosisCode(),
-							inHistopathologyData.getDiagnosisName());
-			inHistopathology.setDisease(theNewDisease);
-		}
+            log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());            
+            
+            log.info("inHistopathologyData.getDiagnosisCode() is null: ");
 
+            inHistopathology.setDisease(new Disease());
+            inHistopathology.getDisease().setName(
+                    inHistopathologyData.getTumorClassification());                
+            log.info("Concept code set to 000000");
+            inHistopathology.getDisease().setConceptCode(
+                    Constants.Dropdowns.CONCEPTCODEZEROS);
+         }
 	}
 
 	private void populateHistopathology(

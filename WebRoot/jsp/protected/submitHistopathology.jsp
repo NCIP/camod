@@ -1,6 +1,10 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2007/06/13 12:12:30  pandyas
+ * Modified for save of organ/diagnosis for each tree options
+ * Removed constants so validation would work for all cases
+ *
  * Revision 1.34  2007/06/05 19:26:44  pandyas
  * Added final method name for Zebrafish tissue tree
  *
@@ -73,7 +77,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.35 2007-06-13 12:12:30 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.36 2007-06-13 19:39:27 pandyas Exp $
  *
  */   
 %>
@@ -233,7 +237,8 @@
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>	
 						<td class="formField">
-								<html:hidden property="diagnosisCode"/>						
+								<html:hidden property="diagnosisCode"/>	
+								<html:hidden property="diagnosisName"/>													
 							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
 								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
 							</html:select>					
@@ -411,6 +416,7 @@
 
 <SCRIPT>
 	chkObservation();
+	chkOtherDiagnosis();	
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
