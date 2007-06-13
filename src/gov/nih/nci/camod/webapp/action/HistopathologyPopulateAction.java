@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.13 2007-06-13 17:50:03 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.14 2007-06-13 20:20:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/06/13 17:50:03  pandyas
+ * Removed code for EVSPreferredDescription since zebrafish tree was throwing errors
+ * Must verify this is valid for this vocabulary
+ *
  * Revision 1.12  2007/06/13 12:10:15  pandyas
  * Modified for save of organ/diagnosis for each tree options
  *
@@ -87,10 +91,9 @@ public class HistopathologyPopulateAction extends BaseAction {
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription, unless concept code is '00000'
-            if (theHistopathology.getOrgan().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
+            if (theHistopathology.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
-	            log.debug("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());
-	
+	            log.debug("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
 	            log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());            	
             	
