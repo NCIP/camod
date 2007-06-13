@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2007/06/05 19:26:44  pandyas
+ * Added final method name for Zebrafish tissue tree
+ *
  * Revision 1.33  2007/06/04 11:59:53  pandyas
  * Updated validation message
  *
@@ -70,7 +73,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitHistopathology.jsp,v 1.34 2007-06-05 19:26:44 pandyas Exp $
+ * $Id: submitHistopathology.jsp,v 1.35 2007-06-13 12:12:30 pandyas Exp $
  *
  */   
 %>
@@ -188,7 +191,7 @@
 				<c:otherwise>
 					<td class="formRequiredLabel"><label for="field1">Site of Lesion/Tumor:</label>&nbsp;
 					</td>
-					<input type="hidden" name="organTissueCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+					<html:hidden property="organTissueCode"/>		
 					<html:hidden property="organTissueName"/>
 					<td class="formField">
 						<html:text styleClass="formFieldSized" disabled="false" property="organ"   size="25" />
@@ -219,8 +222,7 @@
 						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showRatDiagnosisTree('histopathologyForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
-					</td>
-				
+					</td>			
 						<html:hidden property="diagnosisCode"/>		
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
@@ -231,7 +233,7 @@
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>	
 						<td class="formField">
-								<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>						
+								<html:hidden property="diagnosisCode"/>						
 							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
 								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
 							</html:select>					
@@ -250,7 +252,7 @@
 				<c:otherwise>
 					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>
-						<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>		
+						<html:hidden property="diagnosisCode"/>								
 						<html:hidden property="diagnosisName"/>
 						<td class="formField">
 							<html:text styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />
