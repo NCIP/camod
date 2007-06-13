@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.48 2007-05-21 17:37:35 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.49 2007-06-13 12:10:29 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.48  2007/05/21 17:37:35  pandyas
+ *  replaced log statement so it does not print
+ *
  *  Revision 1.47  2007/05/10 16:06:58  pandyas
  *  Added log statement to debug publicationCollection on dev server
  *
@@ -524,6 +527,9 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 					morpholinoList);
 			request.getSession().setAttribute(Constants.Submit.SIRNA_LIST,
 					sirnaList);
+			
+			System.out
+			.println("<AnimalModelTreePopulateAction populate> Exiting... ");			
 
 		} // end of try
 		catch (Exception e) {
