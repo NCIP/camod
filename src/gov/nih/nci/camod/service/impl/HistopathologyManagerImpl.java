@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.19 2007-06-13 12:09:51 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.20 2007-06-13 17:01:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/06/13 12:09:51  pandyas
+ * Modified for save of organ/diagnosis for each tree options
+ *
  * Revision 1.18  2007/05/16 12:31:52  pandyas
  * Cleaned up unused code
  *
@@ -167,7 +170,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
 			inHistopathology.getOrgan().setConceptCode(
 					Constants.Dropdowns.CONCEPTCODEZEROS);
 			inHistopathology.getOrgan()
-					.setName(inHistopathologyData.getOrgan());
+					.setName(inHistopathologyData.getOrganTissueName());
 		} else if (inHistopathologyData.getOrganTissueCode() != null){
 			log.info("OrganTissueCode() != null - getOrCreate method used");
 			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
