@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.12 2007-05-17 18:42:25 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.13 2007-06-13 12:10:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/05/17 18:42:25  pandyas
+ * Fixed diagnosis populate when selecting other
+ *
  * Revision 1.11  2007/04/30 20:10:17  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -30,7 +33,6 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Disease;
 import gov.nih.nci.camod.domain.Histopathology;
-import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.service.HistopathologyManager;
 import gov.nih.nci.camod.webapp.form.AssociatedMetastasisForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
@@ -89,18 +91,26 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             assocMetastasisForm.setComments(associatedMetastasis.getComments());
 
             /* set Organ attributes */
-            Organ organ = associatedMetastasis.getOrgan();
-            //System.out.println("<AssociatedMetastasisPopulateAction> get the Organ attributes");
+            log.debug("<HistopathologyPopulateAction populate> get the Organ attributes");
 
-            // since we are always querying from concept code (save and
-            // edit), simply display EVSPreferredDescription
-            assocMetastasisForm.setOrgan(organ.getEVSPreferredDescription());
-            //System.out.println("setOrgan= " + organ.getEVSPreferredDescription());
-
-            assocMetastasisForm.setOrganTissueCode(organ.getConceptCode());
-            //System.out.println("OrganTissueCode= " + organ.getConceptCode());
-
-            /* Set Disease object attributes - check for other Zebrafish entry*/
+            // since we are always querying from concept code (save and edit),
+            // simply display EVSPreferredDescription, unless concept code is '00000'
+            if (associatedMetastasis.getOrgan().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
+            	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getName());
+	            log.debug("associatedMetastasis.getOrgan().getName(): " + associatedMetastasis.getOrgan().getName());
+	
+	            assocMetastasisForm.setOrganTissueCode(associatedMetastasis.getOrgan().getConceptCode());
+	            log.debug("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());            	
+            	
+            } else {
+            	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getEVSPreferredDescription());
+	            log.debug("associatedMetastasis.getOrgan().getEVSPreferredDescription(): " + associatedMetastasis.getOrgan().getEVSPreferredDescription());
+	
+	            assocMetastasisForm.setOrganTissueCode(associatedMetastasis.getOrgan().getConceptCode());
+	            log.debug("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());
+            }
+            
+             /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = associatedMetastasis.getDisease();
             if(disease.getNameUnctrlVocab() != null) {
                 log.info("disease is other in DB");

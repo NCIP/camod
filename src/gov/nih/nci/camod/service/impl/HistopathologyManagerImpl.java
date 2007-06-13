@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.18 2007-05-16 12:31:52 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.19 2007-06-13 12:09:51 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/05/16 12:31:52  pandyas
+ * Cleaned up unused code
+ *
  * Revision 1.17  2007/04/30 20:09:43  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -156,9 +159,8 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		log.info("<HistopathologyManagerImpl> Entering populateOrganDisease");
 
 		// every submission - lookup organ or create one new
-		if (inHistopathologyData.getOrganTissueCode().equals(
-				Constants.Dropdowns.CONCEPTCODEZEROS)) {
-			log.info("inHistopathologyData.getOrganTissueCode(): "
+		if (inHistopathologyData.getOrganTissueCode().equals(null)) {
+			log.info("inHistopathologyData.getOrganTissueCode() is null: "
 					+ inHistopathologyData.getOrganTissueCode());
 			// Create new organ with conceptCode = 000000, use name field
 			inHistopathology.setOrgan(new Organ());
@@ -167,18 +169,17 @@ public class HistopathologyManagerImpl extends BaseManager implements
 			inHistopathology.getOrgan()
 					.setName(inHistopathologyData.getOrgan());
 		} else if (inHistopathologyData.getOrganTissueCode() != null){
-			log.info("getOrCreate method used");
+			log.info("OrganTissueCode() != null - getOrCreate method used");
 			Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
 					inHistopathologyData.getOrganTissueCode(),
-					inHistopathologyData.getOrganTissueName());
+					inHistopathologyData.getOrgan());
 			inHistopathology.setOrgan(theNewOrgan);
 		} 
 		
 		
 		// every submission - lookup disease or create one new
-		if (inHistopathologyData.getDiagnosisCode().equals(
-				Constants.Dropdowns.CONCEPTCODEZEROS)) {
-			log.info("inHistopathologyData.getDiagnosisCode(): "
+		if (inHistopathologyData.getDiagnosisCode().equals(null)) {
+			log.info("inHistopathologyData.getDiagnosisCode() is null: "
 					+ inHistopathologyData.getDiagnosisCode());
 			// Zebrafish dropdown with other option displayed
 			if (inHistopathologyData.getTumorClassification().equals(
@@ -209,7 +210,7 @@ public class HistopathologyManagerImpl extends BaseManager implements
 					+ inHistopathologyData.getDiagnosisCode());
 			Disease theNewDisease = DiseaseManagerSingleton.instance()
 					.getOrCreate(inHistopathologyData.getDiagnosisCode(),
-							inHistopathologyData.getDiagnosisName());
+							inHistopathologyData.getTumorClassification());
 			inHistopathology.setDisease(theNewDisease);
 		}
 

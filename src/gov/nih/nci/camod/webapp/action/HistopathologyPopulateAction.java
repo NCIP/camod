@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.11 2007-04-30 20:10:17 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.12 2007-06-13 12:10:15 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/04/30 20:10:17  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.10  2006/11/09 17:27:36  pandyas
  * Commented out debug code
  *
@@ -80,13 +83,22 @@ public class HistopathologyPopulateAction extends BaseAction {
             log.debug("<HistopathologyPopulateAction populate> get the Organ attributes");
 
             // since we are always querying from concept code (save and edit),
-            // simply display EVSPreferredDescription
-            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
-            log.debug("setOrgan= " + theHistopathology.getOrgan().getEVSPreferredDescription());
-
-            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-            log.debug("OrganTissueCode= " + theHistopathology.getOrgan().getConceptCode());
-
+            // simply display EVSPreferredDescription, unless concept code is '00000'
+            if (theHistopathology.getOrgan().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
+	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
+	            log.debug("theHistopathology.getOrgan().getName(): " + theHistopathology.getOrgan().getName());
+	
+	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
+	            log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());            	
+            	
+            } else {
+	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
+	            log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());
+	
+	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
+	            log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());
+            }
+            
             /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = theHistopathology.getDisease();
             if(disease.getNameUnctrlVocab() != null) {
@@ -95,9 +107,18 @@ public class HistopathologyPopulateAction extends BaseAction {
             	histopathologyForm.setOtherTumorClassification(disease.getNameUnctrlVocab());
             	
             } else {
-            	histopathologyForm.setDiagnosisName(disease.getName());
-            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
+            	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            		// Concept code is 00000, so just use name
+	            	histopathologyForm.setDiagnosisName(disease.getName());
+	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
+	            	histopathologyForm.setTumorClassification(disease.getName());            		
+            		
+            	} else {
+            		// Concept code is not 00000, so get prefered name from EVS
+	            	histopathologyForm.setDiagnosisName(disease.getName());
+	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
+	            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
+            	}
             }
             
             /* Set Histopathology attributes */
