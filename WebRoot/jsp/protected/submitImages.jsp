@@ -106,7 +106,7 @@
 			<html:hidden property="stainingMethodCode"/>
 			<input type="hidden" name="stainingMethodName" />				
 			<html:text styleClass="formFieldSized" disabled="true" property="stainingMethod" size="30"  />
-			<a href="javascript: clearStainingMethod(document.forms[0].stainingMethod, document.forms[0].stainingMethodCode);"><img border="0" src="/camod/images/clear.gif"></a>
+			<a href="javascript: clearField(document.forms[0].stainingMethod, document.forms[0].stainingMethodCode);"><img border="0" src="/camod/images/clear.gif"></a>
 		</td>
 	</tr>		
 
