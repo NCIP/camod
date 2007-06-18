@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.54 2007-05-18 15:35:31 pandyas Exp $
+ * $Id: submitTransplantXenograft.jsp,v 1.55 2007-06-18 16:12:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.54  2007/05/18 15:35:31  pandyas
+ * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
+ *
  * Revision 1.53  2007/05/17 19:10:45  pandyas
  * Modified for organ tree code - needs to populate select button correctly still
  *
@@ -250,7 +253,7 @@
 				<c:when test="${donorspeciescommonname == 'Zebrafish'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -279,7 +282,7 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">										
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="20"  />
+						<html:text styleClass="formFieldSized" disabled="false" property="organ" size="20"  />
 					</td>				
 				</c:otherwise>				
     		</c:choose>
@@ -460,7 +463,7 @@
 	chkObservation();
 	chkOtherSpecies();
 	chkOtherCondRegimen();
-	getResults();
+	getOptions();
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
