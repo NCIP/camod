@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.35 2007-05-10 02:20:34 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.36 2007-06-18 16:14:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2007/05/10 02:20:34  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.34  2007/04/04 13:18:06  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -274,7 +277,6 @@ public class XenograftManagerImpl extends BaseManager implements
 
 	private void populateOrgan(XenograftData inXenograftData,
 			Xenograft inXenograft) throws Exception {
-        Organ theOrgan = null;
         
         log.info("<XenograftManagerImpl> populateOrgan: ");        
 
