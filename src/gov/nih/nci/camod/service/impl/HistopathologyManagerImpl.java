@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyManagerImpl.java,v 1.23 2007-06-18 12:21:23 pandyas Exp $
+ * $Id: HistopathologyManagerImpl.java,v 1.24 2007-06-18 15:05:29 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/06/18 12:21:23  pandyas
+ * Fixed update function - always has a concept code
+ *
  * Revision 1.22  2007/06/13 19:39:38  pandyas
  * Modified code for EVS trees after formal testing
  *
@@ -139,8 +142,10 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		log.info("Entering HistopathologyManagerImpl.createHistopathology");
 
 		Histopathology theHistopathology = new Histopathology();
-		populateOrganDisease(inAnimalModel, inHistopathologyData,
+		populateOrgan(inAnimalModel, inHistopathologyData,
 				theHistopathology);
+        populateDisease(inAnimalModel, inHistopathologyData,
+                        theHistopathology);         
 		populateHistopathology(inHistopathologyData, theHistopathology);
 
 		log.info("Exiting HistopathologyManagerImpl.createHistopathology");
@@ -155,8 +160,10 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		log.info("Updating HistopathologyData: " + inHistopathology.getId());
 
 		// Populate w/ the new values and save
-		populateOrganDisease(inAnimalModel, inHistopathologyData,
+		populateOrgan(inAnimalModel, inHistopathologyData,
 				inHistopathology);
+        populateDisease(inAnimalModel, inHistopathologyData,
+                        inHistopathology);        
 		populateHistopathology(inHistopathologyData, inHistopathology);
 
 		save(inHistopathology);
@@ -164,11 +171,11 @@ public class HistopathologyManagerImpl extends BaseManager implements
 		log.info("Exiting HistopathologyManagerImpl.updateHistopathology");
 	}
 
-	private void populateOrganDisease(AnimalModel inAnimalModel,
+	private void populateOrgan(AnimalModel inAnimalModel,
 			HistopathologyData inHistopathologyData,
 			Histopathology inHistopathology) throws Exception {
 		
-		log.info("<HistopathologyManagerImpl> Entering populateOrganDisease");
+		log.info("<HistopathologyManagerImpl> Entering populateOrgan");
 		// Update loop handeled separately for conceptCode = 00000
 		if (inHistopathologyData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
             log.info("Organ update loop for text: " + inHistopathologyData.getOrgan()); 
@@ -200,10 +207,20 @@ public class HistopathologyManagerImpl extends BaseManager implements
 			}			
 			
 		}
+    }
 		
- 
+        private void populateDisease(AnimalModel inAnimalModel,
+                                        HistopathologyData inHistopathologyData,
+                                        Histopathology inHistopathology) throws Exception { 
+            
+            log.info("<HistopathologyManagerImpl> Entering populateDisease"); 
+            log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
+            log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName()); 
+            log.info("TumorClassification: " + inHistopathologyData.getTumorClassification()); 
+            
 		// Update loop handeled separately for conceptCode = 00000
 		if (inHistopathologyData.getDiagnosisCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            log.info("<HistopathologyManagerImpl> CONCEPTCODEZEROS loop");             
             log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());            
             log.info("otherTumorClassification: " + inHistopathologyData.getOtherTumorClassification());
             
@@ -223,35 +240,52 @@ public class HistopathologyManagerImpl extends BaseManager implements
             }		
 		
 		} else {
-			// every submission - lookup disease or create one new, check for 00000 for update loop
+            log.info("<HistopathologyManagerImpl> ELSE CONCEPTCODEZEROS loop");             
+			// every submission - lookup disease or create one new
+            // DiagnosisCode() != null for all trees 
 			if (inHistopathologyData.getDiagnosisCode() != null && inHistopathologyData.getDiagnosisCode().length() > 0) {
-	            // New save for other entry in diagnosis
-	            if (inHistopathologyData.getOtherTumorClassification() != null && 
-	                    inHistopathologyData.getOtherTumorClassification().length() > 0) {
-	                log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
-	                log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+           
+	           log.info("DiagnosisCode() != null loop: " );                 
 	                
-	                log.info("Sending Notification eMail - new Zebrafish Diagnosis added");
-	                sendEmail(inAnimalModel, inHistopathologyData
-	                         .getDiagnosisName(), "otherDiagnosisName");
-	                inHistopathology.setDisease(new Disease());
-	                log.info("Concept code set to 000000");
-	                inHistopathology.getDisease().setConceptCode(
-	                         Constants.Dropdowns.CONCEPTCODEZEROS);              
-	                inHistopathology.getDisease().setNameUnctrlVocab(
-	                         inHistopathologyData.getOtherTumorClassification());
-	                inHistopathology.getDisease().setName(null);
-	           } else {           
-	                log.info("DiagnosisCode: " + inHistopathologyData.getDiagnosisCode());
-	                log.info("DiagnosisName: " + inHistopathologyData.getDiagnosisName());             
-	                
-	                Disease theNewDisease = DiseaseManagerSingleton.instance()
-	                        .getOrCreate(inHistopathologyData.getDiagnosisCode(),
-	                                inHistopathologyData.getDiagnosisName());
-	                inHistopathology.setDisease(theNewDisease); 
-	            }
-			}
-		}
+	           Disease theNewDisease = DiseaseManagerSingleton.instance()
+	                   .getOrCreate(inHistopathologyData.getDiagnosisCode(),
+	                           inHistopathologyData.getDiagnosisName());
+               log.info("theNewDisease: " + theNewDisease.toString());
+	           inHistopathology.setDisease(theNewDisease); 
+	            
+			} else {
+                   log.info("DiagnosisCode() == null loop: " ); 
+                if (inHistopathologyData.getOtherTumorClassification() != null && 
+                        inHistopathologyData.getOtherTumorClassification().length() > 0) {
+                    log.info("OtherTumorClassification() != null loop: " ); 
+                    log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
+                    log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+                    
+                    log.info("Sending Notification eMail - new Zebrafish Diagnosis added");
+                    sendEmail(inAnimalModel, inHistopathologyData
+                             .getDiagnosisName(), "otherDiagnosisName");
+                    inHistopathology.setDisease(new Disease());
+                    log.info("Concept code set to 000000");
+                    inHistopathology.getDisease().setConceptCode(
+                             Constants.Dropdowns.CONCEPTCODEZEROS);              
+                    inHistopathology.getDisease().setNameUnctrlVocab(
+                             inHistopathologyData.getOtherTumorClassification());
+                    inHistopathology.getDisease().setName(null);
+               } else {           
+                   log.info("OtherTumorClassification() == null loop: " ); 
+                   log.info("TumorClassification: " + inHistopathologyData.getTumorClassification());
+                   log.info("other TumorClassification: " + inHistopathologyData.getOtherTumorClassification());
+
+                   inHistopathology.setDisease(new Disease());
+                   log.info("Concept code set to 000000");
+                   inHistopathology.getDisease().setConceptCode(
+                            Constants.Dropdowns.CONCEPTCODEZEROS);              
+                   inHistopathology.getDisease().setName(
+                            inHistopathologyData.getTumorClassification());
+                }                
+                
+            }
+		} 
 
 	}
 
@@ -331,8 +365,10 @@ public class HistopathologyManagerImpl extends BaseManager implements
 				.info("Entering HistopathologyManagerImpl.createAssociatedMetastasis");
 
 		Histopathology theAssociatedMetastasis = new Histopathology();
-		populateOrganDisease(inAnimalModel, inAssociatedMetastasisData,
-				theAssociatedMetastasis);		
+		populateOrgan(inAnimalModel, inAssociatedMetastasisData,
+				theAssociatedMetastasis);
+        populateDisease(inAnimalModel, inAssociatedMetastasisData,
+                            theAssociatedMetastasis);        
 		populateHistopathology(inAssociatedMetastasisData,
 				theAssociatedMetastasis);
 
@@ -363,8 +399,10 @@ public class HistopathologyManagerImpl extends BaseManager implements
 				+ inAssociatedMetastasis.getId());
 
 		// Populate w/ the new values and save
-		populateOrganDisease(inAnimalModel, inAssociatedMetastasisData,
-				inAssociatedMetastasis);		
+		populateOrgan(inAnimalModel, inAssociatedMetastasisData,
+				inAssociatedMetastasis);	
+        populateDisease(inAnimalModel, inAssociatedMetastasisData,
+                            inAssociatedMetastasis);        
 		populateHistopathology(inAssociatedMetastasisData,
 				inAssociatedMetastasis);
 		save(inAssociatedMetastasis);
