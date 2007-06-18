@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.20 2007-05-16 12:29:24 pandyas Exp $
+ * $Id: TherapyPopulateAction.java,v 1.21 2007-06-18 19:53:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/05/16 12:29:24  pandyas
+ * Added developmental stage evs tree to Therapy when species is Zebrafsih
+ *
  * Revision 1.19  2006/05/08 13:43:00  georgeda
  * Reformat and clean up warnings
  *
@@ -146,9 +149,10 @@ public class TherapyPopulateAction extends BaseAction
 
             if(therapy.getDevelopmentalStage() !=null){
                 // since we are always querying from concept code (save and edit),
-                // simply display EVSPreferredDescription
+                // simply display EVSPreferredDescription -  does not work for Zebrafish vocab
             	therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getEVSPreferredDescription());
-                log.info("setDevelopmentalStage= " + therapy.getDevelopmentalStage().getEVSPreferredDescription());
+                therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getName());                
+                log.info("setDevelopmentalStage= " + therapy.getDevelopmentalStage().getName());
 
                 therapyForm.setDevelopmentalStageCode(therapy.getDevelopmentalStage().getConceptCode());
                 log.info("setDevelopmentalStageCode= " + therapy.getDevelopmentalStage().getConceptCode());
