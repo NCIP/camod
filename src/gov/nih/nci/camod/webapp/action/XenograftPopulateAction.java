@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.34 2007-05-18 15:33:49 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.35 2007-06-18 16:09:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2007/05/18 15:33:49  pandyas
+ * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
+ *
  * Revision 1.33  2007/05/17 19:11:33  pandyas
  * Modified method name and code to cover strain and organ tree populate functions based on the species selected by the user
  *
@@ -140,7 +143,11 @@ public class XenograftPopulateAction extends BaseAction
             xenograftForm.setAtccNumber(xeno.getAtccNumber());
             xenograftForm.setCellAmount(xeno.getCellAmount());
             xenograftForm.setGrowthPeriod(xeno.getGrowthPeriod());
-
+ 
+            // When populating multiple xenografts, this constant needs to be reset for each species entry
+            request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, xeno.getStrain().getSpecies().getCommonName());
+            log.info("xeno.getDonorSpecies().getCommonName(): " + xeno.getStrain().getSpecies().getCommonName());            
+            
             // Species was required in previous versions of caMod and is stored in donorSpecies column
             // The species and strain are required for 2.1 and strain_id is stored for all future versions
             // Therefore, we must search in both to populate correctly
@@ -187,7 +194,9 @@ public class XenograftPopulateAction extends BaseAction
             // simply display EVSPreferredDescription
             if (xeno.getOrgan() != null)
             {
-                    xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                    // getEVSPreferredDescription does not work for Zebrafish EVS tree
+                    //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                    xenograftForm.setOrgan(xeno.getOrgan().getName());
                     log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getEVSPreferredDescription());
                     xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
                     log.info("<XenograftPopulateAction> OrganTissueCode= " + xeno.getOrgan().getConceptCode());
@@ -329,6 +338,7 @@ public class XenograftPopulateAction extends BaseAction
         if(xenograftForm.getDonorScientificName() != null && xenograftForm.getDonorScientificName().length() > 0){
 	        // Set Donor species to a constant to determine which organ tree displays 
 	        // using common name because Rat has two species
+
 	        Species species = SpeciesManagerSingleton.instance().getByName(xenograftForm.getDonorScientificName());
 	        theDonorSpecies = species.getCommonName();
 	        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
