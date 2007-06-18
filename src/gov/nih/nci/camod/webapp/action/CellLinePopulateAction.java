@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.14 2007-06-13 20:20:24 pandyas Exp $
+ * $Id: CellLinePopulateAction.java,v 1.15 2007-06-18 16:13:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/06/13 20:20:24  pandyas
+ * Copy built to dev for EVSTree project
+ *
  * Revision 1.13  2006/11/09 17:23:54  pandyas
  * Commented out debug code
  *
@@ -85,6 +88,7 @@ public class CellLinePopulateAction extends BaseAction {
                 
             } else {
                 cellLineForm.setOrgan(cellLine.getOrgan().getName());
+                // getEVSPreferredDescription does not work for Zebrafish EVS tree 
                 //log.debug("cellLine.getOrgan().getEVSPreferredDescription(): " + cellLine.getOrgan().getEVSPreferredDescription());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());

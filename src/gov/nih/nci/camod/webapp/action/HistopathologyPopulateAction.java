@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.15 2007-06-18 12:21:52 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.16 2007-06-18 16:13:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/06/18 12:21:52  pandyas
+ * Fixed update function - always has a concept code
+ *
  * Revision 1.14  2007/06/13 20:20:24  pandyas
  * Copy built to dev for EVSTree project
  *
@@ -102,9 +105,9 @@ public class HistopathologyPopulateAction extends BaseAction {
             	
             } else {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
+                //getEVSPreferredDescription does not work for Zebrafish EVS tree
 	            //log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
-	            //log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());
             }
             
             /* Set Disease object attributes - check for other Zebrafish entry*/
@@ -126,6 +129,7 @@ public class HistopathologyPopulateAction extends BaseAction {
             		// Concept code is not 00000, so get prefered name from EVS -broken for zebrafish
 	            	histopathologyForm.setDiagnosisName(disease.getName());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
+                    // getEVSPreferredDescription does not work for Zebrafish EVS tree
 	            	//histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
                     histopathologyForm.setTumorClassification(disease.getName());
             	}

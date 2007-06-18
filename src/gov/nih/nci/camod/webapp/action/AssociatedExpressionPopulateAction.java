@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionPopulateAction.java,v 1.8 2007-04-30 20:10:17 pandyas Exp $
+ * $Id: AssociatedExpressionPopulateAction.java,v 1.9 2007-06-18 16:13:20 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/04/30 20:10:17  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.7  2006/11/09 17:21:25  pandyas
  * Commented out debug code
  *
@@ -72,7 +75,9 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
 
             associatedExpressionForm.setEngineeredGeneID(aAssociatedExpressionID);
             associatedExpressionForm.setOrganTissueCode(organ.getConceptCode());
-            associatedExpressionForm.setOrganTissueName(organ.getEVSPreferredDescription());
+            // Does not work for Zebrafish EVS tree
+            //associatedExpressionForm.setOrganTissueName(organ.getEVSPreferredDescription());
+            associatedExpressionForm.setOrganTissueName(organ.getName());
         }
 
         // setup dropdown menus
