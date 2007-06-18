@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.14 2007-06-13 20:20:24 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.15 2007-06-18 12:21:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/06/13 20:20:24  pandyas
+ * Copy built to dev for EVSTree project
+ *
  * Revision 1.13  2007/06/13 17:50:03  pandyas
  * Removed code for EVSPreferredDescription since zebrafish tree was throwing errors
  * Must verify this is valid for this vocabulary
@@ -99,8 +102,7 @@ public class HistopathologyPopulateAction extends BaseAction {
             	
             } else {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
-	            //log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());
-	
+	            //log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
 	            //log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());
             }
@@ -110,6 +112,7 @@ public class HistopathologyPopulateAction extends BaseAction {
             if(disease.getNameUnctrlVocab() != null) {
             	log.info("disease is other in DB");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
+            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
             	histopathologyForm.setOtherTumorClassification(disease.getNameUnctrlVocab());
             	
             } else {
