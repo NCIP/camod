@@ -58,6 +58,12 @@
 		<fileset dir="${source.lib.dir}">
 			<include name="**/*.jar"/>
 		</fileset>
+        <fileset dir="${source.dir}">                                
+            <include name="**/*.xml" />
+            <include name="**/*.properties" />
+            <include name="*.dtd" />
+            <include name="*.xsd" />
+        </fileset>
 	</path>
 	<!-- Class to  run for the web http integration tests -->
 	<property name="test.class.name" value="web.alltests.AllTests" />
