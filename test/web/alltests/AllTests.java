@@ -1,5 +1,6 @@
 package web.alltests;
 
+import web.search.*;
 import web.allwebtests.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
