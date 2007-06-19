@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.61 2007-06-05 19:26:34 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.62 2007-06-19 13:55:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.61  2007/06/05 19:26:34  pandyas
+ * Added final method name for Zebrafish tissue tree
+ *
  * Revision 1.60  2007/05/21 17:36:13  pandyas
  * Modified simple and adv search species drop down to pull from DB (approved model species only)
  *
@@ -313,7 +316,7 @@
 					<html:hidden property="organTissueCode"/>
 					<input type="hidden" name="organTissueName" />
 					<td class="formField">					
-						<html:text styleClass="formFieldSized" disabled="true" property="organ" size="30"  />
+						<html:text styleClass="formFieldSized" disabled="false" property="organ" size="30"  />
 						<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="organ" target="organTissueCode"
 	  					parameters="organTissueCode={organTissueCode}" className="autocomplete" minimumCharacters="1"/>					
 					</td>				
