@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.32 2007-05-16 16:42:18 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.33 2007-06-19 20:41:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2007/05/16 16:42:18  pandyas
+ * Removed two <br> after Radiation and after Gene Delivery to look better
+ *
  * Revision 1.31  2007/03/28 18:04:32  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -779,7 +782,7 @@
 					<camod:highlight><c:out value="${cd.geneInVirus}" escapeXml="false"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<camod:highlight><c:out value="${cd.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.organ.name}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>

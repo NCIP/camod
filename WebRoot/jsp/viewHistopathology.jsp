@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2007/06/19 20:15:08  pandyas
+ * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription and disease.EVSPreferredDescription) for all screens with trees
+ *
  * Revision 1.37  2006/11/13 20:20:29  pandyas
  * Modified IMG SRC location to include complete location (added /camod/...)
  *
@@ -57,7 +60,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.38 2007-06-19 20:15:08 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.39 2007-06-19 20:41:06 pandyas Exp $
  *
  */   
 %>
@@ -331,14 +334,14 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.organ.name}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 						<bean:define id="d" name="m" property="disease"/>
-							<camod:highlight><c:out value="${d.EVSPreferredDescription}"/>&nbsp;</camod:highlight><br>
+							<camod:highlight><c:out value="${d.name}"/>&nbsp;</camod:highlight><br>
 						&nbsp;
 					</td>
 				</tr>	

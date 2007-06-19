@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.53 2007-05-07 16:47:58 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.54 2007-06-19 20:41:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2007/05/07 16:47:58  pandyas
+ * Fixed code to display link to zfin.org with zfinId
+ *
  * Revision 1.52  2007/04/09 12:34:38  pandyas
  * modified for caMOD 2.3 testing
  *
@@ -411,7 +414,7 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
 									</camod:highlight>		
 								</td>
 								<td class="WhiteBoxRightEnd">
@@ -577,7 +580,7 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</td>
 								<td class="WhiteBoxRightEnd">
@@ -787,7 +790,7 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
 									</camod:highlight>
 								</td>
 								<td class="WhiteBoxRightEnd">

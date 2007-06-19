@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.25 2006-11-13 20:23:18 pandyas Exp $
+ * $Id: viewCellLines.jsp,v 1.26 2007-06-19 20:41:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/11/13 20:23:18  pandyas
+ * Modified IMG SRC location to include complete location (added /camod/...)
+ *
  * Revision 1.24  2006/10/27 18:31:16  pandyas
  * Fixed fields in display page to allow for html markup
  *
@@ -79,7 +82,7 @@
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.organ.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>
