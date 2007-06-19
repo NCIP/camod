@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2006/11/13 20:20:29  pandyas
+ * Modified IMG SRC location to include complete location (added /camod/...)
+ *
  * Revision 1.36  2006/11/13 17:14:11  pandyas
  * #468 - remove width and height variable for mtb image icon on header of serach results and view pages with Jax data
  *
@@ -54,7 +57,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.37 2006-11-13 20:20:29 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.38 2007-06-19 20:15:08 pandyas Exp $
  *
  */   
 %>
@@ -116,13 +119,18 @@
 				  	        <tr>
 					  	        <td width="50%">
 									<a href="<c:out value="#histo_${histstat.count}"/>">
-										<camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/></camod:highlight>
+										<camod:highlight><c:out value="${h.organ.name}"/></camod:highlight>
 									</a>
 								</td>
 								<td width="50%">
-									<c:if test="${not empty h.disease}">
-										    <camod:highlight><c:out value="${h.disease.EVSPreferredDescription}"/></camod:highlight>
-									</c:if>	
+									<c:choose>
+										<c:when test="${empty h.disease.name}">
+											<camod:highlight><c:out value="${h.disease.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+										</c:when>
+										<c:otherwise>
+											<camod:highlight><c:out value="${h.disease.name}" escapeXml="false"/></camod:highlight>
+										</c:otherwise>
+									</c:choose>								
 							    </td>
 						    </tr>
 						    
@@ -133,12 +141,12 @@
 								    <td width="50%">
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
 										<a href="<c:out value="#metas_${histstat.count}_${metastat.count}"/>">
-											<c:out value="${m.organ.EVSPreferredDescription}"/>
+											<c:out value="${m.organ.name}"/>
 										</a>(Metastasis)
 									</td>
 									<td width="50%">
 									    <c:if test="${not empty m.disease}">
-											    <camod:highlight><c:out value="${disease.EVSPreferredDescription}"/></camod:highlight>
+											    <camod:highlight><c:out value="${disease.name}"/></camod:highlight>
 										</c:if>
 									</td>
 								</tr>
@@ -166,14 +174,14 @@
 			<tr>
 			    <a name="<c:out value="histo_${histstat.count}"/>"/>&nbsp;
 				<td class="formTitleBlue" height="20" colspan="2">
-					Lesion / Tumor in <camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+					Lesion / Tumor in <camod:highlight><c:out value="${h.organ.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>				
 			
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<camod:highlight><c:out value="${h.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${h.organ.name}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 
@@ -181,7 +189,7 @@
 				<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
 				    <bean:define id="d" name="h" property="disease"/>
-					     <camod:highlight><c:out value="${d.EVSPreferredDescription}"/>&nbsp;<br></camod:highlight>
+					     <camod:highlight><c:out value="${d.name}"/>&nbsp;<br></camod:highlight>
 				</td>
 			</tr>
 				
