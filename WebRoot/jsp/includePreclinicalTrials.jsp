@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/05/16 12:30:49  pandyas
+ * Added developmental stage evs tree to Therapy when species is Zebrafsih
+ *
  * Revision 1.23  2006/10/31 17:22:08  pandyas
  * fixed code to allow for html markup in fields - there was a bug in this jsp
  *
@@ -51,7 +54,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.24 2007-05-16 12:30:49 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.25 2007-06-19 20:34:00 pandyas Exp $
  */
 %>
 <tr>
@@ -99,14 +102,14 @@
 	</td>
 </tr>
 
-<c:if test="${modelspeciescommonname == 'Zebrafish'}">
+
 	<tr>
-		<td class="resultsBoxWhite" width="25%"><b>Developmental Stage</b></td>
+		<td class="resultsBoxWhite" width="25%"><b>Developmental Stage</b> <br>(applies only to Zebrafish)</td>
 		<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
-			<c:out value="${t.developmentalStage.EVSPreferredDescription}" escapeXml="false"/>
+			<c:out value="${t.developmentalStage.name}" escapeXml="false"/>
 		</td>
 	</tr>
-</c:if>
+
 
 <tr>
 	<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
@@ -139,9 +142,7 @@
 	</td>
 </tr>
 <tr><td></td></tr>
-<tr>
-	<td class="greySubTitleLeftEnd" colspan=2><b>Publications:</b></td>
-</tr>
+
 <c:choose>
 	<c:when test="${empty t.publicationCollection}">
 		<tr>
@@ -149,6 +150,9 @@
 		</tr>
 	</c:when>
 	<c:otherwise>
+	<tr>
+		<td class="greySubTitleLeftEnd" colspan=2><b>Publications:</b></td>
+	</tr>	
 	  <tr><td colspan="2">
 		<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%">	
 		<tr>

@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.41 2007-05-07 16:48:39 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.42 2007-06-19 20:33:47 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.41  2007/05/07 16:48:39  pandyas
+  *   Modified code to hide developmentalStage for non-Zebrafish models
+  *
   *   Revision 1.40  2007/04/17 16:12:59  pandyas
   *   Removed indents for four data results including developmental stage so page display is consistent
   *
@@ -181,16 +184,14 @@
 			</c:choose>	
 		</tr>				
 
-		<c:if test="${modelspeciescommonname == 'Zebrafish'}">
 		<tr>
-			<td class="GreyBox" width="20%"><b>Developmental Stage</b></td>
+			<td class="GreyBox" width="20%"><b>Developmental Stage</b><br>(applies only to Zebrafish)</td>
 			<td class="GreyBoxRightEnd" width="70%">
 					<camod:highlight>
 					    <c:out value="${mdl.developmentalStage}" escapeXml="false" />&nbsp;
 					</camod:highlight>
 			</td>
 		</tr>
-		</c:if>
 		
 		<tr>
 			<td class="GreyBox" width="20%"><b>Experimental Design</b></td>
@@ -363,7 +364,7 @@
 				<!-- Add stock number if not Investigator (already displayed under distributor)  -->
 				<td class="<c:out value="${tdClass}"/>End" width="25%">
 						<c:if test = "${dist.id != 1}">
-							<c:out value="${av.stockNumber}"/>
+							<c:out value="${av.stockNumber}"/>&nbsp;
 						</c:if>&nbsp;
 				</td>
 			</tr>
