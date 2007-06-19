@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.33 2007-06-19 18:39:21 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.34 2007-06-19 20:42:59 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.33  2007/06/19 18:39:21  pandyas
+ *  Constant for species common name needs to be set for viewModelCharacteristics so it shows up for Zebrafish models
+ *
  *  Revision 1.32  2006/08/17 18:10:44  pandyas
  *  Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -153,7 +156,7 @@ public class ViewModelAction extends BaseAction
     private void setCancerModel(HttpServletRequest request)
     {
         String modelID = request.getParameter(Constants.Parameters.MODELID);
-        log.debug("<setCancerModel> modelID" + modelID);
+        log.info("<setCancerModel> modelID: " + modelID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = null;
         try
@@ -166,7 +169,7 @@ public class ViewModelAction extends BaseAction
             e.printStackTrace();
         }
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
-        request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, am.getStrain().getSpecies().getCommonName());        
+        //request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, am.getStrain().getSpecies().getCommonName());        
     }
 
     /**
