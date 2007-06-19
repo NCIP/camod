@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.32 2006-08-17 18:10:44 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.33 2007-06-19 18:39:21 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.32  2006/08/17 18:10:44  pandyas
+ *  Defect# 410: Externalize properties files - Code changes to get properties
+ *
  *  Revision 1.31  2006/05/24 18:37:27  georgeda
  *  Workaround for bug in caBIO
  *
@@ -163,6 +166,7 @@ public class ViewModelAction extends BaseAction
             e.printStackTrace();
         }
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
+        request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, am.getStrain().getSpecies().getCommonName());        
     }
 
     /**
