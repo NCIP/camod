@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionManagerImpl.java,v 1.7 2007-06-13 20:20:09 pandyas Exp $
+ * $Id: AssociatedExpressionManagerImpl.java,v 1.8 2007-06-20 18:05:09 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/06/13 20:20:09  pandyas
+ * Modified code for EVS trees after formal testing
+ *
  * Revision 1.6  2007/04/30 20:09:43  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -66,28 +69,42 @@ public class AssociatedExpressionManagerImpl extends BaseManager implements Asso
         save(inExpressionFeature);
     }
 
+    
+    
     private void populate(AssociatedExpressionData inAssociatedExpressionData,
                           ExpressionFeature inExpressionFeature) throws Exception
     {
         // Using trees loop 
-        if (inAssociatedExpressionData.getOrganTissueCode() != null && inAssociatedExpressionData.getOrganTissueCode().length() > 0) {
-            log.info("OrganTissueCode: " + inAssociatedExpressionData.getOrganTissueCode());
-            log.info("OrganTissueName: " + inAssociatedExpressionData.getOrganTissueName()); 
-            
-            log.info("OrganTissueCode() != null - getOrCreate method used");
-            // when using tree, organTissueName populates the organ name entry
-            Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
-                    inAssociatedExpressionData.getOrganTissueCode(),
-                    inAssociatedExpressionData.getOrganTissueName());
-            inExpressionFeature.setOrgan(theNewOrgan); 
-        } else {
-            log.info("Organ: " + inAssociatedExpressionData.getOrgan());            
-            
-            // Create new organ with conceptCode = 000000, use name field
+        // Update loop handeled separately for conceptCode = 00000
+        if (inAssociatedExpressionData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            log.info("Organ update loop for text: " + inAssociatedExpressionData.getOrgan()); 
             inExpressionFeature.setOrgan(new Organ());
-            inExpressionFeature.getOrgan().setName(inAssociatedExpressionData.getOrgan());                
+            inExpressionFeature.getOrgan().setName(inAssociatedExpressionData.getOrgan());   
             inExpressionFeature.getOrgan().setConceptCode(
-                    Constants.Dropdowns.CONCEPTCODEZEROS);
+                    Constants.Dropdowns.CONCEPTCODEZEROS);            
+        } else {            
+            // Using trees loop, new save loop and update loop
+            if (inAssociatedExpressionData.getOrganTissueCode() != null && inAssociatedExpressionData.getOrganTissueCode().length() > 0) {
+                log.info("OrganTissueCode: " + inAssociatedExpressionData.getOrganTissueCode());
+                log.info("OrganTissueName: " + inAssociatedExpressionData.getOrganTissueName()); 
+                
+                log.info("OrganTissueCode() != null - getOrCreate method used");
+                // when using tree, organTissueName populates the organ name entry
+                Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
+                        inAssociatedExpressionData.getOrganTissueCode(),
+                        inAssociatedExpressionData.getOrganTissueName());
+                
+                log.info("theNewOrgan: " + theNewOrgan);
+                inExpressionFeature.setOrgan(theNewOrgan); 
+            } else {
+                // text entry loop = new save
+                log.info("Organ (text): " + inAssociatedExpressionData.getOrgan()); 
+                inExpressionFeature.setOrgan(new Organ());
+                inExpressionFeature.getOrgan().setName(inAssociatedExpressionData.getOrgan());                
+                inExpressionFeature.getOrgan().setConceptCode(
+                        Constants.Dropdowns.CONCEPTCODEZEROS);            
+            }           
+            
         }
 
         ExpressionLevelDesc expLevelDesc = ExpressionLevelDescManagerSingleton.instance().getByName(
