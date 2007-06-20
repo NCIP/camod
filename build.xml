@@ -53,7 +53,6 @@
     </target>
 	<!-- Classpath to run the junit tests -->
 	<path id="test.run.classpath">
-		<pathelement location="${source.dir}" />
 		<pathelement location="${build.classes.dir}" />
 		<pathelement location="${build.dir}/build" />
 		<fileset dir="${source.lib.dir}">
