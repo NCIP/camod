@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.62 2007-06-19 13:55:38 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.63 2007-06-20 19:29:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.62  2007/06/19 13:55:38  pandyas
+ * Enable disease when species is other than mouse, rat, zebrafish (i.e. hamster, ect) to allow for entry by user
+ *
  * Revision 1.61  2007/06/05 19:26:34  pandyas
  * Added final method name for Zebrafish tissue tree
  *
@@ -187,9 +190,9 @@
 		document.forms[0].agentName.value = document.searchForm.agentName;
 	}
 	
-	function getOrganTree( control ) {
+	function getOrganDiseaseTree( control ) {
 		form = control.form;
-		form.action = "AdvancedSearchPopulateAction.do?unprotected_method=setSpeciesForOrganTree";
+		form.action = "AdvancedSearchPopulateAction.do?unprotected_method=setSpeciesForTrees";
 		form.submit();
 	}			
 	
@@ -258,7 +261,7 @@
 			<td class="formRequiredNotice" width="5">&nbsp;</td>
 			<td class="formLabel"><label for="field3">Species:</label></td>
 			<td class="formField">				
-				<html:select styleClass="formFieldSized" size="1" property="species" onchange="getOrganTree(this);">
+				<html:select styleClass="formFieldSized" size="1" property="species" onchange="getOrganDiseaseTree(this);">
 					<html:optionsCollection name="<%= Dropdowns.APPROVEDSPECIESDROP %>" />										
 				</html:select>				
 			</td>
@@ -323,25 +326,62 @@
 				</c:otherwise>					
     		</c:choose>							
 		</tr>
-		
-		<tr>
-			<td class="formRequiredNotice" width="5">&nbsp;</td>
-			<td class="formLabel">
-		 		<html:hidden styleId="diagnosisCode" property="diagnosisCode"/>
-		 		<html:hidden styleId="diagnosisName" property="diagnosisName"/>
-				<label for="field2">Diagnosis</label>
-				&nbsp;
-				<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="/camod/images/helpTooltip.gif" text="Tool Tip Test 1" />
-		  	    <a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
-				<IMG src="images\selectUP.gif" align=middle  border=0>
-				</a>			    
-			</td>
-			<td class="formField">
-				<html:text styleClass="formFieldSized" styleId="tumorClassification" property="tumorClassification" size="25"/>
-				<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="tumorClassification" target="diagnosisCode"
-  				parameters="diagnosisCode={diagnosisCode}" className="autocomplete" minimumCharacters="1" />				
-			</td>
-		</tr>
+
+	<tr>
+		<td class="formRequiredNotice" width="5">*</td>
+ 			<!-- Display disease tree based on animal model species or allow for text entry if no specific tree exists -->
+	 		<c:choose>			
+				<c:when test="${searchspeciescommonname == 'Mouse'}">
+					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
+						<a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>	
+					</td>
+						<html:hidden property="diagnosisCode"/>		
+						<html:hidden property="diagnosisName"/>
+						<td class="formField">
+							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+							<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="tumorClassification" target="diagnosisCode"
+  							parameters="diagnosisCode={diagnosisCode}" className="autocomplete" minimumCharacters="1" />							
+						</td>									
+				</c:when>
+				<c:when test="${searchspeciescommonname == 'Rat'}">
+					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
+						<a href="javascript:showRatDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
+						<IMG src="images\selectUP.gif" align=middle border=0></a>	
+					</td>			
+						<html:hidden property="diagnosisCode"/>		
+						<html:hidden property="diagnosisName"/>
+						<td class="formField">
+							<html:text styleClass="formFieldSized" disabled="true" property="tumorClassification"   size="30" />
+						</td>												
+				</c:when>
+				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
+					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					</td>	
+						<td class="formField">
+								<html:hidden property="diagnosisCode"/>	
+								<html:hidden property="diagnosisName"/>													
+							<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
+								<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
+							</html:select>					
+						</td>
+					</tr>	
+				</c:when>							
+				<c:otherwise>
+					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					</td>
+						<html:hidden property="diagnosisCode"/>								
+						<html:hidden property="diagnosisName"/>
+						<td class="formField">
+							<html:text styleClass="formFieldSized" disabled="false" property="tumorClassification"   size="25" />
+								<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="tumorClassification" target="diagnosisCode"
+  								parameters="diagnosisCode={diagnosisCode}" className="autocomplete" minimumCharacters="1" />							
+						</td>				
+				</c:otherwise>
+	    	</c:choose>
+	</tr>
 		
 
 		<tr>
@@ -572,7 +612,8 @@
 
 <SCRIPT LANGUAGE="JavaScript">
     checkFields();
-	setAgentName();    
+	setAgentName(); 
+	getOrganDiseaseTree();   
 </SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>

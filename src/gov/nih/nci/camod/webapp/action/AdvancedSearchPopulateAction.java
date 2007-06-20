@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.15 2007-05-21 17:33:45 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.16 2007-06-20 19:29:22 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/05/21 17:33:45  pandyas
+ * Modified simple and adv search species drop down to pull from DB (approved model species only)
+ *
  * Revision 1.14  2007/05/18 14:40:49  pandyas
  * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
  *
@@ -154,7 +157,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
 
 	}
 	
-    public ActionForward setSpeciesForOrganTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+    public ActionForward setSpeciesForTrees(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	
     	String theSearchSpecies = null;    	
@@ -172,6 +175,8 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         } 
         
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
+
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);        
 
         return mapping.findForward("searchAdvanced");    	
     }	

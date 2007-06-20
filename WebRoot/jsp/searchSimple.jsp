@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.47 2007-06-19 13:55:07 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.48 2007-06-20 19:29:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.47  2007/06/19 13:55:07  pandyas
+ * Enable disease when species is other than mouse, rat, zebrafish (i.e. hamster, ect) to allow for entry by user
+ *
  * Revision 1.46  2007/06/05 19:26:34  pandyas
  * Added final method name for Zebrafish tissue tree
  *
@@ -287,5 +290,9 @@
 				
 </td></tr>
 </TABLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+	getOrganTree();   
+</SCRIPT>
 
 <%@ include file="/jsp/footer.jsp" %>
