@@ -24,15 +24,15 @@ public class AllTests extends TestCase {
         //suite.addTest(AllSearchTests.suite());
         //suite.addTest(AllSubmissionTests.suite());
         
-        suite.addTest(SearchPopulateCellLinesTest.suite());
-        suite.addTest(SearchPopulateCITest.suite());
-        suite.addTest(SearchPopulateGeneticDescriptionTest.suite());
-        suite.addTest(SearchPopulateHistopathologyTest.suite());
-        suite.addTest(SearchPopulateModelCharacteristicsTest.suite());        
-        suite.addTest(SearchPopulatePublicationTest.suite());
-        suite.addTest(SearchPopulateTherapyTest.suite());        
-        suite.addTest(SearchPopulateTransIntTest.suite());
-        suite.addTest(SearchPopulateXenograftTest.suite());        
+        //suite.addTest(SearchPopulateCellLinesTest.suite());
+        //suite.addTest(SearchPopulateCITest.suite());
+        //suite.addTest(SearchPopulateGeneticDescriptionTest.suite());
+        //suite.addTest(SearchPopulateHistopathologyTest.suite());
+        //suite.addTest(SearchPopulateModelCharacteristicsTest.suite());        
+        //suite.addTest(SearchPopulatePublicationTest.suite());
+        //suite.addTest(SearchPopulateTherapyTest.suite());        
+        //suite.addTest(SearchPopulateTransIntTest.suite());
+        //suite.addTest(SearchPopulateXenograftTest.suite());        
 
 
         return suite;
