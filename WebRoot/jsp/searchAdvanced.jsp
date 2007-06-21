@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.64 2007-06-21 18:48:19 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.65 2007-06-21 20:07:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.64  2007/06/21 18:48:19  pandyas
+ * Removed bold for diagnosis on adv search jsp
+ *
  * Revision 1.63  2007/06/20 19:29:45  pandyas
  * Fixed populate for diagnosis - depends on species set in the session constant
  *
@@ -330,9 +333,9 @@
     		</c:choose>							
 		</tr>
 
-	<tr>
-		<td class="formNotice" width="5">&nbsp;</td>
- 			<!-- Display disease tree based on animal model species or allow for text entry if no specific tree exists -->
+		<tr>
+			<td class="formRequiredNotice" width="0">&nbsp;</td>
+ 			<!-- Display anatomy tree based on species selected or default to mouse tree if no species selected (new screen) --> 			
 	 		<c:choose>			
 				<c:when test="${searchspeciescommonname == 'Mouse'}">
 					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
