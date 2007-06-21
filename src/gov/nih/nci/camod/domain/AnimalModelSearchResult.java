@@ -1,9 +1,14 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.17 2007-03-28 18:00:26 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.18 2007-06-21 20:46:46 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/03/28 18:00:26  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.16  2006/11/08 19:10:10  pandyas
  * Returns external source so it can be used to determine if the MTB icon is displayed
  *
@@ -1276,7 +1281,9 @@ public class AnimalModelSearchResult implements Comparable
 
             for (Histopathology theHistopathology : theHistopathologySet)
             {
-                String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
+            	// getOrgan().getEVSPreferredDescription does not work for Zebrafish organs so removed
+            	//String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
+                String theOrgan = theHistopathology.getOrgan().getName();
 
                 if (!theOrgans.contains(theOrgan))
                 {
@@ -1289,7 +1296,9 @@ public class AnimalModelSearchResult implements Comparable
 
                 for (Histopathology theMetastasis : theMetastasisSet)
                 {
-                    String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
+                	// getOrgan().getEVSPreferredDescription does not work for Zebrafish organs so removed
+                    //String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
+                	String theMetaOrgan = theMetastasis.getOrgan().getName();
                     if (!theMetaSet.contains(theMetaOrgan))
                     {
                         theMetaSet.add(theMetaOrgan);
