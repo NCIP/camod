@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.63 2007-06-20 19:29:45 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.64 2007-06-21 18:48:19 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.63  2007/06/20 19:29:45  pandyas
+ * Fixed populate for diagnosis - depends on species set in the session constant
+ *
  * Revision 1.62  2007/06/19 13:55:38  pandyas
  * Enable disease when species is other than mouse, rat, zebrafish (i.e. hamster, ect) to allow for entry by user
  *
@@ -328,11 +331,11 @@
 		</tr>
 
 	<tr>
-		<td class="formRequiredNotice" width="5">*</td>
+		<td class="formNotice" width="5">&nbsp;</td>
  			<!-- Display disease tree based on animal model species or allow for text entry if no specific tree exists -->
 	 		<c:choose>			
 				<c:when test="${searchspeciescommonname == 'Mouse'}">
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 							<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showMouseDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
@@ -346,7 +349,7 @@
 						</td>									
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Rat'}">
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 						<camod:cshelp topic="data_tree_help" key="DIAGNOSIS.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />					
 						<a href="javascript:showRatDiagnosisTree('searchForm', 'diagnosisCode', 'diagnosisName', 'tumorClassification', false)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>	
@@ -358,7 +361,7 @@
 						</td>												
 				</c:when>
 				<c:when test="${searchspeciescommonname == 'Zebrafish'}">
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>	
 						<td class="formField">
 								<html:hidden property="diagnosisCode"/>	
@@ -370,7 +373,7 @@
 					</tr>	
 				</c:when>							
 				<c:otherwise>
-					<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
+					<td class="formLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 					</td>
 						<html:hidden property="diagnosisCode"/>								
 						<html:hidden property="diagnosisName"/>
