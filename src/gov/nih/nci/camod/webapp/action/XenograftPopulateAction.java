@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.35 2007-06-18 16:09:31 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.36 2007-06-21 20:49:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.35  2007/06/18 16:09:31  pandyas
+ * Fixed re-populate
+ * When entering mutilple xenografts the constant used to choose the tree being displayed needs to be set in the populate method for each species entry
+ *
  * Revision 1.34  2007/05/18 15:33:49  pandyas
  * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
  *
@@ -197,7 +201,7 @@ public class XenograftPopulateAction extends BaseAction
                     // getEVSPreferredDescription does not work for Zebrafish EVS tree
                     //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
                     xenograftForm.setOrgan(xeno.getOrgan().getName());
-                    log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getEVSPreferredDescription());
+                    log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getName());
                     xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
                     log.info("<XenograftPopulateAction> OrganTissueCode= " + xeno.getOrgan().getConceptCode());
             }
