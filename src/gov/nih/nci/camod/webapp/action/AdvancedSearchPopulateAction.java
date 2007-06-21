@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.16 2007-06-20 19:29:22 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.17 2007-06-21 20:07:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/06/20 19:29:22  pandyas
+ * Fixed populate for diagnosis - depends on species set in the session constant
+ *
  * Revision 1.15  2007/05/21 17:33:45  pandyas
  * Modified simple and adv search species drop down to pull from DB (approved model species only)
  *
@@ -126,6 +129,9 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, 
         			Constants.Dropdowns.ADD_BLANK);   	
         }
+        
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);        
+        
         return mapping.findForward("next");
     }
     
@@ -175,8 +181,6 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         } 
         
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);
-
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);        
 
         return mapping.findForward("searchAdvanced");    	
     }	
