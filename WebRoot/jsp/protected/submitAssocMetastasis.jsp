@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.34  2007/06/13 20:20:34  pandyas
+ * Modified code for EVS trees after formal testing
+ *
  * Revision 1.33  2007/06/05 19:26:44  pandyas
  * Added final method name for Zebrafish tissue tree
  *
@@ -73,7 +76,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: submitAssocMetastasis.jsp,v 1.34 2007-06-13 20:20:34 pandyas Exp $
+ * $Id: submitAssocMetastasis.jsp,v 1.35 2007-06-25 17:49:19 pandyas Exp $
  *
  */   
 %>
@@ -227,7 +230,7 @@
 						<td class="formRequiredLabel"><label for="field2">Diagnosis:</label>&nbsp;				
 						</td>	
 							<td class="formField">
-									<input type="hidden" name="diagnosisCode" value="<%= Constants.Dropdowns.CONCEPTCODEZEROS %>"/>						
+								<html:hidden property="diagnosisCode"/>						
 								<html:select styleClass="formFieldSized" size="1" property="tumorClassification" onchange="chkOtherDiagnosis();" >
 									<html:optionsCollection name="<%= Constants.Dropdowns.ZEBRAFISHDIAGNOSISDROP %>" />										
 								</html:select>					
