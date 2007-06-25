@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.42 2007-06-19 20:33:47 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.43 2007-06-25 16:36:32 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.42  2007/06/19 20:33:47  pandyas
+  *   Users not logged in can not access the session property to check the model species.  Therefore, we must show the attribute for all models.
+  *
   *   Revision 1.41  2007/05/07 16:48:39  pandyas
   *   Modified code to hide developmentalStage for non-Zebrafish models
   *
@@ -194,31 +197,33 @@
 		</tr>
 		
 		<tr>
-			<td class="GreyBox" width="20%"><b>Experimental Design</b></td>
-			<td class="GreyBoxRightEnd" width="70%">
+			<td class="WhiteBox" width="20%"><b>Experimental Design</b></td>
+			<td class="WhiteBoxRightEnd" width="70%">
 					<camod:highlight>
 					    <c:out value="${mdl.experimentDesign}" escapeXml="false" />&nbsp;
 					</camod:highlight>
 			</td>
-		</tr>		               
+		</tr>		
+         
 
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Phenotype</b></td>
-			<td class="WhiteBoxRightEnd" width="70%">
+			<td class="GreyBox" width="20%"><b>Phenotype</b></td>
+			<td class="GreyBoxRightEnd" width="70%">
 					<camod:highlight>
 						<c:out value="${mdl.phenotype.description}" escapeXml="false"/>
 					</camod:highlight>						
 			</td>
 		</tr>		
 		<tr>
-			<td class="GreyBox" width="20%"><b>Website for add. info</b></td>
-			<td class="GreyBoxRightEnd" width="70%">
+			<td class="WhiteBox" width="20%"><b>Website for add. info</b></td>
+			<td class="WhiteBoxRightEnd" width="70%">
 					<a target="_blank" href="<c:out value="${mdl.url}"/>" ><c:out value="${mdl.url}" escapeXml="false"/></a>&nbsp;					
 			</td>
-		</tr>		
+		</tr>	
+			
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Breeding Notes</b></td>
-			<td class="WhiteBoxRightEnd" width="70%">
+			<td class="GreyBox" width="20%"><b>Breeding Notes</b></td>
+			<td class="GreyBoxRightEnd" width="70%">
 				<P>
 					<camod:highlight>
 						<c:out value="${mdl.phenotype.breedingNotes}" escapeXml="false"/>&nbsp;
@@ -228,8 +233,8 @@
 		</tr>		               
 
 		<tr>
-			<td class="GreyBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
-			<td class="GreyBoxRightEnd" width="70%">
+			<td class="WhiteBox" width="20%"><b>Sex Distribution of the Phenotype</b></td>
+			<td class="WhiteBoxRightEnd" width="70%">
 				<camod:highlight>
 					<c:out value="${mdl.phenotype.sexDistribution.type}"  escapeXml="false"/>&nbsp;
 				</camod:highlight>
@@ -237,8 +242,8 @@
 		</tr>	
         
 		<tr>
-			<td class="WhiteBox" width="20%"><b>Submitted by</b></td>
-			<td class="WhiteBoxRightEnd" width="70%">
+			<td class="GreyBox" width="20%"><b>Submitted by</b></td>
+			<td class="GreyBoxRightEnd" width="70%">
 			    <c:if test="${not empty mdl.submitter.emailAddress}">
 				    <a href="mailto:<c:out value="${mdl.submitter.emailAddress}"/>"></a>
 				</c:if>
@@ -250,8 +255,8 @@
 		</tr>
                   
 		<tr>
-			<td class="GreyBox" width="20%"><b>Principal Investigator / Lab</b></td>
-			<td class="GreyBoxRightEnd" width="70%">
+			<td class="WhiteBox" width="20%"><b>Principal Investigator / Lab</b></td>
+			<td class="WhiteBoxRightEnd" width="70%">
 				<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
 				    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
 				</c:if>
