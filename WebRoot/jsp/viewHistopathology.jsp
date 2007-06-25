@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.39  2007/06/19 20:41:06  pandyas
+ * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
+ *
  * Revision 1.38  2007/06/19 20:15:08  pandyas
  * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription and disease.EVSPreferredDescription) for all screens with trees
  *
@@ -60,7 +63,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.39 2007-06-19 20:41:06 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.40 2007-06-25 16:35:09 pandyas Exp $
  *
  */   
 %>
@@ -348,14 +351,14 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Age at Onset of Metastasis</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/></camod:highlight>
+						<camod:highlight><c:out value="${m.ageOfOnset}"/>&nbsp;<c:out value="${m.ageOfOnsetUnit}"/></camod:highlight>
 				    </td>
 				</tr>	
 				
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Age at Detection of Metastasis</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.ageOfDetection}"/>&nbsp;<c:out value="${h.ageOfDetectionUnit}"/></camod:highlight>
+						<camod:highlight><c:out value="${m.ageOfDetection}"/>&nbsp;<c:out value="${m.ageOfDetectionUnit}"/></camod:highlight>
 				    </td>
 				</tr>						
 	
