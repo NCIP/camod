@@ -2,9 +2,13 @@
 
 /**
  * 
- * $Id: viewPublications.jsp,v 1.27 2007-05-16 18:20:12 pandyas Exp $
+ * $Id: viewPublications.jsp,v 1.28 2007-06-25 16:37:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/05/16 18:20:12  pandyas
+ * Modified column header for J Number, MGI, MTB, and ZFIN publication links
+ * Modified code to get the ZFIN code to work
+ *
  * Revision 1.26  2007/05/16 17:48:57  pandyas
  * Fixed ZFIN Pub link on viewPublicaiton screen
  *
@@ -106,6 +110,7 @@
 						<c:set var="tdClass" value="resultsBoxGrey"/>
 					</c:otherwise>
 				</c:choose>
+				
 				<td class="<c:out value="${tdClass}"/>" width="10%">
 					<camod:highlight><c:out value="${p.publicationStatus.name}"/>&nbsp;</camod:highlight>
 				</td>
@@ -113,19 +118,26 @@
 					<camod:highlight><c:out value="${p.authors}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				
+				<!-- Two choose required so we can check for emtpy ZFIN or J Numbers-->
 				<td class="<c:out value="${tdClass}"/>" width="15%" align="center">
 					<c:choose>
 						<c:when test="${not empty p.zfinPubId}">
 								<a target="_blank" href="http://zfin.org/cgi-bin/webdriver?MIval=aa-pubview2.apg&OID=<c:out value="${p.zfinPubId}"/>">ZFIN</a>
 								<br/>
 						</c:when>				
-						<c:otherwise>				
-							<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
-								<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>
-								<br/>
-								<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
+						<c:otherwise>&nbsp;					
 						</c:otherwise>
 					</c:choose>
+					<c:choose>
+							<c:when test="${not empty p.jaxJNumber}">										
+								<c:out value="${p.jaxJNumber}"/>&nbsp;<br/>												
+									<a target="_blank" href="http://www.informatics.jax.org/searches/accession_report.cgi?id=<c:out value="${p.jaxJNumber}"/>">MGI</a>
+									<br/>
+									<a target="_blank" href="http://tumor.informatics.jax.org/mtbwi/referenceDetails.do?accId=<c:out value="${p.jaxJNumber}"/>">MTB</a>
+							</c:when>				
+						<c:otherwise>&nbsp;						
+						</c:otherwise>
+					</c:choose>					
 				</td>	
 							
 				<td class="<c:out value="${tdClass}"/>" width="30%">
