@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.36 2007-06-21 20:49:14 pandyas Exp $
+ * $Id: XenograftPopulateAction.java,v 1.37 2007-06-25 17:48:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2007/06/21 20:49:14  pandyas
+ * Minor modification in print out of log statement
+ *
  * Revision 1.35  2007/06/18 16:09:31  pandyas
  * Fixed re-populate
  * When entering mutilple xenografts the constant used to choose the tree being displayed needs to be set in the populate method for each species entry
@@ -197,13 +200,25 @@ public class XenograftPopulateAction extends BaseAction
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
             if (xeno.getOrgan() != null)
-            {
+            {            
+                // since we are always querying from concept code (save and edit),
+                // simply display EVSPreferredDescription, unless concept code is '00000'
+                if (xeno.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
+                    // getEVSPreferredDescription does not work for Zebrafish EVS tree
+                    //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                    xenograftForm.setOrgan(xeno.getOrgan().getName());
+                    log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getName());
+                    xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
+                    log.info("<XenograftPopulateAction> OrganTissueCode= " + xeno.getOrgan().getConceptCode());           
+                    
+                } else {
                     // getEVSPreferredDescription does not work for Zebrafish EVS tree
                     //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
                     xenograftForm.setOrgan(xeno.getOrgan().getName());
                     log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getName());
                     xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
                     log.info("<XenograftPopulateAction> OrganTissueCode= " + xeno.getOrgan().getConceptCode());
+                }
             }
 
 

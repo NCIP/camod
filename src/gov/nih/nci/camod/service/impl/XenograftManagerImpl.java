@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.36 2007-06-18 16:14:02 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.37 2007-06-25 17:48:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.36  2007/06/18 16:14:02  pandyas
+ * Cleaned up unused object
+ *
  * Revision 1.35  2007/05/10 02:20:34  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -280,37 +283,42 @@ public class XenograftManagerImpl extends BaseManager implements
         
         log.info("<XenograftManagerImpl> populateOrgan: ");        
 
-        // Check for organ and then get and set organ
-        if (inXenograftData.getOrganTissueCode() != null
-                && inXenograftData.getOrganTissueCode().length() > 0) {
-        	
-			// if organ concept code = 000000 create one new
-			if (inXenograftData.getOrganTissueCode().equals(
-					Constants.Dropdowns.CONCEPTCODEZEROS)) {
-				log.info("inXenograftData.getOrganTissueCode(): "
-						+ inXenograftData.getOrganTissueCode());
-				// Create new organ with conceptCode = 000000, use name field
-				inXenograft.setOrgan(new Organ());
-				inXenograft.getOrgan().setConceptCode(
-						Constants.Dropdowns.CONCEPTCODEZEROS);
-				inXenograft.getOrgan()
-						.setName(inXenograftData.getOrgan());
-			} else {
-				log.info("Use getOrCreate method for organ object");
-				Organ theNewOrgan = OrganManagerSingleton.instance()
-						.getOrCreate(inXenograftData.getOrganTissueCode(),
-								inXenograftData.getOrganTissueName());
-				inXenograft.setOrgan(theNewOrgan);
-				// blank out organ, clear button functionality during editing
-			}        	
-            log.info("<populateOrgan> organ is selected: ");   
+        // Update loop handeled separately for conceptCode = 00000
+        if (inXenograftData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            log.info("Organ update loop for text: " + inXenograftData.getOrgan()); 
+            inXenograft.setOrgan(new Organ());
+            inXenograft.getOrgan().setName(inXenograftData.getOrgan());   
+            inXenograft.getOrgan().setConceptCode(
+                    Constants.Dropdowns.CONCEPTCODEZEROS);            
+        } else {            
+            // Using trees loop, new save loop and update loop
+            if (inXenograftData.getOrganTissueCode() != null && inXenograftData.getOrganTissueCode().length() > 0) {
+                log.info("OrganTissueCode: " + inXenograftData.getOrganTissueCode());
+                log.info("OrganTissueName: " + inXenograftData.getOrganTissueName()); 
+                
+                log.info("OrganTissueCode() != null - getOrCreate method used");
+                // when using tree, organTissueName populates the organ name entry
+                Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
+                        inXenograftData.getOrganTissueCode(),
+                        inXenograftData.getOrganTissueName());
+                
+                log.info("theNewOrgan: " + theNewOrgan);
+                inXenograft.setOrgan(theNewOrgan); 
+            }   if (inXenograftData.getOrganTissueCode().equals(null) && inXenograftData.getOrgan().equals(null)) {
+                log.info("Null out organ when cleared: " );
+                inXenograft.setOrgan(null);                 
+
+            }  else {
+                // text entry loop = new save
+                log.info("Organ (text entry): " + inXenograftData.getOrgan()); 
+                inXenograft.setOrgan(new Organ());
+                inXenograft.getOrgan().setName(inXenograftData.getOrgan());                
+                inXenograft.getOrgan().setConceptCode(
+                        Constants.Dropdowns.CONCEPTCODEZEROS); 
+                log.info("Organ: " + inXenograft.getOrgan().toString());
+            }           
             
         }
-		// blank out organ, clear button functionality during editing
-		else {
-			log.info("Setting object to null - clear organ: ");
-			inXenograft.setOrgan(null);
-		}
 
 	}
 

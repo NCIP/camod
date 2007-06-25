@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.21 2007-05-10 02:20:34 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.22 2007-06-25 17:48:37 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/05/10 02:20:34  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.20  2007/04/30 20:09:43  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -182,31 +185,42 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 	private void populateOrgan(GeneDeliveryData inGeneDeliveryData,
 			GeneDelivery inGeneDelivery) throws Exception {
 		
-		if (inGeneDeliveryData.getOrganTissueCode() != null &&
-				inGeneDeliveryData.getOrganTissueCode().length() > 0) {
-			// if organ concept code = 000000 create one new
-			if (inGeneDeliveryData.getOrganTissueCode().equals(
-					Constants.Dropdowns.CONCEPTCODEZEROS)) {
-				log.info("inGeneDeliveryData.getOrganTissueCode(): "
-						+ inGeneDeliveryData.getOrganTissueCode());
-				// Create new organ with conceptCode = 000000, use name field
-				inGeneDelivery.setOrgan(new Organ());
-				inGeneDelivery.getOrgan().setConceptCode(
-						Constants.Dropdowns.CONCEPTCODEZEROS);
-				inGeneDelivery.getOrgan()
-						.setName(inGeneDeliveryData.getOrgan());
-			} else {
-				log.info("Use getOrCreate method for organ object");
-				Organ theNewOrgan = OrganManagerSingleton.instance()
-						.getOrCreate(inGeneDeliveryData.getOrganTissueCode(),
-								inGeneDeliveryData.getOrganTissueName());
-				inGeneDelivery.setOrgan(theNewOrgan);
-				// blank out organ, clear button functionality during editing
-			}
-		} else {
-			log.info("Setting object to null - no organ selected or cleared organ: ");
-			inGeneDelivery.setOrgan(null);
-		}
+        // Update loop handeled separately for conceptCode = 00000
+        if (inGeneDeliveryData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            log.info("Organ update loop for text: " + inGeneDeliveryData.getOrgan()); 
+            inGeneDelivery.setOrgan(new Organ());
+            inGeneDelivery.getOrgan().setName(inGeneDeliveryData.getOrgan());   
+            inGeneDelivery.getOrgan().setConceptCode(
+                    Constants.Dropdowns.CONCEPTCODEZEROS);            
+        } else {            
+            // Using trees loop, new save loop and update loop
+            if (inGeneDeliveryData.getOrganTissueCode() != null && inGeneDeliveryData.getOrganTissueCode().length() > 0) {
+                log.info("OrganTissueCode: " + inGeneDeliveryData.getOrganTissueCode());
+                log.info("OrganTissueName: " + inGeneDeliveryData.getOrganTissueName()); 
+                
+                log.info("OrganTissueCode() != null - getOrCreate method used");
+                // when using tree, organTissueName populates the organ name entry
+                Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
+                        inGeneDeliveryData.getOrganTissueCode(),
+                        inGeneDeliveryData.getOrganTissueName());
+                
+                log.info("theNewOrgan: " + theNewOrgan);
+                inGeneDelivery.setOrgan(theNewOrgan); 
+            }   if (inGeneDeliveryData.getOrganTissueCode().equals(null) && inGeneDeliveryData.getOrgan().equals(null)) {
+                log.info("Null out organ when cleared: " );
+                inGeneDelivery.setOrgan(null);                 
+
+            }  else {
+                // text entry loop = new save
+                log.info("Organ (text entry): " + inGeneDeliveryData.getOrgan()); 
+                inGeneDelivery.setOrgan(new Organ());
+                inGeneDelivery.getOrgan().setName(inGeneDeliveryData.getOrgan());                
+                inGeneDelivery.getOrgan().setConceptCode(
+                        Constants.Dropdowns.CONCEPTCODEZEROS); 
+                log.info("Organ: " + inGeneDelivery.getOrgan().toString());
+            }           
+            
+        } 
 
 	}
 
