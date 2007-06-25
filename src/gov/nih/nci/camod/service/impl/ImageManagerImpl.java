@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.22 2007-04-20 17:51:27 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.23 2007-06-25 16:57:11 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/04/20 17:51:27  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.21  2006/08/17 18:26:17  pandyas
  * Defect# 410: Externalize properties files - Code Changes to send mail method
  *
@@ -26,7 +29,6 @@ import gov.nih.nci.camod.domain.Image;
 import gov.nih.nci.camod.domain.StainingMethod;
 import gov.nih.nci.camod.service.ImageManager;
 import gov.nih.nci.camod.util.FtpUtil;
-import gov.nih.nci.camod.util.MailUtil;
 import gov.nih.nci.camod.util.RandomGUID;
 import gov.nih.nci.camod.webapp.form.ImageData;
 import java.io.BufferedOutputStream;
@@ -38,10 +40,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 import org.apache.struts.upload.FormFile;
 
@@ -103,9 +103,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			String inStorageDirKey) throws Exception {
 
 		log.info("Entering populateImage");
-
-		if (inImageData.getStainingMethodName() != null
-				&& !inImageData.getStainingMethodName().equals("")) {
+		if (inImageData.getStainingMethodCode() != null
+				&& inImageData.getStainingMethodCode().length() >0) {
 
             // every submission - lookup the StainingMethod or create one new
 			StainingMethod stainingMethod = StainingMethodManagerSingleton
@@ -119,6 +118,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			// null staining method - covers editing
 			inImage.setStainingMethod(null);
 		}
+
 
 		if (inImage != null) {
 			inImage.setTitle(inImageData.getTitle());
@@ -289,58 +289,5 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 		log.trace("Exiting populateImage");
 	}
 
-	private void sendEmail(AnimalModel inAnimalModel,
-			String theUncontrolledVocab, String inType) {
-		// Get the e-mail resource
-		Properties camodProperties = new Properties();
-		String camodPropertiesFileName = null;
 
-		camodPropertiesFileName = System
-				.getProperty("gov.nih.nci.camod.camodProperties");
-
-		try {
-
-			FileInputStream in = new FileInputStream(camodPropertiesFileName);
-			camodProperties.load(in);
-
-		} catch (FileNotFoundException e) {
-			log.error("Caught exception finding file for properties: ", e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			log.error("Caught exception finding file for properties: ", e);
-			e.printStackTrace();
-		}
-
-		// Iterate through all the reciepts in the config file - modified
-		String recipients = UserManagerSingleton.instance()
-				.getEmailForCoordinator();
-
-		StringTokenizer st = new StringTokenizer(recipients, ",");
-		String inRecipients[] = new String[st.countTokens()];
-		for (int i = 0; i < inRecipients.length; i++) {
-			inRecipients[i] = st.nextToken();
-		}
-
-		String inSubject = camodProperties
-				.getProperty("model.new_unctrl_vocab_subject");
-		String inFrom = inAnimalModel.getSubmitter().getEmailAddress();
-
-		// gather message keys and variable values to build the e-mail
-		String[] messageKeys = { Constants.Admin.NONCONTROLLED_VOCABULARY };
-		Map<String, Object> values = new TreeMap<String, Object>();
-		values.put("type", inType);
-		values.put("value", theUncontrolledVocab);
-		values.put("submitter", inAnimalModel.getSubmitter());
-		values.put("model", inAnimalModel.getModelDescriptor());
-		values.put("modelstate", inAnimalModel.getState());
-
-		// Send the email
-		try {
-			MailUtil.sendMail(inRecipients, inSubject, "", inFrom, messageKeys,
-					values);
-		} catch (Exception e) {
-			log.error("Caught exception sending mail: ", e);
-			e.printStackTrace();
-		}
-	}
 }
