@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.17 2007-05-10 02:20:49 pandyas Exp $
+ * $Id: GeneDeliveryAction.java,v 1.18 2007-06-26 16:14:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/05/10 02:20:49  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ *
  * Revision 1.16  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -72,10 +75,11 @@ public final class GeneDeliveryAction extends BaseAction {
         log.info("<GeneDeliveryAction edit> following Characteristics:" + "\n\t ViralVector: "
                 + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
                 + geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
-                + "\n\t Regimen: " + geneDeliveryForm.getRegimen() + "\n\t organTissueCode: "
-                + geneDeliveryForm.getOrganTissueCode() + "\n\t organTissueName: "
-                + geneDeliveryForm.getOrganTissueName() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+                + "\n\t Regimen: " + geneDeliveryForm.getRegimen() 
+                + "\n\t organTissueCode: " + geneDeliveryForm.getOrganTissueCode() 
+                + "\n\t organTissueName: "  + geneDeliveryForm.getOrganTissueName() 
+                + "\n\t organ: "  + geneDeliveryForm.getOrgan()                 
+                + "\n\t user: "  + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theAction = (String) request.getParameter(Constants.Parameters.ACTION);
 
@@ -146,8 +150,9 @@ public final class GeneDeliveryAction extends BaseAction {
                 + "\n\t Regimen: " + geneDeliveryForm.getRegimen() 
                 + "\n\t organ: " + geneDeliveryForm.getOrgan()                
                 + "\n\t organTissueCode: " + geneDeliveryForm.getOrganTissueCode() 
-                + "\n\t organTissueName: " + geneDeliveryForm.getOrganTissueName() + "\n\t user: "
-                + (String) request.getSession().getAttribute("camod.loggedon.username"));
+                + "\n\t organTissueName: " + geneDeliveryForm.getOrganTissueName() 
+                + "\n\t organ: "  + geneDeliveryForm.getOrgan()                     
+                + "\n\t user: " + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
 

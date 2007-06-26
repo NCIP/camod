@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.37 2007-06-25 17:48:37 pandyas Exp $
+ * $Id: XenograftManagerImpl.java,v 1.38 2007-06-26 16:13:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2007/06/25 17:48:37  pandyas
+ * Fixed save and edit for text
+ *
  * Revision 1.36  2007/06/18 16:14:02  pandyas
  * Cleaned up unused object
  *
@@ -285,14 +288,20 @@ public class XenograftManagerImpl extends BaseManager implements
 
         // Update loop handeled separately for conceptCode = 00000
         if (inXenograftData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-            log.info("Organ update loop for text: " + inXenograftData.getOrgan()); 
-            inXenograft.setOrgan(new Organ());
-            inXenograft.getOrgan().setName(inXenograftData.getOrgan());   
-            inXenograft.getOrgan().setConceptCode(
-                    Constants.Dropdowns.CONCEPTCODEZEROS);            
+            if(inXenograftData.getOrgan() != null && inXenograftData.getOrgan().length() >0 ) {
+                log.info("Organ update loop for text: " + inXenograftData.getOrgan()); 
+                inXenograft.setOrgan(new Organ());
+                inXenograft.getOrgan().setName(inXenograftData.getOrgan());   
+                inXenograft.getOrgan().setConceptCode(
+                        Constants.Dropdowns.CONCEPTCODEZEROS);     
+            } else {
+                log.info("Clear previously entered organ text: " );
+                inXenograft.setOrgan(null); 
+            }
         } else {            
             // Using trees loop, new save loop and update loop
-            if (inXenograftData.getOrganTissueCode() != null && inXenograftData.getOrganTissueCode().length() > 0) {
+            if (inXenograftData.getOrganTissueCode() != null && inXenograftData.getOrganTissueCode().length() > 0
+                    && inXenograftData.getOrganTissueName() != null && inXenograftData.getOrganTissueName().length() > 0) {
                 log.info("OrganTissueCode: " + inXenograftData.getOrganTissueCode());
                 log.info("OrganTissueName: " + inXenograftData.getOrganTissueName()); 
                 
@@ -304,21 +313,25 @@ public class XenograftManagerImpl extends BaseManager implements
                 
                 log.info("theNewOrgan: " + theNewOrgan);
                 inXenograft.setOrgan(theNewOrgan); 
-            }   if (inXenograftData.getOrganTissueCode().equals(null) && inXenograftData.getOrgan().equals(null)) {
+            } 
+            // Clear organ selection via GUI
+            if (inXenograftData.getOrgan() == null && inXenograftData.getOrganTissueCode().length() <1 ) {
                 log.info("Null out organ when cleared: " );
                 inXenograft.setOrgan(null);                 
 
-            }  else {
+            }
+            // initial save text entry organ from GUI
+            if (inXenograftData.getOrgan() != null && inXenograftData.getOrgan().length() >0 ) {
                 // text entry loop = new save
-                log.info("Organ (text entry): " + inXenograftData.getOrgan()); 
+                log.info("Organ (initial text entry): " + inXenograftData.getOrgan()); 
                 inXenograft.setOrgan(new Organ());
                 inXenograft.getOrgan().setName(inXenograftData.getOrgan());                
                 inXenograft.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS); 
-                log.info("Organ: " + inXenograft.getOrgan().toString());
+                log.info("New Organ: " + inXenograft.getOrgan().toString());
             }           
             
-        }
+        } 
 
 	}
 
