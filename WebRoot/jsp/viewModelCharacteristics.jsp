@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.43 2007-06-25 16:36:32 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.44 2007-06-26 18:15:41 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.43  2007/06/25 16:36:32  pandyas
+  *   Reordered backgroud color - note:  isToolStrain is hidden when not mouse so colors will not be perfect
+  *
   *   Revision 1.42  2007/06/19 20:33:47  pandyas
   *   Users not logged in can not access the session property to check the model species.  Therefore, we must show the attribute for all models.
   *
@@ -170,21 +173,17 @@
 		</tr>
 		
 		<tr>
-			<c:choose>
-				<c:when test="${mdl.strain.species.scientificName == 'Mus musculus'}">		
-					<td class="WhiteBox" width="30%"><b>Is This a Tool Strain?</b></td>
-					<td class="WhiteBoxRightEnd" width="70%">
-						<c:choose>						
-							<c:when test = "${mdl.isToolStrain == true}">
-								<c:out value="Yes"/>
-							</c:when>
-							<c:otherwise>
-								<c:out value="No"/>
-							</c:otherwise>
-						</c:choose>
-					</td>						
-				</c:when>
-			</c:choose>	
+			<td class="WhiteBox" width="30%"><b>Is This a Tool Strain?</b></td>
+			<td class="WhiteBoxRightEnd" width="70%">
+				<c:choose>						
+					<c:when test = "${mdl.isToolStrain == true}">
+						<c:out value="Yes"/>
+					</c:when>
+					<c:otherwise>
+						<c:out value="No"/>
+					</c:otherwise>
+				</c:choose>
+			</td>	
 		</tr>				
 
 		<tr>
