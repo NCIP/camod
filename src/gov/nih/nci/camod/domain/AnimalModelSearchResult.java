@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.18 2007-06-21 20:46:46 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.19 2007-06-26 16:11:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/06/21 20:46:46  pandyas
+ * The method getOrgan().getEVSPrefferedName does not work for Zebrafish - using getOrgan().getName(); until fixed
+ *
  * Revision 1.17  2007/03/28 18:00:26  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -803,8 +806,15 @@ public class AnimalModelSearchResult implements Comparable
 
             while (hisSetIter.hasNext())
             {
-                Histopathology his = (Histopathology) hisSetIter.next();
-                myDiagnosis += his.getDisease().getName() + "<br>";
+                Histopathology his = (Histopathology) hisSetIter.next();                
+                if (his.getDisease().getName() != null)
+                {
+                    myDiagnosis += his.getDisease().getName() + "<br>";
+                }
+                else
+                {
+                    myDiagnosis += his.getDisease().getNameUnctrlVocab() + "<br>";
+                }                
             }
         }
         return myDiagnosis;
