@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: BaseHttpTest.java,v 1.10 2007-02-21 17:08:09 pandyas Exp $
+ * $Id: BaseHttpTest.java,v 1.11 2007-06-27 19:02:36 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/02/21 17:08:09  pandyas
+ * Initial admin testing - does not work
+ *
  * Revision 1.9  2006/10/11 15:17:49  pandyas
  * added debug statements
  *
@@ -46,6 +49,17 @@ public class BaseHttpTest extends TestCase {
 
     public BaseHttpTest(String testName) {
         super(testName);
+        try {
+//          this block removes the https hostname wrong exception
+           com.sun.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+               new com.sun.net.ssl.HostnameVerifier() {
+                   public boolean verify(String urlHostname, String certHostname) {
+                       return true;
+                   }
+               }
+           );} catch(Exception x) {
+               x.printStackTrace();
+           }  
     }
 
     protected void assertCurrentPageContains(String inTextToFind) throws Exception {

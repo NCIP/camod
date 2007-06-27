@@ -51,21 +51,27 @@
     	    <classpath refid="test.compile.classpath" />
         </javac>
     </target>
-	<!-- Classpath to run the junit tests -->
-	<path id="test.run.classpath">
-		<pathelement location="${source.dir}" />
-		<pathelement location="${build.classes.dir}" />
-		<pathelement location="${build.dir}/build" />
-		<fileset dir="${source.lib.dir}">
-			<include name="**/*.jar"/>
-		</fileset>
-	</path>
+	
+    <!-- Classpath to run the junit tests -->
+    <path id="test.run.classpath">
+    	<pathelement location="${source.dir}" />
+          <pathelement location="${build.classes.dir}" />
+          <pathelement location="${build.dir}/build" />
+          <fileset dir="${source.lib.dir}">
+                <include name="**/*.jar"/>
+          </fileset>
+          <fileset dir="/devtools/jboss-4.0.2/client">
+                <include name="**/*.jar"/>
+          </fileset>
+    </path>
+
 	<!-- Class to  run for the web http integration tests -->
 	<property name="test.class.name" value="web.alltests.AllTests" />
 	<target name="test-httpUnit">
 	  <junit fork="yes" haltonfailure="yes">
 	    <test name="${test.class.name}" />
-	  	<formatter type="xml"/>
+	  	<!-- <formatter type="xml"/> -->
+	  	<formatter type="plain" usefile="false"/>
 	  	<classpath refid="test.run.classpath" />
 	  </junit>
 	</target>
@@ -171,7 +177,27 @@
                      includes="**/*.hbm.xml"/>            
         </schemaexport>
     </target>
-	
 
+    <!-- =================================================================== -->
+    <!-- The Junit Ant   --> 
+    <!-- =================================================================== -->
+	
+	<property name="tst-dir" location="test" />
+	  <property name="TALK" value="true" />  <path id="classpath.base">
+	  </path>
+
+	  <path id="classpath.test">
+	    <pathelement location="${junit.jar}" />
+	    <pathelement location="${tst-dir}" />
+	    <path refid="classpath.base" />
+	  </path>
+	
+	  <target name="test" depends="compile-unit-tests">
+	    <junit>
+	      <classpath refid="classpath.test" />
+	      <formatter type="brief" usefile="false" />
+	      <test name="EditModelCharacteristicsTest" />
+	    </junit>
+	  </target>	
 	
 </project>
