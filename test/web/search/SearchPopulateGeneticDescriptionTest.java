@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.8 2007-06-11 18:44:37 pandyas Exp $
+ * $Id: SearchPopulateGeneticDescriptionTest.java,v 1.9 2007-06-27 19:02:18 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/06/11 18:44:37  pandyas
+ * Fixed TestUtil.setRandomValues method
+ *
  * Revision 1.7  2007/06/11 18:06:54  pandyas
  * Fixed TestUtil.setRandomValues method - needs true/false parameter if theParamsToIgnore is not null
  *
@@ -318,7 +321,8 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		verifyValuesOnPage(theWebForm, theParamsToSkip);
 	}	
 
-	public void testPopulateGenomicSegmentWithOthers() throws Exception {
+/*
+    public void testPopulateGenomicSegmentWithOthers() throws Exception {
 
 		navigateToModelForEditing(myModelName);
 
@@ -390,7 +394,7 @@ public class SearchPopulateGeneticDescriptionTest extends BaseModelNeededTest {
 		
 		verifyValuesOnPopulatePage(theWebForm, theParamsToSkip);
 	}	
-	
+*/	
 	public void testSearchForGenomicSegment() throws Exception {
 
 		navigateToModelForEditing(myModelName);
