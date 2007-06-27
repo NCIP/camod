@@ -97,7 +97,7 @@
 					if ( cc > 0 ) {
 						for (int i=0; i<cc; i++) {					
 						CellLine c = (CellLine)l.get(i);
-						if( c.getPublicationCollection() !=null) {
+						if( c.getPublicationCollection() !=null && c.getPublicationCollection().size() > 0) {
 							found = true;
 							break;
 						}
@@ -110,7 +110,7 @@
 					if ( cc > 0 ) {
 						for (int i=0; i<cc; i++) {					
 						Therapy t = (Therapy)l.get(i);
-						if( t.getPublicationCollection() !=null) {
+						if( t.getPublicationCollection() !=null && t.getPublicationCollection().size() > 0) {
 							found = true;
 							break;
 						}
