@@ -1,7 +1,0 @@
-Amaxa
-Ambion
-BioLynx
-Cenix BioScience
-Invitrogen
-Qiagen
-SystemBio
