@@ -70,8 +70,8 @@
 	<target name="test-httpUnit">
 	  <junit fork="yes" haltonfailure="yes">
 	    <test name="${test.class.name}" />
-	  	<!-- <formatter type="xml"/> -->
-	  	<formatter type="plain" usefile="false"/>
+	  	<formatter type="xml"/>
+	  	<!--formatter type="plain" usefile="false"/ -->
 	  	<classpath refid="test.run.classpath" />
 	  </junit>
 	</target>
