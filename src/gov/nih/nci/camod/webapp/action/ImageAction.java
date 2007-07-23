@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageAction.java,v 1.14 2007-04-20 17:51:14 pandyas Exp $
+ * $Id: ImageAction.java,v 1.15 2007-07-23 17:40:42 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/04/20 17:51:14  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.13  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -112,7 +115,7 @@ public final class ImageAction extends BaseAction {
         catch (IllegalArgumentException e) {
             
             theForward = "input";
-            log.error("Exception ocurred creating Image", e);
+            log.error("Exception occurred creating Image", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -120,7 +123,7 @@ public final class ImageAction extends BaseAction {
             saveErrors(request, msg);
         }
         catch (Exception e) {
-            log.error("Exception ocurred creating Image", e);
+            log.error("Exception occurred creating Image", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -181,7 +184,7 @@ public final class ImageAction extends BaseAction {
 
         }
         catch (IllegalArgumentException e) {
-            log.error("Exception ocurred creating Image", e);
+            log.error("Exception occurred creating Image", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -191,7 +194,7 @@ public final class ImageAction extends BaseAction {
             theForward = "input";
         }
         catch (Exception e) {
-            log.error("Exception ocurred creating Image", e);
+            log.error("Exception occurred creating Image", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();

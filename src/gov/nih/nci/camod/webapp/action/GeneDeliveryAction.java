@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.18 2007-06-26 16:14:58 pandyas Exp $
+ * $Id: GeneDeliveryAction.java,v 1.19 2007-07-23 17:40:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/06/26 16:14:58  pandyas
+ * Fixed save when organ cleared from text entry and by use of the clear button for trees
+ *
  * Revision 1.17  2007/05/10 02:20:49  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -111,7 +114,7 @@ public final class GeneDeliveryAction extends BaseAction {
             }
         } catch (Exception e) {
 
-            log.error("Exception ocurred creating GeneDelivery", e);
+            log.error("Exception occurred creating GeneDelivery", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -172,7 +175,7 @@ public final class GeneDeliveryAction extends BaseAction {
             saveErrors(request, msg);
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating GeneDelivery", e);
+            log.error("Exception occurred creating GeneDelivery", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();

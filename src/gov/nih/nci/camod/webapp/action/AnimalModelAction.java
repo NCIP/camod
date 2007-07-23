@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.23 2007-04-04 13:21:00 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.24 2007-07-23 17:40:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/04/04 13:21:00  pandyas
+ * Added reset for animal model species common name in edit (also in save) method
+ *
  * Revision 1.22  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -166,7 +169,7 @@ public final class AnimalModelAction extends BaseAction {
 
 		} catch (Exception e) {
 
-			log.error("Exception ocurred creating model", e);
+			log.error("Exception occurred creating model", e);
 
 			// Encountered an error saving the model.
 			ActionMessages msg = new ActionMessages();

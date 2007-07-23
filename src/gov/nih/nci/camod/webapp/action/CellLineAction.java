@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLineAction.java,v 1.14 2005-11-09 00:17:26 georgeda Exp $
+ * $Id: CellLineAction.java,v 1.15 2007-07-23 17:40:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2005/11/09 00:17:26  georgeda
+ * Fixed delete w/ constraints
+ *
  * Revision 1.13  2005/11/01 18:14:28  schroedn
  * Implementing 'Enter Publication' for CellLines and Therapy, fixed many bugs with Publication. Remaining known bug with "Fill in Fields" button
  *
@@ -98,7 +101,7 @@ public final class CellLineAction extends BaseAction {
 			}
 		} catch (Exception e) {
 
-			log.error("Exception ocurred creating GeneDelivery", e);
+			log.error("Exception occurred creating GeneDelivery", e);
 
 			// Encountered an error saving the model.
 			ActionMessages msg = new ActionMessages();
@@ -155,7 +158,7 @@ public final class CellLineAction extends BaseAction {
 			saveErrors(request, msg);
 
 		} catch (Exception e) {
-			log.error("Exception ocurred creating Xenograft", e);
+			log.error("Exception occurred creating Xenograft", e);
 
 			// Encountered an error saving the model.
 			ActionMessages msg = new ActionMessages();

@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.16 2007-06-13 19:39:38 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.17 2007-07-23 17:40:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/06/13 19:39:38  pandyas
+ * Modified code for EVS trees after formal testing
+ *
  * Revision 1.15  2007/05/17 18:43:23  pandyas
  * Added printouts for more attributes
  *
@@ -388,7 +391,7 @@ public class HistopathologyAction extends BaseAction {
             log.info("<HistopathologyAction> Exiting 'saveMetastasis' method");
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating AssociatedExpression", e);
+            log.error("Exception occurred creating AssociatedExpression", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();

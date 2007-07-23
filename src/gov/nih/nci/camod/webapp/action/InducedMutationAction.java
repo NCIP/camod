@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationAction.java,v 1.13 2007-04-04 13:19:07 pandyas Exp $
+ * $Id: InducedMutationAction.java,v 1.14 2007-07-23 17:40:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/04/04 13:19:07  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.12  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -176,7 +179,7 @@ public final class InducedMutationAction extends BaseAction {
             saveErrors(request, msg);
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating InducedMutation", e);
+            log.error("Exception occurred creating InducedMutation", e);
 
             // Encountered an error
             ActionMessages msg = new ActionMessages();

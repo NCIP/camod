@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftAction.java,v 1.21 2007-04-04 13:19:27 pandyas Exp $
+ * $Id: XenograftAction.java,v 1.22 2007-07-23 17:37:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/04/04 13:19:27  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.20  2007/03/26 12:02:30  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -150,7 +153,7 @@ public final class XenograftAction extends BaseAction
         }
         catch (Exception e)
         {
-            log.error("Exception ocurred creating Xenograft", e);
+            log.error("Exception occurred creating Xenograft", e);
 
             // Encountered an error saving the xenograft.
             ActionMessages msg = new ActionMessages();

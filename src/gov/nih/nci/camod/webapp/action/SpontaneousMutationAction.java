@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationAction.java,v 1.10 2007-04-04 13:19:07 pandyas Exp $
+ * $Id: SpontaneousMutationAction.java,v 1.11 2007-07-23 17:38:26 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/04/04 13:19:07  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.9  2007/03/28 20:53:18  pandyas
  * Added print for rgd and zfin numbers in save and edit methods
  *
@@ -106,7 +109,7 @@ public class SpontaneousMutationAction extends BaseAction {
                 saveErrors(request, msg);
             }
         } catch (Exception e) {
-            log.error("Exception ocurred creating SpontaneousMutation", e);
+            log.error("Exception occurred creating SpontaneousMutation", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -167,7 +170,7 @@ public class SpontaneousMutationAction extends BaseAction {
             saveErrors(request, msg);
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating SpontaneousMutation", e);
+            log.error("Exception occurred creating SpontaneousMutation", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();

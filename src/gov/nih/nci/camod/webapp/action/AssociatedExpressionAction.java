@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionAction.java,v 1.5 2006-04-17 19:09:40 pandyas Exp $
+ * $Id: AssociatedExpressionAction.java,v 1.6 2007-07-23 17:40:43 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/17 19:09:40  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -92,7 +95,7 @@ public class AssociatedExpressionAction extends BaseAction {
             }
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating AssociatedExpression", e);
+            log.error("Exception occurred creating AssociatedExpression", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -180,7 +183,7 @@ public class AssociatedExpressionAction extends BaseAction {
             saveErrors(request, msg);
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating AssociatedExpression", e);
+            log.error("Exception occurred creating AssociatedExpression", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();

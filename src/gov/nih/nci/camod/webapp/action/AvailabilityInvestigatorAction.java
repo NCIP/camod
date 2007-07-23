@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.6 2005-11-11 15:38:58 georgeda Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.7 2007-07-23 17:40:43 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2005/11/11 15:38:58  georgeda
+ * Fix error w/ PI being required
+ *
  * Revision 1.5  2005/11/09 00:17:26  georgeda
  * Fixed delete w/ constraints
  *
@@ -106,7 +109,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
                 saveErrors(request, msg);
             }
         } catch (Exception e) {
-            log.error("Exception ocurred creating Investigator Availability", e);
+            log.error("Exception occurred creating Investigator Availability", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
@@ -161,7 +164,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
             saveErrors(request, msg);
 
         } catch (Exception e) {
-            log.error("Exception ocurred creating Investigator Availability", e);
+            log.error("Exception occurred creating Investigator Availability", e);
 
             // Encountered an error saving the model.
             ActionMessages msg = new ActionMessages();
