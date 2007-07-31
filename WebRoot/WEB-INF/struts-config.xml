@@ -154,8 +154,8 @@
 		    type="gov.nih.nci.camod.webapp.form.ViralTreatmentForm"/>		    
 		
 		<form-bean
-			name="xenograftForm"
-		    type="gov.nih.nci.camod.webapp.form.XenograftForm"/>
+			name="graftForm"
+		    type="gov.nih.nci.camod.webapp.form.GraftForm"/>
 
 		<form-bean
 			name="searchForm"
@@ -343,8 +343,8 @@
 			path="/jsp/viewTherapeuticApproaches.jsp"></forward>
 		
 		<forward
-			name="viewTransplantXenograft"
-			path="/jsp/viewTransplantXenograft.jsp"></forward>
+			name="viewTransplantGraft"
+			path="/jsp/viewTransplantGraft.jsp"></forward>
 		
 		<forward
 			name="viewTransientInterference"
@@ -519,8 +519,8 @@
 			path="/jsp/protected/submitTherapy.jsp"></forward>
 		
 		<forward
-			name="submitTransplantXenograft"
-			path="/jsp/protected/submitTransplantXenograft.jsp"></forward>
+			name="submitTransplantGraft"
+			path="/jsp/protected/submitTransplantGraft.jsp"></forward>
 		
 		<forward
 			name="submitViralTreatment"
@@ -914,9 +914,9 @@
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
-			path="/submitTransplantXenograft"
+			path="/submitTransplantGraft"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitTransplantXenograft.jsp">
+			parameter="/jsp/protected/submitTransplantGraft.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
@@ -1257,8 +1257,8 @@
     		path="/ViewModelAction.do?unprotected_method=populateEngineeredGene">
         </forward>
         <forward 
-    		name="Xenograft Page"
-    		path="/ViewModelAction.do?unprotected_method=populateTransplantXenograft">
+    		name="Graft Page"
+    		path="/ViewModelAction.do?unprotected_method=populateTransplantGraft">
         </forward>
         <forward 
     		name="Transient Interference Page"
@@ -2177,11 +2177,11 @@
 		<set-property property="secure" value="false" />		
     </action>
     
-     <!-- XenograftForm -->
+     <!-- GraftForm -->
 
-     <action path="/XenograftAction"
-	        type="gov.nih.nci.camod.webapp.action.XenograftAction"
-	        name="xenograftForm"
+     <action path="/GraftAction"
+	        type="gov.nih.nci.camod.webapp.action.GraftAction"
+	        name="graftForm"
 	        scope="request"
 	        parameter="method" 	     
 	        validate="true"
@@ -2189,14 +2189,14 @@
 	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
-            path="/submitTransplantXenograft.do">
+            path="/submitTransplantGraft.do">
         </forward>    	
     </action>
 
 
-    <action path="/XenograftPopulateAction"
-    		type="gov.nih.nci.camod.webapp.action.XenograftPopulateAction"
-    		name="xenograftForm"    		
+    <action path="/GraftPopulateAction"
+    		type="gov.nih.nci.camod.webapp.action.GraftPopulateAction"
+    		name="graftForm"    		
             scope="request"
             parameter="method"
 			validate="false">
@@ -2241,6 +2241,26 @@
 			path="/adminEditModels.do">
 		</forward>
      </action>
+     
+    <action path="/SearchAdminAction"
+	        type="gov.nih.nci.camod.webapp.action.SearchAdminAction"
+	        name="curationAssignmentForm"
+	        scope="session"	        
+         	parameter="protected"
+	        unknown="false"
+	        validate="false">         	
+	    <set-property property="secure" value="false" />  
+	    <forward
+            name="next"
+            path="/adminEditModels.do"
+            redirect="true">
+        </forward>
+        <forward
+            name="back"
+            path="/adminEditModels.do">
+        </forward>   	
+    </action>
+     
      
      <action 
          path="/AdminSubmitOverviewPopulateAction"
@@ -2534,7 +2554,8 @@
          path="/ChangeAnimalModelStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
          name="animalModelStateForm"
-         parameter="protected">
+         parameter="protected"
+         validate="true">
          <set-property property="secure" value="false" />
          <forward 
     		name="next"

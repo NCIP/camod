@@ -58,6 +58,9 @@
     <!-- genomicSegmentManager -->
     <bean id="genomicSegmentManager" class="gov.nih.nci.camod.service.impl.GenomicSegmentManagerImpl"/>
     
+    <!-- GraftManager -->
+    <bean id="graftManager" class="gov.nih.nci.camod.service.impl.GraftManagerImpl"/>
+    
     <!-- histopathologyManager -->
     <bean id="histopathologyManager" class="gov.nih.nci.camod.service.impl.HistopathologyManagerImpl"/>    
     
@@ -108,7 +111,6 @@
 
     <!-- strainManager -->
     <bean id="strainManager" class="gov.nih.nci.camod.service.impl.StrainManagerImpl"/>
-
     
     <!-- treatmentManager -->
     <bean id="treatmentManager" class="gov.nih.nci.camod.service.impl.TreatmentManagerImpl"/>    
@@ -119,9 +121,6 @@
     <!--  associatedExpressionManager -->
     <bean id="associatedExpressionManager" class="gov.nih.nci.camod.service.impl.AssociatedExpressionManagerImpl"/>
     
-    <!-- XenograftManager -->
-    <bean id="xenograftManager" class="gov.nih.nci.camod.service.impl.XenograftManagerImpl"/>
-
     <!-- SavedQueryManager -->
     <bean id="savedQueryManager" class="gov.nih.nci.camod.service.impl.SavedQueryManagerImpl"/>    
            

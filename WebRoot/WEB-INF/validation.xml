@@ -2105,10 +2105,10 @@
 			</field>
 		</form>
 
-		<form name="xenograftForm">
-			<field property="xenograftName"
+		<form name="graftForm">
+			<field property="name"
 				depends="required,maxlength">
-				<arg0 key="XenograftForm.xenograftName" />
+				<arg0 key="GraftForm.name" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2117,7 +2117,7 @@
 				</var>
 			</field>
 			<field property="atccNumber" depends="maxlength">
-				<arg0 key="XenograftForm.atccNumber" />
+				<arg0 key="GraftForm.atccNumber" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2127,7 +2127,7 @@
 			</field>
 			<field property="parentalCellLineName"
 				depends="maxlength">
-				<arg0 key="XenograftForm.parentalCellLineName" />
+				<arg0 key="GraftForm.parentalCellLineName" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2136,10 +2136,10 @@
 				</var>
 			</field>
 			<field property="cellAmount" depends="integer">
-				<arg0 key="XenograftForm.cellAmount" />
+				<arg0 key="GraftForm.cellAmount" />
 			</field>
 			<field property="growthPeriod" depends="maxlength">
-				<arg0 key="XenograftForm.growthPeriod" />
+				<arg0 key="GraftForm.growthPeriod" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2149,7 +2149,7 @@
 			</field>
 			<field property="modificationDescription"
 				depends="maxlength">
-				<arg0 key="XenograftForm.modificationDescription" />
+				<arg0 key="GraftForm.modificationDescription" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2158,7 +2158,7 @@
 				</var>
 			</field>
 			<field property="geneticManipulation" depends="maxlength">
-				<arg0 key="XenograftForm.geneticManipulation" />
+				<arg0 key="GraftForm.geneticManipulation" />
 				<arg1 name="maxlength" key="${var:maxlength}"
 					resource="false" />
 				<var>
@@ -2167,15 +2167,15 @@
 				</var>
 			</field>
 			<field property="donorScientificName" depends="required">
-				<arg0 key="XenograftForm.donorScientificName" />
+				<arg0 key="GraftForm.donorScientificName" />
 			</field>
 			<field property="donorEthinicityStrain"
 				depends="required">
-				<arg0 key="XenograftForm.donorEthinicityStrain" />
+				<arg0 key="GraftForm.donorEthinicityStrain" />
 			</field>
 			<field property="otherDonorEthinicityStrain"
 				depends="validwhen,maxlength">
-				<arg0 key="XenograftForm.otherDonorEthinicityStrain" />
+				<arg0 key="GraftForm.otherDonorEthinicityStrain" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2191,16 +2191,16 @@
 					<var-value>255</var-value>
 				</var>
 			</field>
-			<field property="graftType" depends="required">
-				<arg0 key="XenograftForm.graftType" />
+			<field property="sourceType" depends="required">
+				<arg0 key="GraftForm.sourceType" />
 			</field>
-			<field property="otherGraftType"
+			<field property="otherSourceType"
 				depends="validwhen, maxlength">
-				<arg0 key="XenograftForm.otherGraftType" />
+				<arg0 key="GraftForm.otherSourceType" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
-						((graftType != 'Other') or ((graftType ==
+						((sourceType != 'Other') or ((sourceType ==
 						'Other') and (*this* != null)))
 					</var-value>
 				</var>
@@ -2213,7 +2213,7 @@
 			</field>
 			<field property="otherAdministrativeSite"
 				depends="validwhen, maxlength">
-				<arg0 key="XenograftForm.otherAdministrativeSite" />
+				<arg0 key="GraftForm.otherAdministrativeSite" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2230,7 +2230,7 @@
 			</field>
 			<field property="otherConditioningRegimen"
 				depends="validwhen, maxlength">
-				<arg0 key="XenograftForm.otherConditioningRegimen" />
+				<arg0 key="GraftForm.otherConditioningRegimen" />
 				<var>
 					<var-name>test</var-name>
 					<var-value>
@@ -2320,5 +2320,11 @@
 			</field>			
 		</form>
 		
+		<form name="AnimalModelStateForm">
+			<field property="myAssignedTo" depends="required">
+				<arg0 key="AnimalModelStateForm.myAssignedTo" />
+			</field>
+		</form>
+				
 	</formset>
 </form-validation>
