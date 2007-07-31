@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneAction.java,v 1.14 2007-07-23 17:40:42 pandyas Exp $
+ * $Id: EngineeredTransgeneAction.java,v 1.15 2007-07-31 12:13:42 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/07/23 17:40:42  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.13  2007/04/04 13:19:07  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -96,8 +99,8 @@ public final class EngineeredTransgeneAction extends BaseAction {
                 + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
                 + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription() + "\n\t getComments: "
-                + engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "
-                + engineeredTransgeneForm.getFileServerLocation() + "\n\t getTitle: "
+                + engineeredTransgeneForm.getComments() + "\n\t getUrl: "
+                + engineeredTransgeneForm.getUrl() + "\n\t getTitle: "
                 + engineeredTransgeneForm.getTitle() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription()
 
@@ -220,8 +223,8 @@ public final class EngineeredTransgeneAction extends BaseAction {
                 + "\n\t getFunction: " + engineeredTransgeneForm.getFunction()
                 + "\n\t getConditionedBy: " + engineeredTransgeneForm.getConditionedBy() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription() + "\n\t getComments: "
-                + engineeredTransgeneForm.getComments() + "\n\t getFileServerLocation: "
-                + engineeredTransgeneForm.getFileServerLocation() + "\n\t getTitle: "
+                + engineeredTransgeneForm.getComments() + "\n\t getUrl: "
+                + engineeredTransgeneForm.getUrl() + "\n\t getTitle: "
                 + engineeredTransgeneForm.getTitle() + "\n\t getDescription: "
                 + engineeredTransgeneForm.getDescription()
 

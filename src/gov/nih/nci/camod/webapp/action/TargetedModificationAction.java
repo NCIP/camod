@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationAction.java,v 1.16 2007-07-23 17:37:58 pandyas Exp $
+ * $Id: TargetedModificationAction.java,v 1.17 2007-07-31 12:13:42 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/07/23 17:37:58  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.15  2007/04/04 13:19:05  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -75,8 +78,8 @@ public final class TargetedModificationAction extends BaseAction {
                 + "\n\t getMgiId: "  + targetedModificationForm.getMgiId() 
                 + "\n\t getZfinId: "  + targetedModificationForm.getZfinId() 
                 + "\n\t getRgdId: "  + targetedModificationForm.getRgdId()                 
-                + "\n\t getFileServerLocation: "
-                + targetedModificationForm.getFileServerLocation() + "\n\t getTitle: "
+                + "\n\t getUrl: "
+                + targetedModificationForm.getUrl() + "\n\t getTitle: "
                 + targetedModificationForm.getTitle() + "\n\t getDescriptionOfConstruct: "
                 + targetedModificationForm.getDescriptionOfConstruct() + "\n\t getConstructSequence(): "
                 + targetedModificationForm.getConstructSequence()
@@ -168,8 +171,8 @@ public final class TargetedModificationAction extends BaseAction {
                 + targetedModificationForm.getMgiId() 
                 + "\n\t getZfinId: "  + targetedModificationForm.getZfinId() 
                 + "\n\t getRgdId: "  + targetedModificationForm.getRgdId()                   
-                + "\n\t getFileServerLocation: "
-                + targetedModificationForm.getFileServerLocation() + "\n\t getTitle: "
+                + "\n\t getUrl: "
+                + targetedModificationForm.getUrl() + "\n\t getTitle: "
                 + targetedModificationForm.getTitle() + "\n\t getDescriptionOfConstruct: "
                 + targetedModificationForm.getDescriptionOfConstruct() + "\n\t getConstructSequence(): "
                 + targetedModificationForm.getConstructSequence()

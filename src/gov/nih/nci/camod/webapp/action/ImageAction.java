@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageAction.java,v 1.15 2007-07-23 17:40:42 pandyas Exp $
+ * $Id: ImageAction.java,v 1.16 2007-07-31 12:13:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/07/23 17:40:42  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.14  2007/04/20 17:51:14  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -57,8 +60,8 @@ public final class ImageAction extends BaseAction {
         // Grab the current modelID from the session
         String aImageID = imageForm.getImageId();
 
-        log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
-                + imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
+        log.info("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+                + imageForm.getUrl() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
                 + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                
                 + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()  + "\n" 
@@ -157,8 +160,8 @@ public final class ImageAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<ImageAction save> following Characteristics:" + "\n\t getFileServerLocation: "
-                + imageForm.getFileServerLocation() + "\n\t getTitle: " + imageForm.getTitle()
+        log.info("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+                + imageForm.getUrl() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
                 + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                   
                 + "\n\t getStainingMethodCode(): " + imageForm.getStainingMethodCode()     + "\n"            

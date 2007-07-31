@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentAction.java,v 1.19 2007-07-23 17:40:43 pandyas Exp $
+ * $Id: GenomicSegmentAction.java,v 1.20 2007-07-31 12:13:42 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/07/23 17:40:43  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.18  2007/04/04 13:19:08  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -72,7 +75,7 @@ public final class GenomicSegmentAction extends BaseAction {
                 + "\n\t getZfinId: "  + genomicSegmentForm.getZfinId() 
                 + "\n\t getRgdId: "  + genomicSegmentForm.getRgdId()                 
                 + "\n\t getDescription: " + genomicSegmentForm.getDescription()
-                + "\n\t getFileServerLocation: " + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
+                + "\n\t getUrl: " + genomicSegmentForm.getUrl() + "\n\t getTitle: "
                 + genomicSegmentForm.getTitle() + "\n\t"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
@@ -175,8 +178,8 @@ public final class GenomicSegmentAction extends BaseAction {
                         + "\n\t getZfinId: "  + genomicSegmentForm.getZfinId() 
                         + "\n\t getRgdId: "  + genomicSegmentForm.getRgdId()                        
                         + "\n\t getDescription: "
-                        + genomicSegmentForm.getDescription() + "\n\t getFileServerLocation: "
-                        + genomicSegmentForm.getFileServerLocation() + "\n\t getTitle: "
+                        + genomicSegmentForm.getDescription() + "\n\t getUrl: "
+                        + genomicSegmentForm.getUrl() + "\n\t getTitle: "
                         + genomicSegmentForm.getTitle()
                         + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
