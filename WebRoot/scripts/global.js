@@ -50,10 +50,10 @@ function chkOtherCondRegimen() {
     chkOther(regimen, otherRegimen);  	
 }
 
-function chkOtherGraft() {
+function chkOtherSourceType() {
 
-	var site = document.forms[0].graftType;
-	var otherSite = document.forms[0].otherGraftType;
+	var site = document.forms[0].sourceType;
+	var otherSite = document.forms[0].otherSourceType;
 	
     chkOther(site, otherSite);		
 }

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteXenograftTest.java,v 1.3 2006-04-27 15:08:52 pandyas Exp $
+ * $Id: SubmitEditDeleteGraftTest.java,v 1.1 2007-07-31 12:00:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/27 15:08:52  pandyas
+ * Modified while testing caMod 2.1
+ *
  * Revision 1.2  2005/12/12 16:01:07  pandyas
  * modified: navigateToModelForEditing(myModelName);
  *
@@ -22,9 +25,9 @@ import web.util.TestUtil;
 
 import com.meterware.httpunit.*;
 
-public class SubmitEditDeleteXenograftTest extends BaseModelNeededTest {
+public class SubmitEditDeleteGraftTest extends BaseModelNeededTest {
 
-	public SubmitEditDeleteXenograftTest(String arg0) {
+	public SubmitEditDeleteGraftTest(String arg0) {
 		super(arg0);
 	}
 
@@ -45,64 +48,64 @@ public class SubmitEditDeleteXenograftTest extends BaseModelNeededTest {
 	}
 	
     public static Test suite() {
-        TestSuite suite = new TestSuite(SubmitEditDeleteXenograftTest.class);
+        TestSuite suite = new TestSuite(SubmitEditDeleteGraftTest.class);
         return suite;
     }
     
-    public void testXenograft() throws Exception {
+    public void testGraft() throws Exception {
     	navigateToModelForEditing(myModelName);
         
-        /* Find Transplant/Xenograft link to Submit */
+        /* Find Transplant/Graft link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
-                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplant/Xenograft");
+                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplant/Graft");
         WebResponse theCurrentPage = theLink.click(); 
         assertCurrentPageContains("if graft type is not listed");
-        WebForm theForm = theCurrentPage.getFormWithName("xenograftForm");
-        theForm.setParameter("xenograftName", "ABCDEFG");
-        theForm.setParameter("graftType", "Cell Line");        
+        WebForm theForm = theCurrentPage.getFormWithName("raftForm");
+        theForm.setParameter("name", "ABCDEFG");
+        theForm.setParameter("sourceType", "Cell Line");        
         theForm.setParameter("donorScientificName", "Mus musculus");
         theCurrentPage = theForm.submit();
         //TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         assertCurrentPageContains("if strain is not listed");
 
         // Set the donorEthnicityStrain and submit again
-        theForm = theCurrentPage.getFormWithName("xenograftForm");
+        theForm = theCurrentPage.getFormWithName("graftForm");
         theForm.setParameter("donorEthinicityStrain", "129");
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
         
-        assertCurrentPageContains("You have successfully added a Xenograft");
+        assertCurrentPageContains("You have successfully added a Graft");
         
         
-        /* Find Transplant/Xenograft link to Edit 
+        /* Find Transplant/Graft link to Edit 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");        
-        assertNotNull("Unable to find link to edit the Transplant/Xenograft", theLink);        
+        assertNotNull("Unable to find link to edit the Transplant/Graft", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if graft type is not listed");
-        theForm = theCurrentPage.getFormWithName("xenograftForm");
-        theForm.setParameter("xenograftName", "ABCDEFG");
+        theForm = theCurrentPage.getFormWithName("graftForm");
+        theForm.setParameter("name", "ABCDEFG");
         theForm.setParameter("donorScientificName", "Mus musculus"); 
-        theForm.setParameter("graftType", "Cell Line");
+        theForm.setParameter("sourceType", "Cell Line");
         theCurrentPage = theForm.submit();
         
         // Set the ethnicity strain and submit again
-        theForm = theCurrentPage.getFormWithName("xenograftForm");
+        theForm = theCurrentPage.getFormWithName("graftForm");
         theForm.setParameter("donorEthinicityStrain", "129");
         theForm.setParameter("parentalCellLineName", "Parent Cell Line");
         theCurrentPage = theForm.submit();
         TestUtil.getTextOnPage(theCurrentPage, "Error: Bad or missing data", "* indicates a required field");
 
-        assertCurrentPageContains("You have successfully edited a Xenograft.");      
+        assertCurrentPageContains("You have successfully edited a Graft.");      
         */
         
-        /* Find Transplant/Xenograft link to Delete 
+        /* Find Transplant/Graft link to Delete 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");
-        assertNotNull("Unable to find link to delete the Transplant/Xenograft", theLink);        
+        assertNotNull("Unable to find link to delete the Transplant/Graft", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if graft type is not listed");
-        theForm = theCurrentPage.getFormWithName("xenograftForm");               
+        theForm = theCurrentPage.getFormWithName("graftForm");               
         theForm.getSubmitButton( "submitAction", "Delete" ).click();              
-        assertCurrentPageContains("You have successfully deleted a Xenograft.");
+        assertCurrentPageContains("You have successfully deleted a Graft.");
         */ 
     }    
 

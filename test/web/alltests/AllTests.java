@@ -32,7 +32,7 @@ public class AllTests extends TestCase {
         //suite.addTest(SearchPopulatePublicationTest.suite());
         //suite.addTest(SearchPopulateTherapyTest.suite());        
         //suite.addTest(SearchPopulateTransIntTest.suite());
-        //suite.addTest(SearchPopulateXenograftTest.suite());        
+        //suite.addTest(SearchPopulateGraftTest.suite());        
 
 
         return suite;
