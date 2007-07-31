@@ -37,7 +37,7 @@
         <mapping resource="gov/nih/nci/camod/domain/Organization.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/TumorCode.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/AbstractCancerModel.hbm.xml"/>
-        <mapping resource="gov/nih/nci/camod/domain/Xenograft.hbm.xml"/>
+        <mapping resource="gov/nih/nci/camod/domain/Graft.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/YeastModel.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/AnimalModel.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Party.hbm.xml"/>
@@ -46,7 +46,7 @@
         <mapping resource="gov/nih/nci/camod/domain/RegulatoryElementType.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/RegulatoryElement.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Role.hbm.xml"/>
-        <mapping resource="gov/nih/nci/camod/domain/EndpointCode.hbm.xml"/>
+        <mapping resource="gov/nih/nci/camod/domain/Endpoint.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/InvivoResult.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Treatment.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Therapy.hbm.xml"/>
@@ -71,8 +71,7 @@
         <mapping resource="gov/nih/nci/camod/domain/SegmentType.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/GenomicSegment.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/SexDistribution.hbm.xml"/>
-        <mapping resource="gov/nih/nci/camod/domain/Phenotype.hbm.xml"/>
-        <mapping resource="gov/nih/nci/camod/domain/RepositoryInfo.hbm.xml"/>        
+        <mapping resource="gov/nih/nci/camod/domain/Phenotype.hbm.xml"/>       
         <mapping resource="gov/nih/nci/camod/domain/Species.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Strain.hbm.xml"/> 
         <mapping resource="gov/nih/nci/camod/domain/Disease.hbm.xml"/>

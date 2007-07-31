@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelStateForm.java,v 1.5 2005-10-24 13:28:30 georgeda Exp $
+ * $Id: AnimalModelStateForm.java,v 1.6 2007-07-31 12:02:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2005/10/24 13:28:30  georgeda
+ * Cleanup changes
+ *
  * Revision 1.4  2005/10/10 14:13:00  georgeda
  * Changes for comment curation
  *
@@ -26,13 +29,13 @@ import org.apache.struts.validator.ValidatorForm;
  * Form used to change the state of an animal model during curation
  * 
  */
-public class AnimalModelStateForm extends ValidatorForm implements AnimalModelStateData, Serializable {
+public class AnimalModelStateForm extends BaseForm implements AnimalModelStateData, Serializable {
 
 	private static final long serialVersionUID = 3257850969634190134L;
 
 	protected String myModelDescriptor;
 
-	protected String myNote;
+	protected String myRemark;
 
 	protected String myModelId;
 
@@ -52,12 +55,12 @@ public class AnimalModelStateForm extends ValidatorForm implements AnimalModelSt
 		myModelDescriptor = inModelDescriptor;
 	}
 
-	public String getNote() {
-		return myNote;
+	public String getRemark() {
+		return myRemark;
 	}
 
-	public void setNote(String inNote) {
-		myNote = inNote;
+	public void setRemark(String inRemark) {
+		myRemark = inRemark;
 	}
 
 	public String getModelId() {
@@ -86,7 +89,7 @@ public class AnimalModelStateForm extends ValidatorForm implements AnimalModelSt
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		myModelDescriptor = null;
-		myNote = null;
+		myRemark = null;
 		myModelId = null;
 		myAssignedTo = null;
 		myEvent = null;

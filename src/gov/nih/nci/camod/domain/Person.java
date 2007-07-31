@@ -1,7 +1,10 @@
 /*
- * $Id: Person.java,v 1.13 2006-05-15 13:33:55 georgeda Exp $
+ * $Id: Person.java,v 1.14 2007-07-31 12:03:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/05/15 13:33:55  georgeda
+ * Cleaned up contact info management
+ *
  * Revision 1.12  2006/05/10 14:13:51  schroedn
  * New Features - Changes from code review
  *
@@ -29,6 +32,7 @@ public class Person extends Party implements Comparable
     private static final long serialVersionUID = 3258795453799404851L;
 
     private final Log log = LogFactory.getLog(Person.class);
+    private String partyId;    
     private String firstName;
     private String middleName;
     private String lastName;
@@ -216,4 +220,12 @@ public class Person extends Party implements Comparable
 
         return super.compareTo(o);
     }
+
+	public String getPartyId() {
+		return partyId;
+	}
+
+	public void setPartyId(String partyId) {
+		this.partyId = partyId;
+	}
 }

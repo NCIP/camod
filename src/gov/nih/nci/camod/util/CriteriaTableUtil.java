@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: CriteriaTableUtil.java,v 1.7 2007-03-28 18:02:04 pandyas Exp $
+ * $Id: CriteriaTableUtil.java,v 1.8 2007-07-31 12:02:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/03/28 18:02:04  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.6  2006/10/17 16:11:52  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -250,10 +255,10 @@ public class CriteriaTableUtil
             theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchTransientInterference") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
         
-        // Search for xenograft
-        if (sData.isSearchXenograft())
+        // Search for graft
+        if (sData.isSearchGraft())
         {
-            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchXenograft") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
+            theDisplayTable += "<tr><td class=\"formFieldNone\">" + theBundle.getString("criteria.isSearchGraft") + "</td><td class=\"formFieldNone\">" + "Checked" + "</td></tr>";
         }
 
         theDisplayTable += "</TABLE>";

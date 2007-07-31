@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    Document   : Xenograft.hbm.xml
+    Document   : Graft.hbm.xml
     Created on : May 3, 2005
     Author     : rajputs
-    Description: Hibernate mapping file for Xenograft
+    Description: Hibernate mapping file for Graft
 -->
 
 <!DOCTYPE hibernate-mapping PUBLIC 
@@ -12,7 +12,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="gov.nih.nci.camod.domain">
-	<subclass name="Xenograft" 
+	<subclass name="Graft" 
     	extends="AbstractCancerModel"
     	discriminator-value="X"
         lazy="true">
@@ -52,9 +52,9 @@
         	column="parental_cell_line_name" 
         	type="string"/>	
         	
-        <!-- xenograftName -->
-        <property name="xenograftName" 
-        	column="xenograft_name" 
+        <!-- name -->
+        <property name="name" 
+        	column="name" 
         	type="string"/>	
         
         <!-- atccNumber -->
@@ -72,14 +72,14 @@
         	column="growth_period" 
         	type="string"/>
         	
-        <!-- graftType -->
-        <property name="graftType" 
-        	column="graft_type" 
+        <!-- sourceType -->
+        <property name="sourceType" 
+        	column="source_type" 
         	type="string"/>
         
-        <!-- graftTypeUnctrlVocab -->
-        <property name="graftTypeUnctrlVocab" 
-        	column="graft_type_unctrl_vocab" 
+        <!-- sourceTypeUnctrlVocab -->
+        <property name="sourceTypeUnctrlVocab" 
+        	column="source_type_unctrl_vocab" 
         	type="string"/>        
         
         <!-- tumorCode (many-to-one unidirectional) -->

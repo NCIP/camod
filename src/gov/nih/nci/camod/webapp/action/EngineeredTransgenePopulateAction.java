@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.25 2007-04-04 13:19:08 pandyas Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.26 2007-07-31 12:02:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/04/04 13:19:08  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.24  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -247,7 +250,7 @@ public class EngineeredTransgenePopulateAction extends BaseAction
                 if (inImage != null)
                 {
                     theEngineeredTransgeneForm.setTitle(inImage.getTitle());
-                    theEngineeredTransgeneForm.setFileServerLocation(inImage.getFileServerLocation());
+                    theEngineeredTransgeneForm.setUrl(inImage.getUrl());
                     theEngineeredTransgeneForm.setDescriptionOfConstruct(inImage.getDescription());
                     theEngineeredTransgeneForm.setImageUrl(inImage.getImageUrl());
                     theEngineeredTransgeneForm.setThumbUrl(inImage.getThumbUrl());

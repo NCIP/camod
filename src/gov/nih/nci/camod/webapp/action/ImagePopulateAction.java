@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.19 2007-05-23 16:57:34 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.20 2007-07-31 12:02:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/05/23 16:57:34  pandyas
+ * Added code to handle previous models that used the nameUnctrlVocab for staining method
+ * The tree does not allow the user to add terms, but this is a feature request
+ *
  * Revision 1.18  2007/04/20 17:51:14  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -59,7 +63,7 @@ public class ImagePopulateAction extends BaseAction {
 
 			if (theImage != null) {
 				imageForm.setTitle(theImage.getTitle());
-				imageForm.setFileServerLocation(theImage.getFileServerLocation());
+				imageForm.setUrl(theImage.getUrl());
                 
                 if( theImage.getDescription() != null )
                 {

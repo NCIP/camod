@@ -1,13 +1,16 @@
 /**
  * 
- * $Id: MailUtil.java,v 1.11 2006-10-17 16:11:52 pandyas Exp $
+ * $Id: MailUtil.java,v 1.12 2007-07-31 12:02:07 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/10/17 16:11:52  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.10  2006/08/17 18:00:52  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
  * Revision 1.9  2006/04/17 19:10:50  pandyas
- * Added $Id: MailUtil.java,v 1.11 2006-10-17 16:11:52 pandyas Exp $ and $log:$
+ * Added $Id: MailUtil.java,v 1.12 2007-07-31 12:02:07 pandyas Exp $ and $log:$
  *
  * 
  */
@@ -61,7 +64,7 @@ public class MailUtil {
                                 String inFrom)
             throws MessagingException {
 
-        log.trace("Entering sendMail");
+        log.info("Entering sendMail");
 
         try {
 
@@ -99,23 +102,28 @@ public class MailUtil {
 
             // create a message
             Message theEmailMessage = new MimeMessage(theSession);
+            log.info("theEmailMessage: " + theEmailMessage.toString());
 
             // set the from and to address
             InternetAddress theAddressFrom = new InternetAddress(inFrom);
             theEmailMessage.setFrom(theAddressFrom);
+            log.info("theAddressFrom: " + theAddressFrom.toString());            
 
             InternetAddress[] theAddressTo = new InternetAddress[inRecipients.length];
             for (int i = 0; i < inRecipients.length; i++) {
                 theAddressTo[i] = new InternetAddress(inRecipients[i]);
+             
             }
             theEmailMessage.setRecipients(Message.RecipientType.TO, theAddressTo);
+            log.info("theAddressTo: " + theAddressTo.toString());            
 
             // Setting the Subject and Content Type
             theEmailMessage.setSubject(inSubject);
+            log.info("inSubject: " + inSubject.toString());             
             theEmailMessage.setContent(inMessage, "text/plain");
 
-            log.debug("Sending email to: " + inRecipients);
-            log.debug("email subject: " + inSubject);
+            log.info("Sending email to: " + inRecipients);
+            log.info("email subject: " + inSubject);
 
             Transport.send(theEmailMessage);
 
@@ -123,7 +131,7 @@ public class MailUtil {
             log.error("Unable to send e-mail", e);
         }
 
-        log.trace("Exiting sendMail");
+        log.info("Exiting sendMail");
     }
 
     /**
@@ -141,7 +149,7 @@ public class MailUtil {
                                 String[] messageStds,
                                 Map valuesForVariables)
             throws MessagingException {
-        log.trace("Entering sendMail(String, String, String, String, String[])");
+        log.info("Entering sendMail(String, String, String, String, String[])");
 
         try {
 
@@ -198,8 +206,8 @@ public class MailUtil {
                         + lineseparator + lineseparator + inMessage , "text/plain");
             }
 
-            log.debug("Sending email to: " + inRecipients);
-            log.debug("email subject: " + inSubject);
+            log.info("<sendMail method> Sending email to: " + inRecipients);
+            log.info("<sendMail method> email subject: " + inSubject);
 
             Transport.send(theEmailMessage);
 
@@ -207,7 +215,7 @@ public class MailUtil {
             log.error("Unable to send e-mail", e);
         }
 
-        log.trace("Exiting sendMail(String, String, String, String, String[])");
+        log.info("Exiting sendMail(String, String, String, String, String[])");
     }
 
     /**
@@ -238,19 +246,19 @@ public class MailUtil {
      * with log entries.
      */
     private static void loadMacroBundle() {
-        log.trace("loading Macro ResourceBundle");
+        log.info("loading Macro ResourceBundle");
         macroBundle = ResourceBundle.getBundle("mailmacros");
-        log.trace("done loading Macro ResourceBundle");
+        log.info("done loading Macro ResourceBundle");
     }
 
     private static String buildContentWTemplateFile(TreeMap dict, String templateFile) {
-        log.trace("starting up in buildContentWTemplateFile");
+        log.info("starting up in buildContentWTemplateFile");
         try {
             VelocityEngine ve = new VelocityEngine();
             ve.setProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogLogSystem.class.getName());
             /* init runtime engine */
             ve.init();
-            log.trace("after Velocity init");
+            log.info("after Velocity init");
             /* make a Context and put data into it */
             VelocityContext context = new VelocityContext();
             Iterator iter = dict.keySet().iterator();
@@ -280,7 +288,7 @@ public class MailUtil {
      * @return String output
      */
     private static String buildContent(Map myDictionary, String mytemplate) {
-        log.trace("starting up in buildContent");
+        log.info("starting up in buildContent");
         try {
             VelocityEngine ve = new VelocityEngine();
             ve.setProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS, CommonsLogLogSystem.class.getName());
@@ -289,7 +297,7 @@ public class MailUtil {
             // the previous line throws java.lang.InstantiationException: org.apache.commons.logging.impl.Jdk14Logger
             // if ve is asked to set Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS to log.getClass().getName()
             // and then the "runtime.log.logsystem.log4j.category" property is set to "global"
-            log.trace("after Velocity init");
+            log.info("after Velocity init");
             /* make a Context and put data into it */
             VelocityContext context = new VelocityContext();
             Iterator iter = myDictionary.keySet().iterator();

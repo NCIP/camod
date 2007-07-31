@@ -42,9 +42,14 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.17 2007-03-28 18:16:23 pandyas Exp $
+ * $Id: SearchForm.java,v 1.18 2007-07-31 12:02:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/03/28 18:16:23  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.16  2006/12/28 16:04:00  pandyas
  * Reverted to previous version - changed CE on adv search page
  *
@@ -124,7 +129,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
     protected boolean searchImageData = false;    
-    protected boolean searchXenograft = false;
+    protected boolean searchGraft = false;
     protected boolean searchTransientInterference = false;
     protected boolean searchToolStrain = false;    
 
@@ -437,14 +442,14 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         this.searchImageData = searchImageData;
     }    
 
-    public boolean isSearchXenograft()
+    public boolean isSearchGraft()
     {
-        return searchXenograft;
+        return searchGraft;
     }
 
-    public void setSearchXenograft(boolean searchXenograft)
+    public void setSearchGraft(boolean searchGraft)
     {
-        this.searchXenograft = searchXenograft;
+        this.searchGraft = searchGraft;
     }
 
     /**
@@ -527,7 +532,7 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
         targetedModification = false;
         searchHistoMetastasis = false;
         searchMicroArrayData = false;
-        searchXenograft = false;
+        searchGraft = false;
         searchToolStrain = false;
         externalSource = null;
         searchImageData = false;

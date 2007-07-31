@@ -614,7 +614,7 @@ For example, Tg(Zfp38)D1Htz is a transgene containing the mouse <i>Zfp38</i> gen
 		</TD>
 
 	</TR>
-</TABLE><p align="right"><a href="#toc">Back to TOC</a></p><A name="5-6"><H3 class="subhelp">5.6. Transplantation / Xenograft</H3></A>
+</TABLE><p align="right"><a href="#toc">Back to TOC</a></p><A name="5-6"><H3 class="subhelp">5.6. Transplantation / Graft</H3></A>
 <TABLE align="center" width="85%" cellpadding="5" cellspacing="5" border="1">
 	<TR valign="top">
 		<TD class="label">			Required Fields

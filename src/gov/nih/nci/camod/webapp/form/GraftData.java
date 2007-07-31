@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: XenograftData.java,v 1.9 2007-04-04 13:23:49 pandyas Exp $
+ * $Id: GraftData.java,v 1.1 2007-07-31 12:02:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/04/04 13:23:49  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.8  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -33,9 +36,9 @@
 package gov.nih.nci.camod.webapp.form;
 
 /**
- * Xenograft interface
+ * Graft interface
  */
-public interface XenograftData
+public interface GraftData
 {
 
     public String getDonorScientificName();
@@ -54,9 +57,9 @@ public interface XenograftData
 
     public void setOtherDonorEthinicityStrain(String otherDonorEthinicityStrain);
 
-    public String getXenograftName();
+    public String getName();
 
-    public void setXenograftName(String xenograftName);
+    public void setName(String name);
 
     public String getAtccNumber();
 
@@ -90,13 +93,13 @@ public interface XenograftData
 
     public void setGrowthPeriod(String growthPeriod);
 
-    public String getGraftType();
+	public String getOtherSourceType();
 
-    public void setGraftType(String graftType);
+	public void setOtherSourceType(String otherSourceType) ;
 
-    public String getOtherGraftType();
+	public String getSourceType();
 
-    public void setOtherGraftType(String otherGraftType);
+	public void setSourceType(String sourceType);
 
     public String getOrgan();
 

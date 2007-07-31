@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftManagerImpl.java,v 1.38 2007-06-26 16:13:43 pandyas Exp $
+ * $Id: GraftManagerImpl.java,v 1.1 2007-07-31 12:05:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2007/06/26 16:13:43  pandyas
+ * Fixed save when organ cleared from text entry and by use of the clear button for trees
+ *
  * Revision 1.37  2007/06/25 17:48:37  pandyas
  * Fixed save and edit for text
  *
@@ -77,10 +80,10 @@ import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Organ;
 import gov.nih.nci.camod.domain.Strain;
-import gov.nih.nci.camod.domain.Xenograft;
-import gov.nih.nci.camod.service.XenograftManager;
+import gov.nih.nci.camod.domain.Graft;
+import gov.nih.nci.camod.service.GraftManager;
 import gov.nih.nci.camod.util.MailUtil;
-import gov.nih.nci.camod.webapp.form.XenograftData;
+import gov.nih.nci.camod.webapp.form.GraftData;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -94,8 +97,8 @@ import java.util.TreeMap;
 /**
  * @author rajputs
  */
-public class XenograftManagerImpl extends BaseManager implements
-		XenograftManager {
+public class GraftManagerImpl extends BaseManager implements
+		GraftManager {
 
 	/**
 	 * Get all Xenograft objects
@@ -108,26 +111,26 @@ public class XenograftManagerImpl extends BaseManager implements
 	 */
 	public List getAll() throws Exception {
 		log.trace("In XenograftManagerImpl.getAll");
-		return super.getAll(Xenograft.class);
+		return super.getAll(Graft.class);
 	}
 
 	/**
-	 * Get a specific Xenograft by id
+	 * Get a specific Graft by id
 	 * 
 	 * @param id
-	 *            the unique id for a Xenograft
+	 *            the unique id for a Graft
 	 * 
-	 * @return the matching Xenograft object, or null if not found.
+	 * @return the matching Graft object, or null if not found.
 	 * 
 	 * @exception Exception
 	 *                when anything goes wrong.
 	 */
-	public Xenograft get(String id) throws Exception {
+	public Graft get(String id) throws Exception {
 		log.trace("In XenograftManagerImpl.get");
-		return (Xenograft) super.get(id, Xenograft.class);
+		return (Graft) super.get(id, Graft.class);
 	}
 
-	public void save(Xenograft xenograft) throws Exception {
+	public void save(Graft xenograft) throws Exception {
 		log.trace("In XenograftManagerImpl.save");
 		super.save(xenograft);
 	}
@@ -135,154 +138,154 @@ public class XenograftManagerImpl extends BaseManager implements
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
 		log.trace("In XenograftManagerImpl.remove");
 
-		inAnimalModel.getXenograftCollection().remove(get(id));
+		inAnimalModel.getGraftCollection().remove(get(id));
 		super.save(inAnimalModel);
 	}
 
-	public Xenograft create(XenograftData inXenograftData,
+	public Graft create(GraftData inGraftData,
 			AnimalModel inAnimalModel) throws Exception {
 
 		log
 				.trace("<XenograftManagerImpl> Entering XenograftManagerImpl.create");
 
-		Xenograft theXenograft = new Xenograft();
-		populateSpeciesStrain(inXenograftData, theXenograft, inAnimalModel);
-		populateOrgan(inXenograftData, theXenograft);
-		populateXenograft(inXenograftData, theXenograft, inAnimalModel);
+		Graft theGraft = new Graft();
+		populateSpeciesStrain(inGraftData, theGraft, inAnimalModel);
+		populateOrgan(inGraftData, theGraft);
+		populateGraft(inGraftData, theGraft, inAnimalModel);
 
-		log.info("<XenograftManagerImpl> Exiting XenograftManagerImpl.create");
+		log.info("<GraftManagerImpl> Exiting GraftManagerImpl.create");
 
-		return theXenograft;
+		return theGraft;
 	}
 
-	public void update(XenograftData inXenograftData, Xenograft inXenograft,
+	public void update(GraftData inGraftData, Graft inGraft,
 			AnimalModel inAnimalModel) throws Exception {
-		log.info("Entering XenograftManagerImpl.update XenograftId: "
-				+ inXenograft.getId());
+		log.info("Entering GraftManagerImpl.update XenograftId: "
+				+ inGraft.getId());
 
         // Populate w/ the new values and save
-        populateSpeciesStrain(inXenograftData, inXenograft, inAnimalModel);
-        populateOrgan(inXenograftData, inXenograft);
-        populateXenograft(inXenograftData, inXenograft, inAnimalModel);
-        save(inXenograft);
+        populateSpeciesStrain(inGraftData, inGraft, inAnimalModel);
+        populateOrgan(inGraftData, inGraft);
+        populateGraft(inGraftData, inGraft, inAnimalModel);
+        save(inGraft);
 
-        log.info("Exiting XenograftManagerImpl.update");
+        log.info("Exiting GraftManagerImpl.update");
     }
 
-	private void populateXenograft(XenograftData inXenograftData,
-			Xenograft inXenograft, AnimalModel inAnimalModel) throws Exception {
+	private void populateGraft(GraftData inGraftData,
+			Graft inGraft, AnimalModel inAnimalModel) throws Exception {
 
-        log.info("Entering XenograftManagerImpl.populateXenograft");
+        log.info("Entering GraftManagerImpl.populateXenograft");
 
-        /* Set xenograftName */
-        inXenograft.setXenograftName(inXenograftData.getXenograftName());
+        /* Set graft name */
+        inGraft.setName(inGraftData.getName());
 
 		/* Set other adminstrative site or selected adminstrative site */
 		// save directly in administrativeSite column of table
-		if (inXenograftData.getAdministrativeSite().equals(
+		if (inGraftData.getAdministrativeSite().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Do not save other in the DB
-			inXenograft.setAdminSiteUnctrlVocab(inXenograftData
+			inGraft.setAdminSiteUnctrlVocab(inGraftData
 					.getOtherAdministrativeSite());
 
 			// Send e-mail for other administrativeSite
-			sendEmail(inAnimalModel, inXenograftData
+			sendEmail(inAnimalModel, inGraftData
 					.getOtherAdministrativeSite(), "AdministrativeSite");
 		} else {
-			inXenograft.setAdministrativeSite(inXenograftData
+			inGraft.setAdministrativeSite(inGraftData
 					.getAdministrativeSite());
 
 			// Null out during editing from 'other' to selected
-			inXenograft.setAdminSiteUnctrlVocab(null);
+			inGraft.setAdminSiteUnctrlVocab(null);
 		}
 		
 		// save directly in ConditioningRegimen column of table
-		if (inXenograftData.getConditioningRegimen().equals(
+		if (inGraftData.getConditioningRegimen().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			inXenograft.setConditioningRegimen(null);
+			inGraft.setConditioningRegimen(null);
 			log.info("ConditioningRegimen = Other");
 			// Do not save "other" value in the DB
-			inXenograft.setCondRegimenUnctrlVocab(inXenograftData.getOtherConditioningRegimen());
-			log.info("OtherConditioningRegimen = " + inXenograftData.getOtherConditioningRegimen());
+			inGraft.setCondRegimenUnctrlVocab(inGraftData.getOtherConditioningRegimen());
+			log.info("OtherConditioningRegimen = " + inGraftData.getOtherConditioningRegimen());
 
 			// Send e-mail for other ConditioningRegime
-			sendEmail(inAnimalModel, inXenograftData
+			sendEmail(inAnimalModel, inGraftData
 					.getOtherConditioningRegimen(), "ConditioningRegimen");
 		} else {
-			inXenograft.setConditioningRegimen(inXenograftData
+			inGraft.setConditioningRegimen(inGraftData
 					.getConditioningRegimen());
-			log.info("ConditioningRegimen not other= " + inXenograftData
+			log.info("ConditioningRegimen not other= " + inGraftData
 					.getConditioningRegimen());
 
 			// Null out during editing from 'other' to selected
-			inXenograft.setCondRegimenUnctrlVocab(null);
+			inGraft.setCondRegimenUnctrlVocab(null);
 		}
 		
-		inXenograft.setGeneticManipulation(inXenograftData
+		inGraft.setGeneticManipulation(inGraftData
 				.getGeneticManipulation());
-		inXenograft.setModificationDescription(inXenograftData
+		inGraft.setModificationDescription(inGraftData
 				.getModificationDescription());
-		inXenograft.setParentalCellLineName(inXenograftData
+		inGraft.setParentalCellLineName(inGraftData
 				.getParentalCellLineName());
-		inXenograft.setAtccNumber(inXenograftData.getAtccNumber());
-		inXenograft.setCellAmount(inXenograftData.getCellAmount());
-		inXenograft.setGrowthPeriod(inXenograftData.getGrowthPeriod());
+		inGraft.setAtccNumber(inGraftData.getAtccNumber());
+		inGraft.setCellAmount(inGraftData.getCellAmount());
+		inGraft.setGrowthPeriod(inGraftData.getGrowthPeriod());
 
 		// anytime the graft type is "other"
-		if (inXenograftData.getGraftType().equals(
+		if (inGraftData.getGraftType().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Set Graft type
-			inXenograft.setGraftType(null);
-			inXenograft.setGraftTypeUnctrlVocab(inXenograftData
+			inGraft.setGraftType(null);
+			inGraft.setGraftTypeUnctrlVocab(inGraftData
 					.getOtherGraftType());
 
 			// Send e-mail for other Graft Type
-			sendEmail(inAnimalModel, inXenograftData.getOtherGraftType(),
+			sendEmail(inAnimalModel, inGraftData.getOtherGraftType(),
 					"GraftType");
 
 		}
 		// anytime graft type is not other set uncontrolled vocab to null
 		// (covers editing)
 		else {
-			inXenograft.setGraftType(inXenograftData.getGraftType());
-			inXenograft.setGraftTypeUnctrlVocab(null);
+			inGraft.setGraftType(inGraftData.getGraftType());
+			inGraft.setGraftTypeUnctrlVocab(null);
 		}
 
-		log.info("Exiting XenograftManagerImpl.populateXenograft");
+		log.info("Exiting GraftManagerImpl.populateXenograft");
 	}
 
-	private void populateSpeciesStrain(XenograftData inXenograftData,
-			Xenograft inXenograft, AnimalModel inAnimalModel) throws Exception {
+	private void populateSpeciesStrain(GraftData inGraftData,
+			Graft inGraft, AnimalModel inAnimalModel) throws Exception {
 
 		// Use Species to create strain
 		Strain theStrain = StrainManagerSingleton.instance().getOrCreate(
-				inXenograftData.getDonorEthinicityStrain(),
-				inXenograftData.getOtherDonorEthinicityStrain(),
-				inXenograftData.getDonorScientificName(),
-				inXenograftData.getOtherDonorScientificName());
+				inGraftData.getDonorEthinicityStrain(),
+				inGraftData.getOtherDonorEthinicityStrain(),
+				inGraftData.getDonorScientificName(),
+				inGraftData.getOtherDonorScientificName());
 
 		// other option selected for species - send e-mail
-		if (inXenograftData.getDonorScientificName().equals(
+		if (inGraftData.getDonorScientificName().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Send e-mail for other donor species
-			sendEmail(inAnimalModel, inXenograftData
+			sendEmail(inAnimalModel, inGraftData
 					.getOtherDonorScientificName(), "Donor Species");
 		}
 		// other option selected for strain - send e-mail
-		if (inXenograftData.getDonorEthinicityStrain().equals(
+		if (inGraftData.getDonorEthinicityStrain().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			// Send e-mail for other donor species
-			sendEmail(inAnimalModel, inXenograftData
+			sendEmail(inAnimalModel, inGraftData
 					.getOtherDonorEthinicityStrain(), "Donor Strain");
 		}
 
 		log.info("\n <populateSpeciesStrain> theSpecies is NOT other: ");
-		inXenograft.setStrain(theStrain);
+		inGraft.setStrain(theStrain);
 
 	}
 
-	private void populateOrgan(XenograftData inXenograftData,
-			Xenograft inXenograft) throws Exception {
+	private void populateOrgan(GraftData inXenograftData,
+			Graft inXenograft) throws Exception {
         
         log.info("<XenograftManagerImpl> populateOrgan: ");        
 

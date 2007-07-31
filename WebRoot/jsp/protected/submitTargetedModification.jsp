@@ -208,11 +208,11 @@
 		<td class="formLabel"><label for="field1">Upload Construct Map<br>(Image of type .jpg, .jpeg, .gif or .png):</label></td>
 		<td class="formField">
 				
-			<c:if test="${not empty targetedModificationForm.fileServerLocation}">
+			<c:if test="${not empty targetedModificationForm.url}">
 				Current Image Thumbnail: <br>
 					
 				<a href='<c:out value="${targetedModificationForm.imageUrl}"/>'>						
-				<img src="<c:out value="${targetedModificationForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${targetedModificationForm.fileServerLocation}"/>" target="_blank">				
+				<img src="<c:out value="${targetedModificationForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${targetedModificationForm.url}"/>" target="_blank">				
 				Click to View</a>
 				<br><br>													
 			</c:if>

@@ -163,11 +163,11 @@
 			<td class="formLabel"><label for="field1">Upload Construct Map<br>(Image of type .jpg, .jpeg, .gif or .png):</label></td>
 			<td class="formField">
 			
-			<c:if test="${not empty genomicSegmentForm.fileServerLocation}">
+			<c:if test="${not empty genomicSegmentForm.url}">
 				Current Image Thumbnail: <br>
 					
 				<a href='<c:out value="${genomicSegmentForm.imageUrl}"/>'>						
-				<img src="<c:out value="${genomicSegmentForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${genomicSegmentForm.fileServerLocation}"/>" target="_blank">				
+				<img src="<c:out value="${genomicSegmentForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${genomicSegmentForm.url}"/>" target="_blank">				
 				Click to View</a>
 				<br><br>													
 			</c:if>

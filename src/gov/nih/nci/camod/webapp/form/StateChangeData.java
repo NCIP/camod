@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: StateChangeData.java,v 1.2 2005-10-24 13:28:30 georgeda Exp $
+ * $Id: StateChangeData.java,v 1.3 2007-07-31 12:01:54 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2005/10/24 13:28:30  georgeda
+ * Cleanup changes
+ *
  * Revision 1.1  2005/10/10 14:12:37  georgeda
  * Initial revision
  *
@@ -21,9 +24,9 @@ package gov.nih.nci.camod.webapp.form;
  */
 public interface StateChangeData {
 
-	public String getNote();
+	public String getRemark();
 
-	public void setNote(String inComment);
+	public void setRemark(String inComment);
 
 	public String getModelId();
 

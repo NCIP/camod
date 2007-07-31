@@ -1,6 +1,9 @@
 <%
  /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/06/19 20:34:00  pandyas
+ * Users not logged in can not access the session property to check the model species.  Therefore, we must show the attribute for all models.
+ *
  * Revision 1.24  2007/05/16 12:30:49  pandyas
  * Added developmental stage evs tree to Therapy when species is Zebrafsih
  *
@@ -54,7 +57,7 @@
  * Defect #86.  Removed unneeded field.
  *
  *
- * $Id: includePreclinicalTrials.jsp,v 1.25 2007-06-19 20:34:00 pandyas Exp $
+ * $Id: includePreclinicalTrials.jsp,v 1.26 2007-07-31 12:00:10 pandyas Exp $
  */
 %>
 <tr>
@@ -104,40 +107,40 @@
 
 
 	<tr>
-		<td class="resultsBoxWhite" width="25%"><b>Developmental Stage</b> <br>(applies only to Zebrafish)</td>
-		<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+		<td class="resultsBoxGrey" width="25%"><b>Developmental Stage</b> <br>(applies only to Zebrafish)</td>
+		<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 			<c:out value="${t.developmentalStage.name}" escapeXml="false"/>
 		</td>
 	</tr>
 
 
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Results</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhite" width="25%"><b>Results</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 		<camod:highlight><c:out value="${t.results}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Toxicity Grade</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
+	<td class="resultsBoxGrey" width="25%"><b>Toxicity Grade</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
 		<camod:highlight><c:out value="${t.toxicityGrade}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>			
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Biomarker</b></td>
-	<td class="resultsBoxGreyEnd" width="75%">
+	<td class="resultsBoxWhite" width="25%"><b>Biomarker</b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">
 		<camod:highlight><c:out value="${t.biomarker}" escapeXml="false"/>&nbsp;</camod:highlight>
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxWhite" width="25%"><b>Tumor Response</b></td>
-	<td class="resultsBoxWhiteEnd" width="75%">
+	<td class="resultsBoxGrey" width="25%"><b>Tumor Response</b></td>
+	<td class="resultsBoxGreyEnd" width="75%">
 		<camod:highlight><c:out value="${t.tumorResponse}" escapeXml="false"/>&nbsp;</camod:highlight>
 	</td>
 </tr>
 <tr>
-	<td class="resultsBoxGrey" width="25%"><b>Comment </b></td>
-	<td class="resultsBoxGreyEnd" width="75%">&nbsp;
+	<td class="resultsBoxWhite" width="25%"><b>Comment </b></td>
+	<td class="resultsBoxWhiteEnd" width="75%">&nbsp;
 		<camod:highlight><c:out value="${t.comments}" escapeXml="false"/></camod:highlight>
 	</td>
 </tr>

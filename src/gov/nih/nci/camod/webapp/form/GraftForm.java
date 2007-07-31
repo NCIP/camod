@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftForm.java,v 1.16 2007-04-04 13:23:49 pandyas Exp $
+ * $Id: GraftForm.java,v 1.1 2007-07-31 12:02:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/04/04 13:23:49  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.15  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -31,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-public class XenograftForm extends BaseForm implements Serializable, XenograftData {
+public class GraftForm extends BaseForm implements Serializable, GraftData {
 
     private static final long serialVersionUID = 3257125453799404851L;
 
@@ -40,20 +43,20 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
      * 
      * @author rajputs
      */
-    public XenograftForm() {
+    public GraftForm() {
     }
 
-    // This form does not include properties from the parent class of Xenograft,
+    // This form does not include properties from the parent class of Graft,
     // AbstractCancerModel
-    protected String xenograftName;
+    protected String name;
     protected String geneticManipulation;
     protected String modificationDescription;    
     protected String parentalCellLineName;    
     protected String atccNumber;
     protected String cellAmount;
     protected String growthPeriod;
-    protected String graftType;
-    protected String otherGraftType;
+    protected String sourceType;
+    protected String otherSourceType;
     protected String administrativeSite;
     protected String otherAdministrativeSite;
     protected String conditioningRegimen;
@@ -128,20 +131,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
         this.otherDonorEthinicityStrain = otherDonorEthinicityStrain;
     }
 
-    /**
-     * @return Returns the xenograftName.
-     */
-    public String getXenograftName() {
-        return xenograftName;
-    }
-
-    /**
-     * @param xenograftName
-     *            The xenograftName to set.
-     */
-    public void setXenograftName(String xenograftName) {
-        this.xenograftName = xenograftName;
-    }
 
     /**
      * @return Returns the atccNumber.
@@ -248,35 +237,6 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
     }
     
     /**
-     * @return Returns the graftType.
-     */
-    public String getGraftType() {
-        return graftType;
-    }
-
-    /**
-     * @param graftType
-     *            The graftType to set.
-     */
-    public void setGraftType(String graftType) {
-        this.graftType = graftType;
-    }
-
-    /**
-     * @return Returns the otherGraftType.
-     */
-    public String getOtherGraftType() {
-        return otherGraftType;
-    }
-
-    /**
-     * @param otherGraftType
-     *            The otherGraftType to set.
-     */
-    public void setOtherGraftType(String otherGraftType) {
-        this.otherGraftType = otherGraftType;
-    }
-    /**
      * @return Returns the growthPeriod.
      */
     public String getGrowthPeriod() {
@@ -328,15 +288,15 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
 	}	    
 
     public void reset(ActionMapping mapping, HttpServletRequest request) {
-        xenograftName = null;
+        name = null;
         atccNumber = null;
         parentalCellLineName = null;
         cellAmount = null;
         modificationDescription = null;
         geneticManipulation = null;
         administrativeSite = null;
-        graftType = null;
-        otherGraftType = null;
+        sourceType = null;
+        otherSourceType = null;
         donorScientificName = null;
         donorEthinicityStrain = null;
         otherDonorEthinicityStrain = null;
@@ -360,6 +320,30 @@ public class XenograftForm extends BaseForm implements Serializable, XenograftDa
 
 	public void setOtherConditioningRegimen(String otherConditioningRegimen) {
 		this.otherConditioningRegimen = otherConditioningRegimen;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getOtherSourceType() {
+		return otherSourceType;
+	}
+
+	public void setOtherSourceType(String otherSourceType) {
+		this.otherSourceType = otherSourceType;
+	}
+
+	public String getSourceType() {
+		return sourceType;
+	}
+
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
 	}    
 
 }

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantXenograft.jsp,v 1.55 2007-06-18 16:12:14 pandyas Exp $
+ * $Id: submitTransplantGraft.jsp,v 1.1 2007-07-31 12:00:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.55  2007/06/18 16:12:14  pandyas
+ * Fixedmethod name for Zebrafish tree and made text entry enable
+ *
  * Revision 1.54  2007/05/18 15:35:31  pandyas
  * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
  *
@@ -87,7 +90,7 @@
 
 <%@ page import="gov.nih.nci.camod.domain.AnimalModel" %>	
 <%@ page import="gov.nih.nci.camod.domain.Strain" %>	
-<%@ page import="gov.nih.nci.camod.webapp.form.XenograftForm" %>	
+<%@ page import="gov.nih.nci.camod.webapp.form.GraftForm" %>	
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
 <%@ page import="java.util.List" %>
@@ -100,19 +103,19 @@
 <script language="JavaScript" src="scripts/global.js"></script>
 
 <%
-	String aXenograftID = request.getParameter( "aXenograftID" );
+	String aGraftID = request.getParameter( "aGraftID" );
     String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
     
-	//if aXenograftID is passed in, then we are dealing with a previously entered model and are editing it
+	//if aGraftID is passed in, then we are dealing with a previously entered model and are editing it
 	//otherwise, create a new one
 	
-	String actionName = "XenograftAction.do?method=save";
+	String actionName = "GraftAction.do?method=save";
 	
-	if ( aXenograftID != null && aXenograftID.length() > 0 && isDeleted == null) {
-		actionName = "XenograftAction.do?method=edit";
+	if ( aGraftID != null && aGraftID.length() > 0 && isDeleted == null) {
+		actionName = "GraftAction.do?method=edit";
 	}
 	else {
-	    aXenograftID = "";
+	    aGraftID = "";
 	}
 %>
 
@@ -123,7 +126,7 @@
 	}
 	function getOptions( control ) {
 		form = control.form;
-		form.action  = "XenograftPopulateAction.do?method=setStrainOrganValues";
+		form.action  = "GraftPopulateAction.do?method=setStrainOrganValues";
 		form.submit();		
 	}	
 		
@@ -147,9 +150,9 @@
 	
 </SCRIPT>
 
-<html:form action="<%= actionName %>" focus="xenograftName">
+<html:form action="<%= actionName %>" focus="name">
 
-<!-- submitTranplantXenograft.jsp -->
+<!-- submitTranplantGraft.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -164,7 +167,7 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Xenograft/Transplantation
+		<td class="formTitle" height="20" colspan="3">Graft/Transplantation
 			<camod:cshelp topic="xenograft_transplant_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
@@ -173,7 +176,7 @@
 		<td class="formRequiredLabel"><label for="field1">Cell Line/Transplant:</label>
 		</td>
 		<td class="formField">
-				<html:text styleClass="formFieldSized" property="xenograftName"  size="30" />
+				<html:text styleClass="formFieldSized" property="name"  size="30" />
 		</td>
 	</tr>
 
@@ -227,7 +230,7 @@
 				<c:when test="${donorspeciescommonname == 'Mouse'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />							
-					<a href="javascript:showMouseTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showMouseTissueTree('graftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>				
 					<html:hidden property="organTissueCode"/>
@@ -240,7 +243,7 @@
 				<c:when test="${donorspeciescommonname == 'Rat'}">	
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showRatTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showRatTissueTree('graftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -253,7 +256,7 @@
 				<c:when test="${donorspeciescommonname == 'Zebrafish'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showZebrafishTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showZebrafishTissueTree('graftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -266,7 +269,7 @@
 				<c:when test="${donorspeciescommonname == 'Human'}">
 				<td class="formLabel"><label for="field1">Organ/Tissue:</label>&nbsp;
 				<camod:cshelp topic="data_tree_help" key="ORGAN.CONCEPT_CODE" image="images/helpTooltip.gif" text="Tool Tip Test 1" />				
-					<a href="javascript:showHumanTissueTree('xenograftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
+					<a href="javascript:showHumanTissueTree('graftForm', 'organTissueCode', 'organTissueName', 'organ', true)">
 						<IMG src="images\selectUP.gif" align=middle border=0></a>
 				</td>
 					<html:hidden property="organTissueCode"/>
@@ -291,23 +294,23 @@
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field3">Graft Type:</label></td>
+		<td class="formRequiredLabel"><label for="field3">Source Type:</label></td>
 		<td class="formField">
 		<br>				
 		<label for="field3">- if graft type is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>		
-			<html:select styleClass="formFieldSized" size="1" property="graftType" onclick="chkOtherGraft();">
-				<html:options name="<%= Dropdowns.GRAFTTYPEDROP %>" />	
+			<html:select styleClass="formFieldSized" size="1" property="sourceType" onclick="chkOtherSourceType();">
+				<html:options name="<%= Dropdowns.SOURCETYPEDROP %>" />	
 			</html:select>
 		</td>
 	</tr>	
 
 	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formLabel"><label for="field1">If other Graft Type:</label></td>
+		<td class="formLabel"><label for="field1">If other Source Type:</label></td>
 		<td class="formField">
-			<html:text styleClass="formFieldSized" property="otherGraftType"  size="30" />	
+			<html:text styleClass="formFieldSized" property="otherSourceType"  size="30" />	
 		</td>
 	</tr>	
 
@@ -399,7 +402,7 @@
 		<br>
 		<br>
 			<html:select styleClass="formFieldSized" size="1" property="administrativeSite"  onclick="chkOtherAdminSite();">												
-				<html:options name="<%= Dropdowns.XENOGRAFTADMINSITESDROP %>"/>					
+				<html:options name="<%= Dropdowns.GRAFTADMINSITESDROP %>"/>					
 			</html:select>			
 		</td>
 	</tr>
@@ -438,14 +441,14 @@
 				  	  <bean:message key="button.reset"/>
   				  </html:reset>
 
-			      <c:if test="${not empty aXenograftID}">
+			      <c:if test="${not empty aGraftID}">
 	  				  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton" onclick="return confirm('Are you sure you want to delete?');">
 						  <bean:message key="button.delete"/>
 					  </html:submit>
 				  </c:if>
 				  				
 				  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-				  <input type="hidden" name="aXenograftID" value="<%= aXenograftID %>">
+				  <input type="hidden" name="aGraftID" value="<%= aGraftID %>">
 							
 			</TABLE>
 		</td>

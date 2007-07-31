@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: XenograftPopulateAction.java,v 1.37 2007-06-25 17:48:50 pandyas Exp $
+ * $Id: GraftPopulateAction.java,v 1.1 2007-07-31 12:02:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2007/06/25 17:48:50  pandyas
+ * Fixed save and edit for text
+ *
  * Revision 1.36  2007/06/21 20:49:14  pandyas
  * Minor modification in print out of log statement
  *
@@ -78,11 +81,11 @@ package gov.nih.nci.camod.webapp.action;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.Species;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.Graft;
 import gov.nih.nci.camod.service.AnimalModelManager;
+import gov.nih.nci.camod.service.impl.GraftManagerSingleton;
 import gov.nih.nci.camod.service.impl.SpeciesManagerSingleton;
-import gov.nih.nci.camod.service.impl.XenograftManagerSingleton;
-import gov.nih.nci.camod.webapp.form.XenograftForm;
+import gov.nih.nci.camod.webapp.form.GraftForm;
 import gov.nih.nci.camod.webapp.util.DropdownOption;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
 import java.util.List;
@@ -92,7 +95,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class XenograftPopulateAction extends BaseAction
+public class GraftPopulateAction extends BaseAction
 {
 
     /**
@@ -106,140 +109,140 @@ public class XenograftPopulateAction extends BaseAction
     {
 
         // Create a form to edit
-        XenograftForm xenograftForm = (XenograftForm) form;
+        GraftForm graftForm = (GraftForm) form;
 
-        // Grab the current Xenograft we are working with related to this AM
-        String aXenograftID = request.getParameter("aXenograftID");
+        // Grab the current Graft we are working with related to this AM
+        String aGraftID = request.getParameter("aGraftID");
 
-        Xenograft xeno = XenograftManagerSingleton.instance().get(aXenograftID);
+        Graft graft = GraftManagerSingleton.instance().get(aGraftID);
 
-        if (xeno == null)
+        if (graft == null)
         {
             request.setAttribute(Constants.Parameters.DELETED, "true");
         }
         else
         {
-            request.setAttribute("aXenograftID", aXenograftID);
-            xenograftForm.setXenograftName(xeno.getXenograftName());
+            request.setAttribute("aGraftID", aGraftID);
+            graftForm.setName(graft.getName());
 
             // Set the other flag or the selected administrative site from the DB
-            if (xeno.getAdminSiteUnctrlVocab() != null)
+            if (graft.getAdminSiteUnctrlVocab() != null)
             {
-                xenograftForm.setAdministrativeSite(Constants.Dropdowns.OTHER_OPTION);
-                xenograftForm.setOtherAdministrativeSite(xeno.getAdminSiteUnctrlVocab());
+                graftForm.setAdministrativeSite(Constants.Dropdowns.OTHER_OPTION);
+                graftForm.setOtherAdministrativeSite(graft.getAdminSiteUnctrlVocab());
             }
             else
             {
-                xenograftForm.setAdministrativeSite(xeno.getAdministrativeSite());
+                graftForm.setAdministrativeSite(graft.getAdministrativeSite());
             }
             
             // Set the other flag or the selected ConditioningRegimen from the DB
-            if (xeno.getCondRegimenUnctrlVocab() != null)
+            if (graft.getCondRegimenUnctrlVocab() != null)
             {
-                xenograftForm.setConditioningRegimen(Constants.Dropdowns.OTHER_OPTION);
-                xenograftForm.setOtherConditioningRegimen(xeno.getCondRegimenUnctrlVocab());
+                graftForm.setConditioningRegimen(Constants.Dropdowns.OTHER_OPTION);
+                graftForm.setOtherConditioningRegimen(graft.getCondRegimenUnctrlVocab());
             }
             else
             {
-                xenograftForm.setConditioningRegimen(xeno.getConditioningRegimen());
+                graftForm.setConditioningRegimen(graft.getConditioningRegimen());
             }            
 
-            xenograftForm.setGeneticManipulation(xeno.getGeneticManipulation());
-            xenograftForm.setModificationDescription(xeno.getModificationDescription());
-            xenograftForm.setParentalCellLineName(xeno.getParentalCellLineName());
-            xenograftForm.setAtccNumber(xeno.getAtccNumber());
-            xenograftForm.setCellAmount(xeno.getCellAmount());
-            xenograftForm.setGrowthPeriod(xeno.getGrowthPeriod());
+            graftForm.setGeneticManipulation(graft.getGeneticManipulation());
+            graftForm.setModificationDescription(graft.getModificationDescription());
+            graftForm.setParentalCellLineName(graft.getParentalCellLineName());
+            graftForm.setAtccNumber(graft.getAtccNumber());
+            graftForm.setCellAmount(graft.getCellAmount());
+            graftForm.setGrowthPeriod(graft.getGrowthPeriod());
  
             // When populating multiple xenografts, this constant needs to be reset for each species entry
-            request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, xeno.getStrain().getSpecies().getCommonName());
-            log.info("xeno.getDonorSpecies().getCommonName(): " + xeno.getStrain().getSpecies().getCommonName());            
+            request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, graft.getStrain().getSpecies().getCommonName());
+            log.info("xeno.getDonorSpecies().getCommonName(): " + graft.getStrain().getSpecies().getCommonName());            
             
             // Species was required in previous versions of caMod and is stored in donorSpecies column
             // The species and strain are required for 2.1 and strain_id is stored for all future versions
             // Therefore, we must search in both to populate correctly
-            if (xeno.getDonorSpecies() != null)
+            if (graft.getDonorSpecies() != null)
             {
                 // Populate species if uncontrolled vocab - old models
-                if (xeno.getDonorSpecies().getScientificNameUnctrlVocab() != null)
+                if (graft.getDonorSpecies().getScientificNameUnctrlVocab() != null)
                 {
-                    xenograftForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
-                    xenograftForm.setOtherDonorScientificName(xeno.getDonorSpecies().getScientificNameUnctrlVocab());
+                	graftForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
+                	graftForm.setOtherDonorScientificName(graft.getDonorSpecies().getScientificNameUnctrlVocab());
                 }
                 else
                 {
-                    xenograftForm.setDonorScientificName(xeno.getDonorSpecies().getScientificName());
+                	graftForm.setDonorScientificName(graft.getDonorSpecies().getScientificName());
                 }
             }
-            else if (xeno.getStrain() != null)
+            else if (graft.getStrain() != null)
             {
                 //Populate strain for all new models - check for uncontrolled vocab
-                if (xeno.getStrain().getNameUnctrlVocab() != null)
+                if (graft.getStrain().getNameUnctrlVocab() != null)
                 {
-                    xenograftForm.setDonorEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
-                    xenograftForm.setOtherDonorEthinicityStrain(xeno.getStrain().getNameUnctrlVocab());
+                	graftForm.setDonorEthinicityStrain(Constants.Dropdowns.OTHER_OPTION);
+                	graftForm.setOtherDonorEthinicityStrain(graft.getStrain().getNameUnctrlVocab());
 
                 }
                 else
                 {
-                    xenograftForm.setDonorEthinicityStrain(xeno.getStrain().getName());
+                	graftForm.setDonorEthinicityStrain(graft.getStrain().getName());
                 }
                 // Populate species if strain_id is used -  models submitted after 2.0 
                 // check for uncontrolled vocab
-                if (xeno.getStrain().getSpecies().getScientificNameUnctrlVocab() != null)
+                if (graft.getStrain().getSpecies().getScientificNameUnctrlVocab() != null)
                 {
-                    xenograftForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
-                    xenograftForm.setOtherDonorScientificName(xeno.getStrain().getSpecies().getScientificNameUnctrlVocab());
+                	graftForm.setDonorScientificName(Constants.Dropdowns.OTHER_OPTION);
+                	graftForm.setOtherDonorScientificName(graft.getStrain().getSpecies().getScientificNameUnctrlVocab());
                 }
                 else
                 {
-                    xenograftForm.setDonorScientificName(xeno.getStrain().getSpecies().getScientificName());
+                	graftForm.setDonorScientificName(graft.getStrain().getSpecies().getScientificName());
                 }
             }
 
             // since we are always querying from concept code (save and edit),
             // simply display EVSPreferredDescription
-            if (xeno.getOrgan() != null)
+            if (graft.getOrgan() != null)
             {            
                 // since we are always querying from concept code (save and edit),
                 // simply display EVSPreferredDescription, unless concept code is '00000'
-                if (xeno.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
+                if (graft.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
                     // getEVSPreferredDescription does not work for Zebrafish EVS tree
                     //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
-                    xenograftForm.setOrgan(xeno.getOrgan().getName());
-                    log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getName());
-                    xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
-                    log.info("<XenograftPopulateAction> OrganTissueCode= " + xeno.getOrgan().getConceptCode());           
+                	graftForm.setOrgan(graft.getOrgan().getName());
+                    log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
+                    graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
+                    log.info("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());           
                     
                 } else {
                     // getEVSPreferredDescription does not work for Zebrafish EVS tree
                     //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
-                    xenograftForm.setOrgan(xeno.getOrgan().getName());
-                    log.info("<XenograftPopulateAction> setOrgan= " + xeno.getOrgan().getName());
-                    xenograftForm.setOrganTissueCode(xeno.getOrgan().getConceptCode());
-                    log.info("<XenograftPopulateAction> OrganTissueCode= " + xeno.getOrgan().getConceptCode());
+                	graftForm.setOrgan(graft.getOrgan().getName());
+                    log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
+                    graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
+                    log.info("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());
                 }
             }
 
 
-            // Set the other flag or the normal graft type
-            if (xeno.getGraftTypeUnctrlVocab() != null)
+            // Set the other flag or the normal source type
+            if (graft.getSourceTypeUnctrlVocab() != null)
             {
-                xenograftForm.setGraftType(Constants.Dropdowns.OTHER_OPTION);
-                xenograftForm.setOtherGraftType(xeno.getGraftTypeUnctrlVocab());
+            	graftForm.setSourceType(Constants.Dropdowns.OTHER_OPTION);
+            	graftForm.setOtherSourceType(graft.getSourceTypeUnctrlVocab());
             }
             else
             {
-                xenograftForm.setGraftType(xeno.getGraftType());
+            	graftForm.setSourceType(graft.getSourceType());
             }
 
         }
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following
-        this.dropdown(request, response, xenograftForm);
+        this.dropdown(request, response, graftForm);
 
-        return mapping.findForward("submitTransplantXenograft");
+        return mapping.findForward("submitTransplantGraft");
 
     }
 
@@ -259,16 +262,16 @@ public class XenograftPopulateAction extends BaseAction
                                   HttpServletResponse response) throws Exception
     {
 
-        log.info("<XenograftPopulateAction dropdown> Entering dropdown() ");
+        log.info("<GraftPopulateAction dropdown> Entering dropdown() ");
 
-        XenograftForm theForm = (XenograftForm) form;
+        GraftForm theForm = (GraftForm) form;
 
         // setup dropdown menus
         this.dropdown(request, response, theForm);
 
-        log.info("<XenograftPopulateAction dropdown> before return submitTransplantXenograft ");
+        log.info("<GraftPopulateAction dropdown> before return submitTransplantGraft ");
 
-        return mapping.findForward("submitTransplantXenograft");
+        return mapping.findForward("submitTransplantGraft");
 
     }
 
@@ -281,16 +284,16 @@ public class XenograftPopulateAction extends BaseAction
      */
     private void dropdown(HttpServletRequest request,
                           HttpServletResponse response,
-                          XenograftForm inForm) throws Exception
+                          GraftForm inForm) throws Exception
     {
 
-        log.info("<XenograftPopulateAction dropdown> Entering void dropdown()");
+        log.info("<GraftPopulateAction dropdown> Entering void dropdown()");
 
-        // Set the Species drop drop for the Xenograft form
+        // Set the Species drop drop for the Graft form
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
 
-        // theSpecies will be null the first time (submitXenograft screen) - default to full list of strains
-        // but this is needed to populate the strain on the submitXenograft screen
+        // theSpecies will be null the first time (submitGraft screen) - default to full list of strains
+        // but this is needed to populate the strain on the submitGraft screen
         String theSpecies = inForm.getDonorScientificName();
         if (theSpecies == null)
         {
@@ -301,8 +304,8 @@ public class XenograftPopulateAction extends BaseAction
 
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, theSpecies);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.AGEUNITSDROP, "");
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTTYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.XENOGRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SOURCETYPEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.GRAFTADMINSITESDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.CONDITIONINGREGIMEN, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
 
@@ -329,7 +332,7 @@ public class XenograftPopulateAction extends BaseAction
         }
 
 
-        log.info("<XenograftPopulateAction dropdown> Exiting void dropdown()");
+        log.info("<GraftPopulateAction dropdown> Exiting void dropdown()");
     }
 
     /**
@@ -348,31 +351,31 @@ public class XenograftPopulateAction extends BaseAction
                                            HttpServletResponse response) throws Exception
     {
 
-        XenograftForm xenograftForm = (XenograftForm) form;
+        GraftForm graftForm = (GraftForm) form;
         String theDonorSpecies =null;
         
-        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, xenograftForm.getDonorScientificName());
+        NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, graftForm.getDonorScientificName());
         
         // Check if null - if user goes from species to empty this correctly redirects to screen   
-        if(xenograftForm.getDonorScientificName() != null && xenograftForm.getDonorScientificName().length() > 0){
+        if(graftForm.getDonorScientificName() != null && graftForm.getDonorScientificName().length() > 0){
 	        // Set Donor species to a constant to determine which organ tree displays 
 	        // using common name because Rat has two species
 
-	        Species species = SpeciesManagerSingleton.instance().getByName(xenograftForm.getDonorScientificName());
+	        Species species = SpeciesManagerSingleton.instance().getByName(graftForm.getDonorScientificName());
 	        theDonorSpecies = species.getCommonName();
 	        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
         }
         request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, theDonorSpecies);
         
         // Must Reset both fields when new species is chosen or edited
-        xenograftForm.setOrganTissueCode(null);
-        xenograftForm.setOrgan(null);
+        graftForm.setOrganTissueCode(null);
+        graftForm.setOrgan(null);
         
         // Must Reset both fields when new species is chosen or edited
-        xenograftForm.setDonorEthinicityStrain("");
-        xenograftForm.setOtherDonorEthinicityStrain("");
+        graftForm.setDonorEthinicityStrain("");
+        graftForm.setOtherDonorEthinicityStrain("");
 
-        return mapping.findForward("submitTransplantXenograft");
+        return mapping.findForward("submitTransplantGraft");
     }
 
 }

@@ -1,7 +1,10 @@
 /*
- * $Id: EndpointCode.java,v 1.8 2006-10-17 16:14:36 pandyas Exp $
+ * $Id: Endpoint.java,v 1.1 2007-07-31 12:03:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/10/17 16:14:36  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.7  2006/04/19 17:37:37  pandyas
  * Removed text
  *
@@ -18,7 +21,7 @@ import gov.nih.nci.camod.util.Duplicatable;
 /**
  * @author rajputs
  */
-public class EndpointCode extends BaseObject implements Serializable, Duplicatable
+public class Endpoint extends BaseObject implements Serializable, Duplicatable
 {
     private static final long serialVersionUID = 3259495453799404851L;
 

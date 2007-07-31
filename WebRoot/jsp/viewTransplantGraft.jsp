@@ -17,7 +17,7 @@
 
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%">
 	<tr>
-		<td class="formTitle" height="20" colspan="2">Xenograft/Transplantation - Model:
+		<td class="formTitle" height="20" colspan="2">Graft/Transplantation - Model:
 		<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></td>
 	</tr>
 
@@ -26,13 +26,13 @@
 
 			<tr>
 				<td class="formTitleBlue" height="20" colspan="2">
-				<c:out value="${xt.xenograftName}" escapeXml="false"/>
+				<c:out value="${xt.name}" escapeXml="false"/>
 				</td>
 			</tr>
 			       
 		<tr>
 			<td class="GreyBox"><b>Cell Line/Transplant:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.xenograftName}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.nme}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="WhiteBox"><b>Donor Species</b></td>
@@ -71,14 +71,14 @@
 		</tr>
 						
 		<tr>
-			<td class="GreyBox"><b>Graft Type</b></td>
+			<td class="GreyBox"><b>Source Type</b></td>
 			<td class="GreyBoxRightEnd">
 			<c:choose>
-				<c:when test="${empty xt.graftType}">
-					<c:out value="${xt.graftTypeUnctrlVocab}" escapeXml="false"/>&nbsp;
+				<c:when test="${empty xt.sourceType}">
+					<c:out value="${xt.sourceTypeUnctrlVocab}" escapeXml="false"/>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${xt.graftType}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.sourceType}" escapeXml="false"/>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			</td>

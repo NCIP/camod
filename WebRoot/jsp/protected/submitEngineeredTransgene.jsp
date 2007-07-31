@@ -317,11 +317,11 @@
 		<td class="formLabel"><label for="field1">Upload Construct Map<br>(Image of type .jpg, .jpeg, .gif or .png):</label></td>
 		<td class="formField">
 		
-			<c:if test="${not empty engineeredTransgeneForm.fileServerLocation}">
+			<c:if test="${not empty engineeredTransgeneForm.url}">
 				Current Image Thumbnail: <br>
 					
 				<a href='<c:out value="${engineeredTransgeneForm.imageUrl}"/>'>						
-				<img src="<c:out value="${engineeredTransgeneForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${engineeredTransgeneForm.fileServerLocation}"/>" target="_blank">				
+				<img src="<c:out value="${engineeredTransgeneForm.thumbUrl}"/>" height="40" width="40" alt="<c:out value="${engineeredTransgeneForm.url}"/>" target="_blank">				
 				Click to View</a>
 				<br><br>													
 			</c:if>

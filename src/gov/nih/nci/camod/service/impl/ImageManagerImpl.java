@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.23 2007-06-25 16:57:11 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.24 2007-07-31 12:02:22 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/06/25 16:57:11  pandyas
+ * Fixed code so staining_method will not clear when other fields are edited
+ *
  * Revision 1.22  2007/04/20 17:51:27  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -272,10 +275,10 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 								+ uniqueFileName;
 						String theViewUrl = Constants.CaImage.LEGACYJSP
 								+ theType + uniqueFileName;
-						inImage.setFileServerLocation(theThumbUrl
+						inImage.setUrl(theThumbUrl
 								+ Constants.CaImage.FILESEP + theViewUrl);
 					} else {
-						inImage.setFileServerLocation(serverViewUrl
+						inImage.setUrl(serverViewUrl
 								+ uniqueFileName);
 					}
 				} else {

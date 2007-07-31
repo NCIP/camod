@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.103 2007-05-22 12:51:43 pandyas Exp $
+ * $Id: Constants.java,v 1.104 2007-07-31 12:04:18 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.103  2007/05/22 12:51:43  pandyas
+ * added as work around until the EVS vocabularies are ready for Zebrafish
+ *
  * Revision 1.102  2007/05/21 17:32:06  pandyas
  * Modified simple and adv search species drop down to pull from DB (approved model species only)
  *
@@ -275,7 +278,7 @@ public class Constants {
     
     public static final int ITEMSPERPAGEDEFAULT = 15;
     
-    public static final String[] SEARCHRESULTCOLUMNSDEFAULT = { "Model Descriptor", "Tumor Sites", "Species"  }; 
+    public static final String[] SEARCHRESULTCOLUMNSDEFAULT = { "Model Id", "Model Descriptor", "Tumor Sites", "Species"  }; 
     
     public static final String SELECTEDSEARCHRESULTCOLUMNS = "selectedsearchresultcolumns";
     
@@ -384,7 +387,13 @@ public class Constants {
         public static final String CONCEPTCODEZEROS = "000000";        
         
         /* all species from DB -  used for various Screens */
-        public static final String SPECIESQUERYDROP = "speciesquerydrop.db";        
+        public static final String SPECIESQUERYDROP = "speciesquerydrop.db";          
+        
+        /* all species except human from DB -  used for model characteristics */
+        public static final String NONHUMANSPECIESDROP = "nonhumanspeciesdrop.db"; 
+        
+        /* Constant for Homo sapiens - used in the query above (NONHUMANSPECIESDROP) */
+        public static final String HUMANSCIENTIFICNAME = "Homo sapiens";         
         
         public static final String STRAINTEXTDROP = "StrainText.txt";
         
@@ -468,9 +477,9 @@ public class Constants {
 
         public static final String VIRALVECTORDROP = "ViralVectors.txt";
 
-        public static final String GRAFTTYPEDROP = "GraftTypes.txt";
+        public static final String SOURCETYPEDROP = "SourceTypes.txt";
 
-        public static final String XENOGRAFTADMINSITESDROP = "XenograftAdministrativeSites.txt";
+        public static final String GRAFTADMINSITESDROP = "GraftAdministrativeSites.txt";
 
         public static final String INDUCEDMUTATIONDROP = "InducedMutations.txt";
 
@@ -512,7 +521,7 @@ public class Constants {
         
 
         // These two are used to display the species and strain currently in the
-        // AnimalModelCharacteristics - Xenograft screen
+        // AnimalModelCharacteristics - Graft screen
         public static final String MODELSPECIES = "modelspecies";
 
         public static final String MODELSTRAIN = "modelstrain";
@@ -530,9 +539,15 @@ public class Constants {
 
         // Used for curation
         public static final String CURATIONSTATESDROP = "curationstates.db";
-
+        public static final String CURATIONSTATESWITHBLANKDROP = "curationstates.db";
+        
         // Used for curation
         public static final String USERSFORROLEDROP = "usersforrole.db";
+        
+        // Used for dropdowns on adminEditModels.jsp - reuses code from USERSFORROLEDROP
+        // Both the screeener and editor lists show up together on the jsp
+        public static final String USERSFOREDITORROLEDROP = "usersforeditorrole.db"; 
+        public static final String USERSFORSCREENERROLEDROP = "usersforscreenerrole.db";         
 
         // Used for role assignment
         public static final String ROLESDROP = "roles.db"; 
@@ -626,7 +641,7 @@ public class Constants {
 
         public static final String GENETIC_DESCRIPTION = "Genetic Description Page";
 
-        public static final String XENOGRAFT = "Xenograft Page";
+        public static final String GRAFT = "Graft Page";
         
         public static final String TRANSIENT_INTERFERENCE = "Transient Interference Page";
     }
@@ -646,12 +661,12 @@ public class Constants {
     // that display mgi, zfin, or rgd identifier - set in submitAction
     public static final String AMMODELSPECIESCOMMONNAME = "modelspeciescommonname";
     
-    // This constants stores the donor species common name for the Xenograft screens 
-    // set in XenograftPopulateAction
+    // This constants stores the donor species common name for the Graft screens 
+    // set in GraftPopulateAction
     public static final String DONORSPECIESCOMMONNAME = "donorspeciescommonname";
     
     // This constants stores the species common name from the simple and advanced search screens 
-    // set in XenograftPopulateAction
+    // set in GraftPopulateAction
     public static final String SEARCHSPECIESCOMMONNAME = "searchspeciescommonname";    
 
     /**
@@ -661,9 +676,9 @@ public class Constants {
 
     public static final String ANIMALMODEL = "animalmodel";
 
-    public static final String XENOGRAFTMODEL = "xenograftmodel";
+    public static final String GRAFTMODEL = "graftmodel";
 
-    public static final String XENOGRAFTRESULTLIST = "xenograftresultlist";
+    public static final String GRAFTRESULTLIST = "graftresultlist";
 
     /**
      * Used to store username for current user
@@ -681,6 +696,8 @@ public class Constants {
      */
     public static final String KEYWORD_HIGHLIGHT = "keywordhighlight";
     
+    public static final String ADMIN_SEARCH_MODEL_ID = "adminsearchmodelid";    
+    
     public static final String SEARCH_QUERY = "searchquery";
     
     public static final String SEARCH_RESULTS = "searchResults";
@@ -694,6 +711,9 @@ public class Constants {
     public static final String ERRORMESSAGE = "errormessage";
     
     public static final String SEARCH_FORM = "searchform";
+    
+    // used for search results in adminEditModels
+    public static final String CURATION_ASSIGNMENT_FORM = "curationassignmentform";    
     
     public static final String EXECUTE_TIME = "execute_time";
     
@@ -788,7 +808,7 @@ public class Constants {
 
         public static final String VIRALTREATMENT_LIST = "viraltreatment_list";
 
-        public static final String XENOGRAFT_LIST = "xenograft_list";
+        public static final String GRAFT_LIST = "graft_list";
 
         public static final String SPONTANEOUSMUTATION_LIST = "spontaneousmutation_list";
 

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.48 2007-06-20 19:29:45 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.49 2007-07-31 12:00:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.48  2007/06/20 19:29:45  pandyas
+ * Fixed populate for diagnosis - depends on species set in the session constant
+ *
  * Revision 1.47  2007/06/19 13:55:07  pandyas
  * Enable disease when species is other than mouse, rat, zebrafish (i.e. hamster, ect) to allow for entry by user
  *
@@ -102,8 +105,10 @@
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <SCRIPT src="/scripts/TipMessages.js" type=text/javascript></SCRIPT>
+
 <SCRIPT language="JavaScript" src="scripts/global.js"></script>
 <SCRIPT language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+<!-- needed for autocomplete -->
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
 <script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
@@ -131,7 +136,7 @@
 	String aQueryName = (String) request.getSession().getAttribute( Constants.QUERY_NAME );		
 %>
 
-<html:form action="SearchSimpleAction.do" focus="keyword" onsubmit="transferFields()">
+<html:form action="SearchSimpleAction.do" focus="keyword">
 
 <!-- searchSimple.jsp -->
 <!-- Main Content Begins -->

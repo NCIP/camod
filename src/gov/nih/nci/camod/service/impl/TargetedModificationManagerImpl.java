@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.29 2007-04-04 13:17:49 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.30 2007-07-31 12:02:22 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2007/04/04 13:17:49  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.28  2007/03/27 18:38:26  pandyas
  * Modified code to trim identifiers - cleaner for display link
  *
@@ -239,7 +242,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 
 				inImageData.setDescriptionOfConstruct(inTargetedModificationData.getDescriptionOfConstruct());
 				inImageData.setTitle(inTargetedModificationData.getTitle());
-				inImageData.setFileServerLocation(inTargetedModificationData.getFileServerLocation());
+				inImageData.setUrl(inTargetedModificationData.getUrl());
 				inImageData.setFileLocation(inTargetedModificationData.getFileLocation());
 
 				Image image = ImageManagerSingleton.instance().create(
@@ -249,7 +252,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 				System.out.println("Image info: \ndescription:"
 						+ image.getDescription() + " \ntitle:"
 						+ image.getTitle() + " \nname:"
-						+ image.getFileServerLocation() + " \nid:"
+						+ image.getUrl() + " \nid:"
 						+ image.getId());
 				inTargetedModification.setImage(image);
 			}

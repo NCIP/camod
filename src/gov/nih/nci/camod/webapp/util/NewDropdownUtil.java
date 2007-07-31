@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.50 2007-05-21 17:37:04 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.51 2007-07-31 12:01:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.50  2007/05/21 17:37:04  pandyas
+ * Modified simple and adv search species drop down to pull from DB (approved model species only)
+ *
  * Revision 1.49  2007/03/28 18:03:09  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -154,8 +157,14 @@ public class NewDropdownUtil
         //modified for species from DB
         if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
         {
+        	log.info("New DropdownUtil loop with SPECIESQUERYDROP");
             theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
         }
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.NONHUMANSPECIESDROP))
+        {
+            theReturnList = getQueryNonHumanSpeciesList(inRequest, inFilter);
+        }        
 
         else if (inDropdownKey.equals(Constants.Dropdowns.STRAINDROP))
         {
@@ -247,11 +256,26 @@ public class NewDropdownUtil
         {
             theReturnList = getCurationStatesList(inRequest, inFilter);
         }
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.CURATIONSTATESWITHBLANKDROP))
+        {
+            theReturnList = getCurationStatesWithBlankList(inRequest, inFilter);
+        }        
 
         else if (inDropdownKey.equals(Constants.Dropdowns.USERSFORROLEDROP))
         {
             theReturnList = getUsersForRoleList(inRequest, inFilter);
         }
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.USERSFOREDITORROLEDROP))
+        {
+        	theReturnList = getUsersForSpecificRoleList(inRequest, inFilter);
+        }
+        
+        else if (inDropdownKey.equals(Constants.Dropdowns.USERSFORSCREENERROLEDROP))
+        {
+        	theReturnList = getUsersForSpecificRoleList(inRequest, inFilter);
+        }        
 
         else if (inDropdownKey.equals(Constants.Dropdowns.ROLESDROP))
         {
@@ -273,7 +297,7 @@ public class NewDropdownUtil
             theReturnList = new ArrayList();
         }
 
-        log.debug("Exiting NewDropdownUtil.getDatabaseDropdown");
+        log.info("Exiting NewDropdownUtil.getDatabaseDropdown");
         return theReturnList;
     }
 
@@ -397,8 +421,8 @@ public class NewDropdownUtil
     }
 
     /**
-     * Returns a list of all Species and Strains 
-     * Used for search screens
+     * Returns a list of all Species  
+     * Used for submission and search screens
      * 
      * @return speciesNames
      * @throws Exception
@@ -406,7 +430,7 @@ public class NewDropdownUtil
     private static List getQueryOnlySpeciesList(HttpServletRequest inRequest,
                                                 String inAddBlank) throws Exception
     {
-        log.trace("Entering NewDropdownUtil.getQueryOnlySpeciesList");
+        log.info("Entering NewDropdownUtil.getQueryOnlySpeciesList");
 
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
@@ -429,9 +453,46 @@ public class NewDropdownUtil
                 }
             }
         }
+        log.info("Exiting getQueryOnlySpeciesList.size " + theReturnList.size());
         return theReturnList;
     }
+    
+    
+    /**
+     * Returns a list of all Non Human Species 
+     * Used for model char submission screen
+     * 
+     * @return speciesNames
+     * @throws Exception
+     */
+    private static List getQueryNonHumanSpeciesList(HttpServletRequest inRequest,
+                                                String inAddBlank) throws Exception
+    {
+        log.trace("Entering NewDropdownUtil.getQueryNonHumanSpeciesList");
 
+        // Get values for dropdown lists for Species
+        // for each Species, get it's commonName (scientificName)
+        List theSpeciesList = QueryManagerSingleton.instance().getQueryOnlySpecies(inRequest);
+        List<DropdownOption> theReturnList = new ArrayList<DropdownOption>();
+
+        if (theSpeciesList != null)
+        {
+            for (int i = 0; i < theSpeciesList.size(); i++)
+            {
+                Species theSpecies = (Species) theSpeciesList.get(i);
+                if (theSpecies.getScientificName() != null && !theSpecies.getScientificName().equals(Constants.Dropdowns.HUMANSCIENTIFICNAME))
+                {
+                    String theDisplayName = theSpecies.getDisplayName();
+                    if (theDisplayName.length() > 0)
+                    {
+                        DropdownOption theOption = new DropdownOption(theDisplayName, theSpecies.getScientificName());
+                        theReturnList.add(theOption);
+                    }
+                }
+            }
+        }
+        return theReturnList;
+    }
 
     /**
      * Based on a species name retrieve a list of all Strains
@@ -654,6 +715,7 @@ public class NewDropdownUtil
 
         return QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators();
     }
+    
 
     /**
      * Returns a list of all Agents that were used to induce a mutation
@@ -787,6 +849,30 @@ public class NewDropdownUtil
     }
 
     /**
+     * Returns a list of all states for a curation flow and add a blank for 
+     * adminEditModels.jsp only (previously used for adminCommentsAssignment.jsp
+     * and adminModelsAssignment.jsp
+     * 
+     * @return list of curation states
+     * 
+     * @throws Exception
+     */
+    private static List getCurationStatesWithBlankList(HttpServletRequest inRequest,
+                                              String inWorkflow) throws Exception
+    {
+        List theStateList = new ArrayList(); 
+        log.info("Entering NewDropdownUtil.getCurationStatesList");
+
+        // Get the curation manager workflow XML
+        CurationManager theCurationManager = new CurationManagerImpl(inRequest.getSession().getServletContext().getRealPath("/") + inWorkflow);
+        
+        // Add blank to the state list for adminEditModels.jsp
+        theStateList = theCurationManager.getAllStateNames();
+        addBlank(theStateList);
+        return theStateList;
+    }
+    
+    /**
      * Returns a list of all states for a curation flow
      * 
      * @return list of curation states
@@ -796,14 +882,17 @@ public class NewDropdownUtil
     private static List getCurationStatesList(HttpServletRequest inRequest,
                                               String inWorkflow) throws Exception
     {
-
-        log.trace("Entering NewDropdownUtil.getCurationStatesList");
+        List theStateList = new ArrayList(); 
+        log.info("Entering NewDropdownUtil.getCurationStatesList");
 
         // Get the curation manager workflow XML
         CurationManager theCurationManager = new CurationManagerImpl(inRequest.getSession().getServletContext().getRealPath("/") + inWorkflow);
-
-        return theCurationManager.getAllStateNames();
-    }
+        
+        // Add blank to the state list for adminEditModels.jsp
+        theStateList = theCurationManager.getAllStateNames();
+        addBlank(theStateList);
+        return theStateList;
+    }    
 
     /**
      * Returns a list of all states for a curation flow
@@ -825,12 +914,14 @@ public class NewDropdownUtil
 
         try
         {
-
             List theRoles = Search.query(theRole);
 
             if (theRoles.size() > 0)
             {
                 theRole = (Role) theRoles.get(0);
+                
+                // Defaults list to blank in the first position
+                theUserList.add(new DropdownOption(null, null));                 
 
                 // Get the users for the role
                 Set<Party> theUsers = theRole.getPartyCollection();
@@ -848,7 +939,6 @@ public class NewDropdownUtil
                         theUserList.add(new DropdownOption(thePerson.getDisplayName(), thePerson.getUsername()));
                     }
                 }
-
             }
             else
             {
@@ -860,10 +950,76 @@ public class NewDropdownUtil
             log.error("Unable to get roles for user: ", e);
             throw e;
         }
-
         return theUserList;
     }
+    
+    /**
+     * Returns a list of all Editors or screeners - display and use firstName and lastName
+     * instead of the DropdownOption
+     * 
+     * @return list of Editors or Screeners
+     * 
+     * @throws Exception
+     */
+    private static List getUsersForSpecificRoleList(HttpServletRequest inRequest,
+                                            String inRoleName) throws Exception
+    {
 
+        log.info("Entering NewDropdownUtil.getUsersForSpecificRoleList");
+
+        List theUserList = new ArrayList();
+        List<String> theUserNames = new ArrayList<String>();        
+
+        Role theRole = new Role();
+        theRole.setName(inRoleName);
+
+        try
+        {
+            List theRoles = Search.query(theRole);
+
+            if (theRoles.size() > 0)
+            {
+                theRole = (Role) theRoles.get(0);
+                
+                // Defaults list to blank in the first position
+                addBlank(theUserList);                
+
+                // Get the users for the role
+                Set<Party> theUsers = theRole.getPartyCollection();
+                Iterator theIterator = theUsers.iterator();
+
+                // Go through the list of returned Party objects
+                while (theIterator.hasNext())
+                {
+                    Object theObject = theIterator.next();
+
+                    // Only add when it's actually a person
+                    if (theObject instanceof Person)
+                    {
+                        Person thePerson = (Person) theObject;
+                        String thePersonName = thePerson.getDisplayName();
+                        log.info("thePerson in list: " + thePersonName);                        
+                        theUserList.add(thePersonName);
+                        //(new DropdownOption(thePerson.getDisplayName(), thePerson.getUsername()));
+                    }
+                }
+            }
+            else
+            {
+                log.warn("Role not found in database: " + inRoleName);
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("Unable to get roles for user: ", e);
+            throw e;
+        }
+        return theUserList;
+    }    
+
+    
+     
+    
     /**
      * Returns a list of all the known roles
      * 

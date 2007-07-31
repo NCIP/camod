@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.37 2007-04-04 13:17:49 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.38 2007-07-31 12:02:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2007/04/04 13:17:49  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.36  2007/03/27 18:37:23  pandyas
  * Modified code to trim identifiers - cleaner for display link
  *
@@ -386,8 +389,8 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 				inImageData.setDescriptionOfConstruct(inEngineeredTransgeneData
 						.getDescriptionOfConstruct());
 				inImageData.setTitle(inEngineeredTransgeneData.getTitle());
-				inImageData.setFileServerLocation(inEngineeredTransgeneData
-						.getFileServerLocation());
+				inImageData.setUrl(inEngineeredTransgeneData
+						.getUrl());
 				inImageData.setFileLocation(inEngineeredTransgeneData
 						.getFileLocation());
 

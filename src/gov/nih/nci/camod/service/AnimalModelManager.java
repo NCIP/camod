@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelManager.java,v 1.37 2006-10-17 16:14:18 pandyas Exp $
+ * $Id: AnimalModelManager.java,v 1.38 2007-07-31 12:03:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2006/10/17 16:14:18  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.36  2006/05/03 20:03:10  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -87,6 +90,9 @@
  * Added saveXenograft and saveGeneDelivery
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.37  2006/10/17 16:14:18  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.36  2006/05/03 20:03:10  pandyas
  * Modified to add Morpholino object data to application
  *
@@ -216,8 +222,10 @@ public interface AnimalModelManager {
     public void remove(String id) throws Exception;
 
     public List search(SearchData inSearchData) throws Exception;
+    
+    public List searchAdmin(CurationAssignmentData inCurationAssignment) throws Exception;    
 
-    public void addXenograft(AnimalModel inAnimalModel, XenograftData inXenograftData) throws Exception;
+    public void addGraft(AnimalModel inAnimalModel, GraftData inGraftData) throws Exception;
 
     public void addGeneDelivery(AnimalModel inAnimalModel, GeneDeliveryData inGeneDeliveryData) throws Exception;
 

@@ -39,7 +39,7 @@
         <mapping resource="gov/nih/nci/camod/domain/Organization.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/TumorCode.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/AbstractCancerModel.hbm.xml"/>
-        <mapping resource="gov/nih/nci/camod/domain/Xenograft.hbm.xml"/>
+        <mapping resource="gov/nih/nci/camod/domain/Graft.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/YeastModel.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/AnimalModel.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Party.hbm.xml"/>
@@ -48,7 +48,7 @@
         <mapping resource="gov/nih/nci/camod/domain/RegulatoryElementType.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/RegulatoryElement.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Role.hbm.xml"/>
-        <mapping resource="gov/nih/nci/camod/domain/EndpointCode.hbm.xml"/>
+        <mapping resource="gov/nih/nci/camod/domain/Endpoint.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/InvivoResult.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Treatment.hbm.xml"/>
         <mapping resource="gov/nih/nci/camod/domain/Therapy.hbm.xml"/>
@@ -102,7 +102,6 @@
         <mapping resource="gov/nih/nci/camod/domain/ResultSettings.hbm.xml"/>
 		<mapping resource="gov/nih/nci/camod/domain/TransientInterference.hbm.xml"/>
 		<mapping resource="gov/nih/nci/camod/domain/TransientInterferenceMethod.hbm.xml"/> 
-		<mapping resource="gov/nih/nci/camod/domain/DevelopmentalStage.hbm.xml"/> 
-        <mapping resource="gov/nih/nci/camod/domain/ProteomicsData.hbm.xml"/>		          
+		<mapping resource="gov/nih/nci/camod/domain/DevelopmentalStage.hbm.xml"/> 	          
     </session-factory>
 </hibernate-configuration>

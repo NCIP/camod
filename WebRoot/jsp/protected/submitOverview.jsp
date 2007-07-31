@@ -54,7 +54,7 @@
                             <html:hidden property="modelDescriptor" name="<%= Constants.FORMDATA %>" />
                             <html:hidden property="assignedTo" name="<%= Constants.FORMDATA %>" />
                             <html:hidden property="event" name="<%= Constants.FORMDATA %>" />
-                            <html:hidden property="note" name="<%= Constants.FORMDATA %>" />
+                            <html:hidden property="remark" name="<%= Constants.FORMDATA %>" />
                             <html:submit>Set model status to Complete</html:submit> 
                         </html:form> 
                     </td>

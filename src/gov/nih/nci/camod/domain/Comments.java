@@ -1,10 +1,13 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2006/01/18 14:23:31  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.8  2005/11/14 14:16:51  georgeda
  * Cleanup
  *
  * 
- * $Id: Comments.java,v 1.9 2006-01-18 14:23:31 georgeda Exp $
+ * $Id: Comments.java,v 1.10 2007-07-31 12:03:28 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -17,28 +20,11 @@ public class Comments extends BaseObject implements Serializable, Curateable, Du
     private static final long serialVersionUID = 3259595453799404851L;
 
     private String remark;
-    private AbstractCancerModel cancerModel;
+    private AbstractCancerModel abstractCancerModel;
     private Availability availability;
     private ModelSection modelSection;
     private Person submitter;
     private String state;
-
-    /**
-     * @return Returns the name.
-     */
-    public String getRemark()
-    {
-        return remark;
-    }
-
-    /**
-     * @param name
-     *            The name to set.
-     */
-    public void setRemark(String remark)
-    {
-        this.remark = remark;
-    }
 
     /**
      * @return Returns the state.
@@ -55,23 +41,6 @@ public class Comments extends BaseObject implements Serializable, Curateable, Du
     public void setState(String state)
     {
         this.state = state;
-    }
-
-    /**
-     * @return Returns the cancerModel.
-     */
-    public AbstractCancerModel getCancerModel()
-    {
-        return cancerModel;
-    }
-
-    /**
-     * @param cancerModel
-     *            The cancerModel to set.
-     */
-    public void setCancerModel(AbstractCancerModel cancerModel)
-    {
-        this.cancerModel = cancerModel;
     }
 
     /**
@@ -140,5 +109,21 @@ public class Comments extends BaseObject implements Serializable, Curateable, Du
             return false;
         return true;
     }
+
+	public AbstractCancerModel getAbstractCancerModel() {
+		return abstractCancerModel;
+	}
+
+	public void setAbstractCancerModel(AbstractCancerModel abstractCancerModel) {
+		this.abstractCancerModel = abstractCancerModel;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationPopulateAction.java,v 1.16 2007-04-04 13:19:07 pandyas Exp $
+ * $Id: TargetedModificationPopulateAction.java,v 1.17 2007-07-31 12:02:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/04/04 13:19:07  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.15  2007/03/26 12:02:30  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -139,7 +142,7 @@ public class TargetedModificationPopulateAction extends BaseAction
             Image image = theTargetedModification.getImage();
             if (image != null)
             {
-            	theTargetedModificationForm.setFileServerLocation(image.getFileServerLocation());
+            	theTargetedModificationForm.setUrl(image.getUrl());
             	theTargetedModificationForm.setTitle(image.getTitle());
             	theTargetedModificationForm.setDescriptionOfConstruct(image.getDescription());
             	theTargetedModificationForm.setDescriptionOfConstruct(image.getDescription());

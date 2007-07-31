@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.68 2007-05-21 17:33:01 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.69 2007-07-31 12:02:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.68  2007/05/21 17:33:01  pandyas
+ * Modified simple and adv search species drop down to pull from DB (approved model species only)
+ *
  * Revision 1.67  2007/03/28 18:45:47  pandyas
  * Modifed debug statements - no longer need to see them all print to the output
  *
@@ -241,12 +244,14 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
+import gov.nih.nci.camod.domain.AnimalModelSearchResult;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.Publication;
 import gov.nih.nci.camod.domain.Species;
 import gov.nih.nci.camod.util.DrugScreenResult;
+import gov.nih.nci.camod.webapp.form.CurationAssignmentData;
 import gov.nih.nci.camod.webapp.form.SearchData;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -715,7 +720,7 @@ public class QueryManagerImpl extends BaseManager
      */
     public List getQueryOnlySpecies(HttpServletRequest inRequest) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getQueryOnlySpecies");
+        log.info("Entering QueryManagerImpl.getQueryOnlySpecies");
 
         // Format the query
         HQLParameter[] theParams = new HQLParameter[0];
@@ -723,9 +728,9 @@ public class QueryManagerImpl extends BaseManager
 
         List theList = Search.query(theHQLQuery, theParams);
 
-        log.debug("Found matching items: " + theList.size());
+        log.info("Found matching items: " + theList.size());
 
-        log.debug("Exiting QueryManagerImpl.getQueryOnlySpecies");
+        log.info("Exiting QueryManagerImpl.getQueryOnlySpecies");
         return theList;
     }
 
@@ -902,6 +907,58 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
+     * Return the list of Editors associated with animal models
+     * 
+     * @return a sorted list of unique Editors
+     * 
+     * @throws PersistenceException
+     */
+    public List getQueryOnlyEditors() throws PersistenceException
+    {
+        log.debug("Entering QueryManagerImpl.getQueryOnlyEditors");
+
+        // Format the query
+        String theSQLString = "SELECT last_name, first_name " + "FROM party " + "WHERE is_principal_investigator = 1 " + "  AND first_name IS NOT NULL " + "  AND last_name IS NOT NULL " + "  AND party_id IN (SELECT DISTINCT principal_investigator_id FROM abs_cancer_model WHERE state = 'Edited-approved')" + "ORDER BY last_name ASC";
+
+        ResultSet theResultSet = null;
+
+        List<String> theEditorList = new ArrayList<String>();
+
+        try
+        {
+            log.info("getQueryOnlyEditors - SQL: " + theSQLString);
+
+            Object[] params = new Object[0];
+            theResultSet = Search.query(theSQLString, params);
+
+            while (theResultSet.next())
+            {
+                String theEditorEntry = theResultSet.getString(1) + ", " + theResultSet.getString(2);
+                theEditorList.add(theEditorEntry);
+            }
+
+        }
+        catch (Exception e)
+        {
+            log.error("Exception in getQueryOnlyEditors", e);
+            throw new PersistenceException("Exception in getQueryOnlyEditors: " + e);
+        }
+        finally
+        {
+            if (theResultSet != null)
+            {
+                try
+                {
+                    theResultSet.close();
+                }
+                catch (Exception e)
+                {}
+            }
+        }
+        return theEditorList;
+    }    
+    
+    /**
      * Return the latest log for an animal model
      * 
      * @param inModel
@@ -1007,7 +1064,7 @@ public class QueryManagerImpl extends BaseManager
         HQLParameter[] theParams = new HQLParameter[3];
         theParams[0] = new HQLParameter();
         theParams[0].setName("abs_cancer_model_id");
-        theParams[0].setValue(inComments.getCancerModel().getId());
+        theParams[0].setValue(inComments.getAbstractCancerModel().getId());
         theParams[0].setType(Hibernate.LONG);
         theParams[1] = new HQLParameter();
         theParams[1].setName("party_id");
@@ -1069,7 +1126,7 @@ public class QueryManagerImpl extends BaseManager
             theStateHQL += "or c.submitter = :party_id) ";
         }
 
-        String theHQLQuery = "from Comments as c where " + theStateHQL + " and c.cancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
+        String theHQLQuery = "from Comments as c where " + theStateHQL + " and c.abstractCancerModel in (" + "from AnimalModel as am where am.id = :abs_cancer_model_id) and c.modelSection in (from ModelSection where name = :name)";
         log.debug("The HQL query: " + theHQLQuery);
 
         Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
@@ -1159,26 +1216,26 @@ public class QueryManagerImpl extends BaseManager
     public List getModelsByStateForPerson(String inState,
                                           Person inPerson) throws PersistenceException
     {
-        log.debug("Entering QueryManagerImpl.getCurrentLog");
+        log.info("Entering QueryManagerImpl.getCurrentLog");
 
         String theHQLQuery = "from AnimalModel as am where am.state = :state and am.id in (";
         Query theQuery = null;
 
         if (inPerson == null)
         {
-            theHQLQuery += "select l.cancerModel from Log as l where l.type = :state)";
+            theHQLQuery += "select l.abstractCancerModel from Log as l where l.type = :state)";
             theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("state", inState);
         }
         else
         {
-            theHQLQuery += "select l.cancerModel from Log as l where l.submitter = :party_id and l.type = :state)";
+            theHQLQuery += "select l.abstractCancerModel from Log as l where l.submitter = :party_id and l.type = :state)";
             theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("party_id", inPerson.getId());
             theQuery.setParameter("state", inState);
         }
 
-        log.debug("The HQL query: " + theHQLQuery);
+        log.info("<getModelsByStateForPerson> The HQL query: " + theHQLQuery);
 
         List theComments = theQuery.list();
 
@@ -1519,14 +1576,13 @@ public class QueryManagerImpl extends BaseManager
     }
 
     /**
-     * Get the model id's for any model that has a histopathology with a parent
-     * histopathology
-     * 
+     * Get the model id's for any model that has a graft
+     *  
      * @return a list of matching model ids
      * 
      * @throws PersistenceException
      */
-    private String getModelIdsForXenograft() throws PersistenceException
+    private String getModelIdsForGraft() throws PersistenceException
     {
 
         String theSQLString = "SELECT distinct par_abs_can_model_id FROM abs_cancer_model ";
@@ -1897,7 +1953,7 @@ public class QueryManagerImpl extends BaseManager
     public List searchForAnimalModels(SearchData inSearchData) throws Exception
     {
 
-        log.debug("Entering searchForAnimalModels");
+        log.info("Entering searchForAnimalModels");
 
         List theAnimalModels = null;
 
@@ -1906,19 +1962,45 @@ public class QueryManagerImpl extends BaseManager
 
         if (inSearchData.getKeyword() != null && inSearchData.getKeyword().length() > 0)
         {
-            log.debug("Doing a keyword search: " + inSearchData.getKeyword());
+            log.info("Doing a keyword search: " + inSearchData.getKeyword());
             theAnimalModels = keywordSearch(theFromClause, theOrderByClause, inSearchData.getKeyword());
         }
         else
         {
-            log.debug("Doing a criteria search");
+            log.info("Doing a criteria search");
             theAnimalModels = criteriaSearch(theFromClause, theOrderByClause, inSearchData);
         }
 
-        log.debug("Exiting searchForAnimalModels");
+        log.info("Exiting searchForAnimalModels");
 
         return theAnimalModels;
     }
+    
+    public List searchForAdminAnimalModels(CurationAssignmentData inCurationAssignmentData) throws Exception
+    {
+
+        log.info("Entering searchForAdminAnimalModels");
+
+        List theAnimalModels = null;
+
+        String theFromClause = "from AnimalModel as am where am.modelDescriptor IS NOT NULL ";
+        String theOrderByClause = " ORDER BY am.modelDescriptor asc";
+
+        if (inCurationAssignmentData.getModelId() != null && inCurationAssignmentData.getModelId().length() > 0)
+        {
+            log.info("Doing a model id search: " + inCurationAssignmentData.getModelId());
+            theAnimalModels = adminModelIdSearch(theFromClause, inCurationAssignmentData);
+        }
+        else
+        {
+            log.info("Doing a criteria admin search");
+            theAnimalModels = criteriaAdminSearch(theFromClause, theOrderByClause, inCurationAssignmentData);
+        }
+        log.info("theAnimalModels.size() from QM.searchForAdminAnimalModels: " + theAnimalModels.size());
+        log.info("Exiting searchForAdminAnimalModels");
+
+        return theAnimalModels;
+    }    
 
     public int countMatchingAnimalModels(SearchData inSearchData) throws Exception
     {
@@ -2044,6 +2126,34 @@ public class QueryManagerImpl extends BaseManager
 
         return theAnimalModels;
     }
+    
+    private List adminModelIdSearch(String inFromClause, CurationAssignmentData inCurationAssignmentData) throws Exception
+     {
+
+        log.info("adminModelIdSearch Entered");
+        
+        String theWhereClause = buildAdminModelIdSearchWhereClause(inCurationAssignmentData);
+        log.info("theWhereClause: " + theWhereClause);
+
+        List theAnimalModels = null;
+
+        try
+        {
+            String theHQLQuery = inFromClause + theWhereClause;
+
+            log.info("HQL Query: " + theHQLQuery);
+
+            Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+            theAnimalModels = theQuery.list();
+        }
+        catch (Exception e)
+        {
+            log.error("Exception occurred searching for models", e);
+            throw e;
+        }
+
+        return theAnimalModels;     
+     }
 
     private String buildCriteriaSearchWhereClause(SearchData inSearchData) throws Exception
     {
@@ -2190,11 +2300,11 @@ public class QueryManagerImpl extends BaseManager
 		}
 
 		// Search for xenograft
-		if (inSearchData.isSearchXenograft()) {
-			log.debug("In Search inSearchData.isSearchXenograft(): "
-					+ inSearchData.isSearchXenograft());
+		if (inSearchData.isSearchGraft()) {
+			log.debug("In Search inSearchData.isSearchGraft(): "
+					+ inSearchData.isSearchGraft());
 			theWhereClause += " AND abs_cancer_model_id IN ("
-					+ getModelIdsForXenograft() + ")";
+					+ getModelIdsForGraft() + ")";
 		}
 		
 		// Search for Transient Interference
@@ -2217,6 +2327,111 @@ public class QueryManagerImpl extends BaseManager
 
     }
 
+    private String buildAdminCriteriaSearchWhereClause(CurationAssignmentData inCurationAssignmentData) throws Exception
+    {
+    	String theWhereClause = "";
+        log.info("<buildAdminCriteriaSearchWhereClause> following Characteristics:" 
+        		+ "\n\t  State: " + inCurationAssignmentData.getCurrentState()
+                + "\n\t Editor: " + inCurationAssignmentData.getEditor()         		
+                + "\n\t External Source: " + inCurationAssignmentData.getExternalSource() 
+                + "\n\t Model Descriptor: " + inCurationAssignmentData.getModelDescriptor() 
+                + "\n\t PI: " + inCurationAssignmentData.getPrincipalInvestigator() 
+                + "\n\t Species: " + inCurationAssignmentData.getSpecies()                
+                + "\n\t Screener: " + inCurationAssignmentData.getScreener());    	
+  	
+
+        // Current State criteria
+        if (inCurationAssignmentData.getCurrentState() != null && inCurationAssignmentData.getCurrentState().length() > 0)
+        {
+        	log.info("inCurationAssignmentData.getCurrentState() != null loop");
+            theWhereClause += " AND upper(am.state) like '%" + inCurationAssignmentData.getCurrentState().toUpperCase().trim() + "%'";
+        }   	
+    	
+		// External source criteria - sets where clause for null (caMOD) models
+		if (inCurationAssignmentData.getExternalSource() != null && inCurationAssignmentData.getExternalSource().length() > 0) {
+			log.info("inCurationAssignmentData.getExternalSource() != null loop " );
+			theWhereClause += " AND upper(am.externalSource) like '%" + inCurationAssignmentData.getExternalSource().toUpperCase().trim()+ "%'";
+		} else {
+			log.info("inCurationAssignmentData.getExternalSource() else loop " );
+			theWhereClause += " AND upper(am.externalSource) IS NULL ";
+		}
+		
+		// Model descriptor criteria
+		if (inCurationAssignmentData.getModelDescriptor() != null
+				&& inCurationAssignmentData.getModelDescriptor().trim().length() > 0) 
+		{
+			log.info("inCurationAssignmentData.getModelDescriptor() != null loop " );
+            theWhereClause += " AND upper(am.modelDescriptor) like '%" + inCurationAssignmentData.getModelDescriptor().toUpperCase().trim() + "%'";
+        }
+		
+        // Species criteria
+        if (inCurationAssignmentData.getSpecies() != null && inCurationAssignmentData.getSpecies().length() > 0)
+        {
+            theWhereClause += " AND am.strain IN (" + getStrainIdsForSpecies(inCurationAssignmentData.getSpecies()) + ")";
+        }		
+
+        // PI criteria
+        if (inCurationAssignmentData.getPrincipalInvestigator() != null && inCurationAssignmentData.getPrincipalInvestigator().length() > 0)
+        {
+
+            StringTokenizer theTokenizer = new StringTokenizer(inCurationAssignmentData.getPrincipalInvestigator());
+            String theLastName = theTokenizer.nextToken(",").trim();
+            String theFirstName = theTokenizer.nextToken().trim();
+
+            theWhereClause += " AND am.principalInvestigator IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%')";
+        }        
+		
+		// Editor criteria
+        if (inCurationAssignmentData.getEditor() != null && inCurationAssignmentData.getEditor().length() > 0)
+        {
+            StringTokenizer theTokenizer = new StringTokenizer(inCurationAssignmentData.getEditor());
+            String theLastName = theTokenizer.nextToken(",").trim();
+            String theFirstName = theTokenizer.nextToken().trim();
+            
+            theWhereClause += " " + "AND am.id in (select l.abstractCancerModel from Log as l where l.submitter IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%'))";
+        }        
+		
+		// Screener criteria
+        if (inCurationAssignmentData.getScreener() != null && inCurationAssignmentData.getScreener().length() > 0)
+        {
+            StringTokenizer theTokenizer = new StringTokenizer(inCurationAssignmentData.getScreener());
+            String theLastName = theTokenizer.nextToken(",").trim();
+            String theFirstName = theTokenizer.nextToken().trim();
+            
+           theWhereClause += " " + "AND am.id in (select l.abstractCancerModel from Log as l where l.submitter IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%' ))";
+        }       
+        
+        // Species criteria
+        if (inCurationAssignmentData.getSpecies() != null && inCurationAssignmentData.getSpecies().length() > 0)
+        {
+
+            theWhereClause += " AND am.strain IN (" + getStrainIdsForSpecies(inCurationAssignmentData.getSpecies()) + ")";
+        }
+		
+		log.info("buildAdminCriteriaSearchWhereClause theWhereClause: " + theWhereClause.toString());
+        return theWhereClause;
+
+    }
+    
+
+    private String buildAdminModelIdSearchWhereClause(CurationAssignmentData inCurationAssignmentData) throws Exception
+    {
+    	String theWhereClause = "";
+        log.info("<buildAdminCriteriaSearchWhereClause> following Characteristics:" 
+        		+ "\n\t  ModelId: " + inCurationAssignmentData.getModelId()); 
+        
+        // ModelId criteria
+        if (inCurationAssignmentData.getModelId() != null && inCurationAssignmentData.getModelId().length() > 0)
+        {
+        	log.info("inCurationAssignmentData.getCurrentState() != null loop");
+        	theWhereClause += " " + "WHERE am.id LIKE '%" + inCurationAssignmentData.getModelId().trim() + "%' ";
+        }        
+        
+		log.info("buildAdminModelIdSearchWhereClause theWhereClause: " + theWhereClause.toString());
+        return theWhereClause;
+
+    }       
+    
     private List criteriaSearch(String inFromClause,
                                 String inOrderByClause,
                                 SearchData inSearchData) throws Exception
@@ -2229,7 +2444,7 @@ public class QueryManagerImpl extends BaseManager
         {
             String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
 
-            log.debug("HQL Query: " + theHQLQuery);
+            log.info("HQL Query: " + theHQLQuery);
 
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theAnimalModels = theQuery.list();
@@ -2242,6 +2457,35 @@ public class QueryManagerImpl extends BaseManager
 
         return theAnimalModels;
     }
+    
+    private List criteriaAdminSearch(String inFromClause,
+    								 String inOrderByClause,
+    								 CurationAssignmentData inCurationAssignmentData) throws Exception
+     {
+        log.info("criteriaAdminSearch Entered");
+        
+        String theWhereClause = buildAdminCriteriaSearchWhereClause(inCurationAssignmentData);
+        log.info("theWhereClause: " + theWhereClause);
+
+        List theAnimalModels = null;
+
+        try
+        {
+            String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
+
+            log.info("HQL Query: " + theHQLQuery);
+
+            Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
+            theAnimalModels = theQuery.list();
+        }
+        catch (Exception e)
+        {
+            log.error("Exception occurred searching for models", e);
+            throw e;
+        }
+
+        return theAnimalModels;    	
+     }
 
     /**
      * Extract the ID's for an sql query.
@@ -2267,7 +2511,7 @@ public class QueryManagerImpl extends BaseManager
         try
         {
 
-            log.debug("getIds - SQL: " + inSQLString);
+            log.info("getIds - SQL: " + inSQLString);
 
             theResultSet = Search.query(inSQLString, inParameters);
 

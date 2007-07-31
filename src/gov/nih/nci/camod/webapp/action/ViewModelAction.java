@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.34 2007-06-19 20:42:59 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.35 2007-07-31 12:02:55 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.34  2007/06/19 20:42:59  pandyas
+ *  Users not logged in can not access the session property to check the model species.  Therefore, we must show the attribute for all models.
+ *
  *  Revision 1.33  2007/06/19 18:39:21  pandyas
  *  Constant for species common name needs to be set for viewModelCharacteristics so it shows up for Zebrafish models
  *
@@ -107,18 +110,19 @@ import gov.nih.nci.camod.domain.CarcinogenExposure;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.EngineeredGene;
 import gov.nih.nci.camod.domain.GenomicSegment;
+import gov.nih.nci.camod.domain.Graft;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.Person;
 import gov.nih.nci.camod.domain.SpontaneousMutation;
 import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Transgene;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.Graft;
 import gov.nih.nci.camod.service.AgentManager;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.service.CommentsManager;
 import gov.nih.nci.camod.service.PersonManager;
-import gov.nih.nci.camod.service.XenograftManager;
+import gov.nih.nci.camod.service.GraftManager;
 import gov.nih.nci.camod.service.impl.QueryManagerSingleton;
 import gov.nih.nci.camod.util.EvsTreeUtil;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
@@ -169,7 +173,8 @@ public class ViewModelAction extends BaseAction
             e.printStackTrace();
         }
         request.getSession().setAttribute(Constants.ANIMALMODEL, am);
-        //request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, am.getStrain().getSpecies().getCommonName());        
+        // Set model id to display on subViewModelMenu on left menu bar
+        request.getSession().setAttribute(Constants.MODELID, am.getId().toString());        
     }
 
     /**
@@ -429,6 +434,7 @@ public class ViewModelAction extends BaseAction
         try
         {
             pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
+            log.info("pubs.size(): " + pubs.size());
         }
         catch (Exception e)
         {
@@ -696,9 +702,9 @@ public class ViewModelAction extends BaseAction
                                                      HttpServletResponse response) throws Exception
     {
         setCancerModel(request);
-        setComments(request, Constants.Pages.XENOGRAFT);
+        setComments(request, Constants.Pages.GRAFT);
 
-        return mapping.findForward("viewTransplantXenograft");
+        return mapping.findForward("viewTransplantGraft");
     }
 
     /**
@@ -716,7 +722,7 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateXenograftDetails(ActionMapping mapping,
+    public ActionForward populateGraftDetails(ActionMapping mapping,
                                                   ActionForm form,
                                                   HttpServletRequest request,
                                                   HttpServletResponse response) throws Exception
@@ -725,16 +731,16 @@ public class ViewModelAction extends BaseAction
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
-        log.info("<populateXenograftDetails> modelID:" + modelID);
-        log.info("<populateXenograftDetails> nsc:" + nsc);
-        XenograftManager mgr = (XenograftManager) getBean("xenograftManager");
+        log.info("<populateGraftDetails> modelID:" + modelID);
+        log.info("<populateGraftDetails> nsc:" + nsc);
+        GraftManager mgr = (GraftManager) getBean("graftManager");
 
-        Xenograft x = mgr.get(modelID);
+        Graft x = mgr.get(modelID);
 
         setCancerModel(request);
-        request.getSession().setAttribute(Constants.XENOGRAFTMODEL, x);
+        request.getSession().setAttribute(Constants.GRAFTMODEL, x);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
-        request.getSession().setAttribute(Constants.XENOGRAFTRESULTLIST, x.getInvivoResultCollectionByNSC(nsc));
+        request.getSession().setAttribute(Constants.GRAFTRESULTLIST, x.getInvivoResultCollectionByNSC(nsc));
         return mapping.findForward("viewInvivoDetails");
     }
 }

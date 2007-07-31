@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Xenograft.java,v 1.14 2007-04-04 13:17:05 pandyas Exp $
+ * $Id: Graft.java,v 1.1 2007-07-31 12:03:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/04/04 13:17:05  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.13  2007/03/19 18:56:11  pandyas
  * Object Model changes for caMOD 2.3 - dee design doc for details
  *
@@ -29,19 +32,19 @@ import java.util.*;
 /**
  * @author rajputs
  */
-public class Xenograft extends AbstractCancerModel implements Comparable
+public class Graft extends AbstractCancerModel implements Comparable
 {
     private static final long serialVersionUID = 3257445453799404851L;
 
-    private String xenograftName;    
+    private String name;    
     private String geneticManipulation;
     private String modificationDescription;
     private String parentalCellLineName;
     private String atccNumber;
     private String cellAmount;
     private String growthPeriod;
-    private String graftType;
-    private String graftTypeUnctrlVocab;
+    private String sourceType;
+    private String sourceTypeUnctrlVocab;
     private String administrativeSite;
     private String adminSiteUnctrlVocab;  
     private String conditioningRegimen;
@@ -158,38 +161,6 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     }
 
     /**
-     * @return Returns the graftType.
-     */
-    public String getGraftType()
-    {
-        return graftType;
-    }
-
-    /**
-     * @param graftType The graftType to set.
-     */
-    public void setGraftType(String graftType)
-    {
-        this.graftType = graftType;
-    }
-
-    /**
-     * @return Returns the graftTypeUnctrlVocab.
-     */
-    public String getGraftTypeUnctrlVocab()
-    {
-        return graftTypeUnctrlVocab;
-    }
-
-    /**
-     * @param graftTypeUnctrlVocab The graftTypeUnctrlVocab to set.
-     */
-    public void setGraftTypeUnctrlVocab(String graftTypeUnctrlVocab)
-    {
-        this.graftTypeUnctrlVocab = graftTypeUnctrlVocab;
-    }
-
-    /**
      * @return Returns the growthPeriod.
      */
     public String getGrowthPeriod()
@@ -258,21 +229,6 @@ public class Xenograft extends AbstractCancerModel implements Comparable
         this.modificationDescription = modificationDescription;
     }
 
-    /**
-     * @return Returns the xenograftName.
-     */
-    public String getXenograftName()
-    {
-        return xenograftName;
-    }
-
-    /**
-     * @param xenograftName The xenograftName to set.
-     */
-    public void setXenograftName(String xenograftName)
-    {
-        this.xenograftName = xenograftName;
-    }
 
     /**
      * @return Returns the parentalCellLineName.
@@ -312,7 +268,7 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getXenograftName();
+        result += this.getName();
         return result;
     }
 
@@ -322,8 +278,8 @@ public class Xenograft extends AbstractCancerModel implements Comparable
             return false;
         if (!(this.getClass().isInstance(o)))
             return false;
-        final Xenograft obj = (Xenograft) o;
-        if (HashCodeUtil.notEqual(this.getXenograftName(), obj.getXenograftName()))
+        final Graft obj = (Graft) o;
+        if (HashCodeUtil.notEqual(this.getName(), obj.getName()))
             return false;
         return true;
     }
@@ -331,15 +287,15 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     public int hashCode()
     {
         int result = HashCodeUtil.SEED;
-        result = HashCodeUtil.hash(result, this.getXenograftName());
+        result = HashCodeUtil.hash(result, this.getName());
         return result + super.hashCode();
     }
 
     public int compareTo(Object o)
     {
-        if ((o instanceof Xenograft) && (this.getXenograftName() != null) && (((Xenograft) o).getXenograftName() != null))
+        if ((o instanceof Graft) && (this.getName() != null) && (((Graft) o).getName() != null))
         {
-            int result = this.getXenograftName().compareTo(((Xenograft) o).getXenograftName());
+            int result = this.getName().compareTo(((Graft) o).getName());
             if (result != 0)
             {
                 return result;
@@ -380,4 +336,28 @@ public class Xenograft extends AbstractCancerModel implements Comparable
     {
         this.condRegimenUnctrlVocab = condRegimenUnctrlVocab;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSourceType() {
+		return sourceType;
+	}
+
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
+	}
+
+	public String getSourceTypeUnctrlVocab() {
+		return sourceTypeUnctrlVocab;
+	}
+
+	public void setSourceTypeUnctrlVocab(String sourceTypeUnctrlVocab) {
+		this.sourceTypeUnctrlVocab = sourceTypeUnctrlVocab;
+	}
 }

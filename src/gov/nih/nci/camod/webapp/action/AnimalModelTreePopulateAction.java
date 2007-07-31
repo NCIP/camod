@@ -1,9 +1,12 @@
 /**
  *  @author 
  *  
- *  $Id: AnimalModelTreePopulateAction.java,v 1.49 2007-06-13 12:10:29 pandyas Exp $
+ *  $Id: AnimalModelTreePopulateAction.java,v 1.50 2007-07-31 12:02:38 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.49  2007/06/13 12:10:29  pandyas
+ *  Added debug code
+ *
  *  Revision 1.48  2007/05/21 17:37:35  pandyas
  *  replaced log statement so it does not print
  *
@@ -284,16 +287,16 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 				}
 			}
 
-			// Retrive the list of all Xenograft transplants assoicated with
+			// Retrive the list of all Graft transplants assoicated with
 			// this Animal Model
-			Set xenograftSet = animalModel.getXenograftCollection();
-            log.debug("xenograftSet: " + xenograftSet.size());
-			it = xenograftSet.iterator();
-			List<Xenograft> xenoList = new ArrayList<Xenograft>();
+			Set graftSet = animalModel.getGraftCollection();
+            log.debug("graftSet: " + graftSet.size());
+			it = graftSet.iterator();
+			List<Graft> graftList = new ArrayList<Graft>();
 
 			while (it.hasNext()) {
-				Xenograft xenograft = (Xenograft) it.next();
-				xenoList.add(xenograft);
+				Graft graft = (Graft) it.next();
+				graftList.add(graft);
 			}
 
 			// Retrieve a list of all Histopathology entries associated with
@@ -476,8 +479,8 @@ public class AnimalModelTreePopulateAction extends BaseAction {
 			request.getSession().setAttribute(
 					Constants.Submit.PUBLICATION_LIST, pubList);
 
-			request.getSession().setAttribute(Constants.Submit.XENOGRAFT_LIST,
-					xenoList);
+			request.getSession().setAttribute(Constants.Submit.GRAFT_LIST,
+					graftList);
 
 			/* GeneticDescription Lists */
 			request.getSession().setAttribute(

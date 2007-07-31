@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.19 2007-06-26 16:11:41 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.20 2007-07-31 12:05:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/06/26 16:11:41  pandyas
+ * Modified code to get either disease.name or disease.nameUnctrlVocab for the serach results display under the Diagnosis column (customized search option)
+ *
  * Revision 1.18  2007/06/21 20:46:46  pandyas
  * The method getOrgan().getEVSPrefferedName does not work for Zebrafish - using getOrgan().getName(); until fixed
  *
@@ -1086,13 +1089,13 @@ public class AnimalModelSearchResult implements Comparable
         if (myCellLine == null)
         {
             fetchAnimalModel();
-            Set<Xenograft> set = myAnimalModel.getXenograftCollection();
-            Iterator<Xenograft> setIter = set.iterator();
+            Set<Graft> set = myAnimalModel.getGraftCollection();
+            Iterator<Graft> setIter = set.iterator();
             myCellLine = "";
 
             while (setIter.hasNext())
             {
-                Xenograft it = (Xenograft) setIter.next();
+                Graft it = (Graft) setIter.next();
                 if (it.getParentalCellLineName() != null)
                 {
                     myCellLine += it.getParentalCellLineName() + "<br>";
@@ -1115,13 +1118,13 @@ public class AnimalModelSearchResult implements Comparable
         if (myDonorSpecies == null)
         {
             fetchAnimalModel();
-            Set<Xenograft> set = myAnimalModel.getXenograftCollection();
-            Iterator<Xenograft> setIter = set.iterator();
+            Set<Graft> set = myAnimalModel.getGraftCollection();
+            Iterator<Graft> setIter = set.iterator();
             myDonorSpecies = "";
 
             while (setIter.hasNext())
             {
-                Xenograft it = (Xenograft) setIter.next();
+                Graft it = (Graft) setIter.next();
                 if (it.getDonorSpecies() != null)
                 {
                     if (it.getDonorSpecies().getDisplayName() != null)
@@ -1147,13 +1150,13 @@ public class AnimalModelSearchResult implements Comparable
         if (myGraftType == null)
         {
             fetchAnimalModel();
-            Set<Xenograft> set = myAnimalModel.getXenograftCollection();
-            Iterator<Xenograft> setIter = set.iterator();
+            Set<Graft> set = myAnimalModel.getGraftCollection();
+            Iterator<Graft> setIter = set.iterator();
             myGraftType = "";
 
             while (setIter.hasNext())
             {
-                Xenograft it = (Xenograft) setIter.next();
+                Graft it = (Graft) setIter.next();
                 if (it.getGraftType() != null)
                 {
                     myGraftType += it.getGraftType() + "<br>";

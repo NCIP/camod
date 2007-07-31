@@ -2,6 +2,7 @@
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
+<%@ page import="gov.nih.nci.camod.webapp.form.AnimalModelStateForm" %>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
@@ -247,19 +248,19 @@
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
 				            
-				            <c:set var="uri" value="ViewModelSectionAction.do?${modelIdTag}=${comments.cancerModel.id}&${modelSectionTag}=${comments.modelSection.name}&${commentsIdTag}=${comments.id}"/>
+				            <c:set var="uri" value="ViewModelSectionAction.do?${modelIdTag}=${comments.abstractCancerModel.id}&${modelSectionTag}=${comments.modelSection.name}&${commentsIdTag}=${comments.id}"/>
 				            <a href="<c:out value="${uri}"/>">
 				            
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out escapeXml="false" value="${comments.cancerModel.modelDescriptor}"/>
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out escapeXml="false" value="${comments.abstractCancerModel.modelDescriptor}"/>
 				            </a>
 				            <td class="resultsBoxWhiteNoSides" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${screener_approve}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${screener_approve}&${modelIdTag}=${comments.abstractCancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Approve
 				                </a>
 				            </td>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${screener_reject}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${screener_reject}&${modelIdTag}=${comments.abstractCancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Reject
 				                </a>
@@ -284,12 +285,12 @@
 			    <logic:iterate name="<%= Admin.COMMENTS_NEEDING_ASSIGNMENT %>" id="comments" type="gov.nih.nci.camod.domain.Comments">
 			        <tr>
 				        <td class="resultsBoxWhiteNoEnd">
-				            <c:set var="uri" value="ViewModelSectionAction.do?${modelIdTag}=${comments.cancerModel.id}&${modelSectionTag}=${comments.modelSection.name}&${commentsIdTag}=${comments.id}"/>
+				            <c:set var="uri" value="ViewModelSectionAction.do?${modelIdTag}=${comments.abstractCancerModel.id}&${modelSectionTag}=${comments.modelSection.name}&${commentsIdTag}=${comments.id}"/>
 				            <a href="<c:out value="${uri}"/>">
-				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out value="${comments.cancerModel.modelDescriptor}"/>
+				                <IMG height=5 alt="" src="/camod/images/subMenuArrow.gif" width=5 border=0><c:out value="${comments.modelSection.name}"/> - <c:out value="${comments.abstractCancerModel.modelDescriptor}"/>
 				            </a>
 				            <td class="resultsBoxWhiteNoStart" width="25" >
-				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${assign_screener}&${modelIdTag}=${comments.cancerModel.id}&${commentsIdTag}=${comments.id}"/>
+				                <c:set var="uri" value="ChangeCommentsStatePopulateAction.do?${eventTag}=${assign_screener}&${modelIdTag}=${comments.abstractCancerModel.id}&${commentsIdTag}=${comments.id}"/>
 				                <a href="<c:out value="${uri}"/>">
 				                    Assign
 				                </a>

@@ -279,14 +279,14 @@
 	    </queries>
 	</query_group>
     <query_group>
-        <description>Xenograft / Transplant models</description>
+        <description>Graft / Transplant models</description>
 	    <queries>
 			<query>
-			 	<description>Xenograft / Transplant</description>
-			 	<key>Xenograft_Transplant_Query</key>
+			 	<description>Graft / Transplant</description>
+			 	<key>Graft_Transplant_Query</key>
 			 	<parameters>
 				    <parameter>
-				        <name>searchXenograft</name>
+				        <name>searchGraft</name>
 				        <value>true</value>
 			        </parameter>
 				</parameters>

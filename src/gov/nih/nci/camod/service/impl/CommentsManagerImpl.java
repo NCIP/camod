@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CommentsManagerImpl.java,v 1.6 2006-05-08 13:32:52 georgeda Exp $
+ * $Id: CommentsManagerImpl.java,v 1.7 2007-07-31 12:02:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/05/08 13:32:52  georgeda
+ * Clean up warnings
+ *
  * Revision 1.5  2006/01/18 14:24:23  georgeda
  * TT# 376 - Updated to use new Java 1.5 features
  *
@@ -94,7 +97,7 @@ public class CommentsManagerImpl extends BaseManager implements CommentsManager
         {
             throw new IllegalArgumentException("Invalid model id: " + inCommentsData.getModelId());
         }
-        theComments.setCancerModel(theAnimalModel);
+        theComments.setAbstractCancerModel(theAnimalModel);
 
         // Create an availability
         Availability theAvailability = new Availability();

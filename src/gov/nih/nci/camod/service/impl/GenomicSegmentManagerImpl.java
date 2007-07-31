@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.29 2007-04-04 13:17:49 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.30 2007-07-31 12:02:29 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2007/04/04 13:17:49  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.28  2007/03/27 18:37:40  pandyas
  * Modified code to trim identifiers - cleaner for display link
  *
@@ -176,8 +179,8 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 				inImageData.setDescriptionOfConstruct(inGenomicSegmentData
 						.getDescriptionOfConstruct());
 				inImageData.setTitle(inGenomicSegmentData.getTitle());
-				inImageData.setFileServerLocation(inGenomicSegmentData
-						.getFileServerLocation());
+				inImageData.setUrl(inGenomicSegmentData
+						.getUrl());
 				inImageData.setFileLocation(inGenomicSegmentData
 						.getFileLocation());
 
@@ -188,7 +191,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 				System.out.println("Image info: \ndescription:"
 						+ image.getDescription() + " \ntitle:"
 						+ image.getTitle() + " \nname:"
-						+ image.getFileServerLocation() + " \nid:"
+						+ image.getUrl() + " \nid:"
 						+ image.getId());
 				inGenomicSegment.setImage(image);
 			}

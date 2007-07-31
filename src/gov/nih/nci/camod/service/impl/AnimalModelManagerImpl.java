@@ -1,9 +1,13 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.83 2007-04-30 20:09:13 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.84 2007-07-31 12:02:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.83  2007/04/30 20:09:13  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ * Added code to sendMail for other disease for Zebrafish
+ *
  * Revision 1.82  2007/03/26 12:01:11  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -255,7 +259,7 @@ import gov.nih.nci.camod.domain.TargetedModification;
 import gov.nih.nci.camod.domain.Therapy;
 import gov.nih.nci.camod.domain.Transgene;
 import gov.nih.nci.camod.domain.TransientInterference;
-import gov.nih.nci.camod.domain.Xenograft;
+import gov.nih.nci.camod.domain.Graft;
 import gov.nih.nci.camod.service.AnimalModelManager;
 import gov.nih.nci.camod.util.DuplicateUtil;
 import gov.nih.nci.camod.util.MailUtil;
@@ -264,6 +268,7 @@ import gov.nih.nci.camod.webapp.form.AvailabilityData;
 import gov.nih.nci.camod.webapp.form.CellLineData;
 import gov.nih.nci.camod.webapp.form.ChemicalDrugData;
 import gov.nih.nci.camod.webapp.form.ClinicalMarkerData;
+import gov.nih.nci.camod.webapp.form.CurationAssignmentData;
 import gov.nih.nci.camod.webapp.form.EngineeredTransgeneData;
 import gov.nih.nci.camod.webapp.form.EnvironmentalFactorData;
 import gov.nih.nci.camod.webapp.form.GeneDeliveryData;
@@ -284,7 +289,7 @@ import gov.nih.nci.camod.webapp.form.TargetedModificationData;
 import gov.nih.nci.camod.webapp.form.TherapyData;
 import gov.nih.nci.camod.webapp.form.TransientInterferenceData;
 import gov.nih.nci.camod.webapp.form.ViralTreatmentData;
-import gov.nih.nci.camod.webapp.form.XenograftData;
+import gov.nih.nci.camod.webapp.form.GraftData;
 import gov.nih.nci.common.persistence.Persist;
 import gov.nih.nci.common.persistence.Search;
 import gov.nih.nci.common.persistence.exception.PersistenceException;
@@ -407,7 +412,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                        Person inPerson) throws Exception
     {
 
-        log.debug("In CommentsManagerImpl.getAllByStateForPerson");
+        log.info("In AnimalModelManagerImpl.getAllByStateForPerson");
 
         return QueryManagerSingleton.instance().getModelsByStateForPerson(inState, inPerson);
     }
@@ -609,6 +614,30 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
         log.info("In search - theDisplayList.size(): " + theDisplayList.size());
         return theDisplayList;
     }
+    
+    /**
+     * Search for animal models in the admin section based on available criteria:
+     * 
+     * @throws Exception
+     */
+    public List<AnimalModelSearchResult> searchAdmin(CurationAssignmentData inCurationAssignmentData) throws Exception
+    {
+
+        log.info("In searchAdmin");
+        List theAnimalModels = QueryManagerSingleton.instance().searchForAdminAnimalModels(inCurationAssignmentData);
+        log.info("<searchAdmin> theAnimalModels.size(): " + theAnimalModels.size());
+
+        List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
+
+        // Add AnimalModel DTO's so that the paganation works quickly
+        for (int i = 0, j = theAnimalModels.size(); i < j; i++)
+        {
+            AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
+            theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
+        }
+        log.info("In searchAdmin - theDisplayList.size(): " + theDisplayList.size());
+        return theDisplayList;
+    }
 
 	// Populate the model based on the model characteristics form passed in.
 	private AnimalModel populateAnimalModel(
@@ -752,22 +781,22 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
 		return inAnimalModel;
 	}
 
-    public void addXenograft(AnimalModel inAnimalModel,
-                             XenograftData inXenograftData) throws Exception
+    public void addGraft(AnimalModel inAnimalModel,
+                             GraftData inGraftData) throws Exception
     {
 
-        System.out.println("<AnimalModelManagerImpl populate> Entering addXenograft() ");
+        System.out.println("<AnimalModelManagerImpl populate> Entering addGraft() ");
 
-        log.debug("Entering saveXenograft");
+        log.debug("Entering saveGraft");
 
-        Xenograft theXenograft = XenograftManagerSingleton.instance().create(inXenograftData, inAnimalModel);
+        Graft theGraft = GraftManagerSingleton.instance().create(inGraftData, inAnimalModel);
 
-        inAnimalModel.addXenograft(theXenograft);
+        inAnimalModel.addGraft(theGraft);
         save(inAnimalModel);
 
-        System.out.println("<AnimalModelManagerImpl populate> Exiting addXenograft() ");
+        System.out.println("<AnimalModelManagerImpl populate> Exiting addGraft() ");
 
-        log.debug("Exiting saveXenograft");
+        log.debug("Exiting saveGraft");
     }
 
     /**

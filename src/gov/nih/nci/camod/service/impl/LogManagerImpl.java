@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: LogManagerImpl.java,v 1.9 2006-01-18 14:24:24 georgeda Exp $
+ *  $Id: LogManagerImpl.java,v 1.10 2007-07-31 12:02:21 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.9  2006/01/18 14:24:24  georgeda
+ *  TT# 376 - Updated to use new Java 1.5 features
+ *
  *  Revision 1.8  2005/10/10 14:09:00  georgeda
  *  Changes for comment curation
  *
@@ -206,11 +209,11 @@ public class LogManagerImpl extends BaseManager implements LogManager
             Person theAssignedPerson = PersonManagerSingleton.instance().getByUsername(inAssignedPerson);
             AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(inModelId);
 
-            theLog.setCancerModel(theAnimalModel);
+            theLog.setAbstractCancerModel(theAnimalModel);
             theLog.setSubmitter(theAssignedPerson);
             theLog.setTimestamp((new Date()).toString());
-            theLog.setType(inState);
-            theLog.setNotes(inNotes);
+            theLog.setState(inState);
+            theLog.setReviewNote(inNotes);
         }
         catch (Exception e)
         {

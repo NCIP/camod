@@ -13,7 +13,7 @@
 <TR><TD class=subMenuPrimaryTitle height=22>MODEL DETAILS</TD></TR>
 <TR><TD class=subMenuPrimaryGreyTitle height=27>
 	Viewing Model: <b>
-	<c:out value="${mdl.modelDescriptor}" escapeXml="false"/></b>
+	<c:out value="${mdl.modelDescriptor}" escapeXml="false"/>&nbsp;( <%= request.getSession().getAttribute(Constants.MODELID)%> )</b><br>
 </TD></TR>
 <TR><TD class=subMenuPrimaryItems>
 <DIV>
@@ -191,13 +191,13 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = new ArrayList(am.getXenograftCollection());
+			l = new ArrayList(am.getGraftCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) {
 		%>
-		<a href="ViewModelAction.do?unprotected_method=populateTransplantXenograft&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANT/XENOGRAFT</a>	
+		<a href="ViewModelAction.do?unprotected_method=populateTransplantGraft&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANT/GRAFT</a>	
 	    <%} else { %>
-			TRANSPLANT/XENOGRAFT
+			TRANSPLANT/GRAFT
 		<%}%>
 	<BR>
 	<BR>

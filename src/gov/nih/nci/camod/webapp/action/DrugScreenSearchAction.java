@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.8 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.9 2007-07-31 12:02:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.7  2005/11/22 15:17:16  georgeda
  * Defect #21, use nsc number for clinical trials
  *
@@ -127,7 +130,7 @@ public final class DrugScreenSearchAction extends BaseAction {
 							yeastResults.put(a.getId(), yeastStages);
 						}
 						if (theForm.isDoInvivo()) {
-							// now get invivo/Xenograft data
+							// now get invivo/Graft data
 							List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
 							invivoResults.put(a.getId(), xenograftResults);
 						}

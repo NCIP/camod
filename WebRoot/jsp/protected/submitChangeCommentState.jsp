@@ -48,9 +48,9 @@
 		</logic:empty>
 		<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
-		<td class="formRequiredLabel"><label for="field2">Note</label></td>
+		<td class="formRequiredLabel"><label for="field2">Remark</label></td>
 			<td class="formField">
-					<html:textarea styleClass="formFieldSized" property="note" cols="32" rows="4"/>			
+					<html:textarea styleClass="formFieldSized" property="remark" cols="32" rows="4"/>			
 			</td>
 		</tr>
         <html:hidden property="modelId" />

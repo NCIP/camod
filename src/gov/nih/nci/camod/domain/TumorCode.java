@@ -1,7 +1,10 @@
 /*
- * $Id: TumorCode.java,v 1.7 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: TumorCode.java,v 1.8 2007-07-31 12:03:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.6  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -19,24 +22,24 @@ public class TumorCode extends BaseObject implements Serializable, Duplicatable
 {
     private static final long serialVersionUID = 3258465453799404851L;
 
-    private String code;
+    private String abbreviation;
     private String description;
 
     /**
-     * @return Returns the code.
+     * @return Returns the abbreviation.
      */
-    public String getCode()
+    public String getAbbreviation()
     {
-        return code;
+        return abbreviation;
     }
 
     /**
-     * @param code
-     *            The code to set.
+     * @param abbreviation
+     *            The abbreviation to set.
      */
-    public void setCode(String code)
+    public void setAbbreviation(String abbreviation)
     {
-        this.code = code;
+        this.abbreviation = abbreviation;
     }
 
     /**
@@ -62,7 +65,7 @@ public class TumorCode extends BaseObject implements Serializable, Duplicatable
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getCode();
+        result += this.getAbbreviation();
         return result;
     }
 

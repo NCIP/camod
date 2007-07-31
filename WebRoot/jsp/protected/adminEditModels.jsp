@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.6 2006-11-16 13:04:47 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.7 2007-07-31 12:00:10 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/11/16 13:04:47  pandyas
+ * Modified IMG SRC location to include complete location (added /camod/...)
+ *
  * Revision 1.5  2006/11/10 22:02:27  pandyas
  * Format change - addded &nbsp; before help icon
  *
@@ -24,8 +27,19 @@
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 
-<%@ page import="gov.nih.nci.camod.Constants" %>
+<%@ page import='gov.nih.nci.camod.Constants.*' %>
 <%@ page buffer="32kb"%>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js"></script>
+<script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
+
+<SCRIPT LANGUAGE="JavaScript">	
+	function blankModelId() {
+        document.curationAssignmentForm.modelId.value = '';
+    }			
+</SCRIPT>
+
+<html:form action="SearchAdminAction.do" focus="modelId" onsubmit="transferFields()">
 
 <!-- adminEditModels.jsp -->
 <!-- Main Content Begins -->
@@ -47,26 +61,109 @@
 			</td>
 		</tr>
 		<tr>
-		    <td class="formTitle" height="20" colspan="4">Edit Models (SuperUser)&nbsp;
+		    <td class="formTitle" height="20" colspan="8">Edit Models (SuperUser)&nbsp;
 		    	<camod:cshelp topic="screening_model_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>		
 		</tr>
-		<html:form action="AdminEditModelsPopulateAction">
-		    
-			    <td class=resultsBoxGreyNoEnd>			
-			        <html:select property="currentState">
-			            <html:options name="<%=Constants.Dropdowns.CURATIONSTATESDROP%>"/>
-		            </html:select>
-			    </td>
-		    
+
 		
-	        <td  class="resultsBoxGreyNoStart" align="right" colspan="3">
-				<TABLE cellpadding="4" cellspacing="0" border="0">	
-			        <html:submit styleClass="actionButton">
-					    <bean:message key="button.submit"/>
-				    </html:submit>	
+			<tr>
+			    <td class="formRequiredNotice" >&nbsp;</td>
+				<td class="formLabel"><label for="field1">Model Id:</label>
+				</td>
+				<td class="formField" colspan="4">			
+					<html:text styleClass="formFieldSized" styleId="modelId" property="modelId" size="20"/>
+					 &nbsp;&nbsp;
+                	<input class="actionButton" type="submit" value="Search" />	
+				</td>
+			</tr>
+			
+			<tr>
+			    <td class="formRequiredNotice" >&nbsp;</td>
+				<td class="formLabel"><label for="field1">Model Name / Model Descriptor: </label>
+				</td>
+				<td class="formField" >			
+					<html:text styleClass="formFieldSized" styleId="modelDescriptor" property="modelDescriptor" size="20"/>
+					<ajax:autocomplete baseUrl="/camod/autocomplete.view" source="modelDescriptor" target="modelDescriptor"
+	  				parameters="modelDescriptor={modelDescriptor}" className="autocomplete" minimumCharacters="1" />	
+				</td>&nbsp;&nbsp;
+				
+				<td class="formRequiredNotice" width="15">&nbsp;</td>
+				<td class="formLabel"><label for="field3">State:</label></td>
+				<td class="formField">
+			        <html:select styleClass="formFieldSized" size="1" property="currentState">
+			            <html:options name="<%=Dropdowns.CURATIONSTATESWITHBLANKDROP%>"/>
+		            </html:select>
+				</td>				
+			</tr>	
+			
+			<tr>
+			    <td class="formRequiredNotice" >&nbsp;</td>
+			    <td class="formLabel"><label for="field1">Screener:</label></td>
+			    <td class="formField">			
+		            <html:select property="screener">
+			            <html:options name="<%=Dropdowns.USERSFORSCREENERROLEDROP%>"/>
+		            </html:select>
+			    </td>&nbsp;&nbsp;
+				
+			    <td class="formRequiredNotice" >&nbsp;</td>
+			    <td class="formLabel"><label for="field1">Editor:</label></td>
+			    <td class="formField">			
+		            <html:select property="editor">
+			            <html:options name="<%=Dropdowns.USERSFOREDITORROLEDROP%>"/>
+		            </html:select>
+			    </td>				
+			</tr>	
+			
+			<tr>
+			    <td class="formRequiredNotice" >&nbsp;</td>
+				<td class="formLabel"><label for="field3">External Data Source:</label></td>
+				<td class="formField">				
+				<html:select styleClass="formFieldSized" size="1" property="externalSource" >
+					<html:options name="<%=Dropdowns.EXTERNALSOURCEQUERYDROP %>" />										
+				</html:select>
+			    </td>&nbsp;&nbsp;
+				
+			    <td class="formRequiredNotice" >&nbsp;</td>
+				<td class="formLabel"><label for="field2">PI's Name:</label></td>
+				
+				<td class="formField">				
+					<html:select styleClass="formFieldSized" size="1" property="principalInvestigator" >
+						<html:options name="<%=Dropdowns.PRINCIPALINVESTIGATORQUERYDROP %>" />										
+					</html:select>			
+				</td>				
+			</tr>
+			
+			<tr>
+			    <td class="formRequiredNotice" >&nbsp;</td>
+				<td class="formLabel"><label for="field3">Species:</label></td>
+				<td class="formField">				
+					<html:select property="species">
+						<html:optionsCollection name="<%= Dropdowns.NONHUMANSPECIESDROP %>" />										
+					</html:select>			
+				</td>&nbsp;&nbsp;				
+			</tr>						
+			
+			
+		<tr>
+			<td colspan="8" align="right">	
+				<TABLE cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td align="right">
+						  <html:submit styleClass="actionButton" onclick="blankModelId()">
+							  Search
+						  </html:submit>
+					  
+						  <html:reset styleClass="actionButton">
+						  	  <bean:message key="button.reset"/>
+		  				  </html:reset>						  
+						  
+				  		</html:form>			
+				  		</td>
+			  		</tr>
 				</TABLE>
 			</td>
-		</html:form>
+		</tr>			
+
 	 </TABLE>
 	<br>
 	

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.65 2007-06-21 20:07:06 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.66 2007-07-31 12:00:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.65  2007/06/21 20:07:06  pandyas
+ * Fix display of Zebrfish diagnosis drop down on adv search
+ *
  * Revision 1.64  2007/06/21 18:48:19  pandyas
  * Removed bold for diagnosis on adv search jsp
  *
@@ -577,7 +580,7 @@
 			    <html:checkbox property="searchToolStrain" />
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchToolStrain" value="false">
-				<label for="box1">Check here to search for tool strains <BR><BR>(A tool mouse strain is a strain that does not develop cancer, 
+				<label for="box1">Check here to search for tool strains <BR><BR>(A tool strain is a strain that does not develop cancer, 
 				<BR>but can be used to create cancer-bearing models. Example: WAP-Cre strain)</label>
 			</td>
 		</tr>

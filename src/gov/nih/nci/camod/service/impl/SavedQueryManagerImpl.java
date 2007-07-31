@@ -1,9 +1,14 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.5 2007-03-28 18:01:51 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.6 2007-07-31 12:02:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/03/28 18:01:51  pandyas
+ * Modified for the following Test Track items:
+ * #462 - Customized search for carcinogens for Jackson Lab data
+ * #494 - Advanced search for Carcinogens for Jackson Lab data
+ *
  * Revision 1.4  2006/10/17 16:14:05  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -259,9 +264,9 @@ public class SavedQueryManagerImpl extends BaseManager implements
 			}
 			
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.isSearchXenograft"))) {
+					theBundle.getString("criteria.isSearchGraft"))) {
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setSearchXenograft(true);
+					inSearchForm.setSearchGraft(true);
 				}
 			}			
 		}
@@ -548,11 +553,11 @@ public class SavedQueryManagerImpl extends BaseManager implements
 			criteriaList.add(sqa);
 		}
 
-		// Is it a xenograft
-		if (inSearchData.isSearchXenograft() == true) {
+		// Is it a graft
+		if (inSearchData.isSearchGraft() == true) {
 			SavedQueryAttribute sqa = new SavedQueryAttribute();
 			sqa.setAttributeName(theBundle
-					.getString("criteria.isSearchXenograft"));
+					.getString("criteria.isSearchGraft"));
 			sqa.setAttributeValue("true");
 			criteriaList.add(sqa);
 		}

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: includeInvivoData.jsp,v 1.8 2005-11-15 22:13:46 georgeda Exp $
+ * $Id: includeInvivoData.jsp,v 1.9 2007-07-31 12:00:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2005/11/15 22:13:46  georgeda
+ * Cleanup of drug screening
+ *
  * Revision 1.7  2005/11/10 22:07:36  georgeda
  * Fixed part of bug #21
  *
@@ -17,7 +20,7 @@
 
 %>
 
-<!-- invivo / Xenograft data-->
+<!-- invivo / Graft data-->
 <c:set var="invivoColl" value="${invivoData[agentId]}"/>
 <c:if test="${not empty invivoColl}">
     <c:set var="foundInvivoData" value="1"/>
@@ -48,7 +51,7 @@
 							<c:out value="${ivd[1]}"/> in <c:out value="${ivd[2]}"/> (<c:out value="${ivd[3]}"/>)
 						</td>
 						<td align="right" class="<c:out value="${tdClass}End"/>"> &nbsp;&nbsp;
-							<a href="ViewModelAction.do?unprotected_method=populateXenograftDetails&aModelID=<c:out value="${mdl.id}"/>&xModelID=<c:out value="${ivd[0]}"/>&nsc=<c:out value="${agt.nscNumber}"/>" styleClass="subMenuPrimary"/>
+							<a href="ViewModelAction.do?unprotected_method=populateGraftDetails&aModelID=<c:out value="${mdl.id}"/>&xModelID=<c:out value="${ivd[0]}"/>&nsc=<c:out value="${agt.nscNumber}"/>" styleClass="subMenuPrimary"/>
 							<c:out value="${ivd[4]}"/></a>
 						</td>
 				  	</tr>

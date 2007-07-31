@@ -24,9 +24,9 @@
 	        <generator class="native"/>
 	    </id>	    
 	    
-	    <!-- code -->
-        <property name="code" 
-        	column="code" 
+	    <!-- abbreviation -->
+        <property name="abbreviation" 
+        	column="abbreviation" 
         	type="string"/> 
         
         <!-- description -->

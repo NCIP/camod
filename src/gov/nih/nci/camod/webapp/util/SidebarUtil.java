@@ -31,7 +31,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 				return "subSearchMenu.jsp";
 			} 
 			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 
-						jspName.equals("viewTransplantXenograft.jsp") || 
+						jspName.equals("viewTransplantGraft.jsp") || 
 						jspName.equals("viewGeneticDescription.jsp") || 
                         jspName.equals("viewInvivoDetails.jsp") ||
 						jspName.equals("viewPublications.jsp") ||
@@ -84,7 +84,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 						jspName.equals("submitHormone.jsp") ||  
 						jspName.equals("submitRadiation.jsp") ||  
 						jspName.equals("submitViralTreatment.jsp")||  
-						jspName.equals("submitTransplantXenograft.jsp") ||  
+						jspName.equals("submitTransplantGraft.jsp") ||  
 						jspName.equals("submitSurgeryOther.jsp") ||  
 						jspName.equals("submitPublications.jsp") ||  
 						jspName.equals("submitHistopathology.jsp")||  

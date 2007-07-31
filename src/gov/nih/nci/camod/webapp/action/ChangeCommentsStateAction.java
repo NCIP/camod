@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeCommentsStateAction.java,v 1.2 2005-11-28 13:49:16 georgeda Exp $
+ *  $Id: ChangeCommentsStateAction.java,v 1.3 2007-07-31 12:02:38 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2005/11/28 13:49:16  georgeda
+ *  Defect #192, handle back arrow for curation changes
+ *
  *  Revision 1.1  2005/10/10 14:09:55  georgeda
  *  Initial revision
  *
@@ -68,10 +71,10 @@ public class ChangeCommentsStateAction extends BaseAction {
                     // Save the associated log/comment to track the curation
                     // state
                     LogManager theLogManager = (LogManager) getBean("logManager");
-                    Log theLog = theLogManager.create(theForm.getAssignedTo(), theComments.getCancerModel().getId()
-                            .toString(), theComments.getState(), theForm.getNote());
+                    Log theLog = theLogManager.create(theForm.getAssignedTo(), theComments.getAbstractCancerModel().getId()
+                            .toString(), theComments.getState(), theForm.getRemark());
 
-                    theLog.setComment(theComments);
+                    theLog.setComments(theComments);
 
                     theLogManager.save(theLog);
                 } else {

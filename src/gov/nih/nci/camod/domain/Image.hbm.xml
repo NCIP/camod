@@ -35,9 +35,9 @@
         	type="string"
         	length="4000"/>	
         	
-        <!-- fileServerLocation -->
-        <property name="fileServerLocation" 
-        	column="file_server_location" 
+        <!-- url -->
+        <property name="url" 
+        	column="url" 
         	type="string"/>
         	
         <!-- stainingMethod (many-to-one unidirectional) -->

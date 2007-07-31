@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStateAction.java,v 1.13 2007-04-09 12:37:09 pandyas Exp $
+ *  $Id: ChangeAnimalModelStateAction.java,v 1.14 2007-07-31 12:02:38 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.13  2007/04/09 12:37:09  pandyas
+ *  modified after caMOD 2.3 unit testing
+ *
  *  Revision 1.12  2007/03/27 18:42:32  pandyas
  *  Modified the code to use the Constants.MODELID for getting the animal model id and passing from submitOverview to change states of a model.  The constant is already set in SubmitAction.java for all models.
  *
@@ -164,7 +167,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 								.setEvent(Constants.Admin.Actions.SCREENER_APPROVE);
 						theForm.setAssignedTo(theCoordinator);
 						theForm
-								.setNote("This model has been moved back to screener_approve");
+								.setRemark("This model has been moved back to screener_approve");
 
 						log.info("theModelId: " + theModelId);
 						log.info("theEvent: " + theEvent);
@@ -180,7 +183,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 						LogManager theLogManager = (LogManager) getBean("logManager");
 						Log theLog = theLogManager.create(theForm
 								.getAssignedTo(), theForm.getModelId(),
-								theAnimalModel.getState(), theForm.getNote());
+								theAnimalModel.getState(), theForm.getRemark());
 
 						theAnimalModelManager.updateAndAddLog(theAnimalModel,
 								theLog);
@@ -215,7 +218,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 						log.info("Changing model to inactive then to completes loop: ");
 						// set event to complete instead of back_to_complete
 						theForm.setEvent(Constants.Admin.Actions.COMPLETE);
-						theForm.setNote("Model has been moved back to complete");
+						theForm.setRemark("Model has been moved back to complete");
 						theForm.setAssignedTo(theCoordinator);
 
 						log.info("1) Changed model to inactive, now step 2): ");
@@ -234,7 +237,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 						LogManager theLogManager = (LogManager) getBean("logManager");
 						Log theLog = theLogManager.create(theForm
 								.getAssignedTo(), theForm.getModelId(),
-								theAnimalModel.getState(), theForm.getNote());
+								theAnimalModel.getState(), theForm.getRemark());
 
 						theAnimalModelManager.updateAndAddLog(theAnimalModel,
 								theLog);
@@ -265,7 +268,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 						LogManager theLogManager = (LogManager) getBean("logManager");
 						Log theLog = theLogManager.create(theForm
 								.getAssignedTo(), theForm.getModelId(),
-								theAnimalModel.getState(), theForm.getNote());
+								theAnimalModel.getState(), theForm.getRemark());
 
 						theAnimalModelManager.updateAndAddLog(theAnimalModel,
 								theLog);
@@ -319,7 +322,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 			theForm.setModelId(theForm.getModelId());
 			theForm.setEvent(Constants.Admin.Actions.INACTIVATE);
 			theForm.setAssignedTo(theCoordinator);
-			theForm.setNote("This model has been moved to inactive");
+			theForm.setRemark("This model has been moved to inactive");
 
 			log.info("theEvent: " + theForm.getEvent());
 
@@ -332,7 +335,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 			LogManager theLogManager = (LogManager) getBean("logManager");
 			Log theLog = theLogManager
 					.create(theForm.getAssignedTo(), theForm.getModelId(),
-							theAnimalModel.getState(), theForm.getNote());
+							theAnimalModel.getState(), theForm.getRemark());
 
 			theAnimalModelManager.updateAndAddLog(theAnimalModel, theLog);
 

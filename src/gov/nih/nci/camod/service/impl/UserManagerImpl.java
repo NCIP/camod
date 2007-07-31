@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.28 2007-04-17 17:32:42 pandyas Exp $
+ * $Id: UserManagerImpl.java,v 1.29 2007-07-31 12:02:21 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.28  2007/04/17 17:32:42  pandyas
+ * Added debug for e-mail from LDAP - testing bug for PM e-mail
+ *
  * Revision 1.27  2007/03/27 18:39:41  pandyas
  * changed log.info to log.debug to clean up output - done testing changes
  *
@@ -272,8 +275,9 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
 		try {
 			theEmail = LDAPUtil.getEmailAddressForUser(inUsername);
+			log.info("<getEmailForUser> theEmail: " + theEmail.toString());
 		} catch (Exception e) {
-			log.warn("Could not fetch user from LDAP", e);
+			log.info("Could not fetch user from LDAP", e);
 		}
 
 		log.info("Exiting getEmailForUser");
@@ -330,6 +334,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
 			String theCoordinator = camodProperties
 					.getProperty("coordinator.username");
+			log.info("theCoordinator: " + theCoordinator.toString());
 
 			theEmail = getEmailForUser(theCoordinator);
 		} catch (Exception e) {

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CommentsStateForm.java,v 1.3 2005-11-28 13:51:43 georgeda Exp $
+ * $Id: CommentsStateForm.java,v 1.4 2007-07-31 12:02:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2005/11/28 13:51:43  georgeda
+ * Defect #192, handle back arrow for curation changes
+ *
  * Revision 1.2  2005/10/24 13:28:30  georgeda
  * Cleanup changes
  *
@@ -34,7 +37,7 @@ public class CommentsStateForm extends ValidatorForm implements CommentsStateDat
 	private static final long serialVersionUID = 3257850969634190134L;
 
 	protected String myModelDescriptor;
-	protected String myNote;
+	protected String myRemark;
 	protected String myModelId;
 	protected String myCommentsId;
 	protected String myAssignedTo;
@@ -52,12 +55,12 @@ public class CommentsStateForm extends ValidatorForm implements CommentsStateDat
 		myModelDescriptor = inModelDescriptor;
 	}
 
-	public String getNote() {
-		return myNote;
+	public String getRemark() {
+		return myRemark;
 	}
 
-	public void setNote(String inNote) {
-		myNote = inNote;
+	public void setRemark(String inRemark) {
+		myRemark = inRemark;
 	}
 
 	public String getModelId() {
@@ -94,7 +97,7 @@ public class CommentsStateForm extends ValidatorForm implements CommentsStateDat
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		myModelDescriptor = null;
-		myNote = null;
+		myRemark = null;
 		myModelId = null;
 		myCommentsId = null;
 		myEvent = null;

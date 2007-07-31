@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AddCommentsAction.java,v 1.1 2005-10-11 18:15:25 georgeda Exp $
+ *  $Id: AddCommentsAction.java,v 1.2 2007-07-31 12:02:38 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2005/10/11 18:15:25  georgeda
+ *  More comment changes
+ *
  *
  */
 package gov.nih.nci.camod.webapp.action;
@@ -60,7 +63,7 @@ public class AddCommentsAction extends BaseAction {
             Log theLog = LogManagerSingleton.instance().create(theCurrentUser, theForm.getModelId(),
                     theCurationManager.getDefaultState(), "Initial creation of a comment");
 
-            theLog.setComment(theComments);
+            theLog.setComments(theComments);
             
             // Save the log and comment
             LogManagerSingleton.instance().save(theLog);

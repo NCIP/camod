@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.22 2006-10-17 16:13:46 pandyas Exp $
+ * $Id: EmailActionImpl.java,v 1.23 2007-07-31 12:02:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2006/10/17 16:13:46  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.21  2006/06/14 15:22:14  pandyas
  * Added model descriptor and model id to e-mail for various curation states - modified e-mail content for most states
  *
@@ -131,7 +134,7 @@ public class EmailActionImpl extends BaseCurateableAction
 
                 // Build the message text
                 String theMailSubject = "";
-                String theMailText = theData.getNote();
+                String theMailText = theData.getRemark();
                 String[] theMailStandardText = null;
 
                 // Customize the text based on the action.

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    Document   : EndpointCode.hbm.xml
+    Document   : Endpoint.hbm.xml
     Created on : May 4, 2005
     Author     : rajputs
-    Description: Hibernate mapping file for EndpointCode
+    Description: Hibernate mapping file for Endpoint
 -->
 
 <!DOCTYPE hibernate-mapping PUBLIC 
@@ -12,13 +12,13 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="gov.nih.nci.camod.domain">
-	<class name="EndpointCode" 
-    	table="endpoint_code"
+	<class name="Endpoint" 
+    	table="endpoint"
         lazy="true">
 
 	    <!-- id -->
 	    <id name="id" 
-	    	column="endpoint_code_id"
+	    	column="endpoint_id"
 	    	type="long"    	
 	    	unsaved-value="null">	    	
 	        <generator class="native"/>

@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.25 2006-11-17 17:33:22 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.26 2007-07-31 12:00:10 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2006/11/17 17:33:22  pandyas
+ * #480 - move MTB icon in front of the model descriptor in search results list
+ *
  * Revision 1.24  2006/11/13 19:59:44  pandyas
  * #463	images on image search page do not open
  * Modified link to show complete img src location:
@@ -77,7 +80,7 @@
 	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
    	if ( resultColumns == null ) 
    	{
-   		resultColumns = new String[] { "Model Descriptor", "Tumor Sites", "Species" };   //default        
+   		resultColumns = new String[] { "Model Id", "Model Descriptor", "Tumor Sites", "Species" };   //default        
   	}  
   	
 	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 
@@ -248,8 +251,14 @@
 					<%
 					    for (int i = 0; i < resultColumns.length; i++) {
 					    	//System.out.println( "selectedColumnsToDisplay[" + i + "] = " + resultColumns[i] );
-							
-							if( resultColumns[i].equals("Model Descriptor") ) { %>
+					    	
+							if( resultColumns[i].equals("Model Id") ) { %>
+							     <display:column title="Model Id" sortable="true" headerClass="sortable" >
+							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
+							     </display:column>	 							
+							<% }					    	
+					    	
+							else if( resultColumns[i].equals("Model Descriptor") ) { %>
 					             <display:column href="/camod/ViewModelAction.do?unprotected_method=populateModelCharacteristics&" paramId="aModelID" paramProperty="id" title="Model Descriptor" sortable="true" >
 									<c:if test="${row.externalSource == 'Jax MTB'}">
 										<IMG src="/camod/images/mtb_logo.jpg">
@@ -288,11 +297,7 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.strain}"/></camod:highlight>
 							     </display:column>	 							
 							<% }
-							else if( resultColumns[i].equals("Model Id") ) { %>
-							     <display:column title="Model Id" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
-							     </display:column>	 							
-							<% }
+
 							else if( resultColumns[i].equals("Principal Investigator") ) { %>
 							     <display:column title="Principal Investigator" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.principalInvestigatorName}"/></camod:highlight>
@@ -463,9 +468,9 @@
 							         <camod:highlight><c:out escapeXml="false" value="${row.donorSpecies}"/></camod:highlight>
 							     </display:column>	 							
 							<% }							
-							else if( resultColumns[i].equals("Graft Type") ) { %>
-							     <display:column title="Graft Type" sortable="true" headerClass="sortable" >
-							         <camod:highlight><c:out escapeXml="false" value="${row.graftType}"/></camod:highlight>
+							else if( resultColumns[i].equals("Source Type") ) { %>
+							     <display:column title="Source Type" sortable="true" headerClass="sortable" >
+							         <camod:highlight><c:out escapeXml="false" value="${row.sourceType}"/></camod:highlight>
 							     </display:column>	 							
 							<% }	
 							else if( resultColumns[i].equals("Carcinogen") ) { %>

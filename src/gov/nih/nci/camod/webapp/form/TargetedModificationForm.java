@@ -1,7 +1,10 @@
 /*
- * $Id: TargetedModificationForm.java,v 1.13 2007-04-04 13:23:37 pandyas Exp $
+ * $Id: TargetedModificationForm.java,v 1.14 2007-07-31 12:02:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/04/04 13:23:37  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.12  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -17,9 +20,12 @@ import org.apache.struts.upload.FormFile;
 
 /**
  * 
- * $Id: TargetedModificationForm.java,v 1.13 2007-04-04 13:23:37 pandyas Exp $
+ * $Id: TargetedModificationForm.java,v 1.14 2007-07-31 12:02:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2007/04/04 13:23:37  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.12  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -45,7 +51,7 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
     protected String mgiId;
 	protected String zfinId;
 	protected String rgdId;     
-    protected String fileServerLocation;
+    protected String url;
     protected FormFile fileLocation;
     protected String title;
     protected String descriptionOfConstruct;
@@ -198,16 +204,6 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
         this.comments = comments;
     }
 
-    public String getFileServerLocation()
-    {
-        return fileServerLocation;
-    }
-
-    public void setFileServerLocation(String fileServerLocation)
-    {
-        this.fileServerLocation = fileServerLocation;
-    }
-
     public String getTitle()
     {
         return title;
@@ -306,5 +302,13 @@ public class TargetedModificationForm extends BaseForm implements Serializable, 
 
 	public void setZfinId(String zfinId) {
 		this.zfinId = zfinId;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

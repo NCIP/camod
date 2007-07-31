@@ -1,7 +1,10 @@
 /*
- * $Id: InvivoResult.java,v 1.8 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: InvivoResult.java,v 1.9 2007-07-31 12:03:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.7  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -23,7 +26,7 @@ public class InvivoResult extends BaseObject implements Serializable, Duplicatab
     private String evaluationDay;
     private String toxicitySurvivors;
     private String toxicityEvalDay;
-    private EndpointCode endpointCode;
+    private Endpoint endpoint;
     private Treatment treatment;
     private Agent agent;
     private Float percentTreatedControl;
@@ -80,20 +83,20 @@ public class InvivoResult extends BaseObject implements Serializable, Duplicatab
     }
 
     /**
-     * @return Returns the endpointCode.
+     * @return Returns the endpoint.
      */
-    public EndpointCode getEndpointCode()
+    public Endpoint getEndpoint()
     {
-        return endpointCode;
+        return endpoint;
     }
 
     /**
-     * @param endpointCode
-     *            The endpointCode to set.
+     * @param endpoint
+     *            The endpoint to set.
      */
-    public void setEndpointCode(EndpointCode endpointCode)
+    public void setEndpoint(Endpoint endpoint)
     {
-        this.endpointCode = endpointCode;
+        this.endpoint = endpoint;
     }
 
     /**

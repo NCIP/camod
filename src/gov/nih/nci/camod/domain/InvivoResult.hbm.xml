@@ -46,9 +46,9 @@
         
         <!-- endpointCode (many-to-one unidirectional) -->
         <many-to-one
-        	name="endpointCode"
-        	column="endpoint_code_id"
-        	class="EndpointCode"/>        	
+        	name="endpoint"
+        	column="endpoint_id"
+        	class="Endpoint"/>        	
         
         <!-- treatment (many-to-one unidirectional) -->
         <many-to-one

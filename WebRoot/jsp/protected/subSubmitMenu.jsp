@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.58 2007-05-08 17:13:27 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.59 2007-07-31 12:00:10 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.58  2007/05/08 17:13:27  pandyas
+		 * Cleaned up file format
+		 *
 		 * Revision 1.57  2007/03/26 12:07:22  pandyas
 		 * caMOd 2.3 enhancements for Zebrafish support
 		 *
@@ -54,7 +57,7 @@
 <%@ page import="gov.nih.nci.camod.domain.GeneDelivery"%>
 <%@ page import="gov.nih.nci.camod.domain.Therapy"%>
 <%@ page import="gov.nih.nci.camod.domain.CellLine"%>
-<%@ page import="gov.nih.nci.camod.domain.Xenograft"%>
+<%@ page import="gov.nih.nci.camod.domain.Graft"%>
 <%@ page import="gov.nih.nci.camod.domain.InducedMutation"%>
 <%@ page import="gov.nih.nci.camod.domain.EngineeredGene"%>
 <%@ page import="gov.nih.nci.camod.domain.ExpressionFeature"%>
@@ -757,16 +760,16 @@
 		src="images/subMenuArrow.gif" width=5> XENOGRAFT</div>
 	<span class="submasterdiv" id="sub12"> <img
 		src="images/right_arrow.gif" border="0"> 
-		<html:link styleClass="subMenuRed" action="XenograftPopulateAction.do?method=dropdown">
-			Enter Transplant/Xenograft
+		<html:link styleClass="subMenuRed" action="GraftPopulateAction.do?method=dropdown">
+			Enter Transplant/Graft
 		</html:link><br>
-		<logic:iterate id="aXenograft" name="xenograft_list" type="Xenograft">&nbsp;&nbsp;&nbsp;&nbsp;
+		<logic:iterate id="aGraft" name="graft_list" type="Graft">&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<img src="images/aquadot.jpg" border="0">
 			<html:link styleClass="subMenuBlue"
-				action="XenograftPopulateAction.do?method=populate"
-				paramId="aXenograftID" paramName="aXenograft" paramProperty="id">
-				<camod:shorten><bean:write name="aXenograft" property="xenograftName" filter="false" /></camod:shorten>
+				action="GraftPopulateAction.do?method=populate"
+				paramId="aGraftID" paramName="aGraft" paramProperty="id">
+				<camod:shorten><bean:write name="aGraft" property="name" filter="false" /></camod:shorten>
 			</html:link>
 			<br>
 		</logic:iterate> <br>

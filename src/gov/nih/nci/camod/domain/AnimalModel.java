@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/03/19 18:56:11  pandyas
+ * Object Model changes for caMOD 2.3 - dee design doc for details
+ *
  * Revision 1.21  2007/02/23 21:30:01  pandyas
  * Fixed Genotype and Nomenclature - split objects and cleaned up database
  *
@@ -25,7 +28,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalModel.java,v 1.22 2007-03-19 18:56:11 pandyas Exp $
+ * $Id: AnimalModel.java,v 1.23 2007-07-31 12:03:37 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -53,7 +56,7 @@ public class AnimalModel extends AbstractCancerModel {
 
 	private Set<MicroArrayData> microArrayDataCollection = new HashSet<MicroArrayData>();
 
-	private Set<Xenograft> xenograftCollection = new HashSet<Xenograft>();
+	private Set<Graft> graftCollection = new HashSet<Graft>();
 
 	private Set<Therapy> therapyCollection = new HashSet<Therapy>();
 
@@ -76,8 +79,6 @@ public class AnimalModel extends AbstractCancerModel {
 	private Set<Genotype> genotypeCollection = new HashSet<Genotype>();	
 
 	private Set<Log> logCollection = new HashSet<Log>();
-
-	private RepositoryInfo repositoryInfo;
 
 	private Phenotype phenotype;
 	
@@ -377,21 +378,6 @@ public class AnimalModel extends AbstractCancerModel {
 	}
 
 	/**
-	 * @return Returns the repositoryInfo.
-	 */
-	public RepositoryInfo getRepositoryInfo() {
-		return repositoryInfo;
-	}
-
-	/**
-	 * @param repositoryInfo
-	 *            The repositoryInfo to set.
-	 */
-	public void setRepositoryInfo(RepositoryInfo repositoryInfo) {
-		this.repositoryInfo = repositoryInfo;
-	}
-
-	/**
 	 * @return Returns the therapyCollection.
 	 */
 	public Set<Therapy> getTherapyCollection() {
@@ -415,22 +401,22 @@ public class AnimalModel extends AbstractCancerModel {
 	}
 
 	/**
-	 * @return Returns the xenograftCollection.
+	 * @return Returns the graftCollection.
 	 */
-	public Set<Xenograft> getXenograftCollection() {
-		return xenograftCollection;
+	public Set<Graft> getGraftCollection() {
+		return graftCollection;
 	}
 
 	/**
-	 * @param xenograftCollection
-	 *            The xenograftCollection to set.
+	 * @param graftCollection
+	 *            The graftCollection to set.
 	 */
-	public void setXenograftCollection(Set<Xenograft> xenograftCollection) {
-		this.xenograftCollection = xenograftCollection;
+	public void setGraftCollection(Set<Graft> graftCollection) {
+		this.graftCollection = graftCollection;
 	}
 
-	public void addXenograft(Xenograft xenograft) {
-		xenograftCollection.add(xenograft);
+	public void addGraft(Graft graft) {
+		graftCollection.add(graft);
 	}
 
 	/**

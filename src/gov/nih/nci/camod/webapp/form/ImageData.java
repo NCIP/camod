@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageData.java,v 1.6 2007-04-20 17:51:04 pandyas Exp $
+ * $Id: ImageData.java,v 1.7 2007-07-31 12:01:41 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/04/20 17:51:04  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.5  2007/04/18 19:20:23  pandyas
  * Modified to add Staining Method tree to Image submission
  *
@@ -32,9 +35,9 @@ public interface ImageData
 
     public void setFileLocation(FormFile fileLocation);
 
-    public String getFileServerLocation();
+	public String getUrl();
 
-    public void setFileServerLocation(String fileServerLocation);
+	public void setUrl(String url);
 
     public String getTitle();
 

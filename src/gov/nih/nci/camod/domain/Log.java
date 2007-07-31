@@ -1,7 +1,10 @@
 /*
- * $Id: Log.java,v 1.8 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: Log.java,v 1.9 2007-07-31 12:03:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.7  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -19,64 +22,14 @@ public class Log extends BaseObject implements Serializable, Duplicatable
 {
     private static final long serialVersionUID = 3259215453799404851L;
 
-    private String notes;
-    private String type;
-    private String subsystem;
+    private String reviewNote;
+    private String state;
     private String timestamp;
-    private AbstractCancerModel cancerModel;
-    private Comments comment;
+    private AbstractCancerModel abstractCancerModel;
+    private Comments comments;
     private Person submitter;
 
-    /**
-     * @return Returns the notes.
-     */
-    public String getNotes()
-    {
-        return notes;
-    }
 
-    /**
-     * @param notes
-     *            The notes to set.
-     */
-    public void setNotes(String notes)
-    {
-        this.notes = notes;
-    }
-
-    /**
-     * @return Returns the type.
-     */
-    public String getType()
-    {
-        return type;
-    }
-
-    /**
-     * @param type
-     *            The type to set.
-     */
-    public void setType(String type)
-    {
-        this.type = type;
-    }
-
-    /**
-     * @return Returns the subsystem.
-     */
-    public String getSubsystem()
-    {
-        return subsystem;
-    }
-
-    /**
-     * @param subsystem
-     *            The subsystem to set.
-     */
-    public void setSubsystem(String subsystem)
-    {
-        this.subsystem = subsystem;
-    }
 
     /**
      * @return Returns the timestamp.
@@ -96,37 +49,20 @@ public class Log extends BaseObject implements Serializable, Duplicatable
     }
 
     /**
-     * @return Returns the cancerModel.
+     * @return Returns the abstractCancerModel.
      */
-    public AbstractCancerModel getCancerModel()
+    public AbstractCancerModel getAbstractCancerModel()
     {
-        return cancerModel;
+        return abstractCancerModel;
     }
 
     /**
-     * @param cancerModel
-     *            The cancerModel to set.
+     * @param abstractCancerModel
+     *            The abstractCancerModel to set.
      */
-    public void setCancerModel(AbstractCancerModel cancerModel)
+    public void setAbstractCancerModel(AbstractCancerModel abstractCancerModel)
     {
-        this.cancerModel = cancerModel;
-    }
-
-    /**
-     * @return Returns the comment.
-     */
-    public Comments getComment()
-    {
-        return comment;
-    }
-
-    /**
-     * @param comment
-     *            The comment to set.
-     */
-    public void setComment(Comments comment)
-    {
-        this.comment = comment;
+        this.abstractCancerModel = abstractCancerModel;
     }
 
     /**
@@ -153,7 +89,7 @@ public class Log extends BaseObject implements Serializable, Duplicatable
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getTimestamp() + " - " + this.getNotes();
+        result += this.getTimestamp() + " - " + this.getReviewNote();
         return result;
     }
 
@@ -165,4 +101,28 @@ public class Log extends BaseObject implements Serializable, Duplicatable
             return false;
         return true;
     }
+
+	public Comments getComments() {
+		return comments;
+	}
+
+	public void setComments(Comments comments) {
+		this.comments = comments;
+	}
+
+	public String getReviewNote() {
+		return reviewNote;
+	}
+
+	public void setReviewNote(String reviewNote) {
+		this.reviewNote = reviewNote;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 }

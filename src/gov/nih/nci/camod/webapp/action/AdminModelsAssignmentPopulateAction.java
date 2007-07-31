@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminModelsAssignmentPopulateAction.java,v 1.7 2006-10-17 16:11:00 pandyas Exp $
+ * $Id: AdminModelsAssignmentPopulateAction.java,v 1.8 2007-07-31 12:02:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/10/17 16:11:00  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.6  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -27,19 +30,9 @@
 package gov.nih.nci.camod.webapp.action;
 
 import gov.nih.nci.camod.Constants;
-import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.AnimalModelSearchResult;
-import gov.nih.nci.camod.webapp.form.CurationAssignmentForm;
 import gov.nih.nci.camod.webapp.util.NewDropdownUtil;
-import gov.nih.nci.common.persistence.Search;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -61,40 +54,32 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 			HttpServletResponse inResponse) throws Exception {
 
 		log.info("<AdminModelsAssignmentPopulateAction> Entering execute");
-
-		CurationAssignmentForm theForm = (CurationAssignmentForm) inForm;
 		
 		try {
 
-			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.CURATIONSTATESDROP,
+			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.CURATIONSTATESWITHBLANKDROP,
 					Constants.Admin.MODEL_CURATION_WORKFLOW);
+			
+	        NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.EXTERNALSOURCEQUERYDROP,
+	                Constants.Dropdowns.ADD_BLANK);		
+	        
+			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERSFORSCREENERROLEDROP,
+					Constants.Admin.Roles.SCREENER);
+			
+			NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.USERSFOREDITORROLEDROP,
+					Constants.Admin.Roles.EDITOR);	
+			
+			NewDropdownUtil.populateDropdown(inRequest,
+					Constants.Dropdowns.NONHUMANSPECIESDROP,
+					Constants.Dropdowns.ADD_BLANK_OPTION);	
+	        
+	        NewDropdownUtil.populateDropdown(inRequest, Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,
+	                Constants.Dropdowns.ADD_BLANK);		        
 
-			if (theForm.getCurrentState() != null) {
-				log.info("theForm.getCurrentState(): " + theForm.getCurrentState());
 
-				AnimalModel theQBEModel = new AnimalModel();
-				theQBEModel.setState(theForm.getCurrentState());
-
-				// Get the models
-				List theModels = Search.query(theQBEModel);
-				log.info("theModels.size(): " + theModels.size());
-				// Create a display list
-				List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
-
-				// Add AnimalModel DTO's so that the paganation works quickly
-				for (int i = 0, j = theModels.size(); i < j; i++) {
-					AnimalModel theAnimalModel = (AnimalModel) theModels.get(i);
-					theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
-				}
-
-				Collections.sort(theDisplayList);
-
-				inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_SEARCH_RESULTS, theDisplayList);
-
-			}
 			
 		} catch (Exception e) {
-			log.error("Unable to get models for state: " + theForm.getCurrentState());
+			log.error("Unable to populate dropdowns for models in adminEditModels: ");
 
 			// Encountered an error
 			ActionMessages theMsg = new ActionMessages();
@@ -102,7 +87,7 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 			saveErrors(inRequest, theMsg);
 		}
 
-		log.trace("Exiting execute");
+		log.info("<AdminModelsAssignmentPopulateAction> Exiting execute");
 
 		return inMapping.findForward("next");
 	}

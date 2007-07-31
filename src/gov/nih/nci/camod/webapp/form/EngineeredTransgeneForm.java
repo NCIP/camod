@@ -1,9 +1,12 @@
 /*
  * @author pandyas
  *
- * $Id: EngineeredTransgeneForm.java,v 1.10 2007-04-04 13:23:37 pandyas Exp $
+ * $Id: EngineeredTransgeneForm.java,v 1.11 2007-07-31 12:02:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/04/04 13:23:37  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.9  2007/03/26 12:03:10  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -40,7 +43,7 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	protected String conditionedBy;
 	protected String description;
 	protected String comments;
-	protected String fileServerLocation;	
+	protected String url;	
 	protected FormFile fileLocation;	
 	protected String title;
 	protected String descriptionOfConstruct;
@@ -299,12 +302,6 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 	public void setFileLocation(FormFile fileLocation) {
 		this.fileLocation = fileLocation;
 	}
-	public String getFileServerLocation() {
-		return fileServerLocation;
-	}
-	public void setFileServerLocation(String fileServerLocation) {
-		this.fileServerLocation = fileServerLocation;
-	}
     
     public String getTransgeneId() {
         return transgeneId;
@@ -352,5 +349,13 @@ public class EngineeredTransgeneForm extends BaseForm implements Serializable, E
 
 	public void setZfinId(String zfinId) {
 		this.zfinId = zfinId;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

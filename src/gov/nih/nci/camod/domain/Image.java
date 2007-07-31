@@ -1,8 +1,11 @@
 /*
  * 
- * $Id: Image.java,v 1.11 2006-08-17 18:36:34 pandyas Exp $
+ * $Id: Image.java,v 1.12 2007-07-31 12:03:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2006/08/17 18:36:34  pandyas
+ * Defect# 410: Externalize properties files - Code changes to get properties
+ *
  * Revision 1.10  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -43,7 +46,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 
     private String description;
 
-    private String fileServerLocation;
+    private String url;
 
     private StainingMethod stainingMethod;
 
@@ -83,22 +86,6 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
         this.description = description;
     }
 
-    /**
-     * @return fileServerLocation The fileServerLocation to set.
-     */
-    public String getFileServerLocation()
-    {
-        return fileServerLocation;
-    }
-
-    /**
-     * @param fileServerLocation
-     *            The fileServerLocation to set.
-     */
-    public void setFileServerLocation(String fileServerLocation)
-    {
-        this.fileServerLocation = fileServerLocation;
-    }
 
     /**
      * @return Returns the stainingMethod.
@@ -138,9 +125,9 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
     {
 
         String theThumbUrl = "";
-        if (fileServerLocation != null)
+        if (url != null)
         {
-            StringTokenizer theTokenizer = new StringTokenizer(fileServerLocation);
+            StringTokenizer theTokenizer = new StringTokenizer(url);
             theThumbUrl = theTokenizer.nextToken(";");
         }
         else
@@ -182,9 +169,9 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
             String windowStart = camodProperties.getProperty("caimage.window.start");
             String windowEnd = camodProperties.getProperty("caimage.window.end");
 
-            if (fileServerLocation != null)
+            if (url != null)
             {
-                StringTokenizer theTokenizer = new StringTokenizer(fileServerLocation);
+                StringTokenizer theTokenizer = new StringTokenizer(url);
                 theUrl = theTokenizer.nextToken(CaImage.FILESEP);
                 if (theTokenizer.hasMoreTokens())
                 {
@@ -214,7 +201,7 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
                 String gencon = camodProperties.getProperty("caimage.gencon");
                 String model = camodProperties.getProperty("caimage.model");
                 String theType = "";
-                if (fileServerLocation.indexOf(gencon) == -1)
+                if (url.indexOf(gencon) == -1)
                 {
                     theType = model;
                 }
@@ -276,5 +263,13 @@ public class Image extends BaseObject implements Comparable, Serializable, Dupli
 
         return super.compareTo(o);
     }
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 }

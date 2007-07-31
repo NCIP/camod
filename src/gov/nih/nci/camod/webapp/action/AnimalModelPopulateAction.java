@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.23 2007-03-26 12:02:30 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.24 2007-07-31 12:02:38 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/03/26 12:02:30  pandyas
+ * caMOd 2.3 enhancements for Zebrafish support
+ *
  * Revision 1.22  2007/02/23 21:35:28  pandyas
  * Fixed Genotype and Nomenclature - split objects and cleaned up database
  *
@@ -211,7 +214,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 		log.debug("Entering AnimalModelPopulateAction.dropdown");
 
 		NewDropdownUtil.populateDropdown(request,
-				Constants.Dropdowns.SPECIESQUERYDROP,
+				Constants.Dropdowns.NONHUMANSPECIESDROP,
 				Constants.Dropdowns.ADD_BLANK_OPTION);
 
 		// theSpecies will be null the first time (submitNewModel screen) -
@@ -221,7 +224,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 		String theSpecies = inForm.getScientificName();
 		if (theSpecies == null) {
 			List speciesList = (List) request.getSession().getAttribute(
-					Constants.Dropdowns.SPECIESQUERYDROP);
+					Constants.Dropdowns.NONHUMANSPECIESDROP);
 			DropdownOption theOption = (DropdownOption) speciesList.get(0);
 			theSpecies = theOption.getValue();
 		}

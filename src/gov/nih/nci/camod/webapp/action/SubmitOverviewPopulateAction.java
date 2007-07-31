@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: SubmitOverviewPopulateAction.java,v 1.3 2006-10-17 16:11:00 pandyas Exp $
+ *  $Id: SubmitOverviewPopulateAction.java,v 1.4 2007-07-31 12:02:55 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.3  2006/10/17 16:11:00  pandyas
+ *  modified during development of caMOD 2.2 - various
+ *
  *  Revision 1.2  2006/08/17 18:10:20  pandyas
  *  Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -81,7 +84,7 @@ public class SubmitOverviewPopulateAction extends BaseAction {
 
             // Set the fields
             theForm.setModelId(theModelId);
-            theForm.setNote("Model has been moved to complete");
+            theForm.setRemark("Model has been moved to complete");
             theForm.setAssignedTo(theCoordinator);
             theForm.setEvent(Constants.Admin.Actions.COMPLETE);
 
