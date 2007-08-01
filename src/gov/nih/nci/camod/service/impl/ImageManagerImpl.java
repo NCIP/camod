@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.25 2007-08-01 18:05:02 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.26 2007-08-01 18:11:46 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/08/01 18:05:02  pandyas
+ * VCDE changes
+ *
  * Revision 1.24  2007/07/31 12:02:22  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -233,11 +236,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 					String ftpPassword = camodProperties
 							.getProperty("caimage.ftp.password");
 
-                    // Determine which path to use to store the image                    
-
-                    //camodProperties.getProperty("caimage.ftp.modelstoragedirectory");
-                            
-
+                    // Determine which path to use to store the image AND              
 					// Determine which path to store or use to view in 
                     String ftpStorageDirectory = "";
 					String serverViewUrl = "";
