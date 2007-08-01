@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: LogManagerImpl.java,v 1.10 2007-07-31 12:02:21 pandyas Exp $
+ *  $Id: LogManagerImpl.java,v 1.11 2007-08-01 17:29:19 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.10  2007/07/31 12:02:21  pandyas
+ *  VCDE silver level  and caMOD 2.3 changes
+ *
  *  Revision 1.9  2006/01/18 14:24:24  georgeda
  *  TT# 376 - Updated to use new Java 1.5 features
  *
@@ -193,7 +196,7 @@ public class LogManagerImpl extends BaseManager implements LogManager
     public Log create(String inAssignedPerson,
                       String inModelId,
                       String inState,
-                      String inNotes) throws Exception
+                      String inReviewNote) throws Exception
     {
         log.trace("Entering LogManagerImpl.create");
 
@@ -204,7 +207,7 @@ public class LogManagerImpl extends BaseManager implements LogManager
             log.debug("Person: " + inAssignedPerson);
             log.debug("Model: " + inModelId);
             log.debug("State: " + inState);
-            log.debug("Notes: " + inNotes);
+            log.debug("ReviewNote: " + inReviewNote);
 
             Person theAssignedPerson = PersonManagerSingleton.instance().getByUsername(inAssignedPerson);
             AnimalModel theAnimalModel = AnimalModelManagerSingleton.instance().get(inModelId);
@@ -213,7 +216,7 @@ public class LogManagerImpl extends BaseManager implements LogManager
             theLog.setSubmitter(theAssignedPerson);
             theLog.setTimestamp((new Date()).toString());
             theLog.setState(inState);
-            theLog.setReviewNote(inNotes);
+            theLog.setReviewNote(inReviewNote);
         }
         catch (Exception e)
         {
