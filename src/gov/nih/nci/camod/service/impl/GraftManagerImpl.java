@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftManagerImpl.java,v 1.1 2007-07-31 12:05:41 pandyas Exp $
+ * $Id: GraftManagerImpl.java,v 1.2 2007-08-01 18:06:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/07/31 12:05:41  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.38  2007/06/26 16:13:43  pandyas
  * Fixed save when organ cleared from text entry and by use of the clear button for trees
  *
@@ -231,24 +234,24 @@ public class GraftManagerImpl extends BaseManager implements
 		inGraft.setCellAmount(inGraftData.getCellAmount());
 		inGraft.setGrowthPeriod(inGraftData.getGrowthPeriod());
 
-		// anytime the graft type is "other"
-		if (inGraftData.getGraftType().equals(
+		// anytime the Source type is "other"
+		if (inGraftData.getSourceType().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			// Set Graft type
-			inGraft.setGraftType(null);
-			inGraft.setGraftTypeUnctrlVocab(inGraftData
-					.getOtherGraftType());
+			// Set Source type
+			inGraft.setSourceType(null);
+			inGraft.setSourceTypeUnctrlVocab(inGraftData
+					.getOtherSourceType());
 
 			// Send e-mail for other Graft Type
-			sendEmail(inAnimalModel, inGraftData.getOtherGraftType(),
-					"GraftType");
+			sendEmail(inAnimalModel, inGraftData.getOtherSourceType(),
+					"SourceType");
 
 		}
-		// anytime graft type is not other set uncontrolled vocab to null
+		// anytime Source type is not other set uncontrolled vocab to null
 		// (covers editing)
 		else {
-			inGraft.setGraftType(inGraftData.getGraftType());
-			inGraft.setGraftTypeUnctrlVocab(null);
+			inGraft.setSourceType(inGraftData.getSourceType());
+			inGraft.setSourceTypeUnctrlVocab(null);
 		}
 
 		log.info("Exiting GraftManagerImpl.populateXenograft");

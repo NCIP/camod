@@ -1,7 +1,10 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.24 2007-07-31 12:02:22 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.25 2007-08-01 18:05:02 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/07/31 12:02:22  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.23  2007/06/25 16:57:11  pandyas
  * Fixed code so staining_method will not clear when other fields are edited
  *
@@ -230,18 +233,25 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 					String ftpPassword = camodProperties
 							.getProperty("caimage.ftp.password");
 
-					String ftpStorageDirectory = camodProperties
-							.getProperty("caimage.ftp.modelstoragedirectory");
+                    // Determine which path to use to store the image                    
 
-					// Determine which path to do the view in
+                    //camodProperties.getProperty("caimage.ftp.modelstoragedirectory");
+                            
+
+					// Determine which path to store or use to view in 
+                    String ftpStorageDirectory = "";
 					String serverViewUrl = "";
 					if (inStorageDirKey
 							.equals(Constants.CaImage.FTPGENCONSTORAGEDIRECTORY)) {
 						serverViewUrl = camodProperties
 								.getProperty("caimage.genconview.uri");
+                        ftpStorageDirectory = camodProperties
+                        .getProperty("caimage.ftp.genconstoragedirectory");                         
 					} else {
 						serverViewUrl = camodProperties
 								.getProperty("caimage.modelview.uri");
+                        ftpStorageDirectory = camodProperties
+                        .getProperty("caimage.ftp.modelstoragedirectory");                        
 					}
 
 					// Upload the file to caIMAGE

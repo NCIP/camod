@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftAction.java,v 1.1 2007-07-31 12:05:26 pandyas Exp $
+ * $Id: GraftAction.java,v 1.2 2007-08-01 18:03:59 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/07/31 12:05:26  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.21  2007/04/04 13:19:27  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -96,10 +99,10 @@ public final class GraftAction extends BaseAction
                     + graftForm.getAdministrativeSite()
                     + "\n\t getOtherAdministrativeSite: "
                     + graftForm.getOtherAdministrativeSite()                
-                    + "\n\t getGraftType: "
-                    + graftForm.getGraftType()
-                    + "\n\t getOtherGraftType: "
-                    + graftForm.getOtherGraftType()
+                    + "\n\t getSourceType: "
+                    + graftForm.getSourceType()
+                    + "\n\t getOtherSourceType: "
+                    + graftForm.getOtherSourceType()
                     + "\n\t getDonorScientificName: "
                     + graftForm.getDonorScientificName()
                     + "\n\t getOtherDonorScientificName: "
@@ -197,8 +200,8 @@ public final class GraftAction extends BaseAction
                  + "\n\t getGeneticManipulation: " + graftForm.getGeneticManipulation() 
                  + "\n\t getAdministrativeSite: " + graftForm.getAdministrativeSite() 
                  + "\n\t getOtherAdministrativeSite: " + graftForm.getOtherAdministrativeSite() 
-                 + "\n\t getGraftType: " + graftForm.getGraftType() 
-                 + "\n\t getOtherGraftType: " + graftForm.getOtherGraftType() 
+                 + "\n\t getSourceType: " + graftForm.getSourceType() 
+                 + "\n\t getOtherSourceType: " + graftForm.getOtherSourceType() 
                  + "\n\t getDonorScientificName: " + graftForm.getDonorScientificName() 
                  + "\n\t getOtherDonorScientificName: " + graftForm.getOtherDonorScientificName() 
                  + "\n\t getDonorEthinicityStrain: " + graftForm.getDonorEthinicityStrain() 

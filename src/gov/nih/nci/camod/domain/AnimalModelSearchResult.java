@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.20 2007-07-31 12:05:56 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.21 2007-08-01 18:06:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/07/31 12:05:56  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.19  2007/06/26 16:11:41  pandyas
  * Modified code to get either disease.name or disease.nameUnctrlVocab for the serach results display under the Diagnosis column (customized search option)
  *
@@ -118,7 +121,7 @@ public class AnimalModelSearchResult implements Comparable
     private String myDistributor = null;
     private String myCellLine = null;
     private String myDonorSpecies = null;
-    private String myGraftType = null;
+    private String mySourceType = null;
     private String myState = null;
     private String myExternalSource = null;    
 
@@ -1138,37 +1141,37 @@ public class AnimalModelSearchResult implements Comparable
     }
 
     /**
-     * Return the Graft Types. It will fetch the animal model from the DB
+     * Return the Source Types. It will fetch the animal model from the DB
      * if it hasn't already happened.
      * 
-     * @return the Graft Types for the associated model
+     * @return the Source Types for the associated model
      * 
      * @throws Exception
      */
-    public String getGraftType() throws Exception
+    public String getSourceType() throws Exception
     {
-        if (myGraftType == null)
+        if (mySourceType == null)
         {
             fetchAnimalModel();
             Set<Graft> set = myAnimalModel.getGraftCollection();
             Iterator<Graft> setIter = set.iterator();
-            myGraftType = "";
+            mySourceType = "";
 
             while (setIter.hasNext())
             {
                 Graft it = (Graft) setIter.next();
-                if (it.getGraftType() != null)
+                if (it.getSourceType() != null)
                 {
-                    myGraftType += it.getGraftType() + "<br>";
+                    mySourceType += it.getSourceType() + "<br>";
                 }
 
-                if (it.getGraftTypeUnctrlVocab() != null)
+                if (it.getSourceTypeUnctrlVocab() != null)
                 {
-                    myGraftType += it.getGraftTypeUnctrlVocab() + "<br>";
+                    mySourceType += it.getSourceTypeUnctrlVocab() + "<br>";
                 }
             }
         }
-        return myGraftType;
+        return mySourceType;
     }
     
     /**
