@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.69 2007-07-31 12:02:21 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.70 2007-08-02 15:58:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.69  2007/07/31 12:02:21  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.68  2007/05/21 17:33:01  pandyas
  * Modified simple and adv search species drop down to pull from DB (approved model species only)
  *
@@ -1173,13 +1176,13 @@ public class QueryManagerImpl extends BaseManager
         Query theQuery = null;
         if (inPerson == null)
         {
-            theHQLQuery += "select l.comment from Log as l where l.type = :state)";
+            theHQLQuery += "select l.comments from Log as l where l.state = :state)";
             theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("state", inState);
         }
         else
         {
-            theHQLQuery += "select l.comment from Log as l where l.submitter = :party_id and l.type = :state)";
+            theHQLQuery += "select l.comments from Log as l where l.submitter = :party_id and l.state = :state)";
             theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("party_id", inPerson.getId());
             theQuery.setParameter("state", inState);
@@ -1223,13 +1226,13 @@ public class QueryManagerImpl extends BaseManager
 
         if (inPerson == null)
         {
-            theHQLQuery += "select l.abstractCancerModel from Log as l where l.type = :state)";
+            theHQLQuery += "select l.abstractCancerModel from Log as l where l.state = :state)";
             theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("state", inState);
         }
         else
         {
-            theHQLQuery += "select l.abstractCancerModel from Log as l where l.submitter = :party_id and l.type = :state)";
+            theHQLQuery += "select l.abstractCancerModel from Log as l where l.submitter = :party_id and l.state = :state)";
             theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theQuery.setParameter("party_id", inPerson.getId());
             theQuery.setParameter("state", inState);
