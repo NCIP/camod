@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CurationAssignmentForm.java,v 1.3 2007-07-31 12:02:06 pandyas Exp $
+ * $Id: CurationAssignmentForm.java,v 1.4 2007-08-06 17:27:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/07/31 12:02:06  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.2  2005/10/24 13:28:30  georgeda
  * Cleanup changes
  *
@@ -18,11 +21,8 @@
 package gov.nih.nci.camod.webapp.form;
 
 import java.io.Serializable;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.validator.ValidatorForm;
 
 /**
  * 
@@ -32,6 +32,13 @@ import org.apache.struts.validator.ValidatorForm;
 public class CurationAssignmentForm extends BaseForm implements Serializable, CurationAssignmentData {
 
     private static final long serialVersionUID = 6227851969634170134L;
+    
+    /**
+     * Default empty constructor
+     * 
+     */
+    public CurationAssignmentForm() {
+    }
 
     // Previous developer preferred the use of "my"
     protected String myCurrentState;
@@ -92,20 +99,6 @@ public class CurationAssignmentForm extends BaseForm implements Serializable, Cu
 		this.screener = screener;
 	}
 	
-    public void reset(ActionMapping mapping,
-            HttpServletRequest request)
-    {
-    	myCurrentState = null;
-    	externalSource = null;
-    	editor = null;
-    	modelDescriptor = null;
-    	modelId = null;
-    	screener = null;
-    	species = null;
-    	principalInvestigator = null;
-       
-    }
-
 	public String getPrincipalInvestigator() {
 		return principalInvestigator;
 	}
@@ -120,5 +113,17 @@ public class CurationAssignmentForm extends BaseForm implements Serializable, Cu
 
 	public void setSpecies(String species) {
 		this.species = species;
-	}	
+	}
+    
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        myCurrentState = null;
+        externalSource = null;
+        modelDescriptor = null; 
+        modelId = null;
+        screener = null;        
+        editor = null;
+        species = null;
+        principalInvestigator = null;       
+    } 
+    
 }
