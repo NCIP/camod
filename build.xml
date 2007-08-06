@@ -71,10 +71,12 @@
 	  <junit fork="yes" haltonfailure="yes">
 	    <test name="${test.class.name}" />
 	  	<formatter type="xml"/>
-	  	<!--formatter type="plain" usefile="false"/ -->
 	  	<classpath refid="test.run.classpath" />
 	  </junit>
 	</target>
+
+	<!-- add above classpath to print out to console
+		formatter type="plain" usefile="false"/ -->
 
     <!--
         TARGET: copy_resource_directory
