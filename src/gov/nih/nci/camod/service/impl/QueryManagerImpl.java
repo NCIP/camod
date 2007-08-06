@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.70 2007-08-02 15:58:13 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.71 2007-08-06 15:31:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.70  2007/08/02 15:58:13  pandyas
+ * Changed comment to comments and type to state as per VCDE review changes
+ *
  * Revision 1.69  2007/07/31 12:02:21  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -2427,7 +2430,7 @@ public class QueryManagerImpl extends BaseManager
         if (inCurationAssignmentData.getModelId() != null && inCurationAssignmentData.getModelId().length() > 0)
         {
         	log.info("inCurationAssignmentData.getCurrentState() != null loop");
-        	theWhereClause += " " + "WHERE am.id LIKE '%" + inCurationAssignmentData.getModelId().trim() + "%' ";
+        	theWhereClause += " " + "AND am.id LIKE '%" + inCurationAssignmentData.getModelId().trim() + "%' ";
         }        
         
 		log.info("buildAdminModelIdSearchWhereClause theWhereClause: " + theWhereClause.toString());
