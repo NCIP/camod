@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelStateForm.java,v 1.6 2007-07-31 12:02:03 pandyas Exp $
+ * $Id: AnimalModelStateForm.java,v 1.7 2007-08-06 16:15:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/07/31 12:02:03  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.5  2005/10/24 13:28:30  georgeda
  * Cleanup changes
  *
@@ -22,7 +25,6 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.validator.ValidatorForm;
 
 /**
  * 
