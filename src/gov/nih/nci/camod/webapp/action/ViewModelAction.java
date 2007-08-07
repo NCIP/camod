@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.35 2007-07-31 12:02:55 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.36 2007-08-07 18:26:20 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.35  2007/07/31 12:02:55  pandyas
+ *  VCDE silver level  and caMOD 2.3 changes
+ *
  *  Revision 1.34  2007/06/19 20:42:59  pandyas
  *  Users not logged in can not access the session property to check the model species.  Therefore, we must show the attribute for all models.
  *
@@ -536,9 +539,9 @@ public class ViewModelAction extends BaseAction
                     {
                         yeastResults.put(a.getId(), yeastStages);
                     }
-                    // now get invivo/Xenograft data
-                    List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
-                    invivoResults.put(a.getId(), xenograftResults);
+                    // now get invivo/Graft data
+                    List graftResults = QueryManagerSingleton.instance().getInvivoResults(a, true);
+                    invivoResults.put(a.getId(), graftResults);
                 }
             }
         }
@@ -696,7 +699,7 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateTransplantXenograft(ActionMapping mapping,
+    public ActionForward populateTransplantGraft(ActionMapping mapping,
                                                      ActionForm form,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception

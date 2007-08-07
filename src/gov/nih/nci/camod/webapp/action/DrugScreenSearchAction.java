@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.9 2007-07-31 12:02:38 pandyas Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.10 2007-08-07 18:28:24 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/07/31 12:02:38  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.8  2006/04/17 19:09:41  pandyas
  * caMod 2.1 OM changes
  *
@@ -131,8 +134,8 @@ public final class DrugScreenSearchAction extends BaseAction {
 						}
 						if (theForm.isDoInvivo()) {
 							// now get invivo/Graft data
-							List xenograftResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
-							invivoResults.put(a.getId(), xenograftResults);
+							List graftResults = QueryManagerSingleton.instance().getInvivoResults(a, false);
+							invivoResults.put(a.getId(), graftResults);
 						}
 					}
 				}

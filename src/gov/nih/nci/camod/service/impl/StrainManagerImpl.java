@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StrainManagerImpl.java,v 1.4 2006-05-19 16:39:33 pandyas Exp $
+ * $Id: StrainManagerImpl.java,v 1.5 2007-08-07 18:29:29 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/05/19 16:39:33  pandyas
+ * Defect #249 - add other to species on the Xenograft screen
+ *
  * Revision 1.3  2006/04/20 18:11:30  pandyas
  * Cleaned up Species or Strain save of Other in DB
  *
@@ -186,7 +189,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
      *                
      * This method is used to send in the newly created Species
      * when the user specifies other for species and Not Specified
-     * for strain in the XenograftManagerImpl.  Reuse object if other text
+     * for strain in the graftManagerImpl.  Reuse object if other text
      * is exactly the same (rare occurrance).               
      */
     public Strain getOrCreate(String inStrainName,

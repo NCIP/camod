@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftAction.java,v 1.2 2007-08-01 18:03:59 pandyas Exp $
+ * $Id: GraftAction.java,v 1.3 2007-08-07 18:28:05 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/08/01 18:03:59  pandyas
+ * VCDE changes
+ *
  * Revision 1.1  2007/07/31 12:05:26  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -158,13 +161,13 @@ public final class GraftAction extends BaseAction
         {
             log.error("Exception ocurred creating Graft", e);
 
-            // Encountered an error saving the xenograft.
+            // Encountered an error saving the graft.
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, msg);
         }
 
-        log.debug("<XenograftAction> Exiting edit");
+        log.debug("<graftAction> Exiting edit");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 

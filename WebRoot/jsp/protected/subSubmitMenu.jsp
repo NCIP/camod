@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.59 2007-07-31 12:00:10 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.60 2007-08-07 18:24:18 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.59  2007/07/31 12:00:10  pandyas
+		 * VCDE silver level  and caMOD 2.3 changes
+		 *
 		 * Revision 1.58  2007/05/08 17:13:27  pandyas
 		 * Cleaned up file format
 		 *
@@ -757,7 +760,7 @@
 	<div id="menu12" class="masterTitle" onclick="SwitchMenu('sub12')"
 		onmouseover="ChangeClass('menu12','masterTitleOver')"
 		onmouseout="ChangeClass('menu12','masterTitle')"><IMG height=5 alt=""
-		src="images/subMenuArrow.gif" width=5> XENOGRAFT</div>
+		src="images/subMenuArrow.gif" width=5> GRAFT</div>
 	<span class="submasterdiv" id="sub12"> <img
 		src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="GraftPopulateAction.do?method=dropdown">

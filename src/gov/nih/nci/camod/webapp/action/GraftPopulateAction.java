@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftPopulateAction.java,v 1.1 2007-07-31 12:02:55 pandyas Exp $
+ * $Id: GraftPopulateAction.java,v 1.2 2007-08-07 18:27:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/07/31 12:02:55  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.37  2007/06/25 17:48:50  pandyas
  * Fixed save and edit for text
  *
@@ -154,9 +157,9 @@ public class GraftPopulateAction extends BaseAction
             graftForm.setCellAmount(graft.getCellAmount());
             graftForm.setGrowthPeriod(graft.getGrowthPeriod());
  
-            // When populating multiple xenografts, this constant needs to be reset for each species entry
+            // When populating multiple grafts, this constant needs to be reset for each species entry
             request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, graft.getStrain().getSpecies().getCommonName());
-            log.info("xeno.getDonorSpecies().getCommonName(): " + graft.getStrain().getSpecies().getCommonName());            
+            log.info("graft.getStrain().getSpecies().getCommonName(): " + graft.getStrain().getSpecies().getCommonName());            
             
             // Species was required in previous versions of caMod and is stored in donorSpecies column
             // The species and strain are required for 2.1 and strain_id is stored for all future versions
@@ -208,7 +211,7 @@ public class GraftPopulateAction extends BaseAction
                 // simply display EVSPreferredDescription, unless concept code is '00000'
                 if (graft.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
                     // getEVSPreferredDescription does not work for Zebrafish EVS tree
-                    //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                    //graftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
                 	graftForm.setOrgan(graft.getOrgan().getName());
                     log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
                     graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
@@ -216,7 +219,7 @@ public class GraftPopulateAction extends BaseAction
                     
                 } else {
                     // getEVSPreferredDescription does not work for Zebrafish EVS tree
-                    //xenograftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
+                    //graftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
                 	graftForm.setOrgan(graft.getOrgan().getName());
                     log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
                     graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
@@ -320,7 +323,7 @@ public class GraftPopulateAction extends BaseAction
             Species theAMSpecies = animalModel.getStrain().getSpecies();
             request.getSession().setAttribute(Constants.Dropdowns.MODELSPECIES, theAMSpecies.getScientificName());
 
-            // If the animal model has an 'Other' strain selected, display the otherName on the Xenograft screen
+            // If the animal model has an 'Other' strain selected, display the otherName on the Graft screen
             if (animalModel.getStrain().getNameUnctrlVocab() != null)
             {
                 request.getSession().setAttribute(Constants.Dropdowns.OTHERMODELSTRAIN, animalModel.getStrain().getNameUnctrlVocab());

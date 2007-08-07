@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftManagerImpl.java,v 1.2 2007-08-01 18:06:03 pandyas Exp $
+ * $Id: GraftManagerImpl.java,v 1.3 2007-08-07 18:33:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/08/01 18:06:03  pandyas
+ * VCDE changes
+ *
  * Revision 1.1  2007/07/31 12:05:41  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -104,16 +107,16 @@ public class GraftManagerImpl extends BaseManager implements
 		GraftManager {
 
 	/**
-	 * Get all Xenograft objects
+	 * Get all graft objects
 	 * 
 	 * 
-	 * @return the matching Xenograft objects, or null if not found.
+	 * @return the matching graft objects, or null if not found.
 	 * 
 	 * @exception Exception
 	 *                when anything goes wrong.
 	 */
 	public List getAll() throws Exception {
-		log.trace("In XenograftManagerImpl.getAll");
+		log.trace("In GraftManagerImpl.getAll");
 		return super.getAll(Graft.class);
 	}
 
@@ -129,17 +132,17 @@ public class GraftManagerImpl extends BaseManager implements
 	 *                when anything goes wrong.
 	 */
 	public Graft get(String id) throws Exception {
-		log.trace("In XenograftManagerImpl.get");
+		log.trace("In GraftManagerImpl.get");
 		return (Graft) super.get(id, Graft.class);
 	}
 
-	public void save(Graft xenograft) throws Exception {
-		log.trace("In XenograftManagerImpl.save");
-		super.save(xenograft);
+	public void save(Graft graft) throws Exception {
+		log.trace("In GraftManagerImpl.save");
+		super.save(graft);
 	}
 
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.trace("In XenograftManagerImpl.remove");
+		log.trace("In GraftManagerImpl.remove");
 
 		inAnimalModel.getGraftCollection().remove(get(id));
 		super.save(inAnimalModel);
@@ -149,7 +152,7 @@ public class GraftManagerImpl extends BaseManager implements
 			AnimalModel inAnimalModel) throws Exception {
 
 		log
-				.trace("<XenograftManagerImpl> Entering XenograftManagerImpl.create");
+				.trace("<GraftManagerImpl> Entering GraftManagerImpl.create");
 
 		Graft theGraft = new Graft();
 		populateSpeciesStrain(inGraftData, theGraft, inAnimalModel);
@@ -163,7 +166,7 @@ public class GraftManagerImpl extends BaseManager implements
 
 	public void update(GraftData inGraftData, Graft inGraft,
 			AnimalModel inAnimalModel) throws Exception {
-		log.info("Entering GraftManagerImpl.update XenograftId: "
+		log.info("Entering GraftManagerImpl.update GraftId: "
 				+ inGraft.getId());
 
         // Populate w/ the new values and save
@@ -178,7 +181,7 @@ public class GraftManagerImpl extends BaseManager implements
 	private void populateGraft(GraftData inGraftData,
 			Graft inGraft, AnimalModel inAnimalModel) throws Exception {
 
-        log.info("Entering GraftManagerImpl.populateXenograft");
+        log.info("Entering GraftManagerImpl.populateGraft");
 
         /* Set graft name */
         inGraft.setName(inGraftData.getName());
@@ -254,7 +257,7 @@ public class GraftManagerImpl extends BaseManager implements
 			inGraft.setSourceTypeUnctrlVocab(null);
 		}
 
-		log.info("Exiting GraftManagerImpl.populateXenograft");
+		log.info("Exiting GraftManagerImpl.populateGraft");
 	}
 
 	private void populateSpeciesStrain(GraftData inGraftData,
@@ -287,54 +290,54 @@ public class GraftManagerImpl extends BaseManager implements
 
 	}
 
-	private void populateOrgan(GraftData inXenograftData,
-			Graft inXenograft) throws Exception {
+	private void populateOrgan(GraftData inGraftData,
+			Graft inGraft) throws Exception {
         
-        log.info("<XenograftManagerImpl> populateOrgan: ");        
+        log.info("<GraftManagerImpl> populateOrgan: ");        
 
         // Update loop handeled separately for conceptCode = 00000
-        if (inXenograftData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-            if(inXenograftData.getOrgan() != null && inXenograftData.getOrgan().length() >0 ) {
-                log.info("Organ update loop for text: " + inXenograftData.getOrgan()); 
-                inXenograft.setOrgan(new Organ());
-                inXenograft.getOrgan().setName(inXenograftData.getOrgan());   
-                inXenograft.getOrgan().setConceptCode(
+        if (inGraftData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
+            if(inGraftData.getOrgan() != null && inGraftData.getOrgan().length() >0 ) {
+                log.info("Organ update loop for text: " + inGraftData.getOrgan()); 
+                inGraft.setOrgan(new Organ());
+                inGraft.getOrgan().setName(inGraftData.getOrgan());   
+                inGraft.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS);     
             } else {
                 log.info("Clear previously entered organ text: " );
-                inXenograft.setOrgan(null); 
+                inGraft.setOrgan(null); 
             }
         } else {            
             // Using trees loop, new save loop and update loop
-            if (inXenograftData.getOrganTissueCode() != null && inXenograftData.getOrganTissueCode().length() > 0
-                    && inXenograftData.getOrganTissueName() != null && inXenograftData.getOrganTissueName().length() > 0) {
-                log.info("OrganTissueCode: " + inXenograftData.getOrganTissueCode());
-                log.info("OrganTissueName: " + inXenograftData.getOrganTissueName()); 
+            if (inGraftData.getOrganTissueCode() != null && inGraftData.getOrganTissueCode().length() > 0
+                    && inGraftData.getOrganTissueName() != null && inGraftData.getOrganTissueName().length() > 0) {
+                log.info("OrganTissueCode: " + inGraftData.getOrganTissueCode());
+                log.info("OrganTissueName: " + inGraftData.getOrganTissueName()); 
                 
                 log.info("OrganTissueCode() != null - getOrCreate method used");
                 // when using tree, organTissueName populates the organ name entry
                 Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
-                        inXenograftData.getOrganTissueCode(),
-                        inXenograftData.getOrganTissueName());
+                		inGraftData.getOrganTissueCode(),
+                		inGraftData.getOrganTissueName());
                 
                 log.info("theNewOrgan: " + theNewOrgan);
-                inXenograft.setOrgan(theNewOrgan); 
+                inGraft.setOrgan(theNewOrgan); 
             } 
             // Clear organ selection via GUI
-            if (inXenograftData.getOrgan() == null && inXenograftData.getOrganTissueCode().length() <1 ) {
+            if (inGraftData.getOrgan() == null && inGraftData.getOrganTissueCode().length() <1 ) {
                 log.info("Null out organ when cleared: " );
-                inXenograft.setOrgan(null);                 
+                inGraft.setOrgan(null);                 
 
             }
             // initial save text entry organ from GUI
-            if (inXenograftData.getOrgan() != null && inXenograftData.getOrgan().length() >0 ) {
+            if (inGraftData.getOrgan() != null && inGraftData.getOrgan().length() >0 ) {
                 // text entry loop = new save
-                log.info("Organ (initial text entry): " + inXenograftData.getOrgan()); 
-                inXenograft.setOrgan(new Organ());
-                inXenograft.getOrgan().setName(inXenograftData.getOrgan());                
-                inXenograft.getOrgan().setConceptCode(
+                log.info("Organ (initial text entry): " + inGraftData.getOrgan()); 
+                inGraft.setOrgan(new Organ());
+                inGraft.getOrgan().setName(inGraftData.getOrgan());                
+                inGraft.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS); 
-                log.info("New Organ: " + inXenograft.getOrgan().toString());
+                log.info("New Organ: " + inGraft.getOrgan().toString());
             }           
             
         } 
