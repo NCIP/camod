@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLineAction.java,v 1.15 2007-07-23 17:40:43 pandyas Exp $
+ * $Id: CellLineAction.java,v 1.16 2007-08-07 18:28:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/07/23 17:40:43  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.14  2005/11/09 00:17:26  georgeda
  * Fixed delete w/ constraints
  *
@@ -158,7 +161,7 @@ public final class CellLineAction extends BaseAction {
 			saveErrors(request, msg);
 
 		} catch (Exception e) {
-			log.error("Exception occurred creating Xenograft", e);
+			log.error("Exception occurred creating cell line", e);
 
 			// Encountered an error saving the model.
 			ActionMessages msg = new ActionMessages();
