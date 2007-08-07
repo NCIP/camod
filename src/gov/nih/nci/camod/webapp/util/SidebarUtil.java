@@ -31,7 +31,7 @@ public class SidebarUtil extends gov.nih.nci.camod.webapp.action.BaseAction {
 				return "subSearchMenu.jsp";
 			} 
 			else if ( 	jspName.equals("viewModelCharacteristics.jsp") || 
-						jspName.equals("viewTransplantGraft.jsp") || 
+						jspName.equals("viewGraft.jsp") || 
 						jspName.equals("viewGeneticDescription.jsp") || 
                         jspName.equals("viewInvivoDetails.jsp") ||
 						jspName.equals("viewPublications.jsp") ||

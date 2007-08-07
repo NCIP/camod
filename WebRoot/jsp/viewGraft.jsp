@@ -31,7 +31,7 @@
 			</tr>
 			       
 		<tr>
-			<td class="GreyBox"><b>Cell Line/Transplant:</b></td>
+			<td class="GreyBox"><b>Graft:</b></td>
 			<td class="GreyBoxRightEnd"><c:out value="${xt.nme}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		

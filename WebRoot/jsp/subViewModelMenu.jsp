@@ -195,7 +195,7 @@
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) {
 		%>
-		<a href="ViewModelAction.do?unprotected_method=populateTransplantGraft&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANT/GRAFT</a>	
+		<a href="ViewModelAction.do?unprotected_method=populateGraft&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANT/GRAFT</a>	
 	    <%} else { %>
 			TRANSPLANT/GRAFT
 		<%}%>

@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.36 2007-08-07 18:26:20 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.37 2007-08-07 19:49:46 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.36  2007/08/07 18:26:20  pandyas
+ *  Renamed to GRAFT as per VCDE comments
+ *
  *  Revision 1.35  2007/07/31 12:02:55  pandyas
  *  VCDE silver level  and caMOD 2.3 changes
  *
@@ -699,7 +702,7 @@ public class ViewModelAction extends BaseAction
      * @return
      * @throws Exception
      */
-    public ActionForward populateTransplantGraft(ActionMapping mapping,
+    public ActionForward populateGraft(ActionMapping mapping,
                                                      ActionForm form,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) throws Exception
@@ -707,7 +710,7 @@ public class ViewModelAction extends BaseAction
         setCancerModel(request);
         setComments(request, Constants.Pages.GRAFT);
 
-        return mapping.findForward("viewTransplantGraft");
+        return mapping.findForward("viewGraft");
     }
 
     /**
