@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.51 2007-07-31 12:01:20 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.52 2007-08-07 20:02:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.51  2007/07/31 12:01:20  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.50  2007/05/21 17:37:04  pandyas
  * Modified simple and adv search species drop down to pull from DB (approved model species only)
  *
@@ -920,8 +923,8 @@ public class NewDropdownUtil
             {
                 theRole = (Role) theRoles.get(0);
                 
-                // Defaults list to blank in the first position
-                theUserList.add(new DropdownOption(null, null));                 
+                // Defaults list to blank in the first position - validation does not work
+                //theUserList.add(new DropdownOption(null, null));                 
 
                 // Get the users for the role
                 Set<Party> theUsers = theRole.getPartyCollection();
