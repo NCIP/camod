@@ -5,7 +5,7 @@
 <%@ page buffer="32kb"%>
 <%@ page import="gov.nih.nci.camod.Constants" %>
 
-<!-- submitChangeAnimalModelState.jsp -->
+<!-- submitChangeCommentState.jsp -->
 
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 	<tr><td>
