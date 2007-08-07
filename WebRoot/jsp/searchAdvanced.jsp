@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.66 2007-07-31 12:00:09 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.67 2007-08-07 19:55:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.66  2007/07/31 12:00:09  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.65  2007/06/21 20:07:06  pandyas
  * Fix display of Zebrfish diagnosis drop down on adv search
  *
@@ -155,9 +158,8 @@
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
-<SCRIPT src="/camod/scripts/RoboHelp_CSH.js" type=text/javascript></SCRIPT>
-<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 <script language="JavaScript" src="scripts/global.js"></script>
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js"></script>
 <script type="text/javascript" src="js/ajaxtags-1.2-beta2.js"></script>
