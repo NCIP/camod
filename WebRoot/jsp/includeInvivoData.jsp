@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: includeInvivoData.jsp,v 1.9 2007-07-31 12:00:10 pandyas Exp $
+ * $Id: includeInvivoData.jsp,v 1.10 2007-08-07 18:23:38 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/07/31 12:00:10  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.8  2005/11/15 22:13:46  georgeda
  * Cleanup of drug screening
  *
@@ -61,4 +64,4 @@
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 </c:if>
-<!-- end invivo /xenograft data-->
+<!-- end invivo /graft data-->
