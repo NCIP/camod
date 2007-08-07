@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitTransplantGraft.jsp,v 1.1 2007-07-31 12:00:10 pandyas Exp $
+ * $Id: submitGraft.jsp,v 1.1 2007-08-07 19:36:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/07/31 12:00:10  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.55  2007/06/18 16:12:14  pandyas
  * Fixedmethod name for Zebrafish tree and made text entry enable
  *
@@ -152,7 +155,7 @@
 
 <html:form action="<%= actionName %>" focus="name">
 
-<!-- submitTranplantGraft.jsp -->
+<!-- submitGraft.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
@@ -167,13 +170,13 @@
 	</tr>
 	
 	<tr>
-		<td class="formTitle" height="20" colspan="3">Graft/Transplantation
+		<td class="formTitle" height="20" colspan="3">Graft
 			<camod:cshelp topic="xenograft_transplant_help" key="ignore" image="/camod/images/iconHelp.gif" text=""/></td>
 	</tr>
 
 	<tr>
 		<td class="formRequiredNotice" width="5">*</td>
-		<td class="formRequiredLabel"><label for="field1">Cell Line/Transplant:</label>
+		<td class="formRequiredLabel"><label for="field1">Name of Graft:</label>
 		</td>
 		<td class="formField">
 				<html:text styleClass="formFieldSized" property="name"  size="30" />

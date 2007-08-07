@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftPopulateAction.java,v 1.2 2007-08-07 18:27:50 pandyas Exp $
+ * $Id: GraftPopulateAction.java,v 1.3 2007-08-07 19:36:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/08/07 18:27:50  pandyas
+ * Renamed to GRAFT as per VCDE comments
+ *
  * Revision 1.1  2007/07/31 12:02:55  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -245,7 +248,7 @@ public class GraftPopulateAction extends BaseAction
         // following
         this.dropdown(request, response, graftForm);
 
-        return mapping.findForward("submitTransplantGraft");
+        return mapping.findForward("submitGraft");
 
     }
 
@@ -272,9 +275,9 @@ public class GraftPopulateAction extends BaseAction
         // setup dropdown menus
         this.dropdown(request, response, theForm);
 
-        log.info("<GraftPopulateAction dropdown> before return submitTransplantGraft ");
+        log.info("<GraftPopulateAction dropdown> before return submitGraft ");
 
-        return mapping.findForward("submitTransplantGraft");
+        return mapping.findForward("submitGraft");
 
     }
 
@@ -378,7 +381,7 @@ public class GraftPopulateAction extends BaseAction
         graftForm.setDonorEthinicityStrain("");
         graftForm.setOtherDonorEthinicityStrain("");
 
-        return mapping.findForward("submitTransplantGraft");
+        return mapping.findForward("submitGraft");
     }
 
 }

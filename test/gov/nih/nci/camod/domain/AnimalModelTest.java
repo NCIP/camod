@@ -445,23 +445,23 @@ public class AnimalModelTest extends TestCase {
 
   /**
    * Test of getXenograftCollection method, of class gov.nih.nci.camod.domain.AnimalModel.
-   */
+   
   public void testGetXenograftCollection() {
     System.out.println("testGetXenograftCollection");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
-  }
+  }*/
 
   /**
    * Test of getXenograftCollectionSorted method, of class gov.nih.nci.camod.domain.AnimalModel.
-   */
+   
   public void testGetXenograftCollectionSorted() {
     System.out.println("testGetXenograftCollectionSorted");
     
     // TODO add your test code below by replacing the default call to fail.
     fail("The test case is empty.");
-  }
+  }*/
 
   /**
    * Test of setXenograftCollection method, of class gov.nih.nci.camod.domain.AnimalModel.
