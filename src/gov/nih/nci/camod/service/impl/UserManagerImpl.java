@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: UserManagerImpl.java,v 1.29 2007-07-31 12:02:21 pandyas Exp $
+ * $Id: UserManagerImpl.java,v 1.30 2007-08-07 15:01:25 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.29  2007/07/31 12:02:21  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.28  2007/04/17 17:32:42  pandyas
  * Added debug for e-mail from LDAP - testing bug for PM e-mail
  *
@@ -112,10 +115,10 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 		log.debug("Entering UserManagerImpl");
 
 		try {
-            log.info("Entering main try");
+            log.debug("Entering main try");
 			theAuthenticationMgr = SecurityServiceProvider
 					.getAuthenticationManager(Constants.UPT_CONTEXT_NAME);
-            log.info("theAuthenticationMgrtoString(): " + theAuthenticationMgr.toString());
+            log.debug("theAuthenticationMgrtoString(): " + theAuthenticationMgr.toString());
 		} catch (CSException ex) {
 			log.error("Error getting authentication managers", ex);
 		} catch (Throwable e) {
@@ -135,7 +138,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @throws Exception
 	 */
 	public List getRolesForUser(String inUsername) throws Exception {
-		log.info("Entering getRolesForUser");
+		log.debug("Entering getRolesForUser");
 
 		List<String> theRoles = new ArrayList<String>();
 
@@ -268,19 +271,19 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 	 * @return the list of users associated with the role
 	 */
 	public String getEmailForUser(String inUsername) {
-		log.info("Entering getEmailForUser");
-		log.info("Username: " + inUsername);
+		log.debug("Entering getEmailForUser");
+		log.debug("Username: " + inUsername);
 
 		String theEmail = "";
 
 		try {
 			theEmail = LDAPUtil.getEmailAddressForUser(inUsername);
-			log.info("<getEmailForUser> theEmail: " + theEmail.toString());
+			log.debug("<getEmailForUser> theEmail: " + theEmail.toString());
 		} catch (Exception e) {
-			log.info("Could not fetch user from LDAP", e);
+			log.debug("Could not fetch user from LDAP", e);
 		}
 
-		log.info("Exiting getEmailForUser");
+		log.debug("Exiting getEmailForUser");
 
 		return theEmail;
 	}
@@ -334,7 +337,7 @@ public class UserManagerImpl extends BaseManager implements UserManager {
 
 			String theCoordinator = camodProperties
 					.getProperty("coordinator.username");
-			log.info("theCoordinator: " + theCoordinator.toString());
+			log.debug("theCoordinator: " + theCoordinator.toString());
 
 			theEmail = getEmailForUser(theCoordinator);
 		} catch (Exception e) {
