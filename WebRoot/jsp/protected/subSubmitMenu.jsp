@@ -1,8 +1,11 @@
 <%
 		/*
-		 * $Id: subSubmitMenu.jsp,v 1.60 2007-08-07 18:24:18 pandyas Exp $
+		 * $Id: subSubmitMenu.jsp,v 1.61 2007-08-07 19:30:16 pandyas Exp $
 		 *
 		 * $Log: not supported by cvs2svn $
+		 * Revision 1.60  2007/08/07 18:24:18  pandyas
+		 * Renamed to GRAFT as per VCDE comments
+		 *
 		 * Revision 1.59  2007/07/31 12:00:10  pandyas
 		 * VCDE silver level  and caMOD 2.3 changes
 		 *
@@ -764,7 +767,7 @@
 	<span class="submasterdiv" id="sub12"> <img
 		src="images/right_arrow.gif" border="0"> 
 		<html:link styleClass="subMenuRed" action="GraftPopulateAction.do?method=dropdown">
-			Enter Transplant/Graft
+			Enter Graft
 		</html:link><br>
 		<logic:iterate id="aGraft" name="graft_list" type="Graft">&nbsp;&nbsp;&nbsp;&nbsp;
 			
