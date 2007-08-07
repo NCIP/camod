@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.7 2007-07-31 12:00:10 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.8 2007-08-07 15:40:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/07/31 12:00:10  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.6  2006/11/16 13:04:47  pandyas
  * Modified IMG SRC location to include complete location (added /camod/...)
  *
@@ -153,9 +156,9 @@
 							  Search
 						  </html:submit>
 					  
-						  <html:reset styleClass="actionButton">
-						  	  <bean:message key="button.reset"/>
-		  				  </html:reset>						  
+						  <html:submit property="<%=Constants.Parameters.ACTION%>" styleClass="actionButton">
+						  	  <bean:message key="button.clear"/>
+						  </html:submit>						  
 						  
 				  		</html:form>			
 				  		</td>

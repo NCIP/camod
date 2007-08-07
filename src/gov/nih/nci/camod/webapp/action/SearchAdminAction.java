@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAdminAction.java,v 1.1 2007-07-31 12:02:55 pandyas Exp $
+ * $Id: SearchAdminAction.java,v 1.2 2007-08-07 15:36:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/07/31 12:02:55  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * 
  */
 
@@ -39,47 +42,41 @@ public final class SearchAdminAction extends BaseAction {
 
 		CurationAssignmentForm theForm = (CurationAssignmentForm)inForm;
 		theForm.toString();
-
-/*		
-		if (theForm.getModelId() != null && theForm.getModelId().length() > 0) {
-			log.info("<SearchAction> getModelId: " + theForm.getModelId());
-			inRequest.getSession().setAttribute(Constants.ADMIN_SEARCH_MODEL_ID,
-					theForm.getModelId());
-		}		
-*/
+		
 		String theAction = (String) inRequest
-				.getParameter(Constants.Parameters.ACTION);
+		.getParameter(Constants.Parameters.ACTION);
 		String theForward = "next";
 
 		// Clear the form
 		if ("Clear".equals(theAction)) {
-			theForm.reset(mapping, inRequest);
+			theForm.allFieldsReset();
 			theForward = "back";
-		}
-
-		// Do the search
-		try {
-				log.info("<SearchAction> In search loop: ");
-				AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
-
-				// Perform the search
-				List results = animalModelManager.searchAdmin(theForm);
-				log.info("SearchAdminAction results.size(): " + results.size());
-
-				// Set admin search results constant
-				inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_SEARCH_RESULTS,
-						results);
-				log.info("SearchAdminAction set results to Constant ");				
-
-			} catch (Exception e) {
-				log.info(e);
-				// Set the error message
-				ActionMessages msg = new ActionMessages();
-				msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-						"errors.admin.message"));
-				saveErrors(inRequest, msg);
+		} else {
+			// Do the search
+			try {
+					log.info("<SearchAction> In search loop: ");
+					AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
+	
+					// Perform the search
+					List results = animalModelManager.searchAdmin(theForm);
+					log.info("SearchAdminAction results.size(): " + results.size());
+	
+					// Set admin search results constant
+					inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_SEARCH_RESULTS,
+							results);
+					log.info("SearchAdminAction set results to Constant ");				
+	
+				} catch (Exception e) {
+					log.info(e);
+					// Set the error message
+					ActionMessages msg = new ActionMessages();
+					msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+							"errors.admin.message"));
+					saveErrors(inRequest, msg);
 			}
-
+		}
+	
 		return mapping.findForward(theForward);
-	} //end of execute
+		 
+	}//end of execute
 }  // end of class

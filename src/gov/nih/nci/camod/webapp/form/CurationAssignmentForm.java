@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: CurationAssignmentForm.java,v 1.4 2007-08-06 17:27:03 pandyas Exp $
+ * $Id: CurationAssignmentForm.java,v 1.5 2007-08-07 15:39:35 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/08/06 17:27:03  pandyas
+ * working on reest button on adminEdit screen
+ *
  * Revision 1.3  2007/07/31 12:02:06  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -115,7 +118,7 @@ public class CurationAssignmentForm extends BaseForm implements Serializable, Cu
 		this.species = species;
 	}
     
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
+    public void allFieldsReset() {
         myCurrentState = null;
         externalSource = null;
         modelDescriptor = null; 
