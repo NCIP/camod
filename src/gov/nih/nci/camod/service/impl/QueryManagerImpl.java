@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.71 2007-08-06 15:31:07 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.72 2007-08-07 15:35:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.71  2007/08/06 15:31:07  pandyas
+ * Modified admin model id search where clause to be an AND statement instead of a WHERE statement
+ *
  * Revision 1.70  2007/08/02 15:58:13  pandyas
  * Changed comment to comments and type to state as per VCDE review changes
  *
@@ -1645,7 +1648,7 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForCellLine(String inCellLineName) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct cell.abs_cancer_model_id FROM cell_line cell " + "WHERE cell.cell_line_id IN (SELECT c.cell_line_id FROM cell_line c " + "     WHERE upper(c.name) LIKE ?)";
+        String theSQLString = "SELECT distinct cell.abs_cancer_model_id FROM cell_line cell " + "WHERE cell.cell_line_id IN (SELECT c.cell_line_id FROM cell_line c " + "  WHERE upper(c.name) LIKE ?)";
 
         Object[] theParams = new Object[1];
         theParams[0] = "%" + inCellLineName + "%";
@@ -1695,7 +1698,7 @@ public class QueryManagerImpl extends BaseManager
     private String getModelIdsForTransientInterference(String inTransientInterference) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct m.abs_cancer_model_id " + "FROM transient_interference m WHERE upper(m.targeted_region) like ?";
+        String theSQLString = "SELECT distinct t.abs_cancer_model_id " + "FROM transient_interference t WHERE upper(t.targeted_region) like ?";
 
         String theSQLTheraputicApproach = "%";
         if (inTransientInterference != null && inTransientInterference.trim().length() > 0)
@@ -2100,6 +2103,7 @@ public class QueryManagerImpl extends BaseManager
 
         theWhereClause += " OR abs_cancer_model_id IN (" + getModelIdsForTransientInterference(inKeyword) + "))";
 
+        log.info("KeyWordSearchWhereClause: " + theWhereClause.toString());
         return theWhereClause;
     }
 
@@ -2116,7 +2120,7 @@ public class QueryManagerImpl extends BaseManager
         {
             String theHQLQuery = inFromClause + theWhereClause + inOrderByClause;
 
-            log.debug("HQL Query: " + theHQLQuery);
+            log.info("<keywordSearch> HQL Query: " + theHQLQuery);
 
             String theKeyword = "%" + inKeyword.toUpperCase() + "%";
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
