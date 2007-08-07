@@ -43,9 +43,13 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.72 2007-08-07 15:35:50 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.73 2007-08-07 18:43:31 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.72  2007/08/07 15:35:50  pandyas
+ * modified transient interference symbol - consistent
+ * working on keyword search where clause
+ *
  * Revision 1.71  2007/08/06 15:31:07  pandyas
  * Modified admin model id search where clause to be an AND statement instead of a WHERE statement
  *
@@ -1331,7 +1335,7 @@ public class QueryManagerImpl extends BaseManager
                                                     String inModelId) throws PersistenceException
     {
 
-        String theSQLString = "SELECT distinct xeno_inv.invivo_result_id FROM xenograft_invivo_result xeno_inv " + "WHERE xeno_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and xeno_inv.abs_cancer_model_id = ?";
+        String theSQLString = "SELECT distinct xeno_inv.invivo_result_id FROM graft_invivo_result xeno_inv " + "WHERE xeno_inv.invivo_result_id IN (SELECT ir.invivo_result_id FROM invivo_result ir, agent ag " + "     WHERE ir.agent_id = ag.agent_id and ag.nsc_number = ?) and xeno_inv.abs_cancer_model_id = ?";
 
         Object[] theParams = new Object[2];
         theParams[0] = inNSCNumber;

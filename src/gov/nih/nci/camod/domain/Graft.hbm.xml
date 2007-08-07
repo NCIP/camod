@@ -90,7 +90,7 @@
         	
         <!-- invivoResultCollection (one-to-many unidirectional) -->
         <set name="invivoResultCollection" 
-        	table="xenograft_invivo_result"
+        	table="graft_invivo_result"
         	inverse="false" 
         	lazy="true" 
         	cascade="all-delete-orphan"
