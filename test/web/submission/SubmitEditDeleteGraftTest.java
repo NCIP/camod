@@ -1,9 +1,13 @@
 /**
  * @author pandyas
  * 
- * $Id: SubmitEditDeleteGraftTest.java,v 1.1 2007-07-31 12:00:41 pandyas Exp $
+ * $Id: SubmitEditDeleteGraftTest.java,v 1.2 2007-08-08 16:04:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/07/31 12:00:41  pandyas
+ * VCDE silver level  changes
+ * Modified all names used for a new attribute
+ *
  * Revision 1.3  2006/04/27 15:08:52  pandyas
  * Modified while testing caMod 2.1
  *
@@ -55,9 +59,9 @@ public class SubmitEditDeleteGraftTest extends BaseModelNeededTest {
     public void testGraft() throws Exception {
     	navigateToModelForEditing(myModelName);
         
-        /* Find Transplant/Graft link to Submit */
+        /* Find Graft link to Submit */
         WebLink theLink = myWebConversation.getCurrentPage()
-                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Transplant/Graft");
+                .getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "Enter Graft");
         WebResponse theCurrentPage = theLink.click(); 
         assertCurrentPageContains("if graft type is not listed");
         WebForm theForm = theCurrentPage.getFormWithName("raftForm");
@@ -77,9 +81,9 @@ public class SubmitEditDeleteGraftTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully added a Graft");
         
         
-        /* Find Transplant/Graft link to Edit 
+        /* Find Graft link to Edit 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");        
-        assertNotNull("Unable to find link to edit the Transplant/Graft", theLink);        
+        assertNotNull("Unable to find link to edit the Graft", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if graft type is not listed");
         theForm = theCurrentPage.getFormWithName("graftForm");
@@ -98,9 +102,9 @@ public class SubmitEditDeleteGraftTest extends BaseModelNeededTest {
         assertCurrentPageContains("You have successfully edited a Graft.");      
         */
         
-        /* Find Transplant/Graft link to Delete 
+        /* Find Graft link to Delete 
         theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT, "ABCDEFG");
-        assertNotNull("Unable to find link to delete the Transplant/Graft", theLink);        
+        assertNotNull("Unable to find link to delete the Graft", theLink);        
         theCurrentPage = theLink.click();        
         assertCurrentPageContains("if graft type is not listed");
         theForm = theCurrentPage.getFormWithName("graftForm");               

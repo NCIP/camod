@@ -343,8 +343,8 @@
 			path="/jsp/viewTherapeuticApproaches.jsp"></forward>
 		
 		<forward
-			name="viewTransplantGraft"
-			path="/jsp/viewTransplantGraft.jsp"></forward>
+			name="viewGraft"
+			path="/jsp/viewGraft.jsp"></forward>
 		
 		<forward
 			name="viewTransientInterference"
@@ -519,8 +519,8 @@
 			path="/jsp/protected/submitTherapy.jsp"></forward>
 		
 		<forward
-			name="submitTransplantGraft"
-			path="/jsp/protected/submitTransplantGraft.jsp"></forward>
+			name="submitGraft"
+			path="/jsp/protected/submitGraft.jsp"></forward>
 		
 		<forward
 			name="submitViralTreatment"
@@ -914,9 +914,9 @@
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
-			path="/submitTransplantGraft"
+			path="/submitGraft"
 			type="org.apache.struts.actions.ForwardAction"
-			parameter="/jsp/protected/submitTransplantGraft.jsp">
+			parameter="/jsp/protected/submitGraft.jsp">
 			<set-property property="secure" value="false"/>
 		</action>
 		<action
@@ -1258,7 +1258,7 @@
         </forward>
         <forward 
     		name="Graft Page"
-    		path="/ViewModelAction.do?unprotected_method=populateTransplantGraft">
+    		path="/ViewModelAction.do?unprotected_method=populateGraft">
         </forward>
         <forward 
     		name="Transient Interference Page"
@@ -2189,7 +2189,7 @@
 	    <set-property property="secure" value="false" />
 	    <forward
             name="input"
-            path="/submitTransplantGraft.do">
+            path="/submitGraft.do">
         </forward>    	
     </action>
 
@@ -2554,8 +2554,7 @@
          path="/ChangeAnimalModelStatePopulateAction"  
          type="gov.nih.nci.camod.webapp.action.ChangeAnimalModelStatePopulateAction" 
          name="animalModelStateForm"
-         parameter="protected"
-         validate="true">
+         parameter="protected">
          <set-property property="secure" value="false" />
          <forward 
     		name="next"

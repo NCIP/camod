@@ -279,11 +279,11 @@
 	    </queries>
 	</query_group>
     <query_group>
-        <description>Graft / Transplant models</description>
+        <description>Models with Grafts </description>
 	    <queries>
 			<query>
-			 	<description>Graft / Transplant</description>
-			 	<key>Graft_Transplant_Query</key>
+			 	<description>Models with Grafts</description>
+			 	<key>Graft_Query</key>
 			 	<parameters>
 				    <parameter>
 				        <name>searchGraft</name>

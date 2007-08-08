@@ -1,9 +1,13 @@
 /**
  * @author pandyas
  * 
- * $Id: SearchPopulateGraftTest.java,v 1.1 2007-07-31 12:00:41 pandyas Exp $
+ * $Id: SearchPopulateGraftTest.java,v 1.2 2007-08-08 16:03:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/07/31 12:00:41  pandyas
+ * VCDE silver level  changes
+ * Modified all names used for a new attribute
+ *
  * Revision 1.5  2006/10/11 15:47:55  pandyas
  * changes while testing 2.1.1
  *
@@ -87,9 +91,9 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Transplant/Graft
+        // Adding a Graft
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Transplant/Graft");
+                                                                                  "Enter Graft");
 
         assertNotNull("Unable to find link to enter a Graft", theLink);
         WebResponse theCurrentPage = theLink.click();
@@ -165,9 +169,9 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Transplant/Graft
+        // Adding a Graft
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Transplant/Graft");
+                                                                                  "Enter Graft");
         assertNotNull("Unable to find link to enter a Graft", theLink);
         WebResponse theCurrentPage = theLink.click();
         assertCurrentPageContains("if graft type is not listed");
@@ -213,7 +217,7 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
 
         TestUtil.moveModelToEditedApproved(myModelName);
 
-        navigateToSpecificSearchPage(myModelName, "TRANSPLANT/GRAFT");
+        navigateToSpecificSearchPage(myModelName, "GRAFT");
 
         verifyValuesOnPage(theWebForm, theParamsToSkip);
     }
@@ -223,9 +227,9 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
 
         navigateToModelForEditing(myModelName);
 
-        // Adding a Transplant/Graft
+        // Adding a Graft
         WebLink theLink = myWebConversation.getCurrentPage().getFirstMatchingLink(WebLink.MATCH_CONTAINED_TEXT,
-                                                                                  "Enter Transplant/Graft");
+                                                                                  "Enter Graft");
         assertNotNull("Unable to find link to enter a Graft", theLink);
         WebResponse theCurrentPage = theLink.click();
         assertCurrentPageContains("if graft type is not listed");
@@ -261,7 +265,7 @@ public class SearchPopulateGraftTest extends BaseModelNeededTest
 
         TestUtil.moveModelToEditedApproved(myModelName);
 
-        navigateToSpecificSearchPage(myModelName, "TRANSPLANT/GRAFT");
+        navigateToSpecificSearchPage(myModelName, "GRAFT");
 
         verifyValuesOnPage(theWebForm, theParamsToSkip);
     }
