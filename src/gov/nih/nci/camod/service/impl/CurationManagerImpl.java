@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: CurationManagerImpl.java,v 1.7 2006-11-09 17:37:07 pandyas Exp $
+ *  $Id: CurationManagerImpl.java,v 1.8 2007-08-08 16:38:29 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.7  2006/11/09 17:37:07  pandyas
+ *  Commented out debug code
+ *
  *  Revision 1.6  2006/01/18 14:24:24  georgeda
  *  TT# 376 - Updated to use new Java 1.5 features
  *
@@ -45,7 +48,7 @@ public class CurationManagerImpl extends AbstractCurationManager
      */
     public static void main(java.lang.String[] args)
     {
-        CurationManager theCurationManager = new CurationManagerImpl("C:/dev/workspace/camod_dev/WebRoot/config/CurationConfig.xml");
+        CurationManager theCurationManager = new CurationManagerImpl("C:/dev/workspace/camod/WebRoot/config/CurationConfig.xml");
 
         AnimalModel theAnimalModel = new AnimalModel();
 

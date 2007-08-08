@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: TOCManager.java,v 1.2 2006-05-08 13:33:54 georgeda Exp $
+ *  $Id: TOCManager.java,v 1.3 2007-08-08 16:38:33 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2006/05/08 13:33:54  georgeda
+ *  Clean up warnings
+ *
  *  Revision 1.1  2005/10/20 19:28:58  georgeda
  *  Added TOC functionality
  *
@@ -150,7 +153,7 @@ public class TOCManager {
      * Test main
      */
     public static void main(java.lang.String[] args) {
-        TOCManager theTOCManager = new TOCManager("C:/dev/workspace/camod_dev/WebRoot/config/TOCQueryConfig.xml");
+        TOCManager theTOCManager = new TOCManager("C:/dev/workspace/camod/WebRoot/config/TOCQueryConfig.xml");
 
         List theResults = theTOCManager.process();
 
