@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.73 2007-08-07 18:43:31 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.74 2007-08-08 18:49:23 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.73  2007/08/07 18:43:31  pandyas
+ * Renamed to GRAFT as per VCDE comments
+ *
  * Revision 1.72  2007/08/07 15:35:50  pandyas
  * modified transient interference symbol - consistent
  * working on keyword search where clause
@@ -2402,7 +2405,7 @@ public class QueryManagerImpl extends BaseManager
             String theLastName = theTokenizer.nextToken(",").trim();
             String theFirstName = theTokenizer.nextToken().trim();
             
-            theWhereClause += " " + "AND am.id in (select l.abstractCancerModel from Log as l where l.submitter IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%'))";
+            theWhereClause += " " + "AND am.id in (select l.abstractCancerModel from Log as l where l.state = 'Editor-assigned'  AND l.submitter IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%'))";
         }        
 		
 		// Screener criteria
@@ -2412,7 +2415,7 @@ public class QueryManagerImpl extends BaseManager
             String theLastName = theTokenizer.nextToken(",").trim();
             String theFirstName = theTokenizer.nextToken().trim();
             
-           theWhereClause += " " + "AND am.id in (select l.abstractCancerModel from Log as l where l.submitter IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%' ))";
+           theWhereClause += " " + "AND am.id in (select l.abstractCancerModel from Log as l where l.state = 'Screener-assigned'  AND l.submitter IN (from Person as p where p.lastName like '%" + theLastName + "%' AND p.firstName like '%" + theFirstName + "%' ))";
         }       
         
         // Species criteria
