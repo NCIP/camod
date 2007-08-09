@@ -60,7 +60,7 @@ P.fA("MMHCC Repository","Submit%20and%20Edit%20Models.3.43.html");
 P.fA("Investigator","Submit%20and%20Edit%20Models.3.44.html");
 P.fA("IMSR","Submit%20and%20Edit%20Models.3.45.html");
 P.fA("ZFIN","Submit%20and%20Edit%20Models.3.46.html");
-P.fA("Transplant/Xenograft","Submit%20and%20Edit%20Models.3.47.html");
+P.fA("Graft","Submit%20and%20Edit%20Models.3.47.html");
 P.fA("Searching the caMOD Database","caMOD%20searches.4.1.html");
 P.fA("caMOD Database Search Overview","caMOD%20searches.4.2.html");
 P.fA("Types of caMOD Searches","caMOD%20searches.4.3.html");

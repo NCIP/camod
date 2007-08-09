@@ -5,6 +5,7 @@ x.t("camod","fall");
 x.t("camod","welcome");
 x.t("user","account");
 x.t("user","registered");
+x.t("categories","guest");
 x.t("new","user");
 x.t("getting","started");
 x.t("fall","two");
@@ -18,8 +19,7 @@ x.t("started","camod");
 x.t("registered","user");
 x.t("guest","user");
 x.t("login","page");
-x.t("categories:","guest");
 x.t("page","tasks");
 x.t("users","camod");
-x.t("two","categories:");
+x.t("two","categories");
 }

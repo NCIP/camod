@@ -1,17 +1,15 @@
 function FileData_Pairs(x)
 {
-x.t("camod.","what's");
 x.t("camod","camod");
 x.t("camod","what\u2019s");
 x.t("camod","getting");
+x.t("camod","what's");
 x.t("camod","login");
 x.t("describes","new");
 x.t("what\u2019s","new");
-x.t("new","camod.");
 x.t("new","camod");
 x.t("new","features");
 x.t("new","hypertext");
-x.t("new","features.");
 x.t("new","page");
 x.t("getting","started");
 x.t("link","learn");

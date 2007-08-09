@@ -9,7 +9,6 @@ x.t("table","details");
 x.t("once","search");
 x.t("drug","display");
 x.t("drug","screening");
-x.t("summary","table.");
 x.t("summary","table");
 x.t("type","search");
 x.t("listed","type");

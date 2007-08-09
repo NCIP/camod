@@ -7,7 +7,6 @@ x.t("camod","search");
 x.t("camod","database");
 x.t("table","contents");
 x.t("drug","screening");
-x.t("topics:","camod");
 x.t("mode","camod");
 x.t("mode","advanced");
 x.t("contents","search");
@@ -27,6 +26,7 @@ x.t("types","camod");
 x.t("section","includes");
 x.t("database","camod");
 x.t("database","search");
-x.t("following","topics:");
+x.t("topics","camod");
+x.t("following","topics");
 x.t("screening","search");
 }

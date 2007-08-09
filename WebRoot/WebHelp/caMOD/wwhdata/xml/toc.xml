@@ -52,7 +52,7 @@
     <i t="Transient Interference" l="41">
       <i t="Morpholinos" l="42" />
       <i t="siRNA" l="43">
-        <i t="siRNA Background" l="43#1160312" />
+        <i t="siRNA Background" l="43#1183921" />
         <i t="Entering or Editing siRNA Information" l="44" />
       </i>
     </i>
@@ -74,7 +74,7 @@
       <i t="IMSR" l="58" />
       <i t="ZFIN" l="59" />
     </i>
-    <i t="Transplant/Xenograft" l="60" />
+    <i t="Graft" l="60" />
   </i>
   <i t="Searching the caMOD Database" l="61">
     <i t="caMOD Database Search Overview" l="62">
@@ -85,14 +85,12 @@
       <i t="Combining Search Criteria" l="66" />
     </i>
     <i t="Advanced Search Mode" l="67">
-      <i t="Combining Search Criteria">
-        <i t="Combining Search Criteria" l="68" />
-      </i>
-      <i t="caMOD Search Results" l="69">
-        <i t="Saving a Search Query" l="70" />
-        <i t="Search Query History" l="71" />
-        <i t="Customizing Search Results" l="72" />
-      </i>
+      <i t="Combining Search Criteria" l="68" />
+    </i>
+    <i t="caMOD Search Results" l="69">
+      <i t="Saving a Search Query" l="70" />
+      <i t="Search Query History" l="71" />
+      <i t="Customizing Search Results" l="72" />
     </i>
     <i t="Drug Screening Search" l="73">
       <i t="In-Vivo Anti-tumor Screening Data">

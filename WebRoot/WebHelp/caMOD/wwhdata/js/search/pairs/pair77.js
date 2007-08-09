@@ -6,7 +6,7 @@ x.t("trials","populated");
 x.t("trials","pre-clinical");
 x.t("camod","database");
 x.t("drug","screening");
-x.t("stored","camod.");
+x.t("stored","camod");
 x.t("populated","data");
 x.t("pre-clinical","trials");
 x.t("search","in-vivo");
