@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.104 2007-07-31 12:04:18 pandyas Exp $
+ * $Id: Constants.java,v 1.105 2007-08-14 12:03:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.104  2007/07/31 12:04:18  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.103  2007/05/22 12:51:43  pandyas
  * added as work around until the EVS vocabularies are ready for Zebrafish
  *
@@ -661,6 +664,9 @@ public class Constants {
     // that display mgi, zfin, or rgd identifier - set in submitAction
     public static final String AMMODELSPECIESCOMMONNAME = "modelspeciescommonname";
     
+    // Used to compare AMMODELSPECIESCOMMONNAME to Zebrafish in EvsTreeUtil.java
+    public static final String ZEBRAFISH = "Zebrafish";
+    
     // This constants stores the donor species common name for the Graft screens 
     // set in GraftPopulateAction
     public static final String DONORSPECIESCOMMONNAME = "donorspeciescommonname";
@@ -1096,11 +1102,18 @@ public class Constants {
          * The namespace to fetch the concepts from
          */
         public static final String NAMESPACE = "NCI_Thesaurus";
+        
+        /**
+         * The namespace to fetch the concepts from
+         */
+        public static final String ZEBRAFISH_NAMESPACE = "Zebrafish";        
 
         /**
          * The tag used to get the display name
          */
         public static final String DISPLAY_NAME_TAG = "Display_Name";
+        
+        public static final String DISPLAY_NAME_TAG_LOWER_CASE = "display_name";        
 
         /**
          * The key for the URI in the camod.properties file

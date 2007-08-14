@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.5 2006-08-17 17:59:34 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.6 2007-08-14 12:03:59 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.5  2006/08/17 17:59:34  pandyas
+ *  Defect# 410: Externalize properties files - Code changes to get properties
+ *
  *  Revision 1.4  2006/04/21 13:42:12  georgeda
  *  Cleanup
  *
@@ -30,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -56,9 +60,11 @@ public class EvsTreeUtil
      */
     public static synchronized String getEVSPreferedDescription(String inConceptCode)
     {
-        log.trace("Entering getEVSPreferedDescription");
+        log.info("Entering getEVSPreferedDescription");
 
         String theDescription = "";
+        String EVSTreeNameSpace = "";
+        String DisplayNameTag = "";
 
         if (ourDescriptions.containsKey(inConceptCode))
         {
@@ -68,10 +74,27 @@ public class EvsTreeUtil
         {
             try
             {
+            	String modelSpecies = Constants.AMMODELSPECIESCOMMONNAME;
+        		log.info("modelSpecies: " + modelSpecies);
+            	// Define parameters for Zebrafish namespace
+            	if(modelSpecies.equals(Constants.ZEBRAFISH)){
+
+            		EVSTreeNameSpace = Constants.Evs.ZEBRAFISH_NAMESPACE;
+            		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
+            	//Define parameters for all NCI_Thesaurus namespace	
+            	} else {
+            		EVSTreeNameSpace = Constants.Evs.NAMESPACE;
+            		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
+            	}
+            	
+            	log.info("EVSTreeNameSpace: " + EVSTreeNameSpace);
+            	log.info("DisplayNameTag: " + DisplayNameTag);
+            	
+            	
                 ApplicationService theAppService = getApplicationService();
 
                 EVSQuery theConceptNameQuery = new EVSQueryImpl();
-                theConceptNameQuery.getConceptNameByCode(Constants.Evs.NAMESPACE, inConceptCode);
+                theConceptNameQuery.getConceptNameByCode(EVSTreeNameSpace, inConceptCode);
 
                 List theConceptNames = (List) theAppService.evsSearch(theConceptNameQuery);
 
@@ -81,14 +104,17 @@ public class EvsTreeUtil
                     String theDisplayName = (String) theConceptNames.get(0);
 
                     EVSQuery theDisplayNameQuery = new EVSQueryImpl();
-                    theDisplayNameQuery.getPropertyValues(Constants.Evs.NAMESPACE, theDisplayName, Constants.Evs.DISPLAY_NAME_TAG);
+                    //theDisplayNameQuery.getPropertyValues(Constants.Evs.NAMESPACE, theDisplayName, Constants.Evs.DISPLAY_NAME_TAG);
+                    theDisplayNameQuery.getPropertyValues(EVSTreeNameSpace, theDisplayName, DisplayNameTag);
 
                     // Should only be one
                     List theDisplayNameList = (List) theAppService.evsSearch(theDisplayNameQuery);
+                    log.info("theDisplayNameList.size: " + theDisplayNameList.size());
 
                     if (theDisplayNameList.size() > 0)
                     {
                         theDescription = (String) theDisplayNameList.get(0);
+                        log.info("theDescription: " + theDescription);                        
 
                         // Cache for next time
                         ourDescriptions.put(inConceptCode, theDescription);
@@ -105,6 +131,8 @@ public class EvsTreeUtil
 
         return theDescription;
     }
+    
+
 
     /**
      * Get the application service based on the properties file

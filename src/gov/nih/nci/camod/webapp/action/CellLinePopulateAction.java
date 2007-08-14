@@ -1,9 +1,13 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.15 2007-06-18 16:13:20 pandyas Exp $
+ * $Id: CellLinePopulateAction.java,v 1.16 2007-08-14 12:04:12 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/06/18 16:13:20  pandyas
+ * EVS preferred name does not work for Zebrafish tree so changed
+ * Will add this item to EVS gforge to fix, if possilbe
+ *
  * Revision 1.14  2007/06/13 20:20:24  pandyas
  * Copy built to dev for EVSTree project
  *
@@ -81,15 +85,15 @@ public class CellLinePopulateAction extends BaseAction {
             // simply display EVSPreferredDescription, unless concept code is '00000'
             if (cellLine.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
                 cellLineForm.setOrgan(cellLine.getOrgan().getName());
-                log.debug("cellLine.getOrgan().getName(): " + cellLine.getOrgan().getName());
+                log.info("cellLine.getOrgan().getName(): " + cellLine.getOrgan().getEVSPreferredDescription());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
-                log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());             
+                log.info("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());             
                 
             } else {
                 cellLineForm.setOrgan(cellLine.getOrgan().getName());
                 // getEVSPreferredDescription does not work for Zebrafish EVS tree 
-                //log.debug("cellLine.getOrgan().getEVSPreferredDescription(): " + cellLine.getOrgan().getEVSPreferredDescription());
+                log.info("cellLine.getOrgan().getEVSPreferredDescription(): " + cellLine.getOrgan().getEVSPreferredDescription());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
                 //log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());

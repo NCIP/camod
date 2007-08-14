@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.16 2007-04-09 12:37:09 pandyas Exp $
+ *  $Id: SubmitAction.java,v 1.17 2007-08-14 12:05:12 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.16  2007/04/09 12:37:09  pandyas
+ *  modified after caMOD 2.3 unit testing
+ *
  *  Revision 1.15  2007/03/26 12:02:30  pandyas
  *  caMOd 2.3 enhancements for Zebrafish support
  *
@@ -65,7 +68,7 @@ public class SubmitAction extends BaseAction {
         try {
             AnimalModel am = animalModelManager.get(modelID);
             String speciesName = am.getStrain().getSpecies().getCommonName();
-            log.info("setModelConstants inside try speciesName: " + speciesName);
+            log.info("setModelConstants for speciesName: " + speciesName);
             
             // Set animal model species up front for genetic description (mgi, zfin, or rgd id)
             request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, speciesName);            
