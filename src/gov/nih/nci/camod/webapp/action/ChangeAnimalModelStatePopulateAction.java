@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.12 2006-10-17 16:11:00 pandyas Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.13 2007-08-14 12:04:53 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.12  2006/10/17 16:11:00  pandyas
+ *  modified during development of caMOD 2.2 - various
+ *
  *  Revision 1.11  2006/08/17 18:06:57  pandyas
  *  Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -65,7 +68,8 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 		try {
 
 			// Get the attributes from the request
-			String theModelId = inRequest.getParameter(Constants.Parameters.MODELID);
+			/* Grab the current modelID from the session */
+			String theModelId = (String) inRequest.getSession().getAttribute(Constants.Parameters.MODELID);			
 			String theEvent = inRequest.getParameter(Constants.Parameters.EVENT);
 
 			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
