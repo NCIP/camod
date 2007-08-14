@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftPopulateAction.java,v 1.3 2007-08-07 19:36:13 pandyas Exp $
+ * $Id: GraftPopulateAction.java,v 1.4 2007-08-14 17:07:02 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/08/07 19:36:13  pandyas
+ * Removed reference to Transplant as per VCDE comments and after modification to object definition for CDE
+ *
  * Revision 1.2  2007/08/07 18:27:50  pandyas
  * Renamed to GRAFT as per VCDE comments
  *
@@ -213,18 +216,14 @@ public class GraftPopulateAction extends BaseAction
                 // since we are always querying from concept code (save and edit),
                 // simply display EVSPreferredDescription, unless concept code is '00000'
                 if (graft.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
-                    // getEVSPreferredDescription does not work for Zebrafish EVS tree
-                    //graftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
-                	graftForm.setOrgan(graft.getOrgan().getName());
+                    graftForm.setOrgan(graft.getOrgan().getEVSPreferredDescription());
                     log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
                     graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
                     log.info("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());           
                     
                 } else {
-                    // getEVSPreferredDescription does not work for Zebrafish EVS tree
-                    //graftForm.setOrgan(xeno.getOrgan().getEVSPreferredDescription());
-                	graftForm.setOrgan(graft.getOrgan().getName());
-                    log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
+                    graftForm.setOrgan(graft.getOrgan().getEVSPreferredDescription());
+                    log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getEVSPreferredDescription());
                     graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
                     log.info("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());
                 }
@@ -362,14 +361,18 @@ public class GraftPopulateAction extends BaseAction
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, graftForm.getDonorScientificName());
         
-        // Check if null - if user goes from species to empty this correctly redirects to screen   
-        if(graftForm.getDonorScientificName() != null && graftForm.getDonorScientificName().length() > 0){
-	        // Set Donor species to a constant to determine which organ tree displays 
-	        // using common name because Rat has two species
-
-	        Species species = SpeciesManagerSingleton.instance().getByName(graftForm.getDonorScientificName());
-	        theDonorSpecies = species.getCommonName();
-	        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
+        log.info("graftForm.getDonorScientificName(): " + graftForm.getDonorScientificName());
+        
+        // Check if null - if user goes from species to empty this correctly redirects to screen  
+        if (!graftForm.getDonorScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
+            if(graftForm.getDonorScientificName() != null && graftForm.getDonorScientificName().length() > 0){
+    	        // Set Donor species to a constant to determine which organ tree displays 
+    	        // using common name because Rat has two species
+    
+    	        Species species = SpeciesManagerSingleton.instance().getByName(graftForm.getDonorScientificName());
+    	        theDonorSpecies = species.getCommonName();
+    	        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
+            }  
         }
         request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, theDonorSpecies);
         
