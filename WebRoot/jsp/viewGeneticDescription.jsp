@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.54 2007-06-19 20:41:06 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.55 2007-08-14 17:08:41 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.54  2007/06/19 20:41:06  pandyas
+ * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
+ *
  * Revision 1.53  2007/05/07 16:47:58  pandyas
  * Fixed code to display link to zfin.org with zfinId
  *
@@ -712,19 +715,15 @@
             <td class="WhiteBox" width="35%"><b>Modification Types</b></td>
             <td class="WhiteBoxRightEnd" width="65%">
 				<c:forEach var="modType" items="${tm.modificationTypeCollection}">
-				    <li>
-						<camod:highlight>
-							<c:out value="${modType.name}" escapeXml="false"/>&nbsp;
-						</camod:highlight>
-					</li>	
+					<c:choose> 
+						<c:when test="${empty modType.name}">
+							<camod:highlight><c:out value="${modType.nameUnctrlVocab}" escapeXml="false"/></camod:highlight>
+						</c:when>
+						<c:otherwise>
+							<camod:highlight><c:out value="${modType.name}" escapeXml="false"/></camod:highlight>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
-				<c:if test="${not empty modType.nameUnctrlVocab}">&nbsp;
-				    <li>
-						<camod:highlight>
-							<c:out value="${modType.nameUnctrlVocab}" escapeXml="false"/>&nbsp;
-						</camod:highlight>
-					</li>	
-				</c:if>
             </td>
         </tr>
        <tr>
