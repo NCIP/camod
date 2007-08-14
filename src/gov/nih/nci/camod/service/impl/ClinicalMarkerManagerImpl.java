@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: ClinicalMarkerManagerImpl.java,v 1.7 2006-05-25 19:12:20 schroedn Exp $
+ * $Id: ClinicalMarkerManagerImpl.java,v 1.8 2007-08-14 17:07:42 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/05/25 19:12:20  schroedn
+ * Fixed check for 'Other'
+ *
  * Revision 1.6  2006/04/20 19:19:25  pandyas
  * Added 'Other' to field and fixed save for other clinical marker
  *
@@ -89,7 +92,7 @@ public class ClinicalMarkerManagerImpl extends BaseManager implements ClinicalMa
 
         if (inClinicalMarkerData.getOtherName() != null )
         {
-            inClinicalMarker.setName( Constants.Dropdowns.OTHER_OPTION );
+            inClinicalMarker.setName(null);
             inClinicalMarker.setNameUnctrlVocab(inClinicalMarkerData.getOtherName());            
         }
         else
