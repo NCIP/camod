@@ -2320,11 +2320,6 @@
 			</field>			
 		</form>
 		
-		<form name="AnimalModelStateForm">
-			<field property="myAssignedTo" depends="required">
-				<arg0 key="AnimalModelStateForm.myAssignedTo" />
-			</field>
-		</form>
-				
+		
 	</formset>
 </form-validation>
