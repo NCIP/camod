@@ -32,7 +32,7 @@
 			       
 		<tr>
 			<td class="GreyBox"><b>Graft:</b></td>
-			<td class="GreyBoxRightEnd"><c:out value="${xt.nme}" escapeXml="false"/>&nbsp;</td>
+			<td class="GreyBoxRightEnd"><c:out value="${xt.name}" escapeXml="false"/>&nbsp;</td>
 		</tr>
 		<tr>		
 			<td class="WhiteBox"><b>Donor Species</b></td>
