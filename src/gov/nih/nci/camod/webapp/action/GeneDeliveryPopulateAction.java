@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.20 2007-06-18 16:13:20 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.21 2007-08-14 17:05:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/06/18 16:13:20  pandyas
+ * EVS preferred name does not work for Zebrafish tree so changed
+ * Will add this item to EVS gforge to fix, if possilbe
+ *
  * Revision 1.19  2007/05/10 02:20:49  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  *
@@ -118,9 +122,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			if (gene.getOrgan() != null) {
 				log.info("gene.getOrgan(): " + gene.getOrgan().toString());
 				geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
-                geneDeliveryForm.setOrgan(gene.getOrgan().getName());
-                // getEVSPreferredDescription does not work for Zebrafish EVS tree
-				//geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
+				geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
 			}
 
 		}

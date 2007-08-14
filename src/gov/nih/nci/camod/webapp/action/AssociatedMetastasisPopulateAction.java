@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.14 2007-06-21 20:48:18 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.15 2007-08-14 17:06:17 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/06/21 20:48:18  pandyas
+ * The method getOrgan().getEVSPrefferedName does not work for Zebrafish - using getOrgan().getName(); until fixed
+ *
  * Revision 1.13  2007/06/13 12:10:15  pandyas
  * Modified for save of organ/diagnosis for each tree options
  *
@@ -106,9 +109,8 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
 	            log.debug("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());            	
             	
             } else {
-            	// getEVSPreferredDescription does not work for Zebrafish
-            	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getName());
-	            log.debug("associatedMetastasis.getOrgan().getName(): " + associatedMetastasis.getOrgan().getName());
+            	assocMetastasisForm.setOrgan(associatedMetastasis.getOrgan().getEVSPreferredDescription());
+	            log.debug("associatedMetastasis.getOrgan().getEVSPreferredDescription(): " + associatedMetastasis.getOrgan().getEVSPreferredDescription());
 	
 	            assocMetastasisForm.setOrganTissueCode(associatedMetastasis.getOrgan().getConceptCode());
 	            log.debug("OrganTissueCode: " + associatedMetastasis.getOrgan().getConceptCode());

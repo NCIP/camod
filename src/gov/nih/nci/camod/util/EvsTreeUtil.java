@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.6 2007-08-14 12:03:59 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.7 2007-08-14 17:05:02 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.6  2007/08/14 12:03:59  pandyas
+ *  Implementing EVSPreferredName for Zebrafish models
+ *
  *  Revision 1.5  2006/08/17 17:59:34  pandyas
  *  Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -33,7 +36,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -74,21 +76,24 @@ public class EvsTreeUtil
         {
             try
             {
-            	String modelSpecies = Constants.AMMODELSPECIESCOMMONNAME;
-        		log.info("modelSpecies: " + modelSpecies);
+                log.debug("inConceptCode: " + inConceptCode);                
+                
             	// Define parameters for Zebrafish namespace
-            	if(modelSpecies.equals(Constants.ZEBRAFISH)){
+                // Maybe a better way to do this, but I didn't want to send in HttpServletRequest everywhere
+            	if(inConceptCode.contains("ZFA:")){
+                    log.debug("Zebrafish modelSpecies");
 
             		EVSTreeNameSpace = Constants.Evs.ZEBRAFISH_NAMESPACE;
             		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG_LOWER_CASE;
             	//Define parameters for all NCI_Thesaurus namespace	
             	} else {
+                    log.debug("NOT Zebrafish modelSpecies");                    
             		EVSTreeNameSpace = Constants.Evs.NAMESPACE;
             		DisplayNameTag = Constants.Evs.DISPLAY_NAME_TAG;
             	}
             	
-            	log.info("EVSTreeNameSpace: " + EVSTreeNameSpace);
-            	log.info("DisplayNameTag: " + DisplayNameTag);
+            	log.debug("EVSTreeNameSpace: " + EVSTreeNameSpace);
+            	log.debug("DisplayNameTag: " + DisplayNameTag);
             	
             	
                 ApplicationService theAppService = getApplicationService();
@@ -109,7 +114,7 @@ public class EvsTreeUtil
 
                     // Should only be one
                     List theDisplayNameList = (List) theAppService.evsSearch(theDisplayNameQuery);
-                    log.info("theDisplayNameList.size: " + theDisplayNameList.size());
+                    log.debug("theDisplayNameList.size: " + theDisplayNameList.size());
 
                     if (theDisplayNameList.size() > 0)
                     {

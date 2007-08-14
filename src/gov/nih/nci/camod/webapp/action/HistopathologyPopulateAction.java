@@ -2,9 +2,13 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.16 2007-06-18 16:13:20 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.17 2007-08-14 17:06:09 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/06/18 16:13:20  pandyas
+ * EVS preferred name does not work for Zebrafish tree so changed
+ * Will add this item to EVS gforge to fix, if possilbe
+ *
  * Revision 1.15  2007/06/18 12:21:52  pandyas
  * Fixed update function - always has a concept code
  *
@@ -104,9 +108,8 @@ public class HistopathologyPopulateAction extends BaseAction {
 	            log.debug("OrganTissueCode: " + theHistopathology.getOrgan().getConceptCode());            	
             	
             } else {
-	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getName());
-                //getEVSPreferredDescription does not work for Zebrafish EVS tree
-	            //log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
+	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
+	            log.info("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
             }
             
@@ -127,11 +130,9 @@ public class HistopathologyPopulateAction extends BaseAction {
             		
             	} else {
             		// Concept code is not 00000, so get prefered name from EVS -broken for zebrafish
-	            	histopathologyForm.setDiagnosisName(disease.getName());
+	            	histopathologyForm.setDiagnosisName(disease.getEVSPreferredDescription());
 	            	histopathologyForm.setDiagnosisCode(disease.getConceptCode());
-                    // getEVSPreferredDescription does not work for Zebrafish EVS tree
-	            	//histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
-                    histopathologyForm.setTumorClassification(disease.getName());
+	            	histopathologyForm.setTumorClassification(disease.getEVSPreferredDescription());
             	}
             }
             

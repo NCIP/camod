@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.21 2007-08-01 18:06:25 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.22 2007-08-14 17:03:39 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/08/01 18:06:25  pandyas
+ * VCDE changes
+ *
  * Revision 1.20  2007/07/31 12:05:56  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -1297,9 +1300,7 @@ public class AnimalModelSearchResult implements Comparable
 
             for (Histopathology theHistopathology : theHistopathologySet)
             {
-            	// getOrgan().getEVSPreferredDescription does not work for Zebrafish organs so removed
-            	//String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
-                String theOrgan = theHistopathology.getOrgan().getName();
+            	String theOrgan = theHistopathology.getOrgan().getEVSPreferredDescription();
 
                 if (!theOrgans.contains(theOrgan))
                 {
@@ -1312,9 +1313,7 @@ public class AnimalModelSearchResult implements Comparable
 
                 for (Histopathology theMetastasis : theMetastasisSet)
                 {
-                	// getOrgan().getEVSPreferredDescription does not work for Zebrafish organs so removed
-                    //String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
-                	String theMetaOrgan = theMetastasis.getOrgan().getName();
+                    String theMetaOrgan = theMetastasis.getOrgan().getEVSPreferredDescription();
                     if (!theMetaSet.contains(theMetaOrgan))
                     {
                         theMetaSet.add(theMetaOrgan);
