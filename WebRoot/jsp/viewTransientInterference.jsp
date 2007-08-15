@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/04/04 13:26:46  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.6  2007/03/26 12:06:42  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -21,7 +24,7 @@
  * Changes for searching on transient interfaces
  *
  *
- * $Id: viewTransientInterference.jsp,v 1.7 2007-04-04 13:26:46 pandyas Exp $
+ * $Id: viewTransientInterference.jsp,v 1.8 2007-08-15 16:11:41 pandyas Exp $
  *
  */   
 %>
@@ -107,16 +110,16 @@
 			
 			<c:if test="${method.id == 1}">			
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Target Site</b></td>
-				<td class="resultsBoxGreyEnd">
+				<td class="resultsBoxWhite" width="25%"><b>Target Site</b></td>
+				<td class="resultsBoxWhiteEnd">
 					<camod:highlight><c:out value="${p.targetSite}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			
 			</c:if>
 			
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Visualization Ligands</b></td>
-				<td class="resultsBoxWhiteEnd">
+				<td class="resultsBoxGrey" width="25%"><b>Visualization Ligands</b></td>
+				<td class="resultsBoxGreyEnd">
 					<camod:highlight><c:out value="${p.visualLigandDisplayName}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
