@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.40  2007/06/25 16:35:09  pandyas
+ * Fixed typo that displayed histopathology units instead of metastasis units for age of onset and age of detection
+ *
  * Revision 1.39  2007/06/19 20:41:06  pandyas
  * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
  *
@@ -63,7 +66,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.40 2007-06-25 16:35:09 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.41 2007-08-15 16:16:39 pandyas Exp $
  *
  */   
 %>
@@ -207,31 +210,31 @@
 			</tr>
 			
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Detection</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxWhite" width="25%"><b>Age of Tumor Detection</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<camod:highlight><c:out value="${h.ageOfDetection}"/>&nbsp;<c:out value="${h.ageOfDetectionUnit}"/></camod:highlight>
 				</td>
 			</tr>						
 	
 			<tr>
-				<td class="resultsBoxWhite" width="25%">
+				<td class="resultsBoxGrey" width="25%">
 					<b>Average Weight of Tumor (mg)</b>
 				</td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxGreyEnd" width="75%">
 					<camod:highlight><c:out value="${h.weightOfTumor}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxWhite" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					 <camod:highlight><c:out value="${h.volumeOfTumor}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			
 
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Tumor Incidence over Lifetime (%)</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxGrey" width="25%"><b>Tumor Incidence over Lifetime (%)</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<camod:highlight><c:out value="${h.relationalOperation}"/>&nbsp;</camod:highlight>
 					<c:choose>
 						<c:when test = "${h.tumorIncidenceRate == '0'}">
@@ -247,29 +250,29 @@
 			</tr>
 
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxWhite" width="25%"><b>Survival Information</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<camod:highlight><c:out value="${h.survivalInfo}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>			
 
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxGrey" width="25%"><b>Macroscopic Description</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<camod:highlight><c:out value="${h.grossDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 	
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxWhite" width="25%"><b>Microscopic Description</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<camod:highlight><c:out value="${h.microscopicDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 	
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxGrey" width="25%"><b>Genetic Alterations found in the Tumor</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<camod:highlight><c:out value="${h.geneticAlteration.observation}" escapeXml="false"/>&nbsp;</camod:highlight>
 					<c:if test="${not empty h.geneticAlteration.methodOfObservation}">&nbsp;<br/>
 						Method - &nbsp;
@@ -279,14 +282,14 @@
 			</tr>
 				
 			<tr>
-				<td class="resultsBoxGrey" width="25%"><b>Comparative Data from other Species</b></td>
-				<td class="resultsBoxGreyEnd" width="75%">
+				<td class="resultsBoxWhite" width="25%"><b>Comparative Data from other Species</b></td>
+				<td class="resultsBoxWhiteEnd" width="75%">
 					<camod:highlight><c:out value="${h.comparativeData}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 			</tr>	
 			<tr>
-				<td class="resultsBoxWhite" width="25%"><b>Comment</b></td>
-				<td class="resultsBoxWhiteEnd" width="75%">
+				<td class="resultsBoxGrey" width="25%"><b>Comment</b></td>
+				<td class="resultsBoxGreyEnd" width="75%">
 					<camod:highlight><c:out value="${h.comments}" escapeXml="false" />&nbsp;</camod:highlight>
 				</td>
 			</tr>
@@ -294,8 +297,8 @@
 			<bean:define id="cmColl" name="h" property="clinicalMarkerCollection"/>
 			<c:if test="${not empty cmColl}">
 				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Clinical Markers</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxWhite" width="25%"><b>Clinical Markers</b></td>
+					<td class="resultsBoxWhiteEnd" width="75%">
 						<table summary="" cellpadding="7" cellspacing="0" border="0" align="left" width="90%">
 						    <tr>
 							    <td class="formTitle" width="65%"><b>Clinical Marker Name</b></td>
@@ -356,52 +359,52 @@
 				</tr>	
 				
 				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Age at Detection of Metastasis</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxWhite" width="25%"><b>Age at Detection of Metastasis</b></td>
+					<td class="resultsBoxWhiteEnd" width="75%">
 						<camod:highlight><c:out value="${m.ageOfDetection}"/>&nbsp;<c:out value="${m.ageOfDetectionUnit}"/></camod:highlight>
 				    </td>
 				</tr>						
 	
 				<tr>
-					<td class="resultsBoxWhite" width="25%">
+					<td class="resultsBoxGrey" width="25%">
 					<b>Average Weight of Tumor (mg)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxGreyEnd" width="75%">
 					    <camod:highlight><c:out value="${m.weightOfTumor}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxWhite" width="25%"><b>Average Volume of Tumor (mm<sup>3</sup>)</b></td>
+					<td class="resultsBoxWhiteEnd" width="75%">
 						 <camod:highlight><c:out value="${m.volumeOfTumor}"/>&nbsp;</camod:highlight>
 				    </td>
 			    </tr>			
 	
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Metastasis Incidence over Lifetime (%)</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxGrey" width="25%"><b>Metastasis Incidence over Lifetime (%)</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
 						<camod:highlight><c:out value="${m.relationalOperation}"/>&nbsp;</camod:highlight>
 						<camod:highlight><c:out value="${m.tumorIncidenceRate}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Survival Information</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxWhite" width="25%"><b>Survival Information</b></td>
+					<td class="resultsBoxWhiteEnd" width="75%">
 						<camod:highlight><c:out value="${m.survivalInfo}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>			
 	
 				<tr>
-					<td class="resultsBoxWhite" width="25%"><b>Macroscopic Description</b></td>
-					<td class="resultsBoxWhiteEnd" width="75%">
+					<td class="resultsBoxGrey" width="25%"><b>Macroscopic Description</b></td>
+					<td class="resultsBoxGreyEnd" width="75%">
 						<camod:highlight><c:out value="${m.grossDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 	
 				<tr>
-					<td class="resultsBoxGrey" width="25%"><b>Microscopic Description</b></td>
-					<td class="resultsBoxGreyEnd" width="75%">
+					<td class="resultsBoxWhite" width="25%"><b>Microscopic Description</b></td>
+					<td class="resultsBoxWhiteEnd" width="75%">
 						<camod:highlight><c:out value="${m.microscopicDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
