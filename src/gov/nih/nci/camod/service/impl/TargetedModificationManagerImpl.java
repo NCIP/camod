@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.30 2007-07-31 12:02:22 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.31 2007-08-15 16:00:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2007/07/31 12:02:22  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.29  2007/04/04 13:17:49  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -288,6 +291,8 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 
 		inTargetedModification.setComments(inTargetedModificationData
 				.getComments());
+        
+        inTargetedModification.setConstructSequence(inTargetedModificationData.getConstructSequence());
 
 		log.info("Exiting populateTargetedModification");
 	}

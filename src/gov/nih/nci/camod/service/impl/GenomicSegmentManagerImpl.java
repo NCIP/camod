@@ -1,7 +1,10 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.30 2007-07-31 12:02:29 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.31 2007-08-15 16:00:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.30  2007/07/31 12:02:29  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.29  2007/04/04 13:17:49  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -131,6 +134,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 		inGenomicSegment.setSegmentSize(inGenomicSegmentData.getSegmentSize());
 		inGenomicSegment.setCloneDesignator(inGenomicSegmentData
 				.getCloneDesignator());
+        inGenomicSegment.setConstructSequence(inGenomicSegmentData.getConstructSequence());
 
 		// SegmentType. Reuse if it's aready there, update otherwise.
 		SegmentType theSegmentType = null;
