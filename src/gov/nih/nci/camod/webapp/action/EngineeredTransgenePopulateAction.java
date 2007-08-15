@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.26 2007-07-31 12:02:55 pandyas Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.27 2007-08-15 16:01:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/07/31 12:02:55  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.25  2007/04/04 13:19:08  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -82,6 +85,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
             }
             // populate Name
             theEngineeredTransgeneForm.setName(theEngineeredTransgene.getName());
+            
+            // populate construct sequence
+            theEngineeredTransgeneForm.setConstructSequence(theEngineeredTransgene
+                                                    .getConstructSequence());            
 
             NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, "");
 
