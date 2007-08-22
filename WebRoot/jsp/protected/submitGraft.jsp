@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: submitGraft.jsp,v 1.1 2007-08-07 19:36:47 pandyas Exp $
+ * $Id: submitGraft.jsp,v 1.2 2007-08-22 13:59:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/08/07 19:36:47  pandyas
+ * Removed reference to Transplant as per VCDE comments and after modification to object definition for CDE
+ *
  * Revision 1.1  2007/07/31 12:00:10  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -303,7 +306,7 @@
 		<label for="field3">- if graft type is not listed, <br>then please select "Other" and then specify it below:</label>
 		<br>
 		<br>		
-			<html:select styleClass="formFieldSized" size="1" property="sourceType" onclick="chkOtherSourceType();">
+			<html:select styleClass="formFieldSized" size="1" property="sourceType" onclick="chkOtherSourceType(this);">
 				<html:options name="<%= Dropdowns.SOURCETYPEDROP %>" />	
 			</html:select>
 		</td>
@@ -463,7 +466,7 @@
 </html:form>
 
 <SCRIPT LANGUAGE="JavaScript">
-	chkOtherGraft();
+	chkOtherSourceType();
 	chkOtherStrain();
 	chkOtherAdminSite();
 	chkObservation();
