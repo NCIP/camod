@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.7 2007-08-14 17:05:02 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.8 2007-08-23 16:11:50 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.7  2007/08/14 17:05:02  pandyas
+ *  Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
+ *
  *  Revision 1.6  2007/08/14 12:03:59  pandyas
  *  Implementing EVSPreferredName for Zebrafish models
  *
@@ -76,7 +79,7 @@ public class EvsTreeUtil
         {
             try
             {
-                log.debug("inConceptCode: " + inConceptCode);                
+                log.info("inConceptCode: " + inConceptCode);                
                 
             	// Define parameters for Zebrafish namespace
                 // Maybe a better way to do this, but I didn't want to send in HttpServletRequest everywhere
@@ -93,8 +96,7 @@ public class EvsTreeUtil
             	}
             	
             	log.debug("EVSTreeNameSpace: " + EVSTreeNameSpace);
-            	log.debug("DisplayNameTag: " + DisplayNameTag);
-            	
+      	
             	
                 ApplicationService theAppService = getApplicationService();
 
