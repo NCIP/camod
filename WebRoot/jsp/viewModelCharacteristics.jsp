@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.45 2007-08-14 19:03:50 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.46 2007-08-23 17:20:30 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.45  2007/08/14 19:03:50  pandyas
+  *   formatted
+  *
   *   Revision 1.44  2007/06/26 18:15:41  pandyas
   *   Removed code to hide toolStrain for non-mouse species - this will show up for all models
   *
@@ -302,9 +305,9 @@
 									<c:when test="${av.stockNumber == '-1'}">
 							            <!-- Investigator from 2-tier. -->
 										<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
-										    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
+										    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">&nbsp;
 										</c:if>
-										<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>
+										<c:out value="${mdl.principalInvestigator.DisplayName}" escapeXml="false"/>&nbsp;
 										<c:if test="${mdl.principalInvestigator.emailAddress}">
 										    </a>
 										</c:if>	
@@ -314,7 +317,7 @@
 										<c:if test="${not empty av.principalInvestigator.emailAddress}">
 										    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
 										</c:if>
-										<c:out value="${av.principalInvestigator.name}" escapeXml="false"/>
+										<c:out value="${av.principalInvestigator.DisplayName}" escapeXml="false"/>
 										<c:if test="${av.principalInvestigator.emailAddress}">
 										    </a>
 										</c:if>	
