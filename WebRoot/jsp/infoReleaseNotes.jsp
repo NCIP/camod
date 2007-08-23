@@ -22,9 +22,9 @@
     
                              caMOD
                           Version 2.3
-                         June, 2007
+                         Sept, 2007
 
-       National Cancer Institute Center for Bioinformatics
+       National Cancer Institute's Center for Bioinformatics
 
 
 
@@ -42,7 +42,7 @@
 
 
 ================================================================
-    1.0 - caMOD Version 2.3 Introduction and History
+    1.0 caMOD Version 2.3 Introduction and History
 ================================================================
  
 
@@ -50,8 +50,7 @@
     system developed for the management and sharing of data of animal models. 
     caMOD features controlled vocabularies from a shared, publicly accessible metadata 
     repository (caDSR) and enterprise vocabulary services (EVS) from the National 
-    Cancer Institute.  caMOD database also features Application Programming 
-    Interfaces (APIs) for programmatic access to the data. 
+    Cancer Institute.  
 
     -- http://cancermodels.nci.nih.gov
 
@@ -65,8 +64,8 @@
 ================================================================
     2.0 Release History
 ================================================================
-    caMOD Version 2.3 (Iteration 1)
-    --	June 2007 
+    caMOD Version 2.3 
+    --	Sept 2007 
         
     caMOD Version 2.2
     --	November 30th 2006 
@@ -88,31 +87,31 @@
 ================================================================
 
 Expanded EVS vocabulary support
-- Update EVS Tree application to render additional species-specific vocabularies (Rat anatomy and disease and staining methods) (gforge entry #6378)
-- Upgrade EVSTree app to render anatomy and developmental stage vocabulary trees for Zebrafish from the DTS server (gforge entry #6379)
+- Render additional species-specific vocabularies (Rat anatomy, Diseases of Rats, Zebrafish anatomy, Zebrafish developmental stages, and staining methods) (gforge entry #6378, #6379, #4759, #4781)
 
-Improved functionality for submission and search with Zebrafish models:
-- ZEBRAFISH - genetic description pages - link to zfin.org for allele details or to Rat Genome Database (gforge entry #6776)
-- ZEBRAFISH - publication search page - need to link to zfin.org (gforge entry #6774)
+Add functionality for submission and search of Zebrafish and Rat models:
+- Link to zfin.org or to RGD (Rat Genome Database) for allele details on genetic description pages (gforge entry #6776)
+- Link to zfin.org or to RGD (Rat Genome Database) for publication references (gforge entry #6774)
 - Pages that use anatomy vocabulary trees need to show vocabularies depending on selected species (gforge entry #5897)
-- Add conditioning regimen dropdown to xenograft page (gforge entry #4797)
-- ZEBRAFISH - therapy page - add drop down list for developmental stage (gforge entry #4796)
+- Add drop down list for developmental stage to therapy page for zebrafish models (gforge entry #4796)
 - Add "small molecules" to chemical class list on therapy submission page (gforge entry #4795)
-- ZEBRAFISH - availability pages - add page for zfin, keep investigator page (gforge entry #4794)
-- ZEBRAFISH - histopathology page - make diagnosis field free text or used Hatem's list (gforge entry #4793)
-- ZEBRAFISH - add drop down list for delivery method to morpholino submission and search page (gforge entry #4792)
-- ZEBRAFISH - add drop down list for Target Site to morpholino submission and search page (gforge entry #4791)
-- ZEBRAFISH - add age drop down list to model characteristics submission and search page (gforge entry #4790)
-- ZEBRAFISH - anatomy vocabulary for histopathology page (gforge entry #4781)
+- Add page for zin.org to model availability section (gforge entry #4794)
+- Make diagnosis field on histopathology field free text and/or used Dr. Sabawaay's list for zebrafish models (gforge entry #4793)
+- Add drop down list for delivery method to morpholino submission and search page (gforge entry #4792)
+- Add drop down list for Target Site to morpholino submission and search page (gforge entry #4791)
+- Add age drop down list to model characteristics submission and search page for zebrafish entries (gforge entry #4790)
 
-Retrieve staining vocabulary from EVS
-- EVS Tree code added to Image section - utilize the staining vocabulary (gforge entry #4759)
-
-Simple and advanced search enhancements
+Other
+- Add conditioning regimen dropdown to xenograft page (gforge entry #4797)
 - Make species drop down list on simple and advanced search a dynamic drop down list depending on what model species have approved records (gforge entry #6148)
-
-Online Help
 - A new version of online help including a downloadable user guide (PDF file) has been updated. 
+
+Administration
+- Administration pages have additional filters (gforge entry #4784)
+
+NCICB Technology Stack Requirements (gforge entry #6779, 7079)
+- Upgrade to Jboss 4.0.5 from 4.0.2 
+- Upgrade to newer version of ANT for project
 
 
 The caMOD 2.1 Common Data Elements (CDEs) are available via caDSR 
@@ -122,12 +121,15 @@ The caMOD 2.1 Common Data Elements (CDEs) are available via caDSR
 ================================================================
     4.0 Defects Fixed Since Last Release
 ================================================================
-	
-Defect #5284:  	Fix MGI link on genetic description pages and at the same time fix existing data
-Defect #5267: 	MTB radiation data are not shown
-Defect #5259: 	Adv search for carcinogens does not include data from Jackson Lab
-Defect #5236: 	Fix Jax lab availability link and data - part 2
+
 Defect #5227: 	Customizing search results doesn't work when carcinogen is selected
+Defect #5236: 	Fix Jax lab availability link and data - part 2	
+Defect #5259: 	Adv search for carcinogens does not include data from Jackson Lab
+Defect #5267: 	MTB radiation data are not shown
+Defect #5284:  	Fix MGI link on genetic description pages and at the same time fix existing data
+Defect #6269:   	Corrected concept codes for rat and zebrafish on existing models now that the new vocabularies are available from EVS
+Defect #7099:   	Do not show human in species drop down list on model characteristics page
+   
 
 ================================================================
     5.0 Known Issues/Defects
@@ -147,11 +149,7 @@ Defect #5227: 	Customizing search results doesn't work when carcinogen is select
         After meeting with the caBio team, it was concluded that the development team 
         will need to eliminate lazy fetching forlibrary and tissue attributes 
         if we want to improve performance.
-        
-    4.  validation for the histopathology submission screen does not
-    	work for all four cases of vocabularies.
-    	
-         
+     
     Please report any defects found to application support.
 
 
@@ -182,13 +180,8 @@ Defect #5227: 	Customizing search results doesn't work when carcinogen is select
     NCICB Application Support
     --  http://ncicb.nci.nih.gov/NCICB/support
 
-
-    NCICB Download Center
-    --  http://ncicb.nci.nih.gov/download/
-
     caMOD
-    --  http://cancermodels.nci.nih.gov/
-    
+    --  http://cancermodels.nci.nih.gov/    
 </pre>
 
 											</td>
