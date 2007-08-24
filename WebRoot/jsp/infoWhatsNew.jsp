@@ -30,6 +30,112 @@
 																
 																<br>
 																
+<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
+																	<TBODY>
+																		<TR>
+																			<TD class="formTitleBlue" colspan="2" height="20">
+																				Release of caMOD 2.3 - September 20th, 2007
+																			</TD>
+																		</TR>
+																		<TR>
+																		<TR>
+																			<TD style="BORDER-LEFT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 1em; FONT-SIZE: 0.7em; FONT-FAMILY: verdana, arial, helvetica, sans-serif; BACKGROUND-COLOR: #cccccc" width="20%">
+																				Added Features
+																			</TD>
+																			<TD
+																				style="BORDER-LEFT: #5c5c5c 1px solid; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-BOTTOM: #5c5c5c 1px solid; BORDER-TOP: #5c5c5c 1px solid; PADDING-LEFT: 1em; FONT-SIZE: 0.7em; FONT-FAMILY: verdana, arial, helvetica, sans-serif; BACKGROUND-COLOR: #cccccc"
+																				width="80%">
+																				How to use the new feature?
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Expanded vocabulary support
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				Render additional vocabularies (Rat anatomy, Diseases of Rats, Zebrafish anatomy, Zebrafish developmental stages, and staining methods)
+																			</TD>
+																		</TR>
+																		
+																		
+																		
+																		
+																		
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Species-specific customization
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				caMOD supports now the submission and search of <strong>Zebrafish</strong> and <strong>Rat</strong> models. Depending on the selection of the model species the following features are customized<ul>
+<li> Use of species-specific vocabularies on the histopatholoy, cell lines, graft,and associated expression pages 
+<li> Link to zfin.org or to RGD (Rat Genome Database) for allele details on genetic description pages
+<li> Link to zfin.org or to RGD (Rat Genome Database) for publication references
+<li> Added page for zin.org to model availability section
+<li> Added age drop down list to model characteristics submission and search page for zebrafish entries
+<li> Added developmental stage vocabulary for zebrafish to therapeutic approaches page</li></ul>
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Staining Method
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				The image submission page was expanded and uses now the staining method vocabulary provided by NCI Thesaurus.
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Improved Search Functionality
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				The search pages utilize the species-specific vocabularies. The selection drop down list of model species on the search pages is created dynamically depending on which models have been approved during the review process.
+																			</TD>
+																		</TR>
+																		<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Administration
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				New filters were added to the administration pages to handle the growing number of model entries more efficiently. 
+																			</TD>
+																		</TR>
+
+<TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				Technology
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				caMOD was moved to the latest available technology stack.
+																			</TD>
+																		</TR><TR>
+																			<TD style="PADDING-LEFT: 0.8em; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff" width="20%">
+																				<strong>Acknowledgements</strong>
+																			</TD>
+																			<TD
+																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
+																				width="80%">
+																				The rat vocabularies were retrieved from <a href="http://www.item.fraunhofer.de/reni/rat_nomenclature/index.htm" target="_blank"><strong>RENI</strong></a>. We would like to thank the members of the <a href="http://www.item.fraunhofer.de/reni/rat_nomenclature/members.htm" target="_blank"><strong>Rat Nomenclature Reconciliation Subcommittee</strong></a> for their support and advice.<br>
+The zebrafish vocabularies were provided by <a href="http://www.zfin.org" target="_blank"><strong>ZFIN</strong></a>, the Zebrafish Model Organism Database, and rendered from <a href="http://www.bioontology.org" target="_blank"><strong>bioontology.org</strong></a>. <br>Our special thank you goes to <strong>Dr. Hatem Sabaawy</strong> who served as the domain expert on zebrafish models.<br>
+We would also like to thank our <strong>Enterprise Vocabulary Systems team</strong> for their work in converting and importing the vocabularies.
+																			</TD>
+																		</TR>
+
+																	</TBODY>
+																</TABLE>
+																<br>
+																
 																
 																<TABLE cellspacing="0" cellpadding="3" width="100%" align="center" summary="" border="0">
 																	<TBODY>
