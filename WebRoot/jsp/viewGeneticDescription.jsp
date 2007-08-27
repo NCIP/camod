@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewGeneticDescription.jsp,v 1.55 2007-08-14 17:08:41 pandyas Exp $
+ * $Id: viewGeneticDescription.jsp,v 1.56 2007-08-27 15:34:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.55  2007/08/14 17:08:41  pandyas
+ * Bug #8404:  The following fields do not display correctly the entered value for the "other" field:  Genetic description - targeted modification type
+ *
  * Revision 1.54  2007/06/19 20:41:06  pandyas
  * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
  *
@@ -417,7 +420,7 @@
 							<tr>
 								<td class="WhiteBox">
 									<camod:highlight>
-										<c:out value="${el.organ.name}" escapeXml="false"/>&nbsp;
+										<c:out value="${el.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 									</camod:highlight>		
 								</td>
 								<td class="WhiteBoxRightEnd">

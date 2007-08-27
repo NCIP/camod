@@ -66,7 +66,7 @@
 		<tr>
 			<td class="WhiteBox"><b>Organ/Tissue</b></td>
 			<td class="WhiteBoxRightEnd">
-					<c:out value="${xt.organ.name}" escapeXml="false"/>&nbsp;
+					<c:out value="${xt.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;
 			</td>
 		</tr>
 						

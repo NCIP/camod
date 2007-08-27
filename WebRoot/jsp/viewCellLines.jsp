@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCellLines.jsp,v 1.26 2007-06-19 20:41:06 pandyas Exp $
+ * $Id: viewCellLines.jsp,v 1.27 2007-08-27 15:34:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/06/19 20:41:06  pandyas
+ * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
+ *
  * Revision 1.25  2006/11/13 20:23:18  pandyas
  * Modified IMG SRC location to include complete location (added /camod/...)
  *
@@ -82,7 +85,7 @@
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 				<td class="resultsBoxGreyEnd">
-					<camod:highlight><c:out value="${p.organ.name}"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${p.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 				</td>
 			</tr>
 			<tr>

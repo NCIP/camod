@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: viewCarcinogenicInterventions.jsp,v 1.33 2007-06-19 20:41:06 pandyas Exp $
+ * $Id: viewCarcinogenicInterventions.jsp,v 1.34 2007-08-27 15:34:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.33  2007/06/19 20:41:06  pandyas
+ * The EVSPreferredDescription does not return results for Zebrafish vocabulary so the code was changed (This impacts organ.EVSPreferredDescription,  disease.EVSPreferredDescription, and developmentalStage) for all screens with trees
+ *
  * Revision 1.32  2007/05/16 16:42:18  pandyas
  * Removed two <br> after Radiation and after Gene Delivery to look better
  *
@@ -782,7 +785,7 @@
 					<camod:highlight><c:out value="${cd.geneInVirus}" escapeXml="false"/></camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="30%">
-					<camod:highlight><c:out value="${cd.organ.name}" escapeXml="false"/>&nbsp;</camod:highlight>
+					<camod:highlight><c:out value="${cd.organ.EVSPreferredDescription}" escapeXml="false"/>&nbsp;</camod:highlight>
 				</td>
 				<td class="<c:out value="${tdClass}"/>" width="20%">
 					<camod:highlight><c:out value="${cd.treatment.regimen}" escapeXml="false"/>&nbsp;</camod:highlight>
