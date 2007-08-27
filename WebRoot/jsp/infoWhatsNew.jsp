@@ -70,7 +70,7 @@
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				caMOD supports now the submission and search of <strong>Zebrafish</strong> and <strong>Rat</strong> models. Depending on the selection of the model species the following features are customized<ul>
+																				caMOD now supports the submission and search of <strong>Zebrafish</strong> and <strong>Rat</strong> models. Depending on the selection of the model species the following features are customized<ul>
 <li> Use of species-specific vocabularies on the histopatholoy, cell lines, graft,and associated expression pages 
 <li> Link to zfin.org or to RGD (Rat Genome Database) for allele details on genetic description pages
 <li> Link to zfin.org or to RGD (Rat Genome Database) for publication references
@@ -86,7 +86,7 @@
 																			<TD
 																				style="PADDING-LEFT: 0.8em; BORDER-RIGHT: #5c5c5c 1px solid; BORDER-LEFT: #5c5c5c 1px solid; FONT-SIZE: 0.8em; COLOR: #000000; BORDER-BOTTOM: #5c5c5c 1px solid; FONT-FAMILY: arial,helvetica,verdana,sans-serif; BACKGROUND-COLOR: #ffffff"
 																				width="80%">
-																				The image submission page was expanded and uses now the staining method vocabulary provided by NCI Thesaurus.
+																				The image submission page was expanded to use the staining method vocabulary provided by NCI Thesaurus.
 																			</TD>
 																		</TR>
 																		<TR>
