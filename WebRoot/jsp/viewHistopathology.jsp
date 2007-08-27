@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.42  2007/08/27 14:18:29  pandyas
+ * Reverted back to EVSPreferredDescription since this was fixed
+ *
  * Revision 1.41  2007/08/15 16:16:39  pandyas
  * bug #8374:  - Histopathology page - histopath & metastasis tables - background colors are off
  *
@@ -69,7 +72,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.42 2007-08-27 14:18:29 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.43 2007-08-27 15:29:04 pandyas Exp $
  *
  */   
 %>
@@ -208,14 +211,14 @@
 			<tr>
 				<td class="resultsBoxGrey" width="25%"><b>Age of Tumor Onset</b></td>
 				<td class="resultsBoxGreyEnd" width="75%">
-					<camod:highlight><c:out value="${h.ageOfOnset}"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/></camod:highlight>
+					<camod:highlight><c:out value="${h.ageOfOnset}" escapeXml="false"/>&nbsp;<c:out value="${h.ageOfOnsetUnit}"/></camod:highlight>
 				</td>
 			</tr>
 			
 			<tr>
 				<td class="resultsBoxWhite" width="25%"><b>Age of Tumor Detection</b></td>
 				<td class="resultsBoxWhiteEnd" width="75%">
-					<camod:highlight><c:out value="${h.ageOfDetection}"/>&nbsp;<c:out value="${h.ageOfDetectionUnit}"/></camod:highlight>
+					<camod:highlight><c:out value="${h.ageOfDetection}" escapeXml="false"/>&nbsp;<c:out value="${h.ageOfDetectionUnit}"/></camod:highlight>				
 				</td>
 			</tr>						
 	
