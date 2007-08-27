@@ -1,9 +1,12 @@
 /**
  *  @author georgeda 
  *  
- *  $Id: EvsTreeUtil.java,v 1.8 2007-08-23 16:11:50 pandyas Exp $  
+ *  $Id: EvsTreeUtil.java,v 1.9 2007-08-27 15:38:08 pandyas Exp $  
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.8  2007/08/23 16:11:50  pandyas
+ *  Removed extra code
+ *
  *  Revision 1.7  2007/08/14 17:05:02  pandyas
  *  Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
  *
@@ -65,7 +68,7 @@ public class EvsTreeUtil
      */
     public static synchronized String getEVSPreferedDescription(String inConceptCode)
     {
-        log.info("Entering getEVSPreferedDescription");
+        log.debug("Entering getEVSPreferedDescription");
 
         String theDescription = "";
         String EVSTreeNameSpace = "";
@@ -79,7 +82,7 @@ public class EvsTreeUtil
         {
             try
             {
-                log.info("inConceptCode: " + inConceptCode);                
+                log.debug("inConceptCode: " + inConceptCode);                
                 
             	// Define parameters for Zebrafish namespace
                 // Maybe a better way to do this, but I didn't want to send in HttpServletRequest everywhere
@@ -121,7 +124,7 @@ public class EvsTreeUtil
                     if (theDisplayNameList.size() > 0)
                     {
                         theDescription = (String) theDisplayNameList.get(0);
-                        log.info("theDescription: " + theDescription);                        
+                        log.debug("theDescription: " + theDescription);                        
 
                         // Cache for next time
                         ourDescriptions.put(inConceptCode, theDescription);

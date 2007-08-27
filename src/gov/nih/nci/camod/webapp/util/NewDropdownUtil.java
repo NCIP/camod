@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.52 2007-08-07 20:02:45 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.53 2007-08-27 15:41:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.52  2007/08/07 20:02:45  pandyas
+ * removed blank in editor and screener admin list until validation is worked out
+ *
  * Revision 1.51  2007/07/31 12:01:20  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -160,7 +163,6 @@ public class NewDropdownUtil
         //modified for species from DB
         if (inDropdownKey.equals(Constants.Dropdowns.SPECIESQUERYDROP))
         {
-        	log.info("New DropdownUtil loop with SPECIESQUERYDROP");
             theReturnList = getQueryOnlySpeciesList(inRequest, inFilter);
         }
         
@@ -300,7 +302,7 @@ public class NewDropdownUtil
             theReturnList = new ArrayList();
         }
 
-        log.info("Exiting NewDropdownUtil.getDatabaseDropdown");
+        log.debug("Exiting NewDropdownUtil.getDatabaseDropdown");
         return theReturnList;
     }
 
@@ -393,7 +395,7 @@ public class NewDropdownUtil
     protected static List getApprovedSpeciesList(HttpServletRequest inRequest,
                                          String inAddBlank) throws Exception
     {
-        log.info("Entering NewDropdownUtil.getApprovedSpeciesList");
+        log.debug("Entering NewDropdownUtil.getApprovedSpeciesList");
 
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
@@ -419,7 +421,7 @@ public class NewDropdownUtil
         // Sort the list in 'abc' order
         Collections.sort(theReturnList);
 
-        log.info("Exiting NewDropdownUtil.getApprovedSpeciesList");
+        log.debug("Exiting NewDropdownUtil.getApprovedSpeciesList");
         return theReturnList;
     }
 
@@ -433,7 +435,7 @@ public class NewDropdownUtil
     private static List getQueryOnlySpeciesList(HttpServletRequest inRequest,
                                                 String inAddBlank) throws Exception
     {
-        log.info("Entering NewDropdownUtil.getQueryOnlySpeciesList");
+        log.debug("Entering NewDropdownUtil.getQueryOnlySpeciesList");
 
         // Get values for dropdown lists for Species
         // for each Species, get it's commonName (scientificName)
@@ -456,7 +458,7 @@ public class NewDropdownUtil
                 }
             }
         }
-        log.info("Exiting getQueryOnlySpeciesList.size " + theReturnList.size());
+        log.debug("Exiting getQueryOnlySpeciesList.size " + theReturnList.size());
         return theReturnList;
     }
     
@@ -864,7 +866,7 @@ public class NewDropdownUtil
                                               String inWorkflow) throws Exception
     {
         List theStateList = new ArrayList(); 
-        log.info("Entering NewDropdownUtil.getCurationStatesList");
+        log.debug("Entering NewDropdownUtil.getCurationStatesList");
 
         // Get the curation manager workflow XML
         CurationManager theCurationManager = new CurationManagerImpl(inRequest.getSession().getServletContext().getRealPath("/") + inWorkflow);
@@ -886,7 +888,7 @@ public class NewDropdownUtil
                                               String inWorkflow) throws Exception
     {
         List theStateList = new ArrayList(); 
-        log.info("Entering NewDropdownUtil.getCurationStatesList");
+        log.debug("Entering NewDropdownUtil.getCurationStatesList");
 
         // Get the curation manager workflow XML
         CurationManager theCurationManager = new CurationManagerImpl(inRequest.getSession().getServletContext().getRealPath("/") + inWorkflow);
@@ -968,7 +970,7 @@ public class NewDropdownUtil
                                             String inRoleName) throws Exception
     {
 
-        log.info("Entering NewDropdownUtil.getUsersForSpecificRoleList");
+        log.debug("Entering NewDropdownUtil.getUsersForSpecificRoleList");
 
         List theUserList = new ArrayList();
         List<String> theUserNames = new ArrayList<String>();        
@@ -1001,7 +1003,7 @@ public class NewDropdownUtil
                     {
                         Person thePerson = (Person) theObject;
                         String thePersonName = thePerson.getDisplayName();
-                        log.info("thePerson in list: " + thePersonName);                        
+                        log.debug("thePerson in list: " + thePersonName);                        
                         theUserList.add(thePersonName);
                         //(new DropdownOption(thePerson.getDisplayName(), thePerson.getUsername()));
                     }

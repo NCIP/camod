@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.9 2007-07-31 12:02:55 pandyas Exp $
+ * $Id: SearchAction.java,v 1.10 2007-08-27 15:39:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/07/31 12:02:55  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.8  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -71,7 +74,7 @@ public final class SearchAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		log.info("<SearchAction> entered ");
+		log.debug("<SearchAction> entered ");
 
 		SearchForm theForm = new SearchForm();
 		SavedQuery resubmittedSavedQuery = null;
@@ -128,7 +131,7 @@ public final class SearchAction extends BaseAction {
 		}
 
 		if (theForm.getKeyword() != null && theForm.getKeyword().length() > 0) {
-			log.info("<SearchAction> Keyword: " + theForm.getKeyword());
+			log.debug("<SearchAction> Keyword: " + theForm.getKeyword());
 			request.getSession().setAttribute(Constants.KEYWORD_HIGHLIGHT,
 					theForm.getKeyword());
 		}
@@ -147,7 +150,7 @@ public final class SearchAction extends BaseAction {
 		else {
 
 			try {
-				log.info("<SearchAction> In search loop: ");
+				log.debug("<SearchAction> In search loop: ");
 				AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 
 				// Calculate the elasped time of search
