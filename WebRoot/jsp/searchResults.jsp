@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.27 2007-09-06 19:05:47 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.28 2007-09-06 19:09:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/09/06 19:05:47  pandyas
+ * Slight modification to force the newest jsp to build
+ *
  * Revision 1.26  2007/07/31 12:00:10  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -83,7 +86,7 @@
 	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
    	if ( resultColumns == null ) 
    	{
-   		resultColumns = new String[] {"Model Id", "Model Descriptor", "Tumor Sites", "Species"};   //default        
+   		resultColumns = new String[] { "Model Id", "Model Descriptor", "Tumor Sites", "Species" };   //default        
   	}  
   	
 	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 
@@ -256,7 +259,7 @@
 					    	System.out.println( "selectedColumnsToDisplay[" + i + "] = " + resultColumns[i] );
 					    	
 							if( resultColumns[i].equals("Model Id") ) { %>
-							     <display:column title="Model Id" sortable="true" sortable="true" >
+							     <display:column title="Model Id" sortable="true" headerClass="sortable" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
 							     </display:column>	 							
 							<% }					    	
