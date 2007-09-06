@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.6 2007-07-31 12:02:21 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.7 2007-09-06 17:02:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/07/31 12:02:21  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.5  2007/03/28 18:01:51  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -58,7 +61,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 	 *                when anything goes wrong.
 	 */
 	public void save(SavedQuery inSavedQuery) throws Exception {
-		log.debug("Entering QueryStorageManagerImpl.saveQuery");
+		log.debug("Entering SavedQueryManagerImpl.saveQuery");
 
 		// Save to db
 		super.save(inSavedQuery);
@@ -78,7 +81,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 	 */
 	public void buildSearchData(Set<SavedQueryAttribute> inSavedQueryAttribute,
 			SearchForm inSearchForm) throws Exception {
-		log.debug("Entering QueryStorageManagerImpl.buildSearchData");
+		log.debug("Entering SavedQueryManagerImpl.buildSearchData");
 
 		ResourceBundle theBundle = ResourceBundle
 				.getBundle("ApplicationResources_en");
@@ -289,7 +292,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 				.getBundle("ApplicationResources_en");
 
 		Set<SavedQueryAttribute> criteriaList = new HashSet<SavedQueryAttribute>();
-		log.info("SaveQueryAction.save criteriaList.size()"
+		log.info("SavedQueryManagerImpl criteriaList.size()"
 				+ criteriaList.size());
 
 		// Keyword search
@@ -576,7 +579,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 	 *                when anything goes wrong.
 	 */
 	public SavedQuery get(String id) throws Exception {
-		log.debug("In QueryStorageManagerImpl.get");
+		log.debug("In SavedQueryManagerImpl.get");
 		SavedQuery theSavedQuery = (SavedQuery) super.get(id, SavedQuery.class);
 		return theSavedQuery;
 	}
@@ -592,7 +595,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 	 *                when anything goes wrong.
 	 */
 	public List getAllByUsername(String userName) throws Exception {
-		log.debug("Entering QueryStorageManagerImpl.getAllByUsername");
+		log.debug("Entering SavedQueryManagerImpl.getAllByUsername");
 
 		List sqList = QueryManagerSingleton.instance().getQueriesByParty(
 				userName);
@@ -619,7 +622,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 	 *                when anything goes wrong.
 	 */
 	public List getSavedQueriesByUsername(String userName) throws Exception {
-		log.debug("Entering QueryStorageManagerImpl.getSavedQueriesByUsername");
+		log.debug("Entering SavedQueryManagerImpl.getSavedQueriesByUsername");
 		return QueryManagerSingleton.instance()
 				.getSavedQueriesByParty(userName);
 	}
@@ -635,7 +638,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 	 */
 	public void update(SavedQuery inSavedQuery) throws Exception {
 		// Save to db
-		log.debug("Entering QueryStorageManagerImpl.update");
+		log.debug("Entering SavedQueryManagerImpl.update");
 		super.save(inSavedQuery);
 	}
 
@@ -650,7 +653,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 	 */
 	public void remove(String id) throws Exception {
 		// delete from db
-		log.debug("Entering QueryStorageManagerImpl.remove");
+		log.debug("Entering SavedQueryManagerImpl.remove");
 		super.remove(id, SavedQuery.class);
 	}
 
