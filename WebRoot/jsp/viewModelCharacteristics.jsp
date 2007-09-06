@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.46 2007-08-23 17:20:30 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.47 2007-09-06 19:15:59 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.46  2007/08/23 17:20:30  pandyas
+  *   Added &nbsp; to make rows appear when no data
+  *
   *   Revision 1.45  2007/08/14 19:03:50  pandyas
   *   formatted
   *
@@ -307,7 +310,7 @@
 										<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
 										    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">&nbsp;
 										</c:if>
-										<c:out value="${mdl.principalInvestigator.DisplayName}" escapeXml="false"/>&nbsp;
+										<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>&nbsp;
 										<c:if test="${mdl.principalInvestigator.emailAddress}">
 										    </a>
 										</c:if>	
@@ -317,7 +320,7 @@
 										<c:if test="${not empty av.principalInvestigator.emailAddress}">
 										    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
 										</c:if>
-										<c:out value="${av.principalInvestigator.DisplayName}" escapeXml="false"/>
+										<c:out value="${av.principalInvestigator.displayName}" escapeXml="false"/>
 										<c:if test="${av.principalInvestigator.emailAddress}">
 										    </a>
 										</c:if>	
