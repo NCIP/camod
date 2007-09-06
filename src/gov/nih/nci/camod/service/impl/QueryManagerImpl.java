@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.75 2007-08-27 15:39:13 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.76 2007-09-06 19:35:36 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.75  2007/08/27 15:39:13  pandyas
+ * hide debug code printout
+ *
  * Revision 1.74  2007/08/08 18:49:23  pandyas
  * Added Screener-assigned and Editor-assigned to admin filter to limit query by current state
  *
@@ -2007,7 +2010,7 @@ public class QueryManagerImpl extends BaseManager
 
         if (inCurationAssignmentData.getModelId() != null && inCurationAssignmentData.getModelId().length() > 0)
         {
-            log.debug("Doing a model id search: " + inCurationAssignmentData.getModelId());
+            log.info("Doing a model id search: " + inCurationAssignmentData.getModelId());
             theAnimalModels = adminModelIdSearch(theFromClause, inCurationAssignmentData);
         }
         else
@@ -2150,7 +2153,7 @@ public class QueryManagerImpl extends BaseManager
     private List adminModelIdSearch(String inFromClause, CurationAssignmentData inCurationAssignmentData) throws Exception
      {
 
-        log.debug("adminModelIdSearch Entered");
+        log.info("adminModelIdSearch Entered");
         
         String theWhereClause = buildAdminModelIdSearchWhereClause(inCurationAssignmentData);
         log.debug("theWhereClause: " + theWhereClause);
@@ -2161,7 +2164,7 @@ public class QueryManagerImpl extends BaseManager
         {
             String theHQLQuery = inFromClause + theWhereClause;
 
-            log.debug("HQL Query: " + theHQLQuery);
+            log.info("HQL Query: " + theHQLQuery);
 
             Query theQuery = HibernateUtil.getSession().createQuery(theHQLQuery);
             theAnimalModels = theQuery.list();
@@ -2437,17 +2440,17 @@ public class QueryManagerImpl extends BaseManager
     private String buildAdminModelIdSearchWhereClause(CurationAssignmentData inCurationAssignmentData) throws Exception
     {
     	String theWhereClause = "";
-        log.debug("<buildAdminCriteriaSearchWhereClause> following Characteristics:" 
+        log.info("<buildAdminCriteriaSearchWhereClause> following Characteristics:" 
         		+ "\n\t  ModelId: " + inCurationAssignmentData.getModelId()); 
         
         // ModelId criteria
         if (inCurationAssignmentData.getModelId() != null && inCurationAssignmentData.getModelId().length() > 0)
         {
-        	log.debug("inCurationAssignmentData.getCurrentState() != null loop");
-        	theWhereClause += " " + "AND am.id LIKE '%" + inCurationAssignmentData.getModelId().trim() + "%' ";
+        	log.info("inCurationAssignmentData.getCurrentState() != null loop");
+        	theWhereClause += " " + "AND am.id = '%" + inCurationAssignmentData.getModelId().trim() + "%' ";
         }        
         
-		log.debug("buildAdminModelIdSearchWhereClause theWhereClause: " + theWhereClause.toString());
+		log.info("buildAdminModelIdSearchWhereClause theWhereClause: " + theWhereClause.toString());
         return theWhereClause;
 
     }       
