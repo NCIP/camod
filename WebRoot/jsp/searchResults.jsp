@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchResults.jsp,v 1.26 2007-07-31 12:00:10 pandyas Exp $
+ * $Id: searchResults.jsp,v 1.27 2007-09-06 19:05:47 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/07/31 12:00:10  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.25  2006/11/17 17:33:22  pandyas
  * #480 - move MTB icon in front of the model descriptor in search results list
  *
@@ -80,7 +83,7 @@
 	String[] resultColumns = ( String[] ) request.getSession().getAttribute( Constants.SEARCHRESULTCOLUMNS );
    	if ( resultColumns == null ) 
    	{
-   		resultColumns = new String[] { "Model Id", "Model Descriptor", "Tumor Sites", "Species" };   //default        
+   		resultColumns = new String[] {"Model Id", "Model Descriptor", "Tumor Sites", "Species"};   //default        
   	}  
   	
 	//String noSaveOption = request.getParameter( "noSaveOption" );  	  	 
@@ -250,10 +253,10 @@
 				     
 					<%
 					    for (int i = 0; i < resultColumns.length; i++) {
-					    	//System.out.println( "selectedColumnsToDisplay[" + i + "] = " + resultColumns[i] );
+					    	System.out.println( "selectedColumnsToDisplay[" + i + "] = " + resultColumns[i] );
 					    	
 							if( resultColumns[i].equals("Model Id") ) { %>
-							     <display:column title="Model Id" sortable="true" headerClass="sortable" >
+							     <display:column title="Model Id" sortable="true" sortable="true" >
 							         <camod:highlight><c:out escapeXml="false" value="${row.modelId}"/></camod:highlight>
 							     </display:column>	 							
 							<% }					    	
