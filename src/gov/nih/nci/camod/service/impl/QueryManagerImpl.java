@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.76 2007-09-06 19:35:36 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.77 2007-09-07 15:11:58 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.76  2007/09/06 19:35:36  pandyas
+ * Modified LIKE to = for model id admin query
+ *
  * Revision 1.75  2007/08/27 15:39:13  pandyas
  * hide debug code printout
  *
@@ -2447,7 +2450,7 @@ public class QueryManagerImpl extends BaseManager
         if (inCurationAssignmentData.getModelId() != null && inCurationAssignmentData.getModelId().length() > 0)
         {
         	log.info("inCurationAssignmentData.getCurrentState() != null loop");
-        	theWhereClause += " " + "AND am.id = '%" + inCurationAssignmentData.getModelId().trim() + "%' ";
+        	theWhereClause += " " + "AND am.id = " + inCurationAssignmentData.getModelId().trim();
         }        
         
 		log.info("buildAdminModelIdSearchWhereClause theWhereClause: " + theWhereClause.toString());
