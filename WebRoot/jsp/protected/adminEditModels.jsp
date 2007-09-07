@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.9 2007-09-07 16:10:55 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.10 2007-09-07 16:44:08 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/09/07 16:10:55  pandyas
+ * Modified button label for model id search in admin edit models filter
+ *
  * Revision 1.8  2007/08/07 15:40:05  pandyas
  * Fixed clear button on adminEditModels.jsp
  *
@@ -184,13 +187,6 @@
  	    <display:column title="No." >
  	        <c:out value="${row_rowNum}"/>
  	    </display:column> 
- 	    <display:column title="Duplicate" >
-	             <center>
-	             	<c:set var="dupLink" value="return confirm('Are you sure you want to duplicate this record (${row.modelDescriptor})?');"/>   
-	                <c:set var="uri" value="/camod/DuplicateAdminAnimalModelAction.do?method=duplicate&aModelID=${row.modelId}"/>
-	                <a href='<c:out value="${uri}"/>' onclick='<c:out value="${dupLink}"/>' ><IMG src="/camod/images/dupRecord.gif" border=0></a>  
-	       	     </center>     
- 	    </display:column>
 		<display:column href="/camod/SubmitAction.do?method=setModelConstants&" paramId="aModelID" paramProperty="id" title="Model Descriptor" >
 			<c:out escapeXml="false" value="${row.modelDescriptor}"/>
 		</display:column>
