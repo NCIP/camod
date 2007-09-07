@@ -1,8 +1,11 @@
 <%
 /*
- * $Id: adminEditModels.jsp,v 1.8 2007-08-07 15:40:05 pandyas Exp $
+ * $Id: adminEditModels.jsp,v 1.9 2007-09-07 16:10:55 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/08/07 15:40:05  pandyas
+ * Fixed clear button on adminEditModels.jsp
+ *
  * Revision 1.7  2007/07/31 12:00:10  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -76,7 +79,7 @@
 				<td class="formField" colspan="4">			
 					<html:text styleClass="formFieldSized" styleId="modelId" property="modelId" size="20"/>
 					 &nbsp;&nbsp;
-                	<input class="actionButton" type="submit" value="Search" />	
+                	<input class="actionButton" type="submit" value="Search by Model Id" />	
 				</td>
 			</tr>
 			
