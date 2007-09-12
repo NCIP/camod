@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.13 2007-08-14 12:04:53 pandyas Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.14 2007-09-12 19:09:21 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.13  2007/08/14 12:04:53  pandyas
+ *  Working on model id display on search results screen
+ *
  *  Revision 1.12  2006/10/17 16:11:00  pandyas
  *  modified during development of caMOD 2.2 - various
  *
@@ -64,22 +67,36 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 		log.info("Entering ChangeAnimalModelStatePopulateAction.execute");
 
 		String theForward = "next";
+        String theModelId = null;
+        AnimalModel theAnimalModel = null;
 
 		try {
 
 			// Get the attributes from the request
 			/* Grab the current modelID from the session */
-			String theModelId = (String) inRequest.getSession().getAttribute(Constants.Parameters.MODELID);			
+			theModelId = (String) inRequest.getSession().getAttribute(Constants.Parameters.MODELID);	
+            log.info("theModelId: " + theModelId);
 			String theEvent = inRequest.getParameter(Constants.Parameters.EVENT);
-
+            log.info("theEvent: " + theEvent);
+            
 			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-			AnimalModel theAnimalModel = theAnimalModelManager.get(theModelId);
+            log.info("here1: " ); 
+            
+            if (theModelId != null){            
+                theAnimalModel = theAnimalModelManager.get(theModelId);
+            } else {
+                theModelId = inRequest.getParameter("aModelID");
+                log.info("theModelId from getParameter: " + theModelId); 
+                theAnimalModel = theAnimalModelManager.get(theModelId);
+            }
+            log.info("here2: " ); 
 
 			// Set up the form
 			AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
 			theForm.setEvent(theEvent);
-			theForm.setModelId(theModelId);
+            theForm.setModelId(theModelId);
 			theForm.setModelDescriptor(theAnimalModel.getModelDescriptor());
+            log.info("here3: " );            
 
 			// Null out the list in case it had been already set
 			inRequest.getSession().setAttribute(Constants.Dropdowns.USERSFORROLEDROP, null);
