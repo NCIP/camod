@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionManagerImpl.java,v 1.8 2007-06-20 18:05:09 pandyas Exp $
+ * $Id: AssociatedExpressionManagerImpl.java,v 1.9 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/06/20 18:05:09  pandyas
+ * Fixed save and edit for organ
+ *
  * Revision 1.7  2007/06/13 20:20:09  pandyas
  * Modified code for EVS trees after formal testing
  *
@@ -77,7 +80,7 @@ public class AssociatedExpressionManagerImpl extends BaseManager implements Asso
         // Using trees loop 
         // Update loop handeled separately for conceptCode = 00000
         if (inAssociatedExpressionData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-            log.info("Organ update loop for text: " + inAssociatedExpressionData.getOrgan()); 
+            log.debug("Organ update loop for text: " + inAssociatedExpressionData.getOrgan()); 
             inExpressionFeature.setOrgan(new Organ());
             inExpressionFeature.getOrgan().setName(inAssociatedExpressionData.getOrgan());   
             inExpressionFeature.getOrgan().setConceptCode(
@@ -85,20 +88,20 @@ public class AssociatedExpressionManagerImpl extends BaseManager implements Asso
         } else {            
             // Using trees loop, new save loop and update loop
             if (inAssociatedExpressionData.getOrganTissueCode() != null && inAssociatedExpressionData.getOrganTissueCode().length() > 0) {
-                log.info("OrganTissueCode: " + inAssociatedExpressionData.getOrganTissueCode());
-                log.info("OrganTissueName: " + inAssociatedExpressionData.getOrganTissueName()); 
+                log.debug("OrganTissueCode: " + inAssociatedExpressionData.getOrganTissueCode());
+                log.debug("OrganTissueName: " + inAssociatedExpressionData.getOrganTissueName()); 
                 
-                log.info("OrganTissueCode() != null - getOrCreate method used");
+                log.debug("OrganTissueCode() != null - getOrCreate method used");
                 // when using tree, organTissueName populates the organ name entry
                 Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
                         inAssociatedExpressionData.getOrganTissueCode(),
                         inAssociatedExpressionData.getOrganTissueName());
                 
-                log.info("theNewOrgan: " + theNewOrgan);
+                log.debug("theNewOrgan: " + theNewOrgan);
                 inExpressionFeature.setOrgan(theNewOrgan); 
             } else {
                 // text entry loop = new save
-                log.info("Organ (text): " + inAssociatedExpressionData.getOrgan()); 
+                log.debug("Organ (text): " + inAssociatedExpressionData.getOrgan()); 
                 inExpressionFeature.setOrgan(new Organ());
                 inExpressionFeature.getOrgan().setName(inAssociatedExpressionData.getOrgan());                
                 inExpressionFeature.getOrgan().setConceptCode(

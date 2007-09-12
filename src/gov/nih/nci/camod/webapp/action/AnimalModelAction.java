@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelAction.java,v 1.24 2007-07-23 17:40:42 pandyas Exp $
+ * $Id: AnimalModelAction.java,v 1.25 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/07/23 17:40:42  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.23  2007/04/04 13:21:00  pandyas
  * Added reset for animal model species common name in edit (also in save) method
  *
@@ -147,7 +150,7 @@ public final class AnimalModelAction extends BaseAction {
 			// save the model
 			theAnimalModelManager.save(theAnimalModel);
 
-			log.info("New model created with id: " + theAnimalModel.getId());
+			log.debug("New model created with id: " + theAnimalModel.getId());
 
 			// Setup global constants to use for submission / editing process
 			request.getSession().setAttribute(Constants.MODELID,
@@ -313,7 +316,7 @@ public final class AnimalModelAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.info("<AnimalModelAction duplicate> modelID="
+		log.debug("<AnimalModelAction duplicate> modelID="
 				+ request.getParameter("aModelID"));
 
 		String theForward = "duplicatesuccessful";
@@ -330,7 +333,7 @@ public final class AnimalModelAction extends BaseAction {
 			AnimalModel theDuplicatedModel = animalModelManager
 					.duplicate(animalModel);
 
-			log.info("Duplicated model id: " + theDuplicatedModel.getId());
+			log.debug("Duplicated model id: " + theDuplicatedModel.getId());
 
 		} catch (Exception e) {
 
@@ -361,7 +364,7 @@ public final class AnimalModelAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.info("<AnimalModelAction Delete> modelID="
+		log.debug("<AnimalModelAction Delete> modelID="
 				+ request.getParameter("aModelID"));
 
 		String theForward = "modeldeleted";
@@ -406,7 +409,7 @@ public final class AnimalModelAction extends BaseAction {
 	public ActionForward returnUserModels(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
-		log.info("<AnimalModelAction returnUserModels> Entering... ");
+		log.debug("<AnimalModelAction returnUserModels> Entering... ");
 
 		AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 

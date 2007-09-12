@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: OrganManagerImpl.java,v 1.10 2006-05-08 13:33:10 georgeda Exp $
+ * $Id: OrganManagerImpl.java,v 1.11 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/05/08 13:33:10  georgeda
+ * Clean up warnings
+ *
  * Revision 1.9  2006/04/21 13:41:50  georgeda
  * Cleanup
  *
@@ -178,7 +181,7 @@ public class OrganManagerImpl extends BaseManager implements OrganManager
     public Organ getOrCreate(String inConceptCode,
                              String inOrganName) throws Exception
     {
-        log.info("<OrganManagerImpl> Entering getOrCreate");
+        log.debug("<OrganManagerImpl> Entering getOrCreate");
 
         Organ theQBEOrgan = new Organ();
         theQBEOrgan.setConceptCode(inConceptCode);

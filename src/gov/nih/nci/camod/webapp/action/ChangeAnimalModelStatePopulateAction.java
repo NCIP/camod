@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.14 2007-09-12 19:09:21 pandyas Exp $
+ *  $Id: ChangeAnimalModelStatePopulateAction.java,v 1.15 2007-09-12 19:36:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.14  2007/09/12 19:09:21  pandyas
+ *  Added if statement to check for model_id from GUI - this used to work
+ *
  *  Revision 1.13  2007/08/14 12:04:53  pandyas
  *  Working on model id display on search results screen
  *
@@ -64,7 +67,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
 			HttpServletResponse inResponse) throws Exception {
 
-		log.info("Entering ChangeAnimalModelStatePopulateAction.execute");
+		log.debug("Entering ChangeAnimalModelStatePopulateAction.execute");
 
 		String theForward = "next";
         String theModelId = null;
@@ -75,33 +78,33 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 			// Get the attributes from the request
 			/* Grab the current modelID from the session */
 			theModelId = (String) inRequest.getSession().getAttribute(Constants.Parameters.MODELID);	
-            log.info("theModelId: " + theModelId);
+            log.debug("theModelId: " + theModelId);
 			String theEvent = inRequest.getParameter(Constants.Parameters.EVENT);
-            log.info("theEvent: " + theEvent);
+            log.debug("theEvent: " + theEvent);
             
 			AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
-            log.info("here1: " ); 
+            log.debug("here1: " ); 
             
             if (theModelId != null){            
                 theAnimalModel = theAnimalModelManager.get(theModelId);
             } else {
                 theModelId = inRequest.getParameter("aModelID");
-                log.info("theModelId from getParameter: " + theModelId); 
+                log.debug("theModelId from getParameter: " + theModelId); 
                 theAnimalModel = theAnimalModelManager.get(theModelId);
             }
-            log.info("here2: " ); 
+            log.debug("here2: " ); 
 
 			// Set up the form
 			AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
 			theForm.setEvent(theEvent);
             theForm.setModelId(theModelId);
 			theForm.setModelDescriptor(theAnimalModel.getModelDescriptor());
-            log.info("here3: " );            
+            log.debug("here3: " );            
 
 			// Null out the list in case it had been already set
 			inRequest.getSession().setAttribute(Constants.Dropdowns.USERSFORROLEDROP, null);
 
-			log.info("<ChangeAnimalModelStatePopulateAction> The model id: " + theModelId + " and event: " + theEvent);
+			log.debug("<ChangeAnimalModelStatePopulateAction> The model id: " + theModelId + " and event: " + theEvent);
 
 			// Setting the action. This is used to customize the jsp display
 			if (theEvent.equals(Constants.Admin.Actions.ASSIGN_SCREENER)) {
@@ -174,7 +177,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				
 			} else if (theEvent.equals(Constants.Admin.Actions.INACTIVATE)) {
 
-				log.info("<ChangeAnimalModelStatePopulateAction> Inside inactive loop - the event is: " + theEvent);				
+				log.debug("<ChangeAnimalModelStatePopulateAction> Inside inactive loop - the event is: " + theEvent);				
 				// Assign to the coordinator
 				Properties camodProperties = new Properties();
 				String camodPropertiesFileName = null;
@@ -197,7 +200,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 				
 				String theCoordinator = camodProperties.getProperty("coordinator.username");
 				theForm.setAssignedTo(theCoordinator);
-				log.info("<ChangeAnimalModelStatePopulateAction> setting the coordinator to: " + theCoordinator);
+				log.debug("<ChangeAnimalModelStatePopulateAction> setting the coordinator to: " + theCoordinator);
 				
 				inRequest.setAttribute("action", "Inactivating ");
 			} 
@@ -215,7 +218,7 @@ public class ChangeAnimalModelStatePopulateAction extends BaseAction {
 
 			theForward = "failure";
 		}
-		log.info("Exiting ChangeAnimalModelStatePopulateAction.execute");
+		log.debug("Exiting ChangeAnimalModelStatePopulateAction.execute");
 
 		return inMapping.findForward(theForward);
 	}

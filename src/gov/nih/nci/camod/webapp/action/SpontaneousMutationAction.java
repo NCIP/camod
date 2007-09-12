@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpontaneousMutationAction.java,v 1.11 2007-07-23 17:38:26 pandyas Exp $
+ * $Id: SpontaneousMutationAction.java,v 1.12 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/07/23 17:38:26  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.10  2007/04/04 13:19:07  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -57,7 +60,7 @@ public class SpontaneousMutationAction extends BaseAction {
         
         SpontaneousMutationForm spontaneousMutationForm = (SpontaneousMutationForm) form;
         
-        log.info("<SpontaneousMutationAction edit> following Characteristics:" + "\n\t name: "
+        log.debug("<SpontaneousMutationAction edit> following Characteristics:" + "\n\t name: "
                 + spontaneousMutationForm.getName() + "\n\t getMgiId: "
                 + spontaneousMutationForm.getMgiId() + "\n\t getRgdId: "
                 + spontaneousMutationForm.getRgdId()+ "\n\t getZfinId: "
@@ -88,7 +91,7 @@ public class SpontaneousMutationAction extends BaseAction {
 
                 spontaneousMutationManager.remove(aSpontaneousMutationID, theAnimalModel);
 
-                log.info("SpontaneousMutation deleted");
+                log.debug("SpontaneousMutation deleted");
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("spontaneousmutation.delete.successful"));
@@ -99,7 +102,7 @@ public class SpontaneousMutationAction extends BaseAction {
                 SpontaneousMutation theSpontaneousMutation = spontaneousMutationManager.get(aSpontaneousMutationID);
                 spontaneousMutationManager.update(spontaneousMutationForm, theSpontaneousMutation);
 
-                log.info("SpontaneousMutation edited");
+                log.debug("SpontaneousMutation edited");
 
                 // Add a message to be displayed in submitOverview.jsp saying
                 // you've
@@ -143,7 +146,7 @@ public class SpontaneousMutationAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<SpontaneousMutationAction save> following Characteristics:" + "\n\t name: "
+        log.debug("<SpontaneousMutationAction save> following Characteristics:" + "\n\t name: "
                 + spontaneousMutationForm.getName() + "\n\t getMgiId: " + spontaneousMutationForm.getMgiId()
                 + "\n\t getRgdId: "
                 + spontaneousMutationForm.getRgdId()+ "\n\t getZfinId: "
@@ -161,7 +164,7 @@ public class SpontaneousMutationAction extends BaseAction {
 
             theAnimalModelManager.addGeneticDescription(theAnimalModel, spontaneousMutationForm);
 
-            log.info("New SpontaneousMutation created");
+            log.debug("New SpontaneousMutation created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

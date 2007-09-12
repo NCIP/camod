@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ModificationTypeManagerImpl.java,v 1.5 2006-04-20 18:11:51 pandyas Exp $
+ * $Id: ModificationTypeManagerImpl.java,v 1.6 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/20 18:11:51  pandyas
+ * Cleaned up modificationType save of Other in DB
+ *
  * Revision 1.4  2006/04/20 14:06:40  pandyas
  * changed Modification Type to getOrCreate
  *
@@ -73,7 +76,7 @@ public class ModificationTypeManagerImpl extends BaseManager implements Modifica
     public ModificationType getOrCreate(String inName,
                                         String inOtherName) throws Exception
     {
-        log.info("<ModificationTypeImpl> Entering getOrCreate");
+        log.debug("<ModificationTypeImpl> Entering getOrCreate");
 
         ModificationType theQBEModType = new ModificationType();
 

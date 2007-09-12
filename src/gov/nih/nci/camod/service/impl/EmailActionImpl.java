@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: EmailActionImpl.java,v 1.23 2007-07-31 12:02:28 pandyas Exp $
+ * $Id: EmailActionImpl.java,v 1.24 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/07/31 12:02:28  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.22  2006/10/17 16:13:46  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -112,9 +115,9 @@ public class EmailActionImpl extends BaseCurateableAction
     public void execute(Map inArgs,
                         Curateable inObject)
     {
-        log.info("<EmailActionImpl> Entering execute");
+        log.debug("<EmailActionImpl> Entering execute");
 
-        log.info("<EmailActionImpl> Arguments: " + inArgs);
+        log.debug("<EmailActionImpl> Arguments: " + inArgs);
 
         if (inArgs.containsKey(Constants.FORMDATA))
         {

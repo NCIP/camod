@@ -1,8 +1,11 @@
 /**
  *
- * $Id: DevelopmentalStageManagerImpl.java,v 1.1 2007-05-16 12:29:10 pandyas Exp $
+ * $Id: DevelopmentalStageManagerImpl.java,v 1.2 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/05/16 12:29:10  pandyas
+ * Added developmental stage evs tree to Therapy when species is Zebrafsih
+ *
  * 
  */
 
@@ -118,7 +121,7 @@ public class DevelopmentalStageManagerImpl extends BaseManager implements Develo
     public DevelopmentalStage getOrCreate(String inConceptCode,
                              String inName) throws Exception
     {
-        log.info("<DevelopmentalStageManagerImpl> Entering getOrCreate");
+        log.debug("<DevelopmentalStageManagerImpl> Entering getOrCreate");
 
         DevelopmentalStage theQBEStage = new DevelopmentalStage();
         theQBEStage.setConceptCode(inConceptCode);

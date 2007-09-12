@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CellLineAction.java,v 1.16 2007-08-07 18:28:53 pandyas Exp $
+ * $Id: CellLineAction.java,v 1.17 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/08/07 18:28:53  pandyas
+ * fixed error message - typo
+ *
  * Revision 1.15  2007/07/23 17:40:43  pandyas
  * Fixed typo in word occurred
  *
@@ -152,7 +155,7 @@ public final class CellLineAction extends BaseAction {
 
 			theAnimalModelManager.addCellLine(theAnimalModel, cellLineForm);
 
-			log.info("New Cell Line created");
+			log.debug("New Cell Line created");
 
 			// Add a message to be displayed in submitOverview.jsp saying you've
 			// created a new model successfully

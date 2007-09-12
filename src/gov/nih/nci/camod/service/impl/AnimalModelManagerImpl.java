@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelManagerImpl.java,v 1.84 2007-07-31 12:02:28 pandyas Exp $
+ * $Id: AnimalModelManagerImpl.java,v 1.85 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.84  2007/07/31 12:02:28  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.83  2007/04/30 20:09:13  pandyas
  * Implemented species specific vocabulary trees from EVSTree
  * Added code to sendMail for other disease for Zebrafish
@@ -335,7 +338,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
      
     public List getAll(String inKey, int pageSize) throws Exception
     {
-        log.info("In AnimalModelManagerImpl.getAll(key, pageSize");
+        log.debug("In AnimalModelManagerImpl.getAll(key, pageSize");
 
         return QueryManagerSingleton.instance().getModelsBetweenRange(inKey, pageSize);        
     }    
@@ -412,7 +415,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
                                        Person inPerson) throws Exception
     {
 
-        log.info("In AnimalModelManagerImpl.getAllByStateForPerson");
+        log.debug("In AnimalModelManagerImpl.getAllByStateForPerson");
 
         return QueryManagerSingleton.instance().getModelsByStateForPerson(inState, inPerson);
     }
@@ -600,7 +603,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List<AnimalModelSearchResult> search(SearchData inSearchData) throws Exception
     {
 
-        log.info("In search");
+        log.debug("In search");
         List theAnimalModels = QueryManagerSingleton.instance().searchForAnimalModels(inSearchData);
 
         List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
@@ -611,7 +614,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
             theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
         }
-        log.info("In search - theDisplayList.size(): " + theDisplayList.size());
+        log.debug("In search - theDisplayList.size(): " + theDisplayList.size());
         return theDisplayList;
     }
     
@@ -623,9 +626,9 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
     public List<AnimalModelSearchResult> searchAdmin(CurationAssignmentData inCurationAssignmentData) throws Exception
     {
 
-        log.info("In searchAdmin");
+        log.debug("In searchAdmin");
         List theAnimalModels = QueryManagerSingleton.instance().searchForAdminAnimalModels(inCurationAssignmentData);
-        log.info("<searchAdmin> theAnimalModels.size(): " + theAnimalModels.size());
+        log.debug("<searchAdmin> theAnimalModels.size(): " + theAnimalModels.size());
 
         List<AnimalModelSearchResult> theDisplayList = new ArrayList<AnimalModelSearchResult>();
 
@@ -635,7 +638,7 @@ public class AnimalModelManagerImpl extends BaseManager implements AnimalModelMa
             AnimalModel theAnimalModel = (AnimalModel) theAnimalModels.get(i);
             theDisplayList.add(new AnimalModelSearchResult(theAnimalModel));
         }
-        log.info("In searchAdmin - theDisplayList.size(): " + theDisplayList.size());
+        log.debug("In searchAdmin - theDisplayList.size(): " + theDisplayList.size());
         return theDisplayList;
     }
 

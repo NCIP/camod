@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AdvancedSearchPopulateAction.java,v 1.17 2007-06-21 20:07:56 pandyas Exp $
+ * $Id: AdvancedSearchPopulateAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/06/21 20:07:56  pandyas
+ * Moved definition for Zebrafish diagnosis drop down to populate method - called from left menu link
+ *
  * Revision 1.16  2007/06/20 19:29:22  pandyas
  * Fixed populate for diagnosis - depends on species set in the session constant
  *
@@ -65,7 +68,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("In AdvancedSearchPopulateAction.populate");		       
+        log.debug("In AdvancedSearchPopulateAction.populate");		       
 
         // Reset the non-simple-search options
         SearchForm theSearchForm = (SearchForm) form;
@@ -86,7 +89,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
             try {                
                 SavedQuery inSavedQuery = savedQueryManager.get( aQueryId );
                 
-                log.info("<AdvancedSearchPopulateAction.populate> inSavedQuery.getQueryName(): " +inSavedQuery.getQueryName());
+                log.debug("<AdvancedSearchPopulateAction.populate> inSavedQuery.getQueryName(): " +inSavedQuery.getQueryName());
                 
                 request.getSession().setAttribute( Constants.QUERY_NAME, inSavedQuery.getQueryName() );
                 
@@ -152,7 +155,7 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         // Get the form used
         SearchForm theSearchForm = (SearchForm) form;
         
-        log.info("<setAgentNameDropdown> theSearchForm.getCarcinogenicIntervention(): " + theSearchForm.getCarcinogenicIntervention());
+        log.debug("<setAgentNameDropdown> theSearchForm.getCarcinogenicIntervention(): " + theSearchForm.getCarcinogenicIntervention());
         //Set constant for the Agent type here 
         request.getSession().setAttribute(Constants.ENVFactors.AGENT_TYPE, theSearchForm.getCarcinogenicIntervention());        
 
@@ -171,13 +174,13 @@ public class AdvancedSearchPopulateAction extends BaseAction {
         
         // Check if null - if user goes from species to empty this correctly redirects to screen
         if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){        
-	        log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+	        log.debug("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
 	        
 	        // Set selected species to a constant to determine which organ tree displays 
 	        // using common name because Rat has two species
 	        Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
 	        theSearchSpecies = species.getCommonName();
-	        log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);
+	        log.debug("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);
         } 
         
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);

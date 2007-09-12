@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: RegisterUserAction.java,v 1.8 2006-11-10 20:21:26 pandyas Exp $
+ * $Id: RegisterUserAction.java,v 1.9 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/11/10 20:21:26  pandyas
+ * Fixed defect#461 - App support does not receive emails with requests for new user accounts
+ *
  * Revision 1.7  2006/08/17 18:08:49  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -59,7 +62,7 @@ public class RegisterUserAction extends BaseAction {
 			HttpServletRequest inRequest, HttpServletResponse inResponse)
 			throws Exception {
 
-		log.info("<RegisterUserAction> Entering execute");
+		log.debug("<RegisterUserAction> Entering execute");
 
 		String theForward = "next";
 

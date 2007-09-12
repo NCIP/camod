@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.21 2007-08-14 17:05:57 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.22 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/08/14 17:05:57  pandyas
+ * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
+ *
  * Revision 1.20  2007/06/18 16:13:20  pandyas
  * EVS preferred name does not work for Zebrafish tree so changed
  * Will add this item to EVS gforge to fix, if possilbe
@@ -70,7 +73,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.info("<GeneDeliveryPopulateAction populate> Entering populate() ");
+		log.debug("<GeneDeliveryPopulateAction populate> Entering populate() ");
 
 		// Create a form to edit
 		GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
@@ -115,12 +118,12 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 					.getAgeAtTreatmentUnit());
 
 			/* set Organ attributes */
-			log.info("<GeneDeliveryPopulateAction> get the Organ attributes");
+			log.debug("<GeneDeliveryPopulateAction> get the Organ attributes");
 
 			// since we are always querying from concept code (save and edit),
 			// simply display EVSPreferredDescription
 			if (gene.getOrgan() != null) {
-				log.info("gene.getOrgan(): " + gene.getOrgan().toString());
+				log.debug("gene.getOrgan(): " + gene.getOrgan().toString());
 				geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
 				geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
 			}
@@ -149,7 +152,7 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.info("<GeneDeliveryPopulateAction dropdown> Entering dropdown() ");
+		log.debug("<GeneDeliveryPopulateAction dropdown> Entering dropdown() ");
 
 		// setup dropdown menus
 		this.dropdown(request, response);

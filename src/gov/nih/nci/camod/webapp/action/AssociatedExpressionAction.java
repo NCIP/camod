@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionAction.java,v 1.6 2007-07-23 17:40:43 pandyas Exp $
+ * $Id: AssociatedExpressionAction.java,v 1.7 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/07/23 17:40:43  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.5  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -49,7 +52,7 @@ public class AssociatedExpressionAction extends BaseAction {
         String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
         String aTargetedModificationID = request.getParameter("aTargetedModificationID");
 
-        log.info("<AssocExpression edit> following Characteristics:" + "\n\t getExpressionLevel: "
+        log.debug("<AssocExpression edit> following Characteristics:" + "\n\t getExpressionLevel: "
                 + associatedExpressionForm.getExpressionLevel() + "\n\t getName: " + associatedExpressionForm.getName()
                 + "\n\t aAssociatedExpressionID: " + aAssociatedExpressionID + "\n\t getOrganTissueCode: "
                 + associatedExpressionForm.getOrganTissueCode() + "\n\t getOrganTissueName: "
@@ -87,7 +90,7 @@ public class AssociatedExpressionAction extends BaseAction {
 
                 theAssociatedExpressionManager.update(associatedExpressionForm, theExpressionFeature);
 
-                log.info("AssociatedExpression edited");
+                log.debug("AssociatedExpression edited");
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocexpression.edit.successful"));
@@ -135,7 +138,7 @@ public class AssociatedExpressionAction extends BaseAction {
         String aGenomicSegmentID = request.getParameter("aGenomicSegmentID");
         String aTargetedModificationID = request.getParameter("aTargetedModificationID");
 
-        log.info("<AssocExpression save> following Characteristics:" + "\n\t getExpressionLevel: "
+        log.debug("<AssocExpression save> following Characteristics:" + "\n\t getExpressionLevel: "
                 + associatedExpressionForm.getExpressionLevel() + "\n\t getName: " + associatedExpressionForm.getName()
                 + "\n\t aEngineeredTransgeneID: " + aEngineeredTransgeneID + "\n\t aGenomicSegmentID: "
                 + aGenomicSegmentID + "\n\t aTargetedModificationID: " + aTargetedModificationID
@@ -174,7 +177,7 @@ public class AssociatedExpressionAction extends BaseAction {
             } else {
             }
 
-            log.info("New AssociatedExpression created");
+            log.debug("New AssociatedExpression created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

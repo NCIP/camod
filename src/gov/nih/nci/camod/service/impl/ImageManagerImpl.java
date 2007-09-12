@@ -1,7 +1,12 @@
 /*
- * $Id: ImageManagerImpl.java,v 1.26 2007-08-01 18:11:46 pandyas Exp $
+ * $Id: ImageManagerImpl.java,v 1.27 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/08/01 18:11:46  pandyas
+ * Fixed image upload issue - the code was not saving the constructs in the correct folder so the image was not viewable in the edit mode.
+ *
+ * Also changed a few properties in camod.properties to comple the fix
+ *
  * Revision 1.25  2007/08/01 18:05:02  pandyas
  * VCDE changes
  *
@@ -67,7 +72,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 	}
 
 	public void save(Image Image) throws Exception {
-		log.info("In ImageManagerImpl.save");
+		log.debug("In ImageManagerImpl.save");
 		super.save(Image);
 	}
 
@@ -81,13 +86,13 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 	public Image create(AnimalModel inAnimalModel, ImageData inImageData,
 			String inPath, String inStorageDirKey) throws Exception {
 
-		log.info("Entering ImageManagerImpl.create");
+		log.debug("Entering ImageManagerImpl.create");
 
 		Image inImage = new Image();
 		populateImage(inAnimalModel, inImageData, inImage, inPath,
 				inStorageDirKey);
 
-		log.info("Exiting ImageManagerImpl.create");
+		log.debug("Exiting ImageManagerImpl.create");
 
 		return inImage;
 	}
@@ -111,7 +116,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			ImageData inImageData, Image inImage, String inPath,
 			String inStorageDirKey) throws Exception {
 
-		log.info("Entering populateImage");
+		log.debug("Entering populateImage");
 		if (inImageData.getStainingMethodCode() != null
 				&& inImageData.getStainingMethodCode().length() >0) {
 
@@ -119,8 +124,8 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 			StainingMethod stainingMethod = StainingMethodManagerSingleton
 					.instance().getOrCreate(inImageData.getStainingMethodCode(),
 							inImageData.getStainingMethodName());
-            log.info("populateImage inImageData.getStainingMethodCode(): " +inImageData.getStainingMethodCode());
-            log.info("populateImage inImageData.getStainingMethodName(): " +inImageData.getStainingMethodName());            
+            log.debug("populateImage inImageData.getStainingMethodCode(): " +inImageData.getStainingMethodCode());
+            log.debug("populateImage inImageData.getStainingMethodName(): " +inImageData.getStainingMethodName());            
             inImage.setStainingMethod(stainingMethod);
 
 		} else {
@@ -139,7 +144,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 		// Check for exisiting Image for this Image
 		if (inImageData.getFileLocation() != null) {
 
-			log.info("<ImageManagerImpl> Uploading a file");
+			log.debug("<ImageManagerImpl> Uploading a file");
 
 			// If this is a new Image, upload it to the server
 			FormFile f = inImageData.getFileLocation();
@@ -153,7 +158,7 @@ public class ImageManagerImpl extends BaseManager implements ImageManager {
 				System.out.println("Token=" + fileType);
 			}
 
-			log.info("<ImageManagerImpl> fileType is: " + fileType
+			log.debug("<ImageManagerImpl> fileType is: " + fileType
 					+ " FileName is: " + f.getFileName() + " Type is: "
 					+ f.getContentType());
 

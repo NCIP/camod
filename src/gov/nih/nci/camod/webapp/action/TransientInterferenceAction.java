@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: TransientInterferenceAction.java,v 1.6 2007-04-04 13:19:27 pandyas Exp $
+ * $Id: TransientInterferenceAction.java,v 1.7 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2007/04/04 13:19:27  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.5  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -56,7 +59,7 @@ public class TransientInterferenceAction extends BaseAction
                               HttpServletRequest request,
                               HttpServletResponse response) throws Exception
     {
-        log.info("<TransientInterferenceAction> Entering edit method");
+        log.debug("<TransientInterferenceAction> Entering edit method");
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -143,7 +146,7 @@ public class TransientInterferenceAction extends BaseAction
                               HttpServletResponse response) throws Exception
     {
 
-        log.info("<TransientInterferenceAction> Entering 'save' method");
+        log.debug("<TransientInterferenceAction> Entering 'save' method");
         
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -153,7 +156,7 @@ public class TransientInterferenceAction extends BaseAction
 		String conceptCode = request.getParameter("aConceptCode");
 
 		transientInterferenceForm.setConceptCode(conceptCode);        
-        log.info("transientInterferenceForm.getConceptCode(): " + transientInterferenceForm.getConceptCode());
+        log.debug("transientInterferenceForm.getConceptCode(): " + transientInterferenceForm.getConceptCode());
         
         System.out.println("<TransientInterferenceAction save> following Characteristics:" 
 	    + "\n\t Concentration: " + transientInterferenceForm.getConcentration() 
@@ -178,10 +181,10 @@ public class TransientInterferenceAction extends BaseAction
 
         try
         {
-            log.info("<TransientInterferenceAction> Entering try block");            
+            log.debug("<TransientInterferenceAction> Entering try block");            
             animalModelManager.addTransientInterference(animalModel, transientInterferenceForm);
             
-			log.info("New Transient Interference (Morpholino) created");            
+			log.debug("New Transient Interference (Morpholino) created");            
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -198,7 +201,7 @@ public class TransientInterferenceAction extends BaseAction
             saveErrors(request, msg);
         }
 
-        log.info("Exiting save");
+        log.debug("Exiting save");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
     

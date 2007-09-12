@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.7 2005-12-08 21:44:47 georgeda Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.8 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2005/12/08 21:44:47  georgeda
+ * Defect #259; handle PI availability for 2-tier data
+ *
  * Revision 1.6  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -52,7 +55,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
     public ActionForward populate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityInvestigatorPopulateAction populate> Entering ");
+        log.debug("<AvailabilityInvestigatorPopulateAction populate> Entering ");
 
         // Create a form to edit
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -62,7 +65,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         String aAvailabilityID = request.getParameter("aAvailabilityID");
 
         AnimalAvailability avilablity = AvailabilityManagerSingleton.instance().get(aAvailabilityID);
-        log.info("avilablity (id and name): " + avilablity);
+        log.debug("avilablity (id and name): " + avilablity);
 
         if (avilablity == null) {
             request.setAttribute(Constants.Parameters.DELETED, "true");
@@ -78,7 +81,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                     // Hack to work around caMOD mapping issue
                     if (avilablity.getStockNumber().equals("-1")) {
 
-                        log.info("Old 2-tier format.  Setting the stock number to the PI");
+                        log.debug("Old 2-tier format.  Setting the stock number to the PI");
 
                         // Get the PI from the model
                         String theModelID = "" + request.getSession().getAttribute(Constants.MODELID);
@@ -105,7 +108,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         // setup dropdown menus
         this.dropdown(request, response);
 
-        log.info("<AvailabilityInvestigatorPopulateAction populate> Exiting ");
+        log.debug("<AvailabilityInvestigatorPopulateAction populate> Exiting ");
 
         return mapping.findForward("submitInvestigator");
     }
@@ -124,7 +127,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
     public ActionForward dropdown(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Entering ");
+        log.debug("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Entering ");
 
         // blank out the FORMDATA Constant field
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -135,7 +138,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
         // setup dropdown menus
         this.dropdown(request, response);
 
-        log.info("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Exiting ");
+        log.debug("<AvailabilityInvestigatorPopulateAction ActionForward dropdown> Exiting ");
 
         return mapping.findForward("submitInvestigator");
 
@@ -150,7 +153,7 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityInvestigatorPopulateAction dropdown> Entering ");
+        log.debug("<AvailabilityInvestigatorPopulateAction dropdown> Entering ");
 
         // Prepopulate dropdown field on submitInvestigator screen only
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.PRINCIPALINVESTIGATORDROP,

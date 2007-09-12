@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SimpleSearchPopulateAction.java,v 1.12 2007-05-21 17:33:55 pandyas Exp $
+ * $Id: SimpleSearchPopulateAction.java,v 1.13 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/05/21 17:33:55  pandyas
+ * Modified simple and adv search species drop down to pull from DB (approved model species only)
+ *
  * Revision 1.11  2007/05/18 14:40:49  pandyas
  * Modified species and organ tree to default to no organ button and to work when user goes from species to empty selection
  *
@@ -78,7 +81,7 @@ public class SimpleSearchPopulateAction extends BaseAction {
             try {                
                 SavedQuery sq = savedQueryManager.get( aQueryId );
                 
-                log.info("<SimpleSearchPopulateAction.populate> sq.getQueryName(): " + sq.getQueryName());
+                log.debug("<SimpleSearchPopulateAction.populate> sq.getQueryName(): " + sq.getQueryName());
 
                 
                 request.getSession().setAttribute( Constants.QUERY_NAME, sq.getQueryName() );
@@ -114,13 +117,13 @@ public class SimpleSearchPopulateAction extends BaseAction {
         
         // Check if null - if user goes from species to empty this correctly redirects to screen        
         if (theSearchForm.getSpecies() !=null && theSearchForm.getSpecies().length() > 0){
-            log.info("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
+            log.debug("theSearchForm.getSpecies(): "+ theSearchForm.getSpecies());
             
             // Set selected species to a constant to determine which organ tree displays 
             // using common name because Rat has two species
             Species species = SpeciesManagerSingleton.instance().getByName(theSearchForm.getSpecies());
             theSearchSpecies = species.getCommonName();
-            log.info("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);        	
+            log.debug("<setSpeciesForOrganTree> theSearchSpecies: "+ theSearchSpecies);        	
         }
 
         request.getSession().setAttribute(Constants.SEARCHSPECIESCOMMONNAME, theSearchSpecies);

@@ -1,9 +1,13 @@
 /**
  * @pandyas
  * 
- * $Id: ClinicalMarkerManagerImpl.java,v 1.8 2007-08-14 17:07:42 pandyas Exp $
+ * $Id: ClinicalMarkerManagerImpl.java,v 1.9 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/08/14 17:07:42  pandyas
+ * Bug #8404:  Clincal Marker - the search page shows only "Other" instead of the value that was entered which was in this
+ * case "other clinical marker"
+ *
  * Revision 1.7  2006/05/25 19:12:20  schroedn
  * Fixed check for 'Other'
  *
@@ -62,33 +66,33 @@ public class ClinicalMarkerManagerImpl extends BaseManager implements ClinicalMa
     public void create(ClinicalMarkerData inClinicalMarkerData,
                        Histopathology inHistopathology) throws Exception
     {
-        log.info("Entering HistopathologyManagerImpl.createClinicalMarker");
+        log.debug("Entering HistopathologyManagerImpl.createClinicalMarker");
 
         ClinicalMarker theClinicalMarker = new ClinicalMarker();
         populateClinicalMarker(inClinicalMarkerData, theClinicalMarker);
 
         inHistopathology.addClinicalMarker(theClinicalMarker);
 
-        log.info("Exiting HistopathologyManagerImpl.createClinicalMarker");
+        log.debug("Exiting HistopathologyManagerImpl.createClinicalMarker");
     }
 
     public void update(ClinicalMarkerData inClinicalMarkerData,
                        ClinicalMarker inClinicalMarker) throws Exception
     {
-        log.info("Entering ClinicalMarkerManagerImpl.update");
-        log.info("Updating ClinicalMarkerData: " + inClinicalMarker.getId());
+        log.debug("Entering ClinicalMarkerManagerImpl.update");
+        log.debug("Updating ClinicalMarkerData: " + inClinicalMarker.getId());
 
         // Populate w/ the new values and save
         populateClinicalMarker(inClinicalMarkerData, inClinicalMarker);
         save(inClinicalMarker);
 
-        log.info("Exiting ClinicalMarkerManagerImpl.update");
+        log.debug("Exiting ClinicalMarkerManagerImpl.update");
     }
 
     private void populateClinicalMarker(ClinicalMarkerData inClinicalMarkerData,
                                         ClinicalMarker inClinicalMarker)
     {
-        log.info("<ClinicalMarkerManagerImpl> Entering populateClinicalMarker");
+        log.debug("<ClinicalMarkerManagerImpl> Entering populateClinicalMarker");
 
         if (inClinicalMarkerData.getOtherName() != null )
         {
@@ -105,7 +109,7 @@ public class ClinicalMarkerManagerImpl extends BaseManager implements ClinicalMa
         {
             inClinicalMarker.setValue(inClinicalMarkerData.getValue());
         }
-        log.info("<ClinicalMarkerManagerImpl> Exiting populateClinicalMarker");
+        log.debug("<ClinicalMarkerManagerImpl> Exiting populateClinicalMarker");
     }
 
 }

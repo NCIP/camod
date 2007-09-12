@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.37 2007-08-07 19:49:46 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.38 2007-09-12 19:36:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.37  2007/08/07 19:49:46  pandyas
+ *  Removed reference to Transplant as per VCDE comments and after modification to object definition for CDE
+ *
  *  Revision 1.36  2007/08/07 18:26:20  pandyas
  *  Renamed to GRAFT as per VCDE comments
  *
@@ -166,7 +169,7 @@ public class ViewModelAction extends BaseAction
     private void setCancerModel(HttpServletRequest request)
     {
         String modelID = request.getParameter(Constants.Parameters.MODELID);
-        log.info("<setCancerModel> modelID: " + modelID);
+        log.debug("<setCancerModel> modelID: " + modelID);
         AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
         AnimalModel am = null;
         try
@@ -291,7 +294,7 @@ public class ViewModelAction extends BaseAction
                 String geneId = tm.getGeneId();
                 if (geneId != null)
                 {
-                    log.info("Connecting to caBIO to look up gene " + geneId);
+                    log.debug("Connecting to caBIO to look up gene " + geneId);
                     // the geneId is available
                     try
                     {
@@ -310,11 +313,11 @@ public class ViewModelAction extends BaseAction
 
                         
                         final int geneCount = (resultList != null) ? resultList.size() : 0;
-                        log.info("Got " + geneCount + " Gene Objects");
+                        log.debug("Got " + geneCount + " Gene Objects");
                         if (geneCount > 0)
                         {
                             myGene = (Gene) resultList.get(0);
-                            log.info("Gene:" + geneId + " ==>" + myGene);
+                            log.debug("Gene:" + geneId + " ==>" + myGene);
                             tmGeneMap.put(tm.getId(), myGene);
                         }
                     }
@@ -380,7 +383,7 @@ public class ViewModelAction extends BaseAction
             CarcinogenExposure ce = (CarcinogenExposure) it.next();
             if (ce != null)
             {
-                log.info("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
+                log.debug("Checking agent:" + ce.getEnvironmentalFactor().getNscNumber());
                 String theType = ce.getEnvironmentalFactor().getType();
                 if (theType == null || theType.length() == 0)
                 {
@@ -440,7 +443,7 @@ public class ViewModelAction extends BaseAction
         try
         {
             pubs = QueryManagerSingleton.instance().getAllPublications(Long.valueOf(modelID).longValue());
-            log.info("pubs.size(): " + pubs.size());
+            log.debug("pubs.size(): " + pubs.size());
         }
         catch (Exception e)
         {
@@ -498,7 +501,7 @@ public class ViewModelAction extends BaseAction
                                                        HttpServletRequest request,
                                                        HttpServletResponse response) throws Exception
     {
-        log.info("<ViewModelAction>  populateTherapeuticApproaches");
+        log.debug("<ViewModelAction>  populateTherapeuticApproaches");
         
         setCancerModel(request);
         //
@@ -517,7 +520,7 @@ public class ViewModelAction extends BaseAction
         Iterator it = therapyColl.iterator();
 
         final int cc = (therapyColl != null) ? therapyColl.size() : 0;
-        log.info("Looking up clinical protocols for " + cc + " agents...");
+        log.debug("Looking up clinical protocols for " + cc + " agents...");
 
         while (it.hasNext())
         {
@@ -737,8 +740,8 @@ public class ViewModelAction extends BaseAction
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
-        log.info("<populateGraftDetails> modelID:" + modelID);
-        log.info("<populateGraftDetails> nsc:" + nsc);
+        log.debug("<populateGraftDetails> modelID:" + modelID);
+        log.debug("<populateGraftDetails> nsc:" + nsc);
         GraftManager mgr = (GraftManager) getBean("graftManager");
 
         Graft x = mgr.get(modelID);

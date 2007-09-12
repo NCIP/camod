@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: InducedMutationAction.java,v 1.14 2007-07-23 17:40:43 pandyas Exp $
+ * $Id: InducedMutationAction.java,v 1.15 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/07/23 17:40:43  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.13  2007/04/04 13:19:07  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -62,7 +65,7 @@ public final class InducedMutationAction extends BaseAction {
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID); 
         
-        log.info("<TargetedModificationAction edit> following Characteristics:" 
+        log.debug("<TargetedModificationAction edit> following Characteristics:" 
         		+ "\n\t getType: "  + inducedMutationForm.getType() 
                 + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
                 + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() 
@@ -97,7 +100,7 @@ public final class InducedMutationAction extends BaseAction {
                 
                 inducedMutationManager.remove(aInducedMutationID, theAnimalModel);
 
-                log.info("InducedMutation deleted");
+                log.debug("InducedMutation deleted");
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.delete.successful"));
@@ -111,7 +114,7 @@ public final class InducedMutationAction extends BaseAction {
                 InducedMutation theInducedMutation = inducedMutationManager.get(aInducedMutationID);
                 inducedMutationManager.update(theAnimalModel, inducedMutationForm, theInducedMutation);
 
-                log.info("InducedMutation edited");
+                log.debug("InducedMutation edited");
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.edit.successful"));
@@ -143,7 +146,7 @@ public final class InducedMutationAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<InducedMutationAction save> Entering save");
+        log.debug("<InducedMutationAction save> Entering save");
 
         // Create a form to edit
         InducedMutationForm inducedMutationForm = (InducedMutationForm) form;
@@ -152,7 +155,7 @@ public final class InducedMutationAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "  + inducedMutationForm.getType() 
+        log.debug("<InducedMutationAction save> following Characteristics:" + "\n\t getType: "  + inducedMutationForm.getType() 
                 + "\n\t getOtherType: " + inducedMutationForm.getOtherType()
                 + "\n\t getCasNumber: " + inducedMutationForm.getCasNumber() 
                 + "\n\t getGeneId: " + inducedMutationForm.getGeneId() + "\n\t getName: " + inducedMutationForm.getName()
@@ -172,7 +175,7 @@ public final class InducedMutationAction extends BaseAction {
 
             theAnimalModelManager.addGeneticDescription(theAnimalModel, inducedMutationForm);
 
-            log.info("New InducedMutation created");
+            log.debug("New InducedMutation created");
 
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("inducedmutation.creation.successful"));

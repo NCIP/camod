@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoPopulateAction.java,v 1.7 2007-04-04 13:19:27 pandyas Exp $
+ * $Id: MorpholinoPopulateAction.java,v 1.8 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/04/04 13:19:27  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.6  2007/03/26 12:02:31  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -49,14 +52,14 @@ public class MorpholinoPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-        log.info("<MorpholinoPopulateAction populate> Entered");
+        log.debug("<MorpholinoPopulateAction populate> Entered");
 
         // Create a form to edit		
         TransientInterferenceForm transientInterferenceForm = (TransientInterferenceForm) form;
         
         // Grab the current TransientInterference we are working with related to this animalModel        
         String aTransIntID = request.getParameter("aTransIntID");
-        log.info("aTransIntID: = " + aTransIntID);
+        log.debug("aTransIntID: = " + aTransIntID);
 
         TransientInterference transientInterference = TransientInterferenceManagerSingleton.instance().get(aTransIntID);
 
@@ -134,7 +137,7 @@ public class MorpholinoPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-        log.info("<MorpholinoPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.debug("<MorpholinoPopulateAction dropdown> Entering ActionForward dropdown()");
         
 		String aConceptCode = request.getParameter("aConceptCode");
 		// Create a form to edit
@@ -142,12 +145,12 @@ public class MorpholinoPopulateAction extends BaseAction
 
         
 		transientInterferenceForm.setConceptCode(aConceptCode);
-		log.info("<MorpholinoPopulateAction> morpholinoForm.getConceptCode: " + transientInterferenceForm.getConceptCode());
+		log.debug("<MorpholinoPopulateAction> morpholinoForm.getConceptCode: " + transientInterferenceForm.getConceptCode());
 
         //setup dropdown menus
         this.dropdown(request, response);		
         
-        log.info("<MorpholinoPopulateAction dropdown> Exiting ActionForward dropdown()");
+        log.debug("<MorpholinoPopulateAction dropdown> Exiting ActionForward dropdown()");
 
         return mapping.findForward("submitMorpholino");
     }
@@ -162,7 +165,7 @@ public class MorpholinoPopulateAction extends BaseAction
     public void dropdown(HttpServletRequest request,
                          HttpServletResponse response) throws Exception
     {
-        log.info("<MorpholinoPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<MorpholinoPopulateAction dropdown> Entering void dropdown()");
 
         //Prepopulate all dropdown fields, set the global Constants to the following
     	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOSOURCEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
@@ -173,7 +176,7 @@ public class MorpholinoPopulateAction extends BaseAction
     	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.VISUALLIGANDSDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
     	NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.MORPHOLINOTARGETSITE, Constants.Dropdowns.ADD_BLANK);
 
-        log.info("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<MorpholinoPopulateAction dropdown> Exiting void dropdown()");
     }
 
 }

@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CellLinePopulateAction.java,v 1.17 2007-08-14 17:05:47 pandyas Exp $
+ * $Id: CellLinePopulateAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/08/14 17:05:47  pandyas
+ * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
+ *
  * Revision 1.16  2007/08/14 12:04:12  pandyas
  * Implementing EVSPreferredName for Zebrafish models
  *
@@ -88,14 +91,14 @@ public class CellLinePopulateAction extends BaseAction {
             // simply display EVSPreferredDescription, unless concept code is '00000'
             if (cellLine.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
                 cellLineForm.setOrgan(cellLine.getOrgan().getName());
-                log.info("cellLine.getOrgan().getName(): " + cellLine.getOrgan().getName());
+                log.debug("cellLine.getOrgan().getName(): " + cellLine.getOrgan().getName());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
-                log.info("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());             
+                log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());             
                 
             } else {
                 cellLineForm.setOrgan(cellLine.getOrgan().getEVSPreferredDescription());
-                log.info("cellLine.getOrgan().getEVSPreferredDescription(): " + cellLine.getOrgan().getEVSPreferredDescription());
+                log.debug("cellLine.getOrgan().getEVSPreferredDescription(): " + cellLine.getOrgan().getEVSPreferredDescription());
     
                 cellLineForm.setOrganTissueCode(cellLine.getOrgan().getConceptCode());
                 //log.debug("OrganTissueCode: " + cellLine.getOrgan().getConceptCode());

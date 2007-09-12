@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: TherapyManagerImpl.java,v 1.25 2007-05-16 12:29:10 pandyas Exp $
+ * $Id: TherapyManagerImpl.java,v 1.26 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.25  2007/05/16 12:29:10  pandyas
+ * Added developmental stage evs tree to Therapy when species is Zebrafsih
+ *
  * Revision 1.24  2006/08/17 18:17:35  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -92,7 +95,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	 *                when anything goes wrong.
 	 */
 	public Therapy get(String id) throws Exception {
-		log.info("In TherapyManagerImpl.get");
+		log.debug("In TherapyManagerImpl.get");
 		return (Therapy) super.get(id, Therapy.class);
 	}
 
@@ -106,7 +109,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	 *                when anything goes wrong.
 	 */
 	public void save(Therapy therapy) throws Exception {
-		log.info("In TherapyManagerImpl.save");
+		log.debug("In TherapyManagerImpl.save");
 		super.save(therapy);
 	}
 
@@ -120,7 +123,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	 *                when anything goes wrong.
 	 */
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.info("In TherapyManagerImpl.remove");
+		log.debug("In TherapyManagerImpl.remove");
 
 		Therapy theTherapy = get(id);
 
@@ -130,7 +133,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 
 	private void populateAgeGender(TherapyData inTherapyData, Therapy theTherapy) {
 
-		log.info("In TherapyManagerImpl.populateAgeGender");
+		log.debug("In TherapyManagerImpl.populateAgeGender");
 
 		// Set the treatment
 		Treatment theTreatment = theTherapy.getTreatment();
@@ -152,7 +155,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	}
 
 	private void populateDose(TherapyData inTherapyData, Therapy theTherapy) {
-		log.info("Entering populateDose");
+		log.debug("Entering populateDose");
 
 		// Set the treatment
 		Treatment theTreatment = theTherapy.getTreatment();
@@ -167,13 +170,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	
 	private void populateDevelopmentalStage(TherapyData inTherapyData, Therapy theTherapy) 
 							throws Exception {
-		log.info("Entering populateDevelopmentalStage");
+		log.debug("Entering populateDevelopmentalStage");
 
 		if (inTherapyData.getDevelopmentalStageCode() != null && inTherapyData.getDevelopmentalStageCode().length() > 0) {
-			log.info("inTherapyData.getDevelopmentalStageCode(): "
+			log.debug("inTherapyData.getDevelopmentalStageCode(): "
 					+ inTherapyData.getDevelopmentalStageCode());
 			// Get or create DevelopmentalStage object each time
-			log.info("getOrCreate method used");
+			log.debug("getOrCreate method used");
 			DevelopmentalStage theDevelopmentalStage = DevelopmentalStageManagerSingleton.instance().getOrCreate(
 					inTherapyData.getDevelopmentalStageCode(),
 					inTherapyData.getDevelopmentalStageName());
@@ -187,7 +190,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	private void populateAdministration(AnimalModel inAnimalModel,
 			TherapyData inTherapyData, Therapy theTherapy) {
 
-		log.info("In CarcinogenExposureManagerImpl.populateAdministration");
+		log.debug("In CarcinogenExposureManagerImpl.populateAdministration");
 
 		if (inTherapyData.getAdministrativeRoute() != null
 				&& inTherapyData.getAdministrativeRoute().length() > 0) {
@@ -203,7 +206,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 		// anytime admin route is other
 		if (inTherapyData.getAdministrativeRoute().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			log.info("admin route equals other");
+			log.debug("admin route equals other");
 			// Do not save 'Other' in the database
 			theTherapy.getTreatment().setAdminRouteUnctrlVocab(
 					inTherapyData.getOtherAdministrativeRoute());
@@ -236,7 +239,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	public Therapy create(AnimalModel inAnimaModel, TherapyData inTherapyData)
 			throws Exception {
 
-		log.info("In TherapyManagerImpl.create Entering");
+		log.debug("In TherapyManagerImpl.create Entering");
 
 		Therapy theTherapy = new Therapy();
 
@@ -246,7 +249,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 		populateDevelopmentalStage(inTherapyData, theTherapy);		
 		populateTherapy(inTherapyData, theTherapy);
 
-		log.info("In TherapyManagerImpl.create Exiting");
+		log.debug("In TherapyManagerImpl.create Exiting");
 		return theTherapy;
 	}
 
@@ -268,7 +271,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 	private void populateTherapy(TherapyData inTherapyData, Therapy theTherapy)
 			throws Exception {
 
-		log.info("Entering populateTherapy Entering");
+		log.debug("Entering populateTherapy Entering");
 
 		/* populateName method without otherName */
 
@@ -278,7 +281,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 			theTreatment = new Treatment();
 			theTherapy.setTreatment(theTreatment);
 		}
-		log.info("populateTherapy Set the treatment");
+		log.debug("populateTherapy Set the treatment");
 
 		// Set the agent name
 		Agent theAgent = theTherapy.getAgent();
@@ -287,7 +290,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 			theTherapy.setAgent(theAgent);
 		}
 		theAgent.setName(inTherapyData.getName());
-		log.info("populateTherapy setName");
+		log.debug("populateTherapy setName");
 
 		// Set NSC and CAS
 		String theNscNumber = inTherapyData.getNscNumber().trim();
@@ -298,13 +301,13 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 				log.error("Bad NSC number: " + theNscNumber);
 			}
 		}
-		log.info("populateTherapy setNscNumber");
+		log.debug("populateTherapy setNscNumber");
 
 		String theCasNumber = inTherapyData.getCasNumber().trim();
 		if (theCasNumber != null && theCasNumber.length() > 0) {
 			theAgent.setCasNumber(theCasNumber);
 		}
-		log.info("populateTherapy setCasNumber");
+		log.debug("populateTherapy setCasNumber");
 
 		// Therapy object attributes
 		theTherapy.setToxicityGrade(inTherapyData.getToxicityGrade());
@@ -313,12 +316,12 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 		theTherapy.setResults(inTherapyData.getResults());
 		theTherapy.setTumorResponse(inTherapyData.getTumorResponse());
 		theTherapy.setComments(inTherapyData.getComments());
-		log.info("populateTherapy set Therapy object attributes");
+		log.debug("populateTherapy set Therapy object attributes");
 
 		// Get the ChemicalClass
 		String[] theChemicalClasses = inTherapyData
 				.getSelectedChemicalClasses();
-		log.info("theChemicalClasses.length: " + theChemicalClasses.length);
+		log.debug("theChemicalClasses.length: " + theChemicalClasses.length);
 		Set<ChemicalClass> theCurrentChemicalClassSet = theTherapy.getAgent()
 				.getChemicalClassCollection();
 		theCurrentChemicalClassSet.clear();
@@ -373,7 +376,7 @@ public class TherapyManagerImpl extends BaseManager implements TherapyManager {
 			}
 		}
 
-		log.info("Exiting populateTherapy Exiting");
+		log.debug("Exiting populateTherapy Exiting");
 	}
 
 	private void sendEmail(AnimalModel inAnimalModel,

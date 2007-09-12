@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: DiseaseManagerImpl.java,v 1.5 2006-04-21 13:39:12 georgeda Exp $
+ * $Id: DiseaseManagerImpl.java,v 1.6 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/04/21 13:39:12  georgeda
+ * Cleanup
+ *
  * Revision 1.4  2006/04/17 19:11:05  pandyas
  * caMod 2.1 OM changes
  *
@@ -88,7 +91,7 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
                                String inDiseaseName) throws Exception
     {
 
-        log.info("<DiseaseManagerImpl> Entering getOrCreate");
+        log.debug("<DiseaseManagerImpl> Entering getOrCreate");
 
         Disease theQBEDisease = new Disease();
 
@@ -114,7 +117,7 @@ public class DiseaseManagerImpl extends BaseManager implements DiseaseManager
         }
         else
         {
-            log.info("<DiseaseManagerImpl> No matching disease. Create new one");
+            log.debug("<DiseaseManagerImpl> No matching disease. Create new one");
             theDisease = theQBEDisease;
 
             // Get the preferred description

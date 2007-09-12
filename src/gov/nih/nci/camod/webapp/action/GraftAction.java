@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftAction.java,v 1.3 2007-08-07 18:28:05 pandyas Exp $
+ * $Id: GraftAction.java,v 1.4 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/08/07 18:28:05  pandyas
+ * Renamed to GRAFT as per VCDE comments
+ *
  * Revision 1.2  2007/08/01 18:03:59  pandyas
  * VCDE changes
  *
@@ -72,7 +75,7 @@ public final class GraftAction extends BaseAction
                               HttpServletRequest request,
                               HttpServletResponse response) throws Exception
     {
-        log.info("<GraftAction> Entering edit");
+        log.debug("<GraftAction> Entering edit");
 
         // Create a form to edit
         GraftForm graftForm = (GraftForm) form;
@@ -83,7 +86,7 @@ public final class GraftAction extends BaseAction
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
         String aGraftID = request.getParameter("aGraftID");
 
-        log.info("<GraftAction edit> following Characteristics:"
+        log.debug("<GraftAction edit> following Characteristics:"
                     + "\n\t name: "
                     + graftForm.getName()
                     + "\n\t atccNumber: "
@@ -194,7 +197,7 @@ public final class GraftAction extends BaseAction
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<GraftAction save> following Characteristics:" + "\n\t name: " 
+        log.debug("<GraftAction save> following Characteristics:" + "\n\t name: " 
                  + graftForm.getName() 
                  + "\n\t atccNumber: " + graftForm.getAtccNumber() 
                  + "\n\t ParentalCellLineName: " + graftForm.getParentalCellLineName() 
@@ -224,7 +227,7 @@ public final class GraftAction extends BaseAction
 
             theAnimalModelManager.addGraft(theAnimalModel, graftForm);
 
-            log.info("New Graft created");
+            log.debug("New Graft created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationAction.java,v 1.17 2007-07-31 12:13:42 pandyas Exp $
+ * $Id: TargetedModificationAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/07/31 12:13:42  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.16  2007/07/23 17:37:58  pandyas
  * Fixed typo in word occurred
  *
@@ -54,7 +57,7 @@ public final class TargetedModificationAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<TargetedModificationAction> Entering edit");
+        log.debug("<TargetedModificationAction> Entering edit");
 
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -65,7 +68,7 @@ public final class TargetedModificationAction extends BaseAction {
         // this
         String aTargetedModificationID = targetedModificationForm.getModificationId();
 
-        log.info("<TargetedModificationAction save> following Characteristics:" + "\n\t getName: "
+        log.debug("<TargetedModificationAction save> following Characteristics:" + "\n\t getName: "
                 + targetedModificationForm.getName() + "\n\t getModificationType: "
                 + targetedModificationForm.getModificationType() + "\n\t getOtherModificationType: "
                 + targetedModificationForm.getOtherModificationType() + "\n\t getGeneId: "
@@ -107,7 +110,7 @@ public final class TargetedModificationAction extends BaseAction {
                 targetedModificationManager.update(theAnimalModel, targetedModificationForm, theTargetedModification,
                         request);
 
-                log.info("TargetedModification edited");
+                log.debug("TargetedModification edited");
 
                 ActionMessages msg = new ActionMessages();
                 msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("targetedmodification.edit.successful"));
@@ -132,7 +135,7 @@ public final class TargetedModificationAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.info("< TargetedModificationAction> Exiting edit");
+        log.debug("< TargetedModificationAction> Exiting edit");
 
         return mapping.findForward(theForward);
     }
@@ -150,7 +153,7 @@ public final class TargetedModificationAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<TargetedModificationAction> Entering save");
+        log.debug("<TargetedModificationAction> Entering save");
 
         // Create a form to edit
         TargetedModificationForm targetedModificationForm = (TargetedModificationForm) form;
@@ -158,7 +161,7 @@ public final class TargetedModificationAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<TargetedModificationAction save> following Characteristics:" + "\n\t getName: "
+        log.debug("<TargetedModificationAction save> following Characteristics:" + "\n\t getName: "
                 + targetedModificationForm.getName() + "\n\t getModificationType: "
                 + targetedModificationForm.getModificationType() + "\n\t getOtherModificationType: "
                 + targetedModificationForm.getOtherModificationType() + "\n\t getGeneId: "
@@ -187,7 +190,7 @@ public final class TargetedModificationAction extends BaseAction {
 
             theAnimalModelManager.addGeneticDescription(theAnimalModel, targetedModificationForm, request);
 
-            log.info("New TargetedModification created");
+            log.debug("New TargetedModification created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully
@@ -214,7 +217,7 @@ public final class TargetedModificationAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.info("<TargetedModificationAction> Exiting save");
+        log.debug("<TargetedModificationAction> Exiting save");
         return mapping.findForward(theForward);
     }
 }

@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: GraftPopulateAction.java,v 1.4 2007-08-14 17:07:02 pandyas Exp $
+ * $Id: GraftPopulateAction.java,v 1.5 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/08/14 17:07:02  pandyas
+ * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
+ *
+ * Bug #8402:  Selecting "other" species on graft page gets only blank page on dev server
+ *
  * Revision 1.3  2007/08/07 19:36:13  pandyas
  * Removed reference to Transplant as per VCDE comments and after modification to object definition for CDE
  *
@@ -165,7 +170,7 @@ public class GraftPopulateAction extends BaseAction
  
             // When populating multiple grafts, this constant needs to be reset for each species entry
             request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, graft.getStrain().getSpecies().getCommonName());
-            log.info("graft.getStrain().getSpecies().getCommonName(): " + graft.getStrain().getSpecies().getCommonName());            
+            log.debug("graft.getStrain().getSpecies().getCommonName(): " + graft.getStrain().getSpecies().getCommonName());            
             
             // Species was required in previous versions of caMod and is stored in donorSpecies column
             // The species and strain are required for 2.1 and strain_id is stored for all future versions
@@ -217,15 +222,15 @@ public class GraftPopulateAction extends BaseAction
                 // simply display EVSPreferredDescription, unless concept code is '00000'
                 if (graft.getOrgan().getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)) {
                     graftForm.setOrgan(graft.getOrgan().getEVSPreferredDescription());
-                    log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
+                    log.debug("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getName());
                     graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
-                    log.info("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());           
+                    log.debug("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());           
                     
                 } else {
                     graftForm.setOrgan(graft.getOrgan().getEVSPreferredDescription());
-                    log.info("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getEVSPreferredDescription());
+                    log.debug("<GraftPopulateAction> setOrgan= " + graft.getOrgan().getEVSPreferredDescription());
                     graftForm.setOrganTissueCode(graft.getOrgan().getConceptCode());
-                    log.info("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());
+                    log.debug("<GraftPopulateAction> OrganTissueCode= " + graft.getOrgan().getConceptCode());
                 }
             }
 
@@ -267,14 +272,14 @@ public class GraftPopulateAction extends BaseAction
                                   HttpServletResponse response) throws Exception
     {
 
-        log.info("<GraftPopulateAction dropdown> Entering dropdown() ");
+        log.debug("<GraftPopulateAction dropdown> Entering dropdown() ");
 
         GraftForm theForm = (GraftForm) form;
 
         // setup dropdown menus
         this.dropdown(request, response, theForm);
 
-        log.info("<GraftPopulateAction dropdown> before return submitGraft ");
+        log.debug("<GraftPopulateAction dropdown> before return submitGraft ");
 
         return mapping.findForward("submitGraft");
 
@@ -292,7 +297,7 @@ public class GraftPopulateAction extends BaseAction
                           GraftForm inForm) throws Exception
     {
 
-        log.info("<GraftPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<GraftPopulateAction dropdown> Entering void dropdown()");
 
         // Set the Species drop drop for the Graft form
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SPECIESQUERYDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER_OPTION);
@@ -337,7 +342,7 @@ public class GraftPopulateAction extends BaseAction
         }
 
 
-        log.info("<GraftPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<GraftPopulateAction dropdown> Exiting void dropdown()");
     }
 
     /**
@@ -361,7 +366,7 @@ public class GraftPopulateAction extends BaseAction
         
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.STRAINDROP, graftForm.getDonorScientificName());
         
-        log.info("graftForm.getDonorScientificName(): " + graftForm.getDonorScientificName());
+        log.debug("graftForm.getDonorScientificName(): " + graftForm.getDonorScientificName());
         
         // Check if null - if user goes from species to empty this correctly redirects to screen  
         if (!graftForm.getDonorScientificName().equals(Constants.Dropdowns.OTHER_OPTION)) {
@@ -371,7 +376,7 @@ public class GraftPopulateAction extends BaseAction
     
     	        Species species = SpeciesManagerSingleton.instance().getByName(graftForm.getDonorScientificName());
     	        theDonorSpecies = species.getCommonName();
-    	        log.info("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
+    	        log.debug("<setStrainDropdown> theDonorSpecies: "+ theDonorSpecies);
             }  
         }
         request.getSession().setAttribute(Constants.DONORSPECIESCOMMONNAME, theDonorSpecies);

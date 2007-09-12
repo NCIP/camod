@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.26 2007-04-04 13:17:49 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.27 2007-09-12 19:36:03 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.26  2007/04/04 13:17:49  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.25  2007/03/27 18:37:31  pandyas
  * Modified code to trim identifiers - cleaner for display link
  *
@@ -93,36 +96,36 @@ import java.util.TreeMap;
 public class InducedMutationManagerImpl extends BaseManager implements
 		InducedMutationManager {
 	public List getAll() throws Exception {
-		log.info("In InducedMutationManagerImpl.getAll");
+		log.debug("In InducedMutationManagerImpl.getAll");
 		return super.getAll(InducedMutation.class);
 	}
 
 	public InducedMutation get(String id) throws Exception {
-		log.info("In InducedMutationManagerImpl.get");
+		log.debug("In InducedMutationManagerImpl.get");
 		return (InducedMutation) super.get(id, InducedMutation.class);
 	}
 
 	public void save(InducedMutation InducedMutation) throws Exception {
-		log.info("In InducedMutationManagerImpl.save");
+		log.debug("In InducedMutationManagerImpl.save");
 		super.save(InducedMutation);
 	}
 
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.info("In InducedMutationManagerImpl.remove");
+		log.debug("In InducedMutationManagerImpl.remove");
 		inAnimalModel.getEngineeredGeneCollection().remove(get(id));
 		super.save(inAnimalModel);
 	}
 
 	public InducedMutation create(AnimalModel inAnimalModel,
 			InducedMutationData inInducedMutationData) throws Exception {
-		log.info("Entering InducedMutationManagerImpl.create");
+		log.debug("Entering InducedMutationManagerImpl.create");
 
 		InducedMutation theInducedMutation = new InducedMutation();
 
 		populateInducedMutation(inAnimalModel, inInducedMutationData,
 				theInducedMutation);
 
-		log.info("Exiting InducedMutationManagerImpl.create");
+		log.debug("Exiting InducedMutationManagerImpl.create");
 
 		return theInducedMutation;
 	}
@@ -130,21 +133,21 @@ public class InducedMutationManagerImpl extends BaseManager implements
 	public void update(AnimalModel inAnimalModel,
 			InducedMutationData inInducedMutationData,
 			InducedMutation inInducedMutation) throws Exception {
-		log.info("Entering InducedMutationManagerImpl.update");
-		log.info("Updating InducedMutationForm: " + inInducedMutation.getId());
+		log.debug("Entering InducedMutationManagerImpl.update");
+		log.debug("Updating InducedMutationForm: " + inInducedMutation.getId());
 
 		// Populate w/ the new values and save
 		populateInducedMutation(inAnimalModel, inInducedMutationData,
 				inInducedMutation);
 		save(inInducedMutation);
 
-		log.info("Exiting InducedMutationManagerImpl.update");
+		log.debug("Exiting InducedMutationManagerImpl.update");
 	}
 
 	private void populateInducedMutation(AnimalModel inAnimalModel,
 			InducedMutationData inInducedMutationData,
 			InducedMutation inInducedMutation) throws Exception {
-		log.info("Entering populateInducedMutation");
+		log.debug("Entering populateInducedMutation");
 
 		EnvironmentalFactor theEnvironFactor = null;
 
@@ -163,7 +166,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		// Name of Inducing Agent - Saved in uncontrolled vocab field since it
 		// is free text
 		theEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
-		log.info("In InducedMutationManagerImpl.save set name : "
+		log.debug("In InducedMutationManagerImpl.save set name : "
 				+ inInducedMutationData.getName());
 
 		// Inducing Agent Category type / Other type
@@ -176,11 +179,11 @@ public class InducedMutationManagerImpl extends BaseManager implements
 			// Do not save 'Other' in the database
 			theEnvironFactor.setTypeUnctrlVocab(inInducedMutationData
 					.getOtherType());
-			log.info("inInducedMutationData.getOtherType(): "
+			log.debug("inInducedMutationData.getOtherType(): "
 					+ inInducedMutationData.getOtherType());
 		} else {
 			theEnvironFactor.setType(inInducedMutationData.getType());
-			log.info("inInducedMutationData.getType(): "
+			log.debug("inInducedMutationData.getType(): "
 					+ inInducedMutationData.getType());
 		}
 
@@ -193,7 +196,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		// Description
 		inInducedMutation
 				.setDescription(inInducedMutationData.getDescription());
-		log.info("inInducedMutationData.getDescription(): "
+		log.debug("inInducedMutationData.getDescription(): "
 				+ inInducedMutationData.getDescription());
 
 		// Observation and Method of Observation
@@ -256,7 +259,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		// Comments
 		inInducedMutation.setComments(inInducedMutationData.getComments());
 
-		log.info("Exiting populateInducedMutation");
+		log.debug("Exiting populateInducedMutation");
 	}
 
 	private void sendEmail(AnimalModel inAnimalModel,

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImagePopulateAction.java,v 1.20 2007-07-31 12:02:55 pandyas Exp $
+ * $Id: ImagePopulateAction.java,v 1.21 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/07/31 12:02:55  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.19  2007/05/23 16:57:34  pandyas
  * Added code to handle previous models that used the nameUnctrlVocab for staining method
  * The tree does not allow the user to add terms, but this is a feature request
@@ -79,10 +82,10 @@ public class ImagePopulateAction extends BaseAction {
 	                    // since we are always querying from concept code (save and edit),
 	                    // simply display EVSPreferredDescription
 	                    imageForm.setStainingMethod(theImage.getStainingMethod().getEVSPreferredDescription());
-	                    log.info("setStainingMethod= " + theImage.getStainingMethod().getEVSPreferredDescription());
+	                    log.debug("setStainingMethod= " + theImage.getStainingMethod().getEVSPreferredDescription());
 	
 	                    imageForm.setStainingMethodCode(theImage.getStainingMethod().getConceptCode());
-	                    log.info("setStainingMethodCode= " + theImage.getStainingMethod().getConceptCode()); 
+	                    log.debug("setStainingMethodCode= " + theImage.getStainingMethod().getConceptCode()); 
 					}
                 }
                 

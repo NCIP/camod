@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityAction.java,v 1.9 2007-07-23 17:40:43 pandyas Exp $
+ * $Id: AvailabilityAction.java,v 1.10 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/07/23 17:40:43  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.8  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -65,7 +68,7 @@ public class AvailabilityAction extends BaseAction {
 	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		log.info("<AvailabilityAction> Entering edit");
+		log.debug("<AvailabilityAction> Entering edit");
 
 		// Create a form to edit
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -125,7 +128,7 @@ public class AvailabilityAction extends BaseAction {
 			theForward = "failure";
 		}
 
-		log.info("<AvailabilityAction> Exiting edit");
+		log.debug("<AvailabilityAction> Exiting edit");
 		return mapping.findForward(theForward);
 	}
 
@@ -142,7 +145,7 @@ public class AvailabilityAction extends BaseAction {
 	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		log.info("<AvailabilityAction> Entering save");
+		log.debug("<AvailabilityAction> Entering save");
 		
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -150,7 +153,7 @@ public class AvailabilityAction extends BaseAction {
 		// Create a form to edit
 		AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
-		log.info("<AvailabilityAction save> following Characteristics:" 
+		log.debug("<AvailabilityAction save> following Characteristics:" 
 				+ "\n\t lab source: " + availabilityForm.getSource()
 				+ "\n\t name: " + availabilityForm.getName()
 				+ "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
@@ -165,7 +168,7 @@ public class AvailabilityAction extends BaseAction {
 		try {
 			theAnimalModelManager.addAvailability(animalModel, availabilityForm);
 
-			log.info("New Availability created");
+			log.debug("New Availability created");
 
 			// Add a message to be displayed in submitOverview.jsp saying you've
 			// created a new model successfully

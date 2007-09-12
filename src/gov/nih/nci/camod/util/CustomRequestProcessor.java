@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: CustomRequestProcessor.java,v 1.9 2007-03-27 18:40:11 pandyas Exp $
+ * $Id: CustomRequestProcessor.java,v 1.10 2007-09-12 19:36:14 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/03/27 18:40:11  pandyas
+ * changed log.info to log.debug to clean up output - done testing changes
+ *
  * Revision 1.8  2005/12/06 19:51:32  georgeda
  * Defect #255 - add SSL
  *
@@ -83,13 +86,13 @@ public class CustomRequestProcessor extends SecureRequestProcessor {
         // Print the forwards and mapping
         String[] theForwards = mapping.findForwards();
         for (int i = 0, j = theForwards.length; i < j; i++) {
-            log.info("Forward: " + theForwards[i]);
+            log.debug("Forward: " + theForwards[i]);
         }
-        log.info("Mapping: " + mapping);
+        log.debug("Mapping: " + mapping);
 
         // Process the action
         ActionForward theForward = super.processActionPerform(request, response, action, form, mapping);
-        log.info("ActionForward : " + theForward);
+        log.debug("ActionForward : " + theForward);
 
         log.trace("Exiting processActionPerform");
         return theForward;

@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyAction.java,v 1.17 2007-07-23 17:40:43 pandyas Exp $
+ * $Id: HistopathologyAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/07/23 17:40:43  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.16  2007/06/13 19:39:38  pandyas
  * Modified code for EVS trees after formal testing
  *
@@ -86,7 +89,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward editHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyAction> Entering 'edit' method");
+        log.debug("<HistopathologyAction> Entering 'edit' method");
 
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
@@ -97,7 +100,7 @@ public class HistopathologyAction extends BaseAction {
         // Create a form to edit
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
-        log.info("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
+        log.debug("<HistopathologyAction edit> following Characteristics:" + "\n\t  HistopathID: " + aHistopathologyID
                 + "\n\t organ: " + histopathologyForm.getOrgan() 
                 + "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() 
                 + "\n\t organTissueCode: " + histopathologyForm.getOrganTissueCode() 
@@ -172,7 +175,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward editMetastasis(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyAction> Entering 'editMetastasis' method");
+        log.debug("<HistopathologyAction> Entering 'editMetastasis' method");
 
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
@@ -188,7 +191,7 @@ public class HistopathologyAction extends BaseAction {
         // Create a form to edit
         AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
 
-        log.info("<HistopathologyAction editMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
+        log.debug("<HistopathologyAction editMetastasis> following Characteristics:" + "\n\t ParentHistopathID: "
                 + aHistopathologyID + "\n\t aAssociatedMetastasisID: " + aAssociatedMetastasisID
                 + "\n\t organ: " + assocMetastasisForm.getOrgan() 
                 + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
@@ -263,7 +266,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward saveHistopathology(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyAction> Entering 'save' method");
+        log.debug("<HistopathologyAction> Entering 'save' method");
 
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -271,7 +274,7 @@ public class HistopathologyAction extends BaseAction {
         // Create a form to edit
         HistopathologyForm histopathologyForm = (HistopathologyForm) form;
 
-        log.info("<HistopathologyAction save> following Characteristics:" 
+        log.debug("<HistopathologyAction save> following Characteristics:" 
         		+ "\n\t organ: " + histopathologyForm.getOrgan() 
         		+ "\n\t organTissueName: " + histopathologyForm.getOrganTissueName() 
         		+ "\n\t organTissueCode: " + histopathologyForm.getOrganTissueCode() 
@@ -302,13 +305,13 @@ public class HistopathologyAction extends BaseAction {
 
             theAnimalModelManager.addHistopathology(theAnimalModel, histopathologyForm);
 
-            log.info("New histopathology created");
+            log.debug("New histopathology created");
 
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("histopathology.creation.successful"));
             saveErrors(request, msg);
 
-            log.info("<HistopathologyAction> Exiting 'save' method");
+            log.debug("<HistopathologyAction> Exiting 'save' method");
 
         } catch (Exception e) {
 
@@ -318,7 +321,7 @@ public class HistopathologyAction extends BaseAction {
             theMsg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.admin.message"));
             saveErrors(request, theMsg);
         }
-        log.info("<HistopathologyAction> Exiting saveHistopathology");
+        log.debug("<HistopathologyAction> Exiting saveHistopathology");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -335,7 +338,7 @@ public class HistopathologyAction extends BaseAction {
     public ActionForward saveMetastasis(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyAction> Entering 'saveMetastasis' method");
+        log.debug("<HistopathologyAction> Entering 'saveMetastasis' method");
 
         // Create a form to edit
         AssociatedMetastasisForm assocMetastasisForm = (AssociatedMetastasisForm) form;
@@ -347,7 +350,7 @@ public class HistopathologyAction extends BaseAction {
         // Grab the current aHistopathID from the session
         String aHistopathologyID = request.getParameter("aHistopathologyID");
 
-        log.info("<HistopathologyAction saveMetastasis> following Characteristics:" 
+        log.debug("<HistopathologyAction saveMetastasis> following Characteristics:" 
                  + "\n\t ParentHistopathID: " + aHistopathologyID  
                 + "\n\t organ: " + assocMetastasisForm.getOrgan() 
                 + "\n\t organTissueName: " + assocMetastasisForm.getOrganTissueName()
@@ -382,13 +385,13 @@ public class HistopathologyAction extends BaseAction {
 
             theHistopathologyManager.addAssociatedMetastasis(theAnimalModel, theParentHistopathology, assocMetastasisForm);
 
-            log.info("New metastasis created");
+            log.debug("New metastasis created");
 
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("assocmetastasis.creation.successful"));
             saveErrors(request, msg);
 
-            log.info("<HistopathologyAction> Exiting 'saveMetastasis' method");
+            log.debug("<HistopathologyAction> Exiting 'saveMetastasis' method");
 
         } catch (Exception e) {
             log.error("Exception occurred creating AssociatedExpression", e);
@@ -399,7 +402,7 @@ public class HistopathologyAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.info("<HistopathologyAction> Exiting saveMetastasis");
+        log.debug("<HistopathologyAction> Exiting saveMetastasis");
         return mapping.findForward(theForward);
     }
 

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentAction.java,v 1.20 2007-07-31 12:13:42 pandyas Exp $
+ * $Id: GenomicSegmentAction.java,v 1.21 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.20  2007/07/31 12:13:42  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.19  2007/07/23 17:40:43  pandyas
  * Fixed typo in word occurred
  *
@@ -65,7 +68,7 @@ public final class GenomicSegmentAction extends BaseAction {
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
+        log.debug("<GenomicSegmentAction save> following Characteristics:" + "\n\t getLocationOfIntegration: "
                 + genomicSegmentForm.getLocationOfIntegration() + "\n\t getIsRandom() "
                 + genomicSegmentForm.getIsRandom() + "\n\t getSegmentName: "
                 + genomicSegmentForm.getSegmentName() + "\n\t getOtherSegmentName: "
@@ -89,7 +92,7 @@ public final class GenomicSegmentAction extends BaseAction {
 
             if ("Delete".equals(theAction)) {
 
-                log.info("GenomicSegment delete");
+                log.debug("GenomicSegment delete");
 
                 // Grab the current modelID from the session
                 String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -104,7 +107,7 @@ public final class GenomicSegmentAction extends BaseAction {
                 saveErrors(request, msg);
 
             } else {
-                log.info("GenomicSegment edit");
+                log.debug("GenomicSegment edit");
 
                 // retrieve animal model by it's id
                 AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
@@ -192,7 +195,7 @@ public final class GenomicSegmentAction extends BaseAction {
 
             theAnimalModelManager.addGeneticDescription(theAnimalModel, genomicSegmentForm, request);
 
-            log.info("New GenomicSegment created");
+            log.debug("New GenomicSegment created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

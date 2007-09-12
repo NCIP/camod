@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.7 2007-09-06 17:02:47 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.8 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/09/06 17:02:47  pandyas
+ * Fixed name in debug statements to SavedQueryManagerImpl - left over from original author's class name
+ *
  * Revision 1.6  2007/07/31 12:02:21  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -261,7 +264,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 
 			if (theSavedQueryAttribute.getAttributeName().equals(
 					theBundle.getString("criteria.ExternalSource"))) {
-				log.info("<SavedQueryManagerImpl> adding criteria.ExternalSource to criteria list");
+				log.debug("<SavedQueryManagerImpl> adding criteria.ExternalSource to criteria list");
 				inSearchForm.setSurgery(theSavedQueryAttribute
 						.getAttributeValue());
 			}
@@ -292,7 +295,7 @@ public class SavedQueryManagerImpl extends BaseManager implements
 				.getBundle("ApplicationResources_en");
 
 		Set<SavedQueryAttribute> criteriaList = new HashSet<SavedQueryAttribute>();
-		log.info("SavedQueryManagerImpl criteriaList.size()"
+		log.debug("SavedQueryManagerImpl criteriaList.size()"
 				+ criteriaList.size());
 
 		// Keyword search

@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AdminModelsAssignmentPopulateAction.java,v 1.8 2007-07-31 12:02:38 pandyas Exp $
+ * $Id: AdminModelsAssignmentPopulateAction.java,v 1.9 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/07/31 12:02:38  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.7  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -53,7 +56,7 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 	public ActionForward execute(ActionMapping inMapping, ActionForm inForm, HttpServletRequest inRequest,
 			HttpServletResponse inResponse) throws Exception {
 
-		log.info("<AdminModelsAssignmentPopulateAction> Entering execute");
+		log.debug("<AdminModelsAssignmentPopulateAction> Entering execute");
 		
 		try {
 
@@ -87,7 +90,7 @@ public class AdminModelsAssignmentPopulateAction extends BaseAction {
 			saveErrors(inRequest, theMsg);
 		}
 
-		log.info("<AdminModelsAssignmentPopulateAction> Exiting execute");
+		log.debug("<AdminModelsAssignmentPopulateAction> Exiting execute");
 
 		return inMapping.findForward("next");
 	}

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAdminAction.java,v 1.2 2007-08-07 15:36:17 pandyas Exp $
+ * $Id: SearchAdminAction.java,v 1.3 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2007/08/07 15:36:17  pandyas
+ * Fixed clear button on adminEditModels.jsp
+ *
  * Revision 1.1  2007/07/31 12:02:55  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -38,7 +41,7 @@ public final class SearchAdminAction extends BaseAction {
 			HttpServletRequest inRequest, HttpServletResponse inResponse)
 			throws IOException, ServletException {
 
-		log.info("<SearchAdminAction> entered ");
+		log.debug("<SearchAdminAction> entered ");
 
 		CurationAssignmentForm theForm = (CurationAssignmentForm)inForm;
 		theForm.toString();
@@ -54,17 +57,17 @@ public final class SearchAdminAction extends BaseAction {
 		} else {
 			// Do the search
 			try {
-					log.info("<SearchAction> In search loop: ");
+					log.debug("<SearchAction> In search loop: ");
 					AnimalModelManager animalModelManager = (AnimalModelManager) getBean("animalModelManager");
 	
 					// Perform the search
 					List results = animalModelManager.searchAdmin(theForm);
-					log.info("SearchAdminAction results.size(): " + results.size());
+					log.debug("SearchAdminAction results.size(): " + results.size());
 	
 					// Set admin search results constant
 					inRequest.getSession().setAttribute(Constants.ADMIN_MODEL_SEARCH_RESULTS,
 							results);
-					log.info("SearchAdminAction set results to Constant ");				
+					log.debug("SearchAdminAction set results to Constant ");				
 	
 				} catch (Exception e) {
 					log.info(e);

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AnimalModelPopulateAction.java,v 1.24 2007-07-31 12:02:38 pandyas Exp $
+ * $Id: AnimalModelPopulateAction.java,v 1.25 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/07/31 12:02:38  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.23  2007/03/26 12:02:30  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -64,7 +67,7 @@ public class AnimalModelPopulateAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		log.info("Entering AnimalModelPopulateAction.populate");
+		log.debug("Entering AnimalModelPopulateAction.populate");
 
 		// Create a form to edit
 		ModelCharacteristicsForm modelCharForm = (ModelCharacteristicsForm) form;

@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: SirnaPopulateAction.java,v 1.2 2006-10-23 14:17:58 pandyas Exp $
+ * $Id: SirnaPopulateAction.java,v 1.3 2007-09-12 19:36:39 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/10/23 14:17:58  pandyas
+ * changed to conform to conceptCode format in all other classes
+ *
  * Revision 1.1  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -118,7 +121,7 @@ public class SirnaPopulateAction extends BaseAction
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws Exception
     {
-        log.info("<SirnaPopulateAction dropdown> Entering ActionForward dropdown()");
+        log.debug("<SirnaPopulateAction dropdown> Entering ActionForward dropdown()");
 
 		String conceptCode = request.getParameter("aConceptCode");
 		// Create a form to edit
@@ -129,7 +132,7 @@ public class SirnaPopulateAction extends BaseAction
         //setup dropdown menus
         this.dropdown(request, response);
 
-        log.info("<SirnaPopulateAction dropdown> Exiting ActionForward dropdown()");
+        log.debug("<SirnaPopulateAction dropdown> Exiting ActionForward dropdown()");
 
         return mapping.findForward("submitSirna");
     }
@@ -144,7 +147,7 @@ public class SirnaPopulateAction extends BaseAction
     public void dropdown(HttpServletRequest request,
                          HttpServletResponse response) throws Exception
     {
-        log.info("<SirnaPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<SirnaPopulateAction dropdown> Entering void dropdown()");
 
         //Prepopulate all dropdown fields, set the global Constants to the following
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SIRNASOURCEDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
@@ -155,7 +158,7 @@ public class SirnaPopulateAction extends BaseAction
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SIRNADELIVMETHODDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
         NewDropdownUtil.populateDropdown(request, Constants.Dropdowns.SIRNAVISUALLIGANDSDROP, Constants.Dropdowns.ADD_BLANK_AND_OTHER);
 
-        log.info("<SirnaPopulateAction dropdown> Exiting void dropdown()");
+        log.debug("<SirnaPopulateAction dropdown> Exiting void dropdown()");
     }
 
 }

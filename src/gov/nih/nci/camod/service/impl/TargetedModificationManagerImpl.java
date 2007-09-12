@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.31 2007-08-15 16:00:55 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.32 2007-09-12 19:36:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2007/08/15 16:00:55  pandyas
+ * Bug #8351:  Construct Sequence info not shown in edit mode and on search page
+ *
+ * Search issue due to not saving construct sequence on GS and TM screens
+ *
  * Revision 1.30  2007/07/31 12:02:22  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -79,14 +84,14 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 
     public void save(TargetedModification TargetedModification) throws Exception
     {
-        log.info("In TargetedModificationManagerImpl.save");
+        log.debug("In TargetedModificationManagerImpl.save");
         super.save(TargetedModification);
     }
 
     public void remove(String id,
                        AnimalModel inAnimalModel) throws Exception
     {
-        log.info("In TargetedModificationManagerImpl.remove");
+        log.debug("In TargetedModificationManagerImpl.remove");
         inAnimalModel.getEngineeredGeneCollection().remove(get(id));
         super.save(inAnimalModel);
     }
@@ -96,14 +101,14 @@ public class TargetedModificationManagerImpl extends BaseManager implements
                                        HttpServletRequest request) throws Exception
     {
 
-        log.info("Entering TargetedModificationManagerImpl.create");
+        log.debug("Entering TargetedModificationManagerImpl.create");
 
         TargetedModification theTargetedModification = new TargetedModification();
 
 		populateTargetedModification(inAnimalModel, inTargetedModificationData,
 				theTargetedModification, request);
 
-		log.info("Exiting TargetedModificationManagerImpl.create");
+		log.debug("Exiting TargetedModificationManagerImpl.create");
 
 		return theTargetedModification;
 	}
@@ -114,15 +119,15 @@ public class TargetedModificationManagerImpl extends BaseManager implements
                        HttpServletRequest request) throws Exception
     {
 
-        log.info("Entering TargetedModificationManagerImpl.update");
-        log.info("Updating TargetedModificationForm: " + theTargetedModification.getId());
+        log.debug("Entering TargetedModificationManagerImpl.update");
+        log.debug("Updating TargetedModificationForm: " + theTargetedModification.getId());
 
         // Populate w/ the new values and save
         populateTargetedModification(inAnimalModel, inTargetedModificationData, theTargetedModification, request);
 
         save(theTargetedModification);
 
-        log.info("Exiting TargetedModificationManagerImpl.update");
+        log.debug("Exiting TargetedModificationManagerImpl.update");
     }
 
     private void populateTargetedModification(AnimalModel inAnimalModel,
@@ -131,7 +136,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
                                               HttpServletRequest request) throws Exception
     {
 
-        log.info("Entering populateTargetedModification");
+        log.debug("Entering populateTargetedModification");
 
         // set Targeted Gene/Locus
         inTargetedModification.setName(inTargetedModificationData.getName());
@@ -150,7 +155,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 		theCurrentModificationTypeSet.clear();
 
 		for (int i = 0; i < theModificationTypes.length; i++) {
-			log.info(" other theModificationType from GUI: "
+			log.debug(" other theModificationType from GUI: "
 					+ inTargetedModificationData.getOtherModificationType());
 
 			// Create/reuse the ModificationType object - Reuses other if
@@ -162,7 +167,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 									.getOtherModificationType());
 
 			if (theModificationTypes.equals(Constants.Dropdowns.OTHER_OPTION)) {
-				log.info(" other theModificationTyp: "
+				log.debug(" other theModificationTyp: "
 						+ theModificationType.toString());
 				// Send e-mail and add modification type (already reused in
 				// getOrCreate)
@@ -176,7 +181,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 			// phase)
 			if (!inTargetedModification.getModificationTypeCollection()
 					.contains(theModificationType)) {
-				log.info("\n new ModificationType: "
+				log.debug("\n new ModificationType: "
 						+ theModificationType.toString());
 				theCurrentModificationTypeSet.add(theModificationType);
 			}
@@ -294,7 +299,7 @@ public class TargetedModificationManagerImpl extends BaseManager implements
         
         inTargetedModification.setConstructSequence(inTargetedModificationData.getConstructSequence());
 
-		log.info("Exiting populateTargetedModification");
+		log.debug("Exiting populateTargetedModification");
 	}
 
 	private void sendEmail(AnimalModel inAnimalModel,

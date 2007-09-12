@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: ChangeAnimalModelStateAction.java,v 1.14 2007-07-31 12:02:38 pandyas Exp $
+ *  $Id: ChangeAnimalModelStateAction.java,v 1.15 2007-09-12 19:36:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.14  2007/07/31 12:02:38  pandyas
+ *  VCDE silver level  and caMOD 2.3 changes
+ *
  *  Revision 1.13  2007/04/09 12:37:09  pandyas
  *  modified after caMOD 2.3 unit testing
  *
@@ -65,7 +68,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 		if (!isCancelled(inRequest)) {
 
 			try {
-				log.info("<ChangeAnimalModelStateAction> Entering try ");
+				log.debug("<ChangeAnimalModelStateAction> Entering try ");
 
 				// Get the curation manager workflow XML
 				CurationManager theCurationManager = new CurationManagerImpl(
@@ -76,21 +79,21 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 				AnimalModelStateForm theForm = (AnimalModelStateForm) inForm;
 				AnimalModelManager theAnimalModelManager = (AnimalModelManager) getBean("animalModelManager");
 				
-				log.info("<ChangeAnimalModelStateAction> theForm.getModelId(): " + theForm.getModelId());
-				log.info("<ChangeAnimalModelStateAction> theForm.getEvent(): " + theForm.getEvent());				
+				log.debug("<ChangeAnimalModelStateAction> theForm.getModelId(): " + theForm.getModelId());
+				log.debug("<ChangeAnimalModelStateAction> theForm.getEvent(): " + theForm.getEvent());				
 								
 				if (theForm.getModelId() == null){
 					// get model id from adminRoles.jsp and submitOverview.jsp (complete)
 					theModelId = (String)inRequest.getSession().getAttribute(Constants.Parameters.MODELID);
-					log.info("theModelId from Constants.Parameters.MODELID: " + theModelId);
+					log.debug("theModelId from Constants.Parameters.MODELID: " + theModelId);
 					
 					if (theModelId == null) {
 					theModelId = inRequest.getParameter("aModelId");	
-					log.info("theModelId from inRequest.getParameter: " + theModelId);
+					log.debug("theModelId from inRequest.getParameter: " + theModelId);
 					}
 					if(theModelId != null){
 						theForm.setModelId(theModelId);
-						log.info("theModelId set to the form-  theForm.getModelId(): " + theForm.getModelId());
+						log.debug("theModelId set to the form-  theForm.getModelId(): " + theForm.getModelId());
 					}						
 				}				
 
@@ -104,7 +107,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 					// get event from submitOverview.jsp (back to complete or
 					// screened-approved), inactive
 					theEvent = inRequest.getParameter("aEvent");
-					log.info("get theEvent: " + theEvent);
+					log.debug("get theEvent: " + theEvent);
 					// set the form so value is in one place for all code
 					theForm.setEvent(theEvent);
 				}
@@ -139,7 +142,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 
 					if (theForm.getEvent().equals(
 							Constants.Admin.Actions.INACTIVATE)) {
-						log.info("Changing model to: " + theEvent);
+						log.debug("Changing model to: " + theEvent);
 
 						// Change model to inactive
 						changeModelToInactive(theAnimalModel, theForm,
@@ -149,7 +152,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 
 					else if (theForm.getEvent().equals(
 							Constants.Admin.Actions.BACK_TO_SCREENER_APPROVE)) {
-						log.info("Changing model to inactive first, then to: "
+						log.debug("Changing model to inactive first, then to: "
 								+ theForm.getEvent());
 
 						// Change model to inactive first,then to
@@ -158,7 +161,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 								theCurationManager, theAnimalModelManager,
 								theCoordinator);
 
-						log.info("1) Changed model to inactive, now step 2): ");
+						log.debug("1) Changed model to inactive, now step 2): ");
 
 						// Set the event and assign to coordinator,
 						// Null editor or screener assignment - so model can be
@@ -169,13 +172,13 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 						theForm
 								.setRemark("This model has been moved back to screener_approve");
 
-						log.info("theModelId: " + theModelId);
-						log.info("theEvent: " + theEvent);
+						log.debug("theModelId: " + theModelId);
+						log.debug("theEvent: " + theEvent);
 
 						theCurationManager.changeState(theAnimalModel, theForm
 								.getEvent());
 
-						log.info("New state of model: "
+						log.debug("New state of model: "
 								+ theAnimalModel.getState());
 
 						// Save the associated log comment to track the curation
@@ -201,12 +204,12 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 					else if (theForm.getEvent().equals(
 							Constants.Admin.Actions.BACK_TO_COMPLETE)) {
 
-						log.info("Check state: " + theAnimalModel.getState());
+						log.debug("Check state: " + theAnimalModel.getState());
 
 						if(!theAnimalModel.getState().equals(
 								Constants.Admin.ModelState.INACTIVE)) {
 							
-							log.info("Model already Inactive so complete loop: ");
+							log.debug("Model already Inactive so complete loop: ");
 
 							// Change model to inactive first,then to
 							// screener-approved
@@ -215,21 +218,21 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 									theCoordinator);
 
 						}
-						log.info("Changing model to inactive then to completes loop: ");
+						log.debug("Changing model to inactive then to completes loop: ");
 						// set event to complete instead of back_to_complete
 						theForm.setEvent(Constants.Admin.Actions.COMPLETE);
 						theForm.setRemark("Model has been moved back to complete");
 						theForm.setAssignedTo(theCoordinator);
 
-						log.info("1) Changed model to inactive, now step 2): ");
+						log.debug("1) Changed model to inactive, now step 2): ");
 
-						log.info("Current state of model: "
+						log.debug("Current state of model: "
 								+ theAnimalModel.getState());
 
 						theCurationManager.changeState(theAnimalModel, theForm
 								.getEvent());
 
-						log.info("New state of model: "
+						log.debug("New state of model: "
 								+ theAnimalModel.getState());
 
 						// Save the associated log comment to track the curation
@@ -251,16 +254,16 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 
 					} else {
 						// change the state - used by all events from admin
-						log.info("Common code for state changes - Event= "
+						log.debug("Common code for state changes - Event= "
 								+ theForm.getEvent());
-						log.info("theModelId: " + theModelId);
-						log.info("Current state of model: "
+						log.debug("theModelId: " + theModelId);
+						log.debug("Current state of model: "
 								+ theAnimalModel.getState());
 
 						theCurationManager.changeState(theAnimalModel, theForm
 								.getEvent());
 
-						log.info("New state of model: "
+						log.debug("New state of model: "
 								+ theAnimalModel.getState());
 
 						// Save the associated log comment to track the curation
@@ -311,7 +314,7 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 			AnimalModelManager theAnimalModelManager, String theCoordinator)
 			throws Exception {
 
-		log.info("theEvent: " + theForm.getModelId());
+		log.debug("theEvent: " + theForm.getModelId());
 
 		// Did the id match?
 		if (theAnimalModel != null) {
@@ -324,11 +327,11 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 			theForm.setAssignedTo(theCoordinator);
 			theForm.setRemark("This model has been moved to inactive");
 
-			log.info("theEvent: " + theForm.getEvent());
+			log.debug("theEvent: " + theForm.getEvent());
 
 			theCurationManager.changeState(theAnimalModel, theForm.getEvent());
 
-			log.info("New state of model: " + theAnimalModel.getState());
+			log.debug("New state of model: " + theAnimalModel.getState());
 
 			// Save the associated log comment to track the curation
 			// state
@@ -345,8 +348,8 @@ public class ChangeAnimalModelStateAction extends BaseAction {
 			theMap.put(Constants.FORMDATA, theForm);
 			theCurationManager.applyActionsForState(theAnimalModel, theMap);
 
-			log.info("Changed model to inactive");
-			log.info("theAnimalModel.getState(): " + theAnimalModel.getState());
+			log.debug("Changed model to inactive");
+			log.debug("theAnimalModel.getState(): " + theAnimalModel.getState());
 		}
 
 	}

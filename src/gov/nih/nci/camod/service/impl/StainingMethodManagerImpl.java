@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StainingMethodManagerImpl.java,v 1.3 2007-04-20 17:51:27 pandyas Exp $
+ * $Id: StainingMethodManagerImpl.java,v 1.4 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/04/20 17:51:27  pandyas
+ * Modified to add Staining Method tree to Image submission
+ *
  * Revision 1.2  2006/05/24 16:46:14  pandyas
  * Converted StainingMethod to lookup - modified code to pull dropdown list from DB
  *
@@ -52,7 +55,7 @@ public class StainingMethodManagerImpl extends BaseManager implements StainingMe
     public StainingMethod getOrCreate(String inConceptCode,
                                       String inStainingName) throws Exception
     {
-        log.info("<StainingMethodManagerImpl> Entering getOrCreate");
+        log.debug("<StainingMethodManagerImpl> Entering getOrCreate");
         
         StainingMethod theQBEStainingMethod = new StainingMethod();
         theQBEStainingMethod.setConceptCode(inConceptCode);

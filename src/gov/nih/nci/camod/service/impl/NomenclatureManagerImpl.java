@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NomenclatureManagerImpl.java,v 1.4 2007-02-22 21:03:00 pandyas Exp $
+ * $Id: NomenclatureManagerImpl.java,v 1.5 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/02/22 21:03:00  pandyas
+ * Added get method to manager for save bug fix
+ *
  * Revision 1.3  2007/02/21 00:55:08  pandyas
  * Fixed Nomenclature save
  *
@@ -43,7 +46,7 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
      *                when anything goes wrong.
      */
     public Nomenclature get(String id) throws Exception {
-        log.info("In NomenclatureManagerImpl.get");
+        log.debug("In NomenclatureManagerImpl.get");
         return (Nomenclature) super.get(id, Nomenclature.class);
     }    
     
@@ -92,7 +95,7 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
 	
 	public Nomenclature getOrCreate(String inName) throws Exception {
 
-		log.info("<NomenclatureManagerImpl> Entering getOrCreate(String)");
+		log.debug("<NomenclatureManagerImpl> Entering getOrCreate(String)");
 
 		Nomenclature theQBENomenclature = new Nomenclature();
         theQBENomenclature.setName(inName);
@@ -111,7 +114,7 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
             // Doesn't exist. Create object with name 
             else
             {
-                log.info("<NomenclatureManagerImpl> No matching genotype. Create new one");
+                log.debug("<NomenclatureManagerImpl> No matching genotype. Create new one");
                 theNomenclature = theQBENomenclature;
                 if (inName != null)
                 {
@@ -124,7 +127,7 @@ public class NomenclatureManagerImpl extends BaseManager implements Nomenclature
             log.error("Error querying for matching Nomenclature object.  Creating new one.", e);
             theNomenclature = theQBENomenclature;
         }
-        log.info("<NomenclatureManagerImpl> theGenotype: " + theNomenclature.toString());
+        log.debug("<NomenclatureManagerImpl> theGenotype: " + theNomenclature.toString());
         return theNomenclature;
     }
 	

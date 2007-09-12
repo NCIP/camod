@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.17 2007-08-14 17:06:09 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/08/14 17:06:09  pandyas
+ * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
+ *
  * Revision 1.16  2007/06/18 16:13:20  pandyas
  * EVS preferred name does not work for Zebrafish tree so changed
  * Will add this item to EVS gforge to fix, if possilbe
@@ -109,14 +112,14 @@ public class HistopathologyPopulateAction extends BaseAction {
             	
             } else {
 	            histopathologyForm.setOrgan(theHistopathology.getOrgan().getEVSPreferredDescription());
-	            log.info("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
+	            log.debug("theHistopathology.getOrgan().getEVSPreferredDescription(): " + theHistopathology.getOrgan().getEVSPreferredDescription());	
 	            histopathologyForm.setOrganTissueCode(theHistopathology.getOrgan().getConceptCode());
             }
             
             /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = theHistopathology.getDisease();
             if(disease.getNameUnctrlVocab() != null) {
-            	log.info("disease is other in DB");
+            	log.debug("disease is other in DB");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
             	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
             	histopathologyForm.setOtherTumorClassification(disease.getNameUnctrlVocab());
@@ -202,7 +205,7 @@ public class HistopathologyPopulateAction extends BaseAction {
      */
     public void dropdown(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.info("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
+        log.debug("<HistopathologyPopulateAction dropdown> Entering void dropdown()");
 
         // Prepopulate all dropdown fields, set the global Constants to the
         // following

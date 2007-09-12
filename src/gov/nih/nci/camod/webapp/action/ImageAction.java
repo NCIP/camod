@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ImageAction.java,v 1.16 2007-07-31 12:13:41 pandyas Exp $
+ * $Id: ImageAction.java,v 1.17 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/07/31 12:13:41  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.15  2007/07/23 17:40:42  pandyas
  * Fixed typo in word occurred
  *
@@ -60,7 +63,7 @@ public final class ImageAction extends BaseAction {
         // Grab the current modelID from the session
         String aImageID = imageForm.getImageId();
 
-        log.info("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+        log.debug("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
                 + imageForm.getUrl() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
                 + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                
@@ -89,7 +92,7 @@ public final class ImageAction extends BaseAction {
                 saveErrors(request, msg);
 
             } else {
-                log.info("Image edit");
+                log.debug("Image edit");
 
                 // retrieve model and update w/ new values
 
@@ -105,7 +108,7 @@ public final class ImageAction extends BaseAction {
                 imageManager.update(theAnimalModel, imageForm, theImage, inPath,
                         Constants.CaImage.FTPMODELSTORAGEDIRECTORY);
 
-                log.info("New Image created");
+                log.debug("New Image created");
 
                 // Add a message to be displayed in submitOverview.jsp saying
                 // you've
@@ -160,7 +163,7 @@ public final class ImageAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
+        log.debug("<ImageAction save> following Characteristics:" + "\n\t getUrl: "
                 + imageForm.getUrl() + "\n\t getTitle: " + imageForm.getTitle()
                 + "\n\t getDescription: " + imageForm.getDescription()
                 + "\n\t getStainingMethodName() : " + imageForm.getStainingMethodName()                   
@@ -177,7 +180,7 @@ public final class ImageAction extends BaseAction {
             String inPath = request.getSession().getServletContext().getRealPath("/config/temp.jpg");
             theAnimalModelManager.addImage(theAnimalModel, imageForm, inPath);
 
-            log.info("New Image created");
+            log.debug("New Image created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

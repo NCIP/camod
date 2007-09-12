@@ -1,5 +1,8 @@
 /**
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2006/01/18 14:24:23  georgeda
+ * TT# 376 - Updated to use new Java 1.5 features
+ *
  * Revision 1.6  2005/11/15 22:13:46  georgeda
  * Cleanup of drug screening
  *
@@ -7,7 +10,7 @@
  * Fixed part of bug #21
  *
  * 
- * $Id: AgentManagerImpl.java,v 1.7 2006-01-18 14:24:23 georgeda Exp $
+ * $Id: AgentManagerImpl.java,v 1.8 2007-09-12 19:36:03 pandyas Exp $
  * 
  */
 package gov.nih.nci.camod.service.impl;
@@ -91,15 +94,15 @@ public class AgentManagerImpl extends BaseManager implements AgentManager
                 {
                     List resultList = appService.search(gov.nih.nci.cabio.domain.Agent.class, agt);
                     final int resultCount = (resultList != null) ? resultList.size() : 0;
-                    log.info("Got " + resultCount + " results....");
+                    log.debug("Got " + resultCount + " results....");
                     for (Iterator resultsIterator = resultList.iterator(); resultsIterator.hasNext();)
                     {
                         gov.nih.nci.cabio.domain.Agent returnedAgt = (gov.nih.nci.cabio.domain.Agent) resultsIterator.next();
-                        log.info("Returned Agent: " + returnedAgt.getNSCNumber());
+                        log.debug("Returned Agent: " + returnedAgt.getNSCNumber());
                         protocols = returnedAgt.getClinicalTrialProtocolCollection();
                         if (protocols != null)
                         {
-                            log.info("Agent:" + returnedAgt.getName() + "Protocols.size()" + protocols.size());
+                            log.debug("Agent:" + returnedAgt.getName() + "Protocols.size()" + protocols.size());
                         }
                     }
                 }
@@ -124,7 +127,7 @@ public class AgentManagerImpl extends BaseManager implements AgentManager
         {
             // do the query
             String stg = String.valueOf(k);
-            log.info("Calling getYeastScreenResults:" + a.getNscNumber() + " stage=" + stg);
+            log.debug("Calling getYeastScreenResults:" + a.getNscNumber() + " stage=" + stg);
             DrugScreenResult dsr = null;
             try
             {

@@ -1,7 +1,12 @@
 /*
- * $Id: GenomicSegmentManagerImpl.java,v 1.31 2007-08-15 16:00:56 pandyas Exp $
+ * $Id: GenomicSegmentManagerImpl.java,v 1.32 2007-09-12 19:36:04 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.31  2007/08/15 16:00:56  pandyas
+ * Bug #8351:  Construct Sequence info not shown in edit mode and on search page
+ *
+ * Search issue due to not saving construct sequence on GS and TM screens
+ *
  * Revision 1.30  2007/07/31 12:02:29  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -119,7 +124,7 @@ public class GenomicSegmentManagerImpl extends BaseManager implements
 			GenomicSegmentData inGenomicSegmentData,
 			GenomicSegment inGenomicSegment, HttpServletRequest request)
 			throws Exception {
-		log.info("Entering populateGenomicSegment");
+		log.debug("Entering populateGenomicSegment");
 
 		if (inGenomicSegmentData.getIsRandom().equals("yes")) {
 			inGenomicSegment.setIsRandom(true);

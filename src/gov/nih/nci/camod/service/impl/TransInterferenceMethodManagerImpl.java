@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: TransInterferenceMethodManagerImpl.java,v 1.2 2006-10-18 18:10:02 pandyas Exp $
+ * $Id: TransInterferenceMethodManagerImpl.java,v 1.3 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/10/18 18:10:02  pandyas
+ * removed getAll - not used
+ *
  * Revision 1.1  2006/10/17 16:14:05  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -100,7 +103,7 @@ public class TransInterferenceMethodManagerImpl extends BaseManager implements
 				if (theList != null && theList.size() > 0) {
 					theTransIntMethod = (TransientInterferenceMethod) theList
 							.get(0);
-					log.info("theTransIntMethod.getId: "
+					log.debug("theTransIntMethod.getId: "
 							+ theTransIntMethod.getId());
 				}
 			} catch (PersistenceException pe) {

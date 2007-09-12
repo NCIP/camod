@@ -1,8 +1,12 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.21 2007-06-18 19:53:53 pandyas Exp $
+ * $Id: TherapyPopulateAction.java,v 1.22 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/06/18 19:53:53  pandyas
+ * EVS preferred name does not work for Zebrafish tree so changed
+ * Will add this item to EVS gforge to fix, if possilbe
+ *
  * Revision 1.20  2007/05/16 12:29:24  pandyas
  * Added developmental stage evs tree to Therapy when species is Zebrafsih
  *
@@ -152,10 +156,10 @@ public class TherapyPopulateAction extends BaseAction
                 // simply display EVSPreferredDescription -  does not work for Zebrafish vocab
             	therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getEVSPreferredDescription());
                 therapyForm.setDevelopmentalStage(therapy.getDevelopmentalStage().getName());                
-                log.info("setDevelopmentalStage= " + therapy.getDevelopmentalStage().getName());
+                log.debug("setDevelopmentalStage= " + therapy.getDevelopmentalStage().getName());
 
                 therapyForm.setDevelopmentalStageCode(therapy.getDevelopmentalStage().getConceptCode());
-                log.info("setDevelopmentalStageCode= " + therapy.getDevelopmentalStage().getConceptCode());
+                log.debug("setDevelopmentalStageCode= " + therapy.getDevelopmentalStage().getConceptCode());
             }            
             
             // Therapy object attributes

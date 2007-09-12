@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: LoginAction.java,v 1.14 2007-03-20 14:08:48 pandyas Exp $
+ * $Id: LoginAction.java,v 1.15 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/03/20 14:08:48  pandyas
+ * Added logging to debug QA tier
+ *
  * Revision 1.13  2006/10/17 16:11:00  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -71,8 +74,8 @@ public final class LoginAction extends BaseAction {
             HttpServletResponse response) throws IOException, ServletException {
         LoginForm loginForm = (LoginForm) form;
 
-        log.info("Logon Username: " + loginForm.getUsername());
-        log.info("System Config file is: " + System.getProperty("gov.nih.nci.security.configFile"));
+        log.debug("Logon Username: " + loginForm.getUsername());
+        log.debug("System Config file is: " + System.getProperty("gov.nih.nci.security.configFile"));
 
         String theUsername = loginForm.getUsername().toLowerCase();
         
@@ -82,7 +85,7 @@ public final class LoginAction extends BaseAction {
         String forward = "failure";
 
         if (loginOK) {
-            log.info("Successful login");
+            log.debug("Successful login");
             
             forward = "success";
             request.getSession().setAttribute(Constants.CURRENTUSER, theUsername);
@@ -125,11 +128,11 @@ public final class LoginAction extends BaseAction {
                 }
                 
             } catch (Exception e) {
-                log.info( "User search result settings load failed" );
+                log.debug( "User search result settings load failed" );
             }
             
         } else {
-            log.info("Login failed");
+            log.debug("Login failed");
             request.getSession().setAttribute(Constants.LOGINFAILED, "true");
         }
 

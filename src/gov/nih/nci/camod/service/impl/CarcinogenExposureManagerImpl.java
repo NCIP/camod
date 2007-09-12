@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.6 2006-09-22 18:53:40 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.7 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/09/22 18:53:40  pandyas
+ * cleaned up code for mail
+ *
  * Revision 1.5  2006/08/17 17:48:47  pandyas
  * Defect# 410: Externalize properties files - Code Changes to send mail method
  *
@@ -146,7 +149,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inChemicalDrugData, inCarcinogenExposure, "Chemical / Drug");
         populateAgeGender(inChemicalDrugData, inCarcinogenExposure);
@@ -171,7 +174,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                      EnvironmentalFactorData inEnvironmentalFactorData)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.create");
+        log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
 
@@ -201,7 +204,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inEnvironmentalFactorData, inCarcinogenExposure, "Environment");
         populateAgeGender(inEnvironmentalFactorData, inCarcinogenExposure);
@@ -223,7 +226,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
     public CarcinogenExposure create(AnimalModel inAnimalModel,
                                      GrowthFactorData inGrowthFactorData)
     {
-        log.info("In CarcinogenExposureManagerImpl.create");
+        log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inGrowthFactorData, theCarcinogenExposure, "Growth Factor");
@@ -252,7 +255,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inGrowthFactorData, inCarcinogenExposure, "Growth Factor");
         populateAgeGender(inGrowthFactorData, inCarcinogenExposure);
@@ -275,7 +278,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                      HormoneData inHormoneData)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.create");
+        log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inHormoneData, theCarcinogenExposure, "Hormone");
@@ -304,7 +307,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inHormoneData, inCarcinogenExposure, "Hormone");
         populateAgeGender(inHormoneData, inCarcinogenExposure);
@@ -327,7 +330,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                      NutritionalFactorData inNutritionalFactorData)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.create");
+        log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inNutritionalFactorData, theCarcinogenExposure, "Nutrition");
@@ -355,7 +358,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inNutritionalFactorData, inCarcinogenExposure, "Nutrition");
         populateTreatment(inNutritionalFactorData, inCarcinogenExposure);
@@ -377,7 +380,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                      RadiationData inRadiationData)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.create");
+        log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
 
@@ -407,7 +410,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inRadiationData, inCarcinogenExposure, "Radiation");
         populateAgeGender(inRadiationData, inCarcinogenExposure);
@@ -430,7 +433,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                      SurgeryData inSurgeryData)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.create");
+        log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inSurgeryData, theCarcinogenExposure, "Other");
@@ -457,7 +460,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inSurgeryData, inCarcinogenExposure, "Other");
         populateTreatment(inSurgeryData, inCarcinogenExposure);
@@ -479,7 +482,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                      ViralTreatmentData inViralTreatmentData)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.create");
+        log.debug("In CarcinogenExposureManagerImpl.create");
 
         CarcinogenExposure theCarcinogenExposure = new CarcinogenExposure();
         populateName(inAnimalModel, inViralTreatmentData, theCarcinogenExposure, "Viral");
@@ -508,7 +511,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                        CarcinogenExposure inCarcinogenExposure) throws Exception
     {
 
-        log.info("In CarcinogenExposureManagerImpl.update");
+        log.debug("In CarcinogenExposureManagerImpl.update");
 
         populateName(inAnimalModel, inViralTreatmentData, inCarcinogenExposure, "Viral");
         populateAgeGender(inViralTreatmentData, inCarcinogenExposure);
@@ -530,7 +533,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                               String inType)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.populateName");
+        log.debug("In CarcinogenExposureManagerImpl.populateName");
 
         // Set the treatment
         Treatment theTreatment = theCarcinogenExposure.getTreatment();
@@ -553,7 +556,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         if (inNameData.getName().equals(Constants.Dropdowns.OTHER_OPTION))
         {
 
-            log.info("Sending Notification eMail - new Name added");
+            log.debug("Sending Notification eMail - new Name added");
             sendEmail(inAnimalModel, inNameData.getOtherName(), "CarcinogenExposureName");
 
             theEF.setName(null);
@@ -562,7 +565,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         // anytime name is not other, set uncontrolled vocab to null (covers editing)
         else
         {
-            log.info("Name is not other");
+            log.debug("Name is not other");
             theEF.setName(inNameData.getName());
             theEF.setNameUnctrlVocab(null);
         }
@@ -574,7 +577,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                    CarcinogenExposure theCarcinogenExposure)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.populateAgeGender");
+        log.debug("In CarcinogenExposureManagerImpl.populateAgeGender");
 
         // Set the treatment
         Treatment theTreatment = theCarcinogenExposure.getTreatment();
@@ -598,7 +601,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                    CarcinogenExposure theCarcinogenExposure)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.populateTreatment");
+        log.debug("In CarcinogenExposureManagerImpl.populateTreatment");
 
         // Set the treatment
         Treatment theTreatment = theCarcinogenExposure.getTreatment();
@@ -634,7 +637,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                         CarcinogenExposure theCarcinogenExposure)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.populateAdministration");
+        log.debug("In CarcinogenExposureManagerImpl.populateAdministration");
 
         if (inAdministrationData.getAdministrativeRoute() != null && inAdministrationData.getAdministrativeRoute().length() > 0)
         {
@@ -651,12 +654,12 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         // anytime admin route is other
         if (inAdministrationData.getAdministrativeRoute().equals(Constants.Dropdowns.OTHER_OPTION))
         {
-            log.info("admin route equals other");
+            log.debug("admin route equals other");
 
             theCarcinogenExposure.getTreatment().setAdministrativeRoute(null);
             theCarcinogenExposure.getTreatment().setAdminRouteUnctrlVocab(inAdministrationData.getOtherAdministrativeRoute());
 
-            log.info("Sending Notification eMail - new Administrative Route added");
+            log.debug("Sending Notification eMail - new Administrative Route added");
             sendEmail(inAnimalModel, inAdministrationData.getOtherAdministrativeRoute(), "AdministrativeRoute");
 
 
@@ -665,7 +668,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         }
         else if (inAdministrationData.getAdministrativeRoute() != null)
         {
-            log.info("admin route not other or null");
+            log.debug("admin route not other or null");
 
             theCarcinogenExposure.getTreatment().setAdministrativeRoute(inAdministrationData.getAdministrativeRoute());
             theCarcinogenExposure.getTreatment().setAdminRouteUnctrlVocab(null);
@@ -684,7 +687,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
                                       CarcinogenExposure theCarcinogenExposure)
     {
 
-        log.info("In CarcinogenExposureManagerImpl.populateChemicalDrug");
+        log.debug("In CarcinogenExposureManagerImpl.populateChemicalDrug");
 
         EnvironmentalFactor theEF = theCarcinogenExposure.getEnvironmentalFactor();
 
@@ -738,7 +741,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         for (int i = 0; i < inRecipients.length; i++)
         {
             inRecipients[i] = st.nextToken();
-        	log.info("Defining recipients from the properties file: " + inRecipients[i]);             
+        	log.debug("Defining recipients from the properties file: " + inRecipients[i]);             
         }
 
     	String inSubject = camodProperties.getProperty("model.new_unctrl_vocab_subject");

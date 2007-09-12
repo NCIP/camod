@@ -1,9 +1,12 @@
 /**
  *  @author dgeorge
  *  
- *  $Id: AddCommentsAction.java,v 1.2 2007-07-31 12:02:38 pandyas Exp $
+ *  $Id: AddCommentsAction.java,v 1.3 2007-09-12 19:36:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2007/07/31 12:02:38  pandyas
+ *  VCDE silver level  and caMOD 2.3 changes
+ *
  *  Revision 1.1  2005/10/11 18:15:25  georgeda
  *  More comment changes
  *
@@ -40,9 +43,9 @@ public class AddCommentsAction extends BaseAction {
 
             CommentsForm theForm = (CommentsForm) inForm;
 
-            log.info("ModelId: " + theForm.getModelId());
-            log.info("Remark: " + theForm.getRemark());
-            log.info("Section Name: " + theForm.getSectionName());
+            log.debug("ModelId: " + theForm.getModelId());
+            log.debug("Remark: " + theForm.getRemark());
+            log.debug("Section Name: " + theForm.getSectionName());
 
             // Set any necessary form data
             String theCurrentUser = (String) inRequest.getSession().getAttribute(Constants.CURRENTUSER);

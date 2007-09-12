@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: TransientInterferenceManagerImpl.java,v 1.4 2007-04-04 13:18:06 pandyas Exp $
+ * $Id: TransientInterferenceManagerImpl.java,v 1.5 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2007/04/04 13:18:06  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.3  2007/03/26 12:01:11  pandyas
  * caMOd 2.3 enhancements for Zebrafish support
  *
@@ -43,7 +46,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 		TransientInterferenceManager {
 
 	public List getAll() throws Exception {
-		log.info("In TransientInterferenceManagerImpl.getAll");
+		log.debug("In TransientInterferenceManagerImpl.getAll");
 		return super.getAll(TransientInterference.class);
 	}
 
@@ -59,7 +62,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 	 *                when anything goes wrong.
 	 */
 	public TransientInterference get(String id) throws Exception {
-		log.info("In TransientInterferenceManagerImpl.get");
+		log.debug("In TransientInterferenceManagerImpl.get");
 		return (TransientInterference) super.get(id,
 				TransientInterference.class);
 	}
@@ -75,7 +78,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 	 */
 	public void save(TransientInterference transientInterference)
 			throws Exception {
-		log.info("In TransientInterferenceManagerImpl.save");
+		log.debug("In TransientInterferenceManagerImpl.save");
 		super.save(transientInterference);
 	}
 
@@ -89,7 +92,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 	 *                when anything goes wrong.
 	 */
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.info("In TransientInterferenceManagerImpl.remove");
+		log.debug("In TransientInterferenceManagerImpl.remove");
 
 		TransientInterference theTransientInterference = get(id);
 
@@ -110,7 +113,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			TransientInterferenceData inTransientInterferenceData)
 			throws Exception {
 
-		log.info("In TransientInterferenceManagerImpl.create Entering");
+		log.debug("In TransientInterferenceManagerImpl.create Entering");
 
 		TransientInterference theTransientInterference = new TransientInterference();
 
@@ -121,7 +124,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 		populate(inTransientInterferenceData, theTransientInterference,
 				inAnimaModel);
 
-		log.info("In TransientInterferenceManagerImpl.create Exiting");
+		log.debug("In TransientInterferenceManagerImpl.create Exiting");
 		return theTransientInterference;
 	}
 
@@ -142,16 +145,16 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			TransientInterference inTransInt,
 			AnimalModel inAnimalModel) throws Exception {
 		
-		log.info("Entering populateTransMethod");
+		log.debug("Entering populateTransMethod");
 
-		log.info("inTransientInterferenceData.getConceptCode(): "
+		log.debug("inTransientInterferenceData.getConceptCode(): "
 				+ inTransIntData.getConceptCode());
 
 		/* get TransientInterferenceMethod object */
 		TransientInterferenceMethod theMethod = TransIntMethodManagerSingleton
 				.instance().getByConceptCode(
 						inTransIntData.getConceptCode());
-		log.info("In populateTransMethod TIMethod: " + theMethod);
+		log.debug("In populateTransMethod TIMethod: " + theMethod);
 
 		// set TransientInterferenceMethod
 		inTransInt.setTransientInterferenceMethod(theMethod);
@@ -161,22 +164,22 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 			TransientInterferenceData inTransIntData,
 			TransientInterference inTransInt,
 			AnimalModel inAnimalModel) throws Exception {
-		log.info("<TransientInterferenceManagerImpl> Entering populate");
+		log.debug("<TransientInterferenceManagerImpl> Entering populate");
 
 		// Save Source
 		if (inTransIntData.getSource().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			log.info("source equals other");
+			log.debug("source equals other");
 			inTransInt.setSource(null);
 			inTransInt
 					.setSourceUnctrVocab(inTransIntData
 							.getOtherSource());
 
-			log.info("Sending Notification eMail - new Source added");
+			log.debug("Sending Notification eMail - new Source added");
 			sendEmail(inAnimalModel, inTransIntData
 					.getOtherSource(), "otherSource");
 		} else if (inTransIntData.getSource() != null) {
-			log.info("source not other or null");
+			log.debug("source not other or null");
 			inTransInt.setSource(inTransIntData
 					.getSource());
 			inTransInt.setSourceUnctrVocab(null);
@@ -209,17 +212,17 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 		// Save Delivery Method
 		if (inTransIntData.getDeliveryMethod().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			log.info("DeliveryMethod equals other");
+			log.debug("DeliveryMethod equals other");
 			inTransInt.setDeliveryMethod(null);
 			inTransInt
 					.setDeliveryMethodUnctrlVocab(inTransIntData
 							.getOtherDeliveryMethod());
 
-			log.info("Sending Notification eMail - new DeliveryMethod added");
+			log.debug("Sending Notification eMail - new DeliveryMethod added");
 			sendEmail(inAnimalModel, inTransIntData
 					.getOtherDeliveryMethod(), "otherDeliveryMethod");
 		} else if (inTransIntData.getDeliveryMethod() != null) {
-			log.info("DeliveryMethod not other or null");
+			log.debug("DeliveryMethod not other or null");
 			inTransInt
 					.setDeliveryMethod(inTransIntData
 							.getDeliveryMethod());
@@ -229,17 +232,17 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 		// Save visualizationLigands
 		if (inTransIntData.getVisualLigand().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
-			log.info("visualizationLigands equals other");
+			log.debug("visualizationLigands equals other");
 			inTransInt.setVisualLigand(null);
 			inTransInt
 					.setVisualLigandUnctrlVocab(inTransIntData
 							.getOtherVisualLigand());
 
-			log.info("Sending Notification eMail - new VisualLigands added");
+			log.debug("Sending Notification eMail - new VisualLigands added");
 			sendEmail(inAnimalModel, inTransIntData
 					.getOtherVisualLigand(), "otherVisualLigands");
 		} else if (inTransIntData.getVisualLigand() != null) {
-			log.info("visualLigands not other or null");
+			log.debug("visualLigands not other or null");
 			inTransInt.setVisualLigand(inTransIntData
 					.getVisualLigand());
 			inTransInt.setVisualLigandUnctrlVocab(null);
@@ -249,7 +252,7 @@ public class TransientInterferenceManagerImpl extends BaseManager implements
 		inTransInt.setComments(inTransIntData
 				.getComments());
 
-		log.info("<TransientInterfaceManagerImpl> Exiting populate");
+		log.debug("<TransientInterfaceManagerImpl> Exiting populate");
 	}
 
 	private void sendEmail(AnimalModel inAnimalModel,

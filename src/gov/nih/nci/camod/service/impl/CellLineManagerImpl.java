@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: CellLineManagerImpl.java,v 1.19 2007-06-20 17:55:13 pandyas Exp $
+ * $Id: CellLineManagerImpl.java,v 1.20 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/06/20 17:55:13  pandyas
+ * Fixed save and edit for cell line
+ *
  * Revision 1.18  2007/06/13 20:20:09  pandyas
  * Modified code for EVS trees after formal testing
  *
@@ -212,11 +215,11 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
     
     private void populateOrgan(CellLineData inCellLineData,  CellLine inCellLine) throws Exception {
 
-        log.info("<CellLineManagerImpl> Entering populateOrgan");
+        log.debug("<CellLineManagerImpl> Entering populateOrgan");
 
         // Update loop handeled separately for conceptCode = 00000
         if (inCellLineData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
-            log.info("Organ update loop for text: " + inCellLineData.getOrgan()); 
+            log.debug("Organ update loop for text: " + inCellLineData.getOrgan()); 
             inCellLine.setOrgan(new Organ());
             inCellLine.getOrgan().setName(inCellLineData.getOrgan());   
             inCellLine.getOrgan().setConceptCode(
@@ -224,25 +227,25 @@ public class CellLineManagerImpl extends BaseManager implements CellLineManager 
         } else {            
             // Using trees loop, new save loop and update loop
             if (inCellLineData.getOrganTissueCode() != null && inCellLineData.getOrganTissueCode().length() > 0) {
-                log.info("OrganTissueCode: " + inCellLineData.getOrganTissueCode());
-                log.info("OrganTissueName: " + inCellLineData.getOrganTissueName()); 
+                log.debug("OrganTissueCode: " + inCellLineData.getOrganTissueCode());
+                log.debug("OrganTissueName: " + inCellLineData.getOrganTissueName()); 
                 
-                log.info("OrganTissueCode() != null - getOrCreate method used");
+                log.debug("OrganTissueCode() != null - getOrCreate method used");
                 // when using tree, organTissueName populates the organ name entry
                 Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
                         inCellLineData.getOrganTissueCode(),
                         inCellLineData.getOrganTissueName());
                 
-                log.info("theNewOrgan: " + theNewOrgan);
+                log.debug("theNewOrgan: " + theNewOrgan);
                 inCellLine.setOrgan(theNewOrgan); 
             } else {
                 // text entry loop = new save
-                log.info("Organ (text): " + inCellLineData.getOrgan()); 
+                log.debug("Organ (text): " + inCellLineData.getOrgan()); 
                 inCellLine.setOrgan(new Organ());
                 inCellLine.getOrgan().setName(inCellLineData.getOrgan());                
                 inCellLine.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS); 
-                log.info("Organ: " + inCellLine.getOrgan().toString());
+                log.debug("Organ: " + inCellLine.getOrgan().toString());
             }           
             
         }        

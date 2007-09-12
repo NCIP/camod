@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AbstractCurationManager.java,v 1.13 2006-10-17 16:13:47 pandyas Exp $
+ * $Id: AbstractCurationManager.java,v 1.14 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/10/17 16:13:47  pandyas
+ * modified during development of caMOD 2.2 - various
+ *
  * Revision 1.12  2006/05/08 13:32:15  georgeda
  * Clean up warnings
  *
@@ -272,19 +275,19 @@ public abstract class AbstractCurationManager implements CurationManager
     public void changeState(Curateable inCurateableObj,
                             String inEvent)
     {
-        log.info("Entering changeState");
-        log.info("inEvent: " + inEvent);
+        log.debug("Entering changeState");
+        log.debug("inEvent: " + inEvent);
         
         String theCurrentStateName = inCurateableObj.getState();
-        log.info("Current state: (" + theCurrentStateName + ")");
+        log.debug("Current state: (" + theCurrentStateName + ")");
 
         if (myStates.containsKey(theCurrentStateName))
         {
             State theCurrentState = (State) myStates.get(theCurrentStateName);
-            log.info("Current state: (" + theCurrentStateName + ")");
+            log.debug("Current state: (" + theCurrentStateName + ")");
             
             String theNextStateName = theCurrentState.getNextState(inEvent);
-            log.info("theNextStateName: (" + theNextStateName + ")");
+            log.debug("theNextStateName: (" + theNextStateName + ")");
             
 
             if (theNextStateName.equals(""))
@@ -293,7 +296,7 @@ public abstract class AbstractCurationManager implements CurationManager
             }
             else if (myStates.containsKey(theNextStateName))
             {
-                log.info("Setting to state: " + theNextStateName);
+                log.debug("Setting to state: " + theNextStateName);
                 inCurateableObj.setState(theNextStateName);
             }
             else
@@ -318,11 +321,11 @@ public abstract class AbstractCurationManager implements CurationManager
     public void applyActionsForState(Curateable inCurateableObj,
                                      Map<String, Object> inArgs)
     {
-        log.info("Entering applyActionsForState");
+        log.debug("Entering applyActionsForState");
 
         String theCurrentStateName = inCurateableObj.getState();
 
-        log.info("Current state: (" + theCurrentStateName + ")");
+        log.debug("Current state: (" + theCurrentStateName + ")");
 
         if (myStates.containsKey(theCurrentStateName))
         {
@@ -362,7 +365,7 @@ public abstract class AbstractCurationManager implements CurationManager
                 // Execute the action
                 if (theAction != null)
                 {
-                    log.info("Applying action: " + theActionEntry);
+                    log.debug("Applying action: " + theActionEntry);
 
                     // Actions by default are not show stoppers if they
                     // don't work
@@ -383,7 +386,7 @@ public abstract class AbstractCurationManager implements CurationManager
             throw new IllegalArgumentException("Unknown current state: " + theCurrentStateName);
         }
 
-        log.info("Exiting applyActionsForState");
+        log.debug("Exiting applyActionsForState");
 
         return;
     }

@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GraftManagerImpl.java,v 1.3 2007-08-07 18:33:02 pandyas Exp $
+ * $Id: GraftManagerImpl.java,v 1.4 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/08/07 18:33:02  pandyas
+ * Renamed to GRAFT as per VCDE comments
+ *
  * Revision 1.2  2007/08/01 18:06:03  pandyas
  * VCDE changes
  *
@@ -159,14 +162,14 @@ public class GraftManagerImpl extends BaseManager implements
 		populateOrgan(inGraftData, theGraft);
 		populateGraft(inGraftData, theGraft, inAnimalModel);
 
-		log.info("<GraftManagerImpl> Exiting GraftManagerImpl.create");
+		log.debug("<GraftManagerImpl> Exiting GraftManagerImpl.create");
 
 		return theGraft;
 	}
 
 	public void update(GraftData inGraftData, Graft inGraft,
 			AnimalModel inAnimalModel) throws Exception {
-		log.info("Entering GraftManagerImpl.update GraftId: "
+		log.debug("Entering GraftManagerImpl.update GraftId: "
 				+ inGraft.getId());
 
         // Populate w/ the new values and save
@@ -175,13 +178,13 @@ public class GraftManagerImpl extends BaseManager implements
         populateGraft(inGraftData, inGraft, inAnimalModel);
         save(inGraft);
 
-        log.info("Exiting GraftManagerImpl.update");
+        log.debug("Exiting GraftManagerImpl.update");
     }
 
 	private void populateGraft(GraftData inGraftData,
 			Graft inGraft, AnimalModel inAnimalModel) throws Exception {
 
-        log.info("Entering GraftManagerImpl.populateGraft");
+        log.debug("Entering GraftManagerImpl.populateGraft");
 
         /* Set graft name */
         inGraft.setName(inGraftData.getName());
@@ -209,10 +212,10 @@ public class GraftManagerImpl extends BaseManager implements
 		if (inGraftData.getConditioningRegimen().equals(
 				Constants.Dropdowns.OTHER_OPTION)) {
 			inGraft.setConditioningRegimen(null);
-			log.info("ConditioningRegimen = Other");
+			log.debug("ConditioningRegimen = Other");
 			// Do not save "other" value in the DB
 			inGraft.setCondRegimenUnctrlVocab(inGraftData.getOtherConditioningRegimen());
-			log.info("OtherConditioningRegimen = " + inGraftData.getOtherConditioningRegimen());
+			log.debug("OtherConditioningRegimen = " + inGraftData.getOtherConditioningRegimen());
 
 			// Send e-mail for other ConditioningRegime
 			sendEmail(inAnimalModel, inGraftData
@@ -220,7 +223,7 @@ public class GraftManagerImpl extends BaseManager implements
 		} else {
 			inGraft.setConditioningRegimen(inGraftData
 					.getConditioningRegimen());
-			log.info("ConditioningRegimen not other= " + inGraftData
+			log.debug("ConditioningRegimen not other= " + inGraftData
 					.getConditioningRegimen());
 
 			// Null out during editing from 'other' to selected
@@ -257,7 +260,7 @@ public class GraftManagerImpl extends BaseManager implements
 			inGraft.setSourceTypeUnctrlVocab(null);
 		}
 
-		log.info("Exiting GraftManagerImpl.populateGraft");
+		log.debug("Exiting GraftManagerImpl.populateGraft");
 	}
 
 	private void populateSpeciesStrain(GraftData inGraftData,
@@ -285,7 +288,7 @@ public class GraftManagerImpl extends BaseManager implements
 					.getOtherDonorEthinicityStrain(), "Donor Strain");
 		}
 
-		log.info("\n <populateSpeciesStrain> theSpecies is NOT other: ");
+		log.debug("\n <populateSpeciesStrain> theSpecies is NOT other: ");
 		inGraft.setStrain(theStrain);
 
 	}
@@ -293,51 +296,51 @@ public class GraftManagerImpl extends BaseManager implements
 	private void populateOrgan(GraftData inGraftData,
 			Graft inGraft) throws Exception {
         
-        log.info("<GraftManagerImpl> populateOrgan: ");        
+        log.debug("<GraftManagerImpl> populateOrgan: ");        
 
         // Update loop handeled separately for conceptCode = 00000
         if (inGraftData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
             if(inGraftData.getOrgan() != null && inGraftData.getOrgan().length() >0 ) {
-                log.info("Organ update loop for text: " + inGraftData.getOrgan()); 
+                log.debug("Organ update loop for text: " + inGraftData.getOrgan()); 
                 inGraft.setOrgan(new Organ());
                 inGraft.getOrgan().setName(inGraftData.getOrgan());   
                 inGraft.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS);     
             } else {
-                log.info("Clear previously entered organ text: " );
+                log.debug("Clear previously entered organ text: " );
                 inGraft.setOrgan(null); 
             }
         } else {            
             // Using trees loop, new save loop and update loop
             if (inGraftData.getOrganTissueCode() != null && inGraftData.getOrganTissueCode().length() > 0
                     && inGraftData.getOrganTissueName() != null && inGraftData.getOrganTissueName().length() > 0) {
-                log.info("OrganTissueCode: " + inGraftData.getOrganTissueCode());
-                log.info("OrganTissueName: " + inGraftData.getOrganTissueName()); 
+                log.debug("OrganTissueCode: " + inGraftData.getOrganTissueCode());
+                log.debug("OrganTissueName: " + inGraftData.getOrganTissueName()); 
                 
-                log.info("OrganTissueCode() != null - getOrCreate method used");
+                log.debug("OrganTissueCode() != null - getOrCreate method used");
                 // when using tree, organTissueName populates the organ name entry
                 Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
                 		inGraftData.getOrganTissueCode(),
                 		inGraftData.getOrganTissueName());
                 
-                log.info("theNewOrgan: " + theNewOrgan);
+                log.debug("theNewOrgan: " + theNewOrgan);
                 inGraft.setOrgan(theNewOrgan); 
             } 
             // Clear organ selection via GUI
             if (inGraftData.getOrgan() == null && inGraftData.getOrganTissueCode().length() <1 ) {
-                log.info("Null out organ when cleared: " );
+                log.debug("Null out organ when cleared: " );
                 inGraft.setOrgan(null);                 
 
             }
             // initial save text entry organ from GUI
             if (inGraftData.getOrgan() != null && inGraftData.getOrgan().length() >0 ) {
                 // text entry loop = new save
-                log.info("Organ (initial text entry): " + inGraftData.getOrgan()); 
+                log.debug("Organ (initial text entry): " + inGraftData.getOrgan()); 
                 inGraft.setOrgan(new Organ());
                 inGraft.getOrgan().setName(inGraftData.getOrgan());                
                 inGraft.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS); 
-                log.info("New Organ: " + inGraft.getOrgan().toString());
+                log.debug("New Organ: " + inGraft.getOrgan().toString());
             }           
             
         } 

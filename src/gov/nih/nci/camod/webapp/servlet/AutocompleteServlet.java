@@ -46,6 +46,9 @@
  * $Id$
  *
  * $Log$
+ * Revision 1.8  2006/11/09 17:17:28  pandyas
+ * Commented out debug code
+ *
  * Revision 1.7  2006/08/17 17:58:26  pandyas
  * Defect# 410: Externalize properties files - Code changes to get properties
  *
@@ -159,37 +162,37 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 
 		if (theModelDescriptor != null
 				&& theModelDescriptor.trim().length() > 0) {
-			log.info("Searching for model descriptors matching: "
+			log.debug("Searching for model descriptors matching: "
 					+ theModelDescriptor);
 			theModelDescriptor = theModelDescriptor.trim().toLowerCase();
 			theGenericDescriptorList = getMatchingModelDescriptors(
 					theModelDescriptor, ourNumMatchesToReturn);
 		} else if (theGeneName != null && theGeneName.trim().length() > 0) {
-			log.info("Searching for gene name matching: " + theGeneName);
+			log.debug("Searching for gene name matching: " + theGeneName);
 			theGeneName = theGeneName.trim().toLowerCase();
 			theGenericDescriptorList = getMatchingGeneNames(theGeneName,
 					ourNumMatchesToReturn);
 		} else if (theTherapeuticApproach != null
 				&& theTherapeuticApproach.trim().length() > 0) {
-			log.info("Searching for therapeutic approach matching: "
+			log.debug("Searching for therapeutic approach matching: "
 					+ theTherapeuticApproach);
 			theTherapeuticApproach = theTherapeuticApproach.trim()
 					.toLowerCase();
 			theGenericDescriptorList = getMatchineTherapeuticApproachs(
 					theTherapeuticApproach, ourNumMatchesToReturn);
 		} else if (theNSCNumber != null && theNSCNumber.trim().length() > 0) {
-			log.info("Searching for nsc number matching: " + theNSCNumber);
+			log.debug("Searching for nsc number matching: " + theNSCNumber);
 			theNSCNumber = theNSCNumber.trim().toLowerCase();
 			theGenericDescriptorList = getMatchingNSCNumbers(theNSCNumber,
 					ourNumMatchesToReturn);
 		} else if (theOrgan != null && theOrgan.trim().length() > 0) {
-			log.info("Searching for organ matching: " + theOrgan);
+			log.debug("Searching for organ matching: " + theOrgan);
 			theOrgan = theOrgan.trim().toLowerCase();
 			theGenericDescriptorList = getMatchingOrganNames(theOrgan,
 					ourNumMatchesToReturn);
 		} else if (theTumorClassification != null
 				&& theTumorClassification.trim().length() > 0) {
-			log.info("Searching for tumor classification matching: "
+			log.debug("Searching for tumor classification matching: "
 					+ theTumorClassification);
 			theTumorClassification = theTumorClassification.trim()
 					.toLowerCase();
@@ -202,7 +205,7 @@ public class AutocompleteServlet extends BaseAjaxServlet {
 		String theXmlResponse = new AjaxXmlBuilder().addItems(
 				theGenericDescriptorList, "source", "target").toString();
 
-		log.info("Number matched: " + theGenericDescriptorList.size());
+		log.debug("Number matched: " + theGenericDescriptorList.size());
 		log.debug("Exiting getXmlContent");
 
 		return theXmlResponse;

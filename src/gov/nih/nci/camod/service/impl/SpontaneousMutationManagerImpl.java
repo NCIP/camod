@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.14 2007-04-04 13:17:49 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.15 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/04/04 13:17:49  pandyas
+ * modified names for mutation identifier fields (number changed to id)
+ *
  * Revision 1.13  2007/03/27 18:38:15  pandyas
  * Modified code to trim identifiers - cleaner for display link
  *
@@ -102,7 +105,7 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         if (inSpontaneousMutation.getGeneticAlteration() == null && inSpontaneousMutationData.getObservation() != null && inSpontaneousMutationData.getObservation().length() > 0)
         {
             inSpontaneousMutation.setGeneticAlteration(new GeneticAlteration());
-            log.info("Saving: inSpontaneousMutation.getGeneticAlteration() attributes ");
+            log.debug("Saving: inSpontaneousMutation.getGeneticAlteration() attributes ");
 
             inSpontaneousMutation.getGeneticAlteration().setObservation(inSpontaneousMutationData.getObservation());
             inSpontaneousMutation.getGeneticAlteration().setMethodOfObservation(inSpontaneousMutationData.getMethodOfObservation());

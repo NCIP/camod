@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryAction.java,v 1.19 2007-07-23 17:40:42 pandyas Exp $
+ * $Id: GeneDeliveryAction.java,v 1.20 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/07/23 17:40:42  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.18  2007/06/26 16:14:58  pandyas
  * Fixed save when organ cleared from text entry and by use of the clear button for trees
  *
@@ -64,7 +67,7 @@ public final class GeneDeliveryAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<GeneDeliveryAction> Entering edit");
+        log.debug("<GeneDeliveryAction> Entering edit");
 
         // Create a form to edit
         GeneDeliveryForm geneDeliveryForm = (GeneDeliveryForm) form;
@@ -75,7 +78,7 @@ public final class GeneDeliveryAction extends BaseAction {
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<GeneDeliveryAction edit> following Characteristics:" + "\n\t ViralVector: "
+        log.debug("<GeneDeliveryAction edit> following Characteristics:" + "\n\t ViralVector: "
                 + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
                 + geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
                 + "\n\t Regimen: " + geneDeliveryForm.getRegimen() 
@@ -122,7 +125,7 @@ public final class GeneDeliveryAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.info("<GeneDeliveryAction> Exiting edit");
+        log.debug("<GeneDeliveryAction> Exiting edit");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -147,7 +150,7 @@ public final class GeneDeliveryAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<GeneDeliveryAction save> following Characteristics:" + "\n\t ViralVector: "
+        log.debug("<GeneDeliveryAction save> following Characteristics:" + "\n\t ViralVector: "
                 + geneDeliveryForm.getViralVector() + "\n\t OtherViralVector: "
                 + geneDeliveryForm.getOtherViralVector() + "\n\t GeneInVirus: " + geneDeliveryForm.getGeneInVirus()
                 + "\n\t Regimen: " + geneDeliveryForm.getRegimen() 
@@ -166,7 +169,7 @@ public final class GeneDeliveryAction extends BaseAction {
 
             theAnimalModelManager.addGeneDelivery(theAnimalModel, geneDeliveryForm);
 
-            log.info("New GeneDelivery created");
+            log.debug("New GeneDelivery created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

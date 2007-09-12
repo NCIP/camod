@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneAction.java,v 1.15 2007-07-31 12:13:42 pandyas Exp $
+ * $Id: EngineeredTransgeneAction.java,v 1.16 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/07/31 12:13:42  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.14  2007/07/23 17:40:42  pandyas
  * Fixed typo in word occurred
  *
@@ -61,7 +64,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
         // Grab the current modelID from the session
         String aEngineeredTransgeneID = engineeredTransgeneForm.getTransgeneId();
 
-        log.info("<EngineeredTransgeneAction save> following Characteristics:"
+        log.debug("<EngineeredTransgeneAction save> following Characteristics:"
 
                  + "\n\t getIsRandom: " + engineeredTransgeneForm.getIsRandom()
                  + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
@@ -129,7 +132,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
 
             } else {
 
-                log.info("EngineeredTransgene edit");
+                log.debug("EngineeredTransgene edit");
                 // retrieve model and update w/ new values
 
                 Transgene theEngineeredTransgene = engineeredTransgeneManager.get(aEngineeredTransgeneID);
@@ -186,7 +189,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
         // Grab the current modelID from the session
         String theModelId = (String) request.getSession().getAttribute(Constants.MODELID);
 
-        log.info("<EngineeredTransgeneAction save> following Characteristics:"
+        log.debug("<EngineeredTransgeneAction save> following Characteristics:"
                 + "\n\t getIsRandom: " + engineeredTransgeneForm.getIsRandom()
                 + "\n\t getLocationOfIntegration: " + engineeredTransgeneForm.getLocationOfIntegration()
                 + "\n\t getName: " + engineeredTransgeneForm.getName() + "\n\t getScientificName: "
@@ -239,7 +242,7 @@ public final class EngineeredTransgeneAction extends BaseAction {
 
             theAnimalModelManager.addGeneticDescription(theAnimalModel, engineeredTransgeneForm, request);
 
-            log.info("New EngineeredTransgene created");
+            log.debug("New EngineeredTransgene created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

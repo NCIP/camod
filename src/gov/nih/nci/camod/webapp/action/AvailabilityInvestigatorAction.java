@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.7 2007-07-23 17:40:43 pandyas Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.8 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/07/23 17:40:43  pandyas
+ * Fixed typo in word occurred
+ *
  * Revision 1.6  2005/11/11 15:38:58  georgeda
  * Fix error w/ PI being required
  *
@@ -62,7 +65,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
     public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityInvestigatorAction> Entering edit");
+        log.debug("<AvailabilityInvestigatorAction> Entering edit");
 
         // Create a form to edit
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
@@ -117,7 +120,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
             saveErrors(request, msg);
         }
 
-        log.info("<AvailabilityInvestigatorAction> Exiting edit");
+        log.debug("<AvailabilityInvestigatorAction> Exiting edit");
         return mapping.findForward("AnimalModelTreePopulateAction");
     }
 
@@ -134,7 +137,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        log.info("<AvailabilityInvestigatorAction> Entering save");
+        log.debug("<AvailabilityInvestigatorAction> Entering save");
 
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -155,7 +158,7 @@ public class AvailabilityInvestigatorAction extends BaseAction {
         try {
             theAnimalModelManager.addInvestigatorAvailability(animalModel, availabilityForm);
 
-            log.info("New Investigator Availability created");
+            log.debug("New Investigator Availability created");
 
             // Add a message to be displayed in submitOverview.jsp saying you've
             // created a new model successfully

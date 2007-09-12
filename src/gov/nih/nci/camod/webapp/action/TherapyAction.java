@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyAction.java,v 1.17 2007-05-16 12:29:24 pandyas Exp $
+ * $Id: TherapyAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/05/16 12:29:24  pandyas
+ * Added developmental stage evs tree to Therapy when species is Zebrafsih
+ *
  * Revision 1.16  2006/10/27 16:33:49  pandyas
  * fixed printout on error - typo
  *
@@ -69,7 +72,7 @@ public final class TherapyAction extends BaseAction {
 	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		log.info("<TherapyAction> Entering edit");
+		log.debug("<TherapyAction> Entering edit");
 		
         // Grab the current modelID from the session
         String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -150,7 +153,7 @@ public final class TherapyAction extends BaseAction {
 	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		log.info("<TherapyAction> Entering save");
+		log.debug("<TherapyAction> Entering save");
 
 		// Grab the current modelID from the session
 		String modelID = (String) request.getSession().getAttribute(Constants.MODELID);
@@ -182,7 +185,7 @@ public final class TherapyAction extends BaseAction {
 		AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-            log.info("<TherapyAction> Entering try block");            
+            log.debug("<TherapyAction> Entering try block");            
 			animalModelManager.addTherapy(animalModel, therapyForm);
 
 			// Add a message to be displayed in submitOverview.jsp saying you've

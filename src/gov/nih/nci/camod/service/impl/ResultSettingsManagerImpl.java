@@ -22,7 +22,7 @@ public class ResultSettingsManagerImpl  extends BaseManager implements ResultSet
      */
     public void save(ResultSettings inResultSettings) throws Exception
     {
-        log.info( "Entering ResultSettingsManagerImpl.save" );
+        log.debug( "Entering ResultSettingsManagerImpl.save" );
         
         // Save to db
         super.save(inResultSettings);
@@ -39,7 +39,7 @@ public class ResultSettingsManagerImpl  extends BaseManager implements ResultSet
      */
     public void remove(String id) throws Exception
     {
-        log.info( "Entering ResultSettingsManagerImpl.remove" );
+        log.debug( "Entering ResultSettingsManagerImpl.remove" );
         
         //delete from db
         super.remove( id, ResultSettings.class );      
@@ -56,7 +56,7 @@ public class ResultSettingsManagerImpl  extends BaseManager implements ResultSet
      */
     public ResultSettings get(String id) throws Exception
     {     
-        log.info( "Entering ResultSettingsManagerImpl.get" );  
+        log.debug( "Entering ResultSettingsManagerImpl.get" );  
         
         ResultSettings theResultSettings = (ResultSettings) super.get(id, ResultSettings.class );
         return theResultSettings;
@@ -73,7 +73,7 @@ public class ResultSettingsManagerImpl  extends BaseManager implements ResultSet
      */
     public ResultSettings getByUsername(String username) throws Exception
     {     
-        log.info( "Entering ResultSettingsManagerImpl.get" );       
+        log.debug( "Entering ResultSettingsManagerImpl.get" );       
         
         List theResultSettingsList = QueryManagerSingleton.instance().getResultSettingsByUsername( username );        
         
@@ -99,7 +99,7 @@ public class ResultSettingsManagerImpl  extends BaseManager implements ResultSet
      */
     public void update(ResultSettings inResultSettings) throws Exception
     {
-        log.info( "Entering ResultSettingsManagerImpl.update" );
+        log.debug( "Entering ResultSettingsManagerImpl.update" );
         
         // Save to db
         super.save(inResultSettings);       

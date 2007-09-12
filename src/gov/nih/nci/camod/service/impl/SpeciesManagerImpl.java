@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SpeciesManagerImpl.java,v 1.4 2006-05-03 20:03:41 pandyas Exp $
+ * $Id: SpeciesManagerImpl.java,v 1.5 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/05/03 20:03:41  pandyas
+ * Removed commonName method since it is not used
+ *
  * Revision 1.3  2006/04/20 18:11:30  pandyas
  * Cleaned up Species or Strain save of Other in DB
  *
@@ -107,7 +110,7 @@ public class SpeciesManagerImpl extends BaseManager implements SpeciesManager
     public Species getOrCreate(String inScientificName,
                                String inOtherName) throws Exception
     {
-        log.info("<SpeciesManagerImpl> Entering getOrCreate");
+        log.debug("<SpeciesManagerImpl> Entering getOrCreate");
 
         Species theQBESpecies = new Species();
 

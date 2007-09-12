@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenotypeManagerImpl.java,v 1.3 2007-02-22 21:02:52 pandyas Exp $
+ * $Id: GenotypeManagerImpl.java,v 1.4 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/02/22 21:02:52  pandyas
+ * Added get method to manager for save bug fix
+ *
  * Revision 1.2  2007/02/01 19:07:06  pandyas
  * Fixed Genotype bug - working on saving Nomenclature
  *
@@ -41,7 +44,7 @@ public class GenotypeManagerImpl extends BaseManager implements GenotypeManager
      *                when anything goes wrong.
      */
     public Genotype get(String id) throws Exception {
-        log.info("In GenotypeManagerImpl.get");
+        log.debug("In GenotypeManagerImpl.get");
         return (Genotype) super.get(id, Genotype.class);
     }
     
@@ -65,7 +68,7 @@ public class GenotypeManagerImpl extends BaseManager implements GenotypeManager
 
         if (inName != null && inName.length() > 0)
         {
-            log.info("<GenotypeManagerImpl.getByName> Entered inName: " +inName);              
+            log.debug("<GenotypeManagerImpl.getByName> Entered inName: " +inName);              
             try
             {
                 // The following two objects are needed for eQBE.
@@ -81,7 +84,7 @@ public class GenotypeManagerImpl extends BaseManager implements GenotypeManager
                 if (theList != null && theList.size() > 0)
                 {
                     theGenotype = (Genotype) theList.get(0);
-                    log.info("<GenotypeManagerImpl.getByName> theGenotype: " +theGenotype);                    
+                    log.debug("<GenotypeManagerImpl.getByName> theGenotype: " +theGenotype);                    
                 }
             }
             catch (PersistenceException pe)
@@ -101,7 +104,7 @@ public class GenotypeManagerImpl extends BaseManager implements GenotypeManager
     public Genotype getOrCreate(String inGenotypeName) throws Exception
     {
 
-        log.info("<GenotypeManagerImpl> Entering getOrCreate(String)");
+        log.debug("<GenotypeManagerImpl> Entering getOrCreate(String)");
 
         Genotype theQBEGenotype = new Genotype();
         theQBEGenotype.setName(inGenotypeName);
@@ -120,7 +123,7 @@ public class GenotypeManagerImpl extends BaseManager implements GenotypeManager
             // Doesn't exist. Create object with name 
             else
             {
-                log.info("<GenotypeManagerImpl> No matching genotype. Create new one");
+                log.debug("<GenotypeManagerImpl> No matching genotype. Create new one");
                 theGenotype = theQBEGenotype;
                 if (inGenotypeName != null)
                 {
@@ -133,7 +136,7 @@ public class GenotypeManagerImpl extends BaseManager implements GenotypeManager
             log.error("Error querying for matching genotype object.  Creating new one.", e);
             theGenotype = theQBEGenotype;
         }
-        log.info("<GenotypeManagerImpl> theGenotype: " + theGenotype.toString());
+        log.debug("<GenotypeManagerImpl> theGenotype: " + theGenotype.toString());
         return theGenotype;
     }
 }

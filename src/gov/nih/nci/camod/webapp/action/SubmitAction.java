@@ -1,8 +1,11 @@
 /**
  *  
- *  $Id: SubmitAction.java,v 1.17 2007-08-14 12:05:12 pandyas Exp $
+ *  $Id: SubmitAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.17  2007/08/14 12:05:12  pandyas
+ *  Implementing EVSPreferredName for Zebrafish models
+ *
  *  Revision 1.16  2007/04/09 12:37:09  pandyas
  *  modified after caMOD 2.3 unit testing
  *
@@ -68,7 +71,7 @@ public class SubmitAction extends BaseAction {
         try {
             AnimalModel am = animalModelManager.get(modelID);
             String speciesName = am.getStrain().getSpecies().getCommonName();
-            log.info("setModelConstants for speciesName: " + speciesName);
+            log.debug("setModelConstants for speciesName: " + speciesName);
             
             // Set animal model species up front for genetic description (mgi, zfin, or rgd id)
             request.getSession().setAttribute(Constants.AMMODELSPECIESCOMMONNAME, speciesName);            
@@ -77,7 +80,7 @@ public class SubmitAction extends BaseAction {
             // Used for submitOverview to set model back to previous states
             request.getSession().setAttribute(Constants.Parameters.MODELID, am.getId().toString());
             request.getSession().setAttribute(Constants.MODELDESCRIPTOR, am.getModelDescriptor());
-            log.info("Constants.MODELDESCRIPTOR: " + request.getSession().getAttribute(Constants.MODELDESCRIPTOR));
+            log.debug("Constants.MODELDESCRIPTOR: " + request.getSession().getAttribute(Constants.MODELDESCRIPTOR));
             request.getSession().setAttribute(Constants.MODELSTATUS, am.getState());
 
             AnimalModelStateForm theForm = new AnimalModelStateForm();

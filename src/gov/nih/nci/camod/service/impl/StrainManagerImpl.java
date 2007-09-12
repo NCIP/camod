@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: StrainManagerImpl.java,v 1.5 2007-08-07 18:29:29 pandyas Exp $
+ * $Id: StrainManagerImpl.java,v 1.6 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2007/08/07 18:29:29  pandyas
+ * Renamed to GRAFT as per VCDE comments
+ *
  * Revision 1.4  2006/05/19 16:39:33  pandyas
  * Defect #249 - add other to species on the Xenograft screen
  *
@@ -116,7 +119,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
                               String inSpeciesName) throws Exception
     {
 
-        log.info("<StrainManagerImpl> Entering getOrCreate(String, String, String)");
+        log.debug("<StrainManagerImpl> Entering getOrCreate(String, String, String)");
 
         // need species_id to get correct strain - works for 'Not specified'
         Species selectedSpecies = SpeciesManagerSingleton.instance().getByName(inSpeciesName);
@@ -148,7 +151,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
             // Doesn't exist. Create object with either name or otherName set, don't save the word 'Other'
             else
             {
-                log.info("<StrainManagerImpl> No matching strains. Create new one");
+                log.debug("<StrainManagerImpl> No matching strains. Create new one");
                 theStrain = theQBEStrain;
                 if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION))
                 {
@@ -198,7 +201,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
                               String inOtherSpeciesName) throws Exception
     {
 
-        log.info("<StrainManagerImpl> Entering getOrCreate(String, String, String)");
+        log.debug("<StrainManagerImpl> Entering getOrCreate(String, String, String)");
 
         // need species_id to get correct strain - works for 'Not specified'
         Species species = SpeciesManagerSingleton.instance().getOrCreate(inSpeciesName, inOtherSpeciesName);
@@ -230,7 +233,7 @@ public class StrainManagerImpl extends BaseManager implements StrainManager
             // Doesn't exist. Create object with either name or otherName set, don't save the word 'Other'
             else
             {
-                log.info("<StrainManagerImpl> No matching strains. Create new one");
+                log.debug("<StrainManagerImpl> No matching strains. Create new one");
                 theStrain = theQBEStrain;
                 if (inStrainName != null && !inStrainName.equals(Constants.Dropdowns.OTHER_OPTION))
                 {

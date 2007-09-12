@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: DrugScreenSearchAction.java,v 1.10 2007-08-07 18:28:24 pandyas Exp $
+ * $Id: DrugScreenSearchAction.java,v 1.11 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/08/07 18:28:24  pandyas
+ * Renamed to GRAFT as per VCDE comments
+ *
  * Revision 1.9  2007/07/31 12:02:38  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -72,7 +75,7 @@ public final class DrugScreenSearchAction extends BaseAction {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
         DrugScreenSearchForm theForm = (DrugScreenSearchForm) form;
-        log.info("the form=" + theForm);
+        log.debug("the form=" + theForm);
         request.getSession().setAttribute(Constants.DRUG_SCREEN_OPTIONS, theForm);
 
 		// The following two objects are needed for eQBE.

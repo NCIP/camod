@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: ClinicalMarkerAction.java,v 1.8 2006-11-09 17:25:32 pandyas Exp $
+ * $Id: ClinicalMarkerAction.java,v 1.9 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2006/11/09 17:25:32  pandyas
+ * minor format change
+ *
  * Revision 1.7  2006/04/27 15:05:46  pandyas
  * Modified as a result of testing
  *
@@ -58,17 +61,17 @@ public class ClinicalMarkerAction extends BaseAction
                               HttpServletResponse response) throws Exception
     {
 
-        log.info("<ClinicalMarkerAction> Entering 'edit' method");
+        log.debug("<ClinicalMarkerAction> Entering 'edit' method");
 
         // Grab the current aAssocMetastasisID for this animalModel
         String aClinicalMarkerID = request.getParameter("aClinicalMarkerID");
         String aHistopathologyID = request.getParameter("aHistopathologyID");
-        log.info("aClinicalMarkerID: " + aClinicalMarkerID);
+        log.debug("aClinicalMarkerID: " + aClinicalMarkerID);
 
         // Create a form to edit
         ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
 
-        log.info("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() + "\n\t ClinicalMarkerID: " + aClinicalMarkerID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: " + (String) request.getSession().getAttribute(
+        log.debug("<HistopathologyAction saveClinicalMarker> following Characteristics:" + "\n\t ParentHistopathID: " + clinicalMarkerForm.getHistopathologyID() + "\n\t ClinicalMarkerID: " + aClinicalMarkerID + "\n\t Name: " + clinicalMarkerForm.getName() + "\n\t otherName: " + clinicalMarkerForm.getOtherName() + "\n\t Value: " + clinicalMarkerForm.getValue() + "\n\t user: " + (String) request.getSession().getAttribute(
                                                                                                                                                                                                                                                                                                                                                                                                                                       "camod.loggedon.username"));
 
         ClinicalMarkerManager theClinicalMarkerManager = (ClinicalMarkerManager) getBean("clinicalMarkerManager");
@@ -133,7 +136,7 @@ public class ClinicalMarkerAction extends BaseAction
                               HttpServletResponse response) throws Exception
     {
 
-        log.info("<ClinicalMarkerAction> Entering 'save' method");
+        log.debug("<ClinicalMarkerAction> Entering 'save' method");
 
         // Create a form to edit
         ClinicalMarkerForm clinicalMarkerForm = (ClinicalMarkerForm) form;
@@ -164,13 +167,13 @@ public class ClinicalMarkerAction extends BaseAction
 
             theAnimalModelManager.addClinicalMarker(theAnimalModel, theHistopathology, clinicalMarkerForm);
 
-            log.info("New clinical marker created");
+            log.debug("New clinical marker created");
 
             ActionMessages msg = new ActionMessages();
             msg.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("clinicalmarker.creation.successful"));
             saveErrors(request, msg);
 
-            log.info("<ClinicalMarkerAction> Exiting 'save' method");
+            log.debug("<ClinicalMarkerAction> Exiting 'save' method");
 
         }
         catch (Exception e)

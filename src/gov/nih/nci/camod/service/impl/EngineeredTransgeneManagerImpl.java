@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EngineeredTransgeneManagerImpl.java,v 1.38 2007-07-31 12:02:28 pandyas Exp $
+ * $Id: EngineeredTransgeneManagerImpl.java,v 1.39 2007-09-12 19:36:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.38  2007/07/31 12:02:28  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.37  2007/04/04 13:17:49  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -89,35 +92,35 @@ import javax.servlet.http.HttpServletRequest;
 public class EngineeredTransgeneManagerImpl extends BaseManager implements
 		EngineeredTransgeneManager {
 	public List getAll() throws Exception {
-		log.info("In EngineeredTransgeneManagerImpl.getAll");
+		log.debug("In EngineeredTransgeneManagerImpl.getAll");
 		return super.getAll(EngineeredGene.class);
 	}
 
 	public Transgene get(String id) throws Exception {
-		log.info("In EngineeredTransgeneManagerImpl.get");
+		log.debug("In EngineeredTransgeneManagerImpl.get");
 		return (Transgene) super.get(id, Transgene.class);
 	}
 
 	public void save(Transgene engineeredGene) throws Exception {
-		log.info("In EngineeredTransgeneManagerImpl.save");
+		log.debug("In EngineeredTransgeneManagerImpl.save");
 		super.save(engineeredGene);
 	}
 
 	public void remove(String id, AnimalModel inAnimalModel) throws Exception {
-		log.info("In EngineeredTransgeneManagerImpl.remove");
+		log.debug("In EngineeredTransgeneManagerImpl.remove");
 		inAnimalModel.getEngineeredGeneCollection().remove(get(id));
 		super.save(inAnimalModel);
 	}
 
 	public Transgene create(EngineeredTransgeneData inEngineeredTransgeneData,
 			HttpServletRequest request) throws Exception {
-		log.info("Entering EngineeredTransgeneManagerImpl.create");
+		log.debug("Entering EngineeredTransgeneManagerImpl.create");
 
 		Transgene inEngineeredTransgene = new Transgene();
 		populateEngineeredTransgene(inEngineeredTransgeneData,
 				inEngineeredTransgene, request);
 
-		log.info("Exiting EngineeredTransgeneManagerImpl.create");
+		log.debug("Exiting EngineeredTransgeneManagerImpl.create");
 
 		return inEngineeredTransgene;
 	}
@@ -125,7 +128,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 	public void update(EngineeredTransgeneData inEngineeredTransgeneData,
 			Transgene inEngineeredTransgene, HttpServletRequest request)
 			throws Exception {
-		log.info("Entering EngineeredTransgeneManagerImpl.update");
+		log.debug("Entering EngineeredTransgeneManagerImpl.update");
 		log.debug("Updating EngineeredTransgeneForm: "
 				+ inEngineeredTransgene.getId());
 
@@ -134,24 +137,24 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 				inEngineeredTransgene, request);
 		save(inEngineeredTransgene);
 
-		log.info("Exiting EngineeredTransgeneManagerImpl.update");
+		log.debug("Exiting EngineeredTransgeneManagerImpl.update");
 	}
 
 	public void createAssocExpression(
 			AssociatedExpressionData inAssociatedExpressionData,
 			EngineeredGene inEngineeredTransgene) throws Exception {
-		log.info("Entering EngineeredTransgeneManagerImpl.createAssocExpression");
+		log.debug("Entering EngineeredTransgeneManagerImpl.createAssocExpression");
 
 		populateAssocExpression(inAssociatedExpressionData,
 				inEngineeredTransgene);
 
-		log.info("Exiting EngineeredTransgeneManagerImpl.createAssocExpression");
+		log.debug("Exiting EngineeredTransgeneManagerImpl.createAssocExpression");
 	}
 
 	public void updateAssociatedExpression(
 			AssociatedExpressionData inAssociatedExpressionData,
 			EngineeredGene inEngineeredTransgene) throws Exception {
-		log.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
+		log.debug("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
 
 		Set<ExpressionFeature> theExpFeatures = inEngineeredTransgene
 				.getExpressionFeatureCollection();
@@ -174,13 +177,13 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 
 		save(inEngineeredTransgene);
 
-		log.info("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
+		log.debug("Entering EngineeredTransgeneManagerImpl.updateAssociatedExpression");
 	}
 
 	private void populateAssocExpression(
 			AssociatedExpressionData inAssociatedExpressionData,
 			EngineeredGene inEngineeredTransgene) throws Exception {
-		log.info("Entering populateAssocExpression");
+		log.debug("Entering populateAssocExpression");
 
 		ExpressionFeature theExpFeature = new ExpressionFeature();
 
@@ -194,7 +197,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 						inAssociatedExpressionData.getExpressionLevel());
 		theExpFeature.setExpressionLevelDesc(theExpLevelDesc);
 		inEngineeredTransgene.addExpressionFeature(theExpFeature);
-		log.info("Exiting populateAssocExpression");
+		log.debug("Exiting populateAssocExpression");
 	}
 
 	
@@ -203,7 +206,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 			EngineeredTransgeneData inEngineeredTransgeneData,
 			Transgene inEngineeredTransgene, HttpServletRequest request)
 			throws Exception {
-		log.info("Entering populateEngineeredTransgene");
+		log.debug("Entering populateEngineeredTransgene");
 
 		// Grab the current modelID from the session
 		String theModelId = (String) request.getSession().getAttribute(
@@ -400,7 +403,7 @@ public class EngineeredTransgeneManagerImpl extends BaseManager implements
 				inEngineeredTransgene.setImage(image);
 			}
 
-		log.info("Exiting populateEngineeredTransgene");
+		log.debug("Exiting populateEngineeredTransgene");
 	}
 
 	private void addRegulatoryElement(String inName, String inType,

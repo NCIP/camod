@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionPopulateAction.java,v 1.10 2007-06-26 16:14:58 pandyas Exp $
+ * $Id: AssociatedExpressionPopulateAction.java,v 1.11 2007-09-12 19:36:40 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/06/26 16:14:58  pandyas
+ * Fixed save when organ cleared from text entry and by use of the clear button for trees
+ *
  * Revision 1.9  2007/06/18 16:13:20  pandyas
  * EVS preferred name does not work for Zebrafish tree so changed
  * Will add this item to EVS gforge to fix, if possilbe
@@ -72,11 +75,11 @@ public class AssociatedExpressionPopulateAction extends BaseAction {
             Organ organ = theExpressionFeature.getOrgan();
 
             associatedExpressionForm.setOrganTissueName(organ.getName());
-            log.info("organ.getName(): " + organ.getName());
-            log.info("getOrganTissueName(): " + associatedExpressionForm.getOrganTissueName());            
+            log.debug("organ.getName(): " + organ.getName());
+            log.debug("getOrganTissueName(): " + associatedExpressionForm.getOrganTissueName());            
             associatedExpressionForm.setOrgan(organ.getName());
             associatedExpressionForm.setOrganTissueCode(organ.getConceptCode());
-            log.info("organ.getConceptCode(): " + organ.getConceptCode());            
+            log.debug("organ.getConceptCode(): " + organ.getConceptCode());            
 
             if (expLevelDesc != null) {
                 associatedExpressionForm.setExpressionLevel(expLevelDesc.getExpressionLevel());

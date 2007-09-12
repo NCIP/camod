@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: ChemicalDrugAction.java,v 1.17 2006-11-09 17:24:18 pandyas Exp $
+ * $Id: ChemicalDrugAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2006/11/09 17:24:18  pandyas
+ * Commented out debug code
+ *
  * Revision 1.16  2006/05/23 17:01:14  pandyas
  * fixed save of ageOfTreatmentUntis - made code consistent
  *
@@ -157,7 +160,7 @@ public class ChemicalDrugAction extends BaseAction {
         AnimalModel animalModel = animalModelManager.get(modelID);
 
 		try {
-            log.info("<ChemicalDrugAction> Entering try block"); 
+            log.debug("<ChemicalDrugAction> Entering try block"); 
 			animalModelManager.addCarcinogenExposure(animalModel, chemicalDrugForm);
 
 			// Add a message to be displayed in submitOverview.jsp saying you've

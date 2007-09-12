@@ -1,9 +1,12 @@
 /**
  * @author schroedln
  * 
- * $Id: GeneDeliveryManagerImpl.java,v 1.24 2007-06-26 17:26:41 pandyas Exp $
+ * $Id: GeneDeliveryManagerImpl.java,v 1.25 2007-09-12 19:36:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/06/26 17:26:41  pandyas
+ * populateOrgan method was accidentally deleted before uploading to cvs
+ *
  * Revision 1.23  2007/06/26 16:13:43  pandyas
  * Fixed save when organ cleared from text entry and by use of the clear button for trees
  *
@@ -116,20 +119,20 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 
 	public GeneDelivery create(AnimalModel inAnimalModel,
 			GeneDeliveryData inGeneDeliveryForm) throws Exception {
-		log.info("Entering GeneDeliveryManagerImpl.create");
+		log.debug("Entering GeneDeliveryManagerImpl.create");
 
 		GeneDelivery theGeneDelivery = new GeneDelivery();
 		populateOrgan(inGeneDeliveryForm, theGeneDelivery);
 		populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, theGeneDelivery);
 
-		log.info("Exiting GeneDeliveryManagerImpl.create");
+		log.debug("Exiting GeneDeliveryManagerImpl.create");
 		return theGeneDelivery;
 	}
 
 	public void update(AnimalModel inAnimalModel,
 			GeneDeliveryData inGeneDeliveryForm, GeneDelivery inGeneDelivery)
 			throws Exception {
-		log.info("Entering GeneDeliveryManagerImpl.update");
+		log.debug("Entering GeneDeliveryManagerImpl.update");
 		// Populate w/ the new values and save
 		populateOrgan(inGeneDeliveryForm, inGeneDelivery);
 		populateGeneDelivery(inAnimalModel, inGeneDeliveryForm, inGeneDelivery);
@@ -145,46 +148,46 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
         // Update loop handeled separately for conceptCode = 00000
         if (inGeneDeliveryData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
             if(inGeneDeliveryData.getOrgan() != null && inGeneDeliveryData.getOrgan().length() >0 ) {
-                log.info("Organ update loop for text: " + inGeneDeliveryData.getOrgan()); 
+                log.debug("Organ update loop for text: " + inGeneDeliveryData.getOrgan()); 
                 inGeneDelivery.setOrgan(new Organ());
                 inGeneDelivery.getOrgan().setName(inGeneDeliveryData.getOrgan());   
                 inGeneDelivery.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS);     
             } else {
-                log.info("Clear previously entered organ text: " );
+                log.debug("Clear previously entered organ text: " );
                 inGeneDelivery.setOrgan(null); 
             }
         } else {            
             // Using trees loop, new save loop and update loop
             if (inGeneDeliveryData.getOrganTissueCode() != null && inGeneDeliveryData.getOrganTissueCode().length() > 0
                     && inGeneDeliveryData.getOrganTissueName() != null && inGeneDeliveryData.getOrganTissueName().length() > 0) {
-                log.info("OrganTissueCode: " + inGeneDeliveryData.getOrganTissueCode());
-                log.info("OrganTissueName: " + inGeneDeliveryData.getOrganTissueName()); 
+                log.debug("OrganTissueCode: " + inGeneDeliveryData.getOrganTissueCode());
+                log.debug("OrganTissueName: " + inGeneDeliveryData.getOrganTissueName()); 
                 
-                log.info("OrganTissueCode() != null - getOrCreate method used");
+                log.debug("OrganTissueCode() != null - getOrCreate method used");
                 // when using tree, organTissueName populates the organ name entry
                 Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
                         inGeneDeliveryData.getOrganTissueCode(),
                         inGeneDeliveryData.getOrganTissueName());
                 
-                log.info("theNewOrgan: " + theNewOrgan);
+                log.debug("theNewOrgan: " + theNewOrgan);
                 inGeneDelivery.setOrgan(theNewOrgan); 
             } 
             // Clear organ selection via GUI
             if (inGeneDeliveryData.getOrgan() == null && inGeneDeliveryData.getOrganTissueCode().length() <1 ) {
-                log.info("Null out organ when cleared: " );
+                log.debug("Null out organ when cleared: " );
                 inGeneDelivery.setOrgan(null);                 
 
             }
             // initial save text entry organ from GUI
             if (inGeneDeliveryData.getOrgan() != null && inGeneDeliveryData.getOrgan().length() >0 ) {
                 // text entry loop = new save
-                log.info("Organ (initial text entry): " + inGeneDeliveryData.getOrgan()); 
+                log.debug("Organ (initial text entry): " + inGeneDeliveryData.getOrgan()); 
                 inGeneDelivery.setOrgan(new Organ());
                 inGeneDelivery.getOrgan().setName(inGeneDeliveryData.getOrgan());                
                 inGeneDelivery.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS); 
-                log.info("New Organ: " + inGeneDelivery.getOrgan().toString());
+                log.debug("New Organ: " + inGeneDelivery.getOrgan().toString());
             }           
             
         }  
@@ -194,7 +197,7 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 	private void populateGeneDelivery(AnimalModel inAnimalModel,
 			GeneDeliveryData inGeneDeliveryData, GeneDelivery inGeneDelivery)
 			throws Exception {
-		log.info("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
+		log.debug("Entering GeneDeliveryManagerImpl.populateGeneDelivery");
 
 		// Set the treatment
 		Treatment theTreatment = inGeneDelivery.getTreatment();
@@ -237,51 +240,51 @@ public class GeneDeliveryManagerImpl extends BaseManager implements
 				inGeneDeliveryData.getRegimen());
 		inGeneDelivery.setGeneInVirus(inGeneDeliveryData.getGeneInVirus());
 
-		log.info("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
+		log.debug("Exiting GeneDeliveryManagerImpl.populateGeneDelivery");
 		
         // Update loop handeled separately for conceptCode = 00000
         if (inGeneDeliveryData.getOrganTissueCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
             if(inGeneDeliveryData.getOrgan() != null && inGeneDeliveryData.getOrgan().length() >0 ) {
-                log.info("Organ update loop for text: " + inGeneDeliveryData.getOrgan()); 
+                log.debug("Organ update loop for text: " + inGeneDeliveryData.getOrgan()); 
                 inGeneDelivery.setOrgan(new Organ());
                 inGeneDelivery.getOrgan().setName(inGeneDeliveryData.getOrgan());   
                 inGeneDelivery.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS);     
             } else {
-                log.info("Clear previously entered organ text: " );
+                log.debug("Clear previously entered organ text: " );
                 inGeneDelivery.setOrgan(null); 
             }
         } else {            
             // Using trees loop, new save loop and update loop
             if (inGeneDeliveryData.getOrganTissueCode() != null && inGeneDeliveryData.getOrganTissueCode().length() > 0
                     && inGeneDeliveryData.getOrganTissueName() != null && inGeneDeliveryData.getOrganTissueName().length() > 0) {
-                log.info("OrganTissueCode: " + inGeneDeliveryData.getOrganTissueCode());
-                log.info("OrganTissueName: " + inGeneDeliveryData.getOrganTissueName()); 
+                log.debug("OrganTissueCode: " + inGeneDeliveryData.getOrganTissueCode());
+                log.debug("OrganTissueName: " + inGeneDeliveryData.getOrganTissueName()); 
                 
-                log.info("OrganTissueCode() != null - getOrCreate method used");
+                log.debug("OrganTissueCode() != null - getOrCreate method used");
                 // when using tree, organTissueName populates the organ name entry
                 Organ theNewOrgan = OrganManagerSingleton.instance().getOrCreate(
                         inGeneDeliveryData.getOrganTissueCode(),
                         inGeneDeliveryData.getOrganTissueName());
                 
-                log.info("theNewOrgan: " + theNewOrgan);
+                log.debug("theNewOrgan: " + theNewOrgan);
                 inGeneDelivery.setOrgan(theNewOrgan); 
             } 
             // Clear organ selection via GUI
             if (inGeneDeliveryData.getOrgan() == null && inGeneDeliveryData.getOrganTissueCode().length() <1 ) {
-                log.info("Null out organ when cleared: " );
+                log.debug("Null out organ when cleared: " );
                 inGeneDelivery.setOrgan(null);                 
 
             }
             // initial save text entry organ from GUI
             if (inGeneDeliveryData.getOrgan() != null && inGeneDeliveryData.getOrgan().length() >0 ) {
                 // text entry loop = new save
-                log.info("Organ (initial text entry): " + inGeneDeliveryData.getOrgan()); 
+                log.debug("Organ (initial text entry): " + inGeneDeliveryData.getOrgan()); 
                 inGeneDelivery.setOrgan(new Organ());
                 inGeneDelivery.getOrgan().setName(inGeneDeliveryData.getOrgan());                
                 inGeneDelivery.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS); 
-                log.info("New Organ: " + inGeneDelivery.getOrgan().toString());
+                log.debug("New Organ: " + inGeneDelivery.getOrgan().toString());
             }           
             
         } 
