@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.77 2007-09-07 15:11:58 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.78 2007-09-12 17:27:52 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.77  2007/09/07 15:11:58  pandyas
+ * Fixed formating for the equals (=) model id in admin query
+ *
  * Revision 1.76  2007/09/06 19:35:36  pandyas
  * Modified LIKE to = for model id admin query
  *
@@ -1140,7 +1143,6 @@ public class QueryManagerImpl extends BaseManager
         log.debug("Entering QueryManagerImpl.getCommentsBySectionForPerson");
 
         // If no person, only get approved items
-        // TODO: make the states a constant
         String theStateHQL = "(c.state = 'Screened-approved'";
         if (inPerson == null)
         {
@@ -1454,7 +1456,7 @@ public class QueryManagerImpl extends BaseManager
         try
         {
 
-            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," + "\n" + "       st.name," + "\n" + "       acm.administrative_site," + "\n" + "       count(*)" + "\n" + "  from invivo_Result sr," + "\n" + "       agent a," + "\n" + "       XENOGRAFT_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "       strain st," + "\n" + "       species sp" + "\n" + " where sr.agent_id = a.agent_id" + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n" + "   and acm.strain_id = st.strain_id" + "\n" + "   and st.species_id = sp.species_id" + "\n";
+            String theSQLString = "select acm.abs_cancer_model_id," + "\n" + "       acm.model_descriptor," + "\n" + "       st.name," + "\n" + "       acm.administrative_site," + "\n" + "       count(*)" + "\n" + "  from invivo_Result sr," + "\n" + "       agent a," + "\n" + "       GRAFT_INVIVO_RESULT ymsr," + "\n" + "       abs_cancer_model acm," + "\n" + "       treatment t," + "\n" + "       strain st," + "\n" + "       species sp" + "\n" + " where sr.agent_id = a.agent_id" + "\n" + "   and sr.invivo_result_id = ymsr.invivo_result_id" + "\n" + "   and sr.treatment_id = t.treatment_id" + "\n" + "   and ymsr.abs_cancer_model_id = acm.abs_cancer_model_id" + "\n" + "   and acm.strain_id = st.strain_id" + "\n" + "   and st.species_id = sp.species_id" + "\n";
 
             Long theParam;
             if (useNscNumber == true)
@@ -2578,7 +2580,7 @@ public class QueryManagerImpl extends BaseManager
     }
 
 
-    // Sima TODO: optimize query - added extra join for species/strain
+    // TODO: optimize query - added extra join for species/strain
     //no nscNumber in environmental_factor to test if this is correct
     public List getModelsForThisCompound(Long nscNumber) throws PersistenceException
     {
