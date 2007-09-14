@@ -1,9 +1,12 @@
 /**
  * @author pandyas
  * 
- * $Id: CarcinogenExposureManagerImpl.java,v 1.7 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: CarcinogenExposureManagerImpl.java,v 1.8 2007-09-14 13:56:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.6  2006/09/22 18:53:40  pandyas
  * cleaned up code for mail
  *
@@ -573,7 +576,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
     }
 
 
-    private void populateAgeGender(AgeGenderData inAgeGender,
+    private void populateAgeGender(AgeGenderData inAgeGenderData,
                                    CarcinogenExposure theCarcinogenExposure)
     {
 
@@ -588,16 +591,16 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         }
 
         // Set the gender
-        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(inAgeGender.getType());
+        SexDistribution sexDistribution = SexDistributionManagerSingleton.instance().getByType(inAgeGenderData.getType());
 
         // save the treatment
         theTreatment.setSexDistribution(sexDistribution);
 
-        theTreatment.setAgeAtTreatment(inAgeGender.getAgeAtTreatment());
-        theTreatment.setAgeAtTreatmentUnit(inAgeGender.getAgeAtTreatmentUnit());
+        theTreatment.setAgeAtTreatment(inAgeGenderData.getAgeAtTreatment());
+        theTreatment.setAgeAtTreatmentUnit(inAgeGenderData.getAgeAtTreatmentUnit());
     }
 
-    private void populateTreatment(TreatmentData inTreatment,
+    private void populateTreatment(TreatmentData inTreatmentData,
                                    CarcinogenExposure theCarcinogenExposure)
     {
 
@@ -612,7 +615,7 @@ public class CarcinogenExposureManagerImpl extends BaseManager implements Carcin
         }
 
         // save the treatment
-        theTreatment.setRegimen(inTreatment.getRegimen());
+        theTreatment.setRegimen(inTreatmentData.getRegimen());
     }
 
     private void populateDose(DoseData inDoseData,
