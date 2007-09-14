@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.11 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.12 2007-09-14 19:19:54 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.11  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.10  2006/04/18 16:58:55  pandyas
  * Fixed know caMod 2.1 issue - " PI In Animal Availability not working "
  *
@@ -108,7 +111,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         log.debug("Entering AvailabilityManagerImpl.populateAvailability");
 
         inAvailability.setName(inAvailabilityData.getName());
-        inAvailability.setStockNumber(inAvailabilityData.getStockNumber());
+        inAvailability.setStockNumber(inAvailabilityData.getStockNumber().trim());
 
         /* get distributor object */
         AnimalDistributor theDistributor = AnimalDistributorManagerSingleton.instance().getByName(inAvailabilityData.getSource());
@@ -129,7 +132,7 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         log.debug("Entering AvailabilityManagerImpl.editAvailability");
 
         inAvailability.setName(inAvailabilityData.getName());
-        inAvailability.setStockNumber(inAvailabilityData.getStockNumber());
+        inAvailability.setStockNumber(inAvailabilityData.getStockNumber().trim());
 
         log.debug("Exiting AvailabilityManagerImpl.editAvailability");
 
