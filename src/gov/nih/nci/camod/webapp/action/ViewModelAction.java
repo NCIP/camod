@@ -1,9 +1,12 @@
 /**
  *  @author sguruswami
  *  
- *  $Id: ViewModelAction.java,v 1.38 2007-09-12 19:36:40 pandyas Exp $
+ *  $Id: ViewModelAction.java,v 1.39 2007-09-14 18:53:37 pandyas Exp $
  *  
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.38  2007/09/12 19:36:40  pandyas
+ *  modified debug statements for build to stage tier
+ *
  *  Revision 1.37  2007/08/07 19:49:46  pandyas
  *  Removed reference to Transplant as per VCDE comments and after modification to object definition for CDE
  *
@@ -737,6 +740,7 @@ public class ViewModelAction extends BaseAction
                                                   HttpServletResponse response) throws Exception
     {
         String modelID = request.getParameter("xModelID");
+        request.getSession().setAttribute(Constants.MODELID, modelID);
         String nsc = request.getParameter("nsc");
         if (nsc != null && nsc.length() == 0)
             return mapping.findForward("viewModelCharacteristics");
@@ -746,7 +750,6 @@ public class ViewModelAction extends BaseAction
 
         Graft x = mgr.get(modelID);
 
-        setCancerModel(request);
         request.getSession().setAttribute(Constants.GRAFTMODEL, x);
         request.getSession().setAttribute(Constants.NSC_NUMBER, nsc);
         request.getSession().setAttribute(Constants.GRAFTRESULTLIST, x.getInvivoResultCollectionByNSC(nsc));

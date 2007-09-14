@@ -87,7 +87,7 @@
 					
 					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.toxicitySurvivors}"/>&nbsp;</td>
 			
-					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.endpointCode.description}"/>&nbsp;</td>
+					<td class="<c:out value="${tdClass}"/>"><c:out value="${r.endpoint.description}"/>&nbsp;</td>
 					
 					<td class="<c:out value="${tdClass}"/>">
 						<c:choose>
