@@ -1,6 +1,9 @@
 <%
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.43  2007/08/27 15:29:04  pandyas
+ * Allows Age of Tumor Detection  to display the character <165
+ *
  * Revision 1.42  2007/08/27 14:18:29  pandyas
  * Reverted back to EVSPreferredDescription since this was fixed
  *
@@ -72,7 +75,7 @@
  * Defects #168,169,179.  Changed wording on submit and view pages
  *
  *
- * $Id: viewHistopathology.jsp,v 1.43 2007-08-27 15:29:04 pandyas Exp $
+ * $Id: viewHistopathology.jsp,v 1.44 2007-09-17 17:05:08 pandyas Exp $
  *
  */   
 %>
@@ -346,14 +349,14 @@
 				<tr>
 					<td class="resultsBoxGrey" width="25%"><b>Organ / Tissue</b></td>
 					<td class="resultsBoxGreyEnd" width="75%">
-						<camod:highlight><c:out value="${m.organ.name}"/>&nbsp;</camod:highlight>
+						<camod:highlight><c:out value="${m.organ.EVSPreferredDescription}"/>&nbsp;</camod:highlight>
 					</td>
 				</tr>
 				<tr>
 					<td class="resultsBoxWhite" width="25%"><b>Diagnosis</b></td>
 					<td class="resultsBoxWhiteEnd" width="75%">
 						<bean:define id="d" name="m" property="disease"/>
-							<camod:highlight><c:out value="${d.name}"/>&nbsp;</camod:highlight><br>
+							<camod:highlight><c:out value="${d.EVSPreferredDescription}"/>&nbsp;</camod:highlight><br>
 						&nbsp;
 					</td>
 				</tr>	
