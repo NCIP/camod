@@ -39,7 +39,7 @@
  - Query the Cancer Models database for models submitted by fellow researchers. Retrieve information about the making of models, their genetic description, histopathology, derived cell lines, associated images, carcinogenic agents, and therapeutic trials. Links to associated publications and other resources are provided.
 <br><br>
 <a href="/camod/ReturnUserModels.do?method=returnUserModels">Submit Models</a>
- - Submit your model for human cancer here. Rodent models recapitulate many aspects of the genesis, progression, and clinical course of human cancers and are valuable resources to cancer researchers engaged in a variety of investigations
+ - Submit your model for human cancer here. Animal models recapitulate many aspects of the genesis, progression, and clinical course of human cancers and are valuable resources to cancer researchers engaged in a variety of investigations
                                           </td>
                                       </tr>
                                   </table>	
@@ -148,7 +148,7 @@
                                                       <td class="sidebarTitle" height="20">DID YOU KNOW?</td>
                                                   </tr>
                                                   <tr>
-                                                      <td class="sidebarContent" valign="top">caMOD 2.3 was released to production on Sept 27th.<br/><br/><html:link action="infoReleaseNotes.do">Release Notes</html:link></td>
+                                                      <td class="sidebarContent" valign="top">caMOD 2.3 was released to production on Sept 20th.<br/><br/><html:link action="infoReleaseNotes.do">Release Notes</html:link></td>
                                                   </tr>
                                                   <tr>
 													<td> &nbsp; 
