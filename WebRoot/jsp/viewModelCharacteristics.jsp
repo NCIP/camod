@@ -1,8 +1,11 @@
 <%
  /*
-  *   $Id: viewModelCharacteristics.jsp,v 1.47 2007-09-06 19:15:59 pandyas Exp $
+  *   $Id: viewModelCharacteristics.jsp,v 1.48 2007-09-17 14:24:22 pandyas Exp $
   *   
   *   $Log: not supported by cvs2svn $
+  *   Revision 1.47  2007/09/06 19:15:59  pandyas
+  *   Modified DisplayName to displayName
+  *
   *   Revision 1.46  2007/08/23 17:20:30  pandyas
   *   Added &nbsp; to make rows appear when no data
   *
@@ -308,16 +311,16 @@
 									<c:when test="${av.stockNumber == '-1'}">
 							            <!-- Investigator from 2-tier. -->
 										<c:if test="${not empty mdl.principalInvestigator.emailAddress}">
-										    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">&nbsp;
+										    <a href="mailto:<c:out value="${mdl.principalInvestigator.emailAddress}"/>">
 										</c:if>
-										<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>&nbsp;
+										<c:out value="${mdl.principalInvestigator.displayName}" escapeXml="false"/>
 										<c:if test="${mdl.principalInvestigator.emailAddress}">
 										    </a>
 										</c:if>	
 									</c:when>
 									<c:otherwise>							    
 									    <!-- Investigator: Populate the PI name in distributor column -->
-										<c:if test="${not empty av.principalInvestigator.emailAddress}">
+										<c:if test="${not empty av.stockNumber}">
 										    <a href="mailto:<c:out value="${av.principalInvestigator.emailAddress}"/>">
 										</c:if>
 										<c:out value="${av.principalInvestigator.displayName}" escapeXml="false"/>
