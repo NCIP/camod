@@ -34,7 +34,7 @@
 																	<TBODY>
 																		<TR>
 																			<TD class="formTitleBlue" colspan="2" height="20">
-																				Release of caMOD 2.3 - September 20th, 2007
+																				Release of caMOD 2.3 - September 27th, 2007
 																			</TD>
 																		</TR>
 																		<TR>

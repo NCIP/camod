@@ -22,7 +22,7 @@
     
                              caMOD
                           Version 2.3
-                         Sept, 2007
+                         Sept 27, 2007
 
        National Cancer Institute's Center for Bioinformatics
 
@@ -65,7 +65,7 @@
     2.0 Release History
 ================================================================
     caMOD Version 2.3 
-    --	Sept 2007 
+    --	Sept 27 2007 
         
     caMOD Version 2.2
     --	November 30th 2006 
