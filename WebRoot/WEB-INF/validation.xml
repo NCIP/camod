@@ -120,6 +120,22 @@
 			<field property="ethinicityStrain" depends="required">
 				<arg0 key="ModelCharacteristicsForm.ethinicityStrain" />
 			</field>
+			<field property="otherEthnicityStrain" depends="validwhen, maxlength">
+				<arg0
+					key="ModelCharacteristicsForm.otherEthnicityStrain" />
+				<var>
+					<var-name>test</var-name>
+					<var-value>
+						((ethinicityStrain != 'Other') or (*this* != null))
+					</var-value>
+				</var>
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>255</var-value>
+				</var>
+			</field>			
 			<field property="description"
 				depends="required, maxlength">
 				<arg0 key="ModelCharacteristicsForm.description" />
@@ -150,25 +166,6 @@
 			</field>
 			<field property="releaseDate" depends="required">
 				<arg0 key="ModelCharacteristicsForm.releaseDate" />
-			</field>
-			<field property="otherEthnicityStrain"
-				depends="validwhen, maxlength">
-				<arg0
-					key="ModelCharacteristicsForm.otherEthnicityStrain" />
-				<var>
-					<var-name>test</var-name>
-					<var-value>
-						((ethinicityStrain != 'Other') or
-						((ethinicityStrain == 'Other') and (*this* !=
-						null)))
-					</var-value>
-				</var>
-				<arg1 name="maxlength" key="${var:maxlength}"
-					resource="false" />
-				<var>
-					<var-name>maxlength</var-name>
-					<var-value>255</var-value>
-				</var>
 			</field>
 		</form>
 
