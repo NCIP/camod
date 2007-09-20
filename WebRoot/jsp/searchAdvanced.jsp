@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.67 2007-08-07 19:55:27 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.68 2007-09-20 15:24:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.67  2007/08/07 19:55:27  pandyas
+ * Removed robohelp reference
+ *
  * Revision 1.66  2007/07/31 12:00:09  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -583,7 +586,7 @@
 			    <!-- NOTE: Needed to work around struts bug -->
 			    <input type="hidden" name="searchToolStrain" value="false">
 				<label for="box1">Check here to search for tool strains <BR><BR>(A tool strain is a strain that does not develop cancer, 
-				<BR>but can be used to create cancer-bearing models. Example: WAP-Cre strain)</label>
+				<BR>but can be used to create cancer-bearing models. Example: strain carrying a floxed gene)</label>
 			</td>
 		</tr>
 		
