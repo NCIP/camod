@@ -22,7 +22,7 @@
     
                              caMOD
                           Version 2.3
-                         Sept 27, 2007
+                         Oct 4, 2007
 
        National Cancer Institute's Center for Bioinformatics
 
