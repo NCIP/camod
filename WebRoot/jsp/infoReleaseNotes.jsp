@@ -65,7 +65,7 @@
     2.0 Release History
 ================================================================
     caMOD Version 2.3 
-    --	Sept 27 2007 
+    --	Oct 4 2007 
         
     caMOD Version 2.2
     --	November 30th 2006 
