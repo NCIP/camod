@@ -43,9 +43,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- * $Id: QueryManagerImpl.java,v 1.79 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: QueryManagerImpl.java,v 1.80 2007-10-03 17:07:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.79  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.78  2007/09/12 17:27:52  pandyas
  * XENOGRAFT_INVIVO_RESULT changed names to GRAFT_INVIVO_RESULT as per VCDE rcomments
  *
@@ -275,7 +278,6 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.Agent;
 import gov.nih.nci.camod.domain.AnimalModel;
-import gov.nih.nci.camod.domain.AnimalModelSearchResult;
 import gov.nih.nci.camod.domain.Comments;
 import gov.nih.nci.camod.domain.Log;
 import gov.nih.nci.camod.domain.Person;
@@ -290,6 +292,7 @@ import gov.nih.nci.common.persistence.hibernate.HQLParameter;
 import gov.nih.nci.common.persistence.hibernate.HibernateUtil;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -803,7 +806,9 @@ public class QueryManagerImpl extends BaseManager
             {
                 try
                 {
+                    Statement stmt = theResultSet.getStatement();
                     theResultSet.close();
+                    stmt.close();
                 }
                 catch (Exception e)
                 {}
@@ -925,10 +930,13 @@ public class QueryManagerImpl extends BaseManager
         finally
         {
             if (theResultSet != null)
-            {
+            {                
                 try
                 {
+                    Statement stmt = theResultSet.getStatement();
                     theResultSet.close();
+                    stmt.close();
+
                 }
                 catch (Exception e)
                 {}
@@ -2568,7 +2576,9 @@ public class QueryManagerImpl extends BaseManager
             {
                 try
                 {
+                    Statement stmt = theResultSet.getStatement();
                     theResultSet.close();
+                    stmt.close();
                 }
                 catch (Exception e)
                 {}
