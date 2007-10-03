@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: SearchAction.java,v 1.10 2007-08-27 15:39:53 pandyas Exp $
+ * $Id: SearchAction.java,v 1.11 2007-10-03 16:54:20 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2007/08/27 15:39:53  pandyas
+ * hide debug code printout
+ *
  * Revision 1.9  2007/07/31 12:02:55  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -174,7 +177,7 @@ public final class SearchAction extends BaseAction {
 				savedQuery.setNumberResults(results.size());
 
 				log
-						.info("<SearchAction>: savedQuery.setQueryName( No Name Provided )");
+						.debug("<SearchAction>: savedQuery.setQueryName( No Name Provided )");
 				savedQuery.setQueryName("No Name Provided");
 
 				if (resubmittedSavedQuery != null) {
