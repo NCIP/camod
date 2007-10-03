@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : RepositoryInfo.hbm.xml
+    Created on : May 6, 2005
+    Author     : rajputs
+    Description: Hibernate mapping file for RepositoryInfo
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.camod.domain">
+	<class name="RepositoryInfo"
+		table="repository_info"
+        lazy="true">
+	    
+	    <!-- id -->
+	    <id name="id" 
+	    	column="repository_info_id"
+	    	type="long"    	
+	    	unsaved-value="null">	    	
+	        <generator class="native"/>
+	    </id>	
+	    
+        <!-- inTheRepository -->
+        <property name="inTheRepository" 
+        	column="in_the_repository" 
+        	type="long"/>
+        
+        <!-- sentEmailContent -->
+        <property name="sentEmailContent" 
+        	column="sent_email_content" 
+        	type="string"/>	
+        	
+        <!-- suggestSubmission -->
+        <property name="suggestSubmission" 
+        	column="suggest_submission" 
+        	type="long"/>
+	</class>
+</hibernate-mapping>
