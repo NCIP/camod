@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.19 2007-10-17 18:23:40 pandyas Exp $
+ * $Id: SearchForm.java,v 1.20 2007-10-17 18:29:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.19  2007/10/17 18:23:40  pandyas
+ * Modified to prevent cross--site scripting attacks - initial version
+ *
  * Revision 1.18  2007/07/31 12:02:04  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -602,7 +605,8 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         
         // Identify the request parameter containing the method name
         String parameter = mapping.getParameter();
-        
+
+        /*
         List PIList = (List) request.getSession().getAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP);  
         //System.out.println("APPROVEDSPECIESDROP: " + Constants.Dropdowns.APPROVEDSPECIESDROP.toString());
 
@@ -612,6 +616,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             // populate the validation message
             errors.add("piName", new ActionMessage("error.piName.validValue"));
         }
+        */
         // validate for species
         if (species != null && species.length() > 0 )
         {
