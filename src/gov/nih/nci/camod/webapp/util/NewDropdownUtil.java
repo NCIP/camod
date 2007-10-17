@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.53 2007-08-27 15:41:03 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.54 2007-10-17 18:36:55 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.53  2007/08/27 15:41:03  pandyas
+ * hide debug code printout
+ *
  * Revision 1.52  2007/08/07 20:02:45  pandyas
  * removed blank in editor and screener admin list until validation is worked out
  *
@@ -678,7 +681,7 @@ public class NewDropdownUtil
     private static List getPrincipalInvestigatorList(HttpServletRequest inRequest,
                                                      String inAddBlank) throws Exception
     {
-        log.trace("Entering NewDropdownUtil.getPrincipalInvestigatorList");
+        log.info("Entering NewDropdownUtil.getPrincipalInvestigatorList");
 
         List thePIList = QueryManagerSingleton.instance().getPrincipalInvestigators();
 
@@ -701,7 +704,7 @@ public class NewDropdownUtil
             }
         }
 
-        log.trace("Exiting NewDropdownUtil.getPrincipalInvestigatorList");
+        log.info("Exiting NewDropdownUtil.getPrincipalInvestigatorList");
 
         return theReturnList;
     }
@@ -716,9 +719,13 @@ public class NewDropdownUtil
                                                               String inAddBlank) throws Exception
     {
 
-        log.debug("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
-
-        return QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators();
+        log.info("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
+        
+        //Assign list to a constant so simple search can validate against cross-site scripting in searchForm.validate
+        List thePIOnlyList = QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators(); 
+        inRequest.getSession().setAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP, thePIOnlyList);
+        
+        return thePIOnlyList;
     }
     
 
