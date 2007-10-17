@@ -1171,7 +1171,7 @@
 	        scope="session"
 	        parameter="unprotected_method" 
 	        unknown="false"
-	        validate="false">
+	        validate="true">
 	    <set-property property="secure" value="false" />
 	    <forward
             name="next"
@@ -1190,7 +1190,7 @@
 	        scope="session"
 	        parameter="unprotected_method" 
 	        unknown="false"
-	        validate="false">
+	        validate="true">
 	    <set-property property="secure" value="false" />  
 	    <forward
             name="next"
@@ -2798,6 +2798,7 @@
                       value="/WEB-INF/validator-rules.xml,
                              /WEB-INF/validator-rules-custom.xml,
                              /WEB-INF/validation.xml"/>
+         <set-property property="stopOnFirstError" value="false"/>
   </plug-in>
   
   <plug-in className="org.apache.struts.action.SecurePlugIn">
