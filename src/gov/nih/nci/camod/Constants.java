@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.105 2007-08-14 12:03:09 pandyas Exp $
+ * $Id: Constants.java,v 1.106 2007-10-17 18:29:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.105  2007/08/14 12:03:09  pandyas
+ * Implementing EVSPreferredName for Zebrafish models
+ *
  * Revision 1.104  2007/07/31 12:04:18  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -558,6 +561,12 @@ public class Constants {
         public static final String 	ZEBRAFISHORGANLISTSDROP = "ZebrafishOrganList.txt";
 
         public static final String DEVELOPMENTALSTAGETHERAPYDROP = "DevelopmentalStageTherapy.txt";
+        
+        // Used for validation of searchForm to prevent cross-site scripting attacks
+        public static final String SEARCHSPECIESDROP = "searchspecies"; 
+        public static final String SEARCHEXTERNALSOURCEDROP = "searchexternalsource";   
+        public static final String SEARCHINDUCEDMUTATIONDROP = "searchinducedmutation";  
+        public static final String SEARCHCARCINOGENEXPOSUREDROP = "searchcarcinogenexposure";          
       
     }
 
