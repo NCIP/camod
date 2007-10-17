@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.49 2007-07-31 12:00:10 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.50 2007-10-17 18:24:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.49  2007/07/31 12:00:10  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.48  2007/06/20 19:29:45  pandyas
  * Fixed populate for diagnosis - depends on species set in the session constant
  *
@@ -144,6 +147,11 @@
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+		<tr>
+			<html:errors/>
+			<td class="formMessage" colspan="3"></td>
+	
+		</tr>	
         <tr>
             <td class="formTitleBlue" height="20" colspan="3">
                 Keyword Search:&nbsp;&nbsp;

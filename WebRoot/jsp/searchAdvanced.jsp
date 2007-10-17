@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchAdvanced.jsp,v 1.68 2007-09-20 15:24:45 pandyas Exp $
+ * $Id: searchAdvanced.jsp,v 1.69 2007-10-17 18:24:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.68  2007/09/20 15:24:45  pandyas
+ * Bug # 7751: Modified text next to tool strain on advanced search
+ *
  * Revision 1.67  2007/08/07 19:55:27  pandyas
  * Removed robohelp reference
  *
@@ -223,6 +226,11 @@
 <!-- searchAdvanced.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
+		<tr>
+			<html:errors/>
+			<td class="formMessage" colspan="3"></td>
+	
+		</tr>
 	<tr><td>
 	
 	<TABLE summary="" cellpadding="3" cellspacing="0" border="0">
