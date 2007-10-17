@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.18 2007-07-31 12:02:04 pandyas Exp $
+ * $Id: SearchForm.java,v 1.19 2007-10-17 18:23:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/07/31 12:02:04  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.17  2007/03/28 18:16:23  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -90,12 +93,26 @@
  */
 package gov.nih.nci.camod.webapp.form;
 
-import java.io.Serializable;
+import gov.nih.nci.camod.Constants;
+import gov.nih.nci.camod.util.NameValue;
+import gov.nih.nci.camod.util.NameValueList;
 
-public class SearchForm extends BaseForm implements Serializable, SearchData
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.Globals;
+import org.apache.struts.action.*;
+import org.apache.struts.util.MessageResources;
+import org.apache.struts.validator.ValidatorActionForm;
+import org.apache.struts.validator.ValidatorForm;
+
+public class SearchForm extends ActionForm implements Serializable, SearchData
 {
     private static final long serialVersionUID = 3257045453799404851L;
-
+    
     protected String keyword;
     protected String piName;
     protected String modelDescriptor;
@@ -131,7 +148,11 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
     protected boolean searchImageData = false;    
     protected boolean searchGraft = false;
     protected boolean searchTransientInterference = false;
-    protected boolean searchToolStrain = false;    
+    protected boolean searchToolStrain = false; 
+    
+    public SearchForm()
+    {
+    }    
 
     public void setHormone(String hormone)
     {
@@ -567,4 +588,149 @@ public class SearchForm extends BaseForm implements Serializable, SearchData
 	public void setCarcinogenicIntervention(String carcinogenicIntervention) {
 		this.carcinogenicIntervention = carcinogenicIntervention;
 	}
+    
+     /**
+     * validate the search form
+     * @param mapping
+     * @param request
+     * @return
+     */
+    public ActionErrors validate(ActionMapping mapping, HttpServletRequest request)
+    {
+        System.out.println("In SearchForm.validate");
+        ActionErrors errors = new ActionErrors();
+        
+        // Identify the request parameter containing the method name
+        String parameter = mapping.getParameter();
+        
+        List PIList = (List) request.getSession().getAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP);  
+        //System.out.println("APPROVEDSPECIESDROP: " + Constants.Dropdowns.APPROVEDSPECIESDROP.toString());
+
+        // validate for PI
+        if (!isValidValue(piName,Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP,request))
+        {
+            // populate the validation message
+            errors.add("piName", new ActionMessage("error.piName.validValue"));
+        }
+        // validate for species
+        if (species != null && species.length() > 0 )
+        {
+            System.out.println("Enter validate for species loop");            
+            NameValueList.generateApprovedSpeciesList();
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHSPECIESDROP, NameValueList.getApprovedSpeciesList());
+
+            if (!isValidValue(species,Constants.Dropdowns.SEARCHSPECIESDROP,request))
+            {
+                // populate the validation message
+                errors.add("species", new ActionMessage("error.species.validValue"));
+            }
+            System.out.println("Exit validate for species loop");             
+        }
+        
+        // validate for inducedMutationAgent
+        if (inducedMutationAgent != null && inducedMutationAgent.length() > 0 )
+        {
+            System.out.println("Enter validate for inducedMutationAgent loop");            
+            NameValueList.generateInducedMutationAgentList();
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, NameValueList.getInducedMutationAgentList());
+
+            if (!isValidValue(inducedMutationAgent,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request))
+            {
+                // populate the validation message
+                errors.add("inducedMutationAgent", new ActionMessage("error.inducedMutationAgent.validValue"));
+            }
+            System.out.println("Exit validate for inducedMutationAgent loop");             
+        }        
+        
+        // validate for carcinogenicIntervention
+        if (carcinogenicIntervention != null && carcinogenicIntervention.length() > 0 )
+        {
+            System.out.println("Enter validate for carcinogenicIntervention loop");            
+            NameValueList.generateCarcinogenicInterventionList();
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP, NameValueList.getCarcinogenicInterventionList());
+
+            if (!isValidValue(carcinogenicIntervention,Constants.Dropdowns.SEARCHCARCINOGENEXPOSUREDROP,request))
+            {
+                // populate the validation message
+                errors.add("carcinogenicIntervention", new ActionMessage("error.carcinogenicIntervention.validValue"));
+            }
+            System.out.println("Exit validate for carcinogenicIntervention loop");             
+        } 
+        
+        // validate for agentName
+        if (!isValidValue(agentName,Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP,request))
+        {
+            // populate the validation message
+            errors.add("agentName", new ActionMessage("error.agentName.validValue"));
+        } 
+        
+        // validate for externalSource
+        if (externalSource != null && externalSource.length() > 0 )
+        {
+            System.out.println("Enter validate for externalSource loop");            
+            NameValueList.generateExternalSourceList();
+            request.getSession().setAttribute(Constants.Dropdowns.SEARCHEXTERNALSOURCEDROP, NameValueList.getExternalSourceList());
+
+            if (!isValidValue(externalSource,Constants.Dropdowns.SEARCHEXTERNALSOURCEDROP,request))
+            {
+                // populate the validation message
+                errors.add("externalSource", new ActionMessage("error.externalSource.validValue"));
+            }
+            System.out.println("Exit validate for externalSource loop");             
+        } 
+        
+        if (parameter != null) {
+            // Identify the method name to be dispatched to.
+            String method = request.getParameter(parameter);
+            MessageResources resources = (MessageResources) request.getAttribute(Globals.MESSAGES_KEY);
+
+            // Identify the localized message for the clear button
+            String clear = resources.getMessage("button.clear");
+
+            // if message resource matches the clear button then no
+            // need to validate
+            if ((method != null) && (method.equalsIgnoreCase(clear))) {
+                return null;
+            }        
+        }       
+        return errors;               
+    }
+
+
+    /**
+     * a utlity method to check the valid value againts the dropdown
+     * @param input - the data to be validated
+     * @param source - the source against which the input to be validated
+     * @param request - http request
+     * @return boolean
+     */
+    private boolean isValidValue(String input , String source , HttpServletRequest request)
+    {
+        System.out.println("In SearchForm.isValidValue input " + input); 
+        System.out.println("In SearchForm.isValidValue source " + source.toString());         
+        // validate for intentCode
+        List dropDownList = (List) request.getSession().getAttribute(source);        
+        NameValue nv = null ;
+        boolean validValue = true ;
+        if (input != null && input.length() > 0 && dropDownList != null )
+        {
+            // assign the value to false
+            validValue = false ;
+            System.out.println("here 1 " );              
+            for (int i = 0 ; i < dropDownList.size() ; i++ )
+            {
+                System.out.println("here 2 " + i);                  
+                nv  = (NameValue) dropDownList.get(i);
+                System.out.println("nv.toString(): " + nv.toString());                  
+                if (nv.getValue().equals(input))
+                {
+                    validValue = true ;
+                    break ;
+                }
+            }
+        }
+        System.out.println("In SearchForm.isValidValue validValue " + validValue);         
+        return validValue ;
+    }
+    
 }
