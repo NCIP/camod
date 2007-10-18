@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: NewDropdownUtil.java,v 1.54 2007-10-17 18:36:55 pandyas Exp $
+ * $Id: NewDropdownUtil.java,v 1.55 2007-10-18 18:28:04 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.54  2007/10/17 18:36:55  pandyas
+ * Trying to set constanst for PI list to use in validation of searchForm
+ *
  * Revision 1.53  2007/08/27 15:41:03  pandyas
  * hide debug code printout
  *
@@ -668,6 +671,9 @@ public class NewDropdownUtil
     	log.debug("<getQueryOnlyEnvironmentalFactorList> inType: " + inType);
         
         List theEnvFactorList = QueryManagerSingleton.instance().getQueryOnlyEnvironmentalFactors(inType);
+        
+        //set for search validation to prevent cross-site scripting attacks in searchForm
+        inRequest.getSession().setAttribute(Constants.Dropdowns.ENVIRONMENTALFACTORNAMESDROP, theEnvFactorList);        
         addBlank(theEnvFactorList);
         return theEnvFactorList;
     }
@@ -681,7 +687,7 @@ public class NewDropdownUtil
     private static List getPrincipalInvestigatorList(HttpServletRequest inRequest,
                                                      String inAddBlank) throws Exception
     {
-        log.info("Entering NewDropdownUtil.getPrincipalInvestigatorList");
+        log.debug("Entering NewDropdownUtil.getPrincipalInvestigatorList");
 
         List thePIList = QueryManagerSingleton.instance().getPrincipalInvestigators();
 
@@ -704,7 +710,7 @@ public class NewDropdownUtil
             }
         }
 
-        log.info("Exiting NewDropdownUtil.getPrincipalInvestigatorList");
+        log.debug("Exiting NewDropdownUtil.getPrincipalInvestigatorList");
 
         return theReturnList;
     }
@@ -719,11 +725,12 @@ public class NewDropdownUtil
                                                               String inAddBlank) throws Exception
     {
 
-        log.info("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
+        log.debug("Entering NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList");
         
         //Assign list to a constant so simple search can validate against cross-site scripting in searchForm.validate
         List thePIOnlyList = QueryManagerSingleton.instance().getQueryOnlyPrincipalInvestigators(); 
-        inRequest.getSession().setAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP, thePIOnlyList);
+        log.debug("In NewDropdownUtil.getQueryOnlyPrincipalInvestigatorList - set SEARCHPIDROP constant ");
+        inRequest.getSession().setAttribute(Constants.Dropdowns.PRINCIPALINVESTIGATORQUERYDROP, thePIOnlyList);        
         
         return thePIOnlyList;
     }
