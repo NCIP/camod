@@ -1171,7 +1171,8 @@
 	        scope="session"
 	        parameter="unprotected_method" 
 	        unknown="false"
-	        validate="true">
+	        validate="true"
+	        input="input">
 	    <set-property property="secure" value="false" />
 	    <forward
             name="next"
@@ -1181,7 +1182,11 @@
         <forward
             name="back"
             path="/searchAdvanced.do">
-        </forward>   	
+        </forward>
+        <forward
+            name="input"
+            path="/searchAdvanced.do">
+        </forward>           	
     </action>
 
     <action path="/SearchSimpleAction"
@@ -1190,7 +1195,8 @@
 	        scope="session"
 	        parameter="unprotected_method" 
 	        unknown="false"
-	        validate="true">
+	        validate="true"
+	        input="input">
 	    <set-property property="secure" value="false" />  
 	    <forward
             name="next"
@@ -1200,7 +1206,11 @@
         <forward
             name="back"
             path="/searchSimple.do">
-        </forward>   	
+        </forward> 
+        <forward
+            name="input"
+            path="/searchSimple.do">
+        </forward>                  	
     </action>
     
     <action path="/ViewModelAction"
