@@ -2,9 +2,12 @@
 
 /**
  * 
- * $Id: searchSimple.jsp,v 1.50 2007-10-17 18:24:17 pandyas Exp $
+ * $Id: searchSimple.jsp,v 1.51 2007-10-18 18:28:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.50  2007/10/17 18:24:17  pandyas
+ * Added error message tag for cross--site scripting attacks messages
+ *
  * Revision 1.49  2007/07/31 12:00:10  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -144,14 +147,15 @@
 <!-- searchSimple.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
-	<tr><td>
-	
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
 		<tr>
 			<html:errors/>
 			<td class="formMessage" colspan="3"></td>
 	
-		</tr>	
+		</tr>
+	<tr><td>
+	
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+	
         <tr>
             <td class="formTitleBlue" height="20" colspan="3">
                 Keyword Search:&nbsp;&nbsp;
