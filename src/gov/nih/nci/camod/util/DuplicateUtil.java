@@ -3,14 +3,11 @@
  *
  * October 19, 2005, 3:44 PM
  * 
- * $Id: DuplicateUtil.java,v 1.11 2007-09-27 13:58:16 pandyas Exp $
+ * $Id: DuplicateUtil.java,v 1.10 2006-05-08 13:42:02 georgeda Exp $
  *
  * $Log: not supported by cvs2svn $
- * Revision 1.10  2006/05/08 13:42:02  georgeda
- * Reformat and clean up warnings
- *
  * Revision 1.9  2006/04/17 19:10:50  pandyas
- * Added $Id: DuplicateUtil.java,v 1.11 2007-09-27 13:58:16 pandyas Exp $ and $log:$
+ * Added $Id: DuplicateUtil.java,v 1.10 2006-05-08 13:42:02 georgeda Exp $ and $log:$
  *
  */
 
@@ -139,14 +136,13 @@ public class DuplicateUtil
 
                     Map beanProps = PropertyUtils.describe(src);
                     Iterator props = beanProps.entrySet().iterator();
-                    log.info("***** DUPLICATE Deep-Copy of Class: " + duplicateClass.getName());
+                    log.debug("***** DUPLICATE Deep-Copy of Class: " + duplicateClass.getName());
 
                     // loop thru bean properties
                     while (props.hasNext())
                     {
                         Map.Entry entry = (Map.Entry) props.next();
                         Object propValue = entry.getValue();
-                        log.info("entry: " + entry + "\tpropValue: " + propValue);
 
                         if (entry.getKey() != null)
                         {
@@ -163,7 +159,7 @@ public class DuplicateUtil
                             // do no copy property if it is in the excluded list
                             if (!(excludedProperties != null && excludedProperties.contains(pathName)))
                             {
-                                log.info("** processing copy of property: " + pathName);
+                                log.debug("** processing copy of property: " + pathName);
 
                                 // check if property is a collection
                                 if (propValue instanceof java.util.Collection)
@@ -191,14 +187,14 @@ public class DuplicateUtil
                                     // set member property in duplicate object             
                                     try
                                     {
-                                        log.info("** copying property: " + pathName);  
+                                        //log.debug("** copying property: "+pathName);  
                                         BeanUtils.copyProperty(duplicate, propName, duplicateProperty(propValue, srcHistory, dupHistory,
                                                                                                       pathName, excludedProperties));
                                     }
                                     catch (Exception ex)
                                     {
                                         // do nothing. skip and move on. property value may be null, or no set method found.           
-                                        log.info("** property '" + propName + "' not copied.  Either no set method, or null.");
+                                        log.debug("** property '" + propName + "' not copied.  Either no set method, or null.");
                                     }
                                 } // collection condition                
                             }
@@ -210,7 +206,7 @@ public class DuplicateUtil
                     // this src object has already been duplicated, so return a reference
                     // to the duplicate created earlier rather than re-duplicate        
                     duplicate = dupHistory.get(srcHistory.indexOf(src));
-                    log.info("** skipping - already duplicated: " + src.getClass().getName());
+                    log.debug("** skipping - already duplicated: " + src.getClass().getName());
                 }
             }
             catch (Exception ex)
