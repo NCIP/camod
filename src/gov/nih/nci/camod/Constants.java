@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: Constants.java,v 1.106 2007-10-17 18:29:07 pandyas Exp $
+ * $Id: Constants.java,v 1.107 2007-10-18 18:25:30 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.106  2007/10/17 18:29:07  pandyas
+ * Added constants to prevent cross--site scripting attacks
+ *
  * Revision 1.105  2007/08/14 12:03:09  pandyas
  * Implementing EVSPreferredName for Zebrafish models
  *
@@ -566,7 +569,9 @@ public class Constants {
         public static final String SEARCHSPECIESDROP = "searchspecies"; 
         public static final String SEARCHEXTERNALSOURCEDROP = "searchexternalsource";   
         public static final String SEARCHINDUCEDMUTATIONDROP = "searchinducedmutation";  
-        public static final String SEARCHCARCINOGENEXPOSUREDROP = "searchcarcinogenexposure";          
+        public static final String SEARCHCARCINOGENEXPOSUREDROP = "searchcarcinogenexposure";  
+        public static final String SEARCHENVIRONFACTORDROP = "searchenvironfactor";           
+        public static final String SEARCHPIDROP = "searchpi";          
       
     }
 
