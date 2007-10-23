@@ -1,3 +1,13 @@
+<%
+
+/**
+ * $Id: submitTherapy.jsp,v 1.36 2007-10-23 17:29:51 pandyas Exp $
+ * 
+ * $Log: not supported by cvs2svn $
+ */
+
+%> 
+ 
 <%@ include file="/jsp/header.jsp" %>
 <%@ include file="/jsp/sidebar.jsp" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -5,35 +15,15 @@
 <%@ page import="gov.nih.nci.camod.webapp.form.TherapyForm" %>
 <%@ page import='gov.nih.nci.camod.Constants.*' %>
 
+<script language="JavaScript" src="scripts/initIt.js"></script>
+<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+
+<%@ page buffer="100kb"%>
 
 <!-- needed for tooltips -->
 <DIV id="TipLayer" style="visibility:hidden;position:absolute;z-index:1000;top:-100;"></DIV>
 <script language="JavaScript" src="scripts/global.js"></script>
-<SCRIPT>
 
-function removeAllSelected()
-{
-    removeSelected(document.forms[0].selectedChemicalClasses, document.forms[0].chemicalClasses);
-    removeSelected(document.forms[0].selectedProcesses, document.forms[0].processes);
-    removeSelected(document.forms[0].selectedTargets, document.forms[0].targets);
-    unselectAll();
-}
-
-function selectAll()
-{
-    select(document.forms[0].selectedChemicalClasses);
-    select(document.forms[0].selectedProcesses);
-    select(document.forms[0].selectedTargets);
-}
-
-function unselectAll()
-{
-    unselect(document.forms[0].selectedChemicalClasses);
-    unselect(document.forms[0].selectedProcesses);
-    unselect(document.forms[0].selectedTargets);
-}
-
-</SCRIPT>
 <%
 	String aTherapyID = request.getParameter( "aTherapyID" );
 	String isDeleted = (String) request.getAttribute(Constants.Parameters.DELETED);
@@ -51,23 +41,44 @@ function unselectAll()
 	}
 %>
 
-<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">
+<SCRIPT LANGUAGE="JavaScript">
+	function removeAllSelected()
+	{
+	    removeSelected(document.forms[0].selectedChemicalClasses, document.forms[0].chemicalClasses);
+	    removeSelected(document.forms[0].selectedProcesses, document.forms[0].processes);
+	    removeSelected(document.forms[0].selectedTargets, document.forms[0].targets);
+	    unselectAll();
+	}
 
-<script language="JavaScript" src="scripts/initIt.js"></script>
-<script language="JavaScript" src="scripts/EVSTreeScript.js"></script>
+	function selectAll()
+	{
+	    select(document.forms[0].selectedChemicalClasses);
+	    select(document.forms[0].selectedProcesses);
+	    select(document.forms[0].selectedTargets);
+	}
+
+	function unselectAll()
+	{
+	    unselect(document.forms[0].selectedChemicalClasses);
+	    unselect(document.forms[0].selectedProcesses);
+	    unselect(document.forms[0].selectedTargets);
+	}
+</SCRIPT>
+
+<html:form action="<%= actionName %>" focus="name" onsubmit="selectAll()">
 
 <!-- submitTherapy.jsp -->
 <!-- Main Content Begins -->
 <TABLE cellpadding="10" cellspacing="0" border="0" class="contentBegins" width="100%" height="100%">
 <tr><td>
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
+	<TABLE summary="" cellpadding="0" cellspacing="0" border="0" class="contentPage" width="100%" height="100%">
 	<tr><td valign="top">
 
-	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left" width="100%" height="100%">
+	<TABLE summary="" cellpadding="3" cellspacing="0" border="0" align="left">
+
 	<tr>
 		<html:errors/>
 		<td class="formMessage" colspan="3">* indicates a required field</td>
-
 	</tr>
 
 	<tr>
@@ -185,10 +196,7 @@ function unselectAll()
 			</table>
 			</center>
 		</td>
- 	</tr>
- 	
-				
-				
+ 	</tr>				
 				 	
  	<tr>
 		<td class="formRequiredNotice" width="5">&nbsp;</td>
@@ -338,21 +346,18 @@ function unselectAll()
 				      </c:if>
 				      
 					  <!--  Done this way since html:hidden doesn't seem to work correctly -->
-  				  	  <input type="hidden" name="aTherapyID" value="<%= aTherapyID %>">	  				  
-				  
-				  </html:form>			
+  				  	  <input type="hidden" name="aTherapyID" value="<%= aTherapyID %>">	 			
 			</TABLE>
 		</td>
 	</tr>
-	
-	
 </TABLE>
 
 <!-- -->
 	</td></tr></TABLE>
 </tr></td></TABLE>
+</html:form>
 
-<SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
     removeAllSelected();
     chkOtherAdminRoute();
 </SCRIPT>
