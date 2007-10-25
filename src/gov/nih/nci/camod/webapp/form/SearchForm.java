@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.21 2007-10-18 18:27:28 pandyas Exp $
+ * $Id: SearchForm.java,v 1.22 2007-10-25 16:01:40 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.21  2007/10/18 18:27:28  pandyas
+ * Modified to prevent cross--site scripting attacks
+ *
  * Revision 1.20  2007/10/17 18:29:28  pandyas
  * commented out PI until it works
  *
@@ -604,7 +607,30 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
        
         // Identify the request parameter containing the method name
         String parameter = mapping.getParameter();
-
+        
+        // validate keyword against malicious characters to prevent blind SQl injection attacks
+        if (keyword != null  )
+        { 
+            System.out.println("Enter validate for keyword loop");
+            if (!isLetterOrDigit(keyword))
+            {
+               // populate the validation message
+               errors.add("keyword", new ActionMessage("error.keyword.validValue"));
+            } 
+            System.out.println("Exit validate for keyword loop");         
+        }
+        
+        // validate modelDescriptor against malicious characters to prevent blind SQl injection attacks
+        if (modelDescriptor != null  )
+        { 
+            System.out.println("Enter validate for modelDescriptor loop");
+            if (!isLetterOrDigit(modelDescriptor))
+            {
+               // populate the validation message
+               errors.add("modelDescriptor", new ActionMessage("error.modelDescriptor.validValue"));
+            } 
+            System.out.println("Exit validate for modelDescriptor loop");
+        }
         
         // validate for PI
         if (piName != null && piName.length() > 0 )
@@ -620,6 +646,30 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
         }
         
+        // validate organ; against malicious characters to prevent blind SQl injection attacks
+        if (organ != null  )
+        { 
+            System.out.println("Enter validate for organ loop");
+            if (!isLetterOrDigit(organ))
+            {
+               // populate the validation message
+               errors.add("organ", new ActionMessage("error.organ.validValue"));
+            } 
+            System.out.println("Exit validate for organ loop");
+        }
+        
+        // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
+        if (tumorClassification != null )
+        { 
+            System.out.println("Enter validate for tumorClassification loop");
+            if (!isLetterOrDigit(tumorClassification))
+            {
+               // populate the validation message
+               errors.add("tumorClassification", new ActionMessage("error.tumorClassification.validValue"));
+            } 
+            System.out.println("Exit validate for tumorClassification loop");
+        }        
+        
         // validate for species
         if (species != null && species.length() > 0 )
         {
@@ -634,6 +684,43 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
             //System.out.println("Exit validate for species loop");             
         }
+        
+        // validate phenotype against malicious characters to prevent blind SQl injection attacks
+        if (phenotype != null  )
+        { 
+            System.out.println("Enter validate for phenotype loop");
+            if (!isLetterOrDigit(phenotype))
+            {
+               // populate the validation message
+               errors.add("phenotype", new ActionMessage("error.phenotype.validValue"));
+            } 
+            System.out.println("Exit validate for phenotype loop");
+        }  
+        
+        
+        // validate geneName against malicious characters to prevent blind SQl injection attacks
+        if (geneName != null  )
+        { 
+            System.out.println("Enter validate for geneName loop");
+            if (!isLetterOrDigit(geneName))
+            {
+               // populate the validation message
+               errors.add("geneName", new ActionMessage("error.geneName.validValue"));
+            } 
+            System.out.println("Exit validate for geneName loop");
+        }  
+        
+        // validate genomicSegDesignator against malicious characters to prevent blind SQl injection attacks
+        if (genomicSegDesignator != null  )
+        { 
+            System.out.println("Enter validate for genomicSegDesignator loop");
+            if (!isLetterOrDigit(genomicSegDesignator))
+            {
+               // populate the validation message
+               errors.add("genomicSegDesignator", new ActionMessage("error.genomicSegDesignator.validValue"));
+            } 
+            System.out.println("Exit validate for genomicSegDesignator loop");
+        }        
         
         // validate for inducedMutationAgent
         if (inducedMutationAgent != null && inducedMutationAgent.length() > 0 )
@@ -680,8 +767,19 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
                 //System.out.println("Exit validate for agentName loop");                 
             }
             
-        } 
- 
+        }  
+
+        // validate cellLine against malicious characters to prevent blind SQl injection attacks
+        if (cellLine != null  )
+        { 
+            System.out.println("Enter validate for cellLine loop");
+            if (!isLetterOrDigit(cellLine))
+            {
+               // populate the validation message
+               errors.add("cellLine", new ActionMessage("error.cellLine.validValue"));
+            } 
+            System.out.println("Exit validate for cellLine loop");
+        }          
         
         // validate for externalSource
         if (externalSource != null && externalSource.length() > 0 )
@@ -776,7 +874,16 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         //System.out.println("In SearchForm.isValidStringValue validValue " + validValue);         
         return validValue ;
     }    
+
+    private boolean isLetterOrDigit(String input)
+    {    
+        for (int i = 0; i < input.length(); i++)
+        {
+                if (Character.isLetterOrDigit(input.charAt(i)))
+                return false;
+        }
+        return true;
+    }
     
-   
     
 }
