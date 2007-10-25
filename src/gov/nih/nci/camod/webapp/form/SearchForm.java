@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.22 2007-10-25 16:01:40 pandyas Exp $
+ * $Id: SearchForm.java,v 1.23 2007-10-25 16:16:13 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/10/25 16:01:40  pandyas
+ * Added validation for text fields to prevent Blind SQL injection attacks following the AppScan report findings
+ *
  * Revision 1.21  2007/10/18 18:27:28  pandyas
  * Modified to prevent cross--site scripting attacks
  *
@@ -611,25 +614,25 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate keyword against malicious characters to prevent blind SQl injection attacks
         if (keyword != null  )
         { 
-            System.out.println("Enter validate for keyword loop");
+            //System.out.println("Enter validate for keyword loop");
             if (!isLetterOrDigit(keyword))
             {
                // populate the validation message
                errors.add("keyword", new ActionMessage("error.keyword.validValue"));
             } 
-            System.out.println("Exit validate for keyword loop");         
+            //System.out.println("Exit validate for keyword loop");         
         }
         
         // validate modelDescriptor against malicious characters to prevent blind SQl injection attacks
         if (modelDescriptor != null  )
         { 
-            System.out.println("Enter validate for modelDescriptor loop");
+            //System.out.println("Enter validate for modelDescriptor loop");
             if (!isLetterOrDigit(modelDescriptor))
             {
                // populate the validation message
                errors.add("modelDescriptor", new ActionMessage("error.modelDescriptor.validValue"));
             } 
-            System.out.println("Exit validate for modelDescriptor loop");
+            //System.out.println("Exit validate for modelDescriptor loop");
         }
         
         // validate for PI
@@ -649,25 +652,25 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate organ; against malicious characters to prevent blind SQl injection attacks
         if (organ != null  )
         { 
-            System.out.println("Enter validate for organ loop");
+            //System.out.println("Enter validate for organ loop");
             if (!isLetterOrDigit(organ))
             {
                // populate the validation message
                errors.add("organ", new ActionMessage("error.organ.validValue"));
             } 
-            System.out.println("Exit validate for organ loop");
+            //System.out.println("Exit validate for organ loop");
         }
         
         // validate tumorClassification against malicious characters to prevent blind SQl injection attacks
         if (tumorClassification != null )
         { 
-            System.out.println("Enter validate for tumorClassification loop");
+            //System.out.println("Enter validate for tumorClassification loop");
             if (!isLetterOrDigit(tumorClassification))
             {
                // populate the validation message
                errors.add("tumorClassification", new ActionMessage("error.tumorClassification.validValue"));
             } 
-            System.out.println("Exit validate for tumorClassification loop");
+            //System.out.println("Exit validate for tumorClassification loop");
         }        
         
         // validate for species
@@ -688,38 +691,38 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate phenotype against malicious characters to prevent blind SQl injection attacks
         if (phenotype != null  )
         { 
-            System.out.println("Enter validate for phenotype loop");
+            //System.out.println("Enter validate for phenotype loop");
             if (!isLetterOrDigit(phenotype))
             {
                // populate the validation message
                errors.add("phenotype", new ActionMessage("error.phenotype.validValue"));
             } 
-            System.out.println("Exit validate for phenotype loop");
+            //System.out.println("Exit validate for phenotype loop");
         }  
         
         
         // validate geneName against malicious characters to prevent blind SQl injection attacks
         if (geneName != null  )
         { 
-            System.out.println("Enter validate for geneName loop");
+            //System.out.println("Enter validate for geneName loop");
             if (!isLetterOrDigit(geneName))
             {
                // populate the validation message
                errors.add("geneName", new ActionMessage("error.geneName.validValue"));
             } 
-            System.out.println("Exit validate for geneName loop");
+            //System.out.println("Exit validate for geneName loop");
         }  
         
         // validate genomicSegDesignator against malicious characters to prevent blind SQl injection attacks
         if (genomicSegDesignator != null  )
         { 
-            System.out.println("Enter validate for genomicSegDesignator loop");
+            //System.out.println("Enter validate for genomicSegDesignator loop");
             if (!isLetterOrDigit(genomicSegDesignator))
             {
                // populate the validation message
                errors.add("genomicSegDesignator", new ActionMessage("error.genomicSegDesignator.validValue"));
             } 
-            System.out.println("Exit validate for genomicSegDesignator loop");
+            //System.out.println("Exit validate for genomicSegDesignator loop");
         }        
         
         // validate for inducedMutationAgent
@@ -772,13 +775,13 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // validate cellLine against malicious characters to prevent blind SQl injection attacks
         if (cellLine != null  )
         { 
-            System.out.println("Enter validate for cellLine loop");
+            //System.out.println("Enter validate for cellLine loop");
             if (!isLetterOrDigit(cellLine))
             {
                // populate the validation message
                errors.add("cellLine", new ActionMessage("error.cellLine.validValue"));
             } 
-            System.out.println("Exit validate for cellLine loop");
+            //System.out.println("Exit validate for cellLine loop");
         }          
         
         // validate for externalSource
