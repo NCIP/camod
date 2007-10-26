@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.23 2007-10-25 16:16:13 pandyas Exp $
+ * $Id: SearchForm.java,v 1.24 2007-10-26 14:02:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.23  2007/10/25 16:16:13  pandyas
+ * commented out system statments for build to stage
+ *
  * Revision 1.22  2007/10/25 16:01:40  pandyas
  * Added validation for text fields to prevent Blind SQL injection attacks following the AppScan report findings
  *
@@ -611,7 +614,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         // Identify the request parameter containing the method name
         String parameter = mapping.getParameter();
         
-        // validate keyword against malicious characters to prevent blind SQl injection attacks
+        /* validate keyword against malicious characters to prevent blind SQl injection attacks
         if (keyword != null  )
         { 
             //System.out.println("Enter validate for keyword loop");
@@ -634,6 +637,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             } 
             //System.out.println("Exit validate for modelDescriptor loop");
         }
+        */
         
         // validate for PI
         if (piName != null && piName.length() > 0 )
@@ -649,7 +653,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             }
         }
         
-        // validate organ; against malicious characters to prevent blind SQl injection attacks
+        /* validate organ; against malicious characters to prevent blind SQl injection attacks
         if (organ != null  )
         { 
             //System.out.println("Enter validate for organ loop");
@@ -672,6 +676,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             } 
             //System.out.println("Exit validate for tumorClassification loop");
         }        
+        */
         
         // validate for species
         if (species != null && species.length() > 0 )
@@ -688,7 +693,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             //System.out.println("Exit validate for species loop");             
         }
         
-        // validate phenotype against malicious characters to prevent blind SQl injection attacks
+        /* validate phenotype against malicious characters to prevent blind SQl injection attacks
         if (phenotype != null  )
         { 
             //System.out.println("Enter validate for phenotype loop");
@@ -724,6 +729,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             } 
             //System.out.println("Exit validate for genomicSegDesignator loop");
         }        
+        */
         
         // validate for inducedMutationAgent
         if (inducedMutationAgent != null && inducedMutationAgent.length() > 0 )
@@ -772,7 +778,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             
         }  
 
-        // validate cellLine against malicious characters to prevent blind SQl injection attacks
+        /* validate cellLine against malicious characters to prevent blind SQl injection attacks
         if (cellLine != null  )
         { 
             //System.out.println("Enter validate for cellLine loop");
@@ -783,6 +789,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
             } 
             //System.out.println("Exit validate for cellLine loop");
         }          
+        */
         
         // validate for externalSource
         if (externalSource != null && externalSource.length() > 0 )
@@ -878,6 +885,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         return validValue ;
     }    
 
+    /* This method needs testing for sucessful searches
     private boolean isLetterOrDigit(String input)
     {    
         for (int i = 0; i < input.length(); i++)
@@ -887,6 +895,6 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         }
         return true;
     }
-    
+    */
     
 }
