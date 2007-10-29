@@ -122,8 +122,8 @@ Defect #5236: 	Fix Jax lab availability link and data - part 2
 Defect #5259: 	Adv search for carcinogens does not include data from Jackson Lab
 Defect #5267: 	MTB radiation data are not shown
 Defect #5284:  	Fix MGI link on genetic description pages and at the same time fix existing data
-Defect #6269:   	Corrected concept codes for rat and zebrafish on existing models now that the new vocabularies are available from EVS
-Defect #7099:   	Do not show human in species drop down list on model characteristics page
+Defect #6269:   Corrected concept codes for rat and zebrafish on existing models now that the new vocabularies are available from EVS
+Defect #7099:   Do not show human in species drop down list on model characteristics page
    
 
 ================================================================
