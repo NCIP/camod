@@ -109,11 +109,6 @@ Other
 Administration
 - Administration pages have additional filters (gforge entry #4784)
 
-NCICB Technology Stack Requirements (gforge entry #6779, 7079)
-- Upgrade to Jboss 4.0.5 from 4.0.2 
-- Upgrade to newer version of ANT for project
-
-
 The caMOD 2.1 Common Data Elements (CDEs) are available via caDSR 
 (cancer Data Standard Repository) http://ncicb.nci.nih.gov/core/caDSR
   
