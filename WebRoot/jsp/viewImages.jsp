@@ -59,6 +59,12 @@
 						<c:out value="${p.description}"/>&nbsp;
 						</td>
 					<tr>
+					<tr>
+						<td class="resultsBoxGrey" width="25%"><b>Comment</b></td>
+						<td class="resultsBoxGreyEnd">
+							<c:out value="${p.comments}"escapeXml="false"/>&nbsp;
+						</td>
+					</tr>					
 					</TABLE>					
 					<br><br/>
 				</td>
