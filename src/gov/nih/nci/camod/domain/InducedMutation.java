@@ -1,7 +1,10 @@
 /*
- * $Id: InducedMutation.java,v 1.15 2006-05-04 19:28:24 pandyas Exp $
+ * $Id: InducedMutation.java,v 1.16 2007-10-31 16:10:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/05/04 19:28:24  pandyas
+ * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
+ *
  * Revision 1.14  2006/04/19 15:05:46  georgeda
  * remove old code
  *
@@ -16,7 +19,7 @@ public class InducedMutation extends EngineeredGene
 {
     private static final long serialVersionUID = 3259235453799404851L;
 
-    private String geneId;
+    private GeneIdentifier geneIdentifier;
     private String description;
     private GeneticAlteration geneticAlteration;
     private EnvironmentalFactor environmentalFactor;
@@ -69,29 +72,12 @@ public class InducedMutation extends EngineeredGene
     }
 
     /**
-     * @return Returns the geneId.
-     */
-    public String getGeneId()
-    {
-        return geneId;
-    }
-
-    /**
-     * @param geneId
-     *            The geneId to set.
-     */
-    public void setGeneId(String geneId)
-    {
-        this.geneId = geneId;
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getGeneId() + " - " + this.getDescription();
+        result += this.getGeneIdentifier() + " - " + this.getDescription();
         return result;
     }
 
@@ -103,5 +89,19 @@ public class InducedMutation extends EngineeredGene
             return false;
         return true;
     }
+
+	/**
+	 * @return the geneIdentifier
+	 */
+	public GeneIdentifier getGeneIdentifier() {
+		return geneIdentifier;
+	}
+
+	/**
+	 * @param geneIdentifier the geneIdentifier to set
+	 */
+	public void setGeneIdentifier(GeneIdentifier geneIdentifier) {
+		this.geneIdentifier = geneIdentifier;
+	}
 
 }

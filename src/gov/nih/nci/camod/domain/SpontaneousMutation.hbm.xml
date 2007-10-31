@@ -29,10 +29,13 @@
         	column="name" 
         	type="string"/>
         	
-	    <!-- geneId -->
-        <property name="geneId"
-        	column="gene_id" 
-        	type="string"/>        	
+        <!-- geneIdentifier: this is really a one-to-one relationship with unique=true -->
+        <!-- (one-to-one unidirectional) -->
+        <many-to-one name="geneIdentifier"
+        	class="GeneIdentifier"
+        	column="gene_identifier_id"
+        	cascade="all"
+        	unique="true"/>       	
         	
         <!-- comments -->
         <property name="comments" 

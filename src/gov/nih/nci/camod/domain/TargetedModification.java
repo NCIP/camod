@@ -1,7 +1,10 @@
 /*
- * $Id: TargetedModification.java,v 1.15 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: TargetedModification.java,v 1.16 2007-10-31 16:10:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.14  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -20,7 +23,7 @@ public class TargetedModification extends EngineeredGene
 
     private String esCellLineName;
     private String blastocystName;
-    private String geneId;
+    private GeneIdentifier geneIdentifier;    
     private String constructSequence;   
     private Set<ModificationType> modificationTypeCollection = new TreeSet<ModificationType>();
     
@@ -84,22 +87,7 @@ public class TargetedModification extends EngineeredGene
         modificationTypeCollection.add(modificationType);
     }
 
-    /**
-     * @return Returns the geneId.
-     */
-    public String getGeneId()
-    {
-        return geneId;
-    }
 
-    /**
-     * @param geneId
-     *            The geneId to set.
-     */
-    public void setGeneId(String geneId)
-    {
-        this.geneId = geneId;
-    }
     /**
      * @return Returns the constructSequence.
      */
@@ -122,7 +110,7 @@ public class TargetedModification extends EngineeredGene
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getGeneId();
+        result += this.getGeneIdentifier();
         return result;
     }
 
@@ -134,4 +122,18 @@ public class TargetedModification extends EngineeredGene
             return false;
         return true;
     }
+
+	/**
+	 * @return the geneIdentifier
+	 */
+	public GeneIdentifier getGeneIdentifier() {
+		return geneIdentifier;
+	}
+
+	/**
+	 * @param geneIdentifier the geneIdentifier to set
+	 */
+	public void setGeneIdentifier(GeneIdentifier geneIdentifier) {
+		this.geneIdentifier = geneIdentifier;
+	}
 }

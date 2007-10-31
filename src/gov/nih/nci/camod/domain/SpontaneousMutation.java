@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutation.java,v 1.10 2006-05-04 19:28:24 pandyas Exp $
+ * $Id: SpontaneousMutation.java,v 1.11 2007-10-31 16:10:05 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.10  2006/05/04 19:28:24  pandyas
+ * Changed GeneticAlterationCollection to GeneticAlteration relationship from SpontaneousMutation and InducedMutation objects
+ *
  * Revision 1.9  2006/04/19 17:37:37  pandyas
  * Removed TODO text
  *
@@ -24,7 +27,7 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
 
     private AbstractCancerModel cancerModel;    
     private String name;
-    private String geneId;    
+    private GeneIdentifier geneIdentifier;   
     private String comments;
     private GeneticAlteration geneticAlteration;
     private MutationIdentifier mutationIdentifier;
@@ -62,22 +65,7 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
     {
         this.name = name;
     }    
-    /**
-     * @return Returns the geneId.
-     */
-    public String getGeneId()
-    {
-        return geneId;
-    }
-
-    /**
-     * @param geneId
-     *            The geneId to set.
-     */
-    public void setGeneId(String geneId)
-    {
-        this.geneId = geneId;
-    }    
+   
     /**
      * @return Returns the comments. Comment is a reserved word so 
      * we must use the plural form comments.
@@ -170,4 +158,18 @@ public class SpontaneousMutation extends BaseObject implements Comparable, Seria
 
         return super.compareTo(o);
     }
+    
+	/**
+	 * @return the geneIdentifier
+	 */
+	public GeneIdentifier getGeneIdentifier() {
+		return geneIdentifier;
+	}
+
+	/**
+	 * @param geneIdentifier the geneIdentifier to set
+	 */
+	public void setGeneIdentifier(GeneIdentifier geneIdentifier) {
+		this.geneIdentifier = geneIdentifier;
+	}    
 }
