@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: EnvironmentalFactorPopulateAction.java,v 1.15 2006-04-17 19:09:41 pandyas Exp $
+ * $Id: EnvironmentalFactorPopulateAction.java,v 1.16 2007-10-31 18:10:07 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2006/04/17 19:09:41  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.14  2005/11/03 13:59:10  georgeda
  * Fixed delete functionality
  *
@@ -65,9 +68,9 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
             request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
             // Set the otherName and/or the selected name attribute
-            if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
+            if (ce.getEnvironmentalFactor().getNameAlternEntry() != null) {
                 envForm.setName(Constants.Dropdowns.OTHER_OPTION);
-                envForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
+                envForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
             } else {
                 envForm.setName(ce.getEnvironmentalFactor().getName());
             }
@@ -75,9 +78,9 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
             // Set the other administrative route and/or the selected
             // administrative
             // route
-            if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
+            if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
                 envForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                envForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
+                envForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
             } else {
                 envForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
             }
@@ -89,7 +92,12 @@ public class EnvironmentalFactorPopulateAction extends BaseAction {
             envForm.setDosageUnit(ce.getTreatment().getDosageUnit());
             envForm.setRegimen(ce.getTreatment().getRegimen());
             envForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
-            envForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());            
+            envForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit()); 
+            
+            if (ce.getEnvironmentalFactor().getComments() != null)
+            {
+            	envForm.setComments(ce.getEnvironmentalFactor().getComments());
+            }             
 
         }
 

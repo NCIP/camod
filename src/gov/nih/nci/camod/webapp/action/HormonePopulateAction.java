@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: HormonePopulateAction.java,v 1.13 2006-11-09 17:28:17 pandyas Exp $
+ * $Id: HormonePopulateAction.java,v 1.14 2007-10-31 18:12:17 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/11/09 17:28:17  pandyas
+ * Commented out debug code
+ *
  * Revision 1.12  2006/04/17 19:09:40  pandyas
  * caMod 2.1 OM changes
  *
@@ -65,18 +68,18 @@ public class HormonePopulateAction extends BaseAction {
             request.setAttribute("aCarcinogenExposureID", aCarcinogenExposureID);
 
 			// Set the otherName and/or the selected name attribute
-			if (ce.getEnvironmentalFactor().getNameUnctrlVocab() != null) {
+			if (ce.getEnvironmentalFactor().getNameAlternEntry() != null) {
 				hormoneForm.setName(Constants.Dropdowns.OTHER_OPTION);
-				hormoneForm.setOtherName(ce.getEnvironmentalFactor().getNameUnctrlVocab());
+				hormoneForm.setOtherName(ce.getEnvironmentalFactor().getNameAlternEntry());
 			} else {
 				hormoneForm.setName(ce.getEnvironmentalFactor().getName());
 			}
 
 			// Set the other administrative route and/or the selected
 			// administrative route
-			if (ce.getTreatment().getAdminRouteUnctrlVocab() != null) {
+			if (ce.getTreatment().getAdminRouteAlternEntry() != null) {
 				hormoneForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-				hormoneForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteUnctrlVocab());
+				hormoneForm.setOtherAdministrativeRoute(ce.getTreatment().getAdminRouteAlternEntry());
 			} else {
 				hormoneForm.setAdministrativeRoute(ce.getTreatment().getAdministrativeRoute());
 			}
@@ -89,6 +92,12 @@ public class HormonePopulateAction extends BaseAction {
 			hormoneForm.setRegimen(ce.getTreatment().getRegimen());
 			hormoneForm.setAgeAtTreatment(ce.getTreatment().getAgeAtTreatment());
             hormoneForm.setAgeAtTreatmentUnit(ce.getTreatment().getAgeAtTreatmentUnit());
+            
+            if (ce.getEnvironmentalFactor().getComments() != null)
+            {
+            	hormoneForm.setComments(ce.getEnvironmentalFactor().getComments());
+            }
+            
 		}
         log.debug("<HormonePopulateAction populate> Got fields ");
 		// Prepopulate all dropdown fields, set the global Constants to the

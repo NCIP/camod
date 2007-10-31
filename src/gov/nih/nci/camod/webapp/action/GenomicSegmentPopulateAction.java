@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GenomicSegmentPopulateAction.java,v 1.18 2007-07-31 12:02:55 pandyas Exp $
+ * $Id: GenomicSegmentPopulateAction.java,v 1.19 2007-10-31 18:11:03 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/07/31 12:02:55  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.17  2007/04/04 13:19:08  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -73,9 +76,9 @@ public class GenomicSegmentPopulateAction extends BaseAction {
             SegmentType inSegmentType = (SegmentType) theGenomicSegment.getSegmentType();
             genomicSegmentForm.setSegmentName(inSegmentType.getName());
 
-            if (inSegmentType.getNameUnctrlVocab() != null) {
+            if (inSegmentType.getNameAlternEntry() != null) {
             	genomicSegmentForm.setSegmentName(Constants.Dropdowns.OTHER_OPTION);
-                genomicSegmentForm.setOtherSegmentName(inSegmentType.getNameUnctrlVocab());
+                genomicSegmentForm.setOtherSegmentName(inSegmentType.getNameAlternEntry());
             }
 
             genomicSegmentForm.setSegmentSize(theGenomicSegment.getSegmentSize());

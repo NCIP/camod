@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: MorpholinoPopulateAction.java,v 1.8 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: MorpholinoPopulateAction.java,v 1.9 2007-10-31 18:12:33 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.7  2007/04/04 13:19:27  pandyas
  * Modified name for conditioning regimen and target site
  *
@@ -73,10 +76,10 @@ public class MorpholinoPopulateAction extends BaseAction
             request.setAttribute("aTransIntID", aTransIntID);
          
             // Populate the fields from database
-            if (transientInterference.getSourceUnctrVocab() != null)
+            if (transientInterference.getSourceAlternEntry() != null)
             {
             	transientInterferenceForm.setSource(Constants.Dropdowns.OTHER_OPTION);
-            	transientInterferenceForm.setOtherSource(transientInterference.getSourceUnctrVocab());
+            	transientInterferenceForm.setOtherSource(transientInterference.getSourceAlternEntry());
             }
             else
             {
@@ -91,20 +94,20 @@ public class MorpholinoPopulateAction extends BaseAction
             transientInterferenceForm.setConcentrationUnit(transientInterference.getConcentrationUnit());
             transientInterferenceForm.setComments(transientInterference.getComments());
             
-            if (transientInterference.getDeliveryMethodUnctrlVocab() != null)
+            if (transientInterference.getDeliveryMethodAlternEntry() != null)
             {
             	transientInterferenceForm.setDeliveryMethod(Constants.Dropdowns.OTHER_OPTION);
-            	transientInterferenceForm.setOtherDeliveryMethod(transientInterference.getDeliveryMethodUnctrlVocab());
+            	transientInterferenceForm.setOtherDeliveryMethod(transientInterference.getDeliveryMethodAlternEntry());
             }
             else
             {
             	transientInterferenceForm.setDeliveryMethod(transientInterference.getDeliveryMethod());
             }
 
-            if (transientInterference.getVisualLigandUnctrlVocab() != null)
+            if (transientInterference.getVisualLigandAlternEntry() != null)
             {
             	transientInterferenceForm.setVisualLigand(Constants.Dropdowns.OTHER_OPTION);
-            	transientInterferenceForm.setOtherVisualLigand(transientInterference.getVisualLigandUnctrlVocab());
+            	transientInterferenceForm.setOtherVisualLigand(transientInterference.getVisualLigandAlternEntry());
             }
             else
             {

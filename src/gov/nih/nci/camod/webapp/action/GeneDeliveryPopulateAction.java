@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDeliveryPopulateAction.java,v 1.22 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: GeneDeliveryPopulateAction.java,v 1.23 2007-10-31 18:10:26 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.21  2007/08/14 17:05:57  pandyas
  * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
  *
@@ -96,11 +99,11 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 
 			// Set the otherViralVector and/or the selected viral vector
 			// attribute
-			if (gene.getViralVectorUnctrlVocab() != null) {
+			if (gene.getViralVectorAlternEntry() != null) {
 				geneDeliveryForm
 						.setViralVector(Constants.Dropdowns.OTHER_OPTION);
 				geneDeliveryForm.setOtherViralVector(gene
-						.getViralVectorUnctrlVocab());
+						.getViralVectorAlternEntry());
 			} else {
 				geneDeliveryForm.setViralVector(gene.getViralVector());
 			}
@@ -127,6 +130,11 @@ public class GeneDeliveryPopulateAction extends BaseAction {
 				geneDeliveryForm.setOrganTissueCode(gene.getOrgan().getConceptCode());
 				geneDeliveryForm.setOrgan(gene.getOrgan().getEVSPreferredDescription());
 			}
+			
+            if (gene.getComments() != null)
+            {
+            	geneDeliveryForm.setComments(gene.getComments());
+            }			
 
 		}
 

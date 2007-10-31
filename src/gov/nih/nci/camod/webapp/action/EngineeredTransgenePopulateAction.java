@@ -1,8 +1,13 @@
 /**
  * 
- * $Id: EngineeredTransgenePopulateAction.java,v 1.27 2007-08-15 16:01:48 pandyas Exp $
+ * $Id: EngineeredTransgenePopulateAction.java,v 1.28 2007-10-31 18:09:47 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/08/15 16:01:48  pandyas
+ * Bug #8351:  Construct Sequence info not shown in edit mode and on search page
+ *
+ * Construct sequence was saved for EG but not populated in edit mode
+ *
  * Revision 1.26  2007/07/31 12:02:55  pandyas
  * VCDE silver level  and caMOD 2.3 changes
  *
@@ -94,10 +99,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
             if (theEngineeredTransgene.getSpecies() != null)
             {
-                if (theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab() != null && theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab().length() > 0)
+                if (theEngineeredTransgene.getSpecies().getScientificNameAlternEntry() != null && theEngineeredTransgene.getSpecies().getScientificNameAlternEntry().length() > 0)
                 {
                     theEngineeredTransgeneForm.setScientificName(Constants.Dropdowns.OTHER_OPTION);
-                    theEngineeredTransgeneForm.setOtherScientificName(theEngineeredTransgene.getSpecies().getScientificNameUnctrlVocab());
+                    theEngineeredTransgeneForm.setOtherScientificName(theEngineeredTransgene.getSpecies().getScientificNameAlternEntry());
                 }
                 else
                 {
@@ -116,10 +121,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
                     if (theSpecies != null)
                     {
-                        if (theSpecies.getScientificNameUnctrlVocab() != null)
+                        if (theSpecies.getScientificNameAlternEntry() != null)
                         {
                             theEngineeredTransgeneForm.setTranscriptional1_species("Other");
-                            theEngineeredTransgeneForm.setTranscriptional1_otherSpecies(theSpecies.getScientificNameUnctrlVocab());
+                            theEngineeredTransgeneForm.setTranscriptional1_otherSpecies(theSpecies.getScientificNameAlternEntry());
                         }
                         else
                         {
@@ -135,10 +140,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
                     if (theSpecies != null)
                     {
-                        if (theSpecies.getScientificNameUnctrlVocab() != null)
+                        if (theSpecies.getScientificNameAlternEntry() != null)
                         {
                             theEngineeredTransgeneForm.setTranscriptional2_species("Other");
-                            theEngineeredTransgeneForm.setTranscriptional2_otherSpecies(theSpecies.getScientificNameUnctrlVocab());
+                            theEngineeredTransgeneForm.setTranscriptional2_otherSpecies(theSpecies.getScientificNameAlternEntry());
                         }
                         else
                         {
@@ -154,10 +159,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
                     if (theSpecies != null)
                     {
-                        if (theSpecies.getScientificNameUnctrlVocab() != null)
+                        if (theSpecies.getScientificNameAlternEntry() != null)
                         {
                             theEngineeredTransgeneForm.setTranscriptional3_species("Other");
-                            theEngineeredTransgeneForm.setTranscriptional3_otherSpecies(theSpecies.getScientificNameUnctrlVocab());
+                            theEngineeredTransgeneForm.setTranscriptional3_otherSpecies(theSpecies.getScientificNameAlternEntry());
                         }
                         else
                         {
@@ -173,10 +178,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
                     if (theSpecies != null)
                     {
-                        if (theSpecies.getScientificNameUnctrlVocab() != null)
+                        if (theSpecies.getScientificNameAlternEntry() != null)
                         {
                             theEngineeredTransgeneForm.setPolyASignal_species("Other");
-                            theEngineeredTransgeneForm.setPolyASignal_otherSpecies(theSpecies.getScientificNameUnctrlVocab());
+                            theEngineeredTransgeneForm.setPolyASignal_otherSpecies(theSpecies.getScientificNameAlternEntry());
                         }
                         else
                         {
@@ -192,10 +197,10 @@ public class EngineeredTransgenePopulateAction extends BaseAction
 
                     if (theSpecies != null)
                     {
-                        if (theSpecies.getScientificNameUnctrlVocab() != null)
+                        if (theSpecies.getScientificNameAlternEntry() != null)
                         {
                             theEngineeredTransgeneForm.setSpliceSites_species("Other");
-                            theEngineeredTransgeneForm.setSpliceSites_otherSpecies(theSpecies.getScientificNameUnctrlVocab());
+                            theEngineeredTransgeneForm.setSpliceSites_otherSpecies(theSpecies.getScientificNameAlternEntry());
                         }
                         else
                         {

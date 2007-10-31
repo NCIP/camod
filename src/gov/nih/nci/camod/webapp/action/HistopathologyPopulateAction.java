@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: HistopathologyPopulateAction.java,v 1.18 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: HistopathologyPopulateAction.java,v 1.19 2007-10-31 18:11:45 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.18  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.17  2007/08/14 17:06:09  pandyas
  * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
  *
@@ -118,11 +121,11 @@ public class HistopathologyPopulateAction extends BaseAction {
             
             /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = theHistopathology.getDisease();
-            if(disease.getNameUnctrlVocab() != null) {
+            if(disease.getNameAlternEntry() != null) {
             	log.debug("disease is other in DB");
             	histopathologyForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
             	histopathologyForm.setDiagnosisCode(disease.getConceptCode());            	
-            	histopathologyForm.setOtherTumorClassification(disease.getNameUnctrlVocab());
+            	histopathologyForm.setOtherTumorClassification(disease.getNameAlternEntry());
             	
             } else {
             	if (disease.getConceptCode().equals(Constants.Dropdowns.CONCEPTCODEZEROS)){
