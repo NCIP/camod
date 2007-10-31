@@ -1,9 +1,12 @@
 /**
  * @author dgeorge
  * 
- * $Id: AnimalModelSearchResult.java,v 1.22 2007-08-14 17:03:39 pandyas Exp $
+ * $Id: AnimalModelSearchResult.java,v 1.23 2007-10-31 15:19:53 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/08/14 17:03:39  pandyas
+ * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
+ *
  * Revision 1.21  2007/08/01 18:06:25  pandyas
  * VCDE changes
  *
@@ -343,14 +346,14 @@ public class AnimalModelSearchResult implements Comparable
                     {
                         GenomicSegment theGenomicSegment = (GenomicSegment) eg;
 
-                        if (theGenomicSegment.getSegmentType().getNameUnctrlVocab() == null || theGenomicSegment.getSegmentType().getNameUnctrlVocab().equals(
+                        if (theGenomicSegment.getSegmentType().getNameAlternEntry() == null || theGenomicSegment.getSegmentType().getNameAlternEntry().equals(
                                                                                                                                                               ""))
                         {
                             mySegmentType += theGenomicSegment.getSegmentType().getName() + "<br>";
                         }
                         else
                         {
-                            mySegmentType += theGenomicSegment.getSegmentType().getNameUnctrlVocab() + "<br>";
+                            mySegmentType += theGenomicSegment.getSegmentType().getNameAlternEntry() + "<br>";
                         }
                     }
                 }
@@ -459,13 +462,13 @@ public class AnimalModelSearchResult implements Comparable
                         {
                             ModificationType mt = (ModificationType) modIter.next();
 
-                            if (mt.getNameUnctrlVocab() == null || mt.getNameUnctrlVocab().equals(""))
+                            if (mt.getNameAlternEntry() == null || mt.getNameAlternEntry().equals(""))
                             {
                                 myTypeOfModification += mt.getName() + "<br>";
                             }
                             else
                             {
-                                myTypeOfModification += mt.getNameUnctrlVocab() + "<br>";
+                                myTypeOfModification += mt.getNameAlternEntry() + "<br>";
                             }
                         }
                     }
@@ -506,7 +509,7 @@ public class AnimalModelSearchResult implements Comparable
                         }
                         else
                         {
-                            myNameOfInducingAgent += im.getEnvironmentalFactor().getNameUnctrlVocab() + "<br>";
+                            myNameOfInducingAgent += im.getEnvironmentalFactor().getNameAlternEntry() + "<br>";
                         }
                     }
                 }
@@ -567,28 +570,28 @@ public class AnimalModelSearchResult implements Comparable
 
                 if (ef != null)
                 {
-                	// Check for ef.getType() else ef.getTypeUnctrlVocab()
+                	// Check for ef.getType() else ef.getTypeAlternEntry()
                     if (ef.getType() != null)
                     {
-                    	// Check for ef.getName() else ef.getNameUnctrlVocab()
+                    	// Check for ef.getName() else ef.getNameAlternEntry()
                         if (ef.getName() != null)
                         {
                             myCarcinogen += ef.getName() + " (" + ef.getType() + ") <br>";
                         }
                         else
                         {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + ef.getType() + ") <br>";
+                            myCarcinogen += ef.getNameAlternEntry() + " (" + ef.getType() + ") <br>";
                         }
                     }
                     else 
                     {
                         if (ef.getName() != null)
                         {
-                            myCarcinogen += ef.getName() + " (" + ef.getTypeUnctrlVocab() + ") <br>";
+                            myCarcinogen += ef.getName() + " (" + ef.getTypeAlternEntry() + ") <br>";
                         }
                         else
                         {
-                            myCarcinogen += ef.getNameUnctrlVocab() + " (" + ef.getTypeUnctrlVocab() + ") <br>";
+                            myCarcinogen += ef.getNameAlternEntry() + " (" + ef.getTypeAlternEntry() + ") <br>";
                         }
                     }
                 }
@@ -624,7 +627,7 @@ public class AnimalModelSearchResult implements Comparable
                 }
                 else
                 {
-                    myViralVector += geneDelivery.getViralVectorUnctrlVocab() + "<br>";
+                    myViralVector += geneDelivery.getViralVectorAlternEntry() + "<br>";
                 }
             }
 
@@ -822,7 +825,7 @@ public class AnimalModelSearchResult implements Comparable
                 }
                 else
                 {
-                    myDiagnosis += his.getDisease().getNameUnctrlVocab() + "<br>";
+                    myDiagnosis += his.getDisease().getNameAlternEntry() + "<br>";
                 }                
             }
         }
@@ -954,7 +957,7 @@ public class AnimalModelSearchResult implements Comparable
                     }
                     else
                     {
-                        myDrugCompoundName += it.getTreatment().getAdminRouteUnctrlVocab() + "<br>";
+                        myDrugCompoundName += it.getTreatment().getAdminRouteAlternEntry() + "<br>";
                     }
                 }
             }
@@ -1095,13 +1098,13 @@ public class AnimalModelSearchResult implements Comparable
         if (myCellLine == null)
         {
             fetchAnimalModel();
-            Set<Graft> set = myAnimalModel.getGraftCollection();
-            Iterator<Graft> setIter = set.iterator();
+            Set<Transplantation> set = myAnimalModel.getTransplantationCollection();
+            Iterator<Transplantation> setIter = set.iterator();
             myCellLine = "";
 
             while (setIter.hasNext())
             {
-                Graft it = (Graft) setIter.next();
+            	Transplantation it = (Transplantation) setIter.next();
                 if (it.getParentalCellLineName() != null)
                 {
                     myCellLine += it.getParentalCellLineName() + "<br>";
@@ -1124,13 +1127,13 @@ public class AnimalModelSearchResult implements Comparable
         if (myDonorSpecies == null)
         {
             fetchAnimalModel();
-            Set<Graft> set = myAnimalModel.getGraftCollection();
-            Iterator<Graft> setIter = set.iterator();
+            Set<Transplantation> set = myAnimalModel.getTransplantationCollection();
+            Iterator<Transplantation> setIter = set.iterator();
             myDonorSpecies = "";
 
             while (setIter.hasNext())
             {
-                Graft it = (Graft) setIter.next();
+            	Transplantation it = (Transplantation) setIter.next();
                 if (it.getDonorSpecies() != null)
                 {
                     if (it.getDonorSpecies().getDisplayName() != null)
@@ -1156,21 +1159,21 @@ public class AnimalModelSearchResult implements Comparable
         if (mySourceType == null)
         {
             fetchAnimalModel();
-            Set<Graft> set = myAnimalModel.getGraftCollection();
-            Iterator<Graft> setIter = set.iterator();
+            Set<Transplantation> set = myAnimalModel.getTransplantationCollection();
+            Iterator<Transplantation> setIter = set.iterator();
             mySourceType = "";
 
             while (setIter.hasNext())
             {
-                Graft it = (Graft) setIter.next();
+            	Transplantation it = (Transplantation) setIter.next();
                 if (it.getSourceType() != null)
                 {
                     mySourceType += it.getSourceType() + "<br>";
                 }
 
-                if (it.getSourceTypeUnctrlVocab() != null)
+                if (it.getSourceTypeAlternEntry() != null)
                 {
-                    mySourceType += it.getSourceTypeUnctrlVocab() + "<br>";
+                    mySourceType += it.getSourceTypeAlternEntry() + "<br>";
                 }
             }
         }
