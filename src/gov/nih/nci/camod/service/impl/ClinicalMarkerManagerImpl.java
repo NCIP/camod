@@ -1,9 +1,12 @@
 /**
  * @pandyas
  * 
- * $Id: ClinicalMarkerManagerImpl.java,v 1.9 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: ClinicalMarkerManagerImpl.java,v 1.10 2007-10-31 19:03:00 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.8  2007/08/14 17:07:42  pandyas
  * Bug #8404:  Clincal Marker - the search page shows only "Other" instead of the value that was entered which was in this
  * case "other clinical marker"
@@ -97,18 +100,22 @@ public class ClinicalMarkerManagerImpl extends BaseManager implements ClinicalMa
         if (inClinicalMarkerData.getOtherName() != null )
         {
             inClinicalMarker.setName(null);
-            inClinicalMarker.setNameUnctrlVocab(inClinicalMarkerData.getOtherName());            
+            inClinicalMarker.setNameAlternEntry(inClinicalMarkerData.getOtherName());            
         }
         else
         {
             inClinicalMarker.setName(inClinicalMarkerData.getName());
-            inClinicalMarker.setNameUnctrlVocab( null );
+            inClinicalMarker.setNameAlternEntry( null );
         }
 
         if (inClinicalMarkerData.getValue() != null && inClinicalMarkerData.getValue().length() > 0)
         {
             inClinicalMarker.setValue(inClinicalMarkerData.getValue());
         }
+        if (inClinicalMarkerData.getComments() != null && inClinicalMarkerData.getComments().length() > 0)
+        {
+            inClinicalMarker.setComments(inClinicalMarkerData.getComments());
+        }        
         log.debug("<ClinicalMarkerManagerImpl> Exiting populateClinicalMarker");
     }
 
