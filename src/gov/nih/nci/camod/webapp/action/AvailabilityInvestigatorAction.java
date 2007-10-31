@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorAction.java,v 1.8 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AvailabilityInvestigatorAction.java,v 1.9 2007-10-31 17:53:03 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.7  2007/07/23 17:40:43  pandyas
  * Fixed typo in word occurred
  *
@@ -74,7 +77,8 @@ public class AvailabilityInvestigatorAction extends BaseAction {
         String aAvailabilityID = request.getParameter("aAvailabilityID");
 
         System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
-                + availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
+                + availabilityForm.getName() + "\n\t stockNumber: " + availabilityForm.getStockNumber() 
+                + "\n\t PrincipalInvestigator: " + availabilityForm.getPrincipalInvestigator() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         /* Create all the manager objects needed for Screen */
@@ -146,7 +150,8 @@ public class AvailabilityInvestigatorAction extends BaseAction {
         AvailabilityForm availabilityForm = (AvailabilityForm) form;
 
         System.out.println("<AvailabilityInvestigatorAction edit> following Characteristics:" + "\n\t name: "
-                + availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() + "\n\t user: "
+                + availabilityForm.getName() + "\n\t stockNuber: " + availabilityForm.getStockNumber() 
+                + "\n\t PrincipalInvestigator: " + availabilityForm.getPrincipalInvestigator() + "\n\t user: "
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         /* Create all the manager objects needed for Screen */
