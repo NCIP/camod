@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TargetedModificationManagerImpl.java,v 1.32 2007-09-12 19:36:04 pandyas Exp $
+ * $Id: TargetedModificationManagerImpl.java,v 1.33 2007-10-31 19:13:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.32  2007/09/12 19:36:04  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.31  2007/08/15 16:00:55  pandyas
  * Bug #8351:  Construct Sequence info not shown in edit mode and on search page
  *
@@ -187,10 +190,34 @@ public class TargetedModificationManagerImpl extends BaseManager implements
 			}
 
 		}
+		
+		// GeneIdentifier
+		GeneIdentifier inGeneIdentifier = null;
+		if(inTargetedModificationData.getGeneIdentifier() != null && inTargetedModificationData.getGeneIdentifier().length() >0){
+			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inTargetedModificationData.getGeneIdentifier());
+			// Check for exisiting GeneIdentifier
+			if (inTargetedModification.getGeneIdentifier() != null) {
+				log.info("getGeneIdentifier() != null loop");
+				inGeneIdentifier = inTargetedModification.getGeneIdentifier();
+				inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier());
+				inTargetedModification.setGeneIdentifier(inGeneIdentifier);
+				
+				log.info("setEntrezGeneID");			
+			} else {
+				inGeneIdentifier = new GeneIdentifier();
+				log.info("new GeneIdentifier loop");	
+				inGeneIdentifier.setEntrezGeneID(inTargetedModificationData.getGeneIdentifier());
+				inTargetedModification.setGeneIdentifier(inGeneIdentifier);
+				log.info("setEntrezGeneID");			
+			}			
+		}
 
-		// Gene Id
-		inTargetedModification
-				.setGeneId(inTargetedModificationData.getGeneId());
+		if (inTargetedModificationData.getMgiId() != null) {
+
+			inGeneIdentifier.setEntrezGeneID(inTargetedModificationData
+					.getMgiId().trim());
+			inTargetedModification.setGeneIdentifier(inGeneIdentifier);
+		}		
 
 		// Genetic Background - Donor
 		inTargetedModification.setEsCellLineName(inTargetedModificationData

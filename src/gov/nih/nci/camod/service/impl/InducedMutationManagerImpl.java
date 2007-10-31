@@ -1,8 +1,11 @@
 /**
  * @author schroedln
  * 
- * $Id: InducedMutationManagerImpl.java,v 1.27 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: InducedMutationManagerImpl.java,v 1.28 2007-10-31 19:13:27 pandyas Exp $
  * $Log: not supported by cvs2svn $
+ * Revision 1.27  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.26  2007/04/04 13:17:49  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -77,6 +80,7 @@ package gov.nih.nci.camod.service.impl;
 import gov.nih.nci.camod.Constants;
 import gov.nih.nci.camod.domain.AnimalModel;
 import gov.nih.nci.camod.domain.EnvironmentalFactor;
+import gov.nih.nci.camod.domain.GeneIdentifier;
 import gov.nih.nci.camod.domain.GeneticAlteration;
 import gov.nih.nci.camod.domain.InducedMutation;
 import gov.nih.nci.camod.domain.MutationIdentifier;
@@ -165,7 +169,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 
 		// Name of Inducing Agent - Saved in uncontrolled vocab field since it
 		// is free text
-		theEnvironFactor.setNameUnctrlVocab(inInducedMutationData.getName());
+		theEnvironFactor.setNameAlternEntry(inInducedMutationData.getName());
 		log.debug("In InducedMutationManagerImpl.save set name : "
 				+ inInducedMutationData.getName());
 
@@ -177,7 +181,7 @@ public class InducedMutationManagerImpl extends BaseManager implements
 			sendEmail(inAnimalModel, inInducedMutationData.getOtherType(),
 					"OtherInducedMutation");
 			// Do not save 'Other' in the database
-			theEnvironFactor.setTypeUnctrlVocab(inInducedMutationData
+			theEnvironFactor.setTypeAlternEntry(inInducedMutationData
 					.getOtherType());
 			log.debug("inInducedMutationData.getOtherType(): "
 					+ inInducedMutationData.getOtherType());
@@ -190,8 +194,33 @@ public class InducedMutationManagerImpl extends BaseManager implements
 		// CAS Number
 		theEnvironFactor.setCasNumber(inInducedMutationData.getCasNumber());
 
-		// GeneID
-		inInducedMutation.setGeneId(inInducedMutationData.getGeneId());
+		// GeneIdentifier
+		GeneIdentifier inGeneIdentifier = null;
+		if(inInducedMutationData.getGeneIdentifier() != null && inInducedMutationData.getGeneIdentifier().length() >0){
+			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inInducedMutationData.getGeneIdentifier());
+			// Check for exisiting GeneIdentifier
+			if (inInducedMutation.getGeneIdentifier() != null) {
+				log.info("getGeneIdentifier() != null loop");
+				inGeneIdentifier = inInducedMutation.getGeneIdentifier();
+				inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier());
+				inInducedMutation.setGeneIdentifier(inGeneIdentifier);
+				
+				log.info("setEntrezGeneID");			
+			} else {
+				inGeneIdentifier = new GeneIdentifier();
+				log.info("new GeneIdentifier loop");	
+				inGeneIdentifier.setEntrezGeneID(inInducedMutationData.getGeneIdentifier());
+				inInducedMutation.setGeneIdentifier(inGeneIdentifier);
+				log.info("setEntrezGeneID");			
+			}			
+		}
+
+		if (inInducedMutationData.getMgiId() != null) {
+
+			inGeneIdentifier.setEntrezGeneID(inInducedMutationData
+					.getMgiId().trim());
+			inInducedMutation.setGeneIdentifier(inGeneIdentifier);
+		}		
 
 		// Description
 		inInducedMutation

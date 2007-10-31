@@ -1,7 +1,10 @@
 /*
- * $Id: SpontaneousMutationManagerImpl.java,v 1.15 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: SpontaneousMutationManagerImpl.java,v 1.16 2007-10-31 19:13:27 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.15  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.14  2007/04/04 13:17:49  pandyas
  * modified names for mutation identifier fields (number changed to id)
  *
@@ -97,8 +100,26 @@ public class SpontaneousMutationManagerImpl extends BaseManager implements Spont
         //Comment
         inSpontaneousMutation.setComments(inSpontaneousMutationData.getComments());
 
-        // GeneID
-        inSpontaneousMutation.setGeneId(inSpontaneousMutationData.getGeneId());
+		// GeneIdentifier
+		GeneIdentifier inGeneIdentifier = null;
+		if(inSpontaneousMutationData.getGeneIdentifier() != null && inSpontaneousMutationData.getGeneIdentifier().length() >0){
+			log.info("inSpontaneousMutationData.getGeneIdentifier(): " + inSpontaneousMutationData.getGeneIdentifier());
+			// Check for exisiting GeneIdentifier
+			if (inSpontaneousMutation.getGeneIdentifier() != null) {
+				log.info("getGeneIdentifier() != null loop");
+				inGeneIdentifier = inSpontaneousMutation.getGeneIdentifier();
+				inGeneIdentifier.setEntrezGeneID(inSpontaneousMutationData.getGeneIdentifier());
+				inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
+				
+				log.info("setEntrezGeneID");			
+			} else {
+				inGeneIdentifier = new GeneIdentifier();
+				log.info("new GeneIdentifier loop");	
+				inGeneIdentifier.setEntrezGeneID(inSpontaneousMutationData.getGeneIdentifier());
+				inSpontaneousMutation.setGeneIdentifier(inGeneIdentifier);
+				log.info("setEntrezGeneID");			
+			}			
+		}
 
         // Observation and Method of Observation
         // No genetic alteration in DB - data is entered from the GUI

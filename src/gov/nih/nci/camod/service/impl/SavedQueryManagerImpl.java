@@ -1,9 +1,12 @@
 /**
  * @author schroedlni
  * 
- * $Id: SavedQueryManagerImpl.java,v 1.8 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: SavedQueryManagerImpl.java,v 1.9 2007-10-31 19:13:27 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.7  2007/09/06 17:02:47  pandyas
  * Fixed name in debug statements to SavedQueryManagerImpl - left over from original author's class name
  *
@@ -270,9 +273,9 @@ public class SavedQueryManagerImpl extends BaseManager implements
 			}
 			
 			if (theSavedQueryAttribute.getAttributeName().equals(
-					theBundle.getString("criteria.isSearchGraft"))) {
+					theBundle.getString("criteria.isSearchTransplantation"))) {
 				if (theSavedQueryAttribute.getAttributeValue().equals("true")) {
-					inSearchForm.setSearchGraft(true);
+					inSearchForm.setSearchTransplantation(true);
 				}
 			}			
 		}
@@ -559,11 +562,11 @@ public class SavedQueryManagerImpl extends BaseManager implements
 			criteriaList.add(sqa);
 		}
 
-		// Is it a graft
-		if (inSearchData.isSearchGraft() == true) {
+		// Is it a transplantation
+		if (inSearchData.isSearchTransplantation() == true) {
 			SavedQueryAttribute sqa = new SavedQueryAttribute();
 			sqa.setAttributeName(theBundle
-					.getString("criteria.isSearchGraft"));
+					.getString("criteria.isSearchTransplantation"));
 			sqa.setAttributeValue("true");
 			criteriaList.add(sqa);
 		}
