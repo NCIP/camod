@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2007/09/12 19:35:52  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.13  2006/10/17 16:14:36  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -22,7 +25,7 @@
  * Cleanup
  *
  * 
- * $Id: AnimalAvailability.java,v 1.14 2007-09-12 19:35:52 pandyas Exp $
+ * $Id: AnimalAvailability.java,v 1.15 2007-10-31 14:51:11 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -43,6 +46,7 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
     private String stockNumber;
     private AbstractCancerModel cancerModel;
     private AnimalDistributor animalDistributor;
+    private Person principalInvestigator;   
 
 
     /**
@@ -93,6 +97,7 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
         this.stockNumber = stockNumber;
     }
 
+/*    
     public Person getPrincipalInvestigator()
     {
         Person thePerson = null;
@@ -115,7 +120,7 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
 
         return thePerson;
     }
-
+*/
     /**
      * @return Returns the cancerModel.
      */
@@ -192,5 +197,21 @@ public class AnimalAvailability extends BaseObject implements Comparable, Serial
 
         return super.compareTo(o);
     }
+
+	/**
+	 * @return the principalInvestigator
+	 */
+	public Person getPrincipalInvestigator() {
+		return principalInvestigator;
+	}
+
+	/**
+	 * @param principalInvestigator the principalInvestigator to set
+	 */
+	public void setPrincipalInvestigator(Person principalInvestigator) {
+		this.principalInvestigator = principalInvestigator;
+	}
+
+
 
 }

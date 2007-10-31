@@ -33,6 +33,13 @@
         <property name="stockNumber" 
         	column="stock_number" 
         	type="string"/>
+        	
+        <!-- principalInvestigator (many-to-one unidirectional) -->
+        <many-to-one
+        	name="principalInvestigator"
+        	column="principal_investigator_id"
+        	cascade="save-update"
+        	class="Person"/>      	       	
 
         <!-- animalDistributor (many-to-one unidirectional) -->
         <many-to-one
