@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchForm.java,v 1.24 2007-10-26 14:02:57 pandyas Exp $
+ * $Id: SearchForm.java,v 1.25 2007-10-31 17:42:28 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.24  2007/10/26 14:02:57  pandyas
+ * ready for next build
+ *
  * Revision 1.23  2007/10/25 16:16:13  pandyas
  * commented out system statments for build to stage
  *
@@ -157,7 +160,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     protected boolean searchHistoMetastasis = false;
     protected boolean searchMicroArrayData = false;
     protected boolean searchImageData = false;    
-    protected boolean searchGraft = false;
+    protected boolean searchTransplantation = false;
     protected boolean searchTransientInterference = false;
     protected boolean searchToolStrain = false; 
     
@@ -224,16 +227,6 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
     {
         this.organ = organ;
     }
-
-//    public String getTumorClassification()
-//    {
-//        return tumorClassification;
-//    }
-//
-//    public void setTumorClassification(String tumorClassification)
-//    {
-//        this.tumorClassification = tumorClassification;
-//    }
     
     public String getPiName() {
         return piName;
@@ -474,14 +467,14 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         this.searchImageData = searchImageData;
     }    
 
-    public boolean isSearchGraft()
+    public boolean isSearchTransplantation()
     {
-        return searchGraft;
+        return searchTransplantation;
     }
 
-    public void setSearchGraft(boolean searchGraft)
+    public void setSearchTransplantation(boolean searchTransplantation)
     {
-        this.searchGraft = searchGraft;
+        this.searchTransplantation = searchTransplantation;
     }
 
     /**
@@ -564,7 +557,7 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         targetedModification = false;
         searchHistoMetastasis = false;
         searchMicroArrayData = false;
-        searchGraft = false;
+        searchTransplantation = false;
         searchToolStrain = false;
         externalSource = null;
         searchImageData = false;
@@ -896,5 +889,5 @@ public class SearchForm extends ActionForm implements Serializable, SearchData
         return true;
     }
     */
-    
+  
 }

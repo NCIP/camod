@@ -42,9 +42,12 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   
- * $Id: SearchData.java,v 1.12 2007-07-31 12:01:59 pandyas Exp $
+ * $Id: SearchData.java,v 1.13 2007-10-31 17:40:09 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/07/31 12:01:59  pandyas
+ * VCDE silver level  and caMOD 2.3 changes
+ *
  * Revision 1.11  2007/03/28 18:13:40  pandyas
  * Modified for the following Test Track items:
  * #462 - Customized search for carcinogens for Jackson Lab data
@@ -201,9 +204,9 @@ public interface SearchData {
 
 	public void setExternalSource(String externalSource);
 
-	public boolean isSearchGraft();
+	public boolean isSearchTransplantation();
 
-	public void setSearchGraft(boolean b);
+	public void setSearchTransplantation(boolean b);
 
 	public String getTumorClassification();
 
@@ -213,4 +216,5 @@ public interface SearchData {
 
 	public void setSearchTransientInterference(
 			boolean searchTransientInterference);
+	
 }
