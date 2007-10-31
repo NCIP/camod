@@ -1,7 +1,10 @@
 /*
- * $Id: Species.java,v 1.7 2007-05-16 12:31:30 pandyas Exp $
+ * $Id: Species.java,v 1.8 2007-10-31 15:37:34 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/05/16 12:31:30  pandyas
+ * Cleaned up unused code
+ *
  * Revision 1.6  2006/05/23 18:15:58  georgeda
  * Added/cleaned up display name
  *
@@ -23,9 +26,9 @@ public class Species extends BaseObject implements Serializable
 {
     private static final long serialVersionUID = 3258615453799404851L;
     private String scientificName;
-    private String scientificNameUnctrlVocab;
+    private String scientificNameAlternEntry;
     private String commonName;
-    private String commonNameUnctrlVocab;
+    private String commonNameAlternEntry;
     private String abbreviation;
     private String conceptCode;
     private Set<Strain> strainCollection = new HashSet<Strain>();
@@ -53,15 +56,15 @@ public class Species extends BaseObject implements Serializable
                 theDisplayName = commonName.trim();
             }
         }
-        else if (scientificNameUnctrlVocab != null || commonNameUnctrlVocab != null)
+        else if (scientificNameAlternEntry != null || commonNameAlternEntry != null)
         {
-            if (scientificNameUnctrlVocab != null)
+            if (scientificNameAlternEntry != null)
             {
-                theDisplayName = scientificNameUnctrlVocab.trim();
+                theDisplayName = scientificNameAlternEntry.trim();
             }
             else
             {
-                theDisplayName = commonNameUnctrlVocab.trim();
+                theDisplayName = commonNameAlternEntry.trim();
             }
         }
         return theDisplayName;
@@ -85,23 +88,6 @@ public class Species extends BaseObject implements Serializable
     }
 
     /**
-     * @return Returns the scientificNameUnctrlVocab.
-     */
-    public String getScientificNameUnctrlVocab()
-    {
-        return scientificNameUnctrlVocab;
-    }
-
-    /**
-     * @param scientificNameUnctrlVocab
-     *            The scientificNameUnctrlVocab to set.
-     */
-    public void setScientificNameUnctrlVocab(String scientificNameUnctrlVocab)
-    {
-        this.scientificNameUnctrlVocab = scientificNameUnctrlVocab;
-    }
-
-    /**
      * @return Returns the commonName.
      */
     public String getCommonName()
@@ -116,23 +102,6 @@ public class Species extends BaseObject implements Serializable
     public void setCommonName(String commonName)
     {
         this.commonName = commonName;
-    }
-
-    /**
-     * @return Returns the commonNameUnctrlVocab.
-     */
-    public String getCommonNameUnctrlVocab()
-    {
-        return commonNameUnctrlVocab;
-    }
-
-    /**
-     * @param commonNameUnctrlVocab
-     *            The commonNameUnctrlVocab to set.
-     */
-    public void setCommonNameUnctrlVocab(String commonNameUnctrlVocab)
-    {
-        this.commonNameUnctrlVocab = commonNameUnctrlVocab;
     }
 
     /**
@@ -244,4 +213,32 @@ public class Species extends BaseObject implements Serializable
      return super.compareTo(o);
      }
      */
+
+	/**
+	 * @return the scientificNameAlternEntry
+	 */
+	public String getScientificNameAlternEntry() {
+		return scientificNameAlternEntry;
+	}
+
+	/**
+	 * @param scientificNameAlternEntry the scientificNameAlternEntry to set
+	 */
+	public void setScientificNameAlternEntry(String scientificNameAlternEntry) {
+		this.scientificNameAlternEntry = scientificNameAlternEntry;
+	}
+
+	/**
+	 * @return the commonNameAlternEntry
+	 */
+	public String getCommonNameAlternEntry() {
+		return commonNameAlternEntry;
+	}
+
+	/**
+	 * @param commonNameAlternEntry the commonNameAlternEntry to set
+	 */
+	public void setCommonNameAlternEntry(String commonNameAlternEntry) {
+		this.commonNameAlternEntry = commonNameAlternEntry;
+	}
 }

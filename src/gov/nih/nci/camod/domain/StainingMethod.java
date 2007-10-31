@@ -10,7 +10,7 @@ public class StainingMethod extends BaseObject implements Comparable, Serializab
     private static final long serialVersionUID = 3258615453799404851L;
 
     private String name;
-    private String nameUnctrlVocab;
+    private String nameAlternEntry;
     private String conceptCode;
 
     /**
@@ -28,23 +28,6 @@ public class StainingMethod extends BaseObject implements Comparable, Serializab
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    /**
-     * @return Returns the nameUnctrlVocab.
-     */
-    public String getNameUnctrlVocab()
-    {
-        return nameUnctrlVocab;
-    }
-
-    /**
-     * @param nameUnctrlVocab
-     *            The nameUnctrlVocab to set.
-     */
-    public void setNameUnctrlVocab(String nameUnctrlVocab)
-    {
-        this.nameUnctrlVocab = nameUnctrlVocab;
     }
 
     /**
@@ -133,4 +116,18 @@ public class StainingMethod extends BaseObject implements Comparable, Serializab
 
         return super.compareTo(o);
     }
+
+	/**
+	 * @return the nameAlternEntry
+	 */
+	public String getNameAlternEntry() {
+		return nameAlternEntry;
+	}
+
+	/**
+	 * @param nameAlternEntry the nameAlternEntry to set
+	 */
+	public void setNameAlternEntry(String nameAlternEntry) {
+		this.nameAlternEntry = nameAlternEntry;
+	}
 }

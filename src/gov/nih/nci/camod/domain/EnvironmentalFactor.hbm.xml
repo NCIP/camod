@@ -30,9 +30,9 @@
         	column="type" 
         	type="string"/>
         
-        <!-- typeUnctrlVocab -->
-         <property name="typeUnctrlVocab" 
-        	column="type_unctrl_vocab" 
+        <!-- typeAlternEntry -->
+         <property name="typeAlternEntry" 
+        	column="type_altern_entry" 
         	type="string"/>       
         
         <!-- name -->
@@ -40,9 +40,9 @@
         	column="name" 
         	type="string"/>
         	
-        <!-- nameUnctrlVocab -->
-        <property name="nameUnctrlVocab" 
-        	column="name_unctrl_vocab" 
+        <!-- nameAlternEntry -->
+        <property name="nameAlternEntry" 
+        	column="name_altern_entry" 
         	type="string"/>        
         	
         <!-- casNumber -->
@@ -53,7 +53,12 @@
 	    <!-- nscNumber -->
         <property name="nscNumber" 
         	column="nsc_number" 
-        	type="long"/>        	
+        	type="long"/> 
+        	
+        <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"/>	        	       	
         	
 	</class>
 </hibernate-mapping>

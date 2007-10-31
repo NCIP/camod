@@ -1,5 +1,8 @@
 /*
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/04/04 13:17:05  pandyas
+ * Modified name for conditioning regimen and target site
+ *
  * Revision 1.2  2007/03/19 18:56:11  pandyas
  * Object Model changes for caMOD 2.3 - dee design doc for details
  *
@@ -13,7 +16,7 @@
  * Modified to add Morpholino object data to application
  *
  * 
- * $Id: TransientInterference.java,v 1.3 2007-04-04 13:17:05 pandyas Exp $
+ * $Id: TransientInterference.java,v 1.4 2007-10-31 15:41:14 pandyas Exp $
  */
 package gov.nih.nci.camod.domain;
 
@@ -26,16 +29,16 @@ public class TransientInterference extends BaseObject implements Serializable, D
     private static final long serialVersionUID = 4259745453799404851L;
 
     private String source;
-    private String sourceUnctrVocab;
+    private String sourceAlternEntry;
     private String type;
     private String sequenceDirection;
     private String targetedRegion;
     private String concentration;
     private String concentrationUnit;
     private String deliveryMethod;
-    private String deliveryMethodUnctrlVocab;
+    private String deliveryMethodAlternEntry;
     private String visualLigand;
-    private String visualLigandUnctrlVocab;
+    private String visualLigandAlternEntry;
     private String comments;
     private String targetSite;    
     private TransientInterferenceMethod transientInterferenceMethod;
@@ -51,7 +54,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
         }
         else
         {
-            return sourceUnctrVocab;
+            return sourceAlternEntry;
         }
     }
 
@@ -70,23 +73,6 @@ public class TransientInterference extends BaseObject implements Serializable, D
     public void setSource(String source)
     {
         this.source = source;
-    }
-
-    /**
-     * @return Returns the sourceUnctrVocab
-     */
-    public String getSourceUnctrVocab()
-    {
-        return sourceUnctrVocab;
-    }
-
-    /**
-     * @param sourceUnctrVocab
-     *            The source to set.
-     */
-    public void setSourceUnctrVocab(String sourceUnctrVocab)
-    {
-        this.sourceUnctrVocab = sourceUnctrVocab;
     }
 
     /**
@@ -197,7 +183,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
         }
         else
         {
-            return deliveryMethodUnctrlVocab;
+            return deliveryMethodAlternEntry;
         }
     }
     
@@ -208,24 +194,6 @@ public class TransientInterference extends BaseObject implements Serializable, D
     public void setDeliveryMethod(String deliveryMethod)
     {
         this.deliveryMethod = deliveryMethod;
-    }
-
-
-    /**
-     * @return Returns the deliveryMethodUnctrlVocab.
-     */
-    public String getDeliveryMethodUnctrlVocab()
-    {
-        return deliveryMethodUnctrlVocab;
-    }
-
-    /**
-     * @param deliveryMethodUnctrlVocab
-     *            The deliveryMethodUnctrlVocab to set.
-     */
-    public void setDeliveryMethodUnctrlVocab(String deliveryMethodUnctrlVocab)
-    {
-        this.deliveryMethodUnctrlVocab = deliveryMethodUnctrlVocab;
     }
 
     /**
@@ -239,7 +207,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
         }
         else
         {
-            return visualLigandUnctrlVocab;
+            return visualLigandAlternEntry;
         }
     }
     
@@ -259,24 +227,7 @@ public class TransientInterference extends BaseObject implements Serializable, D
     {
         this.visualLigand = visualLigand;
     }
-
-    /**
-     * @return Returns the visualLigandUnctrlVocab.
-     */
-    public String getVisualLigandUnctrlVocab()
-    {
-        return visualLigandUnctrlVocab;
-    }
-
-    /**
-     * @param visualLigandUnctrlVocab
-     *            The visualLigandUncrtlVocab to set.
-     */
-    public void setVisualLigandUnctrlVocab(String visualLigandUnctrlVocab)
-    {
-        this.visualLigandUnctrlVocab = visualLigandUnctrlVocab;
-    }
-    
+  
     /**
      * @return Returns the comments.  Comment is a reserved word so 
      * we must use the plural form comments.
@@ -338,6 +289,48 @@ public class TransientInterference extends BaseObject implements Serializable, D
 
 	public void setTargetSite(String targetSite) {
 		this.targetSite = targetSite;
+	}
+
+	/**
+	 * @return the deliveryMethodAlternEntry
+	 */
+	public String getDeliveryMethodAlternEntry() {
+		return deliveryMethodAlternEntry;
+	}
+
+	/**
+	 * @param deliveryMethodAlternEntry the deliveryMethodAlternEntry to set
+	 */
+	public void setDeliveryMethodAlternEntry(String deliveryMethodAlternEntry) {
+		this.deliveryMethodAlternEntry = deliveryMethodAlternEntry;
+	}
+
+	/**
+	 * @return the visualLigandAlternEntry
+	 */
+	public String getVisualLigandAlternEntry() {
+		return visualLigandAlternEntry;
+	}
+
+	/**
+	 * @param visualLigandAlternEntry the visualLigandAlternEntry to set
+	 */
+	public void setVisualLigandAlternEntry(String visualLigandAlternEntry) {
+		this.visualLigandAlternEntry = visualLigandAlternEntry;
+	}
+
+	/**
+	 * @return the sourceAlternEntry
+	 */
+	public String getSourceAlternEntry() {
+		return sourceAlternEntry;
+	}
+
+	/**
+	 * @param sourceAlternEntry the sourceAlternEntry to set
+	 */
+	public void setSourceAlternEntry(String sourceAlternEntry) {
+		this.sourceAlternEntry = sourceAlternEntry;
 	}
 
 

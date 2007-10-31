@@ -1,7 +1,11 @@
 /*
- * $Id: Disease.java,v 1.17 2007-04-30 20:06:55 pandyas Exp $
+ * $Id: Disease.java,v 1.18 2007-10-31 15:33:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.17  2007/04/30 20:06:55  pandyas
+ * Implemented species specific vocabulary trees from EVSTree
+ * Added uncontrolled vocab for disease name
+ *
  * Revision 1.16  2006/10/17 16:14:36  pandyas
  * modified during development of caMOD 2.2 - various
  *
@@ -25,7 +29,7 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
     private static final long serialVersionUID = 3259515453799404851L;
 
     private String name;
-    private String nameUnctrlVocab;    
+    private String nameAlternEntry;    
     private String conceptCode;
 
     
@@ -126,12 +130,19 @@ public class Disease extends BaseObject implements Comparable, Serializable, Dup
         return super.compareTo(o);
     }
 
-	public String getNameUnctrlVocab() {
-		return nameUnctrlVocab;
+
+	/**
+	 * @return the nameAlternEntry
+	 */
+	public String getNameAlternEntry() {
+		return nameAlternEntry;
 	}
 
-	public void setNameUnctrlVocab(String nameUnctrlVocab) {
-		this.nameUnctrlVocab = nameUnctrlVocab;
+	/**
+	 * @param nameAlternEntry the nameAlternEntry to set
+	 */
+	public void setNameAlternEntry(String nameAlternEntry) {
+		this.nameAlternEntry = nameAlternEntry;
 	}
 
 }

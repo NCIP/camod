@@ -29,9 +29,9 @@
         	column="source" 
         	type="string"/>
         	
-        <!-- sourceUnctrVocab -->
-        <property name="sourceUnctrVocab" 
-        	column="source_unctr_vocab" 
+        <!-- sourceAlternEntry -->
+        <property name="sourceAlternEntry" 
+        	column="source_altern_entry" 
         	type="string"/>
         	
 	    <!-- type -->
@@ -64,9 +64,9 @@
         	column="delivery_method" 
         	type="string"/>
         	
-        <!-- deliveryMethodUnctrlVocab -->
-        <property name="deliveryMethodUnctrlVocab" 
-        	column="delivery_method_unctrl_vocab" 
+        <!-- deliveryMethodAlternEntry -->
+        <property name="deliveryMethodAlternEntry" 
+        	column="delivery_method_altern_entry" 
         	type="string"/>	        	    	        	 
         	
         <!-- visualLigand -->
@@ -74,9 +74,9 @@
         	column="visual_ligand" 
         	type="string"/>
         	
-        <!-- visualLigandUnctrlVocab -->
-        <property name="visualLigandUnctrlVocab" 
-        	column="visual_ligand_unctrl_vocab" 
+        <!-- visualLigandAlternEntry -->
+        <property name="visualLigandAlternEntry" 
+        	column="visual_ligand_altern_entry" 
         	type="string"/>
         	
 	    <!-- comments -->

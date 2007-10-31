@@ -30,9 +30,9 @@
         	column="scientific_name" 
         	type="string"/>
         	
-        <!--  scientificNameUnctrlVocab -->
-        <property name="scientificNameUnctrlVocab" 
-        	column="scientific_name_unctrl_vocab" 
+        <!--  scientificNameAlternEntry -->
+        <property name="scientificNameAlternEntry" 
+        	column="scientific_name_altern_entry" 
         	type="string"/> 
         	
         <!-- commonName -->
@@ -40,9 +40,9 @@
         	column="common_name" 
         	type="string"/>	
         	
-        <!-- commonNameUnctrlVocab -->
-        <property name="commonNameUnctrlVocab" 
-        	column="common_name_unctrl_vocab" 
+        <!-- commonNameAlternEntry -->
+        <property name="commonNameAlternEntry" 
+        	column="common_name_altern_entry" 
         	type="string"/>	        	        	       
         	
         <!-- abbreviation -->

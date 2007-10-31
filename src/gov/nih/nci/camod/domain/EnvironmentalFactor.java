@@ -1,7 +1,10 @@
 /*
- * $Id: EnvironmentalFactor.java,v 1.14 2006-05-04 15:42:03 pandyas Exp $
+ * $Id: EnvironmentalFactor.java,v 1.15 2007-10-31 15:33:31 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.14  2006/05/04 15:42:03  pandyas
+ * Modified/Added to support Morpholino object data in the application
+ *
  * Revision 1.13  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -21,11 +24,12 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     private static final long serialVersionUID = 3259445453799404851L;
 
     private String type;
-    private String typeUnctrlVocab;
+    private String typeAlternEntry;
     private String name;
-    private String nameUnctrlVocab;
+    private String nameAlternEntry;
     private String casNumber;
     private Long nscNumber;
+    private String comments;    
     
 
     /**
@@ -44,32 +48,30 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     {
         this.type = type;
     }
+    
+	/**
+	 * @return the nameAlternEntry
+	 */
+	public String getNameAlternEntry() {
+		return nameAlternEntry;
+	}
 
-    /**
-     * @return Returns the typeUnctrlVocab.
-     */
-    public String getTypeUnctrlVocab()
-    {
-        return typeUnctrlVocab;
-    }
+	/**
+	 * @param nameAlternEntry the nameAlternEntry to set
+	 */
+	public void setNameAlternEntry(String nameAlternEntry) {
+		this.nameAlternEntry = nameAlternEntry;
+	}    
 
-    /**
-     * @param typeUnctrlVocab
-     *            The typeUnctrlVocab to set.
-     */
-    public void setTypeUnctrlVocab(String typeUnctrlVocab)
-    {
-        this.typeUnctrlVocab = typeUnctrlVocab;
-    }
     /**
      * @return Returns the display name.
      */
     public String getDisplayName()
     {
         String theDisplayName = name;
-        if (theDisplayName == null && nameUnctrlVocab != null)
+        if (theDisplayName == null && nameAlternEntry != null)
         {
-            theDisplayName = "Other - " + nameUnctrlVocab;
+            theDisplayName = "Other - " + nameAlternEntry;
         }
 
         return theDisplayName;
@@ -81,7 +83,7 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
      */
     public String getDisplayNameIM()
     {
-        String theDisplayName = nameUnctrlVocab;
+        String theDisplayName = nameAlternEntry;
 
         return theDisplayName;
     }    
@@ -103,22 +105,6 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
         this.name = name;
     }
 
-    /**
-     * @return Returns the nameUnctrlVocab.
-     */
-    public String getNameUnctrlVocab()
-    {
-        return nameUnctrlVocab;
-    }
-
-    /**
-     * @param nameUnctrlVocab
-     *            The nameUnctrlVocab to set.
-     */
-    public void setNameUnctrlVocab(String nameUnctrlVocab)
-    {
-        this.nameUnctrlVocab = nameUnctrlVocab;
-    }
 
     /**
      * @return Returns the casNumber.
@@ -150,6 +136,22 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
     public void setNscNumber(Long nscNumber) {
         this.nscNumber = nscNumber;
     }
+    
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments() {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }    
 
     public String toString()
     {
@@ -190,5 +192,21 @@ public class EnvironmentalFactor extends BaseObject implements Comparable, Seria
 
         return super.compareTo(o);
     }
+
+	/**
+	 * @return the typeAlternEntry
+	 */
+	public String getTypeAlternEntry() {
+		return typeAlternEntry;
+	}
+
+	/**
+	 * @param typeAlternEntry the typeAlternEntry to set
+	 */
+	public void setTypeAlternEntry(String typeAlternEntry) {
+		this.typeAlternEntry = typeAlternEntry;
+	}
+
+
 
 }

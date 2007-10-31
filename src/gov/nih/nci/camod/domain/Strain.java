@@ -1,7 +1,10 @@
 /*
- * $Id: Strain.java,v 1.7 2007-05-16 12:31:31 pandyas Exp $
+ * $Id: Strain.java,v 1.8 2007-10-31 15:39:32 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/05/16 12:31:31  pandyas
+ * Cleaned up unused code
+ *
  * Revision 1.6  2006/05/23 18:15:58  georgeda
  * Added/cleaned up display name
  *
@@ -25,7 +28,7 @@ public class Strain extends BaseObject implements Serializable
     private static final long serialVersionUID = 3258615453799404851L;
 
     private String name;
-    private String nameUnctrlVocab;
+    private String nameAlternEntry;
     private String abbreviation;
     private String conceptCode;
     private MutationIdentifier mutationIdentifier;
@@ -43,9 +46,9 @@ public class Strain extends BaseObject implements Serializable
         {
             theDisplayName = name.trim();
         }
-        else if (nameUnctrlVocab != null)
+        else if (nameAlternEntry != null)
         {
-            theDisplayName = nameUnctrlVocab.trim();
+            theDisplayName = nameAlternEntry.trim();
         }
         return theDisplayName;
     }
@@ -82,23 +85,6 @@ public class Strain extends BaseObject implements Serializable
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    /**
-     * @return Returns the nameUnctrlVocab.
-     */
-    public String getNameUnctrlVocab()
-    {
-        return nameUnctrlVocab;
-    }
-
-    /**
-     * @param nameUnctrlVocab
-     *            The nameUnctrlVocab to set.
-     */
-    public void setNameUnctrlVocab(String nameUnctrlVocab)
-    {
-        this.nameUnctrlVocab = nameUnctrlVocab;
     }
 
     /**
@@ -202,5 +188,19 @@ public class Strain extends BaseObject implements Serializable
      return super.compareTo(o);
      }    
      */
+
+	/**
+	 * @return the nameAlternEntry
+	 */
+	public String getNameAlternEntry() {
+		return nameAlternEntry;
+	}
+
+	/**
+	 * @param nameAlternEntry the nameAlternEntry to set
+	 */
+	public void setNameAlternEntry(String nameAlternEntry) {
+		this.nameAlternEntry = nameAlternEntry;
+	}
 
 }

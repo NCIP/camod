@@ -32,9 +32,9 @@
         	column="name" 
         	type="string"/>
         	
-        <!--  nameUnctrlVocab -->
-        <property name="nameUnctrlVocab" 
-        	column="name_unctrl_vocab" 
+        <!--  nameAlternEntry -->
+        <property name="nameAlternEntry" 
+        	column="name_altern_entry" 
         	type="string"/>        
         	
         <!-- abbreviation -->
