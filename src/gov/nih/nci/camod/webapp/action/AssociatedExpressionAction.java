@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionAction.java,v 1.7 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AssociatedExpressionAction.java,v 1.8 2007-10-31 17:08:33 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.7  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.6  2007/07/23 17:40:43  pandyas
  * Fixed typo in word occurred
  *
@@ -56,8 +59,10 @@ public class AssociatedExpressionAction extends BaseAction {
                 + associatedExpressionForm.getExpressionLevel() + "\n\t getName: " + associatedExpressionForm.getName()
                 + "\n\t aAssociatedExpressionID: " + aAssociatedExpressionID + "\n\t getOrganTissueCode: "
                 + associatedExpressionForm.getOrganTissueCode() + "\n\t getOrganTissueName: "
-                + associatedExpressionForm.getOrganTissueName() + "\n\t getOrgan: "
-                + associatedExpressionForm.getOrgan() + "\n\t username:"
+                + associatedExpressionForm.getOrganTissueName() 
+                + "\n\t getComments: " + associatedExpressionForm.getComments()
+                + "\n\t getOrgan: " + associatedExpressionForm.getOrgan() 
+                + "\n\t getComments: " + associatedExpressionForm.getComments() + "\n\t username:"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";
@@ -143,8 +148,10 @@ public class AssociatedExpressionAction extends BaseAction {
                 + "\n\t aEngineeredTransgeneID: " + aEngineeredTransgeneID + "\n\t aGenomicSegmentID: "
                 + aGenomicSegmentID + "\n\t aTargetedModificationID: " + aTargetedModificationID
                 + "\n\t getOrganTissueCode: " + associatedExpressionForm.getOrganTissueCode()
+                + "\n\t getComments: " + associatedExpressionForm.getComments()                
                 + "\n\t getOrganTissueName: " + associatedExpressionForm.getOrganTissueName() + "\n\t getOrgan: "
-                + associatedExpressionForm.getOrgan() + "\n\t username:"
+                + associatedExpressionForm.getOrgan() 
+                + "\n\t getComments: " + associatedExpressionForm.getComments()+ "\n\t username:"
                 + (String) request.getSession().getAttribute("camod.loggedon.username"));
 
         String theForward = "AnimalModelTreePopulateAction";

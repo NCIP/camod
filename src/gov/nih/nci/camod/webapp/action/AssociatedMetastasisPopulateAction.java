@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedMetastasisPopulateAction.java,v 1.16 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AssociatedMetastasisPopulateAction.java,v 1.17 2007-10-31 17:08:48 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.16  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.15  2007/08/14 17:06:17  pandyas
  * Bug #8414:  getEVSPreferredDiscription needs to be implemented for Zebrafish vocabulary source
  *
@@ -121,10 +124,10 @@ public class AssociatedMetastasisPopulateAction extends BaseAction {
             
              /* Set Disease object attributes - check for other Zebrafish entry*/
             Disease disease = associatedMetastasis.getDisease();
-            if(disease.getNameUnctrlVocab() != null) {
+            if(disease.getNameAlternEntry() != null) {
                 log.debug("disease is other in DB");
                 assocMetastasisForm.setTumorClassification(Constants.Dropdowns.OTHER_OPTION);
-                assocMetastasisForm.setOtherTumorClassification(disease.getNameUnctrlVocab());
+                assocMetastasisForm.setOtherTumorClassification(disease.getNameAlternEntry());
                 
             } else {
                 assocMetastasisForm.setDiagnosisName(disease.getName());
