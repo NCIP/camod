@@ -191,13 +191,13 @@
 	<BR>
 	<IMG height=5 alt="" src="images/subMenuArrow.gif" width=5>&nbsp;&nbsp;
 		<% 
-			l = new ArrayList(am.getGraftCollection());
+			l = new ArrayList(am.getTransplantationCollection());
 			cc = (l!=null)?l.size():0;
 			if ( cc > 0 ) {
 		%>
-		<a href="ViewModelAction.do?unprotected_method=populateGraft&aModelID=<%=mdl%>" styleClass="subMenuPrimary">GRAFT</a>	
+		<a href="ViewModelAction.do?unprotected_method=populateTransplantation&aModelID=<%=mdl%>" styleClass="subMenuPrimary">TRANSPLANTATION</a>	
 	    <%} else { %>
-			GRAFT
+			TRANSPLANT
 		<%}%>
 	<BR>
 	<BR>
