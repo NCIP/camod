@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityManagerImpl.java,v 1.12 2007-09-14 19:19:54 pandyas Exp $
+ * $Id: AvailabilityManagerImpl.java,v 1.13 2007-10-31 18:59:28 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.12  2007/09/14 19:19:54  pandyas
+ * Need to trim the stock number from the GUI for animal availability so display works correctly
+ *
  * Revision 1.11  2007/09/12 19:36:03  pandyas
  * modified debug statements for build to stage tier
  *
@@ -147,15 +150,15 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         inAvailability.setName(inAvailabilityData.getName());
         log.debug("setName: " + inAvailabilityData.getName());
 
-        if (inAvailabilityData.getStockNumber() != null && inAvailabilityData.getStockNumber().length() > 0)
+        if (inAvailabilityData.getPrincipalInvestigator() != null )
         {
             /* Convert the PI name from dropdown to PI_id stored in DB */
-            Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getStockNumber());
+            Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getPrincipalInvestigator());
 
-            log.debug("thePI : " + thePI.toString());
+            log.info("thePI : " + thePI.toString());
 
-            log.debug("thePI.getId().toString(): " + thePI.getId().toString());
-            inAvailability.setStockNumber(thePI.getId().toString());
+            inAvailability.setPrincipalInvestigator(thePI);
+            log.info("thePI.getId().toString(): " + thePI.getId().toString());
         }
         else
         {
@@ -179,15 +182,15 @@ public class AvailabilityManagerImpl extends BaseManager implements Availability
         inAvailability.setName(inAvailabilityData.getName());
         log.debug("setName: " + inAvailabilityData.getName());
 
-        if (inAvailabilityData.getStockNumber() != null && inAvailabilityData.getStockNumber().length() > 0)
+        if (inAvailabilityData.getPrincipalInvestigator() != null)
         {
             /* Convert the PI name from dropdown to PI_id stored in DB */
-            Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getStockNumber());
+            Person thePI = PersonManagerSingleton.instance().getByUsername(inAvailabilityData.getPrincipalInvestigator());
 
             log.debug("thePI : " + thePI.toString());
 
             log.debug("thePI.getId().toString(): " + thePI.getId().toString());
-            inAvailability.setStockNumber(thePI.getId().toString());
+            inAvailability.setPrincipalInvestigator(thePI);
         }
         else
         {
