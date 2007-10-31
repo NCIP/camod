@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: ClinicalMarkerPopulateAction.java,v 1.6 2006-11-09 17:26:10 pandyas Exp $
+ * $Id: ClinicalMarkerPopulateAction.java,v 1.7 2007-10-31 18:09:11 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.6  2006/11/09 17:26:10  pandyas
+ * Commented out debug code
+ *
  * Revision 1.5  2006/04/20 19:19:36  pandyas
  * Added 'Other' to field and fixed save for other clinical marker
  *
@@ -66,16 +69,19 @@ public class ClinicalMarkerPopulateAction extends BaseAction {
             request.setAttribute("aClinicalMarkerID", aClinicalMarkerID);
             
             // Set the other name and/or selected name from database
-            if (theClinicalMarker.getNameUnctrlVocab() != null) {
+            if (theClinicalMarker.getNameAlternEntry() != null) {
                 clinicalMarkerForm.setName(Constants.Dropdowns.OTHER_OPTION);
-                clinicalMarkerForm.setOtherName(theClinicalMarker.getNameUnctrlVocab());
+                clinicalMarkerForm.setOtherName(theClinicalMarker.getNameAlternEntry());
             } else {
                 clinicalMarkerForm.setName(theClinicalMarker.getName());
             }            
         		
             if (theClinicalMarker.getValue() != null) {        		
         		clinicalMarkerForm.setValue(theClinicalMarker.getValue());
-            }   	
+            } 
+            if (theClinicalMarker.getComments() != null) {        		
+        		clinicalMarkerForm.setComments(theClinicalMarker.getComments());
+            }            
         }
         
         // Prepopulate all dropdown fields, set the global Constants to the following
