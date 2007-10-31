@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AvailabilityForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: AvailabilityForm.java,v 1.4 2007-10-31 17:51:56 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * 
  */
 
@@ -12,9 +15,12 @@ package gov.nih.nci.camod.webapp.form;
 /**
  * @author pandyas
  * 
- * $Id: AvailabilityForm.java,v 1.3 2006-04-17 19:09:19 pandyas Exp $
+ * $Id: AvailabilityForm.java,v 1.4 2007-10-31 17:51:56 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/04/17 19:09:19  pandyas
+ * caMod 2.1 OM changes
+ *
  * Revision 1.2  2005/10/26 20:14:25  pandyas
  * implemented model availability
  *
@@ -34,6 +40,7 @@ public class AvailabilityForm extends BaseForm implements Serializable, Availabi
     protected String name;
     protected String source;
     protected String stockNumber;
+    protected String principalInvestigator;    
  
     
     public AvailabilityForm() {
@@ -75,6 +82,20 @@ public class AvailabilityForm extends BaseForm implements Serializable, Availabi
 
 	public void setSource(String source) {
 		this.source = source;
+	}
+
+	/**
+	 * @return the principalInvestigator
+	 */
+	public String getPrincipalInvestigator() {
+		return principalInvestigator;
+	}
+
+	/**
+	 * @param principalInvestigator the principalInvestigator to set
+	 */
+	public void setPrincipalInvestigator(String principalInvestigator) {
+		this.principalInvestigator = principalInvestigator;
 	}
    
 

@@ -2,9 +2,12 @@
  *
  * @author pandyas
  * 
- * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.8 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: AvailabilityInvestigatorPopulateAction.java,v 1.9 2007-10-31 17:54:57 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.8  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.7  2005/12/08 21:44:47  georgeda
  * Defect #259; handle PI availability for 2-tier data
  *
@@ -76,12 +79,13 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
             availabilityForm.setName(avilablity.getName());
             availabilityForm.setStockNumber("");
 
-            if (avilablity.getStockNumber() != null && avilablity.getStockNumber().length() > 0) {
+            if (avilablity.getPrincipalInvestigator() != null) {
                 try {
                     // Hack to work around caMOD mapping issue
-                    if (avilablity.getStockNumber().equals("-1")) {
+                    if (avilablity.getStockNumber() != null){
+                    	if(avilablity.getStockNumber().equals("-1")) {
 
-                        log.debug("Old 2-tier format.  Setting the stock number to the PI");
+                        log.info("Old 2-tier format.  Setting the stock number to the PI");
 
                         // Get the PI from the model
                         String theModelID = "" + request.getSession().getAttribute(Constants.MODELID);
@@ -89,15 +93,17 @@ public class AvailabilityInvestigatorPopulateAction extends BaseAction {
                         AnimalModel theAnimalModel = theAnimalModelManager.get(theModelID);
 
                         availabilityForm.setStockNumber(theAnimalModel.getPrincipalInvestigator().getUsername());
+                    	}
+                    
+                    } else if (avilablity.getPrincipalInvestigator() != null){
 
-                    } else {
-
-                        // get the username from the PI-id stored under
-                        // stock_number
-                        // in
-                        // AnimalAvailability table
-                        Person thePerson = PersonManagerSingleton.instance().get(avilablity.getStockNumber());
-                        availabilityForm.setStockNumber(thePerson.getUsername());
+                    // get the username from the PI-id stored in the
+                    // AnimalAvailability table
+                    availabilityForm.setPrincipalInvestigator(avilablity
+            					.getPrincipalInvestigator().getUsername());
+            		log.info("am.getPrincipalInvestigator().getUsername(): " + avilablity
+            					.getPrincipalInvestigator().getUsername());
+                        
                     }
                 } catch (Exception e) {
                     log.error("Unable to get person for availability", e);
