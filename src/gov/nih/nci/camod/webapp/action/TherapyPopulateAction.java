@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: TherapyPopulateAction.java,v 1.22 2007-09-12 19:36:40 pandyas Exp $
+ * $Id: TherapyPopulateAction.java,v 1.23 2007-10-31 18:34:50 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.22  2007/09/12 19:36:40  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.21  2007/06/18 19:53:53  pandyas
  * EVS preferred name does not work for Zebrafish tree so changed
  * Will add this item to EVS gforge to fix, if possilbe
@@ -126,10 +129,10 @@ public class TherapyPopulateAction extends BaseAction
                 therapyForm.setDosage(therapy.getTreatment().getDosage());
                 therapyForm.setDosageUnit(therapy.getTreatment().getDosageUnit());
 
-                if (therapy.getTreatment().getAdminRouteUnctrlVocab() != null)
+                if (therapy.getTreatment().getAdminRouteAlternEntry() != null)
                 {
                     therapyForm.setAdministrativeRoute(Constants.Dropdowns.OTHER_OPTION);
-                    therapyForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteUnctrlVocab());
+                    therapyForm.setOtherAdministrativeRoute(therapy.getTreatment().getAdminRouteAlternEntry());
                 }
                 else
                 {

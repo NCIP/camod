@@ -2,9 +2,12 @@
  * 
  * @author pandyas
  * 
- * $Id: SirnaPopulateAction.java,v 1.3 2007-09-12 19:36:39 pandyas Exp $
+ * $Id: SirnaPopulateAction.java,v 1.4 2007-10-31 18:34:06 pandyas Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2007/09/12 19:36:39  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.2  2006/10/23 14:17:58  pandyas
  * changed to conform to conceptCode format in all other classes
  *
@@ -61,10 +64,10 @@ public class SirnaPopulateAction extends BaseAction
             request.setAttribute("aTransIntID", aTransIntID);
 
             // Populate the fields from database
-            if (transientInterference.getSourceUnctrVocab() != null)
+            if (transientInterference.getSourceAlternEntry() != null)
             {
             	transientInterferenceForm.setSource(Constants.Dropdowns.OTHER_OPTION);
-            	transientInterferenceForm.setOtherSource(transientInterference.getSourceUnctrVocab());
+            	transientInterferenceForm.setOtherSource(transientInterference.getSourceAlternEntry());
             }
             else
             {
@@ -79,20 +82,20 @@ public class SirnaPopulateAction extends BaseAction
             transientInterferenceForm.setConcentrationUnit(transientInterference.getConcentrationUnit());
             transientInterferenceForm.setComments(transientInterference.getComments());            
 
-            if (transientInterference.getDeliveryMethodUnctrlVocab() != null)
+            if (transientInterference.getDeliveryMethodAlternEntry() != null)
             {
             	transientInterferenceForm.setDeliveryMethod(Constants.Dropdowns.OTHER_OPTION);
-            	transientInterferenceForm.setOtherDeliveryMethod(transientInterference.getDeliveryMethodUnctrlVocab());
+            	transientInterferenceForm.setOtherDeliveryMethod(transientInterference.getDeliveryMethodAlternEntry());
             }
             else
             {
             	transientInterferenceForm.setDeliveryMethod(transientInterference.getDeliveryMethod());
             }
 
-            if (transientInterference.getVisualLigandUnctrlVocab() != null)
+            if (transientInterference.getVisualLigandAlternEntry() != null)
             {
             	transientInterferenceForm.setVisualLigand(Constants.Dropdowns.OTHER_OPTION);
-            	transientInterferenceForm.setOtherVisualLigand(transientInterference.getVisualLigandUnctrlVocab());
+            	transientInterferenceForm.setOtherVisualLigand(transientInterference.getVisualLigandAlternEntry());
             }
             else
             {
