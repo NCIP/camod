@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: AssociatedExpressionManagerImpl.java,v 1.9 2007-09-12 19:36:03 pandyas Exp $
+ * $Id: AssociatedExpressionManagerImpl.java,v 1.10 2007-10-31 18:57:23 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.9  2007/09/12 19:36:03  pandyas
+ * modified debug statements for build to stage tier
+ *
  * Revision 1.8  2007/06/20 18:05:09  pandyas
  * Fixed save and edit for organ
  *
@@ -106,7 +109,11 @@ public class AssociatedExpressionManagerImpl extends BaseManager implements Asso
                 inExpressionFeature.getOrgan().setName(inAssociatedExpressionData.getOrgan());                
                 inExpressionFeature.getOrgan().setConceptCode(
                         Constants.Dropdowns.CONCEPTCODEZEROS);            
-            }           
+            }  
+            
+            if(inAssociatedExpressionData.getComments() != null && inAssociatedExpressionData.getComments().length() >0){
+            	inExpressionFeature.setComments(inAssociatedExpressionData.getComments());
+            }
             
         }
 
