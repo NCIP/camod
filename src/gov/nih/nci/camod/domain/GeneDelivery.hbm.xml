@@ -29,15 +29,20 @@
         	column="viral_vector" 
         	type="string"/>
         	
-        <!-- viralVectorUnctrlVocab -->
-         <property name="viralVectorUnctrlVocab" 
-        	column="viral_vector_unctrl_vocab" 
+        <!-- viralVectorAlternEntry -->
+         <property name="viralVectorAlternEntry" 
+        	column="viral_vector_altern_entry" 
         	type="string"/>       
         	
         <!-- geneInVirus -->
         <property name="geneInVirus" 
         	column="gene_in_virus" 
         	type="string"/>
+        	
+        <!-- comments -->
+        <property name="comments" 
+        	column="comments" 
+        	type="string"/>	        	
         	
         <!-- organ: this is really a one-to-one relationship with unique=true -->
         <!-- (one-to-one unidirectional) -->

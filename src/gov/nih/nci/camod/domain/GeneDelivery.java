@@ -1,8 +1,11 @@
 /**
  * 
- * $Id: GeneDelivery.java,v 1.13 2006-04-19 17:37:37 pandyas Exp $
+ * $Id: GeneDelivery.java,v 1.14 2007-10-31 15:53:15 pandyas Exp $
  *
  * $Log: not supported by cvs2svn $
+ * Revision 1.13  2006/04/19 17:37:37  pandyas
+ * Removed TODO text
+ *
  * Revision 1.12  2006/04/17 19:13:46  pandyas
  * caMod 2.1 OM changes and added log/id header
  *
@@ -31,9 +34,10 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
     private AbstractCancerModel cancerModel;
     private String geneInVirus;
     private String viralVector;
-    private String viralVectorUnctrlVocab;    
+    private String viralVectorAlternEntry;    
     private Organ organ;
     private Treatment treatment;
+    private String comments;    
 
     /**
      * @return Returns the cancerModel.
@@ -51,18 +55,7 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
     {
         this.cancerModel = cancerModel;
     }    
-    /**
-     * @return Returns the display name.
-     */
-    public String getDisplayName()
-    {
-        String theDisplayName = viralVector;
-        if (theDisplayName == null && viralVectorUnctrlVocab != null)
-        {
-            theDisplayName = "Other - " + viralVectorUnctrlVocab;
-        }
-        return theDisplayName;
-    }
+
 
     /**
      * @return Returns the geneInVirus.
@@ -98,22 +91,7 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
         this.viralVector = viralVector;
     }
 
-    /**
-     * @return Returns the viralVectorUnctrlVocab.
-     */
-    public String getViralVectorUnctrlVocab()
-    {
-        return viralVectorUnctrlVocab;
-    }
 
-    /**
-     * @param viralVectorUnctrlVocab
-     *            The viralVectorUnctrlVocab to set.
-     */
-    public void setViralVectorUnctrlVocab(String viralVectorUnctrlVocab)
-    {
-        this.viralVectorUnctrlVocab = viralVectorUnctrlVocab;
-    }
     /**
      * @return Returns the organ.
      */
@@ -145,14 +123,31 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
     public void setTreatment(Treatment treatment)
     {
         this.treatment = treatment;
-    }    
+    }  
+    
+    /**
+     * @return Returns the comments. Comment is a reserved word so 
+     * we must use the plural form comments.
+     */
+    public String getComments() {
+        return comments;
+    }
+
+    /**
+     * @param comments
+     *            The comments to set.
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+    
     /**
      * @see java.lang.Object#toString()
      */
     public String toString()
     {
         String result = super.toString() + " - ";
-        result += this.getViralVector() + " - " + this.getViralVectorUnctrlVocab() + " - " + this.getGeneInVirus();
+        result += this.getViralVector() + " - " + this.getViralVectorAlternEntry() + " - " + this.getGeneInVirus();
         return result;
     }
 
@@ -188,5 +183,32 @@ public class GeneDelivery extends BaseObject implements Comparable, Serializable
 
         return super.compareTo(o);
     }
+
+	/**
+	 * @return the viralVectorAlternEntry
+	 */
+	public String getViralVectorAlternEntry() {
+		return viralVectorAlternEntry;
+	}
+
+	/**
+	 * @param viralVectorAlternEntry the viralVectorAlternEntry to set
+	 */
+	public void setViralVectorAlternEntry(String viralVectorAlternEntry) {
+		this.viralVectorAlternEntry = viralVectorAlternEntry;
+	}
+	
+    /**
+     * @return Returns the display name.
+     */
+    public String getDisplayName()
+    {
+        String theDisplayName = viralVector;
+        if (theDisplayName == null && viralVectorAlternEntry != null)
+        {
+            theDisplayName = "Other - " + viralVectorAlternEntry;
+        }
+        return theDisplayName;
+    }	
 
 }
